@@ -15,7 +15,7 @@ pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> u16 {
     let data = match version {
         MajorWorldVersion::Vanilla => vanilla_fields::FIELDS,
         MajorWorldVersion::BurningCrusade => tbc_fields::FIELDS,
-        MajorWorldVersion::Wrath => wrath_fields::FIELDS.as_slice(),
+        MajorWorldVersion::Wrath => wrath_fields::FIELDS,
     };
 
     let mut i = 0;

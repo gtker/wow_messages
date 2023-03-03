@@ -2151,9 +2151,141 @@ impl UpdatePlayerBuilder {
         self
     }
 
-    pub fn set_player_INV_SLOT_HEAD(mut self, v: Guid) -> Self {
+    pub fn set_player_INV_SLOT_HEAD1(mut self, v: Guid) -> Self {
         self.header_set(324, v.guid() as u32);
         self.header_set(325, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD2(mut self, v: Guid) -> Self {
+        self.header_set(326, v.guid() as u32);
+        self.header_set(327, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD3(mut self, v: Guid) -> Self {
+        self.header_set(328, v.guid() as u32);
+        self.header_set(329, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD4(mut self, v: Guid) -> Self {
+        self.header_set(330, v.guid() as u32);
+        self.header_set(331, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD5(mut self, v: Guid) -> Self {
+        self.header_set(332, v.guid() as u32);
+        self.header_set(333, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD6(mut self, v: Guid) -> Self {
+        self.header_set(334, v.guid() as u32);
+        self.header_set(335, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD7(mut self, v: Guid) -> Self {
+        self.header_set(336, v.guid() as u32);
+        self.header_set(337, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD8(mut self, v: Guid) -> Self {
+        self.header_set(338, v.guid() as u32);
+        self.header_set(339, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD9(mut self, v: Guid) -> Self {
+        self.header_set(340, v.guid() as u32);
+        self.header_set(341, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD10(mut self, v: Guid) -> Self {
+        self.header_set(342, v.guid() as u32);
+        self.header_set(343, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD11(mut self, v: Guid) -> Self {
+        self.header_set(344, v.guid() as u32);
+        self.header_set(345, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD12(mut self, v: Guid) -> Self {
+        self.header_set(346, v.guid() as u32);
+        self.header_set(347, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD13(mut self, v: Guid) -> Self {
+        self.header_set(348, v.guid() as u32);
+        self.header_set(349, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD14(mut self, v: Guid) -> Self {
+        self.header_set(350, v.guid() as u32);
+        self.header_set(351, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD15(mut self, v: Guid) -> Self {
+        self.header_set(352, v.guid() as u32);
+        self.header_set(353, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD16(mut self, v: Guid) -> Self {
+        self.header_set(354, v.guid() as u32);
+        self.header_set(355, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD17(mut self, v: Guid) -> Self {
+        self.header_set(356, v.guid() as u32);
+        self.header_set(357, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD18(mut self, v: Guid) -> Self {
+        self.header_set(358, v.guid() as u32);
+        self.header_set(359, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD19(mut self, v: Guid) -> Self {
+        self.header_set(360, v.guid() as u32);
+        self.header_set(361, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD20(mut self, v: Guid) -> Self {
+        self.header_set(362, v.guid() as u32);
+        self.header_set(363, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD21(mut self, v: Guid) -> Self {
+        self.header_set(364, v.guid() as u32);
+        self.header_set(365, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD22(mut self, v: Guid) -> Self {
+        self.header_set(366, v.guid() as u32);
+        self.header_set(367, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_INV_SLOT_HEAD23(mut self, v: Guid) -> Self {
+        self.header_set(368, v.guid() as u32);
+        self.header_set(369, (v.guid() >> 32) as u32);
         self
     }
 
@@ -2163,9 +2295,261 @@ impl UpdatePlayerBuilder {
         self
     }
 
+    pub fn set_player_PACK_SLOT_2(mut self, v: Guid) -> Self {
+        self.header_set(372, v.guid() as u32);
+        self.header_set(373, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_3(mut self, v: Guid) -> Self {
+        self.header_set(374, v.guid() as u32);
+        self.header_set(375, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_4(mut self, v: Guid) -> Self {
+        self.header_set(376, v.guid() as u32);
+        self.header_set(377, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_5(mut self, v: Guid) -> Self {
+        self.header_set(378, v.guid() as u32);
+        self.header_set(379, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_6(mut self, v: Guid) -> Self {
+        self.header_set(380, v.guid() as u32);
+        self.header_set(381, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_7(mut self, v: Guid) -> Self {
+        self.header_set(382, v.guid() as u32);
+        self.header_set(383, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_8(mut self, v: Guid) -> Self {
+        self.header_set(384, v.guid() as u32);
+        self.header_set(385, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_9(mut self, v: Guid) -> Self {
+        self.header_set(386, v.guid() as u32);
+        self.header_set(387, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_10(mut self, v: Guid) -> Self {
+        self.header_set(388, v.guid() as u32);
+        self.header_set(389, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_11(mut self, v: Guid) -> Self {
+        self.header_set(390, v.guid() as u32);
+        self.header_set(391, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_12(mut self, v: Guid) -> Self {
+        self.header_set(392, v.guid() as u32);
+        self.header_set(393, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_13(mut self, v: Guid) -> Self {
+        self.header_set(394, v.guid() as u32);
+        self.header_set(395, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_14(mut self, v: Guid) -> Self {
+        self.header_set(396, v.guid() as u32);
+        self.header_set(397, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_15(mut self, v: Guid) -> Self {
+        self.header_set(398, v.guid() as u32);
+        self.header_set(399, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_PACK_SLOT_16(mut self, v: Guid) -> Self {
+        self.header_set(400, v.guid() as u32);
+        self.header_set(401, (v.guid() >> 32) as u32);
+        self
+    }
+
     pub fn set_player_BANK_SLOT_1(mut self, v: Guid) -> Self {
         self.header_set(402, v.guid() as u32);
         self.header_set(403, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_2(mut self, v: Guid) -> Self {
+        self.header_set(404, v.guid() as u32);
+        self.header_set(405, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_3(mut self, v: Guid) -> Self {
+        self.header_set(406, v.guid() as u32);
+        self.header_set(407, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_4(mut self, v: Guid) -> Self {
+        self.header_set(408, v.guid() as u32);
+        self.header_set(409, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_5(mut self, v: Guid) -> Self {
+        self.header_set(410, v.guid() as u32);
+        self.header_set(411, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_6(mut self, v: Guid) -> Self {
+        self.header_set(412, v.guid() as u32);
+        self.header_set(413, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_7(mut self, v: Guid) -> Self {
+        self.header_set(414, v.guid() as u32);
+        self.header_set(415, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_8(mut self, v: Guid) -> Self {
+        self.header_set(416, v.guid() as u32);
+        self.header_set(417, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_9(mut self, v: Guid) -> Self {
+        self.header_set(418, v.guid() as u32);
+        self.header_set(419, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_10(mut self, v: Guid) -> Self {
+        self.header_set(420, v.guid() as u32);
+        self.header_set(421, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_11(mut self, v: Guid) -> Self {
+        self.header_set(422, v.guid() as u32);
+        self.header_set(423, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_12(mut self, v: Guid) -> Self {
+        self.header_set(424, v.guid() as u32);
+        self.header_set(425, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_13(mut self, v: Guid) -> Self {
+        self.header_set(426, v.guid() as u32);
+        self.header_set(427, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_14(mut self, v: Guid) -> Self {
+        self.header_set(428, v.guid() as u32);
+        self.header_set(429, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_15(mut self, v: Guid) -> Self {
+        self.header_set(430, v.guid() as u32);
+        self.header_set(431, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_16(mut self, v: Guid) -> Self {
+        self.header_set(432, v.guid() as u32);
+        self.header_set(433, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_17(mut self, v: Guid) -> Self {
+        self.header_set(434, v.guid() as u32);
+        self.header_set(435, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_18(mut self, v: Guid) -> Self {
+        self.header_set(436, v.guid() as u32);
+        self.header_set(437, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_19(mut self, v: Guid) -> Self {
+        self.header_set(438, v.guid() as u32);
+        self.header_set(439, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_20(mut self, v: Guid) -> Self {
+        self.header_set(440, v.guid() as u32);
+        self.header_set(441, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_21(mut self, v: Guid) -> Self {
+        self.header_set(442, v.guid() as u32);
+        self.header_set(443, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_22(mut self, v: Guid) -> Self {
+        self.header_set(444, v.guid() as u32);
+        self.header_set(445, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_23(mut self, v: Guid) -> Self {
+        self.header_set(446, v.guid() as u32);
+        self.header_set(447, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_24(mut self, v: Guid) -> Self {
+        self.header_set(448, v.guid() as u32);
+        self.header_set(449, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_25(mut self, v: Guid) -> Self {
+        self.header_set(450, v.guid() as u32);
+        self.header_set(451, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_26(mut self, v: Guid) -> Self {
+        self.header_set(452, v.guid() as u32);
+        self.header_set(453, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_27(mut self, v: Guid) -> Self {
+        self.header_set(454, v.guid() as u32);
+        self.header_set(455, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANK_SLOT_28(mut self, v: Guid) -> Self {
+        self.header_set(456, v.guid() as u32);
+        self.header_set(457, (v.guid() >> 32) as u32);
         self
     }
 
@@ -2175,9 +2559,111 @@ impl UpdatePlayerBuilder {
         self
     }
 
+    pub fn set_player_BANKBAG_SLOT_2(mut self, v: Guid) -> Self {
+        self.header_set(460, v.guid() as u32);
+        self.header_set(461, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANKBAG_SLOT_3(mut self, v: Guid) -> Self {
+        self.header_set(462, v.guid() as u32);
+        self.header_set(463, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANKBAG_SLOT_4(mut self, v: Guid) -> Self {
+        self.header_set(464, v.guid() as u32);
+        self.header_set(465, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANKBAG_SLOT_5(mut self, v: Guid) -> Self {
+        self.header_set(466, v.guid() as u32);
+        self.header_set(467, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANKBAG_SLOT_6(mut self, v: Guid) -> Self {
+        self.header_set(468, v.guid() as u32);
+        self.header_set(469, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_BANKBAG_SLOT_7(mut self, v: Guid) -> Self {
+        self.header_set(470, v.guid() as u32);
+        self.header_set(471, (v.guid() >> 32) as u32);
+        self
+    }
+
     pub fn set_player_VENDORBUYBACK_SLOT_1(mut self, v: Guid) -> Self {
         self.header_set(472, v.guid() as u32);
         self.header_set(473, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_2(mut self, v: Guid) -> Self {
+        self.header_set(474, v.guid() as u32);
+        self.header_set(475, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_3(mut self, v: Guid) -> Self {
+        self.header_set(476, v.guid() as u32);
+        self.header_set(477, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_4(mut self, v: Guid) -> Self {
+        self.header_set(478, v.guid() as u32);
+        self.header_set(479, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_5(mut self, v: Guid) -> Self {
+        self.header_set(480, v.guid() as u32);
+        self.header_set(481, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_6(mut self, v: Guid) -> Self {
+        self.header_set(482, v.guid() as u32);
+        self.header_set(483, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_7(mut self, v: Guid) -> Self {
+        self.header_set(484, v.guid() as u32);
+        self.header_set(485, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_8(mut self, v: Guid) -> Self {
+        self.header_set(486, v.guid() as u32);
+        self.header_set(487, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_9(mut self, v: Guid) -> Self {
+        self.header_set(488, v.guid() as u32);
+        self.header_set(489, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_10(mut self, v: Guid) -> Self {
+        self.header_set(490, v.guid() as u32);
+        self.header_set(491, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_11(mut self, v: Guid) -> Self {
+        self.header_set(492, v.guid() as u32);
+        self.header_set(493, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_12(mut self, v: Guid) -> Self {
+        self.header_set(494, v.guid() as u32);
+        self.header_set(495, (v.guid() >> 32) as u32);
         self
     }
 
@@ -2187,9 +2673,381 @@ impl UpdatePlayerBuilder {
         self
     }
 
+    pub fn set_player_KEYRING_SLOT_2(mut self, v: Guid) -> Self {
+        self.header_set(498, v.guid() as u32);
+        self.header_set(499, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_3(mut self, v: Guid) -> Self {
+        self.header_set(500, v.guid() as u32);
+        self.header_set(501, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_4(mut self, v: Guid) -> Self {
+        self.header_set(502, v.guid() as u32);
+        self.header_set(503, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_5(mut self, v: Guid) -> Self {
+        self.header_set(504, v.guid() as u32);
+        self.header_set(505, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_6(mut self, v: Guid) -> Self {
+        self.header_set(506, v.guid() as u32);
+        self.header_set(507, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_7(mut self, v: Guid) -> Self {
+        self.header_set(508, v.guid() as u32);
+        self.header_set(509, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_8(mut self, v: Guid) -> Self {
+        self.header_set(510, v.guid() as u32);
+        self.header_set(511, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_9(mut self, v: Guid) -> Self {
+        self.header_set(512, v.guid() as u32);
+        self.header_set(513, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_10(mut self, v: Guid) -> Self {
+        self.header_set(514, v.guid() as u32);
+        self.header_set(515, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_11(mut self, v: Guid) -> Self {
+        self.header_set(516, v.guid() as u32);
+        self.header_set(517, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_12(mut self, v: Guid) -> Self {
+        self.header_set(518, v.guid() as u32);
+        self.header_set(519, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_13(mut self, v: Guid) -> Self {
+        self.header_set(520, v.guid() as u32);
+        self.header_set(521, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_14(mut self, v: Guid) -> Self {
+        self.header_set(522, v.guid() as u32);
+        self.header_set(523, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_15(mut self, v: Guid) -> Self {
+        self.header_set(524, v.guid() as u32);
+        self.header_set(525, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_16(mut self, v: Guid) -> Self {
+        self.header_set(526, v.guid() as u32);
+        self.header_set(527, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_17(mut self, v: Guid) -> Self {
+        self.header_set(528, v.guid() as u32);
+        self.header_set(529, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_18(mut self, v: Guid) -> Self {
+        self.header_set(530, v.guid() as u32);
+        self.header_set(531, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_19(mut self, v: Guid) -> Self {
+        self.header_set(532, v.guid() as u32);
+        self.header_set(533, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_20(mut self, v: Guid) -> Self {
+        self.header_set(534, v.guid() as u32);
+        self.header_set(535, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_21(mut self, v: Guid) -> Self {
+        self.header_set(536, v.guid() as u32);
+        self.header_set(537, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_22(mut self, v: Guid) -> Self {
+        self.header_set(538, v.guid() as u32);
+        self.header_set(539, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_23(mut self, v: Guid) -> Self {
+        self.header_set(540, v.guid() as u32);
+        self.header_set(541, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_24(mut self, v: Guid) -> Self {
+        self.header_set(542, v.guid() as u32);
+        self.header_set(543, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_25(mut self, v: Guid) -> Self {
+        self.header_set(544, v.guid() as u32);
+        self.header_set(545, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_26(mut self, v: Guid) -> Self {
+        self.header_set(546, v.guid() as u32);
+        self.header_set(547, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_27(mut self, v: Guid) -> Self {
+        self.header_set(548, v.guid() as u32);
+        self.header_set(549, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_28(mut self, v: Guid) -> Self {
+        self.header_set(550, v.guid() as u32);
+        self.header_set(551, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_29(mut self, v: Guid) -> Self {
+        self.header_set(552, v.guid() as u32);
+        self.header_set(553, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_30(mut self, v: Guid) -> Self {
+        self.header_set(554, v.guid() as u32);
+        self.header_set(555, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_31(mut self, v: Guid) -> Self {
+        self.header_set(556, v.guid() as u32);
+        self.header_set(557, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_KEYRING_SLOT_32(mut self, v: Guid) -> Self {
+        self.header_set(558, v.guid() as u32);
+        self.header_set(559, (v.guid() >> 32) as u32);
+        self
+    }
+
     pub fn set_player_CURRENCYTOKEN_SLOT_1(mut self, v: Guid) -> Self {
         self.header_set(560, v.guid() as u32);
         self.header_set(561, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_2(mut self, v: Guid) -> Self {
+        self.header_set(562, v.guid() as u32);
+        self.header_set(563, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_3(mut self, v: Guid) -> Self {
+        self.header_set(564, v.guid() as u32);
+        self.header_set(565, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_4(mut self, v: Guid) -> Self {
+        self.header_set(566, v.guid() as u32);
+        self.header_set(567, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_5(mut self, v: Guid) -> Self {
+        self.header_set(568, v.guid() as u32);
+        self.header_set(569, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_6(mut self, v: Guid) -> Self {
+        self.header_set(570, v.guid() as u32);
+        self.header_set(571, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_7(mut self, v: Guid) -> Self {
+        self.header_set(572, v.guid() as u32);
+        self.header_set(573, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_8(mut self, v: Guid) -> Self {
+        self.header_set(574, v.guid() as u32);
+        self.header_set(575, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_9(mut self, v: Guid) -> Self {
+        self.header_set(576, v.guid() as u32);
+        self.header_set(577, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_10(mut self, v: Guid) -> Self {
+        self.header_set(578, v.guid() as u32);
+        self.header_set(579, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_11(mut self, v: Guid) -> Self {
+        self.header_set(580, v.guid() as u32);
+        self.header_set(581, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_12(mut self, v: Guid) -> Self {
+        self.header_set(582, v.guid() as u32);
+        self.header_set(583, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_13(mut self, v: Guid) -> Self {
+        self.header_set(584, v.guid() as u32);
+        self.header_set(585, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_14(mut self, v: Guid) -> Self {
+        self.header_set(586, v.guid() as u32);
+        self.header_set(587, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_15(mut self, v: Guid) -> Self {
+        self.header_set(588, v.guid() as u32);
+        self.header_set(589, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_16(mut self, v: Guid) -> Self {
+        self.header_set(590, v.guid() as u32);
+        self.header_set(591, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_17(mut self, v: Guid) -> Self {
+        self.header_set(592, v.guid() as u32);
+        self.header_set(593, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_18(mut self, v: Guid) -> Self {
+        self.header_set(594, v.guid() as u32);
+        self.header_set(595, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_19(mut self, v: Guid) -> Self {
+        self.header_set(596, v.guid() as u32);
+        self.header_set(597, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_20(mut self, v: Guid) -> Self {
+        self.header_set(598, v.guid() as u32);
+        self.header_set(599, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_21(mut self, v: Guid) -> Self {
+        self.header_set(600, v.guid() as u32);
+        self.header_set(601, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_22(mut self, v: Guid) -> Self {
+        self.header_set(602, v.guid() as u32);
+        self.header_set(603, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_23(mut self, v: Guid) -> Self {
+        self.header_set(604, v.guid() as u32);
+        self.header_set(605, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_24(mut self, v: Guid) -> Self {
+        self.header_set(606, v.guid() as u32);
+        self.header_set(607, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_25(mut self, v: Guid) -> Self {
+        self.header_set(608, v.guid() as u32);
+        self.header_set(609, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_26(mut self, v: Guid) -> Self {
+        self.header_set(610, v.guid() as u32);
+        self.header_set(611, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_27(mut self, v: Guid) -> Self {
+        self.header_set(612, v.guid() as u32);
+        self.header_set(613, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_28(mut self, v: Guid) -> Self {
+        self.header_set(614, v.guid() as u32);
+        self.header_set(615, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_29(mut self, v: Guid) -> Self {
+        self.header_set(616, v.guid() as u32);
+        self.header_set(617, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_30(mut self, v: Guid) -> Self {
+        self.header_set(618, v.guid() as u32);
+        self.header_set(619, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_31(mut self, v: Guid) -> Self {
+        self.header_set(620, v.guid() as u32);
+        self.header_set(621, (v.guid() >> 32) as u32);
+        self
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_32(mut self, v: Guid) -> Self {
+        self.header_set(622, v.guid() as u32);
+        self.header_set(623, (v.guid() >> 32) as u32);
         self
     }
 
@@ -6684,14 +7542,278 @@ impl UpdatePlayer {
         self.values.get(&322).map(|v| *v as i32)
     }
 
-    pub fn set_player_INV_SLOT_HEAD(&mut self, v: Guid) {
+    pub fn set_player_INV_SLOT_HEAD1(&mut self, v: Guid) {
         self.header_set(324, v.guid() as u32);
         self.header_set(325, (v.guid() >> 32) as u32);
     }
 
-    pub fn player_INV_SLOT_HEAD(&self) -> Option<Guid> {
+    pub fn player_INV_SLOT_HEAD1(&self) -> Option<Guid> {
         let lower = self.values.get(&324);
         let upper = self.values.get(&325);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD2(&mut self, v: Guid) {
+        self.header_set(326, v.guid() as u32);
+        self.header_set(327, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD2(&self) -> Option<Guid> {
+        let lower = self.values.get(&326);
+        let upper = self.values.get(&327);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD3(&mut self, v: Guid) {
+        self.header_set(328, v.guid() as u32);
+        self.header_set(329, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD3(&self) -> Option<Guid> {
+        let lower = self.values.get(&328);
+        let upper = self.values.get(&329);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD4(&mut self, v: Guid) {
+        self.header_set(330, v.guid() as u32);
+        self.header_set(331, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD4(&self) -> Option<Guid> {
+        let lower = self.values.get(&330);
+        let upper = self.values.get(&331);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD5(&mut self, v: Guid) {
+        self.header_set(332, v.guid() as u32);
+        self.header_set(333, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD5(&self) -> Option<Guid> {
+        let lower = self.values.get(&332);
+        let upper = self.values.get(&333);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD6(&mut self, v: Guid) {
+        self.header_set(334, v.guid() as u32);
+        self.header_set(335, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD6(&self) -> Option<Guid> {
+        let lower = self.values.get(&334);
+        let upper = self.values.get(&335);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD7(&mut self, v: Guid) {
+        self.header_set(336, v.guid() as u32);
+        self.header_set(337, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD7(&self) -> Option<Guid> {
+        let lower = self.values.get(&336);
+        let upper = self.values.get(&337);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD8(&mut self, v: Guid) {
+        self.header_set(338, v.guid() as u32);
+        self.header_set(339, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD8(&self) -> Option<Guid> {
+        let lower = self.values.get(&338);
+        let upper = self.values.get(&339);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD9(&mut self, v: Guid) {
+        self.header_set(340, v.guid() as u32);
+        self.header_set(341, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD9(&self) -> Option<Guid> {
+        let lower = self.values.get(&340);
+        let upper = self.values.get(&341);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD10(&mut self, v: Guid) {
+        self.header_set(342, v.guid() as u32);
+        self.header_set(343, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD10(&self) -> Option<Guid> {
+        let lower = self.values.get(&342);
+        let upper = self.values.get(&343);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD11(&mut self, v: Guid) {
+        self.header_set(344, v.guid() as u32);
+        self.header_set(345, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD11(&self) -> Option<Guid> {
+        let lower = self.values.get(&344);
+        let upper = self.values.get(&345);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD12(&mut self, v: Guid) {
+        self.header_set(346, v.guid() as u32);
+        self.header_set(347, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD12(&self) -> Option<Guid> {
+        let lower = self.values.get(&346);
+        let upper = self.values.get(&347);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD13(&mut self, v: Guid) {
+        self.header_set(348, v.guid() as u32);
+        self.header_set(349, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD13(&self) -> Option<Guid> {
+        let lower = self.values.get(&348);
+        let upper = self.values.get(&349);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD14(&mut self, v: Guid) {
+        self.header_set(350, v.guid() as u32);
+        self.header_set(351, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD14(&self) -> Option<Guid> {
+        let lower = self.values.get(&350);
+        let upper = self.values.get(&351);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD15(&mut self, v: Guid) {
+        self.header_set(352, v.guid() as u32);
+        self.header_set(353, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD15(&self) -> Option<Guid> {
+        let lower = self.values.get(&352);
+        let upper = self.values.get(&353);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD16(&mut self, v: Guid) {
+        self.header_set(354, v.guid() as u32);
+        self.header_set(355, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD16(&self) -> Option<Guid> {
+        let lower = self.values.get(&354);
+        let upper = self.values.get(&355);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD17(&mut self, v: Guid) {
+        self.header_set(356, v.guid() as u32);
+        self.header_set(357, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD17(&self) -> Option<Guid> {
+        let lower = self.values.get(&356);
+        let upper = self.values.get(&357);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD18(&mut self, v: Guid) {
+        self.header_set(358, v.guid() as u32);
+        self.header_set(359, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD18(&self) -> Option<Guid> {
+        let lower = self.values.get(&358);
+        let upper = self.values.get(&359);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD19(&mut self, v: Guid) {
+        self.header_set(360, v.guid() as u32);
+        self.header_set(361, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD19(&self) -> Option<Guid> {
+        let lower = self.values.get(&360);
+        let upper = self.values.get(&361);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD20(&mut self, v: Guid) {
+        self.header_set(362, v.guid() as u32);
+        self.header_set(363, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD20(&self) -> Option<Guid> {
+        let lower = self.values.get(&362);
+        let upper = self.values.get(&363);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD21(&mut self, v: Guid) {
+        self.header_set(364, v.guid() as u32);
+        self.header_set(365, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD21(&self) -> Option<Guid> {
+        let lower = self.values.get(&364);
+        let upper = self.values.get(&365);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD22(&mut self, v: Guid) {
+        self.header_set(366, v.guid() as u32);
+        self.header_set(367, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD22(&self) -> Option<Guid> {
+        let lower = self.values.get(&366);
+        let upper = self.values.get(&367);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_INV_SLOT_HEAD23(&mut self, v: Guid) {
+        self.header_set(368, v.guid() as u32);
+        self.header_set(369, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_INV_SLOT_HEAD23(&self) -> Option<Guid> {
+        let lower = self.values.get(&368);
+        let upper = self.values.get(&369);
 
         lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
@@ -6708,6 +7830,186 @@ impl UpdatePlayer {
         lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
+    pub fn set_player_PACK_SLOT_2(&mut self, v: Guid) {
+        self.header_set(372, v.guid() as u32);
+        self.header_set(373, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_2(&self) -> Option<Guid> {
+        let lower = self.values.get(&372);
+        let upper = self.values.get(&373);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_3(&mut self, v: Guid) {
+        self.header_set(374, v.guid() as u32);
+        self.header_set(375, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_3(&self) -> Option<Guid> {
+        let lower = self.values.get(&374);
+        let upper = self.values.get(&375);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_4(&mut self, v: Guid) {
+        self.header_set(376, v.guid() as u32);
+        self.header_set(377, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_4(&self) -> Option<Guid> {
+        let lower = self.values.get(&376);
+        let upper = self.values.get(&377);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_5(&mut self, v: Guid) {
+        self.header_set(378, v.guid() as u32);
+        self.header_set(379, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_5(&self) -> Option<Guid> {
+        let lower = self.values.get(&378);
+        let upper = self.values.get(&379);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_6(&mut self, v: Guid) {
+        self.header_set(380, v.guid() as u32);
+        self.header_set(381, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_6(&self) -> Option<Guid> {
+        let lower = self.values.get(&380);
+        let upper = self.values.get(&381);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_7(&mut self, v: Guid) {
+        self.header_set(382, v.guid() as u32);
+        self.header_set(383, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_7(&self) -> Option<Guid> {
+        let lower = self.values.get(&382);
+        let upper = self.values.get(&383);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_8(&mut self, v: Guid) {
+        self.header_set(384, v.guid() as u32);
+        self.header_set(385, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_8(&self) -> Option<Guid> {
+        let lower = self.values.get(&384);
+        let upper = self.values.get(&385);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_9(&mut self, v: Guid) {
+        self.header_set(386, v.guid() as u32);
+        self.header_set(387, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_9(&self) -> Option<Guid> {
+        let lower = self.values.get(&386);
+        let upper = self.values.get(&387);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_10(&mut self, v: Guid) {
+        self.header_set(388, v.guid() as u32);
+        self.header_set(389, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_10(&self) -> Option<Guid> {
+        let lower = self.values.get(&388);
+        let upper = self.values.get(&389);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_11(&mut self, v: Guid) {
+        self.header_set(390, v.guid() as u32);
+        self.header_set(391, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_11(&self) -> Option<Guid> {
+        let lower = self.values.get(&390);
+        let upper = self.values.get(&391);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_12(&mut self, v: Guid) {
+        self.header_set(392, v.guid() as u32);
+        self.header_set(393, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_12(&self) -> Option<Guid> {
+        let lower = self.values.get(&392);
+        let upper = self.values.get(&393);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_13(&mut self, v: Guid) {
+        self.header_set(394, v.guid() as u32);
+        self.header_set(395, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_13(&self) -> Option<Guid> {
+        let lower = self.values.get(&394);
+        let upper = self.values.get(&395);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_14(&mut self, v: Guid) {
+        self.header_set(396, v.guid() as u32);
+        self.header_set(397, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_14(&self) -> Option<Guid> {
+        let lower = self.values.get(&396);
+        let upper = self.values.get(&397);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_15(&mut self, v: Guid) {
+        self.header_set(398, v.guid() as u32);
+        self.header_set(399, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_15(&self) -> Option<Guid> {
+        let lower = self.values.get(&398);
+        let upper = self.values.get(&399);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_PACK_SLOT_16(&mut self, v: Guid) {
+        self.header_set(400, v.guid() as u32);
+        self.header_set(401, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_PACK_SLOT_16(&self) -> Option<Guid> {
+        let lower = self.values.get(&400);
+        let upper = self.values.get(&401);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
     pub fn set_player_BANK_SLOT_1(&mut self, v: Guid) {
         self.header_set(402, v.guid() as u32);
         self.header_set(403, (v.guid() >> 32) as u32);
@@ -6716,6 +8018,330 @@ impl UpdatePlayer {
     pub fn player_BANK_SLOT_1(&self) -> Option<Guid> {
         let lower = self.values.get(&402);
         let upper = self.values.get(&403);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_2(&mut self, v: Guid) {
+        self.header_set(404, v.guid() as u32);
+        self.header_set(405, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_2(&self) -> Option<Guid> {
+        let lower = self.values.get(&404);
+        let upper = self.values.get(&405);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_3(&mut self, v: Guid) {
+        self.header_set(406, v.guid() as u32);
+        self.header_set(407, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_3(&self) -> Option<Guid> {
+        let lower = self.values.get(&406);
+        let upper = self.values.get(&407);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_4(&mut self, v: Guid) {
+        self.header_set(408, v.guid() as u32);
+        self.header_set(409, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_4(&self) -> Option<Guid> {
+        let lower = self.values.get(&408);
+        let upper = self.values.get(&409);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_5(&mut self, v: Guid) {
+        self.header_set(410, v.guid() as u32);
+        self.header_set(411, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_5(&self) -> Option<Guid> {
+        let lower = self.values.get(&410);
+        let upper = self.values.get(&411);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_6(&mut self, v: Guid) {
+        self.header_set(412, v.guid() as u32);
+        self.header_set(413, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_6(&self) -> Option<Guid> {
+        let lower = self.values.get(&412);
+        let upper = self.values.get(&413);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_7(&mut self, v: Guid) {
+        self.header_set(414, v.guid() as u32);
+        self.header_set(415, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_7(&self) -> Option<Guid> {
+        let lower = self.values.get(&414);
+        let upper = self.values.get(&415);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_8(&mut self, v: Guid) {
+        self.header_set(416, v.guid() as u32);
+        self.header_set(417, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_8(&self) -> Option<Guid> {
+        let lower = self.values.get(&416);
+        let upper = self.values.get(&417);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_9(&mut self, v: Guid) {
+        self.header_set(418, v.guid() as u32);
+        self.header_set(419, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_9(&self) -> Option<Guid> {
+        let lower = self.values.get(&418);
+        let upper = self.values.get(&419);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_10(&mut self, v: Guid) {
+        self.header_set(420, v.guid() as u32);
+        self.header_set(421, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_10(&self) -> Option<Guid> {
+        let lower = self.values.get(&420);
+        let upper = self.values.get(&421);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_11(&mut self, v: Guid) {
+        self.header_set(422, v.guid() as u32);
+        self.header_set(423, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_11(&self) -> Option<Guid> {
+        let lower = self.values.get(&422);
+        let upper = self.values.get(&423);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_12(&mut self, v: Guid) {
+        self.header_set(424, v.guid() as u32);
+        self.header_set(425, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_12(&self) -> Option<Guid> {
+        let lower = self.values.get(&424);
+        let upper = self.values.get(&425);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_13(&mut self, v: Guid) {
+        self.header_set(426, v.guid() as u32);
+        self.header_set(427, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_13(&self) -> Option<Guid> {
+        let lower = self.values.get(&426);
+        let upper = self.values.get(&427);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_14(&mut self, v: Guid) {
+        self.header_set(428, v.guid() as u32);
+        self.header_set(429, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_14(&self) -> Option<Guid> {
+        let lower = self.values.get(&428);
+        let upper = self.values.get(&429);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_15(&mut self, v: Guid) {
+        self.header_set(430, v.guid() as u32);
+        self.header_set(431, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_15(&self) -> Option<Guid> {
+        let lower = self.values.get(&430);
+        let upper = self.values.get(&431);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_16(&mut self, v: Guid) {
+        self.header_set(432, v.guid() as u32);
+        self.header_set(433, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_16(&self) -> Option<Guid> {
+        let lower = self.values.get(&432);
+        let upper = self.values.get(&433);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_17(&mut self, v: Guid) {
+        self.header_set(434, v.guid() as u32);
+        self.header_set(435, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_17(&self) -> Option<Guid> {
+        let lower = self.values.get(&434);
+        let upper = self.values.get(&435);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_18(&mut self, v: Guid) {
+        self.header_set(436, v.guid() as u32);
+        self.header_set(437, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_18(&self) -> Option<Guid> {
+        let lower = self.values.get(&436);
+        let upper = self.values.get(&437);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_19(&mut self, v: Guid) {
+        self.header_set(438, v.guid() as u32);
+        self.header_set(439, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_19(&self) -> Option<Guid> {
+        let lower = self.values.get(&438);
+        let upper = self.values.get(&439);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_20(&mut self, v: Guid) {
+        self.header_set(440, v.guid() as u32);
+        self.header_set(441, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_20(&self) -> Option<Guid> {
+        let lower = self.values.get(&440);
+        let upper = self.values.get(&441);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_21(&mut self, v: Guid) {
+        self.header_set(442, v.guid() as u32);
+        self.header_set(443, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_21(&self) -> Option<Guid> {
+        let lower = self.values.get(&442);
+        let upper = self.values.get(&443);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_22(&mut self, v: Guid) {
+        self.header_set(444, v.guid() as u32);
+        self.header_set(445, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_22(&self) -> Option<Guid> {
+        let lower = self.values.get(&444);
+        let upper = self.values.get(&445);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_23(&mut self, v: Guid) {
+        self.header_set(446, v.guid() as u32);
+        self.header_set(447, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_23(&self) -> Option<Guid> {
+        let lower = self.values.get(&446);
+        let upper = self.values.get(&447);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_24(&mut self, v: Guid) {
+        self.header_set(448, v.guid() as u32);
+        self.header_set(449, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_24(&self) -> Option<Guid> {
+        let lower = self.values.get(&448);
+        let upper = self.values.get(&449);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_25(&mut self, v: Guid) {
+        self.header_set(450, v.guid() as u32);
+        self.header_set(451, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_25(&self) -> Option<Guid> {
+        let lower = self.values.get(&450);
+        let upper = self.values.get(&451);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_26(&mut self, v: Guid) {
+        self.header_set(452, v.guid() as u32);
+        self.header_set(453, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_26(&self) -> Option<Guid> {
+        let lower = self.values.get(&452);
+        let upper = self.values.get(&453);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_27(&mut self, v: Guid) {
+        self.header_set(454, v.guid() as u32);
+        self.header_set(455, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_27(&self) -> Option<Guid> {
+        let lower = self.values.get(&454);
+        let upper = self.values.get(&455);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANK_SLOT_28(&mut self, v: Guid) {
+        self.header_set(456, v.guid() as u32);
+        self.header_set(457, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANK_SLOT_28(&self) -> Option<Guid> {
+        let lower = self.values.get(&456);
+        let upper = self.values.get(&457);
 
         lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
@@ -6732,6 +8358,78 @@ impl UpdatePlayer {
         lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
+    pub fn set_player_BANKBAG_SLOT_2(&mut self, v: Guid) {
+        self.header_set(460, v.guid() as u32);
+        self.header_set(461, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANKBAG_SLOT_2(&self) -> Option<Guid> {
+        let lower = self.values.get(&460);
+        let upper = self.values.get(&461);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANKBAG_SLOT_3(&mut self, v: Guid) {
+        self.header_set(462, v.guid() as u32);
+        self.header_set(463, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANKBAG_SLOT_3(&self) -> Option<Guid> {
+        let lower = self.values.get(&462);
+        let upper = self.values.get(&463);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANKBAG_SLOT_4(&mut self, v: Guid) {
+        self.header_set(464, v.guid() as u32);
+        self.header_set(465, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANKBAG_SLOT_4(&self) -> Option<Guid> {
+        let lower = self.values.get(&464);
+        let upper = self.values.get(&465);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANKBAG_SLOT_5(&mut self, v: Guid) {
+        self.header_set(466, v.guid() as u32);
+        self.header_set(467, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANKBAG_SLOT_5(&self) -> Option<Guid> {
+        let lower = self.values.get(&466);
+        let upper = self.values.get(&467);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANKBAG_SLOT_6(&mut self, v: Guid) {
+        self.header_set(468, v.guid() as u32);
+        self.header_set(469, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANKBAG_SLOT_6(&self) -> Option<Guid> {
+        let lower = self.values.get(&468);
+        let upper = self.values.get(&469);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_BANKBAG_SLOT_7(&mut self, v: Guid) {
+        self.header_set(470, v.guid() as u32);
+        self.header_set(471, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_BANKBAG_SLOT_7(&self) -> Option<Guid> {
+        let lower = self.values.get(&470);
+        let upper = self.values.get(&471);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
     pub fn set_player_VENDORBUYBACK_SLOT_1(&mut self, v: Guid) {
         self.header_set(472, v.guid() as u32);
         self.header_set(473, (v.guid() >> 32) as u32);
@@ -6740,6 +8438,138 @@ impl UpdatePlayer {
     pub fn player_VENDORBUYBACK_SLOT_1(&self) -> Option<Guid> {
         let lower = self.values.get(&472);
         let upper = self.values.get(&473);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_2(&mut self, v: Guid) {
+        self.header_set(474, v.guid() as u32);
+        self.header_set(475, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_VENDORBUYBACK_SLOT_2(&self) -> Option<Guid> {
+        let lower = self.values.get(&474);
+        let upper = self.values.get(&475);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_3(&mut self, v: Guid) {
+        self.header_set(476, v.guid() as u32);
+        self.header_set(477, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_VENDORBUYBACK_SLOT_3(&self) -> Option<Guid> {
+        let lower = self.values.get(&476);
+        let upper = self.values.get(&477);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_4(&mut self, v: Guid) {
+        self.header_set(478, v.guid() as u32);
+        self.header_set(479, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_VENDORBUYBACK_SLOT_4(&self) -> Option<Guid> {
+        let lower = self.values.get(&478);
+        let upper = self.values.get(&479);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_5(&mut self, v: Guid) {
+        self.header_set(480, v.guid() as u32);
+        self.header_set(481, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_VENDORBUYBACK_SLOT_5(&self) -> Option<Guid> {
+        let lower = self.values.get(&480);
+        let upper = self.values.get(&481);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_6(&mut self, v: Guid) {
+        self.header_set(482, v.guid() as u32);
+        self.header_set(483, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_VENDORBUYBACK_SLOT_6(&self) -> Option<Guid> {
+        let lower = self.values.get(&482);
+        let upper = self.values.get(&483);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_7(&mut self, v: Guid) {
+        self.header_set(484, v.guid() as u32);
+        self.header_set(485, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_VENDORBUYBACK_SLOT_7(&self) -> Option<Guid> {
+        let lower = self.values.get(&484);
+        let upper = self.values.get(&485);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_8(&mut self, v: Guid) {
+        self.header_set(486, v.guid() as u32);
+        self.header_set(487, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_VENDORBUYBACK_SLOT_8(&self) -> Option<Guid> {
+        let lower = self.values.get(&486);
+        let upper = self.values.get(&487);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_9(&mut self, v: Guid) {
+        self.header_set(488, v.guid() as u32);
+        self.header_set(489, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_VENDORBUYBACK_SLOT_9(&self) -> Option<Guid> {
+        let lower = self.values.get(&488);
+        let upper = self.values.get(&489);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_10(&mut self, v: Guid) {
+        self.header_set(490, v.guid() as u32);
+        self.header_set(491, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_VENDORBUYBACK_SLOT_10(&self) -> Option<Guid> {
+        let lower = self.values.get(&490);
+        let upper = self.values.get(&491);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_11(&mut self, v: Guid) {
+        self.header_set(492, v.guid() as u32);
+        self.header_set(493, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_VENDORBUYBACK_SLOT_11(&self) -> Option<Guid> {
+        let lower = self.values.get(&492);
+        let upper = self.values.get(&493);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_VENDORBUYBACK_SLOT_12(&mut self, v: Guid) {
+        self.header_set(494, v.guid() as u32);
+        self.header_set(495, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_VENDORBUYBACK_SLOT_12(&self) -> Option<Guid> {
+        let lower = self.values.get(&494);
+        let upper = self.values.get(&495);
 
         lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
@@ -6756,6 +8586,378 @@ impl UpdatePlayer {
         lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
 
+    pub fn set_player_KEYRING_SLOT_2(&mut self, v: Guid) {
+        self.header_set(498, v.guid() as u32);
+        self.header_set(499, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_2(&self) -> Option<Guid> {
+        let lower = self.values.get(&498);
+        let upper = self.values.get(&499);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_3(&mut self, v: Guid) {
+        self.header_set(500, v.guid() as u32);
+        self.header_set(501, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_3(&self) -> Option<Guid> {
+        let lower = self.values.get(&500);
+        let upper = self.values.get(&501);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_4(&mut self, v: Guid) {
+        self.header_set(502, v.guid() as u32);
+        self.header_set(503, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_4(&self) -> Option<Guid> {
+        let lower = self.values.get(&502);
+        let upper = self.values.get(&503);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_5(&mut self, v: Guid) {
+        self.header_set(504, v.guid() as u32);
+        self.header_set(505, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_5(&self) -> Option<Guid> {
+        let lower = self.values.get(&504);
+        let upper = self.values.get(&505);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_6(&mut self, v: Guid) {
+        self.header_set(506, v.guid() as u32);
+        self.header_set(507, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_6(&self) -> Option<Guid> {
+        let lower = self.values.get(&506);
+        let upper = self.values.get(&507);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_7(&mut self, v: Guid) {
+        self.header_set(508, v.guid() as u32);
+        self.header_set(509, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_7(&self) -> Option<Guid> {
+        let lower = self.values.get(&508);
+        let upper = self.values.get(&509);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_8(&mut self, v: Guid) {
+        self.header_set(510, v.guid() as u32);
+        self.header_set(511, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_8(&self) -> Option<Guid> {
+        let lower = self.values.get(&510);
+        let upper = self.values.get(&511);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_9(&mut self, v: Guid) {
+        self.header_set(512, v.guid() as u32);
+        self.header_set(513, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_9(&self) -> Option<Guid> {
+        let lower = self.values.get(&512);
+        let upper = self.values.get(&513);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_10(&mut self, v: Guid) {
+        self.header_set(514, v.guid() as u32);
+        self.header_set(515, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_10(&self) -> Option<Guid> {
+        let lower = self.values.get(&514);
+        let upper = self.values.get(&515);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_11(&mut self, v: Guid) {
+        self.header_set(516, v.guid() as u32);
+        self.header_set(517, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_11(&self) -> Option<Guid> {
+        let lower = self.values.get(&516);
+        let upper = self.values.get(&517);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_12(&mut self, v: Guid) {
+        self.header_set(518, v.guid() as u32);
+        self.header_set(519, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_12(&self) -> Option<Guid> {
+        let lower = self.values.get(&518);
+        let upper = self.values.get(&519);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_13(&mut self, v: Guid) {
+        self.header_set(520, v.guid() as u32);
+        self.header_set(521, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_13(&self) -> Option<Guid> {
+        let lower = self.values.get(&520);
+        let upper = self.values.get(&521);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_14(&mut self, v: Guid) {
+        self.header_set(522, v.guid() as u32);
+        self.header_set(523, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_14(&self) -> Option<Guid> {
+        let lower = self.values.get(&522);
+        let upper = self.values.get(&523);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_15(&mut self, v: Guid) {
+        self.header_set(524, v.guid() as u32);
+        self.header_set(525, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_15(&self) -> Option<Guid> {
+        let lower = self.values.get(&524);
+        let upper = self.values.get(&525);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_16(&mut self, v: Guid) {
+        self.header_set(526, v.guid() as u32);
+        self.header_set(527, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_16(&self) -> Option<Guid> {
+        let lower = self.values.get(&526);
+        let upper = self.values.get(&527);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_17(&mut self, v: Guid) {
+        self.header_set(528, v.guid() as u32);
+        self.header_set(529, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_17(&self) -> Option<Guid> {
+        let lower = self.values.get(&528);
+        let upper = self.values.get(&529);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_18(&mut self, v: Guid) {
+        self.header_set(530, v.guid() as u32);
+        self.header_set(531, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_18(&self) -> Option<Guid> {
+        let lower = self.values.get(&530);
+        let upper = self.values.get(&531);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_19(&mut self, v: Guid) {
+        self.header_set(532, v.guid() as u32);
+        self.header_set(533, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_19(&self) -> Option<Guid> {
+        let lower = self.values.get(&532);
+        let upper = self.values.get(&533);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_20(&mut self, v: Guid) {
+        self.header_set(534, v.guid() as u32);
+        self.header_set(535, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_20(&self) -> Option<Guid> {
+        let lower = self.values.get(&534);
+        let upper = self.values.get(&535);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_21(&mut self, v: Guid) {
+        self.header_set(536, v.guid() as u32);
+        self.header_set(537, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_21(&self) -> Option<Guid> {
+        let lower = self.values.get(&536);
+        let upper = self.values.get(&537);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_22(&mut self, v: Guid) {
+        self.header_set(538, v.guid() as u32);
+        self.header_set(539, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_22(&self) -> Option<Guid> {
+        let lower = self.values.get(&538);
+        let upper = self.values.get(&539);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_23(&mut self, v: Guid) {
+        self.header_set(540, v.guid() as u32);
+        self.header_set(541, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_23(&self) -> Option<Guid> {
+        let lower = self.values.get(&540);
+        let upper = self.values.get(&541);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_24(&mut self, v: Guid) {
+        self.header_set(542, v.guid() as u32);
+        self.header_set(543, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_24(&self) -> Option<Guid> {
+        let lower = self.values.get(&542);
+        let upper = self.values.get(&543);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_25(&mut self, v: Guid) {
+        self.header_set(544, v.guid() as u32);
+        self.header_set(545, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_25(&self) -> Option<Guid> {
+        let lower = self.values.get(&544);
+        let upper = self.values.get(&545);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_26(&mut self, v: Guid) {
+        self.header_set(546, v.guid() as u32);
+        self.header_set(547, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_26(&self) -> Option<Guid> {
+        let lower = self.values.get(&546);
+        let upper = self.values.get(&547);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_27(&mut self, v: Guid) {
+        self.header_set(548, v.guid() as u32);
+        self.header_set(549, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_27(&self) -> Option<Guid> {
+        let lower = self.values.get(&548);
+        let upper = self.values.get(&549);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_28(&mut self, v: Guid) {
+        self.header_set(550, v.guid() as u32);
+        self.header_set(551, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_28(&self) -> Option<Guid> {
+        let lower = self.values.get(&550);
+        let upper = self.values.get(&551);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_29(&mut self, v: Guid) {
+        self.header_set(552, v.guid() as u32);
+        self.header_set(553, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_29(&self) -> Option<Guid> {
+        let lower = self.values.get(&552);
+        let upper = self.values.get(&553);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_30(&mut self, v: Guid) {
+        self.header_set(554, v.guid() as u32);
+        self.header_set(555, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_30(&self) -> Option<Guid> {
+        let lower = self.values.get(&554);
+        let upper = self.values.get(&555);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_31(&mut self, v: Guid) {
+        self.header_set(556, v.guid() as u32);
+        self.header_set(557, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_31(&self) -> Option<Guid> {
+        let lower = self.values.get(&556);
+        let upper = self.values.get(&557);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_KEYRING_SLOT_32(&mut self, v: Guid) {
+        self.header_set(558, v.guid() as u32);
+        self.header_set(559, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_KEYRING_SLOT_32(&self) -> Option<Guid> {
+        let lower = self.values.get(&558);
+        let upper = self.values.get(&559);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
     pub fn set_player_CURRENCYTOKEN_SLOT_1(&mut self, v: Guid) {
         self.header_set(560, v.guid() as u32);
         self.header_set(561, (v.guid() >> 32) as u32);
@@ -6764,6 +8966,378 @@ impl UpdatePlayer {
     pub fn player_CURRENCYTOKEN_SLOT_1(&self) -> Option<Guid> {
         let lower = self.values.get(&560);
         let upper = self.values.get(&561);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_2(&mut self, v: Guid) {
+        self.header_set(562, v.guid() as u32);
+        self.header_set(563, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_2(&self) -> Option<Guid> {
+        let lower = self.values.get(&562);
+        let upper = self.values.get(&563);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_3(&mut self, v: Guid) {
+        self.header_set(564, v.guid() as u32);
+        self.header_set(565, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_3(&self) -> Option<Guid> {
+        let lower = self.values.get(&564);
+        let upper = self.values.get(&565);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_4(&mut self, v: Guid) {
+        self.header_set(566, v.guid() as u32);
+        self.header_set(567, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_4(&self) -> Option<Guid> {
+        let lower = self.values.get(&566);
+        let upper = self.values.get(&567);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_5(&mut self, v: Guid) {
+        self.header_set(568, v.guid() as u32);
+        self.header_set(569, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_5(&self) -> Option<Guid> {
+        let lower = self.values.get(&568);
+        let upper = self.values.get(&569);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_6(&mut self, v: Guid) {
+        self.header_set(570, v.guid() as u32);
+        self.header_set(571, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_6(&self) -> Option<Guid> {
+        let lower = self.values.get(&570);
+        let upper = self.values.get(&571);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_7(&mut self, v: Guid) {
+        self.header_set(572, v.guid() as u32);
+        self.header_set(573, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_7(&self) -> Option<Guid> {
+        let lower = self.values.get(&572);
+        let upper = self.values.get(&573);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_8(&mut self, v: Guid) {
+        self.header_set(574, v.guid() as u32);
+        self.header_set(575, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_8(&self) -> Option<Guid> {
+        let lower = self.values.get(&574);
+        let upper = self.values.get(&575);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_9(&mut self, v: Guid) {
+        self.header_set(576, v.guid() as u32);
+        self.header_set(577, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_9(&self) -> Option<Guid> {
+        let lower = self.values.get(&576);
+        let upper = self.values.get(&577);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_10(&mut self, v: Guid) {
+        self.header_set(578, v.guid() as u32);
+        self.header_set(579, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_10(&self) -> Option<Guid> {
+        let lower = self.values.get(&578);
+        let upper = self.values.get(&579);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_11(&mut self, v: Guid) {
+        self.header_set(580, v.guid() as u32);
+        self.header_set(581, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_11(&self) -> Option<Guid> {
+        let lower = self.values.get(&580);
+        let upper = self.values.get(&581);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_12(&mut self, v: Guid) {
+        self.header_set(582, v.guid() as u32);
+        self.header_set(583, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_12(&self) -> Option<Guid> {
+        let lower = self.values.get(&582);
+        let upper = self.values.get(&583);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_13(&mut self, v: Guid) {
+        self.header_set(584, v.guid() as u32);
+        self.header_set(585, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_13(&self) -> Option<Guid> {
+        let lower = self.values.get(&584);
+        let upper = self.values.get(&585);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_14(&mut self, v: Guid) {
+        self.header_set(586, v.guid() as u32);
+        self.header_set(587, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_14(&self) -> Option<Guid> {
+        let lower = self.values.get(&586);
+        let upper = self.values.get(&587);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_15(&mut self, v: Guid) {
+        self.header_set(588, v.guid() as u32);
+        self.header_set(589, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_15(&self) -> Option<Guid> {
+        let lower = self.values.get(&588);
+        let upper = self.values.get(&589);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_16(&mut self, v: Guid) {
+        self.header_set(590, v.guid() as u32);
+        self.header_set(591, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_16(&self) -> Option<Guid> {
+        let lower = self.values.get(&590);
+        let upper = self.values.get(&591);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_17(&mut self, v: Guid) {
+        self.header_set(592, v.guid() as u32);
+        self.header_set(593, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_17(&self) -> Option<Guid> {
+        let lower = self.values.get(&592);
+        let upper = self.values.get(&593);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_18(&mut self, v: Guid) {
+        self.header_set(594, v.guid() as u32);
+        self.header_set(595, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_18(&self) -> Option<Guid> {
+        let lower = self.values.get(&594);
+        let upper = self.values.get(&595);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_19(&mut self, v: Guid) {
+        self.header_set(596, v.guid() as u32);
+        self.header_set(597, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_19(&self) -> Option<Guid> {
+        let lower = self.values.get(&596);
+        let upper = self.values.get(&597);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_20(&mut self, v: Guid) {
+        self.header_set(598, v.guid() as u32);
+        self.header_set(599, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_20(&self) -> Option<Guid> {
+        let lower = self.values.get(&598);
+        let upper = self.values.get(&599);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_21(&mut self, v: Guid) {
+        self.header_set(600, v.guid() as u32);
+        self.header_set(601, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_21(&self) -> Option<Guid> {
+        let lower = self.values.get(&600);
+        let upper = self.values.get(&601);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_22(&mut self, v: Guid) {
+        self.header_set(602, v.guid() as u32);
+        self.header_set(603, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_22(&self) -> Option<Guid> {
+        let lower = self.values.get(&602);
+        let upper = self.values.get(&603);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_23(&mut self, v: Guid) {
+        self.header_set(604, v.guid() as u32);
+        self.header_set(605, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_23(&self) -> Option<Guid> {
+        let lower = self.values.get(&604);
+        let upper = self.values.get(&605);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_24(&mut self, v: Guid) {
+        self.header_set(606, v.guid() as u32);
+        self.header_set(607, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_24(&self) -> Option<Guid> {
+        let lower = self.values.get(&606);
+        let upper = self.values.get(&607);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_25(&mut self, v: Guid) {
+        self.header_set(608, v.guid() as u32);
+        self.header_set(609, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_25(&self) -> Option<Guid> {
+        let lower = self.values.get(&608);
+        let upper = self.values.get(&609);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_26(&mut self, v: Guid) {
+        self.header_set(610, v.guid() as u32);
+        self.header_set(611, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_26(&self) -> Option<Guid> {
+        let lower = self.values.get(&610);
+        let upper = self.values.get(&611);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_27(&mut self, v: Guid) {
+        self.header_set(612, v.guid() as u32);
+        self.header_set(613, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_27(&self) -> Option<Guid> {
+        let lower = self.values.get(&612);
+        let upper = self.values.get(&613);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_28(&mut self, v: Guid) {
+        self.header_set(614, v.guid() as u32);
+        self.header_set(615, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_28(&self) -> Option<Guid> {
+        let lower = self.values.get(&614);
+        let upper = self.values.get(&615);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_29(&mut self, v: Guid) {
+        self.header_set(616, v.guid() as u32);
+        self.header_set(617, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_29(&self) -> Option<Guid> {
+        let lower = self.values.get(&616);
+        let upper = self.values.get(&617);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_30(&mut self, v: Guid) {
+        self.header_set(618, v.guid() as u32);
+        self.header_set(619, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_30(&self) -> Option<Guid> {
+        let lower = self.values.get(&618);
+        let upper = self.values.get(&619);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_31(&mut self, v: Guid) {
+        self.header_set(620, v.guid() as u32);
+        self.header_set(621, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_31(&self) -> Option<Guid> {
+        let lower = self.values.get(&620);
+        let upper = self.values.get(&621);
+
+        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    }
+
+    pub fn set_player_CURRENCYTOKEN_SLOT_32(&mut self, v: Guid) {
+        self.header_set(622, v.guid() as u32);
+        self.header_set(623, (v.guid() >> 32) as u32);
+    }
+
+    pub fn player_CURRENCYTOKEN_SLOT_32(&self) -> Option<Guid> {
+        let lower = self.values.get(&622);
+        let upper = self.values.get(&623);
 
         lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
     }
