@@ -15,6 +15,32 @@ pub(crate) fn parser_test_directory() -> PathBuf {
         .join("tests")
 }
 
+pub(crate) fn doc_summary_path() -> PathBuf {
+    workspace_directory()
+        .join("wowm_language")
+        .join("src")
+        .join("SUMMARY.md")
+}
+
+pub(crate) fn docs_directory() -> PathBuf {
+    workspace_directory()
+        .join("wowm_language")
+        .join("src")
+        .join("docs")
+}
+
+pub(crate) fn update_mask_doc_file() -> PathBuf {
+    workspace_directory()
+        .join("wowm_language")
+        .join("src")
+        .join("spec")
+        .join("update-mask.md")
+}
+
+pub(crate) fn intermediate_representation() -> PathBuf {
+    workspace_directory().join("intermediate_representation.json")
+}
+
 pub(crate) fn opcodes_file(version: MajorWorldVersion) -> PathBuf {
     workspace_directory()
         .join("wow_message_parser")

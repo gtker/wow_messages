@@ -4,10 +4,11 @@ pub mod definer;
 use crate::file_utils::create_and_overwrite_if_not_same_contents;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::{LoginVersion, WorldVersion};
+use crate::path_utils::{doc_summary_path, docs_directory};
 use std::collections::HashMap;
 use std::fmt::Write;
 use std::fs::read_to_string;
-use std::path::Path;
+use std::path::PathBuf;
 
 pub(crate) struct DocWriter {
     name: String,
@@ -74,7 +75,7 @@ impl DocWriter {
     }
 }
 
-fn create_or_append_hashmap(s: &str, path: String, files: &mut HashMap<String, String>) {
+fn create_or_append_hashmap(s: &str, path: PathBuf, files: &mut HashMap<PathBuf, String>) {
     if let Some(c) = files.get_mut(&path) {
         c.push_str(s);
     } else {
@@ -87,9 +88,8 @@ pub(crate) fn print_docs_summary_and_objects(definers: &[DocWriter], containers:
     const LOGIN_CONTAINER_HEADER: &str = "# Login Containers\n";
     const WORLD_DEFINER_HEADER: &str = "# World Definers\n";
     const WORLD_CONTAINER_HEADER: &str = "# Login Containers\n";
-    const SUMMARY_PATH: &str = "wowm_language/src/SUMMARY.md";
 
-    let s = read_to_string(SUMMARY_PATH).unwrap();
+    let s = read_to_string(doc_summary_path()).unwrap();
     let (s, _) = s.split_once(LOGIN_DEFINER_HEADER).unwrap();
     let mut s = s.to_string();
 
@@ -101,21 +101,21 @@ pub(crate) fn print_docs_summary_and_objects(definers: &[DocWriter], containers:
 
     for definer in definers {
         let path = format!(
-            "docs/{lower_name}.md",
+            "{lower_name}.md",
             lower_name = definer.name().to_lowercase()
         );
 
-        create_or_append_hashmap(
-            definer.inner(),
-            "wowm_language/src/".to_string() + &path,
-            &mut files,
-        );
+        create_or_append_hashmap(definer.inner(), docs_directory().join(&path), &mut files);
 
         if already_added_files.contains(&path) {
             continue;
         }
 
-        let bullet_point = format!("- [{name}]({path})\n", name = definer.name(), path = path,);
+        let bullet_point = format!(
+            "- [{name}](docs/{path})\n",
+            name = definer.name(),
+            path = path,
+        );
         if definer.tags().has_login_version() {
             login_definers.push(bullet_point)
         } else {
@@ -142,21 +142,21 @@ pub(crate) fn print_docs_summary_and_objects(definers: &[DocWriter], containers:
     let mut world_containers = Vec::new();
     for container in containers {
         let path = format!(
-            "docs/{lower_name}.md",
+            "{lower_name}.md",
             lower_name = container.name().to_lowercase()
         );
 
-        create_or_append_hashmap(
-            container.inner(),
-            "wowm_language/src/".to_string() + &path,
-            &mut files,
-        );
+        create_or_append_hashmap(container.inner(), docs_directory().join(&path), &mut files);
 
         if already_added_files.contains(&path) {
             continue;
         }
 
-        let bullet_point = format!("- [{name}]({path})\n", name = container.name(), path = path,);
+        let bullet_point = format!(
+            "- [{name}](docs/{path})\n",
+            name = container.name(),
+            path = path,
+        );
         if container.tags().has_login_version() {
             login_containers.push(bullet_point)
         } else {
@@ -178,10 +178,10 @@ pub(crate) fn print_docs_summary_and_objects(definers: &[DocWriter], containers:
     }
     s.push('\n');
 
-    create_and_overwrite_if_not_same_contents(&s, Path::new(SUMMARY_PATH));
+    create_and_overwrite_if_not_same_contents(&s, &doc_summary_path());
 
-    for (path, s) in files {
-        create_and_overwrite_if_not_same_contents(&s, Path::new(&path));
+    for (path, s) in &files {
+        create_and_overwrite_if_not_same_contents(s, path);
     }
 }
 

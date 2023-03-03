@@ -4,13 +4,13 @@ mod definer;
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::ir_printer::container::{containers_to_ir, IrContainer};
 use serde::Serialize;
-use std::path::Path;
 
 use crate::ir_printer::definer::{definers_to_ir, IrDefiner};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
 use crate::parser::types::{Endianness, IntegerType};
+use crate::path_utils::intermediate_representation;
 
 #[derive(Serialize, Debug)]
 struct IrFileInfo {
@@ -236,11 +236,9 @@ impl IrObjects {
 }
 
 pub(crate) fn write_intermediate_representation(o: &Objects) {
-    const IR_PATH: &str = "intermediate_representation.json";
-
     let o = IrObjects::from_regular_objects(o);
 
     let json = serde_json::to_string_pretty(&o).unwrap();
 
-    overwrite_if_not_same_contents(&json, Path::new(IR_PATH));
+    overwrite_if_not_same_contents(&json, &intermediate_representation());
 }

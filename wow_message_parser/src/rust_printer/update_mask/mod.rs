@@ -1,11 +1,10 @@
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::parser::types::version::MajorWorldVersion;
-use crate::path_utils::{update_mask_index_location, update_mask_location};
+use crate::path_utils::{update_mask_doc_file, update_mask_index_location, update_mask_location};
 use crate::rust_printer::Writer;
 use std::fmt::Write;
 use std::fmt::{Display, Formatter};
 use std::fs::read_to_string;
-use std::path::Path;
 
 pub mod tbc_fields;
 pub mod vanilla_fields;
@@ -68,9 +67,8 @@ fn print_specific_update_mask_doc(fields: &[MemberType], s: &mut String) {
 }
 
 pub(crate) fn print_update_mask_docs() {
-    const UPDATE_MASK_FILE: &str = "wowm_language/src/spec/update-mask.md";
     const LOOKUP_TABLE: &str = "## Lookup Table";
-    let contents = read_to_string(UPDATE_MASK_FILE).unwrap();
+    let contents = read_to_string(update_mask_doc_file()).unwrap();
 
     let (s, _) = contents.split_once(LOOKUP_TABLE).unwrap();
     let mut s = s.to_string();
@@ -91,7 +89,7 @@ pub(crate) fn print_update_mask_docs() {
 
     print_specific_update_mask_doc(wrath_fields::FIELDS, &mut s);
 
-    overwrite_if_not_same_contents(&s, Path::new(UPDATE_MASK_FILE));
+    overwrite_if_not_same_contents(&s, &update_mask_doc_file());
 }
 
 fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion) -> Writer {
