@@ -50,7 +50,7 @@ pub(crate) fn all_items(
     unobtainable: impl Fn(&GenericThing) -> bool,
     ty_name: &str,
     default_values: &BTreeMap<(Value, Option<IntegerSize>), String>,
-    arrays: &BTreeMap<(ArrayInstances, &'static str), String>,
+    arrays: &BTreeMap<(&ArrayInstances, &'static str), String>,
     optimizations: &Optimizations,
 ) {
     includes(
@@ -92,9 +92,7 @@ pub(crate) fn all_items(
 
             s.w_no_indent(format!(
                 "{},",
-                arrays
-                    .get(&(array.instances.clone(), array.type_name))
-                    .unwrap()
+                arrays.get(&(&array.instances, array.type_name)).unwrap()
             ));
         }
 

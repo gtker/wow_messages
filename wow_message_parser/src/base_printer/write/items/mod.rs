@@ -235,9 +235,12 @@ impl ConstNamer {
 }
 
 type Values = BTreeMap<(Value, Option<IntegerSize>), String>;
-type Arrays = BTreeMap<(ArrayInstances, &'static str), String>;
+type Arrays<'a> = BTreeMap<(&'a ArrayInstances, &'static str), String>;
 
-fn get_default_values(things: &[GenericThing], optimizations: &Optimizations) -> (Values, Arrays) {
+fn get_default_values<'a>(
+    things: &'a [GenericThing],
+    optimizations: &Optimizations,
+) -> (Values, Arrays<'a>) {
     let mut values: BTreeMap<(Value, Option<IntegerSize>), usize> = BTreeMap::new();
     for thing in things {
         for field in &thing.fields {
@@ -260,17 +263,17 @@ fn get_default_values(things: &[GenericThing], optimizations: &Optimizations) ->
                 continue;
             }
 
-            if let Some(amount) = arrays.get_mut(&(array.instances.clone(), array.type_name)) {
+            if let Some(amount) = arrays.get_mut(&(&array.instances, array.type_name)) {
                 *amount += 1;
             } else {
-                arrays.insert((array.instances.clone(), array.type_name), 1);
+                arrays.insert((&array.instances, array.type_name), 1);
             }
         }
     }
 
-    enum ValuesWrapper {
+    enum ValuesWrapper<'a> {
         Values(((Value, Option<IntegerSize>), usize)),
-        Arrays(((ArrayInstances, &'static str), usize)),
+        Arrays(((&'a ArrayInstances, &'static str), usize)),
     }
 
     // Ensure that most used consts have the shortest name
