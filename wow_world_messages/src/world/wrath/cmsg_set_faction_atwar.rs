@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    Faction,
-    FactionFlag,
+    Faction, FactionFlag,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

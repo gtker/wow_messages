@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::vanilla::{
-    BattlegroundBracket,
-    Map,
-    StatusId,
+    BattlegroundBracket, Map, StatusId,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    Map,
-    RaidDifficulty,
-    RaidInstanceMessage,
+    Map, RaidDifficulty, RaidInstanceMessage,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

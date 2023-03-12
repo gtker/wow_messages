@@ -2,8 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    GroupLootSetting,
-    ItemQuality,
+    GroupLootSetting, ItemQuality,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

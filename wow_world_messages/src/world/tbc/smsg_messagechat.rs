@@ -2,9 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::tbc::{
-    ChatType,
-    Language,
-    PlayerChatTag,
+    ChatType, Language, PlayerChatTag,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

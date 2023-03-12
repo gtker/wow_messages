@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    InstanceResetFailedReason,
-    Map,
+    InstanceResetFailedReason, Map,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

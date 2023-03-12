@@ -2,10 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::vanilla::{
-    MovementBlock,
-    ObjectType,
-    UpdateMask,
-    UpdateType,
+    MovementBlock, ObjectType, UpdateMask, UpdateType,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

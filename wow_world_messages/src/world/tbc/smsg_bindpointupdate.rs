@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::tbc::{
-    Area,
-    Map,
-    Vector3d,
+    Area, Map, Vector3d,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]

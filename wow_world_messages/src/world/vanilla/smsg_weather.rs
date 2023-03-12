@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::vanilla::{
-    WeatherChangeType,
-    WeatherType,
+    WeatherChangeType, WeatherType,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]

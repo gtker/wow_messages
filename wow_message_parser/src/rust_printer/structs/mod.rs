@@ -63,9 +63,14 @@ fn print_includes(s: &mut Writer, e: &Container) {
             s.wln(format!("use {prefix}::{{"));
             s.inc_indent();
 
-            for ty in types {
-                s.wln(format!("{ty},"));
+            for (i, ty) in types.iter().enumerate() {
+                if i != 0 {
+                    s.space();
+                }
+                s.w_break_at(format!("{ty},"), 80);
             }
+
+            s.newline();
 
             s.dec_indent();
             s.wln("};");

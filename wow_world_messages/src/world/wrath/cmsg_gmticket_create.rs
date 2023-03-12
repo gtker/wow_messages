@@ -2,8 +2,7 @@ use crate::Message;
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    Map,
-    Vector3d,
+    Map, Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

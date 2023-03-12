@@ -2,9 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    Gender,
-    Race,
-    WorldResult,
+    Gender, Race, WorldResult,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

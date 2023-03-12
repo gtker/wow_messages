@@ -1,11 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    ArenaFaction,
-    ArenaType,
-    BattlegroundType,
-    Map,
-    StatusId,
+    ArenaFaction, ArenaType, BattlegroundType, Map, StatusId,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

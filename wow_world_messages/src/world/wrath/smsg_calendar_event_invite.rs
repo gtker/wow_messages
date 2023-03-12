@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::{
-    DateTime,
-    Guid,
+    DateTime, Guid,
 };
 use crate::wrath::CalendarStatusTime;
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;

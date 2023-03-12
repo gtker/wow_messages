@@ -2,8 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    Power,
-    SpellEffect,
+    Power, SpellEffect,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]

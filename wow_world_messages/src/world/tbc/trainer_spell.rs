@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::tbc::{
-    Skill,
-    TrainerSpellState,
+    Skill, TrainerSpellState,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

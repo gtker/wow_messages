@@ -2,10 +2,7 @@ use crate::ClientMessage;
 use std::io::{Read, Write};
 
 use crate::logon::all::{
-    Locale,
-    Os,
-    Platform,
-    Version,
+    Locale, Os, Platform, Version,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

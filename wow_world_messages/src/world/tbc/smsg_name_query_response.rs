@@ -2,10 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::tbc::{
-    Class,
-    DeclinedNames,
-    Gender,
-    Race,
+    Class, DeclinedNames, Gender, Race,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

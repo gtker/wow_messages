@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::vanilla::{
-    Area,
-    MeetingStoneStatus,
+    Area, MeetingStoneStatus,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

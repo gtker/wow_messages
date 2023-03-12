@@ -2,11 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    Area,
-    AuraMask,
-    GroupMemberOnlineStatus,
-    GroupUpdateFlags,
-    Power,
+    Area, AuraMask, GroupMemberOnlineStatus, GroupUpdateFlags, Power,
 };
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 

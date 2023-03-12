@@ -2,10 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    ClientCastFlags,
-    ClientMovementData,
-    MovementInfo,
-    SpellCastTargets,
+    ClientCastFlags, ClientMovementData, MovementInfo, SpellCastTargets,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

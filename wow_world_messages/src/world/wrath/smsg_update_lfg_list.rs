@@ -2,10 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    LfgListGroup,
-    LfgListPlayer,
-    LfgListUpdateType,
-    LfgType,
+    LfgListGroup, LfgListPlayer, LfgListUpdateType, LfgType,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

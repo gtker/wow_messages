@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    LfgJoinStatus,
-    LfgUpdateType,
+    LfgJoinStatus, LfgUpdateType,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

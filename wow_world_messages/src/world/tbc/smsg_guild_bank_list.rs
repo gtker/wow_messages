@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::tbc::{
-    GuildBankSlot,
-    GuildBankTab,
-    GuildBankTabResult,
+    GuildBankSlot, GuildBankTab, GuildBankTabResult,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -1,10 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    GuildBankContentResult,
-    GuildBankSlot,
-    GuildBankTab,
-    GuildBankTabResult,
+    GuildBankContentResult, GuildBankSlot, GuildBankTab, GuildBankTabResult,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

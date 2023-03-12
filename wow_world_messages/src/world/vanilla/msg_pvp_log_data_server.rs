@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::vanilla::{
-    BattlegroundEndStatus,
-    BattlegroundPlayer,
-    BattlegroundWinner,
+    BattlegroundEndStatus, BattlegroundPlayer, BattlegroundWinner,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

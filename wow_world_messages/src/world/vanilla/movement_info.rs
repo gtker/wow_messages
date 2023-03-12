@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::vanilla::{
-    MovementFlags,
-    TransportInfo,
-    Vector3d,
+    MovementFlags, TransportInfo, Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

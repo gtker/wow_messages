@@ -2,9 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::vanilla::{
-    NewItemChatAlert,
-    NewItemCreationType,
-    NewItemSource,
+    NewItemChatAlert, NewItemCreationType, NewItemSource,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

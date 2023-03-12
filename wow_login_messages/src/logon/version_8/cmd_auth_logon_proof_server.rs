@@ -2,8 +2,7 @@ use crate::ServerMessage;
 use std::io::{Read, Write};
 
 use crate::logon::version_8::{
-    AccountFlag,
-    LoginResult,
+    AccountFlag, LoginResult,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

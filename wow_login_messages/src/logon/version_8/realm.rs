@@ -2,9 +2,7 @@ use std::io::{Read, Write};
 
 use crate::logon::all::Version;
 use crate::logon::version_2::{
-    Population,
-    RealmCategory,
-    RealmType,
+    Population, RealmCategory, RealmType,
 };
 use crate::logon::version_8::RealmFlag;
 

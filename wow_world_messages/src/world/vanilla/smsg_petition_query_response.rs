@@ -2,8 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::vanilla::{
-    AllowedClass,
-    AllowedRace,
+    AllowedClass, AllowedRace,
 };
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 

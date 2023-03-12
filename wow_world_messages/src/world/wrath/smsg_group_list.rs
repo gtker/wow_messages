@@ -2,11 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    DungeonDifficulty,
-    GroupListMember,
-    GroupLootSetting,
-    ItemQuality,
-    RaidDifficulty,
+    DungeonDifficulty, GroupListMember, GroupLootSetting, ItemQuality, RaidDifficulty,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

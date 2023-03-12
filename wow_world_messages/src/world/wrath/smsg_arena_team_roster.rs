@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    ArenaTeamMember,
-    ArenaType,
+    ArenaTeamMember, ArenaType,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

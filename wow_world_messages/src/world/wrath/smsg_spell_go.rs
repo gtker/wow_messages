@@ -2,9 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    GameobjectCastFlags,
-    Power,
-    SpellCastTargets,
+    GameobjectCastFlags, Power, SpellCastTargets,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

@@ -2,9 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::tbc::{
-    Area,
-    LfgMode,
-    LfgPlayerMember,
+    Area, LfgMode, LfgPlayerMember,
 };
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 

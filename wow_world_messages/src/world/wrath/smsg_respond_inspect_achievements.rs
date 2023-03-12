@@ -2,8 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    AchievementDoneArray,
-    AchievementInProgressArray,
+    AchievementDoneArray, AchievementInProgressArray,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

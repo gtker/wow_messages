@@ -1,10 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::logon::version_2::{
-    Population,
-    RealmCategory,
-    RealmFlag,
-    RealmType,
+    Population, RealmCategory, RealmFlag, RealmType,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

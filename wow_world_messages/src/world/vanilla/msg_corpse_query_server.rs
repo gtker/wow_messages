@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::vanilla::{
-    CorpseQueryResult,
-    Map,
-    Vector3d,
+    CorpseQueryResult, Map, Vector3d,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]

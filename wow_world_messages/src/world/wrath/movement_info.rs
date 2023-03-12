@@ -1,10 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    ExtraMovementFlags,
-    MovementFlags,
-    TransportInfo,
-    Vector3d,
+    ExtraMovementFlags, MovementFlags, TransportInfo, Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

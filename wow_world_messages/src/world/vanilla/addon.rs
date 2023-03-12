@@ -1,10 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::vanilla::{
-    AddonType,
-    InfoBlock,
-    KeyVersion,
-    UrlInfo,
+    AddonType, InfoBlock, KeyVersion, UrlInfo,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]

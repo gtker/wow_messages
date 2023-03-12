@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::tbc::{
-    ArenaType,
-    BattlegroundType,
-    StatusId,
+    ArenaType, BattlegroundType, StatusId,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

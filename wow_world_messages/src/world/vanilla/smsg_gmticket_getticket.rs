@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::vanilla::{
-    GmTicketEscalationStatus,
-    GmTicketStatus,
-    GmTicketType,
+    GmTicketEscalationStatus, GmTicketStatus, GmTicketType,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

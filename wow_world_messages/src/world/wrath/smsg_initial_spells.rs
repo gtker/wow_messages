@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    CooldownSpell,
-    InitialSpell,
+    CooldownSpell, InitialSpell,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

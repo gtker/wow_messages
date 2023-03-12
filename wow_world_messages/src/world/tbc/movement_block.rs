@@ -2,11 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::tbc::{
-    MovementFlags,
-    SplineFlag,
-    TransportInfo,
-    UpdateFlag,
-    Vector3d,
+    MovementFlags, SplineFlag, TransportInfo, UpdateFlag, Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::tbc::{
-    WeatherChangeType,
-    WeatherType,
+    WeatherChangeType, WeatherType,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]

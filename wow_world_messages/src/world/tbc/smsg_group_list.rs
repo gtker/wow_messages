@@ -2,11 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::tbc::{
-    DungeonDifficulty,
-    GroupListMember,
-    GroupLootSetting,
-    GroupType,
-    ItemQuality,
+    DungeonDifficulty, GroupListMember, GroupLootSetting, GroupType, ItemQuality,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

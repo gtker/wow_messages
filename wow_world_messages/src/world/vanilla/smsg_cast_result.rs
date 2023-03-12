@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::vanilla::{
-    Area,
-    CastFailureReason,
-    SimpleSpellCastResult,
+    Area, CastFailureReason, SimpleSpellCastResult,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -2,10 +2,7 @@ use std::io::{Read, Write};
 
 use crate::DateTime;
 use crate::wrath::{
-    SendCalendarEvent,
-    SendCalendarInstance,
-    SendCalendarInvite,
-    SendCalendarResetTime,
+    SendCalendarEvent, SendCalendarInstance, SendCalendarInvite, SendCalendarResetTime,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

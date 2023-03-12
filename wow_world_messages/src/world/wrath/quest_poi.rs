@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    Area,
-    Map,
-    Vector2dUnsigned,
+    Area, Map, Vector2dUnsigned,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    InspectTalent,
-    TalentInfoSpec,
-    TalentInfoType,
+    InspectTalent, TalentInfoSpec, TalentInfoType,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

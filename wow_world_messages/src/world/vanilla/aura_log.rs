@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::vanilla::{
-    AuraType,
-    SpellSchool,
+    AuraType, SpellSchool,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]

@@ -2,11 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    CreatureFamily,
-    PetCommandState,
-    PetEnabled,
-    PetReactState,
-    PetSpellCooldown,
+    CreatureFamily, PetCommandState, PetEnabled, PetReactState, PetSpellCooldown,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

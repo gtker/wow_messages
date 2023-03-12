@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    Class,
-    Gender,
-    Race,
+    Class, Gender, Race,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -2,12 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    ExtraMovementFlags,
-    MovementFlags,
-    SplineFlag,
-    TransportInfo,
-    UpdateFlag,
-    Vector3d,
+    ExtraMovementFlags, MovementFlags, SplineFlag, TransportInfo, UpdateFlag, Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

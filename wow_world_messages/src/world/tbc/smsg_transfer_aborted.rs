@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::tbc::{
-    DungeonDifficulty,
-    Map,
-    TransferAbortReason,
+    DungeonDifficulty, Map, TransferAbortReason,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -2,9 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::vanilla::{
-    Area,
-    Class,
-    GuildMemberStatus,
+    Area, Class, GuildMemberStatus,
 };
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 

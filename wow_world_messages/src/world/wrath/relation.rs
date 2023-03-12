@@ -2,10 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    Area,
-    Class,
-    FriendStatus,
-    RelationType,
+    Area, Class, FriendStatus, RelationType,
 };
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 

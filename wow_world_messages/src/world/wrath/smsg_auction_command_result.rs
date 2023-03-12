@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    AuctionCommandAction,
-    AuctionCommandResult,
-    InventoryResult,
+    AuctionCommandAction, AuctionCommandResult, InventoryResult,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

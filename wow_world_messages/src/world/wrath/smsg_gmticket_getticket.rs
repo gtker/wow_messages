@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    GmTicketEscalationStatus,
-    GmTicketStatus,
+    GmTicketEscalationStatus, GmTicketStatus,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

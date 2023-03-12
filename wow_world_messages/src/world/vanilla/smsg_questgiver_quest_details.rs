@@ -2,8 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::vanilla::{
-    QuestDetailsEmote,
-    QuestItemReward,
+    QuestDetailsEmote, QuestItemReward,
 };
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 

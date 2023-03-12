@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::vanilla::{
-    SimpleEnum,
-    SimpleFlag,
-    StructWithAllBuiltInTypes,
+    SimpleEnum, SimpleFlag, StructWithAllBuiltInTypes,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

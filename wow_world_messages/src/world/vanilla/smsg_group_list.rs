@@ -2,10 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::vanilla::{
-    GroupListMember,
-    GroupLootSetting,
-    GroupType,
-    ItemQuality,
+    GroupListMember, GroupLootSetting, GroupType, ItemQuality,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

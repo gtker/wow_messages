@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::tbc::{
-    GuildMember,
-    GuildRights,
+    GuildMember, GuildRights,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

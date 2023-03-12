@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    Language,
-    NpcTextUpdateEmote,
+    Language, NpcTextUpdateEmote,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

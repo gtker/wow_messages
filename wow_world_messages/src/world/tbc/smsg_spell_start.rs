@@ -2,8 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::tbc::{
-    CastFlags,
-    SpellCastTargets,
+    CastFlags, SpellCastTargets,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

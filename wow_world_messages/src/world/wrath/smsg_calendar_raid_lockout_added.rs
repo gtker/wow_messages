@@ -1,8 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::{
-    DateTime,
-    Guid,
+    DateTime, Guid,
 };
 use crate::wrath::Map;
 

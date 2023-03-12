@@ -2,9 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::vanilla::{
-    CastFlags,
-    SpellCastTargets,
-    SpellMiss,
+    CastFlags, SpellCastTargets, SpellMiss,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

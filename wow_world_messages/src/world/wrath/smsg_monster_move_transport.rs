@@ -3,9 +3,7 @@ use std::io::{Read, Write};
 use crate::Guid;
 use crate::shared::monster_move_spline_vanilla_tbc_wrath::MonsterMoveSplines;
 use crate::wrath::{
-    MonsterMoveType,
-    SplineFlag,
-    Vector3d,
+    MonsterMoveType, SplineFlag, Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

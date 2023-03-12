@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    BillingPlanFlags,
-    Expansion,
-    WorldResult,
+    BillingPlanFlags, Expansion, WorldResult,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

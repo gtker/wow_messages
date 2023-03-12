@@ -2,9 +2,7 @@ use crate::Message;
 use std::io::{Read, Write};
 
 use crate::tbc::{
-    GmTicketType,
-    Map,
-    Vector3d,
+    GmTicketType, Map, Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
