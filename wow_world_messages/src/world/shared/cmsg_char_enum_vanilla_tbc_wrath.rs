@@ -60,7 +60,7 @@ mod test_vanilla {
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
-            ClientOpcodeMessage::CMSG_CHAR_ENUM(t) => t,
+            ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
         };
 
@@ -83,7 +83,7 @@ mod test_vanilla {
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
-            ClientOpcodeMessage::CMSG_CHAR_ENUM(t) => t,
+            ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
         };
 
@@ -106,7 +106,7 @@ mod test_vanilla {
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
-            ClientOpcodeMessage::CMSG_CHAR_ENUM(t) => t,
+            ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
         };
 
@@ -141,7 +141,7 @@ mod test_tbc {
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
-            ClientOpcodeMessage::CMSG_CHAR_ENUM(t) => t,
+            ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
         };
 
@@ -164,7 +164,7 @@ mod test_tbc {
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
-            ClientOpcodeMessage::CMSG_CHAR_ENUM(t) => t,
+            ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
         };
 
@@ -187,7 +187,7 @@ mod test_tbc {
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
-            ClientOpcodeMessage::CMSG_CHAR_ENUM(t) => t,
+            ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
         };
 
@@ -222,7 +222,7 @@ mod test_wrath {
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
-            ClientOpcodeMessage::CMSG_CHAR_ENUM(t) => t,
+            ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
         };
 
@@ -245,7 +245,7 @@ mod test_wrath {
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
-            ClientOpcodeMessage::CMSG_CHAR_ENUM(t) => t,
+            ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
         };
 
@@ -268,7 +268,7 @@ mod test_wrath {
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
-            ClientOpcodeMessage::CMSG_CHAR_ENUM(t) => t,
+            ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
         };
 

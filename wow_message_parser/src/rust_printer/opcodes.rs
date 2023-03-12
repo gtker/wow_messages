@@ -159,10 +159,14 @@ pub(crate) fn definition(s: &mut Writer, v: &[&Container], ty: &str, version: Ve
 
     s.new_enum("pub", format!("{ty}OpcodeMessage"), |s| {
         for &e in v {
+            let ty = if e.empty_body() {
+                "".to_string()
+            } else {
+                format!("({})", e.name())
+            };
             s.wln(format!(
-                "{enum_name}({name}),",
+                "{enum_name}{ty},",
                 enum_name = get_enumerator_name(e.name()),
-                name = e.name()
             ));
         }
     });
@@ -179,10 +183,19 @@ fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str,
                 ContainerType::Msg(i) => i,
                 _ => unreachable!()
             };
-            s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body(&mut r, body_size).map_err(|a| {{ if let ParseError::Io(io) = a {{ ParseError::BufferSizeTooSmall {{ opcode: {opcode:#06X}, size: body_size, io, }} }} else {{ a }} }})?)),",
-                          opcode = opcode,
-                          name = e.name(),
-                          enum_name = get_enumerator_name(e.name())));
+            if e.empty_body() {
+                s.wln(
+                    format!(
+                        "{opcode:#06X} => crate::util::assert_empty(body_size, opcode).map(|_| Self::{enum_name}),",
+                              enum_name = get_enumerator_name(e.name())
+                ));
+            } else {
+                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body(&mut r, body_size).map_err(|a| {{ if let ParseError::Io(io) = a {{ ParseError::BufferSizeTooSmall {{ opcode: {opcode:#06X}, size: body_size, io, }} }} else {{ a }} }})?)),",
+                              opcode = opcode,
+                              name = e.name(),
+                              enum_name = get_enumerator_name(e.name())
+                ));
+            }
         }
 
         let (opcode_text, opcode_to_name_text) = if size == "u32" {
@@ -402,17 +415,7 @@ pub(crate) fn common_impls_world(
 
     impl_display(s, v, ty);
 
-    for &e in v {
-        s.impl_for(
-            format!("From<{}>", e.name()),
-            format!("{ty}OpcodeMessage"),
-            |s| {
-                s.body(format!("fn from(c: {}) -> Self", e.name()), |s| {
-                    s.wln(format!("Self::{}(c)", get_enumerator_name(e.name())));
-                });
-            },
-        );
-    }
+    print_froms(s, v, ty);
 }
 
 fn impl_display(s: &mut Writer, v: &[&Container], ty: &str) {
@@ -426,12 +429,21 @@ fn impl_display(s: &mut Writer, v: &[&Container], ty: &str) {
                         "f.write_str(match self",
                         |s| {
                             for e in v {
-                                s.wln(format!(
-                                    "{ty}OpcodeMessage::{enumerator}(_) => \"{message}\",",
-                                    ty = ty,
-                                    enumerator = get_enumerator_name(e.name()),
-                                    message = e.name(),
-                                ));
+                                if e.empty_body() {
+                                    s.wln(format!(
+                                        "{ty}OpcodeMessage::{enumerator} => \"{message}\",",
+                                        ty = ty,
+                                        enumerator = get_enumerator_name(e.name()),
+                                        message = e.name(),
+                                    ));
+                                } else {
+                                    s.wln(format!(
+                                        "{ty}OpcodeMessage::{enumerator}(_) => \"{message}\",",
+                                        ty = ty,
+                                        enumerator = get_enumerator_name(e.name()),
+                                        message = e.name(),
+                                    ));
+                                }
                             }
                         },
                         ")",
@@ -455,11 +467,20 @@ fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType, enc_pre
         ), |s| {
             s.body("match self", |s| {
                 for container in v {
-                    s.wln(format!("Self::{en}(c) => c.{prefix}write_encrypted_{cd}(w, e){postfix},",
-                                  en = get_enumerator_name(container.name()),
-                                  prefix = it.prefix(),
-                                  postfix = it.postfix(),
-                    ));
+                    if container.empty_body() {
+                        s.wln(format!("Self::{en} => {name}{{}}.{prefix}write_encrypted_{cd}(w, e){postfix},",
+                                      en = get_enumerator_name(container.name()),
+                                      name = container.name(),
+                                      prefix = it.prefix(),
+                                      postfix = it.postfix(),
+                        ));
+                    } else {
+                        s.wln(format!("Self::{en}(c) => c.{prefix}write_encrypted_{cd}(w, e){postfix},",
+                                      en = get_enumerator_name(container.name()),
+                                      prefix = it.prefix(),
+                                      postfix = it.postfix(),
+                        ));
+                    }
                 }
             });
         });
@@ -475,11 +496,20 @@ fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType, enc_pre
         ), |s| {
             s.body("match self", |s| {
                 for container in v {
-                    s.wln(format!("Self::{en}(c) => c.{prefix}write_unencrypted_{cd}(w){postfix},",
-                                  en = get_enumerator_name(container.name()),
-                                  prefix = it.prefix(),
-                                  postfix = it.postfix())
-                    );
+                    if container.empty_body() {
+                        s.wln(format!("Self::{en} => {name}{{}}.{prefix}write_unencrypted_{cd}(w){postfix},",
+                                      en = get_enumerator_name(container.name()),
+                                      name = container.name(),
+                                      prefix = it.prefix(),
+                                      postfix = it.postfix()
+                        ));
+                    } else {
+                        s.wln(format!("Self::{en}(c) => c.{prefix}write_unencrypted_{cd}(w){postfix},",
+                                      en = get_enumerator_name(container.name()),
+                                      prefix = it.prefix(),
+                                      postfix = it.postfix()
+                        ));
+                    }
                 }
             });
         },
@@ -523,14 +553,23 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
                         _ => unreachable!()
                     };
 
-                    s.wln(format!(
-                        "{opcode:#04X} => Ok(Self::{enum_name}({name}::{prefix}read(r){postfix}?)),",
-                        name = e.name(),
-                        enum_name = get_enumerator_name(e.name()),
-                        opcode = opcode,
-                        prefix = it.prefix(),
-                        postfix = it.postfix(),
-                    ));
+                    if e.empty_body() {
+                        s.wln(format!(
+                            "{opcode:#04X} => Ok(Self::{enum_name}),",
+                            enum_name = get_enumerator_name(e.name()),
+                            opcode = opcode,
+                        ));
+                    } else {
+                        s.wln(format!(
+                            "{opcode:#04X} => Ok(Self::{enum_name}({name}::{prefix}read(r){postfix}?)),",
+                            name = e.name(),
+                            enum_name = get_enumerator_name(e.name()),
+                            opcode = opcode,
+                            prefix = it.prefix(),
+                            postfix = it.postfix(),
+                        ));
+                    }
+
                 }
 
                 s.wln(format!("opcode => Err({EXPECTED_OPCODE_ERROR}::Opcode(opcode as u32)),"));
@@ -539,10 +578,17 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
         |s, _it| {
             s.bodyn("match self", |s| {
                 for e in v {
-                    s.wln(format!(
-                        "Self::{enum_name}(e) => e.write_into_vec(w)?,",
-                        enum_name = get_enumerator_name(e.name()),
-                    ));
+                    if e.empty_body() {
+                        s.wln(format!(
+                            "Self::{enum_name} => {{}}",
+                            enum_name = get_enumerator_name(e.name()),
+                        ));
+                    } else {
+                        s.wln(format!(
+                            "Self::{enum_name}(e) => e.write_into_vec(w)?,",
+                            enum_name = get_enumerator_name(e.name()),
+                        ));
+                    }
                 }
             });
         },
@@ -551,13 +597,23 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
 
     impl_display(s, v, ty);
 
+    print_froms(s, v, ty);
+}
+
+fn print_froms(s: &mut Writer, v: &[&Container], ty: &str) {
     for &e in v {
         s.impl_for(
             format!("From<{}>", e.name()),
             format!("{ty}OpcodeMessage"),
             |s| {
-                s.body(format!("fn from(c: {}) -> Self", e.name()), |s| {
-                    s.wln(format!("Self::{}(c)", get_enumerator_name(e.name())));
+                let (variable, extra) = if e.empty_body() {
+                    ("_", "")
+                } else {
+                    ("c", "(c)")
+                };
+
+                s.body(format!("fn from({variable}: {}) -> Self", e.name()), |s| {
+                    s.wln(format!("Self::{}{extra}", get_enumerator_name(e.name())));
                 });
             },
         );

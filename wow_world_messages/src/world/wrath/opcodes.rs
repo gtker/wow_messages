@@ -475,7 +475,7 @@ pub enum ClientOpcodeMessage {
     MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM),
     MSG_MOVE_SET_FACING(MSG_MOVE_SET_FACING),
     MSG_MOVE_SET_PITCH(MSG_MOVE_SET_PITCH),
-    MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
+    MSG_MOVE_WORLDPORT_ACK,
     MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT),
     MSG_MOVE_HOVER(MSG_MOVE_HOVER),
     MSG_PETITION_DECLINE(MSG_PETITION_DECLINE),
@@ -487,18 +487,18 @@ pub enum ClientOpcodeMessage {
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND),
     MSG_MOVE_SET_FLIGHT_BACK_SPEED(MSG_MOVE_SET_FLIGHT_BACK_SPEED),
     MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND),
-    CMSG_CALENDAR_GET_NUM_PENDING(CMSG_CALENDAR_GET_NUM_PENDING),
-    CMSG_BOOTME(CMSG_BOOTME),
+    CMSG_CALENDAR_GET_NUM_PENDING,
+    CMSG_BOOTME,
     CMSG_DBLOOKUP(CMSG_DBLOOKUP),
     CMSG_WORLD_TELEPORT(CMSG_WORLD_TELEPORT),
     CMSG_TELEPORT_TO_UNIT(CMSG_TELEPORT_TO_UNIT),
     CMSG_CHAR_CREATE(CMSG_CHAR_CREATE),
-    CMSG_CHAR_ENUM(CMSG_CHAR_ENUM),
+    CMSG_CHAR_ENUM,
     CMSG_CHAR_DELETE(CMSG_CHAR_DELETE),
     CMSG_PLAYER_LOGIN(CMSG_PLAYER_LOGIN),
-    CMSG_PLAYER_LOGOUT(CMSG_PLAYER_LOGOUT),
-    CMSG_LOGOUT_REQUEST(CMSG_LOGOUT_REQUEST),
-    CMSG_LOGOUT_CANCEL(CMSG_LOGOUT_CANCEL),
+    CMSG_PLAYER_LOGOUT,
+    CMSG_LOGOUT_REQUEST,
+    CMSG_LOGOUT_CANCEL,
     CMSG_NAME_QUERY(CMSG_NAME_QUERY),
     CMSG_PET_NAME_QUERY(CMSG_PET_NAME_QUERY),
     CMSG_GUILD_QUERY(CMSG_GUILD_QUERY),
@@ -516,25 +516,25 @@ pub enum ClientOpcodeMessage {
     CMSG_ADD_IGNORE(CMSG_ADD_IGNORE),
     CMSG_DEL_IGNORE(CMSG_DEL_IGNORE),
     CMSG_GROUP_INVITE(CMSG_GROUP_INVITE),
-    CMSG_GROUP_CANCEL(CMSG_GROUP_CANCEL),
-    CMSG_GROUP_ACCEPT(CMSG_GROUP_ACCEPT),
-    CMSG_GROUP_DECLINE(CMSG_GROUP_DECLINE),
+    CMSG_GROUP_CANCEL,
+    CMSG_GROUP_ACCEPT,
+    CMSG_GROUP_DECLINE,
     CMSG_GROUP_UNINVITE(CMSG_GROUP_UNINVITE),
     CMSG_GROUP_UNINVITE_GUID(CMSG_GROUP_UNINVITE_GUID),
     CMSG_GROUP_SET_LEADER(CMSG_GROUP_SET_LEADER),
     CMSG_LOOT_METHOD(CMSG_LOOT_METHOD),
-    CMSG_GROUP_DISBAND(CMSG_GROUP_DISBAND),
+    CMSG_GROUP_DISBAND,
     CMSG_GUILD_CREATE(CMSG_GUILD_CREATE),
     CMSG_GUILD_INVITE(CMSG_GUILD_INVITE),
-    CMSG_GUILD_ACCEPT(CMSG_GUILD_ACCEPT),
-    CMSG_GUILD_DECLINE(CMSG_GUILD_DECLINE),
-    CMSG_GUILD_INFO(CMSG_GUILD_INFO),
-    CMSG_GUILD_ROSTER(CMSG_GUILD_ROSTER),
+    CMSG_GUILD_ACCEPT,
+    CMSG_GUILD_DECLINE,
+    CMSG_GUILD_INFO,
+    CMSG_GUILD_ROSTER,
     CMSG_GUILD_PROMOTE(CMSG_GUILD_PROMOTE),
     CMSG_GUILD_DEMOTE(CMSG_GUILD_DEMOTE),
-    CMSG_GUILD_LEAVE(CMSG_GUILD_LEAVE),
+    CMSG_GUILD_LEAVE,
     CMSG_GUILD_REMOVE(CMSG_GUILD_REMOVE),
-    CMSG_GUILD_DISBAND(CMSG_GUILD_DISBAND),
+    CMSG_GUILD_DISBAND,
     CMSG_GUILD_LEADER(CMSG_GUILD_LEADER),
     CMSG_GUILD_MOTD(CMSG_GUILD_MOTD),
     CMSG_MESSAGECHAT(CMSG_MESSAGECHAT),
@@ -569,11 +569,11 @@ pub enum ClientOpcodeMessage {
     CMSG_FORCE_MOVE_UNROOT_ACK(CMSG_FORCE_MOVE_UNROOT_ACK),
     CMSG_MOVE_KNOCK_BACK_ACK(CMSG_MOVE_KNOCK_BACK_ACK),
     CMSG_MOVE_HOVER_ACK(CMSG_MOVE_HOVER_ACK),
-    CMSG_NEXT_CINEMATIC_CAMERA(CMSG_NEXT_CINEMATIC_CAMERA),
-    CMSG_COMPLETE_CINEMATIC(CMSG_COMPLETE_CINEMATIC),
+    CMSG_NEXT_CINEMATIC_CAMERA,
+    CMSG_COMPLETE_CINEMATIC,
     CMSG_TUTORIAL_FLAG(CMSG_TUTORIAL_FLAG),
-    CMSG_TUTORIAL_CLEAR(CMSG_TUTORIAL_CLEAR),
-    CMSG_TUTORIAL_RESET(CMSG_TUTORIAL_RESET),
+    CMSG_TUTORIAL_CLEAR,
+    CMSG_TUTORIAL_RESET,
     CMSG_STANDSTATECHANGE(CMSG_STANDSTATECHANGE),
     CMSG_EMOTE(CMSG_EMOTE),
     CMSG_TEXT_EMOTE(CMSG_TEXT_EMOTE),
@@ -587,12 +587,12 @@ pub enum ClientOpcodeMessage {
     CMSG_DESTROYITEM(CMSG_DESTROYITEM),
     CMSG_INSPECT(CMSG_INSPECT),
     CMSG_INITIATE_TRADE(CMSG_INITIATE_TRADE),
-    CMSG_BEGIN_TRADE(CMSG_BEGIN_TRADE),
-    CMSG_BUSY_TRADE(CMSG_BUSY_TRADE),
-    CMSG_IGNORE_TRADE(CMSG_IGNORE_TRADE),
+    CMSG_BEGIN_TRADE,
+    CMSG_BUSY_TRADE,
+    CMSG_IGNORE_TRADE,
     CMSG_ACCEPT_TRADE(CMSG_ACCEPT_TRADE),
-    CMSG_UNACCEPT_TRADE(CMSG_UNACCEPT_TRADE),
-    CMSG_CANCEL_TRADE(CMSG_CANCEL_TRADE),
+    CMSG_UNACCEPT_TRADE,
+    CMSG_CANCEL_TRADE,
     CMSG_SET_TRADE_ITEM(CMSG_SET_TRADE_ITEM),
     CMSG_CLEAR_TRADE_ITEM(CMSG_CLEAR_TRADE_ITEM),
     CMSG_SET_TRADE_GOLD(CMSG_SET_TRADE_GOLD),
@@ -606,15 +606,15 @@ pub enum ClientOpcodeMessage {
     CMSG_DELETEEQUIPMENT_SET(CMSG_DELETEEQUIPMENT_SET),
     CMSG_INSTANCE_LOCK_RESPONSE(CMSG_INSTANCE_LOCK_RESPONSE),
     CMSG_ATTACKSWING(CMSG_ATTACKSWING),
-    CMSG_ATTACKSTOP(CMSG_ATTACKSTOP),
-    CMSG_REPOP_REQUEST(CMSG_REPOP_REQUEST),
+    CMSG_ATTACKSTOP,
+    CMSG_REPOP_REQUEST,
     CMSG_RESURRECT_RESPONSE(CMSG_RESURRECT_RESPONSE),
     CMSG_LOOT(CMSG_LOOT),
-    CMSG_LOOT_MONEY(CMSG_LOOT_MONEY),
+    CMSG_LOOT_MONEY,
     CMSG_LOOT_RELEASE(CMSG_LOOT_RELEASE),
     CMSG_DUEL_ACCEPTED(CMSG_DUEL_ACCEPTED),
     CMSG_DUEL_CANCELLED(CMSG_DUEL_CANCELLED),
-    CMSG_MOUNTSPECIAL_ANIM(CMSG_MOUNTSPECIAL_ANIM),
+    CMSG_MOUNTSPECIAL_ANIM,
     CMSG_PET_SET_ACTION(CMSG_PET_SET_ACTION),
     CMSG_PET_ACTION(CMSG_PET_ACTION),
     CMSG_PET_ABANDON(CMSG_PET_ABANDON),
@@ -625,12 +625,12 @@ pub enum ClientOpcodeMessage {
     CMSG_QUESTGIVER_STATUS_QUERY(CMSG_QUESTGIVER_STATUS_QUERY),
     CMSG_QUESTGIVER_HELLO(CMSG_QUESTGIVER_HELLO),
     CMSG_QUESTGIVER_QUERY_QUEST(CMSG_QUESTGIVER_QUERY_QUEST),
-    CMSG_QUESTGIVER_QUEST_AUTOLAUNCH(CMSG_QUESTGIVER_QUEST_AUTOLAUNCH),
+    CMSG_QUESTGIVER_QUEST_AUTOLAUNCH,
     CMSG_QUESTGIVER_ACCEPT_QUEST(CMSG_QUESTGIVER_ACCEPT_QUEST),
     CMSG_QUESTGIVER_COMPLETE_QUEST(CMSG_QUESTGIVER_COMPLETE_QUEST),
     CMSG_QUESTGIVER_REQUEST_REWARD(CMSG_QUESTGIVER_REQUEST_REWARD),
     CMSG_QUESTGIVER_CHOOSE_REWARD(CMSG_QUESTGIVER_CHOOSE_REWARD),
-    CMSG_QUESTGIVER_CANCEL(CMSG_QUESTGIVER_CANCEL),
+    CMSG_QUESTGIVER_CANCEL,
     CMSG_QUESTLOG_SWAP_QUEST(CMSG_QUESTLOG_SWAP_QUEST),
     CMSG_QUESTLOG_REMOVE_QUEST(CMSG_QUESTLOG_REMOVE_QUEST),
     CMSG_QUEST_CONFIRM_ACCEPT(CMSG_QUEST_CONFIRM_ACCEPT),
@@ -656,7 +656,7 @@ pub enum ClientOpcodeMessage {
     CMSG_PETITION_QUERY(CMSG_PETITION_QUERY),
     CMSG_BUG(CMSG_BUG),
     CMSG_PLAYED_TIME(CMSG_PLAYED_TIME),
-    CMSG_QUERY_TIME(CMSG_QUERY_TIME),
+    CMSG_QUERY_TIME,
     CMSG_RECLAIM_CORPSE(CMSG_RECLAIM_CORPSE),
     CMSG_WRAP_ITEM(CMSG_WRAP_ITEM),
     MSG_MINIMAP_PING(MSG_MINIMAP_PING_Client),
@@ -673,16 +673,16 @@ pub enum ClientOpcodeMessage {
     CMSG_GMTICKET_UPDATETEXT(CMSG_GMTICKET_UPDATETEXT),
     CMSG_REQUEST_ACCOUNT_DATA(CMSG_REQUEST_ACCOUNT_DATA),
     CMSG_UPDATE_ACCOUNT_DATA(CMSG_UPDATE_ACCOUNT_DATA),
-    CMSG_GMTICKET_GETTICKET(CMSG_GMTICKET_GETTICKET),
-    CMSG_UNLEARN_TALENTS(CMSG_UNLEARN_TALENTS),
-    MSG_CORPSE_QUERY(MSG_CORPSE_QUERY_Client),
-    CMSG_GMTICKET_DELETETICKET(CMSG_GMTICKET_DELETETICKET),
-    CMSG_GMTICKET_SYSTEMSTATUS(CMSG_GMTICKET_SYSTEMSTATUS),
+    CMSG_GMTICKET_GETTICKET,
+    CMSG_UNLEARN_TALENTS,
+    MSG_CORPSE_QUERY,
+    CMSG_GMTICKET_DELETETICKET,
+    CMSG_GMTICKET_SYSTEMSTATUS,
     CMSG_SPIRIT_HEALER_ACTIVATE(CMSG_SPIRIT_HEALER_ACTIVATE),
     CMSG_CHAT_IGNORED(CMSG_CHAT_IGNORED),
     CMSG_GUILD_RANK(CMSG_GUILD_RANK),
     CMSG_GUILD_ADD_RANK(CMSG_GUILD_ADD_RANK),
-    CMSG_GUILD_DEL_RANK(CMSG_GUILD_DEL_RANK),
+    CMSG_GUILD_DEL_RANK,
     CMSG_GUILD_SET_PUBLIC_NOTE(CMSG_GUILD_SET_PUBLIC_NOTE),
     CMSG_GUILD_SET_OFFICER_NOTE(CMSG_GUILD_SET_OFFICER_NOTE),
     CMSG_SEND_MAIL(CMSG_SEND_MAIL),
@@ -707,58 +707,58 @@ pub enum ClientOpcodeMessage {
     CMSG_SET_AMMO(CMSG_SET_AMMO),
     CMSG_SET_ACTIVE_MOVER(CMSG_SET_ACTIVE_MOVER),
     CMSG_PET_CANCEL_AURA(CMSG_PET_CANCEL_AURA),
-    CMSG_CANCEL_AUTO_REPEAT_SPELL(CMSG_CANCEL_AUTO_REPEAT_SPELL),
+    CMSG_CANCEL_AUTO_REPEAT_SPELL,
     MSG_LIST_STABLED_PETS(MSG_LIST_STABLED_PETS_Client),
     CMSG_STABLE_PET(CMSG_STABLE_PET),
     CMSG_UNSTABLE_PET(CMSG_UNSTABLE_PET),
     CMSG_BUY_STABLE_SLOT(CMSG_BUY_STABLE_SLOT),
     CMSG_STABLE_SWAP_PET(CMSG_STABLE_SWAP_PET),
-    CMSG_REQUEST_PET_INFO(CMSG_REQUEST_PET_INFO),
+    CMSG_REQUEST_PET_INFO,
     CMSG_FAR_SIGHT(CMSG_FAR_SIGHT),
     CMSG_GROUP_CHANGE_SUB_GROUP(CMSG_GROUP_CHANGE_SUB_GROUP),
     CMSG_REQUEST_PARTY_MEMBER_STATS(CMSG_REQUEST_PARTY_MEMBER_STATS),
     CMSG_GROUP_SWAP_SUB_GROUP(CMSG_GROUP_SWAP_SUB_GROUP),
     CMSG_AUTOSTORE_BANK_ITEM(CMSG_AUTOSTORE_BANK_ITEM),
     CMSG_AUTOBANK_ITEM(CMSG_AUTOBANK_ITEM),
-    MSG_QUERY_NEXT_MAIL_TIME(MSG_QUERY_NEXT_MAIL_TIME_Client),
-    CMSG_GROUP_RAID_CONVERT(CMSG_GROUP_RAID_CONVERT),
+    MSG_QUERY_NEXT_MAIL_TIME,
+    CMSG_GROUP_RAID_CONVERT,
     CMSG_GROUP_ASSISTANT_LEADER(CMSG_GROUP_ASSISTANT_LEADER),
     CMSG_BUYBACK_ITEM(CMSG_BUYBACK_ITEM),
     CMSG_SET_SAVED_INSTANCE_EXTEND(CMSG_SET_SAVED_INSTANCE_EXTEND),
-    CMSG_LFG_GET_STATUS(CMSG_LFG_GET_STATUS),
-    CMSG_GMTICKETSYSTEM_TOGGLE(CMSG_GMTICKETSYSTEM_TOGGLE),
-    CMSG_CANCEL_GROWTH_AURA(CMSG_CANCEL_GROWTH_AURA),
+    CMSG_LFG_GET_STATUS,
+    CMSG_GMTICKETSYSTEM_TOGGLE,
+    CMSG_CANCEL_GROWTH_AURA,
     CMSG_LOOT_ROLL(CMSG_LOOT_ROLL),
     CMSG_LOOT_MASTER_GIVE(CMSG_LOOT_MASTER_GIVE),
     CMSG_REPAIR_ITEM(CMSG_REPAIR_ITEM),
     MSG_TALENT_WIPE_CONFIRM(MSG_TALENT_WIPE_CONFIRM_Client),
     CMSG_SUMMON_RESPONSE(CMSG_SUMMON_RESPONSE),
-    CMSG_SELF_RES(CMSG_SELF_RES),
-    CMSG_TOGGLE_HELM(CMSG_TOGGLE_HELM),
-    CMSG_TOGGLE_CLOAK(CMSG_TOGGLE_CLOAK),
+    CMSG_SELF_RES,
+    CMSG_TOGGLE_HELM,
+    CMSG_TOGGLE_CLOAK,
     CMSG_SET_ACTIONBAR_TOGGLES(CMSG_SET_ACTIONBAR_TOGGLES),
     CMSG_ITEM_NAME_QUERY(CMSG_ITEM_NAME_QUERY),
     CMSG_CHAR_RENAME(CMSG_CHAR_RENAME),
     CMSG_MOVE_SPLINE_DONE(CMSG_MOVE_SPLINE_DONE),
     CMSG_MOVE_FALL_RESET(CMSG_MOVE_FALL_RESET),
-    CMSG_REQUEST_RAID_INFO(CMSG_REQUEST_RAID_INFO),
+    CMSG_REQUEST_RAID_INFO,
     CMSG_MOVE_TIME_SKIPPED(CMSG_MOVE_TIME_SKIPPED),
     CMSG_MOVE_FEATHER_FALL_ACK(CMSG_MOVE_FEATHER_FALL_ACK),
     CMSG_MOVE_WATER_WALK_ACK(CMSG_MOVE_WATER_WALK_ACK),
     CMSG_MOVE_NOT_ACTIVE_MOVER(CMSG_MOVE_NOT_ACTIVE_MOVER),
-    CMSG_BATTLEFIELD_STATUS(CMSG_BATTLEFIELD_STATUS),
+    CMSG_BATTLEFIELD_STATUS,
     CMSG_BATTLEFIELD_PORT(CMSG_BATTLEFIELD_PORT),
     MSG_INSPECT_HONOR_STATS(MSG_INSPECT_HONOR_STATS_Client),
     CMSG_BATTLEMASTER_HELLO(CMSG_BATTLEMASTER_HELLO),
     CMSG_FORCE_WALK_SPEED_CHANGE_ACK(CMSG_FORCE_WALK_SPEED_CHANGE_ACK),
     CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK),
     CMSG_FORCE_TURN_RATE_CHANGE_ACK(CMSG_FORCE_TURN_RATE_CHANGE_ACK),
-    MSG_PVP_LOG_DATA(MSG_PVP_LOG_DATA_Client),
+    MSG_PVP_LOG_DATA,
     CMSG_LEAVE_BATTLEFIELD(CMSG_LEAVE_BATTLEFIELD),
     CMSG_AREA_SPIRIT_HEALER_QUERY(CMSG_AREA_SPIRIT_HEALER_QUERY),
     CMSG_AREA_SPIRIT_HEALER_QUEUE(CMSG_AREA_SPIRIT_HEALER_QUEUE),
     CMSG_WARDEN_DATA(CMSG_WARDEN_DATA),
-    MSG_BATTLEGROUND_PLAYER_POSITIONS(MSG_BATTLEGROUND_PLAYER_POSITIONS_Client),
+    MSG_BATTLEGROUND_PLAYER_POSITIONS,
     CMSG_PET_STOP_ATTACK(CMSG_PET_STOP_ATTACK),
     CMSG_BATTLEMASTER_JOIN(CMSG_BATTLEMASTER_JOIN),
     CMSG_PET_UNLEARN(CMSG_PET_UNLEARN),
@@ -767,7 +767,7 @@ pub enum ClientOpcodeMessage {
     CMSG_ACTIVATETAXIEXPRESS(CMSG_ACTIVATETAXIEXPRESS),
     CMSG_SET_FACTION_INACTIVE(CMSG_SET_FACTION_INACTIVE),
     CMSG_SET_WATCHED_FACTION(CMSG_SET_WATCHED_FACTION),
-    CMSG_RESET_INSTANCES(CMSG_RESET_INSTANCES),
+    CMSG_RESET_INSTANCES,
     MSG_RAID_TARGET_UPDATE(MSG_RAID_TARGET_UPDATE_Client),
     MSG_RAID_READY_CHECK(MSG_RAID_READY_CHECK_Client),
     MSG_SET_DUNGEON_DIFFICULTY(MSG_SET_DUNGEON_DIFFICULTY_Client),
@@ -778,26 +778,26 @@ pub enum ClientOpcodeMessage {
     CMSG_SOCKET_GEMS(CMSG_SOCKET_GEMS),
     CMSG_ARENA_TEAM_ROSTER(CMSG_ARENA_TEAM_ROSTER),
     CMSG_ARENA_TEAM_INVITE(CMSG_ARENA_TEAM_INVITE),
-    CMSG_ARENA_TEAM_ACCEPT(CMSG_ARENA_TEAM_ACCEPT),
-    CMSG_ARENA_TEAM_DECLINE(CMSG_ARENA_TEAM_DECLINE),
+    CMSG_ARENA_TEAM_ACCEPT,
+    CMSG_ARENA_TEAM_DECLINE,
     CMSG_ARENA_TEAM_LEAVE(CMSG_ARENA_TEAM_LEAVE),
     CMSG_ARENA_TEAM_REMOVE(CMSG_ARENA_TEAM_REMOVE),
     CMSG_ARENA_TEAM_DISBAND(CMSG_ARENA_TEAM_DISBAND),
     CMSG_ARENA_TEAM_LEADER(CMSG_ARENA_TEAM_LEADER),
     CMSG_BATTLEMASTER_JOIN_ARENA(CMSG_BATTLEMASTER_JOIN_ARENA),
     CMSG_LFG_JOIN(CMSG_LFG_JOIN),
-    CMSG_LFG_LEAVE(CMSG_LFG_LEAVE),
+    CMSG_LFG_LEAVE,
     CMSG_SEARCH_LFG_JOIN(CMSG_SEARCH_LFG_JOIN),
     CMSG_SEARCH_LFG_LEAVE(CMSG_SEARCH_LFG_LEAVE),
     CMSG_LFG_PROPOSAL_RESULT(CMSG_LFG_PROPOSAL_RESULT),
     CMSG_SET_LFG_COMMENT(CMSG_SET_LFG_COMMENT),
     CMSG_LFG_SET_ROLES(CMSG_LFG_SET_ROLES),
     CMSG_LFG_SET_BOOT_VOTE(CMSG_LFG_SET_BOOT_VOTE),
-    CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(CMSG_LFD_PLAYER_LOCK_INFO_REQUEST),
+    CMSG_LFD_PLAYER_LOCK_INFO_REQUEST,
     CMSG_LFG_TELEPORT(CMSG_LFG_TELEPORT),
-    CMSG_LFD_PARTY_LOCK_INFO_REQUEST(CMSG_LFD_PARTY_LOCK_INFO_REQUEST),
+    CMSG_LFD_PARTY_LOCK_INFO_REQUEST,
     CMSG_SET_TITLE(CMSG_SET_TITLE),
-    CMSG_CANCEL_MOUNT_AURA(CMSG_CANCEL_MOUNT_AURA),
+    CMSG_CANCEL_MOUNT_AURA,
     MSG_INSPECT_ARENA_TEAMS(MSG_INSPECT_ARENA_TEAMS_Client),
     CMSG_CANCEL_TEMP_ENCHANTMENT(CMSG_CANCEL_TEMP_ENCHANTMENT),
     CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK),
@@ -810,12 +810,12 @@ pub enum ClientOpcodeMessage {
     MSG_RAID_READY_CHECK_CONFIRM(MSG_RAID_READY_CHECK_CONFIRM_Client),
     CMSG_VOICE_SESSION_ENABLE(CMSG_VOICE_SESSION_ENABLE),
     CMSG_COMMENTATOR_ENABLE(CMSG_COMMENTATOR_ENABLE),
-    MSG_RAID_READY_CHECK_FINISHED(MSG_RAID_READY_CHECK_FINISHED_Client),
+    MSG_RAID_READY_CHECK_FINISHED,
     CMSG_COMPLAIN(CMSG_COMPLAIN),
     CMSG_CHANNEL_DISPLAY_LIST(CMSG_CHANNEL_DISPLAY_LIST),
     CMSG_SET_ACTIVE_VOICE_CHANNEL(CMSG_SET_ACTIVE_VOICE_CHANNEL),
     CMSG_GET_CHANNEL_MEMBER_COUNT(CMSG_GET_CHANNEL_MEMBER_COUNT),
-    CMSG_CHANNEL_VOICE_ON(CMSG_CHANNEL_VOICE_ON),
+    CMSG_CHANNEL_VOICE_ON,
     CMSG_REPORT_PVP_AFK(CMSG_REPORT_PVP_AFK),
     CMSG_GUILD_BANKER_ACTIVATE(CMSG_GUILD_BANKER_ACTIVATE),
     CMSG_GUILD_BANK_QUERY_TAB(CMSG_GUILD_BANK_QUERY_TAB),
@@ -828,21 +828,21 @@ pub enum ClientOpcodeMessage {
     CMSG_SET_CHANNEL_WATCH(CMSG_SET_CHANNEL_WATCH),
     CMSG_CLEAR_CHANNEL_WATCH(CMSG_CLEAR_CHANNEL_WATCH),
     CMSG_SPELLCLICK(CMSG_SPELLCLICK),
-    MSG_GUILD_PERMISSIONS(MSG_GUILD_PERMISSIONS_Client),
-    MSG_GUILD_BANK_MONEY_WITHDRAWN(MSG_GUILD_BANK_MONEY_WITHDRAWN_Client),
-    MSG_GUILD_EVENT_LOG_QUERY(MSG_GUILD_EVENT_LOG_QUERY_Client),
+    MSG_GUILD_PERMISSIONS,
+    MSG_GUILD_BANK_MONEY_WITHDRAWN,
+    MSG_GUILD_EVENT_LOG_QUERY,
     CMSG_GET_MIRRORIMAGE_DATA(CMSG_GET_MIRRORIMAGE_DATA),
-    CMSG_KEEP_ALIVE(CMSG_KEEP_ALIVE),
+    CMSG_KEEP_ALIVE,
     CMSG_OPT_OUT_OF_LOOT(CMSG_OPT_OUT_OF_LOOT),
     MSG_QUERY_GUILD_BANK_TEXT(MSG_QUERY_GUILD_BANK_TEXT_Client),
     CMSG_SET_GUILD_BANK_TEXT(CMSG_SET_GUILD_BANK_TEXT),
     CMSG_GRANT_LEVEL(CMSG_GRANT_LEVEL),
     CMSG_TOTEM_DESTROYED(CMSG_TOTEM_DESTROYED),
-    CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY),
+    CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY,
     CMSG_SET_PLAYER_DECLINED_NAMES(CMSG_SET_PLAYER_DECLINED_NAMES),
     CMSG_ACCEPT_LEVEL_GRANT(CMSG_ACCEPT_LEVEL_GRANT),
     CMSG_ALTER_APPEARANCE(CMSG_ALTER_APPEARANCE),
-    CMSG_CALENDAR_GET_CALENDAR(CMSG_CALENDAR_GET_CALENDAR),
+    CMSG_CALENDAR_GET_CALENDAR,
     CMSG_CALENDAR_GET_EVENT(CMSG_CALENDAR_GET_EVENT),
     CMSG_CALENDAR_GUILD_FILTER(CMSG_CALENDAR_GUILD_FILTER),
     CMSG_CALENDAR_ARENA_TEAM(CMSG_CALENDAR_ARENA_TEAM),
@@ -857,13 +857,13 @@ pub enum ClientOpcodeMessage {
     CMSG_CALENDAR_EVENT_MODERATOR_STATUS(CMSG_CALENDAR_EVENT_MODERATOR_STATUS),
     CMSG_CALENDAR_COMPLAIN(CMSG_CALENDAR_COMPLAIN),
     CMSG_UPDATE_MISSILE_TRAJECTORY(CMSG_UPDATE_MISSILE_TRAJECTORY),
-    CMSG_COMPLETE_MOVIE(CMSG_COMPLETE_MOVIE),
+    CMSG_COMPLETE_MOVIE,
     CMSG_QUERY_INSPECT_ACHIEVEMENTS(CMSG_QUERY_INSPECT_ACHIEVEMENTS),
-    CMSG_DISMISS_CONTROLLED_VEHICLE(CMSG_DISMISS_CONTROLLED_VEHICLE),
+    CMSG_DISMISS_CONTROLLED_VEHICLE,
     CMSG_CHAR_CUSTOMIZE(CMSG_CHAR_CUSTOMIZE),
-    CMSG_REQUEST_VEHICLE_EXIT(CMSG_REQUEST_VEHICLE_EXIT),
-    CMSG_REQUEST_VEHICLE_PREV_SEAT(CMSG_REQUEST_VEHICLE_PREV_SEAT),
-    CMSG_REQUEST_VEHICLE_NEXT_SEAT(CMSG_REQUEST_VEHICLE_NEXT_SEAT),
+    CMSG_REQUEST_VEHICLE_EXIT,
+    CMSG_REQUEST_VEHICLE_PREV_SEAT,
+    CMSG_REQUEST_VEHICLE_NEXT_SEAT,
     CMSG_REQUEST_VEHICLE_SWITCH_SEAT(CMSG_REQUEST_VEHICLE_SWITCH_SEAT),
     CMSG_PET_LEARN_TALENT(CMSG_PET_LEARN_TALENT),
     CMSG_GAMEOBJ_REPORT_USE(CMSG_GAMEOBJ_REPORT_USE),
@@ -872,7 +872,7 @@ pub enum ClientOpcodeMessage {
     CMSG_AUCTION_LIST_PENDING_SALES(CMSG_AUCTION_LIST_PENDING_SALES),
     CMSG_ENABLETAXI(CMSG_ENABLETAXI),
     CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE),
-    CMSG_HEARTH_AND_RESURRECT(CMSG_HEARTH_AND_RESURRECT),
+    CMSG_HEARTH_AND_RESURRECT,
     CMSG_PLAYER_VEHICLE_ENTER(CMSG_PLAYER_VEHICLE_ENTER),
     CMSG_CONTROLLER_EJECT_PASSENGER(CMSG_CONTROLLER_EJECT_PASSENGER),
     CMSG_ITEM_REFUND_INFO(CMSG_ITEM_REFUND_INFO),
@@ -891,11 +891,11 @@ pub enum ClientOpcodeMessage {
     CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE(CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE),
     CMSG_BATTLEFIELD_MGR_EXIT_REQUEST(CMSG_BATTLEFIELD_MGR_EXIT_REQUEST),
     MSG_SET_RAID_DIFFICULTY(MSG_SET_RAID_DIFFICULTY_Client),
-    CMSG_GMRESPONSE_RESOLVE(CMSG_GMRESPONSE_RESOLVE),
-    CMSG_WORLD_STATE_UI_TIMER_UPDATE(CMSG_WORLD_STATE_UI_TIMER_UPDATE),
+    CMSG_GMRESPONSE_RESOLVE,
+    CMSG_WORLD_STATE_UI_TIMER_UPDATE,
     CMSG_CHAR_RACE_CHANGE(CMSG_CHAR_RACE_CHANGE),
-    CMSG_READY_FOR_ACCOUNT_DATA_TIMES(CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
-    CMSG_QUERY_QUESTS_COMPLETED(CMSG_QUERY_QUESTS_COMPLETED),
+    CMSG_READY_FOR_ACCOUNT_DATA_TIMES,
+    CMSG_QUERY_QUESTS_COMPLETED,
     CMSG_GM_REPORT_LAG(CMSG_GM_REPORT_LAG),
     CMSG_MOVE_SET_COLLISION_HGT_ACK(CMSG_MOVE_SET_COLLISION_HGT_ACK),
 }
@@ -923,7 +923,7 @@ impl ClientOpcodeMessage {
             0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00CB, size: body_size, io, } } else { a } })?)),
             0x00DA => Ok(Self::MSG_MOVE_SET_FACING(<MSG_MOVE_SET_FACING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DA, size: body_size, io, } } else { a } })?)),
             0x00DB => Ok(Self::MSG_MOVE_SET_PITCH(<MSG_MOVE_SET_PITCH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DB, size: body_size, io, } } else { a } })?)),
-            0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DC, size: body_size, io, } } else { a } })?)),
+            0x00DC => crate::util::assert_empty(body_size, opcode).map(|_| Self::MSG_MOVE_WORLDPORT_ACK),
             0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00EE, size: body_size, io, } } else { a } })?)),
             0x00F7 => Ok(Self::MSG_MOVE_HOVER(<MSG_MOVE_HOVER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00F7, size: body_size, io, } } else { a } })?)),
             0x01C2 => Ok(Self::MSG_PETITION_DECLINE(<MSG_PETITION_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C2, size: body_size, io, } } else { a } })?)),
@@ -935,18 +935,18 @@ impl ClientOpcodeMessage {
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035A, size: body_size, io, } } else { a } })?)),
             0x0380 => Ok(Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(<MSG_MOVE_SET_FLIGHT_BACK_SPEED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0380, size: body_size, io, } } else { a } })?)),
             0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A7, size: body_size, io, } } else { a } })?)),
-            0x0447 => Ok(Self::CMSG_CALENDAR_GET_NUM_PENDING(<CMSG_CALENDAR_GET_NUM_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0447, size: body_size, io, } } else { a } })?)),
-            0x0001 => Ok(Self::CMSG_BOOTME(<CMSG_BOOTME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0001, size: body_size, io, } } else { a } })?)),
+            0x0447 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_CALENDAR_GET_NUM_PENDING),
+            0x0001 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_BOOTME),
             0x0002 => Ok(Self::CMSG_DBLOOKUP(<CMSG_DBLOOKUP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0002, size: body_size, io, } } else { a } })?)),
             0x0008 => Ok(Self::CMSG_WORLD_TELEPORT(<CMSG_WORLD_TELEPORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0008, size: body_size, io, } } else { a } })?)),
             0x0009 => Ok(Self::CMSG_TELEPORT_TO_UNIT(<CMSG_TELEPORT_TO_UNIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0009, size: body_size, io, } } else { a } })?)),
             0x0036 => Ok(Self::CMSG_CHAR_CREATE(<CMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0036, size: body_size, io, } } else { a } })?)),
-            0x0037 => Ok(Self::CMSG_CHAR_ENUM(<CMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0037, size: body_size, io, } } else { a } })?)),
+            0x0037 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_CHAR_ENUM),
             0x0038 => Ok(Self::CMSG_CHAR_DELETE(<CMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0038, size: body_size, io, } } else { a } })?)),
             0x003D => Ok(Self::CMSG_PLAYER_LOGIN(<CMSG_PLAYER_LOGIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003D, size: body_size, io, } } else { a } })?)),
-            0x004A => Ok(Self::CMSG_PLAYER_LOGOUT(<CMSG_PLAYER_LOGOUT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004A, size: body_size, io, } } else { a } })?)),
-            0x004B => Ok(Self::CMSG_LOGOUT_REQUEST(<CMSG_LOGOUT_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004B, size: body_size, io, } } else { a } })?)),
-            0x004E => Ok(Self::CMSG_LOGOUT_CANCEL(<CMSG_LOGOUT_CANCEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004E, size: body_size, io, } } else { a } })?)),
+            0x004A => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_PLAYER_LOGOUT),
+            0x004B => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_LOGOUT_REQUEST),
+            0x004E => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_LOGOUT_CANCEL),
             0x0050 => Ok(Self::CMSG_NAME_QUERY(<CMSG_NAME_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0050, size: body_size, io, } } else { a } })?)),
             0x0052 => Ok(Self::CMSG_PET_NAME_QUERY(<CMSG_PET_NAME_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0052, size: body_size, io, } } else { a } })?)),
             0x0054 => Ok(Self::CMSG_GUILD_QUERY(<CMSG_GUILD_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0054, size: body_size, io, } } else { a } })?)),
@@ -964,25 +964,25 @@ impl ClientOpcodeMessage {
             0x006C => Ok(Self::CMSG_ADD_IGNORE(<CMSG_ADD_IGNORE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x006C, size: body_size, io, } } else { a } })?)),
             0x006D => Ok(Self::CMSG_DEL_IGNORE(<CMSG_DEL_IGNORE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x006D, size: body_size, io, } } else { a } })?)),
             0x006E => Ok(Self::CMSG_GROUP_INVITE(<CMSG_GROUP_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x006E, size: body_size, io, } } else { a } })?)),
-            0x0070 => Ok(Self::CMSG_GROUP_CANCEL(<CMSG_GROUP_CANCEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0070, size: body_size, io, } } else { a } })?)),
-            0x0072 => Ok(Self::CMSG_GROUP_ACCEPT(<CMSG_GROUP_ACCEPT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0072, size: body_size, io, } } else { a } })?)),
-            0x0073 => Ok(Self::CMSG_GROUP_DECLINE(<CMSG_GROUP_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0073, size: body_size, io, } } else { a } })?)),
+            0x0070 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GROUP_CANCEL),
+            0x0072 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GROUP_ACCEPT),
+            0x0073 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GROUP_DECLINE),
             0x0075 => Ok(Self::CMSG_GROUP_UNINVITE(<CMSG_GROUP_UNINVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0075, size: body_size, io, } } else { a } })?)),
             0x0076 => Ok(Self::CMSG_GROUP_UNINVITE_GUID(<CMSG_GROUP_UNINVITE_GUID as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0076, size: body_size, io, } } else { a } })?)),
             0x0078 => Ok(Self::CMSG_GROUP_SET_LEADER(<CMSG_GROUP_SET_LEADER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0078, size: body_size, io, } } else { a } })?)),
             0x007A => Ok(Self::CMSG_LOOT_METHOD(<CMSG_LOOT_METHOD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x007A, size: body_size, io, } } else { a } })?)),
-            0x007B => Ok(Self::CMSG_GROUP_DISBAND(<CMSG_GROUP_DISBAND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x007B, size: body_size, io, } } else { a } })?)),
+            0x007B => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GROUP_DISBAND),
             0x0081 => Ok(Self::CMSG_GUILD_CREATE(<CMSG_GUILD_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0081, size: body_size, io, } } else { a } })?)),
             0x0082 => Ok(Self::CMSG_GUILD_INVITE(<CMSG_GUILD_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0082, size: body_size, io, } } else { a } })?)),
-            0x0084 => Ok(Self::CMSG_GUILD_ACCEPT(<CMSG_GUILD_ACCEPT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0084, size: body_size, io, } } else { a } })?)),
-            0x0085 => Ok(Self::CMSG_GUILD_DECLINE(<CMSG_GUILD_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0085, size: body_size, io, } } else { a } })?)),
-            0x0087 => Ok(Self::CMSG_GUILD_INFO(<CMSG_GUILD_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0087, size: body_size, io, } } else { a } })?)),
-            0x0089 => Ok(Self::CMSG_GUILD_ROSTER(<CMSG_GUILD_ROSTER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0089, size: body_size, io, } } else { a } })?)),
+            0x0084 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GUILD_ACCEPT),
+            0x0085 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GUILD_DECLINE),
+            0x0087 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GUILD_INFO),
+            0x0089 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GUILD_ROSTER),
             0x008B => Ok(Self::CMSG_GUILD_PROMOTE(<CMSG_GUILD_PROMOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x008B, size: body_size, io, } } else { a } })?)),
             0x008C => Ok(Self::CMSG_GUILD_DEMOTE(<CMSG_GUILD_DEMOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x008C, size: body_size, io, } } else { a } })?)),
-            0x008D => Ok(Self::CMSG_GUILD_LEAVE(<CMSG_GUILD_LEAVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x008D, size: body_size, io, } } else { a } })?)),
+            0x008D => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GUILD_LEAVE),
             0x008E => Ok(Self::CMSG_GUILD_REMOVE(<CMSG_GUILD_REMOVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x008E, size: body_size, io, } } else { a } })?)),
-            0x008F => Ok(Self::CMSG_GUILD_DISBAND(<CMSG_GUILD_DISBAND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x008F, size: body_size, io, } } else { a } })?)),
+            0x008F => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GUILD_DISBAND),
             0x0090 => Ok(Self::CMSG_GUILD_LEADER(<CMSG_GUILD_LEADER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0090, size: body_size, io, } } else { a } })?)),
             0x0091 => Ok(Self::CMSG_GUILD_MOTD(<CMSG_GUILD_MOTD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0091, size: body_size, io, } } else { a } })?)),
             0x0095 => Ok(Self::CMSG_MESSAGECHAT(<CMSG_MESSAGECHAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0095, size: body_size, io, } } else { a } })?)),
@@ -1017,11 +1017,11 @@ impl ClientOpcodeMessage {
             0x00EB => Ok(Self::CMSG_FORCE_MOVE_UNROOT_ACK(<CMSG_FORCE_MOVE_UNROOT_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00EB, size: body_size, io, } } else { a } })?)),
             0x00F0 => Ok(Self::CMSG_MOVE_KNOCK_BACK_ACK(<CMSG_MOVE_KNOCK_BACK_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00F0, size: body_size, io, } } else { a } })?)),
             0x00F6 => Ok(Self::CMSG_MOVE_HOVER_ACK(<CMSG_MOVE_HOVER_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00F6, size: body_size, io, } } else { a } })?)),
-            0x00FB => Ok(Self::CMSG_NEXT_CINEMATIC_CAMERA(<CMSG_NEXT_CINEMATIC_CAMERA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00FB, size: body_size, io, } } else { a } })?)),
-            0x00FC => Ok(Self::CMSG_COMPLETE_CINEMATIC(<CMSG_COMPLETE_CINEMATIC as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00FC, size: body_size, io, } } else { a } })?)),
+            0x00FB => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_NEXT_CINEMATIC_CAMERA),
+            0x00FC => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_COMPLETE_CINEMATIC),
             0x00FE => Ok(Self::CMSG_TUTORIAL_FLAG(<CMSG_TUTORIAL_FLAG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00FE, size: body_size, io, } } else { a } })?)),
-            0x00FF => Ok(Self::CMSG_TUTORIAL_CLEAR(<CMSG_TUTORIAL_CLEAR as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00FF, size: body_size, io, } } else { a } })?)),
-            0x0100 => Ok(Self::CMSG_TUTORIAL_RESET(<CMSG_TUTORIAL_RESET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0100, size: body_size, io, } } else { a } })?)),
+            0x00FF => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_TUTORIAL_CLEAR),
+            0x0100 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_TUTORIAL_RESET),
             0x0101 => Ok(Self::CMSG_STANDSTATECHANGE(<CMSG_STANDSTATECHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0101, size: body_size, io, } } else { a } })?)),
             0x0102 => Ok(Self::CMSG_EMOTE(<CMSG_EMOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0102, size: body_size, io, } } else { a } })?)),
             0x0104 => Ok(Self::CMSG_TEXT_EMOTE(<CMSG_TEXT_EMOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0104, size: body_size, io, } } else { a } })?)),
@@ -1035,12 +1035,12 @@ impl ClientOpcodeMessage {
             0x0111 => Ok(Self::CMSG_DESTROYITEM(<CMSG_DESTROYITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0111, size: body_size, io, } } else { a } })?)),
             0x0114 => Ok(Self::CMSG_INSPECT(<CMSG_INSPECT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0114, size: body_size, io, } } else { a } })?)),
             0x0116 => Ok(Self::CMSG_INITIATE_TRADE(<CMSG_INITIATE_TRADE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0116, size: body_size, io, } } else { a } })?)),
-            0x0117 => Ok(Self::CMSG_BEGIN_TRADE(<CMSG_BEGIN_TRADE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0117, size: body_size, io, } } else { a } })?)),
-            0x0118 => Ok(Self::CMSG_BUSY_TRADE(<CMSG_BUSY_TRADE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0118, size: body_size, io, } } else { a } })?)),
-            0x0119 => Ok(Self::CMSG_IGNORE_TRADE(<CMSG_IGNORE_TRADE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0119, size: body_size, io, } } else { a } })?)),
+            0x0117 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_BEGIN_TRADE),
+            0x0118 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_BUSY_TRADE),
+            0x0119 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_IGNORE_TRADE),
             0x011A => Ok(Self::CMSG_ACCEPT_TRADE(<CMSG_ACCEPT_TRADE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x011A, size: body_size, io, } } else { a } })?)),
-            0x011B => Ok(Self::CMSG_UNACCEPT_TRADE(<CMSG_UNACCEPT_TRADE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x011B, size: body_size, io, } } else { a } })?)),
-            0x011C => Ok(Self::CMSG_CANCEL_TRADE(<CMSG_CANCEL_TRADE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x011C, size: body_size, io, } } else { a } })?)),
+            0x011B => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_UNACCEPT_TRADE),
+            0x011C => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_CANCEL_TRADE),
             0x011D => Ok(Self::CMSG_SET_TRADE_ITEM(<CMSG_SET_TRADE_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x011D, size: body_size, io, } } else { a } })?)),
             0x011E => Ok(Self::CMSG_CLEAR_TRADE_ITEM(<CMSG_CLEAR_TRADE_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x011E, size: body_size, io, } } else { a } })?)),
             0x011F => Ok(Self::CMSG_SET_TRADE_GOLD(<CMSG_SET_TRADE_GOLD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x011F, size: body_size, io, } } else { a } })?)),
@@ -1054,15 +1054,15 @@ impl ClientOpcodeMessage {
             0x013E => Ok(Self::CMSG_DELETEEQUIPMENT_SET(<CMSG_DELETEEQUIPMENT_SET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x013E, size: body_size, io, } } else { a } })?)),
             0x013F => Ok(Self::CMSG_INSTANCE_LOCK_RESPONSE(<CMSG_INSTANCE_LOCK_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x013F, size: body_size, io, } } else { a } })?)),
             0x0141 => Ok(Self::CMSG_ATTACKSWING(<CMSG_ATTACKSWING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0141, size: body_size, io, } } else { a } })?)),
-            0x0142 => Ok(Self::CMSG_ATTACKSTOP(<CMSG_ATTACKSTOP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0142, size: body_size, io, } } else { a } })?)),
-            0x015A => Ok(Self::CMSG_REPOP_REQUEST(<CMSG_REPOP_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x015A, size: body_size, io, } } else { a } })?)),
+            0x0142 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_ATTACKSTOP),
+            0x015A => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_REPOP_REQUEST),
             0x015C => Ok(Self::CMSG_RESURRECT_RESPONSE(<CMSG_RESURRECT_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x015C, size: body_size, io, } } else { a } })?)),
             0x015D => Ok(Self::CMSG_LOOT(<CMSG_LOOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x015D, size: body_size, io, } } else { a } })?)),
-            0x015E => Ok(Self::CMSG_LOOT_MONEY(<CMSG_LOOT_MONEY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x015E, size: body_size, io, } } else { a } })?)),
+            0x015E => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_LOOT_MONEY),
             0x015F => Ok(Self::CMSG_LOOT_RELEASE(<CMSG_LOOT_RELEASE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x015F, size: body_size, io, } } else { a } })?)),
             0x016C => Ok(Self::CMSG_DUEL_ACCEPTED(<CMSG_DUEL_ACCEPTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x016C, size: body_size, io, } } else { a } })?)),
             0x016D => Ok(Self::CMSG_DUEL_CANCELLED(<CMSG_DUEL_CANCELLED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x016D, size: body_size, io, } } else { a } })?)),
-            0x0171 => Ok(Self::CMSG_MOUNTSPECIAL_ANIM(<CMSG_MOUNTSPECIAL_ANIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0171, size: body_size, io, } } else { a } })?)),
+            0x0171 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_MOUNTSPECIAL_ANIM),
             0x0174 => Ok(Self::CMSG_PET_SET_ACTION(<CMSG_PET_SET_ACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0174, size: body_size, io, } } else { a } })?)),
             0x0175 => Ok(Self::CMSG_PET_ACTION(<CMSG_PET_ACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0175, size: body_size, io, } } else { a } })?)),
             0x0176 => Ok(Self::CMSG_PET_ABANDON(<CMSG_PET_ABANDON as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0176, size: body_size, io, } } else { a } })?)),
@@ -1073,12 +1073,12 @@ impl ClientOpcodeMessage {
             0x0182 => Ok(Self::CMSG_QUESTGIVER_STATUS_QUERY(<CMSG_QUESTGIVER_STATUS_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0182, size: body_size, io, } } else { a } })?)),
             0x0184 => Ok(Self::CMSG_QUESTGIVER_HELLO(<CMSG_QUESTGIVER_HELLO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0184, size: body_size, io, } } else { a } })?)),
             0x0186 => Ok(Self::CMSG_QUESTGIVER_QUERY_QUEST(<CMSG_QUESTGIVER_QUERY_QUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0186, size: body_size, io, } } else { a } })?)),
-            0x0187 => Ok(Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH(<CMSG_QUESTGIVER_QUEST_AUTOLAUNCH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0187, size: body_size, io, } } else { a } })?)),
+            0x0187 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH),
             0x0189 => Ok(Self::CMSG_QUESTGIVER_ACCEPT_QUEST(<CMSG_QUESTGIVER_ACCEPT_QUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0189, size: body_size, io, } } else { a } })?)),
             0x018A => Ok(Self::CMSG_QUESTGIVER_COMPLETE_QUEST(<CMSG_QUESTGIVER_COMPLETE_QUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x018A, size: body_size, io, } } else { a } })?)),
             0x018C => Ok(Self::CMSG_QUESTGIVER_REQUEST_REWARD(<CMSG_QUESTGIVER_REQUEST_REWARD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x018C, size: body_size, io, } } else { a } })?)),
             0x018E => Ok(Self::CMSG_QUESTGIVER_CHOOSE_REWARD(<CMSG_QUESTGIVER_CHOOSE_REWARD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x018E, size: body_size, io, } } else { a } })?)),
-            0x0190 => Ok(Self::CMSG_QUESTGIVER_CANCEL(<CMSG_QUESTGIVER_CANCEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0190, size: body_size, io, } } else { a } })?)),
+            0x0190 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_QUESTGIVER_CANCEL),
             0x0193 => Ok(Self::CMSG_QUESTLOG_SWAP_QUEST(<CMSG_QUESTLOG_SWAP_QUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0193, size: body_size, io, } } else { a } })?)),
             0x0194 => Ok(Self::CMSG_QUESTLOG_REMOVE_QUEST(<CMSG_QUESTLOG_REMOVE_QUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0194, size: body_size, io, } } else { a } })?)),
             0x019B => Ok(Self::CMSG_QUEST_CONFIRM_ACCEPT(<CMSG_QUEST_CONFIRM_ACCEPT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x019B, size: body_size, io, } } else { a } })?)),
@@ -1104,7 +1104,7 @@ impl ClientOpcodeMessage {
             0x01C6 => Ok(Self::CMSG_PETITION_QUERY(<CMSG_PETITION_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C6, size: body_size, io, } } else { a } })?)),
             0x01CA => Ok(Self::CMSG_BUG(<CMSG_BUG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CA, size: body_size, io, } } else { a } })?)),
             0x01CC => Ok(Self::CMSG_PLAYED_TIME(<CMSG_PLAYED_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CC, size: body_size, io, } } else { a } })?)),
-            0x01CE => Ok(Self::CMSG_QUERY_TIME(<CMSG_QUERY_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CE, size: body_size, io, } } else { a } })?)),
+            0x01CE => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_QUERY_TIME),
             0x01D2 => Ok(Self::CMSG_RECLAIM_CORPSE(<CMSG_RECLAIM_CORPSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D2, size: body_size, io, } } else { a } })?)),
             0x01D3 => Ok(Self::CMSG_WRAP_ITEM(<CMSG_WRAP_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D3, size: body_size, io, } } else { a } })?)),
             0x01D5 => Ok(Self::MSG_MINIMAP_PING(<MSG_MINIMAP_PING_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01D5, size: body_size, io, } } else { a } })?)),
@@ -1121,16 +1121,16 @@ impl ClientOpcodeMessage {
             0x0207 => Ok(Self::CMSG_GMTICKET_UPDATETEXT(<CMSG_GMTICKET_UPDATETEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0207, size: body_size, io, } } else { a } })?)),
             0x020A => Ok(Self::CMSG_REQUEST_ACCOUNT_DATA(<CMSG_REQUEST_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x020A, size: body_size, io, } } else { a } })?)),
             0x020B => Ok(Self::CMSG_UPDATE_ACCOUNT_DATA(<CMSG_UPDATE_ACCOUNT_DATA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x020B, size: body_size, io, } } else { a } })?)),
-            0x0211 => Ok(Self::CMSG_GMTICKET_GETTICKET(<CMSG_GMTICKET_GETTICKET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0211, size: body_size, io, } } else { a } })?)),
-            0x0213 => Ok(Self::CMSG_UNLEARN_TALENTS(<CMSG_UNLEARN_TALENTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0213, size: body_size, io, } } else { a } })?)),
-            0x0216 => Ok(Self::MSG_CORPSE_QUERY(<MSG_CORPSE_QUERY_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0216, size: body_size, io, } } else { a } })?)),
-            0x0217 => Ok(Self::CMSG_GMTICKET_DELETETICKET(<CMSG_GMTICKET_DELETETICKET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0217, size: body_size, io, } } else { a } })?)),
-            0x021A => Ok(Self::CMSG_GMTICKET_SYSTEMSTATUS(<CMSG_GMTICKET_SYSTEMSTATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x021A, size: body_size, io, } } else { a } })?)),
+            0x0211 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GMTICKET_GETTICKET),
+            0x0213 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_UNLEARN_TALENTS),
+            0x0216 => crate::util::assert_empty(body_size, opcode).map(|_| Self::MSG_CORPSE_QUERY),
+            0x0217 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GMTICKET_DELETETICKET),
+            0x021A => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GMTICKET_SYSTEMSTATUS),
             0x021C => Ok(Self::CMSG_SPIRIT_HEALER_ACTIVATE(<CMSG_SPIRIT_HEALER_ACTIVATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x021C, size: body_size, io, } } else { a } })?)),
             0x0225 => Ok(Self::CMSG_CHAT_IGNORED(<CMSG_CHAT_IGNORED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0225, size: body_size, io, } } else { a } })?)),
             0x0231 => Ok(Self::CMSG_GUILD_RANK(<CMSG_GUILD_RANK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0231, size: body_size, io, } } else { a } })?)),
             0x0232 => Ok(Self::CMSG_GUILD_ADD_RANK(<CMSG_GUILD_ADD_RANK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0232, size: body_size, io, } } else { a } })?)),
-            0x0233 => Ok(Self::CMSG_GUILD_DEL_RANK(<CMSG_GUILD_DEL_RANK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0233, size: body_size, io, } } else { a } })?)),
+            0x0233 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GUILD_DEL_RANK),
             0x0234 => Ok(Self::CMSG_GUILD_SET_PUBLIC_NOTE(<CMSG_GUILD_SET_PUBLIC_NOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0234, size: body_size, io, } } else { a } })?)),
             0x0235 => Ok(Self::CMSG_GUILD_SET_OFFICER_NOTE(<CMSG_GUILD_SET_OFFICER_NOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0235, size: body_size, io, } } else { a } })?)),
             0x0238 => Ok(Self::CMSG_SEND_MAIL(<CMSG_SEND_MAIL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0238, size: body_size, io, } } else { a } })?)),
@@ -1155,58 +1155,58 @@ impl ClientOpcodeMessage {
             0x0268 => Ok(Self::CMSG_SET_AMMO(<CMSG_SET_AMMO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0268, size: body_size, io, } } else { a } })?)),
             0x026A => Ok(Self::CMSG_SET_ACTIVE_MOVER(<CMSG_SET_ACTIVE_MOVER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x026A, size: body_size, io, } } else { a } })?)),
             0x026B => Ok(Self::CMSG_PET_CANCEL_AURA(<CMSG_PET_CANCEL_AURA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x026B, size: body_size, io, } } else { a } })?)),
-            0x026D => Ok(Self::CMSG_CANCEL_AUTO_REPEAT_SPELL(<CMSG_CANCEL_AUTO_REPEAT_SPELL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x026D, size: body_size, io, } } else { a } })?)),
+            0x026D => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_CANCEL_AUTO_REPEAT_SPELL),
             0x026F => Ok(Self::MSG_LIST_STABLED_PETS(<MSG_LIST_STABLED_PETS_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x026F, size: body_size, io, } } else { a } })?)),
             0x0270 => Ok(Self::CMSG_STABLE_PET(<CMSG_STABLE_PET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0270, size: body_size, io, } } else { a } })?)),
             0x0271 => Ok(Self::CMSG_UNSTABLE_PET(<CMSG_UNSTABLE_PET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0271, size: body_size, io, } } else { a } })?)),
             0x0272 => Ok(Self::CMSG_BUY_STABLE_SLOT(<CMSG_BUY_STABLE_SLOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0272, size: body_size, io, } } else { a } })?)),
             0x0275 => Ok(Self::CMSG_STABLE_SWAP_PET(<CMSG_STABLE_SWAP_PET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0275, size: body_size, io, } } else { a } })?)),
-            0x0279 => Ok(Self::CMSG_REQUEST_PET_INFO(<CMSG_REQUEST_PET_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0279, size: body_size, io, } } else { a } })?)),
+            0x0279 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_REQUEST_PET_INFO),
             0x027A => Ok(Self::CMSG_FAR_SIGHT(<CMSG_FAR_SIGHT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x027A, size: body_size, io, } } else { a } })?)),
             0x027E => Ok(Self::CMSG_GROUP_CHANGE_SUB_GROUP(<CMSG_GROUP_CHANGE_SUB_GROUP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x027E, size: body_size, io, } } else { a } })?)),
             0x027F => Ok(Self::CMSG_REQUEST_PARTY_MEMBER_STATS(<CMSG_REQUEST_PARTY_MEMBER_STATS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x027F, size: body_size, io, } } else { a } })?)),
             0x0280 => Ok(Self::CMSG_GROUP_SWAP_SUB_GROUP(<CMSG_GROUP_SWAP_SUB_GROUP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0280, size: body_size, io, } } else { a } })?)),
             0x0282 => Ok(Self::CMSG_AUTOSTORE_BANK_ITEM(<CMSG_AUTOSTORE_BANK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0282, size: body_size, io, } } else { a } })?)),
             0x0283 => Ok(Self::CMSG_AUTOBANK_ITEM(<CMSG_AUTOBANK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0283, size: body_size, io, } } else { a } })?)),
-            0x0284 => Ok(Self::MSG_QUERY_NEXT_MAIL_TIME(<MSG_QUERY_NEXT_MAIL_TIME_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0284, size: body_size, io, } } else { a } })?)),
-            0x028E => Ok(Self::CMSG_GROUP_RAID_CONVERT(<CMSG_GROUP_RAID_CONVERT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x028E, size: body_size, io, } } else { a } })?)),
+            0x0284 => crate::util::assert_empty(body_size, opcode).map(|_| Self::MSG_QUERY_NEXT_MAIL_TIME),
+            0x028E => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GROUP_RAID_CONVERT),
             0x028F => Ok(Self::CMSG_GROUP_ASSISTANT_LEADER(<CMSG_GROUP_ASSISTANT_LEADER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x028F, size: body_size, io, } } else { a } })?)),
             0x0290 => Ok(Self::CMSG_BUYBACK_ITEM(<CMSG_BUYBACK_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0290, size: body_size, io, } } else { a } })?)),
             0x0292 => Ok(Self::CMSG_SET_SAVED_INSTANCE_EXTEND(<CMSG_SET_SAVED_INSTANCE_EXTEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0292, size: body_size, io, } } else { a } })?)),
-            0x0296 => Ok(Self::CMSG_LFG_GET_STATUS(<CMSG_LFG_GET_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0296, size: body_size, io, } } else { a } })?)),
-            0x029A => Ok(Self::CMSG_GMTICKETSYSTEM_TOGGLE(<CMSG_GMTICKETSYSTEM_TOGGLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x029A, size: body_size, io, } } else { a } })?)),
-            0x029B => Ok(Self::CMSG_CANCEL_GROWTH_AURA(<CMSG_CANCEL_GROWTH_AURA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x029B, size: body_size, io, } } else { a } })?)),
+            0x0296 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_LFG_GET_STATUS),
+            0x029A => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GMTICKETSYSTEM_TOGGLE),
+            0x029B => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_CANCEL_GROWTH_AURA),
             0x02A0 => Ok(Self::CMSG_LOOT_ROLL(<CMSG_LOOT_ROLL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A0, size: body_size, io, } } else { a } })?)),
             0x02A3 => Ok(Self::CMSG_LOOT_MASTER_GIVE(<CMSG_LOOT_MASTER_GIVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A3, size: body_size, io, } } else { a } })?)),
             0x02A8 => Ok(Self::CMSG_REPAIR_ITEM(<CMSG_REPAIR_ITEM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02A8, size: body_size, io, } } else { a } })?)),
             0x02AA => Ok(Self::MSG_TALENT_WIPE_CONFIRM(<MSG_TALENT_WIPE_CONFIRM_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AA, size: body_size, io, } } else { a } })?)),
             0x02AC => Ok(Self::CMSG_SUMMON_RESPONSE(<CMSG_SUMMON_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AC, size: body_size, io, } } else { a } })?)),
-            0x02B3 => Ok(Self::CMSG_SELF_RES(<CMSG_SELF_RES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B3, size: body_size, io, } } else { a } })?)),
-            0x02B9 => Ok(Self::CMSG_TOGGLE_HELM(<CMSG_TOGGLE_HELM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B9, size: body_size, io, } } else { a } })?)),
-            0x02BA => Ok(Self::CMSG_TOGGLE_CLOAK(<CMSG_TOGGLE_CLOAK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02BA, size: body_size, io, } } else { a } })?)),
+            0x02B3 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_SELF_RES),
+            0x02B9 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_TOGGLE_HELM),
+            0x02BA => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_TOGGLE_CLOAK),
             0x02BF => Ok(Self::CMSG_SET_ACTIONBAR_TOGGLES(<CMSG_SET_ACTIONBAR_TOGGLES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02BF, size: body_size, io, } } else { a } })?)),
             0x02C4 => Ok(Self::CMSG_ITEM_NAME_QUERY(<CMSG_ITEM_NAME_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C4, size: body_size, io, } } else { a } })?)),
             0x02C7 => Ok(Self::CMSG_CHAR_RENAME(<CMSG_CHAR_RENAME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C7, size: body_size, io, } } else { a } })?)),
             0x02C9 => Ok(Self::CMSG_MOVE_SPLINE_DONE(<CMSG_MOVE_SPLINE_DONE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C9, size: body_size, io, } } else { a } })?)),
             0x02CA => Ok(Self::CMSG_MOVE_FALL_RESET(<CMSG_MOVE_FALL_RESET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CA, size: body_size, io, } } else { a } })?)),
-            0x02CD => Ok(Self::CMSG_REQUEST_RAID_INFO(<CMSG_REQUEST_RAID_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CD, size: body_size, io, } } else { a } })?)),
+            0x02CD => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_REQUEST_RAID_INFO),
             0x02CE => Ok(Self::CMSG_MOVE_TIME_SKIPPED(<CMSG_MOVE_TIME_SKIPPED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CE, size: body_size, io, } } else { a } })?)),
             0x02CF => Ok(Self::CMSG_MOVE_FEATHER_FALL_ACK(<CMSG_MOVE_FEATHER_FALL_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02CF, size: body_size, io, } } else { a } })?)),
             0x02D0 => Ok(Self::CMSG_MOVE_WATER_WALK_ACK(<CMSG_MOVE_WATER_WALK_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D0, size: body_size, io, } } else { a } })?)),
             0x02D1 => Ok(Self::CMSG_MOVE_NOT_ACTIVE_MOVER(<CMSG_MOVE_NOT_ACTIVE_MOVER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D1, size: body_size, io, } } else { a } })?)),
-            0x02D3 => Ok(Self::CMSG_BATTLEFIELD_STATUS(<CMSG_BATTLEFIELD_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D3, size: body_size, io, } } else { a } })?)),
+            0x02D3 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_BATTLEFIELD_STATUS),
             0x02D5 => Ok(Self::CMSG_BATTLEFIELD_PORT(<CMSG_BATTLEFIELD_PORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D5, size: body_size, io, } } else { a } })?)),
             0x02D6 => Ok(Self::MSG_INSPECT_HONOR_STATS(<MSG_INSPECT_HONOR_STATS_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D6, size: body_size, io, } } else { a } })?)),
             0x02D7 => Ok(Self::CMSG_BATTLEMASTER_HELLO(<CMSG_BATTLEMASTER_HELLO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02D7, size: body_size, io, } } else { a } })?)),
             0x02DB => Ok(Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(<CMSG_FORCE_WALK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02DB, size: body_size, io, } } else { a } })?)),
             0x02DD => Ok(Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(<CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02DD, size: body_size, io, } } else { a } })?)),
             0x02DF => Ok(Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(<CMSG_FORCE_TURN_RATE_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02DF, size: body_size, io, } } else { a } })?)),
-            0x02E0 => Ok(Self::MSG_PVP_LOG_DATA(<MSG_PVP_LOG_DATA_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E0, size: body_size, io, } } else { a } })?)),
+            0x02E0 => crate::util::assert_empty(body_size, opcode).map(|_| Self::MSG_PVP_LOG_DATA),
             0x02E1 => Ok(Self::CMSG_LEAVE_BATTLEFIELD(<CMSG_LEAVE_BATTLEFIELD as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E1, size: body_size, io, } } else { a } })?)),
             0x02E2 => Ok(Self::CMSG_AREA_SPIRIT_HEALER_QUERY(<CMSG_AREA_SPIRIT_HEALER_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E2, size: body_size, io, } } else { a } })?)),
             0x02E3 => Ok(Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(<CMSG_AREA_SPIRIT_HEALER_QUEUE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E3, size: body_size, io, } } else { a } })?)),
             0x02E7 => Ok(Self::CMSG_WARDEN_DATA(<CMSG_WARDEN_DATA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E7, size: body_size, io, } } else { a } })?)),
-            0x02E9 => Ok(Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(<MSG_BATTLEGROUND_PLAYER_POSITIONS_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02E9, size: body_size, io, } } else { a } })?)),
+            0x02E9 => crate::util::assert_empty(body_size, opcode).map(|_| Self::MSG_BATTLEGROUND_PLAYER_POSITIONS),
             0x02EA => Ok(Self::CMSG_PET_STOP_ATTACK(<CMSG_PET_STOP_ATTACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02EA, size: body_size, io, } } else { a } })?)),
             0x02EE => Ok(Self::CMSG_BATTLEMASTER_JOIN(<CMSG_BATTLEMASTER_JOIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02EE, size: body_size, io, } } else { a } })?)),
             0x02F0 => Ok(Self::CMSG_PET_UNLEARN(<CMSG_PET_UNLEARN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02F0, size: body_size, io, } } else { a } })?)),
@@ -1215,7 +1215,7 @@ impl ClientOpcodeMessage {
             0x0312 => Ok(Self::CMSG_ACTIVATETAXIEXPRESS(<CMSG_ACTIVATETAXIEXPRESS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0312, size: body_size, io, } } else { a } })?)),
             0x0317 => Ok(Self::CMSG_SET_FACTION_INACTIVE(<CMSG_SET_FACTION_INACTIVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0317, size: body_size, io, } } else { a } })?)),
             0x0318 => Ok(Self::CMSG_SET_WATCHED_FACTION(<CMSG_SET_WATCHED_FACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0318, size: body_size, io, } } else { a } })?)),
-            0x031D => Ok(Self::CMSG_RESET_INSTANCES(<CMSG_RESET_INSTANCES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x031D, size: body_size, io, } } else { a } })?)),
+            0x031D => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_RESET_INSTANCES),
             0x0321 => Ok(Self::MSG_RAID_TARGET_UPDATE(<MSG_RAID_TARGET_UPDATE_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0321, size: body_size, io, } } else { a } })?)),
             0x0322 => Ok(Self::MSG_RAID_READY_CHECK(<MSG_RAID_READY_CHECK_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0322, size: body_size, io, } } else { a } })?)),
             0x0329 => Ok(Self::MSG_SET_DUNGEON_DIFFICULTY(<MSG_SET_DUNGEON_DIFFICULTY_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0329, size: body_size, io, } } else { a } })?)),
@@ -1226,26 +1226,26 @@ impl ClientOpcodeMessage {
             0x0347 => Ok(Self::CMSG_SOCKET_GEMS(<CMSG_SOCKET_GEMS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0347, size: body_size, io, } } else { a } })?)),
             0x034D => Ok(Self::CMSG_ARENA_TEAM_ROSTER(<CMSG_ARENA_TEAM_ROSTER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x034D, size: body_size, io, } } else { a } })?)),
             0x034F => Ok(Self::CMSG_ARENA_TEAM_INVITE(<CMSG_ARENA_TEAM_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x034F, size: body_size, io, } } else { a } })?)),
-            0x0351 => Ok(Self::CMSG_ARENA_TEAM_ACCEPT(<CMSG_ARENA_TEAM_ACCEPT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0351, size: body_size, io, } } else { a } })?)),
-            0x0352 => Ok(Self::CMSG_ARENA_TEAM_DECLINE(<CMSG_ARENA_TEAM_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0352, size: body_size, io, } } else { a } })?)),
+            0x0351 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_ARENA_TEAM_ACCEPT),
+            0x0352 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_ARENA_TEAM_DECLINE),
             0x0353 => Ok(Self::CMSG_ARENA_TEAM_LEAVE(<CMSG_ARENA_TEAM_LEAVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0353, size: body_size, io, } } else { a } })?)),
             0x0354 => Ok(Self::CMSG_ARENA_TEAM_REMOVE(<CMSG_ARENA_TEAM_REMOVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0354, size: body_size, io, } } else { a } })?)),
             0x0355 => Ok(Self::CMSG_ARENA_TEAM_DISBAND(<CMSG_ARENA_TEAM_DISBAND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0355, size: body_size, io, } } else { a } })?)),
             0x0356 => Ok(Self::CMSG_ARENA_TEAM_LEADER(<CMSG_ARENA_TEAM_LEADER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0356, size: body_size, io, } } else { a } })?)),
             0x0358 => Ok(Self::CMSG_BATTLEMASTER_JOIN_ARENA(<CMSG_BATTLEMASTER_JOIN_ARENA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0358, size: body_size, io, } } else { a } })?)),
             0x035C => Ok(Self::CMSG_LFG_JOIN(<CMSG_LFG_JOIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035C, size: body_size, io, } } else { a } })?)),
-            0x035D => Ok(Self::CMSG_LFG_LEAVE(<CMSG_LFG_LEAVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035D, size: body_size, io, } } else { a } })?)),
+            0x035D => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_LFG_LEAVE),
             0x035E => Ok(Self::CMSG_SEARCH_LFG_JOIN(<CMSG_SEARCH_LFG_JOIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035E, size: body_size, io, } } else { a } })?)),
             0x035F => Ok(Self::CMSG_SEARCH_LFG_LEAVE(<CMSG_SEARCH_LFG_LEAVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035F, size: body_size, io, } } else { a } })?)),
             0x0362 => Ok(Self::CMSG_LFG_PROPOSAL_RESULT(<CMSG_LFG_PROPOSAL_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0362, size: body_size, io, } } else { a } })?)),
             0x0366 => Ok(Self::CMSG_SET_LFG_COMMENT(<CMSG_SET_LFG_COMMENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0366, size: body_size, io, } } else { a } })?)),
             0x036A => Ok(Self::CMSG_LFG_SET_ROLES(<CMSG_LFG_SET_ROLES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x036A, size: body_size, io, } } else { a } })?)),
             0x036C => Ok(Self::CMSG_LFG_SET_BOOT_VOTE(<CMSG_LFG_SET_BOOT_VOTE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x036C, size: body_size, io, } } else { a } })?)),
-            0x036E => Ok(Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(<CMSG_LFD_PLAYER_LOCK_INFO_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x036E, size: body_size, io, } } else { a } })?)),
+            0x036E => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST),
             0x0370 => Ok(Self::CMSG_LFG_TELEPORT(<CMSG_LFG_TELEPORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0370, size: body_size, io, } } else { a } })?)),
-            0x0371 => Ok(Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST(<CMSG_LFD_PARTY_LOCK_INFO_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0371, size: body_size, io, } } else { a } })?)),
+            0x0371 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST),
             0x0374 => Ok(Self::CMSG_SET_TITLE(<CMSG_SET_TITLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0374, size: body_size, io, } } else { a } })?)),
-            0x0375 => Ok(Self::CMSG_CANCEL_MOUNT_AURA(<CMSG_CANCEL_MOUNT_AURA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0375, size: body_size, io, } } else { a } })?)),
+            0x0375 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_CANCEL_MOUNT_AURA),
             0x0377 => Ok(Self::MSG_INSPECT_ARENA_TEAMS(<MSG_INSPECT_ARENA_TEAMS_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0377, size: body_size, io, } } else { a } })?)),
             0x0379 => Ok(Self::CMSG_CANCEL_TEMP_ENCHANTMENT(<CMSG_CANCEL_TEMP_ENCHANTMENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0379, size: body_size, io, } } else { a } })?)),
             0x0382 => Ok(Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(<CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0382, size: body_size, io, } } else { a } })?)),
@@ -1258,12 +1258,12 @@ impl ClientOpcodeMessage {
             0x03AE => Ok(Self::MSG_RAID_READY_CHECK_CONFIRM(<MSG_RAID_READY_CHECK_CONFIRM_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AE, size: body_size, io, } } else { a } })?)),
             0x03AF => Ok(Self::CMSG_VOICE_SESSION_ENABLE(<CMSG_VOICE_SESSION_ENABLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AF, size: body_size, io, } } else { a } })?)),
             0x03B5 => Ok(Self::CMSG_COMMENTATOR_ENABLE(<CMSG_COMMENTATOR_ENABLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03B5, size: body_size, io, } } else { a } })?)),
-            0x03C6 => Ok(Self::MSG_RAID_READY_CHECK_FINISHED(<MSG_RAID_READY_CHECK_FINISHED_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03C6, size: body_size, io, } } else { a } })?)),
+            0x03C6 => crate::util::assert_empty(body_size, opcode).map(|_| Self::MSG_RAID_READY_CHECK_FINISHED),
             0x03C7 => Ok(Self::CMSG_COMPLAIN(<CMSG_COMPLAIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03C7, size: body_size, io, } } else { a } })?)),
             0x03D2 => Ok(Self::CMSG_CHANNEL_DISPLAY_LIST(<CMSG_CHANNEL_DISPLAY_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D2, size: body_size, io, } } else { a } })?)),
             0x03D3 => Ok(Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(<CMSG_SET_ACTIVE_VOICE_CHANNEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D3, size: body_size, io, } } else { a } })?)),
             0x03D4 => Ok(Self::CMSG_GET_CHANNEL_MEMBER_COUNT(<CMSG_GET_CHANNEL_MEMBER_COUNT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D4, size: body_size, io, } } else { a } })?)),
-            0x03D6 => Ok(Self::CMSG_CHANNEL_VOICE_ON(<CMSG_CHANNEL_VOICE_ON as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03D6, size: body_size, io, } } else { a } })?)),
+            0x03D6 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_CHANNEL_VOICE_ON),
             0x03E4 => Ok(Self::CMSG_REPORT_PVP_AFK(<CMSG_REPORT_PVP_AFK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03E4, size: body_size, io, } } else { a } })?)),
             0x03E6 => Ok(Self::CMSG_GUILD_BANKER_ACTIVATE(<CMSG_GUILD_BANKER_ACTIVATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03E6, size: body_size, io, } } else { a } })?)),
             0x03E7 => Ok(Self::CMSG_GUILD_BANK_QUERY_TAB(<CMSG_GUILD_BANK_QUERY_TAB as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03E7, size: body_size, io, } } else { a } })?)),
@@ -1276,21 +1276,21 @@ impl ClientOpcodeMessage {
             0x03EF => Ok(Self::CMSG_SET_CHANNEL_WATCH(<CMSG_SET_CHANNEL_WATCH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03EF, size: body_size, io, } } else { a } })?)),
             0x03F3 => Ok(Self::CMSG_CLEAR_CHANNEL_WATCH(<CMSG_CLEAR_CHANNEL_WATCH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03F3, size: body_size, io, } } else { a } })?)),
             0x03F8 => Ok(Self::CMSG_SPELLCLICK(<CMSG_SPELLCLICK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03F8, size: body_size, io, } } else { a } })?)),
-            0x03FD => Ok(Self::MSG_GUILD_PERMISSIONS(<MSG_GUILD_PERMISSIONS_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FD, size: body_size, io, } } else { a } })?)),
-            0x03FE => Ok(Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(<MSG_GUILD_BANK_MONEY_WITHDRAWN_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FE, size: body_size, io, } } else { a } })?)),
-            0x03FF => Ok(Self::MSG_GUILD_EVENT_LOG_QUERY(<MSG_GUILD_EVENT_LOG_QUERY_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03FF, size: body_size, io, } } else { a } })?)),
+            0x03FD => crate::util::assert_empty(body_size, opcode).map(|_| Self::MSG_GUILD_PERMISSIONS),
+            0x03FE => crate::util::assert_empty(body_size, opcode).map(|_| Self::MSG_GUILD_BANK_MONEY_WITHDRAWN),
+            0x03FF => crate::util::assert_empty(body_size, opcode).map(|_| Self::MSG_GUILD_EVENT_LOG_QUERY),
             0x0401 => Ok(Self::CMSG_GET_MIRRORIMAGE_DATA(<CMSG_GET_MIRRORIMAGE_DATA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0401, size: body_size, io, } } else { a } })?)),
-            0x0407 => Ok(Self::CMSG_KEEP_ALIVE(<CMSG_KEEP_ALIVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0407, size: body_size, io, } } else { a } })?)),
+            0x0407 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_KEEP_ALIVE),
             0x0409 => Ok(Self::CMSG_OPT_OUT_OF_LOOT(<CMSG_OPT_OUT_OF_LOOT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0409, size: body_size, io, } } else { a } })?)),
             0x040A => Ok(Self::MSG_QUERY_GUILD_BANK_TEXT(<MSG_QUERY_GUILD_BANK_TEXT_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x040A, size: body_size, io, } } else { a } })?)),
             0x040B => Ok(Self::CMSG_SET_GUILD_BANK_TEXT(<CMSG_SET_GUILD_BANK_TEXT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x040B, size: body_size, io, } } else { a } })?)),
             0x040D => Ok(Self::CMSG_GRANT_LEVEL(<CMSG_GRANT_LEVEL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x040D, size: body_size, io, } } else { a } })?)),
             0x0414 => Ok(Self::CMSG_TOTEM_DESTROYED(<CMSG_TOTEM_DESTROYED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0414, size: body_size, io, } } else { a } })?)),
-            0x0417 => Ok(Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(<CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0417, size: body_size, io, } } else { a } })?)),
+            0x0417 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY),
             0x0419 => Ok(Self::CMSG_SET_PLAYER_DECLINED_NAMES(<CMSG_SET_PLAYER_DECLINED_NAMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0419, size: body_size, io, } } else { a } })?)),
             0x0420 => Ok(Self::CMSG_ACCEPT_LEVEL_GRANT(<CMSG_ACCEPT_LEVEL_GRANT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0420, size: body_size, io, } } else { a } })?)),
             0x0426 => Ok(Self::CMSG_ALTER_APPEARANCE(<CMSG_ALTER_APPEARANCE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0426, size: body_size, io, } } else { a } })?)),
-            0x0429 => Ok(Self::CMSG_CALENDAR_GET_CALENDAR(<CMSG_CALENDAR_GET_CALENDAR as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0429, size: body_size, io, } } else { a } })?)),
+            0x0429 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_CALENDAR_GET_CALENDAR),
             0x042A => Ok(Self::CMSG_CALENDAR_GET_EVENT(<CMSG_CALENDAR_GET_EVENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x042A, size: body_size, io, } } else { a } })?)),
             0x042B => Ok(Self::CMSG_CALENDAR_GUILD_FILTER(<CMSG_CALENDAR_GUILD_FILTER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x042B, size: body_size, io, } } else { a } })?)),
             0x042C => Ok(Self::CMSG_CALENDAR_ARENA_TEAM(<CMSG_CALENDAR_ARENA_TEAM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x042C, size: body_size, io, } } else { a } })?)),
@@ -1305,13 +1305,13 @@ impl ClientOpcodeMessage {
             0x0435 => Ok(Self::CMSG_CALENDAR_EVENT_MODERATOR_STATUS(<CMSG_CALENDAR_EVENT_MODERATOR_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0435, size: body_size, io, } } else { a } })?)),
             0x0446 => Ok(Self::CMSG_CALENDAR_COMPLAIN(<CMSG_CALENDAR_COMPLAIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0446, size: body_size, io, } } else { a } })?)),
             0x0462 => Ok(Self::CMSG_UPDATE_MISSILE_TRAJECTORY(<CMSG_UPDATE_MISSILE_TRAJECTORY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0462, size: body_size, io, } } else { a } })?)),
-            0x0465 => Ok(Self::CMSG_COMPLETE_MOVIE(<CMSG_COMPLETE_MOVIE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0465, size: body_size, io, } } else { a } })?)),
+            0x0465 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_COMPLETE_MOVIE),
             0x046B => Ok(Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(<CMSG_QUERY_INSPECT_ACHIEVEMENTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x046B, size: body_size, io, } } else { a } })?)),
-            0x046D => Ok(Self::CMSG_DISMISS_CONTROLLED_VEHICLE(<CMSG_DISMISS_CONTROLLED_VEHICLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x046D, size: body_size, io, } } else { a } })?)),
+            0x046D => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_DISMISS_CONTROLLED_VEHICLE),
             0x0473 => Ok(Self::CMSG_CHAR_CUSTOMIZE(<CMSG_CHAR_CUSTOMIZE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0473, size: body_size, io, } } else { a } })?)),
-            0x0476 => Ok(Self::CMSG_REQUEST_VEHICLE_EXIT(<CMSG_REQUEST_VEHICLE_EXIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0476, size: body_size, io, } } else { a } })?)),
-            0x0477 => Ok(Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(<CMSG_REQUEST_VEHICLE_PREV_SEAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0477, size: body_size, io, } } else { a } })?)),
-            0x0478 => Ok(Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(<CMSG_REQUEST_VEHICLE_NEXT_SEAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0478, size: body_size, io, } } else { a } })?)),
+            0x0476 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_REQUEST_VEHICLE_EXIT),
+            0x0477 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_REQUEST_VEHICLE_PREV_SEAT),
+            0x0478 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT),
             0x0479 => Ok(Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(<CMSG_REQUEST_VEHICLE_SWITCH_SEAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0479, size: body_size, io, } } else { a } })?)),
             0x047A => Ok(Self::CMSG_PET_LEARN_TALENT(<CMSG_PET_LEARN_TALENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x047A, size: body_size, io, } } else { a } })?)),
             0x0481 => Ok(Self::CMSG_GAMEOBJ_REPORT_USE(<CMSG_GAMEOBJ_REPORT_USE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0481, size: body_size, io, } } else { a } })?)),
@@ -1320,7 +1320,7 @@ impl ClientOpcodeMessage {
             0x048F => Ok(Self::CMSG_AUCTION_LIST_PENDING_SALES(<CMSG_AUCTION_LIST_PENDING_SALES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x048F, size: body_size, io, } } else { a } })?)),
             0x0493 => Ok(Self::CMSG_ENABLETAXI(<CMSG_ENABLETAXI as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0493, size: body_size, io, } } else { a } })?)),
             0x049B => Ok(Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(<CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049B, size: body_size, io, } } else { a } })?)),
-            0x049C => Ok(Self::CMSG_HEARTH_AND_RESURRECT(<CMSG_HEARTH_AND_RESURRECT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049C, size: body_size, io, } } else { a } })?)),
+            0x049C => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_HEARTH_AND_RESURRECT),
             0x04A8 => Ok(Self::CMSG_PLAYER_VEHICLE_ENTER(<CMSG_PLAYER_VEHICLE_ENTER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04A8, size: body_size, io, } } else { a } })?)),
             0x04A9 => Ok(Self::CMSG_CONTROLLER_EJECT_PASSENGER(<CMSG_CONTROLLER_EJECT_PASSENGER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04A9, size: body_size, io, } } else { a } })?)),
             0x04B3 => Ok(Self::CMSG_ITEM_REFUND_INFO(<CMSG_ITEM_REFUND_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04B3, size: body_size, io, } } else { a } })?)),
@@ -1339,11 +1339,11 @@ impl ClientOpcodeMessage {
             0x04E2 => Ok(Self::CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE(<CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04E2, size: body_size, io, } } else { a } })?)),
             0x04E7 => Ok(Self::CMSG_BATTLEFIELD_MGR_EXIT_REQUEST(<CMSG_BATTLEFIELD_MGR_EXIT_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04E7, size: body_size, io, } } else { a } })?)),
             0x04EB => Ok(Self::MSG_SET_RAID_DIFFICULTY(<MSG_SET_RAID_DIFFICULTY_Client as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EB, size: body_size, io, } } else { a } })?)),
-            0x04F0 => Ok(Self::CMSG_GMRESPONSE_RESOLVE(<CMSG_GMRESPONSE_RESOLVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F0, size: body_size, io, } } else { a } })?)),
-            0x04F6 => Ok(Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(<CMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F6, size: body_size, io, } } else { a } })?)),
+            0x04F0 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_GMRESPONSE_RESOLVE),
+            0x04F6 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE),
             0x04F8 => Ok(Self::CMSG_CHAR_RACE_CHANGE(<CMSG_CHAR_RACE_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F8, size: body_size, io, } } else { a } })?)),
-            0x04FF => Ok(Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(<CMSG_READY_FOR_ACCOUNT_DATA_TIMES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FF, size: body_size, io, } } else { a } })?)),
-            0x0500 => Ok(Self::CMSG_QUERY_QUESTS_COMPLETED(<CMSG_QUERY_QUESTS_COMPLETED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0500, size: body_size, io, } } else { a } })?)),
+            0x04FF => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES),
+            0x0500 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_QUERY_QUESTS_COMPLETED),
             0x0502 => Ok(Self::CMSG_GM_REPORT_LAG(<CMSG_GM_REPORT_LAG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0502, size: body_size, io, } } else { a } })?)),
             0x0517 => Ok(Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(<CMSG_MOVE_SET_COLLISION_HGT_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0517, size: body_size, io, } } else { a } })?)),
             _ => Err(crate::errors::ExpectedOpcodeError::Opcode{ opcode, name: opcode_to_name(opcode), size: body_size }),
@@ -1439,7 +1439,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_SET_FACING(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_SET_PITCH(c) => c.write_encrypted_client(w, e),
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_client(w, e),
+            Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.write_encrypted_client(w, e),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_HOVER(c) => c.write_encrypted_client(w, e),
             Self::MSG_PETITION_DECLINE(c) => c.write_encrypted_client(w, e),
@@ -1451,18 +1451,18 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.write_encrypted_client(w, e),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_BOOTME(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CALENDAR_GET_NUM_PENDING => CMSG_CALENDAR_GET_NUM_PENDING{}.write_encrypted_client(w, e),
+            Self::CMSG_BOOTME => CMSG_BOOTME{}.write_encrypted_client(w, e),
             Self::CMSG_DBLOOKUP(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WORLD_TELEPORT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_CREATE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_CHAR_ENUM(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CHAR_ENUM => CMSG_CHAR_ENUM{}.write_encrypted_client(w, e),
             Self::CMSG_CHAR_DELETE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PLAYER_LOGIN(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_PLAYER_LOGOUT(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_LOGOUT_REQUEST(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_LOGOUT_CANCEL(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_PLAYER_LOGOUT => CMSG_PLAYER_LOGOUT{}.write_encrypted_client(w, e),
+            Self::CMSG_LOGOUT_REQUEST => CMSG_LOGOUT_REQUEST{}.write_encrypted_client(w, e),
+            Self::CMSG_LOGOUT_CANCEL => CMSG_LOGOUT_CANCEL{}.write_encrypted_client(w, e),
             Self::CMSG_NAME_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PET_NAME_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_QUERY(c) => c.write_encrypted_client(w, e),
@@ -1480,25 +1480,25 @@ impl ClientOpcodeMessage {
             Self::CMSG_ADD_IGNORE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_DEL_IGNORE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GROUP_INVITE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GROUP_CANCEL(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GROUP_ACCEPT(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GROUP_DECLINE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GROUP_CANCEL => CMSG_GROUP_CANCEL{}.write_encrypted_client(w, e),
+            Self::CMSG_GROUP_ACCEPT => CMSG_GROUP_ACCEPT{}.write_encrypted_client(w, e),
+            Self::CMSG_GROUP_DECLINE => CMSG_GROUP_DECLINE{}.write_encrypted_client(w, e),
             Self::CMSG_GROUP_UNINVITE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GROUP_SET_LEADER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOOT_METHOD(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GROUP_DISBAND(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GROUP_DISBAND => CMSG_GROUP_DISBAND{}.write_encrypted_client(w, e),
             Self::CMSG_GUILD_CREATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_INVITE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GUILD_ACCEPT(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GUILD_DECLINE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GUILD_INFO(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GUILD_ROSTER(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GUILD_ACCEPT => CMSG_GUILD_ACCEPT{}.write_encrypted_client(w, e),
+            Self::CMSG_GUILD_DECLINE => CMSG_GUILD_DECLINE{}.write_encrypted_client(w, e),
+            Self::CMSG_GUILD_INFO => CMSG_GUILD_INFO{}.write_encrypted_client(w, e),
+            Self::CMSG_GUILD_ROSTER => CMSG_GUILD_ROSTER{}.write_encrypted_client(w, e),
             Self::CMSG_GUILD_PROMOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_DEMOTE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GUILD_LEAVE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GUILD_LEAVE => CMSG_GUILD_LEAVE{}.write_encrypted_client(w, e),
             Self::CMSG_GUILD_REMOVE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GUILD_DISBAND(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GUILD_DISBAND => CMSG_GUILD_DISBAND{}.write_encrypted_client(w, e),
             Self::CMSG_GUILD_LEADER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_MOTD(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MESSAGECHAT(c) => c.write_encrypted_client(w, e),
@@ -1533,11 +1533,11 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_KNOCK_BACK_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_HOVER_ACK(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_COMPLETE_CINEMATIC(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_NEXT_CINEMATIC_CAMERA => CMSG_NEXT_CINEMATIC_CAMERA{}.write_encrypted_client(w, e),
+            Self::CMSG_COMPLETE_CINEMATIC => CMSG_COMPLETE_CINEMATIC{}.write_encrypted_client(w, e),
             Self::CMSG_TUTORIAL_FLAG(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_TUTORIAL_CLEAR(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_TUTORIAL_RESET(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_TUTORIAL_CLEAR => CMSG_TUTORIAL_CLEAR{}.write_encrypted_client(w, e),
+            Self::CMSG_TUTORIAL_RESET => CMSG_TUTORIAL_RESET{}.write_encrypted_client(w, e),
             Self::CMSG_STANDSTATECHANGE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_EMOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TEXT_EMOTE(c) => c.write_encrypted_client(w, e),
@@ -1551,12 +1551,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_DESTROYITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_INSPECT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_INITIATE_TRADE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_BEGIN_TRADE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_BUSY_TRADE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_IGNORE_TRADE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_BEGIN_TRADE => CMSG_BEGIN_TRADE{}.write_encrypted_client(w, e),
+            Self::CMSG_BUSY_TRADE => CMSG_BUSY_TRADE{}.write_encrypted_client(w, e),
+            Self::CMSG_IGNORE_TRADE => CMSG_IGNORE_TRADE{}.write_encrypted_client(w, e),
             Self::CMSG_ACCEPT_TRADE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_UNACCEPT_TRADE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_CANCEL_TRADE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_UNACCEPT_TRADE => CMSG_UNACCEPT_TRADE{}.write_encrypted_client(w, e),
+            Self::CMSG_CANCEL_TRADE => CMSG_CANCEL_TRADE{}.write_encrypted_client(w, e),
             Self::CMSG_SET_TRADE_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CLEAR_TRADE_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_TRADE_GOLD(c) => c.write_encrypted_client(w, e),
@@ -1570,15 +1570,15 @@ impl ClientOpcodeMessage {
             Self::CMSG_DELETEEQUIPMENT_SET(c) => c.write_encrypted_client(w, e),
             Self::CMSG_INSTANCE_LOCK_RESPONSE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ATTACKSWING(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_ATTACKSTOP(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_REPOP_REQUEST(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_ATTACKSTOP => CMSG_ATTACKSTOP{}.write_encrypted_client(w, e),
+            Self::CMSG_REPOP_REQUEST => CMSG_REPOP_REQUEST{}.write_encrypted_client(w, e),
             Self::CMSG_RESURRECT_RESPONSE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOOT(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_LOOT_MONEY(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_LOOT_MONEY => CMSG_LOOT_MONEY{}.write_encrypted_client(w, e),
             Self::CMSG_LOOT_RELEASE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_DUEL_ACCEPTED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_DUEL_CANCELLED(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_MOUNTSPECIAL_ANIM(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_MOUNTSPECIAL_ANIM => CMSG_MOUNTSPECIAL_ANIM{}.write_encrypted_client(w, e),
             Self::CMSG_PET_SET_ACTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PET_ACTION(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PET_ABANDON(c) => c.write_encrypted_client(w, e),
@@ -1589,12 +1589,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_HELLO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH => CMSG_QUESTGIVER_QUEST_AUTOLAUNCH{}.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_REQUEST_REWARD(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTGIVER_CHOOSE_REWARD(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_QUESTGIVER_CANCEL(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_QUESTGIVER_CANCEL => CMSG_QUESTGIVER_CANCEL{}.write_encrypted_client(w, e),
             Self::CMSG_QUESTLOG_SWAP_QUEST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUESTLOG_REMOVE_QUEST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_QUEST_CONFIRM_ACCEPT(c) => c.write_encrypted_client(w, e),
@@ -1620,7 +1620,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUG(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PLAYED_TIME(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_QUERY_TIME(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_QUERY_TIME => CMSG_QUERY_TIME{}.write_encrypted_client(w, e),
             Self::CMSG_RECLAIM_CORPSE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WRAP_ITEM(c) => c.write_encrypted_client(w, e),
             Self::MSG_MINIMAP_PING(c) => c.write_encrypted_client(w, e),
@@ -1637,16 +1637,16 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_UPDATETEXT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GMTICKET_GETTICKET(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_UNLEARN_TALENTS(c) => c.write_encrypted_client(w, e),
-            Self::MSG_CORPSE_QUERY(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GMTICKET_DELETETICKET(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GMTICKET_GETTICKET => CMSG_GMTICKET_GETTICKET{}.write_encrypted_client(w, e),
+            Self::CMSG_UNLEARN_TALENTS => CMSG_UNLEARN_TALENTS{}.write_encrypted_client(w, e),
+            Self::MSG_CORPSE_QUERY => MSG_CORPSE_QUERY_Client{}.write_encrypted_client(w, e),
+            Self::CMSG_GMTICKET_DELETETICKET => CMSG_GMTICKET_DELETETICKET{}.write_encrypted_client(w, e),
+            Self::CMSG_GMTICKET_SYSTEMSTATUS => CMSG_GMTICKET_SYSTEMSTATUS{}.write_encrypted_client(w, e),
             Self::CMSG_SPIRIT_HEALER_ACTIVATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAT_IGNORED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_RANK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_ADD_RANK(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GUILD_DEL_RANK(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GUILD_DEL_RANK => CMSG_GUILD_DEL_RANK{}.write_encrypted_client(w, e),
             Self::CMSG_GUILD_SET_PUBLIC_NOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SEND_MAIL(c) => c.write_encrypted_client(w, e),
@@ -1671,58 +1671,58 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_AMMO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_ACTIVE_MOVER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PET_CANCEL_AURA(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_CANCEL_AUTO_REPEAT_SPELL(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CANCEL_AUTO_REPEAT_SPELL => CMSG_CANCEL_AUTO_REPEAT_SPELL{}.write_encrypted_client(w, e),
             Self::MSG_LIST_STABLED_PETS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_STABLE_PET(c) => c.write_encrypted_client(w, e),
             Self::CMSG_UNSTABLE_PET(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUY_STABLE_SLOT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_STABLE_SWAP_PET(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_REQUEST_PET_INFO(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_REQUEST_PET_INFO => CMSG_REQUEST_PET_INFO{}.write_encrypted_client(w, e),
             Self::CMSG_FAR_SIGHT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GROUP_CHANGE_SUB_GROUP(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GROUP_SWAP_SUB_GROUP(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AUTOBANK_ITEM(c) => c.write_encrypted_client(w, e),
-            Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GROUP_RAID_CONVERT(c) => c.write_encrypted_client(w, e),
+            Self::MSG_QUERY_NEXT_MAIL_TIME => MSG_QUERY_NEXT_MAIL_TIME_Client{}.write_encrypted_client(w, e),
+            Self::CMSG_GROUP_RAID_CONVERT => CMSG_GROUP_RAID_CONVERT{}.write_encrypted_client(w, e),
             Self::CMSG_GROUP_ASSISTANT_LEADER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BUYBACK_ITEM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_SAVED_INSTANCE_EXTEND(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_LFG_GET_STATUS(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GMTICKETSYSTEM_TOGGLE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_CANCEL_GROWTH_AURA(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_LFG_GET_STATUS => CMSG_LFG_GET_STATUS{}.write_encrypted_client(w, e),
+            Self::CMSG_GMTICKETSYSTEM_TOGGLE => CMSG_GMTICKETSYSTEM_TOGGLE{}.write_encrypted_client(w, e),
+            Self::CMSG_CANCEL_GROWTH_AURA => CMSG_CANCEL_GROWTH_AURA{}.write_encrypted_client(w, e),
             Self::CMSG_LOOT_ROLL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_REPAIR_ITEM(c) => c.write_encrypted_client(w, e),
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SUMMON_RESPONSE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_SELF_RES(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_TOGGLE_HELM(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_TOGGLE_CLOAK(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_SELF_RES => CMSG_SELF_RES{}.write_encrypted_client(w, e),
+            Self::CMSG_TOGGLE_HELM => CMSG_TOGGLE_HELM{}.write_encrypted_client(w, e),
+            Self::CMSG_TOGGLE_CLOAK => CMSG_TOGGLE_CLOAK{}.write_encrypted_client(w, e),
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ITEM_NAME_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHAR_RENAME(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_FALL_RESET(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_REQUEST_RAID_INFO(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_REQUEST_RAID_INFO => CMSG_REQUEST_RAID_INFO{}.write_encrypted_client(w, e),
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_BATTLEFIELD_STATUS(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_BATTLEFIELD_STATUS => CMSG_BATTLEFIELD_STATUS{}.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_PORT(c) => c.write_encrypted_client(w, e),
             Self::MSG_INSPECT_HONOR_STATS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
-            Self::MSG_PVP_LOG_DATA(c) => c.write_encrypted_client(w, e),
+            Self::MSG_PVP_LOG_DATA => MSG_PVP_LOG_DATA_Client{}.write_encrypted_client(w, e),
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.write_encrypted_client(w, e),
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_WARDEN_DATA(c) => c.write_encrypted_client(w, e),
-            Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_encrypted_client(w, e),
+            Self::MSG_BATTLEGROUND_PLAYER_POSITIONS => MSG_BATTLEGROUND_PLAYER_POSITIONS_Client{}.write_encrypted_client(w, e),
             Self::CMSG_PET_STOP_ATTACK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PET_UNLEARN(c) => c.write_encrypted_client(w, e),
@@ -1731,7 +1731,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_WATCHED_FACTION(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_RESET_INSTANCES(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_RESET_INSTANCES => CMSG_RESET_INSTANCES{}.write_encrypted_client(w, e),
             Self::MSG_RAID_TARGET_UPDATE(c) => c.write_encrypted_client(w, e),
             Self::MSG_RAID_READY_CHECK(c) => c.write_encrypted_client(w, e),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_encrypted_client(w, e),
@@ -1742,26 +1742,26 @@ impl ClientOpcodeMessage {
             Self::CMSG_SOCKET_GEMS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ARENA_TEAM_ROSTER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ARENA_TEAM_INVITE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_ARENA_TEAM_ACCEPT(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_ARENA_TEAM_DECLINE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_ARENA_TEAM_ACCEPT => CMSG_ARENA_TEAM_ACCEPT{}.write_encrypted_client(w, e),
+            Self::CMSG_ARENA_TEAM_DECLINE => CMSG_ARENA_TEAM_DECLINE{}.write_encrypted_client(w, e),
             Self::CMSG_ARENA_TEAM_LEAVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ARENA_TEAM_REMOVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ARENA_TEAM_DISBAND(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ARENA_TEAM_LEADER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEMASTER_JOIN_ARENA(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LFG_JOIN(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_LFG_LEAVE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_LFG_LEAVE => CMSG_LFG_LEAVE{}.write_encrypted_client(w, e),
             Self::CMSG_SEARCH_LFG_JOIN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SEARCH_LFG_LEAVE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LFG_PROPOSAL_RESULT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_LFG_COMMENT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LFG_SET_ROLES(c) => c.write_encrypted_client(w, e),
             Self::CMSG_LFG_SET_BOOT_VOTE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST => CMSG_LFD_PLAYER_LOCK_INFO_REQUEST{}.write_encrypted_client(w, e),
             Self::CMSG_LFG_TELEPORT(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST => CMSG_LFD_PARTY_LOCK_INFO_REQUEST{}.write_encrypted_client(w, e),
             Self::CMSG_SET_TITLE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_CANCEL_MOUNT_AURA(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CANCEL_MOUNT_AURA => CMSG_CANCEL_MOUNT_AURA{}.write_encrypted_client(w, e),
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.write_encrypted_client(w, e),
@@ -1774,12 +1774,12 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_encrypted_client(w, e),
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.write_encrypted_client(w, e),
-            Self::MSG_RAID_READY_CHECK_FINISHED(c) => c.write_encrypted_client(w, e),
+            Self::MSG_RAID_READY_CHECK_FINISHED => MSG_RAID_READY_CHECK_FINISHED_Client{}.write_encrypted_client(w, e),
             Self::CMSG_COMPLAIN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GET_CHANNEL_MEMBER_COUNT(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_CHANNEL_VOICE_ON(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CHANNEL_VOICE_ON => CMSG_CHANNEL_VOICE_ON{}.write_encrypted_client(w, e),
             Self::CMSG_REPORT_PVP_AFK(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_BANKER_ACTIVATE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GUILD_BANK_QUERY_TAB(c) => c.write_encrypted_client(w, e),
@@ -1792,21 +1792,21 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_CHANNEL_WATCH(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SPELLCLICK(c) => c.write_encrypted_client(w, e),
-            Self::MSG_GUILD_PERMISSIONS(c) => c.write_encrypted_client(w, e),
-            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.write_encrypted_client(w, e),
-            Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_encrypted_client(w, e),
+            Self::MSG_GUILD_PERMISSIONS => MSG_GUILD_PERMISSIONS_Client{}.write_encrypted_client(w, e),
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN => MSG_GUILD_BANK_MONEY_WITHDRAWN_Client{}.write_encrypted_client(w, e),
+            Self::MSG_GUILD_EVENT_LOG_QUERY => MSG_GUILD_EVENT_LOG_QUERY_Client{}.write_encrypted_client(w, e),
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_KEEP_ALIVE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_KEEP_ALIVE => CMSG_KEEP_ALIVE{}.write_encrypted_client(w, e),
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.write_encrypted_client(w, e),
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GRANT_LEVEL(c) => c.write_encrypted_client(w, e),
             Self::CMSG_TOTEM_DESTROYED(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY => CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY{}.write_encrypted_client(w, e),
             Self::CMSG_SET_PLAYER_DECLINED_NAMES(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ACCEPT_LEVEL_GRANT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ALTER_APPEARANCE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_CALENDAR_GET_CALENDAR(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_CALENDAR_GET_CALENDAR => CMSG_CALENDAR_GET_CALENDAR{}.write_encrypted_client(w, e),
             Self::CMSG_CALENDAR_GET_EVENT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CALENDAR_GUILD_FILTER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CALENDAR_ARENA_TEAM(c) => c.write_encrypted_client(w, e),
@@ -1821,13 +1821,13 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_EVENT_MODERATOR_STATUS(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CALENDAR_COMPLAIN(c) => c.write_encrypted_client(w, e),
             Self::CMSG_UPDATE_MISSILE_TRAJECTORY(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_COMPLETE_MOVIE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_COMPLETE_MOVIE => CMSG_COMPLETE_MOVIE{}.write_encrypted_client(w, e),
             Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_DISMISS_CONTROLLED_VEHICLE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_DISMISS_CONTROLLED_VEHICLE => CMSG_DISMISS_CONTROLLED_VEHICLE{}.write_encrypted_client(w, e),
             Self::CMSG_CHAR_CUSTOMIZE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_REQUEST_VEHICLE_EXIT(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_REQUEST_VEHICLE_EXIT => CMSG_REQUEST_VEHICLE_EXIT{}.write_encrypted_client(w, e),
+            Self::CMSG_REQUEST_VEHICLE_PREV_SEAT => CMSG_REQUEST_VEHICLE_PREV_SEAT{}.write_encrypted_client(w, e),
+            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT => CMSG_REQUEST_VEHICLE_NEXT_SEAT{}.write_encrypted_client(w, e),
             Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_PET_LEARN_TALENT(c) => c.write_encrypted_client(w, e),
             Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.write_encrypted_client(w, e),
@@ -1836,7 +1836,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUCTION_LIST_PENDING_SALES(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ENABLETAXI(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_HEARTH_AND_RESURRECT(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_HEARTH_AND_RESURRECT => CMSG_HEARTH_AND_RESURRECT{}.write_encrypted_client(w, e),
             Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_CONTROLLER_EJECT_PASSENGER(c) => c.write_encrypted_client(w, e),
             Self::CMSG_ITEM_REFUND_INFO(c) => c.write_encrypted_client(w, e),
@@ -1855,11 +1855,11 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE(c) => c.write_encrypted_client(w, e),
             Self::CMSG_BATTLEFIELD_MGR_EXIT_REQUEST(c) => c.write_encrypted_client(w, e),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_GMRESPONSE_RESOLVE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_GMRESPONSE_RESOLVE => CMSG_GMRESPONSE_RESOLVE{}.write_encrypted_client(w, e),
+            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE => CMSG_WORLD_STATE_UI_TIMER_UPDATE{}.write_encrypted_client(w, e),
             Self::CMSG_CHAR_RACE_CHANGE(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_encrypted_client(w, e),
-            Self::CMSG_QUERY_QUESTS_COMPLETED(c) => c.write_encrypted_client(w, e),
+            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES => CMSG_READY_FOR_ACCOUNT_DATA_TIMES{}.write_encrypted_client(w, e),
+            Self::CMSG_QUERY_QUESTS_COMPLETED => CMSG_QUERY_QUESTS_COMPLETED{}.write_encrypted_client(w, e),
             Self::CMSG_GM_REPORT_LAG(c) => c.write_encrypted_client(w, e),
             Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(c) => c.write_encrypted_client(w, e),
         }
@@ -1888,7 +1888,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_SET_FACING(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_SET_PITCH(c) => c.write_unencrypted_client(w),
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_client(w),
+            Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.write_unencrypted_client(w),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_HOVER(c) => c.write_unencrypted_client(w),
             Self::MSG_PETITION_DECLINE(c) => c.write_unencrypted_client(w),
@@ -1900,18 +1900,18 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.write_unencrypted_client(w),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_client(w),
-            Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.write_unencrypted_client(w),
-            Self::CMSG_BOOTME(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CALENDAR_GET_NUM_PENDING => CMSG_CALENDAR_GET_NUM_PENDING{}.write_unencrypted_client(w),
+            Self::CMSG_BOOTME => CMSG_BOOTME{}.write_unencrypted_client(w),
             Self::CMSG_DBLOOKUP(c) => c.write_unencrypted_client(w),
             Self::CMSG_WORLD_TELEPORT(c) => c.write_unencrypted_client(w),
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_CREATE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_CHAR_ENUM(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CHAR_ENUM => CMSG_CHAR_ENUM{}.write_unencrypted_client(w),
             Self::CMSG_CHAR_DELETE(c) => c.write_unencrypted_client(w),
             Self::CMSG_PLAYER_LOGIN(c) => c.write_unencrypted_client(w),
-            Self::CMSG_PLAYER_LOGOUT(c) => c.write_unencrypted_client(w),
-            Self::CMSG_LOGOUT_REQUEST(c) => c.write_unencrypted_client(w),
-            Self::CMSG_LOGOUT_CANCEL(c) => c.write_unencrypted_client(w),
+            Self::CMSG_PLAYER_LOGOUT => CMSG_PLAYER_LOGOUT{}.write_unencrypted_client(w),
+            Self::CMSG_LOGOUT_REQUEST => CMSG_LOGOUT_REQUEST{}.write_unencrypted_client(w),
+            Self::CMSG_LOGOUT_CANCEL => CMSG_LOGOUT_CANCEL{}.write_unencrypted_client(w),
             Self::CMSG_NAME_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_PET_NAME_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_QUERY(c) => c.write_unencrypted_client(w),
@@ -1929,25 +1929,25 @@ impl ClientOpcodeMessage {
             Self::CMSG_ADD_IGNORE(c) => c.write_unencrypted_client(w),
             Self::CMSG_DEL_IGNORE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GROUP_INVITE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GROUP_CANCEL(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GROUP_ACCEPT(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GROUP_DECLINE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GROUP_CANCEL => CMSG_GROUP_CANCEL{}.write_unencrypted_client(w),
+            Self::CMSG_GROUP_ACCEPT => CMSG_GROUP_ACCEPT{}.write_unencrypted_client(w),
+            Self::CMSG_GROUP_DECLINE => CMSG_GROUP_DECLINE{}.write_unencrypted_client(w),
             Self::CMSG_GROUP_UNINVITE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.write_unencrypted_client(w),
             Self::CMSG_GROUP_SET_LEADER(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOOT_METHOD(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GROUP_DISBAND(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GROUP_DISBAND => CMSG_GROUP_DISBAND{}.write_unencrypted_client(w),
             Self::CMSG_GUILD_CREATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_INVITE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GUILD_ACCEPT(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GUILD_DECLINE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GUILD_INFO(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GUILD_ROSTER(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GUILD_ACCEPT => CMSG_GUILD_ACCEPT{}.write_unencrypted_client(w),
+            Self::CMSG_GUILD_DECLINE => CMSG_GUILD_DECLINE{}.write_unencrypted_client(w),
+            Self::CMSG_GUILD_INFO => CMSG_GUILD_INFO{}.write_unencrypted_client(w),
+            Self::CMSG_GUILD_ROSTER => CMSG_GUILD_ROSTER{}.write_unencrypted_client(w),
             Self::CMSG_GUILD_PROMOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_DEMOTE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GUILD_LEAVE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GUILD_LEAVE => CMSG_GUILD_LEAVE{}.write_unencrypted_client(w),
             Self::CMSG_GUILD_REMOVE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GUILD_DISBAND(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GUILD_DISBAND => CMSG_GUILD_DISBAND{}.write_unencrypted_client(w),
             Self::CMSG_GUILD_LEADER(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_MOTD(c) => c.write_unencrypted_client(w),
             Self::CMSG_MESSAGECHAT(c) => c.write_unencrypted_client(w),
@@ -1982,11 +1982,11 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_KNOCK_BACK_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_HOVER_ACK(c) => c.write_unencrypted_client(w),
-            Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.write_unencrypted_client(w),
-            Self::CMSG_COMPLETE_CINEMATIC(c) => c.write_unencrypted_client(w),
+            Self::CMSG_NEXT_CINEMATIC_CAMERA => CMSG_NEXT_CINEMATIC_CAMERA{}.write_unencrypted_client(w),
+            Self::CMSG_COMPLETE_CINEMATIC => CMSG_COMPLETE_CINEMATIC{}.write_unencrypted_client(w),
             Self::CMSG_TUTORIAL_FLAG(c) => c.write_unencrypted_client(w),
-            Self::CMSG_TUTORIAL_CLEAR(c) => c.write_unencrypted_client(w),
-            Self::CMSG_TUTORIAL_RESET(c) => c.write_unencrypted_client(w),
+            Self::CMSG_TUTORIAL_CLEAR => CMSG_TUTORIAL_CLEAR{}.write_unencrypted_client(w),
+            Self::CMSG_TUTORIAL_RESET => CMSG_TUTORIAL_RESET{}.write_unencrypted_client(w),
             Self::CMSG_STANDSTATECHANGE(c) => c.write_unencrypted_client(w),
             Self::CMSG_EMOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_TEXT_EMOTE(c) => c.write_unencrypted_client(w),
@@ -2000,12 +2000,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_DESTROYITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_INSPECT(c) => c.write_unencrypted_client(w),
             Self::CMSG_INITIATE_TRADE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_BEGIN_TRADE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_BUSY_TRADE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_IGNORE_TRADE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_BEGIN_TRADE => CMSG_BEGIN_TRADE{}.write_unencrypted_client(w),
+            Self::CMSG_BUSY_TRADE => CMSG_BUSY_TRADE{}.write_unencrypted_client(w),
+            Self::CMSG_IGNORE_TRADE => CMSG_IGNORE_TRADE{}.write_unencrypted_client(w),
             Self::CMSG_ACCEPT_TRADE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_UNACCEPT_TRADE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_CANCEL_TRADE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_UNACCEPT_TRADE => CMSG_UNACCEPT_TRADE{}.write_unencrypted_client(w),
+            Self::CMSG_CANCEL_TRADE => CMSG_CANCEL_TRADE{}.write_unencrypted_client(w),
             Self::CMSG_SET_TRADE_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_CLEAR_TRADE_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_TRADE_GOLD(c) => c.write_unencrypted_client(w),
@@ -2019,15 +2019,15 @@ impl ClientOpcodeMessage {
             Self::CMSG_DELETEEQUIPMENT_SET(c) => c.write_unencrypted_client(w),
             Self::CMSG_INSTANCE_LOCK_RESPONSE(c) => c.write_unencrypted_client(w),
             Self::CMSG_ATTACKSWING(c) => c.write_unencrypted_client(w),
-            Self::CMSG_ATTACKSTOP(c) => c.write_unencrypted_client(w),
-            Self::CMSG_REPOP_REQUEST(c) => c.write_unencrypted_client(w),
+            Self::CMSG_ATTACKSTOP => CMSG_ATTACKSTOP{}.write_unencrypted_client(w),
+            Self::CMSG_REPOP_REQUEST => CMSG_REPOP_REQUEST{}.write_unencrypted_client(w),
             Self::CMSG_RESURRECT_RESPONSE(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOOT(c) => c.write_unencrypted_client(w),
-            Self::CMSG_LOOT_MONEY(c) => c.write_unencrypted_client(w),
+            Self::CMSG_LOOT_MONEY => CMSG_LOOT_MONEY{}.write_unencrypted_client(w),
             Self::CMSG_LOOT_RELEASE(c) => c.write_unencrypted_client(w),
             Self::CMSG_DUEL_ACCEPTED(c) => c.write_unencrypted_client(w),
             Self::CMSG_DUEL_CANCELLED(c) => c.write_unencrypted_client(w),
-            Self::CMSG_MOUNTSPECIAL_ANIM(c) => c.write_unencrypted_client(w),
+            Self::CMSG_MOUNTSPECIAL_ANIM => CMSG_MOUNTSPECIAL_ANIM{}.write_unencrypted_client(w),
             Self::CMSG_PET_SET_ACTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_PET_ACTION(c) => c.write_unencrypted_client(w),
             Self::CMSG_PET_ABANDON(c) => c.write_unencrypted_client(w),
@@ -2038,12 +2038,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_HELLO(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.write_unencrypted_client(w),
-            Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH(c) => c.write_unencrypted_client(w),
+            Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH => CMSG_QUESTGIVER_QUEST_AUTOLAUNCH{}.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_REQUEST_REWARD(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTGIVER_CHOOSE_REWARD(c) => c.write_unencrypted_client(w),
-            Self::CMSG_QUESTGIVER_CANCEL(c) => c.write_unencrypted_client(w),
+            Self::CMSG_QUESTGIVER_CANCEL => CMSG_QUESTGIVER_CANCEL{}.write_unencrypted_client(w),
             Self::CMSG_QUESTLOG_SWAP_QUEST(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUESTLOG_REMOVE_QUEST(c) => c.write_unencrypted_client(w),
             Self::CMSG_QUEST_CONFIRM_ACCEPT(c) => c.write_unencrypted_client(w),
@@ -2069,7 +2069,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUG(c) => c.write_unencrypted_client(w),
             Self::CMSG_PLAYED_TIME(c) => c.write_unencrypted_client(w),
-            Self::CMSG_QUERY_TIME(c) => c.write_unencrypted_client(w),
+            Self::CMSG_QUERY_TIME => CMSG_QUERY_TIME{}.write_unencrypted_client(w),
             Self::CMSG_RECLAIM_CORPSE(c) => c.write_unencrypted_client(w),
             Self::CMSG_WRAP_ITEM(c) => c.write_unencrypted_client(w),
             Self::MSG_MINIMAP_PING(c) => c.write_unencrypted_client(w),
@@ -2086,16 +2086,16 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_UPDATETEXT(c) => c.write_unencrypted_client(w),
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.write_unencrypted_client(w),
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GMTICKET_GETTICKET(c) => c.write_unencrypted_client(w),
-            Self::CMSG_UNLEARN_TALENTS(c) => c.write_unencrypted_client(w),
-            Self::MSG_CORPSE_QUERY(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GMTICKET_DELETETICKET(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GMTICKET_GETTICKET => CMSG_GMTICKET_GETTICKET{}.write_unencrypted_client(w),
+            Self::CMSG_UNLEARN_TALENTS => CMSG_UNLEARN_TALENTS{}.write_unencrypted_client(w),
+            Self::MSG_CORPSE_QUERY => MSG_CORPSE_QUERY_Client{}.write_unencrypted_client(w),
+            Self::CMSG_GMTICKET_DELETETICKET => CMSG_GMTICKET_DELETETICKET{}.write_unencrypted_client(w),
+            Self::CMSG_GMTICKET_SYSTEMSTATUS => CMSG_GMTICKET_SYSTEMSTATUS{}.write_unencrypted_client(w),
             Self::CMSG_SPIRIT_HEALER_ACTIVATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAT_IGNORED(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_RANK(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_ADD_RANK(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GUILD_DEL_RANK(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GUILD_DEL_RANK => CMSG_GUILD_DEL_RANK{}.write_unencrypted_client(w),
             Self::CMSG_GUILD_SET_PUBLIC_NOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.write_unencrypted_client(w),
             Self::CMSG_SEND_MAIL(c) => c.write_unencrypted_client(w),
@@ -2120,58 +2120,58 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_AMMO(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_ACTIVE_MOVER(c) => c.write_unencrypted_client(w),
             Self::CMSG_PET_CANCEL_AURA(c) => c.write_unencrypted_client(w),
-            Self::CMSG_CANCEL_AUTO_REPEAT_SPELL(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CANCEL_AUTO_REPEAT_SPELL => CMSG_CANCEL_AUTO_REPEAT_SPELL{}.write_unencrypted_client(w),
             Self::MSG_LIST_STABLED_PETS(c) => c.write_unencrypted_client(w),
             Self::CMSG_STABLE_PET(c) => c.write_unencrypted_client(w),
             Self::CMSG_UNSTABLE_PET(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUY_STABLE_SLOT(c) => c.write_unencrypted_client(w),
             Self::CMSG_STABLE_SWAP_PET(c) => c.write_unencrypted_client(w),
-            Self::CMSG_REQUEST_PET_INFO(c) => c.write_unencrypted_client(w),
+            Self::CMSG_REQUEST_PET_INFO => CMSG_REQUEST_PET_INFO{}.write_unencrypted_client(w),
             Self::CMSG_FAR_SIGHT(c) => c.write_unencrypted_client(w),
             Self::CMSG_GROUP_CHANGE_SUB_GROUP(c) => c.write_unencrypted_client(w),
             Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c) => c.write_unencrypted_client(w),
             Self::CMSG_GROUP_SWAP_SUB_GROUP(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_AUTOBANK_ITEM(c) => c.write_unencrypted_client(w),
-            Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GROUP_RAID_CONVERT(c) => c.write_unencrypted_client(w),
+            Self::MSG_QUERY_NEXT_MAIL_TIME => MSG_QUERY_NEXT_MAIL_TIME_Client{}.write_unencrypted_client(w),
+            Self::CMSG_GROUP_RAID_CONVERT => CMSG_GROUP_RAID_CONVERT{}.write_unencrypted_client(w),
             Self::CMSG_GROUP_ASSISTANT_LEADER(c) => c.write_unencrypted_client(w),
             Self::CMSG_BUYBACK_ITEM(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_SAVED_INSTANCE_EXTEND(c) => c.write_unencrypted_client(w),
-            Self::CMSG_LFG_GET_STATUS(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GMTICKETSYSTEM_TOGGLE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_CANCEL_GROWTH_AURA(c) => c.write_unencrypted_client(w),
+            Self::CMSG_LFG_GET_STATUS => CMSG_LFG_GET_STATUS{}.write_unencrypted_client(w),
+            Self::CMSG_GMTICKETSYSTEM_TOGGLE => CMSG_GMTICKETSYSTEM_TOGGLE{}.write_unencrypted_client(w),
+            Self::CMSG_CANCEL_GROWTH_AURA => CMSG_CANCEL_GROWTH_AURA{}.write_unencrypted_client(w),
             Self::CMSG_LOOT_ROLL(c) => c.write_unencrypted_client(w),
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_REPAIR_ITEM(c) => c.write_unencrypted_client(w),
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.write_unencrypted_client(w),
             Self::CMSG_SUMMON_RESPONSE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_SELF_RES(c) => c.write_unencrypted_client(w),
-            Self::CMSG_TOGGLE_HELM(c) => c.write_unencrypted_client(w),
-            Self::CMSG_TOGGLE_CLOAK(c) => c.write_unencrypted_client(w),
+            Self::CMSG_SELF_RES => CMSG_SELF_RES{}.write_unencrypted_client(w),
+            Self::CMSG_TOGGLE_HELM => CMSG_TOGGLE_HELM{}.write_unencrypted_client(w),
+            Self::CMSG_TOGGLE_CLOAK => CMSG_TOGGLE_CLOAK{}.write_unencrypted_client(w),
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.write_unencrypted_client(w),
             Self::CMSG_ITEM_NAME_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHAR_RENAME(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_FALL_RESET(c) => c.write_unencrypted_client(w),
-            Self::CMSG_REQUEST_RAID_INFO(c) => c.write_unencrypted_client(w),
+            Self::CMSG_REQUEST_RAID_INFO => CMSG_REQUEST_RAID_INFO{}.write_unencrypted_client(w),
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.write_unencrypted_client(w),
-            Self::CMSG_BATTLEFIELD_STATUS(c) => c.write_unencrypted_client(w),
+            Self::CMSG_BATTLEFIELD_STATUS => CMSG_BATTLEFIELD_STATUS{}.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_PORT(c) => c.write_unencrypted_client(w),
             Self::MSG_INSPECT_HONOR_STATS(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.write_unencrypted_client(w),
-            Self::MSG_PVP_LOG_DATA(c) => c.write_unencrypted_client(w),
+            Self::MSG_PVP_LOG_DATA => MSG_PVP_LOG_DATA_Client{}.write_unencrypted_client(w),
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.write_unencrypted_client(w),
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.write_unencrypted_client(w),
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.write_unencrypted_client(w),
             Self::CMSG_WARDEN_DATA(c) => c.write_unencrypted_client(w),
-            Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.write_unencrypted_client(w),
+            Self::MSG_BATTLEGROUND_PLAYER_POSITIONS => MSG_BATTLEGROUND_PLAYER_POSITIONS_Client{}.write_unencrypted_client(w),
             Self::CMSG_PET_STOP_ATTACK(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.write_unencrypted_client(w),
             Self::CMSG_PET_UNLEARN(c) => c.write_unencrypted_client(w),
@@ -2180,7 +2180,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_WATCHED_FACTION(c) => c.write_unencrypted_client(w),
-            Self::CMSG_RESET_INSTANCES(c) => c.write_unencrypted_client(w),
+            Self::CMSG_RESET_INSTANCES => CMSG_RESET_INSTANCES{}.write_unencrypted_client(w),
             Self::MSG_RAID_TARGET_UPDATE(c) => c.write_unencrypted_client(w),
             Self::MSG_RAID_READY_CHECK(c) => c.write_unencrypted_client(w),
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.write_unencrypted_client(w),
@@ -2191,26 +2191,26 @@ impl ClientOpcodeMessage {
             Self::CMSG_SOCKET_GEMS(c) => c.write_unencrypted_client(w),
             Self::CMSG_ARENA_TEAM_ROSTER(c) => c.write_unencrypted_client(w),
             Self::CMSG_ARENA_TEAM_INVITE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_ARENA_TEAM_ACCEPT(c) => c.write_unencrypted_client(w),
-            Self::CMSG_ARENA_TEAM_DECLINE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_ARENA_TEAM_ACCEPT => CMSG_ARENA_TEAM_ACCEPT{}.write_unencrypted_client(w),
+            Self::CMSG_ARENA_TEAM_DECLINE => CMSG_ARENA_TEAM_DECLINE{}.write_unencrypted_client(w),
             Self::CMSG_ARENA_TEAM_LEAVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_ARENA_TEAM_REMOVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_ARENA_TEAM_DISBAND(c) => c.write_unencrypted_client(w),
             Self::CMSG_ARENA_TEAM_LEADER(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEMASTER_JOIN_ARENA(c) => c.write_unencrypted_client(w),
             Self::CMSG_LFG_JOIN(c) => c.write_unencrypted_client(w),
-            Self::CMSG_LFG_LEAVE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_LFG_LEAVE => CMSG_LFG_LEAVE{}.write_unencrypted_client(w),
             Self::CMSG_SEARCH_LFG_JOIN(c) => c.write_unencrypted_client(w),
             Self::CMSG_SEARCH_LFG_LEAVE(c) => c.write_unencrypted_client(w),
             Self::CMSG_LFG_PROPOSAL_RESULT(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_LFG_COMMENT(c) => c.write_unencrypted_client(w),
             Self::CMSG_LFG_SET_ROLES(c) => c.write_unencrypted_client(w),
             Self::CMSG_LFG_SET_BOOT_VOTE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.write_unencrypted_client(w),
+            Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST => CMSG_LFD_PLAYER_LOCK_INFO_REQUEST{}.write_unencrypted_client(w),
             Self::CMSG_LFG_TELEPORT(c) => c.write_unencrypted_client(w),
-            Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST(c) => c.write_unencrypted_client(w),
+            Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST => CMSG_LFD_PARTY_LOCK_INFO_REQUEST{}.write_unencrypted_client(w),
             Self::CMSG_SET_TITLE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_CANCEL_MOUNT_AURA(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CANCEL_MOUNT_AURA => CMSG_CANCEL_MOUNT_AURA{}.write_unencrypted_client(w),
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.write_unencrypted_client(w),
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.write_unencrypted_client(w),
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.write_unencrypted_client(w),
@@ -2223,12 +2223,12 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.write_unencrypted_client(w),
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.write_unencrypted_client(w),
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.write_unencrypted_client(w),
-            Self::MSG_RAID_READY_CHECK_FINISHED(c) => c.write_unencrypted_client(w),
+            Self::MSG_RAID_READY_CHECK_FINISHED => MSG_RAID_READY_CHECK_FINISHED_Client{}.write_unencrypted_client(w),
             Self::CMSG_COMPLAIN(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_GET_CHANNEL_MEMBER_COUNT(c) => c.write_unencrypted_client(w),
-            Self::CMSG_CHANNEL_VOICE_ON(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CHANNEL_VOICE_ON => CMSG_CHANNEL_VOICE_ON{}.write_unencrypted_client(w),
             Self::CMSG_REPORT_PVP_AFK(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_BANKER_ACTIVATE(c) => c.write_unencrypted_client(w),
             Self::CMSG_GUILD_BANK_QUERY_TAB(c) => c.write_unencrypted_client(w),
@@ -2241,21 +2241,21 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_CHANNEL_WATCH(c) => c.write_unencrypted_client(w),
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.write_unencrypted_client(w),
             Self::CMSG_SPELLCLICK(c) => c.write_unencrypted_client(w),
-            Self::MSG_GUILD_PERMISSIONS(c) => c.write_unencrypted_client(w),
-            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.write_unencrypted_client(w),
-            Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.write_unencrypted_client(w),
+            Self::MSG_GUILD_PERMISSIONS => MSG_GUILD_PERMISSIONS_Client{}.write_unencrypted_client(w),
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN => MSG_GUILD_BANK_MONEY_WITHDRAWN_Client{}.write_unencrypted_client(w),
+            Self::MSG_GUILD_EVENT_LOG_QUERY => MSG_GUILD_EVENT_LOG_QUERY_Client{}.write_unencrypted_client(w),
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.write_unencrypted_client(w),
-            Self::CMSG_KEEP_ALIVE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_KEEP_ALIVE => CMSG_KEEP_ALIVE{}.write_unencrypted_client(w),
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.write_unencrypted_client(w),
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.write_unencrypted_client(w),
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.write_unencrypted_client(w),
             Self::CMSG_GRANT_LEVEL(c) => c.write_unencrypted_client(w),
             Self::CMSG_TOTEM_DESTROYED(c) => c.write_unencrypted_client(w),
-            Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c) => c.write_unencrypted_client(w),
+            Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY => CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY{}.write_unencrypted_client(w),
             Self::CMSG_SET_PLAYER_DECLINED_NAMES(c) => c.write_unencrypted_client(w),
             Self::CMSG_ACCEPT_LEVEL_GRANT(c) => c.write_unencrypted_client(w),
             Self::CMSG_ALTER_APPEARANCE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_CALENDAR_GET_CALENDAR(c) => c.write_unencrypted_client(w),
+            Self::CMSG_CALENDAR_GET_CALENDAR => CMSG_CALENDAR_GET_CALENDAR{}.write_unencrypted_client(w),
             Self::CMSG_CALENDAR_GET_EVENT(c) => c.write_unencrypted_client(w),
             Self::CMSG_CALENDAR_GUILD_FILTER(c) => c.write_unencrypted_client(w),
             Self::CMSG_CALENDAR_ARENA_TEAM(c) => c.write_unencrypted_client(w),
@@ -2270,13 +2270,13 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_EVENT_MODERATOR_STATUS(c) => c.write_unencrypted_client(w),
             Self::CMSG_CALENDAR_COMPLAIN(c) => c.write_unencrypted_client(w),
             Self::CMSG_UPDATE_MISSILE_TRAJECTORY(c) => c.write_unencrypted_client(w),
-            Self::CMSG_COMPLETE_MOVIE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_COMPLETE_MOVIE => CMSG_COMPLETE_MOVIE{}.write_unencrypted_client(w),
             Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(c) => c.write_unencrypted_client(w),
-            Self::CMSG_DISMISS_CONTROLLED_VEHICLE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_DISMISS_CONTROLLED_VEHICLE => CMSG_DISMISS_CONTROLLED_VEHICLE{}.write_unencrypted_client(w),
             Self::CMSG_CHAR_CUSTOMIZE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_REQUEST_VEHICLE_EXIT(c) => c.write_unencrypted_client(w),
-            Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c) => c.write_unencrypted_client(w),
-            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_REQUEST_VEHICLE_EXIT => CMSG_REQUEST_VEHICLE_EXIT{}.write_unencrypted_client(w),
+            Self::CMSG_REQUEST_VEHICLE_PREV_SEAT => CMSG_REQUEST_VEHICLE_PREV_SEAT{}.write_unencrypted_client(w),
+            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT => CMSG_REQUEST_VEHICLE_NEXT_SEAT{}.write_unencrypted_client(w),
             Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(c) => c.write_unencrypted_client(w),
             Self::CMSG_PET_LEARN_TALENT(c) => c.write_unencrypted_client(w),
             Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.write_unencrypted_client(w),
@@ -2285,7 +2285,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUCTION_LIST_PENDING_SALES(c) => c.write_unencrypted_client(w),
             Self::CMSG_ENABLETAXI(c) => c.write_unencrypted_client(w),
             Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_HEARTH_AND_RESURRECT(c) => c.write_unencrypted_client(w),
+            Self::CMSG_HEARTH_AND_RESURRECT => CMSG_HEARTH_AND_RESURRECT{}.write_unencrypted_client(w),
             Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.write_unencrypted_client(w),
             Self::CMSG_CONTROLLER_EJECT_PASSENGER(c) => c.write_unencrypted_client(w),
             Self::CMSG_ITEM_REFUND_INFO(c) => c.write_unencrypted_client(w),
@@ -2304,11 +2304,11 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE(c) => c.write_unencrypted_client(w),
             Self::CMSG_BATTLEFIELD_MGR_EXIT_REQUEST(c) => c.write_unencrypted_client(w),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_unencrypted_client(w),
-            Self::CMSG_GMRESPONSE_RESOLVE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_client(w),
+            Self::CMSG_GMRESPONSE_RESOLVE => CMSG_GMRESPONSE_RESOLVE{}.write_unencrypted_client(w),
+            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE => CMSG_WORLD_STATE_UI_TIMER_UPDATE{}.write_unencrypted_client(w),
             Self::CMSG_CHAR_RACE_CHANGE(c) => c.write_unencrypted_client(w),
-            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.write_unencrypted_client(w),
-            Self::CMSG_QUERY_QUESTS_COMPLETED(c) => c.write_unencrypted_client(w),
+            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES => CMSG_READY_FOR_ACCOUNT_DATA_TIMES{}.write_unencrypted_client(w),
+            Self::CMSG_QUERY_QUESTS_COMPLETED => CMSG_QUERY_QUESTS_COMPLETED{}.write_unencrypted_client(w),
             Self::CMSG_GM_REPORT_LAG(c) => c.write_unencrypted_client(w),
             Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(c) => c.write_unencrypted_client(w),
         }
@@ -2337,7 +2337,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_HOVER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2349,18 +2349,18 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_BOOTME(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CALENDAR_GET_NUM_PENDING => CMSG_CALENDAR_GET_NUM_PENDING{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_BOOTME => CMSG_BOOTME{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_DBLOOKUP(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CHAR_ENUM => CMSG_CHAR_ENUM{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_PLAYER_LOGOUT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_LOGOUT_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_LOGOUT_CANCEL(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_PLAYER_LOGOUT => CMSG_PLAYER_LOGOUT{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_LOGOUT_REQUEST => CMSG_LOGOUT_REQUEST{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_LOGOUT_CANCEL => CMSG_LOGOUT_CANCEL{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_NAME_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_NAME_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2378,25 +2378,25 @@ impl ClientOpcodeMessage {
             Self::CMSG_ADD_IGNORE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_DEL_IGNORE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_INVITE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GROUP_CANCEL(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GROUP_ACCEPT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GROUP_DECLINE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_CANCEL => CMSG_GROUP_CANCEL{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_ACCEPT => CMSG_GROUP_ACCEPT{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_DECLINE => CMSG_GROUP_DECLINE{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_UNINVITE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_SET_LEADER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_METHOD(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GROUP_DISBAND(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_DISBAND => CMSG_GROUP_DISBAND{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_CREATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_INVITE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_ACCEPT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_DECLINE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_INFO(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_ROSTER(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_ACCEPT => CMSG_GUILD_ACCEPT{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_DECLINE => CMSG_GUILD_DECLINE{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_INFO => CMSG_GUILD_INFO{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_ROSTER => CMSG_GUILD_ROSTER{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_PROMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_DEMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_LEAVE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_LEAVE => CMSG_GUILD_LEAVE{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_REMOVE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_DISBAND(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_DISBAND => CMSG_GUILD_DISBAND{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_LEADER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_MOTD(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MESSAGECHAT(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2431,11 +2431,11 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_KNOCK_BACK_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_HOVER_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_COMPLETE_CINEMATIC(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_NEXT_CINEMATIC_CAMERA => CMSG_NEXT_CINEMATIC_CAMERA{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_COMPLETE_CINEMATIC => CMSG_COMPLETE_CINEMATIC{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TUTORIAL_FLAG(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_TUTORIAL_CLEAR(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_TUTORIAL_RESET(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_TUTORIAL_CLEAR => CMSG_TUTORIAL_CLEAR{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_TUTORIAL_RESET => CMSG_TUTORIAL_RESET{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_STANDSTATECHANGE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_EMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TEXT_EMOTE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2449,12 +2449,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_DESTROYITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_INSPECT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_INITIATE_TRADE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_BEGIN_TRADE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_BUSY_TRADE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_IGNORE_TRADE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_BEGIN_TRADE => CMSG_BEGIN_TRADE{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_BUSY_TRADE => CMSG_BUSY_TRADE{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_IGNORE_TRADE => CMSG_IGNORE_TRADE{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACCEPT_TRADE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_UNACCEPT_TRADE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_CANCEL_TRADE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_UNACCEPT_TRADE => CMSG_UNACCEPT_TRADE{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CANCEL_TRADE => CMSG_CANCEL_TRADE{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TRADE_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CLEAR_TRADE_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TRADE_GOLD(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2468,15 +2468,15 @@ impl ClientOpcodeMessage {
             Self::CMSG_DELETEEQUIPMENT_SET(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_INSTANCE_LOCK_RESPONSE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_ATTACKSTOP(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_REPOP_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_ATTACKSTOP => CMSG_ATTACKSTOP{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_REPOP_REQUEST => CMSG_REPOP_REQUEST{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_RESURRECT_RESPONSE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_LOOT_MONEY(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_LOOT_MONEY => CMSG_LOOT_MONEY{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_RELEASE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_DUEL_ACCEPTED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_DUEL_CANCELLED(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_MOUNTSPECIAL_ANIM(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_MOUNTSPECIAL_ANIM => CMSG_MOUNTSPECIAL_ANIM{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_SET_ACTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_ACTION(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_ABANDON(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2487,12 +2487,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH => CMSG_QUESTGIVER_QUEST_AUTOLAUNCH{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_REQUEST_REWARD(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_CHOOSE_REWARD(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_QUESTGIVER_CANCEL(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_QUESTGIVER_CANCEL => CMSG_QUESTGIVER_CANCEL{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTLOG_SWAP_QUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTLOG_REMOVE_QUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUEST_CONFIRM_ACCEPT(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2518,7 +2518,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUG(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYED_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_QUERY_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_QUERY_TIME => CMSG_QUERY_TIME{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_RECLAIM_CORPSE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WRAP_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_MINIMAP_PING(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2535,16 +2535,16 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_UPDATETEXT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GMTICKET_GETTICKET(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_UNLEARN_TALENTS(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_CORPSE_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKET_GETTICKET => CMSG_GMTICKET_GETTICKET{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_UNLEARN_TALENTS => CMSG_UNLEARN_TALENTS{}.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_CORPSE_QUERY => MSG_CORPSE_QUERY_Client{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKET_DELETETICKET => CMSG_GMTICKET_DELETETICKET{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKET_SYSTEMSTATUS => CMSG_GMTICKET_SYSTEMSTATUS{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SPIRIT_HEALER_ACTIVATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAT_IGNORED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_RANK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_ADD_RANK(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_DEL_RANK(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_DEL_RANK => CMSG_GUILD_DEL_RANK{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_SET_PUBLIC_NOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SEND_MAIL(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2569,58 +2569,58 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_AMMO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_MOVER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_CANCEL_AURA(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_CANCEL_AUTO_REPEAT_SPELL(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CANCEL_AUTO_REPEAT_SPELL => CMSG_CANCEL_AUTO_REPEAT_SPELL{}.tokio_write_encrypted_client(w, e).await,
             Self::MSG_LIST_STABLED_PETS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_STABLE_PET(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_UNSTABLE_PET(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_STABLE_SLOT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_STABLE_SWAP_PET(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_REQUEST_PET_INFO(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_PET_INFO => CMSG_REQUEST_PET_INFO{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FAR_SIGHT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_CHANGE_SUB_GROUP(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_SWAP_SUB_GROUP(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GROUP_RAID_CONVERT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_QUERY_NEXT_MAIL_TIME => MSG_QUERY_NEXT_MAIL_TIME_Client{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_RAID_CONVERT => CMSG_GROUP_RAID_CONVERT{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_ASSISTANT_LEADER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_SAVED_INSTANCE_EXTEND(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_LFG_GET_STATUS(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GMTICKETSYSTEM_TOGGLE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_CANCEL_GROWTH_AURA(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_LFG_GET_STATUS => CMSG_LFG_GET_STATUS{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKETSYSTEM_TOGGLE => CMSG_GMTICKETSYSTEM_TOGGLE{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CANCEL_GROWTH_AURA => CMSG_CANCEL_GROWTH_AURA{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_ROLL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REPAIR_ITEM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SUMMON_RESPONSE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_SELF_RES(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_TOGGLE_HELM(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_TOGGLE_CLOAK(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_SELF_RES => CMSG_SELF_RES{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_TOGGLE_HELM => CMSG_TOGGLE_HELM{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_TOGGLE_CLOAK => CMSG_TOGGLE_CLOAK{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ITEM_NAME_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_REQUEST_RAID_INFO(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_RAID_INFO => CMSG_REQUEST_RAID_INFO{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_BATTLEFIELD_STATUS(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_BATTLEFIELD_STATUS => CMSG_BATTLEFIELD_STATUS{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_INSPECT_HONOR_STATS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_PVP_LOG_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_PVP_LOG_DATA => MSG_PVP_LOG_DATA_Client{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_WARDEN_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_BATTLEGROUND_PLAYER_POSITIONS => MSG_BATTLEGROUND_PLAYER_POSITIONS_Client{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_UNLEARN(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2629,7 +2629,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_RESET_INSTANCES(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_RESET_INSTANCES => CMSG_RESET_INSTANCES{}.tokio_write_encrypted_client(w, e).await,
             Self::MSG_RAID_TARGET_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2640,26 +2640,26 @@ impl ClientOpcodeMessage {
             Self::CMSG_SOCKET_GEMS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_ROSTER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_INVITE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_ARENA_TEAM_ACCEPT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_ARENA_TEAM_DECLINE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_ARENA_TEAM_ACCEPT => CMSG_ARENA_TEAM_ACCEPT{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_ARENA_TEAM_DECLINE => CMSG_ARENA_TEAM_DECLINE{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_LEAVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_REMOVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_DISBAND(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_LEADER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_JOIN_ARENA(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_JOIN(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_LFG_LEAVE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_LFG_LEAVE => CMSG_LFG_LEAVE{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SEARCH_LFG_JOIN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SEARCH_LFG_LEAVE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_PROPOSAL_RESULT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_SET_ROLES(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_SET_BOOT_VOTE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST => CMSG_LFD_PLAYER_LOCK_INFO_REQUEST{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_TELEPORT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST => CMSG_LFD_PARTY_LOCK_INFO_REQUEST{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TITLE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_CANCEL_MOUNT_AURA(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CANCEL_MOUNT_AURA => CMSG_CANCEL_MOUNT_AURA{}.tokio_write_encrypted_client(w, e).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2672,12 +2672,12 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_RAID_READY_CHECK_FINISHED(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_RAID_READY_CHECK_FINISHED => MSG_RAID_READY_CHECK_FINISHED_Client{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLAIN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GET_CHANNEL_MEMBER_COUNT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_CHANNEL_VOICE_ON(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_VOICE_ON => CMSG_CHANNEL_VOICE_ON{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REPORT_PVP_AFK(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANKER_ACTIVATE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANK_QUERY_TAB(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2690,21 +2690,21 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_CHANNEL_WATCH(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SPELLCLICK(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_GUILD_PERMISSIONS => MSG_GUILD_PERMISSIONS_Client{}.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN => MSG_GUILD_BANK_MONEY_WITHDRAWN_Client{}.tokio_write_encrypted_client(w, e).await,
+            Self::MSG_GUILD_EVENT_LOG_QUERY => MSG_GUILD_EVENT_LOG_QUERY_Client{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_KEEP_ALIVE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_KEEP_ALIVE => CMSG_KEEP_ALIVE{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GRANT_LEVEL(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_TOTEM_DESTROYED(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY => CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_SET_PLAYER_DECLINED_NAMES(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ACCEPT_LEVEL_GRANT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ALTER_APPEARANCE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_CALENDAR_GET_CALENDAR(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_CALENDAR_GET_CALENDAR => CMSG_CALENDAR_GET_CALENDAR{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_GET_EVENT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_GUILD_FILTER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_ARENA_TEAM(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2719,13 +2719,13 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_EVENT_MODERATOR_STATUS(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_COMPLAIN(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_MISSILE_TRAJECTORY(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_COMPLETE_MOVIE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_COMPLETE_MOVIE => CMSG_COMPLETE_MOVIE{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_DISMISS_CONTROLLED_VEHICLE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_DISMISS_CONTROLLED_VEHICLE => CMSG_DISMISS_CONTROLLED_VEHICLE{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CUSTOMIZE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_REQUEST_VEHICLE_EXIT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_VEHICLE_EXIT => CMSG_REQUEST_VEHICLE_EXIT{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_VEHICLE_PREV_SEAT => CMSG_REQUEST_VEHICLE_PREV_SEAT{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT => CMSG_REQUEST_VEHICLE_NEXT_SEAT{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PET_LEARN_TALENT(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2734,7 +2734,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUCTION_LIST_PENDING_SALES(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ENABLETAXI(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_HEARTH_AND_RESURRECT(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_HEARTH_AND_RESURRECT => CMSG_HEARTH_AND_RESURRECT{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CONTROLLER_EJECT_PASSENGER(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_ITEM_REFUND_INFO(c) => c.tokio_write_encrypted_client(w, e).await,
@@ -2753,11 +2753,11 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_MGR_EXIT_REQUEST(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_GMRESPONSE_RESOLVE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_GMRESPONSE_RESOLVE => CMSG_GMRESPONSE_RESOLVE{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE => CMSG_WORLD_STATE_UI_TIMER_UPDATE{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RACE_CHANGE(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_encrypted_client(w, e).await,
-            Self::CMSG_QUERY_QUESTS_COMPLETED(c) => c.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES => CMSG_READY_FOR_ACCOUNT_DATA_TIMES{}.tokio_write_encrypted_client(w, e).await,
+            Self::CMSG_QUERY_QUESTS_COMPLETED => CMSG_QUERY_QUESTS_COMPLETED{}.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_GM_REPORT_LAG(c) => c.tokio_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(c) => c.tokio_write_encrypted_client(w, e).await,
         }
@@ -2786,7 +2786,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_HOVER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2798,18 +2798,18 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_BOOTME(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CALENDAR_GET_NUM_PENDING => CMSG_CALENDAR_GET_NUM_PENDING{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_BOOTME => CMSG_BOOTME{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_DBLOOKUP(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CHAR_ENUM => CMSG_CHAR_ENUM{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_PLAYER_LOGOUT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_LOGOUT_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_LOGOUT_CANCEL(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_PLAYER_LOGOUT => CMSG_PLAYER_LOGOUT{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_LOGOUT_REQUEST => CMSG_LOGOUT_REQUEST{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_LOGOUT_CANCEL => CMSG_LOGOUT_CANCEL{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_NAME_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_NAME_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2827,25 +2827,25 @@ impl ClientOpcodeMessage {
             Self::CMSG_ADD_IGNORE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_DEL_IGNORE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_INVITE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GROUP_CANCEL(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GROUP_ACCEPT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GROUP_DECLINE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_CANCEL => CMSG_GROUP_CANCEL{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_ACCEPT => CMSG_GROUP_ACCEPT{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_DECLINE => CMSG_GROUP_DECLINE{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_UNINVITE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_SET_LEADER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_METHOD(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GROUP_DISBAND(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_DISBAND => CMSG_GROUP_DISBAND{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_CREATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_INVITE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_ACCEPT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_DECLINE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_INFO(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_ROSTER(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_ACCEPT => CMSG_GUILD_ACCEPT{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_DECLINE => CMSG_GUILD_DECLINE{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_INFO => CMSG_GUILD_INFO{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_ROSTER => CMSG_GUILD_ROSTER{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_PROMOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_DEMOTE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_LEAVE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_LEAVE => CMSG_GUILD_LEAVE{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_REMOVE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_DISBAND(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_DISBAND => CMSG_GUILD_DISBAND{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_LEADER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_MOTD(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MESSAGECHAT(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2880,11 +2880,11 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_KNOCK_BACK_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_HOVER_ACK(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_COMPLETE_CINEMATIC(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_NEXT_CINEMATIC_CAMERA => CMSG_NEXT_CINEMATIC_CAMERA{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_COMPLETE_CINEMATIC => CMSG_COMPLETE_CINEMATIC{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TUTORIAL_FLAG(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_TUTORIAL_CLEAR(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_TUTORIAL_RESET(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_TUTORIAL_CLEAR => CMSG_TUTORIAL_CLEAR{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_TUTORIAL_RESET => CMSG_TUTORIAL_RESET{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_STANDSTATECHANGE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_EMOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TEXT_EMOTE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2898,12 +2898,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_DESTROYITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_INSPECT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_INITIATE_TRADE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_BEGIN_TRADE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_BUSY_TRADE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_IGNORE_TRADE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_BEGIN_TRADE => CMSG_BEGIN_TRADE{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_BUSY_TRADE => CMSG_BUSY_TRADE{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_IGNORE_TRADE => CMSG_IGNORE_TRADE{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACCEPT_TRADE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_UNACCEPT_TRADE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_CANCEL_TRADE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_UNACCEPT_TRADE => CMSG_UNACCEPT_TRADE{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CANCEL_TRADE => CMSG_CANCEL_TRADE{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_TRADE_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CLEAR_TRADE_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_TRADE_GOLD(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2917,15 +2917,15 @@ impl ClientOpcodeMessage {
             Self::CMSG_DELETEEQUIPMENT_SET(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_INSTANCE_LOCK_RESPONSE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSWING(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_ATTACKSTOP(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_REPOP_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_ATTACKSTOP => CMSG_ATTACKSTOP{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_REPOP_REQUEST => CMSG_REPOP_REQUEST{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_RESURRECT_RESPONSE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOOT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_LOOT_MONEY(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_LOOT_MONEY => CMSG_LOOT_MONEY{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_RELEASE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_DUEL_ACCEPTED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_DUEL_CANCELLED(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_MOUNTSPECIAL_ANIM(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_MOUNTSPECIAL_ANIM => CMSG_MOUNTSPECIAL_ANIM{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_SET_ACTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_ACTION(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_ABANDON(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2936,12 +2936,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH => CMSG_QUESTGIVER_QUEST_AUTOLAUNCH{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_REQUEST_REWARD(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_CHOOSE_REWARD(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_QUESTGIVER_CANCEL(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_QUESTGIVER_CANCEL => CMSG_QUESTGIVER_CANCEL{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTLOG_SWAP_QUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUESTLOG_REMOVE_QUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUEST_CONFIRM_ACCEPT(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2967,7 +2967,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUG(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PLAYED_TIME(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_QUERY_TIME(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_QUERY_TIME => CMSG_QUERY_TIME{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_RECLAIM_CORPSE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WRAP_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_MINIMAP_PING(c) => c.tokio_write_unencrypted_client(w).await,
@@ -2984,16 +2984,16 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_UPDATETEXT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GMTICKET_GETTICKET(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_UNLEARN_TALENTS(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_CORPSE_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKET_GETTICKET => CMSG_GMTICKET_GETTICKET{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_UNLEARN_TALENTS => CMSG_UNLEARN_TALENTS{}.tokio_write_unencrypted_client(w).await,
+            Self::MSG_CORPSE_QUERY => MSG_CORPSE_QUERY_Client{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKET_DELETETICKET => CMSG_GMTICKET_DELETETICKET{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKET_SYSTEMSTATUS => CMSG_GMTICKET_SYSTEMSTATUS{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SPIRIT_HEALER_ACTIVATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAT_IGNORED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_RANK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_ADD_RANK(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_DEL_RANK(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_DEL_RANK => CMSG_GUILD_DEL_RANK{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_SET_PUBLIC_NOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SEND_MAIL(c) => c.tokio_write_unencrypted_client(w).await,
@@ -3018,58 +3018,58 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_AMMO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_MOVER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_CANCEL_AURA(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_CANCEL_AUTO_REPEAT_SPELL(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CANCEL_AUTO_REPEAT_SPELL => CMSG_CANCEL_AUTO_REPEAT_SPELL{}.tokio_write_unencrypted_client(w).await,
             Self::MSG_LIST_STABLED_PETS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_STABLE_PET(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_UNSTABLE_PET(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUY_STABLE_SLOT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_STABLE_SWAP_PET(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_REQUEST_PET_INFO(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_PET_INFO => CMSG_REQUEST_PET_INFO{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FAR_SIGHT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_CHANGE_SUB_GROUP(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_SWAP_SUB_GROUP(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GROUP_RAID_CONVERT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_QUERY_NEXT_MAIL_TIME => MSG_QUERY_NEXT_MAIL_TIME_Client{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_RAID_CONVERT => CMSG_GROUP_RAID_CONVERT{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_ASSISTANT_LEADER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_SAVED_INSTANCE_EXTEND(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_LFG_GET_STATUS(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GMTICKETSYSTEM_TOGGLE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_CANCEL_GROWTH_AURA(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_LFG_GET_STATUS => CMSG_LFG_GET_STATUS{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKETSYSTEM_TOGGLE => CMSG_GMTICKETSYSTEM_TOGGLE{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CANCEL_GROWTH_AURA => CMSG_CANCEL_GROWTH_AURA{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_ROLL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REPAIR_ITEM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SUMMON_RESPONSE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_SELF_RES(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_TOGGLE_HELM(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_TOGGLE_CLOAK(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_SELF_RES => CMSG_SELF_RES{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_TOGGLE_HELM => CMSG_TOGGLE_HELM{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_TOGGLE_CLOAK => CMSG_TOGGLE_CLOAK{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ITEM_NAME_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_REQUEST_RAID_INFO(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_RAID_INFO => CMSG_REQUEST_RAID_INFO{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_BATTLEFIELD_STATUS(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_BATTLEFIELD_STATUS => CMSG_BATTLEFIELD_STATUS{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_INSPECT_HONOR_STATS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_PVP_LOG_DATA(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_PVP_LOG_DATA => MSG_PVP_LOG_DATA_Client{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_WARDEN_DATA(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_BATTLEGROUND_PLAYER_POSITIONS => MSG_BATTLEGROUND_PLAYER_POSITIONS_Client{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_UNLEARN(c) => c.tokio_write_unencrypted_client(w).await,
@@ -3078,7 +3078,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_RESET_INSTANCES(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_RESET_INSTANCES => CMSG_RESET_INSTANCES{}.tokio_write_unencrypted_client(w).await,
             Self::MSG_RAID_TARGET_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.tokio_write_unencrypted_client(w).await,
@@ -3089,26 +3089,26 @@ impl ClientOpcodeMessage {
             Self::CMSG_SOCKET_GEMS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_ROSTER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_INVITE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_ARENA_TEAM_ACCEPT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_ARENA_TEAM_DECLINE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_ARENA_TEAM_ACCEPT => CMSG_ARENA_TEAM_ACCEPT{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_ARENA_TEAM_DECLINE => CMSG_ARENA_TEAM_DECLINE{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_LEAVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_REMOVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_DISBAND(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_LEADER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_JOIN_ARENA(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LFG_JOIN(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_LFG_LEAVE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_LFG_LEAVE => CMSG_LFG_LEAVE{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SEARCH_LFG_JOIN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SEARCH_LFG_LEAVE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LFG_PROPOSAL_RESULT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LFG_SET_ROLES(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LFG_SET_BOOT_VOTE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST => CMSG_LFD_PLAYER_LOCK_INFO_REQUEST{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_LFG_TELEPORT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST => CMSG_LFD_PARTY_LOCK_INFO_REQUEST{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_TITLE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_CANCEL_MOUNT_AURA(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CANCEL_MOUNT_AURA => CMSG_CANCEL_MOUNT_AURA{}.tokio_write_unencrypted_client(w).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.tokio_write_unencrypted_client(w).await,
@@ -3121,12 +3121,12 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_RAID_READY_CHECK_FINISHED(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_RAID_READY_CHECK_FINISHED => MSG_RAID_READY_CHECK_FINISHED_Client{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_COMPLAIN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GET_CHANNEL_MEMBER_COUNT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_CHANNEL_VOICE_ON(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_VOICE_ON => CMSG_CHANNEL_VOICE_ON{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REPORT_PVP_AFK(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANKER_ACTIVATE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANK_QUERY_TAB(c) => c.tokio_write_unencrypted_client(w).await,
@@ -3139,21 +3139,21 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_CHANNEL_WATCH(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SPELLCLICK(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_GUILD_PERMISSIONS(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::MSG_GUILD_PERMISSIONS => MSG_GUILD_PERMISSIONS_Client{}.tokio_write_unencrypted_client(w).await,
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN => MSG_GUILD_BANK_MONEY_WITHDRAWN_Client{}.tokio_write_unencrypted_client(w).await,
+            Self::MSG_GUILD_EVENT_LOG_QUERY => MSG_GUILD_EVENT_LOG_QUERY_Client{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_KEEP_ALIVE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_KEEP_ALIVE => CMSG_KEEP_ALIVE{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GRANT_LEVEL(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_TOTEM_DESTROYED(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY => CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_SET_PLAYER_DECLINED_NAMES(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ACCEPT_LEVEL_GRANT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ALTER_APPEARANCE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_CALENDAR_GET_CALENDAR(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_CALENDAR_GET_CALENDAR => CMSG_CALENDAR_GET_CALENDAR{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_GET_EVENT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_GUILD_FILTER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_ARENA_TEAM(c) => c.tokio_write_unencrypted_client(w).await,
@@ -3168,13 +3168,13 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_EVENT_MODERATOR_STATUS(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_COMPLAIN(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_MISSILE_TRAJECTORY(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_COMPLETE_MOVIE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_COMPLETE_MOVIE => CMSG_COMPLETE_MOVIE{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_DISMISS_CONTROLLED_VEHICLE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_DISMISS_CONTROLLED_VEHICLE => CMSG_DISMISS_CONTROLLED_VEHICLE{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CUSTOMIZE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_REQUEST_VEHICLE_EXIT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_VEHICLE_EXIT => CMSG_REQUEST_VEHICLE_EXIT{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_VEHICLE_PREV_SEAT => CMSG_REQUEST_VEHICLE_PREV_SEAT{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT => CMSG_REQUEST_VEHICLE_NEXT_SEAT{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PET_LEARN_TALENT(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.tokio_write_unencrypted_client(w).await,
@@ -3183,7 +3183,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUCTION_LIST_PENDING_SALES(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ENABLETAXI(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_HEARTH_AND_RESURRECT(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_HEARTH_AND_RESURRECT => CMSG_HEARTH_AND_RESURRECT{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CONTROLLER_EJECT_PASSENGER(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_ITEM_REFUND_INFO(c) => c.tokio_write_unencrypted_client(w).await,
@@ -3202,11 +3202,11 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_MGR_EXIT_REQUEST(c) => c.tokio_write_unencrypted_client(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_GMRESPONSE_RESOLVE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_GMRESPONSE_RESOLVE => CMSG_GMRESPONSE_RESOLVE{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE => CMSG_WORLD_STATE_UI_TIMER_UPDATE{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RACE_CHANGE(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.tokio_write_unencrypted_client(w).await,
-            Self::CMSG_QUERY_QUESTS_COMPLETED(c) => c.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES => CMSG_READY_FOR_ACCOUNT_DATA_TIMES{}.tokio_write_unencrypted_client(w).await,
+            Self::CMSG_QUERY_QUESTS_COMPLETED => CMSG_QUERY_QUESTS_COMPLETED{}.tokio_write_unencrypted_client(w).await,
             Self::CMSG_GM_REPORT_LAG(c) => c.tokio_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(c) => c.tokio_write_unencrypted_client(w).await,
         }
@@ -3235,7 +3235,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_FACING(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_HOVER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3247,18 +3247,18 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_BOOTME(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CALENDAR_GET_NUM_PENDING => CMSG_CALENDAR_GET_NUM_PENDING{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_BOOTME => CMSG_BOOTME{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_DBLOOKUP(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_CHAR_ENUM(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CHAR_ENUM => CMSG_CHAR_ENUM{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_PLAYER_LOGOUT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_LOGOUT_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_LOGOUT_CANCEL(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_PLAYER_LOGOUT => CMSG_PLAYER_LOGOUT{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_LOGOUT_REQUEST => CMSG_LOGOUT_REQUEST{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_LOGOUT_CANCEL => CMSG_LOGOUT_CANCEL{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_NAME_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_NAME_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3276,25 +3276,25 @@ impl ClientOpcodeMessage {
             Self::CMSG_ADD_IGNORE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_DEL_IGNORE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_INVITE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GROUP_CANCEL(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GROUP_ACCEPT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GROUP_DECLINE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_CANCEL => CMSG_GROUP_CANCEL{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_ACCEPT => CMSG_GROUP_ACCEPT{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_DECLINE => CMSG_GROUP_DECLINE{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_UNINVITE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_SET_LEADER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_METHOD(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GROUP_DISBAND(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_DISBAND => CMSG_GROUP_DISBAND{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_CREATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_INVITE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_ACCEPT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_DECLINE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_INFO(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_ROSTER(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_ACCEPT => CMSG_GUILD_ACCEPT{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_DECLINE => CMSG_GUILD_DECLINE{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_INFO => CMSG_GUILD_INFO{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_ROSTER => CMSG_GUILD_ROSTER{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_PROMOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_DEMOTE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_LEAVE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_LEAVE => CMSG_GUILD_LEAVE{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_REMOVE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_DISBAND(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_DISBAND => CMSG_GUILD_DISBAND{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_LEADER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_MOTD(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MESSAGECHAT(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3329,11 +3329,11 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_KNOCK_BACK_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_HOVER_ACK(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_COMPLETE_CINEMATIC(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_NEXT_CINEMATIC_CAMERA => CMSG_NEXT_CINEMATIC_CAMERA{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_COMPLETE_CINEMATIC => CMSG_COMPLETE_CINEMATIC{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TUTORIAL_FLAG(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_TUTORIAL_CLEAR(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_TUTORIAL_RESET(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_TUTORIAL_CLEAR => CMSG_TUTORIAL_CLEAR{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_TUTORIAL_RESET => CMSG_TUTORIAL_RESET{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_STANDSTATECHANGE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_EMOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TEXT_EMOTE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3347,12 +3347,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_DESTROYITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_INSPECT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_INITIATE_TRADE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_BEGIN_TRADE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_BUSY_TRADE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_IGNORE_TRADE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_BEGIN_TRADE => CMSG_BEGIN_TRADE{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_BUSY_TRADE => CMSG_BUSY_TRADE{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_IGNORE_TRADE => CMSG_IGNORE_TRADE{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACCEPT_TRADE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_UNACCEPT_TRADE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_CANCEL_TRADE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_UNACCEPT_TRADE => CMSG_UNACCEPT_TRADE{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CANCEL_TRADE => CMSG_CANCEL_TRADE{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TRADE_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CLEAR_TRADE_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TRADE_GOLD(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3366,15 +3366,15 @@ impl ClientOpcodeMessage {
             Self::CMSG_DELETEEQUIPMENT_SET(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_INSTANCE_LOCK_RESPONSE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ATTACKSWING(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_ATTACKSTOP(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_REPOP_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_ATTACKSTOP => CMSG_ATTACKSTOP{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_REPOP_REQUEST => CMSG_REPOP_REQUEST{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_RESURRECT_RESPONSE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_LOOT_MONEY(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_LOOT_MONEY => CMSG_LOOT_MONEY{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_RELEASE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_DUEL_ACCEPTED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_DUEL_CANCELLED(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_MOUNTSPECIAL_ANIM(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_MOUNTSPECIAL_ANIM => CMSG_MOUNTSPECIAL_ANIM{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_SET_ACTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_ACTION(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_ABANDON(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3385,12 +3385,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH => CMSG_QUESTGIVER_QUEST_AUTOLAUNCH{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_REQUEST_REWARD(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTGIVER_CHOOSE_REWARD(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_QUESTGIVER_CANCEL(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_QUESTGIVER_CANCEL => CMSG_QUESTGIVER_CANCEL{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTLOG_SWAP_QUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUESTLOG_REMOVE_QUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUEST_CONFIRM_ACCEPT(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3416,7 +3416,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUG(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYED_TIME(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_QUERY_TIME(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_QUERY_TIME => CMSG_QUERY_TIME{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_RECLAIM_CORPSE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WRAP_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_MINIMAP_PING(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3433,16 +3433,16 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_UPDATETEXT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GMTICKET_GETTICKET(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_UNLEARN_TALENTS(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_CORPSE_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GMTICKET_DELETETICKET(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKET_GETTICKET => CMSG_GMTICKET_GETTICKET{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_UNLEARN_TALENTS => CMSG_UNLEARN_TALENTS{}.astd_write_encrypted_client(w, e).await,
+            Self::MSG_CORPSE_QUERY => MSG_CORPSE_QUERY_Client{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKET_DELETETICKET => CMSG_GMTICKET_DELETETICKET{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKET_SYSTEMSTATUS => CMSG_GMTICKET_SYSTEMSTATUS{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SPIRIT_HEALER_ACTIVATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAT_IGNORED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_RANK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_ADD_RANK(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GUILD_DEL_RANK(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GUILD_DEL_RANK => CMSG_GUILD_DEL_RANK{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_SET_PUBLIC_NOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SEND_MAIL(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3467,58 +3467,58 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_AMMO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_MOVER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_CANCEL_AURA(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_CANCEL_AUTO_REPEAT_SPELL(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CANCEL_AUTO_REPEAT_SPELL => CMSG_CANCEL_AUTO_REPEAT_SPELL{}.astd_write_encrypted_client(w, e).await,
             Self::MSG_LIST_STABLED_PETS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_STABLE_PET(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_UNSTABLE_PET(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUY_STABLE_SLOT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_STABLE_SWAP_PET(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_REQUEST_PET_INFO(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_PET_INFO => CMSG_REQUEST_PET_INFO{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FAR_SIGHT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_CHANGE_SUB_GROUP(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_SWAP_SUB_GROUP(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GROUP_RAID_CONVERT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_QUERY_NEXT_MAIL_TIME => MSG_QUERY_NEXT_MAIL_TIME_Client{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GROUP_RAID_CONVERT => CMSG_GROUP_RAID_CONVERT{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GROUP_ASSISTANT_LEADER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_SAVED_INSTANCE_EXTEND(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_LFG_GET_STATUS(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GMTICKETSYSTEM_TOGGLE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_CANCEL_GROWTH_AURA(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_LFG_GET_STATUS => CMSG_LFG_GET_STATUS{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GMTICKETSYSTEM_TOGGLE => CMSG_GMTICKETSYSTEM_TOGGLE{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CANCEL_GROWTH_AURA => CMSG_CANCEL_GROWTH_AURA{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_ROLL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REPAIR_ITEM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SUMMON_RESPONSE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_SELF_RES(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_TOGGLE_HELM(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_TOGGLE_CLOAK(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_SELF_RES => CMSG_SELF_RES{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_TOGGLE_HELM => CMSG_TOGGLE_HELM{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_TOGGLE_CLOAK => CMSG_TOGGLE_CLOAK{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ITEM_NAME_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_REQUEST_RAID_INFO(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_RAID_INFO => CMSG_REQUEST_RAID_INFO{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_BATTLEFIELD_STATUS(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_BATTLEFIELD_STATUS => CMSG_BATTLEFIELD_STATUS{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_INSPECT_HONOR_STATS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_PVP_LOG_DATA(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_PVP_LOG_DATA => MSG_PVP_LOG_DATA_Client{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_WARDEN_DATA(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_BATTLEGROUND_PLAYER_POSITIONS => MSG_BATTLEGROUND_PLAYER_POSITIONS_Client{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_UNLEARN(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3527,7 +3527,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_RESET_INSTANCES(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_RESET_INSTANCES => CMSG_RESET_INSTANCES{}.astd_write_encrypted_client(w, e).await,
             Self::MSG_RAID_TARGET_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3538,26 +3538,26 @@ impl ClientOpcodeMessage {
             Self::CMSG_SOCKET_GEMS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_ROSTER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_INVITE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_ARENA_TEAM_ACCEPT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_ARENA_TEAM_DECLINE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_ARENA_TEAM_ACCEPT => CMSG_ARENA_TEAM_ACCEPT{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_ARENA_TEAM_DECLINE => CMSG_ARENA_TEAM_DECLINE{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_LEAVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_REMOVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_DISBAND(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ARENA_TEAM_LEADER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEMASTER_JOIN_ARENA(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_JOIN(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_LFG_LEAVE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_LFG_LEAVE => CMSG_LFG_LEAVE{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SEARCH_LFG_JOIN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SEARCH_LFG_LEAVE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_PROPOSAL_RESULT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_SET_ROLES(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_SET_BOOT_VOTE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST => CMSG_LFD_PLAYER_LOCK_INFO_REQUEST{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_LFG_TELEPORT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST => CMSG_LFD_PARTY_LOCK_INFO_REQUEST{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_TITLE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_CANCEL_MOUNT_AURA(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CANCEL_MOUNT_AURA => CMSG_CANCEL_MOUNT_AURA{}.astd_write_encrypted_client(w, e).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3570,12 +3570,12 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_RAID_READY_CHECK_FINISHED(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_RAID_READY_CHECK_FINISHED => MSG_RAID_READY_CHECK_FINISHED_Client{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_COMPLAIN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GET_CHANNEL_MEMBER_COUNT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_CHANNEL_VOICE_ON(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CHANNEL_VOICE_ON => CMSG_CHANNEL_VOICE_ON{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REPORT_PVP_AFK(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANKER_ACTIVATE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GUILD_BANK_QUERY_TAB(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3588,21 +3588,21 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_CHANNEL_WATCH(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SPELLCLICK(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::MSG_GUILD_PERMISSIONS => MSG_GUILD_PERMISSIONS_Client{}.astd_write_encrypted_client(w, e).await,
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN => MSG_GUILD_BANK_MONEY_WITHDRAWN_Client{}.astd_write_encrypted_client(w, e).await,
+            Self::MSG_GUILD_EVENT_LOG_QUERY => MSG_GUILD_EVENT_LOG_QUERY_Client{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_KEEP_ALIVE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_KEEP_ALIVE => CMSG_KEEP_ALIVE{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GRANT_LEVEL(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_TOTEM_DESTROYED(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY => CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_SET_PLAYER_DECLINED_NAMES(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ACCEPT_LEVEL_GRANT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ALTER_APPEARANCE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_CALENDAR_GET_CALENDAR(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_CALENDAR_GET_CALENDAR => CMSG_CALENDAR_GET_CALENDAR{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_GET_EVENT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_GUILD_FILTER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_ARENA_TEAM(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3617,13 +3617,13 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_EVENT_MODERATOR_STATUS(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CALENDAR_COMPLAIN(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_UPDATE_MISSILE_TRAJECTORY(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_COMPLETE_MOVIE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_COMPLETE_MOVIE => CMSG_COMPLETE_MOVIE{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_DISMISS_CONTROLLED_VEHICLE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_DISMISS_CONTROLLED_VEHICLE => CMSG_DISMISS_CONTROLLED_VEHICLE{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_CUSTOMIZE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_REQUEST_VEHICLE_EXIT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_VEHICLE_EXIT => CMSG_REQUEST_VEHICLE_EXIT{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_VEHICLE_PREV_SEAT => CMSG_REQUEST_VEHICLE_PREV_SEAT{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT => CMSG_REQUEST_VEHICLE_NEXT_SEAT{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PET_LEARN_TALENT(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3632,7 +3632,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUCTION_LIST_PENDING_SALES(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ENABLETAXI(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_HEARTH_AND_RESURRECT(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_HEARTH_AND_RESURRECT => CMSG_HEARTH_AND_RESURRECT{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CONTROLLER_EJECT_PASSENGER(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_ITEM_REFUND_INFO(c) => c.astd_write_encrypted_client(w, e).await,
@@ -3651,11 +3651,11 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_BATTLEFIELD_MGR_EXIT_REQUEST(c) => c.astd_write_encrypted_client(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_GMRESPONSE_RESOLVE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_GMRESPONSE_RESOLVE => CMSG_GMRESPONSE_RESOLVE{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE => CMSG_WORLD_STATE_UI_TIMER_UPDATE{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_CHAR_RACE_CHANGE(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_encrypted_client(w, e).await,
-            Self::CMSG_QUERY_QUESTS_COMPLETED(c) => c.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES => CMSG_READY_FOR_ACCOUNT_DATA_TIMES{}.astd_write_encrypted_client(w, e).await,
+            Self::CMSG_QUERY_QUESTS_COMPLETED => CMSG_QUERY_QUESTS_COMPLETED{}.astd_write_encrypted_client(w, e).await,
             Self::CMSG_GM_REPORT_LAG(c) => c.astd_write_encrypted_client(w, e).await,
             Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(c) => c.astd_write_encrypted_client(w, e).await,
         }
@@ -3684,7 +3684,7 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_FACING(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_HOVER(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_unencrypted_client(w).await,
@@ -3696,18 +3696,18 @@ impl ClientOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_BOOTME(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CALENDAR_GET_NUM_PENDING => CMSG_CALENDAR_GET_NUM_PENDING{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_BOOTME => CMSG_BOOTME{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_DBLOOKUP(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WORLD_TELEPORT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TELEPORT_TO_UNIT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CHAR_ENUM => CMSG_CHAR_ENUM{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_LOGIN(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_PLAYER_LOGOUT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_LOGOUT_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_LOGOUT_CANCEL(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_PLAYER_LOGOUT => CMSG_PLAYER_LOGOUT{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_LOGOUT_REQUEST => CMSG_LOGOUT_REQUEST{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_LOGOUT_CANCEL => CMSG_LOGOUT_CANCEL{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_NAME_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_NAME_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_QUERY(c) => c.astd_write_unencrypted_client(w).await,
@@ -3725,25 +3725,25 @@ impl ClientOpcodeMessage {
             Self::CMSG_ADD_IGNORE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_DEL_IGNORE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_INVITE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GROUP_CANCEL(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GROUP_ACCEPT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GROUP_DECLINE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_CANCEL => CMSG_GROUP_CANCEL{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_ACCEPT => CMSG_GROUP_ACCEPT{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_DECLINE => CMSG_GROUP_DECLINE{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_UNINVITE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_UNINVITE_GUID(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_SET_LEADER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_METHOD(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GROUP_DISBAND(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_DISBAND => CMSG_GROUP_DISBAND{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_CREATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_INVITE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_ACCEPT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_DECLINE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_INFO(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_ROSTER(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_ACCEPT => CMSG_GUILD_ACCEPT{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_DECLINE => CMSG_GUILD_DECLINE{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_INFO => CMSG_GUILD_INFO{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_ROSTER => CMSG_GUILD_ROSTER{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_PROMOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_DEMOTE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_LEAVE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_LEAVE => CMSG_GUILD_LEAVE{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_REMOVE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_DISBAND(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_DISBAND => CMSG_GUILD_DISBAND{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_LEADER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_MOTD(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MESSAGECHAT(c) => c.astd_write_unencrypted_client(w).await,
@@ -3778,11 +3778,11 @@ impl ClientOpcodeMessage {
             Self::CMSG_FORCE_MOVE_UNROOT_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_KNOCK_BACK_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_HOVER_ACK(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_NEXT_CINEMATIC_CAMERA(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_COMPLETE_CINEMATIC(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_NEXT_CINEMATIC_CAMERA => CMSG_NEXT_CINEMATIC_CAMERA{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_COMPLETE_CINEMATIC => CMSG_COMPLETE_CINEMATIC{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_TUTORIAL_FLAG(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_TUTORIAL_CLEAR(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_TUTORIAL_RESET(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_TUTORIAL_CLEAR => CMSG_TUTORIAL_CLEAR{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_TUTORIAL_RESET => CMSG_TUTORIAL_RESET{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_STANDSTATECHANGE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_EMOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TEXT_EMOTE(c) => c.astd_write_unencrypted_client(w).await,
@@ -3796,12 +3796,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_DESTROYITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_INSPECT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_INITIATE_TRADE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_BEGIN_TRADE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_BUSY_TRADE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_IGNORE_TRADE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_BEGIN_TRADE => CMSG_BEGIN_TRADE{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_BUSY_TRADE => CMSG_BUSY_TRADE{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_IGNORE_TRADE => CMSG_IGNORE_TRADE{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACCEPT_TRADE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_UNACCEPT_TRADE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_CANCEL_TRADE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_UNACCEPT_TRADE => CMSG_UNACCEPT_TRADE{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CANCEL_TRADE => CMSG_CANCEL_TRADE{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_TRADE_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CLEAR_TRADE_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_TRADE_GOLD(c) => c.astd_write_unencrypted_client(w).await,
@@ -3815,15 +3815,15 @@ impl ClientOpcodeMessage {
             Self::CMSG_DELETEEQUIPMENT_SET(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_INSTANCE_LOCK_RESPONSE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ATTACKSWING(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_ATTACKSTOP(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_REPOP_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_ATTACKSTOP => CMSG_ATTACKSTOP{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_REPOP_REQUEST => CMSG_REPOP_REQUEST{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_RESURRECT_RESPONSE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOOT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_LOOT_MONEY(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_LOOT_MONEY => CMSG_LOOT_MONEY{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_RELEASE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_DUEL_ACCEPTED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_DUEL_CANCELLED(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_MOUNTSPECIAL_ANIM(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_MOUNTSPECIAL_ANIM => CMSG_MOUNTSPECIAL_ANIM{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_SET_ACTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_ACTION(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_ABANDON(c) => c.astd_write_unencrypted_client(w).await,
@@ -3834,12 +3834,12 @@ impl ClientOpcodeMessage {
             Self::CMSG_QUESTGIVER_STATUS_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_HELLO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_QUERY_QUEST(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH => CMSG_QUESTGIVER_QUEST_AUTOLAUNCH{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_ACCEPT_QUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_COMPLETE_QUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_REQUEST_REWARD(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTGIVER_CHOOSE_REWARD(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_QUESTGIVER_CANCEL(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_QUESTGIVER_CANCEL => CMSG_QUESTGIVER_CANCEL{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTLOG_SWAP_QUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUESTLOG_REMOVE_QUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUEST_CONFIRM_ACCEPT(c) => c.astd_write_unencrypted_client(w).await,
@@ -3865,7 +3865,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_PETITION_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUG(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PLAYED_TIME(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_QUERY_TIME(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_QUERY_TIME => CMSG_QUERY_TIME{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_RECLAIM_CORPSE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WRAP_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_MINIMAP_PING(c) => c.astd_write_unencrypted_client(w).await,
@@ -3882,16 +3882,16 @@ impl ClientOpcodeMessage {
             Self::CMSG_GMTICKET_UPDATETEXT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_ACCOUNT_DATA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_ACCOUNT_DATA(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GMTICKET_GETTICKET(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_UNLEARN_TALENTS(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_CORPSE_QUERY(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GMTICKET_DELETETICKET(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKET_GETTICKET => CMSG_GMTICKET_GETTICKET{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_UNLEARN_TALENTS => CMSG_UNLEARN_TALENTS{}.astd_write_unencrypted_client(w).await,
+            Self::MSG_CORPSE_QUERY => MSG_CORPSE_QUERY_Client{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKET_DELETETICKET => CMSG_GMTICKET_DELETETICKET{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKET_SYSTEMSTATUS => CMSG_GMTICKET_SYSTEMSTATUS{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_SPIRIT_HEALER_ACTIVATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAT_IGNORED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_RANK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_ADD_RANK(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GUILD_DEL_RANK(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GUILD_DEL_RANK => CMSG_GUILD_DEL_RANK{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_SET_PUBLIC_NOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_SET_OFFICER_NOTE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SEND_MAIL(c) => c.astd_write_unencrypted_client(w).await,
@@ -3916,58 +3916,58 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_AMMO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_MOVER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_CANCEL_AURA(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_CANCEL_AUTO_REPEAT_SPELL(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CANCEL_AUTO_REPEAT_SPELL => CMSG_CANCEL_AUTO_REPEAT_SPELL{}.astd_write_unencrypted_client(w).await,
             Self::MSG_LIST_STABLED_PETS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_STABLE_PET(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_UNSTABLE_PET(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUY_STABLE_SLOT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_STABLE_SWAP_PET(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_REQUEST_PET_INFO(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_PET_INFO => CMSG_REQUEST_PET_INFO{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_FAR_SIGHT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_CHANGE_SUB_GROUP(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_PARTY_MEMBER_STATS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_SWAP_SUB_GROUP(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOSTORE_BANK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AUTOBANK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_QUERY_NEXT_MAIL_TIME(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GROUP_RAID_CONVERT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_QUERY_NEXT_MAIL_TIME => MSG_QUERY_NEXT_MAIL_TIME_Client{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GROUP_RAID_CONVERT => CMSG_GROUP_RAID_CONVERT{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_GROUP_ASSISTANT_LEADER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BUYBACK_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_SAVED_INSTANCE_EXTEND(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_LFG_GET_STATUS(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GMTICKETSYSTEM_TOGGLE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_CANCEL_GROWTH_AURA(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_LFG_GET_STATUS => CMSG_LFG_GET_STATUS{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GMTICKETSYSTEM_TOGGLE => CMSG_GMTICKETSYSTEM_TOGGLE{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CANCEL_GROWTH_AURA => CMSG_CANCEL_GROWTH_AURA{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_ROLL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LOOT_MASTER_GIVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_REPAIR_ITEM(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SUMMON_RESPONSE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_SELF_RES(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_TOGGLE_HELM(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_TOGGLE_CLOAK(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_SELF_RES => CMSG_SELF_RES{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_TOGGLE_HELM => CMSG_TOGGLE_HELM{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_TOGGLE_CLOAK => CMSG_TOGGLE_CLOAK{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIONBAR_TOGGLES(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ITEM_NAME_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RENAME(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SPLINE_DONE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FALL_RESET(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_REQUEST_RAID_INFO(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_RAID_INFO => CMSG_REQUEST_RAID_INFO{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_TIME_SKIPPED(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_FEATHER_FALL_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_WATER_WALK_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_NOT_ACTIVE_MOVER(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_BATTLEFIELD_STATUS(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_BATTLEFIELD_STATUS => CMSG_BATTLEFIELD_STATUS{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_PORT(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_INSPECT_HONOR_STATS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_HELLO(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_TURN_RATE_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_PVP_LOG_DATA(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_PVP_LOG_DATA => MSG_PVP_LOG_DATA_Client{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_LEAVE_BATTLEFIELD(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUERY(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_AREA_SPIRIT_HEALER_QUEUE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_WARDEN_DATA(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_BATTLEGROUND_PLAYER_POSITIONS => MSG_BATTLEGROUND_PLAYER_POSITIONS_Client{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_STOP_ATTACK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_JOIN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_UNLEARN(c) => c.astd_write_unencrypted_client(w).await,
@@ -3976,7 +3976,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_ACTIVATETAXIEXPRESS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_FACTION_INACTIVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_WATCHED_FACTION(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_RESET_INSTANCES(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_RESET_INSTANCES => CMSG_RESET_INSTANCES{}.astd_write_unencrypted_client(w).await,
             Self::MSG_RAID_TARGET_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_RAID_READY_CHECK(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_SET_DUNGEON_DIFFICULTY(c) => c.astd_write_unencrypted_client(w).await,
@@ -3987,26 +3987,26 @@ impl ClientOpcodeMessage {
             Self::CMSG_SOCKET_GEMS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_ROSTER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_INVITE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_ARENA_TEAM_ACCEPT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_ARENA_TEAM_DECLINE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_ARENA_TEAM_ACCEPT => CMSG_ARENA_TEAM_ACCEPT{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_ARENA_TEAM_DECLINE => CMSG_ARENA_TEAM_DECLINE{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_LEAVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_REMOVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_DISBAND(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ARENA_TEAM_LEADER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEMASTER_JOIN_ARENA(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LFG_JOIN(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_LFG_LEAVE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_LFG_LEAVE => CMSG_LFG_LEAVE{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_SEARCH_LFG_JOIN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SEARCH_LFG_LEAVE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LFG_PROPOSAL_RESULT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_LFG_COMMENT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LFG_SET_ROLES(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_LFG_SET_BOOT_VOTE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST => CMSG_LFD_PLAYER_LOCK_INFO_REQUEST{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_LFG_TELEPORT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST => CMSG_LFD_PARTY_LOCK_INFO_REQUEST{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_TITLE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_CANCEL_MOUNT_AURA(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CANCEL_MOUNT_AURA => CMSG_CANCEL_MOUNT_AURA{}.astd_write_unencrypted_client(w).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CANCEL_TEMP_ENCHANTMENT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(c) => c.astd_write_unencrypted_client(w).await,
@@ -4019,12 +4019,12 @@ impl ClientOpcodeMessage {
             Self::MSG_RAID_READY_CHECK_CONFIRM(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_VOICE_SESSION_ENABLE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_COMMENTATOR_ENABLE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_RAID_READY_CHECK_FINISHED(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_RAID_READY_CHECK_FINISHED => MSG_RAID_READY_CHECK_FINISHED_Client{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_COMPLAIN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANNEL_DISPLAY_LIST(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_ACTIVE_VOICE_CHANNEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GET_CHANNEL_MEMBER_COUNT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_CHANNEL_VOICE_ON(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CHANNEL_VOICE_ON => CMSG_CHANNEL_VOICE_ON{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_REPORT_PVP_AFK(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANKER_ACTIVATE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GUILD_BANK_QUERY_TAB(c) => c.astd_write_unencrypted_client(w).await,
@@ -4037,21 +4037,21 @@ impl ClientOpcodeMessage {
             Self::CMSG_SET_CHANNEL_WATCH(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CLEAR_CHANNEL_WATCH(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SPELLCLICK(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_GUILD_PERMISSIONS(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c) => c.astd_write_unencrypted_client(w).await,
-            Self::MSG_GUILD_EVENT_LOG_QUERY(c) => c.astd_write_unencrypted_client(w).await,
+            Self::MSG_GUILD_PERMISSIONS => MSG_GUILD_PERMISSIONS_Client{}.astd_write_unencrypted_client(w).await,
+            Self::MSG_GUILD_BANK_MONEY_WITHDRAWN => MSG_GUILD_BANK_MONEY_WITHDRAWN_Client{}.astd_write_unencrypted_client(w).await,
+            Self::MSG_GUILD_EVENT_LOG_QUERY => MSG_GUILD_EVENT_LOG_QUERY_Client{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_GET_MIRRORIMAGE_DATA(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_KEEP_ALIVE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_KEEP_ALIVE => CMSG_KEEP_ALIVE{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_OPT_OUT_OF_LOOT(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_QUERY_GUILD_BANK_TEXT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_GUILD_BANK_TEXT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GRANT_LEVEL(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_TOTEM_DESTROYED(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY => CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_SET_PLAYER_DECLINED_NAMES(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ACCEPT_LEVEL_GRANT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ALTER_APPEARANCE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_CALENDAR_GET_CALENDAR(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_CALENDAR_GET_CALENDAR => CMSG_CALENDAR_GET_CALENDAR{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_GET_EVENT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_GUILD_FILTER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_ARENA_TEAM(c) => c.astd_write_unencrypted_client(w).await,
@@ -4066,13 +4066,13 @@ impl ClientOpcodeMessage {
             Self::CMSG_CALENDAR_EVENT_MODERATOR_STATUS(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CALENDAR_COMPLAIN(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_UPDATE_MISSILE_TRAJECTORY(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_COMPLETE_MOVIE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_COMPLETE_MOVIE => CMSG_COMPLETE_MOVIE{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_QUERY_INSPECT_ACHIEVEMENTS(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_DISMISS_CONTROLLED_VEHICLE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_DISMISS_CONTROLLED_VEHICLE => CMSG_DISMISS_CONTROLLED_VEHICLE{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_CUSTOMIZE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_REQUEST_VEHICLE_EXIT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_VEHICLE_EXIT => CMSG_REQUEST_VEHICLE_EXIT{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_VEHICLE_PREV_SEAT => CMSG_REQUEST_VEHICLE_PREV_SEAT{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT => CMSG_REQUEST_VEHICLE_NEXT_SEAT{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_PET_LEARN_TALENT(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_GAMEOBJ_REPORT_USE(c) => c.astd_write_unencrypted_client(w).await,
@@ -4081,7 +4081,7 @@ impl ClientOpcodeMessage {
             Self::CMSG_AUCTION_LIST_PENDING_SALES(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ENABLETAXI(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_HEARTH_AND_RESURRECT(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_HEARTH_AND_RESURRECT => CMSG_HEARTH_AND_RESURRECT{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_PLAYER_VEHICLE_ENTER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_CONTROLLER_EJECT_PASSENGER(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_ITEM_REFUND_INFO(c) => c.astd_write_unencrypted_client(w).await,
@@ -4100,11 +4100,11 @@ impl ClientOpcodeMessage {
             Self::CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_BATTLEFIELD_MGR_EXIT_REQUEST(c) => c.astd_write_unencrypted_client(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_GMRESPONSE_RESOLVE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_GMRESPONSE_RESOLVE => CMSG_GMRESPONSE_RESOLVE{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE => CMSG_WORLD_STATE_UI_TIMER_UPDATE{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_CHAR_RACE_CHANGE(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c) => c.astd_write_unencrypted_client(w).await,
-            Self::CMSG_QUERY_QUESTS_COMPLETED(c) => c.astd_write_unencrypted_client(w).await,
+            Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES => CMSG_READY_FOR_ACCOUNT_DATA_TIMES{}.astd_write_unencrypted_client(w).await,
+            Self::CMSG_QUERY_QUESTS_COMPLETED => CMSG_QUERY_QUESTS_COMPLETED{}.astd_write_unencrypted_client(w).await,
             Self::CMSG_GM_REPORT_LAG(c) => c.astd_write_unencrypted_client(w).await,
             Self::CMSG_MOVE_SET_COLLISION_HGT_ACK(c) => c.astd_write_unencrypted_client(w).await,
         }
@@ -4144,7 +4144,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => "MSG_MOVE_STOP_SWIM",
             ClientOpcodeMessage::MSG_MOVE_SET_FACING(_) => "MSG_MOVE_SET_FACING",
             ClientOpcodeMessage::MSG_MOVE_SET_PITCH(_) => "MSG_MOVE_SET_PITCH",
-            ClientOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
+            ClientOpcodeMessage::MSG_MOVE_WORLDPORT_ACK => "MSG_MOVE_WORLDPORT_ACK",
             ClientOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT",
             ClientOpcodeMessage::MSG_MOVE_HOVER(_) => "MSG_MOVE_HOVER",
             ClientOpcodeMessage::MSG_PETITION_DECLINE(_) => "MSG_PETITION_DECLINE",
@@ -4156,18 +4156,18 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND",
             ClientOpcodeMessage::MSG_MOVE_SET_FLIGHT_BACK_SPEED(_) => "MSG_MOVE_SET_FLIGHT_BACK_SPEED",
             ClientOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND",
-            ClientOpcodeMessage::CMSG_CALENDAR_GET_NUM_PENDING(_) => "CMSG_CALENDAR_GET_NUM_PENDING",
-            ClientOpcodeMessage::CMSG_BOOTME(_) => "CMSG_BOOTME",
+            ClientOpcodeMessage::CMSG_CALENDAR_GET_NUM_PENDING => "CMSG_CALENDAR_GET_NUM_PENDING",
+            ClientOpcodeMessage::CMSG_BOOTME => "CMSG_BOOTME",
             ClientOpcodeMessage::CMSG_DBLOOKUP(_) => "CMSG_DBLOOKUP",
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(_) => "CMSG_WORLD_TELEPORT",
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(_) => "CMSG_TELEPORT_TO_UNIT",
             ClientOpcodeMessage::CMSG_CHAR_CREATE(_) => "CMSG_CHAR_CREATE",
-            ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => "CMSG_CHAR_ENUM",
+            ClientOpcodeMessage::CMSG_CHAR_ENUM => "CMSG_CHAR_ENUM",
             ClientOpcodeMessage::CMSG_CHAR_DELETE(_) => "CMSG_CHAR_DELETE",
             ClientOpcodeMessage::CMSG_PLAYER_LOGIN(_) => "CMSG_PLAYER_LOGIN",
-            ClientOpcodeMessage::CMSG_PLAYER_LOGOUT(_) => "CMSG_PLAYER_LOGOUT",
-            ClientOpcodeMessage::CMSG_LOGOUT_REQUEST(_) => "CMSG_LOGOUT_REQUEST",
-            ClientOpcodeMessage::CMSG_LOGOUT_CANCEL(_) => "CMSG_LOGOUT_CANCEL",
+            ClientOpcodeMessage::CMSG_PLAYER_LOGOUT => "CMSG_PLAYER_LOGOUT",
+            ClientOpcodeMessage::CMSG_LOGOUT_REQUEST => "CMSG_LOGOUT_REQUEST",
+            ClientOpcodeMessage::CMSG_LOGOUT_CANCEL => "CMSG_LOGOUT_CANCEL",
             ClientOpcodeMessage::CMSG_NAME_QUERY(_) => "CMSG_NAME_QUERY",
             ClientOpcodeMessage::CMSG_PET_NAME_QUERY(_) => "CMSG_PET_NAME_QUERY",
             ClientOpcodeMessage::CMSG_GUILD_QUERY(_) => "CMSG_GUILD_QUERY",
@@ -4185,25 +4185,25 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_ADD_IGNORE(_) => "CMSG_ADD_IGNORE",
             ClientOpcodeMessage::CMSG_DEL_IGNORE(_) => "CMSG_DEL_IGNORE",
             ClientOpcodeMessage::CMSG_GROUP_INVITE(_) => "CMSG_GROUP_INVITE",
-            ClientOpcodeMessage::CMSG_GROUP_CANCEL(_) => "CMSG_GROUP_CANCEL",
-            ClientOpcodeMessage::CMSG_GROUP_ACCEPT(_) => "CMSG_GROUP_ACCEPT",
-            ClientOpcodeMessage::CMSG_GROUP_DECLINE(_) => "CMSG_GROUP_DECLINE",
+            ClientOpcodeMessage::CMSG_GROUP_CANCEL => "CMSG_GROUP_CANCEL",
+            ClientOpcodeMessage::CMSG_GROUP_ACCEPT => "CMSG_GROUP_ACCEPT",
+            ClientOpcodeMessage::CMSG_GROUP_DECLINE => "CMSG_GROUP_DECLINE",
             ClientOpcodeMessage::CMSG_GROUP_UNINVITE(_) => "CMSG_GROUP_UNINVITE",
             ClientOpcodeMessage::CMSG_GROUP_UNINVITE_GUID(_) => "CMSG_GROUP_UNINVITE_GUID",
             ClientOpcodeMessage::CMSG_GROUP_SET_LEADER(_) => "CMSG_GROUP_SET_LEADER",
             ClientOpcodeMessage::CMSG_LOOT_METHOD(_) => "CMSG_LOOT_METHOD",
-            ClientOpcodeMessage::CMSG_GROUP_DISBAND(_) => "CMSG_GROUP_DISBAND",
+            ClientOpcodeMessage::CMSG_GROUP_DISBAND => "CMSG_GROUP_DISBAND",
             ClientOpcodeMessage::CMSG_GUILD_CREATE(_) => "CMSG_GUILD_CREATE",
             ClientOpcodeMessage::CMSG_GUILD_INVITE(_) => "CMSG_GUILD_INVITE",
-            ClientOpcodeMessage::CMSG_GUILD_ACCEPT(_) => "CMSG_GUILD_ACCEPT",
-            ClientOpcodeMessage::CMSG_GUILD_DECLINE(_) => "CMSG_GUILD_DECLINE",
-            ClientOpcodeMessage::CMSG_GUILD_INFO(_) => "CMSG_GUILD_INFO",
-            ClientOpcodeMessage::CMSG_GUILD_ROSTER(_) => "CMSG_GUILD_ROSTER",
+            ClientOpcodeMessage::CMSG_GUILD_ACCEPT => "CMSG_GUILD_ACCEPT",
+            ClientOpcodeMessage::CMSG_GUILD_DECLINE => "CMSG_GUILD_DECLINE",
+            ClientOpcodeMessage::CMSG_GUILD_INFO => "CMSG_GUILD_INFO",
+            ClientOpcodeMessage::CMSG_GUILD_ROSTER => "CMSG_GUILD_ROSTER",
             ClientOpcodeMessage::CMSG_GUILD_PROMOTE(_) => "CMSG_GUILD_PROMOTE",
             ClientOpcodeMessage::CMSG_GUILD_DEMOTE(_) => "CMSG_GUILD_DEMOTE",
-            ClientOpcodeMessage::CMSG_GUILD_LEAVE(_) => "CMSG_GUILD_LEAVE",
+            ClientOpcodeMessage::CMSG_GUILD_LEAVE => "CMSG_GUILD_LEAVE",
             ClientOpcodeMessage::CMSG_GUILD_REMOVE(_) => "CMSG_GUILD_REMOVE",
-            ClientOpcodeMessage::CMSG_GUILD_DISBAND(_) => "CMSG_GUILD_DISBAND",
+            ClientOpcodeMessage::CMSG_GUILD_DISBAND => "CMSG_GUILD_DISBAND",
             ClientOpcodeMessage::CMSG_GUILD_LEADER(_) => "CMSG_GUILD_LEADER",
             ClientOpcodeMessage::CMSG_GUILD_MOTD(_) => "CMSG_GUILD_MOTD",
             ClientOpcodeMessage::CMSG_MESSAGECHAT(_) => "CMSG_MESSAGECHAT",
@@ -4238,11 +4238,11 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_FORCE_MOVE_UNROOT_ACK(_) => "CMSG_FORCE_MOVE_UNROOT_ACK",
             ClientOpcodeMessage::CMSG_MOVE_KNOCK_BACK_ACK(_) => "CMSG_MOVE_KNOCK_BACK_ACK",
             ClientOpcodeMessage::CMSG_MOVE_HOVER_ACK(_) => "CMSG_MOVE_HOVER_ACK",
-            ClientOpcodeMessage::CMSG_NEXT_CINEMATIC_CAMERA(_) => "CMSG_NEXT_CINEMATIC_CAMERA",
-            ClientOpcodeMessage::CMSG_COMPLETE_CINEMATIC(_) => "CMSG_COMPLETE_CINEMATIC",
+            ClientOpcodeMessage::CMSG_NEXT_CINEMATIC_CAMERA => "CMSG_NEXT_CINEMATIC_CAMERA",
+            ClientOpcodeMessage::CMSG_COMPLETE_CINEMATIC => "CMSG_COMPLETE_CINEMATIC",
             ClientOpcodeMessage::CMSG_TUTORIAL_FLAG(_) => "CMSG_TUTORIAL_FLAG",
-            ClientOpcodeMessage::CMSG_TUTORIAL_CLEAR(_) => "CMSG_TUTORIAL_CLEAR",
-            ClientOpcodeMessage::CMSG_TUTORIAL_RESET(_) => "CMSG_TUTORIAL_RESET",
+            ClientOpcodeMessage::CMSG_TUTORIAL_CLEAR => "CMSG_TUTORIAL_CLEAR",
+            ClientOpcodeMessage::CMSG_TUTORIAL_RESET => "CMSG_TUTORIAL_RESET",
             ClientOpcodeMessage::CMSG_STANDSTATECHANGE(_) => "CMSG_STANDSTATECHANGE",
             ClientOpcodeMessage::CMSG_EMOTE(_) => "CMSG_EMOTE",
             ClientOpcodeMessage::CMSG_TEXT_EMOTE(_) => "CMSG_TEXT_EMOTE",
@@ -4256,12 +4256,12 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_DESTROYITEM(_) => "CMSG_DESTROYITEM",
             ClientOpcodeMessage::CMSG_INSPECT(_) => "CMSG_INSPECT",
             ClientOpcodeMessage::CMSG_INITIATE_TRADE(_) => "CMSG_INITIATE_TRADE",
-            ClientOpcodeMessage::CMSG_BEGIN_TRADE(_) => "CMSG_BEGIN_TRADE",
-            ClientOpcodeMessage::CMSG_BUSY_TRADE(_) => "CMSG_BUSY_TRADE",
-            ClientOpcodeMessage::CMSG_IGNORE_TRADE(_) => "CMSG_IGNORE_TRADE",
+            ClientOpcodeMessage::CMSG_BEGIN_TRADE => "CMSG_BEGIN_TRADE",
+            ClientOpcodeMessage::CMSG_BUSY_TRADE => "CMSG_BUSY_TRADE",
+            ClientOpcodeMessage::CMSG_IGNORE_TRADE => "CMSG_IGNORE_TRADE",
             ClientOpcodeMessage::CMSG_ACCEPT_TRADE(_) => "CMSG_ACCEPT_TRADE",
-            ClientOpcodeMessage::CMSG_UNACCEPT_TRADE(_) => "CMSG_UNACCEPT_TRADE",
-            ClientOpcodeMessage::CMSG_CANCEL_TRADE(_) => "CMSG_CANCEL_TRADE",
+            ClientOpcodeMessage::CMSG_UNACCEPT_TRADE => "CMSG_UNACCEPT_TRADE",
+            ClientOpcodeMessage::CMSG_CANCEL_TRADE => "CMSG_CANCEL_TRADE",
             ClientOpcodeMessage::CMSG_SET_TRADE_ITEM(_) => "CMSG_SET_TRADE_ITEM",
             ClientOpcodeMessage::CMSG_CLEAR_TRADE_ITEM(_) => "CMSG_CLEAR_TRADE_ITEM",
             ClientOpcodeMessage::CMSG_SET_TRADE_GOLD(_) => "CMSG_SET_TRADE_GOLD",
@@ -4275,15 +4275,15 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_DELETEEQUIPMENT_SET(_) => "CMSG_DELETEEQUIPMENT_SET",
             ClientOpcodeMessage::CMSG_INSTANCE_LOCK_RESPONSE(_) => "CMSG_INSTANCE_LOCK_RESPONSE",
             ClientOpcodeMessage::CMSG_ATTACKSWING(_) => "CMSG_ATTACKSWING",
-            ClientOpcodeMessage::CMSG_ATTACKSTOP(_) => "CMSG_ATTACKSTOP",
-            ClientOpcodeMessage::CMSG_REPOP_REQUEST(_) => "CMSG_REPOP_REQUEST",
+            ClientOpcodeMessage::CMSG_ATTACKSTOP => "CMSG_ATTACKSTOP",
+            ClientOpcodeMessage::CMSG_REPOP_REQUEST => "CMSG_REPOP_REQUEST",
             ClientOpcodeMessage::CMSG_RESURRECT_RESPONSE(_) => "CMSG_RESURRECT_RESPONSE",
             ClientOpcodeMessage::CMSG_LOOT(_) => "CMSG_LOOT",
-            ClientOpcodeMessage::CMSG_LOOT_MONEY(_) => "CMSG_LOOT_MONEY",
+            ClientOpcodeMessage::CMSG_LOOT_MONEY => "CMSG_LOOT_MONEY",
             ClientOpcodeMessage::CMSG_LOOT_RELEASE(_) => "CMSG_LOOT_RELEASE",
             ClientOpcodeMessage::CMSG_DUEL_ACCEPTED(_) => "CMSG_DUEL_ACCEPTED",
             ClientOpcodeMessage::CMSG_DUEL_CANCELLED(_) => "CMSG_DUEL_CANCELLED",
-            ClientOpcodeMessage::CMSG_MOUNTSPECIAL_ANIM(_) => "CMSG_MOUNTSPECIAL_ANIM",
+            ClientOpcodeMessage::CMSG_MOUNTSPECIAL_ANIM => "CMSG_MOUNTSPECIAL_ANIM",
             ClientOpcodeMessage::CMSG_PET_SET_ACTION(_) => "CMSG_PET_SET_ACTION",
             ClientOpcodeMessage::CMSG_PET_ACTION(_) => "CMSG_PET_ACTION",
             ClientOpcodeMessage::CMSG_PET_ABANDON(_) => "CMSG_PET_ABANDON",
@@ -4294,12 +4294,12 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_QUESTGIVER_STATUS_QUERY(_) => "CMSG_QUESTGIVER_STATUS_QUERY",
             ClientOpcodeMessage::CMSG_QUESTGIVER_HELLO(_) => "CMSG_QUESTGIVER_HELLO",
             ClientOpcodeMessage::CMSG_QUESTGIVER_QUERY_QUEST(_) => "CMSG_QUESTGIVER_QUERY_QUEST",
-            ClientOpcodeMessage::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH(_) => "CMSG_QUESTGIVER_QUEST_AUTOLAUNCH",
+            ClientOpcodeMessage::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH => "CMSG_QUESTGIVER_QUEST_AUTOLAUNCH",
             ClientOpcodeMessage::CMSG_QUESTGIVER_ACCEPT_QUEST(_) => "CMSG_QUESTGIVER_ACCEPT_QUEST",
             ClientOpcodeMessage::CMSG_QUESTGIVER_COMPLETE_QUEST(_) => "CMSG_QUESTGIVER_COMPLETE_QUEST",
             ClientOpcodeMessage::CMSG_QUESTGIVER_REQUEST_REWARD(_) => "CMSG_QUESTGIVER_REQUEST_REWARD",
             ClientOpcodeMessage::CMSG_QUESTGIVER_CHOOSE_REWARD(_) => "CMSG_QUESTGIVER_CHOOSE_REWARD",
-            ClientOpcodeMessage::CMSG_QUESTGIVER_CANCEL(_) => "CMSG_QUESTGIVER_CANCEL",
+            ClientOpcodeMessage::CMSG_QUESTGIVER_CANCEL => "CMSG_QUESTGIVER_CANCEL",
             ClientOpcodeMessage::CMSG_QUESTLOG_SWAP_QUEST(_) => "CMSG_QUESTLOG_SWAP_QUEST",
             ClientOpcodeMessage::CMSG_QUESTLOG_REMOVE_QUEST(_) => "CMSG_QUESTLOG_REMOVE_QUEST",
             ClientOpcodeMessage::CMSG_QUEST_CONFIRM_ACCEPT(_) => "CMSG_QUEST_CONFIRM_ACCEPT",
@@ -4325,7 +4325,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_PETITION_QUERY(_) => "CMSG_PETITION_QUERY",
             ClientOpcodeMessage::CMSG_BUG(_) => "CMSG_BUG",
             ClientOpcodeMessage::CMSG_PLAYED_TIME(_) => "CMSG_PLAYED_TIME",
-            ClientOpcodeMessage::CMSG_QUERY_TIME(_) => "CMSG_QUERY_TIME",
+            ClientOpcodeMessage::CMSG_QUERY_TIME => "CMSG_QUERY_TIME",
             ClientOpcodeMessage::CMSG_RECLAIM_CORPSE(_) => "CMSG_RECLAIM_CORPSE",
             ClientOpcodeMessage::CMSG_WRAP_ITEM(_) => "CMSG_WRAP_ITEM",
             ClientOpcodeMessage::MSG_MINIMAP_PING(_) => "MSG_MINIMAP_PING_Client",
@@ -4342,16 +4342,16 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_GMTICKET_UPDATETEXT(_) => "CMSG_GMTICKET_UPDATETEXT",
             ClientOpcodeMessage::CMSG_REQUEST_ACCOUNT_DATA(_) => "CMSG_REQUEST_ACCOUNT_DATA",
             ClientOpcodeMessage::CMSG_UPDATE_ACCOUNT_DATA(_) => "CMSG_UPDATE_ACCOUNT_DATA",
-            ClientOpcodeMessage::CMSG_GMTICKET_GETTICKET(_) => "CMSG_GMTICKET_GETTICKET",
-            ClientOpcodeMessage::CMSG_UNLEARN_TALENTS(_) => "CMSG_UNLEARN_TALENTS",
-            ClientOpcodeMessage::MSG_CORPSE_QUERY(_) => "MSG_CORPSE_QUERY_Client",
-            ClientOpcodeMessage::CMSG_GMTICKET_DELETETICKET(_) => "CMSG_GMTICKET_DELETETICKET",
-            ClientOpcodeMessage::CMSG_GMTICKET_SYSTEMSTATUS(_) => "CMSG_GMTICKET_SYSTEMSTATUS",
+            ClientOpcodeMessage::CMSG_GMTICKET_GETTICKET => "CMSG_GMTICKET_GETTICKET",
+            ClientOpcodeMessage::CMSG_UNLEARN_TALENTS => "CMSG_UNLEARN_TALENTS",
+            ClientOpcodeMessage::MSG_CORPSE_QUERY => "MSG_CORPSE_QUERY_Client",
+            ClientOpcodeMessage::CMSG_GMTICKET_DELETETICKET => "CMSG_GMTICKET_DELETETICKET",
+            ClientOpcodeMessage::CMSG_GMTICKET_SYSTEMSTATUS => "CMSG_GMTICKET_SYSTEMSTATUS",
             ClientOpcodeMessage::CMSG_SPIRIT_HEALER_ACTIVATE(_) => "CMSG_SPIRIT_HEALER_ACTIVATE",
             ClientOpcodeMessage::CMSG_CHAT_IGNORED(_) => "CMSG_CHAT_IGNORED",
             ClientOpcodeMessage::CMSG_GUILD_RANK(_) => "CMSG_GUILD_RANK",
             ClientOpcodeMessage::CMSG_GUILD_ADD_RANK(_) => "CMSG_GUILD_ADD_RANK",
-            ClientOpcodeMessage::CMSG_GUILD_DEL_RANK(_) => "CMSG_GUILD_DEL_RANK",
+            ClientOpcodeMessage::CMSG_GUILD_DEL_RANK => "CMSG_GUILD_DEL_RANK",
             ClientOpcodeMessage::CMSG_GUILD_SET_PUBLIC_NOTE(_) => "CMSG_GUILD_SET_PUBLIC_NOTE",
             ClientOpcodeMessage::CMSG_GUILD_SET_OFFICER_NOTE(_) => "CMSG_GUILD_SET_OFFICER_NOTE",
             ClientOpcodeMessage::CMSG_SEND_MAIL(_) => "CMSG_SEND_MAIL",
@@ -4376,58 +4376,58 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_SET_AMMO(_) => "CMSG_SET_AMMO",
             ClientOpcodeMessage::CMSG_SET_ACTIVE_MOVER(_) => "CMSG_SET_ACTIVE_MOVER",
             ClientOpcodeMessage::CMSG_PET_CANCEL_AURA(_) => "CMSG_PET_CANCEL_AURA",
-            ClientOpcodeMessage::CMSG_CANCEL_AUTO_REPEAT_SPELL(_) => "CMSG_CANCEL_AUTO_REPEAT_SPELL",
+            ClientOpcodeMessage::CMSG_CANCEL_AUTO_REPEAT_SPELL => "CMSG_CANCEL_AUTO_REPEAT_SPELL",
             ClientOpcodeMessage::MSG_LIST_STABLED_PETS(_) => "MSG_LIST_STABLED_PETS_Client",
             ClientOpcodeMessage::CMSG_STABLE_PET(_) => "CMSG_STABLE_PET",
             ClientOpcodeMessage::CMSG_UNSTABLE_PET(_) => "CMSG_UNSTABLE_PET",
             ClientOpcodeMessage::CMSG_BUY_STABLE_SLOT(_) => "CMSG_BUY_STABLE_SLOT",
             ClientOpcodeMessage::CMSG_STABLE_SWAP_PET(_) => "CMSG_STABLE_SWAP_PET",
-            ClientOpcodeMessage::CMSG_REQUEST_PET_INFO(_) => "CMSG_REQUEST_PET_INFO",
+            ClientOpcodeMessage::CMSG_REQUEST_PET_INFO => "CMSG_REQUEST_PET_INFO",
             ClientOpcodeMessage::CMSG_FAR_SIGHT(_) => "CMSG_FAR_SIGHT",
             ClientOpcodeMessage::CMSG_GROUP_CHANGE_SUB_GROUP(_) => "CMSG_GROUP_CHANGE_SUB_GROUP",
             ClientOpcodeMessage::CMSG_REQUEST_PARTY_MEMBER_STATS(_) => "CMSG_REQUEST_PARTY_MEMBER_STATS",
             ClientOpcodeMessage::CMSG_GROUP_SWAP_SUB_GROUP(_) => "CMSG_GROUP_SWAP_SUB_GROUP",
             ClientOpcodeMessage::CMSG_AUTOSTORE_BANK_ITEM(_) => "CMSG_AUTOSTORE_BANK_ITEM",
             ClientOpcodeMessage::CMSG_AUTOBANK_ITEM(_) => "CMSG_AUTOBANK_ITEM",
-            ClientOpcodeMessage::MSG_QUERY_NEXT_MAIL_TIME(_) => "MSG_QUERY_NEXT_MAIL_TIME_Client",
-            ClientOpcodeMessage::CMSG_GROUP_RAID_CONVERT(_) => "CMSG_GROUP_RAID_CONVERT",
+            ClientOpcodeMessage::MSG_QUERY_NEXT_MAIL_TIME => "MSG_QUERY_NEXT_MAIL_TIME_Client",
+            ClientOpcodeMessage::CMSG_GROUP_RAID_CONVERT => "CMSG_GROUP_RAID_CONVERT",
             ClientOpcodeMessage::CMSG_GROUP_ASSISTANT_LEADER(_) => "CMSG_GROUP_ASSISTANT_LEADER",
             ClientOpcodeMessage::CMSG_BUYBACK_ITEM(_) => "CMSG_BUYBACK_ITEM",
             ClientOpcodeMessage::CMSG_SET_SAVED_INSTANCE_EXTEND(_) => "CMSG_SET_SAVED_INSTANCE_EXTEND",
-            ClientOpcodeMessage::CMSG_LFG_GET_STATUS(_) => "CMSG_LFG_GET_STATUS",
-            ClientOpcodeMessage::CMSG_GMTICKETSYSTEM_TOGGLE(_) => "CMSG_GMTICKETSYSTEM_TOGGLE",
-            ClientOpcodeMessage::CMSG_CANCEL_GROWTH_AURA(_) => "CMSG_CANCEL_GROWTH_AURA",
+            ClientOpcodeMessage::CMSG_LFG_GET_STATUS => "CMSG_LFG_GET_STATUS",
+            ClientOpcodeMessage::CMSG_GMTICKETSYSTEM_TOGGLE => "CMSG_GMTICKETSYSTEM_TOGGLE",
+            ClientOpcodeMessage::CMSG_CANCEL_GROWTH_AURA => "CMSG_CANCEL_GROWTH_AURA",
             ClientOpcodeMessage::CMSG_LOOT_ROLL(_) => "CMSG_LOOT_ROLL",
             ClientOpcodeMessage::CMSG_LOOT_MASTER_GIVE(_) => "CMSG_LOOT_MASTER_GIVE",
             ClientOpcodeMessage::CMSG_REPAIR_ITEM(_) => "CMSG_REPAIR_ITEM",
             ClientOpcodeMessage::MSG_TALENT_WIPE_CONFIRM(_) => "MSG_TALENT_WIPE_CONFIRM_Client",
             ClientOpcodeMessage::CMSG_SUMMON_RESPONSE(_) => "CMSG_SUMMON_RESPONSE",
-            ClientOpcodeMessage::CMSG_SELF_RES(_) => "CMSG_SELF_RES",
-            ClientOpcodeMessage::CMSG_TOGGLE_HELM(_) => "CMSG_TOGGLE_HELM",
-            ClientOpcodeMessage::CMSG_TOGGLE_CLOAK(_) => "CMSG_TOGGLE_CLOAK",
+            ClientOpcodeMessage::CMSG_SELF_RES => "CMSG_SELF_RES",
+            ClientOpcodeMessage::CMSG_TOGGLE_HELM => "CMSG_TOGGLE_HELM",
+            ClientOpcodeMessage::CMSG_TOGGLE_CLOAK => "CMSG_TOGGLE_CLOAK",
             ClientOpcodeMessage::CMSG_SET_ACTIONBAR_TOGGLES(_) => "CMSG_SET_ACTIONBAR_TOGGLES",
             ClientOpcodeMessage::CMSG_ITEM_NAME_QUERY(_) => "CMSG_ITEM_NAME_QUERY",
             ClientOpcodeMessage::CMSG_CHAR_RENAME(_) => "CMSG_CHAR_RENAME",
             ClientOpcodeMessage::CMSG_MOVE_SPLINE_DONE(_) => "CMSG_MOVE_SPLINE_DONE",
             ClientOpcodeMessage::CMSG_MOVE_FALL_RESET(_) => "CMSG_MOVE_FALL_RESET",
-            ClientOpcodeMessage::CMSG_REQUEST_RAID_INFO(_) => "CMSG_REQUEST_RAID_INFO",
+            ClientOpcodeMessage::CMSG_REQUEST_RAID_INFO => "CMSG_REQUEST_RAID_INFO",
             ClientOpcodeMessage::CMSG_MOVE_TIME_SKIPPED(_) => "CMSG_MOVE_TIME_SKIPPED",
             ClientOpcodeMessage::CMSG_MOVE_FEATHER_FALL_ACK(_) => "CMSG_MOVE_FEATHER_FALL_ACK",
             ClientOpcodeMessage::CMSG_MOVE_WATER_WALK_ACK(_) => "CMSG_MOVE_WATER_WALK_ACK",
             ClientOpcodeMessage::CMSG_MOVE_NOT_ACTIVE_MOVER(_) => "CMSG_MOVE_NOT_ACTIVE_MOVER",
-            ClientOpcodeMessage::CMSG_BATTLEFIELD_STATUS(_) => "CMSG_BATTLEFIELD_STATUS",
+            ClientOpcodeMessage::CMSG_BATTLEFIELD_STATUS => "CMSG_BATTLEFIELD_STATUS",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_PORT(_) => "CMSG_BATTLEFIELD_PORT",
             ClientOpcodeMessage::MSG_INSPECT_HONOR_STATS(_) => "MSG_INSPECT_HONOR_STATS_Client",
             ClientOpcodeMessage::CMSG_BATTLEMASTER_HELLO(_) => "CMSG_BATTLEMASTER_HELLO",
             ClientOpcodeMessage::CMSG_FORCE_WALK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_WALK_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK",
             ClientOpcodeMessage::CMSG_FORCE_TURN_RATE_CHANGE_ACK(_) => "CMSG_FORCE_TURN_RATE_CHANGE_ACK",
-            ClientOpcodeMessage::MSG_PVP_LOG_DATA(_) => "MSG_PVP_LOG_DATA_Client",
+            ClientOpcodeMessage::MSG_PVP_LOG_DATA => "MSG_PVP_LOG_DATA_Client",
             ClientOpcodeMessage::CMSG_LEAVE_BATTLEFIELD(_) => "CMSG_LEAVE_BATTLEFIELD",
             ClientOpcodeMessage::CMSG_AREA_SPIRIT_HEALER_QUERY(_) => "CMSG_AREA_SPIRIT_HEALER_QUERY",
             ClientOpcodeMessage::CMSG_AREA_SPIRIT_HEALER_QUEUE(_) => "CMSG_AREA_SPIRIT_HEALER_QUEUE",
             ClientOpcodeMessage::CMSG_WARDEN_DATA(_) => "CMSG_WARDEN_DATA",
-            ClientOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS(_) => "MSG_BATTLEGROUND_PLAYER_POSITIONS_Client",
+            ClientOpcodeMessage::MSG_BATTLEGROUND_PLAYER_POSITIONS => "MSG_BATTLEGROUND_PLAYER_POSITIONS_Client",
             ClientOpcodeMessage::CMSG_PET_STOP_ATTACK(_) => "CMSG_PET_STOP_ATTACK",
             ClientOpcodeMessage::CMSG_BATTLEMASTER_JOIN(_) => "CMSG_BATTLEMASTER_JOIN",
             ClientOpcodeMessage::CMSG_PET_UNLEARN(_) => "CMSG_PET_UNLEARN",
@@ -4436,7 +4436,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_ACTIVATETAXIEXPRESS(_) => "CMSG_ACTIVATETAXIEXPRESS",
             ClientOpcodeMessage::CMSG_SET_FACTION_INACTIVE(_) => "CMSG_SET_FACTION_INACTIVE",
             ClientOpcodeMessage::CMSG_SET_WATCHED_FACTION(_) => "CMSG_SET_WATCHED_FACTION",
-            ClientOpcodeMessage::CMSG_RESET_INSTANCES(_) => "CMSG_RESET_INSTANCES",
+            ClientOpcodeMessage::CMSG_RESET_INSTANCES => "CMSG_RESET_INSTANCES",
             ClientOpcodeMessage::MSG_RAID_TARGET_UPDATE(_) => "MSG_RAID_TARGET_UPDATE_Client",
             ClientOpcodeMessage::MSG_RAID_READY_CHECK(_) => "MSG_RAID_READY_CHECK_Client",
             ClientOpcodeMessage::MSG_SET_DUNGEON_DIFFICULTY(_) => "MSG_SET_DUNGEON_DIFFICULTY_Client",
@@ -4447,26 +4447,26 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_SOCKET_GEMS(_) => "CMSG_SOCKET_GEMS",
             ClientOpcodeMessage::CMSG_ARENA_TEAM_ROSTER(_) => "CMSG_ARENA_TEAM_ROSTER",
             ClientOpcodeMessage::CMSG_ARENA_TEAM_INVITE(_) => "CMSG_ARENA_TEAM_INVITE",
-            ClientOpcodeMessage::CMSG_ARENA_TEAM_ACCEPT(_) => "CMSG_ARENA_TEAM_ACCEPT",
-            ClientOpcodeMessage::CMSG_ARENA_TEAM_DECLINE(_) => "CMSG_ARENA_TEAM_DECLINE",
+            ClientOpcodeMessage::CMSG_ARENA_TEAM_ACCEPT => "CMSG_ARENA_TEAM_ACCEPT",
+            ClientOpcodeMessage::CMSG_ARENA_TEAM_DECLINE => "CMSG_ARENA_TEAM_DECLINE",
             ClientOpcodeMessage::CMSG_ARENA_TEAM_LEAVE(_) => "CMSG_ARENA_TEAM_LEAVE",
             ClientOpcodeMessage::CMSG_ARENA_TEAM_REMOVE(_) => "CMSG_ARENA_TEAM_REMOVE",
             ClientOpcodeMessage::CMSG_ARENA_TEAM_DISBAND(_) => "CMSG_ARENA_TEAM_DISBAND",
             ClientOpcodeMessage::CMSG_ARENA_TEAM_LEADER(_) => "CMSG_ARENA_TEAM_LEADER",
             ClientOpcodeMessage::CMSG_BATTLEMASTER_JOIN_ARENA(_) => "CMSG_BATTLEMASTER_JOIN_ARENA",
             ClientOpcodeMessage::CMSG_LFG_JOIN(_) => "CMSG_LFG_JOIN",
-            ClientOpcodeMessage::CMSG_LFG_LEAVE(_) => "CMSG_LFG_LEAVE",
+            ClientOpcodeMessage::CMSG_LFG_LEAVE => "CMSG_LFG_LEAVE",
             ClientOpcodeMessage::CMSG_SEARCH_LFG_JOIN(_) => "CMSG_SEARCH_LFG_JOIN",
             ClientOpcodeMessage::CMSG_SEARCH_LFG_LEAVE(_) => "CMSG_SEARCH_LFG_LEAVE",
             ClientOpcodeMessage::CMSG_LFG_PROPOSAL_RESULT(_) => "CMSG_LFG_PROPOSAL_RESULT",
             ClientOpcodeMessage::CMSG_SET_LFG_COMMENT(_) => "CMSG_SET_LFG_COMMENT",
             ClientOpcodeMessage::CMSG_LFG_SET_ROLES(_) => "CMSG_LFG_SET_ROLES",
             ClientOpcodeMessage::CMSG_LFG_SET_BOOT_VOTE(_) => "CMSG_LFG_SET_BOOT_VOTE",
-            ClientOpcodeMessage::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(_) => "CMSG_LFD_PLAYER_LOCK_INFO_REQUEST",
+            ClientOpcodeMessage::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST => "CMSG_LFD_PLAYER_LOCK_INFO_REQUEST",
             ClientOpcodeMessage::CMSG_LFG_TELEPORT(_) => "CMSG_LFG_TELEPORT",
-            ClientOpcodeMessage::CMSG_LFD_PARTY_LOCK_INFO_REQUEST(_) => "CMSG_LFD_PARTY_LOCK_INFO_REQUEST",
+            ClientOpcodeMessage::CMSG_LFD_PARTY_LOCK_INFO_REQUEST => "CMSG_LFD_PARTY_LOCK_INFO_REQUEST",
             ClientOpcodeMessage::CMSG_SET_TITLE(_) => "CMSG_SET_TITLE",
-            ClientOpcodeMessage::CMSG_CANCEL_MOUNT_AURA(_) => "CMSG_CANCEL_MOUNT_AURA",
+            ClientOpcodeMessage::CMSG_CANCEL_MOUNT_AURA => "CMSG_CANCEL_MOUNT_AURA",
             ClientOpcodeMessage::MSG_INSPECT_ARENA_TEAMS(_) => "MSG_INSPECT_ARENA_TEAMS_Client",
             ClientOpcodeMessage::CMSG_CANCEL_TEMP_ENCHANTMENT(_) => "CMSG_CANCEL_TEMP_ENCHANTMENT",
             ClientOpcodeMessage::CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK(_) => "CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK",
@@ -4479,12 +4479,12 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::MSG_RAID_READY_CHECK_CONFIRM(_) => "MSG_RAID_READY_CHECK_CONFIRM_Client",
             ClientOpcodeMessage::CMSG_VOICE_SESSION_ENABLE(_) => "CMSG_VOICE_SESSION_ENABLE",
             ClientOpcodeMessage::CMSG_COMMENTATOR_ENABLE(_) => "CMSG_COMMENTATOR_ENABLE",
-            ClientOpcodeMessage::MSG_RAID_READY_CHECK_FINISHED(_) => "MSG_RAID_READY_CHECK_FINISHED_Client",
+            ClientOpcodeMessage::MSG_RAID_READY_CHECK_FINISHED => "MSG_RAID_READY_CHECK_FINISHED_Client",
             ClientOpcodeMessage::CMSG_COMPLAIN(_) => "CMSG_COMPLAIN",
             ClientOpcodeMessage::CMSG_CHANNEL_DISPLAY_LIST(_) => "CMSG_CHANNEL_DISPLAY_LIST",
             ClientOpcodeMessage::CMSG_SET_ACTIVE_VOICE_CHANNEL(_) => "CMSG_SET_ACTIVE_VOICE_CHANNEL",
             ClientOpcodeMessage::CMSG_GET_CHANNEL_MEMBER_COUNT(_) => "CMSG_GET_CHANNEL_MEMBER_COUNT",
-            ClientOpcodeMessage::CMSG_CHANNEL_VOICE_ON(_) => "CMSG_CHANNEL_VOICE_ON",
+            ClientOpcodeMessage::CMSG_CHANNEL_VOICE_ON => "CMSG_CHANNEL_VOICE_ON",
             ClientOpcodeMessage::CMSG_REPORT_PVP_AFK(_) => "CMSG_REPORT_PVP_AFK",
             ClientOpcodeMessage::CMSG_GUILD_BANKER_ACTIVATE(_) => "CMSG_GUILD_BANKER_ACTIVATE",
             ClientOpcodeMessage::CMSG_GUILD_BANK_QUERY_TAB(_) => "CMSG_GUILD_BANK_QUERY_TAB",
@@ -4497,21 +4497,21 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_SET_CHANNEL_WATCH(_) => "CMSG_SET_CHANNEL_WATCH",
             ClientOpcodeMessage::CMSG_CLEAR_CHANNEL_WATCH(_) => "CMSG_CLEAR_CHANNEL_WATCH",
             ClientOpcodeMessage::CMSG_SPELLCLICK(_) => "CMSG_SPELLCLICK",
-            ClientOpcodeMessage::MSG_GUILD_PERMISSIONS(_) => "MSG_GUILD_PERMISSIONS_Client",
-            ClientOpcodeMessage::MSG_GUILD_BANK_MONEY_WITHDRAWN(_) => "MSG_GUILD_BANK_MONEY_WITHDRAWN_Client",
-            ClientOpcodeMessage::MSG_GUILD_EVENT_LOG_QUERY(_) => "MSG_GUILD_EVENT_LOG_QUERY_Client",
+            ClientOpcodeMessage::MSG_GUILD_PERMISSIONS => "MSG_GUILD_PERMISSIONS_Client",
+            ClientOpcodeMessage::MSG_GUILD_BANK_MONEY_WITHDRAWN => "MSG_GUILD_BANK_MONEY_WITHDRAWN_Client",
+            ClientOpcodeMessage::MSG_GUILD_EVENT_LOG_QUERY => "MSG_GUILD_EVENT_LOG_QUERY_Client",
             ClientOpcodeMessage::CMSG_GET_MIRRORIMAGE_DATA(_) => "CMSG_GET_MIRRORIMAGE_DATA",
-            ClientOpcodeMessage::CMSG_KEEP_ALIVE(_) => "CMSG_KEEP_ALIVE",
+            ClientOpcodeMessage::CMSG_KEEP_ALIVE => "CMSG_KEEP_ALIVE",
             ClientOpcodeMessage::CMSG_OPT_OUT_OF_LOOT(_) => "CMSG_OPT_OUT_OF_LOOT",
             ClientOpcodeMessage::MSG_QUERY_GUILD_BANK_TEXT(_) => "MSG_QUERY_GUILD_BANK_TEXT_Client",
             ClientOpcodeMessage::CMSG_SET_GUILD_BANK_TEXT(_) => "CMSG_SET_GUILD_BANK_TEXT",
             ClientOpcodeMessage::CMSG_GRANT_LEVEL(_) => "CMSG_GRANT_LEVEL",
             ClientOpcodeMessage::CMSG_TOTEM_DESTROYED(_) => "CMSG_TOTEM_DESTROYED",
-            ClientOpcodeMessage::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(_) => "CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY",
+            ClientOpcodeMessage::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY => "CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY",
             ClientOpcodeMessage::CMSG_SET_PLAYER_DECLINED_NAMES(_) => "CMSG_SET_PLAYER_DECLINED_NAMES",
             ClientOpcodeMessage::CMSG_ACCEPT_LEVEL_GRANT(_) => "CMSG_ACCEPT_LEVEL_GRANT",
             ClientOpcodeMessage::CMSG_ALTER_APPEARANCE(_) => "CMSG_ALTER_APPEARANCE",
-            ClientOpcodeMessage::CMSG_CALENDAR_GET_CALENDAR(_) => "CMSG_CALENDAR_GET_CALENDAR",
+            ClientOpcodeMessage::CMSG_CALENDAR_GET_CALENDAR => "CMSG_CALENDAR_GET_CALENDAR",
             ClientOpcodeMessage::CMSG_CALENDAR_GET_EVENT(_) => "CMSG_CALENDAR_GET_EVENT",
             ClientOpcodeMessage::CMSG_CALENDAR_GUILD_FILTER(_) => "CMSG_CALENDAR_GUILD_FILTER",
             ClientOpcodeMessage::CMSG_CALENDAR_ARENA_TEAM(_) => "CMSG_CALENDAR_ARENA_TEAM",
@@ -4526,13 +4526,13 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_CALENDAR_EVENT_MODERATOR_STATUS(_) => "CMSG_CALENDAR_EVENT_MODERATOR_STATUS",
             ClientOpcodeMessage::CMSG_CALENDAR_COMPLAIN(_) => "CMSG_CALENDAR_COMPLAIN",
             ClientOpcodeMessage::CMSG_UPDATE_MISSILE_TRAJECTORY(_) => "CMSG_UPDATE_MISSILE_TRAJECTORY",
-            ClientOpcodeMessage::CMSG_COMPLETE_MOVIE(_) => "CMSG_COMPLETE_MOVIE",
+            ClientOpcodeMessage::CMSG_COMPLETE_MOVIE => "CMSG_COMPLETE_MOVIE",
             ClientOpcodeMessage::CMSG_QUERY_INSPECT_ACHIEVEMENTS(_) => "CMSG_QUERY_INSPECT_ACHIEVEMENTS",
-            ClientOpcodeMessage::CMSG_DISMISS_CONTROLLED_VEHICLE(_) => "CMSG_DISMISS_CONTROLLED_VEHICLE",
+            ClientOpcodeMessage::CMSG_DISMISS_CONTROLLED_VEHICLE => "CMSG_DISMISS_CONTROLLED_VEHICLE",
             ClientOpcodeMessage::CMSG_CHAR_CUSTOMIZE(_) => "CMSG_CHAR_CUSTOMIZE",
-            ClientOpcodeMessage::CMSG_REQUEST_VEHICLE_EXIT(_) => "CMSG_REQUEST_VEHICLE_EXIT",
-            ClientOpcodeMessage::CMSG_REQUEST_VEHICLE_PREV_SEAT(_) => "CMSG_REQUEST_VEHICLE_PREV_SEAT",
-            ClientOpcodeMessage::CMSG_REQUEST_VEHICLE_NEXT_SEAT(_) => "CMSG_REQUEST_VEHICLE_NEXT_SEAT",
+            ClientOpcodeMessage::CMSG_REQUEST_VEHICLE_EXIT => "CMSG_REQUEST_VEHICLE_EXIT",
+            ClientOpcodeMessage::CMSG_REQUEST_VEHICLE_PREV_SEAT => "CMSG_REQUEST_VEHICLE_PREV_SEAT",
+            ClientOpcodeMessage::CMSG_REQUEST_VEHICLE_NEXT_SEAT => "CMSG_REQUEST_VEHICLE_NEXT_SEAT",
             ClientOpcodeMessage::CMSG_REQUEST_VEHICLE_SWITCH_SEAT(_) => "CMSG_REQUEST_VEHICLE_SWITCH_SEAT",
             ClientOpcodeMessage::CMSG_PET_LEARN_TALENT(_) => "CMSG_PET_LEARN_TALENT",
             ClientOpcodeMessage::CMSG_GAMEOBJ_REPORT_USE(_) => "CMSG_GAMEOBJ_REPORT_USE",
@@ -4541,7 +4541,7 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_AUCTION_LIST_PENDING_SALES(_) => "CMSG_AUCTION_LIST_PENDING_SALES",
             ClientOpcodeMessage::CMSG_ENABLETAXI(_) => "CMSG_ENABLETAXI",
             ClientOpcodeMessage::CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE(_) => "CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE",
-            ClientOpcodeMessage::CMSG_HEARTH_AND_RESURRECT(_) => "CMSG_HEARTH_AND_RESURRECT",
+            ClientOpcodeMessage::CMSG_HEARTH_AND_RESURRECT => "CMSG_HEARTH_AND_RESURRECT",
             ClientOpcodeMessage::CMSG_PLAYER_VEHICLE_ENTER(_) => "CMSG_PLAYER_VEHICLE_ENTER",
             ClientOpcodeMessage::CMSG_CONTROLLER_EJECT_PASSENGER(_) => "CMSG_CONTROLLER_EJECT_PASSENGER",
             ClientOpcodeMessage::CMSG_ITEM_REFUND_INFO(_) => "CMSG_ITEM_REFUND_INFO",
@@ -4560,11 +4560,11 @@ impl std::fmt::Display for ClientOpcodeMessage {
             ClientOpcodeMessage::CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE(_) => "CMSG_BATTLEFIELD_MGR_QUEUE_INVITE_RESPONSE",
             ClientOpcodeMessage::CMSG_BATTLEFIELD_MGR_EXIT_REQUEST(_) => "CMSG_BATTLEFIELD_MGR_EXIT_REQUEST",
             ClientOpcodeMessage::MSG_SET_RAID_DIFFICULTY(_) => "MSG_SET_RAID_DIFFICULTY_Client",
-            ClientOpcodeMessage::CMSG_GMRESPONSE_RESOLVE(_) => "CMSG_GMRESPONSE_RESOLVE",
-            ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
+            ClientOpcodeMessage::CMSG_GMRESPONSE_RESOLVE => "CMSG_GMRESPONSE_RESOLVE",
+            ClientOpcodeMessage::CMSG_WORLD_STATE_UI_TIMER_UPDATE => "CMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ClientOpcodeMessage::CMSG_CHAR_RACE_CHANGE(_) => "CMSG_CHAR_RACE_CHANGE",
-            ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(_) => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
-            ClientOpcodeMessage::CMSG_QUERY_QUESTS_COMPLETED(_) => "CMSG_QUERY_QUESTS_COMPLETED",
+            ClientOpcodeMessage::CMSG_READY_FOR_ACCOUNT_DATA_TIMES => "CMSG_READY_FOR_ACCOUNT_DATA_TIMES",
+            ClientOpcodeMessage::CMSG_QUERY_QUESTS_COMPLETED => "CMSG_QUERY_QUESTS_COMPLETED",
             ClientOpcodeMessage::CMSG_GM_REPORT_LAG(_) => "CMSG_GM_REPORT_LAG",
             ClientOpcodeMessage::CMSG_MOVE_SET_COLLISION_HGT_ACK(_) => "CMSG_MOVE_SET_COLLISION_HGT_ACK",
         })
@@ -4692,8 +4692,8 @@ impl From<MSG_MOVE_SET_PITCH> for ClientOpcodeMessage {
 }
 
 impl From<MSG_MOVE_WORLDPORT_ACK> for ClientOpcodeMessage {
-    fn from(c: MSG_MOVE_WORLDPORT_ACK) -> Self {
-        Self::MSG_MOVE_WORLDPORT_ACK(c)
+    fn from(_: MSG_MOVE_WORLDPORT_ACK) -> Self {
+        Self::MSG_MOVE_WORLDPORT_ACK
     }
 }
 
@@ -4764,14 +4764,14 @@ impl From<MSG_MOVE_START_DESCEND> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_CALENDAR_GET_NUM_PENDING> for ClientOpcodeMessage {
-    fn from(c: CMSG_CALENDAR_GET_NUM_PENDING) -> Self {
-        Self::CMSG_CALENDAR_GET_NUM_PENDING(c)
+    fn from(_: CMSG_CALENDAR_GET_NUM_PENDING) -> Self {
+        Self::CMSG_CALENDAR_GET_NUM_PENDING
     }
 }
 
 impl From<CMSG_BOOTME> for ClientOpcodeMessage {
-    fn from(c: CMSG_BOOTME) -> Self {
-        Self::CMSG_BOOTME(c)
+    fn from(_: CMSG_BOOTME) -> Self {
+        Self::CMSG_BOOTME
     }
 }
 
@@ -4800,8 +4800,8 @@ impl From<CMSG_CHAR_CREATE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_CHAR_ENUM> for ClientOpcodeMessage {
-    fn from(c: CMSG_CHAR_ENUM) -> Self {
-        Self::CMSG_CHAR_ENUM(c)
+    fn from(_: CMSG_CHAR_ENUM) -> Self {
+        Self::CMSG_CHAR_ENUM
     }
 }
 
@@ -4818,20 +4818,20 @@ impl From<CMSG_PLAYER_LOGIN> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_PLAYER_LOGOUT> for ClientOpcodeMessage {
-    fn from(c: CMSG_PLAYER_LOGOUT) -> Self {
-        Self::CMSG_PLAYER_LOGOUT(c)
+    fn from(_: CMSG_PLAYER_LOGOUT) -> Self {
+        Self::CMSG_PLAYER_LOGOUT
     }
 }
 
 impl From<CMSG_LOGOUT_REQUEST> for ClientOpcodeMessage {
-    fn from(c: CMSG_LOGOUT_REQUEST) -> Self {
-        Self::CMSG_LOGOUT_REQUEST(c)
+    fn from(_: CMSG_LOGOUT_REQUEST) -> Self {
+        Self::CMSG_LOGOUT_REQUEST
     }
 }
 
 impl From<CMSG_LOGOUT_CANCEL> for ClientOpcodeMessage {
-    fn from(c: CMSG_LOGOUT_CANCEL) -> Self {
-        Self::CMSG_LOGOUT_CANCEL(c)
+    fn from(_: CMSG_LOGOUT_CANCEL) -> Self {
+        Self::CMSG_LOGOUT_CANCEL
     }
 }
 
@@ -4938,20 +4938,20 @@ impl From<CMSG_GROUP_INVITE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_GROUP_CANCEL> for ClientOpcodeMessage {
-    fn from(c: CMSG_GROUP_CANCEL) -> Self {
-        Self::CMSG_GROUP_CANCEL(c)
+    fn from(_: CMSG_GROUP_CANCEL) -> Self {
+        Self::CMSG_GROUP_CANCEL
     }
 }
 
 impl From<CMSG_GROUP_ACCEPT> for ClientOpcodeMessage {
-    fn from(c: CMSG_GROUP_ACCEPT) -> Self {
-        Self::CMSG_GROUP_ACCEPT(c)
+    fn from(_: CMSG_GROUP_ACCEPT) -> Self {
+        Self::CMSG_GROUP_ACCEPT
     }
 }
 
 impl From<CMSG_GROUP_DECLINE> for ClientOpcodeMessage {
-    fn from(c: CMSG_GROUP_DECLINE) -> Self {
-        Self::CMSG_GROUP_DECLINE(c)
+    fn from(_: CMSG_GROUP_DECLINE) -> Self {
+        Self::CMSG_GROUP_DECLINE
     }
 }
 
@@ -4980,8 +4980,8 @@ impl From<CMSG_LOOT_METHOD> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_GROUP_DISBAND> for ClientOpcodeMessage {
-    fn from(c: CMSG_GROUP_DISBAND) -> Self {
-        Self::CMSG_GROUP_DISBAND(c)
+    fn from(_: CMSG_GROUP_DISBAND) -> Self {
+        Self::CMSG_GROUP_DISBAND
     }
 }
 
@@ -4998,26 +4998,26 @@ impl From<CMSG_GUILD_INVITE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_GUILD_ACCEPT> for ClientOpcodeMessage {
-    fn from(c: CMSG_GUILD_ACCEPT) -> Self {
-        Self::CMSG_GUILD_ACCEPT(c)
+    fn from(_: CMSG_GUILD_ACCEPT) -> Self {
+        Self::CMSG_GUILD_ACCEPT
     }
 }
 
 impl From<CMSG_GUILD_DECLINE> for ClientOpcodeMessage {
-    fn from(c: CMSG_GUILD_DECLINE) -> Self {
-        Self::CMSG_GUILD_DECLINE(c)
+    fn from(_: CMSG_GUILD_DECLINE) -> Self {
+        Self::CMSG_GUILD_DECLINE
     }
 }
 
 impl From<CMSG_GUILD_INFO> for ClientOpcodeMessage {
-    fn from(c: CMSG_GUILD_INFO) -> Self {
-        Self::CMSG_GUILD_INFO(c)
+    fn from(_: CMSG_GUILD_INFO) -> Self {
+        Self::CMSG_GUILD_INFO
     }
 }
 
 impl From<CMSG_GUILD_ROSTER> for ClientOpcodeMessage {
-    fn from(c: CMSG_GUILD_ROSTER) -> Self {
-        Self::CMSG_GUILD_ROSTER(c)
+    fn from(_: CMSG_GUILD_ROSTER) -> Self {
+        Self::CMSG_GUILD_ROSTER
     }
 }
 
@@ -5034,8 +5034,8 @@ impl From<CMSG_GUILD_DEMOTE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_GUILD_LEAVE> for ClientOpcodeMessage {
-    fn from(c: CMSG_GUILD_LEAVE) -> Self {
-        Self::CMSG_GUILD_LEAVE(c)
+    fn from(_: CMSG_GUILD_LEAVE) -> Self {
+        Self::CMSG_GUILD_LEAVE
     }
 }
 
@@ -5046,8 +5046,8 @@ impl From<CMSG_GUILD_REMOVE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_GUILD_DISBAND> for ClientOpcodeMessage {
-    fn from(c: CMSG_GUILD_DISBAND) -> Self {
-        Self::CMSG_GUILD_DISBAND(c)
+    fn from(_: CMSG_GUILD_DISBAND) -> Self {
+        Self::CMSG_GUILD_DISBAND
     }
 }
 
@@ -5256,14 +5256,14 @@ impl From<CMSG_MOVE_HOVER_ACK> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_NEXT_CINEMATIC_CAMERA> for ClientOpcodeMessage {
-    fn from(c: CMSG_NEXT_CINEMATIC_CAMERA) -> Self {
-        Self::CMSG_NEXT_CINEMATIC_CAMERA(c)
+    fn from(_: CMSG_NEXT_CINEMATIC_CAMERA) -> Self {
+        Self::CMSG_NEXT_CINEMATIC_CAMERA
     }
 }
 
 impl From<CMSG_COMPLETE_CINEMATIC> for ClientOpcodeMessage {
-    fn from(c: CMSG_COMPLETE_CINEMATIC) -> Self {
-        Self::CMSG_COMPLETE_CINEMATIC(c)
+    fn from(_: CMSG_COMPLETE_CINEMATIC) -> Self {
+        Self::CMSG_COMPLETE_CINEMATIC
     }
 }
 
@@ -5274,14 +5274,14 @@ impl From<CMSG_TUTORIAL_FLAG> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_TUTORIAL_CLEAR> for ClientOpcodeMessage {
-    fn from(c: CMSG_TUTORIAL_CLEAR) -> Self {
-        Self::CMSG_TUTORIAL_CLEAR(c)
+    fn from(_: CMSG_TUTORIAL_CLEAR) -> Self {
+        Self::CMSG_TUTORIAL_CLEAR
     }
 }
 
 impl From<CMSG_TUTORIAL_RESET> for ClientOpcodeMessage {
-    fn from(c: CMSG_TUTORIAL_RESET) -> Self {
-        Self::CMSG_TUTORIAL_RESET(c)
+    fn from(_: CMSG_TUTORIAL_RESET) -> Self {
+        Self::CMSG_TUTORIAL_RESET
     }
 }
 
@@ -5364,20 +5364,20 @@ impl From<CMSG_INITIATE_TRADE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_BEGIN_TRADE> for ClientOpcodeMessage {
-    fn from(c: CMSG_BEGIN_TRADE) -> Self {
-        Self::CMSG_BEGIN_TRADE(c)
+    fn from(_: CMSG_BEGIN_TRADE) -> Self {
+        Self::CMSG_BEGIN_TRADE
     }
 }
 
 impl From<CMSG_BUSY_TRADE> for ClientOpcodeMessage {
-    fn from(c: CMSG_BUSY_TRADE) -> Self {
-        Self::CMSG_BUSY_TRADE(c)
+    fn from(_: CMSG_BUSY_TRADE) -> Self {
+        Self::CMSG_BUSY_TRADE
     }
 }
 
 impl From<CMSG_IGNORE_TRADE> for ClientOpcodeMessage {
-    fn from(c: CMSG_IGNORE_TRADE) -> Self {
-        Self::CMSG_IGNORE_TRADE(c)
+    fn from(_: CMSG_IGNORE_TRADE) -> Self {
+        Self::CMSG_IGNORE_TRADE
     }
 }
 
@@ -5388,14 +5388,14 @@ impl From<CMSG_ACCEPT_TRADE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_UNACCEPT_TRADE> for ClientOpcodeMessage {
-    fn from(c: CMSG_UNACCEPT_TRADE) -> Self {
-        Self::CMSG_UNACCEPT_TRADE(c)
+    fn from(_: CMSG_UNACCEPT_TRADE) -> Self {
+        Self::CMSG_UNACCEPT_TRADE
     }
 }
 
 impl From<CMSG_CANCEL_TRADE> for ClientOpcodeMessage {
-    fn from(c: CMSG_CANCEL_TRADE) -> Self {
-        Self::CMSG_CANCEL_TRADE(c)
+    fn from(_: CMSG_CANCEL_TRADE) -> Self {
+        Self::CMSG_CANCEL_TRADE
     }
 }
 
@@ -5478,14 +5478,14 @@ impl From<CMSG_ATTACKSWING> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_ATTACKSTOP> for ClientOpcodeMessage {
-    fn from(c: CMSG_ATTACKSTOP) -> Self {
-        Self::CMSG_ATTACKSTOP(c)
+    fn from(_: CMSG_ATTACKSTOP) -> Self {
+        Self::CMSG_ATTACKSTOP
     }
 }
 
 impl From<CMSG_REPOP_REQUEST> for ClientOpcodeMessage {
-    fn from(c: CMSG_REPOP_REQUEST) -> Self {
-        Self::CMSG_REPOP_REQUEST(c)
+    fn from(_: CMSG_REPOP_REQUEST) -> Self {
+        Self::CMSG_REPOP_REQUEST
     }
 }
 
@@ -5502,8 +5502,8 @@ impl From<CMSG_LOOT> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_LOOT_MONEY> for ClientOpcodeMessage {
-    fn from(c: CMSG_LOOT_MONEY) -> Self {
-        Self::CMSG_LOOT_MONEY(c)
+    fn from(_: CMSG_LOOT_MONEY) -> Self {
+        Self::CMSG_LOOT_MONEY
     }
 }
 
@@ -5526,8 +5526,8 @@ impl From<CMSG_DUEL_CANCELLED> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_MOUNTSPECIAL_ANIM> for ClientOpcodeMessage {
-    fn from(c: CMSG_MOUNTSPECIAL_ANIM) -> Self {
-        Self::CMSG_MOUNTSPECIAL_ANIM(c)
+    fn from(_: CMSG_MOUNTSPECIAL_ANIM) -> Self {
+        Self::CMSG_MOUNTSPECIAL_ANIM
     }
 }
 
@@ -5592,8 +5592,8 @@ impl From<CMSG_QUESTGIVER_QUERY_QUEST> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_QUESTGIVER_QUEST_AUTOLAUNCH> for ClientOpcodeMessage {
-    fn from(c: CMSG_QUESTGIVER_QUEST_AUTOLAUNCH) -> Self {
-        Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH(c)
+    fn from(_: CMSG_QUESTGIVER_QUEST_AUTOLAUNCH) -> Self {
+        Self::CMSG_QUESTGIVER_QUEST_AUTOLAUNCH
     }
 }
 
@@ -5622,8 +5622,8 @@ impl From<CMSG_QUESTGIVER_CHOOSE_REWARD> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_QUESTGIVER_CANCEL> for ClientOpcodeMessage {
-    fn from(c: CMSG_QUESTGIVER_CANCEL) -> Self {
-        Self::CMSG_QUESTGIVER_CANCEL(c)
+    fn from(_: CMSG_QUESTGIVER_CANCEL) -> Self {
+        Self::CMSG_QUESTGIVER_CANCEL
     }
 }
 
@@ -5778,8 +5778,8 @@ impl From<CMSG_PLAYED_TIME> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_QUERY_TIME> for ClientOpcodeMessage {
-    fn from(c: CMSG_QUERY_TIME) -> Self {
-        Self::CMSG_QUERY_TIME(c)
+    fn from(_: CMSG_QUERY_TIME) -> Self {
+        Self::CMSG_QUERY_TIME
     }
 }
 
@@ -5880,32 +5880,32 @@ impl From<CMSG_UPDATE_ACCOUNT_DATA> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_GMTICKET_GETTICKET> for ClientOpcodeMessage {
-    fn from(c: CMSG_GMTICKET_GETTICKET) -> Self {
-        Self::CMSG_GMTICKET_GETTICKET(c)
+    fn from(_: CMSG_GMTICKET_GETTICKET) -> Self {
+        Self::CMSG_GMTICKET_GETTICKET
     }
 }
 
 impl From<CMSG_UNLEARN_TALENTS> for ClientOpcodeMessage {
-    fn from(c: CMSG_UNLEARN_TALENTS) -> Self {
-        Self::CMSG_UNLEARN_TALENTS(c)
+    fn from(_: CMSG_UNLEARN_TALENTS) -> Self {
+        Self::CMSG_UNLEARN_TALENTS
     }
 }
 
 impl From<MSG_CORPSE_QUERY_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_CORPSE_QUERY_Client) -> Self {
-        Self::MSG_CORPSE_QUERY(c)
+    fn from(_: MSG_CORPSE_QUERY_Client) -> Self {
+        Self::MSG_CORPSE_QUERY
     }
 }
 
 impl From<CMSG_GMTICKET_DELETETICKET> for ClientOpcodeMessage {
-    fn from(c: CMSG_GMTICKET_DELETETICKET) -> Self {
-        Self::CMSG_GMTICKET_DELETETICKET(c)
+    fn from(_: CMSG_GMTICKET_DELETETICKET) -> Self {
+        Self::CMSG_GMTICKET_DELETETICKET
     }
 }
 
 impl From<CMSG_GMTICKET_SYSTEMSTATUS> for ClientOpcodeMessage {
-    fn from(c: CMSG_GMTICKET_SYSTEMSTATUS) -> Self {
-        Self::CMSG_GMTICKET_SYSTEMSTATUS(c)
+    fn from(_: CMSG_GMTICKET_SYSTEMSTATUS) -> Self {
+        Self::CMSG_GMTICKET_SYSTEMSTATUS
     }
 }
 
@@ -5934,8 +5934,8 @@ impl From<CMSG_GUILD_ADD_RANK> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_GUILD_DEL_RANK> for ClientOpcodeMessage {
-    fn from(c: CMSG_GUILD_DEL_RANK) -> Self {
-        Self::CMSG_GUILD_DEL_RANK(c)
+    fn from(_: CMSG_GUILD_DEL_RANK) -> Self {
+        Self::CMSG_GUILD_DEL_RANK
     }
 }
 
@@ -6084,8 +6084,8 @@ impl From<CMSG_PET_CANCEL_AURA> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_CANCEL_AUTO_REPEAT_SPELL> for ClientOpcodeMessage {
-    fn from(c: CMSG_CANCEL_AUTO_REPEAT_SPELL) -> Self {
-        Self::CMSG_CANCEL_AUTO_REPEAT_SPELL(c)
+    fn from(_: CMSG_CANCEL_AUTO_REPEAT_SPELL) -> Self {
+        Self::CMSG_CANCEL_AUTO_REPEAT_SPELL
     }
 }
 
@@ -6120,8 +6120,8 @@ impl From<CMSG_STABLE_SWAP_PET> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_REQUEST_PET_INFO> for ClientOpcodeMessage {
-    fn from(c: CMSG_REQUEST_PET_INFO) -> Self {
-        Self::CMSG_REQUEST_PET_INFO(c)
+    fn from(_: CMSG_REQUEST_PET_INFO) -> Self {
+        Self::CMSG_REQUEST_PET_INFO
     }
 }
 
@@ -6162,14 +6162,14 @@ impl From<CMSG_AUTOBANK_ITEM> for ClientOpcodeMessage {
 }
 
 impl From<MSG_QUERY_NEXT_MAIL_TIME_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_QUERY_NEXT_MAIL_TIME_Client) -> Self {
-        Self::MSG_QUERY_NEXT_MAIL_TIME(c)
+    fn from(_: MSG_QUERY_NEXT_MAIL_TIME_Client) -> Self {
+        Self::MSG_QUERY_NEXT_MAIL_TIME
     }
 }
 
 impl From<CMSG_GROUP_RAID_CONVERT> for ClientOpcodeMessage {
-    fn from(c: CMSG_GROUP_RAID_CONVERT) -> Self {
-        Self::CMSG_GROUP_RAID_CONVERT(c)
+    fn from(_: CMSG_GROUP_RAID_CONVERT) -> Self {
+        Self::CMSG_GROUP_RAID_CONVERT
     }
 }
 
@@ -6192,20 +6192,20 @@ impl From<CMSG_SET_SAVED_INSTANCE_EXTEND> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_LFG_GET_STATUS> for ClientOpcodeMessage {
-    fn from(c: CMSG_LFG_GET_STATUS) -> Self {
-        Self::CMSG_LFG_GET_STATUS(c)
+    fn from(_: CMSG_LFG_GET_STATUS) -> Self {
+        Self::CMSG_LFG_GET_STATUS
     }
 }
 
 impl From<CMSG_GMTICKETSYSTEM_TOGGLE> for ClientOpcodeMessage {
-    fn from(c: CMSG_GMTICKETSYSTEM_TOGGLE) -> Self {
-        Self::CMSG_GMTICKETSYSTEM_TOGGLE(c)
+    fn from(_: CMSG_GMTICKETSYSTEM_TOGGLE) -> Self {
+        Self::CMSG_GMTICKETSYSTEM_TOGGLE
     }
 }
 
 impl From<CMSG_CANCEL_GROWTH_AURA> for ClientOpcodeMessage {
-    fn from(c: CMSG_CANCEL_GROWTH_AURA) -> Self {
-        Self::CMSG_CANCEL_GROWTH_AURA(c)
+    fn from(_: CMSG_CANCEL_GROWTH_AURA) -> Self {
+        Self::CMSG_CANCEL_GROWTH_AURA
     }
 }
 
@@ -6240,20 +6240,20 @@ impl From<CMSG_SUMMON_RESPONSE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_SELF_RES> for ClientOpcodeMessage {
-    fn from(c: CMSG_SELF_RES) -> Self {
-        Self::CMSG_SELF_RES(c)
+    fn from(_: CMSG_SELF_RES) -> Self {
+        Self::CMSG_SELF_RES
     }
 }
 
 impl From<CMSG_TOGGLE_HELM> for ClientOpcodeMessage {
-    fn from(c: CMSG_TOGGLE_HELM) -> Self {
-        Self::CMSG_TOGGLE_HELM(c)
+    fn from(_: CMSG_TOGGLE_HELM) -> Self {
+        Self::CMSG_TOGGLE_HELM
     }
 }
 
 impl From<CMSG_TOGGLE_CLOAK> for ClientOpcodeMessage {
-    fn from(c: CMSG_TOGGLE_CLOAK) -> Self {
-        Self::CMSG_TOGGLE_CLOAK(c)
+    fn from(_: CMSG_TOGGLE_CLOAK) -> Self {
+        Self::CMSG_TOGGLE_CLOAK
     }
 }
 
@@ -6288,8 +6288,8 @@ impl From<CMSG_MOVE_FALL_RESET> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_REQUEST_RAID_INFO> for ClientOpcodeMessage {
-    fn from(c: CMSG_REQUEST_RAID_INFO) -> Self {
-        Self::CMSG_REQUEST_RAID_INFO(c)
+    fn from(_: CMSG_REQUEST_RAID_INFO) -> Self {
+        Self::CMSG_REQUEST_RAID_INFO
     }
 }
 
@@ -6318,8 +6318,8 @@ impl From<CMSG_MOVE_NOT_ACTIVE_MOVER> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_BATTLEFIELD_STATUS> for ClientOpcodeMessage {
-    fn from(c: CMSG_BATTLEFIELD_STATUS) -> Self {
-        Self::CMSG_BATTLEFIELD_STATUS(c)
+    fn from(_: CMSG_BATTLEFIELD_STATUS) -> Self {
+        Self::CMSG_BATTLEFIELD_STATUS
     }
 }
 
@@ -6360,8 +6360,8 @@ impl From<CMSG_FORCE_TURN_RATE_CHANGE_ACK> for ClientOpcodeMessage {
 }
 
 impl From<MSG_PVP_LOG_DATA_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_PVP_LOG_DATA_Client) -> Self {
-        Self::MSG_PVP_LOG_DATA(c)
+    fn from(_: MSG_PVP_LOG_DATA_Client) -> Self {
+        Self::MSG_PVP_LOG_DATA
     }
 }
 
@@ -6390,8 +6390,8 @@ impl From<CMSG_WARDEN_DATA> for ClientOpcodeMessage {
 }
 
 impl From<MSG_BATTLEGROUND_PLAYER_POSITIONS_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_BATTLEGROUND_PLAYER_POSITIONS_Client) -> Self {
-        Self::MSG_BATTLEGROUND_PLAYER_POSITIONS(c)
+    fn from(_: MSG_BATTLEGROUND_PLAYER_POSITIONS_Client) -> Self {
+        Self::MSG_BATTLEGROUND_PLAYER_POSITIONS
     }
 }
 
@@ -6444,8 +6444,8 @@ impl From<CMSG_SET_WATCHED_FACTION> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_RESET_INSTANCES> for ClientOpcodeMessage {
-    fn from(c: CMSG_RESET_INSTANCES) -> Self {
-        Self::CMSG_RESET_INSTANCES(c)
+    fn from(_: CMSG_RESET_INSTANCES) -> Self {
+        Self::CMSG_RESET_INSTANCES
     }
 }
 
@@ -6510,14 +6510,14 @@ impl From<CMSG_ARENA_TEAM_INVITE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_ARENA_TEAM_ACCEPT> for ClientOpcodeMessage {
-    fn from(c: CMSG_ARENA_TEAM_ACCEPT) -> Self {
-        Self::CMSG_ARENA_TEAM_ACCEPT(c)
+    fn from(_: CMSG_ARENA_TEAM_ACCEPT) -> Self {
+        Self::CMSG_ARENA_TEAM_ACCEPT
     }
 }
 
 impl From<CMSG_ARENA_TEAM_DECLINE> for ClientOpcodeMessage {
-    fn from(c: CMSG_ARENA_TEAM_DECLINE) -> Self {
-        Self::CMSG_ARENA_TEAM_DECLINE(c)
+    fn from(_: CMSG_ARENA_TEAM_DECLINE) -> Self {
+        Self::CMSG_ARENA_TEAM_DECLINE
     }
 }
 
@@ -6558,8 +6558,8 @@ impl From<CMSG_LFG_JOIN> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_LFG_LEAVE> for ClientOpcodeMessage {
-    fn from(c: CMSG_LFG_LEAVE) -> Self {
-        Self::CMSG_LFG_LEAVE(c)
+    fn from(_: CMSG_LFG_LEAVE) -> Self {
+        Self::CMSG_LFG_LEAVE
     }
 }
 
@@ -6600,8 +6600,8 @@ impl From<CMSG_LFG_SET_BOOT_VOTE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_LFD_PLAYER_LOCK_INFO_REQUEST> for ClientOpcodeMessage {
-    fn from(c: CMSG_LFD_PLAYER_LOCK_INFO_REQUEST) -> Self {
-        Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST(c)
+    fn from(_: CMSG_LFD_PLAYER_LOCK_INFO_REQUEST) -> Self {
+        Self::CMSG_LFD_PLAYER_LOCK_INFO_REQUEST
     }
 }
 
@@ -6612,8 +6612,8 @@ impl From<CMSG_LFG_TELEPORT> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_LFD_PARTY_LOCK_INFO_REQUEST> for ClientOpcodeMessage {
-    fn from(c: CMSG_LFD_PARTY_LOCK_INFO_REQUEST) -> Self {
-        Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST(c)
+    fn from(_: CMSG_LFD_PARTY_LOCK_INFO_REQUEST) -> Self {
+        Self::CMSG_LFD_PARTY_LOCK_INFO_REQUEST
     }
 }
 
@@ -6624,8 +6624,8 @@ impl From<CMSG_SET_TITLE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_CANCEL_MOUNT_AURA> for ClientOpcodeMessage {
-    fn from(c: CMSG_CANCEL_MOUNT_AURA) -> Self {
-        Self::CMSG_CANCEL_MOUNT_AURA(c)
+    fn from(_: CMSG_CANCEL_MOUNT_AURA) -> Self {
+        Self::CMSG_CANCEL_MOUNT_AURA
     }
 }
 
@@ -6702,8 +6702,8 @@ impl From<CMSG_COMMENTATOR_ENABLE> for ClientOpcodeMessage {
 }
 
 impl From<MSG_RAID_READY_CHECK_FINISHED_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_RAID_READY_CHECK_FINISHED_Client) -> Self {
-        Self::MSG_RAID_READY_CHECK_FINISHED(c)
+    fn from(_: MSG_RAID_READY_CHECK_FINISHED_Client) -> Self {
+        Self::MSG_RAID_READY_CHECK_FINISHED
     }
 }
 
@@ -6732,8 +6732,8 @@ impl From<CMSG_GET_CHANNEL_MEMBER_COUNT> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_CHANNEL_VOICE_ON> for ClientOpcodeMessage {
-    fn from(c: CMSG_CHANNEL_VOICE_ON) -> Self {
-        Self::CMSG_CHANNEL_VOICE_ON(c)
+    fn from(_: CMSG_CHANNEL_VOICE_ON) -> Self {
+        Self::CMSG_CHANNEL_VOICE_ON
     }
 }
 
@@ -6810,20 +6810,20 @@ impl From<CMSG_SPELLCLICK> for ClientOpcodeMessage {
 }
 
 impl From<MSG_GUILD_PERMISSIONS_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_GUILD_PERMISSIONS_Client) -> Self {
-        Self::MSG_GUILD_PERMISSIONS(c)
+    fn from(_: MSG_GUILD_PERMISSIONS_Client) -> Self {
+        Self::MSG_GUILD_PERMISSIONS
     }
 }
 
 impl From<MSG_GUILD_BANK_MONEY_WITHDRAWN_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_GUILD_BANK_MONEY_WITHDRAWN_Client) -> Self {
-        Self::MSG_GUILD_BANK_MONEY_WITHDRAWN(c)
+    fn from(_: MSG_GUILD_BANK_MONEY_WITHDRAWN_Client) -> Self {
+        Self::MSG_GUILD_BANK_MONEY_WITHDRAWN
     }
 }
 
 impl From<MSG_GUILD_EVENT_LOG_QUERY_Client> for ClientOpcodeMessage {
-    fn from(c: MSG_GUILD_EVENT_LOG_QUERY_Client) -> Self {
-        Self::MSG_GUILD_EVENT_LOG_QUERY(c)
+    fn from(_: MSG_GUILD_EVENT_LOG_QUERY_Client) -> Self {
+        Self::MSG_GUILD_EVENT_LOG_QUERY
     }
 }
 
@@ -6834,8 +6834,8 @@ impl From<CMSG_GET_MIRRORIMAGE_DATA> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_KEEP_ALIVE> for ClientOpcodeMessage {
-    fn from(c: CMSG_KEEP_ALIVE) -> Self {
-        Self::CMSG_KEEP_ALIVE(c)
+    fn from(_: CMSG_KEEP_ALIVE) -> Self {
+        Self::CMSG_KEEP_ALIVE
     }
 }
 
@@ -6870,8 +6870,8 @@ impl From<CMSG_TOTEM_DESTROYED> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY> for ClientOpcodeMessage {
-    fn from(c: CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY) -> Self {
-        Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY(c)
+    fn from(_: CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY) -> Self {
+        Self::CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY
     }
 }
 
@@ -6894,8 +6894,8 @@ impl From<CMSG_ALTER_APPEARANCE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_CALENDAR_GET_CALENDAR> for ClientOpcodeMessage {
-    fn from(c: CMSG_CALENDAR_GET_CALENDAR) -> Self {
-        Self::CMSG_CALENDAR_GET_CALENDAR(c)
+    fn from(_: CMSG_CALENDAR_GET_CALENDAR) -> Self {
+        Self::CMSG_CALENDAR_GET_CALENDAR
     }
 }
 
@@ -6984,8 +6984,8 @@ impl From<CMSG_UPDATE_MISSILE_TRAJECTORY> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_COMPLETE_MOVIE> for ClientOpcodeMessage {
-    fn from(c: CMSG_COMPLETE_MOVIE) -> Self {
-        Self::CMSG_COMPLETE_MOVIE(c)
+    fn from(_: CMSG_COMPLETE_MOVIE) -> Self {
+        Self::CMSG_COMPLETE_MOVIE
     }
 }
 
@@ -6996,8 +6996,8 @@ impl From<CMSG_QUERY_INSPECT_ACHIEVEMENTS> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_DISMISS_CONTROLLED_VEHICLE> for ClientOpcodeMessage {
-    fn from(c: CMSG_DISMISS_CONTROLLED_VEHICLE) -> Self {
-        Self::CMSG_DISMISS_CONTROLLED_VEHICLE(c)
+    fn from(_: CMSG_DISMISS_CONTROLLED_VEHICLE) -> Self {
+        Self::CMSG_DISMISS_CONTROLLED_VEHICLE
     }
 }
 
@@ -7008,20 +7008,20 @@ impl From<CMSG_CHAR_CUSTOMIZE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_REQUEST_VEHICLE_EXIT> for ClientOpcodeMessage {
-    fn from(c: CMSG_REQUEST_VEHICLE_EXIT) -> Self {
-        Self::CMSG_REQUEST_VEHICLE_EXIT(c)
+    fn from(_: CMSG_REQUEST_VEHICLE_EXIT) -> Self {
+        Self::CMSG_REQUEST_VEHICLE_EXIT
     }
 }
 
 impl From<CMSG_REQUEST_VEHICLE_PREV_SEAT> for ClientOpcodeMessage {
-    fn from(c: CMSG_REQUEST_VEHICLE_PREV_SEAT) -> Self {
-        Self::CMSG_REQUEST_VEHICLE_PREV_SEAT(c)
+    fn from(_: CMSG_REQUEST_VEHICLE_PREV_SEAT) -> Self {
+        Self::CMSG_REQUEST_VEHICLE_PREV_SEAT
     }
 }
 
 impl From<CMSG_REQUEST_VEHICLE_NEXT_SEAT> for ClientOpcodeMessage {
-    fn from(c: CMSG_REQUEST_VEHICLE_NEXT_SEAT) -> Self {
-        Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT(c)
+    fn from(_: CMSG_REQUEST_VEHICLE_NEXT_SEAT) -> Self {
+        Self::CMSG_REQUEST_VEHICLE_NEXT_SEAT
     }
 }
 
@@ -7074,8 +7074,8 @@ impl From<CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_HEARTH_AND_RESURRECT> for ClientOpcodeMessage {
-    fn from(c: CMSG_HEARTH_AND_RESURRECT) -> Self {
-        Self::CMSG_HEARTH_AND_RESURRECT(c)
+    fn from(_: CMSG_HEARTH_AND_RESURRECT) -> Self {
+        Self::CMSG_HEARTH_AND_RESURRECT
     }
 }
 
@@ -7188,14 +7188,14 @@ impl From<MSG_SET_RAID_DIFFICULTY_Client> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_GMRESPONSE_RESOLVE> for ClientOpcodeMessage {
-    fn from(c: CMSG_GMRESPONSE_RESOLVE) -> Self {
-        Self::CMSG_GMRESPONSE_RESOLVE(c)
+    fn from(_: CMSG_GMRESPONSE_RESOLVE) -> Self {
+        Self::CMSG_GMRESPONSE_RESOLVE
     }
 }
 
 impl From<CMSG_WORLD_STATE_UI_TIMER_UPDATE> for ClientOpcodeMessage {
-    fn from(c: CMSG_WORLD_STATE_UI_TIMER_UPDATE) -> Self {
-        Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE(c)
+    fn from(_: CMSG_WORLD_STATE_UI_TIMER_UPDATE) -> Self {
+        Self::CMSG_WORLD_STATE_UI_TIMER_UPDATE
     }
 }
 
@@ -7206,14 +7206,14 @@ impl From<CMSG_CHAR_RACE_CHANGE> for ClientOpcodeMessage {
 }
 
 impl From<CMSG_READY_FOR_ACCOUNT_DATA_TIMES> for ClientOpcodeMessage {
-    fn from(c: CMSG_READY_FOR_ACCOUNT_DATA_TIMES) -> Self {
-        Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES(c)
+    fn from(_: CMSG_READY_FOR_ACCOUNT_DATA_TIMES) -> Self {
+        Self::CMSG_READY_FOR_ACCOUNT_DATA_TIMES
     }
 }
 
 impl From<CMSG_QUERY_QUESTS_COMPLETED> for ClientOpcodeMessage {
-    fn from(c: CMSG_QUERY_QUESTS_COMPLETED) -> Self {
-        Self::CMSG_QUERY_QUESTS_COMPLETED(c)
+    fn from(_: CMSG_QUERY_QUESTS_COMPLETED) -> Self {
+        Self::CMSG_QUERY_QUESTS_COMPLETED
     }
 }
 
@@ -7737,7 +7737,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_STOP_SWIM(MSG_MOVE_STOP_SWIM),
     MSG_MOVE_SET_FACING(MSG_MOVE_SET_FACING),
     MSG_MOVE_SET_PITCH(MSG_MOVE_SET_PITCH),
-    MSG_MOVE_WORLDPORT_ACK(MSG_MOVE_WORLDPORT_ACK),
+    MSG_MOVE_WORLDPORT_ACK,
     MSG_MOVE_HEARTBEAT(MSG_MOVE_HEARTBEAT),
     MSG_MOVE_HOVER(MSG_MOVE_HOVER),
     MSG_PETITION_DECLINE(MSG_PETITION_DECLINE),
@@ -7749,7 +7749,7 @@ pub enum ServerOpcodeMessage {
     MSG_MOVE_STOP_ASCEND(MSG_MOVE_STOP_ASCEND),
     MSG_MOVE_SET_FLIGHT_BACK_SPEED(MSG_MOVE_SET_FLIGHT_BACK_SPEED),
     MSG_MOVE_START_DESCEND(MSG_MOVE_START_DESCEND),
-    CMSG_CALENDAR_GET_NUM_PENDING(CMSG_CALENDAR_GET_NUM_PENDING),
+    CMSG_CALENDAR_GET_NUM_PENDING,
     SMSG_CHAR_CREATE(SMSG_CHAR_CREATE),
     SMSG_CHAR_ENUM(SMSG_CHAR_ENUM),
     SMSG_CHAR_DELETE(SMSG_CHAR_DELETE),
@@ -7759,8 +7759,8 @@ pub enum ServerOpcodeMessage {
     SMSG_CHARACTER_LOGIN_FAILED(SMSG_CHARACTER_LOGIN_FAILED),
     SMSG_LOGIN_SETTIMESPEED(SMSG_LOGIN_SETTIMESPEED),
     SMSG_LOGOUT_RESPONSE(SMSG_LOGOUT_RESPONSE),
-    SMSG_LOGOUT_COMPLETE(SMSG_LOGOUT_COMPLETE),
-    SMSG_LOGOUT_CANCEL_ACK(SMSG_LOGOUT_CANCEL_ACK),
+    SMSG_LOGOUT_COMPLETE,
+    SMSG_LOGOUT_CANCEL_ACK,
     SMSG_NAME_QUERY_RESPONSE(SMSG_NAME_QUERY_RESPONSE),
     SMSG_PET_NAME_QUERY_RESPONSE(SMSG_PET_NAME_QUERY_RESPONSE),
     SMSG_GUILD_QUERY_RESPONSE(SMSG_GUILD_QUERY_RESPONSE),
@@ -7775,9 +7775,9 @@ pub enum ServerOpcodeMessage {
     SMSG_FRIEND_STATUS(SMSG_FRIEND_STATUS),
     SMSG_GROUP_INVITE(SMSG_GROUP_INVITE),
     SMSG_GROUP_DECLINE(SMSG_GROUP_DECLINE),
-    SMSG_GROUP_UNINVITE(SMSG_GROUP_UNINVITE),
+    SMSG_GROUP_UNINVITE,
     SMSG_GROUP_SET_LEADER(SMSG_GROUP_SET_LEADER),
-    SMSG_GROUP_DESTROYED(SMSG_GROUP_DESTROYED),
+    SMSG_GROUP_DESTROYED,
     SMSG_GROUP_LIST(SMSG_GROUP_LIST),
     SMSG_PARTY_MEMBER_STATS(SMSG_PARTY_MEMBER_STATS),
     SMSG_PARTY_COMMAND_RESULT(SMSG_PARTY_COMMAND_RESULT),
@@ -7841,13 +7841,13 @@ pub enum ServerOpcodeMessage {
     SMSG_AI_REACTION(SMSG_AI_REACTION),
     SMSG_ATTACKSTART(SMSG_ATTACKSTART),
     SMSG_ATTACKSTOP(SMSG_ATTACKSTOP),
-    SMSG_ATTACKSWING_NOTINRANGE(SMSG_ATTACKSWING_NOTINRANGE),
-    SMSG_ATTACKSWING_BADFACING(SMSG_ATTACKSWING_BADFACING),
+    SMSG_ATTACKSWING_NOTINRANGE,
+    SMSG_ATTACKSWING_BADFACING,
     SMSG_INSTANCE_LOCK_WARNING_QUERY(SMSG_INSTANCE_LOCK_WARNING_QUERY),
-    SMSG_ATTACKSWING_DEADTARGET(SMSG_ATTACKSWING_DEADTARGET),
-    SMSG_ATTACKSWING_CANT_ATTACK(SMSG_ATTACKSWING_CANT_ATTACK),
+    SMSG_ATTACKSWING_DEADTARGET,
+    SMSG_ATTACKSWING_CANT_ATTACK,
     SMSG_ATTACKERSTATEUPDATE(SMSG_ATTACKERSTATEUPDATE),
-    SMSG_CANCEL_COMBAT(SMSG_CANCEL_COMBAT),
+    SMSG_CANCEL_COMBAT,
     SMSG_SPELLHEALLOG(SMSG_SPELLHEALLOG),
     SMSG_SPELLENERGIZELOG(SMSG_SPELLENERGIZELOG),
     SMSG_BREAK_TARGET(SMSG_BREAK_TARGET),
@@ -7859,11 +7859,11 @@ pub enum ServerOpcodeMessage {
     SMSG_LOOT_RELEASE_RESPONSE(SMSG_LOOT_RELEASE_RESPONSE),
     SMSG_LOOT_REMOVED(SMSG_LOOT_REMOVED),
     SMSG_LOOT_MONEY_NOTIFY(SMSG_LOOT_MONEY_NOTIFY),
-    SMSG_LOOT_CLEAR_MONEY(SMSG_LOOT_CLEAR_MONEY),
+    SMSG_LOOT_CLEAR_MONEY,
     SMSG_ITEM_PUSH_RESULT(SMSG_ITEM_PUSH_RESULT),
     SMSG_DUEL_REQUESTED(SMSG_DUEL_REQUESTED),
-    SMSG_DUEL_OUTOFBOUNDS(SMSG_DUEL_OUTOFBOUNDS),
-    SMSG_DUEL_INBOUNDS(SMSG_DUEL_INBOUNDS),
+    SMSG_DUEL_OUTOFBOUNDS,
+    SMSG_DUEL_INBOUNDS,
     SMSG_DUEL_COMPLETE(SMSG_DUEL_COMPLETE),
     SMSG_DUEL_WINNER(SMSG_DUEL_WINNER),
     SMSG_MOUNTRESULT(SMSG_MOUNTRESULT),
@@ -7873,7 +7873,7 @@ pub enum ServerOpcodeMessage {
     SMSG_PET_SPELLS(SMSG_PET_SPELLS),
     SMSG_PET_MODE(SMSG_PET_MODE),
     SMSG_GOSSIP_MESSAGE(SMSG_GOSSIP_MESSAGE),
-    SMSG_GOSSIP_COMPLETE(SMSG_GOSSIP_COMPLETE),
+    SMSG_GOSSIP_COMPLETE,
     SMSG_NPC_TEXT_UPDATE(SMSG_NPC_TEXT_UPDATE),
     SMSG_QUESTGIVER_STATUS(SMSG_QUESTGIVER_STATUS),
     SMSG_QUESTGIVER_QUEST_LIST(SMSG_QUESTGIVER_QUEST_LIST),
@@ -7883,7 +7883,7 @@ pub enum ServerOpcodeMessage {
     SMSG_QUESTGIVER_QUEST_INVALID(SMSG_QUESTGIVER_QUEST_INVALID),
     SMSG_QUESTGIVER_QUEST_COMPLETE(SMSG_QUESTGIVER_QUEST_COMPLETE),
     SMSG_QUESTGIVER_QUEST_FAILED(SMSG_QUESTGIVER_QUEST_FAILED),
-    SMSG_QUESTLOG_FULL(SMSG_QUESTLOG_FULL),
+    SMSG_QUESTLOG_FULL,
     SMSG_QUESTUPDATE_FAILED(SMSG_QUESTUPDATE_FAILED),
     SMSG_QUESTUPDATE_FAILEDTIMER(SMSG_QUESTUPDATE_FAILEDTIMER),
     SMSG_QUESTUPDATE_COMPLETE(SMSG_QUESTUPDATE_COMPLETE),
@@ -7897,7 +7897,7 @@ pub enum ServerOpcodeMessage {
     SMSG_SHOWTAXINODES(SMSG_SHOWTAXINODES),
     SMSG_TAXINODE_STATUS(SMSG_TAXINODE_STATUS),
     SMSG_ACTIVATETAXIREPLY(SMSG_ACTIVATETAXIREPLY),
-    SMSG_NEW_TAXI_PATH(SMSG_NEW_TAXI_PATH),
+    SMSG_NEW_TAXI_PATH,
     SMSG_TRAINER_LIST(SMSG_TRAINER_LIST),
     SMSG_TRAINER_BUY_SUCCEEDED(SMSG_TRAINER_BUY_SUCCEEDED),
     SMSG_TRAINER_BUY_FAILED(SMSG_TRAINER_BUY_FAILED),
@@ -7908,8 +7908,8 @@ pub enum ServerOpcodeMessage {
     SMSG_PETITION_SIGN_RESULTS(SMSG_PETITION_SIGN_RESULTS),
     SMSG_TURN_IN_PETITION_RESULTS(SMSG_TURN_IN_PETITION_RESULTS),
     SMSG_PETITION_QUERY_RESPONSE(SMSG_PETITION_QUERY_RESPONSE),
-    SMSG_FISH_NOT_HOOKED(SMSG_FISH_NOT_HOOKED),
-    SMSG_FISH_ESCAPED(SMSG_FISH_ESCAPED),
+    SMSG_FISH_NOT_HOOKED,
+    SMSG_FISH_ESCAPED,
     SMSG_NOTIFICATION(SMSG_NOTIFICATION),
     SMSG_PLAYED_TIME(SMSG_PLAYED_TIME),
     SMSG_QUERY_TIME_RESPONSE(SMSG_QUERY_TIME_RESPONSE),
@@ -7949,7 +7949,7 @@ pub enum ServerOpcodeMessage {
     SMSG_GAMEOBJECT_DESPAWN_ANIM(SMSG_GAMEOBJECT_DESPAWN_ANIM),
     MSG_CORPSE_QUERY(MSG_CORPSE_QUERY_Server),
     SMSG_GMTICKET_DELETETICKET(SMSG_GMTICKET_DELETETICKET),
-    SMSG_CHAT_WRONG_FACTION(SMSG_CHAT_WRONG_FACTION),
+    SMSG_CHAT_WRONG_FACTION,
     SMSG_GMTICKET_SYSTEMSTATUS(SMSG_GMTICKET_SYSTEMSTATUS),
     SMSG_QUEST_FORCE_REMOVE(SMSG_QUEST_FORCE_REMOVE),
     SMSG_SPIRIT_HEALER_CONFIRM(SMSG_SPIRIT_HEALER_CONFIRM),
@@ -8004,14 +8004,14 @@ pub enum ServerOpcodeMessage {
     MSG_TALENT_WIPE_CONFIRM(MSG_TALENT_WIPE_CONFIRM_Server),
     SMSG_SUMMON_REQUEST(SMSG_SUMMON_REQUEST),
     SMSG_MONSTER_MOVE_TRANSPORT(SMSG_MONSTER_MOVE_TRANSPORT),
-    SMSG_PET_BROKEN(SMSG_PET_BROKEN),
+    SMSG_PET_BROKEN,
     MSG_MOVE_FEATHER_FALL(MSG_MOVE_FEATHER_FALL_Server),
-    SMSG_FEIGN_DEATH_RESISTED(SMSG_FEIGN_DEATH_RESISTED),
+    SMSG_FEIGN_DEATH_RESISTED,
     SMSG_DUEL_COUNTDOWN(SMSG_DUEL_COUNTDOWN),
     SMSG_AREA_TRIGGER_MESSAGE(SMSG_AREA_TRIGGER_MESSAGE),
     SMSG_LFG_ROLE_CHOSEN(SMSG_LFG_ROLE_CHOSEN),
     SMSG_PLAYER_SKINNED(SMSG_PLAYER_SKINNED),
-    SMSG_DURABILITY_DAMAGE_DEATH(SMSG_DURABILITY_DAMAGE_DEATH),
+    SMSG_DURABILITY_DAMAGE_DEATH,
     SMSG_INIT_WORLD_STATES(SMSG_INIT_WORLD_STATES),
     SMSG_UPDATE_WORLD_STATE(SMSG_UPDATE_WORLD_STATE),
     SMSG_ITEM_NAME_QUERY_RESPONSE(SMSG_ITEM_NAME_QUERY_RESPONSE),
@@ -8099,7 +8099,7 @@ pub enum ServerOpcodeMessage {
     SMSG_ARENA_ERROR(SMSG_ARENA_ERROR),
     MSG_INSPECT_ARENA_TEAMS(MSG_INSPECT_ARENA_TEAMS_Server),
     SMSG_DEATH_RELEASE_LOC(SMSG_DEATH_RELEASE_LOC),
-    SMSG_FORCED_DEATH_UPDATE(SMSG_FORCED_DEATH_UPDATE),
+    SMSG_FORCED_DEATH_UPDATE,
     MSG_MOVE_SET_FLIGHT_SPEED(MSG_MOVE_SET_FLIGHT_SPEED_Server),
     SMSG_FORCE_FLIGHT_SPEED_CHANGE(SMSG_FORCE_FLIGHT_SPEED_CHANGE),
     SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE),
@@ -8109,7 +8109,7 @@ pub enum ServerOpcodeMessage {
     SMSG_REALM_SPLIT(SMSG_REALM_SPLIT),
     SMSG_TIME_SYNC_REQ(SMSG_TIME_SYNC_REQ),
     SMSG_RESET_FAILED_NOTIFY(SMSG_RESET_FAILED_NOTIFY),
-    SMSG_LFG_DISABLED(SMSG_LFG_DISABLED),
+    SMSG_LFG_DISABLED,
     SMSG_UPDATE_COMBO_POINTS(SMSG_UPDATE_COMBO_POINTS),
     SMSG_DISMOUNT(SMSG_DISMOUNT),
     MSG_MOVE_UPDATE_CAN_FLY(MSG_MOVE_UPDATE_CAN_FLY_Server),
@@ -8142,7 +8142,7 @@ pub enum ServerOpcodeMessage {
     SMSG_REFER_A_FRIEND_FAILURE(SMSG_REFER_A_FRIEND_FAILURE),
     SMSG_SPLINE_MOVE_SET_FLYING(SMSG_SPLINE_MOVE_SET_FLYING),
     SMSG_SPLINE_MOVE_UNSET_FLYING(SMSG_SPLINE_MOVE_UNSET_FLYING),
-    SMSG_ENABLE_BARBER_SHOP(SMSG_ENABLE_BARBER_SHOP),
+    SMSG_ENABLE_BARBER_SHOP,
     SMSG_BARBER_SHOP_RESULT(SMSG_BARBER_SHOP_RESULT),
     SMSG_CALENDAR_SEND_CALENDAR(SMSG_CALENDAR_SEND_CALENDAR),
     SMSG_CALENDAR_SEND_EVENT(SMSG_CALENDAR_SEND_EVENT),
@@ -8191,17 +8191,17 @@ pub enum ServerOpcodeMessage {
     SMSG_SERVER_FIRST_ACHIEVEMENT(SMSG_SERVER_FIRST_ACHIEVEMENT),
     SMSG_PET_LEARNED_SPELL(SMSG_PET_LEARNED_SPELL),
     SMSG_PET_UNLEARNED_SPELL(SMSG_PET_UNLEARNED_SPELL),
-    SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA),
+    SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA,
     SMSG_CRITERIA_DELETED(SMSG_CRITERIA_DELETED),
     SMSG_ACHIEVEMENT_DELETED(SMSG_ACHIEVEMENT_DELETED),
-    SMSG_BATTLEGROUND_INFO_THROTTLED(SMSG_BATTLEGROUND_INFO_THROTTLED),
+    SMSG_BATTLEGROUND_INFO_THROTTLED,
     SMSG_PLAYER_VEHICLE_DATA(SMSG_PLAYER_VEHICLE_DATA),
     SMSG_PET_GUIDS(SMSG_PET_GUIDS),
     SMSG_CLIENTCACHE_VERSION(SMSG_CLIENTCACHE_VERSION),
     SMSG_ITEM_REFUND_INFO_RESPONSE(SMSG_ITEM_REFUND_INFO_RESPONSE),
     SMSG_ITEM_REFUND_RESULT(SMSG_ITEM_REFUND_RESULT),
     SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE),
-    SMSG_CALENDAR_CLEAR_PENDING_ACTION(SMSG_CALENDAR_CLEAR_PENDING_ACTION),
+    SMSG_CALENDAR_CLEAR_PENDING_ACTION,
     SMSG_EQUIPMENT_SET_LIST(SMSG_EQUIPMENT_SET_LIST),
     SMSG_SET_PROJECTILE_POSITION(SMSG_SET_PROJECTILE_POSITION),
     SMSG_TALENTS_INFO(SMSG_TALENTS_INFO),
@@ -8222,14 +8222,14 @@ pub enum ServerOpcodeMessage {
     SMSG_BATTLEFIELD_MGR_EJECTED(SMSG_BATTLEFIELD_MGR_EJECTED),
     SMSG_BATTLEFIELD_MGR_STATE_CHANGE(SMSG_BATTLEFIELD_MGR_STATE_CHANGE),
     MSG_SET_RAID_DIFFICULTY(MSG_SET_RAID_DIFFICULTY_Server),
-    SMSG_TOGGLE_XP_GAIN(SMSG_TOGGLE_XP_GAIN),
-    SMSG_GMRESPONSE_DB_ERROR(SMSG_GMRESPONSE_DB_ERROR),
+    SMSG_TOGGLE_XP_GAIN,
+    SMSG_GMRESPONSE_DB_ERROR,
     SMSG_GMRESPONSE_RECEIVED(SMSG_GMRESPONSE_RECEIVED),
     SMSG_GMRESPONSE_STATUS_UPDATE(SMSG_GMRESPONSE_STATUS_UPDATE),
     SMSG_WORLD_STATE_UI_TIMER_UPDATE(SMSG_WORLD_STATE_UI_TIMER_UPDATE),
     SMSG_TALENTS_INVOLUNTARILY_RESET(SMSG_TALENTS_INVOLUNTARILY_RESET),
     SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(SMSG_QUERY_QUESTS_COMPLETED_RESPONSE),
-    SMSG_CORPSE_NOT_IN_INSTANCE(SMSG_CORPSE_NOT_IN_INSTANCE),
+    SMSG_CORPSE_NOT_IN_INSTANCE,
     SMSG_CAMERA_SHAKE(SMSG_CAMERA_SHAKE),
     SMSG_SOCKET_GEMS_RESULT(SMSG_SOCKET_GEMS_RESULT),
     SMSG_REDIRECT_CLIENT(SMSG_REDIRECT_CLIENT),
@@ -8260,7 +8260,7 @@ impl ServerOpcodeMessage {
             0x00CB => Ok(Self::MSG_MOVE_STOP_SWIM(<MSG_MOVE_STOP_SWIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00CB, size: body_size, io, } } else { a } })?)),
             0x00DA => Ok(Self::MSG_MOVE_SET_FACING(<MSG_MOVE_SET_FACING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DA, size: body_size, io, } } else { a } })?)),
             0x00DB => Ok(Self::MSG_MOVE_SET_PITCH(<MSG_MOVE_SET_PITCH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DB, size: body_size, io, } } else { a } })?)),
-            0x00DC => Ok(Self::MSG_MOVE_WORLDPORT_ACK(<MSG_MOVE_WORLDPORT_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00DC, size: body_size, io, } } else { a } })?)),
+            0x00DC => crate::util::assert_empty(body_size, opcode).map(|_| Self::MSG_MOVE_WORLDPORT_ACK),
             0x00EE => Ok(Self::MSG_MOVE_HEARTBEAT(<MSG_MOVE_HEARTBEAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00EE, size: body_size, io, } } else { a } })?)),
             0x00F7 => Ok(Self::MSG_MOVE_HOVER(<MSG_MOVE_HOVER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00F7, size: body_size, io, } } else { a } })?)),
             0x01C2 => Ok(Self::MSG_PETITION_DECLINE(<MSG_PETITION_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C2, size: body_size, io, } } else { a } })?)),
@@ -8272,7 +8272,7 @@ impl ServerOpcodeMessage {
             0x035A => Ok(Self::MSG_MOVE_STOP_ASCEND(<MSG_MOVE_STOP_ASCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x035A, size: body_size, io, } } else { a } })?)),
             0x0380 => Ok(Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(<MSG_MOVE_SET_FLIGHT_BACK_SPEED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0380, size: body_size, io, } } else { a } })?)),
             0x03A7 => Ok(Self::MSG_MOVE_START_DESCEND(<MSG_MOVE_START_DESCEND as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03A7, size: body_size, io, } } else { a } })?)),
-            0x0447 => Ok(Self::CMSG_CALENDAR_GET_NUM_PENDING(<CMSG_CALENDAR_GET_NUM_PENDING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0447, size: body_size, io, } } else { a } })?)),
+            0x0447 => crate::util::assert_empty(body_size, opcode).map(|_| Self::CMSG_CALENDAR_GET_NUM_PENDING),
             0x003A => Ok(Self::SMSG_CHAR_CREATE(<SMSG_CHAR_CREATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003A, size: body_size, io, } } else { a } })?)),
             0x003B => Ok(Self::SMSG_CHAR_ENUM(<SMSG_CHAR_ENUM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003B, size: body_size, io, } } else { a } })?)),
             0x003C => Ok(Self::SMSG_CHAR_DELETE(<SMSG_CHAR_DELETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x003C, size: body_size, io, } } else { a } })?)),
@@ -8282,8 +8282,8 @@ impl ServerOpcodeMessage {
             0x0041 => Ok(Self::SMSG_CHARACTER_LOGIN_FAILED(<SMSG_CHARACTER_LOGIN_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0041, size: body_size, io, } } else { a } })?)),
             0x0042 => Ok(Self::SMSG_LOGIN_SETTIMESPEED(<SMSG_LOGIN_SETTIMESPEED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0042, size: body_size, io, } } else { a } })?)),
             0x004C => Ok(Self::SMSG_LOGOUT_RESPONSE(<SMSG_LOGOUT_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004C, size: body_size, io, } } else { a } })?)),
-            0x004D => Ok(Self::SMSG_LOGOUT_COMPLETE(<SMSG_LOGOUT_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004D, size: body_size, io, } } else { a } })?)),
-            0x004F => Ok(Self::SMSG_LOGOUT_CANCEL_ACK(<SMSG_LOGOUT_CANCEL_ACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x004F, size: body_size, io, } } else { a } })?)),
+            0x004D => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_LOGOUT_COMPLETE),
+            0x004F => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_LOGOUT_CANCEL_ACK),
             0x0051 => Ok(Self::SMSG_NAME_QUERY_RESPONSE(<SMSG_NAME_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0051, size: body_size, io, } } else { a } })?)),
             0x0053 => Ok(Self::SMSG_PET_NAME_QUERY_RESPONSE(<SMSG_PET_NAME_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0053, size: body_size, io, } } else { a } })?)),
             0x0055 => Ok(Self::SMSG_GUILD_QUERY_RESPONSE(<SMSG_GUILD_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0055, size: body_size, io, } } else { a } })?)),
@@ -8298,9 +8298,9 @@ impl ServerOpcodeMessage {
             0x0068 => Ok(Self::SMSG_FRIEND_STATUS(<SMSG_FRIEND_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0068, size: body_size, io, } } else { a } })?)),
             0x006F => Ok(Self::SMSG_GROUP_INVITE(<SMSG_GROUP_INVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x006F, size: body_size, io, } } else { a } })?)),
             0x0074 => Ok(Self::SMSG_GROUP_DECLINE(<SMSG_GROUP_DECLINE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0074, size: body_size, io, } } else { a } })?)),
-            0x0077 => Ok(Self::SMSG_GROUP_UNINVITE(<SMSG_GROUP_UNINVITE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0077, size: body_size, io, } } else { a } })?)),
+            0x0077 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_GROUP_UNINVITE),
             0x0079 => Ok(Self::SMSG_GROUP_SET_LEADER(<SMSG_GROUP_SET_LEADER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0079, size: body_size, io, } } else { a } })?)),
-            0x007C => Ok(Self::SMSG_GROUP_DESTROYED(<SMSG_GROUP_DESTROYED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x007C, size: body_size, io, } } else { a } })?)),
+            0x007C => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_GROUP_DESTROYED),
             0x007D => Ok(Self::SMSG_GROUP_LIST(<SMSG_GROUP_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x007D, size: body_size, io, } } else { a } })?)),
             0x007E => Ok(Self::SMSG_PARTY_MEMBER_STATS(<SMSG_PARTY_MEMBER_STATS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x007E, size: body_size, io, } } else { a } })?)),
             0x007F => Ok(Self::SMSG_PARTY_COMMAND_RESULT(<SMSG_PARTY_COMMAND_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x007F, size: body_size, io, } } else { a } })?)),
@@ -8364,13 +8364,13 @@ impl ServerOpcodeMessage {
             0x013C => Ok(Self::SMSG_AI_REACTION(<SMSG_AI_REACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x013C, size: body_size, io, } } else { a } })?)),
             0x0143 => Ok(Self::SMSG_ATTACKSTART(<SMSG_ATTACKSTART as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0143, size: body_size, io, } } else { a } })?)),
             0x0144 => Ok(Self::SMSG_ATTACKSTOP(<SMSG_ATTACKSTOP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0144, size: body_size, io, } } else { a } })?)),
-            0x0145 => Ok(Self::SMSG_ATTACKSWING_NOTINRANGE(<SMSG_ATTACKSWING_NOTINRANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0145, size: body_size, io, } } else { a } })?)),
-            0x0146 => Ok(Self::SMSG_ATTACKSWING_BADFACING(<SMSG_ATTACKSWING_BADFACING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0146, size: body_size, io, } } else { a } })?)),
+            0x0145 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_ATTACKSWING_NOTINRANGE),
+            0x0146 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_ATTACKSWING_BADFACING),
             0x0147 => Ok(Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(<SMSG_INSTANCE_LOCK_WARNING_QUERY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0147, size: body_size, io, } } else { a } })?)),
-            0x0148 => Ok(Self::SMSG_ATTACKSWING_DEADTARGET(<SMSG_ATTACKSWING_DEADTARGET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0148, size: body_size, io, } } else { a } })?)),
-            0x0149 => Ok(Self::SMSG_ATTACKSWING_CANT_ATTACK(<SMSG_ATTACKSWING_CANT_ATTACK as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0149, size: body_size, io, } } else { a } })?)),
+            0x0148 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_ATTACKSWING_DEADTARGET),
+            0x0149 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_ATTACKSWING_CANT_ATTACK),
             0x014A => Ok(Self::SMSG_ATTACKERSTATEUPDATE(<SMSG_ATTACKERSTATEUPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x014A, size: body_size, io, } } else { a } })?)),
-            0x014E => Ok(Self::SMSG_CANCEL_COMBAT(<SMSG_CANCEL_COMBAT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x014E, size: body_size, io, } } else { a } })?)),
+            0x014E => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_CANCEL_COMBAT),
             0x0150 => Ok(Self::SMSG_SPELLHEALLOG(<SMSG_SPELLHEALLOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0150, size: body_size, io, } } else { a } })?)),
             0x0151 => Ok(Self::SMSG_SPELLENERGIZELOG(<SMSG_SPELLENERGIZELOG as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0151, size: body_size, io, } } else { a } })?)),
             0x0152 => Ok(Self::SMSG_BREAK_TARGET(<SMSG_BREAK_TARGET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0152, size: body_size, io, } } else { a } })?)),
@@ -8382,11 +8382,11 @@ impl ServerOpcodeMessage {
             0x0161 => Ok(Self::SMSG_LOOT_RELEASE_RESPONSE(<SMSG_LOOT_RELEASE_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0161, size: body_size, io, } } else { a } })?)),
             0x0162 => Ok(Self::SMSG_LOOT_REMOVED(<SMSG_LOOT_REMOVED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0162, size: body_size, io, } } else { a } })?)),
             0x0163 => Ok(Self::SMSG_LOOT_MONEY_NOTIFY(<SMSG_LOOT_MONEY_NOTIFY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0163, size: body_size, io, } } else { a } })?)),
-            0x0165 => Ok(Self::SMSG_LOOT_CLEAR_MONEY(<SMSG_LOOT_CLEAR_MONEY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0165, size: body_size, io, } } else { a } })?)),
+            0x0165 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_LOOT_CLEAR_MONEY),
             0x0166 => Ok(Self::SMSG_ITEM_PUSH_RESULT(<SMSG_ITEM_PUSH_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0166, size: body_size, io, } } else { a } })?)),
             0x0167 => Ok(Self::SMSG_DUEL_REQUESTED(<SMSG_DUEL_REQUESTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0167, size: body_size, io, } } else { a } })?)),
-            0x0168 => Ok(Self::SMSG_DUEL_OUTOFBOUNDS(<SMSG_DUEL_OUTOFBOUNDS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0168, size: body_size, io, } } else { a } })?)),
-            0x0169 => Ok(Self::SMSG_DUEL_INBOUNDS(<SMSG_DUEL_INBOUNDS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0169, size: body_size, io, } } else { a } })?)),
+            0x0168 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_DUEL_OUTOFBOUNDS),
+            0x0169 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_DUEL_INBOUNDS),
             0x016A => Ok(Self::SMSG_DUEL_COMPLETE(<SMSG_DUEL_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x016A, size: body_size, io, } } else { a } })?)),
             0x016B => Ok(Self::SMSG_DUEL_WINNER(<SMSG_DUEL_WINNER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x016B, size: body_size, io, } } else { a } })?)),
             0x016E => Ok(Self::SMSG_MOUNTRESULT(<SMSG_MOUNTRESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x016E, size: body_size, io, } } else { a } })?)),
@@ -8396,7 +8396,7 @@ impl ServerOpcodeMessage {
             0x0179 => Ok(Self::SMSG_PET_SPELLS(<SMSG_PET_SPELLS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0179, size: body_size, io, } } else { a } })?)),
             0x017A => Ok(Self::SMSG_PET_MODE(<SMSG_PET_MODE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017A, size: body_size, io, } } else { a } })?)),
             0x017D => Ok(Self::SMSG_GOSSIP_MESSAGE(<SMSG_GOSSIP_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017D, size: body_size, io, } } else { a } })?)),
-            0x017E => Ok(Self::SMSG_GOSSIP_COMPLETE(<SMSG_GOSSIP_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x017E, size: body_size, io, } } else { a } })?)),
+            0x017E => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_GOSSIP_COMPLETE),
             0x0180 => Ok(Self::SMSG_NPC_TEXT_UPDATE(<SMSG_NPC_TEXT_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0180, size: body_size, io, } } else { a } })?)),
             0x0183 => Ok(Self::SMSG_QUESTGIVER_STATUS(<SMSG_QUESTGIVER_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0183, size: body_size, io, } } else { a } })?)),
             0x0185 => Ok(Self::SMSG_QUESTGIVER_QUEST_LIST(<SMSG_QUESTGIVER_QUEST_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0185, size: body_size, io, } } else { a } })?)),
@@ -8406,7 +8406,7 @@ impl ServerOpcodeMessage {
             0x018F => Ok(Self::SMSG_QUESTGIVER_QUEST_INVALID(<SMSG_QUESTGIVER_QUEST_INVALID as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x018F, size: body_size, io, } } else { a } })?)),
             0x0191 => Ok(Self::SMSG_QUESTGIVER_QUEST_COMPLETE(<SMSG_QUESTGIVER_QUEST_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0191, size: body_size, io, } } else { a } })?)),
             0x0192 => Ok(Self::SMSG_QUESTGIVER_QUEST_FAILED(<SMSG_QUESTGIVER_QUEST_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0192, size: body_size, io, } } else { a } })?)),
-            0x0195 => Ok(Self::SMSG_QUESTLOG_FULL(<SMSG_QUESTLOG_FULL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0195, size: body_size, io, } } else { a } })?)),
+            0x0195 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_QUESTLOG_FULL),
             0x0196 => Ok(Self::SMSG_QUESTUPDATE_FAILED(<SMSG_QUESTUPDATE_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0196, size: body_size, io, } } else { a } })?)),
             0x0197 => Ok(Self::SMSG_QUESTUPDATE_FAILEDTIMER(<SMSG_QUESTUPDATE_FAILEDTIMER as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0197, size: body_size, io, } } else { a } })?)),
             0x0198 => Ok(Self::SMSG_QUESTUPDATE_COMPLETE(<SMSG_QUESTUPDATE_COMPLETE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0198, size: body_size, io, } } else { a } })?)),
@@ -8420,7 +8420,7 @@ impl ServerOpcodeMessage {
             0x01A9 => Ok(Self::SMSG_SHOWTAXINODES(<SMSG_SHOWTAXINODES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01A9, size: body_size, io, } } else { a } })?)),
             0x01AB => Ok(Self::SMSG_TAXINODE_STATUS(<SMSG_TAXINODE_STATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01AB, size: body_size, io, } } else { a } })?)),
             0x01AE => Ok(Self::SMSG_ACTIVATETAXIREPLY(<SMSG_ACTIVATETAXIREPLY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01AE, size: body_size, io, } } else { a } })?)),
-            0x01AF => Ok(Self::SMSG_NEW_TAXI_PATH(<SMSG_NEW_TAXI_PATH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01AF, size: body_size, io, } } else { a } })?)),
+            0x01AF => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_NEW_TAXI_PATH),
             0x01B1 => Ok(Self::SMSG_TRAINER_LIST(<SMSG_TRAINER_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B1, size: body_size, io, } } else { a } })?)),
             0x01B3 => Ok(Self::SMSG_TRAINER_BUY_SUCCEEDED(<SMSG_TRAINER_BUY_SUCCEEDED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B3, size: body_size, io, } } else { a } })?)),
             0x01B4 => Ok(Self::SMSG_TRAINER_BUY_FAILED(<SMSG_TRAINER_BUY_FAILED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01B4, size: body_size, io, } } else { a } })?)),
@@ -8431,8 +8431,8 @@ impl ServerOpcodeMessage {
             0x01C1 => Ok(Self::SMSG_PETITION_SIGN_RESULTS(<SMSG_PETITION_SIGN_RESULTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C1, size: body_size, io, } } else { a } })?)),
             0x01C5 => Ok(Self::SMSG_TURN_IN_PETITION_RESULTS(<SMSG_TURN_IN_PETITION_RESULTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C5, size: body_size, io, } } else { a } })?)),
             0x01C7 => Ok(Self::SMSG_PETITION_QUERY_RESPONSE(<SMSG_PETITION_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C7, size: body_size, io, } } else { a } })?)),
-            0x01C8 => Ok(Self::SMSG_FISH_NOT_HOOKED(<SMSG_FISH_NOT_HOOKED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C8, size: body_size, io, } } else { a } })?)),
-            0x01C9 => Ok(Self::SMSG_FISH_ESCAPED(<SMSG_FISH_ESCAPED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01C9, size: body_size, io, } } else { a } })?)),
+            0x01C8 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_FISH_NOT_HOOKED),
+            0x01C9 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_FISH_ESCAPED),
             0x01CB => Ok(Self::SMSG_NOTIFICATION(<SMSG_NOTIFICATION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CB, size: body_size, io, } } else { a } })?)),
             0x01CD => Ok(Self::SMSG_PLAYED_TIME(<SMSG_PLAYED_TIME as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CD, size: body_size, io, } } else { a } })?)),
             0x01CF => Ok(Self::SMSG_QUERY_TIME_RESPONSE(<SMSG_QUERY_TIME_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x01CF, size: body_size, io, } } else { a } })?)),
@@ -8472,7 +8472,7 @@ impl ServerOpcodeMessage {
             0x0215 => Ok(Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(<SMSG_GAMEOBJECT_DESPAWN_ANIM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0215, size: body_size, io, } } else { a } })?)),
             0x0216 => Ok(Self::MSG_CORPSE_QUERY(<MSG_CORPSE_QUERY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0216, size: body_size, io, } } else { a } })?)),
             0x0218 => Ok(Self::SMSG_GMTICKET_DELETETICKET(<SMSG_GMTICKET_DELETETICKET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0218, size: body_size, io, } } else { a } })?)),
-            0x0219 => Ok(Self::SMSG_CHAT_WRONG_FACTION(<SMSG_CHAT_WRONG_FACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0219, size: body_size, io, } } else { a } })?)),
+            0x0219 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_CHAT_WRONG_FACTION),
             0x021B => Ok(Self::SMSG_GMTICKET_SYSTEMSTATUS(<SMSG_GMTICKET_SYSTEMSTATUS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x021B, size: body_size, io, } } else { a } })?)),
             0x021E => Ok(Self::SMSG_QUEST_FORCE_REMOVE(<SMSG_QUEST_FORCE_REMOVE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x021E, size: body_size, io, } } else { a } })?)),
             0x0222 => Ok(Self::SMSG_SPIRIT_HEALER_CONFIRM(<SMSG_SPIRIT_HEALER_CONFIRM as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0222, size: body_size, io, } } else { a } })?)),
@@ -8527,14 +8527,14 @@ impl ServerOpcodeMessage {
             0x02AA => Ok(Self::MSG_TALENT_WIPE_CONFIRM(<MSG_TALENT_WIPE_CONFIRM_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AA, size: body_size, io, } } else { a } })?)),
             0x02AB => Ok(Self::SMSG_SUMMON_REQUEST(<SMSG_SUMMON_REQUEST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AB, size: body_size, io, } } else { a } })?)),
             0x02AE => Ok(Self::SMSG_MONSTER_MOVE_TRANSPORT(<SMSG_MONSTER_MOVE_TRANSPORT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AE, size: body_size, io, } } else { a } })?)),
-            0x02AF => Ok(Self::SMSG_PET_BROKEN(<SMSG_PET_BROKEN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02AF, size: body_size, io, } } else { a } })?)),
+            0x02AF => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_PET_BROKEN),
             0x02B0 => Ok(Self::MSG_MOVE_FEATHER_FALL(<MSG_MOVE_FEATHER_FALL_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B0, size: body_size, io, } } else { a } })?)),
-            0x02B4 => Ok(Self::SMSG_FEIGN_DEATH_RESISTED(<SMSG_FEIGN_DEATH_RESISTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B4, size: body_size, io, } } else { a } })?)),
+            0x02B4 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_FEIGN_DEATH_RESISTED),
             0x02B7 => Ok(Self::SMSG_DUEL_COUNTDOWN(<SMSG_DUEL_COUNTDOWN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B7, size: body_size, io, } } else { a } })?)),
             0x02B8 => Ok(Self::SMSG_AREA_TRIGGER_MESSAGE(<SMSG_AREA_TRIGGER_MESSAGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02B8, size: body_size, io, } } else { a } })?)),
             0x02BB => Ok(Self::SMSG_LFG_ROLE_CHOSEN(<SMSG_LFG_ROLE_CHOSEN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02BB, size: body_size, io, } } else { a } })?)),
             0x02BC => Ok(Self::SMSG_PLAYER_SKINNED(<SMSG_PLAYER_SKINNED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02BC, size: body_size, io, } } else { a } })?)),
-            0x02BD => Ok(Self::SMSG_DURABILITY_DAMAGE_DEATH(<SMSG_DURABILITY_DAMAGE_DEATH as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02BD, size: body_size, io, } } else { a } })?)),
+            0x02BD => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_DURABILITY_DAMAGE_DEATH),
             0x02C2 => Ok(Self::SMSG_INIT_WORLD_STATES(<SMSG_INIT_WORLD_STATES as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C2, size: body_size, io, } } else { a } })?)),
             0x02C3 => Ok(Self::SMSG_UPDATE_WORLD_STATE(<SMSG_UPDATE_WORLD_STATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C3, size: body_size, io, } } else { a } })?)),
             0x02C5 => Ok(Self::SMSG_ITEM_NAME_QUERY_RESPONSE(<SMSG_ITEM_NAME_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x02C5, size: body_size, io, } } else { a } })?)),
@@ -8622,7 +8622,7 @@ impl ServerOpcodeMessage {
             0x0376 => Ok(Self::SMSG_ARENA_ERROR(<SMSG_ARENA_ERROR as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0376, size: body_size, io, } } else { a } })?)),
             0x0377 => Ok(Self::MSG_INSPECT_ARENA_TEAMS(<MSG_INSPECT_ARENA_TEAMS_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0377, size: body_size, io, } } else { a } })?)),
             0x0378 => Ok(Self::SMSG_DEATH_RELEASE_LOC(<SMSG_DEATH_RELEASE_LOC as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0378, size: body_size, io, } } else { a } })?)),
-            0x037A => Ok(Self::SMSG_FORCED_DEATH_UPDATE(<SMSG_FORCED_DEATH_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x037A, size: body_size, io, } } else { a } })?)),
+            0x037A => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_FORCED_DEATH_UPDATE),
             0x037E => Ok(Self::MSG_MOVE_SET_FLIGHT_SPEED(<MSG_MOVE_SET_FLIGHT_SPEED_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x037E, size: body_size, io, } } else { a } })?)),
             0x0381 => Ok(Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(<SMSG_FORCE_FLIGHT_SPEED_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0381, size: body_size, io, } } else { a } })?)),
             0x0383 => Ok(Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(<SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0383, size: body_size, io, } } else { a } })?)),
@@ -8632,7 +8632,7 @@ impl ServerOpcodeMessage {
             0x038B => Ok(Self::SMSG_REALM_SPLIT(<SMSG_REALM_SPLIT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x038B, size: body_size, io, } } else { a } })?)),
             0x0390 => Ok(Self::SMSG_TIME_SYNC_REQ(<SMSG_TIME_SYNC_REQ as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0390, size: body_size, io, } } else { a } })?)),
             0x0396 => Ok(Self::SMSG_RESET_FAILED_NOTIFY(<SMSG_RESET_FAILED_NOTIFY as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0396, size: body_size, io, } } else { a } })?)),
-            0x0398 => Ok(Self::SMSG_LFG_DISABLED(<SMSG_LFG_DISABLED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0398, size: body_size, io, } } else { a } })?)),
+            0x0398 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_LFG_DISABLED),
             0x039D => Ok(Self::SMSG_UPDATE_COMBO_POINTS(<SMSG_UPDATE_COMBO_POINTS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x039D, size: body_size, io, } } else { a } })?)),
             0x03AC => Ok(Self::SMSG_DISMOUNT(<SMSG_DISMOUNT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AC, size: body_size, io, } } else { a } })?)),
             0x03AD => Ok(Self::MSG_MOVE_UPDATE_CAN_FLY(<MSG_MOVE_UPDATE_CAN_FLY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x03AD, size: body_size, io, } } else { a } })?)),
@@ -8665,7 +8665,7 @@ impl ServerOpcodeMessage {
             0x0421 => Ok(Self::SMSG_REFER_A_FRIEND_FAILURE(<SMSG_REFER_A_FRIEND_FAILURE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0421, size: body_size, io, } } else { a } })?)),
             0x0422 => Ok(Self::SMSG_SPLINE_MOVE_SET_FLYING(<SMSG_SPLINE_MOVE_SET_FLYING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0422, size: body_size, io, } } else { a } })?)),
             0x0423 => Ok(Self::SMSG_SPLINE_MOVE_UNSET_FLYING(<SMSG_SPLINE_MOVE_UNSET_FLYING as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0423, size: body_size, io, } } else { a } })?)),
-            0x0427 => Ok(Self::SMSG_ENABLE_BARBER_SHOP(<SMSG_ENABLE_BARBER_SHOP as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0427, size: body_size, io, } } else { a } })?)),
+            0x0427 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_ENABLE_BARBER_SHOP),
             0x0428 => Ok(Self::SMSG_BARBER_SHOP_RESULT(<SMSG_BARBER_SHOP_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0428, size: body_size, io, } } else { a } })?)),
             0x0436 => Ok(Self::SMSG_CALENDAR_SEND_CALENDAR(<SMSG_CALENDAR_SEND_CALENDAR as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0436, size: body_size, io, } } else { a } })?)),
             0x0437 => Ok(Self::SMSG_CALENDAR_SEND_EVENT(<SMSG_CALENDAR_SEND_EVENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0437, size: body_size, io, } } else { a } })?)),
@@ -8714,17 +8714,17 @@ impl ServerOpcodeMessage {
             0x0498 => Ok(Self::SMSG_SERVER_FIRST_ACHIEVEMENT(<SMSG_SERVER_FIRST_ACHIEVEMENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0498, size: body_size, io, } } else { a } })?)),
             0x0499 => Ok(Self::SMSG_PET_LEARNED_SPELL(<SMSG_PET_LEARNED_SPELL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0499, size: body_size, io, } } else { a } })?)),
             0x049A => Ok(Self::SMSG_PET_UNLEARNED_SPELL(<SMSG_PET_UNLEARNED_SPELL as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049A, size: body_size, io, } } else { a } })?)),
-            0x049D => Ok(Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(<SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049D, size: body_size, io, } } else { a } })?)),
+            0x049D => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA),
             0x049E => Ok(Self::SMSG_CRITERIA_DELETED(<SMSG_CRITERIA_DELETED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049E, size: body_size, io, } } else { a } })?)),
             0x049F => Ok(Self::SMSG_ACHIEVEMENT_DELETED(<SMSG_ACHIEVEMENT_DELETED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x049F, size: body_size, io, } } else { a } })?)),
-            0x04A6 => Ok(Self::SMSG_BATTLEGROUND_INFO_THROTTLED(<SMSG_BATTLEGROUND_INFO_THROTTLED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04A6, size: body_size, io, } } else { a } })?)),
+            0x04A6 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_BATTLEGROUND_INFO_THROTTLED),
             0x04A7 => Ok(Self::SMSG_PLAYER_VEHICLE_DATA(<SMSG_PLAYER_VEHICLE_DATA as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04A7, size: body_size, io, } } else { a } })?)),
             0x04AA => Ok(Self::SMSG_PET_GUIDS(<SMSG_PET_GUIDS as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04AA, size: body_size, io, } } else { a } })?)),
             0x04AB => Ok(Self::SMSG_CLIENTCACHE_VERSION(<SMSG_CLIENTCACHE_VERSION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04AB, size: body_size, io, } } else { a } })?)),
             0x04B2 => Ok(Self::SMSG_ITEM_REFUND_INFO_RESPONSE(<SMSG_ITEM_REFUND_INFO_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04B2, size: body_size, io, } } else { a } })?)),
             0x04B5 => Ok(Self::SMSG_ITEM_REFUND_RESULT(<SMSG_ITEM_REFUND_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04B5, size: body_size, io, } } else { a } })?)),
             0x04B7 => Ok(Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(<SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04B7, size: body_size, io, } } else { a } })?)),
-            0x04BB => Ok(Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(<SMSG_CALENDAR_CLEAR_PENDING_ACTION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04BB, size: body_size, io, } } else { a } })?)),
+            0x04BB => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION),
             0x04BC => Ok(Self::SMSG_EQUIPMENT_SET_LIST(<SMSG_EQUIPMENT_SET_LIST as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04BC, size: body_size, io, } } else { a } })?)),
             0x04BF => Ok(Self::SMSG_SET_PROJECTILE_POSITION(<SMSG_SET_PROJECTILE_POSITION as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04BF, size: body_size, io, } } else { a } })?)),
             0x04C0 => Ok(Self::SMSG_TALENTS_INFO(<SMSG_TALENTS_INFO as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04C0, size: body_size, io, } } else { a } })?)),
@@ -8745,14 +8745,14 @@ impl ServerOpcodeMessage {
             0x04E6 => Ok(Self::SMSG_BATTLEFIELD_MGR_EJECTED(<SMSG_BATTLEFIELD_MGR_EJECTED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04E6, size: body_size, io, } } else { a } })?)),
             0x04E8 => Ok(Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(<SMSG_BATTLEFIELD_MGR_STATE_CHANGE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04E8, size: body_size, io, } } else { a } })?)),
             0x04EB => Ok(Self::MSG_SET_RAID_DIFFICULTY(<MSG_SET_RAID_DIFFICULTY_Server as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EB, size: body_size, io, } } else { a } })?)),
-            0x04ED => Ok(Self::SMSG_TOGGLE_XP_GAIN(<SMSG_TOGGLE_XP_GAIN as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04ED, size: body_size, io, } } else { a } })?)),
-            0x04EE => Ok(Self::SMSG_GMRESPONSE_DB_ERROR(<SMSG_GMRESPONSE_DB_ERROR as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EE, size: body_size, io, } } else { a } })?)),
+            0x04ED => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_TOGGLE_XP_GAIN),
+            0x04EE => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_GMRESPONSE_DB_ERROR),
             0x04EF => Ok(Self::SMSG_GMRESPONSE_RECEIVED(<SMSG_GMRESPONSE_RECEIVED as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04EF, size: body_size, io, } } else { a } })?)),
             0x04F1 => Ok(Self::SMSG_GMRESPONSE_STATUS_UPDATE(<SMSG_GMRESPONSE_STATUS_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F1, size: body_size, io, } } else { a } })?)),
             0x04F7 => Ok(Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(<SMSG_WORLD_STATE_UI_TIMER_UPDATE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04F7, size: body_size, io, } } else { a } })?)),
             0x04FA => Ok(Self::SMSG_TALENTS_INVOLUNTARILY_RESET(<SMSG_TALENTS_INVOLUNTARILY_RESET as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x04FA, size: body_size, io, } } else { a } })?)),
             0x0501 => Ok(Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(<SMSG_QUERY_QUESTS_COMPLETED_RESPONSE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0501, size: body_size, io, } } else { a } })?)),
-            0x0506 => Ok(Self::SMSG_CORPSE_NOT_IN_INSTANCE(<SMSG_CORPSE_NOT_IN_INSTANCE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x0506, size: body_size, io, } } else { a } })?)),
+            0x0506 => crate::util::assert_empty(body_size, opcode).map(|_| Self::SMSG_CORPSE_NOT_IN_INSTANCE),
             0x050A => Ok(Self::SMSG_CAMERA_SHAKE(<SMSG_CAMERA_SHAKE as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x050A, size: body_size, io, } } else { a } })?)),
             0x050B => Ok(Self::SMSG_SOCKET_GEMS_RESULT(<SMSG_SOCKET_GEMS_RESULT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x050B, size: body_size, io, } } else { a } })?)),
             0x050D => Ok(Self::SMSG_REDIRECT_CLIENT(<SMSG_REDIRECT_CLIENT as crate::Message>::read_body(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x050D, size: body_size, io, } } else { a } })?)),
@@ -8932,7 +8932,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_FACING(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_PITCH(c) => c.write_encrypted_server(w, e),
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_encrypted_server(w, e),
+            Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.write_encrypted_server(w, e),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_HOVER(c) => c.write_encrypted_server(w, e),
             Self::MSG_PETITION_DECLINE(c) => c.write_encrypted_server(w, e),
@@ -8944,7 +8944,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_encrypted_server(w, e),
-            Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.write_encrypted_server(w, e),
+            Self::CMSG_CALENDAR_GET_NUM_PENDING => CMSG_CALENDAR_GET_NUM_PENDING{}.write_encrypted_server(w, e),
             Self::SMSG_CHAR_CREATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_ENUM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CHAR_DELETE(c) => c.write_encrypted_server(w, e),
@@ -8954,8 +8954,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOGOUT_RESPONSE(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_LOGOUT_COMPLETE(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_LOGOUT_COMPLETE => SMSG_LOGOUT_COMPLETE{}.write_encrypted_server(w, e),
+            Self::SMSG_LOGOUT_CANCEL_ACK => SMSG_LOGOUT_CANCEL_ACK{}.write_encrypted_server(w, e),
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
@@ -8970,9 +8970,9 @@ impl ServerOpcodeMessage {
             Self::SMSG_FRIEND_STATUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GROUP_INVITE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GROUP_DECLINE(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_GROUP_UNINVITE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_GROUP_UNINVITE => SMSG_GROUP_UNINVITE{}.write_encrypted_server(w, e),
             Self::SMSG_GROUP_SET_LEADER(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_GROUP_DESTROYED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_GROUP_DESTROYED => SMSG_GROUP_DESTROYED{}.write_encrypted_server(w, e),
             Self::SMSG_GROUP_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PARTY_MEMBER_STATS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PARTY_COMMAND_RESULT(c) => c.write_encrypted_server(w, e),
@@ -9036,13 +9036,13 @@ impl ServerOpcodeMessage {
             Self::SMSG_AI_REACTION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSTART(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ATTACKSTOP(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_ATTACKSWING_NOTINRANGE(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_ATTACKSWING_BADFACING(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ATTACKSWING_NOTINRANGE => SMSG_ATTACKSWING_NOTINRANGE{}.write_encrypted_server(w, e),
+            Self::SMSG_ATTACKSWING_BADFACING => SMSG_ATTACKSWING_BADFACING{}.write_encrypted_server(w, e),
             Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ATTACKSWING_DEADTARGET => SMSG_ATTACKSWING_DEADTARGET{}.write_encrypted_server(w, e),
+            Self::SMSG_ATTACKSWING_CANT_ATTACK => SMSG_ATTACKSWING_CANT_ATTACK{}.write_encrypted_server(w, e),
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_CANCEL_COMBAT(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CANCEL_COMBAT => SMSG_CANCEL_COMBAT{}.write_encrypted_server(w, e),
             Self::SMSG_SPELLHEALLOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPELLENERGIZELOG(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BREAK_TARGET(c) => c.write_encrypted_server(w, e),
@@ -9054,11 +9054,11 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOOT_REMOVED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_LOOT_CLEAR_MONEY(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_LOOT_CLEAR_MONEY => SMSG_LOOT_CLEAR_MONEY{}.write_encrypted_server(w, e),
             Self::SMSG_ITEM_PUSH_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DUEL_REQUESTED(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_DUEL_OUTOFBOUNDS(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_DUEL_INBOUNDS(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_DUEL_OUTOFBOUNDS => SMSG_DUEL_OUTOFBOUNDS{}.write_encrypted_server(w, e),
+            Self::SMSG_DUEL_INBOUNDS => SMSG_DUEL_INBOUNDS{}.write_encrypted_server(w, e),
             Self::SMSG_DUEL_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DUEL_WINNER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MOUNTRESULT(c) => c.write_encrypted_server(w, e),
@@ -9068,7 +9068,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_SPELLS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_MODE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GOSSIP_MESSAGE(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_GOSSIP_COMPLETE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_GOSSIP_COMPLETE => SMSG_GOSSIP_COMPLETE{}.write_encrypted_server(w, e),
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTGIVER_STATUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTGIVER_QUEST_LIST(c) => c.write_encrypted_server(w, e),
@@ -9078,7 +9078,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTGIVER_QUEST_COMPLETE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_QUESTLOG_FULL(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_QUESTLOG_FULL => SMSG_QUESTLOG_FULL{}.write_encrypted_server(w, e),
             Self::SMSG_QUESTUPDATE_FAILED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTUPDATE_FAILEDTIMER(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUESTUPDATE_COMPLETE(c) => c.write_encrypted_server(w, e),
@@ -9092,7 +9092,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SHOWTAXINODES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TAXINODE_STATUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ACTIVATETAXIREPLY(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_NEW_TAXI_PATH(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_NEW_TAXI_PATH => SMSG_NEW_TAXI_PATH{}.write_encrypted_server(w, e),
             Self::SMSG_TRAINER_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TRAINER_BUY_SUCCEEDED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TRAINER_BUY_FAILED(c) => c.write_encrypted_server(w, e),
@@ -9103,8 +9103,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PETITION_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_FISH_NOT_HOOKED(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_FISH_ESCAPED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_FISH_NOT_HOOKED => SMSG_FISH_NOT_HOOKED{}.write_encrypted_server(w, e),
+            Self::SMSG_FISH_ESCAPED => SMSG_FISH_ESCAPED{}.write_encrypted_server(w, e),
             Self::SMSG_NOTIFICATION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAYED_TIME(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.write_encrypted_server(w, e),
@@ -9144,7 +9144,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(c) => c.write_encrypted_server(w, e),
             Self::MSG_CORPSE_QUERY(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_CHAT_WRONG_FACTION(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CHAT_WRONG_FACTION => SMSG_CHAT_WRONG_FACTION{}.write_encrypted_server(w, e),
             Self::SMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUEST_FORCE_REMOVE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPIRIT_HEALER_CONFIRM(c) => c.write_encrypted_server(w, e),
@@ -9199,14 +9199,14 @@ impl ServerOpcodeMessage {
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SUMMON_REQUEST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_MONSTER_MOVE_TRANSPORT(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_PET_BROKEN(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_PET_BROKEN => SMSG_PET_BROKEN{}.write_encrypted_server(w, e),
             Self::MSG_MOVE_FEATHER_FALL(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_FEIGN_DEATH_RESISTED => SMSG_FEIGN_DEATH_RESISTED{}.write_encrypted_server(w, e),
             Self::SMSG_DUEL_COUNTDOWN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_LFG_ROLE_CHOSEN(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PLAYER_SKINNED(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_DURABILITY_DAMAGE_DEATH => SMSG_DURABILITY_DAMAGE_DEATH{}.write_encrypted_server(w, e),
             Self::SMSG_INIT_WORLD_STATES(c) => c.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ITEM_NAME_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
@@ -9294,7 +9294,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ARENA_ERROR(c) => c.write_encrypted_server(w, e),
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DEATH_RELEASE_LOC(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_FORCED_DEATH_UPDATE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_FORCED_DEATH_UPDATE => SMSG_FORCED_DEATH_UPDATE{}.write_encrypted_server(w, e),
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(c) => c.write_encrypted_server(w, e),
@@ -9304,7 +9304,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_encrypted_server(w, e),
             Self::SMSG_RESET_FAILED_NOTIFY(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_LFG_DISABLED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_LFG_DISABLED => SMSG_LFG_DISABLED{}.write_encrypted_server(w, e),
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_DISMOUNT(c) => c.write_encrypted_server(w, e),
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_encrypted_server(w, e),
@@ -9337,7 +9337,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_ENABLE_BARBER_SHOP(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ENABLE_BARBER_SHOP => SMSG_ENABLE_BARBER_SHOP{}.write_encrypted_server(w, e),
             Self::SMSG_BARBER_SHOP_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_SEND_CALENDAR(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CALENDAR_SEND_EVENT(c) => c.write_encrypted_server(w, e),
@@ -9386,17 +9386,17 @@ impl ServerOpcodeMessage {
             Self::SMSG_SERVER_FIRST_ACHIEVEMENT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_LEARNED_SPELL(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_UNLEARNED_SPELL(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA => SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA{}.write_encrypted_server(w, e),
             Self::SMSG_CRITERIA_DELETED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ACHIEVEMENT_DELETED(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_BATTLEGROUND_INFO_THROTTLED => SMSG_BATTLEGROUND_INFO_THROTTLED{}.write_encrypted_server(w, e),
             Self::SMSG_PLAYER_VEHICLE_DATA(c) => c.write_encrypted_server(w, e),
             Self::SMSG_PET_GUIDS(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ITEM_REFUND_INFO_RESPONSE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_ITEM_REFUND_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION => SMSG_CALENDAR_CLEAR_PENDING_ACTION{}.write_encrypted_server(w, e),
             Self::SMSG_EQUIPMENT_SET_LIST(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SET_PROJECTILE_POSITION(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TALENTS_INFO(c) => c.write_encrypted_server(w, e),
@@ -9417,14 +9417,14 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEFIELD_MGR_EJECTED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(c) => c.write_encrypted_server(w, e),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_TOGGLE_XP_GAIN(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_GMRESPONSE_DB_ERROR(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_TOGGLE_XP_GAIN => SMSG_TOGGLE_XP_GAIN{}.write_encrypted_server(w, e),
+            Self::SMSG_GMRESPONSE_DB_ERROR => SMSG_GMRESPONSE_DB_ERROR{}.write_encrypted_server(w, e),
             Self::SMSG_GMRESPONSE_RECEIVED(c) => c.write_encrypted_server(w, e),
             Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_TALENTS_INVOLUNTARILY_RESET(c) => c.write_encrypted_server(w, e),
             Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.write_encrypted_server(w, e),
-            Self::SMSG_CORPSE_NOT_IN_INSTANCE(c) => c.write_encrypted_server(w, e),
+            Self::SMSG_CORPSE_NOT_IN_INSTANCE => SMSG_CORPSE_NOT_IN_INSTANCE{}.write_encrypted_server(w, e),
             Self::SMSG_CAMERA_SHAKE(c) => c.write_encrypted_server(w, e),
             Self::SMSG_SOCKET_GEMS_RESULT(c) => c.write_encrypted_server(w, e),
             Self::SMSG_REDIRECT_CLIENT(c) => c.write_encrypted_server(w, e),
@@ -9456,7 +9456,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_FACING(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_PITCH(c) => c.write_unencrypted_server(w),
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.write_unencrypted_server(w),
+            Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.write_unencrypted_server(w),
             Self::MSG_MOVE_HEARTBEAT(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_HOVER(c) => c.write_unencrypted_server(w),
             Self::MSG_PETITION_DECLINE(c) => c.write_unencrypted_server(w),
@@ -9468,7 +9468,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_START_DESCEND(c) => c.write_unencrypted_server(w),
-            Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.write_unencrypted_server(w),
+            Self::CMSG_CALENDAR_GET_NUM_PENDING => CMSG_CALENDAR_GET_NUM_PENDING{}.write_unencrypted_server(w),
             Self::SMSG_CHAR_CREATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_ENUM(c) => c.write_unencrypted_server(w),
             Self::SMSG_CHAR_DELETE(c) => c.write_unencrypted_server(w),
@@ -9478,8 +9478,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOGOUT_RESPONSE(c) => c.write_unencrypted_server(w),
-            Self::SMSG_LOGOUT_COMPLETE(c) => c.write_unencrypted_server(w),
-            Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.write_unencrypted_server(w),
+            Self::SMSG_LOGOUT_COMPLETE => SMSG_LOGOUT_COMPLETE{}.write_unencrypted_server(w),
+            Self::SMSG_LOGOUT_CANCEL_ACK => SMSG_LOGOUT_CANCEL_ACK{}.write_unencrypted_server(w),
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
@@ -9494,9 +9494,9 @@ impl ServerOpcodeMessage {
             Self::SMSG_FRIEND_STATUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_GROUP_INVITE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GROUP_DECLINE(c) => c.write_unencrypted_server(w),
-            Self::SMSG_GROUP_UNINVITE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_GROUP_UNINVITE => SMSG_GROUP_UNINVITE{}.write_unencrypted_server(w),
             Self::SMSG_GROUP_SET_LEADER(c) => c.write_unencrypted_server(w),
-            Self::SMSG_GROUP_DESTROYED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_GROUP_DESTROYED => SMSG_GROUP_DESTROYED{}.write_unencrypted_server(w),
             Self::SMSG_GROUP_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_PARTY_MEMBER_STATS(c) => c.write_unencrypted_server(w),
             Self::SMSG_PARTY_COMMAND_RESULT(c) => c.write_unencrypted_server(w),
@@ -9560,13 +9560,13 @@ impl ServerOpcodeMessage {
             Self::SMSG_AI_REACTION(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSTART(c) => c.write_unencrypted_server(w),
             Self::SMSG_ATTACKSTOP(c) => c.write_unencrypted_server(w),
-            Self::SMSG_ATTACKSWING_NOTINRANGE(c) => c.write_unencrypted_server(w),
-            Self::SMSG_ATTACKSWING_BADFACING(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ATTACKSWING_NOTINRANGE => SMSG_ATTACKSWING_NOTINRANGE{}.write_unencrypted_server(w),
+            Self::SMSG_ATTACKSWING_BADFACING => SMSG_ATTACKSWING_BADFACING{}.write_unencrypted_server(w),
             Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c) => c.write_unencrypted_server(w),
-            Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.write_unencrypted_server(w),
-            Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ATTACKSWING_DEADTARGET => SMSG_ATTACKSWING_DEADTARGET{}.write_unencrypted_server(w),
+            Self::SMSG_ATTACKSWING_CANT_ATTACK => SMSG_ATTACKSWING_CANT_ATTACK{}.write_unencrypted_server(w),
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.write_unencrypted_server(w),
-            Self::SMSG_CANCEL_COMBAT(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CANCEL_COMBAT => SMSG_CANCEL_COMBAT{}.write_unencrypted_server(w),
             Self::SMSG_SPELLHEALLOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPELLENERGIZELOG(c) => c.write_unencrypted_server(w),
             Self::SMSG_BREAK_TARGET(c) => c.write_unencrypted_server(w),
@@ -9578,11 +9578,11 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOOT_REMOVED(c) => c.write_unencrypted_server(w),
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.write_unencrypted_server(w),
-            Self::SMSG_LOOT_CLEAR_MONEY(c) => c.write_unencrypted_server(w),
+            Self::SMSG_LOOT_CLEAR_MONEY => SMSG_LOOT_CLEAR_MONEY{}.write_unencrypted_server(w),
             Self::SMSG_ITEM_PUSH_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_DUEL_REQUESTED(c) => c.write_unencrypted_server(w),
-            Self::SMSG_DUEL_OUTOFBOUNDS(c) => c.write_unencrypted_server(w),
-            Self::SMSG_DUEL_INBOUNDS(c) => c.write_unencrypted_server(w),
+            Self::SMSG_DUEL_OUTOFBOUNDS => SMSG_DUEL_OUTOFBOUNDS{}.write_unencrypted_server(w),
+            Self::SMSG_DUEL_INBOUNDS => SMSG_DUEL_INBOUNDS{}.write_unencrypted_server(w),
             Self::SMSG_DUEL_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_DUEL_WINNER(c) => c.write_unencrypted_server(w),
             Self::SMSG_MOUNTRESULT(c) => c.write_unencrypted_server(w),
@@ -9592,7 +9592,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_SPELLS(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_MODE(c) => c.write_unencrypted_server(w),
             Self::SMSG_GOSSIP_MESSAGE(c) => c.write_unencrypted_server(w),
-            Self::SMSG_GOSSIP_COMPLETE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_GOSSIP_COMPLETE => SMSG_GOSSIP_COMPLETE{}.write_unencrypted_server(w),
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTGIVER_STATUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTGIVER_QUEST_LIST(c) => c.write_unencrypted_server(w),
@@ -9602,7 +9602,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTGIVER_QUEST_COMPLETE(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.write_unencrypted_server(w),
-            Self::SMSG_QUESTLOG_FULL(c) => c.write_unencrypted_server(w),
+            Self::SMSG_QUESTLOG_FULL => SMSG_QUESTLOG_FULL{}.write_unencrypted_server(w),
             Self::SMSG_QUESTUPDATE_FAILED(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTUPDATE_FAILEDTIMER(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUESTUPDATE_COMPLETE(c) => c.write_unencrypted_server(w),
@@ -9616,7 +9616,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SHOWTAXINODES(c) => c.write_unencrypted_server(w),
             Self::SMSG_TAXINODE_STATUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_ACTIVATETAXIREPLY(c) => c.write_unencrypted_server(w),
-            Self::SMSG_NEW_TAXI_PATH(c) => c.write_unencrypted_server(w),
+            Self::SMSG_NEW_TAXI_PATH => SMSG_NEW_TAXI_PATH{}.write_unencrypted_server(w),
             Self::SMSG_TRAINER_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_TRAINER_BUY_SUCCEEDED(c) => c.write_unencrypted_server(w),
             Self::SMSG_TRAINER_BUY_FAILED(c) => c.write_unencrypted_server(w),
@@ -9627,8 +9627,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.write_unencrypted_server(w),
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.write_unencrypted_server(w),
             Self::SMSG_PETITION_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
-            Self::SMSG_FISH_NOT_HOOKED(c) => c.write_unencrypted_server(w),
-            Self::SMSG_FISH_ESCAPED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_FISH_NOT_HOOKED => SMSG_FISH_NOT_HOOKED{}.write_unencrypted_server(w),
+            Self::SMSG_FISH_ESCAPED => SMSG_FISH_ESCAPED{}.write_unencrypted_server(w),
             Self::SMSG_NOTIFICATION(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAYED_TIME(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.write_unencrypted_server(w),
@@ -9668,7 +9668,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(c) => c.write_unencrypted_server(w),
             Self::MSG_CORPSE_QUERY(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.write_unencrypted_server(w),
-            Self::SMSG_CHAT_WRONG_FACTION(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CHAT_WRONG_FACTION => SMSG_CHAT_WRONG_FACTION{}.write_unencrypted_server(w),
             Self::SMSG_GMTICKET_SYSTEMSTATUS(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUEST_FORCE_REMOVE(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPIRIT_HEALER_CONFIRM(c) => c.write_unencrypted_server(w),
@@ -9723,14 +9723,14 @@ impl ServerOpcodeMessage {
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.write_unencrypted_server(w),
             Self::SMSG_SUMMON_REQUEST(c) => c.write_unencrypted_server(w),
             Self::SMSG_MONSTER_MOVE_TRANSPORT(c) => c.write_unencrypted_server(w),
-            Self::SMSG_PET_BROKEN(c) => c.write_unencrypted_server(w),
+            Self::SMSG_PET_BROKEN => SMSG_PET_BROKEN{}.write_unencrypted_server(w),
             Self::MSG_MOVE_FEATHER_FALL(c) => c.write_unencrypted_server(w),
-            Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_FEIGN_DEATH_RESISTED => SMSG_FEIGN_DEATH_RESISTED{}.write_unencrypted_server(w),
             Self::SMSG_DUEL_COUNTDOWN(c) => c.write_unencrypted_server(w),
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_LFG_ROLE_CHOSEN(c) => c.write_unencrypted_server(w),
             Self::SMSG_PLAYER_SKINNED(c) => c.write_unencrypted_server(w),
-            Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.write_unencrypted_server(w),
+            Self::SMSG_DURABILITY_DAMAGE_DEATH => SMSG_DURABILITY_DAMAGE_DEATH{}.write_unencrypted_server(w),
             Self::SMSG_INIT_WORLD_STATES(c) => c.write_unencrypted_server(w),
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_ITEM_NAME_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
@@ -9818,7 +9818,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ARENA_ERROR(c) => c.write_unencrypted_server(w),
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.write_unencrypted_server(w),
             Self::SMSG_DEATH_RELEASE_LOC(c) => c.write_unencrypted_server(w),
-            Self::SMSG_FORCED_DEATH_UPDATE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_FORCED_DEATH_UPDATE => SMSG_FORCED_DEATH_UPDATE{}.write_unencrypted_server(w),
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(c) => c.write_unencrypted_server(w),
             Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(c) => c.write_unencrypted_server(w),
@@ -9828,7 +9828,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.write_unencrypted_server(w),
             Self::SMSG_TIME_SYNC_REQ(c) => c.write_unencrypted_server(w),
             Self::SMSG_RESET_FAILED_NOTIFY(c) => c.write_unencrypted_server(w),
-            Self::SMSG_LFG_DISABLED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_LFG_DISABLED => SMSG_LFG_DISABLED{}.write_unencrypted_server(w),
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.write_unencrypted_server(w),
             Self::SMSG_DISMOUNT(c) => c.write_unencrypted_server(w),
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.write_unencrypted_server(w),
@@ -9861,7 +9861,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.write_unencrypted_server(w),
             Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.write_unencrypted_server(w),
-            Self::SMSG_ENABLE_BARBER_SHOP(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ENABLE_BARBER_SHOP => SMSG_ENABLE_BARBER_SHOP{}.write_unencrypted_server(w),
             Self::SMSG_BARBER_SHOP_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_SEND_CALENDAR(c) => c.write_unencrypted_server(w),
             Self::SMSG_CALENDAR_SEND_EVENT(c) => c.write_unencrypted_server(w),
@@ -9910,17 +9910,17 @@ impl ServerOpcodeMessage {
             Self::SMSG_SERVER_FIRST_ACHIEVEMENT(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_LEARNED_SPELL(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_UNLEARNED_SPELL(c) => c.write_unencrypted_server(w),
-            Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.write_unencrypted_server(w),
+            Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA => SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA{}.write_unencrypted_server(w),
             Self::SMSG_CRITERIA_DELETED(c) => c.write_unencrypted_server(w),
             Self::SMSG_ACHIEVEMENT_DELETED(c) => c.write_unencrypted_server(w),
-            Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c) => c.write_unencrypted_server(w),
+            Self::SMSG_BATTLEGROUND_INFO_THROTTLED => SMSG_BATTLEGROUND_INFO_THROTTLED{}.write_unencrypted_server(w),
             Self::SMSG_PLAYER_VEHICLE_DATA(c) => c.write_unencrypted_server(w),
             Self::SMSG_PET_GUIDS(c) => c.write_unencrypted_server(w),
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.write_unencrypted_server(w),
             Self::SMSG_ITEM_REFUND_INFO_RESPONSE(c) => c.write_unencrypted_server(w),
             Self::SMSG_ITEM_REFUND_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(c) => c.write_unencrypted_server(w),
-            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION => SMSG_CALENDAR_CLEAR_PENDING_ACTION{}.write_unencrypted_server(w),
             Self::SMSG_EQUIPMENT_SET_LIST(c) => c.write_unencrypted_server(w),
             Self::SMSG_SET_PROJECTILE_POSITION(c) => c.write_unencrypted_server(w),
             Self::SMSG_TALENTS_INFO(c) => c.write_unencrypted_server(w),
@@ -9941,14 +9941,14 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEFIELD_MGR_EJECTED(c) => c.write_unencrypted_server(w),
             Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(c) => c.write_unencrypted_server(w),
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.write_unencrypted_server(w),
-            Self::SMSG_TOGGLE_XP_GAIN(c) => c.write_unencrypted_server(w),
-            Self::SMSG_GMRESPONSE_DB_ERROR(c) => c.write_unencrypted_server(w),
+            Self::SMSG_TOGGLE_XP_GAIN => SMSG_TOGGLE_XP_GAIN{}.write_unencrypted_server(w),
+            Self::SMSG_GMRESPONSE_DB_ERROR => SMSG_GMRESPONSE_DB_ERROR{}.write_unencrypted_server(w),
             Self::SMSG_GMRESPONSE_RECEIVED(c) => c.write_unencrypted_server(w),
             Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.write_unencrypted_server(w),
             Self::SMSG_TALENTS_INVOLUNTARILY_RESET(c) => c.write_unencrypted_server(w),
             Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.write_unencrypted_server(w),
-            Self::SMSG_CORPSE_NOT_IN_INSTANCE(c) => c.write_unencrypted_server(w),
+            Self::SMSG_CORPSE_NOT_IN_INSTANCE => SMSG_CORPSE_NOT_IN_INSTANCE{}.write_unencrypted_server(w),
             Self::SMSG_CAMERA_SHAKE(c) => c.write_unencrypted_server(w),
             Self::SMSG_SOCKET_GEMS_RESULT(c) => c.write_unencrypted_server(w),
             Self::SMSG_REDIRECT_CLIENT(c) => c.write_unencrypted_server(w),
@@ -9980,7 +9980,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_HOVER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -9992,7 +9992,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::CMSG_CALENDAR_GET_NUM_PENDING => CMSG_CALENDAR_GET_NUM_PENDING{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_DELETE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10002,8 +10002,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_LOGOUT_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_LOGOUT_COMPLETE => SMSG_LOGOUT_COMPLETE{}.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_LOGOUT_CANCEL_ACK => SMSG_LOGOUT_CANCEL_ACK{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10018,9 +10018,9 @@ impl ServerOpcodeMessage {
             Self::SMSG_FRIEND_STATUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_INVITE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_DECLINE(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_GROUP_UNINVITE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GROUP_UNINVITE => SMSG_GROUP_UNINVITE{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_SET_LEADER(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_GROUP_DESTROYED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GROUP_DESTROYED => SMSG_GROUP_DESTROYED{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PARTY_MEMBER_STATS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PARTY_COMMAND_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10084,13 +10084,13 @@ impl ServerOpcodeMessage {
             Self::SMSG_AI_REACTION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSTART(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSTOP(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_ATTACKSWING_NOTINRANGE(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_ATTACKSWING_BADFACING(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ATTACKSWING_NOTINRANGE => SMSG_ATTACKSWING_NOTINRANGE{}.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ATTACKSWING_BADFACING => SMSG_ATTACKSWING_BADFACING{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ATTACKSWING_DEADTARGET => SMSG_ATTACKSWING_DEADTARGET{}.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ATTACKSWING_CANT_ATTACK => SMSG_ATTACKSWING_CANT_ATTACK{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_CANCEL_COMBAT(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CANCEL_COMBAT => SMSG_CANCEL_COMBAT{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLHEALLOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLENERGIZELOG(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BREAK_TARGET(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10102,11 +10102,11 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_REMOVED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_LOOT_CLEAR_MONEY(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_LOOT_CLEAR_MONEY => SMSG_LOOT_CLEAR_MONEY{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_PUSH_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_REQUESTED(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_DUEL_OUTOFBOUNDS(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_DUEL_INBOUNDS(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_DUEL_OUTOFBOUNDS => SMSG_DUEL_OUTOFBOUNDS{}.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_DUEL_INBOUNDS => SMSG_DUEL_INBOUNDS{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_WINNER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MOUNTRESULT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10116,7 +10116,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_SPELLS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_MODE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GOSSIP_COMPLETE => SMSG_GOSSIP_COMPLETE{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_STATUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10126,7 +10126,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_QUESTLOG_FULL(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_QUESTLOG_FULL => SMSG_QUESTLOG_FULL{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_FAILEDTIMER(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_COMPLETE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10140,7 +10140,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SHOWTAXINODES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TAXINODE_STATUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ACTIVATETAXIREPLY(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_NEW_TAXI_PATH(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_NEW_TAXI_PATH => SMSG_NEW_TAXI_PATH{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TRAINER_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TRAINER_BUY_SUCCEEDED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TRAINER_BUY_FAILED(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10151,8 +10151,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PETITION_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_FISH_NOT_HOOKED(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_FISH_ESCAPED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_FISH_NOT_HOOKED => SMSG_FISH_NOT_HOOKED{}.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_FISH_ESCAPED => SMSG_FISH_ESCAPED{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYED_TIME(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10192,7 +10192,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_CORPSE_QUERY(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_CHAT_WRONG_FACTION(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CHAT_WRONG_FACTION => SMSG_CHAT_WRONG_FACTION{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUEST_FORCE_REMOVE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPIRIT_HEALER_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10247,14 +10247,14 @@ impl ServerOpcodeMessage {
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SUMMON_REQUEST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_MONSTER_MOVE_TRANSPORT(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_PET_BROKEN(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_PET_BROKEN => SMSG_PET_BROKEN{}.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FEATHER_FALL(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_FEIGN_DEATH_RESISTED => SMSG_FEIGN_DEATH_RESISTED{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_LFG_ROLE_CHOSEN(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYER_SKINNED(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_DURABILITY_DAMAGE_DEATH => SMSG_DURABILITY_DAMAGE_DEATH{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_INIT_WORLD_STATES(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_NAME_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10342,7 +10342,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ARENA_ERROR(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DEATH_RELEASE_LOC(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_FORCED_DEATH_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_FORCED_DEATH_UPDATE => SMSG_FORCED_DEATH_UPDATE{}.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10352,7 +10352,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_RESET_FAILED_NOTIFY(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_LFG_DISABLED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_LFG_DISABLED => SMSG_LFG_DISABLED{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_DISMOUNT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10385,7 +10385,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_ENABLE_BARBER_SHOP(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ENABLE_BARBER_SHOP => SMSG_ENABLE_BARBER_SHOP{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BARBER_SHOP_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_CALENDAR(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_EVENT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10434,17 +10434,17 @@ impl ServerOpcodeMessage {
             Self::SMSG_SERVER_FIRST_ACHIEVEMENT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_LEARNED_SPELL(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_UNLEARNED_SPELL(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA => SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CRITERIA_DELETED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ACHIEVEMENT_DELETED(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_BATTLEGROUND_INFO_THROTTLED => SMSG_BATTLEGROUND_INFO_THROTTLED{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYER_VEHICLE_DATA(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_PET_GUIDS(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_REFUND_INFO_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_REFUND_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION => SMSG_CALENDAR_CLEAR_PENDING_ACTION{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_EQUIPMENT_SET_LIST(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SET_PROJECTILE_POSITION(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TALENTS_INFO(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10465,14 +10465,14 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEFIELD_MGR_EJECTED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_TOGGLE_XP_GAIN(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_GMRESPONSE_DB_ERROR(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_TOGGLE_XP_GAIN => SMSG_TOGGLE_XP_GAIN{}.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_GMRESPONSE_DB_ERROR => SMSG_GMRESPONSE_DB_ERROR{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMRESPONSE_RECEIVED(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_TALENTS_INVOLUNTARILY_RESET(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.tokio_write_encrypted_server(w, e).await,
-            Self::SMSG_CORPSE_NOT_IN_INSTANCE(c) => c.tokio_write_encrypted_server(w, e).await,
+            Self::SMSG_CORPSE_NOT_IN_INSTANCE => SMSG_CORPSE_NOT_IN_INSTANCE{}.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_CAMERA_SHAKE(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_SOCKET_GEMS_RESULT(c) => c.tokio_write_encrypted_server(w, e).await,
             Self::SMSG_REDIRECT_CLIENT(c) => c.tokio_write_encrypted_server(w, e).await,
@@ -10504,7 +10504,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_FACING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_HOVER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10516,7 +10516,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::CMSG_CALENDAR_GET_NUM_PENDING => CMSG_CALENDAR_GET_NUM_PENDING{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_DELETE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10526,8 +10526,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_LOGOUT_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_LOGOUT_COMPLETE => SMSG_LOGOUT_COMPLETE{}.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_LOGOUT_CANCEL_ACK => SMSG_LOGOUT_CANCEL_ACK{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10542,9 +10542,9 @@ impl ServerOpcodeMessage {
             Self::SMSG_FRIEND_STATUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_INVITE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_DECLINE(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_GROUP_UNINVITE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GROUP_UNINVITE => SMSG_GROUP_UNINVITE{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_SET_LEADER(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_GROUP_DESTROYED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GROUP_DESTROYED => SMSG_GROUP_DESTROYED{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PARTY_MEMBER_STATS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PARTY_COMMAND_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10608,13 +10608,13 @@ impl ServerOpcodeMessage {
             Self::SMSG_AI_REACTION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSTART(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSTOP(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_ATTACKSWING_NOTINRANGE(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_ATTACKSWING_BADFACING(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ATTACKSWING_NOTINRANGE => SMSG_ATTACKSWING_NOTINRANGE{}.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ATTACKSWING_BADFACING => SMSG_ATTACKSWING_BADFACING{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ATTACKSWING_DEADTARGET => SMSG_ATTACKSWING_DEADTARGET{}.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ATTACKSWING_CANT_ATTACK => SMSG_ATTACKSWING_CANT_ATTACK{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_CANCEL_COMBAT(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CANCEL_COMBAT => SMSG_CANCEL_COMBAT{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELLHEALLOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPELLENERGIZELOG(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BREAK_TARGET(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10626,11 +10626,11 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_REMOVED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_LOOT_CLEAR_MONEY(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_LOOT_CLEAR_MONEY => SMSG_LOOT_CLEAR_MONEY{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_PUSH_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_REQUESTED(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_DUEL_OUTOFBOUNDS(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_DUEL_INBOUNDS(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_DUEL_OUTOFBOUNDS => SMSG_DUEL_OUTOFBOUNDS{}.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_DUEL_INBOUNDS => SMSG_DUEL_INBOUNDS{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_WINNER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MOUNTRESULT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10640,7 +10640,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_SPELLS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_MODE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_GOSSIP_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GOSSIP_COMPLETE => SMSG_GOSSIP_COMPLETE{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_STATUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_LIST(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10650,7 +10650,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_QUESTLOG_FULL(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_QUESTLOG_FULL => SMSG_QUESTLOG_FULL{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_FAILEDTIMER(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_COMPLETE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10664,7 +10664,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SHOWTAXINODES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TAXINODE_STATUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ACTIVATETAXIREPLY(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_NEW_TAXI_PATH(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_NEW_TAXI_PATH => SMSG_NEW_TAXI_PATH{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TRAINER_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TRAINER_BUY_SUCCEEDED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TRAINER_BUY_FAILED(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10675,8 +10675,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PETITION_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_FISH_NOT_HOOKED(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_FISH_ESCAPED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_FISH_NOT_HOOKED => SMSG_FISH_NOT_HOOKED{}.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_FISH_ESCAPED => SMSG_FISH_ESCAPED{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAYED_TIME(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10716,7 +10716,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_CORPSE_QUERY(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_CHAT_WRONG_FACTION(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CHAT_WRONG_FACTION => SMSG_CHAT_WRONG_FACTION{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_SYSTEMSTATUS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUEST_FORCE_REMOVE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPIRIT_HEALER_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10771,14 +10771,14 @@ impl ServerOpcodeMessage {
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SUMMON_REQUEST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_MONSTER_MOVE_TRANSPORT(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_PET_BROKEN(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_PET_BROKEN => SMSG_PET_BROKEN{}.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FEATHER_FALL(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_FEIGN_DEATH_RESISTED => SMSG_FEIGN_DEATH_RESISTED{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_LFG_ROLE_CHOSEN(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAYER_SKINNED(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_DURABILITY_DAMAGE_DEATH => SMSG_DURABILITY_DAMAGE_DEATH{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_INIT_WORLD_STATES(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_NAME_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10866,7 +10866,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ARENA_ERROR(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DEATH_RELEASE_LOC(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_FORCED_DEATH_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_FORCED_DEATH_UPDATE => SMSG_FORCED_DEATH_UPDATE{}.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10876,7 +10876,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_RESET_FAILED_NOTIFY(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_LFG_DISABLED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_LFG_DISABLED => SMSG_LFG_DISABLED{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_DISMOUNT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10909,7 +10909,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_ENABLE_BARBER_SHOP(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ENABLE_BARBER_SHOP => SMSG_ENABLE_BARBER_SHOP{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BARBER_SHOP_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_CALENDAR(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_EVENT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10958,17 +10958,17 @@ impl ServerOpcodeMessage {
             Self::SMSG_SERVER_FIRST_ACHIEVEMENT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_LEARNED_SPELL(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_UNLEARNED_SPELL(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA => SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CRITERIA_DELETED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ACHIEVEMENT_DELETED(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_BATTLEGROUND_INFO_THROTTLED => SMSG_BATTLEGROUND_INFO_THROTTLED{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PLAYER_VEHICLE_DATA(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_PET_GUIDS(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_REFUND_INFO_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_REFUND_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION => SMSG_CALENDAR_CLEAR_PENDING_ACTION{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_EQUIPMENT_SET_LIST(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SET_PROJECTILE_POSITION(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TALENTS_INFO(c) => c.tokio_write_unencrypted_server(w).await,
@@ -10989,14 +10989,14 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEFIELD_MGR_EJECTED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_TOGGLE_XP_GAIN(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_GMRESPONSE_DB_ERROR(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_TOGGLE_XP_GAIN => SMSG_TOGGLE_XP_GAIN{}.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_GMRESPONSE_DB_ERROR => SMSG_GMRESPONSE_DB_ERROR{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMRESPONSE_RECEIVED(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_TALENTS_INVOLUNTARILY_RESET(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.tokio_write_unencrypted_server(w).await,
-            Self::SMSG_CORPSE_NOT_IN_INSTANCE(c) => c.tokio_write_unencrypted_server(w).await,
+            Self::SMSG_CORPSE_NOT_IN_INSTANCE => SMSG_CORPSE_NOT_IN_INSTANCE{}.tokio_write_unencrypted_server(w).await,
             Self::SMSG_CAMERA_SHAKE(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_SOCKET_GEMS_RESULT(c) => c.tokio_write_unencrypted_server(w).await,
             Self::SMSG_REDIRECT_CLIENT(c) => c.tokio_write_unencrypted_server(w).await,
@@ -11028,7 +11028,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_FACING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_HOVER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11040,7 +11040,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::CMSG_CALENDAR_GET_NUM_PENDING => CMSG_CALENDAR_GET_NUM_PENDING{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CHAR_DELETE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11050,8 +11050,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOGOUT_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_LOGOUT_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_LOGOUT_COMPLETE => SMSG_LOGOUT_COMPLETE{}.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_LOGOUT_CANCEL_ACK => SMSG_LOGOUT_CANCEL_ACK{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11066,9 +11066,9 @@ impl ServerOpcodeMessage {
             Self::SMSG_FRIEND_STATUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_INVITE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_DECLINE(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_GROUP_UNINVITE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GROUP_UNINVITE => SMSG_GROUP_UNINVITE{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_SET_LEADER(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_GROUP_DESTROYED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GROUP_DESTROYED => SMSG_GROUP_DESTROYED{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GROUP_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PARTY_MEMBER_STATS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PARTY_COMMAND_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11132,13 +11132,13 @@ impl ServerOpcodeMessage {
             Self::SMSG_AI_REACTION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSTART(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKSTOP(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_ATTACKSWING_NOTINRANGE(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_ATTACKSWING_BADFACING(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ATTACKSWING_NOTINRANGE => SMSG_ATTACKSWING_NOTINRANGE{}.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ATTACKSWING_BADFACING => SMSG_ATTACKSWING_BADFACING{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ATTACKSWING_DEADTARGET => SMSG_ATTACKSWING_DEADTARGET{}.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ATTACKSWING_CANT_ATTACK => SMSG_ATTACKSWING_CANT_ATTACK{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_CANCEL_COMBAT(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CANCEL_COMBAT => SMSG_CANCEL_COMBAT{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLHEALLOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPELLENERGIZELOG(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BREAK_TARGET(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11150,11 +11150,11 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_REMOVED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_LOOT_CLEAR_MONEY(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_LOOT_CLEAR_MONEY => SMSG_LOOT_CLEAR_MONEY{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_PUSH_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_REQUESTED(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_DUEL_OUTOFBOUNDS(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_DUEL_INBOUNDS(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_DUEL_OUTOFBOUNDS => SMSG_DUEL_OUTOFBOUNDS{}.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_DUEL_INBOUNDS => SMSG_DUEL_INBOUNDS{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_WINNER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MOUNTRESULT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11164,7 +11164,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_SPELLS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_MODE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GOSSIP_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GOSSIP_COMPLETE => SMSG_GOSSIP_COMPLETE{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_STATUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_LIST(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11174,7 +11174,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_QUESTLOG_FULL(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_QUESTLOG_FULL => SMSG_QUESTLOG_FULL{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_FAILEDTIMER(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUESTUPDATE_COMPLETE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11188,7 +11188,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SHOWTAXINODES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TAXINODE_STATUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ACTIVATETAXIREPLY(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_NEW_TAXI_PATH(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_NEW_TAXI_PATH => SMSG_NEW_TAXI_PATH{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TRAINER_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TRAINER_BUY_SUCCEEDED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TRAINER_BUY_FAILED(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11199,8 +11199,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PETITION_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_FISH_NOT_HOOKED(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_FISH_ESCAPED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_FISH_NOT_HOOKED => SMSG_FISH_NOT_HOOKED{}.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_FISH_ESCAPED => SMSG_FISH_ESCAPED{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYED_TIME(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11240,7 +11240,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_CORPSE_QUERY(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_CHAT_WRONG_FACTION(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CHAT_WRONG_FACTION => SMSG_CHAT_WRONG_FACTION{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUEST_FORCE_REMOVE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPIRIT_HEALER_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11295,14 +11295,14 @@ impl ServerOpcodeMessage {
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SUMMON_REQUEST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_MONSTER_MOVE_TRANSPORT(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_PET_BROKEN(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_PET_BROKEN => SMSG_PET_BROKEN{}.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_FEATHER_FALL(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_FEIGN_DEATH_RESISTED => SMSG_FEIGN_DEATH_RESISTED{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_LFG_ROLE_CHOSEN(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYER_SKINNED(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_DURABILITY_DAMAGE_DEATH => SMSG_DURABILITY_DAMAGE_DEATH{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_INIT_WORLD_STATES(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_NAME_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11390,7 +11390,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ARENA_ERROR(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DEATH_RELEASE_LOC(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_FORCED_DEATH_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_FORCED_DEATH_UPDATE => SMSG_FORCED_DEATH_UPDATE{}.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11400,7 +11400,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_RESET_FAILED_NOTIFY(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_LFG_DISABLED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_LFG_DISABLED => SMSG_LFG_DISABLED{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_DISMOUNT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11433,7 +11433,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_ENABLE_BARBER_SHOP(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ENABLE_BARBER_SHOP => SMSG_ENABLE_BARBER_SHOP{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BARBER_SHOP_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_CALENDAR(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CALENDAR_SEND_EVENT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11482,17 +11482,17 @@ impl ServerOpcodeMessage {
             Self::SMSG_SERVER_FIRST_ACHIEVEMENT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_LEARNED_SPELL(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_UNLEARNED_SPELL(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA => SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CRITERIA_DELETED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ACHIEVEMENT_DELETED(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_BATTLEGROUND_INFO_THROTTLED => SMSG_BATTLEGROUND_INFO_THROTTLED{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PLAYER_VEHICLE_DATA(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_PET_GUIDS(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_REFUND_INFO_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_ITEM_REFUND_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION => SMSG_CALENDAR_CLEAR_PENDING_ACTION{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_EQUIPMENT_SET_LIST(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SET_PROJECTILE_POSITION(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TALENTS_INFO(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11513,14 +11513,14 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEFIELD_MGR_EJECTED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_TOGGLE_XP_GAIN(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_GMRESPONSE_DB_ERROR(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_TOGGLE_XP_GAIN => SMSG_TOGGLE_XP_GAIN{}.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_GMRESPONSE_DB_ERROR => SMSG_GMRESPONSE_DB_ERROR{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMRESPONSE_RECEIVED(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_TALENTS_INVOLUNTARILY_RESET(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.astd_write_encrypted_server(w, e).await,
-            Self::SMSG_CORPSE_NOT_IN_INSTANCE(c) => c.astd_write_encrypted_server(w, e).await,
+            Self::SMSG_CORPSE_NOT_IN_INSTANCE => SMSG_CORPSE_NOT_IN_INSTANCE{}.astd_write_encrypted_server(w, e).await,
             Self::SMSG_CAMERA_SHAKE(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_SOCKET_GEMS_RESULT(c) => c.astd_write_encrypted_server(w, e).await,
             Self::SMSG_REDIRECT_CLIENT(c) => c.astd_write_encrypted_server(w, e).await,
@@ -11552,7 +11552,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_SWIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_FACING(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_PITCH(c) => c.astd_write_unencrypted_server(w).await,
-            Self::MSG_MOVE_WORLDPORT_ACK(c) => c.astd_write_unencrypted_server(w).await,
+            Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_HEARTBEAT(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_HOVER(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_PETITION_DECLINE(c) => c.astd_write_unencrypted_server(w).await,
@@ -11564,7 +11564,7 @@ impl ServerOpcodeMessage {
             Self::MSG_MOVE_STOP_ASCEND(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_FLIGHT_BACK_SPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_START_DESCEND(c) => c.astd_write_unencrypted_server(w).await,
-            Self::CMSG_CALENDAR_GET_NUM_PENDING(c) => c.astd_write_unencrypted_server(w).await,
+            Self::CMSG_CALENDAR_GET_NUM_PENDING => CMSG_CALENDAR_GET_NUM_PENDING{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_CREATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_ENUM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CHAR_DELETE(c) => c.astd_write_unencrypted_server(w).await,
@@ -11574,8 +11574,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_CHARACTER_LOGIN_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGIN_SETTIMESPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOGOUT_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_LOGOUT_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_LOGOUT_CANCEL_ACK(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_LOGOUT_COMPLETE => SMSG_LOGOUT_COMPLETE{}.astd_write_unencrypted_server(w).await,
+            Self::SMSG_LOGOUT_CANCEL_ACK => SMSG_LOGOUT_CANCEL_ACK{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_NAME_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_NAME_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GUILD_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
@@ -11590,9 +11590,9 @@ impl ServerOpcodeMessage {
             Self::SMSG_FRIEND_STATUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_INVITE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_DECLINE(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_GROUP_UNINVITE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GROUP_UNINVITE => SMSG_GROUP_UNINVITE{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_SET_LEADER(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_GROUP_DESTROYED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GROUP_DESTROYED => SMSG_GROUP_DESTROYED{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_GROUP_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PARTY_MEMBER_STATS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PARTY_COMMAND_RESULT(c) => c.astd_write_unencrypted_server(w).await,
@@ -11656,13 +11656,13 @@ impl ServerOpcodeMessage {
             Self::SMSG_AI_REACTION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSTART(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKSTOP(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_ATTACKSWING_NOTINRANGE(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_ATTACKSWING_BADFACING(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ATTACKSWING_NOTINRANGE => SMSG_ATTACKSWING_NOTINRANGE{}.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ATTACKSWING_BADFACING => SMSG_ATTACKSWING_BADFACING{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_INSTANCE_LOCK_WARNING_QUERY(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_ATTACKSWING_DEADTARGET(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_ATTACKSWING_CANT_ATTACK(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ATTACKSWING_DEADTARGET => SMSG_ATTACKSWING_DEADTARGET{}.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ATTACKSWING_CANT_ATTACK => SMSG_ATTACKSWING_CANT_ATTACK{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_ATTACKERSTATEUPDATE(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_CANCEL_COMBAT(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CANCEL_COMBAT => SMSG_CANCEL_COMBAT{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELLHEALLOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPELLENERGIZELOG(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BREAK_TARGET(c) => c.astd_write_unencrypted_server(w).await,
@@ -11674,11 +11674,11 @@ impl ServerOpcodeMessage {
             Self::SMSG_LOOT_RELEASE_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_REMOVED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LOOT_MONEY_NOTIFY(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_LOOT_CLEAR_MONEY(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_LOOT_CLEAR_MONEY => SMSG_LOOT_CLEAR_MONEY{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_PUSH_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_REQUESTED(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_DUEL_OUTOFBOUNDS(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_DUEL_INBOUNDS(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_DUEL_OUTOFBOUNDS => SMSG_DUEL_OUTOFBOUNDS{}.astd_write_unencrypted_server(w).await,
+            Self::SMSG_DUEL_INBOUNDS => SMSG_DUEL_INBOUNDS{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_WINNER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MOUNTRESULT(c) => c.astd_write_unencrypted_server(w).await,
@@ -11688,7 +11688,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_PET_SPELLS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_MODE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GOSSIP_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_GOSSIP_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GOSSIP_COMPLETE => SMSG_GOSSIP_COMPLETE{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_NPC_TEXT_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_STATUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_LIST(c) => c.astd_write_unencrypted_server(w).await,
@@ -11698,7 +11698,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_QUESTGIVER_QUEST_INVALID(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTGIVER_QUEST_FAILED(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_QUESTLOG_FULL(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_QUESTLOG_FULL => SMSG_QUESTLOG_FULL{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_FAILED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_FAILEDTIMER(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUESTUPDATE_COMPLETE(c) => c.astd_write_unencrypted_server(w).await,
@@ -11712,7 +11712,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_SHOWTAXINODES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TAXINODE_STATUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ACTIVATETAXIREPLY(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_NEW_TAXI_PATH(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_NEW_TAXI_PATH => SMSG_NEW_TAXI_PATH{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_TRAINER_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TRAINER_BUY_SUCCEEDED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TRAINER_BUY_FAILED(c) => c.astd_write_unencrypted_server(w).await,
@@ -11723,8 +11723,8 @@ impl ServerOpcodeMessage {
             Self::SMSG_PETITION_SIGN_RESULTS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TURN_IN_PETITION_RESULTS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PETITION_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_FISH_NOT_HOOKED(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_FISH_ESCAPED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_FISH_NOT_HOOKED => SMSG_FISH_NOT_HOOKED{}.astd_write_unencrypted_server(w).await,
+            Self::SMSG_FISH_ESCAPED => SMSG_FISH_ESCAPED{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_NOTIFICATION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAYED_TIME(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUERY_TIME_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
@@ -11764,7 +11764,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_GAMEOBJECT_DESPAWN_ANIM(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_CORPSE_QUERY(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_DELETETICKET(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_CHAT_WRONG_FACTION(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CHAT_WRONG_FACTION => SMSG_CHAT_WRONG_FACTION{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMTICKET_SYSTEMSTATUS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUEST_FORCE_REMOVE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPIRIT_HEALER_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
@@ -11819,14 +11819,14 @@ impl ServerOpcodeMessage {
             Self::MSG_TALENT_WIPE_CONFIRM(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SUMMON_REQUEST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_MONSTER_MOVE_TRANSPORT(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_PET_BROKEN(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_PET_BROKEN => SMSG_PET_BROKEN{}.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_FEATHER_FALL(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_FEIGN_DEATH_RESISTED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_FEIGN_DEATH_RESISTED => SMSG_FEIGN_DEATH_RESISTED{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_DUEL_COUNTDOWN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_AREA_TRIGGER_MESSAGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_LFG_ROLE_CHOSEN(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAYER_SKINNED(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_DURABILITY_DAMAGE_DEATH(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_DURABILITY_DAMAGE_DEATH => SMSG_DURABILITY_DAMAGE_DEATH{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_INIT_WORLD_STATES(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_WORLD_STATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_NAME_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
@@ -11914,7 +11914,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_ARENA_ERROR(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_INSPECT_ARENA_TEAMS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DEATH_RELEASE_LOC(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_FORCED_DEATH_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_FORCED_DEATH_UPDATE => SMSG_FORCED_DEATH_UPDATE{}.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_SET_FLIGHT_SPEED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_FLIGHT_SPEED_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
@@ -11924,7 +11924,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REALM_SPLIT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TIME_SYNC_REQ(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_RESET_FAILED_NOTIFY(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_LFG_DISABLED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_LFG_DISABLED => SMSG_LFG_DISABLED{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_UPDATE_COMBO_POINTS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_DISMOUNT(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_MOVE_UPDATE_CAN_FLY(c) => c.astd_write_unencrypted_server(w).await,
@@ -11957,7 +11957,7 @@ impl ServerOpcodeMessage {
             Self::SMSG_REFER_A_FRIEND_FAILURE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_SET_FLYING(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SPLINE_MOVE_UNSET_FLYING(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_ENABLE_BARBER_SHOP(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ENABLE_BARBER_SHOP => SMSG_ENABLE_BARBER_SHOP{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_BARBER_SHOP_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_CALENDAR(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CALENDAR_SEND_EVENT(c) => c.astd_write_unencrypted_server(w).await,
@@ -12006,17 +12006,17 @@ impl ServerOpcodeMessage {
             Self::SMSG_SERVER_FIRST_ACHIEVEMENT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_LEARNED_SPELL(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_UNLEARNED_SPELL(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA => SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_CRITERIA_DELETED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ACHIEVEMENT_DELETED(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_BATTLEGROUND_INFO_THROTTLED => SMSG_BATTLEGROUND_INFO_THROTTLED{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_PLAYER_VEHICLE_DATA(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_PET_GUIDS(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CLIENTCACHE_VERSION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_REFUND_INFO_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_ITEM_REFUND_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION => SMSG_CALENDAR_CLEAR_PENDING_ACTION{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_EQUIPMENT_SET_LIST(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SET_PROJECTILE_POSITION(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TALENTS_INFO(c) => c.astd_write_unencrypted_server(w).await,
@@ -12037,14 +12037,14 @@ impl ServerOpcodeMessage {
             Self::SMSG_BATTLEFIELD_MGR_EJECTED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(c) => c.astd_write_unencrypted_server(w).await,
             Self::MSG_SET_RAID_DIFFICULTY(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_TOGGLE_XP_GAIN(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_GMRESPONSE_DB_ERROR(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_TOGGLE_XP_GAIN => SMSG_TOGGLE_XP_GAIN{}.astd_write_unencrypted_server(w).await,
+            Self::SMSG_GMRESPONSE_DB_ERROR => SMSG_GMRESPONSE_DB_ERROR{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMRESPONSE_RECEIVED(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_GMRESPONSE_STATUS_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_WORLD_STATE_UI_TIMER_UPDATE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_TALENTS_INVOLUNTARILY_RESET(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(c) => c.astd_write_unencrypted_server(w).await,
-            Self::SMSG_CORPSE_NOT_IN_INSTANCE(c) => c.astd_write_unencrypted_server(w).await,
+            Self::SMSG_CORPSE_NOT_IN_INSTANCE => SMSG_CORPSE_NOT_IN_INSTANCE{}.astd_write_unencrypted_server(w).await,
             Self::SMSG_CAMERA_SHAKE(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_SOCKET_GEMS_RESULT(c) => c.astd_write_unencrypted_server(w).await,
             Self::SMSG_REDIRECT_CLIENT(c) => c.astd_write_unencrypted_server(w).await,
@@ -12086,7 +12086,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_STOP_SWIM(_) => "MSG_MOVE_STOP_SWIM",
             ServerOpcodeMessage::MSG_MOVE_SET_FACING(_) => "MSG_MOVE_SET_FACING",
             ServerOpcodeMessage::MSG_MOVE_SET_PITCH(_) => "MSG_MOVE_SET_PITCH",
-            ServerOpcodeMessage::MSG_MOVE_WORLDPORT_ACK(_) => "MSG_MOVE_WORLDPORT_ACK",
+            ServerOpcodeMessage::MSG_MOVE_WORLDPORT_ACK => "MSG_MOVE_WORLDPORT_ACK",
             ServerOpcodeMessage::MSG_MOVE_HEARTBEAT(_) => "MSG_MOVE_HEARTBEAT",
             ServerOpcodeMessage::MSG_MOVE_HOVER(_) => "MSG_MOVE_HOVER",
             ServerOpcodeMessage::MSG_PETITION_DECLINE(_) => "MSG_PETITION_DECLINE",
@@ -12098,7 +12098,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_MOVE_STOP_ASCEND(_) => "MSG_MOVE_STOP_ASCEND",
             ServerOpcodeMessage::MSG_MOVE_SET_FLIGHT_BACK_SPEED(_) => "MSG_MOVE_SET_FLIGHT_BACK_SPEED",
             ServerOpcodeMessage::MSG_MOVE_START_DESCEND(_) => "MSG_MOVE_START_DESCEND",
-            ServerOpcodeMessage::CMSG_CALENDAR_GET_NUM_PENDING(_) => "CMSG_CALENDAR_GET_NUM_PENDING",
+            ServerOpcodeMessage::CMSG_CALENDAR_GET_NUM_PENDING => "CMSG_CALENDAR_GET_NUM_PENDING",
             ServerOpcodeMessage::SMSG_CHAR_CREATE(_) => "SMSG_CHAR_CREATE",
             ServerOpcodeMessage::SMSG_CHAR_ENUM(_) => "SMSG_CHAR_ENUM",
             ServerOpcodeMessage::SMSG_CHAR_DELETE(_) => "SMSG_CHAR_DELETE",
@@ -12108,8 +12108,8 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_CHARACTER_LOGIN_FAILED(_) => "SMSG_CHARACTER_LOGIN_FAILED",
             ServerOpcodeMessage::SMSG_LOGIN_SETTIMESPEED(_) => "SMSG_LOGIN_SETTIMESPEED",
             ServerOpcodeMessage::SMSG_LOGOUT_RESPONSE(_) => "SMSG_LOGOUT_RESPONSE",
-            ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE(_) => "SMSG_LOGOUT_COMPLETE",
-            ServerOpcodeMessage::SMSG_LOGOUT_CANCEL_ACK(_) => "SMSG_LOGOUT_CANCEL_ACK",
+            ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => "SMSG_LOGOUT_COMPLETE",
+            ServerOpcodeMessage::SMSG_LOGOUT_CANCEL_ACK => "SMSG_LOGOUT_CANCEL_ACK",
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(_) => "SMSG_NAME_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_PET_NAME_QUERY_RESPONSE(_) => "SMSG_PET_NAME_QUERY_RESPONSE",
             ServerOpcodeMessage::SMSG_GUILD_QUERY_RESPONSE(_) => "SMSG_GUILD_QUERY_RESPONSE",
@@ -12124,9 +12124,9 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_FRIEND_STATUS(_) => "SMSG_FRIEND_STATUS",
             ServerOpcodeMessage::SMSG_GROUP_INVITE(_) => "SMSG_GROUP_INVITE",
             ServerOpcodeMessage::SMSG_GROUP_DECLINE(_) => "SMSG_GROUP_DECLINE",
-            ServerOpcodeMessage::SMSG_GROUP_UNINVITE(_) => "SMSG_GROUP_UNINVITE",
+            ServerOpcodeMessage::SMSG_GROUP_UNINVITE => "SMSG_GROUP_UNINVITE",
             ServerOpcodeMessage::SMSG_GROUP_SET_LEADER(_) => "SMSG_GROUP_SET_LEADER",
-            ServerOpcodeMessage::SMSG_GROUP_DESTROYED(_) => "SMSG_GROUP_DESTROYED",
+            ServerOpcodeMessage::SMSG_GROUP_DESTROYED => "SMSG_GROUP_DESTROYED",
             ServerOpcodeMessage::SMSG_GROUP_LIST(_) => "SMSG_GROUP_LIST",
             ServerOpcodeMessage::SMSG_PARTY_MEMBER_STATS(_) => "SMSG_PARTY_MEMBER_STATS",
             ServerOpcodeMessage::SMSG_PARTY_COMMAND_RESULT(_) => "SMSG_PARTY_COMMAND_RESULT",
@@ -12190,13 +12190,13 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_AI_REACTION(_) => "SMSG_AI_REACTION",
             ServerOpcodeMessage::SMSG_ATTACKSTART(_) => "SMSG_ATTACKSTART",
             ServerOpcodeMessage::SMSG_ATTACKSTOP(_) => "SMSG_ATTACKSTOP",
-            ServerOpcodeMessage::SMSG_ATTACKSWING_NOTINRANGE(_) => "SMSG_ATTACKSWING_NOTINRANGE",
-            ServerOpcodeMessage::SMSG_ATTACKSWING_BADFACING(_) => "SMSG_ATTACKSWING_BADFACING",
+            ServerOpcodeMessage::SMSG_ATTACKSWING_NOTINRANGE => "SMSG_ATTACKSWING_NOTINRANGE",
+            ServerOpcodeMessage::SMSG_ATTACKSWING_BADFACING => "SMSG_ATTACKSWING_BADFACING",
             ServerOpcodeMessage::SMSG_INSTANCE_LOCK_WARNING_QUERY(_) => "SMSG_INSTANCE_LOCK_WARNING_QUERY",
-            ServerOpcodeMessage::SMSG_ATTACKSWING_DEADTARGET(_) => "SMSG_ATTACKSWING_DEADTARGET",
-            ServerOpcodeMessage::SMSG_ATTACKSWING_CANT_ATTACK(_) => "SMSG_ATTACKSWING_CANT_ATTACK",
+            ServerOpcodeMessage::SMSG_ATTACKSWING_DEADTARGET => "SMSG_ATTACKSWING_DEADTARGET",
+            ServerOpcodeMessage::SMSG_ATTACKSWING_CANT_ATTACK => "SMSG_ATTACKSWING_CANT_ATTACK",
             ServerOpcodeMessage::SMSG_ATTACKERSTATEUPDATE(_) => "SMSG_ATTACKERSTATEUPDATE",
-            ServerOpcodeMessage::SMSG_CANCEL_COMBAT(_) => "SMSG_CANCEL_COMBAT",
+            ServerOpcodeMessage::SMSG_CANCEL_COMBAT => "SMSG_CANCEL_COMBAT",
             ServerOpcodeMessage::SMSG_SPELLHEALLOG(_) => "SMSG_SPELLHEALLOG",
             ServerOpcodeMessage::SMSG_SPELLENERGIZELOG(_) => "SMSG_SPELLENERGIZELOG",
             ServerOpcodeMessage::SMSG_BREAK_TARGET(_) => "SMSG_BREAK_TARGET",
@@ -12208,11 +12208,11 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_LOOT_RELEASE_RESPONSE(_) => "SMSG_LOOT_RELEASE_RESPONSE",
             ServerOpcodeMessage::SMSG_LOOT_REMOVED(_) => "SMSG_LOOT_REMOVED",
             ServerOpcodeMessage::SMSG_LOOT_MONEY_NOTIFY(_) => "SMSG_LOOT_MONEY_NOTIFY",
-            ServerOpcodeMessage::SMSG_LOOT_CLEAR_MONEY(_) => "SMSG_LOOT_CLEAR_MONEY",
+            ServerOpcodeMessage::SMSG_LOOT_CLEAR_MONEY => "SMSG_LOOT_CLEAR_MONEY",
             ServerOpcodeMessage::SMSG_ITEM_PUSH_RESULT(_) => "SMSG_ITEM_PUSH_RESULT",
             ServerOpcodeMessage::SMSG_DUEL_REQUESTED(_) => "SMSG_DUEL_REQUESTED",
-            ServerOpcodeMessage::SMSG_DUEL_OUTOFBOUNDS(_) => "SMSG_DUEL_OUTOFBOUNDS",
-            ServerOpcodeMessage::SMSG_DUEL_INBOUNDS(_) => "SMSG_DUEL_INBOUNDS",
+            ServerOpcodeMessage::SMSG_DUEL_OUTOFBOUNDS => "SMSG_DUEL_OUTOFBOUNDS",
+            ServerOpcodeMessage::SMSG_DUEL_INBOUNDS => "SMSG_DUEL_INBOUNDS",
             ServerOpcodeMessage::SMSG_DUEL_COMPLETE(_) => "SMSG_DUEL_COMPLETE",
             ServerOpcodeMessage::SMSG_DUEL_WINNER(_) => "SMSG_DUEL_WINNER",
             ServerOpcodeMessage::SMSG_MOUNTRESULT(_) => "SMSG_MOUNTRESULT",
@@ -12222,7 +12222,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_PET_SPELLS(_) => "SMSG_PET_SPELLS",
             ServerOpcodeMessage::SMSG_PET_MODE(_) => "SMSG_PET_MODE",
             ServerOpcodeMessage::SMSG_GOSSIP_MESSAGE(_) => "SMSG_GOSSIP_MESSAGE",
-            ServerOpcodeMessage::SMSG_GOSSIP_COMPLETE(_) => "SMSG_GOSSIP_COMPLETE",
+            ServerOpcodeMessage::SMSG_GOSSIP_COMPLETE => "SMSG_GOSSIP_COMPLETE",
             ServerOpcodeMessage::SMSG_NPC_TEXT_UPDATE(_) => "SMSG_NPC_TEXT_UPDATE",
             ServerOpcodeMessage::SMSG_QUESTGIVER_STATUS(_) => "SMSG_QUESTGIVER_STATUS",
             ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_LIST(_) => "SMSG_QUESTGIVER_QUEST_LIST",
@@ -12232,7 +12232,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_INVALID(_) => "SMSG_QUESTGIVER_QUEST_INVALID",
             ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_COMPLETE(_) => "SMSG_QUESTGIVER_QUEST_COMPLETE",
             ServerOpcodeMessage::SMSG_QUESTGIVER_QUEST_FAILED(_) => "SMSG_QUESTGIVER_QUEST_FAILED",
-            ServerOpcodeMessage::SMSG_QUESTLOG_FULL(_) => "SMSG_QUESTLOG_FULL",
+            ServerOpcodeMessage::SMSG_QUESTLOG_FULL => "SMSG_QUESTLOG_FULL",
             ServerOpcodeMessage::SMSG_QUESTUPDATE_FAILED(_) => "SMSG_QUESTUPDATE_FAILED",
             ServerOpcodeMessage::SMSG_QUESTUPDATE_FAILEDTIMER(_) => "SMSG_QUESTUPDATE_FAILEDTIMER",
             ServerOpcodeMessage::SMSG_QUESTUPDATE_COMPLETE(_) => "SMSG_QUESTUPDATE_COMPLETE",
@@ -12246,7 +12246,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SHOWTAXINODES(_) => "SMSG_SHOWTAXINODES",
             ServerOpcodeMessage::SMSG_TAXINODE_STATUS(_) => "SMSG_TAXINODE_STATUS",
             ServerOpcodeMessage::SMSG_ACTIVATETAXIREPLY(_) => "SMSG_ACTIVATETAXIREPLY",
-            ServerOpcodeMessage::SMSG_NEW_TAXI_PATH(_) => "SMSG_NEW_TAXI_PATH",
+            ServerOpcodeMessage::SMSG_NEW_TAXI_PATH => "SMSG_NEW_TAXI_PATH",
             ServerOpcodeMessage::SMSG_TRAINER_LIST(_) => "SMSG_TRAINER_LIST",
             ServerOpcodeMessage::SMSG_TRAINER_BUY_SUCCEEDED(_) => "SMSG_TRAINER_BUY_SUCCEEDED",
             ServerOpcodeMessage::SMSG_TRAINER_BUY_FAILED(_) => "SMSG_TRAINER_BUY_FAILED",
@@ -12257,8 +12257,8 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_PETITION_SIGN_RESULTS(_) => "SMSG_PETITION_SIGN_RESULTS",
             ServerOpcodeMessage::SMSG_TURN_IN_PETITION_RESULTS(_) => "SMSG_TURN_IN_PETITION_RESULTS",
             ServerOpcodeMessage::SMSG_PETITION_QUERY_RESPONSE(_) => "SMSG_PETITION_QUERY_RESPONSE",
-            ServerOpcodeMessage::SMSG_FISH_NOT_HOOKED(_) => "SMSG_FISH_NOT_HOOKED",
-            ServerOpcodeMessage::SMSG_FISH_ESCAPED(_) => "SMSG_FISH_ESCAPED",
+            ServerOpcodeMessage::SMSG_FISH_NOT_HOOKED => "SMSG_FISH_NOT_HOOKED",
+            ServerOpcodeMessage::SMSG_FISH_ESCAPED => "SMSG_FISH_ESCAPED",
             ServerOpcodeMessage::SMSG_NOTIFICATION(_) => "SMSG_NOTIFICATION",
             ServerOpcodeMessage::SMSG_PLAYED_TIME(_) => "SMSG_PLAYED_TIME",
             ServerOpcodeMessage::SMSG_QUERY_TIME_RESPONSE(_) => "SMSG_QUERY_TIME_RESPONSE",
@@ -12298,7 +12298,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_GAMEOBJECT_DESPAWN_ANIM(_) => "SMSG_GAMEOBJECT_DESPAWN_ANIM",
             ServerOpcodeMessage::MSG_CORPSE_QUERY(_) => "MSG_CORPSE_QUERY_Server",
             ServerOpcodeMessage::SMSG_GMTICKET_DELETETICKET(_) => "SMSG_GMTICKET_DELETETICKET",
-            ServerOpcodeMessage::SMSG_CHAT_WRONG_FACTION(_) => "SMSG_CHAT_WRONG_FACTION",
+            ServerOpcodeMessage::SMSG_CHAT_WRONG_FACTION => "SMSG_CHAT_WRONG_FACTION",
             ServerOpcodeMessage::SMSG_GMTICKET_SYSTEMSTATUS(_) => "SMSG_GMTICKET_SYSTEMSTATUS",
             ServerOpcodeMessage::SMSG_QUEST_FORCE_REMOVE(_) => "SMSG_QUEST_FORCE_REMOVE",
             ServerOpcodeMessage::SMSG_SPIRIT_HEALER_CONFIRM(_) => "SMSG_SPIRIT_HEALER_CONFIRM",
@@ -12353,14 +12353,14 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::MSG_TALENT_WIPE_CONFIRM(_) => "MSG_TALENT_WIPE_CONFIRM_Server",
             ServerOpcodeMessage::SMSG_SUMMON_REQUEST(_) => "SMSG_SUMMON_REQUEST",
             ServerOpcodeMessage::SMSG_MONSTER_MOVE_TRANSPORT(_) => "SMSG_MONSTER_MOVE_TRANSPORT",
-            ServerOpcodeMessage::SMSG_PET_BROKEN(_) => "SMSG_PET_BROKEN",
+            ServerOpcodeMessage::SMSG_PET_BROKEN => "SMSG_PET_BROKEN",
             ServerOpcodeMessage::MSG_MOVE_FEATHER_FALL(_) => "MSG_MOVE_FEATHER_FALL_Server",
-            ServerOpcodeMessage::SMSG_FEIGN_DEATH_RESISTED(_) => "SMSG_FEIGN_DEATH_RESISTED",
+            ServerOpcodeMessage::SMSG_FEIGN_DEATH_RESISTED => "SMSG_FEIGN_DEATH_RESISTED",
             ServerOpcodeMessage::SMSG_DUEL_COUNTDOWN(_) => "SMSG_DUEL_COUNTDOWN",
             ServerOpcodeMessage::SMSG_AREA_TRIGGER_MESSAGE(_) => "SMSG_AREA_TRIGGER_MESSAGE",
             ServerOpcodeMessage::SMSG_LFG_ROLE_CHOSEN(_) => "SMSG_LFG_ROLE_CHOSEN",
             ServerOpcodeMessage::SMSG_PLAYER_SKINNED(_) => "SMSG_PLAYER_SKINNED",
-            ServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH(_) => "SMSG_DURABILITY_DAMAGE_DEATH",
+            ServerOpcodeMessage::SMSG_DURABILITY_DAMAGE_DEATH => "SMSG_DURABILITY_DAMAGE_DEATH",
             ServerOpcodeMessage::SMSG_INIT_WORLD_STATES(_) => "SMSG_INIT_WORLD_STATES",
             ServerOpcodeMessage::SMSG_UPDATE_WORLD_STATE(_) => "SMSG_UPDATE_WORLD_STATE",
             ServerOpcodeMessage::SMSG_ITEM_NAME_QUERY_RESPONSE(_) => "SMSG_ITEM_NAME_QUERY_RESPONSE",
@@ -12448,7 +12448,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_ARENA_ERROR(_) => "SMSG_ARENA_ERROR",
             ServerOpcodeMessage::MSG_INSPECT_ARENA_TEAMS(_) => "MSG_INSPECT_ARENA_TEAMS_Server",
             ServerOpcodeMessage::SMSG_DEATH_RELEASE_LOC(_) => "SMSG_DEATH_RELEASE_LOC",
-            ServerOpcodeMessage::SMSG_FORCED_DEATH_UPDATE(_) => "SMSG_FORCED_DEATH_UPDATE",
+            ServerOpcodeMessage::SMSG_FORCED_DEATH_UPDATE => "SMSG_FORCED_DEATH_UPDATE",
             ServerOpcodeMessage::MSG_MOVE_SET_FLIGHT_SPEED(_) => "MSG_MOVE_SET_FLIGHT_SPEED_Server",
             ServerOpcodeMessage::SMSG_FORCE_FLIGHT_SPEED_CHANGE(_) => "SMSG_FORCE_FLIGHT_SPEED_CHANGE",
             ServerOpcodeMessage::SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE(_) => "SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE",
@@ -12458,7 +12458,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_REALM_SPLIT(_) => "SMSG_REALM_SPLIT",
             ServerOpcodeMessage::SMSG_TIME_SYNC_REQ(_) => "SMSG_TIME_SYNC_REQ",
             ServerOpcodeMessage::SMSG_RESET_FAILED_NOTIFY(_) => "SMSG_RESET_FAILED_NOTIFY",
-            ServerOpcodeMessage::SMSG_LFG_DISABLED(_) => "SMSG_LFG_DISABLED",
+            ServerOpcodeMessage::SMSG_LFG_DISABLED => "SMSG_LFG_DISABLED",
             ServerOpcodeMessage::SMSG_UPDATE_COMBO_POINTS(_) => "SMSG_UPDATE_COMBO_POINTS",
             ServerOpcodeMessage::SMSG_DISMOUNT(_) => "SMSG_DISMOUNT",
             ServerOpcodeMessage::MSG_MOVE_UPDATE_CAN_FLY(_) => "MSG_MOVE_UPDATE_CAN_FLY_Server",
@@ -12491,7 +12491,7 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_REFER_A_FRIEND_FAILURE(_) => "SMSG_REFER_A_FRIEND_FAILURE",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_SET_FLYING(_) => "SMSG_SPLINE_MOVE_SET_FLYING",
             ServerOpcodeMessage::SMSG_SPLINE_MOVE_UNSET_FLYING(_) => "SMSG_SPLINE_MOVE_UNSET_FLYING",
-            ServerOpcodeMessage::SMSG_ENABLE_BARBER_SHOP(_) => "SMSG_ENABLE_BARBER_SHOP",
+            ServerOpcodeMessage::SMSG_ENABLE_BARBER_SHOP => "SMSG_ENABLE_BARBER_SHOP",
             ServerOpcodeMessage::SMSG_BARBER_SHOP_RESULT(_) => "SMSG_BARBER_SHOP_RESULT",
             ServerOpcodeMessage::SMSG_CALENDAR_SEND_CALENDAR(_) => "SMSG_CALENDAR_SEND_CALENDAR",
             ServerOpcodeMessage::SMSG_CALENDAR_SEND_EVENT(_) => "SMSG_CALENDAR_SEND_EVENT",
@@ -12540,17 +12540,17 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_SERVER_FIRST_ACHIEVEMENT(_) => "SMSG_SERVER_FIRST_ACHIEVEMENT",
             ServerOpcodeMessage::SMSG_PET_LEARNED_SPELL(_) => "SMSG_PET_LEARNED_SPELL",
             ServerOpcodeMessage::SMSG_PET_UNLEARNED_SPELL(_) => "SMSG_PET_UNLEARNED_SPELL",
-            ServerOpcodeMessage::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(_) => "SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA",
+            ServerOpcodeMessage::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA => "SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA",
             ServerOpcodeMessage::SMSG_CRITERIA_DELETED(_) => "SMSG_CRITERIA_DELETED",
             ServerOpcodeMessage::SMSG_ACHIEVEMENT_DELETED(_) => "SMSG_ACHIEVEMENT_DELETED",
-            ServerOpcodeMessage::SMSG_BATTLEGROUND_INFO_THROTTLED(_) => "SMSG_BATTLEGROUND_INFO_THROTTLED",
+            ServerOpcodeMessage::SMSG_BATTLEGROUND_INFO_THROTTLED => "SMSG_BATTLEGROUND_INFO_THROTTLED",
             ServerOpcodeMessage::SMSG_PLAYER_VEHICLE_DATA(_) => "SMSG_PLAYER_VEHICLE_DATA",
             ServerOpcodeMessage::SMSG_PET_GUIDS(_) => "SMSG_PET_GUIDS",
             ServerOpcodeMessage::SMSG_CLIENTCACHE_VERSION(_) => "SMSG_CLIENTCACHE_VERSION",
             ServerOpcodeMessage::SMSG_ITEM_REFUND_INFO_RESPONSE(_) => "SMSG_ITEM_REFUND_INFO_RESPONSE",
             ServerOpcodeMessage::SMSG_ITEM_REFUND_RESULT(_) => "SMSG_ITEM_REFUND_RESULT",
             ServerOpcodeMessage::SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE(_) => "SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE",
-            ServerOpcodeMessage::SMSG_CALENDAR_CLEAR_PENDING_ACTION(_) => "SMSG_CALENDAR_CLEAR_PENDING_ACTION",
+            ServerOpcodeMessage::SMSG_CALENDAR_CLEAR_PENDING_ACTION => "SMSG_CALENDAR_CLEAR_PENDING_ACTION",
             ServerOpcodeMessage::SMSG_EQUIPMENT_SET_LIST(_) => "SMSG_EQUIPMENT_SET_LIST",
             ServerOpcodeMessage::SMSG_SET_PROJECTILE_POSITION(_) => "SMSG_SET_PROJECTILE_POSITION",
             ServerOpcodeMessage::SMSG_TALENTS_INFO(_) => "SMSG_TALENTS_INFO",
@@ -12571,14 +12571,14 @@ impl std::fmt::Display for ServerOpcodeMessage {
             ServerOpcodeMessage::SMSG_BATTLEFIELD_MGR_EJECTED(_) => "SMSG_BATTLEFIELD_MGR_EJECTED",
             ServerOpcodeMessage::SMSG_BATTLEFIELD_MGR_STATE_CHANGE(_) => "SMSG_BATTLEFIELD_MGR_STATE_CHANGE",
             ServerOpcodeMessage::MSG_SET_RAID_DIFFICULTY(_) => "MSG_SET_RAID_DIFFICULTY_Server",
-            ServerOpcodeMessage::SMSG_TOGGLE_XP_GAIN(_) => "SMSG_TOGGLE_XP_GAIN",
-            ServerOpcodeMessage::SMSG_GMRESPONSE_DB_ERROR(_) => "SMSG_GMRESPONSE_DB_ERROR",
+            ServerOpcodeMessage::SMSG_TOGGLE_XP_GAIN => "SMSG_TOGGLE_XP_GAIN",
+            ServerOpcodeMessage::SMSG_GMRESPONSE_DB_ERROR => "SMSG_GMRESPONSE_DB_ERROR",
             ServerOpcodeMessage::SMSG_GMRESPONSE_RECEIVED(_) => "SMSG_GMRESPONSE_RECEIVED",
             ServerOpcodeMessage::SMSG_GMRESPONSE_STATUS_UPDATE(_) => "SMSG_GMRESPONSE_STATUS_UPDATE",
             ServerOpcodeMessage::SMSG_WORLD_STATE_UI_TIMER_UPDATE(_) => "SMSG_WORLD_STATE_UI_TIMER_UPDATE",
             ServerOpcodeMessage::SMSG_TALENTS_INVOLUNTARILY_RESET(_) => "SMSG_TALENTS_INVOLUNTARILY_RESET",
             ServerOpcodeMessage::SMSG_QUERY_QUESTS_COMPLETED_RESPONSE(_) => "SMSG_QUERY_QUESTS_COMPLETED_RESPONSE",
-            ServerOpcodeMessage::SMSG_CORPSE_NOT_IN_INSTANCE(_) => "SMSG_CORPSE_NOT_IN_INSTANCE",
+            ServerOpcodeMessage::SMSG_CORPSE_NOT_IN_INSTANCE => "SMSG_CORPSE_NOT_IN_INSTANCE",
             ServerOpcodeMessage::SMSG_CAMERA_SHAKE(_) => "SMSG_CAMERA_SHAKE",
             ServerOpcodeMessage::SMSG_SOCKET_GEMS_RESULT(_) => "SMSG_SOCKET_GEMS_RESULT",
             ServerOpcodeMessage::SMSG_REDIRECT_CLIENT(_) => "SMSG_REDIRECT_CLIENT",
@@ -12709,8 +12709,8 @@ impl From<MSG_MOVE_SET_PITCH> for ServerOpcodeMessage {
 }
 
 impl From<MSG_MOVE_WORLDPORT_ACK> for ServerOpcodeMessage {
-    fn from(c: MSG_MOVE_WORLDPORT_ACK) -> Self {
-        Self::MSG_MOVE_WORLDPORT_ACK(c)
+    fn from(_: MSG_MOVE_WORLDPORT_ACK) -> Self {
+        Self::MSG_MOVE_WORLDPORT_ACK
     }
 }
 
@@ -12781,8 +12781,8 @@ impl From<MSG_MOVE_START_DESCEND> for ServerOpcodeMessage {
 }
 
 impl From<CMSG_CALENDAR_GET_NUM_PENDING> for ServerOpcodeMessage {
-    fn from(c: CMSG_CALENDAR_GET_NUM_PENDING) -> Self {
-        Self::CMSG_CALENDAR_GET_NUM_PENDING(c)
+    fn from(_: CMSG_CALENDAR_GET_NUM_PENDING) -> Self {
+        Self::CMSG_CALENDAR_GET_NUM_PENDING
     }
 }
 
@@ -12841,14 +12841,14 @@ impl From<SMSG_LOGOUT_RESPONSE> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_LOGOUT_COMPLETE> for ServerOpcodeMessage {
-    fn from(c: SMSG_LOGOUT_COMPLETE) -> Self {
-        Self::SMSG_LOGOUT_COMPLETE(c)
+    fn from(_: SMSG_LOGOUT_COMPLETE) -> Self {
+        Self::SMSG_LOGOUT_COMPLETE
     }
 }
 
 impl From<SMSG_LOGOUT_CANCEL_ACK> for ServerOpcodeMessage {
-    fn from(c: SMSG_LOGOUT_CANCEL_ACK) -> Self {
-        Self::SMSG_LOGOUT_CANCEL_ACK(c)
+    fn from(_: SMSG_LOGOUT_CANCEL_ACK) -> Self {
+        Self::SMSG_LOGOUT_CANCEL_ACK
     }
 }
 
@@ -12937,8 +12937,8 @@ impl From<SMSG_GROUP_DECLINE> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_GROUP_UNINVITE> for ServerOpcodeMessage {
-    fn from(c: SMSG_GROUP_UNINVITE) -> Self {
-        Self::SMSG_GROUP_UNINVITE(c)
+    fn from(_: SMSG_GROUP_UNINVITE) -> Self {
+        Self::SMSG_GROUP_UNINVITE
     }
 }
 
@@ -12949,8 +12949,8 @@ impl From<SMSG_GROUP_SET_LEADER> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_GROUP_DESTROYED> for ServerOpcodeMessage {
-    fn from(c: SMSG_GROUP_DESTROYED) -> Self {
-        Self::SMSG_GROUP_DESTROYED(c)
+    fn from(_: SMSG_GROUP_DESTROYED) -> Self {
+        Self::SMSG_GROUP_DESTROYED
     }
 }
 
@@ -13333,14 +13333,14 @@ impl From<SMSG_ATTACKSTOP> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_ATTACKSWING_NOTINRANGE> for ServerOpcodeMessage {
-    fn from(c: SMSG_ATTACKSWING_NOTINRANGE) -> Self {
-        Self::SMSG_ATTACKSWING_NOTINRANGE(c)
+    fn from(_: SMSG_ATTACKSWING_NOTINRANGE) -> Self {
+        Self::SMSG_ATTACKSWING_NOTINRANGE
     }
 }
 
 impl From<SMSG_ATTACKSWING_BADFACING> for ServerOpcodeMessage {
-    fn from(c: SMSG_ATTACKSWING_BADFACING) -> Self {
-        Self::SMSG_ATTACKSWING_BADFACING(c)
+    fn from(_: SMSG_ATTACKSWING_BADFACING) -> Self {
+        Self::SMSG_ATTACKSWING_BADFACING
     }
 }
 
@@ -13351,14 +13351,14 @@ impl From<SMSG_INSTANCE_LOCK_WARNING_QUERY> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_ATTACKSWING_DEADTARGET> for ServerOpcodeMessage {
-    fn from(c: SMSG_ATTACKSWING_DEADTARGET) -> Self {
-        Self::SMSG_ATTACKSWING_DEADTARGET(c)
+    fn from(_: SMSG_ATTACKSWING_DEADTARGET) -> Self {
+        Self::SMSG_ATTACKSWING_DEADTARGET
     }
 }
 
 impl From<SMSG_ATTACKSWING_CANT_ATTACK> for ServerOpcodeMessage {
-    fn from(c: SMSG_ATTACKSWING_CANT_ATTACK) -> Self {
-        Self::SMSG_ATTACKSWING_CANT_ATTACK(c)
+    fn from(_: SMSG_ATTACKSWING_CANT_ATTACK) -> Self {
+        Self::SMSG_ATTACKSWING_CANT_ATTACK
     }
 }
 
@@ -13369,8 +13369,8 @@ impl From<SMSG_ATTACKERSTATEUPDATE> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_CANCEL_COMBAT> for ServerOpcodeMessage {
-    fn from(c: SMSG_CANCEL_COMBAT) -> Self {
-        Self::SMSG_CANCEL_COMBAT(c)
+    fn from(_: SMSG_CANCEL_COMBAT) -> Self {
+        Self::SMSG_CANCEL_COMBAT
     }
 }
 
@@ -13441,8 +13441,8 @@ impl From<SMSG_LOOT_MONEY_NOTIFY> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_LOOT_CLEAR_MONEY> for ServerOpcodeMessage {
-    fn from(c: SMSG_LOOT_CLEAR_MONEY) -> Self {
-        Self::SMSG_LOOT_CLEAR_MONEY(c)
+    fn from(_: SMSG_LOOT_CLEAR_MONEY) -> Self {
+        Self::SMSG_LOOT_CLEAR_MONEY
     }
 }
 
@@ -13459,14 +13459,14 @@ impl From<SMSG_DUEL_REQUESTED> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_DUEL_OUTOFBOUNDS> for ServerOpcodeMessage {
-    fn from(c: SMSG_DUEL_OUTOFBOUNDS) -> Self {
-        Self::SMSG_DUEL_OUTOFBOUNDS(c)
+    fn from(_: SMSG_DUEL_OUTOFBOUNDS) -> Self {
+        Self::SMSG_DUEL_OUTOFBOUNDS
     }
 }
 
 impl From<SMSG_DUEL_INBOUNDS> for ServerOpcodeMessage {
-    fn from(c: SMSG_DUEL_INBOUNDS) -> Self {
-        Self::SMSG_DUEL_INBOUNDS(c)
+    fn from(_: SMSG_DUEL_INBOUNDS) -> Self {
+        Self::SMSG_DUEL_INBOUNDS
     }
 }
 
@@ -13525,8 +13525,8 @@ impl From<SMSG_GOSSIP_MESSAGE> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_GOSSIP_COMPLETE> for ServerOpcodeMessage {
-    fn from(c: SMSG_GOSSIP_COMPLETE) -> Self {
-        Self::SMSG_GOSSIP_COMPLETE(c)
+    fn from(_: SMSG_GOSSIP_COMPLETE) -> Self {
+        Self::SMSG_GOSSIP_COMPLETE
     }
 }
 
@@ -13585,8 +13585,8 @@ impl From<SMSG_QUESTGIVER_QUEST_FAILED> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_QUESTLOG_FULL> for ServerOpcodeMessage {
-    fn from(c: SMSG_QUESTLOG_FULL) -> Self {
-        Self::SMSG_QUESTLOG_FULL(c)
+    fn from(_: SMSG_QUESTLOG_FULL) -> Self {
+        Self::SMSG_QUESTLOG_FULL
     }
 }
 
@@ -13669,8 +13669,8 @@ impl From<SMSG_ACTIVATETAXIREPLY> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_NEW_TAXI_PATH> for ServerOpcodeMessage {
-    fn from(c: SMSG_NEW_TAXI_PATH) -> Self {
-        Self::SMSG_NEW_TAXI_PATH(c)
+    fn from(_: SMSG_NEW_TAXI_PATH) -> Self {
+        Self::SMSG_NEW_TAXI_PATH
     }
 }
 
@@ -13735,14 +13735,14 @@ impl From<SMSG_PETITION_QUERY_RESPONSE> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_FISH_NOT_HOOKED> for ServerOpcodeMessage {
-    fn from(c: SMSG_FISH_NOT_HOOKED) -> Self {
-        Self::SMSG_FISH_NOT_HOOKED(c)
+    fn from(_: SMSG_FISH_NOT_HOOKED) -> Self {
+        Self::SMSG_FISH_NOT_HOOKED
     }
 }
 
 impl From<SMSG_FISH_ESCAPED> for ServerOpcodeMessage {
-    fn from(c: SMSG_FISH_ESCAPED) -> Self {
-        Self::SMSG_FISH_ESCAPED(c)
+    fn from(_: SMSG_FISH_ESCAPED) -> Self {
+        Self::SMSG_FISH_ESCAPED
     }
 }
 
@@ -13981,8 +13981,8 @@ impl From<SMSG_GMTICKET_DELETETICKET> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_CHAT_WRONG_FACTION> for ServerOpcodeMessage {
-    fn from(c: SMSG_CHAT_WRONG_FACTION) -> Self {
-        Self::SMSG_CHAT_WRONG_FACTION(c)
+    fn from(_: SMSG_CHAT_WRONG_FACTION) -> Self {
+        Self::SMSG_CHAT_WRONG_FACTION
     }
 }
 
@@ -14311,8 +14311,8 @@ impl From<SMSG_MONSTER_MOVE_TRANSPORT> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_PET_BROKEN> for ServerOpcodeMessage {
-    fn from(c: SMSG_PET_BROKEN) -> Self {
-        Self::SMSG_PET_BROKEN(c)
+    fn from(_: SMSG_PET_BROKEN) -> Self {
+        Self::SMSG_PET_BROKEN
     }
 }
 
@@ -14323,8 +14323,8 @@ impl From<MSG_MOVE_FEATHER_FALL_Server> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_FEIGN_DEATH_RESISTED> for ServerOpcodeMessage {
-    fn from(c: SMSG_FEIGN_DEATH_RESISTED) -> Self {
-        Self::SMSG_FEIGN_DEATH_RESISTED(c)
+    fn from(_: SMSG_FEIGN_DEATH_RESISTED) -> Self {
+        Self::SMSG_FEIGN_DEATH_RESISTED
     }
 }
 
@@ -14353,8 +14353,8 @@ impl From<SMSG_PLAYER_SKINNED> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_DURABILITY_DAMAGE_DEATH> for ServerOpcodeMessage {
-    fn from(c: SMSG_DURABILITY_DAMAGE_DEATH) -> Self {
-        Self::SMSG_DURABILITY_DAMAGE_DEATH(c)
+    fn from(_: SMSG_DURABILITY_DAMAGE_DEATH) -> Self {
+        Self::SMSG_DURABILITY_DAMAGE_DEATH
     }
 }
 
@@ -14881,8 +14881,8 @@ impl From<SMSG_DEATH_RELEASE_LOC> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_FORCED_DEATH_UPDATE> for ServerOpcodeMessage {
-    fn from(c: SMSG_FORCED_DEATH_UPDATE) -> Self {
-        Self::SMSG_FORCED_DEATH_UPDATE(c)
+    fn from(_: SMSG_FORCED_DEATH_UPDATE) -> Self {
+        Self::SMSG_FORCED_DEATH_UPDATE
     }
 }
 
@@ -14941,8 +14941,8 @@ impl From<SMSG_RESET_FAILED_NOTIFY> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_LFG_DISABLED> for ServerOpcodeMessage {
-    fn from(c: SMSG_LFG_DISABLED) -> Self {
-        Self::SMSG_LFG_DISABLED(c)
+    fn from(_: SMSG_LFG_DISABLED) -> Self {
+        Self::SMSG_LFG_DISABLED
     }
 }
 
@@ -15139,8 +15139,8 @@ impl From<SMSG_SPLINE_MOVE_UNSET_FLYING> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_ENABLE_BARBER_SHOP> for ServerOpcodeMessage {
-    fn from(c: SMSG_ENABLE_BARBER_SHOP) -> Self {
-        Self::SMSG_ENABLE_BARBER_SHOP(c)
+    fn from(_: SMSG_ENABLE_BARBER_SHOP) -> Self {
+        Self::SMSG_ENABLE_BARBER_SHOP
     }
 }
 
@@ -15433,8 +15433,8 @@ impl From<SMSG_PET_UNLEARNED_SPELL> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA> for ServerOpcodeMessage {
-    fn from(c: SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA) -> Self {
-        Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA(c)
+    fn from(_: SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA) -> Self {
+        Self::SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA
     }
 }
 
@@ -15451,8 +15451,8 @@ impl From<SMSG_ACHIEVEMENT_DELETED> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_BATTLEGROUND_INFO_THROTTLED> for ServerOpcodeMessage {
-    fn from(c: SMSG_BATTLEGROUND_INFO_THROTTLED) -> Self {
-        Self::SMSG_BATTLEGROUND_INFO_THROTTLED(c)
+    fn from(_: SMSG_BATTLEGROUND_INFO_THROTTLED) -> Self {
+        Self::SMSG_BATTLEGROUND_INFO_THROTTLED
     }
 }
 
@@ -15493,8 +15493,8 @@ impl From<SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_CALENDAR_CLEAR_PENDING_ACTION> for ServerOpcodeMessage {
-    fn from(c: SMSG_CALENDAR_CLEAR_PENDING_ACTION) -> Self {
-        Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION(c)
+    fn from(_: SMSG_CALENDAR_CLEAR_PENDING_ACTION) -> Self {
+        Self::SMSG_CALENDAR_CLEAR_PENDING_ACTION
     }
 }
 
@@ -15619,14 +15619,14 @@ impl From<MSG_SET_RAID_DIFFICULTY_Server> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_TOGGLE_XP_GAIN> for ServerOpcodeMessage {
-    fn from(c: SMSG_TOGGLE_XP_GAIN) -> Self {
-        Self::SMSG_TOGGLE_XP_GAIN(c)
+    fn from(_: SMSG_TOGGLE_XP_GAIN) -> Self {
+        Self::SMSG_TOGGLE_XP_GAIN
     }
 }
 
 impl From<SMSG_GMRESPONSE_DB_ERROR> for ServerOpcodeMessage {
-    fn from(c: SMSG_GMRESPONSE_DB_ERROR) -> Self {
-        Self::SMSG_GMRESPONSE_DB_ERROR(c)
+    fn from(_: SMSG_GMRESPONSE_DB_ERROR) -> Self {
+        Self::SMSG_GMRESPONSE_DB_ERROR
     }
 }
 
@@ -15661,8 +15661,8 @@ impl From<SMSG_QUERY_QUESTS_COMPLETED_RESPONSE> for ServerOpcodeMessage {
 }
 
 impl From<SMSG_CORPSE_NOT_IN_INSTANCE> for ServerOpcodeMessage {
-    fn from(c: SMSG_CORPSE_NOT_IN_INSTANCE) -> Self {
-        Self::SMSG_CORPSE_NOT_IN_INSTANCE(c)
+    fn from(_: SMSG_CORPSE_NOT_IN_INSTANCE) -> Self {
+        Self::SMSG_CORPSE_NOT_IN_INSTANCE
     }
 }
 

@@ -77,7 +77,7 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                 .await
                 .unwrap();
             }
-            ClientOpcodeMessage::CMSG_CHAR_ENUM(_) => {
+            ClientOpcodeMessage::CMSG_CHAR_ENUM => {
                 SMSG_CHAR_ENUM {
                     characters: vec![Character {
                         guid: Guid::new(4),

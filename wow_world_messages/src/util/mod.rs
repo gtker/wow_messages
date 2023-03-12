@@ -14,8 +14,25 @@ pub use async_std_impl::*;
 pub use tokio_impl::*;
 
 use std::io::{Read, Write};
+use wow_world_base::ExpectedOpcodeError;
 
 pub(crate) const CSTRING_LARGEST_ALLOWED: usize = 256;
+
+pub(crate) fn assert_empty(
+    body_size: u32,
+    opcode: impl Into<u32>,
+) -> Result<(), ExpectedOpcodeError> {
+    if body_size != 0 {
+        Err(ExpectedOpcodeError::Parse(
+            crate::errors::ParseError::InvalidSize {
+                opcode: opcode.into(),
+                size: body_size,
+            },
+        ))
+    } else {
+        Ok(())
+    }
+}
 
 pub fn read_fixed_string_to_vec<R: Read>(
     r: &mut R,

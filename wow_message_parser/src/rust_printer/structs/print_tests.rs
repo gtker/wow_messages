@@ -182,21 +182,29 @@ fn print_test_case(
         },
     ));
 
-    s.body_closing_with(
+    s.body_closing_with_semicolon(
         "let t = match t",
         |s| {
-            s.wln(format!(
-                "{opcode}::{subject}(t) => t,",
-                opcode = opcode,
-                subject = get_enumerator_name(t.subject()),
-            ));
+            if e.empty_body() {
+                s.wln(format!(
+                    "{opcode}::{subject} => {{}}",
+                    opcode = opcode,
+                    subject = get_enumerator_name(t.subject()),
+                ));
+            } else {
+                s.wln(format!(
+                    "{opcode}::{subject}(t) => t,",
+                    opcode = opcode,
+                    subject = get_enumerator_name(t.subject()),
+                ));
+            }
             s.wln(format!(
                 r#"opcode => panic!("incorrect opcode. Expected {}, got {{opcode:#?}}", opcode = opcode),"#,
                 get_enumerator_name(t.subject())
             ));
         },
-        ";\n",
     );
+    s.newline();
 
     // Better error reporting when something is wrong.
     for m in e.rust_object().members_in_struct() {
