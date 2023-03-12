@@ -1,7 +1,7 @@
 use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:759`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L759):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:793`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L793):
 /// ```text
 /// struct NpcTextUpdateEmote {
 ///     u32 delay;

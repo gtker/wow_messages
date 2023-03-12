@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:542`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L542):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:576`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L576):
 /// ```text
 /// enum SpellCastResult : u8 {
 ///     SUCCESS = 0x00;

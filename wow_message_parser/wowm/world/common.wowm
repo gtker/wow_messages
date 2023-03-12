@@ -122,18 +122,32 @@ flag SpellCastTargetFlags : u32 {
     versions = "3.3.5";
 }
 
-/* TODO FLAG_OR Probably not valid since flags need || target_flags & other */
 struct SpellCastTargets {
     SpellCastTargetFlags target_flags;
-    if (target_flags & UNIT /* FLAG_OR || target_flags & TRADE_ITEM || target_flags & UNIT_ENEMY */) {
+    if (target_flags & UNIT) {
         PackedGuid unit_target;
     }
-    if (target_flags & GAMEOBJECT /* FLAG_OR || target_flags & LOCKED */) {
+    else if (target_flags & TRADE_ITEM) {
+        PackedGuid trade_item;
+    }
+    else if (target_flags & UNIT_ENEMY) {
+        PackedGuid enemy_target;
+    }
+
+    if (target_flags & GAMEOBJECT) {
         PackedGuid object_target;
     }
-    if (target_flags & ITEM /* FLAG_OR || target_flags & TRADE_ITEM */) {
+    else if (target_flags & LOCKED) {
+        PackedGuid locked_target;
+    }
+
+    if (target_flags & ITEM ) {
         PackedGuid item_target;
     }
+    /*else if (target_flags & TRADE_ITEM) {
+        PackedGuid item_target;
+    } TODO FLAG_ELSEIF_MULTIPLE_SAME */
+
     if (target_flags & SOURCE_LOCATION) {
         Vector3d source;
     }
@@ -143,22 +157,42 @@ struct SpellCastTargets {
     if (target_flags & STRING) {
         CString target_string;
     }
-    if (target_flags & CORPSE_ALLY /* FLAG_OR || target_flags & CORPSE_ENEMY */) {
+
+    if (target_flags & CORPSE_ALLY ) {
         PackedGuid corpse_target_ally;
+    }
+    else if (target_flags & CORPSE_ENEMY) {
+        PackedGuid corpse_target_enemy;
     }
 } {
     versions = "1.12 2";
 }
 
-/* TODO FLAG_OR Probably not valid since flags need || target_flags & other */
 struct SpellCastTargets {
     SpellCastTargetFlags target_flags;
-    if (target_flags & UNIT /* FLAG_OR || target_flags & UNIT_MINIPET || target_flags & GAMEOBJECT || target_flags & CORPSE_ENEMY || target_flags & CORPSE_ALLY*/) {
+    if (target_flags & UNIT) {
         PackedGuid unit_target;
     }
-    if (target_flags & ITEM /* FLAG_OR || target_flags & TRADE_ITEM */) {
+    else if (target_flags & UNIT_MINIPET) {
+        PackedGuid minipet_target;
+    }
+    else if (target_flags & GAMEOBJECT) {
+        PackedGuid gameobject_target;
+    }
+    else if (target_flags & CORPSE_ENEMY) {
+        PackedGuid enemy_corpse_target;
+    }
+    else if (target_flags & CORPSE_ALLY) {
+        PackedGuid ally_corpse_target;
+    }
+
+    if (target_flags & ITEM) {
         PackedGuid item_target;
     }
+    else if (target_flags & TRADE_ITEM) {
+        PackedGuid trade_item_target;
+    }
+
     if (target_flags & SOURCE_LOCATION) {
         Vector3d source;
     }

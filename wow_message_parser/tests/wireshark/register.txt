@@ -1096,6 +1096,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_corpse_target_enemy,
+            { "Corpse Target Enemy", "woww.corpse.target.enemy",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_cos_angle,
             { "Cos Angle", "woww.cos.angle",
                 FT_FLOAT, BASE_NONE, NULL, 0,
@@ -1458,6 +1464,12 @@
         },
         { &hf_woww_enemy,
             { "Enemy", "woww.enemy",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_enemy_target,
+            { "Enemy Target", "woww.enemy.target",
                 FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -2425,6 +2437,12 @@
         { &hf_woww_lock_id,
             { "Lock Id", "woww.lock.id",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_locked_target,
+            { "Locked Target", "woww.locked.target",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
@@ -4435,6 +4453,12 @@
         { &hf_woww_total_played_time,
             { "Total Played Time", "woww.total.played.time",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_trade_item,
+            { "Trade Item", "woww.trade.item",
+                FT_UINT64, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

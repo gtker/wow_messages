@@ -6,15 +6,30 @@ use crate::wrath::{
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:154`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L154):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:171`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L171):
 /// ```text
 /// struct SpellCastTargets {
 ///     SpellCastTargetFlags target_flags;
 ///     if (target_flags & UNIT) {
 ///         PackedGuid unit_target;
 ///     }
+///     else if (target_flags & UNIT_MINIPET) {
+///         PackedGuid minipet_target;
+///     }
+///     else if (target_flags & GAMEOBJECT) {
+///         PackedGuid gameobject_target;
+///     }
+///     else if (target_flags & CORPSE_ENEMY) {
+///         PackedGuid enemy_corpse_target;
+///     }
+///     else if (target_flags & CORPSE_ALLY) {
+///         PackedGuid ally_corpse_target;
+///     }
 ///     if (target_flags & ITEM) {
 ///         PackedGuid item_target;
+///     }
+///     else if (target_flags & TRADE_ITEM) {
+///         PackedGuid trade_item_target;
 ///     }
 ///     if (target_flags & SOURCE_LOCATION) {
 ///         Vector3d source;
@@ -37,15 +52,62 @@ impl SpellCastTargets {
         w.write_all(&u32::from(self.target_flags.as_int()).to_le_bytes())?;
 
         if let Some(if_statement) = &self.target_flags.unit {
-            // unit_target: PackedGuid
-            if_statement.unit_target.write_packed_guid_into_vec(&mut w)?;
+            match if_statement {
+                SpellCastTargets_SpellCastTargetFlags_Unit::Unit {
+                    unit_target,
+                } => {
+                    // unit_target: PackedGuid
+                    unit_target.write_packed_guid_into_vec(&mut w)?;
 
+                }
+                SpellCastTargets_SpellCastTargetFlags_Unit::UnitMinipet {
+                    minipet_target,
+                } => {
+                    // minipet_target: PackedGuid
+                    minipet_target.write_packed_guid_into_vec(&mut w)?;
+
+                }
+                SpellCastTargets_SpellCastTargetFlags_Unit::Gameobject {
+                    gameobject_target,
+                } => {
+                    // gameobject_target: PackedGuid
+                    gameobject_target.write_packed_guid_into_vec(&mut w)?;
+
+                }
+                SpellCastTargets_SpellCastTargetFlags_Unit::CorpseEnemy {
+                    enemy_corpse_target,
+                } => {
+                    // enemy_corpse_target: PackedGuid
+                    enemy_corpse_target.write_packed_guid_into_vec(&mut w)?;
+
+                }
+                SpellCastTargets_SpellCastTargetFlags_Unit::CorpseAlly {
+                    ally_corpse_target,
+                } => {
+                    // ally_corpse_target: PackedGuid
+                    ally_corpse_target.write_packed_guid_into_vec(&mut w)?;
+
+                }
+            }
         }
 
         if let Some(if_statement) = &self.target_flags.item {
-            // item_target: PackedGuid
-            if_statement.item_target.write_packed_guid_into_vec(&mut w)?;
+            match if_statement {
+                SpellCastTargets_SpellCastTargetFlags_Item::Item {
+                    item_target,
+                } => {
+                    // item_target: PackedGuid
+                    item_target.write_packed_guid_into_vec(&mut w)?;
 
+                }
+                SpellCastTargets_SpellCastTargetFlags_Item::TradeItem {
+                    trade_item_target,
+                } => {
+                    // trade_item_target: PackedGuid
+                    trade_item_target.write_packed_guid_into_vec(&mut w)?;
+
+                }
+            }
         }
 
         if let Some(if_statement) = &self.target_flags.source_location {
@@ -83,8 +145,40 @@ impl SpellCastTargets {
             // unit_target: PackedGuid
             let unit_target = Guid::read_packed(&mut r)?;
 
-            Some(SpellCastTargets_SpellCastTargetFlags_Unit {
+            Some(SpellCastTargets_SpellCastTargetFlags_Unit::Unit {
                 unit_target,
+            })
+        }
+        else if target_flags.is_UNIT_MINIPET() {
+            // minipet_target: PackedGuid
+            let minipet_target = Guid::read_packed(&mut r)?;
+
+            Some(SpellCastTargets_SpellCastTargetFlags_Unit::UnitMinipet {
+                minipet_target,
+            })
+        }
+        else if target_flags.is_GAMEOBJECT() {
+            // gameobject_target: PackedGuid
+            let gameobject_target = Guid::read_packed(&mut r)?;
+
+            Some(SpellCastTargets_SpellCastTargetFlags_Unit::Gameobject {
+                gameobject_target,
+            })
+        }
+        else if target_flags.is_CORPSE_ENEMY() {
+            // enemy_corpse_target: PackedGuid
+            let enemy_corpse_target = Guid::read_packed(&mut r)?;
+
+            Some(SpellCastTargets_SpellCastTargetFlags_Unit::CorpseEnemy {
+                enemy_corpse_target,
+            })
+        }
+        else if target_flags.is_CORPSE_ALLY() {
+            // ally_corpse_target: PackedGuid
+            let ally_corpse_target = Guid::read_packed(&mut r)?;
+
+            Some(SpellCastTargets_SpellCastTargetFlags_Unit::CorpseAlly {
+                ally_corpse_target,
             })
         }
         else {
@@ -95,8 +189,16 @@ impl SpellCastTargets {
             // item_target: PackedGuid
             let item_target = Guid::read_packed(&mut r)?;
 
-            Some(SpellCastTargets_SpellCastTargetFlags_Item {
+            Some(SpellCastTargets_SpellCastTargetFlags_Item::Item {
                 item_target,
+            })
+        }
+        else if target_flags.is_TRADE_ITEM() {
+            // trade_item_target: PackedGuid
+            let trade_item_target = Guid::read_packed(&mut r)?;
+
+            Some(SpellCastTargets_SpellCastTargetFlags_Item::TradeItem {
+                trade_item_target,
             })
         }
         else {
@@ -161,6 +263,114 @@ impl SpellCastTargets {
 impl SpellCastTargets {
     pub(crate) fn size(&self) -> usize {
         self.target_flags.size() // target_flags: SpellCastTargets_SpellCastTargetFlags
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum SpellCastTargets_SpellCastTargetFlags_Unit {
+    Unit {
+        unit_target: Guid,
+    },
+    UnitMinipet {
+        minipet_target: Guid,
+    },
+    Gameobject {
+        gameobject_target: Guid,
+    },
+    CorpseEnemy {
+        enemy_corpse_target: Guid,
+    },
+    CorpseAlly {
+        ally_corpse_target: Guid,
+    },
+}
+
+impl SpellCastTargets_SpellCastTargetFlags_Unit {
+    pub(crate) const fn as_int(&self) -> u32 {
+        match self {
+            Self::Unit { .. } => 2,
+            Self::UnitMinipet { .. } => 65536,
+            Self::Gameobject { .. } => 2048,
+            Self::CorpseEnemy { .. } => 512,
+            Self::CorpseAlly { .. } => 32768,
+        }
+    }
+
+}
+
+impl SpellCastTargets_SpellCastTargetFlags_Unit {
+    pub(crate) fn size(&self) -> usize {
+        match self {
+            Self::Unit {
+                unit_target,
+            } => {
+                // Not an actual enum sent over the wire
+                unit_target.size() // unit_target: PackedGuid
+            }
+            Self::UnitMinipet {
+                minipet_target,
+            } => {
+                // Not an actual enum sent over the wire
+                minipet_target.size() // minipet_target: PackedGuid
+            }
+            Self::Gameobject {
+                gameobject_target,
+            } => {
+                // Not an actual enum sent over the wire
+                gameobject_target.size() // gameobject_target: PackedGuid
+            }
+            Self::CorpseEnemy {
+                enemy_corpse_target,
+            } => {
+                // Not an actual enum sent over the wire
+                enemy_corpse_target.size() // enemy_corpse_target: PackedGuid
+            }
+            Self::CorpseAlly {
+                ally_corpse_target,
+            } => {
+                // Not an actual enum sent over the wire
+                ally_corpse_target.size() // ally_corpse_target: PackedGuid
+            }
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum SpellCastTargets_SpellCastTargetFlags_Item {
+    Item {
+        item_target: Guid,
+    },
+    TradeItem {
+        trade_item_target: Guid,
+    },
+}
+
+impl SpellCastTargets_SpellCastTargetFlags_Item {
+    pub(crate) const fn as_int(&self) -> u32 {
+        match self {
+            Self::Item { .. } => 16,
+            Self::TradeItem { .. } => 4096,
+        }
+    }
+
+}
+
+impl SpellCastTargets_SpellCastTargetFlags_Item {
+    pub(crate) fn size(&self) -> usize {
+        match self {
+            Self::Item {
+                item_target,
+            } => {
+                // Not an actual enum sent over the wire
+                item_target.size() // item_target: PackedGuid
+            }
+            Self::TradeItem {
+                trade_item_target,
+            } => {
+                // Not an actual enum sent over the wire
+                trade_item_target.size() // trade_item_target: PackedGuid
+            }
+        }
     }
 }
 
@@ -233,7 +443,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
 
     pub const fn new_UNIT(unit: SpellCastTargets_SpellCastTargetFlags_Unit) -> Self {
         Self {
-            inner: SpellCastTargetFlags::UNIT,
+            inner: unit.as_int(),
             unit: Some(unit),
             item: None,
             source_location: None,
@@ -243,7 +453,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     pub fn set_UNIT(mut self, unit: SpellCastTargets_SpellCastTargetFlags_Unit) -> Self {
-        self.inner |= SpellCastTargetFlags::UNIT;
+        self.inner |= unit.as_int();
         self.unit = Some(unit);
         self
     }
@@ -310,7 +520,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
 
     pub const fn new_ITEM(item: SpellCastTargets_SpellCastTargetFlags_Item) -> Self {
         Self {
-            inner: SpellCastTargetFlags::ITEM,
+            inner: item.as_int(),
             unit: None,
             item: Some(item),
             source_location: None,
@@ -320,7 +530,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     pub fn set_ITEM(mut self, item: SpellCastTargets_SpellCastTargetFlags_Item) -> Self {
-        self.inner |= SpellCastTargetFlags::ITEM;
+        self.inner |= item.as_int();
         self.item = Some(item);
         self
     }
@@ -439,31 +649,6 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self
     }
 
-    pub const fn new_CORPSE_ENEMY() -> Self {
-        Self {
-            inner: SpellCastTargetFlags::CORPSE_ENEMY,
-            unit: None,
-            item: None,
-            source_location: None,
-            dest_location: None,
-            string: None,
-        }
-    }
-
-    pub fn set_CORPSE_ENEMY(mut self) -> Self {
-        self.inner |= SpellCastTargetFlags::CORPSE_ENEMY;
-        self
-    }
-
-    pub const fn get_CORPSE_ENEMY(&self) -> bool {
-        (self.inner & SpellCastTargetFlags::CORPSE_ENEMY) != 0
-    }
-
-    pub fn clear_CORPSE_ENEMY(mut self) -> Self {
-        self.inner &= SpellCastTargetFlags::CORPSE_ENEMY.reverse_bits();
-        self
-    }
-
     pub const fn new_UNIT_DEAD() -> Self {
         Self {
             inner: SpellCastTargetFlags::UNIT_DEAD,
@@ -486,56 +671,6 @@ impl SpellCastTargets_SpellCastTargetFlags {
 
     pub fn clear_UNIT_DEAD(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_DEAD.reverse_bits();
-        self
-    }
-
-    pub const fn new_GAMEOBJECT() -> Self {
-        Self {
-            inner: SpellCastTargetFlags::GAMEOBJECT,
-            unit: None,
-            item: None,
-            source_location: None,
-            dest_location: None,
-            string: None,
-        }
-    }
-
-    pub fn set_GAMEOBJECT(mut self) -> Self {
-        self.inner |= SpellCastTargetFlags::GAMEOBJECT;
-        self
-    }
-
-    pub const fn get_GAMEOBJECT(&self) -> bool {
-        (self.inner & SpellCastTargetFlags::GAMEOBJECT) != 0
-    }
-
-    pub fn clear_GAMEOBJECT(mut self) -> Self {
-        self.inner &= SpellCastTargetFlags::GAMEOBJECT.reverse_bits();
-        self
-    }
-
-    pub const fn new_TRADE_ITEM() -> Self {
-        Self {
-            inner: SpellCastTargetFlags::TRADE_ITEM,
-            unit: None,
-            item: None,
-            source_location: None,
-            dest_location: None,
-            string: None,
-        }
-    }
-
-    pub fn set_TRADE_ITEM(mut self) -> Self {
-        self.inner |= SpellCastTargetFlags::TRADE_ITEM;
-        self
-    }
-
-    pub const fn get_TRADE_ITEM(&self) -> bool {
-        (self.inner & SpellCastTargetFlags::TRADE_ITEM) != 0
-    }
-
-    pub fn clear_TRADE_ITEM(mut self) -> Self {
-        self.inner &= SpellCastTargetFlags::TRADE_ITEM.reverse_bits();
         self
     }
 
@@ -588,56 +723,6 @@ impl SpellCastTargets_SpellCastTargetFlags {
 
     pub fn clear_LOCKED(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::LOCKED.reverse_bits();
-        self
-    }
-
-    pub const fn new_CORPSE_ALLY() -> Self {
-        Self {
-            inner: SpellCastTargetFlags::CORPSE_ALLY,
-            unit: None,
-            item: None,
-            source_location: None,
-            dest_location: None,
-            string: None,
-        }
-    }
-
-    pub fn set_CORPSE_ALLY(mut self) -> Self {
-        self.inner |= SpellCastTargetFlags::CORPSE_ALLY;
-        self
-    }
-
-    pub const fn get_CORPSE_ALLY(&self) -> bool {
-        (self.inner & SpellCastTargetFlags::CORPSE_ALLY) != 0
-    }
-
-    pub fn clear_CORPSE_ALLY(mut self) -> Self {
-        self.inner &= SpellCastTargetFlags::CORPSE_ALLY.reverse_bits();
-        self
-    }
-
-    pub const fn new_UNIT_MINIPET() -> Self {
-        Self {
-            inner: SpellCastTargetFlags::UNIT_MINIPET,
-            unit: None,
-            item: None,
-            source_location: None,
-            dest_location: None,
-            string: None,
-        }
-    }
-
-    pub fn set_UNIT_MINIPET(mut self) -> Self {
-        self.inner |= SpellCastTargetFlags::UNIT_MINIPET;
-        self
-    }
-
-    pub const fn get_UNIT_MINIPET(&self) -> bool {
-        (self.inner & SpellCastTargetFlags::UNIT_MINIPET) != 0
-    }
-
-    pub fn clear_UNIT_MINIPET(mut self) -> Self {
-        self.inner &= SpellCastTargetFlags::UNIT_MINIPET.reverse_bits();
         self
     }
 
@@ -784,28 +869,6 @@ impl SpellCastTargets_SpellCastTargetFlags {
                 0
             }
         }
-    }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct SpellCastTargets_SpellCastTargetFlags_Unit {
-    pub unit_target: Guid,
-}
-
-impl SpellCastTargets_SpellCastTargetFlags_Unit {
-    pub(crate) fn size(&self) -> usize {
-        self.unit_target.size() // unit_target: PackedGuid
-    }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-pub struct SpellCastTargets_SpellCastTargetFlags_Item {
-    pub item_target: Guid,
-}
-
-impl SpellCastTargets_SpellCastTargetFlags_Item {
-    pub(crate) fn size(&self) -> usize {
-        self.item_target.size() // item_target: PackedGuid
     }
 }
 
