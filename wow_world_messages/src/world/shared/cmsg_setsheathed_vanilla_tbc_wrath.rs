@@ -1,7 +1,5 @@
-use crate:: {
-};
-use wow_world_base::shared::sheath_state_vanilla_tbc_wrath::SheathState;
 use std::io::{Read, Write};
+use wow_world_base::shared::sheath_state_vanilla_tbc_wrath::SheathState;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Says which weapon the client pulls out.

@@ -1,8 +1,6 @@
-use crate:: {
-};
-use crate::vanilla::Vector3d;
-use crate::vanilla::Map;
 use std::io::{Read, Write};
+use crate::vanilla::Map;
+use crate::vanilla::Vector3d;
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Message to the client that is has successfully logged into the world and that it should load the map and coordinates.

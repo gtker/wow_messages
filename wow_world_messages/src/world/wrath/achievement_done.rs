@@ -1,7 +1,5 @@
-use crate:: {
-    DateTime,
-};
 use std::io::{Read, Write};
+use crate::DateTime;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Used in the `AchievementDoneArray` built-in type.

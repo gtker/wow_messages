@@ -1,9 +1,7 @@
-use crate:: {
-    Guid,
-};
-use crate::wrath::Vector3d;
-use crate::wrath::SpellCastTargetFlags;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::wrath::SpellCastTargetFlags;
+use crate::wrath::Vector3d;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:154`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L154):

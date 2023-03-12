@@ -1,8 +1,6 @@
-use crate:: {
-};
+use std::io::{Read, Write};
 use wow_world_base::shared::declined_pet_name_included_tbc_wrath::DeclinedPetNameIncluded;
 use wow_world_base::shared::pet_name_invalid_reason_tbc_wrath::PetNameInvalidReason;
-use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Some emulators have this with fields, but it has been verified to be empty on 1.12 through reverse engineering.

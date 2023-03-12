@@ -1,7 +1,5 @@
-use crate:: {
-    Guid,
-};
 use std::io::{Read, Write};
+use crate::Guid;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Command to delete a character from the clients account. Can be sent after the client has received [`SMSG_CHAR_ENUM`](crate::vanilla::SMSG_CHAR_ENUM).

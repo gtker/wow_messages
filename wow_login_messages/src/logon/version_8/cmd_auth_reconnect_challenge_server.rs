@@ -1,8 +1,6 @@
-use crate:: {
-    ServerMessage,
-};
-use crate::logon::version_8::LoginResult;
+use crate::ServerMessage;
 use std::io::{Read, Write};
+use crate::logon::version_8::LoginResult;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Reply to [`CMD_AUTH_RECONNECT_CHALLENGE_Client`](crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client).

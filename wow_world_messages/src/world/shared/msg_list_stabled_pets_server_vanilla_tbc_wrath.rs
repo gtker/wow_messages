@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::shared::stabled_pet_vanilla_tbc_wrath::StabledPet;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/msg_list_stabled_pets_server.wowm:14`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/msg_list_stabled_pets_server.wowm#L14):

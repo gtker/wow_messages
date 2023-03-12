@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::vanilla::Addon;
 use std::io::{Read, Write};
+use crate::vanilla::Addon;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm:60`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm#L60):

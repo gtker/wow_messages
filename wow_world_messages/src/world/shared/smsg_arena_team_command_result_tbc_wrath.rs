@@ -1,8 +1,6 @@
-use crate:: {
-};
-use wow_world_base::shared::arena_team_command_tbc_wrath::ArenaTeamCommand;
-use wow_world_base::shared::arena_team_command_error_tbc_wrath::ArenaTeamCommandError;
 use std::io::{Read, Write};
+use wow_world_base::shared::arena_team_command_error_tbc_wrath::ArenaTeamCommandError;
+use wow_world_base::shared::arena_team_command_tbc_wrath::ArenaTeamCommand;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/arena/smsg_arena_team_command_result.wowm:32`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/arena/smsg_arena_team_command_result.wowm#L32):

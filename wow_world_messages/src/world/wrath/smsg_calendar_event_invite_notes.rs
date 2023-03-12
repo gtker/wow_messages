@@ -1,7 +1,5 @@
-use crate:: {
-    Guid,
-};
 use std::io::{Read, Write};
+use crate::Guid;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// This message only exists as a coment in trinitycore.

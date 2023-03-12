@@ -1,15 +1,11 @@
-use crate:: {
-};
-use crate::wrath:: {
-    Gold,
-    Level,
-};
+use std::io::{Read, Write};
+use crate::wrath::Faction;
 use crate::wrath::QuestItemRequirement;
 use crate::wrath::QuestItemReward;
 use crate::wrath::QuestObjective;
 use crate::wrath::Vector2d;
-use crate::wrath::Faction;
-use std::io::{Read, Write};
+use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
+use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm:110`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/quest/smsg_quest_query_response.wowm#L110):

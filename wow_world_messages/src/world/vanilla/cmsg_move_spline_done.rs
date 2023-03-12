@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::vanilla::MovementInfo;
 use std::io::{Read, Write};
+use crate::vanilla::MovementInfo;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_spline_done.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_spline_done.wowm#L1):

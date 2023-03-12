@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::wrath::MovementInfo;
 use std::io::{Read, Write};
+use crate::wrath::MovementInfo;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_chng_transport.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_chng_transport.wowm#L7):

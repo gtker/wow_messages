@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::tbc::SpellSchool;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::tbc::SpellSchool;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelldamageshield.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelldamageshield.wowm#L10):

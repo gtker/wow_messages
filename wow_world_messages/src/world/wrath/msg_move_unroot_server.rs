@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::wrath::MovementInfo;
 use std::io::{Read, Write};
+use crate::wrath::MovementInfo;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_unroot.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_unroot.wowm#L8):

@@ -1,9 +1,7 @@
-use crate:: {
-};
-use crate::vanilla::BattlegroundPlayer;
-use crate::vanilla::BattlegroundEndStatus;
-use crate::vanilla::BattlegroundWinner;
 use std::io::{Read, Write};
+use crate::vanilla::BattlegroundEndStatus;
+use crate::vanilla::BattlegroundPlayer;
+use crate::vanilla::BattlegroundWinner;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pvp/msg_pvp_log_data_server.wowm#L29):

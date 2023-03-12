@@ -1,9 +1,7 @@
-use crate:: {
-};
+use std::io::{Read, Write};
 use crate::wrath::AuctionCommandAction;
 use crate::wrath::AuctionCommandResult;
 use crate::wrath::InventoryResult;
-use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/unimplemented/vanilla/smsg_auction_command_result.wowm:67`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/unimplemented/vanilla/smsg_auction_command_result.wowm#L67):

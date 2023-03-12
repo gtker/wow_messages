@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::wrath::ExperienceAwardType;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::wrath::ExperienceAwardType;
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/exp/smsg_log_xpgain.wowm#L22):

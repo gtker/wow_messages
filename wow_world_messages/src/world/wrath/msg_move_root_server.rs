@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::wrath::MovementInfo;
 use std::io::{Read, Write};
+use crate::wrath::MovementInfo;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// There does not appear to be a CMSG version of this MSG.

@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::shared::battleground_player_position_vanilla_tbc_wrath::BattlegroundPlayerPosition;
 use std::io::{Read, Write};
+use crate::shared::battleground_player_position_vanilla_tbc_wrath::BattlegroundPlayerPosition;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/msg_battleground_player_positions.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/msg_battleground_player_positions.wowm#L13):

@@ -1,8 +1,6 @@
-use crate:: {
-};
+use std::io::{Read, Write};
 use crate::wrath::LfgAvailableDungeon;
 use crate::wrath::LfgJoinLockedDungeon;
-use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_player_info.wowm:22`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_player_info.wowm#L22):

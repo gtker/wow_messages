@@ -1,12 +1,8 @@
-use crate:: {
-    Guid,
-};
-use crate::wrath:: {
-    Gold,
-};
+use std::io::{Read, Write};
+use crate::Guid;
 use crate::wrath::MailListItem;
 use crate::wrath::MailType;
-use std::io::{Read, Write};
+use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/smsg_mail_list_result.wowm:125`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/smsg_mail_list_result.wowm#L125):

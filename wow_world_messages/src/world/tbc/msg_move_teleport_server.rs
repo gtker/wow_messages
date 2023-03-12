@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::tbc::MovementInfo;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::tbc::MovementInfo;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// There does not appear to be a client version of this MSG.

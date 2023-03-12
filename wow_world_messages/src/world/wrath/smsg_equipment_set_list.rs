@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::wrath::EquipmentSetListItem;
 use std::io::{Read, Write};
+use crate::wrath::EquipmentSetListItem;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_equipment_set_list.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_equipment_set_list.wowm#L10):

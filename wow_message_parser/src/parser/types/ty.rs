@@ -1,5 +1,4 @@
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
-use crate::parser::types::container::TypeImport;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::{
@@ -125,37 +124,6 @@ impl Type {
             Type::Array(_) | Type::Enum { .. } | Type::Flag { .. } | Type::Struct { .. } => {
                 panic!("invalid conversion")
             }
-        }
-    }
-
-    pub(crate) fn is_importable_type(&self) -> Option<TypeImport> {
-        let ty = self.rust_str();
-        match self {
-            Type::Enum { .. }
-            | Type::Flag { .. }
-            | Type::Struct { .. }
-            | Type::CString
-            | Type::SizedCString
-            | Type::String
-            | Type::FloatingPoint(_)
-            | Type::Integer(_)
-            | Type::Bool(_) => None,
-
-            Type::Array(array) => array.is_importable_type(),
-
-            Type::Guid | Type::PackedGuid | Type::DateTime => Some(TypeImport::Crate(ty)),
-
-            Type::Level16
-            | Type::Level32
-            | Type::Level
-            | Type::Gold
-            | Type::MonsterMoveSplines
-            | Type::AuraMask
-            | Type::AchievementDoneArray
-            | Type::AchievementInProgressArray
-            | Type::EnchantMask
-            | Type::InspectTalentGearMask
-            | Type::UpdateMask => Some(TypeImport::ImportPath(ty)),
         }
     }
 

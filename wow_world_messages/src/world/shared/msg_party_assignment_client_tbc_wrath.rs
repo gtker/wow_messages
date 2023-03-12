@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use wow_world_base::shared::party_role_tbc_wrath::PartyRole;
 use std::io::{Read, Write};
+use crate::Guid;
+use wow_world_base::shared::party_role_tbc_wrath::PartyRole;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/msg_party_assignment.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/msg_party_assignment.wowm#L8):

@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::wrath::Addon;
 use std::io::{Read, Write};
+use crate::wrath::Addon;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Banned addons are not properly implemented in the wowm. Sending any number other than 0 means that the packet is incomplete and thus invalid

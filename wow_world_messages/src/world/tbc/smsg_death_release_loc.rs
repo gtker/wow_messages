@@ -1,8 +1,6 @@
-use crate:: {
-};
-use crate::tbc::Vector3d;
-use crate::tbc::Map;
 use std::io::{Read, Write};
+use crate::tbc::Map;
+use crate::tbc::Vector3d;
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/resurrect/smsg_death_release_loc.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/resurrect/smsg_death_release_loc.wowm#L1):

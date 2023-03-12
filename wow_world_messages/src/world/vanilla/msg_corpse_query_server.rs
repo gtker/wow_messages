@@ -1,9 +1,7 @@
-use crate:: {
-};
-use crate::vanilla::Vector3d;
+use std::io::{Read, Write};
 use crate::vanilla::CorpseQueryResult;
 use crate::vanilla::Map;
-use std::io::{Read, Write};
+use crate::vanilla::Vector3d;
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_corpse_query_server.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_corpse_query_server.wowm#L8):

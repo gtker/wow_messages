@@ -1,9 +1,7 @@
-use crate:: {
-};
+use std::io::{Read, Write};
 use crate::tbc::DungeonDifficulty;
 use crate::tbc::Map;
 use crate::tbc::TransferAbortReason;
-use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_transfer_aborted.wowm:45`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_transfer_aborted.wowm#L45):

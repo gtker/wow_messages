@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::vanilla::Character;
 use std::io::{Read, Write};
+use crate::vanilla::Character;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Response to [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).

@@ -1,9 +1,7 @@
-use crate:: {
-};
+use std::io::{Read, Write};
 use crate::tbc::Class;
 use crate::tbc::Gender;
 use crate::tbc::Race;
-use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent after the client presses 'Create Character'. The client will then wait for [`SMSG_CHAR_CREATE`](crate::tbc::SMSG_CHAR_CREATE).

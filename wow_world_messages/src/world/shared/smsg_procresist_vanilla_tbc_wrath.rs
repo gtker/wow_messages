@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use wow_world_base::shared::log_format_vanilla_tbc_wrath::LogFormat;
 use std::io::{Read, Write};
+use crate::Guid;
+use wow_world_base::shared::log_format_vanilla_tbc_wrath::LogFormat;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// According to cmangos/azerothcore/trinitycore/mangostwo. Not present in vmangos.

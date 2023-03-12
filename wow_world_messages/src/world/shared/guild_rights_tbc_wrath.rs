@@ -1,8 +1,6 @@
-use crate::tbc:: {
-    Gold,
-};
-use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
 use std::io::{Read, Write};
+use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
+use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm:77`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm#L77):

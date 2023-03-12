@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::vanilla::WorldResult;
 use std::io::{Read, Write};
+use crate::vanilla::WorldResult;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Response to [`CMSG_CHAR_DELETE`](crate::vanilla::CMSG_CHAR_DELETE).

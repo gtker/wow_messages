@@ -1,5 +1,5 @@
-use crate::vanilla::SpellTriggerType;
 use std::io::{Read, Write};
+use crate::vanilla::SpellTriggerType;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]

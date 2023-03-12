@@ -1,7 +1,5 @@
-use crate:: {
-    Guid,
-};
 use std::io::{Read, Write};
+use crate::Guid;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// cmangos/vmangos/mangoszero returns guid 0 and unknown 0 when talents can not be reset

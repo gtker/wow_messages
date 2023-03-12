@@ -1,7 +1,5 @@
-use crate:: {
-    Guid,
-};
 use std::io::{Read, Write};
+use crate::Guid;
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_spline_set_flight_back_speed.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_spline_set_flight_back_speed.wowm#L1):

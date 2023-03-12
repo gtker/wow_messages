@@ -22,10 +22,6 @@ pub(crate) struct StructMemberDefinition {
 }
 
 impl StructMemberDefinition {
-    pub(crate) fn struct_type(&self) -> Type {
-        self.struct_type.clone()
-    }
-
     pub(crate) fn used_as_size_in(&self) -> &Option<String> {
         &self.used_as_size_in
     }

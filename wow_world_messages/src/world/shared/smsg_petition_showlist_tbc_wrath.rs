@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::shared::petition_showlist_tbc_wrath::PetitionShowlist;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::shared::petition_showlist_tbc_wrath::PetitionShowlist;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm:47`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_petition_showlist.wowm#L47):

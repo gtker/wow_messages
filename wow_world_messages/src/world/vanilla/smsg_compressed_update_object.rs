@@ -1,8 +1,6 @@
-use crate:: {
-    Message,
-};
-use crate::vanilla::Object;
+use crate::Message;
 use std::io::{Read, Write};
+use crate::vanilla::Object;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Compressed version of [`SMSG_UPDATE_OBJECT`](crate::vanilla::SMSG_UPDATE_OBJECT). Has the same fields when uncompressed

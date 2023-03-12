@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::vanilla::Object;
 use std::io::{Read, Write};
+use crate::vanilla::Object;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:189`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L189):

@@ -1,31 +1,27 @@
-use crate:: {
-};
-use crate::wrath:: {
-    Gold,
-    Level,
-};
-use crate::wrath::ItemDamageType;
-use crate::wrath::ItemSocket;
-use crate::wrath::ItemSpells;
-use crate::wrath::ItemStat;
+use std::io::{Read, Write};
+use crate::wrath::AllowedClass;
+use crate::wrath::AllowedRace;
 use crate::wrath::Area;
+use crate::wrath::BagFamily;
 use crate::wrath::Bonding;
 use crate::wrath::Faction;
 use crate::wrath::InventoryType;
 use crate::wrath::ItemClassAndSubClass;
+use crate::wrath::ItemDamageType;
+use crate::wrath::ItemFlag;
+use crate::wrath::ItemFlag2;
 use crate::wrath::ItemQuality;
 use crate::wrath::ItemSet;
+use crate::wrath::ItemSocket;
+use crate::wrath::ItemSpells;
+use crate::wrath::ItemStat;
 use crate::wrath::Language;
 use crate::wrath::Map;
 use crate::wrath::PageTextMaterial;
 use crate::wrath::SheatheType;
 use crate::wrath::Skill;
-use crate::wrath::AllowedClass;
-use crate::wrath::AllowedRace;
-use crate::wrath::BagFamily;
-use crate::wrath::ItemFlag;
-use crate::wrath::ItemFlag2;
-use std::io::{Read, Write};
+use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
+use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:571`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L571):

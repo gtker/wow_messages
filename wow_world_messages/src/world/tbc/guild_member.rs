@@ -1,13 +1,9 @@
-use crate:: {
-    Guid,
-};
-use crate::tbc:: {
-    Level,
-};
+use std::io::{Read, Write};
+use crate::Guid;
 use crate::tbc::Area;
 use crate::tbc::Class;
 use crate::tbc::GuildMemberStatus;
-use std::io::{Read, Write};
+use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm#L35):

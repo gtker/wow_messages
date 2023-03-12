@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::vanilla::GuildEvent;
 use std::io::{Read, Write};
+use crate::vanilla::GuildEvent;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_event.wowm:66`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_event.wowm#L66):

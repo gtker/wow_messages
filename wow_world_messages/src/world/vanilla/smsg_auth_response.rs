@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::vanilla::WorldResult;
 use std::io::{Read, Write};
+use crate::vanilla::WorldResult;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Response to [`CMSG_AUTH_SESSION`](crate::vanilla::CMSG_AUTH_SESSION).

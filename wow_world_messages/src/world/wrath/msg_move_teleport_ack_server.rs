@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::wrath::MovementInfo;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::wrath::MovementInfo;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Can be response to [`CMSG_TELEPORT_TO_UNIT`](crate::vanilla::CMSG_TELEPORT_TO_UNIT).

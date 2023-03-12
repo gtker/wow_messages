@@ -1,6 +1,3 @@
-use crate::file_utils::{
-    get_base_internal_shared_path, get_base_shared_path, get_import_path, get_world_shared_path,
-};
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
@@ -38,71 +35,28 @@ pub(crate) fn print_struct(e: &Container, o: &Objects) -> Writer {
 }
 
 fn print_includes(s: &mut Writer, e: &Container) {
-    let (crate_types, import_path_types) = e.get_types_needing_import();
-
-    if !crate_types.is_empty() || !matches!(e.container_type(), ContainerType::Struct) {
-        s.body_closing_with_semicolon("use crate::", |s| {
-            for ty in &crate_types {
-                s.wln(format!("{ty},"));
+    match e.container_type() {
+        ContainerType::CLogin(_) => {
+            s.wln(format!("use crate::{CLIENT_MESSAGE_TRAIT_NAME};"));
+        }
+        ContainerType::SLogin(_) => {
+            s.wln(format!("use crate::{SERVER_MESSAGE_TRAIT_NAME};"));
+        }
+        ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
+            if e.tags().compressed() || e.contains_compressed_variable() {
+                // We manually implement the trait to avoid double compression
+                s.wln("use crate::Message;");
             }
-
-            match e.container_type() {
-                ContainerType::CLogin(_) => {
-                    s.wln(format!("{CLIENT_MESSAGE_TRAIT_NAME},"));
-                }
-                ContainerType::SLogin(_) => {
-                    s.wln(format!("{SERVER_MESSAGE_TRAIT_NAME},"));
-                }
-                ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
-                    if e.tags().compressed() || e.contains_compressed_variable() {
-                        // We manually implement the trait to avoid double compression
-                        s.wln("Message,");
-                    }
-                }
-                ContainerType::Struct => {}
-            }
-        });
-    }
-
-    let version = e.tags().first_and_main_versions().0;
-    let import_path = get_import_path(version);
-
-    if !import_path_types.is_empty() {
-        s.body_closing_with_semicolon(format!("use {import_path}::"), |s| {
-            for ty in &import_path_types {
-                s.wln(format!("{ty},"));
-            }
-        });
-    }
-
-    for c in e.get_objects_needing_import() {
-        let version = if !version.is_world() {
-            // Login messages need to use the real object and not the reexports
-            c.tags().import_version()
-        } else {
-            version
-        };
-
-        let module_name = if e.tags().has_world_version() && e.tags().shared() {
-            if c.tags().is_in_base() && e.tags().is_in_base() {
-                get_base_internal_shared_path(c.name(), c.tags())
-            } else if c.tags().is_in_base() {
-                get_base_shared_path(c.name(), c.tags())
-            } else {
-                get_world_shared_path(c.name(), c.tags())
-            }
-        } else {
-            get_import_path(version)
-        };
-
-        s.wln(format!(
-            "use {module_name}::{name};",
-            module_name = module_name,
-            name = c.name(),
-        ));
+        }
+        ContainerType::Struct => {}
     }
 
     s.wln("use std::io::{Read, Write};");
+
+    let (version, _) = e.tags().first_and_main_versions();
+    for import in e.get_imports(version) {
+        s.wln(format!("use {import};"));
+    }
 
     s.newline();
 }

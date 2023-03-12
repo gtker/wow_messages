@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use wow_world_base::shared::petition_result_tbc_wrath::PetitionResult;
 use std::io::{Read, Write};
+use crate::Guid;
+use wow_world_base::shared::petition_result_tbc_wrath::PetitionResult;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_petition_sign_results.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_petition_sign_results.wowm#L30):

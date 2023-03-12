@@ -1,8 +1,6 @@
-use crate:: {
-};
+use std::io::{Read, Write};
 use wow_world_base::shared::logout_result_vanilla_tbc_wrath::LogoutResult;
 use wow_world_base::shared::logout_speed_vanilla_tbc_wrath::LogoutSpeed;
-use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Reply to [`CMSG_LOGOUT_REQUEST`](crate::vanilla::CMSG_LOGOUT_REQUEST).

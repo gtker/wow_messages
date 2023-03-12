@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::tbc::MovementInfo;
 use std::io::{Read, Write};
+use crate::tbc::MovementInfo;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_set_pitch.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_set_pitch.wowm#L7):

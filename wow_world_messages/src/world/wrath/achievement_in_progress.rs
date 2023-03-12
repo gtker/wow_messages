@@ -1,8 +1,6 @@
-use crate:: {
-    DateTime,
-    Guid,
-};
 use std::io::{Read, Write};
+use crate::DateTime;
+use crate::Guid;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Used in the `AchievementInProgressArray` built-in type.

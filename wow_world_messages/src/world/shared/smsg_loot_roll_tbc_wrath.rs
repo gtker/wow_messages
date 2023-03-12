@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use wow_world_base::shared::roll_vote_tbc_wrath::RollVote;
 use std::io::{Read, Write};
+use crate::Guid;
+use wow_world_base::shared::roll_vote_tbc_wrath::RollVote;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_roll.wowm:19`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_roll.wowm#L19):

@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::wrath::CalendarModeratorRank;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::wrath::CalendarModeratorRank;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/cmsg_calendar_event_moderator_status.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/cmsg_calendar_event_moderator_status.wowm#L9):

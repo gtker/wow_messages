@@ -1,7 +1,5 @@
-use crate:: {
-};
-use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 use std::io::{Read, Write};
+use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Not implemented in any Wrath emulators.

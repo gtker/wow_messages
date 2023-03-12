@@ -1,9 +1,7 @@
-use crate:: {
-};
+use std::io::{Read, Write};
 use crate::vanilla::Area;
 use crate::vanilla::CastFailureReason;
 use crate::vanilla::SimpleSpellCastResult;
-use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_cast_result.wowm:449`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_cast_result.wowm#L449):

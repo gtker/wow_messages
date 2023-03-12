@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::wrath::Vector3d;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::wrath::Vector3d;
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_update_missile_trajectory.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_update_missile_trajectory.wowm#L1):

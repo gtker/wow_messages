@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::vanilla::Friend;
 use std::io::{Read, Write};
+use crate::vanilla::Friend;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_friend_list.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_friend_list.wowm#L21):

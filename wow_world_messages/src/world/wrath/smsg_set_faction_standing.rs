@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::wrath::FactionStanding;
 use std::io::{Read, Write};
+use crate::wrath::FactionStanding;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/smsg_set_faction_standing.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/smsg_set_faction_standing.wowm#L26):

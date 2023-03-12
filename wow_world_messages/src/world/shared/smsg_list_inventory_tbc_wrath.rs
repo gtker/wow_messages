@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::shared::list_inventory_item_tbc_wrath::ListInventoryItem;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::shared::list_inventory_item_tbc_wrath::ListInventoryItem;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// if `amount_of_items` is 0 it is supposedly followed by a single u8 with 0 to say that vendor has no items.

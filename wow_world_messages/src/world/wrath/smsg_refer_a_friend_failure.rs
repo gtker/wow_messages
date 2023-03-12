@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::wrath::ReferAFriendError;
 use std::io::{Read, Write};
+use crate::wrath::ReferAFriendError;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_refer_a_friend_failure.wowm:30`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_refer_a_friend_failure.wowm#L30):

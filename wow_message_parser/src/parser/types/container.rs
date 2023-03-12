@@ -1,6 +1,8 @@
 use crate::error_printer::invalid_self_size_position;
 use crate::file_info::FileInfo;
-use crate::file_utils::get_import_path;
+use crate::file_utils::{
+    get_base_internal_shared_path, get_base_shared_path, get_import_path, get_world_shared_path,
+};
 use crate::parser::types::array::ArrayType;
 use crate::parser::types::compare_name_and_tags;
 use crate::parser::types::objects::Objects;
@@ -15,9 +17,8 @@ use crate::rust_printer::{
     DefinerType, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
     WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
-use crate::{Object, CONTAINER_SELF_SIZE_FIELD};
+use crate::CONTAINER_SELF_SIZE_FIELD;
 use std::cmp::Ordering;
-use std::collections::BTreeSet;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Ord, PartialOrd)]
 pub(crate) enum ContainerType {
@@ -481,28 +482,105 @@ impl Container {
         false
     }
 
-    pub(crate) fn get_objects_needing_import(&self) -> BTreeSet<Object> {
-        let mut v = BTreeSet::new();
+    pub(crate) fn get_imports(&self, version: Version) -> Vec<String> {
+        fn object_prefix(s: &ObjectTags, e: &ObjectTags, version: Version, name: &str) -> String {
+            if s.has_world_version() && s.shared() {
+                if e.is_in_base() && s.is_in_base() {
+                    get_base_internal_shared_path(name, e)
+                } else if e.is_in_base() {
+                    get_base_shared_path(name, e)
+                } else {
+                    get_world_shared_path(name, e)
+                }
+            } else {
+                let version = if !version.is_world() {
+                    e.import_version()
+                } else {
+                    version
+                };
 
-        for d in self.all_definitions() {
-            match d.struct_type() {
-                Type::Array(a) => {
-                    if let ArrayType::Struct(c) = a.ty() {
-                        v.insert(Object::Container(*c.clone()));
-                    }
-                }
-                Type::Enum { e, .. } => {
-                    v.insert(Object::Enum(e.clone()));
-                }
-                Type::Flag { e, .. } => {
-                    v.insert(Object::Flag(e.clone()));
-                }
-                Type::Struct { e } => {
-                    v.insert(Object::Container(e.clone()));
-                }
-                _ => {}
+                get_import_path(version)
             }
         }
+
+        let mut v = self
+            .all_definitions()
+            .iter()
+            .map(move |a| {
+                let name = a.ty().rust_str();
+
+                Some(match a.ty() {
+                    Type::CString
+                    | Type::SizedCString
+                    | Type::String
+                    | Type::Integer(_)
+                    | Type::Bool(_)
+                    | Type::FloatingPoint(_) => return None,
+
+                    Type::DateTime | Type::PackedGuid | Type::Guid => {
+                        format!("crate::{name}")
+                    }
+
+                    Type::EnchantMask
+                    | Type::InspectTalentGearMask
+                    | Type::AchievementDoneArray
+                    | Type::AchievementInProgressArray
+                    | Type::AuraMask
+                    | Type::UpdateMask => {
+                        format!("crate::{}::{name}", version.as_major_world().module_name())
+                    }
+
+                    Type::MonsterMoveSplines => {
+                        format!("crate::shared::monster_move_spline_vanilla_tbc_wrath::{name}")
+                    }
+
+                    Type::Gold => {
+                        let pre = if self.tags().is_in_base() {
+                            "crate"
+                        } else {
+                            "wow_world_base"
+                        };
+                        format!("{pre}::shared::gold_vanilla_tbc_wrath::{name}")
+                    }
+                    Type::Level | Type::Level16 | Type::Level32 => {
+                        let pre = if self.tags().is_in_base() {
+                            "crate"
+                        } else {
+                            "wow_world_base"
+                        };
+                        format!("{pre}::shared::level_vanilla_tbc_wrath::{name}")
+                    }
+
+                    Type::Array(array) => match array.ty() {
+                        ArrayType::CString | ArrayType::Integer(_) => return None,
+
+                        ArrayType::Guid | ArrayType::PackedGuid => {
+                            format!("crate::Guid")
+                        }
+
+                        ArrayType::Struct(e) => {
+                            let pre = object_prefix(self.tags(), e.tags(), version, e.name());
+
+                            let name = e.name();
+                            format!("{pre}::{name}")
+                        }
+                    },
+
+                    Type::Enum { e, .. } | Type::Flag { e, .. } => {
+                        let pre = object_prefix(self.tags(), e.tags(), version, e.name());
+                        format!("{pre}::{name}")
+                    }
+                    Type::Struct { e } => {
+                        let pre = object_prefix(self.tags(), e.tags(), version, e.name());
+                        format!("{pre}::{name}")
+                    }
+                })
+            })
+            .filter_map(|a| a)
+            .collect::<Vec<_>>();
+
+        v.sort();
+        v.dedup();
 
         v
     }
@@ -528,29 +606,4 @@ impl Container {
     pub(crate) fn members(&self) -> &[StructMember] {
         self.members.as_slice()
     }
-
-    pub(crate) fn get_types_needing_import(&self) -> (BTreeSet<String>, BTreeSet<String>) {
-        let mut local_crate = BTreeSet::new();
-        let mut import_path = BTreeSet::new();
-
-        for d in self.all_definitions() {
-            if let Some(s) = d.ty().is_importable_type() {
-                match s {
-                    TypeImport::Crate(s) => {
-                        local_crate.insert(s);
-                    }
-                    TypeImport::ImportPath(s) => {
-                        import_path.insert(s);
-                    }
-                }
-            }
-        }
-
-        (local_crate, import_path)
-    }
-}
-
-pub(crate) enum TypeImport {
-    Crate(String),
-    ImportPath(String),
 }

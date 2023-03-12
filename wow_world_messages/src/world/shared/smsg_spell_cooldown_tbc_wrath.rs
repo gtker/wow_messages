@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::shared::spell_cooldown_status_vanilla_tbc_wrath::SpellCooldownStatus;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::shared::spell_cooldown_status_vanilla_tbc_wrath::SpellCooldownStatus;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_cooldown.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_cooldown.wowm#L15):

@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::vanilla::WorldResult;
 use std::io::{Read, Write};
+use crate::vanilla::WorldResult;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Response if [`CMSG_PLAYER_LOGIN`](crate::vanilla::CMSG_PLAYER_LOGIN) fails. If successful it should instead be [`SMSG_LOGIN_VERIFY_WORLD`](crate::vanilla::SMSG_LOGIN_VERIFY_WORLD).

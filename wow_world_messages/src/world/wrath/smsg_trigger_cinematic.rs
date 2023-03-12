@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::wrath::CinematicSequenceId;
 use std::io::{Read, Write};
+use crate::wrath::CinematicSequenceId;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/cinematic/smsg_trigger_cinematic.wowm:66`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/cinematic/smsg_trigger_cinematic.wowm#L66):

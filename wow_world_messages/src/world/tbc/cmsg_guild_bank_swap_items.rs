@@ -1,9 +1,7 @@
-use crate:: {
-    Guid,
-};
+use std::io::{Read, Write};
+use crate::Guid;
 use crate::tbc::BankSwapSource;
 use crate::tbc::BankSwapStoreMode;
-use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild_bank/cmsg_guild_bank_swap_items.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild_bank/cmsg_guild_bank_swap_items.wowm#L15):

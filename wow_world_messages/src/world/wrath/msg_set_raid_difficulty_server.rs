@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::wrath::RaidDifficulty;
 use std::io::{Read, Write};
+use crate::wrath::RaidDifficulty;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/msg_set_raid_difficulty.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/msg_set_raid_difficulty.wowm#L7):

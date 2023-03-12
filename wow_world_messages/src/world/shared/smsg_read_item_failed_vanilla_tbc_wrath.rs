@@ -1,7 +1,5 @@
-use crate:: {
-    Guid,
-};
 use std::io::{Read, Write};
+use crate::Guid;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// vmangos has extra u8 with comment `0..2, read failure reason? if == 1, use next command`.

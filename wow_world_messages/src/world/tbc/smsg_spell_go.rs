@@ -1,10 +1,8 @@
-use crate:: {
-    Guid,
-};
+use std::io::{Read, Write};
+use crate::Guid;
+use crate::tbc::CastFlags;
 use crate::tbc::SpellCastTargets;
 use crate::tbc::SpellMiss;
-use crate::tbc::CastFlags;
-use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_go.wowm:24`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_go.wowm#L24):

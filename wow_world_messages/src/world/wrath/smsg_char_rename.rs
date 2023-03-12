@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::wrath::WorldResult;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::wrath::WorldResult;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Response to [`CMSG_CHAR_RENAME`](crate::vanilla::CMSG_CHAR_RENAME).

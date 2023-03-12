@@ -1,12 +1,8 @@
-use crate:: {
-    Guid,
-};
-use crate::tbc:: {
-    Gold,
-};
-use crate::tbc::QuestItemRequirement;
-use crate::tbc::QuestCompletable;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::tbc::QuestCompletable;
+use crate::tbc::QuestItemRequirement;
+use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// mangoszero/vmangos: Quests that don't require items use the `RequestItemsText` field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.

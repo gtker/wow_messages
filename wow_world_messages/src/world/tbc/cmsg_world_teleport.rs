@@ -1,8 +1,6 @@
-use crate:: {
-};
-use crate::tbc::Vector3d;
-use crate::tbc::Map;
 use std::io::{Read, Write};
+use crate::tbc::Map;
+use crate::tbc::Vector3d;
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Sent when using the `worldport` console command.

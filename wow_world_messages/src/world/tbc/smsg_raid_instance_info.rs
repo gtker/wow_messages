@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::tbc::RaidInfo;
 use std::io::{Read, Write};
+use crate::tbc::RaidInfo;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/raid/smsg_raid_instance_info.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/raid/smsg_raid_instance_info.wowm#L9):

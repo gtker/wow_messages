@@ -1,10 +1,8 @@
-use crate:: {
-    Guid,
-};
+use std::io::{Read, Write};
+use crate::Guid;
 use crate::vanilla::Class;
 use crate::vanilla::Gender;
 use crate::vanilla::Race;
-use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Response to [`CMSG_NAME_QUERY`](crate::vanilla::CMSG_NAME_QUERY).

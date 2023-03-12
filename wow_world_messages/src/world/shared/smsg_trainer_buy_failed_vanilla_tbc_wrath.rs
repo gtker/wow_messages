@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use wow_world_base::shared::training_failure_reason_vanilla_tbc_wrath::TrainingFailureReason;
 use std::io::{Read, Write};
+use crate::Guid;
+use wow_world_base::shared::training_failure_reason_vanilla_tbc_wrath::TrainingFailureReason;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// No TBC emulators implement this.

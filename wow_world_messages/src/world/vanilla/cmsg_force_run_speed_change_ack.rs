@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::vanilla::MovementInfo;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::vanilla::MovementInfo;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Sent to acknowledge the new speed. Reply to [`SMSG_FORCE_RUN_SPEED_CHANGE`](crate::vanilla::SMSG_FORCE_RUN_SPEED_CHANGE).

@@ -1,29 +1,25 @@
-use crate:: {
-};
-use crate::vanilla:: {
-    Gold,
-    Level,
-};
-use crate::vanilla::ItemDamageType;
-use crate::vanilla::ItemSpells;
-use crate::vanilla::ItemStat;
+use std::io::{Read, Write};
+use crate::vanilla::AllowedClass;
+use crate::vanilla::AllowedRace;
 use crate::vanilla::Area;
 use crate::vanilla::BagFamily;
 use crate::vanilla::Bonding;
 use crate::vanilla::Faction;
 use crate::vanilla::InventoryType;
 use crate::vanilla::ItemClassAndSubClass;
+use crate::vanilla::ItemDamageType;
+use crate::vanilla::ItemFlag;
 use crate::vanilla::ItemQuality;
 use crate::vanilla::ItemSet;
+use crate::vanilla::ItemSpells;
+use crate::vanilla::ItemStat;
 use crate::vanilla::Language;
 use crate::vanilla::Map;
 use crate::vanilla::PageTextMaterial;
 use crate::vanilla::SheatheType;
 use crate::vanilla::Skill;
-use crate::vanilla::AllowedClass;
-use crate::vanilla::AllowedRace;
-use crate::vanilla::ItemFlag;
-use std::io::{Read, Write};
+use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
+use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm:185`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_item_query_single_response.wowm#L185):

@@ -1,6 +1,4 @@
-use crate:: {
-    Message,
-};
+use crate::Message;
 use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

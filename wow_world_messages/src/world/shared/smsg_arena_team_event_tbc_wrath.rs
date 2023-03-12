@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use wow_world_base::shared::arena_team_event_tbc_wrath::ArenaTeamEvent;
 use std::io::{Read, Write};
+use crate::Guid;
+use wow_world_base::shared::arena_team_event_tbc_wrath::ArenaTeamEvent;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/arena/smsg_arena_team_event.wowm:24`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/arena/smsg_arena_team_event.wowm#L24):

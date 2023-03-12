@@ -1,19 +1,15 @@
-use crate:: {
-    Guid,
-};
-use crate::vanilla:: {
-    Level,
-};
-use crate::vanilla::CharacterGear;
-use crate::vanilla::Vector3d;
+use std::io::{Read, Write};
+use crate::Guid;
 use crate::vanilla::Area;
+use crate::vanilla::CharacterFlags;
+use crate::vanilla::CharacterGear;
 use crate::vanilla::Class;
 use crate::vanilla::CreatureFamily;
 use crate::vanilla::Gender;
 use crate::vanilla::Map;
 use crate::vanilla::Race;
-use crate::vanilla::CharacterFlags;
-use std::io::{Read, Write};
+use crate::vanilla::Vector3d;
+use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm:17`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm#L17):

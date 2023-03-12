@@ -1,13 +1,9 @@
-use crate:: {
-    Guid,
-};
-use crate::vanilla:: {
-    MonsterMoveSplines,
-};
-use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
+use std::io::{Read, Write};
+use crate::Guid;
+use crate::shared::monster_move_spline_vanilla_tbc_wrath::MonsterMoveSplines;
 use wow_world_base::shared::monster_move_type_vanilla_tbc_wrath::MonsterMoveType;
 use wow_world_base::shared::spline_flag_vanilla_tbc::SplineFlag;
-use std::io::{Read, Write};
+use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_monster_move_transport.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_monster_move_transport.wowm#L1):

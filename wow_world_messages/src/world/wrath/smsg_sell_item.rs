@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::wrath::SellItemResult;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::wrath::SellItemResult;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_sell_item.wowm:62`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_sell_item.wowm#L62):

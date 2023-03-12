@@ -1,5 +1,5 @@
-use crate::vanilla::ItemStatType;
 use std::io::{Read, Write};
+use crate::vanilla::ItemStatType;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]

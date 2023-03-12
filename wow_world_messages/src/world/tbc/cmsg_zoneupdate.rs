@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::tbc::Area;
 use std::io::{Read, Write};
+use crate::tbc::Area;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent by the client whenever it reaches a new area.

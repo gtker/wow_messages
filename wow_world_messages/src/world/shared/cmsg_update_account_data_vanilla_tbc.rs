@@ -1,8 +1,6 @@
-use crate:: {
-    Message,
-};
-use wow_world_base::shared::account_data_type_vanilla_tbc::AccountDataType;
+use crate::Message;
 use std::io::{Read, Write};
+use wow_world_base::shared::account_data_type_vanilla_tbc::AccountDataType;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// This is sent by the client after receiving [`SMSG_ACCOUNT_DATA_TIMES`](crate::vanilla::SMSG_ACCOUNT_DATA_TIMES). Client can also request a block through [`CMSG_REQUEST_ACCOUNT_DATA`](crate::vanilla::CMSG_REQUEST_ACCOUNT_DATA).

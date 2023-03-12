@@ -1,8 +1,6 @@
-use crate:: {
-};
+use std::io::{Read, Write};
 use crate::wrath::BattlefieldListLocation;
 use crate::wrath::BattlegroundType;
-use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/battleground/cmsg_battlefield_list.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/battleground/cmsg_battlefield_list.wowm#L18):

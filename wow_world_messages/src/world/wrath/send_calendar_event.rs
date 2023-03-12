@@ -1,8 +1,6 @@
-use crate:: {
-    DateTime,
-    Guid,
-};
 use std::io::{Read, Write};
+use crate::DateTime;
+use crate::Guid;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_send_calendar.wowm:12`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_send_calendar.wowm#L12):

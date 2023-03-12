@@ -1,9 +1,7 @@
-use crate:: {
-    Message,
-};
-use crate::wrath::Vector3d;
-use crate::wrath::Map;
+use crate::Message;
 use std::io::{Read, Write};
+use crate::wrath::Map;
+use crate::wrath::Vector3d;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm#L21):

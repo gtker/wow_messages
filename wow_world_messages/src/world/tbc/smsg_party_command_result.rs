@@ -1,8 +1,6 @@
-use crate:: {
-};
+use std::io::{Read, Write};
 use crate::tbc::PartyOperation;
 use crate::tbc::PartyResult;
-use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_party_command_result.wowm:49`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_party_command_result.wowm#L49):

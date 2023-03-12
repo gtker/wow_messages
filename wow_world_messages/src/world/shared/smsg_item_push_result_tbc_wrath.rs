@@ -1,10 +1,8 @@
-use crate:: {
-    Guid,
-};
+use std::io::{Read, Write};
+use crate::Guid;
 use wow_world_base::shared::new_item_chat_alert_vanilla_tbc_wrath::NewItemChatAlert;
 use wow_world_base::shared::new_item_creation_type_vanilla_tbc_wrath::NewItemCreationType;
 use wow_world_base::shared::new_item_source_vanilla_tbc_wrath::NewItemSource;
-use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/smsg_item_push_result.wowm:72`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/smsg_item_push_result.wowm#L72):

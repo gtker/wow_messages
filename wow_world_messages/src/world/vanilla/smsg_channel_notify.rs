@@ -1,7 +1,5 @@
-use crate:: {
-};
-use crate::vanilla::ChatNotify;
 use std::io::{Read, Write};
+use crate::vanilla::ChatNotify;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_channel_notify.wowm:100`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_channel_notify.wowm#L100):

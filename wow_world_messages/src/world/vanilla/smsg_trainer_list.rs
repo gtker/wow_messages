@@ -1,8 +1,6 @@
-use crate:: {
-    Guid,
-};
-use crate::vanilla::TrainerSpell;
 use std::io::{Read, Write};
+use crate::Guid;
+use crate::vanilla::TrainerSpell;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_trainer_list.wowm:31`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_trainer_list.wowm#L31):
