@@ -1,7 +1,10 @@
 use std::io::{Read, Write};
-use crate::vanilla::SimpleEnum;
-use crate::vanilla::SimpleFlag;
-use crate::vanilla::StructWithAllBuiltInTypes;
+
+use crate::vanilla::{
+    SimpleEnum,
+    SimpleFlag,
+    StructWithAllBuiltInTypes,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/tests/impl_levels.wowm:61`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/tests/impl_levels.wowm#L61):

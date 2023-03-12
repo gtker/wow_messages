@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use wow_world_base::shared::title_earn_status_tbc_wrath::TitleEarnStatus;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

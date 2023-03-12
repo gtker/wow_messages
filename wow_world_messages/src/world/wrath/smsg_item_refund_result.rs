@@ -1,7 +1,10 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::wrath::ItemRefundExtra;
-use crate::wrath::ItemRefundResult;
+use crate::wrath::{
+    ItemRefundExtra,
+    ItemRefundResult,
+};
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

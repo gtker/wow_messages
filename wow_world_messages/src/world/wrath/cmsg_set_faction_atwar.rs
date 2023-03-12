@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
-use crate::wrath::Faction;
-use crate::wrath::FactionFlag;
+
+use crate::wrath::{
+    Faction,
+    FactionFlag,
+};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/cmsg_set_faction_atwar.wowm:65`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/cmsg_set_faction_atwar.wowm#L65):

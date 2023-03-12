@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
 use wow_world_base::shared::quest_party_message_vanilla_tbc::QuestPartyMessage;
 

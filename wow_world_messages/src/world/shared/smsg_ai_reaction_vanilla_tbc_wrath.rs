@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
 use wow_world_base::shared::ai_reaction_vanilla_tbc_wrath::AiReaction;
 

@@ -1,8 +1,11 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::vanilla::Area;
-use crate::vanilla::Class;
-use crate::vanilla::FriendStatus;
+use crate::vanilla::{
+    Area,
+    Class,
+    FriendStatus,
+};
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

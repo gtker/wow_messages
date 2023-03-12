@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
-use crate::tbc::GuildMember;
-use crate::tbc::GuildRights;
+
+use crate::tbc::{
+    GuildMember,
+    GuildRights,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm:84`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm#L84):

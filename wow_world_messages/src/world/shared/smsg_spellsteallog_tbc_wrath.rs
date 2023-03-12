@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
 use crate::shared::spell_steal_tbc_wrath::SpellSteal;
 

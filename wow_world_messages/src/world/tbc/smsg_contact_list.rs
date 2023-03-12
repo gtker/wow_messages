@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
-use crate::tbc::Relation;
-use crate::tbc::RelationType;
+
+use crate::tbc::{
+    Relation,
+    RelationType,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_contact_list.wowm:38`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_contact_list.wowm#L38):

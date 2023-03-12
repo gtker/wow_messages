@@ -1,7 +1,10 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::wrath::QuestDetailsEmote;
-use crate::wrath::QuestGiverReward;
+use crate::wrath::{
+    QuestDetailsEmote,
+    QuestGiverReward,
+};
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

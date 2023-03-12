@@ -1,5 +1,6 @@
 use crate::Message;
 use std::io::{Read, Write};
+
 use crate::vanilla::CompressedMove;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

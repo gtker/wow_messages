@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
-use crate::wrath::AuraType;
-use crate::wrath::SpellSchool;
+
+use crate::wrath::{
+    AuraType,
+    SpellSchool,
+};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm:1059`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm#L1059):

@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use wow_world_base::shared::logout_result_vanilla_tbc_wrath::LogoutResult;
 use wow_world_base::shared::logout_speed_vanilla_tbc_wrath::LogoutSpeed;
 

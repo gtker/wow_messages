@@ -1,8 +1,11 @@
 use std::io::{Read, Write};
+
 use crate::logon::all::Version;
-use crate::logon::version_2::Population;
-use crate::logon::version_2::RealmCategory;
-use crate::logon::version_2::RealmType;
+use crate::logon::version_2::{
+    Population,
+    RealmCategory,
+    RealmType,
+};
 use crate::logon::version_8::RealmFlag;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

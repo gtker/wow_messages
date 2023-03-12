@@ -1,7 +1,10 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::tbc::QuestCompletable;
-use crate::tbc::QuestItemRequirement;
+use crate::tbc::{
+    QuestCompletable,
+    QuestItemRequirement,
+};
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

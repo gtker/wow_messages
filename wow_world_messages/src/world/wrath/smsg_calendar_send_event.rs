@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
-use crate::DateTime;
-use crate::Guid;
+
+use crate::{
+    DateTime,
+    Guid,
+};
 use crate::wrath::CalendarSendInvitee;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

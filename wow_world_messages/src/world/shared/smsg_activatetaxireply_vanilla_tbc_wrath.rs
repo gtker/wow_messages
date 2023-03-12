@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use wow_world_base::shared::activate_taxi_reply_vanilla_tbc_wrath::ActivateTaxiReply;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

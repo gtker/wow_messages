@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use wow_world_base::shared::duel_winner_reason_vanilla_tbc_wrath::DuelWinnerReason;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

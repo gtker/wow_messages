@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::tbc::CommentatorEnableOption;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

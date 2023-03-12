@@ -1,5 +1,6 @@
 use crate::Message;
 use std::io::{Read, Write};
+
 use wow_world_base::shared::account_data_type_vanilla_tbc::AccountDataType;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

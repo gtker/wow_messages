@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::shared::trade_slot_tbc_wrath::TradeSlot;
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 

@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::wrath::ItemClass;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

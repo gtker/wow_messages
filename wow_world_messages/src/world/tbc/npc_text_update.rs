@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
-use crate::tbc::Language;
-use crate::tbc::NpcTextUpdateEmote;
+
+use crate::tbc::{
+    Language,
+    NpcTextUpdateEmote,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gossip/smsg_npc_text_update.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gossip/smsg_npc_text_update.wowm#L1):

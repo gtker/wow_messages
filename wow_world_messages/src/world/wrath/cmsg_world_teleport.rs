@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
-use crate::wrath::Map;
-use crate::wrath::Vector3d;
+
+use crate::wrath::{
+    Map,
+    Vector3d,
+};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Sent when using the `worldport` console command.

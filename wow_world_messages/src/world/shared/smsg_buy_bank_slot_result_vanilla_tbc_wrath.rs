@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use wow_world_base::shared::buy_bank_slot_result_vanilla_tbc_wrath::BuyBankSlotResult;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

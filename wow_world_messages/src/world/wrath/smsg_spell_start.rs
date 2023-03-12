@@ -1,8 +1,11 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::wrath::CastFlags;
-use crate::wrath::Power;
-use crate::wrath::SpellCastTargets;
+use crate::wrath::{
+    CastFlags,
+    Power,
+    SpellCastTargets,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spell_start.wowm:36`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spell_start.wowm#L36):

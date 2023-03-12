@@ -1,7 +1,10 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::vanilla::AllowedClass;
-use crate::vanilla::AllowedRace;
+use crate::vanilla::{
+    AllowedClass,
+    AllowedRace,
+};
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

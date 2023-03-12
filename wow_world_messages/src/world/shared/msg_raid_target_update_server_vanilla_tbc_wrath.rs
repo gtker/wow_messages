@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::shared::raid_target_update_vanilla_tbc_wrath::RaidTargetUpdate;
 use wow_world_base::shared::raid_target_update_type_vanilla_tbc_wrath::RaidTargetUpdateType;
 

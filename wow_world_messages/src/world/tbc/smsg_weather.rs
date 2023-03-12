@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
-use crate::tbc::WeatherChangeType;
-use crate::tbc::WeatherType;
+
+use crate::tbc::{
+    WeatherChangeType,
+    WeatherType,
+};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/smsg_weather.wowm:44`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/smsg_weather.wowm#L44):

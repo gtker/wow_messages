@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::shared::received_mail_tbc_wrath::ReceivedMail;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

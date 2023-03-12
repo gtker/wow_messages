@@ -1,25 +1,28 @@
 use std::io::{Read, Write};
-use crate::wrath::AllowedClass;
-use crate::wrath::AllowedRace;
-use crate::wrath::Area;
-use crate::wrath::BagFamily;
-use crate::wrath::Bonding;
-use crate::wrath::Faction;
-use crate::wrath::InventoryType;
-use crate::wrath::ItemClassAndSubClass;
-use crate::wrath::ItemDamageType;
-use crate::wrath::ItemFlag;
-use crate::wrath::ItemFlag2;
-use crate::wrath::ItemQuality;
-use crate::wrath::ItemSet;
-use crate::wrath::ItemSocket;
-use crate::wrath::ItemSpells;
-use crate::wrath::ItemStat;
-use crate::wrath::Language;
-use crate::wrath::Map;
-use crate::wrath::PageTextMaterial;
-use crate::wrath::SheatheType;
-use crate::wrath::Skill;
+
+use crate::wrath::{
+    AllowedClass,
+    AllowedRace,
+    Area,
+    BagFamily,
+    Bonding,
+    Faction,
+    InventoryType,
+    ItemClassAndSubClass,
+    ItemDamageType,
+    ItemFlag,
+    ItemFlag2,
+    ItemQuality,
+    ItemSet,
+    ItemSocket,
+    ItemSpells,
+    ItemStat,
+    Language,
+    Map,
+    PageTextMaterial,
+    SheatheType,
+    Skill,
+};
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 

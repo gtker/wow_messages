@@ -1,9 +1,12 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::vanilla::MovementBlock;
-use crate::vanilla::ObjectType;
-use crate::vanilla::UpdateMask;
-use crate::vanilla::UpdateType;
+use crate::vanilla::{
+    MovementBlock,
+    ObjectType,
+    UpdateMask,
+    UpdateType,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm:166`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm#L166):

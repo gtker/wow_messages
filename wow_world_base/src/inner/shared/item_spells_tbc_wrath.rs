@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::shared::spell_trigger_type_tbc_wrath::SpellTriggerType;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

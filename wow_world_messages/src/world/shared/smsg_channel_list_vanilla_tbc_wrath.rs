@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::shared::channel_member_vanilla_tbc_wrath::ChannelMember;
 use wow_world_base::shared::channel_flags_vanilla_tbc_wrath::ChannelFlags;
 

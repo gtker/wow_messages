@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
 use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
 

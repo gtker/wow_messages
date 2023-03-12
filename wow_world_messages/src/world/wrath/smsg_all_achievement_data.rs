@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
-use crate::wrath::AchievementDoneArray;
-use crate::wrath::AchievementInProgressArray;
+
+use crate::wrath::{
+    AchievementDoneArray,
+    AchievementInProgressArray,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/achievement/smsg_respond_inspect_achievements.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/achievement/smsg_respond_inspect_achievements.wowm#L9):

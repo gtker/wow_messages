@@ -1,8 +1,11 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::tbc::Area;
-use crate::tbc::LfgMode;
-use crate::tbc::LfgPlayerMember;
+use crate::tbc::{
+    Area,
+    LfgMode,
+    LfgPlayerMember,
+};
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

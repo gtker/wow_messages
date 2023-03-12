@@ -1,8 +1,11 @@
 use std::io::{Read, Write};
-use crate::wrath::ExtraMovementFlags;
-use crate::wrath::MovementFlags;
-use crate::wrath::TransportInfo;
-use crate::wrath::Vector3d;
+
+use crate::wrath::{
+    ExtraMovementFlags,
+    MovementFlags,
+    TransportInfo,
+    Vector3d,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement_3_3_5.wowm:97`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement_3_3_5.wowm#L97):

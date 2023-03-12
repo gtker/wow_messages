@@ -1,9 +1,12 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
 use crate::shared::monster_move_spline_vanilla_tbc_wrath::MonsterMoveSplines;
-use crate::wrath::MonsterMoveType;
-use crate::wrath::SplineFlag;
-use crate::wrath::Vector3d;
+use crate::wrath::{
+    MonsterMoveType,
+    SplineFlag,
+    Vector3d,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm:31`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_monster_move.wowm#L31):

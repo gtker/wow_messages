@@ -1,13 +1,16 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::tbc::Area;
-use crate::tbc::CharacterGear;
-use crate::tbc::Class;
-use crate::tbc::CreatureFamily;
-use crate::tbc::Gender;
-use crate::tbc::Map;
-use crate::tbc::Race;
-use crate::tbc::Vector3d;
+use crate::tbc::{
+    Area,
+    CharacterGear,
+    Class,
+    CreatureFamily,
+    Gender,
+    Map,
+    Race,
+    Vector3d,
+};
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

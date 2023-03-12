@@ -1,5 +1,6 @@
 use crate::ServerMessage;
 use std::io::{Read, Write};
+
 use crate::logon::version_2::LoginResult;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

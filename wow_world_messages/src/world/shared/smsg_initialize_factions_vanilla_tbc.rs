@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::shared::faction_initializer_vanilla_tbc::FactionInitializer;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -1,7 +1,10 @@
 use std::io::{Read, Write};
-use crate::wrath::Area;
-use crate::wrath::Skill;
-use crate::wrath::SpellCastResult;
+
+use crate::wrath::{
+    Area,
+    Skill,
+    SpellCastResult,
+};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_cast_failed.wowm:26`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_cast_failed.wowm#L26):

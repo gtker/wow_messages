@@ -1,8 +1,11 @@
 use std::io::{Read, Write};
-use crate::vanilla::Faction;
-use crate::vanilla::QuestItemReward;
-use crate::vanilla::QuestObjective;
-use crate::vanilla::Vector2d;
+
+use crate::vanilla::{
+    Faction,
+    QuestItemReward,
+    QuestObjective,
+    Vector2d,
+};
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 

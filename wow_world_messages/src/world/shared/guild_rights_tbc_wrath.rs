@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::shared::guild_bank_rights_tbc_wrath::GuildBankRights;
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 

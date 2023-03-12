@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::wrath::NpcTextUpdate;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

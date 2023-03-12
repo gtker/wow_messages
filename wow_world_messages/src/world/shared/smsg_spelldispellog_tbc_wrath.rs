@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
 use crate::shared::dispelled_spell_tbc_wrath::DispelledSpell;
 

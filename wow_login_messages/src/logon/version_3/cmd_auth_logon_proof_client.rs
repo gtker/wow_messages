@@ -1,5 +1,6 @@
 use crate::ClientMessage;
 use std::io::{Read, Write};
+
 use crate::logon::version_2::TelemetryKey;
 use crate::logon::version_3::SecurityFlag;
 

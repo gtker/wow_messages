@@ -1,8 +1,11 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::tbc::ChatType;
-use crate::tbc::Language;
-use crate::tbc::PlayerChatTag;
+use crate::tbc::{
+    ChatType,
+    Language,
+    PlayerChatTag,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_messagechat.wowm:86`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_messagechat.wowm#L86):

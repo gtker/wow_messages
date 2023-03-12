@@ -1,9 +1,12 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::wrath::ClientCastFlags;
-use crate::wrath::ClientMovementData;
-use crate::wrath::MovementInfo;
-use crate::wrath::SpellCastTargets;
+use crate::wrath::{
+    ClientCastFlags,
+    ClientMovementData,
+    MovementInfo,
+    SpellCastTargets,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/item/cmsg_use_item.wowm:37`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/item/cmsg_use_item.wowm#L37):

@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::tbc::Skill;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

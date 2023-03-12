@@ -1,8 +1,11 @@
 use std::io::{Read, Write};
-use crate::tbc::Area;
-use crate::tbc::Class;
-use crate::tbc::Gender;
-use crate::tbc::Race;
+
+use crate::tbc::{
+    Area,
+    Class,
+    Gender,
+    Race,
+};
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

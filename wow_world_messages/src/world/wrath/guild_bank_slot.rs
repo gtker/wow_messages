@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::wrath::GuildBankSocket;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

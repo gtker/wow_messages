@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::tbc::NpcTextUpdate;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

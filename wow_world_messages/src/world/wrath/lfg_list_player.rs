@@ -1,9 +1,12 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::wrath::Area;
-use crate::wrath::Class;
-use crate::wrath::LfgUpdateFlag;
-use crate::wrath::Race;
+use crate::wrath::{
+    Area,
+    Class,
+    LfgUpdateFlag,
+    Race,
+};
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

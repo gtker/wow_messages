@@ -1,7 +1,10 @@
 use std::io::{Read, Write};
-use crate::vanilla::Area;
-use crate::vanilla::Map;
-use crate::vanilla::WorldState;
+
+use crate::vanilla::{
+    Area,
+    Map,
+    WorldState,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/world/smsg_init_world_states.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/world/smsg_init_world_states.wowm#L1):

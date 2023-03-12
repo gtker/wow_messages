@@ -1,10 +1,13 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::vanilla::Area;
-use crate::vanilla::AuraMask;
-use crate::vanilla::GroupMemberOnlineStatus;
-use crate::vanilla::GroupUpdateFlags;
-use crate::vanilla::Power;
+use crate::vanilla::{
+    Area,
+    AuraMask,
+    GroupMemberOnlineStatus,
+    GroupUpdateFlags,
+    Power,
+};
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

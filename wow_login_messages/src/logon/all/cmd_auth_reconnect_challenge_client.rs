@@ -1,9 +1,12 @@
 use crate::ClientMessage;
 use std::io::{Read, Write};
-use crate::logon::all::Locale;
-use crate::logon::all::Os;
-use crate::logon::all::Platform;
-use crate::logon::all::Version;
+
+use crate::logon::all::{
+    Locale,
+    Os,
+    Platform,
+    Version,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// First message sent by the client when attempting to reconnect. The server will respond with [`CMD_AUTH_RECONNECT_CHALLENGE_Server`](crate::logon::version_2::CMD_AUTH_RECONNECT_CHALLENGE_Server).

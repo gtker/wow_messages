@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use wow_world_base::shared::vector2d_vanilla_tbc_wrath::Vector2d;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

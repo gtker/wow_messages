@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
-use crate::tbc::GuildCommand;
-use crate::tbc::GuildCommandResult;
+
+use crate::tbc::{
+    GuildCommand,
+    GuildCommandResult,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_command_result.wowm:114`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_command_result.wowm#L114):

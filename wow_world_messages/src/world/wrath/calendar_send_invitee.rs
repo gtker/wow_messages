@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
-use crate::DateTime;
-use crate::Guid;
+
+use crate::{
+    DateTime,
+    Guid,
+};
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
 use wow_world_base::shared::party_role_tbc_wrath::PartyRole;
 

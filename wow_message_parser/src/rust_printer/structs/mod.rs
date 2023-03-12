@@ -52,15 +52,33 @@ fn print_includes(s: &mut Writer, e: &Container) {
     }
 
     s.wln("use std::io::{Read, Write};");
+    s.newline();
 
     let (version, _) = e.tags().first_and_main_versions();
-    for (prefix, types) in e.get_imports(version) {
-        for ty in types {
-            s.wln(format!("use {prefix}::{ty};"));
+
+    let imports = e.get_imports(version);
+
+    for (prefix, types) in &imports {
+        if types.len() > 1 {
+            s.wln(format!("use {prefix}::{{"));
+            s.inc_indent();
+
+            for ty in types {
+                s.wln(format!("{ty},"));
+            }
+
+            s.dec_indent();
+            s.wln("};");
+        } else {
+            for ty in types {
+                s.wln(format!("use {prefix}::{ty};"));
+            }
         }
     }
 
-    s.newline();
+    if !imports.is_empty() {
+        s.newline();
+    }
 }
 
 fn print_declaration(s: &mut Writer, e: &Container, o: &Objects) {

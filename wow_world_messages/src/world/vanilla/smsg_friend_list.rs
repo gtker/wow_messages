@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::vanilla::Friend;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

@@ -1,5 +1,6 @@
 use crate::ServerMessage;
 use std::io::{Read, Write};
+
 use crate::logon::version_2::Realm;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

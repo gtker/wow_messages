@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
 use wow_world_base::shared::spell_cast_target_flags_vanilla_tbc::SpellCastTargetFlags;
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;

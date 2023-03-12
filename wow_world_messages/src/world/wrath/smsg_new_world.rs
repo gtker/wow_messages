@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
-use crate::wrath::Map;
-use crate::wrath::Vector3d;
+
+use crate::wrath::{
+    Map,
+    Vector3d,
+};
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_new_world.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_new_world.wowm#L1):

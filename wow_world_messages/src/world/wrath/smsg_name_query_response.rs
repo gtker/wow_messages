@@ -1,9 +1,12 @@
 use std::io::{Read, Write};
+
 use crate::Guid;
-use crate::wrath::Class;
-use crate::wrath::DeclinedNames;
-use crate::wrath::Gender;
-use crate::wrath::Race;
+use crate::wrath::{
+    Class,
+    DeclinedNames,
+    Gender,
+    Race,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Response to [`CMSG_NAME_QUERY`](crate::vanilla::CMSG_NAME_QUERY).
