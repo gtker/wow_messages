@@ -61,7 +61,7 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
                 }
 
             }
-            SMSG_ITEM_REFUND_RESULT_ItemRefundResult::Failure => {}
+            _ => {}
         }
 
         Ok(())

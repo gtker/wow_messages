@@ -92,7 +92,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
                 w.write_all(&target.guid().to_le_bytes())?;
 
             }
-            MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::RequestIcons => {}
+            _ => {}
         }
 
         Ok(())

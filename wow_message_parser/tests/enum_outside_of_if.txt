@@ -31,14 +31,7 @@ impl EnumOutsideOfIf {
         w.write_all(&u8::from(self.n.as_int()).to_le_bytes())?;
 
         match &self.t {
-            EnumOutsideOfIf_TEnum::Zero => {}
-            EnumOutsideOfIf_TEnum::One => {}
-            EnumOutsideOfIf_TEnum::Two => {}
-            EnumOutsideOfIf_TEnum::Three => {}
-            EnumOutsideOfIf_TEnum::Four => {}
-            EnumOutsideOfIf_TEnum::Five => {}
-            EnumOutsideOfIf_TEnum::Six => {}
-            EnumOutsideOfIf_TEnum::Rest => {}
+            _ => {}
         }
 
         Ok(())

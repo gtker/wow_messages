@@ -40,7 +40,6 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
         w.write_all(&u32::from(self.result.as_int()).to_le_bytes())?;
 
         match &self.result {
-            SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::Ok => {}
             SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrInventory {
                 inventory_result,
             } => {
@@ -48,13 +47,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
                 w.write_all(&u8::from(inventory_result.as_int()).to_le_bytes())?;
 
             }
-            SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrDatabase => {}
-            SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrNotEnoughMoney => {}
-            SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrItemNotFound => {}
-            SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrHigherBid => {}
-            SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrBidIncrement => {}
-            SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrBidOwn => {}
-            SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrRestrictedAccount => {}
+            _ => {}
         }
 
         Ok(())

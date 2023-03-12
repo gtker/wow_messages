@@ -59,7 +59,6 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
         w.write_all(&u8::from(self.time.as_int()).to_le_bytes())?;
 
         match &self.time {
-            SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::NotPresent => {}
             SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::Present {
                 status_time,
             } => {
@@ -67,6 +66,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
                 w.write_all(&status_time.as_int().to_le_bytes())?;
 
             }
+            _ => {}
         }
 
         // is_sign_up: Bool

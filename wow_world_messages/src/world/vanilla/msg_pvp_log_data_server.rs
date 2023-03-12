@@ -33,7 +33,6 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
         w.write_all(&u8::from(self.status.as_int()).to_le_bytes())?;
 
         match &self.status {
-            MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::NotEnded => {}
             MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::Ended {
                 winner,
             } => {
@@ -41,6 +40,7 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
                 w.write_all(&u8::from(winner.as_int()).to_le_bytes())?;
 
             }
+            _ => {}
         }
 
         // amount_of_players: u32

@@ -28,17 +28,6 @@ impl SpellMiss {
         w.write_all(&u32::from(self.miss_info.as_int()).to_le_bytes())?;
 
         match &self.miss_info {
-            SpellMiss_SpellMissInfo::None => {}
-            SpellMiss_SpellMissInfo::Miss => {}
-            SpellMiss_SpellMissInfo::Resist => {}
-            SpellMiss_SpellMissInfo::Dodge => {}
-            SpellMiss_SpellMissInfo::Parry => {}
-            SpellMiss_SpellMissInfo::Block => {}
-            SpellMiss_SpellMissInfo::Evade => {}
-            SpellMiss_SpellMissInfo::Immune => {}
-            SpellMiss_SpellMissInfo::Immune2 => {}
-            SpellMiss_SpellMissInfo::Deflect => {}
-            SpellMiss_SpellMissInfo::Absorb => {}
             SpellMiss_SpellMissInfo::Reflect {
                 reflect_result,
             } => {
@@ -46,6 +35,7 @@ impl SpellMiss {
                 w.write_all(&reflect_result.to_le_bytes())?;
 
             }
+            _ => {}
         }
 
         Ok(())

@@ -106,7 +106,7 @@ impl Mail {
                 w.write_all(&sender_id.to_le_bytes())?;
 
             }
-            Mail_MailType::Item => {}
+            _ => {}
         }
 
         // subject: CString

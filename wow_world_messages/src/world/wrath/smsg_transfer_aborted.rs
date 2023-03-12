@@ -37,12 +37,6 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
         w.write_all(&u8::from(self.reason.as_int()).to_le_bytes())?;
 
         match &self.reason {
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::None => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::ErrorX => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::MaxPlayers => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::NotFound => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::TooManyInstances => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::ZoneInCombat => {}
             SMSG_TRANSFER_ABORTED_TransferAbortReason::InsufficientExpansionLevel {
                 difficulty,
             } => {
@@ -64,13 +58,7 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
                 w.write_all(&u8::from(difficulty.as_int()).to_le_bytes())?;
 
             }
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::TooManyRealmInstances => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::NeedGroup => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::NotFound1 => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::NotFound2 => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::NotFound3 => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::RealmOnly => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::MapNotAllowed => {}
+            _ => {}
         }
 
         Ok(())

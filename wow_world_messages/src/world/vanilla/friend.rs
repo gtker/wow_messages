@@ -33,7 +33,6 @@ impl Friend {
         w.write_all(&u8::from(self.status.as_int()).to_le_bytes())?;
 
         match &self.status {
-            Friend_FriendStatus::Offline => {}
             Friend_FriendStatus::Online {
                 area,
                 class,
@@ -94,6 +93,7 @@ impl Friend {
                 w.write_all(&u32::from(class.as_int()).to_le_bytes())?;
 
             }
+            _ => {}
         }
 
         Ok(())

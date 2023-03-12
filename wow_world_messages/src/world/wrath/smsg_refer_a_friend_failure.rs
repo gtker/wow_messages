@@ -28,15 +28,6 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
         w.write_all(&u32::from(self.error.as_int()).to_le_bytes())?;
 
         match &self.error {
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::None => {}
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotReferredBy => {}
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::TargetTooHigh => {}
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::InsufficientGrantableLevels => {}
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::TooFar => {}
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::DifferentFaction => {}
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotNow => {}
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::GrantLevelMax => {}
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NoTarget => {}
             SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotInGroup {
                 target_name,
             } => {
@@ -48,10 +39,7 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
                 w.write_all(&[0])?;
 
             }
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::SummonLevelMax => {}
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::SummonCooldown => {}
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::InsufficientExpansionLevel => {}
-            SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::SummonOffline => {}
+            _ => {}
         }
 
         Ok(())

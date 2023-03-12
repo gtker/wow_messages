@@ -37,18 +37,6 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
         w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
 
         match &self.result {
-            SMSG_AUTH_RESPONSE_WorldResult::ResponseSuccess => {}
-            SMSG_AUTH_RESPONSE_WorldResult::ResponseFailure => {}
-            SMSG_AUTH_RESPONSE_WorldResult::ResponseCancelled => {}
-            SMSG_AUTH_RESPONSE_WorldResult::ResponseDisconnected => {}
-            SMSG_AUTH_RESPONSE_WorldResult::ResponseFailedToConnect => {}
-            SMSG_AUTH_RESPONSE_WorldResult::ResponseConnected => {}
-            SMSG_AUTH_RESPONSE_WorldResult::ResponseVersionMismatch => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CstatusConnecting => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CstatusNegotiatingSecurity => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CstatusNegotiationComplete => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CstatusNegotiationFailed => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CstatusAuthenticating => {}
             SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
                 billing_flags,
                 billing_rested,
@@ -64,20 +52,6 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
                 w.write_all(&billing_rested.to_le_bytes())?;
 
             }
-            SMSG_AUTH_RESPONSE_WorldResult::AuthFailed => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthReject => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthBadServerProof => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthUnavailable => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthSystemError => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthBillingError => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthBillingExpired => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthVersionMismatch => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthUnknownAccount => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthIncorrectPassword => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthSessionExpired => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthServerShuttingDown => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthAlreadyLoggingIn => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthLoginServerNotFound => {}
             SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
                 queue_position,
             } => {
@@ -85,60 +59,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
                 w.write_all(&queue_position.to_le_bytes())?;
 
             }
-            SMSG_AUTH_RESPONSE_WorldResult::AuthBanned => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthAlreadyOnline => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthNoTime => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthDbBusy => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthSuspended => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AuthParentalControl => {}
-            SMSG_AUTH_RESPONSE_WorldResult::RealmListInProgress => {}
-            SMSG_AUTH_RESPONSE_WorldResult::RealmListSuccess => {}
-            SMSG_AUTH_RESPONSE_WorldResult::RealmListFailed => {}
-            SMSG_AUTH_RESPONSE_WorldResult::RealmListInvalid => {}
-            SMSG_AUTH_RESPONSE_WorldResult::RealmListRealmNotFound => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AccountCreateInProgress => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AccountCreateSuccess => {}
-            SMSG_AUTH_RESPONSE_WorldResult::AccountCreateFailed => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharListRetrieving => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharListRetrieved => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharListFailed => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateInProgress => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateSuccess => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateError => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateFailed => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateNameInUse => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateDisabled => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreatePvpTeamsViolation => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateServerLimit => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateAccountLimit => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateServerQueue => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharCreateOnlyExisting => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharDeleteInProgress => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharDeleteSuccess => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharDeleteFailed => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharDeleteFailedLockedForTransfer => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharLoginInProgress => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharLoginSuccess => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharLoginNoWorld => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharLoginDuplicateCharacter => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharLoginNoInstances => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharLoginFailed => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharLoginDisabled => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharLoginNoCharacter => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharLoginLockedForTransfer => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharNameNoName => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharNameTooShort => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharNameTooLong => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharNameOnlyLetters => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharNameMixedLanguages => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharNameProfane => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharNameReserved => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharNameInvalidApostrophe => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharNameMultipleApostrophes => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharNameThreeConsecutive => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharNameInvalidSpace => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharNameSuccess => {}
-            SMSG_AUTH_RESPONSE_WorldResult::CharNameFailure => {}
+            _ => {}
         }
 
         Ok(())

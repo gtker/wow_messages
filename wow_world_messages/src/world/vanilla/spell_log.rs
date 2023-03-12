@@ -112,7 +112,6 @@ impl SpellLog {
         w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes())?;
 
         match &self.effect {
-            SpellLog_SpellEffect::None => {}
             SpellLog_SpellEffect::Instakill {
                 target7,
             } => {
@@ -120,12 +119,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::SchoolDamage => {}
-            SpellLog_SpellEffect::Dummy => {}
-            SpellLog_SpellEffect::PortalTeleport => {}
-            SpellLog_SpellEffect::TeleportUnits => {}
-            SpellLog_SpellEffect::ApplyAura => {}
-            SpellLog_SpellEffect::EnvironmentalDamage => {}
             SpellLog_SpellEffect::PowerDrain {
                 amount,
                 multiplier,
@@ -145,7 +138,6 @@ impl SpellLog {
                 w.write_all(&multiplier.to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::HealthLeech => {}
             SpellLog_SpellEffect::Heal {
                 heal_amount,
                 heal_critical,
@@ -161,13 +153,6 @@ impl SpellLog {
                 w.write_all(&heal_critical.to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::Bind => {}
-            SpellLog_SpellEffect::Portal => {}
-            SpellLog_SpellEffect::RitualBase => {}
-            SpellLog_SpellEffect::RitualSpecialize => {}
-            SpellLog_SpellEffect::RitualActivatePortal => {}
-            SpellLog_SpellEffect::QuestComplete => {}
-            SpellLog_SpellEffect::WeaponDamageNoschool => {}
             SpellLog_SpellEffect::Resurrect {
                 target7,
             } => {
@@ -186,10 +171,6 @@ impl SpellLog {
                 w.write_all(&extra_attacks.to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::Dodge => {}
-            SpellLog_SpellEffect::Evade => {}
-            SpellLog_SpellEffect::Parry => {}
-            SpellLog_SpellEffect::Block => {}
             SpellLog_SpellEffect::CreateItem {
                 item,
             } => {
@@ -197,9 +178,6 @@ impl SpellLog {
                 w.write_all(&item.to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::Weapon => {}
-            SpellLog_SpellEffect::Defense => {}
-            SpellLog_SpellEffect::PersistentAreaAura => {}
             SpellLog_SpellEffect::Summon {
                 target7,
             } => {
@@ -207,7 +185,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::Leap => {}
             SpellLog_SpellEffect::Energize {
                 energize_amount,
                 energize_power,
@@ -223,8 +200,6 @@ impl SpellLog {
                 w.write_all(&energize_power.to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::WeaponPercentDamage => {}
-            SpellLog_SpellEffect::TriggerMissile => {}
             SpellLog_SpellEffect::OpenLock {
                 target7,
             } => {
@@ -232,10 +207,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::SummonChangeItem => {}
-            SpellLog_SpellEffect::ApplyAreaAuraParty => {}
-            SpellLog_SpellEffect::LearnSpell => {}
-            SpellLog_SpellEffect::SpellDefense => {}
             SpellLog_SpellEffect::Dispel {
                 target7,
             } => {
@@ -243,8 +214,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::Language => {}
-            SpellLog_SpellEffect::DualWield => {}
             SpellLog_SpellEffect::SummonWild {
                 target7,
             } => {
@@ -259,13 +228,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::TeleportUnitsFaceCaster => {}
-            SpellLog_SpellEffect::SkillStep => {}
-            SpellLog_SpellEffect::AddHonor => {}
-            SpellLog_SpellEffect::Spawn => {}
-            SpellLog_SpellEffect::TradeSkill => {}
-            SpellLog_SpellEffect::Stealth => {}
-            SpellLog_SpellEffect::Detect => {}
             SpellLog_SpellEffect::TransDoor {
                 target7,
             } => {
@@ -273,11 +235,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::ForceCriticalHit => {}
-            SpellLog_SpellEffect::GuaranteeHit => {}
-            SpellLog_SpellEffect::EnchantItem => {}
-            SpellLog_SpellEffect::EnchantItemTemporary => {}
-            SpellLog_SpellEffect::Tamecreature => {}
             SpellLog_SpellEffect::SummonPet {
                 target7,
             } => {
@@ -285,8 +242,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::LearnPetSpell => {}
-            SpellLog_SpellEffect::WeaponDamage => {}
             SpellLog_SpellEffect::OpenLockItem {
                 target7,
             } => {
@@ -294,9 +249,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::Proficiency => {}
-            SpellLog_SpellEffect::SendEvent => {}
-            SpellLog_SpellEffect::PowerBurn => {}
             SpellLog_SpellEffect::Threat {
                 target7,
             } => {
@@ -304,9 +256,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::TriggerSpell => {}
-            SpellLog_SpellEffect::HealthFunnel => {}
-            SpellLog_SpellEffect::PowerFunnel => {}
             SpellLog_SpellEffect::HealMaxHealth {
                 heal_amount,
                 heal_critical,
@@ -340,9 +289,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::Pull => {}
-            SpellLog_SpellEffect::Pickpocket => {}
-            SpellLog_SpellEffect::AddFarsight => {}
             SpellLog_SpellEffect::SummonPossessed {
                 target7,
             } => {
@@ -357,7 +303,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::HealMechanical => {}
             SpellLog_SpellEffect::SummonObjectWild {
                 target7,
             } => {
@@ -365,8 +310,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::ScriptEffect => {}
-            SpellLog_SpellEffect::Attack => {}
             SpellLog_SpellEffect::Sanctuary {
                 target7,
             } => {
@@ -374,13 +317,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::AddComboPoints => {}
-            SpellLog_SpellEffect::CreateHouse => {}
-            SpellLog_SpellEffect::BindSight => {}
-            SpellLog_SpellEffect::Duel => {}
-            SpellLog_SpellEffect::Stuck => {}
-            SpellLog_SpellEffect::SummonPlayer => {}
-            SpellLog_SpellEffect::ActivateObject => {}
             SpellLog_SpellEffect::SummonTotemSlot1 {
                 target7,
             } => {
@@ -416,11 +352,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::EnchantHeldItem => {}
-            SpellLog_SpellEffect::SummonPhantasm => {}
-            SpellLog_SpellEffect::SelfResurrect => {}
-            SpellLog_SpellEffect::Skinning => {}
-            SpellLog_SpellEffect::Charge => {}
             SpellLog_SpellEffect::SummonCritter {
                 target7,
             } => {
@@ -428,9 +359,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::KnockBack => {}
-            SpellLog_SpellEffect::Disenchant => {}
-            SpellLog_SpellEffect::Inebriate => {}
             SpellLog_SpellEffect::FeedPet {
                 feed_pet_item,
             } => {
@@ -445,7 +373,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::Reputation => {}
             SpellLog_SpellEffect::SummonObjectSlot1 {
                 target7,
             } => {
@@ -481,8 +408,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::SummonDeadPet => {}
-            SpellLog_SpellEffect::DestroyAllTotems => {}
             SpellLog_SpellEffect::DurabilityDamage {
                 item_to_damage,
                 target6,
@@ -519,7 +444,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::DurabilityDamagePct => {}
             SpellLog_SpellEffect::SkinPlayerCorpse {
                 target7,
             } => {
@@ -527,14 +451,6 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::SpiritHeal => {}
-            SpellLog_SpellEffect::Skill => {}
-            SpellLog_SpellEffect::ApplyAreaAuraPet => {}
-            SpellLog_SpellEffect::TeleportGraveyard => {}
-            SpellLog_SpellEffect::NormalizedWeaponDmg => {}
-            SpellLog_SpellEffect::Unknown122 => {}
-            SpellLog_SpellEffect::SendTaxi => {}
-            SpellLog_SpellEffect::PlayerPull => {}
             SpellLog_SpellEffect::ModifyThreatPercent {
                 target7,
             } => {
@@ -549,7 +465,7 @@ impl SpellLog {
                 w.write_all(&target7.guid().to_le_bytes())?;
 
             }
-            SpellLog_SpellEffect::Unknown127 => {}
+            _ => {}
         }
 
         Ok(())

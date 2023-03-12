@@ -53,7 +53,6 @@ impl MonsterMove {
                 splines,
             } => {
             }
-            MonsterMove_MonsterMoveType::Stop => {}
             MonsterMove_MonsterMoveType::FacingSpot {
                 duration,
                 position,
@@ -84,6 +83,7 @@ impl MonsterMove {
                 w.write_all(&angle.to_le_bytes())?;
 
             }
+            _ => {}
         }
 
         match &self.move_type {
@@ -102,7 +102,6 @@ impl MonsterMove {
                 splines.write_into_vec(&mut w)?;
 
             }
-            MonsterMove_MonsterMoveType::Stop => {}
             MonsterMove_MonsterMoveType::FacingSpot {
                 duration,
                 position,
@@ -151,6 +150,7 @@ impl MonsterMove {
                 splines.write_into_vec(&mut w)?;
 
             }
+            _ => {}
         }
 
         Ok(())

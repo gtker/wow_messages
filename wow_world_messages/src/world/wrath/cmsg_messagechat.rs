@@ -40,13 +40,6 @@ impl crate::Message for CMSG_MESSAGECHAT {
         w.write_all(&u32::from(self.language.as_int()).to_le_bytes())?;
 
         match &self.chat_type {
-            CMSG_MESSAGECHAT_ChatType::System => {}
-            CMSG_MESSAGECHAT_ChatType::Say => {}
-            CMSG_MESSAGECHAT_ChatType::Party => {}
-            CMSG_MESSAGECHAT_ChatType::Raid => {}
-            CMSG_MESSAGECHAT_ChatType::Guild => {}
-            CMSG_MESSAGECHAT_ChatType::Officer => {}
-            CMSG_MESSAGECHAT_ChatType::Yell => {}
             CMSG_MESSAGECHAT_ChatType::Whisper {
                 target_player,
             } => {
@@ -58,15 +51,6 @@ impl crate::Message for CMSG_MESSAGECHAT {
                 w.write_all(&[0])?;
 
             }
-            CMSG_MESSAGECHAT_ChatType::WhisperForeign => {}
-            CMSG_MESSAGECHAT_ChatType::WhisperInform => {}
-            CMSG_MESSAGECHAT_ChatType::Emote => {}
-            CMSG_MESSAGECHAT_ChatType::TextEmote => {}
-            CMSG_MESSAGECHAT_ChatType::MonsterSay => {}
-            CMSG_MESSAGECHAT_ChatType::MonsterParty => {}
-            CMSG_MESSAGECHAT_ChatType::MonsterYell => {}
-            CMSG_MESSAGECHAT_ChatType::MonsterWhisper => {}
-            CMSG_MESSAGECHAT_ChatType::MonsterEmote => {}
             CMSG_MESSAGECHAT_ChatType::Channel {
                 channel,
             } => {
@@ -78,40 +62,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
                 w.write_all(&[0])?;
 
             }
-            CMSG_MESSAGECHAT_ChatType::ChannelJoin => {}
-            CMSG_MESSAGECHAT_ChatType::ChannelLeave => {}
-            CMSG_MESSAGECHAT_ChatType::ChannelList => {}
-            CMSG_MESSAGECHAT_ChatType::ChannelNotice => {}
-            CMSG_MESSAGECHAT_ChatType::ChannelNoticeUser => {}
-            CMSG_MESSAGECHAT_ChatType::Afk => {}
-            CMSG_MESSAGECHAT_ChatType::Dnd => {}
-            CMSG_MESSAGECHAT_ChatType::Ignored => {}
-            CMSG_MESSAGECHAT_ChatType::Skill => {}
-            CMSG_MESSAGECHAT_ChatType::Loot => {}
-            CMSG_MESSAGECHAT_ChatType::Money => {}
-            CMSG_MESSAGECHAT_ChatType::Opening => {}
-            CMSG_MESSAGECHAT_ChatType::Tradeskills => {}
-            CMSG_MESSAGECHAT_ChatType::PetInfo => {}
-            CMSG_MESSAGECHAT_ChatType::CombatMiscInfo => {}
-            CMSG_MESSAGECHAT_ChatType::CombatXpGain => {}
-            CMSG_MESSAGECHAT_ChatType::CombatHonorGain => {}
-            CMSG_MESSAGECHAT_ChatType::CombatFactionChange => {}
-            CMSG_MESSAGECHAT_ChatType::BgSystemNeutral => {}
-            CMSG_MESSAGECHAT_ChatType::BgSystemAlliance => {}
-            CMSG_MESSAGECHAT_ChatType::BgSystemHorde => {}
-            CMSG_MESSAGECHAT_ChatType::RaidLeader => {}
-            CMSG_MESSAGECHAT_ChatType::RaidWarning => {}
-            CMSG_MESSAGECHAT_ChatType::RaidBossEmote => {}
-            CMSG_MESSAGECHAT_ChatType::RaidBossWhisper => {}
-            CMSG_MESSAGECHAT_ChatType::Filtered => {}
-            CMSG_MESSAGECHAT_ChatType::Battleground => {}
-            CMSG_MESSAGECHAT_ChatType::BattlegroundLeader => {}
-            CMSG_MESSAGECHAT_ChatType::Restricted => {}
-            CMSG_MESSAGECHAT_ChatType::Battlenet => {}
-            CMSG_MESSAGECHAT_ChatType::Achievement => {}
-            CMSG_MESSAGECHAT_ChatType::GuildAchievement => {}
-            CMSG_MESSAGECHAT_ChatType::ArenaPoints => {}
-            CMSG_MESSAGECHAT_ChatType::PartyLeader => {}
+            _ => {}
         }
 
         // message: CString

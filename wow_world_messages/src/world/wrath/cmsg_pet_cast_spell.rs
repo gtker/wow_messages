@@ -58,7 +58,6 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
         self.targets.write_into_vec(&mut w)?;
 
         match &self.cast_flags {
-            CMSG_PET_CAST_SPELL_ClientCastFlags::None => {}
             CMSG_PET_CAST_SPELL_ClientCastFlags::Extra {
                 elevation,
                 movement_data,
@@ -74,7 +73,6 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
                 w.write_all(&u8::from(movement_data.as_int()).to_le_bytes())?;
 
                 match &movement_data {
-                    CMSG_PET_CAST_SPELL_ClientMovementData::NotPresent => {}
                     CMSG_PET_CAST_SPELL_ClientMovementData::Present {
                         info,
                         movement,
@@ -90,9 +88,11 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
                         info.write_into_vec(&mut w)?;
 
                     }
+                    _ => {}
                 }
 
             }
+            _ => {}
         }
 
         Ok(())

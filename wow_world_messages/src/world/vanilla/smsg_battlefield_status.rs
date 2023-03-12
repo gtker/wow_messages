@@ -50,7 +50,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
 
         match &self.map {
-            SMSG_BATTLEFIELD_STATUS_Map::EasternKingdoms => {}
             SMSG_BATTLEFIELD_STATUS_Map::Kalimdor {
                 bracket,
                 client_instance_id,
@@ -66,7 +65,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -96,7 +94,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -115,7 +113,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -145,7 +142,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -164,7 +161,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -194,7 +190,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -213,7 +209,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -243,7 +238,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -262,7 +257,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -292,7 +286,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -311,7 +305,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -341,7 +334,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -360,7 +353,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -390,7 +382,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -409,7 +401,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -439,7 +430,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -458,7 +449,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -488,7 +478,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -507,7 +497,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -537,7 +526,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -556,7 +545,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -586,7 +574,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -605,7 +593,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -635,7 +622,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -654,7 +641,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -684,7 +670,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -703,7 +689,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -733,7 +718,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -752,7 +737,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -782,7 +766,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -801,7 +785,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -831,7 +814,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -850,7 +833,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -880,7 +862,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -899,7 +881,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -929,7 +910,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -948,7 +929,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -978,7 +958,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -997,7 +977,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1027,7 +1006,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1046,7 +1025,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1076,7 +1054,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1095,7 +1073,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1125,7 +1102,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1144,7 +1121,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1174,7 +1150,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1193,7 +1169,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1223,7 +1198,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1242,7 +1217,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1272,7 +1246,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1291,7 +1265,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1321,7 +1294,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1340,7 +1313,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1370,7 +1342,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1389,7 +1361,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1419,7 +1390,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1438,7 +1409,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1468,7 +1438,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1487,7 +1457,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1517,7 +1486,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1536,7 +1505,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1566,7 +1534,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1585,7 +1553,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1615,7 +1582,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1634,7 +1601,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1664,7 +1630,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1683,7 +1649,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1713,7 +1678,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1732,7 +1697,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1762,7 +1726,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1781,7 +1745,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1811,7 +1774,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1830,7 +1793,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1860,7 +1822,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1879,7 +1841,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1909,7 +1870,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1928,7 +1889,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -1958,7 +1918,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -1977,7 +1937,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -2007,7 +1966,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -2026,7 +1985,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -2056,7 +2014,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -2075,7 +2033,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -2105,7 +2062,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
@@ -2124,7 +2081,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(status_id.as_int()).to_le_bytes())?;
 
                 match &status_id {
-                    SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
                     SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
                         time_in_queue_in_ms,
@@ -2154,10 +2110,11 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                         w.write_all(&time_to_bg_start_in_ms.to_le_bytes())?;
 
                     }
-                    SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+                    _ => {}
                 }
 
             }
+            _ => {}
         }
 
         Ok(())

@@ -48,7 +48,7 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
                 }
 
             }
-            SMSG_ACTION_BUTTONS_ActionBarBehavior::Clear => {}
+            _ => {}
         }
 
         Ok(())

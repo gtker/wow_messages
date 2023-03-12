@@ -45,7 +45,6 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
         w.write_all(&u8::from(self.included.as_int()).to_le_bytes())?;
 
         match &self.included {
-            SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::NotIncluded => {}
             SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::Included {
                 declined_names,
             } => {
@@ -56,6 +55,7 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
                 }
 
             }
+            _ => {}
         }
 
         Ok(())

@@ -30,7 +30,6 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
         w.write_all(&u8::from(self.looking_for_more.as_int()).to_le_bytes())?;
 
         match &self.looking_for_more {
-            SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::NotLookingForMore => {}
             SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::LookingForMore {
                 data,
             } => {
@@ -38,6 +37,7 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
                 data.write_into_vec(&mut w)?;
 
             }
+            _ => {}
         }
 
         Ok(())

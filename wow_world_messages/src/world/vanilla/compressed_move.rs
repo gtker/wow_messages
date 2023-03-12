@@ -66,9 +66,7 @@ impl CompressedMove {
                 w.write_all(&speed.to_le_bytes())?;
 
             }
-            CompressedMove_CompressedMoveOpcode::SmsgSplineMoveUnroot => {}
-            CompressedMove_CompressedMoveOpcode::SmsgSplineMoveSetRunMode => {}
-            CompressedMove_CompressedMoveOpcode::SmsgSplineMoveSetWalkMode => {}
+            _ => {}
         }
 
         Ok(())

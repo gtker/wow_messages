@@ -96,7 +96,6 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         w.write_all(&u8::from(self.status_id.as_int()).to_le_bytes())?;
 
         match &self.status_id {
-            SMSG_BATTLEFIELD_STATUS_StatusId::None => {}
             SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                 average_wait_time_in_ms,
                 time_in_queue_in_ms,
@@ -146,7 +145,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 w.write_all(&u8::from(faction.as_int()).to_le_bytes())?;
 
             }
-            SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave => {}
+            _ => {}
         }
 
         Ok(())

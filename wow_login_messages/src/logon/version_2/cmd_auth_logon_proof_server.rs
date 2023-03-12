@@ -42,21 +42,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 w.write_all(&hardware_survey_id.to_le_bytes())?;
 
             }
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0 => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1 => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey => {}
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol => {}
+            _ => {}
         }
 
         Ok(())

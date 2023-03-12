@@ -34,7 +34,6 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
         w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
 
         match &self.result {
-            MSG_CORPSE_QUERY_Server_CorpseQueryResult::NotFound => {}
             MSG_CORPSE_QUERY_Server_CorpseQueryResult::Found {
                 corpse_map,
                 map,
@@ -50,6 +49,7 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
                 w.write_all(&u32::from(corpse_map.as_int()).to_le_bytes())?;
 
             }
+            _ => {}
         }
 
         // unknown: u32

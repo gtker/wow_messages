@@ -22,7 +22,6 @@ impl SimpleIfEnumNot {
         w.write_all(&u8::from(self.enum.as_int()).to_le_bytes())?;
 
         match &self.enum {
-            SimpleIfEnumNot_SimpleEnum::Zero => {}
             SimpleIfEnumNot_SimpleEnum::One {
                 others,
             } => {
@@ -37,6 +36,7 @@ impl SimpleIfEnumNot {
                 w.write_all(&others.to_le_bytes())?;
 
             }
+            _ => {}
         }
 
         Ok(())

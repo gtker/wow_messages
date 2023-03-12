@@ -79,8 +79,6 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
         w.write_all(&u8::from(self.move_type.as_int()).to_le_bytes())?;
 
         match &self.move_type {
-            SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType::Normal => {}
-            SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType::Stop => {}
             SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType::FacingSpot {
                 position,
             } => {
@@ -102,6 +100,7 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
                 w.write_all(&angle.to_le_bytes())?;
 
             }
+            _ => {}
         }
 
         // spline_flags: SplineFlag

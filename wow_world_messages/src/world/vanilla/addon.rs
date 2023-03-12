@@ -38,7 +38,6 @@ impl Addon {
         w.write_all(&u8::from(self.info_block.as_int()).to_le_bytes())?;
 
         match &self.info_block {
-            Addon_InfoBlock::Unavailable => {}
             Addon_InfoBlock::Available {
                 key_version,
                 update_available_flag,
@@ -47,7 +46,6 @@ impl Addon {
                 w.write_all(&u8::from(key_version.as_int()).to_le_bytes())?;
 
                 match &key_version {
-                    Addon_KeyVersion::Zero => {}
                     Addon_KeyVersion::One {
                         public_key,
                     } => {
@@ -129,19 +127,20 @@ impl Addon {
                         }
 
                     }
+                    _ => {}
                 }
 
                 // update_available_flag: u32
                 w.write_all(&update_available_flag.to_le_bytes())?;
 
             }
+            _ => {}
         }
 
         // url_info: UrlInfo
         w.write_all(&u8::from(self.url_info.as_int()).to_le_bytes())?;
 
         match &self.url_info {
-            Addon_UrlInfo::Unavailable => {}
             Addon_UrlInfo::Available {
                 url,
             } => {
@@ -153,6 +152,7 @@ impl Addon {
                 w.write_all(&[0])?;
 
             }
+            _ => {}
         }
 
         Ok(())

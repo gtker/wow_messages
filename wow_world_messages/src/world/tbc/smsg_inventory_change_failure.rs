@@ -35,7 +35,6 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
         w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
 
         match &self.result {
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::Ok => {}
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
                 bag_type_subclass,
                 item1,
@@ -1237,10 +1236,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 w.write_all(&bag_type_subclass.to_le_bytes())?;
 
             }
+            _ => {}
         }
 
         match &self.result {
-            SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::Ok => {}
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
                 bag_type_subclass,
                 item1,
@@ -1725,6 +1724,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
                 item2,
             } => {
             }
+            _ => {}
         }
 
         Ok(())

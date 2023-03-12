@@ -64,8 +64,6 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         w.write_all(&[0])?;
 
         match &self.category {
-            CMSG_GMTICKET_CREATE_GmTicketType::NotSet => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::Stuck => {}
             CMSG_GMTICKET_CREATE_GmTicketType::BehaviorHarassment {
                 chat_data_line_count,
                 chat_data_size_uncompressed,
@@ -84,40 +82,7 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
                 }
 
             }
-            CMSG_GMTICKET_CREATE_GmTicketType::Guild => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::Item => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::Environmental => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::NonQuestCreep => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::QuestQuestNpc => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::Technical => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::AccountBilling => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::Character => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::ArenaHonorItemIssues => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::ArenaHonorPointsIssues => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::BottingCheatingHacking => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::BugReport => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::CompromisedAccountIssue => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::GameSuggestions => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::GameplayQuestion => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::GuildBankIssue => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::GuildMasterIssue => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::HarassmentScamReport => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::InappropriateNameGuildArenaCharacterPet => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::KnownIssueFix => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::LatencyLagReport => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::LootingIssueMistake => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::MailIssue => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::NonInGameRelatedInquiry => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::ParentalControlsCais => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::Pcnc => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::Pct => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::RestorationStatusFollowUp => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::ServerInstanceIssues => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::Spam => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::SuicideCase => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::SuspensionQuestions => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::TechnicalSoundGraphicsIssue => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::UiIssue => {}
+            _ => {}
         }
 
         Ok(())

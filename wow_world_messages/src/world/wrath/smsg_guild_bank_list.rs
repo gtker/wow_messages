@@ -52,7 +52,6 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
         w.write_all(&u8::from(self.tab_result.as_int()).to_le_bytes())?;
 
         match &self.tab_result {
-            SMSG_GUILD_BANK_LIST_GuildBankTabResult::NotPresent => {}
             SMSG_GUILD_BANK_LIST_GuildBankTabResult::Present {
                 tabs,
             } => {
@@ -65,13 +64,13 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
                 }
 
             }
+            _ => {}
         }
 
         // content_result: GuildBankContentResult
         w.write_all(&u8::from(self.content_result.as_int()).to_le_bytes())?;
 
         match &self.content_result {
-            SMSG_GUILD_BANK_LIST_GuildBankContentResult::NotPresent => {}
             SMSG_GUILD_BANK_LIST_GuildBankContentResult::Present {
                 slot_updates,
             } => {
@@ -84,6 +83,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
                 }
 
             }
+            _ => {}
         }
 
         Ok(())

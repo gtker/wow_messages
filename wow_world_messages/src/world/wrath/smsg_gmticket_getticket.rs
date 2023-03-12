@@ -37,7 +37,6 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
         w.write_all(&u32::from(self.status.as_int()).to_le_bytes())?;
 
         match &self.status {
-            SMSG_GMTICKET_GETTICKET_GmTicketStatus::DbError => {}
             SMSG_GMTICKET_GETTICKET_GmTicketStatus::HasText {
                 days_since_last_updated,
                 days_since_oldest_ticket_creation,
@@ -77,7 +76,7 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
                 w.write_all(u8::from(*read_by_gm).to_le_bytes().as_slice())?;
 
             }
-            SMSG_GMTICKET_GETTICKET_GmTicketStatus::Default => {}
+            _ => {}
         }
 
         Ok(())

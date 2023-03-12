@@ -77,7 +77,6 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         w.write_all(&u8::from(self.random.as_int()).to_le_bytes())?;
 
         match &self.random {
-            SMSG_BATTLEFIELD_LIST_RandomBg::NotRandom => {}
             SMSG_BATTLEFIELD_LIST_RandomBg::Random {
                 honor_lost,
                 reward_arena,
@@ -97,6 +96,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
                 w.write_all(&honor_lost.to_le_bytes())?;
 
             }
+            _ => {}
         }
 
         // number_of_battlegrounds: u32

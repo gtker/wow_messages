@@ -64,7 +64,6 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         w.write_all(&[0])?;
 
         match &self.category {
-            CMSG_GMTICKET_CREATE_GmTicketType::Stuck => {}
             CMSG_GMTICKET_CREATE_GmTicketType::BehaviorHarassment {
                 chat_data_line_count,
                 chat_data_size_uncompressed,
@@ -83,14 +82,7 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
                 }
 
             }
-            CMSG_GMTICKET_CREATE_GmTicketType::Guild => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::Item => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::Environmental => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::NonquestCreep => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::QuestQuestnpc => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::Technical => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::AccountBilling => {}
-            CMSG_GMTICKET_CREATE_GmTicketType::Character => {}
+            _ => {}
         }
 
         Ok(())

@@ -45,7 +45,7 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
                 w.write_all(&[0])?;
 
             }
-            SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery::NoText => {}
+            _ => {}
         }
 
         Ok(())

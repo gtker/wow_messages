@@ -37,7 +37,7 @@ impl DoubleVariantEnum {
                 w.write_all(&basic.to_le_bytes())?;
 
             }
-            DoubleVariantEnum_SimpleEnum::Two => {}
+            _ => {}
         }
 
         Ok(())

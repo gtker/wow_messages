@@ -40,7 +40,6 @@ impl crate::Message for SMSG_TRADE_STATUS {
         w.write_all(&u32::from(self.status.as_int()).to_le_bytes())?;
 
         match &self.status {
-            SMSG_TRADE_STATUS_TradeStatus::Busy => {}
             SMSG_TRADE_STATUS_TradeStatus::BeginTrade {
                 unknown1,
             } => {
@@ -48,16 +47,6 @@ impl crate::Message for SMSG_TRADE_STATUS {
                 w.write_all(&unknown1.guid().to_le_bytes())?;
 
             }
-            SMSG_TRADE_STATUS_TradeStatus::OpenWindow => {}
-            SMSG_TRADE_STATUS_TradeStatus::TradeCanceled => {}
-            SMSG_TRADE_STATUS_TradeStatus::TradeAccept => {}
-            SMSG_TRADE_STATUS_TradeStatus::Busy2 => {}
-            SMSG_TRADE_STATUS_TradeStatus::NoTarget => {}
-            SMSG_TRADE_STATUS_TradeStatus::BackToTrade => {}
-            SMSG_TRADE_STATUS_TradeStatus::TradeComplete => {}
-            SMSG_TRADE_STATUS_TradeStatus::TradeRejected => {}
-            SMSG_TRADE_STATUS_TradeStatus::TargetToFar => {}
-            SMSG_TRADE_STATUS_TradeStatus::WrongFaction => {}
             SMSG_TRADE_STATUS_TradeStatus::CloseWindow {
                 inventory_result,
                 item_limit_category_id,
@@ -73,15 +62,6 @@ impl crate::Message for SMSG_TRADE_STATUS {
                 w.write_all(&item_limit_category_id.to_le_bytes())?;
 
             }
-            SMSG_TRADE_STATUS_TradeStatus::Unknown13 => {}
-            SMSG_TRADE_STATUS_TradeStatus::IgnoreYou => {}
-            SMSG_TRADE_STATUS_TradeStatus::YouStunned => {}
-            SMSG_TRADE_STATUS_TradeStatus::TargetStunned => {}
-            SMSG_TRADE_STATUS_TradeStatus::YouDead => {}
-            SMSG_TRADE_STATUS_TradeStatus::TargetDead => {}
-            SMSG_TRADE_STATUS_TradeStatus::YouLogout => {}
-            SMSG_TRADE_STATUS_TradeStatus::TargetLogout => {}
-            SMSG_TRADE_STATUS_TradeStatus::TrialAccount => {}
             SMSG_TRADE_STATUS_TradeStatus::OnlyConjured {
                 slot,
             } => {
@@ -96,6 +76,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
                 w.write_all(&slot.to_le_bytes())?;
 
             }
+            _ => {}
         }
 
         Ok(())

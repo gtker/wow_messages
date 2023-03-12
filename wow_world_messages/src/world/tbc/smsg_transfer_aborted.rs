@@ -36,11 +36,6 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
         w.write_all(&u8::from(self.reason.as_int()).to_le_bytes())?;
 
         match &self.reason {
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::None => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::IsFull => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::NotFound => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::TooManyInstances => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::ZoneIsInCombat => {}
             SMSG_TRANSFER_ABORTED_TransferAbortReason::InsufficientExpansionLevel {
                 difficulty,
             } => {
@@ -55,11 +50,7 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
                 w.write_all(&u8::from(difficulty.as_int()).to_le_bytes())?;
 
             }
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::MissingDifficulty => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::ZoneInCombat => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::InstanceIsFull => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::NotAllowed => {}
-            SMSG_TRANSFER_ABORTED_TransferAbortReason::HasBind => {}
+            _ => {}
         }
 
         Ok(())

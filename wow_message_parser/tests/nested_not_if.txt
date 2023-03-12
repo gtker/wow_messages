@@ -28,7 +28,6 @@ impl NestedNotIf {
         w.write_all(&u8::from(self.t.as_int()).to_le_bytes())?;
 
         match &self.t {
-            NestedNotIf_TEnum::Zero => {}
             NestedNotIf_TEnum::One {
                 e,
                 not_zero,
@@ -47,7 +46,7 @@ impl NestedNotIf {
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIf_NestedEnum::NotNested => {}
+                    _ => {}
                 }
 
             }
@@ -69,7 +68,7 @@ impl NestedNotIf {
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIf_NestedEnum::NotNested => {}
+                    _ => {}
                 }
 
             }
@@ -91,7 +90,7 @@ impl NestedNotIf {
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIf_NestedEnum::NotNested => {}
+                    _ => {}
                 }
 
             }
@@ -113,7 +112,7 @@ impl NestedNotIf {
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIf_NestedEnum::NotNested => {}
+                    _ => {}
                 }
 
             }
@@ -135,7 +134,7 @@ impl NestedNotIf {
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIf_NestedEnum::NotNested => {}
+                    _ => {}
                 }
 
             }
@@ -157,7 +156,7 @@ impl NestedNotIf {
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIf_NestedEnum::NotNested => {}
+                    _ => {}
                 }
 
             }
@@ -179,10 +178,11 @@ impl NestedNotIf {
                         w.write_all(&one.to_le_bytes())?;
 
                     }
-                    NestedNotIf_NestedEnum::NotNested => {}
+                    _ => {}
                 }
 
             }
+            _ => {}
         }
 
         Ok(())

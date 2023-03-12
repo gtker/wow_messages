@@ -40,7 +40,6 @@ impl crate::Message for SMSG_LFG_UPDATE_PLAYER {
         w.write_all(&u8::from(self.join_status.as_int()).to_le_bytes())?;
 
         match &self.join_status {
-            SMSG_LFG_UPDATE_PLAYER_LfgJoinStatus::NotJoined => {}
             SMSG_LFG_UPDATE_PLAYER_LfgJoinStatus::Joined {
                 achievements,
                 comment,
@@ -73,6 +72,7 @@ impl crate::Message for SMSG_LFG_UPDATE_PLAYER {
                 w.write_all(&[0])?;
 
             }
+            _ => {}
         }
 
         Ok(())

@@ -368,13 +368,11 @@ fn print_write_if_enum_statement(
         .rust_object()
         .rust_definer_with_variable_name_and_enumerator(statement.name(), enumerator_name);
 
+    let mut unused_enumerators = false;
+
     for enumerator in rd.enumerators() {
         if !enumerator.has_members() {
-            s.wln(format!(
-                "{new_enum}::{variant} => {{}}",
-                new_enum = rd.ty_name(),
-                variant = enumerator.rust_name()
-            ));
+            unused_enumerators = true;
 
             continue;
         }
@@ -397,6 +395,10 @@ fn print_write_if_enum_statement(
         }
 
         s.closing_curly(); // enum::enumerator
+    }
+
+    if unused_enumerators {
+        s.wln("_ => {}");
     }
 
     s.closing_curly_newline(); // match

@@ -86,35 +86,6 @@ impl crate::Message for SMSG_CAST_FAILED {
         w.write_all(u8::from(self.multiple_casts).to_le_bytes().as_slice())?;
 
         match &self.result {
-            SMSG_CAST_FAILED_SpellCastResult::Success => {}
-            SMSG_CAST_FAILED_SpellCastResult::AffectingCombat => {}
-            SMSG_CAST_FAILED_SpellCastResult::AlreadyAtFullHealth => {}
-            SMSG_CAST_FAILED_SpellCastResult::AlreadyAtFullMana => {}
-            SMSG_CAST_FAILED_SpellCastResult::AlreadyAtFullPower => {}
-            SMSG_CAST_FAILED_SpellCastResult::AlreadyBeingTamed => {}
-            SMSG_CAST_FAILED_SpellCastResult::AlreadyHaveCharm => {}
-            SMSG_CAST_FAILED_SpellCastResult::AlreadyHaveSummon => {}
-            SMSG_CAST_FAILED_SpellCastResult::AlreadyOpen => {}
-            SMSG_CAST_FAILED_SpellCastResult::AuraBounced => {}
-            SMSG_CAST_FAILED_SpellCastResult::AutotrackInterrupted => {}
-            SMSG_CAST_FAILED_SpellCastResult::BadImplicitTargets => {}
-            SMSG_CAST_FAILED_SpellCastResult::BadTargets => {}
-            SMSG_CAST_FAILED_SpellCastResult::CantBeCharmed => {}
-            SMSG_CAST_FAILED_SpellCastResult::CantBeDisenchanted => {}
-            SMSG_CAST_FAILED_SpellCastResult::CantBeDisenchantedSkill => {}
-            SMSG_CAST_FAILED_SpellCastResult::CantBeMilled => {}
-            SMSG_CAST_FAILED_SpellCastResult::CantBeProspected => {}
-            SMSG_CAST_FAILED_SpellCastResult::CantCastOnTapped => {}
-            SMSG_CAST_FAILED_SpellCastResult::CantDuelWhileInvisible => {}
-            SMSG_CAST_FAILED_SpellCastResult::CantDuelWhileStealthed => {}
-            SMSG_CAST_FAILED_SpellCastResult::CantStealth => {}
-            SMSG_CAST_FAILED_SpellCastResult::CasterAurastate => {}
-            SMSG_CAST_FAILED_SpellCastResult::CasterDead => {}
-            SMSG_CAST_FAILED_SpellCastResult::Charmed => {}
-            SMSG_CAST_FAILED_SpellCastResult::ChestInUse => {}
-            SMSG_CAST_FAILED_SpellCastResult::Confused => {}
-            SMSG_CAST_FAILED_SpellCastResult::DontReport => {}
-            SMSG_CAST_FAILED_SpellCastResult::EquippedItem => {}
             SMSG_CAST_FAILED_SpellCastResult::EquippedItemClass {
                 item_class,
                 item_sub_class,
@@ -148,28 +119,6 @@ impl crate::Message for SMSG_CAST_FAILED {
                 w.write_all(&item_sub_class.to_le_bytes())?;
 
             }
-            SMSG_CAST_FAILED_SpellCastResult::ErrorX => {}
-            SMSG_CAST_FAILED_SpellCastResult::Fizzle => {}
-            SMSG_CAST_FAILED_SpellCastResult::Fleeing => {}
-            SMSG_CAST_FAILED_SpellCastResult::FoodLowlevel => {}
-            SMSG_CAST_FAILED_SpellCastResult::Highlevel => {}
-            SMSG_CAST_FAILED_SpellCastResult::HungerSatiated => {}
-            SMSG_CAST_FAILED_SpellCastResult::Immune => {}
-            SMSG_CAST_FAILED_SpellCastResult::IncorrectArea => {}
-            SMSG_CAST_FAILED_SpellCastResult::Interrupted => {}
-            SMSG_CAST_FAILED_SpellCastResult::InterruptedCombat => {}
-            SMSG_CAST_FAILED_SpellCastResult::ItemAlreadyEnchanted => {}
-            SMSG_CAST_FAILED_SpellCastResult::ItemGone => {}
-            SMSG_CAST_FAILED_SpellCastResult::ItemNotFound => {}
-            SMSG_CAST_FAILED_SpellCastResult::ItemNotReady => {}
-            SMSG_CAST_FAILED_SpellCastResult::LevelRequirement => {}
-            SMSG_CAST_FAILED_SpellCastResult::LineOfSight => {}
-            SMSG_CAST_FAILED_SpellCastResult::Lowlevel => {}
-            SMSG_CAST_FAILED_SpellCastResult::LowCastlevel => {}
-            SMSG_CAST_FAILED_SpellCastResult::MainhandEmpty => {}
-            SMSG_CAST_FAILED_SpellCastResult::Moving => {}
-            SMSG_CAST_FAILED_SpellCastResult::NeedAmmo => {}
-            SMSG_CAST_FAILED_SpellCastResult::NeedAmmoPouch => {}
             SMSG_CAST_FAILED_SpellCastResult::NeedExoticAmmo {
                 equipped_item_sub_class,
             } => {
@@ -188,50 +137,6 @@ impl crate::Message for SMSG_CAST_FAILED {
                 w.write_all(&count.to_le_bytes())?;
 
             }
-            SMSG_CAST_FAILED_SpellCastResult::Nopath => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotBehind => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotFishable => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotFlying => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotHere => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotInfront => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotInControl => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotKnown => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotMounted => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotOnTaxi => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotOnTransport => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotReady => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotShapeshift => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotStanding => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotTradeable => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotTrading => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotUnsheathed => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotWhileGhost => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotWhileLooting => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoAmmo => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoChargesRemain => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoChampion => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoComboPoints => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoDueling => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoEndurance => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoFish => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoItemsWhileShapeshifted => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoMountsAllowed => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoPet => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoPower => {}
-            SMSG_CAST_FAILED_SpellCastResult::NothingToDispel => {}
-            SMSG_CAST_FAILED_SpellCastResult::NothingToSteal => {}
-            SMSG_CAST_FAILED_SpellCastResult::OnlyAbovewater => {}
-            SMSG_CAST_FAILED_SpellCastResult::OnlyDaytime => {}
-            SMSG_CAST_FAILED_SpellCastResult::OnlyIndoors => {}
-            SMSG_CAST_FAILED_SpellCastResult::OnlyMounted => {}
-            SMSG_CAST_FAILED_SpellCastResult::OnlyNighttime => {}
-            SMSG_CAST_FAILED_SpellCastResult::OnlyOutdoors => {}
-            SMSG_CAST_FAILED_SpellCastResult::OnlyShapeshift => {}
-            SMSG_CAST_FAILED_SpellCastResult::OnlyStealthed => {}
-            SMSG_CAST_FAILED_SpellCastResult::OnlyUnderwater => {}
-            SMSG_CAST_FAILED_SpellCastResult::OutOfRange => {}
-            SMSG_CAST_FAILED_SpellCastResult::Pacified => {}
-            SMSG_CAST_FAILED_SpellCastResult::Possessed => {}
             SMSG_CAST_FAILED_SpellCastResult::Reagents {
                 missing_item,
             } => {
@@ -253,32 +158,6 @@ impl crate::Message for SMSG_CAST_FAILED {
                 w.write_all(&spell_focus.to_le_bytes())?;
 
             }
-            SMSG_CAST_FAILED_SpellCastResult::Rooted => {}
-            SMSG_CAST_FAILED_SpellCastResult::Silenced => {}
-            SMSG_CAST_FAILED_SpellCastResult::SpellInProgress => {}
-            SMSG_CAST_FAILED_SpellCastResult::SpellLearned => {}
-            SMSG_CAST_FAILED_SpellCastResult::SpellUnavailable => {}
-            SMSG_CAST_FAILED_SpellCastResult::Stunned => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetsDead => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetAffectingCombat => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetAurastate => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetDueling => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetEnemy => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetEnraged => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetFriendly => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetInCombat => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetIsPlayer => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetIsPlayerControlled => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetNotDead => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetNotInParty => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetNotLooted => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetNotPlayer => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetNoPockets => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetNoWeapons => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetNoRangedWeapons => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetUnskinnable => {}
-            SMSG_CAST_FAILED_SpellCastResult::ThirstSatiated => {}
-            SMSG_CAST_FAILED_SpellCastResult::TooClose => {}
             SMSG_CAST_FAILED_SpellCastResult::TooManyOfItem {
                 item_limit_category,
             } => {
@@ -304,21 +183,6 @@ impl crate::Message for SMSG_CAST_FAILED {
                 }
 
             }
-            SMSG_CAST_FAILED_SpellCastResult::TryAgain => {}
-            SMSG_CAST_FAILED_SpellCastResult::UnitNotBehind => {}
-            SMSG_CAST_FAILED_SpellCastResult::UnitNotInfront => {}
-            SMSG_CAST_FAILED_SpellCastResult::WrongPetFood => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotWhileFatigued => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetNotInInstance => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotWhileTrading => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetNotInRaid => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetFreeforall => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoEdibleCorpses => {}
-            SMSG_CAST_FAILED_SpellCastResult::OnlyBattlegrounds => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetNotGhost => {}
-            SMSG_CAST_FAILED_SpellCastResult::TransformUnusable => {}
-            SMSG_CAST_FAILED_SpellCastResult::WrongWeather => {}
-            SMSG_CAST_FAILED_SpellCastResult::DamageImmune => {}
             SMSG_CAST_FAILED_SpellCastResult::PreventedByMechanic {
                 mechanic,
             } => {
@@ -326,8 +190,6 @@ impl crate::Message for SMSG_CAST_FAILED {
                 w.write_all(&mechanic.to_le_bytes())?;
 
             }
-            SMSG_CAST_FAILED_SpellCastResult::PlayTime => {}
-            SMSG_CAST_FAILED_SpellCastResult::Reputation => {}
             SMSG_CAST_FAILED_SpellCastResult::MinSkill {
                 skill,
                 skill_required,
@@ -339,27 +201,6 @@ impl crate::Message for SMSG_CAST_FAILED {
                 w.write_all(&skill_required.to_le_bytes())?;
 
             }
-            SMSG_CAST_FAILED_SpellCastResult::NotInArena => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotOnShapeshift => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotOnStealthed => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotOnDamageImmune => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotOnMounted => {}
-            SMSG_CAST_FAILED_SpellCastResult::TooShallow => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetNotInSanctuary => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetIsTrivial => {}
-            SMSG_CAST_FAILED_SpellCastResult::BmOrInvisgod => {}
-            SMSG_CAST_FAILED_SpellCastResult::ExpertRidingRequirement => {}
-            SMSG_CAST_FAILED_SpellCastResult::ArtisanRidingRequirement => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotIdle => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotInactive => {}
-            SMSG_CAST_FAILED_SpellCastResult::PartialPlaytime => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoPlaytime => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotInBattleground => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotInRaidInstance => {}
-            SMSG_CAST_FAILED_SpellCastResult::OnlyInArena => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetLockedToRaidInstance => {}
-            SMSG_CAST_FAILED_SpellCastResult::OnUseEnchant => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotOnGround => {}
             SMSG_CAST_FAILED_SpellCastResult::CustomError {
                 custom_error,
             } => {
@@ -367,14 +208,6 @@ impl crate::Message for SMSG_CAST_FAILED {
                 w.write_all(&custom_error.to_le_bytes())?;
 
             }
-            SMSG_CAST_FAILED_SpellCastResult::CantDoThatRightNow => {}
-            SMSG_CAST_FAILED_SpellCastResult::TooManySockets => {}
-            SMSG_CAST_FAILED_SpellCastResult::InvalidGlyph => {}
-            SMSG_CAST_FAILED_SpellCastResult::UniqueGlyph => {}
-            SMSG_CAST_FAILED_SpellCastResult::GlyphSocketLocked => {}
-            SMSG_CAST_FAILED_SpellCastResult::NoValidTargets => {}
-            SMSG_CAST_FAILED_SpellCastResult::ItemAtMaxCharges => {}
-            SMSG_CAST_FAILED_SpellCastResult::NotInBarbershop => {}
             SMSG_CAST_FAILED_SpellCastResult::FishingTooLow {
                 fishing_skill_required,
             } => {
@@ -382,12 +215,7 @@ impl crate::Message for SMSG_CAST_FAILED {
                 w.write_all(&fishing_skill_required.to_le_bytes())?;
 
             }
-            SMSG_CAST_FAILED_SpellCastResult::ItemEnchantTradeWindow => {}
-            SMSG_CAST_FAILED_SpellCastResult::SummonPending => {}
-            SMSG_CAST_FAILED_SpellCastResult::MaxSockets => {}
-            SMSG_CAST_FAILED_SpellCastResult::PetCanRename => {}
-            SMSG_CAST_FAILED_SpellCastResult::TargetCannotBeResurrected => {}
-            SMSG_CAST_FAILED_SpellCastResult::Unknown => {}
+            _ => {}
         }
 
         Ok(())

@@ -47,9 +47,6 @@ impl AuraLog {
         w.write_all(&u32::from(self.aura_type.as_int()).to_le_bytes())?;
 
         match &self.aura_type {
-            AuraLog_AuraType::None => {}
-            AuraLog_AuraType::BindSight => {}
-            AuraLog_AuraType::ModPossess => {}
             AuraLog_AuraType::PeriodicDamage {
                 absorb1,
                 critical1,
@@ -77,10 +74,6 @@ impl AuraLog {
                 w.write_all(u8::from(*critical1).to_le_bytes().as_slice())?;
 
             }
-            AuraLog_AuraType::Dummy => {}
-            AuraLog_AuraType::ModConfuse => {}
-            AuraLog_AuraType::ModCharm => {}
-            AuraLog_AuraType::ModFear => {}
             AuraLog_AuraType::PeriodicHeal {
                 absorb2,
                 critical2,
@@ -100,17 +93,6 @@ impl AuraLog {
                 w.write_all(u8::from(*critical2).to_le_bytes().as_slice())?;
 
             }
-            AuraLog_AuraType::ModAttackspeed => {}
-            AuraLog_AuraType::ModThreat => {}
-            AuraLog_AuraType::ModTaunt => {}
-            AuraLog_AuraType::ModStun => {}
-            AuraLog_AuraType::ModDamageDone => {}
-            AuraLog_AuraType::ModDamageTaken => {}
-            AuraLog_AuraType::DamageShield => {}
-            AuraLog_AuraType::ModStealth => {}
-            AuraLog_AuraType::ModStealthDetect => {}
-            AuraLog_AuraType::ModInvisibility => {}
-            AuraLog_AuraType::ModInvisibilityDetect => {}
             AuraLog_AuraType::ObsModHealth {
                 absorb2,
                 critical2,
@@ -130,9 +112,6 @@ impl AuraLog {
                 w.write_all(u8::from(*critical2).to_le_bytes().as_slice())?;
 
             }
-            AuraLog_AuraType::ObsModPower => {}
-            AuraLog_AuraType::ModResistance => {}
-            AuraLog_AuraType::PeriodicTriggerSpell => {}
             AuraLog_AuraType::PeriodicEnergize {
                 damage3,
                 misc_value1,
@@ -144,45 +123,6 @@ impl AuraLog {
                 w.write_all(&damage3.to_le_bytes())?;
 
             }
-            AuraLog_AuraType::ModPacify => {}
-            AuraLog_AuraType::ModRoot => {}
-            AuraLog_AuraType::ModSilence => {}
-            AuraLog_AuraType::ReflectSpells => {}
-            AuraLog_AuraType::ModStat => {}
-            AuraLog_AuraType::ModSkill => {}
-            AuraLog_AuraType::ModIncreaseSpeed => {}
-            AuraLog_AuraType::ModIncreaseMountedSpeed => {}
-            AuraLog_AuraType::ModDecreaseSpeed => {}
-            AuraLog_AuraType::ModIncreaseHealth => {}
-            AuraLog_AuraType::ModIncreaseEnergy => {}
-            AuraLog_AuraType::ModShapeshift => {}
-            AuraLog_AuraType::EffectImmunity => {}
-            AuraLog_AuraType::StateImmunity => {}
-            AuraLog_AuraType::SchoolImmunity => {}
-            AuraLog_AuraType::DamageImmunity => {}
-            AuraLog_AuraType::DispelImmunity => {}
-            AuraLog_AuraType::ProcTriggerSpell => {}
-            AuraLog_AuraType::ProcTriggerDamage => {}
-            AuraLog_AuraType::TrackCreatures => {}
-            AuraLog_AuraType::TrackResources => {}
-            AuraLog_AuraType::Unknown46 => {}
-            AuraLog_AuraType::ModParryPercent => {}
-            AuraLog_AuraType::PeriodicTriggerSpellFromClient => {}
-            AuraLog_AuraType::ModDodgePercent => {}
-            AuraLog_AuraType::ModCriticalHealingAmount => {}
-            AuraLog_AuraType::ModBlockPercent => {}
-            AuraLog_AuraType::ModWeaponCritPercent => {}
-            AuraLog_AuraType::PeriodicLeech => {}
-            AuraLog_AuraType::ModHitChance => {}
-            AuraLog_AuraType::ModSpellHitChance => {}
-            AuraLog_AuraType::Transform => {}
-            AuraLog_AuraType::ModSpellCritChance => {}
-            AuraLog_AuraType::ModIncreaseSwimSpeed => {}
-            AuraLog_AuraType::ModDamageDoneCreature => {}
-            AuraLog_AuraType::ModPacifySilence => {}
-            AuraLog_AuraType::ModScale => {}
-            AuraLog_AuraType::PeriodicHealthFunnel => {}
-            AuraLog_AuraType::Unknown63 => {}
             AuraLog_AuraType::PeriodicManaLeech {
                 damage4,
                 gain_multiplier,
@@ -198,30 +138,6 @@ impl AuraLog {
                 w.write_all(&gain_multiplier.to_le_bytes())?;
 
             }
-            AuraLog_AuraType::ModCastingSpeedNotStack => {}
-            AuraLog_AuraType::FeignDeath => {}
-            AuraLog_AuraType::ModDisarm => {}
-            AuraLog_AuraType::ModStalked => {}
-            AuraLog_AuraType::SchoolAbsorb => {}
-            AuraLog_AuraType::ExtraAttacks => {}
-            AuraLog_AuraType::ModSpellCritChanceSchool => {}
-            AuraLog_AuraType::ModPowerCostSchoolPct => {}
-            AuraLog_AuraType::ModPowerCostSchool => {}
-            AuraLog_AuraType::ReflectSpellsSchool => {}
-            AuraLog_AuraType::ModLanguage => {}
-            AuraLog_AuraType::FarSight => {}
-            AuraLog_AuraType::MechanicImmunity => {}
-            AuraLog_AuraType::Mounted => {}
-            AuraLog_AuraType::ModDamagePercentDone => {}
-            AuraLog_AuraType::ModPercentStat => {}
-            AuraLog_AuraType::SplitDamagePct => {}
-            AuraLog_AuraType::WaterBreathing => {}
-            AuraLog_AuraType::ModBaseResistance => {}
-            AuraLog_AuraType::ModRegen => {}
-            AuraLog_AuraType::ModPowerRegen => {}
-            AuraLog_AuraType::ChannelDeathItem => {}
-            AuraLog_AuraType::ModDamagePercentTaken => {}
-            AuraLog_AuraType::ModHealthRegenPercent => {}
             AuraLog_AuraType::PeriodicDamagePercent {
                 absorb1,
                 critical1,
@@ -249,233 +165,7 @@ impl AuraLog {
                 w.write_all(u8::from(*critical1).to_le_bytes().as_slice())?;
 
             }
-            AuraLog_AuraType::Unknown90 => {}
-            AuraLog_AuraType::ModDetectRange => {}
-            AuraLog_AuraType::PreventsFleeing => {}
-            AuraLog_AuraType::ModUnattackable => {}
-            AuraLog_AuraType::InterruptRegen => {}
-            AuraLog_AuraType::Ghost => {}
-            AuraLog_AuraType::SpellMagnet => {}
-            AuraLog_AuraType::ManaShield => {}
-            AuraLog_AuraType::ModSkillTalent => {}
-            AuraLog_AuraType::ModAttackPower => {}
-            AuraLog_AuraType::AurasVisible => {}
-            AuraLog_AuraType::ModResistancePct => {}
-            AuraLog_AuraType::ModMeleeAttackPowerVersus => {}
-            AuraLog_AuraType::ModTotalThreat => {}
-            AuraLog_AuraType::WaterWalk => {}
-            AuraLog_AuraType::FeatherFall => {}
-            AuraLog_AuraType::Hover => {}
-            AuraLog_AuraType::AddFlatModifier => {}
-            AuraLog_AuraType::AddPctModifier => {}
-            AuraLog_AuraType::AddTargetTrigger => {}
-            AuraLog_AuraType::ModPowerRegenPercent => {}
-            AuraLog_AuraType::AddCasterHitTrigger => {}
-            AuraLog_AuraType::OverrideClassScripts => {}
-            AuraLog_AuraType::ModRangedDamageTaken => {}
-            AuraLog_AuraType::ModRangedDamageTakenPct => {}
-            AuraLog_AuraType::ModHealing => {}
-            AuraLog_AuraType::ModRegenDuringCombat => {}
-            AuraLog_AuraType::ModMechanicResistance => {}
-            AuraLog_AuraType::ModHealingPct => {}
-            AuraLog_AuraType::Unknown119 => {}
-            AuraLog_AuraType::Untrackable => {}
-            AuraLog_AuraType::Empathy => {}
-            AuraLog_AuraType::ModOffhandDamagePct => {}
-            AuraLog_AuraType::ModTargetResistance => {}
-            AuraLog_AuraType::ModRangedAttackPower => {}
-            AuraLog_AuraType::ModMeleeDamageTaken => {}
-            AuraLog_AuraType::ModMeleeDamageTakenPct => {}
-            AuraLog_AuraType::RangedAttackPowerAttackerBonus => {}
-            AuraLog_AuraType::ModPossessPet => {}
-            AuraLog_AuraType::ModSpeedAlways => {}
-            AuraLog_AuraType::ModMountedSpeedAlways => {}
-            AuraLog_AuraType::ModRangedAttackPowerVersus => {}
-            AuraLog_AuraType::ModIncreaseEnergyPercent => {}
-            AuraLog_AuraType::ModIncreaseHealthPercent => {}
-            AuraLog_AuraType::ModManaRegenInterrupt => {}
-            AuraLog_AuraType::ModHealingDone => {}
-            AuraLog_AuraType::ModHealingDonePercent => {}
-            AuraLog_AuraType::ModTotalStatPercentage => {}
-            AuraLog_AuraType::ModMeleeHaste => {}
-            AuraLog_AuraType::ForceReaction => {}
-            AuraLog_AuraType::ModRangedHaste => {}
-            AuraLog_AuraType::ModRangedAmmoHaste => {}
-            AuraLog_AuraType::ModBaseResistancePct => {}
-            AuraLog_AuraType::ModResistanceExclusive => {}
-            AuraLog_AuraType::SafeFall => {}
-            AuraLog_AuraType::ModPetTalentPoints => {}
-            AuraLog_AuraType::AllowTamePetType => {}
-            AuraLog_AuraType::MechanicImmunityMask => {}
-            AuraLog_AuraType::RetainComboPoints => {}
-            AuraLog_AuraType::ReducePushback => {}
-            AuraLog_AuraType::ModShieldBlockvaluePct => {}
-            AuraLog_AuraType::TrackStealthed => {}
-            AuraLog_AuraType::ModDetectedRange => {}
-            AuraLog_AuraType::SplitDamageFlat => {}
-            AuraLog_AuraType::ModStealthLevel => {}
-            AuraLog_AuraType::ModWaterBreathing => {}
-            AuraLog_AuraType::ModReputationGain => {}
-            AuraLog_AuraType::PetDamageMulti => {}
-            AuraLog_AuraType::ModShieldBlockvalue => {}
-            AuraLog_AuraType::NoPvpCredit => {}
-            AuraLog_AuraType::ModAoeAvoidance => {}
-            AuraLog_AuraType::ModHealthRegenInCombat => {}
-            AuraLog_AuraType::PowerBurn => {}
-            AuraLog_AuraType::ModCritDamageBonus => {}
-            AuraLog_AuraType::Unknown164 => {}
-            AuraLog_AuraType::MeleeAttackPowerAttackerBonus => {}
-            AuraLog_AuraType::ModAttackPowerPct => {}
-            AuraLog_AuraType::ModRangedAttackPowerPct => {}
-            AuraLog_AuraType::ModDamageDoneVersus => {}
-            AuraLog_AuraType::ModCritPercentVersus => {}
-            AuraLog_AuraType::DetectAmore => {}
-            AuraLog_AuraType::ModSpeedNotStack => {}
-            AuraLog_AuraType::ModMountedSpeedNotStack => {}
-            AuraLog_AuraType::Unknown173 => {}
-            AuraLog_AuraType::ModSpellDamageOfStatPercent => {}
-            AuraLog_AuraType::ModSpellHealingOfStatPercent => {}
-            AuraLog_AuraType::SpiritOfRedemption => {}
-            AuraLog_AuraType::AoeCharm => {}
-            AuraLog_AuraType::ModDebuffResistance => {}
-            AuraLog_AuraType::ModAttackerSpellCritChance => {}
-            AuraLog_AuraType::ModFlatSpellDamageVersus => {}
-            AuraLog_AuraType::Unknown181 => {}
-            AuraLog_AuraType::ModResistanceOfStatPercent => {}
-            AuraLog_AuraType::ModCriticalThreat => {}
-            AuraLog_AuraType::ModAttackerMeleeHitChance => {}
-            AuraLog_AuraType::ModAttackerRangedHitChance => {}
-            AuraLog_AuraType::ModAttackerSpellHitChance => {}
-            AuraLog_AuraType::ModAttackerMeleeCritChance => {}
-            AuraLog_AuraType::ModAttackerRangedCritChance => {}
-            AuraLog_AuraType::ModRating => {}
-            AuraLog_AuraType::ModFactionReputationGain => {}
-            AuraLog_AuraType::UseNormalMovementSpeed => {}
-            AuraLog_AuraType::ModMeleeRangedHaste => {}
-            AuraLog_AuraType::MeleeSlow => {}
-            AuraLog_AuraType::ModTargetAbsorbSchool => {}
-            AuraLog_AuraType::ModTargetAbilityAbsorbSchool => {}
-            AuraLog_AuraType::ModCooldown => {}
-            AuraLog_AuraType::ModAttackerSpellAndWeaponCritChance => {}
-            AuraLog_AuraType::Unknown198 => {}
-            AuraLog_AuraType::ModIncreasesSpellPctToHit => {}
-            AuraLog_AuraType::ModXpPct => {}
-            AuraLog_AuraType::Fly => {}
-            AuraLog_AuraType::IgnoreCombatResult => {}
-            AuraLog_AuraType::ModAttackerMeleeCritDamage => {}
-            AuraLog_AuraType::ModAttackerRangedCritDamage => {}
-            AuraLog_AuraType::ModSchoolCritDmgTaken => {}
-            AuraLog_AuraType::ModIncreaseVehicleFlightSpeed => {}
-            AuraLog_AuraType::ModIncreaseMountedFlightSpeed => {}
-            AuraLog_AuraType::ModIncreaseFlightSpeed => {}
-            AuraLog_AuraType::ModMountedFlightSpeedAlways => {}
-            AuraLog_AuraType::ModVehicleSpeedAlways => {}
-            AuraLog_AuraType::ModFlightSpeedNotStack => {}
-            AuraLog_AuraType::ModRangedAttackPowerOfStatPercent => {}
-            AuraLog_AuraType::ModRageFromDamageDealt => {}
-            AuraLog_AuraType::Unknown214 => {}
-            AuraLog_AuraType::ArenaPreparation => {}
-            AuraLog_AuraType::HasteSpells => {}
-            AuraLog_AuraType::ModMeleeHaste2 => {}
-            AuraLog_AuraType::HasteRanged => {}
-            AuraLog_AuraType::ModManaRegenFromStat => {}
-            AuraLog_AuraType::ModRatingFromStat => {}
-            AuraLog_AuraType::ModDetaunt => {}
-            AuraLog_AuraType::Unknown222 => {}
-            AuraLog_AuraType::RaidProcFromCharge => {}
-            AuraLog_AuraType::Unknown224 => {}
-            AuraLog_AuraType::RaidProcFromChargeWithValue => {}
-            AuraLog_AuraType::PeriodicDummy => {}
-            AuraLog_AuraType::PeriodicTriggerSpellWithValue => {}
-            AuraLog_AuraType::DetectStealth => {}
-            AuraLog_AuraType::ModAoeDamageAvoidance => {}
-            AuraLog_AuraType::Unknown230 => {}
-            AuraLog_AuraType::ProcTriggerSpellWithValue => {}
-            AuraLog_AuraType::MechanicDurationMod => {}
-            AuraLog_AuraType::ChangeModelForAllHumanoids => {}
-            AuraLog_AuraType::MechanicDurationModNotStack => {}
-            AuraLog_AuraType::ModDispelResist => {}
-            AuraLog_AuraType::ControlVehicle => {}
-            AuraLog_AuraType::ModSpellDamageOfAttackPower => {}
-            AuraLog_AuraType::ModSpellHealingOfAttackPower => {}
-            AuraLog_AuraType::ModScale2 => {}
-            AuraLog_AuraType::ModExpertise => {}
-            AuraLog_AuraType::ForceMoveForward => {}
-            AuraLog_AuraType::ModSpellDamageFromHealing => {}
-            AuraLog_AuraType::ModFaction => {}
-            AuraLog_AuraType::ComprehendLanguage => {}
-            AuraLog_AuraType::ModAuraDurationByDispel => {}
-            AuraLog_AuraType::ModAuraDurationByDispelNotStack => {}
-            AuraLog_AuraType::CloneCaster => {}
-            AuraLog_AuraType::ModCombatResultChance => {}
-            AuraLog_AuraType::ConvertRune => {}
-            AuraLog_AuraType::ModIncreaseHealth2 => {}
-            AuraLog_AuraType::ModEnemyDodge => {}
-            AuraLog_AuraType::ModSpeedSlowAll => {}
-            AuraLog_AuraType::ModBlockCritChance => {}
-            AuraLog_AuraType::ModDisarmOffhand => {}
-            AuraLog_AuraType::ModMechanicDamageTakenPercent => {}
-            AuraLog_AuraType::NoReagentUse => {}
-            AuraLog_AuraType::ModTargetResistBySpellClass => {}
-            AuraLog_AuraType::Unknown258 => {}
-            AuraLog_AuraType::ModHotPct => {}
-            AuraLog_AuraType::ScreenEffect => {}
-            AuraLog_AuraType::Phase => {}
-            AuraLog_AuraType::AbilityIgnoreAurastate => {}
-            AuraLog_AuraType::AllowOnlyAbility => {}
-            AuraLog_AuraType::Unknown264 => {}
-            AuraLog_AuraType::Unknown265 => {}
-            AuraLog_AuraType::Unknown266 => {}
-            AuraLog_AuraType::ModImmuneAuraApplySchool => {}
-            AuraLog_AuraType::ModAttackPowerOfStatPercent => {}
-            AuraLog_AuraType::ModIgnoreTargetResist => {}
-            AuraLog_AuraType::ModAbilityIgnoreTargetResist => {}
-            AuraLog_AuraType::ModDamageFromCaster => {}
-            AuraLog_AuraType::IgnoreMeleeReset => {}
-            AuraLog_AuraType::XRay => {}
-            AuraLog_AuraType::AbilityConsumeNoAmmo => {}
-            AuraLog_AuraType::ModIgnoreShapeshift => {}
-            AuraLog_AuraType::ModDamageDoneForMechanic => {}
-            AuraLog_AuraType::ModMaxAffectedTargets => {}
-            AuraLog_AuraType::ModDisarmRanged => {}
-            AuraLog_AuraType::InitializeImages => {}
-            AuraLog_AuraType::ModArmorPenetrationPct => {}
-            AuraLog_AuraType::ModHonorGainPct => {}
-            AuraLog_AuraType::ModBaseHealthPct => {}
-            AuraLog_AuraType::ModHealingReceived => {}
-            AuraLog_AuraType::Linked => {}
-            AuraLog_AuraType::ModAttackPowerOfArmor => {}
-            AuraLog_AuraType::AbilityPeriodicCrit => {}
-            AuraLog_AuraType::DeflectSpells => {}
-            AuraLog_AuraType::IgnoreHitDirection => {}
-            AuraLog_AuraType::PreventDurabilityLoss => {}
-            AuraLog_AuraType::ModCritPct => {}
-            AuraLog_AuraType::ModXpQuestPct => {}
-            AuraLog_AuraType::OpenStable => {}
-            AuraLog_AuraType::OverrideSpells => {}
-            AuraLog_AuraType::PreventRegeneratePower => {}
-            AuraLog_AuraType::Unknown295 => {}
-            AuraLog_AuraType::SetVehicleId => {}
-            AuraLog_AuraType::BlockSpellFamily => {}
-            AuraLog_AuraType::Strangulate => {}
-            AuraLog_AuraType::Unknown299 => {}
-            AuraLog_AuraType::ShareDamagePct => {}
-            AuraLog_AuraType::SchoolHealAbsorb => {}
-            AuraLog_AuraType::Unknown302 => {}
-            AuraLog_AuraType::ModDamageDoneVersusAurastate => {}
-            AuraLog_AuraType::ModFakeInebriate => {}
-            AuraLog_AuraType::ModMinimumSpeed => {}
-            AuraLog_AuraType::Unknown306 => {}
-            AuraLog_AuraType::HealAbsorbTest => {}
-            AuraLog_AuraType::ModCritChanceForCaster => {}
-            AuraLog_AuraType::Unknown309 => {}
-            AuraLog_AuraType::ModCreatureAoeDamageAvoidance => {}
-            AuraLog_AuraType::Unknown311 => {}
-            AuraLog_AuraType::Unknown312 => {}
-            AuraLog_AuraType::Unknown313 => {}
-            AuraLog_AuraType::PreventResurrection => {}
-            AuraLog_AuraType::UnderwaterWalking => {}
-            AuraLog_AuraType::PeriodicHaste => {}
+            _ => {}
         }
 
         Ok(())

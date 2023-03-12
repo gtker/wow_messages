@@ -77,7 +77,6 @@ impl crate::Message for CMSG_USE_ITEM {
         w.write_all(&u8::from(self.cast_flags.as_int()).to_le_bytes())?;
 
         match &self.cast_flags {
-            CMSG_USE_ITEM_ClientCastFlags::None => {}
             CMSG_USE_ITEM_ClientCastFlags::Extra {
                 elevation,
                 movement_data,
@@ -93,7 +92,6 @@ impl crate::Message for CMSG_USE_ITEM {
                 w.write_all(&u8::from(movement_data.as_int()).to_le_bytes())?;
 
                 match &movement_data {
-                    CMSG_USE_ITEM_ClientMovementData::NotPresent => {}
                     CMSG_USE_ITEM_ClientMovementData::Present {
                         guid,
                         info,
@@ -109,9 +107,11 @@ impl crate::Message for CMSG_USE_ITEM {
                         info.write_into_vec(&mut w)?;
 
                     }
+                    _ => {}
                 }
 
             }
+            _ => {}
         }
 
         // targets: SpellCastTargets

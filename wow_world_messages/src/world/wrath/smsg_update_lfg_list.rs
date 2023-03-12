@@ -68,7 +68,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
                 }
 
             }
-            SMSG_UPDATE_LFG_LIST_LfgListUpdateType::Full => {}
+            _ => {}
         }
 
         // amount_of_groups: u32

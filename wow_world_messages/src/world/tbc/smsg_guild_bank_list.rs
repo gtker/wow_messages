@@ -49,7 +49,6 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
         w.write_all(&u8::from(self.tab_result.as_int()).to_le_bytes())?;
 
         match &self.tab_result {
-            SMSG_GUILD_BANK_LIST_GuildBankTabResult::NotPresent => {}
             SMSG_GUILD_BANK_LIST_GuildBankTabResult::Present {
                 tabs,
             } => {
@@ -62,6 +61,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
                 }
 
             }
+            _ => {}
         }
 
         // amount_of_slot_updates: u8

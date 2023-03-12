@@ -29,8 +29,7 @@ impl SimpleIfEnum {
                 w.write_all(&basic.to_le_bytes())?;
 
             }
-            SimpleIfEnum_SimpleEnum::One => {}
-            SimpleIfEnum_SimpleEnum::Two => {}
+            _ => {}
         }
 
         Ok(())

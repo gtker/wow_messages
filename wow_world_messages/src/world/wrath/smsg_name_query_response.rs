@@ -91,7 +91,6 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         w.write_all(&u8::from(self.has_declined_names.as_int()).to_le_bytes())?;
 
         match &self.has_declined_names {
-            SMSG_NAME_QUERY_RESPONSE_DeclinedNames::No => {}
             SMSG_NAME_QUERY_RESPONSE_DeclinedNames::Yes {
                 declined_names,
             } => {
@@ -102,6 +101,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
                 }
 
             }
+            _ => {}
         }
 
         Ok(())

@@ -83,7 +83,7 @@ impl GuildMember {
                 w.write_all(&time_offline.to_le_bytes())?;
 
             }
-            GuildMember_GuildMemberStatus::Online => {}
+            _ => {}
         }
 
         // public_note: CString

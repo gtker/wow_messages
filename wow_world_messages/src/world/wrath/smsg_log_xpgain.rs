@@ -42,7 +42,6 @@ impl crate::Message for SMSG_LOG_XPGAIN {
         w.write_all(&u8::from(self.exp_type.as_int()).to_le_bytes())?;
 
         match &self.exp_type {
-            SMSG_LOG_XPGAIN_ExperienceAwardType::Kill => {}
             SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
                 exp_group_bonus,
                 experience_without_rested,
@@ -54,6 +53,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
                 w.write_all(&exp_group_bonus.to_le_bytes())?;
 
             }
+            _ => {}
         }
 
         // exp_includes_recruit_a_friend_bonus: Bool

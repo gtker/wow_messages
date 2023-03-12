@@ -106,7 +106,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
                 w.write_all(&parameter2.to_le_bytes())?;
 
             }
-            SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::RefreshFrames => {}
+            _ => {}
         }
 
         Ok(())

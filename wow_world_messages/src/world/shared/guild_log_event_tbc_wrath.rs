@@ -35,9 +35,6 @@ impl GuildLogEvent {
         w.write_all(&self.player1.guid().to_le_bytes())?;
 
         match &self.event {
-            GuildLogEvent_GuildEvent::Promotion => {}
-            GuildLogEvent_GuildEvent::Demotion => {}
-            GuildLogEvent_GuildEvent::Motd => {}
             GuildLogEvent_GuildEvent::Joined {
                 player2,
             } => {
@@ -52,21 +49,7 @@ impl GuildLogEvent {
                 w.write_all(&player2.guid().to_le_bytes())?;
 
             }
-            GuildLogEvent_GuildEvent::Removed => {}
-            GuildLogEvent_GuildEvent::LeaderIs => {}
-            GuildLogEvent_GuildEvent::LeaderChanged => {}
-            GuildLogEvent_GuildEvent::Disbanded => {}
-            GuildLogEvent_GuildEvent::TabardChanged => {}
-            GuildLogEvent_GuildEvent::Unk1 => {}
-            GuildLogEvent_GuildEvent::Unk2 => {}
-            GuildLogEvent_GuildEvent::SignedOn => {}
-            GuildLogEvent_GuildEvent::SignedOff => {}
-            GuildLogEvent_GuildEvent::GuildBankBagSlotsChanged => {}
-            GuildLogEvent_GuildEvent::BanktabPurchased => {}
-            GuildLogEvent_GuildEvent::Unk5 => {}
-            GuildLogEvent_GuildEvent::GuildBankUpdateMoney => {}
-            GuildLogEvent_GuildEvent::GuildBankMoneyWithdrawn => {}
-            GuildLogEvent_GuildEvent::GuildBankTextChanged => {}
+            _ => {}
         }
 
         // unix_time: u32

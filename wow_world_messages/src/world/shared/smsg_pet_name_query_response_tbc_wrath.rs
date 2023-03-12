@@ -57,7 +57,7 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
                 }
 
             }
-            SMSG_PET_NAME_QUERY_RESPONSE_PetQueryDisabledNames::NotPresent => {}
+            _ => {}
         }
 
         Ok(())

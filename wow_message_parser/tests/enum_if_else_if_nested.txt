@@ -41,8 +41,7 @@ impl EnumIfElseIfNested {
                 w.write_all(&zero.to_le_bytes())?;
 
             }
-            EnumIfElseIfNested_SimpleEnum::One => {}
-            EnumIfElseIfNested_SimpleEnum::Two => {}
+            _ => {}
         }
 
         Ok(())

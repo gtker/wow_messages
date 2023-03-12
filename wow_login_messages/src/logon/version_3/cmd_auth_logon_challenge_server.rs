@@ -101,7 +101,6 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
                 w.write_all(&u8::from(security_flag.as_int()).to_le_bytes())?;
 
                 match &security_flag {
-                    CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::None => {}
                     CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::Pin {
                         pin_grid_seed,
                         pin_salt,
@@ -115,24 +114,11 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
                         }
 
                     }
+                    _ => {}
                 }
 
             }
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknown0 => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknown1 => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailBanned => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknownAccount => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailIncorrectPassword => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailAlreadyOnline => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailNoTime => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailDbBusy => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailVersionInvalid => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::LoginDownloadFile => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailInvalidServer => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailSuspended => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailNoAccess => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SuccessSurvey => {}
-            CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailParentalcontrol => {}
+            _ => {}
         }
 
         Ok(())

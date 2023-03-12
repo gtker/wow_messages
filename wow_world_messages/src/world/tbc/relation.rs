@@ -49,7 +49,6 @@ impl Relation {
             w.write_all(&u8::from(if_statement.status.as_int()).to_le_bytes())?;
 
             match &if_statement.status {
-                Relation_FriendStatus::Offline => {}
                 Relation_FriendStatus::Online {
                     area,
                     class,
@@ -65,9 +64,7 @@ impl Relation {
                     w.write_all(&u32::from(class.as_int()).to_le_bytes())?;
 
                 }
-                Relation_FriendStatus::Afk => {}
-                Relation_FriendStatus::Unknown3 => {}
-                Relation_FriendStatus::Dnd => {}
+                _ => {}
             }
 
         }

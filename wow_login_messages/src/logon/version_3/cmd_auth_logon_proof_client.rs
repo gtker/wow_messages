@@ -62,7 +62,6 @@ impl CMD_AUTH_LOGON_PROOF_Client {
         w.write_all(&u8::from(self.security_flag.as_int()).to_le_bytes())?;
 
         match &self.security_flag {
-            CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None => {}
             CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::Pin {
                 pin_hash,
                 pin_salt,
@@ -78,6 +77,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
                 }
 
             }
+            _ => {}
         }
 
         Ok(())

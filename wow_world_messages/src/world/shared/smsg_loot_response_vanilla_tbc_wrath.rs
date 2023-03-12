@@ -49,14 +49,7 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
                 w.write_all(&u8::from(loot_error.as_int()).to_le_bytes())?;
 
             }
-            SMSG_LOOT_RESPONSE_LootMethod::Corpse => {}
-            SMSG_LOOT_RESPONSE_LootMethod::Pickpocketing => {}
-            SMSG_LOOT_RESPONSE_LootMethod::Fishing => {}
-            SMSG_LOOT_RESPONSE_LootMethod::Disenchanting => {}
-            SMSG_LOOT_RESPONSE_LootMethod::Skinning => {}
-            SMSG_LOOT_RESPONSE_LootMethod::Fishinghole => {}
-            SMSG_LOOT_RESPONSE_LootMethod::FishingFail => {}
-            SMSG_LOOT_RESPONSE_LootMethod::Insignia => {}
+            _ => {}
         }
 
         // gold: Gold
