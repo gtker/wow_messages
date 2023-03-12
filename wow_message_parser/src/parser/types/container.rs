@@ -19,6 +19,7 @@ use crate::rust_printer::{
 };
 use crate::CONTAINER_SELF_SIZE_FIELD;
 use std::cmp::Ordering;
+use std::collections::{BTreeMap, BTreeSet};
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Ord, PartialOrd)]
 pub(crate) enum ContainerType {
@@ -482,7 +483,7 @@ impl Container {
         false
     }
 
-    pub(crate) fn get_imports(&self, version: Version) -> Vec<String> {
+    pub(crate) fn get_imports(&self, version: Version) -> BTreeMap<String, BTreeSet<String>> {
         fn object_prefix(s: &ObjectTags, e: &ObjectTags, version: Version, name: &str) -> String {
             if s.has_world_version() && s.shared() {
                 if e.is_in_base() && s.is_in_base() {
@@ -503,84 +504,86 @@ impl Container {
             }
         }
 
-        let mut v = self
-            .all_definitions()
-            .iter()
-            .map(move |a| {
-                let name = a.ty().rust_str();
+        let mut v: BTreeMap<String, BTreeSet<String>> = BTreeMap::new();
 
-                Some(match a.ty() {
-                    Type::CString
-                    | Type::SizedCString
-                    | Type::String
-                    | Type::Integer(_)
-                    | Type::Bool(_)
-                    | Type::FloatingPoint(_) => return None,
+        for a in self.all_definitions() {
+            let name = a.ty().rust_str();
 
-                    Type::DateTime | Type::PackedGuid | Type::Guid => {
-                        format!("crate::{name}")
-                    }
+            let (prefix, ty) = match a.ty() {
+                Type::CString
+                | Type::SizedCString
+                | Type::String
+                | Type::Integer(_)
+                | Type::Bool(_)
+                | Type::FloatingPoint(_) => continue,
 
-                    Type::EnchantMask
-                    | Type::InspectTalentGearMask
-                    | Type::AchievementDoneArray
-                    | Type::AchievementInProgressArray
-                    | Type::AuraMask
-                    | Type::UpdateMask => {
-                        format!("crate::{}::{name}", version.as_major_world().module_name())
-                    }
+                Type::DateTime | Type::PackedGuid | Type::Guid => ("crate".to_string(), name),
 
-                    Type::MonsterMoveSplines => {
-                        format!("crate::shared::monster_move_spline_vanilla_tbc_wrath::{name}")
-                    }
+                Type::EnchantMask
+                | Type::InspectTalentGearMask
+                | Type::AchievementDoneArray
+                | Type::AchievementInProgressArray
+                | Type::AuraMask
+                | Type::UpdateMask => (
+                    format!("crate::{}", version.as_major_world().module_name()),
+                    name,
+                ),
 
-                    Type::Gold => {
-                        let pre = if self.tags().is_in_base() {
-                            "crate"
-                        } else {
-                            "wow_world_base"
-                        };
-                        format!("{pre}::shared::gold_vanilla_tbc_wrath::{name}")
-                    }
-                    Type::Level | Type::Level16 | Type::Level32 => {
-                        let pre = if self.tags().is_in_base() {
-                            "crate"
-                        } else {
-                            "wow_world_base"
-                        };
-                        format!("{pre}::shared::level_vanilla_tbc_wrath::{name}")
-                    }
+                Type::MonsterMoveSplines => (
+                    "crate::shared::monster_move_spline_vanilla_tbc_wrath".to_string(),
+                    name,
+                ),
 
-                    Type::Array(array) => match array.ty() {
-                        ArrayType::CString | ArrayType::Integer(_) => return None,
+                Type::Gold => {
+                    let pre = if self.tags().is_in_base() {
+                        "crate"
+                    } else {
+                        "wow_world_base"
+                    };
+                    (format!("{pre}::shared::gold_vanilla_tbc_wrath"), name)
+                }
+                Type::Level | Type::Level16 | Type::Level32 => {
+                    let pre = if self.tags().is_in_base() {
+                        "crate"
+                    } else {
+                        "wow_world_base"
+                    };
+                    (format!("{pre}::shared::level_vanilla_tbc_wrath"), name)
+                }
 
-                        ArrayType::Guid | ArrayType::PackedGuid => {
-                            format!("crate::Guid")
-                        }
+                Type::Array(array) => {
+                    let name = array.rust_str_inner();
+                    match array.ty() {
+                        ArrayType::CString | ArrayType::Integer(_) => continue,
+
+                        ArrayType::Guid | ArrayType::PackedGuid => ("crate".to_string(), name),
 
                         ArrayType::Struct(e) => {
                             let pre = object_prefix(self.tags(), e.tags(), version, e.name());
-
-                            let name = e.name();
-                            format!("{pre}::{name}")
+                            (pre, name)
                         }
-                    },
-
-                    Type::Enum { e, .. } | Type::Flag { e, .. } => {
-                        let pre = object_prefix(self.tags(), e.tags(), version, e.name());
-                        format!("{pre}::{name}")
                     }
-                    Type::Struct { e } => {
-                        let pre = object_prefix(self.tags(), e.tags(), version, e.name());
-                        format!("{pre}::{name}")
-                    }
-                })
-            })
-            .filter_map(|a| a)
-            .collect::<Vec<_>>();
+                }
 
-        v.sort();
-        v.dedup();
+                Type::Enum { e, .. } | Type::Flag { e, .. } => {
+                    let pre = object_prefix(self.tags(), e.tags(), version, e.name());
+                    (pre, name)
+                }
+                Type::Struct { e } => {
+                    let pre = object_prefix(self.tags(), e.tags(), version, e.name());
+                    (pre, name)
+                }
+            };
+
+            if let Some(tys) = v.get_mut(&prefix) {
+                tys.insert(ty);
+            } else {
+                let mut tys = BTreeSet::new();
+                tys.insert(ty);
+
+                v.insert(prefix, tys);
+            }
+        }
 
         v
     }

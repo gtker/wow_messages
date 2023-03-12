@@ -82,6 +82,15 @@ impl Array {
         }
     }
 
+    pub(crate) fn rust_str_inner(&self) -> String {
+        match &self.inner {
+            ArrayType::Integer(i) => i.rust_str().to_string(),
+            ArrayType::Struct(e) => e.name().to_string(),
+            ArrayType::CString => "String".to_string(),
+            ArrayType::Guid | ArrayType::PackedGuid => "Guid".to_string(),
+        }
+    }
+
     pub(crate) fn is_byte_array(&self) -> bool {
         matches!(self.ty(), ArrayType::Integer(IntegerType::U8))
     }

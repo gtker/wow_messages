@@ -54,8 +54,10 @@ fn print_includes(s: &mut Writer, e: &Container) {
     s.wln("use std::io::{Read, Write};");
 
     let (version, _) = e.tags().first_and_main_versions();
-    for import in e.get_imports(version) {
-        s.wln(format!("use {import};"));
+    for (prefix, types) in e.get_imports(version) {
+        for ty in types {
+            s.wln(format!("use {prefix}::{ty};"));
+        }
     }
 
     s.newline();
