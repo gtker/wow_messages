@@ -390,9 +390,11 @@ fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
             for enumerator in re.enumerators() {
                 if enumerator.has_members_in_struct() {
                     s.open_curly(format!("Self::{name}", name = enumerator.rust_name()));
+
                     for m in enumerator.members_in_struct() {
                         s.wln(format!("{},", m.name()));
                     }
+
                     s.closing_curly_with(" => {");
                     s.inc_indent();
                 } else {
