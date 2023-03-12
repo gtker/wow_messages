@@ -557,8 +557,11 @@ impl Writer {
         self.inner.write_str(s.as_ref()).unwrap();
     }
     pub(crate) fn w_break_at(&mut self, s: impl AsRef<str>, break_at: usize) {
-        if self.get_column() >= break_at {
+        let column = self.get_column();
+        if column >= break_at {
             self.newline();
+            self.w(s.as_ref());
+        } else if column == 0 {
             self.w(s.as_ref());
         } else {
             self.w_no_indent(s.as_ref());
@@ -574,6 +577,10 @@ impl Writer {
         self.inner.write_str("\n").unwrap();
     }
 
+    pub(crate) fn space(&mut self) {
+        self.inner.write_str(" ").unwrap();
+    }
+
     pub(crate) fn w(&mut self, s: impl AsRef<str>) {
         for _ in 0..self.indentation_level {
             self.inner.write_str(Self::INDENTATION).unwrap();
@@ -583,7 +590,7 @@ impl Writer {
     }
 
     fn get_column(&self) -> usize {
-        self.inner.len() - self.inner.rfind(|a| a == '\n').unwrap()
+        self.inner.len() - (self.inner.rfind(|a| a == '\n').unwrap() + 1)
     }
 }
 
