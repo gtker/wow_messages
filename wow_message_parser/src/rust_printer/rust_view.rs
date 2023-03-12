@@ -37,8 +37,8 @@ impl RustMember {
     pub(crate) fn tags(&self) -> &MemberTags {
         &self.tags
     }
-    pub(crate) fn constant_sized(&self) -> bool {
-        self.sizes.is_constant().is_some()
+    pub(crate) fn constant_sized(&self) -> Option<usize> {
+        self.sizes.is_constant()
     }
 
     pub(crate) fn all_members(&self) -> Vec<&RustMember> {
@@ -423,7 +423,6 @@ impl RustType {
             RustType::Struct { ty_name, .. } => ty_name.clone(),
             _ => self.to_type().rust_str(),
         }
-        
     }
 
     pub(crate) fn to_type(&self) -> Type {

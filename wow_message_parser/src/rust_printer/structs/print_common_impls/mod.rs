@@ -2,9 +2,7 @@ use crate::file_utils::get_import_path;
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
-use crate::parser::types::sizes::{
-    Sizes, DATETIME_SIZE, GOLD_SIZE, GUID_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE,
-};
+use crate::parser::types::sizes::Sizes;
 use crate::parser::types::ty::Type;
 use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::rust_printer::rust_view::{RustMember, RustObject, RustType};
@@ -473,15 +471,6 @@ pub(crate) fn print_rust_members_sizes(
 
 pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) {
     let str = match m.ty() {
-        RustType::Bool(i) => format!("{}", i.size()),
-        RustType::Integer(i) => i.size().to_string(),
-        RustType::Floating(f) => f.size().to_string(),
-        RustType::Guid => GUID_SIZE.to_string(),
-        RustType::Gold => GOLD_SIZE.to_string(),
-        RustType::Level16 => LEVEL16_SIZE.to_string(),
-        RustType::Level32 => LEVEL32_SIZE.to_string(),
-        RustType::Level => LEVEL_SIZE.to_string(),
-        RustType::DateTime => DATETIME_SIZE.to_string(),
         RustType::String => format!("{prefix}{name}.len() + 1", name = m.name(), prefix = prefix),
         RustType::CString => format!("{prefix}{name}.len() + 1", name = m.name(), prefix = prefix),
         RustType::SizedCString => {
@@ -489,7 +478,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
         }
         RustType::Struct { sizes, .. } => {
             if let Some(size) = sizes.is_constant() {
-                format!("{size}")
+                size.to_string()
             } else {
                 format!("{prefix}{name}.size()", prefix = prefix, name = m.name())
             }
@@ -547,7 +536,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                     }
                 },
                 ArrayType::Struct(_) => match array.size() {
-                    ArraySize::Fixed(fixed_value) => match m.constant_sized() {
+                    ArraySize::Fixed(fixed_value) => match m.constant_sized().is_some() {
                         true => format!(
                             "{fixed_value} * {inner_type_size}",
                             inner_type_size = inner_sizes.maximum(),
@@ -612,6 +601,8 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                 }
             }
         }
+
+        _ => m.constant_sized().unwrap().to_string(),
     };
     s.w_no_indent(str);
     s.wln_no_indent(m.size_comment());
