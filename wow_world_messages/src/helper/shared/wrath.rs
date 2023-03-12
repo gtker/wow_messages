@@ -1,7 +1,6 @@
-use crate::util::{
-    wrath_get_encrypted_client, wrath_get_encrypted_server, wrath_get_unencrypted_client,
-    wrath_get_unencrypted_server,
-};
+#[cfg(feature = "encryption")]
+use crate::util::{wrath_get_encrypted_client, wrath_get_encrypted_server};
+use crate::util::{wrath_get_unencrypted_client, wrath_get_unencrypted_server};
 use crate::util::{
     CLIENT_HEADER_LENGTH, LARGE_MESSAGE_THRESHOLD, MAXIMUM_SERVER_HEADER_LENGTH,
     MINIMUM_SERVER_HEADER_LENGTH,

@@ -1,7 +1,6 @@
-use crate::util::{
-    tbc_get_encrypted_client, tbc_get_encrypted_server, tbc_get_unencrypted_client,
-    tbc_get_unencrypted_server,
-};
+#[cfg(feature = "encryption")]
+use crate::util::{tbc_get_encrypted_client, tbc_get_encrypted_server};
+use crate::util::{tbc_get_unencrypted_client, tbc_get_unencrypted_server};
 use crate::util::{CLIENT_HEADER_LENGTH, SERVER_HEADER_LENGTH};
 use crate::Message;
 #[cfg(any(feature = "tokio", feature = "async-std"))]

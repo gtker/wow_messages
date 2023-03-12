@@ -1,9 +1,9 @@
 use std::io;
-#[cfg(feature = "tbc")]
+#[cfg(all(feature = "tbc", feature = "encryption"))]
 use wow_srp::tbc_header::EncrypterHalf;
-#[cfg(feature = "vanilla")]
+#[cfg(all(feature = "vanilla", feature = "encryption"))]
 use wow_srp::vanilla_header;
-#[cfg(feature = "wrath")]
+#[cfg(all(feature = "wrath", feature = "encryption"))]
 use wow_srp::wrath_header::{ClientEncrypterHalf, ServerEncrypterHalf};
 
 #[cfg(feature = "wrath")]
@@ -137,7 +137,7 @@ pub(crate) fn tbc_get_encrypted_client(
     e.write_encrypted_client_header(&mut w, size, opcode as u32)
 }
 
-#[cfg(feature = "vanilla")]
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub(crate) fn vanilla_get_unencrypted_server(
     mut w: impl io::Write,
     opcode: u16,
@@ -165,7 +165,7 @@ pub(crate) fn vanilla_get_encrypted_server(
     e.write_encrypted_server_header(&mut w, size, opcode)
 }
 
-#[cfg(feature = "vanilla")]
+#[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub(crate) fn vanilla_get_unencrypted_client(
     mut w: impl io::Write,
     opcode: u16,

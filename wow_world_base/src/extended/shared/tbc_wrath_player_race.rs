@@ -1,5 +1,4 @@
 use crate::shared::player_gender_vanilla_tbc_wrath::PlayerGender;
-use crate::wrath::Faction;
 
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 impl crate::shared::player_race_tbc_wrath::PlayerRace {
