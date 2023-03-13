@@ -3,11 +3,8 @@ use crate::{ServerMessage, ClientMessage};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
-use crate::logon::version_3::CMD_AUTH_LOGON_CHALLENGE_Server;
-use crate::logon::version_2::CMD_AUTH_LOGON_PROOF_Server;
-use crate::logon::version_2::CMD_REALM_LIST_Server;
-use crate::logon::version_3::CMD_XFER_INITIATE;
-use crate::logon::version_3::CMD_XFER_DATA;
+use super::*;
+use crate::all::*;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ServerOpcodeMessage {
@@ -115,14 +112,6 @@ impl From<CMD_XFER_DATA> for ServerOpcodeMessage {
     }
 }
 
-use crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client;
-use crate::logon::version_3::CMD_AUTH_LOGON_PROOF_Client;
-use crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client;
-use crate::logon::version_3::CMD_SURVEY_RESULT;
-use crate::logon::version_2::CMD_REALM_LIST_Client;
-use crate::logon::version_3::CMD_XFER_ACCEPT;
-use crate::logon::version_3::CMD_XFER_RESUME;
-use crate::logon::version_3::CMD_XFER_CANCEL;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ClientOpcodeMessage {

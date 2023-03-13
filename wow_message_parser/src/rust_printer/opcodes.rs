@@ -75,6 +75,9 @@ pub(crate) fn includes(
             s.wln(TOKIO_IMPORT);
             s.wln(CFG_ASYNC_ASYNC_STD);
             s.wln(ASYNC_STD_IMPORT);
+
+            s.wln("use super::*;");
+            s.wln("use crate::all::*;");
         }
         ContainerType::CMsg(_) => {
             s.wln(format!(
@@ -117,28 +120,10 @@ pub(crate) fn includes(
                 "use crate::{}::opcode_to_name;",
                 major_version_to_string(&version.as_major_world()),
             ));
+
+            s.wln("use super::*;");
         }
         _ => {}
-    }
-
-    for e in v {
-        if let ContainerType::SMsg(_) = container_type {
-            if let ContainerType::Msg(_) = e.container_type() {
-                continue;
-            }
-        }
-
-        let import_version = match e.tags().import_version() {
-            Version::Login(l) => l.into(),
-            // TODO: World does not deduplicate same types
-            Version::World(_) => version,
-        };
-        let module_name = get_import_path(import_version);
-        s.wln(format!(
-            "use {module_name}::{name};",
-            module_name = module_name,
-            name = e.name(),
-        ));
     }
 
     s.newline();

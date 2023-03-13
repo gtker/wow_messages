@@ -3,11 +3,8 @@ use crate::{ServerMessage, ClientMessage};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
 use async_std::io::{ReadExt, WriteExt};
-use crate::logon::version_2::CMD_AUTH_LOGON_CHALLENGE_Server;
-use crate::logon::version_2::CMD_AUTH_LOGON_PROOF_Server;
-use crate::logon::version_2::CMD_AUTH_RECONNECT_CHALLENGE_Server;
-use crate::logon::version_2::CMD_AUTH_RECONNECT_PROOF_Server;
-use crate::logon::version_2::CMD_REALM_LIST_Server;
+use super::*;
+use crate::all::*;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ServerOpcodeMessage {
@@ -115,11 +112,6 @@ impl From<CMD_REALM_LIST_Server> for ServerOpcodeMessage {
     }
 }
 
-use crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client;
-use crate::logon::version_2::CMD_AUTH_LOGON_PROOF_Client;
-use crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client;
-use crate::logon::version_2::CMD_AUTH_RECONNECT_PROOF_Client;
-use crate::logon::version_2::CMD_REALM_LIST_Client;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ClientOpcodeMessage {
