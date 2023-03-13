@@ -243,9 +243,7 @@ impl ParsedType {
             ParsedType::Level => sizes.inc_both(LEVEL_SIZE.into()),
             ParsedType::Level16 => sizes.inc_both(LEVEL16_SIZE),
             ParsedType::Level32 => sizes.inc_both(LEVEL32_SIZE),
-            ParsedType::NamedGuid => {
-                sizes.inc(NAMED_GUID_MIN_SIZE.into(), NAMED_GUID_MAX_SIZE.into())
-            }
+            ParsedType::NamedGuid => sizes.inc(NAMED_GUID_MIN_SIZE, NAMED_GUID_MAX_SIZE),
             ParsedType::VariableItemRandomProperty => sizes.inc(
                 VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
                 VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,

@@ -233,7 +233,7 @@ impl Type {
             Type::Level => sizes.inc_both(LEVEL_SIZE.into()),
             Type::Level16 => sizes.inc_both(LEVEL16_SIZE),
             Type::Level32 => sizes.inc_both(LEVEL32_SIZE),
-            Type::NamedGuid => sizes.inc(NAMED_GUID_MIN_SIZE.into(), NAMED_GUID_MAX_SIZE.into()),
+            Type::NamedGuid => sizes.inc(NAMED_GUID_MIN_SIZE, NAMED_GUID_MAX_SIZE),
             Type::VariableItemRandomProperty => sizes.inc(
                 VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
                 VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,

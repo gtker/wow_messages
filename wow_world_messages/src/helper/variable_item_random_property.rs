@@ -19,12 +19,10 @@ impl VariableItemRandomProperty {
             } else {
                 None
             }
+        } else if item_random_property_id == 0 {
+            Some(Self::zero())
         } else {
-            if item_random_property_id == 0 {
-                Some(Self::zero())
-            } else {
-                None
-            }
+            None
         }
     }
 

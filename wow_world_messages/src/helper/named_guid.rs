@@ -18,12 +18,10 @@ impl NamedGuid {
             } else {
                 None
             }
+        } else if guid == 0 {
+            Some(Self::zero())
         } else {
-            if guid == 0 {
-                Some(Self { guid, name: None })
-            } else {
-                None
-            }
+            None
         }
     }
 
@@ -46,7 +44,7 @@ impl NamedGuid {
     }
 
     pub fn name(&self) -> Option<&str> {
-        self.name.as_ref().map(|a| a.as_str())
+        self.name.as_deref()
     }
 
     pub(crate) fn read(r: &mut impl Read) -> Result<Self, ParseError> {
