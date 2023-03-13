@@ -10,7 +10,7 @@ mod async_std_impl;
 #[cfg(feature = "async-std")]
 pub use async_std_impl::*;
 
-use std::io::{Read, Write};
+use std::io::Read;
 
 pub(crate) const CSTRING_LARGEST_ALLOWED: usize = 256;
 
@@ -48,32 +48,11 @@ pub fn read_u8_le<R: Read>(r: &mut R) -> Result<u8, std::io::Error> {
     Ok(u8::from_le_bytes(v))
 }
 
-pub fn write_u8_le<W: Write>(w: &mut W, v: u8) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_le_bytes())?;
-    Ok(())
-}
-
 // u16
 pub fn read_u16_le<R: Read>(r: &mut R) -> Result<u16, std::io::Error> {
     let mut v = [0_u8; 2];
     r.read_exact(&mut v)?;
     Ok(u16::from_le_bytes(v))
-}
-
-pub fn read_u16_be<R: Read>(r: &mut R) -> Result<u16, std::io::Error> {
-    let mut v = [0_u8; 2];
-    r.read_exact(&mut v)?;
-    Ok(u16::from_be_bytes(v))
-}
-
-pub fn write_u16_le<W: Write>(w: &mut W, v: u16) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_le_bytes())?;
-    Ok(())
-}
-
-pub fn write_u16_be<W: Write>(w: &mut W, v: u16) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_be_bytes())?;
-    Ok(())
 }
 
 // u32
@@ -89,35 +68,9 @@ pub fn read_u32_be<R: Read>(r: &mut R) -> Result<u32, std::io::Error> {
     Ok(u32::from_be_bytes(v))
 }
 
-pub fn write_u32_le<W: Write>(w: &mut W, v: u32) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_le_bytes())?;
-    Ok(())
-}
-
-pub fn write_u32_be<W: Write>(w: &mut W, v: u32) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_be_bytes())?;
-    Ok(())
-}
-
 // u64
 pub fn read_u64_le<R: Read>(r: &mut R) -> Result<u64, std::io::Error> {
     let mut v = [0_u8; 8];
     r.read_exact(&mut v)?;
     Ok(u64::from_le_bytes(v))
-}
-
-pub fn read_u64_be<R: Read>(r: &mut R) -> Result<u64, std::io::Error> {
-    let mut v = [0_u8; 8];
-    r.read_exact(&mut v)?;
-    Ok(u64::from_be_bytes(v))
-}
-
-pub fn write_u64_le<W: Write>(w: &mut W, v: u64) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_le_bytes())?;
-    Ok(())
-}
-
-pub fn write_u64_be<W: Write>(w: &mut W, v: u64) -> Result<(), std::io::Error> {
-    w.write_all(&v.to_be_bytes())?;
-    Ok(())
 }
