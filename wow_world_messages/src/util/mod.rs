@@ -34,19 +34,6 @@ pub(crate) fn assert_empty(
     }
 }
 
-pub fn read_fixed_string_to_vec<R: Read>(
-    r: &mut R,
-    size: usize,
-) -> Result<Vec<u8>, std::io::Error> {
-    let mut v = Vec::with_capacity(size);
-
-    for _ in 0..size {
-        v.push(read_u8_le(r)?);
-    }
-
-    Ok(v)
-}
-
 pub fn read_c_string_to_vec<R: Read>(r: &mut R) -> Result<Vec<u8>, std::io::Error> {
     let mut v = Vec::with_capacity(CSTRING_LARGEST_ALLOWED);
 
@@ -102,23 +89,11 @@ pub fn read_u32_le<R: Read>(r: &mut R) -> Result<u32, std::io::Error> {
     Ok(u32::from_le_bytes(v))
 }
 
-pub fn read_u32_be<R: Read>(r: &mut R) -> Result<u32, std::io::Error> {
-    let mut v = [0_u8; 4];
-    r.read_exact(&mut v)?;
-    Ok(u32::from_be_bytes(v))
-}
-
 // u64
 pub fn read_u64_le<R: Read>(r: &mut R) -> Result<u64, std::io::Error> {
     let mut v = [0_u8; 8];
     r.read_exact(&mut v)?;
     Ok(u64::from_le_bytes(v))
-}
-
-pub fn read_u64_be<R: Read>(r: &mut R) -> Result<u64, std::io::Error> {
-    let mut v = [0_u8; 8];
-    r.read_exact(&mut v)?;
-    Ok(u64::from_be_bytes(v))
 }
 
 // u32
@@ -128,36 +103,11 @@ pub fn read_i32_le<R: Read>(r: &mut R) -> Result<i32, std::io::Error> {
     Ok(i32::from_le_bytes(v))
 }
 
-pub fn read_i32_be<R: Read>(r: &mut R) -> Result<i32, std::io::Error> {
-    let mut v = [0_u8; 4];
-    r.read_exact(&mut v)?;
-    Ok(i32::from_be_bytes(v))
-}
-
 // f32
 pub fn read_f32_le<R: Read>(r: &mut R) -> Result<f32, std::io::Error> {
     let mut v = [0_u8; 4];
     r.read_exact(&mut v)?;
     Ok(f32::from_le_bytes(v))
-}
-
-pub fn read_f32_be<R: Read>(r: &mut R) -> Result<f32, std::io::Error> {
-    let mut v = [0_u8; 4];
-    r.read_exact(&mut v)?;
-    Ok(f32::from_be_bytes(v))
-}
-
-// f64
-pub fn read_f64_le<R: Read>(r: &mut R) -> Result<f64, std::io::Error> {
-    let mut v = [0_u8; 8];
-    r.read_exact(&mut v)?;
-    Ok(f64::from_le_bytes(v))
-}
-
-pub fn read_f64_be<R: Read>(r: &mut R) -> Result<f64, std::io::Error> {
-    let mut v = [0_u8; 8];
-    r.read_exact(&mut v)?;
-    Ok(f64::from_be_bytes(v))
 }
 
 pub fn zlib_compressed_size(data: &[u8]) -> usize {

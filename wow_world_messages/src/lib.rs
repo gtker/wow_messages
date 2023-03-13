@@ -27,7 +27,6 @@ pub mod errors;
 pub mod helper;
 mod manual;
 mod traits;
-#[allow(dead_code)]
 pub(crate) mod util;
 #[allow(
     unused,
