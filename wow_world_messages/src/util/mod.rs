@@ -234,8 +234,7 @@ pub(crate) fn write_achievement_done(
     mut v: impl Write,
 ) -> Result<(), std::io::Error> {
     for d in done {
-        v.write_all(d.achievement.to_le_bytes().as_slice())?;
-        v.write_all(d.time.as_int().to_le_bytes().as_slice())?;
+        d.write_into_vec(&mut v)?;
     }
 
     v.write_all(ACHIEVEMENT_SENTINEL_VALUE.to_le_bytes().as_slice())?;
