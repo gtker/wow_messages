@@ -9,7 +9,10 @@ pub struct VariableItemRandomProperty {
 }
 
 impl VariableItemRandomProperty {
-    pub fn new(item_random_property_id: u32, item_suffix_factor: Option<u32>) -> Option<Self> {
+    pub const fn new(
+        item_random_property_id: u32,
+        item_suffix_factor: Option<u32>,
+    ) -> Option<Self> {
         if let Some(suffix) = item_suffix_factor {
             if item_random_property_id != 0 {
                 Some(Self {
@@ -27,14 +30,14 @@ impl VariableItemRandomProperty {
     }
 
     /// No random property.
-    pub fn zero() -> Self {
+    pub const fn zero() -> Self {
         Self {
             item_random_property_id: 0,
             item_suffix_factor: None,
         }
     }
 
-    pub fn is_zero(&self) -> bool {
+    pub const fn is_zero(&self) -> bool {
         self.item_random_property_id == 0
     }
 
@@ -69,7 +72,7 @@ impl VariableItemRandomProperty {
         })
     }
 
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 + if self.item_suffix_factor.is_some() {
             4
         } else {

@@ -71,7 +71,7 @@ fn vector3d_to_packed(v: &Vector3d) -> u32 {
     packed
 }
 
-fn packed_to_vector3d(p: u32) -> Vector3d {
+const fn packed_to_vector3d(p: u32) -> Vector3d {
     let x = ((p & 0x7FF) / 4) as f32;
     let y = (((p >> 11) & 0x7FF) / 4) as f32;
     let z = (((p >> 22) & 0x3FF) / 4) as f32;

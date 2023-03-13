@@ -10,11 +10,14 @@ pub struct NamedGuid {
 }
 
 impl NamedGuid {
+    #[allow(clippy::missing_const_for_fn)] // `the destructor for this type cannot be evaluated in constant functions` for Option<String>
     pub fn new(guid: u64, name: Option<String>) -> Option<Self> {
-        let name = name.into();
         if let Some(name) = name {
             if guid != 0 {
-                Some(Self { guid, name })
+                Some(Self {
+                    guid,
+                    name: Some(name),
+                })
             } else {
                 None
             }
@@ -28,18 +31,18 @@ impl NamedGuid {
     /// Guid with 0 value.
     ///
     /// Client uses this to mean different things, including things like no target selected.
-    pub fn zero() -> Self {
+    pub const fn zero() -> Self {
         Self {
             guid: 0,
             name: None,
         }
     }
 
-    pub fn is_zero(&self) -> bool {
+    pub const fn is_zero(&self) -> bool {
         self.guid == 0
     }
 
-    pub fn guid(&self) -> u64 {
+    pub const fn guid(&self) -> u64 {
         self.guid
     }
 

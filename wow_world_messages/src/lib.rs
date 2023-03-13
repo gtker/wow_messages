@@ -14,7 +14,6 @@
     non_snake_case,
     clippy::missing_errors_doc,
     clippy::upper_case_acronyms,
-    clippy::missing_const_for_fn,
     clippy::approx_constant,
     clippy::derive_partial_eq_without_eq
 )]
@@ -36,6 +35,7 @@ pub(crate) mod util;
     clippy::single_match,
     clippy::large_enum_variant,
     clippy::enum_variant_names,
+    clippy::missing_const_for_fn,
     clippy::needless_borrow
 )]
 mod world;

@@ -47,7 +47,7 @@ pub(crate) fn array_fill_ones(array: &mut [u32]) {
     }
 }
 
-pub(crate) fn has_array_bit_set(array: &[u32], bit: u16) -> bool {
+pub(crate) const fn has_array_bit_set(array: &[u32], bit: u16) -> bool {
     let index = bit / 32;
     let offset = bit % 32;
     let item = array[index as usize];

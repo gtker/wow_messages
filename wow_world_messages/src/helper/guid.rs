@@ -9,22 +9,22 @@ pub struct Guid {
 }
 
 impl Guid {
-    pub fn new(guid: u64) -> Self {
+    pub const fn new(guid: u64) -> Self {
         Self { guid }
     }
 
     /// Guid with 0 value.
     ///
     /// Client uses this to mean different things, including things like no target selected.
-    pub fn zero() -> Self {
+    pub const fn zero() -> Self {
         Self::new(0)
     }
 
-    pub fn is_zero(&self) -> bool {
+    pub const fn is_zero(&self) -> bool {
         self.guid == 0
     }
 
-    pub fn guid(&self) -> u64 {
+    pub const fn guid(&self) -> u64 {
         self.guid
     }
 
