@@ -21,53 +21,44 @@ fn print_read_array(
     prefix: &str,
     postfix: &str,
 ) {
+    let name = d.name();
+
     if array.is_constant_sized_u8_array() {
         s.body_closing_with_semicolon(format!("let {name} =", name = d.name()), |s| {
             s.wln(format!(
                 "let mut {name} = [0_u8; {size}];",
-                name = d.name(),
                 size = array.size().str()
             ));
-            s.wln(format!(
-                "r.read_exact(&mut {name}){postfix}?;",
-                name = d.name(),
-                postfix = postfix
-            ));
-            s.wln(d.name());
+            s.wln(format!("r.read_exact(&mut {name}){postfix}?;",));
+            s.wln(name);
         });
 
         return;
     }
 
-    s.open_curly(format!("let {name} =", name = d.name()));
+    s.open_curly(format!("let {name} ="));
 
     match array.size() {
         ArraySize::Fixed(size) => {
             if array.inner_type_is_copy() {
                 s.wln(format!(
                     "let mut {name} = [{type_name}::default(); {size}];",
-                    name = d.name(),
                     type_name = array.ty().rust_str(),
                 ));
             } else {
                 s.wln(format!(
                     "let mut {name} = [(); {size}].map(|_| {ty}::default());",
-                    name = d.name(),
                     ty = array.ty().rust_str()
                 ));
             }
 
-            s.body(
-                format!("for i in {name}.iter_mut()", name = d.name()),
-                |s| {
-                    print_array_ty(s, array, d, prefix, "r", postfix, true);
-                },
-            );
+            s.body(format!("for i in {name}.iter_mut()"), |s| {
+                print_array_ty(s, array, d, prefix, "r", postfix, true);
+            });
         }
         ArraySize::Variable(m) => {
             s.wln(format!(
                 "let mut {name} = Vec::with_capacity({length} as usize);",
-                name = d.name(),
                 length = m.name()
             ));
 
@@ -96,7 +87,6 @@ fn print_read_array(
 
             s.wln(format!(
                 "let mut {name} = Vec::with_capacity(body_size as usize - current_size);",
-                name = d.name()
             ));
             s.body(loop_condition.as_str(), |s| {
                 print_array_ty(s, array, d, prefix, reader, postfix, false);
@@ -126,8 +116,7 @@ fn print_array_ty(
     match array.ty() {
         ArrayType::Integer(integer_type) => {
             s.wln(format!(
-                "{array_prefix}{module}::{prefix}read_{int_type}_{endian}(&mut {reader}){postfix}?{array_postfix}",
-                module = UTILITY_PATH,
+                "{array_prefix}{UTILITY_PATH}::{prefix}read_{int_type}_{endian}(&mut {reader}){postfix}?{array_postfix}",
                 int_type = integer_type.rust_str(),
                 endian = integer_type.rust_endian_str(),
             ));
@@ -547,7 +536,7 @@ fn print_read_if_statement_enum(
         let assignment_prefix = if !statement.part_of_separate_if_statement() {
             "let ".to_string()
         } else {
-            format!("{}_", if_statement_variable_name)
+            format!("{if_statement_variable_name}_")
         };
         for m in enumerator.original_fields() {
             if statement.contains(m) {
@@ -649,24 +638,21 @@ fn print_read_final_flag(s: &mut Writer, rds: &[RustDefiner]) {
             continue;
         }
 
+        let var_name = rd.variable_name();
+
         match rd.definer_type() {
             DefinerType::Enum => {}
             DefinerType::Flag => {
                 s.open_curly(format!(
                     "let {var_name} = {ty_name}",
-                    var_name = rd.variable_name(),
                     ty_name = rd.ty_name(),
                 ));
-                s.wln(format!(
-                    "inner: {var_name}.as_int(),",
-                    var_name = rd.variable_name()
-                ));
+                s.wln(format!("inner: {var_name}.as_int(),",));
 
                 for enumerator in rd.complex_flag_enumerators() {
                     s.wln(format!(
-                        "{field_name}: {c_var_name}_{f_name},",
+                        "{field_name}: {var_name}_{f_name},",
                         field_name = enumerator.name().to_lowercase(),
-                        c_var_name = rd.variable_name(),
                         f_name = enumerator.name(),
                     ));
                 }
@@ -723,7 +709,7 @@ pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &st
     }
 
     for variable in e.enum_separate_if_statement_variables() {
-        s.wln(format!("let mut {} = Default::default();", variable));
+        s.wln(format!("let mut {variable} = Default::default();"));
     }
 
     if !e.enum_separate_if_statement_variables().is_empty() {
