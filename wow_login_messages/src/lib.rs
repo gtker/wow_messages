@@ -112,7 +112,7 @@ use async_std::io::{ReadExt, WriteExt};
 
 pub mod errors;
 pub mod helper;
-#[allow(unused, clippy::complexity)]
+#[allow(unused, clippy::complexity, clippy::single_match)]
 pub(crate) mod logon;
 #[allow(unused)]
 pub(crate) mod util;

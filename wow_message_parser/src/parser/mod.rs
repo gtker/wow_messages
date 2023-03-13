@@ -96,7 +96,6 @@ pub(crate) fn parse_contents(contents: &str, filename: &Path) -> ParsedObjects {
     };
 
     let mut statements = file
-        .into_iter()
         .find(|a| a.as_rule() == Rule::statements)
         .expect("unable to find statements")
         .into_inner();

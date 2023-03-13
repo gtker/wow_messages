@@ -29,10 +29,16 @@ mod manual;
 mod traits;
 #[allow(dead_code)]
 pub(crate) mod util;
-#[allow(unused, clippy::complexity, clippy::bool_to_int_with_if, dead_code)]
-#[allow(clippy::large_enum_variant)]
-#[allow(clippy::enum_variant_names)]
-#[allow(clippy::needless_borrow)]
+#[allow(
+    unused,
+    clippy::complexity,
+    clippy::bool_to_int_with_if,
+    dead_code,
+    clippy::single_match,
+    clippy::large_enum_variant,
+    clippy::enum_variant_names,
+    clippy::needless_borrow
+)]
 mod world;
 
 pub use traits::*;

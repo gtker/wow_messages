@@ -131,34 +131,34 @@ fn print_container_example_definition(
             }
         }
         Type::DateTime => {
-            s.bytes(bytes.take(core::mem::size_of::<u32>()).into_iter());
+            s.bytes(bytes.take(core::mem::size_of::<u32>()));
         }
         Type::Bool(i) => {
-            s.bytes(bytes.take(i.size() as usize).into_iter());
+            s.bytes(bytes.take(i.size() as usize));
         }
         Type::Level16 => {
-            s.bytes(bytes.take(LEVEL16_SIZE).into_iter());
+            s.bytes(bytes.take(LEVEL16_SIZE));
         }
         Type::Level32 => {
-            s.bytes(bytes.take(LEVEL32_SIZE).into_iter());
+            s.bytes(bytes.take(LEVEL32_SIZE));
         }
         Type::Level => {
-            s.bytes(bytes.take(LEVEL_SIZE.into()).into_iter());
+            s.bytes(bytes.take(LEVEL_SIZE.into()));
         }
         Type::Gold => {
-            s.bytes(bytes.take(GOLD_SIZE.into()).into_iter());
+            s.bytes(bytes.take(GOLD_SIZE.into()));
         }
         Type::Guid => {
-            s.bytes(bytes.take(GUID_SIZE.into()).into_iter());
+            s.bytes(bytes.take(GUID_SIZE.into()));
         }
         Type::FloatingPoint(f) => {
-            s.bytes(bytes.take(f.size() as usize).into_iter());
+            s.bytes(bytes.take(f.size() as usize));
         }
         Type::PackedGuid => {
             let mask = bytes.next().unwrap();
             s.w(format!("{mask}, "));
             let bytes = bytes.take(mask.count_ones() as _);
-            s.bytes(bytes.into_iter());
+            s.bytes(bytes);
         }
         Type::CString => {
             let mut b = bytes.next().unwrap();
@@ -170,7 +170,7 @@ fn print_container_example_definition(
         }
         Type::String => {
             let length = *(bytes.take(1).collect::<Vec<_>>()[0]) as usize;
-            s.bytes(bytes.take(length).into_iter());
+            s.bytes(bytes.take(length));
         }
         Type::Array(array) => {
             print_container_example_array(s, array, bytes, values, o, tags, prefix);
@@ -246,7 +246,7 @@ fn print_container_example_definition(
             for block in blocks {
                 for bit in 0..32 {
                     if (block & 1 << bit) != 0 {
-                        s.bytes(bytes.take(4).into_iter());
+                        s.bytes(bytes.take(4));
                         s.wln_no_indent("// Item");
                     }
                 }
@@ -395,13 +395,13 @@ fn print_container_example_header(s: &mut DocWriter, e: &Container, bytes: &mut 
     match e.container_type() {
         ContainerType::CLogin(o) | ContainerType::SLogin(o) => {
             let bytes = bytes.take(core::mem::size_of::<u8>());
-            s.bytes(bytes.into_iter());
+            s.bytes(bytes);
             s.wln(format!("// opcode ({o})"));
             return;
         }
         ContainerType::CMsg(_) | ContainerType::SMsg(_) => {
             let size = bytes.take(core::mem::size_of::<u16>());
-            s.bytes(size.into_iter());
+            s.bytes(size);
             s.wln("// size");
         }
         ContainerType::Msg(_) => unimplemented!("MSG container example header"),
@@ -413,7 +413,7 @@ fn print_container_example_header(s: &mut DocWriter, e: &Container, bytes: &mut 
         ContainerType::SMsg(o) => (bytes.take(core::mem::size_of::<u16>()), o),
         _ => unimplemented!("msg in container examples"),
     };
-    s.bytes(opcode.into_iter());
+    s.bytes(opcode);
     s.wln(format!("// opcode ({o})"));
 }
 
