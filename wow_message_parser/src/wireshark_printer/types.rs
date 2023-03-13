@@ -209,6 +209,9 @@ impl WiresharkType {
             Type::InspectTalentGearMask => {
                 unreachable!("inspect talent gear mask is only in 3.3.5")
             }
+            Type::NamedGuid => {
+                unreachable!("named guid only in 2.4.3 and 3.3.5")
+            }
         })
     }
 

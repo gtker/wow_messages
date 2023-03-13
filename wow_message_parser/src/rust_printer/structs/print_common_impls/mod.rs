@@ -483,7 +483,8 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                 format!("{prefix}{name}.size()", prefix = prefix, name = m.name())
             }
         }
-        RustType::EnchantMask
+        RustType::NamedGuid
+        | RustType::EnchantMask
         | RustType::InspectTalentGearMask
         | RustType::MonsterMoveSpline
         | RustType::AchievementDoneArray

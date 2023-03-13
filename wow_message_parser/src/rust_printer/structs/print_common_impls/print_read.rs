@@ -394,7 +394,8 @@ fn print_read_definition(
             ));
         }
 
-        Type::Struct { .. }
+        Type::NamedGuid
+        | Type::Struct { .. }
         | Type::Guid
         | Type::UpdateMask
         | Type::AuraMask

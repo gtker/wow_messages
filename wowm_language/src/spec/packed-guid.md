@@ -78,3 +78,7 @@ data = [0xDE, 0xAD]
 
 print(hex(parse_packed_guid(byte_mask, data)))
 ```
+
+# NamedGuid
+
+A `u64` followed by a CString if the `u64` is not equal to 0.

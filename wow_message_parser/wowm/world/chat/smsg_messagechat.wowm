@@ -95,21 +95,13 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
      || chat_type == MONSTER_EMOTE)
     {
         SizedCString sender;
-        Guid target1;
-        /* TODO GUID_NEQ_ZERO
-        if (target != 0 && !isPlayer && !isPet) {
-            SizedCString target_name;
-        } */
+        NamedGuid target1;
     }
     else if (chat_type == BG_SYSTEM_NEUTRAL
           || chat_type == BG_SYSTEM_ALLIANCE
           || chat_type == BG_SYSTEM_HORDE)
     {
-        Guid target2;
-        /* TODO GUID_NEQ_ZERO
-        if (target != 0 && !isPlayer && !isPet) {
-            SizedCString target_name;
-        } */
+        NamedGuid target2;
     }
     else if (chat_type == CHANNEL) {
         CString channel_name;
@@ -140,11 +132,7 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
      || chat_type == BATTLENET)
     {
         SizedCString sender1;
-        Guid target1;
-        /* TODO GUID_NEQ_ZERO
-        if (target1 != 0 && !isPlayer && !isPet) {
-            SizedCString target_name;
-        } */
+        NamedGuid target1;
     }
     else if (chat_type == WHISPER_FOREIGN) {
         SizedCString sender2;
@@ -154,11 +142,7 @@ smsg SMSG_MESSAGECHAT = 0x0096 {
           || chat_type == BG_SYSTEM_ALLIANCE
           || chat_type == BG_SYSTEM_HORDE)
     {
-        Guid target3;
-        /* TODO GUID_NEQ_ZERO
-        if (target != 0 && !isPlayer && !isPet) {
-            SizedCString target_name;
-        } */
+        NamedGuid target3;
     }
     else if (chat_type == ACHIEVEMENT
           || chat_type == GUILD_ACHIEVEMENT)

@@ -241,7 +241,9 @@ pub(crate) fn print_write_definition(
                 "w.write_all(&{variable_prefix}{name}.guid().to_le_bytes()){postfix}?;",
             ));
         }
-        Type::Struct { .. }
+
+        Type::NamedGuid
+        | Type::Struct { .. }
         | Type::EnchantMask
         | Type::InspectTalentGearMask
         | Type::MonsterMoveSplines

@@ -280,6 +280,7 @@ fn print_container_example_definition(
         Type::InspectTalentGearMask => {
             unimplemented!("inspect talent gear mask example")
         }
+        Type::NamedGuid => unimplemented!("named guid example"),
     }
     s.wln(comment);
 }
@@ -538,7 +539,7 @@ fn print_container_field(
                 Type::Struct { e, .. } => {
                     format!("[{}]({}.md)", d.ty().str(), e.name().to_lowercase())
                 }
-                Type::PackedGuid | Type::Guid => {
+                Type::NamedGuid | Type::PackedGuid | Type::Guid => {
                     format!("[{}](../spec/packed-guid.md)", d.ty().str())
                 }
                 Type::UpdateMask => {

@@ -41,6 +41,8 @@ pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> u16 {
 pub(crate) const UPDATE_MASK_MIN_SIZE: u8 = 1;
 pub(crate) const PACKED_GUID_MAX_SIZE: u8 = 9;
 pub(crate) const PACKED_GUID_MIN_SIZE: u8 = 2;
+pub(crate) const NAMED_GUID_MIN_SIZE: u8 = 8;
+pub(crate) const NAMED_GUID_MAX_SIZE: usize = 8008;
 pub(crate) const GUID_SIZE: u8 = core::mem::size_of::<u64>() as u8;
 pub(crate) const GOLD_SIZE: u8 = core::mem::size_of::<u32>() as u8;
 pub(crate) const LEVEL_SIZE: u8 = core::mem::size_of::<u8>() as u8;

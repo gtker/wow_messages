@@ -519,7 +519,8 @@ impl Container {
 
                 Type::DateTime | Type::PackedGuid | Type::Guid => ("crate".to_string(), name),
 
-                Type::EnchantMask
+                Type::NamedGuid
+                | Type::EnchantMask
                 | Type::InspectTalentGearMask
                 | Type::AchievementDoneArray
                 | Type::AchievementInProgressArray

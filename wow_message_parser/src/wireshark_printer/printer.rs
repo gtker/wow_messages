@@ -438,6 +438,9 @@ fn print_definition(
         Type::InspectTalentGearMask => {
             unreachable!("inspect talent gear masks are only in 3.3.5")
         }
+        Type::NamedGuid => {
+            unreachable!("named guid only in 2.4.3 and 3.3.5")
+        }
     }
 
     if d.tags().compressed().is_some() {

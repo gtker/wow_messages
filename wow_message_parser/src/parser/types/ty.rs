@@ -3,8 +3,8 @@ use crate::parser::types::definer::Definer;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::{
     update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, DATETIME_SIZE, GOLD_SIZE,
-    GUID_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE,
-    UPDATE_MASK_MIN_SIZE,
+    GUID_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, NAMED_GUID_MAX_SIZE, NAMED_GUID_MIN_SIZE,
+    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
 };
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::{FloatingPointType, IntegerType};
@@ -23,6 +23,7 @@ pub(crate) enum Type {
     Bool(IntegerType),
     PackedGuid,
     Guid,
+    NamedGuid,
     DateTime,
     FloatingPoint(FloatingPointType),
     CString,
@@ -73,6 +74,7 @@ impl Type {
         "AchievementInProgressArray";
     pub(crate) const ENCHANT_MASK_NAME: &'static str = "EnchantMask";
     pub(crate) const INSPECT_TALENT_GEAR_MASK_NAME: &'static str = "InspectTalentGearMask";
+    pub(crate) const NAMED_GUID_NAME: &'static str = "NamedGuid";
 
     pub(crate) const STRINGS_RUST_NAME: &'static str = "String";
     pub(crate) const GUIDS_RUST_NAME: &'static str = "Guid";
@@ -104,6 +106,7 @@ impl Type {
             Type::Bool(i) => ParsedType::Bool(*i),
             Type::PackedGuid => ParsedType::PackedGuid,
             Type::Guid => ParsedType::Guid,
+            Type::NamedGuid => ParsedType::NamedGuid,
             Type::DateTime => ParsedType::DateTime,
             Type::FloatingPoint(i) => ParsedType::FloatingPoint(*i),
             Type::CString => ParsedType::CString,
@@ -225,6 +228,7 @@ impl Type {
             Type::Level => sizes.inc_both(LEVEL_SIZE.into()),
             Type::Level16 => sizes.inc_both(LEVEL16_SIZE),
             Type::Level32 => sizes.inc_both(LEVEL32_SIZE),
+            Type::NamedGuid => sizes.inc(NAMED_GUID_MIN_SIZE.into(), NAMED_GUID_MAX_SIZE.into()),
         }
 
         sizes
@@ -258,7 +262,8 @@ impl Type {
                 "Little".to_string()
             }
 
-            Type::Level
+            Type::NamedGuid
+            | Type::Level
             | Type::EnchantMask
             | Type::InspectTalentGearMask
             | Type::MonsterMoveSplines

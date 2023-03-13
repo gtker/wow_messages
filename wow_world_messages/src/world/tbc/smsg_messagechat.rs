@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::tbc::{
-    ChatType, Language, PlayerChatTag,
+    ChatType, Language, NamedGuid, PlayerChatTag,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -19,12 +19,12 @@ use crate::tbc::{
 ///         || chat_type == RAID_BOSS_EMOTE
 ///         || chat_type == MONSTER_EMOTE) {
 ///         SizedCString sender;
-///         Guid target1;
+///         NamedGuid target1;
 ///     }
 ///     else if (chat_type == BG_SYSTEM_NEUTRAL
 ///         || chat_type == BG_SYSTEM_ALLIANCE
 ///         || chat_type == BG_SYSTEM_HORDE) {
-///         Guid target2;
+///         NamedGuid target2;
 ///     }
 ///     else if (chat_type == CHANNEL) {
 ///         CString channel_name;
@@ -153,8 +153,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 // Null terminator
                 w.write_all(&[0])?;
 
-                // target1: Guid
-                w.write_all(&target1.guid().to_le_bytes())?;
+                // target1: NamedGuid
+                target1.write_into_vec(&mut w)?;
 
             }
             SMSG_MESSAGECHAT_ChatType::MonsterParty {
@@ -167,8 +167,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 // Null terminator
                 w.write_all(&[0])?;
 
-                // target1: Guid
-                w.write_all(&target1.guid().to_le_bytes())?;
+                // target1: NamedGuid
+                target1.write_into_vec(&mut w)?;
 
             }
             SMSG_MESSAGECHAT_ChatType::MonsterYell {
@@ -181,8 +181,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 // Null terminator
                 w.write_all(&[0])?;
 
-                // target1: Guid
-                w.write_all(&target1.guid().to_le_bytes())?;
+                // target1: NamedGuid
+                target1.write_into_vec(&mut w)?;
 
             }
             SMSG_MESSAGECHAT_ChatType::MonsterWhisper {
@@ -195,8 +195,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 // Null terminator
                 w.write_all(&[0])?;
 
-                // target1: Guid
-                w.write_all(&target1.guid().to_le_bytes())?;
+                // target1: NamedGuid
+                target1.write_into_vec(&mut w)?;
 
             }
             SMSG_MESSAGECHAT_ChatType::MonsterEmote {
@@ -209,8 +209,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 // Null terminator
                 w.write_all(&[0])?;
 
-                // target1: Guid
-                w.write_all(&target1.guid().to_le_bytes())?;
+                // target1: NamedGuid
+                target1.write_into_vec(&mut w)?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Channel {
@@ -357,22 +357,22 @@ impl crate::Message for SMSG_MESSAGECHAT {
             SMSG_MESSAGECHAT_ChatType::BgSystemNeutral {
                 target2,
             } => {
-                // target2: Guid
-                w.write_all(&target2.guid().to_le_bytes())?;
+                // target2: NamedGuid
+                target2.write_into_vec(&mut w)?;
 
             }
             SMSG_MESSAGECHAT_ChatType::BgSystemAlliance {
                 target2,
             } => {
-                // target2: Guid
-                w.write_all(&target2.guid().to_le_bytes())?;
+                // target2: NamedGuid
+                target2.write_into_vec(&mut w)?;
 
             }
             SMSG_MESSAGECHAT_ChatType::BgSystemHorde {
                 target2,
             } => {
-                // target2: Guid
-                w.write_all(&target2.guid().to_le_bytes())?;
+                // target2: NamedGuid
+                target2.write_into_vec(&mut w)?;
 
             }
             SMSG_MESSAGECHAT_ChatType::RaidLeader {
@@ -399,8 +399,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 // Null terminator
                 w.write_all(&[0])?;
 
-                // target1: Guid
-                w.write_all(&target1.guid().to_le_bytes())?;
+                // target1: NamedGuid
+                target1.write_into_vec(&mut w)?;
 
             }
             SMSG_MESSAGECHAT_ChatType::RaidBossEmote {
@@ -413,8 +413,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 // Null terminator
                 w.write_all(&[0])?;
 
-                // target1: Guid
-                w.write_all(&target1.guid().to_le_bytes())?;
+                // target1: NamedGuid
+                target1.write_into_vec(&mut w)?;
 
             }
             SMSG_MESSAGECHAT_ChatType::Filtered {
@@ -459,7 +459,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(19..=16022).contains(&body_size) {
+        if !(19..=24022).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0096, size: body_size as u32 });
         }
 
@@ -574,8 +574,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                     String::from_utf8(sender)?
                 };
 
-                // target1: Guid
-                let target1 = Guid::read(&mut r)?;
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MonsterSay {
                     sender,
@@ -590,8 +590,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                     String::from_utf8(sender)?
                 };
 
-                // target1: Guid
-                let target1 = Guid::read(&mut r)?;
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MonsterParty {
                     sender,
@@ -606,8 +606,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                     String::from_utf8(sender)?
                 };
 
-                // target1: Guid
-                let target1 = Guid::read(&mut r)?;
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MonsterYell {
                     sender,
@@ -622,8 +622,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                     String::from_utf8(sender)?
                 };
 
-                // target1: Guid
-                let target1 = Guid::read(&mut r)?;
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MonsterWhisper {
                     sender,
@@ -638,8 +638,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                     String::from_utf8(sender)?
                 };
 
-                // target1: Guid
-                let target1 = Guid::read(&mut r)?;
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MonsterEmote {
                     sender,
@@ -806,24 +806,24 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 }
             }
             ChatType::BgSystemNeutral => {
-                // target2: Guid
-                let target2 = Guid::read(&mut r)?;
+                // target2: NamedGuid
+                let target2 = NamedGuid::read(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::BgSystemNeutral {
                     target2,
                 }
             }
             ChatType::BgSystemAlliance => {
-                // target2: Guid
-                let target2 = Guid::read(&mut r)?;
+                // target2: NamedGuid
+                let target2 = NamedGuid::read(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::BgSystemAlliance {
                     target2,
                 }
             }
             ChatType::BgSystemHorde => {
-                // target2: Guid
-                let target2 = Guid::read(&mut r)?;
+                // target2: NamedGuid
+                let target2 = NamedGuid::read(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::BgSystemHorde {
                     target2,
@@ -853,8 +853,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                     String::from_utf8(sender)?
                 };
 
-                // target1: Guid
-                let target1 = Guid::read(&mut r)?;
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::RaidBossWhisper {
                     sender,
@@ -869,8 +869,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
                     String::from_utf8(sender)?
                 };
 
-                // target1: Guid
-                let target1 = Guid::read(&mut r)?;
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::RaidBossEmote {
                     sender,
@@ -982,23 +982,23 @@ pub enum SMSG_MESSAGECHAT_ChatType {
     },
     MonsterSay {
         sender: String,
-        target1: Guid,
+        target1: NamedGuid,
     },
     MonsterParty {
         sender: String,
-        target1: Guid,
+        target1: NamedGuid,
     },
     MonsterYell {
         sender: String,
-        target1: Guid,
+        target1: NamedGuid,
     },
     MonsterWhisper {
         sender: String,
-        target1: Guid,
+        target1: NamedGuid,
     },
     MonsterEmote {
         sender: String,
-        target1: Guid,
+        target1: NamedGuid,
     },
     Channel {
         channel_name: String,
@@ -1059,13 +1059,13 @@ pub enum SMSG_MESSAGECHAT_ChatType {
         target5: Guid,
     },
     BgSystemNeutral {
-        target2: Guid,
+        target2: NamedGuid,
     },
     BgSystemAlliance {
-        target2: Guid,
+        target2: NamedGuid,
     },
     BgSystemHorde {
-        target2: Guid,
+        target2: NamedGuid,
     },
     RaidLeader {
         target5: Guid,
@@ -1075,11 +1075,11 @@ pub enum SMSG_MESSAGECHAT_ChatType {
     },
     RaidBossWhisper {
         sender: String,
-        target1: Guid,
+        target1: NamedGuid,
     },
     RaidBossEmote {
         sender: String,
-        target1: Guid,
+        target1: NamedGuid,
     },
     Filtered {
         target5: Guid,
@@ -1240,7 +1240,7 @@ impl SMSG_MESSAGECHAT_ChatType {
             } => {
                 1
                 + sender.len() + 5 // sender: SizedCString
-                + 8 // target1: Guid
+                + target1.size() // target1: NamedGuid
             }
             Self::MonsterParty {
                 sender,
@@ -1248,7 +1248,7 @@ impl SMSG_MESSAGECHAT_ChatType {
             } => {
                 1
                 + sender.len() + 5 // sender: SizedCString
-                + 8 // target1: Guid
+                + target1.size() // target1: NamedGuid
             }
             Self::MonsterYell {
                 sender,
@@ -1256,7 +1256,7 @@ impl SMSG_MESSAGECHAT_ChatType {
             } => {
                 1
                 + sender.len() + 5 // sender: SizedCString
-                + 8 // target1: Guid
+                + target1.size() // target1: NamedGuid
             }
             Self::MonsterWhisper {
                 sender,
@@ -1264,7 +1264,7 @@ impl SMSG_MESSAGECHAT_ChatType {
             } => {
                 1
                 + sender.len() + 5 // sender: SizedCString
-                + 8 // target1: Guid
+                + target1.size() // target1: NamedGuid
             }
             Self::MonsterEmote {
                 sender,
@@ -1272,7 +1272,7 @@ impl SMSG_MESSAGECHAT_ChatType {
             } => {
                 1
                 + sender.len() + 5 // sender: SizedCString
-                + 8 // target1: Guid
+                + target1.size() // target1: NamedGuid
             }
             Self::Channel {
                 channel_name,
@@ -1394,19 +1394,19 @@ impl SMSG_MESSAGECHAT_ChatType {
                 target2,
             } => {
                 1
-                + 8 // target2: Guid
+                + target2.size() // target2: NamedGuid
             }
             Self::BgSystemAlliance {
                 target2,
             } => {
                 1
-                + 8 // target2: Guid
+                + target2.size() // target2: NamedGuid
             }
             Self::BgSystemHorde {
                 target2,
             } => {
                 1
-                + 8 // target2: Guid
+                + target2.size() // target2: NamedGuid
             }
             Self::RaidLeader {
                 target5,
@@ -1426,7 +1426,7 @@ impl SMSG_MESSAGECHAT_ChatType {
             } => {
                 1
                 + sender.len() + 5 // sender: SizedCString
-                + 8 // target1: Guid
+                + target1.size() // target1: NamedGuid
             }
             Self::RaidBossEmote {
                 sender,
@@ -1434,7 +1434,7 @@ impl SMSG_MESSAGECHAT_ChatType {
             } => {
                 1
                 + sender.len() + 5 // sender: SizedCString
-                + 8 // target1: Guid
+                + target1.size() // target1: NamedGuid
             }
             Self::Filtered {
                 target5,

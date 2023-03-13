@@ -26,6 +26,7 @@ pub(crate) enum Feature {
     SimpleBuiltInTypes,
     ComplexBuiltInTypes,
     PackedGuidTypes,
+    NamedGuidTypes,
     UpdateMaskTypes,
     AuraMaskTypes,
     EnchantMaskTypes,
@@ -228,6 +229,7 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
         Type::UpdateMask => f.add(Feature::UpdateMaskTypes),
         Type::AuraMask => f.add(Feature::AuraMaskTypes),
         Type::PackedGuid => f.add(Feature::PackedGuidTypes),
+        Type::NamedGuid => f.add(Feature::NamedGuidTypes),
         Type::Array(array) => {
             match array.size() {
                 ArraySize::Fixed(_) => f.add(Feature::FixedArrays),

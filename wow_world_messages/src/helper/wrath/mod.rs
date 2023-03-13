@@ -28,4 +28,6 @@ pub use crate::helper::shared::monster_move_spline_vanilla_tbc_wrath::*;
 
 pub use opcode_to_name::*;
 
+pub use crate::helper::named_guid::NamedGuid;
+
 pub(crate) const ACHIEVEMENT_SENTINEL_VALUE: u32 = u32::from_le_bytes((-1_i32).to_le_bytes());
