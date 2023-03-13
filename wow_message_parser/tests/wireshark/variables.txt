@@ -62,6 +62,7 @@
     guint32 opcode = 0;
     guint32 reason = 0;
     guint32 result = 0;
+    guint32 result2 = 0;
     guint32 spell_count = 0;
     guint32 spline_flags = 0;
     guint32 status = 0;

@@ -3711,19 +3711,30 @@
         case SMSG_AUCTION_COMMAND_RESULT:
             ptvcursor_add(ptv, hf_woww_auction_id, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_auction_command_action, 4, ENC_LITTLE_ENDIAN, &action);
-            ptvcursor_add_ret_uint(ptv, hf_woww_auction_command_result, 4, ENC_LITTLE_ENDIAN, &result);
-            if (result == AUCTION_COMMAND_RESULT_OK) {
-                if (action == AUCTION_COMMAND_ACTION_BID_PLACED) {
+            if (action == AUCTION_COMMAND_ACTION_BID_PLACED) {
+                ptvcursor_add_ret_uint(ptv, hf_woww_auction_command_result, 4, ENC_LITTLE_ENDIAN, &result);
+                if (result == AUCTION_COMMAND_RESULT_OK) {
+                    ptvcursor_add(ptv, hf_woww_auction_outbid, 4, ENC_LITTLE_ENDIAN);
+                }
+                else if (result == AUCTION_COMMAND_RESULT_ERR_INVENTORY) {
+                    ptvcursor_add(ptv, hf_woww_inventory_result, 1, ENC_LITTLE_ENDIAN);
+                }
+                else if (result == AUCTION_COMMAND_RESULT_ERR_HIGHER_BID) {
+                    ptvcursor_add(ptv, hf_woww_higher_bidder, 8, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_new_bid, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_auction_outbid, 4, ENC_LITTLE_ENDIAN);
                 }
             }
-            else if (result == AUCTION_COMMAND_RESULT_ERR_INVENTORY) {
-                ptvcursor_add(ptv, hf_woww_inventory_result, 1, ENC_LITTLE_ENDIAN);
-            }
-            else if (result == AUCTION_COMMAND_RESULT_ERR_HIGHER_BID) {
-                ptvcursor_add(ptv, hf_woww_higher_bidder, 8, ENC_LITTLE_ENDIAN);
-                ptvcursor_add(ptv, hf_woww_new_bid, 4, ENC_LITTLE_ENDIAN);
-                ptvcursor_add(ptv, hf_woww_auction_outbid, 4, ENC_LITTLE_ENDIAN);
+            else {
+                ptvcursor_add_ret_uint(ptv, hf_woww_auction_command_result_two, 4, ENC_LITTLE_ENDIAN, &result2);
+                if (result2 == AUCTION_COMMAND_RESULT_TWO_ERR_INVENTORY) {
+                    ptvcursor_add(ptv, hf_woww_inventory_result, 1, ENC_LITTLE_ENDIAN);
+                }
+                else if (result2 == AUCTION_COMMAND_RESULT_TWO_ERR_HIGHER_BID) {
+                    ptvcursor_add(ptv, hf_woww_higher_bidder, 8, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_new_bid, 4, ENC_LITTLE_ENDIAN);
+                    ptvcursor_add(ptv, hf_woww_auction_outbid, 4, ENC_LITTLE_ENDIAN);
+                }
             }
             break;
         case SMSG_AUCTION_LIST_RESULT:
@@ -5702,14 +5713,20 @@
         case SMSG_SEND_MAIL_RESULT:
             ptvcursor_add(ptv, hf_woww_mail_id, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_mail_action, 4, ENC_LITTLE_ENDIAN, &action);
-            ptvcursor_add_ret_uint(ptv, hf_woww_mail_result, 4, ENC_LITTLE_ENDIAN, &result);
-            if (result == MAIL_RESULT_ERR_EQUIP_ERROR) {
-                ptvcursor_add(ptv, hf_woww_equip_error, 4, ENC_LITTLE_ENDIAN);
-            }
-            else {
-                if (action == MAIL_ACTION_ITEM_TAKEN) {
+            if (action == MAIL_ACTION_ITEM_TAKEN) {
+                ptvcursor_add_ret_uint(ptv, hf_woww_mail_result, 4, ENC_LITTLE_ENDIAN, &result);
+                if (result == MAIL_RESULT_ERR_EQUIP_ERROR) {
+                    ptvcursor_add(ptv, hf_woww_equip_error, 4, ENC_LITTLE_ENDIAN);
+                }
+                else {
                     ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_item_count, 4, ENC_LITTLE_ENDIAN);
+                }
+            }
+            else {
+                ptvcursor_add_ret_uint(ptv, hf_woww_mail_result_two, 4, ENC_LITTLE_ENDIAN, &result2);
+                if (result2 == MAIL_RESULT_TWO_ERR_EQUIP_ERROR) {
+                    ptvcursor_add(ptv, hf_woww_equip_error, 4, ENC_LITTLE_ENDIAN);
                 }
             }
             break;

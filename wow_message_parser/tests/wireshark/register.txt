@@ -514,6 +514,12 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_auction_command_result_two,
+            { "Auction Command Result Two", "woww.auction.command.result.two",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_auction_command_result_two_strings), 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_auction_duration_in_minutes,
             { "Auction Duration In Minutes", "woww.auction.duration.in.minutes",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -2527,6 +2533,12 @@
         { &hf_woww_mail_result,
             { "Mail Result", "woww.mail.result",
                 FT_UINT32, BASE_HEX_DEC, VALS(e_mail_result_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_mail_result_two,
+            { "Mail Result Two", "woww.mail.result.two",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_mail_result_two_strings), 0,
                 NULL, HFILL
             }
         },
