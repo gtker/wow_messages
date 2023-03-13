@@ -131,42 +131,31 @@ fn print_fields(s: &mut Writer, e: &Definer, o: &Objects) {
 
     for f in e.fields() {
         if f.value().int() != 0 {
-            s.funcn_pub_const(format!("is_{name}(&self)", name = f.name()), "bool", |s| {
+            let name = f.name();
+            s.funcn_pub_const(format!("is_{name}(&self)"), "bool", |s| {
                 if e.tags().zero_is_always_valid() {
                     s.wln(format!(
                         "((self.inner & Self::{name}) != 0) || self.inner == 0",
-                        name = f.name()
                     ));
                 } else {
-                    s.wln(format!("(self.inner & Self::{name}) != 0", name = f.name()));
+                    s.wln(format!("(self.inner & Self::{name}) != 0"));
                 }
             });
 
             print_member_docc_description_and_comment(s, f.tags(), o, e.tags());
-            s.funcn_pub_const(format!("new_{name}()", name = f.name()), "Self", |s| {
-                s.wln(format!("Self {{ inner: Self::{name} }}", name = f.name()));
+            s.funcn_pub_const(format!("new_{name}()"), "Self", |s| {
+                s.wln(format!("Self {{ inner: Self::{name} }}"));
             });
 
-            s.funcn_pub(
-                format!("set_{name}(&mut self)", name = f.name()),
-                "Self",
-                |s| {
-                    s.wln(format!("self.inner |= Self::{name};", name = f.name()));
-                    s.wln("*self");
-                },
-            );
+            s.funcn_pub(format!("set_{name}(&mut self)"), "Self", |s| {
+                s.wln(format!("self.inner |= Self::{name};"));
+                s.wln("*self");
+            });
 
-            s.funcn_pub(
-                format!("clear_{name}(&mut self)", name = f.name()),
-                "Self",
-                |s| {
-                    s.wln(format!(
-                        "self.inner &= Self::{name}.reverse_bits();",
-                        name = f.name()
-                    ));
-                    s.wln("*self");
-                },
-            );
+            s.funcn_pub(format!("clear_{name}(&mut self)"), "Self", |s| {
+                s.wln(format!("self.inner &= Self::{name}.reverse_bits();",));
+                s.wln("*self");
+            });
         }
     }
 }
