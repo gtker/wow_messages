@@ -128,7 +128,7 @@ impl LfgPlayer {
         + 4 // level: Level32
         + 4 // area: Area
         + 1 // lfg_mode: LfgMode
-        + 3 * core::mem::size_of::<u32>() // lfg_slots: u32[3]
+        + 12 // lfg_slots: u32[3]
         + self.comment.len() + 1 // comment: CString
         + 4 // amount_of_members: u32
         + self.members.iter().fold(0, |acc, x| acc + x.size()) // members: LfgPlayerMember[amount_of_members]

@@ -560,9 +560,9 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         + 4 // unknown1: u32
         + 4 * 8 // rewards: QuestItemReward[4]
         + 6 * 8 // choice_rewards: QuestItemReward[6]
-        + 5 * core::mem::size_of::<u32>() // reputation_rewards: u32[5]
-        + 5 * core::mem::size_of::<u32>() // reputation_reward_amounts: u32[5]
-        + 5 * core::mem::size_of::<u32>() // reputation_reward_overrides: u32[5]
+        + 20 // reputation_rewards: u32[5]
+        + 20 // reputation_reward_amounts: u32[5]
+        + 20 // reputation_reward_overrides: u32[5]
         + 4 // point_map_id: u32
         + 8 // position: Vector2d
         + 4 // point_opt: u32

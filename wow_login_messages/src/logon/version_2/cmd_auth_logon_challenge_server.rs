@@ -500,13 +500,13 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult {
                 server_public_key,
             } => {
                 1
-                + 16 * core::mem::size_of::<u8>() // crc_salt: u8[16]
+                + 16 // crc_salt: u8[16]
                 + generator.len() * core::mem::size_of::<u8>() // generator: u8[generator_length]
                 + 1 // generator_length: u8
                 + large_safe_prime.len() * core::mem::size_of::<u8>() // large_safe_prime: u8[large_safe_prime_length]
                 + 1 // large_safe_prime_length: u8
-                + 32 * core::mem::size_of::<u8>() // salt: u8[32]
-                + 32 * core::mem::size_of::<u8>() // server_public_key: u8[32]
+                + 32 // salt: u8[32]
+                + 32 // server_public_key: u8[32]
             }
             Self::FailUnknown0 => {
                 1

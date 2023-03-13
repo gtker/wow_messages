@@ -241,13 +241,13 @@ impl Arrays {
 impl Arrays {
     pub(crate) fn size(&self) -> usize {
         1 // index: u8
-        + 20 * core::mem::size_of::<u8>() // basic_fixed_array: u8[20]
-        + 16 * core::mem::size_of::<u16>() // simple_2byte_fixed_array: u16[16]
-        + 16 * core::mem::size_of::<u16>() // simple_2byte_be_fixed_array: u16_be[16]
+        + 20 // basic_fixed_array: u8[20]
+        + 32 // simple_2byte_fixed_array: u16[16]
+        + 32 // simple_2byte_be_fixed_array: u16_be[16]
         + self.simple_2byte_variable_array.len() * core::mem::size_of::<u16>() // simple_2byte_variable_array: u16[index]
-        + 16 * core::mem::size_of::<u32>() // simple_4byte_be_fixed_array: u32_be[16]
+        + 64 // simple_4byte_be_fixed_array: u32_be[16]
         + self.simple_4byte_variable_array.len() * core::mem::size_of::<u32>() // simple_4byte_variable_array: u32[index]
-        + 16 * core::mem::size_of::<u64>() // simple_8byte_be_fixed_array: u64_be[16]
+        + 128 // simple_8byte_be_fixed_array: u64_be[16]
         + self.simple_8byte_variable_array.len() * core::mem::size_of::<u64>() // simple_8byte_variable_array: u64[index]
         + self.complex_fixed_array.iter().fold(0, |acc, x| acc + x.size()) // complex_fixed_array: StructWithAllBuiltInTypes[10]
         + self.complex_variable_array.iter().fold(0, |acc, x| acc + x.size()) // complex_variable_array: StructWithAllBuiltInTypes[index]

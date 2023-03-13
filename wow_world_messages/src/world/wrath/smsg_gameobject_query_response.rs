@@ -236,9 +236,9 @@ impl SMSG_GAMEOBJECT_QUERY_RESPONSE {
             + found.icon_name.len() + 1 // icon_name: CString
             + found.cast_bar_caption.len() + 1 // cast_bar_caption: CString
             + found.unknown.len() + 1 // unknown: CString
-            + 6 * core::mem::size_of::<u32>() // raw_data: u32[6]
+            + 24 // raw_data: u32[6]
             + 4 // gameobject_size: f32
-            + 6 * core::mem::size_of::<u32>() // gameobject_quest_items: u32[6]
+            + 24 // gameobject_quest_items: u32[6]
         } else {
             0
         }
@@ -272,9 +272,9 @@ impl SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
         + self.icon_name.len() + 1 // icon_name: CString
         + self.cast_bar_caption.len() + 1 // cast_bar_caption: CString
         + self.unknown.len() + 1 // unknown: CString
-        + 6 * core::mem::size_of::<u32>() // raw_data: u32[6]
+        + 24 // raw_data: u32[6]
         + 4 // gameobject_size: f32
-        + 6 * core::mem::size_of::<u32>() // gameobject_quest_items: u32[6]
+        + 24 // gameobject_quest_items: u32[6]
     }
 
 }

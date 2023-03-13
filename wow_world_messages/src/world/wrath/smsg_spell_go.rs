@@ -971,7 +971,7 @@ pub struct SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate {
 
 impl SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate {
     pub(crate) fn size(&self) -> usize {
-        6 * core::mem::size_of::<u8>() // rune_cooldowns: u8[6]
+        6 // rune_cooldowns: u8[6]
         + 1 // rune_mask_after_cast: u8
         + 1 // rune_mask_initial: u8
     }

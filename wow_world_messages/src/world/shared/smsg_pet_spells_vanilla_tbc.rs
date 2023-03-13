@@ -180,7 +180,7 @@ impl SMSG_PET_SPELLS {
             + 1 // command: PetCommandState
             + 1 // unknown: u8
             + 1 // pet_enabled: PetEnabled
-            + 10 * core::mem::size_of::<u32>() // action_bars: u32[10]
+            + 40 // action_bars: u32[10]
             + 1 // amount_of_spells: u8
             + action_bars.spells.len() * core::mem::size_of::<u32>() // spells: u32[amount_of_spells]
             + 1 // amount_of_cooldowns: u8
@@ -210,7 +210,7 @@ impl SMSG_PET_SPELLS_action_bars {
         + 1 // command: PetCommandState
         + 1 // unknown: u8
         + 1 // pet_enabled: PetEnabled
-        + 10 * core::mem::size_of::<u32>() // action_bars: u32[10]
+        + 40 // action_bars: u32[10]
         + 1 // amount_of_spells: u8
         + self.spells.len() * core::mem::size_of::<u32>() // spells: u32[amount_of_spells]
         + 1 // amount_of_cooldowns: u8

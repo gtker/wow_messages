@@ -368,9 +368,9 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
 
 impl CMD_AUTH_LOGON_PROOF_Client {
     pub(crate) fn size(&self) -> usize {
-        32 * core::mem::size_of::<u8>() // client_public_key: u8[32]
-        + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
-        + 20 * core::mem::size_of::<u8>() // crc_hash: u8[20]
+        32 // client_public_key: u8[32]
+        + 20 // client_proof: u8[20]
+        + 20 // crc_hash: u8[20]
         + 1 // number_of_telemetry_keys: u8
         + self.telemetry_keys.len() * 30 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
         + self.security_flag.size() // security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag
@@ -414,8 +414,8 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
                 pin_salt,
             } => {
                 1
-                + 20 * core::mem::size_of::<u8>() // pin_hash: u8[20]
-                + 16 * core::mem::size_of::<u8>() // pin_salt: u8[16]
+                + 20 // pin_hash: u8[20]
+                + 16 // pin_salt: u8[16]
             }
         }
     }

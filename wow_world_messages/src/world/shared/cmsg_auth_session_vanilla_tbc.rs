@@ -111,7 +111,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
                 + 4 // server_id: u32
                 + username.len() + 1 // username: CString
                 + 4 // client_seed: u32
-                + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
+                + 20 // client_proof: u8[20]
                 + 4 // decompressed_addon_info_size: u32
             };
             let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
@@ -418,7 +418,7 @@ impl CMSG_AUTH_SESSION {
         + 4 // server_id: u32
         + self.username.len() + 1 // username: CString
         + 4 // client_seed: u32
-        + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
+        + 20 // client_proof: u8[20]
         + 4 // decompressed_addon_info_size: u32
         + crate::util::zlib_compressed_size(self.addon_info.iter().fold(Vec::new(), |mut acc, x| { x.write_into_vec(&mut acc).unwrap(); acc } ).as_slice()) // addon_info: AddonInfo[-]
     }

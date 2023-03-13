@@ -282,11 +282,11 @@ impl SMSG_CREATURE_QUERY_RESPONSE {
             + 4 // creature_rank: u32
             + 4 // kill_credit1: u32
             + 4 // kill_credit2: u32
-            + 4 * core::mem::size_of::<u32>() // display_ids: u32[4]
+            + 16 // display_ids: u32[4]
             + 4 // health_multiplier: f32
             + 4 // mana_multiplier: f32
             + 1 // racial_leader: u8
-            + 6 * core::mem::size_of::<u32>() // quest_items: u32[6]
+            + 24 // quest_items: u32[6]
             + 4 // movement_id: u32
         } else {
             0
@@ -330,11 +330,11 @@ impl SMSG_CREATURE_QUERY_RESPONSE_found {
         + 4 // creature_rank: u32
         + 4 // kill_credit1: u32
         + 4 // kill_credit2: u32
-        + 4 * core::mem::size_of::<u32>() // display_ids: u32[4]
+        + 16 // display_ids: u32[4]
         + 4 // health_multiplier: f32
         + 4 // mana_multiplier: f32
         + 1 // racial_leader: u8
-        + 6 * core::mem::size_of::<u32>() // quest_items: u32[6]
+        + 24 // quest_items: u32[6]
         + 4 // movement_id: u32
     }
 

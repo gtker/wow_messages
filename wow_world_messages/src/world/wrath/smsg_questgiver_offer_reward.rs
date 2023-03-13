@@ -372,9 +372,9 @@ impl SMSG_QUESTGIVER_OFFER_REWARD {
         + 4 // reward_talents: u32
         + 4 // reward_arena_points: u32
         + 4 // reward_reputation_mask: u32
-        + 5 * core::mem::size_of::<u32>() // reward_factions: u32[5]
-        + 5 * core::mem::size_of::<u32>() // reward_reputations: u32[5]
-        + 5 * core::mem::size_of::<u32>() // reward_reputations_override: u32[5]
+        + 20 // reward_factions: u32[5]
+        + 20 // reward_reputations: u32[5]
+        + 20 // reward_reputations_override: u32[5]
     }
 }
 

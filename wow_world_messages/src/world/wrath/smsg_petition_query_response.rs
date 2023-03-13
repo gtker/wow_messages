@@ -242,7 +242,7 @@ impl SMSG_PETITION_QUERY_RESPONSE {
         + 4 // unknown7: u32
         + 4 // unknown8: u32
         + 4 // unknown9: u32
-        + 10 * core::mem::size_of::<u8>() // unknown10: u8[10]
+        + 10 // unknown10: u8[10]
         + 4 // unknown11: u32
         + 4 // charter_type: CharterType
     }

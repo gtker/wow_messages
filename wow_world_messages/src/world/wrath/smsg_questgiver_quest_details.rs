@@ -406,9 +406,9 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         + 4 // talent_reward: u32
         + 4 // arena_point_reward: u32
         + 4 // unknown2: u32
-        + 5 * core::mem::size_of::<u32>() // reward_factions: u32[5]
-        + 5 * core::mem::size_of::<u32>() // reward_reputations: u32[5]
-        + 5 * core::mem::size_of::<u32>() // reward_reputations_override: u32[5]
+        + 20 // reward_factions: u32[5]
+        + 20 // reward_reputations: u32[5]
+        + 20 // reward_reputations_override: u32[5]
         + 4 // amount_of_emotes: u32
         + self.emotes.len() * 8 // emotes: QuestDetailsEmote[amount_of_emotes]
     }

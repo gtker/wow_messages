@@ -180,7 +180,7 @@ impl SMSG_GAMEOBJECT_QUERY_RESPONSE {
             + found.name3.len() + 1 // name3: CString
             + found.name4.len() + 1 // name4: CString
             + found.name5.len() + 1 // name5: CString
-            + 6 * core::mem::size_of::<u32>() // raw_data: u32[6]
+            + 24 // raw_data: u32[6]
         } else {
             0
         }
@@ -208,7 +208,7 @@ impl SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
         + self.name3.len() + 1 // name3: CString
         + self.name4.len() + 1 // name4: CString
         + self.name5.len() + 1 // name5: CString
-        + 6 * core::mem::size_of::<u32>() // raw_data: u32[6]
+        + 24 // raw_data: u32[6]
     }
 
 }

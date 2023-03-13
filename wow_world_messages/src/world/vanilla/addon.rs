@@ -397,55 +397,55 @@ impl Addon_KeyVersion {
                 public_key,
             } => {
                 1
-                + 256 * core::mem::size_of::<u8>() // public_key: u8[256]
+                + 256 // public_key: u8[256]
             }
             Self::Two {
                 public_key,
             } => {
                 1
-                + 256 * core::mem::size_of::<u8>() // public_key: u8[256]
+                + 256 // public_key: u8[256]
             }
             Self::Three {
                 public_key,
             } => {
                 1
-                + 256 * core::mem::size_of::<u8>() // public_key: u8[256]
+                + 256 // public_key: u8[256]
             }
             Self::Four {
                 public_key,
             } => {
                 1
-                + 256 * core::mem::size_of::<u8>() // public_key: u8[256]
+                + 256 // public_key: u8[256]
             }
             Self::Five {
                 public_key,
             } => {
                 1
-                + 256 * core::mem::size_of::<u8>() // public_key: u8[256]
+                + 256 // public_key: u8[256]
             }
             Self::Six {
                 public_key,
             } => {
                 1
-                + 256 * core::mem::size_of::<u8>() // public_key: u8[256]
+                + 256 // public_key: u8[256]
             }
             Self::Seven {
                 public_key,
             } => {
                 1
-                + 256 * core::mem::size_of::<u8>() // public_key: u8[256]
+                + 256 // public_key: u8[256]
             }
             Self::Eight {
                 public_key,
             } => {
                 1
-                + 256 * core::mem::size_of::<u8>() // public_key: u8[256]
+                + 256 // public_key: u8[256]
             }
             Self::Nine {
                 public_key,
             } => {
                 1
-                + 256 * core::mem::size_of::<u8>() // public_key: u8[256]
+                + 256 // public_key: u8[256]
             }
         }
     }

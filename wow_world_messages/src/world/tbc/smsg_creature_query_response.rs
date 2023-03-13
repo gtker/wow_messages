@@ -258,7 +258,7 @@ impl SMSG_CREATURE_QUERY_RESPONSE {
             + 4 // creature_rank: u32
             + 4 // unknown0: u32
             + 4 // spell_data_id: u32
-            + 4 * core::mem::size_of::<u32>() // display_ids: u32[4]
+            + 16 // display_ids: u32[4]
             + 4 // health_multiplier: f32
             + 4 // mana_multiplier: f32
             + 1 // racial_leader: u8
@@ -302,7 +302,7 @@ impl SMSG_CREATURE_QUERY_RESPONSE_found {
         + 4 // creature_rank: u32
         + 4 // unknown0: u32
         + 4 // spell_data_id: u32
-        + 4 * core::mem::size_of::<u32>() // display_ids: u32[4]
+        + 16 // display_ids: u32[4]
         + 4 // health_multiplier: f32
         + 4 // mana_multiplier: f32
         + 1 // racial_leader: u8

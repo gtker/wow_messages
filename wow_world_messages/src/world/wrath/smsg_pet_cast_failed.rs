@@ -1448,13 +1448,13 @@ impl SMSG_PET_CAST_FAILED_SpellCastResult {
                 totem_categories,
             } => {
                 1
-                + 2 * core::mem::size_of::<u32>() // totem_categories: u32[2]
+                + 8 // totem_categories: u32[2]
             }
             Self::Totems {
                 totems,
             } => {
                 1
-                + 2 * core::mem::size_of::<u32>() // totems: u32[2]
+                + 8 // totems: u32[2]
             }
             Self::TryAgain => {
                 1

@@ -530,11 +530,9 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
             let inner_is_constant = inner_sizes.is_constant().is_some();
             match array.ty() {
                 ArrayType::Integer(integer_type) => match array.size() {
-                    ArraySize::Fixed(fixed_value) => format!(
-                        "{array_size} * core::mem::size_of::<{ty}>()",
-                        array_size = fixed_value,
-                        ty = integer_type.rust_str(),
-                    ),
+                    ArraySize::Fixed(fixed_value) => {
+                        (integer_type.size() as i64 * fixed_value).to_string()
+                    }
                     ArraySize::Variable(_) | ArraySize::Endless => {
                         // ZLib compression is not predictable, so we compress the data and count the bytes.
                         if m.tags().is_compressed() {

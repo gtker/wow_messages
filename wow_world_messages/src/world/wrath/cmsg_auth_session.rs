@@ -155,7 +155,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
                 + 4 // battleground_id: u32
                 + 4 // realm_id: u32
                 + 8 // dos_response: u64
-                + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
+                + 20 // client_proof: u8[20]
                 + 4 // decompressed_addon_info_size: u32
             };
             let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
@@ -342,7 +342,7 @@ impl CMSG_AUTH_SESSION {
         + 4 // battleground_id: u32
         + 4 // realm_id: u32
         + 8 // dos_response: u64
-        + 20 * core::mem::size_of::<u8>() // client_proof: u8[20]
+        + 20 // client_proof: u8[20]
         + 4 // decompressed_addon_info_size: u32
         + crate::util::zlib_compressed_size(&self.addon_info) // addon_info: u8[-]
     }

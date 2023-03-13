@@ -142,9 +142,9 @@ impl SendCalendarHoliday {
         + 4 // looping: u32
         + 4 // priority: u32
         + 4 // calendar_filter_type: u32
-        + 26 * core::mem::size_of::<u32>() // holiday_days: u32[26]
-        + 10 * core::mem::size_of::<u32>() // durations: u32[10]
-        + 10 * core::mem::size_of::<u32>() // flags: u32[10]
+        + 104 // holiday_days: u32[26]
+        + 40 // durations: u32[10]
+        + 40 // flags: u32[10]
         + self.texture_file_name.len() + 1 // texture_file_name: CString
     }
 }

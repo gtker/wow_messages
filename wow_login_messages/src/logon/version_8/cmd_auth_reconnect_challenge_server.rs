@@ -337,8 +337,8 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
                 checksum_salt,
             } => {
                 1
-                + 16 * core::mem::size_of::<u8>() // challenge_data: u8[16]
-                + 16 * core::mem::size_of::<u8>() // checksum_salt: u8[16]
+                + 16 // challenge_data: u8[16]
+                + 16 // checksum_salt: u8[16]
             }
             Self::FailUnknown0 => {
                 1

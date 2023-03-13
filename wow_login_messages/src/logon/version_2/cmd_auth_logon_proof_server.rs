@@ -319,7 +319,7 @@ impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
             } => {
                 1
                 + 4 // hardware_survey_id: u32
-                + 20 * core::mem::size_of::<u8>() // server_proof: u8[20]
+                + 20 // server_proof: u8[20]
             }
             Self::FailUnknown0 => {
                 1

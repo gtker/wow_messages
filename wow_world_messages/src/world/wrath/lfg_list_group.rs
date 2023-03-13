@@ -385,7 +385,7 @@ pub struct LfgListGroup_LfgUpdateFlag_Roles {
 
 impl LfgListGroup_LfgUpdateFlag_Roles {
     pub(crate) fn size(&self) -> usize {
-        3 * core::mem::size_of::<u8>() // roles: u8[3]
+        3 // roles: u8[3]
     }
 }
 
