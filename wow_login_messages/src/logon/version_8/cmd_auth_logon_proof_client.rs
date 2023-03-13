@@ -572,6 +572,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_PIN(mut self, pin: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin) -> Self {
         self.inner |= SecurityFlag::PIN;
         self.pin = Some(pin);
@@ -582,6 +583,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         self.pin.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_PIN(mut self) -> Self {
         self.inner &= SecurityFlag::PIN.reverse_bits();
         self.pin = None;
@@ -597,6 +599,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_MATRIX_CARD(mut self, matrix_card: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard) -> Self {
         self.inner |= SecurityFlag::MATRIX_CARD;
         self.matrix_card = Some(matrix_card);
@@ -607,6 +610,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         self.matrix_card.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_MATRIX_CARD(mut self) -> Self {
         self.inner &= SecurityFlag::MATRIX_CARD.reverse_bits();
         self.matrix_card = None;
@@ -622,6 +626,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_AUTHENTICATOR(mut self, authenticator: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator) -> Self {
         self.inner |= SecurityFlag::AUTHENTICATOR;
         self.authenticator = Some(authenticator);
@@ -632,6 +637,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         self.authenticator.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_AUTHENTICATOR(mut self) -> Self {
         self.inner &= SecurityFlag::AUTHENTICATOR.reverse_bits();
         self.authenticator = None;

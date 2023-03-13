@@ -170,6 +170,7 @@ impl LfgListGroup_LfgUpdateFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_CHARACTER_INFO(mut self) -> Self {
         self.inner |= LfgUpdateFlag::CHARACTER_INFO;
         self
@@ -179,6 +180,7 @@ impl LfgListGroup_LfgUpdateFlag {
         (self.inner & LfgUpdateFlag::CHARACTER_INFO) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_CHARACTER_INFO(mut self) -> Self {
         self.inner &= LfgUpdateFlag::CHARACTER_INFO.reverse_bits();
         self
@@ -192,6 +194,7 @@ impl LfgListGroup_LfgUpdateFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_COMMENT(mut self, comment: LfgListGroup_LfgUpdateFlag_Comment) -> Self {
         self.inner |= LfgUpdateFlag::COMMENT;
         self.comment = Some(comment);
@@ -202,6 +205,7 @@ impl LfgListGroup_LfgUpdateFlag {
         self.comment.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_COMMENT(mut self) -> Self {
         self.inner &= LfgUpdateFlag::COMMENT.reverse_bits();
         self.comment = None;
@@ -216,6 +220,7 @@ impl LfgListGroup_LfgUpdateFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_GROUP_LEADER(mut self) -> Self {
         self.inner |= LfgUpdateFlag::GROUP_LEADER;
         self
@@ -225,6 +230,7 @@ impl LfgListGroup_LfgUpdateFlag {
         (self.inner & LfgUpdateFlag::GROUP_LEADER) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_GROUP_LEADER(mut self) -> Self {
         self.inner &= LfgUpdateFlag::GROUP_LEADER.reverse_bits();
         self
@@ -238,6 +244,7 @@ impl LfgListGroup_LfgUpdateFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_GROUP_GUID(mut self) -> Self {
         self.inner |= LfgUpdateFlag::GROUP_GUID;
         self
@@ -247,6 +254,7 @@ impl LfgListGroup_LfgUpdateFlag {
         (self.inner & LfgUpdateFlag::GROUP_GUID) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_GROUP_GUID(mut self) -> Self {
         self.inner &= LfgUpdateFlag::GROUP_GUID.reverse_bits();
         self
@@ -260,6 +268,7 @@ impl LfgListGroup_LfgUpdateFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_ROLES(mut self, roles: LfgListGroup_LfgUpdateFlag_Roles) -> Self {
         self.inner |= LfgUpdateFlag::ROLES;
         self.roles = Some(roles);
@@ -270,6 +279,7 @@ impl LfgListGroup_LfgUpdateFlag {
         self.roles.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_ROLES(mut self) -> Self {
         self.inner &= LfgUpdateFlag::ROLES.reverse_bits();
         self.roles = None;
@@ -284,6 +294,7 @@ impl LfgListGroup_LfgUpdateFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_AREA(mut self) -> Self {
         self.inner |= LfgUpdateFlag::AREA;
         self
@@ -293,6 +304,7 @@ impl LfgListGroup_LfgUpdateFlag {
         (self.inner & LfgUpdateFlag::AREA) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_AREA(mut self) -> Self {
         self.inner &= LfgUpdateFlag::AREA.reverse_bits();
         self
@@ -306,6 +318,7 @@ impl LfgListGroup_LfgUpdateFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_STATUS(mut self) -> Self {
         self.inner |= LfgUpdateFlag::STATUS;
         self
@@ -315,6 +328,7 @@ impl LfgListGroup_LfgUpdateFlag {
         (self.inner & LfgUpdateFlag::STATUS) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_STATUS(mut self) -> Self {
         self.inner &= LfgUpdateFlag::STATUS.reverse_bits();
         self
@@ -328,6 +342,7 @@ impl LfgListGroup_LfgUpdateFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_BOUND(mut self) -> Self {
         self.inner |= LfgUpdateFlag::BOUND;
         self
@@ -337,6 +352,7 @@ impl LfgListGroup_LfgUpdateFlag {
         (self.inner & LfgUpdateFlag::BOUND) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_BOUND(mut self) -> Self {
         self.inner &= LfgUpdateFlag::BOUND.reverse_bits();
         self

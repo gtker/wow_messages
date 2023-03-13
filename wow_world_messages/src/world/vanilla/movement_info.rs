@@ -246,6 +246,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_FORWARD(mut self) -> Self {
         self.inner |= MovementFlags::FORWARD;
         self
@@ -255,6 +256,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::FORWARD) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_FORWARD(mut self) -> Self {
         self.inner &= MovementFlags::FORWARD.reverse_bits();
         self
@@ -270,6 +272,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_BACKWARD(mut self) -> Self {
         self.inner |= MovementFlags::BACKWARD;
         self
@@ -279,6 +282,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::BACKWARD) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_BACKWARD(mut self) -> Self {
         self.inner &= MovementFlags::BACKWARD.reverse_bits();
         self
@@ -294,6 +298,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_STRAFE_LEFT(mut self) -> Self {
         self.inner |= MovementFlags::STRAFE_LEFT;
         self
@@ -303,6 +308,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::STRAFE_LEFT) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_STRAFE_LEFT(mut self) -> Self {
         self.inner &= MovementFlags::STRAFE_LEFT.reverse_bits();
         self
@@ -318,6 +324,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_STRAFE_RIGHT(mut self) -> Self {
         self.inner |= MovementFlags::STRAFE_RIGHT;
         self
@@ -327,6 +334,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::STRAFE_RIGHT) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_STRAFE_RIGHT(mut self) -> Self {
         self.inner &= MovementFlags::STRAFE_RIGHT.reverse_bits();
         self
@@ -342,6 +350,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_TURN_LEFT(mut self) -> Self {
         self.inner |= MovementFlags::TURN_LEFT;
         self
@@ -351,6 +360,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::TURN_LEFT) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_TURN_LEFT(mut self) -> Self {
         self.inner &= MovementFlags::TURN_LEFT.reverse_bits();
         self
@@ -366,6 +376,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_TURN_RIGHT(mut self) -> Self {
         self.inner |= MovementFlags::TURN_RIGHT;
         self
@@ -375,6 +386,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::TURN_RIGHT) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_TURN_RIGHT(mut self) -> Self {
         self.inner &= MovementFlags::TURN_RIGHT.reverse_bits();
         self
@@ -390,6 +402,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_PITCH_UP(mut self) -> Self {
         self.inner |= MovementFlags::PITCH_UP;
         self
@@ -399,6 +412,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::PITCH_UP) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_PITCH_UP(mut self) -> Self {
         self.inner &= MovementFlags::PITCH_UP.reverse_bits();
         self
@@ -414,6 +428,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_PITCH_DOWN(mut self) -> Self {
         self.inner |= MovementFlags::PITCH_DOWN;
         self
@@ -423,6 +438,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::PITCH_DOWN) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_PITCH_DOWN(mut self) -> Self {
         self.inner &= MovementFlags::PITCH_DOWN.reverse_bits();
         self
@@ -438,6 +454,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_WALK_MODE(mut self) -> Self {
         self.inner |= MovementFlags::WALK_MODE;
         self
@@ -447,6 +464,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::WALK_MODE) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_WALK_MODE(mut self) -> Self {
         self.inner &= MovementFlags::WALK_MODE.reverse_bits();
         self
@@ -462,6 +480,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_ON_TRANSPORT(mut self, on_transport: MovementInfo_MovementFlags_OnTransport) -> Self {
         self.inner |= MovementFlags::ON_TRANSPORT;
         self.on_transport = Some(on_transport);
@@ -472,6 +491,7 @@ impl MovementInfo_MovementFlags {
         self.on_transport.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_ON_TRANSPORT(mut self) -> Self {
         self.inner &= MovementFlags::ON_TRANSPORT.reverse_bits();
         self.on_transport = None;
@@ -488,6 +508,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_LEVITATING(mut self) -> Self {
         self.inner |= MovementFlags::LEVITATING;
         self
@@ -497,6 +518,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::LEVITATING) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_LEVITATING(mut self) -> Self {
         self.inner &= MovementFlags::LEVITATING.reverse_bits();
         self
@@ -512,6 +534,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_FIXED_Z(mut self) -> Self {
         self.inner |= MovementFlags::FIXED_Z;
         self
@@ -521,6 +544,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::FIXED_Z) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_FIXED_Z(mut self) -> Self {
         self.inner &= MovementFlags::FIXED_Z.reverse_bits();
         self
@@ -536,6 +560,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_ROOT(mut self) -> Self {
         self.inner |= MovementFlags::ROOT;
         self
@@ -545,6 +570,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::ROOT) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_ROOT(mut self) -> Self {
         self.inner &= MovementFlags::ROOT.reverse_bits();
         self
@@ -560,6 +586,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_JUMPING(mut self, jumping: MovementInfo_MovementFlags_Jumping) -> Self {
         self.inner |= MovementFlags::JUMPING;
         self.jumping = Some(jumping);
@@ -570,6 +597,7 @@ impl MovementInfo_MovementFlags {
         self.jumping.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_JUMPING(mut self) -> Self {
         self.inner &= MovementFlags::JUMPING.reverse_bits();
         self.jumping = None;
@@ -586,6 +614,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_FALLINGFAR(mut self) -> Self {
         self.inner |= MovementFlags::FALLINGFAR;
         self
@@ -595,6 +624,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::FALLINGFAR) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_FALLINGFAR(mut self) -> Self {
         self.inner &= MovementFlags::FALLINGFAR.reverse_bits();
         self
@@ -610,6 +640,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_SWIMMING(mut self, swimming: MovementInfo_MovementFlags_Swimming) -> Self {
         self.inner |= MovementFlags::SWIMMING;
         self.swimming = Some(swimming);
@@ -620,6 +651,7 @@ impl MovementInfo_MovementFlags {
         self.swimming.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_SWIMMING(mut self) -> Self {
         self.inner &= MovementFlags::SWIMMING.reverse_bits();
         self.swimming = None;
@@ -636,6 +668,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_SPLINE_ENABLED(mut self) -> Self {
         self.inner |= MovementFlags::SPLINE_ENABLED;
         self
@@ -645,6 +678,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::SPLINE_ENABLED) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_SPLINE_ENABLED(mut self) -> Self {
         self.inner &= MovementFlags::SPLINE_ENABLED.reverse_bits();
         self
@@ -660,6 +694,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_CAN_FLY(mut self) -> Self {
         self.inner |= MovementFlags::CAN_FLY;
         self
@@ -669,6 +704,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::CAN_FLY) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_CAN_FLY(mut self) -> Self {
         self.inner &= MovementFlags::CAN_FLY.reverse_bits();
         self
@@ -684,6 +720,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_FLYING(mut self) -> Self {
         self.inner |= MovementFlags::FLYING;
         self
@@ -693,6 +730,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::FLYING) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_FLYING(mut self) -> Self {
         self.inner &= MovementFlags::FLYING.reverse_bits();
         self
@@ -708,6 +746,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_ONTRANSPORT(mut self) -> Self {
         self.inner |= MovementFlags::ONTRANSPORT;
         self
@@ -717,6 +756,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::ONTRANSPORT) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_ONTRANSPORT(mut self) -> Self {
         self.inner &= MovementFlags::ONTRANSPORT.reverse_bits();
         self
@@ -732,6 +772,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_SPLINE_ELEVATION(mut self, spline_elevation: MovementInfo_MovementFlags_SplineElevation) -> Self {
         self.inner |= MovementFlags::SPLINE_ELEVATION;
         self.spline_elevation = Some(spline_elevation);
@@ -742,6 +783,7 @@ impl MovementInfo_MovementFlags {
         self.spline_elevation.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_SPLINE_ELEVATION(mut self) -> Self {
         self.inner &= MovementFlags::SPLINE_ELEVATION.reverse_bits();
         self.spline_elevation = None;
@@ -758,6 +800,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_WATERWALKING(mut self) -> Self {
         self.inner |= MovementFlags::WATERWALKING;
         self
@@ -767,6 +810,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::WATERWALKING) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_WATERWALKING(mut self) -> Self {
         self.inner &= MovementFlags::WATERWALKING.reverse_bits();
         self
@@ -782,6 +826,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_SAFE_FALL(mut self) -> Self {
         self.inner |= MovementFlags::SAFE_FALL;
         self
@@ -791,6 +836,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::SAFE_FALL) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_SAFE_FALL(mut self) -> Self {
         self.inner &= MovementFlags::SAFE_FALL.reverse_bits();
         self
@@ -806,6 +852,7 @@ impl MovementInfo_MovementFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_HOVER(mut self) -> Self {
         self.inner |= MovementFlags::HOVER;
         self
@@ -815,6 +862,7 @@ impl MovementInfo_MovementFlags {
         (self.inner & MovementFlags::HOVER) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_HOVER(mut self) -> Self {
         self.inner &= MovementFlags::HOVER.reverse_bits();
         self

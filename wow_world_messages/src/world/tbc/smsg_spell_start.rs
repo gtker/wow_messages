@@ -181,6 +181,7 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_HIDDEN_COMBATLOG(mut self) -> Self {
         self.inner |= CastFlags::HIDDEN_COMBATLOG;
         self
@@ -190,6 +191,7 @@ impl SMSG_SPELL_START_CastFlags {
         (self.inner & CastFlags::HIDDEN_COMBATLOG) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_HIDDEN_COMBATLOG(mut self) -> Self {
         self.inner &= CastFlags::HIDDEN_COMBATLOG.reverse_bits();
         self
@@ -202,6 +204,7 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNKNOWN2(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN2;
         self
@@ -211,6 +214,7 @@ impl SMSG_SPELL_START_CastFlags {
         (self.inner & CastFlags::UNKNOWN2) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNKNOWN2(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN2.reverse_bits();
         self
@@ -223,6 +227,7 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNKNOWN3(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN3;
         self
@@ -232,6 +237,7 @@ impl SMSG_SPELL_START_CastFlags {
         (self.inner & CastFlags::UNKNOWN3) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNKNOWN3(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN3.reverse_bits();
         self
@@ -244,6 +250,7 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNKNOWN4(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN4;
         self
@@ -253,6 +260,7 @@ impl SMSG_SPELL_START_CastFlags {
         (self.inner & CastFlags::UNKNOWN4) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNKNOWN4(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN4.reverse_bits();
         self
@@ -265,6 +273,7 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNKNOWN5(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN5;
         self
@@ -274,6 +283,7 @@ impl SMSG_SPELL_START_CastFlags {
         (self.inner & CastFlags::UNKNOWN5) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNKNOWN5(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN5.reverse_bits();
         self
@@ -286,6 +296,7 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_AMMO(mut self, ammo: SMSG_SPELL_START_CastFlags_Ammo) -> Self {
         self.inner |= CastFlags::AMMO;
         self.ammo = Some(ammo);
@@ -296,6 +307,7 @@ impl SMSG_SPELL_START_CastFlags {
         self.ammo.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_AMMO(mut self) -> Self {
         self.inner &= CastFlags::AMMO.reverse_bits();
         self.ammo = None;
@@ -309,6 +321,7 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNKNOWN7(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN7;
         self
@@ -318,6 +331,7 @@ impl SMSG_SPELL_START_CastFlags {
         (self.inner & CastFlags::UNKNOWN7) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNKNOWN7(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN7.reverse_bits();
         self
@@ -330,6 +344,7 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNKNOWN8(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN8;
         self
@@ -339,6 +354,7 @@ impl SMSG_SPELL_START_CastFlags {
         (self.inner & CastFlags::UNKNOWN8) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNKNOWN8(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN8.reverse_bits();
         self
@@ -351,6 +367,7 @@ impl SMSG_SPELL_START_CastFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNKNOWN9(mut self) -> Self {
         self.inner |= CastFlags::UNKNOWN9;
         self
@@ -360,6 +377,7 @@ impl SMSG_SPELL_START_CastFlags {
         (self.inner & CastFlags::UNKNOWN9) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNKNOWN9(mut self) -> Self {
         self.inner &= CastFlags::UNKNOWN9.reverse_bits();
         self

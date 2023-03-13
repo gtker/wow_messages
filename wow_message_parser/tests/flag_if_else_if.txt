@@ -191,6 +191,7 @@ impl FlagIfElseIf_SimpleFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_ONE(mut self, one: FlagIfElseIf_SimpleFlag_One) -> Self {
         self.inner |= SimpleFlag::ONE;
         self.one = Some(one);
@@ -201,6 +202,7 @@ impl FlagIfElseIf_SimpleFlag {
         self.one.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_ONE(mut self) -> Self {
         self.inner &= SimpleFlag::ONE.reverse_bits();
         self.one = None;
@@ -214,6 +216,7 @@ impl FlagIfElseIf_SimpleFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_TWO(mut self) -> Self {
         self.inner |= SimpleFlag::TWO;
         self
@@ -223,6 +226,7 @@ impl FlagIfElseIf_SimpleFlag {
         (self.inner & SimpleFlag::TWO) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_TWO(mut self) -> Self {
         self.inner &= SimpleFlag::TWO.reverse_bits();
         self
@@ -344,6 +348,7 @@ impl FlagIfElseIf_UpdateFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_ONE_IF(mut self, one_if: FlagIfElseIf_UpdateFlag_OneIf) -> Self {
         self.inner |= one_if.as_int();
         self.one_if = Some(one_if);
@@ -354,6 +359,7 @@ impl FlagIfElseIf_UpdateFlag {
         self.one_if.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_ONE_IF(mut self) -> Self {
         self.inner &= UpdateFlag::ONE_IF.reverse_bits();
         self.one_if = None;
@@ -368,6 +374,7 @@ impl FlagIfElseIf_UpdateFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_EIGHT_IF(mut self, eight_if: FlagIfElseIf_UpdateFlag_EightIf) -> Self {
         self.inner |= UpdateFlag::EIGHT_IF;
         self.eight_if = Some(eight_if);
@@ -378,6 +385,7 @@ impl FlagIfElseIf_UpdateFlag {
         self.eight_if.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_EIGHT_IF(mut self) -> Self {
         self.inner &= UpdateFlag::EIGHT_IF.reverse_bits();
         self.eight_if = None;

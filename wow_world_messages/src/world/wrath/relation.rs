@@ -239,6 +239,7 @@ impl Relation_RelationType {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_FRIEND(mut self, friend: Relation_RelationType_Friend) -> Self {
         self.inner |= RelationType::FRIEND;
         self.friend = Some(friend);
@@ -249,6 +250,7 @@ impl Relation_RelationType {
         self.friend.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_FRIEND(mut self) -> Self {
         self.inner &= RelationType::FRIEND.reverse_bits();
         self.friend = None;
@@ -262,6 +264,7 @@ impl Relation_RelationType {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_IGNORED(mut self) -> Self {
         self.inner |= RelationType::IGNORED;
         self
@@ -271,6 +274,7 @@ impl Relation_RelationType {
         (self.inner & RelationType::IGNORED) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_IGNORED(mut self) -> Self {
         self.inner &= RelationType::IGNORED.reverse_bits();
         self
@@ -283,6 +287,7 @@ impl Relation_RelationType {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_MUTED(mut self) -> Self {
         self.inner |= RelationType::MUTED;
         self
@@ -292,6 +297,7 @@ impl Relation_RelationType {
         (self.inner & RelationType::MUTED) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_MUTED(mut self) -> Self {
         self.inner &= RelationType::MUTED.reverse_bits();
         self
@@ -304,6 +310,7 @@ impl Relation_RelationType {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_RECRUITAFRIEND(mut self) -> Self {
         self.inner |= RelationType::RECRUITAFRIEND;
         self
@@ -313,6 +320,7 @@ impl Relation_RelationType {
         (self.inner & RelationType::RECRUITAFRIEND) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_RECRUITAFRIEND(mut self) -> Self {
         self.inner &= RelationType::RECRUITAFRIEND.reverse_bits();
         self

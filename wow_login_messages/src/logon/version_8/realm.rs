@@ -329,6 +329,7 @@ impl Realm_RealmFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_INVALID(mut self) -> Self {
         self.inner |= RealmFlag::INVALID;
         self
@@ -338,6 +339,7 @@ impl Realm_RealmFlag {
         (self.inner & RealmFlag::INVALID) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_INVALID(mut self) -> Self {
         self.inner &= RealmFlag::INVALID.reverse_bits();
         self
@@ -350,6 +352,7 @@ impl Realm_RealmFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_OFFLINE(mut self) -> Self {
         self.inner |= RealmFlag::OFFLINE;
         self
@@ -359,6 +362,7 @@ impl Realm_RealmFlag {
         (self.inner & RealmFlag::OFFLINE) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_OFFLINE(mut self) -> Self {
         self.inner &= RealmFlag::OFFLINE.reverse_bits();
         self
@@ -371,6 +375,7 @@ impl Realm_RealmFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_SPECIFY_BUILD(mut self, specify_build: Realm_RealmFlag_SpecifyBuild) -> Self {
         self.inner |= RealmFlag::SPECIFY_BUILD;
         self.specify_build = Some(specify_build);
@@ -381,6 +386,7 @@ impl Realm_RealmFlag {
         self.specify_build.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_SPECIFY_BUILD(mut self) -> Self {
         self.inner &= RealmFlag::SPECIFY_BUILD.reverse_bits();
         self.specify_build = None;
@@ -394,6 +400,7 @@ impl Realm_RealmFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_FORCE_BLUE_RECOMMENDED(mut self) -> Self {
         self.inner |= RealmFlag::FORCE_BLUE_RECOMMENDED;
         self
@@ -403,6 +410,7 @@ impl Realm_RealmFlag {
         (self.inner & RealmFlag::FORCE_BLUE_RECOMMENDED) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_FORCE_BLUE_RECOMMENDED(mut self) -> Self {
         self.inner &= RealmFlag::FORCE_BLUE_RECOMMENDED.reverse_bits();
         self
@@ -415,6 +423,7 @@ impl Realm_RealmFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_FORCE_GREEN_RECOMMENDED(mut self) -> Self {
         self.inner |= RealmFlag::FORCE_GREEN_RECOMMENDED;
         self
@@ -424,6 +433,7 @@ impl Realm_RealmFlag {
         (self.inner & RealmFlag::FORCE_GREEN_RECOMMENDED) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_FORCE_GREEN_RECOMMENDED(mut self) -> Self {
         self.inner &= RealmFlag::FORCE_GREEN_RECOMMENDED.reverse_bits();
         self
@@ -436,6 +446,7 @@ impl Realm_RealmFlag {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_FORCE_RED_FULL(mut self) -> Self {
         self.inner |= RealmFlag::FORCE_RED_FULL;
         self
@@ -445,6 +456,7 @@ impl Realm_RealmFlag {
         (self.inner & RealmFlag::FORCE_RED_FULL) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_FORCE_RED_FULL(mut self) -> Self {
         self.inner &= RealmFlag::FORCE_RED_FULL.reverse_bits();
         self

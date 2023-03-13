@@ -427,6 +427,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNUSED1(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNUSED1;
         self
@@ -436,6 +437,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         (self.inner & SpellCastTargetFlags::UNUSED1) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNUSED1(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNUSED1.reverse_bits();
         self
@@ -452,6 +454,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNIT(mut self, unit: SpellCastTargets_SpellCastTargetFlags_Unit) -> Self {
         self.inner |= unit.as_int();
         self.unit = Some(unit);
@@ -462,6 +465,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self.unit.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNIT(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT.reverse_bits();
         self.unit = None;
@@ -479,6 +483,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNIT_RAID(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_RAID;
         self
@@ -488,6 +493,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         (self.inner & SpellCastTargetFlags::UNIT_RAID) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNIT_RAID(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_RAID.reverse_bits();
         self
@@ -504,6 +510,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNIT_PARTY(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_PARTY;
         self
@@ -513,6 +520,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         (self.inner & SpellCastTargetFlags::UNIT_PARTY) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNIT_PARTY(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_PARTY.reverse_bits();
         self
@@ -529,6 +537,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_ITEM(mut self, item: SpellCastTargets_SpellCastTargetFlags_Item) -> Self {
         self.inner |= item.as_int();
         self.item = Some(item);
@@ -539,6 +548,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self.item.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_ITEM(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::ITEM.reverse_bits();
         self.item = None;
@@ -556,6 +566,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_SOURCE_LOCATION(mut self, source_location: SpellCastTargets_SpellCastTargetFlags_SourceLocation) -> Self {
         self.inner |= SpellCastTargetFlags::SOURCE_LOCATION;
         self.source_location = Some(source_location);
@@ -566,6 +577,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self.source_location.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_SOURCE_LOCATION(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::SOURCE_LOCATION.reverse_bits();
         self.source_location = None;
@@ -583,6 +595,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_DEST_LOCATION(mut self, dest_location: SpellCastTargets_SpellCastTargetFlags_DestLocation) -> Self {
         self.inner |= SpellCastTargetFlags::DEST_LOCATION;
         self.dest_location = Some(dest_location);
@@ -593,6 +606,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self.dest_location.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_DEST_LOCATION(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::DEST_LOCATION.reverse_bits();
         self.dest_location = None;
@@ -610,6 +624,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNIT_ENEMY(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_ENEMY;
         self
@@ -619,6 +634,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         (self.inner & SpellCastTargetFlags::UNIT_ENEMY) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNIT_ENEMY(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_ENEMY.reverse_bits();
         self
@@ -635,6 +651,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNIT_ALLY(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_ALLY;
         self
@@ -644,6 +661,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         (self.inner & SpellCastTargetFlags::UNIT_ALLY) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNIT_ALLY(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_ALLY.reverse_bits();
         self
@@ -660,6 +678,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNIT_DEAD(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_DEAD;
         self
@@ -669,6 +688,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         (self.inner & SpellCastTargetFlags::UNIT_DEAD) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNIT_DEAD(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_DEAD.reverse_bits();
         self
@@ -685,6 +705,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_STRING(mut self, string: SpellCastTargets_SpellCastTargetFlags_String) -> Self {
         self.inner |= SpellCastTargetFlags::STRING;
         self.string = Some(string);
@@ -695,6 +716,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         self.string.as_ref()
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_STRING(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::STRING.reverse_bits();
         self.string = None;
@@ -712,6 +734,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_LOCKED(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::LOCKED;
         self
@@ -721,6 +744,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         (self.inner & SpellCastTargetFlags::LOCKED) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_LOCKED(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::LOCKED.reverse_bits();
         self
@@ -737,6 +761,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_GLYPH_SLOT(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::GLYPH_SLOT;
         self
@@ -746,6 +771,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         (self.inner & SpellCastTargetFlags::GLYPH_SLOT) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_GLYPH_SLOT(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::GLYPH_SLOT.reverse_bits();
         self
@@ -762,6 +788,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_DEST_TARGET(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::DEST_TARGET;
         self
@@ -771,6 +798,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         (self.inner & SpellCastTargetFlags::DEST_TARGET) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_DEST_TARGET(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::DEST_TARGET.reverse_bits();
         self
@@ -787,6 +815,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNUSED20(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNUSED20;
         self
@@ -796,6 +825,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         (self.inner & SpellCastTargetFlags::UNUSED20) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNUSED20(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNUSED20.reverse_bits();
         self
@@ -812,6 +842,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         }
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn set_UNIT_PASSENGER(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_PASSENGER;
         self
@@ -821,6 +852,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         (self.inner & SpellCastTargetFlags::UNIT_PASSENGER) != 0
     }
 
+    #[allow(clippy::missing_const_for_fn)] // false positive
     pub fn clear_UNIT_PASSENGER(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_PASSENGER.reverse_bits();
         self

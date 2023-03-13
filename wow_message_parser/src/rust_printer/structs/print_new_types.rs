@@ -113,6 +113,8 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
         }
     });
 
+    const CLIPPY_MISSING_FN: &str = "#[allow(clippy::missing_const_for_fn)] // false positive";
+
     for enumerator in rd.enumerators() {
         if enumerator.value().int() == 0 {
             continue;
@@ -136,6 +138,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                 });
             });
 
+            s.wln(CLIPPY_MISSING_FN);
             s.funcn_pub(
                 format!("set_{}(mut self)", enumerator.name()),
                 "Self",
@@ -208,6 +211,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                 },
             );
 
+            s.wln(CLIPPY_MISSING_FN);
             s.funcn_pub(
                 format!(
                     "set_{upper_name}(mut self, {lower_name}: {new_ty})",
@@ -251,6 +255,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
             );
         }
 
+        s.wln(CLIPPY_MISSING_FN);
         s.funcn_pub(
             format!("clear_{}(mut self)", enumerator.name()),
             "Self",
