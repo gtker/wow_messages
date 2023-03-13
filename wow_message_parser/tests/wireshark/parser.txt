@@ -191,19 +191,16 @@
             if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
-                add_packed_guid(ptv, pinfo);
-            }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT_ENEMY) {
-                add_packed_guid(ptv, pinfo);
-            }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_GAMEOBJECT) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_LOCKED) {
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_OBJECT_UNK) {
                 add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_ITEM) {
+                add_packed_guid(ptv, pinfo);
+            }
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
                 add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_SOURCE_LOCATION) {
@@ -223,10 +220,10 @@
             if (target_flags & SPELL_CAST_TARGET_FLAGS_STRING) {
                 add_cstring(ptv, &hf_woww_target_string);
             }
-            if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ALLY) {
+            if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ENEMY) {
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_PVP_CORPSE) {
                 add_packed_guid(ptv, pinfo);
             }
             ptvcursor_pop_subtree(ptv);
@@ -1240,19 +1237,16 @@
             if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
-                add_packed_guid(ptv, pinfo);
-            }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT_ENEMY) {
-                add_packed_guid(ptv, pinfo);
-            }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_GAMEOBJECT) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_LOCKED) {
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_OBJECT_UNK) {
                 add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_ITEM) {
+                add_packed_guid(ptv, pinfo);
+            }
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
                 add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_SOURCE_LOCATION) {
@@ -1272,10 +1266,10 @@
             if (target_flags & SPELL_CAST_TARGET_FLAGS_STRING) {
                 add_cstring(ptv, &hf_woww_target_string);
             }
-            if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ALLY) {
+            if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ENEMY) {
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_PVP_CORPSE) {
                 add_packed_guid(ptv, pinfo);
             }
             ptvcursor_pop_subtree(ptv);
@@ -1537,19 +1531,16 @@
             if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
-                add_packed_guid(ptv, pinfo);
-            }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT_ENEMY) {
-                add_packed_guid(ptv, pinfo);
-            }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_GAMEOBJECT) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_LOCKED) {
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_OBJECT_UNK) {
                 add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_ITEM) {
+                add_packed_guid(ptv, pinfo);
+            }
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
                 add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_SOURCE_LOCATION) {
@@ -1569,10 +1560,10 @@
             if (target_flags & SPELL_CAST_TARGET_FLAGS_STRING) {
                 add_cstring(ptv, &hf_woww_target_string);
             }
-            if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ALLY) {
+            if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ENEMY) {
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_PVP_CORPSE) {
                 add_packed_guid(ptv, pinfo);
             }
             ptvcursor_pop_subtree(ptv);
@@ -5973,19 +5964,16 @@
             if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
-                add_packed_guid(ptv, pinfo);
-            }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT_ENEMY) {
-                add_packed_guid(ptv, pinfo);
-            }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_GAMEOBJECT) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_LOCKED) {
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_OBJECT_UNK) {
                 add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_ITEM) {
+                add_packed_guid(ptv, pinfo);
+            }
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
                 add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_SOURCE_LOCATION) {
@@ -6005,10 +5993,10 @@
             if (target_flags & SPELL_CAST_TARGET_FLAGS_STRING) {
                 add_cstring(ptv, &hf_woww_target_string);
             }
-            if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ALLY) {
+            if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ENEMY) {
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_PVP_CORPSE) {
                 add_packed_guid(ptv, pinfo);
             }
             ptvcursor_pop_subtree(ptv);
@@ -6028,19 +6016,16 @@
             if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
-                add_packed_guid(ptv, pinfo);
-            }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_UNIT_ENEMY) {
-                add_packed_guid(ptv, pinfo);
-            }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_GAMEOBJECT) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_LOCKED) {
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_OBJECT_UNK) {
                 add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_ITEM) {
+                add_packed_guid(ptv, pinfo);
+            }
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_TRADE_ITEM) {
                 add_packed_guid(ptv, pinfo);
             }
             if (target_flags & SPELL_CAST_TARGET_FLAGS_SOURCE_LOCATION) {
@@ -6060,10 +6045,10 @@
             if (target_flags & SPELL_CAST_TARGET_FLAGS_STRING) {
                 add_cstring(ptv, &hf_woww_target_string);
             }
-            if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ALLY) {
+            if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE) {
                 add_packed_guid(ptv, pinfo);
             }
-            else if (target_flags & SPELL_CAST_TARGET_FLAGS_CORPSE_ENEMY) {
+            else if (target_flags & SPELL_CAST_TARGET_FLAGS_PVP_CORPSE) {
                 add_packed_guid(ptv, pinfo);
             }
             ptvcursor_pop_subtree(ptv);

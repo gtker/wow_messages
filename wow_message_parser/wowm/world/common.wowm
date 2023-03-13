@@ -1,26 +1,62 @@
 flag SpellCastTargetFlags : u16 {
+    SELF            = 0x00000000;
+    UNUSED1         = 0x00000001 {
+        comment = "not used in any spells (can be set dynamically)";
+    }
+    UNIT            = 0x00000002;
+    UNUSED2         = 0x00000004 {
+        comment = "not used in any spells (can be set dynamically)";
+    }
+    UNUSED3         = 0x00000008 {
+        comment = "not used in any spells (can be set dynamically)";
+    }
+    ITEM            = 0x00000010;
+    SOURCE_LOCATION = 0x00000020;
+    DEST_LOCATION   = 0x00000040;
+    OBJECT_UNK      = 0x00000080 {
+        comment = "used in 7 spells only";
+    }
+    UNIT_UNK        = 0x00000100 {
+        comment = "looks like self target (389 spells)";
+    }
+    PVP_CORPSE      = 0x00000200;
+    UNIT_CORPSE     = 0x00000400 {
+        comment = "10 spells (gathering professions)";
+    }
+    GAMEOBJECT          = 0x00000800 {
+        comment = "pguid, 0 spells";
+    }
+    TRADE_ITEM      = 0x00001000 {
+        comment = "pguid, 0 spells";
+    }
+    STRING          = 0x00002000 {
+        comment = "string, 0 spells";
+    }
+    UNK1            = 0x00004000 {
+        comment = "199 spells, opening object/lock";
+    }
+    CORPSE          = 0x00008000 {
+        comment = "pguid, resurrection spells";
+    }
+} {
+    versions = "1.12";
+}
+
+flag SpellCastTargetFlags : u32 {
     SELF = 0x00000000;
     UNUSED1 = 0x00000001 {
         comment = "not used in any spells as of 2.4.3 (can be set dynamically)";
     }
-    UNIT = 0x00000002 {
-        comment = "pguid";
-    }
+    UNIT = 0x00000002;
     UNIT_RAID = 0x00000004 {
         comment = "not used in any spells as of 2.4.3 (can be set dynamically) - raid member";
     }
     UNIT_PARTY = 0x00000008 {
         comment = "not used in any spells as of 2.4.3 (can be set dynamically) - party member";
     }
-    ITEM = 0x00000010 {
-        comment = "pguid";
-    }
-    SOURCE_LOCATION = 0x00000020 {
-        comment = "3xfloat";
-    }
-    DEST_LOCATION = 0x00000040 {
-        comment = "3xfloat";
-    }
+    ITEM = 0x00000010;
+    SOURCE_LOCATION = 0x00000020;
+    DEST_LOCATION = 0x00000040;
     UNIT_ENEMY = 0x00000080 {
         comment = "`CanAttack` == true";
     }
@@ -48,9 +84,11 @@ flag SpellCastTargetFlags : u16 {
     CORPSE_ALLY = 0x00008000 {
         comment = "pguid, `CanAssist` == true";
     }
+    UNIT_MINIPET = 0x00010000 {
+        comment = "pguid, not used in any spells as of 2.4.3 (can be set dynamically)";
+    }
 } {
-    comment = "Also has `UNIT_MINIPET` = 0x00010000 (pguid, not used in any spells as of 2.4.3 (can be set dynamically)) however this is outside range of u16, which [SpellCastTargets] needs.";
-    versions = "1.12 2";
+    versions = "2.4.3";
 }
 
 flag SpellCastTargetFlags : u32 {
@@ -127,45 +165,87 @@ struct SpellCastTargets {
     if (target_flags & UNIT) {
         PackedGuid unit_target;
     }
-    else if (target_flags & TRADE_ITEM) {
-        PackedGuid trade_item;
-    }
-    else if (target_flags & UNIT_ENEMY) {
-        PackedGuid enemy_target;
-    }
 
     if (target_flags & GAMEOBJECT) {
-        PackedGuid object_target;
+        PackedGuid gameobject;
     }
-    else if (target_flags & LOCKED) {
-        PackedGuid locked_target;
+    else if (target_flags & OBJECT_UNK) {
+        PackedGuid object_unk;
     }
 
-    if (target_flags & ITEM ) {
-        PackedGuid item_target;
+    if (target_flags & ITEM) {
+        PackedGuid item;
+    } else if (target_flags & TRADE_ITEM) {
+        PackedGuid trade_item;
     }
-    /*else if (target_flags & TRADE_ITEM) {
-        PackedGuid item_target;
-    } TODO FLAG_ELSEIF_MULTIPLE_SAME */
 
     if (target_flags & SOURCE_LOCATION) {
         Vector3d source;
     }
+
     if (target_flags & DEST_LOCATION) {
         Vector3d destination;
     }
+
     if (target_flags & STRING) {
         CString target_string;
     }
 
-    if (target_flags & CORPSE_ALLY ) {
-        PackedGuid corpse_target_ally;
+    if (target_flags & CORPSE) {
+        PackedGuid corpse;
     }
-    else if (target_flags & CORPSE_ENEMY) {
-        PackedGuid corpse_target_enemy;
+    else if (target_flags & PVP_CORPSE) {
+        PackedGuid pvp_corpse;
     }
 } {
-    versions = "1.12 2";
+    paste_versions = "1.12";
+}
+
+struct SpellCastTargets {
+    SpellCastTargetFlags target_flags;
+    if (target_flags & UNIT) {
+        PackedGuid unit_target;
+    }
+    else if (target_flags & UNIT_MINIPET) {
+        PackedGuid unit_minipet;
+    }
+    else if (target_flags & UNIT_ENEMY) {
+        PackedGuid unit_enemy;
+    }
+
+    if (target_flags & GAMEOBJECT) {
+        PackedGuid gameobject;
+    }
+    else if (target_flags & LOCKED) {
+        PackedGuid locked;
+    }
+
+    if (target_flags & ITEM) {
+        PackedGuid item;
+    } else if (target_flags & TRADE_ITEM) {
+        PackedGuid trade_item;
+    }
+
+    if (target_flags & SOURCE_LOCATION) {
+        Vector3d source;
+    }
+
+    if (target_flags & DEST_LOCATION) {
+        Vector3d destination;
+    }
+
+    if (target_flags & STRING) {
+        CString target_string;
+    }
+
+    if (target_flags & CORPSE_ALLY) {
+        PackedGuid corpse_ally;
+    }
+    else if (target_flags & CORPSE_ENEMY) {
+        PackedGuid corpse_enemy;
+    }
+} {
+    paste_versions = "2.4.3";
 }
 
 struct SpellCastTargets {

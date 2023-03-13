@@ -254,8 +254,6 @@ pub mod group_member_online_status_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod relation_type_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod spell_cast_target_flags_vanilla_tbc;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod spline_flag_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub mod update_flag_vanilla_tbc;

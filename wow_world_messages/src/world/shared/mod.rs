@@ -70,8 +70,6 @@ pub mod quest_objective_vanilla_tbc_wrath;
 pub mod raid_target_update_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod received_mail_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc"))]
-pub mod spell_cast_targets_vanilla_tbc;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod spell_cooldown_status_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

@@ -55,7 +55,7 @@ impl crate::Message for CMSG_USE_ITEM {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(14..=330).contains(&body_size) {
+        if !(16..=332).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00AB, size: body_size as u32 });
         }
 

@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:231`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L231):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/common.wowm:311`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/common.wowm#L311):
 /// ```text
 /// enum ItemClass : u8 {
 ///     CONSUMABLE = 0;

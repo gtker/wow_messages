@@ -75,7 +75,7 @@ impl crate::Message for SMSG_SPELL_START {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(17..=355).contains(&body_size) {
+        if !(19..=357).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0131, size: body_size as u32 });
         }
 
