@@ -506,13 +506,20 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                 name = m.name()
             )
         }
+        RustType::AchievementDoneArray => {
+            format!("{prefix}{name}.len() * 4", name = m.name())
+        }
+        RustType::AchievementInProgressArray => {
+            format!(
+                "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
+                name = m.name()
+            )
+        }
 
         RustType::VariableItemRandomProperty
         | RustType::NamedGuid
         | RustType::EnchantMask
         | RustType::InspectTalentGearMask
-        | RustType::AchievementDoneArray
-        | RustType::AchievementInProgressArray
         | RustType::PackedGuid
         | RustType::UpdateMask
         | RustType::AuraMask => {

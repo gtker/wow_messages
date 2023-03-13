@@ -100,9 +100,9 @@ impl ParsedType {
             ParsedType::AuraMask => Type::AURA_MASK_NAME.to_string(),
             ParsedType::Bool(_) => Type::BOOLS_RUST_NAME.to_string(),
             ParsedType::DateTime => Type::DATE_TIME_NAME.to_string(),
-            ParsedType::AchievementDoneArray => Type::ACHIEVEMENT_DONE_ARRAY_NAME.to_string(),
+            ParsedType::AchievementDoneArray => Type::ACHIEVEMENT_DONE_ARRAY_RUST_NAME.to_string(),
             ParsedType::AchievementInProgressArray => {
-                Type::ACHIEVEMENT_IN_PROGRESS_ARRAY_NAME.to_string()
+                Type::ACHIEVEMENT_IN_PROGRESS_ARRAY_RUST_NAME.to_string()
             }
             ParsedType::MonsterMoveSpline => Type::MONSTER_MOVE_SPLINES_RUST_NAME.to_string(),
             ParsedType::EnchantMask => Type::ENCHANT_MASK_NAME.to_string(),

@@ -401,6 +401,20 @@ fn print_read_definition(
                 postfix = postfix,
             ));
         }
+        Type::AchievementDoneArray => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = crate::util::read_achievement_done(&mut r){postfix}?;",
+                name = d.name(),
+                postfix = postfix,
+            ));
+        }
+        Type::AchievementInProgressArray => {
+            s.wln(format!(
+                 "{assignment_prefix}{name} = crate::util::read_achievement_in_progress(&mut r){postfix}?;",
+                 name = d.name(),
+                 postfix = postfix,
+             ));
+        }
 
         Type::VariableItemRandomProperty
         | Type::NamedGuid
@@ -408,8 +422,6 @@ fn print_read_definition(
         | Type::Guid
         | Type::UpdateMask
         | Type::AuraMask
-        | Type::AchievementDoneArray
-        | Type::AchievementInProgressArray
         | Type::EnchantMask
         | Type::InspectTalentGearMask => {
             s.wln(format!(

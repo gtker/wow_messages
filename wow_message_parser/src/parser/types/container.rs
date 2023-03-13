@@ -524,12 +524,19 @@ impl Container {
                 | Type::NamedGuid
                 | Type::EnchantMask
                 | Type::InspectTalentGearMask
-                | Type::AchievementDoneArray
-                | Type::AchievementInProgressArray
                 | Type::AuraMask
                 | Type::UpdateMask => (
                     format!("crate::{}", version.as_major_world().module_name()),
                     name,
+                ),
+
+                Type::AchievementDoneArray => (
+                    format!("crate::{}", version.as_major_world().module_name()),
+                    "AchievementDone".to_string(),
+                ),
+                Type::AchievementInProgressArray => (
+                    format!("crate::{}", version.as_major_world().module_name()),
+                    "AchievementInProgress".to_string(),
                 ),
 
                 Type::Gold => {

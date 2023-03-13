@@ -1,7 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    AchievementDoneArray, AchievementInProgressArray,
+    AchievementDone, AchievementInProgress,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -13,8 +13,8 @@ use crate::wrath::{
 /// }
 /// ```
 pub struct SMSG_ALL_ACHIEVEMENT_DATA {
-    pub done: AchievementDoneArray,
-    pub in_progress: AchievementInProgressArray,
+    pub done: Vec<AchievementDone>,
+    pub in_progress: Vec<AchievementInProgress>,
 }
 
 impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
@@ -26,10 +26,10 @@ impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // done: AchievementDoneArray
-        self.done.write_into_vec(&mut w)?;
+        crate::util::write_achievement_done(self.done.as_slice(), &mut w)?;
 
         // in_progress: AchievementInProgressArray
-        self.in_progress.write_into_vec(&mut w)?;
+        crate::util::write_achievement_in_progress(self.in_progress.as_slice(), &mut w)?;
 
         Ok(())
     }
@@ -39,10 +39,10 @@ impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
         }
 
         // done: AchievementDoneArray
-        let done = AchievementDoneArray::read(&mut r)?;
+        let done = crate::util::read_achievement_done(&mut r)?;
 
         // in_progress: AchievementInProgressArray
-        let in_progress = AchievementInProgressArray::read(&mut r)?;
+        let in_progress = crate::util::read_achievement_in_progress(&mut r)?;
 
         Ok(Self {
             done,
@@ -56,8 +56,8 @@ impl crate::wrath::ServerMessage for SMSG_ALL_ACHIEVEMENT_DATA {}
 
 impl SMSG_ALL_ACHIEVEMENT_DATA {
     pub(crate) fn size(&self) -> usize {
-        self.done.size() // done: AchievementDoneArray
-        + self.in_progress.size() // in_progress: AchievementInProgressArray
+        self.done.len() * 4 // done: AchievementDoneArray
+        + self.in_progress.iter().fold(0, |acc, x| acc + x.size()) // in_progress: AchievementInProgressArray
     }
 }
 

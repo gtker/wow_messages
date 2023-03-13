@@ -84,6 +84,9 @@ impl Type {
     pub(crate) const GUIDS_RUST_NAME: &'static str = "Guid";
     pub(crate) const BOOLS_RUST_NAME: &'static str = "bool";
     pub(crate) const MONSTER_MOVE_SPLINES_RUST_NAME: &'static str = "Vec<Vector3d>";
+    pub(crate) const ACHIEVEMENT_DONE_ARRAY_RUST_NAME: &'static str = "Vec<AchievementDone>";
+    pub(crate) const ACHIEVEMENT_IN_PROGRESS_ARRAY_RUST_NAME: &'static str =
+        "Vec<AchievementInProgress>";
 
     pub(crate) fn str(&self) -> String {
         match self {

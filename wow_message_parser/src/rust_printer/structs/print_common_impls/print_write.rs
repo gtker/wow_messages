@@ -247,14 +247,22 @@ pub(crate) fn print_write_definition(
                 "crate::util::write_monster_move_spline({variable_prefix}{name}.as_slice(), &mut w){postfix}?;",
             ));
         }
+        Type::AchievementDoneArray => {
+            s.wln(format!(
+                 "crate::util::write_achievement_done({variable_prefix}{name}.as_slice(), &mut w){postfix}?;",
+             ));
+        }
+        Type::AchievementInProgressArray => {
+            s.wln(format!(
+                 "crate::util::write_achievement_in_progress({variable_prefix}{name}.as_slice(), &mut w){postfix}?;",
+             ));
+        }
 
         Type::VariableItemRandomProperty
         | Type::NamedGuid
         | Type::Struct { .. }
         | Type::EnchantMask
         | Type::InspectTalentGearMask
-        | Type::AchievementDoneArray
-        | Type::AchievementInProgressArray
         | Type::UpdateMask
         | Type::AuraMask => {
             s.wln(format!(
