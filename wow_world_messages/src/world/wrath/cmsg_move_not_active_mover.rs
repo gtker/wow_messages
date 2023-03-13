@@ -33,7 +33,7 @@ impl crate::Message for CMSG_MOVE_NOT_ACTIVE_MOVER {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(38..=92).contains(&body_size) {
+        if !(38..=96).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D1, size: body_size as u32 });
         }
 

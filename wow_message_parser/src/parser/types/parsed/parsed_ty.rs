@@ -286,6 +286,8 @@ impl ParsedType {
             "f64" => Self::FloatingPoint(FloatingPointType::F64(Endianness::Little)),
             "f64_be" => Self::FloatingPoint(FloatingPointType::F64(Endianness::Big)),
 
+            "u48" => Self::Integer(IntegerType::U48),
+
             "Item16" | "Spell16" => Self::Integer(IntegerType::U16(Endianness::Little)),
             Type::LEVEL_NAME => Self::Level,
             Type::LEVEL_NAME16 => Self::Level16,
@@ -379,5 +381,6 @@ pub(crate) fn bool_ty_to_string(i: &IntegerType) -> String {
         IntegerType::I16(_) | IntegerType::U16(_) => "Bool16".to_string(),
         IntegerType::I32(_) | IntegerType::U32(_) => "Bool32".to_string(),
         IntegerType::I64(_) | IntegerType::U64(_) => "Bool64".to_string(),
+        IntegerType::U48 => unreachable!(),
     }
 }

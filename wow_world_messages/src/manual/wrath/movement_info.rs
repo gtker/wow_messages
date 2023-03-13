@@ -1,8 +1,10 @@
 use crate::wrath::{
     MovementBlock_MovementFlags, MovementBlock_MovementFlags_Falling,
-    MovementBlock_MovementFlags_OnTransport, MovementBlock_MovementFlags_SplineElevation,
-    MovementBlock_MovementFlags_SplineEnabled, MovementBlock_MovementFlags_Swimming,
-    MovementBlock_UpdateFlag_Living, MovementInfo, MovementInfo_MovementFlags_Swimming,
+    MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement,
+    MovementBlock_MovementFlags_SplineElevation, MovementBlock_MovementFlags_SplineEnabled,
+    MovementBlock_MovementFlags_Swimming, MovementBlock_UpdateFlag_Living, MovementInfo,
+    MovementInfo_MovementFlags_OnTransportAndInterpolatedMovement,
+    MovementInfo_MovementFlags_Swimming,
 };
 
 impl MovementInfo {
@@ -22,9 +24,19 @@ impl MovementInfo {
     ) -> MovementBlock_UpdateFlag_Living {
         let on_transport =
             self.flags
-                .get_ON_TRANSPORT()
-                .map(|t| MovementBlock_MovementFlags_OnTransport {
-                    transport: t.transport,
+                .get_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT()
+                .map(|t| match t {
+                    MovementInfo_MovementFlags_OnTransportAndInterpolatedMovement::OnTransportAndInterpolatedMovement { transport_info, transport_time } => {
+                         MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement::OnTransportAndInterpolatedMovement {
+                             transport_info: *transport_info,
+                             transport_time: *transport_time,
+                         }
+                    }
+                    MovementInfo_MovementFlags_OnTransportAndInterpolatedMovement::OnTransport { transport } => {
+                        MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement::OnTransport {
+                            transport: *transport,
+                        }
+                    }
                 });
 
         let falling = self
@@ -44,6 +56,9 @@ impl MovementInfo {
             MovementInfo_MovementFlags_Swimming::Flying { pitch2 } => {
                 MovementBlock_MovementFlags_Swimming::Flying { pitch2: *pitch2 }
             }
+            MovementInfo_MovementFlags_Swimming::AlwaysAllowPitching { pitch3 } => {
+                MovementBlock_MovementFlags_Swimming::AlwaysAllowPitching { pitch3: *pitch3 }
+            }
         });
 
         let spline_elevation = self.flags.get_SPLINE_ELEVATION().map(|t| {
@@ -53,25 +68,24 @@ impl MovementInfo {
         });
 
         MovementBlock_UpdateFlag_Living::Living {
-            living_orientation: self.orientation,
-            living_position: self.position,
             timestamp: self.timestamp,
-            extra_flags: self.extra_flags,
             fall_time: self.fall_time,
             flags: MovementBlock_MovementFlags::new(
                 self.flags.as_int(),
-                on_transport,
                 falling,
                 swimming,
                 spline_elevation,
                 spline_enabled,
+                on_transport,
             ),
 
             backwards_flight_speed,
             backwards_running_speed,
             backwards_swimming_speed,
             flight_speed,
+            orientation: self.orientation,
             pitch_rate,
+            position: self.position,
             running_speed,
             swimming_speed,
             turn_rate,

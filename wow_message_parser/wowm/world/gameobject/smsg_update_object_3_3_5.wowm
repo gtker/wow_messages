@@ -90,21 +90,24 @@ struct MovementBlock {
         /* All variables until newline are actually just a MovementInfo,
            but the if statement later requires access to flags. */
         MovementFlags flags;
-        ExtraMovementFlags extra_flags;
         u32 timestamp;
-        Vector3d living_position;
-        f32 living_orientation;
-        if (flags & ON_TRANSPORT) {
-            TransportInfo transport;
-            /* TODO FLAG_DIFFERENT_VARIABLE Flag inside flag
-            if (extra_flags & INTERPOLATED_MOVEMENT) {
-                u32 transport_time;
-            } */
+        Vector3d position;
+        f32 orientation;
+        if (flags & ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT) {
+            TransportInfo transport_info;
+            u32 transport_time;
         }
-        if (flags & SWIMMING /*TODO FLAG_DIFFERENT_VARIABLE || extra_flags & ALWAYS_ALLOW_PITCHING */) {
+        else if (flags & ON_TRANSPORT) {
+            TransportInfo transport;
+        }
+
+        if (flags & SWIMMING) {
             f32 pitch1;
         } else if (flags & FLYING) {
             f32 pitch2;
+        }
+        else if (flags & ALWAYS_ALLOW_PITCHING) {
+            f32 pitch3;
         }
         f32 fall_time;
         if (flags & FALLING) {

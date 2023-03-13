@@ -29,7 +29,7 @@ impl crate::Message for MSG_MOVE_ROOT_Server {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(30..=84).contains(&body_size) {
+        if !(30..=88).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00EC, size: body_size as u32 });
         }
 

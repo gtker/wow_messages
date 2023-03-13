@@ -53,7 +53,7 @@ impl crate::Message for MSG_MOVE_KNOCK_BACK_Server {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(48..=109).contains(&body_size) {
+        if !(48..=113).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00F1, size: body_size as u32 });
         }
 

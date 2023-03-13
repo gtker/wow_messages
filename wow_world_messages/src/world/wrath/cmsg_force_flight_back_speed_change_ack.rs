@@ -43,7 +43,7 @@ impl crate::Message for CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(46..=100).contains(&body_size) {
+        if !(46..=104).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0384, size: body_size as u32 });
         }
 

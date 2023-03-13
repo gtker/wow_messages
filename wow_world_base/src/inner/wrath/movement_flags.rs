@@ -1,6 +1,6 @@
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/common_movement_3_3_5.wowm:11`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/common_movement_3_3_5.wowm#L11):
 /// ```text
-/// flag MovementFlags : u32 {
+/// flag MovementFlags : u48 {
 ///     NONE = 0x00000000;
 ///     FORWARD = 0x00000001;
 ///     BACKWARD = 0x00000002;
@@ -33,51 +33,85 @@
 ///     WATERWALKING = 0x10000000;
 ///     FALLING_SLOW = 0x20000000;
 ///     HOVER = 0x40000000;
+///     NO_STRAFE = 0x0000000100000000;
+///     NO_JUMPING = 0x0000000200000000;
+///     UNK3 = 0x0000000400000000;
+///     FULL_SPEED_TURNING = 0x0000000800000000;
+///     FULL_SPEED_PITCHING = 0x0000001000000000;
+///     ALWAYS_ALLOW_PITCHING = 0x0000002000000000;
+///     UNK7 = 0x0000004000000000;
+///     UNK8 = 0x0000008000000000;
+///     UNK9 = 0x0000010000000000;
+///     UNK10 = 0x0000020000000000;
+///     INTERPOLATED_MOVEMENT = 0x0000040000000000;
+///     INTERPOLATED_TURNING = 0x0000080000000000;
+///     INTERPOLATED_PITCHING = 0x0000100000000000;
+///     UNK14 = 0x0000200000000000;
+///     UNK15 = 0x0000400000000000;
+///     UNK16 = 0x0000800000000000;
+///     ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT = 0x0000040000000200;
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone, Default)]
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct MovementFlags {
-    inner: u32,
+    inner: u64,
 }
 
 impl MovementFlags {
-    pub const fn new(inner: u32) -> Self {
+    pub const fn new(inner: u64) -> Self {
         Self { inner }
     }
 
-    pub const NONE: u32 = 0x00;
-    pub const FORWARD: u32 = 0x01;
-    pub const BACKWARD: u32 = 0x02;
-    pub const STRAFE_LEFT: u32 = 0x04;
-    pub const STRAFE_RIGHT: u32 = 0x08;
-    pub const LEFT: u32 = 0x10;
-    pub const RIGHT: u32 = 0x20;
-    pub const PITCH_UP: u32 = 0x40;
-    pub const PITCH_DOWN: u32 = 0x80;
-    pub const WALKING: u32 = 0x100;
-    pub const ON_TRANSPORT: u32 = 0x200;
-    pub const DISABLE_GRAVITY: u32 = 0x400;
-    pub const ROOT: u32 = 0x800;
-    pub const FALLING: u32 = 0x1000;
-    pub const FALLING_FAR: u32 = 0x2000;
-    pub const PENDING_STOP: u32 = 0x4000;
-    pub const PENDING_STRAFE_STOP: u32 = 0x8000;
-    pub const PENDING_FORWARD: u32 = 0x10000;
-    pub const PENDING_BACKWARD: u32 = 0x20000;
-    pub const PENDING_STRAFE_LEFT: u32 = 0x40000;
-    pub const PENDING_STRAFE_RIGHT: u32 = 0x80000;
-    pub const PENDING_ROOT: u32 = 0x100000;
-    pub const SWIMMING: u32 = 0x200000;
-    pub const ASCENDING: u32 = 0x400000;
-    pub const DESCENDING: u32 = 0x800000;
-    pub const CAN_FLY: u32 = 0x1000000;
-    pub const FLYING: u32 = 0x2000000;
-    pub const SPLINE_ELEVATION: u32 = 0x4000000;
-    pub const SPLINE_ENABLED: u32 = 0x8000000;
-    pub const WATERWALKING: u32 = 0x10000000;
-    pub const FALLING_SLOW: u32 = 0x20000000;
-    pub const HOVER: u32 = 0x40000000;
+    pub const NONE: u64 = 0x00;
+    pub const FORWARD: u64 = 0x01;
+    pub const BACKWARD: u64 = 0x02;
+    pub const STRAFE_LEFT: u64 = 0x04;
+    pub const STRAFE_RIGHT: u64 = 0x08;
+    pub const LEFT: u64 = 0x10;
+    pub const RIGHT: u64 = 0x20;
+    pub const PITCH_UP: u64 = 0x40;
+    pub const PITCH_DOWN: u64 = 0x80;
+    pub const WALKING: u64 = 0x100;
+    pub const ON_TRANSPORT: u64 = 0x200;
+    pub const DISABLE_GRAVITY: u64 = 0x400;
+    pub const ROOT: u64 = 0x800;
+    pub const FALLING: u64 = 0x1000;
+    pub const FALLING_FAR: u64 = 0x2000;
+    pub const PENDING_STOP: u64 = 0x4000;
+    pub const PENDING_STRAFE_STOP: u64 = 0x8000;
+    pub const PENDING_FORWARD: u64 = 0x10000;
+    pub const PENDING_BACKWARD: u64 = 0x20000;
+    pub const PENDING_STRAFE_LEFT: u64 = 0x40000;
+    pub const PENDING_STRAFE_RIGHT: u64 = 0x80000;
+    pub const PENDING_ROOT: u64 = 0x100000;
+    pub const SWIMMING: u64 = 0x200000;
+    pub const ASCENDING: u64 = 0x400000;
+    pub const DESCENDING: u64 = 0x800000;
+    pub const CAN_FLY: u64 = 0x1000000;
+    pub const FLYING: u64 = 0x2000000;
+    pub const SPLINE_ELEVATION: u64 = 0x4000000;
+    pub const SPLINE_ENABLED: u64 = 0x8000000;
+    pub const WATERWALKING: u64 = 0x10000000;
+    pub const FALLING_SLOW: u64 = 0x20000000;
+    pub const HOVER: u64 = 0x40000000;
+    pub const NO_STRAFE: u64 = 0x100000000;
+    pub const NO_JUMPING: u64 = 0x200000000;
+    pub const UNK3: u64 = 0x400000000;
+    pub const FULL_SPEED_TURNING: u64 = 0x800000000;
+    pub const FULL_SPEED_PITCHING: u64 = 0x1000000000;
+    pub const ALWAYS_ALLOW_PITCHING: u64 = 0x2000000000;
+    pub const UNK7: u64 = 0x4000000000;
+    pub const UNK8: u64 = 0x8000000000;
+    pub const UNK9: u64 = 0x10000000000;
+    pub const UNK10: u64 = 0x20000000000;
+    pub const INTERPOLATED_MOVEMENT: u64 = 0x40000000000;
+    pub const INTERPOLATED_TURNING: u64 = 0x80000000000;
+    pub const INTERPOLATED_PITCHING: u64 = 0x100000000000;
+    pub const UNK14: u64 = 0x200000000000;
+    pub const UNK15: u64 = 0x400000000000;
+    pub const UNK16: u64 = 0x800000000000;
+    pub const ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT: u64 = 0x40000000200;
 
     pub const fn empty() -> Self {
         Self { inner: 0 }
@@ -121,6 +155,23 @@ impl MovementFlags {
                 | Self::WATERWALKING
                 | Self::FALLING_SLOW
                 | Self::HOVER
+                | Self::NO_STRAFE
+                | Self::NO_JUMPING
+                | Self::UNK3
+                | Self::FULL_SPEED_TURNING
+                | Self::FULL_SPEED_PITCHING
+                | Self::ALWAYS_ALLOW_PITCHING
+                | Self::UNK7
+                | Self::UNK8
+                | Self::UNK9
+                | Self::UNK10
+                | Self::INTERPOLATED_MOVEMENT
+                | Self::INTERPOLATED_TURNING
+                | Self::INTERPOLATED_PITCHING
+                | Self::UNK14
+                | Self::UNK15
+                | Self::UNK16
+                | Self::ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT
         }
     }
 
@@ -710,7 +761,315 @@ impl MovementFlags {
         *self
     }
 
-    pub const fn as_int(&self) -> u32 {
+    pub const fn is_NO_STRAFE(&self) -> bool {
+        (self.inner & Self::NO_STRAFE) != 0
+    }
+
+    pub const fn new_NO_STRAFE() -> Self {
+        Self { inner: Self::NO_STRAFE }
+    }
+
+    pub fn set_NO_STRAFE(&mut self) -> Self {
+        self.inner |= Self::NO_STRAFE;
+        *self
+    }
+
+    pub fn clear_NO_STRAFE(&mut self) -> Self {
+        self.inner &= Self::NO_STRAFE.reverse_bits();
+        *self
+    }
+
+    pub const fn is_NO_JUMPING(&self) -> bool {
+        (self.inner & Self::NO_JUMPING) != 0
+    }
+
+    pub const fn new_NO_JUMPING() -> Self {
+        Self { inner: Self::NO_JUMPING }
+    }
+
+    pub fn set_NO_JUMPING(&mut self) -> Self {
+        self.inner |= Self::NO_JUMPING;
+        *self
+    }
+
+    pub fn clear_NO_JUMPING(&mut self) -> Self {
+        self.inner &= Self::NO_JUMPING.reverse_bits();
+        *self
+    }
+
+    pub const fn is_UNK3(&self) -> bool {
+        (self.inner & Self::UNK3) != 0
+    }
+
+    /// `AzerothCore`: Overrides various clientside checks
+    ///
+    pub const fn new_UNK3() -> Self {
+        Self { inner: Self::UNK3 }
+    }
+
+    pub fn set_UNK3(&mut self) -> Self {
+        self.inner |= Self::UNK3;
+        *self
+    }
+
+    pub fn clear_UNK3(&mut self) -> Self {
+        self.inner &= Self::UNK3.reverse_bits();
+        *self
+    }
+
+    pub const fn is_FULL_SPEED_TURNING(&self) -> bool {
+        (self.inner & Self::FULL_SPEED_TURNING) != 0
+    }
+
+    pub const fn new_FULL_SPEED_TURNING() -> Self {
+        Self { inner: Self::FULL_SPEED_TURNING }
+    }
+
+    pub fn set_FULL_SPEED_TURNING(&mut self) -> Self {
+        self.inner |= Self::FULL_SPEED_TURNING;
+        *self
+    }
+
+    pub fn clear_FULL_SPEED_TURNING(&mut self) -> Self {
+        self.inner &= Self::FULL_SPEED_TURNING.reverse_bits();
+        *self
+    }
+
+    pub const fn is_FULL_SPEED_PITCHING(&self) -> bool {
+        (self.inner & Self::FULL_SPEED_PITCHING) != 0
+    }
+
+    pub const fn new_FULL_SPEED_PITCHING() -> Self {
+        Self { inner: Self::FULL_SPEED_PITCHING }
+    }
+
+    pub fn set_FULL_SPEED_PITCHING(&mut self) -> Self {
+        self.inner |= Self::FULL_SPEED_PITCHING;
+        *self
+    }
+
+    pub fn clear_FULL_SPEED_PITCHING(&mut self) -> Self {
+        self.inner &= Self::FULL_SPEED_PITCHING.reverse_bits();
+        *self
+    }
+
+    pub const fn is_ALWAYS_ALLOW_PITCHING(&self) -> bool {
+        (self.inner & Self::ALWAYS_ALLOW_PITCHING) != 0
+    }
+
+    pub const fn new_ALWAYS_ALLOW_PITCHING() -> Self {
+        Self { inner: Self::ALWAYS_ALLOW_PITCHING }
+    }
+
+    pub fn set_ALWAYS_ALLOW_PITCHING(&mut self) -> Self {
+        self.inner |= Self::ALWAYS_ALLOW_PITCHING;
+        *self
+    }
+
+    pub fn clear_ALWAYS_ALLOW_PITCHING(&mut self) -> Self {
+        self.inner &= Self::ALWAYS_ALLOW_PITCHING.reverse_bits();
+        *self
+    }
+
+    pub const fn is_UNK7(&self) -> bool {
+        (self.inner & Self::UNK7) != 0
+    }
+
+    pub const fn new_UNK7() -> Self {
+        Self { inner: Self::UNK7 }
+    }
+
+    pub fn set_UNK7(&mut self) -> Self {
+        self.inner |= Self::UNK7;
+        *self
+    }
+
+    pub fn clear_UNK7(&mut self) -> Self {
+        self.inner &= Self::UNK7.reverse_bits();
+        *self
+    }
+
+    pub const fn is_UNK8(&self) -> bool {
+        (self.inner & Self::UNK8) != 0
+    }
+
+    pub const fn new_UNK8() -> Self {
+        Self { inner: Self::UNK8 }
+    }
+
+    pub fn set_UNK8(&mut self) -> Self {
+        self.inner |= Self::UNK8;
+        *self
+    }
+
+    pub fn clear_UNK8(&mut self) -> Self {
+        self.inner &= Self::UNK8.reverse_bits();
+        *self
+    }
+
+    pub const fn is_UNK9(&self) -> bool {
+        (self.inner & Self::UNK9) != 0
+    }
+
+    pub const fn new_UNK9() -> Self {
+        Self { inner: Self::UNK9 }
+    }
+
+    pub fn set_UNK9(&mut self) -> Self {
+        self.inner |= Self::UNK9;
+        *self
+    }
+
+    pub fn clear_UNK9(&mut self) -> Self {
+        self.inner &= Self::UNK9.reverse_bits();
+        *self
+    }
+
+    pub const fn is_UNK10(&self) -> bool {
+        (self.inner & Self::UNK10) != 0
+    }
+
+    pub const fn new_UNK10() -> Self {
+        Self { inner: Self::UNK10 }
+    }
+
+    pub fn set_UNK10(&mut self) -> Self {
+        self.inner |= Self::UNK10;
+        *self
+    }
+
+    pub fn clear_UNK10(&mut self) -> Self {
+        self.inner &= Self::UNK10.reverse_bits();
+        *self
+    }
+
+    pub const fn is_INTERPOLATED_MOVEMENT(&self) -> bool {
+        (self.inner & Self::INTERPOLATED_MOVEMENT) != 0
+    }
+
+    pub const fn new_INTERPOLATED_MOVEMENT() -> Self {
+        Self { inner: Self::INTERPOLATED_MOVEMENT }
+    }
+
+    pub fn set_INTERPOLATED_MOVEMENT(&mut self) -> Self {
+        self.inner |= Self::INTERPOLATED_MOVEMENT;
+        *self
+    }
+
+    pub fn clear_INTERPOLATED_MOVEMENT(&mut self) -> Self {
+        self.inner &= Self::INTERPOLATED_MOVEMENT.reverse_bits();
+        *self
+    }
+
+    pub const fn is_INTERPOLATED_TURNING(&self) -> bool {
+        (self.inner & Self::INTERPOLATED_TURNING) != 0
+    }
+
+    pub const fn new_INTERPOLATED_TURNING() -> Self {
+        Self { inner: Self::INTERPOLATED_TURNING }
+    }
+
+    pub fn set_INTERPOLATED_TURNING(&mut self) -> Self {
+        self.inner |= Self::INTERPOLATED_TURNING;
+        *self
+    }
+
+    pub fn clear_INTERPOLATED_TURNING(&mut self) -> Self {
+        self.inner &= Self::INTERPOLATED_TURNING.reverse_bits();
+        *self
+    }
+
+    pub const fn is_INTERPOLATED_PITCHING(&self) -> bool {
+        (self.inner & Self::INTERPOLATED_PITCHING) != 0
+    }
+
+    pub const fn new_INTERPOLATED_PITCHING() -> Self {
+        Self { inner: Self::INTERPOLATED_PITCHING }
+    }
+
+    pub fn set_INTERPOLATED_PITCHING(&mut self) -> Self {
+        self.inner |= Self::INTERPOLATED_PITCHING;
+        *self
+    }
+
+    pub fn clear_INTERPOLATED_PITCHING(&mut self) -> Self {
+        self.inner &= Self::INTERPOLATED_PITCHING.reverse_bits();
+        *self
+    }
+
+    pub const fn is_UNK14(&self) -> bool {
+        (self.inner & Self::UNK14) != 0
+    }
+
+    pub const fn new_UNK14() -> Self {
+        Self { inner: Self::UNK14 }
+    }
+
+    pub fn set_UNK14(&mut self) -> Self {
+        self.inner |= Self::UNK14;
+        *self
+    }
+
+    pub fn clear_UNK14(&mut self) -> Self {
+        self.inner &= Self::UNK14.reverse_bits();
+        *self
+    }
+
+    pub const fn is_UNK15(&self) -> bool {
+        (self.inner & Self::UNK15) != 0
+    }
+
+    pub const fn new_UNK15() -> Self {
+        Self { inner: Self::UNK15 }
+    }
+
+    pub fn set_UNK15(&mut self) -> Self {
+        self.inner |= Self::UNK15;
+        *self
+    }
+
+    pub fn clear_UNK15(&mut self) -> Self {
+        self.inner &= Self::UNK15.reverse_bits();
+        *self
+    }
+
+    pub const fn is_UNK16(&self) -> bool {
+        (self.inner & Self::UNK16) != 0
+    }
+
+    pub const fn new_UNK16() -> Self {
+        Self { inner: Self::UNK16 }
+    }
+
+    pub fn set_UNK16(&mut self) -> Self {
+        self.inner |= Self::UNK16;
+        *self
+    }
+
+    pub fn clear_UNK16(&mut self) -> Self {
+        self.inner &= Self::UNK16.reverse_bits();
+        *self
+    }
+
+    pub const fn is_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT(&self) -> bool {
+        (self.inner & Self::ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT) != 0
+    }
+
+    pub const fn new_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT() -> Self {
+        Self { inner: Self::ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT }
+    }
+
+    pub fn set_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT(&mut self) -> Self {
+        self.inner |= Self::ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT;
+        *self
+    }
+
+    pub fn clear_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT(&mut self) -> Self {
+        self.inner &= Self::ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT.reverse_bits();
+        *self
+    }
+
+    pub const fn as_int(&self) -> u64 {
         self.inner
     }
 

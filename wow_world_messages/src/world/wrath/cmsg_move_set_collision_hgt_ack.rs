@@ -43,7 +43,7 @@ impl crate::Message for CMSG_MOVE_SET_COLLISION_HGT_ACK {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(40..=101).contains(&body_size) {
+        if !(40..=105).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0517, size: body_size as u32 });
         }
 

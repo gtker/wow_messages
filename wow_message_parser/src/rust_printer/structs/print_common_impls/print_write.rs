@@ -211,11 +211,20 @@ pub(crate) fn print_write_definition(
                 Some(integer) => integer,
             };
 
-            s.wln(format!(
-                "w.write_all(&{ty}::from({variable_prefix}{name}.as_int()).to_{endian}_bytes()){postfix}?;",
-                ty = integer.rust_str(),
-                endian = integer.rust_endian_str()
-            ));
+            if matches!(integer, IntegerType::U48) {
+                s.wln(format!(
+                    "w.write_all(&({variable_prefix}{name}.as_int() as u32).to_le_bytes()){postfix}?;",
+                ));
+                s.wln(format!(
+                    "w.write_all(&(({variable_prefix}{name}.as_int() >> 32) as u16).to_le_bytes()){postfix}?;",
+                ));
+            } else {
+                s.wln(format!(
+                    "w.write_all(&{ty}::from({variable_prefix}{name}.as_int()).to_{endian}_bytes()){postfix}?;",
+                    ty = integer.rust_str(),
+                    endian = integer.rust_endian_str()
+                ));
+            }
         }
         Type::PackedGuid => {
             s.wln(format!(

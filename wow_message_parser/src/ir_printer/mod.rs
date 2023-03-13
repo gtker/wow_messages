@@ -46,6 +46,7 @@ pub(crate) enum IrIntegerType {
     i16(IrEndianness),
     i32(IrEndianness),
     i64(IrEndianness),
+    u48,
 }
 
 impl From<&IntegerType> for IrIntegerType {
@@ -59,6 +60,7 @@ impl From<&IntegerType> for IrIntegerType {
             IntegerType::I8 => Self::i8,
             IntegerType::I16(e) => Self::i16(e.into()),
             IntegerType::I64(e) => Self::i64(e.into()),
+            IntegerType::U48 => Self::u48,
         }
     }
 }

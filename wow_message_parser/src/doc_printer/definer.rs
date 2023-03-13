@@ -87,6 +87,7 @@ fn print_definer_table(s: &mut DocWriter, e: &Definer) {
                     Endianness::Big => "big",
                 }
             ),
+            IntegerType::U48 => "32bit little endian followed by 16 bit little endian".to_string(),
         }
     ));
 

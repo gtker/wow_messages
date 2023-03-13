@@ -114,7 +114,6 @@
 - [EnvironmentalDamageType](docs/environmentaldamagetype.md)
 - [Expansion](docs/expansion.md)
 - [ExperienceAwardType](docs/experienceawardtype.md)
-- [ExtraMovementFlags](docs/extramovementflags.md)
 - [Faction](docs/faction.md)
 - [FactionFlag](docs/factionflag.md)
 - [FarSightOperation](docs/farsightoperation.md)

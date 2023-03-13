@@ -792,5 +792,21 @@ fn get_integer_value(t: &IntegerType, value: &[u8]) -> isize {
                 Endianness::Big => i32::from_be_bytes(value) as isize,
             }
         }
+        IntegerType::U48 => {
+            let value: [u8; 6] = value.try_into().unwrap();
+            let mut a = [0_u8; 4];
+            a[0] = value[0];
+            a[1] = value[1];
+            a[2] = value[2];
+            a[3] = value[3];
+            let a = u32::from_le_bytes(a);
+
+            let mut b = [0_u8; 2];
+            b[0] = value[4];
+            b[1] = value[5];
+            let b = u16::from_le_bytes(b);
+
+            ((a as u64) | ((b as u64) << 32)).try_into().unwrap()
+        }
     }
 }

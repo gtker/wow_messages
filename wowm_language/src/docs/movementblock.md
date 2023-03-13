@@ -399,11 +399,14 @@ struct MovementBlock {
     UpdateFlag update_flag;
     if (update_flag & LIVING) {
         MovementFlags flags;
-        ExtraMovementFlags extra_flags;
         u32 timestamp;
-        Vector3d living_position;
-        f32 living_orientation;
-        if (flags & ON_TRANSPORT) {
+        Vector3d position;
+        f32 orientation;
+        if (flags & ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT) {
+            TransportInfo transport_info;
+            u32 transport_time;
+        }
+        else if (flags & ON_TRANSPORT) {
             TransportInfo transport;
         }
         if (flags & SWIMMING) {
@@ -411,6 +414,9 @@ struct MovementBlock {
         }
         else if (flags & FLYING) {
             f32 pitch2;
+        }
+        else if (flags & ALWAYS_ALLOW_PITCHING) {
+            f32 pitch3;
         }
         f32 fall_time;
         if (flags & FALLING) {
@@ -491,17 +497,23 @@ If update_flag contains `LIVING`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x02 | 4 / - | [MovementFlags](movementflags.md) | flags |  |  |
-| 0x06 | 2 / - | [ExtraMovementFlags](extramovementflags.md) | extra_flags |  |  |
+| 0x02 | 6 / - | [MovementFlags](movementflags.md) | flags |  |  |
 | 0x08 | 4 / Little | u32 | timestamp |  |  |
-| 0x0C | 12 / - | [Vector3d](vector3d.md) | living_position |  |  |
-| 0x18 | 4 / Little | f32 | living_orientation |  |  |
+| 0x0C | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| 0x18 | 4 / Little | f32 | orientation |  |  |
 
-If flags contains `ON_TRANSPORT`:
+If flags contains `ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x1C | - / - | [TransportInfo](transportinfo.md) | transport |  |  |
+| 0x1C | - / - | [TransportInfo](transportinfo.md) | transport_info |  |  |
+| - | 4 / Little | u32 | transport_time |  |  |
+
+Else If flags contains `ON_TRANSPORT`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | - / - | [TransportInfo](transportinfo.md) | transport |  |  |
 
 If flags contains `SWIMMING`:
 
@@ -514,6 +526,12 @@ Else If flags contains `FLYING`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | f32 | pitch2 |  |  |
+
+Else If flags contains `ALWAYS_ALLOW_PITCHING`:
+
+| Offset | Size / Endianness | Type | Name | Description | Comment |
+| ------ | ----------------- | ---- | ---- | ----------- | ------- |
+| - | 4 / Little | f32 | pitch3 |  |  |
 | - | 4 / Little | f32 | fall_time |  |  |
 
 If flags contains `FALLING`:

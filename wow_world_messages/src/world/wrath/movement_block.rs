@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    ExtraMovementFlags, MovementFlags, SplineFlag, TransportInfo, UpdateFlag, Vector3d,
+    MovementFlags, SplineFlag, TransportInfo, UpdateFlag, Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -12,11 +12,14 @@ use crate::wrath::{
 ///     UpdateFlag update_flag;
 ///     if (update_flag & LIVING) {
 ///         MovementFlags flags;
-///         ExtraMovementFlags extra_flags;
 ///         u32 timestamp;
-///         Vector3d living_position;
-///         f32 living_orientation;
-///         if (flags & ON_TRANSPORT) {
+///         Vector3d position;
+///         f32 orientation;
+///         if (flags & ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT) {
+///             TransportInfo transport_info;
+///             u32 transport_time;
+///         }
+///         else if (flags & ON_TRANSPORT) {
 ///             TransportInfo transport;
 ///         }
 ///         if (flags & SWIMMING) {
@@ -24,6 +27,9 @@ use crate::wrath::{
 ///         }
 ///         else if (flags & FLYING) {
 ///             f32 pitch2;
+///         }
+///         else if (flags & ALWAYS_ALLOW_PITCHING) {
+///             f32 pitch3;
 ///         }
 ///         f32 fall_time;
 ///         if (flags & FALLING) {
@@ -109,13 +115,12 @@ impl MovementBlock {
                     backwards_flight_speed,
                     backwards_running_speed,
                     backwards_swimming_speed,
-                    extra_flags,
                     fall_time,
                     flags,
                     flight_speed,
-                    living_orientation,
-                    living_position,
+                    orientation,
                     pitch_rate,
+                    position,
                     running_speed,
                     swimming_speed,
                     timestamp,
@@ -123,24 +128,39 @@ impl MovementBlock {
                     walking_speed,
                 } => {
                     // flags: MovementFlags
-                    w.write_all(&u32::from(flags.as_int()).to_le_bytes())?;
-
-                    // extra_flags: ExtraMovementFlags
-                    w.write_all(&u16::from(extra_flags.as_int()).to_le_bytes())?;
+                    w.write_all(&(flags.as_int() as u32).to_le_bytes())?;
+                    w.write_all(&((flags.as_int() >> 32) as u16).to_le_bytes())?;
 
                     // timestamp: u32
                     w.write_all(&timestamp.to_le_bytes())?;
 
-                    // living_position: Vector3d
-                    living_position.write_into_vec(&mut w)?;
+                    // position: Vector3d
+                    position.write_into_vec(&mut w)?;
 
-                    // living_orientation: f32
-                    w.write_all(&living_orientation.to_le_bytes())?;
+                    // orientation: f32
+                    w.write_all(&orientation.to_le_bytes())?;
 
-                    if let Some(if_statement) = &flags.on_transport {
-                        // transport: TransportInfo
-                        if_statement.transport.write_into_vec(&mut w)?;
+                    if let Some(if_statement) = &flags.on_transport_and_interpolated_movement {
+                        match if_statement {
+                            MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement::OnTransportAndInterpolatedMovement {
+                                transport_info,
+                                transport_time,
+                            } => {
+                                // transport_info: TransportInfo
+                                transport_info.write_into_vec(&mut w)?;
 
+                                // transport_time: u32
+                                w.write_all(&transport_time.to_le_bytes())?;
+
+                            }
+                            MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement::OnTransport {
+                                transport,
+                            } => {
+                                // transport: TransportInfo
+                                transport.write_into_vec(&mut w)?;
+
+                            }
+                        }
                     }
 
                     if let Some(if_statement) = &flags.swimming {
@@ -157,6 +177,13 @@ impl MovementBlock {
                             } => {
                                 // pitch2: f32
                                 w.write_all(&pitch2.to_le_bytes())?;
+
+                            }
+                            MovementBlock_MovementFlags_Swimming::AlwaysAllowPitching {
+                                pitch3,
+                            } => {
+                                // pitch3: f32
+                                w.write_all(&pitch3.to_le_bytes())?;
 
                             }
                         }
@@ -349,25 +376,38 @@ impl MovementBlock {
 
         let update_flag_LIVING = if update_flag.is_LIVING() {
             // flags: MovementFlags
-            let flags = MovementFlags::new(crate::util::read_u32_le(&mut r)?);
-
-            // extra_flags: ExtraMovementFlags
-            let extra_flags = ExtraMovementFlags::new(crate::util::read_u16_le(&mut r)?);
+            let flags: MovementFlags = {
+                let a = crate::util::read_u32_le(&mut r)?;
+                let b = crate::util::read_u16_le(&mut r)?;
+                MovementFlags::new((a as u64) | ((b as u64) << 32))
+            };
 
             // timestamp: u32
             let timestamp = crate::util::read_u32_le(&mut r)?;
 
-            // living_position: Vector3d
-            let living_position = Vector3d::read(&mut r)?;
+            // position: Vector3d
+            let position = Vector3d::read(&mut r)?;
 
-            // living_orientation: f32
-            let living_orientation = crate::util::read_f32_le(&mut r)?;
+            // orientation: f32
+            let orientation = crate::util::read_f32_le(&mut r)?;
 
-            let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
+            let flags_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT = if flags.is_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT() {
+                // transport_info: TransportInfo
+                let transport_info = TransportInfo::read(&mut r)?;
+
+                // transport_time: u32
+                let transport_time = crate::util::read_u32_le(&mut r)?;
+
+                Some(MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement::OnTransportAndInterpolatedMovement {
+                    transport_info,
+                    transport_time,
+                })
+            }
+            else if flags.is_ON_TRANSPORT() {
                 // transport: TransportInfo
                 let transport = TransportInfo::read(&mut r)?;
 
-                Some(MovementBlock_MovementFlags_OnTransport {
+                Some(MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement::OnTransport {
                     transport,
                 })
             }
@@ -389,6 +429,14 @@ impl MovementBlock {
 
                 Some(MovementBlock_MovementFlags_Swimming::Flying {
                     pitch2,
+                })
+            }
+            else if flags.is_ALWAYS_ALLOW_PITCHING() {
+                // pitch3: f32
+                let pitch3 = crate::util::read_f32_le(&mut r)?;
+
+                Some(MovementBlock_MovementFlags_Swimming::AlwaysAllowPitching {
+                    pitch3,
                 })
             }
             else {
@@ -537,24 +585,23 @@ impl MovementBlock {
 
             let flags = MovementBlock_MovementFlags {
                 inner: flags.as_int(),
-                on_transport: flags_ON_TRANSPORT,
                 falling: flags_FALLING,
                 swimming: flags_SWIMMING,
                 spline_elevation: flags_SPLINE_ELEVATION,
                 spline_enabled: flags_SPLINE_ENABLED,
+                on_transport_and_interpolated_movement: flags_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT,
             };
 
             Some(MovementBlock_UpdateFlag_Living::Living {
                 backwards_flight_speed,
                 backwards_running_speed,
                 backwards_swimming_speed,
-                extra_flags,
                 fall_time,
                 flags,
                 flight_speed,
-                living_orientation,
-                living_position,
+                orientation,
                 pitch_rate,
+                position,
                 running_speed,
                 swimming_speed,
                 timestamp,
@@ -706,13 +753,17 @@ pub enum MovementBlock_MovementFlags_Swimming {
     Flying {
         pitch2: f32,
     },
+    AlwaysAllowPitching {
+        pitch3: f32,
+    },
 }
 
 impl MovementBlock_MovementFlags_Swimming {
-    pub(crate) const fn as_int(&self) -> u32 {
+    pub(crate) const fn as_int(&self) -> u64 {
         match self {
             Self::Swimming { .. } => 2097152,
             Self::Flying { .. } => 33554432,
+            Self::AlwaysAllowPitching { .. } => 137438953472,
         }
     }
 
@@ -732,6 +783,12 @@ impl MovementBlock_MovementFlags_Swimming {
             } => {
                 // Not an actual enum sent over the wire
                 4 // pitch2: f32
+            }
+            Self::AlwaysAllowPitching {
+                pitch3,
+            } => {
+                // Not an actual enum sent over the wire
+                4 // pitch3: f32
             }
         }
     }
@@ -1462,56 +1519,98 @@ impl MovementBlock_SplineFlag {
     }
 }
 
+#[derive(Debug, Clone, PartialEq, PartialOrd)]
+pub enum MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement {
+    OnTransportAndInterpolatedMovement {
+        transport_info: TransportInfo,
+        transport_time: u32,
+    },
+    OnTransport {
+        transport: TransportInfo,
+    },
+}
+
+impl MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement {
+    pub(crate) const fn as_int(&self) -> u64 {
+        match self {
+            Self::OnTransportAndInterpolatedMovement { .. } => 4398046511616,
+            Self::OnTransport { .. } => 512,
+        }
+    }
+
+}
+
+impl MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement {
+    pub(crate) fn size(&self) -> usize {
+        match self {
+            Self::OnTransportAndInterpolatedMovement {
+                transport_info,
+                transport_time,
+            } => {
+                // Not an actual enum sent over the wire
+                transport_info.size() // transport_info: TransportInfo
+                + 4 // transport_time: u32
+            }
+            Self::OnTransport {
+                transport,
+            } => {
+                // Not an actual enum sent over the wire
+                transport.size() // transport: TransportInfo
+            }
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 pub struct MovementBlock_MovementFlags {
-    inner: u32,
-    on_transport: Option<MovementBlock_MovementFlags_OnTransport>,
+    inner: u64,
     falling: Option<MovementBlock_MovementFlags_Falling>,
     swimming: Option<MovementBlock_MovementFlags_Swimming>,
     spline_elevation: Option<MovementBlock_MovementFlags_SplineElevation>,
     spline_enabled: Option<MovementBlock_MovementFlags_SplineEnabled>,
+    on_transport_and_interpolated_movement: Option<MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement>,
 }
 
 impl MovementBlock_MovementFlags {
-    pub const fn new(inner: u32, on_transport: Option<MovementBlock_MovementFlags_OnTransport>,falling: Option<MovementBlock_MovementFlags_Falling>,swimming: Option<MovementBlock_MovementFlags_Swimming>,spline_elevation: Option<MovementBlock_MovementFlags_SplineElevation>,spline_enabled: Option<MovementBlock_MovementFlags_SplineEnabled>,) -> Self {
+    pub const fn new(inner: u64, falling: Option<MovementBlock_MovementFlags_Falling>,swimming: Option<MovementBlock_MovementFlags_Swimming>,spline_elevation: Option<MovementBlock_MovementFlags_SplineElevation>,spline_enabled: Option<MovementBlock_MovementFlags_SplineEnabled>,on_transport_and_interpolated_movement: Option<MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement>,) -> Self {
         Self {
             inner,
-            on_transport, 
             falling, 
             swimming, 
             spline_elevation, 
             spline_enabled, 
+            on_transport_and_interpolated_movement, 
         }
     }
 
     pub const fn empty() -> Self {
         Self {
             inner: 0,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
     pub const fn is_empty(&self) -> bool {
         self.inner == 0
-        && self.on_transport.is_none()
         && self.falling.is_none()
         && self.swimming.is_none()
         && self.spline_elevation.is_none()
         && self.spline_enabled.is_none()
+        && self.on_transport_and_interpolated_movement.is_none()
     }
 
     pub const fn new_FORWARD() -> Self {
         Self {
             inner: MovementFlags::FORWARD,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1532,11 +1631,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_BACKWARD() -> Self {
         Self {
             inner: MovementFlags::BACKWARD,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1557,11 +1656,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_STRAFE_LEFT() -> Self {
         Self {
             inner: MovementFlags::STRAFE_LEFT,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1582,11 +1681,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_STRAFE_RIGHT() -> Self {
         Self {
             inner: MovementFlags::STRAFE_RIGHT,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1607,11 +1706,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_LEFT() -> Self {
         Self {
             inner: MovementFlags::LEFT,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1632,11 +1731,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_RIGHT() -> Self {
         Self {
             inner: MovementFlags::RIGHT,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1657,11 +1756,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_PITCH_UP() -> Self {
         Self {
             inner: MovementFlags::PITCH_UP,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1682,11 +1781,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_PITCH_DOWN() -> Self {
         Self {
             inner: MovementFlags::PITCH_DOWN,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1707,11 +1806,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_WALKING() -> Self {
         Self {
             inner: MovementFlags::WALKING,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1729,41 +1828,14 @@ impl MovementBlock_MovementFlags {
         self
     }
 
-    pub const fn new_ON_TRANSPORT(on_transport: MovementBlock_MovementFlags_OnTransport) -> Self {
-        Self {
-            inner: MovementFlags::ON_TRANSPORT,
-            on_transport: Some(on_transport),
-            falling: None,
-            swimming: None,
-            spline_elevation: None,
-            spline_enabled: None,
-        }
-    }
-
-    pub fn set_ON_TRANSPORT(mut self, on_transport: MovementBlock_MovementFlags_OnTransport) -> Self {
-        self.inner |= MovementFlags::ON_TRANSPORT;
-        self.on_transport = Some(on_transport);
-        self
-    }
-
-    pub const fn get_ON_TRANSPORT(&self) -> Option<&MovementBlock_MovementFlags_OnTransport> {
-        self.on_transport.as_ref()
-    }
-
-    pub fn clear_ON_TRANSPORT(mut self) -> Self {
-        self.inner &= MovementFlags::ON_TRANSPORT.reverse_bits();
-        self.on_transport = None;
-        self
-    }
-
     pub const fn new_DISABLE_GRAVITY() -> Self {
         Self {
             inner: MovementFlags::DISABLE_GRAVITY,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1784,11 +1856,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_ROOT() -> Self {
         Self {
             inner: MovementFlags::ROOT,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1809,11 +1881,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_FALLING(falling: MovementBlock_MovementFlags_Falling) -> Self {
         Self {
             inner: MovementFlags::FALLING,
-            on_transport: None,
             falling: Some(falling),
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1836,11 +1908,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_FALLING_FAR() -> Self {
         Self {
             inner: MovementFlags::FALLING_FAR,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1861,11 +1933,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_PENDING_STOP() -> Self {
         Self {
             inner: MovementFlags::PENDING_STOP,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1886,11 +1958,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_PENDING_STRAFE_STOP() -> Self {
         Self {
             inner: MovementFlags::PENDING_STRAFE_STOP,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1911,11 +1983,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_PENDING_FORWARD() -> Self {
         Self {
             inner: MovementFlags::PENDING_FORWARD,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1936,11 +2008,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_PENDING_BACKWARD() -> Self {
         Self {
             inner: MovementFlags::PENDING_BACKWARD,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1961,11 +2033,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_PENDING_STRAFE_LEFT() -> Self {
         Self {
             inner: MovementFlags::PENDING_STRAFE_LEFT,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -1986,11 +2058,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_PENDING_STRAFE_RIGHT() -> Self {
         Self {
             inner: MovementFlags::PENDING_STRAFE_RIGHT,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -2011,11 +2083,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_PENDING_ROOT() -> Self {
         Self {
             inner: MovementFlags::PENDING_ROOT,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -2036,11 +2108,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_SWIMMING(swimming: MovementBlock_MovementFlags_Swimming) -> Self {
         Self {
             inner: swimming.as_int(),
-            on_transport: None,
             falling: None,
             swimming: Some(swimming),
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -2063,11 +2135,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_ASCENDING() -> Self {
         Self {
             inner: MovementFlags::ASCENDING,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -2088,11 +2160,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_DESCENDING() -> Self {
         Self {
             inner: MovementFlags::DESCENDING,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -2113,11 +2185,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_CAN_FLY() -> Self {
         Self {
             inner: MovementFlags::CAN_FLY,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -2138,11 +2210,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_SPLINE_ELEVATION(spline_elevation: MovementBlock_MovementFlags_SplineElevation) -> Self {
         Self {
             inner: MovementFlags::SPLINE_ELEVATION,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: Some(spline_elevation),
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -2165,11 +2237,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_SPLINE_ENABLED(spline_enabled: MovementBlock_MovementFlags_SplineEnabled) -> Self {
         Self {
             inner: MovementFlags::SPLINE_ENABLED,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: Some(spline_enabled),
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -2192,11 +2264,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_WATERWALKING() -> Self {
         Self {
             inner: MovementFlags::WATERWALKING,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -2217,11 +2289,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_FALLING_SLOW() -> Self {
         Self {
             inner: MovementFlags::FALLING_SLOW,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -2242,11 +2314,11 @@ impl MovementBlock_MovementFlags {
     pub const fn new_HOVER() -> Self {
         Self {
             inner: MovementFlags::HOVER,
-            on_transport: None,
             falling: None,
             swimming: None,
             spline_elevation: None,
             spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
         }
     }
 
@@ -2264,21 +2336,416 @@ impl MovementBlock_MovementFlags {
         self
     }
 
-    pub(crate) const fn as_int(&self) -> u32 {
+    pub const fn new_NO_STRAFE() -> Self {
+        Self {
+            inner: MovementFlags::NO_STRAFE,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_NO_STRAFE(mut self) -> Self {
+        self.inner |= MovementFlags::NO_STRAFE;
+        self
+    }
+
+    pub const fn get_NO_STRAFE(&self) -> bool {
+        (self.inner & MovementFlags::NO_STRAFE) != 0
+    }
+
+    pub fn clear_NO_STRAFE(mut self) -> Self {
+        self.inner &= MovementFlags::NO_STRAFE.reverse_bits();
+        self
+    }
+
+    pub const fn new_NO_JUMPING() -> Self {
+        Self {
+            inner: MovementFlags::NO_JUMPING,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_NO_JUMPING(mut self) -> Self {
+        self.inner |= MovementFlags::NO_JUMPING;
+        self
+    }
+
+    pub const fn get_NO_JUMPING(&self) -> bool {
+        (self.inner & MovementFlags::NO_JUMPING) != 0
+    }
+
+    pub fn clear_NO_JUMPING(mut self) -> Self {
+        self.inner &= MovementFlags::NO_JUMPING.reverse_bits();
+        self
+    }
+
+    pub const fn new_UNK3() -> Self {
+        Self {
+            inner: MovementFlags::UNK3,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_UNK3(mut self) -> Self {
+        self.inner |= MovementFlags::UNK3;
+        self
+    }
+
+    pub const fn get_UNK3(&self) -> bool {
+        (self.inner & MovementFlags::UNK3) != 0
+    }
+
+    pub fn clear_UNK3(mut self) -> Self {
+        self.inner &= MovementFlags::UNK3.reverse_bits();
+        self
+    }
+
+    pub const fn new_FULL_SPEED_TURNING() -> Self {
+        Self {
+            inner: MovementFlags::FULL_SPEED_TURNING,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_FULL_SPEED_TURNING(mut self) -> Self {
+        self.inner |= MovementFlags::FULL_SPEED_TURNING;
+        self
+    }
+
+    pub const fn get_FULL_SPEED_TURNING(&self) -> bool {
+        (self.inner & MovementFlags::FULL_SPEED_TURNING) != 0
+    }
+
+    pub fn clear_FULL_SPEED_TURNING(mut self) -> Self {
+        self.inner &= MovementFlags::FULL_SPEED_TURNING.reverse_bits();
+        self
+    }
+
+    pub const fn new_FULL_SPEED_PITCHING() -> Self {
+        Self {
+            inner: MovementFlags::FULL_SPEED_PITCHING,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_FULL_SPEED_PITCHING(mut self) -> Self {
+        self.inner |= MovementFlags::FULL_SPEED_PITCHING;
+        self
+    }
+
+    pub const fn get_FULL_SPEED_PITCHING(&self) -> bool {
+        (self.inner & MovementFlags::FULL_SPEED_PITCHING) != 0
+    }
+
+    pub fn clear_FULL_SPEED_PITCHING(mut self) -> Self {
+        self.inner &= MovementFlags::FULL_SPEED_PITCHING.reverse_bits();
+        self
+    }
+
+    pub const fn new_UNK7() -> Self {
+        Self {
+            inner: MovementFlags::UNK7,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_UNK7(mut self) -> Self {
+        self.inner |= MovementFlags::UNK7;
+        self
+    }
+
+    pub const fn get_UNK7(&self) -> bool {
+        (self.inner & MovementFlags::UNK7) != 0
+    }
+
+    pub fn clear_UNK7(mut self) -> Self {
+        self.inner &= MovementFlags::UNK7.reverse_bits();
+        self
+    }
+
+    pub const fn new_UNK8() -> Self {
+        Self {
+            inner: MovementFlags::UNK8,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_UNK8(mut self) -> Self {
+        self.inner |= MovementFlags::UNK8;
+        self
+    }
+
+    pub const fn get_UNK8(&self) -> bool {
+        (self.inner & MovementFlags::UNK8) != 0
+    }
+
+    pub fn clear_UNK8(mut self) -> Self {
+        self.inner &= MovementFlags::UNK8.reverse_bits();
+        self
+    }
+
+    pub const fn new_UNK9() -> Self {
+        Self {
+            inner: MovementFlags::UNK9,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_UNK9(mut self) -> Self {
+        self.inner |= MovementFlags::UNK9;
+        self
+    }
+
+    pub const fn get_UNK9(&self) -> bool {
+        (self.inner & MovementFlags::UNK9) != 0
+    }
+
+    pub fn clear_UNK9(mut self) -> Self {
+        self.inner &= MovementFlags::UNK9.reverse_bits();
+        self
+    }
+
+    pub const fn new_UNK10() -> Self {
+        Self {
+            inner: MovementFlags::UNK10,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_UNK10(mut self) -> Self {
+        self.inner |= MovementFlags::UNK10;
+        self
+    }
+
+    pub const fn get_UNK10(&self) -> bool {
+        (self.inner & MovementFlags::UNK10) != 0
+    }
+
+    pub fn clear_UNK10(mut self) -> Self {
+        self.inner &= MovementFlags::UNK10.reverse_bits();
+        self
+    }
+
+    pub const fn new_INTERPOLATED_MOVEMENT() -> Self {
+        Self {
+            inner: MovementFlags::INTERPOLATED_MOVEMENT,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_INTERPOLATED_MOVEMENT(mut self) -> Self {
+        self.inner |= MovementFlags::INTERPOLATED_MOVEMENT;
+        self
+    }
+
+    pub const fn get_INTERPOLATED_MOVEMENT(&self) -> bool {
+        (self.inner & MovementFlags::INTERPOLATED_MOVEMENT) != 0
+    }
+
+    pub fn clear_INTERPOLATED_MOVEMENT(mut self) -> Self {
+        self.inner &= MovementFlags::INTERPOLATED_MOVEMENT.reverse_bits();
+        self
+    }
+
+    pub const fn new_INTERPOLATED_TURNING() -> Self {
+        Self {
+            inner: MovementFlags::INTERPOLATED_TURNING,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_INTERPOLATED_TURNING(mut self) -> Self {
+        self.inner |= MovementFlags::INTERPOLATED_TURNING;
+        self
+    }
+
+    pub const fn get_INTERPOLATED_TURNING(&self) -> bool {
+        (self.inner & MovementFlags::INTERPOLATED_TURNING) != 0
+    }
+
+    pub fn clear_INTERPOLATED_TURNING(mut self) -> Self {
+        self.inner &= MovementFlags::INTERPOLATED_TURNING.reverse_bits();
+        self
+    }
+
+    pub const fn new_INTERPOLATED_PITCHING() -> Self {
+        Self {
+            inner: MovementFlags::INTERPOLATED_PITCHING,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_INTERPOLATED_PITCHING(mut self) -> Self {
+        self.inner |= MovementFlags::INTERPOLATED_PITCHING;
+        self
+    }
+
+    pub const fn get_INTERPOLATED_PITCHING(&self) -> bool {
+        (self.inner & MovementFlags::INTERPOLATED_PITCHING) != 0
+    }
+
+    pub fn clear_INTERPOLATED_PITCHING(mut self) -> Self {
+        self.inner &= MovementFlags::INTERPOLATED_PITCHING.reverse_bits();
+        self
+    }
+
+    pub const fn new_UNK14() -> Self {
+        Self {
+            inner: MovementFlags::UNK14,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_UNK14(mut self) -> Self {
+        self.inner |= MovementFlags::UNK14;
+        self
+    }
+
+    pub const fn get_UNK14(&self) -> bool {
+        (self.inner & MovementFlags::UNK14) != 0
+    }
+
+    pub fn clear_UNK14(mut self) -> Self {
+        self.inner &= MovementFlags::UNK14.reverse_bits();
+        self
+    }
+
+    pub const fn new_UNK15() -> Self {
+        Self {
+            inner: MovementFlags::UNK15,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_UNK15(mut self) -> Self {
+        self.inner |= MovementFlags::UNK15;
+        self
+    }
+
+    pub const fn get_UNK15(&self) -> bool {
+        (self.inner & MovementFlags::UNK15) != 0
+    }
+
+    pub fn clear_UNK15(mut self) -> Self {
+        self.inner &= MovementFlags::UNK15.reverse_bits();
+        self
+    }
+
+    pub const fn new_UNK16() -> Self {
+        Self {
+            inner: MovementFlags::UNK16,
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: None,
+        }
+    }
+
+    pub fn set_UNK16(mut self) -> Self {
+        self.inner |= MovementFlags::UNK16;
+        self
+    }
+
+    pub const fn get_UNK16(&self) -> bool {
+        (self.inner & MovementFlags::UNK16) != 0
+    }
+
+    pub fn clear_UNK16(mut self) -> Self {
+        self.inner &= MovementFlags::UNK16.reverse_bits();
+        self
+    }
+
+    pub const fn new_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT(on_transport_and_interpolated_movement: MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement) -> Self {
+        Self {
+            inner: on_transport_and_interpolated_movement.as_int(),
+            falling: None,
+            swimming: None,
+            spline_elevation: None,
+            spline_enabled: None,
+            on_transport_and_interpolated_movement: Some(on_transport_and_interpolated_movement),
+        }
+    }
+
+    pub fn set_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT(mut self, on_transport_and_interpolated_movement: MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement) -> Self {
+        self.inner |= on_transport_and_interpolated_movement.as_int();
+        self.on_transport_and_interpolated_movement = Some(on_transport_and_interpolated_movement);
+        self
+    }
+
+    pub const fn get_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT(&self) -> Option<&MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement> {
+        self.on_transport_and_interpolated_movement.as_ref()
+    }
+
+    pub fn clear_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT(mut self) -> Self {
+        self.inner &= MovementFlags::ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT.reverse_bits();
+        self.on_transport_and_interpolated_movement = None;
+        self
+    }
+
+    pub(crate) const fn as_int(&self) -> u64 {
         self.inner
     }
 
 }
 impl MovementBlock_MovementFlags {
     pub(crate) fn size(&self) -> usize {
-        4 // inner
-        + {
-            if let Some(s) = &self.on_transport {
-                s.size()
-            } else {
-                0
-            }
-        }
+        6 // inner
         + {
             if let Some(s) = &self.falling {
                 s.size()
@@ -2307,17 +2774,13 @@ impl MovementBlock_MovementFlags {
                 0
             }
         }
-    }
-}
-
-#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-pub struct MovementBlock_MovementFlags_OnTransport {
-    pub transport: TransportInfo,
-}
-
-impl MovementBlock_MovementFlags_OnTransport {
-    pub(crate) fn size(&self) -> usize {
-        self.transport.size() // transport: TransportInfo
+        + {
+            if let Some(s) = &self.on_transport_and_interpolated_movement {
+                s.size()
+            } else {
+                0
+            }
+        }
     }
 }
 
@@ -2377,13 +2840,12 @@ pub enum MovementBlock_UpdateFlag_Living {
         backwards_flight_speed: f32,
         backwards_running_speed: f32,
         backwards_swimming_speed: f32,
-        extra_flags: ExtraMovementFlags,
         fall_time: f32,
         flags: MovementBlock_MovementFlags,
         flight_speed: f32,
-        living_orientation: f32,
-        living_position: Vector3d,
+        orientation: f32,
         pitch_rate: f32,
+        position: Vector3d,
         running_speed: f32,
         swimming_speed: f32,
         timestamp: u32,
@@ -2420,13 +2882,12 @@ impl MovementBlock_UpdateFlag_Living {
                 backwards_flight_speed,
                 backwards_running_speed,
                 backwards_swimming_speed,
-                extra_flags,
                 fall_time,
                 flags,
                 flight_speed,
-                living_orientation,
-                living_position,
+                orientation,
                 pitch_rate,
+                position,
                 running_speed,
                 swimming_speed,
                 timestamp,
@@ -2437,13 +2898,12 @@ impl MovementBlock_UpdateFlag_Living {
                 4 // backwards_flight_speed: f32
                 + 4 // backwards_running_speed: f32
                 + 4 // backwards_swimming_speed: f32
-                + 2 // extra_flags: ExtraMovementFlags
                 + 4 // fall_time: f32
                 + flags.size() // flags: MovementBlock_MovementFlags
                 + 4 // flight_speed: f32
-                + 4 // living_orientation: f32
-                + 12 // living_position: Vector3d
+                + 4 // orientation: f32
                 + 4 // pitch_rate: f32
+                + 12 // position: Vector3d
                 + 4 // running_speed: f32
                 + 4 // swimming_speed: f32
                 + 4 // timestamp: u32

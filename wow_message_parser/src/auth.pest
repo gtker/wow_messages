@@ -8,7 +8,7 @@ allowed_text_values = { ("." | "," | "'" | "`" | "\\" | "_" | "-" | "#" | "[" | 
 
 identifier = @{ ( ALPHABETIC | "_" | ASCII_DIGIT )+ }
 text = { (LETTER | NUMBER | allowed_text_values )* }
-basic_type = { ( "u8_be" | "u16_be" | "u32_be" | "u64_be" | "u8" | "u16" | "u32" | "u64" | "i32" | "i32_be" | "f32_be" | "f32" | "f64_be" | "f64" | "CString" ) }
+basic_type = { ( "u8_be" | "u16_be" | "u32_be" | "u64_be" | "u8" | "u16" | "u32" | "u64" | "i32" | "i32_be" | "f32_be" | "f32" | "f64_be" | "f64" | "u48" | "CString" ) }
 array_type = { ( basic_type | identifier ) ~ "[" ~ ( identifier | value | "-" ) ~ "]" }
 value = @{ ( "0x" ~ HEX_DIGIT+
             | "self.value"

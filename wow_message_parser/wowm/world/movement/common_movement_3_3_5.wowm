@@ -8,7 +8,7 @@ struct TransportInfo {
     u8 seat;
 }
 
-flag MovementFlags : u32 {
+flag MovementFlags : u48 {
     NONE                  = 0x00000000;
     FORWARD               = 0x00000001;
     BACKWARD              = 0x00000002;
@@ -69,48 +69,48 @@ flag MovementFlags : u32 {
     HOVER                 = 0x40000000 {
         comment = "`AzerothCore`: hover, cannot jump";
     }
-}
-
-flag ExtraMovementFlags : u16
-{
-    NONE                     = 0x00000000;
-    NO_STRAFE                = 0x00000001;
-    NO_JUMPING               = 0x00000002;
-    UNK3                     = 0x00000004 {
+    NO_STRAFE                = 0x0000000100000000;
+    NO_JUMPING               = 0x0000000200000000;
+    UNK3                     = 0x0000000400000000 {
         comment = "`AzerothCore`: Overrides various clientside checks";
     }
-    FULL_SPEED_TURNING       = 0x00000008;
-    FULL_SPEED_PITCHING      = 0x00000010;
-    ALWAYS_ALLOW_PITCHING    = 0x00000020;
-    UNK7                     = 0x00000040;
-    UNK8                     = 0x00000080;
-    UNK9                     = 0x00000100;
-    UNK10                    = 0x00000200;
-    INTERPOLATED_MOVEMENT    = 0x00000400;
-    INTERPOLATED_TURNING     = 0x00000800;
-    INTERPOLATED_PITCHING    = 0x00001000;
-    UNK14                    = 0x00002000;
-    UNK15                    = 0x00004000;
-    UNK16                    = 0x00008000;
+    FULL_SPEED_TURNING       = 0x0000000800000000;
+    FULL_SPEED_PITCHING      = 0x0000001000000000;
+    ALWAYS_ALLOW_PITCHING    = 0x0000002000000000;
+    UNK7                     = 0x0000004000000000;
+    UNK8                     = 0x0000008000000000;
+    UNK9                     = 0x0000010000000000;
+    UNK10                    = 0x0000020000000000;
+    INTERPOLATED_MOVEMENT    = 0x0000040000000000;
+    INTERPOLATED_TURNING     = 0x0000080000000000;
+    INTERPOLATED_PITCHING    = 0x0000100000000000;
+    UNK14                    = 0x0000200000000000;
+    UNK15                    = 0x0000400000000000;
+    UNK16                    = 0x0000800000000000;
+
+    ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT = 0x0000040000000200;
 }
 
 struct MovementInfo {
     MovementFlags flags;
-    ExtraMovementFlags extra_flags;
     u32 timestamp;
     Vector3d position;
     f32 orientation;
-    if (flags & ON_TRANSPORT) {
-        TransportInfo transport;
-        /* FLAG_DIFFERENT_VARIABLE Flag inside flag
-        if (extra_flags & INTERPOLATED_MOVEMENT) {
-            u32 transport_time;
-        } */
+    if (flags & ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT) {
+        TransportInfo transport_info;
+        u32 transport_time;
     }
-    if (flags & SWIMMING /*TODO FLAG_DIFFERENT_VARIABLE || extra_flags & ALWAYS_ALLOW_PITCHING */) {
+    else if (flags & ON_TRANSPORT) {
+        TransportInfo transport;
+    }
+
+    if (flags & SWIMMING) {
         f32 pitch1;
     } else if (flags & FLYING) {
         f32 pitch2;
+    }
+    else if (flags & ALWAYS_ALLOW_PITCHING) {
+        f32 pitch3;
     }
     f32 fall_time;
     if (flags & FALLING) {

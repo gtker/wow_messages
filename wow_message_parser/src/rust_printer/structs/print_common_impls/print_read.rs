@@ -4,6 +4,7 @@ use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
+use crate::parser::types::IntegerType;
 use crate::rust_printer::rust_view::{RustDefiner, RustType};
 use crate::rust_printer::structs::print_common_impls::{
     print_rust_members_sizes, print_size_of_ty_rust_view,
@@ -309,31 +310,50 @@ fn print_read_definition(
             };
 
             s.wln(format!(
-                "{assignment_prefix}{value_set}{name}: {type_name} = {parens}crate::util::{prefix}read_{ty}_{endian}(&mut r){postfix}?{cast}.{into};",
-                name = d.name(),
-                type_name = d.ty().rust_str(),
-                value_set = if d.value().is_some() { "_" } else { "" },
-                endian = integer.rust_endian_str(),
-                ty = integer.rust_str(),
-                into = match e.self_value().is_some() {
-                    true => "into()",
-                    false => "try_into()?",
-                },
-                prefix = prefix,
-                postfix = postfix,
+                    "{assignment_prefix}{value_set}{name}: {type_name} = {parens}crate::util::{prefix}read_{ty}_{endian}(&mut r){postfix}?{cast}.{into};",
+                    name = d.name(),
+                    type_name = d.ty().rust_str(),
+                    value_set = if d.value().is_some() { "_" } else { "" },
+                    endian = integer.rust_endian_str(),
+                    ty = integer.rust_str(),
+                    into = match e.self_value().is_some() {
+                        true => "into()",
+                        false => "try_into()?",
+                    },
             ));
         }
         Type::Flag { e, .. } => {
-            s.wln(format!(
-                "{assignment_prefix}{value_set}{name} = {type_name}::new(crate::util::{prefix}read_{ty}_{endian}(&mut r){postfix}?);",
-                name = d.name(),
-                type_name = d.ty().rust_str(),
-                value_set = if d.value().is_some() { "_" } else { "" },
-                endian = e.ty().rust_endian_str(),
-                ty = e.ty().rust_str(),
-                prefix = prefix,
-                postfix = postfix,
-            ));
+            if matches!(e.ty(), &IntegerType::U48) {
+                s.body_closing_with_semicolon(
+                    format!(
+                        "{assignment_prefix}{value_set}{name}: {type_name} =",
+                        value_set = if d.value().is_some() { "_" } else { "" },
+                        name = d.name(),
+                        type_name = d.ty().rust_str(),
+                    ),
+                    |s| {
+                        s.wln(format!(
+                            "let a = crate::util::{prefix}read_u32_le(&mut r){postfix}?;"
+                        ));
+                        s.wln(format!(
+                            "let b = crate::util::{prefix}read_u16_le(&mut r){postfix}?;"
+                        ));
+                        s.wln(format!(
+                            "{type_name}::new((a as u64) | ((b as u64) << 32))",
+                            type_name = d.ty().rust_str()
+                        ));
+                    },
+                );
+            } else {
+                s.wln(format ! (
+                    "{assignment_prefix}{value_set}{name} = {type_name}::new(crate::util::{prefix}read_{ty}_{endian}(&mut r){postfix}?);",
+                    name = d.name(),
+                    type_name = d.ty().rust_str(),
+                    value_set = if d.value().is_some() { "_" } else { "" },
+                    endian = e.ty().rust_endian_str(),
+                    ty = e.ty().rust_str(),
+                ));
+            }
         }
         Type::PackedGuid => {
             s.wln(format!(

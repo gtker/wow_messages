@@ -38,7 +38,7 @@ impl crate::Message for CMSG_MOVE_GRAVITY_DISABLE_ACK {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(36..=97).contains(&body_size) {
+        if !(36..=101).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04CF, size: body_size as u32 });
         }
 

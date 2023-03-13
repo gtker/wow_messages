@@ -245,8 +245,6 @@ pub(crate) mod cast_flags;
 pub use cast_flags::*;
 pub use crate::shared::channel_flags_vanilla_tbc_wrath::*;
 pub use crate::shared::channel_member_flags_vanilla_tbc_wrath::*;
-pub(crate) mod extra_movement_flags;
-pub use extra_movement_flags::*;
 pub(crate) mod faction_flag;
 pub use faction_flag::*;
 pub(crate) mod gameobject_cast_flags;
