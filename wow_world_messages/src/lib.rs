@@ -9,14 +9,7 @@
     clippy::doc_markdown,
     clippy::unseparated_literal_suffix
 )]
-#![allow(
-    non_camel_case_types,
-    non_snake_case,
-    clippy::missing_errors_doc,
-    clippy::upper_case_acronyms,
-    clippy::approx_constant,
-    clippy::derive_partial_eq_without_eq
-)]
+#![allow(non_snake_case, clippy::missing_errors_doc)]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
@@ -36,7 +29,11 @@ pub(crate) mod util;
     clippy::large_enum_variant,
     clippy::enum_variant_names,
     clippy::missing_const_for_fn,
-    clippy::needless_borrow
+    clippy::approx_constant,
+    clippy::upper_case_acronyms,
+    clippy::needless_borrow,
+    clippy::derive_partial_eq_without_eq,
+    non_camel_case_types
 )]
 mod world;
 
