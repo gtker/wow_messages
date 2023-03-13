@@ -486,34 +486,30 @@ pub(crate) fn print_rust_members_sizes(
 }
 
 pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix: &str) {
+    let name = m.name();
+
     let str = match m.ty() {
-        RustType::String => format!("{prefix}{name}.len() + 1", name = m.name(), prefix = prefix),
-        RustType::CString => format!("{prefix}{name}.len() + 1", name = m.name(), prefix = prefix),
+        RustType::String => format!("{prefix}{name}.len() + 1"),
+        RustType::CString => format!("{prefix}{name}.len() + 1"),
         RustType::SizedCString => {
-            format!("{prefix}{name}.len() + 5", name = m.name(), prefix = prefix)
+            format!("{prefix}{name}.len() + 5")
         }
         RustType::Struct { sizes, .. } => {
             if let Some(size) = sizes.is_constant() {
                 size.to_string()
             } else {
-                format!("{prefix}{name}.size()", prefix = prefix, name = m.name())
+                format!("{prefix}{name}.size()")
             }
         }
 
         RustType::MonsterMoveSpline => {
-            format!(
-                "crate::util::monster_move_spline_size({prefix}{name}.as_slice())",
-                name = m.name()
-            )
+            format!("crate::util::monster_move_spline_size({prefix}{name}.as_slice())",)
         }
         RustType::AchievementDoneArray => {
-            format!("{prefix}{name}.len() * 4", name = m.name())
+            format!("{prefix}{name}.len() * 4")
         }
         RustType::AchievementInProgressArray => {
-            format!(
-                "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
-                name = m.name()
-            )
+            format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",)
         }
 
         RustType::VariableItemRandomProperty
@@ -523,7 +519,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
         | RustType::PackedGuid
         | RustType::UpdateMask
         | RustType::AuraMask => {
-            format!("{prefix}{name}.size()", prefix = prefix, name = m.name())
+            format!("{prefix}{name}.size()")
         }
         RustType::Enum {
             is_simple, int_ty, ..
@@ -532,7 +528,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
             is_simple, int_ty, ..
         } => {
             if !is_simple {
-                format!("{prefix}{name}.size()", name = m.name(), prefix = prefix)
+                format!("{prefix}{name}.size()")
             } else {
                 int_ty.size().to_string()
             }
@@ -551,15 +547,11 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                         if m.tags().is_compressed() {
                             format!(
                                 "crate::util::zlib_compressed_size({ref}{prefix}{name})",
-                                prefix = prefix,
                                 ref = if prefix.is_empty() { "" } else { "&" },
-                                name = m.name()
                             )
                         } else {
                             format!(
                                 "{prefix}{name}.len() * core::mem::size_of::<{ty}>()",
-                                name = m.name(),
-                                prefix = prefix,
                                 ty = integer_type.rust_str(),
                             )
                         }
@@ -570,13 +562,8 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                         true => format!(
                             "{fixed_value} * {inner_type_size}",
                             inner_type_size = inner_sizes.maximum(),
-                            fixed_value = fixed_value,
                         ),
-                        false => format!(
-                            "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
-                            name = m.name(),
-                            prefix = prefix,
-                        ),
+                        false => format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",),
                     },
                     ArraySize::Variable(_) | ArraySize::Endless => {
                         // ZLib compression is not predictable, so we need to serialise each array member into a Vec
@@ -584,24 +571,18 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                         if m.tags().is_compressed() {
                             format!(
                                 "crate::util::zlib_compressed_size({prefix}{name}.iter().fold(Vec::new(), |mut acc, x| {{ x.write_into_vec(&mut acc).unwrap(); acc }} ).as_slice())",
-                                prefix = prefix,
-                                name = m.name()
                             )
                         } else {
                             match inner_is_constant {
                                 true => {
                                     format!(
                                         "{prefix}{name}.len() * {size}",
-                                        name = m.name(),
-                                        prefix = prefix,
                                         size = inner_sizes.maximum(),
                                     )
                                 }
                                 false => {
                                     format!(
                                         "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
-                                        name = m.name(),
-                                        prefix = prefix,
                                     )
                                 }
                             }
@@ -609,25 +590,13 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                     }
                 },
                 ArrayType::CString => {
-                    format!(
-                        "{prefix}{name}.iter().fold(0, |acc, x| acc + x.len() + 1)",
-                        name = m.name(),
-                        prefix = prefix,
-                    )
+                    format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.len() + 1)",)
                 }
                 ArrayType::Guid => {
-                    format!(
-                        "{prefix}{name}.len() *  8",
-                        name = m.name(),
-                        prefix = prefix,
-                    )
+                    format!("{prefix}{name}.len() *  8",)
                 }
                 ArrayType::PackedGuid => {
-                    format!(
-                        "{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",
-                        name = m.name(),
-                        prefix = prefix,
-                    )
+                    format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",)
                 }
             }
         }
