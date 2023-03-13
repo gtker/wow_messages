@@ -44,7 +44,7 @@ pub struct EnumError {
 }
 
 impl EnumError {
-    pub fn new(name: &'static str, value: u64) -> Self {
+    pub const fn new(name: &'static str, value: u64) -> Self {
         Self { name, value }
     }
 }

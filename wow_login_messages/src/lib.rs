@@ -89,14 +89,6 @@
     clippy::doc_markdown,
     clippy::unseparated_literal_suffix
 )]
-#![allow(
-    non_camel_case_types,
-    non_snake_case,
-    clippy::missing_errors_doc,
-    clippy::upper_case_acronyms,
-    clippy::missing_const_for_fn,
-    clippy::clone_on_copy
-)]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
@@ -112,7 +104,17 @@ use async_std::io::{ReadExt, WriteExt};
 
 pub mod errors;
 pub mod helper;
-#[allow(unused, clippy::complexity, clippy::single_match)]
+#[allow(
+    non_camel_case_types,
+    non_snake_case,
+    unused,
+    clippy::complexity,
+    clippy::single_match,
+    clippy::missing_const_for_fn,
+    clippy::clone_on_copy,
+    clippy::missing_errors_doc,
+    clippy::upper_case_acronyms
+)]
 pub(crate) mod logon;
 pub(crate) mod util;
 
