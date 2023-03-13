@@ -33,7 +33,7 @@ impl crate::Message for SMSG_QUESTGIVER_STATUS_MULTIPLE {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(4..=4294967294).contains(&body_size) {
+        if !(4..=65535).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0417, size: body_size as u32 });
         }
 

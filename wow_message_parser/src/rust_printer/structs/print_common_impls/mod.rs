@@ -383,8 +383,24 @@ fn test_for_invalid_size(s: &mut Writer, e: &Container) {
         true => format!("if body_size != {}", e.sizes().maximum()),
         false => {
             let min = e.sizes().minimum();
+            let max = match e.container_type() {
+                ContainerType::CMsg(_) => {
+                    // vmangos, mangos-tbc, trinitycore all use this max value
+                    // mangos-tbc notes that 0x2800 is the largest buffer supported by the client
+                    10240
+                }
+                ContainerType::Msg(_) | ContainerType::SMsg(_) => {
+                    if e.tags().contains_wrath() {
+                        0xFF_FF_FF // Wrath can have a variable length header size of 3 bytes
+                    } else {
+                        u16::MAX.into() // Non-wrath messages have a u16 size field
+                    }
+                }
+                _ => unreachable!(),
+            };
+
             let max = if e.sizes().maximum() >= u32::MAX as usize {
-                (u32::MAX - 1) as usize // More realistic number here?
+                max
             } else {
                 e.sizes().maximum()
             };

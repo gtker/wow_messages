@@ -126,6 +126,13 @@ impl ObjectTags {
         self.logon_versions().map(Version::Login).chain(world)
     }
 
+    pub(crate) fn contains_wrath(&self) -> bool {
+        self.main_versions().any(|a| match a {
+            Version::Login(_) => false,
+            Version::World(w) => w.wrath_or_greater(),
+        })
+    }
+
     pub(crate) fn first_and_main_versions(&self) -> (Version, Vec<Version>) {
         let mut v = self.main_versions();
         let first = v.next().unwrap();

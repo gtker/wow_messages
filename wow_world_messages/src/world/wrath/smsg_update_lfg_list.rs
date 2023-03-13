@@ -96,7 +96,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(25..=4294967294).contains(&body_size) {
+        if !(25..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0360, size: body_size as u32 });
         }
 

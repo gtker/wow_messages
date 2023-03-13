@@ -87,7 +87,7 @@ impl crate::Message for CMSG_CALENDAR_ADD_EVENT {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(28..=4294967294).contains(&body_size) {
+        if !(28..=10240).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042D, size: body_size as u32 });
         }
 

@@ -109,7 +109,7 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(42..=4294967294).contains(&body_size) {
+        if !(42..=65535).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x018D, size: body_size as u32 });
         }
 

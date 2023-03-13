@@ -83,7 +83,7 @@ impl crate::Message for CMSG_WHO {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(26..=4294967294).contains(&body_size) {
+        if !(26..=10240).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0062, size: body_size as u32 });
         }
 

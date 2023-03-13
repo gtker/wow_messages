@@ -38,7 +38,7 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(8..=4294967294).contains(&body_size) {
+        if !(8..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0284, size: body_size as u32 });
         }
 

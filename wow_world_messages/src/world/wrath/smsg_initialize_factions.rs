@@ -33,7 +33,7 @@ impl crate::Message for SMSG_INITIALIZE_FACTIONS {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(4..=4294967294).contains(&body_size) {
+        if !(4..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0122, size: body_size as u32 });
         }
 

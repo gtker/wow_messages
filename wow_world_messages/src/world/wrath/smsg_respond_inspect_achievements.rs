@@ -40,7 +40,7 @@ impl crate::Message for SMSG_RESPOND_INSPECT_ACHIEVEMENTS {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(2..=4294967294).contains(&body_size) {
+        if !(2..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046C, size: body_size as u32 });
         }
 

@@ -34,7 +34,7 @@ impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size > 4294967294 {
+        if body_size > 16777215 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x047D, size: body_size as u32 });
         }
 

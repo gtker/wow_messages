@@ -56,7 +56,7 @@ impl crate::Message for SMSG_SPELLDISPELLOG {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(13..=4294967294).contains(&body_size) {
+        if !(13..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x027B, size: body_size as u32 });
         }
 

@@ -33,7 +33,7 @@ impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(4..=4294967294).contains(&body_size) {
+        if !(4..=10240).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C1, size: body_size as u32 });
         }
 
