@@ -104,7 +104,7 @@ impl ParsedType {
             ParsedType::AchievementInProgressArray => {
                 Type::ACHIEVEMENT_IN_PROGRESS_ARRAY_NAME.to_string()
             }
-            ParsedType::MonsterMoveSpline => Type::MONSTER_MOVE_SPLINES_NAME.to_string(),
+            ParsedType::MonsterMoveSpline => Type::MONSTER_MOVE_SPLINES_RUST_NAME.to_string(),
             ParsedType::EnchantMask => Type::ENCHANT_MASK_NAME.to_string(),
             ParsedType::InspectTalentGearMask => Type::INSPECT_TALENT_GEAR_MASK_NAME.to_string(),
             ParsedType::Gold => Type::GOLD_NAME.to_string(),

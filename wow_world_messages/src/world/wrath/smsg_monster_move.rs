@@ -1,7 +1,6 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::shared::monster_move_spline_vanilla_tbc_wrath::MonsterMoveSplines;
 use crate::wrath::{
     MonsterMoveType, SplineFlag, Vector3d,
 };
@@ -47,7 +46,7 @@ pub struct SMSG_MONSTER_MOVE {
     pub move_type: SMSG_MONSTER_MOVE_MonsterMoveType,
     pub spline_flags: SMSG_MONSTER_MOVE_SplineFlag,
     pub duration: u32,
-    pub splines: MonsterMoveSplines,
+    pub splines: Vec<Vector3d>,
 }
 
 impl crate::Message for SMSG_MONSTER_MOVE {
@@ -123,7 +122,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         }
 
         // splines: MonsterMoveSplines
-        self.splines.write_into_vec(&mut w)?;
+        crate::util::write_monster_move_spline(self.splines.as_slice(), &mut w)?;
 
         Ok(())
     }
@@ -215,7 +214,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         };
 
         // splines: MonsterMoveSplines
-        let splines = MonsterMoveSplines::read(&mut r)?;
+        let splines = crate::util::read_monster_move_spline(&mut r)?;
 
         let spline_flags = SMSG_MONSTER_MOVE_SplineFlag {
             inner: spline_flags.as_int(),
@@ -248,7 +247,7 @@ impl SMSG_MONSTER_MOVE {
         + self.move_type.size() // move_type: SMSG_MONSTER_MOVE_MonsterMoveType
         + self.spline_flags.size() // spline_flags: SMSG_MONSTER_MOVE_SplineFlag
         + 4 // duration: u32
-        + self.splines.size() // splines: MonsterMoveSplines
+        + crate::util::monster_move_spline_size(self.splines.as_slice()) // splines: MonsterMoveSplines
     }
 }
 

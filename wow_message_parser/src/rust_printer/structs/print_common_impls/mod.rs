@@ -500,11 +500,17 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
             }
         }
 
+        RustType::MonsterMoveSpline => {
+            format!(
+                "crate::util::monster_move_spline_size({prefix}{name}.as_slice())",
+                name = m.name()
+            )
+        }
+
         RustType::VariableItemRandomProperty
         | RustType::NamedGuid
         | RustType::EnchantMask
         | RustType::InspectTalentGearMask
-        | RustType::MonsterMoveSpline
         | RustType::AchievementDoneArray
         | RustType::AchievementInProgressArray
         | RustType::PackedGuid

@@ -24,8 +24,6 @@ pub use enchant_mask::*;
 mod inspect_talent_gear_mask;
 pub use inspect_talent_gear_mask::*;
 
-pub use crate::helper::shared::monster_move_spline_vanilla_tbc_wrath::*;
-
 pub use opcode_to_name::*;
 
 pub use crate::helper::named_guid::NamedGuid;

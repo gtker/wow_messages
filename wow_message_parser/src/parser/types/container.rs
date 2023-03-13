@@ -510,7 +510,8 @@ impl Container {
             let name = a.ty().rust_str();
 
             let (prefix, ty) = match a.ty() {
-                Type::CString
+                Type::MonsterMoveSplines
+                | Type::CString
                 | Type::SizedCString
                 | Type::String
                 | Type::Integer(_)
@@ -528,11 +529,6 @@ impl Container {
                 | Type::AuraMask
                 | Type::UpdateMask => (
                     format!("crate::{}", version.as_major_world().module_name()),
-                    name,
-                ),
-
-                Type::MonsterMoveSplines => (
-                    "crate::shared::monster_move_spline_vanilla_tbc_wrath".to_string(),
                     name,
                 ),
 

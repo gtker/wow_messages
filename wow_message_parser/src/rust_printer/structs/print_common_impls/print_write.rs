@@ -242,12 +242,17 @@ pub(crate) fn print_write_definition(
             ));
         }
 
+        Type::MonsterMoveSplines => {
+            s.wln(format!(
+                "crate::util::write_monster_move_spline({variable_prefix}{name}.as_slice(), &mut w){postfix}?;",
+            ));
+        }
+
         Type::VariableItemRandomProperty
         | Type::NamedGuid
         | Type::Struct { .. }
         | Type::EnchantMask
         | Type::InspectTalentGearMask
-        | Type::MonsterMoveSplines
         | Type::AchievementDoneArray
         | Type::AchievementInProgressArray
         | Type::UpdateMask

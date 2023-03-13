@@ -5,7 +5,6 @@ pub mod expected;
 pub(crate) mod opcode_to_name;
 
 mod aura_mask;
-pub use crate::helper::shared::monster_move_spline_vanilla_tbc_wrath::*;
 pub use aura_mask::*;
 
 pub use opcode_to_name::*;

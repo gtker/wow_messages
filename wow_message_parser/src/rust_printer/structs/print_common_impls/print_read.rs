@@ -394,6 +394,14 @@ fn print_read_definition(
             ));
         }
 
+        Type::MonsterMoveSplines => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = crate::util::read_monster_move_spline(&mut r){postfix}?;",
+                name = d.name(),
+                postfix = postfix,
+            ));
+        }
+
         Type::VariableItemRandomProperty
         | Type::NamedGuid
         | Type::Struct { .. }
@@ -402,7 +410,6 @@ fn print_read_definition(
         | Type::AuraMask
         | Type::AchievementDoneArray
         | Type::AchievementInProgressArray
-        | Type::MonsterMoveSplines
         | Type::EnchantMask
         | Type::InspectTalentGearMask => {
             s.wln(format!(

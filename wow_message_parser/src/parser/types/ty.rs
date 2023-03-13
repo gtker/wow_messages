@@ -83,6 +83,7 @@ impl Type {
     pub(crate) const STRINGS_RUST_NAME: &'static str = "String";
     pub(crate) const GUIDS_RUST_NAME: &'static str = "Guid";
     pub(crate) const BOOLS_RUST_NAME: &'static str = "bool";
+    pub(crate) const MONSTER_MOVE_SPLINES_RUST_NAME: &'static str = "Vec<Vector3d>";
 
     pub(crate) fn str(&self) -> String {
         match self {
