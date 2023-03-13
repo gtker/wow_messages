@@ -222,7 +222,7 @@ impl SMSG_UPDATE_LFG_LIST_LfgListUpdateType {
             } => {
                 1
                 + 4 // amount_of_deleted_guids: u32
-                + deleted_guids.iter().fold(0, |acc, _| acc + 8) // deleted_guids: Guid[amount_of_deleted_guids]
+                + deleted_guids.len() *  8 // deleted_guids: Guid[amount_of_deleted_guids]
             }
             Self::Full => {
                 1

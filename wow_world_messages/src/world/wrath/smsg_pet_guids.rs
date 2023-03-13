@@ -61,7 +61,7 @@ impl crate::wrath::ServerMessage for SMSG_PET_GUIDS {}
 impl SMSG_PET_GUIDS {
     pub(crate) fn size(&self) -> usize {
         4 // amount_of_guids: u32
-        + self.guids.iter().fold(0, |acc, _| acc + 8) // guids: Guid[amount_of_guids]
+        + self.guids.len() *  8 // guids: Guid[amount_of_guids]
     }
 }
 

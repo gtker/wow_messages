@@ -183,7 +183,7 @@ impl SMSG_SPELL_GO {
         + self.flags.size() // flags: SMSG_SPELL_GO_CastFlags
         + 4 // timestamp: u32
         + 1 // amount_of_hits: u8
-        + self.hits.iter().fold(0, |acc, _| acc + 8) // hits: Guid[amount_of_hits]
+        + self.hits.len() *  8 // hits: Guid[amount_of_hits]
         + 1 // amount_of_misses: u8
         + self.misses.iter().fold(0, |acc, x| acc + x.size()) // misses: SpellMiss[amount_of_misses]
         + self.targets.size() // targets: SpellCastTargets

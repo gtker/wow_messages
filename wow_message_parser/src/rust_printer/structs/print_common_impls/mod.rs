@@ -606,7 +606,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                 }
                 ArrayType::Guid => {
                     format!(
-                        "{prefix}{name}.iter().fold(0, |acc, _| acc + 8)",
+                        "{prefix}{name}.len() *  8",
                         name = m.name(),
                         prefix = prefix,
                     )

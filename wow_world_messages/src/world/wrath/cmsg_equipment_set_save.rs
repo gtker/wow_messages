@@ -107,7 +107,7 @@ impl CMSG_EQUIPMENT_SET_SAVE {
         + 4 // index: u32
         + self.name.len() + 1 // name: CString
         + self.icon_name.len() + 1 // icon_name: CString
-        + self.equipment.iter().fold(0, |acc, _| acc + 8) // equipment: Guid[19]
+        + self.equipment.len() *  8 // equipment: Guid[19]
     }
 }
 

@@ -67,7 +67,7 @@ impl crate::wrath::ServerMessage for SMSG_LOOT_MASTER_LIST {}
 impl SMSG_LOOT_MASTER_LIST {
     pub(crate) fn size(&self) -> usize {
         1 // amount_of_players: u8
-        + self.guids.iter().fold(0, |acc, _| acc + 8) // guids: Guid[amount_of_players]
+        + self.guids.len() *  8 // guids: Guid[amount_of_players]
     }
 }
 
