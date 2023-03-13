@@ -61,7 +61,6 @@ pub(crate) struct Data {
     pub name: &'static str,
     pub opcode: usize,
     pub definition: bool,
-    pub rust_skip: bool,
     pub tests: usize,
     pub reason: Reason,
 }
@@ -72,7 +71,6 @@ impl Data {
             name,
             opcode,
             definition: false,
-            rust_skip: false,
             tests: 0,
             reason: Reason::None,
         }
@@ -88,7 +86,6 @@ impl Data {
             name,
             opcode,
             definition: false,
-            rust_skip: false,
             tests: 0,
             reason: Reason::Custom(reason),
         }
@@ -99,7 +96,6 @@ impl Data {
             name,
             opcode,
             definition: false,
-            rust_skip: false,
             tests: 0,
             reason,
         }
@@ -146,7 +142,7 @@ impl Data {
     }
 
     pub(crate) fn needs_work(&self) -> bool {
-        !self.definition || self.rust_skip
+        !self.definition
     }
 }
 
@@ -212,7 +208,6 @@ fn get_data_for(version: MajorWorldVersion, data: &[Data], o: &Objects) -> Vec<D
             }
             assert_eq!(opcode as usize, container.opcode);
 
-            container.rust_skip = s.tags().rust_skip();
             container.definition = !s.tags().unimplemented();
             container.tests = s.tests(o).len();
         } else if let Some(message) = data.iter_mut().find(|a| a.opcode == s.opcode() as usize) {
@@ -245,12 +240,7 @@ fn print_missing_definitions(data: &[Data], version: MajorWorldVersion) {
 
     for d in data {
         if d.needs_work() {
-            let rust_skip = if d.rust_skip {
-                " (Skipped Rust Codegen)"
-            } else {
-                ""
-            };
-            println!("    {}: {}{rust_skip}", d.name, d.reason().unwrap());
+            println!("    {}: {}", d.name, d.reason().unwrap());
         }
     }
 
