@@ -394,7 +394,8 @@ fn print_read_definition(
             ));
         }
 
-        Type::NamedGuid
+        Type::VariableItemRandomProperty
+        | Type::NamedGuid
         | Type::Struct { .. }
         | Type::Guid
         | Type::UpdateMask

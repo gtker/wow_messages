@@ -242,7 +242,8 @@ pub(crate) fn print_write_definition(
             ));
         }
 
-        Type::NamedGuid
+        Type::VariableItemRandomProperty
+        | Type::NamedGuid
         | Type::Struct { .. }
         | Type::EnchantMask
         | Type::InspectTalentGearMask

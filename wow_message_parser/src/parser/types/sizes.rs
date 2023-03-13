@@ -48,6 +48,8 @@ pub(crate) const GOLD_SIZE: u8 = core::mem::size_of::<u32>() as u8;
 pub(crate) const LEVEL_SIZE: u8 = core::mem::size_of::<u8>() as u8;
 pub(crate) const LEVEL16_SIZE: usize = core::mem::size_of::<u16>();
 pub(crate) const LEVEL32_SIZE: usize = core::mem::size_of::<u32>();
+pub(crate) const VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE: usize = 4;
+pub(crate) const VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE: usize = 8;
 
 pub(crate) const DATETIME_SIZE: u8 = 4;
 

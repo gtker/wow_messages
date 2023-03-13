@@ -281,6 +281,9 @@ fn print_container_example_definition(
             unimplemented!("inspect talent gear mask example")
         }
         Type::NamedGuid => unimplemented!("named guid example"),
+        Type::VariableItemRandomProperty => {
+            unimplemented!("variable item random property id example")
+        }
     }
     s.wln(comment);
 }
@@ -576,6 +579,10 @@ fn print_container_field(
                 }
                 Type::AchievementInProgressArray => {
                     "[AchievementInProgressArray](../spec/achievement-in-progress-array.md)"
+                        .to_string()
+                }
+                Type::VariableItemRandomProperty => {
+                    "[VariableItemRandomProperty](../spec/variable-item-random-property.md)"
                         .to_string()
                 }
                 Type::MonsterMoveSplines => {

@@ -1,15 +1,17 @@
 use std::io::{Read, Write};
 
-use crate::wrath::GuildBankSocket;
+use crate::wrath::{
+    GuildBankSocket, VariableItemRandomProperty,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild_bank/smsg_guild_bank_list.wowm:60`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild_bank/smsg_guild_bank_list.wowm#L60):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild_bank/smsg_guild_bank_list.wowm:57`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild_bank/smsg_guild_bank_list.wowm#L57):
 /// ```text
 /// struct GuildBankSlot {
 ///     u8 slot;
 ///     u32 item;
 ///     u32 unknown1;
-///     u32 item_random_property_id;
+///     VariableItemRandomProperty item_random_property_id;
 ///     u32 amount_of_items;
 ///     u32 unknown2;
 ///     u8 unknown3;
@@ -23,7 +25,7 @@ pub struct GuildBankSlot {
     /// 3.3.0 (0x8000, 0x8020)
     ///
     pub unknown1: u32,
-    pub item_random_property_id: u32,
+    pub item_random_property_id: VariableItemRandomProperty,
     pub amount_of_items: u32,
     pub unknown2: u32,
     pub unknown3: u8,
@@ -41,8 +43,8 @@ impl GuildBankSlot {
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
 
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes())?;
+        // item_random_property_id: VariableItemRandomProperty
+        self.item_random_property_id.write_into_vec(&mut w)?;
 
         // amount_of_items: u32
         w.write_all(&self.amount_of_items.to_le_bytes())?;
@@ -76,8 +78,8 @@ impl GuildBankSlot {
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(&mut r)?;
 
-        // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
+        // item_random_property_id: VariableItemRandomProperty
+        let item_random_property_id = VariableItemRandomProperty::read(&mut r)?;
 
         // amount_of_items: u32
         let amount_of_items = crate::util::read_u32_le(&mut r)?;
@@ -119,7 +121,7 @@ impl GuildBankSlot {
         1 // slot: u8
         + 4 // item: u32
         + 4 // unknown1: u32
-        + 4 // item_random_property_id: u32
+        + self.item_random_property_id.size() // item_random_property_id: VariableItemRandomProperty
         + 4 // amount_of_items: u32
         + 4 // unknown2: u32
         + 1 // unknown3: u8

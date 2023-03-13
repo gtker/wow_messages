@@ -8,6 +8,7 @@ use crate::parser::types::sizes::{
     update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, DATETIME_SIZE, GOLD_SIZE,
     GUID_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, NAMED_GUID_MAX_SIZE, NAMED_GUID_MIN_SIZE,
     PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
+    VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
 };
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Endianness, FloatingPointType, IntegerType};
@@ -44,6 +45,7 @@ pub(crate) enum ParsedType {
     AchievementInProgressArray,
     EnchantMask,
     InspectTalentGearMask,
+    VariableItemRandomProperty,
     Gold,
     Level,
     Level16,
@@ -78,6 +80,9 @@ impl ParsedType {
             ParsedType::Level16 => Type::LEVEL_NAME16.to_string(),
             ParsedType::Level32 => Type::LEVEL_NAME32.to_string(),
             ParsedType::NamedGuid => Type::NAMED_GUID_NAME.to_string(),
+            ParsedType::VariableItemRandomProperty => {
+                Type::VARIABLE_ITEM_RANDOM_PROPERTY_NAME.to_string()
+            }
         }
     }
 
@@ -107,6 +112,9 @@ impl ParsedType {
                 Type::LEVEL_NAME.to_string()
             }
             ParsedType::NamedGuid => Type::NAMED_GUID_NAME.to_string(),
+            ParsedType::VariableItemRandomProperty => {
+                Type::VARIABLE_ITEM_RANDOM_PROPERTY_NAME.to_string()
+            }
         }
     }
 
@@ -238,6 +246,10 @@ impl ParsedType {
             ParsedType::NamedGuid => {
                 sizes.inc(NAMED_GUID_MIN_SIZE.into(), NAMED_GUID_MAX_SIZE.into())
             }
+            ParsedType::VariableItemRandomProperty => sizes.inc(
+                VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
+                VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
+            ),
         }
 
         sizes
@@ -316,6 +328,7 @@ impl ParsedType {
             Type::ACHIEVEMENT_IN_PROGRESS_ARRAY_NAME => Self::AchievementInProgressArray,
             Type::ENCHANT_MASK_NAME => Self::EnchantMask,
             Type::INSPECT_TALENT_GEAR_MASK_NAME => Self::InspectTalentGearMask,
+            Type::VARIABLE_ITEM_RANDOM_PROPERTY_NAME => Self::VariableItemRandomProperty,
             _ => Self::Identifier {
                 s: s.to_string(),
                 upcast: None,
@@ -349,7 +362,8 @@ impl ParsedType {
                         ParsedType::CString => {
                             Self::Array(ParsedArray::new(ParsedArrayType::CString, size))
                         }
-                        ParsedType::NamedGuid
+                        ParsedType::VariableItemRandomProperty
+                        | ParsedType::NamedGuid
                         | ParsedType::Level16
                         | ParsedType::Level32
                         | ParsedType::Level

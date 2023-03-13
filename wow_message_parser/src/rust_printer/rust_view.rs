@@ -407,6 +407,7 @@ pub(crate) enum RustType {
     Level,
     Level16,
     Level32,
+    VariableItemRandomProperty,
 }
 
 impl RustType {
@@ -450,6 +451,7 @@ impl RustType {
             RustType::Level => Type::Level,
             RustType::Level16 => Type::Level16,
             RustType::Level32 => Type::Level32,
+            RustType::VariableItemRandomProperty => Type::VariableItemRandomProperty,
 
             RustType::Enum { .. } | RustType::Flag { .. } | RustType::Struct { .. } => {
                 panic!("invalid conversion")
@@ -1278,6 +1280,7 @@ pub(crate) fn create_struct_member(
                 Type::Level => RustType::Level,
                 Type::Level16 => RustType::Level16,
                 Type::Level32 => RustType::Level32,
+                Type::VariableItemRandomProperty => RustType::VariableItemRandomProperty,
             };
 
             let name = d.name().to_string();

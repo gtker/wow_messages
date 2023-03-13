@@ -212,6 +212,9 @@ impl WiresharkType {
             Type::NamedGuid => {
                 unreachable!("named guid only in 2.4.3 and 3.3.5")
             }
+            Type::VariableItemRandomProperty => {
+                unreachable!("variable item random property id only in 2.4.3 and 3.3.5")
+            }
         })
     }
 

@@ -97,6 +97,7 @@ fn parsed_type_to_type(
         ParsedType::Level => Type::Level,
         ParsedType::Level16 => Type::Level16,
         ParsedType::Level32 => Type::Level32,
+        ParsedType::VariableItemRandomProperty => Type::VariableItemRandomProperty,
     }
 }
 
@@ -547,7 +548,8 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 complex_not_found(c.name(), c.tags(), &c.file_info, s, &related);
             }
         }
-        ParsedType::NamedGuid
+        ParsedType::VariableItemRandomProperty
+        | ParsedType::NamedGuid
         | ParsedType::Level16
         | ParsedType::Level32
         | ParsedType::Level

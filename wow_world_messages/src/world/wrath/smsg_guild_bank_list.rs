@@ -5,7 +5,7 @@ use crate::wrath::{
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild_bank/smsg_guild_bank_list.wowm:79`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild_bank/smsg_guild_bank_list.wowm#L79):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild_bank/smsg_guild_bank_list.wowm:73`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild_bank/smsg_guild_bank_list.wowm#L73):
 /// ```text
 /// smsg SMSG_GUILD_BANK_LIST = 0x03E8 {
 ///     u64 bank_balance;
@@ -89,7 +89,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if !(15..=464657).contains(&body_size) {
+        if !(15..=465681).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E8, size: body_size as u32 });
         }
 

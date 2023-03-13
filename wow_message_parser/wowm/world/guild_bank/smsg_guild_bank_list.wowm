@@ -29,10 +29,7 @@ struct GuildBankSocket {
 struct GuildBankSlot {
     u8 slot;
     Item item;
-    u32 item_random_property_id;
-    /* if (item_random_property_id != 0) {
-        u32 item_suffix_factor;
-    } TODO INT_NEQ_ZERO */
+    VariableItemRandomProperty item_random_property_id;
     u8 amount_of_items;
     u32 enchant;
     u8 charges;
@@ -63,10 +60,7 @@ struct GuildBankSlot {
     u32 unknown1 {
         comment = "3.3.0 (0x8000, 0x8020)";
     }
-    u32 item_random_property_id;
-    /* if (item_random_property_id != 0) {
-        u32 item_suffix_factor;
-    } TODO INT_NEQ_ZERO */
+    VariableItemRandomProperty item_random_property_id;
     u32 amount_of_items;
     u32 unknown2;
     u8 unknown3;

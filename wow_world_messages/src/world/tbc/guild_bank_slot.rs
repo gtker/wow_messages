@@ -1,6 +1,8 @@
 use std::io::{Read, Write};
 
-use crate::tbc::GuildBankSocket;
+use crate::tbc::{
+    GuildBankSocket, VariableItemRandomProperty,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild_bank/smsg_guild_bank_list.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild_bank/smsg_guild_bank_list.wowm#L29):
@@ -8,7 +10,7 @@ use crate::tbc::GuildBankSocket;
 /// struct GuildBankSlot {
 ///     u8 slot;
 ///     u32 item;
-///     u32 item_random_property_id;
+///     VariableItemRandomProperty item_random_property_id;
 ///     u8 amount_of_items;
 ///     u32 enchant;
 ///     u8 charges;
@@ -19,7 +21,7 @@ use crate::tbc::GuildBankSocket;
 pub struct GuildBankSlot {
     pub slot: u8,
     pub item: u32,
-    pub item_random_property_id: u32,
+    pub item_random_property_id: VariableItemRandomProperty,
     pub amount_of_items: u8,
     pub enchant: u32,
     pub charges: u8,
@@ -34,8 +36,8 @@ impl GuildBankSlot {
         // item: u32
         w.write_all(&self.item.to_le_bytes())?;
 
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes())?;
+        // item_random_property_id: VariableItemRandomProperty
+        self.item_random_property_id.write_into_vec(&mut w)?;
 
         // amount_of_items: u8
         w.write_all(&self.amount_of_items.to_le_bytes())?;
@@ -66,8 +68,8 @@ impl GuildBankSlot {
         // item: u32
         let item = crate::util::read_u32_le(&mut r)?;
 
-        // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
+        // item_random_property_id: VariableItemRandomProperty
+        let item_random_property_id = VariableItemRandomProperty::read(&mut r)?;
 
         // amount_of_items: u8
         let amount_of_items = crate::util::read_u8_le(&mut r)?;
@@ -107,7 +109,7 @@ impl GuildBankSlot {
     pub(crate) fn size(&self) -> usize {
         1 // slot: u8
         + 4 // item: u32
-        + 4 // item_random_property_id: u32
+        + self.item_random_property_id.size() // item_random_property_id: VariableItemRandomProperty
         + 1 // amount_of_items: u8
         + 4 // enchant: u32
         + 1 // charges: u8

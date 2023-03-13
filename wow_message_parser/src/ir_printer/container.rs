@@ -259,6 +259,7 @@ pub(crate) enum IrType {
     Level,
     Level16,
     Level32,
+    VariableItemRandomProperty,
 }
 
 impl From<&Type> for IrType {
@@ -297,6 +298,7 @@ impl From<&Type> for IrType {
             Type::Level => Self::Level,
             Type::Level16 => Self::Level16,
             Type::Level32 => Self::Level32,
+            Type::VariableItemRandomProperty => Self::VariableItemRandomProperty,
         }
     }
 }
