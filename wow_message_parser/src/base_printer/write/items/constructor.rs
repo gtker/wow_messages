@@ -31,8 +31,8 @@ pub(crate) fn constructor(
             ctor.name(),
             ty_name,
             |s| {
-                for e in fields {
-                    if optimizations.optimization(e.name).skip_field() {
+                for (field_index, e) in fields.iter().enumerate() {
+                    if optimizations.optimization(field_index).skip_field() {
                         continue;
                     }
 
@@ -55,8 +55,8 @@ pub(crate) fn constructor(
                 }
             },
             |s| {
-                for e in fields {
-                    if optimizations.optimization(e.name).skip_field() {
+                for (field_index, e) in fields.iter().enumerate() {
+                    if optimizations.optimization(field_index).skip_field() {
                         continue;
                     }
 

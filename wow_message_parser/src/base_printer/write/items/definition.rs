@@ -62,11 +62,11 @@ pub(crate) fn includes(
     ));
     s.inc_indent();
 
-    for e in fields {
+    for (field_index, e) in fields.iter().enumerate() {
         if matches!(
             import_location,
             ImportFrom::ItemsConstructors | ImportFrom::Items
-        ) && optimizations.optimization(e.name).skip_field()
+        ) && optimizations.optimization(field_index).skip_field()
         {
             continue;
         }
@@ -123,8 +123,8 @@ fn struct_definition(
     s.wln("#[derive(Debug, Copy, Clone)]");
     s.open_curly(format!("pub struct {ty_name}"));
 
-    for e in fields {
-        if optimizations.optimization(e.name).skip_field() {
+    for (field_index, e) in fields.iter().enumerate() {
+        if optimizations.optimization(field_index).skip_field() {
             continue;
         }
 
@@ -188,8 +188,8 @@ fn impl_block(
 
     s.pub_const_fn_new(
         |s| {
-            for e in fields {
-                if optimizations.optimization(e.name).skip_field() {
+            for (field_index, e) in fields.iter().enumerate() {
+                if optimizations.optimization(field_index).skip_field() {
                     continue;
                 }
 
@@ -204,8 +204,8 @@ fn impl_block(
             }
         },
         |s| {
-            for e in fields {
-                if optimizations.optimization(e.name).skip_field() {
+            for (field_index, e) in fields.iter().enumerate() {
+                if optimizations.optimization(field_index).skip_field() {
                     continue;
                 }
 
@@ -229,8 +229,8 @@ fn getters_and_setters(
     arrays: &[Array],
     optimizations: &Optimizations,
 ) {
-    for field in fields {
-        let opt = optimizations.optimization(field.name);
+    for (field_index, field) in fields.iter().enumerate() {
+        let opt = optimizations.optimization(field_index);
 
         match &opt {
             FieldOptimization::None => {}

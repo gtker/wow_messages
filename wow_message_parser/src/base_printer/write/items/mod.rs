@@ -243,8 +243,8 @@ fn get_default_values<'a>(
 ) -> (Values, Arrays<'a>) {
     let mut values: BTreeMap<(Value, Option<IntegerSize>), usize> = BTreeMap::new();
     for thing in things {
-        for field in &thing.fields {
-            if optimizations.optimization(field.name).skip_field() {
+        for (field_index, field) in thing.fields.iter().enumerate() {
+            if optimizations.optimization(field_index).skip_field() {
                 continue;
             }
 

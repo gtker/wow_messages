@@ -80,13 +80,13 @@ impl IntegerSize {
 }
 
 pub struct Optimizations {
-    field_optimizations: HashMap<String, FieldOptimization>,
+    field_optimizations: Vec<FieldOptimization>,
     type_optimizations: HashMap<String, IntegerSize>,
 }
 
 impl Optimizations {
-    pub fn optimization(&self, field_name: &str) -> &FieldOptimization {
-        self.field_optimizations.get(field_name).unwrap()
+    pub fn optimization(&self, index: usize) -> &FieldOptimization {
+        &self.field_optimizations[index]
     }
 
     pub fn is_non_native_type(&self, field: &Field) -> bool {
@@ -120,7 +120,7 @@ impl Optimizations {
 
 impl Optimizations {
     pub fn new(items: &[GenericThing], fields: &[Field]) -> Self {
-        let mut field_optimizations = HashMap::new();
+        let mut field_optimizations = Vec::with_capacity(fields.len());
         let mut type_optimizations = HashMap::new();
 
         for (field_index, field) in fields.iter().enumerate() {
@@ -199,7 +199,7 @@ impl Optimizations {
                 }
             };
 
-            field_optimizations.insert(field.name.to_string(), optimization);
+            field_optimizations.push(optimization);
         }
 
         Self {

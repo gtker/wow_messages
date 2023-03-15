@@ -71,8 +71,8 @@ pub(crate) fn all_items(
         }
         s.w(format!("{}(", item.constructor_name()));
 
-        for value in &item.fields {
-            if optimizations.optimization(value.name).skip_field() {
+        for (field_index, value) in item.fields.iter().enumerate() {
+            if optimizations.optimization(field_index).skip_field() {
                 continue;
             }
 
