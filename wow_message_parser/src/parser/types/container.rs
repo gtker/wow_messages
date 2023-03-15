@@ -342,11 +342,11 @@ impl Container {
         self.sizes
     }
 
-    pub(crate) fn all_definitions_transitively(&self) -> Vec<StructMemberDefinition> {
-        fn inner(m: &StructMember, v: &mut Vec<StructMemberDefinition>) {
+    pub(crate) fn all_definitions_transitively(&self) -> Vec<&StructMemberDefinition> {
+        fn inner<'a>(m: &'a StructMember, v: &mut Vec<&'a StructMemberDefinition>) {
             match m {
                 StructMember::Definition(d) => {
-                    v.push(d.clone());
+                    v.push(d);
                     match d.ty() {
                         Type::Struct { e } => {
                             for m in e.members() {
