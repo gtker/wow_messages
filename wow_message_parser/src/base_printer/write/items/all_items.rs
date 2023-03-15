@@ -76,9 +76,10 @@ pub(crate) fn all_items(
                 continue;
             }
 
-            if let Some(const_name) =
-                default_values.get(&(value.value.const_value(), optimizations.integer_size(value)))
-            {
+            if let Some(const_name) = default_values.get(&(
+                value.value.const_value(),
+                optimizations.integer_size(field_index),
+            )) {
                 s.w_no_indent(format!("{const_name},"));
             } else {
                 s.w_no_indent(format!("{},", value.value.to_string_value()));

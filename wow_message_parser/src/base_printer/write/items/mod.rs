@@ -249,7 +249,7 @@ fn get_default_values<'a>(
             }
 
             let value = field.value.const_value();
-            let value_and_size = (value, optimizations.integer_size(field));
+            let value_and_size = (value, optimizations.integer_size(field_index));
 
             if let Some(g) = values.get_mut(&value_and_size) {
                 *g += 1;

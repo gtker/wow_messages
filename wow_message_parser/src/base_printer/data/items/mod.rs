@@ -1,7 +1,7 @@
 use crate::base_printer::Expansion;
 use rusqlite::Connection;
 use std::cmp::Ordering;
-use std::collections::{BTreeMap, HashMap};
+use std::collections::BTreeMap;
 
 pub mod tbc;
 pub mod vanilla;
@@ -81,7 +81,7 @@ impl IntegerSize {
 
 pub struct Optimizations {
     field_optimizations: Vec<FieldOptimization>,
-    type_optimizations: HashMap<String, IntegerSize>,
+    type_optimizations: Vec<Option<IntegerSize>>,
 }
 
 impl Optimizations {
@@ -89,16 +89,16 @@ impl Optimizations {
         &self.field_optimizations[index]
     }
 
-    pub fn is_non_native_type(&self, field: &Field) -> bool {
-        self.integer_size(field).is_some()
+    pub fn is_non_native_type(&self, field_index: usize) -> bool {
+        self.integer_size(field_index).is_some()
     }
 
-    pub fn integer_size(&self, field: &Field) -> Option<IntegerSize> {
-        self.type_optimizations.get(field.name).cloned()
+    pub fn integer_size(&self, index: usize) -> Option<IntegerSize> {
+        self.type_optimizations[index]
     }
 
-    pub fn native_integer_type_cast(&self, field: &Field) -> Option<&'static str> {
-        if let Some(g) = self.integer_size(field) {
+    pub fn native_integer_type_cast(&self, index: usize) -> Option<&'static str> {
+        if let Some(g) = self.integer_size(index) {
             Some(match g {
                 IntegerSize::U16 | IntegerSize::U8 => "u32",
                 IntegerSize::I16 | IntegerSize::I8 => "i32",
@@ -109,8 +109,8 @@ impl Optimizations {
         }
     }
 
-    pub fn type_name(&self, field: &Field) -> &'static str {
-        if let Some(t) = self.integer_size(field) {
+    pub fn type_name(&self, field: &Field, field_index: usize) -> &'static str {
+        if let Some(t) = self.integer_size(field_index) {
             t.string_value()
         } else {
             field.value.type_name()
@@ -121,7 +121,7 @@ impl Optimizations {
 impl Optimizations {
     pub fn new(items: &[GenericThing], fields: &[Field]) -> Self {
         let mut field_optimizations = Vec::with_capacity(fields.len());
-        let mut type_optimizations = HashMap::new();
+        let mut type_optimizations = Vec::with_capacity(fields.len());
 
         for (field_index, field) in fields.iter().enumerate() {
             let fields = items
@@ -158,15 +158,11 @@ impl Optimizations {
             }
 
             if field.value.i64_value().is_some() {
-                type_optimizations.insert(
-                    field.name.to_string(),
-                    IntegerSize::from_signed(signed_min, signed_max),
-                );
+                type_optimizations.push(Some(IntegerSize::from_signed(signed_min, signed_max)));
             } else if field.value.u64_value().is_some() {
-                type_optimizations.insert(
-                    field.name.to_string(),
-                    IntegerSize::from_unsigned(unsigned_max),
-                );
+                type_optimizations.push(Some(IntegerSize::from_unsigned(unsigned_max)));
+            } else {
+                type_optimizations.push(None);
             }
 
             let optimization = if different_values.len() == 1 {

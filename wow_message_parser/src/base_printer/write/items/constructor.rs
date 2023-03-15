@@ -36,8 +36,8 @@ pub(crate) fn constructor(
                         continue;
                     }
 
-                    let ty_name = if optimizations.is_non_native_type(e) {
-                        optimizations.type_name(e)
+                    let ty_name = if optimizations.is_non_native_type(field_index) {
+                        optimizations.type_name(e, field_index)
                     } else {
                         e.value.constructor_type_name()
                     };
