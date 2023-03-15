@@ -553,7 +553,7 @@ impl RustObject {
             definer_type,
             is_elseif,
             has_separate_if_statements,
-        ) = match m.ty().clone() {
+        ) = match m.ty() {
             RustType::Enum {
                 ty_name,
                 original_ty_name,
@@ -587,21 +587,21 @@ impl RustObject {
                 is_simple,
                 DefinerType::Flag,
                 is_elseif,
-                false,
+                &false,
             ),
             _ => return None,
         };
 
         Some(RustDefiner {
-            inner: m.clone(),
-            enumerators,
-            ty_name,
-            int_ty,
-            is_simple,
-            is_elseif,
-            original_ty_name,
+            inner: &m,
+            enumerators: enumerators.as_slice(),
+            ty_name: ty_name.as_str(),
+            int_ty: *int_ty,
+            is_simple: *is_simple,
+            is_elseif: *is_elseif,
+            original_ty_name: original_ty_name.as_str(),
             definer_type,
-            has_separate_if_statements,
+            has_separate_if_statements: *has_separate_if_statements,
         })
     }
 
@@ -620,7 +620,7 @@ impl RustObject {
     pub(crate) fn rust_definers_in_enumerator(&self, enumerator_name: &str) -> Vec<RustDefiner> {
         let mut v = Vec::new();
 
-        fn inner(m: &RustMember, enumerator_name: &str, v: &mut Vec<RustDefiner>) {
+        fn inner<'a>(m: &'a RustMember, enumerator_name: &str, v: &mut Vec<RustDefiner<'a>>) {
             if let Some(rd) = RustObject::get_rust_definer_from_ty(m) {
                 for enumerator in rd.enumerators() {
                     if enumerator.name() == enumerator_name {
@@ -687,10 +687,8 @@ impl RustObject {
     }
 
     pub(crate) fn get_rust_definers(&self) -> Vec<RustDefiner> {
-        fn inner(m: &RustMember, v: &mut Vec<RustDefiner>) {
-            let rd = RustObject::get_rust_definer_from_ty(m);
-
-            if let Some(rd) = rd {
+        fn inner<'a>(m: &'a RustMember, v: &mut Vec<RustDefiner<'a>>) {
+            if let Some(rd) = RustObject::get_rust_definer_from_ty(m) {
                 for enumerator in rd.enumerators() {
                     for m in enumerator.members_in_struct() {
                         inner(m, v);
@@ -712,18 +710,18 @@ impl RustObject {
         v
     }
 
-    pub(crate) fn rust_definer_with_variable_name_and_enumerator(
-        &self,
+    pub(crate) fn rust_definer_with_variable_name_and_enumerator<'a>(
+        &'a self,
         variable_name: &str,
         enumerator_name: &str,
-    ) -> RustDefiner {
-        fn inner(
-            m: &RustMember,
+    ) -> RustDefiner<'a> {
+        fn inner<'a>(
+            m: &'a RustMember,
             variable_name: &str,
             enumerator_name: &str,
-        ) -> Option<RustDefiner> {
-            if let Some(rd) = RustObject::get_rust_definer_from_ty(m) {
-                for enumerator in rd.enumerators() {
+        ) -> Option<RustDefiner<'a>> {
+            if let Some(ird) = RustObject::get_rust_definer_from_ty(m) {
+                for enumerator in ird.enumerators() {
                     if enumerator.contains_elseif() {
                         match enumerator.members()[0].ty() {
                             RustType::Enum { enumerators, .. } => {
@@ -746,8 +744,9 @@ impl RustObject {
                     }
                 }
 
-                if rd.variable_name() == variable_name && rd.contains_enumerator(enumerator_name) {
-                    return Some(rd);
+                if ird.variable_name() == variable_name && ird.contains_enumerator(enumerator_name)
+                {
+                    return Some(ird);
                 }
             }
             None
@@ -810,23 +809,23 @@ impl RustObject {
 }
 
 #[derive(Debug, Clone)]
-pub(crate) struct RustDefiner {
-    inner: RustMember,
+pub(crate) struct RustDefiner<'a> {
+    inner: &'a RustMember,
     definer_type: DefinerType,
-    enumerators: Vec<RustEnumerator>,
-    ty_name: String,
+    enumerators: &'a [RustEnumerator],
+    ty_name: &'a str,
     int_ty: IntegerType,
     is_simple: bool,
     is_elseif: bool,
-    original_ty_name: String,
+    original_ty_name: &'a str,
     has_separate_if_statements: bool,
 }
 
-impl RustDefiner {
+impl<'a> RustDefiner<'a> {
     pub(crate) fn all_members(&self) -> Vec<&RustMember> {
         let mut v = Vec::new();
 
-        v.push(&self.inner);
+        v.push(self.inner);
 
         for enumerator in self.enumerators() {
             v.append(&mut enumerator.all_members());
@@ -843,8 +842,8 @@ impl RustDefiner {
     pub(crate) fn inner(&self) -> &RustMember {
         &self.inner
     }
-    pub(crate) fn enumerators(&self) -> &[RustEnumerator] {
-        &self.enumerators
+    pub(crate) fn enumerators(&self) -> &'a [RustEnumerator] {
+        self.enumerators
     }
     pub(crate) fn complex_flag_enumerators(&self) -> Vec<&RustEnumerator> {
         self.enumerators
