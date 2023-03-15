@@ -189,7 +189,7 @@ impl VanillaItem {
             Field::new("arcane_res", Value::Int(self.arcane_res)),
             Field::new("delay", Value::Int(self.delay)),
             Field::new("ammo_type", Value::Int(self.ammo_type)),
-            Field::new("ranged_mod_range", Value::Float(self.ranged_mod_range)),
+            Field::new("ranged_mod_range", Value::float(self.ranged_mod_range)),
             Field::new("bonding", Value::Bonding(self.bonding)),
             Field::new("description", Value::String(self.description)),
             Field::new("page_text", Value::Int(self.page_text)),
@@ -229,12 +229,12 @@ impl VanillaItem {
                             ArrayField::new(
                                 "damage_minimum",
                                 "dmg_min1",
-                                Value::Float(self.dmg_min1),
+                                Value::float(self.dmg_min1),
                             ),
                             ArrayField::new(
                                 "damage_maximum",
                                 "dmg_max1",
-                                Value::Float(self.dmg_max1),
+                                Value::float(self.dmg_max1),
                             ),
                             ArrayField::new(
                                 "school",
@@ -249,12 +249,12 @@ impl VanillaItem {
                             ArrayField::new(
                                 "damage_minimum",
                                 "dmg_min2",
-                                Value::Float(self.dmg_min2),
+                                Value::float(self.dmg_min2),
                             ),
                             ArrayField::new(
                                 "damage_maximum",
                                 "dmg_max2",
-                                Value::Float(self.dmg_max2),
+                                Value::float(self.dmg_max2),
                             ),
                             ArrayField::new(
                                 "school",
@@ -269,12 +269,12 @@ impl VanillaItem {
                             ArrayField::new(
                                 "damage_minimum",
                                 "dmg_min3",
-                                Value::Float(self.dmg_min3),
+                                Value::float(self.dmg_min3),
                             ),
                             ArrayField::new(
                                 "damage_maximum",
                                 "dmg_max3",
-                                Value::Float(self.dmg_max3),
+                                Value::float(self.dmg_max3),
                             ),
                             ArrayField::new(
                                 "school",
@@ -289,12 +289,12 @@ impl VanillaItem {
                             ArrayField::new(
                                 "damage_minimum",
                                 "dmg_min4",
-                                Value::Float(self.dmg_min4),
+                                Value::float(self.dmg_min4),
                             ),
                             ArrayField::new(
                                 "damage_maximum",
                                 "dmg_max4",
-                                Value::Float(self.dmg_max4),
+                                Value::float(self.dmg_max4),
                             ),
                             ArrayField::new(
                                 "school",
@@ -309,12 +309,12 @@ impl VanillaItem {
                             ArrayField::new(
                                 "damage_minimum",
                                 "dmg_min5",
-                                Value::Float(self.dmg_min5),
+                                Value::float(self.dmg_min5),
                             ),
                             ArrayField::new(
                                 "damage_maximum",
                                 "dmg_max5",
-                                Value::Float(self.dmg_max5),
+                                Value::float(self.dmg_max5),
                             ),
                             ArrayField::new(
                                 "school",
@@ -347,7 +347,7 @@ impl VanillaItem {
                             ArrayField::new(
                                 "spell_ppm_rate",
                                 "spell_ppm_rate_1",
-                                Value::Float(self.spell_ppm_rate_1),
+                                Value::float(self.spell_ppm_rate_1),
                             ),
                             ArrayField::new(
                                 "spell_cooldown",
@@ -383,7 +383,7 @@ impl VanillaItem {
                             ArrayField::new(
                                 "spell_ppm_rate",
                                 "spell_ppm_rate_2",
-                                Value::Float(self.spell_ppm_rate_2),
+                                Value::float(self.spell_ppm_rate_2),
                             ),
                             ArrayField::new(
                                 "spell_cooldown",
@@ -419,7 +419,7 @@ impl VanillaItem {
                             ArrayField::new(
                                 "spell_ppm_rate",
                                 "spell_ppm_rate_3",
-                                Value::Float(self.spell_ppm_rate_3),
+                                Value::float(self.spell_ppm_rate_3),
                             ),
                             ArrayField::new(
                                 "spell_cooldown",
@@ -455,7 +455,7 @@ impl VanillaItem {
                             ArrayField::new(
                                 "spell_ppm_rate",
                                 "spell_ppm_rate_4",
-                                Value::Float(self.spell_ppm_rate_4),
+                                Value::float(self.spell_ppm_rate_4),
                             ),
                             ArrayField::new(
                                 "spell_cooldown",
@@ -491,7 +491,7 @@ impl VanillaItem {
                             ArrayField::new(
                                 "spell_ppm_rate",
                                 "spell_ppm_rate_5",
-                                Value::Float(self.spell_ppm_rate_5),
+                                Value::float(self.spell_ppm_rate_5),
                             ),
                             ArrayField::new(
                                 "spell_cooldown",

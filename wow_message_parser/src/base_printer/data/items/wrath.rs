@@ -215,7 +215,7 @@ impl WrathItem {
             Field::new("arcane_res", Value::Int(self.arcane_res)),
             Field::new("delay", Value::Int(self.delay)),
             Field::new("ammo_type", Value::Int(self.ammo_type)),
-            Field::new("ranged_mod_range", Value::Float(self.ranged_mod_range)),
+            Field::new("ranged_mod_range", Value::float(self.ranged_mod_range)),
             Field::new("bonding", Value::Bonding(self.bonding)),
             Field::new("description", Value::String(self.description)),
             Field::new("page_text", Value::Int(self.page_text)),
@@ -245,7 +245,7 @@ impl WrathItem {
             ),
             Field::new(
                 "armor_damage_modifier",
-                Value::Float(self.armor_damage_modifier),
+                Value::float(self.armor_damage_modifier),
             ),
             Field::new("duration", Value::Int(self.duration)),
             Field::new("item_limit_category", Value::Int(self.item_limit_category)),
@@ -312,12 +312,12 @@ impl WrathItem {
                             ArrayField::new(
                                 "damage_minimum",
                                 "dmg_min1",
-                                Value::Float(self.dmg_min1),
+                                Value::float(self.dmg_min1),
                             ),
                             ArrayField::new(
                                 "damage_maximum",
                                 "dmg_max1",
-                                Value::Float(self.dmg_max1),
+                                Value::float(self.dmg_max1),
                             ),
                             ArrayField::new(
                                 "school",
@@ -332,12 +332,12 @@ impl WrathItem {
                             ArrayField::new(
                                 "damage_minimum",
                                 "dmg_min2",
-                                Value::Float(self.dmg_min2),
+                                Value::float(self.dmg_min2),
                             ),
                             ArrayField::new(
                                 "damage_maximum",
                                 "dmg_max2",
-                                Value::Float(self.dmg_max2),
+                                Value::float(self.dmg_max2),
                             ),
                             ArrayField::new(
                                 "school",
@@ -487,7 +487,7 @@ impl WrathItem {
                             ArrayField::new(
                                 "spell_ppm_rate",
                                 "spell_ppm_rate_1",
-                                Value::Float(self.spell_ppm_rate_1),
+                                Value::float(self.spell_ppm_rate_1),
                             ),
                             ArrayField::new(
                                 "spell_cooldown",
@@ -523,7 +523,7 @@ impl WrathItem {
                             ArrayField::new(
                                 "spell_ppm_rate",
                                 "spell_ppm_rate_2",
-                                Value::Float(self.spell_ppm_rate_2),
+                                Value::float(self.spell_ppm_rate_2),
                             ),
                             ArrayField::new(
                                 "spell_cooldown",
@@ -559,7 +559,7 @@ impl WrathItem {
                             ArrayField::new(
                                 "spell_ppm_rate",
                                 "spell_ppm_rate_3",
-                                Value::Float(self.spell_ppm_rate_3),
+                                Value::float(self.spell_ppm_rate_3),
                             ),
                             ArrayField::new(
                                 "spell_cooldown",
@@ -595,7 +595,7 @@ impl WrathItem {
                             ArrayField::new(
                                 "spell_ppm_rate",
                                 "spell_ppm_rate_4",
-                                Value::Float(self.spell_ppm_rate_4),
+                                Value::float(self.spell_ppm_rate_4),
                             ),
                             ArrayField::new(
                                 "spell_cooldown",
@@ -631,7 +631,7 @@ impl WrathItem {
                             ArrayField::new(
                                 "spell_ppm_rate",
                                 "spell_ppm_rate_5",
-                                Value::Float(self.spell_ppm_rate_5),
+                                Value::float(self.spell_ppm_rate_5),
                             ),
                             ArrayField::new(
                                 "spell_cooldown",

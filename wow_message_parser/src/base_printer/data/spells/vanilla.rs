@@ -251,7 +251,7 @@ impl VanillaSpell {
                 Value::Int(self.mana_per_second_per_level),
             ),
             Field::new("range_index", Value::Int(self.range_index)),
-            Field::new("speed", Value::Float(self.speed)),
+            Field::new("speed", Value::float(self.speed)),
             Field::new("modal_next_spell", Value::Int(self.modal_next_spell)),
             Field::new("stack_amount", Value::Int(self.stack_amount)),
             Field::new("equipped_item_class", Value::Int(self.equipped_item_class)),
@@ -419,12 +419,12 @@ impl VanillaSpell {
                             ArrayField::new(
                                 "dice_per_level",
                                 "effect_dice_per_level1",
-                                Value::Float(self.effect_dice_per_level1),
+                                Value::float(self.effect_dice_per_level1),
                             ),
                             ArrayField::new(
                                 "real_points_per_level",
                                 "effect_real_points_per_level1",
-                                Value::Float(self.effect_real_points_per_level1),
+                                Value::float(self.effect_real_points_per_level1),
                             ),
                             ArrayField::new(
                                 "base_points",
@@ -464,7 +464,7 @@ impl VanillaSpell {
                             ArrayField::new(
                                 "multiple_value",
                                 "effect_multiple_value1",
-                                Value::Float(self.effect_multiple_value1),
+                                Value::float(self.effect_multiple_value1),
                             ),
                             ArrayField::new(
                                 "chain_target",
@@ -489,12 +489,12 @@ impl VanillaSpell {
                             ArrayField::new(
                                 "effect_points_per_combo_point",
                                 "effect_points_per_combo_point1",
-                                Value::Float(self.effect_points_per_combo_point1),
+                                Value::float(self.effect_points_per_combo_point1),
                             ),
                             ArrayField::new(
                                 "damage_multiplier",
                                 "dmg_multiplier1",
-                                Value::Float(self.dmg_multiplier1),
+                                Value::float(self.dmg_multiplier1),
                             ),
                         ],
                     ),
@@ -515,12 +515,12 @@ impl VanillaSpell {
                             ArrayField::new(
                                 "dice_per_level",
                                 "effect_dice_per_level2",
-                                Value::Float(self.effect_dice_per_level2),
+                                Value::float(self.effect_dice_per_level2),
                             ),
                             ArrayField::new(
                                 "real_points_per_level",
                                 "effect_real_points_per_level2",
-                                Value::Float(self.effect_real_points_per_level2),
+                                Value::float(self.effect_real_points_per_level2),
                             ),
                             ArrayField::new(
                                 "base_points",
@@ -560,7 +560,7 @@ impl VanillaSpell {
                             ArrayField::new(
                                 "multiple_value",
                                 "effect_multiple_value2",
-                                Value::Float(self.effect_multiple_value2),
+                                Value::float(self.effect_multiple_value2),
                             ),
                             ArrayField::new(
                                 "chain_target",
@@ -585,12 +585,12 @@ impl VanillaSpell {
                             ArrayField::new(
                                 "effect_points_per_combo_point",
                                 "effect_points_per_combo_point2",
-                                Value::Float(self.effect_points_per_combo_point2),
+                                Value::float(self.effect_points_per_combo_point2),
                             ),
                             ArrayField::new(
                                 "damage_multiplier",
                                 "dmg_multiplier2",
-                                Value::Float(self.dmg_multiplier2),
+                                Value::float(self.dmg_multiplier2),
                             ),
                         ],
                     ),
@@ -611,12 +611,12 @@ impl VanillaSpell {
                             ArrayField::new(
                                 "dice_per_level",
                                 "effect_dice_per_level3",
-                                Value::Float(self.effect_dice_per_level3),
+                                Value::float(self.effect_dice_per_level3),
                             ),
                             ArrayField::new(
                                 "real_points_per_level",
                                 "effect_real_points_per_level3",
-                                Value::Float(self.effect_real_points_per_level3),
+                                Value::float(self.effect_real_points_per_level3),
                             ),
                             ArrayField::new(
                                 "base_points",
@@ -656,7 +656,7 @@ impl VanillaSpell {
                             ArrayField::new(
                                 "multiple_value",
                                 "effect_multiple_value3",
-                                Value::Float(self.effect_multiple_value3),
+                                Value::float(self.effect_multiple_value3),
                             ),
                             ArrayField::new(
                                 "chain_target",
@@ -681,12 +681,12 @@ impl VanillaSpell {
                             ArrayField::new(
                                 "effect_points_per_combo_point",
                                 "effect_points_per_combo_point3",
-                                Value::Float(self.effect_points_per_combo_point3),
+                                Value::float(self.effect_points_per_combo_point3),
                             ),
                             ArrayField::new(
                                 "damage_multiplier",
                                 "dmg_multiplier3",
-                                Value::Float(self.dmg_multiplier3),
+                                Value::float(self.dmg_multiplier3),
                             ),
                         ],
                     ),

@@ -1,4 +1,5 @@
 use crate::base_printer::Expansion;
+use ordered_float::OrderedFloat;
 use rusqlite::Connection;
 use std::cmp::Ordering;
 use std::collections::BTreeMap;
@@ -250,7 +251,7 @@ impl Ord for Array {
     }
 }
 
-#[derive(Debug, Clone, PartialOrd, PartialEq)]
+#[derive(Debug, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct ArrayFieldInfo {
     fields: Vec<ArrayField>,
 }
@@ -265,7 +266,7 @@ impl ArrayFieldInfo {
     }
 }
 
-#[derive(Debug, Clone, PartialOrd, PartialEq)]
+#[derive(Debug, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct ArrayInstances {
     instances: Vec<ArrayInstance>,
     field_info: ArrayFieldInfo,
@@ -291,16 +292,7 @@ impl ArrayInstances {
     }
 }
 
-impl Eq for ArrayInstances {}
-
-#[allow(clippy::derive_ord_xor_partial_ord)] // f32 can not derive Ord
-impl Ord for ArrayInstances {
-    fn cmp(&self, other: &Self) -> Ordering {
-        self.partial_cmp(other).unwrap()
-    }
-}
-
-#[derive(Debug, Clone, PartialOrd, PartialEq)]
+#[derive(Debug, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct ArrayInstance {
     is_default: bool,
     fields: Vec<ArrayField>,
@@ -325,16 +317,7 @@ impl ArrayInstance {
     }
 }
 
-impl Eq for ArrayInstance {}
-
-#[allow(clippy::derive_ord_xor_partial_ord)] // f32 can not derive Ord
-impl Ord for ArrayInstance {
-    fn cmp(&self, other: &Self) -> Ordering {
-        self.partial_cmp(other).unwrap()
-    }
-}
-
-#[derive(Debug, Clone, PartialOrd, PartialEq)]
+#[derive(Debug, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct ArrayField {
     pub name: &'static str,
     pub variable_name: &'static str,
@@ -355,15 +338,6 @@ impl ArrayField {
     }
 }
 
-impl Eq for ArrayField {}
-
-#[allow(clippy::derive_ord_xor_partial_ord)] // f32 can not derive Ord
-impl Ord for ArrayField {
-    fn cmp(&self, other: &Self) -> Ordering {
-        self.partial_cmp(other).unwrap()
-    }
-}
-
 pub struct Field {
     pub name: &'static str,
     pub value: Value,
@@ -375,14 +349,14 @@ impl Field {
     }
 }
 
-#[derive(Debug, Clone, PartialOrd, PartialEq)]
+#[derive(Debug, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub enum Value {
     String(String),
     Int(i32),
     Int64(i64),
     Uint(u32),
     Uint64(u64),
-    Float(f32),
+    Float(OrderedFloat<f32>),
 
     VanillaItemClassAndSubClass(vanilla_base::ItemClassAndSubClass),
     TbcItemClassAndSubClass(tbc_base::ItemClassAndSubClass),
@@ -458,16 +432,11 @@ pub enum Value {
     Gold(shared_base::gold_vanilla_tbc_wrath::Gold),
 }
 
-impl Eq for Value {}
-
-#[allow(clippy::derive_ord_xor_partial_ord)] // f32 can not derive Ord
-impl Ord for Value {
-    fn cmp(&self, other: &Self) -> Ordering {
-        self.partial_cmp(other).unwrap()
-    }
-}
-
 impl Value {
+    pub fn float(v: f32) -> Self {
+        Self::Float(OrderedFloat(v))
+    }
+
     pub const fn should_import(&self) -> bool {
         !matches!(
             self,
@@ -606,7 +575,7 @@ impl Value {
             Value::Int64(v) => (*v).to_string(),
             Value::Uint(v) => (*v).to_string(),
             Value::Uint64(v) => (*v).to_string(),
-            Value::Float(v) => float_format(*v),
+            Value::Float(v) => float_format(v.into_inner()),
             Value::VanillaItemClassAndSubClass(v) => {
                 format!("ItemClassAndSubClass::{v:?}")
             }
@@ -723,7 +692,7 @@ impl Value {
             Value::Int64(_) => Value::Int64(0),
             Value::Uint(_) => Value::Uint(0),
             Value::Uint64(_) => Value::Uint64(0),
-            Value::Float(_) => Value::Float(0.0),
+            Value::Float(_) => Value::float(0.0),
             Value::VanillaAllowedRace(_) => {
                 Value::VanillaAllowedRace(vanilla_base::AllowedRace::empty())
             }
