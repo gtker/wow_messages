@@ -1,8 +1,8 @@
 use crate::base_printer::Expansion;
+use hashbrown::HashMap;
 use ordered_float::OrderedFloat;
 use rusqlite::Connection;
 use std::cmp::Ordering;
-use std::collections::BTreeMap;
 
 pub mod tbc;
 pub mod vanilla;
@@ -133,7 +133,7 @@ impl Optimizations {
             let mut signed_min = 0;
             let mut signed_max = 0;
 
-            let mut different_values: BTreeMap<Value, Vec<u32>> = BTreeMap::new();
+            let mut different_values: HashMap<Value, Vec<u32>> = HashMap::new();
             for (item_id, field) in fields {
                 if let Some(v) = field.i64_value() {
                     if v > signed_max {
