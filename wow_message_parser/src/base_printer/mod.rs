@@ -160,13 +160,24 @@ pub(crate) fn print_base() {
         std::process::exit(1);
     }
 
-    let vanilla_data = get_data_from_sqlite_file(&vanilla_path, Expansion::Vanilla);
-    let tbc_data = get_data_from_sqlite_file(&tbc_path, Expansion::BurningCrusade);
-    let wrath_data = get_data_from_sqlite_file(&wrath_path, Expansion::WrathOfTheLichKing);
+    let vanilla = std::thread::spawn(move || {
+        let vanilla_data = get_data_from_sqlite_file(&vanilla_path, Expansion::Vanilla);
+        write_to_files(&vanilla_data, Expansion::Vanilla);
+    });
 
-    write_to_files(&vanilla_data, Expansion::Vanilla);
-    write_to_files(&tbc_data, Expansion::BurningCrusade);
-    write_to_files(&wrath_data, Expansion::WrathOfTheLichKing);
+    let tbc = std::thread::spawn(move || {
+        let tbc_data = get_data_from_sqlite_file(&tbc_path, Expansion::BurningCrusade);
+        write_to_files(&tbc_data, Expansion::BurningCrusade);
+    });
+
+    let wrath = std::thread::spawn(move || {
+        let wrath_data = get_data_from_sqlite_file(&wrath_path, Expansion::WrathOfTheLichKing);
+        write_to_files(&wrath_data, Expansion::WrathOfTheLichKing);
+    });
+
+    vanilla.join().unwrap();
+    tbc.join().unwrap();
+    wrath.join().unwrap();
 }
 
 fn write_to_files(data: &Data, expansion: Expansion) {

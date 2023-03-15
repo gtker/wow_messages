@@ -86,6 +86,8 @@ const CONTAINER_SELF_SIZE_FIELD: &str = "self.size";
 const GITHUB_REPO_URL: &str = "https://github.com/gtker/wow_messages";
 
 fn main() {
+    let base = std::thread::spawn(|| base_printer::print_base());
+
     let mut o = ParsedObjects::empty();
 
     load_files(&wowm_directory("login"), &mut o);
@@ -95,7 +97,6 @@ fn main() {
     let o = o.into_objects();
 
     wireshark_printer::print_wireshark(&o);
-    base_printer::print_base();
 
     print_main_types(&o);
 
@@ -110,6 +111,8 @@ fn main() {
     print_opcode_to_name();
 
     print_message_stats(&o);
+
+    base.join().unwrap();
 }
 
 fn print_main_types(o: &Objects) {
