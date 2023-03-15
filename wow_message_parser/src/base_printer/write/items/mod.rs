@@ -22,7 +22,7 @@ use crate::base_printer::write::items::all_items::all_items;
 use crate::base_printer::write::items::constructor::constructor;
 use crate::base_printer::write::items::definition::{definition, includes};
 use crate::base_printer::{Expansion, ImportFrom};
-use crate::file_utils::overwrite_autogenerate_if_not_the_same;
+use crate::file_utils::overwrite_autogenerate_if_not_same_contents;
 use crate::rust_printer::Writer;
 use hashbrown::HashMap;
 use std::path::Path;
@@ -102,7 +102,7 @@ pub(crate) fn write_definition(
 
     definition(&mut s, fields, arrays, expansion, ty_name, optimizations);
 
-    overwrite_autogenerate_if_not_the_same(path, s.inner());
+    overwrite_autogenerate_if_not_same_contents(s.inner(), path);
 }
 
 pub(crate) fn write_pub_use(
@@ -126,7 +126,7 @@ pub(crate) fn write_pub_use(
     );
     lib_functions(&mut s, ty_name);
 
-    overwrite_autogenerate_if_not_the_same(path, s.inner());
+    overwrite_autogenerate_if_not_same_contents(s.inner(), path);
 }
 
 fn lib_functions(s: &mut Writer, ty_name: &str) {
@@ -159,7 +159,7 @@ pub(crate) fn write_constructors(
 
     constructor(&mut s, things, expansion, ty_name, optimizations);
 
-    overwrite_autogenerate_if_not_the_same(path, s.inner());
+    overwrite_autogenerate_if_not_same_contents(s.inner(), path);
 }
 
 pub(crate) fn write_things(
@@ -187,7 +187,7 @@ pub(crate) fn write_things(
         optimizations,
     );
 
-    overwrite_autogenerate_if_not_the_same(path, s.inner());
+    overwrite_autogenerate_if_not_same_contents(s.inner(), path);
 }
 
 struct ConstNamer {

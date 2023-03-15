@@ -117,7 +117,7 @@ pub fn insert_between(contents: &str, start: &str, end: &str, replace_with: &str
     s
 }
 
-pub(crate) fn overwrite_autogenerate_if_not_the_same(path: &Path, s: &str) {
+pub(crate) fn overwrite_autogenerate_if_not_same_contents(s: &str, path: &Path) {
     let contents = match read_to_string(path) {
         Ok(e) => e,
         Err(e) => {

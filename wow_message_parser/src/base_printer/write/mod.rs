@@ -7,7 +7,7 @@ use crate::base_printer::data::area_triggers::{
 };
 use crate::base_printer::data::pet_names::Pet;
 use crate::base_printer::data::Trigger;
-use crate::file_utils::overwrite_autogenerate_if_not_the_same;
+use crate::file_utils::overwrite_autogenerate_if_not_same_contents;
 use crate::rust_printer::Writer;
 use std::path::Path;
 
@@ -41,7 +41,7 @@ pub(crate) fn write_exp(directory: &Path, data: &Data) {
     s.wln("];");
 
     let path = directory.join("exp.rs");
-    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+    overwrite_autogenerate_if_not_same_contents(s.inner(), &path);
 }
 
 pub(crate) fn write_stats(directory: &Path, data: &Data) {
@@ -72,7 +72,7 @@ pub(crate) fn write_stats(directory: &Path, data: &Data) {
     }
 
     let path = directory.join("base_stats.rs");
-    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+    overwrite_autogenerate_if_not_same_contents(s.inner(), &path);
 }
 
 pub(crate) fn write_skills(directory: &Path, data: &Data, expansion: Expansion) {
@@ -113,7 +113,7 @@ pub(crate) fn write_skills(directory: &Path, data: &Data, expansion: Expansion) 
     }
 
     let path = directory.join("skills.rs");
-    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+    overwrite_autogenerate_if_not_same_contents(s.inner(), &path);
 }
 
 pub(crate) fn write_initial_spells(directory: &Path, data: &Data) {
@@ -138,7 +138,7 @@ pub(crate) fn write_initial_spells(directory: &Path, data: &Data) {
     }
 
     let path = directory.join("spells.rs");
-    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+    overwrite_autogenerate_if_not_same_contents(s.inner(), &path);
 }
 
 fn get_string_name(s: &str) -> String {
@@ -217,7 +217,7 @@ pub(crate) fn write_positions(directory: &Path, data: &Data, expansion: Expansio
     s.wln("];");
 
     let path = directory.join("position").join("positions.rs");
-    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+    overwrite_autogenerate_if_not_same_contents(s.inner(), &path);
 }
 
 pub(crate) fn write_actions(directory: &Path, data: &Data) {
@@ -245,7 +245,7 @@ pub(crate) fn write_actions(directory: &Path, data: &Data) {
     }
 
     let path = directory.join("actions.rs");
-    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+    overwrite_autogenerate_if_not_same_contents(s.inner(), &path);
 }
 
 pub(crate) fn write_pet_names(directory: &Path, data: &Data, expansion: Expansion) {
@@ -282,7 +282,7 @@ pub(crate) fn write_pet_names(directory: &Path, data: &Data, expansion: Expansio
     }
 
     let path = directory.join("creature_family.rs");
-    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+    overwrite_autogenerate_if_not_same_contents(s.inner(), &path);
 }
 
 pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expansion) {
@@ -404,5 +404,5 @@ heroic_required_quest: {heroic_required_quest} }},"
     }
 
     let path = directory.join("trigger").join("triggers.rs");
-    overwrite_autogenerate_if_not_the_same(&path, s.inner());
+    overwrite_autogenerate_if_not_same_contents(s.inner(), &path);
 }
