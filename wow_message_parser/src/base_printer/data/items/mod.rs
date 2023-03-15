@@ -190,6 +190,8 @@ impl Optimizations {
                         v.push((s.1.clone(), s.0.clone()));
                     }
 
+                    v.sort_by(|a, b| a.0.cmp(&b.0));
+
                     FieldOptimization::Baseline(baseline.0.clone(), v)
                 } else {
                     FieldOptimization::None
