@@ -16,6 +16,7 @@ pub use tokio_impl::*;
 use std::io::{Read, Write};
 use wow_world_base::ExpectedOpcodeError;
 
+#[cfg(feature = "wrath")]
 use crate::wrath::{AchievementDone, AchievementInProgress};
 use crate::{DateTime, Guid};
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
@@ -206,8 +207,10 @@ pub(crate) fn monster_move_spline_size(splines: &[Vector3d]) -> usize {
     size
 }
 
+#[cfg(feature = "wrath")]
 const ACHIEVEMENT_SENTINEL_VALUE: u32 = u32::from_le_bytes((-1_i32).to_le_bytes());
 
+#[cfg(feature = "wrath")]
 pub(crate) fn read_achievement_done(
     r: &mut impl Read,
 ) -> Result<Vec<AchievementDone>, crate::errors::ParseError> {
@@ -229,6 +232,7 @@ pub(crate) fn read_achievement_done(
     Ok(done)
 }
 
+#[cfg(feature = "wrath")]
 pub(crate) fn write_achievement_done(
     done: &[AchievementDone],
     mut v: impl Write,
@@ -242,6 +246,7 @@ pub(crate) fn write_achievement_done(
     Ok(())
 }
 
+#[cfg(feature = "wrath")]
 pub(crate) fn read_achievement_in_progress(
     r: &mut impl Read,
 ) -> Result<Vec<AchievementInProgress>, crate::errors::ParseError> {
@@ -273,6 +278,7 @@ pub(crate) fn read_achievement_in_progress(
     Ok(in_progress)
 }
 
+#[cfg(feature = "wrath")]
 pub(crate) fn write_achievement_in_progress(
     in_progress: &[AchievementInProgress],
     mut v: impl Write,
