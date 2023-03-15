@@ -123,18 +123,10 @@ impl Optimizations {
         let mut field_optimizations = HashMap::new();
         let mut type_optimizations = HashMap::new();
 
-        for field in fields {
-            let fields = items.iter().map(|item| {
-                (
-                    item.entry,
-                    &item
-                        .fields
-                        .iter()
-                        .find(|a| a.name == field.name)
-                        .unwrap()
-                        .value,
-                )
-            });
+        for (field_index, field) in fields.iter().enumerate() {
+            let fields = items
+                .iter()
+                .map(|item| (item.entry, &item.fields[field_index].value));
 
             let mut unsigned_max = 0;
             let mut signed_min = 0;
