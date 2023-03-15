@@ -66,6 +66,10 @@ impl Writer {
         }
     }
 
+    pub(crate) fn into_inner(self) -> String {
+        self.inner
+    }
+
     pub(crate) fn inner(&self) -> &str {
         &self.inner
     }

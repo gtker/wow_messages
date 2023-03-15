@@ -175,8 +175,15 @@ pub(crate) fn write_things(
     let mut s = Writer::new();
 
     let (default_values, arrays) = get_default_values(things, optimizations);
-    const_default_values(&mut s, &default_values);
-    print_arrays(&mut s, &arrays);
+    let mut sorted = Vec::with_capacity(default_values.len() + arrays.len());
+    const_default_values(&default_values, &mut sorted);
+    print_arrays(&arrays, &mut sorted);
+
+    sorted.sort();
+
+    for line in sorted {
+        s.wln(line);
+    }
 
     all_items(
         &mut s,
@@ -198,13 +205,10 @@ struct ConstNamer {
 }
 
 impl ConstNamer {
-    const ALPHABET: [char; 62] = [
+    const ALPHABET: [char; 26] = [
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_',
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-        's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
     ];
-    const MAX_LETTER_INDEX: usize = 25; // Only letters can start identifier
 
     pub fn new() -> Self {
         Self {
@@ -216,11 +220,32 @@ impl ConstNamer {
     fn increment_index(&mut self) {
         self.alphabet_index += 1;
 
-        if (self.current.is_empty() && self.alphabet_index >= Self::MAX_LETTER_INDEX)
-            || self.alphabet_index >= Self::ALPHABET.len()
-        {
+        if self.alphabet_index >= Self::ALPHABET.len() {
             self.alphabet_index = 0;
-            self.current.push(Self::ALPHABET[self.alphabet_index]);
+
+            if self.current.is_empty() {
+                self.current.push(Self::ALPHABET[self.alphabet_index]);
+            } else {
+                let len = self.current.len();
+
+                let mut id = self.char_index();
+                while id + 1 >= Self::ALPHABET.len() {
+                    if self.current.is_empty() {
+                        for _ in 0..len + 1 {
+                            self.current.push(Self::ALPHABET[0]);
+                        }
+                        return;
+                    }
+
+                    id = self.char_index();
+                }
+
+                self.current.push(Self::ALPHABET[id + 1]);
+
+                while self.current.len() < len {
+                    self.current.push(Self::ALPHABET[0]);
+                }
+            }
         }
     }
 
@@ -234,6 +259,81 @@ impl ConstNamer {
         let mut s = self.current.clone();
         s.push(Self::ALPHABET[self.alphabet_index]);
         s
+    }
+
+    fn char_index(&mut self) -> usize {
+        let char = self.current.pop().unwrap();
+
+        Self::ALPHABET
+            .iter()
+            .enumerate()
+            .find(|(_, a)| a == &&char)
+            .unwrap()
+            .0
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use crate::base_printer::write::items::ConstNamer;
+
+    #[test]
+    fn namer() {
+        let mut n = ConstNamer::new();
+
+        assert_eq!("A", n.next());
+
+        for _ in 0..25 {
+            let _ = n.next();
+        }
+
+        assert_eq!("AA", n.next());
+        assert_eq!("AB", n.next());
+
+        for _ in 0..24 {
+            let _ = n.next();
+        }
+
+        assert_eq!("BA", n.next());
+        assert_eq!("BB", n.next());
+
+        for _ in 0..24 {
+            let _ = n.next();
+        }
+
+        assert_eq!("CA", n.next());
+        assert_eq!("CB", n.next());
+
+        for _ in 0..620 {
+            let _ = n.next();
+        }
+
+        assert_eq!("ZY", n.next());
+        assert_eq!("ZZ", n.next());
+        assert_eq!("AAA", n.next());
+
+        for _ in 0..24 {
+            let _ = n.next();
+        }
+
+        assert_eq!("AAZ", n.next());
+        assert_eq!("ABA", n.next());
+
+        for _ in 0..620 {
+            let _ = n.next();
+        }
+
+        assert_eq!("AYX", n.next());
+        assert_eq!("AYY", n.next());
+        assert_eq!("AYZ", n.next());
+
+        for _ in 0..24 {
+            let _ = n.next();
+        }
+
+        assert_eq!("AZY", n.next());
+        assert_eq!("AZZ", n.next());
+        assert_eq!("BAA", n.next());
     }
 }
 
@@ -327,8 +427,9 @@ fn get_default_values<'a>(
     (values_output, arrays_output)
 }
 
-fn print_arrays(s: &mut Writer, arrays: &Arrays) {
+fn print_arrays(arrays: &Arrays, sorted: &mut Vec<String>) {
     for ((array, ty_name), const_name) in arrays {
+        let mut s = Writer::new();
         s.w(format!("const {const_name}:&[{ty_name}]=&["));
 
         for instance in array.instances() {
@@ -345,11 +446,12 @@ fn print_arrays(s: &mut Writer, arrays: &Arrays) {
             s.w_no_indent("},");
         }
 
-        s.wln_no_indent("];");
+        s.w_no_indent("];");
+        sorted.push(s.into_inner());
     }
 }
 
-fn const_default_values(s: &mut Writer, default_values: &Values) {
+fn const_default_values(default_values: &Values, sorted: &mut Vec<String>) {
     for ((value, integer_size), const_name) in default_values {
         let ty_name = if let Some(t) = integer_size {
             t.string_value()
@@ -357,14 +459,12 @@ fn const_default_values(s: &mut Writer, default_values: &Values) {
             value.const_variable_type_name()
         };
 
-        s.wln(get_const_definition(
+        sorted.push(get_const_definition(
             const_name,
             ty_name,
             &value.to_string_value(),
         ));
     }
-
-    s.newline();
 }
 
 fn get_const_definition(const_name: &str, ty_name: &str, value: &str) -> String {
