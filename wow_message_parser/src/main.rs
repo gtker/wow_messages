@@ -86,7 +86,7 @@ const CONTAINER_SELF_SIZE_FIELD: &str = "self.size";
 const GITHUB_REPO_URL: &str = "https://github.com/gtker/wow_messages";
 
 fn main() {
-    let base = std::thread::spawn(|| base_printer::print_base());
+    let base = std::thread::spawn(base_printer::print_base);
 
     let mut o = ParsedObjects::empty();
 

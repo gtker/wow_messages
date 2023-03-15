@@ -63,7 +63,7 @@ mod test_vanilla {
 
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
-        let t = match t {
+        match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
             opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
         };
@@ -86,7 +86,7 @@ mod test_vanilla {
 
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
+        match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
             opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
         };
@@ -109,7 +109,7 @@ mod test_vanilla {
 
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
+        match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
             opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
         };
@@ -144,7 +144,7 @@ mod test_tbc {
 
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
-        let t = match t {
+        match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
             opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
         };
@@ -167,7 +167,7 @@ mod test_tbc {
 
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
+        match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
             opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
         };
@@ -190,7 +190,7 @@ mod test_tbc {
 
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
+        match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
             opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
         };
@@ -225,7 +225,7 @@ mod test_wrath {
 
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
-        let t = match t {
+        match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
             opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
         };
@@ -248,7 +248,7 @@ mod test_wrath {
 
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
+        match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
             opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
         };
@@ -271,7 +271,7 @@ mod test_wrath {
 
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
+        match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
             opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
         };

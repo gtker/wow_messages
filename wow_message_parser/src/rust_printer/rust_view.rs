@@ -593,7 +593,7 @@ impl RustObject {
         };
 
         Some(RustDefiner {
-            inner: &m,
+            inner: m,
             enumerators: enumerators.as_slice(),
             ty_name: ty_name.as_str(),
             int_ty: *int_ty,
@@ -840,7 +840,7 @@ impl<'a> RustDefiner<'a> {
         self.has_separate_if_statements
     }
     pub(crate) fn inner(&self) -> &RustMember {
-        &self.inner
+        self.inner
     }
     pub(crate) fn enumerators(&self) -> &'a [RustEnumerator] {
         self.enumerators
@@ -852,7 +852,7 @@ impl<'a> RustDefiner<'a> {
             .collect()
     }
     pub(crate) fn ty_name(&self) -> &str {
-        &self.ty_name
+        self.ty_name
     }
     pub(crate) fn int_ty(&self) -> IntegerType {
         self.int_ty
@@ -864,7 +864,7 @@ impl<'a> RustDefiner<'a> {
         self.is_elseif
     }
     pub(crate) fn original_ty_name(&self) -> &str {
-        &self.original_ty_name
+        self.original_ty_name
     }
     pub(crate) fn definer_type(&self) -> DefinerType {
         self.definer_type

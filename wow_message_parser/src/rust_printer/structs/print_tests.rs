@@ -182,8 +182,10 @@ fn print_test_case(
         },
     ));
 
+    let prefix = if e.empty_body() { "" } else { "let t = " };
+
     s.body_closing_with_semicolon(
-        "let t = match t",
+        format!("{prefix}match t"),
         |s| {
             if e.empty_body() {
                 s.wln(format!(

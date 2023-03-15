@@ -125,7 +125,7 @@ mod test {
 
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
-        let t = match t {
+        match t {
             ServerOpcodeMessage::CMD_XFER_INITIATE => {}
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}", opcode = opcode),
         };
@@ -148,7 +148,7 @@ mod test {
 
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
+        match t {
             ServerOpcodeMessage::CMD_XFER_INITIATE => {}
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}", opcode = opcode),
         };
@@ -171,7 +171,7 @@ mod test {
 
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
+        match t {
             ServerOpcodeMessage::CMD_XFER_INITIATE => {}
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}", opcode = opcode),
         };

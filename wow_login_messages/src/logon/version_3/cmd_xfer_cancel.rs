@@ -125,7 +125,7 @@ mod test {
 
         let header_size = 1;
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
-        let t = match t {
+        match t {
             ClientOpcodeMessage::CMD_XFER_CANCEL => {}
             opcode => panic!("incorrect opcode. Expected CMD_XFER_CANCEL, got {opcode:#?}", opcode = opcode),
         };
@@ -148,7 +148,7 @@ mod test {
 
         let header_size = 1;
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
+        match t {
             ClientOpcodeMessage::CMD_XFER_CANCEL => {}
             opcode => panic!("incorrect opcode. Expected CMD_XFER_CANCEL, got {opcode:#?}", opcode = opcode),
         };
@@ -171,7 +171,7 @@ mod test {
 
         let header_size = 1;
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
+        match t {
             ClientOpcodeMessage::CMD_XFER_CANCEL => {}
             opcode => panic!("incorrect opcode. Expected CMD_XFER_CANCEL, got {opcode:#?}", opcode = opcode),
         };
