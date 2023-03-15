@@ -248,11 +248,14 @@ fn get_default_values<'a>(
                 continue;
             }
 
-            insert_value(
-                &mut values,
-                &field.value.const_value(),
-                optimizations.integer_size(field),
-            )
+            let value = field.value.const_value();
+            let value_and_size = (value, optimizations.integer_size(field));
+
+            if let Some(g) = values.get_mut(&value_and_size) {
+                *g += 1;
+            } else {
+                values.insert(value_and_size, 1);
+            }
         }
     }
 
@@ -321,18 +324,6 @@ fn get_default_values<'a>(
     }
 
     (values_output, arrays_output)
-}
-
-fn insert_value(
-    map: &mut BTreeMap<(Value, Option<IntegerSize>), usize>,
-    value: &Value,
-    integer_size: Option<IntegerSize>,
-) {
-    if let Some(g) = map.get_mut(&(value.clone(), integer_size)) {
-        *g += 1;
-    } else {
-        map.insert((value.clone(), integer_size), 1);
-    }
 }
 
 fn print_arrays(s: &mut Writer, arrays: &Arrays) {
