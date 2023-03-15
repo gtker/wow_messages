@@ -243,6 +243,7 @@ fn get_default_values<'a>(
     optimizations: &Optimizations,
 ) -> (Values, Arrays<'a>) {
     let mut values: HashMap<(Value, Option<IntegerSize>), usize> = HashMap::new();
+    let mut arrays = HashMap::new();
     for thing in things {
         for (field_index, field) in thing.fields.iter().enumerate() {
             if optimizations.optimization(field_index).skip_field() {
@@ -258,10 +259,7 @@ fn get_default_values<'a>(
                 values.insert(value_and_size, 1);
             }
         }
-    }
 
-    let mut arrays = HashMap::new();
-    for thing in things {
         for array in &thing.arrays {
             if array.is_default() {
                 continue;
