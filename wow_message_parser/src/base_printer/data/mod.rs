@@ -10,8 +10,9 @@ use crate::base_printer::data::items::{get_items, Field, Optimizations};
 use crate::base_printer::data::pet_names::{get_pet_name_data, Pet, PetNames};
 use crate::base_printer::data::spells::get_spells;
 use crate::base_printer::write::items::GenericThing;
+use hashbrown::HashMap;
 use rusqlite::Connection;
-use std::collections::{BTreeMap, BTreeSet, HashMap};
+use std::collections::{BTreeMap, BTreeSet};
 use std::path::Path;
 
 pub(crate) struct Data {

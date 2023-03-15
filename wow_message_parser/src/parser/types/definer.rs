@@ -6,8 +6,8 @@ use crate::parser::types::{compare_name_and_tags, IntegerType};
 use crate::parser::utility;
 use crate::rust_printer::{field_name_to_rust_name, DefinerType};
 use crate::ENUM_SELF_VALUE_FIELD;
+use hashbrown::HashMap;
 use std::cmp::Ordering;
-use std::collections::HashMap;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) struct DefinerField {

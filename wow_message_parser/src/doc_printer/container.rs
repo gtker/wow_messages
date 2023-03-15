@@ -7,7 +7,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{Endianness, IntegerType};
 use crate::wowm_printer::get_struct_wowm_definition;
 use crate::{doc_printer, Container, ContainerType, DefinerType, ObjectTags, Objects};
-use std::collections::HashMap;
+use hashbrown::HashMap;
 use std::convert::TryInto;
 use std::fmt::Write;
 use std::io::Read;

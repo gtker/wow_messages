@@ -5,7 +5,7 @@ use crate::file_utils::create_and_overwrite_if_not_same_contents;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::path_utils::{doc_summary_path, docs_directory};
-use std::collections::HashMap;
+use hashbrown::HashMap;
 use std::fmt::Write;
 use std::fs::read_to_string;
 use std::path::PathBuf;
