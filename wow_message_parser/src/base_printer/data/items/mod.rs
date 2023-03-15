@@ -134,27 +134,25 @@ impl Optimizations {
             let mut signed_max = 0;
 
             let mut different_values: BTreeMap<Value, Vec<u32>> = BTreeMap::new();
-            for field in fields {
-                if let Some(v) = field.1.i64_value() {
+            for (item_id, field) in fields {
+                if let Some(v) = field.i64_value() {
                     if v > signed_max {
                         signed_max = v;
                     }
                     if v < signed_min {
                         signed_min = v;
                     }
-                }
-
-                if let Some(v) = field.1.u64_value() {
+                } else if let Some(v) = field.u64_value() {
                     if v > unsigned_max {
                         unsigned_max = v;
                     }
                 }
 
-                if let Some(v) = different_values.get_mut(field.1) {
-                    v.push(field.0);
+                if let Some(v) = different_values.get_mut(field) {
+                    v.push(item_id);
                 } else {
-                    let v = vec![field.0];
-                    different_values.insert(field.1.clone(), v);
+                    let v = vec![item_id];
+                    different_values.insert(field.clone(), v);
                 }
             }
 
