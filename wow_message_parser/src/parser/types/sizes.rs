@@ -58,6 +58,10 @@ impl Sizes {
         Self::default()
     }
 
+    pub(crate) fn from_sizes(minimum: usize, maximum: usize) -> Self {
+        Self { minimum, maximum }
+    }
+
     pub(crate) fn inc(&mut self, minimum: usize, maximum: usize) {
         self.minimum = self.minimum.saturating_add(minimum);
         self.maximum = self.maximum.saturating_add(maximum);

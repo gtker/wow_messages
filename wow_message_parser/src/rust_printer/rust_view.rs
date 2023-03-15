@@ -955,6 +955,24 @@ fn create_else_if_flag(
     };
     let flag_ty_name = &find_subject(current_scope, parent_scope, statement).original_ty;
 
+    let mut min = Sizes::new();
+    min.set_minimum(usize::MAX);
+    let mut max = Sizes::new();
+
+    for enumerator in &enumerators {
+        let mut sum = Sizes::new();
+        for member in enumerator.members() {
+            sum += member.sizes;
+        }
+
+        if sum.minimum() < min.minimum() {
+            min = sum;
+        }
+        if sum.maximum() > max.maximum() {
+            max = sum;
+        }
+    }
+
     // Create new Enum RustMember
     let rm = RustMember {
         name: statement.name().to_string(),
@@ -969,7 +987,7 @@ fn create_else_if_flag(
         },
         original_ty: struct_ty_name.to_string(),
         in_rust_type: true,
-        sizes: Sizes::new(),     // TODO Make real?
+        sizes: Sizes::from_sizes(min.minimum(), max.maximum()),
         tags: MemberTags::new(), // TODO Which tags should go in here?
     };
 
