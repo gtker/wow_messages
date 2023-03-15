@@ -444,6 +444,9 @@ fn print_definition(
         Type::VariableItemRandomProperty => {
             unreachable!("variable item random property id only in 2.4.3 and 3.3.5")
         }
+        Type::AddonArray => {
+            unreachable!("addon array only in 2.4.3/3.3.5")
+        }
     }
 
     if d.tags().compressed().is_some() {

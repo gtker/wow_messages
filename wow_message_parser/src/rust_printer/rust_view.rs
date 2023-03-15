@@ -408,6 +408,7 @@ pub(crate) enum RustType {
     Level16,
     Level32,
     VariableItemRandomProperty,
+    AddonArray,
 }
 
 impl RustType {
@@ -456,6 +457,7 @@ impl RustType {
             RustType::Enum { .. } | RustType::Flag { .. } | RustType::Struct { .. } => {
                 panic!("invalid conversion")
             }
+            RustType::AddonArray => Type::AddonArray,
         }
     }
 }
@@ -1299,6 +1301,7 @@ pub(crate) fn create_struct_member(
                 Type::Level16 => RustType::Level16,
                 Type::Level32 => RustType::Level32,
                 Type::VariableItemRandomProperty => RustType::VariableItemRandomProperty,
+                Type::AddonArray => RustType::AddonArray,
             };
 
             let name = d.name().to_string();

@@ -6,8 +6,7 @@ use crate::parser::types::tags::{MemberTags, TagString};
 use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
 use crate::{
     ObjectTags, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, PASTE_VERSIONS,
-    RUST_BASE_TYPE, SKIP_SERIALIZE, SKIP_STR, TEST_STR, UNIMPLEMENTED, VERSIONS,
-    ZERO_IS_ALWAYS_VALID,
+    RUST_BASE_TYPE, SKIP_STR, TEST_STR, UNIMPLEMENTED, VERSIONS, ZERO_IS_ALWAYS_VALID,
 };
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
@@ -20,7 +19,6 @@ pub(crate) struct ParsedTags {
     display: Option<String>,
     paste_versions: BTreeSet<WorldVersion>,
 
-    skip_serialize: BoolTag,
     is_test: BoolTag,
     skip: BoolTag,
     unimplemented: BoolTag,
@@ -56,7 +54,6 @@ impl ParsedTags {
 
         self.paste_versions.append(&mut t.paste_versions);
 
-        self.skip_serialize.append(t.skip_serialize);
         self.is_test.append(t.is_test);
         self.skip.append(t.skip);
         self.unimplemented.append(t.unimplemented);
@@ -111,7 +108,6 @@ impl ParsedTags {
             self.compressed,
             self.comment,
             self.display,
-            self.skip_serialize.into_bool(),
         )
     }
 
@@ -192,8 +188,6 @@ impl ParsedTags {
             }
         } else if key == COMPRESSED {
             self.compressed = Some(value.to_owned());
-        } else if key == SKIP_SERIALIZE {
-            self.skip_serialize.insert(value);
         } else if key == COMMENT {
             if let Some(comment) = &mut self.comment {
                 comment.add(value);

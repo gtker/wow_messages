@@ -11,7 +11,7 @@ use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
-use crate::parser::types::version::{LoginVersion, Version};
+use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
 use crate::rust_printer::rust_view::RustObject;
 use crate::rust_printer::{
     DefinerType, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
@@ -538,6 +538,15 @@ impl Container {
                     format!("crate::{}", version.as_major_world().module_name()),
                     "AchievementInProgress".to_string(),
                 ),
+                Type::AddonArray => {
+                    let tags = ObjectTags::new_with_world_versions(&[
+                        MajorWorldVersion::BurningCrusade,
+                        MajorWorldVersion::Wrath,
+                    ]);
+
+                    let pre = object_prefix(self.tags(), &tags, version, "Addon");
+                    (pre, "Addon".to_string())
+                }
 
                 Type::Gold => {
                     let pre = if self.tags().is_in_base() {

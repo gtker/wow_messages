@@ -106,13 +106,7 @@ pub(crate) fn print_write_definition(
 ) {
     let name = d.name();
 
-    if !(d.used_as_size_in().is_some() && d.tags().skip_serialize()) {
-        s.wln(format!("// {name}: {type_name}", type_name = d.ty().str()));
-    } else {
-        s.wln(format!(
-            "// {name} is included in the struct but explicitly excluded due to its `skip_serialize` tag.",
-        ));
-    }
+    s.wln(format!("// {name}: {type_name}", type_name = d.ty().str()));
 
     match d.ty() {
         Type::Integer(int_type) => {
@@ -126,18 +120,16 @@ pub(crate) fn print_write_definition(
                 0
             };
 
-            if !(d.used_as_size_in().is_some() && d.tags().skip_serialize()) {
-                print_write_field_integer(
-                    s,
-                    d.name(),
-                    variable_prefix,
-                    int_type,
-                    d.used_as_size_in(),
-                    d.value(),
-                    size,
-                    postfix,
-                );
-            }
+            print_write_field_integer(
+                s,
+                d.name(),
+                variable_prefix,
+                int_type,
+                d.used_as_size_in(),
+                d.value(),
+                size,
+                postfix,
+            );
         }
         Type::Bool(i) => {
             s.wln(format!(
@@ -256,6 +248,11 @@ pub(crate) fn print_write_definition(
             s.wln(format!(
                  "crate::util::write_achievement_in_progress({variable_prefix}{name}.as_slice(), &mut w){postfix}?;",
              ));
+        }
+        Type::AddonArray => {
+            s.wln(format!(
+                "crate::util::write_addon_array({variable_prefix}{name}.as_slice(), &mut w){postfix}?;",
+            ));
         }
 
         Type::VariableItemRandomProperty

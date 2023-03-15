@@ -183,7 +183,8 @@ fn can_derive_default(members: &[&RustMember]) -> bool {
 fn can_derive_copy(members: &[&RustMember]) -> bool {
     for m in members {
         match m.ty() {
-            RustType::AchievementInProgressArray
+            RustType::AddonArray
+            | RustType::AchievementInProgressArray
             | RustType::AchievementDoneArray
             | RustType::MonsterMoveSpline
             | RustType::UpdateMask

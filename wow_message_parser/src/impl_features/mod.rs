@@ -32,6 +32,7 @@ pub(crate) enum Feature {
     EnchantMaskTypes,
     InspectTalentGearMaskTypes,
     VariableItemRandomPropertyTypes,
+    AddonArrayType,
 
     AchievementDoneArrayType,
     AchievementInProgressType,
@@ -261,6 +262,7 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
         Type::EnchantMask => f.add(Feature::EnchantMaskTypes),
         Type::InspectTalentGearMask => f.add(Feature::InspectTalentGearMaskTypes),
         Type::VariableItemRandomProperty => f.add(Feature::VariableItemRandomPropertyTypes),
+        Type::AddonArray => f.add(Feature::AddonArrayType),
     }
 }
 

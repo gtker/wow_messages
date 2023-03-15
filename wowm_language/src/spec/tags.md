@@ -365,18 +365,3 @@ struct S {
 }
 ```
 
-#### `skip_serialize`
-
-Specifies that an integer field is used to determine an array size, but will not be written into the packet. This is useful in cases where a fixed size array is required, but the client does not expect a size field before the array. One of such occurences is [SMSG_ADDON_INFO](docs/smsg_addon_info.md). Do note that `skip_serialize` is only a solution on the server side. Currently any message that contains a `skip_serialize` field cannot be used in a client application. 
-
-```rust,ignore
-struct S {
-    u32 number_of_items {
-        skip_serialize = "true";
-    }
-    u32[number_of_items];
-    Bool some_other_field;
-}
-```
-
-In the above example, only the array and the bool will be written into the packet.

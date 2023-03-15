@@ -2,7 +2,7 @@ use std::collections::BTreeSet;
 use std::fmt::Write;
 
 use crate::file_utils::{get_import_path, get_shared_module_name};
-use crate::parser::types::version::{AllVersions, Version};
+use crate::parser::types::version::{AllVersions, MajorWorldVersion, Version};
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::Objects;
 
@@ -62,6 +62,25 @@ impl ObjectTags {
 
         Self {
             all_versions: v.0,
+            description: None,
+            comment: None,
+            compressed: false,
+            is_test: false,
+            skip: false,
+            unimplemented: false,
+            rust_base_ty: false,
+            zero_is_always_valid: false,
+        }
+    }
+
+    pub(crate) fn new_with_world_versions(versions: &[MajorWorldVersion]) -> Self {
+        let mut s = BTreeSet::new();
+        for v in versions {
+            s.insert(v.as_world());
+        }
+
+        Self {
+            all_versions: AllVersions::World(s),
             description: None,
             comment: None,
             compressed: false,
@@ -335,8 +354,6 @@ pub(crate) struct MemberTags {
     compressed: Option<String>,
     comment: Option<TagString>,
     display: Option<String>,
-
-    skip_serialize: bool,
 }
 
 impl MemberTags {
@@ -345,14 +362,12 @@ impl MemberTags {
         compressed: Option<String>,
         comment: Option<TagString>,
         display: Option<String>,
-        skip_serialize: bool,
     ) -> Self {
         Self {
             description,
             compressed,
             comment,
             display,
-            skip_serialize,
         }
     }
 
@@ -370,10 +385,6 @@ impl MemberTags {
 
     pub(crate) fn is_compressed(&self) -> bool {
         self.compressed.is_some()
-    }
-
-    pub(crate) fn skip_serialize(&self) -> bool {
-        self.skip_serialize
     }
 
     pub(crate) fn comment(&self) -> Option<&TagString> {

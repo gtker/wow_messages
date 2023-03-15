@@ -5,10 +5,11 @@ use crate::parser::types::objects::conversion::{get_container, get_definer, get_
 use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, ParsedArrayType};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::sizes::{
-    update_mask_max, Sizes, AURA_MASK_MAX_SIZE, AURA_MASK_MIN_SIZE, DATETIME_SIZE, GOLD_SIZE,
-    GUID_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, NAMED_GUID_MAX_SIZE, NAMED_GUID_MIN_SIZE,
-    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
-    VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
+    update_mask_max, Sizes, ADDON_ARRAY_MAX, ADDON_ARRAY_MIN, AURA_MASK_MAX_SIZE,
+    AURA_MASK_MIN_SIZE, DATETIME_SIZE, GOLD_SIZE, GUID_SIZE, LEVEL16_SIZE, LEVEL32_SIZE,
+    LEVEL_SIZE, NAMED_GUID_MAX_SIZE, NAMED_GUID_MIN_SIZE, PACKED_GUID_MAX_SIZE,
+    PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
+    VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
 };
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Endianness, FloatingPointType, IntegerType};
@@ -46,6 +47,7 @@ pub(crate) enum ParsedType {
     EnchantMask,
     InspectTalentGearMask,
     VariableItemRandomProperty,
+    AddonArray,
     Gold,
     Level,
     Level16,
@@ -83,6 +85,7 @@ impl ParsedType {
             ParsedType::VariableItemRandomProperty => {
                 Type::VARIABLE_ITEM_RANDOM_PROPERTY_NAME.to_string()
             }
+            ParsedType::AddonArray => Type::ADDON_ARRAY_NAME.to_string(),
         }
     }
 
@@ -115,6 +118,7 @@ impl ParsedType {
             ParsedType::VariableItemRandomProperty => {
                 Type::VARIABLE_ITEM_RANDOM_PROPERTY_NAME.to_string()
             }
+            ParsedType::AddonArray => Type::ADDON_ARRAY_RUST_NAME.to_string(),
         }
     }
 
@@ -248,6 +252,7 @@ impl ParsedType {
                 VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
                 VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
             ),
+            ParsedType::AddonArray => sizes.inc(ADDON_ARRAY_MIN, ADDON_ARRAY_MAX),
         }
 
         sizes
@@ -327,6 +332,7 @@ impl ParsedType {
             Type::ENCHANT_MASK_NAME => Self::EnchantMask,
             Type::INSPECT_TALENT_GEAR_MASK_NAME => Self::InspectTalentGearMask,
             Type::VARIABLE_ITEM_RANDOM_PROPERTY_NAME => Self::VariableItemRandomProperty,
+            Type::ADDON_ARRAY_NAME => Self::AddonArray,
             _ => Self::Identifier {
                 s: s.to_string(),
                 upcast: None,
@@ -360,7 +366,8 @@ impl ParsedType {
                         ParsedType::CString => {
                             Self::Array(ParsedArray::new(ParsedArrayType::CString, size))
                         }
-                        ParsedType::VariableItemRandomProperty
+                        ParsedType::AddonArray
+                        | ParsedType::VariableItemRandomProperty
                         | ParsedType::NamedGuid
                         | ParsedType::Level16
                         | ParsedType::Level32

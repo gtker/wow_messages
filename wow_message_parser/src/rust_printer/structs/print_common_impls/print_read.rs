@@ -357,6 +357,11 @@ fn print_read_definition(
                  "{assignment_prefix}{name} = crate::util::read_achievement_in_progress(&mut r){postfix}?;",
              ));
         }
+        Type::AddonArray => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = crate::util::read_addon_array(&mut r){postfix}?;",
+            ));
+        }
 
         Type::VariableItemRandomProperty
         | Type::NamedGuid
@@ -702,9 +707,9 @@ fn print_read_final_enums(s: &mut Writer, rds: &[RustDefiner]) {
 pub(crate) fn print_read(s: &mut Writer, e: &Container, o: &Objects, prefix: &str, postfix: &str) {
     if e.all_definitions()
         .iter()
-        .any(|a| a.tags().skip_serialize())
+        .any(|a| matches!(a.ty(), Type::AddonArray))
     {
-        s.wln("panic!(\"SKIP_SERIALIZE_READ_PANIC This message has a `skip_serialize` tag which makes it impossible to generate a correct read implementation for it.\")");
+        s.wln("panic!(\"SKIP_SERIALIZE_READ_PANIC This message has an `AddonArray` tag which makes it impossible to generate a correct read implementation for it.\")");
         return;
     }
 

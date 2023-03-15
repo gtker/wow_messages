@@ -466,12 +466,7 @@ pub(crate) fn print_rust_members_sizes(
     is_elseif: Option<bool>,
     prefix: &str,
 ) {
-    let mut i = 0;
-    for m in members {
-        if m.tags().skip_serialize() {
-            continue;
-        }
-
+    for (i, m) in members.iter().enumerate() {
         let is_elseif = if let Some(b) = is_elseif { b } else { true };
         if i == 0 && is_elseif {
             s.w("");
@@ -480,8 +475,6 @@ pub(crate) fn print_rust_members_sizes(
         }
 
         print_size_of_ty_rust_view(s, m, prefix);
-
-        i += 1;
     }
 }
 
@@ -507,6 +500,9 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
         }
         RustType::AchievementDoneArray => {
             format!("{prefix}{name}.len() * 4")
+        }
+        RustType::AddonArray => {
+            format!("{prefix}{name}.len() * 8")
         }
         RustType::AchievementInProgressArray => {
             format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",)

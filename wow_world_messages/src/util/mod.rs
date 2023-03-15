@@ -16,8 +16,11 @@ pub use tokio_impl::*;
 use std::io::{Read, Write};
 use wow_world_base::ExpectedOpcodeError;
 
+#[cfg(any(feature = "wrath", feature = "tbc"))]
+use crate::shared::addon_tbc_wrath::Addon;
 #[cfg(feature = "wrath")]
 use crate::wrath::{AchievementDone, AchievementInProgress};
+
 use crate::{DateTime, Guid};
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 
@@ -288,6 +291,15 @@ pub(crate) fn write_achievement_in_progress(
     }
 
     v.write_all(ACHIEVEMENT_SENTINEL_VALUE.to_le_bytes().as_slice())?;
+
+    Ok(())
+}
+
+#[cfg(any(feature = "wrath", feature = "tbc"))]
+pub(crate) fn write_addon_array(addons: &[Addon], mut w: impl Write) -> Result<(), std::io::Error> {
+    for addon in addons {
+        addon.write_into_vec(&mut w)?;
+    }
 
     Ok(())
 }

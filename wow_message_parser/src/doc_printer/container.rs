@@ -284,6 +284,9 @@ fn print_container_example_definition(
         Type::VariableItemRandomProperty => {
             unimplemented!("variable item random property id example")
         }
+        Type::AddonArray => {
+            unimplemented!("addon array example")
+        }
     }
     s.wln(comment);
 }
@@ -574,6 +577,7 @@ fn print_container_field(
                         )
                     }
                 },
+                Type::AddonArray => "[AddonArray](../spec/addon-array.md)".to_string(),
                 Type::AchievementDoneArray => {
                     "[AchievementDoneArray](../spec/achievement-done-array.md)".to_string()
                 }
