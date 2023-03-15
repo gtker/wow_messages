@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common.wowm:307`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common.wowm#L307):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common.wowm:479`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common.wowm#L479):
 /// ```text
 /// enum UnitStandState : u8 {
 ///     STAND = 0;

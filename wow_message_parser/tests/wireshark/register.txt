@@ -4266,7 +4266,7 @@
         },
         { &hf_woww_text_emote,
             { "Text Emote", "woww.text.emote",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                FT_UINT32, BASE_HEX_DEC, VALS(e_text_emote_strings), 0,
                 NULL, HFILL
             }
         },

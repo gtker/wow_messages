@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common_2_4_3.wowm:173`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common_2_4_3.wowm#L173):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/social_common_2_4_3.wowm:359`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/social_common_2_4_3.wowm#L359):
 /// ```text
 /// enum Language : u8 {
 ///     UNIVERSAL = 0;

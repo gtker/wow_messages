@@ -221,6 +221,8 @@ pub use stable_result::*;
 pub use crate::shared::status_id_vanilla_tbc_wrath::*;
 pub(crate) mod talent_info_type;
 pub use talent_info_type::*;
+pub(crate) mod text_emote;
+pub use text_emote::*;
 pub use crate::shared::timer_type_vanilla_vanilla_tbc_wrath::*;
 pub use crate::shared::title_earn_status_tbc_wrath::*;
 pub use crate::shared::trade_status_vanilla_tbc_wrath::*;

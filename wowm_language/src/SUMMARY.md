@@ -238,6 +238,7 @@
 - [StableResult](docs/stableresult.md)
 - [StatusId](docs/statusid.md)
 - [TalentInfoType](docs/talentinfotype.md)
+- [TextEmote](docs/textemote.md)
 - [TimerType](docs/timertype.md)
 - [TitleEarnStatus](docs/titleearnstatus.md)
 - [TradeStatus](docs/tradestatus.md)
