@@ -1,4 +1,4 @@
-struct Talent {
+struct PreviewTalent {
     u32 talent;
     u32 rank;
 } {
@@ -7,7 +7,7 @@ struct Talent {
 
 cmsg CMSG_LEARN_PREVIEW_TALENTS = 0x04C1 {
     u32 amount_of_talents;
-    Talent[amount_of_talents] talents;
+    PreviewTalent[amount_of_talents] talents;
 } {
     versions = "3.3.5";
 }

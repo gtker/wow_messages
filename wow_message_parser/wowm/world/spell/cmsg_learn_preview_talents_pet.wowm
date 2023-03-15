@@ -1,7 +1,7 @@
 cmsg CMSG_LEARN_PREVIEW_TALENTS_PET = 0x04C2 {
     Guid pet;
     u32 amount_of_talents;
-    Talent[amount_of_talents] talents;
+    PreviewTalent[amount_of_talents] talents;
 } {
     versions = "3.3.5";
 }

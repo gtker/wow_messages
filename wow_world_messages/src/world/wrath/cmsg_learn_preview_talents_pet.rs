@@ -1,7 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::wrath::Talent;
+use crate::wrath::PreviewTalent;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_learn_preview_talents_pet.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_learn_preview_talents_pet.wowm#L1):
@@ -9,12 +9,12 @@ use crate::wrath::Talent;
 /// cmsg CMSG_LEARN_PREVIEW_TALENTS_PET = 0x04C2 {
 ///     Guid pet;
 ///     u32 amount_of_talents;
-///     Talent[amount_of_talents] talents;
+///     PreviewTalent[amount_of_talents] talents;
 /// }
 /// ```
 pub struct CMSG_LEARN_PREVIEW_TALENTS_PET {
     pub pet: Guid,
-    pub talents: Vec<Talent>,
+    pub talents: Vec<PreviewTalent>,
 }
 
 impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS_PET {
@@ -31,7 +31,7 @@ impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS_PET {
         // amount_of_talents: u32
         w.write_all(&(self.talents.len() as u32).to_le_bytes())?;
 
-        // talents: Talent[amount_of_talents]
+        // talents: PreviewTalent[amount_of_talents]
         for i in self.talents.iter() {
             i.write_into_vec(&mut w)?;
         }
@@ -49,11 +49,11 @@ impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS_PET {
         // amount_of_talents: u32
         let amount_of_talents = crate::util::read_u32_le(&mut r)?;
 
-        // talents: Talent[amount_of_talents]
+        // talents: PreviewTalent[amount_of_talents]
         let talents = {
             let mut talents = Vec::with_capacity(amount_of_talents as usize);
             for i in 0..amount_of_talents {
-                talents.push(Talent::read(&mut r)?);
+                talents.push(PreviewTalent::read(&mut r)?);
             }
             talents
         };
@@ -72,7 +72,7 @@ impl CMSG_LEARN_PREVIEW_TALENTS_PET {
     pub(crate) fn size(&self) -> usize {
         8 // pet: Guid
         + 4 // amount_of_talents: u32
-        + self.talents.len() * 8 // talents: Talent[amount_of_talents]
+        + self.talents.len() * 8 // talents: PreviewTalent[amount_of_talents]
     }
 }
 
