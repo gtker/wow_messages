@@ -4,7 +4,7 @@ use crate::base_printer::write::items::definition::includes;
 use crate::base_printer::write::items::GenericThing;
 use crate::base_printer::{Expansion, ImportFrom};
 use crate::rust_printer::Writer;
-use std::collections::BTreeMap;
+use hashbrown::HashMap;
 
 pub fn unobtainable_item(entry: u32, extra_flags: i32, name: &str) -> bool {
     const UNOBTAINABLE_FLAG: i32 = 0x04;
@@ -49,8 +49,8 @@ pub(crate) fn all_items(
     expansion: Expansion,
     unobtainable: impl Fn(&GenericThing) -> bool,
     ty_name: &str,
-    default_values: &BTreeMap<(Value, Option<IntegerSize>), String>,
-    arrays: &BTreeMap<(&ArrayInstances, &'static str), String>,
+    default_values: &HashMap<(Value, Option<IntegerSize>), String>,
+    arrays: &HashMap<(&ArrayInstances, &'static str), String>,
     optimizations: &Optimizations,
 ) {
     includes(

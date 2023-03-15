@@ -24,6 +24,7 @@ use crate::base_printer::write::items::definition::{definition, includes};
 use crate::base_printer::{Expansion, ImportFrom};
 use crate::file_utils::overwrite_autogenerate_if_not_the_same;
 use crate::rust_printer::Writer;
+use hashbrown::HashMap;
 use std::path::Path;
 
 pub struct GenericThing {
@@ -234,8 +235,8 @@ impl ConstNamer {
     }
 }
 
-type Values = BTreeMap<(Value, Option<IntegerSize>), String>;
-type Arrays<'a> = BTreeMap<(&'a ArrayInstances, &'static str), String>;
+type Values = HashMap<(Value, Option<IntegerSize>), String>;
+type Arrays<'a> = HashMap<(&'a ArrayInstances, &'static str), String>;
 
 fn get_default_values<'a>(
     things: &'a [GenericThing],
@@ -296,8 +297,8 @@ fn get_default_values<'a>(
     });
 
     let mut namer = ConstNamer::new();
-    let mut values_output = BTreeMap::new();
-    let mut arrays_output = BTreeMap::new();
+    let mut values_output = HashMap::new();
+    let mut arrays_output = HashMap::new();
     for value in values {
         match value {
             ValuesWrapper::Values((value, amount)) => {

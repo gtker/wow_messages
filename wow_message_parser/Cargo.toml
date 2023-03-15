@@ -17,3 +17,4 @@ flate2 = { version = "1.0.24", features = ["zlib"], default-features = false }
 rusqlite = { version = "0.28.0", features = ["bundled"] }
 wow_world_base = { workspace = true, features = ["vanilla", "tbc", "wrath"] }
 ordered-float = "3.4.0"
+hashbrown = "0.13.2"
