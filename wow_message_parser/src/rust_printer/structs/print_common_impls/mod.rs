@@ -557,13 +557,12 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                         }
                     }
                 },
-                ArrayType::Struct(_) => match array.size() {
-                    ArraySize::Fixed(fixed_value) => match m.constant_sized().is_some() {
-                        true => format!(
-                            "{fixed_value} * {inner_type_size}",
-                            inner_type_size = inner_sizes.maximum(),
-                        ),
-                        false => format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",),
+                ArrayType::Struct(e) => match array.size() {
+                    ArraySize::Fixed(fixed_value) => match e.sizes().is_constant() {
+                        Some(size) => {
+                            format!("{fixed_value} * {size}")
+                        }
+                        None => format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",),
                     },
                     ArraySize::Variable(_) | ArraySize::Endless => {
                         // ZLib compression is not predictable, so we need to serialise each array member into a Vec
