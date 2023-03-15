@@ -1,5 +1,5 @@
 struct PreviewTalent {
-    u32 talent;
+    Talent talent;
     u32 rank;
 } {
     versions = "3.3.5";

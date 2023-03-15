@@ -348,8 +348,6 @@ pub mod cmsg_item_query_single_tbc_wrath;
 pub mod cmsg_item_text_query_vanilla_tbc;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod cmsg_join_channel_tbc_wrath;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub mod cmsg_learn_talent_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod cmsg_leave_channel_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]

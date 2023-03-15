@@ -237,6 +237,7 @@
 - [SplineFlag](docs/splineflag.md)
 - [StableResult](docs/stableresult.md)
 - [StatusId](docs/statusid.md)
+- [Talent](docs/talent.md)
 - [TalentInfoType](docs/talentinfotype.md)
 - [TextEmote](docs/textemote.md)
 - [TimerType](docs/timertype.md)

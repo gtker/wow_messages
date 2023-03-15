@@ -1,0 +1,4500 @@
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/cmsg_learn_talent.wowm:1089`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/cmsg_learn_talent.wowm#L1089):
+/// ```text
+/// enum Talent : u32 {
+///     BURNING_SOUL = 23;
+///     MOLTEN_SHIELDS = 24;
+///     IMPROVED_SCORCH = 25;
+///     IMPROVED_FIREBALL = 26;
+///     IMPROVED_FIRE_BLAST = 27;
+///     FLAME_THROWING = 28;
+///     PYROBLAST = 29;
+///     IMPACT = 30;
+///     WORLD_IN_FLAMES = 31;
+///     BLAST_WAVE = 32;
+///     CRITICAL_MASS = 33;
+///     IGNITE = 34;
+///     FIRE_POWER = 35;
+///     COMBUSTION = 36;
+///     IMPROVED_FROSTBOLT = 37;
+///     FROSTBITE = 38;
+///     PIERCING_ICE = 61;
+///     ICE_FLOES = 62;
+///     IMPROVED_BLIZZARD = 63;
+///     IMPROVED_CONE_OF_COLD = 64;
+///     PERMAFROST = 65;
+///     FROST_CHANNELING = 66;
+///     SHATTER = 67;
+///     WINTERS_CHILL = 68;
+///     ICY_VEINS = 69;
+///     FROST_WARDING = 70;
+///     ICE_BARRIER = 71;
+///     COLD_SNAP = 72;
+///     ICE_SHARDS = 73;
+///     ARCANE_SUBTLETY = 74;
+///     ARCANE_CONCENTRATION = 75;
+///     ARCANE_FOCUS = 76;
+///     ARCANE_MIND = 77;
+///     ARCANE_STABILITY = 80;
+///     SPELL_IMPACT = 81;
+///     MAGIC_ATTUNEMENT = 82;
+///     ARCANE_SHIELDING = 83;
+///     ARCANE_FORTITUDE = 85;
+///     PRESENCE_OF_MIND = 86;
+///     ARCANE_POWER = 87;
+///     IMPROVED_COUNTERSPELL = 88;
+///     DEEP_WOUNDS = 121;
+///     SWORD_SPECIALIZATION = 123;
+///     IMPROVED_HEROIC_STRIKE = 124;
+///     WARRIOR_MACE_SPECIALIZATION = 125;
+///     IMPROVED_CHARGE = 126;
+///     IMPROVED_REND = 127;
+///     TACTICAL_MASTERY = 128;
+///     IMPROVED_HAMSTRING = 129;
+///     WARRIOR_DEFLECTION = 130;
+///     IMPROVED_OVERPOWER = 131;
+///     POLEAXE_SPECIALIZATION = 132;
+///     SWEEPING_STRIKES = 133;
+///     WARRIOR_WEAPON_MASTERY = 134;
+///     MORTAL_STRIKE = 135;
+///     WARRIOR_TWO_HANDED_WEAPON_SPECIALIZATION = 136;
+///     ANGER_MANAGEMENT = 137;
+///     WARRIOR_ANTICIPATION = 138;
+///     WARRIOR_TOUGHNESS = 140;
+///     IMPROVED_THUNDER_CLAP = 141;
+///     IMPROVED_BLOODRAGE = 142;
+///     INCITE = 144;
+///     PUNCTURE = 146;
+///     IMPROVED_REVENGE = 147;
+///     VIGILANCE = 148;
+///     GAG_ORDER = 149;
+///     IMPROVED_DISCIPLINES = 150;
+///     IMPROVED_DISARM = 151;
+///     CONCUSSION_BLOW = 152;
+///     WARRIOR_LAST_STAND = 153;
+///     COMMANDING_PRESENCE = 154;
+///     ENRAGE = 155;
+///     WARRIOR_FLURRY = 156;
+///     CRUELTY = 157;
+///     BOOMING_VOICE = 158;
+///     UNBRIDLED_WRATH = 159;
+///     PIERCING_HOWL = 160;
+///     IMPROVED_DEMORALIZING_SHOUT = 161;
+///     DEATH_WISH = 165;
+///     IMPROVED_CLEAVE = 166;
+///     BLOODTHIRST = 167;
+///     ROGUE_PRECISION = 181;
+///     CLOSE_QUARTERS_COMBAT = 182;
+///     ROGUE_MACE_SPECIALIZATION = 184;
+///     ROGUE_LIGHTNING_REFLEXES = 186;
+///     ROGUE_DEFLECTION = 187;
+///     IMPROVED_SINISTER_STRIKE = 201;
+///     IMPROVED_GOUGE = 203;
+///     ENDURANCE = 204;
+///     ADRENALINE_RUSH = 205;
+///     IMPROVED_KICK = 206;
+///     ROGUE_DUAL_WIELD_SPECIALIZATION = 221;
+///     IMPROVED_SPRINT = 222;
+///     BLADE_FLURRY = 223;
+///     MASTER_OF_DECEPTION = 241;
+///     HACK_AND_SLASH = 242;
+///     CAMOUFLAGE = 244;
+///     INITIATIVE = 245;
+///     SETUP = 246;
+///     ELUSIVENESS = 247;
+///     OPPORTUNITY = 261;
+///     DIRTY_TRICKS = 262;
+///     IMPROVED_AMBUSH = 263;
+///     DIRTY_DEEDS = 265;
+///     IMPROVED_POISONS = 268;
+///     LETHALITY = 269;
+///     MALICE = 270;
+///     REMORSELESS_ATTACKS = 272;
+///     RUTHLESSNESS = 273;
+///     MURDER = 274;
+///     IMPROVED_EVISCERATE = 276;
+///     PUNCTURING_WOUNDS = 277;
+///     IMPROVED_EXPOSE_ARMOR = 278;
+///     IMPROVED_KIDNEY_SHOT = 279;
+///     COLD_BLOOD = 280;
+///     OVERKILL = 281;
+///     SEAL_FATE = 283;
+///     PREPARATION = 284;
+///     RIPOSTE = 301;
+///     GHOSTLY_STRIKE = 303;
+///     MARTYRDOM = 321;
+///     POWER_INFUSION = 322;
+///     MENTAL_AGILITY = 341;
+///     UNBREAKABLE_WILL = 342;
+///     IMPROVED_POWER_WORD_SHIELD = 343;
+///     IMPROVED_POWER_WORD_FORTITUDE = 344;
+///     IMPROVED_INNER_FIRE = 346;
+///     MEDITATION = 347;
+///     INNER_FOCUS = 348;
+///     IMPROVED_MANA_BURN = 350;
+///     SOUL_WARDING = 351;
+///     SILENT_RESOLVE = 352;
+///     INSPIRATION = 361;
+///     PREMEDITATION = 381;
+///     VIGOR = 382;
+///     HOLY_SPECIALIZATION = 401;
+///     SPIRITUAL_GUIDANCE = 402;
+///     SEARING_LIGHT = 403;
+///     SPIRITUAL_HEALING = 404;
+///     IMPROVED_RENEW = 406;
+///     IMPROVED_HEALING = 408;
+///     PRIEST_HEALING_FOCUS = 410;
+///     SPELL_WARDING = 411;
+///     HEALING_PRAYERS = 413;
+///     ARCANE_INSTABILITY = 421;
+///     DESPERATE_PRAYER = 442;
+///     SHADOW_WEAVING = 461;
+///     DARKNESS = 462;
+///     SHADOW_FOCUS = 463;
+///     SPIRIT_TAP = 465;
+///     SHADOW_AFFINITY = 466;
+///     IMPROVED_MIND_BLAST = 481;
+///     IMPROVED_SHADOW_WORD_PAIN = 482;
+///     VEILED_SHADOWS = 483;
+///     VAMPIRIC_EMBRACE = 484;
+///     MIND_FLAY = 501;
+///     SHADOWFORM = 521;
+///     SILENCE = 541;
+///     IMPROVED_PSYCHIC_SCREAM = 542;
+///     CALL_OF_FLAME = 561;
+///     CALL_OF_THUNDER = 562;
+///     CONCUSSION = 563;
+///     CONVECTION = 564;
+///     ELEMENTAL_FURY = 565;
+///     IMPROVED_FIRE_NOVA = 567;
+///     ELEMENTAL_MASTERY = 573;
+///     ELEMENTAL_FOCUS = 574;
+///     REVERBERATION = 575;
+///     ANCESTRAL_HEALING = 581;
+///     TIDAL_FORCE = 582;
+///     IMPROVED_WATER_SHIELD = 583;
+///     IMPROVED_HEALING_WAVE = 586;
+///     SHAMAN_HEALING_FOCUS = 587;
+///     RESTORATIVE_TOTEMS = 588;
+///     IMPROVED_REINCARNATION = 589;
+///     MANA_TIDE_TOTEM = 590;
+///     SHAMAN_NATURES_SWIFTNESS = 591;
+///     PURIFICATION = 592;
+///     TIDAL_FOCUS = 593;
+///     TIDAL_MASTERY = 594;
+///     TOTEMIC_FOCUS = 595;
+///     SHAMAN_ANTICIPATION = 601;
+///     SHAMAN_FLURRY = 602;
+///     IMPROVED_GHOST_WOLF = 605;
+///     IMPROVED_SHIELDS = 607;
+///     GUARDIAN_TOTEMS = 609;
+///     ENHANCING_TOTEMS = 610;
+///     ELEMENTAL_WEAPONS = 611;
+///     THUNDERING_STRIKES = 613;
+///     ANCESTRAL_KNOWLEDGE = 614;
+///     SHAMAN_TOUGHNESS = 615;
+///     SPIRIT_WEAPONS = 616;
+///     SHAMANISTIC_FOCUS = 617;
+///     IRON_WILL = 641;
+///     BLOOD_CRAZE = 661;
+///     IMPALE = 662;
+///     HEMORRHAGE = 681;
+///     VILE_POISONS = 682;
+///     WARRIOR_ONE_HANDED_WEAPON_SPECIALIZATION = 702;
+///     LIGHTNING_MASTERY = 721;
+///     ARCTIC_REACH = 741;
+///     STARLIGHT_WRATH = 762;
+///     IMPROVED_MOONFIRE = 763;
+///     NATURES_REACH = 764;
+///     BRAMBLES = 782;
+///     MOONGLOW = 783;
+///     CELESTIAL_FOCUS = 784;
+///     INSECT_SWARM = 788;
+///     NATURES_GRACE = 789;
+///     MOONFURY = 790;
+///     DRUID_VENGEANCE = 792;
+///     MOONKIN_FORM = 793;
+///     DRUID_THICK_HIDE = 794;
+///     FERAL_AGGRESSION = 795;
+///     DRUID_FEROCITY = 796;
+///     BRUTAL_IMPACT = 797;
+///     SHARPENED_CLAWS = 798;
+///     FERAL_INSTINCT = 799;
+///     PRIMAL_FURY = 801;
+///     SHREDDING_ATTACKS = 802;
+///     PREDATORY_STRIKES = 803;
+///     FERAL_CHARGE = 804;
+///     SAVAGE_FURY = 805;
+///     FERAL_SWIFTNESS = 807;
+///     HEART_OF_THE_WILD = 808;
+///     LEADER_OF_THE_PACK = 809;
+///     IMPROVED_MARK_OF_THE_WILD = 821;
+///     FUROR = 822;
+///     NATURES_FOCUS = 823;
+///     NATURALIST = 824;
+///     NATURES_BOUNTY = 825;
+///     NATURAL_SHAPESHIFTER = 826;
+///     OMEN_OF_CLARITY = 827;
+///     GIFT_OF_NATURE = 828;
+///     DRUID_INTENSITY = 829;
+///     IMPROVED_REJUVENATION = 830;
+///     DRUID_NATURES_SWIFTNESS = 831;
+///     SUBTLETY = 841;
+///     IMPROVED_TRANQUILITY = 842;
+///     TRANQUIL_SPIRIT = 843;
+///     SWIFTMEND = 844;
+///     SHADOW_REACH = 881;
+///     STORMSTRIKE = 901;
+///     CATACLYSM = 941;
+///     BANE = 943;
+///     IMPROVED_SHADOW_BOLT = 944;
+///     IMPROVED_IMMOLATE = 961;
+///     SHADOWBURN = 963;
+///     DESTRUCTIVE_REACH = 964;
+///     IMPROVED_SEARING_PAIN = 965;
+///     EMBERSTORM = 966;
+///     RUIN = 967;
+///     CONFLAGRATE = 968;
+///     DEVASTATION = 981;
+///     AFTERMATH = 982;
+///     DEMONIC_POWER = 983;
+///     WARLOCK_INTENSITY = 985;
+///     PYROCLASM = 986;
+///     FEL_CONCENTRATION = 1001;
+///     NIGHTFALL = 1002;
+///     IMPROVED_CORRUPTION = 1003;
+///     SOUL_SIPHON = 1004;
+///     SUPPRESSION = 1005;
+///     IMPROVED_CURSE_OF_WEAKNESS = 1006;
+///     IMPROVED_LIFE_TAP = 1007;
+///     GRIM_REACH = 1021;
+///     DARK_PACT = 1022;
+///     SIPHON_LIFE = 1041;
+///     SHADOW_MASTERY = 1042;
+///     AMPLIFY_CURSE = 1061;
+///     CURSE_OF_EXHAUSTION = 1081;
+///     IMPROVED_DRAIN_SOUL = 1101;
+///     AGGRESSION = 1122;
+///     SERRATED_BLADES = 1123;
+///     INCINERATION = 1141;
+///     ARCANE_MEDITATION = 1142;
+///     DRUID_SURVIVAL_INSTINCTS = 1162;
+///     DIVINE_FURY = 1181;
+///     MENTAL_STRENGTH = 1201;
+///     BORROWED_TIME = 1202;
+///     IMPROVED_HEALTHSTONE = 1221;
+///     IMPROVED_IMP = 1222;
+///     DEMONIC_EMBRACE = 1223;
+///     IMPROVED_HEALTH_FUNNEL = 1224;
+///     DEMONIC_BRUTALITY = 1225;
+///     FEL_DOMINATION = 1226;
+///     MASTER_SUMMONER = 1227;
+///     FEL_VITALITY = 1242;
+///     IMPROVED_SUCCUBUS = 1243;
+///     MASTER_DEMONOLOGIST = 1244;
+///     MASTER_CONJUROR = 1261;
+///     UNHOLY_POWER = 1262;
+///     DEMONIC_KNOWLEDGE = 1263;
+///     MANA_FEED = 1281;
+///     SOUL_LINK = 1282;
+///     MOLTEN_CORE = 1283;
+///     IMPROVED_CURSE_OF_AGONY = 1284;
+///     HUNTER_LIGHTNING_REFLEXES = 1303;
+///     ENTRAPMENT = 1304;
+///     TRAP_MASTERY = 1305;
+///     LOCK_AND_LOAD = 1306;
+///     SURVIVAL_TACTICS = 1309;
+///     SUREFOOTED = 1310;
+///     HUNTER_DEFLECTION = 1311;
+///     COUNTERATTACK = 1312;
+///     KILLER_INSTINCT = 1321;
+///     BLACK_ARROW = 1322;
+///     WYVERN_STING = 1325;
+///     IMPROVED_CONCUSSIVE_SHOT = 1341;
+///     EFFICIENCY = 1342;
+///     IMPROVED_HUNTERS_MARK = 1343;
+///     LETHAL_SHOTS = 1344;
+///     AIMED_SHOT = 1345;
+///     IMPROVED_ARCANE_SHOT = 1346;
+///     BARRAGE = 1347;
+///     IMPROVED_STINGS = 1348;
+///     MORTAL_SHOTS = 1349;
+///     CONCUSSIVE_BARRAGE = 1351;
+///     READINESS = 1353;
+///     TRUESHOT_AURA = 1361;
+///     RANGED_WEAPON_SPECIALIZATION = 1362;
+///     IMPROVED_ASPECT_OF_THE_MONKEY = 1381;
+///     IMPROVED_ASPECT_OF_THE_HAWK = 1382;
+///     PATHFINDING = 1384;
+///     IMPROVED_MEND_PET = 1385;
+///     BESTIAL_WRATH = 1386;
+///     INTIMIDATION = 1387;
+///     SPIRIT_BOND = 1388;
+///     ENDURANCE_TRAINING = 1389;
+///     BESTIAL_DISCIPLINE = 1390;
+///     HUNTER_FEROCITY = 1393;
+///     HUNTER_THICK_HIDE = 1395;
+///     UNLEASHED_FURY = 1396;
+///     FRENZY = 1397;
+///     IMPROVED_BLESSING_OF_MIGHT = 1401;
+///     PALADIN_VENGEANCE = 1402;
+///     PALADIN_DEFLECTION = 1403;
+///     BENEDICTION = 1407;
+///     PALADIN_TWO_HANDED_WEAPON_SPECIALIZATION = 1410;
+///     CONVICTION = 1411;
+///     REDOUBT = 1421;
+///     IMPROVED_DEVOTION_AURA = 1422;
+///     PALADIN_TOUGHNESS = 1423;
+///     GUARDIANS_FAVOR = 1425;
+///     RECKONING = 1426;
+///     PALADIN_ONE_HANDED_WEAPON_SPECIALIZATION = 1429;
+///     HOLY_SHIELD = 1430;
+///     BLESSING_OF_SANCTUARY = 1431;
+///     SPIRITUAL_FOCUS = 1432;
+///     DIVINE_FAVOR = 1433;
+///     AURA_MASTERY = 1435;
+///     REPENTANCE = 1441;
+///     DIVINITY = 1442;
+///     IMPROVED_LAY_ON_HANDS = 1443;
+///     HEALING_LIGHT = 1444;
+///     IMPROVED_BLESSING_OF_WISDOM = 1446;
+///     DIVINE_INTELLECT = 1449;
+///     IMPROVED_CONCENTRATION_AURA = 1450;
+///     ILLUMINATION = 1461;
+///     SEALS_OF_THE_PURE = 1463;
+///     HEART_OF_THE_CRUSADER = 1464;
+///     SANCTIFIED_LIGHT = 1465;
+///     SEAL_OF_COMMAND = 1481;
+///     IMPROVED_RIGHTEOUS_FURY = 1501;
+///     HOLY_SHOCK = 1502;
+///     IMPROVED_HAMMER_OF_JUSTICE = 1521;
+///     IMPROVED_BERSERKER_RAGE = 1541;
+///     IMPROVED_EXECUTE = 1542;
+///     IMPROVED_INTERCEPT = 1543;
+///     SPIRIT_OF_REDEMPTION = 1561;
+///     WARRIOR_DUAL_WIELD_SPECIALIZATION = 1581;
+///     SHIELD_SPECIALIZATION = 1601;
+///     SAVAGE_STRIKES = 1621;
+///     SURVIVALIST = 1622;
+///     IMPROVED_TRACKING = 1623;
+///     FOCUSED_FIRE = 1624;
+///     IMPROVED_REVIVE_PET = 1625;
+///     HOLY_POWER = 1627;
+///     UNYIELDING_FAITH = 1628;
+///     PALADIN_ANTICIPATION = 1629;
+///     IMPROVED_JUDGEMENTS = 1631;
+///     EYE_FOR_AN_EYE = 1632;
+///     VINDICATION = 1633;
+///     PURSUIT_OF_JUSTICE = 1634;
+///     HOLY_REACH = 1635;
+///     BLESSED_RECOVERY = 1636;
+///     LIGHTWELL = 1637;
+///     IMPROVED_VAMPIRIC_EMBRACE = 1638;
+///     MASTER_OF_ELEMENTS = 1639;
+///     ELEMENTAL_WARDING = 1640;
+///     ELEMENTAL_REACH = 1641;
+///     EYE_OF_THE_STORM = 1642;
+///     SHAMAN_WEAPON_MASTERY = 1643;
+///     ELEMENTAL_DEVASTATION = 1645;
+///     HEALING_GRACE = 1646;
+///     IMPROVED_WINDFURY_TOTEM = 1647;
+///     HEALING_WAY = 1648;
+///     MAGE_PRECISION = 1649;
+///     MAGIC_ABSORPTION = 1650;
+///     IMPROVED_DEFENSIVE_STANCE = 1652;
+///     WARRIOR_VITALITY = 1653;
+///     SHIELD_MASTERY = 1654;
+///     IMPROVED_WHIRLWIND = 1655;
+///     WARRIOR_PRECISION = 1657;
+///     IMPROVED_BERSERKER_STANCE = 1658;
+///     RAMPAGE = 1659;
+///     FOCUSED_RAGE = 1660;
+///     ENDLESS_RAGE = 1661;
+///     SUDDEN_DEATH = 1662;
+///     SECOND_WIND = 1663;
+///     BLOOD_FRENZY = 1664;
+///     DEVASTATE = 1666;
+///     MALEDICTION = 1667;
+///     IMPROVED_HOWL_OF_TERROR = 1668;
+///     CONTAGION = 1669;
+///     UNSTABLE_AFFLICTION = 1670;
+///     DEMONIC_AEGIS = 1671;
+///     SUMMON_FELGUARD = 1672;
+///     DEMONIC_TACTICS = 1673;
+///     SHADOWFURY = 1676;
+///     SHADOW_AND_FLAME = 1677;
+///     SOUL_LEECH = 1678;
+///     NETHER_PROTECTION = 1679;
+///     DEMONIC_RESILIENCE = 1680;
+///     UNRELENTING_STORM = 1682;
+///     ELEMENTAL_PRECISION = 1685;
+///     LIGHTNING_OVERLOAD = 1686;
+///     TOTEM_OF_WRATH = 1687;
+///     UNLEASHED_RAGE = 1689;
+///     DUAL_WIELD = 1690;
+///     MENTAL_QUICKNESS = 1691;
+///     SHAMAN_DUAL_WIELD_SPECIALIZATION = 1692;
+///     SHAMANISTIC_RAGE = 1693;
+///     SHAMAN_FOCUSED_MIND = 1695;
+///     NATURES_BLESSING = 1696;
+///     IMPROVED_CHAIN_HEAL = 1697;
+///     EARTH_SHIELD = 1698;
+///     NATURES_GUARDIAN = 1699;
+///     SLEIGHT_OF_HAND = 1700;
+///     HEIGHTENED_SENSES = 1701;
+///     DEADLINESS = 1702;
+///     WEAPON_EXPERTISE = 1703;
+///     ROGUE_VITALITY = 1705;
+///     BLADE_TWISTING = 1706;
+///     NERVES_OF_STEEL = 1707;
+///     SURPRISE_ATTACKS = 1709;
+///     ENVELOPING_SHADOWS = 1711;
+///     SINISTER_CALLING = 1712;
+///     MASTER_OF_SUBTLETY = 1713;
+///     SHADOWSTEP = 1714;
+///     MASTER_POISONER = 1715;
+///     FIND_WEAKNESS = 1718;
+///     MUTILATE = 1719;
+///     FLEET_FOOTED = 1721;
+///     CHEAT_DEATH = 1722;
+///     DEADENED_NERVES = 1723;
+///     IMPROVED_BLINK = 1724;
+///     ARCANE_POTENCY = 1725;
+///     PRISMATIC_CLOAK = 1726;
+///     ARCANE_EMPOWERMENT = 1727;
+///     MIND_MASTERY = 1728;
+///     SLOW = 1729;
+///     PLAYING_WITH_FIRE = 1730;
+///     BLAZING_SPEED = 1731;
+///     MOLTEN_FURY = 1732;
+///     PYROMANIAC = 1733;
+///     EMPOWERED_FIRE = 1734;
+///     DRAGONS_BREATH = 1735;
+///     FROZEN_CORE = 1736;
+///     COLD_AS_ICE = 1737;
+///     ARCTIC_WINDS = 1738;
+///     EMPOWERED_FROSTBOLT = 1740;
+///     SUMMON_WATER_ELEMENTAL = 1741;
+///     PURE_OF_HEART = 1742;
+///     PURIFYING_POWER = 1743;
+///     BLESSED_LIFE = 1744;
+///     LIGHTS_GRACE = 1745;
+///     HOLY_GUIDANCE = 1746;
+///     DIVINE_ILLUMINATION = 1747;
+///     STOICISM = 1748;
+///     SACRED_DUTY = 1750;
+///     ARDENT_DEFENDER = 1751;
+///     COMBAT_EXPERTISE = 1753;
+///     AVENGERS_SHIELD = 1754;
+///     CRUSADE = 1755;
+///     SANCTIFIED_RETRIBUTION = 1756;
+///     DIVINE_PURPOSE = 1757;
+///     JUDGEMENTS_OF_THE_WISE = 1758;
+///     FANATICISM = 1759;
+///     SANCTITY_OF_BATTLE = 1761;
+///     QUICK_RECOVERY = 1762;
+///     SHADOW_EMBRACE = 1763;
+///     EMPOWERED_CORRUPTION = 1764;
+///     BLESSED_RESILIENCE = 1765;
+///     SURGE_OF_LIGHT = 1766;
+///     EMPOWERED_HEALING = 1767;
+///     HOLY_CONCENTRATION = 1768;
+///     ABSOLUTION = 1769;
+///     FOCUSED_POWER = 1771;
+///     ENLIGHTENMENT = 1772;
+///     IMPROVED_FLASH_HEAL = 1773;
+///     PAIN_SUPPRESSION = 1774;
+///     PRIEST_FOCUSED_MIND = 1777;
+///     SHADOW_POWER = 1778;
+///     VAMPIRIC_TOUCH = 1779;
+///     MIND_MELT = 1781;
+///     LUNAR_GUIDANCE = 1782;
+///     BALANCE_OF_POWER = 1783;
+///     DREAMSTATE = 1784;
+///     IMPROVED_FAERIE_FIRE = 1785;
+///     WRATH_OF_CENARIUS = 1786;
+///     FORCE_OF_NATURE = 1787;
+///     EMPOWERED_TOUCH = 1788;
+///     EMPOWERED_REJUVENATION = 1789;
+///     NATURAL_PERFECTION = 1790;
+///     TREE_OF_LIFE = 1791;
+///     NURTURING_INSTINCT = 1792;
+///     PRIMAL_TENACITY = 1793;
+///     SURVIVAL_OF_THE_FITTEST = 1794;
+///     PREDATORY_INSTINCTS = 1795;
+///     MANGLE = 1796;
+///     LIVING_SPIRIT = 1797;
+///     IMPROVED_LEADER_OF_THE_PACK = 1798;
+///     ANIMAL_HANDLER = 1799;
+///     FEROCIOUS_INSPIRATION = 1800;
+///     CATLIKE_REFLEXES = 1801;
+///     SERPENTS_SWIFTNESS = 1802;
+///     THE_BEAST_WITHIN = 1803;
+///     COMBAT_EXPERIENCE = 1804;
+///     CAREFUL_AIM = 1806;
+///     MASTER_MARKSMAN = 1807;
+///     SILENCING_SHOT = 1808;
+///     RESOURCEFULNESS = 1809;
+///     HUNTER_SURVIVAL_INSTINCTS = 1810;
+///     THRILL_OF_THE_HUNT = 1811;
+///     EXPOSE_WEAKNESS = 1812;
+///     MASTER_TACTICIAN = 1813;
+///     SCATTER_SHOT = 1814;
+///     CIRCLE_OF_HEALING = 1815;
+///     MISERY = 1816;
+///     BACKLASH = 1817;
+///     GO_FOR_THE_THROAT = 1818;
+///     RAPID_KILLING = 1819;
+///     HAWK_EYE = 1820;
+///     IMPROVED_BARRAGE = 1821;
+///     NATURES_MAJESTY = 1822;
+///     CRUSADER_STRIKE = 1823;
+///     IMPROVED_MORTAL_STRIKE = 1824;
+///     COMBAT_POTENCY = 1825;
+///     SPELL_POWER = 1826;
+///     IMPROVED_SLICE_AND_DICE = 1827;
+///     ARCANE_FLOWS = 1843;
+///     INCANTERS_ABSORPTION = 1844;
+///     STUDENT_OF_THE_MIND = 1845;
+///     NETHERWIND_PRESENCE = 1846;
+///     ARCANE_BARRAGE = 1847;
+///     FIERY_PAYBACK = 1848;
+///     FIRESTARTER = 1849;
+///     HOT_STREAK = 1850;
+///     BURNOUT = 1851;
+///     LIVING_BOMB = 1852;
+///     FINGERS_OF_FROST = 1853;
+///     BRAIN_FREEZE = 1854;
+///     ENDURING_WINTER = 1855;
+///     CHILLED_TO_THE_BONE = 1856;
+///     DEEP_FREEZE = 1857;
+///     FOCUSED_WILL = 1858;
+///     TRAUMA = 1859;
+///     UNRELENTING_ASSAULT = 1860;
+///     STRENGTH_OF_ARMS = 1862;
+///     BLADESTORM = 1863;
+///     INTENSIFY_RAGE = 1864;
+///     FURIOUS_ATTACKS = 1865;
+///     BLOODSURGE = 1866;
+///     TITANS_GRIP = 1867;
+///     HEROIC_FURY = 1868;
+///     SAFEGUARD = 1870;
+///     SWORD_AND_BOARD = 1871;
+///     SHOCKWAVE = 1872;
+///     IMPROVED_FELHUNTER = 1873;
+///     DEATHS_EMBRACE = 1875;
+///     EVERLASTING_AFFLICTION = 1876;
+///     ERADICATION = 1878;
+///     DEMONIC_EMPOWERMENT = 1880;
+///     IMPROVED_DEMONIC_TACTICS = 1882;
+///     FEL_SYNERGY = 1883;
+///     NEMESIS = 1884;
+///     DEMONIC_PACT = 1885;
+///     METAMORPHOSIS = 1886;
+///     MOLTEN_SKIN = 1887;
+///     BACKDRAFT = 1888;
+///     IMPROVED_SOUL_LEECH = 1889;
+///     FIRE_AND_BRIMSTONE = 1890;
+///     CHAOS_BOLT = 1891;
+///     CRITICAL_BLOCK = 1893;
+///     ASPIRATION = 1894;
+///     DIVINE_AEGIS = 1895;
+///     RAPTURE = 1896;
+///     PENANCE = 1897;
+///     TWIN_DISCIPLINES = 1898;
+///     GRACE = 1901;
+///     EMPOWERED_RENEW = 1902;
+///     TEST_OF_FAITH = 1903;
+///     SERENDIPITY = 1904;
+///     DIVINE_PROVIDENCE = 1905;
+///     IMPROVED_SHADOWFORM = 1906;
+///     TWISTED_FAITH = 1907;
+///     PSYCHIC_HORROR = 1908;
+///     PAIN_AND_SUFFERING = 1909;
+///     DISPERSION = 1910;
+///     GUARDIAN_SPIRIT = 1911;
+///     IMPROVED_MOONKIN_FORM = 1912;
+///     OWLKIN_FRENZY = 1913;
+///     PRIMAL_PRECISION = 1914;
+///     MASTER_SHAPESHIFTER = 1915;
+///     GIFT_OF_THE_EARTHMOTHER = 1916;
+///     WILD_GROWTH = 1917;
+///     REND_AND_TEAR = 1918;
+///     INFECTED_WOUNDS = 1919;
+///     IMPROVED_MANGLE = 1920;
+///     KING_OF_THE_JUNGLE = 1921;
+///     LIVING_SEED = 1922;
+///     TYPHOON = 1923;
+///     ECLIPSE = 1924;
+///     GALE_WINDS = 1925;
+///     STARFALL = 1926;
+///     BERSERK = 1927;
+///     EARTH_AND_MOON = 1928;
+///     REVITALIZE = 1929;
+///     IMPROVED_TREE_OF_LIFE = 1930;
+///     VIRULENCE = 1932;
+///     MORBIDITY = 1933;
+///     RAVENOUS_DEAD = 1934;
+///     IMPROVED_BLOOD_PRESENCE = 1936;
+///     BLADED_ARMOR = 1938;
+///     BUTCHERY = 1939;
+///     RUNE_TAP = 1941;
+///     IMPROVED_RUNE_TAP = 1942;
+///     DARK_CONVICTION = 1943;
+///     BLOODY_VENGEANCE = 1944;
+///     SUBVERSION = 1945;
+///     SCENT_OF_BLOOD = 1948;
+///     MARK_OF_BLOOD = 1949;
+///     VETERAN_OF_THE_THIRD_WAR = 1950;
+///     VENDETTA = 1953;
+///     HYSTERIA = 1954;
+///     SUDDEN_DOOM = 1955;
+///     HEART_STRIKE = 1957;
+///     MIGHT_OF_MOGRAINE = 1958;
+///     WILL_OF_THE_NECROPOLIS = 1959;
+///     BLOODWORMS = 1960;
+///     DANCING_RUNE_WEAPON = 1961;
+///     CRYPT_FEVER = 1962;
+///     EPIDEMIC = 1963;
+///     DEATH_KNIGHT_TOUGHNESS = 1968;
+///     ENDLESS_WINTER = 1971;
+///     BLACK_ICE = 1973;
+///     FROST_STRIKE = 1975;
+///     UNBREAKABLE_ARMOR = 1979;
+///     DEATHCHILL = 1980;
+///     CHILL_OF_THE_GRAVE = 1981;
+///     MASTER_OF_GHOULS = 1984;
+///     CORPSE_EXPLOSION = 1985;
+///     HOWLING_BLAST = 1989;
+///     FRIGID_DREADPLATE = 1990;
+///     RIME = 1992;
+///     MERCILESS_COMBAT = 1993;
+///     UNHOLY_BLIGHT = 1996;
+///     ACCLIMATION = 1997;
+///     TUNDRA_STALKER = 1998;
+///     HUNGERING_COLD = 1999;
+///     SUMMON_GARGOYLE = 2000;
+///     REAPING = 2001;
+///     WANDERING_PLAGUE = 2003;
+///     BLOOD_CAKED_BLADE = 2004;
+///     IMPURITY = 2005;
+///     BONE_SHIELD = 2007;
+///     OUTBREAK = 2008;
+///     MAGIC_SUPPRESSION = 2009;
+///     DIRGE = 2011;
+///     IMPROVED_UNHOLY_PRESENCE = 2013;
+///     BLOODY_STRIKES = 2015;
+///     BLADE_BARRIER = 2017;
+///     SPELL_DEFLECTION = 2018;
+///     VAMPIRIC_BLOOD = 2019;
+///     RUNIC_POWER_MASTERY = 2020;
+///     NERVES_OF_COLD_STEEL = 2022;
+///     UNHOLY_COMMAND = 2025;
+///     IMPROVED_SPIRIT_TAP = 2027;
+///     IMPROVED_FROST_PRESENCE = 2029;
+///     GLACIER_ROT = 2030;
+///     IMPROVED_ICY_TOUCH = 2031;
+///     BLOOD_GORGED = 2034;
+///     ICY_REACH = 2035;
+///     RAGE_OF_RIVENDARE = 2036;
+///     ON_A_PALE_HORSE = 2039;
+///     GUILE_OF_GOREFIEND = 2040;
+///     HAUNT = 2041;
+///     ICY_TALONS = 2042;
+///     EBON_PLAGUEBRINGER = 2043;
+///     KILLING_MACHINE = 2044;
+///     EMPOWERED_IMP = 2045;
+///     NECROSIS = 2047;
+///     ANNIHILATION = 2048;
+///     ELEMENTAL_OATH = 2049;
+///     ASTRAL_SHIFT = 2050;
+///     LAVA_FLOWS = 2051;
+///     STORM_EARTH_AND_FIRE = 2052;
+///     THUNDERSTORM = 2053;
+///     IMPROVED_STORMSTRIKE = 2054;
+///     STATIC_SHOCK = 2055;
+///     EARTHEN_POWER = 2056;
+///     MAELSTROM_WEAPON = 2057;
+///     FERAL_SPIRIT = 2058;
+///     IMPROVED_EARTH_SHIELD = 2059;
+///     BLESSING_OF_THE_ETERNALS = 2060;
+///     ANCESTRAL_AWAKENING = 2061;
+///     TIDAL_WAVES = 2063;
+///     RIPTIDE = 2064;
+///     DEADLY_BREW = 2065;
+///     TURN_THE_TABLES = 2066;
+///     BLOOD_SPATTER = 2068;
+///     FOCUSED_ATTACKS = 2069;
+///     CUT_TO_THE_CHASE = 2070;
+///     HUNGER_FOR_BLOOD = 2071;
+///     THROWING_SPECIALIZATION = 2072;
+///     UNFAIR_ADVANTAGE = 2073;
+///     SAVAGE_COMBAT = 2074;
+///     PREY_ON_THE_WEAK = 2075;
+///     KILLING_SPREE = 2076;
+///     WAYLAY = 2077;
+///     HONOR_AMONG_THIEVES = 2078;
+///     FILTHY_TRICKS = 2079;
+///     SLAUGHTER_FROM_THE_SHADOWS = 2080;
+///     SHADOW_DANCE = 2081;
+///     VICIOUS_STRIKES = 2082;
+///     MENTAL_DEXTERITY = 2083;
+///     CLEANSE_SPIRIT = 2084;
+///     GHOUL_FRENZY = 2085;
+///     DEATH_RUNE_MASTERY = 2086;
+///     EARTHS_GRASP = 2101;
+///     ABOMINATIONS_MIGHT = 2105;
+///     HUNTER_CULLING_THE_HERD = 2106;
+///     HUNTER_COBRA_REFLEXES = 2107;
+///     HUNTER_DASH = 2109;
+///     HUNTER_CULLING_THE_HERD2 = 2110;
+///     HUNTER_CHARGE = 2111;
+///     HUNTER_GREAT_STAMINA = 2112;
+///     HUNTER_NATURAL_ARMOR = 2113;
+///     HUNTER_COBRA_REFLEXES2 = 2114;
+///     HUNTER_GREAT_STAMINA2 = 2116;
+///     HUNTER_NATURAL_ARMOR2 = 2117;
+///     HUNTER_COBRA_REFLEXES3 = 2118;
+///     HUNTER_DASH2 = 2119;
+///     HUNTER_GREAT_STAMINA3 = 2120;
+///     HUNTER_NATURAL_ARMOR3 = 2121;
+///     PET_BARDING = 2122;
+///     GUARD_DOG = 2123;
+///     IMPROVED_COWER = 2124;
+///     HUNTER_SPIKED_COLLAR = 2125;
+///     HUNTER_SPIKED_COLLAR2 = 2126;
+///     HUNTER_SPIKED_COLLAR3 = 2127;
+///     BLOODTHIRSTY = 2128;
+///     SPIDERS_BITE = 2129;
+///     PIERCING_SHOTS = 2130;
+///     RAPID_RECUPERATION = 2131;
+///     WILD_QUIVER = 2132;
+///     IMPROVED_STEADY_SHOT = 2133;
+///     MARKED_FOR_DEATH = 2134;
+///     CHIMERA_SHOT = 2135;
+///     INVIGORATION = 2136;
+///     COBRA_STRIKES = 2137;
+///     ASPECT_MASTERY = 2138;
+///     BEAST_MASTERY = 2139;
+///     LONGEVITY = 2140;
+///     NOXIOUS_STINGS = 2141;
+///     POINT_OF_NO_ESCAPE = 2142;
+///     SNIPER_TRAINING = 2143;
+///     HUNTING_PARTY = 2144;
+///     EXPLOSIVE_SHOT = 2145;
+///     SANCTIFIED_WRATH = 2147;
+///     SWIFT_RETRIBUTION = 2148;
+///     RIGHTEOUS_VENGEANCE = 2149;
+///     DIVINE_STORM = 2150;
+///     HUNTER_BOARS_SPEED = 2151;
+///     HUNTER_LIONHEARTED = 2152;
+///     LICK_YOUR_WOUNDS = 2153;
+///     HUNTER_GREAT_RESISTANCE = 2154;
+///     RABID = 2155;
+///     HEART_OF_THE_PHOENIX = 2156;
+///     CALL_OF_THE_WILD = 2157;
+///     HUNTER_BOARS_SPEED2 = 2160;
+///     HUNTER_GREAT_RESISTANCE2 = 2161;
+///     HUNTER_LIONHEARTED2 = 2162;
+///     HUNTER_GRACE_OF_THE_MANTIS = 2163;
+///     HUNTER_BOARS_SPEED3 = 2165;
+///     HUNTER_CULLING_THE_HERD3 = 2166;
+///     HUNTER_LIONHEARTED3 = 2167;
+///     HUNTER_GREAT_RESISTANCE3 = 2168;
+///     INTERVENE = 2169;
+///     TAUNT = 2170;
+///     HUNTER_LAST_STAND = 2171;
+///     HUNTER_ROAR_OF_SACRIFICE = 2172;
+///     BLOOD_OF_THE_RHINO = 2173;
+///     BULLHEADED = 2175;
+///     THE_ART_OF_WAR = 2176;
+///     CORNERED = 2177;
+///     SHEATH_OF_LIGHT = 2179;
+///     WOLVERINE_BITE = 2181;
+///     OWLS_FOCUS = 2182;
+///     FEEDING_FRENZY = 2183;
+///     ROAR_OF_RECOVERY = 2184;
+///     DIVINE_STRENGTH = 2185;
+///     SACRED_CLEANSING = 2190;
+///     ENLIGHTENED_JUDGEMENTS = 2191;
+///     BEACON_OF_LIGHT = 2192;
+///     INFUSION_OF_LIGHT = 2193;
+///     GUARDED_BY_THE_LIGHT = 2194;
+///     TOUCHED_BY_THE_LIGHT = 2195;
+///     HAMMER_OF_THE_RIGHTEOUS = 2196;
+///     FOCUSED_AIM = 2197;
+///     BLESSED_HANDS = 2198;
+///     JUDGEMENTS_OF_THE_PURE = 2199;
+///     JUDGEMENTS_OF_THE_JUST = 2200;
+///     HUNTER_DIVE = 2201;
+///     HUNTER_DIVE2 = 2203;
+///     SHIELD_OF_THE_TEMPLAR = 2204;
+///     IMPROVED_FEAR = 2205;
+///     CARRION_FEEDER = 2206;
+///     HUNTER_MOBILITY = 2207;
+///     HUNTER_MOBILITY2 = 2208;
+///     MISSILE_BARRAGE = 2209;
+///     BLOOD_OF_THE_NORTH = 2210;
+///     FOCUS_MAGIC = 2211;
+///     BURNING_DETERMINATION = 2212;
+///     SHATTERED_BARRIER = 2214;
+///     LICHBORNE = 2215;
+///     SCOURGE_STRIKE = 2216;
+///     DEATH_KNIGHT_TWO_HANDED_WEAPON_SPECIALIZATION = 2217;
+///     DEATH_KNIGHT_ANTICIPATION = 2218;
+///     SWOOP = 2219;
+///     ANTI_MAGIC_ZONE = 2221;
+///     TORMENT_THE_WEAK = 2222;
+///     IMPROVED_ICY_TALONS = 2223;
+///     NIGHT_OF_THE_DEAD = 2225;
+///     DESECRATION = 2226;
+///     KINDRED_SPIRITS = 2227;
+///     HUNTER_VS_WILD = 2228;
+///     T_N_T = 2229;
+///     WRECKING_CREW = 2231;
+///     TASTE_FOR_BLOOD = 2232;
+///     IMPROVED_SLAM = 2233;
+///     UNENDING_FURY = 2234;
+///     RENEWED_HOPE = 2235;
+///     WARBRINGER = 2236;
+///     HUNTER_CHARGE2 = 2237;
+///     GENESIS = 2238;
+///     IMPROVED_INSECT_SWARM = 2239;
+///     NATURES_SPLENDOR = 2240;
+///     PROTECTOR_OF_THE_PACK = 2241;
+///     NATURAL_REACTION = 2242;
+///     RELENTLESS_STRIKES = 2244;
+///     PANDEMIC = 2245;
+///     DAMAGE_SHIELD = 2246;
+///     IMPROVED_SPELL_REFLECTION = 2247;
+///     LAVA_LASH = 2249;
+///     ARMORED_TO_THE_TEETH = 2250;
+///     SHAMANISM = 2252;
+///     HUNTER_WILD_HUNT = 2253;
+///     SHARK_ATTACK = 2254;
+///     HUNTER_WILD_HUNT2 = 2255;
+///     HUNTER_WILD_HUNT3 = 2256;
+///     HUNTER_GRACE_OF_THE_MANTIS2 = 2257;
+///     SILVERBACK = 2258;
+///     IMPROVED_DEATH_STRIKE = 2259;
+///     CHILBLAINS = 2260;
+///     DECIMATION = 2261;
+///     BOOMING_ECHOES = 2262;
+///     FROZEN_POWER = 2263;
+///     IMPROVED_BARKSKIN = 2264;
+///     PRIMAL_GORE = 2266;
+///     IMPROVED_DEVOURING_PLAGUE = 2267;
+///     REFLECTIVE_SHIELD = 2268;
+///     THUNDERSTOMP = 2277;
+///     HUNTER_ROAR_OF_SACRIFICE2 = 2278;
+///     BODY_AND_SOUL = 2279;
+///     DIVINE_SACRIFICE = 2280;
+///     DIVINE_GUARDIAN = 2281;
+///     SPIRITUAL_ATTUNEMENT = 2282;
+///     JUGGERNAUT = 2283;
+///     THREAT_OF_THASSARIAN = 2284;
+///     DESOLATION = 2285;
+/// }
+/// ```
+#[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
+pub enum Talent {
+    BurningSoul,
+    MoltenShields,
+    ImprovedScorch,
+    ImprovedFireball,
+    ImprovedFireBlast,
+    FlameThrowing,
+    Pyroblast,
+    Impact,
+    WorldInFlames,
+    BlastWave,
+    CriticalMass,
+    Ignite,
+    FirePower,
+    Combustion,
+    ImprovedFrostbolt,
+    Frostbite,
+    PiercingIce,
+    IceFloes,
+    ImprovedBlizzard,
+    ImprovedConeOfCold,
+    Permafrost,
+    FrostChanneling,
+    Shatter,
+    WintersChill,
+    IcyVeins,
+    FrostWarding,
+    IceBarrier,
+    ColdSnap,
+    IceShards,
+    ArcaneSubtlety,
+    ArcaneConcentration,
+    ArcaneFocus,
+    ArcaneMind,
+    ArcaneStability,
+    SpellImpact,
+    MagicAttunement,
+    ArcaneShielding,
+    ArcaneFortitude,
+    PresenceOfMind,
+    ArcanePower,
+    ImprovedCounterspell,
+    DeepWounds,
+    SwordSpecialization,
+    ImprovedHeroicStrike,
+    WarriorMaceSpecialization,
+    ImprovedCharge,
+    ImprovedRend,
+    TacticalMastery,
+    ImprovedHamstring,
+    WarriorDeflection,
+    ImprovedOverpower,
+    PoleaxeSpecialization,
+    SweepingStrikes,
+    WarriorWeaponMastery,
+    MortalStrike,
+    WarriorTwoHandedWeaponSpecialization,
+    AngerManagement,
+    WarriorAnticipation,
+    WarriorToughness,
+    ImprovedThunderClap,
+    ImprovedBloodrage,
+    Incite,
+    Puncture,
+    ImprovedRevenge,
+    Vigilance,
+    GagOrder,
+    ImprovedDisciplines,
+    ImprovedDisarm,
+    ConcussionBlow,
+    WarriorLastStand,
+    CommandingPresence,
+    Enrage,
+    WarriorFlurry,
+    Cruelty,
+    BoomingVoice,
+    UnbridledWrath,
+    PiercingHowl,
+    ImprovedDemoralizingShout,
+    DeathWish,
+    ImprovedCleave,
+    Bloodthirst,
+    RoguePrecision,
+    CloseQuartersCombat,
+    RogueMaceSpecialization,
+    RogueLightningReflexes,
+    RogueDeflection,
+    ImprovedSinisterStrike,
+    ImprovedGouge,
+    Endurance,
+    AdrenalineRush,
+    ImprovedKick,
+    RogueDualWieldSpecialization,
+    ImprovedSprint,
+    BladeFlurry,
+    MasterOfDeception,
+    HackAndSlash,
+    Camouflage,
+    Initiative,
+    Setup,
+    Elusiveness,
+    Opportunity,
+    DirtyTricks,
+    ImprovedAmbush,
+    DirtyDeeds,
+    ImprovedPoisons,
+    Lethality,
+    Malice,
+    RemorselessAttacks,
+    Ruthlessness,
+    Murder,
+    ImprovedEviscerate,
+    PuncturingWounds,
+    ImprovedExposeArmor,
+    ImprovedKidneyShot,
+    ColdBlood,
+    Overkill,
+    SealFate,
+    Preparation,
+    Riposte,
+    GhostlyStrike,
+    Martyrdom,
+    PowerInfusion,
+    MentalAgility,
+    UnbreakableWill,
+    ImprovedPowerWordShield,
+    ImprovedPowerWordFortitude,
+    ImprovedInnerFire,
+    Meditation,
+    InnerFocus,
+    ImprovedManaBurn,
+    SoulWarding,
+    SilentResolve,
+    Inspiration,
+    Premeditation,
+    Vigor,
+    HolySpecialization,
+    SpiritualGuidance,
+    SearingLight,
+    SpiritualHealing,
+    ImprovedRenew,
+    ImprovedHealing,
+    PriestHealingFocus,
+    SpellWarding,
+    HealingPrayers,
+    ArcaneInstability,
+    DesperatePrayer,
+    ShadowWeaving,
+    Darkness,
+    ShadowFocus,
+    SpiritTap,
+    ShadowAffinity,
+    ImprovedMindBlast,
+    ImprovedShadowWordPain,
+    VeiledShadows,
+    VampiricEmbrace,
+    MindFlay,
+    Shadowform,
+    Silence,
+    ImprovedPsychicScream,
+    CallOfFlame,
+    CallOfThunder,
+    Concussion,
+    Convection,
+    ElementalFury,
+    ImprovedFireNova,
+    ElementalMastery,
+    ElementalFocus,
+    Reverberation,
+    AncestralHealing,
+    TidalForce,
+    ImprovedWaterShield,
+    ImprovedHealingWave,
+    ShamanHealingFocus,
+    RestorativeTotems,
+    ImprovedReincarnation,
+    ManaTideTotem,
+    ShamanNaturesSwiftness,
+    Purification,
+    TidalFocus,
+    TidalMastery,
+    TotemicFocus,
+    ShamanAnticipation,
+    ShamanFlurry,
+    ImprovedGhostWolf,
+    ImprovedShields,
+    GuardianTotems,
+    EnhancingTotems,
+    ElementalWeapons,
+    ThunderingStrikes,
+    AncestralKnowledge,
+    ShamanToughness,
+    SpiritWeapons,
+    ShamanisticFocus,
+    IronWill,
+    BloodCraze,
+    Impale,
+    Hemorrhage,
+    VilePoisons,
+    WarriorOneHandedWeaponSpecialization,
+    LightningMastery,
+    ArcticReach,
+    StarlightWrath,
+    ImprovedMoonfire,
+    NaturesReach,
+    Brambles,
+    Moonglow,
+    CelestialFocus,
+    InsectSwarm,
+    NaturesGrace,
+    Moonfury,
+    DruidVengeance,
+    MoonkinForm,
+    DruidThickHide,
+    FeralAggression,
+    DruidFerocity,
+    BrutalImpact,
+    SharpenedClaws,
+    FeralInstinct,
+    PrimalFury,
+    ShreddingAttacks,
+    PredatoryStrikes,
+    FeralCharge,
+    SavageFury,
+    FeralSwiftness,
+    HeartOfTheWild,
+    LeaderOfThePack,
+    ImprovedMarkOfTheWild,
+    Furor,
+    NaturesFocus,
+    Naturalist,
+    NaturesBounty,
+    NaturalShapeshifter,
+    OmenOfClarity,
+    GiftOfNature,
+    DruidIntensity,
+    ImprovedRejuvenation,
+    DruidNaturesSwiftness,
+    Subtlety,
+    ImprovedTranquility,
+    TranquilSpirit,
+    Swiftmend,
+    ShadowReach,
+    Stormstrike,
+    Cataclysm,
+    Bane,
+    ImprovedShadowBolt,
+    ImprovedImmolate,
+    Shadowburn,
+    DestructiveReach,
+    ImprovedSearingPain,
+    Emberstorm,
+    Ruin,
+    Conflagrate,
+    Devastation,
+    Aftermath,
+    DemonicPower,
+    WarlockIntensity,
+    Pyroclasm,
+    FelConcentration,
+    Nightfall,
+    ImprovedCorruption,
+    SoulSiphon,
+    Suppression,
+    ImprovedCurseOfWeakness,
+    ImprovedLifeTap,
+    GrimReach,
+    DarkPact,
+    SiphonLife,
+    ShadowMastery,
+    AmplifyCurse,
+    CurseOfExhaustion,
+    ImprovedDrainSoul,
+    Aggression,
+    SerratedBlades,
+    Incineration,
+    ArcaneMeditation,
+    DruidSurvivalInstincts,
+    DivineFury,
+    MentalStrength,
+    BorrowedTime,
+    ImprovedHealthstone,
+    ImprovedImp,
+    DemonicEmbrace,
+    ImprovedHealthFunnel,
+    DemonicBrutality,
+    FelDomination,
+    MasterSummoner,
+    FelVitality,
+    ImprovedSuccubus,
+    MasterDemonologist,
+    MasterConjuror,
+    UnholyPower,
+    DemonicKnowledge,
+    ManaFeed,
+    SoulLink,
+    MoltenCore,
+    ImprovedCurseOfAgony,
+    HunterLightningReflexes,
+    Entrapment,
+    TrapMastery,
+    LockAndLoad,
+    SurvivalTactics,
+    Surefooted,
+    HunterDeflection,
+    Counterattack,
+    KillerInstinct,
+    BlackArrow,
+    WyvernSting,
+    ImprovedConcussiveShot,
+    Efficiency,
+    ImprovedHuntersMark,
+    LethalShots,
+    AimedShot,
+    ImprovedArcaneShot,
+    Barrage,
+    ImprovedStings,
+    MortalShots,
+    ConcussiveBarrage,
+    Readiness,
+    TrueshotAura,
+    RangedWeaponSpecialization,
+    ImprovedAspectOfTheMonkey,
+    ImprovedAspectOfTheHawk,
+    Pathfinding,
+    ImprovedMendPet,
+    BestialWrath,
+    Intimidation,
+    SpiritBond,
+    EnduranceTraining,
+    BestialDiscipline,
+    HunterFerocity,
+    HunterThickHide,
+    UnleashedFury,
+    Frenzy,
+    ImprovedBlessingOfMight,
+    PaladinVengeance,
+    PaladinDeflection,
+    Benediction,
+    PaladinTwoHandedWeaponSpecialization,
+    Conviction,
+    Redoubt,
+    ImprovedDevotionAura,
+    PaladinToughness,
+    GuardiansFavor,
+    Reckoning,
+    PaladinOneHandedWeaponSpecialization,
+    HolyShield,
+    BlessingOfSanctuary,
+    SpiritualFocus,
+    DivineFavor,
+    AuraMastery,
+    Repentance,
+    Divinity,
+    ImprovedLayOnHands,
+    HealingLight,
+    ImprovedBlessingOfWisdom,
+    DivineIntellect,
+    ImprovedConcentrationAura,
+    Illumination,
+    SealsOfThePure,
+    HeartOfTheCrusader,
+    SanctifiedLight,
+    SealOfCommand,
+    ImprovedRighteousFury,
+    HolyShock,
+    ImprovedHammerOfJustice,
+    ImprovedBerserkerRage,
+    ImprovedExecute,
+    ImprovedIntercept,
+    SpiritOfRedemption,
+    WarriorDualWieldSpecialization,
+    ShieldSpecialization,
+    SavageStrikes,
+    Survivalist,
+    ImprovedTracking,
+    FocusedFire,
+    ImprovedRevivePet,
+    HolyPower,
+    UnyieldingFaith,
+    PaladinAnticipation,
+    ImprovedJudgements,
+    EyeForAnEye,
+    Vindication,
+    PursuitOfJustice,
+    HolyReach,
+    BlessedRecovery,
+    Lightwell,
+    ImprovedVampiricEmbrace,
+    MasterOfElements,
+    ElementalWarding,
+    ElementalReach,
+    EyeOfTheStorm,
+    ShamanWeaponMastery,
+    ElementalDevastation,
+    HealingGrace,
+    ImprovedWindfuryTotem,
+    HealingWay,
+    MagePrecision,
+    MagicAbsorption,
+    ImprovedDefensiveStance,
+    WarriorVitality,
+    ShieldMastery,
+    ImprovedWhirlwind,
+    WarriorPrecision,
+    ImprovedBerserkerStance,
+    Rampage,
+    FocusedRage,
+    EndlessRage,
+    SuddenDeath,
+    SecondWind,
+    BloodFrenzy,
+    Devastate,
+    Malediction,
+    ImprovedHowlOfTerror,
+    Contagion,
+    UnstableAffliction,
+    DemonicAegis,
+    SummonFelguard,
+    DemonicTactics,
+    Shadowfury,
+    ShadowAndFlame,
+    SoulLeech,
+    NetherProtection,
+    DemonicResilience,
+    UnrelentingStorm,
+    ElementalPrecision,
+    LightningOverload,
+    TotemOfWrath,
+    UnleashedRage,
+    DualWield,
+    MentalQuickness,
+    ShamanDualWieldSpecialization,
+    ShamanisticRage,
+    ShamanFocusedMind,
+    NaturesBlessing,
+    ImprovedChainHeal,
+    EarthShield,
+    NaturesGuardian,
+    SleightOfHand,
+    HeightenedSenses,
+    Deadliness,
+    WeaponExpertise,
+    RogueVitality,
+    BladeTwisting,
+    NervesOfSteel,
+    SurpriseAttacks,
+    EnvelopingShadows,
+    SinisterCalling,
+    MasterOfSubtlety,
+    Shadowstep,
+    MasterPoisoner,
+    FindWeakness,
+    Mutilate,
+    FleetFooted,
+    CheatDeath,
+    DeadenedNerves,
+    ImprovedBlink,
+    ArcanePotency,
+    PrismaticCloak,
+    ArcaneEmpowerment,
+    MindMastery,
+    Slow,
+    PlayingWithFire,
+    BlazingSpeed,
+    MoltenFury,
+    Pyromaniac,
+    EmpoweredFire,
+    DragonsBreath,
+    FrozenCore,
+    ColdAsIce,
+    ArcticWinds,
+    EmpoweredFrostbolt,
+    SummonWaterElemental,
+    PureOfHeart,
+    PurifyingPower,
+    BlessedLife,
+    LightsGrace,
+    HolyGuidance,
+    DivineIllumination,
+    Stoicism,
+    SacredDuty,
+    ArdentDefender,
+    CombatExpertise,
+    AvengersShield,
+    Crusade,
+    SanctifiedRetribution,
+    DivinePurpose,
+    JudgementsOfTheWise,
+    Fanaticism,
+    SanctityOfBattle,
+    QuickRecovery,
+    ShadowEmbrace,
+    EmpoweredCorruption,
+    BlessedResilience,
+    SurgeOfLight,
+    EmpoweredHealing,
+    HolyConcentration,
+    Absolution,
+    FocusedPower,
+    Enlightenment,
+    ImprovedFlashHeal,
+    PainSuppression,
+    PriestFocusedMind,
+    ShadowPower,
+    VampiricTouch,
+    MindMelt,
+    LunarGuidance,
+    BalanceOfPower,
+    Dreamstate,
+    ImprovedFaerieFire,
+    WrathOfCenarius,
+    ForceOfNature,
+    EmpoweredTouch,
+    EmpoweredRejuvenation,
+    NaturalPerfection,
+    TreeOfLife,
+    NurturingInstinct,
+    PrimalTenacity,
+    SurvivalOfTheFittest,
+    PredatoryInstincts,
+    Mangle,
+    LivingSpirit,
+    ImprovedLeaderOfThePack,
+    AnimalHandler,
+    FerociousInspiration,
+    CatlikeReflexes,
+    SerpentsSwiftness,
+    TheBeastWithin,
+    CombatExperience,
+    CarefulAim,
+    MasterMarksman,
+    SilencingShot,
+    Resourcefulness,
+    HunterSurvivalInstincts,
+    ThrillOfTheHunt,
+    ExposeWeakness,
+    MasterTactician,
+    ScatterShot,
+    CircleOfHealing,
+    Misery,
+    Backlash,
+    GoForTheThroat,
+    RapidKilling,
+    HawkEye,
+    ImprovedBarrage,
+    NaturesMajesty,
+    CrusaderStrike,
+    ImprovedMortalStrike,
+    CombatPotency,
+    SpellPower,
+    ImprovedSliceAndDice,
+    ArcaneFlows,
+    IncantersAbsorption,
+    StudentOfTheMind,
+    NetherwindPresence,
+    ArcaneBarrage,
+    FieryPayback,
+    Firestarter,
+    HotStreak,
+    Burnout,
+    LivingBomb,
+    FingersOfFrost,
+    BrainFreeze,
+    EnduringWinter,
+    ChilledToTheBone,
+    DeepFreeze,
+    FocusedWill,
+    Trauma,
+    UnrelentingAssault,
+    StrengthOfArms,
+    Bladestorm,
+    IntensifyRage,
+    FuriousAttacks,
+    Bloodsurge,
+    TitansGrip,
+    HeroicFury,
+    Safeguard,
+    SwordAndBoard,
+    Shockwave,
+    ImprovedFelhunter,
+    DeathsEmbrace,
+    EverlastingAffliction,
+    Eradication,
+    DemonicEmpowerment,
+    ImprovedDemonicTactics,
+    FelSynergy,
+    Nemesis,
+    DemonicPact,
+    Metamorphosis,
+    MoltenSkin,
+    Backdraft,
+    ImprovedSoulLeech,
+    FireAndBrimstone,
+    ChaosBolt,
+    CriticalBlock,
+    Aspiration,
+    DivineAegis,
+    Rapture,
+    Penance,
+    TwinDisciplines,
+    Grace,
+    EmpoweredRenew,
+    TestOfFaith,
+    Serendipity,
+    DivineProvidence,
+    ImprovedShadowform,
+    TwistedFaith,
+    PsychicHorror,
+    PainAndSuffering,
+    Dispersion,
+    GuardianSpirit,
+    ImprovedMoonkinForm,
+    OwlkinFrenzy,
+    PrimalPrecision,
+    MasterShapeshifter,
+    GiftOfTheEarthmother,
+    WildGrowth,
+    RendAndTear,
+    InfectedWounds,
+    ImprovedMangle,
+    KingOfTheJungle,
+    LivingSeed,
+    Typhoon,
+    Eclipse,
+    GaleWinds,
+    Starfall,
+    Berserk,
+    EarthAndMoon,
+    Revitalize,
+    ImprovedTreeOfLife,
+    Virulence,
+    Morbidity,
+    RavenousDead,
+    ImprovedBloodPresence,
+    BladedArmor,
+    Butchery,
+    RuneTap,
+    ImprovedRuneTap,
+    DarkConviction,
+    BloodyVengeance,
+    Subversion,
+    ScentOfBlood,
+    MarkOfBlood,
+    VeteranOfTheThirdWar,
+    Vendetta,
+    Hysteria,
+    SuddenDoom,
+    HeartStrike,
+    MightOfMograine,
+    WillOfTheNecropolis,
+    Bloodworms,
+    DancingRuneWeapon,
+    CryptFever,
+    Epidemic,
+    DeathKnightToughness,
+    EndlessWinter,
+    BlackIce,
+    FrostStrike,
+    UnbreakableArmor,
+    Deathchill,
+    ChillOfTheGrave,
+    MasterOfGhouls,
+    CorpseExplosion,
+    HowlingBlast,
+    FrigidDreadplate,
+    Rime,
+    MercilessCombat,
+    UnholyBlight,
+    Acclimation,
+    TundraStalker,
+    HungeringCold,
+    SummonGargoyle,
+    Reaping,
+    WanderingPlague,
+    BloodCakedBlade,
+    Impurity,
+    BoneShield,
+    Outbreak,
+    MagicSuppression,
+    Dirge,
+    ImprovedUnholyPresence,
+    BloodyStrikes,
+    BladeBarrier,
+    SpellDeflection,
+    VampiricBlood,
+    RunicPowerMastery,
+    NervesOfColdSteel,
+    UnholyCommand,
+    ImprovedSpiritTap,
+    ImprovedFrostPresence,
+    GlacierRot,
+    ImprovedIcyTouch,
+    BloodGorged,
+    IcyReach,
+    RageOfRivendare,
+    OnAPaleHorse,
+    GuileOfGorefiend,
+    Haunt,
+    IcyTalons,
+    EbonPlaguebringer,
+    KillingMachine,
+    EmpoweredImp,
+    Necrosis,
+    Annihilation,
+    ElementalOath,
+    AstralShift,
+    LavaFlows,
+    StormEarthAndFire,
+    Thunderstorm,
+    ImprovedStormstrike,
+    StaticShock,
+    EarthenPower,
+    MaelstromWeapon,
+    FeralSpirit,
+    ImprovedEarthShield,
+    BlessingOfTheEternals,
+    AncestralAwakening,
+    TidalWaves,
+    Riptide,
+    DeadlyBrew,
+    TurnTheTables,
+    BloodSpatter,
+    FocusedAttacks,
+    CutToTheChase,
+    HungerForBlood,
+    ThrowingSpecialization,
+    UnfairAdvantage,
+    SavageCombat,
+    PreyOnTheWeak,
+    KillingSpree,
+    Waylay,
+    HonorAmongThieves,
+    FilthyTricks,
+    SlaughterFromTheShadows,
+    ShadowDance,
+    ViciousStrikes,
+    MentalDexterity,
+    CleanseSpirit,
+    GhoulFrenzy,
+    DeathRuneMastery,
+    EarthsGrasp,
+    AbominationsMight,
+    HunterCullingTheHerd,
+    HunterCobraReflexes,
+    HunterDash,
+    HunterCullingTheHerd2,
+    HunterCharge,
+    HunterGreatStamina,
+    HunterNaturalArmor,
+    HunterCobraReflexes2,
+    HunterGreatStamina2,
+    HunterNaturalArmor2,
+    HunterCobraReflexes3,
+    HunterDash2,
+    HunterGreatStamina3,
+    HunterNaturalArmor3,
+    PetBarding,
+    GuardDog,
+    ImprovedCower,
+    HunterSpikedCollar,
+    HunterSpikedCollar2,
+    HunterSpikedCollar3,
+    Bloodthirsty,
+    SpidersBite,
+    PiercingShots,
+    RapidRecuperation,
+    WildQuiver,
+    ImprovedSteadyShot,
+    MarkedForDeath,
+    ChimeraShot,
+    Invigoration,
+    CobraStrikes,
+    AspectMastery,
+    BeastMastery,
+    Longevity,
+    NoxiousStings,
+    PointOfNoEscape,
+    SniperTraining,
+    HuntingParty,
+    ExplosiveShot,
+    SanctifiedWrath,
+    SwiftRetribution,
+    RighteousVengeance,
+    DivineStorm,
+    HunterBoarsSpeed,
+    HunterLionhearted,
+    LickYourWounds,
+    HunterGreatResistance,
+    Rabid,
+    HeartOfThePhoenix,
+    CallOfTheWild,
+    HunterBoarsSpeed2,
+    HunterGreatResistance2,
+    HunterLionhearted2,
+    HunterGraceOfTheMantis,
+    HunterBoarsSpeed3,
+    HunterCullingTheHerd3,
+    HunterLionhearted3,
+    HunterGreatResistance3,
+    Intervene,
+    Taunt,
+    HunterLastStand,
+    HunterRoarOfSacrifice,
+    BloodOfTheRhino,
+    Bullheaded,
+    TheArtOfWar,
+    Cornered,
+    SheathOfLight,
+    WolverineBite,
+    OwlsFocus,
+    FeedingFrenzy,
+    RoarOfRecovery,
+    DivineStrength,
+    SacredCleansing,
+    EnlightenedJudgements,
+    BeaconOfLight,
+    InfusionOfLight,
+    GuardedByTheLight,
+    TouchedByTheLight,
+    HammerOfTheRighteous,
+    FocusedAim,
+    BlessedHands,
+    JudgementsOfThePure,
+    JudgementsOfTheJust,
+    HunterDive,
+    HunterDive2,
+    ShieldOfTheTemplar,
+    ImprovedFear,
+    CarrionFeeder,
+    HunterMobility,
+    HunterMobility2,
+    MissileBarrage,
+    BloodOfTheNorth,
+    FocusMagic,
+    BurningDetermination,
+    ShatteredBarrier,
+    Lichborne,
+    ScourgeStrike,
+    DeathKnightTwoHandedWeaponSpecialization,
+    DeathKnightAnticipation,
+    Swoop,
+    AntiMagicZone,
+    TormentTheWeak,
+    ImprovedIcyTalons,
+    NightOfTheDead,
+    Desecration,
+    KindredSpirits,
+    HunterVsWild,
+    TNT,
+    WreckingCrew,
+    TasteForBlood,
+    ImprovedSlam,
+    UnendingFury,
+    RenewedHope,
+    Warbringer,
+    HunterCharge2,
+    Genesis,
+    ImprovedInsectSwarm,
+    NaturesSplendor,
+    ProtectorOfThePack,
+    NaturalReaction,
+    RelentlessStrikes,
+    Pandemic,
+    DamageShield,
+    ImprovedSpellReflection,
+    LavaLash,
+    ArmoredToTheTeeth,
+    Shamanism,
+    HunterWildHunt,
+    SharkAttack,
+    HunterWildHunt2,
+    HunterWildHunt3,
+    HunterGraceOfTheMantis2,
+    Silverback,
+    ImprovedDeathStrike,
+    Chilblains,
+    Decimation,
+    BoomingEchoes,
+    FrozenPower,
+    ImprovedBarkskin,
+    PrimalGore,
+    ImprovedDevouringPlague,
+    ReflectiveShield,
+    Thunderstomp,
+    HunterRoarOfSacrifice2,
+    BodyAndSoul,
+    DivineSacrifice,
+    DivineGuardian,
+    SpiritualAttunement,
+    Juggernaut,
+    ThreatOfThassarian,
+    Desolation,
+}
+
+impl Talent {
+    pub const fn as_int(&self) -> u32 {
+        match self {
+            Self::BurningSoul => 0x17,
+            Self::MoltenShields => 0x18,
+            Self::ImprovedScorch => 0x19,
+            Self::ImprovedFireball => 0x1a,
+            Self::ImprovedFireBlast => 0x1b,
+            Self::FlameThrowing => 0x1c,
+            Self::Pyroblast => 0x1d,
+            Self::Impact => 0x1e,
+            Self::WorldInFlames => 0x1f,
+            Self::BlastWave => 0x20,
+            Self::CriticalMass => 0x21,
+            Self::Ignite => 0x22,
+            Self::FirePower => 0x23,
+            Self::Combustion => 0x24,
+            Self::ImprovedFrostbolt => 0x25,
+            Self::Frostbite => 0x26,
+            Self::PiercingIce => 0x3d,
+            Self::IceFloes => 0x3e,
+            Self::ImprovedBlizzard => 0x3f,
+            Self::ImprovedConeOfCold => 0x40,
+            Self::Permafrost => 0x41,
+            Self::FrostChanneling => 0x42,
+            Self::Shatter => 0x43,
+            Self::WintersChill => 0x44,
+            Self::IcyVeins => 0x45,
+            Self::FrostWarding => 0x46,
+            Self::IceBarrier => 0x47,
+            Self::ColdSnap => 0x48,
+            Self::IceShards => 0x49,
+            Self::ArcaneSubtlety => 0x4a,
+            Self::ArcaneConcentration => 0x4b,
+            Self::ArcaneFocus => 0x4c,
+            Self::ArcaneMind => 0x4d,
+            Self::ArcaneStability => 0x50,
+            Self::SpellImpact => 0x51,
+            Self::MagicAttunement => 0x52,
+            Self::ArcaneShielding => 0x53,
+            Self::ArcaneFortitude => 0x55,
+            Self::PresenceOfMind => 0x56,
+            Self::ArcanePower => 0x57,
+            Self::ImprovedCounterspell => 0x58,
+            Self::DeepWounds => 0x79,
+            Self::SwordSpecialization => 0x7b,
+            Self::ImprovedHeroicStrike => 0x7c,
+            Self::WarriorMaceSpecialization => 0x7d,
+            Self::ImprovedCharge => 0x7e,
+            Self::ImprovedRend => 0x7f,
+            Self::TacticalMastery => 0x80,
+            Self::ImprovedHamstring => 0x81,
+            Self::WarriorDeflection => 0x82,
+            Self::ImprovedOverpower => 0x83,
+            Self::PoleaxeSpecialization => 0x84,
+            Self::SweepingStrikes => 0x85,
+            Self::WarriorWeaponMastery => 0x86,
+            Self::MortalStrike => 0x87,
+            Self::WarriorTwoHandedWeaponSpecialization => 0x88,
+            Self::AngerManagement => 0x89,
+            Self::WarriorAnticipation => 0x8a,
+            Self::WarriorToughness => 0x8c,
+            Self::ImprovedThunderClap => 0x8d,
+            Self::ImprovedBloodrage => 0x8e,
+            Self::Incite => 0x90,
+            Self::Puncture => 0x92,
+            Self::ImprovedRevenge => 0x93,
+            Self::Vigilance => 0x94,
+            Self::GagOrder => 0x95,
+            Self::ImprovedDisciplines => 0x96,
+            Self::ImprovedDisarm => 0x97,
+            Self::ConcussionBlow => 0x98,
+            Self::WarriorLastStand => 0x99,
+            Self::CommandingPresence => 0x9a,
+            Self::Enrage => 0x9b,
+            Self::WarriorFlurry => 0x9c,
+            Self::Cruelty => 0x9d,
+            Self::BoomingVoice => 0x9e,
+            Self::UnbridledWrath => 0x9f,
+            Self::PiercingHowl => 0xa0,
+            Self::ImprovedDemoralizingShout => 0xa1,
+            Self::DeathWish => 0xa5,
+            Self::ImprovedCleave => 0xa6,
+            Self::Bloodthirst => 0xa7,
+            Self::RoguePrecision => 0xb5,
+            Self::CloseQuartersCombat => 0xb6,
+            Self::RogueMaceSpecialization => 0xb8,
+            Self::RogueLightningReflexes => 0xba,
+            Self::RogueDeflection => 0xbb,
+            Self::ImprovedSinisterStrike => 0xc9,
+            Self::ImprovedGouge => 0xcb,
+            Self::Endurance => 0xcc,
+            Self::AdrenalineRush => 0xcd,
+            Self::ImprovedKick => 0xce,
+            Self::RogueDualWieldSpecialization => 0xdd,
+            Self::ImprovedSprint => 0xde,
+            Self::BladeFlurry => 0xdf,
+            Self::MasterOfDeception => 0xf1,
+            Self::HackAndSlash => 0xf2,
+            Self::Camouflage => 0xf4,
+            Self::Initiative => 0xf5,
+            Self::Setup => 0xf6,
+            Self::Elusiveness => 0xf7,
+            Self::Opportunity => 0x105,
+            Self::DirtyTricks => 0x106,
+            Self::ImprovedAmbush => 0x107,
+            Self::DirtyDeeds => 0x109,
+            Self::ImprovedPoisons => 0x10c,
+            Self::Lethality => 0x10d,
+            Self::Malice => 0x10e,
+            Self::RemorselessAttacks => 0x110,
+            Self::Ruthlessness => 0x111,
+            Self::Murder => 0x112,
+            Self::ImprovedEviscerate => 0x114,
+            Self::PuncturingWounds => 0x115,
+            Self::ImprovedExposeArmor => 0x116,
+            Self::ImprovedKidneyShot => 0x117,
+            Self::ColdBlood => 0x118,
+            Self::Overkill => 0x119,
+            Self::SealFate => 0x11b,
+            Self::Preparation => 0x11c,
+            Self::Riposte => 0x12d,
+            Self::GhostlyStrike => 0x12f,
+            Self::Martyrdom => 0x141,
+            Self::PowerInfusion => 0x142,
+            Self::MentalAgility => 0x155,
+            Self::UnbreakableWill => 0x156,
+            Self::ImprovedPowerWordShield => 0x157,
+            Self::ImprovedPowerWordFortitude => 0x158,
+            Self::ImprovedInnerFire => 0x15a,
+            Self::Meditation => 0x15b,
+            Self::InnerFocus => 0x15c,
+            Self::ImprovedManaBurn => 0x15e,
+            Self::SoulWarding => 0x15f,
+            Self::SilentResolve => 0x160,
+            Self::Inspiration => 0x169,
+            Self::Premeditation => 0x17d,
+            Self::Vigor => 0x17e,
+            Self::HolySpecialization => 0x191,
+            Self::SpiritualGuidance => 0x192,
+            Self::SearingLight => 0x193,
+            Self::SpiritualHealing => 0x194,
+            Self::ImprovedRenew => 0x196,
+            Self::ImprovedHealing => 0x198,
+            Self::PriestHealingFocus => 0x19a,
+            Self::SpellWarding => 0x19b,
+            Self::HealingPrayers => 0x19d,
+            Self::ArcaneInstability => 0x1a5,
+            Self::DesperatePrayer => 0x1ba,
+            Self::ShadowWeaving => 0x1cd,
+            Self::Darkness => 0x1ce,
+            Self::ShadowFocus => 0x1cf,
+            Self::SpiritTap => 0x1d1,
+            Self::ShadowAffinity => 0x1d2,
+            Self::ImprovedMindBlast => 0x1e1,
+            Self::ImprovedShadowWordPain => 0x1e2,
+            Self::VeiledShadows => 0x1e3,
+            Self::VampiricEmbrace => 0x1e4,
+            Self::MindFlay => 0x1f5,
+            Self::Shadowform => 0x209,
+            Self::Silence => 0x21d,
+            Self::ImprovedPsychicScream => 0x21e,
+            Self::CallOfFlame => 0x231,
+            Self::CallOfThunder => 0x232,
+            Self::Concussion => 0x233,
+            Self::Convection => 0x234,
+            Self::ElementalFury => 0x235,
+            Self::ImprovedFireNova => 0x237,
+            Self::ElementalMastery => 0x23d,
+            Self::ElementalFocus => 0x23e,
+            Self::Reverberation => 0x23f,
+            Self::AncestralHealing => 0x245,
+            Self::TidalForce => 0x246,
+            Self::ImprovedWaterShield => 0x247,
+            Self::ImprovedHealingWave => 0x24a,
+            Self::ShamanHealingFocus => 0x24b,
+            Self::RestorativeTotems => 0x24c,
+            Self::ImprovedReincarnation => 0x24d,
+            Self::ManaTideTotem => 0x24e,
+            Self::ShamanNaturesSwiftness => 0x24f,
+            Self::Purification => 0x250,
+            Self::TidalFocus => 0x251,
+            Self::TidalMastery => 0x252,
+            Self::TotemicFocus => 0x253,
+            Self::ShamanAnticipation => 0x259,
+            Self::ShamanFlurry => 0x25a,
+            Self::ImprovedGhostWolf => 0x25d,
+            Self::ImprovedShields => 0x25f,
+            Self::GuardianTotems => 0x261,
+            Self::EnhancingTotems => 0x262,
+            Self::ElementalWeapons => 0x263,
+            Self::ThunderingStrikes => 0x265,
+            Self::AncestralKnowledge => 0x266,
+            Self::ShamanToughness => 0x267,
+            Self::SpiritWeapons => 0x268,
+            Self::ShamanisticFocus => 0x269,
+            Self::IronWill => 0x281,
+            Self::BloodCraze => 0x295,
+            Self::Impale => 0x296,
+            Self::Hemorrhage => 0x2a9,
+            Self::VilePoisons => 0x2aa,
+            Self::WarriorOneHandedWeaponSpecialization => 0x2be,
+            Self::LightningMastery => 0x2d1,
+            Self::ArcticReach => 0x2e5,
+            Self::StarlightWrath => 0x2fa,
+            Self::ImprovedMoonfire => 0x2fb,
+            Self::NaturesReach => 0x2fc,
+            Self::Brambles => 0x30e,
+            Self::Moonglow => 0x30f,
+            Self::CelestialFocus => 0x310,
+            Self::InsectSwarm => 0x314,
+            Self::NaturesGrace => 0x315,
+            Self::Moonfury => 0x316,
+            Self::DruidVengeance => 0x318,
+            Self::MoonkinForm => 0x319,
+            Self::DruidThickHide => 0x31a,
+            Self::FeralAggression => 0x31b,
+            Self::DruidFerocity => 0x31c,
+            Self::BrutalImpact => 0x31d,
+            Self::SharpenedClaws => 0x31e,
+            Self::FeralInstinct => 0x31f,
+            Self::PrimalFury => 0x321,
+            Self::ShreddingAttacks => 0x322,
+            Self::PredatoryStrikes => 0x323,
+            Self::FeralCharge => 0x324,
+            Self::SavageFury => 0x325,
+            Self::FeralSwiftness => 0x327,
+            Self::HeartOfTheWild => 0x328,
+            Self::LeaderOfThePack => 0x329,
+            Self::ImprovedMarkOfTheWild => 0x335,
+            Self::Furor => 0x336,
+            Self::NaturesFocus => 0x337,
+            Self::Naturalist => 0x338,
+            Self::NaturesBounty => 0x339,
+            Self::NaturalShapeshifter => 0x33a,
+            Self::OmenOfClarity => 0x33b,
+            Self::GiftOfNature => 0x33c,
+            Self::DruidIntensity => 0x33d,
+            Self::ImprovedRejuvenation => 0x33e,
+            Self::DruidNaturesSwiftness => 0x33f,
+            Self::Subtlety => 0x349,
+            Self::ImprovedTranquility => 0x34a,
+            Self::TranquilSpirit => 0x34b,
+            Self::Swiftmend => 0x34c,
+            Self::ShadowReach => 0x371,
+            Self::Stormstrike => 0x385,
+            Self::Cataclysm => 0x3ad,
+            Self::Bane => 0x3af,
+            Self::ImprovedShadowBolt => 0x3b0,
+            Self::ImprovedImmolate => 0x3c1,
+            Self::Shadowburn => 0x3c3,
+            Self::DestructiveReach => 0x3c4,
+            Self::ImprovedSearingPain => 0x3c5,
+            Self::Emberstorm => 0x3c6,
+            Self::Ruin => 0x3c7,
+            Self::Conflagrate => 0x3c8,
+            Self::Devastation => 0x3d5,
+            Self::Aftermath => 0x3d6,
+            Self::DemonicPower => 0x3d7,
+            Self::WarlockIntensity => 0x3d9,
+            Self::Pyroclasm => 0x3da,
+            Self::FelConcentration => 0x3e9,
+            Self::Nightfall => 0x3ea,
+            Self::ImprovedCorruption => 0x3eb,
+            Self::SoulSiphon => 0x3ec,
+            Self::Suppression => 0x3ed,
+            Self::ImprovedCurseOfWeakness => 0x3ee,
+            Self::ImprovedLifeTap => 0x3ef,
+            Self::GrimReach => 0x3fd,
+            Self::DarkPact => 0x3fe,
+            Self::SiphonLife => 0x411,
+            Self::ShadowMastery => 0x412,
+            Self::AmplifyCurse => 0x425,
+            Self::CurseOfExhaustion => 0x439,
+            Self::ImprovedDrainSoul => 0x44d,
+            Self::Aggression => 0x462,
+            Self::SerratedBlades => 0x463,
+            Self::Incineration => 0x475,
+            Self::ArcaneMeditation => 0x476,
+            Self::DruidSurvivalInstincts => 0x48a,
+            Self::DivineFury => 0x49d,
+            Self::MentalStrength => 0x4b1,
+            Self::BorrowedTime => 0x4b2,
+            Self::ImprovedHealthstone => 0x4c5,
+            Self::ImprovedImp => 0x4c6,
+            Self::DemonicEmbrace => 0x4c7,
+            Self::ImprovedHealthFunnel => 0x4c8,
+            Self::DemonicBrutality => 0x4c9,
+            Self::FelDomination => 0x4ca,
+            Self::MasterSummoner => 0x4cb,
+            Self::FelVitality => 0x4da,
+            Self::ImprovedSuccubus => 0x4db,
+            Self::MasterDemonologist => 0x4dc,
+            Self::MasterConjuror => 0x4ed,
+            Self::UnholyPower => 0x4ee,
+            Self::DemonicKnowledge => 0x4ef,
+            Self::ManaFeed => 0x501,
+            Self::SoulLink => 0x502,
+            Self::MoltenCore => 0x503,
+            Self::ImprovedCurseOfAgony => 0x504,
+            Self::HunterLightningReflexes => 0x517,
+            Self::Entrapment => 0x518,
+            Self::TrapMastery => 0x519,
+            Self::LockAndLoad => 0x51a,
+            Self::SurvivalTactics => 0x51d,
+            Self::Surefooted => 0x51e,
+            Self::HunterDeflection => 0x51f,
+            Self::Counterattack => 0x520,
+            Self::KillerInstinct => 0x529,
+            Self::BlackArrow => 0x52a,
+            Self::WyvernSting => 0x52d,
+            Self::ImprovedConcussiveShot => 0x53d,
+            Self::Efficiency => 0x53e,
+            Self::ImprovedHuntersMark => 0x53f,
+            Self::LethalShots => 0x540,
+            Self::AimedShot => 0x541,
+            Self::ImprovedArcaneShot => 0x542,
+            Self::Barrage => 0x543,
+            Self::ImprovedStings => 0x544,
+            Self::MortalShots => 0x545,
+            Self::ConcussiveBarrage => 0x547,
+            Self::Readiness => 0x549,
+            Self::TrueshotAura => 0x551,
+            Self::RangedWeaponSpecialization => 0x552,
+            Self::ImprovedAspectOfTheMonkey => 0x565,
+            Self::ImprovedAspectOfTheHawk => 0x566,
+            Self::Pathfinding => 0x568,
+            Self::ImprovedMendPet => 0x569,
+            Self::BestialWrath => 0x56a,
+            Self::Intimidation => 0x56b,
+            Self::SpiritBond => 0x56c,
+            Self::EnduranceTraining => 0x56d,
+            Self::BestialDiscipline => 0x56e,
+            Self::HunterFerocity => 0x571,
+            Self::HunterThickHide => 0x573,
+            Self::UnleashedFury => 0x574,
+            Self::Frenzy => 0x575,
+            Self::ImprovedBlessingOfMight => 0x579,
+            Self::PaladinVengeance => 0x57a,
+            Self::PaladinDeflection => 0x57b,
+            Self::Benediction => 0x57f,
+            Self::PaladinTwoHandedWeaponSpecialization => 0x582,
+            Self::Conviction => 0x583,
+            Self::Redoubt => 0x58d,
+            Self::ImprovedDevotionAura => 0x58e,
+            Self::PaladinToughness => 0x58f,
+            Self::GuardiansFavor => 0x591,
+            Self::Reckoning => 0x592,
+            Self::PaladinOneHandedWeaponSpecialization => 0x595,
+            Self::HolyShield => 0x596,
+            Self::BlessingOfSanctuary => 0x597,
+            Self::SpiritualFocus => 0x598,
+            Self::DivineFavor => 0x599,
+            Self::AuraMastery => 0x59b,
+            Self::Repentance => 0x5a1,
+            Self::Divinity => 0x5a2,
+            Self::ImprovedLayOnHands => 0x5a3,
+            Self::HealingLight => 0x5a4,
+            Self::ImprovedBlessingOfWisdom => 0x5a6,
+            Self::DivineIntellect => 0x5a9,
+            Self::ImprovedConcentrationAura => 0x5aa,
+            Self::Illumination => 0x5b5,
+            Self::SealsOfThePure => 0x5b7,
+            Self::HeartOfTheCrusader => 0x5b8,
+            Self::SanctifiedLight => 0x5b9,
+            Self::SealOfCommand => 0x5c9,
+            Self::ImprovedRighteousFury => 0x5dd,
+            Self::HolyShock => 0x5de,
+            Self::ImprovedHammerOfJustice => 0x5f1,
+            Self::ImprovedBerserkerRage => 0x605,
+            Self::ImprovedExecute => 0x606,
+            Self::ImprovedIntercept => 0x607,
+            Self::SpiritOfRedemption => 0x619,
+            Self::WarriorDualWieldSpecialization => 0x62d,
+            Self::ShieldSpecialization => 0x641,
+            Self::SavageStrikes => 0x655,
+            Self::Survivalist => 0x656,
+            Self::ImprovedTracking => 0x657,
+            Self::FocusedFire => 0x658,
+            Self::ImprovedRevivePet => 0x659,
+            Self::HolyPower => 0x65b,
+            Self::UnyieldingFaith => 0x65c,
+            Self::PaladinAnticipation => 0x65d,
+            Self::ImprovedJudgements => 0x65f,
+            Self::EyeForAnEye => 0x660,
+            Self::Vindication => 0x661,
+            Self::PursuitOfJustice => 0x662,
+            Self::HolyReach => 0x663,
+            Self::BlessedRecovery => 0x664,
+            Self::Lightwell => 0x665,
+            Self::ImprovedVampiricEmbrace => 0x666,
+            Self::MasterOfElements => 0x667,
+            Self::ElementalWarding => 0x668,
+            Self::ElementalReach => 0x669,
+            Self::EyeOfTheStorm => 0x66a,
+            Self::ShamanWeaponMastery => 0x66b,
+            Self::ElementalDevastation => 0x66d,
+            Self::HealingGrace => 0x66e,
+            Self::ImprovedWindfuryTotem => 0x66f,
+            Self::HealingWay => 0x670,
+            Self::MagePrecision => 0x671,
+            Self::MagicAbsorption => 0x672,
+            Self::ImprovedDefensiveStance => 0x674,
+            Self::WarriorVitality => 0x675,
+            Self::ShieldMastery => 0x676,
+            Self::ImprovedWhirlwind => 0x677,
+            Self::WarriorPrecision => 0x679,
+            Self::ImprovedBerserkerStance => 0x67a,
+            Self::Rampage => 0x67b,
+            Self::FocusedRage => 0x67c,
+            Self::EndlessRage => 0x67d,
+            Self::SuddenDeath => 0x67e,
+            Self::SecondWind => 0x67f,
+            Self::BloodFrenzy => 0x680,
+            Self::Devastate => 0x682,
+            Self::Malediction => 0x683,
+            Self::ImprovedHowlOfTerror => 0x684,
+            Self::Contagion => 0x685,
+            Self::UnstableAffliction => 0x686,
+            Self::DemonicAegis => 0x687,
+            Self::SummonFelguard => 0x688,
+            Self::DemonicTactics => 0x689,
+            Self::Shadowfury => 0x68c,
+            Self::ShadowAndFlame => 0x68d,
+            Self::SoulLeech => 0x68e,
+            Self::NetherProtection => 0x68f,
+            Self::DemonicResilience => 0x690,
+            Self::UnrelentingStorm => 0x692,
+            Self::ElementalPrecision => 0x695,
+            Self::LightningOverload => 0x696,
+            Self::TotemOfWrath => 0x697,
+            Self::UnleashedRage => 0x699,
+            Self::DualWield => 0x69a,
+            Self::MentalQuickness => 0x69b,
+            Self::ShamanDualWieldSpecialization => 0x69c,
+            Self::ShamanisticRage => 0x69d,
+            Self::ShamanFocusedMind => 0x69f,
+            Self::NaturesBlessing => 0x6a0,
+            Self::ImprovedChainHeal => 0x6a1,
+            Self::EarthShield => 0x6a2,
+            Self::NaturesGuardian => 0x6a3,
+            Self::SleightOfHand => 0x6a4,
+            Self::HeightenedSenses => 0x6a5,
+            Self::Deadliness => 0x6a6,
+            Self::WeaponExpertise => 0x6a7,
+            Self::RogueVitality => 0x6a9,
+            Self::BladeTwisting => 0x6aa,
+            Self::NervesOfSteel => 0x6ab,
+            Self::SurpriseAttacks => 0x6ad,
+            Self::EnvelopingShadows => 0x6af,
+            Self::SinisterCalling => 0x6b0,
+            Self::MasterOfSubtlety => 0x6b1,
+            Self::Shadowstep => 0x6b2,
+            Self::MasterPoisoner => 0x6b3,
+            Self::FindWeakness => 0x6b6,
+            Self::Mutilate => 0x6b7,
+            Self::FleetFooted => 0x6b9,
+            Self::CheatDeath => 0x6ba,
+            Self::DeadenedNerves => 0x6bb,
+            Self::ImprovedBlink => 0x6bc,
+            Self::ArcanePotency => 0x6bd,
+            Self::PrismaticCloak => 0x6be,
+            Self::ArcaneEmpowerment => 0x6bf,
+            Self::MindMastery => 0x6c0,
+            Self::Slow => 0x6c1,
+            Self::PlayingWithFire => 0x6c2,
+            Self::BlazingSpeed => 0x6c3,
+            Self::MoltenFury => 0x6c4,
+            Self::Pyromaniac => 0x6c5,
+            Self::EmpoweredFire => 0x6c6,
+            Self::DragonsBreath => 0x6c7,
+            Self::FrozenCore => 0x6c8,
+            Self::ColdAsIce => 0x6c9,
+            Self::ArcticWinds => 0x6ca,
+            Self::EmpoweredFrostbolt => 0x6cc,
+            Self::SummonWaterElemental => 0x6cd,
+            Self::PureOfHeart => 0x6ce,
+            Self::PurifyingPower => 0x6cf,
+            Self::BlessedLife => 0x6d0,
+            Self::LightsGrace => 0x6d1,
+            Self::HolyGuidance => 0x6d2,
+            Self::DivineIllumination => 0x6d3,
+            Self::Stoicism => 0x6d4,
+            Self::SacredDuty => 0x6d6,
+            Self::ArdentDefender => 0x6d7,
+            Self::CombatExpertise => 0x6d9,
+            Self::AvengersShield => 0x6da,
+            Self::Crusade => 0x6db,
+            Self::SanctifiedRetribution => 0x6dc,
+            Self::DivinePurpose => 0x6dd,
+            Self::JudgementsOfTheWise => 0x6de,
+            Self::Fanaticism => 0x6df,
+            Self::SanctityOfBattle => 0x6e1,
+            Self::QuickRecovery => 0x6e2,
+            Self::ShadowEmbrace => 0x6e3,
+            Self::EmpoweredCorruption => 0x6e4,
+            Self::BlessedResilience => 0x6e5,
+            Self::SurgeOfLight => 0x6e6,
+            Self::EmpoweredHealing => 0x6e7,
+            Self::HolyConcentration => 0x6e8,
+            Self::Absolution => 0x6e9,
+            Self::FocusedPower => 0x6eb,
+            Self::Enlightenment => 0x6ec,
+            Self::ImprovedFlashHeal => 0x6ed,
+            Self::PainSuppression => 0x6ee,
+            Self::PriestFocusedMind => 0x6f1,
+            Self::ShadowPower => 0x6f2,
+            Self::VampiricTouch => 0x6f3,
+            Self::MindMelt => 0x6f5,
+            Self::LunarGuidance => 0x6f6,
+            Self::BalanceOfPower => 0x6f7,
+            Self::Dreamstate => 0x6f8,
+            Self::ImprovedFaerieFire => 0x6f9,
+            Self::WrathOfCenarius => 0x6fa,
+            Self::ForceOfNature => 0x6fb,
+            Self::EmpoweredTouch => 0x6fc,
+            Self::EmpoweredRejuvenation => 0x6fd,
+            Self::NaturalPerfection => 0x6fe,
+            Self::TreeOfLife => 0x6ff,
+            Self::NurturingInstinct => 0x700,
+            Self::PrimalTenacity => 0x701,
+            Self::SurvivalOfTheFittest => 0x702,
+            Self::PredatoryInstincts => 0x703,
+            Self::Mangle => 0x704,
+            Self::LivingSpirit => 0x705,
+            Self::ImprovedLeaderOfThePack => 0x706,
+            Self::AnimalHandler => 0x707,
+            Self::FerociousInspiration => 0x708,
+            Self::CatlikeReflexes => 0x709,
+            Self::SerpentsSwiftness => 0x70a,
+            Self::TheBeastWithin => 0x70b,
+            Self::CombatExperience => 0x70c,
+            Self::CarefulAim => 0x70e,
+            Self::MasterMarksman => 0x70f,
+            Self::SilencingShot => 0x710,
+            Self::Resourcefulness => 0x711,
+            Self::HunterSurvivalInstincts => 0x712,
+            Self::ThrillOfTheHunt => 0x713,
+            Self::ExposeWeakness => 0x714,
+            Self::MasterTactician => 0x715,
+            Self::ScatterShot => 0x716,
+            Self::CircleOfHealing => 0x717,
+            Self::Misery => 0x718,
+            Self::Backlash => 0x719,
+            Self::GoForTheThroat => 0x71a,
+            Self::RapidKilling => 0x71b,
+            Self::HawkEye => 0x71c,
+            Self::ImprovedBarrage => 0x71d,
+            Self::NaturesMajesty => 0x71e,
+            Self::CrusaderStrike => 0x71f,
+            Self::ImprovedMortalStrike => 0x720,
+            Self::CombatPotency => 0x721,
+            Self::SpellPower => 0x722,
+            Self::ImprovedSliceAndDice => 0x723,
+            Self::ArcaneFlows => 0x733,
+            Self::IncantersAbsorption => 0x734,
+            Self::StudentOfTheMind => 0x735,
+            Self::NetherwindPresence => 0x736,
+            Self::ArcaneBarrage => 0x737,
+            Self::FieryPayback => 0x738,
+            Self::Firestarter => 0x739,
+            Self::HotStreak => 0x73a,
+            Self::Burnout => 0x73b,
+            Self::LivingBomb => 0x73c,
+            Self::FingersOfFrost => 0x73d,
+            Self::BrainFreeze => 0x73e,
+            Self::EnduringWinter => 0x73f,
+            Self::ChilledToTheBone => 0x740,
+            Self::DeepFreeze => 0x741,
+            Self::FocusedWill => 0x742,
+            Self::Trauma => 0x743,
+            Self::UnrelentingAssault => 0x744,
+            Self::StrengthOfArms => 0x746,
+            Self::Bladestorm => 0x747,
+            Self::IntensifyRage => 0x748,
+            Self::FuriousAttacks => 0x749,
+            Self::Bloodsurge => 0x74a,
+            Self::TitansGrip => 0x74b,
+            Self::HeroicFury => 0x74c,
+            Self::Safeguard => 0x74e,
+            Self::SwordAndBoard => 0x74f,
+            Self::Shockwave => 0x750,
+            Self::ImprovedFelhunter => 0x751,
+            Self::DeathsEmbrace => 0x753,
+            Self::EverlastingAffliction => 0x754,
+            Self::Eradication => 0x756,
+            Self::DemonicEmpowerment => 0x758,
+            Self::ImprovedDemonicTactics => 0x75a,
+            Self::FelSynergy => 0x75b,
+            Self::Nemesis => 0x75c,
+            Self::DemonicPact => 0x75d,
+            Self::Metamorphosis => 0x75e,
+            Self::MoltenSkin => 0x75f,
+            Self::Backdraft => 0x760,
+            Self::ImprovedSoulLeech => 0x761,
+            Self::FireAndBrimstone => 0x762,
+            Self::ChaosBolt => 0x763,
+            Self::CriticalBlock => 0x765,
+            Self::Aspiration => 0x766,
+            Self::DivineAegis => 0x767,
+            Self::Rapture => 0x768,
+            Self::Penance => 0x769,
+            Self::TwinDisciplines => 0x76a,
+            Self::Grace => 0x76d,
+            Self::EmpoweredRenew => 0x76e,
+            Self::TestOfFaith => 0x76f,
+            Self::Serendipity => 0x770,
+            Self::DivineProvidence => 0x771,
+            Self::ImprovedShadowform => 0x772,
+            Self::TwistedFaith => 0x773,
+            Self::PsychicHorror => 0x774,
+            Self::PainAndSuffering => 0x775,
+            Self::Dispersion => 0x776,
+            Self::GuardianSpirit => 0x777,
+            Self::ImprovedMoonkinForm => 0x778,
+            Self::OwlkinFrenzy => 0x779,
+            Self::PrimalPrecision => 0x77a,
+            Self::MasterShapeshifter => 0x77b,
+            Self::GiftOfTheEarthmother => 0x77c,
+            Self::WildGrowth => 0x77d,
+            Self::RendAndTear => 0x77e,
+            Self::InfectedWounds => 0x77f,
+            Self::ImprovedMangle => 0x780,
+            Self::KingOfTheJungle => 0x781,
+            Self::LivingSeed => 0x782,
+            Self::Typhoon => 0x783,
+            Self::Eclipse => 0x784,
+            Self::GaleWinds => 0x785,
+            Self::Starfall => 0x786,
+            Self::Berserk => 0x787,
+            Self::EarthAndMoon => 0x788,
+            Self::Revitalize => 0x789,
+            Self::ImprovedTreeOfLife => 0x78a,
+            Self::Virulence => 0x78c,
+            Self::Morbidity => 0x78d,
+            Self::RavenousDead => 0x78e,
+            Self::ImprovedBloodPresence => 0x790,
+            Self::BladedArmor => 0x792,
+            Self::Butchery => 0x793,
+            Self::RuneTap => 0x795,
+            Self::ImprovedRuneTap => 0x796,
+            Self::DarkConviction => 0x797,
+            Self::BloodyVengeance => 0x798,
+            Self::Subversion => 0x799,
+            Self::ScentOfBlood => 0x79c,
+            Self::MarkOfBlood => 0x79d,
+            Self::VeteranOfTheThirdWar => 0x79e,
+            Self::Vendetta => 0x7a1,
+            Self::Hysteria => 0x7a2,
+            Self::SuddenDoom => 0x7a3,
+            Self::HeartStrike => 0x7a5,
+            Self::MightOfMograine => 0x7a6,
+            Self::WillOfTheNecropolis => 0x7a7,
+            Self::Bloodworms => 0x7a8,
+            Self::DancingRuneWeapon => 0x7a9,
+            Self::CryptFever => 0x7aa,
+            Self::Epidemic => 0x7ab,
+            Self::DeathKnightToughness => 0x7b0,
+            Self::EndlessWinter => 0x7b3,
+            Self::BlackIce => 0x7b5,
+            Self::FrostStrike => 0x7b7,
+            Self::UnbreakableArmor => 0x7bb,
+            Self::Deathchill => 0x7bc,
+            Self::ChillOfTheGrave => 0x7bd,
+            Self::MasterOfGhouls => 0x7c0,
+            Self::CorpseExplosion => 0x7c1,
+            Self::HowlingBlast => 0x7c5,
+            Self::FrigidDreadplate => 0x7c6,
+            Self::Rime => 0x7c8,
+            Self::MercilessCombat => 0x7c9,
+            Self::UnholyBlight => 0x7cc,
+            Self::Acclimation => 0x7cd,
+            Self::TundraStalker => 0x7ce,
+            Self::HungeringCold => 0x7cf,
+            Self::SummonGargoyle => 0x7d0,
+            Self::Reaping => 0x7d1,
+            Self::WanderingPlague => 0x7d3,
+            Self::BloodCakedBlade => 0x7d4,
+            Self::Impurity => 0x7d5,
+            Self::BoneShield => 0x7d7,
+            Self::Outbreak => 0x7d8,
+            Self::MagicSuppression => 0x7d9,
+            Self::Dirge => 0x7db,
+            Self::ImprovedUnholyPresence => 0x7dd,
+            Self::BloodyStrikes => 0x7df,
+            Self::BladeBarrier => 0x7e1,
+            Self::SpellDeflection => 0x7e2,
+            Self::VampiricBlood => 0x7e3,
+            Self::RunicPowerMastery => 0x7e4,
+            Self::NervesOfColdSteel => 0x7e6,
+            Self::UnholyCommand => 0x7e9,
+            Self::ImprovedSpiritTap => 0x7eb,
+            Self::ImprovedFrostPresence => 0x7ed,
+            Self::GlacierRot => 0x7ee,
+            Self::ImprovedIcyTouch => 0x7ef,
+            Self::BloodGorged => 0x7f2,
+            Self::IcyReach => 0x7f3,
+            Self::RageOfRivendare => 0x7f4,
+            Self::OnAPaleHorse => 0x7f7,
+            Self::GuileOfGorefiend => 0x7f8,
+            Self::Haunt => 0x7f9,
+            Self::IcyTalons => 0x7fa,
+            Self::EbonPlaguebringer => 0x7fb,
+            Self::KillingMachine => 0x7fc,
+            Self::EmpoweredImp => 0x7fd,
+            Self::Necrosis => 0x7ff,
+            Self::Annihilation => 0x800,
+            Self::ElementalOath => 0x801,
+            Self::AstralShift => 0x802,
+            Self::LavaFlows => 0x803,
+            Self::StormEarthAndFire => 0x804,
+            Self::Thunderstorm => 0x805,
+            Self::ImprovedStormstrike => 0x806,
+            Self::StaticShock => 0x807,
+            Self::EarthenPower => 0x808,
+            Self::MaelstromWeapon => 0x809,
+            Self::FeralSpirit => 0x80a,
+            Self::ImprovedEarthShield => 0x80b,
+            Self::BlessingOfTheEternals => 0x80c,
+            Self::AncestralAwakening => 0x80d,
+            Self::TidalWaves => 0x80f,
+            Self::Riptide => 0x810,
+            Self::DeadlyBrew => 0x811,
+            Self::TurnTheTables => 0x812,
+            Self::BloodSpatter => 0x814,
+            Self::FocusedAttacks => 0x815,
+            Self::CutToTheChase => 0x816,
+            Self::HungerForBlood => 0x817,
+            Self::ThrowingSpecialization => 0x818,
+            Self::UnfairAdvantage => 0x819,
+            Self::SavageCombat => 0x81a,
+            Self::PreyOnTheWeak => 0x81b,
+            Self::KillingSpree => 0x81c,
+            Self::Waylay => 0x81d,
+            Self::HonorAmongThieves => 0x81e,
+            Self::FilthyTricks => 0x81f,
+            Self::SlaughterFromTheShadows => 0x820,
+            Self::ShadowDance => 0x821,
+            Self::ViciousStrikes => 0x822,
+            Self::MentalDexterity => 0x823,
+            Self::CleanseSpirit => 0x824,
+            Self::GhoulFrenzy => 0x825,
+            Self::DeathRuneMastery => 0x826,
+            Self::EarthsGrasp => 0x835,
+            Self::AbominationsMight => 0x839,
+            Self::HunterCullingTheHerd => 0x83a,
+            Self::HunterCobraReflexes => 0x83b,
+            Self::HunterDash => 0x83d,
+            Self::HunterCullingTheHerd2 => 0x83e,
+            Self::HunterCharge => 0x83f,
+            Self::HunterGreatStamina => 0x840,
+            Self::HunterNaturalArmor => 0x841,
+            Self::HunterCobraReflexes2 => 0x842,
+            Self::HunterGreatStamina2 => 0x844,
+            Self::HunterNaturalArmor2 => 0x845,
+            Self::HunterCobraReflexes3 => 0x846,
+            Self::HunterDash2 => 0x847,
+            Self::HunterGreatStamina3 => 0x848,
+            Self::HunterNaturalArmor3 => 0x849,
+            Self::PetBarding => 0x84a,
+            Self::GuardDog => 0x84b,
+            Self::ImprovedCower => 0x84c,
+            Self::HunterSpikedCollar => 0x84d,
+            Self::HunterSpikedCollar2 => 0x84e,
+            Self::HunterSpikedCollar3 => 0x84f,
+            Self::Bloodthirsty => 0x850,
+            Self::SpidersBite => 0x851,
+            Self::PiercingShots => 0x852,
+            Self::RapidRecuperation => 0x853,
+            Self::WildQuiver => 0x854,
+            Self::ImprovedSteadyShot => 0x855,
+            Self::MarkedForDeath => 0x856,
+            Self::ChimeraShot => 0x857,
+            Self::Invigoration => 0x858,
+            Self::CobraStrikes => 0x859,
+            Self::AspectMastery => 0x85a,
+            Self::BeastMastery => 0x85b,
+            Self::Longevity => 0x85c,
+            Self::NoxiousStings => 0x85d,
+            Self::PointOfNoEscape => 0x85e,
+            Self::SniperTraining => 0x85f,
+            Self::HuntingParty => 0x860,
+            Self::ExplosiveShot => 0x861,
+            Self::SanctifiedWrath => 0x863,
+            Self::SwiftRetribution => 0x864,
+            Self::RighteousVengeance => 0x865,
+            Self::DivineStorm => 0x866,
+            Self::HunterBoarsSpeed => 0x867,
+            Self::HunterLionhearted => 0x868,
+            Self::LickYourWounds => 0x869,
+            Self::HunterGreatResistance => 0x86a,
+            Self::Rabid => 0x86b,
+            Self::HeartOfThePhoenix => 0x86c,
+            Self::CallOfTheWild => 0x86d,
+            Self::HunterBoarsSpeed2 => 0x870,
+            Self::HunterGreatResistance2 => 0x871,
+            Self::HunterLionhearted2 => 0x872,
+            Self::HunterGraceOfTheMantis => 0x873,
+            Self::HunterBoarsSpeed3 => 0x875,
+            Self::HunterCullingTheHerd3 => 0x876,
+            Self::HunterLionhearted3 => 0x877,
+            Self::HunterGreatResistance3 => 0x878,
+            Self::Intervene => 0x879,
+            Self::Taunt => 0x87a,
+            Self::HunterLastStand => 0x87b,
+            Self::HunterRoarOfSacrifice => 0x87c,
+            Self::BloodOfTheRhino => 0x87d,
+            Self::Bullheaded => 0x87f,
+            Self::TheArtOfWar => 0x880,
+            Self::Cornered => 0x881,
+            Self::SheathOfLight => 0x883,
+            Self::WolverineBite => 0x885,
+            Self::OwlsFocus => 0x886,
+            Self::FeedingFrenzy => 0x887,
+            Self::RoarOfRecovery => 0x888,
+            Self::DivineStrength => 0x889,
+            Self::SacredCleansing => 0x88e,
+            Self::EnlightenedJudgements => 0x88f,
+            Self::BeaconOfLight => 0x890,
+            Self::InfusionOfLight => 0x891,
+            Self::GuardedByTheLight => 0x892,
+            Self::TouchedByTheLight => 0x893,
+            Self::HammerOfTheRighteous => 0x894,
+            Self::FocusedAim => 0x895,
+            Self::BlessedHands => 0x896,
+            Self::JudgementsOfThePure => 0x897,
+            Self::JudgementsOfTheJust => 0x898,
+            Self::HunterDive => 0x899,
+            Self::HunterDive2 => 0x89b,
+            Self::ShieldOfTheTemplar => 0x89c,
+            Self::ImprovedFear => 0x89d,
+            Self::CarrionFeeder => 0x89e,
+            Self::HunterMobility => 0x89f,
+            Self::HunterMobility2 => 0x8a0,
+            Self::MissileBarrage => 0x8a1,
+            Self::BloodOfTheNorth => 0x8a2,
+            Self::FocusMagic => 0x8a3,
+            Self::BurningDetermination => 0x8a4,
+            Self::ShatteredBarrier => 0x8a6,
+            Self::Lichborne => 0x8a7,
+            Self::ScourgeStrike => 0x8a8,
+            Self::DeathKnightTwoHandedWeaponSpecialization => 0x8a9,
+            Self::DeathKnightAnticipation => 0x8aa,
+            Self::Swoop => 0x8ab,
+            Self::AntiMagicZone => 0x8ad,
+            Self::TormentTheWeak => 0x8ae,
+            Self::ImprovedIcyTalons => 0x8af,
+            Self::NightOfTheDead => 0x8b1,
+            Self::Desecration => 0x8b2,
+            Self::KindredSpirits => 0x8b3,
+            Self::HunterVsWild => 0x8b4,
+            Self::TNT => 0x8b5,
+            Self::WreckingCrew => 0x8b7,
+            Self::TasteForBlood => 0x8b8,
+            Self::ImprovedSlam => 0x8b9,
+            Self::UnendingFury => 0x8ba,
+            Self::RenewedHope => 0x8bb,
+            Self::Warbringer => 0x8bc,
+            Self::HunterCharge2 => 0x8bd,
+            Self::Genesis => 0x8be,
+            Self::ImprovedInsectSwarm => 0x8bf,
+            Self::NaturesSplendor => 0x8c0,
+            Self::ProtectorOfThePack => 0x8c1,
+            Self::NaturalReaction => 0x8c2,
+            Self::RelentlessStrikes => 0x8c4,
+            Self::Pandemic => 0x8c5,
+            Self::DamageShield => 0x8c6,
+            Self::ImprovedSpellReflection => 0x8c7,
+            Self::LavaLash => 0x8c9,
+            Self::ArmoredToTheTeeth => 0x8ca,
+            Self::Shamanism => 0x8cc,
+            Self::HunterWildHunt => 0x8cd,
+            Self::SharkAttack => 0x8ce,
+            Self::HunterWildHunt2 => 0x8cf,
+            Self::HunterWildHunt3 => 0x8d0,
+            Self::HunterGraceOfTheMantis2 => 0x8d1,
+            Self::Silverback => 0x8d2,
+            Self::ImprovedDeathStrike => 0x8d3,
+            Self::Chilblains => 0x8d4,
+            Self::Decimation => 0x8d5,
+            Self::BoomingEchoes => 0x8d6,
+            Self::FrozenPower => 0x8d7,
+            Self::ImprovedBarkskin => 0x8d8,
+            Self::PrimalGore => 0x8da,
+            Self::ImprovedDevouringPlague => 0x8db,
+            Self::ReflectiveShield => 0x8dc,
+            Self::Thunderstomp => 0x8e5,
+            Self::HunterRoarOfSacrifice2 => 0x8e6,
+            Self::BodyAndSoul => 0x8e7,
+            Self::DivineSacrifice => 0x8e8,
+            Self::DivineGuardian => 0x8e9,
+            Self::SpiritualAttunement => 0x8ea,
+            Self::Juggernaut => 0x8eb,
+            Self::ThreatOfThassarian => 0x8ec,
+            Self::Desolation => 0x8ed,
+        }
+    }
+
+}
+
+impl Default for Talent {
+    fn default() -> Self {
+        Self::BurningSoul
+    }
+}
+
+impl std::fmt::Display for Talent {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::BurningSoul => f.write_str("BurningSoul"),
+            Self::MoltenShields => f.write_str("MoltenShields"),
+            Self::ImprovedScorch => f.write_str("ImprovedScorch"),
+            Self::ImprovedFireball => f.write_str("ImprovedFireball"),
+            Self::ImprovedFireBlast => f.write_str("ImprovedFireBlast"),
+            Self::FlameThrowing => f.write_str("FlameThrowing"),
+            Self::Pyroblast => f.write_str("Pyroblast"),
+            Self::Impact => f.write_str("Impact"),
+            Self::WorldInFlames => f.write_str("WorldInFlames"),
+            Self::BlastWave => f.write_str("BlastWave"),
+            Self::CriticalMass => f.write_str("CriticalMass"),
+            Self::Ignite => f.write_str("Ignite"),
+            Self::FirePower => f.write_str("FirePower"),
+            Self::Combustion => f.write_str("Combustion"),
+            Self::ImprovedFrostbolt => f.write_str("ImprovedFrostbolt"),
+            Self::Frostbite => f.write_str("Frostbite"),
+            Self::PiercingIce => f.write_str("PiercingIce"),
+            Self::IceFloes => f.write_str("IceFloes"),
+            Self::ImprovedBlizzard => f.write_str("ImprovedBlizzard"),
+            Self::ImprovedConeOfCold => f.write_str("ImprovedConeOfCold"),
+            Self::Permafrost => f.write_str("Permafrost"),
+            Self::FrostChanneling => f.write_str("FrostChanneling"),
+            Self::Shatter => f.write_str("Shatter"),
+            Self::WintersChill => f.write_str("Winter's Chill"),
+            Self::IcyVeins => f.write_str("IcyVeins"),
+            Self::FrostWarding => f.write_str("FrostWarding"),
+            Self::IceBarrier => f.write_str("IceBarrier"),
+            Self::ColdSnap => f.write_str("ColdSnap"),
+            Self::IceShards => f.write_str("IceShards"),
+            Self::ArcaneSubtlety => f.write_str("ArcaneSubtlety"),
+            Self::ArcaneConcentration => f.write_str("ArcaneConcentration"),
+            Self::ArcaneFocus => f.write_str("ArcaneFocus"),
+            Self::ArcaneMind => f.write_str("ArcaneMind"),
+            Self::ArcaneStability => f.write_str("ArcaneStability"),
+            Self::SpellImpact => f.write_str("SpellImpact"),
+            Self::MagicAttunement => f.write_str("MagicAttunement"),
+            Self::ArcaneShielding => f.write_str("ArcaneShielding"),
+            Self::ArcaneFortitude => f.write_str("ArcaneFortitude"),
+            Self::PresenceOfMind => f.write_str("PresenceOfMind"),
+            Self::ArcanePower => f.write_str("ArcanePower"),
+            Self::ImprovedCounterspell => f.write_str("ImprovedCounterspell"),
+            Self::DeepWounds => f.write_str("DeepWounds"),
+            Self::SwordSpecialization => f.write_str("SwordSpecialization"),
+            Self::ImprovedHeroicStrike => f.write_str("ImprovedHeroicStrike"),
+            Self::WarriorMaceSpecialization => f.write_str("WarriorMaceSpecialization"),
+            Self::ImprovedCharge => f.write_str("ImprovedCharge"),
+            Self::ImprovedRend => f.write_str("ImprovedRend"),
+            Self::TacticalMastery => f.write_str("TacticalMastery"),
+            Self::ImprovedHamstring => f.write_str("ImprovedHamstring"),
+            Self::WarriorDeflection => f.write_str("WarriorDeflection"),
+            Self::ImprovedOverpower => f.write_str("ImprovedOverpower"),
+            Self::PoleaxeSpecialization => f.write_str("PoleaxeSpecialization"),
+            Self::SweepingStrikes => f.write_str("SweepingStrikes"),
+            Self::WarriorWeaponMastery => f.write_str("WarriorWeaponMastery"),
+            Self::MortalStrike => f.write_str("MortalStrike"),
+            Self::WarriorTwoHandedWeaponSpecialization => f.write_str("WarriorTwoHandedWeaponSpecialization"),
+            Self::AngerManagement => f.write_str("AngerManagement"),
+            Self::WarriorAnticipation => f.write_str("WarriorAnticipation"),
+            Self::WarriorToughness => f.write_str("WarriorToughness"),
+            Self::ImprovedThunderClap => f.write_str("ImprovedThunderClap"),
+            Self::ImprovedBloodrage => f.write_str("ImprovedBloodrage"),
+            Self::Incite => f.write_str("Incite"),
+            Self::Puncture => f.write_str("Puncture"),
+            Self::ImprovedRevenge => f.write_str("ImprovedRevenge"),
+            Self::Vigilance => f.write_str("Vigilance"),
+            Self::GagOrder => f.write_str("GagOrder"),
+            Self::ImprovedDisciplines => f.write_str("ImprovedDisciplines"),
+            Self::ImprovedDisarm => f.write_str("ImprovedDisarm"),
+            Self::ConcussionBlow => f.write_str("ConcussionBlow"),
+            Self::WarriorLastStand => f.write_str("WarriorLastStand"),
+            Self::CommandingPresence => f.write_str("CommandingPresence"),
+            Self::Enrage => f.write_str("Enrage"),
+            Self::WarriorFlurry => f.write_str("WarriorFlurry"),
+            Self::Cruelty => f.write_str("Cruelty"),
+            Self::BoomingVoice => f.write_str("BoomingVoice"),
+            Self::UnbridledWrath => f.write_str("UnbridledWrath"),
+            Self::PiercingHowl => f.write_str("PiercingHowl"),
+            Self::ImprovedDemoralizingShout => f.write_str("ImprovedDemoralizingShout"),
+            Self::DeathWish => f.write_str("DeathWish"),
+            Self::ImprovedCleave => f.write_str("ImprovedCleave"),
+            Self::Bloodthirst => f.write_str("Bloodthirst"),
+            Self::RoguePrecision => f.write_str("RoguePrecision"),
+            Self::CloseQuartersCombat => f.write_str("CloseQuartersCombat"),
+            Self::RogueMaceSpecialization => f.write_str("RogueMaceSpecialization"),
+            Self::RogueLightningReflexes => f.write_str("RogueLightningReflexes"),
+            Self::RogueDeflection => f.write_str("RogueDeflection"),
+            Self::ImprovedSinisterStrike => f.write_str("ImprovedSinisterStrike"),
+            Self::ImprovedGouge => f.write_str("ImprovedGouge"),
+            Self::Endurance => f.write_str("Endurance"),
+            Self::AdrenalineRush => f.write_str("AdrenalineRush"),
+            Self::ImprovedKick => f.write_str("ImprovedKick"),
+            Self::RogueDualWieldSpecialization => f.write_str("RogueDualWieldSpecialization"),
+            Self::ImprovedSprint => f.write_str("ImprovedSprint"),
+            Self::BladeFlurry => f.write_str("BladeFlurry"),
+            Self::MasterOfDeception => f.write_str("MasterOfDeception"),
+            Self::HackAndSlash => f.write_str("HackAndSlash"),
+            Self::Camouflage => f.write_str("Camouflage"),
+            Self::Initiative => f.write_str("Initiative"),
+            Self::Setup => f.write_str("Setup"),
+            Self::Elusiveness => f.write_str("Elusiveness"),
+            Self::Opportunity => f.write_str("Opportunity"),
+            Self::DirtyTricks => f.write_str("DirtyTricks"),
+            Self::ImprovedAmbush => f.write_str("ImprovedAmbush"),
+            Self::DirtyDeeds => f.write_str("DirtyDeeds"),
+            Self::ImprovedPoisons => f.write_str("ImprovedPoisons"),
+            Self::Lethality => f.write_str("Lethality"),
+            Self::Malice => f.write_str("Malice"),
+            Self::RemorselessAttacks => f.write_str("RemorselessAttacks"),
+            Self::Ruthlessness => f.write_str("Ruthlessness"),
+            Self::Murder => f.write_str("Murder"),
+            Self::ImprovedEviscerate => f.write_str("ImprovedEviscerate"),
+            Self::PuncturingWounds => f.write_str("PuncturingWounds"),
+            Self::ImprovedExposeArmor => f.write_str("ImprovedExposeArmor"),
+            Self::ImprovedKidneyShot => f.write_str("ImprovedKidneyShot"),
+            Self::ColdBlood => f.write_str("ColdBlood"),
+            Self::Overkill => f.write_str("Overkill"),
+            Self::SealFate => f.write_str("SealFate"),
+            Self::Preparation => f.write_str("Preparation"),
+            Self::Riposte => f.write_str("Riposte"),
+            Self::GhostlyStrike => f.write_str("GhostlyStrike"),
+            Self::Martyrdom => f.write_str("Martyrdom"),
+            Self::PowerInfusion => f.write_str("PowerInfusion"),
+            Self::MentalAgility => f.write_str("MentalAgility"),
+            Self::UnbreakableWill => f.write_str("UnbreakableWill"),
+            Self::ImprovedPowerWordShield => f.write_str("ImprovedPowerWordShield"),
+            Self::ImprovedPowerWordFortitude => f.write_str("ImprovedPowerWordFortitude"),
+            Self::ImprovedInnerFire => f.write_str("ImprovedInnerFire"),
+            Self::Meditation => f.write_str("Meditation"),
+            Self::InnerFocus => f.write_str("InnerFocus"),
+            Self::ImprovedManaBurn => f.write_str("ImprovedManaBurn"),
+            Self::SoulWarding => f.write_str("SoulWarding"),
+            Self::SilentResolve => f.write_str("SilentResolve"),
+            Self::Inspiration => f.write_str("Inspiration"),
+            Self::Premeditation => f.write_str("Premeditation"),
+            Self::Vigor => f.write_str("Vigor"),
+            Self::HolySpecialization => f.write_str("HolySpecialization"),
+            Self::SpiritualGuidance => f.write_str("SpiritualGuidance"),
+            Self::SearingLight => f.write_str("SearingLight"),
+            Self::SpiritualHealing => f.write_str("SpiritualHealing"),
+            Self::ImprovedRenew => f.write_str("ImprovedRenew"),
+            Self::ImprovedHealing => f.write_str("ImprovedHealing"),
+            Self::PriestHealingFocus => f.write_str("PriestHealingFocus"),
+            Self::SpellWarding => f.write_str("SpellWarding"),
+            Self::HealingPrayers => f.write_str("HealingPrayers"),
+            Self::ArcaneInstability => f.write_str("ArcaneInstability"),
+            Self::DesperatePrayer => f.write_str("DesperatePrayer"),
+            Self::ShadowWeaving => f.write_str("ShadowWeaving"),
+            Self::Darkness => f.write_str("Darkness"),
+            Self::ShadowFocus => f.write_str("ShadowFocus"),
+            Self::SpiritTap => f.write_str("SpiritTap"),
+            Self::ShadowAffinity => f.write_str("ShadowAffinity"),
+            Self::ImprovedMindBlast => f.write_str("ImprovedMindBlast"),
+            Self::ImprovedShadowWordPain => f.write_str("ImprovedShadowWordPain"),
+            Self::VeiledShadows => f.write_str("VeiledShadows"),
+            Self::VampiricEmbrace => f.write_str("VampiricEmbrace"),
+            Self::MindFlay => f.write_str("MindFlay"),
+            Self::Shadowform => f.write_str("Shadowform"),
+            Self::Silence => f.write_str("Silence"),
+            Self::ImprovedPsychicScream => f.write_str("ImprovedPsychicScream"),
+            Self::CallOfFlame => f.write_str("CallOfFlame"),
+            Self::CallOfThunder => f.write_str("CallOfThunder"),
+            Self::Concussion => f.write_str("Concussion"),
+            Self::Convection => f.write_str("Convection"),
+            Self::ElementalFury => f.write_str("ElementalFury"),
+            Self::ImprovedFireNova => f.write_str("ImprovedFireNova"),
+            Self::ElementalMastery => f.write_str("ElementalMastery"),
+            Self::ElementalFocus => f.write_str("ElementalFocus"),
+            Self::Reverberation => f.write_str("Reverberation"),
+            Self::AncestralHealing => f.write_str("AncestralHealing"),
+            Self::TidalForce => f.write_str("TidalForce"),
+            Self::ImprovedWaterShield => f.write_str("ImprovedWaterShield"),
+            Self::ImprovedHealingWave => f.write_str("ImprovedHealingWave"),
+            Self::ShamanHealingFocus => f.write_str("ShamanHealingFocus"),
+            Self::RestorativeTotems => f.write_str("RestorativeTotems"),
+            Self::ImprovedReincarnation => f.write_str("ImprovedReincarnation"),
+            Self::ManaTideTotem => f.write_str("ManaTideTotem"),
+            Self::ShamanNaturesSwiftness => f.write_str("Nature's Swiftness"),
+            Self::Purification => f.write_str("Purification"),
+            Self::TidalFocus => f.write_str("TidalFocus"),
+            Self::TidalMastery => f.write_str("TidalMastery"),
+            Self::TotemicFocus => f.write_str("TotemicFocus"),
+            Self::ShamanAnticipation => f.write_str("ShamanAnticipation"),
+            Self::ShamanFlurry => f.write_str("ShamanFlurry"),
+            Self::ImprovedGhostWolf => f.write_str("ImprovedGhostWolf"),
+            Self::ImprovedShields => f.write_str("ImprovedShields"),
+            Self::GuardianTotems => f.write_str("GuardianTotems"),
+            Self::EnhancingTotems => f.write_str("EnhancingTotems"),
+            Self::ElementalWeapons => f.write_str("ElementalWeapons"),
+            Self::ThunderingStrikes => f.write_str("ThunderingStrikes"),
+            Self::AncestralKnowledge => f.write_str("AncestralKnowledge"),
+            Self::ShamanToughness => f.write_str("ShamanToughness"),
+            Self::SpiritWeapons => f.write_str("SpiritWeapons"),
+            Self::ShamanisticFocus => f.write_str("ShamanisticFocus"),
+            Self::IronWill => f.write_str("IronWill"),
+            Self::BloodCraze => f.write_str("BloodCraze"),
+            Self::Impale => f.write_str("Impale"),
+            Self::Hemorrhage => f.write_str("Hemorrhage"),
+            Self::VilePoisons => f.write_str("VilePoisons"),
+            Self::WarriorOneHandedWeaponSpecialization => f.write_str("WarriorOneHandedWeaponSpecialization"),
+            Self::LightningMastery => f.write_str("LightningMastery"),
+            Self::ArcticReach => f.write_str("ArcticReach"),
+            Self::StarlightWrath => f.write_str("StarlightWrath"),
+            Self::ImprovedMoonfire => f.write_str("ImprovedMoonfire"),
+            Self::NaturesReach => f.write_str("Nature's Reach"),
+            Self::Brambles => f.write_str("Brambles"),
+            Self::Moonglow => f.write_str("Moonglow"),
+            Self::CelestialFocus => f.write_str("CelestialFocus"),
+            Self::InsectSwarm => f.write_str("InsectSwarm"),
+            Self::NaturesGrace => f.write_str("Nature's Grace"),
+            Self::Moonfury => f.write_str("Moonfury"),
+            Self::DruidVengeance => f.write_str("DruidVengeance"),
+            Self::MoonkinForm => f.write_str("MoonkinForm"),
+            Self::DruidThickHide => f.write_str("DruidThickHide"),
+            Self::FeralAggression => f.write_str("FeralAggression"),
+            Self::DruidFerocity => f.write_str("DruidFerocity"),
+            Self::BrutalImpact => f.write_str("BrutalImpact"),
+            Self::SharpenedClaws => f.write_str("SharpenedClaws"),
+            Self::FeralInstinct => f.write_str("FeralInstinct"),
+            Self::PrimalFury => f.write_str("PrimalFury"),
+            Self::ShreddingAttacks => f.write_str("ShreddingAttacks"),
+            Self::PredatoryStrikes => f.write_str("PredatoryStrikes"),
+            Self::FeralCharge => f.write_str("FeralCharge"),
+            Self::SavageFury => f.write_str("SavageFury"),
+            Self::FeralSwiftness => f.write_str("FeralSwiftness"),
+            Self::HeartOfTheWild => f.write_str("HeartOfTheWild"),
+            Self::LeaderOfThePack => f.write_str("LeaderOfThePack"),
+            Self::ImprovedMarkOfTheWild => f.write_str("ImprovedMarkOfTheWild"),
+            Self::Furor => f.write_str("Furor"),
+            Self::NaturesFocus => f.write_str("Nature's Focus"),
+            Self::Naturalist => f.write_str("Naturalist"),
+            Self::NaturesBounty => f.write_str("Nature's Bounty"),
+            Self::NaturalShapeshifter => f.write_str("NaturalShapeshifter"),
+            Self::OmenOfClarity => f.write_str("OmenOfClarity"),
+            Self::GiftOfNature => f.write_str("GiftOfNature"),
+            Self::DruidIntensity => f.write_str("DruidIntensity"),
+            Self::ImprovedRejuvenation => f.write_str("ImprovedRejuvenation"),
+            Self::DruidNaturesSwiftness => f.write_str("Nature's Swiftness"),
+            Self::Subtlety => f.write_str("Subtlety"),
+            Self::ImprovedTranquility => f.write_str("ImprovedTranquility"),
+            Self::TranquilSpirit => f.write_str("TranquilSpirit"),
+            Self::Swiftmend => f.write_str("Swiftmend"),
+            Self::ShadowReach => f.write_str("ShadowReach"),
+            Self::Stormstrike => f.write_str("Stormstrike"),
+            Self::Cataclysm => f.write_str("Cataclysm"),
+            Self::Bane => f.write_str("Bane"),
+            Self::ImprovedShadowBolt => f.write_str("ImprovedShadowBolt"),
+            Self::ImprovedImmolate => f.write_str("ImprovedImmolate"),
+            Self::Shadowburn => f.write_str("Shadowburn"),
+            Self::DestructiveReach => f.write_str("DestructiveReach"),
+            Self::ImprovedSearingPain => f.write_str("ImprovedSearingPain"),
+            Self::Emberstorm => f.write_str("Emberstorm"),
+            Self::Ruin => f.write_str("Ruin"),
+            Self::Conflagrate => f.write_str("Conflagrate"),
+            Self::Devastation => f.write_str("Devastation"),
+            Self::Aftermath => f.write_str("Aftermath"),
+            Self::DemonicPower => f.write_str("DemonicPower"),
+            Self::WarlockIntensity => f.write_str("WarlockIntensity"),
+            Self::Pyroclasm => f.write_str("Pyroclasm"),
+            Self::FelConcentration => f.write_str("FelConcentration"),
+            Self::Nightfall => f.write_str("Nightfall"),
+            Self::ImprovedCorruption => f.write_str("ImprovedCorruption"),
+            Self::SoulSiphon => f.write_str("SoulSiphon"),
+            Self::Suppression => f.write_str("Suppression"),
+            Self::ImprovedCurseOfWeakness => f.write_str("ImprovedCurseOfWeakness"),
+            Self::ImprovedLifeTap => f.write_str("ImprovedLifeTap"),
+            Self::GrimReach => f.write_str("GrimReach"),
+            Self::DarkPact => f.write_str("DarkPact"),
+            Self::SiphonLife => f.write_str("SiphonLife"),
+            Self::ShadowMastery => f.write_str("ShadowMastery"),
+            Self::AmplifyCurse => f.write_str("AmplifyCurse"),
+            Self::CurseOfExhaustion => f.write_str("CurseOfExhaustion"),
+            Self::ImprovedDrainSoul => f.write_str("ImprovedDrainSoul"),
+            Self::Aggression => f.write_str("Aggression"),
+            Self::SerratedBlades => f.write_str("SerratedBlades"),
+            Self::Incineration => f.write_str("Incineration"),
+            Self::ArcaneMeditation => f.write_str("ArcaneMeditation"),
+            Self::DruidSurvivalInstincts => f.write_str("DruidSurvivalInstincts"),
+            Self::DivineFury => f.write_str("DivineFury"),
+            Self::MentalStrength => f.write_str("MentalStrength"),
+            Self::BorrowedTime => f.write_str("BorrowedTime"),
+            Self::ImprovedHealthstone => f.write_str("ImprovedHealthstone"),
+            Self::ImprovedImp => f.write_str("ImprovedImp"),
+            Self::DemonicEmbrace => f.write_str("DemonicEmbrace"),
+            Self::ImprovedHealthFunnel => f.write_str("ImprovedHealthFunnel"),
+            Self::DemonicBrutality => f.write_str("DemonicBrutality"),
+            Self::FelDomination => f.write_str("FelDomination"),
+            Self::MasterSummoner => f.write_str("MasterSummoner"),
+            Self::FelVitality => f.write_str("FelVitality"),
+            Self::ImprovedSuccubus => f.write_str("ImprovedSuccubus"),
+            Self::MasterDemonologist => f.write_str("MasterDemonologist"),
+            Self::MasterConjuror => f.write_str("MasterConjuror"),
+            Self::UnholyPower => f.write_str("UnholyPower"),
+            Self::DemonicKnowledge => f.write_str("DemonicKnowledge"),
+            Self::ManaFeed => f.write_str("ManaFeed"),
+            Self::SoulLink => f.write_str("SoulLink"),
+            Self::MoltenCore => f.write_str("MoltenCore"),
+            Self::ImprovedCurseOfAgony => f.write_str("ImprovedCurseOfAgony"),
+            Self::HunterLightningReflexes => f.write_str("HunterLightningReflexes"),
+            Self::Entrapment => f.write_str("Entrapment"),
+            Self::TrapMastery => f.write_str("TrapMastery"),
+            Self::LockAndLoad => f.write_str("LockAndLoad"),
+            Self::SurvivalTactics => f.write_str("SurvivalTactics"),
+            Self::Surefooted => f.write_str("Surefooted"),
+            Self::HunterDeflection => f.write_str("HunterDeflection"),
+            Self::Counterattack => f.write_str("Counterattack"),
+            Self::KillerInstinct => f.write_str("KillerInstinct"),
+            Self::BlackArrow => f.write_str("BlackArrow"),
+            Self::WyvernSting => f.write_str("WyvernSting"),
+            Self::ImprovedConcussiveShot => f.write_str("ImprovedConcussiveShot"),
+            Self::Efficiency => f.write_str("Efficiency"),
+            Self::ImprovedHuntersMark => f.write_str("Improved Hunter's Mark"),
+            Self::LethalShots => f.write_str("LethalShots"),
+            Self::AimedShot => f.write_str("AimedShot"),
+            Self::ImprovedArcaneShot => f.write_str("ImprovedArcaneShot"),
+            Self::Barrage => f.write_str("Barrage"),
+            Self::ImprovedStings => f.write_str("ImprovedStings"),
+            Self::MortalShots => f.write_str("MortalShots"),
+            Self::ConcussiveBarrage => f.write_str("ConcussiveBarrage"),
+            Self::Readiness => f.write_str("Readiness"),
+            Self::TrueshotAura => f.write_str("TrueshotAura"),
+            Self::RangedWeaponSpecialization => f.write_str("RangedWeaponSpecialization"),
+            Self::ImprovedAspectOfTheMonkey => f.write_str("ImprovedAspectOfTheMonkey"),
+            Self::ImprovedAspectOfTheHawk => f.write_str("ImprovedAspectOfTheHawk"),
+            Self::Pathfinding => f.write_str("Pathfinding"),
+            Self::ImprovedMendPet => f.write_str("ImprovedMendPet"),
+            Self::BestialWrath => f.write_str("BestialWrath"),
+            Self::Intimidation => f.write_str("Intimidation"),
+            Self::SpiritBond => f.write_str("SpiritBond"),
+            Self::EnduranceTraining => f.write_str("EnduranceTraining"),
+            Self::BestialDiscipline => f.write_str("BestialDiscipline"),
+            Self::HunterFerocity => f.write_str("HunterFerocity"),
+            Self::HunterThickHide => f.write_str("HunterThickHide"),
+            Self::UnleashedFury => f.write_str("UnleashedFury"),
+            Self::Frenzy => f.write_str("Frenzy"),
+            Self::ImprovedBlessingOfMight => f.write_str("ImprovedBlessingOfMight"),
+            Self::PaladinVengeance => f.write_str("PaladinVengeance"),
+            Self::PaladinDeflection => f.write_str("PaladinDeflection"),
+            Self::Benediction => f.write_str("Benediction"),
+            Self::PaladinTwoHandedWeaponSpecialization => f.write_str("PaladinTwoHandedWeaponSpecialization"),
+            Self::Conviction => f.write_str("Conviction"),
+            Self::Redoubt => f.write_str("Redoubt"),
+            Self::ImprovedDevotionAura => f.write_str("ImprovedDevotionAura"),
+            Self::PaladinToughness => f.write_str("PaladinToughness"),
+            Self::GuardiansFavor => f.write_str("Guardian's Favor"),
+            Self::Reckoning => f.write_str("Reckoning"),
+            Self::PaladinOneHandedWeaponSpecialization => f.write_str("PaladinOneHandedWeaponSpecialization"),
+            Self::HolyShield => f.write_str("HolyShield"),
+            Self::BlessingOfSanctuary => f.write_str("BlessingOfSanctuary"),
+            Self::SpiritualFocus => f.write_str("SpiritualFocus"),
+            Self::DivineFavor => f.write_str("DivineFavor"),
+            Self::AuraMastery => f.write_str("AuraMastery"),
+            Self::Repentance => f.write_str("Repentance"),
+            Self::Divinity => f.write_str("Divinity"),
+            Self::ImprovedLayOnHands => f.write_str("ImprovedLayOnHands"),
+            Self::HealingLight => f.write_str("HealingLight"),
+            Self::ImprovedBlessingOfWisdom => f.write_str("ImprovedBlessingOfWisdom"),
+            Self::DivineIntellect => f.write_str("DivineIntellect"),
+            Self::ImprovedConcentrationAura => f.write_str("ImprovedConcentrationAura"),
+            Self::Illumination => f.write_str("Illumination"),
+            Self::SealsOfThePure => f.write_str("SealsOfThePure"),
+            Self::HeartOfTheCrusader => f.write_str("HeartOfTheCrusader"),
+            Self::SanctifiedLight => f.write_str("SanctifiedLight"),
+            Self::SealOfCommand => f.write_str("SealOfCommand"),
+            Self::ImprovedRighteousFury => f.write_str("ImprovedRighteousFury"),
+            Self::HolyShock => f.write_str("HolyShock"),
+            Self::ImprovedHammerOfJustice => f.write_str("ImprovedHammerOfJustice"),
+            Self::ImprovedBerserkerRage => f.write_str("ImprovedBerserkerRage"),
+            Self::ImprovedExecute => f.write_str("ImprovedExecute"),
+            Self::ImprovedIntercept => f.write_str("ImprovedIntercept"),
+            Self::SpiritOfRedemption => f.write_str("SpiritOfRedemption"),
+            Self::WarriorDualWieldSpecialization => f.write_str("WarriorDualWieldSpecialization"),
+            Self::ShieldSpecialization => f.write_str("ShieldSpecialization"),
+            Self::SavageStrikes => f.write_str("SavageStrikes"),
+            Self::Survivalist => f.write_str("Survivalist"),
+            Self::ImprovedTracking => f.write_str("ImprovedTracking"),
+            Self::FocusedFire => f.write_str("FocusedFire"),
+            Self::ImprovedRevivePet => f.write_str("ImprovedRevivePet"),
+            Self::HolyPower => f.write_str("HolyPower"),
+            Self::UnyieldingFaith => f.write_str("UnyieldingFaith"),
+            Self::PaladinAnticipation => f.write_str("PaladinAnticipation"),
+            Self::ImprovedJudgements => f.write_str("ImprovedJudgements"),
+            Self::EyeForAnEye => f.write_str("EyeForAnEye"),
+            Self::Vindication => f.write_str("Vindication"),
+            Self::PursuitOfJustice => f.write_str("PursuitOfJustice"),
+            Self::HolyReach => f.write_str("HolyReach"),
+            Self::BlessedRecovery => f.write_str("BlessedRecovery"),
+            Self::Lightwell => f.write_str("Lightwell"),
+            Self::ImprovedVampiricEmbrace => f.write_str("ImprovedVampiricEmbrace"),
+            Self::MasterOfElements => f.write_str("MasterOfElements"),
+            Self::ElementalWarding => f.write_str("ElementalWarding"),
+            Self::ElementalReach => f.write_str("ElementalReach"),
+            Self::EyeOfTheStorm => f.write_str("EyeOfTheStorm"),
+            Self::ShamanWeaponMastery => f.write_str("ShamanWeaponMastery"),
+            Self::ElementalDevastation => f.write_str("ElementalDevastation"),
+            Self::HealingGrace => f.write_str("HealingGrace"),
+            Self::ImprovedWindfuryTotem => f.write_str("ImprovedWindfuryTotem"),
+            Self::HealingWay => f.write_str("HealingWay"),
+            Self::MagePrecision => f.write_str("MagePrecision"),
+            Self::MagicAbsorption => f.write_str("MagicAbsorption"),
+            Self::ImprovedDefensiveStance => f.write_str("ImprovedDefensiveStance"),
+            Self::WarriorVitality => f.write_str("WarriorVitality"),
+            Self::ShieldMastery => f.write_str("ShieldMastery"),
+            Self::ImprovedWhirlwind => f.write_str("ImprovedWhirlwind"),
+            Self::WarriorPrecision => f.write_str("WarriorPrecision"),
+            Self::ImprovedBerserkerStance => f.write_str("ImprovedBerserkerStance"),
+            Self::Rampage => f.write_str("Rampage"),
+            Self::FocusedRage => f.write_str("FocusedRage"),
+            Self::EndlessRage => f.write_str("EndlessRage"),
+            Self::SuddenDeath => f.write_str("SuddenDeath"),
+            Self::SecondWind => f.write_str("SecondWind"),
+            Self::BloodFrenzy => f.write_str("BloodFrenzy"),
+            Self::Devastate => f.write_str("Devastate"),
+            Self::Malediction => f.write_str("Malediction"),
+            Self::ImprovedHowlOfTerror => f.write_str("ImprovedHowlOfTerror"),
+            Self::Contagion => f.write_str("Contagion"),
+            Self::UnstableAffliction => f.write_str("UnstableAffliction"),
+            Self::DemonicAegis => f.write_str("DemonicAegis"),
+            Self::SummonFelguard => f.write_str("SummonFelguard"),
+            Self::DemonicTactics => f.write_str("DemonicTactics"),
+            Self::Shadowfury => f.write_str("Shadowfury"),
+            Self::ShadowAndFlame => f.write_str("ShadowAndFlame"),
+            Self::SoulLeech => f.write_str("SoulLeech"),
+            Self::NetherProtection => f.write_str("NetherProtection"),
+            Self::DemonicResilience => f.write_str("DemonicResilience"),
+            Self::UnrelentingStorm => f.write_str("UnrelentingStorm"),
+            Self::ElementalPrecision => f.write_str("ElementalPrecision"),
+            Self::LightningOverload => f.write_str("LightningOverload"),
+            Self::TotemOfWrath => f.write_str("TotemOfWrath"),
+            Self::UnleashedRage => f.write_str("UnleashedRage"),
+            Self::DualWield => f.write_str("DualWield"),
+            Self::MentalQuickness => f.write_str("MentalQuickness"),
+            Self::ShamanDualWieldSpecialization => f.write_str("ShamanDualWieldSpecialization"),
+            Self::ShamanisticRage => f.write_str("ShamanisticRage"),
+            Self::ShamanFocusedMind => f.write_str("ShamanFocusedMind"),
+            Self::NaturesBlessing => f.write_str("Nature's Blessing"),
+            Self::ImprovedChainHeal => f.write_str("ImprovedChainHeal"),
+            Self::EarthShield => f.write_str("EarthShield"),
+            Self::NaturesGuardian => f.write_str("Nature's Guardian"),
+            Self::SleightOfHand => f.write_str("SleightOfHand"),
+            Self::HeightenedSenses => f.write_str("HeightenedSenses"),
+            Self::Deadliness => f.write_str("Deadliness"),
+            Self::WeaponExpertise => f.write_str("WeaponExpertise"),
+            Self::RogueVitality => f.write_str("RogueVitality"),
+            Self::BladeTwisting => f.write_str("BladeTwisting"),
+            Self::NervesOfSteel => f.write_str("NervesOfSteel"),
+            Self::SurpriseAttacks => f.write_str("SurpriseAttacks"),
+            Self::EnvelopingShadows => f.write_str("EnvelopingShadows"),
+            Self::SinisterCalling => f.write_str("SinisterCalling"),
+            Self::MasterOfSubtlety => f.write_str("MasterOfSubtlety"),
+            Self::Shadowstep => f.write_str("Shadowstep"),
+            Self::MasterPoisoner => f.write_str("MasterPoisoner"),
+            Self::FindWeakness => f.write_str("FindWeakness"),
+            Self::Mutilate => f.write_str("Mutilate"),
+            Self::FleetFooted => f.write_str("FleetFooted"),
+            Self::CheatDeath => f.write_str("CheatDeath"),
+            Self::DeadenedNerves => f.write_str("DeadenedNerves"),
+            Self::ImprovedBlink => f.write_str("ImprovedBlink"),
+            Self::ArcanePotency => f.write_str("ArcanePotency"),
+            Self::PrismaticCloak => f.write_str("PrismaticCloak"),
+            Self::ArcaneEmpowerment => f.write_str("ArcaneEmpowerment"),
+            Self::MindMastery => f.write_str("MindMastery"),
+            Self::Slow => f.write_str("Slow"),
+            Self::PlayingWithFire => f.write_str("PlayingWithFire"),
+            Self::BlazingSpeed => f.write_str("BlazingSpeed"),
+            Self::MoltenFury => f.write_str("MoltenFury"),
+            Self::Pyromaniac => f.write_str("Pyromaniac"),
+            Self::EmpoweredFire => f.write_str("EmpoweredFire"),
+            Self::DragonsBreath => f.write_str("Dragon's Breath"),
+            Self::FrozenCore => f.write_str("FrozenCore"),
+            Self::ColdAsIce => f.write_str("ColdAsIce"),
+            Self::ArcticWinds => f.write_str("ArcticWinds"),
+            Self::EmpoweredFrostbolt => f.write_str("EmpoweredFrostbolt"),
+            Self::SummonWaterElemental => f.write_str("SummonWaterElemental"),
+            Self::PureOfHeart => f.write_str("PureOfHeart"),
+            Self::PurifyingPower => f.write_str("PurifyingPower"),
+            Self::BlessedLife => f.write_str("BlessedLife"),
+            Self::LightsGrace => f.write_str("Light's Grace"),
+            Self::HolyGuidance => f.write_str("HolyGuidance"),
+            Self::DivineIllumination => f.write_str("DivineIllumination"),
+            Self::Stoicism => f.write_str("Stoicism"),
+            Self::SacredDuty => f.write_str("SacredDuty"),
+            Self::ArdentDefender => f.write_str("ArdentDefender"),
+            Self::CombatExpertise => f.write_str("CombatExpertise"),
+            Self::AvengersShield => f.write_str("Avenger's Shield"),
+            Self::Crusade => f.write_str("Crusade"),
+            Self::SanctifiedRetribution => f.write_str("SanctifiedRetribution"),
+            Self::DivinePurpose => f.write_str("DivinePurpose"),
+            Self::JudgementsOfTheWise => f.write_str("JudgementsOfTheWise"),
+            Self::Fanaticism => f.write_str("Fanaticism"),
+            Self::SanctityOfBattle => f.write_str("SanctityOfBattle"),
+            Self::QuickRecovery => f.write_str("QuickRecovery"),
+            Self::ShadowEmbrace => f.write_str("ShadowEmbrace"),
+            Self::EmpoweredCorruption => f.write_str("EmpoweredCorruption"),
+            Self::BlessedResilience => f.write_str("BlessedResilience"),
+            Self::SurgeOfLight => f.write_str("SurgeOfLight"),
+            Self::EmpoweredHealing => f.write_str("EmpoweredHealing"),
+            Self::HolyConcentration => f.write_str("HolyConcentration"),
+            Self::Absolution => f.write_str("Absolution"),
+            Self::FocusedPower => f.write_str("FocusedPower"),
+            Self::Enlightenment => f.write_str("Enlightenment"),
+            Self::ImprovedFlashHeal => f.write_str("ImprovedFlashHeal"),
+            Self::PainSuppression => f.write_str("PainSuppression"),
+            Self::PriestFocusedMind => f.write_str("PriestFocusedMind"),
+            Self::ShadowPower => f.write_str("ShadowPower"),
+            Self::VampiricTouch => f.write_str("VampiricTouch"),
+            Self::MindMelt => f.write_str("MindMelt"),
+            Self::LunarGuidance => f.write_str("LunarGuidance"),
+            Self::BalanceOfPower => f.write_str("BalanceOfPower"),
+            Self::Dreamstate => f.write_str("Dreamstate"),
+            Self::ImprovedFaerieFire => f.write_str("ImprovedFaerieFire"),
+            Self::WrathOfCenarius => f.write_str("WrathOfCenarius"),
+            Self::ForceOfNature => f.write_str("ForceOfNature"),
+            Self::EmpoweredTouch => f.write_str("EmpoweredTouch"),
+            Self::EmpoweredRejuvenation => f.write_str("EmpoweredRejuvenation"),
+            Self::NaturalPerfection => f.write_str("NaturalPerfection"),
+            Self::TreeOfLife => f.write_str("TreeOfLife"),
+            Self::NurturingInstinct => f.write_str("NurturingInstinct"),
+            Self::PrimalTenacity => f.write_str("PrimalTenacity"),
+            Self::SurvivalOfTheFittest => f.write_str("SurvivalOfTheFittest"),
+            Self::PredatoryInstincts => f.write_str("PredatoryInstincts"),
+            Self::Mangle => f.write_str("Mangle"),
+            Self::LivingSpirit => f.write_str("LivingSpirit"),
+            Self::ImprovedLeaderOfThePack => f.write_str("ImprovedLeaderOfThePack"),
+            Self::AnimalHandler => f.write_str("AnimalHandler"),
+            Self::FerociousInspiration => f.write_str("FerociousInspiration"),
+            Self::CatlikeReflexes => f.write_str("CatlikeReflexes"),
+            Self::SerpentsSwiftness => f.write_str("Serpent's Swiftness"),
+            Self::TheBeastWithin => f.write_str("TheBeastWithin"),
+            Self::CombatExperience => f.write_str("CombatExperience"),
+            Self::CarefulAim => f.write_str("CarefulAim"),
+            Self::MasterMarksman => f.write_str("MasterMarksman"),
+            Self::SilencingShot => f.write_str("SilencingShot"),
+            Self::Resourcefulness => f.write_str("Resourcefulness"),
+            Self::HunterSurvivalInstincts => f.write_str("HunterSurvivalInstincts"),
+            Self::ThrillOfTheHunt => f.write_str("ThrillOfTheHunt"),
+            Self::ExposeWeakness => f.write_str("ExposeWeakness"),
+            Self::MasterTactician => f.write_str("MasterTactician"),
+            Self::ScatterShot => f.write_str("ScatterShot"),
+            Self::CircleOfHealing => f.write_str("CircleOfHealing"),
+            Self::Misery => f.write_str("Misery"),
+            Self::Backlash => f.write_str("Backlash"),
+            Self::GoForTheThroat => f.write_str("GoForTheThroat"),
+            Self::RapidKilling => f.write_str("RapidKilling"),
+            Self::HawkEye => f.write_str("HawkEye"),
+            Self::ImprovedBarrage => f.write_str("ImprovedBarrage"),
+            Self::NaturesMajesty => f.write_str("Nature's Majesty"),
+            Self::CrusaderStrike => f.write_str("CrusaderStrike"),
+            Self::ImprovedMortalStrike => f.write_str("ImprovedMortalStrike"),
+            Self::CombatPotency => f.write_str("CombatPotency"),
+            Self::SpellPower => f.write_str("SpellPower"),
+            Self::ImprovedSliceAndDice => f.write_str("ImprovedSliceAndDice"),
+            Self::ArcaneFlows => f.write_str("ArcaneFlows"),
+            Self::IncantersAbsorption => f.write_str("Incanter's Absorption"),
+            Self::StudentOfTheMind => f.write_str("StudentOfTheMind"),
+            Self::NetherwindPresence => f.write_str("NetherwindPresence"),
+            Self::ArcaneBarrage => f.write_str("ArcaneBarrage"),
+            Self::FieryPayback => f.write_str("FieryPayback"),
+            Self::Firestarter => f.write_str("Firestarter"),
+            Self::HotStreak => f.write_str("HotStreak"),
+            Self::Burnout => f.write_str("Burnout"),
+            Self::LivingBomb => f.write_str("LivingBomb"),
+            Self::FingersOfFrost => f.write_str("FingersOfFrost"),
+            Self::BrainFreeze => f.write_str("BrainFreeze"),
+            Self::EnduringWinter => f.write_str("EnduringWinter"),
+            Self::ChilledToTheBone => f.write_str("ChilledToTheBone"),
+            Self::DeepFreeze => f.write_str("DeepFreeze"),
+            Self::FocusedWill => f.write_str("FocusedWill"),
+            Self::Trauma => f.write_str("Trauma"),
+            Self::UnrelentingAssault => f.write_str("UnrelentingAssault"),
+            Self::StrengthOfArms => f.write_str("StrengthOfArms"),
+            Self::Bladestorm => f.write_str("Bladestorm"),
+            Self::IntensifyRage => f.write_str("IntensifyRage"),
+            Self::FuriousAttacks => f.write_str("FuriousAttacks"),
+            Self::Bloodsurge => f.write_str("Bloodsurge"),
+            Self::TitansGrip => f.write_str("Titan's Grip"),
+            Self::HeroicFury => f.write_str("HeroicFury"),
+            Self::Safeguard => f.write_str("Safeguard"),
+            Self::SwordAndBoard => f.write_str("SwordAndBoard"),
+            Self::Shockwave => f.write_str("Shockwave"),
+            Self::ImprovedFelhunter => f.write_str("ImprovedFelhunter"),
+            Self::DeathsEmbrace => f.write_str("Death's Embrace"),
+            Self::EverlastingAffliction => f.write_str("EverlastingAffliction"),
+            Self::Eradication => f.write_str("Eradication"),
+            Self::DemonicEmpowerment => f.write_str("DemonicEmpowerment"),
+            Self::ImprovedDemonicTactics => f.write_str("ImprovedDemonicTactics"),
+            Self::FelSynergy => f.write_str("FelSynergy"),
+            Self::Nemesis => f.write_str("Nemesis"),
+            Self::DemonicPact => f.write_str("DemonicPact"),
+            Self::Metamorphosis => f.write_str("Metamorphosis"),
+            Self::MoltenSkin => f.write_str("MoltenSkin"),
+            Self::Backdraft => f.write_str("Backdraft"),
+            Self::ImprovedSoulLeech => f.write_str("ImprovedSoulLeech"),
+            Self::FireAndBrimstone => f.write_str("FireAndBrimstone"),
+            Self::ChaosBolt => f.write_str("ChaosBolt"),
+            Self::CriticalBlock => f.write_str("CriticalBlock"),
+            Self::Aspiration => f.write_str("Aspiration"),
+            Self::DivineAegis => f.write_str("DivineAegis"),
+            Self::Rapture => f.write_str("Rapture"),
+            Self::Penance => f.write_str("Penance"),
+            Self::TwinDisciplines => f.write_str("TwinDisciplines"),
+            Self::Grace => f.write_str("Grace"),
+            Self::EmpoweredRenew => f.write_str("EmpoweredRenew"),
+            Self::TestOfFaith => f.write_str("TestOfFaith"),
+            Self::Serendipity => f.write_str("Serendipity"),
+            Self::DivineProvidence => f.write_str("DivineProvidence"),
+            Self::ImprovedShadowform => f.write_str("ImprovedShadowform"),
+            Self::TwistedFaith => f.write_str("TwistedFaith"),
+            Self::PsychicHorror => f.write_str("PsychicHorror"),
+            Self::PainAndSuffering => f.write_str("PainAndSuffering"),
+            Self::Dispersion => f.write_str("Dispersion"),
+            Self::GuardianSpirit => f.write_str("GuardianSpirit"),
+            Self::ImprovedMoonkinForm => f.write_str("ImprovedMoonkinForm"),
+            Self::OwlkinFrenzy => f.write_str("OwlkinFrenzy"),
+            Self::PrimalPrecision => f.write_str("PrimalPrecision"),
+            Self::MasterShapeshifter => f.write_str("MasterShapeshifter"),
+            Self::GiftOfTheEarthmother => f.write_str("GiftOfTheEarthmother"),
+            Self::WildGrowth => f.write_str("WildGrowth"),
+            Self::RendAndTear => f.write_str("RendAndTear"),
+            Self::InfectedWounds => f.write_str("InfectedWounds"),
+            Self::ImprovedMangle => f.write_str("ImprovedMangle"),
+            Self::KingOfTheJungle => f.write_str("KingOfTheJungle"),
+            Self::LivingSeed => f.write_str("LivingSeed"),
+            Self::Typhoon => f.write_str("Typhoon"),
+            Self::Eclipse => f.write_str("Eclipse"),
+            Self::GaleWinds => f.write_str("GaleWinds"),
+            Self::Starfall => f.write_str("Starfall"),
+            Self::Berserk => f.write_str("Berserk"),
+            Self::EarthAndMoon => f.write_str("EarthAndMoon"),
+            Self::Revitalize => f.write_str("Revitalize"),
+            Self::ImprovedTreeOfLife => f.write_str("ImprovedTreeOfLife"),
+            Self::Virulence => f.write_str("Virulence"),
+            Self::Morbidity => f.write_str("Morbidity"),
+            Self::RavenousDead => f.write_str("RavenousDead"),
+            Self::ImprovedBloodPresence => f.write_str("ImprovedBloodPresence"),
+            Self::BladedArmor => f.write_str("BladedArmor"),
+            Self::Butchery => f.write_str("Butchery"),
+            Self::RuneTap => f.write_str("RuneTap"),
+            Self::ImprovedRuneTap => f.write_str("ImprovedRuneTap"),
+            Self::DarkConviction => f.write_str("DarkConviction"),
+            Self::BloodyVengeance => f.write_str("BloodyVengeance"),
+            Self::Subversion => f.write_str("Subversion"),
+            Self::ScentOfBlood => f.write_str("ScentOfBlood"),
+            Self::MarkOfBlood => f.write_str("MarkOfBlood"),
+            Self::VeteranOfTheThirdWar => f.write_str("VeteranOfTheThirdWar"),
+            Self::Vendetta => f.write_str("Vendetta"),
+            Self::Hysteria => f.write_str("Hysteria"),
+            Self::SuddenDoom => f.write_str("SuddenDoom"),
+            Self::HeartStrike => f.write_str("HeartStrike"),
+            Self::MightOfMograine => f.write_str("MightOfMograine"),
+            Self::WillOfTheNecropolis => f.write_str("WillOfTheNecropolis"),
+            Self::Bloodworms => f.write_str("Bloodworms"),
+            Self::DancingRuneWeapon => f.write_str("DancingRuneWeapon"),
+            Self::CryptFever => f.write_str("CryptFever"),
+            Self::Epidemic => f.write_str("Epidemic"),
+            Self::DeathKnightToughness => f.write_str("DeathKnightToughness"),
+            Self::EndlessWinter => f.write_str("EndlessWinter"),
+            Self::BlackIce => f.write_str("BlackIce"),
+            Self::FrostStrike => f.write_str("FrostStrike"),
+            Self::UnbreakableArmor => f.write_str("UnbreakableArmor"),
+            Self::Deathchill => f.write_str("Deathchill"),
+            Self::ChillOfTheGrave => f.write_str("ChillOfTheGrave"),
+            Self::MasterOfGhouls => f.write_str("MasterOfGhouls"),
+            Self::CorpseExplosion => f.write_str("CorpseExplosion"),
+            Self::HowlingBlast => f.write_str("HowlingBlast"),
+            Self::FrigidDreadplate => f.write_str("FrigidDreadplate"),
+            Self::Rime => f.write_str("Rime"),
+            Self::MercilessCombat => f.write_str("MercilessCombat"),
+            Self::UnholyBlight => f.write_str("UnholyBlight"),
+            Self::Acclimation => f.write_str("Acclimation"),
+            Self::TundraStalker => f.write_str("TundraStalker"),
+            Self::HungeringCold => f.write_str("HungeringCold"),
+            Self::SummonGargoyle => f.write_str("SummonGargoyle"),
+            Self::Reaping => f.write_str("Reaping"),
+            Self::WanderingPlague => f.write_str("WanderingPlague"),
+            Self::BloodCakedBlade => f.write_str("BloodCakedBlade"),
+            Self::Impurity => f.write_str("Impurity"),
+            Self::BoneShield => f.write_str("BoneShield"),
+            Self::Outbreak => f.write_str("Outbreak"),
+            Self::MagicSuppression => f.write_str("MagicSuppression"),
+            Self::Dirge => f.write_str("Dirge"),
+            Self::ImprovedUnholyPresence => f.write_str("ImprovedUnholyPresence"),
+            Self::BloodyStrikes => f.write_str("BloodyStrikes"),
+            Self::BladeBarrier => f.write_str("BladeBarrier"),
+            Self::SpellDeflection => f.write_str("SpellDeflection"),
+            Self::VampiricBlood => f.write_str("VampiricBlood"),
+            Self::RunicPowerMastery => f.write_str("RunicPowerMastery"),
+            Self::NervesOfColdSteel => f.write_str("NervesOfColdSteel"),
+            Self::UnholyCommand => f.write_str("UnholyCommand"),
+            Self::ImprovedSpiritTap => f.write_str("ImprovedSpiritTap"),
+            Self::ImprovedFrostPresence => f.write_str("ImprovedFrostPresence"),
+            Self::GlacierRot => f.write_str("GlacierRot"),
+            Self::ImprovedIcyTouch => f.write_str("ImprovedIcyTouch"),
+            Self::BloodGorged => f.write_str("BloodGorged"),
+            Self::IcyReach => f.write_str("IcyReach"),
+            Self::RageOfRivendare => f.write_str("RageOfRivendare"),
+            Self::OnAPaleHorse => f.write_str("OnAPaleHorse"),
+            Self::GuileOfGorefiend => f.write_str("GuileOfGorefiend"),
+            Self::Haunt => f.write_str("Haunt"),
+            Self::IcyTalons => f.write_str("IcyTalons"),
+            Self::EbonPlaguebringer => f.write_str("EbonPlaguebringer"),
+            Self::KillingMachine => f.write_str("KillingMachine"),
+            Self::EmpoweredImp => f.write_str("EmpoweredImp"),
+            Self::Necrosis => f.write_str("Necrosis"),
+            Self::Annihilation => f.write_str("Annihilation"),
+            Self::ElementalOath => f.write_str("ElementalOath"),
+            Self::AstralShift => f.write_str("AstralShift"),
+            Self::LavaFlows => f.write_str("LavaFlows"),
+            Self::StormEarthAndFire => f.write_str("StormEarthAndFire"),
+            Self::Thunderstorm => f.write_str("Thunderstorm"),
+            Self::ImprovedStormstrike => f.write_str("ImprovedStormstrike"),
+            Self::StaticShock => f.write_str("StaticShock"),
+            Self::EarthenPower => f.write_str("EarthenPower"),
+            Self::MaelstromWeapon => f.write_str("MaelstromWeapon"),
+            Self::FeralSpirit => f.write_str("FeralSpirit"),
+            Self::ImprovedEarthShield => f.write_str("ImprovedEarthShield"),
+            Self::BlessingOfTheEternals => f.write_str("BlessingOfTheEternals"),
+            Self::AncestralAwakening => f.write_str("AncestralAwakening"),
+            Self::TidalWaves => f.write_str("TidalWaves"),
+            Self::Riptide => f.write_str("Riptide"),
+            Self::DeadlyBrew => f.write_str("DeadlyBrew"),
+            Self::TurnTheTables => f.write_str("TurnTheTables"),
+            Self::BloodSpatter => f.write_str("BloodSpatter"),
+            Self::FocusedAttacks => f.write_str("FocusedAttacks"),
+            Self::CutToTheChase => f.write_str("CutToTheChase"),
+            Self::HungerForBlood => f.write_str("HungerForBlood"),
+            Self::ThrowingSpecialization => f.write_str("ThrowingSpecialization"),
+            Self::UnfairAdvantage => f.write_str("UnfairAdvantage"),
+            Self::SavageCombat => f.write_str("SavageCombat"),
+            Self::PreyOnTheWeak => f.write_str("PreyOnTheWeak"),
+            Self::KillingSpree => f.write_str("KillingSpree"),
+            Self::Waylay => f.write_str("Waylay"),
+            Self::HonorAmongThieves => f.write_str("HonorAmongThieves"),
+            Self::FilthyTricks => f.write_str("FilthyTricks"),
+            Self::SlaughterFromTheShadows => f.write_str("SlaughterFromTheShadows"),
+            Self::ShadowDance => f.write_str("ShadowDance"),
+            Self::ViciousStrikes => f.write_str("ViciousStrikes"),
+            Self::MentalDexterity => f.write_str("MentalDexterity"),
+            Self::CleanseSpirit => f.write_str("CleanseSpirit"),
+            Self::GhoulFrenzy => f.write_str("GhoulFrenzy"),
+            Self::DeathRuneMastery => f.write_str("DeathRuneMastery"),
+            Self::EarthsGrasp => f.write_str("Earth's Grasp"),
+            Self::AbominationsMight => f.write_str("Abomination's Might"),
+            Self::HunterCullingTheHerd => f.write_str("HunterCullingTheHerd"),
+            Self::HunterCobraReflexes => f.write_str("HunterCobraReflexes"),
+            Self::HunterDash => f.write_str("HunterDash"),
+            Self::HunterCullingTheHerd2 => f.write_str("HunterCullingTheHerd2"),
+            Self::HunterCharge => f.write_str("HunterCharge"),
+            Self::HunterGreatStamina => f.write_str("HunterGreatStamina"),
+            Self::HunterNaturalArmor => f.write_str("HunterNaturalArmor"),
+            Self::HunterCobraReflexes2 => f.write_str("HunterCobraReflexes2"),
+            Self::HunterGreatStamina2 => f.write_str("HunterGreatStamina2"),
+            Self::HunterNaturalArmor2 => f.write_str("HunterNaturalArmor2"),
+            Self::HunterCobraReflexes3 => f.write_str("HunterCobraReflexes3"),
+            Self::HunterDash2 => f.write_str("HunterDash2"),
+            Self::HunterGreatStamina3 => f.write_str("HunterGreatStamina3"),
+            Self::HunterNaturalArmor3 => f.write_str("HunterNaturalArmor3"),
+            Self::PetBarding => f.write_str("PetBarding"),
+            Self::GuardDog => f.write_str("GuardDog"),
+            Self::ImprovedCower => f.write_str("ImprovedCower"),
+            Self::HunterSpikedCollar => f.write_str("HunterSpikedCollar"),
+            Self::HunterSpikedCollar2 => f.write_str("HunterSpikedCollar2"),
+            Self::HunterSpikedCollar3 => f.write_str("HunterSpikedCollar3"),
+            Self::Bloodthirsty => f.write_str("Bloodthirsty"),
+            Self::SpidersBite => f.write_str("Spider's Bite"),
+            Self::PiercingShots => f.write_str("PiercingShots"),
+            Self::RapidRecuperation => f.write_str("RapidRecuperation"),
+            Self::WildQuiver => f.write_str("WildQuiver"),
+            Self::ImprovedSteadyShot => f.write_str("ImprovedSteadyShot"),
+            Self::MarkedForDeath => f.write_str("MarkedForDeath"),
+            Self::ChimeraShot => f.write_str("ChimeraShot"),
+            Self::Invigoration => f.write_str("Invigoration"),
+            Self::CobraStrikes => f.write_str("CobraStrikes"),
+            Self::AspectMastery => f.write_str("AspectMastery"),
+            Self::BeastMastery => f.write_str("BeastMastery"),
+            Self::Longevity => f.write_str("Longevity"),
+            Self::NoxiousStings => f.write_str("NoxiousStings"),
+            Self::PointOfNoEscape => f.write_str("PointOfNoEscape"),
+            Self::SniperTraining => f.write_str("SniperTraining"),
+            Self::HuntingParty => f.write_str("HuntingParty"),
+            Self::ExplosiveShot => f.write_str("ExplosiveShot"),
+            Self::SanctifiedWrath => f.write_str("SanctifiedWrath"),
+            Self::SwiftRetribution => f.write_str("SwiftRetribution"),
+            Self::RighteousVengeance => f.write_str("RighteousVengeance"),
+            Self::DivineStorm => f.write_str("DivineStorm"),
+            Self::HunterBoarsSpeed => f.write_str("Boar's Speed"),
+            Self::HunterLionhearted => f.write_str("HunterLionhearted"),
+            Self::LickYourWounds => f.write_str("LickYourWounds"),
+            Self::HunterGreatResistance => f.write_str("HunterGreatResistance"),
+            Self::Rabid => f.write_str("Rabid"),
+            Self::HeartOfThePhoenix => f.write_str("HeartOfThePhoenix"),
+            Self::CallOfTheWild => f.write_str("CallOfTheWild"),
+            Self::HunterBoarsSpeed2 => f.write_str("Boar's Speed"),
+            Self::HunterGreatResistance2 => f.write_str("HunterGreatResistance2"),
+            Self::HunterLionhearted2 => f.write_str("HunterLionhearted2"),
+            Self::HunterGraceOfTheMantis => f.write_str("HunterGraceOfTheMantis"),
+            Self::HunterBoarsSpeed3 => f.write_str("Boar's Speed"),
+            Self::HunterCullingTheHerd3 => f.write_str("HunterCullingTheHerd3"),
+            Self::HunterLionhearted3 => f.write_str("HunterLionhearted3"),
+            Self::HunterGreatResistance3 => f.write_str("HunterGreatResistance3"),
+            Self::Intervene => f.write_str("Intervene"),
+            Self::Taunt => f.write_str("Taunt"),
+            Self::HunterLastStand => f.write_str("HunterLastStand"),
+            Self::HunterRoarOfSacrifice => f.write_str("HunterRoarOfSacrifice"),
+            Self::BloodOfTheRhino => f.write_str("BloodOfTheRhino"),
+            Self::Bullheaded => f.write_str("Bullheaded"),
+            Self::TheArtOfWar => f.write_str("TheArtOfWar"),
+            Self::Cornered => f.write_str("Cornered"),
+            Self::SheathOfLight => f.write_str("SheathOfLight"),
+            Self::WolverineBite => f.write_str("WolverineBite"),
+            Self::OwlsFocus => f.write_str("Owl's Focus"),
+            Self::FeedingFrenzy => f.write_str("FeedingFrenzy"),
+            Self::RoarOfRecovery => f.write_str("RoarOfRecovery"),
+            Self::DivineStrength => f.write_str("DivineStrength"),
+            Self::SacredCleansing => f.write_str("SacredCleansing"),
+            Self::EnlightenedJudgements => f.write_str("EnlightenedJudgements"),
+            Self::BeaconOfLight => f.write_str("BeaconOfLight"),
+            Self::InfusionOfLight => f.write_str("InfusionOfLight"),
+            Self::GuardedByTheLight => f.write_str("GuardedByTheLight"),
+            Self::TouchedByTheLight => f.write_str("TouchedByTheLight"),
+            Self::HammerOfTheRighteous => f.write_str("HammerOfTheRighteous"),
+            Self::FocusedAim => f.write_str("FocusedAim"),
+            Self::BlessedHands => f.write_str("BlessedHands"),
+            Self::JudgementsOfThePure => f.write_str("JudgementsOfThePure"),
+            Self::JudgementsOfTheJust => f.write_str("JudgementsOfTheJust"),
+            Self::HunterDive => f.write_str("HunterDive"),
+            Self::HunterDive2 => f.write_str("HunterDive2"),
+            Self::ShieldOfTheTemplar => f.write_str("ShieldOfTheTemplar"),
+            Self::ImprovedFear => f.write_str("ImprovedFear"),
+            Self::CarrionFeeder => f.write_str("CarrionFeeder"),
+            Self::HunterMobility => f.write_str("HunterMobility"),
+            Self::HunterMobility2 => f.write_str("HunterMobility2"),
+            Self::MissileBarrage => f.write_str("MissileBarrage"),
+            Self::BloodOfTheNorth => f.write_str("BloodOfTheNorth"),
+            Self::FocusMagic => f.write_str("FocusMagic"),
+            Self::BurningDetermination => f.write_str("BurningDetermination"),
+            Self::ShatteredBarrier => f.write_str("ShatteredBarrier"),
+            Self::Lichborne => f.write_str("Lichborne"),
+            Self::ScourgeStrike => f.write_str("ScourgeStrike"),
+            Self::DeathKnightTwoHandedWeaponSpecialization => f.write_str("DeathKnightTwoHandedWeaponSpecialization"),
+            Self::DeathKnightAnticipation => f.write_str("DeathKnightAnticipation"),
+            Self::Swoop => f.write_str("Swoop"),
+            Self::AntiMagicZone => f.write_str("AntiMagicZone"),
+            Self::TormentTheWeak => f.write_str("TormentTheWeak"),
+            Self::ImprovedIcyTalons => f.write_str("ImprovedIcyTalons"),
+            Self::NightOfTheDead => f.write_str("NightOfTheDead"),
+            Self::Desecration => f.write_str("Desecration"),
+            Self::KindredSpirits => f.write_str("KindredSpirits"),
+            Self::HunterVsWild => f.write_str("HunterVsWild"),
+            Self::TNT => f.write_str("TNT"),
+            Self::WreckingCrew => f.write_str("WreckingCrew"),
+            Self::TasteForBlood => f.write_str("TasteForBlood"),
+            Self::ImprovedSlam => f.write_str("ImprovedSlam"),
+            Self::UnendingFury => f.write_str("UnendingFury"),
+            Self::RenewedHope => f.write_str("RenewedHope"),
+            Self::Warbringer => f.write_str("Warbringer"),
+            Self::HunterCharge2 => f.write_str("HunterCharge2"),
+            Self::Genesis => f.write_str("Genesis"),
+            Self::ImprovedInsectSwarm => f.write_str("ImprovedInsectSwarm"),
+            Self::NaturesSplendor => f.write_str("Nature's Splendor"),
+            Self::ProtectorOfThePack => f.write_str("ProtectorOfThePack"),
+            Self::NaturalReaction => f.write_str("NaturalReaction"),
+            Self::RelentlessStrikes => f.write_str("RelentlessStrikes"),
+            Self::Pandemic => f.write_str("Pandemic"),
+            Self::DamageShield => f.write_str("DamageShield"),
+            Self::ImprovedSpellReflection => f.write_str("ImprovedSpellReflection"),
+            Self::LavaLash => f.write_str("LavaLash"),
+            Self::ArmoredToTheTeeth => f.write_str("ArmoredToTheTeeth"),
+            Self::Shamanism => f.write_str("Shamanism"),
+            Self::HunterWildHunt => f.write_str("HunterWildHunt"),
+            Self::SharkAttack => f.write_str("SharkAttack"),
+            Self::HunterWildHunt2 => f.write_str("HunterWildHunt2"),
+            Self::HunterWildHunt3 => f.write_str("HunterWildHunt3"),
+            Self::HunterGraceOfTheMantis2 => f.write_str("HunterGraceOfTheMantis2"),
+            Self::Silverback => f.write_str("Silverback"),
+            Self::ImprovedDeathStrike => f.write_str("ImprovedDeathStrike"),
+            Self::Chilblains => f.write_str("Chilblains"),
+            Self::Decimation => f.write_str("Decimation"),
+            Self::BoomingEchoes => f.write_str("BoomingEchoes"),
+            Self::FrozenPower => f.write_str("FrozenPower"),
+            Self::ImprovedBarkskin => f.write_str("ImprovedBarkskin"),
+            Self::PrimalGore => f.write_str("PrimalGore"),
+            Self::ImprovedDevouringPlague => f.write_str("ImprovedDevouringPlague"),
+            Self::ReflectiveShield => f.write_str("ReflectiveShield"),
+            Self::Thunderstomp => f.write_str("Thunderstomp"),
+            Self::HunterRoarOfSacrifice2 => f.write_str("HunterRoarOfSacrifice2"),
+            Self::BodyAndSoul => f.write_str("BodyAndSoul"),
+            Self::DivineSacrifice => f.write_str("DivineSacrifice"),
+            Self::DivineGuardian => f.write_str("DivineGuardian"),
+            Self::SpiritualAttunement => f.write_str("SpiritualAttunement"),
+            Self::Juggernaut => f.write_str("Juggernaut"),
+            Self::ThreatOfThassarian => f.write_str("ThreatOfThassarian"),
+            Self::Desolation => f.write_str("Desolation"),
+        }
+    }
+}
+
+impl TryFrom<u32> for Talent {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+        match value {
+            23 => Ok(Self::BurningSoul),
+            24 => Ok(Self::MoltenShields),
+            25 => Ok(Self::ImprovedScorch),
+            26 => Ok(Self::ImprovedFireball),
+            27 => Ok(Self::ImprovedFireBlast),
+            28 => Ok(Self::FlameThrowing),
+            29 => Ok(Self::Pyroblast),
+            30 => Ok(Self::Impact),
+            31 => Ok(Self::WorldInFlames),
+            32 => Ok(Self::BlastWave),
+            33 => Ok(Self::CriticalMass),
+            34 => Ok(Self::Ignite),
+            35 => Ok(Self::FirePower),
+            36 => Ok(Self::Combustion),
+            37 => Ok(Self::ImprovedFrostbolt),
+            38 => Ok(Self::Frostbite),
+            61 => Ok(Self::PiercingIce),
+            62 => Ok(Self::IceFloes),
+            63 => Ok(Self::ImprovedBlizzard),
+            64 => Ok(Self::ImprovedConeOfCold),
+            65 => Ok(Self::Permafrost),
+            66 => Ok(Self::FrostChanneling),
+            67 => Ok(Self::Shatter),
+            68 => Ok(Self::WintersChill),
+            69 => Ok(Self::IcyVeins),
+            70 => Ok(Self::FrostWarding),
+            71 => Ok(Self::IceBarrier),
+            72 => Ok(Self::ColdSnap),
+            73 => Ok(Self::IceShards),
+            74 => Ok(Self::ArcaneSubtlety),
+            75 => Ok(Self::ArcaneConcentration),
+            76 => Ok(Self::ArcaneFocus),
+            77 => Ok(Self::ArcaneMind),
+            80 => Ok(Self::ArcaneStability),
+            81 => Ok(Self::SpellImpact),
+            82 => Ok(Self::MagicAttunement),
+            83 => Ok(Self::ArcaneShielding),
+            85 => Ok(Self::ArcaneFortitude),
+            86 => Ok(Self::PresenceOfMind),
+            87 => Ok(Self::ArcanePower),
+            88 => Ok(Self::ImprovedCounterspell),
+            121 => Ok(Self::DeepWounds),
+            123 => Ok(Self::SwordSpecialization),
+            124 => Ok(Self::ImprovedHeroicStrike),
+            125 => Ok(Self::WarriorMaceSpecialization),
+            126 => Ok(Self::ImprovedCharge),
+            127 => Ok(Self::ImprovedRend),
+            128 => Ok(Self::TacticalMastery),
+            129 => Ok(Self::ImprovedHamstring),
+            130 => Ok(Self::WarriorDeflection),
+            131 => Ok(Self::ImprovedOverpower),
+            132 => Ok(Self::PoleaxeSpecialization),
+            133 => Ok(Self::SweepingStrikes),
+            134 => Ok(Self::WarriorWeaponMastery),
+            135 => Ok(Self::MortalStrike),
+            136 => Ok(Self::WarriorTwoHandedWeaponSpecialization),
+            137 => Ok(Self::AngerManagement),
+            138 => Ok(Self::WarriorAnticipation),
+            140 => Ok(Self::WarriorToughness),
+            141 => Ok(Self::ImprovedThunderClap),
+            142 => Ok(Self::ImprovedBloodrage),
+            144 => Ok(Self::Incite),
+            146 => Ok(Self::Puncture),
+            147 => Ok(Self::ImprovedRevenge),
+            148 => Ok(Self::Vigilance),
+            149 => Ok(Self::GagOrder),
+            150 => Ok(Self::ImprovedDisciplines),
+            151 => Ok(Self::ImprovedDisarm),
+            152 => Ok(Self::ConcussionBlow),
+            153 => Ok(Self::WarriorLastStand),
+            154 => Ok(Self::CommandingPresence),
+            155 => Ok(Self::Enrage),
+            156 => Ok(Self::WarriorFlurry),
+            157 => Ok(Self::Cruelty),
+            158 => Ok(Self::BoomingVoice),
+            159 => Ok(Self::UnbridledWrath),
+            160 => Ok(Self::PiercingHowl),
+            161 => Ok(Self::ImprovedDemoralizingShout),
+            165 => Ok(Self::DeathWish),
+            166 => Ok(Self::ImprovedCleave),
+            167 => Ok(Self::Bloodthirst),
+            181 => Ok(Self::RoguePrecision),
+            182 => Ok(Self::CloseQuartersCombat),
+            184 => Ok(Self::RogueMaceSpecialization),
+            186 => Ok(Self::RogueLightningReflexes),
+            187 => Ok(Self::RogueDeflection),
+            201 => Ok(Self::ImprovedSinisterStrike),
+            203 => Ok(Self::ImprovedGouge),
+            204 => Ok(Self::Endurance),
+            205 => Ok(Self::AdrenalineRush),
+            206 => Ok(Self::ImprovedKick),
+            221 => Ok(Self::RogueDualWieldSpecialization),
+            222 => Ok(Self::ImprovedSprint),
+            223 => Ok(Self::BladeFlurry),
+            241 => Ok(Self::MasterOfDeception),
+            242 => Ok(Self::HackAndSlash),
+            244 => Ok(Self::Camouflage),
+            245 => Ok(Self::Initiative),
+            246 => Ok(Self::Setup),
+            247 => Ok(Self::Elusiveness),
+            261 => Ok(Self::Opportunity),
+            262 => Ok(Self::DirtyTricks),
+            263 => Ok(Self::ImprovedAmbush),
+            265 => Ok(Self::DirtyDeeds),
+            268 => Ok(Self::ImprovedPoisons),
+            269 => Ok(Self::Lethality),
+            270 => Ok(Self::Malice),
+            272 => Ok(Self::RemorselessAttacks),
+            273 => Ok(Self::Ruthlessness),
+            274 => Ok(Self::Murder),
+            276 => Ok(Self::ImprovedEviscerate),
+            277 => Ok(Self::PuncturingWounds),
+            278 => Ok(Self::ImprovedExposeArmor),
+            279 => Ok(Self::ImprovedKidneyShot),
+            280 => Ok(Self::ColdBlood),
+            281 => Ok(Self::Overkill),
+            283 => Ok(Self::SealFate),
+            284 => Ok(Self::Preparation),
+            301 => Ok(Self::Riposte),
+            303 => Ok(Self::GhostlyStrike),
+            321 => Ok(Self::Martyrdom),
+            322 => Ok(Self::PowerInfusion),
+            341 => Ok(Self::MentalAgility),
+            342 => Ok(Self::UnbreakableWill),
+            343 => Ok(Self::ImprovedPowerWordShield),
+            344 => Ok(Self::ImprovedPowerWordFortitude),
+            346 => Ok(Self::ImprovedInnerFire),
+            347 => Ok(Self::Meditation),
+            348 => Ok(Self::InnerFocus),
+            350 => Ok(Self::ImprovedManaBurn),
+            351 => Ok(Self::SoulWarding),
+            352 => Ok(Self::SilentResolve),
+            361 => Ok(Self::Inspiration),
+            381 => Ok(Self::Premeditation),
+            382 => Ok(Self::Vigor),
+            401 => Ok(Self::HolySpecialization),
+            402 => Ok(Self::SpiritualGuidance),
+            403 => Ok(Self::SearingLight),
+            404 => Ok(Self::SpiritualHealing),
+            406 => Ok(Self::ImprovedRenew),
+            408 => Ok(Self::ImprovedHealing),
+            410 => Ok(Self::PriestHealingFocus),
+            411 => Ok(Self::SpellWarding),
+            413 => Ok(Self::HealingPrayers),
+            421 => Ok(Self::ArcaneInstability),
+            442 => Ok(Self::DesperatePrayer),
+            461 => Ok(Self::ShadowWeaving),
+            462 => Ok(Self::Darkness),
+            463 => Ok(Self::ShadowFocus),
+            465 => Ok(Self::SpiritTap),
+            466 => Ok(Self::ShadowAffinity),
+            481 => Ok(Self::ImprovedMindBlast),
+            482 => Ok(Self::ImprovedShadowWordPain),
+            483 => Ok(Self::VeiledShadows),
+            484 => Ok(Self::VampiricEmbrace),
+            501 => Ok(Self::MindFlay),
+            521 => Ok(Self::Shadowform),
+            541 => Ok(Self::Silence),
+            542 => Ok(Self::ImprovedPsychicScream),
+            561 => Ok(Self::CallOfFlame),
+            562 => Ok(Self::CallOfThunder),
+            563 => Ok(Self::Concussion),
+            564 => Ok(Self::Convection),
+            565 => Ok(Self::ElementalFury),
+            567 => Ok(Self::ImprovedFireNova),
+            573 => Ok(Self::ElementalMastery),
+            574 => Ok(Self::ElementalFocus),
+            575 => Ok(Self::Reverberation),
+            581 => Ok(Self::AncestralHealing),
+            582 => Ok(Self::TidalForce),
+            583 => Ok(Self::ImprovedWaterShield),
+            586 => Ok(Self::ImprovedHealingWave),
+            587 => Ok(Self::ShamanHealingFocus),
+            588 => Ok(Self::RestorativeTotems),
+            589 => Ok(Self::ImprovedReincarnation),
+            590 => Ok(Self::ManaTideTotem),
+            591 => Ok(Self::ShamanNaturesSwiftness),
+            592 => Ok(Self::Purification),
+            593 => Ok(Self::TidalFocus),
+            594 => Ok(Self::TidalMastery),
+            595 => Ok(Self::TotemicFocus),
+            601 => Ok(Self::ShamanAnticipation),
+            602 => Ok(Self::ShamanFlurry),
+            605 => Ok(Self::ImprovedGhostWolf),
+            607 => Ok(Self::ImprovedShields),
+            609 => Ok(Self::GuardianTotems),
+            610 => Ok(Self::EnhancingTotems),
+            611 => Ok(Self::ElementalWeapons),
+            613 => Ok(Self::ThunderingStrikes),
+            614 => Ok(Self::AncestralKnowledge),
+            615 => Ok(Self::ShamanToughness),
+            616 => Ok(Self::SpiritWeapons),
+            617 => Ok(Self::ShamanisticFocus),
+            641 => Ok(Self::IronWill),
+            661 => Ok(Self::BloodCraze),
+            662 => Ok(Self::Impale),
+            681 => Ok(Self::Hemorrhage),
+            682 => Ok(Self::VilePoisons),
+            702 => Ok(Self::WarriorOneHandedWeaponSpecialization),
+            721 => Ok(Self::LightningMastery),
+            741 => Ok(Self::ArcticReach),
+            762 => Ok(Self::StarlightWrath),
+            763 => Ok(Self::ImprovedMoonfire),
+            764 => Ok(Self::NaturesReach),
+            782 => Ok(Self::Brambles),
+            783 => Ok(Self::Moonglow),
+            784 => Ok(Self::CelestialFocus),
+            788 => Ok(Self::InsectSwarm),
+            789 => Ok(Self::NaturesGrace),
+            790 => Ok(Self::Moonfury),
+            792 => Ok(Self::DruidVengeance),
+            793 => Ok(Self::MoonkinForm),
+            794 => Ok(Self::DruidThickHide),
+            795 => Ok(Self::FeralAggression),
+            796 => Ok(Self::DruidFerocity),
+            797 => Ok(Self::BrutalImpact),
+            798 => Ok(Self::SharpenedClaws),
+            799 => Ok(Self::FeralInstinct),
+            801 => Ok(Self::PrimalFury),
+            802 => Ok(Self::ShreddingAttacks),
+            803 => Ok(Self::PredatoryStrikes),
+            804 => Ok(Self::FeralCharge),
+            805 => Ok(Self::SavageFury),
+            807 => Ok(Self::FeralSwiftness),
+            808 => Ok(Self::HeartOfTheWild),
+            809 => Ok(Self::LeaderOfThePack),
+            821 => Ok(Self::ImprovedMarkOfTheWild),
+            822 => Ok(Self::Furor),
+            823 => Ok(Self::NaturesFocus),
+            824 => Ok(Self::Naturalist),
+            825 => Ok(Self::NaturesBounty),
+            826 => Ok(Self::NaturalShapeshifter),
+            827 => Ok(Self::OmenOfClarity),
+            828 => Ok(Self::GiftOfNature),
+            829 => Ok(Self::DruidIntensity),
+            830 => Ok(Self::ImprovedRejuvenation),
+            831 => Ok(Self::DruidNaturesSwiftness),
+            841 => Ok(Self::Subtlety),
+            842 => Ok(Self::ImprovedTranquility),
+            843 => Ok(Self::TranquilSpirit),
+            844 => Ok(Self::Swiftmend),
+            881 => Ok(Self::ShadowReach),
+            901 => Ok(Self::Stormstrike),
+            941 => Ok(Self::Cataclysm),
+            943 => Ok(Self::Bane),
+            944 => Ok(Self::ImprovedShadowBolt),
+            961 => Ok(Self::ImprovedImmolate),
+            963 => Ok(Self::Shadowburn),
+            964 => Ok(Self::DestructiveReach),
+            965 => Ok(Self::ImprovedSearingPain),
+            966 => Ok(Self::Emberstorm),
+            967 => Ok(Self::Ruin),
+            968 => Ok(Self::Conflagrate),
+            981 => Ok(Self::Devastation),
+            982 => Ok(Self::Aftermath),
+            983 => Ok(Self::DemonicPower),
+            985 => Ok(Self::WarlockIntensity),
+            986 => Ok(Self::Pyroclasm),
+            1001 => Ok(Self::FelConcentration),
+            1002 => Ok(Self::Nightfall),
+            1003 => Ok(Self::ImprovedCorruption),
+            1004 => Ok(Self::SoulSiphon),
+            1005 => Ok(Self::Suppression),
+            1006 => Ok(Self::ImprovedCurseOfWeakness),
+            1007 => Ok(Self::ImprovedLifeTap),
+            1021 => Ok(Self::GrimReach),
+            1022 => Ok(Self::DarkPact),
+            1041 => Ok(Self::SiphonLife),
+            1042 => Ok(Self::ShadowMastery),
+            1061 => Ok(Self::AmplifyCurse),
+            1081 => Ok(Self::CurseOfExhaustion),
+            1101 => Ok(Self::ImprovedDrainSoul),
+            1122 => Ok(Self::Aggression),
+            1123 => Ok(Self::SerratedBlades),
+            1141 => Ok(Self::Incineration),
+            1142 => Ok(Self::ArcaneMeditation),
+            1162 => Ok(Self::DruidSurvivalInstincts),
+            1181 => Ok(Self::DivineFury),
+            1201 => Ok(Self::MentalStrength),
+            1202 => Ok(Self::BorrowedTime),
+            1221 => Ok(Self::ImprovedHealthstone),
+            1222 => Ok(Self::ImprovedImp),
+            1223 => Ok(Self::DemonicEmbrace),
+            1224 => Ok(Self::ImprovedHealthFunnel),
+            1225 => Ok(Self::DemonicBrutality),
+            1226 => Ok(Self::FelDomination),
+            1227 => Ok(Self::MasterSummoner),
+            1242 => Ok(Self::FelVitality),
+            1243 => Ok(Self::ImprovedSuccubus),
+            1244 => Ok(Self::MasterDemonologist),
+            1261 => Ok(Self::MasterConjuror),
+            1262 => Ok(Self::UnholyPower),
+            1263 => Ok(Self::DemonicKnowledge),
+            1281 => Ok(Self::ManaFeed),
+            1282 => Ok(Self::SoulLink),
+            1283 => Ok(Self::MoltenCore),
+            1284 => Ok(Self::ImprovedCurseOfAgony),
+            1303 => Ok(Self::HunterLightningReflexes),
+            1304 => Ok(Self::Entrapment),
+            1305 => Ok(Self::TrapMastery),
+            1306 => Ok(Self::LockAndLoad),
+            1309 => Ok(Self::SurvivalTactics),
+            1310 => Ok(Self::Surefooted),
+            1311 => Ok(Self::HunterDeflection),
+            1312 => Ok(Self::Counterattack),
+            1321 => Ok(Self::KillerInstinct),
+            1322 => Ok(Self::BlackArrow),
+            1325 => Ok(Self::WyvernSting),
+            1341 => Ok(Self::ImprovedConcussiveShot),
+            1342 => Ok(Self::Efficiency),
+            1343 => Ok(Self::ImprovedHuntersMark),
+            1344 => Ok(Self::LethalShots),
+            1345 => Ok(Self::AimedShot),
+            1346 => Ok(Self::ImprovedArcaneShot),
+            1347 => Ok(Self::Barrage),
+            1348 => Ok(Self::ImprovedStings),
+            1349 => Ok(Self::MortalShots),
+            1351 => Ok(Self::ConcussiveBarrage),
+            1353 => Ok(Self::Readiness),
+            1361 => Ok(Self::TrueshotAura),
+            1362 => Ok(Self::RangedWeaponSpecialization),
+            1381 => Ok(Self::ImprovedAspectOfTheMonkey),
+            1382 => Ok(Self::ImprovedAspectOfTheHawk),
+            1384 => Ok(Self::Pathfinding),
+            1385 => Ok(Self::ImprovedMendPet),
+            1386 => Ok(Self::BestialWrath),
+            1387 => Ok(Self::Intimidation),
+            1388 => Ok(Self::SpiritBond),
+            1389 => Ok(Self::EnduranceTraining),
+            1390 => Ok(Self::BestialDiscipline),
+            1393 => Ok(Self::HunterFerocity),
+            1395 => Ok(Self::HunterThickHide),
+            1396 => Ok(Self::UnleashedFury),
+            1397 => Ok(Self::Frenzy),
+            1401 => Ok(Self::ImprovedBlessingOfMight),
+            1402 => Ok(Self::PaladinVengeance),
+            1403 => Ok(Self::PaladinDeflection),
+            1407 => Ok(Self::Benediction),
+            1410 => Ok(Self::PaladinTwoHandedWeaponSpecialization),
+            1411 => Ok(Self::Conviction),
+            1421 => Ok(Self::Redoubt),
+            1422 => Ok(Self::ImprovedDevotionAura),
+            1423 => Ok(Self::PaladinToughness),
+            1425 => Ok(Self::GuardiansFavor),
+            1426 => Ok(Self::Reckoning),
+            1429 => Ok(Self::PaladinOneHandedWeaponSpecialization),
+            1430 => Ok(Self::HolyShield),
+            1431 => Ok(Self::BlessingOfSanctuary),
+            1432 => Ok(Self::SpiritualFocus),
+            1433 => Ok(Self::DivineFavor),
+            1435 => Ok(Self::AuraMastery),
+            1441 => Ok(Self::Repentance),
+            1442 => Ok(Self::Divinity),
+            1443 => Ok(Self::ImprovedLayOnHands),
+            1444 => Ok(Self::HealingLight),
+            1446 => Ok(Self::ImprovedBlessingOfWisdom),
+            1449 => Ok(Self::DivineIntellect),
+            1450 => Ok(Self::ImprovedConcentrationAura),
+            1461 => Ok(Self::Illumination),
+            1463 => Ok(Self::SealsOfThePure),
+            1464 => Ok(Self::HeartOfTheCrusader),
+            1465 => Ok(Self::SanctifiedLight),
+            1481 => Ok(Self::SealOfCommand),
+            1501 => Ok(Self::ImprovedRighteousFury),
+            1502 => Ok(Self::HolyShock),
+            1521 => Ok(Self::ImprovedHammerOfJustice),
+            1541 => Ok(Self::ImprovedBerserkerRage),
+            1542 => Ok(Self::ImprovedExecute),
+            1543 => Ok(Self::ImprovedIntercept),
+            1561 => Ok(Self::SpiritOfRedemption),
+            1581 => Ok(Self::WarriorDualWieldSpecialization),
+            1601 => Ok(Self::ShieldSpecialization),
+            1621 => Ok(Self::SavageStrikes),
+            1622 => Ok(Self::Survivalist),
+            1623 => Ok(Self::ImprovedTracking),
+            1624 => Ok(Self::FocusedFire),
+            1625 => Ok(Self::ImprovedRevivePet),
+            1627 => Ok(Self::HolyPower),
+            1628 => Ok(Self::UnyieldingFaith),
+            1629 => Ok(Self::PaladinAnticipation),
+            1631 => Ok(Self::ImprovedJudgements),
+            1632 => Ok(Self::EyeForAnEye),
+            1633 => Ok(Self::Vindication),
+            1634 => Ok(Self::PursuitOfJustice),
+            1635 => Ok(Self::HolyReach),
+            1636 => Ok(Self::BlessedRecovery),
+            1637 => Ok(Self::Lightwell),
+            1638 => Ok(Self::ImprovedVampiricEmbrace),
+            1639 => Ok(Self::MasterOfElements),
+            1640 => Ok(Self::ElementalWarding),
+            1641 => Ok(Self::ElementalReach),
+            1642 => Ok(Self::EyeOfTheStorm),
+            1643 => Ok(Self::ShamanWeaponMastery),
+            1645 => Ok(Self::ElementalDevastation),
+            1646 => Ok(Self::HealingGrace),
+            1647 => Ok(Self::ImprovedWindfuryTotem),
+            1648 => Ok(Self::HealingWay),
+            1649 => Ok(Self::MagePrecision),
+            1650 => Ok(Self::MagicAbsorption),
+            1652 => Ok(Self::ImprovedDefensiveStance),
+            1653 => Ok(Self::WarriorVitality),
+            1654 => Ok(Self::ShieldMastery),
+            1655 => Ok(Self::ImprovedWhirlwind),
+            1657 => Ok(Self::WarriorPrecision),
+            1658 => Ok(Self::ImprovedBerserkerStance),
+            1659 => Ok(Self::Rampage),
+            1660 => Ok(Self::FocusedRage),
+            1661 => Ok(Self::EndlessRage),
+            1662 => Ok(Self::SuddenDeath),
+            1663 => Ok(Self::SecondWind),
+            1664 => Ok(Self::BloodFrenzy),
+            1666 => Ok(Self::Devastate),
+            1667 => Ok(Self::Malediction),
+            1668 => Ok(Self::ImprovedHowlOfTerror),
+            1669 => Ok(Self::Contagion),
+            1670 => Ok(Self::UnstableAffliction),
+            1671 => Ok(Self::DemonicAegis),
+            1672 => Ok(Self::SummonFelguard),
+            1673 => Ok(Self::DemonicTactics),
+            1676 => Ok(Self::Shadowfury),
+            1677 => Ok(Self::ShadowAndFlame),
+            1678 => Ok(Self::SoulLeech),
+            1679 => Ok(Self::NetherProtection),
+            1680 => Ok(Self::DemonicResilience),
+            1682 => Ok(Self::UnrelentingStorm),
+            1685 => Ok(Self::ElementalPrecision),
+            1686 => Ok(Self::LightningOverload),
+            1687 => Ok(Self::TotemOfWrath),
+            1689 => Ok(Self::UnleashedRage),
+            1690 => Ok(Self::DualWield),
+            1691 => Ok(Self::MentalQuickness),
+            1692 => Ok(Self::ShamanDualWieldSpecialization),
+            1693 => Ok(Self::ShamanisticRage),
+            1695 => Ok(Self::ShamanFocusedMind),
+            1696 => Ok(Self::NaturesBlessing),
+            1697 => Ok(Self::ImprovedChainHeal),
+            1698 => Ok(Self::EarthShield),
+            1699 => Ok(Self::NaturesGuardian),
+            1700 => Ok(Self::SleightOfHand),
+            1701 => Ok(Self::HeightenedSenses),
+            1702 => Ok(Self::Deadliness),
+            1703 => Ok(Self::WeaponExpertise),
+            1705 => Ok(Self::RogueVitality),
+            1706 => Ok(Self::BladeTwisting),
+            1707 => Ok(Self::NervesOfSteel),
+            1709 => Ok(Self::SurpriseAttacks),
+            1711 => Ok(Self::EnvelopingShadows),
+            1712 => Ok(Self::SinisterCalling),
+            1713 => Ok(Self::MasterOfSubtlety),
+            1714 => Ok(Self::Shadowstep),
+            1715 => Ok(Self::MasterPoisoner),
+            1718 => Ok(Self::FindWeakness),
+            1719 => Ok(Self::Mutilate),
+            1721 => Ok(Self::FleetFooted),
+            1722 => Ok(Self::CheatDeath),
+            1723 => Ok(Self::DeadenedNerves),
+            1724 => Ok(Self::ImprovedBlink),
+            1725 => Ok(Self::ArcanePotency),
+            1726 => Ok(Self::PrismaticCloak),
+            1727 => Ok(Self::ArcaneEmpowerment),
+            1728 => Ok(Self::MindMastery),
+            1729 => Ok(Self::Slow),
+            1730 => Ok(Self::PlayingWithFire),
+            1731 => Ok(Self::BlazingSpeed),
+            1732 => Ok(Self::MoltenFury),
+            1733 => Ok(Self::Pyromaniac),
+            1734 => Ok(Self::EmpoweredFire),
+            1735 => Ok(Self::DragonsBreath),
+            1736 => Ok(Self::FrozenCore),
+            1737 => Ok(Self::ColdAsIce),
+            1738 => Ok(Self::ArcticWinds),
+            1740 => Ok(Self::EmpoweredFrostbolt),
+            1741 => Ok(Self::SummonWaterElemental),
+            1742 => Ok(Self::PureOfHeart),
+            1743 => Ok(Self::PurifyingPower),
+            1744 => Ok(Self::BlessedLife),
+            1745 => Ok(Self::LightsGrace),
+            1746 => Ok(Self::HolyGuidance),
+            1747 => Ok(Self::DivineIllumination),
+            1748 => Ok(Self::Stoicism),
+            1750 => Ok(Self::SacredDuty),
+            1751 => Ok(Self::ArdentDefender),
+            1753 => Ok(Self::CombatExpertise),
+            1754 => Ok(Self::AvengersShield),
+            1755 => Ok(Self::Crusade),
+            1756 => Ok(Self::SanctifiedRetribution),
+            1757 => Ok(Self::DivinePurpose),
+            1758 => Ok(Self::JudgementsOfTheWise),
+            1759 => Ok(Self::Fanaticism),
+            1761 => Ok(Self::SanctityOfBattle),
+            1762 => Ok(Self::QuickRecovery),
+            1763 => Ok(Self::ShadowEmbrace),
+            1764 => Ok(Self::EmpoweredCorruption),
+            1765 => Ok(Self::BlessedResilience),
+            1766 => Ok(Self::SurgeOfLight),
+            1767 => Ok(Self::EmpoweredHealing),
+            1768 => Ok(Self::HolyConcentration),
+            1769 => Ok(Self::Absolution),
+            1771 => Ok(Self::FocusedPower),
+            1772 => Ok(Self::Enlightenment),
+            1773 => Ok(Self::ImprovedFlashHeal),
+            1774 => Ok(Self::PainSuppression),
+            1777 => Ok(Self::PriestFocusedMind),
+            1778 => Ok(Self::ShadowPower),
+            1779 => Ok(Self::VampiricTouch),
+            1781 => Ok(Self::MindMelt),
+            1782 => Ok(Self::LunarGuidance),
+            1783 => Ok(Self::BalanceOfPower),
+            1784 => Ok(Self::Dreamstate),
+            1785 => Ok(Self::ImprovedFaerieFire),
+            1786 => Ok(Self::WrathOfCenarius),
+            1787 => Ok(Self::ForceOfNature),
+            1788 => Ok(Self::EmpoweredTouch),
+            1789 => Ok(Self::EmpoweredRejuvenation),
+            1790 => Ok(Self::NaturalPerfection),
+            1791 => Ok(Self::TreeOfLife),
+            1792 => Ok(Self::NurturingInstinct),
+            1793 => Ok(Self::PrimalTenacity),
+            1794 => Ok(Self::SurvivalOfTheFittest),
+            1795 => Ok(Self::PredatoryInstincts),
+            1796 => Ok(Self::Mangle),
+            1797 => Ok(Self::LivingSpirit),
+            1798 => Ok(Self::ImprovedLeaderOfThePack),
+            1799 => Ok(Self::AnimalHandler),
+            1800 => Ok(Self::FerociousInspiration),
+            1801 => Ok(Self::CatlikeReflexes),
+            1802 => Ok(Self::SerpentsSwiftness),
+            1803 => Ok(Self::TheBeastWithin),
+            1804 => Ok(Self::CombatExperience),
+            1806 => Ok(Self::CarefulAim),
+            1807 => Ok(Self::MasterMarksman),
+            1808 => Ok(Self::SilencingShot),
+            1809 => Ok(Self::Resourcefulness),
+            1810 => Ok(Self::HunterSurvivalInstincts),
+            1811 => Ok(Self::ThrillOfTheHunt),
+            1812 => Ok(Self::ExposeWeakness),
+            1813 => Ok(Self::MasterTactician),
+            1814 => Ok(Self::ScatterShot),
+            1815 => Ok(Self::CircleOfHealing),
+            1816 => Ok(Self::Misery),
+            1817 => Ok(Self::Backlash),
+            1818 => Ok(Self::GoForTheThroat),
+            1819 => Ok(Self::RapidKilling),
+            1820 => Ok(Self::HawkEye),
+            1821 => Ok(Self::ImprovedBarrage),
+            1822 => Ok(Self::NaturesMajesty),
+            1823 => Ok(Self::CrusaderStrike),
+            1824 => Ok(Self::ImprovedMortalStrike),
+            1825 => Ok(Self::CombatPotency),
+            1826 => Ok(Self::SpellPower),
+            1827 => Ok(Self::ImprovedSliceAndDice),
+            1843 => Ok(Self::ArcaneFlows),
+            1844 => Ok(Self::IncantersAbsorption),
+            1845 => Ok(Self::StudentOfTheMind),
+            1846 => Ok(Self::NetherwindPresence),
+            1847 => Ok(Self::ArcaneBarrage),
+            1848 => Ok(Self::FieryPayback),
+            1849 => Ok(Self::Firestarter),
+            1850 => Ok(Self::HotStreak),
+            1851 => Ok(Self::Burnout),
+            1852 => Ok(Self::LivingBomb),
+            1853 => Ok(Self::FingersOfFrost),
+            1854 => Ok(Self::BrainFreeze),
+            1855 => Ok(Self::EnduringWinter),
+            1856 => Ok(Self::ChilledToTheBone),
+            1857 => Ok(Self::DeepFreeze),
+            1858 => Ok(Self::FocusedWill),
+            1859 => Ok(Self::Trauma),
+            1860 => Ok(Self::UnrelentingAssault),
+            1862 => Ok(Self::StrengthOfArms),
+            1863 => Ok(Self::Bladestorm),
+            1864 => Ok(Self::IntensifyRage),
+            1865 => Ok(Self::FuriousAttacks),
+            1866 => Ok(Self::Bloodsurge),
+            1867 => Ok(Self::TitansGrip),
+            1868 => Ok(Self::HeroicFury),
+            1870 => Ok(Self::Safeguard),
+            1871 => Ok(Self::SwordAndBoard),
+            1872 => Ok(Self::Shockwave),
+            1873 => Ok(Self::ImprovedFelhunter),
+            1875 => Ok(Self::DeathsEmbrace),
+            1876 => Ok(Self::EverlastingAffliction),
+            1878 => Ok(Self::Eradication),
+            1880 => Ok(Self::DemonicEmpowerment),
+            1882 => Ok(Self::ImprovedDemonicTactics),
+            1883 => Ok(Self::FelSynergy),
+            1884 => Ok(Self::Nemesis),
+            1885 => Ok(Self::DemonicPact),
+            1886 => Ok(Self::Metamorphosis),
+            1887 => Ok(Self::MoltenSkin),
+            1888 => Ok(Self::Backdraft),
+            1889 => Ok(Self::ImprovedSoulLeech),
+            1890 => Ok(Self::FireAndBrimstone),
+            1891 => Ok(Self::ChaosBolt),
+            1893 => Ok(Self::CriticalBlock),
+            1894 => Ok(Self::Aspiration),
+            1895 => Ok(Self::DivineAegis),
+            1896 => Ok(Self::Rapture),
+            1897 => Ok(Self::Penance),
+            1898 => Ok(Self::TwinDisciplines),
+            1901 => Ok(Self::Grace),
+            1902 => Ok(Self::EmpoweredRenew),
+            1903 => Ok(Self::TestOfFaith),
+            1904 => Ok(Self::Serendipity),
+            1905 => Ok(Self::DivineProvidence),
+            1906 => Ok(Self::ImprovedShadowform),
+            1907 => Ok(Self::TwistedFaith),
+            1908 => Ok(Self::PsychicHorror),
+            1909 => Ok(Self::PainAndSuffering),
+            1910 => Ok(Self::Dispersion),
+            1911 => Ok(Self::GuardianSpirit),
+            1912 => Ok(Self::ImprovedMoonkinForm),
+            1913 => Ok(Self::OwlkinFrenzy),
+            1914 => Ok(Self::PrimalPrecision),
+            1915 => Ok(Self::MasterShapeshifter),
+            1916 => Ok(Self::GiftOfTheEarthmother),
+            1917 => Ok(Self::WildGrowth),
+            1918 => Ok(Self::RendAndTear),
+            1919 => Ok(Self::InfectedWounds),
+            1920 => Ok(Self::ImprovedMangle),
+            1921 => Ok(Self::KingOfTheJungle),
+            1922 => Ok(Self::LivingSeed),
+            1923 => Ok(Self::Typhoon),
+            1924 => Ok(Self::Eclipse),
+            1925 => Ok(Self::GaleWinds),
+            1926 => Ok(Self::Starfall),
+            1927 => Ok(Self::Berserk),
+            1928 => Ok(Self::EarthAndMoon),
+            1929 => Ok(Self::Revitalize),
+            1930 => Ok(Self::ImprovedTreeOfLife),
+            1932 => Ok(Self::Virulence),
+            1933 => Ok(Self::Morbidity),
+            1934 => Ok(Self::RavenousDead),
+            1936 => Ok(Self::ImprovedBloodPresence),
+            1938 => Ok(Self::BladedArmor),
+            1939 => Ok(Self::Butchery),
+            1941 => Ok(Self::RuneTap),
+            1942 => Ok(Self::ImprovedRuneTap),
+            1943 => Ok(Self::DarkConviction),
+            1944 => Ok(Self::BloodyVengeance),
+            1945 => Ok(Self::Subversion),
+            1948 => Ok(Self::ScentOfBlood),
+            1949 => Ok(Self::MarkOfBlood),
+            1950 => Ok(Self::VeteranOfTheThirdWar),
+            1953 => Ok(Self::Vendetta),
+            1954 => Ok(Self::Hysteria),
+            1955 => Ok(Self::SuddenDoom),
+            1957 => Ok(Self::HeartStrike),
+            1958 => Ok(Self::MightOfMograine),
+            1959 => Ok(Self::WillOfTheNecropolis),
+            1960 => Ok(Self::Bloodworms),
+            1961 => Ok(Self::DancingRuneWeapon),
+            1962 => Ok(Self::CryptFever),
+            1963 => Ok(Self::Epidemic),
+            1968 => Ok(Self::DeathKnightToughness),
+            1971 => Ok(Self::EndlessWinter),
+            1973 => Ok(Self::BlackIce),
+            1975 => Ok(Self::FrostStrike),
+            1979 => Ok(Self::UnbreakableArmor),
+            1980 => Ok(Self::Deathchill),
+            1981 => Ok(Self::ChillOfTheGrave),
+            1984 => Ok(Self::MasterOfGhouls),
+            1985 => Ok(Self::CorpseExplosion),
+            1989 => Ok(Self::HowlingBlast),
+            1990 => Ok(Self::FrigidDreadplate),
+            1992 => Ok(Self::Rime),
+            1993 => Ok(Self::MercilessCombat),
+            1996 => Ok(Self::UnholyBlight),
+            1997 => Ok(Self::Acclimation),
+            1998 => Ok(Self::TundraStalker),
+            1999 => Ok(Self::HungeringCold),
+            2000 => Ok(Self::SummonGargoyle),
+            2001 => Ok(Self::Reaping),
+            2003 => Ok(Self::WanderingPlague),
+            2004 => Ok(Self::BloodCakedBlade),
+            2005 => Ok(Self::Impurity),
+            2007 => Ok(Self::BoneShield),
+            2008 => Ok(Self::Outbreak),
+            2009 => Ok(Self::MagicSuppression),
+            2011 => Ok(Self::Dirge),
+            2013 => Ok(Self::ImprovedUnholyPresence),
+            2015 => Ok(Self::BloodyStrikes),
+            2017 => Ok(Self::BladeBarrier),
+            2018 => Ok(Self::SpellDeflection),
+            2019 => Ok(Self::VampiricBlood),
+            2020 => Ok(Self::RunicPowerMastery),
+            2022 => Ok(Self::NervesOfColdSteel),
+            2025 => Ok(Self::UnholyCommand),
+            2027 => Ok(Self::ImprovedSpiritTap),
+            2029 => Ok(Self::ImprovedFrostPresence),
+            2030 => Ok(Self::GlacierRot),
+            2031 => Ok(Self::ImprovedIcyTouch),
+            2034 => Ok(Self::BloodGorged),
+            2035 => Ok(Self::IcyReach),
+            2036 => Ok(Self::RageOfRivendare),
+            2039 => Ok(Self::OnAPaleHorse),
+            2040 => Ok(Self::GuileOfGorefiend),
+            2041 => Ok(Self::Haunt),
+            2042 => Ok(Self::IcyTalons),
+            2043 => Ok(Self::EbonPlaguebringer),
+            2044 => Ok(Self::KillingMachine),
+            2045 => Ok(Self::EmpoweredImp),
+            2047 => Ok(Self::Necrosis),
+            2048 => Ok(Self::Annihilation),
+            2049 => Ok(Self::ElementalOath),
+            2050 => Ok(Self::AstralShift),
+            2051 => Ok(Self::LavaFlows),
+            2052 => Ok(Self::StormEarthAndFire),
+            2053 => Ok(Self::Thunderstorm),
+            2054 => Ok(Self::ImprovedStormstrike),
+            2055 => Ok(Self::StaticShock),
+            2056 => Ok(Self::EarthenPower),
+            2057 => Ok(Self::MaelstromWeapon),
+            2058 => Ok(Self::FeralSpirit),
+            2059 => Ok(Self::ImprovedEarthShield),
+            2060 => Ok(Self::BlessingOfTheEternals),
+            2061 => Ok(Self::AncestralAwakening),
+            2063 => Ok(Self::TidalWaves),
+            2064 => Ok(Self::Riptide),
+            2065 => Ok(Self::DeadlyBrew),
+            2066 => Ok(Self::TurnTheTables),
+            2068 => Ok(Self::BloodSpatter),
+            2069 => Ok(Self::FocusedAttacks),
+            2070 => Ok(Self::CutToTheChase),
+            2071 => Ok(Self::HungerForBlood),
+            2072 => Ok(Self::ThrowingSpecialization),
+            2073 => Ok(Self::UnfairAdvantage),
+            2074 => Ok(Self::SavageCombat),
+            2075 => Ok(Self::PreyOnTheWeak),
+            2076 => Ok(Self::KillingSpree),
+            2077 => Ok(Self::Waylay),
+            2078 => Ok(Self::HonorAmongThieves),
+            2079 => Ok(Self::FilthyTricks),
+            2080 => Ok(Self::SlaughterFromTheShadows),
+            2081 => Ok(Self::ShadowDance),
+            2082 => Ok(Self::ViciousStrikes),
+            2083 => Ok(Self::MentalDexterity),
+            2084 => Ok(Self::CleanseSpirit),
+            2085 => Ok(Self::GhoulFrenzy),
+            2086 => Ok(Self::DeathRuneMastery),
+            2101 => Ok(Self::EarthsGrasp),
+            2105 => Ok(Self::AbominationsMight),
+            2106 => Ok(Self::HunterCullingTheHerd),
+            2107 => Ok(Self::HunterCobraReflexes),
+            2109 => Ok(Self::HunterDash),
+            2110 => Ok(Self::HunterCullingTheHerd2),
+            2111 => Ok(Self::HunterCharge),
+            2112 => Ok(Self::HunterGreatStamina),
+            2113 => Ok(Self::HunterNaturalArmor),
+            2114 => Ok(Self::HunterCobraReflexes2),
+            2116 => Ok(Self::HunterGreatStamina2),
+            2117 => Ok(Self::HunterNaturalArmor2),
+            2118 => Ok(Self::HunterCobraReflexes3),
+            2119 => Ok(Self::HunterDash2),
+            2120 => Ok(Self::HunterGreatStamina3),
+            2121 => Ok(Self::HunterNaturalArmor3),
+            2122 => Ok(Self::PetBarding),
+            2123 => Ok(Self::GuardDog),
+            2124 => Ok(Self::ImprovedCower),
+            2125 => Ok(Self::HunterSpikedCollar),
+            2126 => Ok(Self::HunterSpikedCollar2),
+            2127 => Ok(Self::HunterSpikedCollar3),
+            2128 => Ok(Self::Bloodthirsty),
+            2129 => Ok(Self::SpidersBite),
+            2130 => Ok(Self::PiercingShots),
+            2131 => Ok(Self::RapidRecuperation),
+            2132 => Ok(Self::WildQuiver),
+            2133 => Ok(Self::ImprovedSteadyShot),
+            2134 => Ok(Self::MarkedForDeath),
+            2135 => Ok(Self::ChimeraShot),
+            2136 => Ok(Self::Invigoration),
+            2137 => Ok(Self::CobraStrikes),
+            2138 => Ok(Self::AspectMastery),
+            2139 => Ok(Self::BeastMastery),
+            2140 => Ok(Self::Longevity),
+            2141 => Ok(Self::NoxiousStings),
+            2142 => Ok(Self::PointOfNoEscape),
+            2143 => Ok(Self::SniperTraining),
+            2144 => Ok(Self::HuntingParty),
+            2145 => Ok(Self::ExplosiveShot),
+            2147 => Ok(Self::SanctifiedWrath),
+            2148 => Ok(Self::SwiftRetribution),
+            2149 => Ok(Self::RighteousVengeance),
+            2150 => Ok(Self::DivineStorm),
+            2151 => Ok(Self::HunterBoarsSpeed),
+            2152 => Ok(Self::HunterLionhearted),
+            2153 => Ok(Self::LickYourWounds),
+            2154 => Ok(Self::HunterGreatResistance),
+            2155 => Ok(Self::Rabid),
+            2156 => Ok(Self::HeartOfThePhoenix),
+            2157 => Ok(Self::CallOfTheWild),
+            2160 => Ok(Self::HunterBoarsSpeed2),
+            2161 => Ok(Self::HunterGreatResistance2),
+            2162 => Ok(Self::HunterLionhearted2),
+            2163 => Ok(Self::HunterGraceOfTheMantis),
+            2165 => Ok(Self::HunterBoarsSpeed3),
+            2166 => Ok(Self::HunterCullingTheHerd3),
+            2167 => Ok(Self::HunterLionhearted3),
+            2168 => Ok(Self::HunterGreatResistance3),
+            2169 => Ok(Self::Intervene),
+            2170 => Ok(Self::Taunt),
+            2171 => Ok(Self::HunterLastStand),
+            2172 => Ok(Self::HunterRoarOfSacrifice),
+            2173 => Ok(Self::BloodOfTheRhino),
+            2175 => Ok(Self::Bullheaded),
+            2176 => Ok(Self::TheArtOfWar),
+            2177 => Ok(Self::Cornered),
+            2179 => Ok(Self::SheathOfLight),
+            2181 => Ok(Self::WolverineBite),
+            2182 => Ok(Self::OwlsFocus),
+            2183 => Ok(Self::FeedingFrenzy),
+            2184 => Ok(Self::RoarOfRecovery),
+            2185 => Ok(Self::DivineStrength),
+            2190 => Ok(Self::SacredCleansing),
+            2191 => Ok(Self::EnlightenedJudgements),
+            2192 => Ok(Self::BeaconOfLight),
+            2193 => Ok(Self::InfusionOfLight),
+            2194 => Ok(Self::GuardedByTheLight),
+            2195 => Ok(Self::TouchedByTheLight),
+            2196 => Ok(Self::HammerOfTheRighteous),
+            2197 => Ok(Self::FocusedAim),
+            2198 => Ok(Self::BlessedHands),
+            2199 => Ok(Self::JudgementsOfThePure),
+            2200 => Ok(Self::JudgementsOfTheJust),
+            2201 => Ok(Self::HunterDive),
+            2203 => Ok(Self::HunterDive2),
+            2204 => Ok(Self::ShieldOfTheTemplar),
+            2205 => Ok(Self::ImprovedFear),
+            2206 => Ok(Self::CarrionFeeder),
+            2207 => Ok(Self::HunterMobility),
+            2208 => Ok(Self::HunterMobility2),
+            2209 => Ok(Self::MissileBarrage),
+            2210 => Ok(Self::BloodOfTheNorth),
+            2211 => Ok(Self::FocusMagic),
+            2212 => Ok(Self::BurningDetermination),
+            2214 => Ok(Self::ShatteredBarrier),
+            2215 => Ok(Self::Lichborne),
+            2216 => Ok(Self::ScourgeStrike),
+            2217 => Ok(Self::DeathKnightTwoHandedWeaponSpecialization),
+            2218 => Ok(Self::DeathKnightAnticipation),
+            2219 => Ok(Self::Swoop),
+            2221 => Ok(Self::AntiMagicZone),
+            2222 => Ok(Self::TormentTheWeak),
+            2223 => Ok(Self::ImprovedIcyTalons),
+            2225 => Ok(Self::NightOfTheDead),
+            2226 => Ok(Self::Desecration),
+            2227 => Ok(Self::KindredSpirits),
+            2228 => Ok(Self::HunterVsWild),
+            2229 => Ok(Self::TNT),
+            2231 => Ok(Self::WreckingCrew),
+            2232 => Ok(Self::TasteForBlood),
+            2233 => Ok(Self::ImprovedSlam),
+            2234 => Ok(Self::UnendingFury),
+            2235 => Ok(Self::RenewedHope),
+            2236 => Ok(Self::Warbringer),
+            2237 => Ok(Self::HunterCharge2),
+            2238 => Ok(Self::Genesis),
+            2239 => Ok(Self::ImprovedInsectSwarm),
+            2240 => Ok(Self::NaturesSplendor),
+            2241 => Ok(Self::ProtectorOfThePack),
+            2242 => Ok(Self::NaturalReaction),
+            2244 => Ok(Self::RelentlessStrikes),
+            2245 => Ok(Self::Pandemic),
+            2246 => Ok(Self::DamageShield),
+            2247 => Ok(Self::ImprovedSpellReflection),
+            2249 => Ok(Self::LavaLash),
+            2250 => Ok(Self::ArmoredToTheTeeth),
+            2252 => Ok(Self::Shamanism),
+            2253 => Ok(Self::HunterWildHunt),
+            2254 => Ok(Self::SharkAttack),
+            2255 => Ok(Self::HunterWildHunt2),
+            2256 => Ok(Self::HunterWildHunt3),
+            2257 => Ok(Self::HunterGraceOfTheMantis2),
+            2258 => Ok(Self::Silverback),
+            2259 => Ok(Self::ImprovedDeathStrike),
+            2260 => Ok(Self::Chilblains),
+            2261 => Ok(Self::Decimation),
+            2262 => Ok(Self::BoomingEchoes),
+            2263 => Ok(Self::FrozenPower),
+            2264 => Ok(Self::ImprovedBarkskin),
+            2266 => Ok(Self::PrimalGore),
+            2267 => Ok(Self::ImprovedDevouringPlague),
+            2268 => Ok(Self::ReflectiveShield),
+            2277 => Ok(Self::Thunderstomp),
+            2278 => Ok(Self::HunterRoarOfSacrifice2),
+            2279 => Ok(Self::BodyAndSoul),
+            2280 => Ok(Self::DivineSacrifice),
+            2281 => Ok(Self::DivineGuardian),
+            2282 => Ok(Self::SpiritualAttunement),
+            2283 => Ok(Self::Juggernaut),
+            2284 => Ok(Self::ThreatOfThassarian),
+            2285 => Ok(Self::Desolation),
+            v => Err(crate::errors::EnumError::new("Talent", v as u64),)
+        }
+    }
+}
+

@@ -4204,9 +4204,9 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_talent_id,
-            { "Talent Id", "woww.talent.id",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+        { &hf_woww_talent,
+            { "Talent", "woww.talent",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_talent_strings), 0,
                 NULL, HFILL
             }
         },

@@ -219,6 +219,8 @@ pub use crate::shared::spell_trigger_type_tbc_wrath::*;
 pub(crate) mod stable_result;
 pub use stable_result::*;
 pub use crate::shared::status_id_vanilla_tbc_wrath::*;
+pub(crate) mod talent;
+pub use talent::*;
 pub(crate) mod talent_info_type;
 pub use talent_info_type::*;
 pub(crate) mod text_emote;

@@ -14,7 +14,7 @@ struct InspectTalentSpec {
 }
 
 struct InspectTalent {
-    u32 talent_id;
+    Talent talent;
     u8 max_rank;
 } {
      versions = "3.3.5";

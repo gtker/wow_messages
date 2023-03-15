@@ -808,7 +808,7 @@
             add_cstring(ptv, &hf_woww_channel_password);
             break;
         case CMSG_LEARN_TALENT:
-            ptvcursor_add(ptv, hf_woww_talent_id, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_talent, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_requested_rank, 4, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_LEAVE_BATTLEFIELD:

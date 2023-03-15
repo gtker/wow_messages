@@ -29,7 +29,7 @@ impl InspectTalentSpec {
 }
 
 impl InspectTalentSpec {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // amount_of_talents: u8
         let amount_of_talents = crate::util::read_u8_le(&mut r)?;
 
