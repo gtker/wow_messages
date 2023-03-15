@@ -6,7 +6,7 @@ pub(crate) mod definition;
 use crate::base_printer::data::items::{
     Array, ArrayInstances, Field, IntegerSize, Optimizations, Value,
 };
-use std::collections::{BTreeMap, BTreeSet};
+use std::collections::BTreeSet;
 
 pub(crate) struct Stats {
     pub strength: i32,
@@ -242,7 +242,7 @@ fn get_default_values<'a>(
     things: &'a [GenericThing],
     optimizations: &Optimizations,
 ) -> (Values, Arrays<'a>) {
-    let mut values: BTreeMap<(Value, Option<IntegerSize>), usize> = BTreeMap::new();
+    let mut values: HashMap<(Value, Option<IntegerSize>), usize> = HashMap::new();
     for thing in things {
         for (field_index, field) in thing.fields.iter().enumerate() {
             if optimizations.optimization(field_index).skip_field() {
@@ -260,7 +260,7 @@ fn get_default_values<'a>(
         }
     }
 
-    let mut arrays = BTreeMap::new();
+    let mut arrays = HashMap::new();
     for thing in things {
         for array in &thing.arrays {
             if array.is_default() {
