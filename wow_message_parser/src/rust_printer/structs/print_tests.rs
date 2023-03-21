@@ -351,6 +351,12 @@ fn print_value(
         TestValue::Number(i) => {
             s.wln_no_indent(format!("{:#X},", i.value()));
         }
+        TestValue::Seconds(i) => {
+            s.wln_no_indent(format!("Duration::from_secs({:#X}),", i.value()));
+        }
+        TestValue::Milliseconds(i) => {
+            s.wln_no_indent(format!("Duration::from_millis({:#X}),", i.value()));
+        }
         TestValue::IpAddress(i) => {
             s.wln_no_indent(format!("Ipv4Addr::from({:#X}_u32),", i.value()));
         }

@@ -532,6 +532,14 @@ fn convert_parsed_test_case_value_to_test_case_value(
             parse_value(&value).unwrap(),
             value.clone(),
         )),
+        ParsedType::Seconds => TestValue::Seconds(ContainerValue::new(
+            parse_value(&value).unwrap(),
+            value.clone(),
+        )),
+        ParsedType::Milliseconds => TestValue::Milliseconds(ContainerValue::new(
+            parse_value(&value).unwrap(),
+            value.clone(),
+        )),
         ParsedType::Integer(_) => TestValue::Number(ContainerValue::new(
             parse_value(&value).unwrap(),
             value.clone(),
@@ -559,9 +567,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 complex_not_found(c.name(), c.tags(), &c.file_info, s, &related);
             }
         }
-        ParsedType::Seconds
-        | ParsedType::Milliseconds
-        | ParsedType::AddonArray
+        ParsedType::AddonArray
         | ParsedType::VariableItemRandomProperty
         | ParsedType::NamedGuid
         | ParsedType::Level16

@@ -1,6 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
+use std::time::Duration;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_boot_proposal_update.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_boot_proposal_update.wowm#L1):
@@ -12,7 +13,7 @@ use crate::Guid;
 ///     Guid victim;
 ///     u32 total_votes;
 ///     u32 votes_agree;
-///     u32 seconds_left;
+///     Seconds time_left;
 ///     u32 votes_needed;
 ///     CString reason;
 /// }
@@ -24,7 +25,7 @@ pub struct SMSG_LFG_BOOT_PROPOSAL_UPDATE {
     pub victim: Guid,
     pub total_votes: u32,
     pub votes_agree: u32,
-    pub seconds_left: u32,
+    pub time_left: Duration,
     pub votes_needed: u32,
     pub reason: String,
 }
@@ -55,8 +56,8 @@ impl crate::Message for SMSG_LFG_BOOT_PROPOSAL_UPDATE {
         // votes_agree: u32
         w.write_all(&self.votes_agree.to_le_bytes())?;
 
-        // seconds_left: u32
-        w.write_all(&self.seconds_left.to_le_bytes())?;
+        // time_left: Seconds
+        w.write_all((self.time_left.as_secs() as u32).to_le_bytes().as_slice())?;
 
         // votes_needed: u32
         w.write_all(&self.votes_needed.to_le_bytes())?;
@@ -93,8 +94,8 @@ impl crate::Message for SMSG_LFG_BOOT_PROPOSAL_UPDATE {
         // votes_agree: u32
         let votes_agree = crate::util::read_u32_le(&mut r)?;
 
-        // seconds_left: u32
-        let seconds_left = crate::util::read_u32_le(&mut r)?;
+        // time_left: Seconds
+        let time_left = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
 
         // votes_needed: u32
         let votes_needed = crate::util::read_u32_le(&mut r)?;
@@ -112,7 +113,7 @@ impl crate::Message for SMSG_LFG_BOOT_PROPOSAL_UPDATE {
             victim,
             total_votes,
             votes_agree,
-            seconds_left,
+            time_left,
             votes_needed,
             reason,
         })
@@ -130,7 +131,7 @@ impl SMSG_LFG_BOOT_PROPOSAL_UPDATE {
         + 8 // victim: Guid
         + 4 // total_votes: u32
         + 4 // votes_agree: u32
-        + 4 // seconds_left: u32
+        + 4 // time_left: Seconds
         + 4 // votes_needed: u32
         + self.reason.len() + 1 // reason: CString
     }

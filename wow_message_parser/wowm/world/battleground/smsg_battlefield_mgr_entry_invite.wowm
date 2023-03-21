@@ -1,7 +1,7 @@
 smsg SMSG_BATTLEFIELD_MGR_ENTRY_INVITE = 0x04DE {
     u32 battle_id;
     Area area;
-    u32 accept_time_in_seconds;
+    Seconds accept_time;
 } {
     versions = "3.3.5";
 }

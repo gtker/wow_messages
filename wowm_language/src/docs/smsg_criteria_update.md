@@ -12,7 +12,7 @@ smsg SMSG_CRITERIA_UPDATE = 0x046A {
     PackedGuid player;
     u32 flags;
     DateTime time;
-    u32 time_elapsed_in_seconds;
+    Seconds time_elapsed;
     u32 unknown;
 }
 ```
@@ -36,6 +36,6 @@ SMSG have a header of 4 bytes.
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
 | - | 4 / Little | u32 | flags |  | trinitycore: this are some flags, 1 is for keeping the counter at 0 in client |
 | - | 4 / Little | DateTime | time |  |  |
-| - | 4 / Little | u32 | time_elapsed_in_seconds |  |  |
+| - | 4 / Little | Seconds | time_elapsed |  |  |
 | - | 4 / Little | u32 | unknown |  |  |
 

@@ -3,6 +3,6 @@
 smsg SMSG_SUMMON_REQUEST = 0x02AB {
     Guid summoner;
     Area area;
-    u32 auto_decline_time_in_msecs;
+    Milliseconds auto_decline_time;
 }
 

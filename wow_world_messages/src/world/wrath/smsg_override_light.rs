@@ -1,18 +1,20 @@
 use std::io::{Read, Write};
 
+use std::time::Duration;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/cinematic/smsg_override_light.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/cinematic/smsg_override_light.wowm#L9):
 /// ```text
 /// smsg SMSG_OVERRIDE_LIGHT = 0x0412 {
 ///     u32 default_id;
 ///     u32 id_override;
-///     u32 fade_in_time_in_seconds;
+///     Seconds fade_in_time;
 /// }
 /// ```
 pub struct SMSG_OVERRIDE_LIGHT {
     pub default_id: u32,
     pub id_override: u32,
-    pub fade_in_time_in_seconds: u32,
+    pub fade_in_time: Duration,
 }
 
 impl crate::Message for SMSG_OVERRIDE_LIGHT {
@@ -29,8 +31,8 @@ impl crate::Message for SMSG_OVERRIDE_LIGHT {
         // id_override: u32
         w.write_all(&self.id_override.to_le_bytes())?;
 
-        // fade_in_time_in_seconds: u32
-        w.write_all(&self.fade_in_time_in_seconds.to_le_bytes())?;
+        // fade_in_time: Seconds
+        w.write_all((self.fade_in_time.as_secs() as u32).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -45,13 +47,13 @@ impl crate::Message for SMSG_OVERRIDE_LIGHT {
         // id_override: u32
         let id_override = crate::util::read_u32_le(&mut r)?;
 
-        // fade_in_time_in_seconds: u32
-        let fade_in_time_in_seconds = crate::util::read_u32_le(&mut r)?;
+        // fade_in_time: Seconds
+        let fade_in_time = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
 
         Ok(Self {
             default_id,
             id_override,
-            fade_in_time_in_seconds,
+            fade_in_time,
         })
     }
 

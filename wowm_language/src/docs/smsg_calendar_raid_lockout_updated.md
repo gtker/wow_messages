@@ -10,8 +10,8 @@ smsg SMSG_CALENDAR_RAID_LOCKOUT_UPDATED = 0x0471 {
     DateTime current_time;
     Map map;
     u32 difficulty;
-    u32 old_time_to_update_in_seconds;
-    u32 new_time_to_update_in_seconds;
+    Seconds old_time_to_update;
+    Seconds new_time_to_update;
 }
 ```
 ### Header
@@ -32,6 +32,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | DateTime | current_time |  |  |
 | 0x08 | 4 / - | [Map](map.md) | map |  |  |
 | 0x0C | 4 / Little | u32 | difficulty |  |  |
-| 0x10 | 4 / Little | u32 | old_time_to_update_in_seconds |  |  |
-| 0x14 | 4 / Little | u32 | new_time_to_update_in_seconds |  |  |
+| 0x10 | 4 / Little | Seconds | old_time_to_update |  |  |
+| 0x14 | 4 / Little | Seconds | new_time_to_update |  |  |
 

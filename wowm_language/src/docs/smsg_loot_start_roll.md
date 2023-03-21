@@ -12,7 +12,7 @@ smsg SMSG_LOOT_START_ROLL = 0x02A1 {
     u32 item;
     u32 item_random_suffix;
     u32 item_random_property_id;
-    u32 countdown_time_in_milliseconds;
+    Milliseconds countdown_time;
 }
 ```
 ### Header
@@ -35,7 +35,7 @@ SMSG have a header of 4 bytes.
 | 0x10 | 4 / Little | u32 | item |  |  |
 | 0x14 | 4 / Little | u32 | item_random_suffix |  | vmangos/mangoszero: not used ? |
 | 0x18 | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x1C | 4 / Little | u32 | countdown_time_in_milliseconds |  |  |
+| 0x1C | 4 / Little | Milliseconds | countdown_time |  |  |
 
 # SMSG_LOOT_START_ROLL
 
@@ -52,7 +52,7 @@ smsg SMSG_LOOT_START_ROLL = 0x02A1 {
     u32 item;
     u32 item_random_suffix;
     u32 item_random_property_id;
-    u32 countdown_time_in_milliseconds;
+    Milliseconds countdown_time;
     RollFlags flags;
 }
 ```
@@ -77,6 +77,6 @@ SMSG have a header of 4 bytes.
 | 0x14 | 4 / Little | u32 | item |  |  |
 | 0x18 | 4 / Little | u32 | item_random_suffix |  | vmangos/mangoszero: not used ? |
 | 0x1C | 4 / Little | u32 | item_random_property_id |  |  |
-| 0x20 | 4 / Little | u32 | countdown_time_in_milliseconds |  |  |
+| 0x20 | 4 / Little | Milliseconds | countdown_time |  |  |
 | 0x24 | 1 / - | [RollFlags](rollflags.md) | flags |  |  |
 

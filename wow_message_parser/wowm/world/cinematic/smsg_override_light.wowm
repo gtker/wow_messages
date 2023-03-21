@@ -1,7 +1,7 @@
 smsg SMSG_OVERRIDE_LIGHT = 0x0411 {
     u32 default_id;
     u32 id_override;
-    u32 fade_in_time_in_seconds;
+    Seconds fade_in_time;
 } {
     versions = "2.4.3";
 }
@@ -9,7 +9,7 @@ smsg SMSG_OVERRIDE_LIGHT = 0x0411 {
 smsg SMSG_OVERRIDE_LIGHT = 0x0412 {
     u32 default_id;
     u32 id_override;
-    u32 fade_in_time_in_seconds;
+    Seconds fade_in_time;
 } {
     versions = "3.3.5";
 }

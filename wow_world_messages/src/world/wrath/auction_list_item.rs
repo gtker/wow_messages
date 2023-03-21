@@ -2,6 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::AuctionEnchantment;
+use std::time::Duration;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/auction_common.wowm:50`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/auction_common.wowm#L50):
@@ -19,7 +20,7 @@ use crate::wrath::AuctionEnchantment;
 ///     u32 start_bid;
 ///     u32 minimum_bid;
 ///     u32 buyout_amount;
-///     u32 time_left_in_msecs;
+///     Milliseconds time_left;
 ///     Guid highest_bidder;
 ///     u32 highest_bid;
 /// }
@@ -39,7 +40,7 @@ pub struct AuctionListItem {
     pub start_bid: u32,
     pub minimum_bid: u32,
     pub buyout_amount: u32,
-    pub time_left_in_msecs: u32,
+    pub time_left: Duration,
     pub highest_bidder: Guid,
     pub highest_bid: u32,
 }
@@ -84,8 +85,8 @@ impl AuctionListItem {
         // buyout_amount: u32
         w.write_all(&self.buyout_amount.to_le_bytes())?;
 
-        // time_left_in_msecs: u32
-        w.write_all(&self.time_left_in_msecs.to_le_bytes())?;
+        // time_left: Milliseconds
+        w.write_all((self.time_left.as_millis() as u32).to_le_bytes().as_slice())?;
 
         // highest_bidder: Guid
         w.write_all(&self.highest_bidder.guid().to_le_bytes())?;
@@ -141,8 +142,8 @@ impl AuctionListItem {
         // buyout_amount: u32
         let buyout_amount = crate::util::read_u32_le(&mut r)?;
 
-        // time_left_in_msecs: u32
-        let time_left_in_msecs = crate::util::read_u32_le(&mut r)?;
+        // time_left: Milliseconds
+        let time_left = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
 
         // highest_bidder: Guid
         let highest_bidder = Guid::read(&mut r)?;
@@ -163,7 +164,7 @@ impl AuctionListItem {
             start_bid,
             minimum_bid,
             buyout_amount,
-            time_left_in_msecs,
+            time_left,
             highest_bidder,
             highest_bid,
         })

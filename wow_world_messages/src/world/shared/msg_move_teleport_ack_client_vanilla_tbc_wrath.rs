@@ -1,6 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
+use std::time::Duration;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Response to [`MSG_MOVE_TELEPORT_ACK_Server`](crate::vanilla::MSG_MOVE_TELEPORT_ACK_Server), at which point [`MSG_MOVE_TELEPORT_ACK_Server`](crate::vanilla::MSG_MOVE_TELEPORT_ACK_Server) should be sent to observing players.
@@ -10,13 +11,13 @@ use crate::Guid;
 /// cmsg MSG_MOVE_TELEPORT_ACK_Client = 0x00C7 {
 ///     PackedGuid guid;
 ///     u32 movement_counter;
-///     u32 time_in_msecs;
+///     Milliseconds time;
 /// }
 /// ```
 pub struct MSG_MOVE_TELEPORT_ACK_Client {
     pub guid: Guid,
     pub movement_counter: u32,
-    pub time_in_msecs: u32,
+    pub time: Duration,
 }
 
 impl crate::Message for MSG_MOVE_TELEPORT_ACK_Client {
@@ -33,8 +34,8 @@ impl crate::Message for MSG_MOVE_TELEPORT_ACK_Client {
         // movement_counter: u32
         w.write_all(&self.movement_counter.to_le_bytes())?;
 
-        // time_in_msecs: u32
-        w.write_all(&self.time_in_msecs.to_le_bytes())?;
+        // time: Milliseconds
+        w.write_all((self.time.as_millis() as u32).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -49,13 +50,13 @@ impl crate::Message for MSG_MOVE_TELEPORT_ACK_Client {
         // movement_counter: u32
         let movement_counter = crate::util::read_u32_le(&mut r)?;
 
-        // time_in_msecs: u32
-        let time_in_msecs = crate::util::read_u32_le(&mut r)?;
+        // time: Milliseconds
+        let time = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
 
         Ok(Self {
             guid,
             movement_counter,
-            time_in_msecs,
+            time,
         })
     }
 
@@ -73,7 +74,7 @@ impl MSG_MOVE_TELEPORT_ACK_Client {
     pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + 4 // movement_counter: u32
-        + 4 // time_in_msecs: u32
+        + 4 // time: Milliseconds
     }
 }
 

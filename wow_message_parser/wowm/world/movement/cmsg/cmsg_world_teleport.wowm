@@ -1,5 +1,5 @@
 cmsg CMSG_WORLD_TELEPORT = 0x08 {
-    u32 time_in_msec;
+    Milliseconds time;
     Map map;
     Vector3d position;
     f32 orientation;
@@ -9,7 +9,7 @@ cmsg CMSG_WORLD_TELEPORT = 0x08 {
 }
 
 test CMSG_WORLD_TELEPORT {
-    time_in_msec = 0xDEADBEEF;
+    time = 0xDEADBEEF;
     map = KALIMDOR;
     position = {
         x = 1.0;
@@ -31,7 +31,7 @@ test CMSG_WORLD_TELEPORT {
 }
 
 test CMSG_WORLD_TELEPORT {
-    time_in_msec = 34160026;
+    time = 34160026;
     map = BLACKWING_LAIR;
     position = {
         x = 452.0;

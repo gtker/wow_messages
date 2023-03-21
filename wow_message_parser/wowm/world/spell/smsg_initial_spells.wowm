@@ -4,8 +4,8 @@ struct CooldownSpell {
         comment = "cmangos/mangoszero: cast item id";
     }
     u16 spell_category;
-    u32 cooldown_in_msecs;
-    u32 category_cooldown_in_msecs;
+    Milliseconds cooldown;
+    Milliseconds category_cooldown;
 } {
     versions = "1 2 3";
 }

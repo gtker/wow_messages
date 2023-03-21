@@ -2,6 +2,7 @@ use crate::wrath::{
     ItemSpells, SMSG_ITEM_QUERY_SINGLE_RESPONSE_found, SMSG_ITEM_NAME_QUERY_RESPONSE,
     SMSG_ITEM_QUERY_SINGLE_RESPONSE,
 };
+use std::time::Duration;
 use wow_world_base::wrath::{Item, Level};
 
 /// Convert an [`Item`] to a [`SMSG_ITEM_QUERY_SINGLE_RESPONSE`].
@@ -131,7 +132,7 @@ impl From<&Item> for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 gem_properties: v.gem_properties() as u32,
                 required_disenchant_skill: v.required_disenchant_skill() as u32,
                 armor_damage_modifier: v.armor_damage_modifier(),
-                duration_in_seconds: v.duration() as u32,
+                duration: Duration::from_secs(v.duration() as u64),
                 item_limit_category: v.item_limit_category() as u32,
                 holiday_id: v.holiday_id() as u32,
             }),

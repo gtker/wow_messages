@@ -592,8 +592,8 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_auto_decline_time_in_msecs,
-            { "Auto Decline Time In Msecs", "woww.auto.decline.time.in.msecs",
+        { &hf_woww_auto_decline_time,
+            { "Auto Decline Time", "woww.auto.decline.time",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -874,8 +874,8 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_category_cooldown_in_msecs,
-            { "Category Cooldown In Msecs", "woww.category.cooldown.in.msecs",
+        { &hf_woww_category_cooldown,
+            { "Category Cooldown", "woww.category.cooldown",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -1072,20 +1072,20 @@
                 NULL, HFILL
             }
         },
+        { &hf_woww_cooldown,
+            { "Cooldown", "woww.cooldown",
+                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+                NULL, HFILL
+            }
+        },
         { &hf_woww_cooldown_count,
             { "Cooldown Count", "woww.cooldown.count",
                 FT_UINT16, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
-        { &hf_woww_cooldown_in_msecs,
-            { "Cooldown In Msecs", "woww.cooldown.in.msecs",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_cooldown_time_in_msecs,
-            { "Cooldown Time In Msecs", "woww.cooldown.time.in.msecs",
+        { &hf_woww_cooldown_time,
+            { "Cooldown Time", "woww.cooldown.time",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -1120,8 +1120,8 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_countdown_time_in_milliseconds,
-            { "Countdown Time In Milliseconds", "woww.countdown.time.in.milliseconds",
+        { &hf_woww_countdown_time,
+            { "Countdown Time", "woww.countdown.time",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -1312,12 +1312,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_delay_in_seconds,
-            { "Delay In Seconds", "woww.delay.in.seconds",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_delay_time,
             { "Delay Time", "woww.delay.time",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
@@ -1410,12 +1404,6 @@
         },
         { &hf_woww_emote_delay,
             { "Emote Delay", "woww.emote.delay",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_emote_delay_in_msecs,
-            { "Emote Delay In Msecs", "woww.emote.delay.in.msecs",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
@@ -4306,38 +4294,14 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_time_in_msec,
-            { "Time In Msec", "woww.time.in.msec",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_time_in_msecs,
-            { "Time In Msecs", "woww.time.in.msecs",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_time_in_queue_in_ms,
             { "Time In Queue In Ms", "woww.time.in.queue.in.ms",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },
-        { &hf_woww_time_in_seconds,
-            { "Time In Seconds", "woww.time.in.seconds",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_time_left,
             { "Time Left", "woww.time.left",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_time_left_in_msecs,
-            { "Time Left In Msecs", "woww.time.left.in.msecs",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }

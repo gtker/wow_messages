@@ -495,6 +495,8 @@ pub(crate) enum IrTestValue {
     },
     UpdateMask(Vec<IrTestUpdateMaskValue>),
     IpAddress(IrIntegerEnumValue),
+    Seconds(IrIntegerEnumValue),
+    Milliseconds(IrIntegerEnumValue),
 }
 
 impl From<&TestValue> for IrTestValue {
@@ -533,6 +535,8 @@ impl From<&TestValue> for IrTestValue {
             TestValue::UpdateMask(v) => {
                 IrTestValue::UpdateMask(v.iter().map(|a| a.into()).collect())
             }
+            TestValue::Seconds(i) => Self::Seconds(i.into()),
+            TestValue::Milliseconds(i) => Self::Milliseconds(i.into()),
         }
     }
 }

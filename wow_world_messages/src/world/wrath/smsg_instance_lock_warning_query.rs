@@ -1,16 +1,18 @@
 use std::io::{Read, Write};
 
+use std::time::Duration;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/smsg_instance_lock_warning_query.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/smsg_instance_lock_warning_query.wowm#L1):
 /// ```text
 /// smsg SMSG_INSTANCE_LOCK_WARNING_QUERY = 0x0147 {
-///     u32 time_in_milliseconds;
+///     Milliseconds time;
 ///     u32 encounter_mask;
 ///     u8 unknown;
 /// }
 /// ```
 pub struct SMSG_INSTANCE_LOCK_WARNING_QUERY {
-    pub time_in_milliseconds: u32,
+    pub time: Duration,
     pub encounter_mask: u32,
     pub unknown: u8,
 }
@@ -23,8 +25,8 @@ impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
     }
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
-        // time_in_milliseconds: u32
-        w.write_all(&self.time_in_milliseconds.to_le_bytes())?;
+        // time: Milliseconds
+        w.write_all((self.time.as_millis() as u32).to_le_bytes().as_slice())?;
 
         // encounter_mask: u32
         w.write_all(&self.encounter_mask.to_le_bytes())?;
@@ -39,8 +41,8 @@ impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0147, size: body_size as u32 });
         }
 
-        // time_in_milliseconds: u32
-        let time_in_milliseconds = crate::util::read_u32_le(&mut r)?;
+        // time: Milliseconds
+        let time = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
 
         // encounter_mask: u32
         let encounter_mask = crate::util::read_u32_le(&mut r)?;
@@ -49,7 +51,7 @@ impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
         let unknown = crate::util::read_u8_le(&mut r)?;
 
         Ok(Self {
-            time_in_milliseconds,
+            time,
             encounter_mask,
             unknown,
         })

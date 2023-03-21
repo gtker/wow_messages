@@ -2,6 +2,7 @@ use std::io::{Read, Write};
 
 use crate::DateTime;
 use crate::wrath::Map;
+use std::time::Duration;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/calendar/smsg_calendar_raid_lockout_updated.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/calendar/smsg_calendar_raid_lockout_updated.wowm#L1):
@@ -10,16 +11,16 @@ use crate::wrath::Map;
 ///     DateTime current_time;
 ///     Map map;
 ///     u32 difficulty;
-///     u32 old_time_to_update_in_seconds;
-///     u32 new_time_to_update_in_seconds;
+///     Seconds old_time_to_update;
+///     Seconds new_time_to_update;
 /// }
 /// ```
 pub struct SMSG_CALENDAR_RAID_LOCKOUT_UPDATED {
     pub current_time: DateTime,
     pub map: Map,
     pub difficulty: u32,
-    pub old_time_to_update_in_seconds: u32,
-    pub new_time_to_update_in_seconds: u32,
+    pub old_time_to_update: Duration,
+    pub new_time_to_update: Duration,
 }
 
 impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_UPDATED {
@@ -39,11 +40,11 @@ impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_UPDATED {
         // difficulty: u32
         w.write_all(&self.difficulty.to_le_bytes())?;
 
-        // old_time_to_update_in_seconds: u32
-        w.write_all(&self.old_time_to_update_in_seconds.to_le_bytes())?;
+        // old_time_to_update: Seconds
+        w.write_all((self.old_time_to_update.as_secs() as u32).to_le_bytes().as_slice())?;
 
-        // new_time_to_update_in_seconds: u32
-        w.write_all(&self.new_time_to_update_in_seconds.to_le_bytes())?;
+        // new_time_to_update: Seconds
+        w.write_all((self.new_time_to_update.as_secs() as u32).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -61,18 +62,18 @@ impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_UPDATED {
         // difficulty: u32
         let difficulty = crate::util::read_u32_le(&mut r)?;
 
-        // old_time_to_update_in_seconds: u32
-        let old_time_to_update_in_seconds = crate::util::read_u32_le(&mut r)?;
+        // old_time_to_update: Seconds
+        let old_time_to_update = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
 
-        // new_time_to_update_in_seconds: u32
-        let new_time_to_update_in_seconds = crate::util::read_u32_le(&mut r)?;
+        // new_time_to_update: Seconds
+        let new_time_to_update = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
 
         Ok(Self {
             current_time,
             map,
             difficulty,
-            old_time_to_update_in_seconds,
-            new_time_to_update_in_seconds,
+            old_time_to_update,
+            new_time_to_update,
         })
     }
 

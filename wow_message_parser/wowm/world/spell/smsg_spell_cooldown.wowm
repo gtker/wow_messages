@@ -1,6 +1,6 @@
 struct SpellCooldownStatus {
     Spell id;
-    u32 cooldown_time_in_msecs;
+    Milliseconds cooldown_time;
 } {
     versions = "1 2 3";
 }

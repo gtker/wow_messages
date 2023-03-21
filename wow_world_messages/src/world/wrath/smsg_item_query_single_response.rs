@@ -6,6 +6,7 @@ use crate::wrath::{
     ItemSocket, ItemSpells, ItemStat, Language, Map, PageTextMaterial, SheatheType, 
     Skill,
 };
+use std::time::Duration;
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
@@ -81,7 +82,7 @@ use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 ///         u32 gem_properties;
 ///         u32 required_disenchant_skill;
 ///         f32 armor_damage_modifier;
-///         u32 duration_in_seconds;
+///         Seconds duration;
 ///         u32 item_limit_category;
 ///         u32 holiday_id;
 ///     }
@@ -331,8 +332,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // armor_damage_modifier: f32
             w.write_all(&v.armor_damage_modifier.to_le_bytes())?;
 
-            // duration_in_seconds: u32
-            w.write_all(&v.duration_in_seconds.to_le_bytes())?;
+            // duration: Seconds
+            w.write_all((v.duration.as_secs() as u32).to_le_bytes().as_slice())?;
 
             // item_limit_category: u32
             w.write_all(&v.item_limit_category.to_le_bytes())?;
@@ -594,8 +595,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // armor_damage_modifier: f32
             let armor_damage_modifier = crate::util::read_f32_le(&mut r)?;
 
-            // duration_in_seconds: u32
-            let duration_in_seconds = crate::util::read_u32_le(&mut r)?;
+            // duration: Seconds
+            let duration = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
 
             // item_limit_category: u32
             let item_limit_category = crate::util::read_u32_le(&mut r)?;
@@ -669,7 +670,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 gem_properties,
                 required_disenchant_skill,
                 armor_damage_modifier,
-                duration_in_seconds,
+                duration,
                 item_limit_category,
                 holiday_id,
             })
@@ -757,7 +758,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             + 4 // gem_properties: u32
             + 4 // required_disenchant_skill: u32
             + 4 // armor_damage_modifier: f32
-            + 4 // duration_in_seconds: u32
+            + 4 // duration: Seconds
             + 4 // item_limit_category: u32
             + 4 // holiday_id: u32
         } else {
@@ -833,7 +834,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
     pub gem_properties: u32,
     pub required_disenchant_skill: u32,
     pub armor_damage_modifier: f32,
-    pub duration_in_seconds: u32,
+    pub duration: Duration,
     pub item_limit_category: u32,
     pub holiday_id: u32,
 }

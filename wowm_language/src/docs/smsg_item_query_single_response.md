@@ -214,7 +214,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 gem_properties;
         u32 required_disenchant_skill;
         f32 armor_damage_modifier;
-        u32 duration_in_seconds;
+        Seconds duration;
     }
 }
 ```
@@ -300,7 +300,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | gem_properties |  |  |
 | - | 4 / Little | u32 | required_disenchant_skill |  |  |
 | - | 4 / Little | f32 | armor_damage_modifier |  |  |
-| - | 4 / Little | u32 | duration_in_seconds |  | mangosone: added in 2.4.2.8209, duration (seconds) |
+| - | 4 / Little | Seconds | duration |  | mangosone: added in 2.4.2.8209, duration (seconds) |
 
 # SMSG_ITEM_QUERY_SINGLE_RESPONSE
 
@@ -379,7 +379,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 gem_properties;
         u32 required_disenchant_skill;
         f32 armor_damage_modifier;
-        u32 duration_in_seconds;
+        Seconds duration;
         u32 item_limit_category;
         u32 holiday_id;
     }
@@ -472,7 +472,7 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | gem_properties |  |  |
 | - | 4 / Little | u32 | required_disenchant_skill |  |  |
 | - | 4 / Little | f32 | armor_damage_modifier |  |  |
-| - | 4 / Little | u32 | duration_in_seconds |  | mangosone: added in 2.4.2.8209, duration (seconds) |
+| - | 4 / Little | Seconds | duration |  | mangosone: added in 2.4.2.8209, duration (seconds) |
 | - | 4 / Little | u32 | item_limit_category |  |  |
 | - | 4 / Little | u32 | holiday_id |  | mangosone: HolidayId - points to HolidayNames.dbc |
 

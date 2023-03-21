@@ -6,7 +6,7 @@ smsg SMSG_LOOT_START_ROLL = 0x02A1 {
         comment = "vmangos/mangoszero: not used ?";
     }
     u32 item_random_property_id;
-    u32 countdown_time_in_milliseconds;
+    Milliseconds countdown_time;
 } {
     versions = "1 2";
 }
@@ -29,7 +29,7 @@ smsg SMSG_LOOT_START_ROLL = 0x02A1 {
         comment = "vmangos/mangoszero: not used ?";
     }
     u32 item_random_property_id;
-    u32 countdown_time_in_milliseconds;
+    Milliseconds countdown_time;
     RollFlags flags;
 } {
     versions = "3.3.5";

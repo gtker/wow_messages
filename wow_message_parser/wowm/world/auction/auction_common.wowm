@@ -10,7 +10,7 @@ struct AuctionListItem {
     u32 start_bid;
     u32 minimum_bid;
     u32 buyout_amount;
-    u32 time_left_in_msecs;
+    Milliseconds time_left;
     Guid highest_bidder;
     u32 highest_bid;
 } {
@@ -40,7 +40,7 @@ struct AuctionListItem {
     u32 start_bid;
     u32 minimum_bid;
     u32 buyout_amount;
-    u32 time_left_in_msecs;
+    Milliseconds time_left;
     Guid highest_bidder;
     u32 highest_bid;
 } {
@@ -62,7 +62,7 @@ struct AuctionListItem {
     u32 start_bid;
     u32 minimum_bid;
     u32 buyout_amount;
-    u32 time_left_in_msecs;
+    Milliseconds time_left;
     Guid highest_bidder;
     u32 highest_bid;
 } {

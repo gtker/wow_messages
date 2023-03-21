@@ -1,6 +1,6 @@
 struct QuestDetailsEmote {
     u32 emote;
-    u32 emote_delay_in_msecs;
+    Milliseconds emote_delay;
 } {
     versions = "1 2 3";
 }

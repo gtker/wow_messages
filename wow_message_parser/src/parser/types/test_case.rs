@@ -133,4 +133,6 @@ pub(crate) enum TestValue {
     ArrayOfSubObject(Container, Vec<Vec<TestCaseMember>>),
     UpdateMask(Vec<TestUpdateMaskValue>),
     IpAddress(ContainerValue),
+    Seconds(ContainerValue),
+    Milliseconds(ContainerValue),
 }

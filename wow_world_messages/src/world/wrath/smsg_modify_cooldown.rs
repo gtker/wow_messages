@@ -1,6 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
+use std::time::Duration;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_modify_cooldown.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_modify_cooldown.wowm#L1):
@@ -8,13 +9,13 @@ use crate::Guid;
 /// smsg SMSG_MODIFY_COOLDOWN = 0x0491 {
 ///     u32 spell;
 ///     Guid player;
-///     i32 cooldown_in_milliseconds;
+///     Milliseconds cooldown;
 /// }
 /// ```
 pub struct SMSG_MODIFY_COOLDOWN {
     pub spell: u32,
     pub player: Guid,
-    pub cooldown_in_milliseconds: i32,
+    pub cooldown: Duration,
 }
 
 impl crate::Message for SMSG_MODIFY_COOLDOWN {
@@ -31,8 +32,8 @@ impl crate::Message for SMSG_MODIFY_COOLDOWN {
         // player: Guid
         w.write_all(&self.player.guid().to_le_bytes())?;
 
-        // cooldown_in_milliseconds: i32
-        w.write_all(&self.cooldown_in_milliseconds.to_le_bytes())?;
+        // cooldown: Milliseconds
+        w.write_all((self.cooldown.as_millis() as u32).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -47,13 +48,13 @@ impl crate::Message for SMSG_MODIFY_COOLDOWN {
         // player: Guid
         let player = Guid::read(&mut r)?;
 
-        // cooldown_in_milliseconds: i32
-        let cooldown_in_milliseconds = crate::util::read_i32_le(&mut r)?;
+        // cooldown: Milliseconds
+        let cooldown = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
 
         Ok(Self {
             spell,
             player,
-            cooldown_in_milliseconds,
+            cooldown,
         })
     }
 

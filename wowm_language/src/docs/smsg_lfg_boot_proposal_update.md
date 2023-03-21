@@ -13,7 +13,7 @@ smsg SMSG_LFG_BOOT_PROPOSAL_UPDATE = 0x036D {
     Guid victim;
     u32 total_votes;
     u32 votes_agree;
-    u32 seconds_left;
+    Seconds time_left;
     u32 votes_needed;
     CString reason;
 }
@@ -39,7 +39,7 @@ SMSG have a header of 4 bytes.
 | 0x07 | 8 / Little | [Guid](../spec/packed-guid.md) | victim |  |  |
 | 0x0F | 4 / Little | u32 | total_votes |  |  |
 | 0x13 | 4 / Little | u32 | votes_agree |  |  |
-| 0x17 | 4 / Little | u32 | seconds_left |  |  |
+| 0x17 | 4 / Little | Seconds | time_left |  |  |
 | 0x1B | 4 / Little | u32 | votes_needed |  |  |
 | 0x1F | - / - | CString | reason |  |  |
 

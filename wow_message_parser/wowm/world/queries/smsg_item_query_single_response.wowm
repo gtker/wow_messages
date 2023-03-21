@@ -436,7 +436,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 gem_properties;
         u32 required_disenchant_skill;
         f32 armor_damage_modifier;
-        u32 duration_in_seconds {
+        Seconds duration {
             comment = "mangosone: added in 2.4.2.8209, duration (seconds)";
         }
     } {
@@ -653,7 +653,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         u32 gem_properties;
         u32 required_disenchant_skill;
         f32 armor_damage_modifier;
-        u32 duration_in_seconds {
+        Seconds duration {
             comment = "mangosone: added in 2.4.2.8209, duration (seconds)";
         }
         u32 item_limit_category;

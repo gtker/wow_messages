@@ -18,7 +18,7 @@ struct AuctionListItem {
     u32 start_bid;
     u32 minimum_bid;
     u32 buyout_amount;
-    u32 time_left_in_msecs;
+    Milliseconds time_left;
     Guid highest_bidder;
     u32 highest_bid;
 }
@@ -38,7 +38,7 @@ struct AuctionListItem {
 | 0x24 | 4 / Little | u32 | start_bid |  |  |
 | 0x28 | 4 / Little | u32 | minimum_bid |  |  |
 | 0x2C | 4 / Little | u32 | buyout_amount |  |  |
-| 0x30 | 4 / Little | u32 | time_left_in_msecs |  |  |
+| 0x30 | 4 / Little | Milliseconds | time_left |  |  |
 | 0x34 | 8 / Little | [Guid](../spec/packed-guid.md) | highest_bidder |  |  |
 | 0x3C | 4 / Little | u32 | highest_bid |  |  |
 
@@ -63,7 +63,7 @@ struct AuctionListItem {
     u32 start_bid;
     u32 minimum_bid;
     u32 buyout_amount;
-    u32 time_left_in_msecs;
+    Milliseconds time_left;
     Guid highest_bidder;
     u32 highest_bid;
 }
@@ -84,7 +84,7 @@ struct AuctionListItem {
 | 0x6C | 4 / Little | u32 | start_bid |  |  |
 | 0x70 | 4 / Little | u32 | minimum_bid |  |  |
 | 0x74 | 4 / Little | u32 | buyout_amount |  |  |
-| 0x78 | 4 / Little | u32 | time_left_in_msecs |  |  |
+| 0x78 | 4 / Little | Milliseconds | time_left |  |  |
 | 0x7C | 8 / Little | [Guid](../spec/packed-guid.md) | highest_bidder |  |  |
 | 0x84 | 4 / Little | u32 | highest_bid |  |  |
 
@@ -109,7 +109,7 @@ struct AuctionListItem {
     u32 start_bid;
     u32 minimum_bid;
     u32 buyout_amount;
-    u32 time_left_in_msecs;
+    Milliseconds time_left;
     Guid highest_bidder;
     u32 highest_bid;
 }
@@ -130,7 +130,7 @@ struct AuctionListItem {
 | 0x78 | 4 / Little | u32 | start_bid |  |  |
 | 0x7C | 4 / Little | u32 | minimum_bid |  |  |
 | 0x80 | 4 / Little | u32 | buyout_amount |  |  |
-| 0x84 | 4 / Little | u32 | time_left_in_msecs |  |  |
+| 0x84 | 4 / Little | Milliseconds | time_left |  |  |
 | 0x88 | 8 / Little | [Guid](../spec/packed-guid.md) | highest_bidder |  |  |
 | 0x90 | 4 / Little | u32 | highest_bid |  |  |
 

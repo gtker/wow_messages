@@ -3,6 +3,7 @@ use std::io::{Read, Write};
 use crate::vanilla::{
     Map, Vector3d,
 };
+use std::time::Duration;
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
 /// Sent when using the `worldport` console command.
@@ -10,14 +11,14 @@ use crate::vanilla::{
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport.wowm#L1):
 /// ```text
 /// cmsg CMSG_WORLD_TELEPORT = 0x0008 {
-///     u32 time_in_msec;
+///     Milliseconds time;
 ///     Map map;
 ///     Vector3d position;
 ///     f32 orientation;
 /// }
 /// ```
 pub struct CMSG_WORLD_TELEPORT {
-    pub time_in_msec: u32,
+    pub time: Duration,
     pub map: Map,
     pub position: Vector3d,
     pub orientation: f32,
@@ -31,8 +32,8 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
     }
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
-        // time_in_msec: u32
-        w.write_all(&self.time_in_msec.to_le_bytes())?;
+        // time: Milliseconds
+        w.write_all((self.time.as_millis() as u32).to_le_bytes().as_slice())?;
 
         // map: Map
         w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
@@ -50,8 +51,8 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0008, size: body_size as u32 });
         }
 
-        // time_in_msec: u32
-        let time_in_msec = crate::util::read_u32_le(&mut r)?;
+        // time: Milliseconds
+        let time = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
 
         // map: Map
         let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
@@ -63,7 +64,7 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
         let orientation = crate::util::read_f32_le(&mut r)?;
 
         Ok(Self {
-            time_in_msec,
+            time,
             map,
             position,
             orientation,
@@ -85,7 +86,7 @@ mod test {
 
     const HEADER_SIZE: usize = 2 + 4;
     fn assert(t: &CMSG_WORLD_TELEPORT, expected: &CMSG_WORLD_TELEPORT) {
-        assert_eq!(t.time_in_msec, expected.time_in_msec);
+        assert_eq!(t.time, expected.time);
         assert_eq!(t.map, expected.map);
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
@@ -97,7 +98,7 @@ mod test {
 
     pub(crate) fn expected0() -> CMSG_WORLD_TELEPORT {
         CMSG_WORLD_TELEPORT {
-            time_in_msec: 0xDEADBEEF,
+            time: Duration::from_millis(0xDEADBEEF),
             map: Map::Kalimdor,
             position: Vector3d {
                 x: 1_f32,
@@ -175,7 +176,7 @@ mod test {
 
     pub(crate) fn expected1() -> CMSG_WORLD_TELEPORT {
         CMSG_WORLD_TELEPORT {
-            time_in_msec: 0x2093D9A,
+            time: Duration::from_millis(0x2093D9A),
             map: Map::BlackwingLair,
             position: Vector3d {
                 x: 452_f32,

@@ -3,6 +3,7 @@ use std::io::{Read, Write};
 use crate::{
     DateTime, Guid,
 };
+use std::time::Duration;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/achievement/smsg_criteria_update.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/achievement/smsg_criteria_update.wowm#L1):
@@ -13,7 +14,7 @@ use crate::{
 ///     PackedGuid player;
 ///     u32 flags;
 ///     DateTime time;
-///     u32 time_elapsed_in_seconds;
+///     Seconds time_elapsed;
 ///     u32 unknown;
 /// }
 /// ```
@@ -27,7 +28,7 @@ pub struct SMSG_CRITERIA_UPDATE {
     ///
     pub flags: u32,
     pub time: DateTime,
-    pub time_elapsed_in_seconds: u32,
+    pub time_elapsed: Duration,
     pub unknown: u32,
 }
 
@@ -54,8 +55,8 @@ impl crate::Message for SMSG_CRITERIA_UPDATE {
         // time: DateTime
         w.write_all(&self.time.as_int().to_le_bytes())?;
 
-        // time_elapsed_in_seconds: u32
-        w.write_all(&self.time_elapsed_in_seconds.to_le_bytes())?;
+        // time_elapsed: Seconds
+        w.write_all((self.time_elapsed.as_secs() as u32).to_le_bytes().as_slice())?;
 
         // unknown: u32
         w.write_all(&self.unknown.to_le_bytes())?;
@@ -82,8 +83,8 @@ impl crate::Message for SMSG_CRITERIA_UPDATE {
         // time: DateTime
         let time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
 
-        // time_elapsed_in_seconds: u32
-        let time_elapsed_in_seconds = crate::util::read_u32_le(&mut r)?;
+        // time_elapsed: Seconds
+        let time_elapsed = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
 
         // unknown: u32
         let unknown = crate::util::read_u32_le(&mut r)?;
@@ -94,7 +95,7 @@ impl crate::Message for SMSG_CRITERIA_UPDATE {
             player,
             flags,
             time,
-            time_elapsed_in_seconds,
+            time_elapsed,
             unknown,
         })
     }
@@ -110,7 +111,7 @@ impl SMSG_CRITERIA_UPDATE {
         + self.player.size() // player: PackedGuid
         + 4 // flags: u32
         + 4 // time: DateTime
-        + 4 // time_elapsed_in_seconds: u32
+        + 4 // time_elapsed: Seconds
         + 4 // unknown: u32
     }
 }

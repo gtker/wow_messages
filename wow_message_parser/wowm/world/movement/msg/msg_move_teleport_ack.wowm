@@ -1,7 +1,7 @@
 cmsg MSG_MOVE_TELEPORT_ACK_Client = 0x00C7 {
     PackedGuid guid;
     u32 movement_counter;
-    u32 time_in_msecs;
+    Milliseconds time;
 } {
     description = "Response to [MSG_MOVE_TELEPORT_ACK_Server], at which point [MSG_MOVE_TELEPORT_ACK_Server] should be sent to observing players.";
     versions = "1 2 3";
