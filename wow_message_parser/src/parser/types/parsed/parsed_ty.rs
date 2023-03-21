@@ -12,7 +12,7 @@ use crate::parser::types::sizes::{
     VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
 };
 use crate::parser::types::ty::Type;
-use crate::parser::types::{Endianness, FloatingPointType, IntegerType};
+use crate::parser::types::{FloatingPointType, IntegerType};
 use crate::{
     CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, ENCHANT_MASK_LARGEST_ALLOWED,
     ENCHANT_MASK_SMALLEST_ALLOWED, INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
@@ -290,35 +290,27 @@ impl ParsedType {
         let s = match s {
             "u8" => Self::Integer(IntegerType::U8),
             "Bool" => Self::Bool(IntegerType::U8),
-            "Bool16" => Self::Bool(IntegerType::U16(Endianness::Little)),
-            "Bool32" => Self::Bool(IntegerType::U32(Endianness::Little)),
-            "Bool64" => Self::Bool(IntegerType::U64(Endianness::Little)),
-            "u16_be" => Self::Integer(IntegerType::U16(Endianness::Big)),
-            "u16" => Self::Integer(IntegerType::U16(Endianness::Little)),
-            "u32_be" => Self::Integer(IntegerType::U32(Endianness::Big)),
-            "u32" => Self::Integer(IntegerType::U32(Endianness::Little)),
-            "u64" => Self::Integer(IntegerType::U64(Endianness::Little)),
-            "u64_be" => Self::Integer(IntegerType::U64(Endianness::Big)),
+            "Bool16" => Self::Bool(IntegerType::U16),
+            "Bool32" => Self::Bool(IntegerType::U32),
+            "Bool64" => Self::Bool(IntegerType::U64),
+            "u16" => Self::Integer(IntegerType::U16),
+            "u32" => Self::Integer(IntegerType::U32),
+            "u64" => Self::Integer(IntegerType::U64),
             "i8" => Self::Integer(IntegerType::I8),
-            "i16" => Self::Integer(IntegerType::I16(Endianness::Little)),
-            "i16_be" => Self::Integer(IntegerType::I16(Endianness::Big)),
-            "i32" => Self::Integer(IntegerType::I32(Endianness::Little)),
-            "i32_be" => Self::Integer(IntegerType::I32(Endianness::Big)),
-            "i64" => Self::Integer(IntegerType::I64(Endianness::Little)),
-            "i64_be" => Self::Integer(IntegerType::I64(Endianness::Big)),
-            "f32" => Self::FloatingPoint(FloatingPointType::F32(Endianness::Little)),
-            "f32_be" => Self::FloatingPoint(FloatingPointType::F32(Endianness::Big)),
-            "f64" => Self::FloatingPoint(FloatingPointType::F64(Endianness::Little)),
-            "f64_be" => Self::FloatingPoint(FloatingPointType::F64(Endianness::Big)),
+            "i16" => Self::Integer(IntegerType::I16),
+            "i32" => Self::Integer(IntegerType::I32),
+            "i64" => Self::Integer(IntegerType::I64),
+            "f32" => Self::FloatingPoint(FloatingPointType::F32),
+            "f64" => Self::FloatingPoint(FloatingPointType::F64),
 
             "u48" => Self::Integer(IntegerType::U48),
 
-            "Item16" | "Spell16" => Self::Integer(IntegerType::U16(Endianness::Little)),
+            "Item16" | "Spell16" => Self::Integer(IntegerType::U16),
             Type::LEVEL_NAME => Self::Level,
             Type::LEVEL_NAME16 => Self::Level16,
             Type::LEVEL_NAME32 => Self::Level32,
             Type::SPELL_NAME | "Milliseconds" | "Seconds" | "Item" => {
-                Self::Integer(IntegerType::U32(Endianness::Little))
+                Self::Integer(IntegerType::U32)
             }
             Type::GOLD_NAME => Self::Gold,
             Type::GUID_NAME => Self::Guid,
@@ -411,9 +403,9 @@ impl ParsedType {
 pub(crate) fn bool_ty_to_string(i: &IntegerType) -> String {
     match i {
         IntegerType::I8 | IntegerType::U8 => "Bool".to_string(),
-        IntegerType::I16(_) | IntegerType::U16(_) => "Bool16".to_string(),
-        IntegerType::I32(_) | IntegerType::U32(_) => "Bool32".to_string(),
-        IntegerType::I64(_) | IntegerType::U64(_) => "Bool64".to_string(),
+        IntegerType::I16 | IntegerType::U16 => "Bool16".to_string(),
+        IntegerType::I32 | IntegerType::U32 => "Bool32".to_string(),
+        IntegerType::I64 | IntegerType::U64 => "Bool64".to_string(),
         IntegerType::U48 => unreachable!(),
     }
 }

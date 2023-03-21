@@ -274,19 +274,19 @@ fn print_definition(
         Type::Integer(i) => {
             let name = w.unwrap().name();
             let len = i.size();
-            let enc = i.wireshark_endian_str();
 
             if d.used_as_size_in().is_some() {
                 variables.push(d.name().to_string());
                 s.wln(format!(
-                    "ptvcursor_add_ret_uint(ptv, {name}, {len}, {enc}, &{var_name});",
+                    "ptvcursor_add_ret_uint(ptv, {name}, {len}, ENC_LITTLE_ENDIAN, &{var_name});",
                     name = name,
                     len = len,
-                    enc = enc,
                     var_name = d.name(),
                 ));
             } else {
-                s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
+                s.wln(format!(
+                    "ptvcursor_add(ptv, {name}, {len}, ENC_LITTLE_ENDIAN);",
+                ));
             }
         }
         Type::Level16 => {
@@ -315,7 +315,7 @@ fn print_definition(
             let enc = if *i == IntegerType::U8 {
                 "ENC_NA"
             } else {
-                i.wireshark_endian_str()
+                "ENC_LITTLE_ENDIAN"
             };
 
             s.wln(format!(
@@ -331,9 +331,10 @@ fn print_definition(
         Type::FloatingPoint(i) => {
             let name = w.unwrap().name();
             let len = i.size();
-            let enc = i.wireshark_endian_str();
 
-            s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
+            s.wln(format!(
+                "ptvcursor_add(ptv, {name}, {len}, ENC_LITTLE_ENDIAN);",
+            ));
         }
         Type::CString => {
             print_cstring(s, w);
@@ -391,9 +392,10 @@ fn print_definition(
                     ArrayType::Integer(i) => {
                         let name = w.unwrap().name();
                         let len = i.size();
-                        let enc = i.wireshark_endian_str();
 
-                        s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
+                        s.wln(format!(
+                            "ptvcursor_add(ptv, {name}, {len}, ENC_LITTLE_ENDIAN);",
+                        ));
                     }
                     ArrayType::Guid => {
                         let name = w.unwrap().name();
@@ -508,20 +510,22 @@ fn print_definer(
     variables: &mut Vec<String>,
     e: &Definer,
 ) {
-    let (len, enc) = if let Some(upcast) = upcast {
-        (upcast.size(), upcast.wireshark_endian_str())
+    let len = if let Some(upcast) = upcast {
+        upcast.size()
     } else {
-        (e.ty().size(), e.ty().wireshark_endian_str())
+        e.ty().size()
     };
     let name = w.unwrap().name();
 
     if e.used_in_if_in_object(container_name) {
         variables.push(variable_name.to_string());
         s.wln(format!(
-            "ptvcursor_add_ret_uint(ptv, {name}, {len}, {enc}, &{variable_name});",
+            "ptvcursor_add_ret_uint(ptv, {name}, {len}, ENC_LITTLE_ENDIAN, &{variable_name});",
         ));
     } else {
-        s.wln(format!("ptvcursor_add(ptv, {name}, {len}, {enc});",));
+        s.wln(format!(
+            "ptvcursor_add(ptv, {name}, {len}, ENC_LITTLE_ENDIAN);",
+        ));
     }
 }
 
@@ -544,8 +548,7 @@ pub(crate) fn print_register_info(w: &WiresharkObject) -> Writer {
         let enum_strings = if let Some(e) = m.has_enum_strings() {
             let vals = if matches!(
                 m.ty(),
-                WiresharkType::Enum(_, IntegerType::U64(_))
-                    | WiresharkType::Enum(_, IntegerType::I64(_))
+                WiresharkType::Enum(_, IntegerType::U64) | WiresharkType::Enum(_, IntegerType::I64)
             ) {
                 "VALS64"
             } else {
@@ -641,7 +644,7 @@ fn print_typedef(s: &mut Writer, e: &Definer) {
 fn print_enum(s: &mut Writer, e: &Definer) {
     print_typedef(s, e);
 
-    let value_string = if matches!(e.ty(), &IntegerType::U64(_) | &IntegerType::I64(_)) {
+    let value_string = if matches!(e.ty(), &IntegerType::U64 | &IntegerType::I64) {
         "val64_string"
     } else {
         "value_string"

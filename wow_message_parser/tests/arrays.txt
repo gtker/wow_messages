@@ -3,17 +3,14 @@ use std::io::{Read, Write};
 use crate::vanilla::StructWithAllBuiltInTypes;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/tests/impl_levels.wowm:68`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/tests/impl_levels.wowm#L68):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/tests/impl_levels.wowm:63`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/tests/impl_levels.wowm#L63):
 /// ```text
 /// struct Arrays {
 ///     u8 index;
 ///     u8[20] basic_fixed_array;
 ///     u16[16] simple_2byte_fixed_array;
-///     u16_be[16] simple_2byte_be_fixed_array;
 ///     u16[index] simple_2byte_variable_array;
-///     u32_be[16] simple_4byte_be_fixed_array;
 ///     u32[index] simple_4byte_variable_array;
-///     u64_be[16] simple_8byte_be_fixed_array;
 ///     u64[index] simple_8byte_variable_array;
 ///     StructWithAllBuiltInTypes[10] complex_fixed_array;
 ///     StructWithAllBuiltInTypes[index] complex_variable_array;
@@ -24,11 +21,8 @@ use crate::vanilla::StructWithAllBuiltInTypes;
 pub struct Arrays {
     pub basic_fixed_array: [u8; 20],
     pub simple_2byte_fixed_array: [u16; 16],
-    pub simple_2byte_be_fixed_array: [u16; 16],
     pub simple_2byte_variable_array: Vec<u16>,
-    pub simple_4byte_be_fixed_array: [u32; 16],
     pub simple_4byte_variable_array: Vec<u32>,
-    pub simple_8byte_be_fixed_array: [u64; 16],
     pub simple_8byte_variable_array: Vec<u64>,
     pub complex_fixed_array: [StructWithAllBuiltInTypes; 10],
     pub complex_variable_array: Vec<StructWithAllBuiltInTypes>,
@@ -51,29 +45,14 @@ impl Arrays {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        // simple_2byte_be_fixed_array: u16_be[16]
-        for i in self.simple_2byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes())?;
-        }
-
         // simple_2byte_variable_array: u16[index]
         for i in self.simple_2byte_variable_array.iter() {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        // simple_4byte_be_fixed_array: u32_be[16]
-        for i in self.simple_4byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes())?;
-        }
-
         // simple_4byte_variable_array: u32[index]
         for i in self.simple_4byte_variable_array.iter() {
             w.write_all(&i.to_le_bytes())?;
-        }
-
-        // simple_8byte_be_fixed_array: u64_be[16]
-        for i in self.simple_8byte_be_fixed_array.iter() {
-            w.write_all(&i.to_be_bytes())?;
         }
 
         // simple_8byte_variable_array: u64[index]
@@ -128,15 +107,6 @@ impl Arrays {
             simple_2byte_fixed_array
         };
 
-        // simple_2byte_be_fixed_array: u16_be[16]
-        let simple_2byte_be_fixed_array = {
-            let mut simple_2byte_be_fixed_array = [u16::default(); 16];
-            for i in simple_2byte_be_fixed_array.iter_mut() {
-                *i = crate::util::read_u16_be(&mut r)?;
-            }
-            simple_2byte_be_fixed_array
-        };
-
         // simple_2byte_variable_array: u16[index]
         let simple_2byte_variable_array = {
             let mut simple_2byte_variable_array = Vec::with_capacity(index as usize);
@@ -146,15 +116,6 @@ impl Arrays {
             simple_2byte_variable_array
         };
 
-        // simple_4byte_be_fixed_array: u32_be[16]
-        let simple_4byte_be_fixed_array = {
-            let mut simple_4byte_be_fixed_array = [u32::default(); 16];
-            for i in simple_4byte_be_fixed_array.iter_mut() {
-                *i = crate::util::read_u32_be(&mut r)?;
-            }
-            simple_4byte_be_fixed_array
-        };
-
         // simple_4byte_variable_array: u32[index]
         let simple_4byte_variable_array = {
             let mut simple_4byte_variable_array = Vec::with_capacity(index as usize);
@@ -162,15 +123,6 @@ impl Arrays {
                 simple_4byte_variable_array.push(crate::util::read_u32_le(&mut r)?);
             }
             simple_4byte_variable_array
-        };
-
-        // simple_8byte_be_fixed_array: u64_be[16]
-        let simple_8byte_be_fixed_array = {
-            let mut simple_8byte_be_fixed_array = [u64::default(); 16];
-            for i in simple_8byte_be_fixed_array.iter_mut() {
-                *i = crate::util::read_u64_be(&mut r)?;
-            }
-            simple_8byte_be_fixed_array
         };
 
         // simple_8byte_variable_array: u64[index]
@@ -223,11 +175,8 @@ impl Arrays {
         Ok(Self {
             basic_fixed_array,
             simple_2byte_fixed_array,
-            simple_2byte_be_fixed_array,
             simple_2byte_variable_array,
-            simple_4byte_be_fixed_array,
             simple_4byte_variable_array,
-            simple_8byte_be_fixed_array,
             simple_8byte_variable_array,
             complex_fixed_array,
             complex_variable_array,
@@ -243,11 +192,8 @@ impl Arrays {
         1 // index: u8
         + 20 // basic_fixed_array: u8[20]
         + 32 // simple_2byte_fixed_array: u16[16]
-        + 32 // simple_2byte_be_fixed_array: u16_be[16]
         + self.simple_2byte_variable_array.len() * core::mem::size_of::<u16>() // simple_2byte_variable_array: u16[index]
-        + 64 // simple_4byte_be_fixed_array: u32_be[16]
         + self.simple_4byte_variable_array.len() * core::mem::size_of::<u32>() // simple_4byte_variable_array: u32[index]
-        + 128 // simple_8byte_be_fixed_array: u64_be[16]
         + self.simple_8byte_variable_array.len() * core::mem::size_of::<u64>() // simple_8byte_variable_array: u64[index]
         + self.complex_fixed_array.iter().fold(0, |acc, x| acc + x.size()) // complex_fixed_array: StructWithAllBuiltInTypes[10]
         + self.complex_variable_array.iter().fold(0, |acc, x| acc + x.size()) // complex_variable_array: StructWithAllBuiltInTypes[index]

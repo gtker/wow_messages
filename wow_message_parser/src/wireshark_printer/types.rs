@@ -1,8 +1,7 @@
 use crate::parser::types::array::ArrayType;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::ty::Type;
-use crate::parser::types::Endianness::Little;
-use crate::parser::types::{Endianness, FloatingPointType, IntegerType};
+use crate::parser::types::{FloatingPointType, IntegerType};
 use crate::{wireshark_printer, Objects};
 
 pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
@@ -177,12 +176,12 @@ impl WiresharkType {
             Type::Struct { .. } => return None,
             Type::Integer(v) => Self::Integer(*v),
             Type::Bool(i) => Self::Integer(*i),
-            Type::Guid | Type::PackedGuid => Self::Integer(IntegerType::U64(Endianness::Little)),
+            Type::Guid | Type::PackedGuid => Self::Integer(IntegerType::U64),
             Type::Level => Self::Integer(IntegerType::U8),
-            Type::Level16 => Self::Integer(IntegerType::U16(Endianness::Little)),
-            Type::Level32 => Self::Integer(IntegerType::U32(Endianness::Little)),
-            Type::Gold => Self::Integer(IntegerType::U32(Endianness::Little)),
-            Type::DateTime => Self::Integer(IntegerType::U32(Endianness::Little)),
+            Type::Level16 => Self::Integer(IntegerType::U16),
+            Type::Level32 => Self::Integer(IntegerType::U32),
+            Type::Gold => Self::Integer(IntegerType::U32),
+            Type::DateTime => Self::Integer(IntegerType::U32),
             Type::FloatingPoint(v) => Self::Float(*v),
             Type::SizedCString | Type::String { .. } | Type::CString => Self::String,
             Type::Array(array) => match array.ty() {
@@ -197,7 +196,7 @@ impl WiresharkType {
                     }
                 }
                 ArrayType::CString => Self::String,
-                ArrayType::PackedGuid | ArrayType::Guid => Self::Integer(IntegerType::U64(Little)),
+                ArrayType::PackedGuid | ArrayType::Guid => Self::Integer(IntegerType::U64),
             },
             Type::MonsterMoveSplines | Type::AuraMask | Type::UpdateMask => return None,
             Type::AchievementDoneArray | Type::AchievementInProgressArray => {
@@ -247,11 +246,11 @@ impl WiresharkType {
                 "BASE_NONE".to_string()
             }
             WiresharkType::Integer(i) => match i {
-                IntegerType::I32(_) => "BASE_DEC",
+                IntegerType::I32 => "BASE_DEC",
                 _ => "BASE_HEX_DEC",
             }
             .to_string(),
-            WiresharkType::Enum(_, IntegerType::U64(_) | IntegerType::I64(_)) => {
+            WiresharkType::Enum(_, IntegerType::U64 | IntegerType::I64) => {
                 "BASE_HEX_DEC | BASE_VAL64_STRING".to_string()
             }
             WiresharkType::Enum(_, _) | WiresharkType::Flag(_) => "BASE_HEX_DEC".to_string(),
@@ -262,13 +261,13 @@ impl WiresharkType {
 fn int_type_to_wireshark_string(i: &IntegerType) -> String {
     match i {
         IntegerType::U8 => "FT_UINT8",
-        IntegerType::U16(_) => "FT_UINT16",
-        IntegerType::U32(_) => "FT_UINT32",
-        IntegerType::U48 | IntegerType::U64(_) => "FT_UINT64",
-        IntegerType::I32(_) => "FT_INT32",
+        IntegerType::U16 => "FT_UINT16",
+        IntegerType::U32 => "FT_UINT32",
+        IntegerType::U48 | IntegerType::U64 => "FT_UINT64",
+        IntegerType::I32 => "FT_INT32",
         IntegerType::I8 => "FT_INT8",
-        IntegerType::I16(_) => "FT_INT16",
-        IntegerType::I64(_) => "FT_INT64",
+        IntegerType::I16 => "FT_INT16",
+        IntegerType::I64 => "FT_INT64",
     }
     .to_string()
 }

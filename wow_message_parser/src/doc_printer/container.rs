@@ -6,7 +6,7 @@ use crate::parser::types::sizes::{
 };
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{Endianness, IntegerType};
+use crate::parser::types::IntegerType;
 use crate::wowm_printer::get_struct_wowm_definition;
 use crate::{doc_printer, Container, ContainerType, DefinerType, ObjectTags, Objects};
 use hashbrown::HashMap;
@@ -782,33 +782,21 @@ fn print_container_header(s: &mut DocWriter, e: &Container) {
 fn get_integer_value(t: &IntegerType, value: &[u8]) -> isize {
     match t {
         IntegerType::I8 | IntegerType::U8 => value[0] as isize,
-        IntegerType::I16(e) | IntegerType::U16(e) => {
+        IntegerType::I16 | IntegerType::U16 => {
             let value: [u8; 2] = value.try_into().unwrap();
-            match e {
-                Endianness::Little => u16::from_le_bytes(value) as isize,
-                Endianness::Big => u16::from_be_bytes(value) as isize,
-            }
+            u16::from_le_bytes(value) as isize
         }
-        IntegerType::U32(e) => {
+        IntegerType::U32 => {
             let value: [u8; 4] = value.try_into().unwrap();
-            match e {
-                Endianness::Little => u32::from_le_bytes(value) as isize,
-                Endianness::Big => u32::from_be_bytes(value) as isize,
-            }
+            u32::from_le_bytes(value) as isize
         }
-        IntegerType::I64(e) | IntegerType::U64(e) => {
+        IntegerType::I64 | IntegerType::U64 => {
             let value: [u8; 8] = value.try_into().unwrap();
-            match e {
-                Endianness::Little => u64::from_le_bytes(value) as isize,
-                Endianness::Big => u64::from_be_bytes(value) as isize,
-            }
+            u64::from_le_bytes(value) as isize
         }
-        IntegerType::I32(e) => {
+        IntegerType::I32 => {
             let value: [u8; 4] = value.try_into().unwrap();
-            match e {
-                Endianness::Little => i32::from_le_bytes(value) as isize,
-                Endianness::Big => i32::from_be_bytes(value) as isize,
-            }
+            i32::from_le_bytes(value) as isize
         }
         IntegerType::U48 => {
             let value: [u8; 6] = value.try_into().unwrap();

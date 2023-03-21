@@ -1,5 +1,5 @@
 use crate::impl_features::{get_impl_features_for_container, Feature};
-use crate::ir_printer::{IrEndianness, IrFileInfo, IrIntegerType, IrTags};
+use crate::ir_printer::{IrFileInfo, IrIntegerType, IrTags};
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::if_statement::{Conditional, Equation, IfStatement};
@@ -371,19 +371,19 @@ impl From<ArraySize> for IrArraySize {
 }
 
 #[derive(Debug, Serialize)]
-#[serde(tag = "type", content = "endianness")]
+#[serde(tag = "type")]
 pub(crate) enum IrFloatingPointType {
     #[serde(rename = "f32")]
-    F32(IrEndianness),
+    F32,
     #[serde(rename = "f64")]
-    F64(IrEndianness),
+    F64,
 }
 
 impl From<&FloatingPointType> for IrFloatingPointType {
     fn from(v: &FloatingPointType) -> Self {
         match v {
-            FloatingPointType::F32(f) => Self::F32(f.into()),
-            FloatingPointType::F64(f) => Self::F64(f.into()),
+            FloatingPointType::F32 => Self::F32,
+            FloatingPointType::F64 => Self::F64,
         }
     }
 }

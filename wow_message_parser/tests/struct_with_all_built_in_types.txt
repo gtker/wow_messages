@@ -8,13 +8,8 @@ use std::io::{Read, Write};
 ///     u16 basic16;
 ///     u32 basic32;
 ///     u64 basic64;
-///     u16_be basic16_be;
-///     u32_be basic32_be;
-///     u64_be basic64_be;
 ///     f32 decimal32;
-///     f32_be decimal32_be;
 ///     f64 decimal64;
-///     f64_be decimal64_be;
 ///     CString simple_cstring;
 ///     String simple_string;
 /// }
@@ -24,13 +19,8 @@ pub struct StructWithAllBuiltInTypes {
     pub basic16: u16,
     pub basic32: u32,
     pub basic64: u64,
-    pub basic16_be: u16,
-    pub basic32_be: u32,
-    pub basic64_be: u64,
     pub decimal32: f32,
-    pub decimal32_be: f32,
     pub decimal64: f64,
-    pub decimal64_be: f64,
     pub simple_cstring: String,
     pub simple_string: String,
 }
@@ -49,26 +39,11 @@ impl StructWithAllBuiltInTypes {
         // basic64: u64
         w.write_all(&self.basic64.to_le_bytes())?;
 
-        // basic16_be: u16_be
-        w.write_all(&self.basic16_be.to_be_bytes())?;
-
-        // basic32_be: u32_be
-        w.write_all(&self.basic32_be.to_be_bytes())?;
-
-        // basic64_be: u64_be
-        w.write_all(&self.basic64_be.to_be_bytes())?;
-
         // decimal32: f32
         w.write_all(&self.decimal32.to_le_bytes())?;
 
-        // decimal32_be: f32_be
-        w.write_all(&self.decimal32_be.to_be_bytes())?;
-
         // decimal64: f64
         w.write_all(&self.decimal64.to_le_bytes())?;
-
-        // decimal64_be: f64_be
-        w.write_all(&self.decimal64_be.to_be_bytes())?;
 
         // simple_cstring: CString
         // TODO: Guard against strings that are already null-terminated
@@ -99,26 +74,11 @@ impl StructWithAllBuiltInTypes {
         // basic64: u64
         let basic64 = crate::util::read_u64_le(&mut r)?;
 
-        // basic16_be: u16_be
-        let basic16_be = crate::util::read_u16_be(&mut r)?;
-
-        // basic32_be: u32_be
-        let basic32_be = crate::util::read_u32_be(&mut r)?;
-
-        // basic64_be: u64_be
-        let basic64_be = crate::util::read_u64_be(&mut r)?;
-
         // decimal32: f32
         let decimal32 = crate::util::read_f32_le(&mut r)?;
 
-        // decimal32_be: f32_be
-        let decimal32_be = crate::util::read_f32_be(&mut r)?;
-
         // decimal64: f64
         let decimal64 = crate::util::read_f64_le(&mut r)?;
-
-        // decimal64_be: f64_be
-        let decimal64_be = crate::util::read_f64_be(&mut r)?;
 
         // simple_cstring: CString
         let simple_cstring = {
@@ -138,13 +98,8 @@ impl StructWithAllBuiltInTypes {
             basic16,
             basic32,
             basic64,
-            basic16_be,
-            basic32_be,
-            basic64_be,
             decimal32,
-            decimal32_be,
             decimal64,
-            decimal64_be,
             simple_cstring,
             simple_string,
         })
@@ -158,13 +113,8 @@ impl StructWithAllBuiltInTypes {
         + 2 // basic16: u16
         + 4 // basic32: u32
         + 8 // basic64: u64
-        + 2 // basic16_be: u16_be
-        + 4 // basic32_be: u32_be
-        + 8 // basic64_be: u64_be
         + 4 // decimal32: f32
-        + 4 // decimal32_be: f32_be
         + 8 // decimal64: f64
-        + 8 // decimal64_be: f64_be
         + self.simple_cstring.len() + 1 // simple_cstring: CString
         + self.simple_string.len() + 1 // simple_string: String
     }

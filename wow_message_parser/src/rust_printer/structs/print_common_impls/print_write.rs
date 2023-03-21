@@ -29,10 +29,9 @@ pub(crate) fn print_write_field_array(
     s.body(
         format!("for i in {variable_prefix}{name}.iter()", name = d.name(),),
         |s| match array.ty() {
-            ArrayType::Integer(integer_type) => s.wln(format!(
-                "{writer}.write_all(&i.to_{endian}_bytes()){postfix}?;",
-                endian = integer_type.rust_endian_str(),
-            )),
+            ArrayType::Integer(_) => {
+                s.wln(format!("{writer}.write_all(&i.to_le_bytes()){postfix}?;",))
+            }
             ArrayType::Struct(_) => {
                 s.wln(format!("i.write_into_vec(&mut {writer})?;"));
             }
@@ -58,25 +57,24 @@ pub(crate) fn print_write_field_integer(
     size_of_fields_before_size: u64,
     postfix: &str,
 ) {
-    let endian = int_type.rust_endian_str();
     let basic_type = int_type.rust_str();
 
     if let Some(value) = verified_value {
         if value.original_string() == CONTAINER_SELF_SIZE_FIELD {
-            s.wln(format!("w.write_all(&((self.size() - {size_of_fields_before_size}) as {basic_type}).to_{endian}_bytes()){postfix}?;"));
+            s.wln(format!("w.write_all(&((self.size() - {size_of_fields_before_size}) as {basic_type}).to_le_bytes()){postfix}?;"));
         } else {
             s.wln(format!(
-                "w.write_all(&Self::{name}_VALUE.to_{endian}_bytes()){postfix}?;",
+                "w.write_all(&Self::{name}_VALUE.to_le_bytes()){postfix}?;",
                 name = variable_name.to_uppercase(),
             ));
         }
     } else if let Some(array) = used_as_size_in {
         s.wln(format!(
-            "w.write_all(&({variable_prefix}{array}.len() as {basic_type}).to_{endian}_bytes()){postfix}?;",
+            "w.write_all(&({variable_prefix}{array}.len() as {basic_type}).to_le_bytes()){postfix}?;",
         ));
     } else {
         s.wln(format!(
-            "w.write_all(&{variable_prefix}{variable_name}.to_{endian}_bytes()){postfix}?;",
+            "w.write_all(&{variable_prefix}{variable_name}.to_le_bytes()){postfix}?;",
         ));
     }
 }
@@ -163,10 +161,9 @@ pub(crate) fn print_write_definition(
                 "w.write_all(&{variable_prefix}{name}.octets()){postfix}?;",
             ));
         }
-        Type::FloatingPoint(floating) => {
+        Type::FloatingPoint(_) => {
             s.wln(format!(
-                "w.write_all(&{variable_prefix}{name}.to_{endian}_bytes()){postfix}?;",
-                endian = floating.rust_endian_str(),
+                "w.write_all(&{variable_prefix}{name}.to_le_bytes()){postfix}?;",
             ));
         }
         Type::SizedCString => {
@@ -217,9 +214,8 @@ pub(crate) fn print_write_definition(
                 ));
             } else {
                 s.wln(format!(
-                    "w.write_all(&{ty}::from({variable_prefix}{name}.as_int()).to_{endian}_bytes()){postfix}?;",
+                    "w.write_all(&{ty}::from({variable_prefix}{name}.as_int()).to_le_bytes()){postfix}?;",
                     ty = integer.rust_str(),
-                    endian = integer.rust_endian_str()
                 ));
             }
         }

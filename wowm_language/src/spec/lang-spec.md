@@ -23,9 +23,7 @@ For example:
 The following types are not looked up but are expected to be handled by the compiler and code generator:
 
 * The basic integer types `u8`, `u16`, `u32`, and `u64` are sent as little endian over the network.
-* The basic integer types `u16_be`, `u32_be`, and `u64_be` are sent as big endian over the network.
 * The basic floating point types `f32` and `f64` are sent as little endian over the network.
-* The basic floating point types `f32_be` and `f64_be` are sent as big endian over the network.
 
 The `String` type is the same as a sized `u8` array (`u8[len]`) containing valid UTF-8 values plus a `u8` for the length of the string, although it should be presented in the native string type.
 
@@ -36,11 +34,8 @@ The `SizedCString` is the same as a `u32` followed by a `CString`, but they are 
 | Type                         | Purpose                                                                                                                       | C Name                                      |
 |------------------------------|-------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
 | `u*`                         | Unsigned little endian `*` bit value.                                                                                         | `unsigned` `char`/`short`/`int`/`long long` |
-| `u*_be`                      | Unsigned big endian `*` bit value.                                                                                            | `unsigned` `char`/`short`/`int`/`long long` |
 | `i*`                         | Signed little endian `*` bit value.                                                                                           | `char`/`short`/`int`/`long long`            |
-| `i*_be`                      | Signed big endian `*` bit value.                                                                                              | `char`/`short`/`int`/`long long`            |
 | `f32` and `f64`              | Floating point value.                                                                                                         | `float`/`double`                            |
-| `f*_be`                      | Floating point value sent as big endian.                                                                                      | `float`/`double`                            |
 | `CString`                    | UTF-8 string type that is terminated by a zero byte value.                                                                    | `char*`                                     |
 | `SizedCString`               | A `u32` field that determines the size of the string followed by a UTF-8 string type that is terminated by a zero byte value. | `uint32_t` + `char*`                        |
 | `String[len]`                | UTF-8 string type of exactly length `len`.                                                                                    | -                                           |
@@ -126,7 +121,7 @@ enum <name> : <basic_type> {
 }
 ```
 
-Where `<name>` is a unique identifier, `<basic_type>` is an integer type `u8`, `u16`, `u32`, `u64`, `u16_be`, `u32_be`, `u64_be`.
+Where `<name>` is a unique identifier, `<basic_type>` is an integer type `u8`, `u16`, `u32`, and `u64`.
 
 `<enumerators>` is one or more enumerators of the form
 ```ignore

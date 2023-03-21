@@ -1,7 +1,7 @@
 use crate::doc_printer::DocWriter;
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
-use crate::parser::types::{Endianness, IntegerType};
+use crate::parser::types::IntegerType;
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{doc_printer, ObjectTags};
 
@@ -74,20 +74,15 @@ fn print_definer_table(s: &mut DocWriter, e: &Definer) {
         byte = e.ty().size(),
         bit = e.ty().size() * 8,
         endian = match e.ty() {
-            IntegerType::I8 | IntegerType::U8 => "".to_string(),
-            IntegerType::U16(e)
-            | IntegerType::U32(e)
-            | IntegerType::I16(e)
-            | IntegerType::I64(e)
-            | IntegerType::U64(e)
-            | IntegerType::I32(e) => format!(
-                " {} endian",
-                match e {
-                    Endianness::Little => "little",
-                    Endianness::Big => "big",
-                }
-            ),
-            IntegerType::U48 => "32bit little endian followed by 16 bit little endian".to_string(),
+            IntegerType::I8 | IntegerType::U8 => "",
+            IntegerType::U16
+            | IntegerType::U32
+            | IntegerType::I16
+            | IntegerType::I64
+            | IntegerType::U64
+            | IntegerType::I32 => " little endian",
+
+            IntegerType::U48 => " 32bit little endian followed by 16 bit little endian",
         }
     ));
 

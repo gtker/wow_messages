@@ -116,9 +116,8 @@ fn print_array_ty(
     match array.ty() {
         ArrayType::Integer(integer_type) => {
             s.wln(format!(
-                "{array_prefix}{UTILITY_PATH}::{prefix}read_{int_type}_{endian}(&mut {reader}){postfix}?{array_postfix}",
+                "{array_prefix}{UTILITY_PATH}::{prefix}read_{int_type}_le(&mut {reader}){postfix}?{array_postfix}",
                 int_type = integer_type.rust_str(),
-                endian = integer_type.rust_endian_str(),
             ));
         }
         ArrayType::CString => {
@@ -210,16 +209,10 @@ fn print_read_definition(
                 "{assignment_prefix}{name}: DateTime = {UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?.try_into()?;",
             ));
         }
-        Type::Integer(integer) => {
+        Type::Integer(_) => {
             let value_set = if d.value().is_some() { "_" } else { "" };
             s.wln(format!(
-                "{assignment_prefix}{value_set}{name} = {UTILITY_PATH}::{prefix}read_{ty}_{endian}(&mut r){postfix}?;",
-                value_set = value_set,
-                name = d.name(),
-                ty = integer.rust_str(),
-                endian = integer.rust_endian_str(),
-                prefix = prefix,
-                postfix = postfix,
+                "{assignment_prefix}{value_set}{name} = {UTILITY_PATH}::{prefix}read_{type_name}_le(&mut r){postfix}?;",
             ));
         }
         Type::IpAddress => {
@@ -229,9 +222,8 @@ fn print_read_definition(
         }
         Type::FloatingPoint(floating) => {
             s.wln(format!(
-                "{assignment_prefix}{name} = {UTILITY_PATH}::{prefix}read_{ty}_{endian}(&mut r){postfix}?;",
+                "{assignment_prefix}{name} = {UTILITY_PATH}::{prefix}read_{ty}_le(&mut r){postfix}?;",
                 ty = floating.rust_str(),
-                endian = floating.rust_endian_str(),
             ));
         }
         Type::SizedCString => {
@@ -282,10 +274,9 @@ fn print_read_definition(
             };
 
             s.wln(format!(
-                    "{assignment_prefix}{value_set}{name}: {type_name} = {parens}crate::util::{prefix}read_{ty}_{endian}(&mut r){postfix}?{cast}.{into};",
+                    "{assignment_prefix}{value_set}{name}: {type_name} = {parens}crate::util::{prefix}read_{ty}_le(&mut r){postfix}?{cast}.{into};",
                     type_name = d.ty().rust_str(),
                     value_set = if d.value().is_some() { "_" } else { "" },
-                    endian = integer.rust_endian_str(),
                     ty = integer.rust_str(),
                     into = match e.self_value().is_some() {
                         true => "into()",
@@ -312,9 +303,8 @@ fn print_read_definition(
                 );
             } else {
                 s.wln(format ! (
-                    "{assignment_prefix}{value_set}{name} = {type_name}::new(crate::util::{prefix}read_{ty}_{endian}(&mut r){postfix}?);",
+                    "{assignment_prefix}{value_set}{name} = {type_name}::new(crate::util::{prefix}read_{ty}_le(&mut r){postfix}?);",
                     value_set = if d.value().is_some() { "_" } else { "" },
-                    endian = e.ty().rust_endian_str(),
                     ty = e.ty().rust_str(),
                 ));
             }

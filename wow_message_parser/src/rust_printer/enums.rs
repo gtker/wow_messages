@@ -171,7 +171,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                         ));
                     }
 
-                    let cast = if let IntegerType::U64(_) = e.ty() {
+                    let cast = if let IntegerType::U64 = e.ty() {
                         "v"
                     } else {
                         "v as u64"

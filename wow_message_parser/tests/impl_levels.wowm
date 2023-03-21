@@ -21,13 +21,8 @@ struct StructWithAllBuiltInTypes {
     u16 basic16;
     u32 basic32;
     u64 basic64;
-    u16_be basic16_be;
-    u32_be basic32_be;
-    u64_be basic64_be;
     f32 decimal32;
-    f32_be decimal32_be;
     f64 decimal64;
-    f64_be decimal64_be;
     CString simple_cstring;
     String simple_string;
 }
@@ -69,11 +64,8 @@ struct Arrays {
     u8 index;
     u8[20] basic_fixed_array;
     u16[16] simple_2byte_fixed_array;
-    u16_be[16] simple_2byte_be_fixed_array;
     u16[index] simple_2byte_variable_array;
-    u32_be[16] simple_4byte_be_fixed_array;
     u32[index] simple_4byte_variable_array;
-    u64_be[16] simple_8byte_be_fixed_array;
     u64[index] simple_8byte_variable_array;
     StructWithAllBuiltInTypes[10] complex_fixed_array;
     StructWithAllBuiltInTypes[index] complex_variable_array;

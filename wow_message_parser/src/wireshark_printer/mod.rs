@@ -4,7 +4,7 @@ mod types;
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::parser::types::array::ArrayType;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{Endianness, IntegerType};
+use crate::parser::types::IntegerType;
 use crate::path_utils::wireshark_directory;
 use crate::rust_printer::Writer;
 use crate::wireshark_printer::printer::{
@@ -174,9 +174,7 @@ fn name_to_hf(name: &str, ty: &Type) -> String {
         }
     } else if name == "size" {
         name += "_struct";
-    } else if name.starts_with("position")
-        && matches!(ty, Type::Integer(IntegerType::U16(Endianness::Little)))
-    {
+    } else if name.starts_with("position") && matches!(ty, Type::Integer(IntegerType::U16)) {
         name += "_int";
     } else if name == "item_slot" {
         if let Type::Integer(_) = ty {

@@ -9,7 +9,7 @@ use crate::ir_printer::definer::{definers_to_ir, IrDefiner};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
-use crate::parser::types::{Endianness, IntegerType};
+use crate::parser::types::IntegerType;
 use crate::path_utils::intermediate_representation;
 
 #[derive(Serialize, Debug)]
@@ -20,32 +20,16 @@ struct IrFileInfo {
 
 #[derive(Debug, Serialize)]
 #[allow(non_camel_case_types)]
-pub(crate) enum IrEndianness {
-    little,
-    big,
-}
-
-impl From<&Endianness> for IrEndianness {
-    fn from(v: &Endianness) -> Self {
-        match v {
-            Endianness::Little => IrEndianness::little,
-            Endianness::Big => IrEndianness::big,
-        }
-    }
-}
-
-#[derive(Debug, Serialize)]
-#[allow(non_camel_case_types)]
-#[serde(tag = "type", content = "endianness")]
+#[serde(tag = "type")]
 pub(crate) enum IrIntegerType {
     u8,
     i8,
-    u16(IrEndianness),
-    u32(IrEndianness),
-    u64(IrEndianness),
-    i16(IrEndianness),
-    i32(IrEndianness),
-    i64(IrEndianness),
+    u16,
+    u32,
+    u64,
+    i16,
+    i32,
+    i64,
     u48,
 }
 
@@ -53,13 +37,13 @@ impl From<&IntegerType> for IrIntegerType {
     fn from(v: &IntegerType) -> Self {
         match v {
             IntegerType::U8 => Self::u8,
-            IntegerType::U16(e) => Self::u16(e.into()),
-            IntegerType::U32(e) => Self::u32(e.into()),
-            IntegerType::U64(e) => Self::u64(e.into()),
-            IntegerType::I32(e) => Self::i32(e.into()),
+            IntegerType::U16 => Self::u16,
+            IntegerType::U32 => Self::u32,
+            IntegerType::U64 => Self::u64,
+            IntegerType::I32 => Self::i32,
             IntegerType::I8 => Self::i8,
-            IntegerType::I16(e) => Self::i16(e.into()),
-            IntegerType::I64(e) => Self::i64(e.into()),
+            IntegerType::I16 => Self::i16,
+            IntegerType::I64 => Self::i64,
             IntegerType::U48 => Self::u48,
         }
     }

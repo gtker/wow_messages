@@ -280,11 +280,13 @@ impl Type {
     pub(crate) fn doc_endian_str(&self) -> String {
         match self {
             Type::Bool(i) | Type::Integer(i) => i.doc_endian_str().to_string(),
-            Type::FloatingPoint(f) => f.doc_endian_str().to_string(),
 
-            Type::Level16 | Type::Level32 | Type::Gold | Type::DateTime | Type::Guid => {
-                "Little".to_string()
-            }
+            Type::FloatingPoint(_)
+            | Type::Level16
+            | Type::Level32
+            | Type::Gold
+            | Type::DateTime
+            | Type::Guid => "Little".to_string(),
 
             Type::IpAddress => "Big".to_string(),
 

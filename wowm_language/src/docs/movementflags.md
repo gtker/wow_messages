@@ -204,7 +204,7 @@ flag MovementFlags : u48 {
 }
 ```
 ### Type
-The basic type is `u48`, a 6 byte (48 bit)32bit little endian followed by 16 bit little endian integer.
+The basic type is `u48`, a 6 byte (48 bit) 32bit little endian followed by 16 bit little endian integer.
 ### Enumerators
 | Enumerator | Value  | Description | Comment |
 | --------- | -------- | ----------- | ------- |

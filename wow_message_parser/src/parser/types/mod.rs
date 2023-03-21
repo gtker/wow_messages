@@ -30,78 +30,30 @@ pub(crate) fn compare_name_and_tags(
 }
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Copy, Clone)]
-pub(crate) enum Endianness {
-    Little,
-    Big,
-}
-
-impl Endianness {
-    pub(crate) fn wireshark_str(&self) -> &str {
-        match self {
-            Endianness::Little => "ENC_LITTLE_ENDIAN",
-            Endianness::Big => "ENC_BIG_ENDIAN",
-        }
-    }
-    pub(crate) fn rust_str(&self) -> &str {
-        match self {
-            Endianness::Little => "le",
-            Endianness::Big => "be",
-        }
-    }
-}
-
-#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Copy, Clone)]
 pub(crate) enum FloatingPointType {
-    F32(Endianness),
-    F64(Endianness),
+    F32,
+    F64,
 }
 
 impl FloatingPointType {
     pub(crate) fn size(&self) -> u8 {
         match self {
-            FloatingPointType::F32(_) => 4,
-            FloatingPointType::F64(_) => 8,
+            FloatingPointType::F32 => 4,
+            FloatingPointType::F64 => 8,
         }
     }
 
     pub(crate) fn str(&self) -> &str {
         match self {
-            FloatingPointType::F32(e) => match e {
-                Endianness::Little => "f32",
-                Endianness::Big => "f32_be",
-            },
-            FloatingPointType::F64(e) => match e {
-                Endianness::Little => "f64",
-                Endianness::Big => "f64_be",
-            },
+            FloatingPointType::F32 => "f32",
+            FloatingPointType::F64 => "f64",
         }
     }
 
     pub(crate) fn rust_str(&self) -> &str {
         match self {
-            FloatingPointType::F32(_) => "f32",
-            FloatingPointType::F64(_) => "f64",
-        }
-    }
-
-    pub(crate) fn rust_endian_str(&self) -> &str {
-        match self {
-            FloatingPointType::F32(e) | FloatingPointType::F64(e) => e.rust_str(),
-        }
-    }
-
-    pub(crate) fn wireshark_endian_str(&self) -> &str {
-        match self {
-            FloatingPointType::F32(e) | FloatingPointType::F64(e) => e.wireshark_str(),
-        }
-    }
-
-    pub(crate) fn doc_endian_str(&self) -> &str {
-        match self {
-            FloatingPointType::F32(e) | FloatingPointType::F64(e) => match e {
-                Endianness::Little => "Little",
-                Endianness::Big => "Big",
-            },
+            FloatingPointType::F32 => "f32",
+            FloatingPointType::F64 => "f64",
         }
     }
 }
@@ -109,23 +61,23 @@ impl FloatingPointType {
 #[derive(Debug, Eq, Ord, PartialOrd, PartialEq, Copy, Clone)]
 pub(crate) enum IntegerType {
     U8,
-    U16(Endianness),
-    U32(Endianness),
+    U16,
+    U32,
     U48,
-    U64(Endianness),
+    U64,
     I8,
-    I16(Endianness),
-    I32(Endianness),
-    I64(Endianness),
+    I16,
+    I32,
+    I64,
 }
 
 impl IntegerType {
     pub(crate) fn size(&self) -> u8 {
         match self {
             IntegerType::I8 | IntegerType::U8 => 1,
-            IntegerType::I16(_) | IntegerType::U16(_) => 2,
-            IntegerType::U32(_) | IntegerType::I32(_) => 4,
-            IntegerType::I64(_) | IntegerType::U64(_) => 8,
+            IntegerType::I16 | IntegerType::U16 => 2,
+            IntegerType::U32 | IntegerType::I32 => 4,
+            IntegerType::I64 | IntegerType::U64 => 8,
 
             IntegerType::U48 => 6,
         }
@@ -142,31 +94,13 @@ impl IntegerType {
     pub(crate) fn str(&self) -> &str {
         match self {
             IntegerType::U8 => "u8",
-            IntegerType::U16(e) => match e {
-                Endianness::Little => "u16",
-                Endianness::Big => "u16_be",
-            },
-            IntegerType::U32(e) => match e {
-                Endianness::Little => "u32",
-                Endianness::Big => "u32_be",
-            },
-            IntegerType::U64(e) => match e {
-                Endianness::Little => "u64",
-                Endianness::Big => "u64_be",
-            },
-            IntegerType::I32(e) => match e {
-                Endianness::Little => "i32",
-                Endianness::Big => "i32_be",
-            },
+            IntegerType::U16 => "u16",
+            IntegerType::U32 => "u32",
+            IntegerType::U64 => "u64",
+            IntegerType::I32 => "i32",
             IntegerType::I8 => "i8",
-            IntegerType::I16(e) => match e {
-                Endianness::Little => "i16",
-                Endianness::Big => "i16_be",
-            },
-            IntegerType::I64(e) => match e {
-                Endianness::Little => "i64",
-                Endianness::Big => "i64_be",
-            },
+            IntegerType::I16 => "i16",
+            IntegerType::I64 => "i64",
 
             IntegerType::U48 => "u48",
         }
@@ -175,57 +109,28 @@ impl IntegerType {
     pub(crate) fn rust_str(&self) -> &str {
         match self {
             IntegerType::U8 => "u8",
-            IntegerType::U16(_) => "u16",
-            IntegerType::U32(_) => "u32",
-            IntegerType::U64(_) => "u64",
-            IntegerType::I32(_) => "i32",
+            IntegerType::U16 => "u16",
+            IntegerType::U32 => "u32",
+            IntegerType::U64 => "u64",
+            IntegerType::I32 => "i32",
             IntegerType::I8 => "i8",
-            IntegerType::I16(_) => "i16",
-            IntegerType::I64(_) => "i64",
+            IntegerType::I16 => "i16",
+            IntegerType::I64 => "i64",
 
             IntegerType::U48 => "u64",
-        }
-    }
-
-    pub(crate) fn rust_endian_str(&self) -> &str {
-        match self {
-            IntegerType::I8 | IntegerType::U8 => "le",
-            IntegerType::I16(i)
-            | IntegerType::I64(i)
-            | IntegerType::U16(i)
-            | IntegerType::U32(i)
-            | IntegerType::U64(i)
-            | IntegerType::I32(i) => i.rust_str(),
-
-            IntegerType::U48 => unreachable!(),
-        }
-    }
-
-    pub(crate) fn wireshark_endian_str(&self) -> &str {
-        match self {
-            IntegerType::U48 | IntegerType::I8 | IntegerType::U8 => "ENC_LITTLE_ENDIAN",
-            IntegerType::I16(i)
-            | IntegerType::I64(i)
-            | IntegerType::U16(i)
-            | IntegerType::U32(i)
-            | IntegerType::U64(i)
-            | IntegerType::I32(i) => i.wireshark_str(),
         }
     }
 
     pub(crate) fn doc_endian_str(&self) -> &str {
         match self {
             IntegerType::I8 | IntegerType::U8 => "-",
-            IntegerType::I16(e)
-            | IntegerType::I64(e)
-            | IntegerType::U16(e)
-            | IntegerType::U32(e)
-            | IntegerType::U64(e)
-            | IntegerType::I32(e) => match e {
-                Endianness::Little => "Little",
-                Endianness::Big => "Big",
-            },
-            IntegerType::U48 => "Little",
+            IntegerType::I16
+            | IntegerType::I64
+            | IntegerType::U16
+            | IntegerType::U32
+            | IntegerType::U64
+            | IntegerType::I32
+            | IntegerType::U48 => "Little",
         }
     }
 
