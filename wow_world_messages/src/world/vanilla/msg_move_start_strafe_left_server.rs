@@ -69,6 +69,7 @@ mod test {
     use crate::Guid;
     use crate::vanilla::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 2;
     const RAW0: [u8; 34] = [ 0x00, 0x20, 0xB8, 0x00, 0x01, 0x05, 0x05, 0x00, 0x00,
          0x00, 0x9F, 0xD2, 0x79, 0x01, 0xEE, 0xC1, 0x0B, 0xC6, 0xFD, 0x44, 0x08,
          0xC3, 0x24, 0x7E, 0xA7, 0x42, 0xB8, 0x9D, 0xC2, 0x3E, 0x7F, 0x03, 0x00,
@@ -100,7 +101,6 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn MSG_MOVE_START_STRAFE_LEFT_Server0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ServerOpcodeMessage::MSG_MOVE_START_STRAFE_LEFT(t) => t,
@@ -110,7 +110,7 @@ mod test {
         assert_eq!(t.guid, expected.guid);
         assert_eq!(t.info, expected.info);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -123,7 +123,6 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_START_STRAFE_LEFT_Server0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::MSG_MOVE_START_STRAFE_LEFT(t) => t,
@@ -133,7 +132,7 @@ mod test {
         assert_eq!(t.guid, expected.guid);
         assert_eq!(t.info, expected.info);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -146,7 +145,6 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_START_STRAFE_LEFT_Server0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::MSG_MOVE_START_STRAFE_LEFT(t) => t,
@@ -156,7 +154,7 @@ mod test {
         assert_eq!(t.guid, expected.guid);
         assert_eq!(t.info, expected.info);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

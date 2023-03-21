@@ -114,6 +114,7 @@ mod test {
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
+    const HEADER_SIZE: usize = 1;
     const RAW0: [u8; 1] = [ 0x32, ];
 
     pub(crate) fn expected0() -> CMD_XFER_ACCEPT {
@@ -127,7 +128,6 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_XFER_ACCEPT0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
             ClientOpcodeMessage::CMD_XFER_ACCEPT => {}
@@ -135,7 +135,7 @@ mod test {
         };
 
 
-        assert_eq!(header_size, RAW0.len());
+        assert_eq!(HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -148,7 +148,6 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_XFER_ACCEPT0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ClientOpcodeMessage::CMD_XFER_ACCEPT => {}
@@ -156,7 +155,7 @@ mod test {
         };
 
 
-        assert_eq!(header_size, RAW0.len());
+        assert_eq!(HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -169,7 +168,6 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_XFER_ACCEPT0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ClientOpcodeMessage::CMD_XFER_ACCEPT => {}
@@ -177,7 +175,7 @@ mod test {
         };
 
 
-        assert_eq!(header_size, RAW0.len());
+        assert_eq!(HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

@@ -34,6 +34,22 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
 
         print_includes(e, version, s);
 
+        match e.container_type() {
+            ContainerType::CLogin(_) => {
+                s.wln("const HEADER_SIZE: usize = 1;");
+            }
+            ContainerType::SLogin(_) => {
+                s.wln("const HEADER_SIZE: usize = 1;");
+            }
+            ContainerType::SMsg(_) => {
+                s.wln("const HEADER_SIZE: usize = 2 + 2;");
+            }
+            ContainerType::CMsg(_) => {
+                s.wln("const HEADER_SIZE: usize = 2 + 4;");
+            }
+            _ => unimplemented!(),
+        }
+
         for (i, t) in e.tests(o).iter().enumerate() {
             s.w(format!("const RAW{}: [u8; {}] = [", i, t.raw_bytes().len()));
             s.inc_indent();
@@ -127,38 +143,26 @@ fn print_includes(e: &Container, version: Version, s: &mut Writer) {
 fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, it: ImplType, i: usize) {
     s.wln(format!("let expected = expected{i}();"));
     let (opcode, read_text, write_text) = match e.container_type() {
-        ContainerType::CLogin(_) => {
-            s.wln("let header_size = 1;");
-            (
-                LOGIN_CLIENT_MESSAGE_ENUM_NAME,
-                format!("{}read", it.prefix()),
-                format!("{}write", it.prefix()),
-            )
-        }
-        ContainerType::SLogin(_) => {
-            s.wln("let header_size = 1;");
-            (
-                LOGIN_SERVER_MESSAGE_ENUM_NAME,
-                format!("{}read", it.prefix()),
-                format!("{}write", it.prefix()),
-            )
-        }
-        ContainerType::SMsg(_) => {
-            s.wln("let header_size = 2 + 2;");
-            (
-                WORLD_SERVER_MESSAGE_ENUM_NAME,
-                format!("{}read_unencrypted", it.prefix()),
-                format!("{}write_unencrypted_server", it.prefix()),
-            )
-        }
-        ContainerType::CMsg(_) => {
-            s.wln("let header_size = 2 + 4;");
-            (
-                WORLD_CLIENT_MESSAGE_ENUM_NAME,
-                format!("{}read_unencrypted", it.prefix()),
-                format!("{}write_unencrypted_client", it.prefix()),
-            )
-        }
+        ContainerType::CLogin(_) => (
+            LOGIN_CLIENT_MESSAGE_ENUM_NAME,
+            format!("{}read", it.prefix()),
+            format!("{}write", it.prefix()),
+        ),
+        ContainerType::SLogin(_) => (
+            LOGIN_SERVER_MESSAGE_ENUM_NAME,
+            format!("{}read", it.prefix()),
+            format!("{}write", it.prefix()),
+        ),
+        ContainerType::SMsg(_) => (
+            WORLD_SERVER_MESSAGE_ENUM_NAME,
+            format!("{}read_unencrypted", it.prefix()),
+            format!("{}write_unencrypted_server", it.prefix()),
+        ),
+        ContainerType::CMsg(_) => (
+            WORLD_CLIENT_MESSAGE_ENUM_NAME,
+            format!("{}read_unencrypted", it.prefix()),
+            format!("{}write_unencrypted_client", it.prefix()),
+        ),
         _ => unimplemented!(),
     };
 
@@ -215,7 +219,7 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, it: ImplType, i:
         // Size reports correct length
         match e.is_constant_sized() {
             false => {
-                s.wln(format!("assert_eq!(t.size() + header_size, RAW{i}.len());"));
+                s.wln(format!("assert_eq!(t.size() + HEADER_SIZE, RAW{i}.len());"));
             }
             true => {
                 let size = if e.sizes().maximum() == 0 {
@@ -224,7 +228,7 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, it: ImplType, i:
                     format!("{} + ", e.sizes().maximum())
                 };
 
-                s.wln(format!("assert_eq!({size}header_size, RAW{i}.len());",));
+                s.wln(format!("assert_eq!({size}HEADER_SIZE, RAW{i}.len());",));
             }
         }
         s.newline();

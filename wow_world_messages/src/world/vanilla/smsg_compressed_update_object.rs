@@ -242,6 +242,7 @@ mod test {
     use crate::vanilla::{UpdateMask, UpdateContainer, UpdateItem, UpdateCorpse, UpdateGameObject, UpdateDynamicObject, UpdateUnit, UpdatePlayer};
     use crate::vanilla::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 2;
     const RAW0: [u8; 139] = [ 0x00, 0x89, 0xF6, 0x01, 0x3C, 0x01, 0x00, 0x00, 0x78,
          0x01, 0x63, 0x61, 0x60, 0x60, 0x60, 0x64, 0x3A, 0xEC, 0x11, 0x78, 0x40,
          0x9E, 0x35, 0x08, 0xC8, 0x86, 0x03, 0xBF, 0x33, 0x0D, 0x0E, 0x8C, 0x40,
@@ -409,7 +410,6 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_COMPRESSED_UPDATE_OBJECT0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_COMPRESSED_UPDATE_OBJECT(t) => t,
@@ -436,7 +436,6 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_COMPRESSED_UPDATE_OBJECT0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_COMPRESSED_UPDATE_OBJECT(t) => t,
@@ -463,7 +462,6 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_COMPRESSED_UPDATE_OBJECT0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_COMPRESSED_UPDATE_OBJECT(t) => t,

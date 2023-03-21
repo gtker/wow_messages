@@ -93,6 +93,7 @@ mod test {
     use crate::wrath::opcodes::ClientOpcodeMessage;
     use crate::wrath::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 4;
     const RAW0: [u8; 38] = [ 0x00, 0x24, 0x08, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x80, 0x3F, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x40,
@@ -118,7 +119,6 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_WORLD_TELEPORT0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
@@ -131,7 +131,7 @@ mod test {
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
-        assert_eq!(32 + header_size, RAW0.len());
+        assert_eq!(32 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -144,7 +144,6 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_WORLD_TELEPORT0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
@@ -157,7 +156,7 @@ mod test {
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
-        assert_eq!(32 + header_size, RAW0.len());
+        assert_eq!(32 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -170,7 +169,6 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_WORLD_TELEPORT0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
@@ -183,7 +181,7 @@ mod test {
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
-        assert_eq!(32 + header_size, RAW0.len());
+        assert_eq!(32 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -216,7 +214,6 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_WORLD_TELEPORT1() {
         let expected = expected1();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
@@ -229,7 +226,7 @@ mod test {
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
-        assert_eq!(32 + header_size, RAW1.len());
+        assert_eq!(32 + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -242,7 +239,6 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_WORLD_TELEPORT1() {
         let expected = expected1();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
@@ -255,7 +251,7 @@ mod test {
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
-        assert_eq!(32 + header_size, RAW1.len());
+        assert_eq!(32 + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -268,7 +264,6 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_WORLD_TELEPORT1() {
         let expected = expected1();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_WORLD_TELEPORT(t) => t,
@@ -281,7 +276,7 @@ mod test {
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
-        assert_eq!(32 + header_size, RAW1.len());
+        assert_eq!(32 + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

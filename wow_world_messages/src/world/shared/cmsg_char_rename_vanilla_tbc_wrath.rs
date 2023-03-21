@@ -83,6 +83,7 @@ mod test_vanilla {
     use crate::Guid;
     use crate::vanilla::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 4;
     const RAW0: [u8; 23] = [ 0x00, 0x15, 0xC7, 0x02, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65,
          0x66, 0x00, ];
@@ -100,7 +101,6 @@ mod test_vanilla {
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_CHAR_RENAME0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_CHAR_RENAME(t) => t,
@@ -110,7 +110,7 @@ mod test_vanilla {
         assert_eq!(t.character, expected.character);
         assert_eq!(t.new_name, expected.new_name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -123,7 +123,6 @@ mod test_vanilla {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_CHAR_RENAME0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_CHAR_RENAME(t) => t,
@@ -133,7 +132,7 @@ mod test_vanilla {
         assert_eq!(t.character, expected.character);
         assert_eq!(t.new_name, expected.new_name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -146,7 +145,6 @@ mod test_vanilla {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_CHAR_RENAME0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_CHAR_RENAME(t) => t,
@@ -156,7 +154,7 @@ mod test_vanilla {
         assert_eq!(t.character, expected.character);
         assert_eq!(t.new_name, expected.new_name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -175,6 +173,7 @@ mod test_tbc {
     use crate::Guid;
     use crate::tbc::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 4;
     const RAW0: [u8; 23] = [ 0x00, 0x15, 0xC7, 0x02, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65,
          0x66, 0x00, ];
@@ -192,7 +191,6 @@ mod test_tbc {
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_CHAR_RENAME0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_CHAR_RENAME(t) => t,
@@ -202,7 +200,7 @@ mod test_tbc {
         assert_eq!(t.character, expected.character);
         assert_eq!(t.new_name, expected.new_name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -215,7 +213,6 @@ mod test_tbc {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_CHAR_RENAME0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_CHAR_RENAME(t) => t,
@@ -225,7 +222,7 @@ mod test_tbc {
         assert_eq!(t.character, expected.character);
         assert_eq!(t.new_name, expected.new_name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -238,7 +235,6 @@ mod test_tbc {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_CHAR_RENAME0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_CHAR_RENAME(t) => t,
@@ -248,7 +244,7 @@ mod test_tbc {
         assert_eq!(t.character, expected.character);
         assert_eq!(t.new_name, expected.new_name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -267,6 +263,7 @@ mod test_wrath {
     use crate::Guid;
     use crate::wrath::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 4;
     const RAW0: [u8; 23] = [ 0x00, 0x15, 0xC7, 0x02, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65,
          0x66, 0x00, ];
@@ -284,7 +281,6 @@ mod test_wrath {
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_CHAR_RENAME0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_CHAR_RENAME(t) => t,
@@ -294,7 +290,7 @@ mod test_wrath {
         assert_eq!(t.character, expected.character);
         assert_eq!(t.new_name, expected.new_name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -307,7 +303,6 @@ mod test_wrath {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_CHAR_RENAME0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_CHAR_RENAME(t) => t,
@@ -317,7 +312,7 @@ mod test_wrath {
         assert_eq!(t.character, expected.character);
         assert_eq!(t.new_name, expected.new_name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -330,7 +325,6 @@ mod test_wrath {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_CHAR_RENAME0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_CHAR_RENAME(t) => t,
@@ -340,7 +334,7 @@ mod test_wrath {
         assert_eq!(t.character, expected.character);
         assert_eq!(t.new_name, expected.new_name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

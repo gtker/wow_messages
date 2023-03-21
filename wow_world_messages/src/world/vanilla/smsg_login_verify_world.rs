@@ -75,6 +75,7 @@ mod test {
     use crate::vanilla::opcodes::ServerOpcodeMessage;
     use crate::vanilla::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 2;
     const RAW0: [u8; 24] = [ 0x00, 0x16, 0x36, 0x02, 0x00, 0x00, 0x00, 0x00, 0xCD,
          0xD7, 0x0B, 0xC6, 0x35, 0x7E, 0x04, 0xC3, 0xF9, 0x0F, 0xA7, 0x42, 0x00,
          0x00, 0x00, 0x00, ];
@@ -97,7 +98,6 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_LOGIN_VERIFY_WORLD0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(t) => t,
@@ -108,7 +108,7 @@ mod test {
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
-        assert_eq!(20 + header_size, RAW0.len());
+        assert_eq!(20 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -121,7 +121,6 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_LOGIN_VERIFY_WORLD0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(t) => t,
@@ -132,7 +131,7 @@ mod test {
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
-        assert_eq!(20 + header_size, RAW0.len());
+        assert_eq!(20 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -145,7 +144,6 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_LOGIN_VERIFY_WORLD0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_LOGIN_VERIFY_WORLD(t) => t,
@@ -156,7 +154,7 @@ mod test {
         assert_eq!(t.position, expected.position);
         assert_eq!(t.orientation, expected.orientation);
 
-        assert_eq!(20 + header_size, RAW0.len());
+        assert_eq!(20 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

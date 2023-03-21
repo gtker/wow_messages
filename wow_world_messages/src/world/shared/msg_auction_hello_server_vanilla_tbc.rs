@@ -64,6 +64,7 @@ mod test_vanilla {
     use crate::Guid;
     use crate::vanilla::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 2;
     const RAW0: [u8; 16] = [ 0x00, 0x0E, 0x55, 0x02, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE,
          0xAD, 0xDE, 0x00, 0x12, 0x00, 0x00, 0x00, ];
 
@@ -80,7 +81,6 @@ mod test_vanilla {
     #[cfg_attr(feature = "sync", test)]
     fn MSG_AUCTION_HELLO_Server0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ServerOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
@@ -90,7 +90,7 @@ mod test_vanilla {
         assert_eq!(t.auctioneer, expected.auctioneer);
         assert_eq!(t.auction_house_id, expected.auction_house_id);
 
-        assert_eq!(12 + header_size, RAW0.len());
+        assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -103,7 +103,6 @@ mod test_vanilla {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_AUCTION_HELLO_Server0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
@@ -113,7 +112,7 @@ mod test_vanilla {
         assert_eq!(t.auctioneer, expected.auctioneer);
         assert_eq!(t.auction_house_id, expected.auction_house_id);
 
-        assert_eq!(12 + header_size, RAW0.len());
+        assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -126,7 +125,6 @@ mod test_vanilla {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_AUCTION_HELLO_Server0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
@@ -136,7 +134,7 @@ mod test_vanilla {
         assert_eq!(t.auctioneer, expected.auctioneer);
         assert_eq!(t.auction_house_id, expected.auction_house_id);
 
-        assert_eq!(12 + header_size, RAW0.len());
+        assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -155,6 +153,7 @@ mod test_tbc {
     use crate::Guid;
     use crate::tbc::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 2;
     const RAW0: [u8; 16] = [ 0x00, 0x0E, 0x55, 0x02, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE,
          0xAD, 0xDE, 0x00, 0x12, 0x00, 0x00, 0x00, ];
 
@@ -171,7 +170,6 @@ mod test_tbc {
     #[cfg_attr(feature = "sync", test)]
     fn MSG_AUCTION_HELLO_Server0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ServerOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
@@ -181,7 +179,7 @@ mod test_tbc {
         assert_eq!(t.auctioneer, expected.auctioneer);
         assert_eq!(t.auction_house_id, expected.auction_house_id);
 
-        assert_eq!(12 + header_size, RAW0.len());
+        assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -194,7 +192,6 @@ mod test_tbc {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_AUCTION_HELLO_Server0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
@@ -204,7 +201,7 @@ mod test_tbc {
         assert_eq!(t.auctioneer, expected.auctioneer);
         assert_eq!(t.auction_house_id, expected.auction_house_id);
 
-        assert_eq!(12 + header_size, RAW0.len());
+        assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -217,7 +214,6 @@ mod test_tbc {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_AUCTION_HELLO_Server0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
@@ -227,7 +223,7 @@ mod test_tbc {
         assert_eq!(t.auctioneer, expected.auctioneer);
         assert_eq!(t.auction_house_id, expected.auction_house_id);
 
-        assert_eq!(12 + header_size, RAW0.len());
+        assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

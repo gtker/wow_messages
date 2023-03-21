@@ -129,6 +129,7 @@ mod test {
     use crate::Guid;
     use crate::vanilla::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 2;
     const RAW0: [u8; 30] = [ 0x00, 0x1C, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE, 0x00,
          0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x00, 0x01, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
@@ -150,7 +151,6 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_NAME_QUERY_RESPONSE0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
@@ -164,7 +164,7 @@ mod test {
         assert_eq!(t.gender, expected.gender);
         assert_eq!(t.class, expected.class);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -177,7 +177,6 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_NAME_QUERY_RESPONSE0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
@@ -191,7 +190,7 @@ mod test {
         assert_eq!(t.gender, expected.gender);
         assert_eq!(t.class, expected.class);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -204,7 +203,6 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_NAME_QUERY_RESPONSE0() {
         let expected = expected0();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
@@ -218,7 +216,7 @@ mod test {
         assert_eq!(t.gender, expected.gender);
         assert_eq!(t.class, expected.class);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -247,7 +245,6 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_NAME_QUERY_RESPONSE1() {
         let expected = expected1();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
@@ -261,7 +258,7 @@ mod test {
         assert_eq!(t.gender, expected.gender);
         assert_eq!(t.class, expected.class);
 
-        assert_eq!(t.size() + header_size, RAW1.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -274,7 +271,6 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_NAME_QUERY_RESPONSE1() {
         let expected = expected1();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
@@ -288,7 +284,7 @@ mod test {
         assert_eq!(t.gender, expected.gender);
         assert_eq!(t.class, expected.class);
 
-        assert_eq!(t.size() + header_size, RAW1.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -301,7 +297,6 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_NAME_QUERY_RESPONSE1() {
         let expected = expected1();
-        let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_NAME_QUERY_RESPONSE(t) => t,
@@ -315,7 +310,7 @@ mod test {
         assert_eq!(t.gender, expected.gender);
         assert_eq!(t.class, expected.class);
 
-        assert_eq!(t.size() + header_size, RAW1.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

@@ -144,6 +144,7 @@ mod test_version_2 {
     use super::super::*;
     use crate::logon::version_2::opcodes::ClientOpcodeMessage;
 
+    const HEADER_SIZE: usize = 1;
     const RAW0: [u8; 5] = [ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> CMD_REALM_LIST_Client {
@@ -157,7 +158,6 @@ mod test_version_2 {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Client0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
@@ -165,7 +165,7 @@ mod test_version_2 {
         };
 
 
-        assert_eq!(4 + header_size, RAW0.len());
+        assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -178,7 +178,6 @@ mod test_version_2 {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Client0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
@@ -186,7 +185,7 @@ mod test_version_2 {
         };
 
 
-        assert_eq!(4 + header_size, RAW0.len());
+        assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -199,7 +198,6 @@ mod test_version_2 {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Client0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
@@ -207,7 +205,7 @@ mod test_version_2 {
         };
 
 
-        assert_eq!(4 + header_size, RAW0.len());
+        assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -225,6 +223,7 @@ mod test_version_3 {
     use super::super::*;
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
+    const HEADER_SIZE: usize = 1;
     const RAW0: [u8; 5] = [ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> CMD_REALM_LIST_Client {
@@ -238,7 +237,6 @@ mod test_version_3 {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Client0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
@@ -246,7 +244,7 @@ mod test_version_3 {
         };
 
 
-        assert_eq!(4 + header_size, RAW0.len());
+        assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -259,7 +257,6 @@ mod test_version_3 {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Client0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
@@ -267,7 +264,7 @@ mod test_version_3 {
         };
 
 
-        assert_eq!(4 + header_size, RAW0.len());
+        assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -280,7 +277,6 @@ mod test_version_3 {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Client0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
@@ -288,7 +284,7 @@ mod test_version_3 {
         };
 
 
-        assert_eq!(4 + header_size, RAW0.len());
+        assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -306,6 +302,7 @@ mod test_version_8 {
     use super::super::*;
     use crate::logon::version_8::opcodes::ClientOpcodeMessage;
 
+    const HEADER_SIZE: usize = 1;
     const RAW0: [u8; 5] = [ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> CMD_REALM_LIST_Client {
@@ -319,7 +316,6 @@ mod test_version_8 {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Client0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
@@ -327,7 +323,7 @@ mod test_version_8 {
         };
 
 
-        assert_eq!(4 + header_size, RAW0.len());
+        assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -340,7 +336,6 @@ mod test_version_8 {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Client0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
@@ -348,7 +343,7 @@ mod test_version_8 {
         };
 
 
-        assert_eq!(4 + header_size, RAW0.len());
+        assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -361,7 +356,6 @@ mod test_version_8 {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Client0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
@@ -369,7 +363,7 @@ mod test_version_8 {
         };
 
 
-        assert_eq!(4 + header_size, RAW0.len());
+        assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

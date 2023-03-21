@@ -432,6 +432,7 @@ mod test_vanilla {
     use crate::vanilla::opcodes::ClientOpcodeMessage;
     use crate::vanilla::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 4;
     const RAW0: [u8; 174] = [ 0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x88, 0x02, 0xD8, 0x49, 0x88,
          0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7, 0x8A, 0xDB, 0xA4, 0xFB,
@@ -540,7 +541,6 @@ mod test_vanilla {
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_AUTH_SESSION0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
@@ -572,7 +572,6 @@ mod test_vanilla {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_AUTH_SESSION0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
@@ -604,7 +603,6 @@ mod test_vanilla {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_AUTH_SESSION0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
@@ -641,6 +639,7 @@ mod test_tbc {
     use crate::tbc::opcodes::ClientOpcodeMessage;
     use crate::tbc::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 4;
     const RAW0: [u8; 174] = [ 0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x88, 0x02, 0xD8, 0x49, 0x88,
          0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7, 0x8A, 0xDB, 0xA4, 0xFB,
@@ -749,7 +748,6 @@ mod test_tbc {
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_AUTH_SESSION0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
@@ -781,7 +779,6 @@ mod test_tbc {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_AUTH_SESSION0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
@@ -813,7 +810,6 @@ mod test_tbc {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_AUTH_SESSION0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,

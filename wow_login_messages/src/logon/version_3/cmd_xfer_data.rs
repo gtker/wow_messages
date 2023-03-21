@@ -171,6 +171,7 @@ mod test {
     use super::super::*;
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;
 
+    const HEADER_SIZE: usize = 1;
     const RAW0: [u8; 4] = [ 0x31, 0x01, 0x00, 0xFF, ];
 
     pub(crate) fn expected0() -> CMD_XFER_DATA {
@@ -185,7 +186,6 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_XFER_DATA0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
@@ -194,7 +194,7 @@ mod test {
 
         assert_eq!(t.data, expected.data);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -207,7 +207,6 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_XFER_DATA0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
@@ -216,7 +215,7 @@ mod test {
 
         assert_eq!(t.data, expected.data);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -229,7 +228,6 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_XFER_DATA0() {
         let expected = expected0();
-        let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
@@ -238,7 +236,7 @@ mod test {
 
         assert_eq!(t.data, expected.data);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -260,7 +258,6 @@ mod test {
     #[cfg_attr(feature = "sync", test)]
     fn CMD_XFER_DATA1() {
         let expected = expected1();
-        let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
@@ -269,7 +266,7 @@ mod test {
 
         assert_eq!(t.data, expected.data);
 
-        assert_eq!(t.size() + header_size, RAW1.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.write(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -282,7 +279,6 @@ mod test {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_XFER_DATA1() {
         let expected = expected1();
-        let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
@@ -291,7 +287,7 @@ mod test {
 
         assert_eq!(t.data, expected.data);
 
-        assert_eq!(t.size() + header_size, RAW1.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.tokio_write(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -304,7 +300,6 @@ mod test {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_XFER_DATA1() {
         let expected = expected1();
-        let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::CMD_XFER_DATA(t) => t,
@@ -313,7 +308,7 @@ mod test {
 
         assert_eq!(t.data, expected.data);
 
-        assert_eq!(t.size() + header_size, RAW1.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
         expected.astd_write(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();

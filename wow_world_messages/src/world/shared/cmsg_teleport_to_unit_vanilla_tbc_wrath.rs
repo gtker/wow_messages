@@ -70,6 +70,7 @@ mod test_vanilla {
     use crate::vanilla::opcodes::ClientOpcodeMessage;
     use crate::vanilla::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 4;
     const RAW0: [u8; 13] = [ 0x00, 0x0B, 0x09, 0x00, 0x00, 0x00, 0x56, 0x75, 0x72,
          0x74, 0x6E, 0x65, 0x00, ];
 
@@ -85,7 +86,6 @@ mod test_vanilla {
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_TELEPORT_TO_UNIT0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
@@ -94,7 +94,7 @@ mod test_vanilla {
 
         assert_eq!(t.name, expected.name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -107,7 +107,6 @@ mod test_vanilla {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_TELEPORT_TO_UNIT0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
@@ -116,7 +115,7 @@ mod test_vanilla {
 
         assert_eq!(t.name, expected.name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -129,7 +128,6 @@ mod test_vanilla {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_TELEPORT_TO_UNIT0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
@@ -138,7 +136,7 @@ mod test_vanilla {
 
         assert_eq!(t.name, expected.name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -156,6 +154,7 @@ mod test_tbc {
     use crate::tbc::opcodes::ClientOpcodeMessage;
     use crate::tbc::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 4;
     const RAW0: [u8; 13] = [ 0x00, 0x0B, 0x09, 0x00, 0x00, 0x00, 0x56, 0x75, 0x72,
          0x74, 0x6E, 0x65, 0x00, ];
 
@@ -171,7 +170,6 @@ mod test_tbc {
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_TELEPORT_TO_UNIT0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
@@ -180,7 +178,7 @@ mod test_tbc {
 
         assert_eq!(t.name, expected.name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -193,7 +191,6 @@ mod test_tbc {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_TELEPORT_TO_UNIT0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
@@ -202,7 +199,7 @@ mod test_tbc {
 
         assert_eq!(t.name, expected.name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -215,7 +212,6 @@ mod test_tbc {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_TELEPORT_TO_UNIT0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
@@ -224,7 +220,7 @@ mod test_tbc {
 
         assert_eq!(t.name, expected.name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -242,6 +238,7 @@ mod test_wrath {
     use crate::wrath::opcodes::ClientOpcodeMessage;
     use crate::wrath::{ClientMessage, ServerMessage};
 
+    const HEADER_SIZE: usize = 2 + 4;
     const RAW0: [u8; 13] = [ 0x00, 0x0B, 0x09, 0x00, 0x00, 0x00, 0x56, 0x75, 0x72,
          0x74, 0x6E, 0x65, 0x00, ];
 
@@ -257,7 +254,6 @@ mod test_wrath {
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_TELEPORT_TO_UNIT0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
@@ -266,7 +262,7 @@ mod test_wrath {
 
         assert_eq!(t.name, expected.name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
@@ -279,7 +275,6 @@ mod test_wrath {
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_TELEPORT_TO_UNIT0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
@@ -288,7 +283,7 @@ mod test_wrath {
 
         assert_eq!(t.name, expected.name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
@@ -301,7 +296,6 @@ mod test_wrath {
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_TELEPORT_TO_UNIT0() {
         let expected = expected0();
-        let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
@@ -310,7 +304,7 @@ mod test_wrath {
 
         assert_eq!(t.name, expected.name);
 
-        assert_eq!(t.size() + header_size, RAW0.len());
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
