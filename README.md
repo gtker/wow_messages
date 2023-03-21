@@ -18,7 +18,7 @@ The project is split into the subdirectories:
 * `intermediate_representation.json`: **UNRELEASED** contains a machine readable version of the `wowm` files.
 * `examples` Example servers and clients that will work with 1.12, 2.4.3 and 3.3.5 clients.
 
-Run `cargo run -p wow_message_parser && cargo test` to "compile" all libraries and ensure that there are no issues.
+Run `cargo gen && cargo test` to "compile" all libraries and ensure that there are no issues.
 
 The following environment variables can be used with the parser:
 

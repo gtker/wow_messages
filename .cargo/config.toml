@@ -1,0 +1,2 @@
+[alias]
+gen = "run --package wow_message_parser --release"
