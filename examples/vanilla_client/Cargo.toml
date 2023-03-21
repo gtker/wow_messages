@@ -2,6 +2,7 @@
 name = "simple_client"
 version = "0.1.0"
 edition = "2021"
+publish = false
 
 [dependencies]
 wow_login_messages = { path = "../../wow_login_messages", features = ["sync"] }

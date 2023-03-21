@@ -5,6 +5,7 @@ edition.workspace = true
 authors.workspace = true
 repository.workspace = true
 license.workspace = true
+publish = false
 
 [dependencies]
 pest = "2.0"
