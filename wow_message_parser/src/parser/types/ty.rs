@@ -100,8 +100,8 @@ impl Type {
     pub(crate) fn rust_str(&self) -> String {
         match self {
             Type::Array(s) => s.rust_str(),
-            Type::Enum { e, .. } | Type::Flag { e, .. } => e.name().to_string(),
-            Type::Struct { e } => e.name().to_string(),
+
+            Type::Enum { .. } | Type::Flag { .. } | Type::Struct { .. } => self.str(),
 
             _ => self.to_parsed_type().rust_str(),
         }
