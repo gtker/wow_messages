@@ -82,10 +82,3 @@ pub struct CMSG_TOGGLE_PVP_set {
     pub enable_pvp: bool,
 }
 
-impl CMSG_TOGGLE_PVP_set {
-    pub(crate) fn size(&self) -> usize {
-        1 // enable_pvp: Bool
-    }
-
-}
-

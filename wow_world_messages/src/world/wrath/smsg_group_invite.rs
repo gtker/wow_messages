@@ -124,12 +124,3 @@ pub struct SMSG_GROUP_INVITE_unknown {
     pub unknown2: u32,
 }
 
-impl SMSG_GROUP_INVITE_unknown {
-    pub(crate) fn size(&self) -> usize {
-        4 // unknown1: u32
-        + 1 // count: u8
-        + 4 // unknown2: u32
-    }
-
-}
-

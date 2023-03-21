@@ -80,10 +80,3 @@ pub struct MSG_RAID_READY_CHECK_Client_answer {
     pub state: u8,
 }
 
-impl MSG_RAID_READY_CHECK_Client_answer {
-    pub(crate) fn size(&self) -> usize {
-        1 // state: u8
-    }
-
-}
-

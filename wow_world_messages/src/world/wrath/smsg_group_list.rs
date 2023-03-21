@@ -237,15 +237,3 @@ pub struct SMSG_GROUP_LIST_group_not_empty {
     pub heroic: bool,
 }
 
-impl SMSG_GROUP_LIST_group_not_empty {
-    pub(crate) fn size(&self) -> usize {
-        1 // loot_setting: GroupLootSetting
-        + 8 // master_loot: Guid
-        + 1 // loot_threshold: ItemQuality
-        + 1 // difficulty: DungeonDifficulty
-        + 1 // raid_difficulty: RaidDifficulty
-        + 1 // heroic: Bool
-    }
-
-}
-

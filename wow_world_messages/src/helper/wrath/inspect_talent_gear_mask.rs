@@ -54,7 +54,7 @@ impl InspectTalentGearMask {
         self.inspect_talent_gears.as_mut_slice()
     }
 
-    pub fn size(&self) -> usize {
+    pub const fn size(&self) -> usize {
         const MASK_VARIABLE_SIZE: usize = std::mem::size_of::<u16>();
         let mut auras = 0;
 

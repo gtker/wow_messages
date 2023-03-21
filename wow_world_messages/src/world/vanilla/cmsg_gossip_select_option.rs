@@ -104,10 +104,3 @@ pub struct CMSG_GOSSIP_SELECT_OPTION_unknown {
     pub code: String,
 }
 
-impl CMSG_GOSSIP_SELECT_OPTION_unknown {
-    pub(crate) fn size(&self) -> usize {
-        self.code.len() + 1 // code: CString
-    }
-
-}
-

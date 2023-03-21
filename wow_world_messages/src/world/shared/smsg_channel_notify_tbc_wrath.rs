@@ -117,11 +117,3 @@ pub struct SMSG_CHANNEL_NOTIFY_unknown1 {
     pub unkwown3: u32,
 }
 
-impl SMSG_CHANNEL_NOTIFY_unknown1 {
-    pub(crate) fn size(&self) -> usize {
-        4 // unknown2: u32
-        + 4 // unkwown3: u32
-    }
-
-}
-

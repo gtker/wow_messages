@@ -253,23 +253,3 @@ pub struct SMSG_CREATURE_QUERY_RESPONSE_found {
     pub racial_leader: u8,
 }
 
-impl SMSG_CREATURE_QUERY_RESPONSE_found {
-    pub(crate) fn size(&self) -> usize {
-        self.name1.len() + 1 // name1: CString
-        + self.name2.len() + 1 // name2: CString
-        + self.name3.len() + 1 // name3: CString
-        + self.name4.len() + 1 // name4: CString
-        + self.sub_name.len() + 1 // sub_name: CString
-        + 4 // type_flags: u32
-        + 4 // creature_type: u32
-        + 4 // creature_family: CreatureFamily
-        + 4 // creature_rank: u32
-        + 4 // unknown0: u32
-        + 4 // spell_data_id: u32
-        + 4 // display_id: u32
-        + 1 // civilian: u8
-        + 1 // racial_leader: u8
-    }
-
-}
-

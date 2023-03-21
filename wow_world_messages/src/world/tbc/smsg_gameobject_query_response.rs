@@ -243,20 +243,3 @@ pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
     pub gameobject_size: f32,
 }
 
-impl SMSG_GAMEOBJECT_QUERY_RESPONSE_found {
-    pub(crate) fn size(&self) -> usize {
-        4 // info_type: u32
-        + 4 // display_id: u32
-        + self.name1.len() + 1 // name1: CString
-        + self.name2.len() + 1 // name2: CString
-        + self.name3.len() + 1 // name3: CString
-        + self.name4.len() + 1 // name4: CString
-        + self.icon_name.len() + 1 // icon_name: CString
-        + self.cast_bar_caption.len() + 1 // cast_bar_caption: CString
-        + self.unknown.len() + 1 // unknown: CString
-        + 24 // raw_data: u32[6]
-        + 4 // gameobject_size: f32
-    }
-
-}
-

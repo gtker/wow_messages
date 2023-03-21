@@ -3668,7 +3668,7 @@ impl ClientOpcodeMessage {
         }
     }
 
-    pub fn movement_info(&self) -> Option<&MovementInfo> {
+    pub const fn movement_info(&self) -> Option<&MovementInfo> {
         match self {
             Self::CMSG_MOVE_FALL_RESET(c) => Some(&c.info),
             Self::CMSG_MOVE_SET_FLY(c) => Some(&c.info),
@@ -11134,7 +11134,7 @@ impl ServerOpcodeMessage {
         }
     }
 
-    pub fn movement_info(&self) -> Option<&MovementInfo> {
+    pub const fn movement_info(&self) -> Option<&MovementInfo> {
         match self {
             Self::MSG_MOVE_ROOT(c) => Some(&c.info),
             Self::MSG_MOVE_UNROOT(c) => Some(&c.info),

@@ -102,10 +102,3 @@ pub struct CMSG_TEST_OPTIONAL_server {
     pub optional_u8: u8,
 }
 
-impl CMSG_TEST_OPTIONAL_server {
-    pub(crate) fn size(&self) -> usize {
-        1 // optional_u8: u8
-    }
-
-}
-

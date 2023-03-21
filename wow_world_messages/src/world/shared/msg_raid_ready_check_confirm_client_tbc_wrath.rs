@@ -77,10 +77,3 @@ pub struct MSG_RAID_READY_CHECK_CONFIRM_Client_set {
     pub state: u8,
 }
 
-impl MSG_RAID_READY_CHECK_CONFIRM_Client_set {
-    pub(crate) fn size(&self) -> usize {
-        1 // state: u8
-    }
-
-}
-

@@ -513,8 +513,6 @@ impl RustType {
             | RustType::NamedGuid
             | RustType::AchievementDoneArray
             | RustType::AchievementInProgressArray
-            | RustType::EnchantMask
-            | RustType::InspectTalentGearMask
             | RustType::VariableItemRandomProperty
             | RustType::AddonArray
             | RustType::String

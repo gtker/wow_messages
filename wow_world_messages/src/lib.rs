@@ -28,7 +28,6 @@ pub(crate) mod util;
     clippy::single_match,
     clippy::large_enum_variant,
     clippy::enum_variant_names,
-    clippy::missing_const_for_fn,
     clippy::approx_constant,
     clippy::upper_case_acronyms,
     clippy::needless_borrow,

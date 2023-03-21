@@ -502,7 +502,7 @@ fn world_inner(s: &mut Writer, v: &[&Container], cd: &str, it: ImplType, enc_pre
 }
 
 fn world_movement_info(s: &mut Writer, v: &[&Container]) {
-    s.funcn_pub("movement_info(&self)", "Option<&MovementInfo>", |s| {
+    s.funcn_pub_const("movement_info(&self)", "Option<&MovementInfo>", |s| {
         s.body("match self", |s| {
             for container in v {
                 if container.is_pure_movement_info() {

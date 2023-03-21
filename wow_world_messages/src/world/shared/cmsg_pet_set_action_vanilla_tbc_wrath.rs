@@ -124,11 +124,3 @@ pub struct CMSG_PET_SET_ACTION_extra {
     pub data2: u32,
 }
 
-impl CMSG_PET_SET_ACTION_extra {
-    pub(crate) fn size(&self) -> usize {
-        4 // position2: u32
-        + 4 // data2: u32
-    }
-
-}
-

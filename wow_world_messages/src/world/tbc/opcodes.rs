@@ -3164,7 +3164,7 @@ impl ClientOpcodeMessage {
         }
     }
 
-    pub fn movement_info(&self) -> Option<&MovementInfo> {
+    pub const fn movement_info(&self) -> Option<&MovementInfo> {
         match self {
             Self::MSG_MOVE_START_FORWARD(c) => Some(&c.info),
             Self::MSG_MOVE_START_BACKWARD(c) => Some(&c.info),

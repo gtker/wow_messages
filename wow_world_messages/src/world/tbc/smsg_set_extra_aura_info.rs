@@ -116,13 +116,3 @@ pub struct SMSG_SET_EXTRA_AURA_INFO_aura {
     pub remaining_duration: u32,
 }
 
-impl SMSG_SET_EXTRA_AURA_INFO_aura {
-    pub(crate) fn size(&self) -> usize {
-        1 // slot: u8
-        + 4 // spell: u32
-        + 4 // max_duration: u32
-        + 4 // remaining_duration: u32
-    }
-
-}
-

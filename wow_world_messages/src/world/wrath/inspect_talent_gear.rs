@@ -72,7 +72,7 @@ impl InspectTalentGear {
 }
 
 impl InspectTalentGear {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // item: u32
         + self.enchant_mask.size() // enchant_mask: EnchantMask
         + 2 // unknown1: u16
