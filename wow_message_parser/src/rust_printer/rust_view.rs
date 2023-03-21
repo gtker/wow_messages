@@ -503,8 +503,7 @@ impl RustType {
                 } else {
                     enumerators
                         .iter()
-                        .map(|a| a.members_in_struct())
-                        .flatten()
+                        .flat_map(|a| a.members_in_struct())
                         .all(|a| a.ty().size_is_const_fn())
                 }
             }
@@ -911,8 +910,7 @@ impl<'a> RustDefiner<'a> {
     pub(crate) fn size_is_const_fn(&self) -> bool {
         self.enumerators()
             .iter()
-            .map(|a| a.members_in_struct())
-            .flatten()
+            .flat_map(|a| a.members_in_struct())
             .all(|a| a.ty().size_is_const_fn())
     }
 
