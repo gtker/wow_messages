@@ -606,10 +606,7 @@ fn print_container_field(
                 },
                 size = d.ty().doc_size_of(),
                 endian = d.ty().doc_endian_str(),
-                ty = ty,
                 name = d.name(),
-                description = description,
-                comment = comment,
             ));
 
             if let Some(size) = d.ty().sizes().is_constant() {
