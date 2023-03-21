@@ -56,13 +56,16 @@ impl Guid {
         })
     }
 
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         let mut amount_of_bytes = 1;
 
-        for i in 0..8 {
+        let mut i = 0;
+        while i < 8 {
             if (self.guid & (0xFF << (i * 8))) != 0 {
                 amount_of_bytes += 1;
             }
+
+            i += 1;
         }
 
         amount_of_bytes
