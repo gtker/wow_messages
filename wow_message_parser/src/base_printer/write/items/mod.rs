@@ -145,7 +145,7 @@ fn lib_functions(s: &mut Writer, ty_name: &str) {
     s.open_curly(format!(
         "pub const fn all_{ty_lower}s() -> &'static [{ty_name}]"
     ));
-    s.wln("data::DATA");
+    s.wln("data::Z________DATA");
     s.closing_curly();
     s.newline();
 }

@@ -63,7 +63,7 @@ pub(crate) fn all_items(
         optimizations,
     );
 
-    s.wln(format!("pub const DATA: &[{ty_name}] = &["));
+    s.wln(format!("pub const Z________DATA: &[{ty_name}] = &["));
 
     for item in items {
         if unobtainable(item) {

@@ -4918,7 +4918,7 @@ use wow_world_base::vanilla::{
     Spells,
 };
 
-pub const DATA: &[Item] = &[
+pub const Z________DATA: &[Item] = &[
 nb(25,BJ,"Worn Shortsword",1542,M,0,1,35,7,BA,A,A,2,1,I,0,E,C,0,0,1,0,0,0,0,0,0,0,0,0,0,DV,0,D,O,G,0,B,0,1,AG,0,0,H,W,F,0,0,QG,),
 nb(35,BN,"Bent Staff",472,M,0,1,47,9,AJ,A,A,2,1,I,0,E,C,0,0,1,0,0,0,0,0,0,0,0,0,0,DN,0,D,O,G,0,B,0,2,BH,0,0,H,25,F,0,0,AIN,),
 nb(36,BM,"Worn Mace",5194,M,0,1,38,7,BA,A,A,2,1,I,0,E,C,0,0,1,0,0,0,0,0,0,0,0,0,0,DV,0,D,O,G,0,B,0,2,AG,0,0,H,W,F,0,0,QG,),
