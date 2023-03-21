@@ -79,7 +79,7 @@
 //!
 
 #![forbid(unsafe_code)]
-#![deny(
+#![warn(
     clippy::complexity,
     clippy::correctness,
     clippy::perf,
