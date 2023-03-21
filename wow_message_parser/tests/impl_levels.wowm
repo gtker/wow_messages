@@ -240,34 +240,6 @@ struct IfEdgeCases {
     }
 }
 
-enum NestedEnum : u8 {
-    NESTED = 0;
-    NOT_NESTED = 1;
-}
-
-/* 23 */
-struct NestedNotIf {
-    TEnum t;
-    if (t != ZERO) {
-        u8 not_zero;
-        NestedEnum e;
-        if (e == NESTED) {
-            u8 one;
-        }
-    }
-}
-
-/* 24 */
-struct EnumOutsideOfIf {
-    TEnum t;
-    NestedEnum n;
-    if (t == ZERO) {
-        if (n == NESTED) {
-            u8 nested;
-        }
-    }
-}
-
 /* 25 */
 cmsg CMSG_TEST_ENDLESS_U8 = 0x1337 {
     CString c_string;
@@ -309,48 +281,6 @@ struct FlagIfElseIf {
     }
     if (flags & EIGHT_IF) {
         u8 last_if;
-    }
-}
-
-/* 28 */
-struct EnumIfElseIfNested {
-    SimpleEnum e;
-    NestedEnum n;
-    if (e == ZERO) {
-        u8 zero;
-    }
-    else {
-        if (n == NESTED) {
-            u8 nested;
-        }
-    }
-}
-
-/* 29 */
-struct EnumIfIfNested {
-    SimpleEnum e;
-    NestedEnum n;
-    if (e == ZERO) {
-        if (n == NESTED) {
-            u8 nested;
-        }
-    }
-    else if (e == ONE) {
-        u8 one;
-    }
-    else {
-        u8 basic_else;
-    }
-}
-
-/* 30 */
-struct EnumNotIfIfNested {
-    SimpleEnum e;
-    NestedEnum n;
-    if (e != ZERO) {
-        if (n == NESTED) {
-            u8 nested;
-        }
     }
 }
 

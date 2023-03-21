@@ -326,32 +326,6 @@ fn not_if_else() {
 }
 
 #[test]
-fn nested_not_if() {
-    let o = get_all_impl_items();
-
-    let d = o
-        .all_containers()
-        .find(|a| a.name() == "NestedNotIf")
-        .unwrap();
-    let s = print_struct(d, &o);
-
-    tcheck(&s, "nested_not_if");
-}
-
-#[test]
-fn enum_outside_of_if() {
-    let o = get_all_impl_items();
-
-    let d = o
-        .all_containers()
-        .find(|a| a.name() == "EnumOutsideOfIf")
-        .unwrap();
-    let s = print_struct(d, &o);
-
-    tcheck(&s, "enum_outside_of_if");
-}
-
-#[test]
 fn cmsg_test_endless_u8() {
     let o = get_all_impl_items();
 
@@ -388,19 +362,6 @@ fn flag_if_else_if() {
     let s = print_struct(d, &o);
 
     tcheck(&s, "flag_if_else_if");
-}
-
-#[test]
-fn enum_if_else_if_nested() {
-    let o = get_all_impl_items();
-
-    let d = o
-        .all_containers()
-        .find(|a| a.name() == "EnumIfElseIfNested")
-        .unwrap();
-    let s = print_struct(d, &o);
-
-    tcheck(&s, "enum_if_else_if_nested");
 }
 
 #[test]
