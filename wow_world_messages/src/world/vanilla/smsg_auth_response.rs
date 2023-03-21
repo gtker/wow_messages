@@ -656,14 +656,18 @@ mod test {
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0xEE, 0x01, 0x0D, ];
 
+    pub(crate) fn expected0() -> SMSG_AUTH_RESPONSE {
+        SMSG_AUTH_RESPONSE {
+            result: SMSG_AUTH_RESPONSE_WorldResult::AuthFailed,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 18.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_AUTH_RESPONSE0() {
-        let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSE_WorldResult::AuthFailed,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -685,10 +689,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_AUTH_RESPONSE0() {
-        let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSE_WorldResult::AuthFailed,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -710,10 +711,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_AUTH_RESPONSE0() {
-        let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSE_WorldResult::AuthFailed,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -733,16 +731,20 @@ mod test {
 
     const RAW1: [u8; 9] = [ 0x00, 0x07, 0xEE, 0x01, 0x1B, 0xEF, 0xBE, 0xAD, 0xDE, ];
 
+    pub(crate) fn expected1() -> SMSG_AUTH_RESPONSE {
+        SMSG_AUTH_RESPONSE {
+            result: SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
+                queue_position: 0xDEADBEEF,
+            },
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 29.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_AUTH_RESPONSE1() {
-        let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
-                queue_position: 0xDEADBEEF,
-            },
-        };
-
+        let expected = expected1();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -764,12 +766,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_AUTH_RESPONSE1() {
-        let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
-                queue_position: 0xDEADBEEF,
-            },
-        };
-
+        let expected = expected1();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -791,12 +788,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_AUTH_RESPONSE1() {
-        let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
-                queue_position: 0xDEADBEEF,
-            },
-        };
-
+        let expected = expected1();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -817,18 +809,22 @@ mod test {
     const RAW2: [u8; 14] = [ 0x00, 0x0C, 0xEE, 0x01, 0x0C, 0xEF, 0xBE, 0xAD, 0xDE,
          0x00, 0x00, 0x00, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 42.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn SMSG_AUTH_RESPONSE2() {
-        let expected = SMSG_AUTH_RESPONSE {
+    pub(crate) fn expected2() -> SMSG_AUTH_RESPONSE {
+        SMSG_AUTH_RESPONSE {
             result: SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
                 billing_flags: 0x0,
                 billing_rested: 0x0,
                 billing_time: 0xDEADBEEF,
             },
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 42.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_AUTH_RESPONSE2() {
+        let expected = expected2();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW2)).unwrap();
         let t = match t {
@@ -850,14 +846,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_AUTH_RESPONSE2() {
-        let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
-                billing_flags: 0x0,
-                billing_rested: 0x0,
-                billing_time: 0xDEADBEEF,
-            },
-        };
-
+        let expected = expected2();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW2)).await.unwrap();
         let t = match t {
@@ -879,14 +868,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_AUTH_RESPONSE2() {
-        let expected = SMSG_AUTH_RESPONSE {
-            result: SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
-                billing_flags: 0x0,
-                billing_rested: 0x0,
-                billing_time: 0xDEADBEEF,
-            },
-        };
-
+        let expected = expected2();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW2)).await.unwrap();
         let t = match t {

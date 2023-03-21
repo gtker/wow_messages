@@ -79,11 +79,8 @@ mod test {
          0xD7, 0x0B, 0xC6, 0x35, 0x7E, 0x04, 0xC3, 0xF9, 0x0F, 0xA7, 0x42, 0x00,
          0x00, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm` line 12.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn SMSG_LOGIN_VERIFY_WORLD0() {
-        let expected = SMSG_LOGIN_VERIFY_WORLD {
+    pub(crate) fn expected0() -> SMSG_LOGIN_VERIFY_WORLD {
+        SMSG_LOGIN_VERIFY_WORLD {
             map: Map::EasternKingdoms,
             position: Vector3d {
                 x: -8949.95_f32,
@@ -91,8 +88,15 @@ mod test {
                 z: 83.5312_f32,
             },
             orientation: 0_f32,
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm` line 12.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_LOGIN_VERIFY_WORLD0() {
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -116,16 +120,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_LOGIN_VERIFY_WORLD0() {
-        let expected = SMSG_LOGIN_VERIFY_WORLD {
-            map: Map::EasternKingdoms,
-            position: Vector3d {
-                x: -8949.95_f32,
-                y: -132.493_f32,
-                z: 83.5312_f32,
-            },
-            orientation: 0_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -149,16 +144,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_LOGIN_VERIFY_WORLD0() {
-        let expected = SMSG_LOGIN_VERIFY_WORLD {
-            map: Map::EasternKingdoms,
-            position: Vector3d {
-                x: -8949.95_f32,
-                y: -132.493_f32,
-                z: 83.5312_f32,
-            },
-            orientation: 0_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

@@ -98,11 +98,8 @@ mod test {
          0x00, 0x00, 0x00, 0x80, 0x3F, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x40,
          0x40, 0x00, 0x00, 0x80, 0x40, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 14.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMSG_WORLD_TELEPORT0() {
-        let expected = CMSG_WORLD_TELEPORT {
+    pub(crate) fn expected0() -> CMSG_WORLD_TELEPORT {
+        CMSG_WORLD_TELEPORT {
             time_in_msec: 0xDEADBEEF,
             map: Map::Kalimdor,
             unknown: 0x0,
@@ -112,8 +109,15 @@ mod test {
                 z: 3_f32,
             },
             orientation: 4_f32,
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 14.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMSG_WORLD_TELEPORT0() {
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -139,18 +143,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_WORLD_TELEPORT0() {
-        let expected = CMSG_WORLD_TELEPORT {
-            time_in_msec: 0xDEADBEEF,
-            map: Map::Kalimdor,
-            unknown: 0x0,
-            position: Vector3d {
-                x: 1_f32,
-                y: 2_f32,
-                z: 3_f32,
-            },
-            orientation: 4_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -176,18 +169,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_WORLD_TELEPORT0() {
-        let expected = CMSG_WORLD_TELEPORT {
-            time_in_msec: 0xDEADBEEF,
-            map: Map::Kalimdor,
-            unknown: 0x0,
-            position: Vector3d {
-                x: 1_f32,
-                y: 2_f32,
-                z: 3_f32,
-            },
-            orientation: 4_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -214,11 +196,8 @@ mod test {
          0x00, 0x00, 0x00, 0xE2, 0x43, 0x00, 0xB0, 0xC9, 0x45, 0x00, 0x80, 0x1E,
          0x45, 0xDB, 0x0F, 0x49, 0x40, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 37.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMSG_WORLD_TELEPORT1() {
-        let expected = CMSG_WORLD_TELEPORT {
+    pub(crate) fn expected1() -> CMSG_WORLD_TELEPORT {
+        CMSG_WORLD_TELEPORT {
             time_in_msec: 0x2093D9A,
             map: Map::BlackwingLair,
             unknown: 0x0,
@@ -228,8 +207,15 @@ mod test {
                 z: 2536_f32,
             },
             orientation: 3.1415927_f32,
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 37.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMSG_WORLD_TELEPORT1() {
+        let expected = expected1();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -255,18 +241,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_WORLD_TELEPORT1() {
-        let expected = CMSG_WORLD_TELEPORT {
-            time_in_msec: 0x2093D9A,
-            map: Map::BlackwingLair,
-            unknown: 0x0,
-            position: Vector3d {
-                x: 452_f32,
-                y: 6454_f32,
-                z: 2536_f32,
-            },
-            orientation: 3.1415927_f32,
-        };
-
+        let expected = expected1();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -292,18 +267,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_WORLD_TELEPORT1() {
-        let expected = CMSG_WORLD_TELEPORT {
-            time_in_msec: 0x2093D9A,
-            map: Map::BlackwingLair,
-            unknown: 0x0,
-            position: Vector3d {
-                x: 452_f32,
-                y: 6454_f32,
-                z: 2536_f32,
-            },
-            orientation: 3.1415927_f32,
-        };
-
+        let expected = expected1();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {

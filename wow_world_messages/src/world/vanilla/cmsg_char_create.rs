@@ -175,11 +175,8 @@ mod test {
          0x64, 0x62, 0x65, 0x65, 0x66, 0x00, 0x01, 0x01, 0x01, 0x08, 0x00, 0x0E,
          0x02, 0x04, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 17.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMSG_CHAR_CREATE0() {
-        let expected = CMSG_CHAR_CREATE {
+    pub(crate) fn expected0() -> CMSG_CHAR_CREATE {
+        CMSG_CHAR_CREATE {
             name: String::from("Deadbeef"),
             race: Race::Human,
             class: Class::Warrior,
@@ -189,8 +186,15 @@ mod test {
             hair_style: 0xE,
             hair_color: 0x2,
             facial_hair: 0x4,
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 17.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMSG_CHAR_CREATE0() {
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -220,18 +224,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_CHAR_CREATE0() {
-        let expected = CMSG_CHAR_CREATE {
-            name: String::from("Deadbeef"),
-            race: Race::Human,
-            class: Class::Warrior,
-            gender: Gender::Female,
-            skin_color: 0x8,
-            face: 0x0,
-            hair_style: 0xE,
-            hair_color: 0x2,
-            facial_hair: 0x4,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -261,18 +254,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_CHAR_CREATE0() {
-        let expected = CMSG_CHAR_CREATE {
-            name: String::from("Deadbeef"),
-            race: Race::Human,
-            class: Class::Warrior,
-            gender: Gender::Female,
-            skin_color: 0x8,
-            face: 0x0,
-            hair_style: 0xE,
-            hair_color: 0x2,
-            facial_hair: 0x4,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

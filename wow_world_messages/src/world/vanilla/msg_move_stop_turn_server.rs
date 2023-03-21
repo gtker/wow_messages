@@ -74,11 +74,8 @@ mod test {
          0xC2, 0xDE, 0x48, 0xA5, 0x42, 0x10, 0x13, 0x9C, 0x40, 0x00, 0x00, 0x00,
          0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_stop_turn.wowm` line 53.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn MSG_MOVE_STOP_TURN_Server0() {
-        let expected = MSG_MOVE_STOP_TURN_Server {
+    pub(crate) fn expected0() -> MSG_MOVE_STOP_TURN_Server {
+        MSG_MOVE_STOP_TURN_Server {
             guid: Guid::new(0x5),
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
@@ -92,8 +89,15 @@ mod test {
                 orientation: 4.877327_f32,
                 fall_time: 0_f32,
             },
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_stop_turn.wowm` line 53.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn MSG_MOVE_STOP_TURN_Server0() {
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -116,22 +120,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_STOP_TURN_Server0() {
-        let expected = MSG_MOVE_STOP_TURN_Server {
-            guid: Guid::new(0x5),
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    ,
-                timestamp: 0x25BA697,
-                position: Vector3d {
-                    x: -8936.536_f32,
-                    y: -124.25434_f32,
-                    z: 82.64232_f32,
-                },
-                orientation: 4.877327_f32,
-                fall_time: 0_f32,
-            },
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -154,22 +143,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_STOP_TURN_Server0() {
-        let expected = MSG_MOVE_STOP_TURN_Server {
-            guid: Guid::new(0x5),
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    ,
-                timestamp: 0x25BA697,
-                position: Vector3d {
-                    x: -8936.536_f32,
-                    y: -124.25434_f32,
-                    z: 82.64232_f32,
-                },
-                orientation: 4.877327_f32,
-                fall_time: 0_f32,
-            },
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

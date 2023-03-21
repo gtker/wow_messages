@@ -63,11 +63,8 @@ mod test {
          0xC3, 0x24, 0x7E, 0xA7, 0x42, 0xB8, 0x9D, 0xC2, 0x3E, 0x7F, 0x03, 0x00,
          0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_left.wowm` line 7.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn MSG_MOVE_START_STRAFE_LEFT_Client0() {
-        let expected = MSG_MOVE_START_STRAFE_LEFT_Client {
+    pub(crate) fn expected0() -> MSG_MOVE_START_STRAFE_LEFT_Client {
+        MSG_MOVE_START_STRAFE_LEFT_Client {
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
                     .set_FORWARD()
@@ -82,8 +79,15 @@ mod test {
                 orientation: 0.38010955_f32,
                 fall_time: 0.000000000000000000000000000000000000000001254_f32,
             },
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_strafe_left.wowm` line 7.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn MSG_MOVE_START_STRAFE_LEFT_Client0() {
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -105,23 +109,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_START_STRAFE_LEFT_Client0() {
-        let expected = MSG_MOVE_START_STRAFE_LEFT_Client {
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    .set_FORWARD()
-                    .set_STRAFE_LEFT()
-                    ,
-                timestamp: 0x179D29F,
-                position: Vector3d {
-                    x: -8944.482_f32,
-                    y: -136.26949_f32,
-                    z: 83.74637_f32,
-                },
-                orientation: 0.38010955_f32,
-                fall_time: 0.000000000000000000000000000000000000000001254_f32,
-            },
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -143,23 +131,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_START_STRAFE_LEFT_Client0() {
-        let expected = MSG_MOVE_START_STRAFE_LEFT_Client {
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    .set_FORWARD()
-                    .set_STRAFE_LEFT()
-                    ,
-                timestamp: 0x179D29F,
-                position: Vector3d {
-                    x: -8944.482_f32,
-                    y: -136.26949_f32,
-                    z: 83.74637_f32,
-                },
-                orientation: 0.38010955_f32,
-                fall_time: 0.000000000000000000000000000000000000000001254_f32,
-            },
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

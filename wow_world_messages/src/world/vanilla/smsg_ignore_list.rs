@@ -74,14 +74,18 @@ mod test {
     const RAW0: [u8; 13] = [ 0x00, 0x0B, 0x6B, 0x00, 0x01, 0xEF, 0xBE, 0xAD, 0xDE,
          0xFE, 0x0F, 0xDC, 0xBA, ];
 
+    pub(crate) fn expected0() -> SMSG_IGNORE_LIST {
+        SMSG_IGNORE_LIST {
+            ignored: vec![ 0xBADC0FFEDEADBEEF, ],
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_IGNORE_LIST0() {
-        let expected = SMSG_IGNORE_LIST {
-            ignored: vec![ 0xBADC0FFEDEADBEEF, ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -103,10 +107,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_IGNORE_LIST0() {
-        let expected = SMSG_IGNORE_LIST {
-            ignored: vec![ 0xBADC0FFEDEADBEEF, ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -128,10 +129,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_IGNORE_LIST0() {
-        let expected = SMSG_IGNORE_LIST {
-            ignored: vec![ 0xBADC0FFEDEADBEEF, ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -152,14 +150,18 @@ mod test {
     const RAW1: [u8; 21] = [ 0x00, 0x13, 0x6B, 0x00, 0x02, 0xEF, 0xBE, 0xAD, 0xDE,
          0xFE, 0x0F, 0xDC, 0xBA, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x00, 0x00, 0x00, ];
 
+    pub(crate) fn expected1() -> SMSG_IGNORE_LIST {
+        SMSG_IGNORE_LIST {
+            ignored: vec![ 0xBADC0FFEDEADBEEF, 0xDEADBEEF, ],
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 18.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_IGNORE_LIST1() {
-        let expected = SMSG_IGNORE_LIST {
-            ignored: vec![ 0xBADC0FFEDEADBEEF, 0xDEADBEEF, ],
-        };
-
+        let expected = expected1();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -181,10 +183,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_IGNORE_LIST1() {
-        let expected = SMSG_IGNORE_LIST {
-            ignored: vec![ 0xBADC0FFEDEADBEEF, 0xDEADBEEF, ],
-        };
-
+        let expected = expected1();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -206,10 +205,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_IGNORE_LIST1() {
-        let expected = SMSG_IGNORE_LIST {
-            ignored: vec![ 0xBADC0FFEDEADBEEF, 0xDEADBEEF, ],
-        };
-
+        let expected = expected1();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {

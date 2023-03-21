@@ -73,15 +73,19 @@ mod test_vanilla {
          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
          0xFF, 0xFF, 0xFF, ];
 
+    pub(crate) fn expected0() -> SMSG_TUTORIAL_FLAGS {
+        SMSG_TUTORIAL_FLAGS {
+            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_TUTORIAL_FLAGS0() {
-        let expected = SMSG_TUTORIAL_FLAGS {
-            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -103,11 +107,7 @@ mod test_vanilla {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_TUTORIAL_FLAGS0() {
-        let expected = SMSG_TUTORIAL_FLAGS {
-            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -129,11 +129,7 @@ mod test_vanilla {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_TUTORIAL_FLAGS0() {
-        let expected = SMSG_TUTORIAL_FLAGS {
-            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -166,15 +162,19 @@ mod test_tbc {
          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
          0xFF, 0xFF, 0xFF, ];
 
+    pub(crate) fn expected0() -> SMSG_TUTORIAL_FLAGS {
+        SMSG_TUTORIAL_FLAGS {
+            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_TUTORIAL_FLAGS0() {
-        let expected = SMSG_TUTORIAL_FLAGS {
-            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -196,11 +196,7 @@ mod test_tbc {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_TUTORIAL_FLAGS0() {
-        let expected = SMSG_TUTORIAL_FLAGS {
-            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -222,11 +218,7 @@ mod test_tbc {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_TUTORIAL_FLAGS0() {
-        let expected = SMSG_TUTORIAL_FLAGS {
-            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -259,15 +251,19 @@ mod test_wrath {
          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
          0xFF, 0xFF, 0xFF, ];
 
+    pub(crate) fn expected0() -> SMSG_TUTORIAL_FLAGS {
+        SMSG_TUTORIAL_FLAGS {
+            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_tutorial_flags.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_TUTORIAL_FLAGS0() {
-        let expected = SMSG_TUTORIAL_FLAGS {
-            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -289,11 +285,7 @@ mod test_wrath {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_TUTORIAL_FLAGS0() {
-        let expected = SMSG_TUTORIAL_FLAGS {
-            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -315,11 +307,7 @@ mod test_wrath {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_TUTORIAL_FLAGS0() {
-        let expected = SMSG_TUTORIAL_FLAGS {
-            tutorial_data: [ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

@@ -57,14 +57,18 @@ mod test {
 
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0x41, 0x00, 0x41, ];
 
+    pub(crate) fn expected0() -> SMSG_CHARACTER_LOGIN_FAILED {
+        SMSG_CHARACTER_LOGIN_FAILED {
+            result: WorldResult::CharLoginFailed,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_character_login_failed.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_CHARACTER_LOGIN_FAILED0() {
-        let expected = SMSG_CHARACTER_LOGIN_FAILED {
-            result: WorldResult::CharLoginFailed,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -86,10 +90,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_CHARACTER_LOGIN_FAILED0() {
-        let expected = SMSG_CHARACTER_LOGIN_FAILED {
-            result: WorldResult::CharLoginFailed,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -111,10 +112,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_CHARACTER_LOGIN_FAILED0() {
-        let expected = SMSG_CHARACTER_LOGIN_FAILED {
-            result: WorldResult::CharLoginFailed,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

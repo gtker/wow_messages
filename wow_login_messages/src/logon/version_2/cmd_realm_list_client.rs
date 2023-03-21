@@ -146,13 +146,17 @@ mod test_version_2 {
 
     const RAW0: [u8; 5] = [ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 
+    pub(crate) fn expected0() -> CMD_REALM_LIST_Client {
+        CMD_REALM_LIST_Client {
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/login/cmd_realm/client.wowm` line 7.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Client0() {
-        let expected = CMD_REALM_LIST_Client {
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -173,9 +177,7 @@ mod test_version_2 {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Client0() {
-        let expected = CMD_REALM_LIST_Client {
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -196,9 +198,7 @@ mod test_version_2 {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Client0() {
-        let expected = CMD_REALM_LIST_Client {
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -227,13 +227,17 @@ mod test_version_3 {
 
     const RAW0: [u8; 5] = [ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 
+    pub(crate) fn expected0() -> CMD_REALM_LIST_Client {
+        CMD_REALM_LIST_Client {
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/login/cmd_realm/client.wowm` line 7.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Client0() {
-        let expected = CMD_REALM_LIST_Client {
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -254,9 +258,7 @@ mod test_version_3 {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Client0() {
-        let expected = CMD_REALM_LIST_Client {
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -277,9 +279,7 @@ mod test_version_3 {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Client0() {
-        let expected = CMD_REALM_LIST_Client {
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -308,13 +308,17 @@ mod test_version_8 {
 
     const RAW0: [u8; 5] = [ 0x10, 0x00, 0x00, 0x00, 0x00, ];
 
+    pub(crate) fn expected0() -> CMD_REALM_LIST_Client {
+        CMD_REALM_LIST_Client {
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/login/cmd_realm/client.wowm` line 7.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Client0() {
-        let expected = CMD_REALM_LIST_Client {
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -335,9 +339,7 @@ mod test_version_8 {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Client0() {
-        let expected = CMD_REALM_LIST_Client {
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -358,9 +360,7 @@ mod test_version_8 {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Client0() {
-        let expected = CMD_REALM_LIST_Client {
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

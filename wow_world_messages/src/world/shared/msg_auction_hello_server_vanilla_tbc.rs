@@ -67,15 +67,19 @@ mod test_vanilla {
     const RAW0: [u8; 16] = [ 0x00, 0x0E, 0x55, 0x02, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE,
          0xAD, 0xDE, 0x00, 0x12, 0x00, 0x00, 0x00, ];
 
+    pub(crate) fn expected0() -> MSG_AUCTION_HELLO_Server {
+        MSG_AUCTION_HELLO_Server {
+            auctioneer: Guid::new(0xDEADBEEFFACADE),
+            auction_house_id: 0x12,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn MSG_AUCTION_HELLO_Server0() {
-        let expected = MSG_AUCTION_HELLO_Server {
-            auctioneer: Guid::new(0xDEADBEEFFACADE),
-            auction_house_id: 0x12,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -98,11 +102,7 @@ mod test_vanilla {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_AUCTION_HELLO_Server0() {
-        let expected = MSG_AUCTION_HELLO_Server {
-            auctioneer: Guid::new(0xDEADBEEFFACADE),
-            auction_house_id: 0x12,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -125,11 +125,7 @@ mod test_vanilla {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_AUCTION_HELLO_Server0() {
-        let expected = MSG_AUCTION_HELLO_Server {
-            auctioneer: Guid::new(0xDEADBEEFFACADE),
-            auction_house_id: 0x12,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -162,15 +158,19 @@ mod test_tbc {
     const RAW0: [u8; 16] = [ 0x00, 0x0E, 0x55, 0x02, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE,
          0xAD, 0xDE, 0x00, 0x12, 0x00, 0x00, 0x00, ];
 
+    pub(crate) fn expected0() -> MSG_AUCTION_HELLO_Server {
+        MSG_AUCTION_HELLO_Server {
+            auctioneer: Guid::new(0xDEADBEEFFACADE),
+            auction_house_id: 0x12,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn MSG_AUCTION_HELLO_Server0() {
-        let expected = MSG_AUCTION_HELLO_Server {
-            auctioneer: Guid::new(0xDEADBEEFFACADE),
-            auction_house_id: 0x12,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -193,11 +193,7 @@ mod test_tbc {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_AUCTION_HELLO_Server0() {
-        let expected = MSG_AUCTION_HELLO_Server {
-            auctioneer: Guid::new(0xDEADBEEFFACADE),
-            auction_house_id: 0x12,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -220,11 +216,7 @@ mod test_tbc {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_AUCTION_HELLO_Server0() {
-        let expected = MSG_AUCTION_HELLO_Server {
-            auctioneer: Guid::new(0xDEADBEEFFACADE),
-            auction_house_id: 0x12,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

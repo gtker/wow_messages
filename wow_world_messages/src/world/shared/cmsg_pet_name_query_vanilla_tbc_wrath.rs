@@ -70,15 +70,19 @@ mod test_vanilla {
     const RAW0: [u8; 18] = [ 0x00, 0x10, 0x52, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0xEF, 0xBE, 0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_PET_NAME_QUERY {
+        CMSG_PET_NAME_QUERY {
+            pet_number: 0xDEADBEEF,
+            guid: Guid::new(0xFACADEDEADBEEF),
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/queries/cmsg_pet_name_query.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_PET_NAME_QUERY0() {
-        let expected = CMSG_PET_NAME_QUERY {
-            pet_number: 0xDEADBEEF,
-            guid: Guid::new(0xFACADEDEADBEEF),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -101,11 +105,7 @@ mod test_vanilla {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_PET_NAME_QUERY0() {
-        let expected = CMSG_PET_NAME_QUERY {
-            pet_number: 0xDEADBEEF,
-            guid: Guid::new(0xFACADEDEADBEEF),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -128,11 +128,7 @@ mod test_vanilla {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_PET_NAME_QUERY0() {
-        let expected = CMSG_PET_NAME_QUERY {
-            pet_number: 0xDEADBEEF,
-            guid: Guid::new(0xFACADEDEADBEEF),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -165,15 +161,19 @@ mod test_tbc {
     const RAW0: [u8; 18] = [ 0x00, 0x10, 0x52, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0xEF, 0xBE, 0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_PET_NAME_QUERY {
+        CMSG_PET_NAME_QUERY {
+            pet_number: 0xDEADBEEF,
+            guid: Guid::new(0xFACADEDEADBEEF),
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/queries/cmsg_pet_name_query.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_PET_NAME_QUERY0() {
-        let expected = CMSG_PET_NAME_QUERY {
-            pet_number: 0xDEADBEEF,
-            guid: Guid::new(0xFACADEDEADBEEF),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -196,11 +196,7 @@ mod test_tbc {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_PET_NAME_QUERY0() {
-        let expected = CMSG_PET_NAME_QUERY {
-            pet_number: 0xDEADBEEF,
-            guid: Guid::new(0xFACADEDEADBEEF),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -223,11 +219,7 @@ mod test_tbc {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_PET_NAME_QUERY0() {
-        let expected = CMSG_PET_NAME_QUERY {
-            pet_number: 0xDEADBEEF,
-            guid: Guid::new(0xFACADEDEADBEEF),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -260,15 +252,19 @@ mod test_wrath {
     const RAW0: [u8; 18] = [ 0x00, 0x10, 0x52, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0xEF, 0xBE, 0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_PET_NAME_QUERY {
+        CMSG_PET_NAME_QUERY {
+            pet_number: 0xDEADBEEF,
+            guid: Guid::new(0xFACADEDEADBEEF),
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/queries/cmsg_pet_name_query.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_PET_NAME_QUERY0() {
-        let expected = CMSG_PET_NAME_QUERY {
-            pet_number: 0xDEADBEEF,
-            guid: Guid::new(0xFACADEDEADBEEF),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -291,11 +287,7 @@ mod test_wrath {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_PET_NAME_QUERY0() {
-        let expected = CMSG_PET_NAME_QUERY {
-            pet_number: 0xDEADBEEF,
-            guid: Guid::new(0xFACADEDEADBEEF),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -318,11 +310,7 @@ mod test_wrath {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_PET_NAME_QUERY0() {
-        let expected = CMSG_PET_NAME_QUERY {
-            pet_number: 0xDEADBEEF,
-            guid: Guid::new(0xFACADEDEADBEEF),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

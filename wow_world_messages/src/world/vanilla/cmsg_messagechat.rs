@@ -392,16 +392,20 @@ mod test {
          0x20, 0x61, 0x20, 0x73, 0x61, 0x79, 0x20, 0x6D, 0x65, 0x73, 0x73, 0x61,
          0x67, 0x65, 0x2E, 0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_MESSAGECHAT {
+        CMSG_MESSAGECHAT {
+            chat_type: CMSG_MESSAGECHAT_ChatType::Say,
+            language: Language::Common,
+            message: String::from("This is a say message."),
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/chat/cmsg_messagechat.wowm` line 14.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_MESSAGECHAT0() {
-        let expected = CMSG_MESSAGECHAT {
-            chat_type: CMSG_MESSAGECHAT_ChatType::Say,
-            language: Language::Common,
-            message: String::from("This is a say message."),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -425,12 +429,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_MESSAGECHAT0() {
-        let expected = CMSG_MESSAGECHAT {
-            chat_type: CMSG_MESSAGECHAT_ChatType::Say,
-            language: Language::Common,
-            message: String::from("This is a say message."),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -454,12 +453,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_MESSAGECHAT0() {
-        let expected = CMSG_MESSAGECHAT {
-            chat_type: CMSG_MESSAGECHAT_ChatType::Say,
-            language: Language::Common,
-            message: String::from("This is a say message."),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

@@ -88,16 +88,20 @@ mod test {
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0xE2, 0x00, 0x01, 0x06, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, 0xE0, 0x40, ];
 
+    pub(crate) fn expected0() -> SMSG_FORCE_RUN_SPEED_CHANGE {
+        SMSG_FORCE_RUN_SPEED_CHANGE {
+            guid: Guid::new(0x6),
+            move_event: 0x0,
+            speed: 7_f32,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm` line 15.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_FORCE_RUN_SPEED_CHANGE0() {
-        let expected = SMSG_FORCE_RUN_SPEED_CHANGE {
-            guid: Guid::new(0x6),
-            move_event: 0x0,
-            speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -121,12 +125,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_FORCE_RUN_SPEED_CHANGE0() {
-        let expected = SMSG_FORCE_RUN_SPEED_CHANGE {
-            guid: Guid::new(0x6),
-            move_event: 0x0,
-            speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -150,12 +149,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_FORCE_RUN_SPEED_CHANGE0() {
-        let expected = SMSG_FORCE_RUN_SPEED_CHANGE {
-            guid: Guid::new(0x6),
-            move_event: 0x0,
-            speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

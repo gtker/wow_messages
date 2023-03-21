@@ -80,15 +80,19 @@ mod test_vanilla {
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0xFE, 0x02, 0x01, 0x06, 0x00, 0x00, 0xE0,
          0x40, ];
 
+    pub(crate) fn expected0() -> SMSG_SPLINE_SET_RUN_SPEED {
+        SMSG_SPLINE_SET_RUN_SPEED {
+            guid: Guid::new(0x6),
+            speed: 7_f32,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_spline_run_speed.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_SPLINE_SET_RUN_SPEED0() {
-        let expected = SMSG_SPLINE_SET_RUN_SPEED {
-            guid: Guid::new(0x6),
-            speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -111,11 +115,7 @@ mod test_vanilla {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_SPLINE_SET_RUN_SPEED0() {
-        let expected = SMSG_SPLINE_SET_RUN_SPEED {
-            guid: Guid::new(0x6),
-            speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -138,11 +138,7 @@ mod test_vanilla {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_SPLINE_SET_RUN_SPEED0() {
-        let expected = SMSG_SPLINE_SET_RUN_SPEED {
-            guid: Guid::new(0x6),
-            speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -175,15 +171,19 @@ mod test_tbc {
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0xFE, 0x02, 0x01, 0x06, 0x00, 0x00, 0xE0,
          0x40, ];
 
+    pub(crate) fn expected0() -> SMSG_SPLINE_SET_RUN_SPEED {
+        SMSG_SPLINE_SET_RUN_SPEED {
+            guid: Guid::new(0x6),
+            speed: 7_f32,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_spline_run_speed.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_SPLINE_SET_RUN_SPEED0() {
-        let expected = SMSG_SPLINE_SET_RUN_SPEED {
-            guid: Guid::new(0x6),
-            speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -206,11 +206,7 @@ mod test_tbc {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_SPLINE_SET_RUN_SPEED0() {
-        let expected = SMSG_SPLINE_SET_RUN_SPEED {
-            guid: Guid::new(0x6),
-            speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -233,11 +229,7 @@ mod test_tbc {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_SPLINE_SET_RUN_SPEED0() {
-        let expected = SMSG_SPLINE_SET_RUN_SPEED {
-            guid: Guid::new(0x6),
-            speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -270,15 +262,19 @@ mod test_wrath {
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0xFE, 0x02, 0x01, 0x06, 0x00, 0x00, 0xE0,
          0x40, ];
 
+    pub(crate) fn expected0() -> SMSG_SPLINE_SET_RUN_SPEED {
+        SMSG_SPLINE_SET_RUN_SPEED {
+            guid: Guid::new(0x6),
+            speed: 7_f32,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/movement/smsg/smsg_spline_run_speed.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_SPLINE_SET_RUN_SPEED0() {
-        let expected = SMSG_SPLINE_SET_RUN_SPEED {
-            guid: Guid::new(0x6),
-            speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -301,11 +297,7 @@ mod test_wrath {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_SPLINE_SET_RUN_SPEED0() {
-        let expected = SMSG_SPLINE_SET_RUN_SPEED {
-            guid: Guid::new(0x6),
-            speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -328,11 +320,7 @@ mod test_wrath {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_SPLINE_SET_RUN_SPEED0() {
-        let expected = SMSG_SPLINE_SET_RUN_SPEED {
-            guid: Guid::new(0x6),
-            speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

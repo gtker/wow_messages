@@ -147,11 +147,8 @@ mod test {
          0x00, 0x00, 0x00, 0xFF, 0x18, 0x00, 0x00, 0x00, 0x60, 0x31, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/item/smsg_item_push_result.wowm` line 43.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn SMSG_ITEM_PUSH_RESULT0() {
-        let expected = SMSG_ITEM_PUSH_RESULT {
+    pub(crate) fn expected0() -> SMSG_ITEM_PUSH_RESULT {
+        SMSG_ITEM_PUSH_RESULT {
             guid: Guid::new(0x4),
             source: NewItemSource::Looted,
             creation_type: NewItemCreationType::Created,
@@ -162,8 +159,15 @@ mod test {
             item_suffix_factor: 0x0,
             item_random_property_id: 0x0,
             item_count: 0x1,
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/item/smsg_item_push_result.wowm` line 43.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_ITEM_PUSH_RESULT0() {
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -194,19 +198,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_ITEM_PUSH_RESULT0() {
-        let expected = SMSG_ITEM_PUSH_RESULT {
-            guid: Guid::new(0x4),
-            source: NewItemSource::Looted,
-            creation_type: NewItemCreationType::Created,
-            alert_chat: NewItemChatAlert::Show,
-            bag_slot: 0xFF,
-            item_slot: 0x18,
-            item: 0x3160,
-            item_suffix_factor: 0x0,
-            item_random_property_id: 0x0,
-            item_count: 0x1,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -237,19 +229,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_ITEM_PUSH_RESULT0() {
-        let expected = SMSG_ITEM_PUSH_RESULT {
-            guid: Guid::new(0x4),
-            source: NewItemSource::Looted,
-            creation_type: NewItemCreationType::Created,
-            alert_chat: NewItemChatAlert::Show,
-            bag_slot: 0xFF,
-            item_slot: 0x18,
-            item: 0x3160,
-            item_suffix_factor: 0x0,
-            item_random_property_id: 0x0,
-            item_count: 0x1,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

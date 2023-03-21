@@ -116,13 +116,17 @@ mod test {
 
     const RAW0: [u8; 1] = [ 0x30, ];
 
+    pub(crate) fn expected0() -> CMD_XFER_INITIATE {
+        CMD_XFER_INITIATE {
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 5.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_XFER_INITIATE0() {
-        let expected = CMD_XFER_INITIATE {
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
@@ -143,9 +147,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_XFER_INITIATE0() {
-        let expected = CMD_XFER_INITIATE {
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
@@ -166,9 +168,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_XFER_INITIATE0() {
-        let expected = CMD_XFER_INITIATE {
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {

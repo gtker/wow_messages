@@ -50,13 +50,17 @@ mod test_vanilla {
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x37, 0x00, 0x00, 0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_CHAR_ENUM {
+        CMSG_CHAR_ENUM {
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm` line 6.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_CHAR_ENUM0() {
-        let expected = CMSG_CHAR_ENUM {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
@@ -77,9 +81,7 @@ mod test_vanilla {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_CHAR_ENUM0() {
-        let expected = CMSG_CHAR_ENUM {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
@@ -100,9 +102,7 @@ mod test_vanilla {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_CHAR_ENUM0() {
-        let expected = CMSG_CHAR_ENUM {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
@@ -131,13 +131,17 @@ mod test_tbc {
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x37, 0x00, 0x00, 0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_CHAR_ENUM {
+        CMSG_CHAR_ENUM {
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm` line 6.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_CHAR_ENUM0() {
-        let expected = CMSG_CHAR_ENUM {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
@@ -158,9 +162,7 @@ mod test_tbc {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_CHAR_ENUM0() {
-        let expected = CMSG_CHAR_ENUM {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
@@ -181,9 +183,7 @@ mod test_tbc {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_CHAR_ENUM0() {
-        let expected = CMSG_CHAR_ENUM {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
@@ -212,13 +212,17 @@ mod test_wrath {
 
     const RAW0: [u8; 6] = [ 0x00, 0x04, 0x37, 0x00, 0x00, 0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_CHAR_ENUM {
+        CMSG_CHAR_ENUM {
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_enum.wowm` line 6.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_CHAR_ENUM0() {
-        let expected = CMSG_CHAR_ENUM {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
@@ -239,9 +243,7 @@ mod test_wrath {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_CHAR_ENUM0() {
-        let expected = CMSG_CHAR_ENUM {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
@@ -262,9 +264,7 @@ mod test_wrath {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_CHAR_ENUM0() {
-        let expected = CMSG_CHAR_ENUM {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {

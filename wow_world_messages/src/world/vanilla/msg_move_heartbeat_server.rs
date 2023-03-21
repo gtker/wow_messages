@@ -74,11 +74,8 @@ mod test {
          0xC2, 0x1A, 0xF5, 0xA5, 0x42, 0x03, 0x51, 0x24, 0x40, 0x85, 0x03, 0x00,
          0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_heartbeat.wowm` line 53.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn MSG_MOVE_HEARTBEAT_Server0() {
-        let expected = MSG_MOVE_HEARTBEAT_Server {
+    pub(crate) fn expected0() -> MSG_MOVE_HEARTBEAT_Server {
+        MSG_MOVE_HEARTBEAT_Server {
             guid: Guid::new(0x5),
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
@@ -93,8 +90,15 @@ mod test {
                 orientation: 2.5674446_f32,
                 fall_time: 0.000000000000000000000000000000000000000001263_f32,
             },
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_heartbeat.wowm` line 53.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn MSG_MOVE_HEARTBEAT_Server0() {
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -117,23 +121,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_HEARTBEAT_Server0() {
-        let expected = MSG_MOVE_HEARTBEAT_Server {
-            guid: Guid::new(0x5),
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    .set_FORWARD()
-                    ,
-                timestamp: 0x17A3146,
-                position: Vector3d {
-                    x: -8945.774_f32,
-                    y: -112.21678_f32,
-                    z: 82.978714_f32,
-                },
-                orientation: 2.5674446_f32,
-                fall_time: 0.000000000000000000000000000000000000000001263_f32,
-            },
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -156,23 +144,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_HEARTBEAT_Server0() {
-        let expected = MSG_MOVE_HEARTBEAT_Server {
-            guid: Guid::new(0x5),
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    .set_FORWARD()
-                    ,
-                timestamp: 0x17A3146,
-                position: Vector3d {
-                    x: -8945.774_f32,
-                    y: -112.21678_f32,
-                    z: 82.978714_f32,
-                },
-                orientation: 2.5674446_f32,
-                fall_time: 0.000000000000000000000000000000000000000001263_f32,
-            },
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

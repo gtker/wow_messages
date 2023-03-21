@@ -1045,11 +1045,8 @@ mod test {
          0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC, 0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2,
          0xF1, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 276.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_LOGON_CHALLENGE_Server0() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
+    pub(crate) fn expected0() -> CMD_AUTH_LOGON_CHALLENGE_Server {
+        CMD_AUTH_LOGON_CHALLENGE_Server {
             result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
@@ -1069,8 +1066,15 @@ mod test {
                      0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
                      0xCE, 0xDA, 0x34, 0x46, ],
             },
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 276.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_AUTH_LOGON_CHALLENGE_Server0() {
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -1092,28 +1096,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server0() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
-                     0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
-                generator: vec![ 0x07, ],
-                large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
-                     0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
-                     0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1,
-                     0x89, 0x5E, 0x64, 0x4B, 0x89, ],
-                salt: [ 0xC7, 0x09, 0x87, 0x7D, 0x8C, 0x65, 0x52, 0x66, 0xA5, 0x7D,
-                     0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
-                     0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
-                     0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    ,
-                server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
-                     0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
-                     0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
-                     0xCE, 0xDA, 0x34, 0x46, ],
-            },
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -1135,28 +1118,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server0() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
-                     0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
-                generator: vec![ 0x07, ],
-                large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
-                     0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
-                     0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1,
-                     0x89, 0x5E, 0x64, 0x4B, 0x89, ],
-                salt: [ 0xC7, 0x09, 0x87, 0x7D, 0x8C, 0x65, 0x52, 0x66, 0xA5, 0x7D,
-                     0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
-                     0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
-                     0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    ,
-                server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
-                     0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
-                     0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
-                     0xCE, 0xDA, 0x34, 0x46, ],
-            },
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -1187,11 +1149,8 @@ mod test {
          0xF1, 0x01, 0xEF, 0xBE, 0xAD, 0xDE, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
          0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 329.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_LOGON_CHALLENGE_Server1() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
+    pub(crate) fn expected1() -> CMD_AUTH_LOGON_CHALLENGE_Server {
+        CMD_AUTH_LOGON_CHALLENGE_Server {
             result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
@@ -1216,8 +1175,15 @@ mod test {
                      0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
                      0xCE, 0xDA, 0x34, 0x46, ],
             },
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 329.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_AUTH_LOGON_CHALLENGE_Server1() {
+        let expected = expected1();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -1239,33 +1205,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server1() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
-                     0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
-                generator: vec![ 0x07, ],
-                large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
-                     0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
-                     0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1,
-                     0x89, 0x5E, 0x64, 0x4B, 0x89, ],
-                salt: [ 0xC7, 0x09, 0x87, 0x7D, 0x8C, 0x65, 0x52, 0x66, 0xA5, 0x7D,
-                     0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
-                     0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
-                     0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_PIN(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
-                        pin_grid_seed: 0xDEADBEEF,
-                        pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                             0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
-                    })
-                    ,
-                server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
-                     0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
-                     0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
-                     0xCE, 0xDA, 0x34, 0x46, ],
-            },
-        };
-
+        let expected = expected1();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -1287,33 +1227,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server1() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
-                     0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
-                generator: vec![ 0x07, ],
-                large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
-                     0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
-                     0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1,
-                     0x89, 0x5E, 0x64, 0x4B, 0x89, ],
-                salt: [ 0xC7, 0x09, 0x87, 0x7D, 0x8C, 0x65, 0x52, 0x66, 0xA5, 0x7D,
-                     0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
-                     0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
-                     0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_PIN(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
-                        pin_grid_seed: 0xDEADBEEF,
-                        pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-                             0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
-                    })
-                    ,
-                server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
-                     0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
-                     0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
-                     0xCE, 0xDA, 0x34, 0x46, ],
-            },
-        };
-
+        let expected = expected1();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -1343,11 +1257,8 @@ mod test {
          0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC, 0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2,
          0xF1, 0x04, 0x01, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 389.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_LOGON_CHALLENGE_Server2() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
+    pub(crate) fn expected2() -> CMD_AUTH_LOGON_CHALLENGE_Server {
+        CMD_AUTH_LOGON_CHALLENGE_Server {
             result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
@@ -1370,8 +1281,15 @@ mod test {
                      0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
                      0xCE, 0xDA, 0x34, 0x46, ],
             },
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 389.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_AUTH_LOGON_CHALLENGE_Server2() {
+        let expected = expected2();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW2)).unwrap();
         let t = match t {
@@ -1393,31 +1311,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server2() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
-                     0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
-                generator: vec![ 0x07, ],
-                large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
-                     0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
-                     0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1,
-                     0x89, 0x5E, 0x64, 0x4B, 0x89, ],
-                salt: [ 0xC7, 0x09, 0x87, 0x7D, 0x8C, 0x65, 0x52, 0x66, 0xA5, 0x7D,
-                     0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
-                     0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
-                     0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                        required: 0x1,
-                    })
-                    ,
-                server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
-                     0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
-                     0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
-                     0xCE, 0xDA, 0x34, 0x46, ],
-            },
-        };
-
+        let expected = expected2();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW2)).await.unwrap();
         let t = match t {
@@ -1439,31 +1333,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server2() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
-                     0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
-                generator: vec![ 0x07, ],
-                large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
-                     0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
-                     0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1,
-                     0x89, 0x5E, 0x64, 0x4B, 0x89, ],
-                salt: [ 0xC7, 0x09, 0x87, 0x7D, 0x8C, 0x65, 0x52, 0x66, 0xA5, 0x7D,
-                     0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
-                     0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
-                     0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                        required: 0x1,
-                    })
-                    ,
-                server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
-                     0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
-                     0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
-                     0xCE, 0xDA, 0x34, 0x46, ],
-            },
-        };
-
+        let expected = expected2();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW2)).await.unwrap();
         let t = match t {
@@ -1494,11 +1364,8 @@ mod test {
          0xF1, 0x02, 0xFF, 0xEE, 0xDD, 0xCC, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 444.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_LOGON_CHALLENGE_Server3() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
+    pub(crate) fn expected3() -> CMD_AUTH_LOGON_CHALLENGE_Server {
+        CMD_AUTH_LOGON_CHALLENGE_Server {
             result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
@@ -1525,8 +1392,15 @@ mod test {
                      0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
                      0xCE, 0xDA, 0x34, 0x46, ],
             },
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 444.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_AUTH_LOGON_CHALLENGE_Server3() {
+        let expected = expected3();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW3)).unwrap();
         let t = match t {
@@ -1548,35 +1422,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server3() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
-                     0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
-                generator: vec![ 0x07, ],
-                large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
-                     0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
-                     0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1,
-                     0x89, 0x5E, 0x64, 0x4B, 0x89, ],
-                salt: [ 0xC7, 0x09, 0x87, 0x7D, 0x8C, 0x65, 0x52, 0x66, 0xA5, 0x7D,
-                     0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
-                     0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
-                     0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_MATRIX_CARD(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
-                        challenge_count: 0xCC,
-                        digit_count: 0xDD,
-                        height: 0xEE,
-                        seed: 0xDEADBEEFFACADE,
-                        width: 0xFF,
-                    })
-                    ,
-                server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
-                     0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
-                     0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
-                     0xCE, 0xDA, 0x34, 0x46, ],
-            },
-        };
-
+        let expected = expected3();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW3)).await.unwrap();
         let t = match t {
@@ -1598,35 +1444,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server3() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
-                     0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
-                generator: vec![ 0x07, ],
-                large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
-                     0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
-                     0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1,
-                     0x89, 0x5E, 0x64, 0x4B, 0x89, ],
-                salt: [ 0xC7, 0x09, 0x87, 0x7D, 0x8C, 0x65, 0x52, 0x66, 0xA5, 0x7D,
-                     0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
-                     0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
-                     0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_MATRIX_CARD(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
-                        challenge_count: 0xCC,
-                        digit_count: 0xDD,
-                        height: 0xEE,
-                        seed: 0xDEADBEEFFACADE,
-                        width: 0xFF,
-                    })
-                    ,
-                server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
-                     0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
-                     0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
-                     0xCE, 0xDA, 0x34, 0x46, ],
-            },
-        };
-
+        let expected = expected3();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW3)).await.unwrap();
         let t = match t {
@@ -1646,14 +1464,18 @@ mod test {
 
     const RAW4: [u8; 3] = [ 0x00, 0x00, 0x05, ];
 
+    pub(crate) fn expected4() -> CMD_AUTH_LOGON_CHALLENGE_Server {
+        CMD_AUTH_LOGON_CHALLENGE_Server {
+            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 508.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server4() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
-        };
-
+        let expected = expected4();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW4)).unwrap();
         let t = match t {
@@ -1675,10 +1497,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server4() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
-        };
-
+        let expected = expected4();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW4)).await.unwrap();
         let t = match t {
@@ -1700,10 +1519,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server4() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
-        };
-
+        let expected = expected4();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW4)).await.unwrap();
         let t = match t {
@@ -1734,11 +1550,8 @@ mod test {
          0xF1, 0x06, 0xFF, 0xEE, 0xDD, 0xCC, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x01, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 518.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_LOGON_CHALLENGE_Server5() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
+    pub(crate) fn expected5() -> CMD_AUTH_LOGON_CHALLENGE_Server {
+        CMD_AUTH_LOGON_CHALLENGE_Server {
             result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
                 crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
                      0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
@@ -1768,8 +1581,15 @@ mod test {
                      0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
                      0xCE, 0xDA, 0x34, 0x46, ],
             },
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 518.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_AUTH_LOGON_CHALLENGE_Server5() {
+        let expected = expected5();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW5)).unwrap();
         let t = match t {
@@ -1791,38 +1611,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server5() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
-                     0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
-                generator: vec![ 0x07, ],
-                large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
-                     0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
-                     0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1,
-                     0x89, 0x5E, 0x64, 0x4B, 0x89, ],
-                salt: [ 0xC7, 0x09, 0x87, 0x7D, 0x8C, 0x65, 0x52, 0x66, 0xA5, 0x7D,
-                     0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
-                     0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
-                     0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_MATRIX_CARD(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
-                        challenge_count: 0xCC,
-                        digit_count: 0xDD,
-                        height: 0xEE,
-                        seed: 0xDEADBEEFFACADE,
-                        width: 0xFF,
-                    })
-                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                        required: 0x1,
-                    })
-                    ,
-                server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
-                     0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
-                     0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
-                     0xCE, 0xDA, 0x34, 0x46, ],
-            },
-        };
-
+        let expected = expected5();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW5)).await.unwrap();
         let t = match t {
@@ -1844,38 +1633,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server5() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                crc_salt: [ 0xBA, 0xA3, 0x1E, 0x99, 0xA0, 0x0B, 0x21, 0x57, 0xFC,
-                     0x37, 0x3F, 0xB3, 0x69, 0xCD, 0xD2, 0xF1, ],
-                generator: vec![ 0x07, ],
-                large_safe_prime: vec![ 0xB7, 0x9B, 0x3E, 0x2A, 0x87, 0x82, 0x3C,
-                     0xAB, 0x8F, 0x5E, 0xBF, 0xBF, 0x8E, 0xB1, 0x01, 0x08, 0x53,
-                     0x50, 0x06, 0x29, 0x8B, 0x5B, 0xAD, 0xBD, 0x5B, 0x53, 0xE1,
-                     0x89, 0x5E, 0x64, 0x4B, 0x89, ],
-                salt: [ 0xC7, 0x09, 0x87, 0x7D, 0x8C, 0x65, 0x52, 0x66, 0xA5, 0x7D,
-                     0xB8, 0x65, 0x3D, 0x6E, 0xA6, 0x2B, 0xB5, 0x54, 0xF2, 0x0B,
-                     0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
-                     0x90, 0x87, ],
-                security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_MATRIX_CARD(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
-                        challenge_count: 0xCC,
-                        digit_count: 0xDD,
-                        height: 0xEE,
-                        seed: 0xDEADBEEFFACADE,
-                        width: 0xFF,
-                    })
-                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                        required: 0x1,
-                    })
-                    ,
-                server_public_key: [ 0x49, 0xD8, 0xC2, 0xBC, 0x68, 0x5C, 0x2B, 0xCE,
-                     0x4A, 0xF4, 0xFA, 0x07, 0x0A, 0x47, 0x93, 0x78, 0x58, 0x78,
-                     0x46, 0xB5, 0x83, 0xD4, 0x41, 0x82, 0x9E, 0x24, 0xD8, 0x87,
-                     0xCE, 0xDA, 0x34, 0x46, ],
-            },
-        };
-
+        let expected = expected5();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW5)).await.unwrap();
         let t = match t {
@@ -1895,14 +1653,18 @@ mod test {
 
     const RAW6: [u8; 3] = [ 0x00, 0x00, 0x05, ];
 
+    pub(crate) fn expected6() -> CMD_AUTH_LOGON_CHALLENGE_Server {
+        CMD_AUTH_LOGON_CHALLENGE_Server {
+            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 585.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_LOGON_CHALLENGE_Server6() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
-        };
-
+        let expected = expected6();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW6)).unwrap();
         let t = match t {
@@ -1924,10 +1686,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server6() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
-        };
-
+        let expected = expected6();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW6)).await.unwrap();
         let t = match t {
@@ -1949,10 +1708,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server6() {
-        let expected = CMD_AUTH_LOGON_CHALLENGE_Server {
-            result: CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
-        };
-
+        let expected = expected6();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW6)).await.unwrap();
         let t = match t {

@@ -1214,11 +1214,8 @@ mod test {
          0x20, 0x69, 0x73, 0x20, 0x61, 0x20, 0x73, 0x61, 0x79, 0x20, 0x6D, 0x65,
          0x73, 0x73, 0x61, 0x67, 0x65, 0x2E, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/chat/smsg_messagechat.wowm` line 53.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn SMSG_MESSAGECHAT0() {
-        let expected = SMSG_MESSAGECHAT {
+    pub(crate) fn expected0() -> SMSG_MESSAGECHAT {
+        SMSG_MESSAGECHAT {
             chat_type: SMSG_MESSAGECHAT_ChatType::Say {
                 chat_credit: Guid::new(0x5),
                 speech_bubble_credit: Guid::new(0x5),
@@ -1226,8 +1223,15 @@ mod test {
             language: Language::Universal,
             message: String::from("This is a say message."),
             tag: PlayerChatTag::None,
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/smsg_messagechat.wowm` line 53.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_MESSAGECHAT0() {
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -1252,16 +1256,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_MESSAGECHAT0() {
-        let expected = SMSG_MESSAGECHAT {
-            chat_type: SMSG_MESSAGECHAT_ChatType::Say {
-                chat_credit: Guid::new(0x5),
-                speech_bubble_credit: Guid::new(0x5),
-            },
-            language: Language::Universal,
-            message: String::from("This is a say message."),
-            tag: PlayerChatTag::None,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -1286,16 +1281,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_MESSAGECHAT0() {
-        let expected = SMSG_MESSAGECHAT {
-            chat_type: SMSG_MESSAGECHAT_ChatType::Say {
-                chat_credit: Guid::new(0x5),
-                speech_bubble_credit: Guid::new(0x5),
-            },
-            language: Language::Universal,
-            message: String::from("This is a say message."),
-            tag: PlayerChatTag::None,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

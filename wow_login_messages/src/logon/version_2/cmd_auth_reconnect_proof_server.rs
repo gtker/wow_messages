@@ -137,14 +137,18 @@ mod test {
 
     const RAW0: [u8; 2] = [ 0x03, 0x00, ];
 
+    pub(crate) fn expected0() -> CMD_AUTH_RECONNECT_PROOF_Server {
+        CMD_AUTH_RECONNECT_PROOF_Server {
+            result: LoginResult::Success,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_PROOF_Server0() {
-        let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::Success,
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -166,10 +170,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_PROOF_Server0() {
-        let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::Success,
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -191,10 +192,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_PROOF_Server0() {
-        let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::Success,
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -214,14 +212,18 @@ mod test {
 
     const RAW1: [u8; 2] = [ 0x03, 0x0E, ];
 
+    pub(crate) fn expected1() -> CMD_AUTH_RECONNECT_PROOF_Server {
+        CMD_AUTH_RECONNECT_PROOF_Server {
+            result: LoginResult::SuccessSurvey,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 17.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_PROOF_Server1() {
-        let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SuccessSurvey,
-        };
-
+        let expected = expected1();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -243,10 +245,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_PROOF_Server1() {
-        let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SuccessSurvey,
-        };
-
+        let expected = expected1();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -268,10 +267,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_PROOF_Server1() {
-        let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SuccessSurvey,
-        };
-
+        let expected = expected1();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -291,14 +287,18 @@ mod test {
 
     const RAW2: [u8; 2] = [ 0x03, 0x0E, ];
 
+    pub(crate) fn expected2() -> CMD_AUTH_RECONNECT_PROOF_Server {
+        CMD_AUTH_RECONNECT_PROOF_Server {
+            result: LoginResult::SuccessSurvey,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/proof_server.wowm` line 44.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_AUTH_RECONNECT_PROOF_Server2() {
-        let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SuccessSurvey,
-        };
-
+        let expected = expected2();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW2)).unwrap();
         let t = match t {
@@ -320,10 +320,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_PROOF_Server2() {
-        let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SuccessSurvey,
-        };
-
+        let expected = expected2();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW2)).await.unwrap();
         let t = match t {
@@ -345,10 +342,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_PROOF_Server2() {
-        let expected = CMD_AUTH_RECONNECT_PROOF_Server {
-            result: LoginResult::SuccessSurvey,
-        };
-
+        let expected = expected2();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW2)).await.unwrap();
         let t = match t {

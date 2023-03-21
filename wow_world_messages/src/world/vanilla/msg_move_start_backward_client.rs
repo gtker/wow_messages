@@ -63,11 +63,8 @@ mod test {
          0xC2, 0xBD, 0x0D, 0xA5, 0x42, 0x6B, 0x6C, 0x92, 0x40, 0x00, 0x00, 0x00,
          0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm` line 20.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn MSG_MOVE_START_BACKWARD_Client0() {
-        let expected = MSG_MOVE_START_BACKWARD_Client {
+    pub(crate) fn expected0() -> MSG_MOVE_START_BACKWARD_Client {
+        MSG_MOVE_START_BACKWARD_Client {
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
                     .set_BACKWARD()
@@ -81,8 +78,15 @@ mod test {
                 orientation: 4.5757346_f32,
                 fall_time: 0_f32,
             },
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_start_backward.wowm` line 20.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn MSG_MOVE_START_BACKWARD_Client0() {
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -104,22 +108,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_START_BACKWARD_Client0() {
-        let expected = MSG_MOVE_START_BACKWARD_Client {
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    .set_BACKWARD()
-                    ,
-                timestamp: 0x25B5710,
-                position: Vector3d {
-                    x: -8937.364_f32,
-                    y: -122.47741_f32,
-                    z: 82.52683_f32,
-                },
-                orientation: 4.5757346_f32,
-                fall_time: 0_f32,
-            },
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -141,22 +130,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_START_BACKWARD_Client0() {
-        let expected = MSG_MOVE_START_BACKWARD_Client {
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    .set_BACKWARD()
-                    ,
-                timestamp: 0x25B5710,
-                position: Vector3d {
-                    x: -8937.364_f32,
-                    y: -122.47741_f32,
-                    z: 82.52683_f32,
-                },
-                orientation: 4.5757346_f32,
-                fall_time: 0_f32,
-            },
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

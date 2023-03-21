@@ -56,14 +56,18 @@ mod test {
 
     const RAW0: [u8; 8] = [ 0x00, 0x06, 0xCF, 0x01, 0x94, 0x98, 0x50, 0x61, ];
 
+    pub(crate) fn expected0() -> SMSG_QUERY_TIME_RESPONSE {
+        SMSG_QUERY_TIME_RESPONSE {
+            time: 0x61509894,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_QUERY_TIME_RESPONSE0() {
-        let expected = SMSG_QUERY_TIME_RESPONSE {
-            time: 0x61509894,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -85,10 +89,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_QUERY_TIME_RESPONSE0() {
-        let expected = SMSG_QUERY_TIME_RESPONSE {
-            time: 0x61509894,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -110,10 +111,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_QUERY_TIME_RESPONSE0() {
-        let expected = SMSG_QUERY_TIME_RESPONSE {
-            time: 0x61509894,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

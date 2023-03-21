@@ -448,11 +448,8 @@ mod test_vanilla {
          0x90, 0x80, 0x51, 0xFC, 0xB7, 0xA4, 0x50, 0x70, 0xB8, 0x12, 0xF3, 0x3F,
          0x26, 0x41, 0xFD, 0xB5, 0x37, 0x90, 0x19, 0x66, 0x8F, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMSG_AUTH_SESSION0() {
-        let expected = CMSG_AUTH_SESSION {
+    pub(crate) fn expected0() -> CMSG_AUTH_SESSION {
+        CMSG_AUTH_SESSION {
             build: 0x16F3,
             server_id: 0x0,
             username: String::from("A"),
@@ -534,8 +531,15 @@ mod test_vanilla {
                     addon_extra_crc: 0x0,
                 },
             ],
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMSG_AUTH_SESSION0() {
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -567,90 +571,7 @@ mod test_vanilla {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_AUTH_SESSION0() {
-        let expected = CMSG_AUTH_SESSION {
-            build: 0x16F3,
-            server_id: 0x0,
-            username: String::from("A"),
-            client_seed: 0x49D80288,
-            client_proof: [ 0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7,
-                 0x8A, 0xDB, 0xA4, 0xFB, 0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, ],
-            decompressed_addon_info_size: 0x156,
-            addon_info: vec![
-                AddonInfo {
-                    addon_name: String::from("Blizzard_AuctionUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_BattlefieldMinimap"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_BindingUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_CombatText"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_CraftUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_GMSurveyUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_InspectUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_MacroUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_RaidUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_TalentUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_TradeSkillUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_TrainerUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-            ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -682,90 +603,7 @@ mod test_vanilla {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_AUTH_SESSION0() {
-        let expected = CMSG_AUTH_SESSION {
-            build: 0x16F3,
-            server_id: 0x0,
-            username: String::from("A"),
-            client_seed: 0x49D80288,
-            client_proof: [ 0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7,
-                 0x8A, 0xDB, 0xA4, 0xFB, 0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, ],
-            decompressed_addon_info_size: 0x156,
-            addon_info: vec![
-                AddonInfo {
-                    addon_name: String::from("Blizzard_AuctionUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_BattlefieldMinimap"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_BindingUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_CombatText"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_CraftUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_GMSurveyUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_InspectUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_MacroUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_RaidUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_TalentUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_TradeSkillUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_TrainerUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-            ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -819,11 +657,8 @@ mod test_tbc {
          0x90, 0x80, 0x51, 0xFC, 0xB7, 0xA4, 0x50, 0x70, 0xB8, 0x12, 0xF3, 0x3F,
          0x26, 0x41, 0xFD, 0xB5, 0x37, 0x90, 0x19, 0x66, 0x8F, ];
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMSG_AUTH_SESSION0() {
-        let expected = CMSG_AUTH_SESSION {
+    pub(crate) fn expected0() -> CMSG_AUTH_SESSION {
+        CMSG_AUTH_SESSION {
             build: 0x16F3,
             server_id: 0x0,
             username: String::from("A"),
@@ -905,8 +740,15 @@ mod test_tbc {
                     addon_extra_crc: 0x0,
                 },
             ],
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMSG_AUTH_SESSION0() {
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -938,90 +780,7 @@ mod test_tbc {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_AUTH_SESSION0() {
-        let expected = CMSG_AUTH_SESSION {
-            build: 0x16F3,
-            server_id: 0x0,
-            username: String::from("A"),
-            client_seed: 0x49D80288,
-            client_proof: [ 0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7,
-                 0x8A, 0xDB, 0xA4, 0xFB, 0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, ],
-            decompressed_addon_info_size: 0x156,
-            addon_info: vec![
-                AddonInfo {
-                    addon_name: String::from("Blizzard_AuctionUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_BattlefieldMinimap"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_BindingUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_CombatText"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_CraftUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_GMSurveyUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_InspectUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_MacroUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_RaidUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_TalentUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_TradeSkillUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_TrainerUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-            ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -1053,90 +812,7 @@ mod test_tbc {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_AUTH_SESSION0() {
-        let expected = CMSG_AUTH_SESSION {
-            build: 0x16F3,
-            server_id: 0x0,
-            username: String::from("A"),
-            client_seed: 0x49D80288,
-            client_proof: [ 0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7,
-                 0x8A, 0xDB, 0xA4, 0xFB, 0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, ],
-            decompressed_addon_info_size: 0x156,
-            addon_info: vec![
-                AddonInfo {
-                    addon_name: String::from("Blizzard_AuctionUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_BattlefieldMinimap"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_BindingUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_CombatText"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_CraftUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_GMSurveyUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_InspectUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_MacroUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_RaidUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_TalentUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_TradeSkillUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-                AddonInfo {
-                    addon_name: String::from("Blizzard_TrainerUI"),
-                    addon_has_signature: 0x1,
-                    addon_crc: 0x4C1C776D,
-                    addon_extra_crc: 0x0,
-                },
-            ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

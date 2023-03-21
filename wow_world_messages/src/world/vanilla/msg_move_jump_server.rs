@@ -75,11 +75,8 @@ mod test {
          0x00, 0xD8, 0x93, 0xFE, 0xC0, 0x4D, 0xBA, 0x6D, 0x3F, 0x9F, 0xF6, 0xBD,
          0x3E, 0x00, 0x00, 0xE0, 0x40, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm` line 61.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn MSG_MOVE_JUMP_Server0() {
-        let expected = MSG_MOVE_JUMP_Server {
+    pub(crate) fn expected0() -> MSG_MOVE_JUMP_Server {
+        MSG_MOVE_JUMP_Server {
             guid: Guid::new(0x5),
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
@@ -100,8 +97,15 @@ mod test {
                 orientation: 0.38010955_f32,
                 fall_time: 0_f32,
             },
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_jump.wowm` line 61.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn MSG_MOVE_JUMP_Server0() {
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -124,29 +128,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_JUMP_Server0() {
-        let expected = MSG_MOVE_JUMP_Server {
-            guid: Guid::new(0x5),
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    .set_JUMPING(MovementInfo_MovementFlags_Jumping {
-                        cos_angle: 0.928624_f32,
-                        sin_angle: 0.3710222_f32,
-                        xy_speed: 7_f32,
-                        z_speed: -7.9555473_f32,
-                    })
-                    .set_FORWARD()
-                    ,
-                timestamp: 0x179D620,
-                position: Vector3d {
-                    x: -8939.276_f32,
-                    y: -133.29927_f32,
-                    z: 83.646126_f32,
-                },
-                orientation: 0.38010955_f32,
-                fall_time: 0_f32,
-            },
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -169,29 +151,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_JUMP_Server0() {
-        let expected = MSG_MOVE_JUMP_Server {
-            guid: Guid::new(0x5),
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    .set_JUMPING(MovementInfo_MovementFlags_Jumping {
-                        cos_angle: 0.928624_f32,
-                        sin_angle: 0.3710222_f32,
-                        xy_speed: 7_f32,
-                        z_speed: -7.9555473_f32,
-                    })
-                    .set_FORWARD()
-                    ,
-                timestamp: 0x179D620,
-                position: Vector3d {
-                    x: -8939.276_f32,
-                    y: -133.29927_f32,
-                    z: 83.646126_f32,
-                },
-                orientation: 0.38010955_f32,
-                fall_time: 0_f32,
-            },
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

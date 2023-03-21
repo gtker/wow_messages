@@ -62,14 +62,18 @@ mod test_vanilla {
     const RAW0: [u8; 12] = [ 0x00, 0x0A, 0xAA, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, ];
 
+    pub(crate) fn expected0() -> SMSG_DESTROY_OBJECT {
+        SMSG_DESTROY_OBJECT {
+            guid: Guid::new(0x6),
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/gameobject/smsg_destroy_object.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_DESTROY_OBJECT0() {
-        let expected = SMSG_DESTROY_OBJECT {
-            guid: Guid::new(0x6),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -91,10 +95,7 @@ mod test_vanilla {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_DESTROY_OBJECT0() {
-        let expected = SMSG_DESTROY_OBJECT {
-            guid: Guid::new(0x6),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -116,10 +117,7 @@ mod test_vanilla {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_DESTROY_OBJECT0() {
-        let expected = SMSG_DESTROY_OBJECT {
-            guid: Guid::new(0x6),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -151,14 +149,18 @@ mod test_tbc {
     const RAW0: [u8; 12] = [ 0x00, 0x0A, 0xAA, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x00, 0x00, ];
 
+    pub(crate) fn expected0() -> SMSG_DESTROY_OBJECT {
+        SMSG_DESTROY_OBJECT {
+            guid: Guid::new(0x6),
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/gameobject/smsg_destroy_object.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_DESTROY_OBJECT0() {
-        let expected = SMSG_DESTROY_OBJECT {
-            guid: Guid::new(0x6),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -180,10 +182,7 @@ mod test_tbc {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_DESTROY_OBJECT0() {
-        let expected = SMSG_DESTROY_OBJECT {
-            guid: Guid::new(0x6),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -205,10 +204,7 @@ mod test_tbc {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_DESTROY_OBJECT0() {
-        let expected = SMSG_DESTROY_OBJECT {
-            guid: Guid::new(0x6),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

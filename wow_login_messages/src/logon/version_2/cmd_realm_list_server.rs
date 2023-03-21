@@ -253,11 +253,8 @@ mod test_version_2 {
          0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8, 0x43,
          0x01, 0x00, 0x02, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 76.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMD_REALM_LIST_Server0() {
-        let expected = CMD_REALM_LIST_Server {
+    pub(crate) fn expected0() -> CMD_REALM_LIST_Server {
+        CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
                     realm_type: RealmType::PlayerVsEnvironment,
@@ -271,8 +268,15 @@ mod test_version_2 {
                     realm_id: 0x2,
                 },
             ],
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 76.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_REALM_LIST_Server0() {
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -294,22 +298,7 @@ mod test_version_2 {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Server0() {
-        let expected = CMD_REALM_LIST_Server {
-            realms: vec![
-                Realm {
-                    realm_type: RealmType::PlayerVsEnvironment,
-                    flag: RealmFlag::empty()
-                        ,
-                    name: String::from("A"),
-                    address: String::from("A"),
-                    population: Population::RedFull,
-                    number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::Default,
-                    realm_id: 0x2,
-                },
-            ],
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -331,22 +320,7 @@ mod test_version_2 {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Server0() {
-        let expected = CMD_REALM_LIST_Server {
-            realms: vec![
-                Realm {
-                    realm_type: RealmType::PlayerVsEnvironment,
-                    flag: RealmFlag::empty()
-                        ,
-                    name: String::from("A"),
-                    address: String::from("A"),
-                    population: Population::RedFull,
-                    number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::Default,
-                    realm_id: 0x2,
-                },
-            ],
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -368,11 +342,8 @@ mod test_version_2 {
          0x00, 0x00, 0x00, 0x03, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8, 0x43,
          0x01, 0x00, 0x02, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 107.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMD_REALM_LIST_Server1() {
-        let expected = CMD_REALM_LIST_Server {
+    pub(crate) fn expected1() -> CMD_REALM_LIST_Server {
+        CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
                     realm_type: RealmType::PlayerVsEnvironment,
@@ -388,8 +359,15 @@ mod test_version_2 {
                     realm_id: 0x2,
                 },
             ],
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 107.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_REALM_LIST_Server1() {
+        let expected = expected1();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -411,24 +389,7 @@ mod test_version_2 {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Server1() {
-        let expected = CMD_REALM_LIST_Server {
-            realms: vec![
-                Realm {
-                    realm_type: RealmType::PlayerVsEnvironment,
-                    flag: RealmFlag::empty()
-                        .set_INVALID()
-                        .set_OFFLINE()
-                        ,
-                    name: String::from("A"),
-                    address: String::from("A"),
-                    population: Population::RedFull,
-                    number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::Default,
-                    realm_id: 0x2,
-                },
-            ],
-        };
-
+        let expected = expected1();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -450,24 +411,7 @@ mod test_version_2 {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Server1() {
-        let expected = CMD_REALM_LIST_Server {
-            realms: vec![
-                Realm {
-                    realm_type: RealmType::PlayerVsEnvironment,
-                    flag: RealmFlag::empty()
-                        .set_INVALID()
-                        .set_OFFLINE()
-                        ,
-                    name: String::from("A"),
-                    address: String::from("A"),
-                    population: Population::RedFull,
-                    number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::Default,
-                    realm_id: 0x2,
-                },
-            ],
-        };
-
+        let expected = expected1();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -499,11 +443,8 @@ mod test_version_3 {
          0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8, 0x43,
          0x01, 0x00, 0x02, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 76.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMD_REALM_LIST_Server0() {
-        let expected = CMD_REALM_LIST_Server {
+    pub(crate) fn expected0() -> CMD_REALM_LIST_Server {
+        CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
                     realm_type: RealmType::PlayerVsEnvironment,
@@ -517,8 +458,15 @@ mod test_version_3 {
                     realm_id: 0x2,
                 },
             ],
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 76.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_REALM_LIST_Server0() {
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -540,22 +488,7 @@ mod test_version_3 {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Server0() {
-        let expected = CMD_REALM_LIST_Server {
-            realms: vec![
-                Realm {
-                    realm_type: RealmType::PlayerVsEnvironment,
-                    flag: RealmFlag::empty()
-                        ,
-                    name: String::from("A"),
-                    address: String::from("A"),
-                    population: Population::RedFull,
-                    number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::Default,
-                    realm_id: 0x2,
-                },
-            ],
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -577,22 +510,7 @@ mod test_version_3 {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Server0() {
-        let expected = CMD_REALM_LIST_Server {
-            realms: vec![
-                Realm {
-                    realm_type: RealmType::PlayerVsEnvironment,
-                    flag: RealmFlag::empty()
-                        ,
-                    name: String::from("A"),
-                    address: String::from("A"),
-                    population: Population::RedFull,
-                    number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::Default,
-                    realm_id: 0x2,
-                },
-            ],
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -614,11 +532,8 @@ mod test_version_3 {
          0x00, 0x00, 0x00, 0x03, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8, 0x43,
          0x01, 0x00, 0x02, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 107.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMD_REALM_LIST_Server1() {
-        let expected = CMD_REALM_LIST_Server {
+    pub(crate) fn expected1() -> CMD_REALM_LIST_Server {
+        CMD_REALM_LIST_Server {
             realms: vec![
                 Realm {
                     realm_type: RealmType::PlayerVsEnvironment,
@@ -634,8 +549,15 @@ mod test_version_3 {
                     realm_id: 0x2,
                 },
             ],
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 107.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_REALM_LIST_Server1() {
+        let expected = expected1();
         let header_size = 1;
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -657,24 +579,7 @@ mod test_version_3 {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Server1() {
-        let expected = CMD_REALM_LIST_Server {
-            realms: vec![
-                Realm {
-                    realm_type: RealmType::PlayerVsEnvironment,
-                    flag: RealmFlag::empty()
-                        .set_INVALID()
-                        .set_OFFLINE()
-                        ,
-                    name: String::from("A"),
-                    address: String::from("A"),
-                    population: Population::RedFull,
-                    number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::Default,
-                    realm_id: 0x2,
-                },
-            ],
-        };
-
+        let expected = expected1();
         let header_size = 1;
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -696,24 +601,7 @@ mod test_version_3 {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Server1() {
-        let expected = CMD_REALM_LIST_Server {
-            realms: vec![
-                Realm {
-                    realm_type: RealmType::PlayerVsEnvironment,
-                    flag: RealmFlag::empty()
-                        .set_INVALID()
-                        .set_OFFLINE()
-                        ,
-                    name: String::from("A"),
-                    address: String::from("A"),
-                    population: Population::RedFull,
-                    number_of_characters_on_realm: 0x1,
-                    category: RealmCategory::Default,
-                    realm_id: 0x2,
-                },
-            ],
-        };
-
+        let expected = expected1();
         let header_size = 1;
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {

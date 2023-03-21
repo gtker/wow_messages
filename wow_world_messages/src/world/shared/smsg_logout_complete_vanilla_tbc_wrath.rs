@@ -54,13 +54,17 @@ mod test_vanilla {
 
     const RAW0: [u8; 4] = [ 0x00, 0x02, 0x4D, 0x00, ];
 
+    pub(crate) fn expected0() -> SMSG_LOGOUT_COMPLETE {
+        SMSG_LOGOUT_COMPLETE {
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_LOGOUT_COMPLETE0() {
-        let expected = SMSG_LOGOUT_COMPLETE {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
@@ -81,9 +85,7 @@ mod test_vanilla {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_LOGOUT_COMPLETE0() {
-        let expected = SMSG_LOGOUT_COMPLETE {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
@@ -104,9 +106,7 @@ mod test_vanilla {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_LOGOUT_COMPLETE0() {
-        let expected = SMSG_LOGOUT_COMPLETE {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
@@ -135,13 +135,17 @@ mod test_tbc {
 
     const RAW0: [u8; 4] = [ 0x00, 0x02, 0x4D, 0x00, ];
 
+    pub(crate) fn expected0() -> SMSG_LOGOUT_COMPLETE {
+        SMSG_LOGOUT_COMPLETE {
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_LOGOUT_COMPLETE0() {
-        let expected = SMSG_LOGOUT_COMPLETE {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
@@ -162,9 +166,7 @@ mod test_tbc {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_LOGOUT_COMPLETE0() {
-        let expected = SMSG_LOGOUT_COMPLETE {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
@@ -185,9 +187,7 @@ mod test_tbc {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_LOGOUT_COMPLETE0() {
-        let expected = SMSG_LOGOUT_COMPLETE {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
@@ -216,13 +216,17 @@ mod test_wrath {
 
     const RAW0: [u8; 4] = [ 0x00, 0x02, 0x4D, 0x00, ];
 
+    pub(crate) fn expected0() -> SMSG_LOGOUT_COMPLETE {
+        SMSG_LOGOUT_COMPLETE {
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn SMSG_LOGOUT_COMPLETE0() {
-        let expected = SMSG_LOGOUT_COMPLETE {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
@@ -243,9 +247,7 @@ mod test_wrath {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_LOGOUT_COMPLETE0() {
-        let expected = SMSG_LOGOUT_COMPLETE {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
@@ -266,9 +268,7 @@ mod test_wrath {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_LOGOUT_COMPLETE0() {
-        let expected = SMSG_LOGOUT_COMPLETE {
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {

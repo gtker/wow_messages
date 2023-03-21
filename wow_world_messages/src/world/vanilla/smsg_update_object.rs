@@ -95,11 +95,8 @@ mod test {
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x19, 0x00, 0x00, 0x00, 0x64, 0x00,
          0x00, 0x00, 0x01, 0x01, 0x01, 0x01, ];
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 195.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn SMSG_UPDATE_OBJECT0() {
-        let expected = SMSG_UPDATE_OBJECT {
+    pub(crate) fn expected0() -> SMSG_UPDATE_OBJECT {
+        SMSG_UPDATE_OBJECT {
             has_transport: 0x0,
             objects: vec![
                 Object {
@@ -141,8 +138,15 @@ mod test {
                     },
                 },
             ],
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 195.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_UPDATE_OBJECT0() {
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -165,50 +169,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_UPDATE_OBJECT0() {
-        let expected = SMSG_UPDATE_OBJECT {
-            has_transport: 0x0,
-            objects: vec![
-                Object {
-                    update_type: Object_UpdateType::CreateObject2 {
-                        guid3: Guid::new(0x4),
-                        mask2: UpdateMask::Player(UpdatePlayer::builder()
-                            .set_object_GUID(Guid::new(4))
-                            .set_unit_HEALTH(100)
-                            .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::Living {
-                                    backwards_running_speed: 4.5_f32,
-                                    backwards_swimming_speed: 0_f32,
-                                    fall_time: 0_f32,
-                                    flags: MovementBlock_MovementFlags::empty()
-                                        ,
-                                    living_orientation: 0_f32,
-                                    living_position: Vector3d {
-                                        x: -8949.95_f32,
-                                        y: -132.493_f32,
-                                        z: 83.5312_f32,
-                                    },
-                                    running_speed: 7_f32,
-                                    swimming_speed: 0_f32,
-                                    timestamp: 0x0,
-                                    turn_rate: 3.1415927_f32,
-                                    walking_speed: 1_f32,
-                                })
-                                .set_ALL(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_SELF()
-                                ,
-                        },
-                        object_type: ObjectType::Player,
-                    },
-                },
-            ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -231,50 +192,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_UPDATE_OBJECT0() {
-        let expected = SMSG_UPDATE_OBJECT {
-            has_transport: 0x0,
-            objects: vec![
-                Object {
-                    update_type: Object_UpdateType::CreateObject2 {
-                        guid3: Guid::new(0x4),
-                        mask2: UpdateMask::Player(UpdatePlayer::builder()
-                            .set_object_GUID(Guid::new(4))
-                            .set_unit_HEALTH(100)
-                            .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::Living {
-                                    backwards_running_speed: 4.5_f32,
-                                    backwards_swimming_speed: 0_f32,
-                                    fall_time: 0_f32,
-                                    flags: MovementBlock_MovementFlags::empty()
-                                        ,
-                                    living_orientation: 0_f32,
-                                    living_position: Vector3d {
-                                        x: -8949.95_f32,
-                                        y: -132.493_f32,
-                                        z: 83.5312_f32,
-                                    },
-                                    running_speed: 7_f32,
-                                    swimming_speed: 0_f32,
-                                    timestamp: 0x0,
-                                    turn_rate: 3.1415927_f32,
-                                    walking_speed: 1_f32,
-                                })
-                                .set_ALL(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_SELF()
-                                ,
-                        },
-                        object_type: ObjectType::Player,
-                    },
-                },
-            ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -306,11 +224,8 @@ mod test {
          0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x32, 0x00,
          0x00, 0x00, 0x32, 0x00, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 262.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn SMSG_UPDATE_OBJECT1() {
-        let expected = SMSG_UPDATE_OBJECT {
+    pub(crate) fn expected1() -> SMSG_UPDATE_OBJECT {
+        SMSG_UPDATE_OBJECT {
             has_transport: 0x0,
             objects: vec![
                 Object {
@@ -358,8 +273,15 @@ mod test {
                     },
                 },
             ],
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_object.wowm` line 262.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_UPDATE_OBJECT1() {
+        let expected = expected1();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -382,56 +304,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_UPDATE_OBJECT1() {
-        let expected = SMSG_UPDATE_OBJECT {
-            has_transport: 0x0,
-            objects: vec![
-                Object {
-                    update_type: Object_UpdateType::CreateObject2 {
-                        guid3: Guid::new(0x4),
-                        mask2: UpdateMask::Player(UpdatePlayer::builder()
-                            .set_object_GUID(Guid::new(4))
-                            .set_object_SCALE_X(1.0)
-                            .set_unit_HEALTH(100)
-                            .set_unit_MAXHEALTH(100)
-                            .set_unit_LEVEL(1)
-                            .set_unit_FACTIONTEMPLATE(1)
-                            .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
-                            .set_unit_DISPLAYID(50)
-                            .set_unit_NATIVEDISPLAYID(50)
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::Living {
-                                    backwards_running_speed: 4.5_f32,
-                                    backwards_swimming_speed: 0_f32,
-                                    fall_time: 0_f32,
-                                    flags: MovementBlock_MovementFlags::empty()
-                                        ,
-                                    living_orientation: 0_f32,
-                                    living_position: Vector3d {
-                                        x: -8949.95_f32,
-                                        y: -132.493_f32,
-                                        z: 83.5312_f32,
-                                    },
-                                    running_speed: 7_f32,
-                                    swimming_speed: 0_f32,
-                                    timestamp: 0x0,
-                                    turn_rate: 3.1415927_f32,
-                                    walking_speed: 1_f32,
-                                })
-                                .set_ALL(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_SELF()
-                                ,
-                        },
-                        object_type: ObjectType::Player,
-                    },
-                },
-            ],
-        };
-
+        let expected = expected1();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -454,56 +327,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_UPDATE_OBJECT1() {
-        let expected = SMSG_UPDATE_OBJECT {
-            has_transport: 0x0,
-            objects: vec![
-                Object {
-                    update_type: Object_UpdateType::CreateObject2 {
-                        guid3: Guid::new(0x4),
-                        mask2: UpdateMask::Player(UpdatePlayer::builder()
-                            .set_object_GUID(Guid::new(4))
-                            .set_object_SCALE_X(1.0)
-                            .set_unit_HEALTH(100)
-                            .set_unit_MAXHEALTH(100)
-                            .set_unit_LEVEL(1)
-                            .set_unit_FACTIONTEMPLATE(1)
-                            .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
-                            .set_unit_DISPLAYID(50)
-                            .set_unit_NATIVEDISPLAYID(50)
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::Living {
-                                    backwards_running_speed: 4.5_f32,
-                                    backwards_swimming_speed: 0_f32,
-                                    fall_time: 0_f32,
-                                    flags: MovementBlock_MovementFlags::empty()
-                                        ,
-                                    living_orientation: 0_f32,
-                                    living_position: Vector3d {
-                                        x: -8949.95_f32,
-                                        y: -132.493_f32,
-                                        z: 83.5312_f32,
-                                    },
-                                    running_speed: 7_f32,
-                                    swimming_speed: 0_f32,
-                                    timestamp: 0x0,
-                                    turn_rate: 3.1415927_f32,
-                                    walking_speed: 1_f32,
-                                })
-                                .set_ALL(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_SELF()
-                                ,
-                        },
-                        object_type: ObjectType::Player,
-                    },
-                },
-            ],
-        };
-
+        let expected = expected1();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {

@@ -255,11 +255,8 @@ mod test {
          0x18, 0xA6, 0x2D, 0x9D, 0xB1, 0x15, 0xD5, 0x6D, 0x40, 0x35, 0x70, 0xD3,
          0x20, 0x6C, 0xEC, 0x6E, 0x03, 0x00, 0x36, 0x4C, 0x30, 0x21, ];
 
-    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 20.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn SMSG_COMPRESSED_UPDATE_OBJECT0() {
-        let expected = SMSG_COMPRESSED_UPDATE_OBJECT {
+    pub(crate) fn expected0() -> SMSG_COMPRESSED_UPDATE_OBJECT {
+        SMSG_COMPRESSED_UPDATE_OBJECT {
             has_transport: 0x1,
             objects: vec![
                 Object {
@@ -403,8 +400,15 @@ mod test {
                     },
                 },
             ],
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 20.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_COMPRESSED_UPDATE_OBJECT0() {
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -431,152 +435,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_COMPRESSED_UPDATE_OBJECT0() {
-        let expected = SMSG_COMPRESSED_UPDATE_OBJECT {
-            has_transport: 0x1,
-            objects: vec![
-                Object {
-                    update_type: Object_UpdateType::CreateObject {
-                        guid3: Guid::new(0x1FC0000000005148),
-                        mask2: UpdateMask::GameObject(UpdateGameObject::builder()
-                            .set_object_GUID(Guid::new(2287828610704232776))
-                            .set_object_ENTRY(20808)
-                            .set_object_SCALE_X(1.0)
-                            .set_gameobject_DISPLAYID(3015)
-                            .set_gameobject_FLAGS(40)
-                            .set_gameobject_STATE(1)
-                            .set_gameobject_TYPE_ID(15)
-                            .set_gameobject_ANIMPROGRESS(100)
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_ALL(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_TRANSPORT(MovementBlock_UpdateFlag_Transport {
-                                    transport_progress_in_ms: 0x5E4E1,
-                                })
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::HasPosition {
-                                    orientation: 4.0249395_f32,
-                                    position: Vector3d {
-                                        x: 0_f32,
-                                        y: 0_f32,
-                                        z: 0_f32,
-                                    },
-                                })
-                                ,
-                        },
-                        object_type: ObjectType::GameObject,
-                    },
-                },
-                Object {
-                    update_type: Object_UpdateType::CreateObject {
-                        guid3: Guid::new(0x1FC000000002B074),
-                        mask2: UpdateMask::GameObject(UpdateGameObject::builder()
-                            .set_object_GUID(Guid::new(2287828610704388212))
-                            .set_object_ENTRY(176244)
-                            .set_object_SCALE_X(1.0)
-                            .set_gameobject_DISPLAYID(3015)
-                            .set_gameobject_FLAGS(40)
-                            .set_gameobject_STATE(1)
-                            .set_gameobject_TYPE_ID(15)
-                            .set_gameobject_ANIMPROGRESS(100)
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_ALL(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_TRANSPORT(MovementBlock_UpdateFlag_Transport {
-                                    transport_progress_in_ms: 0x5E4E1,
-                                })
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::HasPosition {
-                                    orientation: 1.5709158_f32,
-                                    position: Vector3d {
-                                        x: 0_f32,
-                                        y: 0_f32,
-                                        z: 0_f32,
-                                    },
-                                })
-                                ,
-                        },
-                        object_type: ObjectType::GameObject,
-                    },
-                },
-                Object {
-                    update_type: Object_UpdateType::CreateObject {
-                        guid3: Guid::new(0x1FC0000000028407),
-                        mask2: UpdateMask::GameObject(UpdateGameObject::builder()
-                            .set_object_GUID(Guid::new(2287828610704376839))
-                            .set_object_ENTRY(164871)
-                            .set_object_SCALE_X(1.0)
-                            .set_gameobject_DISPLAYID(3031)
-                            .set_gameobject_FLAGS(40)
-                            .set_gameobject_STATE(1)
-                            .set_gameobject_TYPE_ID(15)
-                            .set_gameobject_ANIMPROGRESS(100)
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_ALL(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_TRANSPORT(MovementBlock_UpdateFlag_Transport {
-                                    transport_progress_in_ms: 0x5E4E1,
-                                })
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::HasPosition {
-                                    orientation: 4.5152526_f32,
-                                    position: Vector3d {
-                                        x: 0_f32,
-                                        y: 0_f32,
-                                        z: 0_f32,
-                                    },
-                                })
-                                ,
-                        },
-                        object_type: ObjectType::GameObject,
-                    },
-                },
-                Object {
-                    update_type: Object_UpdateType::CreateObject {
-                        guid3: Guid::new(0x1FC000000002B451),
-                        mask2: UpdateMask::GameObject(UpdateGameObject::builder()
-                            .set_object_GUID(Guid::new(2287828610704389201))
-                            .set_object_ENTRY(177233)
-                            .set_object_SCALE_X(1.0)
-                            .set_gameobject_DISPLAYID(3015)
-                            .set_gameobject_FLAGS(40)
-                            .set_gameobject_STATE(1)
-                            .set_gameobject_TYPE_ID(15)
-                            .set_gameobject_ANIMPROGRESS(100)
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_ALL(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_TRANSPORT(MovementBlock_UpdateFlag_Transport {
-                                    transport_progress_in_ms: 0x5E4E1,
-                                })
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::HasPosition {
-                                    orientation: 1.4187208_f32,
-                                    position: Vector3d {
-                                        x: 0_f32,
-                                        y: 0_f32,
-                                        z: 0_f32,
-                                    },
-                                })
-                                ,
-                        },
-                        object_type: ObjectType::GameObject,
-                    },
-                },
-            ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -603,152 +462,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_COMPRESSED_UPDATE_OBJECT0() {
-        let expected = SMSG_COMPRESSED_UPDATE_OBJECT {
-            has_transport: 0x1,
-            objects: vec![
-                Object {
-                    update_type: Object_UpdateType::CreateObject {
-                        guid3: Guid::new(0x1FC0000000005148),
-                        mask2: UpdateMask::GameObject(UpdateGameObject::builder()
-                            .set_object_GUID(Guid::new(2287828610704232776))
-                            .set_object_ENTRY(20808)
-                            .set_object_SCALE_X(1.0)
-                            .set_gameobject_DISPLAYID(3015)
-                            .set_gameobject_FLAGS(40)
-                            .set_gameobject_STATE(1)
-                            .set_gameobject_TYPE_ID(15)
-                            .set_gameobject_ANIMPROGRESS(100)
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_ALL(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_TRANSPORT(MovementBlock_UpdateFlag_Transport {
-                                    transport_progress_in_ms: 0x5E4E1,
-                                })
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::HasPosition {
-                                    orientation: 4.0249395_f32,
-                                    position: Vector3d {
-                                        x: 0_f32,
-                                        y: 0_f32,
-                                        z: 0_f32,
-                                    },
-                                })
-                                ,
-                        },
-                        object_type: ObjectType::GameObject,
-                    },
-                },
-                Object {
-                    update_type: Object_UpdateType::CreateObject {
-                        guid3: Guid::new(0x1FC000000002B074),
-                        mask2: UpdateMask::GameObject(UpdateGameObject::builder()
-                            .set_object_GUID(Guid::new(2287828610704388212))
-                            .set_object_ENTRY(176244)
-                            .set_object_SCALE_X(1.0)
-                            .set_gameobject_DISPLAYID(3015)
-                            .set_gameobject_FLAGS(40)
-                            .set_gameobject_STATE(1)
-                            .set_gameobject_TYPE_ID(15)
-                            .set_gameobject_ANIMPROGRESS(100)
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_ALL(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_TRANSPORT(MovementBlock_UpdateFlag_Transport {
-                                    transport_progress_in_ms: 0x5E4E1,
-                                })
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::HasPosition {
-                                    orientation: 1.5709158_f32,
-                                    position: Vector3d {
-                                        x: 0_f32,
-                                        y: 0_f32,
-                                        z: 0_f32,
-                                    },
-                                })
-                                ,
-                        },
-                        object_type: ObjectType::GameObject,
-                    },
-                },
-                Object {
-                    update_type: Object_UpdateType::CreateObject {
-                        guid3: Guid::new(0x1FC0000000028407),
-                        mask2: UpdateMask::GameObject(UpdateGameObject::builder()
-                            .set_object_GUID(Guid::new(2287828610704376839))
-                            .set_object_ENTRY(164871)
-                            .set_object_SCALE_X(1.0)
-                            .set_gameobject_DISPLAYID(3031)
-                            .set_gameobject_FLAGS(40)
-                            .set_gameobject_STATE(1)
-                            .set_gameobject_TYPE_ID(15)
-                            .set_gameobject_ANIMPROGRESS(100)
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_ALL(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_TRANSPORT(MovementBlock_UpdateFlag_Transport {
-                                    transport_progress_in_ms: 0x5E4E1,
-                                })
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::HasPosition {
-                                    orientation: 4.5152526_f32,
-                                    position: Vector3d {
-                                        x: 0_f32,
-                                        y: 0_f32,
-                                        z: 0_f32,
-                                    },
-                                })
-                                ,
-                        },
-                        object_type: ObjectType::GameObject,
-                    },
-                },
-                Object {
-                    update_type: Object_UpdateType::CreateObject {
-                        guid3: Guid::new(0x1FC000000002B451),
-                        mask2: UpdateMask::GameObject(UpdateGameObject::builder()
-                            .set_object_GUID(Guid::new(2287828610704389201))
-                            .set_object_ENTRY(177233)
-                            .set_object_SCALE_X(1.0)
-                            .set_gameobject_DISPLAYID(3015)
-                            .set_gameobject_FLAGS(40)
-                            .set_gameobject_STATE(1)
-                            .set_gameobject_TYPE_ID(15)
-                            .set_gameobject_ANIMPROGRESS(100)
-                            .finalize()
-                        ),
-                        movement2: MovementBlock {
-                            update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_ALL(MovementBlock_UpdateFlag_All {
-                                    unknown1: 0x1,
-                                })
-                                .set_TRANSPORT(MovementBlock_UpdateFlag_Transport {
-                                    transport_progress_in_ms: 0x5E4E1,
-                                })
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::HasPosition {
-                                    orientation: 1.4187208_f32,
-                                    position: Vector3d {
-                                        x: 0_f32,
-                                        y: 0_f32,
-                                        z: 0_f32,
-                                    },
-                                })
-                                ,
-                        },
-                        object_type: ObjectType::GameObject,
-                    },
-                },
-            ],
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

@@ -209,16 +209,20 @@ mod test {
 
     const RAW0: [u8; 9] = [ 0x04, 0xDE, 0xFA, 0x00, 0x00, 0x00, 0x01, 0x00, 0xFF, ];
 
+    pub(crate) fn expected0() -> CMD_SURVEY_RESULT {
+        CMD_SURVEY_RESULT {
+            survey_id: 0xFADE,
+            error: 0x0,
+            data: vec![ 0xFF, ],
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/login/survey_result.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_SURVEY_RESULT0() {
-        let expected = CMD_SURVEY_RESULT {
-            survey_id: 0xFADE,
-            error: 0x0,
-            data: vec![ 0xFF, ],
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -242,12 +246,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_SURVEY_RESULT0() {
-        let expected = CMD_SURVEY_RESULT {
-            survey_id: 0xFADE,
-            error: 0x0,
-            data: vec![ 0xFF, ],
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -271,12 +270,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_SURVEY_RESULT0() {
-        let expected = CMD_SURVEY_RESULT {
-            survey_id: 0xFADE,
-            error: 0x0,
-            data: vec![ 0xFF, ],
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

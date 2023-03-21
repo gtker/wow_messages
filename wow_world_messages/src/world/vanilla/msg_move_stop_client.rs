@@ -63,11 +63,8 @@ mod test {
          0xC2, 0x3D, 0x17, 0xA6, 0x42, 0x03, 0x51, 0x24, 0x40, 0x85, 0x03, 0x00,
          0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_stop.wowm` line 20.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn MSG_MOVE_STOP_Client0() {
-        let expected = MSG_MOVE_STOP_Client {
+    pub(crate) fn expected0() -> MSG_MOVE_STOP_Client {
+        MSG_MOVE_STOP_Client {
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
                     ,
@@ -80,8 +77,15 @@ mod test {
                 orientation: 2.5674446_f32,
                 fall_time: 0.000000000000000000000000000000000000000001263_f32,
             },
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/msg/msg_move_stop.wowm` line 20.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn MSG_MOVE_STOP_Client0() {
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -103,21 +107,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_MSG_MOVE_STOP_Client0() {
-        let expected = MSG_MOVE_STOP_Client {
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    ,
-                timestamp: 0x17A31F2,
-                position: Vector3d {
-                    x: -8946.785_f32,
-                    y: -111.56287_f32,
-                    z: 83.04539_f32,
-                },
-                orientation: 2.5674446_f32,
-                fall_time: 0.000000000000000000000000000000000000000001263_f32,
-            },
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -139,21 +129,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_MSG_MOVE_STOP_Client0() {
-        let expected = MSG_MOVE_STOP_Client {
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    ,
-                timestamp: 0x17A31F2,
-                position: Vector3d {
-                    x: -8946.785_f32,
-                    y: -111.56287_f32,
-                    z: 83.04539_f32,
-                },
-                orientation: 2.5674446_f32,
-                fall_time: 0.000000000000000000000000000000000000000001263_f32,
-            },
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

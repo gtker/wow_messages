@@ -133,19 +133,23 @@ mod test {
          0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x00, 0x01, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm` line 62.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn SMSG_NAME_QUERY_RESPONSE0() {
-        let expected = SMSG_NAME_QUERY_RESPONSE {
+    pub(crate) fn expected0() -> SMSG_NAME_QUERY_RESPONSE {
+        SMSG_NAME_QUERY_RESPONSE {
             guid: Guid::new(0xDEADBEEF),
             character_name: String::from("Asdf"),
             realm_name: String::from(""),
             race: Race::Human,
             gender: Gender::Male,
             class: Class::Warrior,
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm` line 62.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_NAME_QUERY_RESPONSE0() {
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -172,15 +176,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_NAME_QUERY_RESPONSE0() {
-        let expected = SMSG_NAME_QUERY_RESPONSE {
-            guid: Guid::new(0xDEADBEEF),
-            character_name: String::from("Asdf"),
-            realm_name: String::from(""),
-            race: Race::Human,
-            gender: Gender::Male,
-            class: Class::Warrior,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -207,15 +203,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_NAME_QUERY_RESPONSE0() {
-        let expected = SMSG_NAME_QUERY_RESPONSE {
-            guid: Guid::new(0xDEADBEEF),
-            character_name: String::from("Asdf"),
-            realm_name: String::from(""),
-            race: Race::Human,
-            gender: Gender::Male,
-            class: Class::Warrior,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -242,19 +230,23 @@ mod test {
          0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x41, 0x00, 0x01, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
 
-    // Generated from `wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm` line 82.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn SMSG_NAME_QUERY_RESPONSE1() {
-        let expected = SMSG_NAME_QUERY_RESPONSE {
+    pub(crate) fn expected1() -> SMSG_NAME_QUERY_RESPONSE {
+        SMSG_NAME_QUERY_RESPONSE {
             guid: Guid::new(0xDEADBEEF),
             character_name: String::from("Asdf"),
             realm_name: String::from("A"),
             race: Race::Human,
             gender: Gender::Male,
             class: Class::Warrior,
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/queries/smsg_name_query_response.wowm` line 82.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn SMSG_NAME_QUERY_RESPONSE1() {
+        let expected = expected1();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -281,15 +273,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_SMSG_NAME_QUERY_RESPONSE1() {
-        let expected = SMSG_NAME_QUERY_RESPONSE {
-            guid: Guid::new(0xDEADBEEF),
-            character_name: String::from("Asdf"),
-            realm_name: String::from("A"),
-            race: Race::Human,
-            gender: Gender::Male,
-            class: Class::Warrior,
-        };
-
+        let expected = expected1();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -316,15 +300,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_SMSG_NAME_QUERY_RESPONSE1() {
-        let expected = SMSG_NAME_QUERY_RESPONSE {
-            guid: Guid::new(0xDEADBEEF),
-            character_name: String::from("Asdf"),
-            realm_name: String::from("A"),
-            race: Race::Human,
-            gender: Gender::Male,
-            class: Class::Warrior,
-        };
-
+        let expected = expected1();
         let header_size = 2 + 2;
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {

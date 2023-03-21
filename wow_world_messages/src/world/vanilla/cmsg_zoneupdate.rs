@@ -58,14 +58,18 @@ mod test {
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0xF4, 0x01, 0x00, 0x00, 0x65, 0x06, 0x00,
          0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_ZONEUPDATE {
+        CMSG_ZONEUPDATE {
+            area: Area::Orgrimmar,
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_ZONEUPDATE0() {
-        let expected = CMSG_ZONEUPDATE {
-            area: Area::Orgrimmar,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -87,10 +91,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_ZONEUPDATE0() {
-        let expected = CMSG_ZONEUPDATE {
-            area: Area::Orgrimmar,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -112,10 +113,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_ZONEUPDATE0() {
-        let expected = CMSG_ZONEUPDATE {
-            area: Area::Orgrimmar,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

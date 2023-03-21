@@ -73,14 +73,18 @@ mod test_vanilla {
     const RAW0: [u8; 13] = [ 0x00, 0x0B, 0x09, 0x00, 0x00, 0x00, 0x56, 0x75, 0x72,
          0x74, 0x6E, 0x65, 0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_TELEPORT_TO_UNIT {
+        CMSG_TELEPORT_TO_UNIT {
+            name: String::from("Vurtne"),
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_teleport_to_unit.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_TELEPORT_TO_UNIT0() {
-        let expected = CMSG_TELEPORT_TO_UNIT {
-            name: String::from("Vurtne"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -102,10 +106,7 @@ mod test_vanilla {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_TELEPORT_TO_UNIT0() {
-        let expected = CMSG_TELEPORT_TO_UNIT {
-            name: String::from("Vurtne"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -127,10 +128,7 @@ mod test_vanilla {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_TELEPORT_TO_UNIT0() {
-        let expected = CMSG_TELEPORT_TO_UNIT {
-            name: String::from("Vurtne"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -161,14 +159,18 @@ mod test_tbc {
     const RAW0: [u8; 13] = [ 0x00, 0x0B, 0x09, 0x00, 0x00, 0x00, 0x56, 0x75, 0x72,
          0x74, 0x6E, 0x65, 0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_TELEPORT_TO_UNIT {
+        CMSG_TELEPORT_TO_UNIT {
+            name: String::from("Vurtne"),
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_teleport_to_unit.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_TELEPORT_TO_UNIT0() {
-        let expected = CMSG_TELEPORT_TO_UNIT {
-            name: String::from("Vurtne"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -190,10 +192,7 @@ mod test_tbc {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_TELEPORT_TO_UNIT0() {
-        let expected = CMSG_TELEPORT_TO_UNIT {
-            name: String::from("Vurtne"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -215,10 +214,7 @@ mod test_tbc {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_TELEPORT_TO_UNIT0() {
-        let expected = CMSG_TELEPORT_TO_UNIT {
-            name: String::from("Vurtne"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -249,14 +245,18 @@ mod test_wrath {
     const RAW0: [u8; 13] = [ 0x00, 0x0B, 0x09, 0x00, 0x00, 0x00, 0x56, 0x75, 0x72,
          0x74, 0x6E, 0x65, 0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_TELEPORT_TO_UNIT {
+        CMSG_TELEPORT_TO_UNIT {
+            name: String::from("Vurtne"),
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_teleport_to_unit.wowm` line 9.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_TELEPORT_TO_UNIT0() {
-        let expected = CMSG_TELEPORT_TO_UNIT {
-            name: String::from("Vurtne"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -278,10 +278,7 @@ mod test_wrath {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_TELEPORT_TO_UNIT0() {
-        let expected = CMSG_TELEPORT_TO_UNIT {
-            name: String::from("Vurtne"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -303,10 +300,7 @@ mod test_wrath {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_TELEPORT_TO_UNIT0() {
-        let expected = CMSG_TELEPORT_TO_UNIT {
-            name: String::from("Vurtne"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

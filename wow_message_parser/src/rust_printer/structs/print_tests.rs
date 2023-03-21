@@ -45,6 +45,14 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             s.dec_indent();
             s.wln_no_indent(" ];\n");
 
+            s.funcn(format!("expected{i}()"), t.subject(), |s| {
+                s.bodyn(format!("{}", t.subject()), |s| {
+                    for m in e.rust_object().members_in_struct() {
+                        print_value(s, m, t.members(), e, version);
+                    }
+                });
+            });
+
             for it in ImplType::types() {
                 s.metadata_comment(format!(
                     "Generated from `{filename}` line {line}.",
@@ -62,7 +70,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
                         number = i,
                     ),
                     |s| {
-                        print_test_case(s, t, e, it, i, version);
+                        print_test_case(s, t, e, it, i);
                     },
                 );
             }
@@ -116,24 +124,8 @@ fn print_includes(e: &Container, version: Version, s: &mut Writer) {
     s.newline();
 }
 
-fn print_test_case(
-    s: &mut Writer,
-    t: &TestCase,
-    e: &Container,
-    it: ImplType,
-    i: usize,
-    version: Version,
-) {
-    s.body_closing_with(
-        format!("let expected = {}", t.subject()),
-        |s| {
-            for m in e.rust_object().members_in_struct() {
-                print_value(s, m, t.members(), e, version);
-            }
-        },
-        ";\n",
-    );
-
+fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, it: ImplType, i: usize) {
+    s.wln(format!("let expected = expected{i}();"));
     let (opcode, read_text, write_text) = match e.container_type() {
         ContainerType::CLogin(_) => {
             s.wln("let header_size = 1;");

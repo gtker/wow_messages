@@ -346,11 +346,8 @@ mod test {
          0x42, 0x47, 0x6E, 0x65, 0x3C, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00, 0x01,
          0x01, 0x41, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 27.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
-        let expected = CMD_AUTH_RECONNECT_CHALLENGE_Client {
+    pub(crate) fn expected0() -> CMD_AUTH_RECONNECT_CHALLENGE_Client {
+        CMD_AUTH_RECONNECT_CHALLENGE_Client {
             protocol_version: 0x2,
             version: Version {
                 major: 0x1,
@@ -364,8 +361,15 @@ mod test {
             utc_timezone_offset: 0x3C,
             client_ip_address: Ipv4Addr::from(0x7F000001_u32),
             account_name: String::from("A"),
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 27.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -394,22 +398,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
-        let expected = CMD_AUTH_RECONNECT_CHALLENGE_Client {
-            protocol_version: 0x2,
-            version: Version {
-                major: 0x1,
-                minor: 0xC,
-                patch: 0x1,
-                build: 0x16F3,
-            },
-            platform: Platform::X86,
-            os: Os::Windows,
-            locale: Locale::EnGb,
-            utc_timezone_offset: 0x3C,
-            client_ip_address: Ipv4Addr::from(0x7F000001_u32),
-            account_name: String::from("A"),
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -438,22 +427,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Client0() {
-        let expected = CMD_AUTH_RECONNECT_CHALLENGE_Client {
-            protocol_version: 0x2,
-            version: Version {
-                major: 0x1,
-                minor: 0xC,
-                patch: 0x1,
-                build: 0x16F3,
-            },
-            platform: Platform::X86,
-            os: Os::Windows,
-            locale: Locale::EnGb,
-            utc_timezone_offset: 0x3C,
-            client_ip_address: Ipv4Addr::from(0x7F000001_u32),
-            account_name: String::from("A"),
-        };
-
+        let expected = expected0();
         let header_size = 1;
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -484,11 +458,8 @@ mod test {
          0x10, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B,
          0x4C, 0x4D, 0x4E, 0x4F, 0x50, ];
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 58.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
-        let expected = CMD_AUTH_RECONNECT_CHALLENGE_Client {
+    pub(crate) fn expected1() -> CMD_AUTH_RECONNECT_CHALLENGE_Client {
+        CMD_AUTH_RECONNECT_CHALLENGE_Client {
             protocol_version: 0x2,
             version: Version {
                 major: 0x1,
@@ -502,8 +473,15 @@ mod test {
             utc_timezone_offset: 0x3C,
             client_ip_address: Ipv4Addr::from(0x7F000001_u32),
             account_name: String::from("ABCDEFGHIJKLMNOP"),
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_reconnect/challenge_client.wowm` line 58.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
+        let expected = expected1();
         let header_size = 1;
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -532,22 +510,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
-        let expected = CMD_AUTH_RECONNECT_CHALLENGE_Client {
-            protocol_version: 0x2,
-            version: Version {
-                major: 0x1,
-                minor: 0xC,
-                patch: 0x1,
-                build: 0x16F3,
-            },
-            platform: Platform::X86,
-            os: Os::Windows,
-            locale: Locale::EnGb,
-            utc_timezone_offset: 0x3C,
-            client_ip_address: Ipv4Addr::from(0x7F000001_u32),
-            account_name: String::from("ABCDEFGHIJKLMNOP"),
-        };
-
+        let expected = expected1();
         let header_size = 1;
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -576,22 +539,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_AUTH_RECONNECT_CHALLENGE_Client1() {
-        let expected = CMD_AUTH_RECONNECT_CHALLENGE_Client {
-            protocol_version: 0x2,
-            version: Version {
-                major: 0x1,
-                minor: 0xC,
-                patch: 0x1,
-                build: 0x16F3,
-            },
-            platform: Platform::X86,
-            os: Os::Windows,
-            locale: Locale::EnGb,
-            utc_timezone_offset: 0x3C,
-            client_ip_address: Ipv4Addr::from(0x7F000001_u32),
-            account_name: String::from("ABCDEFGHIJKLMNOP"),
-        };
-
+        let expected = expected1();
         let header_size = 1;
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {

@@ -87,15 +87,19 @@ mod test_vanilla {
          0xDE, 0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65,
          0x66, 0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_CHAR_RENAME {
+        CMSG_CHAR_RENAME {
+            character: Guid::new(0xDEADBEEF),
+            new_name: String::from("Deadbeef"),
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_rename.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_CHAR_RENAME0() {
-        let expected = CMSG_CHAR_RENAME {
-            character: Guid::new(0xDEADBEEF),
-            new_name: String::from("Deadbeef"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -118,11 +122,7 @@ mod test_vanilla {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_CHAR_RENAME0() {
-        let expected = CMSG_CHAR_RENAME {
-            character: Guid::new(0xDEADBEEF),
-            new_name: String::from("Deadbeef"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -145,11 +145,7 @@ mod test_vanilla {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_CHAR_RENAME0() {
-        let expected = CMSG_CHAR_RENAME {
-            character: Guid::new(0xDEADBEEF),
-            new_name: String::from("Deadbeef"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -183,15 +179,19 @@ mod test_tbc {
          0xDE, 0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65,
          0x66, 0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_CHAR_RENAME {
+        CMSG_CHAR_RENAME {
+            character: Guid::new(0xDEADBEEF),
+            new_name: String::from("Deadbeef"),
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_rename.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_CHAR_RENAME0() {
-        let expected = CMSG_CHAR_RENAME {
-            character: Guid::new(0xDEADBEEF),
-            new_name: String::from("Deadbeef"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -214,11 +214,7 @@ mod test_tbc {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_CHAR_RENAME0() {
-        let expected = CMSG_CHAR_RENAME {
-            character: Guid::new(0xDEADBEEF),
-            new_name: String::from("Deadbeef"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -241,11 +237,7 @@ mod test_tbc {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_CHAR_RENAME0() {
-        let expected = CMSG_CHAR_RENAME {
-            character: Guid::new(0xDEADBEEF),
-            new_name: String::from("Deadbeef"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -279,15 +271,19 @@ mod test_wrath {
          0xDE, 0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65,
          0x66, 0x00, ];
 
+    pub(crate) fn expected0() -> CMSG_CHAR_RENAME {
+        CMSG_CHAR_RENAME {
+            character: Guid::new(0xDEADBEEF),
+            new_name: String::from("Deadbeef"),
+        }
+
+    }
+
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_rename.wowm` line 10.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMSG_CHAR_RENAME0() {
-        let expected = CMSG_CHAR_RENAME {
-            character: Guid::new(0xDEADBEEF),
-            new_name: String::from("Deadbeef"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -310,11 +306,7 @@ mod test_wrath {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_CHAR_RENAME0() {
-        let expected = CMSG_CHAR_RENAME {
-            character: Guid::new(0xDEADBEEF),
-            new_name: String::from("Deadbeef"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -337,11 +329,7 @@ mod test_wrath {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_CHAR_RENAME0() {
-        let expected = CMSG_CHAR_RENAME {
-            character: Guid::new(0xDEADBEEF),
-            new_name: String::from("Deadbeef"),
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

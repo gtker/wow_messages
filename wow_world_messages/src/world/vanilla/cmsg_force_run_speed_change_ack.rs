@@ -97,11 +97,8 @@ mod test {
          0xC2, 0x8E, 0xD1, 0xA5, 0x42, 0xED, 0x99, 0x7F, 0x40, 0x39, 0x03, 0x00,
          0x00, 0x00, 0x00, 0xE0, 0x40, ];
 
-    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 11.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn CMSG_FORCE_RUN_SPEED_CHANGE_ACK0() {
-        let expected = CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
+    pub(crate) fn expected0() -> CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
+        CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
             guid: Guid::new(0x6),
             counter: 0x0,
             info: MovementInfo {
@@ -117,8 +114,15 @@ mod test {
                 fall_time: 0.000000000000000000000000000000000000000001156_f32,
             },
             new_speed: 7_f32,
-        };
+        }
 
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_force_run_speed_change_ack.wowm` line 11.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn CMSG_FORCE_RUN_SPEED_CHANGE_ACK0() {
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -143,24 +147,7 @@ mod test {
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMSG_FORCE_RUN_SPEED_CHANGE_ACK0() {
-        let expected = CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
-            guid: Guid::new(0x6),
-            counter: 0x0,
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    ,
-                timestamp: 0x1F61740,
-                position: Vector3d {
-                    x: -8938.948_f32,
-                    y: -124.26177_f32,
-                    z: 82.90929_f32,
-                },
-                orientation: 3.99377_f32,
-                fall_time: 0.000000000000000000000000000000000000000001156_f32,
-            },
-            new_speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -185,24 +172,7 @@ mod test {
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMSG_FORCE_RUN_SPEED_CHANGE_ACK0() {
-        let expected = CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
-            guid: Guid::new(0x6),
-            counter: 0x0,
-            info: MovementInfo {
-                flags: MovementInfo_MovementFlags::empty()
-                    ,
-                timestamp: 0x1F61740,
-                position: Vector3d {
-                    x: -8938.948_f32,
-                    y: -124.26177_f32,
-                    z: 82.90929_f32,
-                },
-                orientation: 3.99377_f32,
-                fall_time: 0.000000000000000000000000000000000000000001156_f32,
-            },
-            new_speed: 7_f32,
-        };
-
+        let expected = expected0();
         let header_size = 2 + 4;
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
