@@ -1,6 +1,6 @@
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/combat/smsg_environmentaldamagelog.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/combat/smsg_environmentaldamagelog.wowm#L3):
 /// ```text
-/// enum EnvironmentalDamageType : u32 {
+/// enum EnvironmentalDamageType : u8 {
 ///     EXHAUSTED = 0;
 ///     DROWNING = 1;
 ///     FALL = 2;
@@ -21,7 +21,7 @@ pub enum EnvironmentalDamageType {
 }
 
 impl EnvironmentalDamageType {
-    pub const fn as_int(&self) -> u32 {
+    pub const fn as_int(&self) -> u8 {
         match self {
             Self::Exhausted => 0x0,
             Self::Drowning => 0x1,
@@ -53,9 +53,9 @@ impl std::fmt::Display for EnvironmentalDamageType {
     }
 }
 
-impl TryFrom<u32> for EnvironmentalDamageType {
+impl TryFrom<u8> for EnvironmentalDamageType {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::Exhausted),
             1 => Ok(Self::Drowning),

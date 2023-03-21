@@ -26,7 +26,7 @@ impl crate::Message for SMSG_ENVIRONMENTAL_DAMAGE_LOG {
     const OPCODE: u32 = 0x01fc;
 
     fn size_without_header(&self) -> u32 {
-        24
+        21
     }
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
@@ -34,7 +34,7 @@ impl crate::Message for SMSG_ENVIRONMENTAL_DAMAGE_LOG {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // damage_type: EnvironmentalDamageType
-        w.write_all(&u32::from(self.damage_type.as_int()).to_le_bytes())?;
+        w.write_all(&u8::from(self.damage_type.as_int()).to_le_bytes())?;
 
         // damage: u32
         w.write_all(&self.damage.to_le_bytes())?;
@@ -48,7 +48,7 @@ impl crate::Message for SMSG_ENVIRONMENTAL_DAMAGE_LOG {
         Ok(())
     }
     fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
-        if body_size != 24 {
+        if body_size != 21 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FC, size: body_size as u32 });
         }
 
@@ -56,7 +56,7 @@ impl crate::Message for SMSG_ENVIRONMENTAL_DAMAGE_LOG {
         let guid = Guid::read(&mut r)?;
 
         // damage_type: EnvironmentalDamageType
-        let damage_type: EnvironmentalDamageType = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let damage_type: EnvironmentalDamageType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // damage: u32
         let damage = crate::util::read_u32_le(&mut r)?;

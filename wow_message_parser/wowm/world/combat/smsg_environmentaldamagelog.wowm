@@ -1,6 +1,6 @@
 #tag_all versions "1 2 3";
 
-enum EnvironmentalDamageType : u32 {
+enum EnvironmentalDamageType : u8 {
     EXHAUSTED = 0;
     DROWNING = 1;
     FALL = 2;

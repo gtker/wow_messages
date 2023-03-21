@@ -1500,7 +1500,7 @@
         },
         { &hf_woww_environmental_damage_type,
             { "Environmental Damage Type", "woww.environmental.damage.type",
-                FT_UINT32, BASE_HEX_DEC, VALS(e_environmental_damage_type_strings), 0,
+                FT_UINT8, BASE_HEX_DEC, VALS(e_environmental_damage_type_strings), 0,
                 NULL, HFILL
             }
         },
