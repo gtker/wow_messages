@@ -554,7 +554,7 @@ mod test_vanilla {
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -578,7 +578,7 @@ mod test_vanilla {
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -602,7 +602,7 @@ mod test_vanilla {
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -750,7 +750,7 @@ mod test_tbc {
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -774,7 +774,7 @@ mod test_tbc {
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -798,7 +798,7 @@ mod test_tbc {
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_AUTH_SESSION(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}"),
         };
 
         assert(&t, &expected);

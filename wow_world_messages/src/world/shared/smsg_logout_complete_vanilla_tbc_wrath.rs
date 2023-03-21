@@ -69,7 +69,7 @@ mod test_vanilla {
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
-            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -88,7 +88,7 @@ mod test_vanilla {
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
-            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -107,7 +107,7 @@ mod test_vanilla {
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
-            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -145,7 +145,7 @@ mod test_tbc {
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
-            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -164,7 +164,7 @@ mod test_tbc {
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
-            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -183,7 +183,7 @@ mod test_tbc {
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
-            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -221,7 +221,7 @@ mod test_wrath {
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
-            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -240,7 +240,7 @@ mod test_wrath {
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
-            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -259,7 +259,7 @@ mod test_wrath {
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ServerOpcodeMessage::SMSG_LOGOUT_COMPLETE => {}
-            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_LOGOUT_COMPLETE, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());

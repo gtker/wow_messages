@@ -131,7 +131,7 @@ mod test {
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
             ClientOpcodeMessage::CMD_XFER_CANCEL => {}
-            opcode => panic!("incorrect opcode. Expected CMD_XFER_CANCEL, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_CANCEL, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -150,7 +150,7 @@ mod test {
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ClientOpcodeMessage::CMD_XFER_CANCEL => {}
-            opcode => panic!("incorrect opcode. Expected CMD_XFER_CANCEL, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_CANCEL, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -169,7 +169,7 @@ mod test {
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ClientOpcodeMessage::CMD_XFER_CANCEL => {}
-            opcode => panic!("incorrect opcode. Expected CMD_XFER_CANCEL, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_CANCEL, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());

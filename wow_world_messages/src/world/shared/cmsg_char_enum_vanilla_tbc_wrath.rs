@@ -65,7 +65,7 @@ mod test_vanilla {
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
             ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
-            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -84,7 +84,7 @@ mod test_vanilla {
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
-            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -103,7 +103,7 @@ mod test_vanilla {
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
-            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -141,7 +141,7 @@ mod test_tbc {
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
             ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
-            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -160,7 +160,7 @@ mod test_tbc {
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
-            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -179,7 +179,7 @@ mod test_tbc {
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
-            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -217,7 +217,7 @@ mod test_wrath {
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
             ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
-            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -236,7 +236,7 @@ mod test_wrath {
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
-            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -255,7 +255,7 @@ mod test_wrath {
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ClientOpcodeMessage::CMSG_CHAR_ENUM => {}
-            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_CHAR_ENUM, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());

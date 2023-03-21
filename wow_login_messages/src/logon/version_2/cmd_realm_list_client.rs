@@ -164,7 +164,7 @@ mod test_version_2 {
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -184,7 +184,7 @@ mod test_version_2 {
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -204,7 +204,7 @@ mod test_version_2 {
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -246,7 +246,7 @@ mod test_version_3 {
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -266,7 +266,7 @@ mod test_version_3 {
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -286,7 +286,7 @@ mod test_version_3 {
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -328,7 +328,7 @@ mod test_version_8 {
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -348,7 +348,7 @@ mod test_version_8 {
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -368,7 +368,7 @@ mod test_version_8 {
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_REALM_LIST(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}"),
         };
 
         assert(&t, &expected);

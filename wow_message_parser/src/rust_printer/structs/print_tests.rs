@@ -195,28 +195,25 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, it: ImplType, i:
 
     let prefix = if e.empty_body() { "" } else { "let t = " };
 
-    s.body_closing_with_semicolon(
-        format!("{prefix}match t"),
-        |s| {
-            if e.empty_body() {
-                s.wln(format!(
-                    "{opcode}::{subject} => {{}}",
-                    opcode = opcode,
-                    subject = get_enumerator_name(t.subject()),
-                ));
-            } else {
-                s.wln(format!(
-                    "{opcode}::{subject}(t) => t,",
-                    opcode = opcode,
-                    subject = get_enumerator_name(t.subject()),
-                ));
-            }
+    s.body_closing_with_semicolon(format!("{prefix}match t"), |s| {
+        if e.empty_body() {
             s.wln(format!(
-                r#"opcode => panic!("incorrect opcode. Expected {}, got {{opcode:#?}}", opcode = opcode),"#,
-                get_enumerator_name(t.subject())
+                "{opcode}::{subject} => {{}}",
+                opcode = opcode,
+                subject = get_enumerator_name(t.subject()),
             ));
-        },
-    );
+        } else {
+            s.wln(format!(
+                "{opcode}::{subject}(t) => t,",
+                opcode = opcode,
+                subject = get_enumerator_name(t.subject()),
+            ));
+        }
+        s.wln(format!(
+            r#"opcode => panic!("incorrect opcode. Expected {}, got {{opcode:#?}}"),"#,
+            get_enumerator_name(t.subject())
+        ));
+    });
     s.newline();
 
     if !e.empty_body() {

@@ -115,7 +115,7 @@ mod test {
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ServerOpcodeMessage::MSG_MOVE_JUMP(t) => t,
-            opcode => panic!("incorrect opcode. Expected MSG_MOVE_JUMP, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_JUMP, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -135,7 +135,7 @@ mod test {
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::MSG_MOVE_JUMP(t) => t,
-            opcode => panic!("incorrect opcode. Expected MSG_MOVE_JUMP, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_JUMP, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -155,7 +155,7 @@ mod test {
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::MSG_MOVE_JUMP(t) => t,
-            opcode => panic!("incorrect opcode. Expected MSG_MOVE_JUMP, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_JUMP, got {opcode:#?}"),
         };
 
         assert(&t, &expected);

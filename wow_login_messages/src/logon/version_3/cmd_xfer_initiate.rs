@@ -131,7 +131,7 @@ mod test {
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         match t {
             ServerOpcodeMessage::CMD_XFER_INITIATE => {}
-            opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -150,7 +150,7 @@ mod test {
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ServerOpcodeMessage::CMD_XFER_INITIATE => {}
-            opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());
@@ -169,7 +169,7 @@ mod test {
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         match t {
             ServerOpcodeMessage::CMD_XFER_INITIATE => {}
-            opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}"),
         };
 
         assert_eq!(HEADER_SIZE, RAW0.len());

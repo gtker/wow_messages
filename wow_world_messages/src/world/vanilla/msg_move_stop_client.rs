@@ -94,7 +94,7 @@ mod test {
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::MSG_MOVE_STOP(t) => t,
-            opcode => panic!("incorrect opcode. Expected MSG_MOVE_STOP, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_STOP, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -114,7 +114,7 @@ mod test {
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::MSG_MOVE_STOP(t) => t,
-            opcode => panic!("incorrect opcode. Expected MSG_MOVE_STOP, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_STOP, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -134,7 +134,7 @@ mod test {
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::MSG_MOVE_STOP(t) => t,
-            opcode => panic!("incorrect opcode. Expected MSG_MOVE_STOP, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected MSG_MOVE_STOP, got {opcode:#?}"),
         };
 
         assert(&t, &expected);

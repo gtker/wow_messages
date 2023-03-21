@@ -102,7 +102,7 @@ mod test_vanilla {
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -122,7 +122,7 @@ mod test_vanilla {
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -142,7 +142,7 @@ mod test_vanilla {
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -190,7 +190,7 @@ mod test_tbc {
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -210,7 +210,7 @@ mod test_tbc {
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -230,7 +230,7 @@ mod test_tbc {
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -278,7 +278,7 @@ mod test_wrath {
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -298,7 +298,7 @@ mod test_wrath {
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -318,7 +318,7 @@ mod test_wrath {
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ServerOpcodeMessage::SMSG_SPLINE_SET_RUN_SPEED(t) => t,
-            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected SMSG_SPLINE_SET_RUN_SPEED, got {opcode:#?}"),
         };
 
         assert(&t, &expected);

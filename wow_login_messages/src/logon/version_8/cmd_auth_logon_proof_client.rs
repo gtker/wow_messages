@@ -784,7 +784,7 @@ mod test {
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -804,7 +804,7 @@ mod test {
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -824,7 +824,7 @@ mod test {
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -880,7 +880,7 @@ mod test {
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -900,7 +900,7 @@ mod test {
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -920,7 +920,7 @@ mod test {
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -965,7 +965,7 @@ mod test {
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW2)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -985,7 +985,7 @@ mod test {
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW2)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -1005,7 +1005,7 @@ mod test {
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW2)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -1060,7 +1060,7 @@ mod test {
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW3)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -1080,7 +1080,7 @@ mod test {
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW3)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -1100,7 +1100,7 @@ mod test {
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW3)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMD_AUTH_LOGON_PROOF(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}"),
         };
 
         assert(&t, &expected);

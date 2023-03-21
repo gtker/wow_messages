@@ -93,7 +93,7 @@ mod test_vanilla {
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -113,7 +113,7 @@ mod test_vanilla {
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -133,7 +133,7 @@ mod test_vanilla {
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -178,7 +178,7 @@ mod test_tbc {
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -198,7 +198,7 @@ mod test_tbc {
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -218,7 +218,7 @@ mod test_tbc {
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -263,7 +263,7 @@ mod test_wrath {
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -283,7 +283,7 @@ mod test_wrath {
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
@@ -303,7 +303,7 @@ mod test_wrath {
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
             ClientOpcodeMessage::CMSG_TELEPORT_TO_UNIT(t) => t,
-            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}", opcode = opcode),
+            opcode => panic!("incorrect opcode. Expected CMSG_TELEPORT_TO_UNIT, got {opcode:#?}"),
         };
 
         assert(&t, &expected);
