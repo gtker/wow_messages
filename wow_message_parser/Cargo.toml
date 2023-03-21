@@ -7,6 +7,9 @@ repository.workspace = true
 license.workspace = true
 publish = false
 
+[features]
+overwrite-tests = []
+
 [dependencies]
 pest = "2.0"
 pest_derive = "2.0"

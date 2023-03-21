@@ -47,7 +47,7 @@ fn get_all_impl_items() -> Objects {
 }
 
 fn tcheck(s: &Writer, name: &str) {
-    if std::env::var("WOWM_OVERWRITE_ALL_TESTS").is_ok() {
+    if cfg!(feature = "overwrite-tests") {
         overwrite(s, name);
     } else {
         check(s, name);
