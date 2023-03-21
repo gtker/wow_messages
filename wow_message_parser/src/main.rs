@@ -1,3 +1,23 @@
+#![forbid(unsafe_code)]
+#![deny(
+    clippy::approx_constant,
+    clippy::bool_to_int_with_if,
+    clippy::complexity,
+    clippy::correctness,
+    clippy::derive_partial_eq_without_eq,
+    clippy::doc_markdown,
+    clippy::enum_variant_names,
+    clippy::large_enum_variant,
+    clippy::needless_borrow,
+    clippy::perf,
+    clippy::single_match,
+    clippy::style,
+    clippy::unseparated_literal_suffix,
+    clippy::upper_case_acronyms,
+    dead_code,
+    non_camel_case_types,
+    unused
+)]
 #![allow(clippy::too_many_arguments)]
 
 use std::fmt::Write;
