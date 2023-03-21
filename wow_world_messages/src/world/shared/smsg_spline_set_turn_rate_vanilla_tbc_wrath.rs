@@ -59,7 +59,7 @@ impl crate::tbc::ServerMessage for SMSG_SPLINE_SET_TURN_RATE {}
 impl crate::wrath::ServerMessage for SMSG_SPLINE_SET_TURN_RATE {}
 
 impl SMSG_SPLINE_SET_TURN_RATE {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + 4 // speed: f32
     }

@@ -54,7 +54,7 @@ impl crate::Message for SMSG_AURA_UPDATE {
 impl crate::wrath::ServerMessage for SMSG_AURA_UPDATE {}
 
 impl SMSG_AURA_UPDATE {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.unit.size() // unit: PackedGuid
         + self.aura_update.size() // aura_update: AuraUpdate
     }

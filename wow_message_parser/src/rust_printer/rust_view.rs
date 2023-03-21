@@ -1,4 +1,4 @@
-use crate::parser::types::array::{Array, ArrayType};
+use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::{Definer, DefinerValue};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
@@ -462,6 +462,69 @@ impl RustType {
             }
         }
     }
+
+    pub(crate) fn size_is_const_fn(&self) -> bool {
+        match self {
+            RustType::Array {
+                array,
+                inner_sizes,
+                inner_object,
+            } => {
+                let inner = if let Some(object) = inner_object {
+                    object
+                        .members_in_struct()
+                        .all(|a| a.ty().size_is_const_fn())
+                } else {
+                    inner_sizes.is_constant().is_some()
+                };
+
+                match array.size() {
+                    ArraySize::Fixed(_) => inner,
+                    ArraySize::Variable(_) | ArraySize::Endless => false,
+                }
+            }
+
+            RustType::Struct { object, .. } => object
+                .members_in_struct()
+                .all(|a| a.ty().size_is_const_fn()),
+
+            RustType::Enum {
+                is_simple,
+                enumerators,
+                ..
+            }
+            | RustType::Flag {
+                is_simple,
+                enumerators,
+                ..
+            } => {
+                if *is_simple {
+                    true
+                } else {
+                    enumerators
+                        .iter()
+                        .map(|a| a.members_in_struct())
+                        .flatten()
+                        .all(|a| a.ty().size_is_const_fn())
+                }
+            }
+
+            RustType::UpdateMask
+            | RustType::NamedGuid
+            | RustType::AchievementDoneArray
+            | RustType::AchievementInProgressArray
+            | RustType::EnchantMask
+            | RustType::InspectTalentGearMask
+            | RustType::VariableItemRandomProperty
+            | RustType::AddonArray
+            | RustType::String
+            | RustType::CString
+            | RustType::MonsterMoveSpline
+            | RustType::SizedCString => false,
+
+            _ => true,
+        }
+    }
 }
 
 impl Display for RustType {
@@ -847,6 +910,14 @@ impl<'a> RustDefiner<'a> {
     pub(crate) fn enumerators(&self) -> &'a [RustEnumerator] {
         self.enumerators
     }
+    pub(crate) fn size_is_const_fn(&self) -> bool {
+        self.enumerators()
+            .iter()
+            .map(|a| a.members_in_struct())
+            .flatten()
+            .all(|a| a.ty().size_is_const_fn())
+    }
+
     pub(crate) fn complex_flag_enumerators(&self) -> Vec<&RustEnumerator> {
         self.enumerators
             .iter()

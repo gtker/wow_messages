@@ -71,7 +71,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
 impl crate::wrath::ServerMessage for SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {}
 
 impl SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.invitee.size() // invitee: PackedGuid
         + 8 // event_id: Guid
         + 1 // rank: u8

@@ -59,7 +59,7 @@ impl crate::tbc::ServerMessage for MSG_MOVE_TIME_SKIPPED_Server {}
 impl crate::wrath::ServerMessage for MSG_MOVE_TIME_SKIPPED_Server {}
 
 impl MSG_MOVE_TIME_SKIPPED_Server {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.player.size() // player: PackedGuid
         + 4 // time_skipped: u32
     }

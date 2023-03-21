@@ -57,7 +57,7 @@ impl crate::tbc::ClientMessage for MSG_MOVE_WATER_WALK {}
 impl crate::tbc::ServerMessage for MSG_MOVE_WATER_WALK {}
 
 impl MSG_MOVE_WATER_WALK {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.player.size() // player: PackedGuid
         + self.info.size() // info: MovementInfo
     }

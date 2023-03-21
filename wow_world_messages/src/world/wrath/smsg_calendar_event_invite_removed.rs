@@ -71,7 +71,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_REMOVED {
 impl crate::wrath::ServerMessage for SMSG_CALENDAR_EVENT_INVITE_REMOVED {}
 
 impl SMSG_CALENDAR_EVENT_INVITE_REMOVED {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.invitee.size() // invitee: PackedGuid
         + 8 // event_id: Guid
         + 4 // flags: u32

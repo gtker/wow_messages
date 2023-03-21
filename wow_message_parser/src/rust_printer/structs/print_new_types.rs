@@ -275,7 +275,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
 }
 
 fn print_size_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
-    s.variable_size(rd.ty_name(), "size", |s| {
+    s.variable_size(rd.ty_name(), "size", rd.size_is_const_fn(), |s| {
         s.wln(format!("{size} // inner", size = rd.int_ty().size(),));
 
         for enumerator in rd.enumerators() {
@@ -319,7 +319,11 @@ fn print_types_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
             }
         });
 
-        s.variable_size(&new_type_name, "size", |s| {
+        let const_fn = enumerator
+            .members_in_struct()
+            .iter()
+            .all(|a| a.ty().size_is_const_fn());
+        s.variable_size(&new_type_name, "size", const_fn, |s| {
             print_rust_members_sizes(s, enumerator.members(), None, "self.");
         });
     }
@@ -390,7 +394,7 @@ fn print_default_for_new_enum(s: &mut Writer, rd: &RustDefiner) {
 }
 
 fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
-    s.variable_size(re.ty_name(), "size", |s| {
+    s.variable_size(re.ty_name(), "size", re.size_is_const_fn(), |s| {
         s.body("match self", |s| {
             for enumerator in re.enumerators() {
                 if enumerator.has_members_in_struct() {

@@ -72,7 +72,7 @@ impl crate::Message for CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK {
 impl crate::wrath::ClientMessage for CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK {}
 
 impl CMSG_MOVE_SET_CAN_TRANSITION_BETWEEN_SWIM_AND_FLY_ACK {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + 4 // unknown1: u32
         + self.info.size() // info: MovementInfo

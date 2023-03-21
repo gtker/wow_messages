@@ -46,7 +46,7 @@ impl crate::Message for MSG_MOVE_ROOT_Server {
 impl crate::wrath::ServerMessage for MSG_MOVE_ROOT_Server {}
 
 impl MSG_MOVE_ROOT_Server {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.info.size() // info: MovementInfo
     }
 }

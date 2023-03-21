@@ -129,7 +129,7 @@ impl AuraUpdate {
 }
 
 impl AuraUpdate {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // visual_slot: u8
         + 4 // spell: u32
         + self.flags.size() // flags: AuraUpdate_AuraFlag
@@ -394,7 +394,7 @@ impl AuraUpdate_AuraFlag {
 
 }
 impl AuraUpdate_AuraFlag {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.not_caster {
@@ -419,7 +419,7 @@ pub struct AuraUpdate_AuraFlag_NotCaster {
 }
 
 impl AuraUpdate_AuraFlag_NotCaster {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.caster.size() // caster: PackedGuid
     }
 }
@@ -431,7 +431,7 @@ pub struct AuraUpdate_AuraFlag_Duration {
 }
 
 impl AuraUpdate_AuraFlag_Duration {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // duration: u32
         + 4 // time_left: u32
     }

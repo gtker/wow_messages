@@ -72,7 +72,7 @@ impl crate::Message for CMSG_MOVE_SET_CAN_FLY_ACK {
 impl crate::wrath::ClientMessage for CMSG_MOVE_SET_CAN_FLY_ACK {}
 
 impl CMSG_MOVE_SET_CAN_FLY_ACK {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // player: Guid
         + 4 // counter: u32
         + self.info.size() // info: MovementInfo

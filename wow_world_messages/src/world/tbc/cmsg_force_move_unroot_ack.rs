@@ -63,7 +63,7 @@ impl crate::Message for CMSG_FORCE_MOVE_UNROOT_ACK {
 impl crate::tbc::ClientMessage for CMSG_FORCE_MOVE_UNROOT_ACK {}
 
 impl CMSG_FORCE_MOVE_UNROOT_ACK {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // guid: Guid
         + 4 // movement_counter: u32
         + self.info.size() // info: MovementInfo

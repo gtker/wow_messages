@@ -62,7 +62,7 @@ impl crate::Message for SMSG_MOVE_SET_COLLISION_HGT {
 impl crate::wrath::ServerMessage for SMSG_MOVE_SET_COLLISION_HGT {}
 
 impl SMSG_MOVE_SET_COLLISION_HGT {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.unit.size() // unit: PackedGuid
         + 4 // packet_counter: u32
         + 4 // collision_height: f32

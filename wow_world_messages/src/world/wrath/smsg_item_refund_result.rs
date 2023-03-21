@@ -118,7 +118,7 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
 impl crate::wrath::ServerMessage for SMSG_ITEM_REFUND_RESULT {}
 
 impl SMSG_ITEM_REFUND_RESULT {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // item: Guid
         + self.result.size() // result: SMSG_ITEM_REFUND_RESULT_ItemRefundResult
     }
@@ -153,7 +153,7 @@ impl SMSG_ITEM_REFUND_RESULT_ItemRefundResult {
 }
 
 impl SMSG_ITEM_REFUND_RESULT_ItemRefundResult {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Success {
                 arena_point_cost,

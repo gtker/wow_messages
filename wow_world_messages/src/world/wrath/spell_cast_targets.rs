@@ -299,7 +299,7 @@ impl SpellCastTargets_SpellCastTargetFlags_Unit {
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_Unit {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Unit {
                 unit_target,
@@ -356,7 +356,7 @@ impl SpellCastTargets_SpellCastTargetFlags_Item {
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_Item {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Item {
                 item_target,
@@ -910,7 +910,7 @@ pub struct SpellCastTargets_SpellCastTargetFlags_SourceLocation {
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_SourceLocation {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         12 // source: Vector3d
     }
 }
@@ -921,7 +921,7 @@ pub struct SpellCastTargets_SpellCastTargetFlags_DestLocation {
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_DestLocation {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         12 // destination: Vector3d
     }
 }

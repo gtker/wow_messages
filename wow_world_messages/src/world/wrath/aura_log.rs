@@ -623,7 +623,7 @@ impl AuraLog {
 }
 
 impl AuraLog {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.aura_type.size() // aura_type: AuraLog_AuraType
     }
 }
@@ -1313,7 +1313,7 @@ impl AuraLog_AuraType {
 }
 
 impl AuraLog_AuraType {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::None => {
                 4

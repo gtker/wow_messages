@@ -56,7 +56,7 @@ impl crate::tbc::ServerMessage for SMSG_UPDATE_COMBO_POINTS {}
 impl crate::wrath::ServerMessage for SMSG_UPDATE_COMBO_POINTS {}
 
 impl SMSG_UPDATE_COMBO_POINTS {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.target.size() // target: PackedGuid
         + 1 // combo_points: u8
     }

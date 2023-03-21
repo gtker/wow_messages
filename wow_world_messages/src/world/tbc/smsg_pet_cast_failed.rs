@@ -359,7 +359,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
 impl crate::tbc::ServerMessage for SMSG_PET_CAST_FAILED {}
 
 impl SMSG_PET_CAST_FAILED {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // id: u32
         + self.result.size() // result: SMSG_PET_CAST_FAILED_SpellCastResult
         + 1 // multiple_casts: Bool
@@ -736,7 +736,7 @@ impl SMSG_PET_CAST_FAILED_SpellCastResult {
 }
 
 impl SMSG_PET_CAST_FAILED_SpellCastResult {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::AffectingCombat => {
                 1

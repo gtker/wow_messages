@@ -44,7 +44,7 @@ impl crate::Message for CMSG_GRANT_LEVEL {
 impl crate::wrath::ClientMessage for CMSG_GRANT_LEVEL {}
 
 impl CMSG_GRANT_LEVEL {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.player.size() // player: PackedGuid
     }
 }

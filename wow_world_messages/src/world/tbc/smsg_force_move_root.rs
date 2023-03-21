@@ -53,7 +53,7 @@ impl crate::Message for SMSG_FORCE_MOVE_ROOT {
 impl crate::tbc::ServerMessage for SMSG_FORCE_MOVE_ROOT {}
 
 impl SMSG_FORCE_MOVE_ROOT {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + 4 // counter: u32
     }

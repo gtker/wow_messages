@@ -54,7 +54,7 @@ impl crate::Message for CMSG_MOVE_NOT_ACTIVE_MOVER {
 impl crate::tbc::ClientMessage for CMSG_MOVE_NOT_ACTIVE_MOVER {}
 
 impl CMSG_MOVE_NOT_ACTIVE_MOVER {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // old_mover: Guid
         + self.info.size() // info: MovementInfo
     }

@@ -129,7 +129,7 @@ impl MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
 }
 
 impl MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::NotEnded => {
                 1

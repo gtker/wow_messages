@@ -92,7 +92,7 @@ impl SimpleIfNotEnumElse {
 }
 
 impl SimpleIfNotEnumElse {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.enum.size() // enum: SimpleIfNotEnumElse_SimpleEnum
     }
 }
@@ -131,7 +131,7 @@ impl SimpleIfNotEnumElse_SimpleEnum {
 }
 
 impl SimpleIfNotEnumElse_SimpleEnum {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Zero {
                 zero,

@@ -683,7 +683,7 @@ pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
 }
 
 impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         20 // pin_hash: u8[20]
         + 16 // pin_salt: u8[16]
     }
@@ -695,7 +695,7 @@ pub struct CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
 }
 
 impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         20 // matrix_card_proof: u8[20]
     }
 }

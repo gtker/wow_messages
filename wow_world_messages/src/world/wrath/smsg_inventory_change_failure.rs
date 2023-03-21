@@ -3658,7 +3658,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
 impl crate::wrath::ServerMessage for SMSG_INVENTORY_CHANGE_FAILURE {}
 
 impl SMSG_INVENTORY_CHANGE_FAILURE {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.result.size() // result: SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult
     }
 }
@@ -4208,7 +4208,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
 }
 
 impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Ok => {
                 1

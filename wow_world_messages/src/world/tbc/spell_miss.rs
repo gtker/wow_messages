@@ -81,7 +81,7 @@ impl SpellMiss {
 }
 
 impl SpellMiss {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // target: Guid
         + self.miss_info.size() // miss_info: SpellMiss_SpellMissInfo
     }
@@ -133,7 +133,7 @@ impl SpellMiss_SpellMissInfo {
 }
 
 impl SpellMiss_SpellMissInfo {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::None => {
                 4

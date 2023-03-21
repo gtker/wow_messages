@@ -57,7 +57,7 @@ impl crate::tbc::ClientMessage for MSG_MOVE_HOVER {}
 impl crate::tbc::ServerMessage for MSG_MOVE_HOVER {}
 
 impl MSG_MOVE_HOVER {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.player.size() // player: PackedGuid
         + self.info.size() // info: MovementInfo
     }

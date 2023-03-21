@@ -1688,7 +1688,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Status {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Status {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // status: GroupMemberOnlineStatus
     }
 }
@@ -1699,7 +1699,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurHp {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurHp {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         2 // current_health: u16
     }
 }
@@ -1710,7 +1710,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxHp {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxHp {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         2 // max_health: u16
     }
 }
@@ -1721,7 +1721,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PowerType {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PowerType {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // power: Power
     }
 }
@@ -1732,7 +1732,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurPower {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurPower {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         2 // current_power: u16
     }
 }
@@ -1743,7 +1743,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxPower {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxPower {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         2 // max_power: u16
     }
 }
@@ -1754,7 +1754,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Level {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Level {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         2 // level: Level16
     }
 }
@@ -1765,7 +1765,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Zone {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Zone {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // area: Area
     }
 }
@@ -1777,7 +1777,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Position {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Position {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         2 // position_x: u16
         + 2 // position_y: u16
     }
@@ -1789,7 +1789,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Auras {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Auras {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.auras.size() // auras: AuraMask
     }
 }
@@ -1800,7 +1800,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetGuid {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetGuid {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // pet: Guid
     }
 }
@@ -1822,7 +1822,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetModelId {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetModelId {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         2 // pet_display_id: u16
     }
 }
@@ -1833,7 +1833,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurHp {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurHp {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         2 // pet_current_health: u16
     }
 }
@@ -1844,7 +1844,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxHp {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxHp {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         2 // pet_max_health: u16
     }
 }
@@ -1855,7 +1855,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetPowerType {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetPowerType {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // pet_power_type: Power
     }
 }
@@ -1866,7 +1866,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurPower {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurPower {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         2 // pet_current_power: u16
     }
 }
@@ -1877,7 +1877,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxPower {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxPower {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         2 // pet_max_power: u16
     }
 }
@@ -1888,7 +1888,7 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetAuras {
 }
 
 impl SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetAuras {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.pet_auras.size() // pet_auras: AuraMask
     }
 }

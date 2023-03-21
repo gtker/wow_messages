@@ -205,7 +205,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
 impl crate::wrath::ServerMessage for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {}
 
 impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.frame.size() // frame: SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame
     }
 }
@@ -264,7 +264,7 @@ impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame {
 }
 
 impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Engage {
                 guid,

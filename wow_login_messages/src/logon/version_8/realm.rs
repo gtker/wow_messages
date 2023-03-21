@@ -468,7 +468,7 @@ impl Realm_RealmFlag {
 
 }
 impl Realm_RealmFlag {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.specify_build {
@@ -486,7 +486,7 @@ pub struct Realm_RealmFlag_SpecifyBuild {
 }
 
 impl Realm_RealmFlag_SpecifyBuild {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         5 // version: Version
     }
 }

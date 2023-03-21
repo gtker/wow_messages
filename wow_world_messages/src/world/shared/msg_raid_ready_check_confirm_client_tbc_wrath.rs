@@ -63,7 +63,7 @@ impl crate::tbc::ClientMessage for MSG_RAID_READY_CHECK_CONFIRM_Client {}
 impl crate::wrath::ClientMessage for MSG_RAID_READY_CHECK_CONFIRM_Client {}
 
 impl MSG_RAID_READY_CHECK_CONFIRM_Client {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         if let Some(set) = &self.set {
             1 // state: u8
         } else {

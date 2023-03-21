@@ -153,7 +153,7 @@ impl FlagIfElseIf {
 }
 
 impl FlagIfElseIf {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.flags.size() // flags: FlagIfElseIf_UpdateFlag
     }
 }
@@ -238,7 +238,7 @@ impl FlagIfElseIf_SimpleFlag {
 
 }
 impl FlagIfElseIf_SimpleFlag {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.one {
@@ -256,7 +256,7 @@ pub struct FlagIfElseIf_SimpleFlag_One {
 }
 
 impl FlagIfElseIf_SimpleFlag_One {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // if_one: u8
     }
 }
@@ -286,7 +286,7 @@ impl FlagIfElseIf_UpdateFlag_OneIf {
 }
 
 impl FlagIfElseIf_UpdateFlag_OneIf {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::OneIf {
                 b_if,
@@ -398,7 +398,7 @@ impl FlagIfElseIf_UpdateFlag {
 
 }
 impl FlagIfElseIf_UpdateFlag {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.one_if {
@@ -423,7 +423,7 @@ pub struct FlagIfElseIf_UpdateFlag_EightIf {
 }
 
 impl FlagIfElseIf_UpdateFlag_EightIf {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // last_if: u8
     }
 }

@@ -128,7 +128,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
 impl crate::wrath::ServerMessage for SMSG_CALENDAR_EVENT_INVITE {}
 
 impl SMSG_CALENDAR_EVENT_INVITE {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.invitee.size() // invitee: PackedGuid
         + 8 // event_id: Guid
         + 8 // invite_id: Guid
@@ -165,7 +165,7 @@ impl SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime {
 }
 
 impl SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::NotPresent => {
                 1

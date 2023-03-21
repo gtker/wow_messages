@@ -62,7 +62,7 @@ impl crate::Message for SMSG_LOOT_LIST {
 impl crate::wrath::ServerMessage for SMSG_LOOT_LIST {}
 
 impl SMSG_LOOT_LIST {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // creature: Guid
         + self.master_looter.size() // master_looter: PackedGuid
         + self.group_looter.size() // group_looter: PackedGuid

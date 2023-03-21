@@ -95,7 +95,7 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO {
 impl crate::tbc::ServerMessage for SMSG_SET_EXTRA_AURA_INFO {}
 
 impl SMSG_SET_EXTRA_AURA_INFO {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.unit.size() // unit: PackedGuid
         + if let Some(aura) = &self.aura {
             1 // slot: u8

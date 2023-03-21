@@ -103,7 +103,7 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
 impl crate::wrath::ServerMessage for SMSG_ACTION_BUTTONS {}
 
 impl SMSG_ACTION_BUTTONS {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.behavior.size() // behavior: SMSG_ACTION_BUTTONS_ActionBarBehavior
     }
 }
@@ -138,7 +138,7 @@ impl SMSG_ACTION_BUTTONS_ActionBarBehavior {
 }
 
 impl SMSG_ACTION_BUTTONS_ActionBarBehavior {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Initial {
                 data,

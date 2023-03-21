@@ -62,7 +62,7 @@ impl MiniMoveMessage {
 }
 
 impl MiniMoveMessage {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // size: u8
         + 2 // opcode: MiniMoveOpcode
         + self.guid.size() // guid: PackedGuid

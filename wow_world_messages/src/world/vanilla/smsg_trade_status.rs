@@ -162,7 +162,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
 impl crate::vanilla::ServerMessage for SMSG_TRADE_STATUS {}
 
 impl SMSG_TRADE_STATUS {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.status.size() // status: SMSG_TRADE_STATUS_TradeStatus
     }
 }
@@ -245,7 +245,7 @@ impl SMSG_TRADE_STATUS_TradeStatus {
 }
 
 impl SMSG_TRADE_STATUS_TradeStatus {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Busy => {
                 4

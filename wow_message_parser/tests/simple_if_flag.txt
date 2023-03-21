@@ -61,7 +61,7 @@ impl SimpleIfFlag {
 }
 
 impl SimpleIfFlag {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.flag.size() // flag: SimpleIfFlag_SimpleFlag
     }
 }
@@ -144,7 +144,7 @@ impl SimpleIfFlag_SimpleFlag {
 
 }
 impl SimpleIfFlag_SimpleFlag {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.zero {
@@ -162,7 +162,7 @@ pub struct SimpleIfFlag_SimpleFlag_Zero {
 }
 
 impl SimpleIfFlag_SimpleFlag_Zero {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // basic: u8
     }
 }

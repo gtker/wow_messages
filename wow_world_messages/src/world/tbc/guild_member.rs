@@ -210,7 +210,7 @@ impl GuildMember_GuildMemberStatus {
 }
 
 impl GuildMember_GuildMemberStatus {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Offline {
                 time_offline,

@@ -75,7 +75,7 @@ impl crate::Message for SMSG_ACHIEVEMENT_EARNED {
 impl crate::wrath::ServerMessage for SMSG_ACHIEVEMENT_EARNED {}
 
 impl SMSG_ACHIEVEMENT_EARNED {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.player.size() // player: PackedGuid
         + 4 // achievement: u32
         + 4 // earn_time: DateTime

@@ -178,7 +178,7 @@ impl Relation_FriendStatus {
 }
 
 impl Relation_FriendStatus {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Offline => {
                 1
@@ -332,7 +332,7 @@ impl Relation_RelationType {
 
 }
 impl Relation_RelationType {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // inner
         + {
             if let Some(s) = &self.friend {
@@ -350,7 +350,7 @@ pub struct Relation_RelationType_Friend {
 }
 
 impl Relation_RelationType_Friend {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.status.size() // status: Relation_FriendStatus
     }
 }

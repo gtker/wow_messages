@@ -261,7 +261,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 impl crate::wrath::ServerMessage for SMSG_BATTLEFIELD_STATUS {}
 
 impl SMSG_BATTLEFIELD_STATUS {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // queue_slot: u32
         + 1 // arena_type: ArenaType
         + 1 // is_arena: u8
@@ -318,7 +318,7 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
 }
 
 impl SMSG_BATTLEFIELD_STATUS_StatusId {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::None => {
                 1

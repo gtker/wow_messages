@@ -57,7 +57,7 @@ impl crate::wrath::ClientMessage for MSG_MOVE_START_TURN_LEFT {}
 impl crate::wrath::ServerMessage for MSG_MOVE_START_TURN_LEFT {}
 
 impl MSG_MOVE_START_TURN_LEFT {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + self.info.size() // info: MovementInfo
     }

@@ -50,7 +50,7 @@ impl crate::tbc::ServerMessage for SMSG_SPLINE_MOVE_UNSET_HOVER {}
 impl crate::wrath::ServerMessage for SMSG_SPLINE_MOVE_UNSET_HOVER {}
 
 impl SMSG_SPLINE_MOVE_UNSET_HOVER {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
     }
 }

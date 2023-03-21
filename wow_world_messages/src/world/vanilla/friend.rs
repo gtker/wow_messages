@@ -185,7 +185,7 @@ impl Friend {
 }
 
 impl Friend {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // guid: Guid
         + self.status.size() // status: Friend_FriendStatus
     }
@@ -237,7 +237,7 @@ impl Friend_FriendStatus {
 }
 
 impl Friend_FriendStatus {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Offline => {
                 1

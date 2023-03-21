@@ -53,7 +53,7 @@ impl crate::Message for CMSG_MOVE_TIME_SKIPPED {
 impl crate::wrath::ClientMessage for CMSG_MOVE_TIME_SKIPPED {}
 
 impl CMSG_MOVE_TIME_SKIPPED {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + 4 // lag: u32
     }

@@ -76,7 +76,7 @@ impl crate::tbc::ServerMessage for MSG_RAID_READY_CHECK_Server {}
 impl crate::wrath::ServerMessage for MSG_RAID_READY_CHECK_Server {}
 
 impl MSG_RAID_READY_CHECK_Server {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         if let Some(state_check) = &self.state_check {
             8 // guid: Guid
             + 1 // state: u8

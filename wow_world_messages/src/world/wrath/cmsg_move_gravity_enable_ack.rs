@@ -63,7 +63,7 @@ impl crate::Message for CMSG_MOVE_GRAVITY_ENABLE_ACK {
 impl crate::wrath::ClientMessage for CMSG_MOVE_GRAVITY_ENABLE_ACK {}
 
 impl CMSG_MOVE_GRAVITY_ENABLE_ACK {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + 4 // unknown: u32
         + self.info.size() // info: MovementInfo

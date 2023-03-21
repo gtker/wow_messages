@@ -1139,7 +1139,7 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
 
 }
 impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // inner
         + {
             if let Some(s) = &self.unk1 {
@@ -1196,7 +1196,7 @@ pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1 {
 }
 
 impl SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1 {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // unknown10: f32
         + 4 // unknown11: f32
         + 4 // unknown12: f32
@@ -1218,7 +1218,7 @@ pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb {
 }
 
 impl SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // absorb: u32
     }
 }
@@ -1229,7 +1229,7 @@ pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist {
 }
 
 impl SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // resist: u32
     }
 }
@@ -1240,7 +1240,7 @@ pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_Block {
 }
 
 impl SMSG_ATTACKERSTATEUPDATE_HitInfo_Block {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // blocked_amount: u32
     }
 }
@@ -1251,7 +1251,7 @@ pub struct SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19 {
 }
 
 impl SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19 {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // unknown3: u32
     }
 }

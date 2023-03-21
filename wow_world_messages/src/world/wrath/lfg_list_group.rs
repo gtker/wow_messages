@@ -400,7 +400,7 @@ pub struct LfgListGroup_LfgUpdateFlag_Roles {
 }
 
 impl LfgListGroup_LfgUpdateFlag_Roles {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         3 // roles: u8[3]
     }
 }

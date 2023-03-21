@@ -297,7 +297,7 @@ impl SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType {
 }
 
 impl SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Normal => {
                 1
@@ -1135,7 +1135,7 @@ impl SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag {
 
 }
 impl SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // inner
         + {
             if let Some(s) = &self.parabolic {
@@ -1161,7 +1161,7 @@ pub struct SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag_Parabolic {
 }
 
 impl SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag_Parabolic {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // effect_start_time: u32
         + 4 // vertical_acceleration: f32
     }
@@ -1174,7 +1174,7 @@ pub struct SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag_EnterCycle {
 }
 
 impl SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag_EnterCycle {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // animation_id: u32
         + 4 // animation_start_time: u32
     }

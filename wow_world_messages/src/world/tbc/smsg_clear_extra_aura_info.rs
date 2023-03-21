@@ -53,7 +53,7 @@ impl crate::Message for SMSG_CLEAR_EXTRA_AURA_INFO {
 impl crate::tbc::ServerMessage for SMSG_CLEAR_EXTRA_AURA_INFO {}
 
 impl SMSG_CLEAR_EXTRA_AURA_INFO {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.unit.size() // unit: PackedGuid
         + 4 // spell: u32
     }

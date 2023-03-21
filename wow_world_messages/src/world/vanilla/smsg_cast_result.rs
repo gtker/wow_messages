@@ -303,7 +303,7 @@ impl crate::Message for SMSG_CAST_RESULT {
 impl crate::vanilla::ServerMessage for SMSG_CAST_RESULT {}
 
 impl SMSG_CAST_RESULT {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // spell: u32
         + self.result.size() // result: SMSG_CAST_RESULT_SimpleSpellCastResult
     }
@@ -629,7 +629,7 @@ impl SMSG_CAST_RESULT_CastFailureReason {
 }
 
 impl SMSG_CAST_RESULT_CastFailureReason {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::AffectingCombat => {
                 1
@@ -1112,7 +1112,7 @@ impl SMSG_CAST_RESULT_SimpleSpellCastResult {
 }
 
 impl SMSG_CAST_RESULT_SimpleSpellCastResult {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Success {
                 reason,

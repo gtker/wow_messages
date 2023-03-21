@@ -117,7 +117,7 @@ impl GuildLogEvent {
 }
 
 impl GuildLogEvent {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.event.size() // event: GuildLogEvent_GuildEvent
         + 8 // player1: Guid
         + 4 // unix_time: u32
@@ -188,7 +188,7 @@ impl GuildLogEvent_GuildEvent {
 }
 
 impl GuildLogEvent_GuildEvent {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Promotion => {
                 1

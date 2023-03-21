@@ -198,7 +198,7 @@ impl CMSG_CAST_SPELL_ClientMovementData {
 }
 
 impl CMSG_CAST_SPELL_ClientMovementData {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::NotPresent => {
                 1
@@ -245,7 +245,7 @@ impl CMSG_CAST_SPELL_ClientCastFlags {
 }
 
 impl CMSG_CAST_SPELL_ClientCastFlags {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::None => {
                 1

@@ -662,7 +662,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
 impl crate::wrath::ServerMessage for SMSG_SEND_MAIL_RESULT {}
 
 impl SMSG_SEND_MAIL_RESULT {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // mail_id: u32
         + self.action.size() // action: SMSG_SEND_MAIL_RESULT_MailAction
     }
@@ -718,7 +718,7 @@ impl SMSG_SEND_MAIL_RESULT_MailResultTwo {
 }
 
 impl SMSG_SEND_MAIL_RESULT_MailResultTwo {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Ok => {
                 4
@@ -861,7 +861,7 @@ impl SMSG_SEND_MAIL_RESULT_MailResult {
 }
 
 impl SMSG_SEND_MAIL_RESULT_MailResult {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Ok {
                 item,
@@ -1023,7 +1023,7 @@ impl SMSG_SEND_MAIL_RESULT_MailAction {
 }
 
 impl SMSG_SEND_MAIL_RESULT_MailAction {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Send {
                 result2,

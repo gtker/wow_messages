@@ -93,7 +93,7 @@ impl AchievementInProgress {
 }
 
 impl AchievementInProgress {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // achievement: u32
         + self.counter.size() // counter: PackedGuid
         + self.player.size() // player: PackedGuid

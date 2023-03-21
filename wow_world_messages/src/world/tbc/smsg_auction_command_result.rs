@@ -326,7 +326,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
 impl crate::tbc::ServerMessage for SMSG_AUCTION_COMMAND_RESULT {}
 
 impl SMSG_AUCTION_COMMAND_RESULT {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // auction_id: u32
         + self.action.size() // action: SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction
     }
@@ -376,7 +376,7 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo {
 }
 
 impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Ok => {
                 4
@@ -465,7 +465,7 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult {
 }
 
 impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Ok {
                 auction_outbid1,
@@ -545,7 +545,7 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction {
 }
 
 impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Started {
                 result2,

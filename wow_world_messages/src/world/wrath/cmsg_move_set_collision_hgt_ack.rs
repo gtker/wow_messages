@@ -72,7 +72,7 @@ impl crate::Message for CMSG_MOVE_SET_COLLISION_HGT_ACK {
 impl crate::wrath::ClientMessage for CMSG_MOVE_SET_COLLISION_HGT_ACK {}
 
 impl CMSG_MOVE_SET_COLLISION_HGT_ACK {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.player.size() // player: PackedGuid
         + 4 // movement_counter: u32
         + self.info.size() // info: MovementInfo

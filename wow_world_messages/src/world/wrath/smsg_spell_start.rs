@@ -1046,7 +1046,7 @@ impl SMSG_SPELL_START_CastFlags {
 
 }
 impl SMSG_SPELL_START_CastFlags {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // inner
         + {
             if let Some(s) = &self.ammo {
@@ -1079,7 +1079,7 @@ pub struct SMSG_SPELL_START_CastFlags_Ammo {
 }
 
 impl SMSG_SPELL_START_CastFlags_Ammo {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // ammo_display_id: u32
         + 4 // ammo_inventory_type: u32
     }
@@ -1091,7 +1091,7 @@ pub struct SMSG_SPELL_START_CastFlags_PowerLeftSelf {
 }
 
 impl SMSG_SPELL_START_CastFlags_PowerLeftSelf {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // power: Power
     }
 }
@@ -1103,7 +1103,7 @@ pub struct SMSG_SPELL_START_CastFlags_Unknown23 {
 }
 
 impl SMSG_SPELL_START_CastFlags_Unknown23 {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // unknown1: u32
         + 4 // unknown2: u32
     }

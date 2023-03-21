@@ -72,7 +72,7 @@ impl crate::Message for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
 impl crate::wrath::ClientMessage for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {}
 
 impl CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.vehicle.size() // vehicle: PackedGuid
         + self.info.size() // info: MovementInfo
         + self.accessory.size() // accessory: PackedGuid

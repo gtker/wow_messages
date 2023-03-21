@@ -892,7 +892,7 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
 
 }
 impl SMSG_SPELL_GO_GameobjectCastFlags {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // inner
         + {
             if let Some(s) = &self.ammo {
@@ -946,7 +946,7 @@ pub struct SMSG_SPELL_GO_GameobjectCastFlags_Ammo {
 }
 
 impl SMSG_SPELL_GO_GameobjectCastFlags_Ammo {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // ammo_display_id: u32
         + 4 // ammo_inventory_type: u32
     }
@@ -958,7 +958,7 @@ pub struct SMSG_SPELL_GO_GameobjectCastFlags_DestLocation {
 }
 
 impl SMSG_SPELL_GO_GameobjectCastFlags_DestLocation {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // unknown3: u8
     }
 }
@@ -969,7 +969,7 @@ pub struct SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate {
 }
 
 impl SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // power: Power
     }
 }
@@ -981,7 +981,7 @@ pub struct SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile {
 }
 
 impl SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // delay_trajectory: u32
         + 4 // elevation: f32
     }
@@ -994,7 +994,7 @@ pub struct SMSG_SPELL_GO_GameobjectCastFlags_VisualChain {
 }
 
 impl SMSG_SPELL_GO_GameobjectCastFlags_VisualChain {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // unknown1: u32
         + 4 // unknown2: u32
     }
@@ -1008,7 +1008,7 @@ pub struct SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate {
 }
 
 impl SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         6 // rune_cooldowns: u8[6]
         + 1 // rune_mask_after_cast: u8
         + 1 // rune_mask_initial: u8

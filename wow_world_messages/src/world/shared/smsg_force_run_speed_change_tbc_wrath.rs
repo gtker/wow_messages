@@ -84,7 +84,7 @@ impl crate::tbc::ServerMessage for SMSG_FORCE_RUN_SPEED_CHANGE {}
 impl crate::wrath::ServerMessage for SMSG_FORCE_RUN_SPEED_CHANGE {}
 
 impl SMSG_FORCE_RUN_SPEED_CHANGE {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + 4 // move_event: u32
         + 1 // unknown: u8

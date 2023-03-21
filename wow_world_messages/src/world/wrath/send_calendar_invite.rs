@@ -80,7 +80,7 @@ impl SendCalendarInvite {
 }
 
 impl SendCalendarInvite {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // event_id: Guid
         + 8 // invite_id: Guid
         + 1 // status: u8

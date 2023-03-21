@@ -331,7 +331,7 @@ impl Mail_MailType {
 }
 
 impl Mail_MailType {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Normal {
                 sender,

@@ -80,7 +80,7 @@ impl crate::Message for SMSG_SPELLHEALLOG {
 impl crate::vanilla::ServerMessage for SMSG_SPELLHEALLOG {}
 
 impl SMSG_SPELLHEALLOG {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.victim.size() // victim: PackedGuid
         + self.caster.size() // caster: PackedGuid
         + 4 // id: u32

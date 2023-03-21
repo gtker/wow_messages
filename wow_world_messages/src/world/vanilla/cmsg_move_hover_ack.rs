@@ -72,7 +72,7 @@ impl crate::Message for CMSG_MOVE_HOVER_ACK {
 impl crate::vanilla::ClientMessage for CMSG_MOVE_HOVER_ACK {}
 
 impl CMSG_MOVE_HOVER_ACK {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // guid: Guid
         + 4 // counter: u32
         + self.info.size() // info: MovementInfo

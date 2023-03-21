@@ -105,7 +105,7 @@ impl crate::tbc::ClientMessage for CMSG_PET_SET_ACTION {}
 impl crate::wrath::ClientMessage for CMSG_PET_SET_ACTION {}
 
 impl CMSG_PET_SET_ACTION {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // guid: Guid
         + 4 // position1: u32
         + 4 // data1: u32

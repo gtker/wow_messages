@@ -47,7 +47,7 @@ impl crate::tbc::ServerMessage for SMSG_DISMOUNT {}
 impl crate::wrath::ServerMessage for SMSG_DISMOUNT {}
 
 impl SMSG_DISMOUNT {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.player.size() // player: PackedGuid
     }
 }

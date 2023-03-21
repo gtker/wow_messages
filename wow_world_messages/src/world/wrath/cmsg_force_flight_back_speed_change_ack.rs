@@ -72,7 +72,7 @@ impl crate::Message for CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK {
 impl crate::wrath::ClientMessage for CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK {}
 
 impl CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // player: Guid
         + 4 // counter: u32
         + self.info.size() // info: MovementInfo

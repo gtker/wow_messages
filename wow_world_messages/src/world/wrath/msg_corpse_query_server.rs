@@ -99,7 +99,7 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
 impl crate::wrath::ServerMessage for MSG_CORPSE_QUERY_Server {}
 
 impl MSG_CORPSE_QUERY_Server {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.result.size() // result: MSG_CORPSE_QUERY_Server_CorpseQueryResult
         + 4 // unknown: u32
     }
@@ -133,7 +133,7 @@ impl MSG_CORPSE_QUERY_Server_CorpseQueryResult {
 }
 
 impl MSG_CORPSE_QUERY_Server_CorpseQueryResult {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::NotFound => {
                 1

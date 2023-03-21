@@ -90,7 +90,7 @@ impl crate::Message for SMSG_LFG_UPDATE {
 impl crate::tbc::ServerMessage for SMSG_LFG_UPDATE {}
 
 impl SMSG_LFG_UPDATE {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // queued: Bool
         + 1 // is_looking_for_group: Bool
         + self.looking_for_more.size() // looking_for_more: SMSG_LFG_UPDATE_LfgUpdateLookingForMore
@@ -123,7 +123,7 @@ impl SMSG_LFG_UPDATE_LfgUpdateLookingForMore {
 }
 
 impl SMSG_LFG_UPDATE_LfgUpdateLookingForMore {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::NotLookingForMore => {
                 1

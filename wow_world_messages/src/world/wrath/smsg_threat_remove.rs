@@ -53,7 +53,7 @@ impl crate::Message for SMSG_THREAT_REMOVE {
 impl crate::wrath::ServerMessage for SMSG_THREAT_REMOVE {}
 
 impl SMSG_THREAT_REMOVE {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.unit.size() // unit: PackedGuid
         + self.victim.size() // victim: PackedGuid
     }

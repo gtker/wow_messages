@@ -404,7 +404,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
 }
 
 impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::None => {
                 1

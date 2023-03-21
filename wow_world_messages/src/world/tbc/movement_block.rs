@@ -621,7 +621,7 @@ impl MovementBlock_MovementFlags_Swimming {
 }
 
 impl MovementBlock_MovementFlags_Swimming {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Swimming {
                 pitch1,
@@ -664,7 +664,7 @@ impl MovementBlock_SplineFlag_FinalAngle {
 }
 
 impl MovementBlock_SplineFlag_FinalAngle {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::FinalAngle {
                 angle,
@@ -1412,7 +1412,7 @@ impl MovementBlock_SplineFlag {
 
 }
 impl MovementBlock_SplineFlag {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // inner
         + {
             if let Some(s) = &self.final_angle {
@@ -2176,7 +2176,7 @@ pub struct MovementBlock_MovementFlags_OnTransport {
 }
 
 impl MovementBlock_MovementFlags_OnTransport {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.transport.size() // transport: TransportInfo
     }
 }
@@ -2190,7 +2190,7 @@ pub struct MovementBlock_MovementFlags_Jumping {
 }
 
 impl MovementBlock_MovementFlags_Jumping {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // cos_angle: f32
         + 4 // sin_angle: f32
         + 4 // xy_speed: f32
@@ -2204,7 +2204,7 @@ pub struct MovementBlock_MovementFlags_SplineElevation {
 }
 
 impl MovementBlock_MovementFlags_SplineElevation {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // spline_elevation: f32
     }
 }
@@ -2578,7 +2578,7 @@ pub struct MovementBlock_UpdateFlag_Transport {
 }
 
 impl MovementBlock_UpdateFlag_Transport {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // transport_progress_in_ms: u32
     }
 }
@@ -2589,7 +2589,7 @@ pub struct MovementBlock_UpdateFlag_MeleeAttacking {
 }
 
 impl MovementBlock_UpdateFlag_MeleeAttacking {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
     }
 }
@@ -2601,7 +2601,7 @@ pub struct MovementBlock_UpdateFlag_HighGuid {
 }
 
 impl MovementBlock_UpdateFlag_HighGuid {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // unknown0: u32
         + 4 // unknown1: u32
     }
@@ -2613,7 +2613,7 @@ pub struct MovementBlock_UpdateFlag_All {
 }
 
 impl MovementBlock_UpdateFlag_All {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // unknown2: u32
     }
 }

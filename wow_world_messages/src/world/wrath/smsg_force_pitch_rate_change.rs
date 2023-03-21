@@ -65,7 +65,7 @@ impl crate::Message for SMSG_FORCE_PITCH_RATE_CHANGE {
 impl crate::wrath::ServerMessage for SMSG_FORCE_PITCH_RATE_CHANGE {}
 
 impl SMSG_FORCE_PITCH_RATE_CHANGE {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + 4 // move_event: u32
         + 4 // speed: f32

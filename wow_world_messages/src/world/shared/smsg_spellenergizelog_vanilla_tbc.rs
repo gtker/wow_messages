@@ -84,7 +84,7 @@ impl crate::vanilla::ServerMessage for SMSG_SPELLENERGIZELOG {}
 impl crate::tbc::ServerMessage for SMSG_SPELLENERGIZELOG {}
 
 impl SMSG_SPELLENERGIZELOG {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.victim.size() // victim: PackedGuid
         + self.caster.size() // caster: PackedGuid
         + 4 // spell: u32

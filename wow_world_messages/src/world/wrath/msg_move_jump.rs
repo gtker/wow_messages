@@ -57,7 +57,7 @@ impl crate::wrath::ClientMessage for MSG_MOVE_JUMP {}
 impl crate::wrath::ServerMessage for MSG_MOVE_JUMP {}
 
 impl MSG_MOVE_JUMP {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + self.info.size() // info: MovementInfo
     }

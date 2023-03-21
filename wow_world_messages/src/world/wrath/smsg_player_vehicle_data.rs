@@ -53,7 +53,7 @@ impl crate::Message for SMSG_PLAYER_VEHICLE_DATA {
 impl crate::wrath::ServerMessage for SMSG_PLAYER_VEHICLE_DATA {}
 
 impl SMSG_PLAYER_VEHICLE_DATA {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.target.size() // target: PackedGuid
         + 4 // vehicle_id: u32
     }

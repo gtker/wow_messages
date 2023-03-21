@@ -227,7 +227,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
 impl crate::wrath::ServerMessage for SMSG_AUTH_RESPONSE {}
 
 impl SMSG_AUTH_RESPONSE {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.result.size() // result: SMSG_AUTH_RESPONSE_WorldResult
     }
 }
@@ -468,7 +468,7 @@ impl SMSG_AUTH_RESPONSE_WorldResult {
 }
 
 impl SMSG_AUTH_RESPONSE_WorldResult {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::ResponseSuccess => {
                 1

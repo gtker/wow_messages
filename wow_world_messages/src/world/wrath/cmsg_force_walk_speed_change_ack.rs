@@ -72,7 +72,7 @@ impl crate::Message for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
 impl crate::wrath::ClientMessage for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {}
 
 impl CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + 4 // counter: u32
         + self.info.size() // info: MovementInfo

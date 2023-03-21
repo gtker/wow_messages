@@ -240,7 +240,7 @@ impl SMSG_BATTLEFIELD_LIST_RandomBg {
 }
 
 impl SMSG_BATTLEFIELD_LIST_RandomBg {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::NotRandom => {
                 1

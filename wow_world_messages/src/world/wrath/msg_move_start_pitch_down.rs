@@ -57,7 +57,7 @@ impl crate::wrath::ClientMessage for MSG_MOVE_START_PITCH_DOWN {}
 impl crate::wrath::ServerMessage for MSG_MOVE_START_PITCH_DOWN {}
 
 impl MSG_MOVE_START_PITCH_DOWN {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + self.info.size() // info: MovementInfo
     }

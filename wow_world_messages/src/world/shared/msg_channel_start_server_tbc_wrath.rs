@@ -65,7 +65,7 @@ impl crate::tbc::ServerMessage for MSG_CHANNEL_START_Server {}
 impl crate::wrath::ServerMessage for MSG_CHANNEL_START_Server {}
 
 impl MSG_CHANNEL_START_Server {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.caster.size() // caster: PackedGuid
         + 4 // spell: u32
         + 4 // duration: u32

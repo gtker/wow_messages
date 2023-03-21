@@ -110,7 +110,6 @@ pub mod helper;
     unused,
     clippy::complexity,
     clippy::single_match,
-    clippy::missing_const_for_fn,
     clippy::clone_on_copy,
     clippy::missing_errors_doc,
     clippy::upper_case_acronyms

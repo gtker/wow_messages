@@ -66,7 +66,7 @@ impl EnumOutsideOfIf {
 }
 
 impl EnumOutsideOfIf {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.t.size() // t: EnumOutsideOfIf_TEnum
         + self.n.size() // n: EnumOutsideOfIf_NestedEnum
     }
@@ -108,7 +108,7 @@ impl EnumOutsideOfIf_TEnum {
 }
 
 impl EnumOutsideOfIf_TEnum {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Zero => {
                 1
@@ -164,7 +164,7 @@ impl EnumOutsideOfIf_NestedEnum {
 }
 
 impl EnumOutsideOfIf_NestedEnum {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Nested {
                 nested,

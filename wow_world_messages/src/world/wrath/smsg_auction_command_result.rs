@@ -97,7 +97,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
 impl crate::wrath::ServerMessage for SMSG_AUCTION_COMMAND_RESULT {}
 
 impl SMSG_AUCTION_COMMAND_RESULT {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // auction_id: u32
         + 4 // action: AuctionCommandAction
         + self.result.size() // result: SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult
@@ -144,7 +144,7 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult {
 }
 
 impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Ok => {
                 4

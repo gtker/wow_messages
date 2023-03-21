@@ -197,7 +197,7 @@ impl crate::tbc::ClientMessage for MSG_RAID_TARGET_UPDATE_Client {}
 impl crate::wrath::ClientMessage for MSG_RAID_TARGET_UPDATE_Client {}
 
 impl MSG_RAID_TARGET_UPDATE_Client {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.target_index.size() // target_index: MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex
     }
 }
@@ -260,7 +260,7 @@ impl MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
 }
 
 impl MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Unknown0 {
                 target,

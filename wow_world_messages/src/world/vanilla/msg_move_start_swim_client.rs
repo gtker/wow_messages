@@ -44,7 +44,7 @@ impl crate::Message for MSG_MOVE_START_SWIM_Client {
 impl crate::vanilla::ClientMessage for MSG_MOVE_START_SWIM_Client {}
 
 impl MSG_MOVE_START_SWIM_Client {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.info.size() // info: MovementInfo
     }
 }

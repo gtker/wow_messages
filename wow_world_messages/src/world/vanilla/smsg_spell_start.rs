@@ -379,7 +379,7 @@ impl SMSG_SPELL_START_CastFlags {
 
 }
 impl SMSG_SPELL_START_CastFlags {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         2 // inner
         + {
             if let Some(s) = &self.ammo {
@@ -398,7 +398,7 @@ pub struct SMSG_SPELL_START_CastFlags_Ammo {
 }
 
 impl SMSG_SPELL_START_CastFlags_Ammo {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // ammo_display_id: u32
         + 4 // ammo_inventory_type: u32
     }

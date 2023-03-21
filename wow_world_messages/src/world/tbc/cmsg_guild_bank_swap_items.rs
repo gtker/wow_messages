@@ -344,7 +344,7 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode {
 }
 
 impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Manual {
                 bank_to_character_transfer,
@@ -415,7 +415,7 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource {
 }
 
 impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Inventory {
                 bank_slot,

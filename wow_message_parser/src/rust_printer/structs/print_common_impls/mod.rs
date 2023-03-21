@@ -607,7 +607,7 @@ pub(crate) fn print_size_rust_view(s: &mut Writer, c: &Container, prefix: &str) 
 
     if !r.constant_sized() {
         if c.tags().compressed() {
-            s.variable_size(r.name(), "size", |s| {
+            s.variable_size(r.name(), "size", false, |s| {
                 s.wln("use crate::traits::Message;");
                 s.newline();
 
@@ -628,7 +628,17 @@ pub(crate) fn print_size_uncompressed_rust_view(
     function_name: &str,
 ) {
     if !r.constant_sized() {
-        s.variable_size(r.name(), function_name, |s| {
+        let const_fn = r.members_in_struct().all(|a| a.ty().size_is_const_fn())
+            && if let Some(optional) = r.optional() {
+                optional
+                    .members_in_struct()
+                    .iter()
+                    .all(|a| a.ty().size_is_const_fn())
+            } else {
+                true
+            };
+
+        s.variable_size(r.name(), function_name, const_fn, |s| {
             print_rust_members_sizes(s, r.members(), None, prefix);
 
             if let Some(optional) = r.optional() {

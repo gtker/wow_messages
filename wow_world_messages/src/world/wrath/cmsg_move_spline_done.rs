@@ -53,7 +53,7 @@ impl crate::Message for CMSG_MOVE_SPLINE_DONE {
 impl crate::wrath::ClientMessage for CMSG_MOVE_SPLINE_DONE {}
 
 impl CMSG_MOVE_SPLINE_DONE {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.info.size() // info: MovementInfo
         + 4 // movement_counter: u32
     }

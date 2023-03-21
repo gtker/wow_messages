@@ -79,7 +79,7 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
 impl crate::tbc::ServerMessage for SMSG_TRANSFER_PENDING {}
 
 impl SMSG_TRANSFER_PENDING {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // map: Map
         + if let Some(has_transport) = &self.has_transport {
             4 // transport: u32

@@ -823,7 +823,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
 
 }
 impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // inner
         + {
             if let Some(s) = &self.pin {
@@ -856,7 +856,7 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // pin_grid_seed: u32
         + 16 // pin_salt: u8[16]
     }
@@ -872,7 +872,7 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // challenge_count: u8
         + 1 // digit_count: u8
         + 1 // height: u8
@@ -887,7 +887,7 @@ pub struct CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // required: u8
     }
 }

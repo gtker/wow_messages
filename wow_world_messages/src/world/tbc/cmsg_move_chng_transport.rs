@@ -44,7 +44,7 @@ impl crate::Message for CMSG_MOVE_CHNG_TRANSPORT {
 impl crate::tbc::ClientMessage for CMSG_MOVE_CHNG_TRANSPORT {}
 
 impl CMSG_MOVE_CHNG_TRANSPORT {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.info.size() // info: MovementInfo
     }
 }

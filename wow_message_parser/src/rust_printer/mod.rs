@@ -124,10 +124,17 @@ impl Writer {
         &mut self,
         name: impl AsRef<str>,
         function_name: &str,
+        const_fn: bool,
         variable_sized: impl Fn(&mut Self),
     ) {
         self.open_curly(format!("impl {}", name.as_ref()));
-        self.open_curly(format!("pub(crate) fn {function_name}(&self) -> usize"));
+        let const_fn = match const_fn {
+            true => " const",
+            false => "",
+        };
+        self.open_curly(format!(
+            "pub(crate){const_fn} fn {function_name}(&self) -> usize"
+        ));
 
         variable_sized(self);
 

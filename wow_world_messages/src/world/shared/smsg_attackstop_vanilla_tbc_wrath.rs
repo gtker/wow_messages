@@ -70,7 +70,7 @@ impl crate::tbc::ServerMessage for SMSG_ATTACKSTOP {}
 impl crate::wrath::ServerMessage for SMSG_ATTACKSTOP {}
 
 impl SMSG_ATTACKSTOP {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.player.size() // player: PackedGuid
         + self.enemy.size() // enemy: PackedGuid
         + 4 // unknown1: u32

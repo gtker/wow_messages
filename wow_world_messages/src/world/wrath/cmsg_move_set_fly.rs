@@ -44,7 +44,7 @@ impl crate::Message for CMSG_MOVE_SET_FLY {
 impl crate::wrath::ClientMessage for CMSG_MOVE_SET_FLY {}
 
 impl CMSG_MOVE_SET_FLY {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.info.size() // info: MovementInfo
     }
 }

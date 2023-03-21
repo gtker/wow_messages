@@ -578,7 +578,7 @@ impl crate::Message for SMSG_CAST_FAILED {
 impl crate::wrath::ServerMessage for SMSG_CAST_FAILED {}
 
 impl SMSG_CAST_FAILED {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // cast_count: u8
         + 4 // id: u32
         + self.result.size() // result: SMSG_CAST_FAILED_SpellCastResult
@@ -1017,7 +1017,7 @@ impl SMSG_CAST_FAILED_SpellCastResult {
 }
 
 impl SMSG_CAST_FAILED_SpellCastResult {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Success => {
                 1

@@ -44,7 +44,7 @@ impl crate::Message for CMSG_MOVE_FALL_RESET {
 impl crate::vanilla::ClientMessage for CMSG_MOVE_FALL_RESET {}
 
 impl CMSG_MOVE_FALL_RESET {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.info.size() // info: MovementInfo
     }
 }

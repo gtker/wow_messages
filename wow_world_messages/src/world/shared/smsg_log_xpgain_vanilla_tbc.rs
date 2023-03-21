@@ -101,7 +101,7 @@ impl crate::vanilla::ServerMessage for SMSG_LOG_XPGAIN {}
 impl crate::tbc::ServerMessage for SMSG_LOG_XPGAIN {}
 
 impl SMSG_LOG_XPGAIN {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // target: Guid
         + 4 // total_exp: u32
         + self.exp_type.size() // exp_type: SMSG_LOG_XPGAIN_ExperienceAwardType
@@ -135,7 +135,7 @@ impl SMSG_LOG_XPGAIN_ExperienceAwardType {
 }
 
 impl SMSG_LOG_XPGAIN_ExperienceAwardType {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Kill => {
                 1

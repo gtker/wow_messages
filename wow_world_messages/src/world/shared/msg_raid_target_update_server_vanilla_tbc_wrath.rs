@@ -101,7 +101,7 @@ impl crate::tbc::ServerMessage for MSG_RAID_TARGET_UPDATE_Server {}
 impl crate::wrath::ServerMessage for MSG_RAID_TARGET_UPDATE_Server {}
 
 impl MSG_RAID_TARGET_UPDATE_Server {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.update_type.size() // update_type: MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType
     }
 }
@@ -136,7 +136,7 @@ impl MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
 }
 
 impl MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Partial {
                 raid_target,

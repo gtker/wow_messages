@@ -50,7 +50,7 @@ impl crate::tbc::ServerMessage for SMSG_SPLINE_MOVE_START_SWIM {}
 impl crate::wrath::ServerMessage for SMSG_SPLINE_MOVE_START_SWIM {}
 
 impl SMSG_SPLINE_MOVE_START_SWIM {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
     }
 }

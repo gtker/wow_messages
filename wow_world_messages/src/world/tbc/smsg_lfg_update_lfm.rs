@@ -72,7 +72,7 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
 impl crate::tbc::ServerMessage for SMSG_LFG_UPDATE_LFM {}
 
 impl SMSG_LFG_UPDATE_LFM {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.looking_for_more.size() // looking_for_more: SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore
     }
 }
@@ -103,7 +103,7 @@ impl SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore {
 }
 
 impl SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::NotLookingForMore => {
                 1

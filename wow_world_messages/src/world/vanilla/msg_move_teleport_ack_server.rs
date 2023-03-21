@@ -66,7 +66,7 @@ impl crate::Message for MSG_MOVE_TELEPORT_ACK_Server {
 impl crate::vanilla::ServerMessage for MSG_MOVE_TELEPORT_ACK_Server {}
 
 impl MSG_MOVE_TELEPORT_ACK_Server {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + 4 // movement_counter: u32
         + self.info.size() // info: MovementInfo

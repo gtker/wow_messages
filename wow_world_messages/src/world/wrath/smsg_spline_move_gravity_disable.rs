@@ -44,7 +44,7 @@ impl crate::Message for SMSG_SPLINE_MOVE_GRAVITY_DISABLE {
 impl crate::wrath::ServerMessage for SMSG_SPLINE_MOVE_GRAVITY_DISABLE {}
 
 impl SMSG_SPLINE_MOVE_GRAVITY_DISABLE {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.unit.size() // unit: PackedGuid
     }
 }

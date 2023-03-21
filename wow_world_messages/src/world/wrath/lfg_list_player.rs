@@ -826,7 +826,7 @@ pub struct LfgListPlayer_LfgUpdateFlag_CharacterInfo {
 }
 
 impl LfgListPlayer_LfgUpdateFlag_CharacterInfo {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // agility: u32
         + 4 // armor: u32
         + 4 // attack_power: u32
@@ -873,7 +873,7 @@ pub struct LfgListPlayer_LfgUpdateFlag_GroupLeader {
 }
 
 impl LfgListPlayer_LfgUpdateFlag_GroupLeader {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // is_looking_for_more: Bool
     }
 }
@@ -884,7 +884,7 @@ pub struct LfgListPlayer_LfgUpdateFlag_GroupGuid {
 }
 
 impl LfgListPlayer_LfgUpdateFlag_GroupGuid {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         8 // group: Guid
     }
 }
@@ -895,7 +895,7 @@ pub struct LfgListPlayer_LfgUpdateFlag_Roles {
 }
 
 impl LfgListPlayer_LfgUpdateFlag_Roles {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // roles: u8
     }
 }
@@ -906,7 +906,7 @@ pub struct LfgListPlayer_LfgUpdateFlag_Area {
 }
 
 impl LfgListPlayer_LfgUpdateFlag_Area {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // area: Area
     }
 }
@@ -917,7 +917,7 @@ pub struct LfgListPlayer_LfgUpdateFlag_Status {
 }
 
 impl LfgListPlayer_LfgUpdateFlag_Status {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         1 // unknown1: u8
     }
 }

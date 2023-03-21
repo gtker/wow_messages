@@ -106,7 +106,7 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
 impl crate::tbc::ServerMessage for SMSG_TRANSFER_ABORTED {}
 
 impl SMSG_TRANSFER_ABORTED {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         4 // map: Map
         + self.reason.size() // reason: SMSG_TRANSFER_ABORTED_TransferAbortReason
     }
@@ -160,7 +160,7 @@ impl SMSG_TRANSFER_ABORTED_TransferAbortReason {
 }
 
 impl SMSG_TRANSFER_ABORTED_TransferAbortReason {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::None => {
                 1

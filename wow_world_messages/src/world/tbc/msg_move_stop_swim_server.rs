@@ -54,7 +54,7 @@ impl crate::Message for MSG_MOVE_STOP_SWIM_Server {
 impl crate::tbc::ServerMessage for MSG_MOVE_STOP_SWIM_Server {}
 
 impl MSG_MOVE_STOP_SWIM_Server {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
         + self.info.size() // info: MovementInfo
     }

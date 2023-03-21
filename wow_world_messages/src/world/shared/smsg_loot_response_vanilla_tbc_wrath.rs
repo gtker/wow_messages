@@ -178,7 +178,7 @@ impl SMSG_LOOT_RESPONSE_LootMethod {
 }
 
 impl SMSG_LOOT_RESPONSE_LootMethod {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::ErrorX {
                 loot_error,

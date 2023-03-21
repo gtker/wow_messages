@@ -152,7 +152,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
 impl crate::tbc::ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {}
 
 impl SMSG_SPELLNONMELEEDAMAGELOG {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.target.size() // target: PackedGuid
         + self.attacker.size() // attacker: PackedGuid
         + 4 // spell: u32

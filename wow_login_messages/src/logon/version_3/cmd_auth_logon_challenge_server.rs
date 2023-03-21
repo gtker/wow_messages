@@ -558,7 +558,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
 }
 
 impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::None => {
                 1

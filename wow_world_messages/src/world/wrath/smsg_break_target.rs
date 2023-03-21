@@ -44,7 +44,7 @@ impl crate::Message for SMSG_BREAK_TARGET {
 impl crate::wrath::ServerMessage for SMSG_BREAK_TARGET {}
 
 impl SMSG_BREAK_TARGET {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.guid.size() // guid: PackedGuid
     }
 }

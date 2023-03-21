@@ -68,7 +68,7 @@ impl crate::tbc::ClientMessage for CMSG_TOGGLE_PVP {}
 impl crate::wrath::ClientMessage for CMSG_TOGGLE_PVP {}
 
 impl CMSG_TOGGLE_PVP {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         if let Some(set) = &self.set {
             1 // enable_pvp: Bool
         } else {

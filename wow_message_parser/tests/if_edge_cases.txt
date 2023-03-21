@@ -230,7 +230,7 @@ impl IfEdgeCases_TEnum {
 }
 
 impl IfEdgeCases_TEnum {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Zero {
                 basic1,

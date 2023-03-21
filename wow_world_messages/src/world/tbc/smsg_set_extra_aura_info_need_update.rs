@@ -80,7 +80,7 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {
 impl crate::tbc::ServerMessage for SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {}
 
 impl SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.unit.size() // unit: PackedGuid
         + 1 // slot: u8
         + 4 // spell: u32

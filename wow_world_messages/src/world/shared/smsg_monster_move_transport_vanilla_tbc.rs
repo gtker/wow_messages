@@ -224,7 +224,7 @@ impl SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType {
 }
 
 impl SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Normal => {
                 1

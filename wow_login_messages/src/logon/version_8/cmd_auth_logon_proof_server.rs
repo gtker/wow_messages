@@ -400,7 +400,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
 }
 
 impl CMD_AUTH_LOGON_PROOF_Server {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.result.size() // result: CMD_AUTH_LOGON_PROOF_Server_LoginResult
     }
 }
@@ -464,7 +464,7 @@ impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
 }
 
 impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Success {
                 account_flag,

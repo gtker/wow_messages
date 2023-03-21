@@ -268,7 +268,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_CHALLENGE_Server {
 }
 
 impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.result.size() // result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult
     }
 }
@@ -330,7 +330,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
 }
 
 impl CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Success {
                 challenge_data,

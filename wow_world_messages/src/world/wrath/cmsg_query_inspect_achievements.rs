@@ -44,7 +44,7 @@ impl crate::Message for CMSG_QUERY_INSPECT_ACHIEVEMENTS {
 impl crate::wrath::ClientMessage for CMSG_QUERY_INSPECT_ACHIEVEMENTS {}
 
 impl CMSG_QUERY_INSPECT_ACHIEVEMENTS {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.player.size() // player: PackedGuid
     }
 }

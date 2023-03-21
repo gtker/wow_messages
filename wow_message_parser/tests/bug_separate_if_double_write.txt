@@ -138,7 +138,7 @@ impl BugSeparateIfDoubleWrite {
 }
 
 impl BugSeparateIfDoubleWrite {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         self.b.size() // b: BugSeparateIfDoubleWrite_SimpleEnum
         + 1 // middle: u8
     }
@@ -178,7 +178,7 @@ impl BugSeparateIfDoubleWrite_SimpleEnum {
 }
 
 impl BugSeparateIfDoubleWrite_SimpleEnum {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Zero {
                 zero_one,

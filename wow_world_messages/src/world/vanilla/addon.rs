@@ -388,7 +388,7 @@ impl Addon_KeyVersion {
 }
 
 impl Addon_KeyVersion {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Zero => {
                 1
@@ -478,7 +478,7 @@ impl Addon_InfoBlock {
 }
 
 impl Addon_InfoBlock {
-    pub(crate) fn size(&self) -> usize {
+    pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Unavailable => {
                 1
