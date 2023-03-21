@@ -3,13 +3,13 @@ use crate::parser::types::definer::Definer;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::{
     update_mask_max, Sizes, ADDON_ARRAY_MAX, ADDON_ARRAY_MIN, AURA_MASK_MAX_SIZE,
-    AURA_MASK_MIN_SIZE, DATETIME_SIZE, GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE, LEVEL16_SIZE,
-    LEVEL32_SIZE, LEVEL_SIZE, NAMED_GUID_MAX_SIZE, NAMED_GUID_MIN_SIZE, PACKED_GUID_MAX_SIZE,
-    PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
-    VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
+    AURA_MASK_MIN_SIZE, DATETIME_SIZE, F32_SIZE, GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE,
+    LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, NAMED_GUID_MAX_SIZE, NAMED_GUID_MIN_SIZE,
+    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
+    VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
 };
 use crate::parser::types::tags::ObjectTags;
-use crate::parser::types::{FloatingPointType, IntegerType};
+use crate::parser::types::IntegerType;
 use crate::{
     Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, ENCHANT_MASK_LARGEST_ALLOWED,
     ENCHANT_MASK_SMALLEST_ALLOWED, INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
@@ -27,7 +27,7 @@ pub(crate) enum Type {
     Guid,
     NamedGuid,
     DateTime,
-    FloatingPoint(FloatingPointType),
+    FloatingPoint,
     CString,
     SizedCString,
     String,
@@ -60,6 +60,7 @@ pub(crate) enum Type {
 }
 
 impl Type {
+    pub(crate) const F32_NAME: &'static str = "f32";
     pub(crate) const SPELL_NAME: &'static str = "Spell";
     pub(crate) const LEVEL_NAME: &'static str = "Level";
     pub(crate) const LEVEL_NAME16: &'static str = "Level16";
@@ -123,7 +124,7 @@ impl Type {
             Type::Guid => ParsedType::Guid,
             Type::NamedGuid => ParsedType::NamedGuid,
             Type::DateTime => ParsedType::DateTime,
-            Type::FloatingPoint(i) => ParsedType::FloatingPoint(*i),
+            Type::FloatingPoint => ParsedType::FloatingPoint,
             Type::CString => ParsedType::CString,
             Type::SizedCString => ParsedType::SizedCString,
             Type::String => ParsedType::String,
@@ -157,7 +158,7 @@ impl Type {
             Type::Bool(i) => sizes.inc_both(i.size().into()),
             Type::Guid => sizes.inc_both(GUID_SIZE as _),
             Type::DateTime => sizes.inc_both(DATETIME_SIZE.into()),
-            Type::FloatingPoint(i) => sizes.inc_both(i.size() as usize),
+            Type::FloatingPoint => sizes.inc_both(F32_SIZE),
             Type::PackedGuid => sizes.inc(PACKED_GUID_MIN_SIZE as _, PACKED_GUID_MAX_SIZE as _),
             Type::UpdateMask => {
                 let world_version = tags.main_versions().next().unwrap().as_major_world();
@@ -281,7 +282,7 @@ impl Type {
         match self {
             Type::Bool(i) | Type::Integer(i) => i.doc_endian_str().to_string(),
 
-            Type::FloatingPoint(_)
+            Type::FloatingPoint
             | Type::Level16
             | Type::Level32
             | Type::Gold

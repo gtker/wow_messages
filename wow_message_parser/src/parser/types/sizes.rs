@@ -38,6 +38,7 @@ pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> u16 {
     (amount_of_mask_blocks_size + max_mask_blocks + amount_of_bytes_for_data) as u16
 }
 
+pub(crate) const F32_SIZE: usize = 4;
 pub(crate) const UPDATE_MASK_MIN_SIZE: u8 = 1;
 pub(crate) const PACKED_GUID_MAX_SIZE: u8 = 9;
 pub(crate) const PACKED_GUID_MIN_SIZE: u8 = 2;

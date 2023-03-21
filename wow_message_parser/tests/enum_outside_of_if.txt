@@ -5,7 +5,7 @@ use crate::vanilla::{
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/tests/impl_levels.wowm:262`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/tests/impl_levels.wowm#L262):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/tests/impl_levels.wowm:261`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/tests/impl_levels.wowm#L261):
 /// ```text
 /// struct EnumOutsideOfIf {
 ///     TEnum t;

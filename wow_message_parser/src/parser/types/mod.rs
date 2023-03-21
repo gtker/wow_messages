@@ -29,35 +29,6 @@ pub(crate) fn compare_name_and_tags(
     name1.cmp(name2).then_with(|| v1.cmp(v2))
 }
 
-#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Copy, Clone)]
-pub(crate) enum FloatingPointType {
-    F32,
-    F64,
-}
-
-impl FloatingPointType {
-    pub(crate) fn size(&self) -> u8 {
-        match self {
-            FloatingPointType::F32 => 4,
-            FloatingPointType::F64 => 8,
-        }
-    }
-
-    pub(crate) fn str(&self) -> &str {
-        match self {
-            FloatingPointType::F32 => "f32",
-            FloatingPointType::F64 => "f64",
-        }
-    }
-
-    pub(crate) fn rust_str(&self) -> &str {
-        match self {
-            FloatingPointType::F32 => "f32",
-            FloatingPointType::F64 => "f64",
-        }
-    }
-}
-
 #[derive(Debug, Eq, Ord, PartialOrd, PartialEq, Copy, Clone)]
 pub(crate) enum IntegerType {
     U8,

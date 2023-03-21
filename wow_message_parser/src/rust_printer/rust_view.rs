@@ -7,7 +7,7 @@ use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED
 use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{FloatingPointType, IntegerType};
+use crate::parser::types::IntegerType;
 use crate::rust_printer::{
     field_name_to_rust_name, get_new_flag_type_name, get_new_type_name, get_optional_type_name,
     DefinerType,
@@ -362,7 +362,7 @@ pub(crate) enum RustType {
     Integer(IntegerType),
     Bool(IntegerType),
     DateTime,
-    Floating(FloatingPointType),
+    Floating,
     UpdateMask,
     AuraMask,
     Guid,
@@ -434,7 +434,7 @@ impl RustType {
             RustType::Integer(i) => Type::Integer(*i),
             RustType::Bool(i) => Type::Bool(*i),
             RustType::DateTime => Type::DateTime,
-            RustType::Floating(i) => Type::FloatingPoint(*i),
+            RustType::Floating => Type::FloatingPoint,
             RustType::UpdateMask => Type::UpdateMask,
             RustType::AuraMask => Type::AuraMask,
             RustType::Guid => Type::Guid,
@@ -1194,7 +1194,7 @@ pub(crate) fn create_struct_member(
                 Type::Guid => RustType::Guid,
                 Type::NamedGuid => RustType::NamedGuid,
                 Type::PackedGuid => RustType::PackedGuid,
-                Type::FloatingPoint(f) => RustType::Floating(*f),
+                Type::FloatingPoint => RustType::Floating,
                 Type::CString => RustType::CString,
                 Type::String { .. } => RustType::String,
                 Type::Array(array) => {

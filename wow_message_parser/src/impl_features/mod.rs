@@ -216,7 +216,7 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
         | Type::DateTime
         | Type::Bool(_)
         | Type::Integer(_)
-        | Type::FloatingPoint(_) => {
+        | Type::FloatingPoint => {
             f.add(Feature::SimpleBuiltInTypes);
 
             if let Some(v) = d.value() {

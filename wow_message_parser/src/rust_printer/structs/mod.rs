@@ -151,14 +151,14 @@ pub(crate) fn print_derives(s: &mut Writer, members: &[&RustMember], is_enum_typ
 
 fn can_derive_ord(members: &[&RustMember]) -> bool {
     members.iter().all(|a| {
-        !matches!(a.ty(), RustType::Floating(_) | RustType::MonsterMoveSpline)
+        !matches!(a.ty(), RustType::Floating | RustType::MonsterMoveSpline)
             && can_derive_ord(&a.all_members_without_self())
     })
 }
 
 fn can_derive_eq(members: &[&RustMember]) -> bool {
     for m in members {
-        if matches!(m.ty(), RustType::Floating(_) | RustType::MonsterMoveSpline) {
+        if matches!(m.ty(), RustType::Floating | RustType::MonsterMoveSpline) {
             return false;
         }
     }

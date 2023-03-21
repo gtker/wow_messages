@@ -150,7 +150,7 @@ fn name_to_hf(name: &str, ty: &Type) -> String {
             Type::Integer(_) => {
                 name += "_int";
             }
-            Type::FloatingPoint(_) => name += "_float",
+            Type::FloatingPoint => name += "_float",
             Type::Array(array) => match array.ty() {
                 ArrayType::Integer(_) => {
                     name += "_bytes";

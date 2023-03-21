@@ -22,7 +22,6 @@ struct StructWithAllBuiltInTypes {
     u32 basic32;
     u64 basic64;
     f32 decimal32;
-    f64 decimal64;
     CString simple_cstring;
     String simple_string;
 }

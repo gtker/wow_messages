@@ -9,7 +9,6 @@ use std::io::{Read, Write};
 ///     u32 basic32;
 ///     u64 basic64;
 ///     f32 decimal32;
-///     f64 decimal64;
 ///     CString simple_cstring;
 ///     String simple_string;
 /// }
@@ -20,7 +19,6 @@ pub struct StructWithAllBuiltInTypes {
     pub basic32: u32,
     pub basic64: u64,
     pub decimal32: f32,
-    pub decimal64: f64,
     pub simple_cstring: String,
     pub simple_string: String,
 }
@@ -41,9 +39,6 @@ impl StructWithAllBuiltInTypes {
 
         // decimal32: f32
         w.write_all(&self.decimal32.to_le_bytes())?;
-
-        // decimal64: f64
-        w.write_all(&self.decimal64.to_le_bytes())?;
 
         // simple_cstring: CString
         // TODO: Guard against strings that are already null-terminated
@@ -77,9 +72,6 @@ impl StructWithAllBuiltInTypes {
         // decimal32: f32
         let decimal32 = crate::util::read_f32_le(&mut r)?;
 
-        // decimal64: f64
-        let decimal64 = crate::util::read_f64_le(&mut r)?;
-
         // simple_cstring: CString
         let simple_cstring = {
             let simple_cstring = crate::util::read_c_string_to_vec(&mut r)?;
@@ -99,7 +91,6 @@ impl StructWithAllBuiltInTypes {
             basic32,
             basic64,
             decimal32,
-            decimal64,
             simple_cstring,
             simple_string,
         })
@@ -114,7 +105,6 @@ impl StructWithAllBuiltInTypes {
         + 4 // basic32: u32
         + 8 // basic64: u64
         + 4 // decimal32: f32
-        + 8 // decimal64: f64
         + self.simple_cstring.len() + 1 // simple_cstring: CString
         + self.simple_string.len() + 1 // simple_string: String
     }

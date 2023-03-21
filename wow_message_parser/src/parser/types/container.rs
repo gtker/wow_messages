@@ -516,7 +516,7 @@ impl Container {
                 | Type::String
                 | Type::Integer(_)
                 | Type::Bool(_)
-                | Type::FloatingPoint(_) => continue,
+                | Type::FloatingPoint => continue,
 
                 Type::DateTime | Type::PackedGuid | Type::Guid => ("crate".to_string(), name),
 

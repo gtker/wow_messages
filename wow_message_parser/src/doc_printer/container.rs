@@ -2,7 +2,7 @@ use crate::doc_printer::DocWriter;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::sizes::{
-    GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE,
+    F32_SIZE, GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE,
 };
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
@@ -156,8 +156,8 @@ fn print_container_example_definition(
         Type::Guid => {
             s.bytes(bytes.take(GUID_SIZE.into()));
         }
-        Type::FloatingPoint(f) => {
-            s.bytes(bytes.take(f.size() as usize));
+        Type::FloatingPoint => {
+            s.bytes(bytes.take(F32_SIZE));
         }
         Type::PackedGuid => {
             let mask = bytes.next().unwrap();
@@ -608,7 +608,7 @@ fn print_container_field(
                 | Type::CString
                 | Type::String { .. }
                 | Type::Integer(_)
-                | Type::FloatingPoint(_) => d.ty().str(),
+                | Type::FloatingPoint => d.ty().str(),
             };
 
             let description = if let Some(d) = d.tags().description() {

@@ -1,7 +1,7 @@
 use crate::parser::types::array::ArrayType;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::ty::Type;
-use crate::parser::types::{FloatingPointType, IntegerType};
+use crate::parser::types::IntegerType;
 use crate::{wireshark_printer, Objects};
 
 pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
@@ -21,16 +21,6 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
                             };
 
                             if v > i {
-                                *i = *v;
-                            }
-                        }
-                        WiresharkType::Float(i) => {
-                            let v = match new_ty {
-                                WiresharkType::Float(v) => v,
-                                _ => panic!("variable: '{name}' is float and {new_ty:#?}"),
-                            };
-
-                            if *v < *i {
                                 *i = *v;
                             }
                         }
@@ -59,7 +49,9 @@ pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
                                 new_ty
                             ),
                         },
-                        WiresharkType::Bytes | WiresharkType::String => assert_eq!(m.ty(), new_ty),
+                        WiresharkType::Float | WiresharkType::Bytes | WiresharkType::String => {
+                            assert_eq!(m.ty(), new_ty)
+                        }
                     }
                 }
             } else if let Some(ty) = WiresharkType::from_type(d.ty()) {
@@ -162,7 +154,7 @@ impl WiresharkMember {
 pub(crate) enum WiresharkType {
     Integer(IntegerType),
     String,
-    Float(FloatingPointType),
+    Float,
     Bytes,
     Enum(Definer, IntegerType),
     Flag(Definer),
@@ -182,7 +174,7 @@ impl WiresharkType {
             Type::Level32 => Self::Integer(IntegerType::U32),
             Type::Gold => Self::Integer(IntegerType::U32),
             Type::DateTime => Self::Integer(IntegerType::U32),
-            Type::FloatingPoint(v) => Self::Float(*v),
+            Type::FloatingPoint => Self::Float,
             Type::SizedCString | Type::String { .. } | Type::CString => Self::String,
             Type::Array(array) => match array.ty() {
                 ArrayType::Struct(_) => {
@@ -235,14 +227,14 @@ impl WiresharkType {
                 int_type_to_wireshark_string(i)
             }
             WiresharkType::String => "FT_STRINGZ".to_string(),
-            WiresharkType::Float(_) => "FT_FLOAT".to_string(),
+            WiresharkType::Float => "FT_FLOAT".to_string(),
             WiresharkType::Bytes => "FT_BYTES".to_string(),
         }
     }
 
     pub(crate) fn wireshark_base(&self) -> String {
         match self {
-            WiresharkType::Float(_) | WiresharkType::Bytes | WiresharkType::String => {
+            WiresharkType::Float | WiresharkType::Bytes | WiresharkType::String => {
                 "BASE_NONE".to_string()
             }
             WiresharkType::Integer(i) => match i {

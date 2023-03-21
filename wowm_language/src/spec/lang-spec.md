@@ -23,7 +23,7 @@ For example:
 The following types are not looked up but are expected to be handled by the compiler and code generator:
 
 * The basic integer types `u8`, `u16`, `u32`, and `u64` are sent as little endian over the network.
-* The basic floating point types `f32` and `f64` are sent as little endian over the network.
+* The floating point type `f32` is sent as little endian over the network.
 
 The `String` type is the same as a sized `u8` array (`u8[len]`) containing valid UTF-8 values plus a `u8` for the length of the string, although it should be presented in the native string type.
 
@@ -35,7 +35,7 @@ The `SizedCString` is the same as a `u32` followed by a `CString`, but they are 
 |------------------------------|-------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
 | `u*`                         | Unsigned little endian `*` bit value.                                                                                         | `unsigned` `char`/`short`/`int`/`long long` |
 | `i*`                         | Signed little endian `*` bit value.                                                                                           | `char`/`short`/`int`/`long long`            |
-| `f32` and `f64`              | Floating point value.                                                                                                         | `float`/`double`                            |
+| `f32`                        | Floating point value of 4 bytes.                                                                                              | `float`/`double`                            |
 | `CString`                    | UTF-8 string type that is terminated by a zero byte value.                                                                    | `char*`                                     |
 | `SizedCString`               | A `u32` field that determines the size of the string followed by a UTF-8 string type that is terminated by a zero byte value. | `uint32_t` + `char*`                        |
 | `String[len]`                | UTF-8 string type of exactly length `len`.                                                                                    | -                                           |

@@ -220,10 +220,9 @@ fn print_read_definition(
                 "{assignment_prefix}{name} = Ipv4Addr::from({UTILITY_PATH}::{prefix}read_u32_be(&mut r){postfix}?);",
             ));
         }
-        Type::FloatingPoint(floating) => {
+        Type::FloatingPoint => {
             s.wln(format!(
-                "{assignment_prefix}{name} = {UTILITY_PATH}::{prefix}read_{ty}_le(&mut r){postfix}?;",
-                ty = floating.rust_str(),
+                "{assignment_prefix}{name} = {UTILITY_PATH}::{prefix}read_f32_le(&mut r){postfix}?;",
             ));
         }
         Type::SizedCString => {

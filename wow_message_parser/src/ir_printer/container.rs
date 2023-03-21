@@ -7,7 +7,7 @@ use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
-use crate::parser::types::{ContainerValue, FloatingPointType};
+use crate::parser::types::ContainerValue;
 use crate::rust_printer::UpdateMaskType;
 use crate::Objects;
 use serde::Serialize;
@@ -230,7 +230,7 @@ pub(crate) enum IrType {
     PackedGuid,
     Guid,
     NamedGuid,
-    FloatingPoint(IrFloatingPointType),
+    FloatingPoint,
     CString,
     SizedCString,
     String,
@@ -271,7 +271,7 @@ impl From<&Type> for IrType {
             Type::PackedGuid => Self::PackedGuid,
             Type::Guid => Self::Guid,
             Type::NamedGuid => Self::NamedGuid,
-            Type::FloatingPoint(f) => Self::FloatingPoint(f.into()),
+            Type::FloatingPoint => Self::FloatingPoint,
             Type::CString => Self::CString,
             Type::String => Self::String,
             Type::UpdateMask => Self::UpdateMask,
@@ -366,24 +366,6 @@ impl From<ArraySize> for IrArraySize {
             ArraySize::Fixed(s) => Self::Fixed(s),
             ArraySize::Variable(s) => Self::Variable(s.name().into()),
             ArraySize::Endless => Self::Endless,
-        }
-    }
-}
-
-#[derive(Debug, Serialize)]
-#[serde(tag = "type")]
-pub(crate) enum IrFloatingPointType {
-    #[serde(rename = "f32")]
-    F32,
-    #[serde(rename = "f64")]
-    F64,
-}
-
-impl From<&FloatingPointType> for IrFloatingPointType {
-    fn from(v: &FloatingPointType) -> Self {
-        match v {
-            FloatingPointType::F32 => Self::F32,
-            FloatingPointType::F64 => Self::F64,
         }
     }
 }

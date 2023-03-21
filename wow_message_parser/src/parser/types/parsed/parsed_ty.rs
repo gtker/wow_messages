@@ -6,13 +6,13 @@ use crate::parser::types::parsed::parsed_array::{ParsedArray, ParsedArraySize, P
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::sizes::{
     update_mask_max, Sizes, ADDON_ARRAY_MAX, ADDON_ARRAY_MIN, AURA_MASK_MAX_SIZE,
-    AURA_MASK_MIN_SIZE, DATETIME_SIZE, GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE, LEVEL16_SIZE,
-    LEVEL32_SIZE, LEVEL_SIZE, NAMED_GUID_MAX_SIZE, NAMED_GUID_MIN_SIZE, PACKED_GUID_MAX_SIZE,
-    PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
-    VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
+    AURA_MASK_MIN_SIZE, DATETIME_SIZE, F32_SIZE, GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE,
+    LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, NAMED_GUID_MAX_SIZE, NAMED_GUID_MIN_SIZE,
+    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
+    VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
 };
 use crate::parser::types::ty::Type;
-use crate::parser::types::{FloatingPointType, IntegerType};
+use crate::parser::types::IntegerType;
 use crate::{
     CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, ENCHANT_MASK_LARGEST_ALLOWED,
     ENCHANT_MASK_SMALLEST_ALLOWED, INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
@@ -30,7 +30,7 @@ pub(crate) enum ParsedType {
     Guid,
     NamedGuid,
     DateTime,
-    FloatingPoint(FloatingPointType),
+    FloatingPoint,
     CString,
     SizedCString,
     String,
@@ -63,7 +63,7 @@ impl ParsedType {
             ParsedType::String => Type::STRING_NAME.to_string(),
             ParsedType::Array(a) => a.str(),
             ParsedType::Identifier { s, .. } => s.clone(),
-            ParsedType::FloatingPoint(i) => i.str().to_string(),
+            ParsedType::FloatingPoint => Type::F32_NAME.to_string(),
             ParsedType::PackedGuid => Type::PACKED_GUID_NAME.to_string(),
             ParsedType::Guid => Type::GUID_NAME.to_string(),
             ParsedType::UpdateMask => Type::UPDATE_MASK_NAME.to_string(),
@@ -99,7 +99,7 @@ impl ParsedType {
             }
             ParsedType::Array(a) => a.rust_str(),
             ParsedType::Identifier { s, .. } => s.clone(),
-            ParsedType::FloatingPoint(i) => i.rust_str().to_string(),
+            ParsedType::FloatingPoint => Type::F32_NAME.to_string(),
             ParsedType::Guid | ParsedType::PackedGuid => Type::GUIDS_RUST_NAME.to_string(),
             ParsedType::UpdateMask => Type::UPDATE_MASK_NAME.to_string(),
             ParsedType::AuraMask => Type::AURA_MASK_NAME.to_string(),
@@ -139,7 +139,7 @@ impl ParsedType {
             ParsedType::Bool(i) => sizes.inc_both(i.size() as usize),
             ParsedType::Guid => sizes.inc_both(GUID_SIZE as _),
             ParsedType::DateTime => sizes.inc_both(DATETIME_SIZE.into()),
-            ParsedType::FloatingPoint(i) => sizes.inc_both(i.size() as usize),
+            ParsedType::FloatingPoint => sizes.inc_both(F32_SIZE),
             ParsedType::PackedGuid => {
                 sizes.inc(PACKED_GUID_MIN_SIZE as _, PACKED_GUID_MAX_SIZE as _)
             }
@@ -300,8 +300,7 @@ impl ParsedType {
             "i16" => Self::Integer(IntegerType::I16),
             "i32" => Self::Integer(IntegerType::I32),
             "i64" => Self::Integer(IntegerType::I64),
-            "f32" => Self::FloatingPoint(FloatingPointType::F32),
-            "f64" => Self::FloatingPoint(FloatingPointType::F64),
+            "f32" => Self::FloatingPoint,
 
             "u48" => Self::Integer(IntegerType::U48),
 
@@ -379,7 +378,7 @@ impl ParsedType {
                         | ParsedType::SizedCString
                         | ParsedType::String { .. }
                         | ParsedType::Array(_)
-                        | ParsedType::FloatingPoint(_)
+                        | ParsedType::FloatingPoint
                         | ParsedType::UpdateMask
                         | ParsedType::AuraMask
                         | ParsedType::DateTime

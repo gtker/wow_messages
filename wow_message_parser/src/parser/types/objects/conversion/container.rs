@@ -58,7 +58,7 @@ fn parsed_type_to_type(
         ParsedType::Guid => Type::Guid,
         ParsedType::NamedGuid => Type::NamedGuid,
         ParsedType::DateTime => Type::DateTime,
-        ParsedType::FloatingPoint(f) => Type::FloatingPoint(f),
+        ParsedType::FloatingPoint => Type::FloatingPoint,
         ParsedType::CString => Type::CString,
         ParsedType::SizedCString => Type::SizedCString,
         ParsedType::String => Type::String,
@@ -519,7 +519,7 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 parsed_array_to_array(c, array.clone(), containers, definers, c.tags()).size();
             TestValue::Array { values: v, size }
         }
-        ParsedType::FloatingPoint(_) => TestValue::FloatingNumber {
+        ParsedType::FloatingPoint => TestValue::FloatingNumber {
             value: value.parse().unwrap(),
             original_string: value.clone(),
         },

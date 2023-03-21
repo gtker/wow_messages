@@ -161,7 +161,7 @@ pub(crate) fn print_write_definition(
                 "w.write_all(&{variable_prefix}{name}.octets()){postfix}?;",
             ));
         }
-        Type::FloatingPoint(_) => {
+        Type::FloatingPoint => {
             s.wln(format!(
                 "w.write_all(&{variable_prefix}{name}.to_le_bytes()){postfix}?;",
             ));

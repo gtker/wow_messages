@@ -328,13 +328,10 @@ fn print_definition(
             let name = w.unwrap().name();
             s.wln(format!("ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",));
         }
-        Type::FloatingPoint(i) => {
+        Type::FloatingPoint => {
             let name = w.unwrap().name();
-            let len = i.size();
 
-            s.wln(format!(
-                "ptvcursor_add(ptv, {name}, {len}, ENC_LITTLE_ENDIAN);",
-            ));
+            s.wln(format!("ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",));
         }
         Type::CString => {
             print_cstring(s, w);
