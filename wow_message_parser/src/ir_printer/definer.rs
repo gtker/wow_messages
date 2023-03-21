@@ -45,10 +45,9 @@ fn definer_to_ir(e: &Definer) -> IrDefiner {
 }
 
 #[derive(Debug, Serialize)]
+#[serde(rename_all = "snake_case")]
 enum IrDefinerType {
-    #[serde(rename = "enum")]
     Enum,
-    #[serde(rename = "flag")]
     Flag,
 }
 
@@ -62,10 +61,9 @@ impl From<DefinerType> for IrDefinerType {
 }
 
 #[derive(Debug, Serialize, Ord, PartialOrd, Eq, PartialEq)]
+#[serde(rename_all = "snake_case")]
 pub(crate) enum IrDefinerUsage {
-    #[serde(rename = "used_but_not_in_if")]
     UsedButNotInIf,
-    #[serde(rename = "in_if")]
     InIf,
 }
 

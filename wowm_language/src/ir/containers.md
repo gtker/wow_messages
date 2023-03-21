@@ -4,7 +4,7 @@ All containers have:
 
 * `name`, type name of the container.
 * `object_type` contains:
-    * `type`: either `struct`, `clogin`, `slogin`, `cmsg`, `smsg`, or `msg`.
+    * `type`: either `struct`, `c_login`, `s_login`, `c_msg`, `s_msg`, or `msg`.
     * `opcode`, only present if `type` is not struct.
 * `constant`, `true` if all fields always have the same size, otherwise `false`.
 * `members`, an array of Container Members.

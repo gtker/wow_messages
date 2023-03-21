@@ -40,17 +40,11 @@ fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "opcode")]
 pub(crate) enum IrContainerType {
-    #[serde(rename = "struct")]
     Struct,
-    #[serde(rename = "clogin")]
     CLogin(u16),
-    #[serde(rename = "slogin")]
     SLogin(u16),
-    #[serde(rename = "msg")]
     Msg(u16),
-    #[serde(rename = "cmsg")]
     CMsg(u16),
-    #[serde(rename = "smsg")]
     SMsg(u16),
 }
 
@@ -105,12 +99,10 @@ impl From<&OptionalStatement> for IrOptionalStatement {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "content")]
+#[serde(rename_all = "snake_case")]
 pub(crate) enum IrStructMember {
-    #[serde(rename = "definition")]
     Definition(Box<IrStructMemberDefinition>),
-    #[serde(rename = "if_statement")]
     IfStatement(IrIfStatement),
-    #[serde(rename = "optional")]
     Optional(IrOptionalStatement),
 }
 
@@ -126,12 +118,10 @@ impl From<&StructMember> for IrStructMember {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "content")]
+#[serde(rename_all = "snake_case")]
 pub(crate) enum IrEquation {
-    #[serde(rename = "equals")]
     Equals { value: String },
-    #[serde(rename = "not_equals")]
     NotEquals { value: String },
-    #[serde(rename = "bitwise_and")]
     BitwiseAnd { value: String },
 }
 
@@ -172,12 +162,9 @@ impl From<Conditional> for IrConditional {
 pub(crate) struct IrIfStatement {
     pub conditional: IrConditional,
     members: Vec<IrStructMember>,
-    #[serde(rename = "else_if_statements")]
-    else_ifs: Vec<IrIfStatement>,
-    #[serde(rename = "else_members")]
-    else_statement_members: Vec<IrStructMember>,
-    #[serde(rename = "original_type")]
-    original_ty: IrType,
+    else_if_statements: Vec<IrIfStatement>,
+    else_members: Vec<IrStructMember>,
+    original_type: IrType,
 }
 
 impl From<&IfStatement> for IrIfStatement {
@@ -190,9 +177,9 @@ impl From<&IfStatement> for IrIfStatement {
         Self {
             conditional: v.conditional().clone().into(),
             members,
-            else_ifs,
-            else_statement_members,
-            original_ty: v.original_ty().into(),
+            else_if_statements: else_ifs,
+            else_members: else_statement_members,
+            original_type: v.original_ty().into(),
         }
     }
 }
@@ -324,16 +311,12 @@ impl From<&Array> for IrArray {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "content")]
+#[serde(rename_all = "snake_case")]
 pub(crate) enum IrArrayType {
-    #[serde(rename = "integer")]
     Integer(IrIntegerType),
-    #[serde(rename = "complex")]
     Complex(String),
-    #[serde(rename = "cstring")]
     CString,
-    #[serde(rename = "guid")]
     Guid,
-    #[serde(rename = "packed_guid")]
     PackedGuid,
 }
 
@@ -351,12 +334,10 @@ impl From<&ArrayType> for IrArrayType {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "content")]
+#[serde(rename_all = "snake_case")]
 pub(crate) enum IrArraySize {
-    #[serde(rename = "fixed")]
     Fixed(i64),
-    #[serde(rename = "variable")]
     Variable(String),
-    #[serde(rename = "endless")]
     Endless,
 }
 
@@ -483,42 +464,32 @@ impl From<UpdateMaskType> for IrUpdateMaskType {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "content")]
+#[serde(rename_all = "snake_case")]
 pub(crate) enum IrTestValue {
-    #[serde(rename = "number")]
     Number(IrIntegerEnumValue),
-    #[serde(rename = "bool")]
     Bool(bool),
-    #[serde(rename = "datetime")]
     DateTime(IrIntegerEnumValue),
-    #[serde(rename = "guid")]
     Guid(IrIntegerEnumValue),
-    #[serde(rename = "floating_point")]
-    FloatingNumber { value: f64, original_string: String },
-    #[serde(rename = "array")]
+    FloatingNumber {
+        value: f64,
+        original_string: String,
+    },
     Array {
         values: Vec<usize>,
         size: IrArraySize,
     },
-    #[serde(rename = "string")]
     String(String),
-    #[serde(rename = "flag")]
     Flag(Vec<String>),
-    #[serde(rename = "enum")]
     Enum(IrIntegerEnumValue),
-    #[serde(rename = "sub_object")]
     SubObject {
-        #[serde(rename = "type_name")]
-        ty_name: String,
+        type_name: String,
         members: Vec<IrTestCaseMember>,
     },
-    #[serde(rename = "array_of_sub_object")]
     ArrayOfSubObject {
         type_name: String,
         members: Vec<Vec<IrTestCaseMember>>,
     },
-    #[serde(rename = "update_mask")]
     UpdateMask(Vec<IrTestUpdateMaskValue>),
-    #[serde(rename = "ip_address")]
     IpAddress(IrIntegerEnumValue),
 }
 
@@ -545,7 +516,7 @@ impl From<&TestValue> for IrTestValue {
             TestValue::Flag(f) => Self::Flag(f.to_vec()),
             TestValue::Enum(e) => Self::Enum(e.into()),
             TestValue::SubObject { c, members } => Self::SubObject {
-                ty_name: c.name().to_string(),
+                type_name: c.name().to_string(),
                 members: members.iter().map(|a| a.into()).collect(),
             },
             TestValue::ArrayOfSubObject(e, t) => Self::ArrayOfSubObject {

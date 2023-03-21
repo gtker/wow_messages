@@ -19,42 +19,41 @@ struct IrFileInfo {
 }
 
 #[derive(Debug, Serialize)]
-#[allow(non_camel_case_types)]
 #[serde(tag = "type")]
+#[serde(rename_all = "snake_case")]
 pub(crate) enum IrIntegerType {
-    u8,
-    i8,
-    u16,
-    u32,
-    u64,
-    i16,
-    i32,
-    i64,
-    u48,
+    U8,
+    I8,
+    U16,
+    U32,
+    U64,
+    I16,
+    I32,
+    I64,
+    U48,
 }
 
 impl From<&IntegerType> for IrIntegerType {
     fn from(v: &IntegerType) -> Self {
         match v {
-            IntegerType::U8 => Self::u8,
-            IntegerType::U16 => Self::u16,
-            IntegerType::U32 => Self::u32,
-            IntegerType::U64 => Self::u64,
-            IntegerType::I32 => Self::i32,
-            IntegerType::I8 => Self::i8,
-            IntegerType::I16 => Self::i16,
-            IntegerType::I64 => Self::i64,
-            IntegerType::U48 => Self::u48,
+            IntegerType::U8 => Self::U8,
+            IntegerType::U16 => Self::U16,
+            IntegerType::U32 => Self::U32,
+            IntegerType::U64 => Self::U64,
+            IntegerType::I32 => Self::I32,
+            IntegerType::I8 => Self::I8,
+            IntegerType::I16 => Self::I16,
+            IntegerType::I64 => Self::I64,
+            IntegerType::U48 => Self::U48,
         }
     }
 }
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "version")]
+#[serde(rename_all = "snake_case")]
 pub(crate) enum IrLoginVersion {
-    #[serde(rename = "all")]
     All,
-    #[serde(rename = "specific")]
     Specific(u8),
 }
 
@@ -69,16 +68,21 @@ impl From<LoginVersion> for IrLoginVersion {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "version")]
+#[serde(rename_all = "snake_case")]
 pub(crate) enum IrWorldVersion {
-    #[serde(rename = "all")]
     All,
-    #[serde(rename = "major")]
-    Major { major: u8 },
-    #[serde(rename = "minor")]
-    Minor { major: u8, minor: u8 },
-    #[serde(rename = "patch")]
-    Patch { major: u8, minor: u8, patch: u8 },
-    #[serde(rename = "exact")]
+    Major {
+        major: u8,
+    },
+    Minor {
+        major: u8,
+        minor: u8,
+    },
+    Patch {
+        major: u8,
+        minor: u8,
+        patch: u8,
+    },
     Exact {
         major: u8,
         minor: u8,
@@ -89,10 +93,9 @@ pub(crate) enum IrWorldVersion {
 
 #[derive(Debug, Serialize)]
 #[serde(tag = "type", content = "versions")]
+#[serde(rename_all = "snake_case")]
 pub(crate) enum IrVersions {
-    #[serde(rename = "login")]
     Login(Vec<IrLoginVersion>),
-    #[serde(rename = "world")]
     World(Vec<IrWorldVersion>),
 }
 
