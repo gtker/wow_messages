@@ -294,7 +294,7 @@ impl Container {
         for field in self.members() {
             match field {
                 StructMember::Definition(d) => {
-                    if let Some(size) = d.ty().sizes(self.tags()).is_constant() {
+                    if let Some(size) = d.ty().sizes().is_constant() {
                         let size = size as u64;
                         sum += size;
                     } else {
@@ -440,7 +440,7 @@ impl Container {
 
     pub(crate) fn contains_update_mask_transitively(&self) -> bool {
         for d in self.all_definitions_transitively() {
-            if d.ty() == &Type::UpdateMask {
+            if matches!(d.ty(), &Type::UpdateMask { .. }) {
                 return true;
             }
         }
@@ -525,7 +525,7 @@ impl Container {
                 | Type::EnchantMask
                 | Type::InspectTalentGearMask
                 | Type::AuraMask
-                | Type::UpdateMask => (
+                | Type::UpdateMask { .. } => (
                     format!("crate::{}", version.as_major_world().module_name()),
                     name,
                 ),

@@ -229,7 +229,7 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
         Type::SizedCString | Type::Guid | Type::CString | Type::String { .. } => {
             f.add(Feature::ComplexBuiltInTypes)
         }
-        Type::UpdateMask => f.add(Feature::UpdateMaskTypes),
+        Type::UpdateMask { .. } => f.add(Feature::UpdateMaskTypes),
         Type::AuraMask => f.add(Feature::AuraMaskTypes),
         Type::PackedGuid => f.add(Feature::PackedGuidTypes),
         Type::NamedGuid => f.add(Feature::NamedGuidTypes),

@@ -261,7 +261,7 @@ pub(crate) fn print_write_definition(
         | Type::Struct { .. }
         | Type::EnchantMask
         | Type::InspectTalentGearMask
-        | Type::UpdateMask
+        | Type::UpdateMask { .. }
         | Type::AuraMask => {
             s.wln(format!(
                 "{variable_prefix}{name}.write_into_vec(&mut w){postfix}?;",

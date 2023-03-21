@@ -11,7 +11,7 @@ pub(crate) struct Sizes {
 pub(crate) const AURA_MASK_MAX_SIZE: u8 = 4 + 32 * 4;
 pub(crate) const AURA_MASK_MIN_SIZE: u8 = 4;
 
-pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> u16 {
+pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> usize {
     let data = match version {
         MajorWorldVersion::Vanilla => vanilla_fields::FIELDS,
         MajorWorldVersion::BurningCrusade => tbc_fields::FIELDS,
@@ -27,15 +27,15 @@ pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> u16 {
         i += 1;
     }
 
-    let amount_of_bytes_for_data = biggest.offset() + biggest.size();
-    let amount_of_mask_blocks_size = core::mem::size_of::<u32>() as i32;
+    let amount_of_bytes_for_data = (biggest.offset() + biggest.size()) as usize;
+    let amount_of_mask_blocks_size = core::mem::size_of::<u32>();
 
     let mut max_mask_blocks = amount_of_bytes_for_data / 8;
     if (amount_of_bytes_for_data % 8) > 0 {
         max_mask_blocks += 1;
     }
 
-    (amount_of_mask_blocks_size + max_mask_blocks + amount_of_bytes_for_data) as u16
+    amount_of_mask_blocks_size + max_mask_blocks + amount_of_bytes_for_data
 }
 
 pub(crate) const F32_SIZE: usize = 4;
@@ -60,10 +60,6 @@ pub(crate) const DATETIME_SIZE: u8 = 4;
 impl Sizes {
     pub(crate) fn new() -> Self {
         Self::default()
-    }
-
-    pub(crate) fn from_sizes(minimum: usize, maximum: usize) -> Self {
-        Self { minimum, maximum }
     }
 
     pub(crate) fn inc(&mut self, minimum: usize, maximum: usize) {

@@ -513,7 +513,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
         | RustType::EnchantMask
         | RustType::InspectTalentGearMask
         | RustType::PackedGuid
-        | RustType::UpdateMask
+        | RustType::UpdateMask { .. }
         | RustType::AuraMask => {
             format!("{prefix}{name}.size()")
         }
@@ -596,7 +596,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
             }
         }
 
-        _ => m.constant_sized().unwrap().to_string(),
+        _ => m.ty().to_type().sizes().is_constant().unwrap().to_string(),
     };
     s.w_no_indent(str);
     s.wln_no_indent(m.size_comment());

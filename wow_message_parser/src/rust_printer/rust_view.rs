@@ -22,7 +22,6 @@ pub(crate) struct RustMember {
     original_ty: String,
 
     in_rust_type: bool,
-    sizes: Sizes,
 
     tags: MemberTags,
 }
@@ -37,10 +36,6 @@ impl RustMember {
     pub(crate) fn tags(&self) -> &MemberTags {
         &self.tags
     }
-    pub(crate) fn constant_sized(&self) -> Option<usize> {
-        self.sizes.is_constant()
-    }
-
     pub(crate) fn all_members(&self) -> Vec<&RustMember> {
         let mut v = self.all_members_without_self();
         v.push(self);
@@ -363,7 +358,9 @@ pub(crate) enum RustType {
     Bool(IntegerType),
     DateTime,
     Floating,
-    UpdateMask,
+    UpdateMask {
+        max_size: usize,
+    },
     AuraMask,
     Guid,
     NamedGuid,
@@ -435,7 +432,9 @@ impl RustType {
             RustType::Bool(i) => Type::Bool(*i),
             RustType::DateTime => Type::DateTime,
             RustType::Floating => Type::FloatingPoint,
-            RustType::UpdateMask => Type::UpdateMask,
+            RustType::UpdateMask { max_size } => Type::UpdateMask {
+                max_size: *max_size,
+            },
             RustType::AuraMask => Type::AuraMask,
             RustType::Guid => Type::Guid,
             RustType::NamedGuid => Type::NamedGuid,
@@ -508,7 +507,7 @@ impl RustType {
                 }
             }
 
-            RustType::UpdateMask
+            RustType::UpdateMask { .. }
             | RustType::NamedGuid
             | RustType::AchievementDoneArray
             | RustType::AchievementInProgressArray
@@ -1025,24 +1024,6 @@ fn create_else_if_flag(
     };
     let flag_ty_name = &find_subject(current_scope, parent_scope, statement).original_ty;
 
-    let mut min = Sizes::new();
-    min.set_minimum(usize::MAX);
-    let mut max = Sizes::new();
-
-    for enumerator in &enumerators {
-        let mut sum = Sizes::new();
-        for member in enumerator.members() {
-            sum += member.sizes;
-        }
-
-        if sum.minimum() < min.minimum() {
-            min = sum;
-        }
-        if sum.maximum() > max.maximum() {
-            max = sum;
-        }
-    }
-
     // Create new Enum RustMember
     let rm = RustMember {
         name: statement.name().to_string(),
@@ -1057,7 +1038,6 @@ fn create_else_if_flag(
         },
         original_ty: struct_ty_name.to_string(),
         in_rust_type: true,
-        sizes: Sizes::from_sizes(min.minimum(), max.maximum()),
         tags: MemberTags::new(), // TODO Which tags should go in here?
     };
 
@@ -1356,7 +1336,9 @@ pub(crate) fn create_struct_member(
                         object,
                     }
                 }
-                Type::UpdateMask => RustType::UpdateMask,
+                Type::UpdateMask { max_size } => RustType::UpdateMask {
+                    max_size: *max_size,
+                },
                 Type::AuraMask => RustType::AuraMask,
                 Type::SizedCString => RustType::SizedCString,
                 Type::AchievementDoneArray => RustType::AchievementDoneArray,
@@ -1374,7 +1356,7 @@ pub(crate) fn create_struct_member(
             };
 
             let name = d.name().to_string();
-            let mut sizes = d.ty().sizes(e.tags());
+            let mut sizes = d.ty().sizes();
 
             for m in e.fields() {
                 match m {
@@ -1397,7 +1379,6 @@ pub(crate) fn create_struct_member(
                 ty,
                 original_ty: d.ty().str(),
                 in_rust_type,
-                sizes,
                 tags: d.tags().clone(),
             });
         }

@@ -361,7 +361,7 @@ fn print_read_definition(
         | Type::NamedGuid
         | Type::Struct { .. }
         | Type::Guid
-        | Type::UpdateMask
+        | Type::UpdateMask { .. }
         | Type::AuraMask
         | Type::EnchantMask
         | Type::InspectTalentGearMask => {

@@ -274,7 +274,7 @@ impl From<&Type> for IrType {
             Type::FloatingPoint => Self::FloatingPoint,
             Type::CString => Self::CString,
             Type::String => Self::String,
-            Type::UpdateMask => Self::UpdateMask,
+            Type::UpdateMask { .. } => Self::UpdateMask,
             Type::AuraMask => Self::AuraMask,
             Type::Array(array) => Self::Array(array.into()),
             Type::Enum { e, upcast } => Self::Enum {

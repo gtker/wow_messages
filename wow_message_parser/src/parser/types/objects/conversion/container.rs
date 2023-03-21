@@ -22,6 +22,7 @@ use crate::parser::types::parsed::parsed_test_case::{
     ParsedTestCase, ParsedTestCaseMember, ParsedTestValue,
 };
 use crate::parser::types::parsed::parsed_ty::ParsedType;
+use crate::parser::types::sizes::update_mask_max;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
@@ -86,7 +87,9 @@ fn parsed_type_to_type(
                 complex_not_found(p.name(), p.tags(), &p.file_info, &s, &related);
             }
         }
-        ParsedType::UpdateMask => Type::UpdateMask,
+        ParsedType::UpdateMask => Type::UpdateMask {
+            max_size: update_mask_max(tags.main_versions().next().unwrap().as_major_world()),
+        },
         ParsedType::AuraMask => Type::AuraMask,
         ParsedType::AchievementDoneArray => Type::AchievementDoneArray,
         ParsedType::AchievementInProgressArray => Type::AchievementInProgressArray,

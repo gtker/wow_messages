@@ -125,6 +125,49 @@ impl ParsedType {
         }
     }
 
+    pub(crate) fn min_max_size(&self) -> (usize, usize) {
+        match self {
+            ParsedType::Integer(i) | ParsedType::Bool(i) => (i.size() as usize, i.size() as usize),
+            ParsedType::Guid => (GUID_SIZE as usize, GUID_SIZE as usize),
+            ParsedType::DateTime => (DATETIME_SIZE.into(), DATETIME_SIZE.into()),
+            ParsedType::FloatingPoint => (F32_SIZE, F32_SIZE),
+            ParsedType::PackedGuid => (PACKED_GUID_MIN_SIZE as _, PACKED_GUID_MAX_SIZE as _),
+            ParsedType::AuraMask => (AURA_MASK_MIN_SIZE as usize, AURA_MASK_MAX_SIZE as usize),
+            ParsedType::CString => (CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED),
+            ParsedType::SizedCString => (
+                SIZED_CSTRING_SMALLEST_ALLOWED,
+                SIZED_CSTRING_LARGEST_ALLOWED,
+            ),
+            ParsedType::String => (STRING_SMALLEST_POSSIBLE, STRING_LARGEST_POSSIBLE),
+            ParsedType::AchievementDoneArray | ParsedType::AchievementInProgressArray => {
+                (0, usize::MAX)
+            }
+            ParsedType::MonsterMoveSpline => (
+                MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED,
+                MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
+            ),
+            ParsedType::EnchantMask => {
+                (ENCHANT_MASK_SMALLEST_ALLOWED, ENCHANT_MASK_LARGEST_ALLOWED)
+            }
+            ParsedType::InspectTalentGearMask => (
+                INSPECT_TALENT_GEAR_MASK_SMALLEST_ALLOWED,
+                INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
+            ),
+            ParsedType::Gold => (GOLD_SIZE.into(), GOLD_SIZE.into()),
+            ParsedType::Level => (LEVEL_SIZE.into(), LEVEL_SIZE.into()),
+            ParsedType::Level16 => (LEVEL16_SIZE, LEVEL16_SIZE),
+            ParsedType::Level32 => (LEVEL32_SIZE, LEVEL32_SIZE),
+            ParsedType::NamedGuid => (NAMED_GUID_MIN_SIZE, NAMED_GUID_MAX_SIZE),
+            ParsedType::VariableItemRandomProperty => (
+                VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
+                VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
+            ),
+            ParsedType::AddonArray => (ADDON_ARRAY_MIN, ADDON_ARRAY_MAX),
+            ParsedType::IpAddress => (IP_ADDRESS_SIZE, IP_ADDRESS_SIZE),
+            t => unimplemented!("sizes for {t:?}"),
+        }
+    }
+
     // NOTE: Definers used in if statements count if statement contents
     pub(crate) fn sizes_parsed(
         &self,
@@ -135,31 +178,12 @@ impl ParsedType {
         let mut sizes = Sizes::new();
 
         match self {
-            ParsedType::Integer(i) => sizes.inc_both(i.size() as usize),
-            ParsedType::Bool(i) => sizes.inc_both(i.size() as usize),
-            ParsedType::Guid => sizes.inc_both(GUID_SIZE as _),
-            ParsedType::DateTime => sizes.inc_both(DATETIME_SIZE.into()),
-            ParsedType::FloatingPoint => sizes.inc_both(F32_SIZE),
-            ParsedType::PackedGuid => {
-                sizes.inc(PACKED_GUID_MIN_SIZE as _, PACKED_GUID_MAX_SIZE as _)
-            }
             ParsedType::UpdateMask => {
                 let world_version = e.tags().main_versions().next().unwrap().as_major_world();
                 sizes.inc(
                     UPDATE_MASK_MIN_SIZE as usize,
                     update_mask_max(world_version) as usize,
                 )
-            }
-            ParsedType::AuraMask => {
-                sizes.inc(AURA_MASK_MIN_SIZE as usize, AURA_MASK_MAX_SIZE as usize)
-            }
-            ParsedType::CString => sizes.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED),
-            ParsedType::SizedCString => sizes.inc(
-                SIZED_CSTRING_SMALLEST_ALLOWED,
-                SIZED_CSTRING_LARGEST_ALLOWED,
-            ),
-            ParsedType::String => {
-                sizes.inc(STRING_SMALLEST_POSSIBLE, STRING_LARGEST_POSSIBLE);
             }
             ParsedType::Identifier { s, upcast } => {
                 if s == e.name() {
@@ -230,33 +254,11 @@ impl ParsedType {
                     }
                 }
             }
-            ParsedType::AchievementDoneArray | ParsedType::AchievementInProgressArray => {
-                sizes.inc(0, usize::MAX);
+
+            _ => {
+                let (min, max) = self.min_max_size();
+                sizes.inc(min, max);
             }
-            ParsedType::MonsterMoveSpline => {
-                sizes.inc(
-                    MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED,
-                    MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
-                );
-            }
-            ParsedType::EnchantMask => {
-                sizes.inc(ENCHANT_MASK_SMALLEST_ALLOWED, ENCHANT_MASK_LARGEST_ALLOWED);
-            }
-            ParsedType::InspectTalentGearMask => sizes.inc(
-                INSPECT_TALENT_GEAR_MASK_SMALLEST_ALLOWED,
-                INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
-            ),
-            ParsedType::Gold => sizes.inc_both(GOLD_SIZE.into()),
-            ParsedType::Level => sizes.inc_both(LEVEL_SIZE.into()),
-            ParsedType::Level16 => sizes.inc_both(LEVEL16_SIZE),
-            ParsedType::Level32 => sizes.inc_both(LEVEL32_SIZE),
-            ParsedType::NamedGuid => sizes.inc(NAMED_GUID_MIN_SIZE, NAMED_GUID_MAX_SIZE),
-            ParsedType::VariableItemRandomProperty => sizes.inc(
-                VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
-                VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
-            ),
-            ParsedType::AddonArray => sizes.inc(ADDON_ARRAY_MIN, ADDON_ARRAY_MAX),
-            ParsedType::IpAddress => sizes.inc_both(IP_ADDRESS_SIZE),
         }
 
         sizes
@@ -362,33 +364,14 @@ impl ParsedType {
                         ParsedType::CString => {
                             Self::Array(ParsedArray::new(ParsedArrayType::CString, size))
                         }
-                        ParsedType::IpAddress
-                        | ParsedType::AddonArray
-                        | ParsedType::VariableItemRandomProperty
-                        | ParsedType::NamedGuid
-                        | ParsedType::Level16
-                        | ParsedType::Level32
-                        | ParsedType::Level
-                        | ParsedType::Gold
-                        | ParsedType::EnchantMask
-                        | ParsedType::InspectTalentGearMask
-                        | ParsedType::AchievementDoneArray
-                        | ParsedType::AchievementInProgressArray
-                        | ParsedType::MonsterMoveSpline
-                        | ParsedType::SizedCString
-                        | ParsedType::String { .. }
-                        | ParsedType::Array(_)
-                        | ParsedType::FloatingPoint
-                        | ParsedType::UpdateMask
-                        | ParsedType::AuraMask
-                        | ParsedType::DateTime
-                        | ParsedType::Bool(_) => unimplemented!("unsupported"),
                         ParsedType::PackedGuid => {
                             Self::Array(ParsedArray::new(ParsedArrayType::PackedGuid, size))
                         }
                         ParsedType::Guid => {
                             Self::Array(ParsedArray::new(ParsedArrayType::Guid, size))
                         }
+
+                        _ => unimplemented!("unsupported"),
                     }
                 } else {
                     Self::Identifier { s: i, upcast: None }

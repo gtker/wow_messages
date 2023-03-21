@@ -2,21 +2,10 @@ use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::definer::Definer;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::{
-    update_mask_max, Sizes, ADDON_ARRAY_MAX, ADDON_ARRAY_MIN, AURA_MASK_MAX_SIZE,
-    AURA_MASK_MIN_SIZE, DATETIME_SIZE, F32_SIZE, GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE,
-    LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, NAMED_GUID_MAX_SIZE, NAMED_GUID_MIN_SIZE,
-    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
-    VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
+    Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
 };
-use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::IntegerType;
-use crate::{
-    Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED, ENCHANT_MASK_LARGEST_ALLOWED,
-    ENCHANT_MASK_SMALLEST_ALLOWED, INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
-    INSPECT_TALENT_GEAR_MASK_SMALLEST_ALLOWED, MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
-    MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED, SIZED_CSTRING_LARGEST_ALLOWED,
-    SIZED_CSTRING_SMALLEST_ALLOWED, STRING_LARGEST_POSSIBLE, STRING_SMALLEST_POSSIBLE,
-};
+use crate::{Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
 use std::convert::TryInto;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
@@ -43,7 +32,9 @@ pub(crate) enum Type {
     Struct {
         e: Container,
     },
-    UpdateMask,
+    UpdateMask {
+        max_size: usize,
+    },
     MonsterMoveSplines,
     AuraMask,
     AchievementDoneArray,
@@ -128,7 +119,7 @@ impl Type {
             Type::CString => ParsedType::CString,
             Type::SizedCString => ParsedType::SizedCString,
             Type::String => ParsedType::String,
-            Type::UpdateMask => ParsedType::UpdateMask,
+            Type::UpdateMask { .. } => ParsedType::UpdateMask,
             Type::MonsterMoveSplines => ParsedType::MonsterMoveSpline,
             Type::AuraMask => ParsedType::AuraMask,
             Type::AchievementDoneArray => ParsedType::AchievementDoneArray,
@@ -150,30 +141,10 @@ impl Type {
     }
 
     // NOTE: Definers used in if statements count if statement contents
-    pub(crate) fn sizes(&self, tags: &ObjectTags) -> Sizes {
+    pub(crate) fn sizes(&self) -> Sizes {
         let mut sizes = Sizes::new();
 
         match self {
-            Type::Integer(i) => sizes.inc_both(i.size() as usize),
-            Type::Bool(i) => sizes.inc_both(i.size().into()),
-            Type::Guid => sizes.inc_both(GUID_SIZE as _),
-            Type::DateTime => sizes.inc_both(DATETIME_SIZE.into()),
-            Type::FloatingPoint => sizes.inc_both(F32_SIZE),
-            Type::PackedGuid => sizes.inc(PACKED_GUID_MIN_SIZE as _, PACKED_GUID_MAX_SIZE as _),
-            Type::UpdateMask => {
-                let world_version = tags.main_versions().next().unwrap().as_major_world();
-                sizes.inc(
-                    UPDATE_MASK_MIN_SIZE as usize,
-                    update_mask_max(world_version) as usize,
-                )
-            }
-            Type::AuraMask => sizes.inc(AURA_MASK_MIN_SIZE as usize, AURA_MASK_MAX_SIZE as usize),
-            Type::CString => sizes.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED),
-            Type::SizedCString => sizes.inc(
-                SIZED_CSTRING_SMALLEST_ALLOWED,
-                SIZED_CSTRING_LARGEST_ALLOWED,
-            ),
-            Type::String => sizes.inc(STRING_SMALLEST_POSSIBLE, STRING_LARGEST_POSSIBLE),
             Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
                 let s = if let Some(upcast) = upcast {
                     upcast.size()
@@ -227,49 +198,29 @@ impl Type {
                     }
                 }
             }
-            Type::AchievementDoneArray | Type::AchievementInProgressArray => {
-                sizes.inc(0, usize::MAX);
+
+            Type::UpdateMask { max_size } => sizes.inc(UPDATE_MASK_MIN_SIZE.into(), *max_size),
+
+            _ => {
+                let (min, max) = self.to_parsed_type().min_max_size();
+                sizes.inc(min, max);
             }
-            Type::MonsterMoveSplines => {
-                sizes.inc(
-                    MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED,
-                    MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
-                );
-            }
-            Type::EnchantMask => {
-                sizes.inc(ENCHANT_MASK_SMALLEST_ALLOWED, ENCHANT_MASK_LARGEST_ALLOWED)
-            }
-            Type::InspectTalentGearMask => sizes.inc(
-                INSPECT_TALENT_GEAR_MASK_SMALLEST_ALLOWED,
-                INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
-            ),
-            Type::Gold => sizes.inc_both(GOLD_SIZE.into()),
-            Type::Level => sizes.inc_both(LEVEL_SIZE.into()),
-            Type::Level16 => sizes.inc_both(LEVEL16_SIZE),
-            Type::Level32 => sizes.inc_both(LEVEL32_SIZE),
-            Type::NamedGuid => sizes.inc(NAMED_GUID_MIN_SIZE, NAMED_GUID_MAX_SIZE),
-            Type::VariableItemRandomProperty => sizes.inc(
-                VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
-                VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
-            ),
-            Type::AddonArray => sizes.inc(ADDON_ARRAY_MIN, ADDON_ARRAY_MAX),
-            Type::IpAddress => sizes.inc_both(IP_ADDRESS_SIZE),
         }
 
         sizes
     }
 
-    pub(crate) fn doc_size_of(&self, tags: &ObjectTags) -> String {
+    pub(crate) fn doc_size_of(&self) -> String {
         match self {
             Type::Array(_) => {
-                if let Some(size) = self.sizes(tags).is_constant() {
+                if let Some(size) = self.sizes().is_constant() {
                     size.to_string()
                 } else {
                     "?".to_string()
                 }
             }
             _ => {
-                if let Some(size) = self.sizes(tags).is_constant() {
+                if let Some(size) = self.sizes().is_constant() {
                     size.to_string()
                 } else {
                     "-".to_string()
@@ -306,7 +257,7 @@ impl Type {
             | Type::Enum { .. }
             | Type::Flag { .. }
             | Type::Struct { .. }
-            | Type::UpdateMask
+            | Type::UpdateMask { .. }
             | Type::AuraMask
             | Type::CString
             | Type::PackedGuid => "-".to_string(),

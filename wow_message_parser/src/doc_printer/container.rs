@@ -1,9 +1,6 @@
 use crate::doc_printer::DocWriter;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
-use crate::parser::types::sizes::{
-    F32_SIZE, GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE,
-};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
@@ -132,33 +129,6 @@ fn print_container_example_definition(
                 s.w(format!("{b}, "));
             }
         }
-        Type::DateTime => {
-            s.bytes(bytes.take(core::mem::size_of::<u32>()));
-        }
-        Type::Bool(i) => {
-            s.bytes(bytes.take(i.size() as usize));
-        }
-        Type::Level16 => {
-            s.bytes(bytes.take(LEVEL16_SIZE));
-        }
-        Type::Level32 => {
-            s.bytes(bytes.take(LEVEL32_SIZE));
-        }
-        Type::IpAddress => {
-            s.bytes(bytes.take(IP_ADDRESS_SIZE));
-        }
-        Type::Level => {
-            s.bytes(bytes.take(LEVEL_SIZE.into()));
-        }
-        Type::Gold => {
-            s.bytes(bytes.take(GOLD_SIZE.into()));
-        }
-        Type::Guid => {
-            s.bytes(bytes.take(GUID_SIZE.into()));
-        }
-        Type::FloatingPoint => {
-            s.bytes(bytes.take(F32_SIZE));
-        }
         Type::PackedGuid => {
             let mask = bytes.next().unwrap();
             s.w(format!("{mask}, "));
@@ -234,7 +204,7 @@ fn print_container_example_definition(
 
             return;
         }
-        Type::UpdateMask => {
+        Type::UpdateMask { .. } => {
             s.wln("// UpdateMask");
             let amount_of_blocks = bytes.next().unwrap();
             s.wln(format!("{amount_of_blocks}, // amount_of_blocks"));
@@ -291,6 +261,11 @@ fn print_container_example_definition(
         }
         Type::AddonArray => {
             unimplemented!("addon array example")
+        }
+
+        _ => {
+            let size = d.ty().sizes().is_constant().unwrap();
+            s.bytes(bytes.take(size));
         }
     }
     s.wln(comment);
@@ -553,7 +528,7 @@ fn print_container_field(
                 Type::NamedGuid | Type::PackedGuid | Type::Guid => {
                     format!("[{}](../spec/packed-guid.md)", d.ty().str())
                 }
-                Type::UpdateMask => {
+                Type::UpdateMask { .. } => {
                     format!("[{}](../spec/update-mask.md)", d.ty().str())
                 }
                 Type::EnchantMask | Type::InspectTalentGearMask | Type::AuraMask => {
@@ -629,7 +604,7 @@ fn print_container_field(
                 } else {
                     "-".to_string()
                 },
-                size = d.ty().doc_size_of(tags),
+                size = d.ty().doc_size_of(),
                 endian = d.ty().doc_endian_str(),
                 ty = ty,
                 name = d.name(),
@@ -637,7 +612,7 @@ fn print_container_field(
                 comment = comment,
             ));
 
-            if let Some(size) = d.ty().sizes(tags).is_constant() {
+            if let Some(size) = d.ty().sizes().is_constant() {
                 if let Some(off) = offset {
                     *off += size;
                 }

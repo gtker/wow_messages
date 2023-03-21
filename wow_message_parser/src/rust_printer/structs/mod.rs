@@ -189,7 +189,7 @@ fn can_derive_copy(members: &[&RustMember]) -> bool {
             | RustType::AchievementInProgressArray
             | RustType::AchievementDoneArray
             | RustType::MonsterMoveSpline
-            | RustType::UpdateMask
+            | RustType::UpdateMask { .. }
             | RustType::String
             | RustType::CString
             | RustType::SizedCString => return false,
