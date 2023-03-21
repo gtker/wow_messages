@@ -120,7 +120,7 @@
             ptvcursor_add(ptv, hf_woww_slot_index, 1, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_AUTOSTORE_LOOT_ITEM:
-            ptvcursor_add(ptv, hf_woww_item_slot, 1, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_item_slot_int, 1, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_BANKER_ACTIVATE:
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
@@ -838,7 +838,7 @@
             break;
         case CMSG_LOOT_ROLL:
             ptvcursor_add(ptv, hf_woww_item, 8, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_item_slot, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_item_slot_int, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_roll_vote, 1, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_MAIL_CREATE_TEXT_ITEM:
@@ -1459,8 +1459,8 @@
             ptvcursor_add(ptv, hf_woww_summoner, 8, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_SWAP_INV_ITEM:
-            ptvcursor_add(ptv, hf_woww_source_slot, 1, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_destination_slot, 1, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_item_slot, 1, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_item_slot, 1, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_SWAP_ITEM:
             ptvcursor_add(ptv, hf_woww_destination_bag, 1, ENC_LITTLE_ENDIAN);
@@ -1605,7 +1605,7 @@
             ptvcursor_add(ptv, hf_woww_gift_bag_index, 1, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_gift_slot, 1, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_item_bag_index, 1, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_item_slot, 1, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_item_slot_int, 1, ENC_LITTLE_ENDIAN);
             break;
         case CMSG_ZONEUPDATE:
             ptvcursor_add(ptv, hf_woww_area, 4, ENC_LITTLE_ENDIAN);
@@ -4684,7 +4684,7 @@
             ptvcursor_add(ptv, hf_woww_new_item_creation_type, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_new_item_chat_alert, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_bag_slot, 1, ENC_LITTLE_ENDIAN);
-            ptvcursor_add(ptv, hf_woww_item_slot, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_item_slot_int, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_item_suffix_factor, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_item_random_property_id, 4, ENC_LITTLE_ENDIAN);

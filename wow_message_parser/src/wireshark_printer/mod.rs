@@ -178,6 +178,10 @@ fn name_to_hf(name: &str, ty: &Type) -> String {
         && matches!(ty, Type::Integer(IntegerType::U16(Endianness::Little)))
     {
         name += "_int";
+    } else if name == "item_slot" {
+        if let Type::Integer(_) = ty {
+            name += "_int";
+        }
     }
 
     format!("hf_woww_{name}")

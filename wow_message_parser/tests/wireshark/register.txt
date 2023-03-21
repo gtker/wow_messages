@@ -2256,6 +2256,12 @@
         },
         { &hf_woww_item_slot,
             { "Item Slot", "woww.item.slot",
+                FT_UINT8, BASE_HEX_DEC, VALS(e_item_slot_strings), 0,
+                NULL, HFILL
+            }
+        },
+        { &hf_woww_item_slot_int,
+            { "Item Slot Int", "woww.item.slot.int",
                 FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }

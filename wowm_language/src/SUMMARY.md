@@ -151,6 +151,7 @@
 - [ItemQuality](docs/itemquality.md)
 - [ItemRefundResult](docs/itemrefundresult.md)
 - [ItemSet](docs/itemset.md)
+- [ItemSlot](docs/itemslot.md)
 - [ItemStatType](docs/itemstattype.md)
 - [ItemTextQuery](docs/itemtextquery.md)
 - [JoinArenaType](docs/joinarenatype.md)
