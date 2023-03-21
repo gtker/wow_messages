@@ -420,8 +420,8 @@ impl RustType {
 
     pub(crate) fn rust_str(&self) -> String {
         match self {
-            RustType::Enum { ty_name, .. } | RustType::Flag { ty_name, .. } => ty_name.clone(),
-            RustType::Struct { ty_name, .. } => ty_name.clone(),
+            RustType::Enum { .. } | RustType::Flag { .. } | RustType::Struct { .. } => self.str(),
+
             _ => self.to_type().rust_str(),
         }
     }
