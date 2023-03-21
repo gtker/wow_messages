@@ -93,35 +93,23 @@ impl ParsedType {
 
     pub(crate) fn rust_str(&self) -> String {
         match self {
-            ParsedType::Integer(i) => i.rust_str().to_string(),
             ParsedType::SizedCString | ParsedType::CString | ParsedType::String => {
                 Type::STRINGS_RUST_NAME.to_string()
             }
-            ParsedType::Array(a) => a.rust_str(),
-            ParsedType::Identifier { s, .. } => s.clone(),
-            ParsedType::FloatingPoint => Type::F32_NAME.to_string(),
             ParsedType::Guid | ParsedType::PackedGuid => Type::GUIDS_RUST_NAME.to_string(),
-            ParsedType::UpdateMask => Type::UPDATE_MASK_NAME.to_string(),
-            ParsedType::AuraMask => Type::AURA_MASK_NAME.to_string(),
-            ParsedType::Bool(_) => Type::BOOLS_RUST_NAME.to_string(),
-            ParsedType::DateTime => Type::DATE_TIME_NAME.to_string(),
             ParsedType::AchievementDoneArray => Type::ACHIEVEMENT_DONE_ARRAY_RUST_NAME.to_string(),
             ParsedType::AchievementInProgressArray => {
                 Type::ACHIEVEMENT_IN_PROGRESS_ARRAY_RUST_NAME.to_string()
             }
             ParsedType::MonsterMoveSpline => Type::MONSTER_MOVE_SPLINES_RUST_NAME.to_string(),
-            ParsedType::EnchantMask => Type::ENCHANT_MASK_NAME.to_string(),
-            ParsedType::InspectTalentGearMask => Type::INSPECT_TALENT_GEAR_MASK_NAME.to_string(),
-            ParsedType::Gold => Type::GOLD_NAME.to_string(),
-            ParsedType::Level16 | ParsedType::Level32 | ParsedType::Level => {
-                Type::LEVEL_NAME.to_string()
-            }
-            ParsedType::NamedGuid => Type::NAMED_GUID_NAME.to_string(),
-            ParsedType::VariableItemRandomProperty => {
-                Type::VARIABLE_ITEM_RANDOM_PROPERTY_NAME.to_string()
-            }
             ParsedType::AddonArray => Type::ADDON_ARRAY_RUST_NAME.to_string(),
             ParsedType::IpAddress => Type::IP_ADDRESS_RUST_NAME.to_string(),
+            ParsedType::Bool(_) => Type::BOOLS_RUST_NAME.to_string(),
+            ParsedType::Level16 | ParsedType::Level32 => Type::LEVEL_NAME.to_string(),
+
+            ParsedType::Array(a) => a.rust_str(),
+
+            _ => self.str(),
         }
     }
 
