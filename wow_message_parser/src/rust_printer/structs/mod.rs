@@ -174,6 +174,8 @@ fn can_derive_default(members: &[&RustMember]) -> bool {
                     return false;
                 }
             }
+        } else if let RustType::IpAddress = m.ty() {
+            return false;
         }
     }
 

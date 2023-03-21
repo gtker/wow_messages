@@ -447,6 +447,9 @@ fn print_definition(
         Type::AddonArray => {
             unreachable!("addon array only in 2.4.3/3.3.5")
         }
+        Type::IpAddress => {
+            unreachable!("ip addresses are only in login")
+        }
     }
 
     if d.tags().compressed().is_some() {

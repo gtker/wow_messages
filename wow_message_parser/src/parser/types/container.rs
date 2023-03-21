@@ -548,6 +548,8 @@ impl Container {
                     (pre, "Addon".to_string())
                 }
 
+                Type::IpAddress => ("std::net".to_string(), name),
+
                 Type::Gold => {
                     let pre = if self.tags().is_in_base() {
                         "crate"

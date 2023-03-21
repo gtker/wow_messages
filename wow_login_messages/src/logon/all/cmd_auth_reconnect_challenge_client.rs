@@ -4,8 +4,9 @@ use std::io::{Read, Write};
 use crate::logon::all::{
     Locale, Os, Platform, Version,
 };
+use std::net::Ipv4Addr;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 /// First message sent by the client when attempting to reconnect. The server will respond with [`CMD_AUTH_RECONNECT_CHALLENGE_Server`](crate::logon::version_2::CMD_AUTH_RECONNECT_CHALLENGE_Server).
 ///
 /// Has the exact same layout as [`CMD_AUTH_LOGON_CHALLENGE_Client`](crate::logon::all::CMD_AUTH_LOGON_CHALLENGE_Client).
@@ -21,7 +22,7 @@ use crate::logon::all::{
 ///     Os os;
 ///     Locale locale;
 ///     u32 utc_timezone_offset;
-///     u32_be client_ip_address;
+///     IpAddress client_ip_address;
 ///     String account_name;
 /// }
 /// ```
@@ -36,7 +37,7 @@ pub struct CMD_AUTH_RECONNECT_CHALLENGE_Client {
     /// Offset in minutes from UTC time. 180 would be UTC+3
     ///
     pub utc_timezone_offset: u32,
-    pub client_ip_address: u32,
+    pub client_ip_address: Ipv4Addr,
     /// Real clients can send a maximum of 16 UTF-8 characters. This is not necessarily 16 bytes since one character can be more than one byte.
     /// Real clients will send a fully uppercased username, and will perform authentication calculations on the uppercased version.
     /// Uppercasing in regards to non-ASCII values is little weird. See `https://docs.rs/wow_srp/latest/wow_srp/normalized_string/index.html` for more info.
@@ -87,8 +88,8 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
         // utc_timezone_offset: u32
         w.write_all(&self.utc_timezone_offset.to_le_bytes())?;
 
-        // client_ip_address: u32_be
-        w.write_all(&self.client_ip_address.to_be_bytes())?;
+        // client_ip_address: IpAddress
+        w.write_all(&self.client_ip_address.octets())?;
 
         // account_name: String
         w.write_all(&(self.account_name.len() as u8).to_le_bytes())?;
@@ -128,8 +129,8 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
         // utc_timezone_offset: u32
         let utc_timezone_offset = crate::util::read_u32_le(&mut r)?;
 
-        // client_ip_address: u32_be
-        let client_ip_address = crate::util::read_u32_be(&mut r)?;
+        // client_ip_address: IpAddress
+        let client_ip_address = Ipv4Addr::from(crate::util::read_u32_be(&mut r)?);
 
         // account_name: String
         let account_name = {
@@ -194,8 +195,8 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
             // utc_timezone_offset: u32
             let utc_timezone_offset = crate::util::tokio_read_u32_le(&mut r).await?;
 
-            // client_ip_address: u32_be
-            let client_ip_address = crate::util::tokio_read_u32_be(&mut r).await?;
+            // client_ip_address: IpAddress
+            let client_ip_address = Ipv4Addr::from(crate::util::tokio_read_u32_be(&mut r).await?);
 
             // account_name: String
             let account_name = {
@@ -273,8 +274,8 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
             // utc_timezone_offset: u32
             let utc_timezone_offset = crate::util::astd_read_u32_le(&mut r).await?;
 
-            // client_ip_address: u32_be
-            let client_ip_address = crate::util::astd_read_u32_be(&mut r).await?;
+            // client_ip_address: IpAddress
+            let client_ip_address = Ipv4Addr::from(crate::util::astd_read_u32_be(&mut r).await?);
 
             // account_name: String
             let account_name = {
@@ -327,7 +328,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
         + 4 // os: Os
         + 4 // locale: Locale
         + 4 // utc_timezone_offset: u32
-        + 4 // client_ip_address: u32_be
+        + 4 // client_ip_address: IpAddress
         + self.account_name.len() + 1 // account_name: String
     }
 }
@@ -361,7 +362,7 @@ mod test {
             os: Os::Windows,
             locale: Locale::EnGb,
             utc_timezone_offset: 0x3C,
-            client_ip_address: 0x7F000001,
+            client_ip_address: Ipv4Addr::from(0x7F000001_u32),
             account_name: String::from("A"),
         };
 
@@ -405,7 +406,7 @@ mod test {
             os: Os::Windows,
             locale: Locale::EnGb,
             utc_timezone_offset: 0x3C,
-            client_ip_address: 0x7F000001,
+            client_ip_address: Ipv4Addr::from(0x7F000001_u32),
             account_name: String::from("A"),
         };
 
@@ -449,7 +450,7 @@ mod test {
             os: Os::Windows,
             locale: Locale::EnGb,
             utc_timezone_offset: 0x3C,
-            client_ip_address: 0x7F000001,
+            client_ip_address: Ipv4Addr::from(0x7F000001_u32),
             account_name: String::from("A"),
         };
 
@@ -499,7 +500,7 @@ mod test {
             os: Os::Windows,
             locale: Locale::EnGb,
             utc_timezone_offset: 0x3C,
-            client_ip_address: 0x7F000001,
+            client_ip_address: Ipv4Addr::from(0x7F000001_u32),
             account_name: String::from("ABCDEFGHIJKLMNOP"),
         };
 
@@ -543,7 +544,7 @@ mod test {
             os: Os::Windows,
             locale: Locale::EnGb,
             utc_timezone_offset: 0x3C,
-            client_ip_address: 0x7F000001,
+            client_ip_address: Ipv4Addr::from(0x7F000001_u32),
             account_name: String::from("ABCDEFGHIJKLMNOP"),
         };
 
@@ -587,7 +588,7 @@ mod test {
             os: Os::Windows,
             locale: Locale::EnGb,
             utc_timezone_offset: 0x3C,
-            client_ip_address: 0x7F000001,
+            client_ip_address: Ipv4Addr::from(0x7F000001_u32),
             account_name: String::from("ABCDEFGHIJKLMNOP"),
         };
 

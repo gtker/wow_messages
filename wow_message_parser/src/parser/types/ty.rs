@@ -3,8 +3,8 @@ use crate::parser::types::definer::Definer;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::sizes::{
     update_mask_max, Sizes, ADDON_ARRAY_MAX, ADDON_ARRAY_MIN, AURA_MASK_MAX_SIZE,
-    AURA_MASK_MIN_SIZE, DATETIME_SIZE, GOLD_SIZE, GUID_SIZE, LEVEL16_SIZE, LEVEL32_SIZE,
-    LEVEL_SIZE, NAMED_GUID_MAX_SIZE, NAMED_GUID_MIN_SIZE, PACKED_GUID_MAX_SIZE,
+    AURA_MASK_MIN_SIZE, DATETIME_SIZE, GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE, LEVEL16_SIZE,
+    LEVEL32_SIZE, LEVEL_SIZE, NAMED_GUID_MAX_SIZE, NAMED_GUID_MIN_SIZE, PACKED_GUID_MAX_SIZE,
     PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
     VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
 };
@@ -56,6 +56,7 @@ pub(crate) enum Type {
     Level32,
     VariableItemRandomProperty,
     AddonArray,
+    IpAddress,
 }
 
 impl Type {
@@ -82,6 +83,7 @@ impl Type {
     pub(crate) const VARIABLE_ITEM_RANDOM_PROPERTY_NAME: &'static str =
         "VariableItemRandomProperty";
     pub(crate) const ADDON_ARRAY_NAME: &'static str = "AddonArray";
+    pub(crate) const IP_ADDRESS_NAME: &'static str = "IpAddress";
 
     pub(crate) const STRINGS_RUST_NAME: &'static str = "String";
     pub(crate) const GUIDS_RUST_NAME: &'static str = "Guid";
@@ -91,6 +93,7 @@ impl Type {
     pub(crate) const ACHIEVEMENT_IN_PROGRESS_ARRAY_RUST_NAME: &'static str =
         "Vec<AchievementInProgress>";
     pub(crate) const ADDON_ARRAY_RUST_NAME: &'static str = "Vec<Addon>";
+    pub(crate) const IP_ADDRESS_RUST_NAME: &'static str = "Ipv4Addr";
 
     pub(crate) fn str(&self) -> String {
         match self {
@@ -137,6 +140,7 @@ impl Type {
             Type::Level32 => ParsedType::Level32,
             Type::VariableItemRandomProperty => ParsedType::VariableItemRandomProperty,
             Type::AddonArray => ParsedType::AddonArray,
+            Type::IpAddress => ParsedType::IpAddress,
 
             Type::Array(_) | Type::Enum { .. } | Type::Flag { .. } | Type::Struct { .. } => {
                 panic!("invalid conversion")
@@ -248,6 +252,7 @@ impl Type {
                 VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
             ),
             Type::AddonArray => sizes.inc(ADDON_ARRAY_MIN, ADDON_ARRAY_MAX),
+            Type::IpAddress => sizes.inc_both(IP_ADDRESS_SIZE),
         }
 
         sizes
@@ -280,6 +285,8 @@ impl Type {
             Type::Level16 | Type::Level32 | Type::Gold | Type::DateTime | Type::Guid => {
                 "Little".to_string()
             }
+
+            Type::IpAddress => "Big".to_string(),
 
             Type::AddonArray
             | Type::VariableItemRandomProperty

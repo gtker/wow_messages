@@ -261,6 +261,7 @@ pub(crate) enum IrType {
     Level32,
     VariableItemRandomProperty,
     AddonArray,
+    IpAddress,
 }
 
 impl From<&Type> for IrType {
@@ -301,6 +302,7 @@ impl From<&Type> for IrType {
             Type::Level32 => Self::Level32,
             Type::VariableItemRandomProperty => Self::VariableItemRandomProperty,
             Type::AddonArray => Self::AddonArray,
+            Type::IpAddress => Self::IpAddress,
         }
     }
 }
@@ -534,6 +536,8 @@ pub(crate) enum IrTestValue {
     },
     #[serde(rename = "update_mask")]
     UpdateMask(Vec<IrTestUpdateMaskValue>),
+    #[serde(rename = "ip_address")]
+    IpAddress(IrIntegerEnumValue),
 }
 
 impl From<&TestValue> for IrTestValue {
@@ -543,6 +547,7 @@ impl From<&TestValue> for IrTestValue {
             TestValue::DateTime(v) => Self::DateTime(v.into()),
             TestValue::Guid(i) => Self::Guid(i.into()),
             TestValue::Bool(b) => Self::Bool(*b),
+            TestValue::IpAddress(v) => IrTestValue::IpAddress(v.into()),
             TestValue::FloatingNumber {
                 value,
                 original_string,

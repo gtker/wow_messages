@@ -52,9 +52,7 @@ impl TestCase {
 
     pub(crate) fn get_member<'a>(t: &'a [TestCaseMember], member: &str) -> &'a TestCaseMember {
         t.iter().find(|a| a.name() == member).unwrap_or_else(|| {
-            panic!(
-                "variable '{member}' not found in list of variables with values"
-            )
+            panic!("variable '{member}' not found in list of variables with values")
         })
     }
 }
@@ -134,4 +132,5 @@ pub(crate) enum TestValue {
     },
     ArrayOfSubObject(Container, Vec<Vec<TestCaseMember>>),
     UpdateMask(Vec<TestUpdateMaskValue>),
+    IpAddress(ContainerValue),
 }

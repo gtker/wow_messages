@@ -99,6 +99,7 @@ fn parsed_type_to_type(
         ParsedType::Level32 => Type::Level32,
         ParsedType::VariableItemRandomProperty => Type::VariableItemRandomProperty,
         ParsedType::AddonArray => Type::AddonArray,
+        ParsedType::IpAddress => Type::IpAddress,
     }
 }
 
@@ -531,6 +532,10 @@ fn convert_parsed_test_case_value_to_test_case_value(
             value.clone(),
         )),
         ParsedType::Guid | ParsedType::PackedGuid => TestValue::Guid(ContainerValue::new(
+            parse_value(&value).unwrap(),
+            value.clone(),
+        )),
+        ParsedType::IpAddress => TestValue::IpAddress(ContainerValue::new(
             parse_value(&value).unwrap(),
             value.clone(),
         )),

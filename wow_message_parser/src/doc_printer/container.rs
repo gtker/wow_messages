@@ -1,7 +1,9 @@
 use crate::doc_printer::DocWriter;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
-use crate::parser::types::sizes::{GOLD_SIZE, GUID_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE};
+use crate::parser::types::sizes::{
+    GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE, LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE,
+};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{Endianness, IntegerType};
@@ -141,6 +143,9 @@ fn print_container_example_definition(
         }
         Type::Level32 => {
             s.bytes(bytes.take(LEVEL32_SIZE));
+        }
+        Type::IpAddress => {
+            s.bytes(bytes.take(IP_ADDRESS_SIZE));
         }
         Type::Level => {
             s.bytes(bytes.take(LEVEL_SIZE.into()));
@@ -592,7 +597,8 @@ fn print_container_field(
                 Type::MonsterMoveSplines => {
                     "[MonsterMoveSpline](../spec/monster-move-spline.md)".to_string()
                 }
-                Type::Level16
+                Type::IpAddress
+                | Type::Level16
                 | Type::Level32
                 | Type::Level
                 | Type::Gold

@@ -208,7 +208,8 @@ fn features_for_struct_member(f: &mut ImplFeatures, m: &StructMember) {
 
 fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
     match d.ty() {
-        Type::Level16
+        Type::IpAddress
+        | Type::Level16
         | Type::Level32
         | Type::Level
         | Type::Gold

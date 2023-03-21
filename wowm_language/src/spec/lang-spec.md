@@ -82,7 +82,8 @@ These are often used in places where enums do not make sense since almost every 
 | `Seconds`      | `u32`    | Specifies that the time unit is seconds.                                                              |
 | `Milliseconds` | `u32`    | Specifies that the time unit is milliseconds.                                                         |
 | `Gold`         | `u32`    | Specifies that the currency unit is coppers (one silver being 100 copper, one gold being 100 silver). |
-| `Item`         | `u32`    | Specifies an item id..                                                                                |
+| `Item`         | `u32`    | Specifies an item id.                                                                                 |
+| `IpAddress`    | `u32`    | Specifies a big endian IP address.                                                                    |
 
 ## Statements
 

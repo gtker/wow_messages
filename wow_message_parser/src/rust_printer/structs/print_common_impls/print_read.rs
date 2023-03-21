@@ -222,6 +222,11 @@ fn print_read_definition(
                 postfix = postfix,
             ));
         }
+        Type::IpAddress => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = Ipv4Addr::from({UTILITY_PATH}::{prefix}read_u32_be(&mut r){postfix}?);",
+            ));
+        }
         Type::FloatingPoint(floating) => {
             s.wln(format!(
                 "{assignment_prefix}{name} = {UTILITY_PATH}::{prefix}read_{ty}_{endian}(&mut r){postfix}?;",

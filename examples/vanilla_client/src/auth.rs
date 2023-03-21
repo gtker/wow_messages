@@ -1,5 +1,5 @@
 use crate::{PASSWORD, USERNAME};
-use std::net::TcpStream;
+use std::net::{Ipv4Addr, TcpStream};
 use wow_login_messages::all::{CMD_AUTH_LOGON_CHALLENGE_Client, Locale, Os, Platform, Version};
 use wow_login_messages::helper::expect_server_message;
 use wow_login_messages::version_2::{
@@ -30,8 +30,8 @@ pub fn auth(
         os: Os::Windows,
         locale: Locale::EnGb,
         utc_timezone_offset: 180,
-        client_ip_address: 0x7F000001,      // 127.0.0.1
-        account_name: USERNAME.to_string(), //
+        client_ip_address: Ipv4Addr::LOCALHOST, // 127.0.0.1
+        account_name: USERNAME.to_string(),     //
     }
     .write(&mut auth_server)
     .unwrap();
