@@ -293,17 +293,13 @@ fn print_definition(
             let name = w.unwrap().name();
             s.wln(format!("ptvcursor_add(ptv, {name}, 2, ENC_LITTLE_ENDIAN);",));
         }
-        Type::Level32 => {
+        Type::Seconds | Type::Milliseconds | Type::Gold | Type::Level32 => {
             let name = w.unwrap().name();
             s.wln(format!("ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",));
         }
         Type::Level => {
             let name = w.unwrap().name();
             s.wln(format!("ptvcursor_add(ptv, {name}, 1, ENC_LITTLE_ENDIAN);",));
-        }
-        Type::Gold => {
-            let name = w.unwrap().name();
-            s.wln(format!("ptvcursor_add(ptv, {name}, 4, ENC_LITTLE_ENDIAN);",));
         }
         Type::Guid => {
             let name = w.unwrap().name();

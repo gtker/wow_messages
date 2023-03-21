@@ -48,6 +48,8 @@ pub(crate) enum Type {
     VariableItemRandomProperty,
     AddonArray,
     IpAddress,
+    Seconds,
+    Milliseconds,
 }
 
 impl Type {
@@ -76,6 +78,8 @@ impl Type {
         "VariableItemRandomProperty";
     pub(crate) const ADDON_ARRAY_NAME: &'static str = "AddonArray";
     pub(crate) const IP_ADDRESS_NAME: &'static str = "IpAddress";
+    pub(crate) const SECONDS_NAME: &'static str = "Seconds";
+    pub(crate) const MILLISECONDS_NAME: &'static str = "Milliseconds";
 
     pub(crate) const STRINGS_RUST_NAME: &'static str = "String";
     pub(crate) const GUIDS_RUST_NAME: &'static str = "Guid";
@@ -86,6 +90,7 @@ impl Type {
         "Vec<AchievementInProgress>";
     pub(crate) const ADDON_ARRAY_RUST_NAME: &'static str = "Vec<Addon>";
     pub(crate) const IP_ADDRESS_RUST_NAME: &'static str = "Ipv4Addr";
+    pub(crate) const DURATIONS_RUST_NAME: &'static str = "Duration";
 
     pub(crate) fn str(&self) -> String {
         match self {
@@ -137,6 +142,8 @@ impl Type {
             Type::Array(_) | Type::Enum { .. } | Type::Flag { .. } | Type::Struct { .. } => {
                 panic!("invalid conversion")
             }
+            Type::Seconds => ParsedType::Seconds,
+            Type::Milliseconds => ParsedType::Milliseconds,
         }
     }
 
@@ -233,7 +240,9 @@ impl Type {
         match self {
             Type::Bool(i) | Type::Integer(i) => i.doc_endian_str().to_string(),
 
-            Type::FloatingPoint
+            Type::Seconds
+            | Type::Milliseconds
+            | Type::FloatingPoint
             | Type::Level16
             | Type::Level32
             | Type::Gold

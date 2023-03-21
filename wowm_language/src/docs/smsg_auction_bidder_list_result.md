@@ -43,7 +43,7 @@ smsg SMSG_AUCTION_BIDDER_LIST_RESULT = 0x0265 {
     u32 count;
     AuctionListItem[count] auctions;
     u32 total_amount_of_auctions;
-    u32 auction_search_delay;
+    Milliseconds auction_search_delay;
 }
 ```
 ### Header
@@ -64,7 +64,7 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | count |  |  |
 | 0x08 | ? / - | [AuctionListItem](auctionlistitem.md)[count] | auctions |  |  |
 | - | 4 / Little | u32 | total_amount_of_auctions |  |  |
-| - | 4 / Little | u32 | auction_search_delay |  |  |
+| - | 4 / Little | Milliseconds | auction_search_delay |  |  |
 
 # SMSG_AUCTION_BIDDER_LIST_RESULT
 
@@ -78,7 +78,7 @@ smsg SMSG_AUCTION_BIDDER_LIST_RESULT = 0x0265 {
     u32 count;
     AuctionListItem[count] auctions;
     u32 total_amount_of_auctions;
-    u32 auction_search_delay;
+    Milliseconds auction_search_delay;
 }
 ```
 ### Header
@@ -99,5 +99,5 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | count |  |  |
 | 0x08 | ? / - | [AuctionListItem](auctionlistitem.md)[count] | auctions |  |  |
 | - | 4 / Little | u32 | total_amount_of_auctions |  |  |
-| - | 4 / Little | u32 | auction_search_delay |  |  |
+| - | 4 / Little | Milliseconds | auction_search_delay |  |  |
 

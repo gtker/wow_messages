@@ -172,7 +172,7 @@ impl WiresharkType {
             Type::Level => Self::Integer(IntegerType::U8),
             Type::Level16 => Self::Integer(IntegerType::U16),
             Type::Level32 => Self::Integer(IntegerType::U32),
-            Type::Gold => Self::Integer(IntegerType::U32),
+            Type::Seconds | Type::Milliseconds | Type::Gold => Self::Integer(IntegerType::U32),
             Type::DateTime => Self::Integer(IntegerType::U32),
             Type::FloatingPoint => Self::Float,
             Type::SizedCString | Type::String { .. } | Type::CString => Self::String,

@@ -1,6 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::tbc::AuctionListItem;
+use std::time::Duration;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/smsg/smsg_auction_list_result.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/smsg/smsg_auction_list_result.wowm#L9):
@@ -9,13 +10,13 @@ use crate::tbc::AuctionListItem;
 ///     u32 count;
 ///     AuctionListItem[count] auctions;
 ///     u32 total_amount_of_auctions;
-///     u32 auction_search_delay;
+///     Milliseconds auction_search_delay;
 /// }
 /// ```
 pub struct SMSG_AUCTION_LIST_RESULT {
     pub auctions: Vec<AuctionListItem>,
     pub total_amount_of_auctions: u32,
-    pub auction_search_delay: u32,
+    pub auction_search_delay: Duration,
 }
 
 impl crate::Message for SMSG_AUCTION_LIST_RESULT {
@@ -37,8 +38,8 @@ impl crate::Message for SMSG_AUCTION_LIST_RESULT {
         // total_amount_of_auctions: u32
         w.write_all(&self.total_amount_of_auctions.to_le_bytes())?;
 
-        // auction_search_delay: u32
-        w.write_all(&self.auction_search_delay.to_le_bytes())?;
+        // auction_search_delay: Milliseconds
+        w.write_all((self.auction_search_delay.as_millis() as u32).to_le_bytes().as_slice())?;
 
         Ok(())
     }
@@ -62,8 +63,8 @@ impl crate::Message for SMSG_AUCTION_LIST_RESULT {
         // total_amount_of_auctions: u32
         let total_amount_of_auctions = crate::util::read_u32_le(&mut r)?;
 
-        // auction_search_delay: u32
-        let auction_search_delay = crate::util::read_u32_le(&mut r)?;
+        // auction_search_delay: Milliseconds
+        let auction_search_delay = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
 
         Ok(Self {
             auctions,
@@ -81,7 +82,7 @@ impl SMSG_AUCTION_LIST_RESULT {
         4 // count: u32
         + self.auctions.len() * 136 // auctions: AuctionListItem[count]
         + 4 // total_amount_of_auctions: u32
-        + 4 // auction_search_delay: u32
+        + 4 // auction_search_delay: Milliseconds
     }
 }
 

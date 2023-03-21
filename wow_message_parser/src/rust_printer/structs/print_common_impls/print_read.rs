@@ -330,6 +330,17 @@ fn print_read_definition(
             ));
         }
 
+        Type::Seconds => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = Duration::from_secs({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?.into());",
+            ));
+        }
+        Type::Milliseconds => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = Duration::from_millis({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?.into());",
+            ));
+        }
+
         Type::Gold => {
             s.wln(format!(
                 "{assignment_prefix}{name} = Gold::new({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?);",

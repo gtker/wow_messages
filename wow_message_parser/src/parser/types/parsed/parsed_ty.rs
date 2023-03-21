@@ -7,9 +7,10 @@ use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::sizes::{
     update_mask_max, Sizes, ADDON_ARRAY_MAX, ADDON_ARRAY_MIN, AURA_MASK_MAX_SIZE,
     AURA_MASK_MIN_SIZE, DATETIME_SIZE, F32_SIZE, GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE,
-    LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, NAMED_GUID_MAX_SIZE, NAMED_GUID_MIN_SIZE,
-    PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, UPDATE_MASK_MIN_SIZE,
-    VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
+    LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, MILLISECONDS_SIZE, NAMED_GUID_MAX_SIZE,
+    NAMED_GUID_MIN_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, SECONDS_SIZE,
+    UPDATE_MASK_MIN_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
+    VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
 };
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
@@ -53,6 +54,8 @@ pub(crate) enum ParsedType {
     Level16,
     Level32,
     IpAddress,
+    Seconds,
+    Milliseconds,
 }
 
 impl ParsedType {
@@ -88,6 +91,8 @@ impl ParsedType {
             }
             ParsedType::AddonArray => Type::ADDON_ARRAY_NAME.to_string(),
             ParsedType::IpAddress => Type::IP_ADDRESS_NAME.to_string(),
+            ParsedType::Seconds => Type::SECONDS_NAME.to_string(),
+            ParsedType::Milliseconds => Type::MILLISECONDS_NAME.to_string(),
         }
     }
 
@@ -108,6 +113,8 @@ impl ParsedType {
             ParsedType::Level16 | ParsedType::Level32 => Type::LEVEL_NAME.to_string(),
 
             ParsedType::Array(a) => a.rust_str(),
+
+            ParsedType::Milliseconds | ParsedType::Seconds => Type::DURATIONS_RUST_NAME.to_string(),
 
             _ => self.str(),
         }
@@ -145,6 +152,8 @@ impl ParsedType {
             ParsedType::Level => (LEVEL_SIZE.into(), LEVEL_SIZE.into()),
             ParsedType::Level16 => (LEVEL16_SIZE, LEVEL16_SIZE),
             ParsedType::Level32 => (LEVEL32_SIZE, LEVEL32_SIZE),
+            ParsedType::Seconds => (SECONDS_SIZE, SECONDS_SIZE),
+            ParsedType::Milliseconds => (MILLISECONDS_SIZE, MILLISECONDS_SIZE),
             ParsedType::NamedGuid => (NAMED_GUID_MIN_SIZE, NAMED_GUID_MAX_SIZE),
             ParsedType::VariableItemRandomProperty => (
                 VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
@@ -298,9 +307,9 @@ impl ParsedType {
             Type::LEVEL_NAME => Self::Level,
             Type::LEVEL_NAME16 => Self::Level16,
             Type::LEVEL_NAME32 => Self::Level32,
-            Type::SPELL_NAME | "Milliseconds" | "Seconds" | "Item" => {
-                Self::Integer(IntegerType::U32)
-            }
+            Type::MILLISECONDS_NAME => Self::Milliseconds,
+            Type::SECONDS_NAME => Self::Seconds,
+            Type::SPELL_NAME | "Item" => Self::Integer(IntegerType::U32),
             Type::GOLD_NAME => Self::Gold,
             Type::GUID_NAME => Self::Guid,
             Type::PACKED_GUID_NAME => Self::PackedGuid,

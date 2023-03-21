@@ -548,6 +548,7 @@ impl Container {
                     (pre, "Addon".to_string())
                 }
 
+                Type::Seconds | Type::Milliseconds => ("std::time".to_string(), name),
                 Type::IpAddress => ("std::net".to_string(), name),
 
                 Type::Gold => {

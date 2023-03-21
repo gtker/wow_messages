@@ -103,6 +103,8 @@ fn parsed_type_to_type(
         ParsedType::VariableItemRandomProperty => Type::VariableItemRandomProperty,
         ParsedType::AddonArray => Type::AddonArray,
         ParsedType::IpAddress => Type::IpAddress,
+        ParsedType::Seconds => Type::Seconds,
+        ParsedType::Milliseconds => Type::Milliseconds,
     }
 }
 
@@ -557,7 +559,9 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 complex_not_found(c.name(), c.tags(), &c.file_info, s, &related);
             }
         }
-        ParsedType::AddonArray
+        ParsedType::Seconds
+        | ParsedType::Milliseconds
+        | ParsedType::AddonArray
         | ParsedType::VariableItemRandomProperty
         | ParsedType::NamedGuid
         | ParsedType::Level16

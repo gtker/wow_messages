@@ -156,6 +156,16 @@ pub(crate) fn print_write_definition(
                 "w.write_all(u32::from({variable_prefix}{name}.as_int()).to_le_bytes().as_slice()){postfix}?;",
             ));
         }
+        Type::Seconds => {
+            s.wln(format!(
+                "w.write_all(({variable_prefix}{name}.as_secs() as u32).to_le_bytes().as_slice()){postfix}?;",
+            ));
+        }
+        Type::Milliseconds => {
+            s.wln(format!(
+                "w.write_all(({variable_prefix}{name}.as_millis() as u32).to_le_bytes().as_slice()){postfix}?;",
+            ));
+        }
         Type::IpAddress => {
             s.wln(format!(
                 "w.write_all(&{variable_prefix}{name}.octets()){postfix}?;",

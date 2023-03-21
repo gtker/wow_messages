@@ -249,6 +249,8 @@ pub(crate) enum IrType {
     VariableItemRandomProperty,
     AddonArray,
     IpAddress,
+    Seconds,
+    Milliseconds,
 }
 
 impl From<&Type> for IrType {
@@ -290,6 +292,8 @@ impl From<&Type> for IrType {
             Type::VariableItemRandomProperty => Self::VariableItemRandomProperty,
             Type::AddonArray => Self::AddonArray,
             Type::IpAddress => Self::IpAddress,
+            Type::Seconds => Self::Seconds,
+            Type::Milliseconds => Self::Milliseconds,
         }
     }
 }
