@@ -108,6 +108,7 @@ impl ServerMessage for CMD_XFER_INITIATE {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_XFER_INITIATE;
     use crate::all::*;
     use super::*;

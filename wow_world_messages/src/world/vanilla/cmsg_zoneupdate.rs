@@ -49,6 +49,7 @@ impl crate::vanilla::ClientMessage for CMSG_ZONEUPDATE {}
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMSG_ZONEUPDATE;
     use super::*;
     use super::super::*;

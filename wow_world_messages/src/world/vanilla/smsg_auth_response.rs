@@ -648,6 +648,7 @@ impl SMSG_AUTH_RESPONSE_WorldResult {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_AUTH_RESPONSE;
     use super::*;
     use super::super::*;

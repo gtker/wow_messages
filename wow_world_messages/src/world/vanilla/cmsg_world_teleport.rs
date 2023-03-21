@@ -76,6 +76,7 @@ impl crate::vanilla::ClientMessage for CMSG_WORLD_TELEPORT {}
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMSG_WORLD_TELEPORT;
     use super::*;
     use super::super::*;

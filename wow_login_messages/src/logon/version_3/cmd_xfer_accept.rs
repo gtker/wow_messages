@@ -108,6 +108,7 @@ impl ClientMessage for CMD_XFER_ACCEPT {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_XFER_ACCEPT;
     use crate::all::*;
     use super::*;

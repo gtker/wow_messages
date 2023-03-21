@@ -548,6 +548,7 @@ impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_AUTH_LOGON_PROOF_Server;
     use crate::all::*;
     use super::*;

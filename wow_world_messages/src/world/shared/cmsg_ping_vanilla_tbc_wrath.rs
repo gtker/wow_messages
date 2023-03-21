@@ -58,6 +58,7 @@ impl crate::wrath::ClientMessage for CMSG_PING {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMSG_PING;
     use super::*;
     use super::super::*;
@@ -145,6 +146,7 @@ mod test_vanilla {
 
 #[cfg(all(feature = "tbc", test))]
 mod test_tbc {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMSG_PING;
     use super::*;
     use super::super::*;
@@ -232,6 +234,7 @@ mod test_tbc {
 
 #[cfg(all(feature = "wrath", test))]
 mod test_wrath {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMSG_PING;
     use super::*;
     use super::super::*;

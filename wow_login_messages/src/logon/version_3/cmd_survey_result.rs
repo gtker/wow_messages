@@ -201,6 +201,7 @@ impl CMD_SURVEY_RESULT {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_SURVEY_RESULT;
     use crate::all::*;
     use super::*;

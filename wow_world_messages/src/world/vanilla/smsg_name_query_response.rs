@@ -122,6 +122,7 @@ impl SMSG_NAME_QUERY_RESPONSE {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_NAME_QUERY_RESPONSE;
     use super::*;
     use super::super::*;

@@ -620,6 +620,7 @@ impl SMSG_CHAR_RENAME_WorldResult {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_CHAR_RENAME;
     use super::*;
     use super::super::*;

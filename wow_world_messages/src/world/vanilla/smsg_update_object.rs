@@ -77,6 +77,7 @@ impl SMSG_UPDATE_OBJECT {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_UPDATE_OBJECT;
     use super::*;
     use super::super::*;

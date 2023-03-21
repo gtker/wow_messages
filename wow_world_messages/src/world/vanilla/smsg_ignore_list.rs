@@ -65,6 +65,7 @@ impl SMSG_IGNORE_LIST {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_IGNORE_LIST;
     use super::*;
     use super::super::*;

@@ -165,6 +165,7 @@ impl CMD_XFER_DATA {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_XFER_DATA;
     use crate::all::*;
     use super::*;

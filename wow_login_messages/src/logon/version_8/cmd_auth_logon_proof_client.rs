@@ -714,6 +714,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_AUTH_LOGON_PROOF_Client;
     use crate::all::*;
     use super::*;

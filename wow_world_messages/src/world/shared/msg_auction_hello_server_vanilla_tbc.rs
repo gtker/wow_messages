@@ -57,6 +57,7 @@ impl crate::tbc::ServerMessage for MSG_AUCTION_HELLO_Server {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
+    #![allow(clippy::missing_const_for_fn)]
     use super::MSG_AUCTION_HELLO_Server;
     use super::*;
     use super::super::*;
@@ -145,6 +146,7 @@ mod test_vanilla {
 
 #[cfg(all(feature = "tbc", test))]
 mod test_tbc {
+    #![allow(clippy::missing_const_for_fn)]
     use super::MSG_AUCTION_HELLO_Server;
     use super::*;
     use super::super::*;

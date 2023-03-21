@@ -84,6 +84,7 @@ impl CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMSG_FORCE_RUN_SPEED_CHANGE_ACK;
     use super::*;
     use super::super::*;

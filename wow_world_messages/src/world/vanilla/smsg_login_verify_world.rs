@@ -69,6 +69,7 @@ impl crate::vanilla::ServerMessage for SMSG_LOGIN_VERIFY_WORLD {}
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_LOGIN_VERIFY_WORLD;
     use super::*;
     use super::super::*;

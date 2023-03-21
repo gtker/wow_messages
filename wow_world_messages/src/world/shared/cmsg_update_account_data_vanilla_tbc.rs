@@ -367,6 +367,7 @@ impl CMSG_UPDATE_ACCOUNT_DATA {
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMSG_UPDATE_ACCOUNT_DATA;
     use super::*;
     use super::super::*;
@@ -1117,6 +1118,7 @@ mod test_vanilla {
 
 #[cfg(all(feature = "tbc", test))]
 mod test_tbc {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMSG_UPDATE_ACCOUNT_DATA;
     use super::*;
     use super::super::*;

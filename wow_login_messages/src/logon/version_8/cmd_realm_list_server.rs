@@ -243,6 +243,7 @@ impl CMD_REALM_LIST_Server {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_REALM_LIST_Server;
     use crate::all::*;
     use super::*;

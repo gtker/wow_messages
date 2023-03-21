@@ -49,6 +49,7 @@ impl crate::vanilla::ServerMessage for SMSG_CHAR_DELETE {}
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_CHAR_DELETE;
     use super::*;
     use super::super::*;

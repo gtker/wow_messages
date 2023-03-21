@@ -135,6 +135,7 @@ impl crate::vanilla::ServerMessage for SMSG_ITEM_PUSH_RESULT {}
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_ITEM_PUSH_RESULT;
     use super::*;
     use super::super::*;

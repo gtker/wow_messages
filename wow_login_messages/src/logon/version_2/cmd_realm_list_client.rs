@@ -138,6 +138,7 @@ impl ClientMessage for CMD_REALM_LIST_Client {
 
 #[cfg(test)]
 mod test_version_2 {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_REALM_LIST_Client;
     use crate::all::*;
     use super::*;
@@ -220,6 +221,7 @@ mod test_version_2 {
 
 #[cfg(test)]
 mod test_version_3 {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_REALM_LIST_Client;
     use crate::all::*;
     use super::*;
@@ -302,6 +304,7 @@ mod test_version_3 {
 
 #[cfg(test)]
 mod test_version_8 {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_REALM_LIST_Client;
     use crate::all::*;
     use super::*;

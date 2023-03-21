@@ -51,6 +51,7 @@ impl crate::tbc::ServerMessage for SMSG_AUTH_CHALLENGE {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_AUTH_CHALLENGE;
     use super::*;
     use super::super::*;
@@ -135,6 +136,7 @@ mod test_vanilla {
 
 #[cfg(all(feature = "tbc", test))]
 mod test_tbc {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_AUTH_CHALLENGE;
     use super::*;
     use super::super::*;

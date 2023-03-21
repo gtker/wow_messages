@@ -165,6 +165,7 @@ impl CMSG_CHAR_CREATE {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMSG_CHAR_CREATE;
     use super::*;
     use super::super::*;

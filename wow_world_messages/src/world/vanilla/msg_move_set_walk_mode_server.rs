@@ -62,6 +62,7 @@ impl MSG_MOVE_SET_WALK_MODE_Server {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::MSG_MOVE_SET_WALK_MODE_Server;
     use super::*;
     use super::super::*;

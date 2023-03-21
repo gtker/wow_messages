@@ -48,6 +48,7 @@ impl crate::vanilla::ServerMessage for SMSG_QUERY_TIME_RESPONSE {}
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_QUERY_TIME_RESPONSE;
     use super::*;
     use super::super::*;

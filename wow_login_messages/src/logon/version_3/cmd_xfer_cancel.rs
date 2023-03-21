@@ -108,6 +108,7 @@ impl ClientMessage for CMD_XFER_CANCEL {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_XFER_CANCEL;
     use crate::all::*;
     use super::*;

@@ -125,6 +125,7 @@ impl ClientMessage for CMD_XFER_RESUME {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_XFER_RESUME;
     use crate::all::*;
     use super::*;

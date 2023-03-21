@@ -335,6 +335,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_AUTH_RECONNECT_CHALLENGE_Client;
     use crate::all::*;
     use super::*;

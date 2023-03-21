@@ -49,6 +49,7 @@ impl crate::vanilla::ServerMessage for SMSG_CHARACTER_LOGIN_FAILED {}
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_CHARACTER_LOGIN_FAILED;
     use super::*;
     use super::super::*;

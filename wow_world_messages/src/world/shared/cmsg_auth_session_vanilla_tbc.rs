@@ -426,6 +426,7 @@ impl CMSG_AUTH_SESSION {
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMSG_AUTH_SESSION;
     use super::*;
     use super::super::*;
@@ -622,6 +623,7 @@ mod test_vanilla {
 
 #[cfg(all(feature = "tbc", test))]
 mod test_tbc {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMSG_AUTH_SESSION;
     use super::*;
     use super::super::*;

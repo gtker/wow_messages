@@ -32,6 +32,8 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             s.open_curly("mod test");
         }
 
+        s.wln("#![allow(clippy::missing_const_for_fn)]");
+
         print_includes(e, version, s);
 
         match e.container_type() {

@@ -233,6 +233,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
 
 #[cfg(test)]
 mod test_version_2 {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_AUTH_RECONNECT_PROOF_Client;
     use crate::all::*;
     use super::*;
@@ -329,6 +330,7 @@ mod test_version_2 {
 
 #[cfg(test)]
 mod test_version_8 {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMD_AUTH_RECONNECT_PROOF_Client;
     use crate::all::*;
     use super::*;

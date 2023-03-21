@@ -78,6 +78,7 @@ impl SMSG_FORCE_RUN_SPEED_CHANGE {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_FORCE_RUN_SPEED_CHANGE;
     use super::*;
     use super::super::*;

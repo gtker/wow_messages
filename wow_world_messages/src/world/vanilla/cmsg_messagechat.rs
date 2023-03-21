@@ -381,6 +381,7 @@ impl CMSG_MESSAGECHAT_ChatType {
 
 #[cfg(test)]
 mod test {
+    #![allow(clippy::missing_const_for_fn)]
     use super::CMSG_MESSAGECHAT;
     use super::*;
     use super::super::*;

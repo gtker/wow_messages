@@ -60,6 +60,7 @@ impl crate::tbc::ServerMessage for SMSG_ACCOUNT_DATA_TIMES {}
 
 #[cfg(all(feature = "vanilla", test))]
 mod test_vanilla {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_ACCOUNT_DATA_TIMES;
     use super::*;
     use super::super::*;
@@ -157,6 +158,7 @@ mod test_vanilla {
 
 #[cfg(all(feature = "tbc", test))]
 mod test_tbc {
+    #![allow(clippy::missing_const_for_fn)]
     use super::SMSG_ACCOUNT_DATA_TIMES;
     use super::*;
     use super::super::*;
