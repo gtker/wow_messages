@@ -224,14 +224,13 @@ impl BoolTag {
         } else if s == "false" {
             false
         } else {
-            panic!("invalid value for tag: '{}'", s);
+            panic!("invalid value for tag: '{s}'");
         };
 
         if let Some(v) = self.inner {
             assert_eq!(
                 v, value,
-                "invalid overwrite for BoolTag, overwriting '{}' with '{}'",
-                v, value
+                "invalid overwrite for BoolTag, overwriting '{v}' with '{value}'",
             );
         } else {
             self.inner = Some(value);
@@ -243,8 +242,7 @@ impl BoolTag {
             if let Some(value) = other.inner {
                 assert_eq!(
                     v, value,
-                    "invalid overwrite for BoolTag, overwriting '{}' with '{}'",
-                    v, value
+                    "invalid overwrite for BoolTag, overwriting '{v}' with '{value}'",
                 );
             }
         } else if let Some(value) = other.inner {

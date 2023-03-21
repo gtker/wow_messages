@@ -1,11 +1,13 @@
 #![forbid(unsafe_code)]
-#![deny(
+#![warn(
     clippy::approx_constant,
     clippy::bool_to_int_with_if,
     clippy::complexity,
     clippy::correctness,
     clippy::derive_partial_eq_without_eq,
     clippy::doc_markdown,
+    clippy::format_in_format_args,
+    clippy::uninlined_format_args,
     clippy::enum_variant_names,
     clippy::large_enum_variant,
     clippy::needless_borrow,

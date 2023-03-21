@@ -489,7 +489,7 @@ fn print_read_if_statement_enum(
 ) {
     let if_statement_variable_name = format!("{}_if", statement.name());
     let match_prefix = if !statement.part_of_separate_if_statement() {
-        format!("let {} = ", if_statement_variable_name)
+        format!("let {if_statement_variable_name} = ")
     } else {
         "".to_string()
     };
