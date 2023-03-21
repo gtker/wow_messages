@@ -401,6 +401,10 @@ mod test {
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_RECONNECT_CHALLENGE_Server, expected: &CMD_AUTH_RECONNECT_CHALLENGE_Server) {
+        assert_eq!(t.result, expected.result);
+    }
+
     const RAW0: [u8; 34] = [ 0x02, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
          0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0xFF, 0xFE, 0xFD,
          0xFC, 0xFB, 0xFA, 0xF9, 0xF8, 0xF7, 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1,
@@ -429,8 +433,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.result, expected.result);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -450,8 +453,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.result, expected.result);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -471,8 +473,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.result, expected.result);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -501,8 +502,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.result, expected.result);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -522,8 +522,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.result, expected.result);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -543,8 +542,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_CHALLENGE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.result, expected.result);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());

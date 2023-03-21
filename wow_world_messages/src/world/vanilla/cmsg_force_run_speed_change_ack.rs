@@ -92,6 +92,13 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_FORCE_RUN_SPEED_CHANGE_ACK, expected: &CMSG_FORCE_RUN_SPEED_CHANGE_ACK) {
+        assert_eq!(t.guid, expected.guid);
+        assert_eq!(t.counter, expected.counter);
+        assert_eq!(t.info, expected.info);
+        assert_eq!(t.new_speed, expected.new_speed);
+    }
+
     const RAW0: [u8; 50] = [ 0x00, 0x30, 0xE3, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x40, 0x17, 0xF6, 0x01, 0xCB, 0xAB, 0x0B, 0xC6, 0x07, 0x86, 0xF8,
@@ -130,11 +137,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_FORCE_RUN_SPEED_CHANGE_ACK, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.counter, expected.counter);
-        assert_eq!(t.info, expected.info);
-        assert_eq!(t.new_speed, expected.new_speed);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -154,11 +157,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_FORCE_RUN_SPEED_CHANGE_ACK, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.counter, expected.counter);
-        assert_eq!(t.info, expected.info);
-        assert_eq!(t.new_speed, expected.new_speed);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -178,11 +177,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_FORCE_RUN_SPEED_CHANGE_ACK, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.counter, expected.counter);
-        assert_eq!(t.info, expected.info);
-        assert_eq!(t.new_speed, expected.new_speed);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

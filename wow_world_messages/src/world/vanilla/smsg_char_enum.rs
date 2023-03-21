@@ -77,6 +77,10 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_CHAR_ENUM, expected: &SMSG_CHAR_ENUM) {
+        assert_eq!(t.characters, expected.characters);
+    }
+
     const RAW0: [u8; 5] = [ 0x00, 0x03, 0x3B, 0x00, 0x00, ];
 
     pub(crate) fn expected0() -> SMSG_CHAR_ENUM {
@@ -97,8 +101,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.characters, expected.characters);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -118,8 +121,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.characters, expected.characters);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -139,8 +141,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_CHAR_ENUM, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.characters, expected.characters);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

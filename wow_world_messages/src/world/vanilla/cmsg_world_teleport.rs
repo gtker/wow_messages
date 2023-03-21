@@ -83,6 +83,13 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_WORLD_TELEPORT, expected: &CMSG_WORLD_TELEPORT) {
+        assert_eq!(t.time_in_msec, expected.time_in_msec);
+        assert_eq!(t.map, expected.map);
+        assert_eq!(t.position, expected.position);
+        assert_eq!(t.orientation, expected.orientation);
+    }
+
     const RAW0: [u8; 30] = [ 0x00, 0x1C, 0x08, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x3F, 0x00, 0x00, 0x00,
          0x40, 0x00, 0x00, 0x40, 0x40, 0x00, 0x00, 0x80, 0x40, ];
@@ -112,11 +119,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_WORLD_TELEPORT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.time_in_msec, expected.time_in_msec);
-        assert_eq!(t.map, expected.map);
-        assert_eq!(t.position, expected.position);
-        assert_eq!(t.orientation, expected.orientation);
-
+        assert(&t, &expected);
         assert_eq!(24 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -136,11 +139,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_WORLD_TELEPORT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.time_in_msec, expected.time_in_msec);
-        assert_eq!(t.map, expected.map);
-        assert_eq!(t.position, expected.position);
-        assert_eq!(t.orientation, expected.orientation);
-
+        assert(&t, &expected);
         assert_eq!(24 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -160,11 +159,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_WORLD_TELEPORT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.time_in_msec, expected.time_in_msec);
-        assert_eq!(t.map, expected.map);
-        assert_eq!(t.position, expected.position);
-        assert_eq!(t.orientation, expected.orientation);
-
+        assert(&t, &expected);
         assert_eq!(24 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -202,11 +197,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_WORLD_TELEPORT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.time_in_msec, expected.time_in_msec);
-        assert_eq!(t.map, expected.map);
-        assert_eq!(t.position, expected.position);
-        assert_eq!(t.orientation, expected.orientation);
-
+        assert(&t, &expected);
         assert_eq!(24 + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -226,11 +217,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_WORLD_TELEPORT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.time_in_msec, expected.time_in_msec);
-        assert_eq!(t.map, expected.map);
-        assert_eq!(t.position, expected.position);
-        assert_eq!(t.orientation, expected.orientation);
-
+        assert(&t, &expected);
         assert_eq!(24 + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -250,11 +237,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_WORLD_TELEPORT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.time_in_msec, expected.time_in_msec);
-        assert_eq!(t.map, expected.map);
-        assert_eq!(t.position, expected.position);
-        assert_eq!(t.orientation, expected.orientation);
-
+        assert(&t, &expected);
         assert_eq!(24 + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());

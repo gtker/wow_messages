@@ -56,6 +56,10 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_ZONEUPDATE, expected: &CMSG_ZONEUPDATE) {
+        assert_eq!(t.area, expected.area);
+    }
+
     const RAW0: [u8; 10] = [ 0x00, 0x08, 0xF4, 0x01, 0x00, 0x00, 0x65, 0x06, 0x00,
          0x00, ];
 
@@ -77,8 +81,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_ZONEUPDATE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.area, expected.area);
-
+        assert(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -98,8 +101,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_ZONEUPDATE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.area, expected.area);
-
+        assert(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -119,8 +121,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_ZONEUPDATE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.area, expected.area);
-
+        assert(&t, &expected);
         assert_eq!(4 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

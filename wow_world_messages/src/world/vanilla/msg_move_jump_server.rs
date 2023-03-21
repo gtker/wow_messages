@@ -70,6 +70,11 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &MSG_MOVE_JUMP_Server, expected: &MSG_MOVE_JUMP_Server) {
+        assert_eq!(t.guid, expected.guid);
+        assert_eq!(t.info, expected.info);
+    }
+
     const RAW0: [u8; 50] = [ 0x00, 0x30, 0xBB, 0x00, 0x01, 0x05, 0x01, 0x20, 0x00,
          0x00, 0x20, 0xD6, 0x79, 0x01, 0x1B, 0xAD, 0x0B, 0xC6, 0x9D, 0x4C, 0x05,
          0xC3, 0xD1, 0x4A, 0xA7, 0x42, 0xB8, 0x9D, 0xC2, 0x3E, 0x00, 0x00, 0x00,
@@ -113,9 +118,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected MSG_MOVE_JUMP, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.info, expected.info);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -135,9 +138,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected MSG_MOVE_JUMP, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.info, expected.info);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -157,9 +158,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected MSG_MOVE_JUMP, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.info, expected.info);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

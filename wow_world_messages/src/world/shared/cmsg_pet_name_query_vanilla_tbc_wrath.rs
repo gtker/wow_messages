@@ -68,6 +68,11 @@ mod test_vanilla {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_PET_NAME_QUERY, expected: &CMSG_PET_NAME_QUERY) {
+        assert_eq!(t.pet_number, expected.pet_number);
+        assert_eq!(t.guid, expected.guid);
+    }
+
     const RAW0: [u8; 18] = [ 0x00, 0x10, 0x52, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0xEF, 0xBE, 0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
 
@@ -90,9 +95,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_PET_NAME_QUERY, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.pet_number, expected.pet_number);
-        assert_eq!(t.guid, expected.guid);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -112,9 +115,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_PET_NAME_QUERY, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.pet_number, expected.pet_number);
-        assert_eq!(t.guid, expected.guid);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -134,9 +135,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_PET_NAME_QUERY, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.pet_number, expected.pet_number);
-        assert_eq!(t.guid, expected.guid);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -157,6 +156,11 @@ mod test_tbc {
     use crate::tbc::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_PET_NAME_QUERY, expected: &CMSG_PET_NAME_QUERY) {
+        assert_eq!(t.pet_number, expected.pet_number);
+        assert_eq!(t.guid, expected.guid);
+    }
+
     const RAW0: [u8; 18] = [ 0x00, 0x10, 0x52, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0xEF, 0xBE, 0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
 
@@ -179,9 +183,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_PET_NAME_QUERY, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.pet_number, expected.pet_number);
-        assert_eq!(t.guid, expected.guid);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -201,9 +203,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_PET_NAME_QUERY, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.pet_number, expected.pet_number);
-        assert_eq!(t.guid, expected.guid);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -223,9 +223,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_PET_NAME_QUERY, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.pet_number, expected.pet_number);
-        assert_eq!(t.guid, expected.guid);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -246,6 +244,11 @@ mod test_wrath {
     use crate::wrath::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_PET_NAME_QUERY, expected: &CMSG_PET_NAME_QUERY) {
+        assert_eq!(t.pet_number, expected.pet_number);
+        assert_eq!(t.guid, expected.guid);
+    }
+
     const RAW0: [u8; 18] = [ 0x00, 0x10, 0x52, 0x00, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0xEF, 0xBE, 0xAD, 0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
 
@@ -268,9 +271,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected CMSG_PET_NAME_QUERY, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.pet_number, expected.pet_number);
-        assert_eq!(t.guid, expected.guid);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -290,9 +291,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected CMSG_PET_NAME_QUERY, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.pet_number, expected.pet_number);
-        assert_eq!(t.guid, expected.guid);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -312,9 +311,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected CMSG_PET_NAME_QUERY, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.pet_number, expected.pet_number);
-        assert_eq!(t.guid, expected.guid);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

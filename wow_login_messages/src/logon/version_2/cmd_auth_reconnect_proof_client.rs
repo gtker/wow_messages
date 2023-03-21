@@ -240,6 +240,12 @@ mod test_version_2 {
     use crate::logon::version_2::opcodes::ClientOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_RECONNECT_PROOF_Client, expected: &CMD_AUTH_RECONNECT_PROOF_Client) {
+        assert_eq!(t.proof_data, expected.proof_data);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.client_checksum, expected.client_checksum);
+    }
+
     const RAW0: [u8; 58] = [ 0x03, 0xEA, 0xFA, 0xB9, 0xC6, 0x18, 0x15, 0x0B, 0xF2,
          0xF9, 0x32, 0xCE, 0x27, 0x62, 0x79, 0x96, 0x99, 0x6B, 0x6D, 0x1A, 0x0D,
          0xF3, 0xA5, 0x9E, 0x6A, 0x38, 0x02, 0xE7, 0x0B, 0xE1, 0x2F, 0x05, 0x71,
@@ -270,10 +276,7 @@ mod test_version_2 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.proof_data, expected.proof_data);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.client_checksum, expected.client_checksum);
-
+        assert(&t, &expected);
         assert_eq!(57 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -293,10 +296,7 @@ mod test_version_2 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.proof_data, expected.proof_data);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.client_checksum, expected.client_checksum);
-
+        assert(&t, &expected);
         assert_eq!(57 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -316,10 +316,7 @@ mod test_version_2 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.proof_data, expected.proof_data);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.client_checksum, expected.client_checksum);
-
+        assert(&t, &expected);
         assert_eq!(57 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -339,6 +336,12 @@ mod test_version_8 {
     use crate::logon::version_8::opcodes::ClientOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_RECONNECT_PROOF_Client, expected: &CMD_AUTH_RECONNECT_PROOF_Client) {
+        assert_eq!(t.proof_data, expected.proof_data);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.client_checksum, expected.client_checksum);
+    }
+
     const RAW0: [u8; 58] = [ 0x03, 0xEA, 0xFA, 0xB9, 0xC6, 0x18, 0x15, 0x0B, 0xF2,
          0xF9, 0x32, 0xCE, 0x27, 0x62, 0x79, 0x96, 0x99, 0x6B, 0x6D, 0x1A, 0x0D,
          0xF3, 0xA5, 0x9E, 0x6A, 0x38, 0x02, 0xE7, 0x0B, 0xE1, 0x2F, 0x05, 0x71,
@@ -369,10 +372,7 @@ mod test_version_8 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.proof_data, expected.proof_data);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.client_checksum, expected.client_checksum);
-
+        assert(&t, &expected);
         assert_eq!(57 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -392,10 +392,7 @@ mod test_version_8 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.proof_data, expected.proof_data);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.client_checksum, expected.client_checksum);
-
+        assert(&t, &expected);
         assert_eq!(57 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -415,10 +412,7 @@ mod test_version_8 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_RECONNECT_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.proof_data, expected.proof_data);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.client_checksum, expected.client_checksum);
-
+        assert(&t, &expected);
         assert_eq!(57 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

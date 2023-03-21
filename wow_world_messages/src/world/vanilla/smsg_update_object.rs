@@ -86,6 +86,11 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_UPDATE_OBJECT, expected: &SMSG_UPDATE_OBJECT) {
+        assert_eq!(t.has_transport, expected.has_transport);
+        assert_eq!(t.objects, expected.objects);
+    }
+
     const RAW0: [u8; 99] = [ 0x00, 0x61, 0xA9, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00,
          0x03, 0x01, 0x04, 0x04, 0x31, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0xCD, 0xD7, 0x0B, 0xC6, 0x35, 0x7E, 0x04, 0xC3, 0xF9, 0x0F, 0xA7,
@@ -154,9 +159,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_UPDATE_OBJECT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.has_transport, expected.has_transport);
-        assert_eq!(t.objects, expected.objects);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -176,9 +179,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_UPDATE_OBJECT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.has_transport, expected.has_transport);
-        assert_eq!(t.objects, expected.objects);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -198,9 +199,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_UPDATE_OBJECT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.has_transport, expected.has_transport);
-        assert_eq!(t.objects, expected.objects);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -286,9 +285,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_UPDATE_OBJECT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.has_transport, expected.has_transport);
-        assert_eq!(t.objects, expected.objects);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -308,9 +305,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_UPDATE_OBJECT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.has_transport, expected.has_transport);
-        assert_eq!(t.objects, expected.objects);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -330,9 +325,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_UPDATE_OBJECT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.has_transport, expected.has_transport);
-        assert_eq!(t.objects, expected.objects);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());

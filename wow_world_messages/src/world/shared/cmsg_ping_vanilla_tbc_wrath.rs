@@ -65,6 +65,11 @@ mod test_vanilla {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_PING, expected: &CMSG_PING) {
+        assert_eq!(t.sequence_id, expected.sequence_id);
+        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
+    }
+
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0xDC, 0x01, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
 
@@ -87,9 +92,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.sequence_id, expected.sequence_id);
-        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
-
+        assert(&t, &expected);
         assert_eq!(8 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -109,9 +112,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.sequence_id, expected.sequence_id);
-        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
-
+        assert(&t, &expected);
         assert_eq!(8 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -131,9 +132,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.sequence_id, expected.sequence_id);
-        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
-
+        assert(&t, &expected);
         assert_eq!(8 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -153,6 +152,11 @@ mod test_tbc {
     use crate::tbc::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_PING, expected: &CMSG_PING) {
+        assert_eq!(t.sequence_id, expected.sequence_id);
+        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
+    }
+
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0xDC, 0x01, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
 
@@ -175,9 +179,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.sequence_id, expected.sequence_id);
-        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
-
+        assert(&t, &expected);
         assert_eq!(8 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -197,9 +199,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.sequence_id, expected.sequence_id);
-        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
-
+        assert(&t, &expected);
         assert_eq!(8 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -219,9 +219,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.sequence_id, expected.sequence_id);
-        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
-
+        assert(&t, &expected);
         assert_eq!(8 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -241,6 +239,11 @@ mod test_wrath {
     use crate::wrath::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_PING, expected: &CMSG_PING) {
+        assert_eq!(t.sequence_id, expected.sequence_id);
+        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
+    }
+
     const RAW0: [u8; 14] = [ 0x00, 0x0C, 0xDC, 0x01, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0xDE, 0xCA, 0xFA, 0x00, ];
 
@@ -263,9 +266,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.sequence_id, expected.sequence_id);
-        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
-
+        assert(&t, &expected);
         assert_eq!(8 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -285,9 +286,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.sequence_id, expected.sequence_id);
-        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
-
+        assert(&t, &expected);
         assert_eq!(8 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -307,9 +306,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected CMSG_PING, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.sequence_id, expected.sequence_id);
-        assert_eq!(t.round_time_in_ms, expected.round_time_in_ms);
-
+        assert(&t, &expected);
         assert_eq!(8 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

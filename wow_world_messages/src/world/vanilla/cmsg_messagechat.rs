@@ -388,6 +388,12 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_MESSAGECHAT, expected: &CMSG_MESSAGECHAT) {
+        assert_eq!(t.chat_type, expected.chat_type);
+        assert_eq!(t.language, expected.language);
+        assert_eq!(t.message, expected.message);
+    }
+
     const RAW0: [u8; 37] = [ 0x00, 0x23, 0x95, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
          0x00, 0x07, 0x00, 0x00, 0x00, 0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73,
          0x20, 0x61, 0x20, 0x73, 0x61, 0x79, 0x20, 0x6D, 0x65, 0x73, 0x73, 0x61,
@@ -413,10 +419,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_MESSAGECHAT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.chat_type, expected.chat_type);
-        assert_eq!(t.language, expected.language);
-        assert_eq!(t.message, expected.message);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -436,10 +439,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_MESSAGECHAT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.chat_type, expected.chat_type);
-        assert_eq!(t.language, expected.language);
-        assert_eq!(t.message, expected.message);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -459,10 +459,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMSG_MESSAGECHAT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.chat_type, expected.chat_type);
-        assert_eq!(t.language, expected.language);
-        assert_eq!(t.message, expected.message);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

@@ -379,6 +379,10 @@ mod test_version_2 {
     use crate::logon::version_2::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_LOGON_PROOF_Server, expected: &CMD_AUTH_LOGON_PROOF_Server) {
+        assert_eq!(t.result, expected.result);
+    }
+
     const RAW0: [u8; 26] = [ 0x01, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
          0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
          0x13, 0xEF, 0xBE, 0xAD, 0xDE, ];
@@ -406,8 +410,7 @@ mod test_version_2 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.result, expected.result);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -427,8 +430,7 @@ mod test_version_2 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.result, expected.result);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -448,8 +450,7 @@ mod test_version_2 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.result, expected.result);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -469,6 +470,10 @@ mod test_version_3 {
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_AUTH_LOGON_PROOF_Server, expected: &CMD_AUTH_LOGON_PROOF_Server) {
+        assert_eq!(t.result, expected.result);
+    }
+
     const RAW0: [u8; 26] = [ 0x01, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
          0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
          0x13, 0xEF, 0xBE, 0xAD, 0xDE, ];
@@ -496,8 +501,7 @@ mod test_version_3 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.result, expected.result);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -517,8 +521,7 @@ mod test_version_3 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.result, expected.result);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -538,8 +541,7 @@ mod test_version_3 {
             opcode => panic!("incorrect opcode. Expected CMD_AUTH_LOGON_PROOF, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.result, expected.result);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

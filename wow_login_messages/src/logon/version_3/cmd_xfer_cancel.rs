@@ -134,7 +134,6 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_CANCEL, got {opcode:#?}", opcode = opcode),
         };
 
-
         assert_eq!(HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -154,7 +153,6 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_CANCEL, got {opcode:#?}", opcode = opcode),
         };
 
-
         assert_eq!(HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -173,7 +171,6 @@ mod test {
             ClientOpcodeMessage::CMD_XFER_CANCEL => {}
             opcode => panic!("incorrect opcode. Expected CMD_XFER_CANCEL, got {opcode:#?}", opcode = opcode),
         };
-
 
         assert_eq!(HEADER_SIZE, RAW0.len());
 

@@ -50,6 +50,21 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             _ => unimplemented!(),
         }
 
+        if !e.empty_body() {
+            s.bodyn(
+                format!("fn assert(t: &{ty}, expected: &{ty})", ty = e.name()),
+                |s| {
+                    // Better error reporting when something is wrong.
+                    for m in e.rust_object().members_in_struct() {
+                        s.wln(format!(
+                            "assert_eq!(t.{field}, expected.{field});",
+                            field = m.name()
+                        ));
+                    }
+                },
+            );
+        }
+
         for (i, t) in e.tests(o).iter().enumerate() {
             s.w(format!("const RAW{}: [u8; {}] = [", i, t.raw_bytes().len()));
             s.inc_indent();
@@ -62,7 +77,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             s.wln_no_indent(" ];\n");
 
             s.funcn(format!("expected{i}()"), t.subject(), |s| {
-                s.bodyn(format!("{}", t.subject()), |s| {
+                s.bodyn(t.subject(), |s| {
                     for m in e.rust_object().members_in_struct() {
                         print_value(s, m, t.members(), e, version);
                     }
@@ -204,14 +219,9 @@ fn print_test_case(s: &mut Writer, t: &TestCase, e: &Container, it: ImplType, i:
     );
     s.newline();
 
-    // Better error reporting when something is wrong.
-    for m in e.rust_object().members_in_struct() {
-        s.wln(format!(
-            "assert_eq!(t.{field}, expected.{field});",
-            field = m.name()
-        ));
+    if !e.empty_body() {
+        s.wln("assert(&t, &expected);");
     }
-    s.newline();
 
     let compressed = e.tags().compressed() || e.contains_compressed_variable();
 

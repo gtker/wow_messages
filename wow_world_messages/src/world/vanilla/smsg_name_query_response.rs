@@ -130,6 +130,15 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_NAME_QUERY_RESPONSE, expected: &SMSG_NAME_QUERY_RESPONSE) {
+        assert_eq!(t.guid, expected.guid);
+        assert_eq!(t.character_name, expected.character_name);
+        assert_eq!(t.realm_name, expected.realm_name);
+        assert_eq!(t.race, expected.race);
+        assert_eq!(t.gender, expected.gender);
+        assert_eq!(t.class, expected.class);
+    }
+
     const RAW0: [u8; 30] = [ 0x00, 0x1C, 0x51, 0x00, 0xEF, 0xBE, 0xAD, 0xDE, 0x00,
          0x00, 0x00, 0x00, 0x41, 0x73, 0x64, 0x66, 0x00, 0x00, 0x01, 0x00, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, ];
@@ -157,13 +166,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.character_name, expected.character_name);
-        assert_eq!(t.realm_name, expected.realm_name);
-        assert_eq!(t.race, expected.race);
-        assert_eq!(t.gender, expected.gender);
-        assert_eq!(t.class, expected.class);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -183,13 +186,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.character_name, expected.character_name);
-        assert_eq!(t.realm_name, expected.realm_name);
-        assert_eq!(t.race, expected.race);
-        assert_eq!(t.gender, expected.gender);
-        assert_eq!(t.class, expected.class);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -209,13 +206,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.character_name, expected.character_name);
-        assert_eq!(t.realm_name, expected.realm_name);
-        assert_eq!(t.race, expected.race);
-        assert_eq!(t.gender, expected.gender);
-        assert_eq!(t.class, expected.class);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -251,13 +242,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.character_name, expected.character_name);
-        assert_eq!(t.realm_name, expected.realm_name);
-        assert_eq!(t.race, expected.race);
-        assert_eq!(t.gender, expected.gender);
-        assert_eq!(t.class, expected.class);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -277,13 +262,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.character_name, expected.character_name);
-        assert_eq!(t.realm_name, expected.realm_name);
-        assert_eq!(t.race, expected.race);
-        assert_eq!(t.gender, expected.gender);
-        assert_eq!(t.class, expected.class);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -303,13 +282,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_NAME_QUERY_RESPONSE, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.guid, expected.guid);
-        assert_eq!(t.character_name, expected.character_name);
-        assert_eq!(t.realm_name, expected.realm_name);
-        assert_eq!(t.race, expected.race);
-        assert_eq!(t.gender, expected.gender);
-        assert_eq!(t.class, expected.class);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());

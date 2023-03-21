@@ -134,7 +134,6 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}", opcode = opcode),
         };
 
-
         assert_eq!(HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -154,7 +153,6 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}", opcode = opcode),
         };
 
-
         assert_eq!(HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -173,7 +171,6 @@ mod test {
             ServerOpcodeMessage::CMD_XFER_INITIATE => {}
             opcode => panic!("incorrect opcode. Expected CMD_XFER_INITIATE, got {opcode:#?}", opcode = opcode),
         };
-
 
         assert_eq!(HEADER_SIZE, RAW0.len());
 

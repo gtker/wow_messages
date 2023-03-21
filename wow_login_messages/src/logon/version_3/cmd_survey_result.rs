@@ -208,6 +208,12 @@ mod test {
     use crate::logon::version_3::opcodes::ClientOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_SURVEY_RESULT, expected: &CMD_SURVEY_RESULT) {
+        assert_eq!(t.survey_id, expected.survey_id);
+        assert_eq!(t.error, expected.error);
+        assert_eq!(t.data, expected.data);
+    }
+
     const RAW0: [u8; 9] = [ 0x04, 0xDE, 0xFA, 0x00, 0x00, 0x00, 0x01, 0x00, 0xFF, ];
 
     pub(crate) fn expected0() -> CMD_SURVEY_RESULT {
@@ -230,10 +236,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_SURVEY_RESULT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.survey_id, expected.survey_id);
-        assert_eq!(t.error, expected.error);
-        assert_eq!(t.data, expected.data);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -253,10 +256,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_SURVEY_RESULT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.survey_id, expected.survey_id);
-        assert_eq!(t.error, expected.error);
-        assert_eq!(t.data, expected.data);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -276,10 +276,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_SURVEY_RESULT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.survey_id, expected.survey_id);
-        assert_eq!(t.error, expected.error);
-        assert_eq!(t.data, expected.data);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

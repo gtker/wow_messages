@@ -84,6 +84,11 @@ mod test_vanilla {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_CHAR_RENAME, expected: &CMSG_CHAR_RENAME) {
+        assert_eq!(t.character, expected.character);
+        assert_eq!(t.new_name, expected.new_name);
+    }
+
     const RAW0: [u8; 23] = [ 0x00, 0x15, 0xC7, 0x02, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65,
          0x66, 0x00, ];
@@ -107,9 +112,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.character, expected.character);
-        assert_eq!(t.new_name, expected.new_name);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -129,9 +132,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.character, expected.character);
-        assert_eq!(t.new_name, expected.new_name);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -151,9 +152,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.character, expected.character);
-        assert_eq!(t.new_name, expected.new_name);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -174,6 +173,11 @@ mod test_tbc {
     use crate::tbc::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_CHAR_RENAME, expected: &CMSG_CHAR_RENAME) {
+        assert_eq!(t.character, expected.character);
+        assert_eq!(t.new_name, expected.new_name);
+    }
+
     const RAW0: [u8; 23] = [ 0x00, 0x15, 0xC7, 0x02, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65,
          0x66, 0x00, ];
@@ -197,9 +201,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.character, expected.character);
-        assert_eq!(t.new_name, expected.new_name);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -219,9 +221,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.character, expected.character);
-        assert_eq!(t.new_name, expected.new_name);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -241,9 +241,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.character, expected.character);
-        assert_eq!(t.new_name, expected.new_name);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -264,6 +262,11 @@ mod test_wrath {
     use crate::wrath::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_CHAR_RENAME, expected: &CMSG_CHAR_RENAME) {
+        assert_eq!(t.character, expected.character);
+        assert_eq!(t.new_name, expected.new_name);
+    }
+
     const RAW0: [u8; 23] = [ 0x00, 0x15, 0xC7, 0x02, 0x00, 0x00, 0xEF, 0xBE, 0xAD,
          0xDE, 0x00, 0x00, 0x00, 0x00, 0x44, 0x65, 0x61, 0x64, 0x62, 0x65, 0x65,
          0x66, 0x00, ];
@@ -287,9 +290,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.character, expected.character);
-        assert_eq!(t.new_name, expected.new_name);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -309,9 +310,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.character, expected.character);
-        assert_eq!(t.new_name, expected.new_name);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -331,9 +330,7 @@ mod test_wrath {
             opcode => panic!("incorrect opcode. Expected CMSG_CHAR_RENAME, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.character, expected.character);
-        assert_eq!(t.new_name, expected.new_name);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

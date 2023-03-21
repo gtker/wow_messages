@@ -76,6 +76,12 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_LOGIN_VERIFY_WORLD, expected: &SMSG_LOGIN_VERIFY_WORLD) {
+        assert_eq!(t.map, expected.map);
+        assert_eq!(t.position, expected.position);
+        assert_eq!(t.orientation, expected.orientation);
+    }
+
     const RAW0: [u8; 24] = [ 0x00, 0x16, 0x36, 0x02, 0x00, 0x00, 0x00, 0x00, 0xCD,
          0xD7, 0x0B, 0xC6, 0x35, 0x7E, 0x04, 0xC3, 0xF9, 0x0F, 0xA7, 0x42, 0x00,
          0x00, 0x00, 0x00, ];
@@ -104,10 +110,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_LOGIN_VERIFY_WORLD, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.map, expected.map);
-        assert_eq!(t.position, expected.position);
-        assert_eq!(t.orientation, expected.orientation);
-
+        assert(&t, &expected);
         assert_eq!(20 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -127,10 +130,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_LOGIN_VERIFY_WORLD, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.map, expected.map);
-        assert_eq!(t.position, expected.position);
-        assert_eq!(t.orientation, expected.orientation);
-
+        assert(&t, &expected);
         assert_eq!(20 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -150,10 +150,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_LOGIN_VERIFY_WORLD, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.map, expected.map);
-        assert_eq!(t.position, expected.position);
-        assert_eq!(t.orientation, expected.orientation);
-
+        assert(&t, &expected);
         assert_eq!(20 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

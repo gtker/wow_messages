@@ -65,6 +65,11 @@ mod test_vanilla {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &MSG_AUCTION_HELLO_Server, expected: &MSG_AUCTION_HELLO_Server) {
+        assert_eq!(t.auctioneer, expected.auctioneer);
+        assert_eq!(t.auction_house_id, expected.auction_house_id);
+    }
+
     const RAW0: [u8; 16] = [ 0x00, 0x0E, 0x55, 0x02, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE,
          0xAD, 0xDE, 0x00, 0x12, 0x00, 0x00, 0x00, ];
 
@@ -87,9 +92,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.auctioneer, expected.auctioneer);
-        assert_eq!(t.auction_house_id, expected.auction_house_id);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -109,9 +112,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.auctioneer, expected.auctioneer);
-        assert_eq!(t.auction_house_id, expected.auction_house_id);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -131,9 +132,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.auctioneer, expected.auctioneer);
-        assert_eq!(t.auction_house_id, expected.auction_house_id);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -154,6 +153,11 @@ mod test_tbc {
     use crate::tbc::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &MSG_AUCTION_HELLO_Server, expected: &MSG_AUCTION_HELLO_Server) {
+        assert_eq!(t.auctioneer, expected.auctioneer);
+        assert_eq!(t.auction_house_id, expected.auction_house_id);
+    }
+
     const RAW0: [u8; 16] = [ 0x00, 0x0E, 0x55, 0x02, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE,
          0xAD, 0xDE, 0x00, 0x12, 0x00, 0x00, 0x00, ];
 
@@ -176,9 +180,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.auctioneer, expected.auctioneer);
-        assert_eq!(t.auction_house_id, expected.auction_house_id);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -198,9 +200,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.auctioneer, expected.auctioneer);
-        assert_eq!(t.auction_house_id, expected.auction_house_id);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -220,9 +220,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.auctioneer, expected.auctioneer);
-        assert_eq!(t.auction_house_id, expected.auction_house_id);
-
+        assert(&t, &expected);
         assert_eq!(12 + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());

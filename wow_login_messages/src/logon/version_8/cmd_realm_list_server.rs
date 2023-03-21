@@ -250,6 +250,10 @@ mod test {
     use crate::logon::version_8::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_REALM_LIST_Server, expected: &CMD_REALM_LIST_Server) {
+        assert_eq!(t.realms, expected.realms);
+    }
+
     const RAW0: [u8; 25] = [ 0x10, 0x16, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00,
          0x00, 0x00, 0x03, 0x41, 0x00, 0x41, 0x00, 0x00, 0x00, 0xC8, 0x43, 0x01,
          0x00, 0x02, 0x00, 0x00, ];
@@ -287,8 +291,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.realms, expected.realms);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -308,8 +311,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.realms, expected.realms);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -329,8 +331,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.realms, expected.realms);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -382,8 +383,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.realms, expected.realms);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -403,8 +403,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.realms, expected.realms);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -424,8 +423,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_REALM_LIST, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.realms, expected.realms);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());

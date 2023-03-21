@@ -243,6 +243,11 @@ mod test {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 2;
+    fn assert(t: &SMSG_COMPRESSED_UPDATE_OBJECT, expected: &SMSG_COMPRESSED_UPDATE_OBJECT) {
+        assert_eq!(t.has_transport, expected.has_transport);
+        assert_eq!(t.objects, expected.objects);
+    }
+
     const RAW0: [u8; 139] = [ 0x00, 0x89, 0xF6, 0x01, 0x3C, 0x01, 0x00, 0x00, 0x78,
          0x01, 0x63, 0x61, 0x60, 0x60, 0x60, 0x64, 0x3A, 0xEC, 0x11, 0x78, 0x40,
          0x9E, 0x35, 0x08, 0xC8, 0x86, 0x03, 0xBF, 0x33, 0x0D, 0x0E, 0x8C, 0x40,
@@ -416,9 +421,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_UPDATE_OBJECT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.has_transport, expected.has_transport);
-        assert_eq!(t.objects, expected.objects);
-
+        assert(&t, &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
@@ -442,9 +445,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_UPDATE_OBJECT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.has_transport, expected.has_transport);
-        assert_eq!(t.objects, expected.objects);
-
+        assert(&t, &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -468,9 +469,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected SMSG_COMPRESSED_UPDATE_OBJECT, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.has_transport, expected.has_transport);
-        assert_eq!(t.objects, expected.objects);
-
+        assert(&t, &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 

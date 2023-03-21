@@ -172,6 +172,10 @@ mod test {
     use crate::logon::version_3::opcodes::ServerOpcodeMessage;
 
     const HEADER_SIZE: usize = 1;
+    fn assert(t: &CMD_XFER_DATA, expected: &CMD_XFER_DATA) {
+        assert_eq!(t.data, expected.data);
+    }
+
     const RAW0: [u8; 4] = [ 0x31, 0x01, 0x00, 0xFF, ];
 
     pub(crate) fn expected0() -> CMD_XFER_DATA {
@@ -192,8 +196,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.data, expected.data);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -213,8 +216,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.data, expected.data);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -234,8 +236,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.data, expected.data);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
 
         let mut dest = Vec::with_capacity(RAW0.len());
@@ -264,8 +265,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.data, expected.data);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -285,8 +285,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.data, expected.data);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());
@@ -306,8 +305,7 @@ mod test {
             opcode => panic!("incorrect opcode. Expected CMD_XFER_DATA, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.data, expected.data);
-
+        assert(&t, &expected);
         assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
 
         let mut dest = Vec::with_capacity(RAW1.len());

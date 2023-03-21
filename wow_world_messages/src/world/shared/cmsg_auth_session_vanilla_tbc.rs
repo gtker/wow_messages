@@ -433,6 +433,16 @@ mod test_vanilla {
     use crate::vanilla::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_AUTH_SESSION, expected: &CMSG_AUTH_SESSION) {
+        assert_eq!(t.build, expected.build);
+        assert_eq!(t.server_id, expected.server_id);
+        assert_eq!(t.username, expected.username);
+        assert_eq!(t.client_seed, expected.client_seed);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
+        assert_eq!(t.addon_info, expected.addon_info);
+    }
+
     const RAW0: [u8; 174] = [ 0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x88, 0x02, 0xD8, 0x49, 0x88,
          0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7, 0x8A, 0xDB, 0xA4, 0xFB,
@@ -547,14 +557,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.build, expected.build);
-        assert_eq!(t.server_id, expected.server_id);
-        assert_eq!(t.username, expected.username);
-        assert_eq!(t.client_seed, expected.client_seed);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
-        assert_eq!(t.addon_info, expected.addon_info);
-
+        assert(&t, &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
@@ -578,14 +581,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.build, expected.build);
-        assert_eq!(t.server_id, expected.server_id);
-        assert_eq!(t.username, expected.username);
-        assert_eq!(t.client_seed, expected.client_seed);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
-        assert_eq!(t.addon_info, expected.addon_info);
-
+        assert(&t, &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -609,14 +605,7 @@ mod test_vanilla {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.build, expected.build);
-        assert_eq!(t.server_id, expected.server_id);
-        assert_eq!(t.username, expected.username);
-        assert_eq!(t.client_seed, expected.client_seed);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
-        assert_eq!(t.addon_info, expected.addon_info);
-
+        assert(&t, &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -640,6 +629,16 @@ mod test_tbc {
     use crate::tbc::{ClientMessage, ServerMessage};
 
     const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_AUTH_SESSION, expected: &CMSG_AUTH_SESSION) {
+        assert_eq!(t.build, expected.build);
+        assert_eq!(t.server_id, expected.server_id);
+        assert_eq!(t.username, expected.username);
+        assert_eq!(t.client_seed, expected.client_seed);
+        assert_eq!(t.client_proof, expected.client_proof);
+        assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
+        assert_eq!(t.addon_info, expected.addon_info);
+    }
+
     const RAW0: [u8; 174] = [ 0x00, 0xAC, 0xED, 0x01, 0x00, 0x00, 0xF3, 0x16, 0x00,
          0x00, 0x00, 0x00, 0x00, 0x00, 0x41, 0x00, 0x88, 0x02, 0xD8, 0x49, 0x88,
          0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7, 0x8A, 0xDB, 0xA4, 0xFB,
@@ -754,14 +753,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.build, expected.build);
-        assert_eq!(t.server_id, expected.server_id);
-        assert_eq!(t.username, expected.username);
-        assert_eq!(t.client_seed, expected.client_seed);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
-        assert_eq!(t.addon_info, expected.addon_info);
-
+        assert(&t, &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
 
@@ -785,14 +777,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.build, expected.build);
-        assert_eq!(t.server_id, expected.server_id);
-        assert_eq!(t.username, expected.username);
-        assert_eq!(t.client_seed, expected.client_seed);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
-        assert_eq!(t.addon_info, expected.addon_info);
-
+        assert(&t, &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
 
@@ -816,14 +801,7 @@ mod test_tbc {
             opcode => panic!("incorrect opcode. Expected CMSG_AUTH_SESSION, got {opcode:#?}", opcode = opcode),
         };
 
-        assert_eq!(t.build, expected.build);
-        assert_eq!(t.server_id, expected.server_id);
-        assert_eq!(t.username, expected.username);
-        assert_eq!(t.client_seed, expected.client_seed);
-        assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
-        assert_eq!(t.addon_info, expected.addon_info);
-
+        assert(&t, &expected);
         let mut dest = Vec::with_capacity(RAW0.len());
         expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
 
