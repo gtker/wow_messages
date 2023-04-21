@@ -1,3 +1,4 @@
+use crate::parser::types::array::ArrayType;
 use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::tags::MemberTags;
 use crate::rust_printer::rust_view::rust_enumerator::RustEnumerator;
@@ -42,12 +43,15 @@ impl RustMember {
             RustType::Struct { object, .. } => {
                 v.append(&mut object.all_members());
             }
-            RustType::Array {
-                inner_object: Some(o),
-                ..
-            } => {
-                v.append(&mut o.all_members());
-            }
+            RustType::Array { array, .. } => match array.ty() {
+                ArrayType::Struct(c) => {
+                    v.append(&mut c.rust_object().all_members());
+                }
+                ArrayType::Integer(_)
+                | ArrayType::CString
+                | ArrayType::Guid
+                | ArrayType::PackedGuid => {}
+            },
             _ => {}
         }
 

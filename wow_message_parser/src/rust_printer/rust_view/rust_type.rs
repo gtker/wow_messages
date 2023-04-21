@@ -1,10 +1,10 @@
-use std::fmt::{Display, Formatter};
-use crate::parser::types::array::{Array, ArraySize};
-use crate::parser::types::IntegerType;
+use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::ty::Type;
-use crate::rust_printer::rust_view::rust_object::RustObject;
+use crate::parser::types::IntegerType;
 use crate::rust_printer::rust_view::rust_enumerator::RustEnumerator;
+use crate::rust_printer::rust_view::rust_object::RustObject;
+use std::fmt::{Display, Formatter};
 
 #[derive(Debug, Clone)]
 pub(crate) enum RustType {
@@ -25,7 +25,6 @@ pub(crate) enum RustType {
     Array {
         array: Array,
         inner_sizes: Sizes,
-        inner_object: Option<RustObject>,
     },
     Enum {
         ty_name: String,
@@ -115,8 +114,10 @@ impl RustType {
             RustType::Seconds => Type::Seconds,
             RustType::Milliseconds => Type::Milliseconds,
 
-            RustType::Array { .. } |
-            RustType::Enum { .. } | RustType::Flag { .. } | RustType::Struct { .. } => {
+            RustType::Array { .. }
+            | RustType::Enum { .. }
+            | RustType::Flag { .. }
+            | RustType::Struct { .. } => {
                 panic!("invalid conversion")
             }
         }
@@ -125,10 +126,16 @@ impl RustType {
     pub(crate) fn size_is_const_fn(&self) -> bool {
         match self {
             RustType::Array {
-                array,
-                inner_sizes,
-                inner_object,
+                array, inner_sizes, ..
             } => {
+                let inner_object = match array.ty() {
+                    ArrayType::Struct(c) => Some(c.rust_object()),
+                    ArrayType::Integer(_)
+                    | ArrayType::CString
+                    | ArrayType::Guid
+                    | ArrayType::PackedGuid => None,
+                };
+
                 let inner = if let Some(object) = inner_object {
                     object
                         .members_in_struct()

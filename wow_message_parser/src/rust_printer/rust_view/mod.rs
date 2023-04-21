@@ -1,4 +1,3 @@
-use crate::parser::types::array::ArrayType;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
@@ -334,21 +333,10 @@ fn create_struct_member_definition(
         Type::FloatingPoint => RustType::Floating,
         Type::CString => RustType::CString,
         Type::String => RustType::String,
-        Type::Array(array) => {
-            let inner_object = match array.ty() {
-                ArrayType::Struct(c) => Some(c.rust_object().clone()),
-                ArrayType::Integer(_)
-                | ArrayType::Guid
-                | ArrayType::PackedGuid
-                | ArrayType::CString => None,
-            };
-
-            RustType::Array {
-                array: array.clone(),
-                inner_sizes: array.ty().sizes(),
-                inner_object,
-            }
-        }
+        Type::Array(array) => RustType::Array {
+            array: array.clone(),
+            inner_sizes: array.ty().sizes(),
+        },
         Type::Enum { e: definer, upcast } | Type::Flag { e: definer, upcast } => {
             let add_types = || -> Vec<RustEnumerator> {
                 let mut enumerators = Vec::new();
