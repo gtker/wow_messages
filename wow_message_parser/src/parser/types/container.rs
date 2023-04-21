@@ -615,11 +615,10 @@ impl Container {
         panic!("unable to find variable name {variable_name}")
     }
 
-    pub(crate) fn tests(&self, o: &Objects) -> Vec<TestCase> {
+    pub(crate) fn tests<'a>(&self, o: &'a Objects) -> Vec<&'a TestCase> {
         o.tests()
             .iter()
             .filter(|a| a.subject() == self.name() && self.tags().fulfills_all(a.tags()))
-            .cloned()
             .collect()
     }
 

@@ -379,8 +379,8 @@ pub(crate) struct IrTestCase {
     file_info: IrFileInfo,
 }
 
-impl From<&TestCase> for IrTestCase {
-    fn from(v: &TestCase) -> Self {
+impl From<&&TestCase> for IrTestCase {
+    fn from(v: &&TestCase) -> Self {
         let members = v.members().iter().map(|a| a.into()).collect();
 
         Self {
