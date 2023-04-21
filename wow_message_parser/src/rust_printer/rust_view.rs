@@ -414,6 +414,7 @@ pub(crate) enum RustType {
 impl RustType {
     pub(crate) fn str(&self) -> String {
         match self {
+            RustType::Array {array, ..} => array.str(),
             RustType::Flag { ty_name, .. } | RustType::Enum { ty_name, .. } => ty_name.clone(),
             RustType::Struct { ty_name, .. } => ty_name.clone(),
             _ => self.to_type().str(),
@@ -422,6 +423,7 @@ impl RustType {
 
     pub(crate) fn rust_str(&self) -> String {
         match self {
+            RustType::Array { array, .. } => array.rust_str(),
             RustType::Enum { .. } | RustType::Flag { .. } | RustType::Struct { .. } => self.str(),
 
             _ => self.to_type().rust_str(),
@@ -444,7 +446,6 @@ impl RustType {
             RustType::String => Type::String,
             RustType::CString => Type::CString,
             RustType::SizedCString => Type::SizedCString,
-            RustType::Array { array, .. } => Type::Array(array.clone()),
             RustType::MonsterMoveSpline => Type::MonsterMoveSplines,
             RustType::AchievementDoneArray => Type::AchievementDoneArray,
             RustType::AchievementInProgressArray => Type::AchievementInProgressArray,
@@ -460,6 +461,7 @@ impl RustType {
             RustType::Seconds => Type::Seconds,
             RustType::Milliseconds => Type::Milliseconds,
 
+            RustType::Array { .. } |
             RustType::Enum { .. } | RustType::Flag { .. } | RustType::Struct { .. } => {
                 panic!("invalid conversion")
             }
@@ -595,7 +597,7 @@ impl RustObject {
     pub(crate) fn members(&self) -> &[RustMember] {
         &self.members
     }
-    pub(crate) fn members_in_struct(&self) -> impl Iterator<Item = &RustMember> {
+    pub(crate) fn members_in_struct(&self) -> impl Iterator<Item=&RustMember> {
         self.members.iter().filter(|a| a.in_rust_type)
     }
     pub(crate) fn optional(&self) -> Option<&RustOptional> {
