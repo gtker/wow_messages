@@ -4,7 +4,7 @@ use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
 use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
-use crate::parser::types::struct_member::StructMember;
+use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
@@ -1234,161 +1234,7 @@ pub(crate) fn create_struct_member(
 ) {
     match m {
         StructMember::Definition(d) => {
-            let mut in_rust_type = true;
-            let ty = match d.ty() {
-                Type::Integer(i) => {
-                    if d.used_as_size_in().is_some() || d.value().is_some() {
-                        in_rust_type = false;
-                    }
-                    RustType::Integer(*i)
-                }
-                Type::Bool(i) => RustType::Bool(*i),
-                Type::DateTime => RustType::DateTime,
-                Type::Guid => RustType::Guid,
-                Type::NamedGuid => RustType::NamedGuid,
-                Type::PackedGuid => RustType::PackedGuid,
-                Type::FloatingPoint => RustType::Floating,
-                Type::CString => RustType::CString,
-                Type::String { .. } => RustType::String,
-                Type::Array(array) => {
-                    let mut inner_sizes = Sizes::new();
-                    let complex = match array.ty() {
-                        ArrayType::Integer(i) => {
-                            inner_sizes.inc_both(i.size().into());
-                            None
-                        }
-                        ArrayType::Guid => {
-                            inner_sizes.inc_both(GUID_SIZE.into());
-                            None
-                        }
-                        ArrayType::Struct(c) => {
-                            inner_sizes += c.sizes();
-                            Some(c)
-                        }
-                        ArrayType::PackedGuid => {
-                            inner_sizes
-                                .inc(PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into());
-                            None
-                        }
-                        ArrayType::CString => {
-                            inner_sizes.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED);
-                            None
-                        }
-                    };
-
-                    let inner_object = complex.map(|c| c.rust_object().clone());
-
-                    RustType::Array {
-                        array: array.clone(),
-                        inner_sizes,
-                        inner_object,
-                    }
-                }
-                Type::Enum { e: definer, upcast } | Type::Flag { e: definer, upcast } => {
-                    let add_types = || -> Vec<RustEnumerator> {
-                        let mut enumerators = Vec::new();
-
-                        for field in definer.fields() {
-                            enumerators.push(RustEnumerator {
-                                name: field.name().to_string(),
-                                rust_name: field.rust_name().to_string(),
-                                value: field.value().clone(),
-                                members: vec![],
-                                is_main_enumerator: false,
-                                original_fields: vec![],
-                                contains_elseif: false,
-                            });
-                        }
-                        enumerators
-                    };
-                    let int_ty = if let Some(upcast) = upcast {
-                        *upcast
-                    } else {
-                        *definer.ty()
-                    };
-
-                    if definer.definer_ty() == DefinerType::Enum {
-                        let enumerators = add_types();
-
-                        RustType::Enum {
-                            ty_name: definer.name().to_string(),
-                            original_ty_name: definer.name().to_string(),
-                            enumerators,
-                            int_ty,
-                            is_simple: true,
-                            is_elseif: false,
-                            separate_if_statements: e
-                                .enum_type_used_in_separate_if_statements(definer.name()),
-                        }
-                    } else {
-                        let enumerators = add_types();
-
-                        RustType::Flag {
-                            ty_name: definer.name().to_string(),
-                            original_ty_name: definer.name().to_string(),
-                            int_ty,
-                            enumerators,
-                            is_simple: true,
-                            is_elseif: false,
-                        }
-                    }
-                }
-                Type::Struct { e } => {
-                    let object = e.rust_object().clone();
-
-                    RustType::Struct {
-                        ty_name: e.name().to_string(),
-                        sizes: e.sizes(),
-                        object,
-                    }
-                }
-                Type::UpdateMask { max_size } => RustType::UpdateMask {
-                    max_size: *max_size,
-                },
-                Type::AuraMask => RustType::AuraMask,
-                Type::SizedCString => RustType::SizedCString,
-                Type::AchievementDoneArray => RustType::AchievementDoneArray,
-                Type::AchievementInProgressArray => RustType::AchievementInProgressArray,
-                Type::MonsterMoveSplines => RustType::MonsterMoveSpline,
-                Type::EnchantMask => RustType::EnchantMask,
-                Type::InspectTalentGearMask => RustType::InspectTalentGearMask,
-                Type::Gold => RustType::Gold,
-                Type::Level => RustType::Level,
-                Type::Level16 => RustType::Level16,
-                Type::Level32 => RustType::Level32,
-                Type::VariableItemRandomProperty => RustType::VariableItemRandomProperty,
-                Type::AddonArray => RustType::AddonArray,
-                Type::IpAddress => RustType::IpAddress,
-                Type::Seconds => RustType::Seconds,
-                Type::Milliseconds => RustType::Milliseconds,
-            };
-
-            let name = d.name().to_string();
-            let mut sizes = d.ty().sizes();
-
-            for m in e.fields() {
-                match m {
-                    ParsedStructMember::Definition(_) => {}
-                    ParsedStructMember::IfStatement(statement) => {
-                        if statement.name() != name {
-                            continue;
-                        }
-
-                        let complex_sizes =
-                            ParsedContainer::get_complex_sizes(statement, e, containers, definers);
-                        sizes += complex_sizes;
-                    }
-                    ParsedStructMember::OptionalStatement(_) => {}
-                }
-            }
-
-            current_scope.push(RustMember {
-                name,
-                ty,
-                original_ty: d.ty().str(),
-                in_rust_type,
-                tags: d.tags().clone(),
-            });
+            create_struct_member_definition(e, containers, definers, current_scope, d);
         }
         StructMember::IfStatement(statement) => {
             create_if_statement(
@@ -1426,6 +1272,164 @@ pub(crate) fn create_struct_member(
             });
         }
     }
+}
+
+fn create_struct_member_definition(e: &ParsedContainer, containers: &[ParsedContainer], definers: &[Definer], current_scope: &mut Vec<RustMember>, d: &StructMemberDefinition) {
+    let mut in_rust_type = true;
+    let ty = match d.ty() {
+        Type::Integer(i) => {
+            if d.used_as_size_in().is_some() || d.value().is_some() {
+                in_rust_type = false;
+            }
+            RustType::Integer(*i)
+        }
+        Type::Bool(i) => RustType::Bool(*i),
+        Type::DateTime => RustType::DateTime,
+        Type::Guid => RustType::Guid,
+        Type::NamedGuid => RustType::NamedGuid,
+        Type::PackedGuid => RustType::PackedGuid,
+        Type::FloatingPoint => RustType::Floating,
+        Type::CString => RustType::CString,
+        Type::String { .. } => RustType::String,
+        Type::Array(array) => {
+            let mut inner_sizes = Sizes::new();
+            let complex = match array.ty() {
+                ArrayType::Integer(i) => {
+                    inner_sizes.inc_both(i.size().into());
+                    None
+                }
+                ArrayType::Guid => {
+                    inner_sizes.inc_both(GUID_SIZE.into());
+                    None
+                }
+                ArrayType::Struct(c) => {
+                    inner_sizes += c.sizes();
+                    Some(c)
+                }
+                ArrayType::PackedGuid => {
+                    inner_sizes
+                        .inc(PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into());
+                    None
+                }
+                ArrayType::CString => {
+                    inner_sizes.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED);
+                    None
+                }
+            };
+
+            let inner_object = complex.map(|c| c.rust_object().clone());
+
+            RustType::Array {
+                array: array.clone(),
+                inner_sizes,
+                inner_object,
+            }
+        }
+        Type::Enum { e: definer, upcast } | Type::Flag { e: definer, upcast } => {
+            let add_types = || -> Vec<RustEnumerator> {
+                let mut enumerators = Vec::new();
+
+                for field in definer.fields() {
+                    enumerators.push(RustEnumerator {
+                        name: field.name().to_string(),
+                        rust_name: field.rust_name().to_string(),
+                        value: field.value().clone(),
+                        members: vec![],
+                        is_main_enumerator: false,
+                        original_fields: vec![],
+                        contains_elseif: false,
+                    });
+                }
+                enumerators
+            };
+            let int_ty = if let Some(upcast) = upcast {
+                *upcast
+            } else {
+                *definer.ty()
+            };
+
+            if definer.definer_ty() == DefinerType::Enum {
+                let enumerators = add_types();
+
+                RustType::Enum {
+                    ty_name: definer.name().to_string(),
+                    original_ty_name: definer.name().to_string(),
+                    enumerators,
+                    int_ty,
+                    is_simple: true,
+                    is_elseif: false,
+                    separate_if_statements: e
+                        .enum_type_used_in_separate_if_statements(definer.name()),
+                }
+            } else {
+                let enumerators = add_types();
+
+                RustType::Flag {
+                    ty_name: definer.name().to_string(),
+                    original_ty_name: definer.name().to_string(),
+                    int_ty,
+                    enumerators,
+                    is_simple: true,
+                    is_elseif: false,
+                }
+            }
+        }
+        Type::Struct { e } => {
+            let object = e.rust_object().clone();
+
+            RustType::Struct {
+                ty_name: e.name().to_string(),
+                sizes: e.sizes(),
+                object,
+            }
+        }
+        Type::UpdateMask { max_size } => RustType::UpdateMask {
+            max_size: *max_size,
+        },
+        Type::AuraMask => RustType::AuraMask,
+        Type::SizedCString => RustType::SizedCString,
+        Type::AchievementDoneArray => RustType::AchievementDoneArray,
+        Type::AchievementInProgressArray => RustType::AchievementInProgressArray,
+        Type::MonsterMoveSplines => RustType::MonsterMoveSpline,
+        Type::EnchantMask => RustType::EnchantMask,
+        Type::InspectTalentGearMask => RustType::InspectTalentGearMask,
+        Type::Gold => RustType::Gold,
+        Type::Level => RustType::Level,
+        Type::Level16 => RustType::Level16,
+        Type::Level32 => RustType::Level32,
+        Type::VariableItemRandomProperty => RustType::VariableItemRandomProperty,
+        Type::AddonArray => RustType::AddonArray,
+        Type::IpAddress => RustType::IpAddress,
+        Type::Seconds => RustType::Seconds,
+        Type::Milliseconds => RustType::Milliseconds,
+    };
+
+    let name = d.name().to_string();
+    let mut sizes = d.ty().sizes();
+
+    for m in e.fields() {
+        match m {
+            ParsedStructMember::Definition(_) => {}
+            ParsedStructMember::IfStatement(statement) => {
+                if statement.name() != name {
+                    continue;
+                }
+
+                let complex_sizes =
+                    ParsedContainer::get_complex_sizes(statement, e, containers, definers);
+                sizes += complex_sizes;
+            }
+            ParsedStructMember::OptionalStatement(_) => {}
+        }
+    }
+
+    current_scope.push(RustMember {
+        name,
+        ty,
+        original_ty: d.ty().str(),
+        in_rust_type,
+        tags: d.tags().clone(),
+    });
 }
 
 pub(crate) fn create_rust_object(
