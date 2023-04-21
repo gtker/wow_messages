@@ -73,9 +73,9 @@ pub fn is_within_square(
 
     const DELTA: f32 = 2.0;
 
-    !(dx.abs() > square.x / 2.0 + DELTA
-        || dy.abs() > square.y / 2.0 + DELTA
-        || dz.abs() > square.z / 2.0 + DELTA)
+    !(dx.abs() > length / 2.0 + DELTA
+        || dy.abs() > width / 2.0 + DELTA
+        || dz.abs() > height / 2.0 + DELTA)
 }
 
 pub const SAY: f32 = 25.0;
