@@ -4953,8 +4953,8 @@
             ptvcursor_add_ret_uint(ptv, hf_woww_chat_type, 1, ENC_LITTLE_ENDIAN, &chat_type);
             ptvcursor_add(ptv, hf_woww_language, 4, ENC_LITTLE_ENDIAN);
             if (chat_type == CHAT_TYPE_MONSTER_WHISPER
- || chat_type == CHAT_TYPE_RAID_BOSS_EMOTE
- || chat_type == CHAT_TYPE_MONSTER_EMOTE) {
+             || chat_type == CHAT_TYPE_RAID_BOSS_EMOTE
+             || chat_type == CHAT_TYPE_MONSTER_EMOTE) {
                 add_sized_cstring(ptv, &hf_woww_monster_name);
                 ptvcursor_add(ptv, hf_woww_monster, 8, ENC_LITTLE_ENDIAN);
             }
@@ -5267,7 +5267,7 @@
                 ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "AuraLog");
                 ptvcursor_add_ret_uint(ptv, hf_woww_aura_type, 4, ENC_LITTLE_ENDIAN, &aura_type);
                 if (aura_type == AURA_TYPE_PERIODIC_DAMAGE
- || aura_type == AURA_TYPE_PERIODIC_DAMAGE_PERCENT) {
+                 || aura_type == AURA_TYPE_PERIODIC_DAMAGE_PERCENT) {
                     ptvcursor_add(ptv, hf_woww_damage, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_spell_school, 1, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_absorbed, 4, ENC_LITTLE_ENDIAN);
