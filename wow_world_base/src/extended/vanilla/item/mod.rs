@@ -7,7 +7,6 @@ impl Item {
     ///
     /// Non-equipable items along with bags and quivers will always return false.
     pub const fn possibly_equipable_by(&self, race_class: RaceClass) -> bool {
-        let race = race_class.race();
         let class = race_class.class();
 
         let allowed_by_race = self.allowed_race().is_empty()

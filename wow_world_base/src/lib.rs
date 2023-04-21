@@ -45,7 +45,6 @@
     clippy::unseparated_literal_suffix
 )]
 #![allow(
-    unused,
     non_camel_case_types,
     non_snake_case,
     clippy::missing_errors_doc,
@@ -59,6 +58,7 @@
 pub(crate) mod errors;
 #[cfg(feature = "extended")]
 pub(crate) mod extended;
+#[allow(unused)]
 pub(crate) mod inner;
 pub(crate) mod manual;
 pub(crate) mod util;

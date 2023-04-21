@@ -853,7 +853,7 @@ pub fn base_dodge_chance(class: Class, race: PlayerRace, agility: u16, level: u8
 
     let dodge = class_base + agility as f32 * dodge_ratio;
 
-    /// 1% from Quickness racial (skill id 20582)
+    // 1% from Quickness racial (skill id 20582)
     let racial_bonus: f32 = if matches!(race, PlayerRace::NightElf) {
         1.0
     } else {

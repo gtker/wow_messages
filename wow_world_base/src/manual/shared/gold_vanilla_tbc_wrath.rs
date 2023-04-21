@@ -1,5 +1,5 @@
 use std::fmt::Formatter;
-use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Sub, SubAssign};
+use std::ops::{Add, AddAssign, Sub, SubAssign};
 
 /// Representation of money with helper methods.
 ///

@@ -1,5 +1,4 @@
 use crate::shared::class_vanilla_tbc::Class;
-use crate::shared::inventory_type_vanilla_tbc_wrath::InventoryType;
 use crate::shared::power_vanilla_tbc::Power;
 
 impl Class {

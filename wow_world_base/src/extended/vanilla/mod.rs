@@ -1,5 +1,3 @@
-use crate::vanilla::{Class, Map, Race, RaceClass};
-
 mod actions;
 mod base_stats;
 pub mod character_features;
@@ -78,5 +76,4 @@ macro_rules! vanilla_race_class_match {
         }
     };
 }
-use crate::vanilla::position::Position;
 pub(crate) use vanilla_race_class_match;
