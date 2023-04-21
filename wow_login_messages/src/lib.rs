@@ -125,20 +125,20 @@ pub const DEFAULT_PORT: u16 = 3724;
 
 /// Trait to write messages sent **from** the server.
 ///
-/// In order to read messages sent from the server use the [`ServerOpcodeMessage`](crate::version_2::opcodes::ServerOpcodeMessage)
+/// In order to read messages sent from the server use the [`ServerOpcodeMessage`](version_2::opcodes::ServerOpcodeMessage)
 /// with the correct version.
 ///
 /// Do not be alarmed by the excessive boilerplate on the async functions,
 /// it is required for async functions in traits.
 ///
-/// This trait also has a bunch of hidden functions that are necessary for the [`helper`](crate::helper)
-/// and [`opcodes`](crate::version_2::opcodes) modules to work.
+/// This trait also has a bunch of hidden functions that are necessary for the [`helper`](helper)
+/// and [`opcodes`](version_2::opcodes) modules to work.
 pub trait ServerMessage: Sized + private::Sealed {
     #[doc(hidden)]
     const OPCODE: u8;
 
     #[doc(hidden)]
-    fn read<R: std::io::Read, I: private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError>;
+    fn read<R: std::io::Read, I: private::Sealed>(r: R) -> Result<Self, errors::ParseError>;
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: W) -> Result<(), std::io::Error>;
@@ -147,7 +147,7 @@ pub trait ServerMessage: Sized + private::Sealed {
     #[cfg(feature = "async-std")]
     fn astd_read<'async_trait, R, I: private::Sealed>(
         r: R,
-    ) -> Pin<Box<dyn Future<Output = Result<Self, crate::errors::ParseError>> + Send + 'async_trait>>
+    ) -> Pin<Box<dyn Future<Output = Result<Self, errors::ParseError>> + Send + 'async_trait>>
     where
         R: 'async_trait + ReadExt + Unpin + Send,
         Self: 'async_trait;
@@ -166,7 +166,7 @@ pub trait ServerMessage: Sized + private::Sealed {
     #[cfg(feature = "tokio")]
     fn tokio_read<'async_trait, R, I: private::Sealed>(
         r: R,
-    ) -> Pin<Box<dyn Future<Output = Result<Self, crate::errors::ParseError>> + Send + 'async_trait>>
+    ) -> Pin<Box<dyn Future<Output = Result<Self, errors::ParseError>> + Send + 'async_trait>>
     where
         R: 'async_trait + AsyncReadExt + Unpin + Send,
         Self: 'async_trait;
@@ -184,20 +184,20 @@ pub trait ServerMessage: Sized + private::Sealed {
 
 /// Trait to write messages sent **from** the client.
 ///
-/// In order to read messages sent from the client use the [`ClientOpcodeMessage`](crate::version_2::opcodes::ClientOpcodeMessage)
+/// In order to read messages sent from the client use the [`ClientOpcodeMessage`](version_2::opcodes::ClientOpcodeMessage)
 /// with the correct version.
 ///
 /// Do not be alarmed by the excessive boilerplate on the async functions,
 /// it is required for async functions in traits.
 ///
-/// This trait also has a bunch of hidden functions that are necessary for the [`helper`](crate::helper)
-/// and [`opcodes`](crate::version_2::opcodes) modules to work.
+/// This trait also has a bunch of hidden functions that are necessary for the [`helper`](helper)
+/// and [`opcodes`](version_2::opcodes) modules to work.
 pub trait ClientMessage: Sized + private::Sealed {
     #[doc(hidden)]
     const OPCODE: u8;
 
     #[doc(hidden)]
-    fn read<R: std::io::Read, I: private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError>;
+    fn read<R: std::io::Read, I: private::Sealed>(r: R) -> Result<Self, errors::ParseError>;
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: W) -> Result<(), std::io::Error>;
@@ -206,7 +206,7 @@ pub trait ClientMessage: Sized + private::Sealed {
     #[cfg(feature = "async-std")]
     fn astd_read<'async_trait, R, I: private::Sealed>(
         r: R,
-    ) -> Pin<Box<dyn Future<Output = Result<Self, crate::errors::ParseError>> + Send + 'async_trait>>
+    ) -> Pin<Box<dyn Future<Output = Result<Self, errors::ParseError>> + Send + 'async_trait>>
     where
         R: 'async_trait + ReadExt + Unpin + Send,
         Self: 'async_trait;
@@ -225,7 +225,7 @@ pub trait ClientMessage: Sized + private::Sealed {
     #[cfg(feature = "tokio")]
     fn tokio_read<'async_trait, R, I: private::Sealed>(
         r: R,
-    ) -> Pin<Box<dyn Future<Output = Result<Self, crate::errors::ParseError>> + Send + 'async_trait>>
+    ) -> Pin<Box<dyn Future<Output = Result<Self, errors::ParseError>> + Send + 'async_trait>>
     where
         R: 'async_trait + AsyncReadExt + Unpin + Send,
         Self: 'async_trait;
