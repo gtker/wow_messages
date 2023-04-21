@@ -1293,7 +1293,7 @@ fn create_struct_member_definition(e: &ParsedContainer, containers: &[ParsedCont
         Type::String { .. } => RustType::String,
         Type::Array(array) => {
             let mut inner_sizes = Sizes::new();
-            let complex = match array.ty() {
+            let inner_object = match array.ty() {
                 ArrayType::Integer(i) => {
                     inner_sizes.inc_both(i.size().into());
                     None
@@ -1304,7 +1304,7 @@ fn create_struct_member_definition(e: &ParsedContainer, containers: &[ParsedCont
                 }
                 ArrayType::Struct(c) => {
                     inner_sizes += c.sizes();
-                    Some(c)
+                    Some(c.rust_object().clone())
                 }
                 ArrayType::PackedGuid => {
                     inner_sizes
@@ -1316,8 +1316,6 @@ fn create_struct_member_definition(e: &ParsedContainer, containers: &[ParsedCont
                     None
                 }
             };
-
-            let inner_object = complex.map(|c| c.rust_object().clone());
 
             RustType::Array {
                 array: array.clone(),
