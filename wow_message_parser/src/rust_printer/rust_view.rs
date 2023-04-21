@@ -993,7 +993,6 @@ fn create_else_if_flag(
     statement: &IfStatement,
     struct_ty_name: &str,
     current_scope: &mut [RustMember],
-    parent_scope: &mut [RustMember],
 ) {
     assert_eq!(statement.conditional().equations().len(), 1);
     assert!(statement.else_members().is_empty());
@@ -1005,9 +1004,9 @@ fn create_else_if_flag(
 
     // Move enumerators into new RustMember
     let main_enum =
-        find_subject(current_scope, parent_scope, statement).get_flag_enumerator(enumerator);
-    find_subject(current_scope, parent_scope, statement).clear_flag_enumerator(enumerator);
-    find_subject(current_scope, parent_scope, statement).set_is_elseif();
+        find_subject(current_scope, statement).get_flag_enumerator(enumerator);
+    find_subject(current_scope, statement).clear_flag_enumerator(enumerator);
+    find_subject(current_scope, statement).set_is_elseif();
 
     // Push enumerators
     let mut enumerators = vec![main_enum];
@@ -1019,15 +1018,15 @@ fn create_else_if_flag(
             _ => unreachable!(),
         };
         let enumerator =
-            find_subject(current_scope, parent_scope, elseif).pop_flag_enumerator(&name);
+            find_subject(current_scope, elseif).pop_flag_enumerator(&name);
         enumerators.push(enumerator);
     }
 
-    let flag_int_ty = match find_subject(current_scope, parent_scope, statement).ty() {
+    let flag_int_ty = match find_subject(current_scope, statement).ty() {
         RustType::Flag { int_ty, .. } => *int_ty,
         _ => unreachable!(),
     };
-    let flag_ty_name = &find_subject(current_scope, parent_scope, statement).original_ty;
+    let flag_ty_name = &find_subject(current_scope, statement).original_ty;
 
     // Create new Enum RustMember
     let rm = RustMember {
@@ -1047,7 +1046,7 @@ fn create_else_if_flag(
     };
 
     // Move RustMember into
-    find_subject(current_scope, parent_scope, statement)
+    find_subject(current_scope, statement)
         .append_members_to_enumerator_equal_and_set_elseif(
             enumerator,
             &[rm],
@@ -1057,19 +1056,11 @@ fn create_else_if_flag(
 
 fn find_subject<'a>(
     current_scope: &'a mut [RustMember],
-    parent_scope: &'a mut [RustMember],
     statement: &IfStatement,
 ) -> &'a mut RustMember {
     let subject = current_scope
         .iter_mut()
-        .find(|a| statement.name() == a.name);
-    let subject = match subject {
-        None => parent_scope
-            .iter_mut()
-            .find(|a| statement.name() == a.name)
-            .unwrap(),
-        Some(s) => s,
-    };
+        .find(|a| statement.name() == a.name).unwrap();
     subject
 }
 
@@ -1081,7 +1072,6 @@ pub(crate) fn create_if_statement(
     definers: &[Definer],
     e: &ParsedContainer,
     current_scope: &mut [RustMember],
-    parent_scope: &mut [RustMember],
 ) {
     let mut reversed = false;
     let mut main_enumerators = Vec::new();
@@ -1109,7 +1099,6 @@ pub(crate) fn create_if_statement(
             containers,
             definers,
             &mut main_enumerator_members,
-            current_scope,
             &mut None,
         );
 
@@ -1127,18 +1116,17 @@ pub(crate) fn create_if_statement(
             containers,
             definers,
             &mut else_enumerator_members,
-            current_scope,
             &mut None,
         );
 
         else_enumerator_originals.push(m.clone());
     }
 
-    find_subject(current_scope, parent_scope, statement).set_main_enumerators(&main_enumerators);
+    find_subject(current_scope, statement).set_main_enumerators(&main_enumerators);
     if reversed {
         // Apply main to all except main_enumerators
         for i in &main_enumerators {
-            find_subject(current_scope, parent_scope, statement)
+            find_subject(current_scope, statement)
                 .append_members_to_enumerator_not_equal(
                     i,
                     &main_enumerator_members,
@@ -1148,7 +1136,7 @@ pub(crate) fn create_if_statement(
 
         // Apply other to main_enumerator
         for i in &main_enumerators {
-            find_subject(current_scope, parent_scope, statement)
+            find_subject(current_scope, statement)
                 .append_members_to_enumerator_equal(
                     i,
                     &else_enumerator_members,
@@ -1158,7 +1146,7 @@ pub(crate) fn create_if_statement(
     } else {
         // Apply main to main_enumerator
         for i in &main_enumerators {
-            find_subject(current_scope, parent_scope, statement)
+            find_subject(current_scope, statement)
                 .append_members_to_enumerator_equal(
                     i,
                     &main_enumerator_members,
@@ -1190,14 +1178,13 @@ pub(crate) fn create_if_statement(
                     containers,
                     definers,
                     &mut else_if_enumerator_members,
-                    current_scope,
                     &mut None,
                 );
                 else_if_originals.push(m.clone());
             }
 
             for i in &else_if_enumerators {
-                find_subject(current_scope, parent_scope, statement)
+                find_subject(current_scope, statement)
                     .append_members_to_enumerator_equal(
                         i,
                         &else_if_enumerator_members,
@@ -1207,7 +1194,7 @@ pub(crate) fn create_if_statement(
         }
 
         // Apply other to other_enumerators
-        find_subject(current_scope, parent_scope, statement)
+        find_subject(current_scope, statement)
             .append_members_to_enumerator_not_equal_range(
                 &main_enumerators,
                 &else_enumerator_members,
@@ -1216,7 +1203,7 @@ pub(crate) fn create_if_statement(
     }
 
     if statement.is_elseif_flag() {
-        create_else_if_flag(statement, struct_ty_name, current_scope, parent_scope);
+        create_else_if_flag(statement, struct_ty_name, current_scope);
     }
 }
 
@@ -1228,7 +1215,6 @@ pub(crate) fn create_struct_member(
     containers: &[ParsedContainer],
     definers: &[Definer],
     current_scope: &mut Vec<RustMember>,
-    parent_scope: &mut [RustMember],
     optional: &mut Option<RustOptional>,
 ) {
     match m {
@@ -1244,7 +1230,6 @@ pub(crate) fn create_struct_member(
                 definers,
                 e,
                 current_scope,
-                parent_scope,
             );
         }
         StructMember::OptionalStatement(option) => {
@@ -1259,7 +1244,6 @@ pub(crate) fn create_struct_member(
                     containers,
                     definers,
                     &mut members,
-                    current_scope,
                     &mut None,
                 );
             }
@@ -1432,7 +1416,6 @@ pub(crate) fn create_rust_object(
             containers,
             definers,
             &mut v,
-            &mut Vec::new(),
             &mut optional,
         );
     }
