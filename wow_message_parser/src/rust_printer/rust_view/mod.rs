@@ -311,7 +311,7 @@ fn create_struct_member_definition(
         Type::PackedGuid => RustType::PackedGuid,
         Type::FloatingPoint => RustType::Floating,
         Type::CString => RustType::CString,
-        Type::String { .. } => RustType::String,
+        Type::String => RustType::String,
         Type::Array(array) => {
             let inner_object = match array.ty() {
                 ArrayType::Struct(c) => Some(c.rust_object().clone()),
