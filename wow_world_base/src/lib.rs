@@ -61,6 +61,7 @@ pub(crate) mod extended;
 #[allow(unused)]
 pub(crate) mod inner;
 pub(crate) mod manual;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub(crate) mod util;
 
 pub use errors::*;

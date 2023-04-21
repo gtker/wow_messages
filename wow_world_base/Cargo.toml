@@ -1,6 +1,10 @@
 [package]
 name = "wow_world_base"
+description = "Base definitions and functions for World of Warcraft game servers"
 version = "0.1.0"
+keywords = ["wow", "world-of-warcraft", "game", "definitions"]
+categories = ["network-programming", "game-development", "game-engines"]
+
 edition.workspace = true
 authors.workspace = true
 repository.workspace = true
