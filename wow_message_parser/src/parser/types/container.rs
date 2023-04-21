@@ -12,7 +12,7 @@ use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::test_case::TestCase;
 use crate::parser::types::ty::Type;
 use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
-use crate::rust_printer::rust_view::RustObject;
+use crate::rust_printer::rust_view::rust_object::RustObject;
 use crate::rust_printer::{
     DefinerType, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
     WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,

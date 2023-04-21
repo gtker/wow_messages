@@ -1,4 +1,4 @@
-use crate::rust_printer::rust_view::RustOptional;
+use crate::rust_printer::rust_view::rust_optional::RustOptional;
 use crate::rust_printer::structs::print_derives;
 use crate::rust_printer::Writer;
 

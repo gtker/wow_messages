@@ -5,11 +5,13 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::ty::Type;
 use crate::parser::types::version::{MajorWorldVersion, Version};
-use crate::rust_printer::rust_view::{RustMember, RustObject, RustType};
+use crate::rust_printer::rust_view::rust_object::RustObject;
 use crate::rust_printer::{
-    ImplType, Writer, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
+    CLIENT_MESSAGE_TRAIT_NAME, ImplType, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME, Writer,
 };
 use crate::CONTAINER_SELF_SIZE_FIELD;
+use crate::rust_printer::rust_view::rust_member::RustMember;
+use crate::rust_printer::rust_view::rust_type::RustType;
 
 pub mod print_read;
 pub mod print_write;

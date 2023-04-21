@@ -2,11 +2,12 @@ use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::MemberTags;
-use crate::rust_printer::rust_view::{RustMember, RustType};
+use crate::rust_printer::rust_view::rust_member::RustMember;
 use crate::rust_printer::{
-    print_docc_description_and_comment, print_member_docc_description_and_comment,
-    print_serde_derive, Writer, CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME,
+    CLIENT_MESSAGE_TRAIT_NAME, print_docc_description_and_comment,
+    print_member_docc_description_and_comment, print_serde_derive, SERVER_MESSAGE_TRAIT_NAME, Writer,
 };
+use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::wowm_printer::get_struct_wowm_definition;
 
 pub(crate) mod print_common_impls;

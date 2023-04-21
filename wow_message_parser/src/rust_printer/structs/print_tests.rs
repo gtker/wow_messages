@@ -6,13 +6,15 @@ use crate::parser::types::test_case::{TestCase, TestCaseMember, TestValue};
 use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::parser::utility::parse_value;
 use crate::rust_printer::opcodes::get_enumerator_name;
-use crate::rust_printer::rust_view::{RustEnumerator, RustMember, RustType};
+use crate::rust_printer::rust_view::rust_member::RustMember;
 use crate::rust_printer::update_mask::vanilla_fields::FIELDS;
 use crate::rust_printer::{
-    get_new_flag_type_name, ByteInnerTy, ByteType, ImplType, UfType, UpdateMaskType, Writer,
-    CLIENT_MESSAGE_TRAIT_NAME, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
-    SERVER_MESSAGE_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
+    ByteInnerTy, ByteType, CLIENT_MESSAGE_TRAIT_NAME, get_new_flag_type_name, ImplType, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
+    SERVER_MESSAGE_TRAIT_NAME, UfType, UpdateMaskType,
+    WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME, Writer,
 };
+use crate::rust_printer::rust_view::rust_enumerator::RustEnumerator;
+use crate::rust_printer::rust_view::rust_type::RustType;
 
 pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
     if e.tests(o).is_empty() {
