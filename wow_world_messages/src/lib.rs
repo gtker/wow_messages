@@ -42,6 +42,6 @@ pub use world::*;
 
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub use wow_world_base::shared::datetime_vanilla_tbc_wrath::*;
-pub use helper::guid::Guid;
+pub use wow_world_base::shared::guid_vanilla_tbc_wrath::Guid;
 
 pub const DEFAULT_PORT: u16 = 8085;

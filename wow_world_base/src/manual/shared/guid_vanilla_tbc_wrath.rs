@@ -28,7 +28,7 @@ impl Guid {
         self.guid
     }
 
-    pub(crate) fn write_packed_guid_into_vec(
+    pub fn write_packed_guid_into_vec(
         &self,
         mut v: impl std::io::Write,
     ) -> Result<(), std::io::Error> {
@@ -50,13 +50,13 @@ impl Guid {
         v.write_all(&placeholder[0..index])
     }
 
-    pub(crate) fn read(r: &mut impl Read) -> Result<Self, std::io::Error> {
+    pub fn read(r: &mut impl Read) -> Result<Self, std::io::Error> {
         Ok(Self {
             guid: read_u64_le(r)?,
         })
     }
 
-    pub(crate) const fn size(&self) -> usize {
+    pub const fn size(&self) -> usize {
         let mut amount_of_bytes = 1;
 
         let mut i = 0;
@@ -71,7 +71,7 @@ impl Guid {
         amount_of_bytes
     }
 
-    pub(crate) fn read_packed(r: &mut impl Read) -> Result<Self, std::io::Error> {
+    pub fn read_packed(r: &mut impl Read) -> Result<Self, std::io::Error> {
         let bit_pattern = read_u8_le(r)?;
         let mut guid: u64 = 0;
 

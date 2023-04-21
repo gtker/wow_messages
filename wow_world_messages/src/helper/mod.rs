@@ -1,5 +1,3 @@
-pub(crate) mod guid;
-
 #[cfg(feature = "vanilla")]
 pub(crate) mod vanilla;
 
