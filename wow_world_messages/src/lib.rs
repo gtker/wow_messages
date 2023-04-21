@@ -40,8 +40,8 @@ pub use traits::*;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub use world::*;
 
-pub use helper::datetime::DateTime;
-pub use helper::datetime::Weekday;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub use wow_world_base::shared::datetime_vanilla_tbc_wrath::*;
 pub use helper::guid::Guid;
 
 pub const DEFAULT_PORT: u16 = 8085;

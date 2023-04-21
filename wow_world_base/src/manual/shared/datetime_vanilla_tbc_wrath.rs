@@ -1,5 +1,5 @@
 use std::convert::TryFrom;
-use wow_world_base::EnumError;
+use crate::EnumError;
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Default, Hash, Copy, Clone)]
 pub struct DateTime {
@@ -34,7 +34,7 @@ impl DateTime {
         Self { inner }
     }
 
-    pub(crate) const fn as_int(&self) -> u32 {
+    pub const fn as_int(&self) -> u32 {
         self.inner
     }
 
