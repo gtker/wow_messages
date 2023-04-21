@@ -24,10 +24,12 @@ impl CMD_XFER_RESUME {
     }
 }
 
+impl crate::private::Sealed for CMD_XFER_RESUME {}
+
 impl ClientMessage for CMD_XFER_RESUME {
     const OPCODE: u8 = 0x33;
 
-    fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read<R: std::io::Read, I: crate::private::Sealed>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // offset: u64
         let offset = crate::util::read_u64_le(&mut r)?;
 
@@ -44,7 +46,7 @@ impl ClientMessage for CMD_XFER_RESUME {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_read<'async_trait, R>(
+    fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
@@ -83,7 +85,7 @@ impl ClientMessage for CMD_XFER_RESUME {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_read<'async_trait, R>(
+    fn astd_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>

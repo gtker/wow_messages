@@ -40,10 +40,12 @@ impl CMD_SURVEY_RESULT {
     }
 }
 
+impl crate::private::Sealed for CMD_SURVEY_RESULT {}
+
 impl ClientMessage for CMD_SURVEY_RESULT {
     const OPCODE: u8 = 0x04;
 
-    fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read<R: std::io::Read, I: crate::private::Sealed>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // survey_id: u32
         let survey_id = crate::util::read_u32_le(&mut r)?;
 
@@ -77,7 +79,7 @@ impl ClientMessage for CMD_SURVEY_RESULT {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_read<'async_trait, R>(
+    fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
@@ -133,7 +135,7 @@ impl ClientMessage for CMD_SURVEY_RESULT {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_read<'async_trait, R>(
+    fn astd_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>

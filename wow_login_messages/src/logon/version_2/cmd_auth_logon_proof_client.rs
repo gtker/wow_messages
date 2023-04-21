@@ -55,10 +55,12 @@ impl CMD_AUTH_LOGON_PROOF_Client {
     }
 }
 
+impl crate::private::Sealed for CMD_AUTH_LOGON_PROOF_Client {}
+
 impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
     const OPCODE: u8 = 0x01;
 
-    fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read<R: std::io::Read, I: crate::private::Sealed>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         // client_public_key: u8[32]
         let client_public_key = {
             let mut client_public_key = [0_u8; 32];
@@ -108,7 +110,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_read<'async_trait, R>(
+    fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
@@ -180,7 +182,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_read<'async_trait, R>(
+    fn astd_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>

@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: Enums will now default to the first enumerator without any fields. If all enumerators have fields the first one will be used.
 * BREAKING: Write functions have been changed from taking a `&mut impl Write` to just a `Write` [in accordance with the library guidelines](https://rust-lang.github.io/api-guidelines/interoperability.html#c-rw-value).
 * BREAKING: Read functions have been changed from taking a `&mut impl Read` to just `Read` [in accordance with the library guidelines](https://rust-lang.github.io/api-guidelines/interoperability.html#c-rw-value).
+* BREAKING: `ServerMessage` and `ClientMessage` traits have been sealed to prevent downstream implementation. Read methods have also been sealed.
 
 ## [0.2.0] - 2022-10-31
 

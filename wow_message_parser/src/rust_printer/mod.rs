@@ -189,7 +189,7 @@ impl Writer {
     fn print_read_decl(&mut self, it: ImplType) {
         if !it.is_async() {
             self.open_curly(format!(
-                "fn {prefix}read<R: {read}>(mut r: R) -> std::result::Result<Self, {error}>",
+                "fn {prefix}read<R: {read}, I: crate::private::Sealed>(mut r: R) -> std::result::Result<Self, {error}>",
                 prefix = it.prefix(),
                 read = it.read(),
                 error = PARSE_ERROR,
@@ -199,7 +199,7 @@ impl Writer {
         }
 
         self.wln(it.cfg());
-        self.wln(format!("fn {}read<'async_trait, R>(", it.prefix()));
+        self.wln(format!("fn {}read<'async_trait, R, I: crate::private::Sealed>(", it.prefix()));
 
         self.inc_indent();
         self.wln("mut r: R,");

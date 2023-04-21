@@ -721,6 +721,9 @@ pub(crate) fn impl_read_and_writable_login(
 ) {
     s.write_into_vec(&type_name, write_function, "pub(crate)");
 
+    s.wln(format!("impl crate::private::Sealed for {} {{}}", type_name.as_ref()));
+    s.newline();
+
     s.open_curly(format!(
         "impl {} for {}",
         trait_to_impl.as_ref(),

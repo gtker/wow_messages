@@ -19,10 +19,12 @@ impl CMD_XFER_INITIATE {
     }
 }
 
+impl crate::private::Sealed for CMD_XFER_INITIATE {}
+
 impl ServerMessage for CMD_XFER_INITIATE {
     const OPCODE: u8 = 0x30;
 
-    fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read<R: std::io::Read, I: crate::private::Sealed>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
         Ok(Self {
         })
     }
@@ -35,7 +37,7 @@ impl ServerMessage for CMD_XFER_INITIATE {
     }
 
     #[cfg(feature = "tokio")]
-    fn tokio_read<'async_trait, R>(
+    fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
@@ -70,7 +72,7 @@ impl ServerMessage for CMD_XFER_INITIATE {
     }
 
     #[cfg(feature = "async-std")]
-    fn astd_read<'async_trait, R>(
+    fn astd_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>

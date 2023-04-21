@@ -546,7 +546,7 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
                         ));
                     } else {
                         s.wln(format!(
-                            "{opcode:#04X} => Ok(Self::{enum_name}({name}::{prefix}read(r){postfix}?)),",
+                            "{opcode:#04X} => Ok(Self::{enum_name}({name}::{prefix}read::<R, crate::private::Internal>(r){postfix}?)),",
                             name = e.name(),
                             enum_name = get_enumerator_name(e.name()),
                             opcode = opcode,
