@@ -179,7 +179,7 @@ impl ParsedType {
                 let world_version = e.tags().main_versions().next().unwrap().as_major_world();
                 sizes.inc(
                     UPDATE_MASK_MIN_SIZE as usize,
-                    update_mask_max(world_version) as usize,
+                    update_mask_max(world_version),
                 )
             }
             ParsedType::Identifier { s, upcast } => {
