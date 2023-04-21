@@ -143,9 +143,9 @@ impl Objects {
     pub(crate) fn all_objects(&self) -> impl Iterator<Item = Object> + '_ {
         self.enums
             .iter()
-            .map(|a| Object::Enum(a.clone()))
-            .chain(self.flags.iter().map(|a| Object::Flag(a.clone())))
-            .chain(self.all_containers().map(|a| Object::Container(a.clone())))
+            .map(|a| Object::Enum(a))
+            .chain(self.flags.iter().map(|a| Object::Flag(a)))
+            .chain(self.all_containers().map(|a| Object::Container(a)))
     }
 
     pub(crate) fn all_containers(&self) -> impl Iterator<Item = &Container> {
@@ -197,13 +197,13 @@ impl Objects {
 
 #[derive(Debug, Clone, Ord, PartialOrd, PartialEq, Eq)]
 #[allow(clippy::large_enum_variant)]
-pub(crate) enum Object {
-    Container(Container),
-    Enum(Definer),
-    Flag(Definer),
+pub(crate) enum Object<'a> {
+    Container(&'a Container),
+    Enum(&'a Definer),
+    Flag(&'a Definer),
 }
 
-impl Object {
+impl Object<'_> {
     pub(crate) fn tags(&self) -> &ObjectTags {
         match self {
             Object::Container(e) => e.tags(),
