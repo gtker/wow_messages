@@ -1,6 +1,7 @@
 use crate::parser::types::struct_member::StructMemberDefinition;
 use crate::parser::types::IntegerType;
-use crate::Container;
+use crate::{Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
+use crate::parser::types::sizes::{GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, Sizes};
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) enum ArrayType {
@@ -30,6 +31,30 @@ impl ArrayType {
             ArrayType::Guid => "Guid".to_string(),
             ArrayType::PackedGuid => "PackedGuid".to_string(),
         }
+    }
+
+    pub(crate) fn sizes(&self) -> Sizes {
+        let mut s = Sizes::new();
+
+        match self {
+            ArrayType::Integer(i) => {
+                s.inc_both(i.size().into());
+            }
+            ArrayType::Struct(c) => {
+                s += c.sizes();
+            }
+            ArrayType::CString => {
+                s.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED);
+            }
+            ArrayType::Guid => {
+                s.inc_both(GUID_SIZE.into());
+            }
+            ArrayType::PackedGuid => {
+                s.inc(PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into());
+            }
+        }
+
+        s
     }
 }
 

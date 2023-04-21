@@ -3,7 +3,7 @@ use crate::parser::types::definer::{Definer, DefinerValue};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_struct_member::ParsedStructMember;
-use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
+use crate::parser::types::sizes::{Sizes, };
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::ty::Type;
@@ -12,7 +12,6 @@ use crate::rust_printer::{
     field_name_to_rust_name, get_new_flag_type_name, get_new_type_name, get_optional_type_name,
     DefinerType,
 };
-use crate::{CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
 use std::fmt::{Display, Formatter};
 
 #[derive(Debug, Clone)]
@@ -414,7 +413,7 @@ pub(crate) enum RustType {
 impl RustType {
     pub(crate) fn str(&self) -> String {
         match self {
-            RustType::Array {array, ..} => array.str(),
+            RustType::Array { array, .. } => array.str(),
             RustType::Flag { ty_name, .. } | RustType::Enum { ty_name, .. } => ty_name.clone(),
             RustType::Struct { ty_name, .. } => ty_name.clone(),
             _ => self.to_type().str(),
@@ -1292,34 +1291,19 @@ fn create_struct_member_definition(e: &ParsedContainer, containers: &[ParsedCont
         Type::CString => RustType::CString,
         Type::String { .. } => RustType::String,
         Type::Array(array) => {
-            let mut inner_sizes = Sizes::new();
             let inner_object = match array.ty() {
-                ArrayType::Integer(i) => {
-                    inner_sizes.inc_both(i.size().into());
-                    None
-                }
-                ArrayType::Guid => {
-                    inner_sizes.inc_both(GUID_SIZE.into());
-                    None
-                }
                 ArrayType::Struct(c) => {
-                    inner_sizes += c.sizes();
                     Some(c.rust_object().clone())
                 }
-                ArrayType::PackedGuid => {
-                    inner_sizes
-                        .inc(PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into());
-                    None
-                }
-                ArrayType::CString => {
-                    inner_sizes.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED);
-                    None
-                }
+                ArrayType::Integer(_) |
+                ArrayType::Guid |
+                ArrayType::PackedGuid |
+                ArrayType::CString => None,
             };
 
             RustType::Array {
                 array: array.clone(),
-                inner_sizes,
+                inner_sizes: array.ty().sizes(),
                 inner_object,
             }
         }
