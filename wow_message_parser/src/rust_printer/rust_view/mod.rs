@@ -251,7 +251,7 @@ pub(crate) fn create_struct_member(
 ) {
     match m {
         StructMember::Definition(d) => {
-            create_struct_member_definition(e, containers, definers, current_scope, d);
+            current_scope.push(create_struct_member_definition(e, containers, definers, d));
         }
         StructMember::IfStatement(statement) => {
             create_if_statement(
@@ -293,9 +293,8 @@ fn create_struct_member_definition(
     e: &ParsedContainer,
     containers: &[ParsedContainer],
     definers: &[Definer],
-    current_scope: &mut Vec<RustMember>,
     d: &StructMemberDefinition,
-) {
+) -> RustMember {
     let mut in_rust_type = true;
     let ty = match d.ty() {
         Type::Integer(i) => {
@@ -425,13 +424,7 @@ fn create_struct_member_definition(
         }
     }
 
-    current_scope.push(RustMember::new(
-        name,
-        ty,
-        d.ty().str(),
-        in_rust_type,
-        d.tags().clone(),
-    ));
+    RustMember::new(name, ty, d.ty().str(), in_rust_type, d.tags().clone())
 }
 
 pub(crate) fn create_rust_object(
