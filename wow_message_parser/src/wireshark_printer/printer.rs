@@ -186,19 +186,33 @@ fn print_if_statement(
 
     s.w("if (");
 
-    for (i, eq) in statement.conditional().equations().iter().enumerate() {
-        let (op, value) = match eq {
-            Equation::Equals { value } => ("==", value),
-            Equation::NotEquals { value } => ("!=", value),
-            Equation::BitwiseAnd { value } => ("&", value),
-        };
-        let enumerator = enumerator_name(&statement.original_ty().rust_str(), value);
-        if i != 0 {
-            s.newline();
-            s.w(" || ");
-        }
+    match statement.conditional().equation() {
+        Equation::Equals { values: value } => {
+            for (i, v) in value.iter().enumerate() {
+                let enumerator = enumerator_name(&statement.original_ty().rust_str(), v);
+                if i != 0 {
+                    s.newline();
+                    s.w(" || ");
+                }
 
-        s.w_no_indent(format!("{name} {op} {enumerator}"));
+                s.w_no_indent(format!("{name} == {enumerator}"));
+            }
+        }
+        Equation::BitwiseAnd { values: value } => {
+            for (i, v) in value.iter().enumerate() {
+                let enumerator = enumerator_name(&statement.original_ty().rust_str(), v);
+                if i != 0 {
+                    s.newline();
+                    s.w(" || ");
+                }
+
+                s.w_no_indent(format!("{name} & {enumerator}"));
+            }
+        }
+        Equation::NotEquals { value } => {
+            let enumerator = enumerator_name(&statement.original_ty().rust_str(), value);
+            s.w_no_indent(format!("{name} != {enumerator}"));
+        }
     }
 
     s.wln_no_indent(") {");
@@ -213,20 +227,32 @@ fn print_if_statement(
     for elseif in statement.else_ifs() {
         s.w("else if (");
 
-        for (i, eq) in elseif.conditional().equations().iter().enumerate() {
-            let (op, value) = match eq {
-                Equation::Equals { value } => ("==", value),
-                Equation::NotEquals { value } => ("!=", value),
-                Equation::BitwiseAnd { value } => ("&", value),
-            };
+        match elseif.conditional().equation() {
+            Equation::Equals { values: value } => {
+                for (i, v) in value.iter().enumerate() {
+                    let enumerator = enumerator_name(&statement.original_ty().rust_str(), v);
+                    if i != 0 {
+                        s.newline();
+                        s.w(" || ");
+                    }
 
-            let enumerator = enumerator_name(&elseif.original_ty().rust_str(), value);
-            if i != 0 {
-                s.newline();
-                s.w(" || ");
+                    s.w_no_indent(format!("{name} == {enumerator}"));
+                }
             }
+            Equation::BitwiseAnd { values: value } => {
+                for (i, v) in value.iter().enumerate() {
+                    let enumerator = enumerator_name(&statement.original_ty().rust_str(), v);
+                    if i != 0 {
+                        s.newline();
+                        s.w(" || ");
+                    }
 
-            s.w_no_indent(format!("{name} {op} {enumerator}"));
+                    s.w_no_indent(format!("{name} & {enumerator}"));
+                }
+            }
+            Equation::NotEquals { value } => {
+                s.w_no_indent(format!("{name} != {value}"));
+            }
         }
 
         s.wln_no_indent(") {");

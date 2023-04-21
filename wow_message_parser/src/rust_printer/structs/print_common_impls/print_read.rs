@@ -6,12 +6,12 @@ use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
 use crate::rust_printer::rust_view::rust_definer::RustDefiner;
+use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::rust_printer::structs::print_common_impls::{
     print_rust_members_sizes, print_size_of_ty_rust_view,
 };
-use crate::rust_printer::{DefinerType, get_new_flag_type_name, get_new_type_name};
+use crate::rust_printer::{get_new_flag_type_name, get_new_type_name, DefinerType};
 use crate::rust_printer::{get_optional_type_name, Writer};
-use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::UTILITY_PATH;
 
 fn print_read_array(
@@ -510,9 +510,12 @@ fn print_read_if_statement_enum(
         name = statement.name()
     ));
 
-    let enumerator_name = match &statement.conditional().equations()[0] {
-        Equation::Equals { value, .. } | Equation::NotEquals { value, .. } => value,
-        _ => unreachable!("enum printer is bitwise and"),
+    let enumerator_name = match statement.conditional().equation() {
+        Equation::Equals { values: value } => &value[0],
+        Equation::NotEquals { value } => value,
+        Equation::BitwiseAnd { .. } => {
+            unreachable!("enum printer is bitwise and")
+        }
     };
 
     let rd = e

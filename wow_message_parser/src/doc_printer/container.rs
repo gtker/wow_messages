@@ -312,13 +312,13 @@ fn print_container_example_member(
 
             let statement_set = |statement: &IfStatement, enum_value: isize| {
                 let mut set = false;
-                for eq in statement.conditional().equations() {
-                    match eq {
-                        Equation::Equals { value } => {
+                match statement.conditional().equation() {
+                    Equation::Equals { values: value } => {
+                        for v in value {
                             let eq_value = definer_ty
                                 .fields()
                                 .iter()
-                                .find(|a| a.name() == value)
+                                .find(|a| v == a.name())
                                 .unwrap()
                                 .value()
                                 .int();
@@ -327,11 +327,13 @@ fn print_container_example_member(
                                 set = true;
                             }
                         }
-                        Equation::BitwiseAnd { value } => {
+                    }
+                    Equation::BitwiseAnd { values: value } => {
+                        for v in value {
                             let eq_value = definer_ty
                                 .fields()
                                 .iter()
-                                .find(|a| a.name() == value)
+                                .find(|a| v == a.name())
                                 .unwrap()
                                 .value()
                                 .int();
@@ -342,7 +344,9 @@ fn print_container_example_member(
                                 set = true;
                             }
                         }
-                        Equation::NotEquals { .. } => unimplemented!("examples for not equals"),
+                    }
+                    Equation::NotEquals { .. } => {
+                        unimplemented!("examples for not equals")
                     }
                 }
                 set
@@ -472,16 +476,30 @@ fn print_container_if_statement(
     o: &Objects,
 ) {
     s.w(format!("If {variable} ", variable = statement.name()));
-    for (i, e) in statement.conditional().equations().iter().enumerate() {
-        if i != 0 {
-            s.wln(" **or** ");
+    match statement.conditional().equation() {
+        Equation::NotEquals { value } => {
+            s.w(format!("is not equal to `{value}`"));
         }
-        s.w(&(match e {
-            Equation::Equals { value } => format!("is equal to `{value}`"),
-            Equation::NotEquals { value } => format!("is not equal to `{value}`"),
-            Equation::BitwiseAnd { value } => format!("contains `{value}`"),
-        }))
+        Equation::Equals { values: value } => {
+            for (i, v) in value.iter().enumerate() {
+                if i != 0 {
+                    s.wln(" **or** ");
+                }
+
+                s.w(format!("is equal to `{v}`"));
+            }
+        }
+        Equation::BitwiseAnd { values: value } => {
+            for (i, v) in value.iter().enumerate() {
+                if i != 0 {
+                    s.wln(" **or** ");
+                }
+
+                s.w(format!("contains `{v}`"));
+            }
+        }
     }
+
     s.wln(":");
     s.newline();
 

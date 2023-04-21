@@ -392,9 +392,12 @@ fn print_write_if_enum_statement(
         },
     ));
 
-    let enumerator_name = match &statement.conditional().equations()[0] {
-        Equation::Equals { value, .. } | Equation::NotEquals { value, .. } => value,
-        _ => unreachable!("enum branch has bitwise and"),
+    let enumerator_name = match statement.conditional().equation() {
+        Equation::Equals { values: value } => &value[0],
+        Equation::NotEquals { value } => value,
+        Equation::BitwiseAnd { .. } => {
+            unreachable!("enum printer is bitwise and")
+        }
     };
 
     let rd = e

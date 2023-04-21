@@ -51,15 +51,15 @@ impl IfStatement {
     }
 
     pub(crate) fn is_not_enum(&self) -> bool {
-        matches!(self.conditional.equations[0], Equation::NotEquals { .. })
+        matches!(self.conditional().equation(), Equation::NotEquals { .. })
     }
 
     pub(crate) fn flag_get_enumerator(&self) -> String {
-        assert_eq!(self.conditional().equations.len(), 1);
-
-        match &self.conditional().equations[0] {
-            Equation::BitwiseAnd { value } => value.to_string(),
-            _ => unreachable!("flag_get_enumerator was not flag"),
+        match self.conditional().equation() {
+            Equation::BitwiseAnd { values: value } => value[0].clone(),
+            Equation::Equals { .. } | Equation::NotEquals { .. } => {
+                unreachable!("flag_get_enumerator was not flag")
+            }
         }
     }
 
@@ -68,9 +68,9 @@ impl IfStatement {
     }
 
     pub(crate) fn is_elseif_flag(&self) -> bool {
-        match self.conditional.equations[0] {
+        match self.conditional().equation() {
             Equation::BitwiseAnd { .. } => !self.else_ifs().is_empty(),
-            _ => false,
+            Equation::Equals { .. } | Equation::NotEquals { .. } => false,
         }
     }
 
@@ -171,7 +171,7 @@ impl From<&str> for Operator {
 #[derive(Debug, Clone)]
 pub(crate) struct Conditional {
     variable_name: String,
-    equations: Vec<Equation>,
+    equation: Equation,
 }
 
 impl Conditional {
@@ -179,52 +179,72 @@ impl Conditional {
         &self.variable_name
     }
 
-    pub(crate) fn equations(&self) -> &[Equation] {
-        &self.equations
+    pub(crate) fn equation(&self) -> &Equation {
+        &self.equation
     }
 
     pub(crate) fn definer_type(&self) -> DefinerType {
-        match self.equations[0] {
+        match self.equation() {
             Equation::Equals { .. } | Equation::NotEquals { .. } => DefinerType::Enum,
             Equation::BitwiseAnd { .. } => DefinerType::Flag,
         }
     }
 
     pub(crate) fn new(conditions: &[Condition], ty_name: &str, file_info: &FileInfo) -> Self {
-        let variable_name = conditions[0].value.to_string();
+        let variable = &conditions[0];
+        let variable_name = variable.value.clone();
 
-        let mut equations = Vec::new();
-        for c in conditions {
-            if c.value != variable_name {
-                non_matching_if_statement_variables(ty_name, &variable_name, &c.value, file_info);
+        let value = conditions
+            .iter()
+            .map(|a| {
+                if a.value != variable_name {
+                    non_matching_if_statement_variables(
+                        ty_name,
+                        &variable_name,
+                        &variable.value,
+                        file_info,
+                    );
+                }
+
+                a.equals_value.clone()
+            })
+            .collect();
+
+        let equation = match variable.operator {
+            Operator::Equals => {
+                assert!(conditions
+                    .iter()
+                    .all(|a| matches!(a.operator, Operator::Equals)));
+
+                Equation::Equals { values: value }
             }
+            Operator::BitwiseAnd => {
+                assert!(conditions
+                    .iter()
+                    .all(|a| matches!(a.operator, Operator::BitwiseAnd)));
 
-            let v = match c.operator {
-                Operator::Equals => Equation::Equals {
-                    value: c.equals_value.to_owned(),
-                },
-                Operator::BitwiseAnd => Equation::BitwiseAnd {
-                    value: c.equals_value.to_owned(),
-                },
-                Operator::NotEquals => Equation::NotEquals {
-                    value: c.equals_value.to_owned(),
-                },
-            };
-            equations.push(v);
-        }
+                Equation::BitwiseAnd { values: value }
+            }
+            Operator::NotEquals => {
+                assert_eq!(conditions.len(), 1);
+                Equation::NotEquals {
+                    value: variable.equals_value.clone(),
+                }
+            }
+        };
 
         Self {
             variable_name,
-            equations,
+            equation,
         }
     }
 }
 
 #[derive(Debug, Clone)]
 pub(crate) enum Equation {
-    Equals { value: String },
+    Equals { values: Vec<String> },
     NotEquals { value: String },
-    BitwiseAnd { value: String },
+    BitwiseAnd { values: Vec<String> },
 }
 
 #[derive(Debug, Clone)]

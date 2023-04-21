@@ -176,19 +176,27 @@ fn parsed_member_to_member(
             let member = c.get_field_ty(s.conditional.variable_name()).str();
             let definer = get_definer(definers, &member, c.tags()).unwrap();
 
-            for eq in s.conditional.equations() {
-                match eq {
-                    Equation::Equals { value }
-                    | Equation::NotEquals { value }
-                    | Equation::BitwiseAnd { value } => {
-                        if definer.get_field_with_name(value).is_none() {
+            match s.get_conditional().equation() {
+                Equation::Equals { values: value } | Equation::BitwiseAnd { values: value } => {
+                    for v in value {
+                        if definer.get_field_with_name(v).is_none() {
                             variable_in_if_not_found(
                                 s.conditional.variable_name(),
-                                value,
+                                v,
                                 &c.file_info,
                                 definer.name(),
                             );
                         }
+                    }
+                }
+                Equation::NotEquals { value } => {
+                    if definer.get_field_with_name(value).is_none() {
+                        variable_in_if_not_found(
+                            s.conditional.variable_name(),
+                            value,
+                            &c.file_info,
+                            definer.name(),
+                        );
                     }
                 }
             }
@@ -356,36 +364,28 @@ pub(crate) fn check_if_statement_operators(e: &ParsedContainer, definers: &[Defi
 
                 let definer = get_definer(definers, ty, e.tags()).unwrap();
                 match definer.definer_ty() {
-                    DefinerType::Enum => {
-                        for c in statement.get_conditional().equations() {
-                            match c {
-                                Equation::Equals { .. } | Equation::NotEquals { .. } => {}
-                                Equation::BitwiseAnd { .. } => {
-                                    enum_has_bitwise_and(
-                                        e.name(),
-                                        statement.name(),
-                                        definer.name(),
-                                        &e.file_info,
-                                    );
-                                }
-                            }
+                    DefinerType::Enum => match statement.get_conditional().equation() {
+                        Equation::Equals { .. } | Equation::NotEquals { .. } => {}
+                        Equation::BitwiseAnd { .. } => {
+                            enum_has_bitwise_and(
+                                e.name(),
+                                statement.name(),
+                                definer.name(),
+                                &e.file_info,
+                            );
                         }
-                    }
-                    DefinerType::Flag => {
-                        for c in statement.get_conditional().equations() {
-                            match c {
-                                Equation::Equals { .. } | Equation::NotEquals { .. } => {
-                                    flag_used_as_equals_or_not_equals(
-                                        e.name(),
-                                        statement.name(),
-                                        definer.name(),
-                                        &e.file_info,
-                                    );
-                                }
-                                Equation::BitwiseAnd { .. } => {}
-                            }
+                    },
+                    DefinerType::Flag => match statement.get_conditional().equation() {
+                        Equation::Equals { .. } | Equation::NotEquals { .. } => {
+                            flag_used_as_equals_or_not_equals(
+                                e.name(),
+                                statement.name(),
+                                definer.name(),
+                                &e.file_info,
+                            );
                         }
-                    }
+                        Equation::BitwiseAnd { .. } => {}
+                    },
                 }
 
                 for m in statement.all_members() {

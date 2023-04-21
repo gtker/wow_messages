@@ -99,8 +99,7 @@ pub(crate) fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String 
         name = e.name(),
         opcode = match e.container_type() {
             ContainerType::Struct => "".to_string(),
-            ContainerType::CLogin(o) | ContainerType::SLogin(o) =>
-                format!(" = 0x{o:0>2X}"),
+            ContainerType::CLogin(o) | ContainerType::SLogin(o) => format!(" = 0x{o:0>2X}"),
             ContainerType::Msg(o) | ContainerType::CMsg(o) | ContainerType::SMsg(o) =>
                 format!(" = 0x{o:0>4X}"),
         }
@@ -196,30 +195,43 @@ fn print_members(s: &mut WowmWriter, field: &StructMember) {
 }
 
 fn print_wowm_if_statement(s: &mut WowmWriter, statement: &IfStatement, condition: &str) {
-    let equations = statement.conditional().equations();
-    for (i, eq) in equations.iter().enumerate() {
-        let name = statement.conditional().variable_name();
-        let (op, cond) = match eq {
-            Equation::Equals { value } => ("==", value),
-            Equation::NotEquals { value } => ("!=", value),
-            Equation::BitwiseAnd { value } => ("&", value),
-        };
+    let name = statement.name();
+    match statement.conditional().equation() {
+        Equation::Equals { values: value } => {
+            for (i, v) in value.iter().enumerate() {
+                if i == 0 {
+                    s.w(format!("{condition} ({name} == {v}"));
+                    s.inc();
+                } else {
+                    s.w(format!("|| {name} == {v}"));
+                }
 
-        if i == 0 {
-            s.w(format!(
-                "{condition} ({name} {op} {cond}"
-            ));
-            s.inc();
-        } else {
-            s.w(format!(
-                "|| {name} {op} {cond}"
-            ));
+                if i == value.len() - 1 {
+                    s.wln_no_indent(") {");
+                } else {
+                    s.wln_no_indent("");
+                }
+            }
         }
+        Equation::BitwiseAnd { values: value } => {
+            for (i, v) in value.iter().enumerate() {
+                if i == 0 {
+                    s.w(format!("{condition} ({name} & {v}"));
+                    s.inc();
+                } else {
+                    s.w(format!("|| {name} & {v}"));
+                }
 
-        if i == equations.len() - 1 {
-            s.wln_no_indent(") {");
-        } else {
-            s.wln_no_indent("");
+                if i == value.len() - 1 {
+                    s.wln_no_indent(") {");
+                } else {
+                    s.wln_no_indent("");
+                }
+            }
+        }
+        Equation::NotEquals { value } => {
+            s.wln(format!("{condition} ({name} != {value}) {{"));
+            s.inc();
         }
     }
 }

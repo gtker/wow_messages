@@ -120,22 +120,22 @@ impl From<&StructMember> for IrStructMember {
 #[serde(tag = "type", content = "content")]
 #[serde(rename_all = "snake_case")]
 pub(crate) enum IrEquation {
-    Equals { value: String },
+    Equals { value: Vec<String> },
     NotEquals { value: String },
-    BitwiseAnd { value: String },
+    BitwiseAnd { value: Vec<String> },
 }
 
 impl From<&Equation> for IrEquation {
     fn from(v: &Equation) -> Self {
         match v {
-            Equation::Equals { value } => IrEquation::Equals {
-                value: value.to_string(),
+            Equation::Equals { values: value } => IrEquation::Equals {
+                value: value.clone(),
             },
             Equation::NotEquals { value } => IrEquation::NotEquals {
-                value: value.to_string(),
+                value: value.clone(),
             },
-            Equation::BitwiseAnd { value } => IrEquation::BitwiseAnd {
-                value: value.to_string(),
+            Equation::BitwiseAnd { values: value } => IrEquation::BitwiseAnd {
+                value: value.clone(),
             },
         }
     }
@@ -144,12 +144,12 @@ impl From<&Equation> for IrEquation {
 #[derive(Debug, Serialize)]
 pub(crate) struct IrConditional {
     variable_name: String,
-    equations: Vec<IrEquation>,
+    equations: IrEquation,
 }
 
 impl From<Conditional> for IrConditional {
     fn from(v: Conditional) -> Self {
-        let equations = v.equations().iter().map(|a| a.into()).collect();
+        let equations = v.equation().into();
 
         Self {
             variable_name: v.variable_name().to_string(),

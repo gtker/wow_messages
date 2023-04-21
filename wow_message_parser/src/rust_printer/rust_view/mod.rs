@@ -28,12 +28,17 @@ fn create_else_if_flag(
     struct_ty_name: &str,
     current_scope: &mut [RustMember],
 ) {
-    assert_eq!(statement.conditional().equations().len(), 1);
+    match statement.conditional().equation() {
+        Equation::NotEquals { .. } => {}
+        Equation::BitwiseAnd { values: value } | Equation::Equals { values: value } => {
+            assert_eq!(value.len(), 1)
+        }
+    }
     assert!(statement.else_members().is_empty());
 
-    let enumerator = match &statement.conditional().equations()[0] {
-        Equation::BitwiseAnd { value } => value.as_str(),
-        _ => unreachable!(),
+    let enumerator = match statement.conditional().equation() {
+        Equation::BitwiseAnd { values: value } => &value[0],
+        Equation::Equals { .. } | Equation::NotEquals { .. } => unreachable!(),
     };
 
     // Move enumerators into new RustMember
@@ -46,9 +51,9 @@ fn create_else_if_flag(
 
     // Append elseifs
     for elseif in statement.else_ifs() {
-        let name = match &elseif.conditional().equations()[0] {
-            Equation::BitwiseAnd { value } => value.to_string(),
-            _ => unreachable!(),
+        let name = match elseif.conditional().equation() {
+            Equation::BitwiseAnd { values: value } => &value[0],
+            Equation::Equals { .. } | Equation::NotEquals { .. } => unreachable!(),
         };
         let enumerator = find_subject(current_scope, elseif).pop_flag_enumerator(&name);
         enumerators.push(enumerator);
@@ -108,15 +113,15 @@ pub(crate) fn create_if_statement(
     let mut reversed = false;
     let mut main_enumerators = Vec::new();
 
-    for i in statement.conditional().equations() {
-        match i {
-            Equation::BitwiseAnd { value } | Equation::Equals { value } => {
-                main_enumerators.push(value)
+    match statement.conditional().equation() {
+        Equation::Equals { values: value } | Equation::BitwiseAnd { values: value } => {
+            for v in value {
+                main_enumerators.push(v);
             }
-            Equation::NotEquals { value } => {
-                main_enumerators.push(value);
-                reversed = true;
-            }
+        }
+        Equation::NotEquals { value } => {
+            main_enumerators.push(value);
+            reversed = true;
         }
     }
 
@@ -186,14 +191,14 @@ pub(crate) fn create_if_statement(
         // Apply else_if to else_if, ..
         for else_if in statement.else_ifs() {
             let mut else_if_enumerators = Vec::new();
-            for i in else_if.conditional().equations() {
-                match i {
-                    Equation::BitwiseAnd { value } | Equation::Equals { value } => {
-                        main_enumerators.push(value);
-                        else_if_enumerators.push(value);
+            match else_if.conditional().equation() {
+                Equation::Equals { values: value } | Equation::BitwiseAnd { values: value } => {
+                    for v in value {
+                        main_enumerators.push(v);
+                        else_if_enumerators.push(v);
                     }
-                    Equation::NotEquals { .. } => unreachable!(),
                 }
+                Equation::NotEquals { .. } => unreachable!(),
             }
 
             let mut else_if_enumerator_members = Vec::new();

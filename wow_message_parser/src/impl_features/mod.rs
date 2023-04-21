@@ -1,6 +1,7 @@
 use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::definer::Definer;
+use crate::parser::types::if_statement::Equation;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::ty::Type;
@@ -163,8 +164,13 @@ fn features_for_struct_member(f: &mut ImplFeatures, m: &StructMember) {
                 DefinerType::Flag => Feature::IfFlag,
             });
 
-            if statement.conditional().equations().len() > 1 {
-                f.add(Feature::IfMultiCondition);
+            match statement.conditional().equation() {
+                Equation::Equals { values: value } | Equation::BitwiseAnd { values: value } => {
+                    if value.len() > 1 {
+                        f.add(Feature::IfMultiCondition);
+                    }
+                }
+                Equation::NotEquals { .. } => {}
             }
 
             for m in statement.members() {
