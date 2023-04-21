@@ -17,7 +17,7 @@ extern crate core;
 
 pub mod errors;
 pub(crate) mod helper;
-mod manual;
+pub(crate) mod manual;
 mod traits;
 pub(crate) mod util;
 #[allow(
