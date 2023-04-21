@@ -1,6 +1,6 @@
 /// mangoszero: in `SMSG_SEND_MAIL_RESULT`, 7-13 and 16+: 'Mail database error'
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/unimplemented/vanilla/smsg_send_mail_result.wowm:95`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/unimplemented/vanilla/smsg_send_mail_result.wowm#L95):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/smsg_send_mail_result.wowm:95`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/smsg_send_mail_result.wowm#L95):
 /// ```text
 /// enum MailResultTwo : u32 {
 ///     OK = 0;
