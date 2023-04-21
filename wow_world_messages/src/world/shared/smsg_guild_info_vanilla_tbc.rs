@@ -21,6 +21,7 @@ pub struct SMSG_GUILD_INFO {
     pub amount_of_accounts_in_guild: u32,
 }
 
+impl crate::private::Sealed for SMSG_GUILD_INFO {}
 impl crate::Message for SMSG_GUILD_INFO {
     const OPCODE: u32 = 0x0088;
 
@@ -53,7 +54,7 @@ impl crate::Message for SMSG_GUILD_INFO {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(21..=276).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0088, size: body_size as u32 });
         }

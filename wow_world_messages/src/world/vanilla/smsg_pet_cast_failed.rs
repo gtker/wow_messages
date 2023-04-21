@@ -19,6 +19,7 @@ pub struct SMSG_PET_CAST_FAILED {
     pub result: SpellCastResult,
 }
 
+impl crate::private::Sealed for SMSG_PET_CAST_FAILED {}
 impl crate::Message for SMSG_PET_CAST_FAILED {
     const OPCODE: u32 = 0x0138;
 
@@ -38,7 +39,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 6 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0138, size: body_size as u32 });
         }

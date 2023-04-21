@@ -18,6 +18,7 @@ pub struct SMSG_TRANSFER_PENDING {
     pub has_transport: Option<SMSG_TRANSFER_PENDING_has_transport>,
 }
 
+impl crate::private::Sealed for SMSG_TRANSFER_PENDING {}
 impl crate::Message for SMSG_TRANSFER_PENDING {
     const OPCODE: u32 = 0x003f;
 
@@ -41,7 +42,7 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=12).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003F, size: body_size as u32 });
         }

@@ -23,6 +23,7 @@ pub struct MSG_INSPECT_HONOR_STATS_Server {
     pub lifetime_honorable_kills: u32,
 }
 
+impl crate::private::Sealed for MSG_INSPECT_HONOR_STATS_Server {}
 impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
     const OPCODE: u32 = 0x02d6;
 
@@ -51,7 +52,7 @@ impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 25 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D6, size: body_size as u32 });
         }

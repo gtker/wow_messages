@@ -17,6 +17,7 @@ pub struct CMSG_OFFER_PETITION {
     pub target: Guid,
 }
 
+impl crate::private::Sealed for CMSG_OFFER_PETITION {}
 impl crate::Message for CMSG_OFFER_PETITION {
     const OPCODE: u32 = 0x01c3;
 
@@ -36,7 +37,7 @@ impl crate::Message for CMSG_OFFER_PETITION {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C3, size: body_size as u32 });
         }

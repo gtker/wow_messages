@@ -18,6 +18,7 @@ pub struct MSG_MOVE_SET_PITCH_RATE_Server {
     pub new_speed: f32,
 }
 
+impl crate::private::Sealed for MSG_MOVE_SET_PITCH_RATE_Server {}
 impl crate::Message for MSG_MOVE_SET_PITCH_RATE_Server {
     const OPCODE: u32 = 0x045b;
 
@@ -37,7 +38,7 @@ impl crate::Message for MSG_MOVE_SET_PITCH_RATE_Server {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(36..=101).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x045B, size: body_size as u32 });
         }

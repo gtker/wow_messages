@@ -17,6 +17,7 @@ pub struct SMSG_COMPLAIN_RESULT {
     pub window_result: ComplainResultWindow,
 }
 
+impl crate::private::Sealed for SMSG_COMPLAIN_RESULT {}
 impl crate::Message for SMSG_COMPLAIN_RESULT {
     const OPCODE: u32 = 0x03c8;
 
@@ -33,7 +34,7 @@ impl crate::Message for SMSG_COMPLAIN_RESULT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C8, size: body_size as u32 });
         }

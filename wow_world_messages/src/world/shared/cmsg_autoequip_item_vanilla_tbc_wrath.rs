@@ -13,6 +13,7 @@ pub struct CMSG_AUTOEQUIP_ITEM {
     pub source_slot: u8,
 }
 
+impl crate::private::Sealed for CMSG_AUTOEQUIP_ITEM {}
 impl crate::Message for CMSG_AUTOEQUIP_ITEM {
     const OPCODE: u32 = 0x010a;
 
@@ -29,7 +30,7 @@ impl crate::Message for CMSG_AUTOEQUIP_ITEM {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x010A, size: body_size as u32 });
         }

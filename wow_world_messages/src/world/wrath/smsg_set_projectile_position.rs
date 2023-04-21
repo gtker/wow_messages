@@ -18,6 +18,7 @@ pub struct SMSG_SET_PROJECTILE_POSITION {
     pub position: Vector3d,
 }
 
+impl crate::private::Sealed for SMSG_SET_PROJECTILE_POSITION {}
 impl crate::Message for SMSG_SET_PROJECTILE_POSITION {
     const OPCODE: u32 = 0x04bf;
 
@@ -37,7 +38,7 @@ impl crate::Message for SMSG_SET_PROJECTILE_POSITION {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 21 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BF, size: body_size as u32 });
         }

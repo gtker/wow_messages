@@ -31,6 +31,7 @@ pub struct SMSG_CAST_RESULT {
     pub result: SMSG_CAST_RESULT_SimpleSpellCastResult,
 }
 
+impl crate::private::Sealed for SMSG_CAST_RESULT {}
 impl crate::Message for SMSG_CAST_RESULT {
     const OPCODE: u32 = 0x0130;
 
@@ -91,7 +92,7 @@ impl crate::Message for SMSG_CAST_RESULT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=18).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0130, size: body_size as u32 });
         }

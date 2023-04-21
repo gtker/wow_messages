@@ -17,6 +17,7 @@ pub struct SMSG_COMPRESSED_UPDATE_OBJECT {
     pub objects: Vec<Object>,
 }
 
+impl crate::private::Sealed for SMSG_COMPRESSED_UPDATE_OBJECT {}
 impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
     const OPCODE: u32 = 0x01f6;
 
@@ -39,7 +40,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F6, size: body_size as u32 });
         }

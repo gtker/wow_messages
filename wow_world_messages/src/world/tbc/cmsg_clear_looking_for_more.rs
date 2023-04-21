@@ -9,6 +9,7 @@ use std::io::{Read, Write};
 pub struct CMSG_CLEAR_LOOKING_FOR_MORE {
 }
 
+impl crate::private::Sealed for CMSG_CLEAR_LOOKING_FOR_MORE {}
 impl crate::Message for CMSG_CLEAR_LOOKING_FOR_MORE {
     const OPCODE: u32 = 0x0364;
 
@@ -19,7 +20,7 @@ impl crate::Message for CMSG_CLEAR_LOOKING_FOR_MORE {
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0364, size: body_size as u32 });
         }

@@ -11,6 +11,7 @@ pub struct SMSG_PONG {
     pub sequence_id: u32,
 }
 
+impl crate::private::Sealed for SMSG_PONG {}
 impl crate::Message for SMSG_PONG {
     const OPCODE: u32 = 0x01dd;
 
@@ -24,7 +25,7 @@ impl crate::Message for SMSG_PONG {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01DD, size: body_size as u32 });
         }

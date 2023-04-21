@@ -11,6 +11,7 @@ pub struct SMSG_MOTD {
     pub motd: String,
 }
 
+impl crate::private::Sealed for SMSG_MOTD {}
 impl crate::Message for SMSG_MOTD {
     const OPCODE: u32 = 0x033d;
 
@@ -27,7 +28,7 @@ impl crate::Message for SMSG_MOTD {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=8004).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x033D, size: body_size as u32 });
         }

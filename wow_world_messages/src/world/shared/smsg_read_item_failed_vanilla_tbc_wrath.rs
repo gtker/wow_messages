@@ -15,6 +15,7 @@ pub struct SMSG_READ_ITEM_FAILED {
     pub guid: Guid,
 }
 
+impl crate::private::Sealed for SMSG_READ_ITEM_FAILED {}
 impl crate::Message for SMSG_READ_ITEM_FAILED {
     const OPCODE: u32 = 0x00af;
 
@@ -28,7 +29,7 @@ impl crate::Message for SMSG_READ_ITEM_FAILED {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00AF, size: body_size as u32 });
         }

@@ -17,6 +17,7 @@ pub struct SMSG_PAUSE_MIRROR_TIMER {
     pub is_frozen: bool,
 }
 
+impl crate::private::Sealed for SMSG_PAUSE_MIRROR_TIMER {}
 impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
     const OPCODE: u32 = 0x01da;
 
@@ -33,7 +34,7 @@ impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01DA, size: body_size as u32 });
         }

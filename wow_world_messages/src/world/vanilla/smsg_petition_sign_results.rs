@@ -18,6 +18,7 @@ pub struct SMSG_PETITION_SIGN_RESULTS {
     pub result: PetitionResult,
 }
 
+impl crate::private::Sealed for SMSG_PETITION_SIGN_RESULTS {}
 impl crate::Message for SMSG_PETITION_SIGN_RESULTS {
     const OPCODE: u32 = 0x01c1;
 
@@ -37,7 +38,7 @@ impl crate::Message for SMSG_PETITION_SIGN_RESULTS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C1, size: body_size as u32 });
         }

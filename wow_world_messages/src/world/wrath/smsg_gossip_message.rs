@@ -28,6 +28,7 @@ pub struct SMSG_GOSSIP_MESSAGE {
     pub quests: Vec<QuestItem>,
 }
 
+impl crate::private::Sealed for SMSG_GOSSIP_MESSAGE {}
 impl crate::Message for SMSG_GOSSIP_MESSAGE {
     const OPCODE: u32 = 0x017d;
 
@@ -63,7 +64,7 @@ impl crate::Message for SMSG_GOSSIP_MESSAGE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(24..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x017D, size: body_size as u32 });
         }

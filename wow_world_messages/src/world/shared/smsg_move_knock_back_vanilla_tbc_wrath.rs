@@ -34,6 +34,7 @@ pub struct SMSG_MOVE_KNOCK_BACK {
     pub vertical_speed: f32,
 }
 
+impl crate::private::Sealed for SMSG_MOVE_KNOCK_BACK {}
 impl crate::Message for SMSG_MOVE_KNOCK_BACK {
     const OPCODE: u32 = 0x00ef;
 
@@ -62,7 +63,7 @@ impl crate::Message for SMSG_MOVE_KNOCK_BACK {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(22..=29).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00EF, size: body_size as u32 });
         }

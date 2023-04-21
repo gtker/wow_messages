@@ -20,6 +20,7 @@ pub struct CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {
     pub new_speed: f32,
 }
 
+impl crate::private::Sealed for CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {}
 impl crate::Message for CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {
     const OPCODE: u32 = 0x0382;
 
@@ -42,7 +43,7 @@ impl crate::Message for CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(45..=98).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0382, size: body_size as u32 });
         }

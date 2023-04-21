@@ -13,6 +13,7 @@ pub struct CMSG_EQUIPMENT_SET_USE {
     pub sets: [EquipmentSet; 19],
 }
 
+impl crate::private::Sealed for CMSG_EQUIPMENT_SET_USE {}
 impl crate::Message for CMSG_EQUIPMENT_SET_USE {
     const OPCODE: u32 = 0x04d5;
 
@@ -28,7 +29,7 @@ impl crate::Message for CMSG_EQUIPMENT_SET_USE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 190 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04D5, size: body_size as u32 });
         }

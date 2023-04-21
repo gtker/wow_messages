@@ -15,6 +15,7 @@ pub struct SMSG_BATTLEFIELD_MGR_QUEUE_INVITE {
     pub warmup: u8,
 }
 
+impl crate::private::Sealed for SMSG_BATTLEFIELD_MGR_QUEUE_INVITE {}
 impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_INVITE {
     const OPCODE: u32 = 0x04e1;
 
@@ -31,7 +32,7 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_INVITE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E1, size: body_size as u32 });
         }

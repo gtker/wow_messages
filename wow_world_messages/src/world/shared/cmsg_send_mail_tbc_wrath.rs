@@ -44,6 +44,7 @@ pub struct CMSG_SEND_MAIL {
     pub unknown4: u32,
 }
 
+impl crate::private::Sealed for CMSG_SEND_MAIL {}
 impl crate::Message for CMSG_SEND_MAIL {
     const OPCODE: u32 = 0x0238;
 
@@ -104,7 +105,7 @@ impl crate::Message for CMSG_SEND_MAIL {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(36..=3105).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0238, size: body_size as u32 });
         }

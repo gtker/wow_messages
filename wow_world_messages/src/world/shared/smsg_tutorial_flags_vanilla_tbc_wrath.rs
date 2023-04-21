@@ -16,6 +16,7 @@ pub struct SMSG_TUTORIAL_FLAGS {
     pub tutorial_data: [u32; 8],
 }
 
+impl crate::private::Sealed for SMSG_TUTORIAL_FLAGS {}
 impl crate::Message for SMSG_TUTORIAL_FLAGS {
     const OPCODE: u32 = 0x00fd;
 
@@ -31,7 +32,7 @@ impl crate::Message for SMSG_TUTORIAL_FLAGS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 32 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00FD, size: body_size as u32 });
         }

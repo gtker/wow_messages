@@ -11,6 +11,7 @@ pub struct CMSG_GUILD_LEADER {
     pub new_guild_leader_name: String,
 }
 
+impl crate::private::Sealed for CMSG_GUILD_LEADER {}
 impl crate::Message for CMSG_GUILD_LEADER {
     const OPCODE: u32 = 0x0090;
 
@@ -28,7 +29,7 @@ impl crate::Message for CMSG_GUILD_LEADER {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=256).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0090, size: body_size as u32 });
         }

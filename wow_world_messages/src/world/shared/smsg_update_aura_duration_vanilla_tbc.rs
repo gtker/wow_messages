@@ -13,6 +13,7 @@ pub struct SMSG_UPDATE_AURA_DURATION {
     pub aura_duration: u32,
 }
 
+impl crate::private::Sealed for SMSG_UPDATE_AURA_DURATION {}
 impl crate::Message for SMSG_UPDATE_AURA_DURATION {
     const OPCODE: u32 = 0x0137;
 
@@ -29,7 +30,7 @@ impl crate::Message for SMSG_UPDATE_AURA_DURATION {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0137, size: body_size as u32 });
         }

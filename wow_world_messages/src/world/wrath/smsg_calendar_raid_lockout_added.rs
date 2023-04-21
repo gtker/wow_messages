@@ -24,6 +24,7 @@ pub struct SMSG_CALENDAR_RAID_LOCKOUT_ADDED {
     pub instance_id: Guid,
 }
 
+impl crate::private::Sealed for SMSG_CALENDAR_RAID_LOCKOUT_ADDED {}
 impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_ADDED {
     const OPCODE: u32 = 0x043e;
 
@@ -49,7 +50,7 @@ impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_ADDED {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 24 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043E, size: body_size as u32 });
         }

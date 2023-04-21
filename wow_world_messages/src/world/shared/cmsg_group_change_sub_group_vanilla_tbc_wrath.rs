@@ -13,6 +13,7 @@ pub struct CMSG_GROUP_CHANGE_SUB_GROUP {
     pub group_number: u8,
 }
 
+impl crate::private::Sealed for CMSG_GROUP_CHANGE_SUB_GROUP {}
 impl crate::Message for CMSG_GROUP_CHANGE_SUB_GROUP {
     const OPCODE: u32 = 0x027e;
 
@@ -33,7 +34,7 @@ impl crate::Message for CMSG_GROUP_CHANGE_SUB_GROUP {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=257).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x027E, size: body_size as u32 });
         }

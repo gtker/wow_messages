@@ -20,6 +20,7 @@ pub struct MSG_CORPSE_QUERY_Server {
     pub result: MSG_CORPSE_QUERY_Server_CorpseQueryResult,
 }
 
+impl crate::private::Sealed for MSG_CORPSE_QUERY_Server {}
 impl crate::Message for MSG_CORPSE_QUERY_Server {
     const OPCODE: u32 = 0x0216;
 
@@ -52,7 +53,7 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=21).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0216, size: body_size as u32 });
         }

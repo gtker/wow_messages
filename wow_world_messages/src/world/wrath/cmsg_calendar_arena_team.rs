@@ -11,6 +11,7 @@ pub struct CMSG_CALENDAR_ARENA_TEAM {
     pub arena_team: u32,
 }
 
+impl crate::private::Sealed for CMSG_CALENDAR_ARENA_TEAM {}
 impl crate::Message for CMSG_CALENDAR_ARENA_TEAM {
     const OPCODE: u32 = 0x042c;
 
@@ -24,7 +25,7 @@ impl crate::Message for CMSG_CALENDAR_ARENA_TEAM {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042C, size: body_size as u32 });
         }

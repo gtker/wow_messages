@@ -13,6 +13,7 @@ pub struct SMSG_SHOW_BANK {
     pub guid: Guid,
 }
 
+impl crate::private::Sealed for SMSG_SHOW_BANK {}
 impl crate::Message for SMSG_SHOW_BANK {
     const OPCODE: u32 = 0x01b8;
 
@@ -26,7 +27,7 @@ impl crate::Message for SMSG_SHOW_BANK {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01B8, size: body_size as u32 });
         }

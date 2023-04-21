@@ -15,6 +15,7 @@ pub struct SMSG_SET_PROFICIENCY {
     pub item_sub_class_mask: u32,
 }
 
+impl crate::private::Sealed for SMSG_SET_PROFICIENCY {}
 impl crate::Message for SMSG_SET_PROFICIENCY {
     const OPCODE: u32 = 0x0127;
 
@@ -31,7 +32,7 @@ impl crate::Message for SMSG_SET_PROFICIENCY {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0127, size: body_size as u32 });
         }

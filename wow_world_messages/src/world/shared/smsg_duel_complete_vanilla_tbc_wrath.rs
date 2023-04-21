@@ -11,6 +11,7 @@ pub struct SMSG_DUEL_COMPLETE {
     pub ended_without_interruption: bool,
 }
 
+impl crate::private::Sealed for SMSG_DUEL_COMPLETE {}
 impl crate::Message for SMSG_DUEL_COMPLETE {
     const OPCODE: u32 = 0x016a;
 
@@ -24,7 +25,7 @@ impl crate::Message for SMSG_DUEL_COMPLETE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x016A, size: body_size as u32 });
         }

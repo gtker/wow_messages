@@ -15,6 +15,7 @@ pub struct CMSG_PETITION_QUERY {
     pub petition: Guid,
 }
 
+impl crate::private::Sealed for CMSG_PETITION_QUERY {}
 impl crate::Message for CMSG_PETITION_QUERY {
     const OPCODE: u32 = 0x01c6;
 
@@ -31,7 +32,7 @@ impl crate::Message for CMSG_PETITION_QUERY {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C6, size: body_size as u32 });
         }

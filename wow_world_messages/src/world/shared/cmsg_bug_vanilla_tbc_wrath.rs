@@ -17,6 +17,7 @@ pub struct CMSG_BUG {
     pub bug_type: String,
 }
 
+impl crate::private::Sealed for CMSG_BUG {}
 impl crate::Message for CMSG_BUG {
     const OPCODE: u32 = 0x01ca;
 
@@ -42,7 +43,7 @@ impl crate::Message for CMSG_BUG {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=16012).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CA, size: body_size as u32 });
         }

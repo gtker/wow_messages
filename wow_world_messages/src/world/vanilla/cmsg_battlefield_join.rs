@@ -13,6 +13,7 @@ pub struct CMSG_BATTLEFIELD_JOIN {
     pub map: Map,
 }
 
+impl crate::private::Sealed for CMSG_BATTLEFIELD_JOIN {}
 impl crate::Message for CMSG_BATTLEFIELD_JOIN {
     const OPCODE: u32 = 0x023e;
 
@@ -26,7 +27,7 @@ impl crate::Message for CMSG_BATTLEFIELD_JOIN {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023E, size: body_size as u32 });
         }

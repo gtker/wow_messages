@@ -15,6 +15,7 @@ pub struct MSG_PETITION_RENAME {
     pub new_name: String,
 }
 
+impl crate::private::Sealed for MSG_PETITION_RENAME {}
 impl crate::Message for MSG_PETITION_RENAME {
     const OPCODE: u32 = 0x02c1;
 
@@ -35,7 +36,7 @@ impl crate::Message for MSG_PETITION_RENAME {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=264).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C1, size: body_size as u32 });
         }

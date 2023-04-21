@@ -15,6 +15,7 @@ pub struct SMSG_PLAYER_VEHICLE_DATA {
     pub vehicle_id: u32,
 }
 
+impl crate::private::Sealed for SMSG_PLAYER_VEHICLE_DATA {}
 impl crate::Message for SMSG_PLAYER_VEHICLE_DATA {
     const OPCODE: u32 = 0x04a7;
 
@@ -31,7 +32,7 @@ impl crate::Message for SMSG_PLAYER_VEHICLE_DATA {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=13).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04A7, size: body_size as u32 });
         }

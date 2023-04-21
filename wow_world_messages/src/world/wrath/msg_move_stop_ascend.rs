@@ -16,6 +16,7 @@ pub struct MSG_MOVE_STOP_ASCEND {
     pub info: MovementInfo,
 }
 
+impl crate::private::Sealed for MSG_MOVE_STOP_ASCEND {}
 impl crate::Message for MSG_MOVE_STOP_ASCEND {
     const OPCODE: u32 = 0x035a;
 
@@ -32,7 +33,7 @@ impl crate::Message for MSG_MOVE_STOP_ASCEND {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(32..=97).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x035A, size: body_size as u32 });
         }

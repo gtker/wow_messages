@@ -18,6 +18,7 @@ pub struct CMSG_CALENDAR_EVENT_RSVP {
     pub status: CalendarStatus,
 }
 
+impl crate::private::Sealed for CMSG_CALENDAR_EVENT_RSVP {}
 impl crate::Message for CMSG_CALENDAR_EVENT_RSVP {
     const OPCODE: u32 = 0x0432;
 
@@ -37,7 +38,7 @@ impl crate::Message for CMSG_CALENDAR_EVENT_RSVP {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0432, size: body_size as u32 });
         }

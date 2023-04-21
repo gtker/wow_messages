@@ -14,6 +14,7 @@ pub struct SMSG_EXPECTED_SPAM_RECORDS {
     pub records: Vec<String>,
 }
 
+impl crate::private::Sealed for SMSG_EXPECTED_SPAM_RECORDS {}
 impl crate::Message for SMSG_EXPECTED_SPAM_RECORDS {
     const OPCODE: u32 = 0x0332;
 
@@ -33,7 +34,7 @@ impl crate::Message for SMSG_EXPECTED_SPAM_RECORDS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=65535).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0332, size: body_size as u32 });
         }

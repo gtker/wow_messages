@@ -13,6 +13,7 @@ pub struct SMSG_SPLINE_MOVE_ROOT {
     pub guid: Guid,
 }
 
+impl crate::private::Sealed for SMSG_SPLINE_MOVE_ROOT {}
 impl crate::Message for SMSG_SPLINE_MOVE_ROOT {
     const OPCODE: u32 = 0x031a;
 
@@ -26,7 +27,7 @@ impl crate::Message for SMSG_SPLINE_MOVE_ROOT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x031A, size: body_size as u32 });
         }

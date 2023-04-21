@@ -19,6 +19,7 @@ pub struct CMSG_SET_SAVED_INSTANCE_EXTEND {
     pub toggle_extend: bool,
 }
 
+impl crate::private::Sealed for CMSG_SET_SAVED_INSTANCE_EXTEND {}
 impl crate::Message for CMSG_SET_SAVED_INSTANCE_EXTEND {
     const OPCODE: u32 = 0x0292;
 
@@ -38,7 +39,7 @@ impl crate::Message for CMSG_SET_SAVED_INSTANCE_EXTEND {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 6 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0292, size: body_size as u32 });
         }

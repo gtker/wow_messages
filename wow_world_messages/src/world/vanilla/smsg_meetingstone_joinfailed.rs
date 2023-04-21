@@ -13,6 +13,7 @@ pub struct SMSG_MEETINGSTONE_JOINFAILED {
     pub reason: MeetingStoneFailure,
 }
 
+impl crate::private::Sealed for SMSG_MEETINGSTONE_JOINFAILED {}
 impl crate::Message for SMSG_MEETINGSTONE_JOINFAILED {
     const OPCODE: u32 = 0x02bb;
 
@@ -26,7 +27,7 @@ impl crate::Message for SMSG_MEETINGSTONE_JOINFAILED {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02BB, size: body_size as u32 });
         }

@@ -16,6 +16,7 @@ pub struct SMSG_AI_REACTION {
     pub reaction: AiReaction,
 }
 
+impl crate::private::Sealed for SMSG_AI_REACTION {}
 impl crate::Message for SMSG_AI_REACTION {
     const OPCODE: u32 = 0x013c;
 
@@ -32,7 +33,7 @@ impl crate::Message for SMSG_AI_REACTION {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x013C, size: body_size as u32 });
         }

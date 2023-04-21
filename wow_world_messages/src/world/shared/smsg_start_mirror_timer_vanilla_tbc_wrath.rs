@@ -23,6 +23,7 @@ pub struct SMSG_START_MIRROR_TIMER {
     pub id: u32,
 }
 
+impl crate::private::Sealed for SMSG_START_MIRROR_TIMER {}
 impl crate::Message for SMSG_START_MIRROR_TIMER {
     const OPCODE: u32 = 0x01d9;
 
@@ -51,7 +52,7 @@ impl crate::Message for SMSG_START_MIRROR_TIMER {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 21 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D9, size: body_size as u32 });
         }

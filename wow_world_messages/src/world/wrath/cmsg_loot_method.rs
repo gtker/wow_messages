@@ -20,6 +20,7 @@ pub struct CMSG_LOOT_METHOD {
     pub loot_threshold: ItemQuality,
 }
 
+impl crate::private::Sealed for CMSG_LOOT_METHOD {}
 impl crate::Message for CMSG_LOOT_METHOD {
     const OPCODE: u32 = 0x007a;
 
@@ -39,7 +40,7 @@ impl crate::Message for CMSG_LOOT_METHOD {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007A, size: body_size as u32 });
         }

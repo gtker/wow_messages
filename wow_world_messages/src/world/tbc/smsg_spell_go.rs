@@ -38,6 +38,7 @@ pub struct SMSG_SPELL_GO {
     pub targets: SpellCastTargets,
 }
 
+impl crate::private::Sealed for SMSG_SPELL_GO {}
 impl crate::Message for SMSG_SPELL_GO {
     const OPCODE: u32 = 0x0132;
 
@@ -91,7 +92,7 @@ impl crate::Message for SMSG_SPELL_GO {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(20..=5734).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0132, size: body_size as u32 });
         }

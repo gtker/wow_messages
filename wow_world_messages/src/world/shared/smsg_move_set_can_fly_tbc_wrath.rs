@@ -15,6 +15,7 @@ pub struct SMSG_MOVE_SET_CAN_FLY {
     pub counter: u32,
 }
 
+impl crate::private::Sealed for SMSG_MOVE_SET_CAN_FLY {}
 impl crate::Message for SMSG_MOVE_SET_CAN_FLY {
     const OPCODE: u32 = 0x0343;
 
@@ -31,7 +32,7 @@ impl crate::Message for SMSG_MOVE_SET_CAN_FLY {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=13).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0343, size: body_size as u32 });
         }

@@ -11,6 +11,7 @@ pub struct CMSG_CORPSE_MAP_POSITION_QUERY {
     pub unknown: u32,
 }
 
+impl crate::private::Sealed for CMSG_CORPSE_MAP_POSITION_QUERY {}
 impl crate::Message for CMSG_CORPSE_MAP_POSITION_QUERY {
     const OPCODE: u32 = 0x04b6;
 
@@ -24,7 +25,7 @@ impl crate::Message for CMSG_CORPSE_MAP_POSITION_QUERY {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04B6, size: body_size as u32 });
         }

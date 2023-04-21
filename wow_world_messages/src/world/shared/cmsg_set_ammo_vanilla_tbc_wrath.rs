@@ -11,6 +11,7 @@ pub struct CMSG_SET_AMMO {
     pub item: u32,
 }
 
+impl crate::private::Sealed for CMSG_SET_AMMO {}
 impl crate::Message for CMSG_SET_AMMO {
     const OPCODE: u32 = 0x0268;
 
@@ -24,7 +25,7 @@ impl crate::Message for CMSG_SET_AMMO {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0268, size: body_size as u32 });
         }

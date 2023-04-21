@@ -51,6 +51,7 @@ pub struct CMSG_PETITION_BUY {
     pub unknown15: u32,
 }
 
+impl crate::private::Sealed for CMSG_PETITION_BUY {}
 impl crate::Message for CMSG_PETITION_BUY {
     const OPCODE: u32 = 0x01bd;
 
@@ -119,7 +120,7 @@ impl crate::Message for CMSG_PETITION_BUY {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(72..=327).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BD, size: body_size as u32 });
         }

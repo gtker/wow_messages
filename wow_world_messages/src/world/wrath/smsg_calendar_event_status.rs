@@ -27,6 +27,7 @@ pub struct SMSG_CALENDAR_EVENT_STATUS {
     pub status_time: DateTime,
 }
 
+impl crate::private::Sealed for SMSG_CALENDAR_EVENT_STATUS {}
 impl crate::Message for SMSG_CALENDAR_EVENT_STATUS {
     const OPCODE: u32 = 0x043c;
 
@@ -58,7 +59,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_STATUS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(24..=31).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043C, size: body_size as u32 });
         }

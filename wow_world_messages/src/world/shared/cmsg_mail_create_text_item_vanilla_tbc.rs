@@ -19,6 +19,7 @@ pub struct CMSG_MAIL_CREATE_TEXT_ITEM {
     pub mail_template_id: u32,
 }
 
+impl crate::private::Sealed for CMSG_MAIL_CREATE_TEXT_ITEM {}
 impl crate::Message for CMSG_MAIL_CREATE_TEXT_ITEM {
     const OPCODE: u32 = 0x024a;
 
@@ -38,7 +39,7 @@ impl crate::Message for CMSG_MAIL_CREATE_TEXT_ITEM {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x024A, size: body_size as u32 });
         }

@@ -17,6 +17,7 @@ pub struct SMSG_PLAY_SPELL_VISUAL {
     pub spell_art_kit: u32,
 }
 
+impl crate::private::Sealed for SMSG_PLAY_SPELL_VISUAL {}
 impl crate::Message for SMSG_PLAY_SPELL_VISUAL {
     const OPCODE: u32 = 0x01f3;
 
@@ -33,7 +34,7 @@ impl crate::Message for SMSG_PLAY_SPELL_VISUAL {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F3, size: body_size as u32 });
         }

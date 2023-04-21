@@ -17,6 +17,7 @@ pub struct CMSG_ZONEUPDATE {
     pub area: Area,
 }
 
+impl crate::private::Sealed for CMSG_ZONEUPDATE {}
 impl crate::Message for CMSG_ZONEUPDATE {
     const OPCODE: u32 = 0x01f4;
 
@@ -30,7 +31,7 @@ impl crate::Message for CMSG_ZONEUPDATE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F4, size: body_size as u32 });
         }

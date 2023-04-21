@@ -22,6 +22,7 @@ pub struct SMSG_PLAYED_TIME {
     pub show_on_ui: bool,
 }
 
+impl crate::private::Sealed for SMSG_PLAYED_TIME {}
 impl crate::Message for SMSG_PLAYED_TIME {
     const OPCODE: u32 = 0x01cd;
 
@@ -41,7 +42,7 @@ impl crate::Message for SMSG_PLAYED_TIME {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CD, size: body_size as u32 });
         }

@@ -18,6 +18,7 @@ pub struct CMSG_MOVE_GRAVITY_ENABLE_ACK {
     pub info: MovementInfo,
 }
 
+impl crate::private::Sealed for CMSG_MOVE_GRAVITY_ENABLE_ACK {}
 impl crate::Message for CMSG_MOVE_GRAVITY_ENABLE_ACK {
     const OPCODE: u32 = 0x04d1;
 
@@ -37,7 +38,7 @@ impl crate::Message for CMSG_MOVE_GRAVITY_ENABLE_ACK {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(36..=101).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04D1, size: body_size as u32 });
         }

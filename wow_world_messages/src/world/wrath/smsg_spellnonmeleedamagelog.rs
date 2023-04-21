@@ -46,6 +46,7 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
     pub extend_flag: u8,
 }
 
+impl crate::private::Sealed for SMSG_SPELLNONMELEEDAMAGELOG {}
 impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
     const OPCODE: u32 = 0x0250;
 
@@ -95,7 +96,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(36..=50).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0250, size: body_size as u32 });
         }

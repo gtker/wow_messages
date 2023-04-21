@@ -11,6 +11,7 @@ pub struct CMSG_CHANNEL_LIST {
     pub channel_name: String,
 }
 
+impl crate::private::Sealed for CMSG_CHANNEL_LIST {}
 impl crate::Message for CMSG_CHANNEL_LIST {
     const OPCODE: u32 = 0x009a;
 
@@ -28,7 +29,7 @@ impl crate::Message for CMSG_CHANNEL_LIST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=256).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x009A, size: body_size as u32 });
         }

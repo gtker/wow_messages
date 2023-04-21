@@ -14,6 +14,7 @@ pub struct SMSG_FRIEND_LIST {
     pub friends: Vec<Friend>,
 }
 
+impl crate::private::Sealed for SMSG_FRIEND_LIST {}
 impl crate::Message for SMSG_FRIEND_LIST {
     const OPCODE: u32 = 0x0067;
 
@@ -32,7 +33,7 @@ impl crate::Message for SMSG_FRIEND_LIST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=5377).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0067, size: body_size as u32 });
         }

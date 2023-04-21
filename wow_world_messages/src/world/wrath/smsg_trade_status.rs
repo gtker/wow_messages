@@ -28,6 +28,7 @@ pub struct SMSG_TRADE_STATUS {
     pub status: SMSG_TRADE_STATUS_TradeStatus,
 }
 
+impl crate::private::Sealed for SMSG_TRADE_STATUS {}
 impl crate::Message for SMSG_TRADE_STATUS {
     const OPCODE: u32 = 0x0120;
 
@@ -81,7 +82,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=13).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0120, size: body_size as u32 });
         }

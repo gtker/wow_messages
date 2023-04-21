@@ -18,6 +18,7 @@ pub struct MSG_GUILD_BANK_LOG_QUERY_Server {
     pub money_logs: Vec<MoneyLogItem>,
 }
 
+impl crate::private::Sealed for MSG_GUILD_BANK_LOG_QUERY_Server {}
 impl crate::Message for MSG_GUILD_BANK_LOG_QUERY_Server {
     const OPCODE: u32 = 0x03ed;
 
@@ -42,7 +43,7 @@ impl crate::Message for MSG_GUILD_BANK_LOG_QUERY_Server {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=4358).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03ED, size: body_size as u32 });
         }

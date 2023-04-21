@@ -18,6 +18,7 @@ pub struct SMSG_BINDER_CONFIRM {
     pub area: Area,
 }
 
+impl crate::private::Sealed for SMSG_BINDER_CONFIRM {}
 impl crate::Message for SMSG_BINDER_CONFIRM {
     const OPCODE: u32 = 0x02eb;
 
@@ -34,7 +35,7 @@ impl crate::Message for SMSG_BINDER_CONFIRM {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EB, size: body_size as u32 });
         }

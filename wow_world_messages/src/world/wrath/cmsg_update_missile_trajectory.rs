@@ -24,6 +24,7 @@ pub struct CMSG_UPDATE_MISSILE_TRAJECTORY {
     pub target: Vector3d,
 }
 
+impl crate::private::Sealed for CMSG_UPDATE_MISSILE_TRAJECTORY {}
 impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
     const OPCODE: u32 = 0x0462;
 
@@ -52,7 +53,7 @@ impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 44 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0462, size: body_size as u32 });
         }

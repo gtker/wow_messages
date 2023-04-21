@@ -17,6 +17,7 @@ pub struct SMSG_DUEL_WINNER {
     pub initiator_name: String,
 }
 
+impl crate::private::Sealed for SMSG_DUEL_WINNER {}
 impl crate::Message for SMSG_DUEL_WINNER {
     const OPCODE: u32 = 0x016b;
 
@@ -44,7 +45,7 @@ impl crate::Message for SMSG_DUEL_WINNER {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(3..=513).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x016B, size: body_size as u32 });
         }

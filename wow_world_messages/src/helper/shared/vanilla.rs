@@ -10,7 +10,7 @@ use std::pin::Pin;
 #[cfg(feature = "encryption")]
 use wow_srp::vanilla_header::EncrypterHalf;
 
-pub trait ServerMessage: Message {
+pub trait ServerMessage: Message + crate::traits::private::Sealed {
     /// Total size the message takes up including header.
     /// This is not the same value as what goes into the size field
     /// since the size field does not include the size of the size field.
@@ -138,7 +138,7 @@ pub trait ServerMessage: Message {
     }
 }
 
-pub trait ClientMessage: Message {
+pub trait ClientMessage: Message + crate::traits::private::Sealed {
     /// Total size the message takes up including header.
     /// This is not the same value as what goes into the size field
     /// since the size field does not include the size of the size field.

@@ -16,6 +16,7 @@ pub struct MSG_RAID_READY_CHECK_Server {
     pub state_check: Option<MSG_RAID_READY_CHECK_Server_state_check>,
 }
 
+impl crate::private::Sealed for MSG_RAID_READY_CHECK_Server {}
 impl crate::Message for MSG_RAID_READY_CHECK_Server {
     const OPCODE: u32 = 0x0322;
 
@@ -36,7 +37,7 @@ impl crate::Message for MSG_RAID_READY_CHECK_Server {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size > 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0322, size: body_size as u32 });
         }

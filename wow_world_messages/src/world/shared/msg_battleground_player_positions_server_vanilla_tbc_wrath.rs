@@ -17,6 +17,7 @@ pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub carriers: Vec<BattlegroundPlayerPosition>,
 }
 
+impl crate::private::Sealed for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
 impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     const OPCODE: u32 = 0x02e9;
 
@@ -43,7 +44,7 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E9, size: body_size as u32 });
         }

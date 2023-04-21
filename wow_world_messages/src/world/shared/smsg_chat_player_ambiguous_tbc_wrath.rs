@@ -13,6 +13,7 @@ pub struct SMSG_CHAT_PLAYER_AMBIGUOUS {
     pub player: String,
 }
 
+impl crate::private::Sealed for SMSG_CHAT_PLAYER_AMBIGUOUS {}
 impl crate::Message for SMSG_CHAT_PLAYER_AMBIGUOUS {
     const OPCODE: u32 = 0x032d;
 
@@ -30,7 +31,7 @@ impl crate::Message for SMSG_CHAT_PLAYER_AMBIGUOUS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=256).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x032D, size: body_size as u32 });
         }

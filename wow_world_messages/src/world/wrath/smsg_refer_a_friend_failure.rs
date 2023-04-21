@@ -16,6 +16,7 @@ pub struct SMSG_REFER_A_FRIEND_FAILURE {
     pub error: SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError,
 }
 
+impl crate::private::Sealed for SMSG_REFER_A_FRIEND_FAILURE {}
 impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
     const OPCODE: u32 = 0x0421;
 
@@ -44,7 +45,7 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=260).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0421, size: body_size as u32 });
         }

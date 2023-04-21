@@ -15,6 +15,7 @@ pub struct CMSG_QUESTGIVER_REQUEST_REWARD {
     pub quest_id: u32,
 }
 
+impl crate::private::Sealed for CMSG_QUESTGIVER_REQUEST_REWARD {}
 impl crate::Message for CMSG_QUESTGIVER_REQUEST_REWARD {
     const OPCODE: u32 = 0x018c;
 
@@ -31,7 +32,7 @@ impl crate::Message for CMSG_QUESTGIVER_REQUEST_REWARD {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x018C, size: body_size as u32 });
         }

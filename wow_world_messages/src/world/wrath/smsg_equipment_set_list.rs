@@ -14,6 +14,7 @@ pub struct SMSG_EQUIPMENT_SET_LIST {
     pub equipment_sets: Vec<EquipmentSetListItem>,
 }
 
+impl crate::private::Sealed for SMSG_EQUIPMENT_SET_LIST {}
 impl crate::Message for SMSG_EQUIPMENT_SET_LIST {
     const OPCODE: u32 = 0x04bc;
 
@@ -32,7 +33,7 @@ impl crate::Message for SMSG_EQUIPMENT_SET_LIST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BC, size: body_size as u32 });
         }

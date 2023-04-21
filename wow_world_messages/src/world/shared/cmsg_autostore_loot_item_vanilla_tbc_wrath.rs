@@ -11,6 +11,7 @@ pub struct CMSG_AUTOSTORE_LOOT_ITEM {
     pub item_slot: u8,
 }
 
+impl crate::private::Sealed for CMSG_AUTOSTORE_LOOT_ITEM {}
 impl crate::Message for CMSG_AUTOSTORE_LOOT_ITEM {
     const OPCODE: u32 = 0x0108;
 
@@ -24,7 +25,7 @@ impl crate::Message for CMSG_AUTOSTORE_LOOT_ITEM {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0108, size: body_size as u32 });
         }

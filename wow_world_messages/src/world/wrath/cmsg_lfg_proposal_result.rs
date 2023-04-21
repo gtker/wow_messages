@@ -13,6 +13,7 @@ pub struct CMSG_LFG_PROPOSAL_RESULT {
     pub accept_join: bool,
 }
 
+impl crate::private::Sealed for CMSG_LFG_PROPOSAL_RESULT {}
 impl crate::Message for CMSG_LFG_PROPOSAL_RESULT {
     const OPCODE: u32 = 0x0362;
 
@@ -29,7 +30,7 @@ impl crate::Message for CMSG_LFG_PROPOSAL_RESULT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0362, size: body_size as u32 });
         }

@@ -9,6 +9,7 @@ use std::io::{Read, Write};
 pub struct CMSG_TOGGLE_CLOAK {
 }
 
+impl crate::private::Sealed for CMSG_TOGGLE_CLOAK {}
 impl crate::Message for CMSG_TOGGLE_CLOAK {
     const OPCODE: u32 = 0x02ba;
 
@@ -19,7 +20,7 @@ impl crate::Message for CMSG_TOGGLE_CLOAK {
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02BA, size: body_size as u32 });
         }

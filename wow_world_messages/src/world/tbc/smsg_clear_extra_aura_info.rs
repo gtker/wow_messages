@@ -15,6 +15,7 @@ pub struct SMSG_CLEAR_EXTRA_AURA_INFO {
     pub spell: u32,
 }
 
+impl crate::private::Sealed for SMSG_CLEAR_EXTRA_AURA_INFO {}
 impl crate::Message for SMSG_CLEAR_EXTRA_AURA_INFO {
     const OPCODE: u32 = 0x03a6;
 
@@ -31,7 +32,7 @@ impl crate::Message for SMSG_CLEAR_EXTRA_AURA_INFO {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=13).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03A6, size: body_size as u32 });
         }

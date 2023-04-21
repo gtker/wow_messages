@@ -35,6 +35,7 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
     pub blocked_amount: u32,
 }
 
+impl crate::private::Sealed for SMSG_ATTACKERSTATEUPDATE {}
 impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
     const OPCODE: u32 = 0x014a;
 
@@ -77,7 +78,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(29..=5163).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x014A, size: body_size as u32 });
         }

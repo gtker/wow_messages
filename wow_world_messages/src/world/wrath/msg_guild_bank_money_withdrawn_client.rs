@@ -9,6 +9,7 @@ use std::io::{Read, Write};
 pub struct MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {
 }
 
+impl crate::private::Sealed for MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {}
 impl crate::Message for MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {
     const OPCODE: u32 = 0x03fe;
 
@@ -19,7 +20,7 @@ impl crate::Message for MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03FE, size: body_size as u32 });
         }

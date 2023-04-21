@@ -19,6 +19,7 @@ pub struct CMSG_CALENDAR_COPY_EVENT {
     pub time: DateTime,
 }
 
+impl crate::private::Sealed for CMSG_CALENDAR_COPY_EVENT {}
 impl crate::Message for CMSG_CALENDAR_COPY_EVENT {
     const OPCODE: u32 = 0x0430;
 
@@ -38,7 +39,7 @@ impl crate::Message for CMSG_CALENDAR_COPY_EVENT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0430, size: body_size as u32 });
         }

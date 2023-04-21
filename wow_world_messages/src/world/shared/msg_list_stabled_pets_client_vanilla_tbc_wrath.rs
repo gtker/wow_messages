@@ -13,6 +13,7 @@ pub struct MSG_LIST_STABLED_PETS_Client {
     pub npc: Guid,
 }
 
+impl crate::private::Sealed for MSG_LIST_STABLED_PETS_Client {}
 impl crate::Message for MSG_LIST_STABLED_PETS_Client {
     const OPCODE: u32 = 0x026f;
 
@@ -26,7 +27,7 @@ impl crate::Message for MSG_LIST_STABLED_PETS_Client {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x026F, size: body_size as u32 });
         }

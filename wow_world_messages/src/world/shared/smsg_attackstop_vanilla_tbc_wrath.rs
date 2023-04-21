@@ -19,6 +19,7 @@ pub struct SMSG_ATTACKSTOP {
     pub unknown1: u32,
 }
 
+impl crate::private::Sealed for SMSG_ATTACKSTOP {}
 impl crate::Message for SMSG_ATTACKSTOP {
     const OPCODE: u32 = 0x0144;
 
@@ -38,7 +39,7 @@ impl crate::Message for SMSG_ATTACKSTOP {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=22).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0144, size: body_size as u32 });
         }

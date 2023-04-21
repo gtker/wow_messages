@@ -17,6 +17,7 @@ pub struct SMSG_QUEST_CONFIRM_ACCEPT {
     pub guid: Guid,
 }
 
+impl crate::private::Sealed for SMSG_QUEST_CONFIRM_ACCEPT {}
 impl crate::Message for SMSG_QUEST_CONFIRM_ACCEPT {
     const OPCODE: u32 = 0x019c;
 
@@ -40,7 +41,7 @@ impl crate::Message for SMSG_QUEST_CONFIRM_ACCEPT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(13..=268).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x019C, size: body_size as u32 });
         }

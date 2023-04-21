@@ -17,6 +17,7 @@ pub struct MSG_AUCTION_HELLO_Server {
     pub auction_house_enabled: bool,
 }
 
+impl crate::private::Sealed for MSG_AUCTION_HELLO_Server {}
 impl crate::Message for MSG_AUCTION_HELLO_Server {
     const OPCODE: u32 = 0x0255;
 
@@ -36,7 +37,7 @@ impl crate::Message for MSG_AUCTION_HELLO_Server {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 13 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0255, size: body_size as u32 });
         }

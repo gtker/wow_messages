@@ -175,7 +175,7 @@ fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str,
                               enum_name = get_enumerator_name(e.name())
                 ));
             } else {
-                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body(&mut r, body_size).map_err(|a| {{ if let ParseError::Io(io) = a {{ ParseError::BufferSizeTooSmall {{ opcode: {opcode:#06X}, size: body_size, io, }} }} else {{ a }} }})?)),",
+                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| {{ if let ParseError::Io(io) = a {{ ParseError::BufferSizeTooSmall {{ opcode: {opcode:#06X}, size: body_size, io, }} }} else {{ a }} }})?)),",
                               opcode = opcode,
                               name = e.name(),
                               enum_name = get_enumerator_name(e.name())

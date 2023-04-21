@@ -13,6 +13,7 @@ pub struct SMSG_INSTANCE_SAVE_CREATED {
     pub unknown: u32,
 }
 
+impl crate::private::Sealed for SMSG_INSTANCE_SAVE_CREATED {}
 impl crate::Message for SMSG_INSTANCE_SAVE_CREATED {
     const OPCODE: u32 = 0x02cb;
 
@@ -26,7 +27,7 @@ impl crate::Message for SMSG_INSTANCE_SAVE_CREATED {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02CB, size: body_size as u32 });
         }

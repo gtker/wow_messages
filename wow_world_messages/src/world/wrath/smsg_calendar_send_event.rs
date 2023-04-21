@@ -43,6 +43,7 @@ pub struct SMSG_CALENDAR_SEND_EVENT {
     pub invitees: Vec<CalendarSendInvitee>,
 }
 
+impl crate::private::Sealed for SMSG_CALENDAR_SEND_EVENT {}
 impl crate::Message for SMSG_CALENDAR_SEND_EVENT {
     const OPCODE: u32 = 0x0437;
 
@@ -108,7 +109,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_EVENT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(43..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0437, size: body_size as u32 });
         }

@@ -17,6 +17,7 @@ pub struct SMSG_MOVE_SET_COLLISION_HGT {
     pub collision_height: f32,
 }
 
+impl crate::private::Sealed for SMSG_MOVE_SET_COLLISION_HGT {}
 impl crate::Message for SMSG_MOVE_SET_COLLISION_HGT {
     const OPCODE: u32 = 0x0516;
 
@@ -36,7 +37,7 @@ impl crate::Message for SMSG_MOVE_SET_COLLISION_HGT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(10..=17).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0516, size: body_size as u32 });
         }

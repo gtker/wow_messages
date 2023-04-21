@@ -15,6 +15,7 @@ pub struct SMSG_SPLINE_SET_TURN_RATE {
     pub speed: f32,
 }
 
+impl crate::private::Sealed for SMSG_SPLINE_SET_TURN_RATE {}
 impl crate::Message for SMSG_SPLINE_SET_TURN_RATE {
     const OPCODE: u32 = 0x0303;
 
@@ -31,7 +32,7 @@ impl crate::Message for SMSG_SPLINE_SET_TURN_RATE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=13).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0303, size: body_size as u32 });
         }

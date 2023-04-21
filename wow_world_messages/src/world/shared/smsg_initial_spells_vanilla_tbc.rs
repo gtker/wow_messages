@@ -22,6 +22,7 @@ pub struct SMSG_INITIAL_SPELLS {
     pub cooldowns: Vec<CooldownSpell>,
 }
 
+impl crate::private::Sealed for SMSG_INITIAL_SPELLS {}
 impl crate::Message for SMSG_INITIAL_SPELLS {
     const OPCODE: u32 = 0x012a;
 
@@ -51,7 +52,7 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=1179653).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x012A, size: body_size as u32 });
         }

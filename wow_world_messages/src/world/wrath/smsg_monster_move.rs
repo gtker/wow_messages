@@ -49,6 +49,7 @@ pub struct SMSG_MONSTER_MOVE {
     pub splines: Vec<Vector3d>,
 }
 
+impl crate::private::Sealed for SMSG_MONSTER_MOVE {}
 impl crate::Message for SMSG_MONSTER_MOVE {
     const OPCODE: u32 = 0x00dd;
 
@@ -126,7 +127,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(32..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00DD, size: body_size as u32 });
         }

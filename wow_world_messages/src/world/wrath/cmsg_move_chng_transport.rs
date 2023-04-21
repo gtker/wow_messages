@@ -13,6 +13,7 @@ pub struct CMSG_MOVE_CHNG_TRANSPORT {
     pub info: MovementInfo,
 }
 
+impl crate::private::Sealed for CMSG_MOVE_CHNG_TRANSPORT {}
 impl crate::Message for CMSG_MOVE_CHNG_TRANSPORT {
     const OPCODE: u32 = 0x038d;
 
@@ -26,7 +27,7 @@ impl crate::Message for CMSG_MOVE_CHNG_TRANSPORT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(30..=88).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x038D, size: body_size as u32 });
         }

@@ -15,6 +15,7 @@ pub struct SMSG_THREAT_REMOVE {
     pub victim: Guid,
 }
 
+impl crate::private::Sealed for SMSG_THREAT_REMOVE {}
 impl crate::Message for SMSG_THREAT_REMOVE {
     const OPCODE: u32 = 0x0484;
 
@@ -31,7 +32,7 @@ impl crate::Message for SMSG_THREAT_REMOVE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=18).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0484, size: body_size as u32 });
         }

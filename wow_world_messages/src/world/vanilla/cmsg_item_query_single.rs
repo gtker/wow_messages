@@ -15,6 +15,7 @@ pub struct CMSG_ITEM_QUERY_SINGLE {
     pub guid: Guid,
 }
 
+impl crate::private::Sealed for CMSG_ITEM_QUERY_SINGLE {}
 impl crate::Message for CMSG_ITEM_QUERY_SINGLE {
     const OPCODE: u32 = 0x0056;
 
@@ -31,7 +32,7 @@ impl crate::Message for CMSG_ITEM_QUERY_SINGLE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0056, size: body_size as u32 });
         }

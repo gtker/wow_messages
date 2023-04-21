@@ -21,6 +21,7 @@ pub struct CMSG_EQUIPMENT_SET_SAVE {
     pub equipment: [Guid; 19],
 }
 
+impl crate::private::Sealed for CMSG_EQUIPMENT_SET_SAVE {}
 impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
     const OPCODE: u32 = 0x04bd;
 
@@ -56,7 +57,7 @@ impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(160..=677).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BD, size: body_size as u32 });
         }

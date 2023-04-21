@@ -23,6 +23,7 @@ pub struct SMSG_SPELLLOGMISS {
     pub targets: Vec<SpellLogMiss>,
 }
 
+impl crate::private::Sealed for SMSG_SPELLLOGMISS {}
 impl crate::Message for SMSG_SPELLLOGMISS {
     const OPCODE: u32 = 0x024b;
 
@@ -50,7 +51,7 @@ impl crate::Message for SMSG_SPELLLOGMISS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(17..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x024B, size: body_size as u32 });
         }

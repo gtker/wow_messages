@@ -12,6 +12,7 @@ pub struct SMSG_SEND_UNLEARN_SPELLS {
     pub spells: Vec<u32>,
 }
 
+impl crate::private::Sealed for SMSG_SEND_UNLEARN_SPELLS {}
 impl crate::Message for SMSG_SEND_UNLEARN_SPELLS {
     const OPCODE: u32 = 0x041d;
 
@@ -30,7 +31,7 @@ impl crate::Message for SMSG_SEND_UNLEARN_SPELLS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=65535).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x041D, size: body_size as u32 });
         }

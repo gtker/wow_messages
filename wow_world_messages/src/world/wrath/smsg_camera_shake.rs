@@ -17,6 +17,7 @@ pub struct SMSG_CAMERA_SHAKE {
     pub unknown: u32,
 }
 
+impl crate::private::Sealed for SMSG_CAMERA_SHAKE {}
 impl crate::Message for SMSG_CAMERA_SHAKE {
     const OPCODE: u32 = 0x050a;
 
@@ -33,7 +34,7 @@ impl crate::Message for SMSG_CAMERA_SHAKE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x050A, size: body_size as u32 });
         }

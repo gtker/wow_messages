@@ -17,6 +17,7 @@ pub struct CMSG_WRAP_ITEM {
     pub item_slot: u8,
 }
 
+impl crate::private::Sealed for CMSG_WRAP_ITEM {}
 impl crate::Message for CMSG_WRAP_ITEM {
     const OPCODE: u32 = 0x01d3;
 
@@ -39,7 +40,7 @@ impl crate::Message for CMSG_WRAP_ITEM {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D3, size: body_size as u32 });
         }

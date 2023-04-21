@@ -15,6 +15,7 @@ pub struct CMSG_MAIL_MARK_AS_READ {
     pub mail_id: u32,
 }
 
+impl crate::private::Sealed for CMSG_MAIL_MARK_AS_READ {}
 impl crate::Message for CMSG_MAIL_MARK_AS_READ {
     const OPCODE: u32 = 0x0247;
 
@@ -31,7 +32,7 @@ impl crate::Message for CMSG_MAIL_MARK_AS_READ {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0247, size: body_size as u32 });
         }

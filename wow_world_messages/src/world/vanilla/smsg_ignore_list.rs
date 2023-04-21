@@ -12,6 +12,7 @@ pub struct SMSG_IGNORE_LIST {
     pub ignored: Vec<u64>,
 }
 
+impl crate::private::Sealed for SMSG_IGNORE_LIST {}
 impl crate::Message for SMSG_IGNORE_LIST {
     const OPCODE: u32 = 0x006b;
 
@@ -30,7 +31,7 @@ impl crate::Message for SMSG_IGNORE_LIST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=2049).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x006B, size: body_size as u32 });
         }

@@ -19,6 +19,7 @@ pub struct SMSG_SUMMON_REQUEST {
     pub auto_decline_time: Duration,
 }
 
+impl crate::private::Sealed for SMSG_SUMMON_REQUEST {}
 impl crate::Message for SMSG_SUMMON_REQUEST {
     const OPCODE: u32 = 0x02ab;
 
@@ -38,7 +39,7 @@ impl crate::Message for SMSG_SUMMON_REQUEST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02AB, size: body_size as u32 });
         }

@@ -9,6 +9,7 @@ use std::io::{Read, Write};
 pub struct SMSG_FEIGN_DEATH_RESISTED {
 }
 
+impl crate::private::Sealed for SMSG_FEIGN_DEATH_RESISTED {}
 impl crate::Message for SMSG_FEIGN_DEATH_RESISTED {
     const OPCODE: u32 = 0x02b4;
 
@@ -19,7 +20,7 @@ impl crate::Message for SMSG_FEIGN_DEATH_RESISTED {
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02B4, size: body_size as u32 });
         }

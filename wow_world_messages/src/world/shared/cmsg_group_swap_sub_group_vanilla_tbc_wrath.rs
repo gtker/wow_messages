@@ -13,6 +13,7 @@ pub struct CMSG_GROUP_SWAP_SUB_GROUP {
     pub swap_with_name: String,
 }
 
+impl crate::private::Sealed for CMSG_GROUP_SWAP_SUB_GROUP {}
 impl crate::Message for CMSG_GROUP_SWAP_SUB_GROUP {
     const OPCODE: u32 = 0x0280;
 
@@ -37,7 +38,7 @@ impl crate::Message for CMSG_GROUP_SWAP_SUB_GROUP {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=512).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0280, size: body_size as u32 });
         }

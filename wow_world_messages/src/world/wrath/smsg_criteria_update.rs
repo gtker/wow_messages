@@ -32,6 +32,7 @@ pub struct SMSG_CRITERIA_UPDATE {
     pub unknown: u32,
 }
 
+impl crate::private::Sealed for SMSG_CRITERIA_UPDATE {}
 impl crate::Message for SMSG_CRITERIA_UPDATE {
     const OPCODE: u32 = 0x046a;
 
@@ -63,7 +64,7 @@ impl crate::Message for SMSG_CRITERIA_UPDATE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(24..=38).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046A, size: body_size as u32 });
         }

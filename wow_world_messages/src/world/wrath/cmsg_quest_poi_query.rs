@@ -12,6 +12,7 @@ pub struct CMSG_QUEST_POI_QUERY {
     pub points_of_interests: Vec<u32>,
 }
 
+impl crate::private::Sealed for CMSG_QUEST_POI_QUERY {}
 impl crate::Message for CMSG_QUEST_POI_QUERY {
     const OPCODE: u32 = 0x01e3;
 
@@ -30,7 +31,7 @@ impl crate::Message for CMSG_QUEST_POI_QUERY {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=10240).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01E3, size: body_size as u32 });
         }

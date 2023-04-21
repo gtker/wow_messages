@@ -17,6 +17,7 @@ pub struct SMSG_CHAR_DELETE {
     pub result: WorldResult,
 }
 
+impl crate::private::Sealed for SMSG_CHAR_DELETE {}
 impl crate::Message for SMSG_CHAR_DELETE {
     const OPCODE: u32 = 0x003c;
 
@@ -30,7 +31,7 @@ impl crate::Message for SMSG_CHAR_DELETE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003C, size: body_size as u32 });
         }

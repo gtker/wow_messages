@@ -11,6 +11,7 @@ pub struct SMSG_CRITERIA_DELETED {
     pub criteria_id: u32,
 }
 
+impl crate::private::Sealed for SMSG_CRITERIA_DELETED {}
 impl crate::Message for SMSG_CRITERIA_DELETED {
     const OPCODE: u32 = 0x049e;
 
@@ -24,7 +25,7 @@ impl crate::Message for SMSG_CRITERIA_DELETED {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x049E, size: body_size as u32 });
         }

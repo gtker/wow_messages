@@ -17,6 +17,7 @@ pub struct SMSG_LOOT_LIST {
     pub group_looter: Guid,
 }
 
+impl crate::private::Sealed for SMSG_LOOT_LIST {}
 impl crate::Message for SMSG_LOOT_LIST {
     const OPCODE: u32 = 0x03f9;
 
@@ -36,7 +37,7 @@ impl crate::Message for SMSG_LOOT_LIST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(12..=26).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F9, size: body_size as u32 });
         }

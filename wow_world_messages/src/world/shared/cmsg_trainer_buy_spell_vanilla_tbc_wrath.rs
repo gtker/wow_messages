@@ -15,6 +15,7 @@ pub struct CMSG_TRAINER_BUY_SPELL {
     pub id: u32,
 }
 
+impl crate::private::Sealed for CMSG_TRAINER_BUY_SPELL {}
 impl crate::Message for CMSG_TRAINER_BUY_SPELL {
     const OPCODE: u32 = 0x01b2;
 
@@ -31,7 +32,7 @@ impl crate::Message for CMSG_TRAINER_BUY_SPELL {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01B2, size: body_size as u32 });
         }

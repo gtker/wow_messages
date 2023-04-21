@@ -17,6 +17,7 @@ pub struct CMSG_CALENDAR_GUILD_FILTER {
     pub minimum_rank: u32,
 }
 
+impl crate::private::Sealed for CMSG_CALENDAR_GUILD_FILTER {}
 impl crate::Message for CMSG_CALENDAR_GUILD_FILTER {
     const OPCODE: u32 = 0x042b;
 
@@ -36,7 +37,7 @@ impl crate::Message for CMSG_CALENDAR_GUILD_FILTER {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042B, size: body_size as u32 });
         }

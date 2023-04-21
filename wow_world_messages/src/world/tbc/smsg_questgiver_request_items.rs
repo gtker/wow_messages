@@ -52,6 +52,7 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub flags3: u32,
 }
 
+impl crate::private::Sealed for SMSG_QUESTGIVER_REQUEST_ITEMS {}
 impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
     const OPCODE: u32 = 0x018b;
 
@@ -117,7 +118,7 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(54..=65535).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x018B, size: body_size as u32 });
         }

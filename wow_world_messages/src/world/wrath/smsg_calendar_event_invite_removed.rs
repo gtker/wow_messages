@@ -19,6 +19,7 @@ pub struct SMSG_CALENDAR_EVENT_INVITE_REMOVED {
     pub show_alert: bool,
 }
 
+impl crate::private::Sealed for SMSG_CALENDAR_EVENT_INVITE_REMOVED {}
 impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_REMOVED {
     const OPCODE: u32 = 0x043b;
 
@@ -41,7 +42,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_REMOVED {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(15..=22).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043B, size: body_size as u32 });
         }

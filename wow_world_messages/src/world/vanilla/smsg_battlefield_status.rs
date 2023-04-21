@@ -35,6 +35,7 @@ pub struct SMSG_BATTLEFIELD_STATUS {
     pub map: SMSG_BATTLEFIELD_STATUS_Map,
 }
 
+impl crate::private::Sealed for SMSG_BATTLEFIELD_STATUS {}
 impl crate::Message for SMSG_BATTLEFIELD_STATUS {
     const OPCODE: u32 = 0x02d4;
 
@@ -2119,7 +2120,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=22).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D4, size: body_size as u32 });
         }

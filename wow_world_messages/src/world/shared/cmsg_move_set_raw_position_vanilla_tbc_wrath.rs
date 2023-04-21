@@ -17,6 +17,7 @@ pub struct CMSG_MOVE_SET_RAW_POSITION {
     pub orientation: f32,
 }
 
+impl crate::private::Sealed for CMSG_MOVE_SET_RAW_POSITION {}
 impl crate::Message for CMSG_MOVE_SET_RAW_POSITION {
     const OPCODE: u32 = 0x00e1;
 
@@ -33,7 +34,7 @@ impl crate::Message for CMSG_MOVE_SET_RAW_POSITION {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00E1, size: body_size as u32 });
         }

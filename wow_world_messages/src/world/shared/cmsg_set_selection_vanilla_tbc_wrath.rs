@@ -15,6 +15,7 @@ pub struct CMSG_SET_SELECTION {
     pub target: Guid,
 }
 
+impl crate::private::Sealed for CMSG_SET_SELECTION {}
 impl crate::Message for CMSG_SET_SELECTION {
     const OPCODE: u32 = 0x013d;
 
@@ -28,7 +29,7 @@ impl crate::Message for CMSG_SET_SELECTION {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x013D, size: body_size as u32 });
         }

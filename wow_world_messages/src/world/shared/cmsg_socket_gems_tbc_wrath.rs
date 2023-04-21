@@ -15,6 +15,7 @@ pub struct CMSG_SOCKET_GEMS {
     pub gems: [Guid; 3],
 }
 
+impl crate::private::Sealed for CMSG_SOCKET_GEMS {}
 impl crate::Message for CMSG_SOCKET_GEMS {
     const OPCODE: u32 = 0x0347;
 
@@ -33,7 +34,7 @@ impl crate::Message for CMSG_SOCKET_GEMS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 32 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0347, size: body_size as u32 });
         }

@@ -13,6 +13,7 @@ pub struct SMSG_INSTANCE_DIFFICULTY {
     pub dynamic_difficulty: bool,
 }
 
+impl crate::private::Sealed for SMSG_INSTANCE_DIFFICULTY {}
 impl crate::Message for SMSG_INSTANCE_DIFFICULTY {
     const OPCODE: u32 = 0x033b;
 
@@ -29,7 +30,7 @@ impl crate::Message for SMSG_INSTANCE_DIFFICULTY {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x033B, size: body_size as u32 });
         }

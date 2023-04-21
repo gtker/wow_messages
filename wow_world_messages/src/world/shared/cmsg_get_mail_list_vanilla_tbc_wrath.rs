@@ -13,6 +13,7 @@ pub struct CMSG_GET_MAIL_LIST {
     pub mailbox: Guid,
 }
 
+impl crate::private::Sealed for CMSG_GET_MAIL_LIST {}
 impl crate::Message for CMSG_GET_MAIL_LIST {
     const OPCODE: u32 = 0x023a;
 
@@ -26,7 +27,7 @@ impl crate::Message for CMSG_GET_MAIL_LIST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023A, size: body_size as u32 });
         }

@@ -17,6 +17,7 @@ pub struct CMSG_PET_SPELL_AUTOCAST {
     pub autocast_enabled: bool,
 }
 
+impl crate::private::Sealed for CMSG_PET_SPELL_AUTOCAST {}
 impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
     const OPCODE: u32 = 0x02f3;
 
@@ -36,7 +37,7 @@ impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 13 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02F3, size: body_size as u32 });
         }

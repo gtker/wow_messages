@@ -27,6 +27,7 @@ pub struct SMSG_ENCHANTMENTLOG {
     pub show_affiliation: bool,
 }
 
+impl crate::private::Sealed for SMSG_ENCHANTMENTLOG {}
 impl crate::Message for SMSG_ENCHANTMENTLOG {
     const OPCODE: u32 = 0x01d7;
 
@@ -52,7 +53,7 @@ impl crate::Message for SMSG_ENCHANTMENTLOG {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 25 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D7, size: body_size as u32 });
         }

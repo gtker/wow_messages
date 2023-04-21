@@ -13,6 +13,7 @@ pub struct CMSG_PING {
     pub round_time_in_ms: u32,
 }
 
+impl crate::private::Sealed for CMSG_PING {}
 impl crate::Message for CMSG_PING {
     const OPCODE: u32 = 0x01dc;
 
@@ -29,7 +30,7 @@ impl crate::Message for CMSG_PING {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01DC, size: body_size as u32 });
         }

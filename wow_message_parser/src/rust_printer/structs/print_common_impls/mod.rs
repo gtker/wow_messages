@@ -673,6 +673,8 @@ pub(crate) fn impl_world_message(
     read_function: impl Fn(&mut Writer, ImplType),
     sizes: Option<Sizes>,
 ) {
+    s.wln(format!("impl crate::private::Sealed for {} {{}}", type_name.as_ref()));
+
     s.open_curly(format!("impl crate::Message for {}", type_name.as_ref()));
     s.wln(format!("const OPCODE: u32 = {opcode:#06x};"));
     s.newline();
@@ -686,10 +688,19 @@ pub(crate) fn impl_world_message(
     s.closing_curly(); // size_without_header
     s.newline();
 
-    s.write_into_vec_trait(&write_function);
+    s.open_curly(
+        "fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error>",
+    );
+
+    write_function(s, ImplType::Std);
+
+    s.wln("Ok(())");
+
+    s.closing_curly();
+
 
     s.open_curly(format!(
-        "fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, {PARSE_ERROR}>",
+        "fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, {PARSE_ERROR}>",
     ));
 
     read_function(s, ImplType::Std);

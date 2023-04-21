@@ -13,6 +13,7 @@ pub struct CMSG_SET_TRADE_GOLD {
     pub gold: Gold,
 }
 
+impl crate::private::Sealed for CMSG_SET_TRADE_GOLD {}
 impl crate::Message for CMSG_SET_TRADE_GOLD {
     const OPCODE: u32 = 0x011f;
 
@@ -26,7 +27,7 @@ impl crate::Message for CMSG_SET_TRADE_GOLD {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x011F, size: body_size as u32 });
         }

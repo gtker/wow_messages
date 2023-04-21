@@ -49,6 +49,7 @@ pub struct CMSG_GUILD_BANK_SWAP_ITEMS {
     pub unknown5: Vec<u8>,
 }
 
+impl crate::private::Sealed for CMSG_GUILD_BANK_SWAP_ITEMS {}
 impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
     const OPCODE: u32 = 0x03e8;
 
@@ -164,7 +165,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(20..=65558).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E8, size: body_size as u32 });
         }

@@ -21,6 +21,7 @@ pub struct CMSG_AUCTION_SELL_ITEM {
     pub auction_duration_in_minutes: u32,
 }
 
+impl crate::private::Sealed for CMSG_AUCTION_SELL_ITEM {}
 impl crate::Message for CMSG_AUCTION_SELL_ITEM {
     const OPCODE: u32 = 0x0256;
 
@@ -46,7 +47,7 @@ impl crate::Message for CMSG_AUCTION_SELL_ITEM {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 28 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0256, size: body_size as u32 });
         }

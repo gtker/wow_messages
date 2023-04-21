@@ -19,6 +19,7 @@ pub struct CMSG_GUILD_BANK_UPDATE_TAB {
     pub icon: String,
 }
 
+impl crate::private::Sealed for CMSG_GUILD_BANK_UPDATE_TAB {}
 impl crate::Message for CMSG_GUILD_BANK_UPDATE_TAB {
     const OPCODE: u32 = 0x03eb;
 
@@ -49,7 +50,7 @@ impl crate::Message for CMSG_GUILD_BANK_UPDATE_TAB {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(11..=521).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03EB, size: body_size as u32 });
         }

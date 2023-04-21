@@ -1,4 +1,5 @@
 use crate::errors::ExpectedOpcodeError;
+use crate::traits::private::Internal;
 use crate::vanilla::{opcode_to_name, ClientMessage, ServerMessage};
 
 const CLIENT_OPCODE_LENGTH: u16 = 4;
@@ -79,7 +80,7 @@ fn read_client_body<M: ClientMessage>(
 ) -> Result<M, ExpectedOpcodeError> {
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode == M::OPCODE {
-        let m = M::read_body(buf, (size - CLIENT_OPCODE_LENGTH) as u32);
+        let m = M::read_body::<Internal>(buf, (size - CLIENT_OPCODE_LENGTH) as u32);
         match m {
             Ok(m) => Ok(m),
             Err(e) => Err(e.into()),
@@ -100,7 +101,7 @@ fn read_server_body<M: ServerMessage>(
 ) -> Result<M, ExpectedOpcodeError> {
     // Unable to match on associated const M::OPCODE, so we do if
     if opcode == M::OPCODE {
-        let m = M::read_body(buf, (size - SERVER_OPCODE_LENGTH) as u32);
+        let m = M::read_body::<Internal>(buf, (size - SERVER_OPCODE_LENGTH) as u32);
         match m {
             Ok(m) => Ok(m),
             Err(e) => Err(e.into()),

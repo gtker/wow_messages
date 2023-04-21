@@ -15,6 +15,7 @@ pub struct SMSG_NPC_TEXT_UPDATE {
     pub texts: [NpcTextUpdate; 8],
 }
 
+impl crate::private::Sealed for SMSG_NPC_TEXT_UPDATE {}
 impl crate::Message for SMSG_NPC_TEXT_UPDATE {
     const OPCODE: u32 = 0x0180;
 
@@ -33,7 +34,7 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(276..=4356).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0180, size: body_size as u32 });
         }

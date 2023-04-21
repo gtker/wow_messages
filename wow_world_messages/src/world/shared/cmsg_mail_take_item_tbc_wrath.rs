@@ -17,6 +17,7 @@ pub struct CMSG_MAIL_TAKE_ITEM {
     pub item: u32,
 }
 
+impl crate::private::Sealed for CMSG_MAIL_TAKE_ITEM {}
 impl crate::Message for CMSG_MAIL_TAKE_ITEM {
     const OPCODE: u32 = 0x0246;
 
@@ -36,7 +37,7 @@ impl crate::Message for CMSG_MAIL_TAKE_ITEM {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0246, size: body_size as u32 });
         }

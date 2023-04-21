@@ -35,6 +35,7 @@ pub struct SMSG_LEVELUP_INFO {
     pub spirit: u32,
 }
 
+impl crate::private::Sealed for SMSG_LEVELUP_INFO {}
 impl crate::Message for SMSG_LEVELUP_INFO {
     const OPCODE: u32 = 0x01d4;
 
@@ -81,7 +82,7 @@ impl crate::Message for SMSG_LEVELUP_INFO {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 48 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D4, size: body_size as u32 });
         }

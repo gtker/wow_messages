@@ -15,6 +15,7 @@ pub struct CMSG_GAMEOBJECT_QUERY {
     pub guid: Guid,
 }
 
+impl crate::private::Sealed for CMSG_GAMEOBJECT_QUERY {}
 impl crate::Message for CMSG_GAMEOBJECT_QUERY {
     const OPCODE: u32 = 0x005e;
 
@@ -31,7 +32,7 @@ impl crate::Message for CMSG_GAMEOBJECT_QUERY {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x005E, size: body_size as u32 });
         }

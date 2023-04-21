@@ -13,6 +13,7 @@ pub struct CMSG_QUESTLOG_SWAP_QUEST {
     pub slot2: u8,
 }
 
+impl crate::private::Sealed for CMSG_QUESTLOG_SWAP_QUEST {}
 impl crate::Message for CMSG_QUESTLOG_SWAP_QUEST {
     const OPCODE: u32 = 0x0193;
 
@@ -29,7 +30,7 @@ impl crate::Message for CMSG_QUESTLOG_SWAP_QUEST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0193, size: body_size as u32 });
         }

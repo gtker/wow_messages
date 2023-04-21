@@ -26,6 +26,7 @@ pub struct CMSG_USE_ITEM {
     pub targets: SpellCastTargets,
 }
 
+impl crate::private::Sealed for CMSG_USE_ITEM {}
 impl crate::Message for CMSG_USE_ITEM {
     const OPCODE: u32 = 0x00ab;
 
@@ -54,7 +55,7 @@ impl crate::Message for CMSG_USE_ITEM {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(16..=332).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00AB, size: body_size as u32 });
         }

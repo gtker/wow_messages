@@ -21,6 +21,7 @@ pub struct SMSG_RAID_INSTANCE_MESSAGE {
     pub time_left: u32,
 }
 
+impl crate::private::Sealed for SMSG_RAID_INSTANCE_MESSAGE {}
 impl crate::Message for SMSG_RAID_INSTANCE_MESSAGE {
     const OPCODE: u32 = 0x02fa;
 
@@ -43,7 +44,7 @@ impl crate::Message for SMSG_RAID_INSTANCE_MESSAGE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02FA, size: body_size as u32 });
         }

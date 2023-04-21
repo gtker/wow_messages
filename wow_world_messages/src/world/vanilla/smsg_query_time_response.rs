@@ -16,6 +16,7 @@ pub struct SMSG_QUERY_TIME_RESPONSE {
     pub time: u32,
 }
 
+impl crate::private::Sealed for SMSG_QUERY_TIME_RESPONSE {}
 impl crate::Message for SMSG_QUERY_TIME_RESPONSE {
     const OPCODE: u32 = 0x01cf;
 
@@ -29,7 +30,7 @@ impl crate::Message for SMSG_QUERY_TIME_RESPONSE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CF, size: body_size as u32 });
         }

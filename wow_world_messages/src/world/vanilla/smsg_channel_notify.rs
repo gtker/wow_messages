@@ -15,6 +15,7 @@ pub struct SMSG_CHANNEL_NOTIFY {
     pub channel_name: String,
 }
 
+impl crate::private::Sealed for SMSG_CHANNEL_NOTIFY {}
 impl crate::Message for SMSG_CHANNEL_NOTIFY {
     const OPCODE: u32 = 0x0099;
 
@@ -35,7 +36,7 @@ impl crate::Message for SMSG_CHANNEL_NOTIFY {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=257).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0099, size: body_size as u32 });
         }

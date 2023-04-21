@@ -13,6 +13,7 @@ pub struct CMSG_SWAP_INV_ITEM {
     pub destination_slot: u8,
 }
 
+impl crate::private::Sealed for CMSG_SWAP_INV_ITEM {}
 impl crate::Message for CMSG_SWAP_INV_ITEM {
     const OPCODE: u32 = 0x010d;
 
@@ -29,7 +30,7 @@ impl crate::Message for CMSG_SWAP_INV_ITEM {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x010D, size: body_size as u32 });
         }

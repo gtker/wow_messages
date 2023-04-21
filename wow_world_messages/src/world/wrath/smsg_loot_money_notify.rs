@@ -15,6 +15,7 @@ pub struct SMSG_LOOT_MONEY_NOTIFY {
     pub alone: bool,
 }
 
+impl crate::private::Sealed for SMSG_LOOT_MONEY_NOTIFY {}
 impl crate::Message for SMSG_LOOT_MONEY_NOTIFY {
     const OPCODE: u32 = 0x0163;
 
@@ -31,7 +32,7 @@ impl crate::Message for SMSG_LOOT_MONEY_NOTIFY {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0163, size: body_size as u32 });
         }

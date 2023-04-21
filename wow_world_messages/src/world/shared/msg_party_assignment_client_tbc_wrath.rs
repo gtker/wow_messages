@@ -18,6 +18,7 @@ pub struct MSG_PARTY_ASSIGNMENT_Client {
     pub player: Guid,
 }
 
+impl crate::private::Sealed for MSG_PARTY_ASSIGNMENT_Client {}
 impl crate::Message for MSG_PARTY_ASSIGNMENT_Client {
     const OPCODE: u32 = 0x038e;
 
@@ -37,7 +38,7 @@ impl crate::Message for MSG_PARTY_ASSIGNMENT_Client {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 10 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x038E, size: body_size as u32 });
         }

@@ -16,6 +16,7 @@ pub struct MSG_MOVE_UNROOT_Server {
     pub info: MovementInfo,
 }
 
+impl crate::private::Sealed for MSG_MOVE_UNROOT_Server {}
 impl crate::Message for MSG_MOVE_UNROOT_Server {
     const OPCODE: u32 = 0x00ed;
 
@@ -32,7 +33,7 @@ impl crate::Message for MSG_MOVE_UNROOT_Server {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(31..=91).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00ED, size: body_size as u32 });
         }

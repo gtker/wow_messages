@@ -21,6 +21,7 @@ pub struct SMSG_BINDPOINTUPDATE {
     pub area: Area,
 }
 
+impl crate::private::Sealed for SMSG_BINDPOINTUPDATE {}
 impl crate::Message for SMSG_BINDPOINTUPDATE {
     const OPCODE: u32 = 0x0155;
 
@@ -40,7 +41,7 @@ impl crate::Message for SMSG_BINDPOINTUPDATE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0155, size: body_size as u32 });
         }

@@ -13,6 +13,7 @@ pub struct CMSG_AREA_SPIRIT_HEALER_QUEUE {
     pub guid: Guid,
 }
 
+impl crate::private::Sealed for CMSG_AREA_SPIRIT_HEALER_QUEUE {}
 impl crate::Message for CMSG_AREA_SPIRIT_HEALER_QUEUE {
     const OPCODE: u32 = 0x02e3;
 
@@ -26,7 +27,7 @@ impl crate::Message for CMSG_AREA_SPIRIT_HEALER_QUEUE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E3, size: body_size as u32 });
         }

@@ -17,6 +17,7 @@ pub struct SMSG_INSTANCE_RESET_FAILED {
     pub map: Map,
 }
 
+impl crate::private::Sealed for SMSG_INSTANCE_RESET_FAILED {}
 impl crate::Message for SMSG_INSTANCE_RESET_FAILED {
     const OPCODE: u32 = 0x031f;
 
@@ -33,7 +34,7 @@ impl crate::Message for SMSG_INSTANCE_RESET_FAILED {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x031F, size: body_size as u32 });
         }

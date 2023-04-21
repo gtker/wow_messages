@@ -17,6 +17,7 @@ pub struct CMSG_TEST_OPTIONAL {
     pub server: Option<CMSG_TEST_OPTIONAL_server>,
 }
 
+impl crate::private::Sealed for CMSG_TEST_OPTIONAL {}
 impl crate::Message for CMSG_TEST_OPTIONAL {
     const OPCODE: u32 = 0x1137;
 
@@ -44,7 +45,7 @@ impl crate::Message for CMSG_TEST_OPTIONAL {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=258).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x1137, size: body_size as u32 });
         }

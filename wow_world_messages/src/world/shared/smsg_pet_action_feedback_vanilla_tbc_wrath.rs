@@ -13,6 +13,7 @@ pub struct SMSG_PET_ACTION_FEEDBACK {
     pub feedback: PetFeedback,
 }
 
+impl crate::private::Sealed for SMSG_PET_ACTION_FEEDBACK {}
 impl crate::Message for SMSG_PET_ACTION_FEEDBACK {
     const OPCODE: u32 = 0x02c6;
 
@@ -26,7 +27,7 @@ impl crate::Message for SMSG_PET_ACTION_FEEDBACK {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C6, size: body_size as u32 });
         }

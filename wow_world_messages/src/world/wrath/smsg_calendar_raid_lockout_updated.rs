@@ -23,6 +23,7 @@ pub struct SMSG_CALENDAR_RAID_LOCKOUT_UPDATED {
     pub new_time_to_update: Duration,
 }
 
+impl crate::private::Sealed for SMSG_CALENDAR_RAID_LOCKOUT_UPDATED {}
 impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_UPDATED {
     const OPCODE: u32 = 0x0471;
 
@@ -48,7 +49,7 @@ impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_UPDATED {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0471, size: body_size as u32 });
         }

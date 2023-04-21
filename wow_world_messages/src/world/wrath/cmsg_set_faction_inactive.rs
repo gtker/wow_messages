@@ -15,6 +15,7 @@ pub struct CMSG_SET_FACTION_INACTIVE {
     pub inactive: bool,
 }
 
+impl crate::private::Sealed for CMSG_SET_FACTION_INACTIVE {}
 impl crate::Message for CMSG_SET_FACTION_INACTIVE {
     const OPCODE: u32 = 0x0317;
 
@@ -31,7 +32,7 @@ impl crate::Message for CMSG_SET_FACTION_INACTIVE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 3 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0317, size: body_size as u32 });
         }

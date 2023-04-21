@@ -13,6 +13,7 @@ pub struct CMSG_SET_WATCHED_FACTION {
     pub faction: Faction,
 }
 
+impl crate::private::Sealed for CMSG_SET_WATCHED_FACTION {}
 impl crate::Message for CMSG_SET_WATCHED_FACTION {
     const OPCODE: u32 = 0x0318;
 
@@ -26,7 +27,7 @@ impl crate::Message for CMSG_SET_WATCHED_FACTION {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0318, size: body_size as u32 });
         }

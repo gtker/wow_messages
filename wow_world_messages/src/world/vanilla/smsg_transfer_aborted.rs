@@ -21,6 +21,7 @@ pub struct SMSG_TRANSFER_ABORTED {
     pub argument: u8,
 }
 
+impl crate::private::Sealed for SMSG_TRANSFER_ABORTED {}
 impl crate::Message for SMSG_TRANSFER_ABORTED {
     const OPCODE: u32 = 0x0040;
 
@@ -40,7 +41,7 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 6 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0040, size: body_size as u32 });
         }

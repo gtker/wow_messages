@@ -13,6 +13,7 @@ pub struct SMSG_SPLINE_MOVE_SET_FLYING {
     pub guid: Guid,
 }
 
+impl crate::private::Sealed for SMSG_SPLINE_MOVE_SET_FLYING {}
 impl crate::Message for SMSG_SPLINE_MOVE_SET_FLYING {
     const OPCODE: u32 = 0x0421;
 
@@ -26,7 +27,7 @@ impl crate::Message for SMSG_SPLINE_MOVE_SET_FLYING {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=9).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0421, size: body_size as u32 });
         }

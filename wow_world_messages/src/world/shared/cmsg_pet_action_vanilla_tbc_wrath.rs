@@ -17,6 +17,7 @@ pub struct CMSG_PET_ACTION {
     pub target: Guid,
 }
 
+impl crate::private::Sealed for CMSG_PET_ACTION {}
 impl crate::Message for CMSG_PET_ACTION {
     const OPCODE: u32 = 0x0175;
 
@@ -36,7 +37,7 @@ impl crate::Message for CMSG_PET_ACTION {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0175, size: body_size as u32 });
         }

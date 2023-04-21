@@ -13,6 +13,7 @@ pub struct SMSG_GM_TICKET_STATUS_UPDATE {
     pub response: GmTicketStatusResponse,
 }
 
+impl crate::private::Sealed for SMSG_GM_TICKET_STATUS_UPDATE {}
 impl crate::Message for SMSG_GM_TICKET_STATUS_UPDATE {
     const OPCODE: u32 = 0x0328;
 
@@ -26,7 +27,7 @@ impl crate::Message for SMSG_GM_TICKET_STATUS_UPDATE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0328, size: body_size as u32 });
         }

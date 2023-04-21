@@ -27,6 +27,7 @@ pub struct SMSG_ARENA_TEAM_QUERY_RESPONSE {
     pub border_color: u32,
 }
 
+impl crate::private::Sealed for SMSG_ARENA_TEAM_QUERY_RESPONSE {}
 impl crate::Message for SMSG_ARENA_TEAM_QUERY_RESPONSE {
     const OPCODE: u32 = 0x034c;
 
@@ -65,7 +66,7 @@ impl crate::Message for SMSG_ARENA_TEAM_QUERY_RESPONSE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(26..=281).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x034C, size: body_size as u32 });
         }

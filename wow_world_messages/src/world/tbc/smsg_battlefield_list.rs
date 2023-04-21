@@ -19,6 +19,7 @@ pub struct SMSG_BATTLEFIELD_LIST {
     pub battlegrounds: Vec<u32>,
 }
 
+impl crate::private::Sealed for SMSG_BATTLEFIELD_LIST {}
 impl crate::Message for SMSG_BATTLEFIELD_LIST {
     const OPCODE: u32 = 0x023d;
 
@@ -43,7 +44,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(16..=65535).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023D, size: body_size as u32 });
         }

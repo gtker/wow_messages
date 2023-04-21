@@ -14,6 +14,7 @@ pub struct SMSG_LFG_PARTY_INFO {
     pub infos: Vec<LfgPartyInfo>,
 }
 
+impl crate::private::Sealed for SMSG_LFG_PARTY_INFO {}
 impl crate::Message for SMSG_LFG_PARTY_INFO {
     const OPCODE: u32 = 0x0372;
 
@@ -32,7 +33,7 @@ impl crate::Message for SMSG_LFG_PARTY_INFO {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0372, size: body_size as u32 });
         }

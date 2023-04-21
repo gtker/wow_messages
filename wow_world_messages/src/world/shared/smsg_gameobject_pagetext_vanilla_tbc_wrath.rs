@@ -13,6 +13,7 @@ pub struct SMSG_GAMEOBJECT_PAGETEXT {
     pub guid: Guid,
 }
 
+impl crate::private::Sealed for SMSG_GAMEOBJECT_PAGETEXT {}
 impl crate::Message for SMSG_GAMEOBJECT_PAGETEXT {
     const OPCODE: u32 = 0x01df;
 
@@ -26,7 +27,7 @@ impl crate::Message for SMSG_GAMEOBJECT_PAGETEXT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01DF, size: body_size as u32 });
         }

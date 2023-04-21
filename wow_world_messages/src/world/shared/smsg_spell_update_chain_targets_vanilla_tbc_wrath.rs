@@ -18,6 +18,7 @@ pub struct SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     pub targets: Vec<Guid>,
 }
 
+impl crate::private::Sealed for SMSG_SPELL_UPDATE_CHAIN_TARGETS {}
 impl crate::Message for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
     const OPCODE: u32 = 0x0330;
 
@@ -42,7 +43,7 @@ impl crate::Message for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(16..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0330, size: body_size as u32 });
         }

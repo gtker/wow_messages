@@ -21,6 +21,7 @@ pub struct SMSG_GROUP_INVITE {
     pub unknown: Option<SMSG_GROUP_INVITE_unknown>,
 }
 
+impl crate::private::Sealed for SMSG_GROUP_INVITE {}
 impl crate::Message for SMSG_GROUP_INVITE {
     const OPCODE: u32 = 0x006f;
 
@@ -54,7 +55,7 @@ impl crate::Message for SMSG_GROUP_INVITE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=266).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x006F, size: body_size as u32 });
         }

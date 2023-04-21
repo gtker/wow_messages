@@ -17,6 +17,7 @@ pub struct SMSG_ALL_ACHIEVEMENT_DATA {
     pub in_progress: Vec<AchievementInProgress>,
 }
 
+impl crate::private::Sealed for SMSG_ALL_ACHIEVEMENT_DATA {}
 impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
     const OPCODE: u32 = 0x047d;
 
@@ -33,7 +34,7 @@ impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size > 16777215 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x047D, size: body_size as u32 });
         }

@@ -15,6 +15,7 @@ pub struct CMSG_SET_CONTACT_NOTES {
     pub note: String,
 }
 
+impl crate::private::Sealed for CMSG_SET_CONTACT_NOTES {}
 impl crate::Message for CMSG_SET_CONTACT_NOTES {
     const OPCODE: u32 = 0x006b;
 
@@ -35,7 +36,7 @@ impl crate::Message for CMSG_SET_CONTACT_NOTES {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=264).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x006B, size: body_size as u32 });
         }

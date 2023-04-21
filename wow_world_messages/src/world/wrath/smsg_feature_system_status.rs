@@ -15,6 +15,7 @@ pub struct SMSG_FEATURE_SYSTEM_STATUS {
     pub voice_chat_enabled: bool,
 }
 
+impl crate::private::Sealed for SMSG_FEATURE_SYSTEM_STATUS {}
 impl crate::Message for SMSG_FEATURE_SYSTEM_STATUS {
     const OPCODE: u32 = 0x03c9;
 
@@ -31,7 +32,7 @@ impl crate::Message for SMSG_FEATURE_SYSTEM_STATUS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C9, size: body_size as u32 });
         }

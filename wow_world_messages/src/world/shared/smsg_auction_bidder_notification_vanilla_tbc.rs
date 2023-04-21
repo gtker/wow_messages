@@ -27,6 +27,7 @@ pub struct SMSG_AUCTION_BIDDER_NOTIFICATION {
     pub item_random_property_id: u32,
 }
 
+impl crate::private::Sealed for SMSG_AUCTION_BIDDER_NOTIFICATION {}
 impl crate::Message for SMSG_AUCTION_BIDDER_NOTIFICATION {
     const OPCODE: u32 = 0x025e;
 
@@ -58,7 +59,7 @@ impl crate::Message for SMSG_AUCTION_BIDDER_NOTIFICATION {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 32 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025E, size: body_size as u32 });
         }

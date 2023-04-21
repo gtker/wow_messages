@@ -13,6 +13,7 @@ pub struct MSG_CHANNEL_START_Server {
     pub duration: u32,
 }
 
+impl crate::private::Sealed for MSG_CHANNEL_START_Server {}
 impl crate::Message for MSG_CHANNEL_START_Server {
     const OPCODE: u32 = 0x0139;
 
@@ -29,7 +30,7 @@ impl crate::Message for MSG_CHANNEL_START_Server {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0139, size: body_size as u32 });
         }

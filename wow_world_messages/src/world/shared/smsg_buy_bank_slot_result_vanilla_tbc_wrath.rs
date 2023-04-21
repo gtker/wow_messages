@@ -13,6 +13,7 @@ pub struct SMSG_BUY_BANK_SLOT_RESULT {
     pub result: BuyBankSlotResult,
 }
 
+impl crate::private::Sealed for SMSG_BUY_BANK_SLOT_RESULT {}
 impl crate::Message for SMSG_BUY_BANK_SLOT_RESULT {
     const OPCODE: u32 = 0x01ba;
 
@@ -26,7 +27,7 @@ impl crate::Message for SMSG_BUY_BANK_SLOT_RESULT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BA, size: body_size as u32 });
         }

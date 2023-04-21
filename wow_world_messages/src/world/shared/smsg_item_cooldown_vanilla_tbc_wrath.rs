@@ -15,6 +15,7 @@ pub struct SMSG_ITEM_COOLDOWN {
     pub id: u32,
 }
 
+impl crate::private::Sealed for SMSG_ITEM_COOLDOWN {}
 impl crate::Message for SMSG_ITEM_COOLDOWN {
     const OPCODE: u32 = 0x00b0;
 
@@ -31,7 +32,7 @@ impl crate::Message for SMSG_ITEM_COOLDOWN {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00B0, size: body_size as u32 });
         }

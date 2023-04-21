@@ -23,6 +23,7 @@ pub struct MSG_SAVE_GUILD_EMBLEM_Client {
     pub background_color: u32,
 }
 
+impl crate::private::Sealed for MSG_SAVE_GUILD_EMBLEM_Client {}
 impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Client {
     const OPCODE: u32 = 0x01f1;
 
@@ -51,7 +52,7 @@ impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Client {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 28 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F1, size: body_size as u32 });
         }

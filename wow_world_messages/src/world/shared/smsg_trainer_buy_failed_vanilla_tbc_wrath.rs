@@ -20,6 +20,7 @@ pub struct SMSG_TRAINER_BUY_FAILED {
     pub error: TrainingFailureReason,
 }
 
+impl crate::private::Sealed for SMSG_TRAINER_BUY_FAILED {}
 impl crate::Message for SMSG_TRAINER_BUY_FAILED {
     const OPCODE: u32 = 0x01b4;
 
@@ -39,7 +40,7 @@ impl crate::Message for SMSG_TRAINER_BUY_FAILED {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01B4, size: body_size as u32 });
         }

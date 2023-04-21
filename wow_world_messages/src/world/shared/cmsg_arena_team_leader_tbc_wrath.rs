@@ -13,6 +13,7 @@ pub struct CMSG_ARENA_TEAM_LEADER {
     pub player: String,
 }
 
+impl crate::private::Sealed for CMSG_ARENA_TEAM_LEADER {}
 impl crate::Message for CMSG_ARENA_TEAM_LEADER {
     const OPCODE: u32 = 0x0356;
 
@@ -33,7 +34,7 @@ impl crate::Message for CMSG_ARENA_TEAM_LEADER {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=260).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0356, size: body_size as u32 });
         }

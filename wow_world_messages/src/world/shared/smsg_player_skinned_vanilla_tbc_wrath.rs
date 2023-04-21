@@ -11,6 +11,7 @@ pub struct SMSG_PLAYER_SKINNED {
     pub spirit_released: bool,
 }
 
+impl crate::private::Sealed for SMSG_PLAYER_SKINNED {}
 impl crate::Message for SMSG_PLAYER_SKINNED {
     const OPCODE: u32 = 0x02bc;
 
@@ -24,7 +25,7 @@ impl crate::Message for SMSG_PLAYER_SKINNED {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 1 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02BC, size: body_size as u32 });
         }

@@ -16,6 +16,7 @@ pub struct SMSG_GUILD_EVENT {
     pub event_descriptions: Vec<String>,
 }
 
+impl crate::private::Sealed for SMSG_GUILD_EVENT {}
 impl crate::Message for SMSG_GUILD_EVENT {
     const OPCODE: u32 = 0x0092;
 
@@ -38,7 +39,7 @@ impl crate::Message for SMSG_GUILD_EVENT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=65538).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0092, size: body_size as u32 });
         }

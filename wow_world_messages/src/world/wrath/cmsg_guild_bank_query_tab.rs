@@ -17,6 +17,7 @@ pub struct CMSG_GUILD_BANK_QUERY_TAB {
     pub full_update: bool,
 }
 
+impl crate::private::Sealed for CMSG_GUILD_BANK_QUERY_TAB {}
 impl crate::Message for CMSG_GUILD_BANK_QUERY_TAB {
     const OPCODE: u32 = 0x03e7;
 
@@ -36,7 +37,7 @@ impl crate::Message for CMSG_GUILD_BANK_QUERY_TAB {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 10 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E7, size: body_size as u32 });
         }

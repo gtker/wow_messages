@@ -20,6 +20,7 @@ pub struct SMSG_CONTACT_LIST {
     pub relations: Vec<Relation>,
 }
 
+impl crate::private::Sealed for SMSG_CONTACT_LIST {}
 impl crate::Message for SMSG_CONTACT_LIST {
     const OPCODE: u32 = 0x0067;
 
@@ -41,7 +42,7 @@ impl crate::Message for SMSG_CONTACT_LIST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=65535).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0067, size: body_size as u32 });
         }

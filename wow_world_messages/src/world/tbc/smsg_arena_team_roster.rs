@@ -20,6 +20,7 @@ pub struct SMSG_ARENA_TEAM_ROSTER {
     pub members: Vec<ArenaTeamMember>,
 }
 
+impl crate::private::Sealed for SMSG_ARENA_TEAM_ROSTER {}
 impl crate::Message for SMSG_ARENA_TEAM_ROSTER {
     const OPCODE: u32 = 0x034e;
 
@@ -44,7 +45,7 @@ impl crate::Message for SMSG_ARENA_TEAM_ROSTER {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=65535).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x034E, size: body_size as u32 });
         }

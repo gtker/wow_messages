@@ -38,6 +38,7 @@ pub struct SMSG_UPDATE_LFG_LIST {
     pub players: Vec<LfgListPlayer>,
 }
 
+impl crate::private::Sealed for SMSG_UPDATE_LFG_LIST {}
 impl crate::Message for SMSG_UPDATE_LFG_LIST {
     const OPCODE: u32 = 0x0360;
 
@@ -95,7 +96,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(25..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0360, size: body_size as u32 });
         }

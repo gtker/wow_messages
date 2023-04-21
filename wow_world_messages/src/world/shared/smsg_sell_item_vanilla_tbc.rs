@@ -18,6 +18,7 @@ pub struct SMSG_SELL_ITEM {
     pub result: SellItemResult,
 }
 
+impl crate::private::Sealed for SMSG_SELL_ITEM {}
 impl crate::Message for SMSG_SELL_ITEM {
     const OPCODE: u32 = 0x01a1;
 
@@ -37,7 +38,7 @@ impl crate::Message for SMSG_SELL_ITEM {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 17 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01A1, size: body_size as u32 });
         }

@@ -16,6 +16,7 @@ pub struct SMSG_WHO {
     pub players: Vec<WhoPlayer>,
 }
 
+impl crate::private::Sealed for SMSG_WHO {}
 impl crate::Message for SMSG_WHO {
     const OPCODE: u32 = 0x0063;
 
@@ -37,7 +38,7 @@ impl crate::Message for SMSG_WHO {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0063, size: body_size as u32 });
         }

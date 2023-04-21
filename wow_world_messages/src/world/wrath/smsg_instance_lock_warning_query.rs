@@ -17,6 +17,7 @@ pub struct SMSG_INSTANCE_LOCK_WARNING_QUERY {
     pub unknown: u8,
 }
 
+impl crate::private::Sealed for SMSG_INSTANCE_LOCK_WARNING_QUERY {}
 impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
     const OPCODE: u32 = 0x0147;
 
@@ -36,7 +37,7 @@ impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0147, size: body_size as u32 });
         }

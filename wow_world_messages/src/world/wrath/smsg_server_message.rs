@@ -15,6 +15,7 @@ pub struct SMSG_SERVER_MESSAGE {
     pub message: String,
 }
 
+impl crate::private::Sealed for SMSG_SERVER_MESSAGE {}
 impl crate::Message for SMSG_SERVER_MESSAGE {
     const OPCODE: u32 = 0x0291;
 
@@ -35,7 +36,7 @@ impl crate::Message for SMSG_SERVER_MESSAGE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=260).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0291, size: body_size as u32 });
         }

@@ -17,6 +17,7 @@ pub struct SMSG_ITEM_NAME_QUERY_RESPONSE {
     pub inventory_type: InventoryType,
 }
 
+impl crate::private::Sealed for SMSG_ITEM_NAME_QUERY_RESPONSE {}
 impl crate::Message for SMSG_ITEM_NAME_QUERY_RESPONSE {
     const OPCODE: u32 = 0x02c5;
 
@@ -40,7 +41,7 @@ impl crate::Message for SMSG_ITEM_NAME_QUERY_RESPONSE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=261).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C5, size: body_size as u32 });
         }

@@ -20,6 +20,7 @@ pub struct SMSG_CHAR_RENAME {
     pub result: SMSG_CHAR_RENAME_WorldResult,
 }
 
+impl crate::private::Sealed for SMSG_CHAR_RENAME {}
 impl crate::Message for SMSG_CHAR_RENAME {
     const OPCODE: u32 = 0x02c8;
 
@@ -52,7 +53,7 @@ impl crate::Message for SMSG_CHAR_RENAME {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=265).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C8, size: body_size as u32 });
         }

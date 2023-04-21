@@ -22,6 +22,7 @@ pub struct SMSG_PET_NAME_QUERY_RESPONSE {
     pub names: SMSG_PET_NAME_QUERY_RESPONSE_PetQueryDisabledNames,
 }
 
+impl crate::private::Sealed for SMSG_PET_NAME_QUERY_RESPONSE {}
 impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
     const OPCODE: u32 = 0x0053;
 
@@ -62,7 +63,7 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(10..=1545).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0053, size: body_size as u32 });
         }

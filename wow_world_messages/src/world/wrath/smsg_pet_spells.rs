@@ -30,6 +30,7 @@ pub struct SMSG_PET_SPELLS {
     pub action_bars: Option<SMSG_PET_SPELLS_action_bars>,
 }
 
+impl crate::private::Sealed for SMSG_PET_SPELLS {}
 impl crate::Message for SMSG_PET_SPELLS {
     const OPCODE: u32 = 0x0179;
 
@@ -86,7 +87,7 @@ impl crate::Message for SMSG_PET_SPELLS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=4668).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0179, size: body_size as u32 });
         }

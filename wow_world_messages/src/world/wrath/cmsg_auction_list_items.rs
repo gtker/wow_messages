@@ -39,6 +39,7 @@ pub struct CMSG_AUCTION_LIST_ITEMS {
     pub sorted_auctions: Vec<AuctionSort>,
 }
 
+impl crate::private::Sealed for CMSG_AUCTION_LIST_ITEMS {}
 impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
     const OPCODE: u32 = 0x0258;
 
@@ -94,7 +95,7 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(34..=801).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0258, size: body_size as u32 });
         }

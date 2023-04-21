@@ -20,6 +20,7 @@ pub struct SMSG_FORCE_PITCH_RATE_CHANGE {
     pub speed: f32,
 }
 
+impl crate::private::Sealed for SMSG_FORCE_PITCH_RATE_CHANGE {}
 impl crate::Message for SMSG_FORCE_PITCH_RATE_CHANGE {
     const OPCODE: u32 = 0x045c;
 
@@ -39,7 +40,7 @@ impl crate::Message for SMSG_FORCE_PITCH_RATE_CHANGE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(10..=17).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x045C, size: body_size as u32 });
         }

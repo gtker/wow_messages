@@ -240,18 +240,6 @@ impl Writer {
         self.wln(format!("w.write_all(&v){postfix}", postfix = it.postfix()));
     }
 
-    pub(crate) fn write_into_vec_trait(&mut self, write_function: impl Fn(&mut Self, ImplType)) {
-        self.open_curly(
-            "fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error>",
-        );
-
-        write_function(self, ImplType::Std);
-
-        self.wln("Ok(())");
-
-        self.closing_curly();
-    }
-
     pub(crate) fn write_into_vec(
         &mut self,
         type_name: impl AsRef<str>,

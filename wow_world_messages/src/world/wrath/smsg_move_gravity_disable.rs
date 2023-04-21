@@ -15,6 +15,7 @@ pub struct SMSG_MOVE_GRAVITY_DISABLE {
     pub movement_counter: u32,
 }
 
+impl crate::private::Sealed for SMSG_MOVE_GRAVITY_DISABLE {}
 impl crate::Message for SMSG_MOVE_GRAVITY_DISABLE {
     const OPCODE: u32 = 0x04ce;
 
@@ -31,7 +32,7 @@ impl crate::Message for SMSG_MOVE_GRAVITY_DISABLE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=13).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04CE, size: body_size as u32 });
         }

@@ -28,6 +28,7 @@ pub struct CMSG_CHAR_CUSTOMIZE {
     pub face: u8,
 }
 
+impl crate::private::Sealed for CMSG_CHAR_CUSTOMIZE {}
 impl crate::Message for CMSG_CHAR_CUSTOMIZE {
     const OPCODE: u32 = 0x0473;
 
@@ -66,7 +67,7 @@ impl crate::Message for CMSG_CHAR_CUSTOMIZE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(15..=270).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0473, size: body_size as u32 });
         }

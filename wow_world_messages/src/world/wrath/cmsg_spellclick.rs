@@ -13,6 +13,7 @@ pub struct CMSG_SPELLCLICK {
     pub target: Guid,
 }
 
+impl crate::private::Sealed for CMSG_SPELLCLICK {}
 impl crate::Message for CMSG_SPELLCLICK {
     const OPCODE: u32 = 0x03f8;
 
@@ -26,7 +27,7 @@ impl crate::Message for CMSG_SPELLCLICK {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F8, size: body_size as u32 });
         }

@@ -15,6 +15,7 @@ pub struct CMSG_SUMMON_RESPONSE {
     pub agree: bool,
 }
 
+impl crate::private::Sealed for CMSG_SUMMON_RESPONSE {}
 impl crate::Message for CMSG_SUMMON_RESPONSE {
     const OPCODE: u32 = 0x02ac;
 
@@ -31,7 +32,7 @@ impl crate::Message for CMSG_SUMMON_RESPONSE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02AC, size: body_size as u32 });
         }

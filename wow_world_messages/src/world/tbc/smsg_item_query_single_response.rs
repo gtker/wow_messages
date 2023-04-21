@@ -85,6 +85,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     pub found: Option<SMSG_ITEM_QUERY_SINGLE_RESPONSE_found>,
 }
 
+impl crate::private::Sealed for SMSG_ITEM_QUERY_SINGLE_RESPONSE {}
 impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     const OPCODE: u32 = 0x0058;
 
@@ -316,7 +317,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=1784).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0058, size: body_size as u32 });
         }

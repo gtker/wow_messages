@@ -11,6 +11,7 @@ pub struct CMSG_PUSHQUESTTOPARTY {
     pub quest_id: u32,
 }
 
+impl crate::private::Sealed for CMSG_PUSHQUESTTOPARTY {}
 impl crate::Message for CMSG_PUSHQUESTTOPARTY {
     const OPCODE: u32 = 0x019d;
 
@@ -24,7 +25,7 @@ impl crate::Message for CMSG_PUSHQUESTTOPARTY {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x019D, size: body_size as u32 });
         }

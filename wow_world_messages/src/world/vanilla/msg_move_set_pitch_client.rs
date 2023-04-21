@@ -13,6 +13,7 @@ pub struct MSG_MOVE_SET_PITCH_Client {
     pub info: MovementInfo,
 }
 
+impl crate::private::Sealed for MSG_MOVE_SET_PITCH_Client {}
 impl crate::Message for MSG_MOVE_SET_PITCH_Client {
     const OPCODE: u32 = 0x00db;
 
@@ -26,7 +27,7 @@ impl crate::Message for MSG_MOVE_SET_PITCH_Client {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(28..=81).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00DB, size: body_size as u32 });
         }

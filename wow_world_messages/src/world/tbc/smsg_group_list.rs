@@ -38,6 +38,7 @@ pub struct SMSG_GROUP_LIST {
     pub group_not_empty: Option<SMSG_GROUP_LIST_group_not_empty>,
 }
 
+impl crate::private::Sealed for SMSG_GROUP_LIST {}
 impl crate::Message for SMSG_GROUP_LIST {
     const OPCODE: u32 = 0x007d;
 
@@ -90,7 +91,7 @@ impl crate::Message for SMSG_GROUP_LIST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(24..=65535).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007D, size: body_size as u32 });
         }

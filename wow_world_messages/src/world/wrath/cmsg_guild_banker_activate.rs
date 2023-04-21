@@ -15,6 +15,7 @@ pub struct CMSG_GUILD_BANKER_ACTIVATE {
     pub full_update: bool,
 }
 
+impl crate::private::Sealed for CMSG_GUILD_BANKER_ACTIVATE {}
 impl crate::Message for CMSG_GUILD_BANKER_ACTIVATE {
     const OPCODE: u32 = 0x03e6;
 
@@ -31,7 +32,7 @@ impl crate::Message for CMSG_GUILD_BANKER_ACTIVATE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E6, size: body_size as u32 });
         }

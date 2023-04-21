@@ -14,6 +14,7 @@ pub struct SMSG_RAID_INSTANCE_INFO {
     pub raid_infos: Vec<RaidInfo>,
 }
 
+impl crate::private::Sealed for SMSG_RAID_INSTANCE_INFO {}
 impl crate::Message for SMSG_RAID_INSTANCE_INFO {
     const OPCODE: u32 = 0x02cc;
 
@@ -32,7 +33,7 @@ impl crate::Message for SMSG_RAID_INSTANCE_INFO {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02CC, size: body_size as u32 });
         }

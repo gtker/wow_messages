@@ -17,6 +17,7 @@ pub struct SMSG_LOOT_RELEASE_RESPONSE {
     pub unknown1: u8,
 }
 
+impl crate::private::Sealed for SMSG_LOOT_RELEASE_RESPONSE {}
 impl crate::Message for SMSG_LOOT_RELEASE_RESPONSE {
     const OPCODE: u32 = 0x0161;
 
@@ -33,7 +34,7 @@ impl crate::Message for SMSG_LOOT_RELEASE_RESPONSE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0161, size: body_size as u32 });
         }

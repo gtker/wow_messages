@@ -20,6 +20,7 @@ pub struct CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
     pub seat: u8,
 }
 
+impl crate::private::Sealed for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {}
 impl crate::Message for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
     const OPCODE: u32 = 0x049b;
 
@@ -42,7 +43,7 @@ impl crate::Message for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(35..=107).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x049B, size: body_size as u32 });
         }

@@ -31,6 +31,7 @@ pub struct SMSG_GUILD_BANK_LIST {
     pub content_result: SMSG_GUILD_BANK_LIST_GuildBankContentResult,
 }
 
+impl crate::private::Sealed for SMSG_GUILD_BANK_LIST {}
 impl crate::Message for SMSG_GUILD_BANK_LIST {
     const OPCODE: u32 = 0x03e8;
 
@@ -88,7 +89,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(15..=465681).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E8, size: body_size as u32 });
         }

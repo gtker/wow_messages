@@ -13,6 +13,7 @@ pub struct SMSG_LFG_UPDATE_LFG {
     pub data: [LfgData; 3],
 }
 
+impl crate::private::Sealed for SMSG_LFG_UPDATE_LFG {}
 impl crate::Message for SMSG_LFG_UPDATE_LFG {
     const OPCODE: u32 = 0x036e;
 
@@ -28,7 +29,7 @@ impl crate::Message for SMSG_LFG_UPDATE_LFG {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036E, size: body_size as u32 });
         }

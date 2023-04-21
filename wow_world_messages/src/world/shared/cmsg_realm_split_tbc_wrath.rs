@@ -14,6 +14,7 @@ pub struct CMSG_REALM_SPLIT {
     pub realm_id: u32,
 }
 
+impl crate::private::Sealed for CMSG_REALM_SPLIT {}
 impl crate::Message for CMSG_REALM_SPLIT {
     const OPCODE: u32 = 0x038c;
 
@@ -27,7 +28,7 @@ impl crate::Message for CMSG_REALM_SPLIT {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x038C, size: body_size as u32 });
         }

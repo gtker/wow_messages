@@ -24,6 +24,7 @@ pub struct SMSG_LOG_XPGAIN {
     pub exp_includes_recruit_a_friend_bonus: bool,
 }
 
+impl crate::private::Sealed for SMSG_LOG_XPGAIN {}
 impl crate::Message for SMSG_LOG_XPGAIN {
     const OPCODE: u32 = 0x01d0;
 
@@ -61,7 +62,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
 
         Ok(())
     }
-    fn read_body(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=22).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D0, size: body_size as u32 });
         }
