@@ -143,9 +143,9 @@ impl Objects {
     pub(crate) fn all_objects(&self) -> impl Iterator<Item = Object> + '_ {
         self.enums
             .iter()
-            .map(|a| Object::Enum(a))
-            .chain(self.flags.iter().map(|a| Object::Flag(a)))
-            .chain(self.all_containers().map(|a| Object::Container(a)))
+            .map(Object::Enum)
+            .chain(self.flags.iter().map(Object::Flag))
+            .chain(self.all_containers().map(Object::Container))
     }
 
     pub(crate) fn all_containers(&self) -> impl Iterator<Item = &Container> {

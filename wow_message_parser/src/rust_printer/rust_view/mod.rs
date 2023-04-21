@@ -76,7 +76,7 @@ fn create_else_if_flag(
             Equation::BitwiseAnd { values: value } => &value[0],
             Equation::Equals { .. } | Equation::NotEquals { .. } => unreachable!(),
         };
-        let enumerator = subject.pop_flag_enumerator(&name);
+        let enumerator = subject.pop_flag_enumerator(name);
         enumerators.push(enumerator);
     }
 
