@@ -54,28 +54,6 @@ impl RustMember {
         v
     }
 
-    pub(crate) fn clear_flag_enumerator(&mut self, enumerator: &str) {
-        match &mut self.ty {
-            RustType::Flag { enumerators, .. } => enumerators
-                .iter_mut()
-                .find(|a| a.name() == enumerator)
-                .unwrap()
-                .members
-                .clear(),
-            _ => unreachable!("clear_flag_enumerator was not flag"),
-        }
-    }
-
-    pub(crate) fn get_flag_enumerator(&self, enumerator: &str) -> RustEnumerator {
-        match self.ty() {
-            RustType::Flag { enumerators, .. } => {
-                let enumerator = enumerators.iter().find(|a| a.name() == enumerator).unwrap();
-                enumerator.clone()
-            }
-            _ => unreachable!("get_flag_enumerator was not flag"),
-        }
-    }
-
     pub(crate) fn pop_flag_enumerator(&mut self, enumerator: &str) -> RustEnumerator {
         match &mut self.ty {
             RustType::Flag { enumerators, .. } => {
@@ -125,13 +103,6 @@ impl RustMember {
                 });
             e.is_main_enumerator = true;
         }
-    }
-
-    pub(crate) fn set_is_elseif(&mut self) {
-        match &mut self.ty {
-            RustType::Flag { is_elseif, .. } => *is_elseif = true,
-            _ => unreachable!(),
-        };
     }
 
     pub(crate) fn append_members_to_enumerator_not_equal_range(

@@ -42,9 +42,31 @@ fn create_else_if_flag(
     };
 
     // Move enumerators into new RustMember
-    let main_enum = find_subject(current_scope, statement).get_flag_enumerator(enumerator);
-    find_subject(current_scope, statement).clear_flag_enumerator(enumerator);
-    find_subject(current_scope, statement).set_is_elseif();
+    let subject = find_subject(current_scope, statement);
+    let main_enum = match &mut subject.ty {
+        RustType::Flag {
+            is_elseif,
+            enumerators,
+            ..
+        } => {
+            let main_enum = enumerators
+                .iter()
+                .find(|a| a.name() == enumerator)
+                .unwrap()
+                .clone();
+
+            enumerators
+                .iter_mut()
+                .find(|a| a.name() == enumerator)
+                .unwrap()
+                .members
+                .clear();
+            *is_elseif = true;
+
+            main_enum
+        }
+        _ => unreachable!(),
+    };
 
     // Push enumerators
     let mut enumerators = vec![main_enum];
@@ -55,15 +77,15 @@ fn create_else_if_flag(
             Equation::BitwiseAnd { values: value } => &value[0],
             Equation::Equals { .. } | Equation::NotEquals { .. } => unreachable!(),
         };
-        let enumerator = find_subject(current_scope, elseif).pop_flag_enumerator(&name);
+        let enumerator = subject.pop_flag_enumerator(&name);
         enumerators.push(enumerator);
     }
 
-    let flag_int_ty = match find_subject(current_scope, statement).ty() {
+    let flag_int_ty = match subject.ty() {
         RustType::Flag { int_ty, .. } => *int_ty,
         _ => unreachable!(),
     };
-    let flag_ty_name = &find_subject(current_scope, statement).original_ty;
+    let flag_ty_name = &subject.original_ty;
 
     // Create new Enum RustMember
     let rm = RustMember::new(
@@ -83,7 +105,7 @@ fn create_else_if_flag(
     );
 
     // Move RustMember into
-    find_subject(current_scope, statement).append_members_to_enumerator_equal_and_set_elseif(
+    subject.append_members_to_enumerator_equal_and_set_elseif(
         enumerator,
         &[rm],
         &[StructMember::IfStatement(statement.clone())],
@@ -159,11 +181,12 @@ pub(crate) fn create_if_statement(
         else_enumerator_originals.push(m.clone());
     }
 
-    find_subject(current_scope, statement).set_main_enumerators(&main_enumerators);
+    let subject = find_subject(current_scope, statement);
+    subject.set_main_enumerators(&main_enumerators);
     if reversed {
         // Apply main to all except main_enumerators
         for i in &main_enumerators {
-            find_subject(current_scope, statement).append_members_to_enumerator_not_equal(
+            subject.append_members_to_enumerator_not_equal(
                 i,
                 &main_enumerator_members,
                 &main_enumerator_originals,
@@ -172,7 +195,7 @@ pub(crate) fn create_if_statement(
 
         // Apply other to main_enumerator
         for i in &main_enumerators {
-            find_subject(current_scope, statement).append_members_to_enumerator_equal(
+            subject.append_members_to_enumerator_equal(
                 i,
                 &else_enumerator_members,
                 &else_enumerator_originals,
@@ -181,7 +204,7 @@ pub(crate) fn create_if_statement(
     } else {
         // Apply main to main_enumerator
         for i in &main_enumerators {
-            find_subject(current_scope, statement).append_members_to_enumerator_equal(
+            subject.append_members_to_enumerator_equal(
                 i,
                 &main_enumerator_members,
                 &main_enumerator_originals,
@@ -218,7 +241,7 @@ pub(crate) fn create_if_statement(
             }
 
             for i in &else_if_enumerators {
-                find_subject(current_scope, statement).append_members_to_enumerator_equal(
+                subject.append_members_to_enumerator_equal(
                     i,
                     &else_if_enumerator_members,
                     &else_if_originals,
@@ -227,7 +250,7 @@ pub(crate) fn create_if_statement(
         }
 
         // Apply other to other_enumerators
-        find_subject(current_scope, statement).append_members_to_enumerator_not_equal_range(
+        subject.append_members_to_enumerator_not_equal_range(
             &main_enumerators,
             &else_enumerator_members,
             &else_enumerator_originals,
