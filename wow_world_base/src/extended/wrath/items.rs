@@ -1,6 +1,10 @@
-use crate::wrath::{wrath_race_class_match, InventoryType, RaceClass};
+use crate::wrath::{wrath_race_class_match, InventoryType};
 
-wrath_race_class_match!(starter_items, &'static [StarterItem]);
+wrath_race_class_match!(
+    starter_items,
+    &'static [StarterItem],
+    crate::wrath::RaceClass
+);
 
 pub struct StarterItem {
     pub item: u32,

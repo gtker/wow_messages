@@ -5,7 +5,7 @@ use crate::shared::player_race_tbc_wrath::PlayerRace;
 use crate::wrath::{Class, Map};
 pub use positions::*;
 
-position!();
+position!(crate::wrath::Map);
 
 #[cfg(feature = "wrath")]
 impl PlayerRace {
@@ -17,16 +17,16 @@ impl PlayerRace {
         }
 
         match self {
-            PlayerRace::Human => HUMAN_START_POSITION,
-            PlayerRace::Orc => ORC_START_POSITION,
-            PlayerRace::Dwarf => DWARF_START_POSITION,
-            PlayerRace::NightElf => NIGHT_ELF_START_POSITION,
-            PlayerRace::Undead => UNDEAD_START_POSITION,
-            PlayerRace::Tauren => TAUREN_START_POSITION,
-            PlayerRace::Gnome => GNOME_START_POSITION,
-            PlayerRace::Troll => TROLL_START_POSITION,
-            PlayerRace::BloodElf => BLOOD_ELF_START_POSITION,
-            PlayerRace::Draenei => DRAENEI_START_POSITION,
+            Self::Human => HUMAN_START_POSITION,
+            Self::Orc => ORC_START_POSITION,
+            Self::Dwarf => DWARF_START_POSITION,
+            Self::NightElf => NIGHT_ELF_START_POSITION,
+            Self::Undead => UNDEAD_START_POSITION,
+            Self::Tauren => TAUREN_START_POSITION,
+            Self::Gnome => GNOME_START_POSITION,
+            Self::Troll => TROLL_START_POSITION,
+            Self::BloodElf => BLOOD_ELF_START_POSITION,
+            Self::Draenei => DRAENEI_START_POSITION,
         }
     }
 }
@@ -38,9 +38,9 @@ impl crate::wrath::RaceClass {
     }
 }
 
-vanilla_starter_positions!();
+vanilla_starter_positions!(Position, Map);
 
-tbc_starter_positions!();
+tbc_starter_positions!(Position, Map);
 
 // cmangos has 5 slightly different starting positions depending on race
 // This has the assumption that there is only one correct starting position.

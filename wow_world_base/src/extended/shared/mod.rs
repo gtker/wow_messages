@@ -14,7 +14,7 @@ mod vanilla_tbc_item_quality;
 pub use vanilla_tbc_item_quality::*;
 
 macro_rules! exp_required_to_level_up {
-    ($level:expr) => {
+    ($level:expr, $exp_required:expr) => {
         /// Get the current exp required to level up.
         ///
         #[doc = "Values `== 0 || >="]
@@ -25,14 +25,14 @@ macro_rules! exp_required_to_level_up {
                 return None;
             }
 
-            Some(EXP_REQUIRED_FOR_LEVEL[(level - 1) as usize])
+            Some($exp_required[(level - 1) as usize])
         }
     };
 }
 pub(crate) use exp_required_to_level_up;
 
 macro_rules! exploration_exp_for {
-    ($level:expr) => {
+    ($level:expr, $exploration_exp:expr) => {
         /// Get exploration exp for area.
         ///
         #[doc = "`level` `== 0 || >="]
@@ -53,15 +53,15 @@ macro_rules! exploration_exp_for {
 
                     let level = if level > $level { $level } else { level };
 
-                    EXPLORATION_EXP_PER_LEVEL[level as usize]
+                    $exploration_exp[level as usize]
                 } else {
                     let difference = difference as i32;
                     let exploration_percent = (100 - (difference - 5) * 5) / 100;
-                    let exp = EXPLORATION_EXP_PER_LEVEL[level as usize];
+                    let exp = $exploration_exp[level as usize];
                     exp * exploration_percent
                 }
             } else {
-                EXPLORATION_EXP_PER_LEVEL[level as usize]
+                $exploration_exp[level as usize]
             })
         }
     };
@@ -69,14 +69,14 @@ macro_rules! exploration_exp_for {
 pub(crate) use exploration_exp_for;
 
 macro_rules! get_base_stats_for {
-    ($level:expr) => {
-        impl RaceClass {
+    ($level:expr, $race_class:ty, $base_stats:ty) => {
+        impl $race_class {
             /// Get the base stats for a race/class/level combination.
             ///
             #[doc = "Values `== 0 || >="]
             #[doc = stringify!($level)]
             #[doc = "` will return [None]."]
-            pub const fn base_stats_for(&self, level: u8) -> Option<BaseStats> {
+            pub const fn base_stats_for(&self, level: u8) -> Option<$base_stats> {
                 if level > $level || level == 0 {
                     return None;
                 }
@@ -88,14 +88,13 @@ macro_rules! get_base_stats_for {
         }
     };
 }
-
 pub(crate) use get_base_stats_for;
 
 macro_rules! position {
-    () => {
+    ($map:ty) => {
         #[derive(Debug, Copy, Clone, PartialEq, PartialOrd)]
         pub struct Position {
-            pub map: Map,
+            pub map: $map,
             pub x: f32,
             pub y: f32,
             pub z: f32,
@@ -103,7 +102,7 @@ macro_rules! position {
         }
 
         impl Position {
-            pub const fn new(map: Map, x: f32, y: f32, z: f32, orientation: f32) -> Self {
+            pub const fn new(map: $map, x: f32, y: f32, z: f32, orientation: f32) -> Self {
                 Self {
                     map,
                     x,
@@ -135,52 +134,52 @@ macro_rules! position {
 pub(crate) use position;
 
 macro_rules! vanilla_starter_positions {
-    () => {
-        const HUMAN_START_POSITION: Position =
-            Position::new(Map::EasternKingdoms, -8949.95, -132.493, 83.5312, 0.0);
+    ($position:ty, $map:ty) => {
+        const HUMAN_START_POSITION: $position =
+            <$position>::new(<$map>::EasternKingdoms, -8949.95, -132.493, 83.5312, 0.0);
 
-        const TAUREN_START_POSITION: Position =
-            Position::new(Map::Kalimdor, -2917.58, -257.98, 52.9968, 0.0);
+        const TAUREN_START_POSITION: $position =
+            <$position>::new(<$map>::Kalimdor, -2917.58, -257.98, 52.9968, 0.0);
 
-        const ORC_START_POSITION: Position =
-            Position::new(Map::Kalimdor, -618.518, -4251.67, 38.718, 0.0);
-        const TROLL_START_POSITION: Position = ORC_START_POSITION;
+        const ORC_START_POSITION: $position =
+            <$position>::new(<$map>::Kalimdor, -618.518, -4251.67, 38.718, 0.0);
+        const TROLL_START_POSITION: $position = ORC_START_POSITION;
 
-        const DWARF_START_POSITION: Position =
-            Position::new(Map::EasternKingdoms, -6240.32, 331.033, 382.758, 6.17716);
-        const GNOME_START_POSITION: Position = DWARF_START_POSITION;
+        const DWARF_START_POSITION: $position =
+            <$position>::new(<$map>::EasternKingdoms, -6240.32, 331.033, 382.758, 6.17716);
+        const GNOME_START_POSITION: $position = DWARF_START_POSITION;
 
-        const NIGHT_ELF_START_POSITION: Position =
-            Position::new(Map::Kalimdor, 10311.3, 832.463, 1326.41, 5.69632);
+        const NIGHT_ELF_START_POSITION: $position =
+            <$position>::new(<$map>::Kalimdor, 10311.3, 832.463, 1326.41, 5.69632);
 
-        const UNDEAD_START_POSITION: Position =
-            Position::new(Map::EasternKingdoms, 1676.71, 1678.31, 121.67, 2.70526);
+        const UNDEAD_START_POSITION: $position =
+            <$position>::new(<$map>::EasternKingdoms, 1676.71, 1678.31, 121.67, 2.70526);
     };
 }
 
 pub(crate) use vanilla_starter_positions;
 
 macro_rules! tbc_starter_positions {
-    () => {
-        const BLOOD_ELF_START_POSITION: Position =
-            Position::new(Map::Outland, 10349.6, -6357.29, 33.4026, 5.31605);
+    ($position:ty, $map:ty) => {
+        const BLOOD_ELF_START_POSITION: $position =
+            <$position>::new(<$map>::Outland, 10349.6, -6357.29, 33.4026, 5.31605);
 
-        const DRAENEI_START_POSITION: Position =
-            Position::new(Map::Outland, -3961.64, -13931.2, 100.615, 2.08364);
+        const DRAENEI_START_POSITION: $position =
+            <$position>::new(<$map>::Outland, -3961.64, -13931.2, 100.615, 2.08364);
     };
 }
 pub(crate) use tbc_starter_positions;
 
 macro_rules! area_trigger {
-    () => {
+    ($position:ty) => {
         #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
         pub enum AreaTrigger {
             Circle {
-                position: Position,
+                position: $position,
                 radius: f32,
             },
             Square {
-                position: Position,
+                position: $position,
                 /// Size along the x axis.
                 length: f32,
                 /// Size along the y axis.
@@ -193,11 +192,15 @@ macro_rules! area_trigger {
         }
 
         impl AreaTrigger {
-            pub fn contains(&self, player: Position) -> bool {
+            pub fn contains(&self, player: $position) -> bool {
                 match *self {
                     AreaTrigger::Circle { position, radius } => {
                         position.map == player.map
-                            && is_within_distance(position.into(), player.into(), radius)
+                            && $crate::geometry::is_within_distance(
+                                position.into(),
+                                player.into(),
+                                radius,
+                            )
                     }
                     AreaTrigger::Square {
                         position,
@@ -207,7 +210,7 @@ macro_rules! area_trigger {
                         yaw,
                     } => {
                         position.map == player.map
-                            && is_within_square(
+                            && $crate::geometry::is_within_square(
                                 player.into(),
                                 position.into(),
                                 length,
@@ -224,16 +227,16 @@ macro_rules! area_trigger {
 pub(crate) use area_trigger;
 
 macro_rules! verify_trigger {
-    () => {
+    ($array_ty:ty, $triggers:expr, $position:ty) => {
         #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
         pub enum TriggerResult {
             NotFound,
-            NotInsideTrigger(&'static (AreaTrigger, &'static [Trigger])),
-            Success(&'static (AreaTrigger, &'static [Trigger])),
+            NotInsideTrigger($array_ty),
+            Success($array_ty),
         }
 
-        pub fn verify_trigger(player: Position, trigger: u32) -> TriggerResult {
-            let t = match TRIGGERS.iter().find(|(id, _)| *id == trigger) {
+        pub fn verify_trigger(player: $position, trigger: u32) -> TriggerResult {
+            let t = match $triggers.iter().find(|(id, _)| *id == trigger) {
                 None => return TriggerResult::NotFound,
                 Some(t) => &t.1,
             };
@@ -249,7 +252,7 @@ macro_rules! verify_trigger {
 pub(crate) use verify_trigger;
 
 macro_rules! tbc_wrath_trigger {
-    () => {
+    ($position:ty) => {
         #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
         pub enum Trigger {
             Inn,
@@ -257,7 +260,7 @@ macro_rules! tbc_wrath_trigger {
                 quest_id: u32,
             },
             Teleport {
-                location: Position,
+                location: $position,
                 required_level: u8,
                 required_item: u32,
                 required_quest: u32,
@@ -271,7 +274,7 @@ macro_rules! tbc_wrath_trigger {
 pub(crate) use tbc_wrath_trigger;
 
 macro_rules! vanilla_trigger {
-    () => {
+    ($position:ty) => {
         #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
         pub enum Trigger {
             Inn,
@@ -279,7 +282,7 @@ macro_rules! vanilla_trigger {
                 quest_id: u32,
             },
             Teleport {
-                location: Position,
+                location: $position,
                 required_level: u8,
                 required_item: u32,
                 required_quest: u32,

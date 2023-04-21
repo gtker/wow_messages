@@ -1,6 +1,6 @@
 use crate::tbc::{tbc_race_class_match, InventoryType, RaceClass};
 
-tbc_race_class_match!(starter_items, &'static [StarterItem]);
+tbc_race_class_match!(starter_items, &'static [StarterItem], RaceClass);
 
 pub struct StarterItem {
     pub item: u32,

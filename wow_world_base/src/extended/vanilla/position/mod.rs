@@ -4,7 +4,7 @@ use crate::extended::shared::{position, vanilla_starter_positions};
 use crate::vanilla::{Map, PlayerRace};
 pub use positions::*;
 
-position!();
+position!(crate::vanilla::Map);
 
 impl PlayerRace {
     pub const fn starting_position(&self) -> Position {
@@ -27,4 +27,4 @@ impl crate::vanilla::RaceClass {
     }
 }
 
-vanilla_starter_positions!();
+vanilla_starter_positions!(Position, Map);

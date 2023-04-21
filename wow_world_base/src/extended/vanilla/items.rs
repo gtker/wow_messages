@@ -1,7 +1,7 @@
 use crate::extended::vanilla::vanilla_race_class_match;
 use crate::vanilla::{InventoryType, RaceClass};
 
-vanilla_race_class_match!(starter_items, &'static [StarterItem]);
+vanilla_race_class_match!(starter_items, &'static [StarterItem], RaceClass);
 
 pub struct StarterItem {
     pub item: u32,

@@ -5,7 +5,7 @@ use crate::shared::player_race_tbc_wrath::PlayerRace;
 use crate::tbc::Map;
 pub use positions::*;
 
-position!();
+position!(crate::tbc::Map);
 
 impl PlayerRace {
     pub const fn tbc_starting_position(&self) -> Position {
@@ -30,6 +30,6 @@ impl crate::tbc::RaceClass {
     }
 }
 
-vanilla_starter_positions!();
+vanilla_starter_positions!(Position, Map);
 
-tbc_starter_positions!();
+tbc_starter_positions!(Position, Map);
