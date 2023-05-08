@@ -1,7 +1,7 @@
 use crate::extended::shared::get_base_stats_for;
+use crate::extended::top_level::stats::BaseStats;
 use crate::extended::wrath::exp::MAX_LEVEL;
 use crate::extended::wrath::wrath_race_class_match;
-use crate::BaseStats;
 
 wrath_race_class_match!(base_stats, &'static [BaseStats], crate::wrath::RaceClass);
 

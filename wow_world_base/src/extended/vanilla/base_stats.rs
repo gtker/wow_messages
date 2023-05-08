@@ -1,7 +1,7 @@
 use crate::extended::shared::get_base_stats_for;
+use crate::extended::top_level::stats::BaseStats;
 use crate::extended::vanilla::exp::MAX_LEVEL;
 use crate::extended::vanilla::vanilla_race_class_match;
-use crate::BaseStats;
 
 vanilla_race_class_match!(base_stats, &'static [BaseStats], crate::vanilla::RaceClass);
 
