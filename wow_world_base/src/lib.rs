@@ -46,15 +46,12 @@
     clippy::style,
     clippy::missing_const_for_fn,
     clippy::doc_markdown,
-    clippy::unseparated_literal_suffix
-)]
-#![allow(
-    non_camel_case_types,
-    non_snake_case,
-    clippy::missing_errors_doc,
+    clippy::unseparated_literal_suffix,
+    clippy::approx_constant,
     clippy::upper_case_acronyms,
-    clippy::approx_constant
+    non_camel_case_types
 )]
+#![allow(non_snake_case, clippy::missing_errors_doc)]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
