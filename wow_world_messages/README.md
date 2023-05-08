@@ -6,17 +6,10 @@ See the [WoWDev Login page](https://wowdev.wiki/Login) for details.
 
 ## Usage
 
-Add the following to your `Cargo.toml`:
-
-```toml
-[dependencies]
-wow_world_messages = { version = "0.1" }
-```
-
-Or add it with [cargo edit](https://github.com/killercup/cargo-edit):
+Remove the expansions you don't need from the following command:
 
 ```bash
-cargo add wow_world_messages
+cargo add wow_world_messages --features 'vanilla tbc wrath'
 ```
 
 And then [check out the docs](https://docs.rs/wow_world_messages/latest/).

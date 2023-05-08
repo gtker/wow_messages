@@ -2,14 +2,8 @@
 //!
 //! ## Usage
 //!
-//! To add only the base items add the following to your `Cargo.toml`:
+//! To add only the base items run the following command:
 //!
-//! ```toml
-//! [dependencies]
-//! wow_world_base = { version = "0.1", features = ["vanilla", "tbc", "wrath"] }
-//! ```
-//!
-//! Or add it with [cargo edit](https://github.com/killercup/cargo-edit):
 //! ```bash
 //! cargo add --features 'vanilla tbc wrath' wow_login_messages
 //! ```

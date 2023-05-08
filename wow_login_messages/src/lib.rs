@@ -31,14 +31,8 @@
 //!
 //! ## Usage
 //!
-//! To add only the synchronous methods add the following to your `Cargo.toml`:
+//! To add only the synchronous methods run the following command:
 //!
-//! ```toml
-//! [dependencies]
-//! wow_login_messages = { version = "0.2", features = ["sync"] }
-//! ```
-//!
-//! Or add it with [cargo edit](https://github.com/killercup/cargo-edit):
 //! ```bash
 //! cargo add --features 'sync' wow_login_messages
 //! ```
