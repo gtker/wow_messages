@@ -199,7 +199,10 @@ impl Writer {
         }
 
         self.wln(it.cfg());
-        self.wln(format!("fn {}read<'async_trait, R, I: crate::private::Sealed>(", it.prefix()));
+        self.wln(format!(
+            "fn {}read<'async_trait, R, I: crate::private::Sealed>(",
+            it.prefix()
+        ));
 
         self.inc_indent();
         self.wln("mut r: R,");

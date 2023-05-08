@@ -236,10 +236,14 @@ pub async fn tokio_read_initial_message<R: tokio::io::AsyncReadExt + Unpin + Sen
     let opcode = crate::util::tokio_read_u8_le(&mut r).await?;
     match opcode {
         CMD_AUTH_LOGON_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Logon(
-            CMD_AUTH_LOGON_CHALLENGE_Client::tokio_read::<&mut R, crate::private::Internal>(&mut r).await?,
+            CMD_AUTH_LOGON_CHALLENGE_Client::tokio_read::<&mut R, crate::private::Internal>(&mut r)
+                .await?,
         )),
         CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Reconnect(
-            CMD_AUTH_RECONNECT_CHALLENGE_Client::tokio_read::<&mut R, crate::private::Internal>(&mut r).await?,
+            CMD_AUTH_RECONNECT_CHALLENGE_Client::tokio_read::<&mut R, crate::private::Internal>(
+                &mut r,
+            )
+            .await?,
         )),
         opcode => Err(ExpectedOpcodeError::Opcode(opcode as u32)),
     }
@@ -253,10 +257,14 @@ pub async fn astd_read_initial_message<R: async_std::io::ReadExt + Unpin + Send>
     let opcode = crate::util::astd_read_u8_le(&mut r).await?;
     match opcode {
         CMD_AUTH_LOGON_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Logon(
-            CMD_AUTH_LOGON_CHALLENGE_Client::astd_read::<&mut R, crate::private::Internal>(&mut r).await?,
+            CMD_AUTH_LOGON_CHALLENGE_Client::astd_read::<&mut R, crate::private::Internal>(&mut r)
+                .await?,
         )),
         CMD_AUTH_RECONNECT_CHALLENGE_Client::OPCODE => Ok(InitialMessage::Reconnect(
-            CMD_AUTH_RECONNECT_CHALLENGE_Client::astd_read::<&mut R, crate::private::Internal>(&mut r).await?,
+            CMD_AUTH_RECONNECT_CHALLENGE_Client::astd_read::<&mut R, crate::private::Internal>(
+                &mut r,
+            )
+            .await?,
         )),
         opcode => Err(ExpectedOpcodeError::Opcode(opcode as u32)),
     }

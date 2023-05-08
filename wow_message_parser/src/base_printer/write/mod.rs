@@ -317,7 +317,7 @@ pub(crate) fn write_area_triggers(directory: &Path, data: &Data, expansion: Expa
         s.inc_indent();
         match &area_trigger.1 {
             AreaTrigger::Circle { radius, .. } => {
-                s.wln(format!("AreaTrigger::Circle {{ position: Position::new({map}, {x:.1}, {y:.1}, {z:.1}, 0.0), radius: {radius:.1} }}, "));
+                s.wln(format!("AreaTrigger::Circle {{ position: Position::new({map}, {x:.1}, {y:.1}, {z:.1}, 0.0), radius: {radius:.1} }},"));
             }
             AreaTrigger::Square {
                 length,

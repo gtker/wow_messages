@@ -1,7 +1,7 @@
+use crate::parser::types::sizes::{Sizes, GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE};
 use crate::parser::types::struct_member::StructMemberDefinition;
 use crate::parser::types::IntegerType;
 use crate::{Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
-use crate::parser::types::sizes::{GUID_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, Sizes};
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) enum ArrayType {

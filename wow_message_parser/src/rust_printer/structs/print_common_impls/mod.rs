@@ -5,13 +5,13 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::sizes::Sizes;
 use crate::parser::types::ty::Type;
 use crate::parser::types::version::{MajorWorldVersion, Version};
+use crate::rust_printer::rust_view::rust_member::RustMember;
 use crate::rust_printer::rust_view::rust_object::RustObject;
+use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::rust_printer::{
-    CLIENT_MESSAGE_TRAIT_NAME, ImplType, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME, Writer,
+    ImplType, Writer, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
 };
 use crate::CONTAINER_SELF_SIZE_FIELD;
-use crate::rust_printer::rust_view::rust_member::RustMember;
-use crate::rust_printer::rust_view::rust_type::RustType;
 
 pub mod print_read;
 pub mod print_write;
@@ -675,7 +675,10 @@ pub(crate) fn impl_world_message(
     read_function: impl Fn(&mut Writer, ImplType),
     sizes: Option<Sizes>,
 ) {
-    s.wln(format!("impl crate::private::Sealed for {} {{}}", type_name.as_ref()));
+    s.wln(format!(
+        "impl crate::private::Sealed for {} {{}}",
+        type_name.as_ref()
+    ));
 
     s.open_curly(format!("impl crate::Message for {}", type_name.as_ref()));
     s.wln(format!("const OPCODE: u32 = {opcode:#06x};"));
@@ -700,7 +703,6 @@ pub(crate) fn impl_world_message(
 
     s.closing_curly();
 
-
     s.open_curly(format!(
         "fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, {PARSE_ERROR}>",
     ));
@@ -723,7 +725,10 @@ pub(crate) fn impl_read_and_writable_login(
 ) {
     s.write_into_vec(&type_name, write_function, "pub(crate)");
 
-    s.wln(format!("impl crate::private::Sealed for {} {{}}", type_name.as_ref()));
+    s.wln(format!(
+        "impl crate::private::Sealed for {} {{}}",
+        type_name.as_ref()
+    ));
     s.newline();
 
     s.open_curly(format!(
