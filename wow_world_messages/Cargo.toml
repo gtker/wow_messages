@@ -26,6 +26,7 @@ encryption = ["wow_srp"]
 
 [dependencies.chrono]
 version = "0.4"
+default-features = false
 optional = true
 
 [dependencies.flate2]
