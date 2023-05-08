@@ -6,7 +6,7 @@ use crate::vanilla::{Class, PlayerRace, RaceClass};
 /// For druids this does not take into account the different attack power calculations when
 /// the different forms. Use [`non_cat_form_base_attack_power`] or
 /// [`cat_form_base_attack_power`] instead.
-pub fn base_melee_attack_power(class: Class, strength: u16, agility: u16, level: u8) -> u32 {
+pub const fn base_melee_attack_power(class: Class, strength: u16, agility: u16, level: u8) -> u32 {
     let level = level as u32;
     let strength = strength as u32;
     let agility = agility as u32;
@@ -82,7 +82,7 @@ pub fn cat_form_base_attack_power(
 ///
 /// Since only warrior, rogue, and hunter can use weapons that use ranged attack power
 /// all other classes return 0.
-pub fn base_ranged_attack_power(class: Class, agility: u16, level: u8) -> u32 {
+pub const fn base_ranged_attack_power(class: Class, agility: u16, level: u8) -> u32 {
     let level = level as u32;
     let agility = agility as u32;
 
@@ -222,7 +222,7 @@ impl RaceClass {
     /// For druids this does not take into account the different attack power calculations when
     /// the different forms. Use [`non_cat_form_base_attack_power`] or
     /// [`cat_form_base_attack_power`] instead.
-    pub fn base_melee_attack_power(&self, strength: u16, agility: u16, level: u8) -> u32 {
+    pub const fn base_melee_attack_power(&self, strength: u16, agility: u16, level: u8) -> u32 {
         base_melee_attack_power(self.class(), strength, agility, level)
     }
 
@@ -230,7 +230,7 @@ impl RaceClass {
     ///
     /// Since only warrior, rogue, and hunter can use weapons that use ranged attack power
     /// all other classes return 0.
-    pub fn base_ranged_attack_power(&self, agility: u16, level: u8) -> u32 {
+    pub const fn base_ranged_attack_power(&self, agility: u16, level: u8) -> u32 {
         base_ranged_attack_power(self.class(), agility, level)
     }
 

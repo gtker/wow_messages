@@ -1,7 +1,7 @@
 use crate::shared::player_race_tbc_wrath::PlayerRace;
 use crate::tbc::PlayerGender;
 
-pub fn character_features_are_valid(
+pub const fn character_features_are_valid(
     race: PlayerRace,
     gender: PlayerGender,
     skin: u8,

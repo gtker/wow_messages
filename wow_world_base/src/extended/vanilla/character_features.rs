@@ -1,7 +1,7 @@
 use crate::vanilla::PlayerGender;
 use crate::vanilla::PlayerRace;
 
-pub fn character_features_are_valid(
+pub const fn character_features_are_valid(
     race: PlayerRace,
     gender: PlayerGender,
     skin: u8,

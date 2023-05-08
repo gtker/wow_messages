@@ -53,7 +53,6 @@
     non_snake_case,
     clippy::missing_errors_doc,
     clippy::upper_case_acronyms,
-    clippy::missing_const_for_fn,
     clippy::approx_constant
 )]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
