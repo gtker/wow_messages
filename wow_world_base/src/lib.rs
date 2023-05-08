@@ -8,6 +8,16 @@
 //! cargo add --features 'vanilla tbc wrath' wow_login_messages
 //! ```
 //!
+//! The library is split into the top level modules:
+//!
+//! * [`vanilla`] for items valid for version 1.12.x.
+//! * [`tbc`] for items valid for version 2.4.3.8606.
+//! * [`wrath`] for items valid for version 3.3.5.12340.
+//! * [`shared`] for items that are valid for multiple versions.
+//! These are also exported through the regular modules, so for example if you are working with vanilla it is only necessary to export items from [`vanilla`].
+//!
+//! The remaining top level modules contain various functions and constants that are generally valid.
+//!
 //! ## Features/Serde support
 //!
 //! This crate has the following features:
@@ -16,7 +26,7 @@
 //! * `tbc`, for client version 2.4.3.8606.
 //! * `wrath`, for client version 3.3.5.x.
 //! * `extended`, for additional functions and data that is not just simple enums and structs.
-//! * `serde`, for deriving `Serialize` and `Deserialize`.
+//! * `serde`, for [`serde`](https://docs.rs/serde/latest/serde/) support, namely deriving [`Serialize`](https://docs.rs/serde/latest/serde/trait.Serialize.html) and [`Deserialize`](https://docs.rs/serde/latest/serde/trait.Deserialize.html).
 //!
 //! ## Auto Generation
 //!
