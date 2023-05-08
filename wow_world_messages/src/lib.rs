@@ -77,7 +77,6 @@ pub(crate) mod util;
     clippy::approx_constant,
     clippy::upper_case_acronyms,
     clippy::needless_borrow,
-    clippy::derive_partial_eq_without_eq,
     non_camel_case_types
 )]
 mod world;
