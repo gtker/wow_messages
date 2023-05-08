@@ -26,8 +26,8 @@
 //!
 //!  ## Other Work
 //!
-//!  * [vMaNGOS (C++)](https://github.com/vmangos/core)
-//!    and MaNGOS derivatives in general have a relatively complete list of messages for popular versions,
+//!  * [`vMaNGOS` (C++)](https://github.com/vmangos/core)
+//!    and `MaNGOS` derivatives in general have a relatively complete list of messages for popular versions,
 //!    but they are not available as a library.
 //!
 //!  ## License
