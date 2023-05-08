@@ -164,7 +164,8 @@ fn array_definitions(s: &mut Writer, arrays: &[Array]) {
             continue;
         }
 
-        s.wln("#[derive(Debug, Copy, Clone)]");
+        s.wln("#[derive(Debug, Copy, Clone, Default)]");
+        s.wln("#[cfg_attr(feature = \"serde\", derive(serde::Deserialize, serde::Serialize))]");
         s.open_curly(format!("pub struct {}", array.type_name));
 
         for e in array.field_info().fields() {

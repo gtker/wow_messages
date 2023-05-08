@@ -685,7 +685,8 @@ impl core::hash::Hash for Spell {
     }
 }
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct Reagent {
     pub reagent: i32,
     pub amount: u32,
@@ -702,7 +703,8 @@ impl Reagent {
         }
     }
 }
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct SpellEffects {
     pub effect: i32,
     pub die_sides: i32,
@@ -773,7 +775,8 @@ impl SpellEffects {
         }
     }
 }
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct Totem {
     pub totem: i32,
 }
@@ -787,7 +790,8 @@ impl Totem {
         }
     }
 }
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct TotemCategory {
     pub category: i32,
 }

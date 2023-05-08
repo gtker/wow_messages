@@ -643,7 +643,8 @@ impl core::hash::Hash for Item {
     }
 }
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub struct Spells {
     pub spell: i32,
     pub spell_trigger: SpellTriggerType,

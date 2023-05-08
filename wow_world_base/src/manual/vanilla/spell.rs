@@ -639,7 +639,8 @@ impl Spell {
             }
         }
 
-        #[derive(Debug, Copy, Clone)]
+        #[derive(Debug, Copy, Clone, Default)]
+        #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
         pub struct Reagent {
             pub reagent: i32,
             pub amount: i32,
@@ -656,7 +657,8 @@ impl Spell {
                 }
             }
         }
-        #[derive(Debug, Copy, Clone)]
+        #[derive(Debug, Copy, Clone, Default)]
+        #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
         pub struct SpellEffects {
             pub effect: i32,
             pub die_sides: i32,
@@ -724,7 +726,8 @@ impl Spell {
                 }
             }
         }
-        #[derive(Debug, Copy, Clone)]
+        #[derive(Debug, Copy, Clone, Default)]
+        #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
         pub struct Totem {
             pub totem: i32,
         }
