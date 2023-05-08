@@ -120,7 +120,19 @@ fn struct_definition(
     ty_name: &str,
     optimizations: &Optimizations,
 ) {
-    s.wln("#[derive(Debug, Copy, Clone)]");
+    let lower_ty = ty_name.to_lowercase();
+    s.wln(format!(
+        "/// Struct optimized for containing the original {lower_ty}s most efficiently."
+    ));
+    s.wln("///");
+    s.wln("/// This type is not supposed to be used by external users of the library for creating custom items.");
+    s.wln(format!(
+        "/// It's only supposed to be used in conjunction with the `wow_{lower_ty}s` crate."
+    ));
+    s.wln("///");
+    s.wln("/// [`Hash`](core::hash::Hash), [`Ord`], and [`Eq`] all use only the item id without considering other fields.");
+
+    s.wln("#[derive(Debug, Copy, Clone, Default)]");
     s.open_curly(format!("pub struct {ty_name}"));
 
     for (field_index, e) in fields.iter().enumerate() {
@@ -188,47 +200,73 @@ fn impl_block(
     ty_name: &str,
     optimizations: &Optimizations,
 ) {
-    s.open_curly(format!("impl {ty_name}"));
+    s.bodyn(format!("impl {ty_name}"), |s| {
+        s.wln("#[doc(hidden)]");
+        s.pub_const_fn_new(
+            |s| {
+                for (field_index, e) in fields.iter().enumerate() {
+                    if optimizations.optimization(field_index).skip_field() {
+                        continue;
+                    }
 
-    s.pub_const_fn_new(
-        |s| {
-            for (field_index, e) in fields.iter().enumerate() {
-                if optimizations.optimization(field_index).skip_field() {
-                    continue;
+                    s.wln(format!(
+                        "{}: {},",
+                        e.name,
+                        optimizations.type_name(e, field_index)
+                    ));
                 }
 
-                s.wln(format!(
-                    "{}: {},",
-                    e.name,
-                    optimizations.type_name(e, field_index)
-                ));
-            }
+                for array in arrays {
+                    s.wln(format!(
+                        "{}: &'static [{}],",
+                        array.variable_name, array.type_name,
+                    ));
+                }
+            },
+            |s| {
+                for (field_index, e) in fields.iter().enumerate() {
+                    if optimizations.optimization(field_index).skip_field() {
+                        continue;
+                    }
 
-            for array in arrays {
-                s.wln(format!(
-                    "{}: &'static [{}],",
-                    array.variable_name, array.type_name,
-                ));
-            }
-        },
-        |s| {
-            for (field_index, e) in fields.iter().enumerate() {
-                if optimizations.optimization(field_index).skip_field() {
-                    continue;
+                    s.wln(format!("{},", e.name));
                 }
 
-                s.wln(format!("{},", e.name));
-            }
+                for array in arrays {
+                    s.wln(format!("{},", array.variable_name,));
+                }
+            },
+        );
 
-            for array in arrays {
-                s.wln(format!("{},", array.variable_name,));
-            }
-        },
-    );
+        getters_and_setters(s, fields, arrays, optimizations);
+    });
 
-    getters_and_setters(s, fields, arrays, optimizations);
+    s.bodyn(format!("impl PartialOrd for {ty_name}"), |s| {
+        s.body(
+            "fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering>",
+            |s| s.wln("Some(self.cmp(other))"),
+        );
+    });
 
-    s.closing_curly();
+    s.bodyn(format!("impl Ord for {ty_name}"), |s| {
+        s.body("fn cmp(&self, other: &Self) -> core::cmp::Ordering", |s| {
+            s.wln("self.entry.cmp(&other.entry)")
+        });
+    });
+
+    s.bodyn(format!("impl PartialEq<Self> for {ty_name}"), |s| {
+        s.body("fn eq(&self, other: &Self) -> bool", |s| {
+            s.wln("self.entry.eq(&other.entry)")
+        });
+    });
+
+    s.wln(format!("impl Eq for {ty_name} {{}}"));
+
+    s.bodyn(format!("impl core::hash::Hash for {ty_name}"), |s| {
+        s.body("fn hash<H: std::hash::Hasher>(&self, state: &mut H)", |s| {
+            s.wln("self.entry.hash(state)");
+        });
+    });
 }
 
 fn getters_and_setters(

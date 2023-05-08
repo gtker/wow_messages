@@ -26,7 +26,13 @@ use crate::wrath::{
     SpellTriggerType,
 };
 
-#[derive(Debug, Copy, Clone)]
+/// Struct optimized for containing the original items most efficiently.
+///
+/// This type is not supposed to be used by external users of the library for creating custom items.
+/// It's only supposed to be used in conjunction with the `wow_items` crate.
+///
+/// [`Hash`](core::hash::Hash), [`Ord`], and [`Eq`] all use only the item id without considering other fields.
+#[derive(Debug, Copy, Clone, Default)]
 pub struct Item {
     entry: u16,
     class_and_sub_class: ItemClassAndSubClass,
@@ -90,6 +96,7 @@ pub struct Item {
 }
 
 impl Item {
+    #[doc(hidden)]
     pub const fn new(
         entry: u16,
         class_and_sub_class: ItemClassAndSubClass,
@@ -788,6 +795,32 @@ impl Item {
     }
 
 }
+
+impl PartialOrd for Item {
+    fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Item {
+    fn cmp(&self, other: &Self) -> core::cmp::Ordering {
+        self.entry.cmp(&other.entry)
+    }
+}
+
+impl PartialEq<Self> for Item {
+    fn eq(&self, other: &Self) -> bool {
+        self.entry.eq(&other.entry)
+    }
+}
+
+impl Eq for Item {}
+impl core::hash::Hash for Item {
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        self.entry.hash(state)
+    }
+}
+
 #[derive(Debug, Copy, Clone)]
 pub struct Spells {
     pub spell: i32,

@@ -8,7 +8,13 @@ use crate::vanilla::{
     AuraMod,
 };
 
-#[derive(Debug, Copy, Clone)]
+/// Struct optimized for containing the original spells most efficiently.
+///
+/// This type is not supposed to be used by external users of the library for creating custom items.
+/// It's only supposed to be used in conjunction with the `wow_spells` crate.
+///
+/// [`Hash`](core::hash::Hash), [`Ord`], and [`Eq`] all use only the item id without considering other fields.
+#[derive(Debug, Copy, Clone, Default)]
 pub struct Spell {
     entry: u16,
     school: i8,
@@ -66,6 +72,7 @@ pub struct Spell {
 }
 
 impl Spell {
+    #[doc(hidden)]
     pub const fn new(
         entry: u16,
         school: i8,
@@ -606,6 +613,32 @@ impl Spell {
             }
 
         }
+
+        impl PartialOrd for Spell {
+            fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering> {
+                Some(self.cmp(other))
+            }
+        }
+
+        impl Ord for Spell {
+            fn cmp(&self, other: &Self) -> core::cmp::Ordering {
+                self.entry.cmp(&other.entry)
+            }
+        }
+
+        impl PartialEq<Self> for Spell {
+            fn eq(&self, other: &Self) -> bool {
+                self.entry.eq(&other.entry)
+            }
+        }
+
+        impl Eq for Spell {}
+        impl core::hash::Hash for Spell {
+            fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+                self.entry.hash(state)
+            }
+        }
+
         #[derive(Debug, Copy, Clone)]
         pub struct Reagent {
             pub reagent: i32,
