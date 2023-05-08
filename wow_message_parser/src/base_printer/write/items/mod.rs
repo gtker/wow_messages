@@ -175,11 +175,9 @@ pub(crate) fn write_things(
     let mut s = Writer::new();
 
     let (default_values, arrays) = get_default_values(things, optimizations);
-    let mut sorted = Vec::with_capacity(default_values.len() + arrays.len());
+    let mut sorted = BTreeSet::new();
     const_default_values(&default_values, &mut sorted);
     print_arrays(&arrays, &mut sorted);
-
-    sorted.sort();
 
     for line in sorted {
         s.wln(line);
@@ -427,7 +425,7 @@ fn get_default_values<'a>(
     (values_output, arrays_output)
 }
 
-fn print_arrays(arrays: &Arrays, sorted: &mut Vec<String>) {
+fn print_arrays(arrays: &Arrays, sorted: &mut BTreeSet<String>) {
     for ((array, ty_name), const_name) in arrays {
         let mut s = Writer::new();
         s.w(format!("const {const_name}:&[{ty_name}]=&["));
@@ -447,11 +445,11 @@ fn print_arrays(arrays: &Arrays, sorted: &mut Vec<String>) {
         }
 
         s.w_no_indent("];");
-        sorted.push(s.into_inner());
+        sorted.insert(s.into_inner());
     }
 }
 
-fn const_default_values(default_values: &Values, sorted: &mut Vec<String>) {
+fn const_default_values(default_values: &Values, sorted: &mut BTreeSet<String>) {
     for ((value, integer_size), const_name) in default_values {
         let ty_name = if let Some(t) = integer_size {
             t.string_value()
@@ -459,7 +457,7 @@ fn const_default_values(default_values: &Values, sorted: &mut Vec<String>) {
             value.const_variable_type_name()
         };
 
-        sorted.push(get_const_definition(
+        sorted.insert(get_const_definition(
             const_name,
             ty_name,
             &value.to_string_value(),
