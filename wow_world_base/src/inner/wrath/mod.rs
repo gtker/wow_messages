@@ -1,7 +1,13 @@
 pub use crate::manual::wrath::*;
 #[cfg(feature = "extended")]
 pub use crate::extended::wrath::*;
-pub use crate::manual::shared::*;
+pub use crate::manual::shared::datetime_vanilla_tbc_wrath::*;
+pub use crate::manual::shared::gold_vanilla_tbc_wrath::*;
+pub use crate::manual::shared::guid_vanilla_tbc_wrath::*;
+pub use crate::manual::shared::level_vanilla_tbc_wrath::*;
+pub use crate::manual::shared::player_gender_vanilla_tbc_wrath::*;
+pub use crate::manual::shared::player_race_tbc_wrath::*;
+pub use crate::manual::shared::skill_category_vanilla_tbc_wrath::*;
 
 pub(crate) mod achievement_name_link_type;
 pub use achievement_name_link_type::*;

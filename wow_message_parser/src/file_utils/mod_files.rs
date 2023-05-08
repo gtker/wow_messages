@@ -131,7 +131,18 @@ impl ModFiles {
             s.wln(format!("pub use crate::manual::{module}::*;"));
             s.wln("#[cfg(feature = \"extended\")]");
             s.wln(format!("pub use crate::extended::{module}::*;"));
-            s.wln("pub use crate::manual::shared::*;");
+            s.wln("pub use crate::manual::shared::datetime_vanilla_tbc_wrath::*;");
+            s.wln("pub use crate::manual::shared::gold_vanilla_tbc_wrath::*;");
+            s.wln("pub use crate::manual::shared::guid_vanilla_tbc_wrath::*;");
+            s.wln("pub use crate::manual::shared::level_vanilla_tbc_wrath::*;");
+            s.wln("pub use crate::manual::shared::player_gender_vanilla_tbc_wrath::*;");
+            match version {
+                MajorWorldVersion::Vanilla => {}
+                MajorWorldVersion::BurningCrusade | MajorWorldVersion::Wrath => {
+                    s.wln("pub use crate::manual::shared::player_race_tbc_wrath::*;");
+                }
+            }
+            s.wln("pub use crate::manual::shared::skill_category_vanilla_tbc_wrath::*;");
             s.newline();
 
             s.wln(text);
