@@ -67,6 +67,8 @@ pub(crate) mod manual;
 mod traits;
 pub(crate) mod util;
 #[allow(
+    non_camel_case_types,
+    non_snake_case,
     unused,
     clippy::complexity,
     clippy::single_match,
@@ -74,9 +76,7 @@ pub(crate) mod util;
     clippy::enum_variant_names,
     clippy::approx_constant,
     clippy::upper_case_acronyms,
-    clippy::needless_borrow,
-    non_camel_case_types,
-    non_snake_case
+    clippy::needless_borrow
 )]
 mod world;
 
