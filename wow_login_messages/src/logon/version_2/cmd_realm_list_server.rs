@@ -280,7 +280,7 @@ mod test_version_2 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 100.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 110.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Server0() {
@@ -300,7 +300,7 @@ mod test_version_2 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 100.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 110.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Server0() {
@@ -320,7 +320,7 @@ mod test_version_2 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 100.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 110.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Server0() {
@@ -365,7 +365,7 @@ mod test_version_2 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 131.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 141.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Server1() {
@@ -385,7 +385,7 @@ mod test_version_2 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 131.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 141.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Server1() {
@@ -405,7 +405,7 @@ mod test_version_2 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 131.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 141.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Server1() {
@@ -464,7 +464,7 @@ mod test_version_3 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 100.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 110.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Server0() {
@@ -484,7 +484,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 100.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 110.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Server0() {
@@ -504,7 +504,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 100.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 110.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Server0() {
@@ -549,7 +549,7 @@ mod test_version_3 {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 131.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 141.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn CMD_REALM_LIST_Server1() {
@@ -569,7 +569,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 131.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 141.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_CMD_REALM_LIST_Server1() {
@@ -589,7 +589,7 @@ mod test_version_3 {
         assert_eq!(dest, RAW1);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 131.
+    // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 141.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_CMD_REALM_LIST_Server1() {

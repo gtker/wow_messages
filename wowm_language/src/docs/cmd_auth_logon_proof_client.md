@@ -93,7 +93,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 ```
 # CMD_AUTH_LOGON_PROOF_Client
 
-## Protocol Version 3, Protocol Version 5
+## Protocol Version 3, Protocol Version 5, Protocol Version 6
 
 ### Description
 

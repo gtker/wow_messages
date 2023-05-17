@@ -52,7 +52,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 ```
 # CMD_AUTH_RECONNECT_PROOF_Server
 
-## Protocol Version 5
+## Protocol Version 5, Protocol Version 6
 
 ### Description
 

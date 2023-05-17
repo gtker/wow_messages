@@ -1,6 +1,6 @@
 # CMD_REALM_LIST_Client
 
-## Protocol Version 2, Protocol Version 3, Protocol Version 5, Protocol Version 8
+## Protocol Version 2, Protocol Version 3, Protocol Version 5, Protocol Version 6, Protocol Version 8
 
 ### Wowm Representation
 

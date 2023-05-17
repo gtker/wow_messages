@@ -78,7 +78,7 @@ Reply to [CMD_AUTH_LOGON_CHALLENGE_Client](./cmd_auth_logon_challenge_client.md)
 ```
 # CMD_AUTH_LOGON_CHALLENGE_Server
 
-## Protocol Version 3, Protocol Version 5
+## Protocol Version 3, Protocol Version 5, Protocol Version 6
 
 ### Description
 

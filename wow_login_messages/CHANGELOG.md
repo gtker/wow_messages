@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Flags now have their enumerators as public `const` variables.
+* Login and reconnect protocol version 5 and 6.
 
 ### Changed
 

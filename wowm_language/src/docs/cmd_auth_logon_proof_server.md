@@ -53,7 +53,7 @@ If result is equal to `SUCCESS`:
 ```
 # CMD_AUTH_LOGON_PROOF_Server
 
-## Protocol Version 5
+## Protocol Version 5, Protocol Version 6
 
 ### Description
 
