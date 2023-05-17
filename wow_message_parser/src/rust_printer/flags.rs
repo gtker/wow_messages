@@ -132,7 +132,8 @@ fn print_fields(s: &mut Writer, e: &Definer, o: &Objects) {
     for f in e.fields() {
         if f.value().int() != 0 {
             let name = f.name();
-            s.funcn_pub_const(format!("is_{name}(&self)"), "bool", |s| {
+            let function_name = f.function_name();
+            s.funcn_pub_const(format!("is_{function_name}(&self)"), "bool", |s| {
                 if e.tags().zero_is_always_valid() {
                     s.wln(format!(
                         "((self.inner & Self::{name}) != 0) || self.inner == 0",
@@ -143,16 +144,16 @@ fn print_fields(s: &mut Writer, e: &Definer, o: &Objects) {
             });
 
             print_member_docc_description_and_comment(s, f.tags(), o, e.tags());
-            s.funcn_pub_const(format!("new_{name}()"), "Self", |s| {
+            s.funcn_pub_const(format!("new_{function_name}()"), "Self", |s| {
                 s.wln(format!("Self {{ inner: Self::{name} }}"));
             });
 
-            s.funcn_pub(format!("set_{name}(&mut self)"), "Self", |s| {
+            s.funcn_pub(format!("set_{function_name}(&mut self)"), "Self", |s| {
                 s.wln(format!("self.inner |= Self::{name};"));
                 s.wln("*self");
             });
 
-            s.funcn_pub(format!("clear_{name}(&mut self)"), "Self", |s| {
+            s.funcn_pub(format!("clear_{function_name}(&mut self)"), "Self", |s| {
                 s.wln(format!("self.inner &= Self::{name}.reverse_bits();",));
                 s.wln("*self");
             });

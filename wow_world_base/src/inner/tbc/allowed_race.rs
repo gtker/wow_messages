@@ -85,326 +85,326 @@ impl AllowedRace {
         }
     }
 
-    pub const fn is_HUMAN(&self) -> bool {
+    pub const fn is_human(&self) -> bool {
         ((self.inner & Self::HUMAN) != 0) || self.inner == 0
     }
 
-    pub const fn new_HUMAN() -> Self {
+    pub const fn new_human() -> Self {
         Self { inner: Self::HUMAN }
     }
 
-    pub fn set_HUMAN(&mut self) -> Self {
+    pub fn set_human(&mut self) -> Self {
         self.inner |= Self::HUMAN;
         *self
     }
 
-    pub fn clear_HUMAN(&mut self) -> Self {
+    pub fn clear_human(&mut self) -> Self {
         self.inner &= Self::HUMAN.reverse_bits();
         *self
     }
 
-    pub const fn is_ORC(&self) -> bool {
+    pub const fn is_orc(&self) -> bool {
         ((self.inner & Self::ORC) != 0) || self.inner == 0
     }
 
-    pub const fn new_ORC() -> Self {
+    pub const fn new_orc() -> Self {
         Self { inner: Self::ORC }
     }
 
-    pub fn set_ORC(&mut self) -> Self {
+    pub fn set_orc(&mut self) -> Self {
         self.inner |= Self::ORC;
         *self
     }
 
-    pub fn clear_ORC(&mut self) -> Self {
+    pub fn clear_orc(&mut self) -> Self {
         self.inner &= Self::ORC.reverse_bits();
         *self
     }
 
-    pub const fn is_DWARF(&self) -> bool {
+    pub const fn is_dwarf(&self) -> bool {
         ((self.inner & Self::DWARF) != 0) || self.inner == 0
     }
 
-    pub const fn new_DWARF() -> Self {
+    pub const fn new_dwarf() -> Self {
         Self { inner: Self::DWARF }
     }
 
-    pub fn set_DWARF(&mut self) -> Self {
+    pub fn set_dwarf(&mut self) -> Self {
         self.inner |= Self::DWARF;
         *self
     }
 
-    pub fn clear_DWARF(&mut self) -> Self {
+    pub fn clear_dwarf(&mut self) -> Self {
         self.inner &= Self::DWARF.reverse_bits();
         *self
     }
 
-    pub const fn is_NIGHT_ELF(&self) -> bool {
+    pub const fn is_night_elf(&self) -> bool {
         ((self.inner & Self::NIGHT_ELF) != 0) || self.inner == 0
     }
 
-    pub const fn new_NIGHT_ELF() -> Self {
+    pub const fn new_night_elf() -> Self {
         Self { inner: Self::NIGHT_ELF }
     }
 
-    pub fn set_NIGHT_ELF(&mut self) -> Self {
+    pub fn set_night_elf(&mut self) -> Self {
         self.inner |= Self::NIGHT_ELF;
         *self
     }
 
-    pub fn clear_NIGHT_ELF(&mut self) -> Self {
+    pub fn clear_night_elf(&mut self) -> Self {
         self.inner &= Self::NIGHT_ELF.reverse_bits();
         *self
     }
 
-    pub const fn is_UNDEAD(&self) -> bool {
+    pub const fn is_undead(&self) -> bool {
         ((self.inner & Self::UNDEAD) != 0) || self.inner == 0
     }
 
-    pub const fn new_UNDEAD() -> Self {
+    pub const fn new_undead() -> Self {
         Self { inner: Self::UNDEAD }
     }
 
-    pub fn set_UNDEAD(&mut self) -> Self {
+    pub fn set_undead(&mut self) -> Self {
         self.inner |= Self::UNDEAD;
         *self
     }
 
-    pub fn clear_UNDEAD(&mut self) -> Self {
+    pub fn clear_undead(&mut self) -> Self {
         self.inner &= Self::UNDEAD.reverse_bits();
         *self
     }
 
-    pub const fn is_TAUREN(&self) -> bool {
+    pub const fn is_tauren(&self) -> bool {
         ((self.inner & Self::TAUREN) != 0) || self.inner == 0
     }
 
-    pub const fn new_TAUREN() -> Self {
+    pub const fn new_tauren() -> Self {
         Self { inner: Self::TAUREN }
     }
 
-    pub fn set_TAUREN(&mut self) -> Self {
+    pub fn set_tauren(&mut self) -> Self {
         self.inner |= Self::TAUREN;
         *self
     }
 
-    pub fn clear_TAUREN(&mut self) -> Self {
+    pub fn clear_tauren(&mut self) -> Self {
         self.inner &= Self::TAUREN.reverse_bits();
         *self
     }
 
-    pub const fn is_GNOME(&self) -> bool {
+    pub const fn is_gnome(&self) -> bool {
         ((self.inner & Self::GNOME) != 0) || self.inner == 0
     }
 
-    pub const fn new_GNOME() -> Self {
+    pub const fn new_gnome() -> Self {
         Self { inner: Self::GNOME }
     }
 
-    pub fn set_GNOME(&mut self) -> Self {
+    pub fn set_gnome(&mut self) -> Self {
         self.inner |= Self::GNOME;
         *self
     }
 
-    pub fn clear_GNOME(&mut self) -> Self {
+    pub fn clear_gnome(&mut self) -> Self {
         self.inner &= Self::GNOME.reverse_bits();
         *self
     }
 
-    pub const fn is_TROLL(&self) -> bool {
+    pub const fn is_troll(&self) -> bool {
         ((self.inner & Self::TROLL) != 0) || self.inner == 0
     }
 
-    pub const fn new_TROLL() -> Self {
+    pub const fn new_troll() -> Self {
         Self { inner: Self::TROLL }
     }
 
-    pub fn set_TROLL(&mut self) -> Self {
+    pub fn set_troll(&mut self) -> Self {
         self.inner |= Self::TROLL;
         *self
     }
 
-    pub fn clear_TROLL(&mut self) -> Self {
+    pub fn clear_troll(&mut self) -> Self {
         self.inner &= Self::TROLL.reverse_bits();
         *self
     }
 
-    pub const fn is_GOBLIN(&self) -> bool {
+    pub const fn is_goblin(&self) -> bool {
         ((self.inner & Self::GOBLIN) != 0) || self.inner == 0
     }
 
-    pub const fn new_GOBLIN() -> Self {
+    pub const fn new_goblin() -> Self {
         Self { inner: Self::GOBLIN }
     }
 
-    pub fn set_GOBLIN(&mut self) -> Self {
+    pub fn set_goblin(&mut self) -> Self {
         self.inner |= Self::GOBLIN;
         *self
     }
 
-    pub fn clear_GOBLIN(&mut self) -> Self {
+    pub fn clear_goblin(&mut self) -> Self {
         self.inner &= Self::GOBLIN.reverse_bits();
         *self
     }
 
-    pub const fn is_BLOODELF(&self) -> bool {
+    pub const fn is_bloodelf(&self) -> bool {
         ((self.inner & Self::BLOODELF) != 0) || self.inner == 0
     }
 
-    pub const fn new_BLOODELF() -> Self {
+    pub const fn new_bloodelf() -> Self {
         Self { inner: Self::BLOODELF }
     }
 
-    pub fn set_BLOODELF(&mut self) -> Self {
+    pub fn set_bloodelf(&mut self) -> Self {
         self.inner |= Self::BLOODELF;
         *self
     }
 
-    pub fn clear_BLOODELF(&mut self) -> Self {
+    pub fn clear_bloodelf(&mut self) -> Self {
         self.inner &= Self::BLOODELF.reverse_bits();
         *self
     }
 
-    pub const fn is_DRAENEI(&self) -> bool {
+    pub const fn is_draenei(&self) -> bool {
         ((self.inner & Self::DRAENEI) != 0) || self.inner == 0
     }
 
-    pub const fn new_DRAENEI() -> Self {
+    pub const fn new_draenei() -> Self {
         Self { inner: Self::DRAENEI }
     }
 
-    pub fn set_DRAENEI(&mut self) -> Self {
+    pub fn set_draenei(&mut self) -> Self {
         self.inner |= Self::DRAENEI;
         *self
     }
 
-    pub fn clear_DRAENEI(&mut self) -> Self {
+    pub fn clear_draenei(&mut self) -> Self {
         self.inner &= Self::DRAENEI.reverse_bits();
         *self
     }
 
-    pub const fn is_FEL_ORC(&self) -> bool {
+    pub const fn is_fel_orc(&self) -> bool {
         ((self.inner & Self::FEL_ORC) != 0) || self.inner == 0
     }
 
-    pub const fn new_FEL_ORC() -> Self {
+    pub const fn new_fel_orc() -> Self {
         Self { inner: Self::FEL_ORC }
     }
 
-    pub fn set_FEL_ORC(&mut self) -> Self {
+    pub fn set_fel_orc(&mut self) -> Self {
         self.inner |= Self::FEL_ORC;
         *self
     }
 
-    pub fn clear_FEL_ORC(&mut self) -> Self {
+    pub fn clear_fel_orc(&mut self) -> Self {
         self.inner &= Self::FEL_ORC.reverse_bits();
         *self
     }
 
-    pub const fn is_NAGA(&self) -> bool {
+    pub const fn is_naga(&self) -> bool {
         ((self.inner & Self::NAGA) != 0) || self.inner == 0
     }
 
-    pub const fn new_NAGA() -> Self {
+    pub const fn new_naga() -> Self {
         Self { inner: Self::NAGA }
     }
 
-    pub fn set_NAGA(&mut self) -> Self {
+    pub fn set_naga(&mut self) -> Self {
         self.inner |= Self::NAGA;
         *self
     }
 
-    pub fn clear_NAGA(&mut self) -> Self {
+    pub fn clear_naga(&mut self) -> Self {
         self.inner &= Self::NAGA.reverse_bits();
         *self
     }
 
-    pub const fn is_BROKEN(&self) -> bool {
+    pub const fn is_broken(&self) -> bool {
         ((self.inner & Self::BROKEN) != 0) || self.inner == 0
     }
 
-    pub const fn new_BROKEN() -> Self {
+    pub const fn new_broken() -> Self {
         Self { inner: Self::BROKEN }
     }
 
-    pub fn set_BROKEN(&mut self) -> Self {
+    pub fn set_broken(&mut self) -> Self {
         self.inner |= Self::BROKEN;
         *self
     }
 
-    pub fn clear_BROKEN(&mut self) -> Self {
+    pub fn clear_broken(&mut self) -> Self {
         self.inner &= Self::BROKEN.reverse_bits();
         *self
     }
 
-    pub const fn is_SKELETON(&self) -> bool {
+    pub const fn is_skeleton(&self) -> bool {
         ((self.inner & Self::SKELETON) != 0) || self.inner == 0
     }
 
-    pub const fn new_SKELETON() -> Self {
+    pub const fn new_skeleton() -> Self {
         Self { inner: Self::SKELETON }
     }
 
-    pub fn set_SKELETON(&mut self) -> Self {
+    pub fn set_skeleton(&mut self) -> Self {
         self.inner |= Self::SKELETON;
         *self
     }
 
-    pub fn clear_SKELETON(&mut self) -> Self {
+    pub fn clear_skeleton(&mut self) -> Self {
         self.inner &= Self::SKELETON.reverse_bits();
         *self
     }
 
-    pub const fn is_VRYKUL(&self) -> bool {
+    pub const fn is_vrykul(&self) -> bool {
         ((self.inner & Self::VRYKUL) != 0) || self.inner == 0
     }
 
-    pub const fn new_VRYKUL() -> Self {
+    pub const fn new_vrykul() -> Self {
         Self { inner: Self::VRYKUL }
     }
 
-    pub fn set_VRYKUL(&mut self) -> Self {
+    pub fn set_vrykul(&mut self) -> Self {
         self.inner |= Self::VRYKUL;
         *self
     }
 
-    pub fn clear_VRYKUL(&mut self) -> Self {
+    pub fn clear_vrykul(&mut self) -> Self {
         self.inner &= Self::VRYKUL.reverse_bits();
         *self
     }
 
-    pub const fn is_TUSKARR(&self) -> bool {
+    pub const fn is_tuskarr(&self) -> bool {
         ((self.inner & Self::TUSKARR) != 0) || self.inner == 0
     }
 
-    pub const fn new_TUSKARR() -> Self {
+    pub const fn new_tuskarr() -> Self {
         Self { inner: Self::TUSKARR }
     }
 
-    pub fn set_TUSKARR(&mut self) -> Self {
+    pub fn set_tuskarr(&mut self) -> Self {
         self.inner |= Self::TUSKARR;
         *self
     }
 
-    pub fn clear_TUSKARR(&mut self) -> Self {
+    pub fn clear_tuskarr(&mut self) -> Self {
         self.inner &= Self::TUSKARR.reverse_bits();
         *self
     }
 
-    pub const fn is_FOREST_TROLL(&self) -> bool {
+    pub const fn is_forest_troll(&self) -> bool {
         ((self.inner & Self::FOREST_TROLL) != 0) || self.inner == 0
     }
 
-    pub const fn new_FOREST_TROLL() -> Self {
+    pub const fn new_forest_troll() -> Self {
         Self { inner: Self::FOREST_TROLL }
     }
 
-    pub fn set_FOREST_TROLL(&mut self) -> Self {
+    pub fn set_forest_troll(&mut self) -> Self {
         self.inner |= Self::FOREST_TROLL;
         *self
     }
 
-    pub fn clear_FOREST_TROLL(&mut self) -> Self {
+    pub fn clear_forest_troll(&mut self) -> Self {
         self.inner &= Self::FOREST_TROLL.reverse_bits();
         *self
     }

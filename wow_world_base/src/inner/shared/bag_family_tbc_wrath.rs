@@ -76,272 +76,272 @@ impl BagFamily {
         }
     }
 
-    pub const fn is_ARROWS(&self) -> bool {
+    pub const fn is_arrows(&self) -> bool {
         (self.inner & Self::ARROWS) != 0
     }
 
-    pub const fn new_ARROWS() -> Self {
+    pub const fn new_arrows() -> Self {
         Self { inner: Self::ARROWS }
     }
 
-    pub fn set_ARROWS(&mut self) -> Self {
+    pub fn set_arrows(&mut self) -> Self {
         self.inner |= Self::ARROWS;
         *self
     }
 
-    pub fn clear_ARROWS(&mut self) -> Self {
+    pub fn clear_arrows(&mut self) -> Self {
         self.inner &= Self::ARROWS.reverse_bits();
         *self
     }
 
-    pub const fn is_BULLETS(&self) -> bool {
+    pub const fn is_bullets(&self) -> bool {
         (self.inner & Self::BULLETS) != 0
     }
 
-    pub const fn new_BULLETS() -> Self {
+    pub const fn new_bullets() -> Self {
         Self { inner: Self::BULLETS }
     }
 
-    pub fn set_BULLETS(&mut self) -> Self {
+    pub fn set_bullets(&mut self) -> Self {
         self.inner |= Self::BULLETS;
         *self
     }
 
-    pub fn clear_BULLETS(&mut self) -> Self {
+    pub fn clear_bullets(&mut self) -> Self {
         self.inner &= Self::BULLETS.reverse_bits();
         *self
     }
 
-    pub const fn is_SOUL_SHARDS(&self) -> bool {
+    pub const fn is_soul_shards(&self) -> bool {
         (self.inner & Self::SOUL_SHARDS) != 0
     }
 
-    pub const fn new_SOUL_SHARDS() -> Self {
+    pub const fn new_soul_shards() -> Self {
         Self { inner: Self::SOUL_SHARDS }
     }
 
-    pub fn set_SOUL_SHARDS(&mut self) -> Self {
+    pub fn set_soul_shards(&mut self) -> Self {
         self.inner |= Self::SOUL_SHARDS;
         *self
     }
 
-    pub fn clear_SOUL_SHARDS(&mut self) -> Self {
+    pub fn clear_soul_shards(&mut self) -> Self {
         self.inner &= Self::SOUL_SHARDS.reverse_bits();
         *self
     }
 
-    pub const fn is_LEATHERWORKING_SUPPLIES(&self) -> bool {
+    pub const fn is_leatherworking_supplies(&self) -> bool {
         (self.inner & Self::LEATHERWORKING_SUPPLIES) != 0
     }
 
-    pub const fn new_LEATHERWORKING_SUPPLIES() -> Self {
+    pub const fn new_leatherworking_supplies() -> Self {
         Self { inner: Self::LEATHERWORKING_SUPPLIES }
     }
 
-    pub fn set_LEATHERWORKING_SUPPLIES(&mut self) -> Self {
+    pub fn set_leatherworking_supplies(&mut self) -> Self {
         self.inner |= Self::LEATHERWORKING_SUPPLIES;
         *self
     }
 
-    pub fn clear_LEATHERWORKING_SUPPLIES(&mut self) -> Self {
+    pub fn clear_leatherworking_supplies(&mut self) -> Self {
         self.inner &= Self::LEATHERWORKING_SUPPLIES.reverse_bits();
         *self
     }
 
-    pub const fn is_INSCRIPTION_SUPPLIES(&self) -> bool {
+    pub const fn is_inscription_supplies(&self) -> bool {
         (self.inner & Self::INSCRIPTION_SUPPLIES) != 0
     }
 
-    pub const fn new_INSCRIPTION_SUPPLIES() -> Self {
+    pub const fn new_inscription_supplies() -> Self {
         Self { inner: Self::INSCRIPTION_SUPPLIES }
     }
 
-    pub fn set_INSCRIPTION_SUPPLIES(&mut self) -> Self {
+    pub fn set_inscription_supplies(&mut self) -> Self {
         self.inner |= Self::INSCRIPTION_SUPPLIES;
         *self
     }
 
-    pub fn clear_INSCRIPTION_SUPPLIES(&mut self) -> Self {
+    pub fn clear_inscription_supplies(&mut self) -> Self {
         self.inner &= Self::INSCRIPTION_SUPPLIES.reverse_bits();
         *self
     }
 
-    pub const fn is_HERBS(&self) -> bool {
+    pub const fn is_herbs(&self) -> bool {
         (self.inner & Self::HERBS) != 0
     }
 
-    pub const fn new_HERBS() -> Self {
+    pub const fn new_herbs() -> Self {
         Self { inner: Self::HERBS }
     }
 
-    pub fn set_HERBS(&mut self) -> Self {
+    pub fn set_herbs(&mut self) -> Self {
         self.inner |= Self::HERBS;
         *self
     }
 
-    pub fn clear_HERBS(&mut self) -> Self {
+    pub fn clear_herbs(&mut self) -> Self {
         self.inner &= Self::HERBS.reverse_bits();
         *self
     }
 
-    pub const fn is_ENCHANTING_SUPPLIES(&self) -> bool {
+    pub const fn is_enchanting_supplies(&self) -> bool {
         (self.inner & Self::ENCHANTING_SUPPLIES) != 0
     }
 
-    pub const fn new_ENCHANTING_SUPPLIES() -> Self {
+    pub const fn new_enchanting_supplies() -> Self {
         Self { inner: Self::ENCHANTING_SUPPLIES }
     }
 
-    pub fn set_ENCHANTING_SUPPLIES(&mut self) -> Self {
+    pub fn set_enchanting_supplies(&mut self) -> Self {
         self.inner |= Self::ENCHANTING_SUPPLIES;
         *self
     }
 
-    pub fn clear_ENCHANTING_SUPPLIES(&mut self) -> Self {
+    pub fn clear_enchanting_supplies(&mut self) -> Self {
         self.inner &= Self::ENCHANTING_SUPPLIES.reverse_bits();
         *self
     }
 
-    pub const fn is_ENGINEERING_SUPPLIES(&self) -> bool {
+    pub const fn is_engineering_supplies(&self) -> bool {
         (self.inner & Self::ENGINEERING_SUPPLIES) != 0
     }
 
-    pub const fn new_ENGINEERING_SUPPLIES() -> Self {
+    pub const fn new_engineering_supplies() -> Self {
         Self { inner: Self::ENGINEERING_SUPPLIES }
     }
 
-    pub fn set_ENGINEERING_SUPPLIES(&mut self) -> Self {
+    pub fn set_engineering_supplies(&mut self) -> Self {
         self.inner |= Self::ENGINEERING_SUPPLIES;
         *self
     }
 
-    pub fn clear_ENGINEERING_SUPPLIES(&mut self) -> Self {
+    pub fn clear_engineering_supplies(&mut self) -> Self {
         self.inner &= Self::ENGINEERING_SUPPLIES.reverse_bits();
         *self
     }
 
-    pub const fn is_KEYS(&self) -> bool {
+    pub const fn is_keys(&self) -> bool {
         (self.inner & Self::KEYS) != 0
     }
 
-    pub const fn new_KEYS() -> Self {
+    pub const fn new_keys() -> Self {
         Self { inner: Self::KEYS }
     }
 
-    pub fn set_KEYS(&mut self) -> Self {
+    pub fn set_keys(&mut self) -> Self {
         self.inner |= Self::KEYS;
         *self
     }
 
-    pub fn clear_KEYS(&mut self) -> Self {
+    pub fn clear_keys(&mut self) -> Self {
         self.inner &= Self::KEYS.reverse_bits();
         *self
     }
 
-    pub const fn is_GEMS(&self) -> bool {
+    pub const fn is_gems(&self) -> bool {
         (self.inner & Self::GEMS) != 0
     }
 
-    pub const fn new_GEMS() -> Self {
+    pub const fn new_gems() -> Self {
         Self { inner: Self::GEMS }
     }
 
-    pub fn set_GEMS(&mut self) -> Self {
+    pub fn set_gems(&mut self) -> Self {
         self.inner |= Self::GEMS;
         *self
     }
 
-    pub fn clear_GEMS(&mut self) -> Self {
+    pub fn clear_gems(&mut self) -> Self {
         self.inner &= Self::GEMS.reverse_bits();
         *self
     }
 
-    pub const fn is_MINING_SUPPLIES(&self) -> bool {
+    pub const fn is_mining_supplies(&self) -> bool {
         (self.inner & Self::MINING_SUPPLIES) != 0
     }
 
-    pub const fn new_MINING_SUPPLIES() -> Self {
+    pub const fn new_mining_supplies() -> Self {
         Self { inner: Self::MINING_SUPPLIES }
     }
 
-    pub fn set_MINING_SUPPLIES(&mut self) -> Self {
+    pub fn set_mining_supplies(&mut self) -> Self {
         self.inner |= Self::MINING_SUPPLIES;
         *self
     }
 
-    pub fn clear_MINING_SUPPLIES(&mut self) -> Self {
+    pub fn clear_mining_supplies(&mut self) -> Self {
         self.inner &= Self::MINING_SUPPLIES.reverse_bits();
         *self
     }
 
-    pub const fn is_SOULBOUND_EQUIPMENT(&self) -> bool {
+    pub const fn is_soulbound_equipment(&self) -> bool {
         (self.inner & Self::SOULBOUND_EQUIPMENT) != 0
     }
 
-    pub const fn new_SOULBOUND_EQUIPMENT() -> Self {
+    pub const fn new_soulbound_equipment() -> Self {
         Self { inner: Self::SOULBOUND_EQUIPMENT }
     }
 
-    pub fn set_SOULBOUND_EQUIPMENT(&mut self) -> Self {
+    pub fn set_soulbound_equipment(&mut self) -> Self {
         self.inner |= Self::SOULBOUND_EQUIPMENT;
         *self
     }
 
-    pub fn clear_SOULBOUND_EQUIPMENT(&mut self) -> Self {
+    pub fn clear_soulbound_equipment(&mut self) -> Self {
         self.inner &= Self::SOULBOUND_EQUIPMENT.reverse_bits();
         *self
     }
 
-    pub const fn is_VANITY_PETS(&self) -> bool {
+    pub const fn is_vanity_pets(&self) -> bool {
         (self.inner & Self::VANITY_PETS) != 0
     }
 
-    pub const fn new_VANITY_PETS() -> Self {
+    pub const fn new_vanity_pets() -> Self {
         Self { inner: Self::VANITY_PETS }
     }
 
-    pub fn set_VANITY_PETS(&mut self) -> Self {
+    pub fn set_vanity_pets(&mut self) -> Self {
         self.inner |= Self::VANITY_PETS;
         *self
     }
 
-    pub fn clear_VANITY_PETS(&mut self) -> Self {
+    pub fn clear_vanity_pets(&mut self) -> Self {
         self.inner &= Self::VANITY_PETS.reverse_bits();
         *self
     }
 
-    pub const fn is_CURRENCY_TOKENS(&self) -> bool {
+    pub const fn is_currency_tokens(&self) -> bool {
         (self.inner & Self::CURRENCY_TOKENS) != 0
     }
 
-    pub const fn new_CURRENCY_TOKENS() -> Self {
+    pub const fn new_currency_tokens() -> Self {
         Self { inner: Self::CURRENCY_TOKENS }
     }
 
-    pub fn set_CURRENCY_TOKENS(&mut self) -> Self {
+    pub fn set_currency_tokens(&mut self) -> Self {
         self.inner |= Self::CURRENCY_TOKENS;
         *self
     }
 
-    pub fn clear_CURRENCY_TOKENS(&mut self) -> Self {
+    pub fn clear_currency_tokens(&mut self) -> Self {
         self.inner &= Self::CURRENCY_TOKENS.reverse_bits();
         *self
     }
 
-    pub const fn is_QUEST_ITEMS(&self) -> bool {
+    pub const fn is_quest_items(&self) -> bool {
         (self.inner & Self::QUEST_ITEMS) != 0
     }
 
-    pub const fn new_QUEST_ITEMS() -> Self {
+    pub const fn new_quest_items() -> Self {
         Self { inner: Self::QUEST_ITEMS }
     }
 
-    pub fn set_QUEST_ITEMS(&mut self) -> Self {
+    pub fn set_quest_items(&mut self) -> Self {
         self.inner |= Self::QUEST_ITEMS;
         *self
     }
 
-    pub fn clear_QUEST_ITEMS(&mut self) -> Self {
+    pub fn clear_quest_items(&mut self) -> Self {
         self.inner &= Self::QUEST_ITEMS.reverse_bits();
         *self
     }

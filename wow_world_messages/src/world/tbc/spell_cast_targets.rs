@@ -171,7 +171,7 @@ impl SpellCastTargets {
         // target_flags: SpellCastTargetFlags
         let target_flags = SpellCastTargetFlags::new(crate::util::read_u32_le(&mut r)?);
 
-        let target_flags_UNIT = if target_flags.is_UNIT() {
+        let target_flags_UNIT = if target_flags.is_unit() {
             // unit_target: PackedGuid
             let unit_target = Guid::read_packed(&mut r)?;
 
@@ -179,7 +179,7 @@ impl SpellCastTargets {
                 unit_target,
             })
         }
-        else if target_flags.is_UNIT_MINIPET() {
+        else if target_flags.is_unit_minipet() {
             // unit_minipet: PackedGuid
             let unit_minipet = Guid::read_packed(&mut r)?;
 
@@ -187,7 +187,7 @@ impl SpellCastTargets {
                 unit_minipet,
             })
         }
-        else if target_flags.is_UNIT_ENEMY() {
+        else if target_flags.is_unit_enemy() {
             // unit_enemy: PackedGuid
             let unit_enemy = Guid::read_packed(&mut r)?;
 
@@ -199,7 +199,7 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_GAMEOBJECT = if target_flags.is_GAMEOBJECT() {
+        let target_flags_GAMEOBJECT = if target_flags.is_gameobject() {
             // gameobject: PackedGuid
             let gameobject = Guid::read_packed(&mut r)?;
 
@@ -207,7 +207,7 @@ impl SpellCastTargets {
                 gameobject,
             })
         }
-        else if target_flags.is_LOCKED() {
+        else if target_flags.is_locked() {
             // locked: PackedGuid
             let locked = Guid::read_packed(&mut r)?;
 
@@ -219,7 +219,7 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_ITEM = if target_flags.is_ITEM() {
+        let target_flags_ITEM = if target_flags.is_item() {
             // item: PackedGuid
             let item = Guid::read_packed(&mut r)?;
 
@@ -227,7 +227,7 @@ impl SpellCastTargets {
                 item,
             })
         }
-        else if target_flags.is_TRADE_ITEM() {
+        else if target_flags.is_trade_item() {
             // trade_item: PackedGuid
             let trade_item = Guid::read_packed(&mut r)?;
 
@@ -239,7 +239,7 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_SOURCE_LOCATION = if target_flags.is_SOURCE_LOCATION() {
+        let target_flags_SOURCE_LOCATION = if target_flags.is_source_location() {
             // source: Vector3d
             let source = Vector3d::read(&mut r)?;
 
@@ -251,7 +251,7 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_DEST_LOCATION = if target_flags.is_DEST_LOCATION() {
+        let target_flags_DEST_LOCATION = if target_flags.is_dest_location() {
             // destination: Vector3d
             let destination = Vector3d::read(&mut r)?;
 
@@ -263,7 +263,7 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_STRING = if target_flags.is_STRING() {
+        let target_flags_STRING = if target_flags.is_string() {
             // target_string: CString
             let target_string = {
                 let target_string = crate::util::read_c_string_to_vec(&mut r)?;
@@ -278,7 +278,7 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_CORPSE_ALLY = if target_flags.is_CORPSE_ALLY() {
+        let target_flags_CORPSE_ALLY = if target_flags.is_corpse_ally() {
             // corpse_ally: PackedGuid
             let corpse_ally = Guid::read_packed(&mut r)?;
 
@@ -286,7 +286,7 @@ impl SpellCastTargets {
                 corpse_ally,
             })
         }
-        else if target_flags.is_CORPSE_ENEMY() {
+        else if target_flags.is_corpse_enemy() {
             // corpse_enemy: PackedGuid
             let corpse_enemy = Guid::read_packed(&mut r)?;
 
@@ -538,7 +538,7 @@ impl SpellCastTargets_SpellCastTargetFlags {
         && self.corpse_ally.is_none()
     }
 
-    pub const fn new_UNUSED1() -> Self {
+    pub const fn new_unused1() -> Self {
         Self {
             inner: SpellCastTargetFlags::UNUSED1,
             unit: None,
@@ -552,22 +552,22 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNUSED1(mut self) -> Self {
+    pub fn set_unused1(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNUSED1;
         self
     }
 
-    pub const fn get_UNUSED1(&self) -> bool {
+    pub const fn get_unused1(&self) -> bool {
         (self.inner & SpellCastTargetFlags::UNUSED1) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNUSED1(mut self) -> Self {
+    pub fn clear_unused1(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNUSED1.reverse_bits();
         self
     }
 
-    pub const fn new_UNIT(unit: SpellCastTargets_SpellCastTargetFlags_Unit) -> Self {
+    pub const fn new_unit(unit: SpellCastTargets_SpellCastTargetFlags_Unit) -> Self {
         Self {
             inner: unit.as_int(),
             unit: Some(unit),
@@ -581,24 +581,24 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNIT(mut self, unit: SpellCastTargets_SpellCastTargetFlags_Unit) -> Self {
+    pub fn set_unit(mut self, unit: SpellCastTargets_SpellCastTargetFlags_Unit) -> Self {
         self.inner |= unit.as_int();
         self.unit = Some(unit);
         self
     }
 
-    pub const fn get_UNIT(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_Unit> {
+    pub const fn get_unit(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_Unit> {
         self.unit.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNIT(mut self) -> Self {
+    pub fn clear_unit(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT.reverse_bits();
         self.unit = None;
         self
     }
 
-    pub const fn new_UNIT_RAID() -> Self {
+    pub const fn new_unit_raid() -> Self {
         Self {
             inner: SpellCastTargetFlags::UNIT_RAID,
             unit: None,
@@ -612,22 +612,22 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNIT_RAID(mut self) -> Self {
+    pub fn set_unit_raid(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_RAID;
         self
     }
 
-    pub const fn get_UNIT_RAID(&self) -> bool {
+    pub const fn get_unit_raid(&self) -> bool {
         (self.inner & SpellCastTargetFlags::UNIT_RAID) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNIT_RAID(mut self) -> Self {
+    pub fn clear_unit_raid(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_RAID.reverse_bits();
         self
     }
 
-    pub const fn new_UNIT_PARTY() -> Self {
+    pub const fn new_unit_party() -> Self {
         Self {
             inner: SpellCastTargetFlags::UNIT_PARTY,
             unit: None,
@@ -641,22 +641,22 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNIT_PARTY(mut self) -> Self {
+    pub fn set_unit_party(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_PARTY;
         self
     }
 
-    pub const fn get_UNIT_PARTY(&self) -> bool {
+    pub const fn get_unit_party(&self) -> bool {
         (self.inner & SpellCastTargetFlags::UNIT_PARTY) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNIT_PARTY(mut self) -> Self {
+    pub fn clear_unit_party(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_PARTY.reverse_bits();
         self
     }
 
-    pub const fn new_ITEM(item: SpellCastTargets_SpellCastTargetFlags_Item) -> Self {
+    pub const fn new_item(item: SpellCastTargets_SpellCastTargetFlags_Item) -> Self {
         Self {
             inner: item.as_int(),
             unit: None,
@@ -670,24 +670,24 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ITEM(mut self, item: SpellCastTargets_SpellCastTargetFlags_Item) -> Self {
+    pub fn set_item(mut self, item: SpellCastTargets_SpellCastTargetFlags_Item) -> Self {
         self.inner |= item.as_int();
         self.item = Some(item);
         self
     }
 
-    pub const fn get_ITEM(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_Item> {
+    pub const fn get_item(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_Item> {
         self.item.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ITEM(mut self) -> Self {
+    pub fn clear_item(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::ITEM.reverse_bits();
         self.item = None;
         self
     }
 
-    pub const fn new_SOURCE_LOCATION(source_location: SpellCastTargets_SpellCastTargetFlags_SourceLocation) -> Self {
+    pub const fn new_source_location(source_location: SpellCastTargets_SpellCastTargetFlags_SourceLocation) -> Self {
         Self {
             inner: SpellCastTargetFlags::SOURCE_LOCATION,
             unit: None,
@@ -701,24 +701,24 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_SOURCE_LOCATION(mut self, source_location: SpellCastTargets_SpellCastTargetFlags_SourceLocation) -> Self {
+    pub fn set_source_location(mut self, source_location: SpellCastTargets_SpellCastTargetFlags_SourceLocation) -> Self {
         self.inner |= SpellCastTargetFlags::SOURCE_LOCATION;
         self.source_location = Some(source_location);
         self
     }
 
-    pub const fn get_SOURCE_LOCATION(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_SourceLocation> {
+    pub const fn get_source_location(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_SourceLocation> {
         self.source_location.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_SOURCE_LOCATION(mut self) -> Self {
+    pub fn clear_source_location(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::SOURCE_LOCATION.reverse_bits();
         self.source_location = None;
         self
     }
 
-    pub const fn new_DEST_LOCATION(dest_location: SpellCastTargets_SpellCastTargetFlags_DestLocation) -> Self {
+    pub const fn new_dest_location(dest_location: SpellCastTargets_SpellCastTargetFlags_DestLocation) -> Self {
         Self {
             inner: SpellCastTargetFlags::DEST_LOCATION,
             unit: None,
@@ -732,24 +732,24 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_DEST_LOCATION(mut self, dest_location: SpellCastTargets_SpellCastTargetFlags_DestLocation) -> Self {
+    pub fn set_dest_location(mut self, dest_location: SpellCastTargets_SpellCastTargetFlags_DestLocation) -> Self {
         self.inner |= SpellCastTargetFlags::DEST_LOCATION;
         self.dest_location = Some(dest_location);
         self
     }
 
-    pub const fn get_DEST_LOCATION(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_DestLocation> {
+    pub const fn get_dest_location(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_DestLocation> {
         self.dest_location.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_DEST_LOCATION(mut self) -> Self {
+    pub fn clear_dest_location(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::DEST_LOCATION.reverse_bits();
         self.dest_location = None;
         self
     }
 
-    pub const fn new_UNIT_ALLY() -> Self {
+    pub const fn new_unit_ally() -> Self {
         Self {
             inner: SpellCastTargetFlags::UNIT_ALLY,
             unit: None,
@@ -763,22 +763,22 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNIT_ALLY(mut self) -> Self {
+    pub fn set_unit_ally(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_ALLY;
         self
     }
 
-    pub const fn get_UNIT_ALLY(&self) -> bool {
+    pub const fn get_unit_ally(&self) -> bool {
         (self.inner & SpellCastTargetFlags::UNIT_ALLY) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNIT_ALLY(mut self) -> Self {
+    pub fn clear_unit_ally(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_ALLY.reverse_bits();
         self
     }
 
-    pub const fn new_UNIT_DEAD() -> Self {
+    pub const fn new_unit_dead() -> Self {
         Self {
             inner: SpellCastTargetFlags::UNIT_DEAD,
             unit: None,
@@ -792,22 +792,22 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNIT_DEAD(mut self) -> Self {
+    pub fn set_unit_dead(mut self) -> Self {
         self.inner |= SpellCastTargetFlags::UNIT_DEAD;
         self
     }
 
-    pub const fn get_UNIT_DEAD(&self) -> bool {
+    pub const fn get_unit_dead(&self) -> bool {
         (self.inner & SpellCastTargetFlags::UNIT_DEAD) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNIT_DEAD(mut self) -> Self {
+    pub fn clear_unit_dead(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::UNIT_DEAD.reverse_bits();
         self
     }
 
-    pub const fn new_GAMEOBJECT(gameobject: SpellCastTargets_SpellCastTargetFlags_Gameobject) -> Self {
+    pub const fn new_gameobject(gameobject: SpellCastTargets_SpellCastTargetFlags_Gameobject) -> Self {
         Self {
             inner: gameobject.as_int(),
             unit: None,
@@ -821,24 +821,24 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_GAMEOBJECT(mut self, gameobject: SpellCastTargets_SpellCastTargetFlags_Gameobject) -> Self {
+    pub fn set_gameobject(mut self, gameobject: SpellCastTargets_SpellCastTargetFlags_Gameobject) -> Self {
         self.inner |= gameobject.as_int();
         self.gameobject = Some(gameobject);
         self
     }
 
-    pub const fn get_GAMEOBJECT(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_Gameobject> {
+    pub const fn get_gameobject(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_Gameobject> {
         self.gameobject.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_GAMEOBJECT(mut self) -> Self {
+    pub fn clear_gameobject(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::GAMEOBJECT.reverse_bits();
         self.gameobject = None;
         self
     }
 
-    pub const fn new_STRING(string: SpellCastTargets_SpellCastTargetFlags_String) -> Self {
+    pub const fn new_string(string: SpellCastTargets_SpellCastTargetFlags_String) -> Self {
         Self {
             inner: SpellCastTargetFlags::STRING,
             unit: None,
@@ -852,24 +852,24 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_STRING(mut self, string: SpellCastTargets_SpellCastTargetFlags_String) -> Self {
+    pub fn set_string(mut self, string: SpellCastTargets_SpellCastTargetFlags_String) -> Self {
         self.inner |= SpellCastTargetFlags::STRING;
         self.string = Some(string);
         self
     }
 
-    pub const fn get_STRING(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_String> {
+    pub const fn get_string(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_String> {
         self.string.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_STRING(mut self) -> Self {
+    pub fn clear_string(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::STRING.reverse_bits();
         self.string = None;
         self
     }
 
-    pub const fn new_CORPSE_ALLY(corpse_ally: SpellCastTargets_SpellCastTargetFlags_CorpseAlly) -> Self {
+    pub const fn new_corpse_ally(corpse_ally: SpellCastTargets_SpellCastTargetFlags_CorpseAlly) -> Self {
         Self {
             inner: corpse_ally.as_int(),
             unit: None,
@@ -883,18 +883,18 @@ impl SpellCastTargets_SpellCastTargetFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_CORPSE_ALLY(mut self, corpse_ally: SpellCastTargets_SpellCastTargetFlags_CorpseAlly) -> Self {
+    pub fn set_corpse_ally(mut self, corpse_ally: SpellCastTargets_SpellCastTargetFlags_CorpseAlly) -> Self {
         self.inner |= corpse_ally.as_int();
         self.corpse_ally = Some(corpse_ally);
         self
     }
 
-    pub const fn get_CORPSE_ALLY(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_CorpseAlly> {
+    pub const fn get_corpse_ally(&self) -> Option<&SpellCastTargets_SpellCastTargetFlags_CorpseAlly> {
         self.corpse_ally.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_CORPSE_ALLY(mut self) -> Self {
+    pub fn clear_corpse_ally(mut self) -> Self {
         self.inner &= SpellCastTargetFlags::CORPSE_ALLY.reverse_bits();
         self.corpse_ally = None;
         self

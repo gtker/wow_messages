@@ -19,7 +19,7 @@ impl MovementInfo {
     ) -> MovementBlock_UpdateFlag_Living {
         let on_transport =
             self.flags
-                .get_ON_TRANSPORT()
+                .get_on_transport()
                 .map(|t| MovementBlock_MovementFlags_OnTransport {
                     transport_guid: t.transport.guid,
                     transport_orientation: t.transport.orientation,
@@ -28,7 +28,7 @@ impl MovementInfo {
 
         let jumping = self
             .flags
-            .get_JUMPING()
+            .get_jumping()
             .map(|t| MovementBlock_MovementFlags_Jumping {
                 cos_angle: t.cos_angle,
                 sin_angle: t.sin_angle,
@@ -38,10 +38,10 @@ impl MovementInfo {
 
         let swimming = self
             .flags
-            .get_SWIMMING()
+            .get_swimming()
             .map(|t| MovementBlock_MovementFlags_Swimming { pitch: t.pitch });
 
-        let spline_elevation = self.flags.get_SPLINE_ELEVATION().map(|t| {
+        let spline_elevation = self.flags.get_spline_elevation().map(|t| {
             MovementBlock_MovementFlags_SplineElevation {
                 spline_elevation: t.spline_elevation,
             }

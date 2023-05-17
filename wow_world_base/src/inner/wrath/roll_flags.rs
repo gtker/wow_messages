@@ -40,74 +40,74 @@ impl RollFlags {
         }
     }
 
-    pub const fn is_PASS(&self) -> bool {
+    pub const fn is_pass(&self) -> bool {
         (self.inner & Self::PASS) != 0
     }
 
-    pub const fn new_PASS() -> Self {
+    pub const fn new_pass() -> Self {
         Self { inner: Self::PASS }
     }
 
-    pub fn set_PASS(&mut self) -> Self {
+    pub fn set_pass(&mut self) -> Self {
         self.inner |= Self::PASS;
         *self
     }
 
-    pub fn clear_PASS(&mut self) -> Self {
+    pub fn clear_pass(&mut self) -> Self {
         self.inner &= Self::PASS.reverse_bits();
         *self
     }
 
-    pub const fn is_NEED(&self) -> bool {
+    pub const fn is_need(&self) -> bool {
         (self.inner & Self::NEED) != 0
     }
 
-    pub const fn new_NEED() -> Self {
+    pub const fn new_need() -> Self {
         Self { inner: Self::NEED }
     }
 
-    pub fn set_NEED(&mut self) -> Self {
+    pub fn set_need(&mut self) -> Self {
         self.inner |= Self::NEED;
         *self
     }
 
-    pub fn clear_NEED(&mut self) -> Self {
+    pub fn clear_need(&mut self) -> Self {
         self.inner &= Self::NEED.reverse_bits();
         *self
     }
 
-    pub const fn is_GREED(&self) -> bool {
+    pub const fn is_greed(&self) -> bool {
         (self.inner & Self::GREED) != 0
     }
 
-    pub const fn new_GREED() -> Self {
+    pub const fn new_greed() -> Self {
         Self { inner: Self::GREED }
     }
 
-    pub fn set_GREED(&mut self) -> Self {
+    pub fn set_greed(&mut self) -> Self {
         self.inner |= Self::GREED;
         *self
     }
 
-    pub fn clear_GREED(&mut self) -> Self {
+    pub fn clear_greed(&mut self) -> Self {
         self.inner &= Self::GREED.reverse_bits();
         *self
     }
 
-    pub const fn is_DISENCHANT(&self) -> bool {
+    pub const fn is_disenchant(&self) -> bool {
         (self.inner & Self::DISENCHANT) != 0
     }
 
-    pub const fn new_DISENCHANT() -> Self {
+    pub const fn new_disenchant() -> Self {
         Self { inner: Self::DISENCHANT }
     }
 
-    pub fn set_DISENCHANT(&mut self) -> Self {
+    pub fn set_disenchant(&mut self) -> Self {
         self.inner |= Self::DISENCHANT;
         *self
     }
 
-    pub fn clear_DISENCHANT(&mut self) -> Self {
+    pub fn clear_disenchant(&mut self) -> Self {
         self.inner &= Self::DISENCHANT.reverse_bits();
         *self
     }

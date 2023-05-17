@@ -216,7 +216,7 @@ impl LfgListPlayer {
         // flags: LfgUpdateFlag
         let flags = LfgUpdateFlag::new(crate::util::read_u32_le(&mut r)?);
 
-        let flags_CHARACTER_INFO = if flags.is_CHARACTER_INFO() {
+        let flags_CHARACTER_INFO = if flags.is_character_info() {
             // level: Level
             let level = Level::new(crate::util::read_u8_le(&mut r)?);
 
@@ -328,7 +328,7 @@ impl LfgListPlayer {
             None
         };
 
-        let flags_COMMENT = if flags.is_COMMENT() {
+        let flags_COMMENT = if flags.is_comment() {
             // comment: CString
             let comment = {
                 let comment = crate::util::read_c_string_to_vec(&mut r)?;
@@ -343,7 +343,7 @@ impl LfgListPlayer {
             None
         };
 
-        let flags_GROUP_LEADER = if flags.is_GROUP_LEADER() {
+        let flags_GROUP_LEADER = if flags.is_group_leader() {
             // is_looking_for_more: Bool
             let is_looking_for_more = crate::util::read_u8_le(&mut r)? != 0;
 
@@ -355,7 +355,7 @@ impl LfgListPlayer {
             None
         };
 
-        let flags_GROUP_GUID = if flags.is_GROUP_GUID() {
+        let flags_GROUP_GUID = if flags.is_group_guid() {
             // group: Guid
             let group = Guid::read(&mut r)?;
 
@@ -367,7 +367,7 @@ impl LfgListPlayer {
             None
         };
 
-        let flags_ROLES = if flags.is_ROLES() {
+        let flags_ROLES = if flags.is_roles() {
             // roles: u8
             let roles = crate::util::read_u8_le(&mut r)?;
 
@@ -379,7 +379,7 @@ impl LfgListPlayer {
             None
         };
 
-        let flags_AREA = if flags.is_AREA() {
+        let flags_AREA = if flags.is_area() {
             // area: Area
             let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
@@ -391,7 +391,7 @@ impl LfgListPlayer {
             None
         };
 
-        let flags_STATUS = if flags.is_STATUS() {
+        let flags_STATUS = if flags.is_status() {
             // unknown1: u8
             let unknown1 = crate::util::read_u8_le(&mut r)?;
 
@@ -489,7 +489,7 @@ impl LfgListPlayer_LfgUpdateFlag {
         && self.status.is_none()
     }
 
-    pub const fn new_CHARACTER_INFO(character_info: LfgListPlayer_LfgUpdateFlag_CharacterInfo) -> Self {
+    pub const fn new_character_info(character_info: LfgListPlayer_LfgUpdateFlag_CharacterInfo) -> Self {
         Self {
             inner: LfgUpdateFlag::CHARACTER_INFO,
             character_info: Some(character_info),
@@ -503,24 +503,24 @@ impl LfgListPlayer_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_CHARACTER_INFO(mut self, character_info: LfgListPlayer_LfgUpdateFlag_CharacterInfo) -> Self {
+    pub fn set_character_info(mut self, character_info: LfgListPlayer_LfgUpdateFlag_CharacterInfo) -> Self {
         self.inner |= LfgUpdateFlag::CHARACTER_INFO;
         self.character_info = Some(character_info);
         self
     }
 
-    pub const fn get_CHARACTER_INFO(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_CharacterInfo> {
+    pub const fn get_character_info(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_CharacterInfo> {
         self.character_info.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_CHARACTER_INFO(mut self) -> Self {
+    pub fn clear_character_info(mut self) -> Self {
         self.inner &= LfgUpdateFlag::CHARACTER_INFO.reverse_bits();
         self.character_info = None;
         self
     }
 
-    pub const fn new_COMMENT(comment: LfgListPlayer_LfgUpdateFlag_Comment) -> Self {
+    pub const fn new_comment(comment: LfgListPlayer_LfgUpdateFlag_Comment) -> Self {
         Self {
             inner: LfgUpdateFlag::COMMENT,
             character_info: None,
@@ -534,24 +534,24 @@ impl LfgListPlayer_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_COMMENT(mut self, comment: LfgListPlayer_LfgUpdateFlag_Comment) -> Self {
+    pub fn set_comment(mut self, comment: LfgListPlayer_LfgUpdateFlag_Comment) -> Self {
         self.inner |= LfgUpdateFlag::COMMENT;
         self.comment = Some(comment);
         self
     }
 
-    pub const fn get_COMMENT(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_Comment> {
+    pub const fn get_comment(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_Comment> {
         self.comment.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_COMMENT(mut self) -> Self {
+    pub fn clear_comment(mut self) -> Self {
         self.inner &= LfgUpdateFlag::COMMENT.reverse_bits();
         self.comment = None;
         self
     }
 
-    pub const fn new_GROUP_LEADER(group_leader: LfgListPlayer_LfgUpdateFlag_GroupLeader) -> Self {
+    pub const fn new_group_leader(group_leader: LfgListPlayer_LfgUpdateFlag_GroupLeader) -> Self {
         Self {
             inner: LfgUpdateFlag::GROUP_LEADER,
             character_info: None,
@@ -565,24 +565,24 @@ impl LfgListPlayer_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_GROUP_LEADER(mut self, group_leader: LfgListPlayer_LfgUpdateFlag_GroupLeader) -> Self {
+    pub fn set_group_leader(mut self, group_leader: LfgListPlayer_LfgUpdateFlag_GroupLeader) -> Self {
         self.inner |= LfgUpdateFlag::GROUP_LEADER;
         self.group_leader = Some(group_leader);
         self
     }
 
-    pub const fn get_GROUP_LEADER(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_GroupLeader> {
+    pub const fn get_group_leader(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_GroupLeader> {
         self.group_leader.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_GROUP_LEADER(mut self) -> Self {
+    pub fn clear_group_leader(mut self) -> Self {
         self.inner &= LfgUpdateFlag::GROUP_LEADER.reverse_bits();
         self.group_leader = None;
         self
     }
 
-    pub const fn new_GROUP_GUID(group_guid: LfgListPlayer_LfgUpdateFlag_GroupGuid) -> Self {
+    pub const fn new_group_guid(group_guid: LfgListPlayer_LfgUpdateFlag_GroupGuid) -> Self {
         Self {
             inner: LfgUpdateFlag::GROUP_GUID,
             character_info: None,
@@ -596,24 +596,24 @@ impl LfgListPlayer_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_GROUP_GUID(mut self, group_guid: LfgListPlayer_LfgUpdateFlag_GroupGuid) -> Self {
+    pub fn set_group_guid(mut self, group_guid: LfgListPlayer_LfgUpdateFlag_GroupGuid) -> Self {
         self.inner |= LfgUpdateFlag::GROUP_GUID;
         self.group_guid = Some(group_guid);
         self
     }
 
-    pub const fn get_GROUP_GUID(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_GroupGuid> {
+    pub const fn get_group_guid(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_GroupGuid> {
         self.group_guid.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_GROUP_GUID(mut self) -> Self {
+    pub fn clear_group_guid(mut self) -> Self {
         self.inner &= LfgUpdateFlag::GROUP_GUID.reverse_bits();
         self.group_guid = None;
         self
     }
 
-    pub const fn new_ROLES(roles: LfgListPlayer_LfgUpdateFlag_Roles) -> Self {
+    pub const fn new_roles(roles: LfgListPlayer_LfgUpdateFlag_Roles) -> Self {
         Self {
             inner: LfgUpdateFlag::ROLES,
             character_info: None,
@@ -627,24 +627,24 @@ impl LfgListPlayer_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ROLES(mut self, roles: LfgListPlayer_LfgUpdateFlag_Roles) -> Self {
+    pub fn set_roles(mut self, roles: LfgListPlayer_LfgUpdateFlag_Roles) -> Self {
         self.inner |= LfgUpdateFlag::ROLES;
         self.roles = Some(roles);
         self
     }
 
-    pub const fn get_ROLES(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_Roles> {
+    pub const fn get_roles(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_Roles> {
         self.roles.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ROLES(mut self) -> Self {
+    pub fn clear_roles(mut self) -> Self {
         self.inner &= LfgUpdateFlag::ROLES.reverse_bits();
         self.roles = None;
         self
     }
 
-    pub const fn new_AREA(area: LfgListPlayer_LfgUpdateFlag_Area) -> Self {
+    pub const fn new_area(area: LfgListPlayer_LfgUpdateFlag_Area) -> Self {
         Self {
             inner: LfgUpdateFlag::AREA,
             character_info: None,
@@ -658,24 +658,24 @@ impl LfgListPlayer_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_AREA(mut self, area: LfgListPlayer_LfgUpdateFlag_Area) -> Self {
+    pub fn set_area(mut self, area: LfgListPlayer_LfgUpdateFlag_Area) -> Self {
         self.inner |= LfgUpdateFlag::AREA;
         self.area = Some(area);
         self
     }
 
-    pub const fn get_AREA(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_Area> {
+    pub const fn get_area(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_Area> {
         self.area.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_AREA(mut self) -> Self {
+    pub fn clear_area(mut self) -> Self {
         self.inner &= LfgUpdateFlag::AREA.reverse_bits();
         self.area = None;
         self
     }
 
-    pub const fn new_STATUS(status: LfgListPlayer_LfgUpdateFlag_Status) -> Self {
+    pub const fn new_status(status: LfgListPlayer_LfgUpdateFlag_Status) -> Self {
         Self {
             inner: LfgUpdateFlag::STATUS,
             character_info: None,
@@ -689,24 +689,24 @@ impl LfgListPlayer_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_STATUS(mut self, status: LfgListPlayer_LfgUpdateFlag_Status) -> Self {
+    pub fn set_status(mut self, status: LfgListPlayer_LfgUpdateFlag_Status) -> Self {
         self.inner |= LfgUpdateFlag::STATUS;
         self.status = Some(status);
         self
     }
 
-    pub const fn get_STATUS(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_Status> {
+    pub const fn get_status(&self) -> Option<&LfgListPlayer_LfgUpdateFlag_Status> {
         self.status.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_STATUS(mut self) -> Self {
+    pub fn clear_status(mut self) -> Self {
         self.inner &= LfgUpdateFlag::STATUS.reverse_bits();
         self.status = None;
         self
     }
 
-    pub const fn new_BOUND() -> Self {
+    pub const fn new_bound() -> Self {
         Self {
             inner: LfgUpdateFlag::BOUND,
             character_info: None,
@@ -720,17 +720,17 @@ impl LfgListPlayer_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_BOUND(mut self) -> Self {
+    pub fn set_bound(mut self) -> Self {
         self.inner |= LfgUpdateFlag::BOUND;
         self
     }
 
-    pub const fn get_BOUND(&self) -> bool {
+    pub const fn get_bound(&self) -> bool {
         (self.inner & LfgUpdateFlag::BOUND) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_BOUND(mut self) -> Self {
+    pub fn clear_bound(mut self) -> Self {
         self.inner &= LfgUpdateFlag::BOUND.reverse_bits();
         self
     }

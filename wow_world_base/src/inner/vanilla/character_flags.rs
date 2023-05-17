@@ -46,92 +46,92 @@ impl CharacterFlags {
         }
     }
 
-    pub const fn is_LOCKED_FOR_TRANSFER(&self) -> bool {
+    pub const fn is_locked_for_transfer(&self) -> bool {
         (self.inner & Self::LOCKED_FOR_TRANSFER) != 0
     }
 
-    pub const fn new_LOCKED_FOR_TRANSFER() -> Self {
+    pub const fn new_locked_for_transfer() -> Self {
         Self { inner: Self::LOCKED_FOR_TRANSFER }
     }
 
-    pub fn set_LOCKED_FOR_TRANSFER(&mut self) -> Self {
+    pub fn set_locked_for_transfer(&mut self) -> Self {
         self.inner |= Self::LOCKED_FOR_TRANSFER;
         *self
     }
 
-    pub fn clear_LOCKED_FOR_TRANSFER(&mut self) -> Self {
+    pub fn clear_locked_for_transfer(&mut self) -> Self {
         self.inner &= Self::LOCKED_FOR_TRANSFER.reverse_bits();
         *self
     }
 
-    pub const fn is_HIDE_HELM(&self) -> bool {
+    pub const fn is_hide_helm(&self) -> bool {
         (self.inner & Self::HIDE_HELM) != 0
     }
 
-    pub const fn new_HIDE_HELM() -> Self {
+    pub const fn new_hide_helm() -> Self {
         Self { inner: Self::HIDE_HELM }
     }
 
-    pub fn set_HIDE_HELM(&mut self) -> Self {
+    pub fn set_hide_helm(&mut self) -> Self {
         self.inner |= Self::HIDE_HELM;
         *self
     }
 
-    pub fn clear_HIDE_HELM(&mut self) -> Self {
+    pub fn clear_hide_helm(&mut self) -> Self {
         self.inner &= Self::HIDE_HELM.reverse_bits();
         *self
     }
 
-    pub const fn is_HIDE_CLOAK(&self) -> bool {
+    pub const fn is_hide_cloak(&self) -> bool {
         (self.inner & Self::HIDE_CLOAK) != 0
     }
 
-    pub const fn new_HIDE_CLOAK() -> Self {
+    pub const fn new_hide_cloak() -> Self {
         Self { inner: Self::HIDE_CLOAK }
     }
 
-    pub fn set_HIDE_CLOAK(&mut self) -> Self {
+    pub fn set_hide_cloak(&mut self) -> Self {
         self.inner |= Self::HIDE_CLOAK;
         *self
     }
 
-    pub fn clear_HIDE_CLOAK(&mut self) -> Self {
+    pub fn clear_hide_cloak(&mut self) -> Self {
         self.inner &= Self::HIDE_CLOAK.reverse_bits();
         *self
     }
 
-    pub const fn is_GHOST(&self) -> bool {
+    pub const fn is_ghost(&self) -> bool {
         (self.inner & Self::GHOST) != 0
     }
 
-    pub const fn new_GHOST() -> Self {
+    pub const fn new_ghost() -> Self {
         Self { inner: Self::GHOST }
     }
 
-    pub fn set_GHOST(&mut self) -> Self {
+    pub fn set_ghost(&mut self) -> Self {
         self.inner |= Self::GHOST;
         *self
     }
 
-    pub fn clear_GHOST(&mut self) -> Self {
+    pub fn clear_ghost(&mut self) -> Self {
         self.inner &= Self::GHOST.reverse_bits();
         *self
     }
 
-    pub const fn is_RENAME(&self) -> bool {
+    pub const fn is_rename(&self) -> bool {
         (self.inner & Self::RENAME) != 0
     }
 
-    pub const fn new_RENAME() -> Self {
+    pub const fn new_rename() -> Self {
         Self { inner: Self::RENAME }
     }
 
-    pub fn set_RENAME(&mut self) -> Self {
+    pub fn set_rename(&mut self) -> Self {
         self.inner |= Self::RENAME;
         *self
     }
 
-    pub fn clear_RENAME(&mut self) -> Self {
+    pub fn clear_rename(&mut self) -> Self {
         self.inner &= Self::RENAME.reverse_bits();
         *self
     }

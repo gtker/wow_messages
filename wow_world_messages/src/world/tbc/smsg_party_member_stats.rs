@@ -226,7 +226,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
         // mask: GroupUpdateFlags
         let mask = GroupUpdateFlags::new(crate::util::read_u32_le(&mut r)?);
 
-        let mask_STATUS = if mask.is_STATUS() {
+        let mask_STATUS = if mask.is_status() {
             // status: GroupMemberOnlineStatus
             let status = GroupMemberOnlineStatus::new(crate::util::read_u8_le(&mut r)?);
 
@@ -238,7 +238,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_CUR_HP = if mask.is_CUR_HP() {
+        let mask_CUR_HP = if mask.is_cur_hp() {
             // current_health: u16
             let current_health = crate::util::read_u16_le(&mut r)?;
 
@@ -250,7 +250,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_MAX_HP = if mask.is_MAX_HP() {
+        let mask_MAX_HP = if mask.is_max_hp() {
             // max_health: u16
             let max_health = crate::util::read_u16_le(&mut r)?;
 
@@ -262,7 +262,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_POWER_TYPE = if mask.is_POWER_TYPE() {
+        let mask_POWER_TYPE = if mask.is_power_type() {
             // power: Power
             let power: Power = crate::util::read_u8_le(&mut r)?.try_into()?;
 
@@ -274,7 +274,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_CUR_POWER = if mask.is_CUR_POWER() {
+        let mask_CUR_POWER = if mask.is_cur_power() {
             // current_power: u16
             let current_power = crate::util::read_u16_le(&mut r)?;
 
@@ -286,7 +286,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_MAX_POWER = if mask.is_MAX_POWER() {
+        let mask_MAX_POWER = if mask.is_max_power() {
             // max_power: u16
             let max_power = crate::util::read_u16_le(&mut r)?;
 
@@ -298,7 +298,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_LEVEL = if mask.is_LEVEL() {
+        let mask_LEVEL = if mask.is_level() {
             // level: Level16
             let level = Level::new(crate::util::read_u16_le(&mut r)? as u8);
 
@@ -310,7 +310,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_ZONE = if mask.is_ZONE() {
+        let mask_ZONE = if mask.is_zone() {
             // area: Area
             let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
@@ -322,7 +322,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_POSITION = if mask.is_POSITION() {
+        let mask_POSITION = if mask.is_position() {
             // position_x: u16
             let position_x = crate::util::read_u16_le(&mut r)?;
 
@@ -338,7 +338,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_AURAS = if mask.is_AURAS() {
+        let mask_AURAS = if mask.is_auras() {
             // auras: AuraMask
             let auras = AuraMask::read(&mut r)?;
 
@@ -350,7 +350,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_GUID = if mask.is_PET_GUID() {
+        let mask_PET_GUID = if mask.is_pet_guid() {
             // pet: Guid
             let pet = Guid::read(&mut r)?;
 
@@ -362,7 +362,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_NAME = if mask.is_PET_NAME() {
+        let mask_PET_NAME = if mask.is_pet_name() {
             // pet_name: CString
             let pet_name = {
                 let pet_name = crate::util::read_c_string_to_vec(&mut r)?;
@@ -377,7 +377,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_MODEL_ID = if mask.is_PET_MODEL_ID() {
+        let mask_PET_MODEL_ID = if mask.is_pet_model_id() {
             // pet_display_id: u16
             let pet_display_id = crate::util::read_u16_le(&mut r)?;
 
@@ -389,7 +389,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_CUR_HP = if mask.is_PET_CUR_HP() {
+        let mask_PET_CUR_HP = if mask.is_pet_cur_hp() {
             // pet_current_health: u16
             let pet_current_health = crate::util::read_u16_le(&mut r)?;
 
@@ -401,7 +401,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_MAX_HP = if mask.is_PET_MAX_HP() {
+        let mask_PET_MAX_HP = if mask.is_pet_max_hp() {
             // pet_max_health: u16
             let pet_max_health = crate::util::read_u16_le(&mut r)?;
 
@@ -413,7 +413,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_POWER_TYPE = if mask.is_PET_POWER_TYPE() {
+        let mask_PET_POWER_TYPE = if mask.is_pet_power_type() {
             // pet_power_type: Power
             let pet_power_type: Power = crate::util::read_u8_le(&mut r)?.try_into()?;
 
@@ -425,7 +425,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_CUR_POWER = if mask.is_PET_CUR_POWER() {
+        let mask_PET_CUR_POWER = if mask.is_pet_cur_power() {
             // pet_current_power: u16
             let pet_current_power = crate::util::read_u16_le(&mut r)?;
 
@@ -437,7 +437,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_MAX_POWER = if mask.is_PET_MAX_POWER() {
+        let mask_PET_MAX_POWER = if mask.is_pet_max_power() {
             // pet_max_power: u16
             let pet_max_power = crate::util::read_u16_le(&mut r)?;
 
@@ -449,7 +449,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_AURAS = if mask.is_PET_AURAS() {
+        let mask_PET_AURAS = if mask.is_pet_auras() {
             // pet_auras: AuraMask
             let pet_auras = AuraMask::read(&mut r)?;
 
@@ -599,7 +599,7 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
         && self.pet_auras.is_none()
     }
 
-    pub const fn new_STATUS(status: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Status) -> Self {
+    pub const fn new_status(status: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Status) -> Self {
         Self {
             inner: GroupUpdateFlags::STATUS,
             status: Some(status),
@@ -625,24 +625,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_STATUS(mut self, status: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Status) -> Self {
+    pub fn set_status(mut self, status: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Status) -> Self {
         self.inner |= GroupUpdateFlags::STATUS;
         self.status = Some(status);
         self
     }
 
-    pub const fn get_STATUS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Status> {
+    pub const fn get_status(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Status> {
         self.status.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_STATUS(mut self) -> Self {
+    pub fn clear_status(mut self) -> Self {
         self.inner &= GroupUpdateFlags::STATUS.reverse_bits();
         self.status = None;
         self
     }
 
-    pub const fn new_CUR_HP(cur_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurHp) -> Self {
+    pub const fn new_cur_hp(cur_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurHp) -> Self {
         Self {
             inner: GroupUpdateFlags::CUR_HP,
             status: None,
@@ -668,24 +668,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_CUR_HP(mut self, cur_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurHp) -> Self {
+    pub fn set_cur_hp(mut self, cur_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurHp) -> Self {
         self.inner |= GroupUpdateFlags::CUR_HP;
         self.cur_hp = Some(cur_hp);
         self
     }
 
-    pub const fn get_CUR_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurHp> {
+    pub const fn get_cur_hp(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurHp> {
         self.cur_hp.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_CUR_HP(mut self) -> Self {
+    pub fn clear_cur_hp(mut self) -> Self {
         self.inner &= GroupUpdateFlags::CUR_HP.reverse_bits();
         self.cur_hp = None;
         self
     }
 
-    pub const fn new_MAX_HP(max_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxHp) -> Self {
+    pub const fn new_max_hp(max_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxHp) -> Self {
         Self {
             inner: GroupUpdateFlags::MAX_HP,
             status: None,
@@ -711,24 +711,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_MAX_HP(mut self, max_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxHp) -> Self {
+    pub fn set_max_hp(mut self, max_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxHp) -> Self {
         self.inner |= GroupUpdateFlags::MAX_HP;
         self.max_hp = Some(max_hp);
         self
     }
 
-    pub const fn get_MAX_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxHp> {
+    pub const fn get_max_hp(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxHp> {
         self.max_hp.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_MAX_HP(mut self) -> Self {
+    pub fn clear_max_hp(mut self) -> Self {
         self.inner &= GroupUpdateFlags::MAX_HP.reverse_bits();
         self.max_hp = None;
         self
     }
 
-    pub const fn new_POWER_TYPE(power_type: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PowerType) -> Self {
+    pub const fn new_power_type(power_type: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PowerType) -> Self {
         Self {
             inner: GroupUpdateFlags::POWER_TYPE,
             status: None,
@@ -754,24 +754,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_POWER_TYPE(mut self, power_type: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PowerType) -> Self {
+    pub fn set_power_type(mut self, power_type: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PowerType) -> Self {
         self.inner |= GroupUpdateFlags::POWER_TYPE;
         self.power_type = Some(power_type);
         self
     }
 
-    pub const fn get_POWER_TYPE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PowerType> {
+    pub const fn get_power_type(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PowerType> {
         self.power_type.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_POWER_TYPE(mut self) -> Self {
+    pub fn clear_power_type(mut self) -> Self {
         self.inner &= GroupUpdateFlags::POWER_TYPE.reverse_bits();
         self.power_type = None;
         self
     }
 
-    pub const fn new_CUR_POWER(cur_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurPower) -> Self {
+    pub const fn new_cur_power(cur_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurPower) -> Self {
         Self {
             inner: GroupUpdateFlags::CUR_POWER,
             status: None,
@@ -797,24 +797,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_CUR_POWER(mut self, cur_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurPower) -> Self {
+    pub fn set_cur_power(mut self, cur_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurPower) -> Self {
         self.inner |= GroupUpdateFlags::CUR_POWER;
         self.cur_power = Some(cur_power);
         self
     }
 
-    pub const fn get_CUR_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurPower> {
+    pub const fn get_cur_power(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_CurPower> {
         self.cur_power.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_CUR_POWER(mut self) -> Self {
+    pub fn clear_cur_power(mut self) -> Self {
         self.inner &= GroupUpdateFlags::CUR_POWER.reverse_bits();
         self.cur_power = None;
         self
     }
 
-    pub const fn new_MAX_POWER(max_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxPower) -> Self {
+    pub const fn new_max_power(max_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxPower) -> Self {
         Self {
             inner: GroupUpdateFlags::MAX_POWER,
             status: None,
@@ -840,24 +840,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_MAX_POWER(mut self, max_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxPower) -> Self {
+    pub fn set_max_power(mut self, max_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxPower) -> Self {
         self.inner |= GroupUpdateFlags::MAX_POWER;
         self.max_power = Some(max_power);
         self
     }
 
-    pub const fn get_MAX_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxPower> {
+    pub const fn get_max_power(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_MaxPower> {
         self.max_power.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_MAX_POWER(mut self) -> Self {
+    pub fn clear_max_power(mut self) -> Self {
         self.inner &= GroupUpdateFlags::MAX_POWER.reverse_bits();
         self.max_power = None;
         self
     }
 
-    pub const fn new_LEVEL(level: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Level) -> Self {
+    pub const fn new_level(level: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Level) -> Self {
         Self {
             inner: GroupUpdateFlags::LEVEL,
             status: None,
@@ -883,24 +883,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_LEVEL(mut self, level: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Level) -> Self {
+    pub fn set_level(mut self, level: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Level) -> Self {
         self.inner |= GroupUpdateFlags::LEVEL;
         self.level = Some(level);
         self
     }
 
-    pub const fn get_LEVEL(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Level> {
+    pub const fn get_level(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Level> {
         self.level.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_LEVEL(mut self) -> Self {
+    pub fn clear_level(mut self) -> Self {
         self.inner &= GroupUpdateFlags::LEVEL.reverse_bits();
         self.level = None;
         self
     }
 
-    pub const fn new_ZONE(zone: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Zone) -> Self {
+    pub const fn new_zone(zone: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Zone) -> Self {
         Self {
             inner: GroupUpdateFlags::ZONE,
             status: None,
@@ -926,24 +926,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ZONE(mut self, zone: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Zone) -> Self {
+    pub fn set_zone(mut self, zone: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Zone) -> Self {
         self.inner |= GroupUpdateFlags::ZONE;
         self.zone = Some(zone);
         self
     }
 
-    pub const fn get_ZONE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Zone> {
+    pub const fn get_zone(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Zone> {
         self.zone.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ZONE(mut self) -> Self {
+    pub fn clear_zone(mut self) -> Self {
         self.inner &= GroupUpdateFlags::ZONE.reverse_bits();
         self.zone = None;
         self
     }
 
-    pub const fn new_POSITION(position: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Position) -> Self {
+    pub const fn new_position(position: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Position) -> Self {
         Self {
             inner: GroupUpdateFlags::POSITION,
             status: None,
@@ -969,24 +969,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_POSITION(mut self, position: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Position) -> Self {
+    pub fn set_position(mut self, position: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Position) -> Self {
         self.inner |= GroupUpdateFlags::POSITION;
         self.position = Some(position);
         self
     }
 
-    pub const fn get_POSITION(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Position> {
+    pub const fn get_position(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Position> {
         self.position.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_POSITION(mut self) -> Self {
+    pub fn clear_position(mut self) -> Self {
         self.inner &= GroupUpdateFlags::POSITION.reverse_bits();
         self.position = None;
         self
     }
 
-    pub const fn new_AURAS(auras: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras) -> Self {
+    pub const fn new_auras(auras: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras) -> Self {
         Self {
             inner: GroupUpdateFlags::AURAS,
             status: None,
@@ -1012,24 +1012,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_AURAS(mut self, auras: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras) -> Self {
+    pub fn set_auras(mut self, auras: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras) -> Self {
         self.inner |= GroupUpdateFlags::AURAS;
         self.auras = Some(auras);
         self
     }
 
-    pub const fn get_AURAS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras> {
+    pub const fn get_auras(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Auras> {
         self.auras.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_AURAS(mut self) -> Self {
+    pub fn clear_auras(mut self) -> Self {
         self.inner &= GroupUpdateFlags::AURAS.reverse_bits();
         self.auras = None;
         self
     }
 
-    pub const fn new_PET_GUID(pet_guid: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetGuid) -> Self {
+    pub const fn new_pet_guid(pet_guid: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetGuid) -> Self {
         Self {
             inner: GroupUpdateFlags::PET_GUID,
             status: None,
@@ -1055,24 +1055,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PET_GUID(mut self, pet_guid: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetGuid) -> Self {
+    pub fn set_pet_guid(mut self, pet_guid: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetGuid) -> Self {
         self.inner |= GroupUpdateFlags::PET_GUID;
         self.pet_guid = Some(pet_guid);
         self
     }
 
-    pub const fn get_PET_GUID(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetGuid> {
+    pub const fn get_pet_guid(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetGuid> {
         self.pet_guid.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PET_GUID(mut self) -> Self {
+    pub fn clear_pet_guid(mut self) -> Self {
         self.inner &= GroupUpdateFlags::PET_GUID.reverse_bits();
         self.pet_guid = None;
         self
     }
 
-    pub const fn new_PET_NAME(pet_name: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetName) -> Self {
+    pub const fn new_pet_name(pet_name: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetName) -> Self {
         Self {
             inner: GroupUpdateFlags::PET_NAME,
             status: None,
@@ -1098,24 +1098,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PET_NAME(mut self, pet_name: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetName) -> Self {
+    pub fn set_pet_name(mut self, pet_name: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetName) -> Self {
         self.inner |= GroupUpdateFlags::PET_NAME;
         self.pet_name = Some(pet_name);
         self
     }
 
-    pub const fn get_PET_NAME(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetName> {
+    pub const fn get_pet_name(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetName> {
         self.pet_name.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PET_NAME(mut self) -> Self {
+    pub fn clear_pet_name(mut self) -> Self {
         self.inner &= GroupUpdateFlags::PET_NAME.reverse_bits();
         self.pet_name = None;
         self
     }
 
-    pub const fn new_PET_MODEL_ID(pet_model_id: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetModelId) -> Self {
+    pub const fn new_pet_model_id(pet_model_id: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetModelId) -> Self {
         Self {
             inner: GroupUpdateFlags::PET_MODEL_ID,
             status: None,
@@ -1141,24 +1141,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PET_MODEL_ID(mut self, pet_model_id: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetModelId) -> Self {
+    pub fn set_pet_model_id(mut self, pet_model_id: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetModelId) -> Self {
         self.inner |= GroupUpdateFlags::PET_MODEL_ID;
         self.pet_model_id = Some(pet_model_id);
         self
     }
 
-    pub const fn get_PET_MODEL_ID(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetModelId> {
+    pub const fn get_pet_model_id(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetModelId> {
         self.pet_model_id.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PET_MODEL_ID(mut self) -> Self {
+    pub fn clear_pet_model_id(mut self) -> Self {
         self.inner &= GroupUpdateFlags::PET_MODEL_ID.reverse_bits();
         self.pet_model_id = None;
         self
     }
 
-    pub const fn new_PET_CUR_HP(pet_cur_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurHp) -> Self {
+    pub const fn new_pet_cur_hp(pet_cur_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurHp) -> Self {
         Self {
             inner: GroupUpdateFlags::PET_CUR_HP,
             status: None,
@@ -1184,24 +1184,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PET_CUR_HP(mut self, pet_cur_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurHp) -> Self {
+    pub fn set_pet_cur_hp(mut self, pet_cur_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurHp) -> Self {
         self.inner |= GroupUpdateFlags::PET_CUR_HP;
         self.pet_cur_hp = Some(pet_cur_hp);
         self
     }
 
-    pub const fn get_PET_CUR_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurHp> {
+    pub const fn get_pet_cur_hp(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurHp> {
         self.pet_cur_hp.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PET_CUR_HP(mut self) -> Self {
+    pub fn clear_pet_cur_hp(mut self) -> Self {
         self.inner &= GroupUpdateFlags::PET_CUR_HP.reverse_bits();
         self.pet_cur_hp = None;
         self
     }
 
-    pub const fn new_PET_MAX_HP(pet_max_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxHp) -> Self {
+    pub const fn new_pet_max_hp(pet_max_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxHp) -> Self {
         Self {
             inner: GroupUpdateFlags::PET_MAX_HP,
             status: None,
@@ -1227,24 +1227,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PET_MAX_HP(mut self, pet_max_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxHp) -> Self {
+    pub fn set_pet_max_hp(mut self, pet_max_hp: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxHp) -> Self {
         self.inner |= GroupUpdateFlags::PET_MAX_HP;
         self.pet_max_hp = Some(pet_max_hp);
         self
     }
 
-    pub const fn get_PET_MAX_HP(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxHp> {
+    pub const fn get_pet_max_hp(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxHp> {
         self.pet_max_hp.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PET_MAX_HP(mut self) -> Self {
+    pub fn clear_pet_max_hp(mut self) -> Self {
         self.inner &= GroupUpdateFlags::PET_MAX_HP.reverse_bits();
         self.pet_max_hp = None;
         self
     }
 
-    pub const fn new_PET_POWER_TYPE(pet_power_type: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetPowerType) -> Self {
+    pub const fn new_pet_power_type(pet_power_type: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetPowerType) -> Self {
         Self {
             inner: GroupUpdateFlags::PET_POWER_TYPE,
             status: None,
@@ -1270,24 +1270,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PET_POWER_TYPE(mut self, pet_power_type: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetPowerType) -> Self {
+    pub fn set_pet_power_type(mut self, pet_power_type: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetPowerType) -> Self {
         self.inner |= GroupUpdateFlags::PET_POWER_TYPE;
         self.pet_power_type = Some(pet_power_type);
         self
     }
 
-    pub const fn get_PET_POWER_TYPE(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetPowerType> {
+    pub const fn get_pet_power_type(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetPowerType> {
         self.pet_power_type.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PET_POWER_TYPE(mut self) -> Self {
+    pub fn clear_pet_power_type(mut self) -> Self {
         self.inner &= GroupUpdateFlags::PET_POWER_TYPE.reverse_bits();
         self.pet_power_type = None;
         self
     }
 
-    pub const fn new_PET_CUR_POWER(pet_cur_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurPower) -> Self {
+    pub const fn new_pet_cur_power(pet_cur_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurPower) -> Self {
         Self {
             inner: GroupUpdateFlags::PET_CUR_POWER,
             status: None,
@@ -1313,24 +1313,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PET_CUR_POWER(mut self, pet_cur_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurPower) -> Self {
+    pub fn set_pet_cur_power(mut self, pet_cur_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurPower) -> Self {
         self.inner |= GroupUpdateFlags::PET_CUR_POWER;
         self.pet_cur_power = Some(pet_cur_power);
         self
     }
 
-    pub const fn get_PET_CUR_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurPower> {
+    pub const fn get_pet_cur_power(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetCurPower> {
         self.pet_cur_power.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PET_CUR_POWER(mut self) -> Self {
+    pub fn clear_pet_cur_power(mut self) -> Self {
         self.inner &= GroupUpdateFlags::PET_CUR_POWER.reverse_bits();
         self.pet_cur_power = None;
         self
     }
 
-    pub const fn new_PET_MAX_POWER(pet_max_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxPower) -> Self {
+    pub const fn new_pet_max_power(pet_max_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxPower) -> Self {
         Self {
             inner: GroupUpdateFlags::PET_MAX_POWER,
             status: None,
@@ -1356,24 +1356,24 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PET_MAX_POWER(mut self, pet_max_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxPower) -> Self {
+    pub fn set_pet_max_power(mut self, pet_max_power: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxPower) -> Self {
         self.inner |= GroupUpdateFlags::PET_MAX_POWER;
         self.pet_max_power = Some(pet_max_power);
         self
     }
 
-    pub const fn get_PET_MAX_POWER(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxPower> {
+    pub const fn get_pet_max_power(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetMaxPower> {
         self.pet_max_power.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PET_MAX_POWER(mut self) -> Self {
+    pub fn clear_pet_max_power(mut self) -> Self {
         self.inner &= GroupUpdateFlags::PET_MAX_POWER.reverse_bits();
         self.pet_max_power = None;
         self
     }
 
-    pub const fn new_PET_AURAS(pet_auras: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetAuras) -> Self {
+    pub const fn new_pet_auras(pet_auras: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetAuras) -> Self {
         Self {
             inner: GroupUpdateFlags::PET_AURAS,
             status: None,
@@ -1399,18 +1399,18 @@ impl SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PET_AURAS(mut self, pet_auras: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetAuras) -> Self {
+    pub fn set_pet_auras(mut self, pet_auras: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetAuras) -> Self {
         self.inner |= GroupUpdateFlags::PET_AURAS;
         self.pet_auras = Some(pet_auras);
         self
     }
 
-    pub const fn get_PET_AURAS(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetAuras> {
+    pub const fn get_pet_auras(&self) -> Option<&SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetAuras> {
         self.pet_auras.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PET_AURAS(mut self) -> Self {
+    pub fn clear_pet_auras(mut self) -> Self {
         self.inner &= GroupUpdateFlags::PET_AURAS.reverse_bits();
         self.pet_auras = None;
         self

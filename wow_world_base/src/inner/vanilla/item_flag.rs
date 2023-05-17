@@ -79,310 +79,310 @@ impl ItemFlag {
         }
     }
 
-    pub const fn is_NO_PICKUP(&self) -> bool {
+    pub const fn is_no_pickup(&self) -> bool {
         (self.inner & Self::NO_PICKUP) != 0
     }
 
     /// not used
     ///
-    pub const fn new_NO_PICKUP() -> Self {
+    pub const fn new_no_pickup() -> Self {
         Self { inner: Self::NO_PICKUP }
     }
 
-    pub fn set_NO_PICKUP(&mut self) -> Self {
+    pub fn set_no_pickup(&mut self) -> Self {
         self.inner |= Self::NO_PICKUP;
         *self
     }
 
-    pub fn clear_NO_PICKUP(&mut self) -> Self {
+    pub fn clear_no_pickup(&mut self) -> Self {
         self.inner &= Self::NO_PICKUP.reverse_bits();
         *self
     }
 
-    pub const fn is_CONJURED(&self) -> bool {
+    pub const fn is_conjured(&self) -> bool {
         (self.inner & Self::CONJURED) != 0
     }
 
-    pub const fn new_CONJURED() -> Self {
+    pub const fn new_conjured() -> Self {
         Self { inner: Self::CONJURED }
     }
 
-    pub fn set_CONJURED(&mut self) -> Self {
+    pub fn set_conjured(&mut self) -> Self {
         self.inner |= Self::CONJURED;
         *self
     }
 
-    pub fn clear_CONJURED(&mut self) -> Self {
+    pub fn clear_conjured(&mut self) -> Self {
         self.inner &= Self::CONJURED.reverse_bits();
         *self
     }
 
-    pub const fn is_LOOTABLE(&self) -> bool {
+    pub const fn is_lootable(&self) -> bool {
         (self.inner & Self::LOOTABLE) != 0
     }
 
     /// affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED`
     ///
-    pub const fn new_LOOTABLE() -> Self {
+    pub const fn new_lootable() -> Self {
         Self { inner: Self::LOOTABLE }
     }
 
-    pub fn set_LOOTABLE(&mut self) -> Self {
+    pub fn set_lootable(&mut self) -> Self {
         self.inner |= Self::LOOTABLE;
         *self
     }
 
-    pub fn clear_LOOTABLE(&mut self) -> Self {
+    pub fn clear_lootable(&mut self) -> Self {
         self.inner &= Self::LOOTABLE.reverse_bits();
         *self
     }
 
-    pub const fn is_DEPRECATED(&self) -> bool {
+    pub const fn is_deprecated(&self) -> bool {
         (self.inner & Self::DEPRECATED) != 0
     }
 
     /// can't repeat old note: appears red icon (like when item durability==0)
     ///
-    pub const fn new_DEPRECATED() -> Self {
+    pub const fn new_deprecated() -> Self {
         Self { inner: Self::DEPRECATED }
     }
 
-    pub fn set_DEPRECATED(&mut self) -> Self {
+    pub fn set_deprecated(&mut self) -> Self {
         self.inner |= Self::DEPRECATED;
         *self
     }
 
-    pub fn clear_DEPRECATED(&mut self) -> Self {
+    pub fn clear_deprecated(&mut self) -> Self {
         self.inner &= Self::DEPRECATED.reverse_bits();
         *self
     }
 
-    pub const fn is_INDESTRUCTIBLE(&self) -> bool {
+    pub const fn is_indestructible(&self) -> bool {
         (self.inner & Self::INDESTRUCTIBLE) != 0
     }
 
     /// used for totem. Item can not be destroyed, except by using spell (item can be reagent for spell and then allowed)
     ///
-    pub const fn new_INDESTRUCTIBLE() -> Self {
+    pub const fn new_indestructible() -> Self {
         Self { inner: Self::INDESTRUCTIBLE }
     }
 
-    pub fn set_INDESTRUCTIBLE(&mut self) -> Self {
+    pub fn set_indestructible(&mut self) -> Self {
         self.inner |= Self::INDESTRUCTIBLE;
         *self
     }
 
-    pub fn clear_INDESTRUCTIBLE(&mut self) -> Self {
+    pub fn clear_indestructible(&mut self) -> Self {
         self.inner &= Self::INDESTRUCTIBLE.reverse_bits();
         *self
     }
 
-    pub const fn is_PLAYER_CAST(&self) -> bool {
+    pub const fn is_player_cast(&self) -> bool {
         (self.inner & Self::PLAYER_CAST) != 0
     }
 
     /// ? old note: usable
     ///
-    pub const fn new_PLAYER_CAST() -> Self {
+    pub const fn new_player_cast() -> Self {
         Self { inner: Self::PLAYER_CAST }
     }
 
-    pub fn set_PLAYER_CAST(&mut self) -> Self {
+    pub fn set_player_cast(&mut self) -> Self {
         self.inner |= Self::PLAYER_CAST;
         *self
     }
 
-    pub fn clear_PLAYER_CAST(&mut self) -> Self {
+    pub fn clear_player_cast(&mut self) -> Self {
         self.inner &= Self::PLAYER_CAST.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_EQUIP_COOLDOWN(&self) -> bool {
+    pub const fn is_no_equip_cooldown(&self) -> bool {
         (self.inner & Self::NO_EQUIP_COOLDOWN) != 0
     }
 
-    pub const fn new_NO_EQUIP_COOLDOWN() -> Self {
+    pub const fn new_no_equip_cooldown() -> Self {
         Self { inner: Self::NO_EQUIP_COOLDOWN }
     }
 
-    pub fn set_NO_EQUIP_COOLDOWN(&mut self) -> Self {
+    pub fn set_no_equip_cooldown(&mut self) -> Self {
         self.inner |= Self::NO_EQUIP_COOLDOWN;
         *self
     }
 
-    pub fn clear_NO_EQUIP_COOLDOWN(&mut self) -> Self {
+    pub fn clear_no_equip_cooldown(&mut self) -> Self {
         self.inner &= Self::NO_EQUIP_COOLDOWN.reverse_bits();
         *self
     }
 
-    pub const fn is_INT_BONUS_INSTEAD(&self) -> bool {
+    pub const fn is_int_bonus_instead(&self) -> bool {
         (self.inner & Self::INT_BONUS_INSTEAD) != 0
     }
 
-    pub const fn new_INT_BONUS_INSTEAD() -> Self {
+    pub const fn new_int_bonus_instead() -> Self {
         Self { inner: Self::INT_BONUS_INSTEAD }
     }
 
-    pub fn set_INT_BONUS_INSTEAD(&mut self) -> Self {
+    pub fn set_int_bonus_instead(&mut self) -> Self {
         self.inner |= Self::INT_BONUS_INSTEAD;
         *self
     }
 
-    pub fn clear_INT_BONUS_INSTEAD(&mut self) -> Self {
+    pub fn clear_int_bonus_instead(&mut self) -> Self {
         self.inner &= Self::INT_BONUS_INSTEAD.reverse_bits();
         *self
     }
 
-    pub const fn is_WRAPPER(&self) -> bool {
+    pub const fn is_wrapper(&self) -> bool {
         (self.inner & Self::WRAPPER) != 0
     }
 
     /// used or not used wrapper
     ///
-    pub const fn new_WRAPPER() -> Self {
+    pub const fn new_wrapper() -> Self {
         Self { inner: Self::WRAPPER }
     }
 
-    pub fn set_WRAPPER(&mut self) -> Self {
+    pub fn set_wrapper(&mut self) -> Self {
         self.inner |= Self::WRAPPER;
         *self
     }
 
-    pub fn clear_WRAPPER(&mut self) -> Self {
+    pub fn clear_wrapper(&mut self) -> Self {
         self.inner &= Self::WRAPPER.reverse_bits();
         *self
     }
 
-    pub const fn is_IGNORE_BAG_SPACE(&self) -> bool {
+    pub const fn is_ignore_bag_space(&self) -> bool {
         (self.inner & Self::IGNORE_BAG_SPACE) != 0
     }
 
     /// ignore bag space at new item creation?
     ///
-    pub const fn new_IGNORE_BAG_SPACE() -> Self {
+    pub const fn new_ignore_bag_space() -> Self {
         Self { inner: Self::IGNORE_BAG_SPACE }
     }
 
-    pub fn set_IGNORE_BAG_SPACE(&mut self) -> Self {
+    pub fn set_ignore_bag_space(&mut self) -> Self {
         self.inner |= Self::IGNORE_BAG_SPACE;
         *self
     }
 
-    pub fn clear_IGNORE_BAG_SPACE(&mut self) -> Self {
+    pub fn clear_ignore_bag_space(&mut self) -> Self {
         self.inner &= Self::IGNORE_BAG_SPACE.reverse_bits();
         *self
     }
 
-    pub const fn is_PARTY_LOOT(&self) -> bool {
+    pub const fn is_party_loot(&self) -> bool {
         (self.inner & Self::PARTY_LOOT) != 0
     }
 
     /// determines if item is party loot or not
     ///
-    pub const fn new_PARTY_LOOT() -> Self {
+    pub const fn new_party_loot() -> Self {
         Self { inner: Self::PARTY_LOOT }
     }
 
-    pub fn set_PARTY_LOOT(&mut self) -> Self {
+    pub fn set_party_loot(&mut self) -> Self {
         self.inner |= Self::PARTY_LOOT;
         *self
     }
 
-    pub fn clear_PARTY_LOOT(&mut self) -> Self {
+    pub fn clear_party_loot(&mut self) -> Self {
         self.inner &= Self::PARTY_LOOT.reverse_bits();
         *self
     }
 
-    pub const fn is_CHARTER(&self) -> bool {
+    pub const fn is_charter(&self) -> bool {
         (self.inner & Self::CHARTER) != 0
     }
 
     /// guild charter
     ///
-    pub const fn new_CHARTER() -> Self {
+    pub const fn new_charter() -> Self {
         Self { inner: Self::CHARTER }
     }
 
-    pub fn set_CHARTER(&mut self) -> Self {
+    pub fn set_charter(&mut self) -> Self {
         self.inner |= Self::CHARTER;
         *self
     }
 
-    pub fn clear_CHARTER(&mut self) -> Self {
+    pub fn clear_charter(&mut self) -> Self {
         self.inner &= Self::CHARTER.reverse_bits();
         *self
     }
 
-    pub const fn is_HAS_TEXT(&self) -> bool {
+    pub const fn is_has_text(&self) -> bool {
         (self.inner & Self::HAS_TEXT) != 0
     }
 
     /// Only readable items have this (but not all)
     ///
-    pub const fn new_HAS_TEXT() -> Self {
+    pub const fn new_has_text() -> Self {
         Self { inner: Self::HAS_TEXT }
     }
 
-    pub fn set_HAS_TEXT(&mut self) -> Self {
+    pub fn set_has_text(&mut self) -> Self {
         self.inner |= Self::HAS_TEXT;
         *self
     }
 
-    pub fn clear_HAS_TEXT(&mut self) -> Self {
+    pub fn clear_has_text(&mut self) -> Self {
         self.inner &= Self::HAS_TEXT.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_DISENCHANT(&self) -> bool {
+    pub const fn is_no_disenchant(&self) -> bool {
         (self.inner & Self::NO_DISENCHANT) != 0
     }
 
-    pub const fn new_NO_DISENCHANT() -> Self {
+    pub const fn new_no_disenchant() -> Self {
         Self { inner: Self::NO_DISENCHANT }
     }
 
-    pub fn set_NO_DISENCHANT(&mut self) -> Self {
+    pub fn set_no_disenchant(&mut self) -> Self {
         self.inner |= Self::NO_DISENCHANT;
         *self
     }
 
-    pub fn clear_NO_DISENCHANT(&mut self) -> Self {
+    pub fn clear_no_disenchant(&mut self) -> Self {
         self.inner &= Self::NO_DISENCHANT.reverse_bits();
         *self
     }
 
-    pub const fn is_REAL_DURATION(&self) -> bool {
+    pub const fn is_real_duration(&self) -> bool {
         (self.inner & Self::REAL_DURATION) != 0
     }
 
-    pub const fn new_REAL_DURATION() -> Self {
+    pub const fn new_real_duration() -> Self {
         Self { inner: Self::REAL_DURATION }
     }
 
-    pub fn set_REAL_DURATION(&mut self) -> Self {
+    pub fn set_real_duration(&mut self) -> Self {
         self.inner |= Self::REAL_DURATION;
         *self
     }
 
-    pub fn clear_REAL_DURATION(&mut self) -> Self {
+    pub fn clear_real_duration(&mut self) -> Self {
         self.inner &= Self::REAL_DURATION.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_CREATOR(&self) -> bool {
+    pub const fn is_no_creator(&self) -> bool {
         (self.inner & Self::NO_CREATOR) != 0
     }
 
-    pub const fn new_NO_CREATOR() -> Self {
+    pub const fn new_no_creator() -> Self {
         Self { inner: Self::NO_CREATOR }
     }
 
-    pub fn set_NO_CREATOR(&mut self) -> Self {
+    pub fn set_no_creator(&mut self) -> Self {
         self.inner |= Self::NO_CREATOR;
         *self
     }
 
-    pub fn clear_NO_CREATOR(&mut self) -> Self {
+    pub fn clear_no_creator(&mut self) -> Self {
         self.inner &= Self::NO_CREATOR.reverse_bits();
         *self
     }

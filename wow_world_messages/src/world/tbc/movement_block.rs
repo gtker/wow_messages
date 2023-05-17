@@ -299,7 +299,7 @@ impl MovementBlock {
         // update_flag: UpdateFlag
         let update_flag = UpdateFlag::new(crate::util::read_u8_le(&mut r)?);
 
-        let update_flag_LIVING = if update_flag.is_LIVING() {
+        let update_flag_LIVING = if update_flag.is_living() {
             // flags: MovementFlags
             let flags = MovementFlags::new(crate::util::read_u32_le(&mut r)?);
 
@@ -315,7 +315,7 @@ impl MovementBlock {
             // living_orientation: f32
             let living_orientation = crate::util::read_f32_le(&mut r)?;
 
-            let flags_ON_TRANSPORT = if flags.is_ON_TRANSPORT() {
+            let flags_ON_TRANSPORT = if flags.is_on_transport() {
                 // transport: TransportInfo
                 let transport = TransportInfo::read(&mut r)?;
 
@@ -327,7 +327,7 @@ impl MovementBlock {
                 None
             };
 
-            let flags_SWIMMING = if flags.is_SWIMMING() {
+            let flags_SWIMMING = if flags.is_swimming() {
                 // pitch1: f32
                 let pitch1 = crate::util::read_f32_le(&mut r)?;
 
@@ -335,7 +335,7 @@ impl MovementBlock {
                     pitch1,
                 })
             }
-            else if flags.is_ONTRANSPORT() {
+            else if flags.is_ontransport() {
                 // pitch2: f32
                 let pitch2 = crate::util::read_f32_le(&mut r)?;
 
@@ -350,7 +350,7 @@ impl MovementBlock {
             // fall_time: f32
             let fall_time = crate::util::read_f32_le(&mut r)?;
 
-            let flags_JUMPING = if flags.is_JUMPING() {
+            let flags_JUMPING = if flags.is_jumping() {
                 // z_speed: f32
                 let z_speed = crate::util::read_f32_le(&mut r)?;
 
@@ -374,7 +374,7 @@ impl MovementBlock {
                 None
             };
 
-            let flags_SPLINE_ELEVATION = if flags.is_SPLINE_ELEVATION() {
+            let flags_SPLINE_ELEVATION = if flags.is_spline_elevation() {
                 // spline_elevation: f32
                 let spline_elevation = crate::util::read_f32_le(&mut r)?;
 
@@ -410,11 +410,11 @@ impl MovementBlock {
             // turn_rate: f32
             let turn_rate = crate::util::read_f32_le(&mut r)?;
 
-            let flags_SPLINE_ENABLED = if flags.is_SPLINE_ENABLED() {
+            let flags_SPLINE_ENABLED = if flags.is_spline_enabled() {
                 // spline_flags: SplineFlag
                 let spline_flags = SplineFlag::new(crate::util::read_u32_le(&mut r)?);
 
-                let spline_flags_FINAL_ANGLE = if spline_flags.is_FINAL_ANGLE() {
+                let spline_flags_FINAL_ANGLE = if spline_flags.is_final_angle() {
                     // angle: f32
                     let angle = crate::util::read_f32_le(&mut r)?;
 
@@ -422,7 +422,7 @@ impl MovementBlock {
                         angle,
                     })
                 }
-                else if spline_flags.is_FINAL_TARGET() {
+                else if spline_flags.is_final_target() {
                     // target: Guid
                     let target = Guid::read(&mut r)?;
 
@@ -430,7 +430,7 @@ impl MovementBlock {
                         target,
                     })
                 }
-                else if spline_flags.is_FINAL_POINT() {
+                else if spline_flags.is_final_point() {
                     // spline_final_point: Vector3d
                     let spline_final_point = Vector3d::read(&mut r)?;
 
@@ -510,7 +510,7 @@ impl MovementBlock {
                 walking_speed,
             })
         }
-        else if update_flag.is_HAS_POSITION() {
+        else if update_flag.is_has_position() {
             // position: Vector3d
             let position = Vector3d::read(&mut r)?;
 
@@ -526,7 +526,7 @@ impl MovementBlock {
             None
         };
 
-        let update_flag_HIGH_GUID = if update_flag.is_HIGH_GUID() {
+        let update_flag_HIGH_GUID = if update_flag.is_high_guid() {
             // unknown0: u32
             let unknown0 = crate::util::read_u32_le(&mut r)?;
 
@@ -542,7 +542,7 @@ impl MovementBlock {
             None
         };
 
-        let update_flag_ALL = if update_flag.is_ALL() {
+        let update_flag_ALL = if update_flag.is_all() {
             // unknown2: u32
             let unknown2 = crate::util::read_u32_le(&mut r)?;
 
@@ -554,7 +554,7 @@ impl MovementBlock {
             None
         };
 
-        let update_flag_MELEE_ATTACKING = if update_flag.is_MELEE_ATTACKING() {
+        let update_flag_MELEE_ATTACKING = if update_flag.is_melee_attacking() {
             // guid: PackedGuid
             let guid = Guid::read_packed(&mut r)?;
 
@@ -566,7 +566,7 @@ impl MovementBlock {
             None
         };
 
-        let update_flag_TRANSPORT = if update_flag.is_TRANSPORT() {
+        let update_flag_TRANSPORT = if update_flag.is_transport() {
             // transport_progress_in_ms: u32
             let transport_progress_in_ms = crate::util::read_u32_le(&mut r)?;
 
@@ -714,7 +714,7 @@ impl MovementBlock_SplineFlag {
         && self.final_angle.is_none()
     }
 
-    pub const fn new_DONE() -> Self {
+    pub const fn new_done() -> Self {
         Self {
             inner: SplineFlag::DONE,
             final_angle: None,
@@ -722,22 +722,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_DONE(mut self) -> Self {
+    pub fn set_done(mut self) -> Self {
         self.inner |= SplineFlag::DONE;
         self
     }
 
-    pub const fn get_DONE(&self) -> bool {
+    pub const fn get_done(&self) -> bool {
         (self.inner & SplineFlag::DONE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_DONE(mut self) -> Self {
+    pub fn clear_done(mut self) -> Self {
         self.inner &= SplineFlag::DONE.reverse_bits();
         self
     }
 
-    pub const fn new_FALLING() -> Self {
+    pub const fn new_falling() -> Self {
         Self {
             inner: SplineFlag::FALLING,
             final_angle: None,
@@ -745,22 +745,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FALLING(mut self) -> Self {
+    pub fn set_falling(mut self) -> Self {
         self.inner |= SplineFlag::FALLING;
         self
     }
 
-    pub const fn get_FALLING(&self) -> bool {
+    pub const fn get_falling(&self) -> bool {
         (self.inner & SplineFlag::FALLING) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FALLING(mut self) -> Self {
+    pub fn clear_falling(mut self) -> Self {
         self.inner &= SplineFlag::FALLING.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN3() -> Self {
+    pub const fn new_unknown3() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN3,
             final_angle: None,
@@ -768,22 +768,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN3(mut self) -> Self {
+    pub fn set_unknown3(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN3;
         self
     }
 
-    pub const fn get_UNKNOWN3(&self) -> bool {
+    pub const fn get_unknown3(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN3) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN3(mut self) -> Self {
+    pub fn clear_unknown3(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN3.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN4() -> Self {
+    pub const fn new_unknown4() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN4,
             final_angle: None,
@@ -791,22 +791,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN4(mut self) -> Self {
+    pub fn set_unknown4(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN4;
         self
     }
 
-    pub const fn get_UNKNOWN4(&self) -> bool {
+    pub const fn get_unknown4(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN4) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN4(mut self) -> Self {
+    pub fn clear_unknown4(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN4.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN5() -> Self {
+    pub const fn new_unknown5() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN5,
             final_angle: None,
@@ -814,22 +814,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN5(mut self) -> Self {
+    pub fn set_unknown5(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN5;
         self
     }
 
-    pub const fn get_UNKNOWN5(&self) -> bool {
+    pub const fn get_unknown5(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN5) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN5(mut self) -> Self {
+    pub fn clear_unknown5(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN5.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN6() -> Self {
+    pub const fn new_unknown6() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN6,
             final_angle: None,
@@ -837,22 +837,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN6(mut self) -> Self {
+    pub fn set_unknown6(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN6;
         self
     }
 
-    pub const fn get_UNKNOWN6(&self) -> bool {
+    pub const fn get_unknown6(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN6) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN6(mut self) -> Self {
+    pub fn clear_unknown6(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN6.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN7() -> Self {
+    pub const fn new_unknown7() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN7,
             final_angle: None,
@@ -860,22 +860,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN7(mut self) -> Self {
+    pub fn set_unknown7(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN7;
         self
     }
 
-    pub const fn get_UNKNOWN7(&self) -> bool {
+    pub const fn get_unknown7(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN7) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN7(mut self) -> Self {
+    pub fn clear_unknown7(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN7.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN8() -> Self {
+    pub const fn new_unknown8() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN8,
             final_angle: None,
@@ -883,22 +883,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN8(mut self) -> Self {
+    pub fn set_unknown8(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN8;
         self
     }
 
-    pub const fn get_UNKNOWN8(&self) -> bool {
+    pub const fn get_unknown8(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN8) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN8(mut self) -> Self {
+    pub fn clear_unknown8(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN8.reverse_bits();
         self
     }
 
-    pub const fn new_RUN_MODE() -> Self {
+    pub const fn new_run_mode() -> Self {
         Self {
             inner: SplineFlag::RUN_MODE,
             final_angle: None,
@@ -906,22 +906,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_RUN_MODE(mut self) -> Self {
+    pub fn set_run_mode(mut self) -> Self {
         self.inner |= SplineFlag::RUN_MODE;
         self
     }
 
-    pub const fn get_RUN_MODE(&self) -> bool {
+    pub const fn get_run_mode(&self) -> bool {
         (self.inner & SplineFlag::RUN_MODE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_RUN_MODE(mut self) -> Self {
+    pub fn clear_run_mode(mut self) -> Self {
         self.inner &= SplineFlag::RUN_MODE.reverse_bits();
         self
     }
 
-    pub const fn new_FLYING() -> Self {
+    pub const fn new_flying() -> Self {
         Self {
             inner: SplineFlag::FLYING,
             final_angle: None,
@@ -929,22 +929,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FLYING(mut self) -> Self {
+    pub fn set_flying(mut self) -> Self {
         self.inner |= SplineFlag::FLYING;
         self
     }
 
-    pub const fn get_FLYING(&self) -> bool {
+    pub const fn get_flying(&self) -> bool {
         (self.inner & SplineFlag::FLYING) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FLYING(mut self) -> Self {
+    pub fn clear_flying(mut self) -> Self {
         self.inner &= SplineFlag::FLYING.reverse_bits();
         self
     }
 
-    pub const fn new_NO_SPLINE() -> Self {
+    pub const fn new_no_spline() -> Self {
         Self {
             inner: SplineFlag::NO_SPLINE,
             final_angle: None,
@@ -952,22 +952,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_NO_SPLINE(mut self) -> Self {
+    pub fn set_no_spline(mut self) -> Self {
         self.inner |= SplineFlag::NO_SPLINE;
         self
     }
 
-    pub const fn get_NO_SPLINE(&self) -> bool {
+    pub const fn get_no_spline(&self) -> bool {
         (self.inner & SplineFlag::NO_SPLINE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_NO_SPLINE(mut self) -> Self {
+    pub fn clear_no_spline(mut self) -> Self {
         self.inner &= SplineFlag::NO_SPLINE.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN12() -> Self {
+    pub const fn new_unknown12() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN12,
             final_angle: None,
@@ -975,22 +975,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN12(mut self) -> Self {
+    pub fn set_unknown12(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN12;
         self
     }
 
-    pub const fn get_UNKNOWN12(&self) -> bool {
+    pub const fn get_unknown12(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN12) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN12(mut self) -> Self {
+    pub fn clear_unknown12(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN12.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN13() -> Self {
+    pub const fn new_unknown13() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN13,
             final_angle: None,
@@ -998,22 +998,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN13(mut self) -> Self {
+    pub fn set_unknown13(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN13;
         self
     }
 
-    pub const fn get_UNKNOWN13(&self) -> bool {
+    pub const fn get_unknown13(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN13) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN13(mut self) -> Self {
+    pub fn clear_unknown13(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN13.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN14() -> Self {
+    pub const fn new_unknown14() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN14,
             final_angle: None,
@@ -1021,22 +1021,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN14(mut self) -> Self {
+    pub fn set_unknown14(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN14;
         self
     }
 
-    pub const fn get_UNKNOWN14(&self) -> bool {
+    pub const fn get_unknown14(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN14) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN14(mut self) -> Self {
+    pub fn clear_unknown14(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN14.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN15() -> Self {
+    pub const fn new_unknown15() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN15,
             final_angle: None,
@@ -1044,22 +1044,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN15(mut self) -> Self {
+    pub fn set_unknown15(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN15;
         self
     }
 
-    pub const fn get_UNKNOWN15(&self) -> bool {
+    pub const fn get_unknown15(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN15) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN15(mut self) -> Self {
+    pub fn clear_unknown15(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN15.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN16() -> Self {
+    pub const fn new_unknown16() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN16,
             final_angle: None,
@@ -1067,22 +1067,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN16(mut self) -> Self {
+    pub fn set_unknown16(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN16;
         self
     }
 
-    pub const fn get_UNKNOWN16(&self) -> bool {
+    pub const fn get_unknown16(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN16) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN16(mut self) -> Self {
+    pub fn clear_unknown16(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN16.reverse_bits();
         self
     }
 
-    pub const fn new_FINAL_ANGLE(final_angle: MovementBlock_SplineFlag_FinalAngle) -> Self {
+    pub const fn new_final_angle(final_angle: MovementBlock_SplineFlag_FinalAngle) -> Self {
         Self {
             inner: final_angle.as_int(),
             final_angle: Some(final_angle),
@@ -1090,24 +1090,24 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FINAL_ANGLE(mut self, final_angle: MovementBlock_SplineFlag_FinalAngle) -> Self {
+    pub fn set_final_angle(mut self, final_angle: MovementBlock_SplineFlag_FinalAngle) -> Self {
         self.inner |= final_angle.as_int();
         self.final_angle = Some(final_angle);
         self
     }
 
-    pub const fn get_FINAL_ANGLE(&self) -> Option<&MovementBlock_SplineFlag_FinalAngle> {
+    pub const fn get_final_angle(&self) -> Option<&MovementBlock_SplineFlag_FinalAngle> {
         self.final_angle.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FINAL_ANGLE(mut self) -> Self {
+    pub fn clear_final_angle(mut self) -> Self {
         self.inner &= SplineFlag::FINAL_ANGLE.reverse_bits();
         self.final_angle = None;
         self
     }
 
-    pub const fn new_UNKNOWN19() -> Self {
+    pub const fn new_unknown19() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN19,
             final_angle: None,
@@ -1115,22 +1115,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN19(mut self) -> Self {
+    pub fn set_unknown19(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN19;
         self
     }
 
-    pub const fn get_UNKNOWN19(&self) -> bool {
+    pub const fn get_unknown19(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN19) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN19(mut self) -> Self {
+    pub fn clear_unknown19(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN19.reverse_bits();
         self
     }
 
-    pub const fn new_CYCLIC() -> Self {
+    pub const fn new_cyclic() -> Self {
         Self {
             inner: SplineFlag::CYCLIC,
             final_angle: None,
@@ -1138,22 +1138,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_CYCLIC(mut self) -> Self {
+    pub fn set_cyclic(mut self) -> Self {
         self.inner |= SplineFlag::CYCLIC;
         self
     }
 
-    pub const fn get_CYCLIC(&self) -> bool {
+    pub const fn get_cyclic(&self) -> bool {
         (self.inner & SplineFlag::CYCLIC) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_CYCLIC(mut self) -> Self {
+    pub fn clear_cyclic(mut self) -> Self {
         self.inner &= SplineFlag::CYCLIC.reverse_bits();
         self
     }
 
-    pub const fn new_ENTER_CYCLE() -> Self {
+    pub const fn new_enter_cycle() -> Self {
         Self {
             inner: SplineFlag::ENTER_CYCLE,
             final_angle: None,
@@ -1161,22 +1161,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ENTER_CYCLE(mut self) -> Self {
+    pub fn set_enter_cycle(mut self) -> Self {
         self.inner |= SplineFlag::ENTER_CYCLE;
         self
     }
 
-    pub const fn get_ENTER_CYCLE(&self) -> bool {
+    pub const fn get_enter_cycle(&self) -> bool {
         (self.inner & SplineFlag::ENTER_CYCLE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ENTER_CYCLE(mut self) -> Self {
+    pub fn clear_enter_cycle(mut self) -> Self {
         self.inner &= SplineFlag::ENTER_CYCLE.reverse_bits();
         self
     }
 
-    pub const fn new_FROZEN() -> Self {
+    pub const fn new_frozen() -> Self {
         Self {
             inner: SplineFlag::FROZEN,
             final_angle: None,
@@ -1184,22 +1184,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FROZEN(mut self) -> Self {
+    pub fn set_frozen(mut self) -> Self {
         self.inner |= SplineFlag::FROZEN;
         self
     }
 
-    pub const fn get_FROZEN(&self) -> bool {
+    pub const fn get_frozen(&self) -> bool {
         (self.inner & SplineFlag::FROZEN) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FROZEN(mut self) -> Self {
+    pub fn clear_frozen(mut self) -> Self {
         self.inner &= SplineFlag::FROZEN.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN23() -> Self {
+    pub const fn new_unknown23() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN23,
             final_angle: None,
@@ -1207,22 +1207,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN23(mut self) -> Self {
+    pub fn set_unknown23(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN23;
         self
     }
 
-    pub const fn get_UNKNOWN23(&self) -> bool {
+    pub const fn get_unknown23(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN23) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN23(mut self) -> Self {
+    pub fn clear_unknown23(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN23.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN24() -> Self {
+    pub const fn new_unknown24() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN24,
             final_angle: None,
@@ -1230,22 +1230,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN24(mut self) -> Self {
+    pub fn set_unknown24(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN24;
         self
     }
 
-    pub const fn get_UNKNOWN24(&self) -> bool {
+    pub const fn get_unknown24(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN24) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN24(mut self) -> Self {
+    pub fn clear_unknown24(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN24.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN25() -> Self {
+    pub const fn new_unknown25() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN25,
             final_angle: None,
@@ -1253,22 +1253,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN25(mut self) -> Self {
+    pub fn set_unknown25(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN25;
         self
     }
 
-    pub const fn get_UNKNOWN25(&self) -> bool {
+    pub const fn get_unknown25(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN25) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN25(mut self) -> Self {
+    pub fn clear_unknown25(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN25.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN26() -> Self {
+    pub const fn new_unknown26() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN26,
             final_angle: None,
@@ -1276,22 +1276,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN26(mut self) -> Self {
+    pub fn set_unknown26(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN26;
         self
     }
 
-    pub const fn get_UNKNOWN26(&self) -> bool {
+    pub const fn get_unknown26(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN26) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN26(mut self) -> Self {
+    pub fn clear_unknown26(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN26.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN27() -> Self {
+    pub const fn new_unknown27() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN27,
             final_angle: None,
@@ -1299,22 +1299,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN27(mut self) -> Self {
+    pub fn set_unknown27(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN27;
         self
     }
 
-    pub const fn get_UNKNOWN27(&self) -> bool {
+    pub const fn get_unknown27(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN27) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN27(mut self) -> Self {
+    pub fn clear_unknown27(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN27.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN28() -> Self {
+    pub const fn new_unknown28() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN28,
             final_angle: None,
@@ -1322,22 +1322,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN28(mut self) -> Self {
+    pub fn set_unknown28(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN28;
         self
     }
 
-    pub const fn get_UNKNOWN28(&self) -> bool {
+    pub const fn get_unknown28(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN28) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN28(mut self) -> Self {
+    pub fn clear_unknown28(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN28.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN29() -> Self {
+    pub const fn new_unknown29() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN29,
             final_angle: None,
@@ -1345,22 +1345,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN29(mut self) -> Self {
+    pub fn set_unknown29(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN29;
         self
     }
 
-    pub const fn get_UNKNOWN29(&self) -> bool {
+    pub const fn get_unknown29(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN29) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN29(mut self) -> Self {
+    pub fn clear_unknown29(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN29.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN30() -> Self {
+    pub const fn new_unknown30() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN30,
             final_angle: None,
@@ -1368,22 +1368,22 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN30(mut self) -> Self {
+    pub fn set_unknown30(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN30;
         self
     }
 
-    pub const fn get_UNKNOWN30(&self) -> bool {
+    pub const fn get_unknown30(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN30) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN30(mut self) -> Self {
+    pub fn clear_unknown30(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN30.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN31() -> Self {
+    pub const fn new_unknown31() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN31,
             final_angle: None,
@@ -1391,17 +1391,17 @@ impl MovementBlock_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN31(mut self) -> Self {
+    pub fn set_unknown31(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN31;
         self
     }
 
-    pub const fn get_UNKNOWN31(&self) -> bool {
+    pub const fn get_unknown31(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN31) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN31(mut self) -> Self {
+    pub fn clear_unknown31(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN31.reverse_bits();
         self
     }
@@ -1466,7 +1466,7 @@ impl MovementBlock_MovementFlags {
         && self.spline_enabled.is_none()
     }
 
-    pub const fn new_FORWARD() -> Self {
+    pub const fn new_forward() -> Self {
         Self {
             inner: MovementFlags::FORWARD,
             on_transport: None,
@@ -1478,22 +1478,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FORWARD(mut self) -> Self {
+    pub fn set_forward(mut self) -> Self {
         self.inner |= MovementFlags::FORWARD;
         self
     }
 
-    pub const fn get_FORWARD(&self) -> bool {
+    pub const fn get_forward(&self) -> bool {
         (self.inner & MovementFlags::FORWARD) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FORWARD(mut self) -> Self {
+    pub fn clear_forward(mut self) -> Self {
         self.inner &= MovementFlags::FORWARD.reverse_bits();
         self
     }
 
-    pub const fn new_BACKWARD() -> Self {
+    pub const fn new_backward() -> Self {
         Self {
             inner: MovementFlags::BACKWARD,
             on_transport: None,
@@ -1505,22 +1505,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_BACKWARD(mut self) -> Self {
+    pub fn set_backward(mut self) -> Self {
         self.inner |= MovementFlags::BACKWARD;
         self
     }
 
-    pub const fn get_BACKWARD(&self) -> bool {
+    pub const fn get_backward(&self) -> bool {
         (self.inner & MovementFlags::BACKWARD) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_BACKWARD(mut self) -> Self {
+    pub fn clear_backward(mut self) -> Self {
         self.inner &= MovementFlags::BACKWARD.reverse_bits();
         self
     }
 
-    pub const fn new_STRAFE_LEFT() -> Self {
+    pub const fn new_strafe_left() -> Self {
         Self {
             inner: MovementFlags::STRAFE_LEFT,
             on_transport: None,
@@ -1532,22 +1532,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_STRAFE_LEFT(mut self) -> Self {
+    pub fn set_strafe_left(mut self) -> Self {
         self.inner |= MovementFlags::STRAFE_LEFT;
         self
     }
 
-    pub const fn get_STRAFE_LEFT(&self) -> bool {
+    pub const fn get_strafe_left(&self) -> bool {
         (self.inner & MovementFlags::STRAFE_LEFT) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_STRAFE_LEFT(mut self) -> Self {
+    pub fn clear_strafe_left(mut self) -> Self {
         self.inner &= MovementFlags::STRAFE_LEFT.reverse_bits();
         self
     }
 
-    pub const fn new_STRAFE_RIGHT() -> Self {
+    pub const fn new_strafe_right() -> Self {
         Self {
             inner: MovementFlags::STRAFE_RIGHT,
             on_transport: None,
@@ -1559,22 +1559,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_STRAFE_RIGHT(mut self) -> Self {
+    pub fn set_strafe_right(mut self) -> Self {
         self.inner |= MovementFlags::STRAFE_RIGHT;
         self
     }
 
-    pub const fn get_STRAFE_RIGHT(&self) -> bool {
+    pub const fn get_strafe_right(&self) -> bool {
         (self.inner & MovementFlags::STRAFE_RIGHT) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_STRAFE_RIGHT(mut self) -> Self {
+    pub fn clear_strafe_right(mut self) -> Self {
         self.inner &= MovementFlags::STRAFE_RIGHT.reverse_bits();
         self
     }
 
-    pub const fn new_TURN_LEFT() -> Self {
+    pub const fn new_turn_left() -> Self {
         Self {
             inner: MovementFlags::TURN_LEFT,
             on_transport: None,
@@ -1586,22 +1586,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_TURN_LEFT(mut self) -> Self {
+    pub fn set_turn_left(mut self) -> Self {
         self.inner |= MovementFlags::TURN_LEFT;
         self
     }
 
-    pub const fn get_TURN_LEFT(&self) -> bool {
+    pub const fn get_turn_left(&self) -> bool {
         (self.inner & MovementFlags::TURN_LEFT) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_TURN_LEFT(mut self) -> Self {
+    pub fn clear_turn_left(mut self) -> Self {
         self.inner &= MovementFlags::TURN_LEFT.reverse_bits();
         self
     }
 
-    pub const fn new_TURN_RIGHT() -> Self {
+    pub const fn new_turn_right() -> Self {
         Self {
             inner: MovementFlags::TURN_RIGHT,
             on_transport: None,
@@ -1613,22 +1613,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_TURN_RIGHT(mut self) -> Self {
+    pub fn set_turn_right(mut self) -> Self {
         self.inner |= MovementFlags::TURN_RIGHT;
         self
     }
 
-    pub const fn get_TURN_RIGHT(&self) -> bool {
+    pub const fn get_turn_right(&self) -> bool {
         (self.inner & MovementFlags::TURN_RIGHT) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_TURN_RIGHT(mut self) -> Self {
+    pub fn clear_turn_right(mut self) -> Self {
         self.inner &= MovementFlags::TURN_RIGHT.reverse_bits();
         self
     }
 
-    pub const fn new_PITCH_UP() -> Self {
+    pub const fn new_pitch_up() -> Self {
         Self {
             inner: MovementFlags::PITCH_UP,
             on_transport: None,
@@ -1640,22 +1640,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PITCH_UP(mut self) -> Self {
+    pub fn set_pitch_up(mut self) -> Self {
         self.inner |= MovementFlags::PITCH_UP;
         self
     }
 
-    pub const fn get_PITCH_UP(&self) -> bool {
+    pub const fn get_pitch_up(&self) -> bool {
         (self.inner & MovementFlags::PITCH_UP) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PITCH_UP(mut self) -> Self {
+    pub fn clear_pitch_up(mut self) -> Self {
         self.inner &= MovementFlags::PITCH_UP.reverse_bits();
         self
     }
 
-    pub const fn new_PITCH_DOWN() -> Self {
+    pub const fn new_pitch_down() -> Self {
         Self {
             inner: MovementFlags::PITCH_DOWN,
             on_transport: None,
@@ -1667,22 +1667,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PITCH_DOWN(mut self) -> Self {
+    pub fn set_pitch_down(mut self) -> Self {
         self.inner |= MovementFlags::PITCH_DOWN;
         self
     }
 
-    pub const fn get_PITCH_DOWN(&self) -> bool {
+    pub const fn get_pitch_down(&self) -> bool {
         (self.inner & MovementFlags::PITCH_DOWN) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PITCH_DOWN(mut self) -> Self {
+    pub fn clear_pitch_down(mut self) -> Self {
         self.inner &= MovementFlags::PITCH_DOWN.reverse_bits();
         self
     }
 
-    pub const fn new_WALK_MODE() -> Self {
+    pub const fn new_walk_mode() -> Self {
         Self {
             inner: MovementFlags::WALK_MODE,
             on_transport: None,
@@ -1694,22 +1694,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_WALK_MODE(mut self) -> Self {
+    pub fn set_walk_mode(mut self) -> Self {
         self.inner |= MovementFlags::WALK_MODE;
         self
     }
 
-    pub const fn get_WALK_MODE(&self) -> bool {
+    pub const fn get_walk_mode(&self) -> bool {
         (self.inner & MovementFlags::WALK_MODE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_WALK_MODE(mut self) -> Self {
+    pub fn clear_walk_mode(mut self) -> Self {
         self.inner &= MovementFlags::WALK_MODE.reverse_bits();
         self
     }
 
-    pub const fn new_ON_TRANSPORT(on_transport: MovementBlock_MovementFlags_OnTransport) -> Self {
+    pub const fn new_on_transport(on_transport: MovementBlock_MovementFlags_OnTransport) -> Self {
         Self {
             inner: MovementFlags::ON_TRANSPORT,
             on_transport: Some(on_transport),
@@ -1721,24 +1721,24 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ON_TRANSPORT(mut self, on_transport: MovementBlock_MovementFlags_OnTransport) -> Self {
+    pub fn set_on_transport(mut self, on_transport: MovementBlock_MovementFlags_OnTransport) -> Self {
         self.inner |= MovementFlags::ON_TRANSPORT;
         self.on_transport = Some(on_transport);
         self
     }
 
-    pub const fn get_ON_TRANSPORT(&self) -> Option<&MovementBlock_MovementFlags_OnTransport> {
+    pub const fn get_on_transport(&self) -> Option<&MovementBlock_MovementFlags_OnTransport> {
         self.on_transport.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ON_TRANSPORT(mut self) -> Self {
+    pub fn clear_on_transport(mut self) -> Self {
         self.inner &= MovementFlags::ON_TRANSPORT.reverse_bits();
         self.on_transport = None;
         self
     }
 
-    pub const fn new_LEVITATING() -> Self {
+    pub const fn new_levitating() -> Self {
         Self {
             inner: MovementFlags::LEVITATING,
             on_transport: None,
@@ -1750,22 +1750,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_LEVITATING(mut self) -> Self {
+    pub fn set_levitating(mut self) -> Self {
         self.inner |= MovementFlags::LEVITATING;
         self
     }
 
-    pub const fn get_LEVITATING(&self) -> bool {
+    pub const fn get_levitating(&self) -> bool {
         (self.inner & MovementFlags::LEVITATING) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_LEVITATING(mut self) -> Self {
+    pub fn clear_levitating(mut self) -> Self {
         self.inner &= MovementFlags::LEVITATING.reverse_bits();
         self
     }
 
-    pub const fn new_FIXED_Z() -> Self {
+    pub const fn new_fixed_z() -> Self {
         Self {
             inner: MovementFlags::FIXED_Z,
             on_transport: None,
@@ -1777,22 +1777,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FIXED_Z(mut self) -> Self {
+    pub fn set_fixed_z(mut self) -> Self {
         self.inner |= MovementFlags::FIXED_Z;
         self
     }
 
-    pub const fn get_FIXED_Z(&self) -> bool {
+    pub const fn get_fixed_z(&self) -> bool {
         (self.inner & MovementFlags::FIXED_Z) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FIXED_Z(mut self) -> Self {
+    pub fn clear_fixed_z(mut self) -> Self {
         self.inner &= MovementFlags::FIXED_Z.reverse_bits();
         self
     }
 
-    pub const fn new_ROOT() -> Self {
+    pub const fn new_root() -> Self {
         Self {
             inner: MovementFlags::ROOT,
             on_transport: None,
@@ -1804,22 +1804,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ROOT(mut self) -> Self {
+    pub fn set_root(mut self) -> Self {
         self.inner |= MovementFlags::ROOT;
         self
     }
 
-    pub const fn get_ROOT(&self) -> bool {
+    pub const fn get_root(&self) -> bool {
         (self.inner & MovementFlags::ROOT) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ROOT(mut self) -> Self {
+    pub fn clear_root(mut self) -> Self {
         self.inner &= MovementFlags::ROOT.reverse_bits();
         self
     }
 
-    pub const fn new_JUMPING(jumping: MovementBlock_MovementFlags_Jumping) -> Self {
+    pub const fn new_jumping(jumping: MovementBlock_MovementFlags_Jumping) -> Self {
         Self {
             inner: MovementFlags::JUMPING,
             on_transport: None,
@@ -1831,24 +1831,24 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_JUMPING(mut self, jumping: MovementBlock_MovementFlags_Jumping) -> Self {
+    pub fn set_jumping(mut self, jumping: MovementBlock_MovementFlags_Jumping) -> Self {
         self.inner |= MovementFlags::JUMPING;
         self.jumping = Some(jumping);
         self
     }
 
-    pub const fn get_JUMPING(&self) -> Option<&MovementBlock_MovementFlags_Jumping> {
+    pub const fn get_jumping(&self) -> Option<&MovementBlock_MovementFlags_Jumping> {
         self.jumping.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_JUMPING(mut self) -> Self {
+    pub fn clear_jumping(mut self) -> Self {
         self.inner &= MovementFlags::JUMPING.reverse_bits();
         self.jumping = None;
         self
     }
 
-    pub const fn new_FALLINGFAR() -> Self {
+    pub const fn new_fallingfar() -> Self {
         Self {
             inner: MovementFlags::FALLINGFAR,
             on_transport: None,
@@ -1860,22 +1860,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FALLINGFAR(mut self) -> Self {
+    pub fn set_fallingfar(mut self) -> Self {
         self.inner |= MovementFlags::FALLINGFAR;
         self
     }
 
-    pub const fn get_FALLINGFAR(&self) -> bool {
+    pub const fn get_fallingfar(&self) -> bool {
         (self.inner & MovementFlags::FALLINGFAR) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FALLINGFAR(mut self) -> Self {
+    pub fn clear_fallingfar(mut self) -> Self {
         self.inner &= MovementFlags::FALLINGFAR.reverse_bits();
         self
     }
 
-    pub const fn new_SWIMMING(swimming: MovementBlock_MovementFlags_Swimming) -> Self {
+    pub const fn new_swimming(swimming: MovementBlock_MovementFlags_Swimming) -> Self {
         Self {
             inner: swimming.as_int(),
             on_transport: None,
@@ -1887,24 +1887,24 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_SWIMMING(mut self, swimming: MovementBlock_MovementFlags_Swimming) -> Self {
+    pub fn set_swimming(mut self, swimming: MovementBlock_MovementFlags_Swimming) -> Self {
         self.inner |= swimming.as_int();
         self.swimming = Some(swimming);
         self
     }
 
-    pub const fn get_SWIMMING(&self) -> Option<&MovementBlock_MovementFlags_Swimming> {
+    pub const fn get_swimming(&self) -> Option<&MovementBlock_MovementFlags_Swimming> {
         self.swimming.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_SWIMMING(mut self) -> Self {
+    pub fn clear_swimming(mut self) -> Self {
         self.inner &= MovementFlags::SWIMMING.reverse_bits();
         self.swimming = None;
         self
     }
 
-    pub const fn new_ASCENDING() -> Self {
+    pub const fn new_ascending() -> Self {
         Self {
             inner: MovementFlags::ASCENDING,
             on_transport: None,
@@ -1916,22 +1916,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ASCENDING(mut self) -> Self {
+    pub fn set_ascending(mut self) -> Self {
         self.inner |= MovementFlags::ASCENDING;
         self
     }
 
-    pub const fn get_ASCENDING(&self) -> bool {
+    pub const fn get_ascending(&self) -> bool {
         (self.inner & MovementFlags::ASCENDING) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ASCENDING(mut self) -> Self {
+    pub fn clear_ascending(mut self) -> Self {
         self.inner &= MovementFlags::ASCENDING.reverse_bits();
         self
     }
 
-    pub const fn new_CAN_FLY() -> Self {
+    pub const fn new_can_fly() -> Self {
         Self {
             inner: MovementFlags::CAN_FLY,
             on_transport: None,
@@ -1943,22 +1943,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_CAN_FLY(mut self) -> Self {
+    pub fn set_can_fly(mut self) -> Self {
         self.inner |= MovementFlags::CAN_FLY;
         self
     }
 
-    pub const fn get_CAN_FLY(&self) -> bool {
+    pub const fn get_can_fly(&self) -> bool {
         (self.inner & MovementFlags::CAN_FLY) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_CAN_FLY(mut self) -> Self {
+    pub fn clear_can_fly(mut self) -> Self {
         self.inner &= MovementFlags::CAN_FLY.reverse_bits();
         self
     }
 
-    pub const fn new_FLYING() -> Self {
+    pub const fn new_flying() -> Self {
         Self {
             inner: MovementFlags::FLYING,
             on_transport: None,
@@ -1970,22 +1970,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FLYING(mut self) -> Self {
+    pub fn set_flying(mut self) -> Self {
         self.inner |= MovementFlags::FLYING;
         self
     }
 
-    pub const fn get_FLYING(&self) -> bool {
+    pub const fn get_flying(&self) -> bool {
         (self.inner & MovementFlags::FLYING) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FLYING(mut self) -> Self {
+    pub fn clear_flying(mut self) -> Self {
         self.inner &= MovementFlags::FLYING.reverse_bits();
         self
     }
 
-    pub const fn new_SPLINE_ELEVATION(spline_elevation: MovementBlock_MovementFlags_SplineElevation) -> Self {
+    pub const fn new_spline_elevation(spline_elevation: MovementBlock_MovementFlags_SplineElevation) -> Self {
         Self {
             inner: MovementFlags::SPLINE_ELEVATION,
             on_transport: None,
@@ -1997,24 +1997,24 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_SPLINE_ELEVATION(mut self, spline_elevation: MovementBlock_MovementFlags_SplineElevation) -> Self {
+    pub fn set_spline_elevation(mut self, spline_elevation: MovementBlock_MovementFlags_SplineElevation) -> Self {
         self.inner |= MovementFlags::SPLINE_ELEVATION;
         self.spline_elevation = Some(spline_elevation);
         self
     }
 
-    pub const fn get_SPLINE_ELEVATION(&self) -> Option<&MovementBlock_MovementFlags_SplineElevation> {
+    pub const fn get_spline_elevation(&self) -> Option<&MovementBlock_MovementFlags_SplineElevation> {
         self.spline_elevation.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_SPLINE_ELEVATION(mut self) -> Self {
+    pub fn clear_spline_elevation(mut self) -> Self {
         self.inner &= MovementFlags::SPLINE_ELEVATION.reverse_bits();
         self.spline_elevation = None;
         self
     }
 
-    pub const fn new_SPLINE_ENABLED(spline_enabled: MovementBlock_MovementFlags_SplineEnabled) -> Self {
+    pub const fn new_spline_enabled(spline_enabled: MovementBlock_MovementFlags_SplineEnabled) -> Self {
         Self {
             inner: MovementFlags::SPLINE_ENABLED,
             on_transport: None,
@@ -2026,24 +2026,24 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_SPLINE_ENABLED(mut self, spline_enabled: MovementBlock_MovementFlags_SplineEnabled) -> Self {
+    pub fn set_spline_enabled(mut self, spline_enabled: MovementBlock_MovementFlags_SplineEnabled) -> Self {
         self.inner |= MovementFlags::SPLINE_ENABLED;
         self.spline_enabled = Some(spline_enabled);
         self
     }
 
-    pub const fn get_SPLINE_ENABLED(&self) -> Option<&MovementBlock_MovementFlags_SplineEnabled> {
+    pub const fn get_spline_enabled(&self) -> Option<&MovementBlock_MovementFlags_SplineEnabled> {
         self.spline_enabled.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_SPLINE_ENABLED(mut self) -> Self {
+    pub fn clear_spline_enabled(mut self) -> Self {
         self.inner &= MovementFlags::SPLINE_ENABLED.reverse_bits();
         self.spline_enabled = None;
         self
     }
 
-    pub const fn new_WATERWALKING() -> Self {
+    pub const fn new_waterwalking() -> Self {
         Self {
             inner: MovementFlags::WATERWALKING,
             on_transport: None,
@@ -2055,22 +2055,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_WATERWALKING(mut self) -> Self {
+    pub fn set_waterwalking(mut self) -> Self {
         self.inner |= MovementFlags::WATERWALKING;
         self
     }
 
-    pub const fn get_WATERWALKING(&self) -> bool {
+    pub const fn get_waterwalking(&self) -> bool {
         (self.inner & MovementFlags::WATERWALKING) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_WATERWALKING(mut self) -> Self {
+    pub fn clear_waterwalking(mut self) -> Self {
         self.inner &= MovementFlags::WATERWALKING.reverse_bits();
         self
     }
 
-    pub const fn new_SAFE_FALL() -> Self {
+    pub const fn new_safe_fall() -> Self {
         Self {
             inner: MovementFlags::SAFE_FALL,
             on_transport: None,
@@ -2082,22 +2082,22 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_SAFE_FALL(mut self) -> Self {
+    pub fn set_safe_fall(mut self) -> Self {
         self.inner |= MovementFlags::SAFE_FALL;
         self
     }
 
-    pub const fn get_SAFE_FALL(&self) -> bool {
+    pub const fn get_safe_fall(&self) -> bool {
         (self.inner & MovementFlags::SAFE_FALL) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_SAFE_FALL(mut self) -> Self {
+    pub fn clear_safe_fall(mut self) -> Self {
         self.inner &= MovementFlags::SAFE_FALL.reverse_bits();
         self
     }
 
-    pub const fn new_HOVER() -> Self {
+    pub const fn new_hover() -> Self {
         Self {
             inner: MovementFlags::HOVER,
             on_transport: None,
@@ -2109,17 +2109,17 @@ impl MovementBlock_MovementFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_HOVER(mut self) -> Self {
+    pub fn set_hover(mut self) -> Self {
         self.inner |= MovementFlags::HOVER;
         self
     }
 
-    pub const fn get_HOVER(&self) -> bool {
+    pub const fn get_hover(&self) -> bool {
         (self.inner & MovementFlags::HOVER) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_HOVER(mut self) -> Self {
+    pub fn clear_hover(mut self) -> Self {
         self.inner &= MovementFlags::HOVER.reverse_bits();
         self
     }
@@ -2354,7 +2354,7 @@ impl MovementBlock_UpdateFlag {
         && self.living.is_none()
     }
 
-    pub const fn new_SELF() -> Self {
+    pub const fn new_self() -> Self {
         Self {
             inner: UpdateFlag::SELF,
             transport: None,
@@ -2366,22 +2366,22 @@ impl MovementBlock_UpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_SELF(mut self) -> Self {
+    pub fn set_self(mut self) -> Self {
         self.inner |= UpdateFlag::SELF;
         self
     }
 
-    pub const fn get_SELF(&self) -> bool {
+    pub const fn get_self(&self) -> bool {
         (self.inner & UpdateFlag::SELF) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_SELF(mut self) -> Self {
+    pub fn clear_self(mut self) -> Self {
         self.inner &= UpdateFlag::SELF.reverse_bits();
         self
     }
 
-    pub const fn new_TRANSPORT(transport: MovementBlock_UpdateFlag_Transport) -> Self {
+    pub const fn new_transport(transport: MovementBlock_UpdateFlag_Transport) -> Self {
         Self {
             inner: UpdateFlag::TRANSPORT,
             transport: Some(transport),
@@ -2393,24 +2393,24 @@ impl MovementBlock_UpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_TRANSPORT(mut self, transport: MovementBlock_UpdateFlag_Transport) -> Self {
+    pub fn set_transport(mut self, transport: MovementBlock_UpdateFlag_Transport) -> Self {
         self.inner |= UpdateFlag::TRANSPORT;
         self.transport = Some(transport);
         self
     }
 
-    pub const fn get_TRANSPORT(&self) -> Option<&MovementBlock_UpdateFlag_Transport> {
+    pub const fn get_transport(&self) -> Option<&MovementBlock_UpdateFlag_Transport> {
         self.transport.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_TRANSPORT(mut self) -> Self {
+    pub fn clear_transport(mut self) -> Self {
         self.inner &= UpdateFlag::TRANSPORT.reverse_bits();
         self.transport = None;
         self
     }
 
-    pub const fn new_MELEE_ATTACKING(melee_attacking: MovementBlock_UpdateFlag_MeleeAttacking) -> Self {
+    pub const fn new_melee_attacking(melee_attacking: MovementBlock_UpdateFlag_MeleeAttacking) -> Self {
         Self {
             inner: UpdateFlag::MELEE_ATTACKING,
             transport: None,
@@ -2422,24 +2422,24 @@ impl MovementBlock_UpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_MELEE_ATTACKING(mut self, melee_attacking: MovementBlock_UpdateFlag_MeleeAttacking) -> Self {
+    pub fn set_melee_attacking(mut self, melee_attacking: MovementBlock_UpdateFlag_MeleeAttacking) -> Self {
         self.inner |= UpdateFlag::MELEE_ATTACKING;
         self.melee_attacking = Some(melee_attacking);
         self
     }
 
-    pub const fn get_MELEE_ATTACKING(&self) -> Option<&MovementBlock_UpdateFlag_MeleeAttacking> {
+    pub const fn get_melee_attacking(&self) -> Option<&MovementBlock_UpdateFlag_MeleeAttacking> {
         self.melee_attacking.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_MELEE_ATTACKING(mut self) -> Self {
+    pub fn clear_melee_attacking(mut self) -> Self {
         self.inner &= UpdateFlag::MELEE_ATTACKING.reverse_bits();
         self.melee_attacking = None;
         self
     }
 
-    pub const fn new_HIGH_GUID(high_guid: MovementBlock_UpdateFlag_HighGuid) -> Self {
+    pub const fn new_high_guid(high_guid: MovementBlock_UpdateFlag_HighGuid) -> Self {
         Self {
             inner: UpdateFlag::HIGH_GUID,
             transport: None,
@@ -2451,24 +2451,24 @@ impl MovementBlock_UpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_HIGH_GUID(mut self, high_guid: MovementBlock_UpdateFlag_HighGuid) -> Self {
+    pub fn set_high_guid(mut self, high_guid: MovementBlock_UpdateFlag_HighGuid) -> Self {
         self.inner |= UpdateFlag::HIGH_GUID;
         self.high_guid = Some(high_guid);
         self
     }
 
-    pub const fn get_HIGH_GUID(&self) -> Option<&MovementBlock_UpdateFlag_HighGuid> {
+    pub const fn get_high_guid(&self) -> Option<&MovementBlock_UpdateFlag_HighGuid> {
         self.high_guid.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_HIGH_GUID(mut self) -> Self {
+    pub fn clear_high_guid(mut self) -> Self {
         self.inner &= UpdateFlag::HIGH_GUID.reverse_bits();
         self.high_guid = None;
         self
     }
 
-    pub const fn new_ALL(all: MovementBlock_UpdateFlag_All) -> Self {
+    pub const fn new_all(all: MovementBlock_UpdateFlag_All) -> Self {
         Self {
             inner: UpdateFlag::ALL,
             transport: None,
@@ -2480,24 +2480,24 @@ impl MovementBlock_UpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ALL(mut self, all: MovementBlock_UpdateFlag_All) -> Self {
+    pub fn set_all(mut self, all: MovementBlock_UpdateFlag_All) -> Self {
         self.inner |= UpdateFlag::ALL;
         self.all = Some(all);
         self
     }
 
-    pub const fn get_ALL(&self) -> Option<&MovementBlock_UpdateFlag_All> {
+    pub const fn get_all(&self) -> Option<&MovementBlock_UpdateFlag_All> {
         self.all.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ALL(mut self) -> Self {
+    pub fn clear_all(mut self) -> Self {
         self.inner &= UpdateFlag::ALL.reverse_bits();
         self.all = None;
         self
     }
 
-    pub const fn new_LIVING(living: MovementBlock_UpdateFlag_Living) -> Self {
+    pub const fn new_living(living: MovementBlock_UpdateFlag_Living) -> Self {
         Self {
             inner: living.as_int(),
             transport: None,
@@ -2509,18 +2509,18 @@ impl MovementBlock_UpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_LIVING(mut self, living: MovementBlock_UpdateFlag_Living) -> Self {
+    pub fn set_living(mut self, living: MovementBlock_UpdateFlag_Living) -> Self {
         self.inner |= living.as_int();
         self.living = Some(living);
         self
     }
 
-    pub const fn get_LIVING(&self) -> Option<&MovementBlock_UpdateFlag_Living> {
+    pub const fn get_living(&self) -> Option<&MovementBlock_UpdateFlag_Living> {
         self.living.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_LIVING(mut self) -> Self {
+    pub fn clear_living(mut self) -> Self {
         self.inner &= UpdateFlag::LIVING.reverse_bits();
         self.living = None;
         self

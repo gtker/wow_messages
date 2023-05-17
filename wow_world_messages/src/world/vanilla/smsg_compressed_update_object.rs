@@ -283,13 +283,13 @@ mod test {
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_ALL(MovementBlock_UpdateFlag_All {
+                                .set_all(MovementBlock_UpdateFlag_All {
                                     unknown1: 0x1,
                                 })
-                                .set_TRANSPORT(MovementBlock_UpdateFlag_Transport {
+                                .set_transport(MovementBlock_UpdateFlag_Transport {
                                     transport_progress_in_ms: 0x5E4E1,
                                 })
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::HasPosition {
+                                .set_living(MovementBlock_UpdateFlag_Living::HasPosition {
                                     orientation: 4.0249395_f32,
                                     position: Vector3d {
                                         x: 0_f32,
@@ -318,13 +318,13 @@ mod test {
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_ALL(MovementBlock_UpdateFlag_All {
+                                .set_all(MovementBlock_UpdateFlag_All {
                                     unknown1: 0x1,
                                 })
-                                .set_TRANSPORT(MovementBlock_UpdateFlag_Transport {
+                                .set_transport(MovementBlock_UpdateFlag_Transport {
                                     transport_progress_in_ms: 0x5E4E1,
                                 })
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::HasPosition {
+                                .set_living(MovementBlock_UpdateFlag_Living::HasPosition {
                                     orientation: 1.5709158_f32,
                                     position: Vector3d {
                                         x: 0_f32,
@@ -353,13 +353,13 @@ mod test {
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_ALL(MovementBlock_UpdateFlag_All {
+                                .set_all(MovementBlock_UpdateFlag_All {
                                     unknown1: 0x1,
                                 })
-                                .set_TRANSPORT(MovementBlock_UpdateFlag_Transport {
+                                .set_transport(MovementBlock_UpdateFlag_Transport {
                                     transport_progress_in_ms: 0x5E4E1,
                                 })
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::HasPosition {
+                                .set_living(MovementBlock_UpdateFlag_Living::HasPosition {
                                     orientation: 4.5152526_f32,
                                     position: Vector3d {
                                         x: 0_f32,
@@ -388,13 +388,13 @@ mod test {
                         ),
                         movement2: MovementBlock {
                             update_flag: MovementBlock_UpdateFlag::empty()
-                                .set_ALL(MovementBlock_UpdateFlag_All {
+                                .set_all(MovementBlock_UpdateFlag_All {
                                     unknown1: 0x1,
                                 })
-                                .set_TRANSPORT(MovementBlock_UpdateFlag_Transport {
+                                .set_transport(MovementBlock_UpdateFlag_Transport {
                                     transport_progress_in_ms: 0x5E4E1,
                                 })
-                                .set_LIVING(MovementBlock_UpdateFlag_Living::HasPosition {
+                                .set_living(MovementBlock_UpdateFlag_Living::HasPosition {
                                     orientation: 1.4187208_f32,
                                     position: Vector3d {
                                         x: 0_f32,

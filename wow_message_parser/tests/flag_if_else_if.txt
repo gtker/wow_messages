@@ -82,7 +82,7 @@ impl FlagIfElseIf {
         // flags: UpdateFlag
         let flags = UpdateFlag::new(crate::util::read_u8_le(&mut r)?);
 
-        let flags_ONE_IF = if flags.is_ONE_IF() {
+        let flags_ONE_IF = if flags.is_one_if() {
             // b_if: u8
             let b_if = crate::util::read_u8_le(&mut r)?;
 
@@ -90,11 +90,11 @@ impl FlagIfElseIf {
                 b_if,
             })
         }
-        else if flags.is_TWO_ELSEIF() {
+        else if flags.is_two_elseif() {
             // s: SimpleFlag
             let s = SimpleFlag::new(crate::util::read_u8_le(&mut r)?);
 
-            let s_ONE = if s.is_ONE() {
+            let s_ONE = if s.is_one() {
                 // if_one: u8
                 let if_one = crate::util::read_u8_le(&mut r)?;
 
@@ -115,7 +115,7 @@ impl FlagIfElseIf {
                 s,
             })
         }
-        else if flags.is_FOUR_ELSEIF() {
+        else if flags.is_four_elseif() {
             // elseif2: u8
             let elseif2 = crate::util::read_u8_le(&mut r)?;
 
@@ -127,7 +127,7 @@ impl FlagIfElseIf {
             None
         };
 
-        let flags_EIGHT_IF = if flags.is_EIGHT_IF() {
+        let flags_EIGHT_IF = if flags.is_eight_if() {
             // last_if: u8
             let last_if = crate::util::read_u8_le(&mut r)?;
 
@@ -184,7 +184,7 @@ impl FlagIfElseIf_SimpleFlag {
         && self.one.is_none()
     }
 
-    pub const fn new_ONE(one: FlagIfElseIf_SimpleFlag_One) -> Self {
+    pub const fn new_one(one: FlagIfElseIf_SimpleFlag_One) -> Self {
         Self {
             inner: SimpleFlag::ONE,
             one: Some(one),
@@ -192,24 +192,24 @@ impl FlagIfElseIf_SimpleFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ONE(mut self, one: FlagIfElseIf_SimpleFlag_One) -> Self {
+    pub fn set_one(mut self, one: FlagIfElseIf_SimpleFlag_One) -> Self {
         self.inner |= SimpleFlag::ONE;
         self.one = Some(one);
         self
     }
 
-    pub const fn get_ONE(&self) -> Option<&FlagIfElseIf_SimpleFlag_One> {
+    pub const fn get_one(&self) -> Option<&FlagIfElseIf_SimpleFlag_One> {
         self.one.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ONE(mut self) -> Self {
+    pub fn clear_one(mut self) -> Self {
         self.inner &= SimpleFlag::ONE.reverse_bits();
         self.one = None;
         self
     }
 
-    pub const fn new_TWO() -> Self {
+    pub const fn new_two() -> Self {
         Self {
             inner: SimpleFlag::TWO,
             one: None,
@@ -217,17 +217,17 @@ impl FlagIfElseIf_SimpleFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_TWO(mut self) -> Self {
+    pub fn set_two(mut self) -> Self {
         self.inner |= SimpleFlag::TWO;
         self
     }
 
-    pub const fn get_TWO(&self) -> bool {
+    pub const fn get_two(&self) -> bool {
         (self.inner & SimpleFlag::TWO) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_TWO(mut self) -> Self {
+    pub fn clear_two(mut self) -> Self {
         self.inner &= SimpleFlag::TWO.reverse_bits();
         self
     }
@@ -340,7 +340,7 @@ impl FlagIfElseIf_UpdateFlag {
         && self.eight_if.is_none()
     }
 
-    pub const fn new_ONE_IF(one_if: FlagIfElseIf_UpdateFlag_OneIf) -> Self {
+    pub const fn new_one_if(one_if: FlagIfElseIf_UpdateFlag_OneIf) -> Self {
         Self {
             inner: one_if.as_int(),
             one_if: Some(one_if),
@@ -349,24 +349,24 @@ impl FlagIfElseIf_UpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ONE_IF(mut self, one_if: FlagIfElseIf_UpdateFlag_OneIf) -> Self {
+    pub fn set_one_if(mut self, one_if: FlagIfElseIf_UpdateFlag_OneIf) -> Self {
         self.inner |= one_if.as_int();
         self.one_if = Some(one_if);
         self
     }
 
-    pub const fn get_ONE_IF(&self) -> Option<&FlagIfElseIf_UpdateFlag_OneIf> {
+    pub const fn get_one_if(&self) -> Option<&FlagIfElseIf_UpdateFlag_OneIf> {
         self.one_if.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ONE_IF(mut self) -> Self {
+    pub fn clear_one_if(mut self) -> Self {
         self.inner &= UpdateFlag::ONE_IF.reverse_bits();
         self.one_if = None;
         self
     }
 
-    pub const fn new_EIGHT_IF(eight_if: FlagIfElseIf_UpdateFlag_EightIf) -> Self {
+    pub const fn new_eight_if(eight_if: FlagIfElseIf_UpdateFlag_EightIf) -> Self {
         Self {
             inner: UpdateFlag::EIGHT_IF,
             one_if: None,
@@ -375,18 +375,18 @@ impl FlagIfElseIf_UpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_EIGHT_IF(mut self, eight_if: FlagIfElseIf_UpdateFlag_EightIf) -> Self {
+    pub fn set_eight_if(mut self, eight_if: FlagIfElseIf_UpdateFlag_EightIf) -> Self {
         self.inner |= UpdateFlag::EIGHT_IF;
         self.eight_if = Some(eight_if);
         self
     }
 
-    pub const fn get_EIGHT_IF(&self) -> Option<&FlagIfElseIf_UpdateFlag_EightIf> {
+    pub const fn get_eight_if(&self) -> Option<&FlagIfElseIf_UpdateFlag_EightIf> {
         self.eight_if.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_EIGHT_IF(mut self) -> Self {
+    pub fn clear_eight_if(mut self) -> Self {
         self.inner &= UpdateFlag::EIGHT_IF.reverse_bits();
         self.eight_if = None;
         self

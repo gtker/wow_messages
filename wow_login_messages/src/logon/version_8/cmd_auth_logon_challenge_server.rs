@@ -215,7 +215,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                 // security_flag: SecurityFlag
                 let security_flag = SecurityFlag::new(crate::util::read_u8_le(&mut r)?);
 
-                let security_flag_PIN = if security_flag.is_PIN() {
+                let security_flag_PIN = if security_flag.is_pin() {
                     // pin_grid_seed: u32
                     let pin_grid_seed = crate::util::read_u32_le(&mut r)?;
 
@@ -235,7 +235,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     None
                 };
 
-                let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
+                let security_flag_MATRIX_CARD = if security_flag.is_matrix_card() {
                     // width: u8
                     let width = crate::util::read_u8_le(&mut r)?;
 
@@ -263,7 +263,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     None
                 };
 
-                let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
+                let security_flag_AUTHENTICATOR = if security_flag.is_authenticator() {
                     // required: u8
                     let required = crate::util::read_u8_le(&mut r)?;
 
@@ -389,7 +389,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     // security_flag: SecurityFlag
                     let security_flag = SecurityFlag::new(crate::util::tokio_read_u8_le(&mut r).await?);
 
-                    let security_flag_PIN = if security_flag.is_PIN() {
+                    let security_flag_PIN = if security_flag.is_pin() {
                         // pin_grid_seed: u32
                         let pin_grid_seed = crate::util::tokio_read_u32_le(&mut r).await?;
 
@@ -409,7 +409,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         None
                     };
 
-                    let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
+                    let security_flag_MATRIX_CARD = if security_flag.is_matrix_card() {
                         // width: u8
                         let width = crate::util::tokio_read_u8_le(&mut r).await?;
 
@@ -437,7 +437,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         None
                     };
 
-                    let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
+                    let security_flag_AUTHENTICATOR = if security_flag.is_authenticator() {
                         // required: u8
                         let required = crate::util::tokio_read_u8_le(&mut r).await?;
 
@@ -576,7 +576,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     // security_flag: SecurityFlag
                     let security_flag = SecurityFlag::new(crate::util::astd_read_u8_le(&mut r).await?);
 
-                    let security_flag_PIN = if security_flag.is_PIN() {
+                    let security_flag_PIN = if security_flag.is_pin() {
                         // pin_grid_seed: u32
                         let pin_grid_seed = crate::util::astd_read_u32_le(&mut r).await?;
 
@@ -596,7 +596,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         None
                     };
 
-                    let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
+                    let security_flag_MATRIX_CARD = if security_flag.is_matrix_card() {
                         // width: u8
                         let width = crate::util::astd_read_u8_le(&mut r).await?;
 
@@ -624,7 +624,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         None
                     };
 
-                    let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
+                    let security_flag_AUTHENTICATOR = if security_flag.is_authenticator() {
                         // required: u8
                         let required = crate::util::astd_read_u8_le(&mut r).await?;
 
@@ -738,7 +738,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
         && self.authenticator.is_none()
     }
 
-    pub const fn new_PIN(pin: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin) -> Self {
+    pub const fn new_pin(pin: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin) -> Self {
         Self {
             inner: SecurityFlag::PIN,
             pin: Some(pin),
@@ -748,24 +748,24 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PIN(mut self, pin: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin) -> Self {
+    pub fn set_pin(mut self, pin: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin) -> Self {
         self.inner |= SecurityFlag::PIN;
         self.pin = Some(pin);
         self
     }
 
-    pub const fn get_PIN(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin> {
+    pub const fn get_pin(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin> {
         self.pin.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PIN(mut self) -> Self {
+    pub fn clear_pin(mut self) -> Self {
         self.inner &= SecurityFlag::PIN.reverse_bits();
         self.pin = None;
         self
     }
 
-    pub const fn new_MATRIX_CARD(matrix_card: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard) -> Self {
+    pub const fn new_matrix_card(matrix_card: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard) -> Self {
         Self {
             inner: SecurityFlag::MATRIX_CARD,
             pin: None,
@@ -775,24 +775,24 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_MATRIX_CARD(mut self, matrix_card: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard) -> Self {
+    pub fn set_matrix_card(mut self, matrix_card: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard) -> Self {
         self.inner |= SecurityFlag::MATRIX_CARD;
         self.matrix_card = Some(matrix_card);
         self
     }
 
-    pub const fn get_MATRIX_CARD(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard> {
+    pub const fn get_matrix_card(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard> {
         self.matrix_card.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_MATRIX_CARD(mut self) -> Self {
+    pub fn clear_matrix_card(mut self) -> Self {
         self.inner &= SecurityFlag::MATRIX_CARD.reverse_bits();
         self.matrix_card = None;
         self
     }
 
-    pub const fn new_AUTHENTICATOR(authenticator: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator) -> Self {
+    pub const fn new_authenticator(authenticator: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator) -> Self {
         Self {
             inner: SecurityFlag::AUTHENTICATOR,
             pin: None,
@@ -802,18 +802,18 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_AUTHENTICATOR(mut self, authenticator: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator) -> Self {
+    pub fn set_authenticator(mut self, authenticator: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator) -> Self {
         self.inner |= SecurityFlag::AUTHENTICATOR;
         self.authenticator = Some(authenticator);
         self
     }
 
-    pub const fn get_AUTHENTICATOR(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator> {
+    pub const fn get_authenticator(&self) -> Option<&CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator> {
         self.authenticator.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_AUTHENTICATOR(mut self) -> Self {
+    pub fn clear_authenticator(mut self) -> Self {
         self.inner &= SecurityFlag::AUTHENTICATOR.reverse_bits();
         self.authenticator = None;
         self
@@ -1166,7 +1166,7 @@ mod test {
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_PIN(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
+                    .set_pin(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
                         pin_grid_seed: 0xDEADBEEF,
                         pin_salt: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                              0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, ],
@@ -1268,7 +1268,7 @@ mod test {
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
+                    .set_authenticator(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
                         required: 0x1,
                     })
                     ,
@@ -1369,7 +1369,7 @@ mod test {
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_MATRIX_CARD(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                    .set_matrix_card(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
                         challenge_count: 0xCC,
                         digit_count: 0xDD,
                         height: 0xEE,
@@ -1543,14 +1543,14 @@ mod test {
                      0xCF, 0x74, 0xD6, 0x4A, 0x77, 0xA7, 0xD3, 0x3D, 0xF3, 0x30,
                      0x90, 0x87, ],
                 security_flag: CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::empty()
-                    .set_MATRIX_CARD(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                    .set_matrix_card(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
                         challenge_count: 0xCC,
                         digit_count: 0xDD,
                         height: 0xEE,
                         seed: 0xDEADBEEFFACADE,
                         width: 0xFF,
                     })
-                    .set_AUTHENTICATOR(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
+                    .set_authenticator(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
                         required: 0x1,
                     })
                     ,

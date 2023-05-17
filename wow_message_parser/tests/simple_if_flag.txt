@@ -36,7 +36,7 @@ impl SimpleIfFlag {
         // flag: SimpleFlag
         let flag = SimpleFlag::new(crate::util::read_u8_le(&mut r)?);
 
-        let flag_ZERO = if flag.is_ZERO() {
+        let flag_ZERO = if flag.is_zero() {
             // basic: u8
             let basic = crate::util::read_u8_le(&mut r)?;
 
@@ -92,7 +92,7 @@ impl SimpleIfFlag_SimpleFlag {
         && self.zero.is_none()
     }
 
-    pub const fn new_ONE() -> Self {
+    pub const fn new_one() -> Self {
         Self {
             inner: SimpleFlag::ONE,
             zero: None,
@@ -100,22 +100,22 @@ impl SimpleIfFlag_SimpleFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ONE(mut self) -> Self {
+    pub fn set_one(mut self) -> Self {
         self.inner |= SimpleFlag::ONE;
         self
     }
 
-    pub const fn get_ONE(&self) -> bool {
+    pub const fn get_one(&self) -> bool {
         (self.inner & SimpleFlag::ONE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ONE(mut self) -> Self {
+    pub fn clear_one(mut self) -> Self {
         self.inner &= SimpleFlag::ONE.reverse_bits();
         self
     }
 
-    pub const fn new_TWO() -> Self {
+    pub const fn new_two() -> Self {
         Self {
             inner: SimpleFlag::TWO,
             zero: None,
@@ -123,17 +123,17 @@ impl SimpleIfFlag_SimpleFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_TWO(mut self) -> Self {
+    pub fn set_two(mut self) -> Self {
         self.inner |= SimpleFlag::TWO;
         self
     }
 
-    pub const fn get_TWO(&self) -> bool {
+    pub const fn get_two(&self) -> bool {
         (self.inner & SimpleFlag::TWO) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_TWO(mut self) -> Self {
+    pub fn clear_two(mut self) -> Self {
         self.inner &= SimpleFlag::TWO.reverse_bits();
         self
     }

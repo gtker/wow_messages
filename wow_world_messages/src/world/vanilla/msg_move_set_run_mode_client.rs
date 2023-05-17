@@ -74,7 +74,7 @@ mod test {
         MSG_MOVE_SET_RUN_MODE_Client {
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
-                    .set_FORWARD()
+                    .set_forward()
                     ,
                 timestamp: 0x25B1B41,
                 position: Vector3d {

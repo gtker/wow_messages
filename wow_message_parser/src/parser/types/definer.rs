@@ -31,6 +31,10 @@ impl DefinerField {
         &self.name
     }
 
+    pub(crate) fn function_name(&self) -> String {
+        self.name.to_lowercase()
+    }
+
     pub(crate) fn rust_name(&self) -> &str {
         &self.rust_name
     }

@@ -74,7 +74,7 @@ mod test {
         MSG_MOVE_SET_FACING_Client {
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
-                    .set_FORWARD()
+                    .set_forward()
                     ,
                 timestamp: 0x17A2D5E,
                 position: Vector3d {

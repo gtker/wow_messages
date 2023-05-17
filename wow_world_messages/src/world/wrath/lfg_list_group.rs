@@ -70,7 +70,7 @@ impl LfgListGroup {
         // flags: LfgUpdateFlag
         let flags = LfgUpdateFlag::new(crate::util::read_u32_le(&mut r)?);
 
-        let flags_COMMENT = if flags.is_COMMENT() {
+        let flags_COMMENT = if flags.is_comment() {
             // comment: CString
             let comment = {
                 let comment = crate::util::read_c_string_to_vec(&mut r)?;
@@ -85,7 +85,7 @@ impl LfgListGroup {
             None
         };
 
-        let flags_ROLES = if flags.is_ROLES() {
+        let flags_ROLES = if flags.is_roles() {
             // roles: u8[3]
             let roles = {
                 let mut roles = [0_u8; 3];
@@ -162,7 +162,7 @@ impl LfgListGroup_LfgUpdateFlag {
         && self.roles.is_none()
     }
 
-    pub const fn new_CHARACTER_INFO() -> Self {
+    pub const fn new_character_info() -> Self {
         Self {
             inner: LfgUpdateFlag::CHARACTER_INFO,
             comment: None,
@@ -171,22 +171,22 @@ impl LfgListGroup_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_CHARACTER_INFO(mut self) -> Self {
+    pub fn set_character_info(mut self) -> Self {
         self.inner |= LfgUpdateFlag::CHARACTER_INFO;
         self
     }
 
-    pub const fn get_CHARACTER_INFO(&self) -> bool {
+    pub const fn get_character_info(&self) -> bool {
         (self.inner & LfgUpdateFlag::CHARACTER_INFO) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_CHARACTER_INFO(mut self) -> Self {
+    pub fn clear_character_info(mut self) -> Self {
         self.inner &= LfgUpdateFlag::CHARACTER_INFO.reverse_bits();
         self
     }
 
-    pub const fn new_COMMENT(comment: LfgListGroup_LfgUpdateFlag_Comment) -> Self {
+    pub const fn new_comment(comment: LfgListGroup_LfgUpdateFlag_Comment) -> Self {
         Self {
             inner: LfgUpdateFlag::COMMENT,
             comment: Some(comment),
@@ -195,24 +195,24 @@ impl LfgListGroup_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_COMMENT(mut self, comment: LfgListGroup_LfgUpdateFlag_Comment) -> Self {
+    pub fn set_comment(mut self, comment: LfgListGroup_LfgUpdateFlag_Comment) -> Self {
         self.inner |= LfgUpdateFlag::COMMENT;
         self.comment = Some(comment);
         self
     }
 
-    pub const fn get_COMMENT(&self) -> Option<&LfgListGroup_LfgUpdateFlag_Comment> {
+    pub const fn get_comment(&self) -> Option<&LfgListGroup_LfgUpdateFlag_Comment> {
         self.comment.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_COMMENT(mut self) -> Self {
+    pub fn clear_comment(mut self) -> Self {
         self.inner &= LfgUpdateFlag::COMMENT.reverse_bits();
         self.comment = None;
         self
     }
 
-    pub const fn new_GROUP_LEADER() -> Self {
+    pub const fn new_group_leader() -> Self {
         Self {
             inner: LfgUpdateFlag::GROUP_LEADER,
             comment: None,
@@ -221,22 +221,22 @@ impl LfgListGroup_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_GROUP_LEADER(mut self) -> Self {
+    pub fn set_group_leader(mut self) -> Self {
         self.inner |= LfgUpdateFlag::GROUP_LEADER;
         self
     }
 
-    pub const fn get_GROUP_LEADER(&self) -> bool {
+    pub const fn get_group_leader(&self) -> bool {
         (self.inner & LfgUpdateFlag::GROUP_LEADER) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_GROUP_LEADER(mut self) -> Self {
+    pub fn clear_group_leader(mut self) -> Self {
         self.inner &= LfgUpdateFlag::GROUP_LEADER.reverse_bits();
         self
     }
 
-    pub const fn new_GROUP_GUID() -> Self {
+    pub const fn new_group_guid() -> Self {
         Self {
             inner: LfgUpdateFlag::GROUP_GUID,
             comment: None,
@@ -245,22 +245,22 @@ impl LfgListGroup_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_GROUP_GUID(mut self) -> Self {
+    pub fn set_group_guid(mut self) -> Self {
         self.inner |= LfgUpdateFlag::GROUP_GUID;
         self
     }
 
-    pub const fn get_GROUP_GUID(&self) -> bool {
+    pub const fn get_group_guid(&self) -> bool {
         (self.inner & LfgUpdateFlag::GROUP_GUID) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_GROUP_GUID(mut self) -> Self {
+    pub fn clear_group_guid(mut self) -> Self {
         self.inner &= LfgUpdateFlag::GROUP_GUID.reverse_bits();
         self
     }
 
-    pub const fn new_ROLES(roles: LfgListGroup_LfgUpdateFlag_Roles) -> Self {
+    pub const fn new_roles(roles: LfgListGroup_LfgUpdateFlag_Roles) -> Self {
         Self {
             inner: LfgUpdateFlag::ROLES,
             comment: None,
@@ -269,24 +269,24 @@ impl LfgListGroup_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ROLES(mut self, roles: LfgListGroup_LfgUpdateFlag_Roles) -> Self {
+    pub fn set_roles(mut self, roles: LfgListGroup_LfgUpdateFlag_Roles) -> Self {
         self.inner |= LfgUpdateFlag::ROLES;
         self.roles = Some(roles);
         self
     }
 
-    pub const fn get_ROLES(&self) -> Option<&LfgListGroup_LfgUpdateFlag_Roles> {
+    pub const fn get_roles(&self) -> Option<&LfgListGroup_LfgUpdateFlag_Roles> {
         self.roles.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ROLES(mut self) -> Self {
+    pub fn clear_roles(mut self) -> Self {
         self.inner &= LfgUpdateFlag::ROLES.reverse_bits();
         self.roles = None;
         self
     }
 
-    pub const fn new_AREA() -> Self {
+    pub const fn new_area() -> Self {
         Self {
             inner: LfgUpdateFlag::AREA,
             comment: None,
@@ -295,22 +295,22 @@ impl LfgListGroup_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_AREA(mut self) -> Self {
+    pub fn set_area(mut self) -> Self {
         self.inner |= LfgUpdateFlag::AREA;
         self
     }
 
-    pub const fn get_AREA(&self) -> bool {
+    pub const fn get_area(&self) -> bool {
         (self.inner & LfgUpdateFlag::AREA) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_AREA(mut self) -> Self {
+    pub fn clear_area(mut self) -> Self {
         self.inner &= LfgUpdateFlag::AREA.reverse_bits();
         self
     }
 
-    pub const fn new_STATUS() -> Self {
+    pub const fn new_status() -> Self {
         Self {
             inner: LfgUpdateFlag::STATUS,
             comment: None,
@@ -319,22 +319,22 @@ impl LfgListGroup_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_STATUS(mut self) -> Self {
+    pub fn set_status(mut self) -> Self {
         self.inner |= LfgUpdateFlag::STATUS;
         self
     }
 
-    pub const fn get_STATUS(&self) -> bool {
+    pub const fn get_status(&self) -> bool {
         (self.inner & LfgUpdateFlag::STATUS) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_STATUS(mut self) -> Self {
+    pub fn clear_status(mut self) -> Self {
         self.inner &= LfgUpdateFlag::STATUS.reverse_bits();
         self
     }
 
-    pub const fn new_BOUND() -> Self {
+    pub const fn new_bound() -> Self {
         Self {
             inner: LfgUpdateFlag::BOUND,
             comment: None,
@@ -343,17 +343,17 @@ impl LfgListGroup_LfgUpdateFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_BOUND(mut self) -> Self {
+    pub fn set_bound(mut self) -> Self {
         self.inner |= LfgUpdateFlag::BOUND;
         self
     }
 
-    pub const fn get_BOUND(&self) -> bool {
+    pub const fn get_bound(&self) -> bool {
         (self.inner & LfgUpdateFlag::BOUND) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_BOUND(mut self) -> Self {
+    pub fn clear_bound(mut self) -> Self {
         self.inner &= LfgUpdateFlag::BOUND.reverse_bits();
         self
     }

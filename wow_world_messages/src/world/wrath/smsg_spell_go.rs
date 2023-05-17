@@ -164,7 +164,7 @@ impl crate::Message for SMSG_SPELL_GO {
         // targets: SpellCastTargets
         let targets = SpellCastTargets::read(&mut r)?;
 
-        let flags_POWER_UPDATE = if flags.is_POWER_UPDATE() {
+        let flags_POWER_UPDATE = if flags.is_power_update() {
             // power: Power
             let power: Power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
@@ -176,7 +176,7 @@ impl crate::Message for SMSG_SPELL_GO {
             None
         };
 
-        let flags_RUNE_UPDATE = if flags.is_RUNE_UPDATE() {
+        let flags_RUNE_UPDATE = if flags.is_rune_update() {
             // rune_mask_initial: u8
             let rune_mask_initial = crate::util::read_u8_le(&mut r)?;
 
@@ -200,7 +200,7 @@ impl crate::Message for SMSG_SPELL_GO {
             None
         };
 
-        let flags_ADJUST_MISSILE = if flags.is_ADJUST_MISSILE() {
+        let flags_ADJUST_MISSILE = if flags.is_adjust_missile() {
             // elevation: f32
             let elevation = crate::util::read_f32_le(&mut r)?;
 
@@ -216,7 +216,7 @@ impl crate::Message for SMSG_SPELL_GO {
             None
         };
 
-        let flags_AMMO = if flags.is_AMMO() {
+        let flags_AMMO = if flags.is_ammo() {
             // ammo_display_id: u32
             let ammo_display_id = crate::util::read_u32_le(&mut r)?;
 
@@ -232,7 +232,7 @@ impl crate::Message for SMSG_SPELL_GO {
             None
         };
 
-        let flags_VISUAL_CHAIN = if flags.is_VISUAL_CHAIN() {
+        let flags_VISUAL_CHAIN = if flags.is_visual_chain() {
             // unknown1: u32
             let unknown1 = crate::util::read_u32_le(&mut r)?;
 
@@ -248,7 +248,7 @@ impl crate::Message for SMSG_SPELL_GO {
             None
         };
 
-        let flags_DEST_LOCATION = if flags.is_DEST_LOCATION() {
+        let flags_DEST_LOCATION = if flags.is_dest_location() {
             // unknown3: u8
             let unknown3 = crate::util::read_u8_le(&mut r)?;
 
@@ -343,7 +343,7 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
         && self.rune_update.is_none()
     }
 
-    pub const fn new_LOCK_PLAYER_CAST_ANIM() -> Self {
+    pub const fn new_lock_player_cast_anim() -> Self {
         Self {
             inner: GameobjectCastFlags::LOCK_PLAYER_CAST_ANIM,
             ammo: None,
@@ -356,22 +356,22 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_LOCK_PLAYER_CAST_ANIM(mut self) -> Self {
+    pub fn set_lock_player_cast_anim(mut self) -> Self {
         self.inner |= GameobjectCastFlags::LOCK_PLAYER_CAST_ANIM;
         self
     }
 
-    pub const fn get_LOCK_PLAYER_CAST_ANIM(&self) -> bool {
+    pub const fn get_lock_player_cast_anim(&self) -> bool {
         (self.inner & GameobjectCastFlags::LOCK_PLAYER_CAST_ANIM) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_LOCK_PLAYER_CAST_ANIM(mut self) -> Self {
+    pub fn clear_lock_player_cast_anim(mut self) -> Self {
         self.inner &= GameobjectCastFlags::LOCK_PLAYER_CAST_ANIM.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN2() -> Self {
+    pub const fn new_unknown2() -> Self {
         Self {
             inner: GameobjectCastFlags::UNKNOWN2,
             ammo: None,
@@ -384,22 +384,22 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN2(mut self) -> Self {
+    pub fn set_unknown2(mut self) -> Self {
         self.inner |= GameobjectCastFlags::UNKNOWN2;
         self
     }
 
-    pub const fn get_UNKNOWN2(&self) -> bool {
+    pub const fn get_unknown2(&self) -> bool {
         (self.inner & GameobjectCastFlags::UNKNOWN2) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN2(mut self) -> Self {
+    pub fn clear_unknown2(mut self) -> Self {
         self.inner &= GameobjectCastFlags::UNKNOWN2.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN4() -> Self {
+    pub const fn new_unknown4() -> Self {
         Self {
             inner: GameobjectCastFlags::UNKNOWN4,
             ammo: None,
@@ -412,22 +412,22 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN4(mut self) -> Self {
+    pub fn set_unknown4(mut self) -> Self {
         self.inner |= GameobjectCastFlags::UNKNOWN4;
         self
     }
 
-    pub const fn get_UNKNOWN4(&self) -> bool {
+    pub const fn get_unknown4(&self) -> bool {
         (self.inner & GameobjectCastFlags::UNKNOWN4) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN4(mut self) -> Self {
+    pub fn clear_unknown4(mut self) -> Self {
         self.inner &= GameobjectCastFlags::UNKNOWN4.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN8() -> Self {
+    pub const fn new_unknown8() -> Self {
         Self {
             inner: GameobjectCastFlags::UNKNOWN8,
             ammo: None,
@@ -440,22 +440,22 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN8(mut self) -> Self {
+    pub fn set_unknown8(mut self) -> Self {
         self.inner |= GameobjectCastFlags::UNKNOWN8;
         self
     }
 
-    pub const fn get_UNKNOWN8(&self) -> bool {
+    pub const fn get_unknown8(&self) -> bool {
         (self.inner & GameobjectCastFlags::UNKNOWN8) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN8(mut self) -> Self {
+    pub fn clear_unknown8(mut self) -> Self {
         self.inner &= GameobjectCastFlags::UNKNOWN8.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN16() -> Self {
+    pub const fn new_unknown16() -> Self {
         Self {
             inner: GameobjectCastFlags::UNKNOWN16,
             ammo: None,
@@ -468,22 +468,22 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN16(mut self) -> Self {
+    pub fn set_unknown16(mut self) -> Self {
         self.inner |= GameobjectCastFlags::UNKNOWN16;
         self
     }
 
-    pub const fn get_UNKNOWN16(&self) -> bool {
+    pub const fn get_unknown16(&self) -> bool {
         (self.inner & GameobjectCastFlags::UNKNOWN16) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN16(mut self) -> Self {
+    pub fn clear_unknown16(mut self) -> Self {
         self.inner &= GameobjectCastFlags::UNKNOWN16.reverse_bits();
         self
     }
 
-    pub const fn new_AMMO(ammo: SMSG_SPELL_GO_GameobjectCastFlags_Ammo) -> Self {
+    pub const fn new_ammo(ammo: SMSG_SPELL_GO_GameobjectCastFlags_Ammo) -> Self {
         Self {
             inner: GameobjectCastFlags::AMMO,
             ammo: Some(ammo),
@@ -496,24 +496,24 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_AMMO(mut self, ammo: SMSG_SPELL_GO_GameobjectCastFlags_Ammo) -> Self {
+    pub fn set_ammo(mut self, ammo: SMSG_SPELL_GO_GameobjectCastFlags_Ammo) -> Self {
         self.inner |= GameobjectCastFlags::AMMO;
         self.ammo = Some(ammo);
         self
     }
 
-    pub const fn get_AMMO(&self) -> Option<&SMSG_SPELL_GO_GameobjectCastFlags_Ammo> {
+    pub const fn get_ammo(&self) -> Option<&SMSG_SPELL_GO_GameobjectCastFlags_Ammo> {
         self.ammo.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_AMMO(mut self) -> Self {
+    pub fn clear_ammo(mut self) -> Self {
         self.inner &= GameobjectCastFlags::AMMO.reverse_bits();
         self.ammo = None;
         self
     }
 
-    pub const fn new_DEST_LOCATION(dest_location: SMSG_SPELL_GO_GameobjectCastFlags_DestLocation) -> Self {
+    pub const fn new_dest_location(dest_location: SMSG_SPELL_GO_GameobjectCastFlags_DestLocation) -> Self {
         Self {
             inner: GameobjectCastFlags::DEST_LOCATION,
             ammo: None,
@@ -526,24 +526,24 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_DEST_LOCATION(mut self, dest_location: SMSG_SPELL_GO_GameobjectCastFlags_DestLocation) -> Self {
+    pub fn set_dest_location(mut self, dest_location: SMSG_SPELL_GO_GameobjectCastFlags_DestLocation) -> Self {
         self.inner |= GameobjectCastFlags::DEST_LOCATION;
         self.dest_location = Some(dest_location);
         self
     }
 
-    pub const fn get_DEST_LOCATION(&self) -> Option<&SMSG_SPELL_GO_GameobjectCastFlags_DestLocation> {
+    pub const fn get_dest_location(&self) -> Option<&SMSG_SPELL_GO_GameobjectCastFlags_DestLocation> {
         self.dest_location.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_DEST_LOCATION(mut self) -> Self {
+    pub fn clear_dest_location(mut self) -> Self {
         self.inner &= GameobjectCastFlags::DEST_LOCATION.reverse_bits();
         self.dest_location = None;
         self
     }
 
-    pub const fn new_ITEM_CASTER() -> Self {
+    pub const fn new_item_caster() -> Self {
         Self {
             inner: GameobjectCastFlags::ITEM_CASTER,
             ammo: None,
@@ -556,22 +556,22 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ITEM_CASTER(mut self) -> Self {
+    pub fn set_item_caster(mut self) -> Self {
         self.inner |= GameobjectCastFlags::ITEM_CASTER;
         self
     }
 
-    pub const fn get_ITEM_CASTER(&self) -> bool {
+    pub const fn get_item_caster(&self) -> bool {
         (self.inner & GameobjectCastFlags::ITEM_CASTER) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ITEM_CASTER(mut self) -> Self {
+    pub fn clear_item_caster(mut self) -> Self {
         self.inner &= GameobjectCastFlags::ITEM_CASTER.reverse_bits();
         self
     }
 
-    pub const fn new_UNK200() -> Self {
+    pub const fn new_unk200() -> Self {
         Self {
             inner: GameobjectCastFlags::UNK200,
             ammo: None,
@@ -584,22 +584,22 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK200(mut self) -> Self {
+    pub fn set_unk200(mut self) -> Self {
         self.inner |= GameobjectCastFlags::UNK200;
         self
     }
 
-    pub const fn get_UNK200(&self) -> bool {
+    pub const fn get_unk200(&self) -> bool {
         (self.inner & GameobjectCastFlags::UNK200) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK200(mut self) -> Self {
+    pub fn clear_unk200(mut self) -> Self {
         self.inner &= GameobjectCastFlags::UNK200.reverse_bits();
         self
     }
 
-    pub const fn new_EXTRA_MESSAGE() -> Self {
+    pub const fn new_extra_message() -> Self {
         Self {
             inner: GameobjectCastFlags::EXTRA_MESSAGE,
             ammo: None,
@@ -612,22 +612,22 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_EXTRA_MESSAGE(mut self) -> Self {
+    pub fn set_extra_message(mut self) -> Self {
         self.inner |= GameobjectCastFlags::EXTRA_MESSAGE;
         self
     }
 
-    pub const fn get_EXTRA_MESSAGE(&self) -> bool {
+    pub const fn get_extra_message(&self) -> bool {
         (self.inner & GameobjectCastFlags::EXTRA_MESSAGE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_EXTRA_MESSAGE(mut self) -> Self {
+    pub fn clear_extra_message(mut self) -> Self {
         self.inner &= GameobjectCastFlags::EXTRA_MESSAGE.reverse_bits();
         self
     }
 
-    pub const fn new_POWER_UPDATE(power_update: SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate) -> Self {
+    pub const fn new_power_update(power_update: SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate) -> Self {
         Self {
             inner: GameobjectCastFlags::POWER_UPDATE,
             ammo: None,
@@ -640,24 +640,24 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_POWER_UPDATE(mut self, power_update: SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate) -> Self {
+    pub fn set_power_update(mut self, power_update: SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate) -> Self {
         self.inner |= GameobjectCastFlags::POWER_UPDATE;
         self.power_update = Some(power_update);
         self
     }
 
-    pub const fn get_POWER_UPDATE(&self) -> Option<&SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate> {
+    pub const fn get_power_update(&self) -> Option<&SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate> {
         self.power_update.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_POWER_UPDATE(mut self) -> Self {
+    pub fn clear_power_update(mut self) -> Self {
         self.inner &= GameobjectCastFlags::POWER_UPDATE.reverse_bits();
         self.power_update = None;
         self
     }
 
-    pub const fn new_UNK2000() -> Self {
+    pub const fn new_unk2000() -> Self {
         Self {
             inner: GameobjectCastFlags::UNK2000,
             ammo: None,
@@ -670,22 +670,22 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK2000(mut self) -> Self {
+    pub fn set_unk2000(mut self) -> Self {
         self.inner |= GameobjectCastFlags::UNK2000;
         self
     }
 
-    pub const fn get_UNK2000(&self) -> bool {
+    pub const fn get_unk2000(&self) -> bool {
         (self.inner & GameobjectCastFlags::UNK2000) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK2000(mut self) -> Self {
+    pub fn clear_unk2000(mut self) -> Self {
         self.inner &= GameobjectCastFlags::UNK2000.reverse_bits();
         self
     }
 
-    pub const fn new_UNK1000() -> Self {
+    pub const fn new_unk1000() -> Self {
         Self {
             inner: GameobjectCastFlags::UNK1000,
             ammo: None,
@@ -698,22 +698,22 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK1000(mut self) -> Self {
+    pub fn set_unk1000(mut self) -> Self {
         self.inner |= GameobjectCastFlags::UNK1000;
         self
     }
 
-    pub const fn get_UNK1000(&self) -> bool {
+    pub const fn get_unk1000(&self) -> bool {
         (self.inner & GameobjectCastFlags::UNK1000) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK1000(mut self) -> Self {
+    pub fn clear_unk1000(mut self) -> Self {
         self.inner &= GameobjectCastFlags::UNK1000.reverse_bits();
         self
     }
 
-    pub const fn new_UNK8000() -> Self {
+    pub const fn new_unk8000() -> Self {
         Self {
             inner: GameobjectCastFlags::UNK8000,
             ammo: None,
@@ -726,22 +726,22 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK8000(mut self) -> Self {
+    pub fn set_unk8000(mut self) -> Self {
         self.inner |= GameobjectCastFlags::UNK8000;
         self
     }
 
-    pub const fn get_UNK8000(&self) -> bool {
+    pub const fn get_unk8000(&self) -> bool {
         (self.inner & GameobjectCastFlags::UNK8000) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK8000(mut self) -> Self {
+    pub fn clear_unk8000(mut self) -> Self {
         self.inner &= GameobjectCastFlags::UNK8000.reverse_bits();
         self
     }
 
-    pub const fn new_ADJUST_MISSILE(adjust_missile: SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile) -> Self {
+    pub const fn new_adjust_missile(adjust_missile: SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile) -> Self {
         Self {
             inner: GameobjectCastFlags::ADJUST_MISSILE,
             ammo: None,
@@ -754,24 +754,24 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ADJUST_MISSILE(mut self, adjust_missile: SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile) -> Self {
+    pub fn set_adjust_missile(mut self, adjust_missile: SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile) -> Self {
         self.inner |= GameobjectCastFlags::ADJUST_MISSILE;
         self.adjust_missile = Some(adjust_missile);
         self
     }
 
-    pub const fn get_ADJUST_MISSILE(&self) -> Option<&SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile> {
+    pub const fn get_adjust_missile(&self) -> Option<&SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile> {
         self.adjust_missile.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ADJUST_MISSILE(mut self) -> Self {
+    pub fn clear_adjust_missile(mut self) -> Self {
         self.inner &= GameobjectCastFlags::ADJUST_MISSILE.reverse_bits();
         self.adjust_missile = None;
         self
     }
 
-    pub const fn new_UNK40000() -> Self {
+    pub const fn new_unk40000() -> Self {
         Self {
             inner: GameobjectCastFlags::UNK40000,
             ammo: None,
@@ -784,22 +784,22 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK40000(mut self) -> Self {
+    pub fn set_unk40000(mut self) -> Self {
         self.inner |= GameobjectCastFlags::UNK40000;
         self
     }
 
-    pub const fn get_UNK40000(&self) -> bool {
+    pub const fn get_unk40000(&self) -> bool {
         (self.inner & GameobjectCastFlags::UNK40000) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK40000(mut self) -> Self {
+    pub fn clear_unk40000(mut self) -> Self {
         self.inner &= GameobjectCastFlags::UNK40000.reverse_bits();
         self
     }
 
-    pub const fn new_VISUAL_CHAIN(visual_chain: SMSG_SPELL_GO_GameobjectCastFlags_VisualChain) -> Self {
+    pub const fn new_visual_chain(visual_chain: SMSG_SPELL_GO_GameobjectCastFlags_VisualChain) -> Self {
         Self {
             inner: GameobjectCastFlags::VISUAL_CHAIN,
             ammo: None,
@@ -812,24 +812,24 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_VISUAL_CHAIN(mut self, visual_chain: SMSG_SPELL_GO_GameobjectCastFlags_VisualChain) -> Self {
+    pub fn set_visual_chain(mut self, visual_chain: SMSG_SPELL_GO_GameobjectCastFlags_VisualChain) -> Self {
         self.inner |= GameobjectCastFlags::VISUAL_CHAIN;
         self.visual_chain = Some(visual_chain);
         self
     }
 
-    pub const fn get_VISUAL_CHAIN(&self) -> Option<&SMSG_SPELL_GO_GameobjectCastFlags_VisualChain> {
+    pub const fn get_visual_chain(&self) -> Option<&SMSG_SPELL_GO_GameobjectCastFlags_VisualChain> {
         self.visual_chain.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_VISUAL_CHAIN(mut self) -> Self {
+    pub fn clear_visual_chain(mut self) -> Self {
         self.inner &= GameobjectCastFlags::VISUAL_CHAIN.reverse_bits();
         self.visual_chain = None;
         self
     }
 
-    pub const fn new_RUNE_UPDATE(rune_update: SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate) -> Self {
+    pub const fn new_rune_update(rune_update: SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate) -> Self {
         Self {
             inner: GameobjectCastFlags::RUNE_UPDATE,
             ammo: None,
@@ -842,24 +842,24 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_RUNE_UPDATE(mut self, rune_update: SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate) -> Self {
+    pub fn set_rune_update(mut self, rune_update: SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate) -> Self {
         self.inner |= GameobjectCastFlags::RUNE_UPDATE;
         self.rune_update = Some(rune_update);
         self
     }
 
-    pub const fn get_RUNE_UPDATE(&self) -> Option<&SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate> {
+    pub const fn get_rune_update(&self) -> Option<&SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate> {
         self.rune_update.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_RUNE_UPDATE(mut self) -> Self {
+    pub fn clear_rune_update(mut self) -> Self {
         self.inner &= GameobjectCastFlags::RUNE_UPDATE.reverse_bits();
         self.rune_update = None;
         self
     }
 
-    pub const fn new_UNK400000() -> Self {
+    pub const fn new_unk400000() -> Self {
         Self {
             inner: GameobjectCastFlags::UNK400000,
             ammo: None,
@@ -872,17 +872,17 @@ impl SMSG_SPELL_GO_GameobjectCastFlags {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK400000(mut self) -> Self {
+    pub fn set_unk400000(mut self) -> Self {
         self.inner |= GameobjectCastFlags::UNK400000;
         self
     }
 
-    pub const fn get_UNK400000(&self) -> bool {
+    pub const fn get_unk400000(&self) -> bool {
         (self.inner & GameobjectCastFlags::UNK400000) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK400000(mut self) -> Self {
+    pub fn clear_unk400000(mut self) -> Self {
         self.inner &= GameobjectCastFlags::UNK400000.reverse_bits();
         self
     }

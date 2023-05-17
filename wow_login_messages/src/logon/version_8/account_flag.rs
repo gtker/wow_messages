@@ -38,56 +38,56 @@ impl AccountFlag {
         }
     }
 
-    pub const fn is_GM(&self) -> bool {
+    pub const fn is_gm(&self) -> bool {
         (self.inner & Self::GM) != 0
     }
 
-    pub const fn new_GM() -> Self {
+    pub const fn new_gm() -> Self {
         Self { inner: Self::GM }
     }
 
-    pub fn set_GM(&mut self) -> Self {
+    pub fn set_gm(&mut self) -> Self {
         self.inner |= Self::GM;
         *self
     }
 
-    pub fn clear_GM(&mut self) -> Self {
+    pub fn clear_gm(&mut self) -> Self {
         self.inner &= Self::GM.reverse_bits();
         *self
     }
 
-    pub const fn is_TRIAL(&self) -> bool {
+    pub const fn is_trial(&self) -> bool {
         (self.inner & Self::TRIAL) != 0
     }
 
-    pub const fn new_TRIAL() -> Self {
+    pub const fn new_trial() -> Self {
         Self { inner: Self::TRIAL }
     }
 
-    pub fn set_TRIAL(&mut self) -> Self {
+    pub fn set_trial(&mut self) -> Self {
         self.inner |= Self::TRIAL;
         *self
     }
 
-    pub fn clear_TRIAL(&mut self) -> Self {
+    pub fn clear_trial(&mut self) -> Self {
         self.inner &= Self::TRIAL.reverse_bits();
         *self
     }
 
-    pub const fn is_PROPASS(&self) -> bool {
+    pub const fn is_propass(&self) -> bool {
         (self.inner & Self::PROPASS) != 0
     }
 
-    pub const fn new_PROPASS() -> Self {
+    pub const fn new_propass() -> Self {
         Self { inner: Self::PROPASS }
     }
 
-    pub fn set_PROPASS(&mut self) -> Self {
+    pub fn set_propass(&mut self) -> Self {
         self.inner |= Self::PROPASS;
         *self
     }
 
-    pub fn clear_PROPASS(&mut self) -> Self {
+    pub fn clear_propass(&mut self) -> Self {
         self.inner &= Self::PROPASS.reverse_bits();
         *self
     }

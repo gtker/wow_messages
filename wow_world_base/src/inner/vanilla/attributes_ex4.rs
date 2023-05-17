@@ -67,218 +67,218 @@ impl AttributesEx4 {
         }
     }
 
-    pub const fn is_NO_CAST_LOG(&self) -> bool {
+    pub const fn is_no_cast_log(&self) -> bool {
         (self.inner & Self::NO_CAST_LOG) != 0
     }
 
-    pub const fn new_NO_CAST_LOG() -> Self {
+    pub const fn new_no_cast_log() -> Self {
         Self { inner: Self::NO_CAST_LOG }
     }
 
-    pub fn set_NO_CAST_LOG(&mut self) -> Self {
+    pub fn set_no_cast_log(&mut self) -> Self {
         self.inner |= Self::NO_CAST_LOG;
         *self
     }
 
-    pub fn clear_NO_CAST_LOG(&mut self) -> Self {
+    pub fn clear_no_cast_log(&mut self) -> Self {
         self.inner &= Self::NO_CAST_LOG.reverse_bits();
         *self
     }
 
-    pub const fn is_CLASS_TRIGGER_ONLY_ON_TARGET(&self) -> bool {
+    pub const fn is_class_trigger_only_on_target(&self) -> bool {
         (self.inner & Self::CLASS_TRIGGER_ONLY_ON_TARGET) != 0
     }
 
-    pub const fn new_CLASS_TRIGGER_ONLY_ON_TARGET() -> Self {
+    pub const fn new_class_trigger_only_on_target() -> Self {
         Self { inner: Self::CLASS_TRIGGER_ONLY_ON_TARGET }
     }
 
-    pub fn set_CLASS_TRIGGER_ONLY_ON_TARGET(&mut self) -> Self {
+    pub fn set_class_trigger_only_on_target(&mut self) -> Self {
         self.inner |= Self::CLASS_TRIGGER_ONLY_ON_TARGET;
         *self
     }
 
-    pub fn clear_CLASS_TRIGGER_ONLY_ON_TARGET(&mut self) -> Self {
+    pub fn clear_class_trigger_only_on_target(&mut self) -> Self {
         self.inner &= Self::CLASS_TRIGGER_ONLY_ON_TARGET.reverse_bits();
         *self
     }
 
-    pub const fn is_AURA_EXPIRES_OFFLINE(&self) -> bool {
+    pub const fn is_aura_expires_offline(&self) -> bool {
         (self.inner & Self::AURA_EXPIRES_OFFLINE) != 0
     }
 
-    pub const fn new_AURA_EXPIRES_OFFLINE() -> Self {
+    pub const fn new_aura_expires_offline() -> Self {
         Self { inner: Self::AURA_EXPIRES_OFFLINE }
     }
 
-    pub fn set_AURA_EXPIRES_OFFLINE(&mut self) -> Self {
+    pub fn set_aura_expires_offline(&mut self) -> Self {
         self.inner |= Self::AURA_EXPIRES_OFFLINE;
         *self
     }
 
-    pub fn clear_AURA_EXPIRES_OFFLINE(&mut self) -> Self {
+    pub fn clear_aura_expires_offline(&mut self) -> Self {
         self.inner &= Self::AURA_EXPIRES_OFFLINE.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_HELPFUL_THREAT(&self) -> bool {
+    pub const fn is_no_helpful_threat(&self) -> bool {
         (self.inner & Self::NO_HELPFUL_THREAT) != 0
     }
 
-    pub const fn new_NO_HELPFUL_THREAT() -> Self {
+    pub const fn new_no_helpful_threat() -> Self {
         Self { inner: Self::NO_HELPFUL_THREAT }
     }
 
-    pub fn set_NO_HELPFUL_THREAT(&mut self) -> Self {
+    pub fn set_no_helpful_threat(&mut self) -> Self {
         self.inner |= Self::NO_HELPFUL_THREAT;
         *self
     }
 
-    pub fn clear_NO_HELPFUL_THREAT(&mut self) -> Self {
+    pub fn clear_no_helpful_threat(&mut self) -> Self {
         self.inner &= Self::NO_HELPFUL_THREAT.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_HARMFUL_THREAT(&self) -> bool {
+    pub const fn is_no_harmful_threat(&self) -> bool {
         (self.inner & Self::NO_HARMFUL_THREAT) != 0
     }
 
-    pub const fn new_NO_HARMFUL_THREAT() -> Self {
+    pub const fn new_no_harmful_threat() -> Self {
         Self { inner: Self::NO_HARMFUL_THREAT }
     }
 
-    pub fn set_NO_HARMFUL_THREAT(&mut self) -> Self {
+    pub fn set_no_harmful_threat(&mut self) -> Self {
         self.inner |= Self::NO_HARMFUL_THREAT;
         *self
     }
 
-    pub fn clear_NO_HARMFUL_THREAT(&mut self) -> Self {
+    pub fn clear_no_harmful_threat(&mut self) -> Self {
         self.inner &= Self::NO_HARMFUL_THREAT.reverse_bits();
         *self
     }
 
-    pub const fn is_ALLOW_CLIENT_TARGETING(&self) -> bool {
+    pub const fn is_allow_client_targeting(&self) -> bool {
         (self.inner & Self::ALLOW_CLIENT_TARGETING) != 0
     }
 
-    pub const fn new_ALLOW_CLIENT_TARGETING() -> Self {
+    pub const fn new_allow_client_targeting() -> Self {
         Self { inner: Self::ALLOW_CLIENT_TARGETING }
     }
 
-    pub fn set_ALLOW_CLIENT_TARGETING(&mut self) -> Self {
+    pub fn set_allow_client_targeting(&mut self) -> Self {
         self.inner |= Self::ALLOW_CLIENT_TARGETING;
         *self
     }
 
-    pub fn clear_ALLOW_CLIENT_TARGETING(&mut self) -> Self {
+    pub fn clear_allow_client_targeting(&mut self) -> Self {
         self.inner &= Self::ALLOW_CLIENT_TARGETING.reverse_bits();
         *self
     }
 
-    pub const fn is_CANNOT_BE_STOLEN(&self) -> bool {
+    pub const fn is_cannot_be_stolen(&self) -> bool {
         (self.inner & Self::CANNOT_BE_STOLEN) != 0
     }
 
-    pub const fn new_CANNOT_BE_STOLEN() -> Self {
+    pub const fn new_cannot_be_stolen() -> Self {
         Self { inner: Self::CANNOT_BE_STOLEN }
     }
 
-    pub fn set_CANNOT_BE_STOLEN(&mut self) -> Self {
+    pub fn set_cannot_be_stolen(&mut self) -> Self {
         self.inner |= Self::CANNOT_BE_STOLEN;
         *self
     }
 
-    pub fn clear_CANNOT_BE_STOLEN(&mut self) -> Self {
+    pub fn clear_cannot_be_stolen(&mut self) -> Self {
         self.inner &= Self::CANNOT_BE_STOLEN.reverse_bits();
         *self
     }
 
-    pub const fn is_ALLOW_CAST_WHILE_CASTING(&self) -> bool {
+    pub const fn is_allow_cast_while_casting(&self) -> bool {
         (self.inner & Self::ALLOW_CAST_WHILE_CASTING) != 0
     }
 
-    pub const fn new_ALLOW_CAST_WHILE_CASTING() -> Self {
+    pub const fn new_allow_cast_while_casting() -> Self {
         Self { inner: Self::ALLOW_CAST_WHILE_CASTING }
     }
 
-    pub fn set_ALLOW_CAST_WHILE_CASTING(&mut self) -> Self {
+    pub fn set_allow_cast_while_casting(&mut self) -> Self {
         self.inner |= Self::ALLOW_CAST_WHILE_CASTING;
         *self
     }
 
-    pub fn clear_ALLOW_CAST_WHILE_CASTING(&mut self) -> Self {
+    pub fn clear_allow_cast_while_casting(&mut self) -> Self {
         self.inner &= Self::ALLOW_CAST_WHILE_CASTING.reverse_bits();
         *self
     }
 
-    pub const fn is_IGNORE_DAMAGE_TAKEN_MODIFIERS(&self) -> bool {
+    pub const fn is_ignore_damage_taken_modifiers(&self) -> bool {
         (self.inner & Self::IGNORE_DAMAGE_TAKEN_MODIFIERS) != 0
     }
 
-    pub const fn new_IGNORE_DAMAGE_TAKEN_MODIFIERS() -> Self {
+    pub const fn new_ignore_damage_taken_modifiers() -> Self {
         Self { inner: Self::IGNORE_DAMAGE_TAKEN_MODIFIERS }
     }
 
-    pub fn set_IGNORE_DAMAGE_TAKEN_MODIFIERS(&mut self) -> Self {
+    pub fn set_ignore_damage_taken_modifiers(&mut self) -> Self {
         self.inner |= Self::IGNORE_DAMAGE_TAKEN_MODIFIERS;
         *self
     }
 
-    pub fn clear_IGNORE_DAMAGE_TAKEN_MODIFIERS(&mut self) -> Self {
+    pub fn clear_ignore_damage_taken_modifiers(&mut self) -> Self {
         self.inner &= Self::IGNORE_DAMAGE_TAKEN_MODIFIERS.reverse_bits();
         *self
     }
 
-    pub const fn is_COMBAT_FEEDBACK_WHEN_USABLE(&self) -> bool {
+    pub const fn is_combat_feedback_when_usable(&self) -> bool {
         (self.inner & Self::COMBAT_FEEDBACK_WHEN_USABLE) != 0
     }
 
-    pub const fn new_COMBAT_FEEDBACK_WHEN_USABLE() -> Self {
+    pub const fn new_combat_feedback_when_usable() -> Self {
         Self { inner: Self::COMBAT_FEEDBACK_WHEN_USABLE }
     }
 
-    pub fn set_COMBAT_FEEDBACK_WHEN_USABLE(&mut self) -> Self {
+    pub fn set_combat_feedback_when_usable(&mut self) -> Self {
         self.inner |= Self::COMBAT_FEEDBACK_WHEN_USABLE;
         *self
     }
 
-    pub fn clear_COMBAT_FEEDBACK_WHEN_USABLE(&mut self) -> Self {
+    pub fn clear_combat_feedback_when_usable(&mut self) -> Self {
         self.inner &= Self::COMBAT_FEEDBACK_WHEN_USABLE.reverse_bits();
         *self
     }
 
-    pub const fn is_WEAPON_SPEED_COST_SCALING(&self) -> bool {
+    pub const fn is_weapon_speed_cost_scaling(&self) -> bool {
         (self.inner & Self::WEAPON_SPEED_COST_SCALING) != 0
     }
 
-    pub const fn new_WEAPON_SPEED_COST_SCALING() -> Self {
+    pub const fn new_weapon_speed_cost_scaling() -> Self {
         Self { inner: Self::WEAPON_SPEED_COST_SCALING }
     }
 
-    pub fn set_WEAPON_SPEED_COST_SCALING(&mut self) -> Self {
+    pub fn set_weapon_speed_cost_scaling(&mut self) -> Self {
         self.inner |= Self::WEAPON_SPEED_COST_SCALING;
         *self
     }
 
-    pub fn clear_WEAPON_SPEED_COST_SCALING(&mut self) -> Self {
+    pub fn clear_weapon_speed_cost_scaling(&mut self) -> Self {
         self.inner &= Self::WEAPON_SPEED_COST_SCALING.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_PARTIAL_IMMUNITY(&self) -> bool {
+    pub const fn is_no_partial_immunity(&self) -> bool {
         (self.inner & Self::NO_PARTIAL_IMMUNITY) != 0
     }
 
-    pub const fn new_NO_PARTIAL_IMMUNITY() -> Self {
+    pub const fn new_no_partial_immunity() -> Self {
         Self { inner: Self::NO_PARTIAL_IMMUNITY }
     }
 
-    pub fn set_NO_PARTIAL_IMMUNITY(&mut self) -> Self {
+    pub fn set_no_partial_immunity(&mut self) -> Self {
         self.inner |= Self::NO_PARTIAL_IMMUNITY;
         *self
     }
 
-    pub fn clear_NO_PARTIAL_IMMUNITY(&mut self) -> Self {
+    pub fn clear_no_partial_immunity(&mut self) -> Self {
         self.inner &= Self::NO_PARTIAL_IMMUNITY.reverse_bits();
         *self
     }

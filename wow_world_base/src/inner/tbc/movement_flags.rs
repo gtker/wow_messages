@@ -106,452 +106,452 @@ impl MovementFlags {
         }
     }
 
-    pub const fn is_FORWARD(&self) -> bool {
+    pub const fn is_forward(&self) -> bool {
         (self.inner & Self::FORWARD) != 0
     }
 
-    pub const fn new_FORWARD() -> Self {
+    pub const fn new_forward() -> Self {
         Self { inner: Self::FORWARD }
     }
 
-    pub fn set_FORWARD(&mut self) -> Self {
+    pub fn set_forward(&mut self) -> Self {
         self.inner |= Self::FORWARD;
         *self
     }
 
-    pub fn clear_FORWARD(&mut self) -> Self {
+    pub fn clear_forward(&mut self) -> Self {
         self.inner &= Self::FORWARD.reverse_bits();
         *self
     }
 
-    pub const fn is_BACKWARD(&self) -> bool {
+    pub const fn is_backward(&self) -> bool {
         (self.inner & Self::BACKWARD) != 0
     }
 
-    pub const fn new_BACKWARD() -> Self {
+    pub const fn new_backward() -> Self {
         Self { inner: Self::BACKWARD }
     }
 
-    pub fn set_BACKWARD(&mut self) -> Self {
+    pub fn set_backward(&mut self) -> Self {
         self.inner |= Self::BACKWARD;
         *self
     }
 
-    pub fn clear_BACKWARD(&mut self) -> Self {
+    pub fn clear_backward(&mut self) -> Self {
         self.inner &= Self::BACKWARD.reverse_bits();
         *self
     }
 
-    pub const fn is_STRAFE_LEFT(&self) -> bool {
+    pub const fn is_strafe_left(&self) -> bool {
         (self.inner & Self::STRAFE_LEFT) != 0
     }
 
-    pub const fn new_STRAFE_LEFT() -> Self {
+    pub const fn new_strafe_left() -> Self {
         Self { inner: Self::STRAFE_LEFT }
     }
 
-    pub fn set_STRAFE_LEFT(&mut self) -> Self {
+    pub fn set_strafe_left(&mut self) -> Self {
         self.inner |= Self::STRAFE_LEFT;
         *self
     }
 
-    pub fn clear_STRAFE_LEFT(&mut self) -> Self {
+    pub fn clear_strafe_left(&mut self) -> Self {
         self.inner &= Self::STRAFE_LEFT.reverse_bits();
         *self
     }
 
-    pub const fn is_STRAFE_RIGHT(&self) -> bool {
+    pub const fn is_strafe_right(&self) -> bool {
         (self.inner & Self::STRAFE_RIGHT) != 0
     }
 
-    pub const fn new_STRAFE_RIGHT() -> Self {
+    pub const fn new_strafe_right() -> Self {
         Self { inner: Self::STRAFE_RIGHT }
     }
 
-    pub fn set_STRAFE_RIGHT(&mut self) -> Self {
+    pub fn set_strafe_right(&mut self) -> Self {
         self.inner |= Self::STRAFE_RIGHT;
         *self
     }
 
-    pub fn clear_STRAFE_RIGHT(&mut self) -> Self {
+    pub fn clear_strafe_right(&mut self) -> Self {
         self.inner &= Self::STRAFE_RIGHT.reverse_bits();
         *self
     }
 
-    pub const fn is_TURN_LEFT(&self) -> bool {
+    pub const fn is_turn_left(&self) -> bool {
         (self.inner & Self::TURN_LEFT) != 0
     }
 
-    pub const fn new_TURN_LEFT() -> Self {
+    pub const fn new_turn_left() -> Self {
         Self { inner: Self::TURN_LEFT }
     }
 
-    pub fn set_TURN_LEFT(&mut self) -> Self {
+    pub fn set_turn_left(&mut self) -> Self {
         self.inner |= Self::TURN_LEFT;
         *self
     }
 
-    pub fn clear_TURN_LEFT(&mut self) -> Self {
+    pub fn clear_turn_left(&mut self) -> Self {
         self.inner &= Self::TURN_LEFT.reverse_bits();
         *self
     }
 
-    pub const fn is_TURN_RIGHT(&self) -> bool {
+    pub const fn is_turn_right(&self) -> bool {
         (self.inner & Self::TURN_RIGHT) != 0
     }
 
-    pub const fn new_TURN_RIGHT() -> Self {
+    pub const fn new_turn_right() -> Self {
         Self { inner: Self::TURN_RIGHT }
     }
 
-    pub fn set_TURN_RIGHT(&mut self) -> Self {
+    pub fn set_turn_right(&mut self) -> Self {
         self.inner |= Self::TURN_RIGHT;
         *self
     }
 
-    pub fn clear_TURN_RIGHT(&mut self) -> Self {
+    pub fn clear_turn_right(&mut self) -> Self {
         self.inner &= Self::TURN_RIGHT.reverse_bits();
         *self
     }
 
-    pub const fn is_PITCH_UP(&self) -> bool {
+    pub const fn is_pitch_up(&self) -> bool {
         (self.inner & Self::PITCH_UP) != 0
     }
 
-    pub const fn new_PITCH_UP() -> Self {
+    pub const fn new_pitch_up() -> Self {
         Self { inner: Self::PITCH_UP }
     }
 
-    pub fn set_PITCH_UP(&mut self) -> Self {
+    pub fn set_pitch_up(&mut self) -> Self {
         self.inner |= Self::PITCH_UP;
         *self
     }
 
-    pub fn clear_PITCH_UP(&mut self) -> Self {
+    pub fn clear_pitch_up(&mut self) -> Self {
         self.inner &= Self::PITCH_UP.reverse_bits();
         *self
     }
 
-    pub const fn is_PITCH_DOWN(&self) -> bool {
+    pub const fn is_pitch_down(&self) -> bool {
         (self.inner & Self::PITCH_DOWN) != 0
     }
 
-    pub const fn new_PITCH_DOWN() -> Self {
+    pub const fn new_pitch_down() -> Self {
         Self { inner: Self::PITCH_DOWN }
     }
 
-    pub fn set_PITCH_DOWN(&mut self) -> Self {
+    pub fn set_pitch_down(&mut self) -> Self {
         self.inner |= Self::PITCH_DOWN;
         *self
     }
 
-    pub fn clear_PITCH_DOWN(&mut self) -> Self {
+    pub fn clear_pitch_down(&mut self) -> Self {
         self.inner &= Self::PITCH_DOWN.reverse_bits();
         *self
     }
 
-    pub const fn is_WALK_MODE(&self) -> bool {
+    pub const fn is_walk_mode(&self) -> bool {
         (self.inner & Self::WALK_MODE) != 0
     }
 
-    pub const fn new_WALK_MODE() -> Self {
+    pub const fn new_walk_mode() -> Self {
         Self { inner: Self::WALK_MODE }
     }
 
-    pub fn set_WALK_MODE(&mut self) -> Self {
+    pub fn set_walk_mode(&mut self) -> Self {
         self.inner |= Self::WALK_MODE;
         *self
     }
 
-    pub fn clear_WALK_MODE(&mut self) -> Self {
+    pub fn clear_walk_mode(&mut self) -> Self {
         self.inner &= Self::WALK_MODE.reverse_bits();
         *self
     }
 
-    pub const fn is_ON_TRANSPORT(&self) -> bool {
+    pub const fn is_on_transport(&self) -> bool {
         (self.inner & Self::ON_TRANSPORT) != 0
     }
 
-    pub const fn new_ON_TRANSPORT() -> Self {
+    pub const fn new_on_transport() -> Self {
         Self { inner: Self::ON_TRANSPORT }
     }
 
-    pub fn set_ON_TRANSPORT(&mut self) -> Self {
+    pub fn set_on_transport(&mut self) -> Self {
         self.inner |= Self::ON_TRANSPORT;
         *self
     }
 
-    pub fn clear_ON_TRANSPORT(&mut self) -> Self {
+    pub fn clear_on_transport(&mut self) -> Self {
         self.inner &= Self::ON_TRANSPORT.reverse_bits();
         *self
     }
 
-    pub const fn is_LEVITATING(&self) -> bool {
+    pub const fn is_levitating(&self) -> bool {
         (self.inner & Self::LEVITATING) != 0
     }
 
-    pub const fn new_LEVITATING() -> Self {
+    pub const fn new_levitating() -> Self {
         Self { inner: Self::LEVITATING }
     }
 
-    pub fn set_LEVITATING(&mut self) -> Self {
+    pub fn set_levitating(&mut self) -> Self {
         self.inner |= Self::LEVITATING;
         *self
     }
 
-    pub fn clear_LEVITATING(&mut self) -> Self {
+    pub fn clear_levitating(&mut self) -> Self {
         self.inner &= Self::LEVITATING.reverse_bits();
         *self
     }
 
-    pub const fn is_FIXED_Z(&self) -> bool {
+    pub const fn is_fixed_z(&self) -> bool {
         (self.inner & Self::FIXED_Z) != 0
     }
 
-    pub const fn new_FIXED_Z() -> Self {
+    pub const fn new_fixed_z() -> Self {
         Self { inner: Self::FIXED_Z }
     }
 
-    pub fn set_FIXED_Z(&mut self) -> Self {
+    pub fn set_fixed_z(&mut self) -> Self {
         self.inner |= Self::FIXED_Z;
         *self
     }
 
-    pub fn clear_FIXED_Z(&mut self) -> Self {
+    pub fn clear_fixed_z(&mut self) -> Self {
         self.inner &= Self::FIXED_Z.reverse_bits();
         *self
     }
 
-    pub const fn is_ROOT(&self) -> bool {
+    pub const fn is_root(&self) -> bool {
         (self.inner & Self::ROOT) != 0
     }
 
-    pub const fn new_ROOT() -> Self {
+    pub const fn new_root() -> Self {
         Self { inner: Self::ROOT }
     }
 
-    pub fn set_ROOT(&mut self) -> Self {
+    pub fn set_root(&mut self) -> Self {
         self.inner |= Self::ROOT;
         *self
     }
 
-    pub fn clear_ROOT(&mut self) -> Self {
+    pub fn clear_root(&mut self) -> Self {
         self.inner &= Self::ROOT.reverse_bits();
         *self
     }
 
-    pub const fn is_JUMPING(&self) -> bool {
+    pub const fn is_jumping(&self) -> bool {
         (self.inner & Self::JUMPING) != 0
     }
 
-    pub const fn new_JUMPING() -> Self {
+    pub const fn new_jumping() -> Self {
         Self { inner: Self::JUMPING }
     }
 
-    pub fn set_JUMPING(&mut self) -> Self {
+    pub fn set_jumping(&mut self) -> Self {
         self.inner |= Self::JUMPING;
         *self
     }
 
-    pub fn clear_JUMPING(&mut self) -> Self {
+    pub fn clear_jumping(&mut self) -> Self {
         self.inner &= Self::JUMPING.reverse_bits();
         *self
     }
 
-    pub const fn is_FALLINGFAR(&self) -> bool {
+    pub const fn is_fallingfar(&self) -> bool {
         (self.inner & Self::FALLINGFAR) != 0
     }
 
-    pub const fn new_FALLINGFAR() -> Self {
+    pub const fn new_fallingfar() -> Self {
         Self { inner: Self::FALLINGFAR }
     }
 
-    pub fn set_FALLINGFAR(&mut self) -> Self {
+    pub fn set_fallingfar(&mut self) -> Self {
         self.inner |= Self::FALLINGFAR;
         *self
     }
 
-    pub fn clear_FALLINGFAR(&mut self) -> Self {
+    pub fn clear_fallingfar(&mut self) -> Self {
         self.inner &= Self::FALLINGFAR.reverse_bits();
         *self
     }
 
-    pub const fn is_SWIMMING(&self) -> bool {
+    pub const fn is_swimming(&self) -> bool {
         (self.inner & Self::SWIMMING) != 0
     }
 
-    pub const fn new_SWIMMING() -> Self {
+    pub const fn new_swimming() -> Self {
         Self { inner: Self::SWIMMING }
     }
 
-    pub fn set_SWIMMING(&mut self) -> Self {
+    pub fn set_swimming(&mut self) -> Self {
         self.inner |= Self::SWIMMING;
         *self
     }
 
-    pub fn clear_SWIMMING(&mut self) -> Self {
+    pub fn clear_swimming(&mut self) -> Self {
         self.inner &= Self::SWIMMING.reverse_bits();
         *self
     }
 
-    pub const fn is_ASCENDING(&self) -> bool {
+    pub const fn is_ascending(&self) -> bool {
         (self.inner & Self::ASCENDING) != 0
     }
 
-    pub const fn new_ASCENDING() -> Self {
+    pub const fn new_ascending() -> Self {
         Self { inner: Self::ASCENDING }
     }
 
-    pub fn set_ASCENDING(&mut self) -> Self {
+    pub fn set_ascending(&mut self) -> Self {
         self.inner |= Self::ASCENDING;
         *self
     }
 
-    pub fn clear_ASCENDING(&mut self) -> Self {
+    pub fn clear_ascending(&mut self) -> Self {
         self.inner &= Self::ASCENDING.reverse_bits();
         *self
     }
 
-    pub const fn is_CAN_FLY(&self) -> bool {
+    pub const fn is_can_fly(&self) -> bool {
         (self.inner & Self::CAN_FLY) != 0
     }
 
-    pub const fn new_CAN_FLY() -> Self {
+    pub const fn new_can_fly() -> Self {
         Self { inner: Self::CAN_FLY }
     }
 
-    pub fn set_CAN_FLY(&mut self) -> Self {
+    pub fn set_can_fly(&mut self) -> Self {
         self.inner |= Self::CAN_FLY;
         *self
     }
 
-    pub fn clear_CAN_FLY(&mut self) -> Self {
+    pub fn clear_can_fly(&mut self) -> Self {
         self.inner &= Self::CAN_FLY.reverse_bits();
         *self
     }
 
-    pub const fn is_FLYING(&self) -> bool {
+    pub const fn is_flying(&self) -> bool {
         (self.inner & Self::FLYING) != 0
     }
 
-    pub const fn new_FLYING() -> Self {
+    pub const fn new_flying() -> Self {
         Self { inner: Self::FLYING }
     }
 
-    pub fn set_FLYING(&mut self) -> Self {
+    pub fn set_flying(&mut self) -> Self {
         self.inner |= Self::FLYING;
         *self
     }
 
-    pub fn clear_FLYING(&mut self) -> Self {
+    pub fn clear_flying(&mut self) -> Self {
         self.inner &= Self::FLYING.reverse_bits();
         *self
     }
 
-    pub const fn is_ONTRANSPORT(&self) -> bool {
+    pub const fn is_ontransport(&self) -> bool {
         (self.inner & Self::ONTRANSPORT) != 0
     }
 
-    pub const fn new_ONTRANSPORT() -> Self {
+    pub const fn new_ontransport() -> Self {
         Self { inner: Self::ONTRANSPORT }
     }
 
-    pub fn set_ONTRANSPORT(&mut self) -> Self {
+    pub fn set_ontransport(&mut self) -> Self {
         self.inner |= Self::ONTRANSPORT;
         *self
     }
 
-    pub fn clear_ONTRANSPORT(&mut self) -> Self {
+    pub fn clear_ontransport(&mut self) -> Self {
         self.inner &= Self::ONTRANSPORT.reverse_bits();
         *self
     }
 
-    pub const fn is_SPLINE_ELEVATION(&self) -> bool {
+    pub const fn is_spline_elevation(&self) -> bool {
         (self.inner & Self::SPLINE_ELEVATION) != 0
     }
 
-    pub const fn new_SPLINE_ELEVATION() -> Self {
+    pub const fn new_spline_elevation() -> Self {
         Self { inner: Self::SPLINE_ELEVATION }
     }
 
-    pub fn set_SPLINE_ELEVATION(&mut self) -> Self {
+    pub fn set_spline_elevation(&mut self) -> Self {
         self.inner |= Self::SPLINE_ELEVATION;
         *self
     }
 
-    pub fn clear_SPLINE_ELEVATION(&mut self) -> Self {
+    pub fn clear_spline_elevation(&mut self) -> Self {
         self.inner &= Self::SPLINE_ELEVATION.reverse_bits();
         *self
     }
 
-    pub const fn is_SPLINE_ENABLED(&self) -> bool {
+    pub const fn is_spline_enabled(&self) -> bool {
         (self.inner & Self::SPLINE_ENABLED) != 0
     }
 
-    pub const fn new_SPLINE_ENABLED() -> Self {
+    pub const fn new_spline_enabled() -> Self {
         Self { inner: Self::SPLINE_ENABLED }
     }
 
-    pub fn set_SPLINE_ENABLED(&mut self) -> Self {
+    pub fn set_spline_enabled(&mut self) -> Self {
         self.inner |= Self::SPLINE_ENABLED;
         *self
     }
 
-    pub fn clear_SPLINE_ENABLED(&mut self) -> Self {
+    pub fn clear_spline_enabled(&mut self) -> Self {
         self.inner &= Self::SPLINE_ENABLED.reverse_bits();
         *self
     }
 
-    pub const fn is_WATERWALKING(&self) -> bool {
+    pub const fn is_waterwalking(&self) -> bool {
         (self.inner & Self::WATERWALKING) != 0
     }
 
-    pub const fn new_WATERWALKING() -> Self {
+    pub const fn new_waterwalking() -> Self {
         Self { inner: Self::WATERWALKING }
     }
 
-    pub fn set_WATERWALKING(&mut self) -> Self {
+    pub fn set_waterwalking(&mut self) -> Self {
         self.inner |= Self::WATERWALKING;
         *self
     }
 
-    pub fn clear_WATERWALKING(&mut self) -> Self {
+    pub fn clear_waterwalking(&mut self) -> Self {
         self.inner &= Self::WATERWALKING.reverse_bits();
         *self
     }
 
-    pub const fn is_SAFE_FALL(&self) -> bool {
+    pub const fn is_safe_fall(&self) -> bool {
         (self.inner & Self::SAFE_FALL) != 0
     }
 
-    pub const fn new_SAFE_FALL() -> Self {
+    pub const fn new_safe_fall() -> Self {
         Self { inner: Self::SAFE_FALL }
     }
 
-    pub fn set_SAFE_FALL(&mut self) -> Self {
+    pub fn set_safe_fall(&mut self) -> Self {
         self.inner |= Self::SAFE_FALL;
         *self
     }
 
-    pub fn clear_SAFE_FALL(&mut self) -> Self {
+    pub fn clear_safe_fall(&mut self) -> Self {
         self.inner &= Self::SAFE_FALL.reverse_bits();
         *self
     }
 
-    pub const fn is_HOVER(&self) -> bool {
+    pub const fn is_hover(&self) -> bool {
         (self.inner & Self::HOVER) != 0
     }
 
-    pub const fn new_HOVER() -> Self {
+    pub const fn new_hover() -> Self {
         Self { inner: Self::HOVER }
     }
 
-    pub fn set_HOVER(&mut self) -> Self {
+    pub fn set_hover(&mut self) -> Self {
         self.inner |= Self::HOVER;
         *self
     }
 
-    pub fn clear_HOVER(&mut self) -> Self {
+    pub fn clear_hover(&mut self) -> Self {
         self.inner &= Self::HOVER.reverse_bits();
         *self
     }

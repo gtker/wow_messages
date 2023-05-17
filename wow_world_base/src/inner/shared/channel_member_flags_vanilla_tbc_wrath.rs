@@ -49,110 +49,110 @@ impl ChannelMemberFlags {
         }
     }
 
-    pub const fn is_OWNER(&self) -> bool {
+    pub const fn is_owner(&self) -> bool {
         (self.inner & Self::OWNER) != 0
     }
 
-    pub const fn new_OWNER() -> Self {
+    pub const fn new_owner() -> Self {
         Self { inner: Self::OWNER }
     }
 
-    pub fn set_OWNER(&mut self) -> Self {
+    pub fn set_owner(&mut self) -> Self {
         self.inner |= Self::OWNER;
         *self
     }
 
-    pub fn clear_OWNER(&mut self) -> Self {
+    pub fn clear_owner(&mut self) -> Self {
         self.inner &= Self::OWNER.reverse_bits();
         *self
     }
 
-    pub const fn is_MODERATOR(&self) -> bool {
+    pub const fn is_moderator(&self) -> bool {
         (self.inner & Self::MODERATOR) != 0
     }
 
-    pub const fn new_MODERATOR() -> Self {
+    pub const fn new_moderator() -> Self {
         Self { inner: Self::MODERATOR }
     }
 
-    pub fn set_MODERATOR(&mut self) -> Self {
+    pub fn set_moderator(&mut self) -> Self {
         self.inner |= Self::MODERATOR;
         *self
     }
 
-    pub fn clear_MODERATOR(&mut self) -> Self {
+    pub fn clear_moderator(&mut self) -> Self {
         self.inner &= Self::MODERATOR.reverse_bits();
         *self
     }
 
-    pub const fn is_VOICED(&self) -> bool {
+    pub const fn is_voiced(&self) -> bool {
         (self.inner & Self::VOICED) != 0
     }
 
-    pub const fn new_VOICED() -> Self {
+    pub const fn new_voiced() -> Self {
         Self { inner: Self::VOICED }
     }
 
-    pub fn set_VOICED(&mut self) -> Self {
+    pub fn set_voiced(&mut self) -> Self {
         self.inner |= Self::VOICED;
         *self
     }
 
-    pub fn clear_VOICED(&mut self) -> Self {
+    pub fn clear_voiced(&mut self) -> Self {
         self.inner &= Self::VOICED.reverse_bits();
         *self
     }
 
-    pub const fn is_MUTED(&self) -> bool {
+    pub const fn is_muted(&self) -> bool {
         (self.inner & Self::MUTED) != 0
     }
 
-    pub const fn new_MUTED() -> Self {
+    pub const fn new_muted() -> Self {
         Self { inner: Self::MUTED }
     }
 
-    pub fn set_MUTED(&mut self) -> Self {
+    pub fn set_muted(&mut self) -> Self {
         self.inner |= Self::MUTED;
         *self
     }
 
-    pub fn clear_MUTED(&mut self) -> Self {
+    pub fn clear_muted(&mut self) -> Self {
         self.inner &= Self::MUTED.reverse_bits();
         *self
     }
 
-    pub const fn is_CUSTOM(&self) -> bool {
+    pub const fn is_custom(&self) -> bool {
         (self.inner & Self::CUSTOM) != 0
     }
 
-    pub const fn new_CUSTOM() -> Self {
+    pub const fn new_custom() -> Self {
         Self { inner: Self::CUSTOM }
     }
 
-    pub fn set_CUSTOM(&mut self) -> Self {
+    pub fn set_custom(&mut self) -> Self {
         self.inner |= Self::CUSTOM;
         *self
     }
 
-    pub fn clear_CUSTOM(&mut self) -> Self {
+    pub fn clear_custom(&mut self) -> Self {
         self.inner &= Self::CUSTOM.reverse_bits();
         *self
     }
 
-    pub const fn is_MICROPHONE_MUTE(&self) -> bool {
+    pub const fn is_microphone_mute(&self) -> bool {
         (self.inner & Self::MICROPHONE_MUTE) != 0
     }
 
-    pub const fn new_MICROPHONE_MUTE() -> Self {
+    pub const fn new_microphone_mute() -> Self {
         Self { inner: Self::MICROPHONE_MUTE }
     }
 
-    pub fn set_MICROPHONE_MUTE(&mut self) -> Self {
+    pub fn set_microphone_mute(&mut self) -> Self {
         self.inner |= Self::MICROPHONE_MUTE;
         *self
     }
 
-    pub fn clear_MICROPHONE_MUTE(&mut self) -> Self {
+    pub fn clear_microphone_mute(&mut self) -> Self {
         self.inner &= Self::MICROPHONE_MUTE.reverse_bits();
         *self
     }

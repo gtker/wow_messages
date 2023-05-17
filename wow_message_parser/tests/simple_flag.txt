@@ -37,38 +37,38 @@ impl SimpleFlag {
         }
     }
 
-    pub const fn is_ONE(&self) -> bool {
+    pub const fn is_one(&self) -> bool {
         (self.inner & Self::ONE) != 0
     }
 
-    pub const fn new_ONE() -> Self {
+    pub const fn new_one() -> Self {
         Self { inner: Self::ONE }
     }
 
-    pub fn set_ONE(&mut self) -> Self {
+    pub fn set_one(&mut self) -> Self {
         self.inner |= Self::ONE;
         *self
     }
 
-    pub fn clear_ONE(&mut self) -> Self {
+    pub fn clear_one(&mut self) -> Self {
         self.inner &= Self::ONE.reverse_bits();
         *self
     }
 
-    pub const fn is_TWO(&self) -> bool {
+    pub const fn is_two(&self) -> bool {
         (self.inner & Self::TWO) != 0
     }
 
-    pub const fn new_TWO() -> Self {
+    pub const fn new_two() -> Self {
         Self { inner: Self::TWO }
     }
 
-    pub fn set_TWO(&mut self) -> Self {
+    pub fn set_two(&mut self) -> Self {
         self.inner |= Self::TWO;
         *self
     }
 
-    pub fn clear_TWO(&mut self) -> Self {
+    pub fn clear_two(&mut self) -> Self {
         self.inner &= Self::TWO.reverse_bits();
         *self
     }

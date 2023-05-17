@@ -127,578 +127,578 @@ impl AttributesEx2 {
         }
     }
 
-    pub const fn is_ALLOW_DEAD_TARGET(&self) -> bool {
+    pub const fn is_allow_dead_target(&self) -> bool {
         (self.inner & Self::ALLOW_DEAD_TARGET) != 0
     }
 
-    pub const fn new_ALLOW_DEAD_TARGET() -> Self {
+    pub const fn new_allow_dead_target() -> Self {
         Self { inner: Self::ALLOW_DEAD_TARGET }
     }
 
-    pub fn set_ALLOW_DEAD_TARGET(&mut self) -> Self {
+    pub fn set_allow_dead_target(&mut self) -> Self {
         self.inner |= Self::ALLOW_DEAD_TARGET;
         *self
     }
 
-    pub fn clear_ALLOW_DEAD_TARGET(&mut self) -> Self {
+    pub fn clear_allow_dead_target(&mut self) -> Self {
         self.inner &= Self::ALLOW_DEAD_TARGET.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_SHAPESHIFT_UI(&self) -> bool {
+    pub const fn is_no_shapeshift_ui(&self) -> bool {
         (self.inner & Self::NO_SHAPESHIFT_UI) != 0
     }
 
-    pub const fn new_NO_SHAPESHIFT_UI() -> Self {
+    pub const fn new_no_shapeshift_ui() -> Self {
         Self { inner: Self::NO_SHAPESHIFT_UI }
     }
 
-    pub fn set_NO_SHAPESHIFT_UI(&mut self) -> Self {
+    pub fn set_no_shapeshift_ui(&mut self) -> Self {
         self.inner |= Self::NO_SHAPESHIFT_UI;
         *self
     }
 
-    pub fn clear_NO_SHAPESHIFT_UI(&mut self) -> Self {
+    pub fn clear_no_shapeshift_ui(&mut self) -> Self {
         self.inner &= Self::NO_SHAPESHIFT_UI.reverse_bits();
         *self
     }
 
-    pub const fn is_IGNORE_LINE_OF_SIGHT(&self) -> bool {
+    pub const fn is_ignore_line_of_sight(&self) -> bool {
         (self.inner & Self::IGNORE_LINE_OF_SIGHT) != 0
     }
 
-    pub const fn new_IGNORE_LINE_OF_SIGHT() -> Self {
+    pub const fn new_ignore_line_of_sight() -> Self {
         Self { inner: Self::IGNORE_LINE_OF_SIGHT }
     }
 
-    pub fn set_IGNORE_LINE_OF_SIGHT(&mut self) -> Self {
+    pub fn set_ignore_line_of_sight(&mut self) -> Self {
         self.inner |= Self::IGNORE_LINE_OF_SIGHT;
         *self
     }
 
-    pub fn clear_IGNORE_LINE_OF_SIGHT(&mut self) -> Self {
+    pub fn clear_ignore_line_of_sight(&mut self) -> Self {
         self.inner &= Self::IGNORE_LINE_OF_SIGHT.reverse_bits();
         *self
     }
 
-    pub const fn is_ALLOW_LOW_LEVEL_BUFF(&self) -> bool {
+    pub const fn is_allow_low_level_buff(&self) -> bool {
         (self.inner & Self::ALLOW_LOW_LEVEL_BUFF) != 0
     }
 
-    pub const fn new_ALLOW_LOW_LEVEL_BUFF() -> Self {
+    pub const fn new_allow_low_level_buff() -> Self {
         Self { inner: Self::ALLOW_LOW_LEVEL_BUFF }
     }
 
-    pub fn set_ALLOW_LOW_LEVEL_BUFF(&mut self) -> Self {
+    pub fn set_allow_low_level_buff(&mut self) -> Self {
         self.inner |= Self::ALLOW_LOW_LEVEL_BUFF;
         *self
     }
 
-    pub fn clear_ALLOW_LOW_LEVEL_BUFF(&mut self) -> Self {
+    pub fn clear_allow_low_level_buff(&mut self) -> Self {
         self.inner &= Self::ALLOW_LOW_LEVEL_BUFF.reverse_bits();
         *self
     }
 
-    pub const fn is_USE_SHAPESHIFT_BAR(&self) -> bool {
+    pub const fn is_use_shapeshift_bar(&self) -> bool {
         (self.inner & Self::USE_SHAPESHIFT_BAR) != 0
     }
 
-    pub const fn new_USE_SHAPESHIFT_BAR() -> Self {
+    pub const fn new_use_shapeshift_bar() -> Self {
         Self { inner: Self::USE_SHAPESHIFT_BAR }
     }
 
-    pub fn set_USE_SHAPESHIFT_BAR(&mut self) -> Self {
+    pub fn set_use_shapeshift_bar(&mut self) -> Self {
         self.inner |= Self::USE_SHAPESHIFT_BAR;
         *self
     }
 
-    pub fn clear_USE_SHAPESHIFT_BAR(&mut self) -> Self {
+    pub fn clear_use_shapeshift_bar(&mut self) -> Self {
         self.inner &= Self::USE_SHAPESHIFT_BAR.reverse_bits();
         *self
     }
 
-    pub const fn is_AUTO_REPEAT(&self) -> bool {
+    pub const fn is_auto_repeat(&self) -> bool {
         (self.inner & Self::AUTO_REPEAT) != 0
     }
 
-    pub const fn new_AUTO_REPEAT() -> Self {
+    pub const fn new_auto_repeat() -> Self {
         Self { inner: Self::AUTO_REPEAT }
     }
 
-    pub fn set_AUTO_REPEAT(&mut self) -> Self {
+    pub fn set_auto_repeat(&mut self) -> Self {
         self.inner |= Self::AUTO_REPEAT;
         *self
     }
 
-    pub fn clear_AUTO_REPEAT(&mut self) -> Self {
+    pub fn clear_auto_repeat(&mut self) -> Self {
         self.inner &= Self::AUTO_REPEAT.reverse_bits();
         *self
     }
 
-    pub const fn is_CANNOT_CAST_ON_TAPPED(&self) -> bool {
+    pub const fn is_cannot_cast_on_tapped(&self) -> bool {
         (self.inner & Self::CANNOT_CAST_ON_TAPPED) != 0
     }
 
-    pub const fn new_CANNOT_CAST_ON_TAPPED() -> Self {
+    pub const fn new_cannot_cast_on_tapped() -> Self {
         Self { inner: Self::CANNOT_CAST_ON_TAPPED }
     }
 
-    pub fn set_CANNOT_CAST_ON_TAPPED(&mut self) -> Self {
+    pub fn set_cannot_cast_on_tapped(&mut self) -> Self {
         self.inner |= Self::CANNOT_CAST_ON_TAPPED;
         *self
     }
 
-    pub fn clear_CANNOT_CAST_ON_TAPPED(&mut self) -> Self {
+    pub fn clear_cannot_cast_on_tapped(&mut self) -> Self {
         self.inner &= Self::CANNOT_CAST_ON_TAPPED.reverse_bits();
         *self
     }
 
-    pub const fn is_DO_NOT_REPORT_SPELL_FAILURE(&self) -> bool {
+    pub const fn is_do_not_report_spell_failure(&self) -> bool {
         (self.inner & Self::DO_NOT_REPORT_SPELL_FAILURE) != 0
     }
 
-    pub const fn new_DO_NOT_REPORT_SPELL_FAILURE() -> Self {
+    pub const fn new_do_not_report_spell_failure() -> Self {
         Self { inner: Self::DO_NOT_REPORT_SPELL_FAILURE }
     }
 
-    pub fn set_DO_NOT_REPORT_SPELL_FAILURE(&mut self) -> Self {
+    pub fn set_do_not_report_spell_failure(&mut self) -> Self {
         self.inner |= Self::DO_NOT_REPORT_SPELL_FAILURE;
         *self
     }
 
-    pub fn clear_DO_NOT_REPORT_SPELL_FAILURE(&mut self) -> Self {
+    pub fn clear_do_not_report_spell_failure(&mut self) -> Self {
         self.inner &= Self::DO_NOT_REPORT_SPELL_FAILURE.reverse_bits();
         *self
     }
 
-    pub const fn is_INCLUDE_IN_ADVANCED_COMBAT_LOG(&self) -> bool {
+    pub const fn is_include_in_advanced_combat_log(&self) -> bool {
         (self.inner & Self::INCLUDE_IN_ADVANCED_COMBAT_LOG) != 0
     }
 
-    pub const fn new_INCLUDE_IN_ADVANCED_COMBAT_LOG() -> Self {
+    pub const fn new_include_in_advanced_combat_log() -> Self {
         Self { inner: Self::INCLUDE_IN_ADVANCED_COMBAT_LOG }
     }
 
-    pub fn set_INCLUDE_IN_ADVANCED_COMBAT_LOG(&mut self) -> Self {
+    pub fn set_include_in_advanced_combat_log(&mut self) -> Self {
         self.inner |= Self::INCLUDE_IN_ADVANCED_COMBAT_LOG;
         *self
     }
 
-    pub fn clear_INCLUDE_IN_ADVANCED_COMBAT_LOG(&mut self) -> Self {
+    pub fn clear_include_in_advanced_combat_log(&mut self) -> Self {
         self.inner &= Self::INCLUDE_IN_ADVANCED_COMBAT_LOG.reverse_bits();
         *self
     }
 
-    pub const fn is_ALWAYS_CAST_AS_UNIT(&self) -> bool {
+    pub const fn is_always_cast_as_unit(&self) -> bool {
         (self.inner & Self::ALWAYS_CAST_AS_UNIT) != 0
     }
 
-    pub const fn new_ALWAYS_CAST_AS_UNIT() -> Self {
+    pub const fn new_always_cast_as_unit() -> Self {
         Self { inner: Self::ALWAYS_CAST_AS_UNIT }
     }
 
-    pub fn set_ALWAYS_CAST_AS_UNIT(&mut self) -> Self {
+    pub fn set_always_cast_as_unit(&mut self) -> Self {
         self.inner |= Self::ALWAYS_CAST_AS_UNIT;
         *self
     }
 
-    pub fn clear_ALWAYS_CAST_AS_UNIT(&mut self) -> Self {
+    pub fn clear_always_cast_as_unit(&mut self) -> Self {
         self.inner &= Self::ALWAYS_CAST_AS_UNIT.reverse_bits();
         *self
     }
 
-    pub const fn is_SPECIAL_TAMING_FLAG(&self) -> bool {
+    pub const fn is_special_taming_flag(&self) -> bool {
         (self.inner & Self::SPECIAL_TAMING_FLAG) != 0
     }
 
-    pub const fn new_SPECIAL_TAMING_FLAG() -> Self {
+    pub const fn new_special_taming_flag() -> Self {
         Self { inner: Self::SPECIAL_TAMING_FLAG }
     }
 
-    pub fn set_SPECIAL_TAMING_FLAG(&mut self) -> Self {
+    pub fn set_special_taming_flag(&mut self) -> Self {
         self.inner |= Self::SPECIAL_TAMING_FLAG;
         *self
     }
 
-    pub fn clear_SPECIAL_TAMING_FLAG(&mut self) -> Self {
+    pub fn clear_special_taming_flag(&mut self) -> Self {
         self.inner &= Self::SPECIAL_TAMING_FLAG.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_TARGET_PER_SECOND_COSTS(&self) -> bool {
+    pub const fn is_no_target_per_second_costs(&self) -> bool {
         (self.inner & Self::NO_TARGET_PER_SECOND_COSTS) != 0
     }
 
-    pub const fn new_NO_TARGET_PER_SECOND_COSTS() -> Self {
+    pub const fn new_no_target_per_second_costs() -> Self {
         Self { inner: Self::NO_TARGET_PER_SECOND_COSTS }
     }
 
-    pub fn set_NO_TARGET_PER_SECOND_COSTS(&mut self) -> Self {
+    pub fn set_no_target_per_second_costs(&mut self) -> Self {
         self.inner |= Self::NO_TARGET_PER_SECOND_COSTS;
         *self
     }
 
-    pub fn clear_NO_TARGET_PER_SECOND_COSTS(&mut self) -> Self {
+    pub fn clear_no_target_per_second_costs(&mut self) -> Self {
         self.inner &= Self::NO_TARGET_PER_SECOND_COSTS.reverse_bits();
         *self
     }
 
-    pub const fn is_CHAIN_FROM_CASTER(&self) -> bool {
+    pub const fn is_chain_from_caster(&self) -> bool {
         (self.inner & Self::CHAIN_FROM_CASTER) != 0
     }
 
-    pub const fn new_CHAIN_FROM_CASTER() -> Self {
+    pub const fn new_chain_from_caster() -> Self {
         Self { inner: Self::CHAIN_FROM_CASTER }
     }
 
-    pub fn set_CHAIN_FROM_CASTER(&mut self) -> Self {
+    pub fn set_chain_from_caster(&mut self) -> Self {
         self.inner |= Self::CHAIN_FROM_CASTER;
         *self
     }
 
-    pub fn clear_CHAIN_FROM_CASTER(&mut self) -> Self {
+    pub fn clear_chain_from_caster(&mut self) -> Self {
         self.inner &= Self::CHAIN_FROM_CASTER.reverse_bits();
         *self
     }
 
-    pub const fn is_ENCHANT_OWN_ITEM_ONLY(&self) -> bool {
+    pub const fn is_enchant_own_item_only(&self) -> bool {
         (self.inner & Self::ENCHANT_OWN_ITEM_ONLY) != 0
     }
 
-    pub const fn new_ENCHANT_OWN_ITEM_ONLY() -> Self {
+    pub const fn new_enchant_own_item_only() -> Self {
         Self { inner: Self::ENCHANT_OWN_ITEM_ONLY }
     }
 
-    pub fn set_ENCHANT_OWN_ITEM_ONLY(&mut self) -> Self {
+    pub fn set_enchant_own_item_only(&mut self) -> Self {
         self.inner |= Self::ENCHANT_OWN_ITEM_ONLY;
         *self
     }
 
-    pub fn clear_ENCHANT_OWN_ITEM_ONLY(&mut self) -> Self {
+    pub fn clear_enchant_own_item_only(&mut self) -> Self {
         self.inner &= Self::ENCHANT_OWN_ITEM_ONLY.reverse_bits();
         *self
     }
 
-    pub const fn is_ALLOW_WHILE_INVISIBLE(&self) -> bool {
+    pub const fn is_allow_while_invisible(&self) -> bool {
         (self.inner & Self::ALLOW_WHILE_INVISIBLE) != 0
     }
 
-    pub const fn new_ALLOW_WHILE_INVISIBLE() -> Self {
+    pub const fn new_allow_while_invisible() -> Self {
         Self { inner: Self::ALLOW_WHILE_INVISIBLE }
     }
 
-    pub fn set_ALLOW_WHILE_INVISIBLE(&mut self) -> Self {
+    pub fn set_allow_while_invisible(&mut self) -> Self {
         self.inner |= Self::ALLOW_WHILE_INVISIBLE;
         *self
     }
 
-    pub fn clear_ALLOW_WHILE_INVISIBLE(&mut self) -> Self {
+    pub fn clear_allow_while_invisible(&mut self) -> Self {
         self.inner &= Self::ALLOW_WHILE_INVISIBLE.reverse_bits();
         *self
     }
 
-    pub const fn is_UNK15(&self) -> bool {
+    pub const fn is_unk15(&self) -> bool {
         (self.inner & Self::UNK15) != 0
     }
 
-    pub const fn new_UNK15() -> Self {
+    pub const fn new_unk15() -> Self {
         Self { inner: Self::UNK15 }
     }
 
-    pub fn set_UNK15(&mut self) -> Self {
+    pub fn set_unk15(&mut self) -> Self {
         self.inner |= Self::UNK15;
         *self
     }
 
-    pub fn clear_UNK15(&mut self) -> Self {
+    pub fn clear_unk15(&mut self) -> Self {
         self.inner &= Self::UNK15.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_ACTIVE_PETS(&self) -> bool {
+    pub const fn is_no_active_pets(&self) -> bool {
         (self.inner & Self::NO_ACTIVE_PETS) != 0
     }
 
-    pub const fn new_NO_ACTIVE_PETS() -> Self {
+    pub const fn new_no_active_pets() -> Self {
         Self { inner: Self::NO_ACTIVE_PETS }
     }
 
-    pub fn set_NO_ACTIVE_PETS(&mut self) -> Self {
+    pub fn set_no_active_pets(&mut self) -> Self {
         self.inner |= Self::NO_ACTIVE_PETS;
         *self
     }
 
-    pub fn clear_NO_ACTIVE_PETS(&mut self) -> Self {
+    pub fn clear_no_active_pets(&mut self) -> Self {
         self.inner &= Self::NO_ACTIVE_PETS.reverse_bits();
         *self
     }
 
-    pub const fn is_DO_NOT_RESET_COMBAT_TIMERS(&self) -> bool {
+    pub const fn is_do_not_reset_combat_timers(&self) -> bool {
         (self.inner & Self::DO_NOT_RESET_COMBAT_TIMERS) != 0
     }
 
-    pub const fn new_DO_NOT_RESET_COMBAT_TIMERS() -> Self {
+    pub const fn new_do_not_reset_combat_timers() -> Self {
         Self { inner: Self::DO_NOT_RESET_COMBAT_TIMERS }
     }
 
-    pub fn set_DO_NOT_RESET_COMBAT_TIMERS(&mut self) -> Self {
+    pub fn set_do_not_reset_combat_timers(&mut self) -> Self {
         self.inner |= Self::DO_NOT_RESET_COMBAT_TIMERS;
         *self
     }
 
-    pub fn clear_DO_NOT_RESET_COMBAT_TIMERS(&mut self) -> Self {
+    pub fn clear_do_not_reset_combat_timers(&mut self) -> Self {
         self.inner &= Self::DO_NOT_RESET_COMBAT_TIMERS.reverse_bits();
         *self
     }
 
-    pub const fn is_REQ_DEAD_PET(&self) -> bool {
+    pub const fn is_req_dead_pet(&self) -> bool {
         (self.inner & Self::REQ_DEAD_PET) != 0
     }
 
-    pub const fn new_REQ_DEAD_PET() -> Self {
+    pub const fn new_req_dead_pet() -> Self {
         Self { inner: Self::REQ_DEAD_PET }
     }
 
-    pub fn set_REQ_DEAD_PET(&mut self) -> Self {
+    pub fn set_req_dead_pet(&mut self) -> Self {
         self.inner |= Self::REQ_DEAD_PET;
         *self
     }
 
-    pub fn clear_REQ_DEAD_PET(&mut self) -> Self {
+    pub fn clear_req_dead_pet(&mut self) -> Self {
         self.inner &= Self::REQ_DEAD_PET.reverse_bits();
         *self
     }
 
-    pub const fn is_ALLOW_WHILE_NOT_SHAPESHIFTED(&self) -> bool {
+    pub const fn is_allow_while_not_shapeshifted(&self) -> bool {
         (self.inner & Self::ALLOW_WHILE_NOT_SHAPESHIFTED) != 0
     }
 
-    pub const fn new_ALLOW_WHILE_NOT_SHAPESHIFTED() -> Self {
+    pub const fn new_allow_while_not_shapeshifted() -> Self {
         Self { inner: Self::ALLOW_WHILE_NOT_SHAPESHIFTED }
     }
 
-    pub fn set_ALLOW_WHILE_NOT_SHAPESHIFTED(&mut self) -> Self {
+    pub fn set_allow_while_not_shapeshifted(&mut self) -> Self {
         self.inner |= Self::ALLOW_WHILE_NOT_SHAPESHIFTED;
         *self
     }
 
-    pub fn clear_ALLOW_WHILE_NOT_SHAPESHIFTED(&mut self) -> Self {
+    pub fn clear_allow_while_not_shapeshifted(&mut self) -> Self {
         self.inner &= Self::ALLOW_WHILE_NOT_SHAPESHIFTED.reverse_bits();
         *self
     }
 
-    pub const fn is_INITIATE_COMBAT_POST_CAST(&self) -> bool {
+    pub const fn is_initiate_combat_post_cast(&self) -> bool {
         (self.inner & Self::INITIATE_COMBAT_POST_CAST) != 0
     }
 
-    pub const fn new_INITIATE_COMBAT_POST_CAST() -> Self {
+    pub const fn new_initiate_combat_post_cast() -> Self {
         Self { inner: Self::INITIATE_COMBAT_POST_CAST }
     }
 
-    pub fn set_INITIATE_COMBAT_POST_CAST(&mut self) -> Self {
+    pub fn set_initiate_combat_post_cast(&mut self) -> Self {
         self.inner |= Self::INITIATE_COMBAT_POST_CAST;
         *self
     }
 
-    pub fn clear_INITIATE_COMBAT_POST_CAST(&mut self) -> Self {
+    pub fn clear_initiate_combat_post_cast(&mut self) -> Self {
         self.inner &= Self::INITIATE_COMBAT_POST_CAST.reverse_bits();
         *self
     }
 
-    pub const fn is_FAIL_ON_ALL_TARGETS_IMMUNE(&self) -> bool {
+    pub const fn is_fail_on_all_targets_immune(&self) -> bool {
         (self.inner & Self::FAIL_ON_ALL_TARGETS_IMMUNE) != 0
     }
 
-    pub const fn new_FAIL_ON_ALL_TARGETS_IMMUNE() -> Self {
+    pub const fn new_fail_on_all_targets_immune() -> Self {
         Self { inner: Self::FAIL_ON_ALL_TARGETS_IMMUNE }
     }
 
-    pub fn set_FAIL_ON_ALL_TARGETS_IMMUNE(&mut self) -> Self {
+    pub fn set_fail_on_all_targets_immune(&mut self) -> Self {
         self.inner |= Self::FAIL_ON_ALL_TARGETS_IMMUNE;
         *self
     }
 
-    pub fn clear_FAIL_ON_ALL_TARGETS_IMMUNE(&mut self) -> Self {
+    pub fn clear_fail_on_all_targets_immune(&mut self) -> Self {
         self.inner &= Self::FAIL_ON_ALL_TARGETS_IMMUNE.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_INITIAL_THREAT(&self) -> bool {
+    pub const fn is_no_initial_threat(&self) -> bool {
         (self.inner & Self::NO_INITIAL_THREAT) != 0
     }
 
-    pub const fn new_NO_INITIAL_THREAT() -> Self {
+    pub const fn new_no_initial_threat() -> Self {
         Self { inner: Self::NO_INITIAL_THREAT }
     }
 
-    pub fn set_NO_INITIAL_THREAT(&mut self) -> Self {
+    pub fn set_no_initial_threat(&mut self) -> Self {
         self.inner |= Self::NO_INITIAL_THREAT;
         *self
     }
 
-    pub fn clear_NO_INITIAL_THREAT(&mut self) -> Self {
+    pub fn clear_no_initial_threat(&mut self) -> Self {
         self.inner &= Self::NO_INITIAL_THREAT.reverse_bits();
         *self
     }
 
-    pub const fn is_PROC_COOLDOWN_ON_FAILURE(&self) -> bool {
+    pub const fn is_proc_cooldown_on_failure(&self) -> bool {
         (self.inner & Self::PROC_COOLDOWN_ON_FAILURE) != 0
     }
 
-    pub const fn new_PROC_COOLDOWN_ON_FAILURE() -> Self {
+    pub const fn new_proc_cooldown_on_failure() -> Self {
         Self { inner: Self::PROC_COOLDOWN_ON_FAILURE }
     }
 
-    pub fn set_PROC_COOLDOWN_ON_FAILURE(&mut self) -> Self {
+    pub fn set_proc_cooldown_on_failure(&mut self) -> Self {
         self.inner |= Self::PROC_COOLDOWN_ON_FAILURE;
         *self
     }
 
-    pub fn clear_PROC_COOLDOWN_ON_FAILURE(&mut self) -> Self {
+    pub fn clear_proc_cooldown_on_failure(&mut self) -> Self {
         self.inner &= Self::PROC_COOLDOWN_ON_FAILURE.reverse_bits();
         *self
     }
 
-    pub const fn is_ITEM_CAST_WITH_OWNER_SKILL(&self) -> bool {
+    pub const fn is_item_cast_with_owner_skill(&self) -> bool {
         (self.inner & Self::ITEM_CAST_WITH_OWNER_SKILL) != 0
     }
 
-    pub const fn new_ITEM_CAST_WITH_OWNER_SKILL() -> Self {
+    pub const fn new_item_cast_with_owner_skill() -> Self {
         Self { inner: Self::ITEM_CAST_WITH_OWNER_SKILL }
     }
 
-    pub fn set_ITEM_CAST_WITH_OWNER_SKILL(&mut self) -> Self {
+    pub fn set_item_cast_with_owner_skill(&mut self) -> Self {
         self.inner |= Self::ITEM_CAST_WITH_OWNER_SKILL;
         *self
     }
 
-    pub fn clear_ITEM_CAST_WITH_OWNER_SKILL(&mut self) -> Self {
+    pub fn clear_item_cast_with_owner_skill(&mut self) -> Self {
         self.inner &= Self::ITEM_CAST_WITH_OWNER_SKILL.reverse_bits();
         *self
     }
 
-    pub const fn is_DONT_BLOCK_MANA_REGEN(&self) -> bool {
+    pub const fn is_dont_block_mana_regen(&self) -> bool {
         (self.inner & Self::DONT_BLOCK_MANA_REGEN) != 0
     }
 
-    pub const fn new_DONT_BLOCK_MANA_REGEN() -> Self {
+    pub const fn new_dont_block_mana_regen() -> Self {
         Self { inner: Self::DONT_BLOCK_MANA_REGEN }
     }
 
-    pub fn set_DONT_BLOCK_MANA_REGEN(&mut self) -> Self {
+    pub fn set_dont_block_mana_regen(&mut self) -> Self {
         self.inner |= Self::DONT_BLOCK_MANA_REGEN;
         *self
     }
 
-    pub fn clear_DONT_BLOCK_MANA_REGEN(&mut self) -> Self {
+    pub fn clear_dont_block_mana_regen(&mut self) -> Self {
         self.inner &= Self::DONT_BLOCK_MANA_REGEN.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_SCHOOL_IMMUNITIES(&self) -> bool {
+    pub const fn is_no_school_immunities(&self) -> bool {
         (self.inner & Self::NO_SCHOOL_IMMUNITIES) != 0
     }
 
-    pub const fn new_NO_SCHOOL_IMMUNITIES() -> Self {
+    pub const fn new_no_school_immunities() -> Self {
         Self { inner: Self::NO_SCHOOL_IMMUNITIES }
     }
 
-    pub fn set_NO_SCHOOL_IMMUNITIES(&mut self) -> Self {
+    pub fn set_no_school_immunities(&mut self) -> Self {
         self.inner |= Self::NO_SCHOOL_IMMUNITIES;
         *self
     }
 
-    pub fn clear_NO_SCHOOL_IMMUNITIES(&mut self) -> Self {
+    pub fn clear_no_school_immunities(&mut self) -> Self {
         self.inner &= Self::NO_SCHOOL_IMMUNITIES.reverse_bits();
         *self
     }
 
-    pub const fn is_IGNORE_WEAPONSKILL(&self) -> bool {
+    pub const fn is_ignore_weaponskill(&self) -> bool {
         (self.inner & Self::IGNORE_WEAPONSKILL) != 0
     }
 
-    pub const fn new_IGNORE_WEAPONSKILL() -> Self {
+    pub const fn new_ignore_weaponskill() -> Self {
         Self { inner: Self::IGNORE_WEAPONSKILL }
     }
 
-    pub fn set_IGNORE_WEAPONSKILL(&mut self) -> Self {
+    pub fn set_ignore_weaponskill(&mut self) -> Self {
         self.inner |= Self::IGNORE_WEAPONSKILL;
         *self
     }
 
-    pub fn clear_IGNORE_WEAPONSKILL(&mut self) -> Self {
+    pub fn clear_ignore_weaponskill(&mut self) -> Self {
         self.inner &= Self::IGNORE_WEAPONSKILL.reverse_bits();
         *self
     }
 
-    pub const fn is_NOT_AN_ACTION(&self) -> bool {
+    pub const fn is_not_an_action(&self) -> bool {
         (self.inner & Self::NOT_AN_ACTION) != 0
     }
 
-    pub const fn new_NOT_AN_ACTION() -> Self {
+    pub const fn new_not_an_action() -> Self {
         Self { inner: Self::NOT_AN_ACTION }
     }
 
-    pub fn set_NOT_AN_ACTION(&mut self) -> Self {
+    pub fn set_not_an_action(&mut self) -> Self {
         self.inner |= Self::NOT_AN_ACTION;
         *self
     }
 
-    pub fn clear_NOT_AN_ACTION(&mut self) -> Self {
+    pub fn clear_not_an_action(&mut self) -> Self {
         self.inner &= Self::NOT_AN_ACTION.reverse_bits();
         *self
     }
 
-    pub const fn is_CANT_CRIT(&self) -> bool {
+    pub const fn is_cant_crit(&self) -> bool {
         (self.inner & Self::CANT_CRIT) != 0
     }
 
-    pub const fn new_CANT_CRIT() -> Self {
+    pub const fn new_cant_crit() -> Self {
         Self { inner: Self::CANT_CRIT }
     }
 
-    pub fn set_CANT_CRIT(&mut self) -> Self {
+    pub fn set_cant_crit(&mut self) -> Self {
         self.inner |= Self::CANT_CRIT;
         *self
     }
 
-    pub fn clear_CANT_CRIT(&mut self) -> Self {
+    pub fn clear_cant_crit(&mut self) -> Self {
         self.inner &= Self::CANT_CRIT.reverse_bits();
         *self
     }
 
-    pub const fn is_ACTIVE_THREAT(&self) -> bool {
+    pub const fn is_active_threat(&self) -> bool {
         (self.inner & Self::ACTIVE_THREAT) != 0
     }
 
-    pub const fn new_ACTIVE_THREAT() -> Self {
+    pub const fn new_active_threat() -> Self {
         Self { inner: Self::ACTIVE_THREAT }
     }
 
-    pub fn set_ACTIVE_THREAT(&mut self) -> Self {
+    pub fn set_active_threat(&mut self) -> Self {
         self.inner |= Self::ACTIVE_THREAT;
         *self
     }
 
-    pub fn clear_ACTIVE_THREAT(&mut self) -> Self {
+    pub fn clear_active_threat(&mut self) -> Self {
         self.inner &= Self::ACTIVE_THREAT.reverse_bits();
         *self
     }
 
-    pub const fn is_RETAIN_ITEM_CAST(&self) -> bool {
+    pub const fn is_retain_item_cast(&self) -> bool {
         (self.inner & Self::RETAIN_ITEM_CAST) != 0
     }
 
-    pub const fn new_RETAIN_ITEM_CAST() -> Self {
+    pub const fn new_retain_item_cast() -> Self {
         Self { inner: Self::RETAIN_ITEM_CAST }
     }
 
-    pub fn set_RETAIN_ITEM_CAST(&mut self) -> Self {
+    pub fn set_retain_item_cast(&mut self) -> Self {
         self.inner |= Self::RETAIN_ITEM_CAST;
         *self
     }
 
-    pub fn clear_RETAIN_ITEM_CAST(&mut self) -> Self {
+    pub fn clear_retain_item_cast(&mut self) -> Self {
         self.inner &= Self::RETAIN_ITEM_CAST.reverse_bits();
         *self
     }

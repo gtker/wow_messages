@@ -122,26 +122,30 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
         }
 
         if !enumerator.has_members_in_struct() {
-            s.funcn_pub_const(format!("new_{}()", enumerator.name()), "Self", |s| {
-                s.body("Self", |s| {
-                    s.wln(format!(
-                        "inner: {parent}::{name},",
-                        parent = rd.original_ty_name(),
-                        name = enumerator.name()
-                    ));
-
-                    for inner_enumerator in rd.complex_flag_enumerators() {
+            s.funcn_pub_const(
+                format!("new_{}()", enumerator.name().to_lowercase()),
+                "Self",
+                |s| {
+                    s.body("Self", |s| {
                         s.wln(format!(
-                            "{name}: None,",
-                            name = inner_enumerator.name().to_lowercase()
+                            "inner: {parent}::{name},",
+                            parent = rd.original_ty_name(),
+                            name = enumerator.name()
                         ));
-                    }
-                });
-            });
+
+                        for inner_enumerator in rd.complex_flag_enumerators() {
+                            s.wln(format!(
+                                "{name}: None,",
+                                name = inner_enumerator.name().to_lowercase()
+                            ));
+                        }
+                    });
+                },
+            );
 
             s.wln(CLIPPY_MISSING_FN);
             s.funcn_pub(
-                format!("set_{}(mut self)", enumerator.name()),
+                format!("set_{}(mut self)", enumerator.name().to_lowercase()),
                 "Self",
                 |s| {
                     s.wln(format!(
@@ -154,28 +158,31 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
                 },
             );
 
-            s.funcn_pub_const(format!("get_{}(&self)", enumerator.name()), "bool", |s| {
-                if enumerator.value().int() == 0 {
-                    s.wln("// Underlying value is 0");
-                    s.wln(format!(
-                        "self.inner == {ty}::{name}",
-                        ty = rd.original_ty_name(),
-                        name = enumerator.name()
-                    ));
-                } else {
-                    s.wln(format!(
-                        "(self.inner & {ty}::{name}) != 0",
-                        ty = rd.original_ty_name(),
-                        name = enumerator.name()
-                    ));
-                }
-            });
+            s.funcn_pub_const(
+                format!("get_{}(&self)", enumerator.name().to_lowercase()),
+                "bool",
+                |s| {
+                    if enumerator.value().int() == 0 {
+                        s.wln("// Underlying value is 0");
+                        s.wln(format!(
+                            "self.inner == {ty}::{name}",
+                            ty = rd.original_ty_name(),
+                            name = enumerator.name()
+                        ));
+                    } else {
+                        s.wln(format!(
+                            "(self.inner & {ty}::{name}) != 0",
+                            ty = rd.original_ty_name(),
+                            name = enumerator.name()
+                        ));
+                    }
+                },
+            );
         } else {
             let new_ty = get_new_flag_type_name(rd.ty_name(), enumerator.rust_name());
             s.funcn_pub_const(
                 format!(
-                    "new_{upper_name}({lower_name}: {new_ty})",
-                    upper_name = enumerator.name(),
+                    "new_{lower_name}({lower_name}: {new_ty})",
                     lower_name = enumerator.name().to_lowercase(),
                     new_ty = new_ty,
                 ),
@@ -215,8 +222,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
             s.wln(CLIPPY_MISSING_FN);
             s.funcn_pub(
                 format!(
-                    "set_{upper_name}(mut self, {lower_name}: {new_ty})",
-                    upper_name = enumerator.name(),
+                    "set_{lower_name}(mut self, {lower_name}: {new_ty})",
                     lower_name = enumerator.name().to_lowercase(),
                     new_ty = new_ty,
                 ),
@@ -245,7 +251,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
             );
 
             s.funcn_pub_const(
-                format!("get_{}(&self)", enumerator.name()),
+                format!("get_{}(&self)", enumerator.name().to_lowercase()),
                 format!("Option<&{new_ty}>"),
                 |s| {
                     s.wln(format!(
@@ -258,7 +264,7 @@ fn print_constructors_for_new_flag(s: &mut Writer, rd: &RustDefiner) {
 
         s.wln(CLIPPY_MISSING_FN);
         s.funcn_pub(
-            format!("clear_{}(mut self)", enumerator.name()),
+            format!("clear_{}(mut self)", enumerator.name().to_lowercase()),
             "Self",
             |s| {
                 s.wln(format!(

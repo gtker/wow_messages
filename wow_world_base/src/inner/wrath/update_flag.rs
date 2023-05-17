@@ -61,182 +61,182 @@ impl UpdateFlag {
         }
     }
 
-    pub const fn is_SELF(&self) -> bool {
+    pub const fn is_self(&self) -> bool {
         (self.inner & Self::SELF) != 0
     }
 
-    pub const fn new_SELF() -> Self {
+    pub const fn new_self() -> Self {
         Self { inner: Self::SELF }
     }
 
-    pub fn set_SELF(&mut self) -> Self {
+    pub fn set_self(&mut self) -> Self {
         self.inner |= Self::SELF;
         *self
     }
 
-    pub fn clear_SELF(&mut self) -> Self {
+    pub fn clear_self(&mut self) -> Self {
         self.inner &= Self::SELF.reverse_bits();
         *self
     }
 
-    pub const fn is_TRANSPORT(&self) -> bool {
+    pub const fn is_transport(&self) -> bool {
         (self.inner & Self::TRANSPORT) != 0
     }
 
-    pub const fn new_TRANSPORT() -> Self {
+    pub const fn new_transport() -> Self {
         Self { inner: Self::TRANSPORT }
     }
 
-    pub fn set_TRANSPORT(&mut self) -> Self {
+    pub fn set_transport(&mut self) -> Self {
         self.inner |= Self::TRANSPORT;
         *self
     }
 
-    pub fn clear_TRANSPORT(&mut self) -> Self {
+    pub fn clear_transport(&mut self) -> Self {
         self.inner &= Self::TRANSPORT.reverse_bits();
         *self
     }
 
-    pub const fn is_HAS_ATTACKING_TARGET(&self) -> bool {
+    pub const fn is_has_attacking_target(&self) -> bool {
         (self.inner & Self::HAS_ATTACKING_TARGET) != 0
     }
 
-    pub const fn new_HAS_ATTACKING_TARGET() -> Self {
+    pub const fn new_has_attacking_target() -> Self {
         Self { inner: Self::HAS_ATTACKING_TARGET }
     }
 
-    pub fn set_HAS_ATTACKING_TARGET(&mut self) -> Self {
+    pub fn set_has_attacking_target(&mut self) -> Self {
         self.inner |= Self::HAS_ATTACKING_TARGET;
         *self
     }
 
-    pub fn clear_HAS_ATTACKING_TARGET(&mut self) -> Self {
+    pub fn clear_has_attacking_target(&mut self) -> Self {
         self.inner &= Self::HAS_ATTACKING_TARGET.reverse_bits();
         *self
     }
 
-    pub const fn is_LOW_GUID(&self) -> bool {
+    pub const fn is_low_guid(&self) -> bool {
         (self.inner & Self::LOW_GUID) != 0
     }
 
-    pub const fn new_LOW_GUID() -> Self {
+    pub const fn new_low_guid() -> Self {
         Self { inner: Self::LOW_GUID }
     }
 
-    pub fn set_LOW_GUID(&mut self) -> Self {
+    pub fn set_low_guid(&mut self) -> Self {
         self.inner |= Self::LOW_GUID;
         *self
     }
 
-    pub fn clear_LOW_GUID(&mut self) -> Self {
+    pub fn clear_low_guid(&mut self) -> Self {
         self.inner &= Self::LOW_GUID.reverse_bits();
         *self
     }
 
-    pub const fn is_HIGH_GUID(&self) -> bool {
+    pub const fn is_high_guid(&self) -> bool {
         (self.inner & Self::HIGH_GUID) != 0
     }
 
-    pub const fn new_HIGH_GUID() -> Self {
+    pub const fn new_high_guid() -> Self {
         Self { inner: Self::HIGH_GUID }
     }
 
-    pub fn set_HIGH_GUID(&mut self) -> Self {
+    pub fn set_high_guid(&mut self) -> Self {
         self.inner |= Self::HIGH_GUID;
         *self
     }
 
-    pub fn clear_HIGH_GUID(&mut self) -> Self {
+    pub fn clear_high_guid(&mut self) -> Self {
         self.inner &= Self::HIGH_GUID.reverse_bits();
         *self
     }
 
-    pub const fn is_LIVING(&self) -> bool {
+    pub const fn is_living(&self) -> bool {
         (self.inner & Self::LIVING) != 0
     }
 
-    pub const fn new_LIVING() -> Self {
+    pub const fn new_living() -> Self {
         Self { inner: Self::LIVING }
     }
 
-    pub fn set_LIVING(&mut self) -> Self {
+    pub fn set_living(&mut self) -> Self {
         self.inner |= Self::LIVING;
         *self
     }
 
-    pub fn clear_LIVING(&mut self) -> Self {
+    pub fn clear_living(&mut self) -> Self {
         self.inner &= Self::LIVING.reverse_bits();
         *self
     }
 
-    pub const fn is_HAS_POSITION(&self) -> bool {
+    pub const fn is_has_position(&self) -> bool {
         (self.inner & Self::HAS_POSITION) != 0
     }
 
-    pub const fn new_HAS_POSITION() -> Self {
+    pub const fn new_has_position() -> Self {
         Self { inner: Self::HAS_POSITION }
     }
 
-    pub fn set_HAS_POSITION(&mut self) -> Self {
+    pub fn set_has_position(&mut self) -> Self {
         self.inner |= Self::HAS_POSITION;
         *self
     }
 
-    pub fn clear_HAS_POSITION(&mut self) -> Self {
+    pub fn clear_has_position(&mut self) -> Self {
         self.inner &= Self::HAS_POSITION.reverse_bits();
         *self
     }
 
-    pub const fn is_VEHICLE(&self) -> bool {
+    pub const fn is_vehicle(&self) -> bool {
         (self.inner & Self::VEHICLE) != 0
     }
 
-    pub const fn new_VEHICLE() -> Self {
+    pub const fn new_vehicle() -> Self {
         Self { inner: Self::VEHICLE }
     }
 
-    pub fn set_VEHICLE(&mut self) -> Self {
+    pub fn set_vehicle(&mut self) -> Self {
         self.inner |= Self::VEHICLE;
         *self
     }
 
-    pub fn clear_VEHICLE(&mut self) -> Self {
+    pub fn clear_vehicle(&mut self) -> Self {
         self.inner &= Self::VEHICLE.reverse_bits();
         *self
     }
 
-    pub const fn is_POSITION(&self) -> bool {
+    pub const fn is_position(&self) -> bool {
         (self.inner & Self::POSITION) != 0
     }
 
-    pub const fn new_POSITION() -> Self {
+    pub const fn new_position() -> Self {
         Self { inner: Self::POSITION }
     }
 
-    pub fn set_POSITION(&mut self) -> Self {
+    pub fn set_position(&mut self) -> Self {
         self.inner |= Self::POSITION;
         *self
     }
 
-    pub fn clear_POSITION(&mut self) -> Self {
+    pub fn clear_position(&mut self) -> Self {
         self.inner &= Self::POSITION.reverse_bits();
         *self
     }
 
-    pub const fn is_ROTATION(&self) -> bool {
+    pub const fn is_rotation(&self) -> bool {
         (self.inner & Self::ROTATION) != 0
     }
 
-    pub const fn new_ROTATION() -> Self {
+    pub const fn new_rotation() -> Self {
         Self { inner: Self::ROTATION }
     }
 
-    pub fn set_ROTATION(&mut self) -> Self {
+    pub fn set_rotation(&mut self) -> Self {
         self.inner |= Self::ROTATION;
         *self
     }
 
-    pub fn clear_ROTATION(&mut self) -> Self {
+    pub fn clear_rotation(&mut self) -> Self {
         self.inner &= Self::ROTATION.reverse_bits();
         *self
     }

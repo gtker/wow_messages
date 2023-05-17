@@ -61,182 +61,182 @@ impl AllowedClass {
         }
     }
 
-    pub const fn is_WARRIOR(&self) -> bool {
+    pub const fn is_warrior(&self) -> bool {
         ((self.inner & Self::WARRIOR) != 0) || self.inner == 0
     }
 
-    pub const fn new_WARRIOR() -> Self {
+    pub const fn new_warrior() -> Self {
         Self { inner: Self::WARRIOR }
     }
 
-    pub fn set_WARRIOR(&mut self) -> Self {
+    pub fn set_warrior(&mut self) -> Self {
         self.inner |= Self::WARRIOR;
         *self
     }
 
-    pub fn clear_WARRIOR(&mut self) -> Self {
+    pub fn clear_warrior(&mut self) -> Self {
         self.inner &= Self::WARRIOR.reverse_bits();
         *self
     }
 
-    pub const fn is_PALADIN(&self) -> bool {
+    pub const fn is_paladin(&self) -> bool {
         ((self.inner & Self::PALADIN) != 0) || self.inner == 0
     }
 
-    pub const fn new_PALADIN() -> Self {
+    pub const fn new_paladin() -> Self {
         Self { inner: Self::PALADIN }
     }
 
-    pub fn set_PALADIN(&mut self) -> Self {
+    pub fn set_paladin(&mut self) -> Self {
         self.inner |= Self::PALADIN;
         *self
     }
 
-    pub fn clear_PALADIN(&mut self) -> Self {
+    pub fn clear_paladin(&mut self) -> Self {
         self.inner &= Self::PALADIN.reverse_bits();
         *self
     }
 
-    pub const fn is_HUNTER(&self) -> bool {
+    pub const fn is_hunter(&self) -> bool {
         ((self.inner & Self::HUNTER) != 0) || self.inner == 0
     }
 
-    pub const fn new_HUNTER() -> Self {
+    pub const fn new_hunter() -> Self {
         Self { inner: Self::HUNTER }
     }
 
-    pub fn set_HUNTER(&mut self) -> Self {
+    pub fn set_hunter(&mut self) -> Self {
         self.inner |= Self::HUNTER;
         *self
     }
 
-    pub fn clear_HUNTER(&mut self) -> Self {
+    pub fn clear_hunter(&mut self) -> Self {
         self.inner &= Self::HUNTER.reverse_bits();
         *self
     }
 
-    pub const fn is_ROGUE(&self) -> bool {
+    pub const fn is_rogue(&self) -> bool {
         ((self.inner & Self::ROGUE) != 0) || self.inner == 0
     }
 
-    pub const fn new_ROGUE() -> Self {
+    pub const fn new_rogue() -> Self {
         Self { inner: Self::ROGUE }
     }
 
-    pub fn set_ROGUE(&mut self) -> Self {
+    pub fn set_rogue(&mut self) -> Self {
         self.inner |= Self::ROGUE;
         *self
     }
 
-    pub fn clear_ROGUE(&mut self) -> Self {
+    pub fn clear_rogue(&mut self) -> Self {
         self.inner &= Self::ROGUE.reverse_bits();
         *self
     }
 
-    pub const fn is_PRIEST(&self) -> bool {
+    pub const fn is_priest(&self) -> bool {
         ((self.inner & Self::PRIEST) != 0) || self.inner == 0
     }
 
-    pub const fn new_PRIEST() -> Self {
+    pub const fn new_priest() -> Self {
         Self { inner: Self::PRIEST }
     }
 
-    pub fn set_PRIEST(&mut self) -> Self {
+    pub fn set_priest(&mut self) -> Self {
         self.inner |= Self::PRIEST;
         *self
     }
 
-    pub fn clear_PRIEST(&mut self) -> Self {
+    pub fn clear_priest(&mut self) -> Self {
         self.inner &= Self::PRIEST.reverse_bits();
         *self
     }
 
-    pub const fn is_DEATH_KNIGHT(&self) -> bool {
+    pub const fn is_death_knight(&self) -> bool {
         ((self.inner & Self::DEATH_KNIGHT) != 0) || self.inner == 0
     }
 
-    pub const fn new_DEATH_KNIGHT() -> Self {
+    pub const fn new_death_knight() -> Self {
         Self { inner: Self::DEATH_KNIGHT }
     }
 
-    pub fn set_DEATH_KNIGHT(&mut self) -> Self {
+    pub fn set_death_knight(&mut self) -> Self {
         self.inner |= Self::DEATH_KNIGHT;
         *self
     }
 
-    pub fn clear_DEATH_KNIGHT(&mut self) -> Self {
+    pub fn clear_death_knight(&mut self) -> Self {
         self.inner &= Self::DEATH_KNIGHT.reverse_bits();
         *self
     }
 
-    pub const fn is_SHAMAN(&self) -> bool {
+    pub const fn is_shaman(&self) -> bool {
         ((self.inner & Self::SHAMAN) != 0) || self.inner == 0
     }
 
-    pub const fn new_SHAMAN() -> Self {
+    pub const fn new_shaman() -> Self {
         Self { inner: Self::SHAMAN }
     }
 
-    pub fn set_SHAMAN(&mut self) -> Self {
+    pub fn set_shaman(&mut self) -> Self {
         self.inner |= Self::SHAMAN;
         *self
     }
 
-    pub fn clear_SHAMAN(&mut self) -> Self {
+    pub fn clear_shaman(&mut self) -> Self {
         self.inner &= Self::SHAMAN.reverse_bits();
         *self
     }
 
-    pub const fn is_MAGE(&self) -> bool {
+    pub const fn is_mage(&self) -> bool {
         ((self.inner & Self::MAGE) != 0) || self.inner == 0
     }
 
-    pub const fn new_MAGE() -> Self {
+    pub const fn new_mage() -> Self {
         Self { inner: Self::MAGE }
     }
 
-    pub fn set_MAGE(&mut self) -> Self {
+    pub fn set_mage(&mut self) -> Self {
         self.inner |= Self::MAGE;
         *self
     }
 
-    pub fn clear_MAGE(&mut self) -> Self {
+    pub fn clear_mage(&mut self) -> Self {
         self.inner &= Self::MAGE.reverse_bits();
         *self
     }
 
-    pub const fn is_WARLOCK(&self) -> bool {
+    pub const fn is_warlock(&self) -> bool {
         ((self.inner & Self::WARLOCK) != 0) || self.inner == 0
     }
 
-    pub const fn new_WARLOCK() -> Self {
+    pub const fn new_warlock() -> Self {
         Self { inner: Self::WARLOCK }
     }
 
-    pub fn set_WARLOCK(&mut self) -> Self {
+    pub fn set_warlock(&mut self) -> Self {
         self.inner |= Self::WARLOCK;
         *self
     }
 
-    pub fn clear_WARLOCK(&mut self) -> Self {
+    pub fn clear_warlock(&mut self) -> Self {
         self.inner &= Self::WARLOCK.reverse_bits();
         *self
     }
 
-    pub const fn is_DRUID(&self) -> bool {
+    pub const fn is_druid(&self) -> bool {
         ((self.inner & Self::DRUID) != 0) || self.inner == 0
     }
 
-    pub const fn new_DRUID() -> Self {
+    pub const fn new_druid() -> Self {
         Self { inner: Self::DRUID }
     }
 
-    pub fn set_DRUID(&mut self) -> Self {
+    pub fn set_druid(&mut self) -> Self {
         self.inner |= Self::DRUID;
         *self
     }
 
-    pub fn clear_DRUID(&mut self) -> Self {
+    pub fn clear_druid(&mut self) -> Self {
         self.inner &= Self::DRUID.reverse_bits();
         *self
     }

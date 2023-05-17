@@ -58,166 +58,166 @@ impl AuraFlag {
         }
     }
 
-    pub const fn is_EFFECT_1(&self) -> bool {
+    pub const fn is_effect_1(&self) -> bool {
         (self.inner & Self::EFFECT_1) != 0
     }
 
-    pub const fn new_EFFECT_1() -> Self {
+    pub const fn new_effect_1() -> Self {
         Self { inner: Self::EFFECT_1 }
     }
 
-    pub fn set_EFFECT_1(&mut self) -> Self {
+    pub fn set_effect_1(&mut self) -> Self {
         self.inner |= Self::EFFECT_1;
         *self
     }
 
-    pub fn clear_EFFECT_1(&mut self) -> Self {
+    pub fn clear_effect_1(&mut self) -> Self {
         self.inner &= Self::EFFECT_1.reverse_bits();
         *self
     }
 
-    pub const fn is_EFFECT_2(&self) -> bool {
+    pub const fn is_effect_2(&self) -> bool {
         (self.inner & Self::EFFECT_2) != 0
     }
 
-    pub const fn new_EFFECT_2() -> Self {
+    pub const fn new_effect_2() -> Self {
         Self { inner: Self::EFFECT_2 }
     }
 
-    pub fn set_EFFECT_2(&mut self) -> Self {
+    pub fn set_effect_2(&mut self) -> Self {
         self.inner |= Self::EFFECT_2;
         *self
     }
 
-    pub fn clear_EFFECT_2(&mut self) -> Self {
+    pub fn clear_effect_2(&mut self) -> Self {
         self.inner &= Self::EFFECT_2.reverse_bits();
         *self
     }
 
-    pub const fn is_EFFECT_3(&self) -> bool {
+    pub const fn is_effect_3(&self) -> bool {
         (self.inner & Self::EFFECT_3) != 0
     }
 
-    pub const fn new_EFFECT_3() -> Self {
+    pub const fn new_effect_3() -> Self {
         Self { inner: Self::EFFECT_3 }
     }
 
-    pub fn set_EFFECT_3(&mut self) -> Self {
+    pub fn set_effect_3(&mut self) -> Self {
         self.inner |= Self::EFFECT_3;
         *self
     }
 
-    pub fn clear_EFFECT_3(&mut self) -> Self {
+    pub fn clear_effect_3(&mut self) -> Self {
         self.inner &= Self::EFFECT_3.reverse_bits();
         *self
     }
 
-    pub const fn is_NOT_CASTER(&self) -> bool {
+    pub const fn is_not_caster(&self) -> bool {
         (self.inner & Self::NOT_CASTER) != 0
     }
 
-    pub const fn new_NOT_CASTER() -> Self {
+    pub const fn new_not_caster() -> Self {
         Self { inner: Self::NOT_CASTER }
     }
 
-    pub fn set_NOT_CASTER(&mut self) -> Self {
+    pub fn set_not_caster(&mut self) -> Self {
         self.inner |= Self::NOT_CASTER;
         *self
     }
 
-    pub fn clear_NOT_CASTER(&mut self) -> Self {
+    pub fn clear_not_caster(&mut self) -> Self {
         self.inner &= Self::NOT_CASTER.reverse_bits();
         *self
     }
 
-    pub const fn is_SET(&self) -> bool {
+    pub const fn is_set(&self) -> bool {
         (self.inner & Self::SET) != 0
     }
 
-    pub const fn new_SET() -> Self {
+    pub const fn new_set() -> Self {
         Self { inner: Self::SET }
     }
 
-    pub fn set_SET(&mut self) -> Self {
+    pub fn set_set(&mut self) -> Self {
         self.inner |= Self::SET;
         *self
     }
 
-    pub fn clear_SET(&mut self) -> Self {
+    pub fn clear_set(&mut self) -> Self {
         self.inner &= Self::SET.reverse_bits();
         *self
     }
 
-    pub const fn is_CANCELLABLE(&self) -> bool {
+    pub const fn is_cancellable(&self) -> bool {
         (self.inner & Self::CANCELLABLE) != 0
     }
 
-    pub const fn new_CANCELLABLE() -> Self {
+    pub const fn new_cancellable() -> Self {
         Self { inner: Self::CANCELLABLE }
     }
 
-    pub fn set_CANCELLABLE(&mut self) -> Self {
+    pub fn set_cancellable(&mut self) -> Self {
         self.inner |= Self::CANCELLABLE;
         *self
     }
 
-    pub fn clear_CANCELLABLE(&mut self) -> Self {
+    pub fn clear_cancellable(&mut self) -> Self {
         self.inner &= Self::CANCELLABLE.reverse_bits();
         *self
     }
 
-    pub const fn is_DURATION(&self) -> bool {
+    pub const fn is_duration(&self) -> bool {
         (self.inner & Self::DURATION) != 0
     }
 
-    pub const fn new_DURATION() -> Self {
+    pub const fn new_duration() -> Self {
         Self { inner: Self::DURATION }
     }
 
-    pub fn set_DURATION(&mut self) -> Self {
+    pub fn set_duration(&mut self) -> Self {
         self.inner |= Self::DURATION;
         *self
     }
 
-    pub fn clear_DURATION(&mut self) -> Self {
+    pub fn clear_duration(&mut self) -> Self {
         self.inner &= Self::DURATION.reverse_bits();
         *self
     }
 
-    pub const fn is_HIDE(&self) -> bool {
+    pub const fn is_hide(&self) -> bool {
         (self.inner & Self::HIDE) != 0
     }
 
     /// Seems to hide the aura and tell client the aura was removed
     ///
-    pub const fn new_HIDE() -> Self {
+    pub const fn new_hide() -> Self {
         Self { inner: Self::HIDE }
     }
 
-    pub fn set_HIDE(&mut self) -> Self {
+    pub fn set_hide(&mut self) -> Self {
         self.inner |= Self::HIDE;
         *self
     }
 
-    pub fn clear_HIDE(&mut self) -> Self {
+    pub fn clear_hide(&mut self) -> Self {
         self.inner &= Self::HIDE.reverse_bits();
         *self
     }
 
-    pub const fn is_NEGATIVE(&self) -> bool {
+    pub const fn is_negative(&self) -> bool {
         (self.inner & Self::NEGATIVE) != 0
     }
 
-    pub const fn new_NEGATIVE() -> Self {
+    pub const fn new_negative() -> Self {
         Self { inner: Self::NEGATIVE }
     }
 
-    pub fn set_NEGATIVE(&mut self) -> Self {
+    pub fn set_negative(&mut self) -> Self {
         self.inner |= Self::NEGATIVE;
         *self
     }
 
-    pub fn clear_NEGATIVE(&mut self) -> Self {
+    pub fn clear_negative(&mut self) -> Self {
         self.inner &= Self::NEGATIVE.reverse_bits();
         *self
     }

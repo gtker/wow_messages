@@ -79,312 +79,312 @@ impl SpellCastTargetFlags {
         }
     }
 
-    pub const fn is_UNUSED1(&self) -> bool {
+    pub const fn is_unused1(&self) -> bool {
         (self.inner & Self::UNUSED1) != 0
     }
 
     /// not used in any spells (can be set dynamically)
     ///
-    pub const fn new_UNUSED1() -> Self {
+    pub const fn new_unused1() -> Self {
         Self { inner: Self::UNUSED1 }
     }
 
-    pub fn set_UNUSED1(&mut self) -> Self {
+    pub fn set_unused1(&mut self) -> Self {
         self.inner |= Self::UNUSED1;
         *self
     }
 
-    pub fn clear_UNUSED1(&mut self) -> Self {
+    pub fn clear_unused1(&mut self) -> Self {
         self.inner &= Self::UNUSED1.reverse_bits();
         *self
     }
 
-    pub const fn is_UNIT(&self) -> bool {
+    pub const fn is_unit(&self) -> bool {
         (self.inner & Self::UNIT) != 0
     }
 
-    pub const fn new_UNIT() -> Self {
+    pub const fn new_unit() -> Self {
         Self { inner: Self::UNIT }
     }
 
-    pub fn set_UNIT(&mut self) -> Self {
+    pub fn set_unit(&mut self) -> Self {
         self.inner |= Self::UNIT;
         *self
     }
 
-    pub fn clear_UNIT(&mut self) -> Self {
+    pub fn clear_unit(&mut self) -> Self {
         self.inner &= Self::UNIT.reverse_bits();
         *self
     }
 
-    pub const fn is_UNUSED2(&self) -> bool {
+    pub const fn is_unused2(&self) -> bool {
         (self.inner & Self::UNUSED2) != 0
     }
 
     /// not used in any spells (can be set dynamically)
     ///
-    pub const fn new_UNUSED2() -> Self {
+    pub const fn new_unused2() -> Self {
         Self { inner: Self::UNUSED2 }
     }
 
-    pub fn set_UNUSED2(&mut self) -> Self {
+    pub fn set_unused2(&mut self) -> Self {
         self.inner |= Self::UNUSED2;
         *self
     }
 
-    pub fn clear_UNUSED2(&mut self) -> Self {
+    pub fn clear_unused2(&mut self) -> Self {
         self.inner &= Self::UNUSED2.reverse_bits();
         *self
     }
 
-    pub const fn is_UNUSED3(&self) -> bool {
+    pub const fn is_unused3(&self) -> bool {
         (self.inner & Self::UNUSED3) != 0
     }
 
     /// not used in any spells (can be set dynamically)
     ///
-    pub const fn new_UNUSED3() -> Self {
+    pub const fn new_unused3() -> Self {
         Self { inner: Self::UNUSED3 }
     }
 
-    pub fn set_UNUSED3(&mut self) -> Self {
+    pub fn set_unused3(&mut self) -> Self {
         self.inner |= Self::UNUSED3;
         *self
     }
 
-    pub fn clear_UNUSED3(&mut self) -> Self {
+    pub fn clear_unused3(&mut self) -> Self {
         self.inner &= Self::UNUSED3.reverse_bits();
         *self
     }
 
-    pub const fn is_ITEM(&self) -> bool {
+    pub const fn is_item(&self) -> bool {
         (self.inner & Self::ITEM) != 0
     }
 
-    pub const fn new_ITEM() -> Self {
+    pub const fn new_item() -> Self {
         Self { inner: Self::ITEM }
     }
 
-    pub fn set_ITEM(&mut self) -> Self {
+    pub fn set_item(&mut self) -> Self {
         self.inner |= Self::ITEM;
         *self
     }
 
-    pub fn clear_ITEM(&mut self) -> Self {
+    pub fn clear_item(&mut self) -> Self {
         self.inner &= Self::ITEM.reverse_bits();
         *self
     }
 
-    pub const fn is_SOURCE_LOCATION(&self) -> bool {
+    pub const fn is_source_location(&self) -> bool {
         (self.inner & Self::SOURCE_LOCATION) != 0
     }
 
-    pub const fn new_SOURCE_LOCATION() -> Self {
+    pub const fn new_source_location() -> Self {
         Self { inner: Self::SOURCE_LOCATION }
     }
 
-    pub fn set_SOURCE_LOCATION(&mut self) -> Self {
+    pub fn set_source_location(&mut self) -> Self {
         self.inner |= Self::SOURCE_LOCATION;
         *self
     }
 
-    pub fn clear_SOURCE_LOCATION(&mut self) -> Self {
+    pub fn clear_source_location(&mut self) -> Self {
         self.inner &= Self::SOURCE_LOCATION.reverse_bits();
         *self
     }
 
-    pub const fn is_DEST_LOCATION(&self) -> bool {
+    pub const fn is_dest_location(&self) -> bool {
         (self.inner & Self::DEST_LOCATION) != 0
     }
 
-    pub const fn new_DEST_LOCATION() -> Self {
+    pub const fn new_dest_location() -> Self {
         Self { inner: Self::DEST_LOCATION }
     }
 
-    pub fn set_DEST_LOCATION(&mut self) -> Self {
+    pub fn set_dest_location(&mut self) -> Self {
         self.inner |= Self::DEST_LOCATION;
         *self
     }
 
-    pub fn clear_DEST_LOCATION(&mut self) -> Self {
+    pub fn clear_dest_location(&mut self) -> Self {
         self.inner &= Self::DEST_LOCATION.reverse_bits();
         *self
     }
 
-    pub const fn is_OBJECT_UNK(&self) -> bool {
+    pub const fn is_object_unk(&self) -> bool {
         (self.inner & Self::OBJECT_UNK) != 0
     }
 
     /// used in 7 spells only
     ///
-    pub const fn new_OBJECT_UNK() -> Self {
+    pub const fn new_object_unk() -> Self {
         Self { inner: Self::OBJECT_UNK }
     }
 
-    pub fn set_OBJECT_UNK(&mut self) -> Self {
+    pub fn set_object_unk(&mut self) -> Self {
         self.inner |= Self::OBJECT_UNK;
         *self
     }
 
-    pub fn clear_OBJECT_UNK(&mut self) -> Self {
+    pub fn clear_object_unk(&mut self) -> Self {
         self.inner &= Self::OBJECT_UNK.reverse_bits();
         *self
     }
 
-    pub const fn is_UNIT_UNK(&self) -> bool {
+    pub const fn is_unit_unk(&self) -> bool {
         (self.inner & Self::UNIT_UNK) != 0
     }
 
     /// looks like self target (389 spells)
     ///
-    pub const fn new_UNIT_UNK() -> Self {
+    pub const fn new_unit_unk() -> Self {
         Self { inner: Self::UNIT_UNK }
     }
 
-    pub fn set_UNIT_UNK(&mut self) -> Self {
+    pub fn set_unit_unk(&mut self) -> Self {
         self.inner |= Self::UNIT_UNK;
         *self
     }
 
-    pub fn clear_UNIT_UNK(&mut self) -> Self {
+    pub fn clear_unit_unk(&mut self) -> Self {
         self.inner &= Self::UNIT_UNK.reverse_bits();
         *self
     }
 
-    pub const fn is_PVP_CORPSE(&self) -> bool {
+    pub const fn is_pvp_corpse(&self) -> bool {
         (self.inner & Self::PVP_CORPSE) != 0
     }
 
-    pub const fn new_PVP_CORPSE() -> Self {
+    pub const fn new_pvp_corpse() -> Self {
         Self { inner: Self::PVP_CORPSE }
     }
 
-    pub fn set_PVP_CORPSE(&mut self) -> Self {
+    pub fn set_pvp_corpse(&mut self) -> Self {
         self.inner |= Self::PVP_CORPSE;
         *self
     }
 
-    pub fn clear_PVP_CORPSE(&mut self) -> Self {
+    pub fn clear_pvp_corpse(&mut self) -> Self {
         self.inner &= Self::PVP_CORPSE.reverse_bits();
         *self
     }
 
-    pub const fn is_UNIT_CORPSE(&self) -> bool {
+    pub const fn is_unit_corpse(&self) -> bool {
         (self.inner & Self::UNIT_CORPSE) != 0
     }
 
     /// 10 spells (gathering professions)
     ///
-    pub const fn new_UNIT_CORPSE() -> Self {
+    pub const fn new_unit_corpse() -> Self {
         Self { inner: Self::UNIT_CORPSE }
     }
 
-    pub fn set_UNIT_CORPSE(&mut self) -> Self {
+    pub fn set_unit_corpse(&mut self) -> Self {
         self.inner |= Self::UNIT_CORPSE;
         *self
     }
 
-    pub fn clear_UNIT_CORPSE(&mut self) -> Self {
+    pub fn clear_unit_corpse(&mut self) -> Self {
         self.inner &= Self::UNIT_CORPSE.reverse_bits();
         *self
     }
 
-    pub const fn is_GAMEOBJECT(&self) -> bool {
+    pub const fn is_gameobject(&self) -> bool {
         (self.inner & Self::GAMEOBJECT) != 0
     }
 
     /// pguid, 0 spells
     ///
-    pub const fn new_GAMEOBJECT() -> Self {
+    pub const fn new_gameobject() -> Self {
         Self { inner: Self::GAMEOBJECT }
     }
 
-    pub fn set_GAMEOBJECT(&mut self) -> Self {
+    pub fn set_gameobject(&mut self) -> Self {
         self.inner |= Self::GAMEOBJECT;
         *self
     }
 
-    pub fn clear_GAMEOBJECT(&mut self) -> Self {
+    pub fn clear_gameobject(&mut self) -> Self {
         self.inner &= Self::GAMEOBJECT.reverse_bits();
         *self
     }
 
-    pub const fn is_TRADE_ITEM(&self) -> bool {
+    pub const fn is_trade_item(&self) -> bool {
         (self.inner & Self::TRADE_ITEM) != 0
     }
 
     /// pguid, 0 spells
     ///
-    pub const fn new_TRADE_ITEM() -> Self {
+    pub const fn new_trade_item() -> Self {
         Self { inner: Self::TRADE_ITEM }
     }
 
-    pub fn set_TRADE_ITEM(&mut self) -> Self {
+    pub fn set_trade_item(&mut self) -> Self {
         self.inner |= Self::TRADE_ITEM;
         *self
     }
 
-    pub fn clear_TRADE_ITEM(&mut self) -> Self {
+    pub fn clear_trade_item(&mut self) -> Self {
         self.inner &= Self::TRADE_ITEM.reverse_bits();
         *self
     }
 
-    pub const fn is_STRING(&self) -> bool {
+    pub const fn is_string(&self) -> bool {
         (self.inner & Self::STRING) != 0
     }
 
     /// string, 0 spells
     ///
-    pub const fn new_STRING() -> Self {
+    pub const fn new_string() -> Self {
         Self { inner: Self::STRING }
     }
 
-    pub fn set_STRING(&mut self) -> Self {
+    pub fn set_string(&mut self) -> Self {
         self.inner |= Self::STRING;
         *self
     }
 
-    pub fn clear_STRING(&mut self) -> Self {
+    pub fn clear_string(&mut self) -> Self {
         self.inner &= Self::STRING.reverse_bits();
         *self
     }
 
-    pub const fn is_UNK1(&self) -> bool {
+    pub const fn is_unk1(&self) -> bool {
         (self.inner & Self::UNK1) != 0
     }
 
     /// 199 spells, opening object/lock
     ///
-    pub const fn new_UNK1() -> Self {
+    pub const fn new_unk1() -> Self {
         Self { inner: Self::UNK1 }
     }
 
-    pub fn set_UNK1(&mut self) -> Self {
+    pub fn set_unk1(&mut self) -> Self {
         self.inner |= Self::UNK1;
         *self
     }
 
-    pub fn clear_UNK1(&mut self) -> Self {
+    pub fn clear_unk1(&mut self) -> Self {
         self.inner &= Self::UNK1.reverse_bits();
         *self
     }
 
-    pub const fn is_CORPSE(&self) -> bool {
+    pub const fn is_corpse(&self) -> bool {
         (self.inner & Self::CORPSE) != 0
     }
 
     /// pguid, resurrection spells
     ///
-    pub const fn new_CORPSE() -> Self {
+    pub const fn new_corpse() -> Self {
         Self { inner: Self::CORPSE }
     }
 
-    pub fn set_CORPSE(&mut self) -> Self {
+    pub fn set_corpse(&mut self) -> Self {
         self.inner |= Self::CORPSE;
         *self
     }
 
-    pub fn clear_CORPSE(&mut self) -> Self {
+    pub fn clear_corpse(&mut self) -> Self {
         self.inner &= Self::CORPSE.reverse_bits();
         *self
     }

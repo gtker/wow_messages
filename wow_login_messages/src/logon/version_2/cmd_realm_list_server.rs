@@ -350,8 +350,8 @@ mod test_version_2 {
                 Realm {
                     realm_type: RealmType::PlayerVsEnvironment,
                     flag: RealmFlag::empty()
-                        .set_INVALID()
-                        .set_OFFLINE()
+                        .set_invalid()
+                        .set_offline()
                         ,
                     name: String::from("A"),
                     address: String::from("A"),
@@ -534,8 +534,8 @@ mod test_version_3 {
                 Realm {
                     realm_type: RealmType::PlayerVsEnvironment,
                     flag: RealmFlag::empty()
-                        .set_INVALID()
-                        .set_OFFLINE()
+                        .set_invalid()
+                        .set_offline()
                         ,
                     name: String::from("A"),
                     address: String::from("A"),

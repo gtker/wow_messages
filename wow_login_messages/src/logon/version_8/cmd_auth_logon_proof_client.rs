@@ -146,7 +146,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
         // security_flag: SecurityFlag
         let security_flag = SecurityFlag::new(crate::util::read_u8_le(&mut r)?);
 
-        let security_flag_PIN = if security_flag.is_PIN() {
+        let security_flag_PIN = if security_flag.is_pin() {
             // pin_salt: u8[16]
             let pin_salt = {
                 let mut pin_salt = [0_u8; 16];
@@ -170,7 +170,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             None
         };
 
-        let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
+        let security_flag_MATRIX_CARD = if security_flag.is_matrix_card() {
             // matrix_card_proof: u8[20]
             let matrix_card_proof = {
                 let mut matrix_card_proof = [0_u8; 20];
@@ -186,7 +186,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             None
         };
 
-        let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
+        let security_flag_AUTHENTICATOR = if security_flag.is_authenticator() {
             // amount_of_tokens: u8
             let amount_of_tokens = crate::util::read_u8_le(&mut r)?;
 
@@ -277,7 +277,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             // security_flag: SecurityFlag
             let security_flag = SecurityFlag::new(crate::util::tokio_read_u8_le(&mut r).await?);
 
-            let security_flag_PIN = if security_flag.is_PIN() {
+            let security_flag_PIN = if security_flag.is_pin() {
                 // pin_salt: u8[16]
                 let pin_salt = {
                     let mut pin_salt = [0_u8; 16];
@@ -301,7 +301,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 None
             };
 
-            let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
+            let security_flag_MATRIX_CARD = if security_flag.is_matrix_card() {
                 // matrix_card_proof: u8[20]
                 let matrix_card_proof = {
                     let mut matrix_card_proof = [0_u8; 20];
@@ -317,7 +317,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 None
             };
 
-            let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
+            let security_flag_AUTHENTICATOR = if security_flag.is_authenticator() {
                 // amount_of_tokens: u8
                 let amount_of_tokens = crate::util::tokio_read_u8_le(&mut r).await?;
 
@@ -421,7 +421,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             // security_flag: SecurityFlag
             let security_flag = SecurityFlag::new(crate::util::astd_read_u8_le(&mut r).await?);
 
-            let security_flag_PIN = if security_flag.is_PIN() {
+            let security_flag_PIN = if security_flag.is_pin() {
                 // pin_salt: u8[16]
                 let pin_salt = {
                     let mut pin_salt = [0_u8; 16];
@@ -445,7 +445,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 None
             };
 
-            let security_flag_MATRIX_CARD = if security_flag.is_MATRIX_CARD() {
+            let security_flag_MATRIX_CARD = if security_flag.is_matrix_card() {
                 // matrix_card_proof: u8[20]
                 let matrix_card_proof = {
                     let mut matrix_card_proof = [0_u8; 20];
@@ -461,7 +461,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 None
             };
 
-            let security_flag_AUTHENTICATOR = if security_flag.is_AUTHENTICATOR() {
+            let security_flag_AUTHENTICATOR = if security_flag.is_authenticator() {
                 // amount_of_tokens: u8
                 let amount_of_tokens = crate::util::astd_read_u8_le(&mut r).await?;
 
@@ -565,7 +565,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
         && self.authenticator.is_none()
     }
 
-    pub const fn new_PIN(pin: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin) -> Self {
+    pub const fn new_pin(pin: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin) -> Self {
         Self {
             inner: SecurityFlag::PIN,
             pin: Some(pin),
@@ -575,24 +575,24 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PIN(mut self, pin: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin) -> Self {
+    pub fn set_pin(mut self, pin: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin) -> Self {
         self.inner |= SecurityFlag::PIN;
         self.pin = Some(pin);
         self
     }
 
-    pub const fn get_PIN(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin> {
+    pub const fn get_pin(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin> {
         self.pin.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PIN(mut self) -> Self {
+    pub fn clear_pin(mut self) -> Self {
         self.inner &= SecurityFlag::PIN.reverse_bits();
         self.pin = None;
         self
     }
 
-    pub const fn new_MATRIX_CARD(matrix_card: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard) -> Self {
+    pub const fn new_matrix_card(matrix_card: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard) -> Self {
         Self {
             inner: SecurityFlag::MATRIX_CARD,
             pin: None,
@@ -602,24 +602,24 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_MATRIX_CARD(mut self, matrix_card: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard) -> Self {
+    pub fn set_matrix_card(mut self, matrix_card: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard) -> Self {
         self.inner |= SecurityFlag::MATRIX_CARD;
         self.matrix_card = Some(matrix_card);
         self
     }
 
-    pub const fn get_MATRIX_CARD(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard> {
+    pub const fn get_matrix_card(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_MatrixCard> {
         self.matrix_card.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_MATRIX_CARD(mut self) -> Self {
+    pub fn clear_matrix_card(mut self) -> Self {
         self.inner &= SecurityFlag::MATRIX_CARD.reverse_bits();
         self.matrix_card = None;
         self
     }
 
-    pub const fn new_AUTHENTICATOR(authenticator: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator) -> Self {
+    pub const fn new_authenticator(authenticator: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator) -> Self {
         Self {
             inner: SecurityFlag::AUTHENTICATOR,
             pin: None,
@@ -629,18 +629,18 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_AUTHENTICATOR(mut self, authenticator: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator) -> Self {
+    pub fn set_authenticator(mut self, authenticator: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator) -> Self {
         self.inner |= SecurityFlag::AUTHENTICATOR;
         self.authenticator = Some(authenticator);
         self
     }
 
-    pub const fn get_AUTHENTICATOR(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator> {
+    pub const fn get_authenticator(&self) -> Option<&CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Authenticator> {
         self.authenticator.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_AUTHENTICATOR(mut self) -> Self {
+    pub fn clear_authenticator(mut self) -> Self {
         self.inner &= SecurityFlag::AUTHENTICATOR.reverse_bits();
         self.authenticator = None;
         self
@@ -1043,7 +1043,7 @@ mod test {
                  0xC8, 0x41, 0xEE, 0xB8, 0x90, 0x8A, 0x58, 0xBB, 0x00, 0xD0, ],
             telemetry_keys: vec![ ],
             security_flag: CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::empty()
-                .set_PIN(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
+                .set_pin(CMD_AUTH_LOGON_PROOF_Client_SecurityFlag_Pin {
                     pin_hash: [ 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
                          0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
                          0x13, ],

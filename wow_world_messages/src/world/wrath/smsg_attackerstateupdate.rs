@@ -199,7 +199,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             damage_infos
         };
 
-        let hit_info_ALL_ABSORB = if hit_info.is_ALL_ABSORB() {
+        let hit_info_ALL_ABSORB = if hit_info.is_all_absorb() {
             // absorb: u32
             let absorb = crate::util::read_u32_le(&mut r)?;
 
@@ -211,7 +211,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             None
         };
 
-        let hit_info_ALL_RESIST = if hit_info.is_ALL_RESIST() {
+        let hit_info_ALL_RESIST = if hit_info.is_all_resist() {
             // resist: u32
             let resist = crate::util::read_u32_le(&mut r)?;
 
@@ -232,7 +232,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         // unknown2: u32
         let unknown2 = crate::util::read_u32_le(&mut r)?;
 
-        let hit_info_BLOCK = if hit_info.is_BLOCK() {
+        let hit_info_BLOCK = if hit_info.is_block() {
             // blocked_amount: u32
             let blocked_amount = crate::util::read_u32_le(&mut r)?;
 
@@ -244,7 +244,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             None
         };
 
-        let hit_info_UNK19 = if hit_info.is_UNK19() {
+        let hit_info_UNK19 = if hit_info.is_unk19() {
             // unknown3: u32
             let unknown3 = crate::util::read_u32_le(&mut r)?;
 
@@ -256,7 +256,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             None
         };
 
-        let hit_info_UNK1 = if hit_info.is_UNK1() {
+        let hit_info_UNK1 = if hit_info.is_unk1() {
             // unknown4: u32
             let unknown4 = crate::util::read_u32_le(&mut r)?;
 
@@ -395,7 +395,7 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
         && self.unk19.is_none()
     }
 
-    pub const fn new_UNK1(unk1: SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1) -> Self {
+    pub const fn new_unk1(unk1: SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1) -> Self {
         Self {
             inner: HitInfo::UNK1,
             unk1: Some(unk1),
@@ -407,24 +407,24 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK1(mut self, unk1: SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1) -> Self {
+    pub fn set_unk1(mut self, unk1: SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1) -> Self {
         self.inner |= HitInfo::UNK1;
         self.unk1 = Some(unk1);
         self
     }
 
-    pub const fn get_UNK1(&self) -> Option<&SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1> {
+    pub const fn get_unk1(&self) -> Option<&SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1> {
         self.unk1.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK1(mut self) -> Self {
+    pub fn clear_unk1(mut self) -> Self {
         self.inner &= HitInfo::UNK1.reverse_bits();
         self.unk1 = None;
         self
     }
 
-    pub const fn new_AFFECTS_VICTIM() -> Self {
+    pub const fn new_affects_victim() -> Self {
         Self {
             inner: HitInfo::AFFECTS_VICTIM,
             unk1: None,
@@ -436,22 +436,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_AFFECTS_VICTIM(mut self) -> Self {
+    pub fn set_affects_victim(mut self) -> Self {
         self.inner |= HitInfo::AFFECTS_VICTIM;
         self
     }
 
-    pub const fn get_AFFECTS_VICTIM(&self) -> bool {
+    pub const fn get_affects_victim(&self) -> bool {
         (self.inner & HitInfo::AFFECTS_VICTIM) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_AFFECTS_VICTIM(mut self) -> Self {
+    pub fn clear_affects_victim(mut self) -> Self {
         self.inner &= HitInfo::AFFECTS_VICTIM.reverse_bits();
         self
     }
 
-    pub const fn new_OFFHAND() -> Self {
+    pub const fn new_offhand() -> Self {
         Self {
             inner: HitInfo::OFFHAND,
             unk1: None,
@@ -463,22 +463,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_OFFHAND(mut self) -> Self {
+    pub fn set_offhand(mut self) -> Self {
         self.inner |= HitInfo::OFFHAND;
         self
     }
 
-    pub const fn get_OFFHAND(&self) -> bool {
+    pub const fn get_offhand(&self) -> bool {
         (self.inner & HitInfo::OFFHAND) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_OFFHAND(mut self) -> Self {
+    pub fn clear_offhand(mut self) -> Self {
         self.inner &= HitInfo::OFFHAND.reverse_bits();
         self
     }
 
-    pub const fn new_UNK2() -> Self {
+    pub const fn new_unk2() -> Self {
         Self {
             inner: HitInfo::UNK2,
             unk1: None,
@@ -490,22 +490,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK2(mut self) -> Self {
+    pub fn set_unk2(mut self) -> Self {
         self.inner |= HitInfo::UNK2;
         self
     }
 
-    pub const fn get_UNK2(&self) -> bool {
+    pub const fn get_unk2(&self) -> bool {
         (self.inner & HitInfo::UNK2) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK2(mut self) -> Self {
+    pub fn clear_unk2(mut self) -> Self {
         self.inner &= HitInfo::UNK2.reverse_bits();
         self
     }
 
-    pub const fn new_MISS() -> Self {
+    pub const fn new_miss() -> Self {
         Self {
             inner: HitInfo::MISS,
             unk1: None,
@@ -517,22 +517,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_MISS(mut self) -> Self {
+    pub fn set_miss(mut self) -> Self {
         self.inner |= HitInfo::MISS;
         self
     }
 
-    pub const fn get_MISS(&self) -> bool {
+    pub const fn get_miss(&self) -> bool {
         (self.inner & HitInfo::MISS) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_MISS(mut self) -> Self {
+    pub fn clear_miss(mut self) -> Self {
         self.inner &= HitInfo::MISS.reverse_bits();
         self
     }
 
-    pub const fn new_FULL_ABSORB() -> Self {
+    pub const fn new_full_absorb() -> Self {
         Self {
             inner: HitInfo::FULL_ABSORB,
             unk1: None,
@@ -544,22 +544,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FULL_ABSORB(mut self) -> Self {
+    pub fn set_full_absorb(mut self) -> Self {
         self.inner |= HitInfo::FULL_ABSORB;
         self
     }
 
-    pub const fn get_FULL_ABSORB(&self) -> bool {
+    pub const fn get_full_absorb(&self) -> bool {
         (self.inner & HitInfo::FULL_ABSORB) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FULL_ABSORB(mut self) -> Self {
+    pub fn clear_full_absorb(mut self) -> Self {
         self.inner &= HitInfo::FULL_ABSORB.reverse_bits();
         self
     }
 
-    pub const fn new_PARTIAL_ABSORB() -> Self {
+    pub const fn new_partial_absorb() -> Self {
         Self {
             inner: HitInfo::PARTIAL_ABSORB,
             unk1: None,
@@ -571,22 +571,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PARTIAL_ABSORB(mut self) -> Self {
+    pub fn set_partial_absorb(mut self) -> Self {
         self.inner |= HitInfo::PARTIAL_ABSORB;
         self
     }
 
-    pub const fn get_PARTIAL_ABSORB(&self) -> bool {
+    pub const fn get_partial_absorb(&self) -> bool {
         (self.inner & HitInfo::PARTIAL_ABSORB) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PARTIAL_ABSORB(mut self) -> Self {
+    pub fn clear_partial_absorb(mut self) -> Self {
         self.inner &= HitInfo::PARTIAL_ABSORB.reverse_bits();
         self
     }
 
-    pub const fn new_ALL_ABSORB(all_absorb: SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb) -> Self {
+    pub const fn new_all_absorb(all_absorb: SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb) -> Self {
         Self {
             inner: HitInfo::ALL_ABSORB,
             unk1: None,
@@ -598,24 +598,24 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ALL_ABSORB(mut self, all_absorb: SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb) -> Self {
+    pub fn set_all_absorb(mut self, all_absorb: SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb) -> Self {
         self.inner |= HitInfo::ALL_ABSORB;
         self.all_absorb = Some(all_absorb);
         self
     }
 
-    pub const fn get_ALL_ABSORB(&self) -> Option<&SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb> {
+    pub const fn get_all_absorb(&self) -> Option<&SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb> {
         self.all_absorb.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ALL_ABSORB(mut self) -> Self {
+    pub fn clear_all_absorb(mut self) -> Self {
         self.inner &= HitInfo::ALL_ABSORB.reverse_bits();
         self.all_absorb = None;
         self
     }
 
-    pub const fn new_FULL_RESIST() -> Self {
+    pub const fn new_full_resist() -> Self {
         Self {
             inner: HitInfo::FULL_RESIST,
             unk1: None,
@@ -627,22 +627,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FULL_RESIST(mut self) -> Self {
+    pub fn set_full_resist(mut self) -> Self {
         self.inner |= HitInfo::FULL_RESIST;
         self
     }
 
-    pub const fn get_FULL_RESIST(&self) -> bool {
+    pub const fn get_full_resist(&self) -> bool {
         (self.inner & HitInfo::FULL_RESIST) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FULL_RESIST(mut self) -> Self {
+    pub fn clear_full_resist(mut self) -> Self {
         self.inner &= HitInfo::FULL_RESIST.reverse_bits();
         self
     }
 
-    pub const fn new_PARTIAL_RESIST() -> Self {
+    pub const fn new_partial_resist() -> Self {
         Self {
             inner: HitInfo::PARTIAL_RESIST,
             unk1: None,
@@ -654,22 +654,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PARTIAL_RESIST(mut self) -> Self {
+    pub fn set_partial_resist(mut self) -> Self {
         self.inner |= HitInfo::PARTIAL_RESIST;
         self
     }
 
-    pub const fn get_PARTIAL_RESIST(&self) -> bool {
+    pub const fn get_partial_resist(&self) -> bool {
         (self.inner & HitInfo::PARTIAL_RESIST) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PARTIAL_RESIST(mut self) -> Self {
+    pub fn clear_partial_resist(mut self) -> Self {
         self.inner &= HitInfo::PARTIAL_RESIST.reverse_bits();
         self
     }
 
-    pub const fn new_ALL_RESIST(all_resist: SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist) -> Self {
+    pub const fn new_all_resist(all_resist: SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist) -> Self {
         Self {
             inner: HitInfo::ALL_RESIST,
             unk1: None,
@@ -681,24 +681,24 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ALL_RESIST(mut self, all_resist: SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist) -> Self {
+    pub fn set_all_resist(mut self, all_resist: SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist) -> Self {
         self.inner |= HitInfo::ALL_RESIST;
         self.all_resist = Some(all_resist);
         self
     }
 
-    pub const fn get_ALL_RESIST(&self) -> Option<&SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist> {
+    pub const fn get_all_resist(&self) -> Option<&SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist> {
         self.all_resist.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ALL_RESIST(mut self) -> Self {
+    pub fn clear_all_resist(mut self) -> Self {
         self.inner &= HitInfo::ALL_RESIST.reverse_bits();
         self.all_resist = None;
         self
     }
 
-    pub const fn new_CRITICALHIT() -> Self {
+    pub const fn new_criticalhit() -> Self {
         Self {
             inner: HitInfo::CRITICALHIT,
             unk1: None,
@@ -710,22 +710,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_CRITICALHIT(mut self) -> Self {
+    pub fn set_criticalhit(mut self) -> Self {
         self.inner |= HitInfo::CRITICALHIT;
         self
     }
 
-    pub const fn get_CRITICALHIT(&self) -> bool {
+    pub const fn get_criticalhit(&self) -> bool {
         (self.inner & HitInfo::CRITICALHIT) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_CRITICALHIT(mut self) -> Self {
+    pub fn clear_criticalhit(mut self) -> Self {
         self.inner &= HitInfo::CRITICALHIT.reverse_bits();
         self
     }
 
-    pub const fn new_UNK10() -> Self {
+    pub const fn new_unk10() -> Self {
         Self {
             inner: HitInfo::UNK10,
             unk1: None,
@@ -737,22 +737,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK10(mut self) -> Self {
+    pub fn set_unk10(mut self) -> Self {
         self.inner |= HitInfo::UNK10;
         self
     }
 
-    pub const fn get_UNK10(&self) -> bool {
+    pub const fn get_unk10(&self) -> bool {
         (self.inner & HitInfo::UNK10) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK10(mut self) -> Self {
+    pub fn clear_unk10(mut self) -> Self {
         self.inner &= HitInfo::UNK10.reverse_bits();
         self
     }
 
-    pub const fn new_UNK11() -> Self {
+    pub const fn new_unk11() -> Self {
         Self {
             inner: HitInfo::UNK11,
             unk1: None,
@@ -764,22 +764,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK11(mut self) -> Self {
+    pub fn set_unk11(mut self) -> Self {
         self.inner |= HitInfo::UNK11;
         self
     }
 
-    pub const fn get_UNK11(&self) -> bool {
+    pub const fn get_unk11(&self) -> bool {
         (self.inner & HitInfo::UNK11) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK11(mut self) -> Self {
+    pub fn clear_unk11(mut self) -> Self {
         self.inner &= HitInfo::UNK11.reverse_bits();
         self
     }
 
-    pub const fn new_UNK12() -> Self {
+    pub const fn new_unk12() -> Self {
         Self {
             inner: HitInfo::UNK12,
             unk1: None,
@@ -791,22 +791,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK12(mut self) -> Self {
+    pub fn set_unk12(mut self) -> Self {
         self.inner |= HitInfo::UNK12;
         self
     }
 
-    pub const fn get_UNK12(&self) -> bool {
+    pub const fn get_unk12(&self) -> bool {
         (self.inner & HitInfo::UNK12) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK12(mut self) -> Self {
+    pub fn clear_unk12(mut self) -> Self {
         self.inner &= HitInfo::UNK12.reverse_bits();
         self
     }
 
-    pub const fn new_BLOCK(block: SMSG_ATTACKERSTATEUPDATE_HitInfo_Block) -> Self {
+    pub const fn new_block(block: SMSG_ATTACKERSTATEUPDATE_HitInfo_Block) -> Self {
         Self {
             inner: HitInfo::BLOCK,
             unk1: None,
@@ -818,24 +818,24 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_BLOCK(mut self, block: SMSG_ATTACKERSTATEUPDATE_HitInfo_Block) -> Self {
+    pub fn set_block(mut self, block: SMSG_ATTACKERSTATEUPDATE_HitInfo_Block) -> Self {
         self.inner |= HitInfo::BLOCK;
         self.block = Some(block);
         self
     }
 
-    pub const fn get_BLOCK(&self) -> Option<&SMSG_ATTACKERSTATEUPDATE_HitInfo_Block> {
+    pub const fn get_block(&self) -> Option<&SMSG_ATTACKERSTATEUPDATE_HitInfo_Block> {
         self.block.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_BLOCK(mut self) -> Self {
+    pub fn clear_block(mut self) -> Self {
         self.inner &= HitInfo::BLOCK.reverse_bits();
         self.block = None;
         self
     }
 
-    pub const fn new_UNK14() -> Self {
+    pub const fn new_unk14() -> Self {
         Self {
             inner: HitInfo::UNK14,
             unk1: None,
@@ -847,22 +847,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK14(mut self) -> Self {
+    pub fn set_unk14(mut self) -> Self {
         self.inner |= HitInfo::UNK14;
         self
     }
 
-    pub const fn get_UNK14(&self) -> bool {
+    pub const fn get_unk14(&self) -> bool {
         (self.inner & HitInfo::UNK14) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK14(mut self) -> Self {
+    pub fn clear_unk14(mut self) -> Self {
         self.inner &= HitInfo::UNK14.reverse_bits();
         self
     }
 
-    pub const fn new_UNK15() -> Self {
+    pub const fn new_unk15() -> Self {
         Self {
             inner: HitInfo::UNK15,
             unk1: None,
@@ -874,22 +874,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK15(mut self) -> Self {
+    pub fn set_unk15(mut self) -> Self {
         self.inner |= HitInfo::UNK15;
         self
     }
 
-    pub const fn get_UNK15(&self) -> bool {
+    pub const fn get_unk15(&self) -> bool {
         (self.inner & HitInfo::UNK15) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK15(mut self) -> Self {
+    pub fn clear_unk15(mut self) -> Self {
         self.inner &= HitInfo::UNK15.reverse_bits();
         self
     }
 
-    pub const fn new_GLANCING() -> Self {
+    pub const fn new_glancing() -> Self {
         Self {
             inner: HitInfo::GLANCING,
             unk1: None,
@@ -901,22 +901,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_GLANCING(mut self) -> Self {
+    pub fn set_glancing(mut self) -> Self {
         self.inner |= HitInfo::GLANCING;
         self
     }
 
-    pub const fn get_GLANCING(&self) -> bool {
+    pub const fn get_glancing(&self) -> bool {
         (self.inner & HitInfo::GLANCING) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_GLANCING(mut self) -> Self {
+    pub fn clear_glancing(mut self) -> Self {
         self.inner &= HitInfo::GLANCING.reverse_bits();
         self
     }
 
-    pub const fn new_CRUSHING() -> Self {
+    pub const fn new_crushing() -> Self {
         Self {
             inner: HitInfo::CRUSHING,
             unk1: None,
@@ -928,22 +928,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_CRUSHING(mut self) -> Self {
+    pub fn set_crushing(mut self) -> Self {
         self.inner |= HitInfo::CRUSHING;
         self
     }
 
-    pub const fn get_CRUSHING(&self) -> bool {
+    pub const fn get_crushing(&self) -> bool {
         (self.inner & HitInfo::CRUSHING) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_CRUSHING(mut self) -> Self {
+    pub fn clear_crushing(mut self) -> Self {
         self.inner &= HitInfo::CRUSHING.reverse_bits();
         self
     }
 
-    pub const fn new_NO_ANIMATION() -> Self {
+    pub const fn new_no_animation() -> Self {
         Self {
             inner: HitInfo::NO_ANIMATION,
             unk1: None,
@@ -955,22 +955,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_NO_ANIMATION(mut self) -> Self {
+    pub fn set_no_animation(mut self) -> Self {
         self.inner |= HitInfo::NO_ANIMATION;
         self
     }
 
-    pub const fn get_NO_ANIMATION(&self) -> bool {
+    pub const fn get_no_animation(&self) -> bool {
         (self.inner & HitInfo::NO_ANIMATION) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_NO_ANIMATION(mut self) -> Self {
+    pub fn clear_no_animation(mut self) -> Self {
         self.inner &= HitInfo::NO_ANIMATION.reverse_bits();
         self
     }
 
-    pub const fn new_UNK19(unk19: SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19) -> Self {
+    pub const fn new_unk19(unk19: SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19) -> Self {
         Self {
             inner: HitInfo::UNK19,
             unk1: None,
@@ -982,24 +982,24 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK19(mut self, unk19: SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19) -> Self {
+    pub fn set_unk19(mut self, unk19: SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19) -> Self {
         self.inner |= HitInfo::UNK19;
         self.unk19 = Some(unk19);
         self
     }
 
-    pub const fn get_UNK19(&self) -> Option<&SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19> {
+    pub const fn get_unk19(&self) -> Option<&SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19> {
         self.unk19.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK19(mut self) -> Self {
+    pub fn clear_unk19(mut self) -> Self {
         self.inner &= HitInfo::UNK19.reverse_bits();
         self.unk19 = None;
         self
     }
 
-    pub const fn new_UNK20() -> Self {
+    pub const fn new_unk20() -> Self {
         Self {
             inner: HitInfo::UNK20,
             unk1: None,
@@ -1011,22 +1011,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK20(mut self) -> Self {
+    pub fn set_unk20(mut self) -> Self {
         self.inner |= HitInfo::UNK20;
         self
     }
 
-    pub const fn get_UNK20(&self) -> bool {
+    pub const fn get_unk20(&self) -> bool {
         (self.inner & HitInfo::UNK20) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK20(mut self) -> Self {
+    pub fn clear_unk20(mut self) -> Self {
         self.inner &= HitInfo::UNK20.reverse_bits();
         self
     }
 
-    pub const fn new_SWINGNOHITSOUND() -> Self {
+    pub const fn new_swingnohitsound() -> Self {
         Self {
             inner: HitInfo::SWINGNOHITSOUND,
             unk1: None,
@@ -1038,22 +1038,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_SWINGNOHITSOUND(mut self) -> Self {
+    pub fn set_swingnohitsound(mut self) -> Self {
         self.inner |= HitInfo::SWINGNOHITSOUND;
         self
     }
 
-    pub const fn get_SWINGNOHITSOUND(&self) -> bool {
+    pub const fn get_swingnohitsound(&self) -> bool {
         (self.inner & HitInfo::SWINGNOHITSOUND) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_SWINGNOHITSOUND(mut self) -> Self {
+    pub fn clear_swingnohitsound(mut self) -> Self {
         self.inner &= HitInfo::SWINGNOHITSOUND.reverse_bits();
         self
     }
 
-    pub const fn new_UNK22() -> Self {
+    pub const fn new_unk22() -> Self {
         Self {
             inner: HitInfo::UNK22,
             unk1: None,
@@ -1065,22 +1065,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNK22(mut self) -> Self {
+    pub fn set_unk22(mut self) -> Self {
         self.inner |= HitInfo::UNK22;
         self
     }
 
-    pub const fn get_UNK22(&self) -> bool {
+    pub const fn get_unk22(&self) -> bool {
         (self.inner & HitInfo::UNK22) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNK22(mut self) -> Self {
+    pub fn clear_unk22(mut self) -> Self {
         self.inner &= HitInfo::UNK22.reverse_bits();
         self
     }
 
-    pub const fn new_RAGE_GAIN() -> Self {
+    pub const fn new_rage_gain() -> Self {
         Self {
             inner: HitInfo::RAGE_GAIN,
             unk1: None,
@@ -1092,22 +1092,22 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_RAGE_GAIN(mut self) -> Self {
+    pub fn set_rage_gain(mut self) -> Self {
         self.inner |= HitInfo::RAGE_GAIN;
         self
     }
 
-    pub const fn get_RAGE_GAIN(&self) -> bool {
+    pub const fn get_rage_gain(&self) -> bool {
         (self.inner & HitInfo::RAGE_GAIN) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_RAGE_GAIN(mut self) -> Self {
+    pub fn clear_rage_gain(mut self) -> Self {
         self.inner &= HitInfo::RAGE_GAIN.reverse_bits();
         self
     }
 
-    pub const fn new_FAKE_DAMAGE() -> Self {
+    pub const fn new_fake_damage() -> Self {
         Self {
             inner: HitInfo::FAKE_DAMAGE,
             unk1: None,
@@ -1119,17 +1119,17 @@ impl SMSG_ATTACKERSTATEUPDATE_HitInfo {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FAKE_DAMAGE(mut self) -> Self {
+    pub fn set_fake_damage(mut self) -> Self {
         self.inner |= HitInfo::FAKE_DAMAGE;
         self
     }
 
-    pub const fn get_FAKE_DAMAGE(&self) -> bool {
+    pub const fn get_fake_damage(&self) -> bool {
         (self.inner & HitInfo::FAKE_DAMAGE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FAKE_DAMAGE(mut self) -> Self {
+    pub fn clear_fake_damage(mut self) -> Self {
         self.inner &= HitInfo::FAKE_DAMAGE.reverse_bits();
         self
     }

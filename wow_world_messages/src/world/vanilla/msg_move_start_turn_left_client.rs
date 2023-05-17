@@ -74,7 +74,7 @@ mod test {
         MSG_MOVE_START_TURN_LEFT_Client {
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
-                    .set_TURN_LEFT()
+                    .set_turn_left()
                     ,
                 timestamp: 0x179BEFB,
                 position: Vector3d {

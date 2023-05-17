@@ -74,8 +74,8 @@ mod test {
         MSG_MOVE_START_STRAFE_LEFT_Client {
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
-                    .set_FORWARD()
-                    .set_STRAFE_LEFT()
+                    .set_forward()
+                    .set_strafe_left()
                     ,
                 timestamp: 0x179D29F,
                 position: Vector3d {

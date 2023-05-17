@@ -74,7 +74,7 @@ mod test {
         MSG_MOVE_HEARTBEAT_Client {
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
-                    .set_FORWARD()
+                    .set_forward()
                     ,
                 timestamp: 0x17A3146,
                 position: Vector3d {

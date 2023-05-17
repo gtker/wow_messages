@@ -58,170 +58,170 @@ impl CastFlags {
         }
     }
 
-    pub const fn is_HIDDEN_COMBATLOG(&self) -> bool {
+    pub const fn is_hidden_combatlog(&self) -> bool {
         (self.inner & Self::HIDDEN_COMBATLOG) != 0
     }
 
     /// mangoszero/cmangos/vmangos: hide in combat log?
     ///
-    pub const fn new_HIDDEN_COMBATLOG() -> Self {
+    pub const fn new_hidden_combatlog() -> Self {
         Self { inner: Self::HIDDEN_COMBATLOG }
     }
 
-    pub fn set_HIDDEN_COMBATLOG(&mut self) -> Self {
+    pub fn set_hidden_combatlog(&mut self) -> Self {
         self.inner |= Self::HIDDEN_COMBATLOG;
         *self
     }
 
-    pub fn clear_HIDDEN_COMBATLOG(&mut self) -> Self {
+    pub fn clear_hidden_combatlog(&mut self) -> Self {
         self.inner &= Self::HIDDEN_COMBATLOG.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN2(&self) -> bool {
+    pub const fn is_unknown2(&self) -> bool {
         (self.inner & Self::UNKNOWN2) != 0
     }
 
-    pub const fn new_UNKNOWN2() -> Self {
+    pub const fn new_unknown2() -> Self {
         Self { inner: Self::UNKNOWN2 }
     }
 
-    pub fn set_UNKNOWN2(&mut self) -> Self {
+    pub fn set_unknown2(&mut self) -> Self {
         self.inner |= Self::UNKNOWN2;
         *self
     }
 
-    pub fn clear_UNKNOWN2(&mut self) -> Self {
+    pub fn clear_unknown2(&mut self) -> Self {
         self.inner &= Self::UNKNOWN2.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN3(&self) -> bool {
+    pub const fn is_unknown3(&self) -> bool {
         (self.inner & Self::UNKNOWN3) != 0
     }
 
-    pub const fn new_UNKNOWN3() -> Self {
+    pub const fn new_unknown3() -> Self {
         Self { inner: Self::UNKNOWN3 }
     }
 
-    pub fn set_UNKNOWN3(&mut self) -> Self {
+    pub fn set_unknown3(&mut self) -> Self {
         self.inner |= Self::UNKNOWN3;
         *self
     }
 
-    pub fn clear_UNKNOWN3(&mut self) -> Self {
+    pub fn clear_unknown3(&mut self) -> Self {
         self.inner &= Self::UNKNOWN3.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN4(&self) -> bool {
+    pub const fn is_unknown4(&self) -> bool {
         (self.inner & Self::UNKNOWN4) != 0
     }
 
-    pub const fn new_UNKNOWN4() -> Self {
+    pub const fn new_unknown4() -> Self {
         Self { inner: Self::UNKNOWN4 }
     }
 
-    pub fn set_UNKNOWN4(&mut self) -> Self {
+    pub fn set_unknown4(&mut self) -> Self {
         self.inner |= Self::UNKNOWN4;
         *self
     }
 
-    pub fn clear_UNKNOWN4(&mut self) -> Self {
+    pub fn clear_unknown4(&mut self) -> Self {
         self.inner &= Self::UNKNOWN4.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN5(&self) -> bool {
+    pub const fn is_unknown5(&self) -> bool {
         (self.inner & Self::UNKNOWN5) != 0
     }
 
-    pub const fn new_UNKNOWN5() -> Self {
+    pub const fn new_unknown5() -> Self {
         Self { inner: Self::UNKNOWN5 }
     }
 
-    pub fn set_UNKNOWN5(&mut self) -> Self {
+    pub fn set_unknown5(&mut self) -> Self {
         self.inner |= Self::UNKNOWN5;
         *self
     }
 
-    pub fn clear_UNKNOWN5(&mut self) -> Self {
+    pub fn clear_unknown5(&mut self) -> Self {
         self.inner &= Self::UNKNOWN5.reverse_bits();
         *self
     }
 
-    pub const fn is_AMMO(&self) -> bool {
+    pub const fn is_ammo(&self) -> bool {
         (self.inner & Self::AMMO) != 0
     }
 
     /// cmangos/vmangos/mangoszero: Projectiles visual
     ///
-    pub const fn new_AMMO() -> Self {
+    pub const fn new_ammo() -> Self {
         Self { inner: Self::AMMO }
     }
 
-    pub fn set_AMMO(&mut self) -> Self {
+    pub fn set_ammo(&mut self) -> Self {
         self.inner |= Self::AMMO;
         *self
     }
 
-    pub fn clear_AMMO(&mut self) -> Self {
+    pub fn clear_ammo(&mut self) -> Self {
         self.inner &= Self::AMMO.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN7(&self) -> bool {
+    pub const fn is_unknown7(&self) -> bool {
         (self.inner & Self::UNKNOWN7) != 0
     }
 
     /// cmangos/vmangos/mangoszero: !0x41 mask used to call `CGTradeSkillInfo::DoRecast`
     ///
-    pub const fn new_UNKNOWN7() -> Self {
+    pub const fn new_unknown7() -> Self {
         Self { inner: Self::UNKNOWN7 }
     }
 
-    pub fn set_UNKNOWN7(&mut self) -> Self {
+    pub fn set_unknown7(&mut self) -> Self {
         self.inner |= Self::UNKNOWN7;
         *self
     }
 
-    pub fn clear_UNKNOWN7(&mut self) -> Self {
+    pub fn clear_unknown7(&mut self) -> Self {
         self.inner &= Self::UNKNOWN7.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN8(&self) -> bool {
+    pub const fn is_unknown8(&self) -> bool {
         (self.inner & Self::UNKNOWN8) != 0
     }
 
-    pub const fn new_UNKNOWN8() -> Self {
+    pub const fn new_unknown8() -> Self {
         Self { inner: Self::UNKNOWN8 }
     }
 
-    pub fn set_UNKNOWN8(&mut self) -> Self {
+    pub fn set_unknown8(&mut self) -> Self {
         self.inner |= Self::UNKNOWN8;
         *self
     }
 
-    pub fn clear_UNKNOWN8(&mut self) -> Self {
+    pub fn clear_unknown8(&mut self) -> Self {
         self.inner &= Self::UNKNOWN8.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN9(&self) -> bool {
+    pub const fn is_unknown9(&self) -> bool {
         (self.inner & Self::UNKNOWN9) != 0
     }
 
-    pub const fn new_UNKNOWN9() -> Self {
+    pub const fn new_unknown9() -> Self {
         Self { inner: Self::UNKNOWN9 }
     }
 
-    pub fn set_UNKNOWN9(&mut self) -> Self {
+    pub fn set_unknown9(&mut self) -> Self {
         self.inner |= Self::UNKNOWN9;
         *self
     }
 
-    pub fn clear_UNKNOWN9(&mut self) -> Self {
+    pub fn clear_unknown9(&mut self) -> Self {
         self.inner &= Self::UNKNOWN9.reverse_bits();
         *self
     }

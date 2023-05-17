@@ -403,9 +403,10 @@ fn print_read_if_statement_flag(
     postfix: &str,
 ) {
     s.open_curly(format!(
-        "let {var_name}_{enumerator_name} = if {var_name}.is_{enumerator_name}()",
+        "let {var_name}_{enumerator_name} = if {var_name}.is_{enumerator_name_lower}()",
         var_name = statement.name(),
         enumerator_name = statement.flag_get_enumerator(),
+        enumerator_name_lower = statement.flag_get_enumerator().to_lowercase(),
     ));
 
     for m in statement.members() {
@@ -450,7 +451,7 @@ fn print_read_if_statement_flag(
         s.open_curly(format!(
             "else if {var_name}.is_{enumerator_name}()",
             var_name = elseif.name(),
-            enumerator_name = elseif.flag_get_enumerator(),
+            enumerator_name = elseif.flag_get_enumerator().to_lowercase(),
         ));
 
         for m in elseif.members() {

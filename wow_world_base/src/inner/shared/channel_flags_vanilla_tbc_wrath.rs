@@ -52,128 +52,128 @@ impl ChannelFlags {
         }
     }
 
-    pub const fn is_CUSTOM(&self) -> bool {
+    pub const fn is_custom(&self) -> bool {
         (self.inner & Self::CUSTOM) != 0
     }
 
-    pub const fn new_CUSTOM() -> Self {
+    pub const fn new_custom() -> Self {
         Self { inner: Self::CUSTOM }
     }
 
-    pub fn set_CUSTOM(&mut self) -> Self {
+    pub fn set_custom(&mut self) -> Self {
         self.inner |= Self::CUSTOM;
         *self
     }
 
-    pub fn clear_CUSTOM(&mut self) -> Self {
+    pub fn clear_custom(&mut self) -> Self {
         self.inner &= Self::CUSTOM.reverse_bits();
         *self
     }
 
-    pub const fn is_TRADE(&self) -> bool {
+    pub const fn is_trade(&self) -> bool {
         (self.inner & Self::TRADE) != 0
     }
 
-    pub const fn new_TRADE() -> Self {
+    pub const fn new_trade() -> Self {
         Self { inner: Self::TRADE }
     }
 
-    pub fn set_TRADE(&mut self) -> Self {
+    pub fn set_trade(&mut self) -> Self {
         self.inner |= Self::TRADE;
         *self
     }
 
-    pub fn clear_TRADE(&mut self) -> Self {
+    pub fn clear_trade(&mut self) -> Self {
         self.inner &= Self::TRADE.reverse_bits();
         *self
     }
 
-    pub const fn is_NOT_LFG(&self) -> bool {
+    pub const fn is_not_lfg(&self) -> bool {
         (self.inner & Self::NOT_LFG) != 0
     }
 
-    pub const fn new_NOT_LFG() -> Self {
+    pub const fn new_not_lfg() -> Self {
         Self { inner: Self::NOT_LFG }
     }
 
-    pub fn set_NOT_LFG(&mut self) -> Self {
+    pub fn set_not_lfg(&mut self) -> Self {
         self.inner |= Self::NOT_LFG;
         *self
     }
 
-    pub fn clear_NOT_LFG(&mut self) -> Self {
+    pub fn clear_not_lfg(&mut self) -> Self {
         self.inner &= Self::NOT_LFG.reverse_bits();
         *self
     }
 
-    pub const fn is_GENERAL(&self) -> bool {
+    pub const fn is_general(&self) -> bool {
         (self.inner & Self::GENERAL) != 0
     }
 
-    pub const fn new_GENERAL() -> Self {
+    pub const fn new_general() -> Self {
         Self { inner: Self::GENERAL }
     }
 
-    pub fn set_GENERAL(&mut self) -> Self {
+    pub fn set_general(&mut self) -> Self {
         self.inner |= Self::GENERAL;
         *self
     }
 
-    pub fn clear_GENERAL(&mut self) -> Self {
+    pub fn clear_general(&mut self) -> Self {
         self.inner &= Self::GENERAL.reverse_bits();
         *self
     }
 
-    pub const fn is_CITY(&self) -> bool {
+    pub const fn is_city(&self) -> bool {
         (self.inner & Self::CITY) != 0
     }
 
-    pub const fn new_CITY() -> Self {
+    pub const fn new_city() -> Self {
         Self { inner: Self::CITY }
     }
 
-    pub fn set_CITY(&mut self) -> Self {
+    pub fn set_city(&mut self) -> Self {
         self.inner |= Self::CITY;
         *self
     }
 
-    pub fn clear_CITY(&mut self) -> Self {
+    pub fn clear_city(&mut self) -> Self {
         self.inner &= Self::CITY.reverse_bits();
         *self
     }
 
-    pub const fn is_LFG(&self) -> bool {
+    pub const fn is_lfg(&self) -> bool {
         (self.inner & Self::LFG) != 0
     }
 
-    pub const fn new_LFG() -> Self {
+    pub const fn new_lfg() -> Self {
         Self { inner: Self::LFG }
     }
 
-    pub fn set_LFG(&mut self) -> Self {
+    pub fn set_lfg(&mut self) -> Self {
         self.inner |= Self::LFG;
         *self
     }
 
-    pub fn clear_LFG(&mut self) -> Self {
+    pub fn clear_lfg(&mut self) -> Self {
         self.inner &= Self::LFG.reverse_bits();
         *self
     }
 
-    pub const fn is_VOICE(&self) -> bool {
+    pub const fn is_voice(&self) -> bool {
         (self.inner & Self::VOICE) != 0
     }
 
-    pub const fn new_VOICE() -> Self {
+    pub const fn new_voice() -> Self {
         Self { inner: Self::VOICE }
     }
 
-    pub fn set_VOICE(&mut self) -> Self {
+    pub fn set_voice(&mut self) -> Self {
         self.inner |= Self::VOICE;
         *self
     }
 
-    pub fn clear_VOICE(&mut self) -> Self {
+    pub fn clear_voice(&mut self) -> Self {
         self.inner &= Self::VOICE.reverse_bits();
         *self
     }

@@ -82,334 +82,334 @@ impl SpellCastTargetFlags {
         }
     }
 
-    pub const fn is_UNUSED1(&self) -> bool {
+    pub const fn is_unused1(&self) -> bool {
         (self.inner & Self::UNUSED1) != 0
     }
 
     /// not used in any spells as of 2.4.3 (can be set dynamically)
     ///
-    pub const fn new_UNUSED1() -> Self {
+    pub const fn new_unused1() -> Self {
         Self { inner: Self::UNUSED1 }
     }
 
-    pub fn set_UNUSED1(&mut self) -> Self {
+    pub fn set_unused1(&mut self) -> Self {
         self.inner |= Self::UNUSED1;
         *self
     }
 
-    pub fn clear_UNUSED1(&mut self) -> Self {
+    pub fn clear_unused1(&mut self) -> Self {
         self.inner &= Self::UNUSED1.reverse_bits();
         *self
     }
 
-    pub const fn is_UNIT(&self) -> bool {
+    pub const fn is_unit(&self) -> bool {
         (self.inner & Self::UNIT) != 0
     }
 
-    pub const fn new_UNIT() -> Self {
+    pub const fn new_unit() -> Self {
         Self { inner: Self::UNIT }
     }
 
-    pub fn set_UNIT(&mut self) -> Self {
+    pub fn set_unit(&mut self) -> Self {
         self.inner |= Self::UNIT;
         *self
     }
 
-    pub fn clear_UNIT(&mut self) -> Self {
+    pub fn clear_unit(&mut self) -> Self {
         self.inner &= Self::UNIT.reverse_bits();
         *self
     }
 
-    pub const fn is_UNIT_RAID(&self) -> bool {
+    pub const fn is_unit_raid(&self) -> bool {
         (self.inner & Self::UNIT_RAID) != 0
     }
 
     /// not used in any spells as of 2.4.3 (can be set dynamically) - raid member
     ///
-    pub const fn new_UNIT_RAID() -> Self {
+    pub const fn new_unit_raid() -> Self {
         Self { inner: Self::UNIT_RAID }
     }
 
-    pub fn set_UNIT_RAID(&mut self) -> Self {
+    pub fn set_unit_raid(&mut self) -> Self {
         self.inner |= Self::UNIT_RAID;
         *self
     }
 
-    pub fn clear_UNIT_RAID(&mut self) -> Self {
+    pub fn clear_unit_raid(&mut self) -> Self {
         self.inner &= Self::UNIT_RAID.reverse_bits();
         *self
     }
 
-    pub const fn is_UNIT_PARTY(&self) -> bool {
+    pub const fn is_unit_party(&self) -> bool {
         (self.inner & Self::UNIT_PARTY) != 0
     }
 
     /// not used in any spells as of 2.4.3 (can be set dynamically) - party member
     ///
-    pub const fn new_UNIT_PARTY() -> Self {
+    pub const fn new_unit_party() -> Self {
         Self { inner: Self::UNIT_PARTY }
     }
 
-    pub fn set_UNIT_PARTY(&mut self) -> Self {
+    pub fn set_unit_party(&mut self) -> Self {
         self.inner |= Self::UNIT_PARTY;
         *self
     }
 
-    pub fn clear_UNIT_PARTY(&mut self) -> Self {
+    pub fn clear_unit_party(&mut self) -> Self {
         self.inner &= Self::UNIT_PARTY.reverse_bits();
         *self
     }
 
-    pub const fn is_ITEM(&self) -> bool {
+    pub const fn is_item(&self) -> bool {
         (self.inner & Self::ITEM) != 0
     }
 
-    pub const fn new_ITEM() -> Self {
+    pub const fn new_item() -> Self {
         Self { inner: Self::ITEM }
     }
 
-    pub fn set_ITEM(&mut self) -> Self {
+    pub fn set_item(&mut self) -> Self {
         self.inner |= Self::ITEM;
         *self
     }
 
-    pub fn clear_ITEM(&mut self) -> Self {
+    pub fn clear_item(&mut self) -> Self {
         self.inner &= Self::ITEM.reverse_bits();
         *self
     }
 
-    pub const fn is_SOURCE_LOCATION(&self) -> bool {
+    pub const fn is_source_location(&self) -> bool {
         (self.inner & Self::SOURCE_LOCATION) != 0
     }
 
-    pub const fn new_SOURCE_LOCATION() -> Self {
+    pub const fn new_source_location() -> Self {
         Self { inner: Self::SOURCE_LOCATION }
     }
 
-    pub fn set_SOURCE_LOCATION(&mut self) -> Self {
+    pub fn set_source_location(&mut self) -> Self {
         self.inner |= Self::SOURCE_LOCATION;
         *self
     }
 
-    pub fn clear_SOURCE_LOCATION(&mut self) -> Self {
+    pub fn clear_source_location(&mut self) -> Self {
         self.inner &= Self::SOURCE_LOCATION.reverse_bits();
         *self
     }
 
-    pub const fn is_DEST_LOCATION(&self) -> bool {
+    pub const fn is_dest_location(&self) -> bool {
         (self.inner & Self::DEST_LOCATION) != 0
     }
 
-    pub const fn new_DEST_LOCATION() -> Self {
+    pub const fn new_dest_location() -> Self {
         Self { inner: Self::DEST_LOCATION }
     }
 
-    pub fn set_DEST_LOCATION(&mut self) -> Self {
+    pub fn set_dest_location(&mut self) -> Self {
         self.inner |= Self::DEST_LOCATION;
         *self
     }
 
-    pub fn clear_DEST_LOCATION(&mut self) -> Self {
+    pub fn clear_dest_location(&mut self) -> Self {
         self.inner &= Self::DEST_LOCATION.reverse_bits();
         *self
     }
 
-    pub const fn is_UNIT_ENEMY(&self) -> bool {
+    pub const fn is_unit_enemy(&self) -> bool {
         (self.inner & Self::UNIT_ENEMY) != 0
     }
 
     /// `CanAttack` == true
     ///
-    pub const fn new_UNIT_ENEMY() -> Self {
+    pub const fn new_unit_enemy() -> Self {
         Self { inner: Self::UNIT_ENEMY }
     }
 
-    pub fn set_UNIT_ENEMY(&mut self) -> Self {
+    pub fn set_unit_enemy(&mut self) -> Self {
         self.inner |= Self::UNIT_ENEMY;
         *self
     }
 
-    pub fn clear_UNIT_ENEMY(&mut self) -> Self {
+    pub fn clear_unit_enemy(&mut self) -> Self {
         self.inner &= Self::UNIT_ENEMY.reverse_bits();
         *self
     }
 
-    pub const fn is_UNIT_ALLY(&self) -> bool {
+    pub const fn is_unit_ally(&self) -> bool {
         (self.inner & Self::UNIT_ALLY) != 0
     }
 
     /// `CanAssist` == true
     ///
-    pub const fn new_UNIT_ALLY() -> Self {
+    pub const fn new_unit_ally() -> Self {
         Self { inner: Self::UNIT_ALLY }
     }
 
-    pub fn set_UNIT_ALLY(&mut self) -> Self {
+    pub fn set_unit_ally(&mut self) -> Self {
         self.inner |= Self::UNIT_ALLY;
         *self
     }
 
-    pub fn clear_UNIT_ALLY(&mut self) -> Self {
+    pub fn clear_unit_ally(&mut self) -> Self {
         self.inner &= Self::UNIT_ALLY.reverse_bits();
         *self
     }
 
-    pub const fn is_CORPSE_ENEMY(&self) -> bool {
+    pub const fn is_corpse_enemy(&self) -> bool {
         (self.inner & Self::CORPSE_ENEMY) != 0
     }
 
     /// pguid, `CanAssist` == false
     ///
-    pub const fn new_CORPSE_ENEMY() -> Self {
+    pub const fn new_corpse_enemy() -> Self {
         Self { inner: Self::CORPSE_ENEMY }
     }
 
-    pub fn set_CORPSE_ENEMY(&mut self) -> Self {
+    pub fn set_corpse_enemy(&mut self) -> Self {
         self.inner |= Self::CORPSE_ENEMY;
         *self
     }
 
-    pub fn clear_CORPSE_ENEMY(&mut self) -> Self {
+    pub fn clear_corpse_enemy(&mut self) -> Self {
         self.inner &= Self::CORPSE_ENEMY.reverse_bits();
         *self
     }
 
-    pub const fn is_UNIT_DEAD(&self) -> bool {
+    pub const fn is_unit_dead(&self) -> bool {
         (self.inner & Self::UNIT_DEAD) != 0
     }
 
     /// skinning-like effects
     ///
-    pub const fn new_UNIT_DEAD() -> Self {
+    pub const fn new_unit_dead() -> Self {
         Self { inner: Self::UNIT_DEAD }
     }
 
-    pub fn set_UNIT_DEAD(&mut self) -> Self {
+    pub fn set_unit_dead(&mut self) -> Self {
         self.inner |= Self::UNIT_DEAD;
         *self
     }
 
-    pub fn clear_UNIT_DEAD(&mut self) -> Self {
+    pub fn clear_unit_dead(&mut self) -> Self {
         self.inner &= Self::UNIT_DEAD.reverse_bits();
         *self
     }
 
-    pub const fn is_GAMEOBJECT(&self) -> bool {
+    pub const fn is_gameobject(&self) -> bool {
         (self.inner & Self::GAMEOBJECT) != 0
     }
 
     /// pguid, 0 spells in 2.4.3
     ///
-    pub const fn new_GAMEOBJECT() -> Self {
+    pub const fn new_gameobject() -> Self {
         Self { inner: Self::GAMEOBJECT }
     }
 
-    pub fn set_GAMEOBJECT(&mut self) -> Self {
+    pub fn set_gameobject(&mut self) -> Self {
         self.inner |= Self::GAMEOBJECT;
         *self
     }
 
-    pub fn clear_GAMEOBJECT(&mut self) -> Self {
+    pub fn clear_gameobject(&mut self) -> Self {
         self.inner &= Self::GAMEOBJECT.reverse_bits();
         *self
     }
 
-    pub const fn is_TRADE_ITEM(&self) -> bool {
+    pub const fn is_trade_item(&self) -> bool {
         (self.inner & Self::TRADE_ITEM) != 0
     }
 
     /// pguid, 0 spells
     ///
-    pub const fn new_TRADE_ITEM() -> Self {
+    pub const fn new_trade_item() -> Self {
         Self { inner: Self::TRADE_ITEM }
     }
 
-    pub fn set_TRADE_ITEM(&mut self) -> Self {
+    pub fn set_trade_item(&mut self) -> Self {
         self.inner |= Self::TRADE_ITEM;
         *self
     }
 
-    pub fn clear_TRADE_ITEM(&mut self) -> Self {
+    pub fn clear_trade_item(&mut self) -> Self {
         self.inner &= Self::TRADE_ITEM.reverse_bits();
         *self
     }
 
-    pub const fn is_STRING(&self) -> bool {
+    pub const fn is_string(&self) -> bool {
         (self.inner & Self::STRING) != 0
     }
 
     /// string, 0 spells
     ///
-    pub const fn new_STRING() -> Self {
+    pub const fn new_string() -> Self {
         Self { inner: Self::STRING }
     }
 
-    pub fn set_STRING(&mut self) -> Self {
+    pub fn set_string(&mut self) -> Self {
         self.inner |= Self::STRING;
         *self
     }
 
-    pub fn clear_STRING(&mut self) -> Self {
+    pub fn clear_string(&mut self) -> Self {
         self.inner &= Self::STRING.reverse_bits();
         *self
     }
 
-    pub const fn is_LOCKED(&self) -> bool {
+    pub const fn is_locked(&self) -> bool {
         (self.inner & Self::LOCKED) != 0
     }
 
     /// 199 spells, opening object/lock
     ///
-    pub const fn new_LOCKED() -> Self {
+    pub const fn new_locked() -> Self {
         Self { inner: Self::LOCKED }
     }
 
-    pub fn set_LOCKED(&mut self) -> Self {
+    pub fn set_locked(&mut self) -> Self {
         self.inner |= Self::LOCKED;
         *self
     }
 
-    pub fn clear_LOCKED(&mut self) -> Self {
+    pub fn clear_locked(&mut self) -> Self {
         self.inner &= Self::LOCKED.reverse_bits();
         *self
     }
 
-    pub const fn is_CORPSE_ALLY(&self) -> bool {
+    pub const fn is_corpse_ally(&self) -> bool {
         (self.inner & Self::CORPSE_ALLY) != 0
     }
 
     /// pguid, `CanAssist` == true
     ///
-    pub const fn new_CORPSE_ALLY() -> Self {
+    pub const fn new_corpse_ally() -> Self {
         Self { inner: Self::CORPSE_ALLY }
     }
 
-    pub fn set_CORPSE_ALLY(&mut self) -> Self {
+    pub fn set_corpse_ally(&mut self) -> Self {
         self.inner |= Self::CORPSE_ALLY;
         *self
     }
 
-    pub fn clear_CORPSE_ALLY(&mut self) -> Self {
+    pub fn clear_corpse_ally(&mut self) -> Self {
         self.inner &= Self::CORPSE_ALLY.reverse_bits();
         *self
     }
 
-    pub const fn is_UNIT_MINIPET(&self) -> bool {
+    pub const fn is_unit_minipet(&self) -> bool {
         (self.inner & Self::UNIT_MINIPET) != 0
     }
 
     /// pguid, not used in any spells as of 2.4.3 (can be set dynamically)
     ///
-    pub const fn new_UNIT_MINIPET() -> Self {
+    pub const fn new_unit_minipet() -> Self {
         Self { inner: Self::UNIT_MINIPET }
     }
 
-    pub fn set_UNIT_MINIPET(&mut self) -> Self {
+    pub fn set_unit_minipet(&mut self) -> Self {
         self.inner |= Self::UNIT_MINIPET;
         *self
     }
 
-    pub fn clear_UNIT_MINIPET(&mut self) -> Self {
+    pub fn clear_unit_minipet(&mut self) -> Self {
         self.inner &= Self::UNIT_MINIPET.reverse_bits();
         *self
     }

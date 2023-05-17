@@ -124,622 +124,622 @@ impl ItemFlag {
         }
     }
 
-    pub const fn is_NO_PICKUP(&self) -> bool {
+    pub const fn is_no_pickup(&self) -> bool {
         (self.inner & Self::NO_PICKUP) != 0
     }
 
-    pub const fn new_NO_PICKUP() -> Self {
+    pub const fn new_no_pickup() -> Self {
         Self { inner: Self::NO_PICKUP }
     }
 
-    pub fn set_NO_PICKUP(&mut self) -> Self {
+    pub fn set_no_pickup(&mut self) -> Self {
         self.inner |= Self::NO_PICKUP;
         *self
     }
 
-    pub fn clear_NO_PICKUP(&mut self) -> Self {
+    pub fn clear_no_pickup(&mut self) -> Self {
         self.inner &= Self::NO_PICKUP.reverse_bits();
         *self
     }
 
-    pub const fn is_CONJURED(&self) -> bool {
+    pub const fn is_conjured(&self) -> bool {
         (self.inner & Self::CONJURED) != 0
     }
 
     /// Conjured item
     ///
-    pub const fn new_CONJURED() -> Self {
+    pub const fn new_conjured() -> Self {
         Self { inner: Self::CONJURED }
     }
 
-    pub fn set_CONJURED(&mut self) -> Self {
+    pub fn set_conjured(&mut self) -> Self {
         self.inner |= Self::CONJURED;
         *self
     }
 
-    pub fn clear_CONJURED(&mut self) -> Self {
+    pub fn clear_conjured(&mut self) -> Self {
         self.inner &= Self::CONJURED.reverse_bits();
         *self
     }
 
-    pub const fn is_LOOTABLE(&self) -> bool {
+    pub const fn is_lootable(&self) -> bool {
         (self.inner & Self::LOOTABLE) != 0
     }
 
     /// Item can be right clicked to open for loot
     ///
-    pub const fn new_LOOTABLE() -> Self {
+    pub const fn new_lootable() -> Self {
         Self { inner: Self::LOOTABLE }
     }
 
-    pub fn set_LOOTABLE(&mut self) -> Self {
+    pub fn set_lootable(&mut self) -> Self {
         self.inner |= Self::LOOTABLE;
         *self
     }
 
-    pub fn clear_LOOTABLE(&mut self) -> Self {
+    pub fn clear_lootable(&mut self) -> Self {
         self.inner &= Self::LOOTABLE.reverse_bits();
         *self
     }
 
-    pub const fn is_HEROIC_TOOLTIP(&self) -> bool {
+    pub const fn is_heroic_tooltip(&self) -> bool {
         (self.inner & Self::HEROIC_TOOLTIP) != 0
     }
 
     /// Makes green 'Heroic' text appear on item
     ///
-    pub const fn new_HEROIC_TOOLTIP() -> Self {
+    pub const fn new_heroic_tooltip() -> Self {
         Self { inner: Self::HEROIC_TOOLTIP }
     }
 
-    pub fn set_HEROIC_TOOLTIP(&mut self) -> Self {
+    pub fn set_heroic_tooltip(&mut self) -> Self {
         self.inner |= Self::HEROIC_TOOLTIP;
         *self
     }
 
-    pub fn clear_HEROIC_TOOLTIP(&mut self) -> Self {
+    pub fn clear_heroic_tooltip(&mut self) -> Self {
         self.inner &= Self::HEROIC_TOOLTIP.reverse_bits();
         *self
     }
 
-    pub const fn is_DEPRECATED(&self) -> bool {
+    pub const fn is_deprecated(&self) -> bool {
         (self.inner & Self::DEPRECATED) != 0
     }
 
     /// Cannot equip or use
     ///
-    pub const fn new_DEPRECATED() -> Self {
+    pub const fn new_deprecated() -> Self {
         Self { inner: Self::DEPRECATED }
     }
 
-    pub fn set_DEPRECATED(&mut self) -> Self {
+    pub fn set_deprecated(&mut self) -> Self {
         self.inner |= Self::DEPRECATED;
         *self
     }
 
-    pub fn clear_DEPRECATED(&mut self) -> Self {
+    pub fn clear_deprecated(&mut self) -> Self {
         self.inner &= Self::DEPRECATED.reverse_bits();
         *self
     }
 
-    pub const fn is_INDESTRUCTIBLE(&self) -> bool {
+    pub const fn is_indestructible(&self) -> bool {
         (self.inner & Self::INDESTRUCTIBLE) != 0
     }
 
     /// Item can not be destroyed, except by using spell (item can be reagent for spell)
     ///
-    pub const fn new_INDESTRUCTIBLE() -> Self {
+    pub const fn new_indestructible() -> Self {
         Self { inner: Self::INDESTRUCTIBLE }
     }
 
-    pub fn set_INDESTRUCTIBLE(&mut self) -> Self {
+    pub fn set_indestructible(&mut self) -> Self {
         self.inner |= Self::INDESTRUCTIBLE;
         *self
     }
 
-    pub fn clear_INDESTRUCTIBLE(&mut self) -> Self {
+    pub fn clear_indestructible(&mut self) -> Self {
         self.inner &= Self::INDESTRUCTIBLE.reverse_bits();
         *self
     }
 
-    pub const fn is_PLAYER_CAST(&self) -> bool {
+    pub const fn is_player_cast(&self) -> bool {
         (self.inner & Self::PLAYER_CAST) != 0
     }
 
     /// Item's spells are castable by players
     ///
-    pub const fn new_PLAYER_CAST() -> Self {
+    pub const fn new_player_cast() -> Self {
         Self { inner: Self::PLAYER_CAST }
     }
 
-    pub fn set_PLAYER_CAST(&mut self) -> Self {
+    pub fn set_player_cast(&mut self) -> Self {
         self.inner |= Self::PLAYER_CAST;
         *self
     }
 
-    pub fn clear_PLAYER_CAST(&mut self) -> Self {
+    pub fn clear_player_cast(&mut self) -> Self {
         self.inner &= Self::PLAYER_CAST.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_EQUIP_COOLDOWN(&self) -> bool {
+    pub const fn is_no_equip_cooldown(&self) -> bool {
         (self.inner & Self::NO_EQUIP_COOLDOWN) != 0
     }
 
     /// No default 30 seconds cooldown when equipped
     ///
-    pub const fn new_NO_EQUIP_COOLDOWN() -> Self {
+    pub const fn new_no_equip_cooldown() -> Self {
         Self { inner: Self::NO_EQUIP_COOLDOWN }
     }
 
-    pub fn set_NO_EQUIP_COOLDOWN(&mut self) -> Self {
+    pub fn set_no_equip_cooldown(&mut self) -> Self {
         self.inner |= Self::NO_EQUIP_COOLDOWN;
         *self
     }
 
-    pub fn clear_NO_EQUIP_COOLDOWN(&mut self) -> Self {
+    pub fn clear_no_equip_cooldown(&mut self) -> Self {
         self.inner &= Self::NO_EQUIP_COOLDOWN.reverse_bits();
         *self
     }
 
-    pub const fn is_MULTI_LOOT_QUEST(&self) -> bool {
+    pub const fn is_multi_loot_quest(&self) -> bool {
         (self.inner & Self::MULTI_LOOT_QUEST) != 0
     }
 
-    pub const fn new_MULTI_LOOT_QUEST() -> Self {
+    pub const fn new_multi_loot_quest() -> Self {
         Self { inner: Self::MULTI_LOOT_QUEST }
     }
 
-    pub fn set_MULTI_LOOT_QUEST(&mut self) -> Self {
+    pub fn set_multi_loot_quest(&mut self) -> Self {
         self.inner |= Self::MULTI_LOOT_QUEST;
         *self
     }
 
-    pub fn clear_MULTI_LOOT_QUEST(&mut self) -> Self {
+    pub fn clear_multi_loot_quest(&mut self) -> Self {
         self.inner &= Self::MULTI_LOOT_QUEST.reverse_bits();
         *self
     }
 
-    pub const fn is_WRAPPER(&self) -> bool {
+    pub const fn is_wrapper(&self) -> bool {
         (self.inner & Self::WRAPPER) != 0
     }
 
     /// Item can wrap other items
     ///
-    pub const fn new_WRAPPER() -> Self {
+    pub const fn new_wrapper() -> Self {
         Self { inner: Self::WRAPPER }
     }
 
-    pub fn set_WRAPPER(&mut self) -> Self {
+    pub fn set_wrapper(&mut self) -> Self {
         self.inner |= Self::WRAPPER;
         *self
     }
 
-    pub fn clear_WRAPPER(&mut self) -> Self {
+    pub fn clear_wrapper(&mut self) -> Self {
         self.inner &= Self::WRAPPER.reverse_bits();
         *self
     }
 
-    pub const fn is_USES_RESOURCES(&self) -> bool {
+    pub const fn is_uses_resources(&self) -> bool {
         (self.inner & Self::USES_RESOURCES) != 0
     }
 
-    pub const fn new_USES_RESOURCES() -> Self {
+    pub const fn new_uses_resources() -> Self {
         Self { inner: Self::USES_RESOURCES }
     }
 
-    pub fn set_USES_RESOURCES(&mut self) -> Self {
+    pub fn set_uses_resources(&mut self) -> Self {
         self.inner |= Self::USES_RESOURCES;
         *self
     }
 
-    pub fn clear_USES_RESOURCES(&mut self) -> Self {
+    pub fn clear_uses_resources(&mut self) -> Self {
         self.inner &= Self::USES_RESOURCES.reverse_bits();
         *self
     }
 
-    pub const fn is_MULTI_DROP(&self) -> bool {
+    pub const fn is_multi_drop(&self) -> bool {
         (self.inner & Self::MULTI_DROP) != 0
     }
 
     /// Looting this item does not remove it from available loot
     ///
-    pub const fn new_MULTI_DROP() -> Self {
+    pub const fn new_multi_drop() -> Self {
         Self { inner: Self::MULTI_DROP }
     }
 
-    pub fn set_MULTI_DROP(&mut self) -> Self {
+    pub fn set_multi_drop(&mut self) -> Self {
         self.inner |= Self::MULTI_DROP;
         *self
     }
 
-    pub fn clear_MULTI_DROP(&mut self) -> Self {
+    pub fn clear_multi_drop(&mut self) -> Self {
         self.inner &= Self::MULTI_DROP.reverse_bits();
         *self
     }
 
-    pub const fn is_ITEM_PURCHASE_RECORD(&self) -> bool {
+    pub const fn is_item_purchase_record(&self) -> bool {
         (self.inner & Self::ITEM_PURCHASE_RECORD) != 0
     }
 
     /// Item can be returned to vendor for its original cost (extended cost)
     ///
-    pub const fn new_ITEM_PURCHASE_RECORD() -> Self {
+    pub const fn new_item_purchase_record() -> Self {
         Self { inner: Self::ITEM_PURCHASE_RECORD }
     }
 
-    pub fn set_ITEM_PURCHASE_RECORD(&mut self) -> Self {
+    pub fn set_item_purchase_record(&mut self) -> Self {
         self.inner |= Self::ITEM_PURCHASE_RECORD;
         *self
     }
 
-    pub fn clear_ITEM_PURCHASE_RECORD(&mut self) -> Self {
+    pub fn clear_item_purchase_record(&mut self) -> Self {
         self.inner &= Self::ITEM_PURCHASE_RECORD.reverse_bits();
         *self
     }
 
-    pub const fn is_CHARTER(&self) -> bool {
+    pub const fn is_charter(&self) -> bool {
         (self.inner & Self::CHARTER) != 0
     }
 
     /// Item is guild or arena charter
     ///
-    pub const fn new_CHARTER() -> Self {
+    pub const fn new_charter() -> Self {
         Self { inner: Self::CHARTER }
     }
 
-    pub fn set_CHARTER(&mut self) -> Self {
+    pub fn set_charter(&mut self) -> Self {
         self.inner |= Self::CHARTER;
         *self
     }
 
-    pub fn clear_CHARTER(&mut self) -> Self {
+    pub fn clear_charter(&mut self) -> Self {
         self.inner &= Self::CHARTER.reverse_bits();
         *self
     }
 
-    pub const fn is_HAS_TEXT(&self) -> bool {
+    pub const fn is_has_text(&self) -> bool {
         (self.inner & Self::HAS_TEXT) != 0
     }
 
     /// Only readable items have this (but not all)
     ///
-    pub const fn new_HAS_TEXT() -> Self {
+    pub const fn new_has_text() -> Self {
         Self { inner: Self::HAS_TEXT }
     }
 
-    pub fn set_HAS_TEXT(&mut self) -> Self {
+    pub fn set_has_text(&mut self) -> Self {
         self.inner |= Self::HAS_TEXT;
         *self
     }
 
-    pub fn clear_HAS_TEXT(&mut self) -> Self {
+    pub fn clear_has_text(&mut self) -> Self {
         self.inner &= Self::HAS_TEXT.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_DISENCHANT(&self) -> bool {
+    pub const fn is_no_disenchant(&self) -> bool {
         (self.inner & Self::NO_DISENCHANT) != 0
     }
 
-    pub const fn new_NO_DISENCHANT() -> Self {
+    pub const fn new_no_disenchant() -> Self {
         Self { inner: Self::NO_DISENCHANT }
     }
 
-    pub fn set_NO_DISENCHANT(&mut self) -> Self {
+    pub fn set_no_disenchant(&mut self) -> Self {
         self.inner |= Self::NO_DISENCHANT;
         *self
     }
 
-    pub fn clear_NO_DISENCHANT(&mut self) -> Self {
+    pub fn clear_no_disenchant(&mut self) -> Self {
         self.inner &= Self::NO_DISENCHANT.reverse_bits();
         *self
     }
 
-    pub const fn is_REAL_DURATION(&self) -> bool {
+    pub const fn is_real_duration(&self) -> bool {
         (self.inner & Self::REAL_DURATION) != 0
     }
 
-    pub const fn new_REAL_DURATION() -> Self {
+    pub const fn new_real_duration() -> Self {
         Self { inner: Self::REAL_DURATION }
     }
 
-    pub fn set_REAL_DURATION(&mut self) -> Self {
+    pub fn set_real_duration(&mut self) -> Self {
         self.inner |= Self::REAL_DURATION;
         *self
     }
 
-    pub fn clear_REAL_DURATION(&mut self) -> Self {
+    pub fn clear_real_duration(&mut self) -> Self {
         self.inner &= Self::REAL_DURATION.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_CREATOR(&self) -> bool {
+    pub const fn is_no_creator(&self) -> bool {
         (self.inner & Self::NO_CREATOR) != 0
     }
 
-    pub const fn new_NO_CREATOR() -> Self {
+    pub const fn new_no_creator() -> Self {
         Self { inner: Self::NO_CREATOR }
     }
 
-    pub fn set_NO_CREATOR(&mut self) -> Self {
+    pub fn set_no_creator(&mut self) -> Self {
         self.inner |= Self::NO_CREATOR;
         *self
     }
 
-    pub fn clear_NO_CREATOR(&mut self) -> Self {
+    pub fn clear_no_creator(&mut self) -> Self {
         self.inner &= Self::NO_CREATOR.reverse_bits();
         *self
     }
 
-    pub const fn is_IS_PROSPECTABLE(&self) -> bool {
+    pub const fn is_is_prospectable(&self) -> bool {
         (self.inner & Self::IS_PROSPECTABLE) != 0
     }
 
     /// Item can be prospected
     ///
-    pub const fn new_IS_PROSPECTABLE() -> Self {
+    pub const fn new_is_prospectable() -> Self {
         Self { inner: Self::IS_PROSPECTABLE }
     }
 
-    pub fn set_IS_PROSPECTABLE(&mut self) -> Self {
+    pub fn set_is_prospectable(&mut self) -> Self {
         self.inner |= Self::IS_PROSPECTABLE;
         *self
     }
 
-    pub fn clear_IS_PROSPECTABLE(&mut self) -> Self {
+    pub fn clear_is_prospectable(&mut self) -> Self {
         self.inner &= Self::IS_PROSPECTABLE.reverse_bits();
         *self
     }
 
-    pub const fn is_UNIQUE_EQUIPPED(&self) -> bool {
+    pub const fn is_unique_equipped(&self) -> bool {
         (self.inner & Self::UNIQUE_EQUIPPED) != 0
     }
 
     /// You can only equip one of these
     ///
-    pub const fn new_UNIQUE_EQUIPPED() -> Self {
+    pub const fn new_unique_equipped() -> Self {
         Self { inner: Self::UNIQUE_EQUIPPED }
     }
 
-    pub fn set_UNIQUE_EQUIPPED(&mut self) -> Self {
+    pub fn set_unique_equipped(&mut self) -> Self {
         self.inner |= Self::UNIQUE_EQUIPPED;
         *self
     }
 
-    pub fn clear_UNIQUE_EQUIPPED(&mut self) -> Self {
+    pub fn clear_unique_equipped(&mut self) -> Self {
         self.inner &= Self::UNIQUE_EQUIPPED.reverse_bits();
         *self
     }
 
-    pub const fn is_IGNORE_FOR_AURAS(&self) -> bool {
+    pub const fn is_ignore_for_auras(&self) -> bool {
         (self.inner & Self::IGNORE_FOR_AURAS) != 0
     }
 
-    pub const fn new_IGNORE_FOR_AURAS() -> Self {
+    pub const fn new_ignore_for_auras() -> Self {
         Self { inner: Self::IGNORE_FOR_AURAS }
     }
 
-    pub fn set_IGNORE_FOR_AURAS(&mut self) -> Self {
+    pub fn set_ignore_for_auras(&mut self) -> Self {
         self.inner |= Self::IGNORE_FOR_AURAS;
         *self
     }
 
-    pub fn clear_IGNORE_FOR_AURAS(&mut self) -> Self {
+    pub fn clear_ignore_for_auras(&mut self) -> Self {
         self.inner &= Self::IGNORE_FOR_AURAS.reverse_bits();
         *self
     }
 
-    pub const fn is_IGNORE_DEFAULT_ARENA_RESTRICTIONS(&self) -> bool {
+    pub const fn is_ignore_default_arena_restrictions(&self) -> bool {
         (self.inner & Self::IGNORE_DEFAULT_ARENA_RESTRICTIONS) != 0
     }
 
     /// Item can be used during arena match
     ///
-    pub const fn new_IGNORE_DEFAULT_ARENA_RESTRICTIONS() -> Self {
+    pub const fn new_ignore_default_arena_restrictions() -> Self {
         Self { inner: Self::IGNORE_DEFAULT_ARENA_RESTRICTIONS }
     }
 
-    pub fn set_IGNORE_DEFAULT_ARENA_RESTRICTIONS(&mut self) -> Self {
+    pub fn set_ignore_default_arena_restrictions(&mut self) -> Self {
         self.inner |= Self::IGNORE_DEFAULT_ARENA_RESTRICTIONS;
         *self
     }
 
-    pub fn clear_IGNORE_DEFAULT_ARENA_RESTRICTIONS(&mut self) -> Self {
+    pub fn clear_ignore_default_arena_restrictions(&mut self) -> Self {
         self.inner &= Self::IGNORE_DEFAULT_ARENA_RESTRICTIONS.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_DURABILITY_LOSS(&self) -> bool {
+    pub const fn is_no_durability_loss(&self) -> bool {
         (self.inner & Self::NO_DURABILITY_LOSS) != 0
     }
 
     /// Some Thrown weapons have it (and only Thrown) but not all
     ///
-    pub const fn new_NO_DURABILITY_LOSS() -> Self {
+    pub const fn new_no_durability_loss() -> Self {
         Self { inner: Self::NO_DURABILITY_LOSS }
     }
 
-    pub fn set_NO_DURABILITY_LOSS(&mut self) -> Self {
+    pub fn set_no_durability_loss(&mut self) -> Self {
         self.inner |= Self::NO_DURABILITY_LOSS;
         *self
     }
 
-    pub fn clear_NO_DURABILITY_LOSS(&mut self) -> Self {
+    pub fn clear_no_durability_loss(&mut self) -> Self {
         self.inner &= Self::NO_DURABILITY_LOSS.reverse_bits();
         *self
     }
 
-    pub const fn is_USE_WHEN_SHAPESHIFTED(&self) -> bool {
+    pub const fn is_use_when_shapeshifted(&self) -> bool {
         (self.inner & Self::USE_WHEN_SHAPESHIFTED) != 0
     }
 
     /// Item can be used in shapeshift forms
     ///
-    pub const fn new_USE_WHEN_SHAPESHIFTED() -> Self {
+    pub const fn new_use_when_shapeshifted() -> Self {
         Self { inner: Self::USE_WHEN_SHAPESHIFTED }
     }
 
-    pub fn set_USE_WHEN_SHAPESHIFTED(&mut self) -> Self {
+    pub fn set_use_when_shapeshifted(&mut self) -> Self {
         self.inner |= Self::USE_WHEN_SHAPESHIFTED;
         *self
     }
 
-    pub fn clear_USE_WHEN_SHAPESHIFTED(&mut self) -> Self {
+    pub fn clear_use_when_shapeshifted(&mut self) -> Self {
         self.inner &= Self::USE_WHEN_SHAPESHIFTED.reverse_bits();
         *self
     }
 
-    pub const fn is_HAS_QUEST_GLOW(&self) -> bool {
+    pub const fn is_has_quest_glow(&self) -> bool {
         (self.inner & Self::HAS_QUEST_GLOW) != 0
     }
 
-    pub const fn new_HAS_QUEST_GLOW() -> Self {
+    pub const fn new_has_quest_glow() -> Self {
         Self { inner: Self::HAS_QUEST_GLOW }
     }
 
-    pub fn set_HAS_QUEST_GLOW(&mut self) -> Self {
+    pub fn set_has_quest_glow(&mut self) -> Self {
         self.inner |= Self::HAS_QUEST_GLOW;
         *self
     }
 
-    pub fn clear_HAS_QUEST_GLOW(&mut self) -> Self {
+    pub fn clear_has_quest_glow(&mut self) -> Self {
         self.inner &= Self::HAS_QUEST_GLOW.reverse_bits();
         *self
     }
 
-    pub const fn is_HIDE_UNUSABLE_RECIPE(&self) -> bool {
+    pub const fn is_hide_unusable_recipe(&self) -> bool {
         (self.inner & Self::HIDE_UNUSABLE_RECIPE) != 0
     }
 
     /// Profession recipes: can only be looted if you meet requirements and don't already know it
     ///
-    pub const fn new_HIDE_UNUSABLE_RECIPE() -> Self {
+    pub const fn new_hide_unusable_recipe() -> Self {
         Self { inner: Self::HIDE_UNUSABLE_RECIPE }
     }
 
-    pub fn set_HIDE_UNUSABLE_RECIPE(&mut self) -> Self {
+    pub fn set_hide_unusable_recipe(&mut self) -> Self {
         self.inner |= Self::HIDE_UNUSABLE_RECIPE;
         *self
     }
 
-    pub fn clear_HIDE_UNUSABLE_RECIPE(&mut self) -> Self {
+    pub fn clear_hide_unusable_recipe(&mut self) -> Self {
         self.inner &= Self::HIDE_UNUSABLE_RECIPE.reverse_bits();
         *self
     }
 
-    pub const fn is_NOT_USEABLE_IN_ARENA(&self) -> bool {
+    pub const fn is_not_useable_in_arena(&self) -> bool {
         (self.inner & Self::NOT_USEABLE_IN_ARENA) != 0
     }
 
     /// Item cannot be used in arena
     ///
-    pub const fn new_NOT_USEABLE_IN_ARENA() -> Self {
+    pub const fn new_not_useable_in_arena() -> Self {
         Self { inner: Self::NOT_USEABLE_IN_ARENA }
     }
 
-    pub fn set_NOT_USEABLE_IN_ARENA(&mut self) -> Self {
+    pub fn set_not_useable_in_arena(&mut self) -> Self {
         self.inner |= Self::NOT_USEABLE_IN_ARENA;
         *self
     }
 
-    pub fn clear_NOT_USEABLE_IN_ARENA(&mut self) -> Self {
+    pub fn clear_not_useable_in_arena(&mut self) -> Self {
         self.inner &= Self::NOT_USEABLE_IN_ARENA.reverse_bits();
         *self
     }
 
-    pub const fn is_IS_BOUND_TO_ACCOUNT(&self) -> bool {
+    pub const fn is_is_bound_to_account(&self) -> bool {
         (self.inner & Self::IS_BOUND_TO_ACCOUNT) != 0
     }
 
     /// Item binds to account and can be sent only to your own characters
     ///
-    pub const fn new_IS_BOUND_TO_ACCOUNT() -> Self {
+    pub const fn new_is_bound_to_account() -> Self {
         Self { inner: Self::IS_BOUND_TO_ACCOUNT }
     }
 
-    pub fn set_IS_BOUND_TO_ACCOUNT(&mut self) -> Self {
+    pub fn set_is_bound_to_account(&mut self) -> Self {
         self.inner |= Self::IS_BOUND_TO_ACCOUNT;
         *self
     }
 
-    pub fn clear_IS_BOUND_TO_ACCOUNT(&mut self) -> Self {
+    pub fn clear_is_bound_to_account(&mut self) -> Self {
         self.inner &= Self::IS_BOUND_TO_ACCOUNT.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_REAGENT_COST(&self) -> bool {
+    pub const fn is_no_reagent_cost(&self) -> bool {
         (self.inner & Self::NO_REAGENT_COST) != 0
     }
 
     /// Spell is cast ignoring reagents
     ///
-    pub const fn new_NO_REAGENT_COST() -> Self {
+    pub const fn new_no_reagent_cost() -> Self {
         Self { inner: Self::NO_REAGENT_COST }
     }
 
-    pub fn set_NO_REAGENT_COST(&mut self) -> Self {
+    pub fn set_no_reagent_cost(&mut self) -> Self {
         self.inner |= Self::NO_REAGENT_COST;
         *self
     }
 
-    pub fn clear_NO_REAGENT_COST(&mut self) -> Self {
+    pub fn clear_no_reagent_cost(&mut self) -> Self {
         self.inner &= Self::NO_REAGENT_COST.reverse_bits();
         *self
     }
 
-    pub const fn is_IS_MILLABLE(&self) -> bool {
+    pub const fn is_is_millable(&self) -> bool {
         (self.inner & Self::IS_MILLABLE) != 0
     }
 
     /// Item can be milled
     ///
-    pub const fn new_IS_MILLABLE() -> Self {
+    pub const fn new_is_millable() -> Self {
         Self { inner: Self::IS_MILLABLE }
     }
 
-    pub fn set_IS_MILLABLE(&mut self) -> Self {
+    pub fn set_is_millable(&mut self) -> Self {
         self.inner |= Self::IS_MILLABLE;
         *self
     }
 
-    pub fn clear_IS_MILLABLE(&mut self) -> Self {
+    pub fn clear_is_millable(&mut self) -> Self {
         self.inner &= Self::IS_MILLABLE.reverse_bits();
         *self
     }
 
-    pub const fn is_REPORT_TO_GUILD_CHAT(&self) -> bool {
+    pub const fn is_report_to_guild_chat(&self) -> bool {
         (self.inner & Self::REPORT_TO_GUILD_CHAT) != 0
     }
 
-    pub const fn new_REPORT_TO_GUILD_CHAT() -> Self {
+    pub const fn new_report_to_guild_chat() -> Self {
         Self { inner: Self::REPORT_TO_GUILD_CHAT }
     }
 
-    pub fn set_REPORT_TO_GUILD_CHAT(&mut self) -> Self {
+    pub fn set_report_to_guild_chat(&mut self) -> Self {
         self.inner |= Self::REPORT_TO_GUILD_CHAT;
         *self
     }
 
-    pub fn clear_REPORT_TO_GUILD_CHAT(&mut self) -> Self {
+    pub fn clear_report_to_guild_chat(&mut self) -> Self {
         self.inner &= Self::REPORT_TO_GUILD_CHAT.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_PROGRESSIVE_LOOT(&self) -> bool {
+    pub const fn is_no_progressive_loot(&self) -> bool {
         (self.inner & Self::NO_PROGRESSIVE_LOOT) != 0
     }
 
-    pub const fn new_NO_PROGRESSIVE_LOOT() -> Self {
+    pub const fn new_no_progressive_loot() -> Self {
         Self { inner: Self::NO_PROGRESSIVE_LOOT }
     }
 
-    pub fn set_NO_PROGRESSIVE_LOOT(&mut self) -> Self {
+    pub fn set_no_progressive_loot(&mut self) -> Self {
         self.inner |= Self::NO_PROGRESSIVE_LOOT;
         *self
     }
 
-    pub fn clear_NO_PROGRESSIVE_LOOT(&mut self) -> Self {
+    pub fn clear_no_progressive_loot(&mut self) -> Self {
         self.inner &= Self::NO_PROGRESSIVE_LOOT.reverse_bits();
         *self
     }

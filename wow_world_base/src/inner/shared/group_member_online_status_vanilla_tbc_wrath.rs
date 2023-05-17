@@ -55,162 +55,162 @@ impl GroupMemberOnlineStatus {
         }
     }
 
-    pub const fn is_ONLINE(&self) -> bool {
+    pub const fn is_online(&self) -> bool {
         (self.inner & Self::ONLINE) != 0
     }
 
     /// `Lua_UnitIsConnected`
     ///
-    pub const fn new_ONLINE() -> Self {
+    pub const fn new_online() -> Self {
         Self { inner: Self::ONLINE }
     }
 
-    pub fn set_ONLINE(&mut self) -> Self {
+    pub fn set_online(&mut self) -> Self {
         self.inner |= Self::ONLINE;
         *self
     }
 
-    pub fn clear_ONLINE(&mut self) -> Self {
+    pub fn clear_online(&mut self) -> Self {
         self.inner &= Self::ONLINE.reverse_bits();
         *self
     }
 
-    pub const fn is_PVP(&self) -> bool {
+    pub const fn is_pvp(&self) -> bool {
         (self.inner & Self::PVP) != 0
     }
 
     /// `Lua_UnitIsPVP`
     ///
-    pub const fn new_PVP() -> Self {
+    pub const fn new_pvp() -> Self {
         Self { inner: Self::PVP }
     }
 
-    pub fn set_PVP(&mut self) -> Self {
+    pub fn set_pvp(&mut self) -> Self {
         self.inner |= Self::PVP;
         *self
     }
 
-    pub fn clear_PVP(&mut self) -> Self {
+    pub fn clear_pvp(&mut self) -> Self {
         self.inner &= Self::PVP.reverse_bits();
         *self
     }
 
-    pub const fn is_DEAD(&self) -> bool {
+    pub const fn is_dead(&self) -> bool {
         (self.inner & Self::DEAD) != 0
     }
 
     /// `Lua_UnitIsDead`
     ///
-    pub const fn new_DEAD() -> Self {
+    pub const fn new_dead() -> Self {
         Self { inner: Self::DEAD }
     }
 
-    pub fn set_DEAD(&mut self) -> Self {
+    pub fn set_dead(&mut self) -> Self {
         self.inner |= Self::DEAD;
         *self
     }
 
-    pub fn clear_DEAD(&mut self) -> Self {
+    pub fn clear_dead(&mut self) -> Self {
         self.inner &= Self::DEAD.reverse_bits();
         *self
     }
 
-    pub const fn is_GHOST(&self) -> bool {
+    pub const fn is_ghost(&self) -> bool {
         (self.inner & Self::GHOST) != 0
     }
 
     /// `Lua_UnitIsGhost`
     ///
-    pub const fn new_GHOST() -> Self {
+    pub const fn new_ghost() -> Self {
         Self { inner: Self::GHOST }
     }
 
-    pub fn set_GHOST(&mut self) -> Self {
+    pub fn set_ghost(&mut self) -> Self {
         self.inner |= Self::GHOST;
         *self
     }
 
-    pub fn clear_GHOST(&mut self) -> Self {
+    pub fn clear_ghost(&mut self) -> Self {
         self.inner &= Self::GHOST.reverse_bits();
         *self
     }
 
-    pub const fn is_PVP_FFA(&self) -> bool {
+    pub const fn is_pvp_ffa(&self) -> bool {
         (self.inner & Self::PVP_FFA) != 0
     }
 
     /// `Lua_UnitIsPVPFreeForAll`
     ///
-    pub const fn new_PVP_FFA() -> Self {
+    pub const fn new_pvp_ffa() -> Self {
         Self { inner: Self::PVP_FFA }
     }
 
-    pub fn set_PVP_FFA(&mut self) -> Self {
+    pub fn set_pvp_ffa(&mut self) -> Self {
         self.inner |= Self::PVP_FFA;
         *self
     }
 
-    pub fn clear_PVP_FFA(&mut self) -> Self {
+    pub fn clear_pvp_ffa(&mut self) -> Self {
         self.inner &= Self::PVP_FFA.reverse_bits();
         *self
     }
 
-    pub const fn is_ZONE_OUT(&self) -> bool {
+    pub const fn is_zone_out(&self) -> bool {
         (self.inner & Self::ZONE_OUT) != 0
     }
 
     /// used in calls from `Lua_GetPlayerMapPosition`/`Lua_GetBattlefieldFlagPosition`
     ///
-    pub const fn new_ZONE_OUT() -> Self {
+    pub const fn new_zone_out() -> Self {
         Self { inner: Self::ZONE_OUT }
     }
 
-    pub fn set_ZONE_OUT(&mut self) -> Self {
+    pub fn set_zone_out(&mut self) -> Self {
         self.inner |= Self::ZONE_OUT;
         *self
     }
 
-    pub fn clear_ZONE_OUT(&mut self) -> Self {
+    pub fn clear_zone_out(&mut self) -> Self {
         self.inner &= Self::ZONE_OUT.reverse_bits();
         *self
     }
 
-    pub const fn is_AFK(&self) -> bool {
+    pub const fn is_afk(&self) -> bool {
         (self.inner & Self::AFK) != 0
     }
 
     /// `Lua_UnitIsAFK`
     ///
-    pub const fn new_AFK() -> Self {
+    pub const fn new_afk() -> Self {
         Self { inner: Self::AFK }
     }
 
-    pub fn set_AFK(&mut self) -> Self {
+    pub fn set_afk(&mut self) -> Self {
         self.inner |= Self::AFK;
         *self
     }
 
-    pub fn clear_AFK(&mut self) -> Self {
+    pub fn clear_afk(&mut self) -> Self {
         self.inner &= Self::AFK.reverse_bits();
         *self
     }
 
-    pub const fn is_DND(&self) -> bool {
+    pub const fn is_dnd(&self) -> bool {
         (self.inner & Self::DND) != 0
     }
 
     /// `Lua_UnitIsDND`
     ///
-    pub const fn new_DND() -> Self {
+    pub const fn new_dnd() -> Self {
         Self { inner: Self::DND }
     }
 
-    pub fn set_DND(&mut self) -> Self {
+    pub fn set_dnd(&mut self) -> Self {
         self.inner |= Self::DND;
         *self
     }
 
-    pub fn clear_DND(&mut self) -> Self {
+    pub fn clear_dnd(&mut self) -> Self {
         self.inner &= Self::DND.reverse_bits();
         *self
     }

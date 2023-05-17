@@ -179,7 +179,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         // spline_flags: SplineFlag
         let spline_flags = SplineFlag::new(crate::util::read_u32_le(&mut r)?);
 
-        let spline_flags_ENTER_CYCLE = if spline_flags.is_ENTER_CYCLE() {
+        let spline_flags_ENTER_CYCLE = if spline_flags.is_enter_cycle() {
             // animation_id: u32
             let animation_id = crate::util::read_u32_le(&mut r)?;
 
@@ -198,7 +198,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         // duration: u32
         let duration = crate::util::read_u32_le(&mut r)?;
 
-        let spline_flags_PARABOLIC = if spline_flags.is_PARABOLIC() {
+        let spline_flags_PARABOLIC = if spline_flags.is_parabolic() {
             // vertical_acceleration: f32
             let vertical_acceleration = crate::util::read_f32_le(&mut r)?;
 
@@ -348,7 +348,7 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
         && self.enter_cycle.is_none()
     }
 
-    pub const fn new_DONE() -> Self {
+    pub const fn new_done() -> Self {
         Self {
             inner: SplineFlag::DONE,
             parabolic: None,
@@ -357,22 +357,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_DONE(mut self) -> Self {
+    pub fn set_done(mut self) -> Self {
         self.inner |= SplineFlag::DONE;
         self
     }
 
-    pub const fn get_DONE(&self) -> bool {
+    pub const fn get_done(&self) -> bool {
         (self.inner & SplineFlag::DONE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_DONE(mut self) -> Self {
+    pub fn clear_done(mut self) -> Self {
         self.inner &= SplineFlag::DONE.reverse_bits();
         self
     }
 
-    pub const fn new_FALLING() -> Self {
+    pub const fn new_falling() -> Self {
         Self {
             inner: SplineFlag::FALLING,
             parabolic: None,
@@ -381,22 +381,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FALLING(mut self) -> Self {
+    pub fn set_falling(mut self) -> Self {
         self.inner |= SplineFlag::FALLING;
         self
     }
 
-    pub const fn get_FALLING(&self) -> bool {
+    pub const fn get_falling(&self) -> bool {
         (self.inner & SplineFlag::FALLING) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FALLING(mut self) -> Self {
+    pub fn clear_falling(mut self) -> Self {
         self.inner &= SplineFlag::FALLING.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN3() -> Self {
+    pub const fn new_unknown3() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN3,
             parabolic: None,
@@ -405,22 +405,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN3(mut self) -> Self {
+    pub fn set_unknown3(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN3;
         self
     }
 
-    pub const fn get_UNKNOWN3(&self) -> bool {
+    pub const fn get_unknown3(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN3) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN3(mut self) -> Self {
+    pub fn clear_unknown3(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN3.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN4() -> Self {
+    pub const fn new_unknown4() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN4,
             parabolic: None,
@@ -429,22 +429,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN4(mut self) -> Self {
+    pub fn set_unknown4(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN4;
         self
     }
 
-    pub const fn get_UNKNOWN4(&self) -> bool {
+    pub const fn get_unknown4(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN4) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN4(mut self) -> Self {
+    pub fn clear_unknown4(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN4.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN5() -> Self {
+    pub const fn new_unknown5() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN5,
             parabolic: None,
@@ -453,22 +453,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN5(mut self) -> Self {
+    pub fn set_unknown5(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN5;
         self
     }
 
-    pub const fn get_UNKNOWN5(&self) -> bool {
+    pub const fn get_unknown5(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN5) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN5(mut self) -> Self {
+    pub fn clear_unknown5(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN5.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN6() -> Self {
+    pub const fn new_unknown6() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN6,
             parabolic: None,
@@ -477,22 +477,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN6(mut self) -> Self {
+    pub fn set_unknown6(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN6;
         self
     }
 
-    pub const fn get_UNKNOWN6(&self) -> bool {
+    pub const fn get_unknown6(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN6) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN6(mut self) -> Self {
+    pub fn clear_unknown6(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN6.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN7() -> Self {
+    pub const fn new_unknown7() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN7,
             parabolic: None,
@@ -501,22 +501,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN7(mut self) -> Self {
+    pub fn set_unknown7(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN7;
         self
     }
 
-    pub const fn get_UNKNOWN7(&self) -> bool {
+    pub const fn get_unknown7(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN7) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN7(mut self) -> Self {
+    pub fn clear_unknown7(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN7.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN8() -> Self {
+    pub const fn new_unknown8() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN8,
             parabolic: None,
@@ -525,22 +525,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN8(mut self) -> Self {
+    pub fn set_unknown8(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN8;
         self
     }
 
-    pub const fn get_UNKNOWN8(&self) -> bool {
+    pub const fn get_unknown8(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN8) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN8(mut self) -> Self {
+    pub fn clear_unknown8(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN8.reverse_bits();
         self
     }
 
-    pub const fn new_RUNMODE() -> Self {
+    pub const fn new_runmode() -> Self {
         Self {
             inner: SplineFlag::RUNMODE,
             parabolic: None,
@@ -549,22 +549,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_RUNMODE(mut self) -> Self {
+    pub fn set_runmode(mut self) -> Self {
         self.inner |= SplineFlag::RUNMODE;
         self
     }
 
-    pub const fn get_RUNMODE(&self) -> bool {
+    pub const fn get_runmode(&self) -> bool {
         (self.inner & SplineFlag::RUNMODE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_RUNMODE(mut self) -> Self {
+    pub fn clear_runmode(mut self) -> Self {
         self.inner &= SplineFlag::RUNMODE.reverse_bits();
         self
     }
 
-    pub const fn new_FLYING() -> Self {
+    pub const fn new_flying() -> Self {
         Self {
             inner: SplineFlag::FLYING,
             parabolic: None,
@@ -573,22 +573,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FLYING(mut self) -> Self {
+    pub fn set_flying(mut self) -> Self {
         self.inner |= SplineFlag::FLYING;
         self
     }
 
-    pub const fn get_FLYING(&self) -> bool {
+    pub const fn get_flying(&self) -> bool {
         (self.inner & SplineFlag::FLYING) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FLYING(mut self) -> Self {
+    pub fn clear_flying(mut self) -> Self {
         self.inner &= SplineFlag::FLYING.reverse_bits();
         self
     }
 
-    pub const fn new_NO_SPLINE() -> Self {
+    pub const fn new_no_spline() -> Self {
         Self {
             inner: SplineFlag::NO_SPLINE,
             parabolic: None,
@@ -597,22 +597,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_NO_SPLINE(mut self) -> Self {
+    pub fn set_no_spline(mut self) -> Self {
         self.inner |= SplineFlag::NO_SPLINE;
         self
     }
 
-    pub const fn get_NO_SPLINE(&self) -> bool {
+    pub const fn get_no_spline(&self) -> bool {
         (self.inner & SplineFlag::NO_SPLINE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_NO_SPLINE(mut self) -> Self {
+    pub fn clear_no_spline(mut self) -> Self {
         self.inner &= SplineFlag::NO_SPLINE.reverse_bits();
         self
     }
 
-    pub const fn new_PARABOLIC(parabolic: SMSG_MONSTER_MOVE_SplineFlag_Parabolic) -> Self {
+    pub const fn new_parabolic(parabolic: SMSG_MONSTER_MOVE_SplineFlag_Parabolic) -> Self {
         Self {
             inner: SplineFlag::PARABOLIC,
             parabolic: Some(parabolic),
@@ -621,24 +621,24 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_PARABOLIC(mut self, parabolic: SMSG_MONSTER_MOVE_SplineFlag_Parabolic) -> Self {
+    pub fn set_parabolic(mut self, parabolic: SMSG_MONSTER_MOVE_SplineFlag_Parabolic) -> Self {
         self.inner |= SplineFlag::PARABOLIC;
         self.parabolic = Some(parabolic);
         self
     }
 
-    pub const fn get_PARABOLIC(&self) -> Option<&SMSG_MONSTER_MOVE_SplineFlag_Parabolic> {
+    pub const fn get_parabolic(&self) -> Option<&SMSG_MONSTER_MOVE_SplineFlag_Parabolic> {
         self.parabolic.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_PARABOLIC(mut self) -> Self {
+    pub fn clear_parabolic(mut self) -> Self {
         self.inner &= SplineFlag::PARABOLIC.reverse_bits();
         self.parabolic = None;
         self
     }
 
-    pub const fn new_UNKNOWN13() -> Self {
+    pub const fn new_unknown13() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN13,
             parabolic: None,
@@ -647,22 +647,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN13(mut self) -> Self {
+    pub fn set_unknown13(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN13;
         self
     }
 
-    pub const fn get_UNKNOWN13(&self) -> bool {
+    pub const fn get_unknown13(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN13) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN13(mut self) -> Self {
+    pub fn clear_unknown13(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN13.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN14() -> Self {
+    pub const fn new_unknown14() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN14,
             parabolic: None,
@@ -671,22 +671,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN14(mut self) -> Self {
+    pub fn set_unknown14(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN14;
         self
     }
 
-    pub const fn get_UNKNOWN14(&self) -> bool {
+    pub const fn get_unknown14(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN14) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN14(mut self) -> Self {
+    pub fn clear_unknown14(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN14.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN15() -> Self {
+    pub const fn new_unknown15() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN15,
             parabolic: None,
@@ -695,22 +695,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN15(mut self) -> Self {
+    pub fn set_unknown15(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN15;
         self
     }
 
-    pub const fn get_UNKNOWN15(&self) -> bool {
+    pub const fn get_unknown15(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN15) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN15(mut self) -> Self {
+    pub fn clear_unknown15(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN15.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN16() -> Self {
+    pub const fn new_unknown16() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN16,
             parabolic: None,
@@ -719,22 +719,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN16(mut self) -> Self {
+    pub fn set_unknown16(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN16;
         self
     }
 
-    pub const fn get_UNKNOWN16(&self) -> bool {
+    pub const fn get_unknown16(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN16) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN16(mut self) -> Self {
+    pub fn clear_unknown16(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN16.reverse_bits();
         self
     }
 
-    pub const fn new_FINAL_POINT() -> Self {
+    pub const fn new_final_point() -> Self {
         Self {
             inner: SplineFlag::FINAL_POINT,
             parabolic: None,
@@ -743,22 +743,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FINAL_POINT(mut self) -> Self {
+    pub fn set_final_point(mut self) -> Self {
         self.inner |= SplineFlag::FINAL_POINT;
         self
     }
 
-    pub const fn get_FINAL_POINT(&self) -> bool {
+    pub const fn get_final_point(&self) -> bool {
         (self.inner & SplineFlag::FINAL_POINT) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FINAL_POINT(mut self) -> Self {
+    pub fn clear_final_point(mut self) -> Self {
         self.inner &= SplineFlag::FINAL_POINT.reverse_bits();
         self
     }
 
-    pub const fn new_FINAL_TARGET() -> Self {
+    pub const fn new_final_target() -> Self {
         Self {
             inner: SplineFlag::FINAL_TARGET,
             parabolic: None,
@@ -767,22 +767,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FINAL_TARGET(mut self) -> Self {
+    pub fn set_final_target(mut self) -> Self {
         self.inner |= SplineFlag::FINAL_TARGET;
         self
     }
 
-    pub const fn get_FINAL_TARGET(&self) -> bool {
+    pub const fn get_final_target(&self) -> bool {
         (self.inner & SplineFlag::FINAL_TARGET) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FINAL_TARGET(mut self) -> Self {
+    pub fn clear_final_target(mut self) -> Self {
         self.inner &= SplineFlag::FINAL_TARGET.reverse_bits();
         self
     }
 
-    pub const fn new_FINAL_ANGLE() -> Self {
+    pub const fn new_final_angle() -> Self {
         Self {
             inner: SplineFlag::FINAL_ANGLE,
             parabolic: None,
@@ -791,22 +791,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FINAL_ANGLE(mut self) -> Self {
+    pub fn set_final_angle(mut self) -> Self {
         self.inner |= SplineFlag::FINAL_ANGLE;
         self
     }
 
-    pub const fn get_FINAL_ANGLE(&self) -> bool {
+    pub const fn get_final_angle(&self) -> bool {
         (self.inner & SplineFlag::FINAL_ANGLE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FINAL_ANGLE(mut self) -> Self {
+    pub fn clear_final_angle(mut self) -> Self {
         self.inner &= SplineFlag::FINAL_ANGLE.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN19() -> Self {
+    pub const fn new_unknown19() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN19,
             parabolic: None,
@@ -815,22 +815,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN19(mut self) -> Self {
+    pub fn set_unknown19(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN19;
         self
     }
 
-    pub const fn get_UNKNOWN19(&self) -> bool {
+    pub const fn get_unknown19(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN19) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN19(mut self) -> Self {
+    pub fn clear_unknown19(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN19.reverse_bits();
         self
     }
 
-    pub const fn new_CYCLIC() -> Self {
+    pub const fn new_cyclic() -> Self {
         Self {
             inner: SplineFlag::CYCLIC,
             parabolic: None,
@@ -839,22 +839,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_CYCLIC(mut self) -> Self {
+    pub fn set_cyclic(mut self) -> Self {
         self.inner |= SplineFlag::CYCLIC;
         self
     }
 
-    pub const fn get_CYCLIC(&self) -> bool {
+    pub const fn get_cyclic(&self) -> bool {
         (self.inner & SplineFlag::CYCLIC) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_CYCLIC(mut self) -> Self {
+    pub fn clear_cyclic(mut self) -> Self {
         self.inner &= SplineFlag::CYCLIC.reverse_bits();
         self
     }
 
-    pub const fn new_ENTER_CYCLE(enter_cycle: SMSG_MONSTER_MOVE_SplineFlag_EnterCycle) -> Self {
+    pub const fn new_enter_cycle(enter_cycle: SMSG_MONSTER_MOVE_SplineFlag_EnterCycle) -> Self {
         Self {
             inner: SplineFlag::ENTER_CYCLE,
             parabolic: None,
@@ -863,24 +863,24 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_ENTER_CYCLE(mut self, enter_cycle: SMSG_MONSTER_MOVE_SplineFlag_EnterCycle) -> Self {
+    pub fn set_enter_cycle(mut self, enter_cycle: SMSG_MONSTER_MOVE_SplineFlag_EnterCycle) -> Self {
         self.inner |= SplineFlag::ENTER_CYCLE;
         self.enter_cycle = Some(enter_cycle);
         self
     }
 
-    pub const fn get_ENTER_CYCLE(&self) -> Option<&SMSG_MONSTER_MOVE_SplineFlag_EnterCycle> {
+    pub const fn get_enter_cycle(&self) -> Option<&SMSG_MONSTER_MOVE_SplineFlag_EnterCycle> {
         self.enter_cycle.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_ENTER_CYCLE(mut self) -> Self {
+    pub fn clear_enter_cycle(mut self) -> Self {
         self.inner &= SplineFlag::ENTER_CYCLE.reverse_bits();
         self.enter_cycle = None;
         self
     }
 
-    pub const fn new_FROZEN() -> Self {
+    pub const fn new_frozen() -> Self {
         Self {
             inner: SplineFlag::FROZEN,
             parabolic: None,
@@ -889,22 +889,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FROZEN(mut self) -> Self {
+    pub fn set_frozen(mut self) -> Self {
         self.inner |= SplineFlag::FROZEN;
         self
     }
 
-    pub const fn get_FROZEN(&self) -> bool {
+    pub const fn get_frozen(&self) -> bool {
         (self.inner & SplineFlag::FROZEN) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FROZEN(mut self) -> Self {
+    pub fn clear_frozen(mut self) -> Self {
         self.inner &= SplineFlag::FROZEN.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN23() -> Self {
+    pub const fn new_unknown23() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN23,
             parabolic: None,
@@ -913,22 +913,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN23(mut self) -> Self {
+    pub fn set_unknown23(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN23;
         self
     }
 
-    pub const fn get_UNKNOWN23(&self) -> bool {
+    pub const fn get_unknown23(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN23) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN23(mut self) -> Self {
+    pub fn clear_unknown23(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN23.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN24() -> Self {
+    pub const fn new_unknown24() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN24,
             parabolic: None,
@@ -937,22 +937,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN24(mut self) -> Self {
+    pub fn set_unknown24(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN24;
         self
     }
 
-    pub const fn get_UNKNOWN24(&self) -> bool {
+    pub const fn get_unknown24(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN24) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN24(mut self) -> Self {
+    pub fn clear_unknown24(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN24.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN25() -> Self {
+    pub const fn new_unknown25() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN25,
             parabolic: None,
@@ -961,22 +961,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN25(mut self) -> Self {
+    pub fn set_unknown25(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN25;
         self
     }
 
-    pub const fn get_UNKNOWN25(&self) -> bool {
+    pub const fn get_unknown25(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN25) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN25(mut self) -> Self {
+    pub fn clear_unknown25(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN25.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN26() -> Self {
+    pub const fn new_unknown26() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN26,
             parabolic: None,
@@ -985,22 +985,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN26(mut self) -> Self {
+    pub fn set_unknown26(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN26;
         self
     }
 
-    pub const fn get_UNKNOWN26(&self) -> bool {
+    pub const fn get_unknown26(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN26) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN26(mut self) -> Self {
+    pub fn clear_unknown26(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN26.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN27() -> Self {
+    pub const fn new_unknown27() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN27,
             parabolic: None,
@@ -1009,22 +1009,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN27(mut self) -> Self {
+    pub fn set_unknown27(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN27;
         self
     }
 
-    pub const fn get_UNKNOWN27(&self) -> bool {
+    pub const fn get_unknown27(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN27) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN27(mut self) -> Self {
+    pub fn clear_unknown27(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN27.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN28() -> Self {
+    pub const fn new_unknown28() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN28,
             parabolic: None,
@@ -1033,22 +1033,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN28(mut self) -> Self {
+    pub fn set_unknown28(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN28;
         self
     }
 
-    pub const fn get_UNKNOWN28(&self) -> bool {
+    pub const fn get_unknown28(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN28) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN28(mut self) -> Self {
+    pub fn clear_unknown28(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN28.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN29() -> Self {
+    pub const fn new_unknown29() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN29,
             parabolic: None,
@@ -1057,22 +1057,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN29(mut self) -> Self {
+    pub fn set_unknown29(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN29;
         self
     }
 
-    pub const fn get_UNKNOWN29(&self) -> bool {
+    pub const fn get_unknown29(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN29) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN29(mut self) -> Self {
+    pub fn clear_unknown29(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN29.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN30() -> Self {
+    pub const fn new_unknown30() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN30,
             parabolic: None,
@@ -1081,22 +1081,22 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN30(mut self) -> Self {
+    pub fn set_unknown30(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN30;
         self
     }
 
-    pub const fn get_UNKNOWN30(&self) -> bool {
+    pub const fn get_unknown30(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN30) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN30(mut self) -> Self {
+    pub fn clear_unknown30(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN30.reverse_bits();
         self
     }
 
-    pub const fn new_UNKNOWN31() -> Self {
+    pub const fn new_unknown31() -> Self {
         Self {
             inner: SplineFlag::UNKNOWN31,
             parabolic: None,
@@ -1105,17 +1105,17 @@ impl SMSG_MONSTER_MOVE_SplineFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_UNKNOWN31(mut self) -> Self {
+    pub fn set_unknown31(mut self) -> Self {
         self.inner |= SplineFlag::UNKNOWN31;
         self
     }
 
-    pub const fn get_UNKNOWN31(&self) -> bool {
+    pub const fn get_unknown31(&self) -> bool {
         (self.inner & SplineFlag::UNKNOWN31) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_UNKNOWN31(mut self) -> Self {
+    pub fn clear_unknown31(mut self) -> Self {
         self.inner &= SplineFlag::UNKNOWN31.reverse_bits();
         self
     }

@@ -55,150 +55,150 @@ impl VictimState {
         }
     }
 
-    pub const fn is_HIT(&self) -> bool {
+    pub const fn is_hit(&self) -> bool {
         (self.inner & Self::HIT) != 0
     }
 
     /// azerothcore: victim got clear/blocked hit
     ///
-    pub const fn new_HIT() -> Self {
+    pub const fn new_hit() -> Self {
         Self { inner: Self::HIT }
     }
 
-    pub fn set_HIT(&mut self) -> Self {
+    pub fn set_hit(&mut self) -> Self {
         self.inner |= Self::HIT;
         *self
     }
 
-    pub fn clear_HIT(&mut self) -> Self {
+    pub fn clear_hit(&mut self) -> Self {
         self.inner &= Self::HIT.reverse_bits();
         *self
     }
 
-    pub const fn is_DODGE(&self) -> bool {
+    pub const fn is_dodge(&self) -> bool {
         (self.inner & Self::DODGE) != 0
     }
 
-    pub const fn new_DODGE() -> Self {
+    pub const fn new_dodge() -> Self {
         Self { inner: Self::DODGE }
     }
 
-    pub fn set_DODGE(&mut self) -> Self {
+    pub fn set_dodge(&mut self) -> Self {
         self.inner |= Self::DODGE;
         *self
     }
 
-    pub fn clear_DODGE(&mut self) -> Self {
+    pub fn clear_dodge(&mut self) -> Self {
         self.inner &= Self::DODGE.reverse_bits();
         *self
     }
 
-    pub const fn is_PARRY(&self) -> bool {
+    pub const fn is_parry(&self) -> bool {
         (self.inner & Self::PARRY) != 0
     }
 
-    pub const fn new_PARRY() -> Self {
+    pub const fn new_parry() -> Self {
         Self { inner: Self::PARRY }
     }
 
-    pub fn set_PARRY(&mut self) -> Self {
+    pub fn set_parry(&mut self) -> Self {
         self.inner |= Self::PARRY;
         *self
     }
 
-    pub fn clear_PARRY(&mut self) -> Self {
+    pub fn clear_parry(&mut self) -> Self {
         self.inner &= Self::PARRY.reverse_bits();
         *self
     }
 
-    pub const fn is_INTERRUPT(&self) -> bool {
+    pub const fn is_interrupt(&self) -> bool {
         (self.inner & Self::INTERRUPT) != 0
     }
 
-    pub const fn new_INTERRUPT() -> Self {
+    pub const fn new_interrupt() -> Self {
         Self { inner: Self::INTERRUPT }
     }
 
-    pub fn set_INTERRUPT(&mut self) -> Self {
+    pub fn set_interrupt(&mut self) -> Self {
         self.inner |= Self::INTERRUPT;
         *self
     }
 
-    pub fn clear_INTERRUPT(&mut self) -> Self {
+    pub fn clear_interrupt(&mut self) -> Self {
         self.inner &= Self::INTERRUPT.reverse_bits();
         *self
     }
 
-    pub const fn is_BLOCKS(&self) -> bool {
+    pub const fn is_blocks(&self) -> bool {
         (self.inner & Self::BLOCKS) != 0
     }
 
     /// azerothcore: unused? not set when blocked, even on full block
     ///
-    pub const fn new_BLOCKS() -> Self {
+    pub const fn new_blocks() -> Self {
         Self { inner: Self::BLOCKS }
     }
 
-    pub fn set_BLOCKS(&mut self) -> Self {
+    pub fn set_blocks(&mut self) -> Self {
         self.inner |= Self::BLOCKS;
         *self
     }
 
-    pub fn clear_BLOCKS(&mut self) -> Self {
+    pub fn clear_blocks(&mut self) -> Self {
         self.inner &= Self::BLOCKS.reverse_bits();
         *self
     }
 
-    pub const fn is_EVADES(&self) -> bool {
+    pub const fn is_evades(&self) -> bool {
         (self.inner & Self::EVADES) != 0
     }
 
-    pub const fn new_EVADES() -> Self {
+    pub const fn new_evades() -> Self {
         Self { inner: Self::EVADES }
     }
 
-    pub fn set_EVADES(&mut self) -> Self {
+    pub fn set_evades(&mut self) -> Self {
         self.inner |= Self::EVADES;
         *self
     }
 
-    pub fn clear_EVADES(&mut self) -> Self {
+    pub fn clear_evades(&mut self) -> Self {
         self.inner &= Self::EVADES.reverse_bits();
         *self
     }
 
-    pub const fn is_IS_IMMUNE(&self) -> bool {
+    pub const fn is_is_immune(&self) -> bool {
         (self.inner & Self::IS_IMMUNE) != 0
     }
 
-    pub const fn new_IS_IMMUNE() -> Self {
+    pub const fn new_is_immune() -> Self {
         Self { inner: Self::IS_IMMUNE }
     }
 
-    pub fn set_IS_IMMUNE(&mut self) -> Self {
+    pub fn set_is_immune(&mut self) -> Self {
         self.inner |= Self::IS_IMMUNE;
         *self
     }
 
-    pub fn clear_IS_IMMUNE(&mut self) -> Self {
+    pub fn clear_is_immune(&mut self) -> Self {
         self.inner &= Self::IS_IMMUNE.reverse_bits();
         *self
     }
 
-    pub const fn is_DEFLECTS(&self) -> bool {
+    pub const fn is_deflects(&self) -> bool {
         (self.inner & Self::DEFLECTS) != 0
     }
 
-    pub const fn new_DEFLECTS() -> Self {
+    pub const fn new_deflects() -> Self {
         Self { inner: Self::DEFLECTS }
     }
 
-    pub fn set_DEFLECTS(&mut self) -> Self {
+    pub fn set_deflects(&mut self) -> Self {
         self.inner |= Self::DEFLECTS;
         *self
     }
 
-    pub fn clear_DEFLECTS(&mut self) -> Self {
+    pub fn clear_deflects(&mut self) -> Self {
         self.inner &= Self::DEFLECTS.reverse_bits();
         *self
     }

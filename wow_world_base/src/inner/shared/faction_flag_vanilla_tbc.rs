@@ -49,143 +49,143 @@ impl FactionFlag {
         }
     }
 
-    pub const fn is_VISIBLE(&self) -> bool {
+    pub const fn is_visible(&self) -> bool {
         (self.inner & Self::VISIBLE) != 0
     }
 
     /// makes visible in client (set or can be set at interaction with target of this faction)
     ///
-    pub const fn new_VISIBLE() -> Self {
+    pub const fn new_visible() -> Self {
         Self { inner: Self::VISIBLE }
     }
 
-    pub fn set_VISIBLE(&mut self) -> Self {
+    pub fn set_visible(&mut self) -> Self {
         self.inner |= Self::VISIBLE;
         *self
     }
 
-    pub fn clear_VISIBLE(&mut self) -> Self {
+    pub fn clear_visible(&mut self) -> Self {
         self.inner &= Self::VISIBLE.reverse_bits();
         *self
     }
 
-    pub const fn is_AT_WAR(&self) -> bool {
+    pub const fn is_at_war(&self) -> bool {
         (self.inner & Self::AT_WAR) != 0
     }
 
     /// enable AtWar-button in client. player controlled (except opposition team always war state), Flag only set on initial creation
     ///
-    pub const fn new_AT_WAR() -> Self {
+    pub const fn new_at_war() -> Self {
         Self { inner: Self::AT_WAR }
     }
 
-    pub fn set_AT_WAR(&mut self) -> Self {
+    pub fn set_at_war(&mut self) -> Self {
         self.inner |= Self::AT_WAR;
         *self
     }
 
-    pub fn clear_AT_WAR(&mut self) -> Self {
+    pub fn clear_at_war(&mut self) -> Self {
         self.inner &= Self::AT_WAR.reverse_bits();
         *self
     }
 
-    pub const fn is_HIDDEN(&self) -> bool {
+    pub const fn is_hidden(&self) -> bool {
         (self.inner & Self::HIDDEN) != 0
     }
 
     /// hidden faction from reputation pane in client (player can gain reputation, but this update not sent to client)
     ///
-    pub const fn new_HIDDEN() -> Self {
+    pub const fn new_hidden() -> Self {
         Self { inner: Self::HIDDEN }
     }
 
-    pub fn set_HIDDEN(&mut self) -> Self {
+    pub fn set_hidden(&mut self) -> Self {
         self.inner |= Self::HIDDEN;
         *self
     }
 
-    pub fn clear_HIDDEN(&mut self) -> Self {
+    pub fn clear_hidden(&mut self) -> Self {
         self.inner &= Self::HIDDEN.reverse_bits();
         *self
     }
 
-    pub const fn is_INVISIBLE_FORCED(&self) -> bool {
+    pub const fn is_invisible_forced(&self) -> bool {
         (self.inner & Self::INVISIBLE_FORCED) != 0
     }
 
     /// always overwrite `FACTION_FLAG_VISIBLE` and hide faction in rep.list, used for hide opposite team factions
     ///
-    pub const fn new_INVISIBLE_FORCED() -> Self {
+    pub const fn new_invisible_forced() -> Self {
         Self { inner: Self::INVISIBLE_FORCED }
     }
 
-    pub fn set_INVISIBLE_FORCED(&mut self) -> Self {
+    pub fn set_invisible_forced(&mut self) -> Self {
         self.inner |= Self::INVISIBLE_FORCED;
         *self
     }
 
-    pub fn clear_INVISIBLE_FORCED(&mut self) -> Self {
+    pub fn clear_invisible_forced(&mut self) -> Self {
         self.inner &= Self::INVISIBLE_FORCED.reverse_bits();
         *self
     }
 
-    pub const fn is_PEACE_FORCED(&self) -> bool {
+    pub const fn is_peace_forced(&self) -> bool {
         (self.inner & Self::PEACE_FORCED) != 0
     }
 
     /// always overwrite `FACTION_FLAG_AT_WAR`, used for prevent war with own team factions
     ///
-    pub const fn new_PEACE_FORCED() -> Self {
+    pub const fn new_peace_forced() -> Self {
         Self { inner: Self::PEACE_FORCED }
     }
 
-    pub fn set_PEACE_FORCED(&mut self) -> Self {
+    pub fn set_peace_forced(&mut self) -> Self {
         self.inner |= Self::PEACE_FORCED;
         *self
     }
 
-    pub fn clear_PEACE_FORCED(&mut self) -> Self {
+    pub fn clear_peace_forced(&mut self) -> Self {
         self.inner &= Self::PEACE_FORCED.reverse_bits();
         *self
     }
 
-    pub const fn is_INACTIVE(&self) -> bool {
+    pub const fn is_inactive(&self) -> bool {
         (self.inner & Self::INACTIVE) != 0
     }
 
     /// player controlled, state stored in characters.data ( `CMSG_SET_FACTION_INACTIVE` )
     ///
-    pub const fn new_INACTIVE() -> Self {
+    pub const fn new_inactive() -> Self {
         Self { inner: Self::INACTIVE }
     }
 
-    pub fn set_INACTIVE(&mut self) -> Self {
+    pub fn set_inactive(&mut self) -> Self {
         self.inner |= Self::INACTIVE;
         *self
     }
 
-    pub fn clear_INACTIVE(&mut self) -> Self {
+    pub fn clear_inactive(&mut self) -> Self {
         self.inner &= Self::INACTIVE.reverse_bits();
         *self
     }
 
-    pub const fn is_RIVAL(&self) -> bool {
+    pub const fn is_rival(&self) -> bool {
         (self.inner & Self::RIVAL) != 0
     }
 
     /// flag for the two competing outland factions
     /// This is also present in vmangos for Vanilla, unsure if it's used.
     ///
-    pub const fn new_RIVAL() -> Self {
+    pub const fn new_rival() -> Self {
         Self { inner: Self::RIVAL }
     }
 
-    pub fn set_RIVAL(&mut self) -> Self {
+    pub fn set_rival(&mut self) -> Self {
         self.inner |= Self::RIVAL;
         *self
     }
 
-    pub fn clear_RIVAL(&mut self) -> Self {
+    pub fn clear_rival(&mut self) -> Self {
         self.inner &= Self::RIVAL.reverse_bits();
         *self
     }

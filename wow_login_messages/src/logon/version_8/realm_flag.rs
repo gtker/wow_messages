@@ -48,110 +48,110 @@ impl RealmFlag {
         }
     }
 
-    pub const fn is_INVALID(&self) -> bool {
+    pub const fn is_invalid(&self) -> bool {
         (self.inner & Self::INVALID) != 0
     }
 
-    pub const fn new_INVALID() -> Self {
+    pub const fn new_invalid() -> Self {
         Self { inner: Self::INVALID }
     }
 
-    pub fn set_INVALID(&mut self) -> Self {
+    pub fn set_invalid(&mut self) -> Self {
         self.inner |= Self::INVALID;
         *self
     }
 
-    pub fn clear_INVALID(&mut self) -> Self {
+    pub fn clear_invalid(&mut self) -> Self {
         self.inner &= Self::INVALID.reverse_bits();
         *self
     }
 
-    pub const fn is_OFFLINE(&self) -> bool {
+    pub const fn is_offline(&self) -> bool {
         (self.inner & Self::OFFLINE) != 0
     }
 
-    pub const fn new_OFFLINE() -> Self {
+    pub const fn new_offline() -> Self {
         Self { inner: Self::OFFLINE }
     }
 
-    pub fn set_OFFLINE(&mut self) -> Self {
+    pub fn set_offline(&mut self) -> Self {
         self.inner |= Self::OFFLINE;
         *self
     }
 
-    pub fn clear_OFFLINE(&mut self) -> Self {
+    pub fn clear_offline(&mut self) -> Self {
         self.inner &= Self::OFFLINE.reverse_bits();
         *self
     }
 
-    pub const fn is_SPECIFY_BUILD(&self) -> bool {
+    pub const fn is_specify_build(&self) -> bool {
         (self.inner & Self::SPECIFY_BUILD) != 0
     }
 
-    pub const fn new_SPECIFY_BUILD() -> Self {
+    pub const fn new_specify_build() -> Self {
         Self { inner: Self::SPECIFY_BUILD }
     }
 
-    pub fn set_SPECIFY_BUILD(&mut self) -> Self {
+    pub fn set_specify_build(&mut self) -> Self {
         self.inner |= Self::SPECIFY_BUILD;
         *self
     }
 
-    pub fn clear_SPECIFY_BUILD(&mut self) -> Self {
+    pub fn clear_specify_build(&mut self) -> Self {
         self.inner &= Self::SPECIFY_BUILD.reverse_bits();
         *self
     }
 
-    pub const fn is_FORCE_BLUE_RECOMMENDED(&self) -> bool {
+    pub const fn is_force_blue_recommended(&self) -> bool {
         (self.inner & Self::FORCE_BLUE_RECOMMENDED) != 0
     }
 
-    pub const fn new_FORCE_BLUE_RECOMMENDED() -> Self {
+    pub const fn new_force_blue_recommended() -> Self {
         Self { inner: Self::FORCE_BLUE_RECOMMENDED }
     }
 
-    pub fn set_FORCE_BLUE_RECOMMENDED(&mut self) -> Self {
+    pub fn set_force_blue_recommended(&mut self) -> Self {
         self.inner |= Self::FORCE_BLUE_RECOMMENDED;
         *self
     }
 
-    pub fn clear_FORCE_BLUE_RECOMMENDED(&mut self) -> Self {
+    pub fn clear_force_blue_recommended(&mut self) -> Self {
         self.inner &= Self::FORCE_BLUE_RECOMMENDED.reverse_bits();
         *self
     }
 
-    pub const fn is_FORCE_GREEN_RECOMMENDED(&self) -> bool {
+    pub const fn is_force_green_recommended(&self) -> bool {
         (self.inner & Self::FORCE_GREEN_RECOMMENDED) != 0
     }
 
-    pub const fn new_FORCE_GREEN_RECOMMENDED() -> Self {
+    pub const fn new_force_green_recommended() -> Self {
         Self { inner: Self::FORCE_GREEN_RECOMMENDED }
     }
 
-    pub fn set_FORCE_GREEN_RECOMMENDED(&mut self) -> Self {
+    pub fn set_force_green_recommended(&mut self) -> Self {
         self.inner |= Self::FORCE_GREEN_RECOMMENDED;
         *self
     }
 
-    pub fn clear_FORCE_GREEN_RECOMMENDED(&mut self) -> Self {
+    pub fn clear_force_green_recommended(&mut self) -> Self {
         self.inner &= Self::FORCE_GREEN_RECOMMENDED.reverse_bits();
         *self
     }
 
-    pub const fn is_FORCE_RED_FULL(&self) -> bool {
+    pub const fn is_force_red_full(&self) -> bool {
         (self.inner & Self::FORCE_RED_FULL) != 0
     }
 
-    pub const fn new_FORCE_RED_FULL() -> Self {
+    pub const fn new_force_red_full() -> Self {
         Self { inner: Self::FORCE_RED_FULL }
     }
 
-    pub fn set_FORCE_RED_FULL(&mut self) -> Self {
+    pub fn set_force_red_full(&mut self) -> Self {
         self.inner |= Self::FORCE_RED_FULL;
         *self
     }
 
-    pub fn clear_FORCE_RED_FULL(&mut self) -> Self {
+    pub fn clear_force_red_full(&mut self) -> Self {
         self.inner &= Self::FORCE_RED_FULL.reverse_bits();
         *self
     }

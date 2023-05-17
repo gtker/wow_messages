@@ -87,7 +87,7 @@ impl Relation {
             String::from_utf8(note)?
         };
 
-        let relation_mask_FRIEND = if relation_mask.is_FRIEND() {
+        let relation_mask_FRIEND = if relation_mask.is_friend() {
             // status: FriendStatus
             let status: FriendStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
 
@@ -232,7 +232,7 @@ impl Relation_RelationType {
         && self.friend.is_none()
     }
 
-    pub const fn new_FRIEND(friend: Relation_RelationType_Friend) -> Self {
+    pub const fn new_friend(friend: Relation_RelationType_Friend) -> Self {
         Self {
             inner: RelationType::FRIEND,
             friend: Some(friend),
@@ -240,24 +240,24 @@ impl Relation_RelationType {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_FRIEND(mut self, friend: Relation_RelationType_Friend) -> Self {
+    pub fn set_friend(mut self, friend: Relation_RelationType_Friend) -> Self {
         self.inner |= RelationType::FRIEND;
         self.friend = Some(friend);
         self
     }
 
-    pub const fn get_FRIEND(&self) -> Option<&Relation_RelationType_Friend> {
+    pub const fn get_friend(&self) -> Option<&Relation_RelationType_Friend> {
         self.friend.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_FRIEND(mut self) -> Self {
+    pub fn clear_friend(mut self) -> Self {
         self.inner &= RelationType::FRIEND.reverse_bits();
         self.friend = None;
         self
     }
 
-    pub const fn new_IGNORED() -> Self {
+    pub const fn new_ignored() -> Self {
         Self {
             inner: RelationType::IGNORED,
             friend: None,
@@ -265,22 +265,22 @@ impl Relation_RelationType {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_IGNORED(mut self) -> Self {
+    pub fn set_ignored(mut self) -> Self {
         self.inner |= RelationType::IGNORED;
         self
     }
 
-    pub const fn get_IGNORED(&self) -> bool {
+    pub const fn get_ignored(&self) -> bool {
         (self.inner & RelationType::IGNORED) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_IGNORED(mut self) -> Self {
+    pub fn clear_ignored(mut self) -> Self {
         self.inner &= RelationType::IGNORED.reverse_bits();
         self
     }
 
-    pub const fn new_MUTED() -> Self {
+    pub const fn new_muted() -> Self {
         Self {
             inner: RelationType::MUTED,
             friend: None,
@@ -288,22 +288,22 @@ impl Relation_RelationType {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_MUTED(mut self) -> Self {
+    pub fn set_muted(mut self) -> Self {
         self.inner |= RelationType::MUTED;
         self
     }
 
-    pub const fn get_MUTED(&self) -> bool {
+    pub const fn get_muted(&self) -> bool {
         (self.inner & RelationType::MUTED) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_MUTED(mut self) -> Self {
+    pub fn clear_muted(mut self) -> Self {
         self.inner &= RelationType::MUTED.reverse_bits();
         self
     }
 
-    pub const fn new_RECRUITAFRIEND() -> Self {
+    pub const fn new_recruitafriend() -> Self {
         Self {
             inner: RelationType::RECRUITAFRIEND,
             friend: None,
@@ -311,17 +311,17 @@ impl Relation_RelationType {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_RECRUITAFRIEND(mut self) -> Self {
+    pub fn set_recruitafriend(mut self) -> Self {
         self.inner |= RelationType::RECRUITAFRIEND;
         self
     }
 
-    pub const fn get_RECRUITAFRIEND(&self) -> bool {
+    pub const fn get_recruitafriend(&self) -> bool {
         (self.inner & RelationType::RECRUITAFRIEND) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_RECRUITAFRIEND(mut self) -> Self {
+    pub fn clear_recruitafriend(mut self) -> Self {
         self.inner &= RelationType::RECRUITAFRIEND.reverse_bits();
         self
     }

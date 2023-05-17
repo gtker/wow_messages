@@ -124,580 +124,580 @@ impl ItemFlag2 {
         }
     }
 
-    pub const fn is_FACTION_HORDE(&self) -> bool {
+    pub const fn is_faction_horde(&self) -> bool {
         (self.inner & Self::FACTION_HORDE) != 0
     }
 
-    pub const fn new_FACTION_HORDE() -> Self {
+    pub const fn new_faction_horde() -> Self {
         Self { inner: Self::FACTION_HORDE }
     }
 
-    pub fn set_FACTION_HORDE(&mut self) -> Self {
+    pub fn set_faction_horde(&mut self) -> Self {
         self.inner |= Self::FACTION_HORDE;
         *self
     }
 
-    pub fn clear_FACTION_HORDE(&mut self) -> Self {
+    pub fn clear_faction_horde(&mut self) -> Self {
         self.inner &= Self::FACTION_HORDE.reverse_bits();
         *self
     }
 
-    pub const fn is_FACTION_ALLIANCE(&self) -> bool {
+    pub const fn is_faction_alliance(&self) -> bool {
         (self.inner & Self::FACTION_ALLIANCE) != 0
     }
 
-    pub const fn new_FACTION_ALLIANCE() -> Self {
+    pub const fn new_faction_alliance() -> Self {
         Self { inner: Self::FACTION_ALLIANCE }
     }
 
-    pub fn set_FACTION_ALLIANCE(&mut self) -> Self {
+    pub fn set_faction_alliance(&mut self) -> Self {
         self.inner |= Self::FACTION_ALLIANCE;
         *self
     }
 
-    pub fn clear_FACTION_ALLIANCE(&mut self) -> Self {
+    pub fn clear_faction_alliance(&mut self) -> Self {
         self.inner &= Self::FACTION_ALLIANCE.reverse_bits();
         *self
     }
 
-    pub const fn is_DONT_IGNORE_BUY_PRICE(&self) -> bool {
+    pub const fn is_dont_ignore_buy_price(&self) -> bool {
         (self.inner & Self::DONT_IGNORE_BUY_PRICE) != 0
     }
 
     /// when item uses extended cost, gold is also required
     ///
-    pub const fn new_DONT_IGNORE_BUY_PRICE() -> Self {
+    pub const fn new_dont_ignore_buy_price() -> Self {
         Self { inner: Self::DONT_IGNORE_BUY_PRICE }
     }
 
-    pub fn set_DONT_IGNORE_BUY_PRICE(&mut self) -> Self {
+    pub fn set_dont_ignore_buy_price(&mut self) -> Self {
         self.inner |= Self::DONT_IGNORE_BUY_PRICE;
         *self
     }
 
-    pub fn clear_DONT_IGNORE_BUY_PRICE(&mut self) -> Self {
+    pub fn clear_dont_ignore_buy_price(&mut self) -> Self {
         self.inner &= Self::DONT_IGNORE_BUY_PRICE.reverse_bits();
         *self
     }
 
-    pub const fn is_CLASSIFY_AS_CASTER(&self) -> bool {
+    pub const fn is_classify_as_caster(&self) -> bool {
         (self.inner & Self::CLASSIFY_AS_CASTER) != 0
     }
 
-    pub const fn new_CLASSIFY_AS_CASTER() -> Self {
+    pub const fn new_classify_as_caster() -> Self {
         Self { inner: Self::CLASSIFY_AS_CASTER }
     }
 
-    pub fn set_CLASSIFY_AS_CASTER(&mut self) -> Self {
+    pub fn set_classify_as_caster(&mut self) -> Self {
         self.inner |= Self::CLASSIFY_AS_CASTER;
         *self
     }
 
-    pub fn clear_CLASSIFY_AS_CASTER(&mut self) -> Self {
+    pub fn clear_classify_as_caster(&mut self) -> Self {
         self.inner &= Self::CLASSIFY_AS_CASTER.reverse_bits();
         *self
     }
 
-    pub const fn is_CLASSIFY_AS_PHYSICAL(&self) -> bool {
+    pub const fn is_classify_as_physical(&self) -> bool {
         (self.inner & Self::CLASSIFY_AS_PHYSICAL) != 0
     }
 
-    pub const fn new_CLASSIFY_AS_PHYSICAL() -> Self {
+    pub const fn new_classify_as_physical() -> Self {
         Self { inner: Self::CLASSIFY_AS_PHYSICAL }
     }
 
-    pub fn set_CLASSIFY_AS_PHYSICAL(&mut self) -> Self {
+    pub fn set_classify_as_physical(&mut self) -> Self {
         self.inner |= Self::CLASSIFY_AS_PHYSICAL;
         *self
     }
 
-    pub fn clear_CLASSIFY_AS_PHYSICAL(&mut self) -> Self {
+    pub fn clear_classify_as_physical(&mut self) -> Self {
         self.inner &= Self::CLASSIFY_AS_PHYSICAL.reverse_bits();
         *self
     }
 
-    pub const fn is_EVERYONE_CAN_ROLL_NEED(&self) -> bool {
+    pub const fn is_everyone_can_roll_need(&self) -> bool {
         (self.inner & Self::EVERYONE_CAN_ROLL_NEED) != 0
     }
 
-    pub const fn new_EVERYONE_CAN_ROLL_NEED() -> Self {
+    pub const fn new_everyone_can_roll_need() -> Self {
         Self { inner: Self::EVERYONE_CAN_ROLL_NEED }
     }
 
-    pub fn set_EVERYONE_CAN_ROLL_NEED(&mut self) -> Self {
+    pub fn set_everyone_can_roll_need(&mut self) -> Self {
         self.inner |= Self::EVERYONE_CAN_ROLL_NEED;
         *self
     }
 
-    pub fn clear_EVERYONE_CAN_ROLL_NEED(&mut self) -> Self {
+    pub fn clear_everyone_can_roll_need(&mut self) -> Self {
         self.inner &= Self::EVERYONE_CAN_ROLL_NEED.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_TRADE_BIND_ON_ACQUIRE(&self) -> bool {
+    pub const fn is_no_trade_bind_on_acquire(&self) -> bool {
         (self.inner & Self::NO_TRADE_BIND_ON_ACQUIRE) != 0
     }
 
-    pub const fn new_NO_TRADE_BIND_ON_ACQUIRE() -> Self {
+    pub const fn new_no_trade_bind_on_acquire() -> Self {
         Self { inner: Self::NO_TRADE_BIND_ON_ACQUIRE }
     }
 
-    pub fn set_NO_TRADE_BIND_ON_ACQUIRE(&mut self) -> Self {
+    pub fn set_no_trade_bind_on_acquire(&mut self) -> Self {
         self.inner |= Self::NO_TRADE_BIND_ON_ACQUIRE;
         *self
     }
 
-    pub fn clear_NO_TRADE_BIND_ON_ACQUIRE(&mut self) -> Self {
+    pub fn clear_no_trade_bind_on_acquire(&mut self) -> Self {
         self.inner &= Self::NO_TRADE_BIND_ON_ACQUIRE.reverse_bits();
         *self
     }
 
-    pub const fn is_CAN_TRADE_BIND_ON_ACQUIRE(&self) -> bool {
+    pub const fn is_can_trade_bind_on_acquire(&self) -> bool {
         (self.inner & Self::CAN_TRADE_BIND_ON_ACQUIRE) != 0
     }
 
-    pub const fn new_CAN_TRADE_BIND_ON_ACQUIRE() -> Self {
+    pub const fn new_can_trade_bind_on_acquire() -> Self {
         Self { inner: Self::CAN_TRADE_BIND_ON_ACQUIRE }
     }
 
-    pub fn set_CAN_TRADE_BIND_ON_ACQUIRE(&mut self) -> Self {
+    pub fn set_can_trade_bind_on_acquire(&mut self) -> Self {
         self.inner |= Self::CAN_TRADE_BIND_ON_ACQUIRE;
         *self
     }
 
-    pub fn clear_CAN_TRADE_BIND_ON_ACQUIRE(&mut self) -> Self {
+    pub fn clear_can_trade_bind_on_acquire(&mut self) -> Self {
         self.inner &= Self::CAN_TRADE_BIND_ON_ACQUIRE.reverse_bits();
         *self
     }
 
-    pub const fn is_CAN_ONLY_ROLL_GREED(&self) -> bool {
+    pub const fn is_can_only_roll_greed(&self) -> bool {
         (self.inner & Self::CAN_ONLY_ROLL_GREED) != 0
     }
 
-    pub const fn new_CAN_ONLY_ROLL_GREED() -> Self {
+    pub const fn new_can_only_roll_greed() -> Self {
         Self { inner: Self::CAN_ONLY_ROLL_GREED }
     }
 
-    pub fn set_CAN_ONLY_ROLL_GREED(&mut self) -> Self {
+    pub fn set_can_only_roll_greed(&mut self) -> Self {
         self.inner |= Self::CAN_ONLY_ROLL_GREED;
         *self
     }
 
-    pub fn clear_CAN_ONLY_ROLL_GREED(&mut self) -> Self {
+    pub fn clear_can_only_roll_greed(&mut self) -> Self {
         self.inner &= Self::CAN_ONLY_ROLL_GREED.reverse_bits();
         *self
     }
 
-    pub const fn is_CASTER_WEAPON(&self) -> bool {
+    pub const fn is_caster_weapon(&self) -> bool {
         (self.inner & Self::CASTER_WEAPON) != 0
     }
 
-    pub const fn new_CASTER_WEAPON() -> Self {
+    pub const fn new_caster_weapon() -> Self {
         Self { inner: Self::CASTER_WEAPON }
     }
 
-    pub fn set_CASTER_WEAPON(&mut self) -> Self {
+    pub fn set_caster_weapon(&mut self) -> Self {
         self.inner |= Self::CASTER_WEAPON;
         *self
     }
 
-    pub fn clear_CASTER_WEAPON(&mut self) -> Self {
+    pub fn clear_caster_weapon(&mut self) -> Self {
         self.inner &= Self::CASTER_WEAPON.reverse_bits();
         *self
     }
 
-    pub const fn is_DELETE_ON_LOGIN(&self) -> bool {
+    pub const fn is_delete_on_login(&self) -> bool {
         (self.inner & Self::DELETE_ON_LOGIN) != 0
     }
 
-    pub const fn new_DELETE_ON_LOGIN() -> Self {
+    pub const fn new_delete_on_login() -> Self {
         Self { inner: Self::DELETE_ON_LOGIN }
     }
 
-    pub fn set_DELETE_ON_LOGIN(&mut self) -> Self {
+    pub fn set_delete_on_login(&mut self) -> Self {
         self.inner |= Self::DELETE_ON_LOGIN;
         *self
     }
 
-    pub fn clear_DELETE_ON_LOGIN(&mut self) -> Self {
+    pub fn clear_delete_on_login(&mut self) -> Self {
         self.inner &= Self::DELETE_ON_LOGIN.reverse_bits();
         *self
     }
 
-    pub const fn is_INTERNAL_ITEM(&self) -> bool {
+    pub const fn is_internal_item(&self) -> bool {
         (self.inner & Self::INTERNAL_ITEM) != 0
     }
 
-    pub const fn new_INTERNAL_ITEM() -> Self {
+    pub const fn new_internal_item() -> Self {
         Self { inner: Self::INTERNAL_ITEM }
     }
 
-    pub fn set_INTERNAL_ITEM(&mut self) -> Self {
+    pub fn set_internal_item(&mut self) -> Self {
         self.inner |= Self::INTERNAL_ITEM;
         *self
     }
 
-    pub fn clear_INTERNAL_ITEM(&mut self) -> Self {
+    pub fn clear_internal_item(&mut self) -> Self {
         self.inner &= Self::INTERNAL_ITEM.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_VENDOR_VALUE(&self) -> bool {
+    pub const fn is_no_vendor_value(&self) -> bool {
         (self.inner & Self::NO_VENDOR_VALUE) != 0
     }
 
-    pub const fn new_NO_VENDOR_VALUE() -> Self {
+    pub const fn new_no_vendor_value() -> Self {
         Self { inner: Self::NO_VENDOR_VALUE }
     }
 
-    pub fn set_NO_VENDOR_VALUE(&mut self) -> Self {
+    pub fn set_no_vendor_value(&mut self) -> Self {
         self.inner |= Self::NO_VENDOR_VALUE;
         *self
     }
 
-    pub fn clear_NO_VENDOR_VALUE(&mut self) -> Self {
+    pub fn clear_no_vendor_value(&mut self) -> Self {
         self.inner &= Self::NO_VENDOR_VALUE.reverse_bits();
         *self
     }
 
-    pub const fn is_SHOW_BEFORE_DISCOVERED(&self) -> bool {
+    pub const fn is_show_before_discovered(&self) -> bool {
         (self.inner & Self::SHOW_BEFORE_DISCOVERED) != 0
     }
 
-    pub const fn new_SHOW_BEFORE_DISCOVERED() -> Self {
+    pub const fn new_show_before_discovered() -> Self {
         Self { inner: Self::SHOW_BEFORE_DISCOVERED }
     }
 
-    pub fn set_SHOW_BEFORE_DISCOVERED(&mut self) -> Self {
+    pub fn set_show_before_discovered(&mut self) -> Self {
         self.inner |= Self::SHOW_BEFORE_DISCOVERED;
         *self
     }
 
-    pub fn clear_SHOW_BEFORE_DISCOVERED(&mut self) -> Self {
+    pub fn clear_show_before_discovered(&mut self) -> Self {
         self.inner &= Self::SHOW_BEFORE_DISCOVERED.reverse_bits();
         *self
     }
 
-    pub const fn is_OVERRIDE_GOLD_COST(&self) -> bool {
+    pub const fn is_override_gold_cost(&self) -> bool {
         (self.inner & Self::OVERRIDE_GOLD_COST) != 0
     }
 
-    pub const fn new_OVERRIDE_GOLD_COST() -> Self {
+    pub const fn new_override_gold_cost() -> Self {
         Self { inner: Self::OVERRIDE_GOLD_COST }
     }
 
-    pub fn set_OVERRIDE_GOLD_COST(&mut self) -> Self {
+    pub fn set_override_gold_cost(&mut self) -> Self {
         self.inner |= Self::OVERRIDE_GOLD_COST;
         *self
     }
 
-    pub fn clear_OVERRIDE_GOLD_COST(&mut self) -> Self {
+    pub fn clear_override_gold_cost(&mut self) -> Self {
         self.inner &= Self::OVERRIDE_GOLD_COST.reverse_bits();
         *self
     }
 
-    pub const fn is_IGNORE_DEFAULT_RATED_BG_RESTRICTIONS(&self) -> bool {
+    pub const fn is_ignore_default_rated_bg_restrictions(&self) -> bool {
         (self.inner & Self::IGNORE_DEFAULT_RATED_BG_RESTRICTIONS) != 0
     }
 
-    pub const fn new_IGNORE_DEFAULT_RATED_BG_RESTRICTIONS() -> Self {
+    pub const fn new_ignore_default_rated_bg_restrictions() -> Self {
         Self { inner: Self::IGNORE_DEFAULT_RATED_BG_RESTRICTIONS }
     }
 
-    pub fn set_IGNORE_DEFAULT_RATED_BG_RESTRICTIONS(&mut self) -> Self {
+    pub fn set_ignore_default_rated_bg_restrictions(&mut self) -> Self {
         self.inner |= Self::IGNORE_DEFAULT_RATED_BG_RESTRICTIONS;
         *self
     }
 
-    pub fn clear_IGNORE_DEFAULT_RATED_BG_RESTRICTIONS(&mut self) -> Self {
+    pub fn clear_ignore_default_rated_bg_restrictions(&mut self) -> Self {
         self.inner &= Self::IGNORE_DEFAULT_RATED_BG_RESTRICTIONS.reverse_bits();
         *self
     }
 
-    pub const fn is_NOT_USABLE_IN_RATED_BG(&self) -> bool {
+    pub const fn is_not_usable_in_rated_bg(&self) -> bool {
         (self.inner & Self::NOT_USABLE_IN_RATED_BG) != 0
     }
 
-    pub const fn new_NOT_USABLE_IN_RATED_BG() -> Self {
+    pub const fn new_not_usable_in_rated_bg() -> Self {
         Self { inner: Self::NOT_USABLE_IN_RATED_BG }
     }
 
-    pub fn set_NOT_USABLE_IN_RATED_BG(&mut self) -> Self {
+    pub fn set_not_usable_in_rated_bg(&mut self) -> Self {
         self.inner |= Self::NOT_USABLE_IN_RATED_BG;
         *self
     }
 
-    pub fn clear_NOT_USABLE_IN_RATED_BG(&mut self) -> Self {
+    pub fn clear_not_usable_in_rated_bg(&mut self) -> Self {
         self.inner &= Self::NOT_USABLE_IN_RATED_BG.reverse_bits();
         *self
     }
 
-    pub const fn is_BNET_ACCOUNT_TRADE_OK(&self) -> bool {
+    pub const fn is_bnet_account_trade_ok(&self) -> bool {
         (self.inner & Self::BNET_ACCOUNT_TRADE_OK) != 0
     }
 
-    pub const fn new_BNET_ACCOUNT_TRADE_OK() -> Self {
+    pub const fn new_bnet_account_trade_ok() -> Self {
         Self { inner: Self::BNET_ACCOUNT_TRADE_OK }
     }
 
-    pub fn set_BNET_ACCOUNT_TRADE_OK(&mut self) -> Self {
+    pub fn set_bnet_account_trade_ok(&mut self) -> Self {
         self.inner |= Self::BNET_ACCOUNT_TRADE_OK;
         *self
     }
 
-    pub fn clear_BNET_ACCOUNT_TRADE_OK(&mut self) -> Self {
+    pub fn clear_bnet_account_trade_ok(&mut self) -> Self {
         self.inner &= Self::BNET_ACCOUNT_TRADE_OK.reverse_bits();
         *self
     }
 
-    pub const fn is_CONFIRM_BEFORE_USE(&self) -> bool {
+    pub const fn is_confirm_before_use(&self) -> bool {
         (self.inner & Self::CONFIRM_BEFORE_USE) != 0
     }
 
-    pub const fn new_CONFIRM_BEFORE_USE() -> Self {
+    pub const fn new_confirm_before_use() -> Self {
         Self { inner: Self::CONFIRM_BEFORE_USE }
     }
 
-    pub fn set_CONFIRM_BEFORE_USE(&mut self) -> Self {
+    pub fn set_confirm_before_use(&mut self) -> Self {
         self.inner |= Self::CONFIRM_BEFORE_USE;
         *self
     }
 
-    pub fn clear_CONFIRM_BEFORE_USE(&mut self) -> Self {
+    pub fn clear_confirm_before_use(&mut self) -> Self {
         self.inner &= Self::CONFIRM_BEFORE_USE.reverse_bits();
         *self
     }
 
-    pub const fn is_REEVALUATE_BONDING_ON_TRANSFORM(&self) -> bool {
+    pub const fn is_reevaluate_bonding_on_transform(&self) -> bool {
         (self.inner & Self::REEVALUATE_BONDING_ON_TRANSFORM) != 0
     }
 
-    pub const fn new_REEVALUATE_BONDING_ON_TRANSFORM() -> Self {
+    pub const fn new_reevaluate_bonding_on_transform() -> Self {
         Self { inner: Self::REEVALUATE_BONDING_ON_TRANSFORM }
     }
 
-    pub fn set_REEVALUATE_BONDING_ON_TRANSFORM(&mut self) -> Self {
+    pub fn set_reevaluate_bonding_on_transform(&mut self) -> Self {
         self.inner |= Self::REEVALUATE_BONDING_ON_TRANSFORM;
         *self
     }
 
-    pub fn clear_REEVALUATE_BONDING_ON_TRANSFORM(&mut self) -> Self {
+    pub fn clear_reevaluate_bonding_on_transform(&mut self) -> Self {
         self.inner &= Self::REEVALUATE_BONDING_ON_TRANSFORM.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_TRANSFORM_ON_CHARGE_DEPLETION(&self) -> bool {
+    pub const fn is_no_transform_on_charge_depletion(&self) -> bool {
         (self.inner & Self::NO_TRANSFORM_ON_CHARGE_DEPLETION) != 0
     }
 
-    pub const fn new_NO_TRANSFORM_ON_CHARGE_DEPLETION() -> Self {
+    pub const fn new_no_transform_on_charge_depletion() -> Self {
         Self { inner: Self::NO_TRANSFORM_ON_CHARGE_DEPLETION }
     }
 
-    pub fn set_NO_TRANSFORM_ON_CHARGE_DEPLETION(&mut self) -> Self {
+    pub fn set_no_transform_on_charge_depletion(&mut self) -> Self {
         self.inner |= Self::NO_TRANSFORM_ON_CHARGE_DEPLETION;
         *self
     }
 
-    pub fn clear_NO_TRANSFORM_ON_CHARGE_DEPLETION(&mut self) -> Self {
+    pub fn clear_no_transform_on_charge_depletion(&mut self) -> Self {
         self.inner &= Self::NO_TRANSFORM_ON_CHARGE_DEPLETION.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_ALTER_ITEM_VISUAL(&self) -> bool {
+    pub const fn is_no_alter_item_visual(&self) -> bool {
         (self.inner & Self::NO_ALTER_ITEM_VISUAL) != 0
     }
 
-    pub const fn new_NO_ALTER_ITEM_VISUAL() -> Self {
+    pub const fn new_no_alter_item_visual() -> Self {
         Self { inner: Self::NO_ALTER_ITEM_VISUAL }
     }
 
-    pub fn set_NO_ALTER_ITEM_VISUAL(&mut self) -> Self {
+    pub fn set_no_alter_item_visual(&mut self) -> Self {
         self.inner |= Self::NO_ALTER_ITEM_VISUAL;
         *self
     }
 
-    pub fn clear_NO_ALTER_ITEM_VISUAL(&mut self) -> Self {
+    pub fn clear_no_alter_item_visual(&mut self) -> Self {
         self.inner &= Self::NO_ALTER_ITEM_VISUAL.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_SOURCE_FOR_ITEM_VISUAL(&self) -> bool {
+    pub const fn is_no_source_for_item_visual(&self) -> bool {
         (self.inner & Self::NO_SOURCE_FOR_ITEM_VISUAL) != 0
     }
 
-    pub const fn new_NO_SOURCE_FOR_ITEM_VISUAL() -> Self {
+    pub const fn new_no_source_for_item_visual() -> Self {
         Self { inner: Self::NO_SOURCE_FOR_ITEM_VISUAL }
     }
 
-    pub fn set_NO_SOURCE_FOR_ITEM_VISUAL(&mut self) -> Self {
+    pub fn set_no_source_for_item_visual(&mut self) -> Self {
         self.inner |= Self::NO_SOURCE_FOR_ITEM_VISUAL;
         *self
     }
 
-    pub fn clear_NO_SOURCE_FOR_ITEM_VISUAL(&mut self) -> Self {
+    pub fn clear_no_source_for_item_visual(&mut self) -> Self {
         self.inner &= Self::NO_SOURCE_FOR_ITEM_VISUAL.reverse_bits();
         *self
     }
 
-    pub const fn is_IGNORE_QUALITY_FOR_ITEM_VISUAL_SOURCE(&self) -> bool {
+    pub const fn is_ignore_quality_for_item_visual_source(&self) -> bool {
         (self.inner & Self::IGNORE_QUALITY_FOR_ITEM_VISUAL_SOURCE) != 0
     }
 
-    pub const fn new_IGNORE_QUALITY_FOR_ITEM_VISUAL_SOURCE() -> Self {
+    pub const fn new_ignore_quality_for_item_visual_source() -> Self {
         Self { inner: Self::IGNORE_QUALITY_FOR_ITEM_VISUAL_SOURCE }
     }
 
-    pub fn set_IGNORE_QUALITY_FOR_ITEM_VISUAL_SOURCE(&mut self) -> Self {
+    pub fn set_ignore_quality_for_item_visual_source(&mut self) -> Self {
         self.inner |= Self::IGNORE_QUALITY_FOR_ITEM_VISUAL_SOURCE;
         *self
     }
 
-    pub fn clear_IGNORE_QUALITY_FOR_ITEM_VISUAL_SOURCE(&mut self) -> Self {
+    pub fn clear_ignore_quality_for_item_visual_source(&mut self) -> Self {
         self.inner &= Self::IGNORE_QUALITY_FOR_ITEM_VISUAL_SOURCE.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_DURABILITY(&self) -> bool {
+    pub const fn is_no_durability(&self) -> bool {
         (self.inner & Self::NO_DURABILITY) != 0
     }
 
-    pub const fn new_NO_DURABILITY() -> Self {
+    pub const fn new_no_durability() -> Self {
         Self { inner: Self::NO_DURABILITY }
     }
 
-    pub fn set_NO_DURABILITY(&mut self) -> Self {
+    pub fn set_no_durability(&mut self) -> Self {
         self.inner |= Self::NO_DURABILITY;
         *self
     }
 
-    pub fn clear_NO_DURABILITY(&mut self) -> Self {
+    pub fn clear_no_durability(&mut self) -> Self {
         self.inner &= Self::NO_DURABILITY.reverse_bits();
         *self
     }
 
-    pub const fn is_ROLE_TANK(&self) -> bool {
+    pub const fn is_role_tank(&self) -> bool {
         (self.inner & Self::ROLE_TANK) != 0
     }
 
-    pub const fn new_ROLE_TANK() -> Self {
+    pub const fn new_role_tank() -> Self {
         Self { inner: Self::ROLE_TANK }
     }
 
-    pub fn set_ROLE_TANK(&mut self) -> Self {
+    pub fn set_role_tank(&mut self) -> Self {
         self.inner |= Self::ROLE_TANK;
         *self
     }
 
-    pub fn clear_ROLE_TANK(&mut self) -> Self {
+    pub fn clear_role_tank(&mut self) -> Self {
         self.inner &= Self::ROLE_TANK.reverse_bits();
         *self
     }
 
-    pub const fn is_ROLE_HEALER(&self) -> bool {
+    pub const fn is_role_healer(&self) -> bool {
         (self.inner & Self::ROLE_HEALER) != 0
     }
 
-    pub const fn new_ROLE_HEALER() -> Self {
+    pub const fn new_role_healer() -> Self {
         Self { inner: Self::ROLE_HEALER }
     }
 
-    pub fn set_ROLE_HEALER(&mut self) -> Self {
+    pub fn set_role_healer(&mut self) -> Self {
         self.inner |= Self::ROLE_HEALER;
         *self
     }
 
-    pub fn clear_ROLE_HEALER(&mut self) -> Self {
+    pub fn clear_role_healer(&mut self) -> Self {
         self.inner &= Self::ROLE_HEALER.reverse_bits();
         *self
     }
 
-    pub const fn is_ROLE_DAMAGE(&self) -> bool {
+    pub const fn is_role_damage(&self) -> bool {
         (self.inner & Self::ROLE_DAMAGE) != 0
     }
 
-    pub const fn new_ROLE_DAMAGE() -> Self {
+    pub const fn new_role_damage() -> Self {
         Self { inner: Self::ROLE_DAMAGE }
     }
 
-    pub fn set_ROLE_DAMAGE(&mut self) -> Self {
+    pub fn set_role_damage(&mut self) -> Self {
         self.inner |= Self::ROLE_DAMAGE;
         *self
     }
 
-    pub fn clear_ROLE_DAMAGE(&mut self) -> Self {
+    pub fn clear_role_damage(&mut self) -> Self {
         self.inner &= Self::ROLE_DAMAGE.reverse_bits();
         *self
     }
 
-    pub const fn is_CAN_DROP_IN_CHALLENGE_MODE(&self) -> bool {
+    pub const fn is_can_drop_in_challenge_mode(&self) -> bool {
         (self.inner & Self::CAN_DROP_IN_CHALLENGE_MODE) != 0
     }
 
-    pub const fn new_CAN_DROP_IN_CHALLENGE_MODE() -> Self {
+    pub const fn new_can_drop_in_challenge_mode() -> Self {
         Self { inner: Self::CAN_DROP_IN_CHALLENGE_MODE }
     }
 
-    pub fn set_CAN_DROP_IN_CHALLENGE_MODE(&mut self) -> Self {
+    pub fn set_can_drop_in_challenge_mode(&mut self) -> Self {
         self.inner |= Self::CAN_DROP_IN_CHALLENGE_MODE;
         *self
     }
 
-    pub fn clear_CAN_DROP_IN_CHALLENGE_MODE(&mut self) -> Self {
+    pub fn clear_can_drop_in_challenge_mode(&mut self) -> Self {
         self.inner &= Self::CAN_DROP_IN_CHALLENGE_MODE.reverse_bits();
         *self
     }
 
-    pub const fn is_NEVER_STACK_IN_LOOT_UI(&self) -> bool {
+    pub const fn is_never_stack_in_loot_ui(&self) -> bool {
         (self.inner & Self::NEVER_STACK_IN_LOOT_UI) != 0
     }
 
-    pub const fn new_NEVER_STACK_IN_LOOT_UI() -> Self {
+    pub const fn new_never_stack_in_loot_ui() -> Self {
         Self { inner: Self::NEVER_STACK_IN_LOOT_UI }
     }
 
-    pub fn set_NEVER_STACK_IN_LOOT_UI(&mut self) -> Self {
+    pub fn set_never_stack_in_loot_ui(&mut self) -> Self {
         self.inner |= Self::NEVER_STACK_IN_LOOT_UI;
         *self
     }
 
-    pub fn clear_NEVER_STACK_IN_LOOT_UI(&mut self) -> Self {
+    pub fn clear_never_stack_in_loot_ui(&mut self) -> Self {
         self.inner &= Self::NEVER_STACK_IN_LOOT_UI.reverse_bits();
         *self
     }
 
-    pub const fn is_DISENCHANT_TO_LOOT_TABLE(&self) -> bool {
+    pub const fn is_disenchant_to_loot_table(&self) -> bool {
         (self.inner & Self::DISENCHANT_TO_LOOT_TABLE) != 0
     }
 
-    pub const fn new_DISENCHANT_TO_LOOT_TABLE() -> Self {
+    pub const fn new_disenchant_to_loot_table() -> Self {
         Self { inner: Self::DISENCHANT_TO_LOOT_TABLE }
     }
 
-    pub fn set_DISENCHANT_TO_LOOT_TABLE(&mut self) -> Self {
+    pub fn set_disenchant_to_loot_table(&mut self) -> Self {
         self.inner |= Self::DISENCHANT_TO_LOOT_TABLE;
         *self
     }
 
-    pub fn clear_DISENCHANT_TO_LOOT_TABLE(&mut self) -> Self {
+    pub fn clear_disenchant_to_loot_table(&mut self) -> Self {
         self.inner &= Self::DISENCHANT_TO_LOOT_TABLE.reverse_bits();
         *self
     }
 
-    pub const fn is_USED_IN_A_TRADESKILL(&self) -> bool {
+    pub const fn is_used_in_a_tradeskill(&self) -> bool {
         (self.inner & Self::USED_IN_A_TRADESKILL) != 0
     }
 
-    pub const fn new_USED_IN_A_TRADESKILL() -> Self {
+    pub const fn new_used_in_a_tradeskill() -> Self {
         Self { inner: Self::USED_IN_A_TRADESKILL }
     }
 
-    pub fn set_USED_IN_A_TRADESKILL(&mut self) -> Self {
+    pub fn set_used_in_a_tradeskill(&mut self) -> Self {
         self.inner |= Self::USED_IN_A_TRADESKILL;
         *self
     }
 
-    pub fn clear_USED_IN_A_TRADESKILL(&mut self) -> Self {
+    pub fn clear_used_in_a_tradeskill(&mut self) -> Self {
         self.inner &= Self::USED_IN_A_TRADESKILL.reverse_bits();
         *self
     }

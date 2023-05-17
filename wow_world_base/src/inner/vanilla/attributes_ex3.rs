@@ -127,578 +127,578 @@ impl AttributesEx3 {
         }
     }
 
-    pub const fn is_PVP_ENABLING(&self) -> bool {
+    pub const fn is_pvp_enabling(&self) -> bool {
         (self.inner & Self::PVP_ENABLING) != 0
     }
 
-    pub const fn new_PVP_ENABLING() -> Self {
+    pub const fn new_pvp_enabling() -> Self {
         Self { inner: Self::PVP_ENABLING }
     }
 
-    pub fn set_PVP_ENABLING(&mut self) -> Self {
+    pub fn set_pvp_enabling(&mut self) -> Self {
         self.inner |= Self::PVP_ENABLING;
         *self
     }
 
-    pub fn clear_PVP_ENABLING(&mut self) -> Self {
+    pub fn clear_pvp_enabling(&mut self) -> Self {
         self.inner &= Self::PVP_ENABLING.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_PROC_EQUIP_REQUIREMENT(&self) -> bool {
+    pub const fn is_no_proc_equip_requirement(&self) -> bool {
         (self.inner & Self::NO_PROC_EQUIP_REQUIREMENT) != 0
     }
 
-    pub const fn new_NO_PROC_EQUIP_REQUIREMENT() -> Self {
+    pub const fn new_no_proc_equip_requirement() -> Self {
         Self { inner: Self::NO_PROC_EQUIP_REQUIREMENT }
     }
 
-    pub fn set_NO_PROC_EQUIP_REQUIREMENT(&mut self) -> Self {
+    pub fn set_no_proc_equip_requirement(&mut self) -> Self {
         self.inner |= Self::NO_PROC_EQUIP_REQUIREMENT;
         *self
     }
 
-    pub fn clear_NO_PROC_EQUIP_REQUIREMENT(&mut self) -> Self {
+    pub fn clear_no_proc_equip_requirement(&mut self) -> Self {
         self.inner &= Self::NO_PROC_EQUIP_REQUIREMENT.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_CASTING_BAR_TEXT(&self) -> bool {
+    pub const fn is_no_casting_bar_text(&self) -> bool {
         (self.inner & Self::NO_CASTING_BAR_TEXT) != 0
     }
 
-    pub const fn new_NO_CASTING_BAR_TEXT() -> Self {
+    pub const fn new_no_casting_bar_text() -> Self {
         Self { inner: Self::NO_CASTING_BAR_TEXT }
     }
 
-    pub fn set_NO_CASTING_BAR_TEXT(&mut self) -> Self {
+    pub fn set_no_casting_bar_text(&mut self) -> Self {
         self.inner |= Self::NO_CASTING_BAR_TEXT;
         *self
     }
 
-    pub fn clear_NO_CASTING_BAR_TEXT(&mut self) -> Self {
+    pub fn clear_no_casting_bar_text(&mut self) -> Self {
         self.inner &= Self::NO_CASTING_BAR_TEXT.reverse_bits();
         *self
     }
 
-    pub const fn is_COMPLETELY_BLOCKED(&self) -> bool {
+    pub const fn is_completely_blocked(&self) -> bool {
         (self.inner & Self::COMPLETELY_BLOCKED) != 0
     }
 
-    pub const fn new_COMPLETELY_BLOCKED() -> Self {
+    pub const fn new_completely_blocked() -> Self {
         Self { inner: Self::COMPLETELY_BLOCKED }
     }
 
-    pub fn set_COMPLETELY_BLOCKED(&mut self) -> Self {
+    pub fn set_completely_blocked(&mut self) -> Self {
         self.inner |= Self::COMPLETELY_BLOCKED;
         *self
     }
 
-    pub fn clear_COMPLETELY_BLOCKED(&mut self) -> Self {
+    pub fn clear_completely_blocked(&mut self) -> Self {
         self.inner &= Self::COMPLETELY_BLOCKED.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_RES_TIMER(&self) -> bool {
+    pub const fn is_no_res_timer(&self) -> bool {
         (self.inner & Self::NO_RES_TIMER) != 0
     }
 
-    pub const fn new_NO_RES_TIMER() -> Self {
+    pub const fn new_no_res_timer() -> Self {
         Self { inner: Self::NO_RES_TIMER }
     }
 
-    pub fn set_NO_RES_TIMER(&mut self) -> Self {
+    pub fn set_no_res_timer(&mut self) -> Self {
         self.inner |= Self::NO_RES_TIMER;
         *self
     }
 
-    pub fn clear_NO_RES_TIMER(&mut self) -> Self {
+    pub fn clear_no_res_timer(&mut self) -> Self {
         self.inner &= Self::NO_RES_TIMER.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_DURABILITY_LOSS(&self) -> bool {
+    pub const fn is_no_durability_loss(&self) -> bool {
         (self.inner & Self::NO_DURABILITY_LOSS) != 0
     }
 
-    pub const fn new_NO_DURABILITY_LOSS() -> Self {
+    pub const fn new_no_durability_loss() -> Self {
         Self { inner: Self::NO_DURABILITY_LOSS }
     }
 
-    pub fn set_NO_DURABILITY_LOSS(&mut self) -> Self {
+    pub fn set_no_durability_loss(&mut self) -> Self {
         self.inner |= Self::NO_DURABILITY_LOSS;
         *self
     }
 
-    pub fn clear_NO_DURABILITY_LOSS(&mut self) -> Self {
+    pub fn clear_no_durability_loss(&mut self) -> Self {
         self.inner &= Self::NO_DURABILITY_LOSS.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_AVOIDANCE(&self) -> bool {
+    pub const fn is_no_avoidance(&self) -> bool {
         (self.inner & Self::NO_AVOIDANCE) != 0
     }
 
-    pub const fn new_NO_AVOIDANCE() -> Self {
+    pub const fn new_no_avoidance() -> Self {
         Self { inner: Self::NO_AVOIDANCE }
     }
 
-    pub fn set_NO_AVOIDANCE(&mut self) -> Self {
+    pub fn set_no_avoidance(&mut self) -> Self {
         self.inner |= Self::NO_AVOIDANCE;
         *self
     }
 
-    pub fn clear_NO_AVOIDANCE(&mut self) -> Self {
+    pub fn clear_no_avoidance(&mut self) -> Self {
         self.inner &= Self::NO_AVOIDANCE.reverse_bits();
         *self
     }
 
-    pub const fn is_DOT_STACKING_RULE(&self) -> bool {
+    pub const fn is_dot_stacking_rule(&self) -> bool {
         (self.inner & Self::DOT_STACKING_RULE) != 0
     }
 
-    pub const fn new_DOT_STACKING_RULE() -> Self {
+    pub const fn new_dot_stacking_rule() -> Self {
         Self { inner: Self::DOT_STACKING_RULE }
     }
 
-    pub fn set_DOT_STACKING_RULE(&mut self) -> Self {
+    pub fn set_dot_stacking_rule(&mut self) -> Self {
         self.inner |= Self::DOT_STACKING_RULE;
         *self
     }
 
-    pub fn clear_DOT_STACKING_RULE(&mut self) -> Self {
+    pub fn clear_dot_stacking_rule(&mut self) -> Self {
         self.inner &= Self::DOT_STACKING_RULE.reverse_bits();
         *self
     }
 
-    pub const fn is_ONLY_ON_PLAYER(&self) -> bool {
+    pub const fn is_only_on_player(&self) -> bool {
         (self.inner & Self::ONLY_ON_PLAYER) != 0
     }
 
-    pub const fn new_ONLY_ON_PLAYER() -> Self {
+    pub const fn new_only_on_player() -> Self {
         Self { inner: Self::ONLY_ON_PLAYER }
     }
 
-    pub fn set_ONLY_ON_PLAYER(&mut self) -> Self {
+    pub fn set_only_on_player(&mut self) -> Self {
         self.inner |= Self::ONLY_ON_PLAYER;
         *self
     }
 
-    pub fn clear_ONLY_ON_PLAYER(&mut self) -> Self {
+    pub fn clear_only_on_player(&mut self) -> Self {
         self.inner &= Self::ONLY_ON_PLAYER.reverse_bits();
         *self
     }
 
-    pub const fn is_NOT_A_PROC(&self) -> bool {
+    pub const fn is_not_a_proc(&self) -> bool {
         (self.inner & Self::NOT_A_PROC) != 0
     }
 
-    pub const fn new_NOT_A_PROC() -> Self {
+    pub const fn new_not_a_proc() -> Self {
         Self { inner: Self::NOT_A_PROC }
     }
 
-    pub fn set_NOT_A_PROC(&mut self) -> Self {
+    pub fn set_not_a_proc(&mut self) -> Self {
         self.inner |= Self::NOT_A_PROC;
         *self
     }
 
-    pub fn clear_NOT_A_PROC(&mut self) -> Self {
+    pub fn clear_not_a_proc(&mut self) -> Self {
         self.inner &= Self::NOT_A_PROC.reverse_bits();
         *self
     }
 
-    pub const fn is_REQUIRES_MAIN_HAND_WEAPON(&self) -> bool {
+    pub const fn is_requires_main_hand_weapon(&self) -> bool {
         (self.inner & Self::REQUIRES_MAIN_HAND_WEAPON) != 0
     }
 
-    pub const fn new_REQUIRES_MAIN_HAND_WEAPON() -> Self {
+    pub const fn new_requires_main_hand_weapon() -> Self {
         Self { inner: Self::REQUIRES_MAIN_HAND_WEAPON }
     }
 
-    pub fn set_REQUIRES_MAIN_HAND_WEAPON(&mut self) -> Self {
+    pub fn set_requires_main_hand_weapon(&mut self) -> Self {
         self.inner |= Self::REQUIRES_MAIN_HAND_WEAPON;
         *self
     }
 
-    pub fn clear_REQUIRES_MAIN_HAND_WEAPON(&mut self) -> Self {
+    pub fn clear_requires_main_hand_weapon(&mut self) -> Self {
         self.inner &= Self::REQUIRES_MAIN_HAND_WEAPON.reverse_bits();
         *self
     }
 
-    pub const fn is_ONLY_BATTLEGROUNDS(&self) -> bool {
+    pub const fn is_only_battlegrounds(&self) -> bool {
         (self.inner & Self::ONLY_BATTLEGROUNDS) != 0
     }
 
-    pub const fn new_ONLY_BATTLEGROUNDS() -> Self {
+    pub const fn new_only_battlegrounds() -> Self {
         Self { inner: Self::ONLY_BATTLEGROUNDS }
     }
 
-    pub fn set_ONLY_BATTLEGROUNDS(&mut self) -> Self {
+    pub fn set_only_battlegrounds(&mut self) -> Self {
         self.inner |= Self::ONLY_BATTLEGROUNDS;
         *self
     }
 
-    pub fn clear_ONLY_BATTLEGROUNDS(&mut self) -> Self {
+    pub fn clear_only_battlegrounds(&mut self) -> Self {
         self.inner &= Self::ONLY_BATTLEGROUNDS.reverse_bits();
         *self
     }
 
-    pub const fn is_ONLY_ON_GHOSTS(&self) -> bool {
+    pub const fn is_only_on_ghosts(&self) -> bool {
         (self.inner & Self::ONLY_ON_GHOSTS) != 0
     }
 
-    pub const fn new_ONLY_ON_GHOSTS() -> Self {
+    pub const fn new_only_on_ghosts() -> Self {
         Self { inner: Self::ONLY_ON_GHOSTS }
     }
 
-    pub fn set_ONLY_ON_GHOSTS(&mut self) -> Self {
+    pub fn set_only_on_ghosts(&mut self) -> Self {
         self.inner |= Self::ONLY_ON_GHOSTS;
         *self
     }
 
-    pub fn clear_ONLY_ON_GHOSTS(&mut self) -> Self {
+    pub fn clear_only_on_ghosts(&mut self) -> Self {
         self.inner &= Self::ONLY_ON_GHOSTS.reverse_bits();
         *self
     }
 
-    pub const fn is_HIDE_CHANNEL_BAR(&self) -> bool {
+    pub const fn is_hide_channel_bar(&self) -> bool {
         (self.inner & Self::HIDE_CHANNEL_BAR) != 0
     }
 
-    pub const fn new_HIDE_CHANNEL_BAR() -> Self {
+    pub const fn new_hide_channel_bar() -> Self {
         Self { inner: Self::HIDE_CHANNEL_BAR }
     }
 
-    pub fn set_HIDE_CHANNEL_BAR(&mut self) -> Self {
+    pub fn set_hide_channel_bar(&mut self) -> Self {
         self.inner |= Self::HIDE_CHANNEL_BAR;
         *self
     }
 
-    pub fn clear_HIDE_CHANNEL_BAR(&mut self) -> Self {
+    pub fn clear_hide_channel_bar(&mut self) -> Self {
         self.inner &= Self::HIDE_CHANNEL_BAR.reverse_bits();
         *self
     }
 
-    pub const fn is_HIDE_IN_RAID_FILTER(&self) -> bool {
+    pub const fn is_hide_in_raid_filter(&self) -> bool {
         (self.inner & Self::HIDE_IN_RAID_FILTER) != 0
     }
 
-    pub const fn new_HIDE_IN_RAID_FILTER() -> Self {
+    pub const fn new_hide_in_raid_filter() -> Self {
         Self { inner: Self::HIDE_IN_RAID_FILTER }
     }
 
-    pub fn set_HIDE_IN_RAID_FILTER(&mut self) -> Self {
+    pub fn set_hide_in_raid_filter(&mut self) -> Self {
         self.inner |= Self::HIDE_IN_RAID_FILTER;
         *self
     }
 
-    pub fn clear_HIDE_IN_RAID_FILTER(&mut self) -> Self {
+    pub fn clear_hide_in_raid_filter(&mut self) -> Self {
         self.inner &= Self::HIDE_IN_RAID_FILTER.reverse_bits();
         *self
     }
 
-    pub const fn is_NORMAL_RANGED_ATTACK(&self) -> bool {
+    pub const fn is_normal_ranged_attack(&self) -> bool {
         (self.inner & Self::NORMAL_RANGED_ATTACK) != 0
     }
 
-    pub const fn new_NORMAL_RANGED_ATTACK() -> Self {
+    pub const fn new_normal_ranged_attack() -> Self {
         Self { inner: Self::NORMAL_RANGED_ATTACK }
     }
 
-    pub fn set_NORMAL_RANGED_ATTACK(&mut self) -> Self {
+    pub fn set_normal_ranged_attack(&mut self) -> Self {
         self.inner |= Self::NORMAL_RANGED_ATTACK;
         *self
     }
 
-    pub fn clear_NORMAL_RANGED_ATTACK(&mut self) -> Self {
+    pub fn clear_normal_ranged_attack(&mut self) -> Self {
         self.inner &= Self::NORMAL_RANGED_ATTACK.reverse_bits();
         *self
     }
 
-    pub const fn is_SUPPRESS_CASTER_PROCS(&self) -> bool {
+    pub const fn is_suppress_caster_procs(&self) -> bool {
         (self.inner & Self::SUPPRESS_CASTER_PROCS) != 0
     }
 
-    pub const fn new_SUPPRESS_CASTER_PROCS() -> Self {
+    pub const fn new_suppress_caster_procs() -> Self {
         Self { inner: Self::SUPPRESS_CASTER_PROCS }
     }
 
-    pub fn set_SUPPRESS_CASTER_PROCS(&mut self) -> Self {
+    pub fn set_suppress_caster_procs(&mut self) -> Self {
         self.inner |= Self::SUPPRESS_CASTER_PROCS;
         *self
     }
 
-    pub fn clear_SUPPRESS_CASTER_PROCS(&mut self) -> Self {
+    pub fn clear_suppress_caster_procs(&mut self) -> Self {
         self.inner &= Self::SUPPRESS_CASTER_PROCS.reverse_bits();
         *self
     }
 
-    pub const fn is_SUPPRESS_TARGET_PROCS(&self) -> bool {
+    pub const fn is_suppress_target_procs(&self) -> bool {
         (self.inner & Self::SUPPRESS_TARGET_PROCS) != 0
     }
 
-    pub const fn new_SUPPRESS_TARGET_PROCS() -> Self {
+    pub const fn new_suppress_target_procs() -> Self {
         Self { inner: Self::SUPPRESS_TARGET_PROCS }
     }
 
-    pub fn set_SUPPRESS_TARGET_PROCS(&mut self) -> Self {
+    pub fn set_suppress_target_procs(&mut self) -> Self {
         self.inner |= Self::SUPPRESS_TARGET_PROCS;
         *self
     }
 
-    pub fn clear_SUPPRESS_TARGET_PROCS(&mut self) -> Self {
+    pub fn clear_suppress_target_procs(&mut self) -> Self {
         self.inner &= Self::SUPPRESS_TARGET_PROCS.reverse_bits();
         *self
     }
 
-    pub const fn is_ALWAYS_HIT(&self) -> bool {
+    pub const fn is_always_hit(&self) -> bool {
         (self.inner & Self::ALWAYS_HIT) != 0
     }
 
-    pub const fn new_ALWAYS_HIT() -> Self {
+    pub const fn new_always_hit() -> Self {
         Self { inner: Self::ALWAYS_HIT }
     }
 
-    pub fn set_ALWAYS_HIT(&mut self) -> Self {
+    pub fn set_always_hit(&mut self) -> Self {
         self.inner |= Self::ALWAYS_HIT;
         *self
     }
 
-    pub fn clear_ALWAYS_HIT(&mut self) -> Self {
+    pub fn clear_always_hit(&mut self) -> Self {
         self.inner &= Self::ALWAYS_HIT.reverse_bits();
         *self
     }
 
-    pub const fn is_INSTANT_TARGET_PROCS(&self) -> bool {
+    pub const fn is_instant_target_procs(&self) -> bool {
         (self.inner & Self::INSTANT_TARGET_PROCS) != 0
     }
 
-    pub const fn new_INSTANT_TARGET_PROCS() -> Self {
+    pub const fn new_instant_target_procs() -> Self {
         Self { inner: Self::INSTANT_TARGET_PROCS }
     }
 
-    pub fn set_INSTANT_TARGET_PROCS(&mut self) -> Self {
+    pub fn set_instant_target_procs(&mut self) -> Self {
         self.inner |= Self::INSTANT_TARGET_PROCS;
         *self
     }
 
-    pub fn clear_INSTANT_TARGET_PROCS(&mut self) -> Self {
+    pub fn clear_instant_target_procs(&mut self) -> Self {
         self.inner &= Self::INSTANT_TARGET_PROCS.reverse_bits();
         *self
     }
 
-    pub const fn is_ALLOW_AURA_WHILE_DEAD(&self) -> bool {
+    pub const fn is_allow_aura_while_dead(&self) -> bool {
         (self.inner & Self::ALLOW_AURA_WHILE_DEAD) != 0
     }
 
-    pub const fn new_ALLOW_AURA_WHILE_DEAD() -> Self {
+    pub const fn new_allow_aura_while_dead() -> Self {
         Self { inner: Self::ALLOW_AURA_WHILE_DEAD }
     }
 
-    pub fn set_ALLOW_AURA_WHILE_DEAD(&mut self) -> Self {
+    pub fn set_allow_aura_while_dead(&mut self) -> Self {
         self.inner |= Self::ALLOW_AURA_WHILE_DEAD;
         *self
     }
 
-    pub fn clear_ALLOW_AURA_WHILE_DEAD(&mut self) -> Self {
+    pub fn clear_allow_aura_while_dead(&mut self) -> Self {
         self.inner &= Self::ALLOW_AURA_WHILE_DEAD.reverse_bits();
         *self
     }
 
-    pub const fn is_ONLY_PROC_OUTDOORS(&self) -> bool {
+    pub const fn is_only_proc_outdoors(&self) -> bool {
         (self.inner & Self::ONLY_PROC_OUTDOORS) != 0
     }
 
-    pub const fn new_ONLY_PROC_OUTDOORS() -> Self {
+    pub const fn new_only_proc_outdoors() -> Self {
         Self { inner: Self::ONLY_PROC_OUTDOORS }
     }
 
-    pub fn set_ONLY_PROC_OUTDOORS(&mut self) -> Self {
+    pub fn set_only_proc_outdoors(&mut self) -> Self {
         self.inner |= Self::ONLY_PROC_OUTDOORS;
         *self
     }
 
-    pub fn clear_ONLY_PROC_OUTDOORS(&mut self) -> Self {
+    pub fn clear_only_proc_outdoors(&mut self) -> Self {
         self.inner &= Self::ONLY_PROC_OUTDOORS.reverse_bits();
         *self
     }
 
-    pub const fn is_CASTING_CANCELS_AUTOREPEAT(&self) -> bool {
+    pub const fn is_casting_cancels_autorepeat(&self) -> bool {
         (self.inner & Self::CASTING_CANCELS_AUTOREPEAT) != 0
     }
 
-    pub const fn new_CASTING_CANCELS_AUTOREPEAT() -> Self {
+    pub const fn new_casting_cancels_autorepeat() -> Self {
         Self { inner: Self::CASTING_CANCELS_AUTOREPEAT }
     }
 
-    pub fn set_CASTING_CANCELS_AUTOREPEAT(&mut self) -> Self {
+    pub fn set_casting_cancels_autorepeat(&mut self) -> Self {
         self.inner |= Self::CASTING_CANCELS_AUTOREPEAT;
         *self
     }
 
-    pub fn clear_CASTING_CANCELS_AUTOREPEAT(&mut self) -> Self {
+    pub fn clear_casting_cancels_autorepeat(&mut self) -> Self {
         self.inner &= Self::CASTING_CANCELS_AUTOREPEAT.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_DAMAGE_HISTORY(&self) -> bool {
+    pub const fn is_no_damage_history(&self) -> bool {
         (self.inner & Self::NO_DAMAGE_HISTORY) != 0
     }
 
-    pub const fn new_NO_DAMAGE_HISTORY() -> Self {
+    pub const fn new_no_damage_history() -> Self {
         Self { inner: Self::NO_DAMAGE_HISTORY }
     }
 
-    pub fn set_NO_DAMAGE_HISTORY(&mut self) -> Self {
+    pub fn set_no_damage_history(&mut self) -> Self {
         self.inner |= Self::NO_DAMAGE_HISTORY;
         *self
     }
 
-    pub fn clear_NO_DAMAGE_HISTORY(&mut self) -> Self {
+    pub fn clear_no_damage_history(&mut self) -> Self {
         self.inner &= Self::NO_DAMAGE_HISTORY.reverse_bits();
         *self
     }
 
-    pub const fn is_REQUIRES_OFFHAND_WEAPON(&self) -> bool {
+    pub const fn is_requires_offhand_weapon(&self) -> bool {
         (self.inner & Self::REQUIRES_OFFHAND_WEAPON) != 0
     }
 
-    pub const fn new_REQUIRES_OFFHAND_WEAPON() -> Self {
+    pub const fn new_requires_offhand_weapon() -> Self {
         Self { inner: Self::REQUIRES_OFFHAND_WEAPON }
     }
 
-    pub fn set_REQUIRES_OFFHAND_WEAPON(&mut self) -> Self {
+    pub fn set_requires_offhand_weapon(&mut self) -> Self {
         self.inner |= Self::REQUIRES_OFFHAND_WEAPON;
         *self
     }
 
-    pub fn clear_REQUIRES_OFFHAND_WEAPON(&mut self) -> Self {
+    pub fn clear_requires_offhand_weapon(&mut self) -> Self {
         self.inner &= Self::REQUIRES_OFFHAND_WEAPON.reverse_bits();
         *self
     }
 
-    pub const fn is_TREAT_AS_PERIODIC(&self) -> bool {
+    pub const fn is_treat_as_periodic(&self) -> bool {
         (self.inner & Self::TREAT_AS_PERIODIC) != 0
     }
 
-    pub const fn new_TREAT_AS_PERIODIC() -> Self {
+    pub const fn new_treat_as_periodic() -> Self {
         Self { inner: Self::TREAT_AS_PERIODIC }
     }
 
-    pub fn set_TREAT_AS_PERIODIC(&mut self) -> Self {
+    pub fn set_treat_as_periodic(&mut self) -> Self {
         self.inner |= Self::TREAT_AS_PERIODIC;
         *self
     }
 
-    pub fn clear_TREAT_AS_PERIODIC(&mut self) -> Self {
+    pub fn clear_treat_as_periodic(&mut self) -> Self {
         self.inner &= Self::TREAT_AS_PERIODIC.reverse_bits();
         *self
     }
 
-    pub const fn is_CAN_PROC_FROM_PROCS(&self) -> bool {
+    pub const fn is_can_proc_from_procs(&self) -> bool {
         (self.inner & Self::CAN_PROC_FROM_PROCS) != 0
     }
 
-    pub const fn new_CAN_PROC_FROM_PROCS() -> Self {
+    pub const fn new_can_proc_from_procs() -> Self {
         Self { inner: Self::CAN_PROC_FROM_PROCS }
     }
 
-    pub fn set_CAN_PROC_FROM_PROCS(&mut self) -> Self {
+    pub fn set_can_proc_from_procs(&mut self) -> Self {
         self.inner |= Self::CAN_PROC_FROM_PROCS;
         *self
     }
 
-    pub fn clear_CAN_PROC_FROM_PROCS(&mut self) -> Self {
+    pub fn clear_can_proc_from_procs(&mut self) -> Self {
         self.inner &= Self::CAN_PROC_FROM_PROCS.reverse_bits();
         *self
     }
 
-    pub const fn is_ONLY_PROC_ON_CASTER(&self) -> bool {
+    pub const fn is_only_proc_on_caster(&self) -> bool {
         (self.inner & Self::ONLY_PROC_ON_CASTER) != 0
     }
 
-    pub const fn new_ONLY_PROC_ON_CASTER() -> Self {
+    pub const fn new_only_proc_on_caster() -> Self {
         Self { inner: Self::ONLY_PROC_ON_CASTER }
     }
 
-    pub fn set_ONLY_PROC_ON_CASTER(&mut self) -> Self {
+    pub fn set_only_proc_on_caster(&mut self) -> Self {
         self.inner |= Self::ONLY_PROC_ON_CASTER;
         *self
     }
 
-    pub fn clear_ONLY_PROC_ON_CASTER(&mut self) -> Self {
+    pub fn clear_only_proc_on_caster(&mut self) -> Self {
         self.inner &= Self::ONLY_PROC_ON_CASTER.reverse_bits();
         *self
     }
 
-    pub const fn is_IGNORE_CASTER_AND_TARGET_RESTRICTIONS(&self) -> bool {
+    pub const fn is_ignore_caster_and_target_restrictions(&self) -> bool {
         (self.inner & Self::IGNORE_CASTER_AND_TARGET_RESTRICTIONS) != 0
     }
 
-    pub const fn new_IGNORE_CASTER_AND_TARGET_RESTRICTIONS() -> Self {
+    pub const fn new_ignore_caster_and_target_restrictions() -> Self {
         Self { inner: Self::IGNORE_CASTER_AND_TARGET_RESTRICTIONS }
     }
 
-    pub fn set_IGNORE_CASTER_AND_TARGET_RESTRICTIONS(&mut self) -> Self {
+    pub fn set_ignore_caster_and_target_restrictions(&mut self) -> Self {
         self.inner |= Self::IGNORE_CASTER_AND_TARGET_RESTRICTIONS;
         *self
     }
 
-    pub fn clear_IGNORE_CASTER_AND_TARGET_RESTRICTIONS(&mut self) -> Self {
+    pub fn clear_ignore_caster_and_target_restrictions(&mut self) -> Self {
         self.inner &= Self::IGNORE_CASTER_AND_TARGET_RESTRICTIONS.reverse_bits();
         *self
     }
 
-    pub const fn is_IGNORE_CASTER_MODIFIERS(&self) -> bool {
+    pub const fn is_ignore_caster_modifiers(&self) -> bool {
         (self.inner & Self::IGNORE_CASTER_MODIFIERS) != 0
     }
 
-    pub const fn new_IGNORE_CASTER_MODIFIERS() -> Self {
+    pub const fn new_ignore_caster_modifiers() -> Self {
         Self { inner: Self::IGNORE_CASTER_MODIFIERS }
     }
 
-    pub fn set_IGNORE_CASTER_MODIFIERS(&mut self) -> Self {
+    pub fn set_ignore_caster_modifiers(&mut self) -> Self {
         self.inner |= Self::IGNORE_CASTER_MODIFIERS;
         *self
     }
 
-    pub fn clear_IGNORE_CASTER_MODIFIERS(&mut self) -> Self {
+    pub fn clear_ignore_caster_modifiers(&mut self) -> Self {
         self.inner &= Self::IGNORE_CASTER_MODIFIERS.reverse_bits();
         *self
     }
 
-    pub const fn is_DO_NOT_DISPLAY_RANGE(&self) -> bool {
+    pub const fn is_do_not_display_range(&self) -> bool {
         (self.inner & Self::DO_NOT_DISPLAY_RANGE) != 0
     }
 
-    pub const fn new_DO_NOT_DISPLAY_RANGE() -> Self {
+    pub const fn new_do_not_display_range() -> Self {
         Self { inner: Self::DO_NOT_DISPLAY_RANGE }
     }
 
-    pub fn set_DO_NOT_DISPLAY_RANGE(&mut self) -> Self {
+    pub fn set_do_not_display_range(&mut self) -> Self {
         self.inner |= Self::DO_NOT_DISPLAY_RANGE;
         *self
     }
 
-    pub fn clear_DO_NOT_DISPLAY_RANGE(&mut self) -> Self {
+    pub fn clear_do_not_display_range(&mut self) -> Self {
         self.inner &= Self::DO_NOT_DISPLAY_RANGE.reverse_bits();
         *self
     }
 
-    pub const fn is_NOT_ON_AOE_IMMUNE(&self) -> bool {
+    pub const fn is_not_on_aoe_immune(&self) -> bool {
         (self.inner & Self::NOT_ON_AOE_IMMUNE) != 0
     }
 
-    pub const fn new_NOT_ON_AOE_IMMUNE() -> Self {
+    pub const fn new_not_on_aoe_immune() -> Self {
         Self { inner: Self::NOT_ON_AOE_IMMUNE }
     }
 
-    pub fn set_NOT_ON_AOE_IMMUNE(&mut self) -> Self {
+    pub fn set_not_on_aoe_immune(&mut self) -> Self {
         self.inner |= Self::NOT_ON_AOE_IMMUNE;
         *self
     }
 
-    pub fn clear_NOT_ON_AOE_IMMUNE(&mut self) -> Self {
+    pub fn clear_not_on_aoe_immune(&mut self) -> Self {
         self.inner &= Self::NOT_ON_AOE_IMMUNE.reverse_bits();
         *self
     }

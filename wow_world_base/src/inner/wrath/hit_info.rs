@@ -112,502 +112,502 @@ impl HitInfo {
         }
     }
 
-    pub const fn is_UNK1(&self) -> bool {
+    pub const fn is_unk1(&self) -> bool {
         (self.inner & Self::UNK1) != 0
     }
 
     /// req correct packet structure
     ///
-    pub const fn new_UNK1() -> Self {
+    pub const fn new_unk1() -> Self {
         Self { inner: Self::UNK1 }
     }
 
-    pub fn set_UNK1(&mut self) -> Self {
+    pub fn set_unk1(&mut self) -> Self {
         self.inner |= Self::UNK1;
         *self
     }
 
-    pub fn clear_UNK1(&mut self) -> Self {
+    pub fn clear_unk1(&mut self) -> Self {
         self.inner &= Self::UNK1.reverse_bits();
         *self
     }
 
-    pub const fn is_AFFECTS_VICTIM(&self) -> bool {
+    pub const fn is_affects_victim(&self) -> bool {
         (self.inner & Self::AFFECTS_VICTIM) != 0
     }
 
-    pub const fn new_AFFECTS_VICTIM() -> Self {
+    pub const fn new_affects_victim() -> Self {
         Self { inner: Self::AFFECTS_VICTIM }
     }
 
-    pub fn set_AFFECTS_VICTIM(&mut self) -> Self {
+    pub fn set_affects_victim(&mut self) -> Self {
         self.inner |= Self::AFFECTS_VICTIM;
         *self
     }
 
-    pub fn clear_AFFECTS_VICTIM(&mut self) -> Self {
+    pub fn clear_affects_victim(&mut self) -> Self {
         self.inner &= Self::AFFECTS_VICTIM.reverse_bits();
         *self
     }
 
-    pub const fn is_OFFHAND(&self) -> bool {
+    pub const fn is_offhand(&self) -> bool {
         (self.inner & Self::OFFHAND) != 0
     }
 
-    pub const fn new_OFFHAND() -> Self {
+    pub const fn new_offhand() -> Self {
         Self { inner: Self::OFFHAND }
     }
 
-    pub fn set_OFFHAND(&mut self) -> Self {
+    pub fn set_offhand(&mut self) -> Self {
         self.inner |= Self::OFFHAND;
         *self
     }
 
-    pub fn clear_OFFHAND(&mut self) -> Self {
+    pub fn clear_offhand(&mut self) -> Self {
         self.inner &= Self::OFFHAND.reverse_bits();
         *self
     }
 
-    pub const fn is_UNK2(&self) -> bool {
+    pub const fn is_unk2(&self) -> bool {
         (self.inner & Self::UNK2) != 0
     }
 
-    pub const fn new_UNK2() -> Self {
+    pub const fn new_unk2() -> Self {
         Self { inner: Self::UNK2 }
     }
 
-    pub fn set_UNK2(&mut self) -> Self {
+    pub fn set_unk2(&mut self) -> Self {
         self.inner |= Self::UNK2;
         *self
     }
 
-    pub fn clear_UNK2(&mut self) -> Self {
+    pub fn clear_unk2(&mut self) -> Self {
         self.inner &= Self::UNK2.reverse_bits();
         *self
     }
 
-    pub const fn is_MISS(&self) -> bool {
+    pub const fn is_miss(&self) -> bool {
         (self.inner & Self::MISS) != 0
     }
 
-    pub const fn new_MISS() -> Self {
+    pub const fn new_miss() -> Self {
         Self { inner: Self::MISS }
     }
 
-    pub fn set_MISS(&mut self) -> Self {
+    pub fn set_miss(&mut self) -> Self {
         self.inner |= Self::MISS;
         *self
     }
 
-    pub fn clear_MISS(&mut self) -> Self {
+    pub fn clear_miss(&mut self) -> Self {
         self.inner &= Self::MISS.reverse_bits();
         *self
     }
 
-    pub const fn is_FULL_ABSORB(&self) -> bool {
+    pub const fn is_full_absorb(&self) -> bool {
         (self.inner & Self::FULL_ABSORB) != 0
     }
 
-    pub const fn new_FULL_ABSORB() -> Self {
+    pub const fn new_full_absorb() -> Self {
         Self { inner: Self::FULL_ABSORB }
     }
 
-    pub fn set_FULL_ABSORB(&mut self) -> Self {
+    pub fn set_full_absorb(&mut self) -> Self {
         self.inner |= Self::FULL_ABSORB;
         *self
     }
 
-    pub fn clear_FULL_ABSORB(&mut self) -> Self {
+    pub fn clear_full_absorb(&mut self) -> Self {
         self.inner &= Self::FULL_ABSORB.reverse_bits();
         *self
     }
 
-    pub const fn is_PARTIAL_ABSORB(&self) -> bool {
+    pub const fn is_partial_absorb(&self) -> bool {
         (self.inner & Self::PARTIAL_ABSORB) != 0
     }
 
-    pub const fn new_PARTIAL_ABSORB() -> Self {
+    pub const fn new_partial_absorb() -> Self {
         Self { inner: Self::PARTIAL_ABSORB }
     }
 
-    pub fn set_PARTIAL_ABSORB(&mut self) -> Self {
+    pub fn set_partial_absorb(&mut self) -> Self {
         self.inner |= Self::PARTIAL_ABSORB;
         *self
     }
 
-    pub fn clear_PARTIAL_ABSORB(&mut self) -> Self {
+    pub fn clear_partial_absorb(&mut self) -> Self {
         self.inner &= Self::PARTIAL_ABSORB.reverse_bits();
         *self
     }
 
-    pub const fn is_ALL_ABSORB(&self) -> bool {
+    pub const fn is_all_absorb(&self) -> bool {
         (self.inner & Self::ALL_ABSORB) != 0
     }
 
-    pub const fn new_ALL_ABSORB() -> Self {
+    pub const fn new_all_absorb() -> Self {
         Self { inner: Self::ALL_ABSORB }
     }
 
-    pub fn set_ALL_ABSORB(&mut self) -> Self {
+    pub fn set_all_absorb(&mut self) -> Self {
         self.inner |= Self::ALL_ABSORB;
         *self
     }
 
-    pub fn clear_ALL_ABSORB(&mut self) -> Self {
+    pub fn clear_all_absorb(&mut self) -> Self {
         self.inner &= Self::ALL_ABSORB.reverse_bits();
         *self
     }
 
-    pub const fn is_FULL_RESIST(&self) -> bool {
+    pub const fn is_full_resist(&self) -> bool {
         (self.inner & Self::FULL_RESIST) != 0
     }
 
-    pub const fn new_FULL_RESIST() -> Self {
+    pub const fn new_full_resist() -> Self {
         Self { inner: Self::FULL_RESIST }
     }
 
-    pub fn set_FULL_RESIST(&mut self) -> Self {
+    pub fn set_full_resist(&mut self) -> Self {
         self.inner |= Self::FULL_RESIST;
         *self
     }
 
-    pub fn clear_FULL_RESIST(&mut self) -> Self {
+    pub fn clear_full_resist(&mut self) -> Self {
         self.inner &= Self::FULL_RESIST.reverse_bits();
         *self
     }
 
-    pub const fn is_PARTIAL_RESIST(&self) -> bool {
+    pub const fn is_partial_resist(&self) -> bool {
         (self.inner & Self::PARTIAL_RESIST) != 0
     }
 
-    pub const fn new_PARTIAL_RESIST() -> Self {
+    pub const fn new_partial_resist() -> Self {
         Self { inner: Self::PARTIAL_RESIST }
     }
 
-    pub fn set_PARTIAL_RESIST(&mut self) -> Self {
+    pub fn set_partial_resist(&mut self) -> Self {
         self.inner |= Self::PARTIAL_RESIST;
         *self
     }
 
-    pub fn clear_PARTIAL_RESIST(&mut self) -> Self {
+    pub fn clear_partial_resist(&mut self) -> Self {
         self.inner &= Self::PARTIAL_RESIST.reverse_bits();
         *self
     }
 
-    pub const fn is_ALL_RESIST(&self) -> bool {
+    pub const fn is_all_resist(&self) -> bool {
         (self.inner & Self::ALL_RESIST) != 0
     }
 
-    pub const fn new_ALL_RESIST() -> Self {
+    pub const fn new_all_resist() -> Self {
         Self { inner: Self::ALL_RESIST }
     }
 
-    pub fn set_ALL_RESIST(&mut self) -> Self {
+    pub fn set_all_resist(&mut self) -> Self {
         self.inner |= Self::ALL_RESIST;
         *self
     }
 
-    pub fn clear_ALL_RESIST(&mut self) -> Self {
+    pub fn clear_all_resist(&mut self) -> Self {
         self.inner &= Self::ALL_RESIST.reverse_bits();
         *self
     }
 
-    pub const fn is_CRITICALHIT(&self) -> bool {
+    pub const fn is_criticalhit(&self) -> bool {
         (self.inner & Self::CRITICALHIT) != 0
     }
 
     /// critical hit
     ///
-    pub const fn new_CRITICALHIT() -> Self {
+    pub const fn new_criticalhit() -> Self {
         Self { inner: Self::CRITICALHIT }
     }
 
-    pub fn set_CRITICALHIT(&mut self) -> Self {
+    pub fn set_criticalhit(&mut self) -> Self {
         self.inner |= Self::CRITICALHIT;
         *self
     }
 
-    pub fn clear_CRITICALHIT(&mut self) -> Self {
+    pub fn clear_criticalhit(&mut self) -> Self {
         self.inner &= Self::CRITICALHIT.reverse_bits();
         *self
     }
 
-    pub const fn is_UNK10(&self) -> bool {
+    pub const fn is_unk10(&self) -> bool {
         (self.inner & Self::UNK10) != 0
     }
 
-    pub const fn new_UNK10() -> Self {
+    pub const fn new_unk10() -> Self {
         Self { inner: Self::UNK10 }
     }
 
-    pub fn set_UNK10(&mut self) -> Self {
+    pub fn set_unk10(&mut self) -> Self {
         self.inner |= Self::UNK10;
         *self
     }
 
-    pub fn clear_UNK10(&mut self) -> Self {
+    pub fn clear_unk10(&mut self) -> Self {
         self.inner &= Self::UNK10.reverse_bits();
         *self
     }
 
-    pub const fn is_UNK11(&self) -> bool {
+    pub const fn is_unk11(&self) -> bool {
         (self.inner & Self::UNK11) != 0
     }
 
-    pub const fn new_UNK11() -> Self {
+    pub const fn new_unk11() -> Self {
         Self { inner: Self::UNK11 }
     }
 
-    pub fn set_UNK11(&mut self) -> Self {
+    pub fn set_unk11(&mut self) -> Self {
         self.inner |= Self::UNK11;
         *self
     }
 
-    pub fn clear_UNK11(&mut self) -> Self {
+    pub fn clear_unk11(&mut self) -> Self {
         self.inner &= Self::UNK11.reverse_bits();
         *self
     }
 
-    pub const fn is_UNK12(&self) -> bool {
+    pub const fn is_unk12(&self) -> bool {
         (self.inner & Self::UNK12) != 0
     }
 
-    pub const fn new_UNK12() -> Self {
+    pub const fn new_unk12() -> Self {
         Self { inner: Self::UNK12 }
     }
 
-    pub fn set_UNK12(&mut self) -> Self {
+    pub fn set_unk12(&mut self) -> Self {
         self.inner |= Self::UNK12;
         *self
     }
 
-    pub fn clear_UNK12(&mut self) -> Self {
+    pub fn clear_unk12(&mut self) -> Self {
         self.inner &= Self::UNK12.reverse_bits();
         *self
     }
 
-    pub const fn is_BLOCK(&self) -> bool {
+    pub const fn is_block(&self) -> bool {
         (self.inner & Self::BLOCK) != 0
     }
 
     /// blocked damage
     ///
-    pub const fn new_BLOCK() -> Self {
+    pub const fn new_block() -> Self {
         Self { inner: Self::BLOCK }
     }
 
-    pub fn set_BLOCK(&mut self) -> Self {
+    pub fn set_block(&mut self) -> Self {
         self.inner |= Self::BLOCK;
         *self
     }
 
-    pub fn clear_BLOCK(&mut self) -> Self {
+    pub fn clear_block(&mut self) -> Self {
         self.inner &= Self::BLOCK.reverse_bits();
         *self
     }
 
-    pub const fn is_UNK14(&self) -> bool {
+    pub const fn is_unk14(&self) -> bool {
         (self.inner & Self::UNK14) != 0
     }
 
     /// set only if meleespellid is present. no world text when victim is hit for 0 dmg(HideWorldTextForNoDamage?)
     ///
-    pub const fn new_UNK14() -> Self {
+    pub const fn new_unk14() -> Self {
         Self { inner: Self::UNK14 }
     }
 
-    pub fn set_UNK14(&mut self) -> Self {
+    pub fn set_unk14(&mut self) -> Self {
         self.inner |= Self::UNK14;
         *self
     }
 
-    pub fn clear_UNK14(&mut self) -> Self {
+    pub fn clear_unk14(&mut self) -> Self {
         self.inner &= Self::UNK14.reverse_bits();
         *self
     }
 
-    pub const fn is_UNK15(&self) -> bool {
+    pub const fn is_unk15(&self) -> bool {
         (self.inner & Self::UNK15) != 0
     }
 
     /// player victim? something related to blod sprut visual (`BloodSpurtInBack`?)
     ///
-    pub const fn new_UNK15() -> Self {
+    pub const fn new_unk15() -> Self {
         Self { inner: Self::UNK15 }
     }
 
-    pub fn set_UNK15(&mut self) -> Self {
+    pub fn set_unk15(&mut self) -> Self {
         self.inner |= Self::UNK15;
         *self
     }
 
-    pub fn clear_UNK15(&mut self) -> Self {
+    pub fn clear_unk15(&mut self) -> Self {
         self.inner &= Self::UNK15.reverse_bits();
         *self
     }
 
-    pub const fn is_GLANCING(&self) -> bool {
+    pub const fn is_glancing(&self) -> bool {
         (self.inner & Self::GLANCING) != 0
     }
 
-    pub const fn new_GLANCING() -> Self {
+    pub const fn new_glancing() -> Self {
         Self { inner: Self::GLANCING }
     }
 
-    pub fn set_GLANCING(&mut self) -> Self {
+    pub fn set_glancing(&mut self) -> Self {
         self.inner |= Self::GLANCING;
         *self
     }
 
-    pub fn clear_GLANCING(&mut self) -> Self {
+    pub fn clear_glancing(&mut self) -> Self {
         self.inner &= Self::GLANCING.reverse_bits();
         *self
     }
 
-    pub const fn is_CRUSHING(&self) -> bool {
+    pub const fn is_crushing(&self) -> bool {
         (self.inner & Self::CRUSHING) != 0
     }
 
-    pub const fn new_CRUSHING() -> Self {
+    pub const fn new_crushing() -> Self {
         Self { inner: Self::CRUSHING }
     }
 
-    pub fn set_CRUSHING(&mut self) -> Self {
+    pub fn set_crushing(&mut self) -> Self {
         self.inner |= Self::CRUSHING;
         *self
     }
 
-    pub fn clear_CRUSHING(&mut self) -> Self {
+    pub fn clear_crushing(&mut self) -> Self {
         self.inner &= Self::CRUSHING.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_ANIMATION(&self) -> bool {
+    pub const fn is_no_animation(&self) -> bool {
         (self.inner & Self::NO_ANIMATION) != 0
     }
 
-    pub const fn new_NO_ANIMATION() -> Self {
+    pub const fn new_no_animation() -> Self {
         Self { inner: Self::NO_ANIMATION }
     }
 
-    pub fn set_NO_ANIMATION(&mut self) -> Self {
+    pub fn set_no_animation(&mut self) -> Self {
         self.inner |= Self::NO_ANIMATION;
         *self
     }
 
-    pub fn clear_NO_ANIMATION(&mut self) -> Self {
+    pub fn clear_no_animation(&mut self) -> Self {
         self.inner &= Self::NO_ANIMATION.reverse_bits();
         *self
     }
 
-    pub const fn is_UNK19(&self) -> bool {
+    pub const fn is_unk19(&self) -> bool {
         (self.inner & Self::UNK19) != 0
     }
 
-    pub const fn new_UNK19() -> Self {
+    pub const fn new_unk19() -> Self {
         Self { inner: Self::UNK19 }
     }
 
-    pub fn set_UNK19(&mut self) -> Self {
+    pub fn set_unk19(&mut self) -> Self {
         self.inner |= Self::UNK19;
         *self
     }
 
-    pub fn clear_UNK19(&mut self) -> Self {
+    pub fn clear_unk19(&mut self) -> Self {
         self.inner &= Self::UNK19.reverse_bits();
         *self
     }
 
-    pub const fn is_UNK20(&self) -> bool {
+    pub const fn is_unk20(&self) -> bool {
         (self.inner & Self::UNK20) != 0
     }
 
-    pub const fn new_UNK20() -> Self {
+    pub const fn new_unk20() -> Self {
         Self { inner: Self::UNK20 }
     }
 
-    pub fn set_UNK20(&mut self) -> Self {
+    pub fn set_unk20(&mut self) -> Self {
         self.inner |= Self::UNK20;
         *self
     }
 
-    pub fn clear_UNK20(&mut self) -> Self {
+    pub fn clear_unk20(&mut self) -> Self {
         self.inner &= Self::UNK20.reverse_bits();
         *self
     }
 
-    pub const fn is_SWINGNOHITSOUND(&self) -> bool {
+    pub const fn is_swingnohitsound(&self) -> bool {
         (self.inner & Self::SWINGNOHITSOUND) != 0
     }
 
     /// unused?
     ///
-    pub const fn new_SWINGNOHITSOUND() -> Self {
+    pub const fn new_swingnohitsound() -> Self {
         Self { inner: Self::SWINGNOHITSOUND }
     }
 
-    pub fn set_SWINGNOHITSOUND(&mut self) -> Self {
+    pub fn set_swingnohitsound(&mut self) -> Self {
         self.inner |= Self::SWINGNOHITSOUND;
         *self
     }
 
-    pub fn clear_SWINGNOHITSOUND(&mut self) -> Self {
+    pub fn clear_swingnohitsound(&mut self) -> Self {
         self.inner &= Self::SWINGNOHITSOUND.reverse_bits();
         *self
     }
 
-    pub const fn is_UNK22(&self) -> bool {
+    pub const fn is_unk22(&self) -> bool {
         (self.inner & Self::UNK22) != 0
     }
 
-    pub const fn new_UNK22() -> Self {
+    pub const fn new_unk22() -> Self {
         Self { inner: Self::UNK22 }
     }
 
-    pub fn set_UNK22(&mut self) -> Self {
+    pub fn set_unk22(&mut self) -> Self {
         self.inner |= Self::UNK22;
         *self
     }
 
-    pub fn clear_UNK22(&mut self) -> Self {
+    pub fn clear_unk22(&mut self) -> Self {
         self.inner &= Self::UNK22.reverse_bits();
         *self
     }
 
-    pub const fn is_RAGE_GAIN(&self) -> bool {
+    pub const fn is_rage_gain(&self) -> bool {
         (self.inner & Self::RAGE_GAIN) != 0
     }
 
-    pub const fn new_RAGE_GAIN() -> Self {
+    pub const fn new_rage_gain() -> Self {
         Self { inner: Self::RAGE_GAIN }
     }
 
-    pub fn set_RAGE_GAIN(&mut self) -> Self {
+    pub fn set_rage_gain(&mut self) -> Self {
         self.inner |= Self::RAGE_GAIN;
         *self
     }
 
-    pub fn clear_RAGE_GAIN(&mut self) -> Self {
+    pub fn clear_rage_gain(&mut self) -> Self {
         self.inner &= Self::RAGE_GAIN.reverse_bits();
         *self
     }
 
-    pub const fn is_FAKE_DAMAGE(&self) -> bool {
+    pub const fn is_fake_damage(&self) -> bool {
         (self.inner & Self::FAKE_DAMAGE) != 0
     }
 
     /// enables damage animation even if no damage done. set only if no damage
     ///
-    pub const fn new_FAKE_DAMAGE() -> Self {
+    pub const fn new_fake_damage() -> Self {
         Self { inner: Self::FAKE_DAMAGE }
     }
 
-    pub fn set_FAKE_DAMAGE(&mut self) -> Self {
+    pub fn set_fake_damage(&mut self) -> Self {
         self.inner |= Self::FAKE_DAMAGE;
         *self
     }
 
-    pub fn clear_FAKE_DAMAGE(&mut self) -> Self {
+    pub fn clear_fake_damage(&mut self) -> Self {
         self.inner &= Self::FAKE_DAMAGE.reverse_bits();
         *self
     }

@@ -87,7 +87,7 @@ mod test {
             guid: Guid::new(0x5),
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
-                    .set_FORWARD()
+                    .set_forward()
                     ,
                 timestamp: 0x179D346,
                 position: Vector3d {

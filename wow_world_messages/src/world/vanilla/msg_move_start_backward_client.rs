@@ -74,7 +74,7 @@ mod test {
         MSG_MOVE_START_BACKWARD_Client {
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
-                    .set_BACKWARD()
+                    .set_backward()
                     ,
                 timestamp: 0x25B5710,
                 position: Vector3d {

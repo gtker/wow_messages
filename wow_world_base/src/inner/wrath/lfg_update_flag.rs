@@ -55,146 +55,146 @@ impl LfgUpdateFlag {
         }
     }
 
-    pub const fn is_CHARACTER_INFO(&self) -> bool {
+    pub const fn is_character_info(&self) -> bool {
         (self.inner & Self::CHARACTER_INFO) != 0
     }
 
-    pub const fn new_CHARACTER_INFO() -> Self {
+    pub const fn new_character_info() -> Self {
         Self { inner: Self::CHARACTER_INFO }
     }
 
-    pub fn set_CHARACTER_INFO(&mut self) -> Self {
+    pub fn set_character_info(&mut self) -> Self {
         self.inner |= Self::CHARACTER_INFO;
         *self
     }
 
-    pub fn clear_CHARACTER_INFO(&mut self) -> Self {
+    pub fn clear_character_info(&mut self) -> Self {
         self.inner &= Self::CHARACTER_INFO.reverse_bits();
         *self
     }
 
-    pub const fn is_COMMENT(&self) -> bool {
+    pub const fn is_comment(&self) -> bool {
         (self.inner & Self::COMMENT) != 0
     }
 
-    pub const fn new_COMMENT() -> Self {
+    pub const fn new_comment() -> Self {
         Self { inner: Self::COMMENT }
     }
 
-    pub fn set_COMMENT(&mut self) -> Self {
+    pub fn set_comment(&mut self) -> Self {
         self.inner |= Self::COMMENT;
         *self
     }
 
-    pub fn clear_COMMENT(&mut self) -> Self {
+    pub fn clear_comment(&mut self) -> Self {
         self.inner &= Self::COMMENT.reverse_bits();
         *self
     }
 
-    pub const fn is_GROUP_LEADER(&self) -> bool {
+    pub const fn is_group_leader(&self) -> bool {
         (self.inner & Self::GROUP_LEADER) != 0
     }
 
-    pub const fn new_GROUP_LEADER() -> Self {
+    pub const fn new_group_leader() -> Self {
         Self { inner: Self::GROUP_LEADER }
     }
 
-    pub fn set_GROUP_LEADER(&mut self) -> Self {
+    pub fn set_group_leader(&mut self) -> Self {
         self.inner |= Self::GROUP_LEADER;
         *self
     }
 
-    pub fn clear_GROUP_LEADER(&mut self) -> Self {
+    pub fn clear_group_leader(&mut self) -> Self {
         self.inner &= Self::GROUP_LEADER.reverse_bits();
         *self
     }
 
-    pub const fn is_GROUP_GUID(&self) -> bool {
+    pub const fn is_group_guid(&self) -> bool {
         (self.inner & Self::GROUP_GUID) != 0
     }
 
-    pub const fn new_GROUP_GUID() -> Self {
+    pub const fn new_group_guid() -> Self {
         Self { inner: Self::GROUP_GUID }
     }
 
-    pub fn set_GROUP_GUID(&mut self) -> Self {
+    pub fn set_group_guid(&mut self) -> Self {
         self.inner |= Self::GROUP_GUID;
         *self
     }
 
-    pub fn clear_GROUP_GUID(&mut self) -> Self {
+    pub fn clear_group_guid(&mut self) -> Self {
         self.inner &= Self::GROUP_GUID.reverse_bits();
         *self
     }
 
-    pub const fn is_ROLES(&self) -> bool {
+    pub const fn is_roles(&self) -> bool {
         (self.inner & Self::ROLES) != 0
     }
 
-    pub const fn new_ROLES() -> Self {
+    pub const fn new_roles() -> Self {
         Self { inner: Self::ROLES }
     }
 
-    pub fn set_ROLES(&mut self) -> Self {
+    pub fn set_roles(&mut self) -> Self {
         self.inner |= Self::ROLES;
         *self
     }
 
-    pub fn clear_ROLES(&mut self) -> Self {
+    pub fn clear_roles(&mut self) -> Self {
         self.inner &= Self::ROLES.reverse_bits();
         *self
     }
 
-    pub const fn is_AREA(&self) -> bool {
+    pub const fn is_area(&self) -> bool {
         (self.inner & Self::AREA) != 0
     }
 
-    pub const fn new_AREA() -> Self {
+    pub const fn new_area() -> Self {
         Self { inner: Self::AREA }
     }
 
-    pub fn set_AREA(&mut self) -> Self {
+    pub fn set_area(&mut self) -> Self {
         self.inner |= Self::AREA;
         *self
     }
 
-    pub fn clear_AREA(&mut self) -> Self {
+    pub fn clear_area(&mut self) -> Self {
         self.inner &= Self::AREA.reverse_bits();
         *self
     }
 
-    pub const fn is_STATUS(&self) -> bool {
+    pub const fn is_status(&self) -> bool {
         (self.inner & Self::STATUS) != 0
     }
 
-    pub const fn new_STATUS() -> Self {
+    pub const fn new_status() -> Self {
         Self { inner: Self::STATUS }
     }
 
-    pub fn set_STATUS(&mut self) -> Self {
+    pub fn set_status(&mut self) -> Self {
         self.inner |= Self::STATUS;
         *self
     }
 
-    pub fn clear_STATUS(&mut self) -> Self {
+    pub fn clear_status(&mut self) -> Self {
         self.inner &= Self::STATUS.reverse_bits();
         *self
     }
 
-    pub const fn is_BOUND(&self) -> bool {
+    pub const fn is_bound(&self) -> bool {
         (self.inner & Self::BOUND) != 0
     }
 
-    pub const fn new_BOUND() -> Self {
+    pub const fn new_bound() -> Self {
         Self { inner: Self::BOUND }
     }
 
-    pub fn set_BOUND(&mut self) -> Self {
+    pub fn set_bound(&mut self) -> Self {
         self.inner |= Self::BOUND;
         *self
     }
 
-    pub fn clear_BOUND(&mut self) -> Self {
+    pub fn clear_bound(&mut self) -> Self {
         self.inner &= Self::BOUND.reverse_bits();
         *self
     }

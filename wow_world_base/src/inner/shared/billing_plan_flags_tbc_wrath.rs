@@ -55,148 +55,148 @@ impl BillingPlanFlags {
         }
     }
 
-    pub const fn is_UNUSED(&self) -> bool {
+    pub const fn is_unused(&self) -> bool {
         (self.inner & Self::UNUSED) != 0
     }
 
-    pub const fn new_UNUSED() -> Self {
+    pub const fn new_unused() -> Self {
         Self { inner: Self::UNUSED }
     }
 
-    pub fn set_UNUSED(&mut self) -> Self {
+    pub fn set_unused(&mut self) -> Self {
         self.inner |= Self::UNUSED;
         *self
     }
 
-    pub fn clear_UNUSED(&mut self) -> Self {
+    pub fn clear_unused(&mut self) -> Self {
         self.inner &= Self::UNUSED.reverse_bits();
         *self
     }
 
-    pub const fn is_RECURRING_BILL(&self) -> bool {
+    pub const fn is_recurring_bill(&self) -> bool {
         (self.inner & Self::RECURRING_BILL) != 0
     }
 
-    pub const fn new_RECURRING_BILL() -> Self {
+    pub const fn new_recurring_bill() -> Self {
         Self { inner: Self::RECURRING_BILL }
     }
 
-    pub fn set_RECURRING_BILL(&mut self) -> Self {
+    pub fn set_recurring_bill(&mut self) -> Self {
         self.inner |= Self::RECURRING_BILL;
         *self
     }
 
-    pub fn clear_RECURRING_BILL(&mut self) -> Self {
+    pub fn clear_recurring_bill(&mut self) -> Self {
         self.inner &= Self::RECURRING_BILL.reverse_bits();
         *self
     }
 
-    pub const fn is_FREE_TRIAL(&self) -> bool {
+    pub const fn is_free_trial(&self) -> bool {
         (self.inner & Self::FREE_TRIAL) != 0
     }
 
-    pub const fn new_FREE_TRIAL() -> Self {
+    pub const fn new_free_trial() -> Self {
         Self { inner: Self::FREE_TRIAL }
     }
 
-    pub fn set_FREE_TRIAL(&mut self) -> Self {
+    pub fn set_free_trial(&mut self) -> Self {
         self.inner |= Self::FREE_TRIAL;
         *self
     }
 
-    pub fn clear_FREE_TRIAL(&mut self) -> Self {
+    pub fn clear_free_trial(&mut self) -> Self {
         self.inner &= Self::FREE_TRIAL.reverse_bits();
         *self
     }
 
-    pub const fn is_IGR(&self) -> bool {
+    pub const fn is_igr(&self) -> bool {
         (self.inner & Self::IGR) != 0
     }
 
     /// Name meaning unknown
     ///
-    pub const fn new_IGR() -> Self {
+    pub const fn new_igr() -> Self {
         Self { inner: Self::IGR }
     }
 
-    pub fn set_IGR(&mut self) -> Self {
+    pub fn set_igr(&mut self) -> Self {
         self.inner |= Self::IGR;
         *self
     }
 
-    pub fn clear_IGR(&mut self) -> Self {
+    pub fn clear_igr(&mut self) -> Self {
         self.inner &= Self::IGR.reverse_bits();
         *self
     }
 
-    pub const fn is_USAGE(&self) -> bool {
+    pub const fn is_usage(&self) -> bool {
         (self.inner & Self::USAGE) != 0
     }
 
-    pub const fn new_USAGE() -> Self {
+    pub const fn new_usage() -> Self {
         Self { inner: Self::USAGE }
     }
 
-    pub fn set_USAGE(&mut self) -> Self {
+    pub fn set_usage(&mut self) -> Self {
         self.inner |= Self::USAGE;
         *self
     }
 
-    pub fn clear_USAGE(&mut self) -> Self {
+    pub fn clear_usage(&mut self) -> Self {
         self.inner &= Self::USAGE.reverse_bits();
         *self
     }
 
-    pub const fn is_TIME_MIXTURE(&self) -> bool {
+    pub const fn is_time_mixture(&self) -> bool {
         (self.inner & Self::TIME_MIXTURE) != 0
     }
 
-    pub const fn new_TIME_MIXTURE() -> Self {
+    pub const fn new_time_mixture() -> Self {
         Self { inner: Self::TIME_MIXTURE }
     }
 
-    pub fn set_TIME_MIXTURE(&mut self) -> Self {
+    pub fn set_time_mixture(&mut self) -> Self {
         self.inner |= Self::TIME_MIXTURE;
         *self
     }
 
-    pub fn clear_TIME_MIXTURE(&mut self) -> Self {
+    pub fn clear_time_mixture(&mut self) -> Self {
         self.inner &= Self::TIME_MIXTURE.reverse_bits();
         *self
     }
 
-    pub const fn is_RESTRICTED(&self) -> bool {
+    pub const fn is_restricted(&self) -> bool {
         (self.inner & Self::RESTRICTED) != 0
     }
 
-    pub const fn new_RESTRICTED() -> Self {
+    pub const fn new_restricted() -> Self {
         Self { inner: Self::RESTRICTED }
     }
 
-    pub fn set_RESTRICTED(&mut self) -> Self {
+    pub fn set_restricted(&mut self) -> Self {
         self.inner |= Self::RESTRICTED;
         *self
     }
 
-    pub fn clear_RESTRICTED(&mut self) -> Self {
+    pub fn clear_restricted(&mut self) -> Self {
         self.inner &= Self::RESTRICTED.reverse_bits();
         *self
     }
 
-    pub const fn is_ENABLE_CAIS(&self) -> bool {
+    pub const fn is_enable_cais(&self) -> bool {
         (self.inner & Self::ENABLE_CAIS) != 0
     }
 
-    pub const fn new_ENABLE_CAIS() -> Self {
+    pub const fn new_enable_cais() -> Self {
         Self { inner: Self::ENABLE_CAIS }
     }
 
-    pub fn set_ENABLE_CAIS(&mut self) -> Self {
+    pub fn set_enable_cais(&mut self) -> Self {
         self.inner |= Self::ENABLE_CAIS;
         *self
     }
 
-    pub fn clear_ENABLE_CAIS(&mut self) -> Self {
+    pub fn clear_enable_cais(&mut self) -> Self {
         self.inner &= Self::ENABLE_CAIS.reverse_bits();
         *self
     }

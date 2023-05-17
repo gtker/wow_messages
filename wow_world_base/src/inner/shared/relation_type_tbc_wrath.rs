@@ -43,74 +43,74 @@ impl RelationType {
         }
     }
 
-    pub const fn is_FRIEND(&self) -> bool {
+    pub const fn is_friend(&self) -> bool {
         (self.inner & Self::FRIEND) != 0
     }
 
-    pub const fn new_FRIEND() -> Self {
+    pub const fn new_friend() -> Self {
         Self { inner: Self::FRIEND }
     }
 
-    pub fn set_FRIEND(&mut self) -> Self {
+    pub fn set_friend(&mut self) -> Self {
         self.inner |= Self::FRIEND;
         *self
     }
 
-    pub fn clear_FRIEND(&mut self) -> Self {
+    pub fn clear_friend(&mut self) -> Self {
         self.inner &= Self::FRIEND.reverse_bits();
         *self
     }
 
-    pub const fn is_IGNORED(&self) -> bool {
+    pub const fn is_ignored(&self) -> bool {
         (self.inner & Self::IGNORED) != 0
     }
 
-    pub const fn new_IGNORED() -> Self {
+    pub const fn new_ignored() -> Self {
         Self { inner: Self::IGNORED }
     }
 
-    pub fn set_IGNORED(&mut self) -> Self {
+    pub fn set_ignored(&mut self) -> Self {
         self.inner |= Self::IGNORED;
         *self
     }
 
-    pub fn clear_IGNORED(&mut self) -> Self {
+    pub fn clear_ignored(&mut self) -> Self {
         self.inner &= Self::IGNORED.reverse_bits();
         *self
     }
 
-    pub const fn is_MUTED(&self) -> bool {
+    pub const fn is_muted(&self) -> bool {
         (self.inner & Self::MUTED) != 0
     }
 
-    pub const fn new_MUTED() -> Self {
+    pub const fn new_muted() -> Self {
         Self { inner: Self::MUTED }
     }
 
-    pub fn set_MUTED(&mut self) -> Self {
+    pub fn set_muted(&mut self) -> Self {
         self.inner |= Self::MUTED;
         *self
     }
 
-    pub fn clear_MUTED(&mut self) -> Self {
+    pub fn clear_muted(&mut self) -> Self {
         self.inner &= Self::MUTED.reverse_bits();
         *self
     }
 
-    pub const fn is_RECRUITAFRIEND(&self) -> bool {
+    pub const fn is_recruitafriend(&self) -> bool {
         (self.inner & Self::RECRUITAFRIEND) != 0
     }
 
-    pub const fn new_RECRUITAFRIEND() -> Self {
+    pub const fn new_recruitafriend() -> Self {
         Self { inner: Self::RECRUITAFRIEND }
     }
 
-    pub fn set_RECRUITAFRIEND(&mut self) -> Self {
+    pub fn set_recruitafriend(&mut self) -> Self {
         self.inner |= Self::RECRUITAFRIEND;
         *self
     }
 
-    pub fn clear_RECRUITAFRIEND(&mut self) -> Self {
+    pub fn clear_recruitafriend(&mut self) -> Self {
         self.inner &= Self::RECRUITAFRIEND.reverse_bits();
         *self
     }

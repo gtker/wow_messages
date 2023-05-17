@@ -88,13 +88,13 @@ mod test {
             guid: Guid::new(0x5),
             info: MovementInfo {
                 flags: MovementInfo_MovementFlags::empty()
-                    .set_JUMPING(MovementInfo_MovementFlags_Jumping {
+                    .set_jumping(MovementInfo_MovementFlags_Jumping {
                         cos_angle: 0.928624_f32,
                         sin_angle: 0.3710222_f32,
                         xy_speed: 7_f32,
                         z_speed: -7.9555473_f32,
                     })
-                    .set_FORWARD()
+                    .set_forward()
                     ,
                 timestamp: 0x179D620,
                 position: Vector3d {

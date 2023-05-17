@@ -9,30 +9,28 @@ impl Item {
     pub const fn possibly_equipable_by(&self, race_class: RaceClass) -> bool {
         let class = race_class.class();
 
-        let allowed_by_race = self.allowed_race().is_empty()
-            || match race_class.race() {
-                PlayerRace::Human => self.allowed_race().is_HUMAN(),
-                PlayerRace::Orc => self.allowed_race().is_ORC(),
-                PlayerRace::Dwarf => self.allowed_race().is_DWARF(),
-                PlayerRace::NightElf => self.allowed_race().is_NIGHT_ELF(),
-                PlayerRace::Undead => self.allowed_race().is_UNDEAD(),
-                PlayerRace::Tauren => self.allowed_race().is_TAUREN(),
-                PlayerRace::Gnome => self.allowed_race().is_GNOME(),
-                PlayerRace::Troll => self.allowed_race().is_TROLL(),
-            };
+        let allowed_by_race = match race_class.race() {
+            PlayerRace::Human => self.allowed_race().is_human(),
+            PlayerRace::Orc => self.allowed_race().is_orc(),
+            PlayerRace::Dwarf => self.allowed_race().is_dwarf(),
+            PlayerRace::NightElf => self.allowed_race().is_night_elf(),
+            PlayerRace::Undead => self.allowed_race().is_undead(),
+            PlayerRace::Tauren => self.allowed_race().is_tauren(),
+            PlayerRace::Gnome => self.allowed_race().is_gnome(),
+            PlayerRace::Troll => self.allowed_race().is_troll(),
+        };
 
-        let allowed_by_class = self.allowed_class().is_empty()
-            || match class {
-                Class::Warrior => self.allowed_class().is_WARRIOR(),
-                Class::Paladin => self.allowed_class().is_PALADIN(),
-                Class::Hunter => self.allowed_class().is_HUNTER(),
-                Class::Rogue => self.allowed_class().is_ROGUE(),
-                Class::Priest => self.allowed_class().is_PRIEST(),
-                Class::Shaman => self.allowed_class().is_SHAMAN(),
-                Class::Mage => self.allowed_class().is_MAGE(),
-                Class::Warlock => self.allowed_class().is_WARLOCK(),
-                Class::Druid => self.allowed_class().is_DRUID(),
-            };
+        let allowed_by_class = match class {
+            Class::Warrior => self.allowed_class().is_warrior(),
+            Class::Paladin => self.allowed_class().is_paladin(),
+            Class::Hunter => self.allowed_class().is_hunter(),
+            Class::Rogue => self.allowed_class().is_rogue(),
+            Class::Priest => self.allowed_class().is_priest(),
+            Class::Shaman => self.allowed_class().is_shaman(),
+            Class::Mage => self.allowed_class().is_mage(),
+            Class::Warlock => self.allowed_class().is_warlock(),
+            Class::Druid => self.allowed_class().is_druid(),
+        };
 
         let equip_allowed = match self.class_and_sub_class() {
             ItemClassAndSubClass::Consumable

@@ -127,592 +127,592 @@ impl SplineFlag {
         }
     }
 
-    pub const fn is_DONE(&self) -> bool {
+    pub const fn is_done(&self) -> bool {
         (self.inner & Self::DONE) != 0
     }
 
-    pub const fn new_DONE() -> Self {
+    pub const fn new_done() -> Self {
         Self { inner: Self::DONE }
     }
 
-    pub fn set_DONE(&mut self) -> Self {
+    pub fn set_done(&mut self) -> Self {
         self.inner |= Self::DONE;
         *self
     }
 
-    pub fn clear_DONE(&mut self) -> Self {
+    pub fn clear_done(&mut self) -> Self {
         self.inner &= Self::DONE.reverse_bits();
         *self
     }
 
-    pub const fn is_FALLING(&self) -> bool {
+    pub const fn is_falling(&self) -> bool {
         (self.inner & Self::FALLING) != 0
     }
 
     /// vmangos: Affects elevation computation
     ///
-    pub const fn new_FALLING() -> Self {
+    pub const fn new_falling() -> Self {
         Self { inner: Self::FALLING }
     }
 
-    pub fn set_FALLING(&mut self) -> Self {
+    pub fn set_falling(&mut self) -> Self {
         self.inner |= Self::FALLING;
         *self
     }
 
-    pub fn clear_FALLING(&mut self) -> Self {
+    pub fn clear_falling(&mut self) -> Self {
         self.inner &= Self::FALLING.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN3(&self) -> bool {
+    pub const fn is_unknown3(&self) -> bool {
         (self.inner & Self::UNKNOWN3) != 0
     }
 
-    pub const fn new_UNKNOWN3() -> Self {
+    pub const fn new_unknown3() -> Self {
         Self { inner: Self::UNKNOWN3 }
     }
 
-    pub fn set_UNKNOWN3(&mut self) -> Self {
+    pub fn set_unknown3(&mut self) -> Self {
         self.inner |= Self::UNKNOWN3;
         *self
     }
 
-    pub fn clear_UNKNOWN3(&mut self) -> Self {
+    pub fn clear_unknown3(&mut self) -> Self {
         self.inner &= Self::UNKNOWN3.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN4(&self) -> bool {
+    pub const fn is_unknown4(&self) -> bool {
         (self.inner & Self::UNKNOWN4) != 0
     }
 
-    pub const fn new_UNKNOWN4() -> Self {
+    pub const fn new_unknown4() -> Self {
         Self { inner: Self::UNKNOWN4 }
     }
 
-    pub fn set_UNKNOWN4(&mut self) -> Self {
+    pub fn set_unknown4(&mut self) -> Self {
         self.inner |= Self::UNKNOWN4;
         *self
     }
 
-    pub fn clear_UNKNOWN4(&mut self) -> Self {
+    pub fn clear_unknown4(&mut self) -> Self {
         self.inner &= Self::UNKNOWN4.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN5(&self) -> bool {
+    pub const fn is_unknown5(&self) -> bool {
         (self.inner & Self::UNKNOWN5) != 0
     }
 
-    pub const fn new_UNKNOWN5() -> Self {
+    pub const fn new_unknown5() -> Self {
         Self { inner: Self::UNKNOWN5 }
     }
 
-    pub fn set_UNKNOWN5(&mut self) -> Self {
+    pub fn set_unknown5(&mut self) -> Self {
         self.inner |= Self::UNKNOWN5;
         *self
     }
 
-    pub fn clear_UNKNOWN5(&mut self) -> Self {
+    pub fn clear_unknown5(&mut self) -> Self {
         self.inner &= Self::UNKNOWN5.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN6(&self) -> bool {
+    pub const fn is_unknown6(&self) -> bool {
         (self.inner & Self::UNKNOWN6) != 0
     }
 
-    pub const fn new_UNKNOWN6() -> Self {
+    pub const fn new_unknown6() -> Self {
         Self { inner: Self::UNKNOWN6 }
     }
 
-    pub fn set_UNKNOWN6(&mut self) -> Self {
+    pub fn set_unknown6(&mut self) -> Self {
         self.inner |= Self::UNKNOWN6;
         *self
     }
 
-    pub fn clear_UNKNOWN6(&mut self) -> Self {
+    pub fn clear_unknown6(&mut self) -> Self {
         self.inner &= Self::UNKNOWN6.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN7(&self) -> bool {
+    pub const fn is_unknown7(&self) -> bool {
         (self.inner & Self::UNKNOWN7) != 0
     }
 
-    pub const fn new_UNKNOWN7() -> Self {
+    pub const fn new_unknown7() -> Self {
         Self { inner: Self::UNKNOWN7 }
     }
 
-    pub fn set_UNKNOWN7(&mut self) -> Self {
+    pub fn set_unknown7(&mut self) -> Self {
         self.inner |= Self::UNKNOWN7;
         *self
     }
 
-    pub fn clear_UNKNOWN7(&mut self) -> Self {
+    pub fn clear_unknown7(&mut self) -> Self {
         self.inner &= Self::UNKNOWN7.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN8(&self) -> bool {
+    pub const fn is_unknown8(&self) -> bool {
         (self.inner & Self::UNKNOWN8) != 0
     }
 
-    pub const fn new_UNKNOWN8() -> Self {
+    pub const fn new_unknown8() -> Self {
         Self { inner: Self::UNKNOWN8 }
     }
 
-    pub fn set_UNKNOWN8(&mut self) -> Self {
+    pub fn set_unknown8(&mut self) -> Self {
         self.inner |= Self::UNKNOWN8;
         *self
     }
 
-    pub fn clear_UNKNOWN8(&mut self) -> Self {
+    pub fn clear_unknown8(&mut self) -> Self {
         self.inner &= Self::UNKNOWN8.reverse_bits();
         *self
     }
 
-    pub const fn is_RUN_MODE(&self) -> bool {
+    pub const fn is_run_mode(&self) -> bool {
         (self.inner & Self::RUN_MODE) != 0
     }
 
-    pub const fn new_RUN_MODE() -> Self {
+    pub const fn new_run_mode() -> Self {
         Self { inner: Self::RUN_MODE }
     }
 
-    pub fn set_RUN_MODE(&mut self) -> Self {
+    pub fn set_run_mode(&mut self) -> Self {
         self.inner |= Self::RUN_MODE;
         *self
     }
 
-    pub fn clear_RUN_MODE(&mut self) -> Self {
+    pub fn clear_run_mode(&mut self) -> Self {
         self.inner &= Self::RUN_MODE.reverse_bits();
         *self
     }
 
-    pub const fn is_FLYING(&self) -> bool {
+    pub const fn is_flying(&self) -> bool {
         (self.inner & Self::FLYING) != 0
     }
 
     /// vmangos: Smooth movement(Catmullrom interpolation mode), flying animation
     ///
-    pub const fn new_FLYING() -> Self {
+    pub const fn new_flying() -> Self {
         Self { inner: Self::FLYING }
     }
 
-    pub fn set_FLYING(&mut self) -> Self {
+    pub fn set_flying(&mut self) -> Self {
         self.inner |= Self::FLYING;
         *self
     }
 
-    pub fn clear_FLYING(&mut self) -> Self {
+    pub fn clear_flying(&mut self) -> Self {
         self.inner &= Self::FLYING.reverse_bits();
         *self
     }
 
-    pub const fn is_NO_SPLINE(&self) -> bool {
+    pub const fn is_no_spline(&self) -> bool {
         (self.inner & Self::NO_SPLINE) != 0
     }
 
-    pub const fn new_NO_SPLINE() -> Self {
+    pub const fn new_no_spline() -> Self {
         Self { inner: Self::NO_SPLINE }
     }
 
-    pub fn set_NO_SPLINE(&mut self) -> Self {
+    pub fn set_no_spline(&mut self) -> Self {
         self.inner |= Self::NO_SPLINE;
         *self
     }
 
-    pub fn clear_NO_SPLINE(&mut self) -> Self {
+    pub fn clear_no_spline(&mut self) -> Self {
         self.inner &= Self::NO_SPLINE.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN12(&self) -> bool {
+    pub const fn is_unknown12(&self) -> bool {
         (self.inner & Self::UNKNOWN12) != 0
     }
 
-    pub const fn new_UNKNOWN12() -> Self {
+    pub const fn new_unknown12() -> Self {
         Self { inner: Self::UNKNOWN12 }
     }
 
-    pub fn set_UNKNOWN12(&mut self) -> Self {
+    pub fn set_unknown12(&mut self) -> Self {
         self.inner |= Self::UNKNOWN12;
         *self
     }
 
-    pub fn clear_UNKNOWN12(&mut self) -> Self {
+    pub fn clear_unknown12(&mut self) -> Self {
         self.inner &= Self::UNKNOWN12.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN13(&self) -> bool {
+    pub const fn is_unknown13(&self) -> bool {
         (self.inner & Self::UNKNOWN13) != 0
     }
 
-    pub const fn new_UNKNOWN13() -> Self {
+    pub const fn new_unknown13() -> Self {
         Self { inner: Self::UNKNOWN13 }
     }
 
-    pub fn set_UNKNOWN13(&mut self) -> Self {
+    pub fn set_unknown13(&mut self) -> Self {
         self.inner |= Self::UNKNOWN13;
         *self
     }
 
-    pub fn clear_UNKNOWN13(&mut self) -> Self {
+    pub fn clear_unknown13(&mut self) -> Self {
         self.inner &= Self::UNKNOWN13.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN14(&self) -> bool {
+    pub const fn is_unknown14(&self) -> bool {
         (self.inner & Self::UNKNOWN14) != 0
     }
 
-    pub const fn new_UNKNOWN14() -> Self {
+    pub const fn new_unknown14() -> Self {
         Self { inner: Self::UNKNOWN14 }
     }
 
-    pub fn set_UNKNOWN14(&mut self) -> Self {
+    pub fn set_unknown14(&mut self) -> Self {
         self.inner |= Self::UNKNOWN14;
         *self
     }
 
-    pub fn clear_UNKNOWN14(&mut self) -> Self {
+    pub fn clear_unknown14(&mut self) -> Self {
         self.inner &= Self::UNKNOWN14.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN15(&self) -> bool {
+    pub const fn is_unknown15(&self) -> bool {
         (self.inner & Self::UNKNOWN15) != 0
     }
 
-    pub const fn new_UNKNOWN15() -> Self {
+    pub const fn new_unknown15() -> Self {
         Self { inner: Self::UNKNOWN15 }
     }
 
-    pub fn set_UNKNOWN15(&mut self) -> Self {
+    pub fn set_unknown15(&mut self) -> Self {
         self.inner |= Self::UNKNOWN15;
         *self
     }
 
-    pub fn clear_UNKNOWN15(&mut self) -> Self {
+    pub fn clear_unknown15(&mut self) -> Self {
         self.inner &= Self::UNKNOWN15.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN16(&self) -> bool {
+    pub const fn is_unknown16(&self) -> bool {
         (self.inner & Self::UNKNOWN16) != 0
     }
 
-    pub const fn new_UNKNOWN16() -> Self {
+    pub const fn new_unknown16() -> Self {
         Self { inner: Self::UNKNOWN16 }
     }
 
-    pub fn set_UNKNOWN16(&mut self) -> Self {
+    pub fn set_unknown16(&mut self) -> Self {
         self.inner |= Self::UNKNOWN16;
         *self
     }
 
-    pub fn clear_UNKNOWN16(&mut self) -> Self {
+    pub fn clear_unknown16(&mut self) -> Self {
         self.inner &= Self::UNKNOWN16.reverse_bits();
         *self
     }
 
-    pub const fn is_FINAL_POINT(&self) -> bool {
+    pub const fn is_final_point(&self) -> bool {
         (self.inner & Self::FINAL_POINT) != 0
     }
 
-    pub const fn new_FINAL_POINT() -> Self {
+    pub const fn new_final_point() -> Self {
         Self { inner: Self::FINAL_POINT }
     }
 
-    pub fn set_FINAL_POINT(&mut self) -> Self {
+    pub fn set_final_point(&mut self) -> Self {
         self.inner |= Self::FINAL_POINT;
         *self
     }
 
-    pub fn clear_FINAL_POINT(&mut self) -> Self {
+    pub fn clear_final_point(&mut self) -> Self {
         self.inner &= Self::FINAL_POINT.reverse_bits();
         *self
     }
 
-    pub const fn is_FINAL_TARGET(&self) -> bool {
+    pub const fn is_final_target(&self) -> bool {
         (self.inner & Self::FINAL_TARGET) != 0
     }
 
-    pub const fn new_FINAL_TARGET() -> Self {
+    pub const fn new_final_target() -> Self {
         Self { inner: Self::FINAL_TARGET }
     }
 
-    pub fn set_FINAL_TARGET(&mut self) -> Self {
+    pub fn set_final_target(&mut self) -> Self {
         self.inner |= Self::FINAL_TARGET;
         *self
     }
 
-    pub fn clear_FINAL_TARGET(&mut self) -> Self {
+    pub fn clear_final_target(&mut self) -> Self {
         self.inner &= Self::FINAL_TARGET.reverse_bits();
         *self
     }
 
-    pub const fn is_FINAL_ANGLE(&self) -> bool {
+    pub const fn is_final_angle(&self) -> bool {
         (self.inner & Self::FINAL_ANGLE) != 0
     }
 
-    pub const fn new_FINAL_ANGLE() -> Self {
+    pub const fn new_final_angle() -> Self {
         Self { inner: Self::FINAL_ANGLE }
     }
 
-    pub fn set_FINAL_ANGLE(&mut self) -> Self {
+    pub fn set_final_angle(&mut self) -> Self {
         self.inner |= Self::FINAL_ANGLE;
         *self
     }
 
-    pub fn clear_FINAL_ANGLE(&mut self) -> Self {
+    pub fn clear_final_angle(&mut self) -> Self {
         self.inner &= Self::FINAL_ANGLE.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN19(&self) -> bool {
+    pub const fn is_unknown19(&self) -> bool {
         (self.inner & Self::UNKNOWN19) != 0
     }
 
     /// vmangos: exists, but unknown what it does
     ///
-    pub const fn new_UNKNOWN19() -> Self {
+    pub const fn new_unknown19() -> Self {
         Self { inner: Self::UNKNOWN19 }
     }
 
-    pub fn set_UNKNOWN19(&mut self) -> Self {
+    pub fn set_unknown19(&mut self) -> Self {
         self.inner |= Self::UNKNOWN19;
         *self
     }
 
-    pub fn clear_UNKNOWN19(&mut self) -> Self {
+    pub fn clear_unknown19(&mut self) -> Self {
         self.inner &= Self::UNKNOWN19.reverse_bits();
         *self
     }
 
-    pub const fn is_CYCLIC(&self) -> bool {
+    pub const fn is_cyclic(&self) -> bool {
         (self.inner & Self::CYCLIC) != 0
     }
 
     /// vmangos: Movement by cycled spline
     ///
-    pub const fn new_CYCLIC() -> Self {
+    pub const fn new_cyclic() -> Self {
         Self { inner: Self::CYCLIC }
     }
 
-    pub fn set_CYCLIC(&mut self) -> Self {
+    pub fn set_cyclic(&mut self) -> Self {
         self.inner |= Self::CYCLIC;
         *self
     }
 
-    pub fn clear_CYCLIC(&mut self) -> Self {
+    pub fn clear_cyclic(&mut self) -> Self {
         self.inner &= Self::CYCLIC.reverse_bits();
         *self
     }
 
-    pub const fn is_ENTER_CYCLE(&self) -> bool {
+    pub const fn is_enter_cycle(&self) -> bool {
         (self.inner & Self::ENTER_CYCLE) != 0
     }
 
     /// vmangos: Everytimes appears with cyclic flag in monster move packet, erases first spline vertex after first cycle done
     ///
-    pub const fn new_ENTER_CYCLE() -> Self {
+    pub const fn new_enter_cycle() -> Self {
         Self { inner: Self::ENTER_CYCLE }
     }
 
-    pub fn set_ENTER_CYCLE(&mut self) -> Self {
+    pub fn set_enter_cycle(&mut self) -> Self {
         self.inner |= Self::ENTER_CYCLE;
         *self
     }
 
-    pub fn clear_ENTER_CYCLE(&mut self) -> Self {
+    pub fn clear_enter_cycle(&mut self) -> Self {
         self.inner &= Self::ENTER_CYCLE.reverse_bits();
         *self
     }
 
-    pub const fn is_FROZEN(&self) -> bool {
+    pub const fn is_frozen(&self) -> bool {
         (self.inner & Self::FROZEN) != 0
     }
 
     /// vmangos: Will never arrive
     ///
-    pub const fn new_FROZEN() -> Self {
+    pub const fn new_frozen() -> Self {
         Self { inner: Self::FROZEN }
     }
 
-    pub fn set_FROZEN(&mut self) -> Self {
+    pub fn set_frozen(&mut self) -> Self {
         self.inner |= Self::FROZEN;
         *self
     }
 
-    pub fn clear_FROZEN(&mut self) -> Self {
+    pub fn clear_frozen(&mut self) -> Self {
         self.inner &= Self::FROZEN.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN23(&self) -> bool {
+    pub const fn is_unknown23(&self) -> bool {
         (self.inner & Self::UNKNOWN23) != 0
     }
 
-    pub const fn new_UNKNOWN23() -> Self {
+    pub const fn new_unknown23() -> Self {
         Self { inner: Self::UNKNOWN23 }
     }
 
-    pub fn set_UNKNOWN23(&mut self) -> Self {
+    pub fn set_unknown23(&mut self) -> Self {
         self.inner |= Self::UNKNOWN23;
         *self
     }
 
-    pub fn clear_UNKNOWN23(&mut self) -> Self {
+    pub fn clear_unknown23(&mut self) -> Self {
         self.inner &= Self::UNKNOWN23.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN24(&self) -> bool {
+    pub const fn is_unknown24(&self) -> bool {
         (self.inner & Self::UNKNOWN24) != 0
     }
 
-    pub const fn new_UNKNOWN24() -> Self {
+    pub const fn new_unknown24() -> Self {
         Self { inner: Self::UNKNOWN24 }
     }
 
-    pub fn set_UNKNOWN24(&mut self) -> Self {
+    pub fn set_unknown24(&mut self) -> Self {
         self.inner |= Self::UNKNOWN24;
         *self
     }
 
-    pub fn clear_UNKNOWN24(&mut self) -> Self {
+    pub fn clear_unknown24(&mut self) -> Self {
         self.inner &= Self::UNKNOWN24.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN25(&self) -> bool {
+    pub const fn is_unknown25(&self) -> bool {
         (self.inner & Self::UNKNOWN25) != 0
     }
 
     /// vmangos: exists, but unknown what it does
     ///
-    pub const fn new_UNKNOWN25() -> Self {
+    pub const fn new_unknown25() -> Self {
         Self { inner: Self::UNKNOWN25 }
     }
 
-    pub fn set_UNKNOWN25(&mut self) -> Self {
+    pub fn set_unknown25(&mut self) -> Self {
         self.inner |= Self::UNKNOWN25;
         *self
     }
 
-    pub fn clear_UNKNOWN25(&mut self) -> Self {
+    pub fn clear_unknown25(&mut self) -> Self {
         self.inner &= Self::UNKNOWN25.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN26(&self) -> bool {
+    pub const fn is_unknown26(&self) -> bool {
         (self.inner & Self::UNKNOWN26) != 0
     }
 
-    pub const fn new_UNKNOWN26() -> Self {
+    pub const fn new_unknown26() -> Self {
         Self { inner: Self::UNKNOWN26 }
     }
 
-    pub fn set_UNKNOWN26(&mut self) -> Self {
+    pub fn set_unknown26(&mut self) -> Self {
         self.inner |= Self::UNKNOWN26;
         *self
     }
 
-    pub fn clear_UNKNOWN26(&mut self) -> Self {
+    pub fn clear_unknown26(&mut self) -> Self {
         self.inner &= Self::UNKNOWN26.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN27(&self) -> bool {
+    pub const fn is_unknown27(&self) -> bool {
         (self.inner & Self::UNKNOWN27) != 0
     }
 
-    pub const fn new_UNKNOWN27() -> Self {
+    pub const fn new_unknown27() -> Self {
         Self { inner: Self::UNKNOWN27 }
     }
 
-    pub fn set_UNKNOWN27(&mut self) -> Self {
+    pub fn set_unknown27(&mut self) -> Self {
         self.inner |= Self::UNKNOWN27;
         *self
     }
 
-    pub fn clear_UNKNOWN27(&mut self) -> Self {
+    pub fn clear_unknown27(&mut self) -> Self {
         self.inner &= Self::UNKNOWN27.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN28(&self) -> bool {
+    pub const fn is_unknown28(&self) -> bool {
         (self.inner & Self::UNKNOWN28) != 0
     }
 
-    pub const fn new_UNKNOWN28() -> Self {
+    pub const fn new_unknown28() -> Self {
         Self { inner: Self::UNKNOWN28 }
     }
 
-    pub fn set_UNKNOWN28(&mut self) -> Self {
+    pub fn set_unknown28(&mut self) -> Self {
         self.inner |= Self::UNKNOWN28;
         *self
     }
 
-    pub fn clear_UNKNOWN28(&mut self) -> Self {
+    pub fn clear_unknown28(&mut self) -> Self {
         self.inner &= Self::UNKNOWN28.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN29(&self) -> bool {
+    pub const fn is_unknown29(&self) -> bool {
         (self.inner & Self::UNKNOWN29) != 0
     }
 
-    pub const fn new_UNKNOWN29() -> Self {
+    pub const fn new_unknown29() -> Self {
         Self { inner: Self::UNKNOWN29 }
     }
 
-    pub fn set_UNKNOWN29(&mut self) -> Self {
+    pub fn set_unknown29(&mut self) -> Self {
         self.inner |= Self::UNKNOWN29;
         *self
     }
 
-    pub fn clear_UNKNOWN29(&mut self) -> Self {
+    pub fn clear_unknown29(&mut self) -> Self {
         self.inner &= Self::UNKNOWN29.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN30(&self) -> bool {
+    pub const fn is_unknown30(&self) -> bool {
         (self.inner & Self::UNKNOWN30) != 0
     }
 
-    pub const fn new_UNKNOWN30() -> Self {
+    pub const fn new_unknown30() -> Self {
         Self { inner: Self::UNKNOWN30 }
     }
 
-    pub fn set_UNKNOWN30(&mut self) -> Self {
+    pub fn set_unknown30(&mut self) -> Self {
         self.inner |= Self::UNKNOWN30;
         *self
     }
 
-    pub fn clear_UNKNOWN30(&mut self) -> Self {
+    pub fn clear_unknown30(&mut self) -> Self {
         self.inner &= Self::UNKNOWN30.reverse_bits();
         *self
     }
 
-    pub const fn is_UNKNOWN31(&self) -> bool {
+    pub const fn is_unknown31(&self) -> bool {
         (self.inner & Self::UNKNOWN31) != 0
     }
 
-    pub const fn new_UNKNOWN31() -> Self {
+    pub const fn new_unknown31() -> Self {
         Self { inner: Self::UNKNOWN31 }
     }
 
-    pub fn set_UNKNOWN31(&mut self) -> Self {
+    pub fn set_unknown31(&mut self) -> Self {
         self.inner |= Self::UNKNOWN31;
         *self
     }
 
-    pub fn clear_UNKNOWN31(&mut self) -> Self {
+    pub fn clear_unknown31(&mut self) -> Self {
         self.inner &= Self::UNKNOWN31.reverse_bits();
         *self
     }

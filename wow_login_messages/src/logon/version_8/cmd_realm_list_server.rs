@@ -268,8 +268,8 @@ mod test {
                     realm_type: RealmType::PlayerVsEnvironment,
                     locked: false, 
                     flag: Realm_RealmFlag::empty()
-                        .set_INVALID()
-                        .set_OFFLINE()
+                        .set_invalid()
+                        .set_offline()
                         ,
                     name: String::from("A"),
                     address: String::from("A"),
@@ -354,7 +354,7 @@ mod test {
                     realm_type: RealmType::PlayerVsEnvironment,
                     locked: false, 
                     flag: Realm_RealmFlag::empty()
-                        .set_SPECIFY_BUILD(Realm_RealmFlag_SpecifyBuild {
+                        .set_specify_build(Realm_RealmFlag_SpecifyBuild {
                             version: Version {
                                 major: 0x1,
                                 minor: 0xC,

@@ -39,59 +39,59 @@ impl SecurityFlag {
         }
     }
 
-    pub const fn is_PIN(&self) -> bool {
+    pub const fn is_pin(&self) -> bool {
         (self.inner & Self::PIN) != 0
     }
 
-    pub const fn new_PIN() -> Self {
+    pub const fn new_pin() -> Self {
         Self { inner: Self::PIN }
     }
 
-    pub fn set_PIN(&mut self) -> Self {
+    pub fn set_pin(&mut self) -> Self {
         self.inner |= Self::PIN;
         *self
     }
 
-    pub fn clear_PIN(&mut self) -> Self {
+    pub fn clear_pin(&mut self) -> Self {
         self.inner &= Self::PIN.reverse_bits();
         *self
     }
 
-    pub const fn is_MATRIX_CARD(&self) -> bool {
+    pub const fn is_matrix_card(&self) -> bool {
         (self.inner & Self::MATRIX_CARD) != 0
     }
 
     /// Matrix Card 2FA which requires a matrix card.
     /// `https://forum.xentax.com/viewtopic.php?f=13&p=186022`
     ///
-    pub const fn new_MATRIX_CARD() -> Self {
+    pub const fn new_matrix_card() -> Self {
         Self { inner: Self::MATRIX_CARD }
     }
 
-    pub fn set_MATRIX_CARD(&mut self) -> Self {
+    pub fn set_matrix_card(&mut self) -> Self {
         self.inner |= Self::MATRIX_CARD;
         *self
     }
 
-    pub fn clear_MATRIX_CARD(&mut self) -> Self {
+    pub fn clear_matrix_card(&mut self) -> Self {
         self.inner &= Self::MATRIX_CARD.reverse_bits();
         *self
     }
 
-    pub const fn is_AUTHENTICATOR(&self) -> bool {
+    pub const fn is_authenticator(&self) -> bool {
         (self.inner & Self::AUTHENTICATOR) != 0
     }
 
-    pub const fn new_AUTHENTICATOR() -> Self {
+    pub const fn new_authenticator() -> Self {
         Self { inner: Self::AUTHENTICATOR }
     }
 
-    pub fn set_AUTHENTICATOR(&mut self) -> Self {
+    pub fn set_authenticator(&mut self) -> Self {
         self.inner |= Self::AUTHENTICATOR;
         *self
     }
 
-    pub fn clear_AUTHENTICATOR(&mut self) -> Self {
+    pub fn clear_authenticator(&mut self) -> Self {
         self.inner &= Self::AUTHENTICATOR.reverse_bits();
         *self
     }

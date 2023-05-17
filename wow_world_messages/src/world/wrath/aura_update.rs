@@ -83,7 +83,7 @@ impl AuraUpdate {
         // aura_stack_count: u8
         let aura_stack_count = crate::util::read_u8_le(&mut r)?;
 
-        let flags_NOT_CASTER = if flags.is_NOT_CASTER() {
+        let flags_NOT_CASTER = if flags.is_not_caster() {
             // caster: PackedGuid
             let caster = Guid::read_packed(&mut r)?;
 
@@ -95,7 +95,7 @@ impl AuraUpdate {
             None
         };
 
-        let flags_DURATION = if flags.is_DURATION() {
+        let flags_DURATION = if flags.is_duration() {
             // duration: u32
             let duration = crate::util::read_u32_le(&mut r)?;
 
@@ -168,7 +168,7 @@ impl AuraUpdate_AuraFlag {
         && self.duration.is_none()
     }
 
-    pub const fn new_EFFECT_1() -> Self {
+    pub const fn new_effect_1() -> Self {
         Self {
             inner: AuraFlag::EFFECT_1,
             not_caster: None,
@@ -177,22 +177,22 @@ impl AuraUpdate_AuraFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_EFFECT_1(mut self) -> Self {
+    pub fn set_effect_1(mut self) -> Self {
         self.inner |= AuraFlag::EFFECT_1;
         self
     }
 
-    pub const fn get_EFFECT_1(&self) -> bool {
+    pub const fn get_effect_1(&self) -> bool {
         (self.inner & AuraFlag::EFFECT_1) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_EFFECT_1(mut self) -> Self {
+    pub fn clear_effect_1(mut self) -> Self {
         self.inner &= AuraFlag::EFFECT_1.reverse_bits();
         self
     }
 
-    pub const fn new_EFFECT_2() -> Self {
+    pub const fn new_effect_2() -> Self {
         Self {
             inner: AuraFlag::EFFECT_2,
             not_caster: None,
@@ -201,22 +201,22 @@ impl AuraUpdate_AuraFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_EFFECT_2(mut self) -> Self {
+    pub fn set_effect_2(mut self) -> Self {
         self.inner |= AuraFlag::EFFECT_2;
         self
     }
 
-    pub const fn get_EFFECT_2(&self) -> bool {
+    pub const fn get_effect_2(&self) -> bool {
         (self.inner & AuraFlag::EFFECT_2) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_EFFECT_2(mut self) -> Self {
+    pub fn clear_effect_2(mut self) -> Self {
         self.inner &= AuraFlag::EFFECT_2.reverse_bits();
         self
     }
 
-    pub const fn new_EFFECT_3() -> Self {
+    pub const fn new_effect_3() -> Self {
         Self {
             inner: AuraFlag::EFFECT_3,
             not_caster: None,
@@ -225,22 +225,22 @@ impl AuraUpdate_AuraFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_EFFECT_3(mut self) -> Self {
+    pub fn set_effect_3(mut self) -> Self {
         self.inner |= AuraFlag::EFFECT_3;
         self
     }
 
-    pub const fn get_EFFECT_3(&self) -> bool {
+    pub const fn get_effect_3(&self) -> bool {
         (self.inner & AuraFlag::EFFECT_3) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_EFFECT_3(mut self) -> Self {
+    pub fn clear_effect_3(mut self) -> Self {
         self.inner &= AuraFlag::EFFECT_3.reverse_bits();
         self
     }
 
-    pub const fn new_NOT_CASTER(not_caster: AuraUpdate_AuraFlag_NotCaster) -> Self {
+    pub const fn new_not_caster(not_caster: AuraUpdate_AuraFlag_NotCaster) -> Self {
         Self {
             inner: AuraFlag::NOT_CASTER,
             not_caster: Some(not_caster),
@@ -249,24 +249,24 @@ impl AuraUpdate_AuraFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_NOT_CASTER(mut self, not_caster: AuraUpdate_AuraFlag_NotCaster) -> Self {
+    pub fn set_not_caster(mut self, not_caster: AuraUpdate_AuraFlag_NotCaster) -> Self {
         self.inner |= AuraFlag::NOT_CASTER;
         self.not_caster = Some(not_caster);
         self
     }
 
-    pub const fn get_NOT_CASTER(&self) -> Option<&AuraUpdate_AuraFlag_NotCaster> {
+    pub const fn get_not_caster(&self) -> Option<&AuraUpdate_AuraFlag_NotCaster> {
         self.not_caster.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_NOT_CASTER(mut self) -> Self {
+    pub fn clear_not_caster(mut self) -> Self {
         self.inner &= AuraFlag::NOT_CASTER.reverse_bits();
         self.not_caster = None;
         self
     }
 
-    pub const fn new_SET() -> Self {
+    pub const fn new_set() -> Self {
         Self {
             inner: AuraFlag::SET,
             not_caster: None,
@@ -275,22 +275,22 @@ impl AuraUpdate_AuraFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_SET(mut self) -> Self {
+    pub fn set_set(mut self) -> Self {
         self.inner |= AuraFlag::SET;
         self
     }
 
-    pub const fn get_SET(&self) -> bool {
+    pub const fn get_set(&self) -> bool {
         (self.inner & AuraFlag::SET) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_SET(mut self) -> Self {
+    pub fn clear_set(mut self) -> Self {
         self.inner &= AuraFlag::SET.reverse_bits();
         self
     }
 
-    pub const fn new_CANCELLABLE() -> Self {
+    pub const fn new_cancellable() -> Self {
         Self {
             inner: AuraFlag::CANCELLABLE,
             not_caster: None,
@@ -299,22 +299,22 @@ impl AuraUpdate_AuraFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_CANCELLABLE(mut self) -> Self {
+    pub fn set_cancellable(mut self) -> Self {
         self.inner |= AuraFlag::CANCELLABLE;
         self
     }
 
-    pub const fn get_CANCELLABLE(&self) -> bool {
+    pub const fn get_cancellable(&self) -> bool {
         (self.inner & AuraFlag::CANCELLABLE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_CANCELLABLE(mut self) -> Self {
+    pub fn clear_cancellable(mut self) -> Self {
         self.inner &= AuraFlag::CANCELLABLE.reverse_bits();
         self
     }
 
-    pub const fn new_DURATION(duration: AuraUpdate_AuraFlag_Duration) -> Self {
+    pub const fn new_duration(duration: AuraUpdate_AuraFlag_Duration) -> Self {
         Self {
             inner: AuraFlag::DURATION,
             not_caster: None,
@@ -323,24 +323,24 @@ impl AuraUpdate_AuraFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_DURATION(mut self, duration: AuraUpdate_AuraFlag_Duration) -> Self {
+    pub fn set_duration(mut self, duration: AuraUpdate_AuraFlag_Duration) -> Self {
         self.inner |= AuraFlag::DURATION;
         self.duration = Some(duration);
         self
     }
 
-    pub const fn get_DURATION(&self) -> Option<&AuraUpdate_AuraFlag_Duration> {
+    pub const fn get_duration(&self) -> Option<&AuraUpdate_AuraFlag_Duration> {
         self.duration.as_ref()
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_DURATION(mut self) -> Self {
+    pub fn clear_duration(mut self) -> Self {
         self.inner &= AuraFlag::DURATION.reverse_bits();
         self.duration = None;
         self
     }
 
-    pub const fn new_HIDE() -> Self {
+    pub const fn new_hide() -> Self {
         Self {
             inner: AuraFlag::HIDE,
             not_caster: None,
@@ -349,22 +349,22 @@ impl AuraUpdate_AuraFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_HIDE(mut self) -> Self {
+    pub fn set_hide(mut self) -> Self {
         self.inner |= AuraFlag::HIDE;
         self
     }
 
-    pub const fn get_HIDE(&self) -> bool {
+    pub const fn get_hide(&self) -> bool {
         (self.inner & AuraFlag::HIDE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_HIDE(mut self) -> Self {
+    pub fn clear_hide(mut self) -> Self {
         self.inner &= AuraFlag::HIDE.reverse_bits();
         self
     }
 
-    pub const fn new_NEGATIVE() -> Self {
+    pub const fn new_negative() -> Self {
         Self {
             inner: AuraFlag::NEGATIVE,
             not_caster: None,
@@ -373,17 +373,17 @@ impl AuraUpdate_AuraFlag {
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn set_NEGATIVE(mut self) -> Self {
+    pub fn set_negative(mut self) -> Self {
         self.inner |= AuraFlag::NEGATIVE;
         self
     }
 
-    pub const fn get_NEGATIVE(&self) -> bool {
+    pub const fn get_negative(&self) -> bool {
         (self.inner & AuraFlag::NEGATIVE) != 0
     }
 
     #[allow(clippy::missing_const_for_fn)] // false positive
-    pub fn clear_NEGATIVE(mut self) -> Self {
+    pub fn clear_negative(mut self) -> Self {
         self.inner &= AuraFlag::NEGATIVE.reverse_bits();
         self
     }

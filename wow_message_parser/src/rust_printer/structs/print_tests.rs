@@ -428,7 +428,7 @@ fn print_value(
                     }
 
                     if !enumerator.has_members_in_struct() {
-                        s.wln(format!(".set_{}()", enumerator.name()));
+                        s.wln(format!(".set_{}()", enumerator.name().to_lowercase()));
                         continue;
                     }
 
@@ -436,7 +436,7 @@ fn print_value(
                         EnumeratorType::Regular => {
                             s.open_curly(format!(
                                 ".set_{}({}",
-                                enumerator.name(),
+                                enumerator.name().to_lowercase(),
                                 get_new_flag_type_name(rd.ty_name(), enumerator.rust_name()),
                             ));
 
@@ -452,7 +452,7 @@ fn print_value(
                         } => {
                             s.open_curly(format!(
                                 ".set_{}({}::{}",
-                                parent_enum_name,
+                                parent_enum_name.to_lowercase(),
                                 parent_ty_name,
                                 enumerator.rust_name()
                             ));
