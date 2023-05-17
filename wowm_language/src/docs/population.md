@@ -1,6 +1,6 @@
 # Population
 
-## Protocol Version 2, Protocol Version 3, Protocol Version 8
+## Protocol Version 2, Protocol Version 3, Protocol Version 5, Protocol Version 8
 
 ### Wowm Representation
 
@@ -24,6 +24,7 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 | `BLUE_RECOMMENDED` | 1142292480 (0x44160000) |  |  |
 
 Used in:
+* [Realm](realm.md)
 * [Realm](realm.md)
 * [Realm](realm.md)
 

@@ -2,7 +2,7 @@ enum SecurityFlag : u8 {
     NONE = 0x0;
     PIN = 0x1;
 } {
-    login_versions = "3";
+    login_versions = "3 5";
 }
 
 flag SecurityFlag : u8 {
@@ -35,7 +35,7 @@ enum LoginResult : u8 {
     SUCCESS_SURVEY = 0x0E;
     FAIL_PARENTALCONTROL = 0x0F;
 } {
-    login_versions = "2 3";
+    login_versions = "2 3 5";
 }
 
 enum LoginResult : u8 {

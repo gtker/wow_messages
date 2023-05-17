@@ -5,7 +5,7 @@ enum RealmType : u8 {
     ROLEPLAYING = 6;
     ROLEPLAYING_PLAYER_VS_PLAYER = 8;
 } {
-    login_versions = "2 3 8";
+    login_versions = "2 3 5 8";
 }
 
 flag RealmFlag : u8 {
@@ -16,7 +16,7 @@ flag RealmFlag : u8 {
     FORCE_GREEN_RECOMMENDED = 0x40;
     FORCE_RED_FULL = 0x80;
 } {
-    login_versions = "2 3";
+    login_versions = "2 3 5";
 }
 
 flag RealmFlag : u8 {
@@ -37,7 +37,7 @@ enum Population : u32 {
     BLUE_RECOMMENDED = 0x44160000;
     OTHER = self.value;
 } {
-    login_versions = "2 3 8";
+    login_versions = "2 3 5 8";
 }
 
 enum RealmCategory : u8 {
@@ -47,7 +47,7 @@ enum RealmCategory : u8 {
     THREE = 0x3;
     FIVE = 0x5;
 } {
-    login_versions = "2 3 8";
+    login_versions = "2 3 5 8";
 }
 
 struct Realm {
@@ -71,6 +71,30 @@ slogin CMD_REALM_LIST_Server = 0x10 {
     u16 footer_padding = 0;
 } {
     login_versions = "2 3";
+}
+
+struct Realm {
+    RealmType realm_type;
+    Bool locked;
+    RealmFlag flag;
+    CString name;
+    CString address;
+    Population population;
+    u8 number_of_characters_on_realm;
+    RealmCategory category;
+    u8 realm_id;
+} {
+    login_versions = "5";
+}
+
+slogin CMD_REALM_LIST_Server = 0x10 {
+    u16 size = self.size;
+    u32 header_padding = 0;
+    u8 number_of_realms;
+    Realm[number_of_realms] realms;
+    u16 footer_padding = 0;
+} {
+    login_versions = "5";
 }
 
 test CMD_REALM_LIST_Server {

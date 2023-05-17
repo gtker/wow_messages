@@ -1,6 +1,6 @@
 # RealmFlag
 
-## Protocol Version 2, Protocol Version 3
+## Protocol Version 2, Protocol Version 3, Protocol Version 5
 
 ### Wowm Representation
 
@@ -29,6 +29,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `FORCE_RED_FULL` | 128 (0x80) |  |  |
 
 Used in:
+* [Realm](realm.md)
 * [Realm](realm.md)
 # RealmFlag
 

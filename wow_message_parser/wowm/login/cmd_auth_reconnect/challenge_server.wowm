@@ -7,7 +7,7 @@ slogin CMD_AUTH_RECONNECT_CHALLENGE_Server = 0x02 {
     }
 } {
     description = "Reply to [CMD_AUTH_RECONNECT_CHALLENGE_Client].";
-    login_versions = "2";
+    login_versions = "2 5";
 }
 
 test CMD_AUTH_RECONNECT_CHALLENGE_Server {

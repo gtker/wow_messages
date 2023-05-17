@@ -1,6 +1,6 @@
 # RealmCategory
 
-## Protocol Version 2, Protocol Version 3, Protocol Version 8
+## Protocol Version 2, Protocol Version 3, Protocol Version 5, Protocol Version 8
 
 ### Wowm Representation
 
@@ -27,6 +27,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `FIVE` | 5 (0x05) |  |  |
 
 Used in:
+* [Realm](realm.md)
 * [Realm](realm.md)
 * [Realm](realm.md)
 

@@ -1,6 +1,6 @@
 # SecurityFlag
 
-## Protocol Version 3
+## Protocol Version 3, Protocol Version 5
 
 ### Wowm Representation
 

@@ -37,6 +37,18 @@ slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
     LoginResult result;
     if (result == SUCCESS) {
         u8[20] server_proof;
+        u32 hardware_survey_id;
+        u16 unknown;
+    }
+} {
+    description = "Reply to [CMD_AUTH_LOGON_PROOF_Client].";
+    login_versions = "5";
+}
+
+slogin CMD_AUTH_LOGON_PROOF_Server = 0x01 {
+    LoginResult result;
+    if (result == SUCCESS) {
+        u8[20] server_proof;
         AccountFlag account_flag;
         u32 hardware_survey_id;
         u16 unknown_flags;
