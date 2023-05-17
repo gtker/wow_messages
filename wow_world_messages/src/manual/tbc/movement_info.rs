@@ -7,7 +7,7 @@ use crate::tbc::{
 
 impl MovementInfo {
     #[allow(clippy::too_many_arguments)]
-    pub fn into_movement_block_update_flag_living(
+    pub fn to_movement_block_update_flag_living(
         &self,
         backwards_flight_speed: f32,
         backwards_running_speed: f32,
