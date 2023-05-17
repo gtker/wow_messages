@@ -51,14 +51,13 @@
     clippy::upper_case_acronyms,
     non_camel_case_types
 )]
-#![allow(non_snake_case, clippy::missing_errors_doc)]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
 pub(crate) mod errors;
 #[cfg(feature = "extended")]
 pub(crate) mod extended;
-#[allow(unused)]
+#[allow(unused, non_snake_case, clippy::missing_errors_doc)]
 pub(crate) mod inner;
 pub(crate) mod manual;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
