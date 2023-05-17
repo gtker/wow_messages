@@ -104,8 +104,7 @@
     clippy::missing_panics_doc,
     clippy::style,
     clippy::missing_const_for_fn,
-    clippy::doc_markdown,
-    clippy::unseparated_literal_suffix
+    clippy::doc_markdown
 )]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
