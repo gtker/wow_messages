@@ -566,8 +566,8 @@ fn print_value(
                         s.wln(format!(
                             ".set_{ty}_{field}(Guid::new({value}))",
                             value = f.value(),
-                            ty = f.ty(),
-                            field = f.name()
+                            ty = f.ty().to_string().to_lowercase(),
+                            field = f.name().to_lowercase(),
                         ));
                     }
                     UfType::Bytes => {
@@ -575,8 +575,8 @@ fn print_value(
 
                         s.wln(format!(
                             ".set_{ty}_{field}({a}, {b}, {c}, {d})",
-                            ty = field.object_ty(),
-                            field = f.name(),
+                            ty = field.object_ty().to_string().to_lowercase(),
+                            field = f.name().to_lowercase(),
                             a = a,
                             b = b,
                             c = c,
@@ -600,8 +600,8 @@ fn print_value(
 
                         s.wln(format!(
                             ".set_{ty}_{field}({a}.unwrap(), {b}.unwrap(), {c}.unwrap(), {d}.unwrap())",
-                            ty = field.object_ty(),
-                            field = f.name(),
+                            ty = field.object_ty().to_string().to_lowercase(),
+                            field = f.name().to_lowercase(),
                             a = a,
                             b = b,
                             c = c,
@@ -611,8 +611,8 @@ fn print_value(
                     _ => s.wln(format!(
                         ".set_{ty}_{field}({value})",
                         value = f.value(),
-                        ty = f.ty(),
-                        field = f.name()
+                        ty = f.ty().to_string().to_lowercase(),
+                        field = f.name().to_lowercase(),
                     )),
                 }
             }

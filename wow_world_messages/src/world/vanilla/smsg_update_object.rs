@@ -111,9 +111,9 @@ mod test {
                     update_type: Object_UpdateType::CreateObject2 {
                         guid3: Guid::new(0x4),
                         mask2: UpdateMask::Player(UpdatePlayer::builder()
-                            .set_object_GUID(Guid::new(4))
-                            .set_unit_HEALTH(100)
-                            .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
+                            .set_object_guid(Guid::new(4))
+                            .set_unit_health(100)
+                            .set_unit_bytes_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
                             .finalize()
                         ),
                         movement2: MovementBlock {
@@ -231,15 +231,15 @@ mod test {
                     update_type: Object_UpdateType::CreateObject2 {
                         guid3: Guid::new(0x4),
                         mask2: UpdateMask::Player(UpdatePlayer::builder()
-                            .set_object_GUID(Guid::new(4))
-                            .set_object_SCALE_X(1.0)
-                            .set_unit_HEALTH(100)
-                            .set_unit_MAXHEALTH(100)
-                            .set_unit_LEVEL(1)
-                            .set_unit_FACTIONTEMPLATE(1)
-                            .set_unit_BYTES_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
-                            .set_unit_DISPLAYID(50)
-                            .set_unit_NATIVEDISPLAYID(50)
+                            .set_object_guid(Guid::new(4))
+                            .set_object_scale_x(1.0)
+                            .set_unit_health(100)
+                            .set_unit_maxhealth(100)
+                            .set_unit_level(1)
+                            .set_unit_factiontemplate(1)
+                            .set_unit_bytes_0(1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap(), 1.try_into().unwrap())
+                            .set_unit_displayid(50)
+                            .set_unit_nativedisplayid(50)
                             .finalize()
                         ),
                         movement2: MovementBlock {

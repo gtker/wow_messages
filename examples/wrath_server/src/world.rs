@@ -164,15 +164,15 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
     .unwrap();
 
     let update_mask = UpdatePlayer::builder()
-        .set_object_GUID(Guid::new(4))
-        .set_unit_BYTES_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
-        .set_object_SCALE_X(1.0)
-        .set_unit_HEALTH(100)
-        .set_unit_MAXHEALTH(100)
-        .set_unit_LEVEL(1)
-        .set_unit_FACTIONTEMPLATE(1)
-        .set_unit_DISPLAYID(50)
-        .set_unit_NATIVEDISPLAYID(50)
+        .set_object_guid(Guid::new(4))
+        .set_unit_bytes_0(Race::Human, Class::Warrior, Gender::Female, Power::Rage)
+        .set_object_scale_x(1.0)
+        .set_unit_health(100)
+        .set_unit_maxhealth(100)
+        .set_unit_level(1)
+        .set_unit_factiontemplate(1)
+        .set_unit_displayid(50)
+        .set_unit_nativedisplayid(50)
         .finalize();
 
     let update_flag = MovementBlock_UpdateFlag::empty()

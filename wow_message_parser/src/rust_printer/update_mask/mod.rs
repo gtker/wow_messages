@@ -280,16 +280,16 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
         UfType::Custom { name, .. } => {
             s.open_curly(format!(
                 "pub fn {}_{}(&self, index: {name}Index) -> Option<{}>",
-                m.object_ty,
-                m.name,
+                m.object_ty.to_string().to_lowercase(),
+                m.name.to_lowercase(),
                 m.ty.ty_str(),
             ));
         }
         _ => {
             s.open_curly(format!(
                 "pub fn {}_{}(&self) -> Option<{}>",
-                m.object_ty,
-                m.name,
+                m.object_ty.to_string().to_lowercase(),
+                m.name.to_lowercase(),
                 m.ty.ty_str(),
             ));
         }
@@ -373,8 +373,8 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
 fn print_setter(s: &mut Writer, m: &MemberType) {
     s.open_curly(format!(
         "pub fn set_{}_{}(&mut self, {})",
-        m.object_ty,
-        m.name,
+        m.object_ty.to_string().to_lowercase(),
+        m.name.to_lowercase(),
         m.ty.parameter_str(),
     ));
 
@@ -435,8 +435,8 @@ fn print_setter_internals(s: &mut Writer, m: &MemberType) {
 fn print_builder_setter(s: &mut Writer, m: &MemberType) {
     s.open_curly(format!(
         "pub fn set_{}_{}(mut self, {}) -> Self",
-        m.object_ty,
-        m.name,
+        m.object_ty.to_string().to_lowercase(),
+        m.name.to_lowercase(),
         m.ty.parameter_str(),
     ));
 

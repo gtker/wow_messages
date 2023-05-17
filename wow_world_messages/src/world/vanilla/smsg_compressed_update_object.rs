@@ -271,14 +271,14 @@ mod test {
                     update_type: Object_UpdateType::CreateObject {
                         guid3: Guid::new(0x1FC0000000005148),
                         mask2: UpdateMask::GameObject(UpdateGameObject::builder()
-                            .set_object_GUID(Guid::new(2287828610704232776))
-                            .set_object_ENTRY(20808)
-                            .set_object_SCALE_X(1.0)
-                            .set_gameobject_DISPLAYID(3015)
-                            .set_gameobject_FLAGS(40)
-                            .set_gameobject_STATE(1)
-                            .set_gameobject_TYPE_ID(15)
-                            .set_gameobject_ANIMPROGRESS(100)
+                            .set_object_guid(Guid::new(2287828610704232776))
+                            .set_object_entry(20808)
+                            .set_object_scale_x(1.0)
+                            .set_gameobject_displayid(3015)
+                            .set_gameobject_flags(40)
+                            .set_gameobject_state(1)
+                            .set_gameobject_type_id(15)
+                            .set_gameobject_animprogress(100)
                             .finalize()
                         ),
                         movement2: MovementBlock {
@@ -306,14 +306,14 @@ mod test {
                     update_type: Object_UpdateType::CreateObject {
                         guid3: Guid::new(0x1FC000000002B074),
                         mask2: UpdateMask::GameObject(UpdateGameObject::builder()
-                            .set_object_GUID(Guid::new(2287828610704388212))
-                            .set_object_ENTRY(176244)
-                            .set_object_SCALE_X(1.0)
-                            .set_gameobject_DISPLAYID(3015)
-                            .set_gameobject_FLAGS(40)
-                            .set_gameobject_STATE(1)
-                            .set_gameobject_TYPE_ID(15)
-                            .set_gameobject_ANIMPROGRESS(100)
+                            .set_object_guid(Guid::new(2287828610704388212))
+                            .set_object_entry(176244)
+                            .set_object_scale_x(1.0)
+                            .set_gameobject_displayid(3015)
+                            .set_gameobject_flags(40)
+                            .set_gameobject_state(1)
+                            .set_gameobject_type_id(15)
+                            .set_gameobject_animprogress(100)
                             .finalize()
                         ),
                         movement2: MovementBlock {
@@ -341,14 +341,14 @@ mod test {
                     update_type: Object_UpdateType::CreateObject {
                         guid3: Guid::new(0x1FC0000000028407),
                         mask2: UpdateMask::GameObject(UpdateGameObject::builder()
-                            .set_object_GUID(Guid::new(2287828610704376839))
-                            .set_object_ENTRY(164871)
-                            .set_object_SCALE_X(1.0)
-                            .set_gameobject_DISPLAYID(3031)
-                            .set_gameobject_FLAGS(40)
-                            .set_gameobject_STATE(1)
-                            .set_gameobject_TYPE_ID(15)
-                            .set_gameobject_ANIMPROGRESS(100)
+                            .set_object_guid(Guid::new(2287828610704376839))
+                            .set_object_entry(164871)
+                            .set_object_scale_x(1.0)
+                            .set_gameobject_displayid(3031)
+                            .set_gameobject_flags(40)
+                            .set_gameobject_state(1)
+                            .set_gameobject_type_id(15)
+                            .set_gameobject_animprogress(100)
                             .finalize()
                         ),
                         movement2: MovementBlock {
@@ -376,14 +376,14 @@ mod test {
                     update_type: Object_UpdateType::CreateObject {
                         guid3: Guid::new(0x1FC000000002B451),
                         mask2: UpdateMask::GameObject(UpdateGameObject::builder()
-                            .set_object_GUID(Guid::new(2287828610704389201))
-                            .set_object_ENTRY(177233)
-                            .set_object_SCALE_X(1.0)
-                            .set_gameobject_DISPLAYID(3015)
-                            .set_gameobject_FLAGS(40)
-                            .set_gameobject_STATE(1)
-                            .set_gameobject_TYPE_ID(15)
-                            .set_gameobject_ANIMPROGRESS(100)
+                            .set_object_guid(Guid::new(2287828610704389201))
+                            .set_object_entry(177233)
+                            .set_object_scale_x(1.0)
+                            .set_gameobject_displayid(3015)
+                            .set_gameobject_flags(40)
+                            .set_gameobject_state(1)
+                            .set_gameobject_type_id(15)
+                            .set_gameobject_animprogress(100)
                             .finalize()
                         ),
                         movement2: MovementBlock {
