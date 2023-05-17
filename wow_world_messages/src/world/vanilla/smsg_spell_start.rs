@@ -51,7 +51,7 @@ impl crate::Message for SMSG_SPELL_START {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // flags: CastFlags
-        w.write_all(&u16::from(self.flags.as_int()).to_le_bytes())?;
+        w.write_all(&(self.flags.as_int().to_le_bytes()))?;
 
         // timer: u32
         w.write_all(&self.timer.to_le_bytes())?;
@@ -72,7 +72,7 @@ impl crate::Message for SMSG_SPELL_START {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(16..=354).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0131, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0131, size: body_size });
         }
 
         // cast_item: PackedGuid

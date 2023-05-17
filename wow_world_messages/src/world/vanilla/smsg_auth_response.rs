@@ -35,7 +35,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // result: WorldResult
-        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
 
         match &self.result {
             SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
@@ -67,7 +67,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=10).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01EE, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01EE, size: body_size });
         }
 
         // result: WorldResult

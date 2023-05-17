@@ -30,7 +30,7 @@ impl crate::Message for SMSG_ARENA_TEAM_COMMAND_RESULT {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // command: ArenaTeamCommand
-        w.write_all(&u32::from(self.command.as_int()).to_le_bytes())?;
+        w.write_all(&(self.command.as_int().to_le_bytes()))?;
 
         // team: CString
         // TODO: Guard against strings that are already null-terminated
@@ -47,13 +47,13 @@ impl crate::Message for SMSG_ARENA_TEAM_COMMAND_RESULT {
         w.write_all(&[0])?;
 
         // error: ArenaTeamCommandError
-        w.write_all(&u32::from(self.error.as_int()).to_le_bytes())?;
+        w.write_all(&(self.error.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(10..=520).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0349, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0349, size: body_size });
         }
 
         // command: ArenaTeamCommand

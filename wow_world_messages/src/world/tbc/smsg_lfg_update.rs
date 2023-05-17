@@ -38,7 +38,7 @@ impl crate::Message for SMSG_LFG_UPDATE {
         w.write_all(u8::from(self.is_looking_for_group).to_le_bytes().as_slice())?;
 
         // looking_for_more: LfgUpdateLookingForMore
-        w.write_all(&u8::from(self.looking_for_more.as_int()).to_le_bytes())?;
+        w.write_all(&(self.looking_for_more.as_int().to_le_bytes()))?;
 
         match &self.looking_for_more {
             SMSG_LFG_UPDATE_LfgUpdateLookingForMore::LookingForMore {
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_LFG_UPDATE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(3..=7).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036C, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036C, size: body_size });
         }
 
         // queued: Bool

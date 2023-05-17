@@ -27,7 +27,7 @@ impl crate::Message for SMSG_DUEL_WINNER {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // reason: DuelWinnerReason
-        w.write_all(&u8::from(self.reason.as_int()).to_le_bytes())?;
+        w.write_all(&(self.reason.as_int().to_le_bytes()))?;
 
         // opponent_name: CString
         // TODO: Guard against strings that are already null-terminated
@@ -47,7 +47,7 @@ impl crate::Message for SMSG_DUEL_WINNER {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(3..=513).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x016B, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x016B, size: body_size });
         }
 
         // reason: DuelWinnerReason

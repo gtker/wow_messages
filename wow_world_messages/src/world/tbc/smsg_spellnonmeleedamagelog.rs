@@ -66,7 +66,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         w.write_all(&self.damage.to_le_bytes())?;
 
         // school: SpellSchool
-        w.write_all(&u8::from(self.school.as_int()).to_le_bytes())?;
+        w.write_all(&(self.school.as_int().to_le_bytes()))?;
 
         // absorbed_damage: u32
         w.write_all(&self.absorbed_damage.to_le_bytes())?;
@@ -84,7 +84,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         w.write_all(&self.blocked.to_le_bytes())?;
 
         // hit_info: HitInfo
-        w.write_all(&u32::from(self.hit_info.as_int()).to_le_bytes())?;
+        w.write_all(&(self.hit_info.as_int().to_le_bytes()))?;
 
         // extend_flag: u8
         w.write_all(&self.extend_flag.to_le_bytes())?;
@@ -93,7 +93,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(32..=46).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0250, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0250, size: body_size });
         }
 
         // target: PackedGuid

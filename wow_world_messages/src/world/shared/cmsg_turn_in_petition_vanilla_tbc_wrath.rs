@@ -29,7 +29,7 @@ impl crate::Message for CMSG_TURN_IN_PETITION {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C4, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C4, size: body_size });
         }
 
         // petition: Guid

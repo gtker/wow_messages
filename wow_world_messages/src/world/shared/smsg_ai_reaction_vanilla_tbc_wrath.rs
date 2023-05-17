@@ -29,13 +29,13 @@ impl crate::Message for SMSG_AI_REACTION {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // reaction: AiReaction
-        w.write_all(&u32::from(self.reaction.as_int()).to_le_bytes())?;
+        w.write_all(&(self.reaction.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x013C, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x013C, size: body_size });
         }
 
         // guid: Guid

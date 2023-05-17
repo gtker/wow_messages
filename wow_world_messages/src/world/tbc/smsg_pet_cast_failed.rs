@@ -49,7 +49,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
         w.write_all(&self.id.to_le_bytes())?;
 
         // result: SpellCastResult
-        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
 
         // multiple_casts: Bool
         w.write_all(u8::from(self.multiple_casts).to_le_bytes().as_slice())?;
@@ -74,7 +74,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
                 area,
             } => {
                 // area: Area
-                w.write_all(&u32::from(area.as_int()).to_le_bytes())?;
+                w.write_all(&(area.as_int().to_le_bytes()))?;
 
             }
             SMSG_PET_CAST_FAILED_SpellCastResult::RequiresSpellFocus {
@@ -109,7 +109,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=18).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0138, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0138, size: body_size });
         }
 
         // id: u32

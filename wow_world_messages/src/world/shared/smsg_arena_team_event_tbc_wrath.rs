@@ -50,7 +50,7 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // event: ArenaTeamEvent
-        w.write_all(&u8::from(self.event.as_int()).to_le_bytes())?;
+        w.write_all(&(self.event.as_int().to_le_bytes()))?;
 
         match &self.event {
             SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Join {
@@ -190,7 +190,7 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=66306).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0357, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0357, size: body_size });
         }
 
         // event: ArenaTeamEvent

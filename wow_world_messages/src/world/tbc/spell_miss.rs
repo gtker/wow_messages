@@ -25,7 +25,7 @@ impl SpellMiss {
         w.write_all(&self.target.guid().to_le_bytes())?;
 
         // miss_info: SpellMissInfo
-        w.write_all(&u32::from(self.miss_info.as_int()).to_le_bytes())?;
+        w.write_all(&(self.miss_info.as_int().to_le_bytes()))?;
 
         match &self.miss_info {
             SpellMiss_SpellMissInfo::Reflect {

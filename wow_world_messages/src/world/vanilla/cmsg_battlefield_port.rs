@@ -27,16 +27,16 @@ impl crate::Message for CMSG_BATTLEFIELD_PORT {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // map: Map
-        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
+        w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // action: BattlefieldPortAction
-        w.write_all(&u8::from(self.action.as_int()).to_le_bytes())?;
+        w.write_all(&(self.action.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D5, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D5, size: body_size });
         }
 
         // map: Map

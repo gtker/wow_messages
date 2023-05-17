@@ -45,7 +45,7 @@ impl crate::Message for MSG_GUILD_BANK_LOG_QUERY_Server {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=4358).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03EE, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03EE, size: body_size });
         }
 
         // unix_time: u32

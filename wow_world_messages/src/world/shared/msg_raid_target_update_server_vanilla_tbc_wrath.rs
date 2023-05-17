@@ -30,7 +30,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // update_type: RaidTargetUpdateType
-        w.write_all(&u8::from(self.update_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.update_type.as_int().to_le_bytes()))?;
 
         match &self.update_type {
             MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Partial {
@@ -55,7 +55,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=73).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0321, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0321, size: body_size });
         }
 
         // update_type: RaidTargetUpdateType

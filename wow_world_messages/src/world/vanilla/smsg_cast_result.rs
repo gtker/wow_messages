@@ -44,14 +44,14 @@ impl crate::Message for SMSG_CAST_RESULT {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // result: SimpleSpellCastResult
-        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
 
         match &self.result {
             SMSG_CAST_RESULT_SimpleSpellCastResult::Success {
                 reason,
             } => {
                 // reason: CastFailureReason
-                w.write_all(&u8::from(reason.as_int()).to_le_bytes())?;
+                w.write_all(&(reason.as_int().to_le_bytes()))?;
 
                 match &reason {
                     SMSG_CAST_RESULT_CastFailureReason::EquippedItemClass {
@@ -73,7 +73,7 @@ impl crate::Message for SMSG_CAST_RESULT {
                         area,
                     } => {
                         // area: Area
-                        w.write_all(&u32::from(area.as_int()).to_le_bytes())?;
+                        w.write_all(&(area.as_int().to_le_bytes()))?;
 
                     }
                     SMSG_CAST_RESULT_CastFailureReason::RequiresSpellFocus {
@@ -94,7 +94,7 @@ impl crate::Message for SMSG_CAST_RESULT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=18).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0130, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0130, size: body_size });
         }
 
         // spell: u32

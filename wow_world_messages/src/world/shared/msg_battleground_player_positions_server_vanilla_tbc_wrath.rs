@@ -46,7 +46,7 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E9, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E9, size: body_size });
         }
 
         // amount_of_teammates: u32

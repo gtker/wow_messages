@@ -22,7 +22,7 @@ impl crate::Message for CMSG_CLEAR_LOOKING_FOR_MORE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0364, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0364, size: body_size });
         }
 
         Ok(Self {

@@ -31,7 +31,7 @@ impl crate::Message for SMSG_ADDON_INFO {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size > 65535 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EF, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EF, size: body_size });
         }
 
         // addons: Addon[-]

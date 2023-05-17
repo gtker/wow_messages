@@ -33,7 +33,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // result: InventoryResult
-        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
 
         match &self.result {
             SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
@@ -1879,7 +1879,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=22).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0112, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0112, size: body_size });
         }
 
         let mut result_if_item1 = Default::default();

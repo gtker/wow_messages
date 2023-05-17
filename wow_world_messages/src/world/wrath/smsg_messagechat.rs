@@ -73,7 +73,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // chat_type: ChatType
-        w.write_all(&u8::from(self.chat_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.chat_type.as_int().to_le_bytes()))?;
 
         // language: Language
         w.write_all(&u32::from(self.language.as_int()).to_le_bytes())?;
@@ -531,7 +531,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
         w.write_all(&[0])?;
 
         // tag: PlayerChatTag
-        w.write_all(&u8::from(self.tag.as_int()).to_le_bytes())?;
+        w.write_all(&(self.tag.as_int().to_le_bytes()))?;
 
         match &self.chat_type {
             SMSG_MESSAGECHAT_ChatType::System {
@@ -766,7 +766,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(31..=24038).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0096, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0096, size: body_size });
         }
 
         let mut chat_type_if_sender1 = Default::default();

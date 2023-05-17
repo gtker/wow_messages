@@ -30,10 +30,10 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // map: Map
-        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
+        w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // area: Area
-        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
+        w.write_all(&(self.area.as_int().to_le_bytes()))?;
 
         // amount_of_states: u16
         w.write_all(&(self.states.len() as u16).to_le_bytes())?;
@@ -47,7 +47,7 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(10..=524298).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C2, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C2, size: body_size });
         }
 
         // map: Map

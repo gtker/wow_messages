@@ -41,7 +41,7 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
         w.write_all((self.time.as_millis() as u32).to_le_bytes().as_slice())?;
 
         // map: Map
-        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
+        w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // unknown: u64
         w.write_all(&self.unknown.to_le_bytes())?;
@@ -56,7 +56,7 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 32 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0008, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0008, size: body_size });
         }
 
         // time: Milliseconds

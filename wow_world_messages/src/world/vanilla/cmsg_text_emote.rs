@@ -30,10 +30,10 @@ impl crate::Message for CMSG_TEXT_EMOTE {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // text_emote: TextEmote
-        w.write_all(&u32::from(self.text_emote.as_int()).to_le_bytes())?;
+        w.write_all(&(self.text_emote.as_int().to_le_bytes()))?;
 
         // emote: Emote
-        w.write_all(&u32::from(self.emote.as_int()).to_le_bytes())?;
+        w.write_all(&(self.emote.as_int().to_le_bytes()))?;
 
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
@@ -42,7 +42,7 @@ impl crate::Message for CMSG_TEXT_EMOTE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0104, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0104, size: body_size });
         }
 
         // text_emote: TextEmote

@@ -34,7 +34,7 @@ impl crate::Message for SMSG_REALM_SPLIT {
         w.write_all(&self.realm_id.to_le_bytes())?;
 
         // state: RealmSplitState
-        w.write_all(&u32::from(self.state.as_int()).to_le_bytes())?;
+        w.write_all(&(self.state.as_int().to_le_bytes()))?;
 
         // split_date: CString
         // TODO: Guard against strings that are already null-terminated
@@ -47,7 +47,7 @@ impl crate::Message for SMSG_REALM_SPLIT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=264).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x038B, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x038B, size: body_size });
         }
 
         // realm_id: u32

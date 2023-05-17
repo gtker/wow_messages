@@ -23,13 +23,13 @@ impl crate::Message for SMSG_SET_FACTION_VISIBLE {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // faction: Faction
-        w.write_all(&u16::from(self.faction.as_int()).to_le_bytes())?;
+        w.write_all(&(self.faction.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 2 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0123, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0123, size: body_size });
         }
 
         // faction: Faction

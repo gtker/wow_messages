@@ -126,10 +126,10 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         w.write_all(&self.allowed_guild_id.to_le_bytes())?;
 
         // allowed_class: AllowedClass
-        w.write_all(&u32::from(self.allowed_class.as_int()).to_le_bytes())?;
+        w.write_all(&(self.allowed_class.as_int().to_le_bytes()))?;
 
         // allowed_race: AllowedRace
-        w.write_all(&u32::from(self.allowed_race.as_int()).to_le_bytes())?;
+        w.write_all(&(self.allowed_race.as_int().to_le_bytes()))?;
 
         // allowed_genders: u16
         w.write_all(&self.allowed_genders.to_le_bytes())?;
@@ -150,7 +150,7 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(64..=574).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C7, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C7, size: body_size });
         }
 
         // petition_id: u32

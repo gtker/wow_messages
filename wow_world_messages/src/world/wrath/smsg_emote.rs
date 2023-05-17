@@ -26,7 +26,7 @@ impl crate::Message for SMSG_EMOTE {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // emote: Emote
-        w.write_all(&u32::from(self.emote.as_int()).to_le_bytes())?;
+        w.write_all(&(self.emote.as_int().to_le_bytes()))?;
 
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
@@ -35,7 +35,7 @@ impl crate::Message for SMSG_EMOTE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0103, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0103, size: body_size });
         }
 
         // emote: Emote

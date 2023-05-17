@@ -38,7 +38,7 @@ impl crate::Message for MSG_GUILD_PERMISSIONS_Server {
         w.write_all(&self.rights.to_le_bytes())?;
 
         // gold_limit_per_day: Gold
-        w.write_all(u32::from(self.gold_limit_per_day.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.gold_limit_per_day.as_int()).to_le_bytes().as_slice())?;
 
         // purchased_bank_tabs: u8
         w.write_all(&self.purchased_bank_tabs.to_le_bytes())?;
@@ -52,7 +52,7 @@ impl crate::Message for MSG_GUILD_PERMISSIONS_Server {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 61 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03FC, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03FC, size: body_size });
         }
 
         // id: u32

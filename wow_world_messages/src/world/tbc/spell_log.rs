@@ -78,7 +78,7 @@ impl SpellLog {
 impl SpellLog {
     pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // effect: SpellEffect
-        w.write_all(&u32::from(self.effect.as_int()).to_le_bytes())?;
+        w.write_all(&(self.effect.as_int().to_le_bytes()))?;
 
         // amount_of_logs: u32
         w.write_all(&Self::AMOUNT_OF_LOGS_VALUE.to_le_bytes())?;

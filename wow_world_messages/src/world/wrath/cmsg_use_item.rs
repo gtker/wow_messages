@@ -75,7 +75,7 @@ impl crate::Message for CMSG_USE_ITEM {
         w.write_all(&self.glyph_index.to_le_bytes())?;
 
         // cast_flags: ClientCastFlags
-        w.write_all(&u8::from(self.cast_flags.as_int()).to_le_bytes())?;
+        w.write_all(&(self.cast_flags.as_int().to_le_bytes()))?;
 
         match &self.cast_flags {
             CMSG_USE_ITEM_ClientCastFlags::Extra {
@@ -90,7 +90,7 @@ impl crate::Message for CMSG_USE_ITEM {
                 w.write_all(&speed.to_le_bytes())?;
 
                 // movement_data: ClientMovementData
-                w.write_all(&u8::from(movement_data.as_int()).to_le_bytes())?;
+                w.write_all(&(movement_data.as_int().to_le_bytes()))?;
 
                 match &movement_data {
                     CMSG_USE_ITEM_ClientMovementData::Present {
@@ -122,7 +122,7 @@ impl crate::Message for CMSG_USE_ITEM {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(25..=433).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00AB, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00AB, size: body_size });
         }
 
         // bag_index: u8

@@ -54,7 +54,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
         w.write_all(&self.dungeon_id.to_le_bytes())?;
 
         // update_type: LfgListUpdateType
-        w.write_all(&u8::from(self.update_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.update_type.as_int().to_le_bytes()))?;
 
         match &self.update_type {
             SMSG_UPDATE_LFG_LIST_LfgListUpdateType::Partial {
@@ -98,7 +98,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(25..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0360, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0360, size: body_size });
         }
 
         // lfg_type: LfgType

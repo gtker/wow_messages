@@ -37,7 +37,7 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // map: Map
-        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
+        w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // instance_id: u32
         w.write_all(&self.instance_id.to_le_bytes())?;
@@ -49,7 +49,7 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 17 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EE, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EE, size: body_size });
         }
 
         // guid: Guid

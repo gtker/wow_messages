@@ -29,7 +29,7 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 480 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0129, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0129, size: body_size });
         }
 
         // data: u32[120]

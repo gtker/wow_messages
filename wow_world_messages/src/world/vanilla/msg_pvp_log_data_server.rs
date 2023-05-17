@@ -31,14 +31,14 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // status: BattlegroundEndStatus
-        w.write_all(&u8::from(self.status.as_int()).to_le_bytes())?;
+        w.write_all(&(self.status.as_int().to_le_bytes()))?;
 
         match &self.status {
             MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::Ended {
                 winner,
             } => {
                 // winner: BattlegroundWinner
-                w.write_all(&u8::from(winner.as_int()).to_le_bytes())?;
+                w.write_all(&(winner.as_int().to_le_bytes()))?;
 
             }
             _ => {}
@@ -56,7 +56,7 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E0, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E0, size: body_size });
         }
 
         // status: BattlegroundEndStatus

@@ -59,7 +59,7 @@ impl crate::Message for SMSG_LFG_PLAYER_REWARD {
         w.write_all(&self.unknown1.to_le_bytes())?;
 
         // money_reward: Gold
-        w.write_all(u32::from(self.money_reward.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.money_reward.as_int()).to_le_bytes().as_slice())?;
 
         // experience_reward: u32
         w.write_all(&self.experience_reward.to_le_bytes())?;
@@ -82,7 +82,7 @@ impl crate::Message for SMSG_LFG_PLAYER_REWARD {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(30..=3102).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FF, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FF, size: body_size });
         }
 
         // random_dungeon_entry: u32

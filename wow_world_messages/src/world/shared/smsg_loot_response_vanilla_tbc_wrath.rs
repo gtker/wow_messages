@@ -40,21 +40,21 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // loot_method: LootMethod
-        w.write_all(&u8::from(self.loot_method.as_int()).to_le_bytes())?;
+        w.write_all(&(self.loot_method.as_int().to_le_bytes()))?;
 
         match &self.loot_method {
             SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
                 loot_error,
             } => {
                 // loot_error: LootMethodError
-                w.write_all(&u8::from(loot_error.as_int()).to_le_bytes())?;
+                w.write_all(&(loot_error.as_int().to_le_bytes()))?;
 
             }
             _ => {}
         }
 
         // gold: Gold
-        w.write_all(u32::from(self.gold.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.gold.as_int()).to_le_bytes().as_slice())?;
 
         // amount_of_items: u8
         w.write_all(&(self.items.len() as u8).to_le_bytes())?;
@@ -68,7 +68,7 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=1551).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0160, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0160, size: body_size });
         }
 
         // guid: Guid

@@ -75,7 +75,7 @@ impl Mail {
         w.write_all(&self.message_id.to_le_bytes())?;
 
         // message_type: MailType
-        w.write_all(&u8::from(self.message_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.message_type.as_int().to_le_bytes()))?;
 
         match &self.message_type {
             Mail_MailType::Normal {
@@ -150,7 +150,7 @@ impl Mail {
         w.write_all(&self.durability.to_le_bytes())?;
 
         // money: Gold
-        w.write_all(u32::from(self.money.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.money.as_int()).to_le_bytes().as_slice())?;
 
         // cash_on_delivery_amount: u32
         w.write_all(&self.cash_on_delivery_amount.to_le_bytes())?;

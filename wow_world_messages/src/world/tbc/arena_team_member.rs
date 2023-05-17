@@ -52,7 +52,7 @@ impl ArenaTeamMember {
         w.write_all(&self.level.as_int().to_le_bytes())?;
 
         // class: Class
-        w.write_all(&u8::from(self.class.as_int()).to_le_bytes())?;
+        w.write_all(&(self.class.as_int().to_le_bytes()))?;
 
         // games_played_this_week: u32
         w.write_all(&self.games_played_this_week.to_le_bytes())?;

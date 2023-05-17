@@ -31,7 +31,7 @@ impl crate::Message for CMSG_CLEAR_CHANNEL_WATCH {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=256).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F2, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F2, size: body_size });
         }
 
         // channel: CString

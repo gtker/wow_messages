@@ -54,10 +54,10 @@ impl crate::Message for SMSG_MIRRORIMAGE_DATA {
         w.write_all(&self.display_id.to_le_bytes())?;
 
         // race: Race
-        w.write_all(&u8::from(self.race.as_int()).to_le_bytes())?;
+        w.write_all(&(self.race.as_int().to_le_bytes()))?;
 
         // gender: Gender
-        w.write_all(&u8::from(self.gender.as_int()).to_le_bytes())?;
+        w.write_all(&(self.gender.as_int().to_le_bytes()))?;
 
         // skin_color: u8
         w.write_all(&self.skin_color.to_le_bytes())?;
@@ -86,7 +86,7 @@ impl crate::Message for SMSG_MIRRORIMAGE_DATA {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 67 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0401, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0401, size: body_size });
         }
 
         // guid: Guid

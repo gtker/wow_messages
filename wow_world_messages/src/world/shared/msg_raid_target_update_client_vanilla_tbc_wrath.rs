@@ -27,7 +27,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // target_index: RaidTargetIndex
-        w.write_all(&u8::from(self.target_index.as_int()).to_le_bytes())?;
+        w.write_all(&(self.target_index.as_int().to_le_bytes()))?;
 
         match &self.target_index {
             MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {
@@ -100,7 +100,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=9).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0321, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0321, size: body_size });
         }
 
         // target_index: RaidTargetIndex

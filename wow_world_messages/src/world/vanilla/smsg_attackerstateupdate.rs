@@ -45,7 +45,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // hit_info: HitInfo
-        w.write_all(&u32::from(self.hit_info.as_int()).to_le_bytes())?;
+        w.write_all(&(self.hit_info.as_int().to_le_bytes()))?;
 
         // attacker: PackedGuid
         self.attacker.write_packed_guid_into_vec(&mut w)?;
@@ -80,7 +80,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(29..=5163).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x014A, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x014A, size: body_size });
         }
 
         // hit_info: HitInfo

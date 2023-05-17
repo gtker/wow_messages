@@ -71,7 +71,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         w.write_all(&self.spline_id.to_le_bytes())?;
 
         // move_type: MonsterMoveType
-        w.write_all(&u8::from(self.move_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.move_type.as_int().to_le_bytes()))?;
 
         match &self.move_type {
             SMSG_MONSTER_MOVE_MonsterMoveType::FacingSpot {
@@ -99,7 +99,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         }
 
         // spline_flags: SplineFlag
-        w.write_all(&u32::from(self.spline_flags.as_int()).to_le_bytes())?;
+        w.write_all(&(self.spline_flags.as_int().to_le_bytes()))?;
 
         if let Some(if_statement) = &self.spline_flags.enter_cycle {
             // animation_id: u32
@@ -129,7 +129,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(32..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00DD, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00DD, size: body_size });
         }
 
         // guid: PackedGuid

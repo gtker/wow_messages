@@ -24,7 +24,7 @@ impl GuildRights {
         w.write_all(&self.rights.to_le_bytes())?;
 
         // money_per_day: Gold
-        w.write_all(u32::from(self.money_per_day.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.money_per_day.as_int()).to_le_bytes().as_slice())?;
 
         // bank_tab_rights: GuildBankRights[6]
         for i in self.bank_tab_rights.iter() {

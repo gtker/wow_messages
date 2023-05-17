@@ -47,7 +47,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F6, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F6, size: body_size });
         }
 
         let decompressed_size = crate::util::read_u32_le(r)?;;

@@ -31,7 +31,7 @@ impl crate::Message for SMSG_CHAT_PLAYER_NOT_FOUND {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=256).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A9, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A9, size: body_size });
         }
 
         // name: CString

@@ -44,7 +44,7 @@ impl ListInventoryItem {
         w.write_all(&self.max_items.to_le_bytes())?;
 
         // price: Gold
-        w.write_all(u32::from(self.price.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.price.as_int()).to_le_bytes().as_slice())?;
 
         // max_durability: u32
         w.write_all(&self.max_durability.to_le_bytes())?;

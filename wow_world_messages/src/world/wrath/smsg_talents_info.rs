@@ -36,7 +36,7 @@ impl crate::Message for SMSG_TALENTS_INFO {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // talent_type: TalentInfoType
-        w.write_all(&u8::from(self.talent_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.talent_type.as_int().to_le_bytes()))?;
 
         // points_left: u32
         w.write_all(&self.points_left.to_le_bytes())?;
@@ -76,7 +76,7 @@ impl crate::Message for SMSG_TALENTS_INFO {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=459271).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C0, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C0, size: body_size });
         }
 
         // talent_type: TalentInfoType

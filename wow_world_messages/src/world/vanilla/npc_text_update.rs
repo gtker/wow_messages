@@ -33,7 +33,7 @@ impl NpcTextUpdate {
         }
 
         // language: Language
-        w.write_all(&u32::from(self.language.as_int()).to_le_bytes())?;
+        w.write_all(&(self.language.as_int().to_le_bytes()))?;
 
         // emotes: NpcTextUpdateEmote[3]
         for i in self.emotes.iter() {

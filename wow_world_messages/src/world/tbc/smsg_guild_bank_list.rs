@@ -47,7 +47,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
         w.write_all(&self.amount_of_allowed_item_withdraws.to_le_bytes())?;
 
         // tab_result: GuildBankTabResult
-        w.write_all(&u8::from(self.tab_result.as_int()).to_le_bytes())?;
+        w.write_all(&(self.tab_result.as_int().to_le_bytes()))?;
 
         match &self.tab_result {
             SMSG_GUILD_BANK_LIST_GuildBankTabResult::Present {
@@ -77,7 +77,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(15..=463888).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E7, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E7, size: body_size });
         }
 
         // bank_balance: u64

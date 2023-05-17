@@ -39,7 +39,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // frame: EncounterFrame
-        w.write_all(&u32::from(self.frame.as_int()).to_le_bytes())?;
+        w.write_all(&(self.frame.as_int().to_le_bytes()))?;
 
         match &self.frame {
             SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::Engage {
@@ -114,7 +114,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=14).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0214, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0214, size: body_size });
         }
 
         // frame: EncounterFrame

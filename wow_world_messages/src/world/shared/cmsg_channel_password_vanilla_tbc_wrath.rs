@@ -40,7 +40,7 @@ impl crate::Message for CMSG_CHANNEL_PASSWORD {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=512).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x009C, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x009C, size: body_size });
         }
 
         // channel_name: CString

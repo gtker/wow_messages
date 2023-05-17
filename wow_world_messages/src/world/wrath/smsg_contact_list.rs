@@ -30,7 +30,7 @@ impl crate::Message for SMSG_CONTACT_LIST {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // list_mask: RelationType
-        w.write_all(&u32::from(self.list_mask.as_int()).to_le_bytes())?;
+        w.write_all(&(self.list_mask.as_int().to_le_bytes()))?;
 
         // amount_of_relations: u32
         w.write_all(&(self.relations.len() as u32).to_le_bytes())?;
@@ -44,7 +44,7 @@ impl crate::Message for SMSG_CONTACT_LIST {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0067, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0067, size: body_size });
         }
 
         // list_mask: RelationType

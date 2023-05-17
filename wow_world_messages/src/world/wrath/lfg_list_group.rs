@@ -32,7 +32,7 @@ impl LfgListGroup {
         w.write_all(&self.group.guid().to_le_bytes())?;
 
         // flags: LfgUpdateFlag
-        w.write_all(&u32::from(self.flags.as_int()).to_le_bytes())?;
+        w.write_all(&(self.flags.as_int().to_le_bytes()))?;
 
         if let Some(if_statement) = &self.flags.comment {
             // comment: CString

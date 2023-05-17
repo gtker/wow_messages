@@ -30,13 +30,13 @@ impl crate::Message for SMSG_RAID_GROUP_ONLY {
         w.write_all(&self.homebind_timer.to_le_bytes())?;
 
         // error: RaidGroupError
-        w.write_all(&u32::from(self.error.as_int()).to_le_bytes())?;
+        w.write_all(&(self.error.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0286, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0286, size: body_size });
         }
 
         // homebind_timer: u32

@@ -89,7 +89,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         w.write_all(&u8::from(self.class.as_int()).to_le_bytes())?;
 
         // has_declined_names: DeclinedNames
-        w.write_all(&u8::from(self.has_declined_names.as_int()).to_le_bytes())?;
+        w.write_all(&(self.has_declined_names.as_int().to_le_bytes()))?;
 
         match &self.has_declined_names {
             SMSG_NAME_QUERY_RESPONSE_DeclinedNames::Yes {
@@ -109,7 +109,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=1806).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0051, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0051, size: body_size });
         }
 
         // guid: PackedGuid

@@ -33,7 +33,7 @@ pub struct FlagIfElseIf {
 impl FlagIfElseIf {
     pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // flags: UpdateFlag
-        w.write_all(&u8::from(self.flags.as_int()).to_le_bytes())?;
+        w.write_all(&(self.flags.as_int().to_le_bytes()))?;
 
         if let Some(if_statement) = &self.flags.one_if {
             match if_statement {
@@ -48,7 +48,7 @@ impl FlagIfElseIf {
                     s,
                 } => {
                     // s: SimpleFlag
-                    w.write_all(&u8::from(s.as_int()).to_le_bytes())?;
+                    w.write_all(&(s.as_int().to_le_bytes()))?;
 
                     if let Some(if_statement) = &s.one {
                         // if_one: u8

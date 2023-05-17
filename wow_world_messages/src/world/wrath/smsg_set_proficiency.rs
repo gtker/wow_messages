@@ -25,7 +25,7 @@ impl crate::Message for SMSG_SET_PROFICIENCY {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // class: ItemClass
-        w.write_all(&u8::from(self.class.as_int()).to_le_bytes())?;
+        w.write_all(&(self.class.as_int().to_le_bytes()))?;
 
         // item_sub_class_mask: u32
         w.write_all(&self.item_sub_class_mask.to_le_bytes())?;
@@ -34,7 +34,7 @@ impl crate::Message for SMSG_SET_PROFICIENCY {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0127, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0127, size: body_size });
         }
 
         // class: ItemClass

@@ -32,7 +32,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         w.write_all(&self.battlemaster.guid().to_le_bytes())?;
 
         // battleground_type: BattlegroundType
-        w.write_all(&u32::from(self.battleground_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.battleground_type.as_int().to_le_bytes()))?;
 
         // number_of_battlegrounds: u32
         w.write_all(&(self.battlegrounds.len() as u32).to_le_bytes())?;
@@ -46,7 +46,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(16..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023D, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023D, size: body_size });
         }
 
         // battlemaster: Guid

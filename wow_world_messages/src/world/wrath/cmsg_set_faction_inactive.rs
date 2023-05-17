@@ -25,7 +25,7 @@ impl crate::Message for CMSG_SET_FACTION_INACTIVE {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // faction: Faction
-        w.write_all(&u16::from(self.faction.as_int()).to_le_bytes())?;
+        w.write_all(&(self.faction.as_int().to_le_bytes()))?;
 
         // inactive: Bool
         w.write_all(u8::from(self.inactive).to_le_bytes().as_slice())?;
@@ -34,7 +34,7 @@ impl crate::Message for CMSG_SET_FACTION_INACTIVE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 3 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0317, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0317, size: body_size });
         }
 
         // faction: Faction

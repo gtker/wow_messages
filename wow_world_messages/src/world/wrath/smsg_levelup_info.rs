@@ -94,7 +94,7 @@ impl crate::Message for SMSG_LEVELUP_INFO {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 56 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D4, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D4, size: body_size });
         }
 
         // new_level: Level32

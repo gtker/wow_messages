@@ -46,7 +46,7 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
         w.write_all(&self.creature.guid().to_le_bytes())?;
 
         // map: Map
-        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
+        w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // loot_slot: u32
         w.write_all(&self.loot_slot.to_le_bytes())?;
@@ -64,13 +64,13 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
         w.write_all((self.countdown_time.as_millis() as u32).to_le_bytes().as_slice())?;
 
         // flags: RollFlags
-        w.write_all(&u8::from(self.flags.as_int()).to_le_bytes())?;
+        w.write_all(&(self.flags.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 33 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A1, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A1, size: body_size });
         }
 
         // creature: Guid

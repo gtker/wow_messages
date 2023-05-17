@@ -47,7 +47,7 @@ impl crate::Message for SMSG_ARENA_TEAM_QUERY_RESPONSE {
         w.write_all(&[0])?;
 
         // team_type: ArenaType
-        w.write_all(&u8::from(self.team_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.team_type.as_int().to_le_bytes()))?;
 
         // background_color: u32
         w.write_all(&self.background_color.to_le_bytes())?;
@@ -68,7 +68,7 @@ impl crate::Message for SMSG_ARENA_TEAM_QUERY_RESPONSE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(26..=281).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x034C, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x034C, size: body_size });
         }
 
         // arena_team: u32

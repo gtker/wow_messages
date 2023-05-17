@@ -45,7 +45,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
         // result: LoginResult
-        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
 
         match &self.result {
             CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
@@ -60,7 +60,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
                 }
 
                 // account_flag: AccountFlag
-                w.write_all(&u32::from(account_flag.as_int()).to_le_bytes())?;
+                w.write_all(&(account_flag.as_int().to_le_bytes()))?;
 
                 // hardware_survey_id: u32
                 w.write_all(&hardware_survey_id.to_le_bytes())?;

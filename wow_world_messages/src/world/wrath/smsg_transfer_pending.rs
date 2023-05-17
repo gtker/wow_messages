@@ -28,7 +28,7 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // map: Map
-        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
+        w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // optional has_transport
         if let Some(v) = &self.has_transport {
@@ -36,7 +36,7 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
             w.write_all(&v.transport.to_le_bytes())?;
 
             // transport_map: Map
-            w.write_all(&u32::from(v.transport_map.as_int()).to_le_bytes())?;
+            w.write_all(&(v.transport_map.as_int().to_le_bytes()))?;
 
         }
 
@@ -44,7 +44,7 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=12).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003F, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003F, size: body_size });
         }
 
         // map: Map

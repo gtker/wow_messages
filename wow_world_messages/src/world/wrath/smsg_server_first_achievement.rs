@@ -43,13 +43,13 @@ impl crate::Message for SMSG_SERVER_FIRST_ACHIEVEMENT {
         w.write_all(&self.achievement.to_le_bytes())?;
 
         // link_type: AchievementNameLinkType
-        w.write_all(&u8::from(self.link_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.link_type.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(14..=269).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0498, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0498, size: body_size });
         }
 
         // name: CString

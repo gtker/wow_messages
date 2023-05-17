@@ -70,7 +70,7 @@ impl crate::Message for SMSG_LOOT_ROLL {
         w.write_all(&self.roll_number.to_le_bytes())?;
 
         // vote: RollVote
-        w.write_all(&u8::from(self.vote.as_int()).to_le_bytes())?;
+        w.write_all(&(self.vote.as_int().to_le_bytes()))?;
 
         // auto_pass: u8
         w.write_all(&self.auto_pass.to_le_bytes())?;
@@ -79,7 +79,7 @@ impl crate::Message for SMSG_LOOT_ROLL {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 35 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A2, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A2, size: body_size });
         }
 
         // creature: Guid

@@ -37,13 +37,13 @@ impl crate::Message for SMSG_ITEM_NAME_QUERY_RESPONSE {
         w.write_all(&[0])?;
 
         // inventory_type: InventoryType
-        w.write_all(&u8::from(self.inventory_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.inventory_type.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=261).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C5, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C5, size: body_size });
         }
 
         // item: u32

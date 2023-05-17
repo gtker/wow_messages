@@ -38,7 +38,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
         w.write_all(&u32::from(self.chat_type.as_int()).to_le_bytes())?;
 
         // language: Language
-        w.write_all(&u32::from(self.language.as_int()).to_le_bytes())?;
+        w.write_all(&(self.language.as_int().to_le_bytes()))?;
 
         match &self.chat_type {
             CMSG_MESSAGECHAT_ChatType::Whisper {
@@ -77,7 +77,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=520).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0095, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0095, size: body_size });
         }
 
         // chat_type: ChatType

@@ -44,7 +44,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(12..=19).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0445, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0445, size: body_size });
         }
 
         // invitee: PackedGuid

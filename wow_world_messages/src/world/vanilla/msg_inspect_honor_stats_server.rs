@@ -63,7 +63,7 @@ impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // highest_rank: PvpRank
-        w.write_all(&u8::from(self.highest_rank.as_int()).to_le_bytes())?;
+        w.write_all(&(self.highest_rank.as_int().to_le_bytes()))?;
 
         // today_honorable_and_dishonorable: u32
         w.write_all(&self.today_honorable_and_dishonorable.to_le_bytes())?;
@@ -111,7 +111,7 @@ impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 50 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D6, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D6, size: body_size });
         }
 
         // guid: Guid

@@ -415,7 +415,7 @@ fn test_for_invalid_size(s: &mut Writer, e: &Container) {
     };
     s.bodyn(header, |s| {
         s.wln(format!(
-            "return Err({}::InvalidSize {{ opcode: {:#06X}, size: body_size as u32 }});",
+            "return Err({}::InvalidSize {{ opcode: {:#06X}, size: body_size }});",
             PARSE_ERROR,
             e.opcode(),
         ));

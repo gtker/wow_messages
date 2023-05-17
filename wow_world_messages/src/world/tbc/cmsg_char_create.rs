@@ -65,13 +65,13 @@ impl crate::Message for CMSG_CHAR_CREATE {
         w.write_all(&[0])?;
 
         // race: Race
-        w.write_all(&u8::from(self.race.as_int()).to_le_bytes())?;
+        w.write_all(&(self.race.as_int().to_le_bytes()))?;
 
         // class: Class
-        w.write_all(&u8::from(self.class.as_int()).to_le_bytes())?;
+        w.write_all(&(self.class.as_int().to_le_bytes()))?;
 
         // gender: Gender
-        w.write_all(&u8::from(self.gender.as_int()).to_le_bytes())?;
+        w.write_all(&(self.gender.as_int().to_le_bytes()))?;
 
         // skin_color: u8
         w.write_all(&self.skin_color.to_le_bytes())?;
@@ -95,7 +95,7 @@ impl crate::Message for CMSG_CHAR_CREATE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(10..=265).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0036, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0036, size: body_size });
         }
 
         // name: CString

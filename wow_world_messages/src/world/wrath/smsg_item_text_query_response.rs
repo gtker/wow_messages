@@ -28,7 +28,7 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // query: ItemTextQuery
-        w.write_all(&u8::from(self.query.as_int()).to_le_bytes())?;
+        w.write_all(&(self.query.as_int().to_le_bytes()))?;
 
         match &self.query {
             SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery::HasText {
@@ -53,7 +53,7 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=265).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0244, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0244, size: body_size });
         }
 
         // query: ItemTextQuery

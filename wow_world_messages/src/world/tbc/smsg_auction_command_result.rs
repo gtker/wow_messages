@@ -56,21 +56,21 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
         w.write_all(&self.auction_id.to_le_bytes())?;
 
         // action: AuctionCommandAction
-        w.write_all(&u32::from(self.action.as_int()).to_le_bytes())?;
+        w.write_all(&(self.action.as_int().to_le_bytes()))?;
 
         match &self.action {
             SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction::Started {
                 result2,
             } => {
                 // result2: AuctionCommandResultTwo
-                w.write_all(&u32::from(result2.as_int()).to_le_bytes())?;
+                w.write_all(&(result2.as_int().to_le_bytes()))?;
 
                 match &result2 {
                     SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrInventory {
                         inventory_result2,
                     } => {
                         // inventory_result2: InventoryResult
-                        w.write_all(&u8::from(inventory_result2.as_int()).to_le_bytes())?;
+                        w.write_all(&(inventory_result2.as_int().to_le_bytes()))?;
 
                     }
                     SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrHigherBid {
@@ -96,14 +96,14 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
                 result2,
             } => {
                 // result2: AuctionCommandResultTwo
-                w.write_all(&u32::from(result2.as_int()).to_le_bytes())?;
+                w.write_all(&(result2.as_int().to_le_bytes()))?;
 
                 match &result2 {
                     SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrInventory {
                         inventory_result2,
                     } => {
                         // inventory_result2: InventoryResult
-                        w.write_all(&u8::from(inventory_result2.as_int()).to_le_bytes())?;
+                        w.write_all(&(inventory_result2.as_int().to_le_bytes()))?;
 
                     }
                     SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrHigherBid {
@@ -129,7 +129,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
                 result,
             } => {
                 // result: AuctionCommandResult
-                w.write_all(&u32::from(result.as_int()).to_le_bytes())?;
+                w.write_all(&(result.as_int().to_le_bytes()))?;
 
                 match &result {
                     SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::Ok {
@@ -143,7 +143,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
                         inventory_result,
                     } => {
                         // inventory_result: InventoryResult
-                        w.write_all(&u8::from(inventory_result.as_int()).to_le_bytes())?;
+                        w.write_all(&(inventory_result.as_int().to_le_bytes()))?;
 
                     }
                     SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrHigherBid {
@@ -171,7 +171,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(12..=28).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025B, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025B, size: body_size });
         }
 
         // auction_id: u32

@@ -37,7 +37,7 @@ impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_ADDED {
         w.write_all(&self.time.as_int().to_le_bytes())?;
 
         // map: Map
-        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
+        w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // difficulty: u32
         w.write_all(&self.difficulty.to_le_bytes())?;
@@ -52,7 +52,7 @@ impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_ADDED {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 24 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043E, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043E, size: body_size });
         }
 
         // time: DateTime

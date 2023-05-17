@@ -31,7 +31,7 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_ENTRY_INVITE {
         w.write_all(&self.battle_id.to_le_bytes())?;
 
         // area: Area
-        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
+        w.write_all(&(self.area.as_int().to_le_bytes()))?;
 
         // accept_time: Seconds
         w.write_all((self.accept_time.as_secs() as u32).to_le_bytes().as_slice())?;
@@ -40,7 +40,7 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_ENTRY_INVITE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04DE, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04DE, size: body_size });
         }
 
         // battle_id: u32

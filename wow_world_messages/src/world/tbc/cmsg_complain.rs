@@ -38,7 +38,7 @@ impl crate::Message for CMSG_COMPLAIN {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // complaint_type: SpamType
-        w.write_all(&u8::from(self.complaint_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.complaint_type.as_int().to_le_bytes()))?;
 
         // offender: Guid
         w.write_all(&self.offender.guid().to_le_bytes())?;
@@ -92,7 +92,7 @@ impl crate::Message for CMSG_COMPLAIN {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=281).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C6, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C6, size: body_size });
         }
 
         // complaint_type: SpamType

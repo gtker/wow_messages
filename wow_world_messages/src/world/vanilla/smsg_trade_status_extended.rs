@@ -53,7 +53,7 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
         w.write_all(&self.trade_slot_count2.to_le_bytes())?;
 
         // money_in_trade: Gold
-        w.write_all(u32::from(self.money_in_trade.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.money_in_trade.as_int()).to_le_bytes().as_slice())?;
 
         // spell_on_lowest_slot: u32
         w.write_all(&self.spell_on_lowest_slot.to_le_bytes())?;
@@ -67,7 +67,7 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 444 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0121, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0121, size: body_size });
         }
 
         // self_player: Bool

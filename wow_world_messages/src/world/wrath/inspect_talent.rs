@@ -18,7 +18,7 @@ pub struct InspectTalent {
 impl InspectTalent {
     pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // talent: Talent
-        w.write_all(&u32::from(self.talent.as_int()).to_le_bytes())?;
+        w.write_all(&(self.talent.as_int().to_le_bytes()))?;
 
         // max_rank: u8
         w.write_all(&self.max_rank.to_le_bytes())?;

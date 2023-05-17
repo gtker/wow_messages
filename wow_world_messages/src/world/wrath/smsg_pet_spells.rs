@@ -51,16 +51,16 @@ impl crate::Message for SMSG_PET_SPELLS {
             w.write_all(&v.duration.to_le_bytes())?;
 
             // react: PetReactState
-            w.write_all(&u8::from(v.react.as_int()).to_le_bytes())?;
+            w.write_all(&(v.react.as_int().to_le_bytes()))?;
 
             // command: PetCommandState
-            w.write_all(&u8::from(v.command.as_int()).to_le_bytes())?;
+            w.write_all(&(v.command.as_int().to_le_bytes()))?;
 
             // unknown: u8
             w.write_all(&v.unknown.to_le_bytes())?;
 
             // pet_enabled: PetEnabled
-            w.write_all(&u8::from(v.pet_enabled.as_int()).to_le_bytes())?;
+            w.write_all(&(v.pet_enabled.as_int().to_le_bytes()))?;
 
             // action_bars: u32[10]
             for i in v.action_bars.iter() {
@@ -89,7 +89,7 @@ impl crate::Message for SMSG_PET_SPELLS {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(8..=4668).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0179, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0179, size: body_size });
         }
 
         // pet: Guid

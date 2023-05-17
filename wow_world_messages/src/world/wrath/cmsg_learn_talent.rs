@@ -25,7 +25,7 @@ impl crate::Message for CMSG_LEARN_TALENT {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // talent: Talent
-        w.write_all(&u32::from(self.talent.as_int()).to_le_bytes())?;
+        w.write_all(&(self.talent.as_int().to_le_bytes()))?;
 
         // requested_rank: u32
         w.write_all(&self.requested_rank.to_le_bytes())?;
@@ -34,7 +34,7 @@ impl crate::Message for CMSG_LEARN_TALENT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0251, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0251, size: body_size });
         }
 
         // talent: Talent

@@ -35,10 +35,10 @@ impl crate::Message for SMSG_TEXT_EMOTE {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // text_emote: TextEmote
-        w.write_all(&u32::from(self.text_emote.as_int()).to_le_bytes())?;
+        w.write_all(&(self.text_emote.as_int().to_le_bytes()))?;
 
         // emote: Emote
-        w.write_all(&u32::from(self.emote.as_int()).to_le_bytes())?;
+        w.write_all(&(self.emote.as_int().to_le_bytes()))?;
 
         // name: SizedCString
         w.write_all(&((self.name.len() + 1) as u32).to_le_bytes())?;
@@ -50,7 +50,7 @@ impl crate::Message for SMSG_TEXT_EMOTE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(21..=8020).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0105, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0105, size: body_size });
         }
 
         // guid: Guid

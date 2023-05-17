@@ -57,7 +57,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
         w.write_all(&self.invite_status.to_le_bytes())?;
 
         // time: CalendarStatusTime
-        w.write_all(&u8::from(self.time.as_int()).to_le_bytes())?;
+        w.write_all(&(self.time.as_int().to_le_bytes()))?;
 
         match &self.time {
             SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::Present {
@@ -77,7 +77,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(22..=33).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043A, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043A, size: body_size });
         }
 
         // invitee: PackedGuid

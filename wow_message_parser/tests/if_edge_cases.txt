@@ -32,7 +32,7 @@ pub struct IfEdgeCases {
 impl IfEdgeCases {
     pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // t: TEnum
-        w.write_all(&u8::from(self.t.as_int()).to_le_bytes())?;
+        w.write_all(&(self.t.as_int().to_le_bytes()))?;
 
         match &self.t {
             IfEdgeCases_TEnum::Zero {

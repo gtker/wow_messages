@@ -39,7 +39,7 @@ pub struct AuraLog {
 impl AuraLog {
     pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // aura_type: AuraType
-        w.write_all(&u32::from(self.aura_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.aura_type.as_int().to_le_bytes()))?;
 
         match &self.aura_type {
             AuraLog_AuraType::PeriodicDamage {
@@ -52,7 +52,7 @@ impl AuraLog {
                 w.write_all(&damage1.to_le_bytes())?;
 
                 // school: SpellSchool
-                w.write_all(&u8::from(school.as_int()).to_le_bytes())?;
+                w.write_all(&(school.as_int().to_le_bytes()))?;
 
                 // absorbed: u32
                 w.write_all(&absorbed.to_le_bytes())?;
@@ -122,7 +122,7 @@ impl AuraLog {
                 w.write_all(&damage1.to_le_bytes())?;
 
                 // school: SpellSchool
-                w.write_all(&u8::from(school.as_int()).to_le_bytes())?;
+                w.write_all(&(school.as_int().to_le_bytes()))?;
 
                 // absorbed: u32
                 w.write_all(&absorbed.to_le_bytes())?;

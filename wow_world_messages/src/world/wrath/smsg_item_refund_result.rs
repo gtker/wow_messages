@@ -38,7 +38,7 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
         w.write_all(&self.item.guid().to_le_bytes())?;
 
         // result: ItemRefundResult
-        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
 
         match &self.result {
             SMSG_ITEM_REFUND_RESULT_ItemRefundResult::Success {
@@ -48,7 +48,7 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
                 honor_point_cost,
             } => {
                 // cost: Gold
-                w.write_all(u32::from(cost.as_int()).to_le_bytes().as_slice())?;
+                w.write_all((cost.as_int()).to_le_bytes().as_slice())?;
 
                 // honor_point_cost: u32
                 w.write_all(&honor_point_cost.to_le_bytes())?;
@@ -69,7 +69,7 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=61).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04B5, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04B5, size: body_size });
         }
 
         // item: Guid

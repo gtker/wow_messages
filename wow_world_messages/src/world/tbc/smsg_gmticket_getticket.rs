@@ -34,7 +34,7 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // status: GmTicketStatus
-        w.write_all(&u32::from(self.status.as_int()).to_le_bytes())?;
+        w.write_all(&(self.status.as_int().to_le_bytes()))?;
 
         match &self.status {
             SMSG_GMTICKET_GETTICKET_GmTicketStatus::HasText {
@@ -54,7 +54,7 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
                 w.write_all(&[0])?;
 
                 // ticket_type: GmTicketType
-                w.write_all(&u8::from(ticket_type.as_int()).to_le_bytes())?;
+                w.write_all(&(ticket_type.as_int().to_le_bytes()))?;
 
                 // days_since_ticket_creation: f32
                 w.write_all(&days_since_ticket_creation.to_le_bytes())?;
@@ -66,7 +66,7 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
                 w.write_all(&days_since_last_updated.to_le_bytes())?;
 
                 // escalation_status: GmTicketEscalationStatus
-                w.write_all(&u8::from(escalation_status.as_int()).to_le_bytes())?;
+                w.write_all(&(escalation_status.as_int().to_le_bytes()))?;
 
                 // read_by_gm: Bool
                 w.write_all(u8::from(*read_by_gm).to_le_bytes().as_slice())?;
@@ -79,7 +79,7 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=275).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0212, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0212, size: body_size });
         }
 
         // status: GmTicketStatus

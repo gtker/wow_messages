@@ -85,7 +85,7 @@ impl crate::Message for CMSG_SEND_MAIL {
         w.write_all(&self.item.guid().to_le_bytes())?;
 
         // money: Gold
-        w.write_all(u32::from(self.money.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.money.as_int()).to_le_bytes().as_slice())?;
 
         // cash_on_delivery_amount: u32
         w.write_all(&self.cash_on_delivery_amount.to_le_bytes())?;
@@ -100,7 +100,7 @@ impl crate::Message for CMSG_SEND_MAIL {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(43..=808).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0238, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0238, size: body_size });
         }
 
         // mailbox: Guid

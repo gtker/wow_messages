@@ -35,13 +35,13 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
         w.write_all(&self.unknown1.to_le_bytes())?;
 
         // result: SpellCastResult
-        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 6 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0138, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0138, size: body_size });
         }
 
         // id: u32

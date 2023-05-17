@@ -106,13 +106,13 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         w.write_all(&self.quest_type.to_le_bytes())?;
 
         // reputation_objective_faction: Faction
-        w.write_all(&u16::from(self.reputation_objective_faction.as_int()).to_le_bytes())?;
+        w.write_all(&(self.reputation_objective_faction.as_int().to_le_bytes()))?;
 
         // reputation_objective_value: u32
         w.write_all(&self.reputation_objective_value.to_le_bytes())?;
 
         // required_opposite_faction: Faction
-        w.write_all(&u16::from(self.required_opposite_faction.as_int()).to_le_bytes())?;
+        w.write_all(&(self.required_opposite_faction.as_int().to_le_bytes()))?;
 
         // required_opposite_reputation_value: u32
         w.write_all(&self.required_opposite_reputation_value.to_le_bytes())?;
@@ -121,10 +121,10 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         w.write_all(&self.next_quest_in_chain.to_le_bytes())?;
 
         // money_reward: Gold
-        w.write_all(u32::from(self.money_reward.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.money_reward.as_int()).to_le_bytes().as_slice())?;
 
         // max_level_money_reward: Gold
-        w.write_all(u32::from(self.max_level_money_reward.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.max_level_money_reward.as_int()).to_le_bytes().as_slice())?;
 
         // reward_spell: u32
         w.write_all(&self.reward_spell.to_le_bytes())?;
@@ -197,7 +197,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(224..=2264).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x005D, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x005D, size: body_size });
         }
 
         // quest_id: u32

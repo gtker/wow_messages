@@ -23,13 +23,13 @@ impl crate::Message for SMSG_STOP_MIRROR_TIMER {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // timer: TimerType
-        w.write_all(&u32::from(self.timer.as_int()).to_le_bytes())?;
+        w.write_all(&(self.timer.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01DB, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01DB, size: body_size });
         }
 
         // timer: TimerType

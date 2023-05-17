@@ -122,13 +122,7 @@ use async_std::io::{ReadExt, WriteExt};
 
 pub mod errors;
 pub mod helper;
-#[allow(
-    non_camel_case_types,
-    non_snake_case,
-    unused,
-    clippy::complexity,
-    clippy::single_match
-)]
+#[allow(non_camel_case_types, non_snake_case, unused, clippy::single_match)]
 pub(crate) mod logon;
 pub(crate) mod util;
 

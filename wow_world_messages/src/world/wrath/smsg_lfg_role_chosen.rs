@@ -39,7 +39,7 @@ impl crate::Message for SMSG_LFG_ROLE_CHOSEN {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 13 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02BB, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02BB, size: body_size });
         }
 
         // guid: Guid

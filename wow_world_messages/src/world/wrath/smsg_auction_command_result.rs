@@ -35,17 +35,17 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
         w.write_all(&self.auction_id.to_le_bytes())?;
 
         // action: AuctionCommandAction
-        w.write_all(&u32::from(self.action.as_int()).to_le_bytes())?;
+        w.write_all(&(self.action.as_int().to_le_bytes()))?;
 
         // result: AuctionCommandResult
-        w.write_all(&u32::from(self.result.as_int()).to_le_bytes())?;
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
 
         match &self.result {
             SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrInventory {
                 inventory_result,
             } => {
                 // inventory_result: InventoryResult
-                w.write_all(&u8::from(inventory_result.as_int()).to_le_bytes())?;
+                w.write_all(&(inventory_result.as_int().to_le_bytes()))?;
 
             }
             _ => {}
@@ -55,7 +55,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(12..=13).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025B, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025B, size: body_size });
         }
 
         // auction_id: u32

@@ -39,13 +39,13 @@ impl crate::Message for CMSG_CALENDAR_EVENT_MODERATOR_STATUS {
         w.write_all(&self.sender_invite_id.guid().to_le_bytes())?;
 
         // rank: CalendarModeratorRank
-        w.write_all(&u8::from(self.rank.as_int()).to_le_bytes())?;
+        w.write_all(&(self.rank.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 25 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0435, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0435, size: body_size });
         }
 
         // event: Guid

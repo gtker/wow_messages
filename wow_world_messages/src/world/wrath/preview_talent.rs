@@ -18,7 +18,7 @@ pub struct PreviewTalent {
 impl PreviewTalent {
     pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // talent: Talent
-        w.write_all(&u32::from(self.talent.as_int()).to_le_bytes())?;
+        w.write_all(&(self.talent.as_int().to_le_bytes()))?;
 
         // rank: u32
         w.write_all(&self.rank.to_le_bytes())?;

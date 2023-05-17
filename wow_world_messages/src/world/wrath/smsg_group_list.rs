@@ -85,19 +85,19 @@ impl crate::Message for SMSG_GROUP_LIST {
         // optional group_not_empty
         if let Some(v) = &self.group_not_empty {
             // loot_setting: GroupLootSetting
-            w.write_all(&u8::from(v.loot_setting.as_int()).to_le_bytes())?;
+            w.write_all(&(v.loot_setting.as_int().to_le_bytes()))?;
 
             // master_loot: Guid
             w.write_all(&v.master_loot.guid().to_le_bytes())?;
 
             // loot_threshold: ItemQuality
-            w.write_all(&u8::from(v.loot_threshold.as_int()).to_le_bytes())?;
+            w.write_all(&(v.loot_threshold.as_int().to_le_bytes()))?;
 
             // difficulty: DungeonDifficulty
-            w.write_all(&u8::from(v.difficulty.as_int()).to_le_bytes())?;
+            w.write_all(&(v.difficulty.as_int().to_le_bytes()))?;
 
             // raid_difficulty: RaidDifficulty
-            w.write_all(&u8::from(v.raid_difficulty.as_int()).to_le_bytes())?;
+            w.write_all(&(v.raid_difficulty.as_int().to_le_bytes()))?;
 
             // heroic: Bool
             w.write_all(u8::from(v.heroic).to_le_bytes().as_slice())?;
@@ -108,7 +108,7 @@ impl crate::Message for SMSG_GROUP_LIST {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(28..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007D, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007D, size: body_size });
         }
 
         // group_type: u8

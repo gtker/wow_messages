@@ -43,7 +43,7 @@ impl MonsterMove {
         w.write_all(&self.spline_id.to_le_bytes())?;
 
         // move_type: MonsterMoveType
-        w.write_all(&u8::from(self.move_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.move_type.as_int().to_le_bytes()))?;
 
         match &self.move_type {
             MonsterMove_MonsterMoveType::Normal {
@@ -92,7 +92,7 @@ impl MonsterMove {
                 splines,
             } => {
                 // spline_flags: SplineFlag
-                w.write_all(&u32::from(spline_flags.as_int()).to_le_bytes())?;
+                w.write_all(&(spline_flags.as_int().to_le_bytes()))?;
 
                 // duration: u32
                 w.write_all(&duration.to_le_bytes())?;
@@ -108,7 +108,7 @@ impl MonsterMove {
                 splines,
             } => {
                 // spline_flags: SplineFlag
-                w.write_all(&u32::from(spline_flags.as_int()).to_le_bytes())?;
+                w.write_all(&(spline_flags.as_int().to_le_bytes()))?;
 
                 // duration: u32
                 w.write_all(&duration.to_le_bytes())?;
@@ -124,7 +124,7 @@ impl MonsterMove {
                 target,
             } => {
                 // spline_flags: SplineFlag
-                w.write_all(&u32::from(spline_flags.as_int()).to_le_bytes())?;
+                w.write_all(&(spline_flags.as_int().to_le_bytes()))?;
 
                 // duration: u32
                 w.write_all(&duration.to_le_bytes())?;
@@ -140,7 +140,7 @@ impl MonsterMove {
                 splines,
             } => {
                 // spline_flags: SplineFlag
-                w.write_all(&u32::from(spline_flags.as_int()).to_le_bytes())?;
+                w.write_all(&(spline_flags.as_int().to_le_bytes()))?;
 
                 // duration: u32
                 w.write_all(&duration.to_le_bytes())?;

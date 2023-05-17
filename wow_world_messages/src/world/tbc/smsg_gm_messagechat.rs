@@ -59,7 +59,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // chat_type: ChatType
-        w.write_all(&u8::from(self.chat_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.chat_type.as_int().to_le_bytes()))?;
 
         // language: Language
         w.write_all(&u32::from(self.language.as_int()).to_le_bytes())?;
@@ -81,7 +81,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -106,7 +106,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -131,7 +131,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -156,7 +156,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -181,7 +181,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -206,7 +206,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -231,7 +231,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -256,7 +256,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -281,7 +281,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -306,7 +306,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -331,7 +331,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -356,7 +356,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -387,7 +387,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag1: PlayerChatTag
-                w.write_all(&u8::from(chat_tag1.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag1.as_int().to_le_bytes()))?;
 
             }
             SMSG_GM_MESSAGECHAT_ChatType::MonsterParty {
@@ -412,7 +412,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag1: PlayerChatTag
-                w.write_all(&u8::from(chat_tag1.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag1.as_int().to_le_bytes()))?;
 
             }
             SMSG_GM_MESSAGECHAT_ChatType::MonsterYell {
@@ -437,7 +437,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag1: PlayerChatTag
-                w.write_all(&u8::from(chat_tag1.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag1.as_int().to_le_bytes()))?;
 
             }
             SMSG_GM_MESSAGECHAT_ChatType::MonsterWhisper {
@@ -462,7 +462,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag1: PlayerChatTag
-                w.write_all(&u8::from(chat_tag1.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag1.as_int().to_le_bytes()))?;
 
             }
             SMSG_GM_MESSAGECHAT_ChatType::MonsterEmote {
@@ -487,7 +487,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag1: PlayerChatTag
-                w.write_all(&u8::from(chat_tag1.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag1.as_int().to_le_bytes()))?;
 
             }
             SMSG_GM_MESSAGECHAT_ChatType::Channel {
@@ -513,7 +513,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag3: PlayerChatTag
-                w.write_all(&u8::from(chat_tag3.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag3.as_int().to_le_bytes()))?;
 
             }
             SMSG_GM_MESSAGECHAT_ChatType::ChannelJoin {
@@ -532,7 +532,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -557,7 +557,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -582,7 +582,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -607,7 +607,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -632,7 +632,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -657,7 +657,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -682,7 +682,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -707,7 +707,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -732,7 +732,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -757,7 +757,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -782,7 +782,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -807,7 +807,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -832,7 +832,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -857,7 +857,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -882,7 +882,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -907,7 +907,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -932,7 +932,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -957,7 +957,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -981,7 +981,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag2: PlayerChatTag
-                w.write_all(&u8::from(chat_tag2.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag2.as_int().to_le_bytes()))?;
 
             }
             SMSG_GM_MESSAGECHAT_ChatType::BgSystemAlliance {
@@ -999,7 +999,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag2: PlayerChatTag
-                w.write_all(&u8::from(chat_tag2.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag2.as_int().to_le_bytes()))?;
 
             }
             SMSG_GM_MESSAGECHAT_ChatType::BgSystemHorde {
@@ -1017,7 +1017,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag2: PlayerChatTag
-                w.write_all(&u8::from(chat_tag2.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag2.as_int().to_le_bytes()))?;
 
             }
             SMSG_GM_MESSAGECHAT_ChatType::RaidLeader {
@@ -1036,7 +1036,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -1061,7 +1061,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -1092,7 +1092,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag1: PlayerChatTag
-                w.write_all(&u8::from(chat_tag1.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag1.as_int().to_le_bytes()))?;
 
             }
             SMSG_GM_MESSAGECHAT_ChatType::RaidBossEmote {
@@ -1117,7 +1117,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag1: PlayerChatTag
-                w.write_all(&u8::from(chat_tag1.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag1.as_int().to_le_bytes()))?;
 
             }
             SMSG_GM_MESSAGECHAT_ChatType::Filtered {
@@ -1136,7 +1136,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -1161,7 +1161,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -1186,7 +1186,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -1211,7 +1211,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 w.write_all(&[0])?;
 
                 // chat_tag4: PlayerChatTag
-                w.write_all(&u8::from(chat_tag4.as_int()).to_le_bytes())?;
+                w.write_all(&(chat_tag4.as_int().to_le_bytes()))?;
 
                 // sender_name: SizedCString
                 w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
@@ -1226,7 +1226,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(19..=24022).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03B2, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03B2, size: body_size });
         }
 
         // chat_type: ChatType

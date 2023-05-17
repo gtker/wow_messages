@@ -46,14 +46,14 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
         w.write_all(&self.mail_id.to_le_bytes())?;
 
         // action: MailAction
-        w.write_all(&u32::from(self.action.as_int()).to_le_bytes())?;
+        w.write_all(&(self.action.as_int().to_le_bytes()))?;
 
         match &self.action {
             SMSG_SEND_MAIL_RESULT_MailAction::Send {
                 result2,
             } => {
                 // result2: MailResultTwo
-                w.write_all(&u32::from(result2.as_int()).to_le_bytes())?;
+                w.write_all(&(result2.as_int().to_le_bytes()))?;
 
                 match &result2 {
                     SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
@@ -71,7 +71,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                 result2,
             } => {
                 // result2: MailResultTwo
-                w.write_all(&u32::from(result2.as_int()).to_le_bytes())?;
+                w.write_all(&(result2.as_int().to_le_bytes()))?;
 
                 match &result2 {
                     SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
@@ -89,7 +89,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                 result,
             } => {
                 // result: MailResult
-                w.write_all(&u32::from(result.as_int()).to_le_bytes())?;
+                w.write_all(&(result.as_int().to_le_bytes()))?;
 
                 match &result {
                     SMSG_SEND_MAIL_RESULT_MailResult::Ok {
@@ -238,7 +238,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                 result2,
             } => {
                 // result2: MailResultTwo
-                w.write_all(&u32::from(result2.as_int()).to_le_bytes())?;
+                w.write_all(&(result2.as_int().to_le_bytes()))?;
 
                 match &result2 {
                     SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
@@ -256,7 +256,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                 result2,
             } => {
                 // result2: MailResultTwo
-                w.write_all(&u32::from(result2.as_int()).to_le_bytes())?;
+                w.write_all(&(result2.as_int().to_le_bytes()))?;
 
                 match &result2 {
                     SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
@@ -274,7 +274,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
                 result2,
             } => {
                 // result2: MailResultTwo
-                w.write_all(&u32::from(result2.as_int()).to_le_bytes())?;
+                w.write_all(&(result2.as_int().to_le_bytes()))?;
 
                 match &result2 {
                     SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
@@ -294,7 +294,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(12..=20).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0239, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0239, size: body_size });
         }
 
         // mail_id: u32

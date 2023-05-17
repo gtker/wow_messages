@@ -55,7 +55,7 @@ pub struct SpellCastTargets {
 impl SpellCastTargets {
     pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // target_flags: SpellCastTargetFlags
-        w.write_all(&u32::from(self.target_flags.as_int()).to_le_bytes())?;
+        w.write_all(&(self.target_flags.as_int().to_le_bytes()))?;
 
         if let Some(if_statement) = &self.target_flags.unit {
             match if_statement {

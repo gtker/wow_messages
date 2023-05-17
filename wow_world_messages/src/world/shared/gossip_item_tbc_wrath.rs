@@ -43,7 +43,7 @@ impl GossipItem {
         w.write_all(u8::from(self.coded).to_le_bytes().as_slice())?;
 
         // money_required: Gold
-        w.write_all(u32::from(self.money_required.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.money_required.as_int()).to_le_bytes().as_slice())?;
 
         // message: CString
         // TODO: Guard against strings that are already null-terminated

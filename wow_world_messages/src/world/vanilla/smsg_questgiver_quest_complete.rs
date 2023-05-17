@@ -44,7 +44,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
         w.write_all(&self.experience_reward.to_le_bytes())?;
 
         // money_reward: Gold
-        w.write_all(u32::from(self.money_reward.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.money_reward.as_int()).to_le_bytes().as_slice())?;
 
         // amount_of_item_rewards: u32
         w.write_all(&(self.item_rewards.len() as u32).to_le_bytes())?;
@@ -58,7 +58,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(20..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0191, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0191, size: body_size });
         }
 
         // quest_id: u32

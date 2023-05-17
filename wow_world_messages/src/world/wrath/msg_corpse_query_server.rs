@@ -32,7 +32,7 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // result: CorpseQueryResult
-        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
 
         match &self.result {
             MSG_CORPSE_QUERY_Server_CorpseQueryResult::Found {
@@ -41,13 +41,13 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
                 position,
             } => {
                 // map: Map
-                w.write_all(&u32::from(map.as_int()).to_le_bytes())?;
+                w.write_all(&(map.as_int().to_le_bytes()))?;
 
                 // position: Vector3d
                 position.write_into_vec(&mut w)?;
 
                 // corpse_map: Map
-                w.write_all(&u32::from(corpse_map.as_int()).to_le_bytes())?;
+                w.write_all(&(corpse_map.as_int().to_le_bytes()))?;
 
             }
             _ => {}
@@ -60,7 +60,7 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(5..=25).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0216, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0216, size: body_size });
         }
 
         // result: CorpseQueryResult

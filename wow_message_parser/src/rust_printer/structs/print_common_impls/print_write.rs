@@ -153,7 +153,7 @@ pub(crate) fn print_write_definition(
         }
         Type::Gold => {
             s.wln(format!(
-                "w.write_all(u32::from({variable_prefix}{name}.as_int()).to_le_bytes().as_slice()){postfix}?;",
+                "w.write_all(({variable_prefix}{name}.as_int()).to_le_bytes().as_slice()){postfix}?;",
             ));
         }
         Type::Seconds => {
@@ -222,11 +222,15 @@ pub(crate) fn print_write_definition(
                 s.wln(format!(
                     "w.write_all(&(({variable_prefix}{name}.as_int() >> 32) as u16).to_le_bytes()){postfix}?;",
                 ));
+            } else if upcast.is_none() {
+                s.wln(format!(
+                    "w.write_all(&({variable_prefix}{name}.as_int().to_le_bytes())){postfix}?;",
+                ));
             } else {
                 s.wln(format!(
-                    "w.write_all(&{ty}::from({variable_prefix}{name}.as_int()).to_le_bytes()){postfix}?;",
-                    ty = integer.rust_str(),
-                ));
+                        "w.write_all(&{ty}::from({variable_prefix}{name}.as_int()).to_le_bytes()){postfix}?;",
+                        ty = integer.rust_str(),
+                    ));
             }
         }
         Type::PackedGuid => {

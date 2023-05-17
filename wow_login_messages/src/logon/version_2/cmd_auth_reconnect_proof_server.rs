@@ -22,7 +22,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Server {
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
         // result: LoginResult
-        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
 
         Ok(())
     }

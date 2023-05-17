@@ -30,16 +30,16 @@ impl crate::Message for SMSG_LOGOUT_RESPONSE {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // result: LogoutResult
-        w.write_all(&u32::from(self.result.as_int()).to_le_bytes())?;
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
 
         // speed: LogoutSpeed
-        w.write_all(&u8::from(self.speed.as_int()).to_le_bytes())?;
+        w.write_all(&(self.speed.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 5 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x004C, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x004C, size: body_size });
         }
 
         // result: LogoutResult

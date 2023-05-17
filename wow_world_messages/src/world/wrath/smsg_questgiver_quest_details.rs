@@ -156,7 +156,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         }
 
         // money_reward: Gold
-        w.write_all(u32::from(self.money_reward.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.money_reward.as_int()).to_le_bytes().as_slice())?;
 
         // experience_reward: u32
         w.write_all(&self.experience_reward.to_le_bytes())?;
@@ -212,7 +212,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(145..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0188, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0188, size: body_size });
         }
 
         // guid: Guid

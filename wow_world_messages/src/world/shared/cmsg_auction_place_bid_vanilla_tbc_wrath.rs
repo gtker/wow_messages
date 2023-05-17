@@ -34,13 +34,13 @@ impl crate::Message for CMSG_AUCTION_PLACE_BID {
         w.write_all(&self.auction_id.to_le_bytes())?;
 
         // price: Gold
-        w.write_all(u32::from(self.price.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.price.as_int()).to_le_bytes().as_slice())?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025A, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025A, size: body_size });
         }
 
         // auctioneer: Guid

@@ -43,7 +43,7 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
         w.write_all(&[0])?;
 
         // included: DeclinedPetNameIncluded
-        w.write_all(&u8::from(self.included.as_int()).to_le_bytes())?;
+        w.write_all(&(self.included.as_int().to_le_bytes()))?;
 
         match &self.included {
             SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::Included {
@@ -63,7 +63,7 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=1541).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0178, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0178, size: body_size });
         }
 
         // reason: PetNameInvalidReason

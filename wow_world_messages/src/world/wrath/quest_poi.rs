@@ -39,10 +39,10 @@ impl QuestPoi {
         w.write_all(&self.objective_id.to_le_bytes())?;
 
         // map: Map
-        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
+        w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // area: Area
-        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
+        w.write_all(&(self.area.as_int().to_le_bytes()))?;
 
         // floor_id: u32
         w.write_all(&self.floor_id.to_le_bytes())?;

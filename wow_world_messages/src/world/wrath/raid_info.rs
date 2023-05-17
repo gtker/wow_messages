@@ -30,7 +30,7 @@ pub struct RaidInfo {
 impl RaidInfo {
     pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // map: Map
-        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
+        w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // difficulty: DungeonDifficulty
         w.write_all(&u32::from(self.difficulty.as_int()).to_le_bytes())?;

@@ -37,7 +37,7 @@ impl crate::Message for SMSG_CHAR_FACTION_CHANGE {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // result: WorldResult
-        w.write_all(&u8::from(self.result.as_int()).to_le_bytes())?;
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
 
         match &self.result {
             SMSG_CHAR_FACTION_CHANGE_WorldResult::ResponseSuccess {
@@ -62,7 +62,7 @@ impl crate::Message for SMSG_CHAR_FACTION_CHANGE {
                 w.write_all(&[0])?;
 
                 // gender: Gender
-                w.write_all(&u8::from(gender.as_int()).to_le_bytes())?;
+                w.write_all(&(gender.as_int().to_le_bytes()))?;
 
                 // skin_color: u8
                 w.write_all(&skin_color.to_le_bytes())?;
@@ -80,7 +80,7 @@ impl crate::Message for SMSG_CHAR_FACTION_CHANGE {
                 w.write_all(&facial_hair.to_le_bytes())?;
 
                 // race: Race
-                w.write_all(&u8::from(race.as_int()).to_le_bytes())?;
+                w.write_all(&(race.as_int().to_le_bytes()))?;
 
             }
             _ => {}
@@ -90,7 +90,7 @@ impl crate::Message for SMSG_CHAR_FACTION_CHANGE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(1..=272).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04DA, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04DA, size: body_size });
         }
 
         // result: WorldResult

@@ -30,7 +30,7 @@ impl Friend {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // status: FriendStatus
-        w.write_all(&u8::from(self.status.as_int()).to_le_bytes())?;
+        w.write_all(&(self.status.as_int().to_le_bytes()))?;
 
         match &self.status {
             Friend_FriendStatus::Online {
@@ -39,7 +39,7 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                w.write_all(&u32::from(area.as_int()).to_le_bytes())?;
+                w.write_all(&(area.as_int().to_le_bytes()))?;
 
                 // level: Level32
                 w.write_all(&u32::from(level.as_int()).to_le_bytes())?;
@@ -54,7 +54,7 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                w.write_all(&u32::from(area.as_int()).to_le_bytes())?;
+                w.write_all(&(area.as_int().to_le_bytes()))?;
 
                 // level: Level32
                 w.write_all(&u32::from(level.as_int()).to_le_bytes())?;
@@ -69,7 +69,7 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                w.write_all(&u32::from(area.as_int()).to_le_bytes())?;
+                w.write_all(&(area.as_int().to_le_bytes()))?;
 
                 // level: Level32
                 w.write_all(&u32::from(level.as_int()).to_le_bytes())?;
@@ -84,7 +84,7 @@ impl Friend {
                 level,
             } => {
                 // area: Area
-                w.write_all(&u32::from(area.as_int()).to_le_bytes())?;
+                w.write_all(&(area.as_int().to_le_bytes()))?;
 
                 // level: Level32
                 w.write_all(&u32::from(level.as_int()).to_le_bytes())?;

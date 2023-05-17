@@ -45,7 +45,7 @@ impl TrainerSpell {
         w.write_all(&self.spell.to_le_bytes())?;
 
         // state: TrainerSpellState
-        w.write_all(&u8::from(self.state.as_int()).to_le_bytes())?;
+        w.write_all(&(self.state.as_int().to_le_bytes()))?;
 
         // spell_cost: u32
         w.write_all(&self.spell_cost.to_le_bytes())?;

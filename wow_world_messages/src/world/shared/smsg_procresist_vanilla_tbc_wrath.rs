@@ -41,13 +41,13 @@ impl crate::Message for SMSG_PROCRESIST {
         w.write_all(&self.id.to_le_bytes())?;
 
         // log_format: LogFormat
-        w.write_all(&u8::from(self.log_format.as_int()).to_le_bytes())?;
+        w.write_all(&(self.log_format.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 21 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0260, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0260, size: body_size });
         }
 
         // caster: Guid

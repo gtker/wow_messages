@@ -25,7 +25,7 @@ impl MiniMoveMessage {
         w.write_all(&((self.size() - 1) as u8).to_le_bytes())?;
 
         // opcode: MiniMoveOpcode
-        w.write_all(&u16::from(self.opcode.as_int()).to_le_bytes())?;
+        w.write_all(&(self.opcode.as_int().to_le_bytes()))?;
 
         // guid: PackedGuid
         self.guid.write_packed_guid_into_vec(&mut w)?;

@@ -75,17 +75,17 @@ impl LfgListPlayer {
         w.write_all(&self.player.guid().to_le_bytes())?;
 
         // flags: LfgUpdateFlag
-        w.write_all(&u32::from(self.flags.as_int()).to_le_bytes())?;
+        w.write_all(&(self.flags.as_int().to_le_bytes()))?;
 
         if let Some(if_statement) = &self.flags.character_info {
             // level: Level
             w.write_all(&if_statement.level.as_int().to_le_bytes())?;
 
             // class: Class
-            w.write_all(&u8::from(if_statement.class.as_int()).to_le_bytes())?;
+            w.write_all(&(if_statement.class.as_int().to_le_bytes()))?;
 
             // race: Race
-            w.write_all(&u8::from(if_statement.race.as_int()).to_le_bytes())?;
+            w.write_all(&(if_statement.race.as_int().to_le_bytes()))?;
 
             // talents0: u8
             w.write_all(&if_statement.talents0.to_le_bytes())?;
@@ -188,7 +188,7 @@ impl LfgListPlayer {
 
         if let Some(if_statement) = &self.flags.area {
             // area: Area
-            w.write_all(&u32::from(if_statement.area.as_int()).to_le_bytes())?;
+            w.write_all(&(if_statement.area.as_int().to_le_bytes()))?;
 
         }
 

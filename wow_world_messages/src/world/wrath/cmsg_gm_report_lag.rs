@@ -32,7 +32,7 @@ impl crate::Message for CMSG_GM_REPORT_LAG {
         w.write_all(&self.lag_type.to_le_bytes())?;
 
         // map: Map
-        w.write_all(&u32::from(self.map.as_int()).to_le_bytes())?;
+        w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
         // position: Vector3d
         self.position.write_into_vec(&mut w)?;
@@ -41,7 +41,7 @@ impl crate::Message for CMSG_GM_REPORT_LAG {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0502, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0502, size: body_size });
         }
 
         // lag_type: u32

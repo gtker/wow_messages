@@ -38,7 +38,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // status: TradeStatus
-        w.write_all(&u32::from(self.status.as_int()).to_le_bytes())?;
+        w.write_all(&(self.status.as_int().to_le_bytes()))?;
 
         match &self.status {
             SMSG_TRADE_STATUS_TradeStatus::BeginTrade {
@@ -84,7 +84,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=13).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0120, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0120, size: body_size });
         }
 
         // status: TradeStatus

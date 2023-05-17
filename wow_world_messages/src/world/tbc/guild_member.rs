@@ -47,7 +47,7 @@ impl GuildMember {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // status: GuildMemberStatus
-        w.write_all(&u8::from(self.status.as_int()).to_le_bytes())?;
+        w.write_all(&(self.status.as_int().to_le_bytes()))?;
 
         // name: CString
         // TODO: Guard against strings that are already null-terminated
@@ -63,13 +63,13 @@ impl GuildMember {
         w.write_all(&self.level.as_int().to_le_bytes())?;
 
         // class: Class
-        w.write_all(&u8::from(self.class.as_int()).to_le_bytes())?;
+        w.write_all(&(self.class.as_int().to_le_bytes()))?;
 
         // unknown1: u8
         w.write_all(&self.unknown1.to_le_bytes())?;
 
         // area: Area
-        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
+        w.write_all(&(self.area.as_int().to_le_bytes()))?;
 
         match &self.status {
             GuildMember_GuildMemberStatus::Offline {

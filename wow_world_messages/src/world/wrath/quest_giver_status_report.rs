@@ -22,7 +22,7 @@ impl QuestGiverStatusReport {
         w.write_all(&self.npc.guid().to_le_bytes())?;
 
         // dialog_status: QuestGiverStatus
-        w.write_all(&u8::from(self.dialog_status.as_int()).to_le_bytes())?;
+        w.write_all(&(self.dialog_status.as_int().to_le_bytes()))?;
 
         Ok(())
     }

@@ -33,7 +33,7 @@ impl crate::Message for CMSG_QUEST_POI_QUERY {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(4..=10240).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01E3, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01E3, size: body_size });
         }
 
         // amount_of_pois: u32

@@ -36,7 +36,7 @@ impl crate::Message for SMSG_CHANNEL_LIST {
         w.write_all(&[0])?;
 
         // channel_flags: ChannelFlags
-        w.write_all(&u8::from(self.channel_flags.as_int()).to_le_bytes())?;
+        w.write_all(&(self.channel_flags.as_int().to_le_bytes()))?;
 
         // amount_of_members: u32
         w.write_all(&(self.members.len() as u32).to_le_bytes())?;
@@ -50,7 +50,7 @@ impl crate::Message for SMSG_CHANNEL_LIST {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(6..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x009B, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x009B, size: body_size });
         }
 
         // channel_name: CString

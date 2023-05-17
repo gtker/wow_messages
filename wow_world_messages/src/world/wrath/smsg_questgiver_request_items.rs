@@ -101,7 +101,7 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         w.write_all(&self.suggested_players.to_le_bytes())?;
 
         // required_money: Gold
-        w.write_all(u32::from(self.required_money.as_int()).to_le_bytes().as_slice())?;
+        w.write_all((self.required_money.as_int()).to_le_bytes().as_slice())?;
 
         // amount_of_required_items: u32
         w.write_all(&(self.required_items.len() as u32).to_le_bytes())?;
@@ -112,7 +112,7 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         }
 
         // completable: QuestCompletable
-        w.write_all(&u32::from(self.completable.as_int()).to_le_bytes())?;
+        w.write_all(&(self.completable.as_int().to_le_bytes()))?;
 
         // flags2: u32
         w.write_all(&self.flags2.to_le_bytes())?;
@@ -127,7 +127,7 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(58..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x018B, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x018B, size: body_size });
         }
 
         // npc: Guid

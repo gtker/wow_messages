@@ -66,7 +66,7 @@ impl CMD_AUTH_LOGON_PROOF_Client {
         }
 
         // security_flag: SecurityFlag
-        w.write_all(&u8::from(self.security_flag.as_int()).to_le_bytes())?;
+        w.write_all(&(self.security_flag.as_int().to_le_bytes()))?;
 
         if let Some(if_statement) = &self.security_flag.pin {
             // pin_salt: u8[16]

@@ -31,10 +31,10 @@ impl crate::Message for CMSG_BATTLEFIELD_LIST {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // battleground_type: BattlegroundType
-        w.write_all(&u32::from(self.battleground_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.battleground_type.as_int().to_le_bytes()))?;
 
         // location: BattlefieldListLocation
-        w.write_all(&u8::from(self.location.as_int()).to_le_bytes())?;
+        w.write_all(&(self.location.as_int().to_le_bytes()))?;
 
         // can_gain_exp: Bool
         w.write_all(u8::from(self.can_gain_exp).to_le_bytes().as_slice())?;
@@ -43,7 +43,7 @@ impl crate::Message for CMSG_BATTLEFIELD_LIST {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 6 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023C, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023C, size: body_size });
         }
 
         // battleground_type: BattlegroundType

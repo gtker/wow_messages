@@ -50,7 +50,7 @@ impl crate::Message for SMSG_SPELLENERGIZELOG {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(16..=30).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0151, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0151, size: body_size });
         }
 
         // victim: PackedGuid

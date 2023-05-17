@@ -39,10 +39,10 @@ impl LfgPlayer {
         w.write_all(&u32::from(self.level.as_int()).to_le_bytes())?;
 
         // area: Area
-        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
+        w.write_all(&(self.area.as_int().to_le_bytes()))?;
 
         // lfg_mode: LfgMode
-        w.write_all(&u8::from(self.lfg_mode.as_int()).to_le_bytes())?;
+        w.write_all(&(self.lfg_mode.as_int().to_le_bytes()))?;
 
         // lfg_slots: u32[3]
         for i in self.lfg_slots.iter() {

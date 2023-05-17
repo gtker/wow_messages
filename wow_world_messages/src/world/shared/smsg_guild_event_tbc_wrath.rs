@@ -26,7 +26,7 @@ impl crate::Message for SMSG_GUILD_EVENT {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // event: GuildEvent
-        w.write_all(&u8::from(self.event.as_int()).to_le_bytes())?;
+        w.write_all(&(self.event.as_int().to_le_bytes()))?;
 
         // amount_of_events: u8
         w.write_all(&(self.event_descriptions.len() as u8).to_le_bytes())?;
@@ -41,7 +41,7 @@ impl crate::Message for SMSG_GUILD_EVENT {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=65538).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0092, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0092, size: body_size });
         }
 
         // event: GuildEvent

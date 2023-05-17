@@ -25,7 +25,7 @@ impl crate::Message for SMSG_DEFENSE_MESSAGE {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // area: Area
-        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
+        w.write_all(&(self.area.as_int().to_le_bytes()))?;
 
         // message: SizedCString
         w.write_all(&((self.message.len() + 1) as u32).to_le_bytes())?;
@@ -37,7 +37,7 @@ impl crate::Message for SMSG_DEFENSE_MESSAGE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=8008).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x033B, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x033B, size: body_size });
         }
 
         // area: Area

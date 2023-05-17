@@ -34,7 +34,7 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
         w.write_all(&self.battle_id.to_le_bytes())?;
 
         // area: Area
-        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
+        w.write_all(&(self.area.as_int().to_le_bytes()))?;
 
         // queued: Bool
         w.write_all(u8::from(self.queued).to_le_bytes().as_slice())?;
@@ -49,7 +49,7 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 11 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E4, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E4, size: body_size });
         }
 
         // battle_id: u32

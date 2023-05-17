@@ -29,13 +29,13 @@ impl crate::Message for SMSG_PLAYERBOUND {
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // area: Area
-        w.write_all(&u32::from(self.area.as_int()).to_le_bytes())?;
+        w.write_all(&(self.area.as_int().to_le_bytes()))?;
 
         Ok(())
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0158, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0158, size: body_size });
         }
 
         // guid: Guid

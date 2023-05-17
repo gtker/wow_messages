@@ -68,7 +68,7 @@ impl crate::Message for CMSG_LFG_JOIN {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=1544).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x035C, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x035C, size: body_size });
         }
 
         // roles: u32

@@ -43,7 +43,7 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         w.write_all(&self.unknown1.to_le_bytes())?;
 
         // mask: CacheMask
-        w.write_all(&u32::from(self.mask.as_int()).to_le_bytes())?;
+        w.write_all(&(self.mask.as_int().to_le_bytes()))?;
 
         // data: u32[-]
         for i in self.data.iter() {
@@ -54,7 +54,7 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(9..=65544).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0209, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0209, size: body_size });
         }
 
         // unix_time: u32

@@ -36,10 +36,10 @@ impl crate::Message for SMSG_LFG_UPDATE_PARTY {
 
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         // update_type: LfgUpdateType
-        w.write_all(&u8::from(self.update_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.update_type.as_int().to_le_bytes()))?;
 
         // join_status: LfgJoinStatus
-        w.write_all(&u8::from(self.join_status.as_int()).to_le_bytes())?;
+        w.write_all(&(self.join_status.as_int().to_le_bytes()))?;
 
         match &self.join_status {
             SMSG_LFG_UPDATE_PARTY_LfgJoinStatus::Joined {
@@ -85,7 +85,7 @@ impl crate::Message for SMSG_LFG_UPDATE_PARTY {
     }
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
         if !(2..=1287).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0368, size: body_size as u32 });
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0368, size: body_size });
         }
 
         // update_type: LfgUpdateType
