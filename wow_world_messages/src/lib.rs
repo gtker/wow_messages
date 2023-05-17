@@ -69,8 +69,6 @@ pub(crate) mod util;
 #[allow(
     unused,
     clippy::complexity,
-    clippy::bool_to_int_with_if,
-    dead_code,
     clippy::single_match,
     clippy::large_enum_variant,
     clippy::enum_variant_names,

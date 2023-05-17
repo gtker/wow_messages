@@ -127,10 +127,7 @@ pub mod helper;
     non_snake_case,
     unused,
     clippy::complexity,
-    clippy::single_match,
-    clippy::clone_on_copy,
-    clippy::missing_errors_doc,
-    clippy::upper_case_acronyms
+    clippy::single_match
 )]
 pub(crate) mod logon;
 pub(crate) mod util;
