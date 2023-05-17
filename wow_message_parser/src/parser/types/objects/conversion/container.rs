@@ -644,7 +644,11 @@ pub(crate) fn parsed_test_case_to_test_case(
     let definers = [enums, flags].concat();
 
     for p in parsed {
-        let c = conversion::get_container(containers, p.subject(), p.tags()).unwrap();
+        let c = if let Some(a) = conversion::get_container(containers, p.subject(), p.tags()) {
+            a
+        } else {
+            panic!("Unable to find test subject '{}' for test.", p.subject());
+        };
 
         v.push(convert_parsed_test_case_to_test_case(
             p, c, containers, enums, flags, &definers,
