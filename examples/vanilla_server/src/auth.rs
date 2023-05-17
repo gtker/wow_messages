@@ -368,7 +368,7 @@ async fn print_version_8_realm_list(mut stream: TcpStream) {
         for i in 0..9 {
             realms.push(Realm {
                 realm_type: RealmType::PlayerVsEnvironment,
-                locked: 0,
+                locked: false,
                 flag: Default::default(),
                 name: i.to_string(),
                 address: "localhost:8085".to_string(),

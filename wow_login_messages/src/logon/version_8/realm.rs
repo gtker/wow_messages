@@ -11,7 +11,7 @@ use crate::logon::version_8::RealmFlag;
 /// ```text
 /// struct Realm {
 ///     RealmType realm_type;
-///     u8 locked;
+///     Bool locked;
 ///     RealmFlag flag;
 ///     CString name;
 ///     CString address;
@@ -28,7 +28,7 @@ pub struct Realm {
     /// vmangos: this is the second column in Cfg_Configs.dbc
     ///
     pub realm_type: RealmType,
-    pub locked: u8,
+    pub locked: bool,
     pub flag: Realm_RealmFlag,
     pub name: String,
     pub address: String,
@@ -43,8 +43,8 @@ impl Realm {
         // realm_type: RealmType
         w.write_all(&u8::from(self.realm_type.as_int()).to_le_bytes())?;
 
-        // locked: u8
-        w.write_all(&self.locked.to_le_bytes())?;
+        // locked: Bool
+        w.write_all(u8::from(self.locked).to_le_bytes().as_slice())?;
 
         // flag: RealmFlag
         w.write_all(&u8::from(self.flag.as_int()).to_le_bytes())?;
@@ -90,8 +90,8 @@ impl Realm {
         // realm_type: RealmType
         let realm_type: RealmType = crate::util::read_u8_le(&mut r)?.try_into()?;
 
-        // locked: u8
-        let locked = crate::util::read_u8_le(&mut r)?;
+        // locked: Bool
+        let locked = crate::util::read_u8_le(&mut r)? != 0;
 
         // flag: RealmFlag
         let flag = RealmFlag::new(crate::util::read_u8_le(&mut r)?);
@@ -155,8 +155,8 @@ impl Realm {
         // realm_type: RealmType
         let realm_type: RealmType = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
-        // locked: u8
-        let locked = crate::util::tokio_read_u8_le(&mut r).await?;
+        // locked: Bool
+        let locked = crate::util::tokio_read_u8_le(&mut r).await? != 0;
 
         // flag: RealmFlag
         let flag = RealmFlag::new(crate::util::tokio_read_u8_le(&mut r).await?);
@@ -220,8 +220,8 @@ impl Realm {
         // realm_type: RealmType
         let realm_type: RealmType = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
-        // locked: u8
-        let locked = crate::util::astd_read_u8_le(&mut r).await?;
+        // locked: Bool
+        let locked = crate::util::astd_read_u8_le(&mut r).await? != 0;
 
         // flag: RealmFlag
         let flag = RealmFlag::new(crate::util::astd_read_u8_le(&mut r).await?);
@@ -285,7 +285,7 @@ impl Realm {
 impl Realm {
     pub(crate) fn size(&self) -> usize {
         1 // realm_type: RealmType
-        + 1 // locked: u8
+        + 1 // locked: Bool
         + self.flag.size() // flag: Realm_RealmFlag
         + self.name.len() + 1 // name: CString
         + self.address.len() + 1 // address: CString

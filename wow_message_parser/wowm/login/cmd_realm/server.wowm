@@ -139,7 +139,7 @@ struct Realm {
     RealmType realm_type {
         comment = "vmangos: this is the second column in Cfg_Configs.dbc";
     }
-    u8 locked;
+    Bool locked;
     RealmFlag flag;
     CString name;
     CString address;
@@ -168,7 +168,7 @@ test CMD_REALM_LIST_Server {
     realms = [
         {
             realm_type = PLAYER_VS_ENVIRONMENT;  
-            locked = 0;
+            locked = FALSE;
             flag = INVALID | OFFLINE;
             name = "A";
             address = "A";
@@ -201,7 +201,7 @@ test CMD_REALM_LIST_Server {
     realms = [
         {
             realm_type = PLAYER_VS_ENVIRONMENT;  
-            locked = 0;
+            locked = FALSE;
             flag = SPECIFY_BUILD;
             name = "A";
             address = "A";

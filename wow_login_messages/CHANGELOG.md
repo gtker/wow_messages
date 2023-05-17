@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: Write functions have been changed from taking a `&mut impl Write` to just a `Write` [in accordance with the library guidelines](https://rust-lang.github.io/api-guidelines/interoperability.html#c-rw-value).
 * BREAKING: Read functions have been changed from taking a `&mut impl Read` to just `Read` [in accordance with the library guidelines](https://rust-lang.github.io/api-guidelines/interoperability.html#c-rw-value).
 * BREAKING: `ServerMessage` and `ClientMessage` traits have been sealed to prevent downstream implementation. Read methods have also been sealed.
+* BREAKING: The `locked` field of `Realm` for login version 8 is now a `bool` instead of a `u8`.
 
 ## [0.2.0] - 2022-10-31
 

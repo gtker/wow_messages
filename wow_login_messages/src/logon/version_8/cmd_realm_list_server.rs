@@ -266,7 +266,7 @@ mod test {
             realms: vec![
                 Realm {
                     realm_type: RealmType::PlayerVsEnvironment,
-                    locked: 0x0,
+                    locked: false, 
                     flag: Realm_RealmFlag::empty()
                         .set_INVALID()
                         .set_OFFLINE()
@@ -352,7 +352,7 @@ mod test {
             realms: vec![
                 Realm {
                     realm_type: RealmType::PlayerVsEnvironment,
-                    locked: 0x0,
+                    locked: false, 
                     flag: Realm_RealmFlag::empty()
                         .set_SPECIFY_BUILD(Realm_RealmFlag_SpecifyBuild {
                             version: Version {
