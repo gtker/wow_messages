@@ -57,7 +57,7 @@
     clippy::doc_markdown,
     clippy::unseparated_literal_suffix
 )]
-#![allow(non_snake_case, clippy::missing_errors_doc)]
+#![allow(clippy::missing_errors_doc)]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
@@ -77,7 +77,8 @@ pub(crate) mod util;
     clippy::approx_constant,
     clippy::upper_case_acronyms,
     clippy::needless_borrow,
-    non_camel_case_types
+    non_camel_case_types,
+    non_snake_case
 )]
 mod world;
 
