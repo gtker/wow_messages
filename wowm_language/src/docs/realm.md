@@ -32,7 +32,7 @@ struct Realm {
 
 # Realm
 
-## Protocol Version 5, Protocol Version 6
+## Protocol Version 5, Protocol Version 6, Protocol Version 7
 
 ### Wowm Representation
 

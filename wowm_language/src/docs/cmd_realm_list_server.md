@@ -110,7 +110,7 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 
 # CMD_REALM_LIST_Server
 
-## Protocol Version 6
+## Protocol Version 6, Protocol Version 7
 
 ### Wowm Representation
 

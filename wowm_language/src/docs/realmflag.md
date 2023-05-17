@@ -1,6 +1,6 @@
 # RealmFlag
 
-## Protocol Version 2, Protocol Version 3, Protocol Version 5, Protocol Version 6
+## Protocol Version 2, Protocol Version 3, Protocol Version 5, Protocol Version 6, Protocol Version 7
 
 ### Wowm Representation
 
