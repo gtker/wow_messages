@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
-## [0.1.0] - 2023-05-08
+## [0.1.0] - 2023-05-20
 
 ### Added
 
@@ -16,4 +16,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- next-url -->
 [Unreleased]: https://github.com/gtker/wow_messages/compare/wow_world_base-v0.1.0...HEAD
-[0.1.0]: https://github.com/gtker/wow_messages/tree/c6826f8134ab31938d80c2fd9490852dd3601738
+[0.1.0]: https://github.com/gtker/wow_messages/releases/tag/wow_world_base-v0.1.0
