@@ -5,7 +5,7 @@
 //! To add only the base items run the following command:
 //!
 //! ```bash
-//! cargo add --features 'vanilla tbc wrath' wow_login_messages
+//! cargo add --features 'vanilla tbc wrath' wow_world_base
 //! ```
 //!
 //! The library is split into the top level modules:
