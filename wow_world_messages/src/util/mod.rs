@@ -21,7 +21,7 @@ use crate::shared::addon_tbc_wrath::Addon;
 #[cfg(feature = "wrath")]
 use crate::wrath::{AchievementDone, AchievementInProgress};
 
-use crate::{DateTime, Guid};
+#[cfg(any(feature = "wrath", feature = "tbc", feature = "vanilla"))]
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 
 pub(crate) const CSTRING_LARGEST_ALLOWED: usize = 256;
@@ -140,6 +140,7 @@ pub const fn u32_to_u16s(a: u32) -> (u16, u16) {
     (high, low)
 }
 
+#[cfg(any(feature = "wrath", feature = "tbc", feature = "vanilla"))]
 fn vector3d_to_packed(v: &Vector3d) -> u32 {
     let mut packed = 0;
 
@@ -150,6 +151,7 @@ fn vector3d_to_packed(v: &Vector3d) -> u32 {
     packed
 }
 
+#[cfg(any(feature = "wrath", feature = "tbc", feature = "vanilla"))]
 const fn packed_to_vector3d(p: u32) -> Vector3d {
     let x = ((p & 0x7FF) / 4) as f32;
     let y = (((p >> 11) & 0x7FF) / 4) as f32;
@@ -157,6 +159,8 @@ const fn packed_to_vector3d(p: u32) -> Vector3d {
 
     Vector3d { x, y, z }
 }
+
+#[cfg(any(feature = "wrath", feature = "tbc", feature = "vanilla"))]
 pub(crate) fn read_monster_move_spline(
     mut r: &mut impl Read,
 ) -> Result<Vec<Vector3d>, crate::errors::ParseError> {
@@ -176,6 +180,7 @@ pub(crate) fn read_monster_move_spline(
     Ok(splines)
 }
 
+#[cfg(any(feature = "wrath", feature = "tbc", feature = "vanilla"))]
 pub(crate) fn write_monster_move_spline(
     splines: &[Vector3d],
     mut v: impl Write,
@@ -196,6 +201,7 @@ pub(crate) fn write_monster_move_spline(
     Ok(())
 }
 
+#[cfg(any(feature = "wrath", feature = "tbc", feature = "vanilla"))]
 pub(crate) fn monster_move_spline_size(splines: &[Vector3d]) -> usize {
     let mut splines = splines.iter();
 
@@ -222,7 +228,7 @@ pub(crate) fn read_achievement_done(
     let mut done = Vec::new();
 
     while first != ACHIEVEMENT_SENTINEL_VALUE {
-        let time = DateTime::try_from(read_u32_le(r)?)?;
+        let time = crate::DateTime::try_from(read_u32_le(r)?)?;
 
         done.push(AchievementDone {
             achievement: first,
@@ -258,10 +264,10 @@ pub(crate) fn read_achievement_in_progress(
     let mut in_progress = Vec::new();
 
     while first != ACHIEVEMENT_SENTINEL_VALUE {
-        let counter = Guid::read_packed(r)?;
-        let player = Guid::read_packed(r)?;
+        let counter = crate::Guid::read_packed(r)?;
+        let player = crate::Guid::read_packed(r)?;
         let timed_criteria_failed = read_u32_le(r)? != 0;
-        let progress_date = DateTime::try_from(read_u32_le(r)?)?;
+        let progress_date = crate::DateTime::try_from(read_u32_le(r)?)?;
         let time_since_progress = read_u32_le(r)?;
         let time_since_progress2 = read_u32_le(r)?;
 
