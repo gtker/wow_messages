@@ -77,7 +77,7 @@ impl crate::Message for SMSG_SPELLSTEALLOG {
         // spell_steals: SpellSteal[amount_of_spell_steals]
         let spell_steals = {
             let mut spell_steals = Vec::with_capacity(amount_of_spell_steals as usize);
-            for i in 0..amount_of_spell_steals {
+            for _ in 0..amount_of_spell_steals {
                 spell_steals.push(SpellSteal::read(&mut r)?);
             }
             spell_steals

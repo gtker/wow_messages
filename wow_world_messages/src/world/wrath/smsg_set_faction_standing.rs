@@ -64,7 +64,7 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
         // faction_standings: FactionStanding[amount_of_faction_standings]
         let faction_standings = {
             let mut faction_standings = Vec::with_capacity(amount_of_faction_standings as usize);
-            for i in 0..amount_of_faction_standings {
+            for _ in 0..amount_of_faction_standings {
                 faction_standings.push(FactionStanding::read(&mut r)?);
             }
             faction_standings

@@ -142,7 +142,7 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
         // sorted_auctions: AuctionSort[amount_of_sorted_auctions]
         let sorted_auctions = {
             let mut sorted_auctions = Vec::with_capacity(amount_of_sorted_auctions as usize);
-            for i in 0..amount_of_sorted_auctions {
+            for _ in 0..amount_of_sorted_auctions {
                 sorted_auctions.push(AuctionSort::read(&mut r)?);
             }
             sorted_auctions

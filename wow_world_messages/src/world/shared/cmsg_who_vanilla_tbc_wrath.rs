@@ -118,7 +118,7 @@ impl crate::Message for CMSG_WHO {
         // zones: u32[amount_of_zones]
         let zones = {
             let mut zones = Vec::with_capacity(amount_of_zones as usize);
-            for i in 0..amount_of_zones {
+            for _ in 0..amount_of_zones {
                 zones.push(crate::util::read_u32_le(&mut r)?);
             }
             zones
@@ -130,7 +130,7 @@ impl crate::Message for CMSG_WHO {
         // search_strings: CString[amount_of_strings]
         let search_strings = {
             let mut search_strings = Vec::with_capacity(amount_of_strings as usize);
-            for i in 0..amount_of_strings {
+            for _ in 0..amount_of_strings {
                 let s = crate::util::read_c_string_to_vec(&mut r)?;
                 search_strings.push(String::from_utf8(s)?);
             }

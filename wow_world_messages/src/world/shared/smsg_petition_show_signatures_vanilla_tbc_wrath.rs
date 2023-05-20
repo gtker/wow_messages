@@ -69,7 +69,7 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
         // signatures: PetitionSignature[amount_of_signatures]
         let signatures = {
             let mut signatures = Vec::with_capacity(amount_of_signatures as usize);
-            for i in 0..amount_of_signatures {
+            for _ in 0..amount_of_signatures {
                 signatures.push(PetitionSignature::read(&mut r)?);
             }
             signatures

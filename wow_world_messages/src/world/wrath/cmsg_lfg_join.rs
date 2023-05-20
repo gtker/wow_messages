@@ -86,7 +86,7 @@ impl crate::Message for CMSG_LFG_JOIN {
         // slots: u32[amount_of_slots]
         let slots = {
             let mut slots = Vec::with_capacity(amount_of_slots as usize);
-            for i in 0..amount_of_slots {
+            for _ in 0..amount_of_slots {
                 slots.push(crate::util::read_u32_le(&mut r)?);
             }
             slots
@@ -98,7 +98,7 @@ impl crate::Message for CMSG_LFG_JOIN {
         // needs: u8[amount_of_needs]
         let needs = {
             let mut needs = Vec::with_capacity(amount_of_needs as usize);
-            for i in 0..amount_of_needs {
+            for _ in 0..amount_of_needs {
                 needs.push(crate::util::read_u8_le(&mut r)?);
             }
             needs

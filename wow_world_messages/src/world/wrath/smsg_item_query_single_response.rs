@@ -458,7 +458,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             // stats: ItemStat[amount_of_stats]
             let stats = {
                 let mut stats = Vec::with_capacity(amount_of_stats as usize);
-                for i in 0..amount_of_stats {
+                for _ in 0..amount_of_stats {
                     stats.push(ItemStat::read(&mut r)?);
                 }
                 stats

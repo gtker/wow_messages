@@ -153,7 +153,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                 // generator: u8[generator_length]
                 let generator = {
                     let mut generator = Vec::with_capacity(generator_length as usize);
-                    for i in 0..generator_length {
+                    for _ in 0..generator_length {
                         generator.push(crate::util::read_u8_le(&mut r)?);
                     }
                     generator
@@ -165,7 +165,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                 // large_safe_prime: u8[large_safe_prime_length]
                 let large_safe_prime = {
                     let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
-                    for i in 0..large_safe_prime_length {
+                    for _ in 0..large_safe_prime_length {
                         large_safe_prime.push(crate::util::read_u8_le(&mut r)?);
                     }
                     large_safe_prime
@@ -279,7 +279,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     // generator: u8[generator_length]
                     let generator = {
                         let mut generator = Vec::with_capacity(generator_length as usize);
-                        for i in 0..generator_length {
+                        for _ in 0..generator_length {
                             generator.push(crate::util::tokio_read_u8_le(&mut r).await?);
                         }
                         generator
@@ -291,7 +291,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     // large_safe_prime: u8[large_safe_prime_length]
                     let large_safe_prime = {
                         let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
-                        for i in 0..large_safe_prime_length {
+                        for _ in 0..large_safe_prime_length {
                             large_safe_prime.push(crate::util::tokio_read_u8_le(&mut r).await?);
                         }
                         large_safe_prime
@@ -418,7 +418,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     // generator: u8[generator_length]
                     let generator = {
                         let mut generator = Vec::with_capacity(generator_length as usize);
-                        for i in 0..generator_length {
+                        for _ in 0..generator_length {
                             generator.push(crate::util::astd_read_u8_le(&mut r).await?);
                         }
                         generator
@@ -430,7 +430,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     // large_safe_prime: u8[large_safe_prime_length]
                     let large_safe_prime = {
                         let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
-                        for i in 0..large_safe_prime_length {
+                        for _ in 0..large_safe_prime_length {
                             large_safe_prime.push(crate::util::astd_read_u8_le(&mut r).await?);
                         }
                         large_safe_prime

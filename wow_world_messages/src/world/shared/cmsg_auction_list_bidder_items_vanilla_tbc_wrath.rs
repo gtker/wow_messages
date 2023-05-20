@@ -60,7 +60,7 @@ impl crate::Message for CMSG_AUCTION_LIST_BIDDER_ITEMS {
         // outbid_item_ids: u32[amount_of_outbid_items]
         let outbid_item_ids = {
             let mut outbid_item_ids = Vec::with_capacity(amount_of_outbid_items as usize);
-            for i in 0..amount_of_outbid_items {
+            for _ in 0..amount_of_outbid_items {
                 outbid_item_ids.push(crate::util::read_u32_le(&mut r)?);
             }
             outbid_item_ids

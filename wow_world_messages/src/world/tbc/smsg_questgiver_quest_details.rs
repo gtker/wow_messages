@@ -176,7 +176,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
         let choice_item_rewards = {
             let mut choice_item_rewards = Vec::with_capacity(amount_of_choice_item_rewards as usize);
-            for i in 0..amount_of_choice_item_rewards {
+            for _ in 0..amount_of_choice_item_rewards {
                 choice_item_rewards.push(QuestItemReward::read(&mut r)?);
             }
             choice_item_rewards
@@ -188,7 +188,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         // item_rewards: QuestItemReward[amount_of_item_rewards]
         let item_rewards = {
             let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
-            for i in 0..amount_of_item_rewards {
+            for _ in 0..amount_of_item_rewards {
                 item_rewards.push(QuestItemReward::read(&mut r)?);
             }
             item_rewards
@@ -215,7 +215,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         // emotes: QuestDetailsEmote[amount_of_emotes]
         let emotes = {
             let mut emotes = Vec::with_capacity(amount_of_emotes as usize);
-            for i in 0..amount_of_emotes {
+            for _ in 0..amount_of_emotes {
                 emotes.push(QuestDetailsEmote::read(&mut r)?);
             }
             emotes

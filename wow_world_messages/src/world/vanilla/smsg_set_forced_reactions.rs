@@ -44,7 +44,7 @@ impl crate::Message for SMSG_SET_FORCED_REACTIONS {
         // reactions: ForcedReaction[amount_of_reactions]
         let reactions = {
             let mut reactions = Vec::with_capacity(amount_of_reactions as usize);
-            for i in 0..amount_of_reactions {
+            for _ in 0..amount_of_reactions {
                 reactions.push(ForcedReaction::read(&mut r)?);
             }
             reactions

@@ -115,7 +115,7 @@ impl crate::Message for SMSG_LFG_UPDATE_PARTY {
                 // dungeons: u32[amount_of_dungeons]
                 let dungeons = {
                     let mut dungeons = Vec::with_capacity(amount_of_dungeons as usize);
-                    for i in 0..amount_of_dungeons {
+                    for _ in 0..amount_of_dungeons {
                         dungeons.push(crate::util::read_u32_le(&mut r)?);
                     }
                     dungeons

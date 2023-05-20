@@ -44,7 +44,7 @@ impl crate::Message for SMSG_AUCTION_LIST_PENDING_SALES {
         // pending_sales: PendingAuctionSale[amount_of_pending_sales]
         let pending_sales = {
             let mut pending_sales = Vec::with_capacity(amount_of_pending_sales as usize);
-            for i in 0..amount_of_pending_sales {
+            for _ in 0..amount_of_pending_sales {
                 pending_sales.push(PendingAuctionSale::read(&mut r)?);
             }
             pending_sales

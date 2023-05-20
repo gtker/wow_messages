@@ -96,7 +96,7 @@ impl crate::Message for SMSG_TALENTS_INFO {
                 // specs: TalentInfoSpec[amount_of_specs]
                 let specs = {
                     let mut specs = Vec::with_capacity(amount_of_specs as usize);
-                    for i in 0..amount_of_specs {
+                    for _ in 0..amount_of_specs {
                         specs.push(TalentInfoSpec::read(&mut r)?);
                     }
                     specs
@@ -114,7 +114,7 @@ impl crate::Message for SMSG_TALENTS_INFO {
                 // talents: InspectTalent[amount_of_talents]
                 let talents = {
                     let mut talents = Vec::with_capacity(amount_of_talents as usize);
-                    for i in 0..amount_of_talents {
+                    for _ in 0..amount_of_talents {
                         talents.push(InspectTalent::read(&mut r)?);
                     }
                     talents

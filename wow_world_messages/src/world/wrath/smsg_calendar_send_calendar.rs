@@ -100,7 +100,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
         // invites: SendCalendarInvite[amount_of_invites]
         let invites = {
             let mut invites = Vec::with_capacity(amount_of_invites as usize);
-            for i in 0..amount_of_invites {
+            for _ in 0..amount_of_invites {
                 invites.push(SendCalendarInvite::read(&mut r)?);
             }
             invites
@@ -112,7 +112,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
         // events: SendCalendarEvent[amount_of_events]
         let events = {
             let mut events = Vec::with_capacity(amount_of_events as usize);
-            for i in 0..amount_of_events {
+            for _ in 0..amount_of_events {
                 events.push(SendCalendarEvent::read(&mut r)?);
             }
             events
@@ -130,7 +130,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
         // instances: SendCalendarInstance[amount_of_instances]
         let instances = {
             let mut instances = Vec::with_capacity(amount_of_instances as usize);
-            for i in 0..amount_of_instances {
+            for _ in 0..amount_of_instances {
                 instances.push(SendCalendarInstance::read(&mut r)?);
             }
             instances
@@ -145,7 +145,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
         // reset_times: SendCalendarResetTime[amount_of_reset_times]
         let reset_times = {
             let mut reset_times = Vec::with_capacity(amount_of_reset_times as usize);
-            for i in 0..amount_of_reset_times {
+            for _ in 0..amount_of_reset_times {
                 reset_times.push(SendCalendarResetTime::read(&mut r)?);
             }
             reset_times

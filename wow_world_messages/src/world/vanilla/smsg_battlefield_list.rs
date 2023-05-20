@@ -71,7 +71,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         // battlegrounds: u32[number_of_battlegrounds]
         let battlegrounds = {
             let mut battlegrounds = Vec::with_capacity(number_of_battlegrounds as usize);
-            for i in 0..number_of_battlegrounds {
+            for _ in 0..number_of_battlegrounds {
                 battlegrounds.push(crate::util::read_u32_le(&mut r)?);
             }
             battlegrounds

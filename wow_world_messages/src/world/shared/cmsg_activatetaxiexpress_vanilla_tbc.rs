@@ -62,7 +62,7 @@ impl crate::Message for CMSG_ACTIVATETAXIEXPRESS {
         // nodes: u32[node_count]
         let nodes = {
             let mut nodes = Vec::with_capacity(node_count as usize);
-            for i in 0..node_count {
+            for _ in 0..node_count {
                 nodes.push(crate::util::read_u32_le(&mut r)?);
             }
             nodes

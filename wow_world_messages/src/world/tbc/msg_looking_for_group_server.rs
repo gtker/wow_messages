@@ -72,7 +72,7 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
         // players_displayed: LfgPlayer[amount_of_players_displayed]
         let players_displayed = {
             let mut players_displayed = Vec::with_capacity(amount_of_players_displayed as usize);
-            for i in 0..amount_of_players_displayed {
+            for _ in 0..amount_of_players_displayed {
                 players_displayed.push(LfgPlayer::read(&mut r)?);
             }
             players_displayed

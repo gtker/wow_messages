@@ -127,7 +127,7 @@ impl crate::Message for SMSG_PET_SPELLS {
             // spells: u32[amount_of_spells]
             let spells = {
                 let mut spells = Vec::with_capacity(amount_of_spells as usize);
-                for i in 0..amount_of_spells {
+                for _ in 0..amount_of_spells {
                     spells.push(crate::util::read_u32_le(&mut r)?);
                 }
                 spells
@@ -139,7 +139,7 @@ impl crate::Message for SMSG_PET_SPELLS {
             // cooldowns: PetSpellCooldown[amount_of_cooldowns]
             let cooldowns = {
                 let mut cooldowns = Vec::with_capacity(amount_of_cooldowns as usize);
-                for i in 0..amount_of_cooldowns {
+                for _ in 0..amount_of_cooldowns {
                     cooldowns.push(PetSpellCooldown::read(&mut r)?);
                 }
                 cooldowns

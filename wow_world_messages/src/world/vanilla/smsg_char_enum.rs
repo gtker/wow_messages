@@ -46,7 +46,7 @@ impl crate::Message for SMSG_CHAR_ENUM {
         // characters: Character[amount_of_characters]
         let characters = {
             let mut characters = Vec::with_capacity(amount_of_characters as usize);
-            for i in 0..amount_of_characters {
+            for _ in 0..amount_of_characters {
                 characters.push(Character::read(&mut r)?);
             }
             characters

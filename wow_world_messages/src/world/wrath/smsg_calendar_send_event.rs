@@ -165,7 +165,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_EVENT {
         // invitees: CalendarSendInvitee[amount_of_invitees]
         let invitees = {
             let mut invitees = Vec::with_capacity(amount_of_invitees as usize);
-            for i in 0..amount_of_invitees {
+            for _ in 0..amount_of_invitees {
                 invitees.push(CalendarSendInvitee::read(&mut r)?);
             }
             invitees

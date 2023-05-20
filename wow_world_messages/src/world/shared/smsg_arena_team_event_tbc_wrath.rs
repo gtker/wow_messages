@@ -321,7 +321,7 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
         // string: CString[amount_of_strings]
         let string = {
             let mut string = Vec::with_capacity(amount_of_strings as usize);
-            for i in 0..amount_of_strings {
+            for _ in 0..amount_of_strings {
                 let s = crate::util::read_c_string_to_vec(&mut r)?;
                 string.push(String::from_utf8(s)?);
             }

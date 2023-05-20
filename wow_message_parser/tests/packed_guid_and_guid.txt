@@ -98,7 +98,7 @@ impl PackedGuidAndGuid {
         // variable_packed: PackedGuid[basic1]
         let variable_packed = {
             let mut variable_packed = Vec::with_capacity(basic1 as usize);
-            for i in 0..basic1 {
+            for _ in 0..basic1 {
                 variable_packed.push(Guid::read_packed(&mut r)?);
             }
             variable_packed
@@ -107,7 +107,7 @@ impl PackedGuidAndGuid {
         // variable_guid: Guid[basic2]
         let variable_guid = {
             let mut variable_guid = Vec::with_capacity(basic2 as usize);
-            for i in 0..basic2 {
+            for _ in 0..basic2 {
                 variable_guid.push(Guid::read(&mut r)?);
             }
             variable_guid

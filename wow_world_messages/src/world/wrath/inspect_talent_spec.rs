@@ -36,7 +36,7 @@ impl InspectTalentSpec {
         // talents: InspectTalent[amount_of_talents]
         let talents = {
             let mut talents = Vec::with_capacity(amount_of_talents as usize);
-            for i in 0..amount_of_talents {
+            for _ in 0..amount_of_talents {
                 talents.push(InspectTalent::read(&mut r)?);
             }
             talents

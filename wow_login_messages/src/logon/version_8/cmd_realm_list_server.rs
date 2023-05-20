@@ -89,7 +89,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
         // realms: Realm[number_of_realms]
         let realms = {
             let mut realms = Vec::with_capacity(number_of_realms as usize);
-            for i in 0..number_of_realms {
+            for _ in 0..number_of_realms {
                 realms.push(Realm::read(&mut r)?);
             }
             realms
@@ -136,7 +136,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
             // realms: Realm[number_of_realms]
             let realms = {
                 let mut realms = Vec::with_capacity(number_of_realms as usize);
-                for i in 0..number_of_realms {
+                for _ in 0..number_of_realms {
                     realms.push(Realm::tokio_read(&mut r).await?);
                 }
                 realms
@@ -196,7 +196,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
             // realms: Realm[number_of_realms]
             let realms = {
                 let mut realms = Vec::with_capacity(number_of_realms as usize);
-                for i in 0..number_of_realms {
+                for _ in 0..number_of_realms {
                     realms.push(Realm::astd_read(&mut r).await?);
                 }
                 realms

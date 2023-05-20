@@ -44,7 +44,7 @@ impl crate::Message for SMSG_EQUIPMENT_SET_LIST {
         // equipment_sets: EquipmentSetListItem[amount_of_equipment_sets]
         let equipment_sets = {
             let mut equipment_sets = Vec::with_capacity(amount_of_equipment_sets as usize);
-            for i in 0..amount_of_equipment_sets {
+            for _ in 0..amount_of_equipment_sets {
                 equipment_sets.push(EquipmentSetListItem::read(&mut r)?);
             }
             equipment_sets

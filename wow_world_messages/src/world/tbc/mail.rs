@@ -239,7 +239,7 @@ impl Mail {
         // items: MailListItem[amount_of_items]
         let items = {
             let mut items = Vec::with_capacity(amount_of_items as usize);
-            for i in 0..amount_of_items {
+            for _ in 0..amount_of_items {
                 items.push(MailListItem::read(&mut r)?);
             }
             items

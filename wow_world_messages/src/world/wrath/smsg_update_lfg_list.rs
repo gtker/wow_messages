@@ -118,7 +118,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
                 // deleted_guids: Guid[amount_of_deleted_guids]
                 let deleted_guids = {
                     let mut deleted_guids = Vec::with_capacity(amount_of_deleted_guids as usize);
-                    for i in 0..amount_of_deleted_guids {
+                    for _ in 0..amount_of_deleted_guids {
                         deleted_guids.push(Guid::read(&mut r)?);
                     }
                     deleted_guids
@@ -140,7 +140,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
         // groups: LfgListGroup[amount_of_groups]
         let groups = {
             let mut groups = Vec::with_capacity(amount_of_groups as usize);
-            for i in 0..amount_of_groups {
+            for _ in 0..amount_of_groups {
                 groups.push(LfgListGroup::read(&mut r)?);
             }
             groups
@@ -155,7 +155,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
         // players: LfgListPlayer[amount_of_players]
         let players = {
             let mut players = Vec::with_capacity(amount_of_players as usize);
-            for i in 0..amount_of_players {
+            for _ in 0..amount_of_players {
                 players.push(LfgListPlayer::read(&mut r)?);
             }
             players

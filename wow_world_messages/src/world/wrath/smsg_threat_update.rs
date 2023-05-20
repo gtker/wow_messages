@@ -53,7 +53,7 @@ impl crate::Message for SMSG_THREAT_UPDATE {
         // units: ThreatUpdateUnit[amount_of_units]
         let units = {
             let mut units = Vec::with_capacity(amount_of_units as usize);
-            for i in 0..amount_of_units {
+            for _ in 0..amount_of_units {
                 units.push(ThreatUpdateUnit::read(&mut r)?);
             }
             units

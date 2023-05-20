@@ -88,7 +88,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_LIST {
         // quest_items: QuestItem[amount_of_entries]
         let quest_items = {
             let mut quest_items = Vec::with_capacity(amount_of_entries as usize);
-            for i in 0..amount_of_entries {
+            for _ in 0..amount_of_entries {
                 quest_items.push(QuestItem::read(&mut r)?);
             }
             quest_items

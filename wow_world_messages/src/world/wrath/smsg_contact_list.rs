@@ -56,7 +56,7 @@ impl crate::Message for SMSG_CONTACT_LIST {
         // relations: Relation[amount_of_relations]
         let relations = {
             let mut relations = Vec::with_capacity(amount_of_relations as usize);
-            for i in 0..amount_of_relations {
+            for _ in 0..amount_of_relations {
                 relations.push(Relation::read(&mut r)?);
             }
             relations

@@ -131,7 +131,7 @@ impl crate::Message for CMSG_CALENDAR_ADD_EVENT {
         // invitees: CalendarInvitee[amount_of_invitees]
         let invitees = {
             let mut invitees = Vec::with_capacity(amount_of_invitees as usize);
-            for i in 0..amount_of_invitees {
+            for _ in 0..amount_of_invitees {
                 invitees.push(CalendarInvitee::read(&mut r)?);
             }
             invitees

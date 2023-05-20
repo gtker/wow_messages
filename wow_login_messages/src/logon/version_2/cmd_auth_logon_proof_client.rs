@@ -88,7 +88,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
         // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
         let telemetry_keys = {
             let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
-            for i in 0..number_of_telemetry_keys {
+            for _ in 0..number_of_telemetry_keys {
                 telemetry_keys.push(TelemetryKey::read(&mut r)?);
             }
             telemetry_keys
@@ -147,7 +147,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
             let telemetry_keys = {
                 let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
-                for i in 0..number_of_telemetry_keys {
+                for _ in 0..number_of_telemetry_keys {
                     telemetry_keys.push(TelemetryKey::tokio_read(&mut r).await?);
                 }
                 telemetry_keys
@@ -219,7 +219,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
             let telemetry_keys = {
                 let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
-                for i in 0..number_of_telemetry_keys {
+                for _ in 0..number_of_telemetry_keys {
                     telemetry_keys.push(TelemetryKey::astd_read(&mut r).await?);
                 }
                 telemetry_keys

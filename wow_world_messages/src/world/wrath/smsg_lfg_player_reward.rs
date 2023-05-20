@@ -115,7 +115,7 @@ impl crate::Message for SMSG_LFG_PLAYER_REWARD {
         // rewards: QuestGiverReward[amount_of_rewards]
         let rewards = {
             let mut rewards = Vec::with_capacity(amount_of_rewards as usize);
-            for i in 0..amount_of_rewards {
+            for _ in 0..amount_of_rewards {
                 rewards.push(QuestGiverReward::read(&mut r)?);
             }
             rewards

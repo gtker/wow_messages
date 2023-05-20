@@ -103,7 +103,7 @@ impl LfgPlayer {
         // members: LfgPlayerMember[amount_of_members]
         let members = {
             let mut members = Vec::with_capacity(amount_of_members as usize);
-            for i in 0..amount_of_members {
+            for _ in 0..amount_of_members {
                 members.push(LfgPlayerMember::read(&mut r)?);
             }
             members

@@ -60,7 +60,7 @@ impl crate::Message for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
         // targets: Guid[amount_of_targets]
         let targets = {
             let mut targets = Vec::with_capacity(amount_of_targets as usize);
-            for i in 0..amount_of_targets {
+            for _ in 0..amount_of_targets {
                 targets.push(Guid::read(&mut r)?);
             }
             targets

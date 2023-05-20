@@ -107,7 +107,7 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         // times: u32[num_of_times]
         let times = {
             let mut times = Vec::with_capacity(num_of_times as usize);
-            for i in 0..num_of_times {
+            for _ in 0..num_of_times {
                 times.push(crate::util::read_u32_le(&mut r)?);
             }
             times

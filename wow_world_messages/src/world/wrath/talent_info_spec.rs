@@ -47,7 +47,7 @@ impl TalentInfoSpec {
         // talents: InspectTalent[amount_of_talents]
         let talents = {
             let mut talents = Vec::with_capacity(amount_of_talents as usize);
-            for i in 0..amount_of_talents {
+            for _ in 0..amount_of_talents {
                 talents.push(InspectTalent::read(&mut r)?);
             }
             talents
@@ -59,7 +59,7 @@ impl TalentInfoSpec {
         // glyphs: u16[amount_of_glyphs]
         let glyphs = {
             let mut glyphs = Vec::with_capacity(amount_of_glyphs as usize);
-            for i in 0..amount_of_glyphs {
+            for _ in 0..amount_of_glyphs {
                 glyphs.push(crate::util::read_u16_le(&mut r)?);
             }
             glyphs

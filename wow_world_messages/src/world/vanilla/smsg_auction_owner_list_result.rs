@@ -49,7 +49,7 @@ impl crate::Message for SMSG_AUCTION_OWNER_LIST_RESULT {
         // auctions: AuctionListItem[count]
         let auctions = {
             let mut auctions = Vec::with_capacity(count as usize);
-            for i in 0..count {
+            for _ in 0..count {
                 auctions.push(AuctionListItem::read(&mut r)?);
             }
             auctions

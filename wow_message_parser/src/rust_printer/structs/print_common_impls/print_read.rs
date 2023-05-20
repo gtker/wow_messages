@@ -63,7 +63,7 @@ fn print_read_array(
                 length = m.name()
             ));
 
-            s.body(format!("for i in 0..{length}", length = m.name()), |s| {
+            s.body(format!("for _ in 0..{length}", length = m.name()), |s| {
                 print_array_ty(s, array, d, prefix, "r", postfix, false);
             });
         }

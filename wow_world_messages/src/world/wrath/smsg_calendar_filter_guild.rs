@@ -44,7 +44,7 @@ impl crate::Message for SMSG_CALENDAR_FILTER_GUILD {
         // members: CalendarMember[amount_of_members]
         let members = {
             let mut members = Vec::with_capacity(amount_of_members as usize);
-            for i in 0..amount_of_members {
+            for _ in 0..amount_of_members {
                 members.push(CalendarMember::read(&mut r)?);
             }
             members

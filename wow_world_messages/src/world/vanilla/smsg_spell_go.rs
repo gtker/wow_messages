@@ -110,7 +110,7 @@ impl crate::Message for SMSG_SPELL_GO {
         // hits: Guid[amount_of_hits]
         let hits = {
             let mut hits = Vec::with_capacity(amount_of_hits as usize);
-            for i in 0..amount_of_hits {
+            for _ in 0..amount_of_hits {
                 hits.push(Guid::read(&mut r)?);
             }
             hits
@@ -122,7 +122,7 @@ impl crate::Message for SMSG_SPELL_GO {
         // misses: SpellMiss[amount_of_misses]
         let misses = {
             let mut misses = Vec::with_capacity(amount_of_misses as usize);
-            for i in 0..amount_of_misses {
+            for _ in 0..amount_of_misses {
                 misses.push(SpellMiss::read(&mut r)?);
             }
             misses

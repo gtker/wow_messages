@@ -73,7 +73,7 @@ impl crate::Message for SMSG_LFG_ROLE_CHECK_UPDATE {
         // dungeon_entries: u32[amount_of_dungeon_entries]
         let dungeon_entries = {
             let mut dungeon_entries = Vec::with_capacity(amount_of_dungeon_entries as usize);
-            for i in 0..amount_of_dungeon_entries {
+            for _ in 0..amount_of_dungeon_entries {
                 dungeon_entries.push(crate::util::read_u32_le(&mut r)?);
             }
             dungeon_entries
@@ -85,7 +85,7 @@ impl crate::Message for SMSG_LFG_ROLE_CHECK_UPDATE {
         // roles: LfgRole[amount_of_roles]
         let roles = {
             let mut roles = Vec::with_capacity(amount_of_roles as usize);
-            for i in 0..amount_of_roles {
+            for _ in 0..amount_of_roles {
                 roles.push(LfgRole::read(&mut r)?);
             }
             roles

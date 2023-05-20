@@ -90,7 +90,7 @@ impl crate::Message for SMSG_GUILD_ROSTER {
         // rights: GuildRights[amount_of_rights]
         let rights = {
             let mut rights = Vec::with_capacity(amount_of_rights as usize);
-            for i in 0..amount_of_rights {
+            for _ in 0..amount_of_rights {
                 rights.push(GuildRights::read(&mut r)?);
             }
             rights
@@ -99,7 +99,7 @@ impl crate::Message for SMSG_GUILD_ROSTER {
         // members: GuildMember[amount_of_members]
         let members = {
             let mut members = Vec::with_capacity(amount_of_members as usize);
-            for i in 0..amount_of_members {
+            for _ in 0..amount_of_members {
                 members.push(GuildMember::read(&mut r)?);
             }
             members

@@ -57,7 +57,7 @@ impl crate::Message for SMSG_LFG_PLAYER_INFO {
         // available_dungeons: LfgAvailableDungeon[amount_of_available_dungeons]
         let available_dungeons = {
             let mut available_dungeons = Vec::with_capacity(amount_of_available_dungeons as usize);
-            for i in 0..amount_of_available_dungeons {
+            for _ in 0..amount_of_available_dungeons {
                 available_dungeons.push(LfgAvailableDungeon::read(&mut r)?);
             }
             available_dungeons
@@ -69,7 +69,7 @@ impl crate::Message for SMSG_LFG_PLAYER_INFO {
         // locked_dungeons: LfgJoinLockedDungeon[amount_of_locked_dungeons]
         let locked_dungeons = {
             let mut locked_dungeons = Vec::with_capacity(amount_of_locked_dungeons as usize);
-            for i in 0..amount_of_locked_dungeons {
+            for _ in 0..amount_of_locked_dungeons {
                 locked_dungeons.push(LfgJoinLockedDungeon::read(&mut r)?);
             }
             locked_dungeons

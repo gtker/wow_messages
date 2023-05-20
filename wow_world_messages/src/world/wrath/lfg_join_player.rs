@@ -45,7 +45,7 @@ impl LfgJoinPlayer {
         // locked_dungeons: LfgJoinLockedDungeon[amount_of_locked_dungeons]
         let locked_dungeons = {
             let mut locked_dungeons = Vec::with_capacity(amount_of_locked_dungeons as usize);
-            for i in 0..amount_of_locked_dungeons {
+            for _ in 0..amount_of_locked_dungeons {
                 locked_dungeons.push(LfgJoinLockedDungeon::read(&mut r)?);
             }
             locked_dungeons

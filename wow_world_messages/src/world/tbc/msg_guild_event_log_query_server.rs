@@ -44,7 +44,7 @@ impl crate::Message for MSG_GUILD_EVENT_LOG_QUERY_Server {
         // events: GuildLogEvent[amount_of_events]
         let events = {
             let mut events = Vec::with_capacity(amount_of_events as usize);
-            for i in 0..amount_of_events {
+            for _ in 0..amount_of_events {
                 events.push(GuildLogEvent::read(&mut r)?);
             }
             events

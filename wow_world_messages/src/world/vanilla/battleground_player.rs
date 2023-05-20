@@ -89,7 +89,7 @@ impl BattlegroundPlayer {
         // fields: u32[amount_of_extra_fields]
         let fields = {
             let mut fields = Vec::with_capacity(amount_of_extra_fields as usize);
-            for i in 0..amount_of_extra_fields {
+            for _ in 0..amount_of_extra_fields {
                 fields.push(crate::util::read_u32_le(&mut r)?);
             }
             fields
