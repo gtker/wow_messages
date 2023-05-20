@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+### Added
+
+* `set_player_field_inv_slot` method on `UpdatePlayer` and `UpdatePlayerBuilder` for vanilla.
+
 ### Changed
 
 * BREAKING: `MSG_AUCTION_HELLO_Server`, `SMSG_AUCTION_BIDDER_NOTIFICATION`, and `ReceivedMail` have had the variable `auction_house_id` of type `u32` changed to `auction_house` of type `AuctionHouse` enum.

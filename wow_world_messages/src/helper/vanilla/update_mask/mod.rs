@@ -14,6 +14,7 @@ use std::collections::BTreeMap;
 use std::convert::TryFrom;
 use std::io;
 use std::io::Read;
+use wow_world_base::vanilla::ItemSlot;
 
 update_item!(UpdateItem, UpdateItemBuilder, ITEM);
 update_item!(UpdateContainer, UpdateContainerBuilder, ITEM | CONTAINER);
@@ -30,6 +31,145 @@ update_item!(UpdateCorpse, UpdateCorpseBuilder, CORPSE);
 update_mask!();
 
 skill_info!(wow_world_base::vanilla::Skill, indices::SkillInfoIndex);
+
+impl UpdatePlayer {
+    pub fn set_player_field_inv_slot(&mut self, item_slot: ItemSlot, item: crate::Guid) {
+        let f = match item_slot {
+            ItemSlot::Head => Self::set_player_field_inv_slot_head,
+            ItemSlot::Neck => Self::set_player_field_inv_slot_neck,
+            ItemSlot::Shoulders => Self::set_player_field_inv_slot_shoulders,
+            ItemSlot::Chest => Self::set_player_field_inv_slot_chest,
+            ItemSlot::Waist => Self::set_player_field_inv_slot_waist,
+            ItemSlot::Legs => Self::set_player_field_inv_slot_legs,
+            ItemSlot::Boots => Self::set_player_field_inv_slot_feet,
+            ItemSlot::Wrist => Self::set_player_field_inv_slot_wrists,
+            ItemSlot::Hands => Self::set_player_field_inv_slot_hands,
+            ItemSlot::Ring1 => Self::set_player_field_inv_slot_finger1,
+            ItemSlot::Ring2 => Self::set_player_field_inv_slot_finger2,
+            ItemSlot::Trinket1 => Self::set_player_field_inv_slot_trinket1,
+            ItemSlot::Trinket2 => Self::set_player_field_inv_slot_trinket2,
+            ItemSlot::Back => Self::set_player_field_inv_slot_back,
+            ItemSlot::MainHand => Self::set_player_field_inv_slot_main_hand,
+            ItemSlot::OffHand => Self::set_player_field_inv_slot_off_hand,
+            ItemSlot::RangedOrRelic => Self::set_player_field_inv_slot_ranged,
+            ItemSlot::Tabard => Self::set_player_field_inv_slot_tabard,
+            ItemSlot::Bag1 => Self::set_player_field_inv_slot_bag1,
+            ItemSlot::Bag2 => Self::set_player_field_inv_slot_bag2,
+            ItemSlot::Bag3 => Self::set_player_field_inv_slot_bag3,
+            ItemSlot::Bag4 => Self::set_player_field_inv_slot_bag4,
+            ItemSlot::Inventory0 => Self::set_player_field_pack_slot_1,
+            ItemSlot::Inventory1 => Self::set_player_field_pack_slot_2,
+            ItemSlot::Inventory2 => Self::set_player_field_pack_slot_3,
+            ItemSlot::Inventory3 => Self::set_player_field_pack_slot_4,
+            ItemSlot::Inventory4 => Self::set_player_field_pack_slot_5,
+            ItemSlot::Inventory5 => Self::set_player_field_pack_slot_6,
+            ItemSlot::Inventory6 => Self::set_player_field_pack_slot_7,
+            ItemSlot::Inventory7 => Self::set_player_field_pack_slot_8,
+            ItemSlot::Inventory8 => Self::set_player_field_pack_slot_9,
+            ItemSlot::Inventory9 => Self::set_player_field_pack_slot_10,
+            ItemSlot::Inventory10 => Self::set_player_field_pack_slot_11,
+            ItemSlot::Inventory11 => Self::set_player_field_pack_slot_12,
+            ItemSlot::Inventory12 => Self::set_player_field_pack_slot_13,
+            ItemSlot::Inventory13 => Self::set_player_field_pack_slot_14,
+            ItemSlot::Inventory14 => Self::set_player_field_pack_slot_15,
+            ItemSlot::Inventory15 => Self::set_player_field_pack_slot_16,
+        };
+
+        f(self, item);
+    }
+
+    pub fn player_field_inv_slot(&self, item_slot: ItemSlot) -> Option<crate::Guid> {
+        let f = match item_slot {
+            ItemSlot::Head => Self::player_field_inv_slot_head,
+            ItemSlot::Neck => Self::player_field_inv_slot_neck,
+            ItemSlot::Shoulders => Self::player_field_inv_slot_shoulders,
+            ItemSlot::Chest => Self::player_field_inv_slot_chest,
+            ItemSlot::Waist => Self::player_field_inv_slot_waist,
+            ItemSlot::Legs => Self::player_field_inv_slot_legs,
+            ItemSlot::Boots => Self::player_field_inv_slot_feet,
+            ItemSlot::Wrist => Self::player_field_inv_slot_wrists,
+            ItemSlot::Hands => Self::player_field_inv_slot_hands,
+            ItemSlot::Ring1 => Self::player_field_inv_slot_finger1,
+            ItemSlot::Ring2 => Self::player_field_inv_slot_finger2,
+            ItemSlot::Trinket1 => Self::player_field_inv_slot_trinket1,
+            ItemSlot::Trinket2 => Self::player_field_inv_slot_trinket2,
+            ItemSlot::Back => Self::player_field_inv_slot_back,
+            ItemSlot::MainHand => Self::player_field_inv_slot_main_hand,
+            ItemSlot::OffHand => Self::player_field_inv_slot_off_hand,
+            ItemSlot::RangedOrRelic => Self::player_field_inv_slot_ranged,
+            ItemSlot::Tabard => Self::player_field_inv_slot_tabard,
+            ItemSlot::Bag1 => Self::player_field_inv_slot_bag1,
+            ItemSlot::Bag2 => Self::player_field_inv_slot_bag2,
+            ItemSlot::Bag3 => Self::player_field_inv_slot_bag3,
+            ItemSlot::Bag4 => Self::player_field_inv_slot_bag4,
+            ItemSlot::Inventory0 => Self::player_field_pack_slot_1,
+            ItemSlot::Inventory1 => Self::player_field_pack_slot_2,
+            ItemSlot::Inventory2 => Self::player_field_pack_slot_3,
+            ItemSlot::Inventory3 => Self::player_field_pack_slot_4,
+            ItemSlot::Inventory4 => Self::player_field_pack_slot_5,
+            ItemSlot::Inventory5 => Self::player_field_pack_slot_6,
+            ItemSlot::Inventory6 => Self::player_field_pack_slot_7,
+            ItemSlot::Inventory7 => Self::player_field_pack_slot_8,
+            ItemSlot::Inventory8 => Self::player_field_pack_slot_9,
+            ItemSlot::Inventory9 => Self::player_field_pack_slot_10,
+            ItemSlot::Inventory10 => Self::player_field_pack_slot_11,
+            ItemSlot::Inventory11 => Self::player_field_pack_slot_12,
+            ItemSlot::Inventory12 => Self::player_field_pack_slot_13,
+            ItemSlot::Inventory13 => Self::player_field_pack_slot_14,
+            ItemSlot::Inventory14 => Self::player_field_pack_slot_15,
+            ItemSlot::Inventory15 => Self::player_field_pack_slot_16,
+        };
+
+        f(self)
+    }
+}
+
+impl UpdatePlayerBuilder {
+    pub fn set_player_field_inv_slot(self, item_slot: ItemSlot, item: crate::Guid) -> Self {
+        let f = match item_slot {
+            ItemSlot::Head => Self::set_player_field_inv_slot_head,
+            ItemSlot::Neck => Self::set_player_field_inv_slot_neck,
+            ItemSlot::Shoulders => Self::set_player_field_inv_slot_shoulders,
+            ItemSlot::Chest => Self::set_player_field_inv_slot_chest,
+            ItemSlot::Waist => Self::set_player_field_inv_slot_waist,
+            ItemSlot::Legs => Self::set_player_field_inv_slot_legs,
+            ItemSlot::Boots => Self::set_player_field_inv_slot_feet,
+            ItemSlot::Wrist => Self::set_player_field_inv_slot_wrists,
+            ItemSlot::Hands => Self::set_player_field_inv_slot_hands,
+            ItemSlot::Ring1 => Self::set_player_field_inv_slot_finger1,
+            ItemSlot::Ring2 => Self::set_player_field_inv_slot_finger2,
+            ItemSlot::Trinket1 => Self::set_player_field_inv_slot_trinket1,
+            ItemSlot::Trinket2 => Self::set_player_field_inv_slot_trinket2,
+            ItemSlot::Back => Self::set_player_field_inv_slot_back,
+            ItemSlot::MainHand => Self::set_player_field_inv_slot_main_hand,
+            ItemSlot::OffHand => Self::set_player_field_inv_slot_off_hand,
+            ItemSlot::RangedOrRelic => Self::set_player_field_inv_slot_ranged,
+            ItemSlot::Tabard => Self::set_player_field_inv_slot_tabard,
+            ItemSlot::Bag1 => Self::set_player_field_inv_slot_bag1,
+            ItemSlot::Bag2 => Self::set_player_field_inv_slot_bag2,
+            ItemSlot::Bag3 => Self::set_player_field_inv_slot_bag3,
+            ItemSlot::Bag4 => Self::set_player_field_inv_slot_bag4,
+            ItemSlot::Inventory0 => Self::set_player_field_pack_slot_1,
+            ItemSlot::Inventory1 => Self::set_player_field_pack_slot_2,
+            ItemSlot::Inventory2 => Self::set_player_field_pack_slot_3,
+            ItemSlot::Inventory3 => Self::set_player_field_pack_slot_4,
+            ItemSlot::Inventory4 => Self::set_player_field_pack_slot_5,
+            ItemSlot::Inventory5 => Self::set_player_field_pack_slot_6,
+            ItemSlot::Inventory6 => Self::set_player_field_pack_slot_7,
+            ItemSlot::Inventory7 => Self::set_player_field_pack_slot_8,
+            ItemSlot::Inventory8 => Self::set_player_field_pack_slot_9,
+            ItemSlot::Inventory9 => Self::set_player_field_pack_slot_10,
+            ItemSlot::Inventory10 => Self::set_player_field_pack_slot_11,
+            ItemSlot::Inventory11 => Self::set_player_field_pack_slot_12,
+            ItemSlot::Inventory12 => Self::set_player_field_pack_slot_13,
+            ItemSlot::Inventory13 => Self::set_player_field_pack_slot_14,
+            ItemSlot::Inventory14 => Self::set_player_field_pack_slot_15,
+            ItemSlot::Inventory15 => Self::set_player_field_pack_slot_16,
+        };
+
+        f(self, item)
+    }
+}
 
 #[cfg(test)]
 mod test {
