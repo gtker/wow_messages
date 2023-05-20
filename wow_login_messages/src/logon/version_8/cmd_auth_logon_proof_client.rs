@@ -782,7 +782,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 348.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_LOGON_PROOF_Client0() {
+    fn cmd_auth_logon_proof_client0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -802,7 +802,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 348.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMD_AUTH_LOGON_PROOF_Client0() {
+    async fn tokio_cmd_auth_logon_proof_client0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -822,7 +822,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 348.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMD_AUTH_LOGON_PROOF_Client0() {
+    async fn astd_cmd_auth_logon_proof_client0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -878,7 +878,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 405.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_LOGON_PROOF_Client1() {
+    fn cmd_auth_logon_proof_client1() {
         let expected = expected1();
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -898,7 +898,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 405.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMD_AUTH_LOGON_PROOF_Client1() {
+    async fn tokio_cmd_auth_logon_proof_client1() {
         let expected = expected1();
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -918,7 +918,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 405.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMD_AUTH_LOGON_PROOF_Client1() {
+    async fn astd_cmd_auth_logon_proof_client1() {
         let expected = expected1();
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -963,7 +963,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 447.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_LOGON_PROOF_Client2() {
+    fn cmd_auth_logon_proof_client2() {
         let expected = expected2();
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW2)).unwrap();
         let t = match t {
@@ -983,7 +983,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 447.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMD_AUTH_LOGON_PROOF_Client2() {
+    async fn tokio_cmd_auth_logon_proof_client2() {
         let expected = expected2();
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW2)).await.unwrap();
         let t = match t {
@@ -1003,7 +1003,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 447.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMD_AUTH_LOGON_PROOF_Client2() {
+    async fn astd_cmd_auth_logon_proof_client2() {
         let expected = expected2();
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW2)).await.unwrap();
         let t = match t {
@@ -1058,7 +1058,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 473.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_LOGON_PROOF_Client3() {
+    fn cmd_auth_logon_proof_client3() {
         let expected = expected3();
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW3)).unwrap();
         let t = match t {
@@ -1078,7 +1078,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 473.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMD_AUTH_LOGON_PROOF_Client3() {
+    async fn tokio_cmd_auth_logon_proof_client3() {
         let expected = expected3();
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW3)).await.unwrap();
         let t = match t {
@@ -1098,7 +1098,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/proof_client.wowm` line 473.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMD_AUTH_LOGON_PROOF_Client3() {
+    async fn astd_cmd_auth_logon_proof_client3() {
         let expected = expected3();
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW3)).await.unwrap();
         let t = match t {

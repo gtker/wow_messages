@@ -611,7 +611,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 28.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMD_AUTH_LOGON_CHALLENGE_Server0() {
+    fn cmd_auth_logon_challenge_server0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -631,7 +631,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 28.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMD_AUTH_LOGON_CHALLENGE_Server0() {
+    async fn tokio_cmd_auth_logon_challenge_server0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -651,7 +651,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_server.wowm` line 28.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMD_AUTH_LOGON_CHALLENGE_Server0() {
+    async fn astd_cmd_auth_logon_challenge_server0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

@@ -91,7 +91,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 8.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn SMSG_IGNORE_LIST0() {
+    fn smsg_ignore_list0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -111,7 +111,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 8.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_SMSG_IGNORE_LIST0() {
+    async fn tokio_smsg_ignore_list0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -131,7 +131,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 8.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_SMSG_IGNORE_LIST0() {
+    async fn astd_smsg_ignore_list0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -161,7 +161,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 18.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn SMSG_IGNORE_LIST1() {
+    fn smsg_ignore_list1() {
         let expected = expected1();
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -181,7 +181,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 18.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_SMSG_IGNORE_LIST1() {
+    async fn tokio_smsg_ignore_list1() {
         let expected = expected1();
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -201,7 +201,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/social/smsg_ignore_list.wowm` line 18.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_SMSG_IGNORE_LIST1() {
+    async fn astd_smsg_ignore_list1() {
         let expected = expected1();
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {

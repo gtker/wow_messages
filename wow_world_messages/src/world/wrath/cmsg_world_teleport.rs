@@ -128,7 +128,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 14.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMSG_WORLD_TELEPORT0() {
+    fn cmsg_world_teleport0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -148,7 +148,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 14.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMSG_WORLD_TELEPORT0() {
+    async fn tokio_cmsg_world_teleport0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -168,7 +168,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 14.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMSG_WORLD_TELEPORT0() {
+    async fn astd_cmsg_world_teleport0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -208,7 +208,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 37.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMSG_WORLD_TELEPORT1() {
+    fn cmsg_world_teleport1() {
         let expected = expected1();
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -228,7 +228,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 37.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMSG_WORLD_TELEPORT1() {
+    async fn tokio_cmsg_world_teleport1() {
         let expected = expected1();
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -248,7 +248,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_world_teleport_3_3_5.wowm` line 37.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMSG_WORLD_TELEPORT1() {
+    async fn astd_cmsg_world_teleport1() {
         let expected = expected1();
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {

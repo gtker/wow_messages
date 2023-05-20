@@ -673,7 +673,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 18.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn SMSG_AUTH_RESPONSE0() {
+    fn smsg_auth_response0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -693,7 +693,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 18.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_SMSG_AUTH_RESPONSE0() {
+    async fn tokio_smsg_auth_response0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -713,7 +713,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 18.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_SMSG_AUTH_RESPONSE0() {
+    async fn astd_smsg_auth_response0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -744,7 +744,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 29.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn SMSG_AUTH_RESPONSE1() {
+    fn smsg_auth_response1() {
         let expected = expected1();
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -764,7 +764,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 29.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_SMSG_AUTH_RESPONSE1() {
+    async fn tokio_smsg_auth_response1() {
         let expected = expected1();
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -784,7 +784,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 29.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_SMSG_AUTH_RESPONSE1() {
+    async fn astd_smsg_auth_response1() {
         let expected = expected1();
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -818,7 +818,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 42.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn SMSG_AUTH_RESPONSE2() {
+    fn smsg_auth_response2() {
         let expected = expected2();
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW2)).unwrap();
         let t = match t {
@@ -838,7 +838,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 42.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_SMSG_AUTH_RESPONSE2() {
+    async fn tokio_smsg_auth_response2() {
         let expected = expected2();
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW2)).await.unwrap();
         let t = match t {
@@ -858,7 +858,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_auth_response.wowm` line 42.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_SMSG_AUTH_RESPONSE2() {
+    async fn astd_smsg_auth_response2() {
         let expected = expected2();
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW2)).await.unwrap();
         let t = match t {

@@ -208,7 +208,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 17.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMSG_CHAR_CREATE0() {
+    fn cmsg_char_create0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -228,7 +228,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 17.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMSG_CHAR_CREATE0() {
+    async fn tokio_cmsg_char_create0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -248,7 +248,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm` line 17.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMSG_CHAR_CREATE0() {
+    async fn astd_cmsg_char_create0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

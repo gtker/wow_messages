@@ -104,7 +104,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm` line 12.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn SMSG_LOGIN_VERIFY_WORLD0() {
+    fn smsg_login_verify_world0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -124,7 +124,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm` line 12.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_SMSG_LOGIN_VERIFY_WORLD0() {
+    async fn tokio_smsg_login_verify_world0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -144,7 +144,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/character_screen/smsg_login_verify_world.wowm` line 12.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_SMSG_LOGIN_VERIFY_WORLD0() {
+    async fn astd_smsg_login_verify_world0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

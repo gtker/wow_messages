@@ -415,7 +415,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 20.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn SMSG_COMPRESSED_UPDATE_OBJECT0() {
+    fn smsg_compressed_update_object0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -439,7 +439,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 20.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_SMSG_COMPRESSED_UPDATE_OBJECT0() {
+    async fn tokio_smsg_compressed_update_object0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -463,7 +463,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm` line 20.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_SMSG_COMPRESSED_UPDATE_OBJECT0() {
+    async fn astd_smsg_compressed_update_object0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

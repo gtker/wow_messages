@@ -73,7 +73,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm` line 11.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn SMSG_QUERY_TIME_RESPONSE0() {
+    fn smsg_query_time_response0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -93,7 +93,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm` line 11.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_SMSG_QUERY_TIME_RESPONSE0() {
+    async fn tokio_smsg_query_time_response0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -113,7 +113,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/world/queries/smsg_query_time_response.wowm` line 11.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_SMSG_QUERY_TIME_RESPONSE0() {
+    async fn astd_smsg_query_time_response0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

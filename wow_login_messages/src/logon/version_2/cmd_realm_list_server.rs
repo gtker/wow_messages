@@ -283,7 +283,7 @@ mod test_version_2 {
     // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 110.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMD_REALM_LIST_Server0() {
+    fn cmd_realm_list_server0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -303,7 +303,7 @@ mod test_version_2 {
     // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 110.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMD_REALM_LIST_Server0() {
+    async fn tokio_cmd_realm_list_server0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -323,7 +323,7 @@ mod test_version_2 {
     // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 110.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMD_REALM_LIST_Server0() {
+    async fn astd_cmd_realm_list_server0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -368,7 +368,7 @@ mod test_version_2 {
     // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 141.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMD_REALM_LIST_Server1() {
+    fn cmd_realm_list_server1() {
         let expected = expected1();
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -388,7 +388,7 @@ mod test_version_2 {
     // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 141.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMD_REALM_LIST_Server1() {
+    async fn tokio_cmd_realm_list_server1() {
         let expected = expected1();
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -408,7 +408,7 @@ mod test_version_2 {
     // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 141.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMD_REALM_LIST_Server1() {
+    async fn astd_cmd_realm_list_server1() {
         let expected = expected1();
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -467,7 +467,7 @@ mod test_version_3 {
     // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 110.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMD_REALM_LIST_Server0() {
+    fn cmd_realm_list_server0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -487,7 +487,7 @@ mod test_version_3 {
     // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 110.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMD_REALM_LIST_Server0() {
+    async fn tokio_cmd_realm_list_server0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -507,7 +507,7 @@ mod test_version_3 {
     // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 110.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMD_REALM_LIST_Server0() {
+    async fn astd_cmd_realm_list_server0() {
         let expected = expected0();
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -552,7 +552,7 @@ mod test_version_3 {
     // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 141.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMD_REALM_LIST_Server1() {
+    fn cmd_realm_list_server1() {
         let expected = expected1();
         let t = ServerOpcodeMessage::read(&mut std::io::Cursor::new(&RAW1)).unwrap();
         let t = match t {
@@ -572,7 +572,7 @@ mod test_version_3 {
     // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 141.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMD_REALM_LIST_Server1() {
+    async fn tokio_cmd_realm_list_server1() {
         let expected = expected1();
         let t = ServerOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {
@@ -592,7 +592,7 @@ mod test_version_3 {
     // Generated from `wow_message_parser/wowm/login/cmd_realm/server.wowm` line 141.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMD_REALM_LIST_Server1() {
+    async fn astd_cmd_realm_list_server1() {
         let expected = expected1();
         let t = ServerOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
         let t = match t {

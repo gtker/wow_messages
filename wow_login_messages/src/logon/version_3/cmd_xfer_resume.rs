@@ -151,7 +151,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 44.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMD_XFER_RESUME0() {
+    fn cmd_xfer_resume0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::read(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -171,7 +171,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 44.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMD_XFER_RESUME0() {
+    async fn tokio_cmd_xfer_resume0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::tokio_read(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -191,7 +191,7 @@ mod test {
     // Generated from `wow_message_parser/wowm/login/cmd_xfer.wowm` line 44.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMD_XFER_RESUME0() {
+    async fn astd_cmd_xfer_resume0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::astd_read(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

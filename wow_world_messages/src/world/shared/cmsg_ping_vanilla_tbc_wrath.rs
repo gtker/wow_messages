@@ -86,7 +86,7 @@ mod test_vanilla {
     // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMSG_PING0() {
+    fn cmsg_ping0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -106,7 +106,7 @@ mod test_vanilla {
     // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMSG_PING0() {
+    async fn tokio_cmsg_ping0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -126,7 +126,7 @@ mod test_vanilla {
     // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMSG_PING0() {
+    async fn astd_cmsg_ping0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -174,7 +174,7 @@ mod test_tbc {
     // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMSG_PING0() {
+    fn cmsg_ping0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -194,7 +194,7 @@ mod test_tbc {
     // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMSG_PING0() {
+    async fn tokio_cmsg_ping0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -214,7 +214,7 @@ mod test_tbc {
     // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMSG_PING0() {
+    async fn astd_cmsg_ping0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -262,7 +262,7 @@ mod test_wrath {
     // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
-    fn CMSG_PING0() {
+    fn cmsg_ping0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
         let t = match t {
@@ -282,7 +282,7 @@ mod test_wrath {
     // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_CMSG_PING0() {
+    async fn tokio_cmsg_ping0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {
@@ -302,7 +302,7 @@ mod test_wrath {
     // Generated from `wow_message_parser/wowm/world/ping_pong/cmsg_ping.wowm` line 14.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_CMSG_PING0() {
+    async fn astd_cmsg_ping0() {
         let expected = expected0();
         let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
         let t = match t {

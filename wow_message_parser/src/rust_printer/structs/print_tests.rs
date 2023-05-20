@@ -98,11 +98,10 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
                 s.wln(it.test_macro());
                 s.bodyn(
                     format!(
-                        "{func}fn {prefix}{subject}{number}()",
+                        "{func}fn {prefix}{subject}{i}()",
                         func = it.func(),
                         prefix = it.prefix(),
-                        subject = t.subject(),
-                        number = i,
+                        subject = t.subject().to_lowercase(),
                     ),
                     |s| {
                         print_test_case(s, t, e, it, i);
