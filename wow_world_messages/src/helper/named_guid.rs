@@ -1,4 +1,5 @@
 use std::io::{Read, Write};
+use std::num::NonZeroU64;
 use wow_world_base::ParseError;
 
 use crate::util::{read_c_string_to_vec, read_u64_le};
@@ -10,21 +11,13 @@ pub struct NamedGuid {
 }
 
 impl NamedGuid {
-    #[allow(clippy::missing_const_for_fn)] // `the destructor for this type cannot be evaluated in constant functions` for Option<String>
-    pub fn new(guid: u64, name: Option<String>) -> Option<Self> {
-        if let Some(name) = name {
-            if guid != 0 {
-                Some(Self {
-                    guid,
-                    name: Some(name),
-                })
-            } else {
-                None
-            }
-        } else if guid == 0 {
-            Some(Self::zero())
-        } else {
-            None
+    /// Constructs a named guid with a non-zero guid value.
+    ///
+    /// Can only construct objects with a non-zero guid. Use [`Self::zero`] to create a zero guid.
+    pub const fn new(guid: NonZeroU64, name: String) -> Self {
+        Self {
+            guid: guid.get(),
+            name: Some(name),
         }
     }
 
