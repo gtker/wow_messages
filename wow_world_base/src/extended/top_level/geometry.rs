@@ -2,6 +2,7 @@ use crate::shared::vector2d_vanilla_tbc_wrath::Vector2d;
 use crate::shared::vector3d_vanilla_tbc_wrath::Vector3d;
 use std::f32::consts::PI;
 
+/// Extends a point by an `angle` in degrees and a `distance`.
 pub fn trace_point_2d(from: Vector2d, angle: f32, distance: f32) -> (f32, f32) {
     (
         from.x + (distance * angle.cos()),
@@ -9,10 +10,12 @@ pub fn trace_point_2d(from: Vector2d, angle: f32, distance: f32) -> (f32, f32) {
     )
 }
 
+/// Checks if two three-dimensional points are within a `distance`.
 pub fn is_within_distance(from: Vector3d, to: Vector3d, distance: f32) -> bool {
     distance_between(from, to) < distance
 }
 
+/// Returns the distance between two three-dimensional points.
 pub fn distance_between(from: Vector3d, to: Vector3d) -> f32 {
     let delta_x = from.x - to.x;
     let delta_y = from.y - to.y;
@@ -21,6 +24,7 @@ pub fn distance_between(from: Vector3d, to: Vector3d) -> f32 {
     ((delta_x * delta_x) + (delta_y * delta_y) + (delta_z * delta_z)).sqrt()
 }
 
+/// Returns the distance between two two-dimensional points.
 pub fn distance_2d(from: Vector2d, to: Vector2d) -> f32 {
     let delta_x = from.x - to.x;
     let delta_y = from.y - to.y;
@@ -28,6 +32,9 @@ pub fn distance_2d(from: Vector2d, to: Vector2d) -> f32 {
     ((delta_x * delta_x) + (delta_y * delta_y)).sqrt()
 }
 
+/// Checks whether a player is within a square trigger box.
+///
+/// Should not be used directly, but instead the `contains` method of the different `AreaTrigger`s.
 pub fn is_within_square(
     player: Vector3d,
     square: Vector3d,
@@ -78,8 +85,11 @@ pub fn is_within_square(
         || dz.abs() > height / 2.0 + DELTA)
 }
 
+/// Distance within which chat in say (`/say`) can be heard.
 pub const SAY: f32 = 25.0;
+/// Distance within which chat in emotes (`/emote`) can be heard.
 pub const EMOTE: f32 = 25.0;
+/// Distance within which chat in yell (`/yell`) can be heard.
 pub const YELL: f32 = 300.0;
 
 /// Maximum range that stealth can be detected.
@@ -87,8 +97,12 @@ pub const YELL: f32 = 300.0;
 /// This is valid for both players and creatures.
 pub const STEALTH_DETECTION: f32 = 30.0;
 
+/// Distance within which player to player trades can occur.
 pub const TRADE: f32 = 11.11;
 
+/// Distance for general interaction like accepting quest, opening vendor screen, or
+/// opening auctioneer menu.
 pub const INTERACTION: f32 = 5.0;
 
+/// Distance for base melee attack range.
 pub const MELEE_ATTACK: f32 = 5.0;

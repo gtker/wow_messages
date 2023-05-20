@@ -1,2 +1,4 @@
-pub const UNARMED_SPEED: u32 = 1800;
-pub const UNARMED_SPEED_FLOAT: f32 = 1.8;
+/// Unarmed attack speed in milliseconds.
+pub const UNARMED_SPEED_IN_MILLISECONDS: u32 = 1800;
+/// Unarmed attack speed in seconds.
+pub const UNARMED_SPEED: f32 = 1.8;
