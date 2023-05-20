@@ -1,7 +1,7 @@
 #tag_all login_versions "*";
 
 clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
-    u8 protocol_version {
+    ProtocolVersion protocol_version {
         comment = "Determines which version of messages are used for further communication.";
     }
     u16 size = self.size;
@@ -25,7 +25,7 @@ clogin CMD_AUTH_RECONNECT_CHALLENGE_Client = 0x02 {
 }
 
 test CMD_AUTH_RECONNECT_CHALLENGE_Client {
-    protocol_version = 2;
+    protocol_version = TWO;
     game_name = "\0WoW";
     version = {
         major = 1;
@@ -56,7 +56,7 @@ test CMD_AUTH_RECONNECT_CHALLENGE_Client {
 ]
 
 test CMD_AUTH_RECONNECT_CHALLENGE_Client {
-    protocol_version = 2;
+    protocol_version = TWO;
     game_name = "\0WoW";
     version = {
         major = 1;

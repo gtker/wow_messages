@@ -1,6 +1,8 @@
 use crate::{PASSWORD, USERNAME};
 use std::net::{Ipv4Addr, TcpStream};
-use wow_login_messages::all::{CMD_AUTH_LOGON_CHALLENGE_Client, Locale, Os, Platform, Version};
+use wow_login_messages::all::{
+    CMD_AUTH_LOGON_CHALLENGE_Client, Locale, Os, Platform, ProtocolVersion, Version,
+};
 use wow_login_messages::helper::expect_server_message;
 use wow_login_messages::version_2::{
     CMD_AUTH_LOGON_PROOF_Server, CMD_AUTH_LOGON_PROOF_Server_LoginResult, CMD_REALM_LIST_Client,
@@ -19,7 +21,7 @@ pub fn auth(
     mut auth_server: &mut TcpStream,
 ) -> ([u8; SESSION_KEY_LENGTH as usize], CMD_REALM_LIST_Server) {
     CMD_AUTH_LOGON_CHALLENGE_Client {
-        protocol_version: 3, // We are pretending to be 1.12
+        protocol_version: ProtocolVersion::Three, // We are pretending to be 1.12
         version: Version {
             major: 1,
             minor: 12,

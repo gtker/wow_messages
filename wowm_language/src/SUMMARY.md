@@ -33,6 +33,7 @@
 - [Os](docs/os.md)
 - [Platform](docs/platform.md)
 - [Population](docs/population.md)
+- [ProtocolVersion](docs/protocolversion.md)
 - [RealmCategory](docs/realmcategory.md)
 - [RealmFlag](docs/realmflag.md)
 - [RealmType](docs/realmtype.md)

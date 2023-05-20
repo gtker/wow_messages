@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+### Changed
+
+* `protocol_version` for `CMD_AUTH_RECONNECT_CHALLENGE_Client` and `CMD_AUTH_LOGON_CHALLENGE_Client` has been converted to enum named `ProtocolVersion`.
+
 ## [0.3.0] - 2023-05-20
 
 ### Added

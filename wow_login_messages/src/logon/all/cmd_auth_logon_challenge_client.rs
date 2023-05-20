@@ -2,7 +2,7 @@ use crate::ClientMessage;
 use std::io::{Read, Write};
 
 use crate::logon::all::{
-    Locale, Os, Platform, Version,
+    Locale, Os, Platform, ProtocolVersion, Version,
 };
 use std::net::Ipv4Addr;
 
@@ -11,10 +11,10 @@ use std::net::Ipv4Addr;
 ///
 /// Has the exact same layout as [`CMD_AUTH_RECONNECT_CHALLENGE_Client`](crate::logon::all::CMD_AUTH_RECONNECT_CHALLENGE_Client).
 ///
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm#L3):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm:25`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm#L25):
 /// ```text
 /// clogin CMD_AUTH_LOGON_CHALLENGE_Client = 0x00 {
-///     u8 protocol_version;
+///     ProtocolVersion protocol_version;
 ///     u16 size = self.size;
 ///     u32 game_name = "\0WoW";
 ///     Version version;
@@ -29,7 +29,7 @@ use std::net::Ipv4Addr;
 pub struct CMD_AUTH_LOGON_CHALLENGE_Client {
     /// Determines which version of messages are used for further communication.
     ///
-    pub protocol_version: u8,
+    pub protocol_version: ProtocolVersion,
     pub version: Version,
     pub platform: Platform,
     pub os: Os,
@@ -64,8 +64,8 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
-        // protocol_version: u8
-        w.write_all(&self.protocol_version.to_le_bytes())?;
+        // protocol_version: ProtocolVersion
+        w.write_all(&(self.protocol_version.as_int().to_le_bytes()))?;
 
         // size: u16
         w.write_all(&((self.size() - 3) as u16).to_le_bytes())?;
@@ -105,8 +105,8 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
     const OPCODE: u8 = 0x00;
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
-        // protocol_version: u8
-        let protocol_version = crate::util::read_u8_le(&mut r)?;
+        // protocol_version: ProtocolVersion
+        let protocol_version: ProtocolVersion = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // size: u16
         let _size = crate::util::read_u16_le(&mut r)?;
@@ -171,8 +171,8 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // protocol_version: u8
-            let protocol_version = crate::util::tokio_read_u8_le(&mut r).await?;
+            // protocol_version: ProtocolVersion
+            let protocol_version: ProtocolVersion = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
             // size: u16
             let _size = crate::util::tokio_read_u16_le(&mut r).await?;
@@ -250,8 +250,8 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
         Self: 'async_trait,
      {
         Box::pin(async move {
-            // protocol_version: u8
-            let protocol_version = crate::util::astd_read_u8_le(&mut r).await?;
+            // protocol_version: ProtocolVersion
+            let protocol_version: ProtocolVersion = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
             // size: u16
             let _size = crate::util::astd_read_u16_le(&mut r).await?;
@@ -322,7 +322,7 @@ impl ClientMessage for CMD_AUTH_LOGON_CHALLENGE_Client {
 
 impl CMD_AUTH_LOGON_CHALLENGE_Client {
     pub(crate) fn size(&self) -> usize {
-        1 // protocol_version: u8
+        1 // protocol_version: ProtocolVersion
         + 2 // size: u16
         + 4 // game_name: u32
         + 5 // version: Version
@@ -363,7 +363,7 @@ mod test {
 
     pub(crate) fn expected0() -> CMD_AUTH_LOGON_CHALLENGE_Client {
         CMD_AUTH_LOGON_CHALLENGE_Client {
-            protocol_version: 0x3,
+            protocol_version: ProtocolVersion::Three,
             version: Version {
                 major: 0x1,
                 minor: 0xC,
@@ -380,7 +380,7 @@ mod test {
 
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 27.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 49.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmd_auth_logon_challenge_client0() {
@@ -400,7 +400,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 27.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 49.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmd_auth_logon_challenge_client0() {
@@ -420,7 +420,7 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
-    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 27.
+    // Generated from `wow_message_parser/wowm/login/cmd_auth_logon/challenge_client.wowm` line 49.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmd_auth_logon_challenge_client0() {

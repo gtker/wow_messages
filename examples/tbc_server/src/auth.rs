@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use tokio::net::{TcpListener, TcpStream};
 use wow_login_messages::all::{
-    CMD_AUTH_LOGON_CHALLENGE_Client, CMD_AUTH_RECONNECT_CHALLENGE_Client,
+    CMD_AUTH_LOGON_CHALLENGE_Client, CMD_AUTH_RECONNECT_CHALLENGE_Client, ProtocolVersion,
 };
 use wow_login_messages::errors::ExpectedOpcodeError;
 use wow_login_messages::helper::{
@@ -42,14 +42,14 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
 
     match opcode {
         InitialMessage::Logon(l) => match l.protocol_version {
-            2 => login_version_2(stream, l, users).await,
-            3 => login_version_3(stream, l, users).await,
-            8 => login_version_8(stream, l, users).await,
+            ProtocolVersion::Two => login_version_2(stream, l, users).await,
+            ProtocolVersion::Three => login_version_3(stream, l, users).await,
+            ProtocolVersion::Eight => login_version_8(stream, l, users).await,
             _ => {}
         },
         InitialMessage::Reconnect(r) => match r.protocol_version {
-            2 => reconnect_version_2(stream, r, users).await,
-            8 => reconnect_version_8(stream, r, users).await,
+            ProtocolVersion::Two => reconnect_version_2(stream, r, users).await,
+            ProtocolVersion::Eight => reconnect_version_8(stream, r, users).await,
             _ => {}
         },
     }

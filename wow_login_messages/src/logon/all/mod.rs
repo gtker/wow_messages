@@ -4,6 +4,8 @@ pub(crate) mod os;
 pub use os::*;
 pub(crate) mod platform;
 pub use platform::*;
+pub(crate) mod protocol_version;
+pub use protocol_version::*;
 pub(crate) mod version;
 pub use version::*;
 pub(crate) mod cmd_auth_logon_challenge_client;

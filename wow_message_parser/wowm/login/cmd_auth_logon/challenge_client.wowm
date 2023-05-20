@@ -1,7 +1,29 @@
 #tag_all login_versions "*";
 
+enum ProtocolVersion : u8 {
+    TWO = 2 {
+        comment = "Used for login by `1.1.2.4125`.";
+        comment = "Used for reconnect by `1.1.2.4125`, `1.12.1.5875`, `2.0.0.6080`, and 2.0.1.6180`.";
+    }
+    THREE = 3 {
+        comment = "Used for login by `1.12.1.5875`, `2.0.0.6080`, and `2.0.1.6180`.";
+    }
+    FIVE = 5 {
+        comment = "Used for login and reconnect by `2.0.3.6299`.";
+    }
+    SIX = 6 {
+        comment = "Used for login and reconnect by `2.0.5.6320`, `2.0.7.6383`, `2.0.8.6403`, `2.0.10.6448`, `2.0.12.6546`, `2.1.0.6692`, `2.1.0.6729`, `2.1.1.6739`, `2.1.2.6803`, `2.1.3.6898`, `2.2.0.7272`, `2.2.2.7318`, `2.2.2.7318`, and `2.2.3.7359`.";
+    }
+    SEVEN = 7 {
+        comment = "Used for login and reconnect by `2.3.0.7561`, `2.3.2.7741`, and `2.3.3.7799`.";
+    }
+    EIGHT = 8 {
+        comment = "Used for login and reconnect by `2.4.0.8089`, `2.4.1.8125`, `2.4.2.8278`, `2.4.3.8606`, and `3.3.5.12340`.";
+    }
+}
+
 clogin CMD_AUTH_LOGON_CHALLENGE_Client = 0x00 {
-    u8 protocol_version {
+    ProtocolVersion protocol_version {
         comment = "Determines which version of messages are used for further communication.";
     }
     u16 size = self.size;
@@ -25,7 +47,7 @@ clogin CMD_AUTH_LOGON_CHALLENGE_Client = 0x00 {
 }
 
 test CMD_AUTH_LOGON_CHALLENGE_Client {
-    protocol_version = 3;
+    protocol_version = THREE;
     game_name = "\0WoW";
     version = {
         major = 1;
