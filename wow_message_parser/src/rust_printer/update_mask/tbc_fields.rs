@@ -2477,7 +2477,7 @@ pub(crate) const FIELDS: &[MemberType] = &[
         "SKILL_INFO",
         0x03A0,
         384,
-        UfType::Custom {
+        UfType::ArrayOfStruct {
             name: "SkillInfo",
             variable_name: "skill_info",
             import_location: "crate::tbc",

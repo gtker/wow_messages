@@ -35,7 +35,7 @@ fn print_specific_update_mask_doc(fields: &[MemberType], s: &mut String) {
                     UfType::Float => "FLOAT",
                     UfType::BytesWith(_, _, _, _) | UfType::Bytes => "BYTES",
                     UfType::TwoShort => "TWO_SHORT",
-                    UfType::Custom { .. } => "CUSTOM",
+                    UfType::ArrayOfStruct { .. } => "CUSTOM",
                 };
 
                 writeln!(
@@ -178,7 +178,7 @@ fn print_specific_update_mask_indices(fields: &[MemberType]) -> Writer {
     s.wln("use std::convert::TryFrom;");
 
     for field in fields {
-        if let UfType::Custom { name, size, .. } = field.ty {
+        if let UfType::ArrayOfStruct { name, size, .. } = field.ty {
             assert_eq!(field.size % size, 0);
             let amount_of_fields = field.size / size;
 
@@ -277,7 +277,7 @@ pub(crate) fn print_update_mask() {
 
 fn print_getter(s: &mut Writer, m: &MemberType) {
     match m.ty() {
-        UfType::Custom { name, .. } => {
+        UfType::ArrayOfStruct { name, .. } => {
             s.open_curly(format!(
                 "pub fn {}_{}(&self, index: {name}Index) -> Option<{}>",
                 m.object_ty.to_string().to_lowercase(),
@@ -362,7 +362,7 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
                 s.wln("None");
             },
         ),
-        UfType::Custom { name,  import_location, .. } => {
+        UfType::ArrayOfStruct { name,  import_location, .. } => {
             s.wln(format!("{import_location}::{name}::from_range(self.values.range(index.first()..=index.last()))"));
         }
     }
@@ -392,7 +392,7 @@ fn print_setter_internals(s: &mut Writer, m: &MemberType) {
                 m.offset + 1
             ));
         }
-        UfType::Custom { variable_name, .. } => {
+        UfType::ArrayOfStruct { variable_name, .. } => {
             s.open_curly(format!(
                 "for (index, value) in {variable_name}.mask_values(index)"
             ));
@@ -421,7 +421,7 @@ fn print_setter_internals(s: &mut Writer, m: &MemberType) {
 
                     format!("u32::from_le_bytes([{a}, {b}, {c}, {d}])")
                 }
-                UfType::Custom { .. } => {
+                UfType::ArrayOfStruct { .. } => {
                     unreachable!("Guid has already been checked for in outer match")
                 }
                 UfType::Guid => unreachable!("Guid has already been checked for in outer match"),
@@ -545,7 +545,7 @@ pub(crate) enum UfType {
     Bytes,
     BytesWith(ByteType, ByteType, ByteType, ByteType),
     TwoShort,
-    Custom {
+    ArrayOfStruct {
         name: &'static str,
         variable_name: &'static str,
         import_location: &'static str,
@@ -573,7 +573,7 @@ impl UfType {
                 c.ty_str(),
                 d.ty_str(),
             ),
-            UfType::Custom {
+            UfType::ArrayOfStruct {
                 name,
                 import_location,
                 ..
@@ -605,7 +605,7 @@ impl UfType {
                         d.ty_str(),
                     );
                 }
-                UfType::Custom {
+                UfType::ArrayOfStruct {
                     name,
                     variable_name,
                     import_location,
