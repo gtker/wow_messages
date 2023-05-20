@@ -13,8 +13,8 @@ pub use async_std_impl::*;
 #[cfg(feature = "tokio")]
 pub use tokio_impl::*;
 
+use crate::errors::ExpectedOpcodeError;
 use std::io::{Read, Write};
-use wow_world_base::ExpectedOpcodeError;
 
 #[cfg(any(feature = "wrath", feature = "tbc"))]
 use crate::shared::addon_tbc_wrath::Addon;
