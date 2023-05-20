@@ -133,6 +133,9 @@ pub(crate) fn write_pub_use(
 
 fn lib_functions(s: &mut Writer, ty_name: &str) {
     let ty_lower = ty_name.to_lowercase();
+    s.wln(format!("/// Looks up {ty_lower}s and returns if found."));
+    s.wln("///");
+    s.wln(format!("/// Prefer using this over [`all_{ty_lower}s`] since this may incorporate optimizations for lookup speed in the future."));
     s.open_curly(format!(
         "pub fn lookup_{ty_lower}(id: u32) -> Option<&'static {ty_name}>"
     ));
@@ -142,6 +145,9 @@ fn lib_functions(s: &mut Writer, ty_name: &str) {
     s.closing_curly();
     s.newline();
 
+    s.wln(format!("/// Returns all {ty_lower}s."));
+    s.wln("///");
+    s.wln(format!("/// Prefer using [`lookup_{ty_lower}`] since it may incorporate optimizations for lookup speed in the future."));
     s.open_curly(format!(
         "pub const fn all_{ty_lower}s() -> &'static [{ty_name}]"
     ));

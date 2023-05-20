@@ -30,10 +30,16 @@ pub use wow_world_base::vanilla::{
     Spells,
 };
 
+/// Looks up items and returns if found.
+///
+/// Prefer using this over [`all_items`] since this may incorporate optimizations for lookup speed in the future.
 pub fn lookup_item(id: u32) -> Option<&'static Item> {
     all_items().iter().find(|a| a.entry() == id)
 }
 
+/// Returns all items.
+///
+/// Prefer using [`lookup_item`] since it may incorporate optimizations for lookup speed in the future.
 pub const fn all_items() -> &'static [Item] {
     data::Z________DATA
 }

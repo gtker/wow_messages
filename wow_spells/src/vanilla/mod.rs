@@ -17,10 +17,16 @@ pub use wow_world_base::vanilla::{
     Totem,
 };
 
+/// Looks up spells and returns if found.
+///
+/// Prefer using this over [`all_spells`] since this may incorporate optimizations for lookup speed in the future.
 pub fn lookup_spell(id: u32) -> Option<&'static Spell> {
     all_spells().iter().find(|a| a.entry() == id)
 }
 
+/// Returns all spells.
+///
+/// Prefer using [`lookup_spell`] since it may incorporate optimizations for lookup speed in the future.
 pub const fn all_spells() -> &'static [Spell] {
     data::Z________DATA
 }
