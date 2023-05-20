@@ -50,7 +50,7 @@ smsg SMSG_ITEM_QUERY_SINGLE_RESPONSE = 0x0058 {
         (u32)Bonding bonding;
         CString description;
         u32 page_text;
-        (u32)Language language;
+        Language language;
         (u32)PageTextMaterial page_text_material;
         u32 start_quest;
         u32 lock_id;

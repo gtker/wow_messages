@@ -1,6 +1,6 @@
 use crate::error_printer::{
     complex_not_found, enum_has_bitwise_and, flag_used_as_equals_or_not_equals,
-    variable_in_if_not_found,
+    type_is_upcast_to_same, variable_in_if_not_found,
 };
 use crate::file_info::FileInfo;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
@@ -68,6 +68,12 @@ fn parsed_type_to_type(
         }
         ParsedType::Identifier { s, upcast } => {
             if let Some(e) = get_definer(definers, &s, tags) {
+                if let Some(upcast) = &upcast {
+                    if upcast == e.ty() {
+                        type_is_upcast_to_same(&s, &p.file_info, *e.ty());
+                    }
+                }
+
                 match e.definer_ty() {
                     DefinerType::Enum => Type::Enum {
                         e: e.clone(),

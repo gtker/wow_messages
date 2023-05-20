@@ -15,9 +15,9 @@ use crate::wrath::{
 ///     u8 early_terminate = 0;
 ///     CString character_name;
 ///     CString realm_name;
-///     (u8)Race race;
-///     (u8)Gender gender;
-///     (u8)Class class;
+///     Race race;
+///     Gender gender;
+///     Class class;
 ///     DeclinedNames has_declined_names;
 ///     if (has_declined_names == YES) {
 ///         CString[5] declined_names;
@@ -80,13 +80,13 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         w.write_all(&[0])?;
 
         // race: Race
-        w.write_all(&u8::from(self.race.as_int()).to_le_bytes())?;
+        w.write_all(&(self.race.as_int().to_le_bytes()))?;
 
         // gender: Gender
-        w.write_all(&u8::from(self.gender.as_int()).to_le_bytes())?;
+        w.write_all(&(self.gender.as_int().to_le_bytes()))?;
 
         // class: Class
-        w.write_all(&u8::from(self.class.as_int()).to_le_bytes())?;
+        w.write_all(&(self.class.as_int().to_le_bytes()))?;
 
         // has_declined_names: DeclinedNames
         w.write_all(&(self.has_declined_names.as_int().to_le_bytes()))?;
@@ -132,13 +132,13 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         };
 
         // race: Race
-        let race: Race = (crate::util::read_u8_le(&mut r)? as u8).try_into()?;
+        let race: Race = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // gender: Gender
-        let gender: Gender = (crate::util::read_u8_le(&mut r)? as u8).try_into()?;
+        let gender: Gender = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // class: Class
-        let class: Class = (crate::util::read_u8_le(&mut r)? as u8).try_into()?;
+        let class: Class = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // has_declined_names: DeclinedNames
         let has_declined_names: DeclinedNames = crate::util::read_u8_le(&mut r)?.try_into()?;

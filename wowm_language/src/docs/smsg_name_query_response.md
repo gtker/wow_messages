@@ -138,9 +138,9 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x0051 {
     u8 early_terminate = 0;
     CString character_name;
     CString realm_name;
-    (u8)Race race;
-    (u8)Gender gender;
-    (u8)Class class;
+    Race race;
+    Gender gender;
+    Class class;
     DeclinedNames has_declined_names;
     if (has_declined_names == YES) {
         CString[5] declined_names;

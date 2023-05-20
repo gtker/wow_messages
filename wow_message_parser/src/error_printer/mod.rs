@@ -1,5 +1,6 @@
 use crate::file_info::FileInfo;
 use crate::parser::types::version::MajorWorldVersion;
+use crate::parser::types::IntegerType;
 use crate::path_utils::opcodes_file;
 use crate::{ObjectTags, CONTAINER_SELF_SIZE_FIELD, ENUM_SELF_VALUE_FIELD};
 use std::process::exit;
@@ -25,7 +26,8 @@ pub(crate) const OVERLAPPING_VERSIONS: i32 = 15;
 pub(crate) const BOTH_LOGIN_AND_WORLD_VERSIONS: i32 = 16;
 pub(crate) const DUPLICATE_FIELD_NAMES: i32 = 17;
 pub(crate) const MESSAGE_NOT_IN_INDEX: i32 = 18;
-pub(crate) const OPCODE_HAS_INCORRECT_NAME: i32 = 18;
+pub(crate) const OPCODE_HAS_INCORRECT_NAME: i32 = 19;
+pub(crate) const TYPE_IS_UPCAST_TO_SAME: i32 = 20;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -418,4 +420,16 @@ pub(crate) fn message_not_in_index(
     );
 
     wowm_exit(s, MESSAGE_NOT_IN_INDEX)
+}
+
+pub(crate) fn type_is_upcast_to_same(ty_name: &str, file_info: &FileInfo, ty: IntegerType) -> ! {
+    let mut s = ErrorWriter::new("Type is upcast to same type.");
+
+    let ty = ty.str();
+    s.fileinfo(
+        file_info,
+        format!("Type '{ty_name}' of integer type '{ty}' is upcast to the same type.",),
+    );
+
+    wowm_exit(s, TYPE_IS_UPCAST_TO_SAME)
 }

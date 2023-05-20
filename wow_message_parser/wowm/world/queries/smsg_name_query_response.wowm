@@ -47,9 +47,9 @@ smsg SMSG_NAME_QUERY_RESPONSE = 0x51 {
     CString realm_name {
         description = "Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.";
     }
-    (u8)Race race;
-    (u8)Gender gender;
-    (u8)Class class;
+    Race race;
+    Gender gender;
+    Class class;
     DeclinedNames has_declined_names;
     if (has_declined_names == YES) {
         CString[5] declined_names;

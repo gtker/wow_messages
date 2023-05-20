@@ -55,7 +55,7 @@ use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 ///         (u32)Bonding bonding;
 ///         CString description;
 ///         u32 page_text;
-///         (u32)Language language;
+///         Language language;
 ///         (u32)PageTextMaterial page_text_material;
 ///         u32 start_quest;
 ///         u32 lock_id;
@@ -240,7 +240,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             w.write_all(&v.page_text.to_le_bytes())?;
 
             // language: Language
-            w.write_all(&u32::from(v.language.as_int()).to_le_bytes())?;
+            w.write_all(&(v.language.as_int().to_le_bytes()))?;
 
             // page_text_material: PageTextMaterial
             w.write_all(&u32::from(v.page_text_material.as_int()).to_le_bytes())?;
@@ -452,7 +452,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let page_text = crate::util::read_u32_le(&mut r)?;
 
             // language: Language
-            let language: Language = (crate::util::read_u32_le(&mut r)? as u32).try_into()?;
+            let language: Language = crate::util::read_u32_le(&mut r)?.try_into()?;
 
             // page_text_material: PageTextMaterial
             let page_text_material: PageTextMaterial = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
