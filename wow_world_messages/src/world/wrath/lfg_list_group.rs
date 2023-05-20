@@ -70,7 +70,7 @@ impl LfgListGroup {
         // flags: LfgUpdateFlag
         let flags = LfgUpdateFlag::new(crate::util::read_u32_le(&mut r)?);
 
-        let flags_COMMENT = if flags.is_comment() {
+        let flags_comment = if flags.is_comment() {
             // comment: CString
             let comment = {
                 let comment = crate::util::read_c_string_to_vec(&mut r)?;
@@ -85,7 +85,7 @@ impl LfgListGroup {
             None
         };
 
-        let flags_ROLES = if flags.is_roles() {
+        let flags_roles = if flags.is_roles() {
             // roles: u8[3]
             let roles = {
                 let mut roles = [0_u8; 3];
@@ -109,8 +109,8 @@ impl LfgListGroup {
 
         let flags = LfgListGroup_LfgUpdateFlag {
             inner: flags.as_int(),
-            comment: flags_COMMENT,
-            roles: flags_ROLES,
+            comment: flags_comment,
+            roles: flags_roles,
         };
 
         Ok(Self {

@@ -199,7 +199,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             damage_infos
         };
 
-        let hit_info_ALL_ABSORB = if hit_info.is_all_absorb() {
+        let hit_info_all_absorb = if hit_info.is_all_absorb() {
             // absorb: u32
             let absorb = crate::util::read_u32_le(&mut r)?;
 
@@ -211,7 +211,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             None
         };
 
-        let hit_info_ALL_RESIST = if hit_info.is_all_resist() {
+        let hit_info_all_resist = if hit_info.is_all_resist() {
             // resist: u32
             let resist = crate::util::read_u32_le(&mut r)?;
 
@@ -232,7 +232,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         // unknown2: u32
         let unknown2 = crate::util::read_u32_le(&mut r)?;
 
-        let hit_info_BLOCK = if hit_info.is_block() {
+        let hit_info_block = if hit_info.is_block() {
             // blocked_amount: u32
             let blocked_amount = crate::util::read_u32_le(&mut r)?;
 
@@ -244,7 +244,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             None
         };
 
-        let hit_info_UNK19 = if hit_info.is_unk19() {
+        let hit_info_unk19 = if hit_info.is_unk19() {
             // unknown3: u32
             let unknown3 = crate::util::read_u32_le(&mut r)?;
 
@@ -256,7 +256,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             None
         };
 
-        let hit_info_UNK1 = if hit_info.is_unk1() {
+        let hit_info_unk1 = if hit_info.is_unk1() {
             // unknown4: u32
             let unknown4 = crate::util::read_u32_le(&mut r)?;
 
@@ -314,11 +314,11 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
         let hit_info = SMSG_ATTACKERSTATEUPDATE_HitInfo {
             inner: hit_info.as_int(),
-            unk1: hit_info_UNK1,
-            all_absorb: hit_info_ALL_ABSORB,
-            all_resist: hit_info_ALL_RESIST,
-            block: hit_info_BLOCK,
-            unk19: hit_info_UNK19,
+            unk1: hit_info_unk1,
+            all_absorb: hit_info_all_absorb,
+            all_resist: hit_info_all_resist,
+            block: hit_info_block,
+            unk19: hit_info_unk19,
         };
 
         Ok(Self {

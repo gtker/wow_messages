@@ -216,7 +216,7 @@ impl LfgListPlayer {
         // flags: LfgUpdateFlag
         let flags = LfgUpdateFlag::new(crate::util::read_u32_le(&mut r)?);
 
-        let flags_CHARACTER_INFO = if flags.is_character_info() {
+        let flags_character_info = if flags.is_character_info() {
             // level: Level
             let level = Level::new(crate::util::read_u8_le(&mut r)?);
 
@@ -328,7 +328,7 @@ impl LfgListPlayer {
             None
         };
 
-        let flags_COMMENT = if flags.is_comment() {
+        let flags_comment = if flags.is_comment() {
             // comment: CString
             let comment = {
                 let comment = crate::util::read_c_string_to_vec(&mut r)?;
@@ -343,7 +343,7 @@ impl LfgListPlayer {
             None
         };
 
-        let flags_GROUP_LEADER = if flags.is_group_leader() {
+        let flags_group_leader = if flags.is_group_leader() {
             // is_looking_for_more: Bool
             let is_looking_for_more = crate::util::read_u8_le(&mut r)? != 0;
 
@@ -355,7 +355,7 @@ impl LfgListPlayer {
             None
         };
 
-        let flags_GROUP_GUID = if flags.is_group_guid() {
+        let flags_group_guid = if flags.is_group_guid() {
             // group: Guid
             let group = Guid::read(&mut r)?;
 
@@ -367,7 +367,7 @@ impl LfgListPlayer {
             None
         };
 
-        let flags_ROLES = if flags.is_roles() {
+        let flags_roles = if flags.is_roles() {
             // roles: u8
             let roles = crate::util::read_u8_le(&mut r)?;
 
@@ -379,7 +379,7 @@ impl LfgListPlayer {
             None
         };
 
-        let flags_AREA = if flags.is_area() {
+        let flags_area = if flags.is_area() {
             // area: Area
             let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
@@ -391,7 +391,7 @@ impl LfgListPlayer {
             None
         };
 
-        let flags_STATUS = if flags.is_status() {
+        let flags_status = if flags.is_status() {
             // unknown1: u8
             let unknown1 = crate::util::read_u8_le(&mut r)?;
 
@@ -411,13 +411,13 @@ impl LfgListPlayer {
 
         let flags = LfgListPlayer_LfgUpdateFlag {
             inner: flags.as_int(),
-            character_info: flags_CHARACTER_INFO,
-            comment: flags_COMMENT,
-            group_leader: flags_GROUP_LEADER,
-            group_guid: flags_GROUP_GUID,
-            roles: flags_ROLES,
-            area: flags_AREA,
-            status: flags_STATUS,
+            character_info: flags_character_info,
+            comment: flags_comment,
+            group_leader: flags_group_leader,
+            group_guid: flags_group_guid,
+            roles: flags_roles,
+            area: flags_area,
+            status: flags_status,
         };
 
         Ok(Self {

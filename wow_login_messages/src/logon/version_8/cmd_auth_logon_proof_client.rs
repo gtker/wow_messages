@@ -146,7 +146,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
         // security_flag: SecurityFlag
         let security_flag = SecurityFlag::new(crate::util::read_u8_le(&mut r)?);
 
-        let security_flag_PIN = if security_flag.is_pin() {
+        let security_flag_pin = if security_flag.is_pin() {
             // pin_salt: u8[16]
             let pin_salt = {
                 let mut pin_salt = [0_u8; 16];
@@ -170,7 +170,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             None
         };
 
-        let security_flag_MATRIX_CARD = if security_flag.is_matrix_card() {
+        let security_flag_matrix_card = if security_flag.is_matrix_card() {
             // matrix_card_proof: u8[20]
             let matrix_card_proof = {
                 let mut matrix_card_proof = [0_u8; 20];
@@ -186,7 +186,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             None
         };
 
-        let security_flag_AUTHENTICATOR = if security_flag.is_authenticator() {
+        let security_flag_authenticator = if security_flag.is_authenticator() {
             // amount_of_tokens: u8
             let amount_of_tokens = crate::util::read_u8_le(&mut r)?;
 
@@ -209,9 +209,9 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
 
         let security_flag = CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
             inner: security_flag.as_int(),
-            pin: security_flag_PIN,
-            matrix_card: security_flag_MATRIX_CARD,
-            authenticator: security_flag_AUTHENTICATOR,
+            pin: security_flag_pin,
+            matrix_card: security_flag_matrix_card,
+            authenticator: security_flag_authenticator,
         };
 
         Ok(Self {
@@ -277,7 +277,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             // security_flag: SecurityFlag
             let security_flag = SecurityFlag::new(crate::util::tokio_read_u8_le(&mut r).await?);
 
-            let security_flag_PIN = if security_flag.is_pin() {
+            let security_flag_pin = if security_flag.is_pin() {
                 // pin_salt: u8[16]
                 let pin_salt = {
                     let mut pin_salt = [0_u8; 16];
@@ -301,7 +301,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 None
             };
 
-            let security_flag_MATRIX_CARD = if security_flag.is_matrix_card() {
+            let security_flag_matrix_card = if security_flag.is_matrix_card() {
                 // matrix_card_proof: u8[20]
                 let matrix_card_proof = {
                     let mut matrix_card_proof = [0_u8; 20];
@@ -317,7 +317,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 None
             };
 
-            let security_flag_AUTHENTICATOR = if security_flag.is_authenticator() {
+            let security_flag_authenticator = if security_flag.is_authenticator() {
                 // amount_of_tokens: u8
                 let amount_of_tokens = crate::util::tokio_read_u8_le(&mut r).await?;
 
@@ -340,9 +340,9 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
 
             let security_flag = CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
                 inner: security_flag.as_int(),
-                pin: security_flag_PIN,
-                matrix_card: security_flag_MATRIX_CARD,
-                authenticator: security_flag_AUTHENTICATOR,
+                pin: security_flag_pin,
+                matrix_card: security_flag_matrix_card,
+                authenticator: security_flag_authenticator,
             };
 
             Ok(Self {
@@ -421,7 +421,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             // security_flag: SecurityFlag
             let security_flag = SecurityFlag::new(crate::util::astd_read_u8_le(&mut r).await?);
 
-            let security_flag_PIN = if security_flag.is_pin() {
+            let security_flag_pin = if security_flag.is_pin() {
                 // pin_salt: u8[16]
                 let pin_salt = {
                     let mut pin_salt = [0_u8; 16];
@@ -445,7 +445,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 None
             };
 
-            let security_flag_MATRIX_CARD = if security_flag.is_matrix_card() {
+            let security_flag_matrix_card = if security_flag.is_matrix_card() {
                 // matrix_card_proof: u8[20]
                 let matrix_card_proof = {
                     let mut matrix_card_proof = [0_u8; 20];
@@ -461,7 +461,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
                 None
             };
 
-            let security_flag_AUTHENTICATOR = if security_flag.is_authenticator() {
+            let security_flag_authenticator = if security_flag.is_authenticator() {
                 // amount_of_tokens: u8
                 let amount_of_tokens = crate::util::astd_read_u8_le(&mut r).await?;
 
@@ -484,9 +484,9 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
 
             let security_flag = CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
                 inner: security_flag.as_int(),
-                pin: security_flag_PIN,
-                matrix_card: security_flag_MATRIX_CARD,
-                authenticator: security_flag_AUTHENTICATOR,
+                pin: security_flag_pin,
+                matrix_card: security_flag_matrix_card,
+                authenticator: security_flag_authenticator,
             };
 
             Ok(Self {

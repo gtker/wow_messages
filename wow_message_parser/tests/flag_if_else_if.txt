@@ -82,7 +82,7 @@ impl FlagIfElseIf {
         // flags: UpdateFlag
         let flags = UpdateFlag::new(crate::util::read_u8_le(&mut r)?);
 
-        let flags_ONE_IF = if flags.is_one_if() {
+        let flags_one_if = if flags.is_one_if() {
             // b_if: u8
             let b_if = crate::util::read_u8_le(&mut r)?;
 
@@ -94,7 +94,7 @@ impl FlagIfElseIf {
             // s: SimpleFlag
             let s = SimpleFlag::new(crate::util::read_u8_le(&mut r)?);
 
-            let s_ONE = if s.is_one() {
+            let s_one = if s.is_one() {
                 // if_one: u8
                 let if_one = crate::util::read_u8_le(&mut r)?;
 
@@ -108,7 +108,7 @@ impl FlagIfElseIf {
 
             let s = FlagIfElseIf_SimpleFlag {
                 inner: s.as_int(),
-                one: s_ONE,
+                one: s_one,
             };
 
             Some(FlagIfElseIf_UpdateFlag_OneIf::TwoElseif {
@@ -127,7 +127,7 @@ impl FlagIfElseIf {
             None
         };
 
-        let flags_EIGHT_IF = if flags.is_eight_if() {
+        let flags_eight_if = if flags.is_eight_if() {
             // last_if: u8
             let last_if = crate::util::read_u8_le(&mut r)?;
 
@@ -141,8 +141,8 @@ impl FlagIfElseIf {
 
         let flags = FlagIfElseIf_UpdateFlag {
             inner: flags.as_int(),
-            one_if: flags_ONE_IF,
-            eight_if: flags_EIGHT_IF,
+            one_if: flags_one_if,
+            eight_if: flags_eight_if,
         };
 
         Ok(Self {

@@ -171,7 +171,7 @@ impl SpellCastTargets {
         // target_flags: SpellCastTargetFlags
         let target_flags = SpellCastTargetFlags::new(crate::util::read_u32_le(&mut r)?);
 
-        let target_flags_UNIT = if target_flags.is_unit() {
+        let target_flags_unit = if target_flags.is_unit() {
             // unit_target: PackedGuid
             let unit_target = Guid::read_packed(&mut r)?;
 
@@ -199,7 +199,7 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_GAMEOBJECT = if target_flags.is_gameobject() {
+        let target_flags_gameobject = if target_flags.is_gameobject() {
             // gameobject: PackedGuid
             let gameobject = Guid::read_packed(&mut r)?;
 
@@ -219,7 +219,7 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_ITEM = if target_flags.is_item() {
+        let target_flags_item = if target_flags.is_item() {
             // item: PackedGuid
             let item = Guid::read_packed(&mut r)?;
 
@@ -239,7 +239,7 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_SOURCE_LOCATION = if target_flags.is_source_location() {
+        let target_flags_source_location = if target_flags.is_source_location() {
             // source: Vector3d
             let source = Vector3d::read(&mut r)?;
 
@@ -251,7 +251,7 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_DEST_LOCATION = if target_flags.is_dest_location() {
+        let target_flags_dest_location = if target_flags.is_dest_location() {
             // destination: Vector3d
             let destination = Vector3d::read(&mut r)?;
 
@@ -263,7 +263,7 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_STRING = if target_flags.is_string() {
+        let target_flags_string = if target_flags.is_string() {
             // target_string: CString
             let target_string = {
                 let target_string = crate::util::read_c_string_to_vec(&mut r)?;
@@ -278,7 +278,7 @@ impl SpellCastTargets {
             None
         };
 
-        let target_flags_CORPSE_ALLY = if target_flags.is_corpse_ally() {
+        let target_flags_corpse_ally = if target_flags.is_corpse_ally() {
             // corpse_ally: PackedGuid
             let corpse_ally = Guid::read_packed(&mut r)?;
 
@@ -300,13 +300,13 @@ impl SpellCastTargets {
 
         let target_flags = SpellCastTargets_SpellCastTargetFlags {
             inner: target_flags.as_int(),
-            unit: target_flags_UNIT,
-            item: target_flags_ITEM,
-            source_location: target_flags_SOURCE_LOCATION,
-            dest_location: target_flags_DEST_LOCATION,
-            gameobject: target_flags_GAMEOBJECT,
-            string: target_flags_STRING,
-            corpse_ally: target_flags_CORPSE_ALLY,
+            unit: target_flags_unit,
+            item: target_flags_item,
+            source_location: target_flags_source_location,
+            dest_location: target_flags_dest_location,
+            gameobject: target_flags_gameobject,
+            string: target_flags_string,
+            corpse_ally: target_flags_corpse_ally,
         };
 
         Ok(Self {

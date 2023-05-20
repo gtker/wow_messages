@@ -299,7 +299,7 @@ impl MovementBlock {
         // update_flag: UpdateFlag
         let update_flag = UpdateFlag::new(crate::util::read_u8_le(&mut r)?);
 
-        let update_flag_LIVING = if update_flag.is_living() {
+        let update_flag_living = if update_flag.is_living() {
             // flags: MovementFlags
             let flags = MovementFlags::new(crate::util::read_u32_le(&mut r)?);
 
@@ -315,7 +315,7 @@ impl MovementBlock {
             // living_orientation: f32
             let living_orientation = crate::util::read_f32_le(&mut r)?;
 
-            let flags_ON_TRANSPORT = if flags.is_on_transport() {
+            let flags_on_transport = if flags.is_on_transport() {
                 // transport: TransportInfo
                 let transport = TransportInfo::read(&mut r)?;
 
@@ -327,7 +327,7 @@ impl MovementBlock {
                 None
             };
 
-            let flags_SWIMMING = if flags.is_swimming() {
+            let flags_swimming = if flags.is_swimming() {
                 // pitch1: f32
                 let pitch1 = crate::util::read_f32_le(&mut r)?;
 
@@ -350,7 +350,7 @@ impl MovementBlock {
             // fall_time: f32
             let fall_time = crate::util::read_f32_le(&mut r)?;
 
-            let flags_JUMPING = if flags.is_jumping() {
+            let flags_jumping = if flags.is_jumping() {
                 // z_speed: f32
                 let z_speed = crate::util::read_f32_le(&mut r)?;
 
@@ -374,7 +374,7 @@ impl MovementBlock {
                 None
             };
 
-            let flags_SPLINE_ELEVATION = if flags.is_spline_elevation() {
+            let flags_spline_elevation = if flags.is_spline_elevation() {
                 // spline_elevation: f32
                 let spline_elevation = crate::util::read_f32_le(&mut r)?;
 
@@ -410,11 +410,11 @@ impl MovementBlock {
             // turn_rate: f32
             let turn_rate = crate::util::read_f32_le(&mut r)?;
 
-            let flags_SPLINE_ENABLED = if flags.is_spline_enabled() {
+            let flags_spline_enabled = if flags.is_spline_enabled() {
                 // spline_flags: SplineFlag
                 let spline_flags = SplineFlag::new(crate::util::read_u32_le(&mut r)?);
 
-                let spline_flags_FINAL_ANGLE = if spline_flags.is_final_angle() {
+                let spline_flags_final_angle = if spline_flags.is_final_angle() {
                     // angle: f32
                     let angle = crate::util::read_f32_le(&mut r)?;
 
@@ -468,7 +468,7 @@ impl MovementBlock {
 
                 let spline_flags = MovementBlock_SplineFlag {
                     inner: spline_flags.as_int(),
-                    final_angle: spline_flags_FINAL_ANGLE,
+                    final_angle: spline_flags_final_angle,
                 };
 
                 Some(MovementBlock_MovementFlags_SplineEnabled {
@@ -486,11 +486,11 @@ impl MovementBlock {
 
             let flags = MovementBlock_MovementFlags {
                 inner: flags.as_int(),
-                on_transport: flags_ON_TRANSPORT,
-                jumping: flags_JUMPING,
-                swimming: flags_SWIMMING,
-                spline_elevation: flags_SPLINE_ELEVATION,
-                spline_enabled: flags_SPLINE_ENABLED,
+                on_transport: flags_on_transport,
+                jumping: flags_jumping,
+                swimming: flags_swimming,
+                spline_elevation: flags_spline_elevation,
+                spline_enabled: flags_spline_enabled,
             };
 
             Some(MovementBlock_UpdateFlag_Living::Living {
@@ -526,7 +526,7 @@ impl MovementBlock {
             None
         };
 
-        let update_flag_HIGH_GUID = if update_flag.is_high_guid() {
+        let update_flag_high_guid = if update_flag.is_high_guid() {
             // unknown0: u32
             let unknown0 = crate::util::read_u32_le(&mut r)?;
 
@@ -542,7 +542,7 @@ impl MovementBlock {
             None
         };
 
-        let update_flag_ALL = if update_flag.is_all() {
+        let update_flag_all = if update_flag.is_all() {
             // unknown2: u32
             let unknown2 = crate::util::read_u32_le(&mut r)?;
 
@@ -554,7 +554,7 @@ impl MovementBlock {
             None
         };
 
-        let update_flag_MELEE_ATTACKING = if update_flag.is_melee_attacking() {
+        let update_flag_melee_attacking = if update_flag.is_melee_attacking() {
             // guid: PackedGuid
             let guid = Guid::read_packed(&mut r)?;
 
@@ -566,7 +566,7 @@ impl MovementBlock {
             None
         };
 
-        let update_flag_TRANSPORT = if update_flag.is_transport() {
+        let update_flag_transport = if update_flag.is_transport() {
             // transport_progress_in_ms: u32
             let transport_progress_in_ms = crate::util::read_u32_le(&mut r)?;
 
@@ -580,11 +580,11 @@ impl MovementBlock {
 
         let update_flag = MovementBlock_UpdateFlag {
             inner: update_flag.as_int(),
-            transport: update_flag_TRANSPORT,
-            melee_attacking: update_flag_MELEE_ATTACKING,
-            high_guid: update_flag_HIGH_GUID,
-            all: update_flag_ALL,
-            living: update_flag_LIVING,
+            transport: update_flag_transport,
+            melee_attacking: update_flag_melee_attacking,
+            high_guid: update_flag_high_guid,
+            all: update_flag_all,
+            living: update_flag_living,
         };
 
         Ok(Self {

@@ -120,7 +120,7 @@ impl Realm {
         // realm_id: u8
         let realm_id = crate::util::read_u8_le(&mut r)?;
 
-        let flag_SPECIFY_BUILD = if flag.is_specify_build() {
+        let flag_specify_build = if flag.is_specify_build() {
             // version: Version
             let version = Version::read(&mut r)?;
 
@@ -134,7 +134,7 @@ impl Realm {
 
         let flag = Realm_RealmFlag {
             inner: flag.as_int(),
-            specify_build: flag_SPECIFY_BUILD,
+            specify_build: flag_specify_build,
         };
 
         Ok(Self {
@@ -185,7 +185,7 @@ impl Realm {
         // realm_id: u8
         let realm_id = crate::util::tokio_read_u8_le(&mut r).await?;
 
-        let flag_SPECIFY_BUILD = if flag.is_specify_build() {
+        let flag_specify_build = if flag.is_specify_build() {
             // version: Version
             let version = Version::tokio_read(&mut r).await?;
 
@@ -199,7 +199,7 @@ impl Realm {
 
         let flag = Realm_RealmFlag {
             inner: flag.as_int(),
-            specify_build: flag_SPECIFY_BUILD,
+            specify_build: flag_specify_build,
         };
 
         Ok(Self {
@@ -250,7 +250,7 @@ impl Realm {
         // realm_id: u8
         let realm_id = crate::util::astd_read_u8_le(&mut r).await?;
 
-        let flag_SPECIFY_BUILD = if flag.is_specify_build() {
+        let flag_specify_build = if flag.is_specify_build() {
             // version: Version
             let version = Version::astd_read(&mut r).await?;
 
@@ -264,7 +264,7 @@ impl Realm {
 
         let flag = Realm_RealmFlag {
             inner: flag.as_int(),
-            specify_build: flag_SPECIFY_BUILD,
+            specify_build: flag_specify_build,
         };
 
         Ok(Self {

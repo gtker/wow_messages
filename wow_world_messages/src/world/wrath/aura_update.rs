@@ -83,7 +83,7 @@ impl AuraUpdate {
         // aura_stack_count: u8
         let aura_stack_count = crate::util::read_u8_le(&mut r)?;
 
-        let flags_NOT_CASTER = if flags.is_not_caster() {
+        let flags_not_caster = if flags.is_not_caster() {
             // caster: PackedGuid
             let caster = Guid::read_packed(&mut r)?;
 
@@ -95,7 +95,7 @@ impl AuraUpdate {
             None
         };
 
-        let flags_DURATION = if flags.is_duration() {
+        let flags_duration = if flags.is_duration() {
             // duration: u32
             let duration = crate::util::read_u32_le(&mut r)?;
 
@@ -113,8 +113,8 @@ impl AuraUpdate {
 
         let flags = AuraUpdate_AuraFlag {
             inner: flags.as_int(),
-            not_caster: flags_NOT_CASTER,
-            duration: flags_DURATION,
+            not_caster: flags_not_caster,
+            duration: flags_duration,
         };
 
         Ok(Self {

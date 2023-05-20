@@ -187,7 +187,7 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
         // spline_flags: SplineFlag
         let spline_flags = SplineFlag::new(crate::util::read_u32_le(&mut r)?);
 
-        let spline_flags_ENTER_CYCLE = if spline_flags.is_enter_cycle() {
+        let spline_flags_enter_cycle = if spline_flags.is_enter_cycle() {
             // animation_id: u32
             let animation_id = crate::util::read_u32_le(&mut r)?;
 
@@ -206,7 +206,7 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
         // duration: u32
         let duration = crate::util::read_u32_le(&mut r)?;
 
-        let spline_flags_PARABOLIC = if spline_flags.is_parabolic() {
+        let spline_flags_parabolic = if spline_flags.is_parabolic() {
             // vertical_acceleration: f32
             let vertical_acceleration = crate::util::read_f32_le(&mut r)?;
 
@@ -227,8 +227,8 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
 
         let spline_flags = SMSG_MONSTER_MOVE_TRANSPORT_SplineFlag {
             inner: spline_flags.as_int(),
-            parabolic: spline_flags_PARABOLIC,
-            enter_cycle: spline_flags_ENTER_CYCLE,
+            parabolic: spline_flags_parabolic,
+            enter_cycle: spline_flags_enter_cycle,
         };
 
         Ok(Self {

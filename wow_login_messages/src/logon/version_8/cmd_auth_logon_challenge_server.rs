@@ -215,7 +215,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                 // security_flag: SecurityFlag
                 let security_flag = SecurityFlag::new(crate::util::read_u8_le(&mut r)?);
 
-                let security_flag_PIN = if security_flag.is_pin() {
+                let security_flag_pin = if security_flag.is_pin() {
                     // pin_grid_seed: u32
                     let pin_grid_seed = crate::util::read_u32_le(&mut r)?;
 
@@ -235,7 +235,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     None
                 };
 
-                let security_flag_MATRIX_CARD = if security_flag.is_matrix_card() {
+                let security_flag_matrix_card = if security_flag.is_matrix_card() {
                     // width: u8
                     let width = crate::util::read_u8_le(&mut r)?;
 
@@ -263,7 +263,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     None
                 };
 
-                let security_flag_AUTHENTICATOR = if security_flag.is_authenticator() {
+                let security_flag_authenticator = if security_flag.is_authenticator() {
                     // required: u8
                     let required = crate::util::read_u8_le(&mut r)?;
 
@@ -277,9 +277,9 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
 
                 let security_flag = CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
                     inner: security_flag.as_int(),
-                    pin: security_flag_PIN,
-                    matrix_card: security_flag_MATRIX_CARD,
-                    authenticator: security_flag_AUTHENTICATOR,
+                    pin: security_flag_pin,
+                    matrix_card: security_flag_matrix_card,
+                    authenticator: security_flag_authenticator,
                 };
 
                 CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
@@ -389,7 +389,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     // security_flag: SecurityFlag
                     let security_flag = SecurityFlag::new(crate::util::tokio_read_u8_le(&mut r).await?);
 
-                    let security_flag_PIN = if security_flag.is_pin() {
+                    let security_flag_pin = if security_flag.is_pin() {
                         // pin_grid_seed: u32
                         let pin_grid_seed = crate::util::tokio_read_u32_le(&mut r).await?;
 
@@ -409,7 +409,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         None
                     };
 
-                    let security_flag_MATRIX_CARD = if security_flag.is_matrix_card() {
+                    let security_flag_matrix_card = if security_flag.is_matrix_card() {
                         // width: u8
                         let width = crate::util::tokio_read_u8_le(&mut r).await?;
 
@@ -437,7 +437,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         None
                     };
 
-                    let security_flag_AUTHENTICATOR = if security_flag.is_authenticator() {
+                    let security_flag_authenticator = if security_flag.is_authenticator() {
                         // required: u8
                         let required = crate::util::tokio_read_u8_le(&mut r).await?;
 
@@ -451,9 +451,9 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
 
                     let security_flag = CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
                         inner: security_flag.as_int(),
-                        pin: security_flag_PIN,
-                        matrix_card: security_flag_MATRIX_CARD,
-                        authenticator: security_flag_AUTHENTICATOR,
+                        pin: security_flag_pin,
+                        matrix_card: security_flag_matrix_card,
+                        authenticator: security_flag_authenticator,
                     };
 
                     CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
@@ -576,7 +576,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     // security_flag: SecurityFlag
                     let security_flag = SecurityFlag::new(crate::util::astd_read_u8_le(&mut r).await?);
 
-                    let security_flag_PIN = if security_flag.is_pin() {
+                    let security_flag_pin = if security_flag.is_pin() {
                         // pin_grid_seed: u32
                         let pin_grid_seed = crate::util::astd_read_u32_le(&mut r).await?;
 
@@ -596,7 +596,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         None
                     };
 
-                    let security_flag_MATRIX_CARD = if security_flag.is_matrix_card() {
+                    let security_flag_matrix_card = if security_flag.is_matrix_card() {
                         // width: u8
                         let width = crate::util::astd_read_u8_le(&mut r).await?;
 
@@ -624,7 +624,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                         None
                     };
 
-                    let security_flag_AUTHENTICATOR = if security_flag.is_authenticator() {
+                    let security_flag_authenticator = if security_flag.is_authenticator() {
                         // required: u8
                         let required = crate::util::astd_read_u8_le(&mut r).await?;
 
@@ -638,9 +638,9 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
 
                     let security_flag = CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
                         inner: security_flag.as_int(),
-                        pin: security_flag_PIN,
-                        matrix_card: security_flag_MATRIX_CARD,
-                        authenticator: security_flag_AUTHENTICATOR,
+                        pin: security_flag_pin,
+                        matrix_card: security_flag_matrix_card,
+                        authenticator: security_flag_authenticator,
                     };
 
                     CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {

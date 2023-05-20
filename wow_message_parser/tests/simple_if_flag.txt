@@ -36,7 +36,7 @@ impl SimpleIfFlag {
         // flag: SimpleFlag
         let flag = SimpleFlag::new(crate::util::read_u8_le(&mut r)?);
 
-        let flag_ZERO = if flag.is_zero() {
+        let flag_zero = if flag.is_zero() {
             // basic: u8
             let basic = crate::util::read_u8_le(&mut r)?;
 
@@ -50,7 +50,7 @@ impl SimpleIfFlag {
 
         let flag = SimpleIfFlag_SimpleFlag {
             inner: flag.as_int(),
-            zero: flag_ZERO,
+            zero: flag_zero,
         };
 
         Ok(Self {

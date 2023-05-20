@@ -235,7 +235,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
         // mask: GroupUpdateFlags
         let mask = GroupUpdateFlags::new(crate::util::read_u32_le(&mut r)?);
 
-        let mask_STATUS = if mask.is_status() {
+        let mask_status = if mask.is_status() {
             // status: GroupMemberOnlineStatus
             let status = GroupMemberOnlineStatus::new(crate::util::read_u8_le(&mut r)?);
 
@@ -247,7 +247,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_CUR_HP = if mask.is_cur_hp() {
+        let mask_cur_hp = if mask.is_cur_hp() {
             // current_health: u16
             let current_health = crate::util::read_u16_le(&mut r)?;
 
@@ -259,7 +259,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_MAX_HP = if mask.is_max_hp() {
+        let mask_max_hp = if mask.is_max_hp() {
             // max_health: u16
             let max_health = crate::util::read_u16_le(&mut r)?;
 
@@ -271,7 +271,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_POWER_TYPE = if mask.is_power_type() {
+        let mask_power_type = if mask.is_power_type() {
             // power: Power
             let power: Power = crate::util::read_u8_le(&mut r)?.try_into()?;
 
@@ -283,7 +283,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_CUR_POWER = if mask.is_cur_power() {
+        let mask_cur_power = if mask.is_cur_power() {
             // current_power: u16
             let current_power = crate::util::read_u16_le(&mut r)?;
 
@@ -295,7 +295,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_MAX_POWER = if mask.is_max_power() {
+        let mask_max_power = if mask.is_max_power() {
             // max_power: u16
             let max_power = crate::util::read_u16_le(&mut r)?;
 
@@ -307,7 +307,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_LEVEL = if mask.is_level() {
+        let mask_level = if mask.is_level() {
             // level: Level16
             let level = Level::new(crate::util::read_u16_le(&mut r)? as u8);
 
@@ -319,7 +319,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_ZONE = if mask.is_zone() {
+        let mask_zone = if mask.is_zone() {
             // area: Area
             let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
@@ -331,7 +331,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_POSITION = if mask.is_position() {
+        let mask_position = if mask.is_position() {
             // position_x: u16
             let position_x = crate::util::read_u16_le(&mut r)?;
 
@@ -347,7 +347,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_AURAS = if mask.is_auras() {
+        let mask_auras = if mask.is_auras() {
             // auras: AuraMask
             let auras = AuraMask::read(&mut r)?;
 
@@ -359,7 +359,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_AURAS_2 = if mask.is_auras_2() {
+        let mask_auras_2 = if mask.is_auras_2() {
             // negative_auras: AuraMask
             let negative_auras = AuraMask::read(&mut r)?;
 
@@ -371,7 +371,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_GUID = if mask.is_pet_guid() {
+        let mask_pet_guid = if mask.is_pet_guid() {
             // pet: Guid
             let pet = Guid::read(&mut r)?;
 
@@ -383,7 +383,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_NAME = if mask.is_pet_name() {
+        let mask_pet_name = if mask.is_pet_name() {
             // pet_name: CString
             let pet_name = {
                 let pet_name = crate::util::read_c_string_to_vec(&mut r)?;
@@ -398,7 +398,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_MODEL_ID = if mask.is_pet_model_id() {
+        let mask_pet_model_id = if mask.is_pet_model_id() {
             // pet_display_id: u16
             let pet_display_id = crate::util::read_u16_le(&mut r)?;
 
@@ -410,7 +410,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_CUR_HP = if mask.is_pet_cur_hp() {
+        let mask_pet_cur_hp = if mask.is_pet_cur_hp() {
             // pet_current_health: u16
             let pet_current_health = crate::util::read_u16_le(&mut r)?;
 
@@ -422,7 +422,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_MAX_HP = if mask.is_pet_max_hp() {
+        let mask_pet_max_hp = if mask.is_pet_max_hp() {
             // pet_max_health: u16
             let pet_max_health = crate::util::read_u16_le(&mut r)?;
 
@@ -434,7 +434,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_POWER_TYPE = if mask.is_pet_power_type() {
+        let mask_pet_power_type = if mask.is_pet_power_type() {
             // pet_power_type: Power
             let pet_power_type: Power = crate::util::read_u8_le(&mut r)?.try_into()?;
 
@@ -446,7 +446,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_CUR_POWER = if mask.is_pet_cur_power() {
+        let mask_pet_cur_power = if mask.is_pet_cur_power() {
             // pet_current_power: u16
             let pet_current_power = crate::util::read_u16_le(&mut r)?;
 
@@ -458,7 +458,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_MAX_POWER = if mask.is_pet_max_power() {
+        let mask_pet_max_power = if mask.is_pet_max_power() {
             // pet_max_power: u16
             let pet_max_power = crate::util::read_u16_le(&mut r)?;
 
@@ -470,7 +470,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
             None
         };
 
-        let mask_PET_AURAS = if mask.is_pet_auras() {
+        let mask_pet_auras = if mask.is_pet_auras() {
             // pet_auras: AuraMask
             let pet_auras = AuraMask::read(&mut r)?;
 
@@ -484,26 +484,26 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
 
         let mask = SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags {
             inner: mask.as_int(),
-            status: mask_STATUS,
-            cur_hp: mask_CUR_HP,
-            max_hp: mask_MAX_HP,
-            power_type: mask_POWER_TYPE,
-            cur_power: mask_CUR_POWER,
-            max_power: mask_MAX_POWER,
-            level: mask_LEVEL,
-            zone: mask_ZONE,
-            position: mask_POSITION,
-            auras: mask_AURAS,
-            auras_2: mask_AURAS_2,
-            pet_guid: mask_PET_GUID,
-            pet_name: mask_PET_NAME,
-            pet_model_id: mask_PET_MODEL_ID,
-            pet_cur_hp: mask_PET_CUR_HP,
-            pet_max_hp: mask_PET_MAX_HP,
-            pet_power_type: mask_PET_POWER_TYPE,
-            pet_cur_power: mask_PET_CUR_POWER,
-            pet_max_power: mask_PET_MAX_POWER,
-            pet_auras: mask_PET_AURAS,
+            status: mask_status,
+            cur_hp: mask_cur_hp,
+            max_hp: mask_max_hp,
+            power_type: mask_power_type,
+            cur_power: mask_cur_power,
+            max_power: mask_max_power,
+            level: mask_level,
+            zone: mask_zone,
+            position: mask_position,
+            auras: mask_auras,
+            auras_2: mask_auras_2,
+            pet_guid: mask_pet_guid,
+            pet_name: mask_pet_name,
+            pet_model_id: mask_pet_model_id,
+            pet_cur_hp: mask_pet_cur_hp,
+            pet_max_hp: mask_pet_max_hp,
+            pet_power_type: mask_pet_power_type,
+            pet_cur_power: mask_pet_cur_power,
+            pet_max_power: mask_pet_max_power,
+            pet_auras: mask_pet_auras,
         };
 
         Ok(Self {

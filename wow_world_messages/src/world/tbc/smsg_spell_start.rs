@@ -101,7 +101,7 @@ impl crate::Message for SMSG_SPELL_START {
         // targets: SpellCastTargets
         let targets = SpellCastTargets::read(&mut r)?;
 
-        let flags_AMMO = if flags.is_ammo() {
+        let flags_ammo = if flags.is_ammo() {
             // ammo_display_id: u32
             let ammo_display_id = crate::util::read_u32_le(&mut r)?;
 
@@ -119,7 +119,7 @@ impl crate::Message for SMSG_SPELL_START {
 
         let flags = SMSG_SPELL_START_CastFlags {
             inner: flags.as_int(),
-            ammo: flags_AMMO,
+            ammo: flags_ammo,
         };
 
         Ok(Self {

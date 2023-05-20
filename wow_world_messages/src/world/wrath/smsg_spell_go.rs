@@ -164,7 +164,7 @@ impl crate::Message for SMSG_SPELL_GO {
         // targets: SpellCastTargets
         let targets = SpellCastTargets::read(&mut r)?;
 
-        let flags_POWER_UPDATE = if flags.is_power_update() {
+        let flags_power_update = if flags.is_power_update() {
             // power: Power
             let power: Power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
@@ -176,7 +176,7 @@ impl crate::Message for SMSG_SPELL_GO {
             None
         };
 
-        let flags_RUNE_UPDATE = if flags.is_rune_update() {
+        let flags_rune_update = if flags.is_rune_update() {
             // rune_mask_initial: u8
             let rune_mask_initial = crate::util::read_u8_le(&mut r)?;
 
@@ -200,7 +200,7 @@ impl crate::Message for SMSG_SPELL_GO {
             None
         };
 
-        let flags_ADJUST_MISSILE = if flags.is_adjust_missile() {
+        let flags_adjust_missile = if flags.is_adjust_missile() {
             // elevation: f32
             let elevation = crate::util::read_f32_le(&mut r)?;
 
@@ -216,7 +216,7 @@ impl crate::Message for SMSG_SPELL_GO {
             None
         };
 
-        let flags_AMMO = if flags.is_ammo() {
+        let flags_ammo = if flags.is_ammo() {
             // ammo_display_id: u32
             let ammo_display_id = crate::util::read_u32_le(&mut r)?;
 
@@ -232,7 +232,7 @@ impl crate::Message for SMSG_SPELL_GO {
             None
         };
 
-        let flags_VISUAL_CHAIN = if flags.is_visual_chain() {
+        let flags_visual_chain = if flags.is_visual_chain() {
             // unknown1: u32
             let unknown1 = crate::util::read_u32_le(&mut r)?;
 
@@ -248,7 +248,7 @@ impl crate::Message for SMSG_SPELL_GO {
             None
         };
 
-        let flags_DEST_LOCATION = if flags.is_dest_location() {
+        let flags_dest_location = if flags.is_dest_location() {
             // unknown3: u8
             let unknown3 = crate::util::read_u8_le(&mut r)?;
 
@@ -262,12 +262,12 @@ impl crate::Message for SMSG_SPELL_GO {
 
         let flags = SMSG_SPELL_GO_GameobjectCastFlags {
             inner: flags.as_int(),
-            ammo: flags_AMMO,
-            dest_location: flags_DEST_LOCATION,
-            power_update: flags_POWER_UPDATE,
-            adjust_missile: flags_ADJUST_MISSILE,
-            visual_chain: flags_VISUAL_CHAIN,
-            rune_update: flags_RUNE_UPDATE,
+            ammo: flags_ammo,
+            dest_location: flags_dest_location,
+            power_update: flags_power_update,
+            adjust_missile: flags_adjust_missile,
+            visual_chain: flags_visual_chain,
+            rune_update: flags_rune_update,
         };
 
         Ok(Self {

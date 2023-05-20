@@ -87,7 +87,7 @@ impl Relation {
             String::from_utf8(note)?
         };
 
-        let relation_mask_FRIEND = if relation_mask.is_friend() {
+        let relation_mask_friend = if relation_mask.is_friend() {
             // status: FriendStatus
             let status: FriendStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
 
@@ -124,7 +124,7 @@ impl Relation {
 
         let relation_mask = Relation_RelationType {
             inner: relation_mask.as_int(),
-            friend: relation_mask_FRIEND,
+            friend: relation_mask_friend,
         };
 
         Ok(Self {

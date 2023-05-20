@@ -403,10 +403,9 @@ fn print_read_if_statement_flag(
     postfix: &str,
 ) {
     s.open_curly(format!(
-        "let {var_name}_{enumerator_name} = if {var_name}.is_{enumerator_name_lower}()",
+        "let {var_name}_{enumerator_name} = if {var_name}.is_{enumerator_name}()",
         var_name = statement.name(),
-        enumerator_name = statement.flag_get_enumerator(),
-        enumerator_name_lower = statement.flag_get_enumerator().to_lowercase(),
+        enumerator_name = statement.flag_get_enumerator().to_lowercase(),
     ));
 
     for m in statement.members() {
@@ -668,7 +667,7 @@ fn print_read_final_flag(s: &mut Writer, rds: &[RustDefiner]) {
                     s.wln(format!(
                         "{field_name}: {var_name}_{f_name},",
                         field_name = enumerator.name().to_lowercase(),
-                        f_name = enumerator.name(),
+                        f_name = enumerator.name().to_lowercase(),
                     ));
                 }
 

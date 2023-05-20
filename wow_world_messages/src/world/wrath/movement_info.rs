@@ -158,7 +158,7 @@ impl MovementInfo {
         // orientation: f32
         let orientation = crate::util::read_f32_le(&mut r)?;
 
-        let flags_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT = if flags.is_on_transport_and_interpolated_movement() {
+        let flags_on_transport_and_interpolated_movement = if flags.is_on_transport_and_interpolated_movement() {
             // transport_info: TransportInfo
             let transport_info = TransportInfo::read(&mut r)?;
 
@@ -182,7 +182,7 @@ impl MovementInfo {
             None
         };
 
-        let flags_SWIMMING = if flags.is_swimming() {
+        let flags_swimming = if flags.is_swimming() {
             // pitch1: f32
             let pitch1 = crate::util::read_f32_le(&mut r)?;
 
@@ -213,7 +213,7 @@ impl MovementInfo {
         // fall_time: f32
         let fall_time = crate::util::read_f32_le(&mut r)?;
 
-        let flags_FALLING = if flags.is_falling() {
+        let flags_falling = if flags.is_falling() {
             // z_speed: f32
             let z_speed = crate::util::read_f32_le(&mut r)?;
 
@@ -237,7 +237,7 @@ impl MovementInfo {
             None
         };
 
-        let flags_SPLINE_ELEVATION = if flags.is_spline_elevation() {
+        let flags_spline_elevation = if flags.is_spline_elevation() {
             // spline_elevation: f32
             let spline_elevation = crate::util::read_f32_le(&mut r)?;
 
@@ -251,10 +251,10 @@ impl MovementInfo {
 
         let flags = MovementInfo_MovementFlags {
             inner: flags.as_int(),
-            falling: flags_FALLING,
-            swimming: flags_SWIMMING,
-            spline_elevation: flags_SPLINE_ELEVATION,
-            on_transport_and_interpolated_movement: flags_ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT,
+            falling: flags_falling,
+            swimming: flags_swimming,
+            spline_elevation: flags_spline_elevation,
+            on_transport_and_interpolated_movement: flags_on_transport_and_interpolated_movement,
         };
 
         Ok(Self {
