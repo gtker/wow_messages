@@ -21,7 +21,7 @@ impl crate::Message for SMSG_STANDSTATE_UPDATE {
         1
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // state: UnitStandState
         w.write_all(&(self.state.as_int().to_le_bytes()))?;
 

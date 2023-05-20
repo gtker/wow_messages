@@ -30,7 +30,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // target: Guid
         w.write_all(&self.target.guid().to_le_bytes())?;
 

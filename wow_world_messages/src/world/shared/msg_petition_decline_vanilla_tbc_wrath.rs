@@ -21,7 +21,7 @@ impl crate::Message for MSG_PETITION_DECLINE {
         8
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // petition: Guid
         w.write_all(&self.petition.guid().to_le_bytes())?;
 

@@ -16,7 +16,7 @@ pub struct MailItem {
 }
 
 impl MailItem {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // item: Guid
         w.write_all(&self.item.guid().to_le_bytes())?;
 
@@ -28,7 +28,7 @@ impl MailItem {
 }
 
 impl MailItem {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // item: Guid
         let item = Guid::read(&mut r)?;
 

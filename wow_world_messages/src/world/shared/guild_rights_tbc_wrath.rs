@@ -19,7 +19,7 @@ pub struct GuildRights {
 }
 
 impl GuildRights {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // rights: u32
         w.write_all(&self.rights.to_le_bytes())?;
 
@@ -36,7 +36,7 @@ impl GuildRights {
 }
 
 impl GuildRights {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // rights: u32
         let rights = crate::util::read_u32_le(&mut r)?;
 

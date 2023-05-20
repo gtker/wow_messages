@@ -30,7 +30,7 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // result: CorpseQueryResult
         w.write_all(&(self.result.as_int().to_le_bytes()))?;
 

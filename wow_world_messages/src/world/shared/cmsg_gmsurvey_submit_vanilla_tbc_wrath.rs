@@ -30,7 +30,7 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // survey_id: u32
         w.write_all(&self.survey_id.to_le_bytes())?;
 

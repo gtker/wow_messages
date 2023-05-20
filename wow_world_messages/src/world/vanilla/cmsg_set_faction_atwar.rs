@@ -25,7 +25,7 @@ impl crate::Message for CMSG_SET_FACTION_ATWAR {
         3
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // faction: Faction
         w.write_all(&(self.faction.as_int().to_le_bytes()))?;
 

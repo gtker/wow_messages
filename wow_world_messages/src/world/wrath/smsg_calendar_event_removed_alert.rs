@@ -27,7 +27,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_REMOVED_ALERT {
         13
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // show_alert: Bool
         w.write_all(u8::from(self.show_alert).to_le_bytes().as_slice())?;
 

@@ -42,7 +42,7 @@ pub struct AuraLog {
 }
 
 impl AuraLog {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // aura_type: AuraType
         w.write_all(&(self.aura_type.as_int().to_le_bytes()))?;
 
@@ -173,7 +173,7 @@ impl AuraLog {
 }
 
 impl AuraLog {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // aura_type: AuraType
         let aura_type: AuraType = crate::util::read_u32_le(&mut r)?.try_into()?;
 

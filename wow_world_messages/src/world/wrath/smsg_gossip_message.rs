@@ -36,7 +36,7 @@ impl crate::Message for SMSG_GOSSIP_MESSAGE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 

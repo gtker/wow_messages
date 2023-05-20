@@ -21,7 +21,7 @@ impl crate::Message for CMSG_SUMMON_RESPONSE {
         8
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // summoner: Guid
         w.write_all(&self.summoner.guid().to_le_bytes())?;
 

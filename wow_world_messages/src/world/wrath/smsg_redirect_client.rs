@@ -29,7 +29,7 @@ impl crate::Message for SMSG_REDIRECT_CLIENT {
         30
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // ip_address: u32
         w.write_all(&self.ip_address.to_le_bytes())?;
 

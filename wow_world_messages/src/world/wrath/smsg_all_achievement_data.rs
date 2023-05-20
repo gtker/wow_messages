@@ -25,7 +25,7 @@ impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // done: AchievementDoneArray
         crate::util::write_achievement_done(self.done.as_slice(), &mut w)?;
 

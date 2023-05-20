@@ -27,7 +27,7 @@ impl crate::Message for SMSG_NEW_WORLD {
         20
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&(self.map.as_int().to_le_bytes()))?;
 

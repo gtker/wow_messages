@@ -25,7 +25,7 @@ impl crate::Message for CMSG_WRAP_ITEM {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // gift_bag_index: u8
         w.write_all(&self.gift_bag_index.to_le_bytes())?;
 

@@ -30,7 +30,7 @@ pub struct IfEdgeCases {
 }
 
 impl IfEdgeCases {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // t: TEnum
         w.write_all(&(self.t.as_int().to_le_bytes()))?;
 
@@ -98,7 +98,7 @@ impl IfEdgeCases {
 }
 
 impl IfEdgeCases {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // t: TEnum
         let t: TEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
 

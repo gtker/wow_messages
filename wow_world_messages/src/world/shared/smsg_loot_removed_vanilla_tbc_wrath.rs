@@ -21,7 +21,7 @@ impl crate::Message for SMSG_LOOT_REMOVED {
         1
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // slot: u8
         w.write_all(&self.slot.to_le_bytes())?;
 

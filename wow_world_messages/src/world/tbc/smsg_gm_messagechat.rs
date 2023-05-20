@@ -57,7 +57,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // chat_type: ChatType
         w.write_all(&(self.chat_type.as_int().to_le_bytes()))?;
 

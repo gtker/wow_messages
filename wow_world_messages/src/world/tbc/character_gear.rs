@@ -18,7 +18,7 @@ pub struct CharacterGear {
 }
 
 impl CharacterGear {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // equipment_display_id: u32
         w.write_all(&self.equipment_display_id.to_le_bytes())?;
 
@@ -33,7 +33,7 @@ impl CharacterGear {
 }
 
 impl CharacterGear {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // equipment_display_id: u32
         let equipment_display_id = crate::util::read_u32_le(&mut r)?;
 

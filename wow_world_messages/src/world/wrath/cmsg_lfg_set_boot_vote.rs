@@ -19,7 +19,7 @@ impl crate::Message for CMSG_LFG_SET_BOOT_VOTE {
         1
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // agree_to_kick_player: Bool
         w.write_all(u8::from(self.agree_to_kick_player).to_le_bytes().as_slice())?;
 

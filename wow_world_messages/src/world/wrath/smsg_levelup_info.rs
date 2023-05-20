@@ -47,7 +47,7 @@ impl crate::Message for SMSG_LEVELUP_INFO {
         56
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // new_level: Level32
         w.write_all(&u32::from(self.new_level.as_int()).to_le_bytes())?;
 

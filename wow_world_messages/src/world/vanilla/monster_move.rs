@@ -35,7 +35,7 @@ pub struct MonsterMove {
 }
 
 impl MonsterMove {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // spline_point: Vector3d
         self.spline_point.write_into_vec(&mut w)?;
 
@@ -157,7 +157,7 @@ impl MonsterMove {
 }
 
 impl MonsterMove {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         let mut move_type_if_target = Default::default();
         let mut move_type_if_angle = Default::default();
         let mut move_type_if_position = Default::default();

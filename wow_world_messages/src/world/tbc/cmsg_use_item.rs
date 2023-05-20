@@ -34,7 +34,7 @@ impl crate::Message for CMSG_USE_ITEM {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // bag_index: u8
         w.write_all(&self.bag_index.to_le_bytes())?;
 

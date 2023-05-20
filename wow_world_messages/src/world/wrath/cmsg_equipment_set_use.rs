@@ -21,7 +21,7 @@ impl crate::Message for CMSG_EQUIPMENT_SET_USE {
         190
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // sets: EquipmentSet[19]
         for i in self.sets.iter() {
             i.write_into_vec(&mut w)?;

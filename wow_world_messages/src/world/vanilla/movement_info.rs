@@ -39,7 +39,7 @@ pub struct MovementInfo {
 }
 
 impl MovementInfo {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // flags: MovementFlags
         w.write_all(&(self.flags.as_int().to_le_bytes()))?;
 
@@ -93,7 +93,7 @@ impl MovementInfo {
 }
 
 impl MovementInfo {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // flags: MovementFlags
         let flags = MovementFlags::new(crate::util::read_u32_le(&mut r)?);
 

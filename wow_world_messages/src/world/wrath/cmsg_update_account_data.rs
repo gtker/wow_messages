@@ -36,7 +36,7 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // data_type: u32
         w.write_all(&self.data_type.to_le_bytes())?;
 
@@ -97,7 +97,7 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
     #[cfg(feature = "sync")]
-    fn write_unencrypted_client<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
+    fn write_unencrypted_client<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(1024);
         let mut s = &mut v;
         crate::util::wrath_get_unencrypted_client(&mut s, Self::OPCODE as u16, 0)?;
@@ -114,7 +114,7 @@ impl crate::wrath::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
     }
 
     #[cfg(all(feature = "sync", feature = "encryption"))]
-    fn write_encrypted_client<W: std::io::Write>(
+    fn write_encrypted_client<W: Write>(
         &self,
         mut w: W,
         e: &mut wow_srp::wrath_header::ClientEncrypterHalf,

@@ -19,7 +19,7 @@ impl crate::Message for SimpleMsg {
         1
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // basic: u8
         w.write_all(&self.basic.to_le_bytes())?;
 

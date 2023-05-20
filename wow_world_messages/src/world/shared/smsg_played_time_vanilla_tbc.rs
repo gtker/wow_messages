@@ -21,7 +21,7 @@ impl crate::Message for SMSG_PLAYED_TIME {
         8
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // total_played_time: u32
         w.write_all(&self.total_played_time.to_le_bytes())?;
 

@@ -28,7 +28,7 @@ impl crate::Message for CMSG_TEXT_EMOTE {
         16
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // text_emote: TextEmote
         w.write_all(&(self.text_emote.as_int().to_le_bytes()))?;
 

@@ -61,7 +61,7 @@ impl crate::Message for SMSG_SPELL_GO {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // cast_item: PackedGuid
         self.cast_item.write_packed_guid_into_vec(&mut w)?;
 

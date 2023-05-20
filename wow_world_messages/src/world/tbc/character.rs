@@ -58,7 +58,7 @@ pub struct Character {
 }
 
 impl Character {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
@@ -133,7 +133,7 @@ impl Character {
 }
 
 impl Character {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // guid: Guid
         let guid = Guid::read(&mut r)?;
 

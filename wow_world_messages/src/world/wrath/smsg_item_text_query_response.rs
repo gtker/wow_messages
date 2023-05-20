@@ -26,7 +26,7 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // query: ItemTextQuery
         w.write_all(&(self.query.as_int().to_le_bytes()))?;
 

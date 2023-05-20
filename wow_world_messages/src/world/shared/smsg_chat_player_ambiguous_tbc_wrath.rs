@@ -21,7 +21,7 @@ impl crate::Message for SMSG_CHAT_PLAYER_AMBIGUOUS {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // player: CString
         // TODO: Guard against strings that are already null-terminated
         assert_ne!(self.player.as_bytes().iter().rev().next(), Some(&0_u8), "String `player` must not be null-terminated.");

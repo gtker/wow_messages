@@ -51,7 +51,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_EVENT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // send_type: u8
         w.write_all(&self.send_type.to_le_bytes())?;
 

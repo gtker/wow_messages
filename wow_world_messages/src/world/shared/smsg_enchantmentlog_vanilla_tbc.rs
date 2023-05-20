@@ -35,7 +35,7 @@ impl crate::Message for SMSG_ENCHANTMENTLOG {
         25
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // target: Guid
         w.write_all(&self.target.guid().to_le_bytes())?;
 

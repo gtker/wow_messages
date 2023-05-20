@@ -20,7 +20,7 @@ pub struct TelemetryKey {
 }
 
 impl TelemetryKey {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // unknown1: u16
         w.write_all(&self.unknown1.to_le_bytes())?;
 
@@ -42,7 +42,7 @@ impl TelemetryKey {
 }
 
 impl TelemetryKey {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // unknown1: u16
         let unknown1 = crate::util::read_u16_le(&mut r)?;
 

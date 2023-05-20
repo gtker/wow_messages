@@ -21,7 +21,7 @@ impl crate::Message for SMSG_LFG_TELEPORT_DENIED {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // error: LfgTeleportError
         w.write_all(&(self.error.as_int().to_le_bytes()))?;
 

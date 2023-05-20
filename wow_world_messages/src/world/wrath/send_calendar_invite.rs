@@ -24,7 +24,7 @@ pub struct SendCalendarInvite {
 }
 
 impl SendCalendarInvite {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // event_id: Guid
         w.write_all(&self.event_id.guid().to_le_bytes())?;
 
@@ -48,7 +48,7 @@ impl SendCalendarInvite {
 }
 
 impl SendCalendarInvite {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // event_id: Guid
         let event_id = Guid::read(&mut r)?;
 

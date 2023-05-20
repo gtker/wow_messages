@@ -19,7 +19,7 @@ impl crate::Message for CMSG_OPT_OUT_OF_LOOT {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // pass_on_loot: Bool32
         w.write_all(u32::from(self.pass_on_loot).to_le_bytes().as_slice())?;
 

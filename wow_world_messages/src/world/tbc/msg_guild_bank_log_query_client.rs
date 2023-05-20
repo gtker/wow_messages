@@ -19,7 +19,7 @@ impl crate::Message for MSG_GUILD_BANK_LOG_QUERY_Client {
         1
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // slot: u8
         w.write_all(&self.slot.to_le_bytes())?;
 

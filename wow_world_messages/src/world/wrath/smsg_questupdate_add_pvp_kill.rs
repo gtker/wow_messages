@@ -23,7 +23,7 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_PVP_KILL {
         12
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // quest_id: u32
         w.write_all(&self.quest_id.to_le_bytes())?;
 

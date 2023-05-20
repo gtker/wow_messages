@@ -2,6 +2,7 @@ use crate::tbc::{ServerMessage, ClientMessage};
 #[cfg(feature = "encryption")]
 use wow_srp::tbc_header::{DecrypterHalf, EncrypterHalf};
 
+use std::io::{Read, Write};
 #[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
@@ -783,7 +784,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "sync")]
-    pub fn read_unencrypted<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read_unencrypted<R: Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let size = (crate::util::read_u16_be(&mut r)?.saturating_sub(4)) as u32;
         let opcode = crate::util::read_u32_le(&mut r)?;
 
@@ -792,7 +793,7 @@ impl ClientOpcodeMessage {
         Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(all(feature = "sync", feature = "encryption"))]
-    pub fn read_encrypted<R: std::io::Read>(mut r: R, d: &mut DecrypterHalf) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read_encrypted<R: Read>(mut r: R, d: &mut DecrypterHalf) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header)?;
         let header = d.decrypt_client_header(header);
@@ -849,7 +850,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(all(feature = "sync", feature = "encryption"))]
-    pub fn write_encrypted_client<W: std::io::Write>(&self, mut w: W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
+    pub fn write_encrypted_client<W: Write>(&self, mut w: W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.write_encrypted_client(w, e),
             Self::MSG_MOVE_HOVER(c) => c.write_encrypted_client(w, e),
@@ -1235,7 +1236,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "sync")]
-    pub fn write_unencrypted_client<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
+    pub fn write_unencrypted_client<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.write_unencrypted_client(w),
             Self::MSG_MOVE_HOVER(c) => c.write_unencrypted_client(w),
@@ -6717,7 +6718,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "sync")]
-    pub fn read_unencrypted<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read_unencrypted<R: Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let size = (crate::util::read_u16_be(&mut r)?.saturating_sub(2)) as u32;
         let opcode = crate::util::read_u16_le(&mut r)?;
 
@@ -6726,7 +6727,7 @@ impl ServerOpcodeMessage {
         Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(all(feature = "sync", feature = "encryption"))]
-    pub fn read_encrypted<R: std::io::Read>(mut r: R, d: &mut DecrypterHalf) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read_encrypted<R: Read>(mut r: R, d: &mut DecrypterHalf) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header)?;
         let header = d.decrypt_server_header(header);
@@ -6783,7 +6784,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(all(feature = "sync", feature = "encryption"))]
-    pub fn write_encrypted_server<W: std::io::Write>(&self, mut w: W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
+    pub fn write_encrypted_server<W: Write>(&self, mut w: W, e: &mut EncrypterHalf) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.write_encrypted_server(w, e),
             Self::MSG_MOVE_HOVER(c) => c.write_encrypted_server(w, e),
@@ -7208,7 +7209,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "sync")]
-    pub fn write_unencrypted_server<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
+    pub fn write_unencrypted_server<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         match self {
             Self::MSG_MOVE_WORLDPORT_ACK => MSG_MOVE_WORLDPORT_ACK{}.write_unencrypted_server(w),
             Self::MSG_MOVE_HOVER(c) => c.write_unencrypted_server(w),

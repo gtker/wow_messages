@@ -35,7 +35,7 @@ impl crate::Message for SMSG_LOGIN_SETTIMESPEED {
         12
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // datetime: DateTime
         w.write_all(&self.datetime.as_int().to_le_bytes())?;
 

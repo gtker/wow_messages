@@ -41,6 +41,7 @@ pub(crate) const LOGIN_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
 pub(crate) const WORLD_CLIENT_MESSAGE_ENUM_NAME: &str = "ClientOpcodeMessage";
 pub(crate) const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
 
+pub(crate) const SYNC_IMPORT: &str = "use std::io::{Read, Write};";
 pub(crate) const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
 pub(crate) const ASYNC_STD_IMPORT: &str = "use async_std::io::{ReadExt, WriteExt};";
 
@@ -253,7 +254,7 @@ impl Writer {
         self.open_curly(format!("impl {}", type_name.as_ref()));
 
         self.open_curly(format!(
-            "{visibility} fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error>",
+            "{visibility} fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error>",
         ));
 
         write_function(self, ImplType::Std);
@@ -629,7 +630,7 @@ impl ImplType {
 
     pub(crate) fn write(&self) -> &str {
         match self {
-            ImplType::Std => "std::io::Write",
+            ImplType::Std => "Write",
             ImplType::Tokio => "tokio::io::AsyncWriteExt + Unpin + Send",
             ImplType::AsyncStd => "async_std::io::WriteExt + Unpin + Send",
         }
@@ -637,7 +638,7 @@ impl ImplType {
 
     pub(crate) fn read(&self) -> &str {
         match self {
-            ImplType::Std => "std::io::Read",
+            ImplType::Std => "Read",
             ImplType::Tokio => "tokio::io::AsyncReadExt + Unpin + Send",
             ImplType::AsyncStd => "async_std::io::ReadExt + Unpin + Send",
         }

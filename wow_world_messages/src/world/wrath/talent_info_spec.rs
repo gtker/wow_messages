@@ -18,7 +18,7 @@ pub struct TalentInfoSpec {
 }
 
 impl TalentInfoSpec {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // amount_of_talents: u8
         w.write_all(&(self.talents.len() as u8).to_le_bytes())?;
 
@@ -40,7 +40,7 @@ impl TalentInfoSpec {
 }
 
 impl TalentInfoSpec {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // amount_of_talents: u8
         let amount_of_talents = crate::util::read_u8_le(&mut r)?;
 

@@ -37,7 +37,7 @@ pub struct Object {
 }
 
 impl Object {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // update_type: UpdateType
         w.write_all(&(self.update_type.as_int().to_le_bytes()))?;
 
@@ -133,7 +133,7 @@ impl Object {
 }
 
 impl Object {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // update_type: UpdateType
         let update_type: UpdateType = crate::util::read_u8_le(&mut r)?.try_into()?;
 

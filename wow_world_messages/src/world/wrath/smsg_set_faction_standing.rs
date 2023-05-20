@@ -30,7 +30,7 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // refer_a_friend_bonus: f32
         w.write_all(&self.refer_a_friend_bonus.to_le_bytes())?;
 

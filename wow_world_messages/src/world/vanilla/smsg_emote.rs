@@ -24,7 +24,7 @@ impl crate::Message for SMSG_EMOTE {
         12
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // emote: Emote
         w.write_all(&(self.emote.as_int().to_le_bytes()))?;
 

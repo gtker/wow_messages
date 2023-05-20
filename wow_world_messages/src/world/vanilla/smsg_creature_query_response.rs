@@ -40,7 +40,7 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // creature_entry: u32
         w.write_all(&self.creature_entry.to_le_bytes())?;
 

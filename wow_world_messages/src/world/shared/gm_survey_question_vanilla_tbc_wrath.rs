@@ -24,7 +24,7 @@ pub struct GmSurveyQuestion {
 }
 
 impl GmSurveyQuestion {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // question_id: u32
         w.write_all(&self.question_id.to_le_bytes())?;
 
@@ -43,7 +43,7 @@ impl GmSurveyQuestion {
 }
 
 impl GmSurveyQuestion {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // question_id: u32
         let question_id = crate::util::read_u32_le(&mut r)?;
 

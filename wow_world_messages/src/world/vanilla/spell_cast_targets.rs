@@ -47,7 +47,7 @@ pub struct SpellCastTargets {
 }
 
 impl SpellCastTargets {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // target_flags: SpellCastTargetFlags
         w.write_all(&(self.target_flags.as_int().to_le_bytes()))?;
 
@@ -141,7 +141,7 @@ impl SpellCastTargets {
 }
 
 impl SpellCastTargets {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // target_flags: SpellCastTargetFlags
         let target_flags = SpellCastTargetFlags::new(crate::util::read_u16_le(&mut r)?);
 

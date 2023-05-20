@@ -1,4 +1,5 @@
 use crate::{ServerMessage, ClientMessage};
+use std::io::{Read, Write};
 #[cfg(feature = "tokio")]
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 #[cfg(feature = "async-std")]
@@ -16,7 +17,7 @@ pub enum ServerOpcodeMessage {
 }
 
 impl ServerOpcodeMessage {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         match self {
             Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.write_into_vec(w)?,
             Self::CMD_AUTH_LOGON_PROOF(e) => e.write_into_vec(w)?,
@@ -30,7 +31,7 @@ impl ServerOpcodeMessage {
 }
 
 impl ServerOpcodeMessage {
-    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::read_u8_le(&mut r)?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::read::<R, crate::private::Internal>(r)?)),
@@ -123,7 +124,7 @@ pub enum ClientOpcodeMessage {
 }
 
 impl ClientOpcodeMessage {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         match self {
             Self::CMD_AUTH_LOGON_CHALLENGE(e) => e.write_into_vec(w)?,
             Self::CMD_AUTH_LOGON_PROOF(e) => e.write_into_vec(w)?,
@@ -137,7 +138,7 @@ impl ClientOpcodeMessage {
 }
 
 impl ClientOpcodeMessage {
-    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::read_u8_le(&mut r)?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client::read::<R, crate::private::Internal>(r)?)),

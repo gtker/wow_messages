@@ -31,7 +31,7 @@ pub struct LfgPlayer {
 }
 
 impl LfgPlayer {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
         self.guid.write_packed_guid_into_vec(&mut w)?;
 
@@ -69,7 +69,7 @@ impl LfgPlayer {
 }
 
 impl LfgPlayer {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // guid: PackedGuid
         let guid = Guid::read_packed(&mut r)?;
 

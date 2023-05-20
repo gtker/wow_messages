@@ -22,7 +22,7 @@ pub struct NpcTextUpdate {
 }
 
 impl NpcTextUpdate {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // probability: f32
         w.write_all(&self.probability.to_le_bytes())?;
 
@@ -45,7 +45,7 @@ impl NpcTextUpdate {
 }
 
 impl NpcTextUpdate {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // probability: f32
         let probability = crate::util::read_f32_le(&mut r)?;
 

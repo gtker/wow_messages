@@ -31,7 +31,7 @@ impl crate::Message for SMSG_LFG_ROLE_CHECK_UPDATE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // rolecheck_state: u32
         w.write_all(&self.rolecheck_state.to_le_bytes())?;
 

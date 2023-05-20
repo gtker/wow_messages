@@ -21,7 +21,7 @@ impl crate::Message for CMSG_SET_TAXI_BENCHMARK_MODE {
         1
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // mode: u8
         w.write_all(&self.mode.to_le_bytes())?;
 

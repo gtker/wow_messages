@@ -21,7 +21,7 @@ impl crate::Message for SMSG_CORPSE_RECLAIM_DELAY {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // delay: Seconds
         w.write_all((self.delay.as_secs() as u32).to_le_bytes().as_slice())?;
 

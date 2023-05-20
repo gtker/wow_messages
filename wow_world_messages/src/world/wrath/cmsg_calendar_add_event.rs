@@ -41,7 +41,7 @@ impl crate::Message for CMSG_CALENDAR_ADD_EVENT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // title: CString
         // TODO: Guard against strings that are already null-terminated
         assert_ne!(self.title.as_bytes().iter().rev().next(), Some(&0_u8), "String `title` must not be null-terminated.");

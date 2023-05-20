@@ -21,7 +21,7 @@ impl crate::Message for CMSG_PET_ABANDON {
         8
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // pet: Guid
         w.write_all(&self.pet.guid().to_le_bytes())?;
 

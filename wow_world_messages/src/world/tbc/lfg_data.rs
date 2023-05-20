@@ -16,7 +16,7 @@ pub struct LfgData {
 }
 
 impl LfgData {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // entry: u16
         w.write_all(&self.entry.to_le_bytes())?;
 
@@ -28,7 +28,7 @@ impl LfgData {
 }
 
 impl LfgData {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // entry: u16
         let entry = crate::util::read_u16_le(&mut r)?;
 

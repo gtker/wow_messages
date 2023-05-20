@@ -35,7 +35,7 @@ impl crate::Message for SMSG_AUCTION_OWNER_NOTIFICATION {
         28
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // auction_id: u32
         w.write_all(&self.auction_id.to_le_bytes())?;
 

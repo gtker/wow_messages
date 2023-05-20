@@ -19,7 +19,7 @@ impl crate::Message for MSG_CHANNEL_UPDATE_Server {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // time: u32
         w.write_all(&self.time.to_le_bytes())?;
 

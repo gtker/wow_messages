@@ -23,7 +23,7 @@ impl crate::Message for SMSG_FEATURE_SYSTEM_STATUS {
         2
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // complaint_status: ComplaintStatus
         w.write_all(&(self.complaint_status.as_int().to_le_bytes()))?;
 

@@ -24,7 +24,7 @@ pub struct CMD_AUTH_LOGON_PROOF_Client {
 }
 
 impl CMD_AUTH_LOGON_PROOF_Client {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -60,7 +60,7 @@ impl crate::private::Sealed for CMD_AUTH_LOGON_PROOF_Client {}
 impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
     const OPCODE: u8 = 0x01;
 
-    fn read<R: std::io::Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // client_public_key: u8[32]
         let client_public_key = {
             let mut client_public_key = [0_u8; 32];
@@ -103,7 +103,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
     }
 
     #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
+    fn write<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(self.size() + 1);
         self.write_into_vec(&mut v)?;
         w.write_all(&v)

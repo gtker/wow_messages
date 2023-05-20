@@ -25,7 +25,7 @@ impl crate::Message for CMSG_OFFER_PETITION {
         20
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // unknown0: u32
         w.write_all(&self.unknown0.to_le_bytes())?;
 

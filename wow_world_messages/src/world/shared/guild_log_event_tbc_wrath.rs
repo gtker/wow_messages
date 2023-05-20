@@ -27,7 +27,7 @@ pub struct GuildLogEvent {
 }
 
 impl GuildLogEvent {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // event: GuildEvent
         w.write_all(&(self.event.as_int().to_le_bytes()))?;
 
@@ -60,7 +60,7 @@ impl GuildLogEvent {
 }
 
 impl GuildLogEvent {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // event: GuildEvent
         let event: GuildEvent = crate::util::read_u8_le(&mut r)?.try_into()?;
 

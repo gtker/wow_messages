@@ -15,7 +15,7 @@ pub struct ItemStat {
 }
 
 impl ItemStat {
-    pub fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // stat_type: u32
         w.write_all(&self.stat_type.to_le_bytes())?;
 
@@ -27,7 +27,7 @@ impl ItemStat {
 }
 
 impl ItemStat {
-    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // stat_type: u32
         let stat_type = crate::util::read_u32_le(&mut r)?;
 

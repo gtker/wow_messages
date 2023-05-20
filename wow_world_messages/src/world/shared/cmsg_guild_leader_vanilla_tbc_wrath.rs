@@ -19,7 +19,7 @@ impl crate::Message for CMSG_GUILD_LEADER {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // new_guild_leader_name: CString
         // TODO: Guard against strings that are already null-terminated
         assert_ne!(self.new_guild_leader_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `new_guild_leader_name` must not be null-terminated.");

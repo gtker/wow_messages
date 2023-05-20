@@ -24,7 +24,7 @@ impl crate::Message for CMSG_GUILD_BANK_WITHDRAW_MONEY {
         12
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // bank: Guid
         w.write_all(&self.bank.guid().to_le_bytes())?;
 

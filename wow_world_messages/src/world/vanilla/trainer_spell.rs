@@ -40,7 +40,7 @@ pub struct TrainerSpell {
 }
 
 impl TrainerSpell {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
 
@@ -75,7 +75,7 @@ impl TrainerSpell {
 }
 
 impl TrainerSpell {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // spell: u32
         let spell = crate::util::read_u32_le(&mut r)?;
 

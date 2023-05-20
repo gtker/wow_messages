@@ -27,7 +27,7 @@ impl crate::Message for CMSG_GM_REPORT_LAG {
         20
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // lag_type: u32
         w.write_all(&self.lag_type.to_le_bytes())?;
 

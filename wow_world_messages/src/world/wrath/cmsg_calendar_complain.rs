@@ -25,7 +25,7 @@ impl crate::Message for CMSG_CALENDAR_COMPLAIN {
         24
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // responsible_player: Guid
         w.write_all(&self.responsible_player.guid().to_le_bytes())?;
 

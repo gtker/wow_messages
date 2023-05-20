@@ -22,7 +22,7 @@ impl crate::Message for SMSG_MULTIPLE_MOVES {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // size: u32
         w.write_all(&((self.size() - 4) as u32).to_le_bytes())?;
 

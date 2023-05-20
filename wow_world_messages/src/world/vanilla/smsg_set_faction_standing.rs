@@ -22,7 +22,7 @@ impl crate::Message for SMSG_SET_FACTION_STANDING {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // amount_of_faction_standings: u32
         w.write_all(&(self.faction_standings.len() as u32).to_le_bytes())?;
 

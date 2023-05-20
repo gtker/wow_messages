@@ -46,7 +46,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // lfg_type: LfgType
         w.write_all(&u32::from(self.lfg_type.as_int()).to_le_bytes())?;
 

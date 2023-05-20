@@ -18,7 +18,7 @@ pub struct SendCalendarResetTime {
 }
 
 impl SendCalendarResetTime {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&(self.map.as_int().to_le_bytes()))?;
 
@@ -33,7 +33,7 @@ impl SendCalendarResetTime {
 }
 
 impl SendCalendarResetTime {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // map: Map
         let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
 

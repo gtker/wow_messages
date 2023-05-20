@@ -21,7 +21,7 @@ impl crate::Message for CMSG_GMTICKET_UPDATETEXT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // message: CString
         // TODO: Guard against strings that are already null-terminated
         assert_ne!(self.message.as_bytes().iter().rev().next(), Some(&0_u8), "String `message` must not be null-terminated.");

@@ -33,7 +33,7 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // status: GmTicketStatus
         w.write_all(&(self.status.as_int().to_le_bytes()))?;
 

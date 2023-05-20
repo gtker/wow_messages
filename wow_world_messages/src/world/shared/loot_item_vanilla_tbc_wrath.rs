@@ -18,7 +18,7 @@ pub struct LootItem {
 }
 
 impl LootItem {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // index: u8
         w.write_all(&self.index.to_le_bytes())?;
 
@@ -33,7 +33,7 @@ impl LootItem {
 }
 
 impl LootItem {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // index: u8
         let index = crate::util::read_u8_le(&mut r)?;
 

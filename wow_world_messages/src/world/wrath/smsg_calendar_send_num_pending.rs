@@ -23,7 +23,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_NUM_PENDING {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // pending_events: u32
         w.write_all(&self.pending_events.to_le_bytes())?;
 

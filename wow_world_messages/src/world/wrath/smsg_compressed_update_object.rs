@@ -25,7 +25,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         w.write_all(&(self.size_uncompressed() as u32).to_le_bytes())?;
 
         let mut w = &mut flate2::write::ZlibEncoder::new(w, flate2::Compression::fast());
@@ -70,7 +70,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
 #[cfg(feature = "wrath")]
 impl crate::wrath::ServerMessage for SMSG_COMPRESSED_UPDATE_OBJECT {
     #[cfg(feature = "sync")]
-    fn write_unencrypted_server<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
+    fn write_unencrypted_server<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(1024);
         let mut s = &mut v;
         crate::util::wrath_get_unencrypted_server(&mut s, Self::OPCODE as u16, 0)?;
@@ -87,7 +87,7 @@ impl crate::wrath::ServerMessage for SMSG_COMPRESSED_UPDATE_OBJECT {
     }
 
     #[cfg(all(feature = "sync", feature = "encryption"))]
-    fn write_encrypted_server<W: std::io::Write>(
+    fn write_encrypted_server<W: Write>(
         &self,
         mut w: W,
         e: &mut wow_srp::wrath_header::ServerEncrypterHalf,

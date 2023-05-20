@@ -21,7 +21,7 @@ impl crate::Message for SMSG_DISMOUNTRESULT {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // result: DismountResult
         w.write_all(&(self.result.as_int().to_le_bytes()))?;
 

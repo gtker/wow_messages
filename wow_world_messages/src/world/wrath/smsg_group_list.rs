@@ -52,7 +52,7 @@ impl crate::Message for SMSG_GROUP_LIST {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // group_type: u8
         w.write_all(&self.group_type.to_le_bytes())?;
 

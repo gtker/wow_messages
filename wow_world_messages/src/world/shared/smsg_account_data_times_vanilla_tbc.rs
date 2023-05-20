@@ -25,7 +25,7 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         128
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // data: u32[32]
         for i in self.data.iter() {
             w.write_all(&i.to_le_bytes())?;

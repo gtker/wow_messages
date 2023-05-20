@@ -23,7 +23,7 @@ impl crate::Message for CMSG_CREATURE_QUERY {
         12
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // creature: u32
         w.write_all(&self.creature.to_le_bytes())?;
 

@@ -20,7 +20,7 @@ pub struct MiniMoveMessage {
 }
 
 impl MiniMoveMessage {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // size: u8
         w.write_all(&((self.size() - 1) as u8).to_le_bytes())?;
 
@@ -38,7 +38,7 @@ impl MiniMoveMessage {
 }
 
 impl MiniMoveMessage {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // size: u8
         let _size = crate::util::read_u8_le(&mut r)?;
         // size is expected to always be self.size (0)

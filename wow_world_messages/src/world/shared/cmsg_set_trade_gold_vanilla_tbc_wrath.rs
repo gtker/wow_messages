@@ -21,7 +21,7 @@ impl crate::Message for CMSG_SET_TRADE_GOLD {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // gold: Gold
         w.write_all((self.gold.as_int()).to_le_bytes().as_slice())?;
 

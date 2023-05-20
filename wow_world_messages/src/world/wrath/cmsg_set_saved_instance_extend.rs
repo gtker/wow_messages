@@ -27,7 +27,7 @@ impl crate::Message for CMSG_SET_SAVED_INSTANCE_EXTEND {
         6
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // map: Map
         w.write_all(&(self.map.as_int().to_le_bytes()))?;
 

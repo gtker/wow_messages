@@ -19,7 +19,7 @@ impl crate::Message for SMSG_MOTD {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // motd: SizedCString
         w.write_all(&((self.motd.len() + 1) as u32).to_le_bytes())?;
         w.write_all(self.motd.as_bytes())?;

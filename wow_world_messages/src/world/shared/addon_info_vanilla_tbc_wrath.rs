@@ -18,7 +18,7 @@ pub struct AddonInfo {
 }
 
 impl AddonInfo {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // addon_name: CString
         // TODO: Guard against strings that are already null-terminated
         assert_ne!(self.addon_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `addon_name` must not be null-terminated.");
@@ -40,7 +40,7 @@ impl AddonInfo {
 }
 
 impl AddonInfo {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // addon_name: CString
         let addon_name = {
             let addon_name = crate::util::read_c_string_to_vec(&mut r)?;

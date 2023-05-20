@@ -14,7 +14,7 @@ pub struct ResyncRune {
 }
 
 impl ResyncRune {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // current_rune: u8
         w.write_all(&self.current_rune.to_le_bytes())?;
 
@@ -26,7 +26,7 @@ impl ResyncRune {
 }
 
 impl ResyncRune {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // current_rune: u8
         let current_rune = crate::util::read_u8_le(&mut r)?;
 

@@ -23,7 +23,7 @@ impl crate::Message for CMSG_SETSHEATHED {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // sheathed: SheathState
         w.write_all(&u32::from(self.sheathed.as_int()).to_le_bytes())?;
 

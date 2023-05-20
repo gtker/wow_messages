@@ -20,7 +20,7 @@ impl crate::Message for SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // amount_of_reward_quests: u32
         w.write_all(&(self.reward_quests.len() as u32).to_le_bytes())?;
 

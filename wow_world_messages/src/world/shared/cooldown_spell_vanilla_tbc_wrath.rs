@@ -24,7 +24,7 @@ pub struct CooldownSpell {
 }
 
 impl CooldownSpell {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // spell_id: u16
         w.write_all(&self.spell_id.to_le_bytes())?;
 
@@ -45,7 +45,7 @@ impl CooldownSpell {
 }
 
 impl CooldownSpell {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // spell_id: u16
         let spell_id = crate::util::read_u16_le(&mut r)?;
 

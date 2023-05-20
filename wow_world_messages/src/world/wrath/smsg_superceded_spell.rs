@@ -21,7 +21,7 @@ impl crate::Message for SMSG_SUPERCEDED_SPELL {
         8
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // new: u32
         w.write_all(&self.new.to_le_bytes())?;
 

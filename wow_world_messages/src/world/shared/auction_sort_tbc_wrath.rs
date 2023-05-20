@@ -14,7 +14,7 @@ pub struct AuctionSort {
 }
 
 impl AuctionSort {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // column: u8
         w.write_all(&self.column.to_le_bytes())?;
 
@@ -26,7 +26,7 @@ impl AuctionSort {
 }
 
 impl AuctionSort {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // column: u8
         let column = crate::util::read_u8_le(&mut r)?;
 

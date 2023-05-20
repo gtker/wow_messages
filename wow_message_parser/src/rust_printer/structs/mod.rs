@@ -6,7 +6,7 @@ use crate::rust_printer::rust_view::rust_member::RustMember;
 use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::rust_printer::{
     print_docc_description_and_comment, print_member_docc_description_and_comment,
-    print_serde_derive, Writer, CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME,
+    print_serde_derive, Writer, CLIENT_MESSAGE_TRAIT_NAME, SERVER_MESSAGE_TRAIT_NAME, SYNC_IMPORT,
 };
 use crate::wowm_printer::get_struct_wowm_definition;
 
@@ -52,7 +52,7 @@ fn print_includes(s: &mut Writer, e: &Container) {
         ContainerType::Struct => {}
     }
 
-    s.wln("use std::io::{Read, Write};");
+    s.wln(SYNC_IMPORT);
     s.newline();
 
     let (version, _) = e.tags().first_and_main_versions();

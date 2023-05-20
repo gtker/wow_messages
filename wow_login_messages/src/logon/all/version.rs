@@ -18,7 +18,7 @@ pub struct Version {
 }
 
 impl Version {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // major: u8
         w.write_all(&self.major.to_le_bytes())?;
 
@@ -36,7 +36,7 @@ impl Version {
 }
 
 impl Version {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // major: u8
         let major = crate::util::read_u8_le(&mut r)?;
 

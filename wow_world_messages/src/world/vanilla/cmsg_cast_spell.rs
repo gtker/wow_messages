@@ -23,7 +23,7 @@ impl crate::Message for CMSG_CAST_SPELL {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
 

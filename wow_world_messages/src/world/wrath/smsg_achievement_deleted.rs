@@ -19,7 +19,7 @@ impl crate::Message for SMSG_ACHIEVEMENT_DELETED {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // achievement: u32
         w.write_all(&self.achievement.to_le_bytes())?;
 

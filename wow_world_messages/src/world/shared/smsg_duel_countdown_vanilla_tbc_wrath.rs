@@ -21,7 +21,7 @@ impl crate::Message for SMSG_DUEL_COUNTDOWN {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // time: Seconds
         w.write_all((self.time.as_secs() as u32).to_le_bytes().as_slice())?;
 

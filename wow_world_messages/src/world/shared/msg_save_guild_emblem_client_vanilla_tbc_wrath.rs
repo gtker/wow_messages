@@ -31,7 +31,7 @@ impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Client {
         28
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // vendor: Guid
         w.write_all(&self.vendor.guid().to_le_bytes())?;
 

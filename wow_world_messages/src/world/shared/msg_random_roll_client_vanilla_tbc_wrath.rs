@@ -21,7 +21,7 @@ impl crate::Message for MSG_RANDOM_ROLL_Client {
         8
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // minimum: u32
         w.write_all(&self.minimum.to_le_bytes())?;
 

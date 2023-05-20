@@ -21,7 +21,7 @@ impl crate::Message for SMSG_BARBER_SHOP_RESULT {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // result: BarberShopResult
         w.write_all(&u32::from(self.result.as_int()).to_le_bytes())?;
 

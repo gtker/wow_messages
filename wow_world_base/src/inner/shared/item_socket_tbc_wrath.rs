@@ -15,7 +15,7 @@ pub struct ItemSocket {
 }
 
 impl ItemSocket {
-    pub fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // color: u32
         w.write_all(&self.color.to_le_bytes())?;
 
@@ -27,7 +27,7 @@ impl ItemSocket {
 }
 
 impl ItemSocket {
-    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // color: u32
         let color = crate::util::read_u32_le(&mut r)?;
 

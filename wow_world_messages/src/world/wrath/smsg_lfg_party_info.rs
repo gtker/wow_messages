@@ -22,7 +22,7 @@ impl crate::Message for SMSG_LFG_PARTY_INFO {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // amount_of_infos: u8
         w.write_all(&(self.infos.len() as u8).to_le_bytes())?;
 

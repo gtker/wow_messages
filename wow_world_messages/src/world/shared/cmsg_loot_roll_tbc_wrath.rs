@@ -26,7 +26,7 @@ impl crate::Message for CMSG_LOOT_ROLL {
         13
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // item: Guid
         w.write_all(&self.item.guid().to_le_bytes())?;
 

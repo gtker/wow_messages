@@ -183,14 +183,14 @@ pub(crate) fn impl_world_server_or_client_message(
 
         s.wln("#[cfg(feature = \"sync\")]");
         s.open_curly(format!(
-            "fn write_unencrypted_{ty}<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error>"
+            "fn write_unencrypted_{ty}<W: Write>(&self, mut w: W) -> Result<(), std::io::Error>"
         ));
 
         print_unencrypted_body(s, "", feature_name, ty, version, &container_type);
         s.closing_curly_newline(); // fn write_unencrypted
 
         s.wln("#[cfg(all(feature = \"sync\", feature = \"encryption\"))]");
-        s.wln(format!("fn write_encrypted_{ty}<W: std::io::Write>("));
+        s.wln(format!("fn write_encrypted_{ty}<W: Write>("));
 
         s.inc_indent();
         s.wln("&self,");
@@ -693,9 +693,7 @@ pub(crate) fn impl_world_message(
     s.closing_curly(); // size_without_header
     s.newline();
 
-    s.open_curly(
-        "fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error>",
-    );
+    s.open_curly("fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error>");
 
     write_function(s, ImplType::Std);
 

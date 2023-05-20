@@ -25,7 +25,7 @@ impl crate::Message for CMSG_CALENDAR_GUILD_FILTER {
         12
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // minimum_level: Level32
         w.write_all(&u32::from(self.minimum_level.as_int()).to_le_bytes())?;
 

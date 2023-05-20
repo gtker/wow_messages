@@ -11,7 +11,7 @@ pub struct CMD_XFER_INITIATE {
 }
 
 impl CMD_XFER_INITIATE {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -24,13 +24,13 @@ impl crate::private::Sealed for CMD_XFER_INITIATE {}
 impl ServerMessage for CMD_XFER_INITIATE {
     const OPCODE: u8 = 0x30;
 
-    fn read<R: std::io::Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         Ok(Self {
         })
     }
 
     #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
+    fn write<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(1);
         self.write_into_vec(&mut v)?;
         w.write_all(&v)

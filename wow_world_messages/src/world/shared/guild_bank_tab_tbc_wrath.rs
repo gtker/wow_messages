@@ -14,7 +14,7 @@ pub struct GuildBankTab {
 }
 
 impl GuildBankTab {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // tab_name: CString
         // TODO: Guard against strings that are already null-terminated
         assert_ne!(self.tab_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `tab_name` must not be null-terminated.");
@@ -34,7 +34,7 @@ impl GuildBankTab {
 }
 
 impl GuildBankTab {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // tab_name: CString
         let tab_name = {
             let tab_name = crate::util::read_c_string_to_vec(&mut r)?;

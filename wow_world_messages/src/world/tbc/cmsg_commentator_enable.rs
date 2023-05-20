@@ -21,7 +21,7 @@ impl crate::Message for CMSG_COMMENTATOR_ENABLE {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // option: CommentatorEnableOption
         w.write_all(&(self.option.as_int().to_le_bytes()))?;
 

@@ -17,7 +17,7 @@ pub struct SpellLogMiss {
 }
 
 impl SpellLogMiss {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // target: Guid
         w.write_all(&self.target.guid().to_le_bytes())?;
 
@@ -29,7 +29,7 @@ impl SpellLogMiss {
 }
 
 impl SpellLogMiss {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // target: Guid
         let target = Guid::read(&mut r)?;
 

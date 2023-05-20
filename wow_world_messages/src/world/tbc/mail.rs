@@ -57,7 +57,7 @@ pub struct Mail {
 }
 
 impl Mail {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // size: u16
         w.write_all(&((self.size() - 2) as u16).to_le_bytes())?;
 
@@ -149,7 +149,7 @@ impl Mail {
 }
 
 impl Mail {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // size: u16
         let _size = crate::util::read_u16_le(&mut r)?;
         // size is expected to always be self.size (0)

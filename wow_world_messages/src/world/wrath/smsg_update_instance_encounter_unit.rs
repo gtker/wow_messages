@@ -37,7 +37,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // frame: EncounterFrame
         w.write_all(&(self.frame.as_int().to_le_bytes()))?;
 

@@ -5,7 +5,7 @@ use crate::rust_printer::structs::print_common_impls::impl_read_write_opcode;
 use crate::rust_printer::{
     ImplType, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO,
     CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
-    TOKIO_IMPORT,
+    SYNC_IMPORT, TOKIO_IMPORT,
 };
 
 const CLOGIN_NAME: &str = "Client";
@@ -71,6 +71,8 @@ pub(crate) fn includes(
                 "use crate::{{{SERVER_MESSAGE_TRAIT_NAME}, {CLIENT_MESSAGE_TRAIT_NAME}}};"
             ));
 
+            s.wln(SYNC_IMPORT);
+
             s.wln(CFG_ASYNC_TOKIO);
             s.wln(TOKIO_IMPORT);
             s.wln(CFG_ASYNC_ASYNC_STD);
@@ -101,6 +103,8 @@ pub(crate) fn includes(
             }
 
             s.newline();
+
+            s.wln(SYNC_IMPORT);
 
             s.wln(CFG_ASYNC_TOKIO);
             s.wln(TOKIO_IMPORT);

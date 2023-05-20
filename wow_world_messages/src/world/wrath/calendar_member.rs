@@ -17,7 +17,7 @@ pub struct CalendarMember {
 }
 
 impl CalendarMember {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // member: PackedGuid
         self.member.write_packed_guid_into_vec(&mut w)?;
 
@@ -29,7 +29,7 @@ impl CalendarMember {
 }
 
 impl CalendarMember {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // member: PackedGuid
         let member = Guid::read_packed(&mut r)?;
 

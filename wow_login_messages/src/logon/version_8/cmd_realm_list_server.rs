@@ -44,7 +44,7 @@ impl CMD_REALM_LIST_Server {
 }
 
 impl CMD_REALM_LIST_Server {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8
         w.write_all(&Self::OPCODE.to_le_bytes())?;
 
@@ -74,7 +74,7 @@ impl crate::private::Sealed for CMD_REALM_LIST_Server {}
 impl ServerMessage for CMD_REALM_LIST_Server {
     const OPCODE: u8 = 0x10;
 
-    fn read<R: std::io::Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // size: u16
         let _size = crate::util::read_u16_le(&mut r)?;
         // size is expected to always be self.size (0)
@@ -105,7 +105,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
     }
 
     #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
+    fn write<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(self.size() + 1);
         self.write_into_vec(&mut v)?;
         w.write_all(&v)

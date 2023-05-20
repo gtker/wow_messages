@@ -19,7 +19,7 @@ pub struct ItemDamageType {
 }
 
 impl ItemDamageType {
-    pub fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // damage_minimum: f32
         w.write_all(&self.damage_minimum.to_le_bytes())?;
 
@@ -34,7 +34,7 @@ impl ItemDamageType {
 }
 
 impl ItemDamageType {
-    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // damage_minimum: f32
         let damage_minimum = crate::util::read_f32_le(&mut r)?;
 

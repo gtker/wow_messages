@@ -25,7 +25,7 @@ impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
         9
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // time: Milliseconds
         w.write_all((self.time.as_millis() as u32).to_le_bytes().as_slice())?;
 

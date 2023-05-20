@@ -16,7 +16,7 @@ pub struct ActionButton {
 }
 
 impl ActionButton {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // action: u16
         w.write_all(&self.action.to_le_bytes())?;
 
@@ -31,7 +31,7 @@ impl ActionButton {
 }
 
 impl ActionButton {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // action: u16
         let action = crate::util::read_u16_le(&mut r)?;
 

@@ -23,7 +23,7 @@ impl crate::Message for SMSG_ATTACKSTART {
         16
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // attacker: Guid
         w.write_all(&self.attacker.guid().to_le_bytes())?;
 

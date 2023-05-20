@@ -20,7 +20,7 @@ impl crate::Message for CMSG_QUEST_POI_QUERY {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // amount_of_pois: u32
         w.write_all(&(self.points_of_interests.len() as u32).to_le_bytes())?;
 

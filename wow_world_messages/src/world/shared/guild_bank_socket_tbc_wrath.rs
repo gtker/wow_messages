@@ -14,7 +14,7 @@ pub struct GuildBankSocket {
 }
 
 impl GuildBankSocket {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // socket_index: u8
         w.write_all(&self.socket_index.to_le_bytes())?;
 
@@ -26,7 +26,7 @@ impl GuildBankSocket {
 }
 
 impl GuildBankSocket {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // socket_index: u8
         let socket_index = crate::util::read_u8_le(&mut r)?;
 

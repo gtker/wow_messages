@@ -21,7 +21,7 @@ impl crate::Message for MSG_TALENT_WIPE_CONFIRM_Client {
         8
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // wiping_npc: Guid
         w.write_all(&self.wiping_npc.guid().to_le_bytes())?;
 

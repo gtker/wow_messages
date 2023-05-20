@@ -19,7 +19,7 @@ impl crate::Message for SMSG_LFG_UPDATE_SEARCH {
         1
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // in_lfg_queue: Bool
         w.write_all(u8::from(self.in_lfg_queue).to_le_bytes().as_slice())?;
 

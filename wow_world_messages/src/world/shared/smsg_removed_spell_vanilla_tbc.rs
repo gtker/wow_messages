@@ -19,7 +19,7 @@ impl crate::Message for SMSG_REMOVED_SPELL {
         2
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // spell: u16
         w.write_all(&self.spell.to_le_bytes())?;
 

@@ -23,7 +23,7 @@ impl crate::Message for SMSG_MOVE_SET_CAN_FLY {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // player: PackedGuid
         self.player.write_packed_guid_into_vec(&mut w)?;
 

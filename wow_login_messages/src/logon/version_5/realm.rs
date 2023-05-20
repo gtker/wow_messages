@@ -32,7 +32,7 @@ pub struct Realm {
 }
 
 impl Realm {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // realm_type: RealmType
         w.write_all(&(self.realm_type.as_int().to_le_bytes()))?;
 
@@ -73,7 +73,7 @@ impl Realm {
 }
 
 impl Realm {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // realm_type: RealmType
         let realm_type: RealmType = crate::util::read_u8_le(&mut r)?.try_into()?;
 

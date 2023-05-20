@@ -16,7 +16,7 @@ pub struct PreviewTalent {
 }
 
 impl PreviewTalent {
-    pub(crate) fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // talent: Talent
         w.write_all(&(self.talent.as_int().to_le_bytes()))?;
 
@@ -28,7 +28,7 @@ impl PreviewTalent {
 }
 
 impl PreviewTalent {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // talent: Talent
         let talent: Talent = crate::util::read_u32_le(&mut r)?.try_into()?;
 

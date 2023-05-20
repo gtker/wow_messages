@@ -21,7 +21,7 @@ impl crate::Message for SMSG_ZONE_UNDER_ATTACK {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // zone_id: Area
         w.write_all(&(self.zone_id.as_int().to_le_bytes()))?;
 

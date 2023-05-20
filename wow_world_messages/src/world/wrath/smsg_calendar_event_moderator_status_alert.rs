@@ -27,7 +27,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
         self.size() as u32
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // invitee: PackedGuid
         self.invitee.write_packed_guid_into_vec(&mut w)?;
 

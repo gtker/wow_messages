@@ -23,7 +23,7 @@ impl crate::Message for SMSG_MOVE_UNSET_FLIGHT {
         12
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 

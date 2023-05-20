@@ -21,7 +21,7 @@ impl crate::Message for CMSG_PLAYED_TIME {
         1
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // show_on_ui: Bool
         w.write_all(u8::from(self.show_on_ui).to_le_bytes().as_slice())?;
 

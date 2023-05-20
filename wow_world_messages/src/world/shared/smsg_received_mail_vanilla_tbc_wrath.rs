@@ -23,7 +23,7 @@ impl crate::Message for SMSG_RECEIVED_MAIL {
         4
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
 

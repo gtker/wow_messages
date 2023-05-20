@@ -23,7 +23,7 @@ impl crate::Message for SMSG_DUEL_REQUESTED {
         16
     }
 
-    fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // initiator: Guid
         w.write_all(&self.initiator.guid().to_le_bytes())?;
 
