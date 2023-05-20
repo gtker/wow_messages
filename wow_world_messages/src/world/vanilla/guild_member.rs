@@ -205,9 +205,7 @@ impl GuildMember_GuildMemberStatus {
                 1
                 + 4 // time_offline: f32
             }
-            Self::Online => {
-                1
-            }
+            _ => 1,
         }
     }
 }

@@ -404,8 +404,13 @@ fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
     s.variable_size(re.ty_name(), "size", re.size_is_const_fn(), |s| {
         s.body("match self", |s| {
             for enumerator in re.enumerators() {
+                if !enumerator.has_members() {
+                    continue;
+                }
+
+                let name = enumerator.rust_name();
                 if enumerator.has_members_in_struct() {
-                    s.open_curly(format!("Self::{name}", name = enumerator.rust_name()));
+                    s.open_curly(format!("Self::{name}"));
 
                     for m in enumerator.members_in_struct() {
                         s.wln(format!("{},", m.name()));
@@ -414,7 +419,7 @@ fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
                     s.closing_curly_with(" => {");
                     s.inc_indent();
                 } else {
-                    s.open_curly(format!("Self::{name} =>", name = enumerator.rust_name()));
+                    s.open_curly(format!("Self::{name} =>"));
                 }
 
                 if re.is_elseif() {
@@ -425,6 +430,10 @@ fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
 
                 print_rust_members_sizes(s, enumerator.members(), Some(re.is_elseif()), "");
                 s.closing_curly();
+            }
+
+            if re.enumerators().iter().any(|a| !a.has_members()) {
+                s.wln(format!("_ => {},", re.int_ty().size()));
             }
         });
     });

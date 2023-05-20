@@ -343,51 +343,7 @@ impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
                 + 20 // server_proof: u8[20]
                 + 2 // unknown: u16
             }
-            Self::FailUnknown0 => {
-                1
-            }
-            Self::FailUnknown1 => {
-                1
-            }
-            Self::FailBanned => {
-                1
-            }
-            Self::FailUnknownAccount => {
-                1
-            }
-            Self::FailIncorrectPassword => {
-                1
-            }
-            Self::FailAlreadyOnline => {
-                1
-            }
-            Self::FailNoTime => {
-                1
-            }
-            Self::FailDbBusy => {
-                1
-            }
-            Self::FailVersionInvalid => {
-                1
-            }
-            Self::LoginDownloadFile => {
-                1
-            }
-            Self::FailInvalidServer => {
-                1
-            }
-            Self::FailSuspended => {
-                1
-            }
-            Self::FailNoAccess => {
-                1
-            }
-            Self::SuccessSurvey => {
-                1
-            }
-            Self::FailParentalcontrol => {
-                1
-            }
+            _ => 1,
         }
     }
 }

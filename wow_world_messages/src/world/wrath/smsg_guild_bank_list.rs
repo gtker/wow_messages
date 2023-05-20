@@ -202,9 +202,6 @@ impl SMSG_GUILD_BANK_LIST_GuildBankTabResult {
 impl SMSG_GUILD_BANK_LIST_GuildBankTabResult {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::NotPresent => {
-                1
-            }
             Self::Present {
                 tabs,
             } => {
@@ -212,6 +209,7 @@ impl SMSG_GUILD_BANK_LIST_GuildBankTabResult {
                 + 1 // amount_of_bank_tabs: u8
                 + tabs.iter().fold(0, |acc, x| acc + x.size()) // tabs: GuildBankTab[amount_of_bank_tabs]
             }
+            _ => 1,
         }
     }
 }
@@ -244,9 +242,6 @@ impl SMSG_GUILD_BANK_LIST_GuildBankContentResult {
 impl SMSG_GUILD_BANK_LIST_GuildBankContentResult {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::NotPresent => {
-                1
-            }
             Self::Present {
                 slot_updates,
             } => {
@@ -254,6 +249,7 @@ impl SMSG_GUILD_BANK_LIST_GuildBankContentResult {
                 + 1 // amount_of_slot_updates: u8
                 + slot_updates.iter().fold(0, |acc, x| acc + x.size()) // slot_updates: GuildBankSlot[amount_of_slot_updates]
             }
+            _ => 1,
         }
     }
 }

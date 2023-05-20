@@ -190,15 +190,6 @@ impl GuildLogEvent_GuildEvent {
 impl GuildLogEvent_GuildEvent {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::Promotion => {
-                1
-            }
-            Self::Demotion => {
-                1
-            }
-            Self::Motd => {
-                1
-            }
             Self::Joined {
                 player2,
             } => {
@@ -211,51 +202,7 @@ impl GuildLogEvent_GuildEvent {
                 1
                 + 8 // player2: Guid
             }
-            Self::Removed => {
-                1
-            }
-            Self::LeaderIs => {
-                1
-            }
-            Self::LeaderChanged => {
-                1
-            }
-            Self::Disbanded => {
-                1
-            }
-            Self::TabardChanged => {
-                1
-            }
-            Self::Unk1 => {
-                1
-            }
-            Self::Unk2 => {
-                1
-            }
-            Self::SignedOn => {
-                1
-            }
-            Self::SignedOff => {
-                1
-            }
-            Self::GuildBankBagSlotsChanged => {
-                1
-            }
-            Self::BanktabPurchased => {
-                1
-            }
-            Self::Unk5 => {
-                1
-            }
-            Self::GuildBankUpdateMoney => {
-                1
-            }
-            Self::GuildBankMoneyWithdrawn => {
-                1
-            }
-            Self::GuildBankTextChanged => {
-                1
-            }
+            _ => 1,
         }
     }
 }

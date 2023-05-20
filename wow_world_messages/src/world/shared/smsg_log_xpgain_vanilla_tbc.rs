@@ -138,9 +138,6 @@ impl SMSG_LOG_XPGAIN_ExperienceAwardType {
 impl SMSG_LOG_XPGAIN_ExperienceAwardType {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::Kill => {
-                1
-            }
             Self::NonKill {
                 exp_group_bonus,
                 experience_without_rested,
@@ -149,6 +146,7 @@ impl SMSG_LOG_XPGAIN_ExperienceAwardType {
                 + 4 // exp_group_bonus: f32
                 + 4 // experience_without_rested: u32
             }
+            _ => 1,
         }
     }
 }

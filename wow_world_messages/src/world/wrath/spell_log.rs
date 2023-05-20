@@ -1022,30 +1022,6 @@ impl SpellLog_SpellEffect {
 impl SpellLog_SpellEffect {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::None => {
-                4
-            }
-            Self::Instakill => {
-                4
-            }
-            Self::SchoolDamage => {
-                4
-            }
-            Self::Dummy => {
-                4
-            }
-            Self::PortalTeleport => {
-                4
-            }
-            Self::TeleportUnits => {
-                4
-            }
-            Self::ApplyAura => {
-                4
-            }
-            Self::EnvironmentalDamage => {
-                4
-            }
             Self::PowerDrain {
                 amount,
                 multiplier,
@@ -1057,33 +1033,6 @@ impl SpellLog_SpellEffect {
                 + 4 // multiplier: f32
                 + 4 // power: Power
                 + target1.size() // target1: PackedGuid
-            }
-            Self::HealthLeech => {
-                4
-            }
-            Self::Heal => {
-                4
-            }
-            Self::Bind => {
-                4
-            }
-            Self::Portal => {
-                4
-            }
-            Self::RitualBase => {
-                4
-            }
-            Self::RitualSpecialize => {
-                4
-            }
-            Self::RitualActivatePortal => {
-                4
-            }
-            Self::QuestComplete => {
-                4
-            }
-            Self::WeaponDamageNoschool => {
-                4
             }
             Self::Resurrect {
                 resurrect_guid,
@@ -1099,32 +1048,11 @@ impl SpellLog_SpellEffect {
                 + 4 // extra_attacks: u32
                 + target4.size() // target4: PackedGuid
             }
-            Self::Dodge => {
-                4
-            }
-            Self::Evade => {
-                4
-            }
-            Self::Parry => {
-                4
-            }
-            Self::Block => {
-                4
-            }
             Self::CreateItem {
                 item,
             } => {
                 4
                 + 4 // item: u32
-            }
-            Self::Weapon => {
-                4
-            }
-            Self::Defense => {
-                4
-            }
-            Self::PersistentAreaAura => {
-                4
             }
             Self::Summon {
                 summon_target,
@@ -1132,71 +1060,11 @@ impl SpellLog_SpellEffect {
                 4
                 + summon_target.size() // summon_target: PackedGuid
             }
-            Self::Leap => {
-                4
-            }
-            Self::Energize => {
-                4
-            }
-            Self::WeaponPercentDamage => {
-                4
-            }
-            Self::TriggerMissile => {
-                4
-            }
             Self::OpenLock {
                 lock_target,
             } => {
                 4
                 + lock_target.size() // lock_target: PackedGuid
-            }
-            Self::SummonChangeItem => {
-                4
-            }
-            Self::ApplyAreaAuraParty => {
-                4
-            }
-            Self::LearnSpell => {
-                4
-            }
-            Self::SpellDefense => {
-                4
-            }
-            Self::Dispel => {
-                4
-            }
-            Self::Language => {
-                4
-            }
-            Self::DualWield => {
-                4
-            }
-            Self::Jump => {
-                4
-            }
-            Self::Jump2 => {
-                4
-            }
-            Self::TeleportUnitsFaceCaster => {
-                4
-            }
-            Self::SkillStep => {
-                4
-            }
-            Self::AddHonor => {
-                4
-            }
-            Self::Spawn => {
-                4
-            }
-            Self::TradeSkill => {
-                4
-            }
-            Self::Stealth => {
-                4
-            }
-            Self::Detect => {
-                4
             }
             Self::TransDoor {
                 summon_target,
@@ -1204,59 +1072,11 @@ impl SpellLog_SpellEffect {
                 4
                 + summon_target.size() // summon_target: PackedGuid
             }
-            Self::ForceCriticalHit => {
-                4
-            }
-            Self::GuaranteeHit => {
-                4
-            }
-            Self::EnchantItem => {
-                4
-            }
-            Self::EnchantItemTemporary => {
-                4
-            }
-            Self::Tamecreature => {
-                4
-            }
             Self::SummonPet {
                 summon_target,
             } => {
                 4
                 + summon_target.size() // summon_target: PackedGuid
-            }
-            Self::LearnPetSpell => {
-                4
-            }
-            Self::WeaponDamage => {
-                4
-            }
-            Self::CreateRandomItem => {
-                4
-            }
-            Self::Proficiency => {
-                4
-            }
-            Self::SendEvent => {
-                4
-            }
-            Self::PowerBurn => {
-                4
-            }
-            Self::Threat => {
-                4
-            }
-            Self::TriggerSpell => {
-                4
-            }
-            Self::ApplyAreaAuraRaid => {
-                4
-            }
-            Self::RestoreItemCharges => {
-                4
-            }
-            Self::HealMaxHealth => {
-                4
             }
             Self::InterruptCast {
                 interrupted_spell,
@@ -1266,44 +1086,11 @@ impl SpellLog_SpellEffect {
                 + 4 // interrupted_spell: u32
                 + target5.size() // target5: PackedGuid
             }
-            Self::Distract => {
-                4
-            }
-            Self::Pull => {
-                4
-            }
-            Self::Pickpocket => {
-                4
-            }
-            Self::AddFarsight => {
-                4
-            }
-            Self::UntrainTalents => {
-                4
-            }
-            Self::ApplyGlyph => {
-                4
-            }
-            Self::HealMechanical => {
-                4
-            }
             Self::SummonObjectWild {
                 summon_target,
             } => {
                 4
                 + summon_target.size() // summon_target: PackedGuid
-            }
-            Self::ScriptEffect => {
-                4
-            }
-            Self::Attack => {
-                4
-            }
-            Self::Sanctuary => {
-                4
-            }
-            Self::AddComboPoints => {
-                4
             }
             Self::CreateHouse {
                 summon_target,
@@ -1311,65 +1098,11 @@ impl SpellLog_SpellEffect {
                 4
                 + summon_target.size() // summon_target: PackedGuid
             }
-            Self::BindSight => {
-                4
-            }
             Self::Duel {
                 summon_target,
             } => {
                 4
                 + summon_target.size() // summon_target: PackedGuid
-            }
-            Self::Stuck => {
-                4
-            }
-            Self::SummonPlayer => {
-                4
-            }
-            Self::ActivateObject => {
-                4
-            }
-            Self::WmoDamage => {
-                4
-            }
-            Self::WmoRepair => {
-                4
-            }
-            Self::WmoChange => {
-                4
-            }
-            Self::KillCreditPersonal => {
-                4
-            }
-            Self::ThreatAll => {
-                4
-            }
-            Self::EnchantHeldItem => {
-                4
-            }
-            Self::BreakPlayerTargeting => {
-                4
-            }
-            Self::SelfResurrect => {
-                4
-            }
-            Self::Skinning => {
-                4
-            }
-            Self::Charge => {
-                4
-            }
-            Self::SummonAllTotems => {
-                4
-            }
-            Self::KnockBack => {
-                4
-            }
-            Self::Disenchant => {
-                4
-            }
-            Self::Inebriate => {
-                4
             }
             Self::FeedPet {
                 pet_feed_guid,
@@ -1382,9 +1115,6 @@ impl SpellLog_SpellEffect {
             } => {
                 4
                 + pet_dismiss_guid.size() // pet_dismiss_guid: PackedGuid
-            }
-            Self::Reputation => {
-                4
             }
             Self::SummonObjectSlot1 {
                 summon_target,
@@ -1410,15 +1140,6 @@ impl SpellLog_SpellEffect {
                 4
                 + summon_target.size() // summon_target: PackedGuid
             }
-            Self::DispelMechanic => {
-                4
-            }
-            Self::SummonDeadPet => {
-                4
-            }
-            Self::DestroyAllTotems => {
-                4
-            }
             Self::DurabilityDamage {
                 item_to_damage,
                 target6,
@@ -1429,168 +1150,13 @@ impl SpellLog_SpellEffect {
                 + target6.size() // target6: PackedGuid
                 + 4 // unknown5: u32
             }
-            Self::Unknown112 => {
-                4
-            }
             Self::ResurrectNew {
                 resurrect_guid,
             } => {
                 4
                 + resurrect_guid.size() // resurrect_guid: PackedGuid
             }
-            Self::AttackMe => {
-                4
-            }
-            Self::DurabilityDamagePct => {
-                4
-            }
-            Self::SkinPlayerCorpse => {
-                4
-            }
-            Self::SpiritHeal => {
-                4
-            }
-            Self::Skill => {
-                4
-            }
-            Self::ApplyAreaAuraPet => {
-                4
-            }
-            Self::TeleportGraveyard => {
-                4
-            }
-            Self::NormalizedWeaponDmg => {
-                4
-            }
-            Self::Unknown122 => {
-                4
-            }
-            Self::SendTaxi => {
-                4
-            }
-            Self::PlayerPull => {
-                4
-            }
-            Self::ModifyThreatPercent => {
-                4
-            }
-            Self::StealBeneficialBuff => {
-                4
-            }
-            Self::Prospecting => {
-                4
-            }
-            Self::ApplyAreaAuraFriend => {
-                4
-            }
-            Self::ApplyAreaAuraEnemy => {
-                4
-            }
-            Self::RedirectThreat => {
-                4
-            }
-            Self::PlaySound => {
-                4
-            }
-            Self::PlayMusic => {
-                4
-            }
-            Self::UnlearnSpecialization => {
-                4
-            }
-            Self::KillCreditGroup => {
-                4
-            }
-            Self::CallPet => {
-                4
-            }
-            Self::HealPct => {
-                4
-            }
-            Self::EnergizePct => {
-                4
-            }
-            Self::LeapBack => {
-                4
-            }
-            Self::ClearQuest => {
-                4
-            }
-            Self::ForceCast => {
-                4
-            }
-            Self::ForceCastWithValue => {
-                4
-            }
-            Self::TriggerSpellWithValue => {
-                4
-            }
-            Self::ApplyAreaAuraOwner => {
-                4
-            }
-            Self::KnockbackFromPosition => {
-                4
-            }
-            Self::GravityPull => {
-                4
-            }
-            Self::ActivateRune => {
-                4
-            }
-            Self::QuestFail => {
-                4
-            }
-            Self::Unknown148 => {
-                4
-            }
-            Self::Charge2 => {
-                4
-            }
-            Self::QuestOffer => {
-                4
-            }
-            Self::TriggerSpell2 => {
-                4
-            }
-            Self::Unknown152 => {
-                4
-            }
-            Self::CreatePet => {
-                4
-            }
-            Self::TeachTaxiNode => {
-                4
-            }
-            Self::TitanGrip => {
-                4
-            }
-            Self::EnchantItemPrismatic => {
-                4
-            }
-            Self::CreateItem2 => {
-                4
-            }
-            Self::Milling => {
-                4
-            }
-            Self::AllowRenamePet => {
-                4
-            }
-            Self::Unknown160 => {
-                4
-            }
-            Self::TalentSpecCount => {
-                4
-            }
-            Self::TalentSpecSelect => {
-                4
-            }
-            Self::Unknown163 => {
-                4
-            }
-            Self::CancelAura => {
-                4
-            }
+            _ => 4,
         }
     }
 }

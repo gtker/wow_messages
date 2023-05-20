@@ -379,23 +379,11 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo {
 impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::Ok => {
-                4
-            }
             Self::ErrInventory {
                 inventory_result2,
             } => {
                 4
                 + 1 // inventory_result2: InventoryResult
-            }
-            Self::ErrDatabase => {
-                4
-            }
-            Self::ErrNotEnoughMoney => {
-                4
-            }
-            Self::ErrItemNotFound => {
-                4
             }
             Self::ErrHigherBid {
                 auction_outbid3,
@@ -407,15 +395,7 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo {
                 + 8 // higher_bidder2: Guid
                 + 4 // new_bid2: u32
             }
-            Self::ErrBidIncrement => {
-                4
-            }
-            Self::ErrBidOwn => {
-                4
-            }
-            Self::ErrRestrictedAccount => {
-                4
-            }
+            _ => 4,
         }
     }
 }
@@ -480,15 +460,6 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult {
                 4
                 + 1 // inventory_result: InventoryResult
             }
-            Self::ErrDatabase => {
-                4
-            }
-            Self::ErrNotEnoughMoney => {
-                4
-            }
-            Self::ErrItemNotFound => {
-                4
-            }
             Self::ErrHigherBid {
                 auction_outbid2,
                 higher_bidder,
@@ -499,15 +470,7 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult {
                 + 8 // higher_bidder: Guid
                 + 4 // new_bid: u32
             }
-            Self::ErrBidIncrement => {
-                4
-            }
-            Self::ErrBidOwn => {
-                4
-            }
-            Self::ErrRestrictedAccount => {
-                4
-            }
+            _ => 4,
         }
     }
 }

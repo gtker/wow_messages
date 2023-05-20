@@ -4211,9 +4211,6 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
 impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::Ok => {
-                1
-            }
             Self::CantEquipLevelI {
                 bag_type_subclass,
                 item1,
@@ -5086,6 +5083,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item1: Guid
                 + 8 // item2: Guid
             }
+            _ => 1,
         }
     }
 }

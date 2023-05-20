@@ -359,9 +359,6 @@ impl MonsterMove_MonsterMoveType {
                 + 4 // spline_flags: SplineFlag
                 + crate::util::monster_move_spline_size(splines.as_slice()) // splines: MonsterMoveSplines
             }
-            Self::Stop => {
-                1
-            }
             Self::FacingSpot {
                 duration,
                 position,
@@ -398,6 +395,7 @@ impl MonsterMove_MonsterMoveType {
                 + 4 // spline_flags: SplineFlag
                 + crate::util::monster_move_spline_size(splines.as_slice()) // splines: MonsterMoveSplines
             }
+            _ => 1,
         }
     }
 }

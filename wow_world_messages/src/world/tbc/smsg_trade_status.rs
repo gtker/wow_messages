@@ -248,44 +248,11 @@ impl SMSG_TRADE_STATUS_TradeStatus {
 impl SMSG_TRADE_STATUS_TradeStatus {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::Busy => {
-                4
-            }
             Self::BeginTrade {
                 unknown1,
             } => {
                 4
                 + 8 // unknown1: Guid
-            }
-            Self::OpenWindow => {
-                4
-            }
-            Self::TradeCanceled => {
-                4
-            }
-            Self::TradeAccept => {
-                4
-            }
-            Self::Busy2 => {
-                4
-            }
-            Self::NoTarget => {
-                4
-            }
-            Self::BackToTrade => {
-                4
-            }
-            Self::TradeComplete => {
-                4
-            }
-            Self::TradeRejected => {
-                4
-            }
-            Self::TargetToFar => {
-                4
-            }
-            Self::WrongFaction => {
-                4
             }
             Self::CloseWindow {
                 inventory_result,
@@ -296,33 +263,6 @@ impl SMSG_TRADE_STATUS_TradeStatus {
                 + 4 // inventory_result: InventoryResult
                 + 4 // item_limit_category_id: u32
                 + 1 // target_error: Bool
-            }
-            Self::Unknown13 => {
-                4
-            }
-            Self::IgnoreYou => {
-                4
-            }
-            Self::YouStunned => {
-                4
-            }
-            Self::TargetStunned => {
-                4
-            }
-            Self::YouDead => {
-                4
-            }
-            Self::TargetDead => {
-                4
-            }
-            Self::YouLogout => {
-                4
-            }
-            Self::TargetLogout => {
-                4
-            }
-            Self::TrialAccount => {
-                4
             }
             Self::OnlyConjured {
                 slot,
@@ -336,6 +276,7 @@ impl SMSG_TRADE_STATUS_TradeStatus {
                 4
                 + 1 // slot: u8
             }
+            _ => 4,
         }
     }
 }

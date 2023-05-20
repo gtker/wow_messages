@@ -196,15 +196,7 @@ impl CompressedMove_CompressedMoveOpcode {
                 2
                 + 4 // speed: f32
             }
-            Self::SmsgSplineMoveUnroot => {
-                2
-            }
-            Self::SmsgSplineMoveSetRunMode => {
-                2
-            }
-            Self::SmsgSplineMoveSetWalkMode => {
-                2
-            }
+            _ => 2,
         }
     }
 }

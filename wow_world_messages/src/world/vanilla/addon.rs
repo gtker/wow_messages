@@ -390,9 +390,6 @@ impl Addon_KeyVersion {
 impl Addon_KeyVersion {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::Zero => {
-                1
-            }
             Self::One {
                 public_key,
             } => {
@@ -447,6 +444,7 @@ impl Addon_KeyVersion {
                 1
                 + 256 // public_key: u8[256]
             }
+            _ => 1,
         }
     }
 }
@@ -480,9 +478,6 @@ impl Addon_InfoBlock {
 impl Addon_InfoBlock {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::Unavailable => {
-                1
-            }
             Self::Available {
                 key_version,
                 update_available_flag,
@@ -491,6 +486,7 @@ impl Addon_InfoBlock {
                 + key_version.size() // key_version: Addon_KeyVersion
                 + 4 // update_available_flag: u32
             }
+            _ => 1,
         }
     }
 }
@@ -523,15 +519,13 @@ impl Addon_UrlInfo {
 impl Addon_UrlInfo {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::Unavailable => {
-                1
-            }
             Self::Available {
                 url,
             } => {
                 1
                 + url.len() + 1 // url: CString
             }
+            _ => 1,
         }
     }
 }

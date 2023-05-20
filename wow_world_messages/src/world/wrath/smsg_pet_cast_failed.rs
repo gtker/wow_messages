@@ -1020,93 +1020,6 @@ impl SMSG_PET_CAST_FAILED_SpellCastResult {
 impl SMSG_PET_CAST_FAILED_SpellCastResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::Success => {
-                1
-            }
-            Self::AffectingCombat => {
-                1
-            }
-            Self::AlreadyAtFullHealth => {
-                1
-            }
-            Self::AlreadyAtFullMana => {
-                1
-            }
-            Self::AlreadyAtFullPower => {
-                1
-            }
-            Self::AlreadyBeingTamed => {
-                1
-            }
-            Self::AlreadyHaveCharm => {
-                1
-            }
-            Self::AlreadyHaveSummon => {
-                1
-            }
-            Self::AlreadyOpen => {
-                1
-            }
-            Self::AuraBounced => {
-                1
-            }
-            Self::AutotrackInterrupted => {
-                1
-            }
-            Self::BadImplicitTargets => {
-                1
-            }
-            Self::BadTargets => {
-                1
-            }
-            Self::CantBeCharmed => {
-                1
-            }
-            Self::CantBeDisenchanted => {
-                1
-            }
-            Self::CantBeDisenchantedSkill => {
-                1
-            }
-            Self::CantBeMilled => {
-                1
-            }
-            Self::CantBeProspected => {
-                1
-            }
-            Self::CantCastOnTapped => {
-                1
-            }
-            Self::CantDuelWhileInvisible => {
-                1
-            }
-            Self::CantDuelWhileStealthed => {
-                1
-            }
-            Self::CantStealth => {
-                1
-            }
-            Self::CasterAurastate => {
-                1
-            }
-            Self::CasterDead => {
-                1
-            }
-            Self::Charmed => {
-                1
-            }
-            Self::ChestInUse => {
-                1
-            }
-            Self::Confused => {
-                1
-            }
-            Self::DontReport => {
-                1
-            }
-            Self::EquippedItem => {
-                1
-            }
             Self::EquippedItemClass {
                 item_class,
                 item_sub_class,
@@ -1131,72 +1044,6 @@ impl SMSG_PET_CAST_FAILED_SpellCastResult {
                 + 4 // item_class: u32
                 + 4 // item_sub_class: u32
             }
-            Self::ErrorX => {
-                1
-            }
-            Self::Fizzle => {
-                1
-            }
-            Self::Fleeing => {
-                1
-            }
-            Self::FoodLowlevel => {
-                1
-            }
-            Self::Highlevel => {
-                1
-            }
-            Self::HungerSatiated => {
-                1
-            }
-            Self::Immune => {
-                1
-            }
-            Self::IncorrectArea => {
-                1
-            }
-            Self::Interrupted => {
-                1
-            }
-            Self::InterruptedCombat => {
-                1
-            }
-            Self::ItemAlreadyEnchanted => {
-                1
-            }
-            Self::ItemGone => {
-                1
-            }
-            Self::ItemNotFound => {
-                1
-            }
-            Self::ItemNotReady => {
-                1
-            }
-            Self::LevelRequirement => {
-                1
-            }
-            Self::LineOfSight => {
-                1
-            }
-            Self::Lowlevel => {
-                1
-            }
-            Self::LowCastlevel => {
-                1
-            }
-            Self::MainhandEmpty => {
-                1
-            }
-            Self::Moving => {
-                1
-            }
-            Self::NeedAmmo => {
-                1
-            }
-            Self::NeedAmmoPouch => {
-                1
-            }
             Self::NeedExoticAmmo {
                 equipped_item_sub_class,
             } => {
@@ -1210,138 +1057,6 @@ impl SMSG_PET_CAST_FAILED_SpellCastResult {
                 1
                 + 4 // count: u32
                 + 4 // item: u32
-            }
-            Self::Nopath => {
-                1
-            }
-            Self::NotBehind => {
-                1
-            }
-            Self::NotFishable => {
-                1
-            }
-            Self::NotFlying => {
-                1
-            }
-            Self::NotHere => {
-                1
-            }
-            Self::NotInfront => {
-                1
-            }
-            Self::NotInControl => {
-                1
-            }
-            Self::NotKnown => {
-                1
-            }
-            Self::NotMounted => {
-                1
-            }
-            Self::NotOnTaxi => {
-                1
-            }
-            Self::NotOnTransport => {
-                1
-            }
-            Self::NotReady => {
-                1
-            }
-            Self::NotShapeshift => {
-                1
-            }
-            Self::NotStanding => {
-                1
-            }
-            Self::NotTradeable => {
-                1
-            }
-            Self::NotTrading => {
-                1
-            }
-            Self::NotUnsheathed => {
-                1
-            }
-            Self::NotWhileGhost => {
-                1
-            }
-            Self::NotWhileLooting => {
-                1
-            }
-            Self::NoAmmo => {
-                1
-            }
-            Self::NoChargesRemain => {
-                1
-            }
-            Self::NoChampion => {
-                1
-            }
-            Self::NoComboPoints => {
-                1
-            }
-            Self::NoDueling => {
-                1
-            }
-            Self::NoEndurance => {
-                1
-            }
-            Self::NoFish => {
-                1
-            }
-            Self::NoItemsWhileShapeshifted => {
-                1
-            }
-            Self::NoMountsAllowed => {
-                1
-            }
-            Self::NoPet => {
-                1
-            }
-            Self::NoPower => {
-                1
-            }
-            Self::NothingToDispel => {
-                1
-            }
-            Self::NothingToSteal => {
-                1
-            }
-            Self::OnlyAbovewater => {
-                1
-            }
-            Self::OnlyDaytime => {
-                1
-            }
-            Self::OnlyIndoors => {
-                1
-            }
-            Self::OnlyMounted => {
-                1
-            }
-            Self::OnlyNighttime => {
-                1
-            }
-            Self::OnlyOutdoors => {
-                1
-            }
-            Self::OnlyShapeshift => {
-                1
-            }
-            Self::OnlyStealthed => {
-                1
-            }
-            Self::OnlyUnderwater => {
-                1
-            }
-            Self::OutOfRange => {
-                1
-            }
-            Self::Pacified => {
-                1
-            }
-            Self::Possessed => {
-                1
             }
             Self::Reagents {
                 missing_item,
@@ -1361,84 +1076,6 @@ impl SMSG_PET_CAST_FAILED_SpellCastResult {
                 1
                 + 4 // spell_focus: u32
             }
-            Self::Rooted => {
-                1
-            }
-            Self::Silenced => {
-                1
-            }
-            Self::SpellInProgress => {
-                1
-            }
-            Self::SpellLearned => {
-                1
-            }
-            Self::SpellUnavailable => {
-                1
-            }
-            Self::Stunned => {
-                1
-            }
-            Self::TargetsDead => {
-                1
-            }
-            Self::TargetAffectingCombat => {
-                1
-            }
-            Self::TargetAurastate => {
-                1
-            }
-            Self::TargetDueling => {
-                1
-            }
-            Self::TargetEnemy => {
-                1
-            }
-            Self::TargetEnraged => {
-                1
-            }
-            Self::TargetFriendly => {
-                1
-            }
-            Self::TargetInCombat => {
-                1
-            }
-            Self::TargetIsPlayer => {
-                1
-            }
-            Self::TargetIsPlayerControlled => {
-                1
-            }
-            Self::TargetNotDead => {
-                1
-            }
-            Self::TargetNotInParty => {
-                1
-            }
-            Self::TargetNotLooted => {
-                1
-            }
-            Self::TargetNotPlayer => {
-                1
-            }
-            Self::TargetNoPockets => {
-                1
-            }
-            Self::TargetNoWeapons => {
-                1
-            }
-            Self::TargetNoRangedWeapons => {
-                1
-            }
-            Self::TargetUnskinnable => {
-                1
-            }
-            Self::ThirstSatiated => {
-                1
-            }
-            Self::TooClose => {
-                1
-            }
             Self::TooManyOfItem {
                 item_limit_category,
             } => {
@@ -1457,62 +1094,11 @@ impl SMSG_PET_CAST_FAILED_SpellCastResult {
                 1
                 + 8 // totems: u32[2]
             }
-            Self::TryAgain => {
-                1
-            }
-            Self::UnitNotBehind => {
-                1
-            }
-            Self::UnitNotInfront => {
-                1
-            }
-            Self::WrongPetFood => {
-                1
-            }
-            Self::NotWhileFatigued => {
-                1
-            }
-            Self::TargetNotInInstance => {
-                1
-            }
-            Self::NotWhileTrading => {
-                1
-            }
-            Self::TargetNotInRaid => {
-                1
-            }
-            Self::TargetFreeforall => {
-                1
-            }
-            Self::NoEdibleCorpses => {
-                1
-            }
-            Self::OnlyBattlegrounds => {
-                1
-            }
-            Self::TargetNotGhost => {
-                1
-            }
-            Self::TransformUnusable => {
-                1
-            }
-            Self::WrongWeather => {
-                1
-            }
-            Self::DamageImmune => {
-                1
-            }
             Self::PreventedByMechanic {
                 mechanic,
             } => {
                 1
                 + 4 // mechanic: u32
-            }
-            Self::PlayTime => {
-                1
-            }
-            Self::Reputation => {
-                1
             }
             Self::MinSkill {
                 skill,
@@ -1522,98 +1108,11 @@ impl SMSG_PET_CAST_FAILED_SpellCastResult {
                 + 4 // skill: Skill
                 + 4 // skill_required: u32
             }
-            Self::NotInArena => {
-                1
-            }
-            Self::NotOnShapeshift => {
-                1
-            }
-            Self::NotOnStealthed => {
-                1
-            }
-            Self::NotOnDamageImmune => {
-                1
-            }
-            Self::NotOnMounted => {
-                1
-            }
-            Self::TooShallow => {
-                1
-            }
-            Self::TargetNotInSanctuary => {
-                1
-            }
-            Self::TargetIsTrivial => {
-                1
-            }
-            Self::BmOrInvisgod => {
-                1
-            }
-            Self::ExpertRidingRequirement => {
-                1
-            }
-            Self::ArtisanRidingRequirement => {
-                1
-            }
-            Self::NotIdle => {
-                1
-            }
-            Self::NotInactive => {
-                1
-            }
-            Self::PartialPlaytime => {
-                1
-            }
-            Self::NoPlaytime => {
-                1
-            }
-            Self::NotInBattleground => {
-                1
-            }
-            Self::NotInRaidInstance => {
-                1
-            }
-            Self::OnlyInArena => {
-                1
-            }
-            Self::TargetLockedToRaidInstance => {
-                1
-            }
-            Self::OnUseEnchant => {
-                1
-            }
-            Self::NotOnGround => {
-                1
-            }
             Self::CustomError {
                 custom_error,
             } => {
                 1
                 + 4 // custom_error: u32
-            }
-            Self::CantDoThatRightNow => {
-                1
-            }
-            Self::TooManySockets => {
-                1
-            }
-            Self::InvalidGlyph => {
-                1
-            }
-            Self::UniqueGlyph => {
-                1
-            }
-            Self::GlyphSocketLocked => {
-                1
-            }
-            Self::NoValidTargets => {
-                1
-            }
-            Self::ItemAtMaxCharges => {
-                1
-            }
-            Self::NotInBarbershop => {
-                1
             }
             Self::FishingTooLow {
                 fishing_skill_required,
@@ -1621,24 +1120,7 @@ impl SMSG_PET_CAST_FAILED_SpellCastResult {
                 1
                 + 4 // fishing_skill_required: u32
             }
-            Self::ItemEnchantTradeWindow => {
-                1
-            }
-            Self::SummonPending => {
-                1
-            }
-            Self::MaxSockets => {
-                1
-            }
-            Self::PetCanRename => {
-                1
-            }
-            Self::TargetCannotBeResurrected => {
-                1
-            }
-            Self::Unknown => {
-                1
-            }
+            _ => 1,
         }
     }
 }

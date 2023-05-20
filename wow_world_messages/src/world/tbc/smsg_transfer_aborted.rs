@@ -163,21 +163,6 @@ impl SMSG_TRANSFER_ABORTED_TransferAbortReason {
 impl SMSG_TRANSFER_ABORTED_TransferAbortReason {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::None => {
-                1
-            }
-            Self::IsFull => {
-                1
-            }
-            Self::NotFound => {
-                1
-            }
-            Self::TooManyInstances => {
-                1
-            }
-            Self::ZoneIsInCombat => {
-                1
-            }
             Self::InsufficientExpansionLevel {
                 difficulty,
             } => {
@@ -190,21 +175,7 @@ impl SMSG_TRANSFER_ABORTED_TransferAbortReason {
                 1
                 + 1 // difficulty: DungeonDifficulty
             }
-            Self::MissingDifficulty => {
-                1
-            }
-            Self::ZoneInCombat => {
-                1
-            }
-            Self::InstanceIsFull => {
-                1
-            }
-            Self::NotAllowed => {
-                1
-            }
-            Self::HasBind => {
-                1
-            }
+            _ => 1,
         }
     }
 }

@@ -379,9 +379,7 @@ impl Mail_MailType {
                 1
                 + 4 // sender_id: u32
             }
-            Self::Item => {
-                1
-            }
+            _ => 1,
         }
     }
 }

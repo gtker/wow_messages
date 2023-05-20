@@ -290,12 +290,6 @@ impl SMSG_MONSTER_MOVE_MonsterMoveType {
 impl SMSG_MONSTER_MOVE_MonsterMoveType {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::Normal => {
-                1
-            }
-            Self::Stop => {
-                1
-            }
             Self::FacingSpot {
                 position,
             } => {
@@ -314,6 +308,7 @@ impl SMSG_MONSTER_MOVE_MonsterMoveType {
                 1
                 + 4 // angle: f32
             }
+            _ => 1,
         }
     }
 }

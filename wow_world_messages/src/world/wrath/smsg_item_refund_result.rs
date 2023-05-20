@@ -168,9 +168,7 @@ impl SMSG_ITEM_REFUND_RESULT_ItemRefundResult {
                 + 5 * 8 // extra_items: ItemRefundExtra[5]
                 + 4 // honor_point_cost: u32
             }
-            Self::Failure => {
-                1
-            }
+            _ => 1,
         }
     }
 }

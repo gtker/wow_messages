@@ -147,15 +147,13 @@ impl SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded {
 impl SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::NotIncluded => {
-                1
-            }
             Self::Included {
                 declined_names,
             } => {
                 1
                 + declined_names.iter().fold(0, |acc, x| acc + x.len() + 1) // declined_names: CString[5]
             }
+            _ => 1,
         }
     }
 }

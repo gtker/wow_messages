@@ -192,24 +192,6 @@ impl SMSG_TRANSFER_ABORTED_TransferAbortReason {
 impl SMSG_TRANSFER_ABORTED_TransferAbortReason {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::None => {
-                1
-            }
-            Self::ErrorX => {
-                1
-            }
-            Self::MaxPlayers => {
-                1
-            }
-            Self::NotFound => {
-                1
-            }
-            Self::TooManyInstances => {
-                1
-            }
-            Self::ZoneInCombat => {
-                1
-            }
             Self::InsufficientExpansionLevel {
                 difficulty,
             } => {
@@ -228,27 +210,7 @@ impl SMSG_TRANSFER_ABORTED_TransferAbortReason {
                 1
                 + 1 // difficulty: DungeonDifficulty
             }
-            Self::TooManyRealmInstances => {
-                1
-            }
-            Self::NeedGroup => {
-                1
-            }
-            Self::NotFound1 => {
-                1
-            }
-            Self::NotFound2 => {
-                1
-            }
-            Self::NotFound3 => {
-                1
-            }
-            Self::RealmOnly => {
-                1
-            }
-            Self::MapNotAllowed => {
-                1
-            }
+            _ => 1,
         }
     }
 }

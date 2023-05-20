@@ -317,9 +317,7 @@ impl MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
                 1
                 + 8 // target: Guid
             }
-            Self::RequestIcons => {
-                1
-            }
+            _ => 1,
         }
     }
 }

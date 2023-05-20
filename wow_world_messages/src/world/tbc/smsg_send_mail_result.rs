@@ -691,48 +691,13 @@ impl SMSG_SEND_MAIL_RESULT_MailResultTwo {
 impl SMSG_SEND_MAIL_RESULT_MailResultTwo {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::Ok => {
-                4
-            }
             Self::ErrEquipError {
                 equip_error2,
             } => {
                 4
                 + 4 // equip_error2: u32
             }
-            Self::ErrCannotSendToSelf => {
-                4
-            }
-            Self::ErrNotEnoughMoney => {
-                4
-            }
-            Self::ErrRecipientNotFound => {
-                4
-            }
-            Self::ErrNotYourTeam => {
-                4
-            }
-            Self::ErrInternalError => {
-                4
-            }
-            Self::ErrDisabledForTrialAcc => {
-                4
-            }
-            Self::ErrRecipientCapReached => {
-                4
-            }
-            Self::ErrCantSendWrappedCod => {
-                4
-            }
-            Self::ErrMailAndChatSuspended => {
-                4
-            }
-            Self::ErrTooManyAttachments => {
-                4
-            }
-            Self::ErrMailAttachmentInvalid => {
-                4
-            }
+            _ => 4,
         }
     }
 }

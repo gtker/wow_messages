@@ -316,59 +316,11 @@ impl CMSG_MESSAGECHAT_ChatType {
 impl CMSG_MESSAGECHAT_ChatType {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::System => {
-                4
-            }
-            Self::Say => {
-                4
-            }
-            Self::Party => {
-                4
-            }
-            Self::Raid => {
-                4
-            }
-            Self::Guild => {
-                4
-            }
-            Self::Officer => {
-                4
-            }
-            Self::Yell => {
-                4
-            }
             Self::Whisper {
                 target_player,
             } => {
                 4
                 + target_player.len() + 1 // target_player: CString
-            }
-            Self::WhisperForeign => {
-                4
-            }
-            Self::WhisperInform => {
-                4
-            }
-            Self::Emote => {
-                4
-            }
-            Self::TextEmote => {
-                4
-            }
-            Self::MonsterSay => {
-                4
-            }
-            Self::MonsterParty => {
-                4
-            }
-            Self::MonsterYell => {
-                4
-            }
-            Self::MonsterWhisper => {
-                4
-            }
-            Self::MonsterEmote => {
-                4
             }
             Self::Channel {
                 channel,
@@ -376,108 +328,7 @@ impl CMSG_MESSAGECHAT_ChatType {
                 4
                 + channel.len() + 1 // channel: CString
             }
-            Self::ChannelJoin => {
-                4
-            }
-            Self::ChannelLeave => {
-                4
-            }
-            Self::ChannelList => {
-                4
-            }
-            Self::ChannelNotice => {
-                4
-            }
-            Self::ChannelNoticeUser => {
-                4
-            }
-            Self::Afk => {
-                4
-            }
-            Self::Dnd => {
-                4
-            }
-            Self::Ignored => {
-                4
-            }
-            Self::Skill => {
-                4
-            }
-            Self::Loot => {
-                4
-            }
-            Self::Money => {
-                4
-            }
-            Self::Opening => {
-                4
-            }
-            Self::Tradeskills => {
-                4
-            }
-            Self::PetInfo => {
-                4
-            }
-            Self::CombatMiscInfo => {
-                4
-            }
-            Self::CombatXpGain => {
-                4
-            }
-            Self::CombatHonorGain => {
-                4
-            }
-            Self::CombatFactionChange => {
-                4
-            }
-            Self::BgSystemNeutral => {
-                4
-            }
-            Self::BgSystemAlliance => {
-                4
-            }
-            Self::BgSystemHorde => {
-                4
-            }
-            Self::RaidLeader => {
-                4
-            }
-            Self::RaidWarning => {
-                4
-            }
-            Self::RaidBossEmote => {
-                4
-            }
-            Self::RaidBossWhisper => {
-                4
-            }
-            Self::Filtered => {
-                4
-            }
-            Self::Battleground => {
-                4
-            }
-            Self::BattlegroundLeader => {
-                4
-            }
-            Self::Restricted => {
-                4
-            }
-            Self::Battlenet => {
-                4
-            }
-            Self::Achievement => {
-                4
-            }
-            Self::GuildAchievement => {
-                4
-            }
-            Self::ArenaPoints => {
-                4
-            }
-            Self::PartyLeader => {
-                4
-            }
+            _ => 4,
         }
     }
 }

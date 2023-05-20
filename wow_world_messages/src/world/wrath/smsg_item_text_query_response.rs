@@ -130,9 +130,7 @@ impl SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery {
                 + 8 // item: Guid
                 + text.len() + 1 // text: CString
             }
-            Self::NoText => {
-                1
-            }
+            _ => 1,
         }
     }
 }

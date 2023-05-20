@@ -317,9 +317,7 @@ impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame {
                 4
                 + 1 // parameter2: u8
             }
-            Self::RefreshFrames => {
-                4
-            }
+            _ => 4,
         }
     }
 }

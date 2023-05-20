@@ -147,36 +147,13 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult {
 impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::Ok => {
-                4
-            }
             Self::ErrInventory {
                 inventory_result,
             } => {
                 4
                 + 1 // inventory_result: InventoryResult
             }
-            Self::ErrDatabase => {
-                4
-            }
-            Self::ErrNotEnoughMoney => {
-                4
-            }
-            Self::ErrItemNotFound => {
-                4
-            }
-            Self::ErrHigherBid => {
-                4
-            }
-            Self::ErrBidIncrement => {
-                4
-            }
-            Self::ErrBidOwn => {
-                4
-            }
-            Self::ErrRestrictedAccount => {
-                4
-            }
+            _ => 4,
         }
     }
 }

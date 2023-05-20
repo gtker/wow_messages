@@ -211,9 +211,6 @@ impl CMSG_PET_CAST_SPELL_ClientMovementData {
 impl CMSG_PET_CAST_SPELL_ClientMovementData {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::NotPresent => {
-                1
-            }
             Self::Present {
                 info,
                 movement,
@@ -224,6 +221,7 @@ impl CMSG_PET_CAST_SPELL_ClientMovementData {
                 + movement.size() // movement: PackedGuid
                 + 4 // opcode: u32
             }
+            _ => 1,
         }
     }
 }
@@ -258,9 +256,6 @@ impl CMSG_PET_CAST_SPELL_ClientCastFlags {
 impl CMSG_PET_CAST_SPELL_ClientCastFlags {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::None => {
-                1
-            }
             Self::Extra {
                 elevation,
                 movement_data,
@@ -271,6 +266,7 @@ impl CMSG_PET_CAST_SPELL_ClientCastFlags {
                 + movement_data.size() // movement_data: CMSG_PET_CAST_SPELL_ClientMovementData
                 + 4 // speed: f32
             }
+            _ => 1,
         }
     }
 }

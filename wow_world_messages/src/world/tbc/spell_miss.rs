@@ -135,45 +135,13 @@ impl SpellMiss_SpellMissInfo {
 impl SpellMiss_SpellMissInfo {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::None => {
-                4
-            }
-            Self::Miss => {
-                4
-            }
-            Self::Resist => {
-                4
-            }
-            Self::Dodge => {
-                4
-            }
-            Self::Parry => {
-                4
-            }
-            Self::Block => {
-                4
-            }
-            Self::Evade => {
-                4
-            }
-            Self::Immune => {
-                4
-            }
-            Self::Immune2 => {
-                4
-            }
-            Self::Deflect => {
-                4
-            }
-            Self::Absorb => {
-                4
-            }
             Self::Reflect {
                 reflect_result,
             } => {
                 4
                 + 1 // reflect_result: u8
             }
+            _ => 4,
         }
     }
 }

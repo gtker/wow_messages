@@ -186,9 +186,6 @@ impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
 impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::DbError => {
-                4
-            }
             Self::HasText {
                 days_since_last_updated,
                 days_since_oldest_ticket_creation,
@@ -209,9 +206,7 @@ impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
                 + 1 // read_by_gm: Bool
                 + text.len() + 1 // text: CString
             }
-            Self::Default => {
-                4
-            }
+            _ => 4,
         }
     }
 }

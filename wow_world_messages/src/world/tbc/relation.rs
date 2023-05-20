@@ -180,9 +180,6 @@ impl Relation_FriendStatus {
 impl Relation_FriendStatus {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::Offline => {
-                1
-            }
             Self::Online {
                 area,
                 class,
@@ -193,15 +190,7 @@ impl Relation_FriendStatus {
                 + 4 // class: Class
                 + 4 // level: Level32
             }
-            Self::Afk => {
-                1
-            }
-            Self::Unknown3 => {
-                1
-            }
-            Self::Dnd => {
-                1
-            }
+            _ => 1,
         }
     }
 }

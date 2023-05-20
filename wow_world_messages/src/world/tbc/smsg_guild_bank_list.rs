@@ -177,9 +177,6 @@ impl SMSG_GUILD_BANK_LIST_GuildBankTabResult {
 impl SMSG_GUILD_BANK_LIST_GuildBankTabResult {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::NotPresent => {
-                1
-            }
             Self::Present {
                 tabs,
             } => {
@@ -187,6 +184,7 @@ impl SMSG_GUILD_BANK_LIST_GuildBankTabResult {
                 + 1 // amount_of_bank_tabs: u8
                 + tabs.iter().fold(0, |acc, x| acc + x.size()) // tabs: GuildBankTab[amount_of_bank_tabs]
             }
+            _ => 1,
         }
     }
 }

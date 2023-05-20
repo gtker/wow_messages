@@ -153,9 +153,7 @@ impl SMSG_ACTION_BUTTONS_ActionBarBehavior {
                 1
                 + 144 * 4 // data: ActionButton[144]
             }
-            Self::Clear => {
-                1
-            }
+            _ => 1,
         }
     }
 }

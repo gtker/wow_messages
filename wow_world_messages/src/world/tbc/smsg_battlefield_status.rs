@@ -251,9 +251,6 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
 impl SMSG_BATTLEFIELD_STATUS_StatusId {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::None => {
-                1
-            }
             Self::WaitQueue {
                 average_wait_time_in_ms,
                 time_in_queue_in_ms,
@@ -276,9 +273,7 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
                 + 4 // time_to_bg_autoleave_in_ms: u32
                 + 4 // time_to_bg_start_in_ms: u32
             }
-            Self::WaitLeave => {
-                1
-            }
+            _ => 1,
         }
     }
 }

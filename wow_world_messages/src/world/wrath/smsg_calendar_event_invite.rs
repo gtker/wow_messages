@@ -168,15 +168,13 @@ impl SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime {
 impl SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::NotPresent => {
-                1
-            }
             Self::Present {
                 status_time,
             } => {
                 1
                 + 4 // status_time: DateTime
             }
+            _ => 1,
         }
     }
 }

@@ -126,15 +126,13 @@ impl SMSG_LFG_UPDATE_LfgUpdateLookingForMore {
 impl SMSG_LFG_UPDATE_LfgUpdateLookingForMore {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::NotLookingForMore => {
-                1
-            }
             Self::LookingForMore {
                 data,
             } => {
                 1
                 + 4 // data: LfgData
             }
+            _ => 1,
         }
     }
 }

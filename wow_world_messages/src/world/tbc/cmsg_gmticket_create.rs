@@ -444,12 +444,6 @@ impl CMSG_GMTICKET_CREATE_GmTicketType {
 impl CMSG_GMTICKET_CREATE_GmTicketType {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::NotSet => {
-                1
-            }
-            Self::Stuck => {
-                1
-            }
             Self::BehaviorHarassment {
                 chat_data_line_count,
                 chat_data_size_uncompressed,
@@ -460,108 +454,7 @@ impl CMSG_GMTICKET_CREATE_GmTicketType {
                 + 4 // chat_data_size_uncompressed: u32
                 + crate::util::zlib_compressed_size(compressed_chat_data) // compressed_chat_data: u8[-]
             }
-            Self::Guild => {
-                1
-            }
-            Self::Item => {
-                1
-            }
-            Self::Environmental => {
-                1
-            }
-            Self::NonQuestCreep => {
-                1
-            }
-            Self::QuestQuestNpc => {
-                1
-            }
-            Self::Technical => {
-                1
-            }
-            Self::AccountBilling => {
-                1
-            }
-            Self::Character => {
-                1
-            }
-            Self::ArenaHonorItemIssues => {
-                1
-            }
-            Self::ArenaHonorPointsIssues => {
-                1
-            }
-            Self::BottingCheatingHacking => {
-                1
-            }
-            Self::BugReport => {
-                1
-            }
-            Self::CompromisedAccountIssue => {
-                1
-            }
-            Self::GameSuggestions => {
-                1
-            }
-            Self::GameplayQuestion => {
-                1
-            }
-            Self::GuildBankIssue => {
-                1
-            }
-            Self::GuildMasterIssue => {
-                1
-            }
-            Self::HarassmentScamReport => {
-                1
-            }
-            Self::InappropriateNameGuildArenaCharacterPet => {
-                1
-            }
-            Self::KnownIssueFix => {
-                1
-            }
-            Self::LatencyLagReport => {
-                1
-            }
-            Self::LootingIssueMistake => {
-                1
-            }
-            Self::MailIssue => {
-                1
-            }
-            Self::NonInGameRelatedInquiry => {
-                1
-            }
-            Self::ParentalControlsCais => {
-                1
-            }
-            Self::Pcnc => {
-                1
-            }
-            Self::Pct => {
-                1
-            }
-            Self::RestorationStatusFollowUp => {
-                1
-            }
-            Self::ServerInstanceIssues => {
-                1
-            }
-            Self::Spam => {
-                1
-            }
-            Self::SuicideCase => {
-                1
-            }
-            Self::SuspensionQuestions => {
-                1
-            }
-            Self::TechnicalSoundGraphicsIssue => {
-                1
-            }
-            Self::UiIssue => {
-                1
-            }
+            _ => 1,
         }
     }
 }

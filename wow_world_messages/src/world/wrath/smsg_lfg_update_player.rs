@@ -178,9 +178,6 @@ impl SMSG_LFG_UPDATE_PLAYER_LfgJoinStatus {
 impl SMSG_LFG_UPDATE_PLAYER_LfgJoinStatus {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::NotJoined => {
-                1
-            }
             Self::Joined {
                 achievements,
                 comment,
@@ -196,6 +193,7 @@ impl SMSG_LFG_UPDATE_PLAYER_LfgJoinStatus {
                 + 1 // no_partial_clear: u8
                 + 1 // queued: u8
             }
+            _ => 1,
         }
     }
 }

@@ -187,30 +187,7 @@ impl SMSG_LOOT_RESPONSE_LootMethod {
                 1
                 + 1 // loot_error: LootMethodError
             }
-            Self::Corpse => {
-                1
-            }
-            Self::Pickpocketing => {
-                1
-            }
-            Self::Fishing => {
-                1
-            }
-            Self::Disenchanting => {
-                1
-            }
-            Self::Skinning => {
-                1
-            }
-            Self::Fishinghole => {
-                1
-            }
-            Self::FishingFail => {
-                1
-            }
-            Self::Insignia => {
-                1
-            }
+            _ => 1,
         }
     }
 }

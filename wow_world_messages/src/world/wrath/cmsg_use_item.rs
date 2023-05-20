@@ -253,9 +253,6 @@ impl CMSG_USE_ITEM_ClientMovementData {
 impl CMSG_USE_ITEM_ClientMovementData {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::NotPresent => {
-                1
-            }
             Self::Present {
                 guid,
                 info,
@@ -266,6 +263,7 @@ impl CMSG_USE_ITEM_ClientMovementData {
                 + info.size() // info: MovementInfo
                 + 4 // opcode: u32
             }
+            _ => 1,
         }
     }
 }
@@ -300,9 +298,6 @@ impl CMSG_USE_ITEM_ClientCastFlags {
 impl CMSG_USE_ITEM_ClientCastFlags {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::None => {
-                1
-            }
             Self::Extra {
                 elevation,
                 movement_data,
@@ -313,6 +308,7 @@ impl CMSG_USE_ITEM_ClientCastFlags {
                 + movement_data.size() // movement_data: CMSG_USE_ITEM_ClientMovementData
                 + 4 // speed: f32
             }
+            _ => 1,
         }
     }
 }

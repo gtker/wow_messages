@@ -243,9 +243,6 @@ impl SMSG_BATTLEFIELD_LIST_RandomBg {
 impl SMSG_BATTLEFIELD_LIST_RandomBg {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::NotRandom => {
-                1
-            }
             Self::Random {
                 honor_lost,
                 reward_arena,
@@ -258,6 +255,7 @@ impl SMSG_BATTLEFIELD_LIST_RandomBg {
                 + 4 // reward_honor: u32
                 + 1 // win_random: u8
             }
+            _ => 1,
         }
     }
 }

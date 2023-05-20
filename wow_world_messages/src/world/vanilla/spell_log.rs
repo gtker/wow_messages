@@ -1356,32 +1356,11 @@ impl SpellLog_SpellEffect {
 impl SpellLog_SpellEffect {
     pub(crate) const fn size(&self) -> usize {
         match self {
-            Self::None => {
-                4
-            }
             Self::Instakill {
                 target7,
             } => {
                 4
                 + 8 // target7: Guid
-            }
-            Self::SchoolDamage => {
-                4
-            }
-            Self::Dummy => {
-                4
-            }
-            Self::PortalTeleport => {
-                4
-            }
-            Self::TeleportUnits => {
-                4
-            }
-            Self::ApplyAura => {
-                4
-            }
-            Self::EnvironmentalDamage => {
-                4
             }
             Self::PowerDrain {
                 amount,
@@ -1395,9 +1374,6 @@ impl SpellLog_SpellEffect {
                 + 4 // power: Power
                 + 8 // target1: Guid
             }
-            Self::HealthLeech => {
-                4
-            }
             Self::Heal {
                 heal_amount,
                 heal_critical,
@@ -1407,27 +1383,6 @@ impl SpellLog_SpellEffect {
                 + 4 // heal_amount: u32
                 + 4 // heal_critical: u32
                 + 8 // target2: Guid
-            }
-            Self::Bind => {
-                4
-            }
-            Self::Portal => {
-                4
-            }
-            Self::RitualBase => {
-                4
-            }
-            Self::RitualSpecialize => {
-                4
-            }
-            Self::RitualActivatePortal => {
-                4
-            }
-            Self::QuestComplete => {
-                4
-            }
-            Self::WeaponDamageNoschool => {
-                4
             }
             Self::Resurrect {
                 target7,
@@ -1443,41 +1398,17 @@ impl SpellLog_SpellEffect {
                 + 4 // extra_attacks: u32
                 + 8 // target4: Guid
             }
-            Self::Dodge => {
-                4
-            }
-            Self::Evade => {
-                4
-            }
-            Self::Parry => {
-                4
-            }
-            Self::Block => {
-                4
-            }
             Self::CreateItem {
                 item,
             } => {
                 4
                 + 4 // item: u32
             }
-            Self::Weapon => {
-                4
-            }
-            Self::Defense => {
-                4
-            }
-            Self::PersistentAreaAura => {
-                4
-            }
             Self::Summon {
                 target7,
             } => {
                 4
                 + 8 // target7: Guid
-            }
-            Self::Leap => {
-                4
             }
             Self::Energize {
                 energize_amount,
@@ -1489,41 +1420,17 @@ impl SpellLog_SpellEffect {
                 + 4 // energize_power: u32
                 + 8 // target3: Guid
             }
-            Self::WeaponPercentDamage => {
-                4
-            }
-            Self::TriggerMissile => {
-                4
-            }
             Self::OpenLock {
                 target7,
             } => {
                 4
                 + 8 // target7: Guid
             }
-            Self::SummonChangeItem => {
-                4
-            }
-            Self::ApplyAreaAuraParty => {
-                4
-            }
-            Self::LearnSpell => {
-                4
-            }
-            Self::SpellDefense => {
-                4
-            }
             Self::Dispel {
                 target7,
             } => {
                 4
                 + 8 // target7: Guid
-            }
-            Self::Language => {
-                4
-            }
-            Self::DualWield => {
-                4
             }
             Self::SummonWild {
                 target7,
@@ -1537,47 +1444,11 @@ impl SpellLog_SpellEffect {
                 4
                 + 8 // target7: Guid
             }
-            Self::TeleportUnitsFaceCaster => {
-                4
-            }
-            Self::SkillStep => {
-                4
-            }
-            Self::AddHonor => {
-                4
-            }
-            Self::Spawn => {
-                4
-            }
-            Self::TradeSkill => {
-                4
-            }
-            Self::Stealth => {
-                4
-            }
-            Self::Detect => {
-                4
-            }
             Self::TransDoor {
                 target7,
             } => {
                 4
                 + 8 // target7: Guid
-            }
-            Self::ForceCriticalHit => {
-                4
-            }
-            Self::GuaranteeHit => {
-                4
-            }
-            Self::EnchantItem => {
-                4
-            }
-            Self::EnchantItemTemporary => {
-                4
-            }
-            Self::Tamecreature => {
-                4
             }
             Self::SummonPet {
                 target7,
@@ -1585,41 +1456,17 @@ impl SpellLog_SpellEffect {
                 4
                 + 8 // target7: Guid
             }
-            Self::LearnPetSpell => {
-                4
-            }
-            Self::WeaponDamage => {
-                4
-            }
             Self::OpenLockItem {
                 target7,
             } => {
                 4
                 + 8 // target7: Guid
             }
-            Self::Proficiency => {
-                4
-            }
-            Self::SendEvent => {
-                4
-            }
-            Self::PowerBurn => {
-                4
-            }
             Self::Threat {
                 target7,
             } => {
                 4
                 + 8 // target7: Guid
-            }
-            Self::TriggerSpell => {
-                4
-            }
-            Self::HealthFunnel => {
-                4
-            }
-            Self::PowerFunnel => {
-                4
             }
             Self::HealMaxHealth {
                 heal_amount,
@@ -1645,15 +1492,6 @@ impl SpellLog_SpellEffect {
                 4
                 + 8 // target7: Guid
             }
-            Self::Pull => {
-                4
-            }
-            Self::Pickpocket => {
-                4
-            }
-            Self::AddFarsight => {
-                4
-            }
             Self::SummonPossessed {
                 target7,
             } => {
@@ -1666,47 +1504,17 @@ impl SpellLog_SpellEffect {
                 4
                 + 8 // target7: Guid
             }
-            Self::HealMechanical => {
-                4
-            }
             Self::SummonObjectWild {
                 target7,
             } => {
                 4
                 + 8 // target7: Guid
             }
-            Self::ScriptEffect => {
-                4
-            }
-            Self::Attack => {
-                4
-            }
             Self::Sanctuary {
                 target7,
             } => {
                 4
                 + 8 // target7: Guid
-            }
-            Self::AddComboPoints => {
-                4
-            }
-            Self::CreateHouse => {
-                4
-            }
-            Self::BindSight => {
-                4
-            }
-            Self::Duel => {
-                4
-            }
-            Self::Stuck => {
-                4
-            }
-            Self::SummonPlayer => {
-                4
-            }
-            Self::ActivateObject => {
-                4
             }
             Self::SummonTotemSlot1 {
                 target7,
@@ -1738,35 +1546,11 @@ impl SpellLog_SpellEffect {
                 4
                 + 8 // target7: Guid
             }
-            Self::EnchantHeldItem => {
-                4
-            }
-            Self::SummonPhantasm => {
-                4
-            }
-            Self::SelfResurrect => {
-                4
-            }
-            Self::Skinning => {
-                4
-            }
-            Self::Charge => {
-                4
-            }
             Self::SummonCritter {
                 target7,
             } => {
                 4
                 + 8 // target7: Guid
-            }
-            Self::KnockBack => {
-                4
-            }
-            Self::Disenchant => {
-                4
-            }
-            Self::Inebriate => {
-                4
             }
             Self::FeedPet {
                 feed_pet_item,
@@ -1779,9 +1563,6 @@ impl SpellLog_SpellEffect {
             } => {
                 4
                 + 8 // target7: Guid
-            }
-            Self::Reputation => {
-                4
             }
             Self::SummonObjectSlot1 {
                 target7,
@@ -1813,12 +1594,6 @@ impl SpellLog_SpellEffect {
                 4
                 + 8 // target7: Guid
             }
-            Self::SummonDeadPet => {
-                4
-            }
-            Self::DestroyAllTotems => {
-                4
-            }
             Self::DurabilityDamage {
                 item_to_damage,
                 target6,
@@ -1847,38 +1622,11 @@ impl SpellLog_SpellEffect {
                 4
                 + 8 // target7: Guid
             }
-            Self::DurabilityDamagePct => {
-                4
-            }
             Self::SkinPlayerCorpse {
                 target7,
             } => {
                 4
                 + 8 // target7: Guid
-            }
-            Self::SpiritHeal => {
-                4
-            }
-            Self::Skill => {
-                4
-            }
-            Self::ApplyAreaAuraPet => {
-                4
-            }
-            Self::TeleportGraveyard => {
-                4
-            }
-            Self::NormalizedWeaponDmg => {
-                4
-            }
-            Self::Unknown122 => {
-                4
-            }
-            Self::SendTaxi => {
-                4
-            }
-            Self::PlayerPull => {
-                4
             }
             Self::ModifyThreatPercent {
                 target7,
@@ -1892,9 +1640,7 @@ impl SpellLog_SpellEffect {
                 4
                 + 8 // target7: Guid
             }
-            Self::Unknown127 => {
-                4
-            }
+            _ => 4,
         }
     }
 }

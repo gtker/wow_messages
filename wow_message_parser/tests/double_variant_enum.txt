@@ -126,9 +126,7 @@ impl DoubleVariantEnum_SimpleEnum {
                 1
                 + 1 // basic: u8
             }
-            Self::Two => {
-                1
-            }
+            _ => 1,
         }
     }
 }

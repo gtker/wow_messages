@@ -337,51 +337,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
                 + 16 // challenge_data: u8[16]
                 + 16 // checksum_salt: u8[16]
             }
-            Self::FailUnknown0 => {
-                1
-            }
-            Self::FailUnknown1 => {
-                1
-            }
-            Self::FailBanned => {
-                1
-            }
-            Self::FailUnknownAccount => {
-                1
-            }
-            Self::FailIncorrectPassword => {
-                1
-            }
-            Self::FailAlreadyOnline => {
-                1
-            }
-            Self::FailNoTime => {
-                1
-            }
-            Self::FailDbBusy => {
-                1
-            }
-            Self::FailVersionInvalid => {
-                1
-            }
-            Self::LoginDownloadFile => {
-                1
-            }
-            Self::FailInvalidServer => {
-                1
-            }
-            Self::FailSuspended => {
-                1
-            }
-            Self::FailNoAccess => {
-                1
-            }
-            Self::SuccessSurvey => {
-                1
-            }
-            Self::FailParentalcontrol => {
-                1
-            }
+            _ => 1,
         }
     }
 }

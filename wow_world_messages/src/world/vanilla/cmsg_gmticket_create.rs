@@ -363,9 +363,6 @@ impl CMSG_GMTICKET_CREATE_GmTicketType {
 impl CMSG_GMTICKET_CREATE_GmTicketType {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::Stuck => {
-                1
-            }
             Self::BehaviorHarassment {
                 chat_data_line_count,
                 chat_data_size_uncompressed,
@@ -376,30 +373,7 @@ impl CMSG_GMTICKET_CREATE_GmTicketType {
                 + 4 // chat_data_size_uncompressed: u32
                 + crate::util::zlib_compressed_size(compressed_chat_data) // compressed_chat_data: u8[-]
             }
-            Self::Guild => {
-                1
-            }
-            Self::Item => {
-                1
-            }
-            Self::Environmental => {
-                1
-            }
-            Self::NonquestCreep => {
-                1
-            }
-            Self::QuestQuestnpc => {
-                1
-            }
-            Self::Technical => {
-                1
-            }
-            Self::AccountBilling => {
-                1
-            }
-            Self::Character => {
-                1
-            }
+            _ => 1,
         }
     }
 }

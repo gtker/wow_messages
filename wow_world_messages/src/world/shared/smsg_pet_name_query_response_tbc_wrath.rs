@@ -160,9 +160,7 @@ impl SMSG_PET_NAME_QUERY_RESPONSE_PetQueryDisabledNames {
                 1
                 + declined_names.iter().fold(0, |acc, x| acc + x.len() + 1) // declined_names: CString[5]
             }
-            Self::NotPresent => {
-                1
-            }
+            _ => 1,
         }
     }
 }

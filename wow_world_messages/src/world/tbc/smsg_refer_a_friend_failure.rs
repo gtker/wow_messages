@@ -147,51 +147,13 @@ impl SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError {
 impl SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError {
     pub(crate) fn size(&self) -> usize {
         match self {
-            Self::None => {
-                4
-            }
-            Self::NotReferredBy => {
-                4
-            }
-            Self::TargetTooHigh => {
-                4
-            }
-            Self::InsufficientGrantableLevels => {
-                4
-            }
-            Self::TooFar => {
-                4
-            }
-            Self::DifferentFaction => {
-                4
-            }
-            Self::NotNow => {
-                4
-            }
-            Self::GrantLevelMax => {
-                4
-            }
-            Self::NoTarget => {
-                4
-            }
             Self::NotInGroup {
                 target_name,
             } => {
                 4
                 + target_name.len() + 1 // target_name: CString
             }
-            Self::SummonLevelMax => {
-                4
-            }
-            Self::SummonCooldown => {
-                4
-            }
-            Self::InsufficientExpansionLevel => {
-                4
-            }
-            Self::SummonOffline => {
-                4
-            }
+            _ => 4,
         }
     }
 }
