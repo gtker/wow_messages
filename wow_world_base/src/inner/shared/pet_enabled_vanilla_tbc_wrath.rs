@@ -39,7 +39,7 @@ impl std::fmt::Display for PetEnabled {
 
 impl TryFrom<u8> for PetEnabled {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             8 => Ok(Self::Enabled),
             0 => Ok(Self::Disabled),

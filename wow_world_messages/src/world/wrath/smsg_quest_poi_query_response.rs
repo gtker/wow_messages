@@ -33,7 +33,7 @@ impl crate::Message for SMSG_QUEST_POI_QUERY_RESPONSE {
 
         Ok(())
     }
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(4..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01E4, size: body_size });
         }

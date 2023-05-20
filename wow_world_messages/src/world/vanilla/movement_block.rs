@@ -268,7 +268,7 @@ impl MovementBlock {
 }
 
 impl MovementBlock {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // update_flag: UpdateFlag
         let update_flag = UpdateFlag::new(crate::util::read_u8_le(&mut r)?);
 

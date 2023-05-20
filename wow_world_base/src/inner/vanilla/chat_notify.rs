@@ -221,7 +221,7 @@ impl std::fmt::Display for ChatNotify {
 
 impl TryFrom<u8> for ChatNotify {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::JoinedNotice),
             1 => Ok(Self::LeftNotice),

@@ -71,7 +71,7 @@ impl SendCalendarHoliday {
 }
 
 impl SendCalendarHoliday {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // holiday_id: u32
         let holiday_id = crate::util::read_u32_le(&mut r)?;
 

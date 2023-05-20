@@ -146,9 +146,10 @@ impl Writer {
         self.wln(it.cfg());
 
         if !it.is_async() {
-            self.open_curly(format!("fn {prefix}write<W: {write}>(&self, mut w: W) -> std::result::Result<(), std::io::Error>",
-                                    prefix = it.prefix(),
-                                    write = it.write(),
+            self.open_curly(format!(
+                "fn {prefix}write<W: {write}>(&self, mut w: W) -> Result<(), std::io::Error>",
+                prefix = it.prefix(),
+                write = it.write(),
             ));
 
             return;
@@ -167,7 +168,7 @@ impl Writer {
         self.wln(") -> core::pin::Pin<Box<");
         self.inc_indent();
 
-        self.wln("dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>");
+        self.wln("dyn core::future::Future<Output = Result<(), std::io::Error>>");
         self.inc_indent();
 
         self.wln("+ Send + 'async_trait");
@@ -189,7 +190,7 @@ impl Writer {
     fn print_read_decl(&mut self, it: ImplType) {
         if !it.is_async() {
             self.open_curly(format!(
-                "fn {prefix}read<R: {read}, I: crate::private::Sealed>(mut r: R) -> std::result::Result<Self, {error}>",
+                "fn {prefix}read<R: {read}, I: crate::private::Sealed>(mut r: R) -> Result<Self, {error}>",
                 prefix = it.prefix(),
                 read = it.read(),
                 error = PARSE_ERROR,
@@ -212,7 +213,7 @@ impl Writer {
 
         self.inc_indent();
         self.wln(format!(
-            "dyn core::future::Future<Output = std::result::Result<Self, {PARSE_ERROR}>>",
+            "dyn core::future::Future<Output = Result<Self, {PARSE_ERROR}>>",
         ));
         self.inc_indent();
 

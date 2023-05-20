@@ -28,7 +28,7 @@ impl CharacterGear {
 }
 
 impl CharacterGear {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // equipment_display_id: u32
         let equipment_display_id = crate::util::read_u32_le(&mut r)?;
 

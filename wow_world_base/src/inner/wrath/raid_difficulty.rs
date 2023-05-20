@@ -47,7 +47,7 @@ impl std::fmt::Display for RaidDifficulty {
 
 impl TryFrom<u8> for RaidDifficulty {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::TenManNormal),
             1 => Ok(Self::TwentyFiveManNormal),

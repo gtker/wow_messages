@@ -39,7 +39,7 @@ impl std::fmt::Display for ArenaFaction {
 
 impl TryFrom<u8> for ArenaFaction {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::Horde),
             1 => Ok(Self::Alliance),

@@ -39,7 +39,7 @@ impl std::fmt::Display for LfgTeleportLocation {
 
 impl TryFrom<u8> for LfgTeleportLocation {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::In),
             1 => Ok(Self::Out),

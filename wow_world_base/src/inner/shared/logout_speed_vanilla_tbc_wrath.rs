@@ -39,7 +39,7 @@ impl std::fmt::Display for LogoutSpeed {
 
 impl TryFrom<u8> for LogoutSpeed {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::Delayed),
             1 => Ok(Self::Instant),

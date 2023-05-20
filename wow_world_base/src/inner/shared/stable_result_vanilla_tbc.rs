@@ -61,7 +61,7 @@ impl std::fmt::Display for StableResult {
 
 impl TryFrom<u8> for StableResult {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::ErrMoney),
             6 => Ok(Self::ErrStable),

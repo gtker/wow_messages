@@ -29,7 +29,7 @@ impl SpellMiss {
 }
 
 impl SpellMiss {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // target: Guid
         let target = Guid::read(&mut r)?;
 

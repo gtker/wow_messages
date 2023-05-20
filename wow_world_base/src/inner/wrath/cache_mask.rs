@@ -45,7 +45,7 @@ impl std::fmt::Display for CacheMask {
 
 impl TryFrom<u32> for CacheMask {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
             21 => Ok(Self::GlobalCache),
             234 => Ok(Self::PerCharacterCache),

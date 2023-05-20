@@ -67,7 +67,7 @@ impl std::fmt::Display for ArenaTeamEvent {
 
 impl TryFrom<u8> for ArenaTeamEvent {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             3 => Ok(Self::Join),
             4 => Ok(Self::Leave),

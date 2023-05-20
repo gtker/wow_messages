@@ -158,7 +158,7 @@ pub(crate) fn definition(s: &mut Writer, v: &[&Container], ty: &str, version: Ve
 }
 
 fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str, error_ty: &str) {
-    s.bodyn(format!("fn read_opcodes(opcode: {size}, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, {error_ty}>"), |s| {
+    s.bodyn(format!("fn read_opcodes(opcode: {size}, body_size: u32, mut r: &[u8]) -> Result<Self, {error_ty}>"), |s| {
         s.open_curly("match opcode");
 
         for &e in v {
@@ -207,7 +207,7 @@ fn world_common_impls_read_write(
 ) {
     s.wln(it.cfg());
     s.open_curly(format!(
-        "pub {func}fn {prefix}read_unencrypted<R: {read}>(mut r: R) -> std::result::Result<Self, {error_ty}>",
+        "pub {func}fn {prefix}read_unencrypted<R: {read}>(mut r: R) -> Result<Self, {error_ty}>",
         prefix = it.prefix(),
         read = it.read(),
         func = it.func(),
@@ -274,7 +274,7 @@ fn world_common_impls_read_write(
 
     s.wln(it.cfg_and_encryption());
     s.open_curly(
-        format!("pub {func}fn {prefix}read_encrypted<R: {read}>(mut r: R, d: &mut {dec_prefix}DecrypterHalf) -> std::result::Result<Self, {error_ty}>",
+        format!("pub {func}fn {prefix}read_encrypted<R: {read}>(mut r: R, d: &mut {dec_prefix}DecrypterHalf) -> Result<Self, {error_ty}>",
                 func = it.func(),
                 prefix = it.prefix(),
                 read = it.read(),

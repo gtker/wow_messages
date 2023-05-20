@@ -158,7 +158,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
 
         s.body(
             format!(
-                "fn try_from(value: {}) -> std::result::Result<Self, Self::Error>",
+                "fn try_from(value: {}) -> Result<Self, Self::Error>",
                 e.ty().rust_str()
             ),
             |s| {

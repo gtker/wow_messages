@@ -39,7 +39,7 @@ impl std::fmt::Display for DispelMethod {
 
 impl TryFrom<u8> for DispelMethod {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::Dispelled),
             1 => Ok(Self::Cleansed),

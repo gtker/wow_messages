@@ -87,7 +87,7 @@ impl std::fmt::Display for GuildEvent {
 
 impl TryFrom<u8> for GuildEvent {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::Promotion),
             1 => Ok(Self::Demotion),

@@ -47,7 +47,7 @@ impl std::fmt::Display for PetFeedback {
 
 impl TryFrom<u8> for PetFeedback {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::PetDead),
             2 => Ok(Self::NothingToAttack),

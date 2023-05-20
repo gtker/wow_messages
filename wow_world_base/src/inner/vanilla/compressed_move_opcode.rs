@@ -55,7 +55,7 @@ impl std::fmt::Display for CompressedMoveOpcode {
 
 impl TryFrom<u16> for CompressedMoveOpcode {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u16) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
         match value {
             221 => Ok(Self::SmsgMonsterMove),
             686 => Ok(Self::SmsgMonsterMoveTransport),

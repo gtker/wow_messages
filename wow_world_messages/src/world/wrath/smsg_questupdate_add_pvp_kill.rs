@@ -35,7 +35,7 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_PVP_KILL {
 
         Ok(())
     }
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 12 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046F, size: body_size });
         }

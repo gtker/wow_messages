@@ -51,7 +51,7 @@ impl std::fmt::Display for TrainingFailureReason {
 
 impl TryFrom<u32> for TrainingFailureReason {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::Unavailable),
             1 => Ok(Self::NotEnoughMoney),

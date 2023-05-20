@@ -39,7 +39,7 @@ impl std::fmt::Display for NewItemCreationType {
 
 impl TryFrom<u32> for NewItemCreationType {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::Received),
             1 => Ok(Self::Created),

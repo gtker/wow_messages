@@ -36,7 +36,7 @@ impl Version {
 }
 
 impl Version {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // major: u8
         let major = crate::util::read_u8_le(&mut r)?;
 
@@ -58,7 +58,7 @@ impl Version {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, std::io::Error> {
         // major: u8
         let major = crate::util::tokio_read_u8_le(&mut r).await?;
 
@@ -80,7 +80,7 @@ impl Version {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, std::io::Error> {
         // major: u8
         let major = crate::util::astd_read_u8_le(&mut r).await?;
 

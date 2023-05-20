@@ -40,7 +40,7 @@ impl TalentInfoSpec {
 }
 
 impl TalentInfoSpec {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // amount_of_talents: u8
         let amount_of_talents = crate::util::read_u8_le(&mut r)?;
 

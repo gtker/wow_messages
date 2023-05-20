@@ -1759,7 +1759,7 @@ impl std::fmt::Display for Talent {
 
 impl TryFrom<u32> for Talent {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
             23 => Ok(Self::BurningSoul),
             24 => Ok(Self::ImprovedFireWard),

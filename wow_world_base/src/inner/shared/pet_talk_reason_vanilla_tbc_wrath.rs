@@ -39,7 +39,7 @@ impl std::fmt::Display for PetTalkReason {
 
 impl TryFrom<u32> for PetTalkReason {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::SpecialSpell),
             1 => Ok(Self::Attack),

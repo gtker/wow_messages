@@ -459,7 +459,7 @@ pub enum ClientOpcodeMessage {
 }
 
 impl ClientOpcodeMessage {
-    fn read_opcodes(opcode: u32, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    fn read_opcodes(opcode: u32, body_size: u32, mut r: &[u8]) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
             0x00B5 => Ok(Self::MSG_MOVE_START_FORWARD(<MSG_MOVE_START_FORWARD as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00B5, size: body_size, io, } } else { a } })?)),
             0x00B6 => Ok(Self::MSG_MOVE_START_BACKWARD(<MSG_MOVE_START_BACKWARD as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00B6, size: body_size, io, } } else { a } })?)),
@@ -909,7 +909,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "sync")]
-    pub fn read_unencrypted<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read_unencrypted<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let size = (crate::util::read_u16_be(&mut r)?.saturating_sub(4)) as u32;
         let opcode = crate::util::read_u32_le(&mut r)?;
 
@@ -918,7 +918,7 @@ impl ClientOpcodeMessage {
         Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(all(feature = "sync", feature = "encryption"))]
-    pub fn read_encrypted<R: std::io::Read>(mut r: R, d: &mut ServerDecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read_encrypted<R: std::io::Read>(mut r: R, d: &mut ServerDecrypterHalf) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header)?;
         let header = d.decrypt_client_header(header);
@@ -931,7 +931,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "tokio")]
-    pub async fn tokio_read_unencrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn tokio_read_unencrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let size = (crate::util::tokio_read_u16_be(&mut r).await?.saturating_sub(4)) as u32;
         let opcode = crate::util::tokio_read_u32_le(&mut r).await?;
 
@@ -940,7 +940,7 @@ impl ClientOpcodeMessage {
         Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(all(feature = "tokio", feature = "encryption"))]
-    pub async fn tokio_read_encrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R, d: &mut ServerDecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn tokio_read_encrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R, d: &mut ServerDecrypterHalf) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
@@ -953,7 +953,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "async-std")]
-    pub async fn astd_read_unencrypted<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn astd_read_unencrypted<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let size = (crate::util::astd_read_u16_be(&mut r).await?.saturating_sub(4)) as u32;
         let opcode = crate::util::astd_read_u32_le(&mut r).await?;
 
@@ -962,7 +962,7 @@ impl ClientOpcodeMessage {
         Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(all(feature = "async-std", feature = "encryption"))]
-    pub async fn astd_read_encrypted<R: async_std::io::ReadExt + Unpin + Send>(mut r: R, d: &mut ServerDecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn astd_read_encrypted<R: async_std::io::ReadExt + Unpin + Send>(mut r: R, d: &mut ServerDecrypterHalf) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 6];
         r.read_exact(&mut header).await?;
         let header = d.decrypt_client_header(header);
@@ -7312,7 +7312,7 @@ pub enum ServerOpcodeMessage {
 }
 
 impl ServerOpcodeMessage {
-    fn read_opcodes(opcode: u16, body_size: u32, mut r: &[u8]) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    fn read_opcodes(opcode: u16, body_size: u32, mut r: &[u8]) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         match opcode {
             0x00B5 => Ok(Self::MSG_MOVE_START_FORWARD(<MSG_MOVE_START_FORWARD as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00B5, size: body_size, io, } } else { a } })?)),
             0x00B6 => Ok(Self::MSG_MOVE_START_BACKWARD(<MSG_MOVE_START_BACKWARD as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| { if let ParseError::Io(io) = a { ParseError::BufferSizeTooSmall { opcode: 0x00B6, size: body_size, io, } } else { a } })?)),
@@ -7838,7 +7838,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "sync")]
-    pub fn read_unencrypted<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read_unencrypted<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header)?;
 
@@ -7861,7 +7861,7 @@ impl ServerOpcodeMessage {
         Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(all(feature = "sync", feature = "encryption"))]
-    pub fn read_encrypted<R: std::io::Read>(mut r: R, d: &mut ClientDecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read_encrypted<R: std::io::Read>(mut r: R, d: &mut ClientDecrypterHalf) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header)?;
         d.decrypt(&mut header);
@@ -7887,7 +7887,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "tokio")]
-    pub async fn tokio_read_unencrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn tokio_read_unencrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
 
@@ -7910,7 +7910,7 @@ impl ServerOpcodeMessage {
         Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(all(feature = "tokio", feature = "encryption"))]
-    pub async fn tokio_read_encrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R, d: &mut ClientDecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn tokio_read_encrypted<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R, d: &mut ClientDecrypterHalf) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
         d.decrypt(&mut header);
@@ -7936,7 +7936,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "async-std")]
-    pub async fn astd_read_unencrypted<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn astd_read_unencrypted<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
 
@@ -7959,7 +7959,7 @@ impl ServerOpcodeMessage {
         Self::read_opcodes(opcode, size, &buf)
     }
     #[cfg(all(feature = "async-std", feature = "encryption"))]
-    pub async fn astd_read_encrypted<R: async_std::io::ReadExt + Unpin + Send>(mut r: R, d: &mut ClientDecrypterHalf) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn astd_read_encrypted<R: async_std::io::ReadExt + Unpin + Send>(mut r: R, d: &mut ClientDecrypterHalf) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let mut header = [0_u8; 4];
         r.read_exact(&mut header).await?;
         d.decrypt(&mut header);

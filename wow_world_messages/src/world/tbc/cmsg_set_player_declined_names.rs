@@ -44,7 +44,7 @@ impl crate::Message for CMSG_SET_PLAYER_DECLINED_NAMES {
 
         Ok(())
     }
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(14..=1544).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0418, size: body_size });
         }

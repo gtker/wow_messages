@@ -83,7 +83,7 @@ impl std::fmt::Display for BuybackSlot {
 
 impl TryFrom<u32> for BuybackSlot {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
             69 => Ok(Self::Slot1),
             70 => Ok(Self::Slot2),

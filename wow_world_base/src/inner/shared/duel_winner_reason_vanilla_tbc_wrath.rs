@@ -39,7 +39,7 @@ impl std::fmt::Display for DuelWinnerReason {
 
 impl TryFrom<u8> for DuelWinnerReason {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::Won),
             1 => Ok(Self::Fled),

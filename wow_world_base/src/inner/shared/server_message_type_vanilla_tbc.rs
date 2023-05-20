@@ -51,7 +51,7 @@ impl std::fmt::Display for ServerMessageType {
 
 impl TryFrom<u32> for ServerMessageType {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::ShutdownTime),
             2 => Ok(Self::RestartTime),

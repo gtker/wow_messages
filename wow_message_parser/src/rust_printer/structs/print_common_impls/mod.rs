@@ -704,7 +704,7 @@ pub(crate) fn impl_world_message(
     s.closing_curly();
 
     s.open_curly(format!(
-        "fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, {PARSE_ERROR}>",
+        "fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, {PARSE_ERROR}>",
     ));
 
     read_function(s, ImplType::Std);
@@ -805,7 +805,7 @@ pub(crate) fn impl_read_write_non_trait(
             s.wln(it.cfg());
         }
         s.open_curly(format!(
-            "{visibility} {func}fn {prefix}read<R: {read}>(mut r: R) -> std::result::Result<Self, {error}>",
+            "{visibility} {func}fn {prefix}read<R: {read}>(mut r: R) -> Result<Self, {error}>",
             prefix = it.prefix(),
             read = it.read(),
             error = error_name.as_ref(),

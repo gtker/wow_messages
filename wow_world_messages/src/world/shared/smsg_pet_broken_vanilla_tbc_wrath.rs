@@ -22,7 +22,7 @@ impl crate::Message for SMSG_PET_BROKEN {
     fn write_into_vec(&self, mut w: impl std::io::Write) -> Result<(), std::io::Error> {
         Ok(())
     }
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02AF, size: body_size });
         }

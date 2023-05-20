@@ -38,7 +38,7 @@ impl crate::Message for CMSG_FORCE_MOVE_ROOT_ACK {
 
         Ok(())
     }
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(36..=101).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00E9, size: body_size });
         }

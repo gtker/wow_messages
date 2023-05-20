@@ -43,7 +43,7 @@ impl std::fmt::Display for RealmSplitState {
 
 impl TryFrom<u32> for RealmSplitState {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::Normal),
             1 => Ok(Self::Split),

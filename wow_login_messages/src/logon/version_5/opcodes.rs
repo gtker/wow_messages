@@ -30,7 +30,7 @@ impl ServerOpcodeMessage {
 }
 
 impl ServerOpcodeMessage {
-    pub fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::read_u8_le(&mut r)?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::read::<R, crate::private::Internal>(r)?)),
@@ -43,7 +43,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "tokio")]
-    pub async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::tokio_read_u8_le(&mut r).await?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::tokio_read::<R, crate::private::Internal>(r).await?)),
@@ -56,7 +56,7 @@ impl ServerOpcodeMessage {
     }
 
     #[cfg(feature = "async-std")]
-    pub async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::astd_read_u8_le(&mut r).await?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server::astd_read::<R, crate::private::Internal>(r).await?)),
@@ -137,7 +137,7 @@ impl ClientOpcodeMessage {
 }
 
 impl ClientOpcodeMessage {
-    pub fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::read_u8_le(&mut r)?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client::read::<R, crate::private::Internal>(r)?)),
@@ -150,7 +150,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "tokio")]
-    pub async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::tokio_read_u8_le(&mut r).await?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client::tokio_read::<R, crate::private::Internal>(r).await?)),
@@ -163,7 +163,7 @@ impl ClientOpcodeMessage {
     }
 
     #[cfg(feature = "async-std")]
-    pub async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, crate::errors::ExpectedOpcodeError> {
+    pub async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         let opcode = crate::util::astd_read_u8_le(&mut r).await?;
         match opcode {
             0x00 => Ok(Self::CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client::astd_read::<R, crate::private::Internal>(r).await?)),

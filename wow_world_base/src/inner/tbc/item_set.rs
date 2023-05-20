@@ -1527,7 +1527,7 @@ impl std::fmt::Display for ItemSet {
 
 impl TryFrom<u16> for ItemSet {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u16) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::None),
             1 => Ok(Self::TheGladiator),

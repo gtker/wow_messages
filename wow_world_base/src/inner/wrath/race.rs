@@ -115,7 +115,7 @@ impl std::fmt::Display for Race {
 
 impl TryFrom<u8> for Race {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::Human),
             2 => Ok(Self::Orc),

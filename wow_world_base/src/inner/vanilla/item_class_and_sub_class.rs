@@ -319,7 +319,7 @@ impl std::fmt::Display for ItemClassAndSubClass {
 
 impl TryFrom<u64> for ItemClassAndSubClass {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u64) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::Consumable),
             4294967296 => Ok(Self::CheeseOrBreadObsolete),

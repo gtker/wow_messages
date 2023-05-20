@@ -67,7 +67,7 @@ impl AuraUpdate {
 }
 
 impl AuraUpdate {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, std::io::Error> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, std::io::Error> {
         // visual_slot: u8
         let visual_slot = crate::util::read_u8_le(&mut r)?;
 

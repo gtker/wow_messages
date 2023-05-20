@@ -67,7 +67,7 @@ impl std::fmt::Display for AccountDataType {
 
 impl TryFrom<u8> for AccountDataType {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::GlobalConfigCache),
             1 => Ok(Self::PerCharacterConfigCache),

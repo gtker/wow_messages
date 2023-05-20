@@ -43,7 +43,7 @@ impl std::fmt::Display for RollVote {
 
 impl TryFrom<u8> for RollVote {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::Pass),
             1 => Ok(Self::Need),

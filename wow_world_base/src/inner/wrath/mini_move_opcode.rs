@@ -47,7 +47,7 @@ impl std::fmt::Display for MiniMoveOpcode {
 
 impl TryFrom<u16> for MiniMoveOpcode {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u16) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
         match value {
             232 => Ok(Self::SmsgForceMoveRoot),
             242 => Ok(Self::SmsgMoveFeatherFall),

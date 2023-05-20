@@ -39,7 +39,7 @@ impl std::fmt::Display for RaidGroupError {
 
 impl TryFrom<u32> for RaidGroupError {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
             1 => Ok(Self::Required),
             2 => Ok(Self::Full),

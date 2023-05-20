@@ -87,7 +87,7 @@ impl std::fmt::Display for BattlegroundType {
 
 impl TryFrom<u32> for BattlegroundType {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::None),
             1 => Ok(Self::AlteracValley),

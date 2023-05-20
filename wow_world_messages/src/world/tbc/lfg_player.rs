@@ -69,7 +69,7 @@ impl LfgPlayer {
 }
 
 impl LfgPlayer {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // guid: PackedGuid
         let guid = Guid::read_packed(&mut r)?;
 

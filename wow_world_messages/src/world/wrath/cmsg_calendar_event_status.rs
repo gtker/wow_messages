@@ -43,7 +43,7 @@ impl crate::Message for CMSG_CALENDAR_EVENT_STATUS {
 
         Ok(())
     }
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 25 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0434, size: body_size });
         }

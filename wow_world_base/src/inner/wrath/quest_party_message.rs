@@ -79,7 +79,7 @@ impl std::fmt::Display for QuestPartyMessage {
 
 impl TryFrom<u8> for QuestPartyMessage {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::MsgSharingQuest),
             1 => Ok(Self::MsgCantTakeQuest),

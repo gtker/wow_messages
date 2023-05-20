@@ -85,7 +85,7 @@ impl std::fmt::Display for MailResultTwo {
 
 impl TryFrom<u32> for MailResultTwo {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u32) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::Ok),
             1 => Ok(Self::ErrEquipError),

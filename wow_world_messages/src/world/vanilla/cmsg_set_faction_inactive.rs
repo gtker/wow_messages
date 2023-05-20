@@ -32,7 +32,7 @@ impl crate::Message for CMSG_SET_FACTION_INACTIVE {
 
         Ok(())
     }
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 3 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0317, size: body_size });
         }

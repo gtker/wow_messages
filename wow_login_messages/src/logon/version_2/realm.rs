@@ -68,7 +68,7 @@ impl Realm {
 }
 
 impl Realm {
-    pub(crate) fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // realm_type: RealmType
         let realm_type: RealmType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
@@ -112,7 +112,7 @@ impl Realm {
     }
 
     #[cfg(feature = "tokio")]
-    pub(crate) async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // realm_type: RealmType
         let realm_type: RealmType = (crate::util::tokio_read_u32_le(&mut r).await? as u8).try_into()?;
 
@@ -156,7 +156,7 @@ impl Realm {
     }
 
     #[cfg(feature = "async-std")]
-    pub(crate) async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub(crate) async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // realm_type: RealmType
         let realm_type: RealmType = (crate::util::astd_read_u32_le(&mut r).await? as u8).try_into()?;
 

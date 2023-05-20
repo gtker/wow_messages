@@ -103,7 +103,7 @@ impl crate::private::Sealed for CMD_AUTH_LOGON_CHALLENGE_Server {}
 impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
     const OPCODE: u8 = 0x00;
 
-    fn read<R: std::io::Read, I: crate::private::Sealed>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read<R: std::io::Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // protocol_version: u8
         let _protocol_version = crate::util::read_u8_le(&mut r)?;
         // protocol_version is expected to always be 0 (0)
@@ -189,7 +189,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
     }
 
     #[cfg(feature = "sync")]
-    fn write<W: std::io::Write>(&self, mut w: W) -> std::result::Result<(), std::io::Error> {
+    fn write<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let mut v = Vec::with_capacity(self.size() + 1);
         self.write_into_vec(&mut v)?;
         w.write_all(&v)
@@ -199,7 +199,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
     fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
@@ -296,7 +296,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
         &'life0 self,
         mut w: W,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+        dyn core::future::Future<Output = Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
         W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
@@ -314,7 +314,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
     fn astd_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<Self, crate::errors::ParseError>>
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
@@ -411,7 +411,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
         &'life0 self,
         mut w: W,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = std::result::Result<(), std::io::Error>>
+        dyn core::future::Future<Output = Result<(), std::io::Error>>
             + Send + 'async_trait
     >> where
         W: 'async_trait + async_std::io::WriteExt + Unpin + Send,

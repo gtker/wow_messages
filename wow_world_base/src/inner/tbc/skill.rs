@@ -575,7 +575,7 @@ impl std::fmt::Display for Skill {
 
 impl TryFrom<u16> for Skill {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u16) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::None),
             6 => Ok(Self::Frost),

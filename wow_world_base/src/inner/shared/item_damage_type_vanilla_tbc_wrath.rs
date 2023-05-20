@@ -34,7 +34,7 @@ impl ItemDamageType {
 }
 
 impl ItemDamageType {
-    pub fn read<R: std::io::Read>(mut r: R) -> std::result::Result<Self, crate::errors::ParseError> {
+    pub fn read<R: std::io::Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // damage_minimum: f32
         let damage_minimum = crate::util::read_f32_le(&mut r)?;
 

@@ -39,7 +39,7 @@ impl std::fmt::Display for BattlefieldPortAction {
 
 impl TryFrom<u8> for BattlefieldPortAction {
     type Error = crate::errors::EnumError;
-    fn try_from(value: u8) -> std::result::Result<Self, Self::Error> {
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
         match value {
             0 => Ok(Self::LeaveQueue),
             1 => Ok(Self::EnterBattle),

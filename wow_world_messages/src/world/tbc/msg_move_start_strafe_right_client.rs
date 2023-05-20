@@ -27,7 +27,7 @@ impl crate::Message for MSG_MOVE_START_STRAFE_RIGHT_Client {
 
         Ok(())
     }
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> std::result::Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(29..=82).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00B9, size: body_size });
         }
