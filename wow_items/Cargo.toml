@@ -21,3 +21,7 @@ vanilla = ["wow_world_base/vanilla"]
 tbc = ["wow_world_base/tbc"]
 wrath = ["wow_world_base/wrath"]
 unobtainable = []
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

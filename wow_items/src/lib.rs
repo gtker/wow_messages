@@ -35,6 +35,8 @@
 //! This crate is partially auto generated through sqlite databases in the
 //! [`wow_messages` repository](https://github.com/gtker/wow_messages/).
 //!
+#![cfg_attr(docsrs, feature(doc_auto_cfg))]
+#![cfg_attr(docsrs, feature(doc_cfg))]
 
 /// Version 2.4.3.8606.
 #[cfg(feature = "tbc")]
