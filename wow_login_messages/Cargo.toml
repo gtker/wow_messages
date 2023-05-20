@@ -1,7 +1,7 @@
 [package]
 name = "wow_login_messages"
 description = "Message definitions for World of Warcraft authentication servers"
-version = "0.2.0" # Remember to update html_root_url and docs in src/lib.rs, and README.md
+version = "0.3.0"
 keywords = ["wow", "world-of-warcraft", "login", "messages", "packets"]
 categories = ["authentication", "network-programming", "game-development", "game-engines"]
 readme = "README.md"
