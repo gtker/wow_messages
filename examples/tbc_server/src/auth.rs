@@ -203,7 +203,7 @@ async fn login_version_2(
 
     let (p, proof) = p
         .into_server(
-            PublicKey::from_le_bytes(&l.client_public_key).unwrap(),
+            PublicKey::from_le_bytes(l.client_public_key).unwrap(),
             l.client_proof,
         )
         .unwrap();
@@ -262,7 +262,7 @@ async fn login_version_3(
 
     let (p, proof) = p
         .into_server(
-            PublicKey::from_le_bytes(&l.client_public_key).unwrap(),
+            PublicKey::from_le_bytes(l.client_public_key).unwrap(),
             l.client_proof,
         )
         .unwrap();
@@ -314,7 +314,7 @@ async fn login_version_8(
 
     let (p, server_proof) = p
         .into_server(
-            PublicKey::from_le_bytes(&l.client_public_key).unwrap(),
+            PublicKey::from_le_bytes(l.client_public_key).unwrap(),
             l.client_proof,
         )
         .unwrap();

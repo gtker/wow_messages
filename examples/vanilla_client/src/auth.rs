@@ -48,7 +48,7 @@ pub fn auth(
     {
         let generator = generator[0];
         let large_safe_prime = large_safe_prime.try_into().unwrap();
-        let server_public_key = PublicKey::from_le_bytes(&server_public_key).unwrap();
+        let server_public_key = PublicKey::from_le_bytes(server_public_key).unwrap();
 
         SrpClientUser::new(
             NormalizedString::new(USERNAME).unwrap(),

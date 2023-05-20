@@ -12,7 +12,7 @@ license.workspace = true
 workspace = true
 
 [dependencies.wow_srp]
-version = "0.5.1"
+version = "0.6.0"
 default-features = false
 optional = true
 
