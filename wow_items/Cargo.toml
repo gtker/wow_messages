@@ -1,6 +1,10 @@
 [package]
 name = "wow_items"
+description = "Item definitions for World of Warcraft game servers"
 version = "0.1.0"
+keywords = ["wow", "world-of-warcraft", "item", "definitions"]
+categories = ["network-programming", "game-development", "game-engines"]
+
 edition.workspace = true
 authors.workspace = true
 repository.workspace = true

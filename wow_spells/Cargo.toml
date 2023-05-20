@@ -1,6 +1,10 @@
 [package]
 name = "wow_spells"
+description = "Spell definitions for World of Warcraft game servers"
 version = "0.1.0"
+keywords = ["wow", "world-of-warcraft", "spell", "definitions"]
+categories = ["network-programming", "game-development", "game-engines"]
+
 edition.workspace = true
 authors.workspace = true
 repository.workspace = true
@@ -14,4 +18,3 @@ default = []
 vanilla = ["wow_world_base/vanilla"]
 tbc = ["wow_world_base/tbc"]
 wrath = ["wow_world_base/wrath"]
-unobtainable-items = []
