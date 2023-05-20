@@ -26,7 +26,7 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // error: ReferAFriendError
-        w.write_all(&u32::from(self.error.as_int()).to_le_bytes())?;
+        w.write_all(&(self.error.as_int().to_le_bytes()))?;
 
         match &self.error {
             SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotInGroup {

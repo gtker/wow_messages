@@ -35,7 +35,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // chat_type: ChatType
-        w.write_all(&u32::from(self.chat_type.as_int()).to_le_bytes())?;
+        w.write_all(&(self.chat_type.as_int().to_le_bytes()))?;
 
         // language: Language
         w.write_all(&u32::from(self.language.as_int()).to_le_bytes())?;

@@ -222,7 +222,7 @@ pub(crate) fn print_write_definition(
                 s.wln(format!(
                     "w.write_all(&(({variable_prefix}{name}.as_int() >> 32) as u16).to_le_bytes()){postfix}?;",
                 ));
-            } else if upcast.is_none() {
+            } else if upcast.is_none() || d.used_in_if() {
                 s.wln(format!(
                     "w.write_all(&({variable_prefix}{name}.as_int().to_le_bytes())){postfix}?;",
                 ));
