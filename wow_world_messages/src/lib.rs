@@ -79,7 +79,6 @@ pub(crate) mod util;
     non_snake_case,
     unused,
     clippy::single_match,
-    clippy::complexity,
     clippy::too_many_arguments,
     clippy::large_enum_variant,
     clippy::enum_variant_names,
