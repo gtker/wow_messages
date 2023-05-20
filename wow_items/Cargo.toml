@@ -5,6 +5,8 @@ version = "0.1.0"
 keywords = ["wow", "world-of-warcraft", "item", "definitions"]
 categories = ["network-programming", "game-development", "game-engines"]
 
+exclude = ["release.toml"]
+
 edition.workspace = true
 authors.workspace = true
 repository.workspace = true
