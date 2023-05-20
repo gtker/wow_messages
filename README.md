@@ -10,8 +10,8 @@ The project is split into the subdirectories:
 * `wow_message_parser`: The parser, codegen and definitions that creates the libraries.
   Used to build `wow_login_messages`, `wow_world_messages` and `wowm_language`.
 * `wow_world_messages`: **UNRELEASED** Rust library for the world server for WoW version 1.x.y.
-* `wow_world_base`: **UNRELEASED** Rust library that provides the basic types and enums such as `Class`, `Race`
-  and `Gender` for `wow_world_messages` and others.
+* `wow_world_base`: Rust library that provides the basic types and enums such as `Class`, `Race`
+  and `Gender` for `wow_world_messages` and others. [On crates.io](https://crates.io/crates/wow_world_base).
 * `wow_items`: Rust library that contains an array of all `Item`s. Uses the `Item` type from `wow_world_base`.
 * `wowm_language`: [mdbook](https://github.com/rust-lang/mdBook) of language specification. Hosted
   at [`www.gtker.com/wow_messages`](https://www.gtker.com/wow_messages).
