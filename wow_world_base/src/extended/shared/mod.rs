@@ -10,6 +10,11 @@ pub use vanilla_tbc_class::*;
 
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 mod vanilla_tbc_item_quality;
+
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+mod vanilla_tbc_wrath_auction_house;
+pub use vanilla_tbc_wrath_auction_house::*;
+
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
 pub use vanilla_tbc_item_quality::*;
 
