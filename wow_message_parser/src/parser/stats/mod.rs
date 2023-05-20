@@ -19,14 +19,7 @@ pub enum MessageType {
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
 pub enum Reason {
     None,
-    Compressed,
-    RequiresNestedIf,
-    ElseIfForDifferentVariable,
     NotImplementedInAnyEmulator,
-    SelfSizeStruct,
-    RequiresNotEqualGuid,
-    ComplexImplementation,
-    Custom(&'static str),
 }
 
 impl Reason {
@@ -36,13 +29,6 @@ impl Reason {
 
     pub const fn is_some(&self) -> bool {
         !self.is_none()
-    }
-
-    pub const fn str(&self) -> Option<&'static str> {
-        match self {
-            Reason::Custom(s) => Some(s),
-            _ => None,
-        }
     }
 }
 
@@ -76,21 +62,6 @@ impl Data {
         }
     }
 
-    #[allow(unused)]
-    pub(crate) const fn with_reason(
-        name: &'static str,
-        opcode: usize,
-        reason: &'static str,
-    ) -> Self {
-        Self {
-            name,
-            opcode,
-            definition: false,
-            tests: 0,
-            reason: Reason::Custom(reason),
-        }
-    }
-
     const fn direct(name: &'static str, opcode: usize, reason: Reason) -> Self {
         Self {
             name,
@@ -103,42 +74,13 @@ impl Data {
 
     const fn reason(&self) -> Option<&'static str> {
         Some(match self.reason {
-            Reason::Custom(reason) => reason,
             Reason::None => return None,
-            Reason::Compressed => "Requires compression",
             Reason::NotImplementedInAnyEmulator => "Not implemented in any emulator yet",
-            Reason::RequiresNestedIf => "RUST_IF_SCOPE Requires nested if",
-            Reason::ElseIfForDifferentVariable => {
-                "RUST_IF_SCOPE Requires else if for different variable"
-            }
-            Reason::SelfSizeStruct => "Requires self.size for struct",
-            Reason::RequiresNotEqualGuid => "Requires != 0 for Guid type",
-            Reason::ComplexImplementation => "Complex implementation",
         })
-    }
-
-    pub(crate) const fn compressed(name: &'static str, opcode: usize) -> Self {
-        Self::direct(name, opcode, Reason::Compressed)
-    }
-
-    pub(crate) const fn nested_if(name: &'static str, opcode: usize) -> Self {
-        Self::direct(name, opcode, Reason::RequiresNestedIf)
     }
 
     pub(crate) const fn nyi(name: &'static str, opcode: usize) -> Self {
         Self::direct(name, opcode, Reason::NotImplementedInAnyEmulator)
-    }
-
-    pub(crate) const fn complex(name: &'static str, opcode: usize) -> Self {
-        Self::direct(name, opcode, Reason::ComplexImplementation)
-    }
-
-    pub(crate) const fn else_if_different_variable(name: &'static str, opcode: usize) -> Self {
-        Self::direct(name, opcode, Reason::ElseIfForDifferentVariable)
-    }
-
-    pub(crate) const fn self_size_struct(name: &'static str, opcode: usize) -> Self {
-        Self::direct(name, opcode, Reason::SelfSizeStruct)
     }
 
     pub(crate) fn needs_work(&self) -> bool {
