@@ -179,11 +179,9 @@ impl SMSG_LFG_UPDATE_PLAYER_LfgJoinStatus {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::Joined {
-                achievements,
                 comment,
                 dungeons,
-                no_partial_clear,
-                queued,
+                ..
             } => {
                 1
                 + 1 // achievements: u8

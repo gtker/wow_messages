@@ -350,9 +350,8 @@ impl MonsterMove_MonsterMoveType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::Normal {
-                duration,
-                spline_flags,
                 splines,
+                ..
             } => {
                 1
                 + 4 // duration: u32
@@ -360,10 +359,8 @@ impl MonsterMove_MonsterMoveType {
                 + crate::util::monster_move_spline_size(splines.as_slice()) // splines: MonsterMoveSplines
             }
             Self::FacingSpot {
-                duration,
-                position,
-                spline_flags,
                 splines,
+                ..
             } => {
                 1
                 + 4 // duration: u32
@@ -372,10 +369,8 @@ impl MonsterMove_MonsterMoveType {
                 + crate::util::monster_move_spline_size(splines.as_slice()) // splines: MonsterMoveSplines
             }
             Self::FacingTarget {
-                duration,
-                spline_flags,
                 splines,
-                target,
+                ..
             } => {
                 1
                 + 4 // duration: u32
@@ -384,10 +379,8 @@ impl MonsterMove_MonsterMoveType {
                 + 8 // target: Guid
             }
             Self::FacingAngle {
-                angle,
-                duration,
-                spline_flags,
                 splines,
+                ..
             } => {
                 1
                 + 4 // angle: f32

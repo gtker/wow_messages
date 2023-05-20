@@ -495,11 +495,9 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::Success {
-                crc_salt,
                 generator,
                 large_safe_prime,
-                salt,
-                server_public_key,
+                ..
             } => {
                 1
                 + 16 // crc_salt: u8[16]

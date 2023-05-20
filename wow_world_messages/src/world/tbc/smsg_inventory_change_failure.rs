@@ -3883,10 +3883,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::CantEquipLevelI {
-                bag_type_subclass,
-                item1,
-                item2,
-                required_level,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -3895,9 +3892,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 4 // required_level: Level32
             }
             Self::CantEquipSkill {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -3905,9 +3900,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemDoesntGoToSlot {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -3915,9 +3908,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::BagFull {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -3925,9 +3916,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::NonemptyBagOverOtherBag {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -3935,9 +3924,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CantTradeEquipBags {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -3945,9 +3932,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::OnlyAmmoCanGoHere {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -3955,9 +3940,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::NoRequiredProficiency {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -3965,9 +3948,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::NoEquipmentSlotAvailable {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -3975,9 +3956,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::YouCanNeverUseThatItem {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -3985,9 +3964,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::YouCanNeverUseThatItem2 {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -3995,9 +3972,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::NoEquipmentSlotAvailable2 {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4005,9 +3980,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CantEquipWithTwohanded {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4015,9 +3988,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CantDualWield {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4025,9 +3996,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemDoesntGoIntoBag {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4035,9 +4004,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemDoesntGoIntoBag2 {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4045,9 +4012,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CantCarryMoreOfThis {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4055,9 +4020,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::NoEquipmentSlotAvailable3 {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4065,9 +4028,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemCantStack {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4075,9 +4036,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemCantBeEquipped {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4085,9 +4044,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemsCantBeSwapped {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4095,9 +4052,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::SlotIsEmpty {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4105,9 +4060,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemNotFound {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4115,9 +4068,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CantDropSoulbound {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4125,9 +4076,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::OutOfRange {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4135,9 +4084,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::TriedToSplitMoreThanCount {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4145,9 +4092,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CouldntSplitItems {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4155,9 +4100,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::MissingReagent {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4165,9 +4108,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::NotEnoughMoney {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4175,9 +4116,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::NotABag {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4185,9 +4124,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CanOnlyDoWithEmptyBags {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4195,9 +4132,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::DontOwnThatItem {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4205,9 +4140,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CanEquipOnly1Quiver {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4215,9 +4148,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::MustPurchaseThatBagSlot {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4225,9 +4156,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::TooFarAwayFromBank {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4235,9 +4164,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemLocked {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4245,9 +4172,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::YouAreStunned {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4255,9 +4180,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::YouAreDead {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4265,9 +4188,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CantDoRightNow {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4275,9 +4196,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::IntBagError {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4285,9 +4204,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CanEquipOnly1Bolt {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4295,9 +4212,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CanEquipOnly1Ammopouch {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4305,9 +4220,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::StackableCantBeWrapped {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4315,9 +4228,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::EquippedCantBeWrapped {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4325,9 +4236,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::WrappedCantBeWrapped {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4335,9 +4244,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::BoundCantBeWrapped {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4345,9 +4252,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::UniqueCantBeWrapped {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4355,9 +4260,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::BagsCantBeWrapped {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4365,9 +4268,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::AlreadyLooted {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4375,9 +4276,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::InventoryFull {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4385,9 +4284,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::BankFull {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4395,9 +4292,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemIsCurrentlySoldOut {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4405,9 +4300,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::BagFull3 {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4415,9 +4308,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemNotFound2 {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4425,9 +4316,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemCantStack2 {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4435,9 +4324,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::BagFull4 {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4445,9 +4332,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemSoldOut {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4455,9 +4340,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ObjectIsBusy {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4465,9 +4348,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::None {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4475,9 +4356,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::NotInCombat {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4485,9 +4364,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::NotWhileDisarmed {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4495,9 +4372,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::BagFull6 {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4505,9 +4380,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CantEquipRank {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4515,9 +4388,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CantEquipReputation {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4525,9 +4396,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::TooManySpecialBags {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4535,9 +4404,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::LootCantLootThatNow {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4545,9 +4412,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemUniqueEquipable {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4555,9 +4420,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::VendorMissingTurnins {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4565,9 +4428,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::NotEnoughHonorPoints {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4575,9 +4436,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::NotEnoughArenaPoints {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4585,9 +4444,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemMaxCountSocketed {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4595,9 +4452,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::MailBoundItem {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4605,9 +4460,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::NoSplitWhileProspecting {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4615,9 +4468,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::BagFull7 {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4625,9 +4476,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemMaxCountEquippedSocketed {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4635,9 +4484,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::ItemUniqueEquippableSocketed {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4645,9 +4492,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::TooMuchGold {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4655,9 +4500,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::NotDuringArenaMatch {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4665,9 +4508,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::CannotTradeThat {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8
@@ -4675,9 +4516,7 @@ impl SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult {
                 + 8 // item2: Guid
             }
             Self::PersonalArenaRatingTooLow {
-                bag_type_subclass,
-                item1,
-                item2,
+                ..
             } => {
                 1
                 + 1 // bag_type_subclass: u8

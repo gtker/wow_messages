@@ -137,9 +137,7 @@ impl MSG_CORPSE_QUERY_Server_CorpseQueryResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Found {
-                corpse_map,
-                map,
-                position,
+                ..
             } => {
                 1
                 + 4 // corpse_map: Map

@@ -214,7 +214,7 @@ impl CMSG_PET_CAST_SPELL_ClientMovementData {
             Self::Present {
                 info,
                 movement,
-                opcode,
+                ..
             } => {
                 1
                 + info.size() // info: MovementInfo
@@ -257,9 +257,8 @@ impl CMSG_PET_CAST_SPELL_ClientCastFlags {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Extra {
-                elevation,
                 movement_data,
-                speed,
+                ..
             } => {
                 1
                 + 4 // elevation: f32

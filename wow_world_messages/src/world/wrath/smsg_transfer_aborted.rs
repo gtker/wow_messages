@@ -193,19 +193,19 @@ impl SMSG_TRANSFER_ABORTED_TransferAbortReason {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::InsufficientExpansionLevel {
-                difficulty,
+                ..
             } => {
                 1
                 + 1 // difficulty: DungeonDifficulty
             }
             Self::DifficultyNotAvailable {
-                difficulty,
+                ..
             } => {
                 1
                 + 1 // difficulty: DungeonDifficulty
             }
             Self::UniqueMessage {
-                difficulty,
+                ..
             } => {
                 1
                 + 1 // difficulty: DungeonDifficulty

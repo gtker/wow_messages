@@ -306,19 +306,19 @@ impl MovementInfo_MovementFlags_Swimming {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Swimming {
-                pitch1,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 4 // pitch1: f32
             }
             Self::Flying {
-                pitch2,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 4 // pitch2: f32
             }
             Self::AlwaysAllowPitching {
-                pitch3,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 4 // pitch3: f32
@@ -353,7 +353,7 @@ impl MovementInfo_MovementFlags_OnTransportAndInterpolatedMovement {
         match self {
             Self::OnTransportAndInterpolatedMovement {
                 transport_info,
-                transport_time,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 transport_info.size() // transport_info: TransportInfo

@@ -364,9 +364,8 @@ impl CMSG_GMTICKET_CREATE_GmTicketType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::BehaviorHarassment {
-                chat_data_line_count,
-                chat_data_size_uncompressed,
                 compressed_chat_data,
+                ..
             } => {
                 1
                 + 4 // chat_data_line_count: u32

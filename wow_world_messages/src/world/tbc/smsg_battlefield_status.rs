@@ -252,22 +252,20 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::WaitQueue {
-                average_wait_time_in_ms,
-                time_in_queue_in_ms,
+                ..
             } => {
                 1
                 + 4 // average_wait_time_in_ms: u32
                 + 4 // time_in_queue_in_ms: u32
             }
             Self::WaitJoin {
-                time_to_remove_in_queue_in_ms,
+                ..
             } => {
                 1
                 + 4 // time_to_remove_in_queue_in_ms: u32
             }
             Self::InProgress {
-                time_to_bg_autoleave_in_ms,
-                time_to_bg_start_in_ms,
+                ..
             } => {
                 1
                 + 4 // time_to_bg_autoleave_in_ms: u32

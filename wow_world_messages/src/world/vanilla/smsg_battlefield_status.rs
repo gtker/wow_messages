@@ -4472,22 +4472,20 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::WaitQueue {
-                average_wait_time_in_ms,
-                time_in_queue_in_ms,
+                ..
             } => {
                 1
                 + 4 // average_wait_time_in_ms: u32
                 + 4 // time_in_queue_in_ms: u32
             }
             Self::WaitJoin {
-                time_to_remove_in_queue_in_ms,
+                ..
             } => {
                 1
                 + 4 // time_to_remove_in_queue_in_ms: u32
             }
             Self::InProgress {
-                time_to_bg_autoleave_in_ms,
-                time_to_bg_start_in_ms,
+                ..
             } => {
                 1
                 + 4 // time_to_bg_autoleave_in_ms: u32
@@ -4781,9 +4779,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Kalimdor {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4791,9 +4788,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::Testing {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4801,9 +4797,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::ScottTest {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4811,9 +4806,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::CashTest {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4821,9 +4815,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::AlteracValley {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4831,9 +4824,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::ShadowfangKeep {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4841,9 +4833,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::StormwindStockade {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4851,9 +4842,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::StormwindPrison {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4861,9 +4851,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::Deadmines {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4871,9 +4860,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::AzsharaCrater {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4881,9 +4869,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::CollinsTest {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4891,9 +4878,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::WailingCaverns {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4901,9 +4887,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::MonasteryUnused {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4911,9 +4896,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::RazorfenKraul {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4921,9 +4905,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::BlackfathomDeeps {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4931,9 +4914,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::Uldaman {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4941,9 +4923,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::Gnomeregan {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4951,9 +4932,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::SunkenTemple {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4961,9 +4941,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::RazorfenDowns {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4971,9 +4950,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::EmeraldDream {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4981,9 +4959,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::ScarletMonastery {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -4991,9 +4968,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::ZulFarrak {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5001,9 +4977,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::BlackrockSpire {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5011,9 +4986,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::BlackrockDepths {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5021,9 +4995,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::OnyxiasLair {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5031,9 +5004,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::OpeningOfTheDarkPortal {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5041,9 +5013,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::Scholomance {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5051,9 +5022,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::ZulGurub {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5061,9 +5031,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::Stratholme {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5071,9 +5040,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::Maraudon {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5081,9 +5049,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::DeeprunTram {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5091,9 +5058,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::RagefireChasm {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5101,9 +5067,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::MoltenCore {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5111,9 +5076,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::DireMaul {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5121,9 +5085,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::AlliancePvpBarracks {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5131,9 +5094,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::HordePvpBarracks {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5141,9 +5103,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::DevelopmentLand {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5151,9 +5112,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::BlackwingLair {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5161,9 +5121,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::WarsongGulch {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5171,9 +5130,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::RuinsOfAhnQiraj {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5181,9 +5139,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::ArathiBasin {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5191,9 +5148,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::AhnQirajTemple {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket
@@ -5201,9 +5157,8 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
                 + status_id.size() // status_id: SMSG_BATTLEFIELD_STATUS_StatusId
             }
             Self::Naxxramas {
-                bracket,
-                client_instance_id,
                 status_id,
+                ..
             } => {
                 4
                 + 1 // bracket: BattlegroundBracket

@@ -123,6 +123,44 @@ impl RustType {
         }
     }
 
+    pub(crate) fn size_requires_variable(&self) -> bool {
+        match self {
+            RustType::Integer(_)
+            | RustType::Bool(_)
+            | RustType::DateTime
+            | RustType::Floating
+            | RustType::Guid
+            | RustType::IpAddress
+            | RustType::Seconds
+            | RustType::Milliseconds
+            | RustType::Gold
+            | RustType::Level
+            | RustType::Level16
+            | RustType::Level32 => false,
+
+            RustType::UpdateMask { .. }
+            | RustType::AuraMask
+            | RustType::NamedGuid
+            | RustType::PackedGuid
+            | RustType::String
+            | RustType::CString
+            | RustType::SizedCString
+            | RustType::MonsterMoveSpline
+            | RustType::AchievementDoneArray
+            | RustType::AchievementInProgressArray
+            | RustType::EnchantMask
+            | RustType::InspectTalentGearMask
+            | RustType::VariableItemRandomProperty
+            | RustType::AddonArray => true,
+
+            RustType::Array { array, .. } => !array.is_constant(),
+
+            RustType::Enum { is_simple, .. } | RustType::Flag { is_simple, .. } => !*is_simple,
+
+            RustType::Struct { sizes, .. } => sizes.is_constant().is_none(),
+        }
+    }
+
     pub(crate) fn size_is_const_fn(&self) -> bool {
         match self {
             RustType::Array {

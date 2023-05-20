@@ -157,10 +157,7 @@ impl SMSG_ITEM_REFUND_RESULT_ItemRefundResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Success {
-                arena_point_cost,
-                cost,
-                extra_items,
-                honor_point_cost,
+                ..
             } => {
                 1
                 + 4 // arena_point_cost: u32

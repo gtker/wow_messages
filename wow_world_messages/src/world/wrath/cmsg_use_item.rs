@@ -256,7 +256,7 @@ impl CMSG_USE_ITEM_ClientMovementData {
             Self::Present {
                 guid,
                 info,
-                opcode,
+                ..
             } => {
                 1
                 + guid.size() // guid: PackedGuid
@@ -299,9 +299,8 @@ impl CMSG_USE_ITEM_ClientCastFlags {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Extra {
-                elevation,
                 movement_data,
-                speed,
+                ..
             } => {
                 1
                 + 4 // elevation: f32

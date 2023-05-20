@@ -182,7 +182,7 @@ impl SMSG_LOOT_RESPONSE_LootMethod {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::ErrorX {
-                loot_error,
+                ..
             } => {
                 1
                 + 1 // loot_error: LootMethodError

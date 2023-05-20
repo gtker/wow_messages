@@ -269,7 +269,7 @@ impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame {
         match self {
             Self::Engage {
                 guid,
-                parameter1,
+                ..
             } => {
                 4
                 + guid.size() // guid: PackedGuid
@@ -277,7 +277,7 @@ impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame {
             }
             Self::Disengage {
                 guid,
-                parameter1,
+                ..
             } => {
                 4
                 + guid.size() // guid: PackedGuid
@@ -285,34 +285,33 @@ impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame {
             }
             Self::UpdatePriority {
                 guid,
-                parameter1,
+                ..
             } => {
                 4
                 + guid.size() // guid: PackedGuid
                 + 1 // parameter1: u8
             }
             Self::AddTimer {
-                parameter2,
+                ..
             } => {
                 4
                 + 1 // parameter2: u8
             }
             Self::EnableObjective {
-                parameter2,
+                ..
             } => {
                 4
                 + 1 // parameter2: u8
             }
             Self::UpdateObjective {
-                parameter3,
-                parameter4,
+                ..
             } => {
                 4
                 + 1 // parameter3: u8
                 + 1 // parameter4: u8
             }
             Self::DisableObjective {
-                parameter2,
+                ..
             } => {
                 4
                 + 1 // parameter2: u8

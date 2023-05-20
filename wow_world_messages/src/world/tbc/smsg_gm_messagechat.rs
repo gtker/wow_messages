@@ -2900,10 +2900,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::System {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -2912,10 +2911,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Say {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -2924,10 +2922,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Party {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -2936,10 +2933,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Raid {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -2948,10 +2944,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Guild {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -2960,10 +2955,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Officer {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -2972,10 +2966,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Yell {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -2984,10 +2977,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Whisper {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -2996,10 +2988,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::WhisperInform {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3008,10 +2999,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Reply {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3020,10 +3010,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Emote {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3032,10 +3021,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::TextEmote {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3044,10 +3032,10 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::MonsterSay {
-                chat_tag1,
                 message1,
                 sender,
                 target1,
+                ..
             } => {
                 1
                 + 1 // chat_tag1: PlayerChatTag
@@ -3056,10 +3044,10 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + target1.size() // target1: NamedGuid
             }
             Self::MonsterParty {
-                chat_tag1,
                 message1,
                 sender,
                 target1,
+                ..
             } => {
                 1
                 + 1 // chat_tag1: PlayerChatTag
@@ -3068,10 +3056,10 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + target1.size() // target1: NamedGuid
             }
             Self::MonsterYell {
-                chat_tag1,
                 message1,
                 sender,
                 target1,
+                ..
             } => {
                 1
                 + 1 // chat_tag1: PlayerChatTag
@@ -3080,10 +3068,10 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + target1.size() // target1: NamedGuid
             }
             Self::MonsterWhisper {
-                chat_tag1,
                 message1,
                 sender,
                 target1,
+                ..
             } => {
                 1
                 + 1 // chat_tag1: PlayerChatTag
@@ -3092,10 +3080,10 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + target1.size() // target1: NamedGuid
             }
             Self::MonsterEmote {
-                chat_tag1,
                 message1,
                 sender,
                 target1,
+                ..
             } => {
                 1
                 + 1 // chat_tag1: PlayerChatTag
@@ -3105,9 +3093,8 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Channel {
                 channel_name,
-                chat_tag3,
                 message3,
-                target4,
+                ..
             } => {
                 1
                 + channel_name.len() + 1 // channel_name: CString
@@ -3116,10 +3103,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target4: Guid
             }
             Self::ChannelJoin {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3128,10 +3114,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::ChannelLeave {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3140,10 +3125,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::ChannelList {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3152,10 +3136,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::ChannelNotice {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3164,10 +3147,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::ChannelNoticeUser {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3176,10 +3158,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Afk {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3188,10 +3169,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Dnd {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3200,10 +3180,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Ignored {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3212,10 +3191,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Skill {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3224,10 +3202,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Loot {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3236,10 +3213,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Money {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3248,10 +3224,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Opening {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3260,10 +3235,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Tradeskills {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3272,10 +3246,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::PetInfo {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3284,10 +3257,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::CombatMiscInfo {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3296,10 +3268,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::CombatXpGain {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3308,10 +3279,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::CombatHonorGain {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3320,10 +3290,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::CombatFactionChange {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3332,9 +3301,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::BgSystemNeutral {
-                chat_tag2,
                 message2,
                 target2,
+                ..
             } => {
                 1
                 + 1 // chat_tag2: PlayerChatTag
@@ -3342,9 +3311,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + target2.size() // target2: NamedGuid
             }
             Self::BgSystemAlliance {
-                chat_tag2,
                 message2,
                 target2,
+                ..
             } => {
                 1
                 + 1 // chat_tag2: PlayerChatTag
@@ -3352,9 +3321,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + target2.size() // target2: NamedGuid
             }
             Self::BgSystemHorde {
-                chat_tag2,
                 message2,
                 target2,
+                ..
             } => {
                 1
                 + 1 // chat_tag2: PlayerChatTag
@@ -3362,10 +3331,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + target2.size() // target2: NamedGuid
             }
             Self::RaidLeader {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3374,10 +3342,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::RaidWarning {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3386,10 +3353,10 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::RaidBossWhisper {
-                chat_tag1,
                 message1,
                 sender,
                 target1,
+                ..
             } => {
                 1
                 + 1 // chat_tag1: PlayerChatTag
@@ -3398,10 +3365,10 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + target1.size() // target1: NamedGuid
             }
             Self::RaidBossEmote {
-                chat_tag1,
                 message1,
                 sender,
                 target1,
+                ..
             } => {
                 1
                 + 1 // chat_tag1: PlayerChatTag
@@ -3410,10 +3377,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + target1.size() // target1: NamedGuid
             }
             Self::Filtered {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3422,10 +3388,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Battleground {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3434,10 +3399,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::BattlegroundLeader {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag
@@ -3446,10 +3410,9 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + 8 // target5: Guid
             }
             Self::Restricted {
-                chat_tag4,
                 message4,
                 sender_name,
-                target5,
+                ..
             } => {
                 1
                 + 1 // chat_tag4: PlayerChatTag

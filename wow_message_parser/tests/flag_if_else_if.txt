@@ -289,7 +289,7 @@ impl FlagIfElseIf_UpdateFlag_OneIf {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::OneIf {
-                b_if,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 1 // b_if: u8
@@ -301,7 +301,7 @@ impl FlagIfElseIf_UpdateFlag_OneIf {
                 s.size() // s: FlagIfElseIf_SimpleFlag
             }
             Self::FourElseif {
-                elseif2,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 1 // elseif2: u8

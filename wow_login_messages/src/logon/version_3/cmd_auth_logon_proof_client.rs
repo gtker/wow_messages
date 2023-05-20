@@ -409,8 +409,7 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Pin {
-                pin_hash,
-                pin_salt,
+                ..
             } => {
                 1
                 + 20 // pin_hash: u8[20]

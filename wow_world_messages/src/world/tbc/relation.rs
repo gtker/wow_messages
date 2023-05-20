@@ -181,9 +181,7 @@ impl Relation_FriendStatus {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Online {
-                area,
-                class,
-                level,
+                ..
             } => {
                 1
                 + 4 // area: Area

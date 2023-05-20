@@ -469,10 +469,7 @@ impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Success {
-                account_flag,
-                hardware_survey_id,
-                server_proof,
-                unknown_flags,
+                ..
             } => {
                 1
                 + 4 // account_flag: AccountFlag

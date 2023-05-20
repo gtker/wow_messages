@@ -123,8 +123,8 @@ impl SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::HasText {
-                item,
                 text,
+                ..
             } => {
                 1
                 + 8 // item: Guid

@@ -330,8 +330,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Success {
-                challenge_data,
-                checksum_salt,
+                ..
             } => {
                 1
                 + 16 // challenge_data: u8[16]

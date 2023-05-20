@@ -136,7 +136,7 @@ impl SpellMiss_SpellMissInfo {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Reflect {
-                reflect_result,
+                ..
             } => {
                 4
                 + 1 // reflect_result: u8

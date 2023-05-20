@@ -2425,7 +2425,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
         match self {
             Self::System {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2433,7 +2433,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Say {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2441,7 +2441,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Party {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2449,7 +2449,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Raid {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2457,7 +2457,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Guild {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2465,7 +2465,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Officer {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2473,7 +2473,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Yell {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2481,7 +2481,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Whisper {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2489,7 +2489,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::WhisperForeign {
                 sender2,
-                target2,
+                ..
             } => {
                 1
                 + sender2.len() + 5 // sender2: SizedCString
@@ -2497,7 +2497,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::WhisperInform {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2505,7 +2505,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Emote {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2513,7 +2513,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::TextEmote {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2561,7 +2561,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Channel {
                 channel_name,
-                target5,
+                ..
             } => {
                 1
                 + channel_name.len() + 1 // channel_name: CString
@@ -2569,7 +2569,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::ChannelJoin {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2577,7 +2577,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::ChannelLeave {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2585,7 +2585,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::ChannelList {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2593,7 +2593,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::ChannelNotice {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2601,7 +2601,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::ChannelNoticeUser {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2609,7 +2609,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Afk {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2617,7 +2617,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Dnd {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2625,7 +2625,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Ignored {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2633,7 +2633,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Skill {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2641,7 +2641,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Loot {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2649,7 +2649,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Money {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2657,7 +2657,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Opening {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2665,7 +2665,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Tradeskills {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2673,7 +2673,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::PetInfo {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2681,7 +2681,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::CombatMiscInfo {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2689,7 +2689,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::CombatXpGain {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2697,7 +2697,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::CombatHonorGain {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2705,7 +2705,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::CombatFactionChange {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2731,7 +2731,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::RaidLeader {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2739,7 +2739,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::RaidWarning {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2763,7 +2763,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Filtered {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2771,7 +2771,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Battleground {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2779,7 +2779,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::BattlegroundLeader {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2787,7 +2787,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::Restricted {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2802,16 +2802,14 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
                 + target1.size() // target1: NamedGuid
             }
             Self::Achievement {
-                achievement_id,
-                target4,
+                ..
             } => {
                 1
                 + 4 // achievement_id: u32
                 + 8 // target4: Guid
             }
             Self::GuildAchievement {
-                achievement_id,
-                target4,
+                ..
             } => {
                 1
                 + 4 // achievement_id: u32
@@ -2819,7 +2817,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::ArenaPoints {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString
@@ -2827,7 +2825,7 @@ impl SMSG_GM_MESSAGECHAT_ChatType {
             }
             Self::PartyLeader {
                 sender_name,
-                target6,
+                ..
             } => {
                 1
                 + sender_name.len() + 5 // sender_name: SizedCString

@@ -348,10 +348,7 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Manual {
-                bank_to_character_transfer,
-                player_bag,
-                player_bag_slot,
-                split_amount,
+                ..
             } => {
                 1
                 + 1 // bank_to_character_transfer: Bool
@@ -360,9 +357,7 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode {
                 + 1 // split_amount: u8
             }
             Self::Automatic {
-                auto_count,
-                unknown3,
-                unknown4,
+                ..
             } => {
                 1
                 + 4 // auto_count: u32
@@ -419,10 +414,8 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Inventory {
-                bank_slot,
-                bank_tab,
-                item2,
                 mode,
+                ..
             } => {
                 1
                 + 1 // bank_slot: u8
@@ -431,14 +424,7 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource {
                 + mode.size() // mode: CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode
             }
             Self::Bank {
-                amount,
-                bank_destination_slot,
-                bank_destination_tab,
-                bank_source_slot,
-                bank_source_tab,
-                item1,
-                unknown1,
-                unknown2,
+                ..
             } => {
                 1
                 + 1 // amount: u8

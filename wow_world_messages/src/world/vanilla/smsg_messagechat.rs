@@ -963,81 +963,77 @@ impl SMSG_MESSAGECHAT_ChatType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::Say {
-                chat_credit,
-                speech_bubble_credit,
+                ..
             } => {
                 1
                 + 8 // chat_credit: Guid
                 + 8 // speech_bubble_credit: Guid
             }
             Self::Party {
-                chat_credit,
-                speech_bubble_credit,
+                ..
             } => {
                 1
                 + 8 // chat_credit: Guid
                 + 8 // speech_bubble_credit: Guid
             }
             Self::Raid {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::Guild {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::Officer {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::Yell {
-                chat_credit,
-                speech_bubble_credit,
+                ..
             } => {
                 1
                 + 8 // chat_credit: Guid
                 + 8 // speech_bubble_credit: Guid
             }
             Self::Whisper {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::WhisperInform {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::Emote {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::TextEmote {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::System {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::MonsterSay {
-                sender1,
                 sender_name,
-                target,
+                ..
             } => {
                 1
                 + 8 // sender1: Guid
@@ -1045,9 +1041,8 @@ impl SMSG_MESSAGECHAT_ChatType {
                 + 8 // target: Guid
             }
             Self::MonsterYell {
-                sender1,
                 sender_name,
-                target,
+                ..
             } => {
                 1
                 + 8 // sender1: Guid
@@ -1055,8 +1050,8 @@ impl SMSG_MESSAGECHAT_ChatType {
                 + 8 // target: Guid
             }
             Self::MonsterEmote {
-                monster,
                 monster_name,
+                ..
             } => {
                 1
                 + 8 // monster: Guid
@@ -1064,8 +1059,7 @@ impl SMSG_MESSAGECHAT_ChatType {
             }
             Self::Channel {
                 channel_name,
-                player,
-                player_rank,
+                ..
             } => {
                 1
                 + channel_name.len() + 1 // channel_name: CString
@@ -1073,125 +1067,125 @@ impl SMSG_MESSAGECHAT_ChatType {
                 + 4 // player_rank: u32
             }
             Self::ChannelJoin {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::ChannelLeave {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::ChannelList {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::ChannelNotice {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::ChannelNoticeUser {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::Afk {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::Dnd {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::Ignored {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::Skill {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::Loot {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::MonsterWhisper {
-                monster,
                 monster_name,
+                ..
             } => {
                 1
                 + 8 // monster: Guid
                 + monster_name.len() + 5 // monster_name: SizedCString
             }
             Self::BgSystemNeutral {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::BgSystemAlliance {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::BgSystemHorde {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::RaidLeader {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::RaidWarning {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::RaidBossWhisper {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::RaidBossEmote {
-                monster,
                 monster_name,
+                ..
             } => {
                 1
                 + 8 // monster: Guid
                 + monster_name.len() + 5 // monster_name: SizedCString
             }
             Self::Battleground {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid
             }
             Self::BattlegroundLeader {
-                sender2,
+                ..
             } => {
                 1
                 + 8 // sender2: Guid

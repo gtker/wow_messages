@@ -322,17 +322,14 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::WaitQueue {
-                average_wait_time_in_ms,
-                time_in_queue_in_ms,
+                ..
             } => {
                 1
                 + 4 // average_wait_time_in_ms: u32
                 + 4 // time_in_queue_in_ms: u32
             }
             Self::WaitJoin {
-                map1,
-                time_to_remove_in_queue_in_ms,
-                unknown2,
+                ..
             } => {
                 1
                 + 4 // map1: Map
@@ -340,11 +337,7 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
                 + 8 // unknown2: u64
             }
             Self::InProgress {
-                faction,
-                map2,
-                time_to_bg_autoleave_in_ms,
-                time_to_bg_start_in_ms,
-                unknown3,
+                ..
             } => {
                 1
                 + 1 // faction: ArenaFaction

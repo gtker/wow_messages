@@ -205,9 +205,7 @@ impl CMSG_COMPLAIN_SpamType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::Mail {
-                mail_id,
-                unknown1,
-                unknown2,
+                ..
             } => {
                 1
                 + 4 // mail_id: u32
@@ -215,11 +213,8 @@ impl CMSG_COMPLAIN_SpamType {
                 + 4 // unknown2: u32
             }
             Self::Chat {
-                channel_id,
                 description,
-                language,
-                message_type,
-                time,
+                ..
             } => {
                 1
                 + 4 // channel_id: u32

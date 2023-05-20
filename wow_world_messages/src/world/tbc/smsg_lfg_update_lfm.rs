@@ -107,7 +107,7 @@ impl SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::LookingForMore {
-                data,
+                ..
             } => {
                 1
                 + 4 // data: LfgData

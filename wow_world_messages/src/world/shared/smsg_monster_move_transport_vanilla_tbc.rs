@@ -228,19 +228,19 @@ impl SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::FacingSpot {
-                position,
+                ..
             } => {
                 1
                 + 12 // position: Vector3d
             }
             Self::FacingTarget {
-                target,
+                ..
             } => {
                 1
                 + 8 // target: Guid
             }
             Self::FacingAngle {
-                angle,
+                ..
             } => {
                 1
                 + 4 // angle: f32

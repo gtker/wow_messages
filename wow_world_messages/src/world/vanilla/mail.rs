@@ -356,25 +356,25 @@ impl Mail_MailType {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Normal {
-                sender,
+                ..
             } => {
                 1
                 + 8 // sender: Guid
             }
             Self::Auction {
-                auction_id,
+                ..
             } => {
                 1
                 + 4 // auction_id: u32
             }
             Self::Creature {
-                sender_id,
+                ..
             } => {
                 1
                 + 4 // sender_id: u32
             }
             Self::Gameobject {
-                sender_id,
+                ..
             } => {
                 1
                 + 4 // sender_id: u32

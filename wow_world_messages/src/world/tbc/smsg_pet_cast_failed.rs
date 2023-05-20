@@ -740,9 +740,7 @@ impl SMSG_PET_CAST_FAILED_SpellCastResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::EquippedItemClass {
-                item_class,
-                item_inventory_type,
-                item_sub_class,
+                ..
             } => {
                 1
                 + 4 // item_class: u32
@@ -750,25 +748,25 @@ impl SMSG_PET_CAST_FAILED_SpellCastResult {
                 + 4 // item_sub_class: u32
             }
             Self::RequiresArea {
-                area,
+                ..
             } => {
                 1
                 + 4 // area: Area
             }
             Self::RequiresSpellFocus {
-                spell_focus,
+                ..
             } => {
                 1
                 + 4 // spell_focus: u32
             }
             Self::TotemCategory {
-                totem_categories,
+                ..
             } => {
                 1
                 + 8 // totem_categories: u32[2]
             }
             Self::Totems {
-                totems,
+                ..
             } => {
                 1
                 + 8 // totems: u32[2]

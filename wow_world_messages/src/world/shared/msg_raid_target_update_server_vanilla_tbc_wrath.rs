@@ -140,13 +140,13 @@ impl MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Partial {
-                raid_target,
+                ..
             } => {
                 1
                 + 9 // raid_target: RaidTargetUpdate
             }
             Self::Full {
-                raid_targets,
+                ..
             } => {
                 1
                 + 8 * 9 // raid_targets: RaidTargetUpdate[8]

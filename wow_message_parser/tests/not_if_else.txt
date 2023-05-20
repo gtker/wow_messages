@@ -134,19 +134,19 @@ impl SimpleIfNotEnumElse_SimpleEnum {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Zero {
-                zero,
+                ..
             } => {
                 1
                 + 2 // zero: u16
             }
             Self::One {
-                others,
+                ..
             } => {
                 1
                 + 1 // others: u8
             }
             Self::Two {
-                others,
+                ..
             } => {
                 1
                 + 1 // others: u8

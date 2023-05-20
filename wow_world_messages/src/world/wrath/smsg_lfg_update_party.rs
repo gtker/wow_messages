@@ -189,12 +189,9 @@ impl SMSG_LFG_UPDATE_PARTY_LfgJoinStatus {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::Joined {
-                achievements,
                 comment,
                 dungeons,
-                joined,
-                no_partial_clear,
-                queued,
+                ..
             } => {
                 1
                 + 1 // achievements: u8

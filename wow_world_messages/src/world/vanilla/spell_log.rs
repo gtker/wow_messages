@@ -1357,16 +1357,13 @@ impl SpellLog_SpellEffect {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Instakill {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::PowerDrain {
-                amount,
-                multiplier,
-                power,
-                target1,
+                ..
             } => {
                 4
                 + 4 // amount: u32
@@ -1375,9 +1372,7 @@ impl SpellLog_SpellEffect {
                 + 8 // target1: Guid
             }
             Self::Heal {
-                heal_amount,
-                heal_critical,
-                target2,
+                ..
             } => {
                 4
                 + 4 // heal_amount: u32
@@ -1385,35 +1380,32 @@ impl SpellLog_SpellEffect {
                 + 8 // target2: Guid
             }
             Self::Resurrect {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::AddExtraAttacks {
-                extra_attacks,
-                target4,
+                ..
             } => {
                 4
                 + 4 // extra_attacks: u32
                 + 8 // target4: Guid
             }
             Self::CreateItem {
-                item,
+                ..
             } => {
                 4
                 + 4 // item: u32
             }
             Self::Summon {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::Energize {
-                energize_amount,
-                energize_power,
-                target3,
+                ..
             } => {
                 4
                 + 4 // energize_amount: u32
@@ -1421,57 +1413,55 @@ impl SpellLog_SpellEffect {
                 + 8 // target3: Guid
             }
             Self::OpenLock {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::Dispel {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonWild {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonGuardian {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::TransDoor {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonPet {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::OpenLockItem {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::Threat {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::HealMaxHealth {
-                heal_amount,
-                heal_critical,
-                target2,
+                ..
             } => {
                 4
                 + 4 // heal_amount: u32
@@ -1479,125 +1469,122 @@ impl SpellLog_SpellEffect {
                 + 8 // target2: Guid
             }
             Self::InterruptCast {
-                interrupted_spell,
-                target5,
+                ..
             } => {
                 4
                 + 4 // interrupted_spell: u32
                 + 8 // target5: Guid
             }
             Self::Distract {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonPossessed {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonTotem {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonObjectWild {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::Sanctuary {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonTotemSlot1 {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonTotemSlot2 {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonTotemSlot3 {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonTotemSlot4 {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::ThreatAll {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonCritter {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::FeedPet {
-                feed_pet_item,
+                ..
             } => {
                 4
                 + 4 // feed_pet_item: u32
             }
             Self::DismissPet {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonObjectSlot1 {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonObjectSlot2 {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonObjectSlot3 {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SummonObjectSlot4 {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::DispelMechanic {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::DurabilityDamage {
-                item_to_damage,
-                target6,
-                unknown5,
+                ..
             } => {
                 4
                 + 4 // item_to_damage: u32
@@ -1605,37 +1592,37 @@ impl SpellLog_SpellEffect {
                 + 4 // unknown5: u32
             }
             Self::SummonDemon {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::ResurrectNew {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::AttackMe {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::SkinPlayerCorpse {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::ModifyThreatPercent {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid
             }
             Self::Unknown126 {
-                target7,
+                ..
             } => {
                 4
                 + 8 // target7: Guid

@@ -409,8 +409,8 @@ impl SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent {
         match self {
             Self::Join {
                 arena_team_name1,
-                joiner,
                 joiner_name,
+                ..
             } => {
                 1
                 + arena_team_name1.len() + 1 // arena_team_name1: CString
@@ -418,8 +418,8 @@ impl SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent {
                 + joiner_name.len() + 1 // joiner_name: CString
             }
             Self::Leave {
-                leaver,
                 leaver_name,
+                ..
             } => {
                 1
                 + 8 // leaver: Guid

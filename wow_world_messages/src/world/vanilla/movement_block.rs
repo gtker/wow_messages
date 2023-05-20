@@ -585,19 +585,19 @@ impl MovementBlock_SplineFlag_FinalAngle {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::FinalAngle {
-                angle,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 4 // angle: f32
             }
             Self::FinalTarget {
-                target,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 8 // target: u64
             }
             Self::FinalPoint {
-                spline_final_point,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 12 // spline_final_point: Vector3d
@@ -2199,17 +2199,8 @@ impl MovementBlock_UpdateFlag_Living {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::Living {
-                backwards_running_speed,
-                backwards_swimming_speed,
-                fall_time,
                 flags,
-                living_orientation,
-                living_position,
-                running_speed,
-                swimming_speed,
-                timestamp,
-                turn_rate,
-                walking_speed,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 4 // backwards_running_speed: f32
@@ -2225,8 +2216,7 @@ impl MovementBlock_UpdateFlag_Living {
                 + 4 // walking_speed: f32
             }
             Self::HasPosition {
-                orientation,
-                position,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 4 // orientation: f32

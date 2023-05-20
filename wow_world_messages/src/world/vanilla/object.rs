@@ -328,7 +328,7 @@ impl Object_UpdateType {
                 guid3,
                 mask2,
                 movement2,
-                object_type,
+                ..
             } => {
                 1
                 + guid3.size() // guid3: PackedGuid
@@ -340,7 +340,7 @@ impl Object_UpdateType {
                 guid3,
                 mask2,
                 movement2,
-                object_type,
+                ..
             } => {
                 1
                 + guid3.size() // guid3: PackedGuid

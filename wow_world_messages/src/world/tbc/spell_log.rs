@@ -969,10 +969,8 @@ impl SpellLog_SpellEffect {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::PowerDrain {
-                amount,
-                multiplier,
-                power,
                 target1,
+                ..
             } => {
                 4
                 + 4 // amount: u32
@@ -981,15 +979,15 @@ impl SpellLog_SpellEffect {
                 + target1.size() // target1: PackedGuid
             }
             Self::AddExtraAttacks {
-                extra_attacks,
                 target4,
+                ..
             } => {
                 4
                 + 4 // extra_attacks: u32
                 + target4.size() // target4: PackedGuid
             }
             Self::CreateItem {
-                item,
+                ..
             } => {
                 4
                 + 4 // item: u32
@@ -1025,8 +1023,8 @@ impl SpellLog_SpellEffect {
                 + lock_target.size() // lock_target: PackedGuid
             }
             Self::InterruptCast {
-                interrupted_spell,
                 target5,
+                ..
             } => {
                 4
                 + 4 // interrupted_spell: u32
@@ -1087,9 +1085,8 @@ impl SpellLog_SpellEffect {
                 + summon_target.size() // summon_target: PackedGuid
             }
             Self::DurabilityDamage {
-                item_to_damage,
                 target6,
-                unknown5,
+                ..
             } => {
                 4
                 + 4 // item_to_damage: u32

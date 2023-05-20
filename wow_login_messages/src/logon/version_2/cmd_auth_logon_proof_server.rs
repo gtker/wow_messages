@@ -316,8 +316,7 @@ impl CMD_AUTH_LOGON_PROOF_Server_LoginResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Success {
-                hardware_survey_id,
-                server_proof,
+                ..
             } => {
                 1
                 + 4 // hardware_survey_id: u32

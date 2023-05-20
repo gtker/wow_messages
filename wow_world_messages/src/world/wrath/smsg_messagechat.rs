@@ -1792,75 +1792,75 @@ impl SMSG_MESSAGECHAT_ChatType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::System {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Say {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Party {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Raid {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Guild {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Officer {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Yell {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Whisper {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::WhisperForeign {
                 sender2,
-                target2,
+                ..
             } => {
                 1
                 + sender2.len() + 5 // sender2: SizedCString
                 + 8 // target2: Guid
             }
             Self::WhisperInform {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Emote {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::TextEmote {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
@@ -1907,116 +1907,116 @@ impl SMSG_MESSAGECHAT_ChatType {
             }
             Self::Channel {
                 channel_name,
-                target5,
+                ..
             } => {
                 1
                 + channel_name.len() + 1 // channel_name: CString
                 + 8 // target5: Guid
             }
             Self::ChannelJoin {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::ChannelLeave {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::ChannelList {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::ChannelNotice {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::ChannelNoticeUser {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Afk {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Dnd {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Ignored {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Skill {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Loot {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Money {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Opening {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Tradeskills {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::PetInfo {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::CombatMiscInfo {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::CombatXpGain {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::CombatHonorGain {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::CombatFactionChange {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
@@ -2040,13 +2040,13 @@ impl SMSG_MESSAGECHAT_ChatType {
                 + target3.size() // target3: NamedGuid
             }
             Self::RaidLeader {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::RaidWarning {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
@@ -2068,25 +2068,25 @@ impl SMSG_MESSAGECHAT_ChatType {
                 + target1.size() // target1: NamedGuid
             }
             Self::Filtered {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Battleground {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::BattlegroundLeader {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::Restricted {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
@@ -2100,29 +2100,27 @@ impl SMSG_MESSAGECHAT_ChatType {
                 + target1.size() // target1: NamedGuid
             }
             Self::Achievement {
-                achievement_id,
-                target4,
+                ..
             } => {
                 1
                 + 4 // achievement_id: u32
                 + 8 // target4: Guid
             }
             Self::GuildAchievement {
-                achievement_id,
-                target4,
+                ..
             } => {
                 1
                 + 4 // achievement_id: u32
                 + 8 // target4: Guid
             }
             Self::ArenaPoints {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid
             }
             Self::PartyLeader {
-                target6,
+                ..
             } => {
                 1
                 + 8 // target6: Guid

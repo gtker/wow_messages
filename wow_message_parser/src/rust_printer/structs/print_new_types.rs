@@ -413,7 +413,17 @@ fn print_size_for_new_enum(s: &mut Writer, re: &RustDefiner) {
                     s.open_curly(format!("Self::{name}"));
 
                     for m in enumerator.members_in_struct() {
-                        s.wln(format!("{},", m.name()));
+                        if m.ty().size_requires_variable() {
+                            s.wln(format!("{},", m.name()));
+                        }
+                    }
+
+                    if enumerator
+                        .members_in_struct()
+                        .iter()
+                        .any(|a| !a.ty().size_requires_variable())
+                    {
+                        s.wln("..");
                     }
 
                     s.closing_curly_with(" => {");

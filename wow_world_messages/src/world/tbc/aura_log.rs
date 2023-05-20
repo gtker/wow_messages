@@ -1081,10 +1081,7 @@ impl AuraLog_AuraType {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::PeriodicDamage {
-                absorbed,
-                damage1,
-                resisted,
-                school,
+                ..
             } => {
                 4
                 + 4 // absorbed: u32
@@ -1093,37 +1090,33 @@ impl AuraLog_AuraType {
                 + 1 // school: SpellSchool
             }
             Self::PeriodicHeal {
-                damage2,
+                ..
             } => {
                 4
                 + 4 // damage2: u32
             }
             Self::ObsModHealth {
-                damage2,
+                ..
             } => {
                 4
                 + 4 // damage2: u32
             }
             Self::ObsModMana {
-                damage3,
-                misc_value1,
+                ..
             } => {
                 4
                 + 4 // damage3: u32
                 + 4 // misc_value1: u32
             }
             Self::PeriodicEnergize {
-                damage3,
-                misc_value1,
+                ..
             } => {
                 4
                 + 4 // damage3: u32
                 + 4 // misc_value1: u32
             }
             Self::PeriodicManaLeech {
-                damage,
-                gain_multiplier,
-                misc_value2,
+                ..
             } => {
                 4
                 + 4 // damage: u32
@@ -1131,10 +1124,7 @@ impl AuraLog_AuraType {
                 + 4 // misc_value2: u32
             }
             Self::PeriodicDamagePercent {
-                absorbed,
-                damage1,
-                resisted,
-                school,
+                ..
             } => {
                 4
                 + 4 // absorbed: u32

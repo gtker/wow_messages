@@ -133,7 +133,7 @@ impl MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Ended {
-                winner,
+                ..
             } => {
                 1
                 + 1 // winner: BattlegroundWinner

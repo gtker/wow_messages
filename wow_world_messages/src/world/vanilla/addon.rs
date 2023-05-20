@@ -391,55 +391,55 @@ impl Addon_KeyVersion {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::One {
-                public_key,
+                ..
             } => {
                 1
                 + 256 // public_key: u8[256]
             }
             Self::Two {
-                public_key,
+                ..
             } => {
                 1
                 + 256 // public_key: u8[256]
             }
             Self::Three {
-                public_key,
+                ..
             } => {
                 1
                 + 256 // public_key: u8[256]
             }
             Self::Four {
-                public_key,
+                ..
             } => {
                 1
                 + 256 // public_key: u8[256]
             }
             Self::Five {
-                public_key,
+                ..
             } => {
                 1
                 + 256 // public_key: u8[256]
             }
             Self::Six {
-                public_key,
+                ..
             } => {
                 1
                 + 256 // public_key: u8[256]
             }
             Self::Seven {
-                public_key,
+                ..
             } => {
                 1
                 + 256 // public_key: u8[256]
             }
             Self::Eight {
-                public_key,
+                ..
             } => {
                 1
                 + 256 // public_key: u8[256]
             }
             Self::Nine {
-                public_key,
+                ..
             } => {
                 1
                 + 256 // public_key: u8[256]
@@ -480,7 +480,7 @@ impl Addon_InfoBlock {
         match self {
             Self::Available {
                 key_version,
-                update_available_flag,
+                ..
             } => {
                 1
                 + key_version.size() // key_version: Addon_KeyVersion

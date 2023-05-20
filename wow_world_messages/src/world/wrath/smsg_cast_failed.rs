@@ -1021,101 +1021,96 @@ impl SMSG_CAST_FAILED_SpellCastResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::EquippedItemClass {
-                item_class,
-                item_sub_class,
+                ..
             } => {
                 1
                 + 4 // item_class: u32
                 + 4 // item_sub_class: u32
             }
             Self::EquippedItemClassMainhand {
-                item_class,
-                item_sub_class,
+                ..
             } => {
                 1
                 + 4 // item_class: u32
                 + 4 // item_sub_class: u32
             }
             Self::EquippedItemClassOffhand {
-                item_class,
-                item_sub_class,
+                ..
             } => {
                 1
                 + 4 // item_class: u32
                 + 4 // item_sub_class: u32
             }
             Self::NeedExoticAmmo {
-                equipped_item_sub_class,
+                ..
             } => {
                 1
                 + 4 // equipped_item_sub_class: u32
             }
             Self::NeedMoreItems {
-                count,
-                item,
+                ..
             } => {
                 1
                 + 4 // count: u32
                 + 4 // item: u32
             }
             Self::Reagents {
-                missing_item,
+                ..
             } => {
                 1
                 + 4 // missing_item: u32
             }
             Self::RequiresArea {
-                area,
+                ..
             } => {
                 1
                 + 4 // area: Area
             }
             Self::RequiresSpellFocus {
-                spell_focus,
+                ..
             } => {
                 1
                 + 4 // spell_focus: u32
             }
             Self::TooManyOfItem {
-                item_limit_category,
+                ..
             } => {
                 1
                 + 4 // item_limit_category: u32
             }
             Self::TotemCategory {
-                totem_categories,
+                ..
             } => {
                 1
                 + 8 // totem_categories: u32[2]
             }
             Self::Totems {
-                totems,
+                ..
             } => {
                 1
                 + 8 // totems: u32[2]
             }
             Self::PreventedByMechanic {
-                mechanic,
+                ..
             } => {
                 1
                 + 4 // mechanic: u32
             }
             Self::MinSkill {
-                skill,
-                skill_required,
+                ..
             } => {
                 1
                 + 4 // skill: Skill
                 + 4 // skill_required: u32
             }
             Self::CustomError {
-                custom_error,
+                ..
             } => {
                 1
                 + 4 // custom_error: u32
             }
             Self::FishingTooLow {
-                fishing_skill_required,
+                ..
             } => {
                 1
                 + 4 // fishing_skill_required: u32

@@ -177,13 +177,8 @@ impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::HasText {
-                days_since_last_updated,
-                days_since_oldest_ticket_creation,
-                days_since_ticket_creation,
-                escalation_status,
-                read_by_gm,
                 text,
-                ticket_type,
+                ..
             } => {
                 4
                 + 4 // days_since_last_updated: f32

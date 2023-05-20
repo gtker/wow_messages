@@ -563,8 +563,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Pin {
-                pin_grid_seed,
-                pin_salt,
+                ..
             } => {
                 1
                 + 4 // pin_grid_seed: u32
@@ -637,12 +636,10 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::Success {
-                crc_salt,
                 generator,
                 large_safe_prime,
-                salt,
                 security_flag,
-                server_public_key,
+                ..
             } => {
                 1
                 + 16 // crc_salt: u8[16]

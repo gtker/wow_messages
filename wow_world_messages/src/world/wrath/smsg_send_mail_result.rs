@@ -722,7 +722,7 @@ impl SMSG_SEND_MAIL_RESULT_MailResultTwo {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::ErrEquipError {
-                equip_error2,
+                ..
             } => {
                 4
                 + 4 // equip_error2: u32
@@ -827,110 +827,97 @@ impl SMSG_SEND_MAIL_RESULT_MailResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Ok {
-                item,
-                item_count,
+                ..
             } => {
                 4
                 + 4 // item: u32
                 + 4 // item_count: u32
             }
             Self::ErrEquipError {
-                equip_error,
+                ..
             } => {
                 4
                 + 4 // equip_error: u32
             }
             Self::ErrCannotSendToSelf {
-                item,
-                item_count,
+                ..
             } => {
                 4
                 + 4 // item: u32
                 + 4 // item_count: u32
             }
             Self::ErrNotEnoughMoney {
-                item,
-                item_count,
+                ..
             } => {
                 4
                 + 4 // item: u32
                 + 4 // item_count: u32
             }
             Self::ErrRecipientNotFound {
-                item,
-                item_count,
+                ..
             } => {
                 4
                 + 4 // item: u32
                 + 4 // item_count: u32
             }
             Self::ErrNotYourTeam {
-                item,
-                item_count,
+                ..
             } => {
                 4
                 + 4 // item: u32
                 + 4 // item_count: u32
             }
             Self::ErrInternalError {
-                item,
-                item_count,
+                ..
             } => {
                 4
                 + 4 // item: u32
                 + 4 // item_count: u32
             }
             Self::ErrDisabledForTrialAcc {
-                item,
-                item_count,
+                ..
             } => {
                 4
                 + 4 // item: u32
                 + 4 // item_count: u32
             }
             Self::ErrRecipientCapReached {
-                item,
-                item_count,
+                ..
             } => {
                 4
                 + 4 // item: u32
                 + 4 // item_count: u32
             }
             Self::ErrCantSendWrappedCod {
-                item,
-                item_count,
+                ..
             } => {
                 4
                 + 4 // item: u32
                 + 4 // item_count: u32
             }
             Self::ErrMailAndChatSuspended {
-                item,
-                item_count,
+                ..
             } => {
                 4
                 + 4 // item: u32
                 + 4 // item_count: u32
             }
             Self::ErrTooManyAttachments {
-                item,
-                item_count,
+                ..
             } => {
                 4
                 + 4 // item: u32
                 + 4 // item_count: u32
             }
             Self::ErrMailAttachmentInvalid {
-                item,
-                item_count,
+                ..
             } => {
                 4
                 + 4 // item: u32
                 + 4 // item_count: u32
             }
             Self::ErrItemHasExpired {
-                item,
-                item_count,
+                ..
             } => {
                 4
                 + 4 // item: u32

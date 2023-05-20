@@ -380,15 +380,13 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::ErrInventory {
-                inventory_result2,
+                ..
             } => {
                 4
                 + 1 // inventory_result2: InventoryResult
             }
             Self::ErrHigherBid {
-                auction_outbid3,
-                higher_bidder2,
-                new_bid2,
+                ..
             } => {
                 4
                 + 4 // auction_outbid3: u32
@@ -449,21 +447,19 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Ok {
-                auction_outbid1,
+                ..
             } => {
                 4
                 + 4 // auction_outbid1: u32
             }
             Self::ErrInventory {
-                inventory_result,
+                ..
             } => {
                 4
                 + 1 // inventory_result: InventoryResult
             }
             Self::ErrHigherBid {
-                auction_outbid2,
-                higher_bidder,
-                new_bid,
+                ..
             } => {
                 4
                 + 4 // auction_outbid2: u32

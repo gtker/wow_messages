@@ -249,15 +249,13 @@ impl SMSG_TRADE_STATUS_TradeStatus {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::BeginTrade {
-                unknown1,
+                ..
             } => {
                 4
                 + 8 // unknown1: Guid
             }
             Self::CloseWindow {
-                inventory_result,
-                item_limit_category_id,
-                target_error,
+                ..
             } => {
                 4
                 + 4 // inventory_result: InventoryResult
@@ -265,13 +263,13 @@ impl SMSG_TRADE_STATUS_TradeStatus {
                 + 1 // target_error: Bool
             }
             Self::OnlyConjured {
-                slot,
+                ..
             } => {
                 4
                 + 1 // slot: u8
             }
             Self::NotOnTaplist {
-                slot,
+                ..
             } => {
                 4
                 + 1 // slot: u8

@@ -1316,12 +1316,7 @@ impl AuraLog_AuraType {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::PeriodicDamage {
-                absorb1,
-                critical1,
-                damage1,
-                overkill_damage,
-                resisted,
-                school,
+                ..
             } => {
                 4
                 + 4 // absorb1: u32
@@ -1332,10 +1327,7 @@ impl AuraLog_AuraType {
                 + 1 // school: SpellSchool
             }
             Self::PeriodicHeal {
-                absorb2,
-                critical2,
-                damage2,
-                over_damage,
+                ..
             } => {
                 4
                 + 4 // absorb2: u32
@@ -1344,10 +1336,7 @@ impl AuraLog_AuraType {
                 + 4 // over_damage: u32
             }
             Self::ObsModHealth {
-                absorb2,
-                critical2,
-                damage2,
-                over_damage,
+                ..
             } => {
                 4
                 + 4 // absorb2: u32
@@ -1356,17 +1345,14 @@ impl AuraLog_AuraType {
                 + 4 // over_damage: u32
             }
             Self::PeriodicEnergize {
-                damage3,
-                misc_value1,
+                ..
             } => {
                 4
                 + 4 // damage3: u32
                 + 4 // misc_value1: u32
             }
             Self::PeriodicManaLeech {
-                damage4,
-                gain_multiplier,
-                misc_value2,
+                ..
             } => {
                 4
                 + 4 // damage4: u32
@@ -1374,12 +1360,7 @@ impl AuraLog_AuraType {
                 + 4 // misc_value2: u32
             }
             Self::PeriodicDamagePercent {
-                absorb1,
-                critical1,
-                damage1,
-                overkill_damage,
-                resisted,
-                school,
+                ..
             } => {
                 4
                 + 4 // absorb1: u32

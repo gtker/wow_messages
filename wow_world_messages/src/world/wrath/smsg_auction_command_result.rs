@@ -148,7 +148,7 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::ErrInventory {
-                inventory_result,
+                ..
             } => {
                 4
                 + 1 // inventory_result: InventoryResult

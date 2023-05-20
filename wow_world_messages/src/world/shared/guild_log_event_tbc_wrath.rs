@@ -191,13 +191,13 @@ impl GuildLogEvent_GuildEvent {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Joined {
-                player2,
+                ..
             } => {
                 1
                 + 8 // player2: Guid
             }
             Self::Left {
-                player2,
+                ..
             } => {
                 1
                 + 8 // player2: Guid

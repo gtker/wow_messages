@@ -240,9 +240,7 @@ impl Friend_FriendStatus {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Online {
-                area,
-                class,
-                level,
+                ..
             } => {
                 1
                 + 4 // area: Area
@@ -250,9 +248,7 @@ impl Friend_FriendStatus {
                 + 4 // level: Level32
             }
             Self::Afk {
-                area,
-                class,
-                level,
+                ..
             } => {
                 1
                 + 4 // area: Area
@@ -260,9 +256,7 @@ impl Friend_FriendStatus {
                 + 4 // level: Level32
             }
             Self::Unknown3 {
-                area,
-                class,
-                level,
+                ..
             } => {
                 1
                 + 4 // area: Area
@@ -270,9 +264,7 @@ impl Friend_FriendStatus {
                 + 4 // level: Level32
             }
             Self::Dnd {
-                area,
-                class,
-                level,
+                ..
             } => {
                 1
                 + 4 // area: Area

@@ -115,13 +115,13 @@ impl DoubleVariantEnum_SimpleEnum {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Zero {
-                basic,
+                ..
             } => {
                 1
                 + 1 // basic: u8
             }
             Self::One {
-                basic,
+                ..
             } => {
                 1
                 + 1 // basic: u8

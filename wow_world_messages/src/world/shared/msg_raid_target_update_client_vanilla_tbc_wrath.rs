@@ -264,55 +264,55 @@ impl MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Unknown0 {
-                target,
+                ..
             } => {
                 1
                 + 8 // target: Guid
             }
             Self::Unknown1 {
-                target,
+                ..
             } => {
                 1
                 + 8 // target: Guid
             }
             Self::Unknown2 {
-                target,
+                ..
             } => {
                 1
                 + 8 // target: Guid
             }
             Self::Unknown3 {
-                target,
+                ..
             } => {
                 1
                 + 8 // target: Guid
             }
             Self::Unknown4 {
-                target,
+                ..
             } => {
                 1
                 + 8 // target: Guid
             }
             Self::Unknown5 {
-                target,
+                ..
             } => {
                 1
                 + 8 // target: Guid
             }
             Self::Unknown6 {
-                target,
+                ..
             } => {
                 1
                 + 8 // target: Guid
             }
             Self::Unknown7 {
-                target,
+                ..
             } => {
                 1
                 + 8 // target: Guid
             }
             Self::Unknown8 {
-                target,
+                ..
             } => {
                 1
                 + 8 // target: Guid

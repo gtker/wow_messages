@@ -191,7 +191,7 @@ impl CompressedMove_CompressedMoveOpcode {
                 + transport.size() // transport: PackedGuid
             }
             Self::SmsgSplineSetRunSpeed {
-                speed,
+                ..
             } => {
                 2
                 + 4 // speed: f32

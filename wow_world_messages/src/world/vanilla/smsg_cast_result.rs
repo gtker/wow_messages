@@ -633,9 +633,7 @@ impl SMSG_CAST_RESULT_CastFailureReason {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::EquippedItemClass {
-                equipped_item_class,
-                equipped_item_inventory_type_mask,
-                equipped_item_subclass_mask,
+                ..
             } => {
                 1
                 + 4 // equipped_item_class: u32
@@ -643,13 +641,13 @@ impl SMSG_CAST_RESULT_CastFailureReason {
                 + 4 // equipped_item_subclass_mask: u32
             }
             Self::RequiresArea {
-                area,
+                ..
             } => {
                 1
                 + 4 // area: Area
             }
             Self::RequiresSpellFocus {
-                required_spell_focus,
+                ..
             } => {
                 1
                 + 4 // required_spell_focus: u32

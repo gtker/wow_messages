@@ -501,15 +501,8 @@ impl SMSG_CHAR_FACTION_CHANGE_WorldResult {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::ResponseSuccess {
-                face,
-                facial_hair,
-                gender,
-                guid,
-                hair_color,
-                hair_style,
                 name,
-                race,
-                skin_color,
+                ..
             } => {
                 1
                 + 1 // face: u8

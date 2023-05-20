@@ -431,8 +431,8 @@ impl SMSG_CHAR_RENAME_WorldResult {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::ResponseSuccess {
-                character,
                 new_name,
+                ..
             } => {
                 1
                 + 8 // character: Guid

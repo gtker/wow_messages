@@ -1164,73 +1164,73 @@ impl SMSG_MESSAGECHAT_ChatType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::System {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Say {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Party {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Raid {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Guild {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Officer {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Yell {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Whisper {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::WhisperInform {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Reply {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Emote {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::TextEmote {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
@@ -1277,116 +1277,116 @@ impl SMSG_MESSAGECHAT_ChatType {
             }
             Self::Channel {
                 channel_name,
-                target4,
+                ..
             } => {
                 1
                 + channel_name.len() + 1 // channel_name: CString
                 + 8 // target4: Guid
             }
             Self::ChannelJoin {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::ChannelLeave {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::ChannelList {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::ChannelNotice {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::ChannelNoticeUser {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Afk {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Dnd {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Ignored {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Skill {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Loot {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Money {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Opening {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Tradeskills {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::PetInfo {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::CombatMiscInfo {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::CombatXpGain {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::CombatHonorGain {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::CombatFactionChange {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
@@ -1410,13 +1410,13 @@ impl SMSG_MESSAGECHAT_ChatType {
                 + target2.size() // target2: NamedGuid
             }
             Self::RaidLeader {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::RaidWarning {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
@@ -1438,25 +1438,25 @@ impl SMSG_MESSAGECHAT_ChatType {
                 + target1.size() // target1: NamedGuid
             }
             Self::Filtered {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Battleground {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::BattlegroundLeader {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid
             }
             Self::Restricted {
-                target5,
+                ..
             } => {
                 1
                 + 8 // target5: Guid

@@ -233,49 +233,49 @@ impl IfEdgeCases_TEnum {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Zero {
-                basic1,
+                ..
             } => {
                 1
                 + 1 // basic1: u8
             }
             Self::One {
-                basic1,
+                ..
             } => {
                 1
                 + 1 // basic1: u8
             }
             Self::Two {
-                basic1,
+                ..
             } => {
                 1
                 + 1 // basic1: u8
             }
             Self::Three {
-                basic3,
+                ..
             } => {
                 1
                 + 1 // basic3: u8
             }
             Self::Four {
-                basic3,
+                ..
             } => {
                 1
                 + 1 // basic3: u8
             }
             Self::Five {
-                basic5,
+                ..
             } => {
                 1
                 + 1 // basic5: u8
             }
             Self::Six {
-                basic5,
+                ..
             } => {
                 1
                 + 1 // basic5: u8
             }
             Self::Rest {
-                rest,
+                ..
             } => {
                 1
                 + 1 // rest: u8

@@ -472,10 +472,7 @@ impl SMSG_AUTH_RESPONSE_WorldResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::AuthOk {
-                billing_flags,
-                billing_rested,
-                billing_time,
-                expansion,
+                ..
             } => {
                 1
                 + 1 // billing_flags: BillingPlanFlags
@@ -484,8 +481,7 @@ impl SMSG_AUTH_RESPONSE_WorldResult {
                 + 1 // expansion: Expansion
             }
             Self::AuthWaitQueue {
-                queue_position,
-                realm_has_free_character_migration,
+                ..
             } => {
                 1
                 + 4 // queue_position: u32

@@ -181,19 +181,19 @@ impl BugSeparateIfDoubleWrite_SimpleEnum {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Zero {
-                zero_one,
+                ..
             } => {
                 1
                 + 1 // zero_one: u8
             }
             Self::One {
-                zero_one,
+                ..
             } => {
                 1
                 + 1 // zero_one: u8
             }
             Self::Two {
-                two,
+                ..
             } => {
                 1
                 + 1 // two: u8

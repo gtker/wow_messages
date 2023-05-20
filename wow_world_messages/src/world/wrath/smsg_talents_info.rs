@@ -178,8 +178,8 @@ impl SMSG_TALENTS_INFO_TalentInfoType {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::Player {
-                active_spec,
                 specs,
+                ..
             } => {
                 1
                 + 1 // active_spec: u8

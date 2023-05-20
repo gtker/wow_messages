@@ -136,4 +136,12 @@ impl Array {
             ArrayType::CString => false,
         }
     }
+
+    pub(crate) fn is_constant(&self) -> bool {
+        self.ty().sizes().is_constant().is_some()
+            && match self.size() {
+                ArraySize::Fixed(_) => true,
+                ArraySize::Variable(_) | ArraySize::Endless => false,
+            }
+    }
 }

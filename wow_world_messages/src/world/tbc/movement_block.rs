@@ -624,13 +624,13 @@ impl MovementBlock_MovementFlags_Swimming {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Swimming {
-                pitch1,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 4 // pitch1: f32
             }
             Self::Ontransport {
-                pitch2,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 4 // pitch2: f32
@@ -667,19 +667,19 @@ impl MovementBlock_SplineFlag_FinalAngle {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::FinalAngle {
-                angle,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 4 // angle: f32
             }
             Self::FinalTarget {
-                target,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 8 // target: Guid
             }
             Self::FinalPoint {
-                spline_final_point,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 12 // spline_final_point: Vector3d
@@ -2269,20 +2269,8 @@ impl MovementBlock_UpdateFlag_Living {
     pub(crate) fn size(&self) -> usize {
         match self {
             Self::Living {
-                backwards_flying_speed,
-                backwards_running_speed,
-                backwards_swimming_speed,
-                extra_flags,
-                fall_time,
                 flags,
-                flying_speed,
-                living_orientation,
-                living_position,
-                running_speed,
-                swimming_speed,
-                timestamp,
-                turn_rate,
-                walking_speed,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 4 // backwards_flying_speed: f32
@@ -2301,8 +2289,7 @@ impl MovementBlock_UpdateFlag_Living {
                 + 4 // walking_speed: f32
             }
             Self::HasPosition {
-                orientation,
-                position,
+                ..
             } => {
                 // Not an actual enum sent over the wire
                 4 // orientation: f32

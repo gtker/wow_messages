@@ -142,13 +142,13 @@ impl SMSG_ACTION_BUTTONS_ActionBarBehavior {
     pub(crate) const fn size(&self) -> usize {
         match self {
             Self::Initial {
-                data,
+                ..
             } => {
                 1
                 + 144 * 4 // data: ActionButton[144]
             }
             Self::Set {
-                data,
+                ..
             } => {
                 1
                 + 144 * 4 // data: ActionButton[144]
