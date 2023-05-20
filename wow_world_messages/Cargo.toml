@@ -6,7 +6,7 @@ authors.workspace = true
 repository.workspace = true
 license.workspace = true
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+exclude = ["release.toml"]
 
 [dependencies.wow_world_base]
 workspace = true
