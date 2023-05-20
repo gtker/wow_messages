@@ -22,7 +22,6 @@
 //! } else {
 //!     println!("Item not found.");
 //! }
-//!
 //! ```
 //!
 //! ## Notice

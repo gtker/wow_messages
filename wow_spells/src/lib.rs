@@ -22,7 +22,6 @@
 //! } else {
 //!     println!("Spell not found.");
 //! }
-//!
 //! ```
 //!
 //! ## Notice
