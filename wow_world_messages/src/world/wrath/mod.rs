@@ -14,6 +14,7 @@ pub use wow_world_base::shared::arena_type_tbc_wrath::*;
 pub use wow_world_base::shared::auction_command_action_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::auction_command_result_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::auction_command_result_two_vanilla_tbc_wrath::*;
+pub use wow_world_base::shared::auction_house_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::bank_swap_source_tbc_wrath::*;
 pub use wow_world_base::shared::bank_swap_store_mode_tbc_wrath::*;
 pub use wow_world_base::shared::battlefield_port_action_vanilla_tbc_wrath::*;

@@ -1,19 +1,20 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
+use crate::wrath::AuctionHouse;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm:20`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm#L20):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm#L15):
 /// ```text
 /// smsg MSG_AUCTION_HELLO_Server = 0x0255 {
 ///     Guid auctioneer;
-///     u32 auction_house_id;
+///     AuctionHouse auction_house;
 ///     Bool auction_house_enabled;
 /// }
 /// ```
 pub struct MSG_AUCTION_HELLO_Server {
     pub auctioneer: Guid,
-    pub auction_house_id: u32,
+    pub auction_house: AuctionHouse,
     pub auction_house_enabled: bool,
 }
 
@@ -29,8 +30,8 @@ impl crate::Message for MSG_AUCTION_HELLO_Server {
         // auctioneer: Guid
         w.write_all(&self.auctioneer.guid().to_le_bytes())?;
 
-        // auction_house_id: u32
-        w.write_all(&self.auction_house_id.to_le_bytes())?;
+        // auction_house: AuctionHouse
+        w.write_all(&(self.auction_house.as_int().to_le_bytes()))?;
 
         // auction_house_enabled: Bool
         w.write_all(u8::from(self.auction_house_enabled).to_le_bytes().as_slice())?;
@@ -45,15 +46,15 @@ impl crate::Message for MSG_AUCTION_HELLO_Server {
         // auctioneer: Guid
         let auctioneer = Guid::read(&mut r)?;
 
-        // auction_house_id: u32
-        let auction_house_id = crate::util::read_u32_le(&mut r)?;
+        // auction_house: AuctionHouse
+        let auction_house: AuctionHouse = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // auction_house_enabled: Bool
         let auction_house_enabled = crate::util::read_u8_le(&mut r)? != 0;
 
         Ok(Self {
             auctioneer,
-            auction_house_id,
+            auction_house,
             auction_house_enabled,
         })
     }

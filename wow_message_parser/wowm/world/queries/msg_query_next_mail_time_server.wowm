@@ -28,7 +28,7 @@ enum MailMessageType : u32 {
 
 struct ReceivedMail {
     Guid sender;
-    u32 auction_house_id;
+    AuctionHouse auction_house;
     MailMessageType message_type;
     u32 stationery;
     f32 time {

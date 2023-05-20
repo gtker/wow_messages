@@ -1,6 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
+use wow_world_base::shared::auction_house_vanilla_tbc_wrath::AuctionHouse;
 use wow_world_base::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType;
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -8,7 +9,7 @@ use wow_world_base::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType
 /// ```text
 /// struct ReceivedMail {
 ///     Guid sender;
-///     u32 auction_house_id;
+///     AuctionHouse auction_house;
 ///     MailMessageType message_type;
 ///     u32 stationery;
 ///     f32 time;
@@ -16,7 +17,7 @@ use wow_world_base::shared::mail_message_type_vanilla_tbc_wrath::MailMessageType
 /// ```
 pub struct ReceivedMail {
     pub sender: Guid,
-    pub auction_house_id: u32,
+    pub auction_house: AuctionHouse,
     pub message_type: MailMessageType,
     pub stationery: u32,
     /// mangosone sets to `0xC6000000`
@@ -30,8 +31,8 @@ impl ReceivedMail {
         // sender: Guid
         w.write_all(&self.sender.guid().to_le_bytes())?;
 
-        // auction_house_id: u32
-        w.write_all(&self.auction_house_id.to_le_bytes())?;
+        // auction_house: AuctionHouse
+        w.write_all(&(self.auction_house.as_int().to_le_bytes()))?;
 
         // message_type: MailMessageType
         w.write_all(&(self.message_type.as_int().to_le_bytes()))?;
@@ -51,8 +52,8 @@ impl ReceivedMail {
         // sender: Guid
         let sender = Guid::read(&mut r)?;
 
-        // auction_house_id: u32
-        let auction_house_id = crate::util::read_u32_le(&mut r)?;
+        // auction_house: AuctionHouse
+        let auction_house: AuctionHouse = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // message_type: MailMessageType
         let message_type: MailMessageType = crate::util::read_u32_le(&mut r)?.try_into()?;
@@ -65,7 +66,7 @@ impl ReceivedMail {
 
         Ok(Self {
             sender,
-            auction_house_id,
+            auction_house,
             message_type,
             stationery,
             time,

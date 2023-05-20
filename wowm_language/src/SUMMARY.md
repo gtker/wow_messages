@@ -62,6 +62,7 @@
 - [AuctionCommandAction](docs/auctioncommandaction.md)
 - [AuctionCommandResult](docs/auctioncommandresult.md)
 - [AuctionCommandResultTwo](docs/auctioncommandresulttwo.md)
+- [AuctionHouse](docs/auctionhouse.md)
 - [AuraFlag](docs/auraflag.md)
 - [AuraMod](docs/auramod.md)
 - [AuraType](docs/auratype.md)

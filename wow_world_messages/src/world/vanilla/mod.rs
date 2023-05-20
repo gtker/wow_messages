@@ -9,6 +9,7 @@ pub use wow_world_base::shared::ai_reaction_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::auction_command_action_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::auction_command_result_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::auction_command_result_two_vanilla_tbc_wrath::*;
+pub use wow_world_base::shared::auction_house_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::battlefield_port_action_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::bonding_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::buy_bank_slot_result_vanilla_tbc_wrath::*;

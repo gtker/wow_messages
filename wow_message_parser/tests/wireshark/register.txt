@@ -526,9 +526,9 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_auction_house_id,
-            { "Auction House Id", "woww.auction.house.id",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
+        { &hf_woww_auction_house,
+            { "Auction House", "woww.auction.house",
+                FT_UINT32, BASE_HEX_DEC, VALS(e_auction_house_strings), 0,
                 NULL, HFILL
             }
         },

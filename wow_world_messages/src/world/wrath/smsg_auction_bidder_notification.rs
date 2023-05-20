@@ -1,12 +1,13 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
+use crate::wrath::AuctionHouse;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/smsg/smsg_auction_bidder_notification.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/smsg/smsg_auction_bidder_notification.wowm#L15):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/smsg/smsg_auction_bidder_notification.wowm:41`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/smsg/smsg_auction_bidder_notification.wowm#L41):
 /// ```text
 /// smsg SMSG_AUCTION_BIDDER_NOTIFICATION = 0x025E {
-///     u32 auction_house_id;
+///     AuctionHouse auction_house;
 ///     u32 auction_id;
 ///     Guid bidder;
 ///     u32 bid_sum;
@@ -17,7 +18,7 @@ use crate::Guid;
 /// }
 /// ```
 pub struct SMSG_AUCTION_BIDDER_NOTIFICATION {
-    pub auction_house_id: u32,
+    pub auction_house: AuctionHouse,
     pub auction_id: u32,
     pub bidder: Guid,
     pub bid_sum: u32,
@@ -36,8 +37,8 @@ impl crate::Message for SMSG_AUCTION_BIDDER_NOTIFICATION {
     }
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // auction_house_id: u32
-        w.write_all(&self.auction_house_id.to_le_bytes())?;
+        // auction_house: AuctionHouse
+        w.write_all(&(self.auction_house.as_int().to_le_bytes()))?;
 
         // auction_id: u32
         w.write_all(&self.auction_id.to_le_bytes())?;
@@ -67,8 +68,8 @@ impl crate::Message for SMSG_AUCTION_BIDDER_NOTIFICATION {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025E, size: body_size });
         }
 
-        // auction_house_id: u32
-        let auction_house_id = crate::util::read_u32_le(&mut r)?;
+        // auction_house: AuctionHouse
+        let auction_house: AuctionHouse = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // auction_id: u32
         let auction_id = crate::util::read_u32_le(&mut r)?;
@@ -92,7 +93,7 @@ impl crate::Message for SMSG_AUCTION_BIDDER_NOTIFICATION {
         let item_random_property_id = crate::util::read_u32_le(&mut r)?;
 
         Ok(Self {
-            auction_house_id,
+            auction_house,
             auction_id,
             bidder,
             bid_sum,

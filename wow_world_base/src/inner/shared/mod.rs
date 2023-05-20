@@ -23,6 +23,8 @@ pub mod auction_command_action_vanilla_tbc_wrath;
 pub mod auction_command_result_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod auction_command_result_two_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod auction_house_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod bank_swap_source_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]

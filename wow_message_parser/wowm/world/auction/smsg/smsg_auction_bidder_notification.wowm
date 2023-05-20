@@ -1,3 +1,15 @@
+enum AuctionHouse : u32 {
+    STORMWIND = 1;
+    ALLIANCE = 2;
+    DARNASSUS = 3;
+    UNDERCITY = 4;
+    THUNDER_BLUFF = 5;
+    HORDE = 6;
+    GOBLIN = 7;
+} {
+    versions = "1.12 2 3";
+}
+
 smsg SMSG_AUCTION_BIDDER_NOTIFICATION = 0x025E {
     u32 auction_house_id;
     u32 auction_id;
@@ -9,11 +21,25 @@ smsg SMSG_AUCTION_BIDDER_NOTIFICATION = 0x025E {
     u32 item_template;
     u32 item_random_property_id;
 } {
-    versions = "1 2";
+    versions = "1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 1.10 1.11";
 }
 
 smsg SMSG_AUCTION_BIDDER_NOTIFICATION = 0x025E {
-    u32 auction_house_id;
+    AuctionHouse auction_house;
+    u32 auction_id;
+    Guid bidder;
+    u32 won {
+        comment = "vmangos/cmangos: if 0, client shows ERR_AUCTION_WON_S, else ERR_AUCTION_OUTBID_S";
+    }
+    u32 out_bid;
+    u32 item_template;
+    u32 item_random_property_id;
+} {
+    versions = "1.12 2";
+}
+
+smsg SMSG_AUCTION_BIDDER_NOTIFICATION = 0x025E {
+    AuctionHouse auction_house;
     u32 auction_id;
     Guid bidder;
     u32 bid_sum;

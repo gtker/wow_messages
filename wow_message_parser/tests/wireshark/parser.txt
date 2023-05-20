@@ -1613,7 +1613,7 @@
         case MSG_AUCTION_HELLO:
             if (WOWW_SERVER_TO_CLIENT) {
                 ptvcursor_add(ptv, hf_woww_auctioneer, 8, ENC_LITTLE_ENDIAN);
-                ptvcursor_add(ptv, hf_woww_auction_house_id, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_auction_house, 4, ENC_LITTLE_ENDIAN);
             }
             else {
                 ptvcursor_add(ptv, hf_woww_auctioneer, 8, ENC_LITTLE_ENDIAN);
@@ -3691,7 +3691,7 @@
             ptvcursor_add(ptv, hf_woww_total_amount_of_auctions, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_AUCTION_BIDDER_NOTIFICATION:
-            ptvcursor_add(ptv, hf_woww_auction_house_id, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_auction_house, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_auction_id, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_bidder, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_won, 4, ENC_LITTLE_ENDIAN);

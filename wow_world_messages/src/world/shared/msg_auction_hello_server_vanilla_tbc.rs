@@ -1,18 +1,19 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
+use wow_world_base::shared::auction_house_vanilla_tbc_wrath::AuctionHouse;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm#L1):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm#L8):
 /// ```text
 /// smsg MSG_AUCTION_HELLO_Server = 0x0255 {
 ///     Guid auctioneer;
-///     u32 auction_house_id;
+///     AuctionHouse auction_house;
 /// }
 /// ```
 pub struct MSG_AUCTION_HELLO_Server {
     pub auctioneer: Guid,
-    pub auction_house_id: u32,
+    pub auction_house: AuctionHouse,
 }
 
 impl crate::private::Sealed for MSG_AUCTION_HELLO_Server {}
@@ -27,8 +28,8 @@ impl crate::Message for MSG_AUCTION_HELLO_Server {
         // auctioneer: Guid
         w.write_all(&self.auctioneer.guid().to_le_bytes())?;
 
-        // auction_house_id: u32
-        w.write_all(&self.auction_house_id.to_le_bytes())?;
+        // auction_house: AuctionHouse
+        w.write_all(&(self.auction_house.as_int().to_le_bytes()))?;
 
         Ok(())
     }
@@ -40,12 +41,12 @@ impl crate::Message for MSG_AUCTION_HELLO_Server {
         // auctioneer: Guid
         let auctioneer = Guid::read(&mut r)?;
 
-        // auction_house_id: u32
-        let auction_house_id = crate::util::read_u32_le(&mut r)?;
+        // auction_house: AuctionHouse
+        let auction_house: AuctionHouse = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             auctioneer,
-            auction_house_id,
+            auction_house,
         })
     }
 
@@ -55,182 +56,4 @@ impl crate::vanilla::ServerMessage for MSG_AUCTION_HELLO_Server {}
 
 #[cfg(feature = "tbc")]
 impl crate::tbc::ServerMessage for MSG_AUCTION_HELLO_Server {}
-
-#[cfg(all(feature = "vanilla", test))]
-mod test_vanilla {
-    #![allow(clippy::missing_const_for_fn)]
-    use super::MSG_AUCTION_HELLO_Server;
-    use super::*;
-    use super::super::*;
-    use crate::vanilla::opcodes::ServerOpcodeMessage;
-    use crate::Guid;
-    use crate::vanilla::{ClientMessage, ServerMessage};
-
-    const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &MSG_AUCTION_HELLO_Server, expected: &MSG_AUCTION_HELLO_Server) {
-        assert_eq!(t.auctioneer, expected.auctioneer);
-        assert_eq!(t.auction_house_id, expected.auction_house_id);
-    }
-
-    const RAW0: [u8; 16] = [ 0x00, 0x0E, 0x55, 0x02, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE,
-         0xAD, 0xDE, 0x00, 0x12, 0x00, 0x00, 0x00, ];
-
-    pub(crate) fn expected0() -> MSG_AUCTION_HELLO_Server {
-        MSG_AUCTION_HELLO_Server {
-            auctioneer: Guid::new(0xDEADBEEFFACADE),
-            auction_house_id: 0x12,
-        }
-
-    }
-
-    // Generated from `wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm` line 8.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn msg_auction_hello_server0() {
-        let expected = expected0();
-        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
-        let t = match t {
-            ServerOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
-            opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}"),
-        };
-
-        assert(&t, &expected);
-        assert_eq!(12 + HEADER_SIZE, RAW0.len());
-
-        let mut dest = Vec::with_capacity(RAW0.len());
-        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
-
-        assert_eq!(dest, RAW0);
-    }
-
-    // Generated from `wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm` line 8.
-    #[cfg(feature = "tokio")]
-    #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_msg_auction_hello_server0() {
-        let expected = expected0();
-        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
-            ServerOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
-            opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}"),
-        };
-
-        assert(&t, &expected);
-        assert_eq!(12 + HEADER_SIZE, RAW0.len());
-
-        let mut dest = Vec::with_capacity(RAW0.len());
-        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
-
-        assert_eq!(dest, RAW0);
-    }
-
-    // Generated from `wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm` line 8.
-    #[cfg(feature = "async-std")]
-    #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_msg_auction_hello_server0() {
-        let expected = expected0();
-        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
-            ServerOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
-            opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}"),
-        };
-
-        assert(&t, &expected);
-        assert_eq!(12 + HEADER_SIZE, RAW0.len());
-
-        let mut dest = Vec::with_capacity(RAW0.len());
-        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
-
-        assert_eq!(dest, RAW0);
-    }
-
-}
-
-#[cfg(all(feature = "tbc", test))]
-mod test_tbc {
-    #![allow(clippy::missing_const_for_fn)]
-    use super::MSG_AUCTION_HELLO_Server;
-    use super::*;
-    use super::super::*;
-    use crate::tbc::opcodes::ServerOpcodeMessage;
-    use crate::Guid;
-    use crate::tbc::{ClientMessage, ServerMessage};
-
-    const HEADER_SIZE: usize = 2 + 2;
-    fn assert(t: &MSG_AUCTION_HELLO_Server, expected: &MSG_AUCTION_HELLO_Server) {
-        assert_eq!(t.auctioneer, expected.auctioneer);
-        assert_eq!(t.auction_house_id, expected.auction_house_id);
-    }
-
-    const RAW0: [u8; 16] = [ 0x00, 0x0E, 0x55, 0x02, 0xDE, 0xCA, 0xFA, 0xEF, 0xBE,
-         0xAD, 0xDE, 0x00, 0x12, 0x00, 0x00, 0x00, ];
-
-    pub(crate) fn expected0() -> MSG_AUCTION_HELLO_Server {
-        MSG_AUCTION_HELLO_Server {
-            auctioneer: Guid::new(0xDEADBEEFFACADE),
-            auction_house_id: 0x12,
-        }
-
-    }
-
-    // Generated from `wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm` line 8.
-    #[cfg(feature = "sync")]
-    #[cfg_attr(feature = "sync", test)]
-    fn msg_auction_hello_server0() {
-        let expected = expected0();
-        let t = ServerOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
-        let t = match t {
-            ServerOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
-            opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}"),
-        };
-
-        assert(&t, &expected);
-        assert_eq!(12 + HEADER_SIZE, RAW0.len());
-
-        let mut dest = Vec::with_capacity(RAW0.len());
-        expected.write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).unwrap();
-
-        assert_eq!(dest, RAW0);
-    }
-
-    // Generated from `wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm` line 8.
-    #[cfg(feature = "tokio")]
-    #[cfg_attr(feature = "tokio", tokio::test)]
-    async fn tokio_msg_auction_hello_server0() {
-        let expected = expected0();
-        let t = ServerOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
-            ServerOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
-            opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}"),
-        };
-
-        assert(&t, &expected);
-        assert_eq!(12 + HEADER_SIZE, RAW0.len());
-
-        let mut dest = Vec::with_capacity(RAW0.len());
-        expected.tokio_write_unencrypted_server(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
-
-        assert_eq!(dest, RAW0);
-    }
-
-    // Generated from `wow_message_parser/wowm/world/auction/msg/msg_auction_hello_server.wowm` line 8.
-    #[cfg(feature = "async-std")]
-    #[cfg_attr(feature = "async-std", async_std::test)]
-    async fn astd_msg_auction_hello_server0() {
-        let expected = expected0();
-        let t = ServerOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
-        let t = match t {
-            ServerOpcodeMessage::MSG_AUCTION_HELLO(t) => t,
-            opcode => panic!("incorrect opcode. Expected MSG_AUCTION_HELLO, got {opcode:#?}"),
-        };
-
-        assert(&t, &expected);
-        assert_eq!(12 + HEADER_SIZE, RAW0.len());
-
-        let mut dest = Vec::with_capacity(RAW0.len());
-        expected.astd_write_unencrypted_server(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
-
-        assert_eq!(dest, RAW0);
-    }
-
-}
 

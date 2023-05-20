@@ -5945,6 +5945,26 @@ static const value_string e_account_data_type_strings[] =  {
 };
 
 typedef enum {
+    AUCTION_HOUSE_STORMWIND = 0x1,
+    AUCTION_HOUSE_ALLIANCE = 0x2,
+    AUCTION_HOUSE_DARNASSUS = 0x3,
+    AUCTION_HOUSE_UNDERCITY = 0x4,
+    AUCTION_HOUSE_THUNDER_BLUFF = 0x5,
+    AUCTION_HOUSE_HORDE = 0x6,
+    AUCTION_HOUSE_GOBLIN = 0x7,
+} e_auction_house;
+static const value_string e_auction_house_strings[] =  {
+    { AUCTION_HOUSE_STORMWIND, "Stormwind" },
+    { AUCTION_HOUSE_ALLIANCE, "Alliance" },
+    { AUCTION_HOUSE_DARNASSUS, "Darnassus" },
+    { AUCTION_HOUSE_UNDERCITY, "Undercity" },
+    { AUCTION_HOUSE_THUNDER_BLUFF, "Thunder Bluff" },
+    { AUCTION_HOUSE_HORDE, "Horde" },
+    { AUCTION_HOUSE_GOBLIN, "Goblin" },
+    { 0, NULL }
+};
+
+typedef enum {
     CORPSE_QUERY_RESULT_NOT_FOUND = 0x0,
     CORPSE_QUERY_RESULT_FOUND = 0x1,
 } e_corpse_query_result;

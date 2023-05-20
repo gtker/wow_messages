@@ -18,6 +18,7 @@ pub use area::*;
 pub use crate::shared::auction_command_action_vanilla_tbc_wrath::*;
 pub use crate::shared::auction_command_result_vanilla_tbc_wrath::*;
 pub use crate::shared::auction_command_result_two_vanilla_tbc_wrath::*;
+pub use crate::shared::auction_house_vanilla_tbc_wrath::*;
 pub(crate) mod aura_mod;
 pub use aura_mod::*;
 pub(crate) mod aura_type;
