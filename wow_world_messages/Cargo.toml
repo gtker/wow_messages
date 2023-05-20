@@ -1,20 +1,16 @@
 [package]
 name = "wow_world_messages"
+description = "Message definitions for World of Warcraft world servers"
 version = "0.1.0"
+keywords = ["wow", "world-of-warcraft", "message", "definitions"]
+categories = ["network-programming", "game-development", "game-engines"]
+
 edition.workspace = true
 authors.workspace = true
 repository.workspace = true
 license.workspace = true
 
 exclude = ["release.toml"]
-
-[dependencies.wow_world_base]
-workspace = true
-
-[dependencies.wow_srp]
-version = "0.6.0"
-default-features = false
-optional = true
 
 [features]
 default = ["encryption"]
@@ -23,6 +19,14 @@ vanilla = ["wow_world_base/vanilla"]
 tbc = ["wow_srp/tbc-header", "wow_world_base/tbc"]
 wrath = ["wow_srp/wrath-header", "wow_world_base/wrath"]
 encryption = ["wow_srp"]
+
+[dependencies.wow_world_base]
+workspace = true
+
+[dependencies.wow_srp]
+version = "0.6.0"
+default-features = false
+optional = true
 
 [dependencies.chrono]
 version = "0.4"

@@ -9,6 +9,7 @@ edition.workspace = true
 authors.workspace = true
 repository.workspace = true
 license.workspace = true
+
 exclude = ["release.toml"]
 
 [features]
@@ -19,3 +20,7 @@ wrath = []
 
 [dependencies]
 serde = { version = "1", optional = true, features = ["derive"] }
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
