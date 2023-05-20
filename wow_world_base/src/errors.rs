@@ -1,5 +1,6 @@
 use std::fmt::{Display, Formatter};
 
+/// Error enum for when an integer is out of range.
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash)]
 pub struct EnumError {
     pub name: &'static str,
@@ -23,6 +24,7 @@ impl Display for EnumError {
 
 impl std::error::Error for EnumError {}
 
+/// Errors that can be encountered while parsing messages.
 #[derive(Debug)]
 pub enum ParseError {
     Io(std::io::Error),
