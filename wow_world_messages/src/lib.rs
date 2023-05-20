@@ -76,7 +76,6 @@ mod traits;
 pub(crate) mod util;
 #[allow(
     non_camel_case_types,
-    non_snake_case,
     unused,
     clippy::single_match,
     clippy::too_many_arguments,
