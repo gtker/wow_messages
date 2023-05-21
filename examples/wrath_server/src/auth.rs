@@ -35,6 +35,9 @@ async fn handle(mut stream: TcpStream, users: Arc<Mutex<HashMap<String, SrpServe
                 ExpectedOpcodeError::Parse(e) => {
                     println!("parse error {e:#?}")
                 }
+                ExpectedOpcodeError::Io(e) => {
+                    println!("io error {e:#?}")
+                }
             }
             return;
         }

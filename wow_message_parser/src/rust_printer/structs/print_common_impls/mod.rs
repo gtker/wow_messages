@@ -492,8 +492,20 @@ pub(crate) fn impl_read_and_writable_login(
 
     for it in ImplType::types() {
         print_read_decl(s, it, false);
+        if it.is_async() {
+            s.w("Box::pin(async move {");
+        } else {
+            s.w("");
+        }
+
         let function_name = format!("{}read_inner", it.prefix());
-        s.wln(format!("Self::{function_name}(r)"));
+        let postfix = it.postfix();
+        s.w_no_indent(format!("Self::{function_name}(r){postfix}.map_err(|kind| {PARSE_ERROR}::new({opcode}, \"{type_name}\", kind))"));
+        if it.is_async() {
+            s.wln_no_indent("})");
+        } else {
+            s.wln_no_indent("");
+        }
         s.closing_curly_newline();
 
         print_write_decl(s, it);
@@ -553,7 +565,7 @@ fn impl_read_write_struct(s: &mut Writer, e: &Container, o: &Objects) {
 }
 
 fn print_read_decl(s: &mut Writer, it: ImplType, inner: bool) {
-    let error = PARSE_ERROR_KIND;
+    let error = if inner { PARSE_ERROR_KIND } else { PARSE_ERROR };
     let prefix = it.prefix();
     let read = it.read();
 

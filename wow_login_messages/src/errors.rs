@@ -1,4 +1,42 @@
+use std::error::Error;
 use std::fmt::{Display, Formatter};
+
+#[derive(Debug)]
+pub struct ParseError {
+    opcode: u32,
+    message: &'static str,
+    kind: ParseErrorKind,
+}
+
+impl ParseError {
+    pub const fn new(opcode: u32, message: &'static str, kind: ParseErrorKind) -> Self {
+        Self {
+            opcode,
+            message,
+            kind,
+        }
+    }
+}
+
+impl Display for ParseError {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "'{}' ({:#06X}) had error '{}'",
+            self.message, self.opcode, self.kind
+        )
+    }
+}
+
+impl Error for ParseError {
+    fn source(&self) -> Option<&(dyn Error + 'static)> {
+        match &self.kind {
+            ParseErrorKind::Io(e) => Some(e),
+            ParseErrorKind::Enum(e) => Some(e),
+            ParseErrorKind::String(e) => Some(e),
+        }
+    }
+}
 
 #[derive(Debug)]
 pub enum ParseErrorKind {
@@ -17,7 +55,7 @@ impl Display for ParseErrorKind {
     }
 }
 
-impl std::error::Error for ParseErrorKind {}
+impl Error for ParseErrorKind {}
 
 impl From<EnumError> for ParseErrorKind {
     fn from(e: EnumError) -> Self {
@@ -58,12 +96,13 @@ impl Display for EnumError {
     }
 }
 
-impl std::error::Error for EnumError {}
+impl Error for EnumError {}
 
 #[derive(Debug)]
 pub enum ExpectedOpcodeError {
     Opcode(u32),
-    Parse(ParseErrorKind),
+    Parse(ParseError),
+    Io(std::io::Error),
 }
 
 impl Display for ExpectedOpcodeError {
@@ -73,20 +112,21 @@ impl Display for ExpectedOpcodeError {
                 f.write_str(&format!("unexpected opcode found: '{opcode:#06X}'"))
             }
             Self::Parse(i) => i.fmt(f),
+            Self::Io(e) => e.fmt(f),
         }
     }
 }
 
-impl std::error::Error for ExpectedOpcodeError {}
+impl Error for ExpectedOpcodeError {}
 
-impl From<ParseErrorKind> for ExpectedOpcodeError {
-    fn from(e: ParseErrorKind) -> Self {
+impl From<ParseError> for ExpectedOpcodeError {
+    fn from(e: ParseError) -> Self {
         Self::Parse(e)
     }
 }
 
 impl From<std::io::Error> for ExpectedOpcodeError {
     fn from(e: std::io::Error) -> Self {
-        Self::Parse(e.into())
+        Self::Io(e)
     }
 }

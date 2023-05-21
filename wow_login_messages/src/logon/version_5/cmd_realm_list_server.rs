@@ -256,8 +256,8 @@ impl ServerMessage for CMD_REALM_LIST_Server {
         Some(s)
     }
 
-    fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r)
+    fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(16, "CMD_REALM_LIST_Server", kind))
     }
 
     #[cfg(feature = "sync")]
@@ -271,13 +271,13 @@ impl ServerMessage for CMD_REALM_LIST_Server {
     fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
         r: R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
         Self: 'async_trait,
      {
-        Self::tokio_read_inner(r)
+        Box::pin(async move {Self::tokio_read_inner(r).await.map_err(|kind| crate::errors::ParseError::new(16, "CMD_REALM_LIST_Server", kind))})
     }
 
     #[cfg(feature = "tokio")]
@@ -303,13 +303,13 @@ impl ServerMessage for CMD_REALM_LIST_Server {
     fn astd_read<'async_trait, R, I: crate::private::Sealed>(
         r: R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
         Self: 'async_trait,
      {
-        Self::astd_read_inner(r)
+        Box::pin(async move {Self::astd_read_inner(r).await.map_err(|kind| crate::errors::ParseError::new(16, "CMD_REALM_LIST_Server", kind))})
     }
 
     #[cfg(feature = "async-std")]
