@@ -55,12 +55,20 @@ impl Writer {
     }
 
     pub(crate) fn into_inner(self) -> String {
-        assert_eq!(self.indentation_level, self.initial_indentation_level);
+        assert_eq!(
+            self.indentation_level, self.initial_indentation_level,
+            "indentation level is not initial level {}, instead it is {}",
+            self.initial_indentation_level, self.indentation_level
+        );
         self.inner
     }
 
     pub(crate) fn inner(&self) -> &str {
-        assert_eq!(self.indentation_level, self.initial_indentation_level);
+        assert_eq!(
+            self.indentation_level, self.initial_indentation_level,
+            "indentation level is not initial level {}, instead it is {}",
+            self.initial_indentation_level, self.indentation_level
+        );
         &self.inner
     }
 

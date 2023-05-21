@@ -23,34 +23,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
 
     match e.container_type() {
         ContainerType::Struct => {
-            let create_async_reads = e.tags().has_login_version();
-
-            let visibility = if e.tags().is_in_base() {
-                "pub"
-            } else {
-                "pub(crate)"
-            };
-
-            let error_name = if e.only_has_io_errors() {
-                "std::io::Error"
-            } else {
-                PARSE_ERROR
-            };
-
-            impl_read_write_struct(
-                s,
-                e.name(),
-                error_name,
-                |s, it| {
-                    print_read::print_read(s, e, o, it.prefix(), it.postfix());
-                },
-                |s, it| {
-                    print_write::print_write(s, e, o, it.prefix(), it.postfix());
-                },
-                visibility,
-                visibility,
-                create_async_reads,
-            );
+            impl_read_write_struct(s, e, o);
         }
         ContainerType::CLogin(opcode) | ContainerType::SLogin(opcode) => {
             let mut sizes = e.sizes();
@@ -569,46 +542,46 @@ pub(crate) fn impl_read_and_writable_login(
     s.closing_curly_newline(); // impl
 }
 
-pub(crate) fn impl_read_write_struct(
-    s: &mut Writer,
-    type_name: impl AsRef<str>,
-    error_name: impl AsRef<str>,
-    read_function: impl Fn(&mut Writer, ImplType),
-    write_function: impl Fn(&mut Writer, ImplType),
-    read_visibility: impl AsRef<str>,
-    write_visibility: impl AsRef<str>,
-    create_async_reads: bool,
-) {
-    let type_name = type_name.as_ref();
-    write_into_vec(s, type_name, write_function, read_visibility.as_ref());
+fn impl_read_write_struct(s: &mut Writer, e: &Container, o: &Objects) {
+    let visibility = if e.tags().is_in_base() {
+        "pub"
+    } else {
+        "pub(crate)"
+    };
 
-    s.open_curly(format!("impl {}", type_name));
+    let ty_name = e.name();
 
-    for it in ImplType::types() {
-        if it.is_async() {
-            if !create_async_reads {
-                continue;
+    let write_function = |s: &mut Writer, it: ImplType| {
+        print_write::print_write(s, e, o, it.prefix(), it.postfix());
+    };
+    write_into_vec(s, ty_name, write_function, visibility);
+
+    s.bodyn(format!("impl {ty_name}"), |s| {
+        let error_name = if e.only_has_io_errors() {
+            "std::io::Error"
+        } else {
+            PARSE_ERROR
+        };
+        for it in ImplType::types() {
+            if it.is_async() {
+                if !e.tags().has_login_version() {
+                    continue;
+                }
+
+                s.wln(it.cfg());
             }
 
-            s.wln(it.cfg());
+            let func = it.func();
+            let read = it.read();
+            let prefix = it.prefix();
+
+            s.bodyn(format!(
+                "{visibility} {func}fn {prefix}read<R: {read}>(mut r: R) -> Result<Self, {error_name}>",
+            ), |s| {
+                print_read::print_read(s, e, o, it.prefix(), it.postfix());
+            })
         }
-
-        let func = it.func();
-        let read = it.read();
-        let prefix = it.prefix();
-        let error = error_name.as_ref();
-        let visibility = write_visibility.as_ref();
-
-        s.open_curly(format!(
-            "{visibility} {func}fn {prefix}read<R: {read}>(mut r: R) -> Result<Self, {error}>",
-        ));
-
-        read_function(s, it);
-
-        s.closing_curly_newline();
-    }
-
-    s.closing_curly_newline(); // impl
+    });
 }
 
 fn print_read_decl(s: &mut Writer, it: ImplType) {
