@@ -2,7 +2,7 @@ use crate::file_utils::{get_import_path, major_version_to_string};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
-use crate::rust_printer::structs::print_common_impls::impl_read_write_non_trait;
+use crate::rust_printer::structs::print_common_impls::write_into_vec;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
     ImplType, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO, CFG_TESTCASE,
@@ -569,11 +569,41 @@ fn world_movement_info(s: &mut Writer, v: &[&Container]) {
 }
 
 pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
-    impl_read_write_non_trait(
-        s,
-        format!("{ty}OpcodeMessage"),
-        EXPECTED_OPCODE_ERROR,
-        |s, it| {
+    let ty_name = format!("{ty}OpcodeMessage");
+    let write_function = |s: &mut Writer, _it| {
+        s.bodyn("match self", |s| {
+            for e in v {
+                if e.empty_body() {
+                    s.wln(format!(
+                        "Self::{enum_name} => {{}}",
+                        enum_name = get_enumerator_name(e.name()),
+                    ));
+                } else {
+                    s.wln(format!(
+                        "Self::{enum_name}(e) => e.write_into_vec(w)?,",
+                        enum_name = get_enumerator_name(e.name()),
+                    ));
+                }
+            }
+        });
+    };
+
+    write_into_vec(s, &ty_name, write_function, "pub(crate)");
+
+    s.bodyn(format!("impl {ty_name}"), |s| {
+        for it in ImplType::types() {
+            if it.is_async() {
+                s.wln(it.cfg());
+            }
+            let func = it.func();
+            let read = it.read();
+            let prefix = it.prefix();
+            let postfix = it.postfix();
+            let error = "crate::errors::ExpectedOpcodeError";
+
+            s.open_curly(format!(
+                "{func}fn {prefix}read_inner<R: {read}>(mut r: R) -> Result<{ty_name}, {error}>"
+            ));
             s.wln(format!(
                 "let opcode = crate::util::{prefix}read_u8_le(&mut r){postfix}?;",
                 prefix = it.prefix(),
@@ -609,28 +639,17 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
 
                 s.wln(format!("opcode => Err({EXPECTED_OPCODE_ERROR}::Opcode(opcode as u32)),"));
             });
-        },
-        |s, _it| {
-            s.bodyn("match self", |s| {
-                for e in v {
-                    if e.empty_body() {
-                        s.wln(format!(
-                            "Self::{enum_name} => {{}}",
-                            enum_name = get_enumerator_name(e.name()),
-                        ));
-                    } else {
-                        s.wln(format!(
-                            "Self::{enum_name}(e) => e.write_into_vec(w)?,",
-                            enum_name = get_enumerator_name(e.name()),
-                        ));
-                    }
-                }
-            });
-        },
-        "pub(crate)",
-        "pub",
-        true,
-    );
+            s.closing_curly_newline();
+
+            s.open_curly(format!(
+                "pub {func}fn {prefix}read<R: {read}>(r: R) -> Result<Self, {error}>",
+            ));
+
+            s.wln(format!("Self::{prefix}read_inner(r){postfix}"));
+
+            s.closing_curly_newline();
+        }
+    });
 
     impl_display(s, v, ty);
 
