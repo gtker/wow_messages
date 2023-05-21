@@ -20,6 +20,39 @@ pub struct CMSG_ACTIVATETAXIEXPRESS {
 }
 
 impl crate::private::Sealed for CMSG_ACTIVATETAXIEXPRESS {}
+impl CMSG_ACTIVATETAXIEXPRESS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(16..=10240).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0312, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // total_cost: u32
+        let total_cost = crate::util::read_u32_le(&mut r)?;
+
+        // node_count: u32
+        let node_count = crate::util::read_u32_le(&mut r)?;
+
+        // nodes: u32[node_count]
+        let nodes = {
+            let mut nodes = Vec::with_capacity(node_count as usize);
+            for _ in 0..node_count {
+                nodes.push(crate::util::read_u32_le(&mut r)?);
+            }
+            nodes
+        };
+
+        Ok(Self {
+            guid,
+            total_cost,
+            nodes,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_ACTIVATETAXIEXPRESS {
     const OPCODE: u32 = 0x0312;
 
@@ -92,34 +125,8 @@ impl crate::Message for CMSG_ACTIVATETAXIEXPRESS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(16..=10240).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0312, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // total_cost: u32
-        let total_cost = crate::util::read_u32_le(&mut r)?;
-
-        // node_count: u32
-        let node_count = crate::util::read_u32_le(&mut r)?;
-
-        // nodes: u32[node_count]
-        let nodes = {
-            let mut nodes = Vec::with_capacity(node_count as usize);
-            for _ in 0..node_count {
-                nodes.push(crate::util::read_u32_le(&mut r)?);
-            }
-            nodes
-        };
-
-        Ok(Self {
-            guid,
-            total_cost,
-            nodes,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

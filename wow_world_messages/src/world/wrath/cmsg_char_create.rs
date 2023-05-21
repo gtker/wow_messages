@@ -48,6 +48,61 @@ impl CMSG_CHAR_CREATE {
 }
 
 impl crate::private::Sealed for CMSG_CHAR_CREATE {}
+impl CMSG_CHAR_CREATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(10..=265).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0036, size: body_size });
+        }
+
+        // name: CString
+        let name = {
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(name)?
+        };
+
+        // race: Race
+        let race = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // class: Class
+        let class = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // gender: Gender
+        let gender = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // skin_color: u8
+        let skin_color = crate::util::read_u8_le(&mut r)?;
+
+        // face: u8
+        let face = crate::util::read_u8_le(&mut r)?;
+
+        // hair_style: u8
+        let hair_style = crate::util::read_u8_le(&mut r)?;
+
+        // hair_color: u8
+        let hair_color = crate::util::read_u8_le(&mut r)?;
+
+        // facial_hair: u8
+        let facial_hair = crate::util::read_u8_le(&mut r)?;
+
+        // outfit_id: u8
+        let _outfit_id = crate::util::read_u8_le(&mut r)?;
+        // outfit_id is expected to always be 0 (0)
+
+        Ok(Self {
+            name,
+            race,
+            class,
+            gender,
+            skin_color,
+            face,
+            hair_style,
+            hair_color,
+            facial_hair,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CHAR_CREATE {
     const OPCODE: u32 = 0x0036;
 
@@ -141,56 +196,8 @@ impl crate::Message for CMSG_CHAR_CREATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(10..=265).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0036, size: body_size });
-        }
-
-        // name: CString
-        let name = {
-            let name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(name)?
-        };
-
-        // race: Race
-        let race = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // class: Class
-        let class = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // gender: Gender
-        let gender = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // skin_color: u8
-        let skin_color = crate::util::read_u8_le(&mut r)?;
-
-        // face: u8
-        let face = crate::util::read_u8_le(&mut r)?;
-
-        // hair_style: u8
-        let hair_style = crate::util::read_u8_le(&mut r)?;
-
-        // hair_color: u8
-        let hair_color = crate::util::read_u8_le(&mut r)?;
-
-        // facial_hair: u8
-        let facial_hair = crate::util::read_u8_le(&mut r)?;
-
-        // outfit_id: u8
-        let _outfit_id = crate::util::read_u8_le(&mut r)?;
-        // outfit_id is expected to always be 0 (0)
-
-        Ok(Self {
-            name,
-            race,
-            class,
-            gender,
-            skin_color,
-            face,
-            hair_style,
-            hair_color,
-            facial_hair,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -34,6 +34,347 @@ pub struct SMSG_SEND_MAIL_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_SEND_MAIL_RESULT {}
+impl SMSG_SEND_MAIL_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(12..=20).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0239, size: body_size });
+        }
+
+        // mail_id: u32
+        let mail_id = crate::util::read_u32_le(&mut r)?;
+
+        // action: MailAction
+        let action = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        let action_if = match action {
+            MailAction::Send => {
+                // result2: MailResultTwo
+                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+                let result2_if = match result2 {
+                    MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
+                    MailResultTwo::ErrEquipError => {
+                        // equip_error2: u32
+                        let equip_error2 = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                            equip_error2,
+                        }
+                    }
+                    MailResultTwo::ErrCannotSendToSelf => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCannotSendToSelf,
+                    MailResultTwo::ErrNotEnoughMoney => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotEnoughMoney,
+                    MailResultTwo::ErrRecipientNotFound => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientNotFound,
+                    MailResultTwo::ErrNotYourTeam => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotYourTeam,
+                    MailResultTwo::ErrInternalError => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrInternalError,
+                    MailResultTwo::ErrDisabledForTrialAcc => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrDisabledForTrialAcc,
+                    MailResultTwo::ErrRecipientCapReached => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientCapReached,
+                    MailResultTwo::ErrCantSendWrappedCod => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCantSendWrappedCod,
+                    MailResultTwo::ErrMailAndChatSuspended => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAndChatSuspended,
+                    MailResultTwo::ErrTooManyAttachments => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrTooManyAttachments,
+                    MailResultTwo::ErrMailAttachmentInvalid => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAttachmentInvalid,
+                };
+
+                SMSG_SEND_MAIL_RESULT_MailAction::Send {
+                    result2: result2_if,
+                }
+            }
+            MailAction::MoneyTaken => {
+                // result2: MailResultTwo
+                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+                let result2_if = match result2 {
+                    MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
+                    MailResultTwo::ErrEquipError => {
+                        // equip_error2: u32
+                        let equip_error2 = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                            equip_error2,
+                        }
+                    }
+                    MailResultTwo::ErrCannotSendToSelf => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCannotSendToSelf,
+                    MailResultTwo::ErrNotEnoughMoney => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotEnoughMoney,
+                    MailResultTwo::ErrRecipientNotFound => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientNotFound,
+                    MailResultTwo::ErrNotYourTeam => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotYourTeam,
+                    MailResultTwo::ErrInternalError => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrInternalError,
+                    MailResultTwo::ErrDisabledForTrialAcc => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrDisabledForTrialAcc,
+                    MailResultTwo::ErrRecipientCapReached => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientCapReached,
+                    MailResultTwo::ErrCantSendWrappedCod => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCantSendWrappedCod,
+                    MailResultTwo::ErrMailAndChatSuspended => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAndChatSuspended,
+                    MailResultTwo::ErrTooManyAttachments => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrTooManyAttachments,
+                    MailResultTwo::ErrMailAttachmentInvalid => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAttachmentInvalid,
+                };
+
+                SMSG_SEND_MAIL_RESULT_MailAction::MoneyTaken {
+                    result2: result2_if,
+                }
+            }
+            MailAction::ItemTaken => {
+                // result: MailResult
+                let result = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+                let result_if = match result {
+                    MailResult::Ok => {
+                        // item: u32
+                        let item = crate::util::read_u32_le(&mut r)?;
+
+                        // item_count: u32
+                        let item_count = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResult::Ok {
+                            item,
+                            item_count,
+                        }
+                    }
+                    MailResult::ErrEquipError => {
+                        // equip_error: u32
+                        let equip_error = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResult::ErrEquipError {
+                            equip_error,
+                        }
+                    }
+                    MailResult::ErrCannotSendToSelf => {
+                        // item: u32
+                        let item = crate::util::read_u32_le(&mut r)?;
+
+                        // item_count: u32
+                        let item_count = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResult::ErrCannotSendToSelf {
+                            item,
+                            item_count,
+                        }
+                    }
+                    MailResult::ErrNotEnoughMoney => {
+                        // item: u32
+                        let item = crate::util::read_u32_le(&mut r)?;
+
+                        // item_count: u32
+                        let item_count = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResult::ErrNotEnoughMoney {
+                            item,
+                            item_count,
+                        }
+                    }
+                    MailResult::ErrRecipientNotFound => {
+                        // item: u32
+                        let item = crate::util::read_u32_le(&mut r)?;
+
+                        // item_count: u32
+                        let item_count = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResult::ErrRecipientNotFound {
+                            item,
+                            item_count,
+                        }
+                    }
+                    MailResult::ErrNotYourTeam => {
+                        // item: u32
+                        let item = crate::util::read_u32_le(&mut r)?;
+
+                        // item_count: u32
+                        let item_count = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResult::ErrNotYourTeam {
+                            item,
+                            item_count,
+                        }
+                    }
+                    MailResult::ErrInternalError => {
+                        // item: u32
+                        let item = crate::util::read_u32_le(&mut r)?;
+
+                        // item_count: u32
+                        let item_count = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResult::ErrInternalError {
+                            item,
+                            item_count,
+                        }
+                    }
+                    MailResult::ErrDisabledForTrialAcc => {
+                        // item: u32
+                        let item = crate::util::read_u32_le(&mut r)?;
+
+                        // item_count: u32
+                        let item_count = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResult::ErrDisabledForTrialAcc {
+                            item,
+                            item_count,
+                        }
+                    }
+                    MailResult::ErrRecipientCapReached => {
+                        // item: u32
+                        let item = crate::util::read_u32_le(&mut r)?;
+
+                        // item_count: u32
+                        let item_count = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResult::ErrRecipientCapReached {
+                            item,
+                            item_count,
+                        }
+                    }
+                    MailResult::ErrCantSendWrappedCod => {
+                        // item: u32
+                        let item = crate::util::read_u32_le(&mut r)?;
+
+                        // item_count: u32
+                        let item_count = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResult::ErrCantSendWrappedCod {
+                            item,
+                            item_count,
+                        }
+                    }
+                    MailResult::ErrMailAndChatSuspended => {
+                        // item: u32
+                        let item = crate::util::read_u32_le(&mut r)?;
+
+                        // item_count: u32
+                        let item_count = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResult::ErrMailAndChatSuspended {
+                            item,
+                            item_count,
+                        }
+                    }
+                    MailResult::ErrTooManyAttachments => {
+                        // item: u32
+                        let item = crate::util::read_u32_le(&mut r)?;
+
+                        // item_count: u32
+                        let item_count = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResult::ErrTooManyAttachments {
+                            item,
+                            item_count,
+                        }
+                    }
+                    MailResult::ErrMailAttachmentInvalid => {
+                        // item: u32
+                        let item = crate::util::read_u32_le(&mut r)?;
+
+                        // item_count: u32
+                        let item_count = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResult::ErrMailAttachmentInvalid {
+                            item,
+                            item_count,
+                        }
+                    }
+                };
+
+                SMSG_SEND_MAIL_RESULT_MailAction::ItemTaken {
+                    result: result_if,
+                }
+            }
+            MailAction::ReturnedToSender => {
+                // result2: MailResultTwo
+                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+                let result2_if = match result2 {
+                    MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
+                    MailResultTwo::ErrEquipError => {
+                        // equip_error2: u32
+                        let equip_error2 = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                            equip_error2,
+                        }
+                    }
+                    MailResultTwo::ErrCannotSendToSelf => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCannotSendToSelf,
+                    MailResultTwo::ErrNotEnoughMoney => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotEnoughMoney,
+                    MailResultTwo::ErrRecipientNotFound => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientNotFound,
+                    MailResultTwo::ErrNotYourTeam => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotYourTeam,
+                    MailResultTwo::ErrInternalError => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrInternalError,
+                    MailResultTwo::ErrDisabledForTrialAcc => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrDisabledForTrialAcc,
+                    MailResultTwo::ErrRecipientCapReached => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientCapReached,
+                    MailResultTwo::ErrCantSendWrappedCod => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCantSendWrappedCod,
+                    MailResultTwo::ErrMailAndChatSuspended => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAndChatSuspended,
+                    MailResultTwo::ErrTooManyAttachments => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrTooManyAttachments,
+                    MailResultTwo::ErrMailAttachmentInvalid => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAttachmentInvalid,
+                };
+
+                SMSG_SEND_MAIL_RESULT_MailAction::ReturnedToSender {
+                    result2: result2_if,
+                }
+            }
+            MailAction::Deleted => {
+                // result2: MailResultTwo
+                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+                let result2_if = match result2 {
+                    MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
+                    MailResultTwo::ErrEquipError => {
+                        // equip_error2: u32
+                        let equip_error2 = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                            equip_error2,
+                        }
+                    }
+                    MailResultTwo::ErrCannotSendToSelf => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCannotSendToSelf,
+                    MailResultTwo::ErrNotEnoughMoney => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotEnoughMoney,
+                    MailResultTwo::ErrRecipientNotFound => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientNotFound,
+                    MailResultTwo::ErrNotYourTeam => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotYourTeam,
+                    MailResultTwo::ErrInternalError => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrInternalError,
+                    MailResultTwo::ErrDisabledForTrialAcc => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrDisabledForTrialAcc,
+                    MailResultTwo::ErrRecipientCapReached => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientCapReached,
+                    MailResultTwo::ErrCantSendWrappedCod => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCantSendWrappedCod,
+                    MailResultTwo::ErrMailAndChatSuspended => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAndChatSuspended,
+                    MailResultTwo::ErrTooManyAttachments => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrTooManyAttachments,
+                    MailResultTwo::ErrMailAttachmentInvalid => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAttachmentInvalid,
+                };
+
+                SMSG_SEND_MAIL_RESULT_MailAction::Deleted {
+                    result2: result2_if,
+                }
+            }
+            MailAction::MadePermanent => {
+                // result2: MailResultTwo
+                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+                let result2_if = match result2 {
+                    MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
+                    MailResultTwo::ErrEquipError => {
+                        // equip_error2: u32
+                        let equip_error2 = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                            equip_error2,
+                        }
+                    }
+                    MailResultTwo::ErrCannotSendToSelf => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCannotSendToSelf,
+                    MailResultTwo::ErrNotEnoughMoney => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotEnoughMoney,
+                    MailResultTwo::ErrRecipientNotFound => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientNotFound,
+                    MailResultTwo::ErrNotYourTeam => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotYourTeam,
+                    MailResultTwo::ErrInternalError => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrInternalError,
+                    MailResultTwo::ErrDisabledForTrialAcc => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrDisabledForTrialAcc,
+                    MailResultTwo::ErrRecipientCapReached => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientCapReached,
+                    MailResultTwo::ErrCantSendWrappedCod => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCantSendWrappedCod,
+                    MailResultTwo::ErrMailAndChatSuspended => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAndChatSuspended,
+                    MailResultTwo::ErrTooManyAttachments => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrTooManyAttachments,
+                    MailResultTwo::ErrMailAttachmentInvalid => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAttachmentInvalid,
+                };
+
+                SMSG_SEND_MAIL_RESULT_MailAction::MadePermanent {
+                    result2: result2_if,
+                }
+            }
+        };
+
+        Ok(Self {
+            mail_id,
+            action: action_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SEND_MAIL_RESULT {
     const OPCODE: u32 = 0x0239;
 
@@ -666,342 +1007,8 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(12..=20).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0239, size: body_size });
-        }
-
-        // mail_id: u32
-        let mail_id = crate::util::read_u32_le(&mut r)?;
-
-        // action: MailAction
-        let action = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        let action_if = match action {
-            MailAction::Send => {
-                // result2: MailResultTwo
-                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-                let result2_if = match result2 {
-                    MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
-                    MailResultTwo::ErrEquipError => {
-                        // equip_error2: u32
-                        let equip_error2 = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
-                            equip_error2,
-                        }
-                    }
-                    MailResultTwo::ErrCannotSendToSelf => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCannotSendToSelf,
-                    MailResultTwo::ErrNotEnoughMoney => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotEnoughMoney,
-                    MailResultTwo::ErrRecipientNotFound => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientNotFound,
-                    MailResultTwo::ErrNotYourTeam => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotYourTeam,
-                    MailResultTwo::ErrInternalError => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrInternalError,
-                    MailResultTwo::ErrDisabledForTrialAcc => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrDisabledForTrialAcc,
-                    MailResultTwo::ErrRecipientCapReached => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientCapReached,
-                    MailResultTwo::ErrCantSendWrappedCod => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCantSendWrappedCod,
-                    MailResultTwo::ErrMailAndChatSuspended => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAndChatSuspended,
-                    MailResultTwo::ErrTooManyAttachments => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrTooManyAttachments,
-                    MailResultTwo::ErrMailAttachmentInvalid => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAttachmentInvalid,
-                };
-
-                SMSG_SEND_MAIL_RESULT_MailAction::Send {
-                    result2: result2_if,
-                }
-            }
-            MailAction::MoneyTaken => {
-                // result2: MailResultTwo
-                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-                let result2_if = match result2 {
-                    MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
-                    MailResultTwo::ErrEquipError => {
-                        // equip_error2: u32
-                        let equip_error2 = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
-                            equip_error2,
-                        }
-                    }
-                    MailResultTwo::ErrCannotSendToSelf => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCannotSendToSelf,
-                    MailResultTwo::ErrNotEnoughMoney => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotEnoughMoney,
-                    MailResultTwo::ErrRecipientNotFound => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientNotFound,
-                    MailResultTwo::ErrNotYourTeam => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotYourTeam,
-                    MailResultTwo::ErrInternalError => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrInternalError,
-                    MailResultTwo::ErrDisabledForTrialAcc => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrDisabledForTrialAcc,
-                    MailResultTwo::ErrRecipientCapReached => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientCapReached,
-                    MailResultTwo::ErrCantSendWrappedCod => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCantSendWrappedCod,
-                    MailResultTwo::ErrMailAndChatSuspended => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAndChatSuspended,
-                    MailResultTwo::ErrTooManyAttachments => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrTooManyAttachments,
-                    MailResultTwo::ErrMailAttachmentInvalid => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAttachmentInvalid,
-                };
-
-                SMSG_SEND_MAIL_RESULT_MailAction::MoneyTaken {
-                    result2: result2_if,
-                }
-            }
-            MailAction::ItemTaken => {
-                // result: MailResult
-                let result = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-                let result_if = match result {
-                    MailResult::Ok => {
-                        // item: u32
-                        let item = crate::util::read_u32_le(&mut r)?;
-
-                        // item_count: u32
-                        let item_count = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResult::Ok {
-                            item,
-                            item_count,
-                        }
-                    }
-                    MailResult::ErrEquipError => {
-                        // equip_error: u32
-                        let equip_error = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResult::ErrEquipError {
-                            equip_error,
-                        }
-                    }
-                    MailResult::ErrCannotSendToSelf => {
-                        // item: u32
-                        let item = crate::util::read_u32_le(&mut r)?;
-
-                        // item_count: u32
-                        let item_count = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResult::ErrCannotSendToSelf {
-                            item,
-                            item_count,
-                        }
-                    }
-                    MailResult::ErrNotEnoughMoney => {
-                        // item: u32
-                        let item = crate::util::read_u32_le(&mut r)?;
-
-                        // item_count: u32
-                        let item_count = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResult::ErrNotEnoughMoney {
-                            item,
-                            item_count,
-                        }
-                    }
-                    MailResult::ErrRecipientNotFound => {
-                        // item: u32
-                        let item = crate::util::read_u32_le(&mut r)?;
-
-                        // item_count: u32
-                        let item_count = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResult::ErrRecipientNotFound {
-                            item,
-                            item_count,
-                        }
-                    }
-                    MailResult::ErrNotYourTeam => {
-                        // item: u32
-                        let item = crate::util::read_u32_le(&mut r)?;
-
-                        // item_count: u32
-                        let item_count = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResult::ErrNotYourTeam {
-                            item,
-                            item_count,
-                        }
-                    }
-                    MailResult::ErrInternalError => {
-                        // item: u32
-                        let item = crate::util::read_u32_le(&mut r)?;
-
-                        // item_count: u32
-                        let item_count = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResult::ErrInternalError {
-                            item,
-                            item_count,
-                        }
-                    }
-                    MailResult::ErrDisabledForTrialAcc => {
-                        // item: u32
-                        let item = crate::util::read_u32_le(&mut r)?;
-
-                        // item_count: u32
-                        let item_count = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResult::ErrDisabledForTrialAcc {
-                            item,
-                            item_count,
-                        }
-                    }
-                    MailResult::ErrRecipientCapReached => {
-                        // item: u32
-                        let item = crate::util::read_u32_le(&mut r)?;
-
-                        // item_count: u32
-                        let item_count = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResult::ErrRecipientCapReached {
-                            item,
-                            item_count,
-                        }
-                    }
-                    MailResult::ErrCantSendWrappedCod => {
-                        // item: u32
-                        let item = crate::util::read_u32_le(&mut r)?;
-
-                        // item_count: u32
-                        let item_count = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResult::ErrCantSendWrappedCod {
-                            item,
-                            item_count,
-                        }
-                    }
-                    MailResult::ErrMailAndChatSuspended => {
-                        // item: u32
-                        let item = crate::util::read_u32_le(&mut r)?;
-
-                        // item_count: u32
-                        let item_count = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResult::ErrMailAndChatSuspended {
-                            item,
-                            item_count,
-                        }
-                    }
-                    MailResult::ErrTooManyAttachments => {
-                        // item: u32
-                        let item = crate::util::read_u32_le(&mut r)?;
-
-                        // item_count: u32
-                        let item_count = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResult::ErrTooManyAttachments {
-                            item,
-                            item_count,
-                        }
-                    }
-                    MailResult::ErrMailAttachmentInvalid => {
-                        // item: u32
-                        let item = crate::util::read_u32_le(&mut r)?;
-
-                        // item_count: u32
-                        let item_count = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResult::ErrMailAttachmentInvalid {
-                            item,
-                            item_count,
-                        }
-                    }
-                };
-
-                SMSG_SEND_MAIL_RESULT_MailAction::ItemTaken {
-                    result: result_if,
-                }
-            }
-            MailAction::ReturnedToSender => {
-                // result2: MailResultTwo
-                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-                let result2_if = match result2 {
-                    MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
-                    MailResultTwo::ErrEquipError => {
-                        // equip_error2: u32
-                        let equip_error2 = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
-                            equip_error2,
-                        }
-                    }
-                    MailResultTwo::ErrCannotSendToSelf => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCannotSendToSelf,
-                    MailResultTwo::ErrNotEnoughMoney => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotEnoughMoney,
-                    MailResultTwo::ErrRecipientNotFound => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientNotFound,
-                    MailResultTwo::ErrNotYourTeam => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotYourTeam,
-                    MailResultTwo::ErrInternalError => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrInternalError,
-                    MailResultTwo::ErrDisabledForTrialAcc => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrDisabledForTrialAcc,
-                    MailResultTwo::ErrRecipientCapReached => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientCapReached,
-                    MailResultTwo::ErrCantSendWrappedCod => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCantSendWrappedCod,
-                    MailResultTwo::ErrMailAndChatSuspended => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAndChatSuspended,
-                    MailResultTwo::ErrTooManyAttachments => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrTooManyAttachments,
-                    MailResultTwo::ErrMailAttachmentInvalid => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAttachmentInvalid,
-                };
-
-                SMSG_SEND_MAIL_RESULT_MailAction::ReturnedToSender {
-                    result2: result2_if,
-                }
-            }
-            MailAction::Deleted => {
-                // result2: MailResultTwo
-                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-                let result2_if = match result2 {
-                    MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
-                    MailResultTwo::ErrEquipError => {
-                        // equip_error2: u32
-                        let equip_error2 = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
-                            equip_error2,
-                        }
-                    }
-                    MailResultTwo::ErrCannotSendToSelf => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCannotSendToSelf,
-                    MailResultTwo::ErrNotEnoughMoney => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotEnoughMoney,
-                    MailResultTwo::ErrRecipientNotFound => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientNotFound,
-                    MailResultTwo::ErrNotYourTeam => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotYourTeam,
-                    MailResultTwo::ErrInternalError => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrInternalError,
-                    MailResultTwo::ErrDisabledForTrialAcc => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrDisabledForTrialAcc,
-                    MailResultTwo::ErrRecipientCapReached => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientCapReached,
-                    MailResultTwo::ErrCantSendWrappedCod => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCantSendWrappedCod,
-                    MailResultTwo::ErrMailAndChatSuspended => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAndChatSuspended,
-                    MailResultTwo::ErrTooManyAttachments => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrTooManyAttachments,
-                    MailResultTwo::ErrMailAttachmentInvalid => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAttachmentInvalid,
-                };
-
-                SMSG_SEND_MAIL_RESULT_MailAction::Deleted {
-                    result2: result2_if,
-                }
-            }
-            MailAction::MadePermanent => {
-                // result2: MailResultTwo
-                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-                let result2_if = match result2 {
-                    MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
-                    MailResultTwo::ErrEquipError => {
-                        // equip_error2: u32
-                        let equip_error2 = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
-                            equip_error2,
-                        }
-                    }
-                    MailResultTwo::ErrCannotSendToSelf => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCannotSendToSelf,
-                    MailResultTwo::ErrNotEnoughMoney => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotEnoughMoney,
-                    MailResultTwo::ErrRecipientNotFound => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientNotFound,
-                    MailResultTwo::ErrNotYourTeam => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrNotYourTeam,
-                    MailResultTwo::ErrInternalError => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrInternalError,
-                    MailResultTwo::ErrDisabledForTrialAcc => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrDisabledForTrialAcc,
-                    MailResultTwo::ErrRecipientCapReached => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrRecipientCapReached,
-                    MailResultTwo::ErrCantSendWrappedCod => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrCantSendWrappedCod,
-                    MailResultTwo::ErrMailAndChatSuspended => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAndChatSuspended,
-                    MailResultTwo::ErrTooManyAttachments => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrTooManyAttachments,
-                    MailResultTwo::ErrMailAttachmentInvalid => SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrMailAttachmentInvalid,
-                };
-
-                SMSG_SEND_MAIL_RESULT_MailAction::MadePermanent {
-                    result2: result2_if,
-                }
-            }
-        };
-
-        Ok(Self {
-            mail_id,
-            action: action_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

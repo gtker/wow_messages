@@ -28,6 +28,46 @@ pub struct SMSG_CALENDAR_EVENT_STATUS {
 }
 
 impl crate::private::Sealed for SMSG_CALENDAR_EVENT_STATUS {}
+impl SMSG_CALENDAR_EVENT_STATUS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(24..=31).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043C, size: body_size });
+        }
+
+        // invitee: PackedGuid
+        let invitee = crate::util::read_packed_guid(&mut r)?;
+
+        // event_id: Guid
+        let event_id = crate::util::read_guid(&mut r)?;
+
+        // event_time: DateTime
+        let event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+        // flags: u32
+        let flags = crate::util::read_u32_le(&mut r)?;
+
+        // status: u8
+        let status = crate::util::read_u8_le(&mut r)?;
+
+        // rank: u8
+        let rank = crate::util::read_u8_le(&mut r)?;
+
+        // status_time: DateTime
+        let status_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+        Ok(Self {
+            invitee,
+            event_id,
+            event_time,
+            flags,
+            status,
+            rank,
+            status_time,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CALENDAR_EVENT_STATUS {
     const OPCODE: u32 = 0x043c;
 
@@ -103,41 +143,8 @@ impl crate::Message for SMSG_CALENDAR_EVENT_STATUS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(24..=31).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043C, size: body_size });
-        }
-
-        // invitee: PackedGuid
-        let invitee = crate::util::read_packed_guid(&mut r)?;
-
-        // event_id: Guid
-        let event_id = crate::util::read_guid(&mut r)?;
-
-        // event_time: DateTime
-        let event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-        // flags: u32
-        let flags = crate::util::read_u32_le(&mut r)?;
-
-        // status: u8
-        let status = crate::util::read_u8_le(&mut r)?;
-
-        // rank: u8
-        let rank = crate::util::read_u8_le(&mut r)?;
-
-        // status_time: DateTime
-        let status_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-        Ok(Self {
-            invitee,
-            event_id,
-            event_time,
-            flags,
-            status,
-            rank,
-            status_time,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

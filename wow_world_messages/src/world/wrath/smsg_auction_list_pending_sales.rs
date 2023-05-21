@@ -15,6 +15,31 @@ pub struct SMSG_AUCTION_LIST_PENDING_SALES {
 }
 
 impl crate::private::Sealed for SMSG_AUCTION_LIST_PENDING_SALES {}
+impl SMSG_AUCTION_LIST_PENDING_SALES {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0490, size: body_size });
+        }
+
+        // amount_of_pending_sales: u32
+        let amount_of_pending_sales = crate::util::read_u32_le(&mut r)?;
+
+        // pending_sales: PendingAuctionSale[amount_of_pending_sales]
+        let pending_sales = {
+            let mut pending_sales = Vec::with_capacity(amount_of_pending_sales as usize);
+            for _ in 0..amount_of_pending_sales {
+                pending_sales.push(PendingAuctionSale::read(&mut r)?);
+            }
+            pending_sales
+        };
+
+        Ok(Self {
+            pending_sales,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_AUCTION_LIST_PENDING_SALES {
     const OPCODE: u32 = 0x0490;
 
@@ -91,26 +116,8 @@ impl crate::Message for SMSG_AUCTION_LIST_PENDING_SALES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0490, size: body_size });
-        }
-
-        // amount_of_pending_sales: u32
-        let amount_of_pending_sales = crate::util::read_u32_le(&mut r)?;
-
-        // pending_sales: PendingAuctionSale[amount_of_pending_sales]
-        let pending_sales = {
-            let mut pending_sales = Vec::with_capacity(amount_of_pending_sales as usize);
-            for _ in 0..amount_of_pending_sales {
-                pending_sales.push(PendingAuctionSale::read(&mut r)?);
-            }
-            pending_sales
-        };
-
-        Ok(Self {
-            pending_sales,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

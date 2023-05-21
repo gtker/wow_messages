@@ -23,6 +23,38 @@ pub struct SMSG_SPELLDAMAGESHIELD {
 }
 
 impl crate::private::Sealed for SMSG_SPELLDAMAGESHIELD {}
+impl SMSG_SPELLDAMAGESHIELD {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 28 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x024F, size: body_size });
+        }
+
+        // victim: Guid
+        let victim = crate::util::read_guid(&mut r)?;
+
+        // caster: Guid
+        let caster = crate::util::read_guid(&mut r)?;
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // damage: u32
+        let damage = crate::util::read_u32_le(&mut r)?;
+
+        // school: SpellSchool
+        let school = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        Ok(Self {
+            victim,
+            caster,
+            spell,
+            damage,
+            school,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SPELLDAMAGESHIELD {
     const OPCODE: u32 = 0x024f;
 
@@ -88,33 +120,8 @@ impl crate::Message for SMSG_SPELLDAMAGESHIELD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 28 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x024F, size: body_size });
-        }
-
-        // victim: Guid
-        let victim = crate::util::read_guid(&mut r)?;
-
-        // caster: Guid
-        let caster = crate::util::read_guid(&mut r)?;
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // damage: u32
-        let damage = crate::util::read_u32_le(&mut r)?;
-
-        // school: SpellSchool
-        let school = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        Ok(Self {
-            victim,
-            caster,
-            spell,
-            damage,
-            school,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

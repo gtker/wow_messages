@@ -25,6 +25,42 @@ pub struct CMSG_UPDATE_MISSILE_TRAJECTORY {
 }
 
 impl crate::private::Sealed for CMSG_UPDATE_MISSILE_TRAJECTORY {}
+impl CMSG_UPDATE_MISSILE_TRAJECTORY {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 44 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0462, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // elevation: f32
+        let elevation = crate::util::read_f32_le(&mut r)?;
+
+        // speed: f32
+        let speed = crate::util::read_f32_le(&mut r)?;
+
+        // position: Vector3d
+        let position = Vector3d::read(&mut r)?;
+
+        // target: Vector3d
+        let target = Vector3d::read(&mut r)?;
+
+        Ok(Self {
+            guid,
+            spell,
+            elevation,
+            speed,
+            position,
+            target,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
     const OPCODE: u32 = 0x0462;
 
@@ -117,37 +153,8 @@ impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 44 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0462, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // elevation: f32
-        let elevation = crate::util::read_f32_le(&mut r)?;
-
-        // speed: f32
-        let speed = crate::util::read_f32_le(&mut r)?;
-
-        // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
-
-        // target: Vector3d
-        let target = Vector3d::read(&mut r)?;
-
-        Ok(Self {
-            guid,
-            spell,
-            elevation,
-            speed,
-            position,
-            target,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

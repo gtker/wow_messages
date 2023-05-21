@@ -14,6 +14,26 @@ pub struct CMSG_QUESTLOG_SWAP_QUEST {
 }
 
 impl crate::private::Sealed for CMSG_QUESTLOG_SWAP_QUEST {}
+impl CMSG_QUESTLOG_SWAP_QUEST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 2 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0193, size: body_size });
+        }
+
+        // slot1: u8
+        let slot1 = crate::util::read_u8_le(&mut r)?;
+
+        // slot2: u8
+        let slot2 = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            slot1,
+            slot2,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_QUESTLOG_SWAP_QUEST {
     const OPCODE: u32 = 0x0193;
 
@@ -64,21 +84,8 @@ impl crate::Message for CMSG_QUESTLOG_SWAP_QUEST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 2 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0193, size: body_size });
-        }
-
-        // slot1: u8
-        let slot1 = crate::util::read_u8_le(&mut r)?;
-
-        // slot2: u8
-        let slot2 = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            slot1,
-            slot2,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

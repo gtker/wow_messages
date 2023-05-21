@@ -12,6 +12,22 @@ pub struct CMSG_TOTEM_DESTROYED {
 }
 
 impl crate::private::Sealed for CMSG_TOTEM_DESTROYED {}
+impl CMSG_TOTEM_DESTROYED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0414, size: body_size });
+        }
+
+        // slot: u8
+        let slot = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            slot,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_TOTEM_DESTROYED {
     const OPCODE: u32 = 0x0414;
 
@@ -57,17 +73,8 @@ impl crate::Message for CMSG_TOTEM_DESTROYED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0414, size: body_size });
-        }
-
-        // slot: u8
-        let slot = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            slot,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

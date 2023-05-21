@@ -29,6 +29,48 @@ pub struct SMSG_NAME_QUERY_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_NAME_QUERY_RESPONSE {}
+impl SMSG_NAME_QUERY_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(22..=532).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0051, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // character_name: CString
+        let character_name = {
+            let character_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(character_name)?
+        };
+
+        // realm_name: CString
+        let realm_name = {
+            let realm_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(realm_name)?
+        };
+
+        // race: Race
+        let race = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        // gender: Gender
+        let gender = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        // class: Class
+        let class = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        Ok(Self {
+            guid,
+            character_name,
+            realm_name,
+            race,
+            gender,
+            class,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
     const OPCODE: u32 = 0x0051;
 
@@ -66,43 +108,8 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(22..=532).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0051, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // character_name: CString
-        let character_name = {
-            let character_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(character_name)?
-        };
-
-        // realm_name: CString
-        let realm_name = {
-            let realm_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(realm_name)?
-        };
-
-        // race: Race
-        let race = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        // gender: Gender
-        let gender = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        // class: Class
-        let class = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        Ok(Self {
-            guid,
-            character_name,
-            realm_name,
-            race,
-            gender,
-            class,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

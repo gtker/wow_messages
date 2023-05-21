@@ -19,6 +19,44 @@ pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 }
 
 impl crate::private::Sealed for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
+impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(5..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E9, size: body_size });
+        }
+
+        // amount_of_teammates: u32
+        let amount_of_teammates = crate::util::read_u32_le(&mut r)?;
+
+        // teammates: BattlegroundPlayerPosition[amount_of_teammates]
+        let teammates = {
+            let mut teammates = Vec::with_capacity(amount_of_teammates as usize);
+            for _ in 0..amount_of_teammates {
+                teammates.push(BattlegroundPlayerPosition::read(&mut r)?);
+            }
+            teammates
+        };
+
+        // amount_of_carriers: u8
+        let amount_of_carriers = crate::util::read_u8_le(&mut r)?;
+
+        // carriers: BattlegroundPlayerPosition[amount_of_carriers]
+        let carriers = {
+            let mut carriers = Vec::with_capacity(amount_of_carriers as usize);
+            for _ in 0..amount_of_carriers {
+                carriers.push(BattlegroundPlayerPosition::read(&mut r)?);
+            }
+            carriers
+        };
+
+        Ok(Self {
+            teammates,
+            carriers,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     const OPCODE: u32 = 0x02e9;
 
@@ -123,39 +161,8 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(5..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E9, size: body_size });
-        }
-
-        // amount_of_teammates: u32
-        let amount_of_teammates = crate::util::read_u32_le(&mut r)?;
-
-        // teammates: BattlegroundPlayerPosition[amount_of_teammates]
-        let teammates = {
-            let mut teammates = Vec::with_capacity(amount_of_teammates as usize);
-            for _ in 0..amount_of_teammates {
-                teammates.push(BattlegroundPlayerPosition::read(&mut r)?);
-            }
-            teammates
-        };
-
-        // amount_of_carriers: u8
-        let amount_of_carriers = crate::util::read_u8_le(&mut r)?;
-
-        // carriers: BattlegroundPlayerPosition[amount_of_carriers]
-        let carriers = {
-            let mut carriers = Vec::with_capacity(amount_of_carriers as usize);
-            for _ in 0..amount_of_carriers {
-                carriers.push(BattlegroundPlayerPosition::read(&mut r)?);
-            }
-            carriers
-        };
-
-        Ok(Self {
-            teammates,
-            carriers,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

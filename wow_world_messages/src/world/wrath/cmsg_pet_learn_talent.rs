@@ -18,6 +18,30 @@ pub struct CMSG_PET_LEARN_TALENT {
 }
 
 impl crate::private::Sealed for CMSG_PET_LEARN_TALENT {}
+impl CMSG_PET_LEARN_TALENT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x047A, size: body_size });
+        }
+
+        // pet: Guid
+        let pet = crate::util::read_guid(&mut r)?;
+
+        // talent: u32
+        let talent = crate::util::read_u32_le(&mut r)?;
+
+        // rank: u32
+        let rank = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            pet,
+            talent,
+            rank,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_PET_LEARN_TALENT {
     const OPCODE: u32 = 0x047a;
 
@@ -73,25 +97,8 @@ impl crate::Message for CMSG_PET_LEARN_TALENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x047A, size: body_size });
-        }
-
-        // pet: Guid
-        let pet = crate::util::read_guid(&mut r)?;
-
-        // talent: u32
-        let talent = crate::util::read_u32_le(&mut r)?;
-
-        // rank: u32
-        let rank = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            pet,
-            talent,
-            rank,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

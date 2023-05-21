@@ -20,6 +20,30 @@ pub struct SMSG_CALENDAR_EVENT_REMOVED_ALERT {
 }
 
 impl crate::private::Sealed for SMSG_CALENDAR_EVENT_REMOVED_ALERT {}
+impl SMSG_CALENDAR_EVENT_REMOVED_ALERT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 13 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0443, size: body_size });
+        }
+
+        // show_alert: Bool
+        let show_alert = crate::util::read_u8_le(&mut r)? != 0;
+
+        // event_id: Guid
+        let event_id = crate::util::read_guid(&mut r)?;
+
+        // event_time: DateTime
+        let event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+        Ok(Self {
+            show_alert,
+            event_id,
+            event_time,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CALENDAR_EVENT_REMOVED_ALERT {
     const OPCODE: u32 = 0x0443;
 
@@ -75,25 +99,8 @@ impl crate::Message for SMSG_CALENDAR_EVENT_REMOVED_ALERT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 13 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0443, size: body_size });
-        }
-
-        // show_alert: Bool
-        let show_alert = crate::util::read_u8_le(&mut r)? != 0;
-
-        // event_id: Guid
-        let event_id = crate::util::read_guid(&mut r)?;
-
-        // event_time: DateTime
-        let event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-        Ok(Self {
-            show_alert,
-            event_id,
-            event_time,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

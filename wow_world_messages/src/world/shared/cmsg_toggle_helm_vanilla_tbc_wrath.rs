@@ -10,6 +10,18 @@ pub struct CMSG_TOGGLE_HELM {
 }
 
 impl crate::private::Sealed for CMSG_TOGGLE_HELM {}
+impl CMSG_TOGGLE_HELM {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 0 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02B9, size: body_size });
+        }
+
+        Ok(Self {
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_TOGGLE_HELM {
     const OPCODE: u32 = 0x02b9;
 
@@ -50,13 +62,8 @@ impl crate::Message for CMSG_TOGGLE_HELM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02B9, size: body_size });
-        }
-
-        Ok(Self {
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

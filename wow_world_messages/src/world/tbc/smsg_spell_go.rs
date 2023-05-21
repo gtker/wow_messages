@@ -39,6 +39,89 @@ pub struct SMSG_SPELL_GO {
 }
 
 impl crate::private::Sealed for SMSG_SPELL_GO {}
+impl SMSG_SPELL_GO {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(20..=5734).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0132, size: body_size });
+        }
+
+        // cast_item: PackedGuid
+        let cast_item = crate::util::read_packed_guid(&mut r)?;
+
+        // caster: PackedGuid
+        let caster = crate::util::read_packed_guid(&mut r)?;
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // flags: CastFlags
+        let flags = CastFlags::new(crate::util::read_u16_le(&mut r)?);
+
+        // timestamp: u32
+        let timestamp = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_hits: u8
+        let amount_of_hits = crate::util::read_u8_le(&mut r)?;
+
+        // hits: Guid[amount_of_hits]
+        let hits = {
+            let mut hits = Vec::with_capacity(amount_of_hits as usize);
+            for _ in 0..amount_of_hits {
+                hits.push(crate::util::read_guid(&mut r)?);
+            }
+            hits
+        };
+
+        // amount_of_misses: u8
+        let amount_of_misses = crate::util::read_u8_le(&mut r)?;
+
+        // misses: SpellMiss[amount_of_misses]
+        let misses = {
+            let mut misses = Vec::with_capacity(amount_of_misses as usize);
+            for _ in 0..amount_of_misses {
+                misses.push(SpellMiss::read(&mut r)?);
+            }
+            misses
+        };
+
+        // targets: SpellCastTargets
+        let targets = SpellCastTargets::read(&mut r)?;
+
+        let flags_ammo = if flags.is_ammo() {
+            // ammo_display_id: u32
+            let ammo_display_id = crate::util::read_u32_le(&mut r)?;
+
+            // ammo_inventory_type: u32
+            let ammo_inventory_type = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_SPELL_GO_CastFlags_Ammo {
+                ammo_display_id,
+                ammo_inventory_type,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags = SMSG_SPELL_GO_CastFlags {
+            inner: flags.as_int(),
+            ammo: flags_ammo,
+        };
+
+        Ok(Self {
+            cast_item,
+            caster,
+            spell,
+            flags,
+            timestamp,
+            hits,
+            misses,
+            targets,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SPELL_GO {
     const OPCODE: u32 = 0x0132;
 
@@ -381,84 +464,8 @@ impl crate::Message for SMSG_SPELL_GO {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(20..=5734).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0132, size: body_size });
-        }
-
-        // cast_item: PackedGuid
-        let cast_item = crate::util::read_packed_guid(&mut r)?;
-
-        // caster: PackedGuid
-        let caster = crate::util::read_packed_guid(&mut r)?;
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // flags: CastFlags
-        let flags = CastFlags::new(crate::util::read_u16_le(&mut r)?);
-
-        // timestamp: u32
-        let timestamp = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_hits: u8
-        let amount_of_hits = crate::util::read_u8_le(&mut r)?;
-
-        // hits: Guid[amount_of_hits]
-        let hits = {
-            let mut hits = Vec::with_capacity(amount_of_hits as usize);
-            for _ in 0..amount_of_hits {
-                hits.push(crate::util::read_guid(&mut r)?);
-            }
-            hits
-        };
-
-        // amount_of_misses: u8
-        let amount_of_misses = crate::util::read_u8_le(&mut r)?;
-
-        // misses: SpellMiss[amount_of_misses]
-        let misses = {
-            let mut misses = Vec::with_capacity(amount_of_misses as usize);
-            for _ in 0..amount_of_misses {
-                misses.push(SpellMiss::read(&mut r)?);
-            }
-            misses
-        };
-
-        // targets: SpellCastTargets
-        let targets = SpellCastTargets::read(&mut r)?;
-
-        let flags_ammo = if flags.is_ammo() {
-            // ammo_display_id: u32
-            let ammo_display_id = crate::util::read_u32_le(&mut r)?;
-
-            // ammo_inventory_type: u32
-            let ammo_inventory_type = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_SPELL_GO_CastFlags_Ammo {
-                ammo_display_id,
-                ammo_inventory_type,
-            })
-        }
-        else {
-            None
-        };
-
-        let flags = SMSG_SPELL_GO_CastFlags {
-            inner: flags.as_int(),
-            ammo: flags_ammo,
-        };
-
-        Ok(Self {
-            cast_item,
-            caster,
-            spell,
-            flags,
-            timestamp,
-            hits,
-            misses,
-            targets,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

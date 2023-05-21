@@ -14,6 +14,22 @@ pub struct SMSG_TRIGGER_CINEMATIC {
 }
 
 impl crate::private::Sealed for SMSG_TRIGGER_CINEMATIC {}
+impl SMSG_TRIGGER_CINEMATIC {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00FA, size: body_size });
+        }
+
+        // cinematic_sequence_id: CinematicSequenceId
+        let cinematic_sequence_id = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            cinematic_sequence_id,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_TRIGGER_CINEMATIC {
     const OPCODE: u32 = 0x00fa;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_TRIGGER_CINEMATIC {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00FA, size: body_size });
-        }
-
-        // cinematic_sequence_id: CinematicSequenceId
-        let cinematic_sequence_id = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            cinematic_sequence_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

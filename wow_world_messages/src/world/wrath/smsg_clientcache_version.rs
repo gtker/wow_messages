@@ -12,6 +12,22 @@ pub struct SMSG_CLIENTCACHE_VERSION {
 }
 
 impl crate::private::Sealed for SMSG_CLIENTCACHE_VERSION {}
+impl SMSG_CLIENTCACHE_VERSION {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04AB, size: body_size });
+        }
+
+        // version: u32
+        let version = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            version,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CLIENTCACHE_VERSION {
     const OPCODE: u32 = 0x04ab;
 
@@ -57,17 +73,8 @@ impl crate::Message for SMSG_CLIENTCACHE_VERSION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04AB, size: body_size });
-        }
-
-        // version: u32
-        let version = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            version,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

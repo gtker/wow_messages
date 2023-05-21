@@ -19,6 +19,30 @@ pub struct SMSG_SELL_ITEM {
 }
 
 impl crate::private::Sealed for SMSG_SELL_ITEM {}
+impl SMSG_SELL_ITEM {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 17 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01A1, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // item: Guid
+        let item = crate::util::read_guid(&mut r)?;
+
+        // result: SellItemResult
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            guid,
+            item,
+            result,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SELL_ITEM {
     const OPCODE: u32 = 0x01a1;
 
@@ -74,25 +98,8 @@ impl crate::Message for SMSG_SELL_ITEM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 17 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01A1, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // item: Guid
-        let item = crate::util::read_guid(&mut r)?;
-
-        // result: SellItemResult
-        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            guid,
-            item,
-            result,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

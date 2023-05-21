@@ -15,6 +15,29 @@ pub struct SMSG_KICK_REASON {
 }
 
 impl crate::private::Sealed for SMSG_KICK_REASON {}
+impl SMSG_KICK_REASON {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=257).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C5, size: body_size });
+        }
+
+        // reason: u8
+        let reason = crate::util::read_u8_le(&mut r)?;
+
+        // text: CString
+        let text = {
+            let text = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(text)?
+        };
+
+        Ok(Self {
+            reason,
+            text,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_KICK_REASON {
     const OPCODE: u32 = 0x03c5;
 
@@ -69,24 +92,8 @@ impl crate::Message for SMSG_KICK_REASON {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=257).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C5, size: body_size });
-        }
-
-        // reason: u8
-        let reason = crate::util::read_u8_le(&mut r)?;
-
-        // text: CString
-        let text = {
-            let text = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(text)?
-        };
-
-        Ok(Self {
-            reason,
-            text,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -18,6 +18,30 @@ pub struct SMSG_CROSSED_INEBRIATION_THRESHOLD {
 }
 
 impl crate::private::Sealed for SMSG_CROSSED_INEBRIATION_THRESHOLD {}
+impl SMSG_CROSSED_INEBRIATION_THRESHOLD {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C1, size: body_size });
+        }
+
+        // player: Guid
+        let player = crate::util::read_guid(&mut r)?;
+
+        // state: u32
+        let state = crate::util::read_u32_le(&mut r)?;
+
+        // item: u32
+        let item = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            player,
+            state,
+            item,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CROSSED_INEBRIATION_THRESHOLD {
     const OPCODE: u32 = 0x03c1;
 
@@ -73,25 +97,8 @@ impl crate::Message for SMSG_CROSSED_INEBRIATION_THRESHOLD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C1, size: body_size });
-        }
-
-        // player: Guid
-        let player = crate::util::read_guid(&mut r)?;
-
-        // state: u32
-        let state = crate::util::read_u32_le(&mut r)?;
-
-        // item: u32
-        let item = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            player,
-            state,
-            item,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

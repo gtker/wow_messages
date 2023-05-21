@@ -14,6 +14,22 @@ pub struct CMSG_STANDSTATECHANGE {
 }
 
 impl crate::private::Sealed for CMSG_STANDSTATECHANGE {}
+impl CMSG_STANDSTATECHANGE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0101, size: body_size });
+        }
+
+        // animation_state: UnitStandState
+        let animation_state = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        Ok(Self {
+            animation_state,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_STANDSTATECHANGE {
     const OPCODE: u32 = 0x0101;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_STANDSTATECHANGE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0101, size: body_size });
-        }
-
-        // animation_state: UnitStandState
-        let animation_state = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        Ok(Self {
-            animation_state,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

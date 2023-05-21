@@ -16,23 +16,8 @@ pub struct SMSG_ACCOUNT_DATA_TIMES {
 }
 
 impl crate::private::Sealed for SMSG_ACCOUNT_DATA_TIMES {}
-impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
-    const OPCODE: u32 = 0x0209;
-
-    fn size_without_header(&self) -> u32 {
-        128
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // data: u32[32]
-        for i in self.data.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl SMSG_ACCOUNT_DATA_TIMES {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 128 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0209, size: body_size });
         }
@@ -49,6 +34,28 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         Ok(Self {
             data,
         })
+    }
+
+}
+
+impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
+    const OPCODE: u32 = 0x0209;
+
+    fn size_without_header(&self) -> u32 {
+        128
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // data: u32[32]
+        for i in self.data.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

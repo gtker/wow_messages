@@ -12,6 +12,22 @@ pub struct CMSG_OPT_OUT_OF_LOOT {
 }
 
 impl crate::private::Sealed for CMSG_OPT_OUT_OF_LOOT {}
+impl CMSG_OPT_OUT_OF_LOOT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0408, size: body_size });
+        }
+
+        // pass_on_loot: Bool32
+        let pass_on_loot = crate::util::read_u32_le(&mut r)? != 0;
+
+        Ok(Self {
+            pass_on_loot,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_OPT_OUT_OF_LOOT {
     const OPCODE: u32 = 0x0408;
 
@@ -57,17 +73,8 @@ impl crate::Message for CMSG_OPT_OUT_OF_LOOT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0408, size: body_size });
-        }
-
-        // pass_on_loot: Bool32
-        let pass_on_loot = crate::util::read_u32_le(&mut r)? != 0;
-
-        Ok(Self {
-            pass_on_loot,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -28,6 +28,42 @@ pub struct CMSG_USE_ITEM {
 }
 
 impl crate::private::Sealed for CMSG_USE_ITEM {}
+impl CMSG_USE_ITEM {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(16..=332).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00AB, size: body_size });
+        }
+
+        // bag_index: u8
+        let bag_index = crate::util::read_u8_le(&mut r)?;
+
+        // bag_slot: u8
+        let bag_slot = crate::util::read_u8_le(&mut r)?;
+
+        // spell_index: u8
+        let spell_index = crate::util::read_u8_le(&mut r)?;
+
+        // cast_count: u8
+        let cast_count = crate::util::read_u8_le(&mut r)?;
+
+        // item: Guid
+        let item = crate::util::read_guid(&mut r)?;
+
+        // targets: SpellCastTargets
+        let targets = SpellCastTargets::read(&mut r)?;
+
+        Ok(Self {
+            bag_index,
+            bag_slot,
+            spell_index,
+            cast_count,
+            item,
+            targets,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_USE_ITEM {
     const OPCODE: u32 = 0x00ab;
 
@@ -281,37 +317,8 @@ impl crate::Message for CMSG_USE_ITEM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(16..=332).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00AB, size: body_size });
-        }
-
-        // bag_index: u8
-        let bag_index = crate::util::read_u8_le(&mut r)?;
-
-        // bag_slot: u8
-        let bag_slot = crate::util::read_u8_le(&mut r)?;
-
-        // spell_index: u8
-        let spell_index = crate::util::read_u8_le(&mut r)?;
-
-        // cast_count: u8
-        let cast_count = crate::util::read_u8_le(&mut r)?;
-
-        // item: Guid
-        let item = crate::util::read_guid(&mut r)?;
-
-        // targets: SpellCastTargets
-        let targets = SpellCastTargets::read(&mut r)?;
-
-        Ok(Self {
-            bag_index,
-            bag_slot,
-            spell_index,
-            cast_count,
-            item,
-            targets,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

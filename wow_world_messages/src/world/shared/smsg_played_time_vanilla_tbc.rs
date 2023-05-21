@@ -14,6 +14,26 @@ pub struct SMSG_PLAYED_TIME {
 }
 
 impl crate::private::Sealed for SMSG_PLAYED_TIME {}
+impl SMSG_PLAYED_TIME {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CD, size: body_size });
+        }
+
+        // total_played_time: u32
+        let total_played_time = crate::util::read_u32_le(&mut r)?;
+
+        // level_played_time: u32
+        let level_played_time = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            total_played_time,
+            level_played_time,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PLAYED_TIME {
     const OPCODE: u32 = 0x01cd;
 
@@ -64,21 +84,8 @@ impl crate::Message for SMSG_PLAYED_TIME {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CD, size: body_size });
-        }
-
-        // total_played_time: u32
-        let total_played_time = crate::util::read_u32_le(&mut r)?;
-
-        // level_played_time: u32
-        let level_played_time = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            total_played_time,
-            level_played_time,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

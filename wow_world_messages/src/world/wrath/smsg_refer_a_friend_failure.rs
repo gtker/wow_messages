@@ -17,6 +17,49 @@ pub struct SMSG_REFER_A_FRIEND_FAILURE {
 }
 
 impl crate::private::Sealed for SMSG_REFER_A_FRIEND_FAILURE {}
+impl SMSG_REFER_A_FRIEND_FAILURE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=260).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0421, size: body_size });
+        }
+
+        // error: ReferAFriendError
+        let error = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        let error_if = match error {
+            ReferAFriendError::None => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::None,
+            ReferAFriendError::NotReferredBy => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotReferredBy,
+            ReferAFriendError::TargetTooHigh => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::TargetTooHigh,
+            ReferAFriendError::InsufficientGrantableLevels => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::InsufficientGrantableLevels,
+            ReferAFriendError::TooFar => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::TooFar,
+            ReferAFriendError::DifferentFaction => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::DifferentFaction,
+            ReferAFriendError::NotNow => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotNow,
+            ReferAFriendError::GrantLevelMax => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::GrantLevelMax,
+            ReferAFriendError::NoTarget => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NoTarget,
+            ReferAFriendError::NotInGroup => {
+                // target_name: CString
+                let target_name = {
+                    let target_name = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(target_name)?
+                };
+
+                SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotInGroup {
+                    target_name,
+                }
+            }
+            ReferAFriendError::SummonLevelMax => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::SummonLevelMax,
+            ReferAFriendError::SummonCooldown => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::SummonCooldown,
+            ReferAFriendError::InsufficientExpansionLevel => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::InsufficientExpansionLevel,
+            ReferAFriendError::SummonOffline => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::SummonOffline,
+        };
+
+        Ok(Self {
+            error: error_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
     const OPCODE: u32 = 0x0421;
 
@@ -95,44 +138,8 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=260).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0421, size: body_size });
-        }
-
-        // error: ReferAFriendError
-        let error = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        let error_if = match error {
-            ReferAFriendError::None => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::None,
-            ReferAFriendError::NotReferredBy => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotReferredBy,
-            ReferAFriendError::TargetTooHigh => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::TargetTooHigh,
-            ReferAFriendError::InsufficientGrantableLevels => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::InsufficientGrantableLevels,
-            ReferAFriendError::TooFar => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::TooFar,
-            ReferAFriendError::DifferentFaction => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::DifferentFaction,
-            ReferAFriendError::NotNow => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotNow,
-            ReferAFriendError::GrantLevelMax => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::GrantLevelMax,
-            ReferAFriendError::NoTarget => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NoTarget,
-            ReferAFriendError::NotInGroup => {
-                // target_name: CString
-                let target_name = {
-                    let target_name = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(target_name)?
-                };
-
-                SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotInGroup {
-                    target_name,
-                }
-            }
-            ReferAFriendError::SummonLevelMax => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::SummonLevelMax,
-            ReferAFriendError::SummonCooldown => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::SummonCooldown,
-            ReferAFriendError::InsufficientExpansionLevel => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::InsufficientExpansionLevel,
-            ReferAFriendError::SummonOffline => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::SummonOffline,
-        };
-
-        Ok(Self {
-            error: error_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -16,6 +16,26 @@ pub struct CMSG_STABLE_SWAP_PET {
 }
 
 impl crate::private::Sealed for CMSG_STABLE_SWAP_PET {}
+impl CMSG_STABLE_SWAP_PET {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0275, size: body_size });
+        }
+
+        // npc: Guid
+        let npc = crate::util::read_guid(&mut r)?;
+
+        // pet_slot: u32
+        let pet_slot = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            npc,
+            pet_slot,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_STABLE_SWAP_PET {
     const OPCODE: u32 = 0x0275;
 
@@ -66,21 +86,8 @@ impl crate::Message for CMSG_STABLE_SWAP_PET {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0275, size: body_size });
-        }
-
-        // npc: Guid
-        let npc = crate::util::read_guid(&mut r)?;
-
-        // pet_slot: u32
-        let pet_slot = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            npc,
-            pet_slot,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

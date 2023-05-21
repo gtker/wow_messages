@@ -26,130 +26,8 @@ pub struct SMSG_AUTH_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_AUTH_RESPONSE {}
-impl crate::Message for SMSG_AUTH_RESPONSE {
-    const OPCODE: u32 = 0x01ee;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_AUTH_RESPONSE {{").unwrap();
-        // Members
-        writeln!(s, "    result = {};", WorldResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.result {
-            crate::wrath::SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
-                billing_flags,
-                billing_rested,
-                billing_time,
-                expansion,
-            } => {
-                writeln!(s, "    billing_time = {};", billing_time).unwrap();
-                writeln!(s, "    billing_flags = {};", billing_flags.as_test_case_value()).unwrap();
-                writeln!(s, "    billing_rested = {};", billing_rested).unwrap();
-                writeln!(s, "    expansion = {};", expansion.as_test_case_value()).unwrap();
-            }
-            crate::wrath::SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
-                queue_position,
-                realm_has_free_character_migration,
-            } => {
-                writeln!(s, "    queue_position = {};", queue_position).unwrap();
-                writeln!(s, "    realm_has_free_character_migration = {};", if *realm_has_free_character_migration { "TRUE" } else { "FALSE" }).unwrap();
-            }
-            _ => {}
-        }
-
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 494_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
-        match &self.result {
-            crate::wrath::SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
-                billing_flags,
-                billing_rested,
-                billing_time,
-                expansion,
-            } => {
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "billing_time", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "billing_flags", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "billing_rested", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "expansion", "    ");
-            }
-            crate::wrath::SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
-                queue_position,
-                realm_has_free_character_migration,
-            } => {
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "queue_position", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "realm_has_free_character_migration", "    ");
-            }
-            _ => {}
-        }
-
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("3.3.5".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // result: WorldResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
-
-        match &self.result {
-            SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
-                billing_flags,
-                billing_rested,
-                billing_time,
-                expansion,
-            } => {
-                // billing_time: u32
-                w.write_all(&billing_time.to_le_bytes())?;
-
-                // billing_flags: BillingPlanFlags
-                w.write_all(&(billing_flags.as_int().to_le_bytes()))?;
-
-                // billing_rested: u32
-                w.write_all(&billing_rested.to_le_bytes())?;
-
-                // expansion: Expansion
-                w.write_all(&(expansion.as_int().to_le_bytes()))?;
-
-            }
-            SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
-                queue_position,
-                realm_has_free_character_migration,
-            } => {
-                // queue_position: u32
-                w.write_all(&queue_position.to_le_bytes())?;
-
-                // realm_has_free_character_migration: Bool
-                w.write_all(u8::from(*realm_has_free_character_migration).to_le_bytes().as_slice())?;
-
-            }
-            _ => {}
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl SMSG_AUTH_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(1..=11).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01EE, size: body_size });
         }
@@ -297,6 +175,135 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
         Ok(Self {
             result: result_if,
         })
+    }
+
+}
+
+impl crate::Message for SMSG_AUTH_RESPONSE {
+    const OPCODE: u32 = 0x01ee;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_AUTH_RESPONSE {{").unwrap();
+        // Members
+        writeln!(s, "    result = {};", WorldResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.result {
+            crate::wrath::SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
+                billing_flags,
+                billing_rested,
+                billing_time,
+                expansion,
+            } => {
+                writeln!(s, "    billing_time = {};", billing_time).unwrap();
+                writeln!(s, "    billing_flags = {};", billing_flags.as_test_case_value()).unwrap();
+                writeln!(s, "    billing_rested = {};", billing_rested).unwrap();
+                writeln!(s, "    expansion = {};", expansion.as_test_case_value()).unwrap();
+            }
+            crate::wrath::SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
+                queue_position,
+                realm_has_free_character_migration,
+            } => {
+                writeln!(s, "    queue_position = {};", queue_position).unwrap();
+                writeln!(s, "    realm_has_free_character_migration = {};", if *realm_has_free_character_migration { "TRUE" } else { "FALSE" }).unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 494_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
+        match &self.result {
+            crate::wrath::SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
+                billing_flags,
+                billing_rested,
+                billing_time,
+                expansion,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "billing_time", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "billing_flags", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "billing_rested", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "expansion", "    ");
+            }
+            crate::wrath::SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
+                queue_position,
+                realm_has_free_character_migration,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "queue_position", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "realm_has_free_character_migration", "    ");
+            }
+            _ => {}
+        }
+
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("3.3.5".to_string())).unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        Some(s)
+    }
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // result: WorldResult
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
+
+        match &self.result {
+            SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
+                billing_flags,
+                billing_rested,
+                billing_time,
+                expansion,
+            } => {
+                // billing_time: u32
+                w.write_all(&billing_time.to_le_bytes())?;
+
+                // billing_flags: BillingPlanFlags
+                w.write_all(&(billing_flags.as_int().to_le_bytes()))?;
+
+                // billing_rested: u32
+                w.write_all(&billing_rested.to_le_bytes())?;
+
+                // expansion: Expansion
+                w.write_all(&(expansion.as_int().to_le_bytes()))?;
+
+            }
+            SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
+                queue_position,
+                realm_has_free_character_migration,
+            } => {
+                // queue_position: u32
+                w.write_all(&queue_position.to_le_bytes())?;
+
+                // realm_has_free_character_migration: Bool
+                w.write_all(u8::from(*realm_has_free_character_migration).to_le_bytes().as_slice())?;
+
+            }
+            _ => {}
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

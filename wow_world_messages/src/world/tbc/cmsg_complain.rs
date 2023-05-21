@@ -29,6 +29,72 @@ pub struct CMSG_COMPLAIN {
 }
 
 impl crate::private::Sealed for CMSG_COMPLAIN {}
+impl CMSG_COMPLAIN {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(9..=281).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C6, size: body_size });
+        }
+
+        // complaint_type: SpamType
+        let complaint_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // offender: Guid
+        let offender = crate::util::read_guid(&mut r)?;
+
+        let complaint_type_if = match complaint_type {
+            SpamType::Mail => {
+                // unknown1: u32
+                let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+                // mail_id: u32
+                let mail_id = crate::util::read_u32_le(&mut r)?;
+
+                // unknown2: u32
+                let unknown2 = crate::util::read_u32_le(&mut r)?;
+
+                CMSG_COMPLAIN_SpamType::Mail {
+                    mail_id,
+                    unknown1,
+                    unknown2,
+                }
+            }
+            SpamType::Chat => {
+                // language: u32
+                let language = crate::util::read_u32_le(&mut r)?;
+
+                // message_type: u32
+                let message_type = crate::util::read_u32_le(&mut r)?;
+
+                // channel_id: u32
+                let channel_id = crate::util::read_u32_le(&mut r)?;
+
+                // time: u32
+                let time = crate::util::read_u32_le(&mut r)?;
+
+                // description: CString
+                let description = {
+                    let description = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(description)?
+                };
+
+                CMSG_COMPLAIN_SpamType::Chat {
+                    channel_id,
+                    description,
+                    language,
+                    message_type,
+                    time,
+                }
+            }
+        };
+
+        Ok(Self {
+            complaint_type: complaint_type_if,
+            offender,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_COMPLAIN {
     const OPCODE: u32 = 0x03c6;
 
@@ -174,67 +240,8 @@ impl crate::Message for CMSG_COMPLAIN {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(9..=281).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C6, size: body_size });
-        }
-
-        // complaint_type: SpamType
-        let complaint_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // offender: Guid
-        let offender = crate::util::read_guid(&mut r)?;
-
-        let complaint_type_if = match complaint_type {
-            SpamType::Mail => {
-                // unknown1: u32
-                let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-                // mail_id: u32
-                let mail_id = crate::util::read_u32_le(&mut r)?;
-
-                // unknown2: u32
-                let unknown2 = crate::util::read_u32_le(&mut r)?;
-
-                CMSG_COMPLAIN_SpamType::Mail {
-                    mail_id,
-                    unknown1,
-                    unknown2,
-                }
-            }
-            SpamType::Chat => {
-                // language: u32
-                let language = crate::util::read_u32_le(&mut r)?;
-
-                // message_type: u32
-                let message_type = crate::util::read_u32_le(&mut r)?;
-
-                // channel_id: u32
-                let channel_id = crate::util::read_u32_le(&mut r)?;
-
-                // time: u32
-                let time = crate::util::read_u32_le(&mut r)?;
-
-                // description: CString
-                let description = {
-                    let description = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(description)?
-                };
-
-                CMSG_COMPLAIN_SpamType::Chat {
-                    channel_id,
-                    description,
-                    language,
-                    message_type,
-                    time,
-                }
-            }
-        };
-
-        Ok(Self {
-            complaint_type: complaint_type_if,
-            offender,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

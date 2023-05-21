@@ -18,6 +18,34 @@ pub struct CMSG_SET_ACTION_BUTTON {
 }
 
 impl crate::private::Sealed for CMSG_SET_ACTION_BUTTON {}
+impl CMSG_SET_ACTION_BUTTON {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 5 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0128, size: body_size });
+        }
+
+        // button: u8
+        let button = crate::util::read_u8_le(&mut r)?;
+
+        // action: u16
+        let action = crate::util::read_u16_le(&mut r)?;
+
+        // misc: u8
+        let misc = crate::util::read_u8_le(&mut r)?;
+
+        // action_type: u8
+        let action_type = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            button,
+            action,
+            misc,
+            action_type,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_SET_ACTION_BUTTON {
     const OPCODE: u32 = 0x0128;
 
@@ -78,29 +106,8 @@ impl crate::Message for CMSG_SET_ACTION_BUTTON {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 5 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0128, size: body_size });
-        }
-
-        // button: u8
-        let button = crate::util::read_u8_le(&mut r)?;
-
-        // action: u16
-        let action = crate::util::read_u16_le(&mut r)?;
-
-        // misc: u8
-        let misc = crate::util::read_u8_le(&mut r)?;
-
-        // action_type: u8
-        let action_type = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            button,
-            action,
-            misc,
-            action_type,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -49,6 +49,89 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
 }
 
 impl crate::private::Sealed for SMSG_QUESTGIVER_REQUEST_ITEMS {}
+impl SMSG_QUESTGIVER_REQUEST_ITEMS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(54..=65535).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x018B, size: body_size });
+        }
+
+        // npc: Guid
+        let npc = crate::util::read_guid(&mut r)?;
+
+        // quest_id: u32
+        let quest_id = crate::util::read_u32_le(&mut r)?;
+
+        // title: CString
+        let title = {
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(title)?
+        };
+
+        // request_items_text: CString
+        let request_items_text = {
+            let request_items_text = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(request_items_text)?
+        };
+
+        // emote_delay: u32
+        let emote_delay = crate::util::read_u32_le(&mut r)?;
+
+        // emote: u32
+        let emote = crate::util::read_u32_le(&mut r)?;
+
+        // auto_finish: Bool32
+        let auto_finish = crate::util::read_u32_le(&mut r)? != 0;
+
+        // suggested_players: u32
+        let suggested_players = crate::util::read_u32_le(&mut r)?;
+
+        // required_money: Gold
+        let required_money = Gold::new(crate::util::read_u32_le(&mut r)?);
+
+        // amount_of_required_items: u32
+        let amount_of_required_items = crate::util::read_u32_le(&mut r)?;
+
+        // required_items: QuestItemRequirement[amount_of_required_items]
+        let required_items = {
+            let mut required_items = Vec::with_capacity(amount_of_required_items as usize);
+            for _ in 0..amount_of_required_items {
+                required_items.push(QuestItemRequirement::read(&mut r)?);
+            }
+            required_items
+        };
+
+        // completable: QuestCompletable
+        let completable = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // flags1: u32
+        let flags1 = crate::util::read_u32_le(&mut r)?;
+
+        // flags2: u32
+        let flags2 = crate::util::read_u32_le(&mut r)?;
+
+        // flags3: u32
+        let flags3 = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            npc,
+            quest_id,
+            title,
+            request_items_text,
+            emote_delay,
+            emote,
+            auto_finish,
+            suggested_players,
+            required_money,
+            required_items,
+            completable,
+            flags1,
+            flags2,
+            flags3,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
     const OPCODE: u32 = 0x018b;
 
@@ -194,84 +277,8 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(54..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x018B, size: body_size });
-        }
-
-        // npc: Guid
-        let npc = crate::util::read_guid(&mut r)?;
-
-        // quest_id: u32
-        let quest_id = crate::util::read_u32_le(&mut r)?;
-
-        // title: CString
-        let title = {
-            let title = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(title)?
-        };
-
-        // request_items_text: CString
-        let request_items_text = {
-            let request_items_text = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(request_items_text)?
-        };
-
-        // emote_delay: u32
-        let emote_delay = crate::util::read_u32_le(&mut r)?;
-
-        // emote: u32
-        let emote = crate::util::read_u32_le(&mut r)?;
-
-        // auto_finish: Bool32
-        let auto_finish = crate::util::read_u32_le(&mut r)? != 0;
-
-        // suggested_players: u32
-        let suggested_players = crate::util::read_u32_le(&mut r)?;
-
-        // required_money: Gold
-        let required_money = Gold::new(crate::util::read_u32_le(&mut r)?);
-
-        // amount_of_required_items: u32
-        let amount_of_required_items = crate::util::read_u32_le(&mut r)?;
-
-        // required_items: QuestItemRequirement[amount_of_required_items]
-        let required_items = {
-            let mut required_items = Vec::with_capacity(amount_of_required_items as usize);
-            for _ in 0..amount_of_required_items {
-                required_items.push(QuestItemRequirement::read(&mut r)?);
-            }
-            required_items
-        };
-
-        // completable: QuestCompletable
-        let completable = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // flags1: u32
-        let flags1 = crate::util::read_u32_le(&mut r)?;
-
-        // flags2: u32
-        let flags2 = crate::util::read_u32_le(&mut r)?;
-
-        // flags3: u32
-        let flags3 = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            npc,
-            quest_id,
-            title,
-            request_items_text,
-            emote_delay,
-            emote,
-            auto_finish,
-            suggested_players,
-            required_money,
-            required_items,
-            completable,
-            flags1,
-            flags2,
-            flags3,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

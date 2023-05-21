@@ -37,6 +37,86 @@ pub struct SMSG_CALENDAR_SEND_CALENDAR {
 }
 
 impl crate::private::Sealed for SMSG_CALENDAR_SEND_CALENDAR {}
+impl SMSG_CALENDAR_SEND_CALENDAR {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(32..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0436, size: body_size });
+        }
+
+        // amount_of_invites: u32
+        let amount_of_invites = crate::util::read_u32_le(&mut r)?;
+
+        // invites: SendCalendarInvite[amount_of_invites]
+        let invites = {
+            let mut invites = Vec::with_capacity(amount_of_invites as usize);
+            for _ in 0..amount_of_invites {
+                invites.push(SendCalendarInvite::read(&mut r)?);
+            }
+            invites
+        };
+
+        // amount_of_events: u32
+        let amount_of_events = crate::util::read_u32_le(&mut r)?;
+
+        // events: SendCalendarEvent[amount_of_events]
+        let events = {
+            let mut events = Vec::with_capacity(amount_of_events as usize);
+            for _ in 0..amount_of_events {
+                events.push(SendCalendarEvent::read(&mut r)?);
+            }
+            events
+        };
+
+        // current_time: u32
+        let current_time = crate::util::read_u32_le(&mut r)?;
+
+        // zone_time: DateTime
+        let zone_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+        // amount_of_instances: u32
+        let amount_of_instances = crate::util::read_u32_le(&mut r)?;
+
+        // instances: SendCalendarInstance[amount_of_instances]
+        let instances = {
+            let mut instances = Vec::with_capacity(amount_of_instances as usize);
+            for _ in 0..amount_of_instances {
+                instances.push(SendCalendarInstance::read(&mut r)?);
+            }
+            instances
+        };
+
+        // relative_time: u32
+        let relative_time = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_reset_times: u32
+        let amount_of_reset_times = crate::util::read_u32_le(&mut r)?;
+
+        // reset_times: SendCalendarResetTime[amount_of_reset_times]
+        let reset_times = {
+            let mut reset_times = Vec::with_capacity(amount_of_reset_times as usize);
+            for _ in 0..amount_of_reset_times {
+                reset_times.push(SendCalendarResetTime::read(&mut r)?);
+            }
+            reset_times
+        };
+
+        // amount_of_holidays: u32
+        let amount_of_holidays = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            invites,
+            events,
+            current_time,
+            zone_time,
+            instances,
+            relative_time,
+            reset_times,
+            amount_of_holidays,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
     const OPCODE: u32 = 0x0436;
 
@@ -241,81 +321,8 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(32..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0436, size: body_size });
-        }
-
-        // amount_of_invites: u32
-        let amount_of_invites = crate::util::read_u32_le(&mut r)?;
-
-        // invites: SendCalendarInvite[amount_of_invites]
-        let invites = {
-            let mut invites = Vec::with_capacity(amount_of_invites as usize);
-            for _ in 0..amount_of_invites {
-                invites.push(SendCalendarInvite::read(&mut r)?);
-            }
-            invites
-        };
-
-        // amount_of_events: u32
-        let amount_of_events = crate::util::read_u32_le(&mut r)?;
-
-        // events: SendCalendarEvent[amount_of_events]
-        let events = {
-            let mut events = Vec::with_capacity(amount_of_events as usize);
-            for _ in 0..amount_of_events {
-                events.push(SendCalendarEvent::read(&mut r)?);
-            }
-            events
-        };
-
-        // current_time: u32
-        let current_time = crate::util::read_u32_le(&mut r)?;
-
-        // zone_time: DateTime
-        let zone_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-        // amount_of_instances: u32
-        let amount_of_instances = crate::util::read_u32_le(&mut r)?;
-
-        // instances: SendCalendarInstance[amount_of_instances]
-        let instances = {
-            let mut instances = Vec::with_capacity(amount_of_instances as usize);
-            for _ in 0..amount_of_instances {
-                instances.push(SendCalendarInstance::read(&mut r)?);
-            }
-            instances
-        };
-
-        // relative_time: u32
-        let relative_time = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_reset_times: u32
-        let amount_of_reset_times = crate::util::read_u32_le(&mut r)?;
-
-        // reset_times: SendCalendarResetTime[amount_of_reset_times]
-        let reset_times = {
-            let mut reset_times = Vec::with_capacity(amount_of_reset_times as usize);
-            for _ in 0..amount_of_reset_times {
-                reset_times.push(SendCalendarResetTime::read(&mut r)?);
-            }
-            reset_times
-        };
-
-        // amount_of_holidays: u32
-        let amount_of_holidays = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            invites,
-            events,
-            current_time,
-            zone_time,
-            instances,
-            relative_time,
-            reset_times,
-            amount_of_holidays,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -16,6 +16,26 @@ pub struct SMSG_COOLDOWN_EVENT {
 }
 
 impl crate::private::Sealed for SMSG_COOLDOWN_EVENT {}
+impl SMSG_COOLDOWN_EVENT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0135, size: body_size });
+        }
+
+        // id: u32
+        let id = crate::util::read_u32_le(&mut r)?;
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            id,
+            guid,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_COOLDOWN_EVENT {
     const OPCODE: u32 = 0x0135;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_COOLDOWN_EVENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0135, size: body_size });
-        }
-
-        // id: u32
-        let id = crate::util::read_u32_le(&mut r)?;
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            id,
-            guid,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

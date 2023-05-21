@@ -14,6 +14,32 @@ pub struct CMSG_ADD_FRIEND {
 }
 
 impl crate::private::Sealed for CMSG_ADD_FRIEND {}
+impl CMSG_ADD_FRIEND {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=512).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0069, size: body_size });
+        }
+
+        // name: CString
+        let name = {
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(name)?
+        };
+
+        // note: CString
+        let note = {
+            let note = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(note)?
+        };
+
+        Ok(Self {
+            name,
+            note,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_ADD_FRIEND {
     const OPCODE: u32 = 0x0069;
 
@@ -72,27 +98,8 @@ impl crate::Message for CMSG_ADD_FRIEND {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=512).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0069, size: body_size });
-        }
-
-        // name: CString
-        let name = {
-            let name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(name)?
-        };
-
-        // note: CString
-        let note = {
-            let note = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(note)?
-        };
-
-        Ok(Self {
-            name,
-            note,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

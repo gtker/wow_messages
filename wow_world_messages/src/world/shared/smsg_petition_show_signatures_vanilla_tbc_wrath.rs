@@ -22,6 +22,43 @@ pub struct SMSG_PETITION_SHOW_SIGNATURES {
 }
 
 impl crate::private::Sealed for SMSG_PETITION_SHOW_SIGNATURES {}
+impl SMSG_PETITION_SHOW_SIGNATURES {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(21..=3093).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BF, size: body_size });
+        }
+
+        // item: Guid
+        let item = crate::util::read_guid(&mut r)?;
+
+        // owner: Guid
+        let owner = crate::util::read_guid(&mut r)?;
+
+        // petition: u32
+        let petition = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_signatures: u8
+        let amount_of_signatures = crate::util::read_u8_le(&mut r)?;
+
+        // signatures: PetitionSignature[amount_of_signatures]
+        let signatures = {
+            let mut signatures = Vec::with_capacity(amount_of_signatures as usize);
+            for _ in 0..amount_of_signatures {
+                signatures.push(PetitionSignature::read(&mut r)?);
+            }
+            signatures
+        };
+
+        Ok(Self {
+            item,
+            owner,
+            petition,
+            signatures,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
     const OPCODE: u32 = 0x01bf;
 
@@ -107,38 +144,8 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(21..=3093).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BF, size: body_size });
-        }
-
-        // item: Guid
-        let item = crate::util::read_guid(&mut r)?;
-
-        // owner: Guid
-        let owner = crate::util::read_guid(&mut r)?;
-
-        // petition: u32
-        let petition = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_signatures: u8
-        let amount_of_signatures = crate::util::read_u8_le(&mut r)?;
-
-        // signatures: PetitionSignature[amount_of_signatures]
-        let signatures = {
-            let mut signatures = Vec::with_capacity(amount_of_signatures as usize);
-            for _ in 0..amount_of_signatures {
-                signatures.push(PetitionSignature::read(&mut r)?);
-            }
-            signatures
-        };
-
-        Ok(Self {
-            item,
-            owner,
-            petition,
-            signatures,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

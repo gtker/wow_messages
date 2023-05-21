@@ -13,6 +13,22 @@ pub struct CMSG_PLAYED_TIME {
 }
 
 impl crate::private::Sealed for CMSG_PLAYED_TIME {}
+impl CMSG_PLAYED_TIME {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CC, size: body_size });
+        }
+
+        // show_on_ui: Bool
+        let show_on_ui = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            show_on_ui,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_PLAYED_TIME {
     const OPCODE: u32 = 0x01cc;
 
@@ -58,17 +74,8 @@ impl crate::Message for CMSG_PLAYED_TIME {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CC, size: body_size });
-        }
-
-        // show_on_ui: Bool
-        let show_on_ui = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            show_on_ui,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

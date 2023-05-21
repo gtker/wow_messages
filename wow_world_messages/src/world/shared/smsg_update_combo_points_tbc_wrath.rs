@@ -16,6 +16,26 @@ pub struct SMSG_UPDATE_COMBO_POINTS {
 }
 
 impl crate::private::Sealed for SMSG_UPDATE_COMBO_POINTS {}
+impl SMSG_UPDATE_COMBO_POINTS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(3..=10).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x039D, size: body_size });
+        }
+
+        // target: PackedGuid
+        let target = crate::util::read_packed_guid(&mut r)?;
+
+        // combo_points: u8
+        let combo_points = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            target,
+            combo_points,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_UPDATE_COMBO_POINTS {
     const OPCODE: u32 = 0x039d;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_UPDATE_COMBO_POINTS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(3..=10).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x039D, size: body_size });
-        }
-
-        // target: PackedGuid
-        let target = crate::util::read_packed_guid(&mut r)?;
-
-        // combo_points: u8
-        let combo_points = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            target,
-            combo_points,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

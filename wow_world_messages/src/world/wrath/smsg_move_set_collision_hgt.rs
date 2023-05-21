@@ -18,6 +18,30 @@ pub struct SMSG_MOVE_SET_COLLISION_HGT {
 }
 
 impl crate::private::Sealed for SMSG_MOVE_SET_COLLISION_HGT {}
+impl SMSG_MOVE_SET_COLLISION_HGT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(10..=17).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0516, size: body_size });
+        }
+
+        // unit: PackedGuid
+        let unit = crate::util::read_packed_guid(&mut r)?;
+
+        // packet_counter: u32
+        let packet_counter = crate::util::read_u32_le(&mut r)?;
+
+        // collision_height: f32
+        let collision_height = crate::util::read_f32_le(&mut r)?;
+
+        Ok(Self {
+            unit,
+            packet_counter,
+            collision_height,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_MOVE_SET_COLLISION_HGT {
     const OPCODE: u32 = 0x0516;
 
@@ -73,25 +97,8 @@ impl crate::Message for SMSG_MOVE_SET_COLLISION_HGT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(10..=17).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0516, size: body_size });
-        }
-
-        // unit: PackedGuid
-        let unit = crate::util::read_packed_guid(&mut r)?;
-
-        // packet_counter: u32
-        let packet_counter = crate::util::read_u32_le(&mut r)?;
-
-        // collision_height: f32
-        let collision_height = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            unit,
-            packet_counter,
-            collision_height,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -20,6 +20,30 @@ pub struct SMSG_TRAINER_BUY_FAILED {
 }
 
 impl crate::private::Sealed for SMSG_TRAINER_BUY_FAILED {}
+impl SMSG_TRAINER_BUY_FAILED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01B4, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // id: u32
+        let id = crate::util::read_u32_le(&mut r)?;
+
+        // error: TrainingFailureReason
+        let error = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            guid,
+            id,
+            error,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_TRAINER_BUY_FAILED {
     const OPCODE: u32 = 0x01b4;
 
@@ -75,25 +99,8 @@ impl crate::Message for SMSG_TRAINER_BUY_FAILED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01B4, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // id: u32
-        let id = crate::util::read_u32_le(&mut r)?;
-
-        // error: TrainingFailureReason
-        let error = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            guid,
-            id,
-            error,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

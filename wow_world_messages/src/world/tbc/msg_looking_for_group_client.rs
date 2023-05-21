@@ -19,6 +19,30 @@ pub struct MSG_LOOKING_FOR_GROUP_Client {
 }
 
 impl crate::private::Sealed for MSG_LOOKING_FOR_GROUP_Client {}
+impl MSG_LOOKING_FOR_GROUP_Client {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FF, size: body_size });
+        }
+
+        // lfg_type: LfgType
+        let lfg_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        // entry: u32
+        let entry = crate::util::read_u32_le(&mut r)?;
+
+        // unknown: u32
+        let unknown = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            lfg_type,
+            entry,
+            unknown,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_LOOKING_FOR_GROUP_Client {
     const OPCODE: u32 = 0x01ff;
 
@@ -74,25 +98,8 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Client {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FF, size: body_size });
-        }
-
-        // lfg_type: LfgType
-        let lfg_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        // entry: u32
-        let entry = crate::util::read_u32_le(&mut r)?;
-
-        // unknown: u32
-        let unknown = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            lfg_type,
-            entry,
-            unknown,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

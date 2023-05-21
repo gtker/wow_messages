@@ -14,6 +14,29 @@ pub struct CMSG_SET_ACTIVE_VOICE_CHANNEL {
 }
 
 impl crate::private::Sealed for CMSG_SET_ACTIVE_VOICE_CHANNEL {}
+impl CMSG_SET_ACTIVE_VOICE_CHANNEL {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(5..=260).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03D2, size: body_size });
+        }
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown2: CString
+        let unknown2 = {
+            let unknown2 = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(unknown2)?
+        };
+
+        Ok(Self {
+            unknown1,
+            unknown2,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_SET_ACTIVE_VOICE_CHANNEL {
     const OPCODE: u32 = 0x03d2;
 
@@ -68,24 +91,8 @@ impl crate::Message for CMSG_SET_ACTIVE_VOICE_CHANNEL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(5..=260).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03D2, size: body_size });
-        }
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown2: CString
-        let unknown2 = {
-            let unknown2 = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(unknown2)?
-        };
-
-        Ok(Self {
-            unknown1,
-            unknown2,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

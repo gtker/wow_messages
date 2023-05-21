@@ -20,6 +20,34 @@ pub struct CMSG_LEAVE_BATTLEFIELD {
 }
 
 impl crate::private::Sealed for CMSG_LEAVE_BATTLEFIELD {}
+impl CMSG_LEAVE_BATTLEFIELD {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E1, size: body_size });
+        }
+
+        // unknown1: u8
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
+
+        // unknown2: u8
+        let unknown2 = crate::util::read_u8_le(&mut r)?;
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // unknown3: u16
+        let unknown3 = crate::util::read_u16_le(&mut r)?;
+
+        Ok(Self {
+            unknown1,
+            unknown2,
+            map,
+            unknown3,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_LEAVE_BATTLEFIELD {
     const OPCODE: u32 = 0x02e1;
 
@@ -80,29 +108,8 @@ impl crate::Message for CMSG_LEAVE_BATTLEFIELD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E1, size: body_size });
-        }
-
-        // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(&mut r)?;
-
-        // unknown2: u8
-        let unknown2 = crate::util::read_u8_le(&mut r)?;
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // unknown3: u16
-        let unknown3 = crate::util::read_u16_le(&mut r)?;
-
-        Ok(Self {
-            unknown1,
-            unknown2,
-            map,
-            unknown3,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

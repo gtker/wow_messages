@@ -17,6 +17,31 @@ pub struct CMSG_LEARN_PREVIEW_TALENTS {
 }
 
 impl crate::private::Sealed for CMSG_LEARN_PREVIEW_TALENTS {}
+impl CMSG_LEARN_PREVIEW_TALENTS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=10240).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C1, size: body_size });
+        }
+
+        // amount_of_talents: u32
+        let amount_of_talents = crate::util::read_u32_le(&mut r)?;
+
+        // talents: PreviewTalent[amount_of_talents]
+        let talents = {
+            let mut talents = Vec::with_capacity(amount_of_talents as usize);
+            for _ in 0..amount_of_talents {
+                talents.push(PreviewTalent::read(&mut r)?);
+            }
+            talents
+        };
+
+        Ok(Self {
+            talents,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS {
     const OPCODE: u32 = 0x04c1;
 
@@ -87,26 +112,8 @@ impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=10240).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C1, size: body_size });
-        }
-
-        // amount_of_talents: u32
-        let amount_of_talents = crate::util::read_u32_le(&mut r)?;
-
-        // talents: PreviewTalent[amount_of_talents]
-        let talents = {
-            let mut talents = Vec::with_capacity(amount_of_talents as usize);
-            for _ in 0..amount_of_talents {
-                talents.push(PreviewTalent::read(&mut r)?);
-            }
-            talents
-        };
-
-        Ok(Self {
-            talents,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

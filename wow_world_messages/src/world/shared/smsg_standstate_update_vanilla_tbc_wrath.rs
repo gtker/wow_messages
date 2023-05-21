@@ -14,6 +14,22 @@ pub struct SMSG_STANDSTATE_UPDATE {
 }
 
 impl crate::private::Sealed for SMSG_STANDSTATE_UPDATE {}
+impl SMSG_STANDSTATE_UPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x029D, size: body_size });
+        }
+
+        // state: UnitStandState
+        let state = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            state,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_STANDSTATE_UPDATE {
     const OPCODE: u32 = 0x029d;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_STANDSTATE_UPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x029D, size: body_size });
-        }
-
-        // state: UnitStandState
-        let state = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            state,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

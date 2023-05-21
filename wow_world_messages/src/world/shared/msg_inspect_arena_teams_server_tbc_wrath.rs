@@ -28,6 +28,50 @@ pub struct MSG_INSPECT_ARENA_TEAMS_Server {
 }
 
 impl crate::private::Sealed for MSG_INSPECT_ARENA_TEAMS_Server {}
+impl MSG_INSPECT_ARENA_TEAMS_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 33 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0377, size: body_size });
+        }
+
+        // player: Guid
+        let player = crate::util::read_guid(&mut r)?;
+
+        // slot: u8
+        let slot = crate::util::read_u8_le(&mut r)?;
+
+        // arena_team: u32
+        let arena_team = crate::util::read_u32_le(&mut r)?;
+
+        // rating: u32
+        let rating = crate::util::read_u32_le(&mut r)?;
+
+        // games_played_this_season: u32
+        let games_played_this_season = crate::util::read_u32_le(&mut r)?;
+
+        // wins_this_season: u32
+        let wins_this_season = crate::util::read_u32_le(&mut r)?;
+
+        // total_games_played: u32
+        let total_games_played = crate::util::read_u32_le(&mut r)?;
+
+        // personal_rating: u32
+        let personal_rating = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            player,
+            slot,
+            arena_team,
+            rating,
+            games_played_this_season,
+            wins_this_season,
+            total_games_played,
+            personal_rating,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_INSPECT_ARENA_TEAMS_Server {
     const OPCODE: u32 = 0x0377;
 
@@ -108,45 +152,8 @@ impl crate::Message for MSG_INSPECT_ARENA_TEAMS_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 33 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0377, size: body_size });
-        }
-
-        // player: Guid
-        let player = crate::util::read_guid(&mut r)?;
-
-        // slot: u8
-        let slot = crate::util::read_u8_le(&mut r)?;
-
-        // arena_team: u32
-        let arena_team = crate::util::read_u32_le(&mut r)?;
-
-        // rating: u32
-        let rating = crate::util::read_u32_le(&mut r)?;
-
-        // games_played_this_season: u32
-        let games_played_this_season = crate::util::read_u32_le(&mut r)?;
-
-        // wins_this_season: u32
-        let wins_this_season = crate::util::read_u32_le(&mut r)?;
-
-        // total_games_played: u32
-        let total_games_played = crate::util::read_u32_le(&mut r)?;
-
-        // personal_rating: u32
-        let personal_rating = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            player,
-            slot,
-            arena_team,
-            rating,
-            games_played_this_season,
-            wins_this_season,
-            total_games_played,
-            personal_rating,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -25,6 +25,47 @@ pub struct SMSG_SPELLSTEALLOG {
 }
 
 impl crate::private::Sealed for SMSG_SPELLSTEALLOG {}
+impl SMSG_SPELLSTEALLOG {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(13..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0333, size: body_size });
+        }
+
+        // victim: PackedGuid
+        let victim = crate::util::read_packed_guid(&mut r)?;
+
+        // caster: PackedGuid
+        let caster = crate::util::read_packed_guid(&mut r)?;
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // unknown: u8
+        let unknown = crate::util::read_u8_le(&mut r)?;
+
+        // amount_of_spell_steals: u32
+        let amount_of_spell_steals = crate::util::read_u32_le(&mut r)?;
+
+        // spell_steals: SpellSteal[amount_of_spell_steals]
+        let spell_steals = {
+            let mut spell_steals = Vec::with_capacity(amount_of_spell_steals as usize);
+            for _ in 0..amount_of_spell_steals {
+                spell_steals.push(SpellSteal::read(&mut r)?);
+            }
+            spell_steals
+        };
+
+        Ok(Self {
+            victim,
+            caster,
+            spell,
+            unknown,
+            spell_steals,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SPELLSTEALLOG {
     const OPCODE: u32 = 0x0333;
 
@@ -115,42 +156,8 @@ impl crate::Message for SMSG_SPELLSTEALLOG {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(13..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0333, size: body_size });
-        }
-
-        // victim: PackedGuid
-        let victim = crate::util::read_packed_guid(&mut r)?;
-
-        // caster: PackedGuid
-        let caster = crate::util::read_packed_guid(&mut r)?;
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // unknown: u8
-        let unknown = crate::util::read_u8_le(&mut r)?;
-
-        // amount_of_spell_steals: u32
-        let amount_of_spell_steals = crate::util::read_u32_le(&mut r)?;
-
-        // spell_steals: SpellSteal[amount_of_spell_steals]
-        let spell_steals = {
-            let mut spell_steals = Vec::with_capacity(amount_of_spell_steals as usize);
-            for _ in 0..amount_of_spell_steals {
-                spell_steals.push(SpellSteal::read(&mut r)?);
-            }
-            spell_steals
-        };
-
-        Ok(Self {
-            victim,
-            caster,
-            spell,
-            unknown,
-            spell_steals,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

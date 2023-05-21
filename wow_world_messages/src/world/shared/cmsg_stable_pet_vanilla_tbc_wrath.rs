@@ -14,6 +14,22 @@ pub struct CMSG_STABLE_PET {
 }
 
 impl crate::private::Sealed for CMSG_STABLE_PET {}
+impl CMSG_STABLE_PET {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0270, size: body_size });
+        }
+
+        // stable_master: Guid
+        let stable_master = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            stable_master,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_STABLE_PET {
     const OPCODE: u32 = 0x0270;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_STABLE_PET {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0270, size: body_size });
-        }
-
-        // stable_master: Guid
-        let stable_master = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            stable_master,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

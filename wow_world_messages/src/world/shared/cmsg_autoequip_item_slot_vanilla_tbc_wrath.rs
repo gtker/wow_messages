@@ -16,6 +16,26 @@ pub struct CMSG_AUTOEQUIP_ITEM_SLOT {
 }
 
 impl crate::private::Sealed for CMSG_AUTOEQUIP_ITEM_SLOT {}
+impl CMSG_AUTOEQUIP_ITEM_SLOT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 9 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x010F, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // destination_slot: u8
+        let destination_slot = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            destination_slot,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_AUTOEQUIP_ITEM_SLOT {
     const OPCODE: u32 = 0x010f;
 
@@ -66,21 +86,8 @@ impl crate::Message for CMSG_AUTOEQUIP_ITEM_SLOT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 9 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x010F, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // destination_slot: u8
-        let destination_slot = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            destination_slot,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -23,6 +23,38 @@ pub struct SMSG_QUESTUPDATE_ADD_KILL {
 }
 
 impl crate::private::Sealed for SMSG_QUESTUPDATE_ADD_KILL {}
+impl SMSG_QUESTUPDATE_ADD_KILL {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 24 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0199, size: body_size });
+        }
+
+        // quest_id: u32
+        let quest_id = crate::util::read_u32_le(&mut r)?;
+
+        // creature_id: u32
+        let creature_id = crate::util::read_u32_le(&mut r)?;
+
+        // kill_count: u32
+        let kill_count = crate::util::read_u32_le(&mut r)?;
+
+        // required_kill_count: u32
+        let required_kill_count = crate::util::read_u32_le(&mut r)?;
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            quest_id,
+            creature_id,
+            kill_count,
+            required_kill_count,
+            guid,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_QUESTUPDATE_ADD_KILL {
     const OPCODE: u32 = 0x0199;
 
@@ -88,33 +120,8 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_KILL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 24 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0199, size: body_size });
-        }
-
-        // quest_id: u32
-        let quest_id = crate::util::read_u32_le(&mut r)?;
-
-        // creature_id: u32
-        let creature_id = crate::util::read_u32_le(&mut r)?;
-
-        // kill_count: u32
-        let kill_count = crate::util::read_u32_le(&mut r)?;
-
-        // required_kill_count: u32
-        let required_kill_count = crate::util::read_u32_le(&mut r)?;
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            quest_id,
-            creature_id,
-            kill_count,
-            required_kill_count,
-            guid,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

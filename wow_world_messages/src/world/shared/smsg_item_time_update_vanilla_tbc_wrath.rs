@@ -16,6 +16,26 @@ pub struct SMSG_ITEM_TIME_UPDATE {
 }
 
 impl crate::private::Sealed for SMSG_ITEM_TIME_UPDATE {}
+impl SMSG_ITEM_TIME_UPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01EA, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // duration: u32
+        let duration = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            duration,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ITEM_TIME_UPDATE {
     const OPCODE: u32 = 0x01ea;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_ITEM_TIME_UPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01EA, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // duration: u32
-        let duration = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            duration,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -14,6 +14,22 @@ pub struct SMSG_ACTIVATETAXIREPLY {
 }
 
 impl crate::private::Sealed for SMSG_ACTIVATETAXIREPLY {}
+impl SMSG_ACTIVATETAXIREPLY {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01AE, size: body_size });
+        }
+
+        // reply: ActivateTaxiReply
+        let reply = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            reply,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ACTIVATETAXIREPLY {
     const OPCODE: u32 = 0x01ae;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_ACTIVATETAXIREPLY {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01AE, size: body_size });
-        }
-
-        // reply: ActivateTaxiReply
-        let reply = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            reply,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

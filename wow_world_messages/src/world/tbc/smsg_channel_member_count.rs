@@ -16,6 +16,33 @@ pub struct SMSG_CHANNEL_MEMBER_COUNT {
 }
 
 impl crate::private::Sealed for SMSG_CHANNEL_MEMBER_COUNT {}
+impl SMSG_CHANNEL_MEMBER_COUNT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(6..=261).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03D4, size: body_size });
+        }
+
+        // channel: CString
+        let channel = {
+            let channel = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(channel)?
+        };
+
+        // flags: u8
+        let flags = crate::util::read_u8_le(&mut r)?;
+
+        // amount_of_members: u32
+        let amount_of_members = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            channel,
+            flags,
+            amount_of_members,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CHANNEL_MEMBER_COUNT {
     const OPCODE: u32 = 0x03d4;
 
@@ -75,28 +102,8 @@ impl crate::Message for SMSG_CHANNEL_MEMBER_COUNT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(6..=261).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03D4, size: body_size });
-        }
-
-        // channel: CString
-        let channel = {
-            let channel = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(channel)?
-        };
-
-        // flags: u8
-        let flags = crate::util::read_u8_le(&mut r)?;
-
-        // amount_of_members: u32
-        let amount_of_members = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            channel,
-            flags,
-            amount_of_members,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -16,6 +16,26 @@ pub struct SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {}
+impl SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x041A, size: body_size });
+        }
+
+        // result: u32
+        let result = crate::util::read_u32_le(&mut r)?;
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            result,
+            guid,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {
     const OPCODE: u32 = 0x041a;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x041A, size: body_size });
-        }
-
-        // result: u32
-        let result = crate::util::read_u32_le(&mut r)?;
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            result,
-            guid,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

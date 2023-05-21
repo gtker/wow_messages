@@ -44,6 +44,70 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
 }
 
 impl crate::private::Sealed for SMSG_SPELLNONMELEEDAMAGELOG {}
+impl SMSG_SPELLNONMELEEDAMAGELOG {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(36..=50).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0250, size: body_size });
+        }
+
+        // target: PackedGuid
+        let target = crate::util::read_packed_guid(&mut r)?;
+
+        // attacker: PackedGuid
+        let attacker = crate::util::read_packed_guid(&mut r)?;
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // damage: u32
+        let damage = crate::util::read_u32_le(&mut r)?;
+
+        // overkill: u32
+        let overkill = crate::util::read_u32_le(&mut r)?;
+
+        // school: SpellSchool
+        let school = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // absorbed_damage: u32
+        let absorbed_damage = crate::util::read_u32_le(&mut r)?;
+
+        // resisted: u32
+        let resisted = crate::util::read_u32_le(&mut r)?;
+
+        // periodic_log: Bool
+        let periodic_log = crate::util::read_u8_le(&mut r)? != 0;
+
+        // unused: u8
+        let unused = crate::util::read_u8_le(&mut r)?;
+
+        // blocked: u32
+        let blocked = crate::util::read_u32_le(&mut r)?;
+
+        // hit_info: HitInfo
+        let hit_info = HitInfo::new(crate::util::read_u32_le(&mut r)?);
+
+        // extend_flag: u8
+        let extend_flag = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            target,
+            attacker,
+            spell,
+            damage,
+            overkill,
+            school,
+            absorbed_damage,
+            resisted,
+            periodic_log,
+            unused,
+            blocked,
+            hit_info,
+            extend_flag,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
     const OPCODE: u32 = 0x0250;
 
@@ -149,65 +213,8 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(36..=50).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0250, size: body_size });
-        }
-
-        // target: PackedGuid
-        let target = crate::util::read_packed_guid(&mut r)?;
-
-        // attacker: PackedGuid
-        let attacker = crate::util::read_packed_guid(&mut r)?;
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // damage: u32
-        let damage = crate::util::read_u32_le(&mut r)?;
-
-        // overkill: u32
-        let overkill = crate::util::read_u32_le(&mut r)?;
-
-        // school: SpellSchool
-        let school = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // absorbed_damage: u32
-        let absorbed_damage = crate::util::read_u32_le(&mut r)?;
-
-        // resisted: u32
-        let resisted = crate::util::read_u32_le(&mut r)?;
-
-        // periodic_log: Bool
-        let periodic_log = crate::util::read_u8_le(&mut r)? != 0;
-
-        // unused: u8
-        let unused = crate::util::read_u8_le(&mut r)?;
-
-        // blocked: u32
-        let blocked = crate::util::read_u32_le(&mut r)?;
-
-        // hit_info: HitInfo
-        let hit_info = HitInfo::new(crate::util::read_u32_le(&mut r)?);
-
-        // extend_flag: u8
-        let extend_flag = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            target,
-            attacker,
-            spell,
-            damage,
-            overkill,
-            school,
-            absorbed_damage,
-            resisted,
-            periodic_log,
-            unused,
-            blocked,
-            hit_info,
-            extend_flag,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

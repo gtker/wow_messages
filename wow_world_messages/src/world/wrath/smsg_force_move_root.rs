@@ -16,6 +16,26 @@ pub struct SMSG_FORCE_MOVE_ROOT {
 }
 
 impl crate::private::Sealed for SMSG_FORCE_MOVE_ROOT {}
+impl SMSG_FORCE_MOVE_ROOT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(6..=13).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00E8, size: body_size });
+        }
+
+        // guid: PackedGuid
+        let guid = crate::util::read_packed_guid(&mut r)?;
+
+        // counter: u32
+        let counter = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            counter,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_FORCE_MOVE_ROOT {
     const OPCODE: u32 = 0x00e8;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_FORCE_MOVE_ROOT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(6..=13).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00E8, size: body_size });
-        }
-
-        // guid: PackedGuid
-        let guid = crate::util::read_packed_guid(&mut r)?;
-
-        // counter: u32
-        let counter = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            counter,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

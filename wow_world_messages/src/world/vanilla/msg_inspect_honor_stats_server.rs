@@ -48,6 +48,82 @@ pub struct MSG_INSPECT_HONOR_STATS_Server {
 }
 
 impl crate::private::Sealed for MSG_INSPECT_HONOR_STATS_Server {}
+impl MSG_INSPECT_HONOR_STATS_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 50 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D6, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // highest_rank: PvpRank
+        let highest_rank = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // today_honorable_and_dishonorable: u32
+        let today_honorable_and_dishonorable = crate::util::read_u32_le(&mut r)?;
+
+        // yesterday_honorable: u16
+        let yesterday_honorable = crate::util::read_u16_le(&mut r)?;
+
+        // unknown1: u16
+        let unknown1 = crate::util::read_u16_le(&mut r)?;
+
+        // last_week_honorable: u16
+        let last_week_honorable = crate::util::read_u16_le(&mut r)?;
+
+        // unknown2: u16
+        let unknown2 = crate::util::read_u16_le(&mut r)?;
+
+        // this_week_honorable: u16
+        let this_week_honorable = crate::util::read_u16_le(&mut r)?;
+
+        // unknown3: u16
+        let unknown3 = crate::util::read_u16_le(&mut r)?;
+
+        // lifetime_honorable: u32
+        let lifetime_honorable = crate::util::read_u32_le(&mut r)?;
+
+        // lifetime_dishonorable: u32
+        let lifetime_dishonorable = crate::util::read_u32_le(&mut r)?;
+
+        // yesterday_honor: u32
+        let yesterday_honor = crate::util::read_u32_le(&mut r)?;
+
+        // last_week_honor: u32
+        let last_week_honor = crate::util::read_u32_le(&mut r)?;
+
+        // this_week_honor: u32
+        let this_week_honor = crate::util::read_u32_le(&mut r)?;
+
+        // last_week_standing: PvpRank
+        let last_week_standing = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        // rank_progress_bar: u8
+        let rank_progress_bar = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            highest_rank,
+            today_honorable_and_dishonorable,
+            yesterday_honorable,
+            unknown1,
+            last_week_honorable,
+            unknown2,
+            this_week_honorable,
+            unknown3,
+            lifetime_honorable,
+            lifetime_dishonorable,
+            yesterday_honor,
+            last_week_honor,
+            this_week_honor,
+            last_week_standing,
+            rank_progress_bar,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
     const OPCODE: u32 = 0x02d6;
 
@@ -168,77 +244,8 @@ impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 50 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D6, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // highest_rank: PvpRank
-        let highest_rank = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // today_honorable_and_dishonorable: u32
-        let today_honorable_and_dishonorable = crate::util::read_u32_le(&mut r)?;
-
-        // yesterday_honorable: u16
-        let yesterday_honorable = crate::util::read_u16_le(&mut r)?;
-
-        // unknown1: u16
-        let unknown1 = crate::util::read_u16_le(&mut r)?;
-
-        // last_week_honorable: u16
-        let last_week_honorable = crate::util::read_u16_le(&mut r)?;
-
-        // unknown2: u16
-        let unknown2 = crate::util::read_u16_le(&mut r)?;
-
-        // this_week_honorable: u16
-        let this_week_honorable = crate::util::read_u16_le(&mut r)?;
-
-        // unknown3: u16
-        let unknown3 = crate::util::read_u16_le(&mut r)?;
-
-        // lifetime_honorable: u32
-        let lifetime_honorable = crate::util::read_u32_le(&mut r)?;
-
-        // lifetime_dishonorable: u32
-        let lifetime_dishonorable = crate::util::read_u32_le(&mut r)?;
-
-        // yesterday_honor: u32
-        let yesterday_honor = crate::util::read_u32_le(&mut r)?;
-
-        // last_week_honor: u32
-        let last_week_honor = crate::util::read_u32_le(&mut r)?;
-
-        // this_week_honor: u32
-        let this_week_honor = crate::util::read_u32_le(&mut r)?;
-
-        // last_week_standing: PvpRank
-        let last_week_standing = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        // rank_progress_bar: u8
-        let rank_progress_bar = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            highest_rank,
-            today_honorable_and_dishonorable,
-            yesterday_honorable,
-            unknown1,
-            last_week_honorable,
-            unknown2,
-            this_week_honorable,
-            unknown3,
-            lifetime_honorable,
-            lifetime_dishonorable,
-            yesterday_honor,
-            last_week_honor,
-            this_week_honor,
-            last_week_standing,
-            rank_progress_bar,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

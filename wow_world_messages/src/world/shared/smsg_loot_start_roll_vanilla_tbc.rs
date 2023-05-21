@@ -26,6 +26,42 @@ pub struct SMSG_LOOT_START_ROLL {
 }
 
 impl crate::private::Sealed for SMSG_LOOT_START_ROLL {}
+impl SMSG_LOOT_START_ROLL {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 28 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A1, size: body_size });
+        }
+
+        // creature: Guid
+        let creature = crate::util::read_guid(&mut r)?;
+
+        // loot_slot: u32
+        let loot_slot = crate::util::read_u32_le(&mut r)?;
+
+        // item: u32
+        let item = crate::util::read_u32_le(&mut r)?;
+
+        // item_random_suffix: u32
+        let item_random_suffix = crate::util::read_u32_le(&mut r)?;
+
+        // item_random_property_id: u32
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
+
+        // countdown_time: Milliseconds
+        let countdown_time = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
+
+        Ok(Self {
+            creature,
+            loot_slot,
+            item,
+            item_random_suffix,
+            item_random_property_id,
+            countdown_time,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LOOT_START_ROLL {
     const OPCODE: u32 = 0x02a1;
 
@@ -96,37 +132,8 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 28 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A1, size: body_size });
-        }
-
-        // creature: Guid
-        let creature = crate::util::read_guid(&mut r)?;
-
-        // loot_slot: u32
-        let loot_slot = crate::util::read_u32_le(&mut r)?;
-
-        // item: u32
-        let item = crate::util::read_u32_le(&mut r)?;
-
-        // item_random_suffix: u32
-        let item_random_suffix = crate::util::read_u32_le(&mut r)?;
-
-        // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
-
-        // countdown_time: Milliseconds
-        let countdown_time = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
-
-        Ok(Self {
-            creature,
-            loot_slot,
-            item,
-            item_random_suffix,
-            item_random_property_id,
-            countdown_time,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

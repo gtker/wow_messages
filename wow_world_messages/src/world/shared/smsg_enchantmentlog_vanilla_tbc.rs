@@ -25,6 +25,38 @@ pub struct SMSG_ENCHANTMENTLOG {
 }
 
 impl crate::private::Sealed for SMSG_ENCHANTMENTLOG {}
+impl SMSG_ENCHANTMENTLOG {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 25 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D7, size: body_size });
+        }
+
+        // target: Guid
+        let target = crate::util::read_guid(&mut r)?;
+
+        // caster: Guid
+        let caster = crate::util::read_guid(&mut r)?;
+
+        // item: u32
+        let item = crate::util::read_u32_le(&mut r)?;
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // show_affiliation: Bool
+        let show_affiliation = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            target,
+            caster,
+            item,
+            spell,
+            show_affiliation,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ENCHANTMENTLOG {
     const OPCODE: u32 = 0x01d7;
 
@@ -90,33 +122,8 @@ impl crate::Message for SMSG_ENCHANTMENTLOG {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 25 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D7, size: body_size });
-        }
-
-        // target: Guid
-        let target = crate::util::read_guid(&mut r)?;
-
-        // caster: Guid
-        let caster = crate::util::read_guid(&mut r)?;
-
-        // item: u32
-        let item = crate::util::read_u32_le(&mut r)?;
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // show_affiliation: Bool
-        let show_affiliation = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            target,
-            caster,
-            item,
-            spell,
-            show_affiliation,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

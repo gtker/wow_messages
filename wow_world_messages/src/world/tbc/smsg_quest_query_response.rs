@@ -85,6 +85,175 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_QUEST_QUERY_RESPONSE {}
+impl SMSG_QUEST_QUERY_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(240..=2280).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x005D, size: body_size });
+        }
+
+        // quest_id: u32
+        let quest_id = crate::util::read_u32_le(&mut r)?;
+
+        // quest_method: u32
+        let quest_method = crate::util::read_u32_le(&mut r)?;
+
+        // quest_level: Level32
+        let quest_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
+
+        // zone_or_sort: u32
+        let zone_or_sort = crate::util::read_u32_le(&mut r)?;
+
+        // quest_type: u32
+        let quest_type = crate::util::read_u32_le(&mut r)?;
+
+        // suggest_player_amount: u32
+        let suggest_player_amount = crate::util::read_u32_le(&mut r)?;
+
+        // reputation_objective_faction: Faction
+        let reputation_objective_faction = crate::util::read_u16_le(&mut r)?.try_into()?;
+
+        // reputation_objective_value: u32
+        let reputation_objective_value = crate::util::read_u32_le(&mut r)?;
+
+        // required_opposite_faction: Faction
+        let required_opposite_faction = crate::util::read_u16_le(&mut r)?.try_into()?;
+
+        // required_opposite_reputation_value: u32
+        let required_opposite_reputation_value = crate::util::read_u32_le(&mut r)?;
+
+        // next_quest_in_chain: u32
+        let next_quest_in_chain = crate::util::read_u32_le(&mut r)?;
+
+        // money_reward: Gold
+        let money_reward = Gold::new(crate::util::read_u32_le(&mut r)?);
+
+        // max_level_money_reward: Gold
+        let max_level_money_reward = Gold::new(crate::util::read_u32_le(&mut r)?);
+
+        // reward_spell: u32
+        let reward_spell = crate::util::read_u32_le(&mut r)?;
+
+        // casted_reward_spell: u32
+        let casted_reward_spell = crate::util::read_u32_le(&mut r)?;
+
+        // honor_reward: u32
+        let honor_reward = crate::util::read_u32_le(&mut r)?;
+
+        // source_item_id: u32
+        let source_item_id = crate::util::read_u32_le(&mut r)?;
+
+        // quest_flags: u32
+        let quest_flags = crate::util::read_u32_le(&mut r)?;
+
+        // title_reward: u32
+        let title_reward = crate::util::read_u32_le(&mut r)?;
+
+        // rewards: QuestItemReward[4]
+        let rewards = {
+            let mut rewards = [QuestItemReward::default(); 4];
+            for i in rewards.iter_mut() {
+                *i = QuestItemReward::read(&mut r)?;
+            }
+            rewards
+        };
+
+        // choice_rewards: QuestItemReward[6]
+        let choice_rewards = {
+            let mut choice_rewards = [QuestItemReward::default(); 6];
+            for i in choice_rewards.iter_mut() {
+                *i = QuestItemReward::read(&mut r)?;
+            }
+            choice_rewards
+        };
+
+        // point_map_id: u32
+        let point_map_id = crate::util::read_u32_le(&mut r)?;
+
+        // position: Vector2d
+        let position = Vector2d::read(&mut r)?;
+
+        // point_opt: u32
+        let point_opt = crate::util::read_u32_le(&mut r)?;
+
+        // title: CString
+        let title = {
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(title)?
+        };
+
+        // objective_text: CString
+        let objective_text = {
+            let objective_text = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(objective_text)?
+        };
+
+        // details: CString
+        let details = {
+            let details = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(details)?
+        };
+
+        // end_text: CString
+        let end_text = {
+            let end_text = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(end_text)?
+        };
+
+        // objectives: QuestObjective[4]
+        let objectives = {
+            let mut objectives = [QuestObjective::default(); 4];
+            for i in objectives.iter_mut() {
+                *i = QuestObjective::read(&mut r)?;
+            }
+            objectives
+        };
+
+        // objective_texts: CString[4]
+        let objective_texts = {
+            let mut objective_texts = [(); 4].map(|_| String::default());
+            for i in objective_texts.iter_mut() {
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
+                *i = String::from_utf8(s)?;
+            }
+            objective_texts
+        };
+
+        Ok(Self {
+            quest_id,
+            quest_method,
+            quest_level,
+            zone_or_sort,
+            quest_type,
+            suggest_player_amount,
+            reputation_objective_faction,
+            reputation_objective_value,
+            required_opposite_faction,
+            required_opposite_reputation_value,
+            next_quest_in_chain,
+            money_reward,
+            max_level_money_reward,
+            reward_spell,
+            casted_reward_spell,
+            honor_reward,
+            source_item_id,
+            quest_flags,
+            title_reward,
+            rewards,
+            choice_rewards,
+            point_map_id,
+            position,
+            point_opt,
+            title,
+            objective_text,
+            details,
+            end_text,
+            objectives,
+            objective_texts,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
     const OPCODE: u32 = 0x005d;
 
@@ -369,170 +538,8 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(240..=2280).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x005D, size: body_size });
-        }
-
-        // quest_id: u32
-        let quest_id = crate::util::read_u32_le(&mut r)?;
-
-        // quest_method: u32
-        let quest_method = crate::util::read_u32_le(&mut r)?;
-
-        // quest_level: Level32
-        let quest_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
-
-        // zone_or_sort: u32
-        let zone_or_sort = crate::util::read_u32_le(&mut r)?;
-
-        // quest_type: u32
-        let quest_type = crate::util::read_u32_le(&mut r)?;
-
-        // suggest_player_amount: u32
-        let suggest_player_amount = crate::util::read_u32_le(&mut r)?;
-
-        // reputation_objective_faction: Faction
-        let reputation_objective_faction = crate::util::read_u16_le(&mut r)?.try_into()?;
-
-        // reputation_objective_value: u32
-        let reputation_objective_value = crate::util::read_u32_le(&mut r)?;
-
-        // required_opposite_faction: Faction
-        let required_opposite_faction = crate::util::read_u16_le(&mut r)?.try_into()?;
-
-        // required_opposite_reputation_value: u32
-        let required_opposite_reputation_value = crate::util::read_u32_le(&mut r)?;
-
-        // next_quest_in_chain: u32
-        let next_quest_in_chain = crate::util::read_u32_le(&mut r)?;
-
-        // money_reward: Gold
-        let money_reward = Gold::new(crate::util::read_u32_le(&mut r)?);
-
-        // max_level_money_reward: Gold
-        let max_level_money_reward = Gold::new(crate::util::read_u32_le(&mut r)?);
-
-        // reward_spell: u32
-        let reward_spell = crate::util::read_u32_le(&mut r)?;
-
-        // casted_reward_spell: u32
-        let casted_reward_spell = crate::util::read_u32_le(&mut r)?;
-
-        // honor_reward: u32
-        let honor_reward = crate::util::read_u32_le(&mut r)?;
-
-        // source_item_id: u32
-        let source_item_id = crate::util::read_u32_le(&mut r)?;
-
-        // quest_flags: u32
-        let quest_flags = crate::util::read_u32_le(&mut r)?;
-
-        // title_reward: u32
-        let title_reward = crate::util::read_u32_le(&mut r)?;
-
-        // rewards: QuestItemReward[4]
-        let rewards = {
-            let mut rewards = [QuestItemReward::default(); 4];
-            for i in rewards.iter_mut() {
-                *i = QuestItemReward::read(&mut r)?;
-            }
-            rewards
-        };
-
-        // choice_rewards: QuestItemReward[6]
-        let choice_rewards = {
-            let mut choice_rewards = [QuestItemReward::default(); 6];
-            for i in choice_rewards.iter_mut() {
-                *i = QuestItemReward::read(&mut r)?;
-            }
-            choice_rewards
-        };
-
-        // point_map_id: u32
-        let point_map_id = crate::util::read_u32_le(&mut r)?;
-
-        // position: Vector2d
-        let position = Vector2d::read(&mut r)?;
-
-        // point_opt: u32
-        let point_opt = crate::util::read_u32_le(&mut r)?;
-
-        // title: CString
-        let title = {
-            let title = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(title)?
-        };
-
-        // objective_text: CString
-        let objective_text = {
-            let objective_text = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(objective_text)?
-        };
-
-        // details: CString
-        let details = {
-            let details = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(details)?
-        };
-
-        // end_text: CString
-        let end_text = {
-            let end_text = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(end_text)?
-        };
-
-        // objectives: QuestObjective[4]
-        let objectives = {
-            let mut objectives = [QuestObjective::default(); 4];
-            for i in objectives.iter_mut() {
-                *i = QuestObjective::read(&mut r)?;
-            }
-            objectives
-        };
-
-        // objective_texts: CString[4]
-        let objective_texts = {
-            let mut objective_texts = [(); 4].map(|_| String::default());
-            for i in objective_texts.iter_mut() {
-                let s = crate::util::read_c_string_to_vec(&mut r)?;
-                *i = String::from_utf8(s)?;
-            }
-            objective_texts
-        };
-
-        Ok(Self {
-            quest_id,
-            quest_method,
-            quest_level,
-            zone_or_sort,
-            quest_type,
-            suggest_player_amount,
-            reputation_objective_faction,
-            reputation_objective_value,
-            required_opposite_faction,
-            required_opposite_reputation_value,
-            next_quest_in_chain,
-            money_reward,
-            max_level_money_reward,
-            reward_spell,
-            casted_reward_spell,
-            honor_reward,
-            source_item_id,
-            quest_flags,
-            title_reward,
-            rewards,
-            choice_rewards,
-            point_map_id,
-            position,
-            point_opt,
-            title,
-            objective_text,
-            details,
-            end_text,
-            objectives,
-            objective_texts,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

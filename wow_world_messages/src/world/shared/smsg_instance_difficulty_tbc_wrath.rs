@@ -14,6 +14,26 @@ pub struct SMSG_INSTANCE_DIFFICULTY {
 }
 
 impl crate::private::Sealed for SMSG_INSTANCE_DIFFICULTY {}
+impl SMSG_INSTANCE_DIFFICULTY {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x033B, size: body_size });
+        }
+
+        // difficulty: u32
+        let difficulty = crate::util::read_u32_le(&mut r)?;
+
+        // dynamic_difficulty: Bool32
+        let dynamic_difficulty = crate::util::read_u32_le(&mut r)? != 0;
+
+        Ok(Self {
+            difficulty,
+            dynamic_difficulty,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_INSTANCE_DIFFICULTY {
     const OPCODE: u32 = 0x033b;
 
@@ -64,21 +84,8 @@ impl crate::Message for SMSG_INSTANCE_DIFFICULTY {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x033B, size: body_size });
-        }
-
-        // difficulty: u32
-        let difficulty = crate::util::read_u32_le(&mut r)?;
-
-        // dynamic_difficulty: Bool32
-        let dynamic_difficulty = crate::util::read_u32_le(&mut r)? != 0;
-
-        Ok(Self {
-            difficulty,
-            dynamic_difficulty,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

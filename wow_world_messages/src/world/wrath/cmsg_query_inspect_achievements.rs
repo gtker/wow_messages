@@ -14,6 +14,22 @@ pub struct CMSG_QUERY_INSPECT_ACHIEVEMENTS {
 }
 
 impl crate::private::Sealed for CMSG_QUERY_INSPECT_ACHIEVEMENTS {}
+impl CMSG_QUERY_INSPECT_ACHIEVEMENTS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=9).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046B, size: body_size });
+        }
+
+        // player: PackedGuid
+        let player = crate::util::read_packed_guid(&mut r)?;
+
+        Ok(Self {
+            player,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_QUERY_INSPECT_ACHIEVEMENTS {
     const OPCODE: u32 = 0x046b;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_QUERY_INSPECT_ACHIEVEMENTS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=9).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046B, size: body_size });
-        }
-
-        // player: PackedGuid
-        let player = crate::util::read_packed_guid(&mut r)?;
-
-        Ok(Self {
-            player,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

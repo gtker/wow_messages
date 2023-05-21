@@ -16,26 +16,8 @@ pub struct SMSG_CHAR_ENUM {
 }
 
 impl crate::private::Sealed for SMSG_CHAR_ENUM {}
-impl crate::Message for SMSG_CHAR_ENUM {
-    const OPCODE: u32 = 0x003b;
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // amount_of_characters: u8
-        w.write_all(&(self.characters.len() as u8).to_le_bytes())?;
-
-        // characters: Character[amount_of_characters]
-        for i in self.characters.iter() {
-            i.write_into_vec(&mut w)?;
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl SMSG_CHAR_ENUM {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(1..=105985).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003B, size: body_size });
         }
@@ -55,6 +37,31 @@ impl crate::Message for SMSG_CHAR_ENUM {
         Ok(Self {
             characters,
         })
+    }
+
+}
+
+impl crate::Message for SMSG_CHAR_ENUM {
+    const OPCODE: u32 = 0x003b;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // amount_of_characters: u8
+        w.write_all(&(self.characters.len() as u8).to_le_bytes())?;
+
+        // characters: Character[amount_of_characters]
+        for i in self.characters.iter() {
+            i.write_into_vec(&mut w)?;
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

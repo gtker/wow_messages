@@ -16,6 +16,26 @@ pub struct SMSG_DUEL_REQUESTED {
 }
 
 impl crate::private::Sealed for SMSG_DUEL_REQUESTED {}
+impl SMSG_DUEL_REQUESTED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0167, size: body_size });
+        }
+
+        // initiator: Guid
+        let initiator = crate::util::read_guid(&mut r)?;
+
+        // target: Guid
+        let target = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            initiator,
+            target,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_DUEL_REQUESTED {
     const OPCODE: u32 = 0x0167;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_DUEL_REQUESTED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0167, size: body_size });
-        }
-
-        // initiator: Guid
-        let initiator = crate::util::read_guid(&mut r)?;
-
-        // target: Guid
-        let target = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            initiator,
-            target,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

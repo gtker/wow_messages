@@ -12,6 +12,28 @@ pub struct SMSG_ACTION_BUTTONS {
 }
 
 impl crate::private::Sealed for SMSG_ACTION_BUTTONS {}
+impl SMSG_ACTION_BUTTONS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 480 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0129, size: body_size });
+        }
+
+        // data: u32[120]
+        let data = {
+            let mut data = [u32::default(); 120];
+            for i in data.iter_mut() {
+                *i = crate::util::read_u32_le(&mut r)?;
+            }
+            data
+        };
+
+        Ok(Self {
+            data,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ACTION_BUTTONS {
     const OPCODE: u32 = 0x0129;
 
@@ -67,23 +89,8 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 480 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0129, size: body_size });
-        }
-
-        // data: u32[120]
-        let data = {
-            let mut data = [u32::default(); 120];
-            for i in data.iter_mut() {
-                *i = crate::util::read_u32_le(&mut r)?;
-            }
-            data
-        };
-
-        Ok(Self {
-            data,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

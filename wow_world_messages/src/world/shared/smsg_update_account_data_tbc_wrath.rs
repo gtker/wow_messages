@@ -17,6 +17,41 @@ pub struct SMSG_UPDATE_ACCOUNT_DATA {
 }
 
 impl crate::private::Sealed for SMSG_UPDATE_ACCOUNT_DATA {}
+impl SMSG_UPDATE_ACCOUNT_DATA {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(8..=65543).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x020C, size: body_size });
+        }
+
+        // data_type: u32
+        let data_type = crate::util::read_u32_le(&mut r)?;
+
+        // decompressed_size: u32
+        let decompressed_size = crate::util::read_u32_le(&mut r)?;
+
+        // compressed_data: u8[-]
+        let compressed_data = {
+            let mut current_size = {
+                4 // data_type: u32
+                + 4 // decompressed_size: u32
+            };
+            let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                compressed_data.push(crate::util::read_u8_le(&mut r)?);
+                current_size += 1;
+            }
+            compressed_data
+        };
+
+        Ok(Self {
+            data_type,
+            decompressed_size,
+            compressed_data,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA {
     const OPCODE: u32 = 0x020c;
 
@@ -78,36 +113,8 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(8..=65543).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x020C, size: body_size });
-        }
-
-        // data_type: u32
-        let data_type = crate::util::read_u32_le(&mut r)?;
-
-        // decompressed_size: u32
-        let decompressed_size = crate::util::read_u32_le(&mut r)?;
-
-        // compressed_data: u8[-]
-        let compressed_data = {
-            let mut current_size = {
-                4 // data_type: u32
-                + 4 // decompressed_size: u32
-            };
-            let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                compressed_data.push(crate::util::read_u8_le(&mut r)?);
-                current_size += 1;
-            }
-            compressed_data
-        };
-
-        Ok(Self {
-            data_type,
-            decompressed_size,
-            compressed_data,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

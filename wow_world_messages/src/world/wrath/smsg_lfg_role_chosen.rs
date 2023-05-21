@@ -18,6 +18,30 @@ pub struct SMSG_LFG_ROLE_CHOSEN {
 }
 
 impl crate::private::Sealed for SMSG_LFG_ROLE_CHOSEN {}
+impl SMSG_LFG_ROLE_CHOSEN {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 13 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02BB, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // ready: Bool
+        let ready = crate::util::read_u8_le(&mut r)? != 0;
+
+        // roles: u32
+        let roles = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            ready,
+            roles,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LFG_ROLE_CHOSEN {
     const OPCODE: u32 = 0x02bb;
 
@@ -73,25 +97,8 @@ impl crate::Message for SMSG_LFG_ROLE_CHOSEN {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 13 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02BB, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // ready: Bool
-        let ready = crate::util::read_u8_le(&mut r)? != 0;
-
-        // roles: u32
-        let roles = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            ready,
-            roles,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -13,6 +13,22 @@ pub struct SMSG_TALENTS_INVOLUNTARILY_RESET {
 }
 
 impl crate::private::Sealed for SMSG_TALENTS_INVOLUNTARILY_RESET {}
+impl SMSG_TALENTS_INVOLUNTARILY_RESET {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04FA, size: body_size });
+        }
+
+        // unknown: u8
+        let unknown = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            unknown,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_TALENTS_INVOLUNTARILY_RESET {
     const OPCODE: u32 = 0x04fa;
 
@@ -58,17 +74,8 @@ impl crate::Message for SMSG_TALENTS_INVOLUNTARILY_RESET {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04FA, size: body_size });
-        }
-
-        // unknown: u8
-        let unknown = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            unknown,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

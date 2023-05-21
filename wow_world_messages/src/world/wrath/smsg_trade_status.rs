@@ -29,6 +29,85 @@ pub struct SMSG_TRADE_STATUS {
 }
 
 impl crate::private::Sealed for SMSG_TRADE_STATUS {}
+impl SMSG_TRADE_STATUS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=13).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0120, size: body_size });
+        }
+
+        // status: TradeStatus
+        let status = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        let status_if = match status {
+            TradeStatus::Busy => SMSG_TRADE_STATUS_TradeStatus::Busy,
+            TradeStatus::BeginTrade => {
+                // unknown1: Guid
+                let unknown1 = crate::util::read_guid(&mut r)?;
+
+                SMSG_TRADE_STATUS_TradeStatus::BeginTrade {
+                    unknown1,
+                }
+            }
+            TradeStatus::OpenWindow => SMSG_TRADE_STATUS_TradeStatus::OpenWindow,
+            TradeStatus::TradeCanceled => SMSG_TRADE_STATUS_TradeStatus::TradeCanceled,
+            TradeStatus::TradeAccept => SMSG_TRADE_STATUS_TradeStatus::TradeAccept,
+            TradeStatus::Busy2 => SMSG_TRADE_STATUS_TradeStatus::Busy2,
+            TradeStatus::NoTarget => SMSG_TRADE_STATUS_TradeStatus::NoTarget,
+            TradeStatus::BackToTrade => SMSG_TRADE_STATUS_TradeStatus::BackToTrade,
+            TradeStatus::TradeComplete => SMSG_TRADE_STATUS_TradeStatus::TradeComplete,
+            TradeStatus::TradeRejected => SMSG_TRADE_STATUS_TradeStatus::TradeRejected,
+            TradeStatus::TargetToFar => SMSG_TRADE_STATUS_TradeStatus::TargetToFar,
+            TradeStatus::WrongFaction => SMSG_TRADE_STATUS_TradeStatus::WrongFaction,
+            TradeStatus::CloseWindow => {
+                // inventory_result: InventoryResult
+                let inventory_result = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+                // target_error: Bool
+                let target_error = crate::util::read_u8_le(&mut r)? != 0;
+
+                // item_limit_category_id: u32
+                let item_limit_category_id = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_TRADE_STATUS_TradeStatus::CloseWindow {
+                    inventory_result,
+                    item_limit_category_id,
+                    target_error,
+                }
+            }
+            TradeStatus::Unknown13 => SMSG_TRADE_STATUS_TradeStatus::Unknown13,
+            TradeStatus::IgnoreYou => SMSG_TRADE_STATUS_TradeStatus::IgnoreYou,
+            TradeStatus::YouStunned => SMSG_TRADE_STATUS_TradeStatus::YouStunned,
+            TradeStatus::TargetStunned => SMSG_TRADE_STATUS_TradeStatus::TargetStunned,
+            TradeStatus::YouDead => SMSG_TRADE_STATUS_TradeStatus::YouDead,
+            TradeStatus::TargetDead => SMSG_TRADE_STATUS_TradeStatus::TargetDead,
+            TradeStatus::YouLogout => SMSG_TRADE_STATUS_TradeStatus::YouLogout,
+            TradeStatus::TargetLogout => SMSG_TRADE_STATUS_TradeStatus::TargetLogout,
+            TradeStatus::TrialAccount => SMSG_TRADE_STATUS_TradeStatus::TrialAccount,
+            TradeStatus::OnlyConjured => {
+                // slot: u8
+                let slot = crate::util::read_u8_le(&mut r)?;
+
+                SMSG_TRADE_STATUS_TradeStatus::OnlyConjured {
+                    slot,
+                }
+            }
+            TradeStatus::NotOnTaplist => {
+                // slot: u8
+                let slot = crate::util::read_u8_le(&mut r)?;
+
+                SMSG_TRADE_STATUS_TradeStatus::NotOnTaplist {
+                    slot,
+                }
+            }
+        };
+
+        Ok(Self {
+            status: status_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_TRADE_STATUS {
     const OPCODE: u32 = 0x0120;
 
@@ -170,80 +249,8 @@ impl crate::Message for SMSG_TRADE_STATUS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=13).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0120, size: body_size });
-        }
-
-        // status: TradeStatus
-        let status = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        let status_if = match status {
-            TradeStatus::Busy => SMSG_TRADE_STATUS_TradeStatus::Busy,
-            TradeStatus::BeginTrade => {
-                // unknown1: Guid
-                let unknown1 = crate::util::read_guid(&mut r)?;
-
-                SMSG_TRADE_STATUS_TradeStatus::BeginTrade {
-                    unknown1,
-                }
-            }
-            TradeStatus::OpenWindow => SMSG_TRADE_STATUS_TradeStatus::OpenWindow,
-            TradeStatus::TradeCanceled => SMSG_TRADE_STATUS_TradeStatus::TradeCanceled,
-            TradeStatus::TradeAccept => SMSG_TRADE_STATUS_TradeStatus::TradeAccept,
-            TradeStatus::Busy2 => SMSG_TRADE_STATUS_TradeStatus::Busy2,
-            TradeStatus::NoTarget => SMSG_TRADE_STATUS_TradeStatus::NoTarget,
-            TradeStatus::BackToTrade => SMSG_TRADE_STATUS_TradeStatus::BackToTrade,
-            TradeStatus::TradeComplete => SMSG_TRADE_STATUS_TradeStatus::TradeComplete,
-            TradeStatus::TradeRejected => SMSG_TRADE_STATUS_TradeStatus::TradeRejected,
-            TradeStatus::TargetToFar => SMSG_TRADE_STATUS_TradeStatus::TargetToFar,
-            TradeStatus::WrongFaction => SMSG_TRADE_STATUS_TradeStatus::WrongFaction,
-            TradeStatus::CloseWindow => {
-                // inventory_result: InventoryResult
-                let inventory_result = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-                // target_error: Bool
-                let target_error = crate::util::read_u8_le(&mut r)? != 0;
-
-                // item_limit_category_id: u32
-                let item_limit_category_id = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_TRADE_STATUS_TradeStatus::CloseWindow {
-                    inventory_result,
-                    item_limit_category_id,
-                    target_error,
-                }
-            }
-            TradeStatus::Unknown13 => SMSG_TRADE_STATUS_TradeStatus::Unknown13,
-            TradeStatus::IgnoreYou => SMSG_TRADE_STATUS_TradeStatus::IgnoreYou,
-            TradeStatus::YouStunned => SMSG_TRADE_STATUS_TradeStatus::YouStunned,
-            TradeStatus::TargetStunned => SMSG_TRADE_STATUS_TradeStatus::TargetStunned,
-            TradeStatus::YouDead => SMSG_TRADE_STATUS_TradeStatus::YouDead,
-            TradeStatus::TargetDead => SMSG_TRADE_STATUS_TradeStatus::TargetDead,
-            TradeStatus::YouLogout => SMSG_TRADE_STATUS_TradeStatus::YouLogout,
-            TradeStatus::TargetLogout => SMSG_TRADE_STATUS_TradeStatus::TargetLogout,
-            TradeStatus::TrialAccount => SMSG_TRADE_STATUS_TradeStatus::TrialAccount,
-            TradeStatus::OnlyConjured => {
-                // slot: u8
-                let slot = crate::util::read_u8_le(&mut r)?;
-
-                SMSG_TRADE_STATUS_TradeStatus::OnlyConjured {
-                    slot,
-                }
-            }
-            TradeStatus::NotOnTaplist => {
-                // slot: u8
-                let slot = crate::util::read_u8_le(&mut r)?;
-
-                SMSG_TRADE_STATUS_TradeStatus::NotOnTaplist {
-                    slot,
-                }
-            }
-        };
-
-        Ok(Self {
-            status: status_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

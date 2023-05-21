@@ -16,6 +16,44 @@ pub struct CMSG_TEST_ENDLESS_U8 {
 }
 
 impl crate::private::Sealed for CMSG_TEST_ENDLESS_U8 {}
+impl CMSG_TEST_ENDLESS_U8 {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=65792).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x1337, size: body_size });
+        }
+
+        // c_string: CString
+        let c_string = {
+            let c_string = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(c_string)?
+        };
+
+        // b_u8: u8
+        let b_u8 = crate::util::read_u8_le(&mut r)?;
+
+        // endless: u8[-]
+        let endless = {
+            let mut current_size = {
+                c_string.len() + 1 // c_string: CString
+                + 1 // b_u8: u8
+            };
+            let mut endless = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                endless.push(crate::util::read_u8_le(&mut r)?);
+                current_size += 1;
+            }
+            endless
+        };
+
+        Ok(Self {
+            c_string,
+            b_u8,
+            endless,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_TEST_ENDLESS_U8 {
     const OPCODE: u32 = 0x1337;
 
@@ -81,39 +119,8 @@ impl crate::Message for CMSG_TEST_ENDLESS_U8 {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=65792).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x1337, size: body_size });
-        }
-
-        // c_string: CString
-        let c_string = {
-            let c_string = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(c_string)?
-        };
-
-        // b_u8: u8
-        let b_u8 = crate::util::read_u8_le(&mut r)?;
-
-        // endless: u8[-]
-        let endless = {
-            let mut current_size = {
-                c_string.len() + 1 // c_string: CString
-                + 1 // b_u8: u8
-            };
-            let mut endless = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                endless.push(crate::util::read_u8_le(&mut r)?);
-                current_size += 1;
-            }
-            endless
-        };
-
-        Ok(Self {
-            c_string,
-            b_u8,
-            endless,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

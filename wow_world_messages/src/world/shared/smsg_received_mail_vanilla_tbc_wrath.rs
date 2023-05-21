@@ -14,6 +14,22 @@ pub struct SMSG_RECEIVED_MAIL {
 }
 
 impl crate::private::Sealed for SMSG_RECEIVED_MAIL {}
+impl SMSG_RECEIVED_MAIL {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0285, size: body_size });
+        }
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            unknown1,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_RECEIVED_MAIL {
     const OPCODE: u32 = 0x0285;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_RECEIVED_MAIL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0285, size: body_size });
-        }
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            unknown1,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

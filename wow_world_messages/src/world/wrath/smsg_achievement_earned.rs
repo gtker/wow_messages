@@ -23,6 +23,34 @@ pub struct SMSG_ACHIEVEMENT_EARNED {
 }
 
 impl crate::private::Sealed for SMSG_ACHIEVEMENT_EARNED {}
+impl SMSG_ACHIEVEMENT_EARNED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(14..=21).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0468, size: body_size });
+        }
+
+        // player: PackedGuid
+        let player = crate::util::read_packed_guid(&mut r)?;
+
+        // achievement: u32
+        let achievement = crate::util::read_u32_le(&mut r)?;
+
+        // earn_time: DateTime
+        let earn_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+        // unknown: u32
+        let unknown = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            player,
+            achievement,
+            earn_time,
+            unknown,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ACHIEVEMENT_EARNED {
     const OPCODE: u32 = 0x0468;
 
@@ -83,29 +111,8 @@ impl crate::Message for SMSG_ACHIEVEMENT_EARNED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(14..=21).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0468, size: body_size });
-        }
-
-        // player: PackedGuid
-        let player = crate::util::read_packed_guid(&mut r)?;
-
-        // achievement: u32
-        let achievement = crate::util::read_u32_le(&mut r)?;
-
-        // earn_time: DateTime
-        let earn_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-        // unknown: u32
-        let unknown = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            player,
-            achievement,
-            earn_time,
-            unknown,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

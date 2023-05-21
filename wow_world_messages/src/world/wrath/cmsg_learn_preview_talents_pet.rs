@@ -20,6 +20,35 @@ pub struct CMSG_LEARN_PREVIEW_TALENTS_PET {
 }
 
 impl crate::private::Sealed for CMSG_LEARN_PREVIEW_TALENTS_PET {}
+impl CMSG_LEARN_PREVIEW_TALENTS_PET {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(12..=10240).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C2, size: body_size });
+        }
+
+        // pet: Guid
+        let pet = crate::util::read_guid(&mut r)?;
+
+        // amount_of_talents: u32
+        let amount_of_talents = crate::util::read_u32_le(&mut r)?;
+
+        // talents: PreviewTalent[amount_of_talents]
+        let talents = {
+            let mut talents = Vec::with_capacity(amount_of_talents as usize);
+            for _ in 0..amount_of_talents {
+                talents.push(PreviewTalent::read(&mut r)?);
+            }
+            talents
+        };
+
+        Ok(Self {
+            pet,
+            talents,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS_PET {
     const OPCODE: u32 = 0x04c2;
 
@@ -95,30 +124,8 @@ impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS_PET {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(12..=10240).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C2, size: body_size });
-        }
-
-        // pet: Guid
-        let pet = crate::util::read_guid(&mut r)?;
-
-        // amount_of_talents: u32
-        let amount_of_talents = crate::util::read_u32_le(&mut r)?;
-
-        // talents: PreviewTalent[amount_of_talents]
-        let talents = {
-            let mut talents = Vec::with_capacity(amount_of_talents as usize);
-            for _ in 0..amount_of_talents {
-                talents.push(PreviewTalent::read(&mut r)?);
-            }
-            talents
-        };
-
-        Ok(Self {
-            pet,
-            talents,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

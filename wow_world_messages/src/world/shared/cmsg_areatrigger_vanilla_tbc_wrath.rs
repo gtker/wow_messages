@@ -12,6 +12,22 @@ pub struct CMSG_AREATRIGGER {
 }
 
 impl crate::private::Sealed for CMSG_AREATRIGGER {}
+impl CMSG_AREATRIGGER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00B4, size: body_size });
+        }
+
+        // trigger_id: u32
+        let trigger_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            trigger_id,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_AREATRIGGER {
     const OPCODE: u32 = 0x00b4;
 
@@ -57,17 +73,8 @@ impl crate::Message for CMSG_AREATRIGGER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00B4, size: body_size });
-        }
-
-        // trigger_id: u32
-        let trigger_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            trigger_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

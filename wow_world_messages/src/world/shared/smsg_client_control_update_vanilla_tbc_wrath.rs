@@ -16,6 +16,26 @@ pub struct SMSG_CLIENT_CONTROL_UPDATE {
 }
 
 impl crate::private::Sealed for SMSG_CLIENT_CONTROL_UPDATE {}
+impl SMSG_CLIENT_CONTROL_UPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(3..=10).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0159, size: body_size });
+        }
+
+        // guid: PackedGuid
+        let guid = crate::util::read_packed_guid(&mut r)?;
+
+        // allow_movement: Bool
+        let allow_movement = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            guid,
+            allow_movement,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CLIENT_CONTROL_UPDATE {
     const OPCODE: u32 = 0x0159;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_CLIENT_CONTROL_UPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(3..=10).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0159, size: body_size });
-        }
-
-        // guid: PackedGuid
-        let guid = crate::util::read_packed_guid(&mut r)?;
-
-        // allow_movement: Bool
-        let allow_movement = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            guid,
-            allow_movement,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

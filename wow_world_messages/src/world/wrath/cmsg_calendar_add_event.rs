@@ -36,6 +36,73 @@ pub struct CMSG_CALENDAR_ADD_EVENT {
 }
 
 impl crate::private::Sealed for CMSG_CALENDAR_ADD_EVENT {}
+impl CMSG_CALENDAR_ADD_EVENT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(28..=10240).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042D, size: body_size });
+        }
+
+        // title: CString
+        let title = {
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(title)?
+        };
+
+        // description: CString
+        let description = {
+            let description = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(description)?
+        };
+
+        // event_type: u8
+        let event_type = crate::util::read_u8_le(&mut r)?;
+
+        // repeatable: Bool
+        let repeatable = crate::util::read_u8_le(&mut r)? != 0;
+
+        // maximum_invites: u32
+        let maximum_invites = crate::util::read_u32_le(&mut r)?;
+
+        // dungeon_id: u32
+        let dungeon_id = crate::util::read_u32_le(&mut r)?;
+
+        // event_time: DateTime
+        let event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+        // time_zone_time: DateTime
+        let time_zone_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+        // flags: u32
+        let flags = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_invitees: u32
+        let amount_of_invitees = crate::util::read_u32_le(&mut r)?;
+
+        // invitees: CalendarInvitee[amount_of_invitees]
+        let invitees = {
+            let mut invitees = Vec::with_capacity(amount_of_invitees as usize);
+            for _ in 0..amount_of_invitees {
+                invitees.push(CalendarInvitee::read(&mut r)?);
+            }
+            invitees
+        };
+
+        Ok(Self {
+            title,
+            description,
+            event_type,
+            repeatable,
+            maximum_invites,
+            dungeon_id,
+            event_time,
+            time_zone_time,
+            flags,
+            invitees,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CALENDAR_ADD_EVENT {
     const OPCODE: u32 = 0x042d;
 
@@ -161,68 +228,8 @@ impl crate::Message for CMSG_CALENDAR_ADD_EVENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(28..=10240).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042D, size: body_size });
-        }
-
-        // title: CString
-        let title = {
-            let title = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(title)?
-        };
-
-        // description: CString
-        let description = {
-            let description = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(description)?
-        };
-
-        // event_type: u8
-        let event_type = crate::util::read_u8_le(&mut r)?;
-
-        // repeatable: Bool
-        let repeatable = crate::util::read_u8_le(&mut r)? != 0;
-
-        // maximum_invites: u32
-        let maximum_invites = crate::util::read_u32_le(&mut r)?;
-
-        // dungeon_id: u32
-        let dungeon_id = crate::util::read_u32_le(&mut r)?;
-
-        // event_time: DateTime
-        let event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-        // time_zone_time: DateTime
-        let time_zone_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-        // flags: u32
-        let flags = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_invitees: u32
-        let amount_of_invitees = crate::util::read_u32_le(&mut r)?;
-
-        // invitees: CalendarInvitee[amount_of_invitees]
-        let invitees = {
-            let mut invitees = Vec::with_capacity(amount_of_invitees as usize);
-            for _ in 0..amount_of_invitees {
-                invitees.push(CalendarInvitee::read(&mut r)?);
-            }
-            invitees
-        };
-
-        Ok(Self {
-            title,
-            description,
-            event_type,
-            repeatable,
-            maximum_invites,
-            dungeon_id,
-            event_time,
-            time_zone_time,
-            flags,
-            invitees,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

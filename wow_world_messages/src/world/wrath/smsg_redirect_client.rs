@@ -20,6 +20,38 @@ pub struct SMSG_REDIRECT_CLIENT {
 }
 
 impl crate::private::Sealed for SMSG_REDIRECT_CLIENT {}
+impl SMSG_REDIRECT_CLIENT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 30 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x050D, size: body_size });
+        }
+
+        // ip_address: u32
+        let ip_address = crate::util::read_u32_le(&mut r)?;
+
+        // port: u16
+        let port = crate::util::read_u16_le(&mut r)?;
+
+        // unknown: u32
+        let unknown = crate::util::read_u32_le(&mut r)?;
+
+        // hash: u8[20]
+        let hash = {
+            let mut hash = [0_u8; 20];
+            r.read_exact(&mut hash)?;
+            hash
+        };
+
+        Ok(Self {
+            ip_address,
+            port,
+            unknown,
+            hash,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_REDIRECT_CLIENT {
     const OPCODE: u32 = 0x050d;
 
@@ -86,33 +118,8 @@ impl crate::Message for SMSG_REDIRECT_CLIENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 30 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x050D, size: body_size });
-        }
-
-        // ip_address: u32
-        let ip_address = crate::util::read_u32_le(&mut r)?;
-
-        // port: u16
-        let port = crate::util::read_u16_le(&mut r)?;
-
-        // unknown: u32
-        let unknown = crate::util::read_u32_le(&mut r)?;
-
-        // hash: u8[20]
-        let hash = {
-            let mut hash = [0_u8; 20];
-            r.read_exact(&mut hash)?;
-            hash
-        };
-
-        Ok(Self {
-            ip_address,
-            port,
-            unknown,
-            hash,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

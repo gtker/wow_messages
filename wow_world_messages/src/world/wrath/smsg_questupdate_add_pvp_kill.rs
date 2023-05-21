@@ -16,6 +16,30 @@ pub struct SMSG_QUESTUPDATE_ADD_PVP_KILL {
 }
 
 impl crate::private::Sealed for SMSG_QUESTUPDATE_ADD_PVP_KILL {}
+impl SMSG_QUESTUPDATE_ADD_PVP_KILL {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046F, size: body_size });
+        }
+
+        // quest_id: u32
+        let quest_id = crate::util::read_u32_le(&mut r)?;
+
+        // count: u32
+        let count = crate::util::read_u32_le(&mut r)?;
+
+        // players_slain: u32
+        let players_slain = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            quest_id,
+            count,
+            players_slain,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_QUESTUPDATE_ADD_PVP_KILL {
     const OPCODE: u32 = 0x046f;
 
@@ -71,25 +95,8 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_PVP_KILL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046F, size: body_size });
-        }
-
-        // quest_id: u32
-        let quest_id = crate::util::read_u32_le(&mut r)?;
-
-        // count: u32
-        let count = crate::util::read_u32_le(&mut r)?;
-
-        // players_slain: u32
-        let players_slain = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            quest_id,
-            count,
-            players_slain,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

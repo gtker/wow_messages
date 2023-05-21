@@ -18,6 +18,26 @@ pub struct CMSG_SET_FACTION_ATWAR {
 }
 
 impl crate::private::Sealed for CMSG_SET_FACTION_ATWAR {}
+impl CMSG_SET_FACTION_ATWAR {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 3 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0125, size: body_size });
+        }
+
+        // faction: Faction
+        let faction = crate::util::read_u16_le(&mut r)?.try_into()?;
+
+        // flags: FactionFlag
+        let flags = FactionFlag::new(crate::util::read_u8_le(&mut r)?);
+
+        Ok(Self {
+            faction,
+            flags,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_SET_FACTION_ATWAR {
     const OPCODE: u32 = 0x0125;
 
@@ -68,21 +88,8 @@ impl crate::Message for CMSG_SET_FACTION_ATWAR {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 3 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0125, size: body_size });
-        }
-
-        // faction: Faction
-        let faction = crate::util::read_u16_le(&mut r)?.try_into()?;
-
-        // flags: FactionFlag
-        let flags = FactionFlag::new(crate::util::read_u8_le(&mut r)?);
-
-        Ok(Self {
-            faction,
-            flags,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

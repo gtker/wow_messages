@@ -42,6 +42,98 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
 }
 
 impl crate::private::Sealed for SMSG_QUESTGIVER_QUEST_DETAILS {}
+impl SMSG_QUESTGIVER_QUEST_DETAILS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(39..=65535).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0188, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // quest_id: u32
+        let quest_id = crate::util::read_u32_le(&mut r)?;
+
+        // title: CString
+        let title = {
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(title)?
+        };
+
+        // details: CString
+        let details = {
+            let details = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(details)?
+        };
+
+        // objectives: CString
+        let objectives = {
+            let objectives = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(objectives)?
+        };
+
+        // auto_finish: Bool32
+        let auto_finish = crate::util::read_u32_le(&mut r)? != 0;
+
+        // amount_of_choice_item_rewards: u32
+        let amount_of_choice_item_rewards = crate::util::read_u32_le(&mut r)?;
+
+        // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
+        let choice_item_rewards = {
+            let mut choice_item_rewards = Vec::with_capacity(amount_of_choice_item_rewards as usize);
+            for _ in 0..amount_of_choice_item_rewards {
+                choice_item_rewards.push(QuestItemReward::read(&mut r)?);
+            }
+            choice_item_rewards
+        };
+
+        // amount_of_item_rewards: u32
+        let amount_of_item_rewards = crate::util::read_u32_le(&mut r)?;
+
+        // item_rewards: QuestItemReward[amount_of_item_rewards]
+        let item_rewards = {
+            let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
+            for _ in 0..amount_of_item_rewards {
+                item_rewards.push(QuestItemReward::read(&mut r)?);
+            }
+            item_rewards
+        };
+
+        // money_reward: Gold
+        let money_reward = Gold::new(crate::util::read_u32_le(&mut r)?);
+
+        // reward_spell: u32
+        let reward_spell = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_emotes: u32
+        let amount_of_emotes = crate::util::read_u32_le(&mut r)?;
+
+        // emotes: QuestDetailsEmote[amount_of_emotes]
+        let emotes = {
+            let mut emotes = Vec::with_capacity(amount_of_emotes as usize);
+            for _ in 0..amount_of_emotes {
+                emotes.push(QuestDetailsEmote::read(&mut r)?);
+            }
+            emotes
+        };
+
+        Ok(Self {
+            guid,
+            quest_id,
+            title,
+            details,
+            objectives,
+            auto_finish,
+            choice_item_rewards,
+            item_rewards,
+            money_reward,
+            reward_spell,
+            emotes,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
     const OPCODE: u32 = 0x0188;
 
@@ -224,93 +316,8 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(39..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0188, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // quest_id: u32
-        let quest_id = crate::util::read_u32_le(&mut r)?;
-
-        // title: CString
-        let title = {
-            let title = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(title)?
-        };
-
-        // details: CString
-        let details = {
-            let details = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(details)?
-        };
-
-        // objectives: CString
-        let objectives = {
-            let objectives = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(objectives)?
-        };
-
-        // auto_finish: Bool32
-        let auto_finish = crate::util::read_u32_le(&mut r)? != 0;
-
-        // amount_of_choice_item_rewards: u32
-        let amount_of_choice_item_rewards = crate::util::read_u32_le(&mut r)?;
-
-        // choice_item_rewards: QuestItemReward[amount_of_choice_item_rewards]
-        let choice_item_rewards = {
-            let mut choice_item_rewards = Vec::with_capacity(amount_of_choice_item_rewards as usize);
-            for _ in 0..amount_of_choice_item_rewards {
-                choice_item_rewards.push(QuestItemReward::read(&mut r)?);
-            }
-            choice_item_rewards
-        };
-
-        // amount_of_item_rewards: u32
-        let amount_of_item_rewards = crate::util::read_u32_le(&mut r)?;
-
-        // item_rewards: QuestItemReward[amount_of_item_rewards]
-        let item_rewards = {
-            let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
-            for _ in 0..amount_of_item_rewards {
-                item_rewards.push(QuestItemReward::read(&mut r)?);
-            }
-            item_rewards
-        };
-
-        // money_reward: Gold
-        let money_reward = Gold::new(crate::util::read_u32_le(&mut r)?);
-
-        // reward_spell: u32
-        let reward_spell = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_emotes: u32
-        let amount_of_emotes = crate::util::read_u32_le(&mut r)?;
-
-        // emotes: QuestDetailsEmote[amount_of_emotes]
-        let emotes = {
-            let mut emotes = Vec::with_capacity(amount_of_emotes as usize);
-            for _ in 0..amount_of_emotes {
-                emotes.push(QuestDetailsEmote::read(&mut r)?);
-            }
-            emotes
-        };
-
-        Ok(Self {
-            guid,
-            quest_id,
-            title,
-            details,
-            objectives,
-            auto_finish,
-            choice_item_rewards,
-            item_rewards,
-            money_reward,
-            reward_spell,
-            emotes,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

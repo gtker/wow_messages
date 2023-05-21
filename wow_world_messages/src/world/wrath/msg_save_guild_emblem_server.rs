@@ -14,6 +14,22 @@ pub struct MSG_SAVE_GUILD_EMBLEM_Server {
 }
 
 impl crate::private::Sealed for MSG_SAVE_GUILD_EMBLEM_Server {}
+impl MSG_SAVE_GUILD_EMBLEM_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F1, size: body_size });
+        }
+
+        // result: GuildEmblemResult
+        let result = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            result,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Server {
     const OPCODE: u32 = 0x01f1;
 
@@ -59,17 +75,8 @@ impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F1, size: body_size });
-        }
-
-        // result: GuildEmblemResult
-        let result = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            result,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

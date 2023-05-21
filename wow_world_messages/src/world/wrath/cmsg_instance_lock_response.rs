@@ -12,6 +12,22 @@ pub struct CMSG_INSTANCE_LOCK_RESPONSE {
 }
 
 impl crate::private::Sealed for CMSG_INSTANCE_LOCK_RESPONSE {}
+impl CMSG_INSTANCE_LOCK_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x013F, size: body_size });
+        }
+
+        // accept: Bool
+        let accept = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            accept,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_INSTANCE_LOCK_RESPONSE {
     const OPCODE: u32 = 0x013f;
 
@@ -57,17 +73,8 @@ impl crate::Message for CMSG_INSTANCE_LOCK_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x013F, size: body_size });
-        }
-
-        // accept: Bool
-        let accept = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            accept,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

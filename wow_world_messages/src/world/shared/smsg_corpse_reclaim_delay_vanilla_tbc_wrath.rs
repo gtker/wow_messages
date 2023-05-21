@@ -14,6 +14,22 @@ pub struct SMSG_CORPSE_RECLAIM_DELAY {
 }
 
 impl crate::private::Sealed for SMSG_CORPSE_RECLAIM_DELAY {}
+impl SMSG_CORPSE_RECLAIM_DELAY {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0269, size: body_size });
+        }
+
+        // delay: Seconds
+        let delay = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
+
+        Ok(Self {
+            delay,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CORPSE_RECLAIM_DELAY {
     const OPCODE: u32 = 0x0269;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_CORPSE_RECLAIM_DELAY {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0269, size: body_size });
-        }
-
-        // delay: Seconds
-        let delay = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
-
-        Ok(Self {
-            delay,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

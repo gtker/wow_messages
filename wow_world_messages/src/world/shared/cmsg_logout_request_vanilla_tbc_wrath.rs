@@ -14,6 +14,18 @@ pub struct CMSG_LOGOUT_REQUEST {
 }
 
 impl crate::private::Sealed for CMSG_LOGOUT_REQUEST {}
+impl CMSG_LOGOUT_REQUEST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 0 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x004B, size: body_size });
+        }
+
+        Ok(Self {
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_LOGOUT_REQUEST {
     const OPCODE: u32 = 0x004b;
 
@@ -25,13 +37,8 @@ impl crate::Message for CMSG_LOGOUT_REQUEST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x004B, size: body_size });
-        }
-
-        Ok(Self {
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

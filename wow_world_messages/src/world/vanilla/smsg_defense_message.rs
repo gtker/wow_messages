@@ -16,6 +16,30 @@ pub struct SMSG_DEFENSE_MESSAGE {
 }
 
 impl crate::private::Sealed for SMSG_DEFENSE_MESSAGE {}
+impl SMSG_DEFENSE_MESSAGE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(9..=8008).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x033B, size: body_size });
+        }
+
+        // area: Area
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // message: SizedCString
+        let message = {
+            let message = crate::util::read_u32_le(&mut r)?;
+            let message = crate::util::read_sized_c_string_to_vec(&mut r, message)?;
+            String::from_utf8(message)?
+        };
+
+        Ok(Self {
+            area,
+            message,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_DEFENSE_MESSAGE {
     const OPCODE: u32 = 0x033b;
 
@@ -69,25 +93,8 @@ impl crate::Message for SMSG_DEFENSE_MESSAGE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(9..=8008).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x033B, size: body_size });
-        }
-
-        // area: Area
-        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // message: SizedCString
-        let message = {
-            let message = crate::util::read_u32_le(&mut r)?;
-            let message = crate::util::read_sized_c_string_to_vec(&mut r, message)?;
-            String::from_utf8(message)?
-        };
-
-        Ok(Self {
-            area,
-            message,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

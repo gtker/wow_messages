@@ -42,6 +42,91 @@ pub struct SMSG_BATTLEFIELD_LIST {
 }
 
 impl crate::private::Sealed for SMSG_BATTLEFIELD_LIST {}
+impl SMSG_BATTLEFIELD_LIST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(32..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023D, size: body_size });
+        }
+
+        // battlemaster: Guid
+        let battlemaster = crate::util::read_guid(&mut r)?;
+
+        // battleground_type: BattlegroundType
+        let battleground_type = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // unknown1: u8
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
+
+        // unknown2: u8
+        let unknown2 = crate::util::read_u8_le(&mut r)?;
+
+        // has_win: u8
+        let has_win = crate::util::read_u8_le(&mut r)?;
+
+        // win_honor: u32
+        let win_honor = crate::util::read_u32_le(&mut r)?;
+
+        // win_arena: u32
+        let win_arena = crate::util::read_u32_le(&mut r)?;
+
+        // loss_honor: u32
+        let loss_honor = crate::util::read_u32_le(&mut r)?;
+
+        // random: RandomBg
+        let random = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let random_if = match random {
+            RandomBg::NotRandom => SMSG_BATTLEFIELD_LIST_RandomBg::NotRandom,
+            RandomBg::Random => {
+                // win_random: u8
+                let win_random = crate::util::read_u8_le(&mut r)?;
+
+                // reward_honor: u32
+                let reward_honor = crate::util::read_u32_le(&mut r)?;
+
+                // reward_arena: u32
+                let reward_arena = crate::util::read_u32_le(&mut r)?;
+
+                // honor_lost: u32
+                let honor_lost = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_BATTLEFIELD_LIST_RandomBg::Random {
+                    honor_lost,
+                    reward_arena,
+                    reward_honor,
+                    win_random,
+                }
+            }
+        };
+
+        // number_of_battlegrounds: u32
+        let number_of_battlegrounds = crate::util::read_u32_le(&mut r)?;
+
+        // battlegrounds: u32[number_of_battlegrounds]
+        let battlegrounds = {
+            let mut battlegrounds = Vec::with_capacity(number_of_battlegrounds as usize);
+            for _ in 0..number_of_battlegrounds {
+                battlegrounds.push(crate::util::read_u32_le(&mut r)?);
+            }
+            battlegrounds
+        };
+
+        Ok(Self {
+            battlemaster,
+            battleground_type,
+            unknown1,
+            unknown2,
+            has_win,
+            win_honor,
+            win_arena,
+            loss_honor,
+            random: random_if,
+            battlegrounds,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_BATTLEFIELD_LIST {
     const OPCODE: u32 = 0x023d;
 
@@ -202,86 +287,8 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(32..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023D, size: body_size });
-        }
-
-        // battlemaster: Guid
-        let battlemaster = crate::util::read_guid(&mut r)?;
-
-        // battleground_type: BattlegroundType
-        let battleground_type = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(&mut r)?;
-
-        // unknown2: u8
-        let unknown2 = crate::util::read_u8_le(&mut r)?;
-
-        // has_win: u8
-        let has_win = crate::util::read_u8_le(&mut r)?;
-
-        // win_honor: u32
-        let win_honor = crate::util::read_u32_le(&mut r)?;
-
-        // win_arena: u32
-        let win_arena = crate::util::read_u32_le(&mut r)?;
-
-        // loss_honor: u32
-        let loss_honor = crate::util::read_u32_le(&mut r)?;
-
-        // random: RandomBg
-        let random = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let random_if = match random {
-            RandomBg::NotRandom => SMSG_BATTLEFIELD_LIST_RandomBg::NotRandom,
-            RandomBg::Random => {
-                // win_random: u8
-                let win_random = crate::util::read_u8_le(&mut r)?;
-
-                // reward_honor: u32
-                let reward_honor = crate::util::read_u32_le(&mut r)?;
-
-                // reward_arena: u32
-                let reward_arena = crate::util::read_u32_le(&mut r)?;
-
-                // honor_lost: u32
-                let honor_lost = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_BATTLEFIELD_LIST_RandomBg::Random {
-                    honor_lost,
-                    reward_arena,
-                    reward_honor,
-                    win_random,
-                }
-            }
-        };
-
-        // number_of_battlegrounds: u32
-        let number_of_battlegrounds = crate::util::read_u32_le(&mut r)?;
-
-        // battlegrounds: u32[number_of_battlegrounds]
-        let battlegrounds = {
-            let mut battlegrounds = Vec::with_capacity(number_of_battlegrounds as usize);
-            for _ in 0..number_of_battlegrounds {
-                battlegrounds.push(crate::util::read_u32_le(&mut r)?);
-            }
-            battlegrounds
-        };
-
-        Ok(Self {
-            battlemaster,
-            battleground_type,
-            unknown1,
-            unknown2,
-            has_win,
-            win_honor,
-            win_arena,
-            loss_honor,
-            random: random_if,
-            battlegrounds,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -31,48 +31,8 @@ pub struct CMSG_AUTH_SESSION {
 }
 
 impl crate::private::Sealed for CMSG_AUTH_SESSION {}
-impl crate::Message for CMSG_AUTH_SESSION {
-    const OPCODE: u32 = 0x01ed;
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // build: u32
-        w.write_all(&self.build.to_le_bytes())?;
-
-        // server_id: u32
-        w.write_all(&self.server_id.to_le_bytes())?;
-
-        // username: CString
-        // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.username.as_bytes().iter().rev().next(), Some(&0_u8), "String `username` must not be null-terminated.");
-        w.write_all(self.username.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // client_seed: u32
-        w.write_all(&self.client_seed.to_le_bytes())?;
-
-        // client_proof: u8[20]
-        for i in self.client_proof.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        // decompressed_addon_info_size: u32
-        w.write_all(&self.decompressed_addon_info_size.to_le_bytes())?;
-
-        // addon_info: AddonInfo[-]
-        let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
-        for i in self.addon_info.iter() {
-            i.write_into_vec(&mut encoder)?;
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl CMSG_AUTH_SESSION {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(37..=65827).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01ED, size: body_size });
         }
@@ -131,6 +91,53 @@ impl crate::Message for CMSG_AUTH_SESSION {
             decompressed_addon_info_size,
             addon_info,
         })
+    }
+
+}
+
+impl crate::Message for CMSG_AUTH_SESSION {
+    const OPCODE: u32 = 0x01ed;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // build: u32
+        w.write_all(&self.build.to_le_bytes())?;
+
+        // server_id: u32
+        w.write_all(&self.server_id.to_le_bytes())?;
+
+        // username: CString
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.username.as_bytes().iter().rev().next(), Some(&0_u8), "String `username` must not be null-terminated.");
+        w.write_all(self.username.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // client_seed: u32
+        w.write_all(&self.client_seed.to_le_bytes())?;
+
+        // client_proof: u8[20]
+        for i in self.client_proof.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        // decompressed_addon_info_size: u32
+        w.write_all(&self.decompressed_addon_info_size.to_le_bytes())?;
+
+        // addon_info: AddonInfo[-]
+        let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
+        for i in self.addon_info.iter() {
+            i.write_into_vec(&mut encoder)?;
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

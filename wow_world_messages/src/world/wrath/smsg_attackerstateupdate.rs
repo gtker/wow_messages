@@ -61,6 +61,176 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
 }
 
 impl crate::private::Sealed for SMSG_ATTACKERSTATEUPDATE {}
+impl SMSG_ATTACKERSTATEUPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(26..=3176).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x014A, size: body_size });
+        }
+
+        // hit_info: HitInfo
+        let hit_info = HitInfo::new(crate::util::read_u32_le(&mut r)?);
+
+        // attacker: PackedGuid
+        let attacker = crate::util::read_packed_guid(&mut r)?;
+
+        // target: PackedGuid
+        let target = crate::util::read_packed_guid(&mut r)?;
+
+        // total_damage: u32
+        let total_damage = crate::util::read_u32_le(&mut r)?;
+
+        // overkill: u32
+        let overkill = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_damages: u8
+        let amount_of_damages = crate::util::read_u8_le(&mut r)?;
+
+        // damage_infos: DamageInfo[amount_of_damages]
+        let damage_infos = {
+            let mut damage_infos = Vec::with_capacity(amount_of_damages as usize);
+            for _ in 0..amount_of_damages {
+                damage_infos.push(DamageInfo::read(&mut r)?);
+            }
+            damage_infos
+        };
+
+        let hit_info_all_absorb = if hit_info.is_all_absorb() {
+            // absorb: u32
+            let absorb = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb {
+                absorb,
+            })
+        }
+        else {
+            None
+        };
+
+        let hit_info_all_resist = if hit_info.is_all_resist() {
+            // resist: u32
+            let resist = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist {
+                resist,
+            })
+        }
+        else {
+            None
+        };
+
+        // victim_state: VictimState
+        let victim_state = VictimState::new(crate::util::read_u8_le(&mut r)?);
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown2: u32
+        let unknown2 = crate::util::read_u32_le(&mut r)?;
+
+        let hit_info_block = if hit_info.is_block() {
+            // blocked_amount: u32
+            let blocked_amount = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_Block {
+                blocked_amount,
+            })
+        }
+        else {
+            None
+        };
+
+        let hit_info_unk19 = if hit_info.is_unk19() {
+            // unknown3: u32
+            let unknown3 = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19 {
+                unknown3,
+            })
+        }
+        else {
+            None
+        };
+
+        let hit_info_unk1 = if hit_info.is_unk1() {
+            // unknown4: u32
+            let unknown4 = crate::util::read_u32_le(&mut r)?;
+
+            // unknown5: f32
+            let unknown5 = crate::util::read_f32_le(&mut r)?;
+
+            // unknown6: f32
+            let unknown6 = crate::util::read_f32_le(&mut r)?;
+
+            // unknown7: f32
+            let unknown7 = crate::util::read_f32_le(&mut r)?;
+
+            // unknown8: f32
+            let unknown8 = crate::util::read_f32_le(&mut r)?;
+
+            // unknown9: f32
+            let unknown9 = crate::util::read_f32_le(&mut r)?;
+
+            // unknown10: f32
+            let unknown10 = crate::util::read_f32_le(&mut r)?;
+
+            // unknown11: f32
+            let unknown11 = crate::util::read_f32_le(&mut r)?;
+
+            // unknown12: f32
+            let unknown12 = crate::util::read_f32_le(&mut r)?;
+
+            // unknown13: f32
+            let unknown13 = crate::util::read_f32_le(&mut r)?;
+
+            // unknown14: f32
+            let unknown14 = crate::util::read_f32_le(&mut r)?;
+
+            // unknown15: u32
+            let unknown15 = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1 {
+                unknown10,
+                unknown11,
+                unknown12,
+                unknown13,
+                unknown14,
+                unknown15,
+                unknown4,
+                unknown5,
+                unknown6,
+                unknown7,
+                unknown8,
+                unknown9,
+            })
+        }
+        else {
+            None
+        };
+
+        let hit_info = SMSG_ATTACKERSTATEUPDATE_HitInfo {
+            inner: hit_info.as_int(),
+            unk1: hit_info_unk1,
+            all_absorb: hit_info_all_absorb,
+            all_resist: hit_info_all_resist,
+            block: hit_info_block,
+            unk19: hit_info_unk19,
+        };
+
+        Ok(Self {
+            hit_info,
+            attacker,
+            target,
+            total_damage,
+            overkill,
+            damage_infos,
+            victim_state,
+            unknown1,
+            unknown2,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
     const OPCODE: u32 = 0x014a;
 
@@ -298,171 +468,8 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(26..=3176).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x014A, size: body_size });
-        }
-
-        // hit_info: HitInfo
-        let hit_info = HitInfo::new(crate::util::read_u32_le(&mut r)?);
-
-        // attacker: PackedGuid
-        let attacker = crate::util::read_packed_guid(&mut r)?;
-
-        // target: PackedGuid
-        let target = crate::util::read_packed_guid(&mut r)?;
-
-        // total_damage: u32
-        let total_damage = crate::util::read_u32_le(&mut r)?;
-
-        // overkill: u32
-        let overkill = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_damages: u8
-        let amount_of_damages = crate::util::read_u8_le(&mut r)?;
-
-        // damage_infos: DamageInfo[amount_of_damages]
-        let damage_infos = {
-            let mut damage_infos = Vec::with_capacity(amount_of_damages as usize);
-            for _ in 0..amount_of_damages {
-                damage_infos.push(DamageInfo::read(&mut r)?);
-            }
-            damage_infos
-        };
-
-        let hit_info_all_absorb = if hit_info.is_all_absorb() {
-            // absorb: u32
-            let absorb = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_AllAbsorb {
-                absorb,
-            })
-        }
-        else {
-            None
-        };
-
-        let hit_info_all_resist = if hit_info.is_all_resist() {
-            // resist: u32
-            let resist = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_AllResist {
-                resist,
-            })
-        }
-        else {
-            None
-        };
-
-        // victim_state: VictimState
-        let victim_state = VictimState::new(crate::util::read_u8_le(&mut r)?);
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown2: u32
-        let unknown2 = crate::util::read_u32_le(&mut r)?;
-
-        let hit_info_block = if hit_info.is_block() {
-            // blocked_amount: u32
-            let blocked_amount = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_Block {
-                blocked_amount,
-            })
-        }
-        else {
-            None
-        };
-
-        let hit_info_unk19 = if hit_info.is_unk19() {
-            // unknown3: u32
-            let unknown3 = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk19 {
-                unknown3,
-            })
-        }
-        else {
-            None
-        };
-
-        let hit_info_unk1 = if hit_info.is_unk1() {
-            // unknown4: u32
-            let unknown4 = crate::util::read_u32_le(&mut r)?;
-
-            // unknown5: f32
-            let unknown5 = crate::util::read_f32_le(&mut r)?;
-
-            // unknown6: f32
-            let unknown6 = crate::util::read_f32_le(&mut r)?;
-
-            // unknown7: f32
-            let unknown7 = crate::util::read_f32_le(&mut r)?;
-
-            // unknown8: f32
-            let unknown8 = crate::util::read_f32_le(&mut r)?;
-
-            // unknown9: f32
-            let unknown9 = crate::util::read_f32_le(&mut r)?;
-
-            // unknown10: f32
-            let unknown10 = crate::util::read_f32_le(&mut r)?;
-
-            // unknown11: f32
-            let unknown11 = crate::util::read_f32_le(&mut r)?;
-
-            // unknown12: f32
-            let unknown12 = crate::util::read_f32_le(&mut r)?;
-
-            // unknown13: f32
-            let unknown13 = crate::util::read_f32_le(&mut r)?;
-
-            // unknown14: f32
-            let unknown14 = crate::util::read_f32_le(&mut r)?;
-
-            // unknown15: u32
-            let unknown15 = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_ATTACKERSTATEUPDATE_HitInfo_Unk1 {
-                unknown10,
-                unknown11,
-                unknown12,
-                unknown13,
-                unknown14,
-                unknown15,
-                unknown4,
-                unknown5,
-                unknown6,
-                unknown7,
-                unknown8,
-                unknown9,
-            })
-        }
-        else {
-            None
-        };
-
-        let hit_info = SMSG_ATTACKERSTATEUPDATE_HitInfo {
-            inner: hit_info.as_int(),
-            unk1: hit_info_unk1,
-            all_absorb: hit_info_all_absorb,
-            all_resist: hit_info_all_resist,
-            block: hit_info_block,
-            unk19: hit_info_unk19,
-        };
-
-        Ok(Self {
-            hit_info,
-            attacker,
-            target,
-            total_damage,
-            overkill,
-            damage_infos,
-            victim_state,
-            unknown1,
-            unknown2,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

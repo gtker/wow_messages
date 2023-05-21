@@ -21,6 +21,30 @@ pub struct CMSG_MOVE_KNOCK_BACK_ACK {
 }
 
 impl crate::private::Sealed for CMSG_MOVE_KNOCK_BACK_ACK {}
+impl CMSG_MOVE_KNOCK_BACK_ACK {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(41..=94).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00F0, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // counter: u32
+        let counter = crate::util::read_u32_le(&mut r)?;
+
+        // info: MovementInfo
+        let info = MovementInfo::read(&mut r)?;
+
+        Ok(Self {
+            guid,
+            counter,
+            info,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_MOVE_KNOCK_BACK_ACK {
     const OPCODE: u32 = 0x00f0;
 
@@ -188,25 +212,8 @@ impl crate::Message for CMSG_MOVE_KNOCK_BACK_ACK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(41..=94).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00F0, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // counter: u32
-        let counter = crate::util::read_u32_le(&mut r)?;
-
-        // info: MovementInfo
-        let info = MovementInfo::read(&mut r)?;
-
-        Ok(Self {
-            guid,
-            counter,
-            info,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -18,6 +18,30 @@ pub struct CMSG_ITEM_TEXT_QUERY {
 }
 
 impl crate::private::Sealed for CMSG_ITEM_TEXT_QUERY {}
+impl CMSG_ITEM_TEXT_QUERY {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0243, size: body_size });
+        }
+
+        // item_text_id: u32
+        let item_text_id = crate::util::read_u32_le(&mut r)?;
+
+        // mail_id: u32
+        let mail_id = crate::util::read_u32_le(&mut r)?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            item_text_id,
+            mail_id,
+            unknown1,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_ITEM_TEXT_QUERY {
     const OPCODE: u32 = 0x0243;
 
@@ -73,25 +97,8 @@ impl crate::Message for CMSG_ITEM_TEXT_QUERY {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0243, size: body_size });
-        }
-
-        // item_text_id: u32
-        let item_text_id = crate::util::read_u32_le(&mut r)?;
-
-        // mail_id: u32
-        let mail_id = crate::util::read_u32_le(&mut r)?;
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            item_text_id,
-            mail_id,
-            unknown1,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

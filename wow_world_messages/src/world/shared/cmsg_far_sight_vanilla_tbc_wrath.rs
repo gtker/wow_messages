@@ -14,6 +14,22 @@ pub struct CMSG_FAR_SIGHT {
 }
 
 impl crate::private::Sealed for CMSG_FAR_SIGHT {}
+impl CMSG_FAR_SIGHT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x027A, size: body_size });
+        }
+
+        // operation: FarSightOperation
+        let operation = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            operation,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_FAR_SIGHT {
     const OPCODE: u32 = 0x027a;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_FAR_SIGHT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x027A, size: body_size });
-        }
-
-        // operation: FarSightOperation
-        let operation = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            operation,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

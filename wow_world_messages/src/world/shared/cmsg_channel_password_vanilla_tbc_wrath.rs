@@ -14,6 +14,32 @@ pub struct CMSG_CHANNEL_PASSWORD {
 }
 
 impl crate::private::Sealed for CMSG_CHANNEL_PASSWORD {}
+impl CMSG_CHANNEL_PASSWORD {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=512).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x009C, size: body_size });
+        }
+
+        // channel_name: CString
+        let channel_name = {
+            let channel_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(channel_name)?
+        };
+
+        // channel_password: CString
+        let channel_password = {
+            let channel_password = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(channel_password)?
+        };
+
+        Ok(Self {
+            channel_name,
+            channel_password,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CHANNEL_PASSWORD {
     const OPCODE: u32 = 0x009c;
 
@@ -72,27 +98,8 @@ impl crate::Message for CMSG_CHANNEL_PASSWORD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=512).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x009C, size: body_size });
-        }
-
-        // channel_name: CString
-        let channel_name = {
-            let channel_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(channel_name)?
-        };
-
-        // channel_password: CString
-        let channel_password = {
-            let channel_password = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(channel_password)?
-        };
-
-        Ok(Self {
-            channel_name,
-            channel_password,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

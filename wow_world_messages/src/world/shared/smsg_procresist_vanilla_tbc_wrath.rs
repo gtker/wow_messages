@@ -22,6 +22,34 @@ pub struct SMSG_PROCRESIST {
 }
 
 impl crate::private::Sealed for SMSG_PROCRESIST {}
+impl SMSG_PROCRESIST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 21 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0260, size: body_size });
+        }
+
+        // caster: Guid
+        let caster = crate::util::read_guid(&mut r)?;
+
+        // target: Guid
+        let target = crate::util::read_guid(&mut r)?;
+
+        // id: u32
+        let id = crate::util::read_u32_le(&mut r)?;
+
+        // log_format: LogFormat
+        let log_format = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            caster,
+            target,
+            id,
+            log_format,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PROCRESIST {
     const OPCODE: u32 = 0x0260;
 
@@ -82,29 +110,8 @@ impl crate::Message for SMSG_PROCRESIST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 21 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0260, size: body_size });
-        }
-
-        // caster: Guid
-        let caster = crate::util::read_guid(&mut r)?;
-
-        // target: Guid
-        let target = crate::util::read_guid(&mut r)?;
-
-        // id: u32
-        let id = crate::util::read_u32_le(&mut r)?;
-
-        // log_format: LogFormat
-        let log_format = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            caster,
-            target,
-            id,
-            log_format,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -14,6 +14,22 @@ pub struct SMSG_GROUP_JOINED_BATTLEGROUND {
 }
 
 impl crate::private::Sealed for SMSG_GROUP_JOINED_BATTLEGROUND {}
+impl SMSG_GROUP_JOINED_BATTLEGROUND {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E8, size: body_size });
+        }
+
+        // id: BgTypeId
+        let id = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            id,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GROUP_JOINED_BATTLEGROUND {
     const OPCODE: u32 = 0x02e8;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_GROUP_JOINED_BATTLEGROUND {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E8, size: body_size });
-        }
-
-        // id: BgTypeId
-        let id = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

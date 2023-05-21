@@ -20,6 +20,30 @@ pub struct CMSG_GM_REPORT_LAG {
 }
 
 impl crate::private::Sealed for CMSG_GM_REPORT_LAG {}
+impl CMSG_GM_REPORT_LAG {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 20 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0502, size: body_size });
+        }
+
+        // lag_type: u32
+        let lag_type = crate::util::read_u32_le(&mut r)?;
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // position: Vector3d
+        let position = Vector3d::read(&mut r)?;
+
+        Ok(Self {
+            lag_type,
+            map,
+            position,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GM_REPORT_LAG {
     const OPCODE: u32 = 0x0502;
 
@@ -86,25 +110,8 @@ impl crate::Message for CMSG_GM_REPORT_LAG {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 20 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0502, size: body_size });
-        }
-
-        // lag_type: u32
-        let lag_type = crate::util::read_u32_le(&mut r)?;
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
-
-        Ok(Self {
-            lag_type,
-            map,
-            position,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

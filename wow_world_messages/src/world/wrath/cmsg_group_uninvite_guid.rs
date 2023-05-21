@@ -16,6 +16,29 @@ pub struct CMSG_GROUP_UNINVITE_GUID {
 }
 
 impl crate::private::Sealed for CMSG_GROUP_UNINVITE_GUID {}
+impl CMSG_GROUP_UNINVITE_GUID {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(9..=264).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0076, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // reason: CString
+        let reason = {
+            let reason = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(reason)?
+        };
+
+        Ok(Self {
+            guid,
+            reason,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GROUP_UNINVITE_GUID {
     const OPCODE: u32 = 0x0076;
 
@@ -70,24 +93,8 @@ impl crate::Message for CMSG_GROUP_UNINVITE_GUID {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(9..=264).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0076, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // reason: CString
-        let reason = {
-            let reason = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(reason)?
-        };
-
-        Ok(Self {
-            guid,
-            reason,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

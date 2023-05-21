@@ -19,6 +19,30 @@ pub struct SMSG_ATTACKSTOP {
 }
 
 impl crate::private::Sealed for SMSG_ATTACKSTOP {}
+impl SMSG_ATTACKSTOP {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(8..=22).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0144, size: body_size });
+        }
+
+        // player: PackedGuid
+        let player = crate::util::read_packed_guid(&mut r)?;
+
+        // enemy: PackedGuid
+        let enemy = crate::util::read_packed_guid(&mut r)?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            player,
+            enemy,
+            unknown1,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ATTACKSTOP {
     const OPCODE: u32 = 0x0144;
 
@@ -74,25 +98,8 @@ impl crate::Message for SMSG_ATTACKSTOP {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(8..=22).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0144, size: body_size });
-        }
-
-        // player: PackedGuid
-        let player = crate::util::read_packed_guid(&mut r)?;
-
-        // enemy: PackedGuid
-        let enemy = crate::util::read_packed_guid(&mut r)?;
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            player,
-            enemy,
-            unknown1,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

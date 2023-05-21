@@ -14,6 +14,22 @@ pub struct SMSG_CLEAR_TARGET {
 }
 
 impl crate::private::Sealed for SMSG_CLEAR_TARGET {}
+impl SMSG_CLEAR_TARGET {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03BE, size: body_size });
+        }
+
+        // target: Guid
+        let target = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            target,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CLEAR_TARGET {
     const OPCODE: u32 = 0x03be;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_CLEAR_TARGET {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03BE, size: body_size });
-        }
-
-        // target: Guid
-        let target = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            target,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

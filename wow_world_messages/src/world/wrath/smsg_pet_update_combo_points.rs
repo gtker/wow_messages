@@ -18,6 +18,30 @@ pub struct SMSG_PET_UPDATE_COMBO_POINTS {
 }
 
 impl crate::private::Sealed for SMSG_PET_UPDATE_COMBO_POINTS {}
+impl SMSG_PET_UPDATE_COMBO_POINTS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(5..=19).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0492, size: body_size });
+        }
+
+        // unit: PackedGuid
+        let unit = crate::util::read_packed_guid(&mut r)?;
+
+        // target: PackedGuid
+        let target = crate::util::read_packed_guid(&mut r)?;
+
+        // combo_points: u8
+        let combo_points = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            unit,
+            target,
+            combo_points,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PET_UPDATE_COMBO_POINTS {
     const OPCODE: u32 = 0x0492;
 
@@ -73,25 +97,8 @@ impl crate::Message for SMSG_PET_UPDATE_COMBO_POINTS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(5..=19).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0492, size: body_size });
-        }
-
-        // unit: PackedGuid
-        let unit = crate::util::read_packed_guid(&mut r)?;
-
-        // target: PackedGuid
-        let target = crate::util::read_packed_guid(&mut r)?;
-
-        // combo_points: u8
-        let combo_points = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            unit,
-            target,
-            combo_points,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

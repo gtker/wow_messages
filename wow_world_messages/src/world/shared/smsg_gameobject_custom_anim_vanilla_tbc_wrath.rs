@@ -16,6 +16,26 @@ pub struct SMSG_GAMEOBJECT_CUSTOM_ANIM {
 }
 
 impl crate::private::Sealed for SMSG_GAMEOBJECT_CUSTOM_ANIM {}
+impl SMSG_GAMEOBJECT_CUSTOM_ANIM {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00B3, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // animation_id: u32
+        let animation_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            animation_id,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GAMEOBJECT_CUSTOM_ANIM {
     const OPCODE: u32 = 0x00b3;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_GAMEOBJECT_CUSTOM_ANIM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00B3, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // animation_id: u32
-        let animation_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            animation_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -31,6 +31,71 @@ pub struct SMSG_GROUP_LIST {
 }
 
 impl crate::private::Sealed for SMSG_GROUP_LIST {}
+impl SMSG_GROUP_LIST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(14..=65535).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007D, size: body_size });
+        }
+
+        // group_type: GroupType
+        let group_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // flags: u8
+        let flags = crate::util::read_u8_le(&mut r)?;
+
+        // amount_of_members: u32
+        let amount_of_members = crate::util::read_u32_le(&mut r)?;
+
+        // members: GroupListMember[amount_of_members]
+        let members = {
+            let mut members = Vec::with_capacity(amount_of_members as usize);
+            for _ in 0..amount_of_members {
+                members.push(GroupListMember::read(&mut r)?);
+            }
+            members
+        };
+
+        // leader: Guid
+        let leader = crate::util::read_guid(&mut r)?;
+
+        // optional group_not_empty
+        let current_size = {
+            1 // group_type: GroupType
+            + 1 // flags: u8
+            + 4 // amount_of_members: u32
+            + members.iter().fold(0, |acc, x| acc + x.size()) // members: GroupListMember[amount_of_members]
+            + 8 // leader: Guid
+        };
+        let group_not_empty = if current_size < body_size as usize {
+            // loot_setting: GroupLootSetting
+            let loot_setting = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+            // master_loot: Guid
+            let master_loot = crate::util::read_guid(&mut r)?;
+
+            // loot_threshold: ItemQuality
+            let loot_threshold = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+            Some(SMSG_GROUP_LIST_group_not_empty {
+                loot_setting,
+                master_loot,
+                loot_threshold,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            group_type,
+            flags,
+            members,
+            leader,
+            group_not_empty,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GROUP_LIST {
     const OPCODE: u32 = 0x007d;
 
@@ -143,66 +208,8 @@ impl crate::Message for SMSG_GROUP_LIST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(14..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007D, size: body_size });
-        }
-
-        // group_type: GroupType
-        let group_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // flags: u8
-        let flags = crate::util::read_u8_le(&mut r)?;
-
-        // amount_of_members: u32
-        let amount_of_members = crate::util::read_u32_le(&mut r)?;
-
-        // members: GroupListMember[amount_of_members]
-        let members = {
-            let mut members = Vec::with_capacity(amount_of_members as usize);
-            for _ in 0..amount_of_members {
-                members.push(GroupListMember::read(&mut r)?);
-            }
-            members
-        };
-
-        // leader: Guid
-        let leader = crate::util::read_guid(&mut r)?;
-
-        // optional group_not_empty
-        let current_size = {
-            1 // group_type: GroupType
-            + 1 // flags: u8
-            + 4 // amount_of_members: u32
-            + members.iter().fold(0, |acc, x| acc + x.size()) // members: GroupListMember[amount_of_members]
-            + 8 // leader: Guid
-        };
-        let group_not_empty = if current_size < body_size as usize {
-            // loot_setting: GroupLootSetting
-            let loot_setting = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-            // master_loot: Guid
-            let master_loot = crate::util::read_guid(&mut r)?;
-
-            // loot_threshold: ItemQuality
-            let loot_threshold = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-            Some(SMSG_GROUP_LIST_group_not_empty {
-                loot_setting,
-                master_loot,
-                loot_threshold,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            group_type,
-            flags,
-            members,
-            leader,
-            group_not_empty,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

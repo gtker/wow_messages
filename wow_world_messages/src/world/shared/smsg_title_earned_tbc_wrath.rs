@@ -16,6 +16,26 @@ pub struct SMSG_TITLE_EARNED {
 }
 
 impl crate::private::Sealed for SMSG_TITLE_EARNED {}
+impl SMSG_TITLE_EARNED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0373, size: body_size });
+        }
+
+        // title: u32
+        let title = crate::util::read_u32_le(&mut r)?;
+
+        // status: TitleEarnStatus
+        let status = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            title,
+            status,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_TITLE_EARNED {
     const OPCODE: u32 = 0x0373;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_TITLE_EARNED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0373, size: body_size });
-        }
-
-        // title: u32
-        let title = crate::util::read_u32_le(&mut r)?;
-
-        // status: TitleEarnStatus
-        let status = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            title,
-            status,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

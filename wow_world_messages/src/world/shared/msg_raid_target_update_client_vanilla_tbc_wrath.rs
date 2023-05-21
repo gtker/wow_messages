@@ -18,6 +18,98 @@ pub struct MSG_RAID_TARGET_UPDATE_Client {
 }
 
 impl crate::private::Sealed for MSG_RAID_TARGET_UPDATE_Client {}
+impl MSG_RAID_TARGET_UPDATE_Client {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(1..=9).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0321, size: body_size });
+        }
+
+        // target_index: RaidTargetIndex
+        let target_index = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let target_index_if = match target_index {
+            RaidTargetIndex::Unknown0 => {
+                // target: Guid
+                let target = crate::util::read_guid(&mut r)?;
+
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {
+                    target,
+                }
+            }
+            RaidTargetIndex::Unknown1 => {
+                // target: Guid
+                let target = crate::util::read_guid(&mut r)?;
+
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown1 {
+                    target,
+                }
+            }
+            RaidTargetIndex::Unknown2 => {
+                // target: Guid
+                let target = crate::util::read_guid(&mut r)?;
+
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown2 {
+                    target,
+                }
+            }
+            RaidTargetIndex::Unknown3 => {
+                // target: Guid
+                let target = crate::util::read_guid(&mut r)?;
+
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown3 {
+                    target,
+                }
+            }
+            RaidTargetIndex::Unknown4 => {
+                // target: Guid
+                let target = crate::util::read_guid(&mut r)?;
+
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown4 {
+                    target,
+                }
+            }
+            RaidTargetIndex::Unknown5 => {
+                // target: Guid
+                let target = crate::util::read_guid(&mut r)?;
+
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown5 {
+                    target,
+                }
+            }
+            RaidTargetIndex::Unknown6 => {
+                // target: Guid
+                let target = crate::util::read_guid(&mut r)?;
+
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown6 {
+                    target,
+                }
+            }
+            RaidTargetIndex::Unknown7 => {
+                // target: Guid
+                let target = crate::util::read_guid(&mut r)?;
+
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown7 {
+                    target,
+                }
+            }
+            RaidTargetIndex::Unknown8 => {
+                // target: Guid
+                let target = crate::util::read_guid(&mut r)?;
+
+                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown8 {
+                    target,
+                }
+            }
+            RaidTargetIndex::RequestIcons => MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::RequestIcons,
+        };
+
+        Ok(Self {
+            target_index: target_index_if,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
     const OPCODE: u32 = 0x0321;
 
@@ -228,93 +320,8 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(1..=9).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0321, size: body_size });
-        }
-
-        // target_index: RaidTargetIndex
-        let target_index = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let target_index_if = match target_index {
-            RaidTargetIndex::Unknown0 => {
-                // target: Guid
-                let target = crate::util::read_guid(&mut r)?;
-
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {
-                    target,
-                }
-            }
-            RaidTargetIndex::Unknown1 => {
-                // target: Guid
-                let target = crate::util::read_guid(&mut r)?;
-
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown1 {
-                    target,
-                }
-            }
-            RaidTargetIndex::Unknown2 => {
-                // target: Guid
-                let target = crate::util::read_guid(&mut r)?;
-
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown2 {
-                    target,
-                }
-            }
-            RaidTargetIndex::Unknown3 => {
-                // target: Guid
-                let target = crate::util::read_guid(&mut r)?;
-
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown3 {
-                    target,
-                }
-            }
-            RaidTargetIndex::Unknown4 => {
-                // target: Guid
-                let target = crate::util::read_guid(&mut r)?;
-
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown4 {
-                    target,
-                }
-            }
-            RaidTargetIndex::Unknown5 => {
-                // target: Guid
-                let target = crate::util::read_guid(&mut r)?;
-
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown5 {
-                    target,
-                }
-            }
-            RaidTargetIndex::Unknown6 => {
-                // target: Guid
-                let target = crate::util::read_guid(&mut r)?;
-
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown6 {
-                    target,
-                }
-            }
-            RaidTargetIndex::Unknown7 => {
-                // target: Guid
-                let target = crate::util::read_guid(&mut r)?;
-
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown7 {
-                    target,
-                }
-            }
-            RaidTargetIndex::Unknown8 => {
-                // target: Guid
-                let target = crate::util::read_guid(&mut r)?;
-
-                MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown8 {
-                    target,
-                }
-            }
-            RaidTargetIndex::RequestIcons => MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::RequestIcons,
-        };
-
-        Ok(Self {
-            target_index: target_index_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

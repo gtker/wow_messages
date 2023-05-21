@@ -33,6 +33,80 @@ pub struct SMSG_GUILD_BANK_LIST {
 }
 
 impl crate::private::Sealed for SMSG_GUILD_BANK_LIST {}
+impl SMSG_GUILD_BANK_LIST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(15..=465681).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E8, size: body_size });
+        }
+
+        // bank_balance: u64
+        let bank_balance = crate::util::read_u64_le(&mut r)?;
+
+        // tab_id: u8
+        let tab_id = crate::util::read_u8_le(&mut r)?;
+
+        // amount_of_allowed_item_withdraws: u32
+        let amount_of_allowed_item_withdraws = crate::util::read_u32_le(&mut r)?;
+
+        // tab_result: GuildBankTabResult
+        let tab_result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let tab_result_if = match tab_result {
+            GuildBankTabResult::NotPresent => SMSG_GUILD_BANK_LIST_GuildBankTabResult::NotPresent,
+            GuildBankTabResult::Present => {
+                // amount_of_bank_tabs: u8
+                let amount_of_bank_tabs = crate::util::read_u8_le(&mut r)?;
+
+                // tabs: GuildBankTab[amount_of_bank_tabs]
+                let tabs = {
+                    let mut tabs = Vec::with_capacity(amount_of_bank_tabs as usize);
+                    for _ in 0..amount_of_bank_tabs {
+                        tabs.push(GuildBankTab::read(&mut r)?);
+                    }
+                    tabs
+                };
+
+                SMSG_GUILD_BANK_LIST_GuildBankTabResult::Present {
+                    tabs,
+                }
+            }
+        };
+
+        // content_result: GuildBankContentResult
+        let content_result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let content_result_if = match content_result {
+            GuildBankContentResult::NotPresent => SMSG_GUILD_BANK_LIST_GuildBankContentResult::NotPresent,
+            GuildBankContentResult::Present => {
+                // amount_of_slot_updates: u8
+                let amount_of_slot_updates = crate::util::read_u8_le(&mut r)?;
+
+                // slot_updates: GuildBankSlot[amount_of_slot_updates]
+                let slot_updates = {
+                    let mut slot_updates = Vec::with_capacity(amount_of_slot_updates as usize);
+                    for _ in 0..amount_of_slot_updates {
+                        slot_updates.push(GuildBankSlot::read(&mut r)?);
+                    }
+                    slot_updates
+                };
+
+                SMSG_GUILD_BANK_LIST_GuildBankContentResult::Present {
+                    slot_updates,
+                }
+            }
+        };
+
+        Ok(Self {
+            bank_balance,
+            tab_id,
+            amount_of_allowed_item_withdraws,
+            tab_result: tab_result_if,
+            content_result: content_result_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GUILD_BANK_LIST {
     const OPCODE: u32 = 0x03e8;
 
@@ -238,75 +312,8 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(15..=465681).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E8, size: body_size });
-        }
-
-        // bank_balance: u64
-        let bank_balance = crate::util::read_u64_le(&mut r)?;
-
-        // tab_id: u8
-        let tab_id = crate::util::read_u8_le(&mut r)?;
-
-        // amount_of_allowed_item_withdraws: u32
-        let amount_of_allowed_item_withdraws = crate::util::read_u32_le(&mut r)?;
-
-        // tab_result: GuildBankTabResult
-        let tab_result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let tab_result_if = match tab_result {
-            GuildBankTabResult::NotPresent => SMSG_GUILD_BANK_LIST_GuildBankTabResult::NotPresent,
-            GuildBankTabResult::Present => {
-                // amount_of_bank_tabs: u8
-                let amount_of_bank_tabs = crate::util::read_u8_le(&mut r)?;
-
-                // tabs: GuildBankTab[amount_of_bank_tabs]
-                let tabs = {
-                    let mut tabs = Vec::with_capacity(amount_of_bank_tabs as usize);
-                    for _ in 0..amount_of_bank_tabs {
-                        tabs.push(GuildBankTab::read(&mut r)?);
-                    }
-                    tabs
-                };
-
-                SMSG_GUILD_BANK_LIST_GuildBankTabResult::Present {
-                    tabs,
-                }
-            }
-        };
-
-        // content_result: GuildBankContentResult
-        let content_result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let content_result_if = match content_result {
-            GuildBankContentResult::NotPresent => SMSG_GUILD_BANK_LIST_GuildBankContentResult::NotPresent,
-            GuildBankContentResult::Present => {
-                // amount_of_slot_updates: u8
-                let amount_of_slot_updates = crate::util::read_u8_le(&mut r)?;
-
-                // slot_updates: GuildBankSlot[amount_of_slot_updates]
-                let slot_updates = {
-                    let mut slot_updates = Vec::with_capacity(amount_of_slot_updates as usize);
-                    for _ in 0..amount_of_slot_updates {
-                        slot_updates.push(GuildBankSlot::read(&mut r)?);
-                    }
-                    slot_updates
-                };
-
-                SMSG_GUILD_BANK_LIST_GuildBankContentResult::Present {
-                    slot_updates,
-                }
-            }
-        };
-
-        Ok(Self {
-            bank_balance,
-            tab_id,
-            amount_of_allowed_item_withdraws,
-            tab_result: tab_result_if,
-            content_result: content_result_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

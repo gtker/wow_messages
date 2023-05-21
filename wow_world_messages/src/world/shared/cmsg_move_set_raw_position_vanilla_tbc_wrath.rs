@@ -17,6 +17,26 @@ pub struct CMSG_MOVE_SET_RAW_POSITION {
 }
 
 impl crate::private::Sealed for CMSG_MOVE_SET_RAW_POSITION {}
+impl CMSG_MOVE_SET_RAW_POSITION {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00E1, size: body_size });
+        }
+
+        // position: Vector3d
+        let position = Vector3d::read(&mut r)?;
+
+        // orientation: f32
+        let orientation = crate::util::read_f32_le(&mut r)?;
+
+        Ok(Self {
+            position,
+            orientation,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_MOVE_SET_RAW_POSITION {
     const OPCODE: u32 = 0x00e1;
 
@@ -78,21 +98,8 @@ impl crate::Message for CMSG_MOVE_SET_RAW_POSITION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00E1, size: body_size });
-        }
-
-        // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
-
-        // orientation: f32
-        let orientation = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            position,
-            orientation,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -19,6 +19,39 @@ pub struct CMSG_AUCTION_LIST_BIDDER_ITEMS {
 }
 
 impl crate::private::Sealed for CMSG_AUCTION_LIST_BIDDER_ITEMS {}
+impl CMSG_AUCTION_LIST_BIDDER_ITEMS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(16..=10240).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0264, size: body_size });
+        }
+
+        // auctioneer: Guid
+        let auctioneer = crate::util::read_guid(&mut r)?;
+
+        // start_from_page: u32
+        let start_from_page = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_outbid_items: u32
+        let amount_of_outbid_items = crate::util::read_u32_le(&mut r)?;
+
+        // outbid_item_ids: u32[amount_of_outbid_items]
+        let outbid_item_ids = {
+            let mut outbid_item_ids = Vec::with_capacity(amount_of_outbid_items as usize);
+            for _ in 0..amount_of_outbid_items {
+                outbid_item_ids.push(crate::util::read_u32_le(&mut r)?);
+            }
+            outbid_item_ids
+        };
+
+        Ok(Self {
+            auctioneer,
+            start_from_page,
+            outbid_item_ids,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_AUCTION_LIST_BIDDER_ITEMS {
     const OPCODE: u32 = 0x0264;
 
@@ -91,34 +124,8 @@ impl crate::Message for CMSG_AUCTION_LIST_BIDDER_ITEMS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(16..=10240).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0264, size: body_size });
-        }
-
-        // auctioneer: Guid
-        let auctioneer = crate::util::read_guid(&mut r)?;
-
-        // start_from_page: u32
-        let start_from_page = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_outbid_items: u32
-        let amount_of_outbid_items = crate::util::read_u32_le(&mut r)?;
-
-        // outbid_item_ids: u32[amount_of_outbid_items]
-        let outbid_item_ids = {
-            let mut outbid_item_ids = Vec::with_capacity(amount_of_outbid_items as usize);
-            for _ in 0..amount_of_outbid_items {
-                outbid_item_ids.push(crate::util::read_u32_le(&mut r)?);
-            }
-            outbid_item_ids
-        };
-
-        Ok(Self {
-            auctioneer,
-            start_from_page,
-            outbid_item_ids,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

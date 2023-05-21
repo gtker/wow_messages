@@ -14,6 +14,22 @@ pub struct SMSG_SPLINE_MOVE_GRAVITY_ENABLE {
 }
 
 impl crate::private::Sealed for SMSG_SPLINE_MOVE_GRAVITY_ENABLE {}
+impl SMSG_SPLINE_MOVE_GRAVITY_ENABLE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=9).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04D4, size: body_size });
+        }
+
+        // unit: PackedGuid
+        let unit = crate::util::read_packed_guid(&mut r)?;
+
+        Ok(Self {
+            unit,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SPLINE_MOVE_GRAVITY_ENABLE {
     const OPCODE: u32 = 0x04d4;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_SPLINE_MOVE_GRAVITY_ENABLE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=9).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04D4, size: body_size });
-        }
-
-        // unit: PackedGuid
-        let unit = crate::util::read_packed_guid(&mut r)?;
-
-        Ok(Self {
-            unit,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

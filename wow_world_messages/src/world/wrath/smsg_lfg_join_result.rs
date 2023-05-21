@@ -21,6 +21,41 @@ pub struct SMSG_LFG_JOIN_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_LFG_JOIN_RESULT {}
+impl SMSG_LFG_JOIN_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(8..=65543).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0364, size: body_size });
+        }
+
+        // result: u32
+        let result = crate::util::read_u32_le(&mut r)?;
+
+        // state: u32
+        let state = crate::util::read_u32_le(&mut r)?;
+
+        // players: LfgJoinPlayer[-]
+        let players = {
+            let mut current_size = {
+                4 // result: u32
+                + 4 // state: u32
+            };
+            let mut players = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                players.push(LfgJoinPlayer::read(&mut r)?);
+                current_size += 1;
+            }
+            players
+        };
+
+        Ok(Self {
+            result,
+            state,
+            players,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LFG_JOIN_RESULT {
     const OPCODE: u32 = 0x0364;
 
@@ -116,36 +151,8 @@ impl crate::Message for SMSG_LFG_JOIN_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(8..=65543).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0364, size: body_size });
-        }
-
-        // result: u32
-        let result = crate::util::read_u32_le(&mut r)?;
-
-        // state: u32
-        let state = crate::util::read_u32_le(&mut r)?;
-
-        // players: LfgJoinPlayer[-]
-        let players = {
-            let mut current_size = {
-                4 // result: u32
-                + 4 // state: u32
-            };
-            let mut players = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                players.push(LfgJoinPlayer::read(&mut r)?);
-                current_size += 1;
-            }
-            players
-        };
-
-        Ok(Self {
-            result,
-            state,
-            players,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

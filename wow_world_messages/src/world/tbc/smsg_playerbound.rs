@@ -17,6 +17,26 @@ pub struct SMSG_PLAYERBOUND {
 }
 
 impl crate::private::Sealed for SMSG_PLAYERBOUND {}
+impl SMSG_PLAYERBOUND {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0158, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // area: Area
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            guid,
+            area,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PLAYERBOUND {
     const OPCODE: u32 = 0x0158;
 
@@ -67,21 +87,8 @@ impl crate::Message for SMSG_PLAYERBOUND {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0158, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // area: Area
-        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            guid,
-            area,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

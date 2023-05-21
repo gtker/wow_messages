@@ -21,6 +21,35 @@ pub struct SMSG_COMPRESSED_UPDATE_OBJECT {
 }
 
 impl crate::private::Sealed for SMSG_COMPRESSED_UPDATE_OBJECT {}
+impl SMSG_COMPRESSED_UPDATE_OBJECT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F6, size: body_size });
+        }
+
+        let decompressed_size = crate::util::read_u32_le(r)?;;
+        let decompressed_buffer = vec![0; decompressed_size as usize];
+        let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);
+
+        // amount_of_objects: u32
+        let amount_of_objects = crate::util::read_u32_le(&mut r)?;
+
+        // objects: Object[amount_of_objects]
+        let objects = {
+            let mut objects = Vec::with_capacity(amount_of_objects as usize);
+            for _ in 0..amount_of_objects {
+                objects.push(Object::read(&mut r)?);
+            }
+            objects
+        };
+
+        Ok(Self {
+            objects,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
     const OPCODE: u32 = 0x01f6;
 
@@ -1559,30 +1588,8 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F6, size: body_size });
-        }
-
-        let decompressed_size = crate::util::read_u32_le(r)?;;
-        let decompressed_buffer = vec![0; decompressed_size as usize];
-        let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);
-
-        // amount_of_objects: u32
-        let amount_of_objects = crate::util::read_u32_le(&mut r)?;
-
-        // objects: Object[amount_of_objects]
-        let objects = {
-            let mut objects = Vec::with_capacity(amount_of_objects as usize);
-            for _ in 0..amount_of_objects {
-                objects.push(Object::read(&mut r)?);
-            }
-            objects
-        };
-
-        Ok(Self {
-            objects,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

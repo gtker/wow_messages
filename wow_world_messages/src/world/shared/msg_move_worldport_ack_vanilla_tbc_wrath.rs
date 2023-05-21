@@ -14,6 +14,18 @@ pub struct MSG_MOVE_WORLDPORT_ACK {
 }
 
 impl crate::private::Sealed for MSG_MOVE_WORLDPORT_ACK {}
+impl MSG_MOVE_WORLDPORT_ACK {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 0 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00DC, size: body_size });
+        }
+
+        Ok(Self {
+        })
+    }
+
+}
+
 impl crate::Message for MSG_MOVE_WORLDPORT_ACK {
     const OPCODE: u32 = 0x00dc;
 
@@ -30,13 +42,8 @@ impl crate::Message for MSG_MOVE_WORLDPORT_ACK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00DC, size: body_size });
-        }
-
-        Ok(Self {
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

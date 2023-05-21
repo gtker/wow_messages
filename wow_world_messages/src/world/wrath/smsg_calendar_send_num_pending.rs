@@ -14,6 +14,22 @@ pub struct SMSG_CALENDAR_SEND_NUM_PENDING {
 }
 
 impl crate::private::Sealed for SMSG_CALENDAR_SEND_NUM_PENDING {}
+impl SMSG_CALENDAR_SEND_NUM_PENDING {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0448, size: body_size });
+        }
+
+        // pending_events: u32
+        let pending_events = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            pending_events,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CALENDAR_SEND_NUM_PENDING {
     const OPCODE: u32 = 0x0448;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_CALENDAR_SEND_NUM_PENDING {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0448, size: body_size });
-        }
-
-        // pending_events: u32
-        let pending_events = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            pending_events,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

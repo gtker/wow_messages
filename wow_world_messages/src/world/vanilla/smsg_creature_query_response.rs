@@ -32,6 +32,105 @@ pub struct SMSG_CREATURE_QUERY_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_CREATURE_QUERY_RESPONSE {}
+impl SMSG_CREATURE_QUERY_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=1314).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0061, size: body_size });
+        }
+
+        // creature_entry: u32
+        let creature_entry = crate::util::read_u32_le(&mut r)?;
+
+        // optional found
+        let current_size = {
+            4 // creature_entry: u32
+        };
+        let found = if current_size < body_size as usize {
+            // name1: CString
+            let name1 = {
+                let name1 = crate::util::read_c_string_to_vec(&mut r)?;
+                String::from_utf8(name1)?
+            };
+
+            // name2: CString
+            let name2 = {
+                let name2 = crate::util::read_c_string_to_vec(&mut r)?;
+                String::from_utf8(name2)?
+            };
+
+            // name3: CString
+            let name3 = {
+                let name3 = crate::util::read_c_string_to_vec(&mut r)?;
+                String::from_utf8(name3)?
+            };
+
+            // name4: CString
+            let name4 = {
+                let name4 = crate::util::read_c_string_to_vec(&mut r)?;
+                String::from_utf8(name4)?
+            };
+
+            // sub_name: CString
+            let sub_name = {
+                let sub_name = crate::util::read_c_string_to_vec(&mut r)?;
+                String::from_utf8(sub_name)?
+            };
+
+            // type_flags: u32
+            let type_flags = crate::util::read_u32_le(&mut r)?;
+
+            // creature_type: u32
+            let creature_type = crate::util::read_u32_le(&mut r)?;
+
+            // creature_family: CreatureFamily
+            let creature_family = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+            // creature_rank: u32
+            let creature_rank = crate::util::read_u32_le(&mut r)?;
+
+            // unknown0: u32
+            let unknown0 = crate::util::read_u32_le(&mut r)?;
+
+            // spell_data_id: u32
+            let spell_data_id = crate::util::read_u32_le(&mut r)?;
+
+            // display_id: u32
+            let display_id = crate::util::read_u32_le(&mut r)?;
+
+            // civilian: u8
+            let civilian = crate::util::read_u8_le(&mut r)?;
+
+            // racial_leader: u8
+            let racial_leader = crate::util::read_u8_le(&mut r)?;
+
+            Some(SMSG_CREATURE_QUERY_RESPONSE_found {
+                name1,
+                name2,
+                name3,
+                name4,
+                sub_name,
+                type_flags,
+                creature_type,
+                creature_family,
+                creature_rank,
+                unknown0,
+                spell_data_id,
+                display_id,
+                civilian,
+                racial_leader,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            creature_entry,
+            found,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
     const OPCODE: u32 = 0x0061;
 
@@ -175,100 +274,8 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=1314).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0061, size: body_size });
-        }
-
-        // creature_entry: u32
-        let creature_entry = crate::util::read_u32_le(&mut r)?;
-
-        // optional found
-        let current_size = {
-            4 // creature_entry: u32
-        };
-        let found = if current_size < body_size as usize {
-            // name1: CString
-            let name1 = {
-                let name1 = crate::util::read_c_string_to_vec(&mut r)?;
-                String::from_utf8(name1)?
-            };
-
-            // name2: CString
-            let name2 = {
-                let name2 = crate::util::read_c_string_to_vec(&mut r)?;
-                String::from_utf8(name2)?
-            };
-
-            // name3: CString
-            let name3 = {
-                let name3 = crate::util::read_c_string_to_vec(&mut r)?;
-                String::from_utf8(name3)?
-            };
-
-            // name4: CString
-            let name4 = {
-                let name4 = crate::util::read_c_string_to_vec(&mut r)?;
-                String::from_utf8(name4)?
-            };
-
-            // sub_name: CString
-            let sub_name = {
-                let sub_name = crate::util::read_c_string_to_vec(&mut r)?;
-                String::from_utf8(sub_name)?
-            };
-
-            // type_flags: u32
-            let type_flags = crate::util::read_u32_le(&mut r)?;
-
-            // creature_type: u32
-            let creature_type = crate::util::read_u32_le(&mut r)?;
-
-            // creature_family: CreatureFamily
-            let creature_family = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-            // creature_rank: u32
-            let creature_rank = crate::util::read_u32_le(&mut r)?;
-
-            // unknown0: u32
-            let unknown0 = crate::util::read_u32_le(&mut r)?;
-
-            // spell_data_id: u32
-            let spell_data_id = crate::util::read_u32_le(&mut r)?;
-
-            // display_id: u32
-            let display_id = crate::util::read_u32_le(&mut r)?;
-
-            // civilian: u8
-            let civilian = crate::util::read_u8_le(&mut r)?;
-
-            // racial_leader: u8
-            let racial_leader = crate::util::read_u8_le(&mut r)?;
-
-            Some(SMSG_CREATURE_QUERY_RESPONSE_found {
-                name1,
-                name2,
-                name3,
-                name4,
-                sub_name,
-                type_flags,
-                creature_type,
-                creature_family,
-                creature_rank,
-                unknown0,
-                spell_data_id,
-                display_id,
-                civilian,
-                racial_leader,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            creature_entry,
-            found,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -23,6 +23,46 @@ pub struct MSG_CORPSE_QUERY_Server {
 }
 
 impl crate::private::Sealed for MSG_CORPSE_QUERY_Server {}
+impl MSG_CORPSE_QUERY_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(5..=25).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0216, size: body_size });
+        }
+
+        // result: CorpseQueryResult
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let result_if = match result {
+            CorpseQueryResult::NotFound => MSG_CORPSE_QUERY_Server_CorpseQueryResult::NotFound,
+            CorpseQueryResult::Found => {
+                // map: Map
+                let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+                // position: Vector3d
+                let position = Vector3d::read(&mut r)?;
+
+                // corpse_map: Map
+                let corpse_map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+                MSG_CORPSE_QUERY_Server_CorpseQueryResult::Found {
+                    corpse_map,
+                    map,
+                    position,
+                }
+            }
+        };
+
+        // unknown: u32
+        let unknown = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            result: result_if,
+            unknown,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_CORPSE_QUERY_Server {
     const OPCODE: u32 = 0x0216;
 
@@ -129,41 +169,8 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(5..=25).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0216, size: body_size });
-        }
-
-        // result: CorpseQueryResult
-        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let result_if = match result {
-            CorpseQueryResult::NotFound => MSG_CORPSE_QUERY_Server_CorpseQueryResult::NotFound,
-            CorpseQueryResult::Found => {
-                // map: Map
-                let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-                // position: Vector3d
-                let position = Vector3d::read(&mut r)?;
-
-                // corpse_map: Map
-                let corpse_map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-                MSG_CORPSE_QUERY_Server_CorpseQueryResult::Found {
-                    corpse_map,
-                    map,
-                    position,
-                }
-            }
-        };
-
-        // unknown: u32
-        let unknown = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            result: result_if,
-            unknown,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

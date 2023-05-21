@@ -12,6 +12,22 @@ pub struct CMSG_LFG_SET_BOOT_VOTE {
 }
 
 impl crate::private::Sealed for CMSG_LFG_SET_BOOT_VOTE {}
+impl CMSG_LFG_SET_BOOT_VOTE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036C, size: body_size });
+        }
+
+        // agree_to_kick_player: Bool
+        let agree_to_kick_player = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            agree_to_kick_player,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_LFG_SET_BOOT_VOTE {
     const OPCODE: u32 = 0x036c;
 
@@ -57,17 +73,8 @@ impl crate::Message for CMSG_LFG_SET_BOOT_VOTE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036C, size: body_size });
-        }
-
-        // agree_to_kick_player: Bool
-        let agree_to_kick_player = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            agree_to_kick_player,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

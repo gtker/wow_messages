@@ -14,6 +14,22 @@ pub struct SMSG_CHAT_RESTRICTED {
 }
 
 impl crate::private::Sealed for SMSG_CHAT_RESTRICTED {}
+impl SMSG_CHAT_RESTRICTED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02FD, size: body_size });
+        }
+
+        // restriction: ChatRestrictionType
+        let restriction = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            restriction,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CHAT_RESTRICTED {
     const OPCODE: u32 = 0x02fd;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_CHAT_RESTRICTED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02FD, size: body_size });
-        }
-
-        // restriction: ChatRestrictionType
-        let restriction = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            restriction,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

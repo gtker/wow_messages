@@ -23,6 +23,34 @@ pub struct CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
 }
 
 impl crate::private::Sealed for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {}
+impl CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(35..=107).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x049B, size: body_size });
+        }
+
+        // vehicle: PackedGuid
+        let vehicle = crate::util::read_packed_guid(&mut r)?;
+
+        // info: MovementInfo
+        let info = MovementInfo::read(&mut r)?;
+
+        // accessory: PackedGuid
+        let accessory = crate::util::read_packed_guid(&mut r)?;
+
+        // seat: u8
+        let seat = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            vehicle,
+            info,
+            accessory,
+            seat,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
     const OPCODE: u32 = 0x049b;
 
@@ -257,29 +285,8 @@ impl crate::Message for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(35..=107).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x049B, size: body_size });
-        }
-
-        // vehicle: PackedGuid
-        let vehicle = crate::util::read_packed_guid(&mut r)?;
-
-        // info: MovementInfo
-        let info = MovementInfo::read(&mut r)?;
-
-        // accessory: PackedGuid
-        let accessory = crate::util::read_packed_guid(&mut r)?;
-
-        // seat: u8
-        let seat = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            vehicle,
-            info,
-            accessory,
-            seat,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -35,6 +35,63 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
 }
 
 impl crate::private::Sealed for SMSG_ATTACKERSTATEUPDATE {}
+impl SMSG_ATTACKERSTATEUPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(29..=5163).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x014A, size: body_size });
+        }
+
+        // hit_info: HitInfo
+        let hit_info = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // attacker: PackedGuid
+        let attacker = crate::util::read_packed_guid(&mut r)?;
+
+        // target: PackedGuid
+        let target = crate::util::read_packed_guid(&mut r)?;
+
+        // total_damage: u32
+        let total_damage = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_damages: u8
+        let amount_of_damages = crate::util::read_u8_le(&mut r)?;
+
+        // damages: DamageInfo[amount_of_damages]
+        let damages = {
+            let mut damages = Vec::with_capacity(amount_of_damages as usize);
+            for _ in 0..amount_of_damages {
+                damages.push(DamageInfo::read(&mut r)?);
+            }
+            damages
+        };
+
+        // damage_state: u32
+        let damage_state = crate::util::read_u32_le(&mut r)?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        // spell_id: u32
+        let spell_id = crate::util::read_u32_le(&mut r)?;
+
+        // blocked_amount: u32
+        let blocked_amount = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            hit_info,
+            attacker,
+            target,
+            total_damage,
+            damages,
+            damage_state,
+            unknown1,
+            spell_id,
+            blocked_amount,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
     const OPCODE: u32 = 0x014a;
 
@@ -151,58 +208,8 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(29..=5163).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x014A, size: body_size });
-        }
-
-        // hit_info: HitInfo
-        let hit_info = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // attacker: PackedGuid
-        let attacker = crate::util::read_packed_guid(&mut r)?;
-
-        // target: PackedGuid
-        let target = crate::util::read_packed_guid(&mut r)?;
-
-        // total_damage: u32
-        let total_damage = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_damages: u8
-        let amount_of_damages = crate::util::read_u8_le(&mut r)?;
-
-        // damages: DamageInfo[amount_of_damages]
-        let damages = {
-            let mut damages = Vec::with_capacity(amount_of_damages as usize);
-            for _ in 0..amount_of_damages {
-                damages.push(DamageInfo::read(&mut r)?);
-            }
-            damages
-        };
-
-        // damage_state: u32
-        let damage_state = crate::util::read_u32_le(&mut r)?;
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        // spell_id: u32
-        let spell_id = crate::util::read_u32_le(&mut r)?;
-
-        // blocked_amount: u32
-        let blocked_amount = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            hit_info,
-            attacker,
-            target,
-            total_damage,
-            damages,
-            damage_state,
-            unknown1,
-            spell_id,
-            blocked_amount,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

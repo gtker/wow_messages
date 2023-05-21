@@ -21,30 +21,8 @@ pub struct CMSG_UPDATE_ACCOUNT_DATA {
 }
 
 impl crate::private::Sealed for CMSG_UPDATE_ACCOUNT_DATA {}
-impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
-    const OPCODE: u32 = 0x020b;
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // data_type: AccountDataType
-        w.write_all(&u32::from(self.data_type.as_int()).to_le_bytes())?;
-
-        // decompressed_size: u32
-        w.write_all(&self.decompressed_size.to_le_bytes())?;
-
-        // compressed_data: u8[-]
-        let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
-        for i in self.compressed_data.iter() {
-            encoder.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl CMSG_UPDATE_ACCOUNT_DATA {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(8..=65543).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x020B, size: body_size });
         }
@@ -76,6 +54,35 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
             decompressed_size,
             compressed_data,
         })
+    }
+
+}
+
+impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
+    const OPCODE: u32 = 0x020b;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // data_type: AccountDataType
+        w.write_all(&u32::from(self.data_type.as_int()).to_le_bytes())?;
+
+        // decompressed_size: u32
+        w.write_all(&self.decompressed_size.to_le_bytes())?;
+
+        // compressed_data: u8[-]
+        let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
+        for i in self.compressed_data.iter() {
+            encoder.write_all(&i.to_le_bytes())?;
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

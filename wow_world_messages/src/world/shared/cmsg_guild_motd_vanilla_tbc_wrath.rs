@@ -12,6 +12,25 @@ pub struct CMSG_GUILD_MOTD {
 }
 
 impl crate::private::Sealed for CMSG_GUILD_MOTD {}
+impl CMSG_GUILD_MOTD {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(1..=256).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0091, size: body_size });
+        }
+
+        // message_of_the_day: CString
+        let message_of_the_day = {
+            let message_of_the_day = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(message_of_the_day)?
+        };
+
+        Ok(Self {
+            message_of_the_day,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GUILD_MOTD {
     const OPCODE: u32 = 0x0091;
 
@@ -61,20 +80,8 @@ impl crate::Message for CMSG_GUILD_MOTD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(1..=256).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0091, size: body_size });
-        }
-
-        // message_of_the_day: CString
-        let message_of_the_day = {
-            let message_of_the_day = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(message_of_the_day)?
-        };
-
-        Ok(Self {
-            message_of_the_day,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

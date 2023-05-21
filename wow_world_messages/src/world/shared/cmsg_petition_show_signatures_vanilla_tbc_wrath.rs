@@ -14,6 +14,22 @@ pub struct CMSG_PETITION_SHOW_SIGNATURES {
 }
 
 impl crate::private::Sealed for CMSG_PETITION_SHOW_SIGNATURES {}
+impl CMSG_PETITION_SHOW_SIGNATURES {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BE, size: body_size });
+        }
+
+        // item: Guid
+        let item = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            item,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_PETITION_SHOW_SIGNATURES {
     const OPCODE: u32 = 0x01be;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_PETITION_SHOW_SIGNATURES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BE, size: body_size });
-        }
-
-        // item: Guid
-        let item = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            item,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

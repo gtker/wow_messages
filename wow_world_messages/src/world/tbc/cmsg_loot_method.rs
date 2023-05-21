@@ -21,6 +21,30 @@ pub struct CMSG_LOOT_METHOD {
 }
 
 impl crate::private::Sealed for CMSG_LOOT_METHOD {}
+impl CMSG_LOOT_METHOD {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007A, size: body_size });
+        }
+
+        // loot_setting: GroupLootSetting
+        let loot_setting = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        // loot_master: Guid
+        let loot_master = crate::util::read_guid(&mut r)?;
+
+        // loot_threshold: ItemQuality
+        let loot_threshold = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        Ok(Self {
+            loot_setting,
+            loot_master,
+            loot_threshold,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_LOOT_METHOD {
     const OPCODE: u32 = 0x007a;
 
@@ -76,25 +100,8 @@ impl crate::Message for CMSG_LOOT_METHOD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007A, size: body_size });
-        }
-
-        // loot_setting: GroupLootSetting
-        let loot_setting = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        // loot_master: Guid
-        let loot_master = crate::util::read_guid(&mut r)?;
-
-        // loot_threshold: ItemQuality
-        let loot_threshold = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        Ok(Self {
-            loot_setting,
-            loot_master,
-            loot_threshold,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

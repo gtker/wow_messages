@@ -16,6 +16,26 @@ pub struct CMSG_GROUP_ASSISTANT_LEADER {
 }
 
 impl crate::private::Sealed for CMSG_GROUP_ASSISTANT_LEADER {}
+impl CMSG_GROUP_ASSISTANT_LEADER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 9 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x028F, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // set_assistant: Bool
+        let set_assistant = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            guid,
+            set_assistant,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GROUP_ASSISTANT_LEADER {
     const OPCODE: u32 = 0x028f;
 
@@ -66,21 +86,8 @@ impl crate::Message for CMSG_GROUP_ASSISTANT_LEADER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 9 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x028F, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // set_assistant: Bool
-        let set_assistant = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            guid,
-            set_assistant,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

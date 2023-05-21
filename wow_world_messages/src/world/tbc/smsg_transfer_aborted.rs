@@ -22,6 +22,55 @@ pub struct SMSG_TRANSFER_ABORTED {
 }
 
 impl crate::private::Sealed for SMSG_TRANSFER_ABORTED {}
+impl SMSG_TRANSFER_ABORTED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(5..=6).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0040, size: body_size });
+        }
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // reason: TransferAbortReason
+        let reason = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let reason_if = match reason {
+            TransferAbortReason::None => SMSG_TRANSFER_ABORTED_TransferAbortReason::None,
+            TransferAbortReason::IsFull => SMSG_TRANSFER_ABORTED_TransferAbortReason::IsFull,
+            TransferAbortReason::NotFound => SMSG_TRANSFER_ABORTED_TransferAbortReason::NotFound,
+            TransferAbortReason::TooManyInstances => SMSG_TRANSFER_ABORTED_TransferAbortReason::TooManyInstances,
+            TransferAbortReason::ZoneIsInCombat => SMSG_TRANSFER_ABORTED_TransferAbortReason::ZoneIsInCombat,
+            TransferAbortReason::InsufficientExpansionLevel => {
+                // difficulty: DungeonDifficulty
+                let difficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_TRANSFER_ABORTED_TransferAbortReason::InsufficientExpansionLevel {
+                    difficulty,
+                }
+            }
+            TransferAbortReason::DifficultyNotAvailable => {
+                // difficulty: DungeonDifficulty
+                let difficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_TRANSFER_ABORTED_TransferAbortReason::DifficultyNotAvailable {
+                    difficulty,
+                }
+            }
+            TransferAbortReason::MissingDifficulty => SMSG_TRANSFER_ABORTED_TransferAbortReason::MissingDifficulty,
+            TransferAbortReason::ZoneInCombat => SMSG_TRANSFER_ABORTED_TransferAbortReason::ZoneInCombat,
+            TransferAbortReason::InstanceIsFull => SMSG_TRANSFER_ABORTED_TransferAbortReason::InstanceIsFull,
+            TransferAbortReason::NotAllowed => SMSG_TRANSFER_ABORTED_TransferAbortReason::NotAllowed,
+            TransferAbortReason::HasBind => SMSG_TRANSFER_ABORTED_TransferAbortReason::HasBind,
+        };
+
+        Ok(Self {
+            map,
+            reason: reason_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_TRANSFER_ABORTED {
     const OPCODE: u32 = 0x0040;
 
@@ -118,50 +167,8 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(5..=6).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0040, size: body_size });
-        }
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // reason: TransferAbortReason
-        let reason = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let reason_if = match reason {
-            TransferAbortReason::None => SMSG_TRANSFER_ABORTED_TransferAbortReason::None,
-            TransferAbortReason::IsFull => SMSG_TRANSFER_ABORTED_TransferAbortReason::IsFull,
-            TransferAbortReason::NotFound => SMSG_TRANSFER_ABORTED_TransferAbortReason::NotFound,
-            TransferAbortReason::TooManyInstances => SMSG_TRANSFER_ABORTED_TransferAbortReason::TooManyInstances,
-            TransferAbortReason::ZoneIsInCombat => SMSG_TRANSFER_ABORTED_TransferAbortReason::ZoneIsInCombat,
-            TransferAbortReason::InsufficientExpansionLevel => {
-                // difficulty: DungeonDifficulty
-                let difficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_TRANSFER_ABORTED_TransferAbortReason::InsufficientExpansionLevel {
-                    difficulty,
-                }
-            }
-            TransferAbortReason::DifficultyNotAvailable => {
-                // difficulty: DungeonDifficulty
-                let difficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_TRANSFER_ABORTED_TransferAbortReason::DifficultyNotAvailable {
-                    difficulty,
-                }
-            }
-            TransferAbortReason::MissingDifficulty => SMSG_TRANSFER_ABORTED_TransferAbortReason::MissingDifficulty,
-            TransferAbortReason::ZoneInCombat => SMSG_TRANSFER_ABORTED_TransferAbortReason::ZoneInCombat,
-            TransferAbortReason::InstanceIsFull => SMSG_TRANSFER_ABORTED_TransferAbortReason::InstanceIsFull,
-            TransferAbortReason::NotAllowed => SMSG_TRANSFER_ABORTED_TransferAbortReason::NotAllowed,
-            TransferAbortReason::HasBind => SMSG_TRANSFER_ABORTED_TransferAbortReason::HasBind,
-        };
-
-        Ok(Self {
-            map,
-            reason: reason_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

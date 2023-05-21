@@ -16,6 +16,26 @@ pub struct SMSG_PARTYKILLLOG {
 }
 
 impl crate::private::Sealed for SMSG_PARTYKILLLOG {}
+impl SMSG_PARTYKILLLOG {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F5, size: body_size });
+        }
+
+        // player_with_killing_blow: Guid
+        let player_with_killing_blow = crate::util::read_guid(&mut r)?;
+
+        // victim: Guid
+        let victim = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            player_with_killing_blow,
+            victim,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PARTYKILLLOG {
     const OPCODE: u32 = 0x01f5;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_PARTYKILLLOG {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F5, size: body_size });
-        }
-
-        // player_with_killing_blow: Guid
-        let player_with_killing_blow = crate::util::read_guid(&mut r)?;
-
-        // victim: Guid
-        let victim = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            player_with_killing_blow,
-            victim,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

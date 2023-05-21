@@ -63,6 +63,777 @@ pub struct SMSG_MESSAGECHAT {
 }
 
 impl crate::private::Sealed for SMSG_MESSAGECHAT {}
+impl SMSG_MESSAGECHAT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(31..=24038).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0096, size: body_size });
+        }
+
+        let mut chat_type_if_sender1 = Default::default();
+        let mut chat_type_if_target1 = Default::default();
+        let mut chat_type_if_sender2 = Default::default();
+        let mut chat_type_if_target2 = Default::default();
+        let mut chat_type_if_target3 = Default::default();
+        let mut chat_type_if_target4 = Default::default();
+        let mut chat_type_if_channel_name = Default::default();
+        let mut chat_type_if_target5 = Default::default();
+        let mut chat_type_if_target6 = Default::default();
+        let mut chat_type_if_achievement_id = Default::default();
+
+        // chat_type: ChatType
+        let chat_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // language: Language
+        let language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        // sender: Guid
+        let sender = crate::util::read_guid(&mut r)?;
+
+        // flags: u32
+        let flags = crate::util::read_u32_le(&mut r)?;
+
+        match chat_type {
+            ChatType::System => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Say => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Party => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Raid => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Guild => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Officer => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Yell => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Whisper => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::WhisperForeign => {
+                // sender2: SizedCString
+                chat_type_if_sender2 = {
+                    let sender2 = crate::util::read_u32_le(&mut r)?;
+                    let sender2 = crate::util::read_sized_c_string_to_vec(&mut r, sender2)?;
+                    String::from_utf8(sender2)?
+                };
+
+                // target2: Guid
+                chat_type_if_target2 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::WhisperInform => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Emote => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::TextEmote => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::MonsterSay => {
+                // sender1: SizedCString
+                chat_type_if_sender1 = {
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
+                    String::from_utf8(sender1)?
+                };
+
+                // target1: NamedGuid
+                chat_type_if_target1 = NamedGuid::read(&mut r)?;
+
+            }
+            ChatType::MonsterParty => {
+                // sender1: SizedCString
+                chat_type_if_sender1 = {
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
+                    String::from_utf8(sender1)?
+                };
+
+                // target1: NamedGuid
+                chat_type_if_target1 = NamedGuid::read(&mut r)?;
+
+            }
+            ChatType::MonsterYell => {
+                // sender1: SizedCString
+                chat_type_if_sender1 = {
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
+                    String::from_utf8(sender1)?
+                };
+
+                // target1: NamedGuid
+                chat_type_if_target1 = NamedGuid::read(&mut r)?;
+
+            }
+            ChatType::MonsterWhisper => {
+                // sender1: SizedCString
+                chat_type_if_sender1 = {
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
+                    String::from_utf8(sender1)?
+                };
+
+                // target1: NamedGuid
+                chat_type_if_target1 = NamedGuid::read(&mut r)?;
+
+            }
+            ChatType::MonsterEmote => {
+                // sender1: SizedCString
+                chat_type_if_sender1 = {
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
+                    String::from_utf8(sender1)?
+                };
+
+                // target1: NamedGuid
+                chat_type_if_target1 = NamedGuid::read(&mut r)?;
+
+            }
+            ChatType::Channel => {
+                // channel_name: CString
+                chat_type_if_channel_name = {
+                    let channel_name = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(channel_name)?
+                };
+
+                // target5: Guid
+                chat_type_if_target5 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::ChannelJoin => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::ChannelLeave => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::ChannelList => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::ChannelNotice => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::ChannelNoticeUser => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Afk => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Dnd => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Ignored => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Skill => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Loot => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Money => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Opening => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Tradeskills => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::PetInfo => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::CombatMiscInfo => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::CombatXpGain => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::CombatHonorGain => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::CombatFactionChange => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::BgSystemNeutral => {
+                // target3: NamedGuid
+                chat_type_if_target3 = NamedGuid::read(&mut r)?;
+
+            }
+            ChatType::BgSystemAlliance => {
+                // target3: NamedGuid
+                chat_type_if_target3 = NamedGuid::read(&mut r)?;
+
+            }
+            ChatType::BgSystemHorde => {
+                // target3: NamedGuid
+                chat_type_if_target3 = NamedGuid::read(&mut r)?;
+
+            }
+            ChatType::RaidLeader => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::RaidWarning => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::RaidBossEmote => {
+                // sender1: SizedCString
+                chat_type_if_sender1 = {
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
+                    String::from_utf8(sender1)?
+                };
+
+                // target1: NamedGuid
+                chat_type_if_target1 = NamedGuid::read(&mut r)?;
+
+            }
+            ChatType::RaidBossWhisper => {
+                // sender1: SizedCString
+                chat_type_if_sender1 = {
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
+                    String::from_utf8(sender1)?
+                };
+
+                // target1: NamedGuid
+                chat_type_if_target1 = NamedGuid::read(&mut r)?;
+
+            }
+            ChatType::Filtered => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Battleground => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::BattlegroundLeader => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Restricted => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::Battlenet => {
+                // sender1: SizedCString
+                chat_type_if_sender1 = {
+                    let sender1 = crate::util::read_u32_le(&mut r)?;
+                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
+                    String::from_utf8(sender1)?
+                };
+
+                // target1: NamedGuid
+                chat_type_if_target1 = NamedGuid::read(&mut r)?;
+
+            }
+            ChatType::Achievement => {
+                // target4: Guid
+                chat_type_if_target4 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::GuildAchievement => {
+                // target4: Guid
+                chat_type_if_target4 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::ArenaPoints => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+            ChatType::PartyLeader => {
+                // target6: Guid
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
+
+            }
+        };
+
+        // message: SizedCString
+        let message = {
+            let message = crate::util::read_u32_le(&mut r)?;
+            let message = crate::util::read_sized_c_string_to_vec(&mut r, message)?;
+            String::from_utf8(message)?
+        };
+
+        // tag: PlayerChatTag
+        let tag = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        match chat_type {
+            ChatType::System => {
+            }
+            ChatType::Say => {
+            }
+            ChatType::Party => {
+            }
+            ChatType::Raid => {
+            }
+            ChatType::Guild => {
+            }
+            ChatType::Officer => {
+            }
+            ChatType::Yell => {
+            }
+            ChatType::Whisper => {
+            }
+            ChatType::WhisperForeign => {
+            }
+            ChatType::WhisperInform => {
+            }
+            ChatType::Emote => {
+            }
+            ChatType::TextEmote => {
+            }
+            ChatType::MonsterSay => {
+            }
+            ChatType::MonsterParty => {
+            }
+            ChatType::MonsterYell => {
+            }
+            ChatType::MonsterWhisper => {
+            }
+            ChatType::MonsterEmote => {
+            }
+            ChatType::Channel => {
+            }
+            ChatType::ChannelJoin => {
+            }
+            ChatType::ChannelLeave => {
+            }
+            ChatType::ChannelList => {
+            }
+            ChatType::ChannelNotice => {
+            }
+            ChatType::ChannelNoticeUser => {
+            }
+            ChatType::Afk => {
+            }
+            ChatType::Dnd => {
+            }
+            ChatType::Ignored => {
+            }
+            ChatType::Skill => {
+            }
+            ChatType::Loot => {
+            }
+            ChatType::Money => {
+            }
+            ChatType::Opening => {
+            }
+            ChatType::Tradeskills => {
+            }
+            ChatType::PetInfo => {
+            }
+            ChatType::CombatMiscInfo => {
+            }
+            ChatType::CombatXpGain => {
+            }
+            ChatType::CombatHonorGain => {
+            }
+            ChatType::CombatFactionChange => {
+            }
+            ChatType::BgSystemNeutral => {
+            }
+            ChatType::BgSystemAlliance => {
+            }
+            ChatType::BgSystemHorde => {
+            }
+            ChatType::RaidLeader => {
+            }
+            ChatType::RaidWarning => {
+            }
+            ChatType::RaidBossEmote => {
+            }
+            ChatType::RaidBossWhisper => {
+            }
+            ChatType::Filtered => {
+            }
+            ChatType::Battleground => {
+            }
+            ChatType::BattlegroundLeader => {
+            }
+            ChatType::Restricted => {
+            }
+            ChatType::Battlenet => {
+            }
+            ChatType::Achievement => {
+                // achievement_id: u32
+                chat_type_if_achievement_id = crate::util::read_u32_le(&mut r)?;
+
+            }
+            ChatType::GuildAchievement => {
+                // achievement_id: u32
+                chat_type_if_achievement_id = crate::util::read_u32_le(&mut r)?;
+
+            }
+            ChatType::ArenaPoints => {
+            }
+            ChatType::PartyLeader => {
+            }
+        };
+
+        let chat_type_if = match chat_type {
+            ChatType::System => {
+                SMSG_MESSAGECHAT_ChatType::System {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Say => {
+                SMSG_MESSAGECHAT_ChatType::Say {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Party => {
+                SMSG_MESSAGECHAT_ChatType::Party {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Raid => {
+                SMSG_MESSAGECHAT_ChatType::Raid {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Guild => {
+                SMSG_MESSAGECHAT_ChatType::Guild {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Officer => {
+                SMSG_MESSAGECHAT_ChatType::Officer {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Yell => {
+                SMSG_MESSAGECHAT_ChatType::Yell {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Whisper => {
+                SMSG_MESSAGECHAT_ChatType::Whisper {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::WhisperForeign => {
+                SMSG_MESSAGECHAT_ChatType::WhisperForeign {
+                    sender2: chat_type_if_sender2,
+                    target2: chat_type_if_target2,
+                }
+            }
+            ChatType::WhisperInform => {
+                SMSG_MESSAGECHAT_ChatType::WhisperInform {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Emote => {
+                SMSG_MESSAGECHAT_ChatType::Emote {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::TextEmote => {
+                SMSG_MESSAGECHAT_ChatType::TextEmote {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::MonsterSay => {
+                SMSG_MESSAGECHAT_ChatType::MonsterSay {
+                    sender1: chat_type_if_sender1,
+                    target1: chat_type_if_target1,
+                }
+            }
+            ChatType::MonsterParty => {
+                SMSG_MESSAGECHAT_ChatType::MonsterParty {
+                    sender1: chat_type_if_sender1,
+                    target1: chat_type_if_target1,
+                }
+            }
+            ChatType::MonsterYell => {
+                SMSG_MESSAGECHAT_ChatType::MonsterYell {
+                    sender1: chat_type_if_sender1,
+                    target1: chat_type_if_target1,
+                }
+            }
+            ChatType::MonsterWhisper => {
+                SMSG_MESSAGECHAT_ChatType::MonsterWhisper {
+                    sender1: chat_type_if_sender1,
+                    target1: chat_type_if_target1,
+                }
+            }
+            ChatType::MonsterEmote => {
+                SMSG_MESSAGECHAT_ChatType::MonsterEmote {
+                    sender1: chat_type_if_sender1,
+                    target1: chat_type_if_target1,
+                }
+            }
+            ChatType::Channel => {
+                SMSG_MESSAGECHAT_ChatType::Channel {
+                    channel_name: chat_type_if_channel_name,
+                    target5: chat_type_if_target5,
+                }
+            }
+            ChatType::ChannelJoin => {
+                SMSG_MESSAGECHAT_ChatType::ChannelJoin {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::ChannelLeave => {
+                SMSG_MESSAGECHAT_ChatType::ChannelLeave {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::ChannelList => {
+                SMSG_MESSAGECHAT_ChatType::ChannelList {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::ChannelNotice => {
+                SMSG_MESSAGECHAT_ChatType::ChannelNotice {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::ChannelNoticeUser => {
+                SMSG_MESSAGECHAT_ChatType::ChannelNoticeUser {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Afk => {
+                SMSG_MESSAGECHAT_ChatType::Afk {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Dnd => {
+                SMSG_MESSAGECHAT_ChatType::Dnd {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Ignored => {
+                SMSG_MESSAGECHAT_ChatType::Ignored {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Skill => {
+                SMSG_MESSAGECHAT_ChatType::Skill {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Loot => {
+                SMSG_MESSAGECHAT_ChatType::Loot {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Money => {
+                SMSG_MESSAGECHAT_ChatType::Money {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Opening => {
+                SMSG_MESSAGECHAT_ChatType::Opening {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Tradeskills => {
+                SMSG_MESSAGECHAT_ChatType::Tradeskills {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::PetInfo => {
+                SMSG_MESSAGECHAT_ChatType::PetInfo {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::CombatMiscInfo => {
+                SMSG_MESSAGECHAT_ChatType::CombatMiscInfo {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::CombatXpGain => {
+                SMSG_MESSAGECHAT_ChatType::CombatXpGain {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::CombatHonorGain => {
+                SMSG_MESSAGECHAT_ChatType::CombatHonorGain {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::CombatFactionChange => {
+                SMSG_MESSAGECHAT_ChatType::CombatFactionChange {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::BgSystemNeutral => {
+                SMSG_MESSAGECHAT_ChatType::BgSystemNeutral {
+                    target3: chat_type_if_target3,
+                }
+            }
+            ChatType::BgSystemAlliance => {
+                SMSG_MESSAGECHAT_ChatType::BgSystemAlliance {
+                    target3: chat_type_if_target3,
+                }
+            }
+            ChatType::BgSystemHorde => {
+                SMSG_MESSAGECHAT_ChatType::BgSystemHorde {
+                    target3: chat_type_if_target3,
+                }
+            }
+            ChatType::RaidLeader => {
+                SMSG_MESSAGECHAT_ChatType::RaidLeader {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::RaidWarning => {
+                SMSG_MESSAGECHAT_ChatType::RaidWarning {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::RaidBossEmote => {
+                SMSG_MESSAGECHAT_ChatType::RaidBossEmote {
+                    sender1: chat_type_if_sender1,
+                    target1: chat_type_if_target1,
+                }
+            }
+            ChatType::RaidBossWhisper => {
+                SMSG_MESSAGECHAT_ChatType::RaidBossWhisper {
+                    sender1: chat_type_if_sender1,
+                    target1: chat_type_if_target1,
+                }
+            }
+            ChatType::Filtered => {
+                SMSG_MESSAGECHAT_ChatType::Filtered {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Battleground => {
+                SMSG_MESSAGECHAT_ChatType::Battleground {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::BattlegroundLeader => {
+                SMSG_MESSAGECHAT_ChatType::BattlegroundLeader {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Restricted => {
+                SMSG_MESSAGECHAT_ChatType::Restricted {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::Battlenet => {
+                SMSG_MESSAGECHAT_ChatType::Battlenet {
+                    sender1: chat_type_if_sender1,
+                    target1: chat_type_if_target1,
+                }
+            }
+            ChatType::Achievement => {
+                SMSG_MESSAGECHAT_ChatType::Achievement {
+                    achievement_id: chat_type_if_achievement_id,
+                    target4: chat_type_if_target4,
+                }
+            }
+            ChatType::GuildAchievement => {
+                SMSG_MESSAGECHAT_ChatType::GuildAchievement {
+                    achievement_id: chat_type_if_achievement_id,
+                    target4: chat_type_if_target4,
+                }
+            }
+            ChatType::ArenaPoints => {
+                SMSG_MESSAGECHAT_ChatType::ArenaPoints {
+                    target6: chat_type_if_target6,
+                }
+            }
+            ChatType::PartyLeader => {
+                SMSG_MESSAGECHAT_ChatType::PartyLeader {
+                    target6: chat_type_if_target6,
+                }
+            }
+        };
+
+        Ok(Self {
+            chat_type: chat_type_if,
+            language,
+            sender,
+            flags,
+            message,
+            tag,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_MESSAGECHAT {
     const OPCODE: u32 = 0x0096;
 
@@ -1825,772 +2596,8 @@ impl crate::Message for SMSG_MESSAGECHAT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(31..=24038).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0096, size: body_size });
-        }
-
-        let mut chat_type_if_sender1 = Default::default();
-        let mut chat_type_if_target1 = Default::default();
-        let mut chat_type_if_sender2 = Default::default();
-        let mut chat_type_if_target2 = Default::default();
-        let mut chat_type_if_target3 = Default::default();
-        let mut chat_type_if_target4 = Default::default();
-        let mut chat_type_if_channel_name = Default::default();
-        let mut chat_type_if_target5 = Default::default();
-        let mut chat_type_if_target6 = Default::default();
-        let mut chat_type_if_achievement_id = Default::default();
-
-        // chat_type: ChatType
-        let chat_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // language: Language
-        let language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        // sender: Guid
-        let sender = crate::util::read_guid(&mut r)?;
-
-        // flags: u32
-        let flags = crate::util::read_u32_le(&mut r)?;
-
-        match chat_type {
-            ChatType::System => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Say => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Party => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Raid => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Guild => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Officer => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Yell => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Whisper => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::WhisperForeign => {
-                // sender2: SizedCString
-                chat_type_if_sender2 = {
-                    let sender2 = crate::util::read_u32_le(&mut r)?;
-                    let sender2 = crate::util::read_sized_c_string_to_vec(&mut r, sender2)?;
-                    String::from_utf8(sender2)?
-                };
-
-                // target2: Guid
-                chat_type_if_target2 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::WhisperInform => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Emote => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::TextEmote => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::MonsterSay => {
-                // sender1: SizedCString
-                chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(&mut r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
-                    String::from_utf8(sender1)?
-                };
-
-                // target1: NamedGuid
-                chat_type_if_target1 = NamedGuid::read(&mut r)?;
-
-            }
-            ChatType::MonsterParty => {
-                // sender1: SizedCString
-                chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(&mut r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
-                    String::from_utf8(sender1)?
-                };
-
-                // target1: NamedGuid
-                chat_type_if_target1 = NamedGuid::read(&mut r)?;
-
-            }
-            ChatType::MonsterYell => {
-                // sender1: SizedCString
-                chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(&mut r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
-                    String::from_utf8(sender1)?
-                };
-
-                // target1: NamedGuid
-                chat_type_if_target1 = NamedGuid::read(&mut r)?;
-
-            }
-            ChatType::MonsterWhisper => {
-                // sender1: SizedCString
-                chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(&mut r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
-                    String::from_utf8(sender1)?
-                };
-
-                // target1: NamedGuid
-                chat_type_if_target1 = NamedGuid::read(&mut r)?;
-
-            }
-            ChatType::MonsterEmote => {
-                // sender1: SizedCString
-                chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(&mut r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
-                    String::from_utf8(sender1)?
-                };
-
-                // target1: NamedGuid
-                chat_type_if_target1 = NamedGuid::read(&mut r)?;
-
-            }
-            ChatType::Channel => {
-                // channel_name: CString
-                chat_type_if_channel_name = {
-                    let channel_name = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(channel_name)?
-                };
-
-                // target5: Guid
-                chat_type_if_target5 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::ChannelJoin => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::ChannelLeave => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::ChannelList => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::ChannelNotice => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::ChannelNoticeUser => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Afk => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Dnd => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Ignored => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Skill => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Loot => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Money => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Opening => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Tradeskills => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::PetInfo => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::CombatMiscInfo => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::CombatXpGain => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::CombatHonorGain => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::CombatFactionChange => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::BgSystemNeutral => {
-                // target3: NamedGuid
-                chat_type_if_target3 = NamedGuid::read(&mut r)?;
-
-            }
-            ChatType::BgSystemAlliance => {
-                // target3: NamedGuid
-                chat_type_if_target3 = NamedGuid::read(&mut r)?;
-
-            }
-            ChatType::BgSystemHorde => {
-                // target3: NamedGuid
-                chat_type_if_target3 = NamedGuid::read(&mut r)?;
-
-            }
-            ChatType::RaidLeader => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::RaidWarning => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::RaidBossEmote => {
-                // sender1: SizedCString
-                chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(&mut r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
-                    String::from_utf8(sender1)?
-                };
-
-                // target1: NamedGuid
-                chat_type_if_target1 = NamedGuid::read(&mut r)?;
-
-            }
-            ChatType::RaidBossWhisper => {
-                // sender1: SizedCString
-                chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(&mut r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
-                    String::from_utf8(sender1)?
-                };
-
-                // target1: NamedGuid
-                chat_type_if_target1 = NamedGuid::read(&mut r)?;
-
-            }
-            ChatType::Filtered => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Battleground => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::BattlegroundLeader => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Restricted => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::Battlenet => {
-                // sender1: SizedCString
-                chat_type_if_sender1 = {
-                    let sender1 = crate::util::read_u32_le(&mut r)?;
-                    let sender1 = crate::util::read_sized_c_string_to_vec(&mut r, sender1)?;
-                    String::from_utf8(sender1)?
-                };
-
-                // target1: NamedGuid
-                chat_type_if_target1 = NamedGuid::read(&mut r)?;
-
-            }
-            ChatType::Achievement => {
-                // target4: Guid
-                chat_type_if_target4 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::GuildAchievement => {
-                // target4: Guid
-                chat_type_if_target4 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::ArenaPoints => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-            ChatType::PartyLeader => {
-                // target6: Guid
-                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
-
-            }
-        };
-
-        // message: SizedCString
-        let message = {
-            let message = crate::util::read_u32_le(&mut r)?;
-            let message = crate::util::read_sized_c_string_to_vec(&mut r, message)?;
-            String::from_utf8(message)?
-        };
-
-        // tag: PlayerChatTag
-        let tag = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        match chat_type {
-            ChatType::System => {
-            }
-            ChatType::Say => {
-            }
-            ChatType::Party => {
-            }
-            ChatType::Raid => {
-            }
-            ChatType::Guild => {
-            }
-            ChatType::Officer => {
-            }
-            ChatType::Yell => {
-            }
-            ChatType::Whisper => {
-            }
-            ChatType::WhisperForeign => {
-            }
-            ChatType::WhisperInform => {
-            }
-            ChatType::Emote => {
-            }
-            ChatType::TextEmote => {
-            }
-            ChatType::MonsterSay => {
-            }
-            ChatType::MonsterParty => {
-            }
-            ChatType::MonsterYell => {
-            }
-            ChatType::MonsterWhisper => {
-            }
-            ChatType::MonsterEmote => {
-            }
-            ChatType::Channel => {
-            }
-            ChatType::ChannelJoin => {
-            }
-            ChatType::ChannelLeave => {
-            }
-            ChatType::ChannelList => {
-            }
-            ChatType::ChannelNotice => {
-            }
-            ChatType::ChannelNoticeUser => {
-            }
-            ChatType::Afk => {
-            }
-            ChatType::Dnd => {
-            }
-            ChatType::Ignored => {
-            }
-            ChatType::Skill => {
-            }
-            ChatType::Loot => {
-            }
-            ChatType::Money => {
-            }
-            ChatType::Opening => {
-            }
-            ChatType::Tradeskills => {
-            }
-            ChatType::PetInfo => {
-            }
-            ChatType::CombatMiscInfo => {
-            }
-            ChatType::CombatXpGain => {
-            }
-            ChatType::CombatHonorGain => {
-            }
-            ChatType::CombatFactionChange => {
-            }
-            ChatType::BgSystemNeutral => {
-            }
-            ChatType::BgSystemAlliance => {
-            }
-            ChatType::BgSystemHorde => {
-            }
-            ChatType::RaidLeader => {
-            }
-            ChatType::RaidWarning => {
-            }
-            ChatType::RaidBossEmote => {
-            }
-            ChatType::RaidBossWhisper => {
-            }
-            ChatType::Filtered => {
-            }
-            ChatType::Battleground => {
-            }
-            ChatType::BattlegroundLeader => {
-            }
-            ChatType::Restricted => {
-            }
-            ChatType::Battlenet => {
-            }
-            ChatType::Achievement => {
-                // achievement_id: u32
-                chat_type_if_achievement_id = crate::util::read_u32_le(&mut r)?;
-
-            }
-            ChatType::GuildAchievement => {
-                // achievement_id: u32
-                chat_type_if_achievement_id = crate::util::read_u32_le(&mut r)?;
-
-            }
-            ChatType::ArenaPoints => {
-            }
-            ChatType::PartyLeader => {
-            }
-        };
-
-        let chat_type_if = match chat_type {
-            ChatType::System => {
-                SMSG_MESSAGECHAT_ChatType::System {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Say => {
-                SMSG_MESSAGECHAT_ChatType::Say {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Party => {
-                SMSG_MESSAGECHAT_ChatType::Party {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Raid => {
-                SMSG_MESSAGECHAT_ChatType::Raid {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Guild => {
-                SMSG_MESSAGECHAT_ChatType::Guild {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Officer => {
-                SMSG_MESSAGECHAT_ChatType::Officer {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Yell => {
-                SMSG_MESSAGECHAT_ChatType::Yell {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Whisper => {
-                SMSG_MESSAGECHAT_ChatType::Whisper {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::WhisperForeign => {
-                SMSG_MESSAGECHAT_ChatType::WhisperForeign {
-                    sender2: chat_type_if_sender2,
-                    target2: chat_type_if_target2,
-                }
-            }
-            ChatType::WhisperInform => {
-                SMSG_MESSAGECHAT_ChatType::WhisperInform {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Emote => {
-                SMSG_MESSAGECHAT_ChatType::Emote {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::TextEmote => {
-                SMSG_MESSAGECHAT_ChatType::TextEmote {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::MonsterSay => {
-                SMSG_MESSAGECHAT_ChatType::MonsterSay {
-                    sender1: chat_type_if_sender1,
-                    target1: chat_type_if_target1,
-                }
-            }
-            ChatType::MonsterParty => {
-                SMSG_MESSAGECHAT_ChatType::MonsterParty {
-                    sender1: chat_type_if_sender1,
-                    target1: chat_type_if_target1,
-                }
-            }
-            ChatType::MonsterYell => {
-                SMSG_MESSAGECHAT_ChatType::MonsterYell {
-                    sender1: chat_type_if_sender1,
-                    target1: chat_type_if_target1,
-                }
-            }
-            ChatType::MonsterWhisper => {
-                SMSG_MESSAGECHAT_ChatType::MonsterWhisper {
-                    sender1: chat_type_if_sender1,
-                    target1: chat_type_if_target1,
-                }
-            }
-            ChatType::MonsterEmote => {
-                SMSG_MESSAGECHAT_ChatType::MonsterEmote {
-                    sender1: chat_type_if_sender1,
-                    target1: chat_type_if_target1,
-                }
-            }
-            ChatType::Channel => {
-                SMSG_MESSAGECHAT_ChatType::Channel {
-                    channel_name: chat_type_if_channel_name,
-                    target5: chat_type_if_target5,
-                }
-            }
-            ChatType::ChannelJoin => {
-                SMSG_MESSAGECHAT_ChatType::ChannelJoin {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::ChannelLeave => {
-                SMSG_MESSAGECHAT_ChatType::ChannelLeave {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::ChannelList => {
-                SMSG_MESSAGECHAT_ChatType::ChannelList {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::ChannelNotice => {
-                SMSG_MESSAGECHAT_ChatType::ChannelNotice {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::ChannelNoticeUser => {
-                SMSG_MESSAGECHAT_ChatType::ChannelNoticeUser {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Afk => {
-                SMSG_MESSAGECHAT_ChatType::Afk {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Dnd => {
-                SMSG_MESSAGECHAT_ChatType::Dnd {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Ignored => {
-                SMSG_MESSAGECHAT_ChatType::Ignored {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Skill => {
-                SMSG_MESSAGECHAT_ChatType::Skill {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Loot => {
-                SMSG_MESSAGECHAT_ChatType::Loot {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Money => {
-                SMSG_MESSAGECHAT_ChatType::Money {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Opening => {
-                SMSG_MESSAGECHAT_ChatType::Opening {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Tradeskills => {
-                SMSG_MESSAGECHAT_ChatType::Tradeskills {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::PetInfo => {
-                SMSG_MESSAGECHAT_ChatType::PetInfo {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::CombatMiscInfo => {
-                SMSG_MESSAGECHAT_ChatType::CombatMiscInfo {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::CombatXpGain => {
-                SMSG_MESSAGECHAT_ChatType::CombatXpGain {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::CombatHonorGain => {
-                SMSG_MESSAGECHAT_ChatType::CombatHonorGain {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::CombatFactionChange => {
-                SMSG_MESSAGECHAT_ChatType::CombatFactionChange {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::BgSystemNeutral => {
-                SMSG_MESSAGECHAT_ChatType::BgSystemNeutral {
-                    target3: chat_type_if_target3,
-                }
-            }
-            ChatType::BgSystemAlliance => {
-                SMSG_MESSAGECHAT_ChatType::BgSystemAlliance {
-                    target3: chat_type_if_target3,
-                }
-            }
-            ChatType::BgSystemHorde => {
-                SMSG_MESSAGECHAT_ChatType::BgSystemHorde {
-                    target3: chat_type_if_target3,
-                }
-            }
-            ChatType::RaidLeader => {
-                SMSG_MESSAGECHAT_ChatType::RaidLeader {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::RaidWarning => {
-                SMSG_MESSAGECHAT_ChatType::RaidWarning {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::RaidBossEmote => {
-                SMSG_MESSAGECHAT_ChatType::RaidBossEmote {
-                    sender1: chat_type_if_sender1,
-                    target1: chat_type_if_target1,
-                }
-            }
-            ChatType::RaidBossWhisper => {
-                SMSG_MESSAGECHAT_ChatType::RaidBossWhisper {
-                    sender1: chat_type_if_sender1,
-                    target1: chat_type_if_target1,
-                }
-            }
-            ChatType::Filtered => {
-                SMSG_MESSAGECHAT_ChatType::Filtered {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Battleground => {
-                SMSG_MESSAGECHAT_ChatType::Battleground {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::BattlegroundLeader => {
-                SMSG_MESSAGECHAT_ChatType::BattlegroundLeader {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Restricted => {
-                SMSG_MESSAGECHAT_ChatType::Restricted {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::Battlenet => {
-                SMSG_MESSAGECHAT_ChatType::Battlenet {
-                    sender1: chat_type_if_sender1,
-                    target1: chat_type_if_target1,
-                }
-            }
-            ChatType::Achievement => {
-                SMSG_MESSAGECHAT_ChatType::Achievement {
-                    achievement_id: chat_type_if_achievement_id,
-                    target4: chat_type_if_target4,
-                }
-            }
-            ChatType::GuildAchievement => {
-                SMSG_MESSAGECHAT_ChatType::GuildAchievement {
-                    achievement_id: chat_type_if_achievement_id,
-                    target4: chat_type_if_target4,
-                }
-            }
-            ChatType::ArenaPoints => {
-                SMSG_MESSAGECHAT_ChatType::ArenaPoints {
-                    target6: chat_type_if_target6,
-                }
-            }
-            ChatType::PartyLeader => {
-                SMSG_MESSAGECHAT_ChatType::PartyLeader {
-                    target6: chat_type_if_target6,
-                }
-            }
-        };
-
-        Ok(Self {
-            chat_type: chat_type_if,
-            language,
-            sender,
-            flags,
-            message,
-            tag,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

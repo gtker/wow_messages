@@ -14,6 +14,32 @@ pub struct CMSG_CHANNEL_INVITE {
 }
 
 impl crate::private::Sealed for CMSG_CHANNEL_INVITE {}
+impl CMSG_CHANNEL_INVITE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=512).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00A3, size: body_size });
+        }
+
+        // channel_name: CString
+        let channel_name = {
+            let channel_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(channel_name)?
+        };
+
+        // player_name: CString
+        let player_name = {
+            let player_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(player_name)?
+        };
+
+        Ok(Self {
+            channel_name,
+            player_name,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CHANNEL_INVITE {
     const OPCODE: u32 = 0x00a3;
 
@@ -72,27 +98,8 @@ impl crate::Message for CMSG_CHANNEL_INVITE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=512).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00A3, size: body_size });
-        }
-
-        // channel_name: CString
-        let channel_name = {
-            let channel_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(channel_name)?
-        };
-
-        // player_name: CString
-        let player_name = {
-            let player_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(player_name)?
-        };
-
-        Ok(Self {
-            channel_name,
-            player_name,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

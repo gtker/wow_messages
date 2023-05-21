@@ -26,6 +26,46 @@ pub struct CMSG_AUCTION_SELL_ITEM {
 }
 
 impl crate::private::Sealed for CMSG_AUCTION_SELL_ITEM {}
+impl CMSG_AUCTION_SELL_ITEM {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 36 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0256, size: body_size });
+        }
+
+        // auctioneer: Guid
+        let auctioneer = crate::util::read_guid(&mut r)?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        // item: Guid
+        let item = crate::util::read_guid(&mut r)?;
+
+        // unknown2: u32
+        let unknown2 = crate::util::read_u32_le(&mut r)?;
+
+        // starting_bid: u32
+        let starting_bid = crate::util::read_u32_le(&mut r)?;
+
+        // buyout: u32
+        let buyout = crate::util::read_u32_le(&mut r)?;
+
+        // auction_duration_in_minutes: u32
+        let auction_duration_in_minutes = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            auctioneer,
+            unknown1,
+            item,
+            unknown2,
+            starting_bid,
+            buyout,
+            auction_duration_in_minutes,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_AUCTION_SELL_ITEM {
     const OPCODE: u32 = 0x0256;
 
@@ -101,41 +141,8 @@ impl crate::Message for CMSG_AUCTION_SELL_ITEM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 36 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0256, size: body_size });
-        }
-
-        // auctioneer: Guid
-        let auctioneer = crate::util::read_guid(&mut r)?;
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        // item: Guid
-        let item = crate::util::read_guid(&mut r)?;
-
-        // unknown2: u32
-        let unknown2 = crate::util::read_u32_le(&mut r)?;
-
-        // starting_bid: u32
-        let starting_bid = crate::util::read_u32_le(&mut r)?;
-
-        // buyout: u32
-        let buyout = crate::util::read_u32_le(&mut r)?;
-
-        // auction_duration_in_minutes: u32
-        let auction_duration_in_minutes = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            auctioneer,
-            unknown1,
-            item,
-            unknown2,
-            starting_bid,
-            buyout,
-            auction_duration_in_minutes,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

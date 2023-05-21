@@ -32,165 +32,8 @@ pub struct SMSG_CAST_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_CAST_RESULT {}
-impl crate::Message for SMSG_CAST_RESULT {
-    const OPCODE: u32 = 0x0130;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_CAST_RESULT {{").unwrap();
-        // Members
-        writeln!(s, "    spell = {};", self.spell).unwrap();
-        writeln!(s, "    result = {};", SimpleSpellCastResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.result {
-            crate::vanilla::SMSG_CAST_RESULT_SimpleSpellCastResult::Success {
-                reason,
-            } => {
-                writeln!(s, "    reason = {};", CastFailureReason::try_from(reason.as_int()).unwrap().as_test_case_value()).unwrap();
-                match &reason {
-                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::EquippedItemClass {
-                        equipped_item_class,
-                        equipped_item_inventory_type_mask,
-                        equipped_item_subclass_mask,
-                    } => {
-                        writeln!(s, "    equipped_item_class = {};", equipped_item_class).unwrap();
-                        writeln!(s, "    equipped_item_subclass_mask = {};", equipped_item_subclass_mask).unwrap();
-                        writeln!(s, "    equipped_item_inventory_type_mask = {};", equipped_item_inventory_type_mask).unwrap();
-                    }
-                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::RequiresArea {
-                        area,
-                    } => {
-                        writeln!(s, "    area = {};", area.as_test_case_value()).unwrap();
-                    }
-                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::RequiresSpellFocus {
-                        required_spell_focus,
-                    } => {
-                        writeln!(s, "    required_spell_focus = {};", required_spell_focus).unwrap();
-                    }
-                    _ => {}
-                }
-
-            }
-            _ => {}
-        }
-
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 304_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "spell", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
-        match &self.result {
-            crate::vanilla::SMSG_CAST_RESULT_SimpleSpellCastResult::Success {
-                reason,
-            } => {
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "reason", "    ");
-                match &reason {
-                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::EquippedItemClass {
-                        equipped_item_class,
-                        equipped_item_inventory_type_mask,
-                        equipped_item_subclass_mask,
-                    } => {
-                        crate::util::write_bytes(&mut s, &mut bytes, 4, "equipped_item_class", "    ");
-                        crate::util::write_bytes(&mut s, &mut bytes, 4, "equipped_item_subclass_mask", "    ");
-                        crate::util::write_bytes(&mut s, &mut bytes, 4, "equipped_item_inventory_type_mask", "    ");
-                    }
-                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::RequiresArea {
-                        area,
-                    } => {
-                        crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "    ");
-                    }
-                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::RequiresSpellFocus {
-                        required_spell_focus,
-                    } => {
-                        crate::util::write_bytes(&mut s, &mut bytes, 4, "required_spell_focus", "    ");
-                    }
-                    _ => {}
-                }
-
-            }
-            _ => {}
-        }
-
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // spell: u32
-        w.write_all(&self.spell.to_le_bytes())?;
-
-        // result: SimpleSpellCastResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
-
-        match &self.result {
-            SMSG_CAST_RESULT_SimpleSpellCastResult::Success {
-                reason,
-            } => {
-                // reason: CastFailureReason
-                w.write_all(&(reason.as_int().to_le_bytes()))?;
-
-                match &reason {
-                    SMSG_CAST_RESULT_CastFailureReason::EquippedItemClass {
-                        equipped_item_class,
-                        equipped_item_inventory_type_mask,
-                        equipped_item_subclass_mask,
-                    } => {
-                        // equipped_item_class: u32
-                        w.write_all(&equipped_item_class.to_le_bytes())?;
-
-                        // equipped_item_subclass_mask: u32
-                        w.write_all(&equipped_item_subclass_mask.to_le_bytes())?;
-
-                        // equipped_item_inventory_type_mask: u32
-                        w.write_all(&equipped_item_inventory_type_mask.to_le_bytes())?;
-
-                    }
-                    SMSG_CAST_RESULT_CastFailureReason::RequiresArea {
-                        area,
-                    } => {
-                        // area: Area
-                        w.write_all(&(area.as_int().to_le_bytes()))?;
-
-                    }
-                    SMSG_CAST_RESULT_CastFailureReason::RequiresSpellFocus {
-                        required_spell_focus,
-                    } => {
-                        // required_spell_focus: u32
-                        w.write_all(&required_spell_focus.to_le_bytes())?;
-
-                    }
-                    _ => {}
-                }
-
-            }
-            _ => {}
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl SMSG_CAST_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(5..=18).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0130, size: body_size });
         }
@@ -395,6 +238,170 @@ impl crate::Message for SMSG_CAST_RESULT {
             spell,
             result: result_if,
         })
+    }
+
+}
+
+impl crate::Message for SMSG_CAST_RESULT {
+    const OPCODE: u32 = 0x0130;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_CAST_RESULT {{").unwrap();
+        // Members
+        writeln!(s, "    spell = {};", self.spell).unwrap();
+        writeln!(s, "    result = {};", SimpleSpellCastResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.result {
+            crate::vanilla::SMSG_CAST_RESULT_SimpleSpellCastResult::Success {
+                reason,
+            } => {
+                writeln!(s, "    reason = {};", CastFailureReason::try_from(reason.as_int()).unwrap().as_test_case_value()).unwrap();
+                match &reason {
+                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::EquippedItemClass {
+                        equipped_item_class,
+                        equipped_item_inventory_type_mask,
+                        equipped_item_subclass_mask,
+                    } => {
+                        writeln!(s, "    equipped_item_class = {};", equipped_item_class).unwrap();
+                        writeln!(s, "    equipped_item_subclass_mask = {};", equipped_item_subclass_mask).unwrap();
+                        writeln!(s, "    equipped_item_inventory_type_mask = {};", equipped_item_inventory_type_mask).unwrap();
+                    }
+                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::RequiresArea {
+                        area,
+                    } => {
+                        writeln!(s, "    area = {};", area.as_test_case_value()).unwrap();
+                    }
+                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::RequiresSpellFocus {
+                        required_spell_focus,
+                    } => {
+                        writeln!(s, "    required_spell_focus = {};", required_spell_focus).unwrap();
+                    }
+                    _ => {}
+                }
+
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 304_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "spell", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
+        match &self.result {
+            crate::vanilla::SMSG_CAST_RESULT_SimpleSpellCastResult::Success {
+                reason,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "reason", "    ");
+                match &reason {
+                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::EquippedItemClass {
+                        equipped_item_class,
+                        equipped_item_inventory_type_mask,
+                        equipped_item_subclass_mask,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "equipped_item_class", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "equipped_item_subclass_mask", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "equipped_item_inventory_type_mask", "    ");
+                    }
+                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::RequiresArea {
+                        area,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "    ");
+                    }
+                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::RequiresSpellFocus {
+                        required_spell_focus,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "required_spell_focus", "    ");
+                    }
+                    _ => {}
+                }
+
+            }
+            _ => {}
+        }
+
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12".to_string())).unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        Some(s)
+    }
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // spell: u32
+        w.write_all(&self.spell.to_le_bytes())?;
+
+        // result: SimpleSpellCastResult
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
+
+        match &self.result {
+            SMSG_CAST_RESULT_SimpleSpellCastResult::Success {
+                reason,
+            } => {
+                // reason: CastFailureReason
+                w.write_all(&(reason.as_int().to_le_bytes()))?;
+
+                match &reason {
+                    SMSG_CAST_RESULT_CastFailureReason::EquippedItemClass {
+                        equipped_item_class,
+                        equipped_item_inventory_type_mask,
+                        equipped_item_subclass_mask,
+                    } => {
+                        // equipped_item_class: u32
+                        w.write_all(&equipped_item_class.to_le_bytes())?;
+
+                        // equipped_item_subclass_mask: u32
+                        w.write_all(&equipped_item_subclass_mask.to_le_bytes())?;
+
+                        // equipped_item_inventory_type_mask: u32
+                        w.write_all(&equipped_item_inventory_type_mask.to_le_bytes())?;
+
+                    }
+                    SMSG_CAST_RESULT_CastFailureReason::RequiresArea {
+                        area,
+                    } => {
+                        // area: Area
+                        w.write_all(&(area.as_int().to_le_bytes()))?;
+
+                    }
+                    SMSG_CAST_RESULT_CastFailureReason::RequiresSpellFocus {
+                        required_spell_focus,
+                    } => {
+                        // required_spell_focus: u32
+                        w.write_all(&required_spell_focus.to_le_bytes())?;
+
+                    }
+                    _ => {}
+                }
+
+            }
+            _ => {}
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

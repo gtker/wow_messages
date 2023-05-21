@@ -12,6 +12,22 @@ pub struct CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {
 }
 
 impl crate::private::Sealed for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {}
+impl CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E7, size: body_size });
+        }
+
+        // battle_id: u32
+        let battle_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            battle_id,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {
     const OPCODE: u32 = 0x04e7;
 
@@ -57,17 +73,8 @@ impl crate::Message for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E7, size: body_size });
-        }
-
-        // battle_id: u32
-        let battle_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            battle_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

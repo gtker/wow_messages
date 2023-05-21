@@ -12,6 +12,22 @@ pub struct CMSG_CANCEL_CAST {
 }
 
 impl crate::private::Sealed for CMSG_CANCEL_CAST {}
+impl CMSG_CANCEL_CAST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x012F, size: body_size });
+        }
+
+        // id: u32
+        let id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            id,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CANCEL_CAST {
     const OPCODE: u32 = 0x012f;
 
@@ -26,17 +42,8 @@ impl crate::Message for CMSG_CANCEL_CAST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x012F, size: body_size });
-        }
-
-        // id: u32
-        let id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

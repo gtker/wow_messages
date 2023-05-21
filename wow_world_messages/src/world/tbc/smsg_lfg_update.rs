@@ -23,6 +23,42 @@ pub struct SMSG_LFG_UPDATE {
 }
 
 impl crate::private::Sealed for SMSG_LFG_UPDATE {}
+impl SMSG_LFG_UPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(3..=7).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036C, size: body_size });
+        }
+
+        // queued: Bool
+        let queued = crate::util::read_u8_le(&mut r)? != 0;
+
+        // is_looking_for_group: Bool
+        let is_looking_for_group = crate::util::read_u8_le(&mut r)? != 0;
+
+        // looking_for_more: LfgUpdateLookingForMore
+        let looking_for_more = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let looking_for_more_if = match looking_for_more {
+            LfgUpdateLookingForMore::NotLookingForMore => SMSG_LFG_UPDATE_LfgUpdateLookingForMore::NotLookingForMore,
+            LfgUpdateLookingForMore::LookingForMore => {
+                // data: LfgData
+                let data = LfgData::read(&mut r)?;
+
+                SMSG_LFG_UPDATE_LfgUpdateLookingForMore::LookingForMore {
+                    data,
+                }
+            }
+        };
+
+        Ok(Self {
+            queued,
+            is_looking_for_group,
+            looking_for_more: looking_for_more_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LFG_UPDATE {
     const OPCODE: u32 = 0x036c;
 
@@ -116,37 +152,8 @@ impl crate::Message for SMSG_LFG_UPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(3..=7).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036C, size: body_size });
-        }
-
-        // queued: Bool
-        let queued = crate::util::read_u8_le(&mut r)? != 0;
-
-        // is_looking_for_group: Bool
-        let is_looking_for_group = crate::util::read_u8_le(&mut r)? != 0;
-
-        // looking_for_more: LfgUpdateLookingForMore
-        let looking_for_more = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let looking_for_more_if = match looking_for_more {
-            LfgUpdateLookingForMore::NotLookingForMore => SMSG_LFG_UPDATE_LfgUpdateLookingForMore::NotLookingForMore,
-            LfgUpdateLookingForMore::LookingForMore => {
-                // data: LfgData
-                let data = LfgData::read(&mut r)?;
-
-                SMSG_LFG_UPDATE_LfgUpdateLookingForMore::LookingForMore {
-                    data,
-                }
-            }
-        };
-
-        Ok(Self {
-            queued,
-            is_looking_for_group,
-            looking_for_more: looking_for_more_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -23,6 +23,34 @@ pub struct CMSG_MOVE_FEATHER_FALL_ACK {
 }
 
 impl crate::private::Sealed for CMSG_MOVE_FEATHER_FALL_ACK {}
+impl CMSG_MOVE_FEATHER_FALL_ACK {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(44..=97).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02CF, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // movement_counter: u32
+        let movement_counter = crate::util::read_u32_le(&mut r)?;
+
+        // info: MovementInfo
+        let info = MovementInfo::read(&mut r)?;
+
+        // apply: u32
+        let apply = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            movement_counter,
+            info,
+            apply,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_MOVE_FEATHER_FALL_ACK {
     const OPCODE: u32 = 0x02cf;
 
@@ -171,29 +199,8 @@ impl crate::Message for CMSG_MOVE_FEATHER_FALL_ACK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(44..=97).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02CF, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // movement_counter: u32
-        let movement_counter = crate::util::read_u32_le(&mut r)?;
-
-        // info: MovementInfo
-        let info = MovementInfo::read(&mut r)?;
-
-        // apply: u32
-        let apply = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            movement_counter,
-            info,
-            apply,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

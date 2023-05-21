@@ -14,6 +14,26 @@ pub struct SMSG_UPDATE_AURA_DURATION {
 }
 
 impl crate::private::Sealed for SMSG_UPDATE_AURA_DURATION {}
+impl SMSG_UPDATE_AURA_DURATION {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 5 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0137, size: body_size });
+        }
+
+        // aura_slot: u8
+        let aura_slot = crate::util::read_u8_le(&mut r)?;
+
+        // aura_duration: u32
+        let aura_duration = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            aura_slot,
+            aura_duration,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_UPDATE_AURA_DURATION {
     const OPCODE: u32 = 0x0137;
 
@@ -64,21 +84,8 @@ impl crate::Message for SMSG_UPDATE_AURA_DURATION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 5 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0137, size: body_size });
-        }
-
-        // aura_slot: u8
-        let aura_slot = crate::util::read_u8_le(&mut r)?;
-
-        // aura_duration: u32
-        let aura_duration = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            aura_slot,
-            aura_duration,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

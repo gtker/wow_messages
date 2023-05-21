@@ -20,6 +20,26 @@ pub struct SMSG_AURA_UPDATE {
 }
 
 impl crate::private::Sealed for SMSG_AURA_UPDATE {}
+impl SMSG_AURA_UPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(10..=34).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0496, size: body_size });
+        }
+
+        // unit: PackedGuid
+        let unit = crate::util::read_packed_guid(&mut r)?;
+
+        // aura_update: AuraUpdate
+        let aura_update = AuraUpdate::read(&mut r)?;
+
+        Ok(Self {
+            unit,
+            aura_update,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_AURA_UPDATE {
     const OPCODE: u32 = 0x0496;
 
@@ -103,21 +123,8 @@ impl crate::Message for SMSG_AURA_UPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(10..=34).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0496, size: body_size });
-        }
-
-        // unit: PackedGuid
-        let unit = crate::util::read_packed_guid(&mut r)?;
-
-        // aura_update: AuraUpdate
-        let aura_update = AuraUpdate::read(&mut r)?;
-
-        Ok(Self {
-            unit,
-            aura_update,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

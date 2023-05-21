@@ -16,6 +16,26 @@ pub struct SMSG_FORCE_MOVE_UNROOT {
 }
 
 impl crate::private::Sealed for SMSG_FORCE_MOVE_UNROOT {}
+impl SMSG_FORCE_MOVE_UNROOT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00EA, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // counter: u32
+        let counter = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            counter,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_FORCE_MOVE_UNROOT {
     const OPCODE: u32 = 0x00ea;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_FORCE_MOVE_UNROOT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00EA, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // counter: u32
-        let counter = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            counter,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

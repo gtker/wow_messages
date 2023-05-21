@@ -22,6 +22,38 @@ pub struct SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {
 }
 
 impl crate::private::Sealed for SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {}
+impl SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(15..=22).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03A5, size: body_size });
+        }
+
+        // unit: PackedGuid
+        let unit = crate::util::read_packed_guid(&mut r)?;
+
+        // slot: u8
+        let slot = crate::util::read_u8_le(&mut r)?;
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // max_duration: u32
+        let max_duration = crate::util::read_u32_le(&mut r)?;
+
+        // remaining_duration: u32
+        let remaining_duration = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            unit,
+            slot,
+            spell,
+            max_duration,
+            remaining_duration,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {
     const OPCODE: u32 = 0x03a5;
 
@@ -87,33 +119,8 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(15..=22).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03A5, size: body_size });
-        }
-
-        // unit: PackedGuid
-        let unit = crate::util::read_packed_guid(&mut r)?;
-
-        // slot: u8
-        let slot = crate::util::read_u8_le(&mut r)?;
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // max_duration: u32
-        let max_duration = crate::util::read_u32_le(&mut r)?;
-
-        // remaining_duration: u32
-        let remaining_duration = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            unit,
-            slot,
-            spell,
-            max_duration,
-            remaining_duration,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

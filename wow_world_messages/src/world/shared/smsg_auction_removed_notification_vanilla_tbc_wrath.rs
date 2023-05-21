@@ -16,6 +16,30 @@ pub struct SMSG_AUCTION_REMOVED_NOTIFICATION {
 }
 
 impl crate::private::Sealed for SMSG_AUCTION_REMOVED_NOTIFICATION {}
+impl SMSG_AUCTION_REMOVED_NOTIFICATION {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x028D, size: body_size });
+        }
+
+        // item: u32
+        let item = crate::util::read_u32_le(&mut r)?;
+
+        // item_template: u32
+        let item_template = crate::util::read_u32_le(&mut r)?;
+
+        // random_property_id: u32
+        let random_property_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            item,
+            item_template,
+            random_property_id,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_AUCTION_REMOVED_NOTIFICATION {
     const OPCODE: u32 = 0x028d;
 
@@ -71,25 +95,8 @@ impl crate::Message for SMSG_AUCTION_REMOVED_NOTIFICATION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x028D, size: body_size });
-        }
-
-        // item: u32
-        let item = crate::util::read_u32_le(&mut r)?;
-
-        // item_template: u32
-        let item_template = crate::util::read_u32_le(&mut r)?;
-
-        // random_property_id: u32
-        let random_property_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            item,
-            item_template,
-            random_property_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

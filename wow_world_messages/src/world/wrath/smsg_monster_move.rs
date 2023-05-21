@@ -49,6 +49,117 @@ pub struct SMSG_MONSTER_MOVE {
 }
 
 impl crate::private::Sealed for SMSG_MONSTER_MOVE {}
+impl SMSG_MONSTER_MOVE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(32..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00DD, size: body_size });
+        }
+
+        // guid: PackedGuid
+        let guid = crate::util::read_packed_guid(&mut r)?;
+
+        // unknown: u8
+        let unknown = crate::util::read_u8_le(&mut r)?;
+
+        // spline_point: Vector3d
+        let spline_point = Vector3d::read(&mut r)?;
+
+        // spline_id: u32
+        let spline_id = crate::util::read_u32_le(&mut r)?;
+
+        // move_type: MonsterMoveType
+        let move_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let move_type_if = match move_type {
+            MonsterMoveType::Normal => SMSG_MONSTER_MOVE_MonsterMoveType::Normal,
+            MonsterMoveType::Stop => SMSG_MONSTER_MOVE_MonsterMoveType::Stop,
+            MonsterMoveType::FacingSpot => {
+                // position: Vector3d
+                let position = Vector3d::read(&mut r)?;
+
+                SMSG_MONSTER_MOVE_MonsterMoveType::FacingSpot {
+                    position,
+                }
+            }
+            MonsterMoveType::FacingTarget => {
+                // target: Guid
+                let target = crate::util::read_guid(&mut r)?;
+
+                SMSG_MONSTER_MOVE_MonsterMoveType::FacingTarget {
+                    target,
+                }
+            }
+            MonsterMoveType::FacingAngle => {
+                // angle: f32
+                let angle = crate::util::read_f32_le(&mut r)?;
+
+                SMSG_MONSTER_MOVE_MonsterMoveType::FacingAngle {
+                    angle,
+                }
+            }
+        };
+
+        // spline_flags: SplineFlag
+        let spline_flags = SplineFlag::new(crate::util::read_u32_le(&mut r)?);
+
+        let spline_flags_enter_cycle = if spline_flags.is_enter_cycle() {
+            // animation_id: u32
+            let animation_id = crate::util::read_u32_le(&mut r)?;
+
+            // animation_start_time: u32
+            let animation_start_time = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_MONSTER_MOVE_SplineFlag_EnterCycle {
+                animation_id,
+                animation_start_time,
+            })
+        }
+        else {
+            None
+        };
+
+        // duration: u32
+        let duration = crate::util::read_u32_le(&mut r)?;
+
+        let spline_flags_parabolic = if spline_flags.is_parabolic() {
+            // vertical_acceleration: f32
+            let vertical_acceleration = crate::util::read_f32_le(&mut r)?;
+
+            // effect_start_time: u32
+            let effect_start_time = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_MONSTER_MOVE_SplineFlag_Parabolic {
+                effect_start_time,
+                vertical_acceleration,
+            })
+        }
+        else {
+            None
+        };
+
+        // splines: MonsterMoveSplines
+        let splines = crate::util::read_monster_move_spline(&mut r)?;
+
+        let spline_flags = SMSG_MONSTER_MOVE_SplineFlag {
+            inner: spline_flags.as_int(),
+            parabolic: spline_flags_parabolic,
+            enter_cycle: spline_flags_enter_cycle,
+        };
+
+        Ok(Self {
+            guid,
+            unknown,
+            spline_point,
+            spline_id,
+            move_type: move_type_if,
+            spline_flags,
+            duration,
+            splines,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_MONSTER_MOVE {
     const OPCODE: u32 = 0x00dd;
 
@@ -252,112 +363,8 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(32..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00DD, size: body_size });
-        }
-
-        // guid: PackedGuid
-        let guid = crate::util::read_packed_guid(&mut r)?;
-
-        // unknown: u8
-        let unknown = crate::util::read_u8_le(&mut r)?;
-
-        // spline_point: Vector3d
-        let spline_point = Vector3d::read(&mut r)?;
-
-        // spline_id: u32
-        let spline_id = crate::util::read_u32_le(&mut r)?;
-
-        // move_type: MonsterMoveType
-        let move_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let move_type_if = match move_type {
-            MonsterMoveType::Normal => SMSG_MONSTER_MOVE_MonsterMoveType::Normal,
-            MonsterMoveType::Stop => SMSG_MONSTER_MOVE_MonsterMoveType::Stop,
-            MonsterMoveType::FacingSpot => {
-                // position: Vector3d
-                let position = Vector3d::read(&mut r)?;
-
-                SMSG_MONSTER_MOVE_MonsterMoveType::FacingSpot {
-                    position,
-                }
-            }
-            MonsterMoveType::FacingTarget => {
-                // target: Guid
-                let target = crate::util::read_guid(&mut r)?;
-
-                SMSG_MONSTER_MOVE_MonsterMoveType::FacingTarget {
-                    target,
-                }
-            }
-            MonsterMoveType::FacingAngle => {
-                // angle: f32
-                let angle = crate::util::read_f32_le(&mut r)?;
-
-                SMSG_MONSTER_MOVE_MonsterMoveType::FacingAngle {
-                    angle,
-                }
-            }
-        };
-
-        // spline_flags: SplineFlag
-        let spline_flags = SplineFlag::new(crate::util::read_u32_le(&mut r)?);
-
-        let spline_flags_enter_cycle = if spline_flags.is_enter_cycle() {
-            // animation_id: u32
-            let animation_id = crate::util::read_u32_le(&mut r)?;
-
-            // animation_start_time: u32
-            let animation_start_time = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_MONSTER_MOVE_SplineFlag_EnterCycle {
-                animation_id,
-                animation_start_time,
-            })
-        }
-        else {
-            None
-        };
-
-        // duration: u32
-        let duration = crate::util::read_u32_le(&mut r)?;
-
-        let spline_flags_parabolic = if spline_flags.is_parabolic() {
-            // vertical_acceleration: f32
-            let vertical_acceleration = crate::util::read_f32_le(&mut r)?;
-
-            // effect_start_time: u32
-            let effect_start_time = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_MONSTER_MOVE_SplineFlag_Parabolic {
-                effect_start_time,
-                vertical_acceleration,
-            })
-        }
-        else {
-            None
-        };
-
-        // splines: MonsterMoveSplines
-        let splines = crate::util::read_monster_move_spline(&mut r)?;
-
-        let spline_flags = SMSG_MONSTER_MOVE_SplineFlag {
-            inner: spline_flags.as_int(),
-            parabolic: spline_flags_parabolic,
-            enter_cycle: spline_flags_enter_cycle,
-        };
-
-        Ok(Self {
-            guid,
-            unknown,
-            spline_point,
-            spline_id,
-            move_type: move_type_if,
-            spline_flags,
-            duration,
-            splines,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

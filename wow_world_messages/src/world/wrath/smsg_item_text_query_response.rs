@@ -19,6 +19,41 @@ pub struct SMSG_ITEM_TEXT_QUERY_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_ITEM_TEXT_QUERY_RESPONSE {}
+impl SMSG_ITEM_TEXT_QUERY_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(1..=265).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0244, size: body_size });
+        }
+
+        // query: ItemTextQuery
+        let query = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let query_if = match query {
+            ItemTextQuery::HasText => {
+                // item: Guid
+                let item = crate::util::read_guid(&mut r)?;
+
+                // text: CString
+                let text = {
+                    let text = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(text)?
+                };
+
+                SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery::HasText {
+                    item,
+                    text,
+                }
+            }
+            ItemTextQuery::NoText => SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery::NoText,
+        };
+
+        Ok(Self {
+            query: query_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
     const OPCODE: u32 = 0x0244;
 
@@ -105,36 +140,8 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(1..=265).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0244, size: body_size });
-        }
-
-        // query: ItemTextQuery
-        let query = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let query_if = match query {
-            ItemTextQuery::HasText => {
-                // item: Guid
-                let item = crate::util::read_guid(&mut r)?;
-
-                // text: CString
-                let text = {
-                    let text = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(text)?
-                };
-
-                SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery::HasText {
-                    item,
-                    text,
-                }
-            }
-            ItemTextQuery::NoText => SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery::NoText,
-        };
-
-        Ok(Self {
-            query: query_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -16,6 +16,26 @@ pub struct CMSG_CALENDAR_EVENT_SIGNUP {
 }
 
 impl crate::private::Sealed for CMSG_CALENDAR_EVENT_SIGNUP {}
+impl CMSG_CALENDAR_EVENT_SIGNUP {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 9 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BA, size: body_size });
+        }
+
+        // event_id: Guid
+        let event_id = crate::util::read_guid(&mut r)?;
+
+        // tentative: Bool
+        let tentative = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            event_id,
+            tentative,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CALENDAR_EVENT_SIGNUP {
     const OPCODE: u32 = 0x04ba;
 
@@ -66,21 +86,8 @@ impl crate::Message for CMSG_CALENDAR_EVENT_SIGNUP {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 9 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BA, size: body_size });
-        }
-
-        // event_id: Guid
-        let event_id = crate::util::read_guid(&mut r)?;
-
-        // tentative: Bool
-        let tentative = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            event_id,
-            tentative,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -38,48 +38,8 @@ pub struct SMSG_ITEM_PUSH_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_ITEM_PUSH_RESULT {}
-impl crate::Message for SMSG_ITEM_PUSH_RESULT {
-    const OPCODE: u32 = 0x0166;
-
-    fn size_without_header(&self) -> u32 {
-        41
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
-
-        // source: NewItemSource
-        w.write_all(&(self.source.as_int().to_le_bytes()))?;
-
-        // creation_type: NewItemCreationType
-        w.write_all(&(self.creation_type.as_int().to_le_bytes()))?;
-
-        // alert_chat: NewItemChatAlert
-        w.write_all(&(self.alert_chat.as_int().to_le_bytes()))?;
-
-        // bag_slot: u8
-        w.write_all(&self.bag_slot.to_le_bytes())?;
-
-        // item_slot: u32
-        w.write_all(&self.item_slot.to_le_bytes())?;
-
-        // item: u32
-        w.write_all(&self.item.to_le_bytes())?;
-
-        // item_suffix_factor: u32
-        w.write_all(&self.item_suffix_factor.to_le_bytes())?;
-
-        // item_random_property_id: u32
-        w.write_all(&self.item_random_property_id.to_le_bytes())?;
-
-        // item_count: u32
-        w.write_all(&self.item_count.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl SMSG_ITEM_PUSH_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 41 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0166, size: body_size });
         }
@@ -126,6 +86,53 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
             item_random_property_id,
             item_count,
         })
+    }
+
+}
+
+impl crate::Message for SMSG_ITEM_PUSH_RESULT {
+    const OPCODE: u32 = 0x0166;
+
+    fn size_without_header(&self) -> u32 {
+        41
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // guid: Guid
+        w.write_all(&self.guid.guid().to_le_bytes())?;
+
+        // source: NewItemSource
+        w.write_all(&(self.source.as_int().to_le_bytes()))?;
+
+        // creation_type: NewItemCreationType
+        w.write_all(&(self.creation_type.as_int().to_le_bytes()))?;
+
+        // alert_chat: NewItemChatAlert
+        w.write_all(&(self.alert_chat.as_int().to_le_bytes()))?;
+
+        // bag_slot: u8
+        w.write_all(&self.bag_slot.to_le_bytes())?;
+
+        // item_slot: u32
+        w.write_all(&self.item_slot.to_le_bytes())?;
+
+        // item: u32
+        w.write_all(&self.item.to_le_bytes())?;
+
+        // item_suffix_factor: u32
+        w.write_all(&self.item_suffix_factor.to_le_bytes())?;
+
+        // item_random_property_id: u32
+        w.write_all(&self.item_random_property_id.to_le_bytes())?;
+
+        // item_count: u32
+        w.write_all(&self.item_count.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

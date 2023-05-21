@@ -16,6 +16,30 @@ pub struct CMSG_ALTER_APPEARANCE {
 }
 
 impl crate::private::Sealed for CMSG_ALTER_APPEARANCE {}
+impl CMSG_ALTER_APPEARANCE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0426, size: body_size });
+        }
+
+        // hair: u32
+        let hair = crate::util::read_u32_le(&mut r)?;
+
+        // hair_color: u32
+        let hair_color = crate::util::read_u32_le(&mut r)?;
+
+        // facial_hair: u32
+        let facial_hair = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            hair,
+            hair_color,
+            facial_hair,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_ALTER_APPEARANCE {
     const OPCODE: u32 = 0x0426;
 
@@ -71,25 +95,8 @@ impl crate::Message for CMSG_ALTER_APPEARANCE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0426, size: body_size });
-        }
-
-        // hair: u32
-        let hair = crate::util::read_u32_le(&mut r)?;
-
-        // hair_color: u32
-        let hair_color = crate::util::read_u32_le(&mut r)?;
-
-        // facial_hair: u32
-        let facial_hair = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            hair,
-            hair_color,
-            facial_hair,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

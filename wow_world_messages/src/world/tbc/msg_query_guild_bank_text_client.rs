@@ -12,6 +12,22 @@ pub struct MSG_QUERY_GUILD_BANK_TEXT_Client {
 }
 
 impl crate::private::Sealed for MSG_QUERY_GUILD_BANK_TEXT_Client {}
+impl MSG_QUERY_GUILD_BANK_TEXT_Client {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0409, size: body_size });
+        }
+
+        // tab: u8
+        let tab = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            tab,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_QUERY_GUILD_BANK_TEXT_Client {
     const OPCODE: u32 = 0x0409;
 
@@ -57,17 +73,8 @@ impl crate::Message for MSG_QUERY_GUILD_BANK_TEXT_Client {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0409, size: body_size });
-        }
-
-        // tab: u8
-        let tab = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            tab,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

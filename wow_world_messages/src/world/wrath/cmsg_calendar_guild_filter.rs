@@ -18,6 +18,30 @@ pub struct CMSG_CALENDAR_GUILD_FILTER {
 }
 
 impl crate::private::Sealed for CMSG_CALENDAR_GUILD_FILTER {}
+impl CMSG_CALENDAR_GUILD_FILTER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042B, size: body_size });
+        }
+
+        // minimum_level: Level32
+        let minimum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
+
+        // maximum_level: Level32
+        let maximum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
+
+        // minimum_rank: u32
+        let minimum_rank = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            minimum_level,
+            maximum_level,
+            minimum_rank,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CALENDAR_GUILD_FILTER {
     const OPCODE: u32 = 0x042b;
 
@@ -73,25 +97,8 @@ impl crate::Message for CMSG_CALENDAR_GUILD_FILTER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042B, size: body_size });
-        }
-
-        // minimum_level: Level32
-        let minimum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
-
-        // maximum_level: Level32
-        let maximum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
-
-        // minimum_rank: u32
-        let minimum_rank = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            minimum_level,
-            maximum_level,
-            minimum_rank,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

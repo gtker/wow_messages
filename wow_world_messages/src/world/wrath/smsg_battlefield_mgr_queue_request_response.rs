@@ -22,6 +22,38 @@ pub struct SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {}
+impl SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 11 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E4, size: body_size });
+        }
+
+        // battle_id: u32
+        let battle_id = crate::util::read_u32_le(&mut r)?;
+
+        // area: Area
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // queued: Bool
+        let queued = crate::util::read_u8_le(&mut r)? != 0;
+
+        // full: Bool
+        let full = crate::util::read_u8_le(&mut r)? != 0;
+
+        // warmup: Bool
+        let warmup = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            battle_id,
+            area,
+            queued,
+            full,
+            warmup,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
     const OPCODE: u32 = 0x04e4;
 
@@ -87,33 +119,8 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 11 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E4, size: body_size });
-        }
-
-        // battle_id: u32
-        let battle_id = crate::util::read_u32_le(&mut r)?;
-
-        // area: Area
-        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // queued: Bool
-        let queued = crate::util::read_u8_le(&mut r)? != 0;
-
-        // full: Bool
-        let full = crate::util::read_u8_le(&mut r)? != 0;
-
-        // warmup: Bool
-        let warmup = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            battle_id,
-            area,
-            queued,
-            full,
-            warmup,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -17,6 +17,26 @@ pub struct MSG_QUEST_PUSH_RESULT {
 }
 
 impl crate::private::Sealed for MSG_QUEST_PUSH_RESULT {}
+impl MSG_QUEST_PUSH_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 9 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0276, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // message: QuestPartyMessage
+        let message = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            guid,
+            message,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_QUEST_PUSH_RESULT {
     const OPCODE: u32 = 0x0276;
 
@@ -39,21 +59,8 @@ impl crate::Message for MSG_QUEST_PUSH_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 9 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0276, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // message: QuestPartyMessage
-        let message = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            guid,
-            message,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

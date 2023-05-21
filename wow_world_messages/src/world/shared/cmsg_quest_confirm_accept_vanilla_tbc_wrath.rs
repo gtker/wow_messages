@@ -12,6 +12,22 @@ pub struct CMSG_QUEST_CONFIRM_ACCEPT {
 }
 
 impl crate::private::Sealed for CMSG_QUEST_CONFIRM_ACCEPT {}
+impl CMSG_QUEST_CONFIRM_ACCEPT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x019B, size: body_size });
+        }
+
+        // quest_id: u32
+        let quest_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            quest_id,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_QUEST_CONFIRM_ACCEPT {
     const OPCODE: u32 = 0x019b;
 
@@ -57,17 +73,8 @@ impl crate::Message for CMSG_QUEST_CONFIRM_ACCEPT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x019B, size: body_size });
-        }
-
-        // quest_id: u32
-        let quest_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            quest_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

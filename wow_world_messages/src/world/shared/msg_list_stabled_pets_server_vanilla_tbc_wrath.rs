@@ -21,6 +21,39 @@ pub struct MSG_LIST_STABLED_PETS_Server {
 }
 
 impl crate::private::Sealed for MSG_LIST_STABLED_PETS_Server {}
+impl MSG_LIST_STABLED_PETS_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(10..=69898).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x026F, size: body_size });
+        }
+
+        // npc: Guid
+        let npc = crate::util::read_guid(&mut r)?;
+
+        // amount_of_pets: u8
+        let amount_of_pets = crate::util::read_u8_le(&mut r)?;
+
+        // stable_slots: u8
+        let stable_slots = crate::util::read_u8_le(&mut r)?;
+
+        // pets: StabledPet[amount_of_pets]
+        let pets = {
+            let mut pets = Vec::with_capacity(amount_of_pets as usize);
+            for _ in 0..amount_of_pets {
+                pets.push(StabledPet::read(&mut r)?);
+            }
+            pets
+        };
+
+        Ok(Self {
+            npc,
+            stable_slots,
+            pets,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_LIST_STABLED_PETS_Server {
     const OPCODE: u32 = 0x026f;
 
@@ -109,34 +142,8 @@ impl crate::Message for MSG_LIST_STABLED_PETS_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(10..=69898).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x026F, size: body_size });
-        }
-
-        // npc: Guid
-        let npc = crate::util::read_guid(&mut r)?;
-
-        // amount_of_pets: u8
-        let amount_of_pets = crate::util::read_u8_le(&mut r)?;
-
-        // stable_slots: u8
-        let stable_slots = crate::util::read_u8_le(&mut r)?;
-
-        // pets: StabledPet[amount_of_pets]
-        let pets = {
-            let mut pets = Vec::with_capacity(amount_of_pets as usize);
-            for _ in 0..amount_of_pets {
-                pets.push(StabledPet::read(&mut r)?);
-            }
-            pets
-        };
-
-        Ok(Self {
-            npc,
-            stable_slots,
-            pets,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

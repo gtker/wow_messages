@@ -15,6 +15,26 @@ pub struct SMSG_BATTLEFIELD_MGR_QUEUE_INVITE {
 }
 
 impl crate::private::Sealed for SMSG_BATTLEFIELD_MGR_QUEUE_INVITE {}
+impl SMSG_BATTLEFIELD_MGR_QUEUE_INVITE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 5 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E1, size: body_size });
+        }
+
+        // battle_id: u32
+        let battle_id = crate::util::read_u32_le(&mut r)?;
+
+        // warmup: u8
+        let warmup = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            battle_id,
+            warmup,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_INVITE {
     const OPCODE: u32 = 0x04e1;
 
@@ -65,21 +85,8 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_INVITE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 5 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E1, size: body_size });
-        }
-
-        // battle_id: u32
-        let battle_id = crate::util::read_u32_le(&mut r)?;
-
-        // warmup: u8
-        let warmup = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            battle_id,
-            warmup,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

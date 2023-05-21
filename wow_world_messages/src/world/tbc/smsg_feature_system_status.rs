@@ -16,6 +16,26 @@ pub struct SMSG_FEATURE_SYSTEM_STATUS {
 }
 
 impl crate::private::Sealed for SMSG_FEATURE_SYSTEM_STATUS {}
+impl SMSG_FEATURE_SYSTEM_STATUS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 2 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C8, size: body_size });
+        }
+
+        // complaint_status: ComplaintStatus
+        let complaint_status = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // voice_chat_enabled: Bool
+        let voice_chat_enabled = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            complaint_status,
+            voice_chat_enabled,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_FEATURE_SYSTEM_STATUS {
     const OPCODE: u32 = 0x03c8;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_FEATURE_SYSTEM_STATUS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 2 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C8, size: body_size });
-        }
-
-        // complaint_status: ComplaintStatus
-        let complaint_status = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // voice_chat_enabled: Bool
-        let voice_chat_enabled = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            complaint_status,
-            voice_chat_enabled,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

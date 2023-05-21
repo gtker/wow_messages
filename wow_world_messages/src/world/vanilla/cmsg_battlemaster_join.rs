@@ -23,6 +23,34 @@ pub struct CMSG_BATTLEMASTER_JOIN {
 }
 
 impl crate::private::Sealed for CMSG_BATTLEMASTER_JOIN {}
+impl CMSG_BATTLEMASTER_JOIN {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 17 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EE, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // instance_id: u32
+        let instance_id = crate::util::read_u32_le(&mut r)?;
+
+        // join_as_group: Bool
+        let join_as_group = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            guid,
+            map,
+            instance_id,
+            join_as_group,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_BATTLEMASTER_JOIN {
     const OPCODE: u32 = 0x02ee;
 
@@ -83,29 +111,8 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 17 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EE, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // instance_id: u32
-        let instance_id = crate::util::read_u32_le(&mut r)?;
-
-        // join_as_group: Bool
-        let join_as_group = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            guid,
-            map,
-            instance_id,
-            join_as_group,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

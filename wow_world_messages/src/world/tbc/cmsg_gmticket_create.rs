@@ -32,6 +32,115 @@ pub struct CMSG_GMTICKET_CREATE {
 }
 
 impl crate::private::Sealed for CMSG_GMTICKET_CREATE {}
+impl CMSG_GMTICKET_CREATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(19..=66072).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0205, size: body_size });
+        }
+
+        // category: GmTicketType
+        let category = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // position: Vector3d
+        let position = Vector3d::read(&mut r)?;
+
+        // message: CString
+        let message = {
+            let message = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(message)?
+        };
+
+        // reserved_for_future_use: CString
+        let reserved_for_future_use = {
+            let reserved_for_future_use = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(reserved_for_future_use)?
+        };
+
+        let category_if = match category {
+            GmTicketType::NotSet => CMSG_GMTICKET_CREATE_GmTicketType::NotSet,
+            GmTicketType::Stuck => CMSG_GMTICKET_CREATE_GmTicketType::Stuck,
+            GmTicketType::BehaviorHarassment => {
+                // chat_data_line_count: u32
+                let chat_data_line_count = crate::util::read_u32_le(&mut r)?;
+
+                // chat_data_size_uncompressed: u32
+                let chat_data_size_uncompressed = crate::util::read_u32_le(&mut r)?;
+
+                // compressed_chat_data: u8[-]
+                let compressed_chat_data = {
+                    let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
+
+                    let mut current_size = {
+                        1 // category: CMSG_GMTICKET_CREATE_GmTicketType
+                        + 4 // map: Map
+                        + 12 // position: Vector3d
+                        + message.len() + 1 // message: CString
+                        + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString
+                    };
+                    let mut compressed_chat_data = Vec::with_capacity(body_size as usize - current_size);
+                    while decoder.total_out() < (chat_data_size_uncompressed as u64) {
+                        compressed_chat_data.push(crate::util::read_u8_le(&mut decoder)?);
+                        current_size += 1;
+                    }
+                    compressed_chat_data
+                };
+
+                CMSG_GMTICKET_CREATE_GmTicketType::BehaviorHarassment {
+                    chat_data_line_count,
+                    chat_data_size_uncompressed,
+                    compressed_chat_data,
+                }
+            }
+            GmTicketType::Guild => CMSG_GMTICKET_CREATE_GmTicketType::Guild,
+            GmTicketType::Item => CMSG_GMTICKET_CREATE_GmTicketType::Item,
+            GmTicketType::Environmental => CMSG_GMTICKET_CREATE_GmTicketType::Environmental,
+            GmTicketType::NonQuestCreep => CMSG_GMTICKET_CREATE_GmTicketType::NonQuestCreep,
+            GmTicketType::QuestQuestNpc => CMSG_GMTICKET_CREATE_GmTicketType::QuestQuestNpc,
+            GmTicketType::Technical => CMSG_GMTICKET_CREATE_GmTicketType::Technical,
+            GmTicketType::AccountBilling => CMSG_GMTICKET_CREATE_GmTicketType::AccountBilling,
+            GmTicketType::Character => CMSG_GMTICKET_CREATE_GmTicketType::Character,
+            GmTicketType::ArenaHonorItemIssues => CMSG_GMTICKET_CREATE_GmTicketType::ArenaHonorItemIssues,
+            GmTicketType::ArenaHonorPointsIssues => CMSG_GMTICKET_CREATE_GmTicketType::ArenaHonorPointsIssues,
+            GmTicketType::BottingCheatingHacking => CMSG_GMTICKET_CREATE_GmTicketType::BottingCheatingHacking,
+            GmTicketType::BugReport => CMSG_GMTICKET_CREATE_GmTicketType::BugReport,
+            GmTicketType::CompromisedAccountIssue => CMSG_GMTICKET_CREATE_GmTicketType::CompromisedAccountIssue,
+            GmTicketType::GameSuggestions => CMSG_GMTICKET_CREATE_GmTicketType::GameSuggestions,
+            GmTicketType::GameplayQuestion => CMSG_GMTICKET_CREATE_GmTicketType::GameplayQuestion,
+            GmTicketType::GuildBankIssue => CMSG_GMTICKET_CREATE_GmTicketType::GuildBankIssue,
+            GmTicketType::GuildMasterIssue => CMSG_GMTICKET_CREATE_GmTicketType::GuildMasterIssue,
+            GmTicketType::HarassmentScamReport => CMSG_GMTICKET_CREATE_GmTicketType::HarassmentScamReport,
+            GmTicketType::InappropriateNameGuildArenaCharacterPet => CMSG_GMTICKET_CREATE_GmTicketType::InappropriateNameGuildArenaCharacterPet,
+            GmTicketType::KnownIssueFix => CMSG_GMTICKET_CREATE_GmTicketType::KnownIssueFix,
+            GmTicketType::LatencyLagReport => CMSG_GMTICKET_CREATE_GmTicketType::LatencyLagReport,
+            GmTicketType::LootingIssueMistake => CMSG_GMTICKET_CREATE_GmTicketType::LootingIssueMistake,
+            GmTicketType::MailIssue => CMSG_GMTICKET_CREATE_GmTicketType::MailIssue,
+            GmTicketType::NonInGameRelatedInquiry => CMSG_GMTICKET_CREATE_GmTicketType::NonInGameRelatedInquiry,
+            GmTicketType::ParentalControlsCais => CMSG_GMTICKET_CREATE_GmTicketType::ParentalControlsCais,
+            GmTicketType::Pcnc => CMSG_GMTICKET_CREATE_GmTicketType::Pcnc,
+            GmTicketType::Pct => CMSG_GMTICKET_CREATE_GmTicketType::Pct,
+            GmTicketType::RestorationStatusFollowUp => CMSG_GMTICKET_CREATE_GmTicketType::RestorationStatusFollowUp,
+            GmTicketType::ServerInstanceIssues => CMSG_GMTICKET_CREATE_GmTicketType::ServerInstanceIssues,
+            GmTicketType::Spam => CMSG_GMTICKET_CREATE_GmTicketType::Spam,
+            GmTicketType::SuicideCase => CMSG_GMTICKET_CREATE_GmTicketType::SuicideCase,
+            GmTicketType::SuspensionQuestions => CMSG_GMTICKET_CREATE_GmTicketType::SuspensionQuestions,
+            GmTicketType::TechnicalSoundGraphicsIssue => CMSG_GMTICKET_CREATE_GmTicketType::TechnicalSoundGraphicsIssue,
+            GmTicketType::UiIssue => CMSG_GMTICKET_CREATE_GmTicketType::UiIssue,
+        };
+
+        Ok(Self {
+            category: category_if,
+            map,
+            position,
+            message,
+            reserved_for_future_use,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GMTICKET_CREATE {
     const OPCODE: u32 = 0x0205;
 
@@ -168,110 +277,8 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(19..=66072).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0205, size: body_size });
-        }
-
-        // category: GmTicketType
-        let category = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
-
-        // message: CString
-        let message = {
-            let message = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(message)?
-        };
-
-        // reserved_for_future_use: CString
-        let reserved_for_future_use = {
-            let reserved_for_future_use = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(reserved_for_future_use)?
-        };
-
-        let category_if = match category {
-            GmTicketType::NotSet => CMSG_GMTICKET_CREATE_GmTicketType::NotSet,
-            GmTicketType::Stuck => CMSG_GMTICKET_CREATE_GmTicketType::Stuck,
-            GmTicketType::BehaviorHarassment => {
-                // chat_data_line_count: u32
-                let chat_data_line_count = crate::util::read_u32_le(&mut r)?;
-
-                // chat_data_size_uncompressed: u32
-                let chat_data_size_uncompressed = crate::util::read_u32_le(&mut r)?;
-
-                // compressed_chat_data: u8[-]
-                let compressed_chat_data = {
-                    let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
-
-                    let mut current_size = {
-                        1 // category: CMSG_GMTICKET_CREATE_GmTicketType
-                        + 4 // map: Map
-                        + 12 // position: Vector3d
-                        + message.len() + 1 // message: CString
-                        + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString
-                    };
-                    let mut compressed_chat_data = Vec::with_capacity(body_size as usize - current_size);
-                    while decoder.total_out() < (chat_data_size_uncompressed as u64) {
-                        compressed_chat_data.push(crate::util::read_u8_le(&mut decoder)?);
-                        current_size += 1;
-                    }
-                    compressed_chat_data
-                };
-
-                CMSG_GMTICKET_CREATE_GmTicketType::BehaviorHarassment {
-                    chat_data_line_count,
-                    chat_data_size_uncompressed,
-                    compressed_chat_data,
-                }
-            }
-            GmTicketType::Guild => CMSG_GMTICKET_CREATE_GmTicketType::Guild,
-            GmTicketType::Item => CMSG_GMTICKET_CREATE_GmTicketType::Item,
-            GmTicketType::Environmental => CMSG_GMTICKET_CREATE_GmTicketType::Environmental,
-            GmTicketType::NonQuestCreep => CMSG_GMTICKET_CREATE_GmTicketType::NonQuestCreep,
-            GmTicketType::QuestQuestNpc => CMSG_GMTICKET_CREATE_GmTicketType::QuestQuestNpc,
-            GmTicketType::Technical => CMSG_GMTICKET_CREATE_GmTicketType::Technical,
-            GmTicketType::AccountBilling => CMSG_GMTICKET_CREATE_GmTicketType::AccountBilling,
-            GmTicketType::Character => CMSG_GMTICKET_CREATE_GmTicketType::Character,
-            GmTicketType::ArenaHonorItemIssues => CMSG_GMTICKET_CREATE_GmTicketType::ArenaHonorItemIssues,
-            GmTicketType::ArenaHonorPointsIssues => CMSG_GMTICKET_CREATE_GmTicketType::ArenaHonorPointsIssues,
-            GmTicketType::BottingCheatingHacking => CMSG_GMTICKET_CREATE_GmTicketType::BottingCheatingHacking,
-            GmTicketType::BugReport => CMSG_GMTICKET_CREATE_GmTicketType::BugReport,
-            GmTicketType::CompromisedAccountIssue => CMSG_GMTICKET_CREATE_GmTicketType::CompromisedAccountIssue,
-            GmTicketType::GameSuggestions => CMSG_GMTICKET_CREATE_GmTicketType::GameSuggestions,
-            GmTicketType::GameplayQuestion => CMSG_GMTICKET_CREATE_GmTicketType::GameplayQuestion,
-            GmTicketType::GuildBankIssue => CMSG_GMTICKET_CREATE_GmTicketType::GuildBankIssue,
-            GmTicketType::GuildMasterIssue => CMSG_GMTICKET_CREATE_GmTicketType::GuildMasterIssue,
-            GmTicketType::HarassmentScamReport => CMSG_GMTICKET_CREATE_GmTicketType::HarassmentScamReport,
-            GmTicketType::InappropriateNameGuildArenaCharacterPet => CMSG_GMTICKET_CREATE_GmTicketType::InappropriateNameGuildArenaCharacterPet,
-            GmTicketType::KnownIssueFix => CMSG_GMTICKET_CREATE_GmTicketType::KnownIssueFix,
-            GmTicketType::LatencyLagReport => CMSG_GMTICKET_CREATE_GmTicketType::LatencyLagReport,
-            GmTicketType::LootingIssueMistake => CMSG_GMTICKET_CREATE_GmTicketType::LootingIssueMistake,
-            GmTicketType::MailIssue => CMSG_GMTICKET_CREATE_GmTicketType::MailIssue,
-            GmTicketType::NonInGameRelatedInquiry => CMSG_GMTICKET_CREATE_GmTicketType::NonInGameRelatedInquiry,
-            GmTicketType::ParentalControlsCais => CMSG_GMTICKET_CREATE_GmTicketType::ParentalControlsCais,
-            GmTicketType::Pcnc => CMSG_GMTICKET_CREATE_GmTicketType::Pcnc,
-            GmTicketType::Pct => CMSG_GMTICKET_CREATE_GmTicketType::Pct,
-            GmTicketType::RestorationStatusFollowUp => CMSG_GMTICKET_CREATE_GmTicketType::RestorationStatusFollowUp,
-            GmTicketType::ServerInstanceIssues => CMSG_GMTICKET_CREATE_GmTicketType::ServerInstanceIssues,
-            GmTicketType::Spam => CMSG_GMTICKET_CREATE_GmTicketType::Spam,
-            GmTicketType::SuicideCase => CMSG_GMTICKET_CREATE_GmTicketType::SuicideCase,
-            GmTicketType::SuspensionQuestions => CMSG_GMTICKET_CREATE_GmTicketType::SuspensionQuestions,
-            GmTicketType::TechnicalSoundGraphicsIssue => CMSG_GMTICKET_CREATE_GmTicketType::TechnicalSoundGraphicsIssue,
-            GmTicketType::UiIssue => CMSG_GMTICKET_CREATE_GmTicketType::UiIssue,
-        };
-
-        Ok(Self {
-            category: category_if,
-            map,
-            position,
-            message,
-            reserved_for_future_use,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

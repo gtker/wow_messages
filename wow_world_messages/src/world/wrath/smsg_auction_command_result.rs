@@ -23,6 +23,49 @@ pub struct SMSG_AUCTION_COMMAND_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_AUCTION_COMMAND_RESULT {}
+impl SMSG_AUCTION_COMMAND_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(12..=13).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025B, size: body_size });
+        }
+
+        // auction_id: u32
+        let auction_id = crate::util::read_u32_le(&mut r)?;
+
+        // action: AuctionCommandAction
+        let action = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // result: AuctionCommandResult
+        let result = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        let result_if = match result {
+            AuctionCommandResult::Ok => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::Ok,
+            AuctionCommandResult::ErrInventory => {
+                // inventory_result: InventoryResult
+                let inventory_result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrInventory {
+                    inventory_result,
+                }
+            }
+            AuctionCommandResult::ErrDatabase => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrDatabase,
+            AuctionCommandResult::ErrNotEnoughMoney => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrNotEnoughMoney,
+            AuctionCommandResult::ErrItemNotFound => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrItemNotFound,
+            AuctionCommandResult::ErrHigherBid => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrHigherBid,
+            AuctionCommandResult::ErrBidIncrement => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrBidIncrement,
+            AuctionCommandResult::ErrBidOwn => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrBidOwn,
+            AuctionCommandResult::ErrRestrictedAccount => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrRestrictedAccount,
+        };
+
+        Ok(Self {
+            auction_id,
+            action,
+            result: result_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
     const OPCODE: u32 = 0x025b;
 
@@ -107,44 +150,8 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(12..=13).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025B, size: body_size });
-        }
-
-        // auction_id: u32
-        let auction_id = crate::util::read_u32_le(&mut r)?;
-
-        // action: AuctionCommandAction
-        let action = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // result: AuctionCommandResult
-        let result = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        let result_if = match result {
-            AuctionCommandResult::Ok => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::Ok,
-            AuctionCommandResult::ErrInventory => {
-                // inventory_result: InventoryResult
-                let inventory_result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrInventory {
-                    inventory_result,
-                }
-            }
-            AuctionCommandResult::ErrDatabase => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrDatabase,
-            AuctionCommandResult::ErrNotEnoughMoney => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrNotEnoughMoney,
-            AuctionCommandResult::ErrItemNotFound => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrItemNotFound,
-            AuctionCommandResult::ErrHigherBid => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrHigherBid,
-            AuctionCommandResult::ErrBidIncrement => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrBidIncrement,
-            AuctionCommandResult::ErrBidOwn => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrBidOwn,
-            AuctionCommandResult::ErrRestrictedAccount => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrRestrictedAccount,
-        };
-
-        Ok(Self {
-            auction_id,
-            action,
-            result: result_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

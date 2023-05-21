@@ -18,6 +18,30 @@ pub struct CMSG_CALENDAR_COMPLAIN {
 }
 
 impl crate::private::Sealed for CMSG_CALENDAR_COMPLAIN {}
+impl CMSG_CALENDAR_COMPLAIN {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 24 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0446, size: body_size });
+        }
+
+        // responsible_player: Guid
+        let responsible_player = crate::util::read_guid(&mut r)?;
+
+        // event: Guid
+        let event = crate::util::read_guid(&mut r)?;
+
+        // invite_id: Guid
+        let invite_id = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            responsible_player,
+            event,
+            invite_id,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CALENDAR_COMPLAIN {
     const OPCODE: u32 = 0x0446;
 
@@ -73,25 +97,8 @@ impl crate::Message for CMSG_CALENDAR_COMPLAIN {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 24 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0446, size: body_size });
-        }
-
-        // responsible_player: Guid
-        let responsible_player = crate::util::read_guid(&mut r)?;
-
-        // event: Guid
-        let event = crate::util::read_guid(&mut r)?;
-
-        // invite_id: Guid
-        let invite_id = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            responsible_player,
-            event,
-            invite_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

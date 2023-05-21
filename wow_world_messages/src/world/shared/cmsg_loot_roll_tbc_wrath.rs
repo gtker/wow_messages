@@ -19,6 +19,30 @@ pub struct CMSG_LOOT_ROLL {
 }
 
 impl crate::private::Sealed for CMSG_LOOT_ROLL {}
+impl CMSG_LOOT_ROLL {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 13 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A0, size: body_size });
+        }
+
+        // item: Guid
+        let item = crate::util::read_guid(&mut r)?;
+
+        // item_slot: u32
+        let item_slot = crate::util::read_u32_le(&mut r)?;
+
+        // vote: RollVote
+        let vote = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            item,
+            item_slot,
+            vote,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_LOOT_ROLL {
     const OPCODE: u32 = 0x02a0;
 
@@ -74,25 +98,8 @@ impl crate::Message for CMSG_LOOT_ROLL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 13 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A0, size: body_size });
-        }
-
-        // item: Guid
-        let item = crate::util::read_guid(&mut r)?;
-
-        // item_slot: u32
-        let item_slot = crate::util::read_u32_le(&mut r)?;
-
-        // vote: RollVote
-        let vote = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            item,
-            item_slot,
-            vote,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

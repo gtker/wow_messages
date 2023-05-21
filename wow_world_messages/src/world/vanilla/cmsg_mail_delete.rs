@@ -16,6 +16,26 @@ pub struct CMSG_MAIL_DELETE {
 }
 
 impl crate::private::Sealed for CMSG_MAIL_DELETE {}
+impl CMSG_MAIL_DELETE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0249, size: body_size });
+        }
+
+        // mailbox_id: Guid
+        let mailbox_id = crate::util::read_guid(&mut r)?;
+
+        // mail_id: u32
+        let mail_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            mailbox_id,
+            mail_id,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_MAIL_DELETE {
     const OPCODE: u32 = 0x0249;
 
@@ -66,21 +86,8 @@ impl crate::Message for CMSG_MAIL_DELETE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0249, size: body_size });
-        }
-
-        // mailbox_id: Guid
-        let mailbox_id = crate::util::read_guid(&mut r)?;
-
-        // mail_id: u32
-        let mail_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            mailbox_id,
-            mail_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

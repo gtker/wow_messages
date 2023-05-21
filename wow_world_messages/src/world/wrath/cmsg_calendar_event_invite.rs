@@ -22,6 +22,41 @@ pub struct CMSG_CALENDAR_EVENT_INVITE {
 }
 
 impl crate::private::Sealed for CMSG_CALENDAR_EVENT_INVITE {}
+impl CMSG_CALENDAR_EVENT_INVITE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(19..=274).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0431, size: body_size });
+        }
+
+        // event: Guid
+        let event = crate::util::read_guid(&mut r)?;
+
+        // invite_id: Guid
+        let invite_id = crate::util::read_guid(&mut r)?;
+
+        // name: CString
+        let name = {
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(name)?
+        };
+
+        // pre_event: Bool
+        let pre_event = crate::util::read_u8_le(&mut r)? != 0;
+
+        // guild_event: Bool
+        let guild_event = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            event,
+            invite_id,
+            name,
+            pre_event,
+            guild_event,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CALENDAR_EVENT_INVITE {
     const OPCODE: u32 = 0x0431;
 
@@ -91,36 +126,8 @@ impl crate::Message for CMSG_CALENDAR_EVENT_INVITE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(19..=274).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0431, size: body_size });
-        }
-
-        // event: Guid
-        let event = crate::util::read_guid(&mut r)?;
-
-        // invite_id: Guid
-        let invite_id = crate::util::read_guid(&mut r)?;
-
-        // name: CString
-        let name = {
-            let name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(name)?
-        };
-
-        // pre_event: Bool
-        let pre_event = crate::util::read_u8_le(&mut r)? != 0;
-
-        // guild_event: Bool
-        let guild_event = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            event,
-            invite_id,
-            name,
-            pre_event,
-            guild_event,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

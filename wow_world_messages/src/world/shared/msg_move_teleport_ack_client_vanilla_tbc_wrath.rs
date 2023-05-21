@@ -20,6 +20,30 @@ pub struct MSG_MOVE_TELEPORT_ACK_Client {
 }
 
 impl crate::private::Sealed for MSG_MOVE_TELEPORT_ACK_Client {}
+impl MSG_MOVE_TELEPORT_ACK_Client {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(10..=17).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00C7, size: body_size });
+        }
+
+        // guid: PackedGuid
+        let guid = crate::util::read_packed_guid(&mut r)?;
+
+        // movement_counter: u32
+        let movement_counter = crate::util::read_u32_le(&mut r)?;
+
+        // time: Milliseconds
+        let time = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
+
+        Ok(Self {
+            guid,
+            movement_counter,
+            time,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_MOVE_TELEPORT_ACK_Client {
     const OPCODE: u32 = 0x00c7;
 
@@ -75,25 +99,8 @@ impl crate::Message for MSG_MOVE_TELEPORT_ACK_Client {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(10..=17).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00C7, size: body_size });
-        }
-
-        // guid: PackedGuid
-        let guid = crate::util::read_packed_guid(&mut r)?;
-
-        // movement_counter: u32
-        let movement_counter = crate::util::read_u32_le(&mut r)?;
-
-        // time: Milliseconds
-        let time = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
-
-        Ok(Self {
-            guid,
-            movement_counter,
-            time,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

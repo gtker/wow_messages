@@ -10,6 +10,18 @@ pub struct CMSG_LFG_SET_AUTOJOIN {
 }
 
 impl crate::private::Sealed for CMSG_LFG_SET_AUTOJOIN {}
+impl CMSG_LFG_SET_AUTOJOIN {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 0 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x035C, size: body_size });
+        }
+
+        Ok(Self {
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_LFG_SET_AUTOJOIN {
     const OPCODE: u32 = 0x035c;
 
@@ -50,13 +62,8 @@ impl crate::Message for CMSG_LFG_SET_AUTOJOIN {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x035C, size: body_size });
-        }
-
-        Ok(Self {
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

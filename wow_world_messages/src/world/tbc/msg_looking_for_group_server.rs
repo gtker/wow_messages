@@ -26,6 +26,43 @@ pub struct MSG_LOOKING_FOR_GROUP_Server {
 }
 
 impl crate::private::Sealed for MSG_LOOKING_FOR_GROUP_Server {}
+impl MSG_LOOKING_FOR_GROUP_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(16..=65535).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FF, size: body_size });
+        }
+
+        // lfg_type: LfgType
+        let lfg_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        // entry: u32
+        let entry = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_players_displayed: u32
+        let amount_of_players_displayed = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_players_found: u32
+        let amount_of_players_found = crate::util::read_u32_le(&mut r)?;
+
+        // players_displayed: LfgPlayer[amount_of_players_displayed]
+        let players_displayed = {
+            let mut players_displayed = Vec::with_capacity(amount_of_players_displayed as usize);
+            for _ in 0..amount_of_players_displayed {
+                players_displayed.push(LfgPlayer::read(&mut r)?);
+            }
+            players_displayed
+        };
+
+        Ok(Self {
+            lfg_type,
+            entry,
+            amount_of_players_found,
+            players_displayed,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
     const OPCODE: u32 = 0x01ff;
 
@@ -149,38 +186,8 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(16..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FF, size: body_size });
-        }
-
-        // lfg_type: LfgType
-        let lfg_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        // entry: u32
-        let entry = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_players_displayed: u32
-        let amount_of_players_displayed = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_players_found: u32
-        let amount_of_players_found = crate::util::read_u32_le(&mut r)?;
-
-        // players_displayed: LfgPlayer[amount_of_players_displayed]
-        let players_displayed = {
-            let mut players_displayed = Vec::with_capacity(amount_of_players_displayed as usize);
-            for _ in 0..amount_of_players_displayed {
-                players_displayed.push(LfgPlayer::read(&mut r)?);
-            }
-            players_displayed
-        };
-
-        Ok(Self {
-            lfg_type,
-            entry,
-            amount_of_players_found,
-            players_displayed,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

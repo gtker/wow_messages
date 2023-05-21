@@ -21,6 +21,30 @@ pub struct SMSG_BINDPOINTUPDATE {
 }
 
 impl crate::private::Sealed for SMSG_BINDPOINTUPDATE {}
+impl SMSG_BINDPOINTUPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 20 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0155, size: body_size });
+        }
+
+        // position: Vector3d
+        let position = Vector3d::read(&mut r)?;
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // area: Area
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            position,
+            map,
+            area,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_BINDPOINTUPDATE {
     const OPCODE: u32 = 0x0155;
 
@@ -87,25 +111,8 @@ impl crate::Message for SMSG_BINDPOINTUPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 20 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0155, size: body_size });
-        }
-
-        // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // area: Area
-        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            position,
-            map,
-            area,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

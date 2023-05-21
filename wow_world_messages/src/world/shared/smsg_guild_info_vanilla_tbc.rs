@@ -22,6 +22,45 @@ pub struct SMSG_GUILD_INFO {
 }
 
 impl crate::private::Sealed for SMSG_GUILD_INFO {}
+impl SMSG_GUILD_INFO {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(21..=276).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0088, size: body_size });
+        }
+
+        // guild_name: CString
+        let guild_name = {
+            let guild_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(guild_name)?
+        };
+
+        // created_day: u32
+        let created_day = crate::util::read_u32_le(&mut r)?;
+
+        // created_month: u32
+        let created_month = crate::util::read_u32_le(&mut r)?;
+
+        // created_year: u32
+        let created_year = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_characters_in_guild: u32
+        let amount_of_characters_in_guild = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_accounts_in_guild: u32
+        let amount_of_accounts_in_guild = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guild_name,
+            created_day,
+            created_month,
+            created_year,
+            amount_of_characters_in_guild,
+            amount_of_accounts_in_guild,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GUILD_INFO {
     const OPCODE: u32 = 0x0088;
 
@@ -96,40 +135,8 @@ impl crate::Message for SMSG_GUILD_INFO {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(21..=276).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0088, size: body_size });
-        }
-
-        // guild_name: CString
-        let guild_name = {
-            let guild_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(guild_name)?
-        };
-
-        // created_day: u32
-        let created_day = crate::util::read_u32_le(&mut r)?;
-
-        // created_month: u32
-        let created_month = crate::util::read_u32_le(&mut r)?;
-
-        // created_year: u32
-        let created_year = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_characters_in_guild: u32
-        let amount_of_characters_in_guild = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_accounts_in_guild: u32
-        let amount_of_accounts_in_guild = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guild_name,
-            created_day,
-            created_month,
-            created_year,
-            amount_of_characters_in_guild,
-            amount_of_accounts_in_guild,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

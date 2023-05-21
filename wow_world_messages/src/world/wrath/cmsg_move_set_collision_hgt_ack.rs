@@ -23,6 +23,34 @@ pub struct CMSG_MOVE_SET_COLLISION_HGT_ACK {
 }
 
 impl crate::private::Sealed for CMSG_MOVE_SET_COLLISION_HGT_ACK {}
+impl CMSG_MOVE_SET_COLLISION_HGT_ACK {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(40..=105).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0517, size: body_size });
+        }
+
+        // player: PackedGuid
+        let player = crate::util::read_packed_guid(&mut r)?;
+
+        // movement_counter: u32
+        let movement_counter = crate::util::read_u32_le(&mut r)?;
+
+        // info: MovementInfo
+        let info = MovementInfo::read(&mut r)?;
+
+        // new_height: f32
+        let new_height = crate::util::read_f32_le(&mut r)?;
+
+        Ok(Self {
+            player,
+            movement_counter,
+            info,
+            new_height,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_MOVE_SET_COLLISION_HGT_ACK {
     const OPCODE: u32 = 0x0517;
 
@@ -257,29 +285,8 @@ impl crate::Message for CMSG_MOVE_SET_COLLISION_HGT_ACK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(40..=105).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0517, size: body_size });
-        }
-
-        // player: PackedGuid
-        let player = crate::util::read_packed_guid(&mut r)?;
-
-        // movement_counter: u32
-        let movement_counter = crate::util::read_u32_le(&mut r)?;
-
-        // info: MovementInfo
-        let info = MovementInfo::read(&mut r)?;
-
-        // new_height: f32
-        let new_height = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            player,
-            movement_counter,
-            info,
-            new_height,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

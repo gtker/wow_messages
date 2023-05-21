@@ -13,6 +13,25 @@ pub struct SMSG_WHOIS {
 }
 
 impl crate::private::Sealed for SMSG_WHOIS {}
+impl SMSG_WHOIS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(1..=256).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0065, size: body_size });
+        }
+
+        // message: CString
+        let message = {
+            let message = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(message)?
+        };
+
+        Ok(Self {
+            message,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_WHOIS {
     const OPCODE: u32 = 0x0065;
 
@@ -62,20 +81,8 @@ impl crate::Message for SMSG_WHOIS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(1..=256).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0065, size: body_size });
-        }
-
-        // message: CString
-        let message = {
-            let message = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(message)?
-        };
-
-        Ok(Self {
-            message,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

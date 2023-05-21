@@ -14,6 +14,22 @@ pub struct SMSG_BATTLEGROUND_PLAYER_LEFT {
 }
 
 impl crate::private::Sealed for SMSG_BATTLEGROUND_PLAYER_LEFT {}
+impl SMSG_BATTLEGROUND_PLAYER_LEFT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02ED, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            guid,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_BATTLEGROUND_PLAYER_LEFT {
     const OPCODE: u32 = 0x02ed;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_BATTLEGROUND_PLAYER_LEFT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02ED, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            guid,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

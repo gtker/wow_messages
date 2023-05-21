@@ -20,6 +20,26 @@ pub struct SMSG_LOGOUT_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_LOGOUT_RESPONSE {}
+impl SMSG_LOGOUT_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 5 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x004C, size: body_size });
+        }
+
+        // result: LogoutResult
+        let result = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // speed: LogoutSpeed
+        let speed = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            result,
+            speed,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LOGOUT_RESPONSE {
     const OPCODE: u32 = 0x004c;
 
@@ -37,21 +57,8 @@ impl crate::Message for SMSG_LOGOUT_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 5 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x004C, size: body_size });
-        }
-
-        // result: LogoutResult
-        let result = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // speed: LogoutSpeed
-        let speed = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            result,
-            speed,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

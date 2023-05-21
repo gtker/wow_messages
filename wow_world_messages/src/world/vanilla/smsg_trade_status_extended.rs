@@ -32,6 +32,48 @@ pub struct SMSG_TRADE_STATUS_EXTENDED {
 }
 
 impl crate::private::Sealed for SMSG_TRADE_STATUS_EXTENDED {}
+impl SMSG_TRADE_STATUS_EXTENDED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 444 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0121, size: body_size });
+        }
+
+        // self_player: Bool
+        let self_player = crate::util::read_u8_le(&mut r)? != 0;
+
+        // trade_slot_count1: u32
+        let trade_slot_count1 = crate::util::read_u32_le(&mut r)?;
+
+        // trade_slot_count2: u32
+        let trade_slot_count2 = crate::util::read_u32_le(&mut r)?;
+
+        // money_in_trade: Gold
+        let money_in_trade = Gold::new(crate::util::read_u32_le(&mut r)?);
+
+        // spell_on_lowest_slot: u32
+        let spell_on_lowest_slot = crate::util::read_u32_le(&mut r)?;
+
+        // trade_slots: TradeSlot[7]
+        let trade_slots = {
+            let mut trade_slots = [TradeSlot::default(); 7];
+            for i in trade_slots.iter_mut() {
+                *i = TradeSlot::read(&mut r)?;
+            }
+            trade_slots
+        };
+
+        Ok(Self {
+            self_player,
+            trade_slot_count1,
+            trade_slot_count2,
+            money_in_trade,
+            spell_on_lowest_slot,
+            trade_slots,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
     const OPCODE: u32 = 0x0121;
 
@@ -144,43 +186,8 @@ impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 444 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0121, size: body_size });
-        }
-
-        // self_player: Bool
-        let self_player = crate::util::read_u8_le(&mut r)? != 0;
-
-        // trade_slot_count1: u32
-        let trade_slot_count1 = crate::util::read_u32_le(&mut r)?;
-
-        // trade_slot_count2: u32
-        let trade_slot_count2 = crate::util::read_u32_le(&mut r)?;
-
-        // money_in_trade: Gold
-        let money_in_trade = Gold::new(crate::util::read_u32_le(&mut r)?);
-
-        // spell_on_lowest_slot: u32
-        let spell_on_lowest_slot = crate::util::read_u32_le(&mut r)?;
-
-        // trade_slots: TradeSlot[7]
-        let trade_slots = {
-            let mut trade_slots = [TradeSlot::default(); 7];
-            for i in trade_slots.iter_mut() {
-                *i = TradeSlot::read(&mut r)?;
-            }
-            trade_slots
-        };
-
-        Ok(Self {
-            self_player,
-            trade_slot_count1,
-            trade_slot_count2,
-            money_in_trade,
-            spell_on_lowest_slot,
-            trade_slots,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

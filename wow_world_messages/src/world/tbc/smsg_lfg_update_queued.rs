@@ -12,6 +12,22 @@ pub struct SMSG_LFG_UPDATE_QUEUED {
 }
 
 impl crate::private::Sealed for SMSG_LFG_UPDATE_QUEUED {}
+impl SMSG_LFG_UPDATE_QUEUED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036F, size: body_size });
+        }
+
+        // queued: Bool
+        let queued = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            queued,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LFG_UPDATE_QUEUED {
     const OPCODE: u32 = 0x036f;
 
@@ -57,17 +73,8 @@ impl crate::Message for SMSG_LFG_UPDATE_QUEUED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036F, size: body_size });
-        }
-
-        // queued: Bool
-        let queued = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            queued,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

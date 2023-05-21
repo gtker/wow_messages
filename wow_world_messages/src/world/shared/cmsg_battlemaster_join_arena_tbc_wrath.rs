@@ -21,6 +21,34 @@ pub struct CMSG_BATTLEMASTER_JOIN_ARENA {
 }
 
 impl crate::private::Sealed for CMSG_BATTLEMASTER_JOIN_ARENA {}
+impl CMSG_BATTLEMASTER_JOIN_ARENA {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 11 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0358, size: body_size });
+        }
+
+        // battlemaster: Guid
+        let battlemaster = crate::util::read_guid(&mut r)?;
+
+        // arena_type: JoinArenaType
+        let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // as_group: Bool
+        let as_group = crate::util::read_u8_le(&mut r)? != 0;
+
+        // rated: Bool
+        let rated = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            battlemaster,
+            arena_type,
+            as_group,
+            rated,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_BATTLEMASTER_JOIN_ARENA {
     const OPCODE: u32 = 0x0358;
 
@@ -81,29 +109,8 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN_ARENA {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 11 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0358, size: body_size });
-        }
-
-        // battlemaster: Guid
-        let battlemaster = crate::util::read_guid(&mut r)?;
-
-        // arena_type: JoinArenaType
-        let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // as_group: Bool
-        let as_group = crate::util::read_u8_le(&mut r)? != 0;
-
-        // rated: Bool
-        let rated = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            battlemaster,
-            arena_type,
-            as_group,
-            rated,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

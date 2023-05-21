@@ -35,6 +35,2309 @@ pub struct SMSG_BATTLEFIELD_STATUS {
 }
 
 impl crate::private::Sealed for SMSG_BATTLEFIELD_STATUS {}
+impl SMSG_BATTLEFIELD_STATUS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(8..=22).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D4, size: body_size });
+        }
+
+        // queue_slot: u32
+        let queue_slot = crate::util::read_u32_le(&mut r)?;
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        let map_if = match map {
+            Map::EasternKingdoms => SMSG_BATTLEFIELD_STATUS_Map::EasternKingdoms,
+            Map::Kalimdor => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::Kalimdor {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::Testing => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::Testing {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::ScottTest => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::ScottTest {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::CashTest => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::CashTest {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::AlteracValley => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::AlteracValley {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::ShadowfangKeep => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::ShadowfangKeep {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::StormwindStockade => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::StormwindStockade {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::StormwindPrison => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::StormwindPrison {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::Deadmines => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::Deadmines {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::AzsharaCrater => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::AzsharaCrater {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::CollinsTest => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::CollinsTest {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::WailingCaverns => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::WailingCaverns {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::MonasteryUnused => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::MonasteryUnused {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::RazorfenKraul => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::RazorfenKraul {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::BlackfathomDeeps => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::BlackfathomDeeps {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::Uldaman => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::Uldaman {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::Gnomeregan => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::Gnomeregan {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::SunkenTemple => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::SunkenTemple {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::RazorfenDowns => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::RazorfenDowns {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::EmeraldDream => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::EmeraldDream {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::ScarletMonastery => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::ScarletMonastery {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::ZulFarrak => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::ZulFarrak {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::BlackrockSpire => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::BlackrockSpire {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::BlackrockDepths => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::BlackrockDepths {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::OnyxiasLair => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::OnyxiasLair {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::OpeningOfTheDarkPortal => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::OpeningOfTheDarkPortal {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::Scholomance => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::Scholomance {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::ZulGurub => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::ZulGurub {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::Stratholme => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::Stratholme {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::Maraudon => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::Maraudon {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::DeeprunTram => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::DeeprunTram {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::RagefireChasm => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::RagefireChasm {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::MoltenCore => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::MoltenCore {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::DireMaul => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::DireMaul {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::AlliancePvpBarracks => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::AlliancePvpBarracks {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::HordePvpBarracks => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::HordePvpBarracks {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::DevelopmentLand => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::DevelopmentLand {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::BlackwingLair => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::BlackwingLair {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::WarsongGulch => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::WarsongGulch {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::RuinsOfAhnQiraj => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::RuinsOfAhnQiraj {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::ArathiBasin => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::ArathiBasin {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::AhnQirajTemple => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::AhnQirajTemple {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+            Map::Naxxramas => {
+                // bracket: BattlegroundBracket
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // client_instance_id: u32
+                let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+                // status_id: StatusId
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                let status_id_if = match status_id {
+                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+                    StatusId::WaitQueue => {
+                        // average_wait_time_in_ms: u32
+                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_in_queue_in_ms: u32
+                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                            average_wait_time_in_ms,
+                            time_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::WaitJoin => {
+                        // time_to_remove_in_queue_in_ms: u32
+                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                            time_to_remove_in_queue_in_ms,
+                        }
+                    }
+                    StatusId::InProgress => {
+                        // time_to_bg_autoleave_in_ms: u32
+                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        // time_to_bg_start_in_ms: u32
+                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                            time_to_bg_autoleave_in_ms,
+                            time_to_bg_start_in_ms,
+                        }
+                    }
+                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+                };
+
+                SMSG_BATTLEFIELD_STATUS_Map::Naxxramas {
+                    bracket,
+                    client_instance_id,
+                    status_id: status_id_if,
+                }
+            }
+        };
+
+        Ok(Self {
+            queue_slot,
+            map: map_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_BATTLEFIELD_STATUS {
     const OPCODE: u32 = 0x02d4;
 
@@ -4913,2304 +7216,8 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(8..=22).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D4, size: body_size });
-        }
-
-        // queue_slot: u32
-        let queue_slot = crate::util::read_u32_le(&mut r)?;
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        let map_if = match map {
-            Map::EasternKingdoms => SMSG_BATTLEFIELD_STATUS_Map::EasternKingdoms,
-            Map::Kalimdor => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::Kalimdor {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::Testing => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::Testing {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::ScottTest => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::ScottTest {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::CashTest => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::CashTest {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::AlteracValley => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::AlteracValley {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::ShadowfangKeep => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::ShadowfangKeep {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::StormwindStockade => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::StormwindStockade {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::StormwindPrison => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::StormwindPrison {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::Deadmines => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::Deadmines {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::AzsharaCrater => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::AzsharaCrater {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::CollinsTest => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::CollinsTest {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::WailingCaverns => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::WailingCaverns {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::MonasteryUnused => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::MonasteryUnused {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::RazorfenKraul => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::RazorfenKraul {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::BlackfathomDeeps => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::BlackfathomDeeps {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::Uldaman => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::Uldaman {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::Gnomeregan => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::Gnomeregan {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::SunkenTemple => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::SunkenTemple {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::RazorfenDowns => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::RazorfenDowns {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::EmeraldDream => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::EmeraldDream {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::ScarletMonastery => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::ScarletMonastery {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::ZulFarrak => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::ZulFarrak {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::BlackrockSpire => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::BlackrockSpire {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::BlackrockDepths => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::BlackrockDepths {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::OnyxiasLair => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::OnyxiasLair {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::OpeningOfTheDarkPortal => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::OpeningOfTheDarkPortal {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::Scholomance => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::Scholomance {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::ZulGurub => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::ZulGurub {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::Stratholme => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::Stratholme {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::Maraudon => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::Maraudon {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::DeeprunTram => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::DeeprunTram {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::RagefireChasm => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::RagefireChasm {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::MoltenCore => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::MoltenCore {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::DireMaul => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::DireMaul {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::AlliancePvpBarracks => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::AlliancePvpBarracks {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::HordePvpBarracks => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::HordePvpBarracks {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::DevelopmentLand => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::DevelopmentLand {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::BlackwingLair => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::BlackwingLair {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::WarsongGulch => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::WarsongGulch {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::RuinsOfAhnQiraj => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::RuinsOfAhnQiraj {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::ArathiBasin => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::ArathiBasin {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::AhnQirajTemple => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::AhnQirajTemple {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-            Map::Naxxramas => {
-                // bracket: BattlegroundBracket
-                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // client_instance_id: u32
-                let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-                // status_id: StatusId
-                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                let status_id_if = match status_id {
-                    StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-                    StatusId::WaitQueue => {
-                        // average_wait_time_in_ms: u32
-                        let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_in_queue_in_ms: u32
-                        let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                            average_wait_time_in_ms,
-                            time_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::WaitJoin => {
-                        // time_to_remove_in_queue_in_ms: u32
-                        let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                            time_to_remove_in_queue_in_ms,
-                        }
-                    }
-                    StatusId::InProgress => {
-                        // time_to_bg_autoleave_in_ms: u32
-                        let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        // time_to_bg_start_in_ms: u32
-                        let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                            time_to_bg_autoleave_in_ms,
-                            time_to_bg_start_in_ms,
-                        }
-                    }
-                    StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-                };
-
-                SMSG_BATTLEFIELD_STATUS_Map::Naxxramas {
-                    bracket,
-                    client_instance_id,
-                    status_id: status_id_if,
-                }
-            }
-        };
-
-        Ok(Self {
-            queue_slot,
-            map: map_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

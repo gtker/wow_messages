@@ -22,6 +22,38 @@ pub struct SMSG_SPELLHEALLOG {
 }
 
 impl crate::private::Sealed for SMSG_SPELLHEALLOG {}
+impl SMSG_SPELLHEALLOG {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(13..=27).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0150, size: body_size });
+        }
+
+        // victim: PackedGuid
+        let victim = crate::util::read_packed_guid(&mut r)?;
+
+        // caster: PackedGuid
+        let caster = crate::util::read_packed_guid(&mut r)?;
+
+        // id: u32
+        let id = crate::util::read_u32_le(&mut r)?;
+
+        // damage: u32
+        let damage = crate::util::read_u32_le(&mut r)?;
+
+        // critical: Bool
+        let critical = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            victim,
+            caster,
+            id,
+            damage,
+            critical,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SPELLHEALLOG {
     const OPCODE: u32 = 0x0150;
 
@@ -87,33 +119,8 @@ impl crate::Message for SMSG_SPELLHEALLOG {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(13..=27).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0150, size: body_size });
-        }
-
-        // victim: PackedGuid
-        let victim = crate::util::read_packed_guid(&mut r)?;
-
-        // caster: PackedGuid
-        let caster = crate::util::read_packed_guid(&mut r)?;
-
-        // id: u32
-        let id = crate::util::read_u32_le(&mut r)?;
-
-        // damage: u32
-        let damage = crate::util::read_u32_le(&mut r)?;
-
-        // critical: Bool
-        let critical = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            victim,
-            caster,
-            id,
-            damage,
-            critical,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

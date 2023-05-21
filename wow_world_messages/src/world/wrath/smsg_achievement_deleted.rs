@@ -12,6 +12,22 @@ pub struct SMSG_ACHIEVEMENT_DELETED {
 }
 
 impl crate::private::Sealed for SMSG_ACHIEVEMENT_DELETED {}
+impl SMSG_ACHIEVEMENT_DELETED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x049F, size: body_size });
+        }
+
+        // achievement: u32
+        let achievement = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            achievement,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ACHIEVEMENT_DELETED {
     const OPCODE: u32 = 0x049f;
 
@@ -57,17 +73,8 @@ impl crate::Message for SMSG_ACHIEVEMENT_DELETED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x049F, size: body_size });
-        }
-
-        // achievement: u32
-        let achievement = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            achievement,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

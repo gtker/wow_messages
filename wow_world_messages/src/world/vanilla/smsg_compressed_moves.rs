@@ -19,6 +19,36 @@ pub struct SMSG_COMPRESSED_MOVES {
 }
 
 impl crate::private::Sealed for SMSG_COMPRESSED_MOVES {}
+impl SMSG_COMPRESSED_MOVES {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size > 65535 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02FB, size: body_size });
+        }
+
+        let decompressed_size = crate::util::read_u32_le(r)?;;
+        let decompressed_buffer = vec![0; decompressed_size as usize];
+        let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);
+
+        // moves: CompressedMove[-]
+        let moves = {
+            let mut current_size = {
+                0
+            };
+            let mut moves = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                moves.push(CompressedMove::read(&mut r)?);
+                current_size += 1;
+            }
+            moves
+        };
+
+        Ok(Self {
+            moves,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_COMPRESSED_MOVES {
     const OPCODE: u32 = 0x02fb;
 
@@ -505,31 +535,8 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size > 65535 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02FB, size: body_size });
-        }
-
-        let decompressed_size = crate::util::read_u32_le(r)?;;
-        let decompressed_buffer = vec![0; decompressed_size as usize];
-        let mut r = &mut flate2::read::ZlibDecoder::new_with_buf(r, decompressed_buffer);
-
-        // moves: CompressedMove[-]
-        let moves = {
-            let mut current_size = {
-                0
-            };
-            let mut moves = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                moves.push(CompressedMove::read(&mut r)?);
-                current_size += 1;
-            }
-            moves
-        };
-
-        Ok(Self {
-            moves,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

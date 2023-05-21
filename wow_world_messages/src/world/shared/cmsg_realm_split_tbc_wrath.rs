@@ -14,6 +14,22 @@ pub struct CMSG_REALM_SPLIT {
 }
 
 impl crate::private::Sealed for CMSG_REALM_SPLIT {}
+impl CMSG_REALM_SPLIT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x038C, size: body_size });
+        }
+
+        // realm_id: u32
+        let realm_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            realm_id,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_REALM_SPLIT {
     const OPCODE: u32 = 0x038c;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_REALM_SPLIT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x038C, size: body_size });
-        }
-
-        // realm_id: u32
-        let realm_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            realm_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

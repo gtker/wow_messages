@@ -19,6 +19,30 @@ pub struct SMSG_POWER_UPDATE {
 }
 
 impl crate::private::Sealed for SMSG_POWER_UPDATE {}
+impl SMSG_POWER_UPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(7..=14).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0480, size: body_size });
+        }
+
+        // unit: PackedGuid
+        let unit = crate::util::read_packed_guid(&mut r)?;
+
+        // power: Power
+        let power = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // amount: u32
+        let amount = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            unit,
+            power,
+            amount,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_POWER_UPDATE {
     const OPCODE: u32 = 0x0480;
 
@@ -74,25 +98,8 @@ impl crate::Message for SMSG_POWER_UPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(7..=14).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0480, size: body_size });
-        }
-
-        // unit: PackedGuid
-        let unit = crate::util::read_packed_guid(&mut r)?;
-
-        // power: Power
-        let power = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // amount: u32
-        let amount = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            unit,
-            power,
-            amount,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -18,6 +18,26 @@ pub struct SMSG_MEETINGSTONE_SETQUEUE {
 }
 
 impl crate::private::Sealed for SMSG_MEETINGSTONE_SETQUEUE {}
+impl SMSG_MEETINGSTONE_SETQUEUE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 5 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0295, size: body_size });
+        }
+
+        // area: Area
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // status: MeetingStoneStatus
+        let status = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            area,
+            status,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_MEETINGSTONE_SETQUEUE {
     const OPCODE: u32 = 0x0295;
 
@@ -68,21 +88,8 @@ impl crate::Message for SMSG_MEETINGSTONE_SETQUEUE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 5 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0295, size: body_size });
-        }
-
-        // area: Area
-        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // status: MeetingStoneStatus
-        let status = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            area,
-            status,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

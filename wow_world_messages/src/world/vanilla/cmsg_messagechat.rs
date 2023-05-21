@@ -26,57 +26,8 @@ pub struct CMSG_MESSAGECHAT {
 }
 
 impl crate::private::Sealed for CMSG_MESSAGECHAT {}
-impl crate::Message for CMSG_MESSAGECHAT {
-    const OPCODE: u32 = 0x0095;
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // chat_type: ChatType
-        w.write_all(&(self.chat_type.as_int().to_le_bytes()))?;
-
-        // language: Language
-        w.write_all(&(self.language.as_int().to_le_bytes()))?;
-
-        match &self.chat_type {
-            CMSG_MESSAGECHAT_ChatType::Whisper {
-                target_player,
-            } => {
-                // target_player: CString
-                // TODO: Guard against strings that are already null-terminated
-                assert_ne!(target_player.as_bytes().iter().rev().next(), Some(&0_u8), "String `target_player` must not be null-terminated.");
-                w.write_all(target_player.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            CMSG_MESSAGECHAT_ChatType::Channel {
-                channel,
-            } => {
-                // channel: CString
-                // TODO: Guard against strings that are already null-terminated
-                assert_ne!(channel.as_bytes().iter().rev().next(), Some(&0_u8), "String `channel` must not be null-terminated.");
-                w.write_all(channel.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            _ => {}
-        }
-
-        // message: CString
-        // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.message.as_bytes().iter().rev().next(), Some(&0_u8), "String `message` must not be null-terminated.");
-        w.write_all(self.message.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl CMSG_MESSAGECHAT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(9..=520).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0095, size: body_size });
         }
@@ -156,6 +107,62 @@ impl crate::Message for CMSG_MESSAGECHAT {
             language,
             message,
         })
+    }
+
+}
+
+impl crate::Message for CMSG_MESSAGECHAT {
+    const OPCODE: u32 = 0x0095;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // chat_type: ChatType
+        w.write_all(&(self.chat_type.as_int().to_le_bytes()))?;
+
+        // language: Language
+        w.write_all(&(self.language.as_int().to_le_bytes()))?;
+
+        match &self.chat_type {
+            CMSG_MESSAGECHAT_ChatType::Whisper {
+                target_player,
+            } => {
+                // target_player: CString
+                // TODO: Guard against strings that are already null-terminated
+                assert_ne!(target_player.as_bytes().iter().rev().next(), Some(&0_u8), "String `target_player` must not be null-terminated.");
+                w.write_all(target_player.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            CMSG_MESSAGECHAT_ChatType::Channel {
+                channel,
+            } => {
+                // channel: CString
+                // TODO: Guard against strings that are already null-terminated
+                assert_ne!(channel.as_bytes().iter().rev().next(), Some(&0_u8), "String `channel` must not be null-terminated.");
+                w.write_all(channel.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            _ => {}
+        }
+
+        // message: CString
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.message.as_bytes().iter().rev().next(), Some(&0_u8), "String `message` must not be null-terminated.");
+        w.write_all(self.message.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

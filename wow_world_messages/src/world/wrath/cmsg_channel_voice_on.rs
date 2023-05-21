@@ -10,6 +10,18 @@ pub struct CMSG_CHANNEL_VOICE_ON {
 }
 
 impl crate::private::Sealed for CMSG_CHANNEL_VOICE_ON {}
+impl CMSG_CHANNEL_VOICE_ON {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 0 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03D6, size: body_size });
+        }
+
+        Ok(Self {
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CHANNEL_VOICE_ON {
     const OPCODE: u32 = 0x03d6;
 
@@ -50,13 +62,8 @@ impl crate::Message for CMSG_CHANNEL_VOICE_ON {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03D6, size: body_size });
-        }
-
-        Ok(Self {
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

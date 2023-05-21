@@ -16,6 +16,36 @@ pub struct SMSG_INSPECT_TALENT {
 }
 
 impl crate::private::Sealed for SMSG_INSPECT_TALENT {}
+impl SMSG_INSPECT_TALENT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=65544).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F3, size: body_size });
+        }
+
+        // player: PackedGuid
+        let player = crate::util::read_packed_guid(&mut r)?;
+
+        // talent_data: u8[-]
+        let talent_data = {
+            let mut current_size = {
+                crate::util::packed_guid_size(&player) // player: PackedGuid
+            };
+            let mut talent_data = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                talent_data.push(crate::util::read_u8_le(&mut r)?);
+                current_size += 1;
+            }
+            talent_data
+        };
+
+        Ok(Self {
+            player,
+            talent_data,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_INSPECT_TALENT {
     const OPCODE: u32 = 0x03f3;
 
@@ -72,31 +102,8 @@ impl crate::Message for SMSG_INSPECT_TALENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=65544).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F3, size: body_size });
-        }
-
-        // player: PackedGuid
-        let player = crate::util::read_packed_guid(&mut r)?;
-
-        // talent_data: u8[-]
-        let talent_data = {
-            let mut current_size = {
-                crate::util::packed_guid_size(&player) // player: PackedGuid
-            };
-            let mut talent_data = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                talent_data.push(crate::util::read_u8_le(&mut r)?);
-                current_size += 1;
-            }
-            talent_data
-        };
-
-        Ok(Self {
-            player,
-            talent_data,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -18,6 +18,31 @@ pub struct SMSG_LFG_PARTY_INFO {
 }
 
 impl crate::private::Sealed for SMSG_LFG_PARTY_INFO {}
+impl SMSG_LFG_PARTY_INFO {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(1..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0372, size: body_size });
+        }
+
+        // amount_of_infos: u8
+        let amount_of_infos = crate::util::read_u8_le(&mut r)?;
+
+        // infos: LfgPartyInfo[amount_of_infos]
+        let infos = {
+            let mut infos = Vec::with_capacity(amount_of_infos as usize);
+            for _ in 0..amount_of_infos {
+                infos.push(LfgPartyInfo::read(&mut r)?);
+            }
+            infos
+        };
+
+        Ok(Self {
+            infos,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LFG_PARTY_INFO {
     const OPCODE: u32 = 0x0372;
 
@@ -108,26 +133,8 @@ impl crate::Message for SMSG_LFG_PARTY_INFO {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(1..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0372, size: body_size });
-        }
-
-        // amount_of_infos: u8
-        let amount_of_infos = crate::util::read_u8_le(&mut r)?;
-
-        // infos: LfgPartyInfo[amount_of_infos]
-        let infos = {
-            let mut infos = Vec::with_capacity(amount_of_infos as usize);
-            for _ in 0..amount_of_infos {
-                infos.push(LfgPartyInfo::read(&mut r)?);
-            }
-            infos
-        };
-
-        Ok(Self {
-            infos,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

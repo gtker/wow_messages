@@ -20,6 +20,39 @@ pub struct SMSG_BATTLEFIELD_LIST {
 }
 
 impl crate::private::Sealed for SMSG_BATTLEFIELD_LIST {}
+impl SMSG_BATTLEFIELD_LIST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(16..=65535).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023D, size: body_size });
+        }
+
+        // battlemaster: Guid
+        let battlemaster = crate::util::read_guid(&mut r)?;
+
+        // battleground_type: BattlegroundType
+        let battleground_type = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // number_of_battlegrounds: u32
+        let number_of_battlegrounds = crate::util::read_u32_le(&mut r)?;
+
+        // battlegrounds: u32[number_of_battlegrounds]
+        let battlegrounds = {
+            let mut battlegrounds = Vec::with_capacity(number_of_battlegrounds as usize);
+            for _ in 0..number_of_battlegrounds {
+                battlegrounds.push(crate::util::read_u32_le(&mut r)?);
+            }
+            battlegrounds
+        };
+
+        Ok(Self {
+            battlemaster,
+            battleground_type,
+            battlegrounds,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_BATTLEFIELD_LIST {
     const OPCODE: u32 = 0x023d;
 
@@ -92,34 +125,8 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(16..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023D, size: body_size });
-        }
-
-        // battlemaster: Guid
-        let battlemaster = crate::util::read_guid(&mut r)?;
-
-        // battleground_type: BattlegroundType
-        let battleground_type = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // number_of_battlegrounds: u32
-        let number_of_battlegrounds = crate::util::read_u32_le(&mut r)?;
-
-        // battlegrounds: u32[number_of_battlegrounds]
-        let battlegrounds = {
-            let mut battlegrounds = Vec::with_capacity(number_of_battlegrounds as usize);
-            for _ in 0..number_of_battlegrounds {
-                battlegrounds.push(crate::util::read_u32_le(&mut r)?);
-            }
-            battlegrounds
-        };
-
-        Ok(Self {
-            battlemaster,
-            battleground_type,
-            battlegrounds,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

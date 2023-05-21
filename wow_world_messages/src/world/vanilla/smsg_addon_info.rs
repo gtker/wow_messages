@@ -16,6 +16,32 @@ pub struct SMSG_ADDON_INFO {
 }
 
 impl crate::private::Sealed for SMSG_ADDON_INFO {}
+impl SMSG_ADDON_INFO {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size > 65535 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EF, size: body_size });
+        }
+
+        // addons: Addon[-]
+        let addons = {
+            let mut current_size = {
+                0
+            };
+            let mut addons = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                addons.push(Addon::read(&mut r)?);
+                current_size += 1;
+            }
+            addons
+        };
+
+        Ok(Self {
+            addons,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ADDON_INFO {
     const OPCODE: u32 = 0x02ef;
 
@@ -257,27 +283,8 @@ impl crate::Message for SMSG_ADDON_INFO {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size > 65535 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EF, size: body_size });
-        }
-
-        // addons: Addon[-]
-        let addons = {
-            let mut current_size = {
-                0
-            };
-            let mut addons = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                addons.push(Addon::read(&mut r)?);
-                current_size += 1;
-            }
-            addons
-        };
-
-        Ok(Self {
-            addons,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -23,6 +23,34 @@ pub struct CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
 }
 
 impl crate::private::Sealed for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {}
+impl CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(40..=105).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02DB, size: body_size });
+        }
+
+        // guid: PackedGuid
+        let guid = crate::util::read_packed_guid(&mut r)?;
+
+        // counter: u32
+        let counter = crate::util::read_u32_le(&mut r)?;
+
+        // info: MovementInfo
+        let info = MovementInfo::read(&mut r)?;
+
+        // new_speed: f32
+        let new_speed = crate::util::read_f32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            counter,
+            info,
+            new_speed,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
     const OPCODE: u32 = 0x02db;
 
@@ -257,29 +285,8 @@ impl crate::Message for CMSG_FORCE_WALK_SPEED_CHANGE_ACK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(40..=105).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02DB, size: body_size });
-        }
-
-        // guid: PackedGuid
-        let guid = crate::util::read_packed_guid(&mut r)?;
-
-        // counter: u32
-        let counter = crate::util::read_u32_le(&mut r)?;
-
-        // info: MovementInfo
-        let info = MovementInfo::read(&mut r)?;
-
-        // new_speed: f32
-        let new_speed = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            counter,
-            info,
-            new_speed,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

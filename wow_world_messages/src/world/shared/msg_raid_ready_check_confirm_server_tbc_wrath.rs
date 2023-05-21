@@ -16,6 +16,26 @@ pub struct MSG_RAID_READY_CHECK_CONFIRM_Server {
 }
 
 impl crate::private::Sealed for MSG_RAID_READY_CHECK_CONFIRM_Server {}
+impl MSG_RAID_READY_CHECK_CONFIRM_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 9 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03AE, size: body_size });
+        }
+
+        // player: Guid
+        let player = crate::util::read_guid(&mut r)?;
+
+        // state: u8
+        let state = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            player,
+            state,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_RAID_READY_CHECK_CONFIRM_Server {
     const OPCODE: u32 = 0x03ae;
 
@@ -66,21 +86,8 @@ impl crate::Message for MSG_RAID_READY_CHECK_CONFIRM_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 9 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03AE, size: body_size });
-        }
-
-        // player: Guid
-        let player = crate::util::read_guid(&mut r)?;
-
-        // state: u8
-        let state = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            player,
-            state,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

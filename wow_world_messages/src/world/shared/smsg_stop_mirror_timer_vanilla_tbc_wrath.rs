@@ -14,6 +14,22 @@ pub struct SMSG_STOP_MIRROR_TIMER {
 }
 
 impl crate::private::Sealed for SMSG_STOP_MIRROR_TIMER {}
+impl SMSG_STOP_MIRROR_TIMER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01DB, size: body_size });
+        }
+
+        // timer: TimerType
+        let timer = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            timer,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_STOP_MIRROR_TIMER {
     const OPCODE: u32 = 0x01db;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_STOP_MIRROR_TIMER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01DB, size: body_size });
-        }
-
-        // timer: TimerType
-        let timer = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            timer,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

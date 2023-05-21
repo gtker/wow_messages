@@ -14,6 +14,32 @@ pub struct CMSG_JOIN_CHANNEL {
 }
 
 impl crate::private::Sealed for CMSG_JOIN_CHANNEL {}
+impl CMSG_JOIN_CHANNEL {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=512).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0097, size: body_size });
+        }
+
+        // channel_name: CString
+        let channel_name = {
+            let channel_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(channel_name)?
+        };
+
+        // channel_password: CString
+        let channel_password = {
+            let channel_password = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(channel_password)?
+        };
+
+        Ok(Self {
+            channel_name,
+            channel_password,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_JOIN_CHANNEL {
     const OPCODE: u32 = 0x0097;
 
@@ -39,27 +65,8 @@ impl crate::Message for CMSG_JOIN_CHANNEL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=512).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0097, size: body_size });
-        }
-
-        // channel_name: CString
-        let channel_name = {
-            let channel_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(channel_name)?
-        };
-
-        // channel_password: CString
-        let channel_password = {
-            let channel_password = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(channel_password)?
-        };
-
-        Ok(Self {
-            channel_name,
-            channel_password,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

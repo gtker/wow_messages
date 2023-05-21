@@ -18,6 +18,34 @@ pub struct CMSG_WRAP_ITEM {
 }
 
 impl crate::private::Sealed for CMSG_WRAP_ITEM {}
+impl CMSG_WRAP_ITEM {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D3, size: body_size });
+        }
+
+        // gift_bag_index: u8
+        let gift_bag_index = crate::util::read_u8_le(&mut r)?;
+
+        // gift_slot: u8
+        let gift_slot = crate::util::read_u8_le(&mut r)?;
+
+        // item_bag_index: u8
+        let item_bag_index = crate::util::read_u8_le(&mut r)?;
+
+        // item_slot: u8
+        let item_slot = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            gift_bag_index,
+            gift_slot,
+            item_bag_index,
+            item_slot,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_WRAP_ITEM {
     const OPCODE: u32 = 0x01d3;
 
@@ -78,29 +106,8 @@ impl crate::Message for CMSG_WRAP_ITEM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D3, size: body_size });
-        }
-
-        // gift_bag_index: u8
-        let gift_bag_index = crate::util::read_u8_le(&mut r)?;
-
-        // gift_slot: u8
-        let gift_slot = crate::util::read_u8_le(&mut r)?;
-
-        // item_bag_index: u8
-        let item_bag_index = crate::util::read_u8_le(&mut r)?;
-
-        // item_slot: u8
-        let item_slot = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            gift_bag_index,
-            gift_slot,
-            item_bag_index,
-            item_slot,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -18,6 +18,32 @@ pub struct SMSG_NPC_TEXT_UPDATE {
 }
 
 impl crate::private::Sealed for SMSG_NPC_TEXT_UPDATE {}
+impl SMSG_NPC_TEXT_UPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(276..=4356).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0180, size: body_size });
+        }
+
+        // text_id: u32
+        let text_id = crate::util::read_u32_le(&mut r)?;
+
+        // texts: NpcTextUpdate[8]
+        let texts = {
+            let mut texts = [(); 8].map(|_| NpcTextUpdate::default());
+            for i in texts.iter_mut() {
+                *i = NpcTextUpdate::read(&mut r)?;
+            }
+            texts
+        };
+
+        Ok(Self {
+            text_id,
+            texts,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_NPC_TEXT_UPDATE {
     const OPCODE: u32 = 0x0180;
 
@@ -114,27 +140,8 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(276..=4356).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0180, size: body_size });
-        }
-
-        // text_id: u32
-        let text_id = crate::util::read_u32_le(&mut r)?;
-
-        // texts: NpcTextUpdate[8]
-        let texts = {
-            let mut texts = [(); 8].map(|_| NpcTextUpdate::default());
-            for i in texts.iter_mut() {
-                *i = NpcTextUpdate::read(&mut r)?;
-            }
-            texts
-        };
-
-        Ok(Self {
-            text_id,
-            texts,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

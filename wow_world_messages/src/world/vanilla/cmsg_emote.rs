@@ -14,6 +14,22 @@ pub struct CMSG_EMOTE {
 }
 
 impl crate::private::Sealed for CMSG_EMOTE {}
+impl CMSG_EMOTE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0102, size: body_size });
+        }
+
+        // emote: Emote
+        let emote = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            emote,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_EMOTE {
     const OPCODE: u32 = 0x0102;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_EMOTE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0102, size: body_size });
-        }
-
-        // emote: Emote
-        let emote = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            emote,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

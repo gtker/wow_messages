@@ -12,6 +12,25 @@ pub struct CMSG_SET_CHANNEL_WATCH {
 }
 
 impl crate::private::Sealed for CMSG_SET_CHANNEL_WATCH {}
+impl CMSG_SET_CHANNEL_WATCH {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(1..=256).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03EF, size: body_size });
+        }
+
+        // channel: CString
+        let channel = {
+            let channel = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(channel)?
+        };
+
+        Ok(Self {
+            channel,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_SET_CHANNEL_WATCH {
     const OPCODE: u32 = 0x03ef;
 
@@ -61,20 +80,8 @@ impl crate::Message for CMSG_SET_CHANNEL_WATCH {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(1..=256).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03EF, size: body_size });
-        }
-
-        // channel: CString
-        let channel = {
-            let channel = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(channel)?
-        };
-
-        Ok(Self {
-            channel,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -17,6 +17,26 @@ pub struct SMSG_PET_DISMISS_SOUND {
 }
 
 impl crate::private::Sealed for SMSG_PET_DISMISS_SOUND {}
+impl SMSG_PET_DISMISS_SOUND {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0325, size: body_size });
+        }
+
+        // sound_id: u32
+        let sound_id = crate::util::read_u32_le(&mut r)?;
+
+        // position: Vector3d
+        let position = Vector3d::read(&mut r)?;
+
+        Ok(Self {
+            sound_id,
+            position,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PET_DISMISS_SOUND {
     const OPCODE: u32 = 0x0325;
 
@@ -78,21 +98,8 @@ impl crate::Message for SMSG_PET_DISMISS_SOUND {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0325, size: body_size });
-        }
-
-        // sound_id: u32
-        let sound_id = crate::util::read_u32_le(&mut r)?;
-
-        // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
-
-        Ok(Self {
-            sound_id,
-            position,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -20,6 +20,34 @@ pub struct SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
 }
 
 impl crate::private::Sealed for SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {}
+impl SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(12..=19).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0445, size: body_size });
+        }
+
+        // invitee: PackedGuid
+        let invitee = crate::util::read_packed_guid(&mut r)?;
+
+        // event_id: Guid
+        let event_id = crate::util::read_guid(&mut r)?;
+
+        // rank: u8
+        let rank = crate::util::read_u8_le(&mut r)?;
+
+        // show_alert: Bool
+        let show_alert = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            invitee,
+            event_id,
+            rank,
+            show_alert,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
     const OPCODE: u32 = 0x0445;
 
@@ -80,29 +108,8 @@ impl crate::Message for SMSG_CALENDAR_EVENT_MODERATOR_STATUS_ALERT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(12..=19).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0445, size: body_size });
-        }
-
-        // invitee: PackedGuid
-        let invitee = crate::util::read_packed_guid(&mut r)?;
-
-        // event_id: Guid
-        let event_id = crate::util::read_guid(&mut r)?;
-
-        // rank: u8
-        let rank = crate::util::read_u8_le(&mut r)?;
-
-        // show_alert: Bool
-        let show_alert = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            invitee,
-            event_id,
-            rank,
-            show_alert,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

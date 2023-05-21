@@ -12,6 +12,22 @@ pub struct SMSG_GMRESPONSE_STATUS_UPDATE {
 }
 
 impl crate::private::Sealed for SMSG_GMRESPONSE_STATUS_UPDATE {}
+impl SMSG_GMRESPONSE_STATUS_UPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04F1, size: body_size });
+        }
+
+        // show_survey: Bool
+        let show_survey = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            show_survey,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GMRESPONSE_STATUS_UPDATE {
     const OPCODE: u32 = 0x04f1;
 
@@ -57,17 +73,8 @@ impl crate::Message for SMSG_GMRESPONSE_STATUS_UPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04F1, size: body_size });
-        }
-
-        // show_survey: Bool
-        let show_survey = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            show_survey,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

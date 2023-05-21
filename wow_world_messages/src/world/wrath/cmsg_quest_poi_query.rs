@@ -13,6 +13,31 @@ pub struct CMSG_QUEST_POI_QUERY {
 }
 
 impl crate::private::Sealed for CMSG_QUEST_POI_QUERY {}
+impl CMSG_QUEST_POI_QUERY {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=10240).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01E3, size: body_size });
+        }
+
+        // amount_of_pois: u32
+        let amount_of_pois = crate::util::read_u32_le(&mut r)?;
+
+        // points_of_interests: u32[amount_of_pois]
+        let points_of_interests = {
+            let mut points_of_interests = Vec::with_capacity(amount_of_pois as usize);
+            for _ in 0..amount_of_pois {
+                points_of_interests.push(crate::util::read_u32_le(&mut r)?);
+            }
+            points_of_interests
+        };
+
+        Ok(Self {
+            points_of_interests,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_QUEST_POI_QUERY {
     const OPCODE: u32 = 0x01e3;
 
@@ -75,26 +100,8 @@ impl crate::Message for CMSG_QUEST_POI_QUERY {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=10240).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01E3, size: body_size });
-        }
-
-        // amount_of_pois: u32
-        let amount_of_pois = crate::util::read_u32_le(&mut r)?;
-
-        // points_of_interests: u32[amount_of_pois]
-        let points_of_interests = {
-            let mut points_of_interests = Vec::with_capacity(amount_of_pois as usize);
-            for _ in 0..amount_of_pois {
-                points_of_interests.push(crate::util::read_u32_le(&mut r)?);
-            }
-            points_of_interests
-        };
-
-        Ok(Self {
-            points_of_interests,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

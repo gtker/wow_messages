@@ -10,6 +10,18 @@ pub struct CMSG_GMTICKETSYSTEM_TOGGLE {
 }
 
 impl crate::private::Sealed for CMSG_GMTICKETSYSTEM_TOGGLE {}
+impl CMSG_GMTICKETSYSTEM_TOGGLE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 0 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x029A, size: body_size });
+        }
+
+        Ok(Self {
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GMTICKETSYSTEM_TOGGLE {
     const OPCODE: u32 = 0x029a;
 
@@ -50,13 +62,8 @@ impl crate::Message for CMSG_GMTICKETSYSTEM_TOGGLE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x029A, size: body_size });
-        }
-
-        Ok(Self {
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

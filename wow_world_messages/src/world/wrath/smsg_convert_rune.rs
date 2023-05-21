@@ -14,6 +14,26 @@ pub struct SMSG_CONVERT_RUNE {
 }
 
 impl crate::private::Sealed for SMSG_CONVERT_RUNE {}
+impl SMSG_CONVERT_RUNE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 2 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0486, size: body_size });
+        }
+
+        // index: u8
+        let index = crate::util::read_u8_le(&mut r)?;
+
+        // new_type: u8
+        let new_type = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            index,
+            new_type,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CONVERT_RUNE {
     const OPCODE: u32 = 0x0486;
 
@@ -64,21 +84,8 @@ impl crate::Message for SMSG_CONVERT_RUNE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 2 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0486, size: body_size });
-        }
-
-        // index: u8
-        let index = crate::util::read_u8_le(&mut r)?;
-
-        // new_type: u8
-        let new_type = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            index,
-            new_type,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

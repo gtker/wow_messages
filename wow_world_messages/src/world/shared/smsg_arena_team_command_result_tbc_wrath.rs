@@ -21,6 +21,40 @@ pub struct SMSG_ARENA_TEAM_COMMAND_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_ARENA_TEAM_COMMAND_RESULT {}
+impl SMSG_ARENA_TEAM_COMMAND_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(10..=520).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0349, size: body_size });
+        }
+
+        // command: ArenaTeamCommand
+        let command = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // team: CString
+        let team = {
+            let team = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(team)?
+        };
+
+        // player: CString
+        let player = {
+            let player = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(player)?
+        };
+
+        // error: ArenaTeamCommandError
+        let error = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            command,
+            team,
+            player,
+            error,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ARENA_TEAM_COMMAND_RESULT {
     const OPCODE: u32 = 0x0349;
 
@@ -89,35 +123,8 @@ impl crate::Message for SMSG_ARENA_TEAM_COMMAND_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(10..=520).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0349, size: body_size });
-        }
-
-        // command: ArenaTeamCommand
-        let command = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // team: CString
-        let team = {
-            let team = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(team)?
-        };
-
-        // player: CString
-        let player = {
-            let player = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(player)?
-        };
-
-        // error: ArenaTeamCommandError
-        let error = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            command,
-            team,
-            player,
-            error,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

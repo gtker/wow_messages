@@ -18,6 +18,26 @@ pub struct CMSG_BATTLEFIELD_PORT {
 }
 
 impl crate::private::Sealed for CMSG_BATTLEFIELD_PORT {}
+impl CMSG_BATTLEFIELD_PORT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 5 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D5, size: body_size });
+        }
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // action: BattlefieldPortAction
+        let action = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            map,
+            action,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_BATTLEFIELD_PORT {
     const OPCODE: u32 = 0x02d5;
 
@@ -68,21 +88,8 @@ impl crate::Message for CMSG_BATTLEFIELD_PORT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 5 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D5, size: body_size });
-        }
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // action: BattlefieldPortAction
-        let action = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            map,
-            action,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

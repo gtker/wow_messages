@@ -12,6 +12,25 @@ pub struct CMSG_GUILD_LEADER {
 }
 
 impl crate::private::Sealed for CMSG_GUILD_LEADER {}
+impl CMSG_GUILD_LEADER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(1..=256).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0090, size: body_size });
+        }
+
+        // new_guild_leader_name: CString
+        let new_guild_leader_name = {
+            let new_guild_leader_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(new_guild_leader_name)?
+        };
+
+        Ok(Self {
+            new_guild_leader_name,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GUILD_LEADER {
     const OPCODE: u32 = 0x0090;
 
@@ -61,20 +80,8 @@ impl crate::Message for CMSG_GUILD_LEADER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(1..=256).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0090, size: body_size });
-        }
-
-        // new_guild_leader_name: CString
-        let new_guild_leader_name = {
-            let new_guild_leader_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(new_guild_leader_name)?
-        };
-
-        Ok(Self {
-            new_guild_leader_name,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

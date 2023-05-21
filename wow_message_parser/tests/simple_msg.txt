@@ -12,6 +12,22 @@ pub struct SimpleMsg {
 }
 
 impl crate::private::Sealed for SimpleMsg {}
+impl SimpleMsg {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0002, size: body_size });
+        }
+
+        // basic: u8
+        let basic = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            basic,
+        })
+    }
+
+}
+
 impl crate::Message for SimpleMsg {
     const OPCODE: u32 = 0x0002;
 
@@ -31,17 +47,8 @@ impl crate::Message for SimpleMsg {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0002, size: body_size });
-        }
-
-        // basic: u8
-        let basic = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            basic,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

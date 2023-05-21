@@ -21,6 +21,30 @@ pub struct CMSG_MOVE_GRAVITY_ENABLE_ACK {
 }
 
 impl crate::private::Sealed for CMSG_MOVE_GRAVITY_ENABLE_ACK {}
+impl CMSG_MOVE_GRAVITY_ENABLE_ACK {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(36..=101).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04D1, size: body_size });
+        }
+
+        // guid: PackedGuid
+        let guid = crate::util::read_packed_guid(&mut r)?;
+
+        // unknown: u32
+        let unknown = crate::util::read_u32_le(&mut r)?;
+
+        // info: MovementInfo
+        let info = MovementInfo::read(&mut r)?;
+
+        Ok(Self {
+            guid,
+            unknown,
+            info,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_MOVE_GRAVITY_ENABLE_ACK {
     const OPCODE: u32 = 0x04d1;
 
@@ -250,25 +274,8 @@ impl crate::Message for CMSG_MOVE_GRAVITY_ENABLE_ACK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(36..=101).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04D1, size: body_size });
-        }
-
-        // guid: PackedGuid
-        let guid = crate::util::read_packed_guid(&mut r)?;
-
-        // unknown: u32
-        let unknown = crate::util::read_u32_le(&mut r)?;
-
-        // info: MovementInfo
-        let info = MovementInfo::read(&mut r)?;
-
-        Ok(Self {
-            guid,
-            unknown,
-            info,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

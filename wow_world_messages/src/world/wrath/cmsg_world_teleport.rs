@@ -28,33 +28,8 @@ pub struct CMSG_WORLD_TELEPORT {
 }
 
 impl crate::private::Sealed for CMSG_WORLD_TELEPORT {}
-impl crate::Message for CMSG_WORLD_TELEPORT {
-    const OPCODE: u32 = 0x0008;
-
-    fn size_without_header(&self) -> u32 {
-        32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // time: Milliseconds
-        w.write_all((self.time.as_millis() as u32).to_le_bytes().as_slice())?;
-
-        // map: Map
-        w.write_all(&(self.map.as_int().to_le_bytes()))?;
-
-        // unknown: u64
-        w.write_all(&self.unknown.to_le_bytes())?;
-
-        // position: Vector3d
-        self.position.write_into_vec(&mut w)?;
-
-        // orientation: f32
-        w.write_all(&self.orientation.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl CMSG_WORLD_TELEPORT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 32 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0008, size: body_size });
         }
@@ -81,6 +56,38 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
             position,
             orientation,
         })
+    }
+
+}
+
+impl crate::Message for CMSG_WORLD_TELEPORT {
+    const OPCODE: u32 = 0x0008;
+
+    fn size_without_header(&self) -> u32 {
+        32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // time: Milliseconds
+        w.write_all((self.time.as_millis() as u32).to_le_bytes().as_slice())?;
+
+        // map: Map
+        w.write_all(&(self.map.as_int().to_le_bytes()))?;
+
+        // unknown: u64
+        w.write_all(&self.unknown.to_le_bytes())?;
+
+        // position: Vector3d
+        self.position.write_into_vec(&mut w)?;
+
+        // orientation: f32
+        w.write_all(&self.orientation.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

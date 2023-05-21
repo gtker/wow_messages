@@ -26,6 +26,38 @@ pub struct SMSG_PET_MODE {
 }
 
 impl crate::private::Sealed for SMSG_PET_MODE {}
+impl SMSG_PET_MODE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x017A, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // react_state: PetReactState
+        let react_state = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // command_state: PetCommandState
+        let command_state = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // unknown1: u8
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
+
+        // pet_enabled: PetEnabled
+        let pet_enabled = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            guid,
+            react_state,
+            command_state,
+            unknown1,
+            pet_enabled,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PET_MODE {
     const OPCODE: u32 = 0x017a;
 
@@ -91,33 +123,8 @@ impl crate::Message for SMSG_PET_MODE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x017A, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // react_state: PetReactState
-        let react_state = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // command_state: PetCommandState
-        let command_state = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(&mut r)?;
-
-        // pet_enabled: PetEnabled
-        let pet_enabled = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            guid,
-            react_state,
-            command_state,
-            unknown1,
-            pet_enabled,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

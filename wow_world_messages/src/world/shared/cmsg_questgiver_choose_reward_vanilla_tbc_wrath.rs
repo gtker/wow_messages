@@ -18,6 +18,30 @@ pub struct CMSG_QUESTGIVER_CHOOSE_REWARD {
 }
 
 impl crate::private::Sealed for CMSG_QUESTGIVER_CHOOSE_REWARD {}
+impl CMSG_QUESTGIVER_CHOOSE_REWARD {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x018E, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // quest_id: u32
+        let quest_id = crate::util::read_u32_le(&mut r)?;
+
+        // reward: u32
+        let reward = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            quest_id,
+            reward,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_QUESTGIVER_CHOOSE_REWARD {
     const OPCODE: u32 = 0x018e;
 
@@ -73,25 +97,8 @@ impl crate::Message for CMSG_QUESTGIVER_CHOOSE_REWARD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x018E, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // quest_id: u32
-        let quest_id = crate::util::read_u32_le(&mut r)?;
-
-        // reward: u32
-        let reward = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            quest_id,
-            reward,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

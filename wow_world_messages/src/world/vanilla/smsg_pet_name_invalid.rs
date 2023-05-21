@@ -11,6 +11,18 @@ pub struct SMSG_PET_NAME_INVALID {
 }
 
 impl crate::private::Sealed for SMSG_PET_NAME_INVALID {}
+impl SMSG_PET_NAME_INVALID {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 0 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0178, size: body_size });
+        }
+
+        Ok(Self {
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PET_NAME_INVALID {
     const OPCODE: u32 = 0x0178;
 
@@ -51,13 +63,8 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0178, size: body_size });
-        }
-
-        Ok(Self {
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

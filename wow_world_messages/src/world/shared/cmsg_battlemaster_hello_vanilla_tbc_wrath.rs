@@ -14,6 +14,22 @@ pub struct CMSG_BATTLEMASTER_HELLO {
 }
 
 impl crate::private::Sealed for CMSG_BATTLEMASTER_HELLO {}
+impl CMSG_BATTLEMASTER_HELLO {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D7, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            guid,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_BATTLEMASTER_HELLO {
     const OPCODE: u32 = 0x02d7;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_BATTLEMASTER_HELLO {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D7, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            guid,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

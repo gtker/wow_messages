@@ -19,6 +19,30 @@ pub struct SMSG_BATTLEFIELD_MGR_ENTRY_INVITE {
 }
 
 impl crate::private::Sealed for SMSG_BATTLEFIELD_MGR_ENTRY_INVITE {}
+impl SMSG_BATTLEFIELD_MGR_ENTRY_INVITE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04DE, size: body_size });
+        }
+
+        // battle_id: u32
+        let battle_id = crate::util::read_u32_le(&mut r)?;
+
+        // area: Area
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // accept_time: Seconds
+        let accept_time = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
+
+        Ok(Self {
+            battle_id,
+            area,
+            accept_time,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_BATTLEFIELD_MGR_ENTRY_INVITE {
     const OPCODE: u32 = 0x04de;
 
@@ -74,25 +98,8 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_ENTRY_INVITE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04DE, size: body_size });
-        }
-
-        // battle_id: u32
-        let battle_id = crate::util::read_u32_le(&mut r)?;
-
-        // area: Area
-        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // accept_time: Seconds
-        let accept_time = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
-
-        Ok(Self {
-            battle_id,
-            area,
-            accept_time,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -12,6 +12,22 @@ pub struct CMSG_SEARCH_LFG_JOIN {
 }
 
 impl crate::private::Sealed for CMSG_SEARCH_LFG_JOIN {}
+impl CMSG_SEARCH_LFG_JOIN {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x035E, size: body_size });
+        }
+
+        // dungeon_id: u32
+        let dungeon_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            dungeon_id,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_SEARCH_LFG_JOIN {
     const OPCODE: u32 = 0x035e;
 
@@ -57,17 +73,8 @@ impl crate::Message for CMSG_SEARCH_LFG_JOIN {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x035E, size: body_size });
-        }
-
-        // dungeon_id: u32
-        let dungeon_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            dungeon_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -26,6 +26,56 @@ pub struct SMSG_ITEM_REFUND_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_ITEM_REFUND_RESULT {}
+impl SMSG_ITEM_REFUND_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(9..=61).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04B5, size: body_size });
+        }
+
+        // item: Guid
+        let item = crate::util::read_guid(&mut r)?;
+
+        // result: ItemRefundResult
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let result_if = match result {
+            ItemRefundResult::Success => {
+                // cost: Gold
+                let cost = Gold::new(crate::util::read_u32_le(&mut r)?);
+
+                // honor_point_cost: u32
+                let honor_point_cost = crate::util::read_u32_le(&mut r)?;
+
+                // arena_point_cost: u32
+                let arena_point_cost = crate::util::read_u32_le(&mut r)?;
+
+                // extra_items: ItemRefundExtra[5]
+                let extra_items = {
+                    let mut extra_items = [ItemRefundExtra::default(); 5];
+                    for i in extra_items.iter_mut() {
+                        *i = ItemRefundExtra::read(&mut r)?;
+                    }
+                    extra_items
+                };
+
+                SMSG_ITEM_REFUND_RESULT_ItemRefundResult::Success {
+                    arena_point_cost,
+                    cost,
+                    extra_items,
+                    honor_point_cost,
+                }
+            }
+            ItemRefundResult::Failure => SMSG_ITEM_REFUND_RESULT_ItemRefundResult::Failure,
+        };
+
+        Ok(Self {
+            item,
+            result: result_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ITEM_REFUND_RESULT {
     const OPCODE: u32 = 0x04b5;
 
@@ -147,51 +197,8 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(9..=61).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04B5, size: body_size });
-        }
-
-        // item: Guid
-        let item = crate::util::read_guid(&mut r)?;
-
-        // result: ItemRefundResult
-        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let result_if = match result {
-            ItemRefundResult::Success => {
-                // cost: Gold
-                let cost = Gold::new(crate::util::read_u32_le(&mut r)?);
-
-                // honor_point_cost: u32
-                let honor_point_cost = crate::util::read_u32_le(&mut r)?;
-
-                // arena_point_cost: u32
-                let arena_point_cost = crate::util::read_u32_le(&mut r)?;
-
-                // extra_items: ItemRefundExtra[5]
-                let extra_items = {
-                    let mut extra_items = [ItemRefundExtra::default(); 5];
-                    for i in extra_items.iter_mut() {
-                        *i = ItemRefundExtra::read(&mut r)?;
-                    }
-                    extra_items
-                };
-
-                SMSG_ITEM_REFUND_RESULT_ItemRefundResult::Success {
-                    arena_point_cost,
-                    cost,
-                    extra_items,
-                    honor_point_cost,
-                }
-            }
-            ItemRefundResult::Failure => SMSG_ITEM_REFUND_RESULT_ItemRefundResult::Failure,
-        };
-
-        Ok(Self {
-            item,
-            result: result_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

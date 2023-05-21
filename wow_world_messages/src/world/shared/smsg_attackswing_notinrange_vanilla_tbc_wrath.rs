@@ -10,6 +10,18 @@ pub struct SMSG_ATTACKSWING_NOTINRANGE {
 }
 
 impl crate::private::Sealed for SMSG_ATTACKSWING_NOTINRANGE {}
+impl SMSG_ATTACKSWING_NOTINRANGE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 0 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0145, size: body_size });
+        }
+
+        Ok(Self {
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ATTACKSWING_NOTINRANGE {
     const OPCODE: u32 = 0x0145;
 
@@ -50,13 +62,8 @@ impl crate::Message for SMSG_ATTACKSWING_NOTINRANGE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0145, size: body_size });
-        }
-
-        Ok(Self {
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

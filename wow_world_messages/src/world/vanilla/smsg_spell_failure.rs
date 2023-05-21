@@ -19,6 +19,30 @@ pub struct SMSG_SPELL_FAILURE {
 }
 
 impl crate::private::Sealed for SMSG_SPELL_FAILURE {}
+impl SMSG_SPELL_FAILURE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 13 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0133, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // result: SpellCastResult
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            guid,
+            spell,
+            result,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SPELL_FAILURE {
     const OPCODE: u32 = 0x0133;
 
@@ -74,25 +98,8 @@ impl crate::Message for SMSG_SPELL_FAILURE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 13 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0133, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // result: SpellCastResult
-        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            guid,
-            spell,
-            result,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

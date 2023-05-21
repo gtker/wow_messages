@@ -32,6 +32,50 @@ pub struct SMSG_LOOT_ROLL_WON {
 }
 
 impl crate::private::Sealed for SMSG_LOOT_ROLL_WON {}
+impl SMSG_LOOT_ROLL_WON {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 34 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x029F, size: body_size });
+        }
+
+        // looted_target: Guid
+        let looted_target = crate::util::read_guid(&mut r)?;
+
+        // loot_slot: u32
+        let loot_slot = crate::util::read_u32_le(&mut r)?;
+
+        // item: u32
+        let item = crate::util::read_u32_le(&mut r)?;
+
+        // item_random_suffix: u32
+        let item_random_suffix = crate::util::read_u32_le(&mut r)?;
+
+        // item_random_property_id: u32
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
+
+        // winning_player: Guid
+        let winning_player = crate::util::read_guid(&mut r)?;
+
+        // winning_roll: u8
+        let winning_roll = crate::util::read_u8_le(&mut r)?;
+
+        // vote: RollVote
+        let vote = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            looted_target,
+            loot_slot,
+            item,
+            item_random_suffix,
+            item_random_property_id,
+            winning_player,
+            winning_roll,
+            vote,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LOOT_ROLL_WON {
     const OPCODE: u32 = 0x029f;
 
@@ -112,45 +156,8 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 34 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x029F, size: body_size });
-        }
-
-        // looted_target: Guid
-        let looted_target = crate::util::read_guid(&mut r)?;
-
-        // loot_slot: u32
-        let loot_slot = crate::util::read_u32_le(&mut r)?;
-
-        // item: u32
-        let item = crate::util::read_u32_le(&mut r)?;
-
-        // item_random_suffix: u32
-        let item_random_suffix = crate::util::read_u32_le(&mut r)?;
-
-        // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
-
-        // winning_player: Guid
-        let winning_player = crate::util::read_guid(&mut r)?;
-
-        // winning_roll: u8
-        let winning_roll = crate::util::read_u8_le(&mut r)?;
-
-        // vote: RollVote
-        let vote = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            looted_target,
-            loot_slot,
-            item,
-            item_random_suffix,
-            item_random_property_id,
-            winning_player,
-            winning_roll,
-            vote,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -10,6 +10,18 @@ pub struct CMSG_GMRESPONSE_RESOLVE {
 }
 
 impl crate::private::Sealed for CMSG_GMRESPONSE_RESOLVE {}
+impl CMSG_GMRESPONSE_RESOLVE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 0 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04F0, size: body_size });
+        }
+
+        Ok(Self {
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GMRESPONSE_RESOLVE {
     const OPCODE: u32 = 0x04f0;
 
@@ -50,13 +62,8 @@ impl crate::Message for CMSG_GMRESPONSE_RESOLVE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04F0, size: body_size });
-        }
-
-        Ok(Self {
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

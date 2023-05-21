@@ -16,6 +16,29 @@ pub struct CMSG_PET_RENAME {
 }
 
 impl crate::private::Sealed for CMSG_PET_RENAME {}
+impl CMSG_PET_RENAME {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(9..=264).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0177, size: body_size });
+        }
+
+        // pet: Guid
+        let pet = crate::util::read_guid(&mut r)?;
+
+        // name: CString
+        let name = {
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(name)?
+        };
+
+        Ok(Self {
+            pet,
+            name,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_PET_RENAME {
     const OPCODE: u32 = 0x0177;
 
@@ -70,24 +93,8 @@ impl crate::Message for CMSG_PET_RENAME {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(9..=264).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0177, size: body_size });
-        }
-
-        // pet: Guid
-        let pet = crate::util::read_guid(&mut r)?;
-
-        // name: CString
-        let name = {
-            let name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(name)?
-        };
-
-        Ok(Self {
-            pet,
-            name,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

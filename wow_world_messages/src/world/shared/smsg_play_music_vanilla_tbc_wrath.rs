@@ -12,6 +12,22 @@ pub struct SMSG_PLAY_MUSIC {
 }
 
 impl crate::private::Sealed for SMSG_PLAY_MUSIC {}
+impl SMSG_PLAY_MUSIC {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0277, size: body_size });
+        }
+
+        // sound_id: u32
+        let sound_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            sound_id,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PLAY_MUSIC {
     const OPCODE: u32 = 0x0277;
 
@@ -57,17 +73,8 @@ impl crate::Message for SMSG_PLAY_MUSIC {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0277, size: body_size });
-        }
-
-        // sound_id: u32
-        let sound_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            sound_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

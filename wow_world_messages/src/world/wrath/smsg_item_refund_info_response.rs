@@ -29,6 +29,52 @@ pub struct SMSG_ITEM_REFUND_INFO_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_ITEM_REFUND_INFO_RESPONSE {}
+impl SMSG_ITEM_REFUND_INFO_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 68 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04B2, size: body_size });
+        }
+
+        // item: Guid
+        let item = crate::util::read_guid(&mut r)?;
+
+        // money_cost: Gold
+        let money_cost = Gold::new(crate::util::read_u32_le(&mut r)?);
+
+        // honor_point_cost: u32
+        let honor_point_cost = crate::util::read_u32_le(&mut r)?;
+
+        // arena_point_cost: u32
+        let arena_point_cost = crate::util::read_u32_le(&mut r)?;
+
+        // extra_items: ItemRefundExtra[5]
+        let extra_items = {
+            let mut extra_items = [ItemRefundExtra::default(); 5];
+            for i in extra_items.iter_mut() {
+                *i = ItemRefundExtra::read(&mut r)?;
+            }
+            extra_items
+        };
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        // time_since_loss: u32
+        let time_since_loss = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            item,
+            money_cost,
+            honor_point_cost,
+            arena_point_cost,
+            extra_items,
+            unknown1,
+            time_since_loss,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ITEM_REFUND_INFO_RESPONSE {
     const OPCODE: u32 = 0x04b2;
 
@@ -122,47 +168,8 @@ impl crate::Message for SMSG_ITEM_REFUND_INFO_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 68 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04B2, size: body_size });
-        }
-
-        // item: Guid
-        let item = crate::util::read_guid(&mut r)?;
-
-        // money_cost: Gold
-        let money_cost = Gold::new(crate::util::read_u32_le(&mut r)?);
-
-        // honor_point_cost: u32
-        let honor_point_cost = crate::util::read_u32_le(&mut r)?;
-
-        // arena_point_cost: u32
-        let arena_point_cost = crate::util::read_u32_le(&mut r)?;
-
-        // extra_items: ItemRefundExtra[5]
-        let extra_items = {
-            let mut extra_items = [ItemRefundExtra::default(); 5];
-            for i in extra_items.iter_mut() {
-                *i = ItemRefundExtra::read(&mut r)?;
-            }
-            extra_items
-        };
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        // time_since_loss: u32
-        let time_since_loss = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            item,
-            money_cost,
-            honor_point_cost,
-            arena_point_cost,
-            extra_items,
-            unknown1,
-            time_since_loss,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

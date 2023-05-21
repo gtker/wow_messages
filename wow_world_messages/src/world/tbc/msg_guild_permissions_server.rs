@@ -23,6 +23,44 @@ pub struct MSG_GUILD_PERMISSIONS_Server {
 }
 
 impl crate::private::Sealed for MSG_GUILD_PERMISSIONS_Server {}
+impl MSG_GUILD_PERMISSIONS_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 61 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03FC, size: body_size });
+        }
+
+        // id: u32
+        let id = crate::util::read_u32_le(&mut r)?;
+
+        // rights: u32
+        let rights = crate::util::read_u32_le(&mut r)?;
+
+        // gold_limit_per_day: Gold
+        let gold_limit_per_day = Gold::new(crate::util::read_u32_le(&mut r)?);
+
+        // purchased_bank_tabs: u8
+        let purchased_bank_tabs = crate::util::read_u8_le(&mut r)?;
+
+        // bank_tabs: BankTab[6]
+        let bank_tabs = {
+            let mut bank_tabs = [BankTab::default(); 6];
+            for i in bank_tabs.iter_mut() {
+                *i = BankTab::read(&mut r)?;
+            }
+            bank_tabs
+        };
+
+        Ok(Self {
+            id,
+            rights,
+            gold_limit_per_day,
+            purchased_bank_tabs,
+            bank_tabs,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_GUILD_PERMISSIONS_Server {
     const OPCODE: u32 = 0x03fc;
 
@@ -106,39 +144,8 @@ impl crate::Message for MSG_GUILD_PERMISSIONS_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 61 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03FC, size: body_size });
-        }
-
-        // id: u32
-        let id = crate::util::read_u32_le(&mut r)?;
-
-        // rights: u32
-        let rights = crate::util::read_u32_le(&mut r)?;
-
-        // gold_limit_per_day: Gold
-        let gold_limit_per_day = Gold::new(crate::util::read_u32_le(&mut r)?);
-
-        // purchased_bank_tabs: u8
-        let purchased_bank_tabs = crate::util::read_u8_le(&mut r)?;
-
-        // bank_tabs: BankTab[6]
-        let bank_tabs = {
-            let mut bank_tabs = [BankTab::default(); 6];
-            for i in bank_tabs.iter_mut() {
-                *i = BankTab::read(&mut r)?;
-            }
-            bank_tabs
-        };
-
-        Ok(Self {
-            id,
-            rights,
-            gold_limit_per_day,
-            purchased_bank_tabs,
-            bank_tabs,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

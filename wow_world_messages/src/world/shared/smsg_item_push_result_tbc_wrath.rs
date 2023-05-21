@@ -40,6 +40,62 @@ pub struct SMSG_ITEM_PUSH_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_ITEM_PUSH_RESULT {}
+impl SMSG_ITEM_PUSH_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 45 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0166, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // source: NewItemSource
+        let source = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // creation_type: NewItemCreationType
+        let creation_type = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // alert_chat: NewItemChatAlert
+        let alert_chat = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // bag_slot: u8
+        let bag_slot = crate::util::read_u8_le(&mut r)?;
+
+        // item_slot: u32
+        let item_slot = crate::util::read_u32_le(&mut r)?;
+
+        // item: u32
+        let item = crate::util::read_u32_le(&mut r)?;
+
+        // item_suffix_factor: u32
+        let item_suffix_factor = crate::util::read_u32_le(&mut r)?;
+
+        // item_random_property_id: u32
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
+
+        // item_count: u32
+        let item_count = crate::util::read_u32_le(&mut r)?;
+
+        // item_count_in_inventory: u32
+        let item_count_in_inventory = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            source,
+            creation_type,
+            alert_chat,
+            bag_slot,
+            item_slot,
+            item,
+            item_suffix_factor,
+            item_random_property_id,
+            item_count,
+            item_count_in_inventory,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ITEM_PUSH_RESULT {
     const OPCODE: u32 = 0x0166;
 
@@ -135,57 +191,8 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 45 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0166, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // source: NewItemSource
-        let source = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // creation_type: NewItemCreationType
-        let creation_type = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // alert_chat: NewItemChatAlert
-        let alert_chat = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // bag_slot: u8
-        let bag_slot = crate::util::read_u8_le(&mut r)?;
-
-        // item_slot: u32
-        let item_slot = crate::util::read_u32_le(&mut r)?;
-
-        // item: u32
-        let item = crate::util::read_u32_le(&mut r)?;
-
-        // item_suffix_factor: u32
-        let item_suffix_factor = crate::util::read_u32_le(&mut r)?;
-
-        // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
-
-        // item_count: u32
-        let item_count = crate::util::read_u32_le(&mut r)?;
-
-        // item_count_in_inventory: u32
-        let item_count_in_inventory = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            source,
-            creation_type,
-            alert_chat,
-            bag_slot,
-            item_slot,
-            item,
-            item_suffix_factor,
-            item_random_property_id,
-            item_count,
-            item_count_in_inventory,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

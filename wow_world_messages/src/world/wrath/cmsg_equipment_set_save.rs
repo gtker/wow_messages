@@ -22,6 +22,50 @@ pub struct CMSG_EQUIPMENT_SET_SAVE {
 }
 
 impl crate::private::Sealed for CMSG_EQUIPMENT_SET_SAVE {}
+impl CMSG_EQUIPMENT_SET_SAVE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(160..=677).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BD, size: body_size });
+        }
+
+        // guid: PackedGuid
+        let guid = crate::util::read_packed_guid(&mut r)?;
+
+        // index: u32
+        let index = crate::util::read_u32_le(&mut r)?;
+
+        // name: CString
+        let name = {
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(name)?
+        };
+
+        // icon_name: CString
+        let icon_name = {
+            let icon_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(icon_name)?
+        };
+
+        // equipment: Guid[19]
+        let equipment = {
+            let mut equipment = [Guid::default(); 19];
+            for i in equipment.iter_mut() {
+                *i = crate::util::read_guid(&mut r)?;
+            }
+            equipment
+        };
+
+        Ok(Self {
+            guid,
+            index,
+            name,
+            icon_name,
+            equipment,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
     const OPCODE: u32 = 0x04bd;
 
@@ -105,45 +149,8 @@ impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(160..=677).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BD, size: body_size });
-        }
-
-        // guid: PackedGuid
-        let guid = crate::util::read_packed_guid(&mut r)?;
-
-        // index: u32
-        let index = crate::util::read_u32_le(&mut r)?;
-
-        // name: CString
-        let name = {
-            let name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(name)?
-        };
-
-        // icon_name: CString
-        let icon_name = {
-            let icon_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(icon_name)?
-        };
-
-        // equipment: Guid[19]
-        let equipment = {
-            let mut equipment = [Guid::default(); 19];
-            for i in equipment.iter_mut() {
-                *i = crate::util::read_guid(&mut r)?;
-            }
-            equipment
-        };
-
-        Ok(Self {
-            guid,
-            index,
-            name,
-            icon_name,
-            equipment,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

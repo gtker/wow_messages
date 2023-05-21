@@ -17,6 +17,26 @@ pub struct SMSG_PLAY_SPELL_IMPACT {
 }
 
 impl crate::private::Sealed for SMSG_PLAY_SPELL_IMPACT {}
+impl SMSG_PLAY_SPELL_IMPACT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F7, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // spell_visual_kit: u32
+        let spell_visual_kit = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            spell_visual_kit,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PLAY_SPELL_IMPACT {
     const OPCODE: u32 = 0x01f7;
 
@@ -67,21 +87,8 @@ impl crate::Message for SMSG_PLAY_SPELL_IMPACT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F7, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // spell_visual_kit: u32
-        let spell_visual_kit = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            spell_visual_kit,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -41,6 +41,155 @@ pub struct SMSG_ARENA_TEAM_EVENT {
 }
 
 impl crate::private::Sealed for SMSG_ARENA_TEAM_EVENT {}
+impl SMSG_ARENA_TEAM_EVENT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=66306).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0357, size: body_size });
+        }
+
+        // event: ArenaTeamEvent
+        let event = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let event_if = match event {
+            ArenaTeamEvent::Join => {
+                // joiner_name: CString
+                let joiner_name = {
+                    let joiner_name = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(joiner_name)?
+                };
+
+                // arena_team_name1: CString
+                let arena_team_name1 = {
+                    let arena_team_name1 = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(arena_team_name1)?
+                };
+
+                // joiner: Guid
+                let joiner = crate::util::read_guid(&mut r)?;
+
+                SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Join {
+                    arena_team_name1,
+                    joiner,
+                    joiner_name,
+                }
+            }
+            ArenaTeamEvent::Leave => {
+                // leaver_name: CString
+                let leaver_name = {
+                    let leaver_name = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(leaver_name)?
+                };
+
+                // leaver: Guid
+                let leaver = crate::util::read_guid(&mut r)?;
+
+                SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Leave {
+                    leaver,
+                    leaver_name,
+                }
+            }
+            ArenaTeamEvent::Remove => {
+                // kicked_player_name: CString
+                let kicked_player_name = {
+                    let kicked_player_name = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(kicked_player_name)?
+                };
+
+                // arena_team_name2: CString
+                let arena_team_name2 = {
+                    let arena_team_name2 = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(arena_team_name2)?
+                };
+
+                // kicker_name: CString
+                let kicker_name = {
+                    let kicker_name = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(kicker_name)?
+                };
+
+                SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Remove {
+                    arena_team_name2,
+                    kicked_player_name,
+                    kicker_name,
+                }
+            }
+            ArenaTeamEvent::LeaderIs => {
+                // leader_name: CString
+                let leader_name = {
+                    let leader_name = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(leader_name)?
+                };
+
+                // arena_team_name3: CString
+                let arena_team_name3 = {
+                    let arena_team_name3 = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(arena_team_name3)?
+                };
+
+                SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderIs {
+                    arena_team_name3,
+                    leader_name,
+                }
+            }
+            ArenaTeamEvent::LeaderChanged => {
+                // old_leader: CString
+                let old_leader = {
+                    let old_leader = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(old_leader)?
+                };
+
+                // new_leader: CString
+                let new_leader = {
+                    let new_leader = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(new_leader)?
+                };
+
+                SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderChanged {
+                    new_leader,
+                    old_leader,
+                }
+            }
+            ArenaTeamEvent::Disbanded => {
+                // leader_name: CString
+                let leader_name = {
+                    let leader_name = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(leader_name)?
+                };
+
+                // arena_team_name3: CString
+                let arena_team_name3 = {
+                    let arena_team_name3 = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(arena_team_name3)?
+                };
+
+                SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Disbanded {
+                    arena_team_name3,
+                    leader_name,
+                }
+            }
+        };
+
+        // amount_of_strings: u8
+        let amount_of_strings = crate::util::read_u8_le(&mut r)?;
+
+        // string: CString[amount_of_strings]
+        let string = {
+            let mut string = Vec::with_capacity(amount_of_strings as usize);
+            for _ in 0..amount_of_strings {
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
+                string.push(String::from_utf8(s)?);
+            }
+            string
+        };
+
+        Ok(Self {
+            event: event_if,
+            string,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ARENA_TEAM_EVENT {
     const OPCODE: u32 = 0x0357;
 
@@ -332,150 +481,8 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=66306).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0357, size: body_size });
-        }
-
-        // event: ArenaTeamEvent
-        let event = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let event_if = match event {
-            ArenaTeamEvent::Join => {
-                // joiner_name: CString
-                let joiner_name = {
-                    let joiner_name = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(joiner_name)?
-                };
-
-                // arena_team_name1: CString
-                let arena_team_name1 = {
-                    let arena_team_name1 = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(arena_team_name1)?
-                };
-
-                // joiner: Guid
-                let joiner = crate::util::read_guid(&mut r)?;
-
-                SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Join {
-                    arena_team_name1,
-                    joiner,
-                    joiner_name,
-                }
-            }
-            ArenaTeamEvent::Leave => {
-                // leaver_name: CString
-                let leaver_name = {
-                    let leaver_name = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(leaver_name)?
-                };
-
-                // leaver: Guid
-                let leaver = crate::util::read_guid(&mut r)?;
-
-                SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Leave {
-                    leaver,
-                    leaver_name,
-                }
-            }
-            ArenaTeamEvent::Remove => {
-                // kicked_player_name: CString
-                let kicked_player_name = {
-                    let kicked_player_name = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(kicked_player_name)?
-                };
-
-                // arena_team_name2: CString
-                let arena_team_name2 = {
-                    let arena_team_name2 = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(arena_team_name2)?
-                };
-
-                // kicker_name: CString
-                let kicker_name = {
-                    let kicker_name = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(kicker_name)?
-                };
-
-                SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Remove {
-                    arena_team_name2,
-                    kicked_player_name,
-                    kicker_name,
-                }
-            }
-            ArenaTeamEvent::LeaderIs => {
-                // leader_name: CString
-                let leader_name = {
-                    let leader_name = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(leader_name)?
-                };
-
-                // arena_team_name3: CString
-                let arena_team_name3 = {
-                    let arena_team_name3 = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(arena_team_name3)?
-                };
-
-                SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderIs {
-                    arena_team_name3,
-                    leader_name,
-                }
-            }
-            ArenaTeamEvent::LeaderChanged => {
-                // old_leader: CString
-                let old_leader = {
-                    let old_leader = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(old_leader)?
-                };
-
-                // new_leader: CString
-                let new_leader = {
-                    let new_leader = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(new_leader)?
-                };
-
-                SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderChanged {
-                    new_leader,
-                    old_leader,
-                }
-            }
-            ArenaTeamEvent::Disbanded => {
-                // leader_name: CString
-                let leader_name = {
-                    let leader_name = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(leader_name)?
-                };
-
-                // arena_team_name3: CString
-                let arena_team_name3 = {
-                    let arena_team_name3 = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(arena_team_name3)?
-                };
-
-                SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Disbanded {
-                    arena_team_name3,
-                    leader_name,
-                }
-            }
-        };
-
-        // amount_of_strings: u8
-        let amount_of_strings = crate::util::read_u8_le(&mut r)?;
-
-        // string: CString[amount_of_strings]
-        let string = {
-            let mut string = Vec::with_capacity(amount_of_strings as usize);
-            for _ in 0..amount_of_strings {
-                let s = crate::util::read_c_string_to_vec(&mut r)?;
-                string.push(String::from_utf8(s)?);
-            }
-            string
-        };
-
-        Ok(Self {
-            event: event_if,
-            string,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

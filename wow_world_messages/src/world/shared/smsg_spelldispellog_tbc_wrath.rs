@@ -26,6 +26,47 @@ pub struct SMSG_SPELLDISPELLOG {
 }
 
 impl crate::private::Sealed for SMSG_SPELLDISPELLOG {}
+impl SMSG_SPELLDISPELLOG {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(13..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x027B, size: body_size });
+        }
+
+        // victim: PackedGuid
+        let victim = crate::util::read_packed_guid(&mut r)?;
+
+        // caster: PackedGuid
+        let caster = crate::util::read_packed_guid(&mut r)?;
+
+        // dispell_spell: u32
+        let dispell_spell = crate::util::read_u32_le(&mut r)?;
+
+        // unknown: u8
+        let unknown = crate::util::read_u8_le(&mut r)?;
+
+        // amount_of_spells: u32
+        let amount_of_spells = crate::util::read_u32_le(&mut r)?;
+
+        // spells: DispelledSpell[amount_of_spells]
+        let spells = {
+            let mut spells = Vec::with_capacity(amount_of_spells as usize);
+            for _ in 0..amount_of_spells {
+                spells.push(DispelledSpell::read(&mut r)?);
+            }
+            spells
+        };
+
+        Ok(Self {
+            victim,
+            caster,
+            dispell_spell,
+            unknown,
+            spells,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SPELLDISPELLOG {
     const OPCODE: u32 = 0x027b;
 
@@ -116,42 +157,8 @@ impl crate::Message for SMSG_SPELLDISPELLOG {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(13..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x027B, size: body_size });
-        }
-
-        // victim: PackedGuid
-        let victim = crate::util::read_packed_guid(&mut r)?;
-
-        // caster: PackedGuid
-        let caster = crate::util::read_packed_guid(&mut r)?;
-
-        // dispell_spell: u32
-        let dispell_spell = crate::util::read_u32_le(&mut r)?;
-
-        // unknown: u8
-        let unknown = crate::util::read_u8_le(&mut r)?;
-
-        // amount_of_spells: u32
-        let amount_of_spells = crate::util::read_u32_le(&mut r)?;
-
-        // spells: DispelledSpell[amount_of_spells]
-        let spells = {
-            let mut spells = Vec::with_capacity(amount_of_spells as usize);
-            for _ in 0..amount_of_spells {
-                spells.push(DispelledSpell::read(&mut r)?);
-            }
-            spells
-        };
-
-        Ok(Self {
-            victim,
-            caster,
-            dispell_spell,
-            unknown,
-            spells,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

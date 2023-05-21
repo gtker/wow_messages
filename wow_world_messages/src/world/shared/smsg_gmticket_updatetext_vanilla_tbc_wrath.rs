@@ -14,6 +14,22 @@ pub struct SMSG_GMTICKET_UPDATETEXT {
 }
 
 impl crate::private::Sealed for SMSG_GMTICKET_UPDATETEXT {}
+impl SMSG_GMTICKET_UPDATETEXT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0208, size: body_size });
+        }
+
+        // response: GmTicketResponse
+        let response = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            response,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GMTICKET_UPDATETEXT {
     const OPCODE: u32 = 0x0208;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_GMTICKET_UPDATETEXT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0208, size: body_size });
-        }
-
-        // response: GmTicketResponse
-        let response = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            response,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

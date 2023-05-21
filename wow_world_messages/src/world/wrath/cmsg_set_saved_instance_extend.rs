@@ -20,6 +20,30 @@ pub struct CMSG_SET_SAVED_INSTANCE_EXTEND {
 }
 
 impl crate::private::Sealed for CMSG_SET_SAVED_INSTANCE_EXTEND {}
+impl CMSG_SET_SAVED_INSTANCE_EXTEND {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 6 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0292, size: body_size });
+        }
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // difficulty: RaidDifficulty
+        let difficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // toggle_extend: Bool
+        let toggle_extend = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            map,
+            difficulty,
+            toggle_extend,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_SET_SAVED_INSTANCE_EXTEND {
     const OPCODE: u32 = 0x0292;
 
@@ -75,25 +99,8 @@ impl crate::Message for CMSG_SET_SAVED_INSTANCE_EXTEND {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 6 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0292, size: body_size });
-        }
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // difficulty: RaidDifficulty
-        let difficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // toggle_extend: Bool
-        let toggle_extend = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            map,
-            difficulty,
-            toggle_extend,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

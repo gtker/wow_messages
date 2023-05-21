@@ -18,6 +18,30 @@ pub struct CMSG_PET_SPELL_AUTOCAST {
 }
 
 impl crate::private::Sealed for CMSG_PET_SPELL_AUTOCAST {}
+impl CMSG_PET_SPELL_AUTOCAST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 13 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02F3, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // id: u32
+        let id = crate::util::read_u32_le(&mut r)?;
+
+        // autocast_enabled: Bool
+        let autocast_enabled = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            guid,
+            id,
+            autocast_enabled,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
     const OPCODE: u32 = 0x02f3;
 
@@ -73,25 +97,8 @@ impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 13 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02F3, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // id: u32
-        let id = crate::util::read_u32_le(&mut r)?;
-
-        // autocast_enabled: Bool
-        let autocast_enabled = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            guid,
-            id,
-            autocast_enabled,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

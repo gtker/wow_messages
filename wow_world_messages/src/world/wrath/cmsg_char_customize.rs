@@ -29,6 +29,53 @@ pub struct CMSG_CHAR_CUSTOMIZE {
 }
 
 impl crate::private::Sealed for CMSG_CHAR_CUSTOMIZE {}
+impl CMSG_CHAR_CUSTOMIZE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(15..=270).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0473, size: body_size });
+        }
+
+        // player: Guid
+        let player = crate::util::read_guid(&mut r)?;
+
+        // new_name: CString
+        let new_name = {
+            let new_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(new_name)?
+        };
+
+        // gender: Gender
+        let gender = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // skin_color: u8
+        let skin_color = crate::util::read_u8_le(&mut r)?;
+
+        // hair_color: u8
+        let hair_color = crate::util::read_u8_le(&mut r)?;
+
+        // hair_style: u8
+        let hair_style = crate::util::read_u8_le(&mut r)?;
+
+        // facial_hair: u8
+        let facial_hair = crate::util::read_u8_le(&mut r)?;
+
+        // face: u8
+        let face = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            player,
+            new_name,
+            gender,
+            skin_color,
+            hair_color,
+            hair_style,
+            facial_hair,
+            face,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CHAR_CUSTOMIZE {
     const OPCODE: u32 = 0x0473;
 
@@ -113,48 +160,8 @@ impl crate::Message for CMSG_CHAR_CUSTOMIZE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(15..=270).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0473, size: body_size });
-        }
-
-        // player: Guid
-        let player = crate::util::read_guid(&mut r)?;
-
-        // new_name: CString
-        let new_name = {
-            let new_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(new_name)?
-        };
-
-        // gender: Gender
-        let gender = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // skin_color: u8
-        let skin_color = crate::util::read_u8_le(&mut r)?;
-
-        // hair_color: u8
-        let hair_color = crate::util::read_u8_le(&mut r)?;
-
-        // hair_style: u8
-        let hair_style = crate::util::read_u8_le(&mut r)?;
-
-        // facial_hair: u8
-        let facial_hair = crate::util::read_u8_le(&mut r)?;
-
-        // face: u8
-        let face = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            player,
-            new_name,
-            gender,
-            skin_color,
-            hair_color,
-            hair_style,
-            facial_hair,
-            face,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

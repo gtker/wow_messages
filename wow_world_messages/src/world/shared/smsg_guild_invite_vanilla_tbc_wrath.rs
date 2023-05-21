@@ -14,6 +14,32 @@ pub struct SMSG_GUILD_INVITE {
 }
 
 impl crate::private::Sealed for SMSG_GUILD_INVITE {}
+impl SMSG_GUILD_INVITE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=512).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0083, size: body_size });
+        }
+
+        // player_name: CString
+        let player_name = {
+            let player_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(player_name)?
+        };
+
+        // guild_name: CString
+        let guild_name = {
+            let guild_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(guild_name)?
+        };
+
+        Ok(Self {
+            player_name,
+            guild_name,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GUILD_INVITE {
     const OPCODE: u32 = 0x0083;
 
@@ -72,27 +98,8 @@ impl crate::Message for SMSG_GUILD_INVITE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=512).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0083, size: body_size });
-        }
-
-        // player_name: CString
-        let player_name = {
-            let player_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(player_name)?
-        };
-
-        // guild_name: CString
-        let guild_name = {
-            let guild_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(guild_name)?
-        };
-
-        Ok(Self {
-            player_name,
-            guild_name,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -12,6 +12,22 @@ pub struct CMSG_CANCEL_TEMP_ENCHANTMENT {
 }
 
 impl crate::private::Sealed for CMSG_CANCEL_TEMP_ENCHANTMENT {}
+impl CMSG_CANCEL_TEMP_ENCHANTMENT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0379, size: body_size });
+        }
+
+        // slot: u32
+        let slot = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            slot,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CANCEL_TEMP_ENCHANTMENT {
     const OPCODE: u32 = 0x0379;
 
@@ -57,17 +73,8 @@ impl crate::Message for CMSG_CANCEL_TEMP_ENCHANTMENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0379, size: body_size });
-        }
-
-        // slot: u32
-        let slot = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            slot,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

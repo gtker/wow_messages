@@ -40,6 +40,78 @@ pub struct CMSG_AUCTION_LIST_ITEMS {
 }
 
 impl crate::private::Sealed for CMSG_AUCTION_LIST_ITEMS {}
+impl CMSG_AUCTION_LIST_ITEMS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(34..=801).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0258, size: body_size });
+        }
+
+        // auctioneer: Guid
+        let auctioneer = crate::util::read_guid(&mut r)?;
+
+        // list_start_item: u32
+        let list_start_item = crate::util::read_u32_le(&mut r)?;
+
+        // searched_name: CString
+        let searched_name = {
+            let searched_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(searched_name)?
+        };
+
+        // minimum_level: u8
+        let minimum_level = crate::util::read_u8_le(&mut r)?;
+
+        // maximum_level: u8
+        let maximum_level = crate::util::read_u8_le(&mut r)?;
+
+        // auction_slot_id: u32
+        let auction_slot_id = crate::util::read_u32_le(&mut r)?;
+
+        // auction_main_category: u32
+        let auction_main_category = crate::util::read_u32_le(&mut r)?;
+
+        // auction_sub_category: u32
+        let auction_sub_category = crate::util::read_u32_le(&mut r)?;
+
+        // auction_quality: ItemQuality
+        let auction_quality = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        // usable: u8
+        let usable = crate::util::read_u8_le(&mut r)?;
+
+        // is_full: u8
+        let is_full = crate::util::read_u8_le(&mut r)?;
+
+        // amount_of_sorted_auctions: u8
+        let amount_of_sorted_auctions = crate::util::read_u8_le(&mut r)?;
+
+        // sorted_auctions: AuctionSort[amount_of_sorted_auctions]
+        let sorted_auctions = {
+            let mut sorted_auctions = Vec::with_capacity(amount_of_sorted_auctions as usize);
+            for _ in 0..amount_of_sorted_auctions {
+                sorted_auctions.push(AuctionSort::read(&mut r)?);
+            }
+            sorted_auctions
+        };
+
+        Ok(Self {
+            auctioneer,
+            list_start_item,
+            searched_name,
+            minimum_level,
+            maximum_level,
+            auction_slot_id,
+            auction_main_category,
+            auction_sub_category,
+            auction_quality,
+            usable,
+            is_full,
+            sorted_auctions,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
     const OPCODE: u32 = 0x0258;
 
@@ -169,73 +241,8 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(34..=801).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0258, size: body_size });
-        }
-
-        // auctioneer: Guid
-        let auctioneer = crate::util::read_guid(&mut r)?;
-
-        // list_start_item: u32
-        let list_start_item = crate::util::read_u32_le(&mut r)?;
-
-        // searched_name: CString
-        let searched_name = {
-            let searched_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(searched_name)?
-        };
-
-        // minimum_level: u8
-        let minimum_level = crate::util::read_u8_le(&mut r)?;
-
-        // maximum_level: u8
-        let maximum_level = crate::util::read_u8_le(&mut r)?;
-
-        // auction_slot_id: u32
-        let auction_slot_id = crate::util::read_u32_le(&mut r)?;
-
-        // auction_main_category: u32
-        let auction_main_category = crate::util::read_u32_le(&mut r)?;
-
-        // auction_sub_category: u32
-        let auction_sub_category = crate::util::read_u32_le(&mut r)?;
-
-        // auction_quality: ItemQuality
-        let auction_quality = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        // usable: u8
-        let usable = crate::util::read_u8_le(&mut r)?;
-
-        // is_full: u8
-        let is_full = crate::util::read_u8_le(&mut r)?;
-
-        // amount_of_sorted_auctions: u8
-        let amount_of_sorted_auctions = crate::util::read_u8_le(&mut r)?;
-
-        // sorted_auctions: AuctionSort[amount_of_sorted_auctions]
-        let sorted_auctions = {
-            let mut sorted_auctions = Vec::with_capacity(amount_of_sorted_auctions as usize);
-            for _ in 0..amount_of_sorted_auctions {
-                sorted_auctions.push(AuctionSort::read(&mut r)?);
-            }
-            sorted_auctions
-        };
-
-        Ok(Self {
-            auctioneer,
-            list_start_item,
-            searched_name,
-            minimum_level,
-            maximum_level,
-            auction_slot_id,
-            auction_main_category,
-            auction_sub_category,
-            auction_quality,
-            usable,
-            is_full,
-            sorted_auctions,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

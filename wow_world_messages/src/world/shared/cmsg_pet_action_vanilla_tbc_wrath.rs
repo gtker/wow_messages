@@ -18,6 +18,30 @@ pub struct CMSG_PET_ACTION {
 }
 
 impl crate::private::Sealed for CMSG_PET_ACTION {}
+impl CMSG_PET_ACTION {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 20 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0175, size: body_size });
+        }
+
+        // pet: Guid
+        let pet = crate::util::read_guid(&mut r)?;
+
+        // data: u32
+        let data = crate::util::read_u32_le(&mut r)?;
+
+        // target: Guid
+        let target = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            pet,
+            data,
+            target,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_PET_ACTION {
     const OPCODE: u32 = 0x0175;
 
@@ -73,25 +97,8 @@ impl crate::Message for CMSG_PET_ACTION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 20 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0175, size: body_size });
-        }
-
-        // pet: Guid
-        let pet = crate::util::read_guid(&mut r)?;
-
-        // data: u32
-        let data = crate::util::read_u32_le(&mut r)?;
-
-        // target: Guid
-        let target = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            pet,
-            data,
-            target,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

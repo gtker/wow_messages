@@ -14,6 +14,34 @@ pub struct MSG_RAID_READY_CHECK_CONFIRM_Client {
 }
 
 impl crate::private::Sealed for MSG_RAID_READY_CHECK_CONFIRM_Client {}
+impl MSG_RAID_READY_CHECK_CONFIRM_Client {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size > 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03AE, size: body_size });
+        }
+
+        // optional set
+        let current_size = {
+            0
+        };
+        let set = if current_size < body_size as usize {
+            // state: u8
+            let state = crate::util::read_u8_le(&mut r)?;
+
+            Some(MSG_RAID_READY_CHECK_CONFIRM_Client_set {
+                state,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            set,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_RAID_READY_CHECK_CONFIRM_Client {
     const OPCODE: u32 = 0x03ae;
 
@@ -67,29 +95,8 @@ impl crate::Message for MSG_RAID_READY_CHECK_CONFIRM_Client {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size > 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03AE, size: body_size });
-        }
-
-        // optional set
-        let current_size = {
-            0
-        };
-        let set = if current_size < body_size as usize {
-            // state: u8
-            let state = crate::util::read_u8_le(&mut r)?;
-
-            Some(MSG_RAID_READY_CHECK_CONFIRM_Client_set {
-                state,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            set,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

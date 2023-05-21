@@ -16,6 +16,26 @@ pub struct CMSG_MOVE_TIME_SKIPPED {
 }
 
 impl crate::private::Sealed for CMSG_MOVE_TIME_SKIPPED {}
+impl CMSG_MOVE_TIME_SKIPPED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02CE, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // lag: u32
+        let lag = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            lag,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_MOVE_TIME_SKIPPED {
     const OPCODE: u32 = 0x02ce;
 
@@ -33,21 +53,8 @@ impl crate::Message for CMSG_MOVE_TIME_SKIPPED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02CE, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // lag: u32
-        let lag = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            lag,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

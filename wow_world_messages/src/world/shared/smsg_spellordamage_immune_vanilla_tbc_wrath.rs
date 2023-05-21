@@ -20,6 +20,34 @@ pub struct SMSG_SPELLORDAMAGE_IMMUNE {
 }
 
 impl crate::private::Sealed for SMSG_SPELLORDAMAGE_IMMUNE {}
+impl SMSG_SPELLORDAMAGE_IMMUNE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 21 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0263, size: body_size });
+        }
+
+        // caster: Guid
+        let caster = crate::util::read_guid(&mut r)?;
+
+        // target: Guid
+        let target = crate::util::read_guid(&mut r)?;
+
+        // id: u32
+        let id = crate::util::read_u32_le(&mut r)?;
+
+        // debug_log_format: Bool
+        let debug_log_format = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            caster,
+            target,
+            id,
+            debug_log_format,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SPELLORDAMAGE_IMMUNE {
     const OPCODE: u32 = 0x0263;
 
@@ -80,29 +108,8 @@ impl crate::Message for SMSG_SPELLORDAMAGE_IMMUNE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 21 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0263, size: body_size });
-        }
-
-        // caster: Guid
-        let caster = crate::util::read_guid(&mut r)?;
-
-        // target: Guid
-        let target = crate::util::read_guid(&mut r)?;
-
-        // id: u32
-        let id = crate::util::read_u32_le(&mut r)?;
-
-        // debug_log_format: Bool
-        let debug_log_format = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            caster,
-            target,
-            id,
-            debug_log_format,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

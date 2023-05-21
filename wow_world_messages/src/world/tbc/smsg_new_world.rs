@@ -20,6 +20,30 @@ pub struct SMSG_NEW_WORLD {
 }
 
 impl crate::private::Sealed for SMSG_NEW_WORLD {}
+impl SMSG_NEW_WORLD {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 20 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003E, size: body_size });
+        }
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // position: Vector3d
+        let position = Vector3d::read(&mut r)?;
+
+        // orientation: f32
+        let orientation = crate::util::read_f32_le(&mut r)?;
+
+        Ok(Self {
+            map,
+            position,
+            orientation,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_NEW_WORLD {
     const OPCODE: u32 = 0x003e;
 
@@ -86,25 +110,8 @@ impl crate::Message for SMSG_NEW_WORLD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 20 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003E, size: body_size });
-        }
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
-
-        // orientation: f32
-        let orientation = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            map,
-            position,
-            orientation,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

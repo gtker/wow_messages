@@ -14,6 +14,22 @@ pub struct CMSG_BUY_STABLE_SLOT {
 }
 
 impl crate::private::Sealed for CMSG_BUY_STABLE_SLOT {}
+impl CMSG_BUY_STABLE_SLOT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0272, size: body_size });
+        }
+
+        // npc: Guid
+        let npc = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            npc,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_BUY_STABLE_SLOT {
     const OPCODE: u32 = 0x0272;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_BUY_STABLE_SLOT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0272, size: body_size });
-        }
-
-        // npc: Guid
-        let npc = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            npc,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

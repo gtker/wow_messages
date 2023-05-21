@@ -65,6 +65,92 @@ pub struct SMSG_PETITION_QUERY_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_PETITION_QUERY_RESPONSE {}
+impl SMSG_PETITION_QUERY_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(64..=574).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C7, size: body_size });
+        }
+
+        // petition_id: u32
+        let petition_id = crate::util::read_u32_le(&mut r)?;
+
+        // charter_owner: Guid
+        let charter_owner = crate::util::read_guid(&mut r)?;
+
+        // guild_name: CString
+        let guild_name = {
+            let guild_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(guild_name)?
+        };
+
+        // body_text: CString
+        let body_text = {
+            let body_text = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(body_text)?
+        };
+
+        // unknown_flags: u32
+        let unknown_flags = crate::util::read_u32_le(&mut r)?;
+
+        // minimum_signatures: u32
+        let minimum_signatures = crate::util::read_u32_le(&mut r)?;
+
+        // maximum_signatures: u32
+        let maximum_signatures = crate::util::read_u32_le(&mut r)?;
+
+        // deadline: u32
+        let deadline = crate::util::read_u32_le(&mut r)?;
+
+        // issue_date: u32
+        let issue_date = crate::util::read_u32_le(&mut r)?;
+
+        // allowed_guild_id: u32
+        let allowed_guild_id = crate::util::read_u32_le(&mut r)?;
+
+        // allowed_class: AllowedClass
+        let allowed_class = AllowedClass::new(crate::util::read_u32_le(&mut r)?);
+
+        // allowed_race: AllowedRace
+        let allowed_race = AllowedRace::new(crate::util::read_u32_le(&mut r)?);
+
+        // allowed_genders: u16
+        let allowed_genders = crate::util::read_u16_le(&mut r)?;
+
+        // allowed_minimum_level: Level32
+        let allowed_minimum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
+
+        // allowed_maximum_level: Level32
+        let allowed_maximum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
+
+        // todo_amount_of_signers: u32
+        let todo_amount_of_signers = crate::util::read_u32_le(&mut r)?;
+
+        // number_of_choices: u32
+        let number_of_choices = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            petition_id,
+            charter_owner,
+            guild_name,
+            body_text,
+            unknown_flags,
+            minimum_signatures,
+            maximum_signatures,
+            deadline,
+            issue_date,
+            allowed_guild_id,
+            allowed_class,
+            allowed_race,
+            allowed_genders,
+            allowed_minimum_level,
+            allowed_maximum_level,
+            todo_amount_of_signers,
+            number_of_choices,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
     const OPCODE: u32 = 0x01c7;
 
@@ -198,87 +284,8 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(64..=574).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C7, size: body_size });
-        }
-
-        // petition_id: u32
-        let petition_id = crate::util::read_u32_le(&mut r)?;
-
-        // charter_owner: Guid
-        let charter_owner = crate::util::read_guid(&mut r)?;
-
-        // guild_name: CString
-        let guild_name = {
-            let guild_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(guild_name)?
-        };
-
-        // body_text: CString
-        let body_text = {
-            let body_text = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(body_text)?
-        };
-
-        // unknown_flags: u32
-        let unknown_flags = crate::util::read_u32_le(&mut r)?;
-
-        // minimum_signatures: u32
-        let minimum_signatures = crate::util::read_u32_le(&mut r)?;
-
-        // maximum_signatures: u32
-        let maximum_signatures = crate::util::read_u32_le(&mut r)?;
-
-        // deadline: u32
-        let deadline = crate::util::read_u32_le(&mut r)?;
-
-        // issue_date: u32
-        let issue_date = crate::util::read_u32_le(&mut r)?;
-
-        // allowed_guild_id: u32
-        let allowed_guild_id = crate::util::read_u32_le(&mut r)?;
-
-        // allowed_class: AllowedClass
-        let allowed_class = AllowedClass::new(crate::util::read_u32_le(&mut r)?);
-
-        // allowed_race: AllowedRace
-        let allowed_race = AllowedRace::new(crate::util::read_u32_le(&mut r)?);
-
-        // allowed_genders: u16
-        let allowed_genders = crate::util::read_u16_le(&mut r)?;
-
-        // allowed_minimum_level: Level32
-        let allowed_minimum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
-
-        // allowed_maximum_level: Level32
-        let allowed_maximum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
-
-        // todo_amount_of_signers: u32
-        let todo_amount_of_signers = crate::util::read_u32_le(&mut r)?;
-
-        // number_of_choices: u32
-        let number_of_choices = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            petition_id,
-            charter_owner,
-            guild_name,
-            body_text,
-            unknown_flags,
-            minimum_signatures,
-            maximum_signatures,
-            deadline,
-            issue_date,
-            allowed_guild_id,
-            allowed_class,
-            allowed_race,
-            allowed_genders,
-            allowed_minimum_level,
-            allowed_maximum_level,
-            todo_amount_of_signers,
-            number_of_choices,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

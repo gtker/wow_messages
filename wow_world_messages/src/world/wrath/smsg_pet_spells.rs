@@ -32,6 +32,94 @@ pub struct SMSG_PET_SPELLS {
 }
 
 impl crate::private::Sealed for SMSG_PET_SPELLS {}
+impl SMSG_PET_SPELLS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(8..=4668).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0179, size: body_size });
+        }
+
+        // pet: Guid
+        let pet = crate::util::read_guid(&mut r)?;
+
+        // optional action_bars
+        let current_size = {
+            8 // pet: Guid
+        };
+        let action_bars = if current_size < body_size as usize {
+            // family: CreatureFamily
+            let family = (crate::util::read_u16_le(&mut r)? as u8).try_into()?;
+
+            // duration: u32
+            let duration = crate::util::read_u32_le(&mut r)?;
+
+            // react: PetReactState
+            let react = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+            // command: PetCommandState
+            let command = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+            // unknown: u8
+            let unknown = crate::util::read_u8_le(&mut r)?;
+
+            // pet_enabled: PetEnabled
+            let pet_enabled = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+            // action_bars: u32[10]
+            let action_bars = {
+                let mut action_bars = [u32::default(); 10];
+                for i in action_bars.iter_mut() {
+                    *i = crate::util::read_u32_le(&mut r)?;
+                }
+                action_bars
+            };
+
+            // amount_of_spells: u8
+            let amount_of_spells = crate::util::read_u8_le(&mut r)?;
+
+            // spells: u32[amount_of_spells]
+            let spells = {
+                let mut spells = Vec::with_capacity(amount_of_spells as usize);
+                for _ in 0..amount_of_spells {
+                    spells.push(crate::util::read_u32_le(&mut r)?);
+                }
+                spells
+            };
+
+            // amount_of_cooldowns: u8
+            let amount_of_cooldowns = crate::util::read_u8_le(&mut r)?;
+
+            // cooldowns: PetSpellCooldown[amount_of_cooldowns]
+            let cooldowns = {
+                let mut cooldowns = Vec::with_capacity(amount_of_cooldowns as usize);
+                for _ in 0..amount_of_cooldowns {
+                    cooldowns.push(PetSpellCooldown::read(&mut r)?);
+                }
+                cooldowns
+            };
+
+            Some(SMSG_PET_SPELLS_action_bars {
+                family,
+                duration,
+                react,
+                command,
+                unknown,
+                pet_enabled,
+                action_bars,
+                spells,
+                cooldowns,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            pet,
+            action_bars,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PET_SPELLS {
     const OPCODE: u32 = 0x0179;
 
@@ -186,89 +274,8 @@ impl crate::Message for SMSG_PET_SPELLS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(8..=4668).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0179, size: body_size });
-        }
-
-        // pet: Guid
-        let pet = crate::util::read_guid(&mut r)?;
-
-        // optional action_bars
-        let current_size = {
-            8 // pet: Guid
-        };
-        let action_bars = if current_size < body_size as usize {
-            // family: CreatureFamily
-            let family = (crate::util::read_u16_le(&mut r)? as u8).try_into()?;
-
-            // duration: u32
-            let duration = crate::util::read_u32_le(&mut r)?;
-
-            // react: PetReactState
-            let react = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-            // command: PetCommandState
-            let command = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-            // unknown: u8
-            let unknown = crate::util::read_u8_le(&mut r)?;
-
-            // pet_enabled: PetEnabled
-            let pet_enabled = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-            // action_bars: u32[10]
-            let action_bars = {
-                let mut action_bars = [u32::default(); 10];
-                for i in action_bars.iter_mut() {
-                    *i = crate::util::read_u32_le(&mut r)?;
-                }
-                action_bars
-            };
-
-            // amount_of_spells: u8
-            let amount_of_spells = crate::util::read_u8_le(&mut r)?;
-
-            // spells: u32[amount_of_spells]
-            let spells = {
-                let mut spells = Vec::with_capacity(amount_of_spells as usize);
-                for _ in 0..amount_of_spells {
-                    spells.push(crate::util::read_u32_le(&mut r)?);
-                }
-                spells
-            };
-
-            // amount_of_cooldowns: u8
-            let amount_of_cooldowns = crate::util::read_u8_le(&mut r)?;
-
-            // cooldowns: PetSpellCooldown[amount_of_cooldowns]
-            let cooldowns = {
-                let mut cooldowns = Vec::with_capacity(amount_of_cooldowns as usize);
-                for _ in 0..amount_of_cooldowns {
-                    cooldowns.push(PetSpellCooldown::read(&mut r)?);
-                }
-                cooldowns
-            };
-
-            Some(SMSG_PET_SPELLS_action_bars {
-                family,
-                duration,
-                react,
-                command,
-                unknown,
-                pet_enabled,
-                action_bars,
-                spells,
-                cooldowns,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            pet,
-            action_bars,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

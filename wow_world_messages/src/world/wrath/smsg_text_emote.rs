@@ -21,6 +21,38 @@ pub struct SMSG_TEXT_EMOTE {
 }
 
 impl crate::private::Sealed for SMSG_TEXT_EMOTE {}
+impl SMSG_TEXT_EMOTE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(21..=8020).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0105, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // text_emote: TextEmote
+        let text_emote = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // emote: u32
+        let emote = crate::util::read_u32_le(&mut r)?;
+
+        // name: SizedCString
+        let name = {
+            let name = crate::util::read_u32_le(&mut r)?;
+            let name = crate::util::read_sized_c_string_to_vec(&mut r, name)?;
+            String::from_utf8(name)?
+        };
+
+        Ok(Self {
+            guid,
+            text_emote,
+            emote,
+            name,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_TEXT_EMOTE {
     const OPCODE: u32 = 0x0105;
 
@@ -84,33 +116,8 @@ impl crate::Message for SMSG_TEXT_EMOTE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(21..=8020).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0105, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // text_emote: TextEmote
-        let text_emote = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // emote: u32
-        let emote = crate::util::read_u32_le(&mut r)?;
-
-        // name: SizedCString
-        let name = {
-            let name = crate::util::read_u32_le(&mut r)?;
-            let name = crate::util::read_sized_c_string_to_vec(&mut r, name)?;
-            String::from_utf8(name)?
-        };
-
-        Ok(Self {
-            guid,
-            text_emote,
-            emote,
-            name,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

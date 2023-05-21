@@ -13,6 +13,22 @@ pub struct CMSG_SET_TAXI_BENCHMARK_MODE {
 }
 
 impl crate::private::Sealed for CMSG_SET_TAXI_BENCHMARK_MODE {}
+impl CMSG_SET_TAXI_BENCHMARK_MODE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0389, size: body_size });
+        }
+
+        // mode: u8
+        let mode = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            mode,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_SET_TAXI_BENCHMARK_MODE {
     const OPCODE: u32 = 0x0389;
 
@@ -58,17 +74,8 @@ impl crate::Message for CMSG_SET_TAXI_BENCHMARK_MODE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0389, size: body_size });
-        }
-
-        // mode: u8
-        let mode = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            mode,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -14,6 +14,22 @@ pub struct SMSG_LFG_TELEPORT_DENIED {
 }
 
 impl crate::private::Sealed for SMSG_LFG_TELEPORT_DENIED {}
+impl SMSG_LFG_TELEPORT_DENIED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0200, size: body_size });
+        }
+
+        // error: LfgTeleportError
+        let error = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            error,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LFG_TELEPORT_DENIED {
     const OPCODE: u32 = 0x0200;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_LFG_TELEPORT_DENIED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0200, size: body_size });
-        }
-
-        // error: LfgTeleportError
-        let error = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            error,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

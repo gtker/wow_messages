@@ -14,6 +14,22 @@ pub struct CMSG_GRANT_LEVEL {
 }
 
 impl crate::private::Sealed for CMSG_GRANT_LEVEL {}
+impl CMSG_GRANT_LEVEL {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=9).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x040C, size: body_size });
+        }
+
+        // player: PackedGuid
+        let player = crate::util::read_packed_guid(&mut r)?;
+
+        Ok(Self {
+            player,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GRANT_LEVEL {
     const OPCODE: u32 = 0x040c;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_GRANT_LEVEL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=9).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x040C, size: body_size });
-        }
-
-        // player: PackedGuid
-        let player = crate::util::read_packed_guid(&mut r)?;
-
-        Ok(Self {
-            player,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

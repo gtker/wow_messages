@@ -18,6 +18,26 @@ pub struct SMSG_BINDER_CONFIRM {
 }
 
 impl crate::private::Sealed for SMSG_BINDER_CONFIRM {}
+impl SMSG_BINDER_CONFIRM {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EB, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // area: Area
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            guid,
+            area,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_BINDER_CONFIRM {
     const OPCODE: u32 = 0x02eb;
 
@@ -68,21 +88,8 @@ impl crate::Message for SMSG_BINDER_CONFIRM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02EB, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // area: Area
-        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            guid,
-            area,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

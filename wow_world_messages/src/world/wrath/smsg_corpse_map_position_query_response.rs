@@ -19,6 +19,34 @@ pub struct SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE {}
+impl SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04B7, size: body_size });
+        }
+
+        // unknown1: f32
+        let unknown1 = crate::util::read_f32_le(&mut r)?;
+
+        // unknown2: f32
+        let unknown2 = crate::util::read_f32_le(&mut r)?;
+
+        // unknown3: f32
+        let unknown3 = crate::util::read_f32_le(&mut r)?;
+
+        // unknown4: f32
+        let unknown4 = crate::util::read_f32_le(&mut r)?;
+
+        Ok(Self {
+            unknown1,
+            unknown2,
+            unknown3,
+            unknown4,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE {
     const OPCODE: u32 = 0x04b7;
 
@@ -79,29 +107,8 @@ impl crate::Message for SMSG_CORPSE_MAP_POSITION_QUERY_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04B7, size: body_size });
-        }
-
-        // unknown1: f32
-        let unknown1 = crate::util::read_f32_le(&mut r)?;
-
-        // unknown2: f32
-        let unknown2 = crate::util::read_f32_le(&mut r)?;
-
-        // unknown3: f32
-        let unknown3 = crate::util::read_f32_le(&mut r)?;
-
-        // unknown4: f32
-        let unknown4 = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            unknown1,
-            unknown2,
-            unknown3,
-            unknown4,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -17,6 +17,26 @@ pub struct CMSG_BUYBACK_ITEM {
 }
 
 impl crate::private::Sealed for CMSG_BUYBACK_ITEM {}
+impl CMSG_BUYBACK_ITEM {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0290, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // slot: BuybackSlot
+        let slot = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            guid,
+            slot,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_BUYBACK_ITEM {
     const OPCODE: u32 = 0x0290;
 
@@ -67,21 +87,8 @@ impl crate::Message for CMSG_BUYBACK_ITEM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0290, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // slot: BuybackSlot
-        let slot = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            guid,
-            slot,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -72,6 +72,165 @@ pub struct SMSG_QUESTGIVER_OFFER_REWARD {
 }
 
 impl crate::private::Sealed for SMSG_QUESTGIVER_OFFER_REWARD {}
+impl SMSG_QUESTGIVER_OFFER_REWARD {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(142..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x018D, size: body_size });
+        }
+
+        // npc: Guid
+        let npc = crate::util::read_guid(&mut r)?;
+
+        // quest_id: u32
+        let quest_id = crate::util::read_u32_le(&mut r)?;
+
+        // title: CString
+        let title = {
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(title)?
+        };
+
+        // offer_reward_text: CString
+        let offer_reward_text = {
+            let offer_reward_text = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(offer_reward_text)?
+        };
+
+        // auto_finish: Bool32
+        let auto_finish = crate::util::read_u32_le(&mut r)? != 0;
+
+        // flags1: u32
+        let flags1 = crate::util::read_u32_le(&mut r)?;
+
+        // suggested_players: u32
+        let suggested_players = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_emotes: u32
+        let amount_of_emotes = crate::util::read_u32_le(&mut r)?;
+
+        // emotes: NpcTextUpdateEmote[amount_of_emotes]
+        let emotes = {
+            let mut emotes = Vec::with_capacity(amount_of_emotes as usize);
+            for _ in 0..amount_of_emotes {
+                emotes.push(NpcTextUpdateEmote::read(&mut r)?);
+            }
+            emotes
+        };
+
+        // amount_of_choice_item_rewards: u32
+        let amount_of_choice_item_rewards = crate::util::read_u32_le(&mut r)?;
+
+        // choice_item_rewards: QuestItemRequirement[amount_of_choice_item_rewards]
+        let choice_item_rewards = {
+            let mut choice_item_rewards = Vec::with_capacity(amount_of_choice_item_rewards as usize);
+            for _ in 0..amount_of_choice_item_rewards {
+                choice_item_rewards.push(QuestItemRequirement::read(&mut r)?);
+            }
+            choice_item_rewards
+        };
+
+        // amount_of_item_rewards: u32
+        let amount_of_item_rewards = crate::util::read_u32_le(&mut r)?;
+
+        // item_rewards: QuestItemRequirement[amount_of_item_rewards]
+        let item_rewards = {
+            let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
+            for _ in 0..amount_of_item_rewards {
+                item_rewards.push(QuestItemRequirement::read(&mut r)?);
+            }
+            item_rewards
+        };
+
+        // money_reward: Gold
+        let money_reward = Gold::new(crate::util::read_u32_le(&mut r)?);
+
+        // experience_reward: u32
+        let experience_reward = crate::util::read_u32_le(&mut r)?;
+
+        // honor_reward: u32
+        let honor_reward = crate::util::read_u32_le(&mut r)?;
+
+        // honor_reward_multiplier: f32
+        let honor_reward_multiplier = crate::util::read_f32_le(&mut r)?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        // reward_spell: u32
+        let reward_spell = crate::util::read_u32_le(&mut r)?;
+
+        // reward_spell_cast: u32
+        let reward_spell_cast = crate::util::read_u32_le(&mut r)?;
+
+        // title_reward: u32
+        let title_reward = crate::util::read_u32_le(&mut r)?;
+
+        // reward_talents: u32
+        let reward_talents = crate::util::read_u32_le(&mut r)?;
+
+        // reward_arena_points: u32
+        let reward_arena_points = crate::util::read_u32_le(&mut r)?;
+
+        // reward_reputation_mask: u32
+        let reward_reputation_mask = crate::util::read_u32_le(&mut r)?;
+
+        // reward_factions: u32[5]
+        let reward_factions = {
+            let mut reward_factions = [u32::default(); 5];
+            for i in reward_factions.iter_mut() {
+                *i = crate::util::read_u32_le(&mut r)?;
+            }
+            reward_factions
+        };
+
+        // reward_reputations: u32[5]
+        let reward_reputations = {
+            let mut reward_reputations = [u32::default(); 5];
+            for i in reward_reputations.iter_mut() {
+                *i = crate::util::read_u32_le(&mut r)?;
+            }
+            reward_reputations
+        };
+
+        // reward_reputations_override: u32[5]
+        let reward_reputations_override = {
+            let mut reward_reputations_override = [u32::default(); 5];
+            for i in reward_reputations_override.iter_mut() {
+                *i = crate::util::read_u32_le(&mut r)?;
+            }
+            reward_reputations_override
+        };
+
+        Ok(Self {
+            npc,
+            quest_id,
+            title,
+            offer_reward_text,
+            auto_finish,
+            flags1,
+            suggested_players,
+            emotes,
+            choice_item_rewards,
+            item_rewards,
+            money_reward,
+            experience_reward,
+            honor_reward,
+            honor_reward_multiplier,
+            unknown1,
+            reward_spell,
+            reward_spell_cast,
+            title_reward,
+            reward_talents,
+            reward_arena_points,
+            reward_reputation_mask,
+            reward_factions,
+            reward_reputations,
+            reward_reputations_override,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
     const OPCODE: u32 = 0x018d;
 
@@ -349,160 +508,8 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(142..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x018D, size: body_size });
-        }
-
-        // npc: Guid
-        let npc = crate::util::read_guid(&mut r)?;
-
-        // quest_id: u32
-        let quest_id = crate::util::read_u32_le(&mut r)?;
-
-        // title: CString
-        let title = {
-            let title = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(title)?
-        };
-
-        // offer_reward_text: CString
-        let offer_reward_text = {
-            let offer_reward_text = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(offer_reward_text)?
-        };
-
-        // auto_finish: Bool32
-        let auto_finish = crate::util::read_u32_le(&mut r)? != 0;
-
-        // flags1: u32
-        let flags1 = crate::util::read_u32_le(&mut r)?;
-
-        // suggested_players: u32
-        let suggested_players = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_emotes: u32
-        let amount_of_emotes = crate::util::read_u32_le(&mut r)?;
-
-        // emotes: NpcTextUpdateEmote[amount_of_emotes]
-        let emotes = {
-            let mut emotes = Vec::with_capacity(amount_of_emotes as usize);
-            for _ in 0..amount_of_emotes {
-                emotes.push(NpcTextUpdateEmote::read(&mut r)?);
-            }
-            emotes
-        };
-
-        // amount_of_choice_item_rewards: u32
-        let amount_of_choice_item_rewards = crate::util::read_u32_le(&mut r)?;
-
-        // choice_item_rewards: QuestItemRequirement[amount_of_choice_item_rewards]
-        let choice_item_rewards = {
-            let mut choice_item_rewards = Vec::with_capacity(amount_of_choice_item_rewards as usize);
-            for _ in 0..amount_of_choice_item_rewards {
-                choice_item_rewards.push(QuestItemRequirement::read(&mut r)?);
-            }
-            choice_item_rewards
-        };
-
-        // amount_of_item_rewards: u32
-        let amount_of_item_rewards = crate::util::read_u32_le(&mut r)?;
-
-        // item_rewards: QuestItemRequirement[amount_of_item_rewards]
-        let item_rewards = {
-            let mut item_rewards = Vec::with_capacity(amount_of_item_rewards as usize);
-            for _ in 0..amount_of_item_rewards {
-                item_rewards.push(QuestItemRequirement::read(&mut r)?);
-            }
-            item_rewards
-        };
-
-        // money_reward: Gold
-        let money_reward = Gold::new(crate::util::read_u32_le(&mut r)?);
-
-        // experience_reward: u32
-        let experience_reward = crate::util::read_u32_le(&mut r)?;
-
-        // honor_reward: u32
-        let honor_reward = crate::util::read_u32_le(&mut r)?;
-
-        // honor_reward_multiplier: f32
-        let honor_reward_multiplier = crate::util::read_f32_le(&mut r)?;
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        // reward_spell: u32
-        let reward_spell = crate::util::read_u32_le(&mut r)?;
-
-        // reward_spell_cast: u32
-        let reward_spell_cast = crate::util::read_u32_le(&mut r)?;
-
-        // title_reward: u32
-        let title_reward = crate::util::read_u32_le(&mut r)?;
-
-        // reward_talents: u32
-        let reward_talents = crate::util::read_u32_le(&mut r)?;
-
-        // reward_arena_points: u32
-        let reward_arena_points = crate::util::read_u32_le(&mut r)?;
-
-        // reward_reputation_mask: u32
-        let reward_reputation_mask = crate::util::read_u32_le(&mut r)?;
-
-        // reward_factions: u32[5]
-        let reward_factions = {
-            let mut reward_factions = [u32::default(); 5];
-            for i in reward_factions.iter_mut() {
-                *i = crate::util::read_u32_le(&mut r)?;
-            }
-            reward_factions
-        };
-
-        // reward_reputations: u32[5]
-        let reward_reputations = {
-            let mut reward_reputations = [u32::default(); 5];
-            for i in reward_reputations.iter_mut() {
-                *i = crate::util::read_u32_le(&mut r)?;
-            }
-            reward_reputations
-        };
-
-        // reward_reputations_override: u32[5]
-        let reward_reputations_override = {
-            let mut reward_reputations_override = [u32::default(); 5];
-            for i in reward_reputations_override.iter_mut() {
-                *i = crate::util::read_u32_le(&mut r)?;
-            }
-            reward_reputations_override
-        };
-
-        Ok(Self {
-            npc,
-            quest_id,
-            title,
-            offer_reward_text,
-            auto_finish,
-            flags1,
-            suggested_players,
-            emotes,
-            choice_item_rewards,
-            item_rewards,
-            money_reward,
-            experience_reward,
-            honor_reward,
-            honor_reward_multiplier,
-            unknown1,
-            reward_spell,
-            reward_spell_cast,
-            title_reward,
-            reward_talents,
-            reward_arena_points,
-            reward_reputation_mask,
-            reward_factions,
-            reward_reputations,
-            reward_reputations_override,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

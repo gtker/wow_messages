@@ -14,6 +14,22 @@ pub struct CMSG_SUMMON_RESPONSE {
 }
 
 impl crate::private::Sealed for CMSG_SUMMON_RESPONSE {}
+impl CMSG_SUMMON_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02AC, size: body_size });
+        }
+
+        // summoner: Guid
+        let summoner = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            summoner,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_SUMMON_RESPONSE {
     const OPCODE: u32 = 0x02ac;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_SUMMON_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02AC, size: body_size });
-        }
-
-        // summoner: Guid
-        let summoner = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            summoner,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

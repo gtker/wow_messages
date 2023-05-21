@@ -14,6 +14,22 @@ pub struct CMSG_REQUEST_ACCOUNT_DATA {
 }
 
 impl crate::private::Sealed for CMSG_REQUEST_ACCOUNT_DATA {}
+impl CMSG_REQUEST_ACCOUNT_DATA {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x020A, size: body_size });
+        }
+
+        // data_type: u32
+        let data_type = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            data_type,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_REQUEST_ACCOUNT_DATA {
     const OPCODE: u32 = 0x020a;
 
@@ -28,17 +44,8 @@ impl crate::Message for CMSG_REQUEST_ACCOUNT_DATA {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x020A, size: body_size });
-        }
-
-        // data_type: u32
-        let data_type = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            data_type,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

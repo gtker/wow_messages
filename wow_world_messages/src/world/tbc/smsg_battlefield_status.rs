@@ -45,6 +45,87 @@ pub struct SMSG_BATTLEFIELD_STATUS {
 }
 
 impl crate::private::Sealed for SMSG_BATTLEFIELD_STATUS {}
+impl SMSG_BATTLEFIELD_STATUS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(18..=26).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D4, size: body_size });
+        }
+
+        // queue_slot: u32
+        let queue_slot = crate::util::read_u32_le(&mut r)?;
+
+        // arena_type: ArenaType
+        let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // unknown1: u8
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
+
+        // battleground_type: BattlegroundType
+        let battleground_type = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // unknown2: u16
+        let unknown2 = crate::util::read_u16_le(&mut r)?;
+
+        // client_instance_id: u32
+        let client_instance_id = crate::util::read_u32_le(&mut r)?;
+
+        // rated: Bool
+        let rated = crate::util::read_u8_le(&mut r)? != 0;
+
+        // status_id: StatusId
+        let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let status_id_if = match status_id {
+            StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
+            StatusId::WaitQueue => {
+                // average_wait_time_in_ms: u32
+                let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                // time_in_queue_in_ms: u32
+                let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                    average_wait_time_in_ms,
+                    time_in_queue_in_ms,
+                }
+            }
+            StatusId::WaitJoin => {
+                // time_to_remove_in_queue_in_ms: u32
+                let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                    time_to_remove_in_queue_in_ms,
+                }
+            }
+            StatusId::InProgress => {
+                // time_to_bg_autoleave_in_ms: u32
+                let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                // time_to_bg_start_in_ms: u32
+                let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                    time_to_bg_autoleave_in_ms,
+                    time_to_bg_start_in_ms,
+                }
+            }
+            StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
+        };
+
+        Ok(Self {
+            queue_slot,
+            arena_type,
+            unknown1,
+            battleground_type,
+            unknown2,
+            client_instance_id,
+            rated,
+            status_id: status_id_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_BATTLEFIELD_STATUS {
     const OPCODE: u32 = 0x02d4;
 
@@ -204,82 +285,8 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(18..=26).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D4, size: body_size });
-        }
-
-        // queue_slot: u32
-        let queue_slot = crate::util::read_u32_le(&mut r)?;
-
-        // arena_type: ArenaType
-        let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(&mut r)?;
-
-        // battleground_type: BattlegroundType
-        let battleground_type = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // unknown2: u16
-        let unknown2 = crate::util::read_u16_le(&mut r)?;
-
-        // client_instance_id: u32
-        let client_instance_id = crate::util::read_u32_le(&mut r)?;
-
-        // rated: Bool
-        let rated = crate::util::read_u8_le(&mut r)? != 0;
-
-        // status_id: StatusId
-        let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let status_id_if = match status_id {
-            StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
-            StatusId::WaitQueue => {
-                // average_wait_time_in_ms: u32
-                let average_wait_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                // time_in_queue_in_ms: u32
-                let time_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
-                    average_wait_time_in_ms,
-                    time_in_queue_in_ms,
-                }
-            }
-            StatusId::WaitJoin => {
-                // time_to_remove_in_queue_in_ms: u32
-                let time_to_remove_in_queue_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
-                    time_to_remove_in_queue_in_ms,
-                }
-            }
-            StatusId::InProgress => {
-                // time_to_bg_autoleave_in_ms: u32
-                let time_to_bg_autoleave_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                // time_to_bg_start_in_ms: u32
-                let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
-                    time_to_bg_autoleave_in_ms,
-                    time_to_bg_start_in_ms,
-                }
-            }
-            StatusId::WaitLeave => SMSG_BATTLEFIELD_STATUS_StatusId::WaitLeave,
-        };
-
-        Ok(Self {
-            queue_slot,
-            arena_type,
-            unknown1,
-            battleground_type,
-            unknown2,
-            client_instance_id,
-            rated,
-            status_id: status_id_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

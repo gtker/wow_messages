@@ -23,6 +23,38 @@ pub struct SMSG_LOOT_ALL_PASSED {
 }
 
 impl crate::private::Sealed for SMSG_LOOT_ALL_PASSED {}
+impl SMSG_LOOT_ALL_PASSED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 24 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x029E, size: body_size });
+        }
+
+        // looted_target: Guid
+        let looted_target = crate::util::read_guid(&mut r)?;
+
+        // loot_slot: u32
+        let loot_slot = crate::util::read_u32_le(&mut r)?;
+
+        // item: u32
+        let item = crate::util::read_u32_le(&mut r)?;
+
+        // item_random_property_id: u32
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
+
+        // item_random_suffix_id: u32
+        let item_random_suffix_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            looted_target,
+            loot_slot,
+            item,
+            item_random_property_id,
+            item_random_suffix_id,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LOOT_ALL_PASSED {
     const OPCODE: u32 = 0x029e;
 
@@ -88,33 +120,8 @@ impl crate::Message for SMSG_LOOT_ALL_PASSED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 24 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x029E, size: body_size });
-        }
-
-        // looted_target: Guid
-        let looted_target = crate::util::read_guid(&mut r)?;
-
-        // loot_slot: u32
-        let loot_slot = crate::util::read_u32_le(&mut r)?;
-
-        // item: u32
-        let item = crate::util::read_u32_le(&mut r)?;
-
-        // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
-
-        // item_random_suffix_id: u32
-        let item_random_suffix_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            looted_target,
-            loot_slot,
-            item,
-            item_random_property_id,
-            item_random_suffix_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

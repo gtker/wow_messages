@@ -30,6 +30,75 @@ pub struct CMSG_WHO {
 }
 
 impl crate::private::Sealed for CMSG_WHO {}
+impl CMSG_WHO {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(26..=10240).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0062, size: body_size });
+        }
+
+        // minimum_level: Level32
+        let minimum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
+
+        // maximum_level: Level32
+        let maximum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
+
+        // player_name: CString
+        let player_name = {
+            let player_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(player_name)?
+        };
+
+        // guild_name: CString
+        let guild_name = {
+            let guild_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(guild_name)?
+        };
+
+        // race_mask: u32
+        let race_mask = crate::util::read_u32_le(&mut r)?;
+
+        // class_mask: u32
+        let class_mask = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_zones: u32
+        let amount_of_zones = crate::util::read_u32_le(&mut r)?;
+
+        // zones: u32[amount_of_zones]
+        let zones = {
+            let mut zones = Vec::with_capacity(amount_of_zones as usize);
+            for _ in 0..amount_of_zones {
+                zones.push(crate::util::read_u32_le(&mut r)?);
+            }
+            zones
+        };
+
+        // amount_of_strings: u32
+        let amount_of_strings = crate::util::read_u32_le(&mut r)?;
+
+        // search_strings: CString[amount_of_strings]
+        let search_strings = {
+            let mut search_strings = Vec::with_capacity(amount_of_strings as usize);
+            for _ in 0..amount_of_strings {
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
+                search_strings.push(String::from_utf8(s)?);
+            }
+            search_strings
+        };
+
+        Ok(Self {
+            minimum_level,
+            maximum_level,
+            player_name,
+            guild_name,
+            race_mask,
+            class_mask,
+            zones,
+            search_strings,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_WHO {
     const OPCODE: u32 = 0x0062;
 
@@ -153,70 +222,8 @@ impl crate::Message for CMSG_WHO {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(26..=10240).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0062, size: body_size });
-        }
-
-        // minimum_level: Level32
-        let minimum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
-
-        // maximum_level: Level32
-        let maximum_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
-
-        // player_name: CString
-        let player_name = {
-            let player_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(player_name)?
-        };
-
-        // guild_name: CString
-        let guild_name = {
-            let guild_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(guild_name)?
-        };
-
-        // race_mask: u32
-        let race_mask = crate::util::read_u32_le(&mut r)?;
-
-        // class_mask: u32
-        let class_mask = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_zones: u32
-        let amount_of_zones = crate::util::read_u32_le(&mut r)?;
-
-        // zones: u32[amount_of_zones]
-        let zones = {
-            let mut zones = Vec::with_capacity(amount_of_zones as usize);
-            for _ in 0..amount_of_zones {
-                zones.push(crate::util::read_u32_le(&mut r)?);
-            }
-            zones
-        };
-
-        // amount_of_strings: u32
-        let amount_of_strings = crate::util::read_u32_le(&mut r)?;
-
-        // search_strings: CString[amount_of_strings]
-        let search_strings = {
-            let mut search_strings = Vec::with_capacity(amount_of_strings as usize);
-            for _ in 0..amount_of_strings {
-                let s = crate::util::read_c_string_to_vec(&mut r)?;
-                search_strings.push(String::from_utf8(s)?);
-            }
-            search_strings
-        };
-
-        Ok(Self {
-            minimum_level,
-            maximum_level,
-            player_name,
-            guild_name,
-            race_mask,
-            class_mask,
-            zones,
-            search_strings,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

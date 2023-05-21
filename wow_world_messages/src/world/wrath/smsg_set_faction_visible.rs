@@ -14,6 +14,22 @@ pub struct SMSG_SET_FACTION_VISIBLE {
 }
 
 impl crate::private::Sealed for SMSG_SET_FACTION_VISIBLE {}
+impl SMSG_SET_FACTION_VISIBLE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 2 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0123, size: body_size });
+        }
+
+        // faction: Faction
+        let faction = crate::util::read_u16_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            faction,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SET_FACTION_VISIBLE {
     const OPCODE: u32 = 0x0123;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_SET_FACTION_VISIBLE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 2 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0123, size: body_size });
-        }
-
-        // faction: Faction
-        let faction = crate::util::read_u16_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            faction,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

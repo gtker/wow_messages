@@ -16,6 +16,30 @@ pub struct SMSG_SET_PCT_SPELL_MODIFIER {
 }
 
 impl crate::private::Sealed for SMSG_SET_PCT_SPELL_MODIFIER {}
+impl SMSG_SET_PCT_SPELL_MODIFIER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 6 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0267, size: body_size });
+        }
+
+        // eff: u8
+        let eff = crate::util::read_u8_le(&mut r)?;
+
+        // op: u8
+        let op = crate::util::read_u8_le(&mut r)?;
+
+        // value: u32
+        let value = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            eff,
+            op,
+            value,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SET_PCT_SPELL_MODIFIER {
     const OPCODE: u32 = 0x0267;
 
@@ -71,25 +95,8 @@ impl crate::Message for SMSG_SET_PCT_SPELL_MODIFIER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 6 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0267, size: body_size });
-        }
-
-        // eff: u8
-        let eff = crate::util::read_u8_le(&mut r)?;
-
-        // op: u8
-        let op = crate::util::read_u8_le(&mut r)?;
-
-        // value: u32
-        let value = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            eff,
-            op,
-            value,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

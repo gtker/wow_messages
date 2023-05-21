@@ -18,6 +18,40 @@ pub struct CMSG_SET_PLAYER_DECLINED_NAMES {
 }
 
 impl crate::private::Sealed for CMSG_SET_PLAYER_DECLINED_NAMES {}
+impl CMSG_SET_PLAYER_DECLINED_NAMES {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(14..=1544).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0419, size: body_size });
+        }
+
+        // player: Guid
+        let player = crate::util::read_guid(&mut r)?;
+
+        // name: CString
+        let name = {
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(name)?
+        };
+
+        // declined_names: CString[5]
+        let declined_names = {
+            let mut declined_names = [(); 5].map(|_| String::default());
+            for i in declined_names.iter_mut() {
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
+                *i = String::from_utf8(s)?;
+            }
+            declined_names
+        };
+
+        Ok(Self {
+            player,
+            name,
+            declined_names,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_SET_PLAYER_DECLINED_NAMES {
     const OPCODE: u32 = 0x0419;
 
@@ -88,35 +122,8 @@ impl crate::Message for CMSG_SET_PLAYER_DECLINED_NAMES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(14..=1544).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0419, size: body_size });
-        }
-
-        // player: Guid
-        let player = crate::util::read_guid(&mut r)?;
-
-        // name: CString
-        let name = {
-            let name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(name)?
-        };
-
-        // declined_names: CString[5]
-        let declined_names = {
-            let mut declined_names = [(); 5].map(|_| String::default());
-            for i in declined_names.iter_mut() {
-                let s = crate::util::read_c_string_to_vec(&mut r)?;
-                *i = String::from_utf8(s)?;
-            }
-            declined_names
-        };
-
-        Ok(Self {
-            player,
-            name,
-            declined_names,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

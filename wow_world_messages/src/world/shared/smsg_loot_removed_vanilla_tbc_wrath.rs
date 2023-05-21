@@ -13,6 +13,22 @@ pub struct SMSG_LOOT_REMOVED {
 }
 
 impl crate::private::Sealed for SMSG_LOOT_REMOVED {}
+impl SMSG_LOOT_REMOVED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0162, size: body_size });
+        }
+
+        // slot: u8
+        let slot = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            slot,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LOOT_REMOVED {
     const OPCODE: u32 = 0x0162;
 
@@ -58,17 +74,8 @@ impl crate::Message for SMSG_LOOT_REMOVED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0162, size: body_size });
-        }
-
-        // slot: u8
-        let slot = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            slot,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

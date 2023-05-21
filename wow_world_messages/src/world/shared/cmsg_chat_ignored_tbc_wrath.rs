@@ -17,6 +17,26 @@ pub struct CMSG_CHAT_IGNORED {
 }
 
 impl crate::private::Sealed for CMSG_CHAT_IGNORED {}
+impl CMSG_CHAT_IGNORED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 9 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0225, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // unknown: u8
+        let unknown = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            unknown,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CHAT_IGNORED {
     const OPCODE: u32 = 0x0225;
 
@@ -67,21 +87,8 @@ impl crate::Message for CMSG_CHAT_IGNORED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 9 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0225, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // unknown: u8
-        let unknown = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            unknown,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -18,6 +18,26 @@ pub struct SMSG_QUERY_TIME_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_QUERY_TIME_RESPONSE {}
+impl SMSG_QUERY_TIME_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CF, size: body_size });
+        }
+
+        // time: u32
+        let time = crate::util::read_u32_le(&mut r)?;
+
+        // time_until_daily_quest_reset: u32
+        let time_until_daily_quest_reset = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            time,
+            time_until_daily_quest_reset,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_QUERY_TIME_RESPONSE {
     const OPCODE: u32 = 0x01cf;
 
@@ -68,21 +88,8 @@ impl crate::Message for SMSG_QUERY_TIME_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CF, size: body_size });
-        }
-
-        // time: u32
-        let time = crate::util::read_u32_le(&mut r)?;
-
-        // time_until_daily_quest_reset: u32
-        let time_until_daily_quest_reset = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            time,
-            time_until_daily_quest_reset,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

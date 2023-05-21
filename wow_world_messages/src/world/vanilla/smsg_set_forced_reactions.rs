@@ -17,6 +17,31 @@ pub struct SMSG_SET_FORCED_REACTIONS {
 }
 
 impl crate::private::Sealed for SMSG_SET_FORCED_REACTIONS {}
+impl SMSG_SET_FORCED_REACTIONS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=65535).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A5, size: body_size });
+        }
+
+        // amount_of_reactions: u32
+        let amount_of_reactions = crate::util::read_u32_le(&mut r)?;
+
+        // reactions: ForcedReaction[amount_of_reactions]
+        let reactions = {
+            let mut reactions = Vec::with_capacity(amount_of_reactions as usize);
+            for _ in 0..amount_of_reactions {
+                reactions.push(ForcedReaction::read(&mut r)?);
+            }
+            reactions
+        };
+
+        Ok(Self {
+            reactions,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SET_FORCED_REACTIONS {
     const OPCODE: u32 = 0x02a5;
 
@@ -87,26 +112,8 @@ impl crate::Message for SMSG_SET_FORCED_REACTIONS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A5, size: body_size });
-        }
-
-        // amount_of_reactions: u32
-        let amount_of_reactions = crate::util::read_u32_le(&mut r)?;
-
-        // reactions: ForcedReaction[amount_of_reactions]
-        let reactions = {
-            let mut reactions = Vec::with_capacity(amount_of_reactions as usize);
-            for _ in 0..amount_of_reactions {
-                reactions.push(ForcedReaction::read(&mut r)?);
-            }
-            reactions
-        };
-
-        Ok(Self {
-            reactions,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

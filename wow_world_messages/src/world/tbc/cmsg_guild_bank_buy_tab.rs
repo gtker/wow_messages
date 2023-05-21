@@ -16,6 +16,26 @@ pub struct CMSG_GUILD_BANK_BUY_TAB {
 }
 
 impl crate::private::Sealed for CMSG_GUILD_BANK_BUY_TAB {}
+impl CMSG_GUILD_BANK_BUY_TAB {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 9 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E9, size: body_size });
+        }
+
+        // banker: Guid
+        let banker = crate::util::read_guid(&mut r)?;
+
+        // tab: u8
+        let tab = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            banker,
+            tab,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GUILD_BANK_BUY_TAB {
     const OPCODE: u32 = 0x03e9;
 
@@ -66,21 +86,8 @@ impl crate::Message for CMSG_GUILD_BANK_BUY_TAB {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 9 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E9, size: body_size });
-        }
-
-        // banker: Guid
-        let banker = crate::util::read_guid(&mut r)?;
-
-        // tab: u8
-        let tab = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            banker,
-            tab,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

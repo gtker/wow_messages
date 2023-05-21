@@ -16,6 +16,26 @@ pub struct CMSG_CAST_SPELL {
 }
 
 impl crate::private::Sealed for CMSG_CAST_SPELL {}
+impl CMSG_CAST_SPELL {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(6..=322).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x012E, size: body_size });
+        }
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // targets: SpellCastTargets
+        let targets = SpellCastTargets::read(&mut r)?;
+
+        Ok(Self {
+            spell,
+            targets,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CAST_SPELL {
     const OPCODE: u32 = 0x012e;
 
@@ -33,21 +53,8 @@ impl crate::Message for CMSG_CAST_SPELL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(6..=322).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x012E, size: body_size });
-        }
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // targets: SpellCastTargets
-        let targets = SpellCastTargets::read(&mut r)?;
-
-        Ok(Self {
-            spell,
-            targets,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

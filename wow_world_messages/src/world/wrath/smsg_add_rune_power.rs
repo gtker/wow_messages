@@ -14,6 +14,22 @@ pub struct SMSG_ADD_RUNE_POWER {
 }
 
 impl crate::private::Sealed for SMSG_ADD_RUNE_POWER {}
+impl SMSG_ADD_RUNE_POWER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0488, size: body_size });
+        }
+
+        // rune: u32
+        let rune = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            rune,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ADD_RUNE_POWER {
     const OPCODE: u32 = 0x0488;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_ADD_RUNE_POWER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0488, size: body_size });
-        }
-
-        // rune: u32
-        let rune = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            rune,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

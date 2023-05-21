@@ -12,6 +12,22 @@ pub struct SMSG_LFG_UPDATE_SEARCH {
 }
 
 impl crate::private::Sealed for SMSG_LFG_UPDATE_SEARCH {}
+impl SMSG_LFG_UPDATE_SEARCH {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0369, size: body_size });
+        }
+
+        // in_lfg_queue: Bool
+        let in_lfg_queue = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            in_lfg_queue,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LFG_UPDATE_SEARCH {
     const OPCODE: u32 = 0x0369;
 
@@ -57,17 +73,8 @@ impl crate::Message for SMSG_LFG_UPDATE_SEARCH {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0369, size: body_size });
-        }
-
-        // in_lfg_queue: Bool
-        let in_lfg_queue = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            in_lfg_queue,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

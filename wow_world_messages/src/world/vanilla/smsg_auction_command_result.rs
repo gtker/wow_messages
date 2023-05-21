@@ -44,6 +44,162 @@ pub struct SMSG_AUCTION_COMMAND_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_AUCTION_COMMAND_RESULT {}
+impl SMSG_AUCTION_COMMAND_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(12..=28).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025B, size: body_size });
+        }
+
+        // auction_id: u32
+        let auction_id = crate::util::read_u32_le(&mut r)?;
+
+        // action: AuctionCommandAction
+        let action = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        let action_if = match action {
+            AuctionCommandAction::Started => {
+                // result2: AuctionCommandResultTwo
+                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+                let result2_if = match result2 {
+                    AuctionCommandResultTwo::Ok => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::Ok,
+                    AuctionCommandResultTwo::ErrInventory => {
+                        // inventory_result2: InventoryResult
+                        let inventory_result2 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrInventory {
+                            inventory_result2,
+                        }
+                    }
+                    AuctionCommandResultTwo::ErrDatabase => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrDatabase,
+                    AuctionCommandResultTwo::ErrNotEnoughMoney => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrNotEnoughMoney,
+                    AuctionCommandResultTwo::ErrItemNotFound => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrItemNotFound,
+                    AuctionCommandResultTwo::ErrHigherBid => {
+                        // higher_bidder2: Guid
+                        let higher_bidder2 = crate::util::read_guid(&mut r)?;
+
+                        // new_bid2: u32
+                        let new_bid2 = crate::util::read_u32_le(&mut r)?;
+
+                        // auction_outbid3: u32
+                        let auction_outbid3 = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrHigherBid {
+                            auction_outbid3,
+                            higher_bidder2,
+                            new_bid2,
+                        }
+                    }
+                    AuctionCommandResultTwo::ErrBidIncrement => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrBidIncrement,
+                    AuctionCommandResultTwo::ErrBidOwn => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrBidOwn,
+                    AuctionCommandResultTwo::ErrRestrictedAccount => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrRestrictedAccount,
+                };
+
+                SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction::Started {
+                    result2: result2_if,
+                }
+            }
+            AuctionCommandAction::Removed => {
+                // result2: AuctionCommandResultTwo
+                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+                let result2_if = match result2 {
+                    AuctionCommandResultTwo::Ok => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::Ok,
+                    AuctionCommandResultTwo::ErrInventory => {
+                        // inventory_result2: InventoryResult
+                        let inventory_result2 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrInventory {
+                            inventory_result2,
+                        }
+                    }
+                    AuctionCommandResultTwo::ErrDatabase => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrDatabase,
+                    AuctionCommandResultTwo::ErrNotEnoughMoney => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrNotEnoughMoney,
+                    AuctionCommandResultTwo::ErrItemNotFound => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrItemNotFound,
+                    AuctionCommandResultTwo::ErrHigherBid => {
+                        // higher_bidder2: Guid
+                        let higher_bidder2 = crate::util::read_guid(&mut r)?;
+
+                        // new_bid2: u32
+                        let new_bid2 = crate::util::read_u32_le(&mut r)?;
+
+                        // auction_outbid3: u32
+                        let auction_outbid3 = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrHigherBid {
+                            auction_outbid3,
+                            higher_bidder2,
+                            new_bid2,
+                        }
+                    }
+                    AuctionCommandResultTwo::ErrBidIncrement => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrBidIncrement,
+                    AuctionCommandResultTwo::ErrBidOwn => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrBidOwn,
+                    AuctionCommandResultTwo::ErrRestrictedAccount => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrRestrictedAccount,
+                };
+
+                SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction::Removed {
+                    result2: result2_if,
+                }
+            }
+            AuctionCommandAction::BidPlaced => {
+                // result: AuctionCommandResult
+                let result = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+                let result_if = match result {
+                    AuctionCommandResult::Ok => {
+                        // auction_outbid1: u32
+                        let auction_outbid1 = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::Ok {
+                            auction_outbid1,
+                        }
+                    }
+                    AuctionCommandResult::ErrInventory => {
+                        // inventory_result: InventoryResult
+                        let inventory_result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrInventory {
+                            inventory_result,
+                        }
+                    }
+                    AuctionCommandResult::ErrDatabase => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrDatabase,
+                    AuctionCommandResult::ErrNotEnoughMoney => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrNotEnoughMoney,
+                    AuctionCommandResult::ErrItemNotFound => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrItemNotFound,
+                    AuctionCommandResult::ErrHigherBid => {
+                        // higher_bidder: Guid
+                        let higher_bidder = crate::util::read_guid(&mut r)?;
+
+                        // new_bid: u32
+                        let new_bid = crate::util::read_u32_le(&mut r)?;
+
+                        // auction_outbid2: u32
+                        let auction_outbid2 = crate::util::read_u32_le(&mut r)?;
+
+                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrHigherBid {
+                            auction_outbid2,
+                            higher_bidder,
+                            new_bid,
+                        }
+                    }
+                    AuctionCommandResult::ErrBidIncrement => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrBidIncrement,
+                    AuctionCommandResult::ErrBidOwn => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrBidOwn,
+                    AuctionCommandResult::ErrRestrictedAccount => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrRestrictedAccount,
+                };
+
+                SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction::BidPlaced {
+                    result: result_if,
+                }
+            }
+        };
+
+        Ok(Self {
+            auction_id,
+            action: action_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
     const OPCODE: u32 = 0x025b;
 
@@ -357,157 +513,8 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(12..=28).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025B, size: body_size });
-        }
-
-        // auction_id: u32
-        let auction_id = crate::util::read_u32_le(&mut r)?;
-
-        // action: AuctionCommandAction
-        let action = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        let action_if = match action {
-            AuctionCommandAction::Started => {
-                // result2: AuctionCommandResultTwo
-                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-                let result2_if = match result2 {
-                    AuctionCommandResultTwo::Ok => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::Ok,
-                    AuctionCommandResultTwo::ErrInventory => {
-                        // inventory_result2: InventoryResult
-                        let inventory_result2 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrInventory {
-                            inventory_result2,
-                        }
-                    }
-                    AuctionCommandResultTwo::ErrDatabase => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrDatabase,
-                    AuctionCommandResultTwo::ErrNotEnoughMoney => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrNotEnoughMoney,
-                    AuctionCommandResultTwo::ErrItemNotFound => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrItemNotFound,
-                    AuctionCommandResultTwo::ErrHigherBid => {
-                        // higher_bidder2: Guid
-                        let higher_bidder2 = crate::util::read_guid(&mut r)?;
-
-                        // new_bid2: u32
-                        let new_bid2 = crate::util::read_u32_le(&mut r)?;
-
-                        // auction_outbid3: u32
-                        let auction_outbid3 = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrHigherBid {
-                            auction_outbid3,
-                            higher_bidder2,
-                            new_bid2,
-                        }
-                    }
-                    AuctionCommandResultTwo::ErrBidIncrement => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrBidIncrement,
-                    AuctionCommandResultTwo::ErrBidOwn => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrBidOwn,
-                    AuctionCommandResultTwo::ErrRestrictedAccount => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrRestrictedAccount,
-                };
-
-                SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction::Started {
-                    result2: result2_if,
-                }
-            }
-            AuctionCommandAction::Removed => {
-                // result2: AuctionCommandResultTwo
-                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-                let result2_if = match result2 {
-                    AuctionCommandResultTwo::Ok => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::Ok,
-                    AuctionCommandResultTwo::ErrInventory => {
-                        // inventory_result2: InventoryResult
-                        let inventory_result2 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrInventory {
-                            inventory_result2,
-                        }
-                    }
-                    AuctionCommandResultTwo::ErrDatabase => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrDatabase,
-                    AuctionCommandResultTwo::ErrNotEnoughMoney => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrNotEnoughMoney,
-                    AuctionCommandResultTwo::ErrItemNotFound => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrItemNotFound,
-                    AuctionCommandResultTwo::ErrHigherBid => {
-                        // higher_bidder2: Guid
-                        let higher_bidder2 = crate::util::read_guid(&mut r)?;
-
-                        // new_bid2: u32
-                        let new_bid2 = crate::util::read_u32_le(&mut r)?;
-
-                        // auction_outbid3: u32
-                        let auction_outbid3 = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrHigherBid {
-                            auction_outbid3,
-                            higher_bidder2,
-                            new_bid2,
-                        }
-                    }
-                    AuctionCommandResultTwo::ErrBidIncrement => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrBidIncrement,
-                    AuctionCommandResultTwo::ErrBidOwn => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrBidOwn,
-                    AuctionCommandResultTwo::ErrRestrictedAccount => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrRestrictedAccount,
-                };
-
-                SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction::Removed {
-                    result2: result2_if,
-                }
-            }
-            AuctionCommandAction::BidPlaced => {
-                // result: AuctionCommandResult
-                let result = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-                let result_if = match result {
-                    AuctionCommandResult::Ok => {
-                        // auction_outbid1: u32
-                        let auction_outbid1 = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::Ok {
-                            auction_outbid1,
-                        }
-                    }
-                    AuctionCommandResult::ErrInventory => {
-                        // inventory_result: InventoryResult
-                        let inventory_result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrInventory {
-                            inventory_result,
-                        }
-                    }
-                    AuctionCommandResult::ErrDatabase => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrDatabase,
-                    AuctionCommandResult::ErrNotEnoughMoney => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrNotEnoughMoney,
-                    AuctionCommandResult::ErrItemNotFound => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrItemNotFound,
-                    AuctionCommandResult::ErrHigherBid => {
-                        // higher_bidder: Guid
-                        let higher_bidder = crate::util::read_guid(&mut r)?;
-
-                        // new_bid: u32
-                        let new_bid = crate::util::read_u32_le(&mut r)?;
-
-                        // auction_outbid2: u32
-                        let auction_outbid2 = crate::util::read_u32_le(&mut r)?;
-
-                        SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrHigherBid {
-                            auction_outbid2,
-                            higher_bidder,
-                            new_bid,
-                        }
-                    }
-                    AuctionCommandResult::ErrBidIncrement => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrBidIncrement,
-                    AuctionCommandResult::ErrBidOwn => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrBidOwn,
-                    AuctionCommandResult::ErrRestrictedAccount => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrRestrictedAccount,
-                };
-
-                SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction::BidPlaced {
-                    result: result_if,
-                }
-            }
-        };
-
-        Ok(Self {
-            auction_id,
-            action: action_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

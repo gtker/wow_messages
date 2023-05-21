@@ -21,6 +21,39 @@ pub struct SMSG_INIT_WORLD_STATES {
 }
 
 impl crate::private::Sealed for SMSG_INIT_WORLD_STATES {}
+impl SMSG_INIT_WORLD_STATES {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(10..=524298).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C2, size: body_size });
+        }
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // area: Area
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // amount_of_states: u16
+        let amount_of_states = crate::util::read_u16_le(&mut r)?;
+
+        // states: WorldState[amount_of_states]
+        let states = {
+            let mut states = Vec::with_capacity(amount_of_states as usize);
+            for _ in 0..amount_of_states {
+                states.push(WorldState::read(&mut r)?);
+            }
+            states
+        };
+
+        Ok(Self {
+            map,
+            area,
+            states,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_INIT_WORLD_STATES {
     const OPCODE: u32 = 0x02c2;
 
@@ -101,34 +134,8 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(10..=524298).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C2, size: body_size });
-        }
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // area: Area
-        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // amount_of_states: u16
-        let amount_of_states = crate::util::read_u16_le(&mut r)?;
-
-        // states: WorldState[amount_of_states]
-        let states = {
-            let mut states = Vec::with_capacity(amount_of_states as usize);
-            for _ in 0..amount_of_states {
-                states.push(WorldState::read(&mut r)?);
-            }
-            states
-        };
-
-        Ok(Self {
-            map,
-            area,
-            states,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

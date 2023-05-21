@@ -18,6 +18,30 @@ pub struct SMSG_OVERRIDE_LIGHT {
 }
 
 impl crate::private::Sealed for SMSG_OVERRIDE_LIGHT {}
+impl SMSG_OVERRIDE_LIGHT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0412, size: body_size });
+        }
+
+        // default_id: u32
+        let default_id = crate::util::read_u32_le(&mut r)?;
+
+        // id_override: u32
+        let id_override = crate::util::read_u32_le(&mut r)?;
+
+        // fade_in_time: Seconds
+        let fade_in_time = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
+
+        Ok(Self {
+            default_id,
+            id_override,
+            fade_in_time,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_OVERRIDE_LIGHT {
     const OPCODE: u32 = 0x0412;
 
@@ -73,25 +97,8 @@ impl crate::Message for SMSG_OVERRIDE_LIGHT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0412, size: body_size });
-        }
-
-        // default_id: u32
-        let default_id = crate::util::read_u32_le(&mut r)?;
-
-        // id_override: u32
-        let id_override = crate::util::read_u32_le(&mut r)?;
-
-        // fade_in_time: Seconds
-        let fade_in_time = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
-
-        Ok(Self {
-            default_id,
-            id_override,
-            fade_in_time,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

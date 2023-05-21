@@ -22,6 +22,41 @@ pub struct SMSG_GOSSIP_POI {
 }
 
 impl crate::private::Sealed for SMSG_GOSSIP_POI {}
+impl SMSG_GOSSIP_POI {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(21..=276).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0224, size: body_size });
+        }
+
+        // flags: u32
+        let flags = crate::util::read_u32_le(&mut r)?;
+
+        // position: Vector2d
+        let position = Vector2d::read(&mut r)?;
+
+        // icon: u32
+        let icon = crate::util::read_u32_le(&mut r)?;
+
+        // data: u32
+        let data = crate::util::read_u32_le(&mut r)?;
+
+        // location_name: CString
+        let location_name = {
+            let location_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(location_name)?
+        };
+
+        Ok(Self {
+            flags,
+            position,
+            icon,
+            data,
+            location_name,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GOSSIP_POI {
     const OPCODE: u32 = 0x0224;
 
@@ -100,36 +135,8 @@ impl crate::Message for SMSG_GOSSIP_POI {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(21..=276).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0224, size: body_size });
-        }
-
-        // flags: u32
-        let flags = crate::util::read_u32_le(&mut r)?;
-
-        // position: Vector2d
-        let position = Vector2d::read(&mut r)?;
-
-        // icon: u32
-        let icon = crate::util::read_u32_le(&mut r)?;
-
-        // data: u32
-        let data = crate::util::read_u32_le(&mut r)?;
-
-        // location_name: CString
-        let location_name = {
-            let location_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(location_name)?
-        };
-
-        Ok(Self {
-            flags,
-            position,
-            icon,
-            data,
-            location_name,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

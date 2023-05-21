@@ -14,6 +14,26 @@ pub struct MSG_MINIMAP_PING_Client {
 }
 
 impl crate::private::Sealed for MSG_MINIMAP_PING_Client {}
+impl MSG_MINIMAP_PING_Client {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D5, size: body_size });
+        }
+
+        // position_x: f32
+        let position_x = crate::util::read_f32_le(&mut r)?;
+
+        // position_y: f32
+        let position_y = crate::util::read_f32_le(&mut r)?;
+
+        Ok(Self {
+            position_x,
+            position_y,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_MINIMAP_PING_Client {
     const OPCODE: u32 = 0x01d5;
 
@@ -64,21 +84,8 @@ impl crate::Message for MSG_MINIMAP_PING_Client {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D5, size: body_size });
-        }
-
-        // position_x: f32
-        let position_x = crate::util::read_f32_le(&mut r)?;
-
-        // position_y: f32
-        let position_y = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            position_x,
-            position_y,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

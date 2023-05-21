@@ -25,6 +25,62 @@ pub struct SMSG_GMTICKET_GETTICKET {
 }
 
 impl crate::private::Sealed for SMSG_GMTICKET_GETTICKET {}
+impl SMSG_GMTICKET_GETTICKET {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=275).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0212, size: body_size });
+        }
+
+        // status: GmTicketStatus
+        let status = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        let status_if = match status {
+            GmTicketStatus::DbError => SMSG_GMTICKET_GETTICKET_GmTicketStatus::DbError,
+            GmTicketStatus::HasText => {
+                // text: CString
+                let text = {
+                    let text = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(text)?
+                };
+
+                // ticket_type: GmTicketType
+                let ticket_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // days_since_ticket_creation: f32
+                let days_since_ticket_creation = crate::util::read_f32_le(&mut r)?;
+
+                // days_since_oldest_ticket_creation: f32
+                let days_since_oldest_ticket_creation = crate::util::read_f32_le(&mut r)?;
+
+                // days_since_last_updated: f32
+                let days_since_last_updated = crate::util::read_f32_le(&mut r)?;
+
+                // escalation_status: GmTicketEscalationStatus
+                let escalation_status = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // read_by_gm: Bool
+                let read_by_gm = crate::util::read_u8_le(&mut r)? != 0;
+
+                SMSG_GMTICKET_GETTICKET_GmTicketStatus::HasText {
+                    days_since_last_updated,
+                    days_since_oldest_ticket_creation,
+                    days_since_ticket_creation,
+                    escalation_status,
+                    read_by_gm,
+                    text,
+                    ticket_type,
+                }
+            }
+            GmTicketStatus::Default => SMSG_GMTICKET_GETTICKET_GmTicketStatus::Default,
+        };
+
+        Ok(Self {
+            status: status_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GMTICKET_GETTICKET {
     const OPCODE: u32 = 0x0212;
 
@@ -151,57 +207,8 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=275).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0212, size: body_size });
-        }
-
-        // status: GmTicketStatus
-        let status = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        let status_if = match status {
-            GmTicketStatus::DbError => SMSG_GMTICKET_GETTICKET_GmTicketStatus::DbError,
-            GmTicketStatus::HasText => {
-                // text: CString
-                let text = {
-                    let text = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(text)?
-                };
-
-                // ticket_type: GmTicketType
-                let ticket_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // days_since_ticket_creation: f32
-                let days_since_ticket_creation = crate::util::read_f32_le(&mut r)?;
-
-                // days_since_oldest_ticket_creation: f32
-                let days_since_oldest_ticket_creation = crate::util::read_f32_le(&mut r)?;
-
-                // days_since_last_updated: f32
-                let days_since_last_updated = crate::util::read_f32_le(&mut r)?;
-
-                // escalation_status: GmTicketEscalationStatus
-                let escalation_status = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // read_by_gm: Bool
-                let read_by_gm = crate::util::read_u8_le(&mut r)? != 0;
-
-                SMSG_GMTICKET_GETTICKET_GmTicketStatus::HasText {
-                    days_since_last_updated,
-                    days_since_oldest_ticket_creation,
-                    days_since_ticket_creation,
-                    escalation_status,
-                    read_by_gm,
-                    text,
-                    ticket_type,
-                }
-            }
-            GmTicketStatus::Default => SMSG_GMTICKET_GETTICKET_GmTicketStatus::Default,
-        };
-
-        Ok(Self {
-            status: status_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

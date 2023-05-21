@@ -21,6 +21,46 @@ pub struct SMSG_SHOWTAXINODES {
 }
 
 impl crate::private::Sealed for SMSG_SHOWTAXINODES {}
+impl SMSG_SHOWTAXINODES {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(16..=65551).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01A9, size: body_size });
+        }
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // nearest_node: u32
+        let nearest_node = crate::util::read_u32_le(&mut r)?;
+
+        // nodes: u32[-]
+        let nodes = {
+            let mut current_size = {
+                4 // unknown1: u32
+                + 8 // guid: Guid
+                + 4 // nearest_node: u32
+            };
+            let mut nodes = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                nodes.push(crate::util::read_u32_le(&mut r)?);
+                current_size += 1;
+            }
+            nodes
+        };
+
+        Ok(Self {
+            unknown1,
+            guid,
+            nearest_node,
+            nodes,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SHOWTAXINODES {
     const OPCODE: u32 = 0x01a9;
 
@@ -93,41 +133,8 @@ impl crate::Message for SMSG_SHOWTAXINODES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(16..=65551).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01A9, size: body_size });
-        }
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // nearest_node: u32
-        let nearest_node = crate::util::read_u32_le(&mut r)?;
-
-        // nodes: u32[-]
-        let nodes = {
-            let mut current_size = {
-                4 // unknown1: u32
-                + 8 // guid: Guid
-                + 4 // nearest_node: u32
-            };
-            let mut nodes = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                nodes.push(crate::util::read_u32_le(&mut r)?);
-                current_size += 1;
-            }
-            nodes
-        };
-
-        Ok(Self {
-            unknown1,
-            guid,
-            nearest_node,
-            nodes,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

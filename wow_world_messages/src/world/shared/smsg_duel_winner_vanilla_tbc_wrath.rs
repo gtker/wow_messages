@@ -18,6 +18,36 @@ pub struct SMSG_DUEL_WINNER {
 }
 
 impl crate::private::Sealed for SMSG_DUEL_WINNER {}
+impl SMSG_DUEL_WINNER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(3..=513).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x016B, size: body_size });
+        }
+
+        // reason: DuelWinnerReason
+        let reason = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // opponent_name: CString
+        let opponent_name = {
+            let opponent_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(opponent_name)?
+        };
+
+        // initiator_name: CString
+        let initiator_name = {
+            let initiator_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(initiator_name)?
+        };
+
+        Ok(Self {
+            reason,
+            opponent_name,
+            initiator_name,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_DUEL_WINNER {
     const OPCODE: u32 = 0x016b;
 
@@ -81,31 +111,8 @@ impl crate::Message for SMSG_DUEL_WINNER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(3..=513).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x016B, size: body_size });
-        }
-
-        // reason: DuelWinnerReason
-        let reason = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // opponent_name: CString
-        let opponent_name = {
-            let opponent_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(opponent_name)?
-        };
-
-        // initiator_name: CString
-        let initiator_name = {
-            let initiator_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(initiator_name)?
-        };
-
-        Ok(Self {
-            reason,
-            opponent_name,
-            initiator_name,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -14,6 +14,26 @@ pub struct CMSG_PING {
 }
 
 impl crate::private::Sealed for CMSG_PING {}
+impl CMSG_PING {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01DC, size: body_size });
+        }
+
+        // sequence_id: u32
+        let sequence_id = crate::util::read_u32_le(&mut r)?;
+
+        // round_time_in_ms: u32
+        let round_time_in_ms = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            sequence_id,
+            round_time_in_ms,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_PING {
     const OPCODE: u32 = 0x01dc;
 
@@ -31,21 +51,8 @@ impl crate::Message for CMSG_PING {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01DC, size: body_size });
-        }
-
-        // sequence_id: u32
-        let sequence_id = crate::util::read_u32_le(&mut r)?;
-
-        // round_time_in_ms: u32
-        let round_time_in_ms = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            sequence_id,
-            round_time_in_ms,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

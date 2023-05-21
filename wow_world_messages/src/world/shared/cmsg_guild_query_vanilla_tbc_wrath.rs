@@ -12,6 +12,22 @@ pub struct CMSG_GUILD_QUERY {
 }
 
 impl crate::private::Sealed for CMSG_GUILD_QUERY {}
+impl CMSG_GUILD_QUERY {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0054, size: body_size });
+        }
+
+        // guild_id: u32
+        let guild_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guild_id,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GUILD_QUERY {
     const OPCODE: u32 = 0x0054;
 
@@ -57,17 +73,8 @@ impl crate::Message for CMSG_GUILD_QUERY {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0054, size: body_size });
-        }
-
-        // guild_id: u32
-        let guild_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guild_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

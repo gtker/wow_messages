@@ -10,6 +10,18 @@ pub struct CMSG_GUILD_DISBAND {
 }
 
 impl crate::private::Sealed for CMSG_GUILD_DISBAND {}
+impl CMSG_GUILD_DISBAND {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 0 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x008F, size: body_size });
+        }
+
+        Ok(Self {
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GUILD_DISBAND {
     const OPCODE: u32 = 0x008f;
 
@@ -50,13 +62,8 @@ impl crate::Message for CMSG_GUILD_DISBAND {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x008F, size: body_size });
-        }
-
-        Ok(Self {
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

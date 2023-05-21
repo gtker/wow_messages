@@ -14,6 +14,22 @@ pub struct CMSG_GET_MIRRORIMAGE_DATA {
 }
 
 impl crate::private::Sealed for CMSG_GET_MIRRORIMAGE_DATA {}
+impl CMSG_GET_MIRRORIMAGE_DATA {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0400, size: body_size });
+        }
+
+        // target: Guid
+        let target = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            target,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GET_MIRRORIMAGE_DATA {
     const OPCODE: u32 = 0x0400;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_GET_MIRRORIMAGE_DATA {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0400, size: body_size });
-        }
-
-        // target: Guid
-        let target = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            target,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

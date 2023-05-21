@@ -19,6 +19,42 @@ pub struct SMSG_TRANSFER_PENDING {
 }
 
 impl crate::private::Sealed for SMSG_TRANSFER_PENDING {}
+impl SMSG_TRANSFER_PENDING {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=12).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003F, size: body_size });
+        }
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // optional has_transport
+        let current_size = {
+            4 // map: Map
+        };
+        let has_transport = if current_size < body_size as usize {
+            // transport: u32
+            let transport = crate::util::read_u32_le(&mut r)?;
+
+            // transport_map: Map
+            let transport_map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+            Some(SMSG_TRANSFER_PENDING_has_transport {
+                transport,
+                transport_map,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            map,
+            has_transport,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_TRANSFER_PENDING {
     const OPCODE: u32 = 0x003f;
 
@@ -82,37 +118,8 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=12).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003F, size: body_size });
-        }
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // optional has_transport
-        let current_size = {
-            4 // map: Map
-        };
-        let has_transport = if current_size < body_size as usize {
-            // transport: u32
-            let transport = crate::util::read_u32_le(&mut r)?;
-
-            // transport_map: Map
-            let transport_map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-            Some(SMSG_TRANSFER_PENDING_has_transport {
-                transport,
-                transport_map,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            map,
-            has_transport,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

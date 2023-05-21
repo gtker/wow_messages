@@ -27,6 +27,43 @@ pub struct SMSG_ARENA_TEAM_ROSTER {
 }
 
 impl crate::private::Sealed for SMSG_ARENA_TEAM_ROSTER {}
+impl SMSG_ARENA_TEAM_ROSTER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(10..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x034E, size: body_size });
+        }
+
+        // arena_team: u32
+        let arena_team = crate::util::read_u32_le(&mut r)?;
+
+        // unknown: u8
+        let unknown = crate::util::read_u8_le(&mut r)?;
+
+        // amount_of_members: u32
+        let amount_of_members = crate::util::read_u32_le(&mut r)?;
+
+        // arena_type: ArenaType
+        let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // members: ArenaTeamMember[amount_of_members]
+        let members = {
+            let mut members = Vec::with_capacity(amount_of_members as usize);
+            for _ in 0..amount_of_members {
+                members.push(ArenaTeamMember::read(&mut r)?);
+            }
+            members
+        };
+
+        Ok(Self {
+            arena_team,
+            unknown,
+            arena_type,
+            members,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ARENA_TEAM_ROSTER {
     const OPCODE: u32 = 0x034e;
 
@@ -128,38 +165,8 @@ impl crate::Message for SMSG_ARENA_TEAM_ROSTER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(10..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x034E, size: body_size });
-        }
-
-        // arena_team: u32
-        let arena_team = crate::util::read_u32_le(&mut r)?;
-
-        // unknown: u8
-        let unknown = crate::util::read_u8_le(&mut r)?;
-
-        // amount_of_members: u32
-        let amount_of_members = crate::util::read_u32_le(&mut r)?;
-
-        // arena_type: ArenaType
-        let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // members: ArenaTeamMember[amount_of_members]
-        let members = {
-            let mut members = Vec::with_capacity(amount_of_members as usize);
-            for _ in 0..amount_of_members {
-                members.push(ArenaTeamMember::read(&mut r)?);
-            }
-            members
-        };
-
-        Ok(Self {
-            arena_team,
-            unknown,
-            arena_type,
-            members,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

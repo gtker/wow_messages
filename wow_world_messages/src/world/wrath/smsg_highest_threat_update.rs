@@ -20,6 +20,39 @@ pub struct SMSG_HIGHEST_THREAT_UPDATE {
 }
 
 impl crate::private::Sealed for SMSG_HIGHEST_THREAT_UPDATE {}
+impl SMSG_HIGHEST_THREAT_UPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(8..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0482, size: body_size });
+        }
+
+        // unit: PackedGuid
+        let unit = crate::util::read_packed_guid(&mut r)?;
+
+        // new_victim: PackedGuid
+        let new_victim = crate::util::read_packed_guid(&mut r)?;
+
+        // amount_of_units: u32
+        let amount_of_units = crate::util::read_u32_le(&mut r)?;
+
+        // units: ThreatUpdateUnit[amount_of_units]
+        let units = {
+            let mut units = Vec::with_capacity(amount_of_units as usize);
+            for _ in 0..amount_of_units {
+                units.push(ThreatUpdateUnit::read(&mut r)?);
+            }
+            units
+        };
+
+        Ok(Self {
+            unit,
+            new_victim,
+            units,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_HIGHEST_THREAT_UPDATE {
     const OPCODE: u32 = 0x0482;
 
@@ -100,34 +133,8 @@ impl crate::Message for SMSG_HIGHEST_THREAT_UPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(8..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0482, size: body_size });
-        }
-
-        // unit: PackedGuid
-        let unit = crate::util::read_packed_guid(&mut r)?;
-
-        // new_victim: PackedGuid
-        let new_victim = crate::util::read_packed_guid(&mut r)?;
-
-        // amount_of_units: u32
-        let amount_of_units = crate::util::read_u32_le(&mut r)?;
-
-        // units: ThreatUpdateUnit[amount_of_units]
-        let units = {
-            let mut units = Vec::with_capacity(amount_of_units as usize);
-            for _ in 0..amount_of_units {
-                units.push(ThreatUpdateUnit::read(&mut r)?);
-            }
-            units
-        };
-
-        Ok(Self {
-            unit,
-            new_victim,
-            units,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

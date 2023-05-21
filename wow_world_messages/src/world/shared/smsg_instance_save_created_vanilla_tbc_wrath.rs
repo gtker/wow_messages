@@ -13,6 +13,22 @@ pub struct SMSG_INSTANCE_SAVE_CREATED {
 }
 
 impl crate::private::Sealed for SMSG_INSTANCE_SAVE_CREATED {}
+impl SMSG_INSTANCE_SAVE_CREATED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02CB, size: body_size });
+        }
+
+        // unknown: u32
+        let unknown = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            unknown,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_INSTANCE_SAVE_CREATED {
     const OPCODE: u32 = 0x02cb;
 
@@ -58,17 +74,8 @@ impl crate::Message for SMSG_INSTANCE_SAVE_CREATED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02CB, size: body_size });
-        }
-
-        // unknown: u32
-        let unknown = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            unknown,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

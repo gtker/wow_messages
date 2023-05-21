@@ -12,6 +12,32 @@ pub struct CMSG_WARDEN_DATA {
 }
 
 impl crate::private::Sealed for CMSG_WARDEN_DATA {}
+impl CMSG_WARDEN_DATA {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size > 65535 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E7, size: body_size });
+        }
+
+        // encrypted_data: u8[-]
+        let encrypted_data = {
+            let mut current_size = {
+                0
+            };
+            let mut encrypted_data = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                encrypted_data.push(crate::util::read_u8_le(&mut r)?);
+                current_size += 1;
+            }
+            encrypted_data
+        };
+
+        Ok(Self {
+            encrypted_data,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_WARDEN_DATA {
     const OPCODE: u32 = 0x02e7;
 
@@ -63,27 +89,8 @@ impl crate::Message for CMSG_WARDEN_DATA {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size > 65535 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E7, size: body_size });
-        }
-
-        // encrypted_data: u8[-]
-        let encrypted_data = {
-            let mut current_size = {
-                0
-            };
-            let mut encrypted_data = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                encrypted_data.push(crate::util::read_u8_le(&mut r)?);
-                current_size += 1;
-            }
-            encrypted_data
-        };
-
-        Ok(Self {
-            encrypted_data,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

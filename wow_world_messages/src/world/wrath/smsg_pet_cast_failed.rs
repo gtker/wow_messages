@@ -66,6 +66,362 @@ pub struct SMSG_PET_CAST_FAILED {
 }
 
 impl crate::private::Sealed for SMSG_PET_CAST_FAILED {}
+impl SMSG_PET_CAST_FAILED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(7..=15).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0138, size: body_size });
+        }
+
+        // cast_count: u8
+        let cast_count = crate::util::read_u8_le(&mut r)?;
+
+        // id: u32
+        let id = crate::util::read_u32_le(&mut r)?;
+
+        // result: SpellCastResult
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // multiple_casts: Bool
+        let multiple_casts = crate::util::read_u8_le(&mut r)? != 0;
+
+        let result_if = match result {
+            SpellCastResult::Success => SMSG_PET_CAST_FAILED_SpellCastResult::Success,
+            SpellCastResult::AffectingCombat => SMSG_PET_CAST_FAILED_SpellCastResult::AffectingCombat,
+            SpellCastResult::AlreadyAtFullHealth => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyAtFullHealth,
+            SpellCastResult::AlreadyAtFullMana => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyAtFullMana,
+            SpellCastResult::AlreadyAtFullPower => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyAtFullPower,
+            SpellCastResult::AlreadyBeingTamed => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyBeingTamed,
+            SpellCastResult::AlreadyHaveCharm => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyHaveCharm,
+            SpellCastResult::AlreadyHaveSummon => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyHaveSummon,
+            SpellCastResult::AlreadyOpen => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyOpen,
+            SpellCastResult::AuraBounced => SMSG_PET_CAST_FAILED_SpellCastResult::AuraBounced,
+            SpellCastResult::AutotrackInterrupted => SMSG_PET_CAST_FAILED_SpellCastResult::AutotrackInterrupted,
+            SpellCastResult::BadImplicitTargets => SMSG_PET_CAST_FAILED_SpellCastResult::BadImplicitTargets,
+            SpellCastResult::BadTargets => SMSG_PET_CAST_FAILED_SpellCastResult::BadTargets,
+            SpellCastResult::CantBeCharmed => SMSG_PET_CAST_FAILED_SpellCastResult::CantBeCharmed,
+            SpellCastResult::CantBeDisenchanted => SMSG_PET_CAST_FAILED_SpellCastResult::CantBeDisenchanted,
+            SpellCastResult::CantBeDisenchantedSkill => SMSG_PET_CAST_FAILED_SpellCastResult::CantBeDisenchantedSkill,
+            SpellCastResult::CantBeMilled => SMSG_PET_CAST_FAILED_SpellCastResult::CantBeMilled,
+            SpellCastResult::CantBeProspected => SMSG_PET_CAST_FAILED_SpellCastResult::CantBeProspected,
+            SpellCastResult::CantCastOnTapped => SMSG_PET_CAST_FAILED_SpellCastResult::CantCastOnTapped,
+            SpellCastResult::CantDuelWhileInvisible => SMSG_PET_CAST_FAILED_SpellCastResult::CantDuelWhileInvisible,
+            SpellCastResult::CantDuelWhileStealthed => SMSG_PET_CAST_FAILED_SpellCastResult::CantDuelWhileStealthed,
+            SpellCastResult::CantStealth => SMSG_PET_CAST_FAILED_SpellCastResult::CantStealth,
+            SpellCastResult::CasterAurastate => SMSG_PET_CAST_FAILED_SpellCastResult::CasterAurastate,
+            SpellCastResult::CasterDead => SMSG_PET_CAST_FAILED_SpellCastResult::CasterDead,
+            SpellCastResult::Charmed => SMSG_PET_CAST_FAILED_SpellCastResult::Charmed,
+            SpellCastResult::ChestInUse => SMSG_PET_CAST_FAILED_SpellCastResult::ChestInUse,
+            SpellCastResult::Confused => SMSG_PET_CAST_FAILED_SpellCastResult::Confused,
+            SpellCastResult::DontReport => SMSG_PET_CAST_FAILED_SpellCastResult::DontReport,
+            SpellCastResult::EquippedItem => SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItem,
+            SpellCastResult::EquippedItemClass => {
+                // item_class: u32
+                let item_class = crate::util::read_u32_le(&mut r)?;
+
+                // item_sub_class: u32
+                let item_sub_class = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClass {
+                    item_class,
+                    item_sub_class,
+                }
+            }
+            SpellCastResult::EquippedItemClassMainhand => {
+                // item_class: u32
+                let item_class = crate::util::read_u32_le(&mut r)?;
+
+                // item_sub_class: u32
+                let item_sub_class = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClassMainhand {
+                    item_class,
+                    item_sub_class,
+                }
+            }
+            SpellCastResult::EquippedItemClassOffhand => {
+                // item_class: u32
+                let item_class = crate::util::read_u32_le(&mut r)?;
+
+                // item_sub_class: u32
+                let item_sub_class = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClassOffhand {
+                    item_class,
+                    item_sub_class,
+                }
+            }
+            SpellCastResult::ErrorX => SMSG_PET_CAST_FAILED_SpellCastResult::ErrorX,
+            SpellCastResult::Fizzle => SMSG_PET_CAST_FAILED_SpellCastResult::Fizzle,
+            SpellCastResult::Fleeing => SMSG_PET_CAST_FAILED_SpellCastResult::Fleeing,
+            SpellCastResult::FoodLowlevel => SMSG_PET_CAST_FAILED_SpellCastResult::FoodLowlevel,
+            SpellCastResult::Highlevel => SMSG_PET_CAST_FAILED_SpellCastResult::Highlevel,
+            SpellCastResult::HungerSatiated => SMSG_PET_CAST_FAILED_SpellCastResult::HungerSatiated,
+            SpellCastResult::Immune => SMSG_PET_CAST_FAILED_SpellCastResult::Immune,
+            SpellCastResult::IncorrectArea => SMSG_PET_CAST_FAILED_SpellCastResult::IncorrectArea,
+            SpellCastResult::Interrupted => SMSG_PET_CAST_FAILED_SpellCastResult::Interrupted,
+            SpellCastResult::InterruptedCombat => SMSG_PET_CAST_FAILED_SpellCastResult::InterruptedCombat,
+            SpellCastResult::ItemAlreadyEnchanted => SMSG_PET_CAST_FAILED_SpellCastResult::ItemAlreadyEnchanted,
+            SpellCastResult::ItemGone => SMSG_PET_CAST_FAILED_SpellCastResult::ItemGone,
+            SpellCastResult::ItemNotFound => SMSG_PET_CAST_FAILED_SpellCastResult::ItemNotFound,
+            SpellCastResult::ItemNotReady => SMSG_PET_CAST_FAILED_SpellCastResult::ItemNotReady,
+            SpellCastResult::LevelRequirement => SMSG_PET_CAST_FAILED_SpellCastResult::LevelRequirement,
+            SpellCastResult::LineOfSight => SMSG_PET_CAST_FAILED_SpellCastResult::LineOfSight,
+            SpellCastResult::Lowlevel => SMSG_PET_CAST_FAILED_SpellCastResult::Lowlevel,
+            SpellCastResult::LowCastlevel => SMSG_PET_CAST_FAILED_SpellCastResult::LowCastlevel,
+            SpellCastResult::MainhandEmpty => SMSG_PET_CAST_FAILED_SpellCastResult::MainhandEmpty,
+            SpellCastResult::Moving => SMSG_PET_CAST_FAILED_SpellCastResult::Moving,
+            SpellCastResult::NeedAmmo => SMSG_PET_CAST_FAILED_SpellCastResult::NeedAmmo,
+            SpellCastResult::NeedAmmoPouch => SMSG_PET_CAST_FAILED_SpellCastResult::NeedAmmoPouch,
+            SpellCastResult::NeedExoticAmmo => {
+                // equipped_item_sub_class: u32
+                let equipped_item_sub_class = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::NeedExoticAmmo {
+                    equipped_item_sub_class,
+                }
+            }
+            SpellCastResult::NeedMoreItems => {
+                // item: u32
+                let item = crate::util::read_u32_le(&mut r)?;
+
+                // count: u32
+                let count = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::NeedMoreItems {
+                    count,
+                    item,
+                }
+            }
+            SpellCastResult::Nopath => SMSG_PET_CAST_FAILED_SpellCastResult::Nopath,
+            SpellCastResult::NotBehind => SMSG_PET_CAST_FAILED_SpellCastResult::NotBehind,
+            SpellCastResult::NotFishable => SMSG_PET_CAST_FAILED_SpellCastResult::NotFishable,
+            SpellCastResult::NotFlying => SMSG_PET_CAST_FAILED_SpellCastResult::NotFlying,
+            SpellCastResult::NotHere => SMSG_PET_CAST_FAILED_SpellCastResult::NotHere,
+            SpellCastResult::NotInfront => SMSG_PET_CAST_FAILED_SpellCastResult::NotInfront,
+            SpellCastResult::NotInControl => SMSG_PET_CAST_FAILED_SpellCastResult::NotInControl,
+            SpellCastResult::NotKnown => SMSG_PET_CAST_FAILED_SpellCastResult::NotKnown,
+            SpellCastResult::NotMounted => SMSG_PET_CAST_FAILED_SpellCastResult::NotMounted,
+            SpellCastResult::NotOnTaxi => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnTaxi,
+            SpellCastResult::NotOnTransport => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnTransport,
+            SpellCastResult::NotReady => SMSG_PET_CAST_FAILED_SpellCastResult::NotReady,
+            SpellCastResult::NotShapeshift => SMSG_PET_CAST_FAILED_SpellCastResult::NotShapeshift,
+            SpellCastResult::NotStanding => SMSG_PET_CAST_FAILED_SpellCastResult::NotStanding,
+            SpellCastResult::NotTradeable => SMSG_PET_CAST_FAILED_SpellCastResult::NotTradeable,
+            SpellCastResult::NotTrading => SMSG_PET_CAST_FAILED_SpellCastResult::NotTrading,
+            SpellCastResult::NotUnsheathed => SMSG_PET_CAST_FAILED_SpellCastResult::NotUnsheathed,
+            SpellCastResult::NotWhileGhost => SMSG_PET_CAST_FAILED_SpellCastResult::NotWhileGhost,
+            SpellCastResult::NotWhileLooting => SMSG_PET_CAST_FAILED_SpellCastResult::NotWhileLooting,
+            SpellCastResult::NoAmmo => SMSG_PET_CAST_FAILED_SpellCastResult::NoAmmo,
+            SpellCastResult::NoChargesRemain => SMSG_PET_CAST_FAILED_SpellCastResult::NoChargesRemain,
+            SpellCastResult::NoChampion => SMSG_PET_CAST_FAILED_SpellCastResult::NoChampion,
+            SpellCastResult::NoComboPoints => SMSG_PET_CAST_FAILED_SpellCastResult::NoComboPoints,
+            SpellCastResult::NoDueling => SMSG_PET_CAST_FAILED_SpellCastResult::NoDueling,
+            SpellCastResult::NoEndurance => SMSG_PET_CAST_FAILED_SpellCastResult::NoEndurance,
+            SpellCastResult::NoFish => SMSG_PET_CAST_FAILED_SpellCastResult::NoFish,
+            SpellCastResult::NoItemsWhileShapeshifted => SMSG_PET_CAST_FAILED_SpellCastResult::NoItemsWhileShapeshifted,
+            SpellCastResult::NoMountsAllowed => SMSG_PET_CAST_FAILED_SpellCastResult::NoMountsAllowed,
+            SpellCastResult::NoPet => SMSG_PET_CAST_FAILED_SpellCastResult::NoPet,
+            SpellCastResult::NoPower => SMSG_PET_CAST_FAILED_SpellCastResult::NoPower,
+            SpellCastResult::NothingToDispel => SMSG_PET_CAST_FAILED_SpellCastResult::NothingToDispel,
+            SpellCastResult::NothingToSteal => SMSG_PET_CAST_FAILED_SpellCastResult::NothingToSteal,
+            SpellCastResult::OnlyAbovewater => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyAbovewater,
+            SpellCastResult::OnlyDaytime => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyDaytime,
+            SpellCastResult::OnlyIndoors => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyIndoors,
+            SpellCastResult::OnlyMounted => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyMounted,
+            SpellCastResult::OnlyNighttime => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyNighttime,
+            SpellCastResult::OnlyOutdoors => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyOutdoors,
+            SpellCastResult::OnlyShapeshift => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyShapeshift,
+            SpellCastResult::OnlyStealthed => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyStealthed,
+            SpellCastResult::OnlyUnderwater => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyUnderwater,
+            SpellCastResult::OutOfRange => SMSG_PET_CAST_FAILED_SpellCastResult::OutOfRange,
+            SpellCastResult::Pacified => SMSG_PET_CAST_FAILED_SpellCastResult::Pacified,
+            SpellCastResult::Possessed => SMSG_PET_CAST_FAILED_SpellCastResult::Possessed,
+            SpellCastResult::Reagents => {
+                // missing_item: u32
+                let missing_item = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::Reagents {
+                    missing_item,
+                }
+            }
+            SpellCastResult::RequiresArea => {
+                // area: Area
+                let area = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::RequiresArea {
+                    area,
+                }
+            }
+            SpellCastResult::RequiresSpellFocus => {
+                // spell_focus: u32
+                let spell_focus = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::RequiresSpellFocus {
+                    spell_focus,
+                }
+            }
+            SpellCastResult::Rooted => SMSG_PET_CAST_FAILED_SpellCastResult::Rooted,
+            SpellCastResult::Silenced => SMSG_PET_CAST_FAILED_SpellCastResult::Silenced,
+            SpellCastResult::SpellInProgress => SMSG_PET_CAST_FAILED_SpellCastResult::SpellInProgress,
+            SpellCastResult::SpellLearned => SMSG_PET_CAST_FAILED_SpellCastResult::SpellLearned,
+            SpellCastResult::SpellUnavailable => SMSG_PET_CAST_FAILED_SpellCastResult::SpellUnavailable,
+            SpellCastResult::Stunned => SMSG_PET_CAST_FAILED_SpellCastResult::Stunned,
+            SpellCastResult::TargetsDead => SMSG_PET_CAST_FAILED_SpellCastResult::TargetsDead,
+            SpellCastResult::TargetAffectingCombat => SMSG_PET_CAST_FAILED_SpellCastResult::TargetAffectingCombat,
+            SpellCastResult::TargetAurastate => SMSG_PET_CAST_FAILED_SpellCastResult::TargetAurastate,
+            SpellCastResult::TargetDueling => SMSG_PET_CAST_FAILED_SpellCastResult::TargetDueling,
+            SpellCastResult::TargetEnemy => SMSG_PET_CAST_FAILED_SpellCastResult::TargetEnemy,
+            SpellCastResult::TargetEnraged => SMSG_PET_CAST_FAILED_SpellCastResult::TargetEnraged,
+            SpellCastResult::TargetFriendly => SMSG_PET_CAST_FAILED_SpellCastResult::TargetFriendly,
+            SpellCastResult::TargetInCombat => SMSG_PET_CAST_FAILED_SpellCastResult::TargetInCombat,
+            SpellCastResult::TargetIsPlayer => SMSG_PET_CAST_FAILED_SpellCastResult::TargetIsPlayer,
+            SpellCastResult::TargetIsPlayerControlled => SMSG_PET_CAST_FAILED_SpellCastResult::TargetIsPlayerControlled,
+            SpellCastResult::TargetNotDead => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotDead,
+            SpellCastResult::TargetNotInParty => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotInParty,
+            SpellCastResult::TargetNotLooted => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotLooted,
+            SpellCastResult::TargetNotPlayer => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotPlayer,
+            SpellCastResult::TargetNoPockets => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNoPockets,
+            SpellCastResult::TargetNoWeapons => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNoWeapons,
+            SpellCastResult::TargetNoRangedWeapons => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNoRangedWeapons,
+            SpellCastResult::TargetUnskinnable => SMSG_PET_CAST_FAILED_SpellCastResult::TargetUnskinnable,
+            SpellCastResult::ThirstSatiated => SMSG_PET_CAST_FAILED_SpellCastResult::ThirstSatiated,
+            SpellCastResult::TooClose => SMSG_PET_CAST_FAILED_SpellCastResult::TooClose,
+            SpellCastResult::TooManyOfItem => {
+                // item_limit_category: u32
+                let item_limit_category = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::TooManyOfItem {
+                    item_limit_category,
+                }
+            }
+            SpellCastResult::TotemCategory => {
+                // totem_categories: u32[2]
+                let totem_categories = {
+                    let mut totem_categories = [u32::default(); 2];
+                    for i in totem_categories.iter_mut() {
+                        *i = crate::util::read_u32_le(&mut r)?;
+                    }
+                    totem_categories
+                };
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::TotemCategory {
+                    totem_categories,
+                }
+            }
+            SpellCastResult::Totems => {
+                // totems: u32[2]
+                let totems = {
+                    let mut totems = [u32::default(); 2];
+                    for i in totems.iter_mut() {
+                        *i = crate::util::read_u32_le(&mut r)?;
+                    }
+                    totems
+                };
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::Totems {
+                    totems,
+                }
+            }
+            SpellCastResult::TryAgain => SMSG_PET_CAST_FAILED_SpellCastResult::TryAgain,
+            SpellCastResult::UnitNotBehind => SMSG_PET_CAST_FAILED_SpellCastResult::UnitNotBehind,
+            SpellCastResult::UnitNotInfront => SMSG_PET_CAST_FAILED_SpellCastResult::UnitNotInfront,
+            SpellCastResult::WrongPetFood => SMSG_PET_CAST_FAILED_SpellCastResult::WrongPetFood,
+            SpellCastResult::NotWhileFatigued => SMSG_PET_CAST_FAILED_SpellCastResult::NotWhileFatigued,
+            SpellCastResult::TargetNotInInstance => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotInInstance,
+            SpellCastResult::NotWhileTrading => SMSG_PET_CAST_FAILED_SpellCastResult::NotWhileTrading,
+            SpellCastResult::TargetNotInRaid => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotInRaid,
+            SpellCastResult::TargetFreeforall => SMSG_PET_CAST_FAILED_SpellCastResult::TargetFreeforall,
+            SpellCastResult::NoEdibleCorpses => SMSG_PET_CAST_FAILED_SpellCastResult::NoEdibleCorpses,
+            SpellCastResult::OnlyBattlegrounds => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyBattlegrounds,
+            SpellCastResult::TargetNotGhost => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotGhost,
+            SpellCastResult::TransformUnusable => SMSG_PET_CAST_FAILED_SpellCastResult::TransformUnusable,
+            SpellCastResult::WrongWeather => SMSG_PET_CAST_FAILED_SpellCastResult::WrongWeather,
+            SpellCastResult::DamageImmune => SMSG_PET_CAST_FAILED_SpellCastResult::DamageImmune,
+            SpellCastResult::PreventedByMechanic => {
+                // mechanic: u32
+                let mechanic = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::PreventedByMechanic {
+                    mechanic,
+                }
+            }
+            SpellCastResult::PlayTime => SMSG_PET_CAST_FAILED_SpellCastResult::PlayTime,
+            SpellCastResult::Reputation => SMSG_PET_CAST_FAILED_SpellCastResult::Reputation,
+            SpellCastResult::MinSkill => {
+                // skill: Skill
+                let skill = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
+
+                // skill_required: u32
+                let skill_required = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::MinSkill {
+                    skill,
+                    skill_required,
+                }
+            }
+            SpellCastResult::NotInArena => SMSG_PET_CAST_FAILED_SpellCastResult::NotInArena,
+            SpellCastResult::NotOnShapeshift => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnShapeshift,
+            SpellCastResult::NotOnStealthed => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnStealthed,
+            SpellCastResult::NotOnDamageImmune => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnDamageImmune,
+            SpellCastResult::NotOnMounted => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnMounted,
+            SpellCastResult::TooShallow => SMSG_PET_CAST_FAILED_SpellCastResult::TooShallow,
+            SpellCastResult::TargetNotInSanctuary => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotInSanctuary,
+            SpellCastResult::TargetIsTrivial => SMSG_PET_CAST_FAILED_SpellCastResult::TargetIsTrivial,
+            SpellCastResult::BmOrInvisgod => SMSG_PET_CAST_FAILED_SpellCastResult::BmOrInvisgod,
+            SpellCastResult::ExpertRidingRequirement => SMSG_PET_CAST_FAILED_SpellCastResult::ExpertRidingRequirement,
+            SpellCastResult::ArtisanRidingRequirement => SMSG_PET_CAST_FAILED_SpellCastResult::ArtisanRidingRequirement,
+            SpellCastResult::NotIdle => SMSG_PET_CAST_FAILED_SpellCastResult::NotIdle,
+            SpellCastResult::NotInactive => SMSG_PET_CAST_FAILED_SpellCastResult::NotInactive,
+            SpellCastResult::PartialPlaytime => SMSG_PET_CAST_FAILED_SpellCastResult::PartialPlaytime,
+            SpellCastResult::NoPlaytime => SMSG_PET_CAST_FAILED_SpellCastResult::NoPlaytime,
+            SpellCastResult::NotInBattleground => SMSG_PET_CAST_FAILED_SpellCastResult::NotInBattleground,
+            SpellCastResult::NotInRaidInstance => SMSG_PET_CAST_FAILED_SpellCastResult::NotInRaidInstance,
+            SpellCastResult::OnlyInArena => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyInArena,
+            SpellCastResult::TargetLockedToRaidInstance => SMSG_PET_CAST_FAILED_SpellCastResult::TargetLockedToRaidInstance,
+            SpellCastResult::OnUseEnchant => SMSG_PET_CAST_FAILED_SpellCastResult::OnUseEnchant,
+            SpellCastResult::NotOnGround => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnGround,
+            SpellCastResult::CustomError => {
+                // custom_error: u32
+                let custom_error = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::CustomError {
+                    custom_error,
+                }
+            }
+            SpellCastResult::CantDoThatRightNow => SMSG_PET_CAST_FAILED_SpellCastResult::CantDoThatRightNow,
+            SpellCastResult::TooManySockets => SMSG_PET_CAST_FAILED_SpellCastResult::TooManySockets,
+            SpellCastResult::InvalidGlyph => SMSG_PET_CAST_FAILED_SpellCastResult::InvalidGlyph,
+            SpellCastResult::UniqueGlyph => SMSG_PET_CAST_FAILED_SpellCastResult::UniqueGlyph,
+            SpellCastResult::GlyphSocketLocked => SMSG_PET_CAST_FAILED_SpellCastResult::GlyphSocketLocked,
+            SpellCastResult::NoValidTargets => SMSG_PET_CAST_FAILED_SpellCastResult::NoValidTargets,
+            SpellCastResult::ItemAtMaxCharges => SMSG_PET_CAST_FAILED_SpellCastResult::ItemAtMaxCharges,
+            SpellCastResult::NotInBarbershop => SMSG_PET_CAST_FAILED_SpellCastResult::NotInBarbershop,
+            SpellCastResult::FishingTooLow => {
+                // fishing_skill_required: u32
+                let fishing_skill_required = crate::util::read_u32_le(&mut r)?;
+
+                SMSG_PET_CAST_FAILED_SpellCastResult::FishingTooLow {
+                    fishing_skill_required,
+                }
+            }
+            SpellCastResult::ItemEnchantTradeWindow => SMSG_PET_CAST_FAILED_SpellCastResult::ItemEnchantTradeWindow,
+            SpellCastResult::SummonPending => SMSG_PET_CAST_FAILED_SpellCastResult::SummonPending,
+            SpellCastResult::MaxSockets => SMSG_PET_CAST_FAILED_SpellCastResult::MaxSockets,
+            SpellCastResult::PetCanRename => SMSG_PET_CAST_FAILED_SpellCastResult::PetCanRename,
+            SpellCastResult::TargetCannotBeResurrected => SMSG_PET_CAST_FAILED_SpellCastResult::TargetCannotBeResurrected,
+            SpellCastResult::Unknown => SMSG_PET_CAST_FAILED_SpellCastResult::Unknown,
+        };
+
+        Ok(Self {
+            cast_count,
+            id,
+            result: result_if,
+            multiple_casts,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PET_CAST_FAILED {
     const OPCODE: u32 = 0x0138;
 
@@ -453,357 +809,8 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(7..=15).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0138, size: body_size });
-        }
-
-        // cast_count: u8
-        let cast_count = crate::util::read_u8_le(&mut r)?;
-
-        // id: u32
-        let id = crate::util::read_u32_le(&mut r)?;
-
-        // result: SpellCastResult
-        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // multiple_casts: Bool
-        let multiple_casts = crate::util::read_u8_le(&mut r)? != 0;
-
-        let result_if = match result {
-            SpellCastResult::Success => SMSG_PET_CAST_FAILED_SpellCastResult::Success,
-            SpellCastResult::AffectingCombat => SMSG_PET_CAST_FAILED_SpellCastResult::AffectingCombat,
-            SpellCastResult::AlreadyAtFullHealth => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyAtFullHealth,
-            SpellCastResult::AlreadyAtFullMana => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyAtFullMana,
-            SpellCastResult::AlreadyAtFullPower => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyAtFullPower,
-            SpellCastResult::AlreadyBeingTamed => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyBeingTamed,
-            SpellCastResult::AlreadyHaveCharm => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyHaveCharm,
-            SpellCastResult::AlreadyHaveSummon => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyHaveSummon,
-            SpellCastResult::AlreadyOpen => SMSG_PET_CAST_FAILED_SpellCastResult::AlreadyOpen,
-            SpellCastResult::AuraBounced => SMSG_PET_CAST_FAILED_SpellCastResult::AuraBounced,
-            SpellCastResult::AutotrackInterrupted => SMSG_PET_CAST_FAILED_SpellCastResult::AutotrackInterrupted,
-            SpellCastResult::BadImplicitTargets => SMSG_PET_CAST_FAILED_SpellCastResult::BadImplicitTargets,
-            SpellCastResult::BadTargets => SMSG_PET_CAST_FAILED_SpellCastResult::BadTargets,
-            SpellCastResult::CantBeCharmed => SMSG_PET_CAST_FAILED_SpellCastResult::CantBeCharmed,
-            SpellCastResult::CantBeDisenchanted => SMSG_PET_CAST_FAILED_SpellCastResult::CantBeDisenchanted,
-            SpellCastResult::CantBeDisenchantedSkill => SMSG_PET_CAST_FAILED_SpellCastResult::CantBeDisenchantedSkill,
-            SpellCastResult::CantBeMilled => SMSG_PET_CAST_FAILED_SpellCastResult::CantBeMilled,
-            SpellCastResult::CantBeProspected => SMSG_PET_CAST_FAILED_SpellCastResult::CantBeProspected,
-            SpellCastResult::CantCastOnTapped => SMSG_PET_CAST_FAILED_SpellCastResult::CantCastOnTapped,
-            SpellCastResult::CantDuelWhileInvisible => SMSG_PET_CAST_FAILED_SpellCastResult::CantDuelWhileInvisible,
-            SpellCastResult::CantDuelWhileStealthed => SMSG_PET_CAST_FAILED_SpellCastResult::CantDuelWhileStealthed,
-            SpellCastResult::CantStealth => SMSG_PET_CAST_FAILED_SpellCastResult::CantStealth,
-            SpellCastResult::CasterAurastate => SMSG_PET_CAST_FAILED_SpellCastResult::CasterAurastate,
-            SpellCastResult::CasterDead => SMSG_PET_CAST_FAILED_SpellCastResult::CasterDead,
-            SpellCastResult::Charmed => SMSG_PET_CAST_FAILED_SpellCastResult::Charmed,
-            SpellCastResult::ChestInUse => SMSG_PET_CAST_FAILED_SpellCastResult::ChestInUse,
-            SpellCastResult::Confused => SMSG_PET_CAST_FAILED_SpellCastResult::Confused,
-            SpellCastResult::DontReport => SMSG_PET_CAST_FAILED_SpellCastResult::DontReport,
-            SpellCastResult::EquippedItem => SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItem,
-            SpellCastResult::EquippedItemClass => {
-                // item_class: u32
-                let item_class = crate::util::read_u32_le(&mut r)?;
-
-                // item_sub_class: u32
-                let item_sub_class = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClass {
-                    item_class,
-                    item_sub_class,
-                }
-            }
-            SpellCastResult::EquippedItemClassMainhand => {
-                // item_class: u32
-                let item_class = crate::util::read_u32_le(&mut r)?;
-
-                // item_sub_class: u32
-                let item_sub_class = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClassMainhand {
-                    item_class,
-                    item_sub_class,
-                }
-            }
-            SpellCastResult::EquippedItemClassOffhand => {
-                // item_class: u32
-                let item_class = crate::util::read_u32_le(&mut r)?;
-
-                // item_sub_class: u32
-                let item_sub_class = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClassOffhand {
-                    item_class,
-                    item_sub_class,
-                }
-            }
-            SpellCastResult::ErrorX => SMSG_PET_CAST_FAILED_SpellCastResult::ErrorX,
-            SpellCastResult::Fizzle => SMSG_PET_CAST_FAILED_SpellCastResult::Fizzle,
-            SpellCastResult::Fleeing => SMSG_PET_CAST_FAILED_SpellCastResult::Fleeing,
-            SpellCastResult::FoodLowlevel => SMSG_PET_CAST_FAILED_SpellCastResult::FoodLowlevel,
-            SpellCastResult::Highlevel => SMSG_PET_CAST_FAILED_SpellCastResult::Highlevel,
-            SpellCastResult::HungerSatiated => SMSG_PET_CAST_FAILED_SpellCastResult::HungerSatiated,
-            SpellCastResult::Immune => SMSG_PET_CAST_FAILED_SpellCastResult::Immune,
-            SpellCastResult::IncorrectArea => SMSG_PET_CAST_FAILED_SpellCastResult::IncorrectArea,
-            SpellCastResult::Interrupted => SMSG_PET_CAST_FAILED_SpellCastResult::Interrupted,
-            SpellCastResult::InterruptedCombat => SMSG_PET_CAST_FAILED_SpellCastResult::InterruptedCombat,
-            SpellCastResult::ItemAlreadyEnchanted => SMSG_PET_CAST_FAILED_SpellCastResult::ItemAlreadyEnchanted,
-            SpellCastResult::ItemGone => SMSG_PET_CAST_FAILED_SpellCastResult::ItemGone,
-            SpellCastResult::ItemNotFound => SMSG_PET_CAST_FAILED_SpellCastResult::ItemNotFound,
-            SpellCastResult::ItemNotReady => SMSG_PET_CAST_FAILED_SpellCastResult::ItemNotReady,
-            SpellCastResult::LevelRequirement => SMSG_PET_CAST_FAILED_SpellCastResult::LevelRequirement,
-            SpellCastResult::LineOfSight => SMSG_PET_CAST_FAILED_SpellCastResult::LineOfSight,
-            SpellCastResult::Lowlevel => SMSG_PET_CAST_FAILED_SpellCastResult::Lowlevel,
-            SpellCastResult::LowCastlevel => SMSG_PET_CAST_FAILED_SpellCastResult::LowCastlevel,
-            SpellCastResult::MainhandEmpty => SMSG_PET_CAST_FAILED_SpellCastResult::MainhandEmpty,
-            SpellCastResult::Moving => SMSG_PET_CAST_FAILED_SpellCastResult::Moving,
-            SpellCastResult::NeedAmmo => SMSG_PET_CAST_FAILED_SpellCastResult::NeedAmmo,
-            SpellCastResult::NeedAmmoPouch => SMSG_PET_CAST_FAILED_SpellCastResult::NeedAmmoPouch,
-            SpellCastResult::NeedExoticAmmo => {
-                // equipped_item_sub_class: u32
-                let equipped_item_sub_class = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::NeedExoticAmmo {
-                    equipped_item_sub_class,
-                }
-            }
-            SpellCastResult::NeedMoreItems => {
-                // item: u32
-                let item = crate::util::read_u32_le(&mut r)?;
-
-                // count: u32
-                let count = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::NeedMoreItems {
-                    count,
-                    item,
-                }
-            }
-            SpellCastResult::Nopath => SMSG_PET_CAST_FAILED_SpellCastResult::Nopath,
-            SpellCastResult::NotBehind => SMSG_PET_CAST_FAILED_SpellCastResult::NotBehind,
-            SpellCastResult::NotFishable => SMSG_PET_CAST_FAILED_SpellCastResult::NotFishable,
-            SpellCastResult::NotFlying => SMSG_PET_CAST_FAILED_SpellCastResult::NotFlying,
-            SpellCastResult::NotHere => SMSG_PET_CAST_FAILED_SpellCastResult::NotHere,
-            SpellCastResult::NotInfront => SMSG_PET_CAST_FAILED_SpellCastResult::NotInfront,
-            SpellCastResult::NotInControl => SMSG_PET_CAST_FAILED_SpellCastResult::NotInControl,
-            SpellCastResult::NotKnown => SMSG_PET_CAST_FAILED_SpellCastResult::NotKnown,
-            SpellCastResult::NotMounted => SMSG_PET_CAST_FAILED_SpellCastResult::NotMounted,
-            SpellCastResult::NotOnTaxi => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnTaxi,
-            SpellCastResult::NotOnTransport => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnTransport,
-            SpellCastResult::NotReady => SMSG_PET_CAST_FAILED_SpellCastResult::NotReady,
-            SpellCastResult::NotShapeshift => SMSG_PET_CAST_FAILED_SpellCastResult::NotShapeshift,
-            SpellCastResult::NotStanding => SMSG_PET_CAST_FAILED_SpellCastResult::NotStanding,
-            SpellCastResult::NotTradeable => SMSG_PET_CAST_FAILED_SpellCastResult::NotTradeable,
-            SpellCastResult::NotTrading => SMSG_PET_CAST_FAILED_SpellCastResult::NotTrading,
-            SpellCastResult::NotUnsheathed => SMSG_PET_CAST_FAILED_SpellCastResult::NotUnsheathed,
-            SpellCastResult::NotWhileGhost => SMSG_PET_CAST_FAILED_SpellCastResult::NotWhileGhost,
-            SpellCastResult::NotWhileLooting => SMSG_PET_CAST_FAILED_SpellCastResult::NotWhileLooting,
-            SpellCastResult::NoAmmo => SMSG_PET_CAST_FAILED_SpellCastResult::NoAmmo,
-            SpellCastResult::NoChargesRemain => SMSG_PET_CAST_FAILED_SpellCastResult::NoChargesRemain,
-            SpellCastResult::NoChampion => SMSG_PET_CAST_FAILED_SpellCastResult::NoChampion,
-            SpellCastResult::NoComboPoints => SMSG_PET_CAST_FAILED_SpellCastResult::NoComboPoints,
-            SpellCastResult::NoDueling => SMSG_PET_CAST_FAILED_SpellCastResult::NoDueling,
-            SpellCastResult::NoEndurance => SMSG_PET_CAST_FAILED_SpellCastResult::NoEndurance,
-            SpellCastResult::NoFish => SMSG_PET_CAST_FAILED_SpellCastResult::NoFish,
-            SpellCastResult::NoItemsWhileShapeshifted => SMSG_PET_CAST_FAILED_SpellCastResult::NoItemsWhileShapeshifted,
-            SpellCastResult::NoMountsAllowed => SMSG_PET_CAST_FAILED_SpellCastResult::NoMountsAllowed,
-            SpellCastResult::NoPet => SMSG_PET_CAST_FAILED_SpellCastResult::NoPet,
-            SpellCastResult::NoPower => SMSG_PET_CAST_FAILED_SpellCastResult::NoPower,
-            SpellCastResult::NothingToDispel => SMSG_PET_CAST_FAILED_SpellCastResult::NothingToDispel,
-            SpellCastResult::NothingToSteal => SMSG_PET_CAST_FAILED_SpellCastResult::NothingToSteal,
-            SpellCastResult::OnlyAbovewater => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyAbovewater,
-            SpellCastResult::OnlyDaytime => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyDaytime,
-            SpellCastResult::OnlyIndoors => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyIndoors,
-            SpellCastResult::OnlyMounted => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyMounted,
-            SpellCastResult::OnlyNighttime => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyNighttime,
-            SpellCastResult::OnlyOutdoors => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyOutdoors,
-            SpellCastResult::OnlyShapeshift => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyShapeshift,
-            SpellCastResult::OnlyStealthed => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyStealthed,
-            SpellCastResult::OnlyUnderwater => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyUnderwater,
-            SpellCastResult::OutOfRange => SMSG_PET_CAST_FAILED_SpellCastResult::OutOfRange,
-            SpellCastResult::Pacified => SMSG_PET_CAST_FAILED_SpellCastResult::Pacified,
-            SpellCastResult::Possessed => SMSG_PET_CAST_FAILED_SpellCastResult::Possessed,
-            SpellCastResult::Reagents => {
-                // missing_item: u32
-                let missing_item = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::Reagents {
-                    missing_item,
-                }
-            }
-            SpellCastResult::RequiresArea => {
-                // area: Area
-                let area = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::RequiresArea {
-                    area,
-                }
-            }
-            SpellCastResult::RequiresSpellFocus => {
-                // spell_focus: u32
-                let spell_focus = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::RequiresSpellFocus {
-                    spell_focus,
-                }
-            }
-            SpellCastResult::Rooted => SMSG_PET_CAST_FAILED_SpellCastResult::Rooted,
-            SpellCastResult::Silenced => SMSG_PET_CAST_FAILED_SpellCastResult::Silenced,
-            SpellCastResult::SpellInProgress => SMSG_PET_CAST_FAILED_SpellCastResult::SpellInProgress,
-            SpellCastResult::SpellLearned => SMSG_PET_CAST_FAILED_SpellCastResult::SpellLearned,
-            SpellCastResult::SpellUnavailable => SMSG_PET_CAST_FAILED_SpellCastResult::SpellUnavailable,
-            SpellCastResult::Stunned => SMSG_PET_CAST_FAILED_SpellCastResult::Stunned,
-            SpellCastResult::TargetsDead => SMSG_PET_CAST_FAILED_SpellCastResult::TargetsDead,
-            SpellCastResult::TargetAffectingCombat => SMSG_PET_CAST_FAILED_SpellCastResult::TargetAffectingCombat,
-            SpellCastResult::TargetAurastate => SMSG_PET_CAST_FAILED_SpellCastResult::TargetAurastate,
-            SpellCastResult::TargetDueling => SMSG_PET_CAST_FAILED_SpellCastResult::TargetDueling,
-            SpellCastResult::TargetEnemy => SMSG_PET_CAST_FAILED_SpellCastResult::TargetEnemy,
-            SpellCastResult::TargetEnraged => SMSG_PET_CAST_FAILED_SpellCastResult::TargetEnraged,
-            SpellCastResult::TargetFriendly => SMSG_PET_CAST_FAILED_SpellCastResult::TargetFriendly,
-            SpellCastResult::TargetInCombat => SMSG_PET_CAST_FAILED_SpellCastResult::TargetInCombat,
-            SpellCastResult::TargetIsPlayer => SMSG_PET_CAST_FAILED_SpellCastResult::TargetIsPlayer,
-            SpellCastResult::TargetIsPlayerControlled => SMSG_PET_CAST_FAILED_SpellCastResult::TargetIsPlayerControlled,
-            SpellCastResult::TargetNotDead => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotDead,
-            SpellCastResult::TargetNotInParty => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotInParty,
-            SpellCastResult::TargetNotLooted => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotLooted,
-            SpellCastResult::TargetNotPlayer => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotPlayer,
-            SpellCastResult::TargetNoPockets => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNoPockets,
-            SpellCastResult::TargetNoWeapons => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNoWeapons,
-            SpellCastResult::TargetNoRangedWeapons => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNoRangedWeapons,
-            SpellCastResult::TargetUnskinnable => SMSG_PET_CAST_FAILED_SpellCastResult::TargetUnskinnable,
-            SpellCastResult::ThirstSatiated => SMSG_PET_CAST_FAILED_SpellCastResult::ThirstSatiated,
-            SpellCastResult::TooClose => SMSG_PET_CAST_FAILED_SpellCastResult::TooClose,
-            SpellCastResult::TooManyOfItem => {
-                // item_limit_category: u32
-                let item_limit_category = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::TooManyOfItem {
-                    item_limit_category,
-                }
-            }
-            SpellCastResult::TotemCategory => {
-                // totem_categories: u32[2]
-                let totem_categories = {
-                    let mut totem_categories = [u32::default(); 2];
-                    for i in totem_categories.iter_mut() {
-                        *i = crate::util::read_u32_le(&mut r)?;
-                    }
-                    totem_categories
-                };
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::TotemCategory {
-                    totem_categories,
-                }
-            }
-            SpellCastResult::Totems => {
-                // totems: u32[2]
-                let totems = {
-                    let mut totems = [u32::default(); 2];
-                    for i in totems.iter_mut() {
-                        *i = crate::util::read_u32_le(&mut r)?;
-                    }
-                    totems
-                };
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::Totems {
-                    totems,
-                }
-            }
-            SpellCastResult::TryAgain => SMSG_PET_CAST_FAILED_SpellCastResult::TryAgain,
-            SpellCastResult::UnitNotBehind => SMSG_PET_CAST_FAILED_SpellCastResult::UnitNotBehind,
-            SpellCastResult::UnitNotInfront => SMSG_PET_CAST_FAILED_SpellCastResult::UnitNotInfront,
-            SpellCastResult::WrongPetFood => SMSG_PET_CAST_FAILED_SpellCastResult::WrongPetFood,
-            SpellCastResult::NotWhileFatigued => SMSG_PET_CAST_FAILED_SpellCastResult::NotWhileFatigued,
-            SpellCastResult::TargetNotInInstance => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotInInstance,
-            SpellCastResult::NotWhileTrading => SMSG_PET_CAST_FAILED_SpellCastResult::NotWhileTrading,
-            SpellCastResult::TargetNotInRaid => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotInRaid,
-            SpellCastResult::TargetFreeforall => SMSG_PET_CAST_FAILED_SpellCastResult::TargetFreeforall,
-            SpellCastResult::NoEdibleCorpses => SMSG_PET_CAST_FAILED_SpellCastResult::NoEdibleCorpses,
-            SpellCastResult::OnlyBattlegrounds => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyBattlegrounds,
-            SpellCastResult::TargetNotGhost => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotGhost,
-            SpellCastResult::TransformUnusable => SMSG_PET_CAST_FAILED_SpellCastResult::TransformUnusable,
-            SpellCastResult::WrongWeather => SMSG_PET_CAST_FAILED_SpellCastResult::WrongWeather,
-            SpellCastResult::DamageImmune => SMSG_PET_CAST_FAILED_SpellCastResult::DamageImmune,
-            SpellCastResult::PreventedByMechanic => {
-                // mechanic: u32
-                let mechanic = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::PreventedByMechanic {
-                    mechanic,
-                }
-            }
-            SpellCastResult::PlayTime => SMSG_PET_CAST_FAILED_SpellCastResult::PlayTime,
-            SpellCastResult::Reputation => SMSG_PET_CAST_FAILED_SpellCastResult::Reputation,
-            SpellCastResult::MinSkill => {
-                // skill: Skill
-                let skill = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
-
-                // skill_required: u32
-                let skill_required = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::MinSkill {
-                    skill,
-                    skill_required,
-                }
-            }
-            SpellCastResult::NotInArena => SMSG_PET_CAST_FAILED_SpellCastResult::NotInArena,
-            SpellCastResult::NotOnShapeshift => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnShapeshift,
-            SpellCastResult::NotOnStealthed => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnStealthed,
-            SpellCastResult::NotOnDamageImmune => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnDamageImmune,
-            SpellCastResult::NotOnMounted => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnMounted,
-            SpellCastResult::TooShallow => SMSG_PET_CAST_FAILED_SpellCastResult::TooShallow,
-            SpellCastResult::TargetNotInSanctuary => SMSG_PET_CAST_FAILED_SpellCastResult::TargetNotInSanctuary,
-            SpellCastResult::TargetIsTrivial => SMSG_PET_CAST_FAILED_SpellCastResult::TargetIsTrivial,
-            SpellCastResult::BmOrInvisgod => SMSG_PET_CAST_FAILED_SpellCastResult::BmOrInvisgod,
-            SpellCastResult::ExpertRidingRequirement => SMSG_PET_CAST_FAILED_SpellCastResult::ExpertRidingRequirement,
-            SpellCastResult::ArtisanRidingRequirement => SMSG_PET_CAST_FAILED_SpellCastResult::ArtisanRidingRequirement,
-            SpellCastResult::NotIdle => SMSG_PET_CAST_FAILED_SpellCastResult::NotIdle,
-            SpellCastResult::NotInactive => SMSG_PET_CAST_FAILED_SpellCastResult::NotInactive,
-            SpellCastResult::PartialPlaytime => SMSG_PET_CAST_FAILED_SpellCastResult::PartialPlaytime,
-            SpellCastResult::NoPlaytime => SMSG_PET_CAST_FAILED_SpellCastResult::NoPlaytime,
-            SpellCastResult::NotInBattleground => SMSG_PET_CAST_FAILED_SpellCastResult::NotInBattleground,
-            SpellCastResult::NotInRaidInstance => SMSG_PET_CAST_FAILED_SpellCastResult::NotInRaidInstance,
-            SpellCastResult::OnlyInArena => SMSG_PET_CAST_FAILED_SpellCastResult::OnlyInArena,
-            SpellCastResult::TargetLockedToRaidInstance => SMSG_PET_CAST_FAILED_SpellCastResult::TargetLockedToRaidInstance,
-            SpellCastResult::OnUseEnchant => SMSG_PET_CAST_FAILED_SpellCastResult::OnUseEnchant,
-            SpellCastResult::NotOnGround => SMSG_PET_CAST_FAILED_SpellCastResult::NotOnGround,
-            SpellCastResult::CustomError => {
-                // custom_error: u32
-                let custom_error = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::CustomError {
-                    custom_error,
-                }
-            }
-            SpellCastResult::CantDoThatRightNow => SMSG_PET_CAST_FAILED_SpellCastResult::CantDoThatRightNow,
-            SpellCastResult::TooManySockets => SMSG_PET_CAST_FAILED_SpellCastResult::TooManySockets,
-            SpellCastResult::InvalidGlyph => SMSG_PET_CAST_FAILED_SpellCastResult::InvalidGlyph,
-            SpellCastResult::UniqueGlyph => SMSG_PET_CAST_FAILED_SpellCastResult::UniqueGlyph,
-            SpellCastResult::GlyphSocketLocked => SMSG_PET_CAST_FAILED_SpellCastResult::GlyphSocketLocked,
-            SpellCastResult::NoValidTargets => SMSG_PET_CAST_FAILED_SpellCastResult::NoValidTargets,
-            SpellCastResult::ItemAtMaxCharges => SMSG_PET_CAST_FAILED_SpellCastResult::ItemAtMaxCharges,
-            SpellCastResult::NotInBarbershop => SMSG_PET_CAST_FAILED_SpellCastResult::NotInBarbershop,
-            SpellCastResult::FishingTooLow => {
-                // fishing_skill_required: u32
-                let fishing_skill_required = crate::util::read_u32_le(&mut r)?;
-
-                SMSG_PET_CAST_FAILED_SpellCastResult::FishingTooLow {
-                    fishing_skill_required,
-                }
-            }
-            SpellCastResult::ItemEnchantTradeWindow => SMSG_PET_CAST_FAILED_SpellCastResult::ItemEnchantTradeWindow,
-            SpellCastResult::SummonPending => SMSG_PET_CAST_FAILED_SpellCastResult::SummonPending,
-            SpellCastResult::MaxSockets => SMSG_PET_CAST_FAILED_SpellCastResult::MaxSockets,
-            SpellCastResult::PetCanRename => SMSG_PET_CAST_FAILED_SpellCastResult::PetCanRename,
-            SpellCastResult::TargetCannotBeResurrected => SMSG_PET_CAST_FAILED_SpellCastResult::TargetCannotBeResurrected,
-            SpellCastResult::Unknown => SMSG_PET_CAST_FAILED_SpellCastResult::Unknown,
-        };
-
-        Ok(Self {
-            cast_count,
-            id,
-            result: result_if,
-            multiple_casts,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -17,6 +17,26 @@ pub struct SMSG_EMOTE {
 }
 
 impl crate::private::Sealed for SMSG_EMOTE {}
+impl SMSG_EMOTE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0103, size: body_size });
+        }
+
+        // emote: Emote
+        let emote = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            emote,
+            guid,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_EMOTE {
     const OPCODE: u32 = 0x0103;
 
@@ -67,21 +87,8 @@ impl crate::Message for SMSG_EMOTE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0103, size: body_size });
-        }
-
-        // emote: Emote
-        let emote = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            emote,
-            guid,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -16,6 +16,26 @@ pub struct CMSG_SET_FACTION_INACTIVE {
 }
 
 impl crate::private::Sealed for CMSG_SET_FACTION_INACTIVE {}
+impl CMSG_SET_FACTION_INACTIVE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 3 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0317, size: body_size });
+        }
+
+        // faction: Faction
+        let faction = crate::util::read_u16_le(&mut r)?.try_into()?;
+
+        // inactive: Bool
+        let inactive = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            faction,
+            inactive,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_SET_FACTION_INACTIVE {
     const OPCODE: u32 = 0x0317;
 
@@ -66,21 +86,8 @@ impl crate::Message for CMSG_SET_FACTION_INACTIVE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 3 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0317, size: body_size });
-        }
-
-        // faction: Faction
-        let faction = crate::util::read_u16_le(&mut r)?.try_into()?;
-
-        // inactive: Bool
-        let inactive = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            faction,
-            inactive,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

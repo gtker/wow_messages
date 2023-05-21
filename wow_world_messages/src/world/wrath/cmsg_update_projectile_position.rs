@@ -21,6 +21,34 @@ pub struct CMSG_UPDATE_PROJECTILE_POSITION {
 }
 
 impl crate::private::Sealed for CMSG_UPDATE_PROJECTILE_POSITION {}
+impl CMSG_UPDATE_PROJECTILE_POSITION {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 25 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BE, size: body_size });
+        }
+
+        // caster: Guid
+        let caster = crate::util::read_guid(&mut r)?;
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // cast_count: u8
+        let cast_count = crate::util::read_u8_le(&mut r)?;
+
+        // position: Vector3d
+        let position = Vector3d::read(&mut r)?;
+
+        Ok(Self {
+            caster,
+            spell,
+            cast_count,
+            position,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_UPDATE_PROJECTILE_POSITION {
     const OPCODE: u32 = 0x04be;
 
@@ -92,29 +120,8 @@ impl crate::Message for CMSG_UPDATE_PROJECTILE_POSITION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 25 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BE, size: body_size });
-        }
-
-        // caster: Guid
-        let caster = crate::util::read_guid(&mut r)?;
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // cast_count: u8
-        let cast_count = crate::util::read_u8_le(&mut r)?;
-
-        // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
-
-        Ok(Self {
-            caster,
-            spell,
-            cast_count,
-            position,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

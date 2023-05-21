@@ -16,23 +16,8 @@ pub struct SMSG_TUTORIAL_FLAGS {
 }
 
 impl crate::private::Sealed for SMSG_TUTORIAL_FLAGS {}
-impl crate::Message for SMSG_TUTORIAL_FLAGS {
-    const OPCODE: u32 = 0x00fd;
-
-    fn size_without_header(&self) -> u32 {
-        32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // tutorial_data: u32[8]
-        for i in self.tutorial_data.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl SMSG_TUTORIAL_FLAGS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 32 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00FD, size: body_size });
         }
@@ -49,6 +34,28 @@ impl crate::Message for SMSG_TUTORIAL_FLAGS {
         Ok(Self {
             tutorial_data,
         })
+    }
+
+}
+
+impl crate::Message for SMSG_TUTORIAL_FLAGS {
+    const OPCODE: u32 = 0x00fd;
+
+    fn size_without_header(&self) -> u32 {
+        32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // tutorial_data: u32[8]
+        for i in self.tutorial_data.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

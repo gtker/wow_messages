@@ -38,6 +38,72 @@ pub struct SMSG_CALENDAR_EVENT_UPDATED_ALERT {
 }
 
 impl crate::private::Sealed for SMSG_CALENDAR_EVENT_UPDATED_ALERT {}
+impl SMSG_CALENDAR_EVENT_UPDATED_ALERT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(37..=547).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0444, size: body_size });
+        }
+
+        // show_alert: Bool
+        let show_alert = crate::util::read_u8_le(&mut r)? != 0;
+
+        // event_id: Guid
+        let event_id = crate::util::read_guid(&mut r)?;
+
+        // old_event_time: DateTime
+        let old_event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+        // flags: u32
+        let flags = crate::util::read_u32_le(&mut r)?;
+
+        // new_event_time: DateTime
+        let new_event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+        // event_type: u8
+        let event_type = crate::util::read_u8_le(&mut r)?;
+
+        // dungeon_id: u32
+        let dungeon_id = crate::util::read_u32_le(&mut r)?;
+
+        // title: CString
+        let title = {
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(title)?
+        };
+
+        // description: CString
+        let description = {
+            let description = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(description)?
+        };
+
+        // repeatable: u8
+        let repeatable = crate::util::read_u8_le(&mut r)?;
+
+        // max_invitees: u32
+        let max_invitees = crate::util::read_u32_le(&mut r)?;
+
+        // unknown_time: DateTime
+        let unknown_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+        Ok(Self {
+            show_alert,
+            event_id,
+            old_event_time,
+            flags,
+            new_event_time,
+            event_type,
+            dungeon_id,
+            title,
+            description,
+            repeatable,
+            max_invitees,
+            unknown_time,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CALENDAR_EVENT_UPDATED_ALERT {
     const OPCODE: u32 = 0x0444;
 
@@ -146,67 +212,8 @@ impl crate::Message for SMSG_CALENDAR_EVENT_UPDATED_ALERT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(37..=547).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0444, size: body_size });
-        }
-
-        // show_alert: Bool
-        let show_alert = crate::util::read_u8_le(&mut r)? != 0;
-
-        // event_id: Guid
-        let event_id = crate::util::read_guid(&mut r)?;
-
-        // old_event_time: DateTime
-        let old_event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-        // flags: u32
-        let flags = crate::util::read_u32_le(&mut r)?;
-
-        // new_event_time: DateTime
-        let new_event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-        // event_type: u8
-        let event_type = crate::util::read_u8_le(&mut r)?;
-
-        // dungeon_id: u32
-        let dungeon_id = crate::util::read_u32_le(&mut r)?;
-
-        // title: CString
-        let title = {
-            let title = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(title)?
-        };
-
-        // description: CString
-        let description = {
-            let description = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(description)?
-        };
-
-        // repeatable: u8
-        let repeatable = crate::util::read_u8_le(&mut r)?;
-
-        // max_invitees: u32
-        let max_invitees = crate::util::read_u32_le(&mut r)?;
-
-        // unknown_time: DateTime
-        let unknown_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-        Ok(Self {
-            show_alert,
-            event_id,
-            old_event_time,
-            flags,
-            new_event_time,
-            event_type,
-            dungeon_id,
-            title,
-            description,
-            repeatable,
-            max_invitees,
-            unknown_time,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

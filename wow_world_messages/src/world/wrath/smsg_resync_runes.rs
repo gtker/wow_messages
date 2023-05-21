@@ -15,6 +15,31 @@ pub struct SMSG_RESYNC_RUNES {
 }
 
 impl crate::private::Sealed for SMSG_RESYNC_RUNES {}
+impl SMSG_RESYNC_RUNES {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0487, size: body_size });
+        }
+
+        // amount_of_runes: u32
+        let amount_of_runes = crate::util::read_u32_le(&mut r)?;
+
+        // runes: ResyncRune[amount_of_runes]
+        let runes = {
+            let mut runes = Vec::with_capacity(amount_of_runes as usize);
+            for _ in 0..amount_of_runes {
+                runes.push(ResyncRune::read(&mut r)?);
+            }
+            runes
+        };
+
+        Ok(Self {
+            runes,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_RESYNC_RUNES {
     const OPCODE: u32 = 0x0487;
 
@@ -85,26 +110,8 @@ impl crate::Message for SMSG_RESYNC_RUNES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0487, size: body_size });
-        }
-
-        // amount_of_runes: u32
-        let amount_of_runes = crate::util::read_u32_le(&mut r)?;
-
-        // runes: ResyncRune[amount_of_runes]
-        let runes = {
-            let mut runes = Vec::with_capacity(amount_of_runes as usize);
-            for _ in 0..amount_of_runes {
-                runes.push(ResyncRune::read(&mut r)?);
-            }
-            runes
-        };
-
-        Ok(Self {
-            runes,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

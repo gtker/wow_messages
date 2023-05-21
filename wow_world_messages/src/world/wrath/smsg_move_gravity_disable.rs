@@ -16,6 +16,26 @@ pub struct SMSG_MOVE_GRAVITY_DISABLE {
 }
 
 impl crate::private::Sealed for SMSG_MOVE_GRAVITY_DISABLE {}
+impl SMSG_MOVE_GRAVITY_DISABLE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(6..=13).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04CE, size: body_size });
+        }
+
+        // unit: PackedGuid
+        let unit = crate::util::read_packed_guid(&mut r)?;
+
+        // movement_counter: u32
+        let movement_counter = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            unit,
+            movement_counter,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_MOVE_GRAVITY_DISABLE {
     const OPCODE: u32 = 0x04ce;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_MOVE_GRAVITY_DISABLE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(6..=13).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04CE, size: body_size });
-        }
-
-        // unit: PackedGuid
-        let unit = crate::util::read_packed_guid(&mut r)?;
-
-        // movement_counter: u32
-        let movement_counter = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            unit,
-            movement_counter,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

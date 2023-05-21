@@ -18,6 +18,34 @@ pub struct SMSG_BATTLEFIELD_MGR_EJECTED {
 }
 
 impl crate::private::Sealed for SMSG_BATTLEFIELD_MGR_EJECTED {}
+impl SMSG_BATTLEFIELD_MGR_EJECTED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 7 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E6, size: body_size });
+        }
+
+        // battle_id: u32
+        let battle_id = crate::util::read_u32_le(&mut r)?;
+
+        // reason: u8
+        let reason = crate::util::read_u8_le(&mut r)?;
+
+        // battle_status: u8
+        let battle_status = crate::util::read_u8_le(&mut r)?;
+
+        // relocated: u8
+        let relocated = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            battle_id,
+            reason,
+            battle_status,
+            relocated,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_BATTLEFIELD_MGR_EJECTED {
     const OPCODE: u32 = 0x04e6;
 
@@ -78,29 +106,8 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_EJECTED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 7 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E6, size: body_size });
-        }
-
-        // battle_id: u32
-        let battle_id = crate::util::read_u32_le(&mut r)?;
-
-        // reason: u8
-        let reason = crate::util::read_u8_le(&mut r)?;
-
-        // battle_status: u8
-        let battle_status = crate::util::read_u8_le(&mut r)?;
-
-        // relocated: u8
-        let relocated = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            battle_id,
-            reason,
-            battle_status,
-            relocated,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

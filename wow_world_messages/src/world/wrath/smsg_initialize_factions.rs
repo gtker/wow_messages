@@ -17,6 +17,31 @@ pub struct SMSG_INITIALIZE_FACTIONS {
 }
 
 impl crate::private::Sealed for SMSG_INITIALIZE_FACTIONS {}
+impl SMSG_INITIALIZE_FACTIONS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0122, size: body_size });
+        }
+
+        // amount_of_factions: u32
+        let amount_of_factions = crate::util::read_u32_le(&mut r)?;
+
+        // factions: FactionInitializer[amount_of_factions]
+        let factions = {
+            let mut factions = Vec::with_capacity(amount_of_factions as usize);
+            for _ in 0..amount_of_factions {
+                factions.push(FactionInitializer::read(&mut r)?);
+            }
+            factions
+        };
+
+        Ok(Self {
+            factions,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_INITIALIZE_FACTIONS {
     const OPCODE: u32 = 0x0122;
 
@@ -87,26 +112,8 @@ impl crate::Message for SMSG_INITIALIZE_FACTIONS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0122, size: body_size });
-        }
-
-        // amount_of_factions: u32
-        let amount_of_factions = crate::util::read_u32_le(&mut r)?;
-
-        // factions: FactionInitializer[amount_of_factions]
-        let factions = {
-            let mut factions = Vec::with_capacity(amount_of_factions as usize);
-            for _ in 0..amount_of_factions {
-                factions.push(FactionInitializer::read(&mut r)?);
-            }
-            factions
-        };
-
-        Ok(Self {
-            factions,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

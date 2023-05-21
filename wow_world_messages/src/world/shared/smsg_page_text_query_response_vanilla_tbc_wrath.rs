@@ -16,6 +16,33 @@ pub struct SMSG_PAGE_TEXT_QUERY_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_PAGE_TEXT_QUERY_RESPONSE {}
+impl SMSG_PAGE_TEXT_QUERY_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(9..=264).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x005B, size: body_size });
+        }
+
+        // page_id: u32
+        let page_id = crate::util::read_u32_le(&mut r)?;
+
+        // text: CString
+        let text = {
+            let text = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(text)?
+        };
+
+        // next_page_id: u32
+        let next_page_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            page_id,
+            text,
+            next_page_id,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PAGE_TEXT_QUERY_RESPONSE {
     const OPCODE: u32 = 0x005b;
 
@@ -75,28 +102,8 @@ impl crate::Message for SMSG_PAGE_TEXT_QUERY_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(9..=264).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x005B, size: body_size });
-        }
-
-        // page_id: u32
-        let page_id = crate::util::read_u32_le(&mut r)?;
-
-        // text: CString
-        let text = {
-            let text = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(text)?
-        };
-
-        // next_page_id: u32
-        let next_page_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            page_id,
-            text,
-            next_page_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

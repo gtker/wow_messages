@@ -12,6 +12,22 @@ pub struct SMSG_SET_PHASE_SHIFT {
 }
 
 impl crate::private::Sealed for SMSG_SET_PHASE_SHIFT {}
+impl SMSG_SET_PHASE_SHIFT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x047C, size: body_size });
+        }
+
+        // new_phase: u32
+        let new_phase = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            new_phase,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SET_PHASE_SHIFT {
     const OPCODE: u32 = 0x047c;
 
@@ -57,17 +73,8 @@ impl crate::Message for SMSG_SET_PHASE_SHIFT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x047C, size: body_size });
-        }
-
-        // new_phase: u32
-        let new_phase = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            new_phase,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

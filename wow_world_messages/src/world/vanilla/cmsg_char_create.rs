@@ -48,52 +48,8 @@ impl CMSG_CHAR_CREATE {
 }
 
 impl crate::private::Sealed for CMSG_CHAR_CREATE {}
-impl crate::Message for CMSG_CHAR_CREATE {
-    const OPCODE: u32 = 0x0036;
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // name: CString
-        // TODO: Guard against strings that are already null-terminated
-        assert_ne!(self.name.as_bytes().iter().rev().next(), Some(&0_u8), "String `name` must not be null-terminated.");
-        w.write_all(self.name.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // race: Race
-        w.write_all(&(self.race.as_int().to_le_bytes()))?;
-
-        // class: Class
-        w.write_all(&(self.class.as_int().to_le_bytes()))?;
-
-        // gender: Gender
-        w.write_all(&(self.gender.as_int().to_le_bytes()))?;
-
-        // skin_color: u8
-        w.write_all(&self.skin_color.to_le_bytes())?;
-
-        // face: u8
-        w.write_all(&self.face.to_le_bytes())?;
-
-        // hair_style: u8
-        w.write_all(&self.hair_style.to_le_bytes())?;
-
-        // hair_color: u8
-        w.write_all(&self.hair_color.to_le_bytes())?;
-
-        // facial_hair: u8
-        w.write_all(&self.facial_hair.to_le_bytes())?;
-
-        // outfit_id: u8
-        w.write_all(&Self::OUTFIT_ID_VALUE.to_le_bytes())?;
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl CMSG_CHAR_CREATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(10..=265).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0036, size: body_size });
         }
@@ -143,6 +99,57 @@ impl crate::Message for CMSG_CHAR_CREATE {
             hair_color,
             facial_hair,
         })
+    }
+
+}
+
+impl crate::Message for CMSG_CHAR_CREATE {
+    const OPCODE: u32 = 0x0036;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // name: CString
+        // TODO: Guard against strings that are already null-terminated
+        assert_ne!(self.name.as_bytes().iter().rev().next(), Some(&0_u8), "String `name` must not be null-terminated.");
+        w.write_all(self.name.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // race: Race
+        w.write_all(&(self.race.as_int().to_le_bytes()))?;
+
+        // class: Class
+        w.write_all(&(self.class.as_int().to_le_bytes()))?;
+
+        // gender: Gender
+        w.write_all(&(self.gender.as_int().to_le_bytes()))?;
+
+        // skin_color: u8
+        w.write_all(&self.skin_color.to_le_bytes())?;
+
+        // face: u8
+        w.write_all(&self.face.to_le_bytes())?;
+
+        // hair_style: u8
+        w.write_all(&self.hair_style.to_le_bytes())?;
+
+        // hair_color: u8
+        w.write_all(&self.hair_color.to_le_bytes())?;
+
+        // facial_hair: u8
+        w.write_all(&self.facial_hair.to_le_bytes())?;
+
+        // outfit_id: u8
+        w.write_all(&Self::OUTFIT_ID_VALUE.to_le_bytes())?;
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

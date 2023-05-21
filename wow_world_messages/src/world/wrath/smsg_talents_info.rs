@@ -27,6 +27,67 @@ pub struct SMSG_TALENTS_INFO {
 }
 
 impl crate::private::Sealed for SMSG_TALENTS_INFO {}
+impl SMSG_TALENTS_INFO {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(5..=459271).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C0, size: body_size });
+        }
+
+        // talent_type: TalentInfoType
+        let talent_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // points_left: u32
+        let points_left = crate::util::read_u32_le(&mut r)?;
+
+        let talent_type_if = match talent_type {
+            TalentInfoType::Player => {
+                // amount_of_specs: u8
+                let amount_of_specs = crate::util::read_u8_le(&mut r)?;
+
+                // active_spec: u8
+                let active_spec = crate::util::read_u8_le(&mut r)?;
+
+                // specs: TalentInfoSpec[amount_of_specs]
+                let specs = {
+                    let mut specs = Vec::with_capacity(amount_of_specs as usize);
+                    for _ in 0..amount_of_specs {
+                        specs.push(TalentInfoSpec::read(&mut r)?);
+                    }
+                    specs
+                };
+
+                SMSG_TALENTS_INFO_TalentInfoType::Player {
+                    active_spec,
+                    specs,
+                }
+            }
+            TalentInfoType::Pet => {
+                // amount_of_talents: u8
+                let amount_of_talents = crate::util::read_u8_le(&mut r)?;
+
+                // talents: InspectTalent[amount_of_talents]
+                let talents = {
+                    let mut talents = Vec::with_capacity(amount_of_talents as usize);
+                    for _ in 0..amount_of_talents {
+                        talents.push(InspectTalent::read(&mut r)?);
+                    }
+                    talents
+                };
+
+                SMSG_TALENTS_INFO_TalentInfoType::Pet {
+                    talents,
+                }
+            }
+        };
+
+        Ok(Self {
+            talent_type: talent_type_if,
+            points_left,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_TALENTS_INFO {
     const OPCODE: u32 = 0x04c0;
 
@@ -210,62 +271,8 @@ impl crate::Message for SMSG_TALENTS_INFO {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(5..=459271).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C0, size: body_size });
-        }
-
-        // talent_type: TalentInfoType
-        let talent_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // points_left: u32
-        let points_left = crate::util::read_u32_le(&mut r)?;
-
-        let talent_type_if = match talent_type {
-            TalentInfoType::Player => {
-                // amount_of_specs: u8
-                let amount_of_specs = crate::util::read_u8_le(&mut r)?;
-
-                // active_spec: u8
-                let active_spec = crate::util::read_u8_le(&mut r)?;
-
-                // specs: TalentInfoSpec[amount_of_specs]
-                let specs = {
-                    let mut specs = Vec::with_capacity(amount_of_specs as usize);
-                    for _ in 0..amount_of_specs {
-                        specs.push(TalentInfoSpec::read(&mut r)?);
-                    }
-                    specs
-                };
-
-                SMSG_TALENTS_INFO_TalentInfoType::Player {
-                    active_spec,
-                    specs,
-                }
-            }
-            TalentInfoType::Pet => {
-                // amount_of_talents: u8
-                let amount_of_talents = crate::util::read_u8_le(&mut r)?;
-
-                // talents: InspectTalent[amount_of_talents]
-                let talents = {
-                    let mut talents = Vec::with_capacity(amount_of_talents as usize);
-                    for _ in 0..amount_of_talents {
-                        talents.push(InspectTalent::read(&mut r)?);
-                    }
-                    talents
-                };
-
-                SMSG_TALENTS_INFO_TalentInfoType::Pet {
-                    talents,
-                }
-            }
-        };
-
-        Ok(Self {
-            talent_type: talent_type_if,
-            points_left,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

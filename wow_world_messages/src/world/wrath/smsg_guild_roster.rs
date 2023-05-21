@@ -27,6 +27,58 @@ pub struct SMSG_GUILD_ROSTER {
 }
 
 impl crate::private::Sealed for SMSG_GUILD_ROSTER {}
+impl SMSG_GUILD_ROSTER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(10..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x008A, size: body_size });
+        }
+
+        // amount_of_members: u32
+        let amount_of_members = crate::util::read_u32_le(&mut r)?;
+
+        // motd: CString
+        let motd = {
+            let motd = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(motd)?
+        };
+
+        // guild_info: CString
+        let guild_info = {
+            let guild_info = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(guild_info)?
+        };
+
+        // amount_of_rights: u32
+        let amount_of_rights = crate::util::read_u32_le(&mut r)?;
+
+        // rights: GuildRights[amount_of_rights]
+        let rights = {
+            let mut rights = Vec::with_capacity(amount_of_rights as usize);
+            for _ in 0..amount_of_rights {
+                rights.push(GuildRights::read(&mut r)?);
+            }
+            rights
+        };
+
+        // members: GuildMember[amount_of_members]
+        let members = {
+            let mut members = Vec::with_capacity(amount_of_members as usize);
+            for _ in 0..amount_of_members {
+                members.push(GuildMember::read(&mut r)?);
+            }
+            members
+        };
+
+        Ok(Self {
+            motd,
+            guild_info,
+            rights,
+            members,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GUILD_ROSTER {
     const OPCODE: u32 = 0x008a;
 
@@ -199,53 +251,8 @@ impl crate::Message for SMSG_GUILD_ROSTER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(10..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x008A, size: body_size });
-        }
-
-        // amount_of_members: u32
-        let amount_of_members = crate::util::read_u32_le(&mut r)?;
-
-        // motd: CString
-        let motd = {
-            let motd = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(motd)?
-        };
-
-        // guild_info: CString
-        let guild_info = {
-            let guild_info = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(guild_info)?
-        };
-
-        // amount_of_rights: u32
-        let amount_of_rights = crate::util::read_u32_le(&mut r)?;
-
-        // rights: GuildRights[amount_of_rights]
-        let rights = {
-            let mut rights = Vec::with_capacity(amount_of_rights as usize);
-            for _ in 0..amount_of_rights {
-                rights.push(GuildRights::read(&mut r)?);
-            }
-            rights
-        };
-
-        // members: GuildMember[amount_of_members]
-        let members = {
-            let mut members = Vec::with_capacity(amount_of_members as usize);
-            for _ in 0..amount_of_members {
-                members.push(GuildMember::read(&mut r)?);
-            }
-            members
-        };
-
-        Ok(Self {
-            motd,
-            guild_info,
-            rights,
-            members,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

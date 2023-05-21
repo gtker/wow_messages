@@ -29,6 +29,60 @@ pub struct SMSG_INSPECT_TALENT {
 }
 
 impl crate::private::Sealed for SMSG_INSPECT_TALENT {}
+impl SMSG_INSPECT_TALENT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(13..=330164).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F4, size: body_size });
+        }
+
+        // player: PackedGuid
+        let player = crate::util::read_packed_guid(&mut r)?;
+
+        // unspent_talent_points: u32
+        let unspent_talent_points = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_specs: u8
+        let amount_of_specs = crate::util::read_u8_le(&mut r)?;
+
+        // active_spec: u8
+        let active_spec = crate::util::read_u8_le(&mut r)?;
+
+        // specs: InspectTalentSpec[amount_of_specs]
+        let specs = {
+            let mut specs = Vec::with_capacity(amount_of_specs as usize);
+            for _ in 0..amount_of_specs {
+                specs.push(InspectTalentSpec::read(&mut r)?);
+            }
+            specs
+        };
+
+        // amount_of_glyphs: u8
+        let amount_of_glyphs = crate::util::read_u8_le(&mut r)?;
+
+        // glyphs: u16[amount_of_glyphs]
+        let glyphs = {
+            let mut glyphs = Vec::with_capacity(amount_of_glyphs as usize);
+            for _ in 0..amount_of_glyphs {
+                glyphs.push(crate::util::read_u16_le(&mut r)?);
+            }
+            glyphs
+        };
+
+        // talent_gear_mask: InspectTalentGearMask
+        let talent_gear_mask = InspectTalentGearMask::read(&mut r)?;
+
+        Ok(Self {
+            player,
+            unspent_talent_points,
+            active_spec,
+            specs,
+            glyphs,
+            talent_gear_mask,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_INSPECT_TALENT {
     const OPCODE: u32 = 0x03f4;
 
@@ -159,55 +213,8 @@ impl crate::Message for SMSG_INSPECT_TALENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(13..=330164).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F4, size: body_size });
-        }
-
-        // player: PackedGuid
-        let player = crate::util::read_packed_guid(&mut r)?;
-
-        // unspent_talent_points: u32
-        let unspent_talent_points = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_specs: u8
-        let amount_of_specs = crate::util::read_u8_le(&mut r)?;
-
-        // active_spec: u8
-        let active_spec = crate::util::read_u8_le(&mut r)?;
-
-        // specs: InspectTalentSpec[amount_of_specs]
-        let specs = {
-            let mut specs = Vec::with_capacity(amount_of_specs as usize);
-            for _ in 0..amount_of_specs {
-                specs.push(InspectTalentSpec::read(&mut r)?);
-            }
-            specs
-        };
-
-        // amount_of_glyphs: u8
-        let amount_of_glyphs = crate::util::read_u8_le(&mut r)?;
-
-        // glyphs: u16[amount_of_glyphs]
-        let glyphs = {
-            let mut glyphs = Vec::with_capacity(amount_of_glyphs as usize);
-            for _ in 0..amount_of_glyphs {
-                glyphs.push(crate::util::read_u16_le(&mut r)?);
-            }
-            glyphs
-        };
-
-        // talent_gear_mask: InspectTalentGearMask
-        let talent_gear_mask = InspectTalentGearMask::read(&mut r)?;
-
-        Ok(Self {
-            player,
-            unspent_talent_points,
-            active_spec,
-            specs,
-            glyphs,
-            talent_gear_mask,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

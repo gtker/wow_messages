@@ -17,6 +17,38 @@ pub struct CMSG_BUG {
 }
 
 impl crate::private::Sealed for CMSG_BUG {}
+impl CMSG_BUG {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(14..=16012).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CA, size: body_size });
+        }
+
+        // suggestion: u32
+        let suggestion = crate::util::read_u32_le(&mut r)?;
+
+        // content: SizedCString
+        let content = {
+            let content = crate::util::read_u32_le(&mut r)?;
+            let content = crate::util::read_sized_c_string_to_vec(&mut r, content)?;
+            String::from_utf8(content)?
+        };
+
+        // bug_type: SizedCString
+        let bug_type = {
+            let bug_type = crate::util::read_u32_le(&mut r)?;
+            let bug_type = crate::util::read_sized_c_string_to_vec(&mut r, bug_type)?;
+            String::from_utf8(bug_type)?
+        };
+
+        Ok(Self {
+            suggestion,
+            content,
+            bug_type,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_BUG {
     const OPCODE: u32 = 0x01ca;
 
@@ -78,33 +110,8 @@ impl crate::Message for CMSG_BUG {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(14..=16012).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01CA, size: body_size });
-        }
-
-        // suggestion: u32
-        let suggestion = crate::util::read_u32_le(&mut r)?;
-
-        // content: SizedCString
-        let content = {
-            let content = crate::util::read_u32_le(&mut r)?;
-            let content = crate::util::read_sized_c_string_to_vec(&mut r, content)?;
-            String::from_utf8(content)?
-        };
-
-        // bug_type: SizedCString
-        let bug_type = {
-            let bug_type = crate::util::read_u32_le(&mut r)?;
-            let bug_type = crate::util::read_sized_c_string_to_vec(&mut r, bug_type)?;
-            String::from_utf8(bug_type)?
-        };
-
-        Ok(Self {
-            suggestion,
-            content,
-            bug_type,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

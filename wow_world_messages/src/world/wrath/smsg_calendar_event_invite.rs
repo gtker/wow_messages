@@ -33,6 +33,58 @@ pub struct SMSG_CALENDAR_EVENT_INVITE {
 }
 
 impl crate::private::Sealed for SMSG_CALENDAR_EVENT_INVITE {}
+impl SMSG_CALENDAR_EVENT_INVITE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(22..=33).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043A, size: body_size });
+        }
+
+        // invitee: PackedGuid
+        let invitee = crate::util::read_packed_guid(&mut r)?;
+
+        // event_id: Guid
+        let event_id = crate::util::read_guid(&mut r)?;
+
+        // invite_id: Guid
+        let invite_id = crate::util::read_guid(&mut r)?;
+
+        // level: Level
+        let level = Level::new(crate::util::read_u8_le(&mut r)?);
+
+        // invite_status: u8
+        let invite_status = crate::util::read_u8_le(&mut r)?;
+
+        // time: CalendarStatusTime
+        let time = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let time_if = match time {
+            CalendarStatusTime::NotPresent => SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::NotPresent,
+            CalendarStatusTime::Present => {
+                // status_time: DateTime
+                let status_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+                SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::Present {
+                    status_time,
+                }
+            }
+        };
+
+        // is_sign_up: Bool
+        let is_sign_up = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            invitee,
+            event_id,
+            invite_id,
+            level,
+            invite_status,
+            time: time_if,
+            is_sign_up,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
     const OPCODE: u32 = 0x043a;
 
@@ -137,53 +189,8 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(22..=33).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x043A, size: body_size });
-        }
-
-        // invitee: PackedGuid
-        let invitee = crate::util::read_packed_guid(&mut r)?;
-
-        // event_id: Guid
-        let event_id = crate::util::read_guid(&mut r)?;
-
-        // invite_id: Guid
-        let invite_id = crate::util::read_guid(&mut r)?;
-
-        // level: Level
-        let level = Level::new(crate::util::read_u8_le(&mut r)?);
-
-        // invite_status: u8
-        let invite_status = crate::util::read_u8_le(&mut r)?;
-
-        // time: CalendarStatusTime
-        let time = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let time_if = match time {
-            CalendarStatusTime::NotPresent => SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::NotPresent,
-            CalendarStatusTime::Present => {
-                // status_time: DateTime
-                let status_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-                SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::Present {
-                    status_time,
-                }
-            }
-        };
-
-        // is_sign_up: Bool
-        let is_sign_up = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            invitee,
-            event_id,
-            invite_id,
-            level,
-            invite_status,
-            time: time_if,
-            is_sign_up,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

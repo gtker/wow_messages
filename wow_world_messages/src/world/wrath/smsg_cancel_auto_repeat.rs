@@ -14,6 +14,22 @@ pub struct SMSG_CANCEL_AUTO_REPEAT {
 }
 
 impl crate::private::Sealed for SMSG_CANCEL_AUTO_REPEAT {}
+impl SMSG_CANCEL_AUTO_REPEAT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=9).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x029C, size: body_size });
+        }
+
+        // target: PackedGuid
+        let target = crate::util::read_packed_guid(&mut r)?;
+
+        Ok(Self {
+            target,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CANCEL_AUTO_REPEAT {
     const OPCODE: u32 = 0x029c;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_CANCEL_AUTO_REPEAT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=9).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x029C, size: body_size });
-        }
-
-        // target: PackedGuid
-        let target = crate::util::read_packed_guid(&mut r)?;
-
-        Ok(Self {
-            target,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

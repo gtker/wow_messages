@@ -24,6 +24,63 @@ pub struct CMSG_LFG_JOIN {
 }
 
 impl crate::private::Sealed for CMSG_LFG_JOIN {}
+impl CMSG_LFG_JOIN {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(9..=1544).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x035C, size: body_size });
+        }
+
+        // roles: u32
+        let roles = crate::util::read_u32_le(&mut r)?;
+
+        // no_partial_clear: Bool
+        let no_partial_clear = crate::util::read_u8_le(&mut r)? != 0;
+
+        // achievements: Bool
+        let achievements = crate::util::read_u8_le(&mut r)? != 0;
+
+        // amount_of_slots: u8
+        let amount_of_slots = crate::util::read_u8_le(&mut r)?;
+
+        // slots: u32[amount_of_slots]
+        let slots = {
+            let mut slots = Vec::with_capacity(amount_of_slots as usize);
+            for _ in 0..amount_of_slots {
+                slots.push(crate::util::read_u32_le(&mut r)?);
+            }
+            slots
+        };
+
+        // amount_of_needs: u8
+        let amount_of_needs = crate::util::read_u8_le(&mut r)?;
+
+        // needs: u8[amount_of_needs]
+        let needs = {
+            let mut needs = Vec::with_capacity(amount_of_needs as usize);
+            for _ in 0..amount_of_needs {
+                needs.push(crate::util::read_u8_le(&mut r)?);
+            }
+            needs
+        };
+
+        // comment: CString
+        let comment = {
+            let comment = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(comment)?
+        };
+
+        Ok(Self {
+            roles,
+            no_partial_clear,
+            achievements,
+            slots,
+            needs,
+            comment,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_LFG_JOIN {
     const OPCODE: u32 = 0x035c;
 
@@ -126,58 +183,8 @@ impl crate::Message for CMSG_LFG_JOIN {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(9..=1544).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x035C, size: body_size });
-        }
-
-        // roles: u32
-        let roles = crate::util::read_u32_le(&mut r)?;
-
-        // no_partial_clear: Bool
-        let no_partial_clear = crate::util::read_u8_le(&mut r)? != 0;
-
-        // achievements: Bool
-        let achievements = crate::util::read_u8_le(&mut r)? != 0;
-
-        // amount_of_slots: u8
-        let amount_of_slots = crate::util::read_u8_le(&mut r)?;
-
-        // slots: u32[amount_of_slots]
-        let slots = {
-            let mut slots = Vec::with_capacity(amount_of_slots as usize);
-            for _ in 0..amount_of_slots {
-                slots.push(crate::util::read_u32_le(&mut r)?);
-            }
-            slots
-        };
-
-        // amount_of_needs: u8
-        let amount_of_needs = crate::util::read_u8_le(&mut r)?;
-
-        // needs: u8[amount_of_needs]
-        let needs = {
-            let mut needs = Vec::with_capacity(amount_of_needs as usize);
-            for _ in 0..amount_of_needs {
-                needs.push(crate::util::read_u8_le(&mut r)?);
-            }
-            needs
-        };
-
-        // comment: CString
-        let comment = {
-            let comment = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(comment)?
-        };
-
-        Ok(Self {
-            roles,
-            no_partial_clear,
-            achievements,
-            slots,
-            needs,
-            comment,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

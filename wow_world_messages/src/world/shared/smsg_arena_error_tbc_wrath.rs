@@ -16,6 +16,26 @@ pub struct SMSG_ARENA_ERROR {
 }
 
 impl crate::private::Sealed for SMSG_ARENA_ERROR {}
+impl SMSG_ARENA_ERROR {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 5 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0376, size: body_size });
+        }
+
+        // unknown: u32
+        let unknown = crate::util::read_u32_le(&mut r)?;
+
+        // arena_type: ArenaType
+        let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            unknown,
+            arena_type,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ARENA_ERROR {
     const OPCODE: u32 = 0x0376;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_ARENA_ERROR {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 5 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0376, size: body_size });
-        }
-
-        // unknown: u32
-        let unknown = crate::util::read_u32_le(&mut r)?;
-
-        // arena_type: ArenaType
-        let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            unknown,
-            arena_type,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

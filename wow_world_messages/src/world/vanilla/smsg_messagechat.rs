@@ -49,348 +49,8 @@ pub struct SMSG_MESSAGECHAT {
 }
 
 impl crate::private::Sealed for SMSG_MESSAGECHAT {}
-impl crate::Message for SMSG_MESSAGECHAT {
-    const OPCODE: u32 = 0x0096;
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // chat_type: ChatType
-        w.write_all(&(self.chat_type.as_int().to_le_bytes()))?;
-
-        // language: Language
-        w.write_all(&(self.language.as_int().to_le_bytes()))?;
-
-        match &self.chat_type {
-            SMSG_MESSAGECHAT_ChatType::Say {
-                chat_credit,
-                speech_bubble_credit,
-            } => {
-                // speech_bubble_credit: Guid
-                w.write_all(&speech_bubble_credit.guid().to_le_bytes())?;
-
-                // chat_credit: Guid
-                w.write_all(&chat_credit.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Party {
-                chat_credit,
-                speech_bubble_credit,
-            } => {
-                // speech_bubble_credit: Guid
-                w.write_all(&speech_bubble_credit.guid().to_le_bytes())?;
-
-                // chat_credit: Guid
-                w.write_all(&chat_credit.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Raid {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Guild {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Officer {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Yell {
-                chat_credit,
-                speech_bubble_credit,
-            } => {
-                // speech_bubble_credit: Guid
-                w.write_all(&speech_bubble_credit.guid().to_le_bytes())?;
-
-                // chat_credit: Guid
-                w.write_all(&chat_credit.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Whisper {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::WhisperInform {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Emote {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::TextEmote {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::System {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::MonsterSay {
-                sender1,
-                sender_name,
-                target,
-            } => {
-                // sender1: Guid
-                w.write_all(&sender1.guid().to_le_bytes())?;
-
-                // sender_name: SizedCString
-                w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
-                w.write_all(sender_name.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-                // target: Guid
-                w.write_all(&target.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::MonsterYell {
-                sender1,
-                sender_name,
-                target,
-            } => {
-                // sender1: Guid
-                w.write_all(&sender1.guid().to_le_bytes())?;
-
-                // sender_name: SizedCString
-                w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
-                w.write_all(sender_name.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-                // target: Guid
-                w.write_all(&target.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::MonsterEmote {
-                monster,
-                monster_name,
-            } => {
-                // monster_name: SizedCString
-                w.write_all(&((monster_name.len() + 1) as u32).to_le_bytes())?;
-                w.write_all(monster_name.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-                // monster: Guid
-                w.write_all(&monster.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Channel {
-                channel_name,
-                player,
-                player_rank,
-            } => {
-                // channel_name: CString
-                // TODO: Guard against strings that are already null-terminated
-                assert_ne!(channel_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `channel_name` must not be null-terminated.");
-                w.write_all(channel_name.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-                // player_rank: u32
-                w.write_all(&player_rank.to_le_bytes())?;
-
-                // player: Guid
-                w.write_all(&player.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::ChannelJoin {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::ChannelLeave {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::ChannelList {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::ChannelNotice {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::ChannelNoticeUser {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Afk {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Dnd {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Ignored {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Skill {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Loot {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::MonsterWhisper {
-                monster,
-                monster_name,
-            } => {
-                // monster_name: SizedCString
-                w.write_all(&((monster_name.len() + 1) as u32).to_le_bytes())?;
-                w.write_all(monster_name.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-                // monster: Guid
-                w.write_all(&monster.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::BgSystemNeutral {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::BgSystemAlliance {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::BgSystemHorde {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::RaidLeader {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::RaidWarning {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::RaidBossWhisper {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::RaidBossEmote {
-                monster,
-                monster_name,
-            } => {
-                // monster_name: SizedCString
-                w.write_all(&((monster_name.len() + 1) as u32).to_le_bytes())?;
-                w.write_all(monster_name.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-                // monster: Guid
-                w.write_all(&monster.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::Battleground {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-            SMSG_MESSAGECHAT_ChatType::BattlegroundLeader {
-                sender2,
-            } => {
-                // sender2: Guid
-                w.write_all(&sender2.guid().to_le_bytes())?;
-
-            }
-        }
-
-        // message: SizedCString
-        w.write_all(&((self.message.len() + 1) as u32).to_le_bytes())?;
-        w.write_all(self.message.as_bytes())?;
-        // Null terminator
-        w.write_all(&[0])?;
-
-        // tag: PlayerChatTag
-        w.write_all(&(self.tag.as_int().to_le_bytes()))?;
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl SMSG_MESSAGECHAT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(19..=16030).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0096, size: body_size });
         }
@@ -771,6 +431,353 @@ impl crate::Message for SMSG_MESSAGECHAT {
             message,
             tag,
         })
+    }
+
+}
+
+impl crate::Message for SMSG_MESSAGECHAT {
+    const OPCODE: u32 = 0x0096;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // chat_type: ChatType
+        w.write_all(&(self.chat_type.as_int().to_le_bytes()))?;
+
+        // language: Language
+        w.write_all(&(self.language.as_int().to_le_bytes()))?;
+
+        match &self.chat_type {
+            SMSG_MESSAGECHAT_ChatType::Say {
+                chat_credit,
+                speech_bubble_credit,
+            } => {
+                // speech_bubble_credit: Guid
+                w.write_all(&speech_bubble_credit.guid().to_le_bytes())?;
+
+                // chat_credit: Guid
+                w.write_all(&chat_credit.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Party {
+                chat_credit,
+                speech_bubble_credit,
+            } => {
+                // speech_bubble_credit: Guid
+                w.write_all(&speech_bubble_credit.guid().to_le_bytes())?;
+
+                // chat_credit: Guid
+                w.write_all(&chat_credit.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Raid {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Guild {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Officer {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Yell {
+                chat_credit,
+                speech_bubble_credit,
+            } => {
+                // speech_bubble_credit: Guid
+                w.write_all(&speech_bubble_credit.guid().to_le_bytes())?;
+
+                // chat_credit: Guid
+                w.write_all(&chat_credit.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Whisper {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::WhisperInform {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Emote {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::TextEmote {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::System {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::MonsterSay {
+                sender1,
+                sender_name,
+                target,
+            } => {
+                // sender1: Guid
+                w.write_all(&sender1.guid().to_le_bytes())?;
+
+                // sender_name: SizedCString
+                w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
+                w.write_all(sender_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // target: Guid
+                w.write_all(&target.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::MonsterYell {
+                sender1,
+                sender_name,
+                target,
+            } => {
+                // sender1: Guid
+                w.write_all(&sender1.guid().to_le_bytes())?;
+
+                // sender_name: SizedCString
+                w.write_all(&((sender_name.len() + 1) as u32).to_le_bytes())?;
+                w.write_all(sender_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // target: Guid
+                w.write_all(&target.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::MonsterEmote {
+                monster,
+                monster_name,
+            } => {
+                // monster_name: SizedCString
+                w.write_all(&((monster_name.len() + 1) as u32).to_le_bytes())?;
+                w.write_all(monster_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // monster: Guid
+                w.write_all(&monster.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Channel {
+                channel_name,
+                player,
+                player_rank,
+            } => {
+                // channel_name: CString
+                // TODO: Guard against strings that are already null-terminated
+                assert_ne!(channel_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `channel_name` must not be null-terminated.");
+                w.write_all(channel_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // player_rank: u32
+                w.write_all(&player_rank.to_le_bytes())?;
+
+                // player: Guid
+                w.write_all(&player.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::ChannelJoin {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::ChannelLeave {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::ChannelList {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::ChannelNotice {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::ChannelNoticeUser {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Afk {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Dnd {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Ignored {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Skill {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Loot {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::MonsterWhisper {
+                monster,
+                monster_name,
+            } => {
+                // monster_name: SizedCString
+                w.write_all(&((monster_name.len() + 1) as u32).to_le_bytes())?;
+                w.write_all(monster_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // monster: Guid
+                w.write_all(&monster.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::BgSystemNeutral {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::BgSystemAlliance {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::BgSystemHorde {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::RaidLeader {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::RaidWarning {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::RaidBossWhisper {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::RaidBossEmote {
+                monster,
+                monster_name,
+            } => {
+                // monster_name: SizedCString
+                w.write_all(&((monster_name.len() + 1) as u32).to_le_bytes())?;
+                w.write_all(monster_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+                // monster: Guid
+                w.write_all(&monster.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::Battleground {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+            SMSG_MESSAGECHAT_ChatType::BattlegroundLeader {
+                sender2,
+            } => {
+                // sender2: Guid
+                w.write_all(&sender2.guid().to_le_bytes())?;
+
+            }
+        }
+
+        // message: SizedCString
+        w.write_all(&((self.message.len() + 1) as u32).to_le_bytes())?;
+        w.write_all(self.message.as_bytes())?;
+        // Null terminator
+        w.write_all(&[0])?;
+
+        // tag: PlayerChatTag
+        w.write_all(&(self.tag.as_int().to_le_bytes()))?;
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

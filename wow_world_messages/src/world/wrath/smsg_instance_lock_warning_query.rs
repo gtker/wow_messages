@@ -18,6 +18,30 @@ pub struct SMSG_INSTANCE_LOCK_WARNING_QUERY {
 }
 
 impl crate::private::Sealed for SMSG_INSTANCE_LOCK_WARNING_QUERY {}
+impl SMSG_INSTANCE_LOCK_WARNING_QUERY {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 9 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0147, size: body_size });
+        }
+
+        // time: Milliseconds
+        let time = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
+
+        // encounter_mask: u32
+        let encounter_mask = crate::util::read_u32_le(&mut r)?;
+
+        // unknown: u8
+        let unknown = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            time,
+            encounter_mask,
+            unknown,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
     const OPCODE: u32 = 0x0147;
 
@@ -73,25 +97,8 @@ impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 9 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0147, size: body_size });
-        }
-
-        // time: Milliseconds
-        let time = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
-
-        // encounter_mask: u32
-        let encounter_mask = crate::util::read_u32_le(&mut r)?;
-
-        // unknown: u8
-        let unknown = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            time,
-            encounter_mask,
-            unknown,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

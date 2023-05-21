@@ -20,93 +20,8 @@ pub struct SMSG_CHAR_RENAME {
 }
 
 impl crate::private::Sealed for SMSG_CHAR_RENAME {}
-impl crate::Message for SMSG_CHAR_RENAME {
-    const OPCODE: u32 = 0x02c8;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_CHAR_RENAME {{").unwrap();
-        // Members
-        writeln!(s, "    result = {};", WorldResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.result {
-            crate::tbc::SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
-                character,
-                new_name,
-            } => {
-                writeln!(s, "    character = {};", character.guid()).unwrap();
-                writeln!(s, "    new_name = \"{}\";", new_name).unwrap();
-            }
-            _ => {}
-        }
-
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 712_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
-        match &self.result {
-            crate::tbc::SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
-                character,
-                new_name,
-            } => {
-                crate::util::write_bytes(&mut s, &mut bytes, 8, "character", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, new_name.len() + 1, "new_name", "    ");
-            }
-            _ => {}
-        }
-
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("2.4.3".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // result: WorldResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
-
-        match &self.result {
-            SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
-                character,
-                new_name,
-            } => {
-                // character: Guid
-                w.write_all(&character.guid().to_le_bytes())?;
-
-                // new_name: CString
-                // TODO: Guard against strings that are already null-terminated
-                assert_ne!(new_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `new_name` must not be null-terminated.");
-                w.write_all(new_name.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            _ => {}
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl SMSG_CHAR_RENAME {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(1..=265).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C8, size: body_size });
         }
@@ -225,6 +140,98 @@ impl crate::Message for SMSG_CHAR_RENAME {
         Ok(Self {
             result: result_if,
         })
+    }
+
+}
+
+impl crate::Message for SMSG_CHAR_RENAME {
+    const OPCODE: u32 = 0x02c8;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_CHAR_RENAME {{").unwrap();
+        // Members
+        writeln!(s, "    result = {};", WorldResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.result {
+            crate::tbc::SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
+                character,
+                new_name,
+            } => {
+                writeln!(s, "    character = {};", character.guid()).unwrap();
+                writeln!(s, "    new_name = \"{}\";", new_name).unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 712_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
+        match &self.result {
+            crate::tbc::SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
+                character,
+                new_name,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "character", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, new_name.len() + 1, "new_name", "    ");
+            }
+            _ => {}
+        }
+
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("2.4.3".to_string())).unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        Some(s)
+    }
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // result: WorldResult
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
+
+        match &self.result {
+            SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
+                character,
+                new_name,
+            } => {
+                // character: Guid
+                w.write_all(&character.guid().to_le_bytes())?;
+
+                // new_name: CString
+                // TODO: Guard against strings that are already null-terminated
+                assert_ne!(new_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `new_name` must not be null-terminated.");
+                w.write_all(new_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            _ => {}
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

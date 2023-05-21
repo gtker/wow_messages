@@ -22,6 +22,39 @@ pub struct SMSG_SPELLLOGEXECUTE {
 }
 
 impl crate::private::Sealed for SMSG_SPELLLOGEXECUTE {}
+impl SMSG_SPELLLOGEXECUTE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(10..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x024C, size: body_size });
+        }
+
+        // caster: PackedGuid
+        let caster = crate::util::read_packed_guid(&mut r)?;
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_effects: u32
+        let amount_of_effects = crate::util::read_u32_le(&mut r)?;
+
+        // logs: SpellLog[amount_of_effects]
+        let logs = {
+            let mut logs = Vec::with_capacity(amount_of_effects as usize);
+            for _ in 0..amount_of_effects {
+                logs.push(SpellLog::read(&mut r)?);
+            }
+            logs
+        };
+
+        Ok(Self {
+            caster,
+            spell,
+            logs,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SPELLLOGEXECUTE {
     const OPCODE: u32 = 0x024c;
 
@@ -337,34 +370,8 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(10..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x024C, size: body_size });
-        }
-
-        // caster: PackedGuid
-        let caster = crate::util::read_packed_guid(&mut r)?;
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_effects: u32
-        let amount_of_effects = crate::util::read_u32_le(&mut r)?;
-
-        // logs: SpellLog[amount_of_effects]
-        let logs = {
-            let mut logs = Vec::with_capacity(amount_of_effects as usize);
-            for _ in 0..amount_of_effects {
-                logs.push(SpellLog::read(&mut r)?);
-            }
-            logs
-        };
-
-        Ok(Self {
-            caster,
-            spell,
-            logs,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

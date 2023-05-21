@@ -35,6 +35,63 @@ pub struct SMSG_LFG_PLAYER_REWARD {
 }
 
 impl crate::private::Sealed for SMSG_LFG_PLAYER_REWARD {}
+impl SMSG_LFG_PLAYER_REWARD {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(30..=3102).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FF, size: body_size });
+        }
+
+        // random_dungeon_entry: u32
+        let random_dungeon_entry = crate::util::read_u32_le(&mut r)?;
+
+        // dungeon_finished_entry: u32
+        let dungeon_finished_entry = crate::util::read_u32_le(&mut r)?;
+
+        // done: Bool
+        let done = crate::util::read_u8_le(&mut r)? != 0;
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        // money_reward: Gold
+        let money_reward = Gold::new(crate::util::read_u32_le(&mut r)?);
+
+        // experience_reward: u32
+        let experience_reward = crate::util::read_u32_le(&mut r)?;
+
+        // unknown2: u32
+        let unknown2 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown3: u32
+        let unknown3 = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_rewards: u8
+        let amount_of_rewards = crate::util::read_u8_le(&mut r)?;
+
+        // rewards: QuestGiverReward[amount_of_rewards]
+        let rewards = {
+            let mut rewards = Vec::with_capacity(amount_of_rewards as usize);
+            for _ in 0..amount_of_rewards {
+                rewards.push(QuestGiverReward::read(&mut r)?);
+            }
+            rewards
+        };
+
+        Ok(Self {
+            random_dungeon_entry,
+            dungeon_finished_entry,
+            done,
+            unknown1,
+            money_reward,
+            experience_reward,
+            unknown2,
+            unknown3,
+            rewards,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LFG_PLAYER_REWARD {
     const OPCODE: u32 = 0x01ff;
 
@@ -147,58 +204,8 @@ impl crate::Message for SMSG_LFG_PLAYER_REWARD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(30..=3102).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FF, size: body_size });
-        }
-
-        // random_dungeon_entry: u32
-        let random_dungeon_entry = crate::util::read_u32_le(&mut r)?;
-
-        // dungeon_finished_entry: u32
-        let dungeon_finished_entry = crate::util::read_u32_le(&mut r)?;
-
-        // done: Bool
-        let done = crate::util::read_u8_le(&mut r)? != 0;
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        // money_reward: Gold
-        let money_reward = Gold::new(crate::util::read_u32_le(&mut r)?);
-
-        // experience_reward: u32
-        let experience_reward = crate::util::read_u32_le(&mut r)?;
-
-        // unknown2: u32
-        let unknown2 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown3: u32
-        let unknown3 = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_rewards: u8
-        let amount_of_rewards = crate::util::read_u8_le(&mut r)?;
-
-        // rewards: QuestGiverReward[amount_of_rewards]
-        let rewards = {
-            let mut rewards = Vec::with_capacity(amount_of_rewards as usize);
-            for _ in 0..amount_of_rewards {
-                rewards.push(QuestGiverReward::read(&mut r)?);
-            }
-            rewards
-        };
-
-        Ok(Self {
-            random_dungeon_entry,
-            dungeon_finished_entry,
-            done,
-            unknown1,
-            money_reward,
-            experience_reward,
-            unknown2,
-            unknown3,
-            rewards,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

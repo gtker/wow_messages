@@ -39,6 +39,85 @@ pub struct SMSG_UPDATE_LFG_LIST {
 }
 
 impl crate::private::Sealed for SMSG_UPDATE_LFG_LIST {}
+impl SMSG_UPDATE_LFG_LIST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(25..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0360, size: body_size });
+        }
+
+        // lfg_type: LfgType
+        let lfg_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        // dungeon_id: u32
+        let dungeon_id = crate::util::read_u32_le(&mut r)?;
+
+        // update_type: LfgListUpdateType
+        let update_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let update_type_if = match update_type {
+            LfgListUpdateType::Partial => {
+                // amount_of_deleted_guids: u32
+                let amount_of_deleted_guids = crate::util::read_u32_le(&mut r)?;
+
+                // deleted_guids: Guid[amount_of_deleted_guids]
+                let deleted_guids = {
+                    let mut deleted_guids = Vec::with_capacity(amount_of_deleted_guids as usize);
+                    for _ in 0..amount_of_deleted_guids {
+                        deleted_guids.push(crate::util::read_guid(&mut r)?);
+                    }
+                    deleted_guids
+                };
+
+                SMSG_UPDATE_LFG_LIST_LfgListUpdateType::Partial {
+                    deleted_guids,
+                }
+            }
+            LfgListUpdateType::Full => SMSG_UPDATE_LFG_LIST_LfgListUpdateType::Full,
+        };
+
+        // amount_of_groups: u32
+        let amount_of_groups = crate::util::read_u32_le(&mut r)?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        // groups: LfgListGroup[amount_of_groups]
+        let groups = {
+            let mut groups = Vec::with_capacity(amount_of_groups as usize);
+            for _ in 0..amount_of_groups {
+                groups.push(LfgListGroup::read(&mut r)?);
+            }
+            groups
+        };
+
+        // amount_of_players: u32
+        let amount_of_players = crate::util::read_u32_le(&mut r)?;
+
+        // unknown2: u32
+        let unknown2 = crate::util::read_u32_le(&mut r)?;
+
+        // players: LfgListPlayer[amount_of_players]
+        let players = {
+            let mut players = Vec::with_capacity(amount_of_players as usize);
+            for _ in 0..amount_of_players {
+                players.push(LfgListPlayer::read(&mut r)?);
+            }
+            players
+        };
+
+        Ok(Self {
+            lfg_type,
+            dungeon_id,
+            update_type: update_type_if,
+            unknown1,
+            groups,
+            unknown2,
+            players,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_UPDATE_LFG_LIST {
     const OPCODE: u32 = 0x0360;
 
@@ -344,80 +423,8 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(25..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0360, size: body_size });
-        }
-
-        // lfg_type: LfgType
-        let lfg_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        // dungeon_id: u32
-        let dungeon_id = crate::util::read_u32_le(&mut r)?;
-
-        // update_type: LfgListUpdateType
-        let update_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let update_type_if = match update_type {
-            LfgListUpdateType::Partial => {
-                // amount_of_deleted_guids: u32
-                let amount_of_deleted_guids = crate::util::read_u32_le(&mut r)?;
-
-                // deleted_guids: Guid[amount_of_deleted_guids]
-                let deleted_guids = {
-                    let mut deleted_guids = Vec::with_capacity(amount_of_deleted_guids as usize);
-                    for _ in 0..amount_of_deleted_guids {
-                        deleted_guids.push(crate::util::read_guid(&mut r)?);
-                    }
-                    deleted_guids
-                };
-
-                SMSG_UPDATE_LFG_LIST_LfgListUpdateType::Partial {
-                    deleted_guids,
-                }
-            }
-            LfgListUpdateType::Full => SMSG_UPDATE_LFG_LIST_LfgListUpdateType::Full,
-        };
-
-        // amount_of_groups: u32
-        let amount_of_groups = crate::util::read_u32_le(&mut r)?;
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        // groups: LfgListGroup[amount_of_groups]
-        let groups = {
-            let mut groups = Vec::with_capacity(amount_of_groups as usize);
-            for _ in 0..amount_of_groups {
-                groups.push(LfgListGroup::read(&mut r)?);
-            }
-            groups
-        };
-
-        // amount_of_players: u32
-        let amount_of_players = crate::util::read_u32_le(&mut r)?;
-
-        // unknown2: u32
-        let unknown2 = crate::util::read_u32_le(&mut r)?;
-
-        // players: LfgListPlayer[amount_of_players]
-        let players = {
-            let mut players = Vec::with_capacity(amount_of_players as usize);
-            for _ in 0..amount_of_players {
-                players.push(LfgListPlayer::read(&mut r)?);
-            }
-            players
-        };
-
-        Ok(Self {
-            lfg_type,
-            dungeon_id,
-            update_type: update_type_if,
-            unknown1,
-            groups,
-            unknown2,
-            players,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

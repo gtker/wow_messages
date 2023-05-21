@@ -20,40 +20,8 @@ pub struct SMSG_CHAR_RENAME {
 }
 
 impl crate::private::Sealed for SMSG_CHAR_RENAME {}
-impl crate::Message for SMSG_CHAR_RENAME {
-    const OPCODE: u32 = 0x02c8;
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // result: WorldResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
-
-        match &self.result {
-            SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
-                character,
-                new_name,
-            } => {
-                // character: Guid
-                w.write_all(&character.guid().to_le_bytes())?;
-
-                // new_name: CString
-                // TODO: Guard against strings that are already null-terminated
-                assert_ne!(new_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `new_name` must not be null-terminated.");
-                w.write_all(new_name.as_bytes())?;
-                // Null terminator
-                w.write_all(&[0])?;
-
-            }
-            _ => {}
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl SMSG_CHAR_RENAME {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(1..=265).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C8, size: body_size });
         }
@@ -163,6 +131,45 @@ impl crate::Message for SMSG_CHAR_RENAME {
         Ok(Self {
             result: result_if,
         })
+    }
+
+}
+
+impl crate::Message for SMSG_CHAR_RENAME {
+    const OPCODE: u32 = 0x02c8;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // result: WorldResult
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
+
+        match &self.result {
+            SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
+                character,
+                new_name,
+            } => {
+                // character: Guid
+                w.write_all(&character.guid().to_le_bytes())?;
+
+                // new_name: CString
+                // TODO: Guard against strings that are already null-terminated
+                assert_ne!(new_name.as_bytes().iter().rev().next(), Some(&0_u8), "String `new_name` must not be null-terminated.");
+                w.write_all(new_name.as_bytes())?;
+                // Null terminator
+                w.write_all(&[0])?;
+
+            }
+            _ => {}
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

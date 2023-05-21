@@ -17,29 +17,8 @@ pub struct SMSG_UPDATE_OBJECT {
 }
 
 impl crate::private::Sealed for SMSG_UPDATE_OBJECT {}
-impl crate::Message for SMSG_UPDATE_OBJECT {
-    const OPCODE: u32 = 0x00a9;
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // amount_of_objects: u32
-        w.write_all(&(self.objects.len() as u32).to_le_bytes())?;
-
-        // has_transport: u8
-        w.write_all(&self.has_transport.to_le_bytes())?;
-
-        // objects: Object[amount_of_objects]
-        for i in self.objects.iter() {
-            i.write_into_vec(&mut w)?;
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl SMSG_UPDATE_OBJECT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(5..=65535).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00A9, size: body_size });
         }
@@ -63,6 +42,34 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
             has_transport,
             objects,
         })
+    }
+
+}
+
+impl crate::Message for SMSG_UPDATE_OBJECT {
+    const OPCODE: u32 = 0x00a9;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // amount_of_objects: u32
+        w.write_all(&(self.objects.len() as u32).to_le_bytes())?;
+
+        // has_transport: u8
+        w.write_all(&self.has_transport.to_le_bytes())?;
+
+        // objects: Object[amount_of_objects]
+        for i in self.objects.iter() {
+            i.write_into_vec(&mut w)?;
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -22,6 +22,51 @@ pub struct CMSG_GOSSIP_SELECT_OPTION {
 }
 
 impl crate::private::Sealed for CMSG_GOSSIP_SELECT_OPTION {}
+impl CMSG_GOSSIP_SELECT_OPTION {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(16..=272).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x017C, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // menu_id: u32
+        let menu_id = crate::util::read_u32_le(&mut r)?;
+
+        // gossip_list_id: u32
+        let gossip_list_id = crate::util::read_u32_le(&mut r)?;
+
+        // optional unknown
+        let current_size = {
+            8 // guid: Guid
+            + 4 // menu_id: u32
+            + 4 // gossip_list_id: u32
+        };
+        let unknown = if current_size < body_size as usize {
+            // code: CString
+            let code = {
+                let code = crate::util::read_c_string_to_vec(&mut r)?;
+                String::from_utf8(code)?
+            };
+
+            Some(CMSG_GOSSIP_SELECT_OPTION_unknown {
+                code,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            guid,
+            menu_id,
+            gossip_list_id,
+            unknown,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
     const OPCODE: u32 = 0x017c;
 
@@ -94,46 +139,8 @@ impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(16..=272).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x017C, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // menu_id: u32
-        let menu_id = crate::util::read_u32_le(&mut r)?;
-
-        // gossip_list_id: u32
-        let gossip_list_id = crate::util::read_u32_le(&mut r)?;
-
-        // optional unknown
-        let current_size = {
-            8 // guid: Guid
-            + 4 // menu_id: u32
-            + 4 // gossip_list_id: u32
-        };
-        let unknown = if current_size < body_size as usize {
-            // code: CString
-            let code = {
-                let code = crate::util::read_c_string_to_vec(&mut r)?;
-                String::from_utf8(code)?
-            };
-
-            Some(CMSG_GOSSIP_SELECT_OPTION_unknown {
-                code,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            guid,
-            menu_id,
-            gossip_list_id,
-            unknown,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

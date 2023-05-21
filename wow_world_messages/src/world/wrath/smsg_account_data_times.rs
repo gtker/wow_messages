@@ -24,6 +24,46 @@ pub struct SMSG_ACCOUNT_DATA_TIMES {
 }
 
 impl crate::private::Sealed for SMSG_ACCOUNT_DATA_TIMES {}
+impl SMSG_ACCOUNT_DATA_TIMES {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(9..=65544).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0209, size: body_size });
+        }
+
+        // unix_time: u32
+        let unix_time = crate::util::read_u32_le(&mut r)?;
+
+        // unknown1: u8
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
+
+        // mask: CacheMask
+        let mask = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // data: u32[-]
+        let data = {
+            let mut current_size = {
+                4 // unix_time: u32
+                + 1 // unknown1: u8
+                + 4 // mask: CacheMask
+            };
+            let mut data = Vec::with_capacity(body_size as usize - current_size);
+            while current_size < (body_size as usize) {
+                data.push(crate::util::read_u32_le(&mut r)?);
+                current_size += 1;
+            }
+            data
+        };
+
+        Ok(Self {
+            unix_time,
+            unknown1,
+            mask,
+            data,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
     const OPCODE: u32 = 0x0209;
 
@@ -96,41 +136,8 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(9..=65544).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0209, size: body_size });
-        }
-
-        // unix_time: u32
-        let unix_time = crate::util::read_u32_le(&mut r)?;
-
-        // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(&mut r)?;
-
-        // mask: CacheMask
-        let mask = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // data: u32[-]
-        let data = {
-            let mut current_size = {
-                4 // unix_time: u32
-                + 1 // unknown1: u8
-                + 4 // mask: CacheMask
-            };
-            let mut data = Vec::with_capacity(body_size as usize - current_size);
-            while current_size < (body_size as usize) {
-                data.push(crate::util::read_u32_le(&mut r)?);
-                current_size += 1;
-            }
-            data
-        };
-
-        Ok(Self {
-            unix_time,
-            unknown1,
-            mask,
-            data,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -17,6 +17,26 @@ pub struct SMSG_FRIEND_STATUS {
 }
 
 impl crate::private::Sealed for SMSG_FRIEND_STATUS {}
+impl SMSG_FRIEND_STATUS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 9 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0068, size: body_size });
+        }
+
+        // result: FriendResult
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            result,
+            guid,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_FRIEND_STATUS {
     const OPCODE: u32 = 0x0068;
 
@@ -67,21 +87,8 @@ impl crate::Message for SMSG_FRIEND_STATUS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 9 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0068, size: body_size });
-        }
-
-        // result: FriendResult
-        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            result,
-            guid,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

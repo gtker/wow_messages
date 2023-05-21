@@ -14,6 +14,26 @@ pub struct CMSG_AUTOSTORE_BANK_ITEM {
 }
 
 impl crate::private::Sealed for CMSG_AUTOSTORE_BANK_ITEM {}
+impl CMSG_AUTOSTORE_BANK_ITEM {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 2 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0282, size: body_size });
+        }
+
+        // bag_index: u8
+        let bag_index = crate::util::read_u8_le(&mut r)?;
+
+        // slot_index: u8
+        let slot_index = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            bag_index,
+            slot_index,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_AUTOSTORE_BANK_ITEM {
     const OPCODE: u32 = 0x0282;
 
@@ -64,21 +84,8 @@ impl crate::Message for CMSG_AUTOSTORE_BANK_ITEM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 2 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0282, size: body_size });
-        }
-
-        // bag_index: u8
-        let bag_index = crate::util::read_u8_le(&mut r)?;
-
-        // slot_index: u8
-        let slot_index = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            bag_index,
-            slot_index,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -26,6 +26,60 @@ pub struct SMSG_GUILD_QUERY_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_GUILD_QUERY_RESPONSE {}
+impl SMSG_GUILD_QUERY_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(35..=2840).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0055, size: body_size });
+        }
+
+        // id: u32
+        let id = crate::util::read_u32_le(&mut r)?;
+
+        // name: CString
+        let name = {
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(name)?
+        };
+
+        // rank_names: CString[10]
+        let rank_names = {
+            let mut rank_names = [(); 10].map(|_| String::default());
+            for i in rank_names.iter_mut() {
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
+                *i = String::from_utf8(s)?;
+            }
+            rank_names
+        };
+
+        // emblem_style: u32
+        let emblem_style = crate::util::read_u32_le(&mut r)?;
+
+        // emblem_color: u32
+        let emblem_color = crate::util::read_u32_le(&mut r)?;
+
+        // border_style: u32
+        let border_style = crate::util::read_u32_le(&mut r)?;
+
+        // border_color: u32
+        let border_color = crate::util::read_u32_le(&mut r)?;
+
+        // background_color: u32
+        let background_color = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            id,
+            name,
+            rank_names,
+            emblem_style,
+            emblem_color,
+            border_style,
+            border_color,
+            background_color,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GUILD_QUERY_RESPONSE {
     const OPCODE: u32 = 0x0055;
 
@@ -121,55 +175,8 @@ impl crate::Message for SMSG_GUILD_QUERY_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(35..=2840).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0055, size: body_size });
-        }
-
-        // id: u32
-        let id = crate::util::read_u32_le(&mut r)?;
-
-        // name: CString
-        let name = {
-            let name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(name)?
-        };
-
-        // rank_names: CString[10]
-        let rank_names = {
-            let mut rank_names = [(); 10].map(|_| String::default());
-            for i in rank_names.iter_mut() {
-                let s = crate::util::read_c_string_to_vec(&mut r)?;
-                *i = String::from_utf8(s)?;
-            }
-            rank_names
-        };
-
-        // emblem_style: u32
-        let emblem_style = crate::util::read_u32_le(&mut r)?;
-
-        // emblem_color: u32
-        let emblem_color = crate::util::read_u32_le(&mut r)?;
-
-        // border_style: u32
-        let border_style = crate::util::read_u32_le(&mut r)?;
-
-        // border_color: u32
-        let border_color = crate::util::read_u32_le(&mut r)?;
-
-        // background_color: u32
-        let background_color = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            id,
-            name,
-            rank_names,
-            emblem_style,
-            emblem_color,
-            border_style,
-            border_color,
-            background_color,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

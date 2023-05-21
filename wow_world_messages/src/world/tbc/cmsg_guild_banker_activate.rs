@@ -16,6 +16,26 @@ pub struct CMSG_GUILD_BANKER_ACTIVATE {
 }
 
 impl crate::private::Sealed for CMSG_GUILD_BANKER_ACTIVATE {}
+impl CMSG_GUILD_BANKER_ACTIVATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 9 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E5, size: body_size });
+        }
+
+        // bank: Guid
+        let bank = crate::util::read_guid(&mut r)?;
+
+        // full_update: Bool
+        let full_update = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            bank,
+            full_update,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GUILD_BANKER_ACTIVATE {
     const OPCODE: u32 = 0x03e5;
 
@@ -66,21 +86,8 @@ impl crate::Message for CMSG_GUILD_BANKER_ACTIVATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 9 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E5, size: body_size });
-        }
-
-        // bank: Guid
-        let bank = crate::util::read_guid(&mut r)?;
-
-        // full_update: Bool
-        let full_update = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            bank,
-            full_update,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

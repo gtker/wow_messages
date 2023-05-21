@@ -21,6 +21,30 @@ pub struct MSG_MOVE_SET_FLIGHT_BACK_SPEED {
 }
 
 impl crate::private::Sealed for MSG_MOVE_SET_FLIGHT_BACK_SPEED {}
+impl MSG_MOVE_SET_FLIGHT_BACK_SPEED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(35..=95).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0380, size: body_size });
+        }
+
+        // player: PackedGuid
+        let player = crate::util::read_packed_guid(&mut r)?;
+
+        // info: MovementInfo
+        let info = MovementInfo::read(&mut r)?;
+
+        // new_speed: f32
+        let new_speed = crate::util::read_f32_le(&mut r)?;
+
+        Ok(Self {
+            player,
+            info,
+            new_speed,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_MOVE_SET_FLIGHT_BACK_SPEED {
     const OPCODE: u32 = 0x0380;
 
@@ -46,25 +70,8 @@ impl crate::Message for MSG_MOVE_SET_FLIGHT_BACK_SPEED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(35..=95).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0380, size: body_size });
-        }
-
-        // player: PackedGuid
-        let player = crate::util::read_packed_guid(&mut r)?;
-
-        // info: MovementInfo
-        let info = MovementInfo::read(&mut r)?;
-
-        // new_speed: f32
-        let new_speed = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            player,
-            info,
-            new_speed,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

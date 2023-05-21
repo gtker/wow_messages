@@ -14,6 +14,22 @@ pub struct MSG_MOVE_HEARTBEAT_Client {
 }
 
 impl crate::private::Sealed for MSG_MOVE_HEARTBEAT_Client {}
+impl MSG_MOVE_HEARTBEAT_Client {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(28..=81).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00EE, size: body_size });
+        }
+
+        // info: MovementInfo
+        let info = MovementInfo::read(&mut r)?;
+
+        Ok(Self {
+            info,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_MOVE_HEARTBEAT_Client {
     const OPCODE: u32 = 0x00ee;
 
@@ -28,17 +44,8 @@ impl crate::Message for MSG_MOVE_HEARTBEAT_Client {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(28..=81).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00EE, size: body_size });
-        }
-
-        // info: MovementInfo
-        let info = MovementInfo::read(&mut r)?;
-
-        Ok(Self {
-            info,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -14,6 +14,22 @@ pub struct SMSG_PROPOSE_LEVEL_GRANT {
 }
 
 impl crate::private::Sealed for SMSG_PROPOSE_LEVEL_GRANT {}
+impl SMSG_PROPOSE_LEVEL_GRANT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=9).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x041F, size: body_size });
+        }
+
+        // player: PackedGuid
+        let player = crate::util::read_packed_guid(&mut r)?;
+
+        Ok(Self {
+            player,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PROPOSE_LEVEL_GRANT {
     const OPCODE: u32 = 0x041f;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_PROPOSE_LEVEL_GRANT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=9).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x041F, size: body_size });
-        }
-
-        // player: PackedGuid
-        let player = crate::util::read_packed_guid(&mut r)?;
-
-        Ok(Self {
-            player,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

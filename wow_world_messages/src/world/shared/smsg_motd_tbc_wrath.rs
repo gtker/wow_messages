@@ -12,6 +12,26 @@ pub struct SMSG_MOTD {
 }
 
 impl crate::private::Sealed for SMSG_MOTD {}
+impl SMSG_MOTD {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(5..=8004).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x033D, size: body_size });
+        }
+
+        // motd: SizedCString
+        let motd = {
+            let motd = crate::util::read_u32_le(&mut r)?;
+            let motd = crate::util::read_sized_c_string_to_vec(&mut r, motd)?;
+            String::from_utf8(motd)?
+        };
+
+        Ok(Self {
+            motd,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_MOTD {
     const OPCODE: u32 = 0x033d;
 
@@ -60,21 +80,8 @@ impl crate::Message for SMSG_MOTD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(5..=8004).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x033D, size: body_size });
-        }
-
-        // motd: SizedCString
-        let motd = {
-            let motd = crate::util::read_u32_le(&mut r)?;
-            let motd = crate::util::read_sized_c_string_to_vec(&mut r, motd)?;
-            String::from_utf8(motd)?
-        };
-
-        Ok(Self {
-            motd,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

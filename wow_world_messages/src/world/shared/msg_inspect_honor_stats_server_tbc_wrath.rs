@@ -24,6 +24,42 @@ pub struct MSG_INSPECT_HONOR_STATS_Server {
 }
 
 impl crate::private::Sealed for MSG_INSPECT_HONOR_STATS_Server {}
+impl MSG_INSPECT_HONOR_STATS_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 25 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D6, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // amount_of_honor: u8
+        let amount_of_honor = crate::util::read_u8_le(&mut r)?;
+
+        // kills: u32
+        let kills = crate::util::read_u32_le(&mut r)?;
+
+        // honor_today: u32
+        let honor_today = crate::util::read_u32_le(&mut r)?;
+
+        // honor_yesterday: u32
+        let honor_yesterday = crate::util::read_u32_le(&mut r)?;
+
+        // lifetime_honorable_kills: u32
+        let lifetime_honorable_kills = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            amount_of_honor,
+            kills,
+            honor_today,
+            honor_yesterday,
+            lifetime_honorable_kills,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
     const OPCODE: u32 = 0x02d6;
 
@@ -94,37 +130,8 @@ impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 25 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D6, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // amount_of_honor: u8
-        let amount_of_honor = crate::util::read_u8_le(&mut r)?;
-
-        // kills: u32
-        let kills = crate::util::read_u32_le(&mut r)?;
-
-        // honor_today: u32
-        let honor_today = crate::util::read_u32_le(&mut r)?;
-
-        // honor_yesterday: u32
-        let honor_yesterday = crate::util::read_u32_le(&mut r)?;
-
-        // lifetime_honorable_kills: u32
-        let lifetime_honorable_kills = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            amount_of_honor,
-            kills,
-            honor_today,
-            honor_yesterday,
-            lifetime_honorable_kills,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

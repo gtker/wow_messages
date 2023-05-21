@@ -15,6 +15,26 @@ pub struct SMSG_LEARNED_SPELL {
 }
 
 impl crate::private::Sealed for SMSG_LEARNED_SPELL {}
+impl SMSG_LEARNED_SPELL {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 6 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x012B, size: body_size });
+        }
+
+        // id: u32
+        let id = crate::util::read_u32_le(&mut r)?;
+
+        // unknown: u16
+        let unknown = crate::util::read_u16_le(&mut r)?;
+
+        Ok(Self {
+            id,
+            unknown,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LEARNED_SPELL {
     const OPCODE: u32 = 0x012b;
 
@@ -65,21 +85,8 @@ impl crate::Message for SMSG_LEARNED_SPELL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 6 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x012B, size: body_size });
-        }
-
-        // id: u32
-        let id = crate::util::read_u32_le(&mut r)?;
-
-        // unknown: u16
-        let unknown = crate::util::read_u16_le(&mut r)?;
-
-        Ok(Self {
-            id,
-            unknown,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -16,6 +16,22 @@ pub struct CMSG_SET_LOOKING_FOR_MORE {
 }
 
 impl crate::private::Sealed for CMSG_SET_LOOKING_FOR_MORE {}
+impl CMSG_SET_LOOKING_FOR_MORE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0365, size: body_size });
+        }
+
+        // data: LfgData
+        let data = LfgData::read(&mut r)?;
+
+        Ok(Self {
+            data,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_SET_LOOKING_FOR_MORE {
     const OPCODE: u32 = 0x0365;
 
@@ -70,17 +86,8 @@ impl crate::Message for CMSG_SET_LOOKING_FOR_MORE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0365, size: body_size });
-        }
-
-        // data: LfgData
-        let data = LfgData::read(&mut r)?;
-
-        Ok(Self {
-            data,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -480,6 +480,17 @@ pub(crate) fn impl_world_message(
 
     s.wln(format!("impl crate::private::Sealed for {type_name} {{}}",));
 
+    s.bodyn(format!("impl {type_name}"), |s| {
+        s.bodyn(
+            format!(
+                "fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, {PARSE_ERROR}>"
+            ),
+            |s| {
+                read_function(s, ImplType::Std);
+            },
+        );
+    });
+
     s.impl_for("crate::Message", type_name, |s| {
         s.wln(format!("const OPCODE: u32 = {opcode:#06x};"));
         s.newline();
@@ -504,9 +515,9 @@ pub(crate) fn impl_world_message(
         );
 
         s.bodyn(format!(
-            "fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, {PARSE_ERROR}>",
+            "fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, {PARSE_ERROR}>",
         ), |s| {
-            read_function(s, ImplType::Std);
+            s.wln("Self::read_inner(r, body_size)")
         });
     });
 }
@@ -568,9 +579,10 @@ pub(crate) fn impl_read_write_struct(
     write_visibility: impl AsRef<str>,
     create_async_reads: bool,
 ) {
-    write_into_vec(s, &type_name, write_function, read_visibility.as_ref());
+    let type_name = type_name.as_ref();
+    write_into_vec(s, type_name, write_function, read_visibility.as_ref());
 
-    s.open_curly(format!("impl {}", type_name.as_ref()));
+    s.open_curly(format!("impl {}", type_name));
 
     for it in ImplType::types() {
         if it.is_async() {
@@ -580,15 +592,19 @@ pub(crate) fn impl_read_write_struct(
 
             s.wln(it.cfg());
         }
+
+        let func = it.func();
+        let read = it.read();
+        let prefix = it.prefix();
+        let error = error_name.as_ref();
+        let visibility = write_visibility.as_ref();
+
         s.open_curly(format!(
             "{visibility} {func}fn {prefix}read<R: {read}>(mut r: R) -> Result<Self, {error}>",
-            prefix = it.prefix(),
-            read = it.read(),
-            error = error_name.as_ref(),
-            func = it.func(),
-            visibility = write_visibility.as_ref(),
         ));
+
         read_function(s, it);
+
         s.closing_curly_newline();
     }
 

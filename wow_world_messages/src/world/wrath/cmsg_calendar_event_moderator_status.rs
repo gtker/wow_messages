@@ -21,6 +21,34 @@ pub struct CMSG_CALENDAR_EVENT_MODERATOR_STATUS {
 }
 
 impl crate::private::Sealed for CMSG_CALENDAR_EVENT_MODERATOR_STATUS {}
+impl CMSG_CALENDAR_EVENT_MODERATOR_STATUS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 25 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0435, size: body_size });
+        }
+
+        // event: Guid
+        let event = crate::util::read_guid(&mut r)?;
+
+        // invite_id: Guid
+        let invite_id = crate::util::read_guid(&mut r)?;
+
+        // sender_invite_id: Guid
+        let sender_invite_id = crate::util::read_guid(&mut r)?;
+
+        // rank: CalendarModeratorRank
+        let rank = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            event,
+            invite_id,
+            sender_invite_id,
+            rank,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CALENDAR_EVENT_MODERATOR_STATUS {
     const OPCODE: u32 = 0x0435;
 
@@ -81,29 +109,8 @@ impl crate::Message for CMSG_CALENDAR_EVENT_MODERATOR_STATUS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 25 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0435, size: body_size });
-        }
-
-        // event: Guid
-        let event = crate::util::read_guid(&mut r)?;
-
-        // invite_id: Guid
-        let invite_id = crate::util::read_guid(&mut r)?;
-
-        // sender_invite_id: Guid
-        let sender_invite_id = crate::util::read_guid(&mut r)?;
-
-        // rank: CalendarModeratorRank
-        let rank = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            event,
-            invite_id,
-            sender_invite_id,
-            rank,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

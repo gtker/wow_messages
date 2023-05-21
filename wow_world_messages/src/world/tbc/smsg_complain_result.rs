@@ -17,6 +17,26 @@ pub struct SMSG_COMPLAIN_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_COMPLAIN_RESULT {}
+impl SMSG_COMPLAIN_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 2 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C7, size: body_size });
+        }
+
+        // unknown: u8
+        let unknown = crate::util::read_u8_le(&mut r)?;
+
+        // window_result: ComplainResultWindow
+        let window_result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            unknown,
+            window_result,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_COMPLAIN_RESULT {
     const OPCODE: u32 = 0x03c7;
 
@@ -67,21 +87,8 @@ impl crate::Message for SMSG_COMPLAIN_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 2 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C7, size: body_size });
-        }
-
-        // unknown: u8
-        let unknown = crate::util::read_u8_le(&mut r)?;
-
-        // window_result: ComplainResultWindow
-        let window_result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            unknown,
-            window_result,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

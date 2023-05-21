@@ -15,6 +15,34 @@ pub struct CMSG_TOGGLE_PVP {
 }
 
 impl crate::private::Sealed for CMSG_TOGGLE_PVP {}
+impl CMSG_TOGGLE_PVP {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size > 1 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0253, size: body_size });
+        }
+
+        // optional set
+        let current_size = {
+            0
+        };
+        let set = if current_size < body_size as usize {
+            // enable_pvp: Bool
+            let enable_pvp = crate::util::read_u8_le(&mut r)? != 0;
+
+            Some(CMSG_TOGGLE_PVP_set {
+                enable_pvp,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            set,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_TOGGLE_PVP {
     const OPCODE: u32 = 0x0253;
 
@@ -68,29 +96,8 @@ impl crate::Message for CMSG_TOGGLE_PVP {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size > 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0253, size: body_size });
-        }
-
-        // optional set
-        let current_size = {
-            0
-        };
-        let set = if current_size < body_size as usize {
-            // enable_pvp: Bool
-            let enable_pvp = crate::util::read_u8_le(&mut r)? != 0;
-
-            Some(CMSG_TOGGLE_PVP_set {
-                enable_pvp,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            set,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

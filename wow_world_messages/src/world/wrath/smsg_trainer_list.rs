@@ -24,6 +24,46 @@ pub struct SMSG_TRAINER_LIST {
 }
 
 impl crate::private::Sealed for SMSG_TRAINER_LIST {}
+impl SMSG_TRAINER_LIST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(17..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01B1, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // trainer_type: u32
+        let trainer_type = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_spells: u32
+        let amount_of_spells = crate::util::read_u32_le(&mut r)?;
+
+        // spells: TrainerSpell[amount_of_spells]
+        let spells = {
+            let mut spells = Vec::with_capacity(amount_of_spells as usize);
+            for _ in 0..amount_of_spells {
+                spells.push(TrainerSpell::read(&mut r)?);
+            }
+            spells
+        };
+
+        // greeting: CString
+        let greeting = {
+            let greeting = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(greeting)?
+        };
+
+        Ok(Self {
+            guid,
+            trainer_type,
+            spells,
+            greeting,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_TRAINER_LIST {
     const OPCODE: u32 = 0x01b1;
 
@@ -135,41 +175,8 @@ impl crate::Message for SMSG_TRAINER_LIST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(17..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01B1, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // trainer_type: u32
-        let trainer_type = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_spells: u32
-        let amount_of_spells = crate::util::read_u32_le(&mut r)?;
-
-        // spells: TrainerSpell[amount_of_spells]
-        let spells = {
-            let mut spells = Vec::with_capacity(amount_of_spells as usize);
-            for _ in 0..amount_of_spells {
-                spells.push(TrainerSpell::read(&mut r)?);
-            }
-            spells
-        };
-
-        // greeting: CString
-        let greeting = {
-            let greeting = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(greeting)?
-        };
-
-        Ok(Self {
-            guid,
-            trainer_type,
-            spells,
-            greeting,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

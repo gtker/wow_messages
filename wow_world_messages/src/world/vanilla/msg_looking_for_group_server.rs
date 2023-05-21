@@ -13,6 +13,22 @@ pub struct MSG_LOOKING_FOR_GROUP_Server {
 }
 
 impl crate::private::Sealed for MSG_LOOKING_FOR_GROUP_Server {}
+impl MSG_LOOKING_FOR_GROUP_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FF, size: body_size });
+        }
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            unknown1,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
     const OPCODE: u32 = 0x01ff;
 
@@ -58,17 +74,8 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FF, size: body_size });
-        }
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            unknown1,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

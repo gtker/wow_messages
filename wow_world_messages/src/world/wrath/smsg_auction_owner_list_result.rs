@@ -23,6 +23,39 @@ pub struct SMSG_AUCTION_OWNER_LIST_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_AUCTION_OWNER_LIST_RESULT {}
+impl SMSG_AUCTION_OWNER_LIST_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(12..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025D, size: body_size });
+        }
+
+        // count: u32
+        let count = crate::util::read_u32_le(&mut r)?;
+
+        // auctions: AuctionListItem[count]
+        let auctions = {
+            let mut auctions = Vec::with_capacity(count as usize);
+            for _ in 0..count {
+                auctions.push(AuctionListItem::read(&mut r)?);
+            }
+            auctions
+        };
+
+        // total_amount_of_auctions: u32
+        let total_amount_of_auctions = crate::util::read_u32_le(&mut r)?;
+
+        // auction_search_delay: Milliseconds
+        let auction_search_delay = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
+
+        Ok(Self {
+            auctions,
+            total_amount_of_auctions,
+            auction_search_delay,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_AUCTION_OWNER_LIST_RESULT {
     const OPCODE: u32 = 0x025d;
 
@@ -147,34 +180,8 @@ impl crate::Message for SMSG_AUCTION_OWNER_LIST_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(12..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025D, size: body_size });
-        }
-
-        // count: u32
-        let count = crate::util::read_u32_le(&mut r)?;
-
-        // auctions: AuctionListItem[count]
-        let auctions = {
-            let mut auctions = Vec::with_capacity(count as usize);
-            for _ in 0..count {
-                auctions.push(AuctionListItem::read(&mut r)?);
-            }
-            auctions
-        };
-
-        // total_amount_of_auctions: u32
-        let total_amount_of_auctions = crate::util::read_u32_le(&mut r)?;
-
-        // auction_search_delay: Milliseconds
-        let auction_search_delay = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
-
-        Ok(Self {
-            auctions,
-            total_amount_of_auctions,
-            auction_search_delay,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

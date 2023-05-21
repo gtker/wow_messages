@@ -14,6 +14,22 @@ pub struct SMSG_ARENA_UNIT_DESTROYED {
 }
 
 impl crate::private::Sealed for SMSG_ARENA_UNIT_DESTROYED {}
+impl SMSG_ARENA_UNIT_DESTROYED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C7, size: body_size });
+        }
+
+        // unit: Guid
+        let unit = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            unit,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ARENA_UNIT_DESTROYED {
     const OPCODE: u32 = 0x04c7;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_ARENA_UNIT_DESTROYED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C7, size: body_size });
-        }
-
-        // unit: Guid
-        let unit = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            unit,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

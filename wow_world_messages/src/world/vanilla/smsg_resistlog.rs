@@ -28,6 +28,46 @@ pub struct SMSG_RESISTLOG {
 }
 
 impl crate::private::Sealed for SMSG_RESISTLOG {}
+impl SMSG_RESISTLOG {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 36 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D6, size: body_size });
+        }
+
+        // guid1: Guid
+        let guid1 = crate::util::read_guid(&mut r)?;
+
+        // guid2: Guid
+        let guid2 = crate::util::read_guid(&mut r)?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown2: f32
+        let unknown2 = crate::util::read_f32_le(&mut r)?;
+
+        // unknown3: f32
+        let unknown3 = crate::util::read_f32_le(&mut r)?;
+
+        // unknown4: u32
+        let unknown4 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown5: u32
+        let unknown5 = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid1,
+            guid2,
+            unknown1,
+            unknown2,
+            unknown3,
+            unknown4,
+            unknown5,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_RESISTLOG {
     const OPCODE: u32 = 0x01d6;
 
@@ -103,41 +143,8 @@ impl crate::Message for SMSG_RESISTLOG {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 36 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D6, size: body_size });
-        }
-
-        // guid1: Guid
-        let guid1 = crate::util::read_guid(&mut r)?;
-
-        // guid2: Guid
-        let guid2 = crate::util::read_guid(&mut r)?;
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown2: f32
-        let unknown2 = crate::util::read_f32_le(&mut r)?;
-
-        // unknown3: f32
-        let unknown3 = crate::util::read_f32_le(&mut r)?;
-
-        // unknown4: u32
-        let unknown4 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown5: u32
-        let unknown5 = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid1,
-            guid2,
-            unknown1,
-            unknown2,
-            unknown3,
-            unknown4,
-            unknown5,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

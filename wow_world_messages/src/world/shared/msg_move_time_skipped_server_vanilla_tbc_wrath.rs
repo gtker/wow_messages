@@ -16,6 +16,26 @@ pub struct MSG_MOVE_TIME_SKIPPED_Server {
 }
 
 impl crate::private::Sealed for MSG_MOVE_TIME_SKIPPED_Server {}
+impl MSG_MOVE_TIME_SKIPPED_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(6..=13).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0319, size: body_size });
+        }
+
+        // player: PackedGuid
+        let player = crate::util::read_packed_guid(&mut r)?;
+
+        // time_skipped: u32
+        let time_skipped = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            player,
+            time_skipped,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_MOVE_TIME_SKIPPED_Server {
     const OPCODE: u32 = 0x0319;
 
@@ -66,21 +86,8 @@ impl crate::Message for MSG_MOVE_TIME_SKIPPED_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(6..=13).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0319, size: body_size });
-        }
-
-        // player: PackedGuid
-        let player = crate::util::read_packed_guid(&mut r)?;
-
-        // time_skipped: u32
-        let time_skipped = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            player,
-            time_skipped,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

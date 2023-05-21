@@ -16,6 +16,26 @@ pub struct MSG_CHANNEL_UPDATE_Server {
 }
 
 impl crate::private::Sealed for MSG_CHANNEL_UPDATE_Server {}
+impl MSG_CHANNEL_UPDATE_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(6..=13).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x013A, size: body_size });
+        }
+
+        // caster: PackedGuid
+        let caster = crate::util::read_packed_guid(&mut r)?;
+
+        // time: u32
+        let time = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            caster,
+            time,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_CHANNEL_UPDATE_Server {
     const OPCODE: u32 = 0x013a;
 
@@ -66,21 +86,8 @@ impl crate::Message for MSG_CHANNEL_UPDATE_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(6..=13).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x013A, size: body_size });
-        }
-
-        // caster: PackedGuid
-        let caster = crate::util::read_packed_guid(&mut r)?;
-
-        // time: u32
-        let time = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            caster,
-            time,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

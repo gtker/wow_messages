@@ -19,6 +19,31 @@ pub struct SMSG_MAIL_LIST_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_MAIL_LIST_RESULT {}
+impl SMSG_MAIL_LIST_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(1..=84481).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023B, size: body_size });
+        }
+
+        // amount_of_mails: u8
+        let amount_of_mails = crate::util::read_u8_le(&mut r)?;
+
+        // mails: Mail[amount_of_mails]
+        let mails = {
+            let mut mails = Vec::with_capacity(amount_of_mails as usize);
+            for _ in 0..amount_of_mails {
+                mails.push(Mail::read(&mut r)?);
+            }
+            mails
+        };
+
+        Ok(Self {
+            mails,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_MAIL_LIST_RESULT {
     const OPCODE: u32 = 0x023b;
 
@@ -171,26 +196,8 @@ impl crate::Message for SMSG_MAIL_LIST_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(1..=84481).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023B, size: body_size });
-        }
-
-        // amount_of_mails: u8
-        let amount_of_mails = crate::util::read_u8_le(&mut r)?;
-
-        // mails: Mail[amount_of_mails]
-        let mails = {
-            let mut mails = Vec::with_capacity(amount_of_mails as usize);
-            for _ in 0..amount_of_mails {
-                mails.push(Mail::read(&mut r)?);
-            }
-            mails
-        };
-
-        Ok(Self {
-            mails,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

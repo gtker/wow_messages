@@ -12,6 +12,25 @@ pub struct CMSG_GUILD_ADD_RANK {
 }
 
 impl crate::private::Sealed for CMSG_GUILD_ADD_RANK {}
+impl CMSG_GUILD_ADD_RANK {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(1..=256).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0232, size: body_size });
+        }
+
+        // rank_name: CString
+        let rank_name = {
+            let rank_name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(rank_name)?
+        };
+
+        Ok(Self {
+            rank_name,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GUILD_ADD_RANK {
     const OPCODE: u32 = 0x0232;
 
@@ -61,20 +80,8 @@ impl crate::Message for CMSG_GUILD_ADD_RANK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(1..=256).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0232, size: body_size });
-        }
-
-        // rank_name: CString
-        let rank_name = {
-            let rank_name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(rank_name)?
-        };
-
-        Ok(Self {
-            rank_name,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

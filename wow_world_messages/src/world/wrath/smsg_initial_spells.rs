@@ -24,6 +24,48 @@ pub struct SMSG_INITIAL_SPELLS {
 }
 
 impl crate::private::Sealed for SMSG_INITIAL_SPELLS {}
+impl SMSG_INITIAL_SPELLS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(5..=1310725).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x012A, size: body_size });
+        }
+
+        // unknown1: u8
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
+
+        // spell_count: u16
+        let spell_count = crate::util::read_u16_le(&mut r)?;
+
+        // initial_spells: InitialSpell[spell_count]
+        let initial_spells = {
+            let mut initial_spells = Vec::with_capacity(spell_count as usize);
+            for _ in 0..spell_count {
+                initial_spells.push(InitialSpell::read(&mut r)?);
+            }
+            initial_spells
+        };
+
+        // cooldown_count: u16
+        let cooldown_count = crate::util::read_u16_le(&mut r)?;
+
+        // cooldowns: CooldownSpell[cooldown_count]
+        let cooldowns = {
+            let mut cooldowns = Vec::with_capacity(cooldown_count as usize);
+            for _ in 0..cooldown_count {
+                cooldowns.push(CooldownSpell::read(&mut r)?);
+            }
+            cooldowns
+        };
+
+        Ok(Self {
+            unknown1,
+            initial_spells,
+            cooldowns,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_INITIAL_SPELLS {
     const OPCODE: u32 = 0x012a;
 
@@ -135,43 +177,8 @@ impl crate::Message for SMSG_INITIAL_SPELLS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(5..=1310725).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x012A, size: body_size });
-        }
-
-        // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(&mut r)?;
-
-        // spell_count: u16
-        let spell_count = crate::util::read_u16_le(&mut r)?;
-
-        // initial_spells: InitialSpell[spell_count]
-        let initial_spells = {
-            let mut initial_spells = Vec::with_capacity(spell_count as usize);
-            for _ in 0..spell_count {
-                initial_spells.push(InitialSpell::read(&mut r)?);
-            }
-            initial_spells
-        };
-
-        // cooldown_count: u16
-        let cooldown_count = crate::util::read_u16_le(&mut r)?;
-
-        // cooldowns: CooldownSpell[cooldown_count]
-        let cooldowns = {
-            let mut cooldowns = Vec::with_capacity(cooldown_count as usize);
-            for _ in 0..cooldown_count {
-                cooldowns.push(CooldownSpell::read(&mut r)?);
-            }
-            cooldowns
-        };
-
-        Ok(Self {
-            unknown1,
-            initial_spells,
-            cooldowns,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

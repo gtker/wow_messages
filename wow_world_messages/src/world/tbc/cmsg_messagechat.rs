@@ -26,6 +26,103 @@ pub struct CMSG_MESSAGECHAT {
 }
 
 impl crate::private::Sealed for CMSG_MESSAGECHAT {}
+impl CMSG_MESSAGECHAT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(9..=520).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0095, size: body_size });
+        }
+
+        // chat_type: ChatType
+        let chat_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        // language: Language
+        let language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        let chat_type_if = match chat_type {
+            ChatType::System => CMSG_MESSAGECHAT_ChatType::System,
+            ChatType::Say => CMSG_MESSAGECHAT_ChatType::Say,
+            ChatType::Party => CMSG_MESSAGECHAT_ChatType::Party,
+            ChatType::Raid => CMSG_MESSAGECHAT_ChatType::Raid,
+            ChatType::Guild => CMSG_MESSAGECHAT_ChatType::Guild,
+            ChatType::Officer => CMSG_MESSAGECHAT_ChatType::Officer,
+            ChatType::Yell => CMSG_MESSAGECHAT_ChatType::Yell,
+            ChatType::Whisper => {
+                // target_player: CString
+                let target_player = {
+                    let target_player = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(target_player)?
+                };
+
+                CMSG_MESSAGECHAT_ChatType::Whisper {
+                    target_player,
+                }
+            }
+            ChatType::WhisperInform => CMSG_MESSAGECHAT_ChatType::WhisperInform,
+            ChatType::Reply => CMSG_MESSAGECHAT_ChatType::Reply,
+            ChatType::Emote => CMSG_MESSAGECHAT_ChatType::Emote,
+            ChatType::TextEmote => CMSG_MESSAGECHAT_ChatType::TextEmote,
+            ChatType::MonsterSay => CMSG_MESSAGECHAT_ChatType::MonsterSay,
+            ChatType::MonsterParty => CMSG_MESSAGECHAT_ChatType::MonsterParty,
+            ChatType::MonsterYell => CMSG_MESSAGECHAT_ChatType::MonsterYell,
+            ChatType::MonsterWhisper => CMSG_MESSAGECHAT_ChatType::MonsterWhisper,
+            ChatType::MonsterEmote => CMSG_MESSAGECHAT_ChatType::MonsterEmote,
+            ChatType::Channel => {
+                // channel: CString
+                let channel = {
+                    let channel = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(channel)?
+                };
+
+                CMSG_MESSAGECHAT_ChatType::Channel {
+                    channel,
+                }
+            }
+            ChatType::ChannelJoin => CMSG_MESSAGECHAT_ChatType::ChannelJoin,
+            ChatType::ChannelLeave => CMSG_MESSAGECHAT_ChatType::ChannelLeave,
+            ChatType::ChannelList => CMSG_MESSAGECHAT_ChatType::ChannelList,
+            ChatType::ChannelNotice => CMSG_MESSAGECHAT_ChatType::ChannelNotice,
+            ChatType::ChannelNoticeUser => CMSG_MESSAGECHAT_ChatType::ChannelNoticeUser,
+            ChatType::Afk => CMSG_MESSAGECHAT_ChatType::Afk,
+            ChatType::Dnd => CMSG_MESSAGECHAT_ChatType::Dnd,
+            ChatType::Ignored => CMSG_MESSAGECHAT_ChatType::Ignored,
+            ChatType::Skill => CMSG_MESSAGECHAT_ChatType::Skill,
+            ChatType::Loot => CMSG_MESSAGECHAT_ChatType::Loot,
+            ChatType::Money => CMSG_MESSAGECHAT_ChatType::Money,
+            ChatType::Opening => CMSG_MESSAGECHAT_ChatType::Opening,
+            ChatType::Tradeskills => CMSG_MESSAGECHAT_ChatType::Tradeskills,
+            ChatType::PetInfo => CMSG_MESSAGECHAT_ChatType::PetInfo,
+            ChatType::CombatMiscInfo => CMSG_MESSAGECHAT_ChatType::CombatMiscInfo,
+            ChatType::CombatXpGain => CMSG_MESSAGECHAT_ChatType::CombatXpGain,
+            ChatType::CombatHonorGain => CMSG_MESSAGECHAT_ChatType::CombatHonorGain,
+            ChatType::CombatFactionChange => CMSG_MESSAGECHAT_ChatType::CombatFactionChange,
+            ChatType::BgSystemNeutral => CMSG_MESSAGECHAT_ChatType::BgSystemNeutral,
+            ChatType::BgSystemAlliance => CMSG_MESSAGECHAT_ChatType::BgSystemAlliance,
+            ChatType::BgSystemHorde => CMSG_MESSAGECHAT_ChatType::BgSystemHorde,
+            ChatType::RaidLeader => CMSG_MESSAGECHAT_ChatType::RaidLeader,
+            ChatType::RaidWarning => CMSG_MESSAGECHAT_ChatType::RaidWarning,
+            ChatType::RaidBossWhisper => CMSG_MESSAGECHAT_ChatType::RaidBossWhisper,
+            ChatType::RaidBossEmote => CMSG_MESSAGECHAT_ChatType::RaidBossEmote,
+            ChatType::Filtered => CMSG_MESSAGECHAT_ChatType::Filtered,
+            ChatType::Battleground => CMSG_MESSAGECHAT_ChatType::Battleground,
+            ChatType::BattlegroundLeader => CMSG_MESSAGECHAT_ChatType::BattlegroundLeader,
+            ChatType::Restricted => CMSG_MESSAGECHAT_ChatType::Restricted,
+        };
+
+        // message: CString
+        let message = {
+            let message = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(message)?
+        };
+
+        Ok(Self {
+            chat_type: chat_type_if,
+            language,
+            message,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_MESSAGECHAT {
     const OPCODE: u32 = 0x0095;
 
@@ -139,98 +236,8 @@ impl crate::Message for CMSG_MESSAGECHAT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(9..=520).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0095, size: body_size });
-        }
-
-        // chat_type: ChatType
-        let chat_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        // language: Language
-        let language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        let chat_type_if = match chat_type {
-            ChatType::System => CMSG_MESSAGECHAT_ChatType::System,
-            ChatType::Say => CMSG_MESSAGECHAT_ChatType::Say,
-            ChatType::Party => CMSG_MESSAGECHAT_ChatType::Party,
-            ChatType::Raid => CMSG_MESSAGECHAT_ChatType::Raid,
-            ChatType::Guild => CMSG_MESSAGECHAT_ChatType::Guild,
-            ChatType::Officer => CMSG_MESSAGECHAT_ChatType::Officer,
-            ChatType::Yell => CMSG_MESSAGECHAT_ChatType::Yell,
-            ChatType::Whisper => {
-                // target_player: CString
-                let target_player = {
-                    let target_player = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(target_player)?
-                };
-
-                CMSG_MESSAGECHAT_ChatType::Whisper {
-                    target_player,
-                }
-            }
-            ChatType::WhisperInform => CMSG_MESSAGECHAT_ChatType::WhisperInform,
-            ChatType::Reply => CMSG_MESSAGECHAT_ChatType::Reply,
-            ChatType::Emote => CMSG_MESSAGECHAT_ChatType::Emote,
-            ChatType::TextEmote => CMSG_MESSAGECHAT_ChatType::TextEmote,
-            ChatType::MonsterSay => CMSG_MESSAGECHAT_ChatType::MonsterSay,
-            ChatType::MonsterParty => CMSG_MESSAGECHAT_ChatType::MonsterParty,
-            ChatType::MonsterYell => CMSG_MESSAGECHAT_ChatType::MonsterYell,
-            ChatType::MonsterWhisper => CMSG_MESSAGECHAT_ChatType::MonsterWhisper,
-            ChatType::MonsterEmote => CMSG_MESSAGECHAT_ChatType::MonsterEmote,
-            ChatType::Channel => {
-                // channel: CString
-                let channel = {
-                    let channel = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(channel)?
-                };
-
-                CMSG_MESSAGECHAT_ChatType::Channel {
-                    channel,
-                }
-            }
-            ChatType::ChannelJoin => CMSG_MESSAGECHAT_ChatType::ChannelJoin,
-            ChatType::ChannelLeave => CMSG_MESSAGECHAT_ChatType::ChannelLeave,
-            ChatType::ChannelList => CMSG_MESSAGECHAT_ChatType::ChannelList,
-            ChatType::ChannelNotice => CMSG_MESSAGECHAT_ChatType::ChannelNotice,
-            ChatType::ChannelNoticeUser => CMSG_MESSAGECHAT_ChatType::ChannelNoticeUser,
-            ChatType::Afk => CMSG_MESSAGECHAT_ChatType::Afk,
-            ChatType::Dnd => CMSG_MESSAGECHAT_ChatType::Dnd,
-            ChatType::Ignored => CMSG_MESSAGECHAT_ChatType::Ignored,
-            ChatType::Skill => CMSG_MESSAGECHAT_ChatType::Skill,
-            ChatType::Loot => CMSG_MESSAGECHAT_ChatType::Loot,
-            ChatType::Money => CMSG_MESSAGECHAT_ChatType::Money,
-            ChatType::Opening => CMSG_MESSAGECHAT_ChatType::Opening,
-            ChatType::Tradeskills => CMSG_MESSAGECHAT_ChatType::Tradeskills,
-            ChatType::PetInfo => CMSG_MESSAGECHAT_ChatType::PetInfo,
-            ChatType::CombatMiscInfo => CMSG_MESSAGECHAT_ChatType::CombatMiscInfo,
-            ChatType::CombatXpGain => CMSG_MESSAGECHAT_ChatType::CombatXpGain,
-            ChatType::CombatHonorGain => CMSG_MESSAGECHAT_ChatType::CombatHonorGain,
-            ChatType::CombatFactionChange => CMSG_MESSAGECHAT_ChatType::CombatFactionChange,
-            ChatType::BgSystemNeutral => CMSG_MESSAGECHAT_ChatType::BgSystemNeutral,
-            ChatType::BgSystemAlliance => CMSG_MESSAGECHAT_ChatType::BgSystemAlliance,
-            ChatType::BgSystemHorde => CMSG_MESSAGECHAT_ChatType::BgSystemHorde,
-            ChatType::RaidLeader => CMSG_MESSAGECHAT_ChatType::RaidLeader,
-            ChatType::RaidWarning => CMSG_MESSAGECHAT_ChatType::RaidWarning,
-            ChatType::RaidBossWhisper => CMSG_MESSAGECHAT_ChatType::RaidBossWhisper,
-            ChatType::RaidBossEmote => CMSG_MESSAGECHAT_ChatType::RaidBossEmote,
-            ChatType::Filtered => CMSG_MESSAGECHAT_ChatType::Filtered,
-            ChatType::Battleground => CMSG_MESSAGECHAT_ChatType::Battleground,
-            ChatType::BattlegroundLeader => CMSG_MESSAGECHAT_ChatType::BattlegroundLeader,
-            ChatType::Restricted => CMSG_MESSAGECHAT_ChatType::Restricted,
-        };
-
-        // message: CString
-        let message = {
-            let message = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(message)?
-        };
-
-        Ok(Self {
-            chat_type: chat_type_if,
-            language,
-            message,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

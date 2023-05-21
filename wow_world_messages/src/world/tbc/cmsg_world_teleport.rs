@@ -24,6 +24,34 @@ pub struct CMSG_WORLD_TELEPORT {
 }
 
 impl crate::private::Sealed for CMSG_WORLD_TELEPORT {}
+impl CMSG_WORLD_TELEPORT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 24 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0008, size: body_size });
+        }
+
+        // time: Milliseconds
+        let time = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // position: Vector3d
+        let position = Vector3d::read(&mut r)?;
+
+        // orientation: f32
+        let orientation = crate::util::read_f32_le(&mut r)?;
+
+        Ok(Self {
+            time,
+            map,
+            position,
+            orientation,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_WORLD_TELEPORT {
     const OPCODE: u32 = 0x0008;
 
@@ -95,29 +123,8 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 24 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0008, size: body_size });
-        }
-
-        // time: Milliseconds
-        let time = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // position: Vector3d
-        let position = Vector3d::read(&mut r)?;
-
-        // orientation: f32
-        let orientation = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            time,
-            map,
-            position,
-            orientation,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

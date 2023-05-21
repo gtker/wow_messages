@@ -30,6 +30,42 @@ pub struct SMSG_MOVE_KNOCK_BACK {
 }
 
 impl crate::private::Sealed for SMSG_MOVE_KNOCK_BACK {}
+impl SMSG_MOVE_KNOCK_BACK {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(22..=29).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00EF, size: body_size });
+        }
+
+        // guid: PackedGuid
+        let guid = crate::util::read_packed_guid(&mut r)?;
+
+        // movement_counter: u32
+        let movement_counter = crate::util::read_u32_le(&mut r)?;
+
+        // v_cos: f32
+        let v_cos = crate::util::read_f32_le(&mut r)?;
+
+        // v_sin: f32
+        let v_sin = crate::util::read_f32_le(&mut r)?;
+
+        // horizontal_speed: f32
+        let horizontal_speed = crate::util::read_f32_le(&mut r)?;
+
+        // vertical_speed: f32
+        let vertical_speed = crate::util::read_f32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            movement_counter,
+            v_cos,
+            v_sin,
+            horizontal_speed,
+            vertical_speed,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_MOVE_KNOCK_BACK {
     const OPCODE: u32 = 0x00ef;
 
@@ -100,37 +136,8 @@ impl crate::Message for SMSG_MOVE_KNOCK_BACK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(22..=29).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00EF, size: body_size });
-        }
-
-        // guid: PackedGuid
-        let guid = crate::util::read_packed_guid(&mut r)?;
-
-        // movement_counter: u32
-        let movement_counter = crate::util::read_u32_le(&mut r)?;
-
-        // v_cos: f32
-        let v_cos = crate::util::read_f32_le(&mut r)?;
-
-        // v_sin: f32
-        let v_sin = crate::util::read_f32_le(&mut r)?;
-
-        // horizontal_speed: f32
-        let horizontal_speed = crate::util::read_f32_le(&mut r)?;
-
-        // vertical_speed: f32
-        let vertical_speed = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            movement_counter,
-            v_cos,
-            v_sin,
-            horizontal_speed,
-            vertical_speed,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

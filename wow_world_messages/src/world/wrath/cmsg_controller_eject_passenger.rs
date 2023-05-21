@@ -14,6 +14,22 @@ pub struct CMSG_CONTROLLER_EJECT_PASSENGER {
 }
 
 impl crate::private::Sealed for CMSG_CONTROLLER_EJECT_PASSENGER {}
+impl CMSG_CONTROLLER_EJECT_PASSENGER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04A9, size: body_size });
+        }
+
+        // player: Guid
+        let player = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            player,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CONTROLLER_EJECT_PASSENGER {
     const OPCODE: u32 = 0x04a9;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_CONTROLLER_EJECT_PASSENGER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04A9, size: body_size });
-        }
-
-        // player: Guid
-        let player = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            player,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

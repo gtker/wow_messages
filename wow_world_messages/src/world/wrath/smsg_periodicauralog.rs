@@ -24,6 +24,43 @@ pub struct SMSG_PERIODICAURALOG {
 }
 
 impl crate::private::Sealed for SMSG_PERIODICAURALOG {}
+impl SMSG_PERIODICAURALOG {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(12..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x024E, size: body_size });
+        }
+
+        // target: PackedGuid
+        let target = crate::util::read_packed_guid(&mut r)?;
+
+        // caster: PackedGuid
+        let caster = crate::util::read_packed_guid(&mut r)?;
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_auras: u32
+        let amount_of_auras = crate::util::read_u32_le(&mut r)?;
+
+        // auras: AuraLog[amount_of_auras]
+        let auras = {
+            let mut auras = Vec::with_capacity(amount_of_auras as usize);
+            for _ in 0..amount_of_auras {
+                auras.push(AuraLog::read(&mut r)?);
+            }
+            auras
+        };
+
+        Ok(Self {
+            target,
+            caster,
+            spell,
+            auras,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PERIODICAURALOG {
     const OPCODE: u32 = 0x024e;
 
@@ -251,38 +288,8 @@ impl crate::Message for SMSG_PERIODICAURALOG {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(12..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x024E, size: body_size });
-        }
-
-        // target: PackedGuid
-        let target = crate::util::read_packed_guid(&mut r)?;
-
-        // caster: PackedGuid
-        let caster = crate::util::read_packed_guid(&mut r)?;
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_auras: u32
-        let amount_of_auras = crate::util::read_u32_le(&mut r)?;
-
-        // auras: AuraLog[amount_of_auras]
-        let auras = {
-            let mut auras = Vec::with_capacity(amount_of_auras as usize);
-            for _ in 0..amount_of_auras {
-                auras.push(AuraLog::read(&mut r)?);
-            }
-            auras
-        };
-
-        Ok(Self {
-            target,
-            caster,
-            spell,
-            auras,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

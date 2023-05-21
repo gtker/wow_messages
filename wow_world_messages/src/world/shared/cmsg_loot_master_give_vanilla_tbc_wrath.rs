@@ -18,6 +18,30 @@ pub struct CMSG_LOOT_MASTER_GIVE {
 }
 
 impl crate::private::Sealed for CMSG_LOOT_MASTER_GIVE {}
+impl CMSG_LOOT_MASTER_GIVE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 17 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A3, size: body_size });
+        }
+
+        // loot: Guid
+        let loot = crate::util::read_guid(&mut r)?;
+
+        // slot_id: u8
+        let slot_id = crate::util::read_u8_le(&mut r)?;
+
+        // player: Guid
+        let player = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            loot,
+            slot_id,
+            player,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_LOOT_MASTER_GIVE {
     const OPCODE: u32 = 0x02a3;
 
@@ -73,25 +97,8 @@ impl crate::Message for CMSG_LOOT_MASTER_GIVE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 17 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A3, size: body_size });
-        }
-
-        // loot: Guid
-        let loot = crate::util::read_guid(&mut r)?;
-
-        // slot_id: u8
-        let slot_id = crate::util::read_u8_le(&mut r)?;
-
-        // player: Guid
-        let player = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            loot,
-            slot_id,
-            player,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

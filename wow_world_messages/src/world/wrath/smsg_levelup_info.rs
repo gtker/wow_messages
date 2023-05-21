@@ -40,6 +40,74 @@ pub struct SMSG_LEVELUP_INFO {
 }
 
 impl crate::private::Sealed for SMSG_LEVELUP_INFO {}
+impl SMSG_LEVELUP_INFO {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 56 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D4, size: body_size });
+        }
+
+        // new_level: Level32
+        let new_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
+
+        // health: u32
+        let health = crate::util::read_u32_le(&mut r)?;
+
+        // mana: u32
+        let mana = crate::util::read_u32_le(&mut r)?;
+
+        // rage: u32
+        let rage = crate::util::read_u32_le(&mut r)?;
+
+        // focus: u32
+        let focus = crate::util::read_u32_le(&mut r)?;
+
+        // energy: u32
+        let energy = crate::util::read_u32_le(&mut r)?;
+
+        // happiness: u32
+        let happiness = crate::util::read_u32_le(&mut r)?;
+
+        // rune: u32
+        let rune = crate::util::read_u32_le(&mut r)?;
+
+        // runic_power: u32
+        let runic_power = crate::util::read_u32_le(&mut r)?;
+
+        // strength: u32
+        let strength = crate::util::read_u32_le(&mut r)?;
+
+        // agility: u32
+        let agility = crate::util::read_u32_le(&mut r)?;
+
+        // stamina: u32
+        let stamina = crate::util::read_u32_le(&mut r)?;
+
+        // intellect: u32
+        let intellect = crate::util::read_u32_le(&mut r)?;
+
+        // spirit: u32
+        let spirit = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            new_level,
+            health,
+            mana,
+            rage,
+            focus,
+            energy,
+            happiness,
+            rune,
+            runic_power,
+            strength,
+            agility,
+            stamina,
+            intellect,
+            spirit,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LEVELUP_INFO {
     const OPCODE: u32 = 0x01d4;
 
@@ -150,69 +218,8 @@ impl crate::Message for SMSG_LEVELUP_INFO {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 56 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D4, size: body_size });
-        }
-
-        // new_level: Level32
-        let new_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
-
-        // health: u32
-        let health = crate::util::read_u32_le(&mut r)?;
-
-        // mana: u32
-        let mana = crate::util::read_u32_le(&mut r)?;
-
-        // rage: u32
-        let rage = crate::util::read_u32_le(&mut r)?;
-
-        // focus: u32
-        let focus = crate::util::read_u32_le(&mut r)?;
-
-        // energy: u32
-        let energy = crate::util::read_u32_le(&mut r)?;
-
-        // happiness: u32
-        let happiness = crate::util::read_u32_le(&mut r)?;
-
-        // rune: u32
-        let rune = crate::util::read_u32_le(&mut r)?;
-
-        // runic_power: u32
-        let runic_power = crate::util::read_u32_le(&mut r)?;
-
-        // strength: u32
-        let strength = crate::util::read_u32_le(&mut r)?;
-
-        // agility: u32
-        let agility = crate::util::read_u32_le(&mut r)?;
-
-        // stamina: u32
-        let stamina = crate::util::read_u32_le(&mut r)?;
-
-        // intellect: u32
-        let intellect = crate::util::read_u32_le(&mut r)?;
-
-        // spirit: u32
-        let spirit = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            new_level,
-            health,
-            mana,
-            rage,
-            focus,
-            energy,
-            happiness,
-            rune,
-            runic_power,
-            strength,
-            agility,
-            stamina,
-            intellect,
-            spirit,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -26,6 +26,42 @@ pub struct SMSG_AUCTION_OWNER_NOTIFICATION {
 }
 
 impl crate::private::Sealed for SMSG_AUCTION_OWNER_NOTIFICATION {}
+impl SMSG_AUCTION_OWNER_NOTIFICATION {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 28 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025F, size: body_size });
+        }
+
+        // auction_id: u32
+        let auction_id = crate::util::read_u32_le(&mut r)?;
+
+        // bid: u32
+        let bid = crate::util::read_u32_le(&mut r)?;
+
+        // auction_out_bid: u32
+        let auction_out_bid = crate::util::read_u32_le(&mut r)?;
+
+        // bidder: Guid
+        let bidder = crate::util::read_guid(&mut r)?;
+
+        // item: u32
+        let item = crate::util::read_u32_le(&mut r)?;
+
+        // item_random_property_id: u32
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            auction_id,
+            bid,
+            auction_out_bid,
+            bidder,
+            item,
+            item_random_property_id,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_AUCTION_OWNER_NOTIFICATION {
     const OPCODE: u32 = 0x025f;
 
@@ -96,37 +132,8 @@ impl crate::Message for SMSG_AUCTION_OWNER_NOTIFICATION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 28 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025F, size: body_size });
-        }
-
-        // auction_id: u32
-        let auction_id = crate::util::read_u32_le(&mut r)?;
-
-        // bid: u32
-        let bid = crate::util::read_u32_le(&mut r)?;
-
-        // auction_out_bid: u32
-        let auction_out_bid = crate::util::read_u32_le(&mut r)?;
-
-        // bidder: Guid
-        let bidder = crate::util::read_guid(&mut r)?;
-
-        // item: u32
-        let item = crate::util::read_u32_le(&mut r)?;
-
-        // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            auction_id,
-            bid,
-            auction_out_bid,
-            bidder,
-            item,
-            item_random_property_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

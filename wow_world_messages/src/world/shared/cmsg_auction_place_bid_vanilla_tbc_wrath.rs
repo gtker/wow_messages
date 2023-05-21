@@ -19,6 +19,30 @@ pub struct CMSG_AUCTION_PLACE_BID {
 }
 
 impl crate::private::Sealed for CMSG_AUCTION_PLACE_BID {}
+impl CMSG_AUCTION_PLACE_BID {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025A, size: body_size });
+        }
+
+        // auctioneer: Guid
+        let auctioneer = crate::util::read_guid(&mut r)?;
+
+        // auction_id: u32
+        let auction_id = crate::util::read_u32_le(&mut r)?;
+
+        // price: Gold
+        let price = Gold::new(crate::util::read_u32_le(&mut r)?);
+
+        Ok(Self {
+            auctioneer,
+            auction_id,
+            price,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_AUCTION_PLACE_BID {
     const OPCODE: u32 = 0x025a;
 
@@ -74,25 +98,8 @@ impl crate::Message for CMSG_AUCTION_PLACE_BID {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025A, size: body_size });
-        }
-
-        // auctioneer: Guid
-        let auctioneer = crate::util::read_guid(&mut r)?;
-
-        // auction_id: u32
-        let auction_id = crate::util::read_u32_le(&mut r)?;
-
-        // price: Gold
-        let price = Gold::new(crate::util::read_u32_le(&mut r)?);
-
-        Ok(Self {
-            auctioneer,
-            auction_id,
-            price,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

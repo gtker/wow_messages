@@ -14,6 +14,22 @@ pub struct MSG_PETITION_DECLINE {
 }
 
 impl crate::private::Sealed for MSG_PETITION_DECLINE {}
+impl MSG_PETITION_DECLINE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C2, size: body_size });
+        }
+
+        // petition: Guid
+        let petition = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            petition,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_PETITION_DECLINE {
     const OPCODE: u32 = 0x01c2;
 
@@ -33,17 +49,8 @@ impl crate::Message for MSG_PETITION_DECLINE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C2, size: body_size });
-        }
-
-        // petition: Guid
-        let petition = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            petition,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

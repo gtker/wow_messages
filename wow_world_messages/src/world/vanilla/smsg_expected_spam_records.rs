@@ -14,6 +14,32 @@ pub struct SMSG_EXPECTED_SPAM_RECORDS {
 }
 
 impl crate::private::Sealed for SMSG_EXPECTED_SPAM_RECORDS {}
+impl SMSG_EXPECTED_SPAM_RECORDS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=65535).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0332, size: body_size });
+        }
+
+        // amount_of_records: u32
+        let amount_of_records = crate::util::read_u32_le(&mut r)?;
+
+        // records: CString[amount_of_records]
+        let records = {
+            let mut records = Vec::with_capacity(amount_of_records as usize);
+            for _ in 0..amount_of_records {
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
+                records.push(String::from_utf8(s)?);
+            }
+            records
+        };
+
+        Ok(Self {
+            records,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_EXPECTED_SPAM_RECORDS {
     const OPCODE: u32 = 0x0332;
 
@@ -77,27 +103,8 @@ impl crate::Message for SMSG_EXPECTED_SPAM_RECORDS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0332, size: body_size });
-        }
-
-        // amount_of_records: u32
-        let amount_of_records = crate::util::read_u32_le(&mut r)?;
-
-        // records: CString[amount_of_records]
-        let records = {
-            let mut records = Vec::with_capacity(amount_of_records as usize);
-            for _ in 0..amount_of_records {
-                let s = crate::util::read_c_string_to_vec(&mut r)?;
-                records.push(String::from_utf8(s)?);
-            }
-            records
-        };
-
-        Ok(Self {
-            records,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

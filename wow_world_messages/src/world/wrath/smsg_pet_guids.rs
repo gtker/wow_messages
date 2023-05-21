@@ -15,6 +15,31 @@ pub struct SMSG_PET_GUIDS {
 }
 
 impl crate::private::Sealed for SMSG_PET_GUIDS {}
+impl SMSG_PET_GUIDS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04AA, size: body_size });
+        }
+
+        // amount_of_guids: u32
+        let amount_of_guids = crate::util::read_u32_le(&mut r)?;
+
+        // guids: Guid[amount_of_guids]
+        let guids = {
+            let mut guids = Vec::with_capacity(amount_of_guids as usize);
+            for _ in 0..amount_of_guids {
+                guids.push(crate::util::read_guid(&mut r)?);
+            }
+            guids
+        };
+
+        Ok(Self {
+            guids,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PET_GUIDS {
     const OPCODE: u32 = 0x04aa;
 
@@ -77,26 +102,8 @@ impl crate::Message for SMSG_PET_GUIDS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04AA, size: body_size });
-        }
-
-        // amount_of_guids: u32
-        let amount_of_guids = crate::util::read_u32_le(&mut r)?;
-
-        // guids: Guid[amount_of_guids]
-        let guids = {
-            let mut guids = Vec::with_capacity(amount_of_guids as usize);
-            for _ in 0..amount_of_guids {
-                guids.push(crate::util::read_guid(&mut r)?);
-            }
-            guids
-        };
-
-        Ok(Self {
-            guids,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

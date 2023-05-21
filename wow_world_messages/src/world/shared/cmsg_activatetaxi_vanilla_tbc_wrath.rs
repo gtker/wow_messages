@@ -18,6 +18,30 @@ pub struct CMSG_ACTIVATETAXI {
 }
 
 impl crate::private::Sealed for CMSG_ACTIVATETAXI {}
+impl CMSG_ACTIVATETAXI {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01AD, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // source_node: u32
+        let source_node = crate::util::read_u32_le(&mut r)?;
+
+        // destination_node: u32
+        let destination_node = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            source_node,
+            destination_node,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_ACTIVATETAXI {
     const OPCODE: u32 = 0x01ad;
 
@@ -73,25 +97,8 @@ impl crate::Message for CMSG_ACTIVATETAXI {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01AD, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // source_node: u32
-        let source_node = crate::util::read_u32_le(&mut r)?;
-
-        // destination_node: u32
-        let destination_node = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            source_node,
-            destination_node,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

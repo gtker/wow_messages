@@ -16,6 +16,26 @@ pub struct SMSG_TAXINODE_STATUS {
 }
 
 impl crate::private::Sealed for SMSG_TAXINODE_STATUS {}
+impl SMSG_TAXINODE_STATUS {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 9 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01AB, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // taxi_mask_node_known: Bool
+        let taxi_mask_node_known = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            guid,
+            taxi_mask_node_known,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_TAXINODE_STATUS {
     const OPCODE: u32 = 0x01ab;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_TAXINODE_STATUS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 9 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01AB, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // taxi_mask_node_known: Bool
-        let taxi_mask_node_known = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            guid,
-            taxi_mask_node_known,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

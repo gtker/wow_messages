@@ -22,6 +22,54 @@ pub struct SMSG_GROUP_INVITE {
 }
 
 impl crate::private::Sealed for SMSG_GROUP_INVITE {}
+impl SMSG_GROUP_INVITE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=266).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x006F, size: body_size });
+        }
+
+        // status: PlayerInviteStatus
+        let status = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // name: CString
+        let name = {
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(name)?
+        };
+
+        // optional unknown
+        let current_size = {
+            1 // status: PlayerInviteStatus
+            + name.len() + 1 // name: CString
+        };
+        let unknown = if current_size < body_size as usize {
+            // unknown1: u32
+            let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+            // count: u8
+            let count = crate::util::read_u8_le(&mut r)?;
+
+            // unknown2: u32
+            let unknown2 = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_GROUP_INVITE_unknown {
+                unknown1,
+                count,
+                unknown2,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            status,
+            name,
+            unknown,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GROUP_INVITE {
     const OPCODE: u32 = 0x006f;
 
@@ -99,49 +147,8 @@ impl crate::Message for SMSG_GROUP_INVITE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=266).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x006F, size: body_size });
-        }
-
-        // status: PlayerInviteStatus
-        let status = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // name: CString
-        let name = {
-            let name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(name)?
-        };
-
-        // optional unknown
-        let current_size = {
-            1 // status: PlayerInviteStatus
-            + name.len() + 1 // name: CString
-        };
-        let unknown = if current_size < body_size as usize {
-            // unknown1: u32
-            let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-            // count: u8
-            let count = crate::util::read_u8_le(&mut r)?;
-
-            // unknown2: u32
-            let unknown2 = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_GROUP_INVITE_unknown {
-                unknown1,
-                count,
-                unknown2,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            status,
-            name,
-            unknown,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

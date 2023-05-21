@@ -19,6 +19,30 @@ pub struct MSG_SET_RAID_DIFFICULTY_Server {
 }
 
 impl crate::private::Sealed for MSG_SET_RAID_DIFFICULTY_Server {}
+impl MSG_SET_RAID_DIFFICULTY_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04EB, size: body_size });
+        }
+
+        // difficulty: RaidDifficulty
+        let difficulty = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        // in_group: Bool32
+        let in_group = crate::util::read_u32_le(&mut r)? != 0;
+
+        Ok(Self {
+            difficulty,
+            unknown1,
+            in_group,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_SET_RAID_DIFFICULTY_Server {
     const OPCODE: u32 = 0x04eb;
 
@@ -74,25 +98,8 @@ impl crate::Message for MSG_SET_RAID_DIFFICULTY_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04EB, size: body_size });
-        }
-
-        // difficulty: RaidDifficulty
-        let difficulty = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        // in_group: Bool32
-        let in_group = crate::util::read_u32_le(&mut r)? != 0;
-
-        Ok(Self {
-            difficulty,
-            unknown1,
-            in_group,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

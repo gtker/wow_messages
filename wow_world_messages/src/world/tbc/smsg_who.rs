@@ -20,6 +20,35 @@ pub struct SMSG_WHO {
 }
 
 impl crate::private::Sealed for SMSG_WHO {}
+impl SMSG_WHO {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(8..=65535).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0063, size: body_size });
+        }
+
+        // listed_players: u32
+        let listed_players = crate::util::read_u32_le(&mut r)?;
+
+        // online_players: u32
+        let online_players = crate::util::read_u32_le(&mut r)?;
+
+        // players: WhoPlayer[listed_players]
+        let players = {
+            let mut players = Vec::with_capacity(listed_players as usize);
+            for _ in 0..listed_players {
+                players.push(WhoPlayer::read(&mut r)?);
+            }
+            players
+        };
+
+        Ok(Self {
+            online_players,
+            players,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_WHO {
     const OPCODE: u32 = 0x0063;
 
@@ -105,30 +134,8 @@ impl crate::Message for SMSG_WHO {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(8..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0063, size: body_size });
-        }
-
-        // listed_players: u32
-        let listed_players = crate::util::read_u32_le(&mut r)?;
-
-        // online_players: u32
-        let online_players = crate::util::read_u32_le(&mut r)?;
-
-        // players: WhoPlayer[listed_players]
-        let players = {
-            let mut players = Vec::with_capacity(listed_players as usize);
-            for _ in 0..listed_players {
-                players.push(WhoPlayer::read(&mut r)?);
-            }
-            players
-        };
-
-        Ok(Self {
-            online_players,
-            players,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

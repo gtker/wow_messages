@@ -28,6 +28,46 @@ pub struct SMSG_AUCTION_BIDDER_NOTIFICATION {
 }
 
 impl crate::private::Sealed for SMSG_AUCTION_BIDDER_NOTIFICATION {}
+impl SMSG_AUCTION_BIDDER_NOTIFICATION {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 32 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025E, size: body_size });
+        }
+
+        // auction_house: AuctionHouse
+        let auction_house = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // auction_id: u32
+        let auction_id = crate::util::read_u32_le(&mut r)?;
+
+        // bidder: Guid
+        let bidder = crate::util::read_guid(&mut r)?;
+
+        // won: u32
+        let won = crate::util::read_u32_le(&mut r)?;
+
+        // out_bid: u32
+        let out_bid = crate::util::read_u32_le(&mut r)?;
+
+        // item_template: u32
+        let item_template = crate::util::read_u32_le(&mut r)?;
+
+        // item_random_property_id: u32
+        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            auction_house,
+            auction_id,
+            bidder,
+            won,
+            out_bid,
+            item_template,
+            item_random_property_id,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_AUCTION_BIDDER_NOTIFICATION {
     const OPCODE: u32 = 0x025e;
 
@@ -103,41 +143,8 @@ impl crate::Message for SMSG_AUCTION_BIDDER_NOTIFICATION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 32 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025E, size: body_size });
-        }
-
-        // auction_house: AuctionHouse
-        let auction_house = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // auction_id: u32
-        let auction_id = crate::util::read_u32_le(&mut r)?;
-
-        // bidder: Guid
-        let bidder = crate::util::read_guid(&mut r)?;
-
-        // won: u32
-        let won = crate::util::read_u32_le(&mut r)?;
-
-        // out_bid: u32
-        let out_bid = crate::util::read_u32_le(&mut r)?;
-
-        // item_template: u32
-        let item_template = crate::util::read_u32_le(&mut r)?;
-
-        // item_random_property_id: u32
-        let item_random_property_id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            auction_house,
-            auction_id,
-            bidder,
-            won,
-            out_bid,
-            item_template,
-            item_random_property_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -19,6 +19,30 @@ pub struct SMSG_PVP_CREDIT {
 }
 
 impl crate::private::Sealed for SMSG_PVP_CREDIT {}
+impl SMSG_PVP_CREDIT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x028C, size: body_size });
+        }
+
+        // honor_points: u32
+        let honor_points = crate::util::read_u32_le(&mut r)?;
+
+        // victim: Guid
+        let victim = crate::util::read_guid(&mut r)?;
+
+        // rank: PvpRank
+        let rank = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        Ok(Self {
+            honor_points,
+            victim,
+            rank,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PVP_CREDIT {
     const OPCODE: u32 = 0x028c;
 
@@ -74,25 +98,8 @@ impl crate::Message for SMSG_PVP_CREDIT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x028C, size: body_size });
-        }
-
-        // honor_points: u32
-        let honor_points = crate::util::read_u32_le(&mut r)?;
-
-        // victim: Guid
-        let victim = crate::util::read_guid(&mut r)?;
-
-        // rank: PvpRank
-        let rank = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        Ok(Self {
-            honor_points,
-            victim,
-            rank,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

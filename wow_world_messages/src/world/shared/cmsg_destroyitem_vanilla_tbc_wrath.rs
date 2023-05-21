@@ -22,6 +22,42 @@ pub struct CMSG_DESTROYITEM {
 }
 
 impl crate::private::Sealed for CMSG_DESTROYITEM {}
+impl CMSG_DESTROYITEM {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 6 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0111, size: body_size });
+        }
+
+        // bag: u8
+        let bag = crate::util::read_u8_le(&mut r)?;
+
+        // slot: u8
+        let slot = crate::util::read_u8_le(&mut r)?;
+
+        // amount: u8
+        let amount = crate::util::read_u8_le(&mut r)?;
+
+        // unknown1: u8
+        let unknown1 = crate::util::read_u8_le(&mut r)?;
+
+        // unknown2: u8
+        let unknown2 = crate::util::read_u8_le(&mut r)?;
+
+        // unknown3: u8
+        let unknown3 = crate::util::read_u8_le(&mut r)?;
+
+        Ok(Self {
+            bag,
+            slot,
+            amount,
+            unknown1,
+            unknown2,
+            unknown3,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_DESTROYITEM {
     const OPCODE: u32 = 0x0111;
 
@@ -92,37 +128,8 @@ impl crate::Message for CMSG_DESTROYITEM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 6 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0111, size: body_size });
-        }
-
-        // bag: u8
-        let bag = crate::util::read_u8_le(&mut r)?;
-
-        // slot: u8
-        let slot = crate::util::read_u8_le(&mut r)?;
-
-        // amount: u8
-        let amount = crate::util::read_u8_le(&mut r)?;
-
-        // unknown1: u8
-        let unknown1 = crate::util::read_u8_le(&mut r)?;
-
-        // unknown2: u8
-        let unknown2 = crate::util::read_u8_le(&mut r)?;
-
-        // unknown3: u8
-        let unknown3 = crate::util::read_u8_le(&mut r)?;
-
-        Ok(Self {
-            bag,
-            slot,
-            amount,
-            unknown1,
-            unknown2,
-            unknown3,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

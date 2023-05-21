@@ -16,6 +16,26 @@ pub struct SMSG_CLEAR_EXTRA_AURA_INFO {
 }
 
 impl crate::private::Sealed for SMSG_CLEAR_EXTRA_AURA_INFO {}
+impl SMSG_CLEAR_EXTRA_AURA_INFO {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(6..=13).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03A6, size: body_size });
+        }
+
+        // unit: PackedGuid
+        let unit = crate::util::read_packed_guid(&mut r)?;
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            unit,
+            spell,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CLEAR_EXTRA_AURA_INFO {
     const OPCODE: u32 = 0x03a6;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_CLEAR_EXTRA_AURA_INFO {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(6..=13).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03A6, size: body_size });
-        }
-
-        // unit: PackedGuid
-        let unit = crate::util::read_packed_guid(&mut r)?;
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            unit,
-            spell,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

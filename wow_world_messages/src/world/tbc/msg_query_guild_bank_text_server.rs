@@ -14,6 +14,29 @@ pub struct MSG_QUERY_GUILD_BANK_TEXT_Server {
 }
 
 impl crate::private::Sealed for MSG_QUERY_GUILD_BANK_TEXT_Server {}
+impl MSG_QUERY_GUILD_BANK_TEXT_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=257).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0409, size: body_size });
+        }
+
+        // tab: u8
+        let tab = crate::util::read_u8_le(&mut r)?;
+
+        // text: CString
+        let text = {
+            let text = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(text)?
+        };
+
+        Ok(Self {
+            tab,
+            text,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_QUERY_GUILD_BANK_TEXT_Server {
     const OPCODE: u32 = 0x0409;
 
@@ -68,24 +91,8 @@ impl crate::Message for MSG_QUERY_GUILD_BANK_TEXT_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=257).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0409, size: body_size });
-        }
-
-        // tab: u8
-        let tab = crate::util::read_u8_le(&mut r)?;
-
-        // text: CString
-        let text = {
-            let text = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(text)?
-        };
-
-        Ok(Self {
-            tab,
-            text,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

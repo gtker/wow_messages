@@ -53,6 +53,152 @@ pub struct SMSG_SPELL_GO {
 }
 
 impl crate::private::Sealed for SMSG_SPELL_GO {}
+impl SMSG_SPELL_GO {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(21..=370).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0132, size: body_size });
+        }
+
+        // cast_item: PackedGuid
+        let cast_item = crate::util::read_packed_guid(&mut r)?;
+
+        // caster: PackedGuid
+        let caster = crate::util::read_packed_guid(&mut r)?;
+
+        // extra_casts: u8
+        let extra_casts = crate::util::read_u8_le(&mut r)?;
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // flags: GameobjectCastFlags
+        let flags = GameobjectCastFlags::new(crate::util::read_u32_le(&mut r)?);
+
+        // timestamp: u32
+        let timestamp = crate::util::read_u32_le(&mut r)?;
+
+        // targets: SpellCastTargets
+        let targets = SpellCastTargets::read(&mut r)?;
+
+        let flags_power_update = if flags.is_power_update() {
+            // power: Power
+            let power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+            Some(SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate {
+                power,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags_rune_update = if flags.is_rune_update() {
+            // rune_mask_initial: u8
+            let rune_mask_initial = crate::util::read_u8_le(&mut r)?;
+
+            // rune_mask_after_cast: u8
+            let rune_mask_after_cast = crate::util::read_u8_le(&mut r)?;
+
+            // rune_cooldowns: u8[6]
+            let rune_cooldowns = {
+                let mut rune_cooldowns = [0_u8; 6];
+                r.read_exact(&mut rune_cooldowns)?;
+                rune_cooldowns
+            };
+
+            Some(SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate {
+                rune_cooldowns,
+                rune_mask_after_cast,
+                rune_mask_initial,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags_adjust_missile = if flags.is_adjust_missile() {
+            // elevation: f32
+            let elevation = crate::util::read_f32_le(&mut r)?;
+
+            // delay_trajectory: u32
+            let delay_trajectory = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile {
+                delay_trajectory,
+                elevation,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags_ammo = if flags.is_ammo() {
+            // ammo_display_id: u32
+            let ammo_display_id = crate::util::read_u32_le(&mut r)?;
+
+            // ammo_inventory_type: u32
+            let ammo_inventory_type = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_SPELL_GO_GameobjectCastFlags_Ammo {
+                ammo_display_id,
+                ammo_inventory_type,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags_visual_chain = if flags.is_visual_chain() {
+            // unknown1: u32
+            let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+            // unknown2: u32
+            let unknown2 = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_SPELL_GO_GameobjectCastFlags_VisualChain {
+                unknown1,
+                unknown2,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags_dest_location = if flags.is_dest_location() {
+            // unknown3: u8
+            let unknown3 = crate::util::read_u8_le(&mut r)?;
+
+            Some(SMSG_SPELL_GO_GameobjectCastFlags_DestLocation {
+                unknown3,
+            })
+        }
+        else {
+            None
+        };
+
+        let flags = SMSG_SPELL_GO_GameobjectCastFlags {
+            inner: flags.as_int(),
+            ammo: flags_ammo,
+            dest_location: flags_dest_location,
+            power_update: flags_power_update,
+            adjust_missile: flags_adjust_missile,
+            visual_chain: flags_visual_chain,
+            rune_update: flags_rune_update,
+        };
+
+        Ok(Self {
+            cast_item,
+            caster,
+            extra_casts,
+            spell,
+            flags,
+            timestamp,
+            targets,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SPELL_GO {
     const OPCODE: u32 = 0x0132;
 
@@ -386,147 +532,8 @@ impl crate::Message for SMSG_SPELL_GO {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(21..=370).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0132, size: body_size });
-        }
-
-        // cast_item: PackedGuid
-        let cast_item = crate::util::read_packed_guid(&mut r)?;
-
-        // caster: PackedGuid
-        let caster = crate::util::read_packed_guid(&mut r)?;
-
-        // extra_casts: u8
-        let extra_casts = crate::util::read_u8_le(&mut r)?;
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // flags: GameobjectCastFlags
-        let flags = GameobjectCastFlags::new(crate::util::read_u32_le(&mut r)?);
-
-        // timestamp: u32
-        let timestamp = crate::util::read_u32_le(&mut r)?;
-
-        // targets: SpellCastTargets
-        let targets = SpellCastTargets::read(&mut r)?;
-
-        let flags_power_update = if flags.is_power_update() {
-            // power: Power
-            let power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-            Some(SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate {
-                power,
-            })
-        }
-        else {
-            None
-        };
-
-        let flags_rune_update = if flags.is_rune_update() {
-            // rune_mask_initial: u8
-            let rune_mask_initial = crate::util::read_u8_le(&mut r)?;
-
-            // rune_mask_after_cast: u8
-            let rune_mask_after_cast = crate::util::read_u8_le(&mut r)?;
-
-            // rune_cooldowns: u8[6]
-            let rune_cooldowns = {
-                let mut rune_cooldowns = [0_u8; 6];
-                r.read_exact(&mut rune_cooldowns)?;
-                rune_cooldowns
-            };
-
-            Some(SMSG_SPELL_GO_GameobjectCastFlags_RuneUpdate {
-                rune_cooldowns,
-                rune_mask_after_cast,
-                rune_mask_initial,
-            })
-        }
-        else {
-            None
-        };
-
-        let flags_adjust_missile = if flags.is_adjust_missile() {
-            // elevation: f32
-            let elevation = crate::util::read_f32_le(&mut r)?;
-
-            // delay_trajectory: u32
-            let delay_trajectory = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_SPELL_GO_GameobjectCastFlags_AdjustMissile {
-                delay_trajectory,
-                elevation,
-            })
-        }
-        else {
-            None
-        };
-
-        let flags_ammo = if flags.is_ammo() {
-            // ammo_display_id: u32
-            let ammo_display_id = crate::util::read_u32_le(&mut r)?;
-
-            // ammo_inventory_type: u32
-            let ammo_inventory_type = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_SPELL_GO_GameobjectCastFlags_Ammo {
-                ammo_display_id,
-                ammo_inventory_type,
-            })
-        }
-        else {
-            None
-        };
-
-        let flags_visual_chain = if flags.is_visual_chain() {
-            // unknown1: u32
-            let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-            // unknown2: u32
-            let unknown2 = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_SPELL_GO_GameobjectCastFlags_VisualChain {
-                unknown1,
-                unknown2,
-            })
-        }
-        else {
-            None
-        };
-
-        let flags_dest_location = if flags.is_dest_location() {
-            // unknown3: u8
-            let unknown3 = crate::util::read_u8_le(&mut r)?;
-
-            Some(SMSG_SPELL_GO_GameobjectCastFlags_DestLocation {
-                unknown3,
-            })
-        }
-        else {
-            None
-        };
-
-        let flags = SMSG_SPELL_GO_GameobjectCastFlags {
-            inner: flags.as_int(),
-            ammo: flags_ammo,
-            dest_location: flags_dest_location,
-            power_update: flags_power_update,
-            adjust_missile: flags_adjust_missile,
-            visual_chain: flags_visual_chain,
-            rune_update: flags_rune_update,
-        };
-
-        Ok(Self {
-            cast_item,
-            caster,
-            extra_casts,
-            spell,
-            flags,
-            timestamp,
-            targets,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

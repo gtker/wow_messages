@@ -18,6 +18,30 @@ pub struct CMSG_CALENDAR_EVENT_REMOVE_INVITE {
 }
 
 impl crate::private::Sealed for CMSG_CALENDAR_EVENT_REMOVE_INVITE {}
+impl CMSG_CALENDAR_EVENT_REMOVE_INVITE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 24 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0433, size: body_size });
+        }
+
+        // event: Guid
+        let event = crate::util::read_guid(&mut r)?;
+
+        // sender_invite_id: Guid
+        let sender_invite_id = crate::util::read_guid(&mut r)?;
+
+        // invite_id: Guid
+        let invite_id = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            event,
+            sender_invite_id,
+            invite_id,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CALENDAR_EVENT_REMOVE_INVITE {
     const OPCODE: u32 = 0x0433;
 
@@ -73,25 +97,8 @@ impl crate::Message for CMSG_CALENDAR_EVENT_REMOVE_INVITE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 24 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0433, size: body_size });
-        }
-
-        // event: Guid
-        let event = crate::util::read_guid(&mut r)?;
-
-        // sender_invite_id: Guid
-        let sender_invite_id = crate::util::read_guid(&mut r)?;
-
-        // invite_id: Guid
-        let invite_id = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            event,
-            sender_invite_id,
-            invite_id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

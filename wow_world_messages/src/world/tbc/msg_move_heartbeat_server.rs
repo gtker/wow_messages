@@ -19,6 +19,26 @@ pub struct MSG_MOVE_HEARTBEAT_Server {
 }
 
 impl crate::private::Sealed for MSG_MOVE_HEARTBEAT_Server {}
+impl MSG_MOVE_HEARTBEAT_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(31..=91).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00EE, size: body_size });
+        }
+
+        // guid: PackedGuid
+        let guid = crate::util::read_packed_guid(&mut r)?;
+
+        // info: MovementInfo
+        let info = MovementInfo::read(&mut r)?;
+
+        Ok(Self {
+            guid,
+            info,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_MOVE_HEARTBEAT_Server {
     const OPCODE: u32 = 0x00ee;
 
@@ -181,21 +201,8 @@ impl crate::Message for MSG_MOVE_HEARTBEAT_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(31..=91).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00EE, size: body_size });
-        }
-
-        // guid: PackedGuid
-        let guid = crate::util::read_packed_guid(&mut r)?;
-
-        // info: MovementInfo
-        let info = MovementInfo::read(&mut r)?;
-
-        Ok(Self {
-            guid,
-            info,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

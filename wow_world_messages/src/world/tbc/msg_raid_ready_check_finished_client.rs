@@ -11,6 +11,18 @@ pub struct MSG_RAID_READY_CHECK_FINISHED_Client {
 }
 
 impl crate::private::Sealed for MSG_RAID_READY_CHECK_FINISHED_Client {}
+impl MSG_RAID_READY_CHECK_FINISHED_Client {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 0 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C5, size: body_size });
+        }
+
+        Ok(Self {
+        })
+    }
+
+}
+
 impl crate::Message for MSG_RAID_READY_CHECK_FINISHED_Client {
     const OPCODE: u32 = 0x03c5;
 
@@ -51,13 +63,8 @@ impl crate::Message for MSG_RAID_READY_CHECK_FINISHED_Client {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03C5, size: body_size });
-        }
-
-        Ok(Self {
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

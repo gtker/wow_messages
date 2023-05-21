@@ -16,6 +16,26 @@ pub struct SMSG_SPLINE_SET_FLIGHT_BACK_SPEED {
 }
 
 impl crate::private::Sealed for SMSG_SPLINE_SET_FLIGHT_BACK_SPEED {}
+impl SMSG_SPLINE_SET_FLIGHT_BACK_SPEED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(6..=13).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0386, size: body_size });
+        }
+
+        // guid: PackedGuid
+        let guid = crate::util::read_packed_guid(&mut r)?;
+
+        // speed: f32
+        let speed = crate::util::read_f32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            speed,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SPLINE_SET_FLIGHT_BACK_SPEED {
     const OPCODE: u32 = 0x0386;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_SPLINE_SET_FLIGHT_BACK_SPEED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(6..=13).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0386, size: body_size });
-        }
-
-        // guid: PackedGuid
-        let guid = crate::util::read_packed_guid(&mut r)?;
-
-        // speed: f32
-        let speed = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            speed,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

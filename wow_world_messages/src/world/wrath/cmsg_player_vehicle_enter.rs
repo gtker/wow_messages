@@ -14,6 +14,22 @@ pub struct CMSG_PLAYER_VEHICLE_ENTER {
 }
 
 impl crate::private::Sealed for CMSG_PLAYER_VEHICLE_ENTER {}
+impl CMSG_PLAYER_VEHICLE_ENTER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04A8, size: body_size });
+        }
+
+        // vehicle: Guid
+        let vehicle = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            vehicle,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_PLAYER_VEHICLE_ENTER {
     const OPCODE: u32 = 0x04a8;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_PLAYER_VEHICLE_ENTER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04A8, size: body_size });
-        }
-
-        // vehicle: Guid
-        let vehicle = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            vehicle,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -50,6 +50,93 @@ pub struct CMSG_PETITION_BUY {
 }
 
 impl crate::private::Sealed for CMSG_PETITION_BUY {}
+impl CMSG_PETITION_BUY {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(72..=327).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BD, size: body_size });
+        }
+
+        // npc: Guid
+        let npc = crate::util::read_guid(&mut r)?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown2: Guid
+        let unknown2 = crate::util::read_guid(&mut r)?;
+
+        // name: CString
+        let name = {
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(name)?
+        };
+
+        // unknown3: u32
+        let unknown3 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown4: u32
+        let unknown4 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown5: u32
+        let unknown5 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown6: u32
+        let unknown6 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown7: u32
+        let unknown7 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown8: u32
+        let unknown8 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown9: u32
+        let unknown9 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown10: u32
+        let unknown10 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown11: u32
+        let unknown11 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown12: u32
+        let unknown12 = crate::util::read_u32_le(&mut r)?;
+
+        // unknown13: u16
+        let unknown13 = crate::util::read_u16_le(&mut r)?;
+
+        // unknown14: u8
+        let unknown14 = crate::util::read_u8_le(&mut r)?;
+
+        // index: u32
+        let index = crate::util::read_u32_le(&mut r)?;
+
+        // unknown15: u32
+        let unknown15 = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            npc,
+            unknown1,
+            unknown2,
+            name,
+            unknown3,
+            unknown4,
+            unknown5,
+            unknown6,
+            unknown7,
+            unknown8,
+            unknown9,
+            unknown10,
+            unknown11,
+            unknown12,
+            unknown13,
+            unknown14,
+            index,
+            unknown15,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_PETITION_BUY {
     const OPCODE: u32 = 0x01bd;
 
@@ -184,88 +271,8 @@ impl crate::Message for CMSG_PETITION_BUY {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(72..=327).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BD, size: body_size });
-        }
-
-        // npc: Guid
-        let npc = crate::util::read_guid(&mut r)?;
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown2: Guid
-        let unknown2 = crate::util::read_guid(&mut r)?;
-
-        // name: CString
-        let name = {
-            let name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(name)?
-        };
-
-        // unknown3: u32
-        let unknown3 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown4: u32
-        let unknown4 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown5: u32
-        let unknown5 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown6: u32
-        let unknown6 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown7: u32
-        let unknown7 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown8: u32
-        let unknown8 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown9: u32
-        let unknown9 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown10: u32
-        let unknown10 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown11: u32
-        let unknown11 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown12: u32
-        let unknown12 = crate::util::read_u32_le(&mut r)?;
-
-        // unknown13: u16
-        let unknown13 = crate::util::read_u16_le(&mut r)?;
-
-        // unknown14: u8
-        let unknown14 = crate::util::read_u8_le(&mut r)?;
-
-        // index: u32
-        let index = crate::util::read_u32_le(&mut r)?;
-
-        // unknown15: u32
-        let unknown15 = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            npc,
-            unknown1,
-            unknown2,
-            name,
-            unknown3,
-            unknown4,
-            unknown5,
-            unknown6,
-            unknown7,
-            unknown8,
-            unknown9,
-            unknown10,
-            unknown11,
-            unknown12,
-            unknown13,
-            unknown14,
-            index,
-            unknown15,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

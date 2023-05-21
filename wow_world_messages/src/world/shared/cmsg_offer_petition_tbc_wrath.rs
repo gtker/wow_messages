@@ -18,6 +18,30 @@ pub struct CMSG_OFFER_PETITION {
 }
 
 impl crate::private::Sealed for CMSG_OFFER_PETITION {}
+impl CMSG_OFFER_PETITION {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 20 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C3, size: body_size });
+        }
+
+        // unknown0: u32
+        let unknown0 = crate::util::read_u32_le(&mut r)?;
+
+        // petition: Guid
+        let petition = crate::util::read_guid(&mut r)?;
+
+        // target: Guid
+        let target = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            unknown0,
+            petition,
+            target,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_OFFER_PETITION {
     const OPCODE: u32 = 0x01c3;
 
@@ -73,25 +97,8 @@ impl crate::Message for CMSG_OFFER_PETITION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 20 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C3, size: body_size });
-        }
-
-        // unknown0: u32
-        let unknown0 = crate::util::read_u32_le(&mut r)?;
-
-        // petition: Guid
-        let petition = crate::util::read_guid(&mut r)?;
-
-        // target: Guid
-        let target = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            unknown0,
-            petition,
-            target,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

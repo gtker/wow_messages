@@ -16,6 +16,26 @@ pub struct SMSG_AREA_SPIRIT_HEALER_TIME {
 }
 
 impl crate::private::Sealed for SMSG_AREA_SPIRIT_HEALER_TIME {}
+impl SMSG_AREA_SPIRIT_HEALER_TIME {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E4, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // next_resurrect_time: u32
+        let next_resurrect_time = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            guid,
+            next_resurrect_time,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_AREA_SPIRIT_HEALER_TIME {
     const OPCODE: u32 = 0x02e4;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_AREA_SPIRIT_HEALER_TIME {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E4, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // next_resurrect_time: u32
-        let next_resurrect_time = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            guid,
-            next_resurrect_time,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -18,6 +18,30 @@ pub struct SMSG_LOOT_LIST {
 }
 
 impl crate::private::Sealed for SMSG_LOOT_LIST {}
+impl SMSG_LOOT_LIST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(12..=26).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F8, size: body_size });
+        }
+
+        // creature: Guid
+        let creature = crate::util::read_guid(&mut r)?;
+
+        // master_looter: PackedGuid
+        let master_looter = crate::util::read_packed_guid(&mut r)?;
+
+        // group_looter: PackedGuid
+        let group_looter = crate::util::read_packed_guid(&mut r)?;
+
+        Ok(Self {
+            creature,
+            master_looter,
+            group_looter,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LOOT_LIST {
     const OPCODE: u32 = 0x03f8;
 
@@ -73,25 +97,8 @@ impl crate::Message for SMSG_LOOT_LIST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(12..=26).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F8, size: body_size });
-        }
-
-        // creature: Guid
-        let creature = crate::util::read_guid(&mut r)?;
-
-        // master_looter: PackedGuid
-        let master_looter = crate::util::read_packed_guid(&mut r)?;
-
-        // group_looter: PackedGuid
-        let group_looter = crate::util::read_packed_guid(&mut r)?;
-
-        Ok(Self {
-            creature,
-            master_looter,
-            group_looter,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

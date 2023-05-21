@@ -16,6 +16,22 @@ pub struct MSG_QUERY_NEXT_MAIL_TIME_Server {
 }
 
 impl crate::private::Sealed for MSG_QUERY_NEXT_MAIL_TIME_Server {}
+impl MSG_QUERY_NEXT_MAIL_TIME_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0284, size: body_size });
+        }
+
+        // unread_mails: f32
+        let unread_mails = crate::util::read_f32_le(&mut r)?;
+
+        Ok(Self {
+            unread_mails,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
     const OPCODE: u32 = 0x0284;
 
@@ -61,17 +77,8 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0284, size: body_size });
-        }
-
-        // unread_mails: f32
-        let unread_mails = crate::util::read_f32_le(&mut r)?;
-
-        Ok(Self {
-            unread_mails,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

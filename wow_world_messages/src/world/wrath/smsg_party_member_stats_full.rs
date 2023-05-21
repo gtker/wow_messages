@@ -81,6 +81,297 @@ pub struct SMSG_PARTY_MEMBER_STATS_FULL {
 }
 
 impl crate::private::Sealed for SMSG_PARTY_MEMBER_STATS_FULL {}
+impl SMSG_PARTY_MEMBER_STATS_FULL {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(6..=584).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02F2, size: body_size });
+        }
+
+        // guid: PackedGuid
+        let guid = crate::util::read_packed_guid(&mut r)?;
+
+        // mask: GroupUpdateFlags
+        let mask = GroupUpdateFlags::new(crate::util::read_u32_le(&mut r)?);
+
+        let mask_status = if mask.is_status() {
+            // status: GroupMemberOnlineStatus
+            let status = GroupMemberOnlineStatus::new(crate::util::read_u8_le(&mut r)?);
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Status {
+                status,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_cur_hp = if mask.is_cur_hp() {
+            // current_health: u32
+            let current_health = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurHp {
+                current_health,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_max_hp = if mask.is_max_hp() {
+            // max_health: u32
+            let max_health = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxHp {
+                max_health,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_power_type = if mask.is_power_type() {
+            // power: Power
+            let power = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PowerType {
+                power,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_cur_power = if mask.is_cur_power() {
+            // current_power: u16
+            let current_power = crate::util::read_u16_le(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurPower {
+                current_power,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_max_power = if mask.is_max_power() {
+            // max_power: u16
+            let max_power = crate::util::read_u16_le(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxPower {
+                max_power,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_level = if mask.is_level() {
+            // level: Level16
+            let level = Level::new(crate::util::read_u16_le(&mut r)? as u8);
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Level {
+                level,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_zone = if mask.is_zone() {
+            // area: Area
+            let area = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Zone {
+                area,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_position = if mask.is_position() {
+            // position_x: u16
+            let position_x = crate::util::read_u16_le(&mut r)?;
+
+            // position_y: u16
+            let position_y = crate::util::read_u16_le(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Position {
+                position_x,
+                position_y,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_auras = if mask.is_auras() {
+            // auras: AuraMask
+            let auras = AuraMask::read(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Auras {
+                auras,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_pet_guid = if mask.is_pet_guid() {
+            // pet: Guid
+            let pet = crate::util::read_guid(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetGuid {
+                pet,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_pet_name = if mask.is_pet_name() {
+            // pet_name: CString
+            let pet_name = {
+                let pet_name = crate::util::read_c_string_to_vec(&mut r)?;
+                String::from_utf8(pet_name)?
+            };
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetName {
+                pet_name,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_pet_model_id = if mask.is_pet_model_id() {
+            // pet_display_id: u16
+            let pet_display_id = crate::util::read_u16_le(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetModelId {
+                pet_display_id,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_pet_cur_hp = if mask.is_pet_cur_hp() {
+            // pet_current_health: u32
+            let pet_current_health = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurHp {
+                pet_current_health,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_pet_max_hp = if mask.is_pet_max_hp() {
+            // pet_max_health: u32
+            let pet_max_health = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxHp {
+                pet_max_health,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_pet_power_type = if mask.is_pet_power_type() {
+            // pet_power_type: Power
+            let pet_power_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetPowerType {
+                pet_power_type,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_pet_cur_power = if mask.is_pet_cur_power() {
+            // pet_current_power: u16
+            let pet_current_power = crate::util::read_u16_le(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurPower {
+                pet_current_power,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_pet_max_power = if mask.is_pet_max_power() {
+            // pet_max_power: u16
+            let pet_max_power = crate::util::read_u16_le(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxPower {
+                pet_max_power,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_pet_auras = if mask.is_pet_auras() {
+            // pet_auras: AuraMask
+            let pet_auras = AuraMask::read(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetAuras {
+                pet_auras,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask_vehicle_seat = if mask.is_vehicle_seat() {
+            // transport: u32
+            let transport = crate::util::read_u32_le(&mut r)?;
+
+            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_VehicleSeat {
+                transport,
+            })
+        }
+        else {
+            None
+        };
+
+        let mask = SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
+            inner: mask.as_int(),
+            status: mask_status,
+            cur_hp: mask_cur_hp,
+            max_hp: mask_max_hp,
+            power_type: mask_power_type,
+            cur_power: mask_cur_power,
+            max_power: mask_max_power,
+            level: mask_level,
+            zone: mask_zone,
+            position: mask_position,
+            auras: mask_auras,
+            pet_guid: mask_pet_guid,
+            pet_name: mask_pet_name,
+            pet_model_id: mask_pet_model_id,
+            pet_cur_hp: mask_pet_cur_hp,
+            pet_max_hp: mask_pet_max_hp,
+            pet_power_type: mask_pet_power_type,
+            pet_cur_power: mask_pet_cur_power,
+            pet_max_power: mask_pet_max_power,
+            pet_auras: mask_pet_auras,
+            vehicle_seat: mask_vehicle_seat,
+        };
+
+        Ok(Self {
+            guid,
+            mask,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
     const OPCODE: u32 = 0x02f2;
 
@@ -420,292 +711,8 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(6..=584).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02F2, size: body_size });
-        }
-
-        // guid: PackedGuid
-        let guid = crate::util::read_packed_guid(&mut r)?;
-
-        // mask: GroupUpdateFlags
-        let mask = GroupUpdateFlags::new(crate::util::read_u32_le(&mut r)?);
-
-        let mask_status = if mask.is_status() {
-            // status: GroupMemberOnlineStatus
-            let status = GroupMemberOnlineStatus::new(crate::util::read_u8_le(&mut r)?);
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Status {
-                status,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_cur_hp = if mask.is_cur_hp() {
-            // current_health: u32
-            let current_health = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurHp {
-                current_health,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_max_hp = if mask.is_max_hp() {
-            // max_health: u32
-            let max_health = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxHp {
-                max_health,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_power_type = if mask.is_power_type() {
-            // power: Power
-            let power = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PowerType {
-                power,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_cur_power = if mask.is_cur_power() {
-            // current_power: u16
-            let current_power = crate::util::read_u16_le(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_CurPower {
-                current_power,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_max_power = if mask.is_max_power() {
-            // max_power: u16
-            let max_power = crate::util::read_u16_le(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_MaxPower {
-                max_power,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_level = if mask.is_level() {
-            // level: Level16
-            let level = Level::new(crate::util::read_u16_le(&mut r)? as u8);
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Level {
-                level,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_zone = if mask.is_zone() {
-            // area: Area
-            let area = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Zone {
-                area,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_position = if mask.is_position() {
-            // position_x: u16
-            let position_x = crate::util::read_u16_le(&mut r)?;
-
-            // position_y: u16
-            let position_y = crate::util::read_u16_le(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Position {
-                position_x,
-                position_y,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_auras = if mask.is_auras() {
-            // auras: AuraMask
-            let auras = AuraMask::read(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_Auras {
-                auras,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_pet_guid = if mask.is_pet_guid() {
-            // pet: Guid
-            let pet = crate::util::read_guid(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetGuid {
-                pet,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_pet_name = if mask.is_pet_name() {
-            // pet_name: CString
-            let pet_name = {
-                let pet_name = crate::util::read_c_string_to_vec(&mut r)?;
-                String::from_utf8(pet_name)?
-            };
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetName {
-                pet_name,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_pet_model_id = if mask.is_pet_model_id() {
-            // pet_display_id: u16
-            let pet_display_id = crate::util::read_u16_le(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetModelId {
-                pet_display_id,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_pet_cur_hp = if mask.is_pet_cur_hp() {
-            // pet_current_health: u32
-            let pet_current_health = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurHp {
-                pet_current_health,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_pet_max_hp = if mask.is_pet_max_hp() {
-            // pet_max_health: u32
-            let pet_max_health = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxHp {
-                pet_max_health,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_pet_power_type = if mask.is_pet_power_type() {
-            // pet_power_type: Power
-            let pet_power_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetPowerType {
-                pet_power_type,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_pet_cur_power = if mask.is_pet_cur_power() {
-            // pet_current_power: u16
-            let pet_current_power = crate::util::read_u16_le(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetCurPower {
-                pet_current_power,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_pet_max_power = if mask.is_pet_max_power() {
-            // pet_max_power: u16
-            let pet_max_power = crate::util::read_u16_le(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetMaxPower {
-                pet_max_power,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_pet_auras = if mask.is_pet_auras() {
-            // pet_auras: AuraMask
-            let pet_auras = AuraMask::read(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetAuras {
-                pet_auras,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask_vehicle_seat = if mask.is_vehicle_seat() {
-            // transport: u32
-            let transport = crate::util::read_u32_le(&mut r)?;
-
-            Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_VehicleSeat {
-                transport,
-            })
-        }
-        else {
-            None
-        };
-
-        let mask = SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags {
-            inner: mask.as_int(),
-            status: mask_status,
-            cur_hp: mask_cur_hp,
-            max_hp: mask_max_hp,
-            power_type: mask_power_type,
-            cur_power: mask_cur_power,
-            max_power: mask_max_power,
-            level: mask_level,
-            zone: mask_zone,
-            position: mask_position,
-            auras: mask_auras,
-            pet_guid: mask_pet_guid,
-            pet_name: mask_pet_name,
-            pet_model_id: mask_pet_model_id,
-            pet_cur_hp: mask_pet_cur_hp,
-            pet_max_hp: mask_pet_max_hp,
-            pet_power_type: mask_pet_power_type,
-            pet_cur_power: mask_pet_cur_power,
-            pet_max_power: mask_pet_max_power,
-            pet_auras: mask_pet_auras,
-            vehicle_seat: mask_vehicle_seat,
-        };
-
-        Ok(Self {
-            guid,
-            mask,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

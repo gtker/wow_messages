@@ -14,6 +14,22 @@ pub struct SMSG_UPDATE_LAST_INSTANCE {
 }
 
 impl crate::private::Sealed for SMSG_UPDATE_LAST_INSTANCE {}
+impl SMSG_UPDATE_LAST_INSTANCE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0320, size: body_size });
+        }
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            map,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_UPDATE_LAST_INSTANCE {
     const OPCODE: u32 = 0x0320;
 
@@ -59,17 +75,8 @@ impl crate::Message for SMSG_UPDATE_LAST_INSTANCE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0320, size: body_size });
-        }
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            map,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

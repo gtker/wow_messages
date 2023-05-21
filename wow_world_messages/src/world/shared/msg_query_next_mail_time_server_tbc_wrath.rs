@@ -20,6 +20,35 @@ pub struct MSG_QUERY_NEXT_MAIL_TIME_Server {
 }
 
 impl crate::private::Sealed for MSG_QUERY_NEXT_MAIL_TIME_Server {}
+impl MSG_QUERY_NEXT_MAIL_TIME_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(8..=16777215).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0284, size: body_size });
+        }
+
+        // float: u32
+        let float = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_mails: u32
+        let amount_of_mails = crate::util::read_u32_le(&mut r)?;
+
+        // mails: ReceivedMail[amount_of_mails]
+        let mails = {
+            let mut mails = Vec::with_capacity(amount_of_mails as usize);
+            for _ in 0..amount_of_mails {
+                mails.push(ReceivedMail::read(&mut r)?);
+            }
+            mails
+        };
+
+        Ok(Self {
+            float,
+            mails,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
     const OPCODE: u32 = 0x0284;
 
@@ -101,30 +130,8 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(8..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0284, size: body_size });
-        }
-
-        // float: u32
-        let float = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_mails: u32
-        let amount_of_mails = crate::util::read_u32_le(&mut r)?;
-
-        // mails: ReceivedMail[amount_of_mails]
-        let mails = {
-            let mut mails = Vec::with_capacity(amount_of_mails as usize);
-            for _ in 0..amount_of_mails {
-                mails.push(ReceivedMail::read(&mut r)?);
-            }
-            mails
-        };
-
-        Ok(Self {
-            float,
-            mails,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

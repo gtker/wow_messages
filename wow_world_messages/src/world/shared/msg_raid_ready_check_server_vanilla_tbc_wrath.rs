@@ -17,6 +17,38 @@ pub struct MSG_RAID_READY_CHECK_Server {
 }
 
 impl crate::private::Sealed for MSG_RAID_READY_CHECK_Server {}
+impl MSG_RAID_READY_CHECK_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size > 9 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0322, size: body_size });
+        }
+
+        // optional state_check
+        let current_size = {
+            0
+        };
+        let state_check = if current_size < body_size as usize {
+            // guid: Guid
+            let guid = crate::util::read_guid(&mut r)?;
+
+            // state: u8
+            let state = crate::util::read_u8_le(&mut r)?;
+
+            Some(MSG_RAID_READY_CHECK_Server_state_check {
+                guid,
+                state,
+            })
+        } else {
+            None
+        };
+
+        Ok(Self {
+            state_check,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_RAID_READY_CHECK_Server {
     const OPCODE: u32 = 0x0322;
 
@@ -75,33 +107,8 @@ impl crate::Message for MSG_RAID_READY_CHECK_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size > 9 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0322, size: body_size });
-        }
-
-        // optional state_check
-        let current_size = {
-            0
-        };
-        let state_check = if current_size < body_size as usize {
-            // guid: Guid
-            let guid = crate::util::read_guid(&mut r)?;
-
-            // state: u8
-            let state = crate::util::read_u8_le(&mut r)?;
-
-            Some(MSG_RAID_READY_CHECK_Server_state_check {
-                guid,
-                state,
-            })
-        } else {
-            None
-        };
-
-        Ok(Self {
-            state_check,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

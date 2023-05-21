@@ -24,6 +24,42 @@ pub struct SMSG_START_MIRROR_TIMER {
 }
 
 impl crate::private::Sealed for SMSG_START_MIRROR_TIMER {}
+impl SMSG_START_MIRROR_TIMER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 21 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D9, size: body_size });
+        }
+
+        // timer: TimerType
+        let timer = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // time_remaining: u32
+        let time_remaining = crate::util::read_u32_le(&mut r)?;
+
+        // duration: u32
+        let duration = crate::util::read_u32_le(&mut r)?;
+
+        // scale: u32
+        let scale = crate::util::read_u32_le(&mut r)?;
+
+        // is_frozen: Bool
+        let is_frozen = crate::util::read_u8_le(&mut r)? != 0;
+
+        // id: u32
+        let id = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            timer,
+            time_remaining,
+            duration,
+            scale,
+            is_frozen,
+            id,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_START_MIRROR_TIMER {
     const OPCODE: u32 = 0x01d9;
 
@@ -94,37 +130,8 @@ impl crate::Message for SMSG_START_MIRROR_TIMER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 21 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D9, size: body_size });
-        }
-
-        // timer: TimerType
-        let timer = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // time_remaining: u32
-        let time_remaining = crate::util::read_u32_le(&mut r)?;
-
-        // duration: u32
-        let duration = crate::util::read_u32_le(&mut r)?;
-
-        // scale: u32
-        let scale = crate::util::read_u32_le(&mut r)?;
-
-        // is_frozen: Bool
-        let is_frozen = crate::util::read_u8_le(&mut r)? != 0;
-
-        // id: u32
-        let id = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            timer,
-            time_remaining,
-            duration,
-            scale,
-            is_frozen,
-            id,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -16,6 +16,32 @@ pub struct SMSG_SOCKET_GEMS_RESULT {
 }
 
 impl crate::private::Sealed for SMSG_SOCKET_GEMS_RESULT {}
+impl SMSG_SOCKET_GEMS_RESULT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 20 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x050B, size: body_size });
+        }
+
+        // item: Guid
+        let item = crate::util::read_guid(&mut r)?;
+
+        // sockets: u32[3]
+        let sockets = {
+            let mut sockets = [u32::default(); 3];
+            for i in sockets.iter_mut() {
+                *i = crate::util::read_u32_le(&mut r)?;
+            }
+            sockets
+        };
+
+        Ok(Self {
+            item,
+            sockets,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SOCKET_GEMS_RESULT {
     const OPCODE: u32 = 0x050b;
 
@@ -76,27 +102,8 @@ impl crate::Message for SMSG_SOCKET_GEMS_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 20 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x050B, size: body_size });
-        }
-
-        // item: Guid
-        let item = crate::util::read_guid(&mut r)?;
-
-        // sockets: u32[3]
-        let sockets = {
-            let mut sockets = [u32::default(); 3];
-            for i in sockets.iter_mut() {
-                *i = crate::util::read_u32_le(&mut r)?;
-            }
-            sockets
-        };
-
-        Ok(Self {
-            item,
-            sockets,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

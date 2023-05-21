@@ -27,6 +27,50 @@ pub struct SMSG_QUESTGIVER_QUEST_LIST {
 }
 
 impl crate::private::Sealed for SMSG_QUESTGIVER_QUEST_LIST {}
+impl SMSG_QUESTGIVER_QUEST_LIST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(18..=70161).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0185, size: body_size });
+        }
+
+        // npc: Guid
+        let npc = crate::util::read_guid(&mut r)?;
+
+        // title: CString
+        let title = {
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(title)?
+        };
+
+        // emote_delay: u32
+        let emote_delay = crate::util::read_u32_le(&mut r)?;
+
+        // emote: u32
+        let emote = crate::util::read_u32_le(&mut r)?;
+
+        // amount_of_entries: u8
+        let amount_of_entries = crate::util::read_u8_le(&mut r)?;
+
+        // quest_items: QuestItem[amount_of_entries]
+        let quest_items = {
+            let mut quest_items = Vec::with_capacity(amount_of_entries as usize);
+            for _ in 0..amount_of_entries {
+                quest_items.push(QuestItem::read(&mut r)?);
+            }
+            quest_items
+        };
+
+        Ok(Self {
+            npc,
+            title,
+            emote_delay,
+            emote,
+            quest_items,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_QUESTGIVER_QUEST_LIST {
     const OPCODE: u32 = 0x0185;
 
@@ -129,45 +173,8 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_LIST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(18..=70161).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0185, size: body_size });
-        }
-
-        // npc: Guid
-        let npc = crate::util::read_guid(&mut r)?;
-
-        // title: CString
-        let title = {
-            let title = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(title)?
-        };
-
-        // emote_delay: u32
-        let emote_delay = crate::util::read_u32_le(&mut r)?;
-
-        // emote: u32
-        let emote = crate::util::read_u32_le(&mut r)?;
-
-        // amount_of_entries: u8
-        let amount_of_entries = crate::util::read_u8_le(&mut r)?;
-
-        // quest_items: QuestItem[amount_of_entries]
-        let quest_items = {
-            let mut quest_items = Vec::with_capacity(amount_of_entries as usize);
-            for _ in 0..amount_of_entries {
-                quest_items.push(QuestItem::read(&mut r)?);
-            }
-            quest_items
-        };
-
-        Ok(Self {
-            npc,
-            title,
-            emote_delay,
-            emote,
-            quest_items,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

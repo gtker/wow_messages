@@ -18,6 +18,26 @@ pub struct SMSG_ALL_ACHIEVEMENT_DATA {
 }
 
 impl crate::private::Sealed for SMSG_ALL_ACHIEVEMENT_DATA {}
+impl SMSG_ALL_ACHIEVEMENT_DATA {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size > 16777215 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x047D, size: body_size });
+        }
+
+        // done: AchievementDoneArray
+        let done = crate::util::read_achievement_done(&mut r)?;
+
+        // in_progress: AchievementInProgressArray
+        let in_progress = crate::util::read_achievement_in_progress(&mut r)?;
+
+        Ok(Self {
+            done,
+            in_progress,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
     const OPCODE: u32 = 0x047d;
 
@@ -68,21 +88,8 @@ impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size > 16777215 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x047D, size: body_size });
-        }
-
-        // done: AchievementDoneArray
-        let done = crate::util::read_achievement_done(&mut r)?;
-
-        // in_progress: AchievementInProgressArray
-        let in_progress = crate::util::read_achievement_in_progress(&mut r)?;
-
-        Ok(Self {
-            done,
-            in_progress,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

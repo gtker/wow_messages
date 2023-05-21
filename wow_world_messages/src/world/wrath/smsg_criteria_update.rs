@@ -31,6 +31,46 @@ pub struct SMSG_CRITERIA_UPDATE {
 }
 
 impl crate::private::Sealed for SMSG_CRITERIA_UPDATE {}
+impl SMSG_CRITERIA_UPDATE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(24..=38).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046A, size: body_size });
+        }
+
+        // achievement: u32
+        let achievement = crate::util::read_u32_le(&mut r)?;
+
+        // progress_counter: PackedGuid
+        let progress_counter = crate::util::read_packed_guid(&mut r)?;
+
+        // player: PackedGuid
+        let player = crate::util::read_packed_guid(&mut r)?;
+
+        // flags: u32
+        let flags = crate::util::read_u32_le(&mut r)?;
+
+        // time: DateTime
+        let time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+        // time_elapsed: Seconds
+        let time_elapsed = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
+
+        // unknown: u32
+        let unknown = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            achievement,
+            progress_counter,
+            player,
+            flags,
+            time,
+            time_elapsed,
+            unknown,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CRITERIA_UPDATE {
     const OPCODE: u32 = 0x046a;
 
@@ -106,41 +146,8 @@ impl crate::Message for SMSG_CRITERIA_UPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(24..=38).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046A, size: body_size });
-        }
-
-        // achievement: u32
-        let achievement = crate::util::read_u32_le(&mut r)?;
-
-        // progress_counter: PackedGuid
-        let progress_counter = crate::util::read_packed_guid(&mut r)?;
-
-        // player: PackedGuid
-        let player = crate::util::read_packed_guid(&mut r)?;
-
-        // flags: u32
-        let flags = crate::util::read_u32_le(&mut r)?;
-
-        // time: DateTime
-        let time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-        // time_elapsed: Seconds
-        let time_elapsed = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());
-
-        // unknown: u32
-        let unknown = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            achievement,
-            progress_counter,
-            player,
-            flags,
-            time,
-            time_elapsed,
-            unknown,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

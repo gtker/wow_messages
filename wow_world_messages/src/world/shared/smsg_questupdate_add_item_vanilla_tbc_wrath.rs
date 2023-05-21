@@ -14,6 +14,26 @@ pub struct SMSG_QUESTUPDATE_ADD_ITEM {
 }
 
 impl crate::private::Sealed for SMSG_QUESTUPDATE_ADD_ITEM {}
+impl SMSG_QUESTUPDATE_ADD_ITEM {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x019A, size: body_size });
+        }
+
+        // required_item_id: u32
+        let required_item_id = crate::util::read_u32_le(&mut r)?;
+
+        // items_required: u32
+        let items_required = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            required_item_id,
+            items_required,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_QUESTUPDATE_ADD_ITEM {
     const OPCODE: u32 = 0x019a;
 
@@ -64,21 +84,8 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_ITEM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x019A, size: body_size });
-        }
-
-        // required_item_id: u32
-        let required_item_id = crate::util::read_u32_le(&mut r)?;
-
-        // items_required: u32
-        let items_required = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            required_item_id,
-            items_required,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

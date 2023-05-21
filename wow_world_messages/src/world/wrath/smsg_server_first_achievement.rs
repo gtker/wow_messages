@@ -21,6 +21,37 @@ pub struct SMSG_SERVER_FIRST_ACHIEVEMENT {
 }
 
 impl crate::private::Sealed for SMSG_SERVER_FIRST_ACHIEVEMENT {}
+impl SMSG_SERVER_FIRST_ACHIEVEMENT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(14..=269).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0498, size: body_size });
+        }
+
+        // name: CString
+        let name = {
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(name)?
+        };
+
+        // player: Guid
+        let player = crate::util::read_guid(&mut r)?;
+
+        // achievement: u32
+        let achievement = crate::util::read_u32_le(&mut r)?;
+
+        // link_type: AchievementNameLinkType
+        let link_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            name,
+            player,
+            achievement,
+            link_type,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_SERVER_FIRST_ACHIEVEMENT {
     const OPCODE: u32 = 0x0498;
 
@@ -85,32 +116,8 @@ impl crate::Message for SMSG_SERVER_FIRST_ACHIEVEMENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(14..=269).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0498, size: body_size });
-        }
-
-        // name: CString
-        let name = {
-            let name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(name)?
-        };
-
-        // player: Guid
-        let player = crate::util::read_guid(&mut r)?;
-
-        // achievement: u32
-        let achievement = crate::util::read_u32_le(&mut r)?;
-
-        // link_type: AchievementNameLinkType
-        let link_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            name,
-            player,
-            achievement,
-            link_type,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

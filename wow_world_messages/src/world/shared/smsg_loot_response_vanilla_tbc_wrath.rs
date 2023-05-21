@@ -29,6 +29,62 @@ pub struct SMSG_LOOT_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_LOOT_RESPONSE {}
+impl SMSG_LOOT_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(14..=1551).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0160, size: body_size });
+        }
+
+        // guid: Guid
+        let guid = crate::util::read_guid(&mut r)?;
+
+        // loot_method: LootMethod
+        let loot_method = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let loot_method_if = match loot_method {
+            LootMethod::ErrorX => {
+                // loot_error: LootMethodError
+                let loot_error = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
+                    loot_error,
+                }
+            }
+            LootMethod::Corpse => SMSG_LOOT_RESPONSE_LootMethod::Corpse,
+            LootMethod::Pickpocketing => SMSG_LOOT_RESPONSE_LootMethod::Pickpocketing,
+            LootMethod::Fishing => SMSG_LOOT_RESPONSE_LootMethod::Fishing,
+            LootMethod::Disenchanting => SMSG_LOOT_RESPONSE_LootMethod::Disenchanting,
+            LootMethod::Skinning => SMSG_LOOT_RESPONSE_LootMethod::Skinning,
+            LootMethod::Fishinghole => SMSG_LOOT_RESPONSE_LootMethod::Fishinghole,
+            LootMethod::FishingFail => SMSG_LOOT_RESPONSE_LootMethod::FishingFail,
+            LootMethod::Insignia => SMSG_LOOT_RESPONSE_LootMethod::Insignia,
+        };
+
+        // gold: Gold
+        let gold = Gold::new(crate::util::read_u32_le(&mut r)?);
+
+        // amount_of_items: u8
+        let amount_of_items = crate::util::read_u8_le(&mut r)?;
+
+        // items: LootItem[amount_of_items]
+        let items = {
+            let mut items = Vec::with_capacity(amount_of_items as usize);
+            for _ in 0..amount_of_items {
+                items.push(LootItem::read(&mut r)?);
+            }
+            items
+        };
+
+        Ok(Self {
+            guid,
+            loot_method: loot_method_if,
+            gold,
+            items,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_LOOT_RESPONSE {
     const OPCODE: u32 = 0x0160;
 
@@ -145,57 +201,8 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(14..=1551).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0160, size: body_size });
-        }
-
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
-
-        // loot_method: LootMethod
-        let loot_method = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let loot_method_if = match loot_method {
-            LootMethod::ErrorX => {
-                // loot_error: LootMethodError
-                let loot_error = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
-                    loot_error,
-                }
-            }
-            LootMethod::Corpse => SMSG_LOOT_RESPONSE_LootMethod::Corpse,
-            LootMethod::Pickpocketing => SMSG_LOOT_RESPONSE_LootMethod::Pickpocketing,
-            LootMethod::Fishing => SMSG_LOOT_RESPONSE_LootMethod::Fishing,
-            LootMethod::Disenchanting => SMSG_LOOT_RESPONSE_LootMethod::Disenchanting,
-            LootMethod::Skinning => SMSG_LOOT_RESPONSE_LootMethod::Skinning,
-            LootMethod::Fishinghole => SMSG_LOOT_RESPONSE_LootMethod::Fishinghole,
-            LootMethod::FishingFail => SMSG_LOOT_RESPONSE_LootMethod::FishingFail,
-            LootMethod::Insignia => SMSG_LOOT_RESPONSE_LootMethod::Insignia,
-        };
-
-        // gold: Gold
-        let gold = Gold::new(crate::util::read_u32_le(&mut r)?);
-
-        // amount_of_items: u8
-        let amount_of_items = crate::util::read_u8_le(&mut r)?;
-
-        // items: LootItem[amount_of_items]
-        let items = {
-            let mut items = Vec::with_capacity(amount_of_items as usize);
-            for _ in 0..amount_of_items {
-                items.push(LootItem::read(&mut r)?);
-            }
-            items
-        };
-
-        Ok(Self {
-            guid,
-            loot_method: loot_method_if,
-            gold,
-            items,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

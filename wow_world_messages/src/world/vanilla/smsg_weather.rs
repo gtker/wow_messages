@@ -22,6 +22,34 @@ pub struct SMSG_WEATHER {
 }
 
 impl crate::private::Sealed for SMSG_WEATHER {}
+impl SMSG_WEATHER {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 13 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02F4, size: body_size });
+        }
+
+        // weather_type: WeatherType
+        let weather_type = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // grade: f32
+        let grade = crate::util::read_f32_le(&mut r)?;
+
+        // sound_id: u32
+        let sound_id = crate::util::read_u32_le(&mut r)?;
+
+        // change: WeatherChangeType
+        let change = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            weather_type,
+            grade,
+            sound_id,
+            change,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_WEATHER {
     const OPCODE: u32 = 0x02f4;
 
@@ -82,29 +110,8 @@ impl crate::Message for SMSG_WEATHER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 13 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02F4, size: body_size });
-        }
-
-        // weather_type: WeatherType
-        let weather_type = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // grade: f32
-        let grade = crate::util::read_f32_le(&mut r)?;
-
-        // sound_id: u32
-        let sound_id = crate::util::read_u32_le(&mut r)?;
-
-        // change: WeatherChangeType
-        let change = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            weather_type,
-            grade,
-            sound_id,
-            change,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

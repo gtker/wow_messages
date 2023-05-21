@@ -25,47 +25,8 @@ pub struct SMSG_AUTH_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_AUTH_RESPONSE {}
-impl crate::Message for SMSG_AUTH_RESPONSE {
-    const OPCODE: u32 = 0x01ee;
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // result: WorldResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
-
-        match &self.result {
-            SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
-                billing_flags,
-                billing_rested,
-                billing_time,
-            } => {
-                // billing_time: u32
-                w.write_all(&billing_time.to_le_bytes())?;
-
-                // billing_flags: u8
-                w.write_all(&billing_flags.to_le_bytes())?;
-
-                // billing_rested: u32
-                w.write_all(&billing_rested.to_le_bytes())?;
-
-            }
-            SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
-                queue_position,
-            } => {
-                // queue_position: u32
-                w.write_all(&queue_position.to_le_bytes())?;
-
-            }
-            _ => {}
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl SMSG_AUTH_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(1..=10).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01EE, size: body_size });
         }
@@ -183,6 +144,52 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
         Ok(Self {
             result: result_if,
         })
+    }
+
+}
+
+impl crate::Message for SMSG_AUTH_RESPONSE {
+    const OPCODE: u32 = 0x01ee;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // result: WorldResult
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
+
+        match &self.result {
+            SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
+                billing_flags,
+                billing_rested,
+                billing_time,
+            } => {
+                // billing_time: u32
+                w.write_all(&billing_time.to_le_bytes())?;
+
+                // billing_flags: u8
+                w.write_all(&billing_flags.to_le_bytes())?;
+
+                // billing_rested: u32
+                w.write_all(&billing_rested.to_le_bytes())?;
+
+            }
+            SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
+                queue_position,
+            } => {
+                // queue_position: u32
+                w.write_all(&queue_position.to_le_bytes())?;
+
+            }
+            _ => {}
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

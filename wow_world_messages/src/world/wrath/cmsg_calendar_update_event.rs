@@ -36,6 +36,68 @@ pub struct CMSG_CALENDAR_UPDATE_EVENT {
 }
 
 impl crate::private::Sealed for CMSG_CALENDAR_UPDATE_EVENT {}
+impl CMSG_CALENDAR_UPDATE_EVENT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(40..=550).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042E, size: body_size });
+        }
+
+        // event: Guid
+        let event = crate::util::read_guid(&mut r)?;
+
+        // invite_id: Guid
+        let invite_id = crate::util::read_guid(&mut r)?;
+
+        // title: CString
+        let title = {
+            let title = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(title)?
+        };
+
+        // description: CString
+        let description = {
+            let description = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(description)?
+        };
+
+        // event_type: u8
+        let event_type = crate::util::read_u8_le(&mut r)?;
+
+        // repeatable: Bool
+        let repeatable = crate::util::read_u8_le(&mut r)? != 0;
+
+        // maximum_invites: u32
+        let maximum_invites = crate::util::read_u32_le(&mut r)?;
+
+        // dungeon_id: u32
+        let dungeon_id = crate::util::read_u32_le(&mut r)?;
+
+        // event_time: DateTime
+        let event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+        // time_zone_time: DateTime
+        let time_zone_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
+
+        // flags: u32
+        let flags = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            event,
+            invite_id,
+            title,
+            description,
+            event_type,
+            repeatable,
+            maximum_invites,
+            dungeon_id,
+            event_time,
+            time_zone_time,
+            flags,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_CALENDAR_UPDATE_EVENT {
     const OPCODE: u32 = 0x042e;
 
@@ -139,63 +201,8 @@ impl crate::Message for CMSG_CALENDAR_UPDATE_EVENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(40..=550).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042E, size: body_size });
-        }
-
-        // event: Guid
-        let event = crate::util::read_guid(&mut r)?;
-
-        // invite_id: Guid
-        let invite_id = crate::util::read_guid(&mut r)?;
-
-        // title: CString
-        let title = {
-            let title = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(title)?
-        };
-
-        // description: CString
-        let description = {
-            let description = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(description)?
-        };
-
-        // event_type: u8
-        let event_type = crate::util::read_u8_le(&mut r)?;
-
-        // repeatable: Bool
-        let repeatable = crate::util::read_u8_le(&mut r)? != 0;
-
-        // maximum_invites: u32
-        let maximum_invites = crate::util::read_u32_le(&mut r)?;
-
-        // dungeon_id: u32
-        let dungeon_id = crate::util::read_u32_le(&mut r)?;
-
-        // event_time: DateTime
-        let event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-        // time_zone_time: DateTime
-        let time_zone_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
-
-        // flags: u32
-        let flags = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            event,
-            invite_id,
-            title,
-            description,
-            event_type,
-            repeatable,
-            maximum_invites,
-            dungeon_id,
-            event_time,
-            time_zone_time,
-            flags,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

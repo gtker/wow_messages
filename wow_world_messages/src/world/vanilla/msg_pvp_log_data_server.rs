@@ -23,6 +23,47 @@ pub struct MSG_PVP_LOG_DATA_Server {
 }
 
 impl crate::private::Sealed for MSG_PVP_LOG_DATA_Server {}
+impl MSG_PVP_LOG_DATA_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(5..=65535).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E0, size: body_size });
+        }
+
+        // status: BattlegroundEndStatus
+        let status = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let status_if = match status {
+            BattlegroundEndStatus::NotEnded => MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::NotEnded,
+            BattlegroundEndStatus::Ended => {
+                // winner: BattlegroundWinner
+                let winner = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::Ended {
+                    winner,
+                }
+            }
+        };
+
+        // amount_of_players: u32
+        let amount_of_players = crate::util::read_u32_le(&mut r)?;
+
+        // players: BattlegroundPlayer[amount_of_players]
+        let players = {
+            let mut players = Vec::with_capacity(amount_of_players as usize);
+            for _ in 0..amount_of_players {
+                players.push(BattlegroundPlayer::read(&mut r)?);
+            }
+            players
+        };
+
+        Ok(Self {
+            status: status_if,
+            players,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_PVP_LOG_DATA_Server {
     const OPCODE: u32 = 0x02e0;
 
@@ -149,42 +190,8 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(5..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E0, size: body_size });
-        }
-
-        // status: BattlegroundEndStatus
-        let status = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let status_if = match status {
-            BattlegroundEndStatus::NotEnded => MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::NotEnded,
-            BattlegroundEndStatus::Ended => {
-                // winner: BattlegroundWinner
-                let winner = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::Ended {
-                    winner,
-                }
-            }
-        };
-
-        // amount_of_players: u32
-        let amount_of_players = crate::util::read_u32_le(&mut r)?;
-
-        // players: BattlegroundPlayer[amount_of_players]
-        let players = {
-            let mut players = Vec::with_capacity(amount_of_players as usize);
-            for _ in 0..amount_of_players {
-                players.push(BattlegroundPlayer::read(&mut r)?);
-            }
-            players
-        };
-
-        Ok(Self {
-            status: status_if,
-            players,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

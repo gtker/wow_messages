@@ -17,6 +17,22 @@ pub struct CMSG_MOVE_CHNG_TRANSPORT {
 }
 
 impl crate::private::Sealed for CMSG_MOVE_CHNG_TRANSPORT {}
+impl CMSG_MOVE_CHNG_TRANSPORT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(30..=88).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x038D, size: body_size });
+        }
+
+        // info: MovementInfo
+        let info = MovementInfo::read(&mut r)?;
+
+        Ok(Self {
+            info,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_MOVE_CHNG_TRANSPORT {
     const OPCODE: u32 = 0x038d;
 
@@ -236,17 +252,8 @@ impl crate::Message for CMSG_MOVE_CHNG_TRANSPORT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(30..=88).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x038D, size: body_size });
-        }
-
-        // info: MovementInfo
-        let info = MovementInfo::read(&mut r)?;
-
-        Ok(Self {
-            info,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

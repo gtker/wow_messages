@@ -15,6 +15,25 @@ pub struct CMSG_DBLOOKUP {
 }
 
 impl crate::private::Sealed for CMSG_DBLOOKUP {}
+impl CMSG_DBLOOKUP {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(1..=256).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0002, size: body_size });
+        }
+
+        // query: CString
+        let query = {
+            let query = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(query)?
+        };
+
+        Ok(Self {
+            query,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_DBLOOKUP {
     const OPCODE: u32 = 0x0002;
 
@@ -64,20 +83,8 @@ impl crate::Message for CMSG_DBLOOKUP {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(1..=256).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0002, size: body_size });
-        }
-
-        // query: CString
-        let query = {
-            let query = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(query)?
-        };
-
-        Ok(Self {
-            query,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

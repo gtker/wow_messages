@@ -15,6 +15,26 @@ pub struct SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {
 }
 
 impl crate::private::Sealed for SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {}
+impl SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0463, size: body_size });
+        }
+
+        // data_type: u32
+        let data_type = crate::util::read_u32_le(&mut r)?;
+
+        // unknown1: u32
+        let unknown1 = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            data_type,
+            unknown1,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {
     const OPCODE: u32 = 0x0463;
 
@@ -65,21 +85,8 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0463, size: body_size });
-        }
-
-        // data_type: u32
-        let data_type = crate::util::read_u32_le(&mut r)?;
-
-        // unknown1: u32
-        let unknown1 = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            data_type,
-            unknown1,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

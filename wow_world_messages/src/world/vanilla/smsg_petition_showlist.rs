@@ -18,6 +18,35 @@ pub struct SMSG_PETITION_SHOWLIST {
 }
 
 impl crate::private::Sealed for SMSG_PETITION_SHOWLIST {}
+impl SMSG_PETITION_SHOWLIST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(9..=5129).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BC, size: body_size });
+        }
+
+        // npc: Guid
+        let npc = crate::util::read_guid(&mut r)?;
+
+        // amount_of_petitions: u8
+        let amount_of_petitions = crate::util::read_u8_le(&mut r)?;
+
+        // petitions: PetitionShowlist[amount_of_petitions]
+        let petitions = {
+            let mut petitions = Vec::with_capacity(amount_of_petitions as usize);
+            for _ in 0..amount_of_petitions {
+                petitions.push(PetitionShowlist::read(&mut r)?);
+            }
+            petitions
+        };
+
+        Ok(Self {
+            npc,
+            petitions,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PETITION_SHOWLIST {
     const OPCODE: u32 = 0x01bc;
 
@@ -99,30 +128,8 @@ impl crate::Message for SMSG_PETITION_SHOWLIST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(9..=5129).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BC, size: body_size });
-        }
-
-        // npc: Guid
-        let npc = crate::util::read_guid(&mut r)?;
-
-        // amount_of_petitions: u8
-        let amount_of_petitions = crate::util::read_u8_le(&mut r)?;
-
-        // petitions: PetitionShowlist[amount_of_petitions]
-        let petitions = {
-            let mut petitions = Vec::with_capacity(amount_of_petitions as usize);
-            for _ in 0..amount_of_petitions {
-                petitions.push(PetitionShowlist::read(&mut r)?);
-            }
-            petitions
-        };
-
-        Ok(Self {
-            npc,
-            petitions,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

@@ -21,6 +21,39 @@ pub struct CMSG_GMSURVEY_SUBMIT {
 }
 
 impl crate::private::Sealed for CMSG_GMSURVEY_SUBMIT {}
+impl CMSG_GMSURVEY_SUBMIT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(65..=2870).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x032A, size: body_size });
+        }
+
+        // survey_id: u32
+        let survey_id = crate::util::read_u32_le(&mut r)?;
+
+        // questions: GmSurveyQuestion[10]
+        let questions = {
+            let mut questions = [(); 10].map(|_| GmSurveyQuestion::default());
+            for i in questions.iter_mut() {
+                *i = GmSurveyQuestion::read(&mut r)?;
+            }
+            questions
+        };
+
+        // answer_comment: CString
+        let answer_comment = {
+            let answer_comment = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(answer_comment)?
+        };
+
+        Ok(Self {
+            survey_id,
+            questions,
+            answer_comment,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_GMSURVEY_SUBMIT {
     const OPCODE: u32 = 0x032a;
 
@@ -100,34 +133,8 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(65..=2870).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x032A, size: body_size });
-        }
-
-        // survey_id: u32
-        let survey_id = crate::util::read_u32_le(&mut r)?;
-
-        // questions: GmSurveyQuestion[10]
-        let questions = {
-            let mut questions = [(); 10].map(|_| GmSurveyQuestion::default());
-            for i in questions.iter_mut() {
-                *i = GmSurveyQuestion::read(&mut r)?;
-            }
-            questions
-        };
-
-        // answer_comment: CString
-        let answer_comment = {
-            let answer_comment = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(answer_comment)?
-        };
-
-        Ok(Self {
-            survey_id,
-            questions,
-            answer_comment,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

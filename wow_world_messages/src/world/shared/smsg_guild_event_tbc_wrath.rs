@@ -17,6 +17,36 @@ pub struct SMSG_GUILD_EVENT {
 }
 
 impl crate::private::Sealed for SMSG_GUILD_EVENT {}
+impl SMSG_GUILD_EVENT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(2..=65538).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0092, size: body_size });
+        }
+
+        // event: GuildEvent
+        let event = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // amount_of_events: u8
+        let amount_of_events = crate::util::read_u8_le(&mut r)?;
+
+        // event_descriptions: CString[amount_of_events]
+        let event_descriptions = {
+            let mut event_descriptions = Vec::with_capacity(amount_of_events as usize);
+            for _ in 0..amount_of_events {
+                let s = crate::util::read_c_string_to_vec(&mut r)?;
+                event_descriptions.push(String::from_utf8(s)?);
+            }
+            event_descriptions
+        };
+
+        Ok(Self {
+            event,
+            event_descriptions,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GUILD_EVENT {
     const OPCODE: u32 = 0x0092;
 
@@ -85,31 +115,8 @@ impl crate::Message for SMSG_GUILD_EVENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(2..=65538).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0092, size: body_size });
-        }
-
-        // event: GuildEvent
-        let event = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // amount_of_events: u8
-        let amount_of_events = crate::util::read_u8_le(&mut r)?;
-
-        // event_descriptions: CString[amount_of_events]
-        let event_descriptions = {
-            let mut event_descriptions = Vec::with_capacity(amount_of_events as usize);
-            for _ in 0..amount_of_events {
-                let s = crate::util::read_c_string_to_vec(&mut r)?;
-                event_descriptions.push(String::from_utf8(s)?);
-            }
-            event_descriptions
-        };
-
-        Ok(Self {
-            event,
-            event_descriptions,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

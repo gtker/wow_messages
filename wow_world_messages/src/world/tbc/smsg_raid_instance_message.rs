@@ -20,6 +20,30 @@ pub struct SMSG_RAID_INSTANCE_MESSAGE {
 }
 
 impl crate::private::Sealed for SMSG_RAID_INSTANCE_MESSAGE {}
+impl SMSG_RAID_INSTANCE_MESSAGE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 12 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02FA, size: body_size });
+        }
+
+        // message_type: RaidInstanceMessage
+        let message_type = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // time_left: u32
+        let time_left = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            message_type,
+            map,
+            time_left,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_RAID_INSTANCE_MESSAGE {
     const OPCODE: u32 = 0x02fa;
 
@@ -75,25 +99,8 @@ impl crate::Message for SMSG_RAID_INSTANCE_MESSAGE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02FA, size: body_size });
-        }
-
-        // message_type: RaidInstanceMessage
-        let message_type = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // time_left: u32
-        let time_left = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            message_type,
-            map,
-            time_left,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

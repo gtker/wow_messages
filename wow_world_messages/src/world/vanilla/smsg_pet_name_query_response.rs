@@ -16,6 +16,33 @@ pub struct SMSG_PET_NAME_QUERY_RESPONSE {
 }
 
 impl crate::private::Sealed for SMSG_PET_NAME_QUERY_RESPONSE {}
+impl SMSG_PET_NAME_QUERY_RESPONSE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(9..=264).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0053, size: body_size });
+        }
+
+        // pet_number: u32
+        let pet_number = crate::util::read_u32_le(&mut r)?;
+
+        // name: CString
+        let name = {
+            let name = crate::util::read_c_string_to_vec(&mut r)?;
+            String::from_utf8(name)?
+        };
+
+        // pet_name_timestamp: u32
+        let pet_name_timestamp = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            pet_number,
+            name,
+            pet_name_timestamp,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
     const OPCODE: u32 = 0x0053;
 
@@ -40,28 +67,8 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(9..=264).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0053, size: body_size });
-        }
-
-        // pet_number: u32
-        let pet_number = crate::util::read_u32_le(&mut r)?;
-
-        // name: CString
-        let name = {
-            let name = crate::util::read_c_string_to_vec(&mut r)?;
-            String::from_utf8(name)?
-        };
-
-        // pet_name_timestamp: u32
-        let pet_name_timestamp = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            pet_number,
-            name,
-            pet_name_timestamp,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

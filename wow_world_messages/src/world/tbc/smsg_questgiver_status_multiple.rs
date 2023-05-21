@@ -18,6 +18,31 @@ pub struct SMSG_QUESTGIVER_STATUS_MULTIPLE {
 }
 
 impl crate::private::Sealed for SMSG_QUESTGIVER_STATUS_MULTIPLE {}
+impl SMSG_QUESTGIVER_STATUS_MULTIPLE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=65535).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0417, size: body_size });
+        }
+
+        // amount_of_statuses: u32
+        let amount_of_statuses = crate::util::read_u32_le(&mut r)?;
+
+        // statuses: QuestGiverStatusReport[amount_of_statuses]
+        let statuses = {
+            let mut statuses = Vec::with_capacity(amount_of_statuses as usize);
+            for _ in 0..amount_of_statuses {
+                statuses.push(QuestGiverStatusReport::read(&mut r)?);
+            }
+            statuses
+        };
+
+        Ok(Self {
+            statuses,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_QUESTGIVER_STATUS_MULTIPLE {
     const OPCODE: u32 = 0x0417;
 
@@ -88,26 +113,8 @@ impl crate::Message for SMSG_QUESTGIVER_STATUS_MULTIPLE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0417, size: body_size });
-        }
-
-        // amount_of_statuses: u32
-        let amount_of_statuses = crate::util::read_u32_le(&mut r)?;
-
-        // statuses: QuestGiverStatusReport[amount_of_statuses]
-        let statuses = {
-            let mut statuses = Vec::with_capacity(amount_of_statuses as usize);
-            for _ in 0..amount_of_statuses {
-                statuses.push(QuestGiverStatusReport::read(&mut r)?);
-            }
-            statuses
-        };
-
-        Ok(Self {
-            statuses,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

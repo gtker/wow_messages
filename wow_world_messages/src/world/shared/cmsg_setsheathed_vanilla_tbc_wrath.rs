@@ -15,6 +15,22 @@ pub struct CMSG_SETSHEATHED {
 }
 
 impl crate::private::Sealed for CMSG_SETSHEATHED {}
+impl CMSG_SETSHEATHED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01E0, size: body_size });
+        }
+
+        // sheathed: SheathState
+        let sheathed = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        Ok(Self {
+            sheathed,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_SETSHEATHED {
     const OPCODE: u32 = 0x01e0;
 
@@ -29,17 +45,8 @@ impl crate::Message for CMSG_SETSHEATHED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01E0, size: body_size });
-        }
-
-        // sheathed: SheathState
-        let sheathed = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        Ok(Self {
-            sheathed,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

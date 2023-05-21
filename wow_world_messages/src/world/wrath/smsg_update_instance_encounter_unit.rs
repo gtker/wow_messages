@@ -30,6 +30,98 @@ pub struct SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
 }
 
 impl crate::private::Sealed for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {}
+impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(4..=14).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0214, size: body_size });
+        }
+
+        // frame: EncounterFrame
+        let frame = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        let frame_if = match frame {
+            EncounterFrame::Engage => {
+                // guid: PackedGuid
+                let guid = crate::util::read_packed_guid(&mut r)?;
+
+                // parameter1: u8
+                let parameter1 = crate::util::read_u8_le(&mut r)?;
+
+                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::Engage {
+                    guid,
+                    parameter1,
+                }
+            }
+            EncounterFrame::Disengage => {
+                // guid: PackedGuid
+                let guid = crate::util::read_packed_guid(&mut r)?;
+
+                // parameter1: u8
+                let parameter1 = crate::util::read_u8_le(&mut r)?;
+
+                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::Disengage {
+                    guid,
+                    parameter1,
+                }
+            }
+            EncounterFrame::UpdatePriority => {
+                // guid: PackedGuid
+                let guid = crate::util::read_packed_guid(&mut r)?;
+
+                // parameter1: u8
+                let parameter1 = crate::util::read_u8_le(&mut r)?;
+
+                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::UpdatePriority {
+                    guid,
+                    parameter1,
+                }
+            }
+            EncounterFrame::AddTimer => {
+                // parameter2: u8
+                let parameter2 = crate::util::read_u8_le(&mut r)?;
+
+                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::AddTimer {
+                    parameter2,
+                }
+            }
+            EncounterFrame::EnableObjective => {
+                // parameter2: u8
+                let parameter2 = crate::util::read_u8_le(&mut r)?;
+
+                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::EnableObjective {
+                    parameter2,
+                }
+            }
+            EncounterFrame::UpdateObjective => {
+                // parameter3: u8
+                let parameter3 = crate::util::read_u8_le(&mut r)?;
+
+                // parameter4: u8
+                let parameter4 = crate::util::read_u8_le(&mut r)?;
+
+                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::UpdateObjective {
+                    parameter3,
+                    parameter4,
+                }
+            }
+            EncounterFrame::DisableObjective => {
+                // parameter2: u8
+                let parameter2 = crate::util::read_u8_le(&mut r)?;
+
+                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::DisableObjective {
+                    parameter2,
+                }
+            }
+            EncounterFrame::RefreshFrames => SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::RefreshFrames,
+        };
+
+        Ok(Self {
+            frame: frame_if,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
     const OPCODE: u32 = 0x0214;
 
@@ -238,93 +330,8 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(4..=14).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0214, size: body_size });
-        }
-
-        // frame: EncounterFrame
-        let frame = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        let frame_if = match frame {
-            EncounterFrame::Engage => {
-                // guid: PackedGuid
-                let guid = crate::util::read_packed_guid(&mut r)?;
-
-                // parameter1: u8
-                let parameter1 = crate::util::read_u8_le(&mut r)?;
-
-                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::Engage {
-                    guid,
-                    parameter1,
-                }
-            }
-            EncounterFrame::Disengage => {
-                // guid: PackedGuid
-                let guid = crate::util::read_packed_guid(&mut r)?;
-
-                // parameter1: u8
-                let parameter1 = crate::util::read_u8_le(&mut r)?;
-
-                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::Disengage {
-                    guid,
-                    parameter1,
-                }
-            }
-            EncounterFrame::UpdatePriority => {
-                // guid: PackedGuid
-                let guid = crate::util::read_packed_guid(&mut r)?;
-
-                // parameter1: u8
-                let parameter1 = crate::util::read_u8_le(&mut r)?;
-
-                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::UpdatePriority {
-                    guid,
-                    parameter1,
-                }
-            }
-            EncounterFrame::AddTimer => {
-                // parameter2: u8
-                let parameter2 = crate::util::read_u8_le(&mut r)?;
-
-                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::AddTimer {
-                    parameter2,
-                }
-            }
-            EncounterFrame::EnableObjective => {
-                // parameter2: u8
-                let parameter2 = crate::util::read_u8_le(&mut r)?;
-
-                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::EnableObjective {
-                    parameter2,
-                }
-            }
-            EncounterFrame::UpdateObjective => {
-                // parameter3: u8
-                let parameter3 = crate::util::read_u8_le(&mut r)?;
-
-                // parameter4: u8
-                let parameter4 = crate::util::read_u8_le(&mut r)?;
-
-                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::UpdateObjective {
-                    parameter3,
-                    parameter4,
-                }
-            }
-            EncounterFrame::DisableObjective => {
-                // parameter2: u8
-                let parameter2 = crate::util::read_u8_le(&mut r)?;
-
-                SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::DisableObjective {
-                    parameter2,
-                }
-            }
-            EncounterFrame::RefreshFrames => SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::RefreshFrames,
-        };
-
-        Ok(Self {
-            frame: frame_if,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

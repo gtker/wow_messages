@@ -21,6 +21,30 @@ pub struct CMSG_BATTLEFIELD_LIST {
 }
 
 impl crate::private::Sealed for CMSG_BATTLEFIELD_LIST {}
+impl CMSG_BATTLEFIELD_LIST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 6 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023C, size: body_size });
+        }
+
+        // battleground_type: BattlegroundType
+        let battleground_type = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        // location: BattlefieldListLocation
+        let location = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // can_gain_exp: Bool
+        let can_gain_exp = crate::util::read_u8_le(&mut r)? != 0;
+
+        Ok(Self {
+            battleground_type,
+            location,
+            can_gain_exp,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_BATTLEFIELD_LIST {
     const OPCODE: u32 = 0x023c;
 
@@ -76,25 +100,8 @@ impl crate::Message for CMSG_BATTLEFIELD_LIST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 6 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023C, size: body_size });
-        }
-
-        // battleground_type: BattlegroundType
-        let battleground_type = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        // location: BattlefieldListLocation
-        let location = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // can_gain_exp: Bool
-        let can_gain_exp = crate::util::read_u8_le(&mut r)? != 0;
-
-        Ok(Self {
-            battleground_type,
-            location,
-            can_gain_exp,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

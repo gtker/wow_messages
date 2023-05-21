@@ -19,6 +19,30 @@ pub struct SMSG_MODIFY_COOLDOWN {
 }
 
 impl crate::private::Sealed for SMSG_MODIFY_COOLDOWN {}
+impl SMSG_MODIFY_COOLDOWN {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 16 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0491, size: body_size });
+        }
+
+        // spell: u32
+        let spell = crate::util::read_u32_le(&mut r)?;
+
+        // player: Guid
+        let player = crate::util::read_guid(&mut r)?;
+
+        // cooldown: Milliseconds
+        let cooldown = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
+
+        Ok(Self {
+            spell,
+            player,
+            cooldown,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_MODIFY_COOLDOWN {
     const OPCODE: u32 = 0x0491;
 
@@ -74,25 +98,8 @@ impl crate::Message for SMSG_MODIFY_COOLDOWN {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0491, size: body_size });
-        }
-
-        // spell: u32
-        let spell = crate::util::read_u32_le(&mut r)?;
-
-        // player: Guid
-        let player = crate::util::read_guid(&mut r)?;
-
-        // cooldown: Milliseconds
-        let cooldown = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
-
-        Ok(Self {
-            spell,
-            player,
-            cooldown,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

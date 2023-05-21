@@ -13,26 +13,8 @@ pub struct SMSG_IGNORE_LIST {
 }
 
 impl crate::private::Sealed for SMSG_IGNORE_LIST {}
-impl crate::Message for SMSG_IGNORE_LIST {
-    const OPCODE: u32 = 0x006b;
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // amount_of_ignored: u8
-        w.write_all(&(self.ignored.len() as u8).to_le_bytes())?;
-
-        // ignored: u64[amount_of_ignored]
-        for i in self.ignored.iter() {
-            w.write_all(&i.to_le_bytes())?;
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl SMSG_IGNORE_LIST {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(1..=2049).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x006B, size: body_size });
         }
@@ -52,6 +34,31 @@ impl crate::Message for SMSG_IGNORE_LIST {
         Ok(Self {
             ignored,
         })
+    }
+
+}
+
+impl crate::Message for SMSG_IGNORE_LIST {
+    const OPCODE: u32 = 0x006b;
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // amount_of_ignored: u8
+        w.write_all(&(self.ignored.len() as u8).to_le_bytes())?;
+
+        // ignored: u64[amount_of_ignored]
+        for i in self.ignored.iter() {
+            w.write_all(&i.to_le_bytes())?;
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

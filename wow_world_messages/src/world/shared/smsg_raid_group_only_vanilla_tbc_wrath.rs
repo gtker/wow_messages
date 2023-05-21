@@ -17,6 +17,26 @@ pub struct SMSG_RAID_GROUP_ONLY {
 }
 
 impl crate::private::Sealed for SMSG_RAID_GROUP_ONLY {}
+impl SMSG_RAID_GROUP_ONLY {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0286, size: body_size });
+        }
+
+        // homebind_timer: u32
+        let homebind_timer = crate::util::read_u32_le(&mut r)?;
+
+        // error: RaidGroupError
+        let error = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            homebind_timer,
+            error,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_RAID_GROUP_ONLY {
     const OPCODE: u32 = 0x0286;
 
@@ -67,21 +87,8 @@ impl crate::Message for SMSG_RAID_GROUP_ONLY {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0286, size: body_size });
-        }
-
-        // homebind_timer: u32
-        let homebind_timer = crate::util::read_u32_le(&mut r)?;
-
-        // error: RaidGroupError
-        let error = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            homebind_timer,
-            error,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

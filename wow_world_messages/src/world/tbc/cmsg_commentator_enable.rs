@@ -14,6 +14,22 @@ pub struct CMSG_COMMENTATOR_ENABLE {
 }
 
 impl crate::private::Sealed for CMSG_COMMENTATOR_ENABLE {}
+impl CMSG_COMMENTATOR_ENABLE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 4 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03B4, size: body_size });
+        }
+
+        // option: CommentatorEnableOption
+        let option = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            option,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_COMMENTATOR_ENABLE {
     const OPCODE: u32 = 0x03b4;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_COMMENTATOR_ENABLE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03B4, size: body_size });
-        }
-
-        // option: CommentatorEnableOption
-        let option = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            option,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

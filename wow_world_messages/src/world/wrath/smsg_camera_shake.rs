@@ -16,6 +16,26 @@ pub struct SMSG_CAMERA_SHAKE {
 }
 
 impl crate::private::Sealed for SMSG_CAMERA_SHAKE {}
+impl SMSG_CAMERA_SHAKE {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x050A, size: body_size });
+        }
+
+        // camera_shake_id: u32
+        let camera_shake_id = crate::util::read_u32_le(&mut r)?;
+
+        // unknown: u32
+        let unknown = crate::util::read_u32_le(&mut r)?;
+
+        Ok(Self {
+            camera_shake_id,
+            unknown,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CAMERA_SHAKE {
     const OPCODE: u32 = 0x050a;
 
@@ -66,21 +86,8 @@ impl crate::Message for SMSG_CAMERA_SHAKE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x050A, size: body_size });
-        }
-
-        // camera_shake_id: u32
-        let camera_shake_id = crate::util::read_u32_le(&mut r)?;
-
-        // unknown: u32
-        let unknown = crate::util::read_u32_le(&mut r)?;
-
-        Ok(Self {
-            camera_shake_id,
-            unknown,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

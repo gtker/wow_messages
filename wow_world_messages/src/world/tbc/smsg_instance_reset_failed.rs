@@ -18,6 +18,26 @@ pub struct SMSG_INSTANCE_RESET_FAILED {
 }
 
 impl crate::private::Sealed for SMSG_INSTANCE_RESET_FAILED {}
+impl SMSG_INSTANCE_RESET_FAILED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x031F, size: body_size });
+        }
+
+        // reason: InstanceResetFailedReason
+        let reason = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        // map: Map
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
+
+        Ok(Self {
+            reason,
+            map,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_INSTANCE_RESET_FAILED {
     const OPCODE: u32 = 0x031f;
 
@@ -68,21 +88,8 @@ impl crate::Message for SMSG_INSTANCE_RESET_FAILED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x031F, size: body_size });
-        }
-
-        // reason: InstanceResetFailedReason
-        let reason = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        // map: Map
-        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
-
-        Ok(Self {
-            reason,
-            map,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

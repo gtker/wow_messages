@@ -10,6 +10,18 @@ pub struct SMSG_CANCEL_COMBAT {
 }
 
 impl crate::private::Sealed for SMSG_CANCEL_COMBAT {}
+impl SMSG_CANCEL_COMBAT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 0 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x014E, size: body_size });
+        }
+
+        Ok(Self {
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_CANCEL_COMBAT {
     const OPCODE: u32 = 0x014e;
 
@@ -50,13 +62,8 @@ impl crate::Message for SMSG_CANCEL_COMBAT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x014E, size: body_size });
-        }
-
-        Ok(Self {
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

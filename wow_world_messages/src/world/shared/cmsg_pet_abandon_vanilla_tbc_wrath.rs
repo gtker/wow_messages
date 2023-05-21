@@ -14,6 +14,22 @@ pub struct CMSG_PET_ABANDON {
 }
 
 impl crate::private::Sealed for CMSG_PET_ABANDON {}
+impl CMSG_PET_ABANDON {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if body_size != 8 {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0176, size: body_size });
+        }
+
+        // pet: Guid
+        let pet = crate::util::read_guid(&mut r)?;
+
+        Ok(Self {
+            pet,
+        })
+    }
+
+}
+
 impl crate::Message for CMSG_PET_ABANDON {
     const OPCODE: u32 = 0x0176;
 
@@ -59,17 +75,8 @@ impl crate::Message for CMSG_PET_ABANDON {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0176, size: body_size });
-        }
-
-        // pet: Guid
-        let pet = crate::util::read_guid(&mut r)?;
-
-        Ok(Self {
-            pet,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

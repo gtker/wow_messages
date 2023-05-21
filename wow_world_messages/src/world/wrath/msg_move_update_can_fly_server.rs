@@ -19,6 +19,26 @@ pub struct MSG_MOVE_UPDATE_CAN_FLY_Server {
 }
 
 impl crate::private::Sealed for MSG_MOVE_UPDATE_CAN_FLY_Server {}
+impl MSG_MOVE_UPDATE_CAN_FLY_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(32..=97).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03AD, size: body_size });
+        }
+
+        // player: PackedGuid
+        let player = crate::util::read_packed_guid(&mut r)?;
+
+        // info: MovementInfo
+        let info = MovementInfo::read(&mut r)?;
+
+        Ok(Self {
+            player,
+            info,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_MOVE_UPDATE_CAN_FLY_Server {
     const OPCODE: u32 = 0x03ad;
 
@@ -243,21 +263,8 @@ impl crate::Message for MSG_MOVE_UPDATE_CAN_FLY_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(32..=97).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03AD, size: body_size });
-        }
-
-        // player: PackedGuid
-        let player = crate::util::read_packed_guid(&mut r)?;
-
-        // info: MovementInfo
-        let info = MovementInfo::read(&mut r)?;
-
-        Ok(Self {
-            player,
-            info,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

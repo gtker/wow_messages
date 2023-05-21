@@ -37,195 +37,8 @@ pub struct SMSG_PET_CAST_FAILED {
 }
 
 impl crate::private::Sealed for SMSG_PET_CAST_FAILED {}
-impl crate::Message for SMSG_PET_CAST_FAILED {
-    const OPCODE: u32 = 0x0138;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_PET_CAST_FAILED {{").unwrap();
-        // Members
-        writeln!(s, "    id = {};", self.id).unwrap();
-        writeln!(s, "    result = {};", SpellCastResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
-        writeln!(s, "    multiple_casts = {};", if self.multiple_casts { "TRUE" } else { "FALSE" }).unwrap();
-        match &self.result {
-            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClass {
-                item_class,
-                item_inventory_type,
-                item_sub_class,
-            } => {
-                writeln!(s, "    item_class = {};", item_class).unwrap();
-                writeln!(s, "    item_sub_class = {};", item_sub_class).unwrap();
-                writeln!(s, "    item_inventory_type = {};", item_inventory_type).unwrap();
-            }
-            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::RequiresArea {
-                area,
-            } => {
-                writeln!(s, "    area = {};", area.as_test_case_value()).unwrap();
-            }
-            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::RequiresSpellFocus {
-                spell_focus,
-            } => {
-                writeln!(s, "    spell_focus = {};", spell_focus).unwrap();
-            }
-            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::TotemCategory {
-                totem_categories,
-            } => {
-                write!(s, "    totem_categories = [").unwrap();
-                for v in totem_categories.as_slice() {
-                    write!(s, "{v:#04X}, ").unwrap();
-                }
-                writeln!(s, "];").unwrap();
-            }
-            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::Totems {
-                totems,
-            } => {
-                write!(s, "    totems = [").unwrap();
-                for v in totems.as_slice() {
-                    write!(s, "{v:#04X}, ").unwrap();
-                }
-                writeln!(s, "];").unwrap();
-            }
-            _ => {}
-        }
-
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 312_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "id", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "multiple_casts", "    ");
-        match &self.result {
-            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClass {
-                item_class,
-                item_inventory_type,
-                item_sub_class,
-            } => {
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_class", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_sub_class", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_inventory_type", "    ");
-            }
-            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::RequiresArea {
-                area,
-            } => {
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "    ");
-            }
-            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::RequiresSpellFocus {
-                spell_focus,
-            } => {
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_focus", "    ");
-            }
-            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::TotemCategory {
-                totem_categories,
-            } => {
-                writeln!(s, "    /* totem_categories: u32[2] start */").unwrap();
-                for (i, v) in totem_categories.iter().enumerate() {
-                    crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("totem_categories {i}"), "    ");
-                }
-                writeln!(s, "    /* totem_categories: u32[2] end */").unwrap();
-            }
-            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::Totems {
-                totems,
-            } => {
-                writeln!(s, "    /* totems: u32[2] start */").unwrap();
-                for (i, v) in totems.iter().enumerate() {
-                    crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("totems {i}"), "    ");
-                }
-                writeln!(s, "    /* totems: u32[2] end */").unwrap();
-            }
-            _ => {}
-        }
-
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("2.4.3".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
-    }
-
-    fn size_without_header(&self) -> u32 {
-        self.size() as u32
-    }
-
-    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // id: u32
-        w.write_all(&self.id.to_le_bytes())?;
-
-        // result: SpellCastResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
-
-        // multiple_casts: Bool
-        w.write_all(u8::from(self.multiple_casts).to_le_bytes().as_slice())?;
-
-        match &self.result {
-            SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClass {
-                item_class,
-                item_inventory_type,
-                item_sub_class,
-            } => {
-                // item_class: u32
-                w.write_all(&item_class.to_le_bytes())?;
-
-                // item_sub_class: u32
-                w.write_all(&item_sub_class.to_le_bytes())?;
-
-                // item_inventory_type: u32
-                w.write_all(&item_inventory_type.to_le_bytes())?;
-
-            }
-            SMSG_PET_CAST_FAILED_SpellCastResult::RequiresArea {
-                area,
-            } => {
-                // area: Area
-                w.write_all(&(area.as_int().to_le_bytes()))?;
-
-            }
-            SMSG_PET_CAST_FAILED_SpellCastResult::RequiresSpellFocus {
-                spell_focus,
-            } => {
-                // spell_focus: u32
-                w.write_all(&spell_focus.to_le_bytes())?;
-
-            }
-            SMSG_PET_CAST_FAILED_SpellCastResult::TotemCategory {
-                totem_categories,
-            } => {
-                // totem_categories: u32[2]
-                for i in totem_categories.iter() {
-                    w.write_all(&i.to_le_bytes())?;
-                }
-
-            }
-            SMSG_PET_CAST_FAILED_SpellCastResult::Totems {
-                totems,
-            } => {
-                // totems: u32[2]
-                for i in totems.iter() {
-                    w.write_all(&i.to_le_bytes())?;
-                }
-
-            }
-            _ => {}
-        }
-
-        Ok(())
-    }
-
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+impl SMSG_PET_CAST_FAILED {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(6..=18).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0138, size: body_size });
         }
@@ -471,6 +284,200 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
             result: result_if,
             multiple_casts,
         })
+    }
+
+}
+
+impl crate::Message for SMSG_PET_CAST_FAILED {
+    const OPCODE: u32 = 0x0138;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_PET_CAST_FAILED {{").unwrap();
+        // Members
+        writeln!(s, "    id = {};", self.id).unwrap();
+        writeln!(s, "    result = {};", SpellCastResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    multiple_casts = {};", if self.multiple_casts { "TRUE" } else { "FALSE" }).unwrap();
+        match &self.result {
+            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClass {
+                item_class,
+                item_inventory_type,
+                item_sub_class,
+            } => {
+                writeln!(s, "    item_class = {};", item_class).unwrap();
+                writeln!(s, "    item_sub_class = {};", item_sub_class).unwrap();
+                writeln!(s, "    item_inventory_type = {};", item_inventory_type).unwrap();
+            }
+            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::RequiresArea {
+                area,
+            } => {
+                writeln!(s, "    area = {};", area.as_test_case_value()).unwrap();
+            }
+            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::RequiresSpellFocus {
+                spell_focus,
+            } => {
+                writeln!(s, "    spell_focus = {};", spell_focus).unwrap();
+            }
+            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::TotemCategory {
+                totem_categories,
+            } => {
+                write!(s, "    totem_categories = [").unwrap();
+                for v in totem_categories.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+            }
+            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::Totems {
+                totems,
+            } => {
+                write!(s, "    totems = [").unwrap();
+                for v in totems.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 312_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "multiple_casts", "    ");
+        match &self.result {
+            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClass {
+                item_class,
+                item_inventory_type,
+                item_sub_class,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_class", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_sub_class", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_inventory_type", "    ");
+            }
+            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::RequiresArea {
+                area,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "    ");
+            }
+            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::RequiresSpellFocus {
+                spell_focus,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_focus", "    ");
+            }
+            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::TotemCategory {
+                totem_categories,
+            } => {
+                writeln!(s, "    /* totem_categories: u32[2] start */").unwrap();
+                for (i, v) in totem_categories.iter().enumerate() {
+                    crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("totem_categories {i}"), "    ");
+                }
+                writeln!(s, "    /* totem_categories: u32[2] end */").unwrap();
+            }
+            crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::Totems {
+                totems,
+            } => {
+                writeln!(s, "    /* totems: u32[2] start */").unwrap();
+                for (i, v) in totems.iter().enumerate() {
+                    crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("totems {i}"), "    ");
+                }
+                writeln!(s, "    /* totems: u32[2] end */").unwrap();
+            }
+            _ => {}
+        }
+
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("2.4.3".to_string())).unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        Some(s)
+    }
+
+    fn size_without_header(&self) -> u32 {
+        self.size() as u32
+    }
+
+    fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // id: u32
+        w.write_all(&self.id.to_le_bytes())?;
+
+        // result: SpellCastResult
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
+
+        // multiple_casts: Bool
+        w.write_all(u8::from(self.multiple_casts).to_le_bytes().as_slice())?;
+
+        match &self.result {
+            SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClass {
+                item_class,
+                item_inventory_type,
+                item_sub_class,
+            } => {
+                // item_class: u32
+                w.write_all(&item_class.to_le_bytes())?;
+
+                // item_sub_class: u32
+                w.write_all(&item_sub_class.to_le_bytes())?;
+
+                // item_inventory_type: u32
+                w.write_all(&item_inventory_type.to_le_bytes())?;
+
+            }
+            SMSG_PET_CAST_FAILED_SpellCastResult::RequiresArea {
+                area,
+            } => {
+                // area: Area
+                w.write_all(&(area.as_int().to_le_bytes()))?;
+
+            }
+            SMSG_PET_CAST_FAILED_SpellCastResult::RequiresSpellFocus {
+                spell_focus,
+            } => {
+                // spell_focus: u32
+                w.write_all(&spell_focus.to_le_bytes())?;
+
+            }
+            SMSG_PET_CAST_FAILED_SpellCastResult::TotemCategory {
+                totem_categories,
+            } => {
+                // totem_categories: u32[2]
+                for i in totem_categories.iter() {
+                    w.write_all(&i.to_le_bytes())?;
+                }
+
+            }
+            SMSG_PET_CAST_FAILED_SpellCastResult::Totems {
+                totems,
+            } => {
+                // totems: u32[2]
+                for i in totems.iter() {
+                    w.write_all(&i.to_le_bytes())?;
+                }
+
+            }
+            _ => {}
+        }
+
+        Ok(())
+    }
+
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

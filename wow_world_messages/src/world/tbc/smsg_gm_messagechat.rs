@@ -50,6 +50,1320 @@ pub struct SMSG_GM_MESSAGECHAT {
 }
 
 impl crate::private::Sealed for SMSG_GM_MESSAGECHAT {}
+impl SMSG_GM_MESSAGECHAT {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(19..=24022).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03B2, size: body_size });
+        }
+
+        // chat_type: ChatType
+        let chat_type = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        // language: Language
+        let language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+
+        let chat_type_if = match chat_type {
+            ChatType::System => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::System {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Say => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Say {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Party => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Party {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Raid => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Raid {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Guild => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Guild {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Officer => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Officer {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Yell => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Yell {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Whisper => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Whisper {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::WhisperInform => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::WhisperInform {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Reply => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Reply {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Emote => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Emote {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::TextEmote => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::TextEmote {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::MonsterSay => {
+                // sender: SizedCString
+                let sender = {
+                    let sender = crate::util::read_u32_le(&mut r)?;
+                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
+                    String::from_utf8(sender)?
+                };
+
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
+
+                // message1: SizedCString
+                let message1 = {
+                    let message1 = crate::util::read_u32_le(&mut r)?;
+                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
+                    String::from_utf8(message1)?
+                };
+
+                // chat_tag1: PlayerChatTag
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_GM_MESSAGECHAT_ChatType::MonsterSay {
+                    chat_tag1,
+                    message1,
+                    sender,
+                    target1,
+                }
+            }
+            ChatType::MonsterParty => {
+                // sender: SizedCString
+                let sender = {
+                    let sender = crate::util::read_u32_le(&mut r)?;
+                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
+                    String::from_utf8(sender)?
+                };
+
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
+
+                // message1: SizedCString
+                let message1 = {
+                    let message1 = crate::util::read_u32_le(&mut r)?;
+                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
+                    String::from_utf8(message1)?
+                };
+
+                // chat_tag1: PlayerChatTag
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_GM_MESSAGECHAT_ChatType::MonsterParty {
+                    chat_tag1,
+                    message1,
+                    sender,
+                    target1,
+                }
+            }
+            ChatType::MonsterYell => {
+                // sender: SizedCString
+                let sender = {
+                    let sender = crate::util::read_u32_le(&mut r)?;
+                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
+                    String::from_utf8(sender)?
+                };
+
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
+
+                // message1: SizedCString
+                let message1 = {
+                    let message1 = crate::util::read_u32_le(&mut r)?;
+                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
+                    String::from_utf8(message1)?
+                };
+
+                // chat_tag1: PlayerChatTag
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_GM_MESSAGECHAT_ChatType::MonsterYell {
+                    chat_tag1,
+                    message1,
+                    sender,
+                    target1,
+                }
+            }
+            ChatType::MonsterWhisper => {
+                // sender: SizedCString
+                let sender = {
+                    let sender = crate::util::read_u32_le(&mut r)?;
+                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
+                    String::from_utf8(sender)?
+                };
+
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
+
+                // message1: SizedCString
+                let message1 = {
+                    let message1 = crate::util::read_u32_le(&mut r)?;
+                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
+                    String::from_utf8(message1)?
+                };
+
+                // chat_tag1: PlayerChatTag
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_GM_MESSAGECHAT_ChatType::MonsterWhisper {
+                    chat_tag1,
+                    message1,
+                    sender,
+                    target1,
+                }
+            }
+            ChatType::MonsterEmote => {
+                // sender: SizedCString
+                let sender = {
+                    let sender = crate::util::read_u32_le(&mut r)?;
+                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
+                    String::from_utf8(sender)?
+                };
+
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
+
+                // message1: SizedCString
+                let message1 = {
+                    let message1 = crate::util::read_u32_le(&mut r)?;
+                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
+                    String::from_utf8(message1)?
+                };
+
+                // chat_tag1: PlayerChatTag
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_GM_MESSAGECHAT_ChatType::MonsterEmote {
+                    chat_tag1,
+                    message1,
+                    sender,
+                    target1,
+                }
+            }
+            ChatType::Channel => {
+                // channel_name: CString
+                let channel_name = {
+                    let channel_name = crate::util::read_c_string_to_vec(&mut r)?;
+                    String::from_utf8(channel_name)?
+                };
+
+                // target4: Guid
+                let target4 = crate::util::read_guid(&mut r)?;
+
+                // message3: SizedCString
+                let message3 = {
+                    let message3 = crate::util::read_u32_le(&mut r)?;
+                    let message3 = crate::util::read_sized_c_string_to_vec(&mut r, message3)?;
+                    String::from_utf8(message3)?
+                };
+
+                // chat_tag3: PlayerChatTag
+                let chat_tag3 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_GM_MESSAGECHAT_ChatType::Channel {
+                    channel_name,
+                    chat_tag3,
+                    message3,
+                    target4,
+                }
+            }
+            ChatType::ChannelJoin => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::ChannelJoin {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::ChannelLeave => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::ChannelLeave {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::ChannelList => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::ChannelList {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::ChannelNotice => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::ChannelNotice {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::ChannelNoticeUser => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::ChannelNoticeUser {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Afk => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Afk {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Dnd => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Dnd {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Ignored => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Ignored {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Skill => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Skill {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Loot => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Loot {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Money => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Money {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Opening => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Opening {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Tradeskills => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Tradeskills {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::PetInfo => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::PetInfo {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::CombatMiscInfo => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::CombatMiscInfo {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::CombatXpGain => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::CombatXpGain {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::CombatHonorGain => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::CombatHonorGain {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::CombatFactionChange => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::CombatFactionChange {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::BgSystemNeutral => {
+                // target2: NamedGuid
+                let target2 = NamedGuid::read(&mut r)?;
+
+                // message2: SizedCString
+                let message2 = {
+                    let message2 = crate::util::read_u32_le(&mut r)?;
+                    let message2 = crate::util::read_sized_c_string_to_vec(&mut r, message2)?;
+                    String::from_utf8(message2)?
+                };
+
+                // chat_tag2: PlayerChatTag
+                let chat_tag2 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_GM_MESSAGECHAT_ChatType::BgSystemNeutral {
+                    chat_tag2,
+                    message2,
+                    target2,
+                }
+            }
+            ChatType::BgSystemAlliance => {
+                // target2: NamedGuid
+                let target2 = NamedGuid::read(&mut r)?;
+
+                // message2: SizedCString
+                let message2 = {
+                    let message2 = crate::util::read_u32_le(&mut r)?;
+                    let message2 = crate::util::read_sized_c_string_to_vec(&mut r, message2)?;
+                    String::from_utf8(message2)?
+                };
+
+                // chat_tag2: PlayerChatTag
+                let chat_tag2 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_GM_MESSAGECHAT_ChatType::BgSystemAlliance {
+                    chat_tag2,
+                    message2,
+                    target2,
+                }
+            }
+            ChatType::BgSystemHorde => {
+                // target2: NamedGuid
+                let target2 = NamedGuid::read(&mut r)?;
+
+                // message2: SizedCString
+                let message2 = {
+                    let message2 = crate::util::read_u32_le(&mut r)?;
+                    let message2 = crate::util::read_sized_c_string_to_vec(&mut r, message2)?;
+                    String::from_utf8(message2)?
+                };
+
+                // chat_tag2: PlayerChatTag
+                let chat_tag2 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_GM_MESSAGECHAT_ChatType::BgSystemHorde {
+                    chat_tag2,
+                    message2,
+                    target2,
+                }
+            }
+            ChatType::RaidLeader => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::RaidLeader {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::RaidWarning => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::RaidWarning {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::RaidBossWhisper => {
+                // sender: SizedCString
+                let sender = {
+                    let sender = crate::util::read_u32_le(&mut r)?;
+                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
+                    String::from_utf8(sender)?
+                };
+
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
+
+                // message1: SizedCString
+                let message1 = {
+                    let message1 = crate::util::read_u32_le(&mut r)?;
+                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
+                    String::from_utf8(message1)?
+                };
+
+                // chat_tag1: PlayerChatTag
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_GM_MESSAGECHAT_ChatType::RaidBossWhisper {
+                    chat_tag1,
+                    message1,
+                    sender,
+                    target1,
+                }
+            }
+            ChatType::RaidBossEmote => {
+                // sender: SizedCString
+                let sender = {
+                    let sender = crate::util::read_u32_le(&mut r)?;
+                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
+                    String::from_utf8(sender)?
+                };
+
+                // target1: NamedGuid
+                let target1 = NamedGuid::read(&mut r)?;
+
+                // message1: SizedCString
+                let message1 = {
+                    let message1 = crate::util::read_u32_le(&mut r)?;
+                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
+                    String::from_utf8(message1)?
+                };
+
+                // chat_tag1: PlayerChatTag
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                SMSG_GM_MESSAGECHAT_ChatType::RaidBossEmote {
+                    chat_tag1,
+                    message1,
+                    sender,
+                    target1,
+                }
+            }
+            ChatType::Filtered => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Filtered {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Battleground => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Battleground {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::BattlegroundLeader => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::BattlegroundLeader {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+            ChatType::Restricted => {
+                // target5: Guid
+                let target5 = crate::util::read_guid(&mut r)?;
+
+                // message4: SizedCString
+                let message4 = {
+                    let message4 = crate::util::read_u32_le(&mut r)?;
+                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
+                    String::from_utf8(message4)?
+                };
+
+                // chat_tag4: PlayerChatTag
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+                // sender_name: SizedCString
+                let sender_name = {
+                    let sender_name = crate::util::read_u32_le(&mut r)?;
+                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
+                    String::from_utf8(sender_name)?
+                };
+
+                SMSG_GM_MESSAGECHAT_ChatType::Restricted {
+                    chat_tag4,
+                    message4,
+                    sender_name,
+                    target5,
+                }
+            }
+        };
+
+        Ok(Self {
+            chat_type: chat_type_if,
+            language,
+        })
+    }
+
+}
+
 impl crate::Message for SMSG_GM_MESSAGECHAT {
     const OPCODE: u32 = 0x03b2;
 
@@ -2286,1315 +3600,8 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(19..=24022).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03B2, size: body_size });
-        }
-
-        // chat_type: ChatType
-        let chat_type = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        // language: Language
-        let language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
-
-        let chat_type_if = match chat_type {
-            ChatType::System => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::System {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Say => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Say {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Party => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Party {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Raid => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Raid {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Guild => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Guild {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Officer => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Officer {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Yell => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Yell {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Whisper => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Whisper {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::WhisperInform => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::WhisperInform {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Reply => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Reply {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Emote => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Emote {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::TextEmote => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::TextEmote {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::MonsterSay => {
-                // sender: SizedCString
-                let sender = {
-                    let sender = crate::util::read_u32_le(&mut r)?;
-                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
-                    String::from_utf8(sender)?
-                };
-
-                // target1: NamedGuid
-                let target1 = NamedGuid::read(&mut r)?;
-
-                // message1: SizedCString
-                let message1 = {
-                    let message1 = crate::util::read_u32_le(&mut r)?;
-                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
-                    String::from_utf8(message1)?
-                };
-
-                // chat_tag1: PlayerChatTag
-                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_GM_MESSAGECHAT_ChatType::MonsterSay {
-                    chat_tag1,
-                    message1,
-                    sender,
-                    target1,
-                }
-            }
-            ChatType::MonsterParty => {
-                // sender: SizedCString
-                let sender = {
-                    let sender = crate::util::read_u32_le(&mut r)?;
-                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
-                    String::from_utf8(sender)?
-                };
-
-                // target1: NamedGuid
-                let target1 = NamedGuid::read(&mut r)?;
-
-                // message1: SizedCString
-                let message1 = {
-                    let message1 = crate::util::read_u32_le(&mut r)?;
-                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
-                    String::from_utf8(message1)?
-                };
-
-                // chat_tag1: PlayerChatTag
-                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_GM_MESSAGECHAT_ChatType::MonsterParty {
-                    chat_tag1,
-                    message1,
-                    sender,
-                    target1,
-                }
-            }
-            ChatType::MonsterYell => {
-                // sender: SizedCString
-                let sender = {
-                    let sender = crate::util::read_u32_le(&mut r)?;
-                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
-                    String::from_utf8(sender)?
-                };
-
-                // target1: NamedGuid
-                let target1 = NamedGuid::read(&mut r)?;
-
-                // message1: SizedCString
-                let message1 = {
-                    let message1 = crate::util::read_u32_le(&mut r)?;
-                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
-                    String::from_utf8(message1)?
-                };
-
-                // chat_tag1: PlayerChatTag
-                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_GM_MESSAGECHAT_ChatType::MonsterYell {
-                    chat_tag1,
-                    message1,
-                    sender,
-                    target1,
-                }
-            }
-            ChatType::MonsterWhisper => {
-                // sender: SizedCString
-                let sender = {
-                    let sender = crate::util::read_u32_le(&mut r)?;
-                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
-                    String::from_utf8(sender)?
-                };
-
-                // target1: NamedGuid
-                let target1 = NamedGuid::read(&mut r)?;
-
-                // message1: SizedCString
-                let message1 = {
-                    let message1 = crate::util::read_u32_le(&mut r)?;
-                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
-                    String::from_utf8(message1)?
-                };
-
-                // chat_tag1: PlayerChatTag
-                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_GM_MESSAGECHAT_ChatType::MonsterWhisper {
-                    chat_tag1,
-                    message1,
-                    sender,
-                    target1,
-                }
-            }
-            ChatType::MonsterEmote => {
-                // sender: SizedCString
-                let sender = {
-                    let sender = crate::util::read_u32_le(&mut r)?;
-                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
-                    String::from_utf8(sender)?
-                };
-
-                // target1: NamedGuid
-                let target1 = NamedGuid::read(&mut r)?;
-
-                // message1: SizedCString
-                let message1 = {
-                    let message1 = crate::util::read_u32_le(&mut r)?;
-                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
-                    String::from_utf8(message1)?
-                };
-
-                // chat_tag1: PlayerChatTag
-                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_GM_MESSAGECHAT_ChatType::MonsterEmote {
-                    chat_tag1,
-                    message1,
-                    sender,
-                    target1,
-                }
-            }
-            ChatType::Channel => {
-                // channel_name: CString
-                let channel_name = {
-                    let channel_name = crate::util::read_c_string_to_vec(&mut r)?;
-                    String::from_utf8(channel_name)?
-                };
-
-                // target4: Guid
-                let target4 = crate::util::read_guid(&mut r)?;
-
-                // message3: SizedCString
-                let message3 = {
-                    let message3 = crate::util::read_u32_le(&mut r)?;
-                    let message3 = crate::util::read_sized_c_string_to_vec(&mut r, message3)?;
-                    String::from_utf8(message3)?
-                };
-
-                // chat_tag3: PlayerChatTag
-                let chat_tag3 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_GM_MESSAGECHAT_ChatType::Channel {
-                    channel_name,
-                    chat_tag3,
-                    message3,
-                    target4,
-                }
-            }
-            ChatType::ChannelJoin => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::ChannelJoin {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::ChannelLeave => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::ChannelLeave {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::ChannelList => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::ChannelList {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::ChannelNotice => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::ChannelNotice {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::ChannelNoticeUser => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::ChannelNoticeUser {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Afk => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Afk {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Dnd => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Dnd {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Ignored => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Ignored {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Skill => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Skill {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Loot => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Loot {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Money => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Money {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Opening => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Opening {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Tradeskills => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Tradeskills {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::PetInfo => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::PetInfo {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::CombatMiscInfo => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::CombatMiscInfo {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::CombatXpGain => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::CombatXpGain {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::CombatHonorGain => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::CombatHonorGain {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::CombatFactionChange => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::CombatFactionChange {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::BgSystemNeutral => {
-                // target2: NamedGuid
-                let target2 = NamedGuid::read(&mut r)?;
-
-                // message2: SizedCString
-                let message2 = {
-                    let message2 = crate::util::read_u32_le(&mut r)?;
-                    let message2 = crate::util::read_sized_c_string_to_vec(&mut r, message2)?;
-                    String::from_utf8(message2)?
-                };
-
-                // chat_tag2: PlayerChatTag
-                let chat_tag2 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_GM_MESSAGECHAT_ChatType::BgSystemNeutral {
-                    chat_tag2,
-                    message2,
-                    target2,
-                }
-            }
-            ChatType::BgSystemAlliance => {
-                // target2: NamedGuid
-                let target2 = NamedGuid::read(&mut r)?;
-
-                // message2: SizedCString
-                let message2 = {
-                    let message2 = crate::util::read_u32_le(&mut r)?;
-                    let message2 = crate::util::read_sized_c_string_to_vec(&mut r, message2)?;
-                    String::from_utf8(message2)?
-                };
-
-                // chat_tag2: PlayerChatTag
-                let chat_tag2 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_GM_MESSAGECHAT_ChatType::BgSystemAlliance {
-                    chat_tag2,
-                    message2,
-                    target2,
-                }
-            }
-            ChatType::BgSystemHorde => {
-                // target2: NamedGuid
-                let target2 = NamedGuid::read(&mut r)?;
-
-                // message2: SizedCString
-                let message2 = {
-                    let message2 = crate::util::read_u32_le(&mut r)?;
-                    let message2 = crate::util::read_sized_c_string_to_vec(&mut r, message2)?;
-                    String::from_utf8(message2)?
-                };
-
-                // chat_tag2: PlayerChatTag
-                let chat_tag2 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_GM_MESSAGECHAT_ChatType::BgSystemHorde {
-                    chat_tag2,
-                    message2,
-                    target2,
-                }
-            }
-            ChatType::RaidLeader => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::RaidLeader {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::RaidWarning => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::RaidWarning {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::RaidBossWhisper => {
-                // sender: SizedCString
-                let sender = {
-                    let sender = crate::util::read_u32_le(&mut r)?;
-                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
-                    String::from_utf8(sender)?
-                };
-
-                // target1: NamedGuid
-                let target1 = NamedGuid::read(&mut r)?;
-
-                // message1: SizedCString
-                let message1 = {
-                    let message1 = crate::util::read_u32_le(&mut r)?;
-                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
-                    String::from_utf8(message1)?
-                };
-
-                // chat_tag1: PlayerChatTag
-                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_GM_MESSAGECHAT_ChatType::RaidBossWhisper {
-                    chat_tag1,
-                    message1,
-                    sender,
-                    target1,
-                }
-            }
-            ChatType::RaidBossEmote => {
-                // sender: SizedCString
-                let sender = {
-                    let sender = crate::util::read_u32_le(&mut r)?;
-                    let sender = crate::util::read_sized_c_string_to_vec(&mut r, sender)?;
-                    String::from_utf8(sender)?
-                };
-
-                // target1: NamedGuid
-                let target1 = NamedGuid::read(&mut r)?;
-
-                // message1: SizedCString
-                let message1 = {
-                    let message1 = crate::util::read_u32_le(&mut r)?;
-                    let message1 = crate::util::read_sized_c_string_to_vec(&mut r, message1)?;
-                    String::from_utf8(message1)?
-                };
-
-                // chat_tag1: PlayerChatTag
-                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                SMSG_GM_MESSAGECHAT_ChatType::RaidBossEmote {
-                    chat_tag1,
-                    message1,
-                    sender,
-                    target1,
-                }
-            }
-            ChatType::Filtered => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Filtered {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Battleground => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Battleground {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::BattlegroundLeader => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::BattlegroundLeader {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-            ChatType::Restricted => {
-                // target5: Guid
-                let target5 = crate::util::read_guid(&mut r)?;
-
-                // message4: SizedCString
-                let message4 = {
-                    let message4 = crate::util::read_u32_le(&mut r)?;
-                    let message4 = crate::util::read_sized_c_string_to_vec(&mut r, message4)?;
-                    String::from_utf8(message4)?
-                };
-
-                // chat_tag4: PlayerChatTag
-                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-                // sender_name: SizedCString
-                let sender_name = {
-                    let sender_name = crate::util::read_u32_le(&mut r)?;
-                    let sender_name = crate::util::read_sized_c_string_to_vec(&mut r, sender_name)?;
-                    String::from_utf8(sender_name)?
-                };
-
-                SMSG_GM_MESSAGECHAT_ChatType::Restricted {
-                    chat_tag4,
-                    message4,
-                    sender_name,
-                    target5,
-                }
-            }
-        };
-
-        Ok(Self {
-            chat_type: chat_type_if,
-            language,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

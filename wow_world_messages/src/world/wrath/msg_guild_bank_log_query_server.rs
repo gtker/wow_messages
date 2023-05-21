@@ -20,6 +20,39 @@ pub struct MSG_GUILD_BANK_LOG_QUERY_Server {
 }
 
 impl crate::private::Sealed for MSG_GUILD_BANK_LOG_QUERY_Server {}
+impl MSG_GUILD_BANK_LOG_QUERY_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(6..=4358).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03EE, size: body_size });
+        }
+
+        // unix_time: u32
+        let unix_time = crate::util::read_u32_le(&mut r)?;
+
+        // slot: u8
+        let slot = crate::util::read_u8_le(&mut r)?;
+
+        // amount_of_money_logs: u8
+        let amount_of_money_logs = crate::util::read_u8_le(&mut r)?;
+
+        // money_logs: MoneyLogItem[amount_of_money_logs]
+        let money_logs = {
+            let mut money_logs = Vec::with_capacity(amount_of_money_logs as usize);
+            for _ in 0..amount_of_money_logs {
+                money_logs.push(MoneyLogItem::read(&mut r)?);
+            }
+            money_logs
+        };
+
+        Ok(Self {
+            unix_time,
+            slot,
+            money_logs,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_GUILD_BANK_LOG_QUERY_Server {
     const OPCODE: u32 = 0x03ee;
 
@@ -104,34 +137,8 @@ impl crate::Message for MSG_GUILD_BANK_LOG_QUERY_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(6..=4358).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03EE, size: body_size });
-        }
-
-        // unix_time: u32
-        let unix_time = crate::util::read_u32_le(&mut r)?;
-
-        // slot: u8
-        let slot = crate::util::read_u8_le(&mut r)?;
-
-        // amount_of_money_logs: u8
-        let amount_of_money_logs = crate::util::read_u8_le(&mut r)?;
-
-        // money_logs: MoneyLogItem[amount_of_money_logs]
-        let money_logs = {
-            let mut money_logs = Vec::with_capacity(amount_of_money_logs as usize);
-            for _ in 0..amount_of_money_logs {
-                money_logs.push(MoneyLogItem::read(&mut r)?);
-            }
-            money_logs
-        };
-
-        Ok(Self {
-            unix_time,
-            slot,
-            money_logs,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }

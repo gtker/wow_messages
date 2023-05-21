@@ -17,6 +17,26 @@ pub struct MSG_MOVE_START_TURN_LEFT_Server {
 }
 
 impl crate::private::Sealed for MSG_MOVE_START_TURN_LEFT_Server {}
+impl MSG_MOVE_START_TURN_LEFT_Server {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        if !(30..=90).contains(&body_size) {
+            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00BC, size: body_size });
+        }
+
+        // guid: PackedGuid
+        let guid = crate::util::read_packed_guid(&mut r)?;
+
+        // info: MovementInfo
+        let info = MovementInfo::read(&mut r)?;
+
+        Ok(Self {
+            guid,
+            info,
+        })
+    }
+
+}
+
 impl crate::Message for MSG_MOVE_START_TURN_LEFT_Server {
     const OPCODE: u32 = 0x00bc;
 
@@ -34,21 +54,8 @@ impl crate::Message for MSG_MOVE_START_TURN_LEFT_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
-        if !(30..=90).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00BC, size: body_size });
-        }
-
-        // guid: PackedGuid
-        let guid = crate::util::read_packed_guid(&mut r)?;
-
-        // info: MovementInfo
-        let info = MovementInfo::read(&mut r)?;
-
-        Ok(Self {
-            guid,
-            info,
-        })
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size)
     }
 
 }
