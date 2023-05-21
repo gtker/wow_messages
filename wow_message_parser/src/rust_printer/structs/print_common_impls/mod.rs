@@ -29,43 +29,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
             impl_read_and_writable_login(s, e, o, opcode);
         }
         ContainerType::Msg(opcode) | ContainerType::CMsg(opcode) | ContainerType::SMsg(opcode) => {
-            let bind = |s: &mut Writer, container_type, version| {
-                impl_world_server_or_client_message(
-                    s,
-                    e.name(),
-                    container_type,
-                    version,
-                    e.tags().compressed() || e.contains_compressed_variable(),
-                );
-            };
-
-            impl_world_message(
-                s,
-                e,
-                opcode,
-                |s, it| {
-                    print_write::print_write(s, e, o, it.prefix(), it.postfix());
-                },
-                |s, it| {
-                    test_for_invalid_size(s, e);
-                    print_read::print_read(s, e, o, it.prefix(), it.postfix());
-                },
-                Some(e.sizes()),
-                e.should_print_test_case_string(o),
-            );
-
-            for version in e.tags().main_versions() {
-                match e.container_type() {
-                    ContainerType::CMsg(_) => bind(s, ContainerType::CMsg(0), version),
-                    ContainerType::SMsg(_) => bind(s, ContainerType::SMsg(0), version),
-                    ContainerType::Msg(_) => {
-                        bind(s, ContainerType::CMsg(0), version);
-
-                        bind(s, ContainerType::SMsg(0), version);
-                    }
-                    _ => unreachable!("non world container in world branch"),
-                }
-            }
+            impl_world_message(s, e, o, opcode);
         }
     }
 
@@ -410,15 +374,7 @@ pub(crate) fn print_constant_member(
     ));
 }
 
-pub(crate) fn impl_world_message(
-    s: &mut Writer,
-    e: &Container,
-    opcode: u16,
-    write_function: impl Fn(&mut Writer, ImplType),
-    read_function: impl Fn(&mut Writer, ImplType),
-    sizes: Option<Sizes>,
-    should_write_test_case_string: bool,
-) {
+pub(crate) fn impl_world_message(s: &mut Writer, e: &Container, o: &Objects, opcode: u16) {
     let type_name = e.name();
 
     s.wln(format!("impl crate::private::Sealed for {type_name} {{}}",));
@@ -429,7 +385,8 @@ pub(crate) fn impl_world_message(
                 "fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, {PARSE_ERROR}>"
             ),
             |s| {
-                read_function(s, ImplType::Std);
+                test_for_invalid_size(s, e);
+                print_read::print_read(s, e, o, ImplType::Std.prefix(), ImplType::Std.postfix());
             },
         );
     });
@@ -438,11 +395,11 @@ pub(crate) fn impl_world_message(
         s.wln(format!("const OPCODE: u32 = {opcode:#06x};"));
         s.newline();
 
-        print_to_testcase(s, e, should_write_test_case_string);
+        print_to_testcase(s, e, e.should_print_test_case_string(o));
 
         s.bodyn("fn size_without_header(&self) -> u32", |s| {
-            if sizes.is_some() && sizes.unwrap().is_constant().is_some() {
-                s.wln(format!("{}", sizes.unwrap().maximum()));
+            if let Some(value) = e.sizes().is_constant() {
+                s.wln(format!("{value}"));
             } else {
                 s.wln("self.size() as u32");
             }
@@ -451,7 +408,7 @@ pub(crate) fn impl_world_message(
         s.bodyn(
             "fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error>",
             |s| {
-                write_function(s, ImplType::Std);
+                print_write::print_write(s, e, o, ImplType::Std.prefix(), ImplType::Std.postfix());
 
                 s.wln("Ok(())");
             },
@@ -463,6 +420,29 @@ pub(crate) fn impl_world_message(
             s.wln("Self::read_inner(r, body_size)")
         });
     });
+
+    let bind = |s: &mut Writer, container_type, version| {
+        impl_world_server_or_client_message(
+            s,
+            e.name(),
+            container_type,
+            version,
+            e.tags().compressed() || e.contains_compressed_variable(),
+        );
+    };
+
+    for version in e.tags().main_versions() {
+        match e.container_type() {
+            ContainerType::CMsg(_) => bind(s, ContainerType::CMsg(0), version),
+            ContainerType::SMsg(_) => bind(s, ContainerType::SMsg(0), version),
+            ContainerType::Msg(_) => {
+                bind(s, ContainerType::CMsg(0), version);
+
+                bind(s, ContainerType::SMsg(0), version);
+            }
+            _ => unreachable!("non world container in world branch"),
+        }
+    }
 }
 
 pub(crate) fn impl_read_and_writable_login(
