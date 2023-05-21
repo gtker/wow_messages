@@ -26,10 +26,8 @@ impl CMD_XFER_RESUME {
 
 impl crate::private::Sealed for CMD_XFER_RESUME {}
 
-impl ClientMessage for CMD_XFER_RESUME {
-    const OPCODE: u8 = 0x33;
-
-    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+impl CMD_XFER_RESUME {
+    fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // offset: u64
         let offset = crate::util::read_u64_le(&mut r)?;
 
@@ -38,15 +36,8 @@ impl ClientMessage for CMD_XFER_RESUME {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
-        let mut v = Vec::with_capacity(9);
-        self.write_into_vec(&mut v)?;
-        w.write_all(&v)
-    }
-
     #[cfg(feature = "tokio")]
-    fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
+    fn tokio_read_inner<'async_trait, R>(
         mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
@@ -63,6 +54,55 @@ impl ClientMessage for CMD_XFER_RESUME {
                 offset,
             })
         })
+    }
+
+    #[cfg(feature = "async-std")]
+    fn astd_read_inner<'async_trait, R>(
+        mut r: R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // offset: u64
+            let offset = crate::util::astd_read_u64_le(&mut r).await?;
+
+            Ok(Self {
+                offset,
+            })
+        })
+    }
+
+}
+
+impl ClientMessage for CMD_XFER_RESUME {
+    const OPCODE: u8 = 0x33;
+
+    fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        Self::read_inner(r)
+    }
+
+    #[cfg(feature = "sync")]
+    fn write<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
+        let mut v = Vec::with_capacity(9);
+        self.write_into_vec(&mut v)?;
+        w.write_all(&v)
+    }
+
+    #[cfg(feature = "tokio")]
+    fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
+        r: R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
+        Self: 'async_trait,
+     {
+        Self::tokio_read_inner(r)
     }
 
     #[cfg(feature = "tokio")]
@@ -86,7 +126,7 @@ impl ClientMessage for CMD_XFER_RESUME {
 
     #[cfg(feature = "async-std")]
     fn astd_read<'async_trait, R, I: crate::private::Sealed>(
-        mut r: R,
+        r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
             + Send + 'async_trait,
@@ -94,14 +134,7 @@ impl ClientMessage for CMD_XFER_RESUME {
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
         Self: 'async_trait,
      {
-        Box::pin(async move {
-            // offset: u64
-            let offset = crate::util::astd_read_u64_le(&mut r).await?;
-
-            Ok(Self {
-                offset,
-            })
-        })
+        Self::astd_read_inner(r)
     }
 
     #[cfg(feature = "async-std")]

@@ -61,10 +61,8 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
 
 impl crate::private::Sealed for CMD_AUTH_RECONNECT_PROOF_Client {}
 
-impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
-    const OPCODE: u8 = 0x03;
-
-    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+impl CMD_AUTH_RECONNECT_PROOF_Client {
+    fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // proof_data: u8[16]
         let proof_data = {
             let mut proof_data = [0_u8; 16];
@@ -97,15 +95,8 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
-        let mut v = Vec::with_capacity(58);
-        self.write_into_vec(&mut v)?;
-        w.write_all(&v)
-    }
-
     #[cfg(feature = "tokio")]
-    fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
+    fn tokio_read_inner<'async_trait, R>(
         mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
@@ -148,27 +139,8 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_write<'life0, 'async_trait, W>(
-        &'life0 self,
-        mut w: W,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<(), std::io::Error>>
-            + Send + 'async_trait
-    >> where
-        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
-        'life0: 'async_trait,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            let mut v = Vec::with_capacity(58);
-            self.write_into_vec(&mut v)?;
-            w.write_all(&v).await
-        })
-    }
-
     #[cfg(feature = "async-std")]
-    fn astd_read<'async_trait, R, I: crate::private::Sealed>(
+    fn astd_read_inner<'async_trait, R>(
         mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
@@ -209,6 +181,67 @@ impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
                 client_checksum,
             })
         })
+    }
+
+}
+
+impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
+    const OPCODE: u8 = 0x03;
+
+    fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        Self::read_inner(r)
+    }
+
+    #[cfg(feature = "sync")]
+    fn write<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
+        let mut v = Vec::with_capacity(58);
+        self.write_into_vec(&mut v)?;
+        w.write_all(&v)
+    }
+
+    #[cfg(feature = "tokio")]
+    fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
+        r: R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
+        Self: 'async_trait,
+     {
+        Self::tokio_read_inner(r)
+    }
+
+    #[cfg(feature = "tokio")]
+    fn tokio_write<'life0, 'async_trait, W>(
+        &'life0 self,
+        mut w: W,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = Result<(), std::io::Error>>
+            + Send + 'async_trait
+    >> where
+        W: 'async_trait + tokio::io::AsyncWriteExt + Unpin + Send,
+        'life0: 'async_trait,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            let mut v = Vec::with_capacity(58);
+            self.write_into_vec(&mut v)?;
+            w.write_all(&v).await
+        })
+    }
+
+    #[cfg(feature = "async-std")]
+    fn astd_read<'async_trait, R, I: crate::private::Sealed>(
+        r: R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
+        Self: 'async_trait,
+     {
+        Self::astd_read_inner(r)
     }
 
     #[cfg(feature = "async-std")]

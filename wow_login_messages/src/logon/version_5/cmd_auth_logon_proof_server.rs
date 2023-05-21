@@ -55,6 +55,172 @@ impl CMD_AUTH_LOGON_PROOF_Server {
 
 impl crate::private::Sealed for CMD_AUTH_LOGON_PROOF_Server {}
 
+impl CMD_AUTH_LOGON_PROOF_Server {
+    fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // result: LoginResult
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
+
+        let result_if = match result {
+            LoginResult::Success => {
+                // server_proof: u8[20]
+                let server_proof = {
+                    let mut server_proof = [0_u8; 20];
+                    r.read_exact(&mut server_proof)?;
+                    server_proof
+                };
+
+                // hardware_survey_id: u32
+                let hardware_survey_id = crate::util::read_u32_le(&mut r)?;
+
+                // unknown: u16
+                let unknown = crate::util::read_u16_le(&mut r)?;
+
+                CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
+                    hardware_survey_id,
+                    server_proof,
+                    unknown,
+                }
+            }
+            LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
+            LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1,
+            LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned,
+            LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount,
+            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword,
+            LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline,
+            LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime,
+            LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy,
+            LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid,
+            LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile,
+            LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer,
+            LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended,
+            LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess,
+            LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey,
+            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol,
+        };
+
+        Ok(Self {
+            result: result_if,
+        })
+    }
+
+    #[cfg(feature = "tokio")]
+    fn tokio_read_inner<'async_trait, R>(
+        mut r: R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // result: LoginResult
+            let result = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
+
+            let result_if = match result {
+                LoginResult::Success => {
+                    // server_proof: u8[20]
+                    let server_proof = {
+                        let mut server_proof = [0_u8; 20];
+                        r.read_exact(&mut server_proof).await?;
+                        server_proof
+                    };
+
+                    // hardware_survey_id: u32
+                    let hardware_survey_id = crate::util::tokio_read_u32_le(&mut r).await?;
+
+                    // unknown: u16
+                    let unknown = crate::util::tokio_read_u16_le(&mut r).await?;
+
+                    CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
+                        hardware_survey_id,
+                        server_proof,
+                        unknown,
+                    }
+                }
+                LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
+                LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1,
+                LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned,
+                LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount,
+                LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword,
+                LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline,
+                LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime,
+                LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy,
+                LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid,
+                LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile,
+                LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer,
+                LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended,
+                LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess,
+                LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey,
+                LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol,
+            };
+
+            Ok(Self {
+                result: result_if,
+            })
+        })
+    }
+
+    #[cfg(feature = "async-std")]
+    fn astd_read_inner<'async_trait, R>(
+        mut r: R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // result: LoginResult
+            let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+
+            let result_if = match result {
+                LoginResult::Success => {
+                    // server_proof: u8[20]
+                    let server_proof = {
+                        let mut server_proof = [0_u8; 20];
+                        r.read_exact(&mut server_proof).await?;
+                        server_proof
+                    };
+
+                    // hardware_survey_id: u32
+                    let hardware_survey_id = crate::util::astd_read_u32_le(&mut r).await?;
+
+                    // unknown: u16
+                    let unknown = crate::util::astd_read_u16_le(&mut r).await?;
+
+                    CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
+                        hardware_survey_id,
+                        server_proof,
+                        unknown,
+                    }
+                }
+                LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
+                LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1,
+                LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned,
+                LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount,
+                LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword,
+                LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline,
+                LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime,
+                LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy,
+                LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid,
+                LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile,
+                LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer,
+                LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended,
+                LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess,
+                LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey,
+                LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol,
+            };
+
+            Ok(Self {
+                result: result_if,
+            })
+        })
+    }
+
+}
+
 impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
     const OPCODE: u8 = 0x01;
 
@@ -115,51 +281,8 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
         Some(s)
     }
 
-    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
-        // result: LoginResult
-        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
-
-        let result_if = match result {
-            LoginResult::Success => {
-                // server_proof: u8[20]
-                let server_proof = {
-                    let mut server_proof = [0_u8; 20];
-                    r.read_exact(&mut server_proof)?;
-                    server_proof
-                };
-
-                // hardware_survey_id: u32
-                let hardware_survey_id = crate::util::read_u32_le(&mut r)?;
-
-                // unknown: u16
-                let unknown = crate::util::read_u16_le(&mut r)?;
-
-                CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
-                    hardware_survey_id,
-                    server_proof,
-                    unknown,
-                }
-            }
-            LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
-            LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1,
-            LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned,
-            LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount,
-            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword,
-            LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline,
-            LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime,
-            LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy,
-            LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid,
-            LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile,
-            LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer,
-            LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended,
-            LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess,
-            LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey,
-            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol,
-        };
-
-        Ok(Self {
-            result: result_if,
-        })
+    fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        Self::read_inner(r)
     }
 
     #[cfg(feature = "sync")]
@@ -171,7 +294,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
 
     #[cfg(feature = "tokio")]
     fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
-        mut r: R,
+        r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
             + Send + 'async_trait,
@@ -179,52 +302,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
         Self: 'async_trait,
      {
-        Box::pin(async move {
-            // result: LoginResult
-            let result = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
-
-            let result_if = match result {
-                LoginResult::Success => {
-                    // server_proof: u8[20]
-                    let server_proof = {
-                        let mut server_proof = [0_u8; 20];
-                        r.read_exact(&mut server_proof).await?;
-                        server_proof
-                    };
-
-                    // hardware_survey_id: u32
-                    let hardware_survey_id = crate::util::tokio_read_u32_le(&mut r).await?;
-
-                    // unknown: u16
-                    let unknown = crate::util::tokio_read_u16_le(&mut r).await?;
-
-                    CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
-                        hardware_survey_id,
-                        server_proof,
-                        unknown,
-                    }
-                }
-                LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
-                LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1,
-                LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned,
-                LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount,
-                LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword,
-                LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline,
-                LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime,
-                LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy,
-                LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid,
-                LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile,
-                LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer,
-                LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended,
-                LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess,
-                LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey,
-                LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol,
-            };
-
-            Ok(Self {
-                result: result_if,
-            })
-        })
+        Self::tokio_read_inner(r)
     }
 
     #[cfg(feature = "tokio")]
@@ -248,7 +326,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
 
     #[cfg(feature = "async-std")]
     fn astd_read<'async_trait, R, I: crate::private::Sealed>(
-        mut r: R,
+        r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
             + Send + 'async_trait,
@@ -256,52 +334,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
         Self: 'async_trait,
      {
-        Box::pin(async move {
-            // result: LoginResult
-            let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
-
-            let result_if = match result {
-                LoginResult::Success => {
-                    // server_proof: u8[20]
-                    let server_proof = {
-                        let mut server_proof = [0_u8; 20];
-                        r.read_exact(&mut server_proof).await?;
-                        server_proof
-                    };
-
-                    // hardware_survey_id: u32
-                    let hardware_survey_id = crate::util::astd_read_u32_le(&mut r).await?;
-
-                    // unknown: u16
-                    let unknown = crate::util::astd_read_u16_le(&mut r).await?;
-
-                    CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
-                        hardware_survey_id,
-                        server_proof,
-                        unknown,
-                    }
-                }
-                LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
-                LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1,
-                LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned,
-                LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount,
-                LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword,
-                LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline,
-                LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime,
-                LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy,
-                LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid,
-                LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile,
-                LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer,
-                LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended,
-                LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess,
-                LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey,
-                LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol,
-            };
-
-            Ok(Self {
-                result: result_if,
-            })
-        })
+        Self::astd_read_inner(r)
     }
 
     #[cfg(feature = "async-std")]

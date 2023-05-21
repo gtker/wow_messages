@@ -471,6 +471,19 @@ pub(crate) fn impl_read_and_writable_login(
     s.wln(format!("impl crate::private::Sealed for {type_name} {{}}",));
     s.newline();
 
+    s.bodyn(format!("impl {type_name}"), |s| {
+        for it in ImplType::types() {
+            print_read_decl(s, it, true);
+
+            print_read::print_read(s, e, o, it.prefix(), it.postfix());
+
+            if it.is_async() {
+                s.closing_curly_with(")"); // Box::pin
+            }
+            s.closing_curly_newline();
+        }
+    });
+
     s.open_curly(format!("impl {trait_to_impl} for {type_name}",));
     s.wln(format!("const OPCODE: u8 = {opcode:#04x};"));
     s.newline();
@@ -478,12 +491,9 @@ pub(crate) fn impl_read_and_writable_login(
     print_to_testcase(s, e, e.should_print_test_case_string(o));
 
     for it in ImplType::types() {
-        print_read_decl(s, it);
-
-        print_read::print_read(s, e, o, it.prefix(), it.postfix());
-        if it.is_async() {
-            s.closing_curly_with(")"); // Box::pin
-        }
+        print_read_decl(s, it, false);
+        let function_name = format!("{}read_inner", it.prefix());
+        s.wln(format!("Self::{function_name}(r)"));
         s.closing_curly_newline();
 
         print_write_decl(s, it);
@@ -542,33 +552,45 @@ fn impl_read_write_struct(s: &mut Writer, e: &Container, o: &Objects) {
     });
 }
 
-fn print_read_decl(s: &mut Writer, it: ImplType) {
+fn print_read_decl(s: &mut Writer, it: ImplType, inner: bool) {
+    let error = PARSE_ERROR_KIND;
+    let prefix = it.prefix();
+    let read = it.read();
+
+    let function_name = if inner {
+        format!("{prefix}read_inner")
+    } else {
+        format!("{prefix}read")
+    };
+
+    let sealed = if inner {
+        ""
+    } else {
+        ", I: crate::private::Sealed"
+    };
+
+    let reader = if inner { "mut r" } else { "r" };
+
     if !it.is_async() {
         s.open_curly(format!(
-            "fn {prefix}read<R: {read}, I: crate::private::Sealed>(mut r: R) -> Result<Self, {error}>",
-            prefix = it.prefix(),
-            read = it.read(),
-            error = PARSE_ERROR_KIND,
+            "fn {function_name}<R: {read}{sealed}>({reader}: R) -> Result<Self, {error}>",
         ));
 
         return;
     }
 
     s.wln(it.cfg());
-    s.wln(format!(
-        "fn {}read<'async_trait, R, I: crate::private::Sealed>(",
-        it.prefix()
-    ));
+    s.wln(format!("fn {function_name}<'async_trait, R{sealed}>(",));
 
     s.inc_indent();
-    s.wln("mut r: R,");
+    s.wln(format!("{reader}: R,"));
     s.dec_indent();
 
     s.wln(") -> core::pin::Pin<Box<");
 
     s.inc_indent();
     s.wln(format!(
-        "dyn core::future::Future<Output = Result<Self, {PARSE_ERROR_KIND}>>",
+        "dyn core::future::Future<Output = Result<Self, {error}>>",
     ));
     s.inc_indent();
 
@@ -579,12 +601,14 @@ fn print_read_decl(s: &mut Writer, it: ImplType) {
     s.wln(">> where");
 
     s.inc_indent();
-    s.wln(format!("R: 'async_trait + {},", it.read()));
+    s.wln(format!("R: 'async_trait + {read},"));
     s.wln("Self: 'async_trait,");
     s.dec_indent();
-
     s.open_curly("");
-    s.open_curly("Box::pin(async move");
+
+    if inner {
+        s.open_curly("Box::pin(async move");
+    }
 }
 
 fn print_write_decl(s: &mut Writer, it: ImplType) {

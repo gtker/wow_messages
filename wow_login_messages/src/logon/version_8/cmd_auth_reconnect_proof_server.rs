@@ -47,10 +47,8 @@ impl CMD_AUTH_RECONNECT_PROOF_Server {
 
 impl crate::private::Sealed for CMD_AUTH_RECONNECT_PROOF_Server {}
 
-impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
-    const OPCODE: u8 = 0x03;
-
-    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+impl CMD_AUTH_RECONNECT_PROOF_Server {
+    fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // result: LoginResult
         let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
@@ -63,15 +61,8 @@ impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
-        let mut v = Vec::with_capacity(4);
-        self.write_into_vec(&mut v)?;
-        w.write_all(&v)
-    }
-
     #[cfg(feature = "tokio")]
-    fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
+    fn tokio_read_inner<'async_trait, R>(
         mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
@@ -92,6 +83,59 @@ impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
                 result,
             })
         })
+    }
+
+    #[cfg(feature = "async-std")]
+    fn astd_read_inner<'async_trait, R>(
+        mut r: R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // result: LoginResult
+            let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+
+            // padding: u16
+            let _padding = crate::util::astd_read_u16_le(&mut r).await?;
+            // padding is expected to always be 0 (0)
+
+            Ok(Self {
+                result,
+            })
+        })
+    }
+
+}
+
+impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
+    const OPCODE: u8 = 0x03;
+
+    fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        Self::read_inner(r)
+    }
+
+    #[cfg(feature = "sync")]
+    fn write<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
+        let mut v = Vec::with_capacity(4);
+        self.write_into_vec(&mut v)?;
+        w.write_all(&v)
+    }
+
+    #[cfg(feature = "tokio")]
+    fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
+        r: R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
+        Self: 'async_trait,
+     {
+        Self::tokio_read_inner(r)
     }
 
     #[cfg(feature = "tokio")]
@@ -115,7 +159,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
 
     #[cfg(feature = "async-std")]
     fn astd_read<'async_trait, R, I: crate::private::Sealed>(
-        mut r: R,
+        r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
             + Send + 'async_trait,
@@ -123,18 +167,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
         Self: 'async_trait,
      {
-        Box::pin(async move {
-            // result: LoginResult
-            let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
-
-            // padding: u16
-            let _padding = crate::util::astd_read_u16_le(&mut r).await?;
-            // padding is expected to always be 0 (0)
-
-            Ok(Self {
-                result,
-            })
-        })
+        Self::astd_read_inner(r)
     }
 
     #[cfg(feature = "async-std")]

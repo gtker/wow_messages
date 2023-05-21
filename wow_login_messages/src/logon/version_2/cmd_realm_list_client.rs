@@ -39,10 +39,8 @@ impl CMD_REALM_LIST_Client {
 
 impl crate::private::Sealed for CMD_REALM_LIST_Client {}
 
-impl ClientMessage for CMD_REALM_LIST_Client {
-    const OPCODE: u8 = 0x10;
-
-    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+impl CMD_REALM_LIST_Client {
+    fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // padding: u32
         let _padding = crate::util::read_u32_le(&mut r)?;
         // padding is expected to always be 0 (0)
@@ -51,15 +49,8 @@ impl ClientMessage for CMD_REALM_LIST_Client {
         })
     }
 
-    #[cfg(feature = "sync")]
-    fn write<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
-        let mut v = Vec::with_capacity(5);
-        self.write_into_vec(&mut v)?;
-        w.write_all(&v)
-    }
-
     #[cfg(feature = "tokio")]
-    fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
+    fn tokio_read_inner<'async_trait, R>(
         mut r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
@@ -76,6 +67,55 @@ impl ClientMessage for CMD_REALM_LIST_Client {
             Ok(Self {
             })
         })
+    }
+
+    #[cfg(feature = "async-std")]
+    fn astd_read_inner<'async_trait, R>(
+        mut r: R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
+        Self: 'async_trait,
+     {
+        Box::pin(async move {
+            // padding: u32
+            let _padding = crate::util::astd_read_u32_le(&mut r).await?;
+            // padding is expected to always be 0 (0)
+
+            Ok(Self {
+            })
+        })
+    }
+
+}
+
+impl ClientMessage for CMD_REALM_LIST_Client {
+    const OPCODE: u8 = 0x10;
+
+    fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        Self::read_inner(r)
+    }
+
+    #[cfg(feature = "sync")]
+    fn write<W: Write>(&self, mut w: W) -> Result<(), std::io::Error> {
+        let mut v = Vec::with_capacity(5);
+        self.write_into_vec(&mut v)?;
+        w.write_all(&v)
+    }
+
+    #[cfg(feature = "tokio")]
+    fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
+        r: R,
+    ) -> core::pin::Pin<Box<
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
+            + Send + 'async_trait,
+    >> where
+        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
+        Self: 'async_trait,
+     {
+        Self::tokio_read_inner(r)
     }
 
     #[cfg(feature = "tokio")]
@@ -99,7 +139,7 @@ impl ClientMessage for CMD_REALM_LIST_Client {
 
     #[cfg(feature = "async-std")]
     fn astd_read<'async_trait, R, I: crate::private::Sealed>(
-        mut r: R,
+        r: R,
     ) -> core::pin::Pin<Box<
         dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
             + Send + 'async_trait,
@@ -107,14 +147,7 @@ impl ClientMessage for CMD_REALM_LIST_Client {
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
         Self: 'async_trait,
      {
-        Box::pin(async move {
-            // padding: u32
-            let _padding = crate::util::astd_read_u32_le(&mut r).await?;
-            // padding is expected to always be 0 (0)
-
-            Ok(Self {
-            })
-        })
+        Self::astd_read_inner(r)
     }
 
     #[cfg(feature = "async-std")]
