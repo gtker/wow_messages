@@ -29,7 +29,7 @@ impl SpellLogMiss {
 }
 
 impl SpellLogMiss {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // target: Guid
         let target = crate::util::read_guid(&mut r)?;
 

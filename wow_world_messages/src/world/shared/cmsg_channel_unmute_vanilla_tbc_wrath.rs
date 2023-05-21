@@ -15,9 +15,9 @@ pub struct CMSG_CHANNEL_UNMUTE {
 
 impl crate::private::Sealed for CMSG_CHANNEL_UNMUTE {}
 impl CMSG_CHANNEL_UNMUTE {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(2..=512).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00A2, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x00A2, size: body_size });
         }
 
         // channel_name: CString
@@ -98,7 +98,7 @@ impl crate::Message for CMSG_CHANNEL_UNMUTE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

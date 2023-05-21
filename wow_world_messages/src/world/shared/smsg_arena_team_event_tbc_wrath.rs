@@ -42,9 +42,9 @@ pub struct SMSG_ARENA_TEAM_EVENT {
 
 impl crate::private::Sealed for SMSG_ARENA_TEAM_EVENT {}
 impl SMSG_ARENA_TEAM_EVENT {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(2..=66306).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0357, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0357, size: body_size });
         }
 
         // event: ArenaTeamEvent
@@ -481,7 +481,7 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

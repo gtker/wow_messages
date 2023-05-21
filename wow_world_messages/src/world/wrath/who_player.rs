@@ -64,7 +64,7 @@ impl WhoPlayer {
 }
 
 impl WhoPlayer {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // name: CString
         let name = {
             let name = crate::util::read_c_string_to_vec(&mut r)?;

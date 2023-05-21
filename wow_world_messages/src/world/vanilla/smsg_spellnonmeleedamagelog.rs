@@ -43,9 +43,9 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
 
 impl crate::private::Sealed for SMSG_SPELLNONMELEEDAMAGELOG {}
 impl SMSG_SPELLNONMELEEDAMAGELOG {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(32..=46).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0250, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0250, size: body_size });
         }
 
         // target: PackedGuid
@@ -202,7 +202,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

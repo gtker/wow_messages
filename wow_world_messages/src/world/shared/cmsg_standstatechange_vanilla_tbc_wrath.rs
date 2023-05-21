@@ -15,9 +15,9 @@ pub struct CMSG_STANDSTATECHANGE {
 
 impl crate::private::Sealed for CMSG_STANDSTATECHANGE {}
 impl CMSG_STANDSTATECHANGE {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0101, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0101, size: body_size });
         }
 
         // animation_state: UnitStandState
@@ -75,7 +75,7 @@ impl crate::Message for CMSG_STANDSTATECHANGE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

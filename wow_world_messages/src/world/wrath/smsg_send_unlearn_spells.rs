@@ -14,9 +14,9 @@ pub struct SMSG_SEND_UNLEARN_SPELLS {
 
 impl crate::private::Sealed for SMSG_SEND_UNLEARN_SPELLS {}
 impl SMSG_SEND_UNLEARN_SPELLS {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(4..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x041E, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x041E, size: body_size });
         }
 
         // amount_of_spells: u32
@@ -100,7 +100,7 @@ impl crate::Message for SMSG_SEND_UNLEARN_SPELLS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

@@ -19,9 +19,9 @@ pub struct CMSG_PET_ACTION {
 
 impl crate::private::Sealed for CMSG_PET_ACTION {}
 impl CMSG_PET_ACTION {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 20 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0175, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0175, size: body_size });
         }
 
         // pet: Guid
@@ -97,7 +97,7 @@ impl crate::Message for CMSG_PET_ACTION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

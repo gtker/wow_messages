@@ -1,6 +1,6 @@
 use std::io::{Read, Write};
 use std::num::NonZeroU64;
-use wow_world_base::ParseError;
+use wow_world_base::ParseErrorKind;
 
 use crate::util::{read_c_string_to_vec, read_u64_le};
 
@@ -43,7 +43,7 @@ impl NamedGuid {
         self.name.as_deref()
     }
 
-    pub(crate) fn read(r: &mut impl Read) -> Result<Self, ParseError> {
+    pub(crate) fn read(r: &mut impl Read) -> Result<Self, ParseErrorKind> {
         let guid = read_u64_le(r)?;
         let name = if guid != 0 {
             let name = read_c_string_to_vec(r)?;

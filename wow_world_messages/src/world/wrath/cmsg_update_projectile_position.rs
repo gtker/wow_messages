@@ -22,9 +22,9 @@ pub struct CMSG_UPDATE_PROJECTILE_POSITION {
 
 impl crate::private::Sealed for CMSG_UPDATE_PROJECTILE_POSITION {}
 impl CMSG_UPDATE_PROJECTILE_POSITION {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 25 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BE, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x04BE, size: body_size });
         }
 
         // caster: Guid
@@ -120,7 +120,7 @@ impl crate::Message for CMSG_UPDATE_PROJECTILE_POSITION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

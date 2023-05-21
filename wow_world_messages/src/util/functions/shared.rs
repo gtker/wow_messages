@@ -35,7 +35,7 @@ pub(crate) const fn packed_to_vector3d(p: u32) -> Vector3d {
 
 pub(crate) fn read_monster_move_spline(
     mut r: &mut impl Read,
-) -> Result<Vec<Vector3d>, crate::errors::ParseError> {
+) -> Result<Vec<Vector3d>, crate::errors::ParseErrorKind> {
     let amount_of_splines = read_u32_le(&mut r)?;
     let mut splines = Vec::with_capacity(amount_of_splines.try_into().unwrap());
 
@@ -146,7 +146,7 @@ pub(crate) fn assert_empty(
 ) -> Result<(), ExpectedOpcodeError> {
     if body_size != 0 {
         Err(ExpectedOpcodeError::Parse(
-            crate::errors::ParseError::InvalidSize {
+            crate::errors::ParseErrorKind::InvalidSize {
                 opcode: opcode.into(),
                 size: body_size,
             },

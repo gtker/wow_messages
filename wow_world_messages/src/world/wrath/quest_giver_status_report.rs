@@ -29,7 +29,7 @@ impl QuestGiverStatusReport {
 }
 
 impl QuestGiverStatusReport {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // npc: Guid
         let npc = crate::util::read_guid(&mut r)?;
 

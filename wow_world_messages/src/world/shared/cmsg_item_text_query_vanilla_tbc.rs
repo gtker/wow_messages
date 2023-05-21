@@ -19,9 +19,9 @@ pub struct CMSG_ITEM_TEXT_QUERY {
 
 impl crate::private::Sealed for CMSG_ITEM_TEXT_QUERY {}
 impl CMSG_ITEM_TEXT_QUERY {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0243, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0243, size: body_size });
         }
 
         // item_text_id: u32
@@ -97,7 +97,7 @@ impl crate::Message for CMSG_ITEM_TEXT_QUERY {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

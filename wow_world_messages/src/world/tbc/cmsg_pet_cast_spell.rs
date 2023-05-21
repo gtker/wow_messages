@@ -22,9 +22,9 @@ pub struct CMSG_PET_CAST_SPELL {
 
 impl crate::private::Sealed for CMSG_PET_CAST_SPELL {}
 impl CMSG_PET_CAST_SPELL {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(16..=332).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01F0, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x01F0, size: body_size });
         }
 
         // guid: Guid
@@ -283,7 +283,7 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

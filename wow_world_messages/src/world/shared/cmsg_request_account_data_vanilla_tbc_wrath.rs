@@ -15,9 +15,9 @@ pub struct CMSG_REQUEST_ACCOUNT_DATA {
 
 impl crate::private::Sealed for CMSG_REQUEST_ACCOUNT_DATA {}
 impl CMSG_REQUEST_ACCOUNT_DATA {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x020A, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x020A, size: body_size });
         }
 
         // data_type: u32
@@ -44,7 +44,7 @@ impl crate::Message for CMSG_REQUEST_ACCOUNT_DATA {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

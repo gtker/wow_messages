@@ -15,9 +15,9 @@ pub struct CMSG_LFG_TELEPORT {
 
 impl crate::private::Sealed for CMSG_LFG_TELEPORT {}
 impl CMSG_LFG_TELEPORT {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0370, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0370, size: body_size });
         }
 
         // location: LfgTeleportLocation
@@ -75,7 +75,7 @@ impl crate::Message for CMSG_LFG_TELEPORT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

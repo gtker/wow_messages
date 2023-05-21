@@ -19,9 +19,9 @@ pub struct CMSG_LOOT_MASTER_GIVE {
 
 impl crate::private::Sealed for CMSG_LOOT_MASTER_GIVE {}
 impl CMSG_LOOT_MASTER_GIVE {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 17 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A3, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x02A3, size: body_size });
         }
 
         // loot: Guid
@@ -97,7 +97,7 @@ impl crate::Message for CMSG_LOOT_MASTER_GIVE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

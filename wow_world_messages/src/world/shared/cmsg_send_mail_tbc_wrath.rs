@@ -42,9 +42,9 @@ pub struct CMSG_SEND_MAIL {
 
 impl crate::private::Sealed for CMSG_SEND_MAIL {}
 impl CMSG_SEND_MAIL {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(36..=3105).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0238, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0238, size: body_size });
         }
 
         // mailbox: Guid
@@ -247,7 +247,7 @@ impl crate::Message for CMSG_SEND_MAIL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

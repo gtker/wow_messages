@@ -21,9 +21,9 @@ pub struct CMSG_GOSSIP_SELECT_OPTION {
 
 impl crate::private::Sealed for CMSG_GOSSIP_SELECT_OPTION {}
 impl CMSG_GOSSIP_SELECT_OPTION {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(12..=268).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x017C, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x017C, size: body_size });
         }
 
         // guid: Guid
@@ -127,7 +127,7 @@ impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

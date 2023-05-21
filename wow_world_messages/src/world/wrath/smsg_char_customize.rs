@@ -28,9 +28,9 @@ pub struct SMSG_CHAR_CUSTOMIZE {
 
 impl crate::private::Sealed for SMSG_CHAR_CUSTOMIZE {}
 impl SMSG_CHAR_CUSTOMIZE {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(1..=271).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0474, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0474, size: body_size });
         }
 
         // result: WorldResult
@@ -322,7 +322,7 @@ impl crate::Message for SMSG_CHAR_CUSTOMIZE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

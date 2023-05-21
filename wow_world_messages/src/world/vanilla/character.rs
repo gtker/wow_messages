@@ -167,7 +167,7 @@ impl Character {
 }
 
 impl Character {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // guid: Guid
         let guid = crate::util::read_guid(&mut r)?;
 

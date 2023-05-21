@@ -26,9 +26,9 @@ pub struct SMSG_LOG_XPGAIN {
 
 impl crate::private::Sealed for SMSG_LOG_XPGAIN {}
 impl SMSG_LOG_XPGAIN {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(14..=22).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01D0, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x01D0, size: body_size });
         }
 
         // target: Guid
@@ -166,7 +166,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

@@ -148,7 +148,7 @@ impl Mail {
 }
 
 impl Mail {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // size: u16
         let _size = crate::util::read_u16_le(&mut r)?;
         // size is expected to always be self.size (0)

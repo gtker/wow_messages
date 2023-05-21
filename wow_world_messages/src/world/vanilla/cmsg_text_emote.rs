@@ -24,9 +24,9 @@ pub struct CMSG_TEXT_EMOTE {
 
 impl crate::private::Sealed for CMSG_TEXT_EMOTE {}
 impl CMSG_TEXT_EMOTE {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0104, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0104, size: body_size });
         }
 
         // text_emote: TextEmote
@@ -67,7 +67,7 @@ impl crate::Message for CMSG_TEXT_EMOTE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

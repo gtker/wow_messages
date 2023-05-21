@@ -32,9 +32,9 @@ pub struct SMSG_LOOT_ROLL {
 
 impl crate::private::Sealed for SMSG_LOOT_ROLL {}
 impl SMSG_LOOT_ROLL {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 34 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A2, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x02A2, size: body_size });
         }
 
         // creature: Guid
@@ -155,7 +155,7 @@ impl crate::Message for SMSG_LOOT_ROLL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

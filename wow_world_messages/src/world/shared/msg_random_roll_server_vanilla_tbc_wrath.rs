@@ -21,9 +21,9 @@ pub struct MSG_RANDOM_ROLL_Server {
 
 impl crate::private::Sealed for MSG_RANDOM_ROLL_Server {}
 impl MSG_RANDOM_ROLL_Server {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 20 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FB, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x01FB, size: body_size });
         }
 
         // minimum: u32
@@ -108,7 +108,7 @@ impl crate::Message for MSG_RANDOM_ROLL_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

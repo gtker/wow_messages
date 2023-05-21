@@ -13,9 +13,9 @@ pub struct CMSG_LFG_SET_BOOT_VOTE {
 
 impl crate::private::Sealed for CMSG_LFG_SET_BOOT_VOTE {}
 impl CMSG_LFG_SET_BOOT_VOTE {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x036C, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x036C, size: body_size });
         }
 
         // agree_to_kick_player: Bool
@@ -73,7 +73,7 @@ impl crate::Message for CMSG_LFG_SET_BOOT_VOTE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

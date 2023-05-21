@@ -35,9 +35,9 @@ pub struct SMSG_SPELL_START {
 
 impl crate::private::Sealed for SMSG_SPELL_START {}
 impl SMSG_SPELL_START {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(19..=357).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0131, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0131, size: body_size });
         }
 
         // cast_item: PackedGuid
@@ -372,7 +372,7 @@ impl crate::Message for SMSG_SPELL_START {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

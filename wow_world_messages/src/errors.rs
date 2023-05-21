@@ -1,7 +1,7 @@
 use std::fmt::{Display, Formatter};
 
 pub use wow_world_base::EnumError;
-pub use wow_world_base::ParseError;
+pub use wow_world_base::ParseErrorKind;
 
 #[derive(Debug)]
 pub enum ExpectedOpcodeError {
@@ -10,7 +10,7 @@ pub enum ExpectedOpcodeError {
         name: Option<&'static str>,
         size: u32,
     },
-    Parse(ParseError),
+    Parse(ParseErrorKind),
 }
 
 impl Display for ExpectedOpcodeError {
@@ -36,8 +36,8 @@ impl Display for ExpectedOpcodeError {
 
 impl std::error::Error for ExpectedOpcodeError {}
 
-impl From<ParseError> for ExpectedOpcodeError {
-    fn from(e: ParseError) -> Self {
+impl From<ParseErrorKind> for ExpectedOpcodeError {
+    fn from(e: ParseErrorKind) -> Self {
         Self::Parse(e)
     }
 }

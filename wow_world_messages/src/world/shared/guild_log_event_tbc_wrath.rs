@@ -60,7 +60,7 @@ impl GuildLogEvent {
 }
 
 impl GuildLogEvent {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // event: GuildEvent
         let event = crate::util::read_u8_le(&mut r)?.try_into()?;
 

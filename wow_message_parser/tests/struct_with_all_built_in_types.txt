@@ -56,7 +56,7 @@ impl StructWithAllBuiltInTypes {
 }
 
 impl StructWithAllBuiltInTypes {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // basic8: u8
         let basic8 = crate::util::read_u8_le(&mut r)?;
 

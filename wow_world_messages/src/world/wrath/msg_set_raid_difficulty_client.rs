@@ -15,9 +15,9 @@ pub struct MSG_SET_RAID_DIFFICULTY_Client {
 
 impl crate::private::Sealed for MSG_SET_RAID_DIFFICULTY_Client {}
 impl MSG_SET_RAID_DIFFICULTY_Client {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04EB, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x04EB, size: body_size });
         }
 
         // difficulty: RaidDifficulty
@@ -75,7 +75,7 @@ impl crate::Message for MSG_SET_RAID_DIFFICULTY_Client {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

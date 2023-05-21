@@ -13,9 +13,9 @@ pub struct MSG_GUILD_BANK_LOG_QUERY_Client {
 
 impl crate::private::Sealed for MSG_GUILD_BANK_LOG_QUERY_Client {}
 impl MSG_GUILD_BANK_LOG_QUERY_Client {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03ED, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x03ED, size: body_size });
         }
 
         // slot: u8
@@ -73,7 +73,7 @@ impl crate::Message for MSG_GUILD_BANK_LOG_QUERY_Client {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

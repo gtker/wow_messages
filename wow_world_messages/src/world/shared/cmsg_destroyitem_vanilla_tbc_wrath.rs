@@ -23,9 +23,9 @@ pub struct CMSG_DESTROYITEM {
 
 impl crate::private::Sealed for CMSG_DESTROYITEM {}
 impl CMSG_DESTROYITEM {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 6 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0111, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0111, size: body_size });
         }
 
         // bag: u8
@@ -128,7 +128,7 @@ impl crate::Message for CMSG_DESTROYITEM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

@@ -15,9 +15,9 @@ pub struct SMSG_SET_FACTION_VISIBLE {
 
 impl crate::private::Sealed for SMSG_SET_FACTION_VISIBLE {}
 impl SMSG_SET_FACTION_VISIBLE {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 2 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0123, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0123, size: body_size });
         }
 
         // faction: Faction
@@ -75,7 +75,7 @@ impl crate::Message for SMSG_SET_FACTION_VISIBLE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

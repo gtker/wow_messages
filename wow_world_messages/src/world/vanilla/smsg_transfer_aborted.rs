@@ -22,9 +22,9 @@ pub struct SMSG_TRANSFER_ABORTED {
 
 impl crate::private::Sealed for SMSG_TRANSFER_ABORTED {}
 impl SMSG_TRANSFER_ABORTED {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 6 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0040, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0040, size: body_size });
         }
 
         // map: Map
@@ -100,7 +100,7 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

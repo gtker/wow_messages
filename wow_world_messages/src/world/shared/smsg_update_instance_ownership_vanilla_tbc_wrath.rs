@@ -13,9 +13,9 @@ pub struct SMSG_UPDATE_INSTANCE_OWNERSHIP {
 
 impl crate::private::Sealed for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
 impl SMSG_UPDATE_INSTANCE_OWNERSHIP {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x032B, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x032B, size: body_size });
         }
 
         // player_is_saved_to_a_raid: Bool32
@@ -73,7 +73,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_OWNERSHIP {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

@@ -100,7 +100,7 @@ impl crate::private::Sealed for CMD_AUTH_RECONNECT_CHALLENGE_Client {}
 impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
     const OPCODE: u8 = 0x02;
 
-    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // protocol_version: ProtocolVersion
         let protocol_version = crate::util::read_u8_le(&mut r)?.try_into()?;
 
@@ -160,7 +160,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
     fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
@@ -239,7 +239,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
     fn astd_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,

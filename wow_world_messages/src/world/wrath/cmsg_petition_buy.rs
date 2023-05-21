@@ -52,9 +52,9 @@ pub struct CMSG_PETITION_BUY {
 
 impl crate::private::Sealed for CMSG_PETITION_BUY {}
 impl CMSG_PETITION_BUY {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(82..=3142).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01BD, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x01BD, size: body_size });
         }
 
         // npc: Guid
@@ -306,7 +306,7 @@ impl crate::Message for CMSG_PETITION_BUY {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

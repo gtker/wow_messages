@@ -21,9 +21,9 @@ pub struct SMSG_SUMMON_REQUEST {
 
 impl crate::private::Sealed for SMSG_SUMMON_REQUEST {}
 impl SMSG_SUMMON_REQUEST {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 16 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02AB, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x02AB, size: body_size });
         }
 
         // summoner: Guid
@@ -99,7 +99,7 @@ impl crate::Message for SMSG_SUMMON_REQUEST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

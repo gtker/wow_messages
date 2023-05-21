@@ -24,9 +24,9 @@ pub struct CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {
 
 impl crate::private::Sealed for CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {}
 impl CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(45..=98).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0382, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0382, size: body_size });
         }
 
         // player: Guid
@@ -223,7 +223,7 @@ impl crate::Message for CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

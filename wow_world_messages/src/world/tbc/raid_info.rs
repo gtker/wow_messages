@@ -39,7 +39,7 @@ impl RaidInfo {
 }
 
 impl RaidInfo {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // map: Map
         let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 

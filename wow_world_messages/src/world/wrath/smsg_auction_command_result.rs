@@ -24,9 +24,9 @@ pub struct SMSG_AUCTION_COMMAND_RESULT {
 
 impl crate::private::Sealed for SMSG_AUCTION_COMMAND_RESULT {}
 impl SMSG_AUCTION_COMMAND_RESULT {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(12..=13).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x025B, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x025B, size: body_size });
         }
 
         // auction_id: u32
@@ -150,7 +150,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

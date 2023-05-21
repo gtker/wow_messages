@@ -15,9 +15,9 @@ pub struct CMSG_REPORT_PVP_AFK {
 
 impl crate::private::Sealed for CMSG_REPORT_PVP_AFK {}
 impl CMSG_REPORT_PVP_AFK {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E4, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x03E4, size: body_size });
         }
 
         // player: Guid
@@ -75,7 +75,7 @@ impl crate::Message for CMSG_REPORT_PVP_AFK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

@@ -13,9 +13,9 @@ pub struct CMSG_SET_AMMO {
 
 impl crate::private::Sealed for CMSG_SET_AMMO {}
 impl CMSG_SET_AMMO {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0268, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0268, size: body_size });
         }
 
         // item: u32
@@ -73,7 +73,7 @@ impl crate::Message for CMSG_SET_AMMO {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

@@ -28,7 +28,7 @@ impl LfgData {
 }
 
 impl LfgData {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // entry: u16
         let entry = crate::util::read_u16_le(&mut r)?;
 

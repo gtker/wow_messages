@@ -19,9 +19,9 @@ pub struct CMSG_GUILD_BANK_QUERY_TAB {
 
 impl crate::private::Sealed for CMSG_GUILD_BANK_QUERY_TAB {}
 impl CMSG_GUILD_BANK_QUERY_TAB {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 10 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E6, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x03E6, size: body_size });
         }
 
         // bank: Guid
@@ -97,7 +97,7 @@ impl crate::Message for CMSG_GUILD_BANK_QUERY_TAB {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

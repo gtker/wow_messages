@@ -44,9 +44,9 @@ pub struct SMSG_GROUP_LIST {
 
 impl crate::private::Sealed for SMSG_GROUP_LIST {}
 impl SMSG_GROUP_LIST {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(28..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007D, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x007D, size: body_size });
         }
 
         // group_type: u8
@@ -291,7 +291,7 @@ impl crate::Message for SMSG_GROUP_LIST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

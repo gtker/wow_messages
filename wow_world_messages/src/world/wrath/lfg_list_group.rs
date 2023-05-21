@@ -63,7 +63,7 @@ impl LfgListGroup {
 }
 
 impl LfgListGroup {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // group: Guid
         let group = crate::util::read_guid(&mut r)?;
 

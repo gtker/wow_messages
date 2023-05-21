@@ -42,7 +42,7 @@ impl crate::private::Sealed for CMD_REALM_LIST_Client {}
 impl ClientMessage for CMD_REALM_LIST_Client {
     const OPCODE: u8 = 0x10;
 
-    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // padding: u32
         let _padding = crate::util::read_u32_le(&mut r)?;
         // padding is expected to always be 0 (0)
@@ -62,7 +62,7 @@ impl ClientMessage for CMD_REALM_LIST_Client {
     fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
@@ -101,7 +101,7 @@ impl ClientMessage for CMD_REALM_LIST_Client {
     fn astd_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,

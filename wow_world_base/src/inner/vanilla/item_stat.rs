@@ -29,7 +29,7 @@ impl ItemStat {
 }
 
 impl ItemStat {
-    pub fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // stat_type: ItemStatType
         let stat_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 

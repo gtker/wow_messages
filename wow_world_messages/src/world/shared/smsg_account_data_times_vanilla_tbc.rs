@@ -17,9 +17,9 @@ pub struct SMSG_ACCOUNT_DATA_TIMES {
 
 impl crate::private::Sealed for SMSG_ACCOUNT_DATA_TIMES {}
 impl SMSG_ACCOUNT_DATA_TIMES {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 128 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0209, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0209, size: body_size });
         }
 
         // data: u32[32]
@@ -54,7 +54,7 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

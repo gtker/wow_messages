@@ -22,9 +22,9 @@ pub struct CMSG_BATTLEFIELD_LIST {
 
 impl crate::private::Sealed for CMSG_BATTLEFIELD_LIST {}
 impl CMSG_BATTLEFIELD_LIST {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 6 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x023C, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x023C, size: body_size });
         }
 
         // battleground_type: BattlegroundType
@@ -100,7 +100,7 @@ impl crate::Message for CMSG_BATTLEFIELD_LIST {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

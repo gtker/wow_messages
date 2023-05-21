@@ -17,9 +17,9 @@ pub struct CMSG_GUILD_BANK_BUY_TAB {
 
 impl crate::private::Sealed for CMSG_GUILD_BANK_BUY_TAB {}
 impl CMSG_GUILD_BANK_BUY_TAB {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 9 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E9, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x03E9, size: body_size });
         }
 
         // banker: Guid
@@ -86,7 +86,7 @@ impl crate::Message for CMSG_GUILD_BANK_BUY_TAB {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

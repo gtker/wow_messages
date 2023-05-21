@@ -17,9 +17,9 @@ pub struct CMSG_GUILD_RANK {
 
 impl crate::private::Sealed for CMSG_GUILD_RANK {}
 impl CMSG_GUILD_RANK {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(9..=264).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0231, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0231, size: body_size });
         }
 
         // rank_id: u32
@@ -102,7 +102,7 @@ impl crate::Message for CMSG_GUILD_RANK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

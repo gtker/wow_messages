@@ -31,7 +31,7 @@ impl InspectTalentSpec {
 }
 
 impl InspectTalentSpec {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // amount_of_talents: u8
         let amount_of_talents = crate::util::read_u8_le(&mut r)?;
 

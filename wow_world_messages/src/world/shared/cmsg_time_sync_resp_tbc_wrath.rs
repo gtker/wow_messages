@@ -18,9 +18,9 @@ pub struct CMSG_TIME_SYNC_RESP {
 
 impl crate::private::Sealed for CMSG_TIME_SYNC_RESP {}
 impl CMSG_TIME_SYNC_RESP {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0391, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0391, size: body_size });
         }
 
         // time_sync: u32
@@ -87,7 +87,7 @@ impl crate::Message for CMSG_TIME_SYNC_RESP {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

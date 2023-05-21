@@ -15,9 +15,9 @@ pub struct SMSG_SPLINE_MOVE_LAND_WALK {
 
 impl crate::private::Sealed for SMSG_SPLINE_MOVE_LAND_WALK {}
 impl SMSG_SPLINE_MOVE_LAND_WALK {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(2..=9).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x030A, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x030A, size: body_size });
         }
 
         // guid: PackedGuid
@@ -75,7 +75,7 @@ impl crate::Message for SMSG_SPLINE_MOVE_LAND_WALK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

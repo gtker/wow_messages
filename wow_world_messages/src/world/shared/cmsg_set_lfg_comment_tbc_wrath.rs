@@ -13,9 +13,9 @@ pub struct CMSG_SET_LFG_COMMENT {
 
 impl crate::private::Sealed for CMSG_SET_LFG_COMMENT {}
 impl CMSG_SET_LFG_COMMENT {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(1..=256).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0366, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0366, size: body_size });
         }
 
         // comment: CString
@@ -80,7 +80,7 @@ impl crate::Message for CMSG_SET_LFG_COMMENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

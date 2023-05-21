@@ -67,9 +67,9 @@ pub struct SMSG_CAST_FAILED {
 
 impl crate::private::Sealed for SMSG_CAST_FAILED {}
 impl SMSG_CAST_FAILED {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(7..=15).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0130, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0130, size: body_size });
         }
 
         // cast_count: u8
@@ -809,7 +809,7 @@ impl crate::Message for SMSG_CAST_FAILED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

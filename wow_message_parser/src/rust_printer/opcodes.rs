@@ -6,7 +6,7 @@ use crate::rust_printer::structs::print_common_impls::write_into_vec;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
     ImplType, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO, CFG_TESTCASE,
-    CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
+    CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, PARSE_ERROR_KIND, SERVER_MESSAGE_TRAIT_NAME,
     SYNC_IMPORT, TOKIO_IMPORT,
 };
 
@@ -121,7 +121,7 @@ pub(crate) fn includes(
                 ));
             }
 
-            s.wln(format!("use {PARSE_ERROR};"));
+            s.wln(format!("use {PARSE_ERROR_KIND};"));
 
             s.wln(format!(
                 "use crate::{}::opcode_to_name;",
@@ -182,8 +182,7 @@ fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str,
                               enum_name = get_enumerator_name(e.name())
                 ));
             } else {
-                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| {{ if let ParseError::Io(io) = a {{ ParseError::BufferSizeTooSmall {{ opcode: {opcode:#06X}, size: body_size, io, }} }} else {{ a }} }})?)),",
-                              opcode = opcode,
+                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| {{ if let {PARSE_ERROR_KIND}::Io(io) = a {{ {PARSE_ERROR_KIND}::BufferSizeTooSmall {{ opcode: {opcode:#06X}, size: body_size, io, }} }} else {{ a }} }})?)),",
                               name = e.name(),
                               enum_name = get_enumerator_name(e.name())
                 ));

@@ -14,9 +14,9 @@ pub struct SMSG_CHAT_PLAYER_AMBIGUOUS {
 
 impl crate::private::Sealed for SMSG_CHAT_PLAYER_AMBIGUOUS {}
 impl SMSG_CHAT_PLAYER_AMBIGUOUS {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(1..=256).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x032D, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x032D, size: body_size });
         }
 
         // player: CString
@@ -81,7 +81,7 @@ impl crate::Message for SMSG_CHAT_PLAYER_AMBIGUOUS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

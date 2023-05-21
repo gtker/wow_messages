@@ -33,9 +33,9 @@ pub struct CMSG_GMTICKET_CREATE {
 
 impl crate::private::Sealed for CMSG_GMTICKET_CREATE {}
 impl CMSG_GMTICKET_CREATE {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(19..=66072).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0205, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0205, size: body_size });
         }
 
         // category: GmTicketType
@@ -250,7 +250,7 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

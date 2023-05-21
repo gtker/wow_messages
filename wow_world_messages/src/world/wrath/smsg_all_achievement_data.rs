@@ -19,9 +19,9 @@ pub struct SMSG_ALL_ACHIEVEMENT_DATA {
 
 impl crate::private::Sealed for SMSG_ALL_ACHIEVEMENT_DATA {}
 impl SMSG_ALL_ACHIEVEMENT_DATA {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size > 16777215 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x047D, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x047D, size: body_size });
         }
 
         // done: AchievementDoneArray
@@ -88,7 +88,7 @@ impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

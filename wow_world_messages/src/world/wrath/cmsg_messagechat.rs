@@ -27,9 +27,9 @@ pub struct CMSG_MESSAGECHAT {
 
 impl crate::private::Sealed for CMSG_MESSAGECHAT {}
 impl CMSG_MESSAGECHAT {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(9..=520).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0095, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0095, size: body_size });
         }
 
         // chat_type: ChatType
@@ -241,7 +241,7 @@ impl crate::Message for CMSG_MESSAGECHAT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

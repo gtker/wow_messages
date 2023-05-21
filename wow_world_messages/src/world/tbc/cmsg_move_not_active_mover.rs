@@ -20,9 +20,9 @@ pub struct CMSG_MOVE_NOT_ACTIVE_MOVER {
 
 impl crate::private::Sealed for CMSG_MOVE_NOT_ACTIVE_MOVER {}
 impl CMSG_MOVE_NOT_ACTIVE_MOVER {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(37..=90).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D1, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x02D1, size: body_size });
         }
 
         // old_mover: Guid
@@ -201,7 +201,7 @@ impl crate::Message for CMSG_MOVE_NOT_ACTIVE_MOVER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

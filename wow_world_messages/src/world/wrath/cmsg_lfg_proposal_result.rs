@@ -15,9 +15,9 @@ pub struct CMSG_LFG_PROPOSAL_RESULT {
 
 impl crate::private::Sealed for CMSG_LFG_PROPOSAL_RESULT {}
 impl CMSG_LFG_PROPOSAL_RESULT {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 5 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0362, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0362, size: body_size });
         }
 
         // proposal_id: u32
@@ -84,7 +84,7 @@ impl crate::Message for CMSG_LFG_PROPOSAL_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

@@ -17,9 +17,9 @@ pub struct SMSG_SPELL_DELAYED {
 
 impl crate::private::Sealed for SMSG_SPELL_DELAYED {}
 impl SMSG_SPELL_DELAYED {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01E2, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x01E2, size: body_size });
         }
 
         // guid: Guid
@@ -86,7 +86,7 @@ impl crate::Message for SMSG_SPELL_DELAYED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

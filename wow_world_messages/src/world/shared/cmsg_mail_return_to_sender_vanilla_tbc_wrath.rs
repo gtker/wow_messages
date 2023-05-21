@@ -17,9 +17,9 @@ pub struct CMSG_MAIL_RETURN_TO_SENDER {
 
 impl crate::private::Sealed for CMSG_MAIL_RETURN_TO_SENDER {}
 impl CMSG_MAIL_RETURN_TO_SENDER {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 12 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0248, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0248, size: body_size });
         }
 
         // mailbox_id: Guid
@@ -86,7 +86,7 @@ impl crate::Message for CMSG_MAIL_RETURN_TO_SENDER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

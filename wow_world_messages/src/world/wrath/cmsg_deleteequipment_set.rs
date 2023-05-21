@@ -15,9 +15,9 @@ pub struct CMSG_DELETEEQUIPMENT_SET {
 
 impl crate::private::Sealed for CMSG_DELETEEQUIPMENT_SET {}
 impl CMSG_DELETEEQUIPMENT_SET {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(2..=9).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x013E, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x013E, size: body_size });
         }
 
         // set: PackedGuid
@@ -75,7 +75,7 @@ impl crate::Message for CMSG_DELETEEQUIPMENT_SET {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

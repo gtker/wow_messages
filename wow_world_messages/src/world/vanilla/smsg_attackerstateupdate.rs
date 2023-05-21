@@ -36,9 +36,9 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
 
 impl crate::private::Sealed for SMSG_ATTACKERSTATEUPDATE {}
 impl SMSG_ATTACKERSTATEUPDATE {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(29..=5163).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x014A, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x014A, size: body_size });
         }
 
         // hit_info: HitInfo
@@ -208,7 +208,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

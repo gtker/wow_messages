@@ -37,9 +37,9 @@ pub struct CMSG_CALENDAR_ADD_EVENT {
 
 impl crate::private::Sealed for CMSG_CALENDAR_ADD_EVENT {}
 impl CMSG_CALENDAR_ADD_EVENT {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(28..=10240).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042D, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x042D, size: body_size });
         }
 
         // title: CString
@@ -228,7 +228,7 @@ impl crate::Message for CMSG_CALENDAR_ADD_EVENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

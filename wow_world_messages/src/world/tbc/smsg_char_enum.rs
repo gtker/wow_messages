@@ -21,9 +21,9 @@ pub struct SMSG_CHAR_ENUM {
 
 impl crate::private::Sealed for SMSG_CHAR_ENUM {}
 impl SMSG_CHAR_ENUM {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(1..=126465).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003B, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x003B, size: body_size });
         }
 
         // amount_of_characters: u8
@@ -182,7 +182,7 @@ impl crate::Message for SMSG_CHAR_ENUM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

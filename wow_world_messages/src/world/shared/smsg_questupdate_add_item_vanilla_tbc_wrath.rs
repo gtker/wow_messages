@@ -15,9 +15,9 @@ pub struct SMSG_QUESTUPDATE_ADD_ITEM {
 
 impl crate::private::Sealed for SMSG_QUESTUPDATE_ADD_ITEM {}
 impl SMSG_QUESTUPDATE_ADD_ITEM {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x019A, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x019A, size: body_size });
         }
 
         // required_item_id: u32
@@ -84,7 +84,7 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_ITEM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

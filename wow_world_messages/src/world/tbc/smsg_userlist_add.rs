@@ -23,9 +23,9 @@ pub struct SMSG_USERLIST_ADD {
 
 impl crate::private::Sealed for SMSG_USERLIST_ADD {}
 impl SMSG_USERLIST_ADD {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(15..=270).contains(&body_size) {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03EF, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x03EF, size: body_size });
         }
 
         // player: Guid
@@ -126,7 +126,7 @@ impl crate::Message for SMSG_USERLIST_ADD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

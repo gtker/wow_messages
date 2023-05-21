@@ -19,9 +19,9 @@ pub struct CMSG_BATTLEFIELD_PORT {
 
 impl crate::private::Sealed for CMSG_BATTLEFIELD_PORT {}
 impl CMSG_BATTLEFIELD_PORT {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 5 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D5, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x02D5, size: body_size });
         }
 
         // map: Map
@@ -88,7 +88,7 @@ impl crate::Message for CMSG_BATTLEFIELD_PORT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

@@ -16,9 +16,9 @@ pub struct SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {
 
 impl crate::private::Sealed for SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {}
 impl SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0463, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0463, size: body_size });
         }
 
         // data_type: u32
@@ -85,7 +85,7 @@ impl crate::Message for SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

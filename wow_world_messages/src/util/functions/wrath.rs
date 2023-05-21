@@ -6,7 +6,7 @@ const ACHIEVEMENT_SENTINEL_VALUE: u32 = u32::from_le_bytes((-1_i32).to_le_bytes(
 
 pub(crate) fn read_achievement_done(
     r: &mut impl Read,
-) -> Result<Vec<AchievementDone>, crate::errors::ParseError> {
+) -> Result<Vec<AchievementDone>, crate::errors::ParseErrorKind> {
     let mut first = read_u32_le(r)?;
 
     let mut done = Vec::new();
@@ -40,7 +40,7 @@ pub(crate) fn write_achievement_done(
 
 pub(crate) fn read_achievement_in_progress(
     r: &mut impl Read,
-) -> Result<Vec<AchievementInProgress>, crate::errors::ParseError> {
+) -> Result<Vec<AchievementInProgress>, crate::errors::ParseErrorKind> {
     let mut first = read_u32_le(r)?;
 
     let mut in_progress = Vec::new();

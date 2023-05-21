@@ -25,9 +25,9 @@ pub struct SMSG_CALENDAR_RAID_LOCKOUT_UPDATED {
 
 impl crate::private::Sealed for SMSG_CALENDAR_RAID_LOCKOUT_UPDATED {}
 impl SMSG_CALENDAR_RAID_LOCKOUT_UPDATED {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 20 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0471, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0471, size: body_size });
         }
 
         // current_time: DateTime
@@ -121,7 +121,7 @@ impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_UPDATED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

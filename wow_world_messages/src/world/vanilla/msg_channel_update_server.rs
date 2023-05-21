@@ -13,9 +13,9 @@ pub struct MSG_CHANNEL_UPDATE_Server {
 
 impl crate::private::Sealed for MSG_CHANNEL_UPDATE_Server {}
 impl MSG_CHANNEL_UPDATE_Server {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x013A, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x013A, size: body_size });
         }
 
         // time: u32
@@ -73,7 +73,7 @@ impl crate::Message for MSG_CHANNEL_UPDATE_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

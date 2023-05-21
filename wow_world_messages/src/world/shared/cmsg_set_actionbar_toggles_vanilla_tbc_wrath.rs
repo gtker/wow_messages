@@ -14,9 +14,9 @@ pub struct CMSG_SET_ACTIONBAR_TOGGLES {
 
 impl crate::private::Sealed for CMSG_SET_ACTIONBAR_TOGGLES {}
 impl CMSG_SET_ACTIONBAR_TOGGLES {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 1 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02BF, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x02BF, size: body_size });
         }
 
         // action_bar: u8
@@ -74,7 +74,7 @@ impl crate::Message for CMSG_SET_ACTIONBAR_TOGGLES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

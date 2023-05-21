@@ -12,9 +12,9 @@ pub struct CMSG_NEXT_CINEMATIC_CAMERA {
 
 impl crate::private::Sealed for CMSG_NEXT_CINEMATIC_CAMERA {}
 impl CMSG_NEXT_CINEMATIC_CAMERA {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 0 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00FB, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x00FB, size: body_size });
         }
 
         Ok(Self {
@@ -63,7 +63,7 @@ impl crate::Message for CMSG_NEXT_CINEMATIC_CAMERA {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

@@ -40,7 +40,7 @@ impl AddonInfo {
 }
 
 impl AddonInfo {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // addon_name: CString
         let addon_name = {
             let addon_name = crate::util::read_c_string_to_vec(&mut r)?;

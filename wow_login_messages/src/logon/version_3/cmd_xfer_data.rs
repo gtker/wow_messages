@@ -35,7 +35,7 @@ impl crate::private::Sealed for CMD_XFER_DATA {}
 impl ServerMessage for CMD_XFER_DATA {
     const OPCODE: u8 = 0x31;
 
-    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // size: u16
         let size = crate::util::read_u16_le(&mut r)?;
 
@@ -64,7 +64,7 @@ impl ServerMessage for CMD_XFER_DATA {
     fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
@@ -112,7 +112,7 @@ impl ServerMessage for CMD_XFER_DATA {
     fn astd_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,

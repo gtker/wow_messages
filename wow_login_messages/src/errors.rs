@@ -1,37 +1,37 @@
 use std::fmt::{Display, Formatter};
 
 #[derive(Debug)]
-pub enum ParseError {
+pub enum ParseErrorKind {
     Io(std::io::Error),
     Enum(EnumError),
     String(std::string::FromUtf8Error),
 }
 
-impl Display for ParseError {
+impl Display for ParseErrorKind {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            ParseError::Io(i) => i.fmt(f),
-            ParseError::Enum(i) => i.fmt(f),
-            ParseError::String(i) => i.fmt(f),
+            ParseErrorKind::Io(i) => i.fmt(f),
+            ParseErrorKind::Enum(i) => i.fmt(f),
+            ParseErrorKind::String(i) => i.fmt(f),
         }
     }
 }
 
-impl std::error::Error for ParseError {}
+impl std::error::Error for ParseErrorKind {}
 
-impl From<EnumError> for ParseError {
+impl From<EnumError> for ParseErrorKind {
     fn from(e: EnumError) -> Self {
         Self::Enum(e)
     }
 }
 
-impl From<std::string::FromUtf8Error> for ParseError {
+impl From<std::string::FromUtf8Error> for ParseErrorKind {
     fn from(e: std::string::FromUtf8Error) -> Self {
         Self::String(e)
     }
 }
 
-impl From<std::io::Error> for ParseError {
+impl From<std::io::Error> for ParseErrorKind {
     fn from(e: std::io::Error) -> Self {
         Self::Io(e)
     }
@@ -63,7 +63,7 @@ impl std::error::Error for EnumError {}
 #[derive(Debug)]
 pub enum ExpectedOpcodeError {
     Opcode(u32),
-    Parse(ParseError),
+    Parse(ParseErrorKind),
 }
 
 impl Display for ExpectedOpcodeError {
@@ -79,8 +79,8 @@ impl Display for ExpectedOpcodeError {
 
 impl std::error::Error for ExpectedOpcodeError {}
 
-impl From<ParseError> for ExpectedOpcodeError {
-    fn from(e: ParseError) -> Self {
+impl From<ParseErrorKind> for ExpectedOpcodeError {
+    fn from(e: ParseErrorKind) -> Self {
         Self::Parse(e)
     }
 }

@@ -15,9 +15,9 @@ pub struct CMSG_GAMEOBJ_USE {
 
 impl crate::private::Sealed for CMSG_GAMEOBJ_USE {}
 impl CMSG_GAMEOBJ_USE {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 8 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00B1, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x00B1, size: body_size });
         }
 
         // guid: Guid
@@ -75,7 +75,7 @@ impl crate::Message for CMSG_GAMEOBJ_USE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

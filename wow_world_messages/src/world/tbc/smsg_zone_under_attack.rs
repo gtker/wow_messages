@@ -15,9 +15,9 @@ pub struct SMSG_ZONE_UNDER_ATTACK {
 
 impl crate::private::Sealed for SMSG_ZONE_UNDER_ATTACK {}
 impl SMSG_ZONE_UNDER_ATTACK {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 4 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0254, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0254, size: body_size });
         }
 
         // zone_id: Area
@@ -75,7 +75,7 @@ impl crate::Message for SMSG_ZONE_UNDER_ATTACK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 

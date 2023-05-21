@@ -209,7 +209,7 @@ impl LfgListPlayer {
 }
 
 impl LfgListPlayer {
-    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // player: Guid
         let player = crate::util::read_guid(&mut r)?;
 

@@ -10,7 +10,7 @@ use crate::rust_printer::structs::print_common_impls::print_size::{
 use crate::rust_printer::structs::test_case_string::print_to_testcase;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
-    ImplType, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
+    ImplType, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR_KIND, SERVER_MESSAGE_TRAIT_NAME,
 };
 use crate::CONTAINER_SELF_SIZE_FIELD;
 
@@ -328,7 +328,7 @@ fn test_for_invalid_size(s: &mut Writer, e: &Container) {
     s.bodyn(header, |s| {
         s.wln(format!(
             "return Err({}::InvalidSize {{ opcode: {:#06X}, size: body_size }});",
-            PARSE_ERROR,
+            PARSE_ERROR_KIND,
             e.opcode(),
         ));
     });
@@ -382,7 +382,7 @@ pub(crate) fn impl_world_message(s: &mut Writer, e: &Container, o: &Objects, opc
     s.bodyn(format!("impl {type_name}"), |s| {
         s.bodyn(
             format!(
-                "fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, {PARSE_ERROR}>"
+                "fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, {PARSE_ERROR_KIND}>"
             ),
             |s| {
                 test_for_invalid_size(s, e);
@@ -415,7 +415,7 @@ pub(crate) fn impl_world_message(s: &mut Writer, e: &Container, o: &Objects, opc
         );
 
         s.bodyn(format!(
-            "fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, {PARSE_ERROR}>",
+            "fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, {PARSE_ERROR_KIND}>",
         ), |s| {
             s.wln("Self::read_inner(r, body_size)")
         });
@@ -525,7 +525,7 @@ fn impl_read_write_struct(s: &mut Writer, e: &Container, o: &Objects) {
         let error_name = if e.only_has_io_errors() {
             "std::io::Error"
         } else {
-            PARSE_ERROR
+            PARSE_ERROR_KIND
         };
         for it in ImplType::types() {
             if it.is_async() {
@@ -555,7 +555,7 @@ fn print_read_decl(s: &mut Writer, it: ImplType) {
             "fn {prefix}read<R: {read}, I: crate::private::Sealed>(mut r: R) -> Result<Self, {error}>",
             prefix = it.prefix(),
             read = it.read(),
-            error = PARSE_ERROR,
+            error = PARSE_ERROR_KIND,
         ));
 
         return;
@@ -575,7 +575,7 @@ fn print_read_decl(s: &mut Writer, it: ImplType) {
 
     s.inc_indent();
     s.wln(format!(
-        "dyn core::future::Future<Output = Result<Self, {PARSE_ERROR}>>",
+        "dyn core::future::Future<Output = Result<Self, {PARSE_ERROR_KIND}>>",
     ));
     s.inc_indent();
 

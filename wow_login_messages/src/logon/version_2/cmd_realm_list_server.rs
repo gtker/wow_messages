@@ -74,7 +74,7 @@ impl crate::private::Sealed for CMD_REALM_LIST_Server {}
 impl ServerMessage for CMD_REALM_LIST_Server {
     const OPCODE: u8 = 0x10;
 
-    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
+    fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // size: u16
         let _size = crate::util::read_u16_le(&mut r)?;
         // size is expected to always be self.size (0)
@@ -115,7 +115,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
     fn tokio_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
@@ -175,7 +175,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
     fn astd_read<'async_trait, R, I: crate::private::Sealed>(
         mut r: R,
     ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseError>>
+        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
             + Send + 'async_trait,
     >> where
         R: 'async_trait + async_std::io::ReadExt + Unpin + Send,

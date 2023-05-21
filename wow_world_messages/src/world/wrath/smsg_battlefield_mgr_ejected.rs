@@ -19,9 +19,9 @@ pub struct SMSG_BATTLEFIELD_MGR_EJECTED {
 
 impl crate::private::Sealed for SMSG_BATTLEFIELD_MGR_EJECTED {}
 impl SMSG_BATTLEFIELD_MGR_EJECTED {
-    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 7 {
-            return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E6, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x04E6, size: body_size });
         }
 
         // battle_id: u32
@@ -106,7 +106,7 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_EJECTED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         Self::read_inner(r, body_size)
     }
 
