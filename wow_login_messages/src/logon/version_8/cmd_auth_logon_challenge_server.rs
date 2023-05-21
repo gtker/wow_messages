@@ -312,339 +312,317 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // protocol_version: u8
-            let _protocol_version = crate::util::tokio_read_u8_le(&mut r).await?;
-            // protocol_version is expected to always be 0 (0)
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // protocol_version: u8
+        let _protocol_version = crate::util::tokio_read_u8_le(&mut r).await?;
+        // protocol_version is expected to always be 0 (0)
 
-            // result: LoginResult
-            let result = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
+        // result: LoginResult
+        let result = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
-            let result_if = match result {
-                LoginResult::Success => {
-                    // server_public_key: u8[32]
-                    let server_public_key = {
-                        let mut server_public_key = [0_u8; 32];
-                        r.read_exact(&mut server_public_key).await?;
-                        server_public_key
-                    };
+        let result_if = match result {
+            LoginResult::Success => {
+                // server_public_key: u8[32]
+                let server_public_key = {
+                    let mut server_public_key = [0_u8; 32];
+                    r.read_exact(&mut server_public_key).await?;
+                    server_public_key
+                };
 
-                    // generator_length: u8
-                    let generator_length = crate::util::tokio_read_u8_le(&mut r).await?;
+                // generator_length: u8
+                let generator_length = crate::util::tokio_read_u8_le(&mut r).await?;
 
-                    // generator: u8[generator_length]
-                    let generator = {
-                        let mut generator = Vec::with_capacity(generator_length as usize);
-                        for _ in 0..generator_length {
-                            generator.push(crate::util::tokio_read_u8_le(&mut r).await?);
-                        }
-                        generator
-                    };
-
-                    // large_safe_prime_length: u8
-                    let large_safe_prime_length = crate::util::tokio_read_u8_le(&mut r).await?;
-
-                    // large_safe_prime: u8[large_safe_prime_length]
-                    let large_safe_prime = {
-                        let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
-                        for _ in 0..large_safe_prime_length {
-                            large_safe_prime.push(crate::util::tokio_read_u8_le(&mut r).await?);
-                        }
-                        large_safe_prime
-                    };
-
-                    // salt: u8[32]
-                    let salt = {
-                        let mut salt = [0_u8; 32];
-                        r.read_exact(&mut salt).await?;
-                        salt
-                    };
-
-                    // crc_salt: u8[16]
-                    let crc_salt = {
-                        let mut crc_salt = [0_u8; 16];
-                        r.read_exact(&mut crc_salt).await?;
-                        crc_salt
-                    };
-
-                    // security_flag: SecurityFlag
-                    let security_flag = SecurityFlag::new(crate::util::tokio_read_u8_le(&mut r).await?);
-
-                    let security_flag_pin = if security_flag.is_pin() {
-                        // pin_grid_seed: u32
-                        let pin_grid_seed = crate::util::tokio_read_u32_le(&mut r).await?;
-
-                        // pin_salt: u8[16]
-                        let pin_salt = {
-                            let mut pin_salt = [0_u8; 16];
-                            r.read_exact(&mut pin_salt).await?;
-                            pin_salt
-                        };
-
-                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
-                            pin_grid_seed,
-                            pin_salt,
-                        })
+                // generator: u8[generator_length]
+                let generator = {
+                    let mut generator = Vec::with_capacity(generator_length as usize);
+                    for _ in 0..generator_length {
+                        generator.push(crate::util::tokio_read_u8_le(&mut r).await?);
                     }
-                    else {
-                        None
-                    };
+                    generator
+                };
 
-                    let security_flag_matrix_card = if security_flag.is_matrix_card() {
-                        // width: u8
-                        let width = crate::util::tokio_read_u8_le(&mut r).await?;
+                // large_safe_prime_length: u8
+                let large_safe_prime_length = crate::util::tokio_read_u8_le(&mut r).await?;
 
-                        // height: u8
-                        let height = crate::util::tokio_read_u8_le(&mut r).await?;
-
-                        // digit_count: u8
-                        let digit_count = crate::util::tokio_read_u8_le(&mut r).await?;
-
-                        // challenge_count: u8
-                        let challenge_count = crate::util::tokio_read_u8_le(&mut r).await?;
-
-                        // seed: u64
-                        let seed = crate::util::tokio_read_u64_le(&mut r).await?;
-
-                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
-                            challenge_count,
-                            digit_count,
-                            height,
-                            seed,
-                            width,
-                        })
+                // large_safe_prime: u8[large_safe_prime_length]
+                let large_safe_prime = {
+                    let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
+                    for _ in 0..large_safe_prime_length {
+                        large_safe_prime.push(crate::util::tokio_read_u8_le(&mut r).await?);
                     }
-                    else {
-                        None
+                    large_safe_prime
+                };
+
+                // salt: u8[32]
+                let salt = {
+                    let mut salt = [0_u8; 32];
+                    r.read_exact(&mut salt).await?;
+                    salt
+                };
+
+                // crc_salt: u8[16]
+                let crc_salt = {
+                    let mut crc_salt = [0_u8; 16];
+                    r.read_exact(&mut crc_salt).await?;
+                    crc_salt
+                };
+
+                // security_flag: SecurityFlag
+                let security_flag = SecurityFlag::new(crate::util::tokio_read_u8_le(&mut r).await?);
+
+                let security_flag_pin = if security_flag.is_pin() {
+                    // pin_grid_seed: u32
+                    let pin_grid_seed = crate::util::tokio_read_u32_le(&mut r).await?;
+
+                    // pin_salt: u8[16]
+                    let pin_salt = {
+                        let mut pin_salt = [0_u8; 16];
+                        r.read_exact(&mut pin_salt).await?;
+                        pin_salt
                     };
 
-                    let security_flag_authenticator = if security_flag.is_authenticator() {
-                        // required: u8
-                        let required = crate::util::tokio_read_u8_le(&mut r).await?;
-
-                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                            required,
-                        })
-                    }
-                    else {
-                        None
-                    };
-
-                    let security_flag = CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
-                        inner: security_flag.as_int(),
-                        pin: security_flag_pin,
-                        matrix_card: security_flag_matrix_card,
-                        authenticator: security_flag_authenticator,
-                    };
-
-                    CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                        crc_salt,
-                        generator,
-                        large_safe_prime,
-                        salt,
-                        security_flag,
-                        server_public_key,
-                    }
+                    Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
+                        pin_grid_seed,
+                        pin_salt,
+                    })
                 }
-                LoginResult::FailUnknown0 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknown0,
-                LoginResult::FailUnknown1 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknown1,
-                LoginResult::FailBanned => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailBanned,
-                LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknownAccount,
-                LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
-                LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailAlreadyOnline,
-                LoginResult::FailNoTime => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailNoTime,
-                LoginResult::FailDbBusy => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailDbBusy,
-                LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailVersionInvalid,
-                LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::LoginDownloadFile,
-                LoginResult::FailInvalidServer => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailInvalidServer,
-                LoginResult::FailSuspended => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailSuspended,
-                LoginResult::FailNoAccess => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailNoAccess,
-                LoginResult::SuccessSurvey => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SuccessSurvey,
-                LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailParentalcontrol,
-                LoginResult::FailLockedEnforced => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailLockedEnforced,
-            };
+                else {
+                    None
+                };
 
-            Ok(Self {
-                result: result_if,
-            })
+                let security_flag_matrix_card = if security_flag.is_matrix_card() {
+                    // width: u8
+                    let width = crate::util::tokio_read_u8_le(&mut r).await?;
+
+                    // height: u8
+                    let height = crate::util::tokio_read_u8_le(&mut r).await?;
+
+                    // digit_count: u8
+                    let digit_count = crate::util::tokio_read_u8_le(&mut r).await?;
+
+                    // challenge_count: u8
+                    let challenge_count = crate::util::tokio_read_u8_le(&mut r).await?;
+
+                    // seed: u64
+                    let seed = crate::util::tokio_read_u64_le(&mut r).await?;
+
+                    Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                        challenge_count,
+                        digit_count,
+                        height,
+                        seed,
+                        width,
+                    })
+                }
+                else {
+                    None
+                };
+
+                let security_flag_authenticator = if security_flag.is_authenticator() {
+                    // required: u8
+                    let required = crate::util::tokio_read_u8_le(&mut r).await?;
+
+                    Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
+                        required,
+                    })
+                }
+                else {
+                    None
+                };
+
+                let security_flag = CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
+                    inner: security_flag.as_int(),
+                    pin: security_flag_pin,
+                    matrix_card: security_flag_matrix_card,
+                    authenticator: security_flag_authenticator,
+                };
+
+                CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
+                    crc_salt,
+                    generator,
+                    large_safe_prime,
+                    salt,
+                    security_flag,
+                    server_public_key,
+                }
+            }
+            LoginResult::FailUnknown0 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknown0,
+            LoginResult::FailUnknown1 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknown1,
+            LoginResult::FailBanned => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailBanned,
+            LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknownAccount,
+            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
+            LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailAlreadyOnline,
+            LoginResult::FailNoTime => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailNoTime,
+            LoginResult::FailDbBusy => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailDbBusy,
+            LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailVersionInvalid,
+            LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::LoginDownloadFile,
+            LoginResult::FailInvalidServer => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailInvalidServer,
+            LoginResult::FailSuspended => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailSuspended,
+            LoginResult::FailNoAccess => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailNoAccess,
+            LoginResult::SuccessSurvey => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SuccessSurvey,
+            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailParentalcontrol,
+            LoginResult::FailLockedEnforced => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailLockedEnforced,
+        };
+
+        Ok(Self {
+            result: result_if,
         })
     }
 
-    #[cfg(feature = "async-std")]
-    fn astd_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // protocol_version: u8
-            let _protocol_version = crate::util::astd_read_u8_le(&mut r).await?;
-            // protocol_version is expected to always be 0 (0)
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // protocol_version: u8
+        let _protocol_version = crate::util::astd_read_u8_le(&mut r).await?;
+        // protocol_version is expected to always be 0 (0)
 
-            // result: LoginResult
-            let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+        // result: LoginResult
+        let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
-            let result_if = match result {
-                LoginResult::Success => {
-                    // server_public_key: u8[32]
-                    let server_public_key = {
-                        let mut server_public_key = [0_u8; 32];
-                        r.read_exact(&mut server_public_key).await?;
-                        server_public_key
-                    };
+        let result_if = match result {
+            LoginResult::Success => {
+                // server_public_key: u8[32]
+                let server_public_key = {
+                    let mut server_public_key = [0_u8; 32];
+                    r.read_exact(&mut server_public_key).await?;
+                    server_public_key
+                };
 
-                    // generator_length: u8
-                    let generator_length = crate::util::astd_read_u8_le(&mut r).await?;
+                // generator_length: u8
+                let generator_length = crate::util::astd_read_u8_le(&mut r).await?;
 
-                    // generator: u8[generator_length]
-                    let generator = {
-                        let mut generator = Vec::with_capacity(generator_length as usize);
-                        for _ in 0..generator_length {
-                            generator.push(crate::util::astd_read_u8_le(&mut r).await?);
-                        }
-                        generator
-                    };
-
-                    // large_safe_prime_length: u8
-                    let large_safe_prime_length = crate::util::astd_read_u8_le(&mut r).await?;
-
-                    // large_safe_prime: u8[large_safe_prime_length]
-                    let large_safe_prime = {
-                        let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
-                        for _ in 0..large_safe_prime_length {
-                            large_safe_prime.push(crate::util::astd_read_u8_le(&mut r).await?);
-                        }
-                        large_safe_prime
-                    };
-
-                    // salt: u8[32]
-                    let salt = {
-                        let mut salt = [0_u8; 32];
-                        r.read_exact(&mut salt).await?;
-                        salt
-                    };
-
-                    // crc_salt: u8[16]
-                    let crc_salt = {
-                        let mut crc_salt = [0_u8; 16];
-                        r.read_exact(&mut crc_salt).await?;
-                        crc_salt
-                    };
-
-                    // security_flag: SecurityFlag
-                    let security_flag = SecurityFlag::new(crate::util::astd_read_u8_le(&mut r).await?);
-
-                    let security_flag_pin = if security_flag.is_pin() {
-                        // pin_grid_seed: u32
-                        let pin_grid_seed = crate::util::astd_read_u32_le(&mut r).await?;
-
-                        // pin_salt: u8[16]
-                        let pin_salt = {
-                            let mut pin_salt = [0_u8; 16];
-                            r.read_exact(&mut pin_salt).await?;
-                            pin_salt
-                        };
-
-                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
-                            pin_grid_seed,
-                            pin_salt,
-                        })
+                // generator: u8[generator_length]
+                let generator = {
+                    let mut generator = Vec::with_capacity(generator_length as usize);
+                    for _ in 0..generator_length {
+                        generator.push(crate::util::astd_read_u8_le(&mut r).await?);
                     }
-                    else {
-                        None
-                    };
+                    generator
+                };
 
-                    let security_flag_matrix_card = if security_flag.is_matrix_card() {
-                        // width: u8
-                        let width = crate::util::astd_read_u8_le(&mut r).await?;
+                // large_safe_prime_length: u8
+                let large_safe_prime_length = crate::util::astd_read_u8_le(&mut r).await?;
 
-                        // height: u8
-                        let height = crate::util::astd_read_u8_le(&mut r).await?;
-
-                        // digit_count: u8
-                        let digit_count = crate::util::astd_read_u8_le(&mut r).await?;
-
-                        // challenge_count: u8
-                        let challenge_count = crate::util::astd_read_u8_le(&mut r).await?;
-
-                        // seed: u64
-                        let seed = crate::util::astd_read_u64_le(&mut r).await?;
-
-                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
-                            challenge_count,
-                            digit_count,
-                            height,
-                            seed,
-                            width,
-                        })
+                // large_safe_prime: u8[large_safe_prime_length]
+                let large_safe_prime = {
+                    let mut large_safe_prime = Vec::with_capacity(large_safe_prime_length as usize);
+                    for _ in 0..large_safe_prime_length {
+                        large_safe_prime.push(crate::util::astd_read_u8_le(&mut r).await?);
                     }
-                    else {
-                        None
+                    large_safe_prime
+                };
+
+                // salt: u8[32]
+                let salt = {
+                    let mut salt = [0_u8; 32];
+                    r.read_exact(&mut salt).await?;
+                    salt
+                };
+
+                // crc_salt: u8[16]
+                let crc_salt = {
+                    let mut crc_salt = [0_u8; 16];
+                    r.read_exact(&mut crc_salt).await?;
+                    crc_salt
+                };
+
+                // security_flag: SecurityFlag
+                let security_flag = SecurityFlag::new(crate::util::astd_read_u8_le(&mut r).await?);
+
+                let security_flag_pin = if security_flag.is_pin() {
+                    // pin_grid_seed: u32
+                    let pin_grid_seed = crate::util::astd_read_u32_le(&mut r).await?;
+
+                    // pin_salt: u8[16]
+                    let pin_salt = {
+                        let mut pin_salt = [0_u8; 16];
+                        r.read_exact(&mut pin_salt).await?;
+                        pin_salt
                     };
 
-                    let security_flag_authenticator = if security_flag.is_authenticator() {
-                        // required: u8
-                        let required = crate::util::astd_read_u8_le(&mut r).await?;
-
-                        Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
-                            required,
-                        })
-                    }
-                    else {
-                        None
-                    };
-
-                    let security_flag = CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
-                        inner: security_flag.as_int(),
-                        pin: security_flag_pin,
-                        matrix_card: security_flag_matrix_card,
-                        authenticator: security_flag_authenticator,
-                    };
-
-                    CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
-                        crc_salt,
-                        generator,
-                        large_safe_prime,
-                        salt,
-                        security_flag,
-                        server_public_key,
-                    }
+                    Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Pin {
+                        pin_grid_seed,
+                        pin_salt,
+                    })
                 }
-                LoginResult::FailUnknown0 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknown0,
-                LoginResult::FailUnknown1 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknown1,
-                LoginResult::FailBanned => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailBanned,
-                LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknownAccount,
-                LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
-                LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailAlreadyOnline,
-                LoginResult::FailNoTime => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailNoTime,
-                LoginResult::FailDbBusy => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailDbBusy,
-                LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailVersionInvalid,
-                LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::LoginDownloadFile,
-                LoginResult::FailInvalidServer => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailInvalidServer,
-                LoginResult::FailSuspended => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailSuspended,
-                LoginResult::FailNoAccess => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailNoAccess,
-                LoginResult::SuccessSurvey => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SuccessSurvey,
-                LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailParentalcontrol,
-                LoginResult::FailLockedEnforced => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailLockedEnforced,
-            };
+                else {
+                    None
+                };
 
-            Ok(Self {
-                result: result_if,
-            })
+                let security_flag_matrix_card = if security_flag.is_matrix_card() {
+                    // width: u8
+                    let width = crate::util::astd_read_u8_le(&mut r).await?;
+
+                    // height: u8
+                    let height = crate::util::astd_read_u8_le(&mut r).await?;
+
+                    // digit_count: u8
+                    let digit_count = crate::util::astd_read_u8_le(&mut r).await?;
+
+                    // challenge_count: u8
+                    let challenge_count = crate::util::astd_read_u8_le(&mut r).await?;
+
+                    // seed: u64
+                    let seed = crate::util::astd_read_u64_le(&mut r).await?;
+
+                    Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_MatrixCard {
+                        challenge_count,
+                        digit_count,
+                        height,
+                        seed,
+                        width,
+                    })
+                }
+                else {
+                    None
+                };
+
+                let security_flag_authenticator = if security_flag.is_authenticator() {
+                    // required: u8
+                    let required = crate::util::astd_read_u8_le(&mut r).await?;
+
+                    Some(CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag_Authenticator {
+                        required,
+                    })
+                }
+                else {
+                    None
+                };
+
+                let security_flag = CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag {
+                    inner: security_flag.as_int(),
+                    pin: security_flag_pin,
+                    matrix_card: security_flag_matrix_card,
+                    authenticator: security_flag_authenticator,
+                };
+
+                CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
+                    crc_salt,
+                    generator,
+                    large_safe_prime,
+                    salt,
+                    security_flag,
+                    server_public_key,
+                }
+            }
+            LoginResult::FailUnknown0 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknown0,
+            LoginResult::FailUnknown1 => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknown1,
+            LoginResult::FailBanned => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailBanned,
+            LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailUnknownAccount,
+            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
+            LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailAlreadyOnline,
+            LoginResult::FailNoTime => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailNoTime,
+            LoginResult::FailDbBusy => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailDbBusy,
+            LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailVersionInvalid,
+            LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::LoginDownloadFile,
+            LoginResult::FailInvalidServer => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailInvalidServer,
+            LoginResult::FailSuspended => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailSuspended,
+            LoginResult::FailNoAccess => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailNoAccess,
+            LoginResult::SuccessSurvey => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::SuccessSurvey,
+            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailParentalcontrol,
+            LoginResult::FailLockedEnforced => CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::FailLockedEnforced,
+        };
+
+        Ok(Self {
+            result: result_if,
         })
     }
 

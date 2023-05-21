@@ -101,121 +101,99 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // result: LoginResult
-            let result = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // result: LoginResult
+        let result = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
-            let result_if = match result {
-                LoginResult::Success => {
-                    // challenge_data: u8[16]
-                    let challenge_data = {
-                        let mut challenge_data = [0_u8; 16];
-                        r.read_exact(&mut challenge_data).await?;
-                        challenge_data
-                    };
+        let result_if = match result {
+            LoginResult::Success => {
+                // challenge_data: u8[16]
+                let challenge_data = {
+                    let mut challenge_data = [0_u8; 16];
+                    r.read_exact(&mut challenge_data).await?;
+                    challenge_data
+                };
 
-                    // checksum_salt: u8[16]
-                    let checksum_salt = {
-                        let mut checksum_salt = [0_u8; 16];
-                        r.read_exact(&mut checksum_salt).await?;
-                        checksum_salt
-                    };
+                // checksum_salt: u8[16]
+                let checksum_salt = {
+                    let mut checksum_salt = [0_u8; 16];
+                    r.read_exact(&mut checksum_salt).await?;
+                    checksum_salt
+                };
 
-                    CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
-                        challenge_data,
-                        checksum_salt,
-                    }
+                CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
+                    challenge_data,
+                    checksum_salt,
                 }
-                LoginResult::FailUnknown0 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown0,
-                LoginResult::FailUnknown1 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown1,
-                LoginResult::FailBanned => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailBanned,
-                LoginResult::FailUnknownAccount => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknownAccount,
-                LoginResult::FailIncorrectPassword => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
-                LoginResult::FailAlreadyOnline => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailAlreadyOnline,
-                LoginResult::FailNoTime => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoTime,
-                LoginResult::FailDbBusy => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailDbBusy,
-                LoginResult::FailVersionInvalid => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailVersionInvalid,
-                LoginResult::LoginDownloadFile => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::LoginDownloadFile,
-                LoginResult::FailInvalidServer => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailInvalidServer,
-                LoginResult::FailSuspended => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailSuspended,
-                LoginResult::FailNoAccess => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoAccess,
-                LoginResult::SuccessSurvey => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::SuccessSurvey,
-                LoginResult::FailParentalcontrol => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailParentalcontrol,
-                LoginResult::FailLockedEnforced => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailLockedEnforced,
-            };
+            }
+            LoginResult::FailUnknown0 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown0,
+            LoginResult::FailUnknown1 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown1,
+            LoginResult::FailBanned => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailBanned,
+            LoginResult::FailUnknownAccount => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknownAccount,
+            LoginResult::FailIncorrectPassword => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
+            LoginResult::FailAlreadyOnline => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailAlreadyOnline,
+            LoginResult::FailNoTime => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoTime,
+            LoginResult::FailDbBusy => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailDbBusy,
+            LoginResult::FailVersionInvalid => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailVersionInvalid,
+            LoginResult::LoginDownloadFile => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::LoginDownloadFile,
+            LoginResult::FailInvalidServer => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailInvalidServer,
+            LoginResult::FailSuspended => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailSuspended,
+            LoginResult::FailNoAccess => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoAccess,
+            LoginResult::SuccessSurvey => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::SuccessSurvey,
+            LoginResult::FailParentalcontrol => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailParentalcontrol,
+            LoginResult::FailLockedEnforced => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailLockedEnforced,
+        };
 
-            Ok(Self {
-                result: result_if,
-            })
+        Ok(Self {
+            result: result_if,
         })
     }
 
-    #[cfg(feature = "async-std")]
-    fn astd_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // result: LoginResult
-            let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // result: LoginResult
+        let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
-            let result_if = match result {
-                LoginResult::Success => {
-                    // challenge_data: u8[16]
-                    let challenge_data = {
-                        let mut challenge_data = [0_u8; 16];
-                        r.read_exact(&mut challenge_data).await?;
-                        challenge_data
-                    };
+        let result_if = match result {
+            LoginResult::Success => {
+                // challenge_data: u8[16]
+                let challenge_data = {
+                    let mut challenge_data = [0_u8; 16];
+                    r.read_exact(&mut challenge_data).await?;
+                    challenge_data
+                };
 
-                    // checksum_salt: u8[16]
-                    let checksum_salt = {
-                        let mut checksum_salt = [0_u8; 16];
-                        r.read_exact(&mut checksum_salt).await?;
-                        checksum_salt
-                    };
+                // checksum_salt: u8[16]
+                let checksum_salt = {
+                    let mut checksum_salt = [0_u8; 16];
+                    r.read_exact(&mut checksum_salt).await?;
+                    checksum_salt
+                };
 
-                    CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
-                        challenge_data,
-                        checksum_salt,
-                    }
+                CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
+                    challenge_data,
+                    checksum_salt,
                 }
-                LoginResult::FailUnknown0 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown0,
-                LoginResult::FailUnknown1 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown1,
-                LoginResult::FailBanned => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailBanned,
-                LoginResult::FailUnknownAccount => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknownAccount,
-                LoginResult::FailIncorrectPassword => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
-                LoginResult::FailAlreadyOnline => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailAlreadyOnline,
-                LoginResult::FailNoTime => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoTime,
-                LoginResult::FailDbBusy => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailDbBusy,
-                LoginResult::FailVersionInvalid => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailVersionInvalid,
-                LoginResult::LoginDownloadFile => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::LoginDownloadFile,
-                LoginResult::FailInvalidServer => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailInvalidServer,
-                LoginResult::FailSuspended => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailSuspended,
-                LoginResult::FailNoAccess => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoAccess,
-                LoginResult::SuccessSurvey => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::SuccessSurvey,
-                LoginResult::FailParentalcontrol => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailParentalcontrol,
-                LoginResult::FailLockedEnforced => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailLockedEnforced,
-            };
+            }
+            LoginResult::FailUnknown0 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown0,
+            LoginResult::FailUnknown1 => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknown1,
+            LoginResult::FailBanned => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailBanned,
+            LoginResult::FailUnknownAccount => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailUnknownAccount,
+            LoginResult::FailIncorrectPassword => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailIncorrectPassword,
+            LoginResult::FailAlreadyOnline => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailAlreadyOnline,
+            LoginResult::FailNoTime => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoTime,
+            LoginResult::FailDbBusy => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailDbBusy,
+            LoginResult::FailVersionInvalid => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailVersionInvalid,
+            LoginResult::LoginDownloadFile => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::LoginDownloadFile,
+            LoginResult::FailInvalidServer => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailInvalidServer,
+            LoginResult::FailSuspended => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailSuspended,
+            LoginResult::FailNoAccess => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailNoAccess,
+            LoginResult::SuccessSurvey => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::SuccessSurvey,
+            LoginResult::FailParentalcontrol => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailParentalcontrol,
+            LoginResult::FailLockedEnforced => CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::FailLockedEnforced,
+        };
 
-            Ok(Self {
-                result: result_if,
-            })
+        Ok(Self {
+            result: result_if,
         })
     }
 

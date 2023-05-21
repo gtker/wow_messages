@@ -27,35 +27,13 @@ impl CMD_XFER_INITIATE {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            Ok(Self {
-            })
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        Ok(Self {
         })
     }
 
-    #[cfg(feature = "async-std")]
-    fn astd_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            Ok(Self {
-            })
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        Ok(Self {
         })
     }
 

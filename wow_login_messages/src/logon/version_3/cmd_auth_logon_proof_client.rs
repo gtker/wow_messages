@@ -156,165 +156,143 @@ impl CMD_AUTH_LOGON_PROOF_Client {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // client_public_key: u8[32]
-            let client_public_key = {
-                let mut client_public_key = [0_u8; 32];
-                r.read_exact(&mut client_public_key).await?;
-                client_public_key
-            };
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // client_public_key: u8[32]
+        let client_public_key = {
+            let mut client_public_key = [0_u8; 32];
+            r.read_exact(&mut client_public_key).await?;
+            client_public_key
+        };
 
-            // client_proof: u8[20]
-            let client_proof = {
-                let mut client_proof = [0_u8; 20];
-                r.read_exact(&mut client_proof).await?;
-                client_proof
-            };
+        // client_proof: u8[20]
+        let client_proof = {
+            let mut client_proof = [0_u8; 20];
+            r.read_exact(&mut client_proof).await?;
+            client_proof
+        };
 
-            // crc_hash: u8[20]
-            let crc_hash = {
-                let mut crc_hash = [0_u8; 20];
-                r.read_exact(&mut crc_hash).await?;
-                crc_hash
-            };
+        // crc_hash: u8[20]
+        let crc_hash = {
+            let mut crc_hash = [0_u8; 20];
+            r.read_exact(&mut crc_hash).await?;
+            crc_hash
+        };
 
-            // number_of_telemetry_keys: u8
-            let number_of_telemetry_keys = crate::util::tokio_read_u8_le(&mut r).await?;
+        // number_of_telemetry_keys: u8
+        let number_of_telemetry_keys = crate::util::tokio_read_u8_le(&mut r).await?;
 
-            // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
-            let telemetry_keys = {
-                let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
-                for _ in 0..number_of_telemetry_keys {
-                    telemetry_keys.push(TelemetryKey::tokio_read(&mut r).await?);
+        // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+        let telemetry_keys = {
+            let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
+            for _ in 0..number_of_telemetry_keys {
+                telemetry_keys.push(TelemetryKey::tokio_read(&mut r).await?);
+            }
+            telemetry_keys
+        };
+
+        // security_flag: SecurityFlag
+        let security_flag = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
+
+        let security_flag_if = match security_flag {
+            SecurityFlag::None => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
+            SecurityFlag::Pin => {
+                // pin_salt: u8[16]
+                let pin_salt = {
+                    let mut pin_salt = [0_u8; 16];
+                    r.read_exact(&mut pin_salt).await?;
+                    pin_salt
+                };
+
+                // pin_hash: u8[20]
+                let pin_hash = {
+                    let mut pin_hash = [0_u8; 20];
+                    r.read_exact(&mut pin_hash).await?;
+                    pin_hash
+                };
+
+                CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::Pin {
+                    pin_hash,
+                    pin_salt,
                 }
-                telemetry_keys
-            };
+            }
+        };
 
-            // security_flag: SecurityFlag
-            let security_flag = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
-
-            let security_flag_if = match security_flag {
-                SecurityFlag::None => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
-                SecurityFlag::Pin => {
-                    // pin_salt: u8[16]
-                    let pin_salt = {
-                        let mut pin_salt = [0_u8; 16];
-                        r.read_exact(&mut pin_salt).await?;
-                        pin_salt
-                    };
-
-                    // pin_hash: u8[20]
-                    let pin_hash = {
-                        let mut pin_hash = [0_u8; 20];
-                        r.read_exact(&mut pin_hash).await?;
-                        pin_hash
-                    };
-
-                    CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::Pin {
-                        pin_hash,
-                        pin_salt,
-                    }
-                }
-            };
-
-            Ok(Self {
-                client_public_key,
-                client_proof,
-                crc_hash,
-                telemetry_keys,
-                security_flag: security_flag_if,
-            })
+        Ok(Self {
+            client_public_key,
+            client_proof,
+            crc_hash,
+            telemetry_keys,
+            security_flag: security_flag_if,
         })
     }
 
-    #[cfg(feature = "async-std")]
-    fn astd_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // client_public_key: u8[32]
-            let client_public_key = {
-                let mut client_public_key = [0_u8; 32];
-                r.read_exact(&mut client_public_key).await?;
-                client_public_key
-            };
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // client_public_key: u8[32]
+        let client_public_key = {
+            let mut client_public_key = [0_u8; 32];
+            r.read_exact(&mut client_public_key).await?;
+            client_public_key
+        };
 
-            // client_proof: u8[20]
-            let client_proof = {
-                let mut client_proof = [0_u8; 20];
-                r.read_exact(&mut client_proof).await?;
-                client_proof
-            };
+        // client_proof: u8[20]
+        let client_proof = {
+            let mut client_proof = [0_u8; 20];
+            r.read_exact(&mut client_proof).await?;
+            client_proof
+        };
 
-            // crc_hash: u8[20]
-            let crc_hash = {
-                let mut crc_hash = [0_u8; 20];
-                r.read_exact(&mut crc_hash).await?;
-                crc_hash
-            };
+        // crc_hash: u8[20]
+        let crc_hash = {
+            let mut crc_hash = [0_u8; 20];
+            r.read_exact(&mut crc_hash).await?;
+            crc_hash
+        };
 
-            // number_of_telemetry_keys: u8
-            let number_of_telemetry_keys = crate::util::astd_read_u8_le(&mut r).await?;
+        // number_of_telemetry_keys: u8
+        let number_of_telemetry_keys = crate::util::astd_read_u8_le(&mut r).await?;
 
-            // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
-            let telemetry_keys = {
-                let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
-                for _ in 0..number_of_telemetry_keys {
-                    telemetry_keys.push(TelemetryKey::astd_read(&mut r).await?);
+        // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
+        let telemetry_keys = {
+            let mut telemetry_keys = Vec::with_capacity(number_of_telemetry_keys as usize);
+            for _ in 0..number_of_telemetry_keys {
+                telemetry_keys.push(TelemetryKey::astd_read(&mut r).await?);
+            }
+            telemetry_keys
+        };
+
+        // security_flag: SecurityFlag
+        let security_flag = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+
+        let security_flag_if = match security_flag {
+            SecurityFlag::None => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
+            SecurityFlag::Pin => {
+                // pin_salt: u8[16]
+                let pin_salt = {
+                    let mut pin_salt = [0_u8; 16];
+                    r.read_exact(&mut pin_salt).await?;
+                    pin_salt
+                };
+
+                // pin_hash: u8[20]
+                let pin_hash = {
+                    let mut pin_hash = [0_u8; 20];
+                    r.read_exact(&mut pin_hash).await?;
+                    pin_hash
+                };
+
+                CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::Pin {
+                    pin_hash,
+                    pin_salt,
                 }
-                telemetry_keys
-            };
+            }
+        };
 
-            // security_flag: SecurityFlag
-            let security_flag = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
-
-            let security_flag_if = match security_flag {
-                SecurityFlag::None => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
-                SecurityFlag::Pin => {
-                    // pin_salt: u8[16]
-                    let pin_salt = {
-                        let mut pin_salt = [0_u8; 16];
-                        r.read_exact(&mut pin_salt).await?;
-                        pin_salt
-                    };
-
-                    // pin_hash: u8[20]
-                    let pin_hash = {
-                        let mut pin_hash = [0_u8; 20];
-                        r.read_exact(&mut pin_hash).await?;
-                        pin_hash
-                    };
-
-                    CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::Pin {
-                        pin_hash,
-                        pin_salt,
-                    }
-                }
-            };
-
-            Ok(Self {
-                client_public_key,
-                client_proof,
-                crc_hash,
-                telemetry_keys,
-                security_flag: security_flag_if,
-            })
+        Ok(Self {
+            client_public_key,
+            client_proof,
+            crc_hash,
+            telemetry_keys,
+            security_flag: security_flag_if,
         })
     }
 

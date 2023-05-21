@@ -61,51 +61,29 @@ impl CMD_AUTH_RECONNECT_PROOF_Server {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // result: LoginResult
-            let result = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // result: LoginResult
+        let result = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
-            // padding: u16
-            let _padding = crate::util::tokio_read_u16_le(&mut r).await?;
-            // padding is expected to always be 0 (0)
+        // padding: u16
+        let _padding = crate::util::tokio_read_u16_le(&mut r).await?;
+        // padding is expected to always be 0 (0)
 
-            Ok(Self {
-                result,
-            })
+        Ok(Self {
+            result,
         })
     }
 
-    #[cfg(feature = "async-std")]
-    fn astd_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // result: LoginResult
-            let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // result: LoginResult
+        let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
-            // padding: u16
-            let _padding = crate::util::astd_read_u16_le(&mut r).await?;
-            // padding is expected to always be 0 (0)
+        // padding: u16
+        let _padding = crate::util::astd_read_u16_le(&mut r).await?;
+        // padding is expected to always be 0 (0)
 
-            Ok(Self {
-                result,
-            })
+        Ok(Self {
+            result,
         })
     }
 

@@ -473,14 +473,13 @@ pub(crate) fn impl_read_and_writable_login(
 
     s.bodyn(format!("impl {type_name}"), |s| {
         for it in ImplType::types() {
-            print_read_decl(s, it, true);
+            let func = it.func();
+            let prefix = it.prefix();
+            let read = it.read();
 
-            print_read::print_read(s, e, o, it.prefix(), it.postfix());
-
-            if it.is_async() {
-                s.closing_curly_with(")"); // Box::pin
-            }
-            s.closing_curly_newline();
+            s.bodyn(format!("{func}fn {prefix}read_inner<R: {read}>(mut r: R) -> Result<Self, {PARSE_ERROR_KIND}>"), |s| {
+                print_read::print_read(s, e, o, it.prefix(), it.postfix());
+            });
         }
     });
 

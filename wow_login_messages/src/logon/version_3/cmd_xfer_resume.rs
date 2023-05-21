@@ -36,43 +36,21 @@ impl CMD_XFER_RESUME {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // offset: u64
-            let offset = crate::util::tokio_read_u64_le(&mut r).await?;
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // offset: u64
+        let offset = crate::util::tokio_read_u64_le(&mut r).await?;
 
-            Ok(Self {
-                offset,
-            })
+        Ok(Self {
+            offset,
         })
     }
 
-    #[cfg(feature = "async-std")]
-    fn astd_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // offset: u64
-            let offset = crate::util::astd_read_u64_le(&mut r).await?;
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // offset: u64
+        let offset = crate::util::astd_read_u64_le(&mut r).await?;
 
-            Ok(Self {
-                offset,
-            })
+        Ok(Self {
+            offset,
         })
     }
 

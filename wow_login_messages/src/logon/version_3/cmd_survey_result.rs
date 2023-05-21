@@ -69,77 +69,55 @@ impl CMD_SURVEY_RESULT {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // survey_id: u32
-            let survey_id = crate::util::tokio_read_u32_le(&mut r).await?;
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // survey_id: u32
+        let survey_id = crate::util::tokio_read_u32_le(&mut r).await?;
 
-            // error: u8
-            let error = crate::util::tokio_read_u8_le(&mut r).await?;
+        // error: u8
+        let error = crate::util::tokio_read_u8_le(&mut r).await?;
 
-            // compressed_data_length: u16
-            let compressed_data_length = crate::util::tokio_read_u16_le(&mut r).await?;
+        // compressed_data_length: u16
+        let compressed_data_length = crate::util::tokio_read_u16_le(&mut r).await?;
 
-            // data: u8[compressed_data_length]
-            let data = {
-                let mut data = Vec::with_capacity(compressed_data_length as usize);
-                for _ in 0..compressed_data_length {
-                    data.push(crate::util::tokio_read_u8_le(&mut r).await?);
-                }
-                data
-            };
+        // data: u8[compressed_data_length]
+        let data = {
+            let mut data = Vec::with_capacity(compressed_data_length as usize);
+            for _ in 0..compressed_data_length {
+                data.push(crate::util::tokio_read_u8_le(&mut r).await?);
+            }
+            data
+        };
 
-            Ok(Self {
-                survey_id,
-                error,
-                data,
-            })
+        Ok(Self {
+            survey_id,
+            error,
+            data,
         })
     }
 
-    #[cfg(feature = "async-std")]
-    fn astd_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // survey_id: u32
-            let survey_id = crate::util::astd_read_u32_le(&mut r).await?;
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // survey_id: u32
+        let survey_id = crate::util::astd_read_u32_le(&mut r).await?;
 
-            // error: u8
-            let error = crate::util::astd_read_u8_le(&mut r).await?;
+        // error: u8
+        let error = crate::util::astd_read_u8_le(&mut r).await?;
 
-            // compressed_data_length: u16
-            let compressed_data_length = crate::util::astd_read_u16_le(&mut r).await?;
+        // compressed_data_length: u16
+        let compressed_data_length = crate::util::astd_read_u16_le(&mut r).await?;
 
-            // data: u8[compressed_data_length]
-            let data = {
-                let mut data = Vec::with_capacity(compressed_data_length as usize);
-                for _ in 0..compressed_data_length {
-                    data.push(crate::util::astd_read_u8_le(&mut r).await?);
-                }
-                data
-            };
+        // data: u8[compressed_data_length]
+        let data = {
+            let mut data = Vec::with_capacity(compressed_data_length as usize);
+            for _ in 0..compressed_data_length {
+                data.push(crate::util::astd_read_u8_le(&mut r).await?);
+            }
+            data
+        };
 
-            Ok(Self {
-                survey_id,
-                error,
-                data,
-            })
+        Ok(Self {
+            survey_id,
+            error,
+            data,
         })
     }
 

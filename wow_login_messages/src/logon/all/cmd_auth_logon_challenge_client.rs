@@ -147,123 +147,101 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // protocol_version: ProtocolVersion
-            let protocol_version = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // protocol_version: ProtocolVersion
+        let protocol_version = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
-            // size: u16
-            let _size = crate::util::tokio_read_u16_le(&mut r).await?;
-            // size is expected to always be self.size (0)
+        // size: u16
+        let _size = crate::util::tokio_read_u16_le(&mut r).await?;
+        // size is expected to always be self.size (0)
 
-            // game_name: u32
-            let _game_name = crate::util::tokio_read_u32_le(&mut r).await?;
-            // game_name is expected to always be "\0WoW" (5730135)
+        // game_name: u32
+        let _game_name = crate::util::tokio_read_u32_le(&mut r).await?;
+        // game_name is expected to always be "\0WoW" (5730135)
 
-            // version: Version
-            let version = Version::tokio_read(&mut r).await?;
+        // version: Version
+        let version = Version::tokio_read(&mut r).await?;
 
-            // platform: Platform
-            let platform = crate::util::tokio_read_u32_le(&mut r).await?.into();
+        // platform: Platform
+        let platform = crate::util::tokio_read_u32_le(&mut r).await?.into();
 
-            // os: Os
-            let os = crate::util::tokio_read_u32_le(&mut r).await?.into();
+        // os: Os
+        let os = crate::util::tokio_read_u32_le(&mut r).await?.into();
 
-            // locale: Locale
-            let locale = crate::util::tokio_read_u32_le(&mut r).await?.into();
+        // locale: Locale
+        let locale = crate::util::tokio_read_u32_le(&mut r).await?.into();
 
-            // utc_timezone_offset: u32
-            let utc_timezone_offset = crate::util::tokio_read_u32_le(&mut r).await?;
+        // utc_timezone_offset: u32
+        let utc_timezone_offset = crate::util::tokio_read_u32_le(&mut r).await?;
 
-            // client_ip_address: IpAddress
-            let client_ip_address = Ipv4Addr::from(crate::util::tokio_read_u32_be(&mut r).await?);
+        // client_ip_address: IpAddress
+        let client_ip_address = Ipv4Addr::from(crate::util::tokio_read_u32_be(&mut r).await?);
 
-            // account_name: String
-            let account_name = {
-                let account_name = crate::util::tokio_read_u8_le(&mut r).await?;
-                let account_name = crate::util::tokio_read_fixed_string_to_vec(&mut r, account_name as usize).await?;
-                String::from_utf8(account_name)?
-            };
+        // account_name: String
+        let account_name = {
+            let account_name = crate::util::tokio_read_u8_le(&mut r).await?;
+            let account_name = crate::util::tokio_read_fixed_string_to_vec(&mut r, account_name as usize).await?;
+            String::from_utf8(account_name)?
+        };
 
-            Ok(Self {
-                protocol_version,
-                version,
-                platform,
-                os,
-                locale,
-                utc_timezone_offset,
-                client_ip_address,
-                account_name,
-            })
+        Ok(Self {
+            protocol_version,
+            version,
+            platform,
+            os,
+            locale,
+            utc_timezone_offset,
+            client_ip_address,
+            account_name,
         })
     }
 
-    #[cfg(feature = "async-std")]
-    fn astd_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // protocol_version: ProtocolVersion
-            let protocol_version = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // protocol_version: ProtocolVersion
+        let protocol_version = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
-            // size: u16
-            let _size = crate::util::astd_read_u16_le(&mut r).await?;
-            // size is expected to always be self.size (0)
+        // size: u16
+        let _size = crate::util::astd_read_u16_le(&mut r).await?;
+        // size is expected to always be self.size (0)
 
-            // game_name: u32
-            let _game_name = crate::util::astd_read_u32_le(&mut r).await?;
-            // game_name is expected to always be "\0WoW" (5730135)
+        // game_name: u32
+        let _game_name = crate::util::astd_read_u32_le(&mut r).await?;
+        // game_name is expected to always be "\0WoW" (5730135)
 
-            // version: Version
-            let version = Version::astd_read(&mut r).await?;
+        // version: Version
+        let version = Version::astd_read(&mut r).await?;
 
-            // platform: Platform
-            let platform = crate::util::astd_read_u32_le(&mut r).await?.into();
+        // platform: Platform
+        let platform = crate::util::astd_read_u32_le(&mut r).await?.into();
 
-            // os: Os
-            let os = crate::util::astd_read_u32_le(&mut r).await?.into();
+        // os: Os
+        let os = crate::util::astd_read_u32_le(&mut r).await?.into();
 
-            // locale: Locale
-            let locale = crate::util::astd_read_u32_le(&mut r).await?.into();
+        // locale: Locale
+        let locale = crate::util::astd_read_u32_le(&mut r).await?.into();
 
-            // utc_timezone_offset: u32
-            let utc_timezone_offset = crate::util::astd_read_u32_le(&mut r).await?;
+        // utc_timezone_offset: u32
+        let utc_timezone_offset = crate::util::astd_read_u32_le(&mut r).await?;
 
-            // client_ip_address: IpAddress
-            let client_ip_address = Ipv4Addr::from(crate::util::astd_read_u32_be(&mut r).await?);
+        // client_ip_address: IpAddress
+        let client_ip_address = Ipv4Addr::from(crate::util::astd_read_u32_be(&mut r).await?);
 
-            // account_name: String
-            let account_name = {
-                let account_name = crate::util::astd_read_u8_le(&mut r).await?;
-                let account_name = crate::util::astd_read_fixed_string_to_vec(&mut r, account_name as usize).await?;
-                String::from_utf8(account_name)?
-            };
+        // account_name: String
+        let account_name = {
+            let account_name = crate::util::astd_read_u8_le(&mut r).await?;
+            let account_name = crate::util::astd_read_fixed_string_to_vec(&mut r, account_name as usize).await?;
+            String::from_utf8(account_name)?
+        };
 
-            Ok(Self {
-                protocol_version,
-                version,
-                platform,
-                os,
-                locale,
-                utc_timezone_offset,
-                client_ip_address,
-                account_name,
-            })
+        Ok(Self {
+            protocol_version,
+            version,
+            platform,
+            os,
+            locale,
+            utc_timezone_offset,
+            client_ip_address,
+            account_name,
         })
     }
 

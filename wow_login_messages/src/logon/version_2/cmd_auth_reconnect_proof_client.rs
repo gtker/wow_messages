@@ -95,91 +95,69 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // proof_data: u8[16]
-            let proof_data = {
-                let mut proof_data = [0_u8; 16];
-                r.read_exact(&mut proof_data).await?;
-                proof_data
-            };
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // proof_data: u8[16]
+        let proof_data = {
+            let mut proof_data = [0_u8; 16];
+            r.read_exact(&mut proof_data).await?;
+            proof_data
+        };
 
-            // client_proof: u8[20]
-            let client_proof = {
-                let mut client_proof = [0_u8; 20];
-                r.read_exact(&mut client_proof).await?;
-                client_proof
-            };
+        // client_proof: u8[20]
+        let client_proof = {
+            let mut client_proof = [0_u8; 20];
+            r.read_exact(&mut client_proof).await?;
+            client_proof
+        };
 
-            // client_checksum: u8[20]
-            let client_checksum = {
-                let mut client_checksum = [0_u8; 20];
-                r.read_exact(&mut client_checksum).await?;
-                client_checksum
-            };
+        // client_checksum: u8[20]
+        let client_checksum = {
+            let mut client_checksum = [0_u8; 20];
+            r.read_exact(&mut client_checksum).await?;
+            client_checksum
+        };
 
-            // key_count: u8
-            let _key_count = crate::util::tokio_read_u8_le(&mut r).await?;
-            // key_count is expected to always be 0 (0)
+        // key_count: u8
+        let _key_count = crate::util::tokio_read_u8_le(&mut r).await?;
+        // key_count is expected to always be 0 (0)
 
-            Ok(Self {
-                proof_data,
-                client_proof,
-                client_checksum,
-            })
+        Ok(Self {
+            proof_data,
+            client_proof,
+            client_checksum,
         })
     }
 
-    #[cfg(feature = "async-std")]
-    fn astd_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // proof_data: u8[16]
-            let proof_data = {
-                let mut proof_data = [0_u8; 16];
-                r.read_exact(&mut proof_data).await?;
-                proof_data
-            };
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // proof_data: u8[16]
+        let proof_data = {
+            let mut proof_data = [0_u8; 16];
+            r.read_exact(&mut proof_data).await?;
+            proof_data
+        };
 
-            // client_proof: u8[20]
-            let client_proof = {
-                let mut client_proof = [0_u8; 20];
-                r.read_exact(&mut client_proof).await?;
-                client_proof
-            };
+        // client_proof: u8[20]
+        let client_proof = {
+            let mut client_proof = [0_u8; 20];
+            r.read_exact(&mut client_proof).await?;
+            client_proof
+        };
 
-            // client_checksum: u8[20]
-            let client_checksum = {
-                let mut client_checksum = [0_u8; 20];
-                r.read_exact(&mut client_checksum).await?;
-                client_checksum
-            };
+        // client_checksum: u8[20]
+        let client_checksum = {
+            let mut client_checksum = [0_u8; 20];
+            r.read_exact(&mut client_checksum).await?;
+            client_checksum
+        };
 
-            // key_count: u8
-            let _key_count = crate::util::astd_read_u8_le(&mut r).await?;
-            // key_count is expected to always be 0 (0)
+        // key_count: u8
+        let _key_count = crate::util::astd_read_u8_le(&mut r).await?;
+        // key_count is expected to always be 0 (0)
 
-            Ok(Self {
-                proof_data,
-                client_proof,
-                client_checksum,
-            })
+        Ok(Self {
+            proof_data,
+            client_proof,
+            client_checksum,
         })
     }
 

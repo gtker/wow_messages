@@ -51,61 +51,39 @@ impl CMD_XFER_DATA {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // size: u16
-            let size = crate::util::tokio_read_u16_le(&mut r).await?;
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // size: u16
+        let size = crate::util::tokio_read_u16_le(&mut r).await?;
 
-            // data: u8[size]
-            let data = {
-                let mut data = Vec::with_capacity(size as usize);
-                for _ in 0..size {
-                    data.push(crate::util::tokio_read_u8_le(&mut r).await?);
-                }
-                data
-            };
+        // data: u8[size]
+        let data = {
+            let mut data = Vec::with_capacity(size as usize);
+            for _ in 0..size {
+                data.push(crate::util::tokio_read_u8_le(&mut r).await?);
+            }
+            data
+        };
 
-            Ok(Self {
-                data,
-            })
+        Ok(Self {
+            data,
         })
     }
 
-    #[cfg(feature = "async-std")]
-    fn astd_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // size: u16
-            let size = crate::util::astd_read_u16_le(&mut r).await?;
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // size: u16
+        let size = crate::util::astd_read_u16_le(&mut r).await?;
 
-            // data: u8[size]
-            let data = {
-                let mut data = Vec::with_capacity(size as usize);
-                for _ in 0..size {
-                    data.push(crate::util::astd_read_u8_le(&mut r).await?);
-                }
-                data
-            };
+        // data: u8[size]
+        let data = {
+            let mut data = Vec::with_capacity(size as usize);
+            for _ in 0..size {
+                data.push(crate::util::astd_read_u8_le(&mut r).await?);
+            }
+            data
+        };
 
-            Ok(Self {
-                data,
-            })
+        Ok(Self {
+            data,
         })
     }
 

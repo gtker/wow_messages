@@ -102,85 +102,63 @@ impl CMD_REALM_LIST_Server {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // size: u16
-            let _size = crate::util::tokio_read_u16_le(&mut r).await?;
-            // size is expected to always be self.size (0)
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // size: u16
+        let _size = crate::util::tokio_read_u16_le(&mut r).await?;
+        // size is expected to always be self.size (0)
 
-            // header_padding: u32
-            let _header_padding = crate::util::tokio_read_u32_le(&mut r).await?;
-            // header_padding is expected to always be 0 (0)
+        // header_padding: u32
+        let _header_padding = crate::util::tokio_read_u32_le(&mut r).await?;
+        // header_padding is expected to always be 0 (0)
 
-            // number_of_realms: u16
-            let number_of_realms = crate::util::tokio_read_u16_le(&mut r).await?;
+        // number_of_realms: u16
+        let number_of_realms = crate::util::tokio_read_u16_le(&mut r).await?;
 
-            // realms: Realm[number_of_realms]
-            let realms = {
-                let mut realms = Vec::with_capacity(number_of_realms as usize);
-                for _ in 0..number_of_realms {
-                    realms.push(Realm::tokio_read(&mut r).await?);
-                }
-                realms
-            };
+        // realms: Realm[number_of_realms]
+        let realms = {
+            let mut realms = Vec::with_capacity(number_of_realms as usize);
+            for _ in 0..number_of_realms {
+                realms.push(Realm::tokio_read(&mut r).await?);
+            }
+            realms
+        };
 
-            // footer_padding: u16
-            let _footer_padding = crate::util::tokio_read_u16_le(&mut r).await?;
-            // footer_padding is expected to always be 0 (0)
+        // footer_padding: u16
+        let _footer_padding = crate::util::tokio_read_u16_le(&mut r).await?;
+        // footer_padding is expected to always be 0 (0)
 
-            Ok(Self {
-                realms,
-            })
+        Ok(Self {
+            realms,
         })
     }
 
-    #[cfg(feature = "async-std")]
-    fn astd_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // size: u16
-            let _size = crate::util::astd_read_u16_le(&mut r).await?;
-            // size is expected to always be self.size (0)
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // size: u16
+        let _size = crate::util::astd_read_u16_le(&mut r).await?;
+        // size is expected to always be self.size (0)
 
-            // header_padding: u32
-            let _header_padding = crate::util::astd_read_u32_le(&mut r).await?;
-            // header_padding is expected to always be 0 (0)
+        // header_padding: u32
+        let _header_padding = crate::util::astd_read_u32_le(&mut r).await?;
+        // header_padding is expected to always be 0 (0)
 
-            // number_of_realms: u16
-            let number_of_realms = crate::util::astd_read_u16_le(&mut r).await?;
+        // number_of_realms: u16
+        let number_of_realms = crate::util::astd_read_u16_le(&mut r).await?;
 
-            // realms: Realm[number_of_realms]
-            let realms = {
-                let mut realms = Vec::with_capacity(number_of_realms as usize);
-                for _ in 0..number_of_realms {
-                    realms.push(Realm::astd_read(&mut r).await?);
-                }
-                realms
-            };
+        // realms: Realm[number_of_realms]
+        let realms = {
+            let mut realms = Vec::with_capacity(number_of_realms as usize);
+            for _ in 0..number_of_realms {
+                realms.push(Realm::astd_read(&mut r).await?);
+            }
+            realms
+        };
 
-            // footer_padding: u16
-            let _footer_padding = crate::util::astd_read_u16_le(&mut r).await?;
-            // footer_padding is expected to always be 0 (0)
+        // footer_padding: u16
+        let _footer_padding = crate::util::astd_read_u16_le(&mut r).await?;
+        // footer_padding is expected to always be 0 (0)
 
-            Ok(Self {
-                realms,
-            })
+        Ok(Self {
+            realms,
         })
     }
 

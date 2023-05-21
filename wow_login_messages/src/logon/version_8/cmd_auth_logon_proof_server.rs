@@ -226,129 +226,107 @@ impl CMD_AUTH_LOGON_PROOF_Server {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // result: LoginResult
-            let result = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // result: LoginResult
+        let result = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
-            let result_if = match result {
-                LoginResult::Success => {
-                    // server_proof: u8[20]
-                    let server_proof = {
-                        let mut server_proof = [0_u8; 20];
-                        r.read_exact(&mut server_proof).await?;
-                        server_proof
-                    };
+        let result_if = match result {
+            LoginResult::Success => {
+                // server_proof: u8[20]
+                let server_proof = {
+                    let mut server_proof = [0_u8; 20];
+                    r.read_exact(&mut server_proof).await?;
+                    server_proof
+                };
 
-                    // account_flag: AccountFlag
-                    let account_flag = AccountFlag::new(crate::util::tokio_read_u32_le(&mut r).await?);
+                // account_flag: AccountFlag
+                let account_flag = AccountFlag::new(crate::util::tokio_read_u32_le(&mut r).await?);
 
-                    // hardware_survey_id: u32
-                    let hardware_survey_id = crate::util::tokio_read_u32_le(&mut r).await?;
+                // hardware_survey_id: u32
+                let hardware_survey_id = crate::util::tokio_read_u32_le(&mut r).await?;
 
-                    // unknown_flags: u16
-                    let unknown_flags = crate::util::tokio_read_u16_le(&mut r).await?;
+                // unknown_flags: u16
+                let unknown_flags = crate::util::tokio_read_u16_le(&mut r).await?;
 
-                    CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
-                        account_flag,
-                        hardware_survey_id,
-                        server_proof,
-                        unknown_flags,
-                    }
+                CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
+                    account_flag,
+                    hardware_survey_id,
+                    server_proof,
+                    unknown_flags,
                 }
-                LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
-                LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1,
-                LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned,
-                LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount,
-                LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword,
-                LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline,
-                LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime,
-                LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy,
-                LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid,
-                LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile,
-                LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer,
-                LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended,
-                LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess,
-                LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey,
-                LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol,
-                LoginResult::FailLockedEnforced => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailLockedEnforced,
-            };
+            }
+            LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
+            LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1,
+            LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned,
+            LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount,
+            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword,
+            LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline,
+            LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime,
+            LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy,
+            LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid,
+            LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile,
+            LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer,
+            LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended,
+            LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess,
+            LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey,
+            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol,
+            LoginResult::FailLockedEnforced => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailLockedEnforced,
+        };
 
-            Ok(Self {
-                result: result_if,
-            })
+        Ok(Self {
+            result: result_if,
         })
     }
 
-    #[cfg(feature = "async-std")]
-    fn astd_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // result: LoginResult
-            let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // result: LoginResult
+        let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
-            let result_if = match result {
-                LoginResult::Success => {
-                    // server_proof: u8[20]
-                    let server_proof = {
-                        let mut server_proof = [0_u8; 20];
-                        r.read_exact(&mut server_proof).await?;
-                        server_proof
-                    };
+        let result_if = match result {
+            LoginResult::Success => {
+                // server_proof: u8[20]
+                let server_proof = {
+                    let mut server_proof = [0_u8; 20];
+                    r.read_exact(&mut server_proof).await?;
+                    server_proof
+                };
 
-                    // account_flag: AccountFlag
-                    let account_flag = AccountFlag::new(crate::util::astd_read_u32_le(&mut r).await?);
+                // account_flag: AccountFlag
+                let account_flag = AccountFlag::new(crate::util::astd_read_u32_le(&mut r).await?);
 
-                    // hardware_survey_id: u32
-                    let hardware_survey_id = crate::util::astd_read_u32_le(&mut r).await?;
+                // hardware_survey_id: u32
+                let hardware_survey_id = crate::util::astd_read_u32_le(&mut r).await?;
 
-                    // unknown_flags: u16
-                    let unknown_flags = crate::util::astd_read_u16_le(&mut r).await?;
+                // unknown_flags: u16
+                let unknown_flags = crate::util::astd_read_u16_le(&mut r).await?;
 
-                    CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
-                        account_flag,
-                        hardware_survey_id,
-                        server_proof,
-                        unknown_flags,
-                    }
+                CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
+                    account_flag,
+                    hardware_survey_id,
+                    server_proof,
+                    unknown_flags,
                 }
-                LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
-                LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1,
-                LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned,
-                LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount,
-                LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword,
-                LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline,
-                LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime,
-                LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy,
-                LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid,
-                LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile,
-                LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer,
-                LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended,
-                LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess,
-                LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey,
-                LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol,
-                LoginResult::FailLockedEnforced => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailLockedEnforced,
-            };
+            }
+            LoginResult::FailUnknown0 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0,
+            LoginResult::FailUnknown1 => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1,
+            LoginResult::FailBanned => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned,
+            LoginResult::FailUnknownAccount => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount,
+            LoginResult::FailIncorrectPassword => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword,
+            LoginResult::FailAlreadyOnline => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline,
+            LoginResult::FailNoTime => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime,
+            LoginResult::FailDbBusy => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy,
+            LoginResult::FailVersionInvalid => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid,
+            LoginResult::LoginDownloadFile => CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile,
+            LoginResult::FailInvalidServer => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer,
+            LoginResult::FailSuspended => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended,
+            LoginResult::FailNoAccess => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess,
+            LoginResult::SuccessSurvey => CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey,
+            LoginResult::FailParentalcontrol => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol,
+            LoginResult::FailLockedEnforced => CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailLockedEnforced,
+        };
 
-            Ok(Self {
-                result: result_if,
-            })
+        Ok(Self {
+            result: result_if,
         })
     }
 

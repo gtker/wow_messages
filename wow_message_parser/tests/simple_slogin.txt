@@ -36,43 +36,21 @@ impl SimpleSlogin {
         })
     }
 
-    #[cfg(feature = "tokio")]
-    fn tokio_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + tokio::io::AsyncReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // basic: u8
-            let basic = crate::util::tokio_read_u8_le(&mut r).await?;
+    async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // basic: u8
+        let basic = crate::util::tokio_read_u8_le(&mut r).await?;
 
-            Ok(Self {
-                basic,
-            })
+        Ok(Self {
+            basic,
         })
     }
 
-    #[cfg(feature = "async-std")]
-    fn astd_read_inner<'async_trait, R>(
-        mut r: R,
-    ) -> core::pin::Pin<Box<
-        dyn core::future::Future<Output = Result<Self, crate::errors::ParseErrorKind>>
-            + Send + 'async_trait,
-    >> where
-        R: 'async_trait + async_std::io::ReadExt + Unpin + Send,
-        Self: 'async_trait,
-     {
-        Box::pin(async move {
-            // basic: u8
-            let basic = crate::util::astd_read_u8_le(&mut r).await?;
+    async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
+        // basic: u8
+        let basic = crate::util::astd_read_u8_le(&mut r).await?;
 
-            Ok(Self {
-                basic,
-            })
+        Ok(Self {
+            basic,
         })
     }
 
