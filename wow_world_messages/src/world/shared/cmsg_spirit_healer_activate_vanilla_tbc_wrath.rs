@@ -17,7 +17,7 @@ impl crate::private::Sealed for CMSG_SPIRIT_HEALER_ACTIVATE {}
 impl CMSG_SPIRIT_HEALER_ACTIVATE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 8 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x021C, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // guid: Guid
@@ -75,8 +75,8 @@ impl crate::Message for CMSG_SPIRIT_HEALER_ACTIVATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(540, "CMSG_SPIRIT_HEALER_ACTIVATE", body_size, a))
     }
 
 }

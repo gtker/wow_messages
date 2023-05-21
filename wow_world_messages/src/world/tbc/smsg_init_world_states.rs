@@ -24,7 +24,7 @@ impl crate::private::Sealed for SMSG_INIT_WORLD_STATES {}
 impl SMSG_INIT_WORLD_STATES {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(10..=524298).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x02C2, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // map: Map
@@ -134,8 +134,8 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(706, "SMSG_INIT_WORLD_STATES", body_size, a))
     }
 
 }

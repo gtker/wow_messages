@@ -16,7 +16,7 @@ impl crate::private::Sealed for CMSG_ACCEPT_TRADE {}
 impl CMSG_ACCEPT_TRADE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 4 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x011A, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // unknown1: u32
@@ -74,8 +74,8 @@ impl crate::Message for CMSG_ACCEPT_TRADE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(282, "CMSG_ACCEPT_TRADE", body_size, a))
     }
 
 }

@@ -21,7 +21,7 @@ impl crate::private::Sealed for CMSG_ACTIVATETAXI {}
 impl CMSG_ACTIVATETAXI {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 16 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x01AD, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // guid: Guid
@@ -97,8 +97,8 @@ impl crate::Message for CMSG_ACTIVATETAXI {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(429, "CMSG_ACTIVATETAXI", body_size, a))
     }
 
 }

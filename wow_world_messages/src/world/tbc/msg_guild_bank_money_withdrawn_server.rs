@@ -15,7 +15,7 @@ impl crate::private::Sealed for MSG_GUILD_BANK_MONEY_WITHDRAWN_Server {}
 impl MSG_GUILD_BANK_MONEY_WITHDRAWN_Server {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 4 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x03FD, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // remaining_withdraw_amount: u32
@@ -73,8 +73,8 @@ impl crate::Message for MSG_GUILD_BANK_MONEY_WITHDRAWN_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1021, "MSG_GUILD_BANK_MONEY_WITHDRAWN_Server", body_size, a))
     }
 
 }

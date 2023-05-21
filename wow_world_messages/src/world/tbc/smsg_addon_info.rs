@@ -33,7 +33,7 @@ impl crate::private::Sealed for SMSG_ADDON_INFO {}
 impl SMSG_ADDON_INFO {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(4..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x02EF, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         panic!("SKIP_SERIALIZE_READ_PANIC This message has an `AddonArray` tag which makes it impossible to generate a correct read implementation for it.")
@@ -90,8 +90,8 @@ impl crate::Message for SMSG_ADDON_INFO {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(751, "SMSG_ADDON_INFO", body_size, a))
     }
 
 }

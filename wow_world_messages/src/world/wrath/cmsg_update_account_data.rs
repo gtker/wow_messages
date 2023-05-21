@@ -27,7 +27,7 @@ impl crate::private::Sealed for CMSG_UPDATE_ACCOUNT_DATA {}
 impl CMSG_UPDATE_ACCOUNT_DATA {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(12..=65547).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x020B, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // data_type: u32
@@ -133,8 +133,8 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(523, "CMSG_UPDATE_ACCOUNT_DATA", body_size, a))
     }
 
 }

@@ -31,7 +31,7 @@ impl crate::private::Sealed for SMSG_CHAR_FACTION_CHANGE {}
 impl SMSG_CHAR_FACTION_CHANGE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(1..=272).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x04DA, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // result: WorldResult
@@ -335,8 +335,8 @@ impl crate::Message for SMSG_CHAR_FACTION_CHANGE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1242, "SMSG_CHAR_FACTION_CHANGE", body_size, a))
     }
 
 }

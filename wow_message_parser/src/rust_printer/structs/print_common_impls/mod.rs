@@ -10,7 +10,7 @@ use crate::rust_printer::structs::print_common_impls::print_size::{
 use crate::rust_printer::structs::test_case_string::print_to_testcase;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
-    ImplType, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR_KIND, SERVER_MESSAGE_TRAIT_NAME,
+    ImplType, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, PARSE_ERROR_KIND, SERVER_MESSAGE_TRAIT_NAME,
 };
 use crate::CONTAINER_SELF_SIZE_FIELD;
 
@@ -326,11 +326,7 @@ fn test_for_invalid_size(s: &mut Writer, e: &Container) {
         }
     };
     s.bodyn(header, |s| {
-        s.wln(format!(
-            "return Err({}::InvalidSize {{ opcode: {:#06X}, size: body_size }});",
-            PARSE_ERROR_KIND,
-            e.opcode(),
-        ));
+        s.wln(format!("return Err({PARSE_ERROR_KIND}::InvalidSize);",));
     });
 }
 
@@ -415,9 +411,9 @@ pub(crate) fn impl_world_message(s: &mut Writer, e: &Container, o: &Objects, opc
         );
 
         s.bodyn(format!(
-            "fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, {PARSE_ERROR_KIND}>",
+            "fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, {PARSE_ERROR}>",
         ), |s| {
-            s.wln("Self::read_inner(r, body_size)")
+            s.wln(format!("Self::read_inner(r, body_size).map_err(|a| {PARSE_ERROR}::new({opcode}, \"{type_name}\", body_size, a))"));
         });
     });
 

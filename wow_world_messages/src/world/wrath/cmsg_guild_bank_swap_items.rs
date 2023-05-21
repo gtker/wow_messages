@@ -52,7 +52,7 @@ impl crate::private::Sealed for CMSG_GUILD_BANK_SWAP_ITEMS {}
 impl CMSG_GUILD_BANK_SWAP_ITEMS {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(23..=65561).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x03E9, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // bank: Guid
@@ -449,8 +449,8 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1001, "CMSG_GUILD_BANK_SWAP_ITEMS", body_size, a))
     }
 
 }

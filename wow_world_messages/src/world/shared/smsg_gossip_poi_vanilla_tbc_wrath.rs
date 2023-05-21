@@ -25,7 +25,7 @@ impl crate::private::Sealed for SMSG_GOSSIP_POI {}
 impl SMSG_GOSSIP_POI {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(21..=276).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0224, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // flags: u32
@@ -135,8 +135,8 @@ impl crate::Message for SMSG_GOSSIP_POI {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(548, "SMSG_GOSSIP_POI", body_size, a))
     }
 
 }

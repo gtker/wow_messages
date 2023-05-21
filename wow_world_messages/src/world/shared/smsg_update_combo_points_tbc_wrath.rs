@@ -19,7 +19,7 @@ impl crate::private::Sealed for SMSG_UPDATE_COMBO_POINTS {}
 impl SMSG_UPDATE_COMBO_POINTS {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(3..=10).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x039D, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // target: PackedGuid
@@ -86,8 +86,8 @@ impl crate::Message for SMSG_UPDATE_COMBO_POINTS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(925, "SMSG_UPDATE_COMBO_POINTS", body_size, a))
     }
 
 }

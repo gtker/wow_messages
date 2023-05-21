@@ -17,7 +17,7 @@ impl crate::private::Sealed for CMSG_ACCEPT_LEVEL_GRANT {}
 impl CMSG_ACCEPT_LEVEL_GRANT {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(2..=9).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x041F, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // guid: PackedGuid
@@ -75,8 +75,8 @@ impl crate::Message for CMSG_ACCEPT_LEVEL_GRANT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1055, "CMSG_ACCEPT_LEVEL_GRANT", body_size, a))
     }
 
 }

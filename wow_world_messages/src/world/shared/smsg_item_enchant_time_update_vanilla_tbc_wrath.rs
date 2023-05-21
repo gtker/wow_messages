@@ -24,7 +24,7 @@ impl crate::private::Sealed for SMSG_ITEM_ENCHANT_TIME_UPDATE {}
 impl SMSG_ITEM_ENCHANT_TIME_UPDATE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 24 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x01EB, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // item: Guid
@@ -109,8 +109,8 @@ impl crate::Message for SMSG_ITEM_ENCHANT_TIME_UPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(491, "SMSG_ITEM_ENCHANT_TIME_UPDATE", body_size, a))
     }
 
 }

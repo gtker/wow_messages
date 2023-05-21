@@ -20,7 +20,7 @@ impl crate::private::Sealed for CMSG_LEARN_PREVIEW_TALENTS {}
 impl CMSG_LEARN_PREVIEW_TALENTS {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(4..=10240).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x04C1, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // amount_of_talents: u32
@@ -112,8 +112,8 @@ impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1217, "CMSG_LEARN_PREVIEW_TALENTS", body_size, a))
     }
 
 }

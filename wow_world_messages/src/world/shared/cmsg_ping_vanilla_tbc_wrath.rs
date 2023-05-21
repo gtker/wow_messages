@@ -17,7 +17,7 @@ impl crate::private::Sealed for CMSG_PING {}
 impl CMSG_PING {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 8 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x01DC, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // sequence_id: u32
@@ -51,8 +51,8 @@ impl crate::Message for CMSG_PING {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(476, "CMSG_PING", body_size, a))
     }
 
 }

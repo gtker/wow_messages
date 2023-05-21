@@ -41,7 +41,7 @@ impl crate::private::Sealed for SMSG_MIRRORIMAGE_DATA {}
 impl SMSG_MIRRORIMAGE_DATA {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 67 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0401, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // guid: Guid
@@ -205,8 +205,8 @@ impl crate::Message for SMSG_MIRRORIMAGE_DATA {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1025, "SMSG_MIRRORIMAGE_DATA", body_size, a))
     }
 
 }

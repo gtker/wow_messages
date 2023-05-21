@@ -1,4 +1,4 @@
-use crate::errors::ExpectedOpcodeError;
+use crate::errors::{ExpectedOpcodeError, ParseError};
 use crate::util::{read_u32_le, read_u8_le};
 use std::io::{Read, Write};
 use wow_world_base::shared::vector3d_vanilla_tbc_wrath::Vector3d;
@@ -143,14 +143,16 @@ pub fn read_packed_guid(r: &mut impl Read) -> Result<crate::Guid, std::io::Error
 pub(crate) fn assert_empty(
     body_size: u32,
     opcode: impl Into<u32>,
+    message: &'static str,
 ) -> Result<(), ExpectedOpcodeError> {
+    let opcode: u32 = opcode.into();
     if body_size != 0 {
-        Err(ExpectedOpcodeError::Parse(
-            crate::errors::ParseErrorKind::InvalidSize {
-                opcode: opcode.into(),
-                size: body_size,
-            },
-        ))
+        Err(ExpectedOpcodeError::Parse(ParseError::new(
+            opcode,
+            message,
+            body_size,
+            crate::errors::ParseErrorKind::InvalidSize,
+        )))
     } else {
         Ok(())
     }

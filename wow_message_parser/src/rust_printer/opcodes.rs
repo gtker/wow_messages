@@ -175,15 +175,16 @@ fn world_common_impls_read_opcodes(s: &mut Writer, v: &[&Container], size: &str,
                 ContainerType::Msg(i) => i,
                 _ => unreachable!()
             };
+            let name = e.name();
+
             if e.empty_body() {
                 s.wln(
                     format!(
-                        "{opcode:#06X} => crate::util::assert_empty(body_size, opcode).map(|_| Self::{enum_name}),",
+                        "{opcode:#06X} => crate::util::assert_empty(body_size, opcode, \"{name}\").map(|_| Self::{enum_name}),",
                               enum_name = get_enumerator_name(e.name())
                 ));
             } else {
-                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| {{ if let {PARSE_ERROR_KIND}::Io(io) = a {{ {PARSE_ERROR_KIND}::BufferSizeTooSmall {{ opcode: {opcode:#06X}, size: body_size, io, }} }} else {{ a }} }})?)),",
-                              name = e.name(),
+                s.wln(format!("{opcode:#06X} => Ok(Self::{enum_name}(<{name} as crate::Message>::read_body::<crate::traits::private::Internal>(&mut r, body_size).map_err(|a| a.opcode_convert())?)),",
                               enum_name = get_enumerator_name(e.name())
                 ));
             }

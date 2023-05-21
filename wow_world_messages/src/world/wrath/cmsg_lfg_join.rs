@@ -27,7 +27,7 @@ impl crate::private::Sealed for CMSG_LFG_JOIN {}
 impl CMSG_LFG_JOIN {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(9..=1544).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x035C, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // roles: u32
@@ -183,8 +183,8 @@ impl crate::Message for CMSG_LFG_JOIN {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(860, "CMSG_LFG_JOIN", body_size, a))
     }
 
 }

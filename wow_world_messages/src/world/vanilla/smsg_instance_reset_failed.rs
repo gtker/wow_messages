@@ -21,7 +21,7 @@ impl crate::private::Sealed for SMSG_INSTANCE_RESET_FAILED {}
 impl SMSG_INSTANCE_RESET_FAILED {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 8 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x031F, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // reason: InstanceResetFailedReason
@@ -88,8 +88,8 @@ impl crate::Message for SMSG_INSTANCE_RESET_FAILED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(799, "SMSG_INSTANCE_RESET_FAILED", body_size, a))
     }
 
 }

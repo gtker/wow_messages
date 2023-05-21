@@ -17,7 +17,7 @@ impl crate::private::Sealed for SMSG_GUILD_INVITE {}
 impl SMSG_GUILD_INVITE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(2..=512).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0083, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // player_name: CString
@@ -98,8 +98,8 @@ impl crate::Message for SMSG_GUILD_INVITE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(131, "SMSG_GUILD_INVITE", body_size, a))
     }
 
 }

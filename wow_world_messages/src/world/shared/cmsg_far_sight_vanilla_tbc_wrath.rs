@@ -17,7 +17,7 @@ impl crate::private::Sealed for CMSG_FAR_SIGHT {}
 impl CMSG_FAR_SIGHT {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 1 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x027A, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // operation: FarSightOperation
@@ -75,8 +75,8 @@ impl crate::Message for CMSG_FAR_SIGHT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(634, "CMSG_FAR_SIGHT", body_size, a))
     }
 
 }

@@ -23,7 +23,7 @@ impl crate::private::Sealed for SMSG_HIGHEST_THREAT_UPDATE {}
 impl SMSG_HIGHEST_THREAT_UPDATE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(8..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0482, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // unit: PackedGuid
@@ -133,8 +133,8 @@ impl crate::Message for SMSG_HIGHEST_THREAT_UPDATE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1154, "SMSG_HIGHEST_THREAT_UPDATE", body_size, a))
     }
 
 }

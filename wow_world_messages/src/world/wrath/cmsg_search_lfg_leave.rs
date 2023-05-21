@@ -15,7 +15,7 @@ impl crate::private::Sealed for CMSG_SEARCH_LFG_LEAVE {}
 impl CMSG_SEARCH_LFG_LEAVE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 4 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x035F, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // dungeon_id: u32
@@ -73,8 +73,8 @@ impl crate::Message for CMSG_SEARCH_LFG_LEAVE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(863, "CMSG_SEARCH_LFG_LEAVE", body_size, a))
     }
 
 }

@@ -17,7 +17,7 @@ impl crate::private::Sealed for CMSG_AUCTION_LIST_PENDING_SALES {}
 impl CMSG_AUCTION_LIST_PENDING_SALES {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 8 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x048F, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // auctioneer: Guid
@@ -75,8 +75,8 @@ impl crate::Message for CMSG_AUCTION_LIST_PENDING_SALES {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1167, "CMSG_AUCTION_LIST_PENDING_SALES", body_size, a))
     }
 
 }

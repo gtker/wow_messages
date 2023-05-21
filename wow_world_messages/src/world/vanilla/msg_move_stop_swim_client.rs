@@ -20,7 +20,7 @@ impl crate::private::Sealed for MSG_MOVE_STOP_SWIM_Client {}
 impl MSG_MOVE_STOP_SWIM_Client {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(28..=81).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x00CB, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // info: MovementInfo
@@ -166,8 +166,8 @@ impl crate::Message for MSG_MOVE_STOP_SWIM_Client {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(203, "MSG_MOVE_STOP_SWIM_Client", body_size, a))
     }
 
 }

@@ -17,7 +17,7 @@ impl crate::private::Sealed for SMSG_EXPECTED_SPAM_RECORDS {}
 impl SMSG_EXPECTED_SPAM_RECORDS {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(4..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0332, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // amount_of_records: u32
@@ -103,8 +103,8 @@ impl crate::Message for SMSG_EXPECTED_SPAM_RECORDS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(818, "SMSG_EXPECTED_SPAM_RECORDS", body_size, a))
     }
 
 }

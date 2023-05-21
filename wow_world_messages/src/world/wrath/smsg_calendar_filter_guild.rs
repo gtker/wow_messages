@@ -20,7 +20,7 @@ impl crate::private::Sealed for SMSG_CALENDAR_FILTER_GUILD {}
 impl SMSG_CALENDAR_FILTER_GUILD {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(4..=16777215).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0438, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // amount_of_members: u32
@@ -112,8 +112,8 @@ impl crate::Message for SMSG_CALENDAR_FILTER_GUILD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1080, "SMSG_CALENDAR_FILTER_GUILD", body_size, a))
     }
 
 }

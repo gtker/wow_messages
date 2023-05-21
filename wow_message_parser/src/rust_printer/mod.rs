@@ -24,6 +24,7 @@ pub use update_mask::*;
 
 pub(crate) const EXPECTED_OPCODE_ERROR: &str = "crate::errors::ExpectedOpcodeError";
 pub(crate) const PARSE_ERROR_KIND: &str = "crate::errors::ParseErrorKind";
+pub(crate) const PARSE_ERROR: &str = "crate::errors::ParseError";
 
 pub(crate) const CLIENT_MESSAGE_TRAIT_NAME: &str = "ClientMessage";
 pub(crate) const SERVER_MESSAGE_TRAIT_NAME: &str = "ServerMessage";

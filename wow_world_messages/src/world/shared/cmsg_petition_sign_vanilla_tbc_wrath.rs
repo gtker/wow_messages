@@ -19,7 +19,7 @@ impl crate::private::Sealed for CMSG_PETITION_SIGN {}
 impl CMSG_PETITION_SIGN {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 9 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x01C0, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // petition: Guid
@@ -86,8 +86,8 @@ impl crate::Message for CMSG_PETITION_SIGN {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(448, "CMSG_PETITION_SIGN", body_size, a))
     }
 
 }

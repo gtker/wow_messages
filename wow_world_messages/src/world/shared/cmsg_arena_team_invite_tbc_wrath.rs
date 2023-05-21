@@ -17,7 +17,7 @@ impl crate::private::Sealed for CMSG_ARENA_TEAM_INVITE {}
 impl CMSG_ARENA_TEAM_INVITE {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(5..=260).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x034F, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // arena_team: u32
@@ -91,8 +91,8 @@ impl crate::Message for CMSG_ARENA_TEAM_INVITE {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(847, "CMSG_ARENA_TEAM_INVITE", body_size, a))
     }
 
 }

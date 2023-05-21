@@ -24,7 +24,7 @@ impl crate::private::Sealed for SMSG_CALENDAR_RAID_LOCKOUT_REMOVED {}
 impl SMSG_CALENDAR_RAID_LOCKOUT_REMOVED {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 20 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x043F, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // map: Map
@@ -109,8 +109,8 @@ impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_REMOVED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1087, "SMSG_CALENDAR_RAID_LOCKOUT_REMOVED", body_size, a))
     }
 
 }

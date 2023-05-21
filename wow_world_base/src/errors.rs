@@ -30,15 +30,8 @@ pub enum ParseErrorKind {
     Io(std::io::Error),
     Enum(EnumError),
     String(std::string::FromUtf8Error),
-    InvalidSize {
-        opcode: u32,
-        size: u32,
-    },
-    BufferSizeTooSmall {
-        opcode: u32,
-        size: u32,
-        io: std::io::Error,
-    },
+    InvalidSize,
+    BufferSizeTooSmall(std::io::Error),
 }
 
 impl Display for ParseErrorKind {
@@ -47,12 +40,10 @@ impl Display for ParseErrorKind {
             ParseErrorKind::Io(i) => i.fmt(f),
             ParseErrorKind::Enum(i) => i.fmt(f),
             ParseErrorKind::String(i) => i.fmt(f),
-            ParseErrorKind::InvalidSize { opcode, size } => f.write_fmt(format_args!(
-                "message '{opcode:#06X}' has invalid size: '{size}'"
-            )),
-            ParseErrorKind::BufferSizeTooSmall { opcode, size, io } => f.write_fmt(format_args!(
-                "opcode '{opcode}' has received too small size '{size}' with io error: '{io}'"
-            )),
+            ParseErrorKind::InvalidSize => f.write_fmt(format_args!("message has invalid size")),
+            ParseErrorKind::BufferSizeTooSmall(io) => {
+                f.write_fmt(format_args!("buffer too small with io error: '{io}'"))
+            }
         }
     }
 }

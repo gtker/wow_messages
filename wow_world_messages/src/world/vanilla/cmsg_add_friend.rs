@@ -15,7 +15,7 @@ impl crate::private::Sealed for CMSG_ADD_FRIEND {}
 impl CMSG_ADD_FRIEND {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(1..=256).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0069, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // name: CString
@@ -80,8 +80,8 @@ impl crate::Message for CMSG_ADD_FRIEND {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(105, "CMSG_ADD_FRIEND", body_size, a))
     }
 
 }

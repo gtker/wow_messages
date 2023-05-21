@@ -22,7 +22,7 @@ impl crate::private::Sealed for SMSG_MAIL_LIST_RESULT {}
 impl SMSG_MAIL_LIST_RESULT {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(1..=84481).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x023B, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // amount_of_mails: u8
@@ -196,8 +196,8 @@ impl crate::Message for SMSG_MAIL_LIST_RESULT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(571, "SMSG_MAIL_LIST_RESULT", body_size, a))
     }
 
 }

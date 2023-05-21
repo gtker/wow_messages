@@ -22,7 +22,7 @@ impl crate::private::Sealed for MSG_MOVE_SET_FACING {}
 impl MSG_MOVE_SET_FACING {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(32..=97).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x00DA, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // guid: PackedGuid
@@ -61,8 +61,8 @@ impl crate::Message for MSG_MOVE_SET_FACING {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(218, "MSG_MOVE_SET_FACING", body_size, a))
     }
 
 }

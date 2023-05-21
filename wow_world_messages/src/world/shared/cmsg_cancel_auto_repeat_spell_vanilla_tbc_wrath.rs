@@ -13,7 +13,7 @@ impl crate::private::Sealed for CMSG_CANCEL_AUTO_REPEAT_SPELL {}
 impl CMSG_CANCEL_AUTO_REPEAT_SPELL {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 0 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x026D, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         Ok(Self {
@@ -62,8 +62,8 @@ impl crate::Message for CMSG_CANCEL_AUTO_REPEAT_SPELL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(621, "CMSG_CANCEL_AUTO_REPEAT_SPELL", body_size, a))
     }
 
 }

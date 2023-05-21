@@ -45,7 +45,7 @@ impl crate::private::Sealed for SMSG_QUESTGIVER_OFFER_REWARD {}
 impl SMSG_QUESTGIVER_OFFER_REWARD {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(42..=65535).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x018D, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // npc: Guid
@@ -313,8 +313,8 @@ impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(397, "SMSG_QUESTGIVER_OFFER_REWARD", body_size, a))
     }
 
 }

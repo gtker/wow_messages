@@ -26,7 +26,7 @@ impl crate::private::Sealed for SMSG_LOOT_ALL_PASSED {}
 impl SMSG_LOOT_ALL_PASSED {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 24 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x029E, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // looted_target: Guid
@@ -120,8 +120,8 @@ impl crate::Message for SMSG_LOOT_ALL_PASSED {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(670, "SMSG_LOOT_ALL_PASSED", body_size, a))
     }
 
 }

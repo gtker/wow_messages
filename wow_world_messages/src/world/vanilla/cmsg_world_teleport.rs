@@ -27,7 +27,7 @@ impl crate::private::Sealed for CMSG_WORLD_TELEPORT {}
 impl CMSG_WORLD_TELEPORT {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 24 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0008, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // time: Milliseconds
@@ -75,8 +75,8 @@ impl crate::Message for CMSG_WORLD_TELEPORT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(8, "CMSG_WORLD_TELEPORT", body_size, a))
     }
 
 }

@@ -21,7 +21,7 @@ impl crate::private::Sealed for CMSG_CALENDAR_GUILD_FILTER {}
 impl CMSG_CALENDAR_GUILD_FILTER {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 12 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x042B, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // minimum_level: Level32
@@ -97,8 +97,8 @@ impl crate::Message for CMSG_CALENDAR_GUILD_FILTER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1067, "CMSG_CALENDAR_GUILD_FILTER", body_size, a))
     }
 
 }

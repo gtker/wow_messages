@@ -19,7 +19,7 @@ impl crate::private::Sealed for SMSG_CHANNEL_MEMBER_COUNT {}
 impl SMSG_CHANNEL_MEMBER_COUNT {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(6..=261).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x03D5, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // channel: CString
@@ -102,8 +102,8 @@ impl crate::Message for SMSG_CHANNEL_MEMBER_COUNT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(981, "SMSG_CHANNEL_MEMBER_COUNT", body_size, a))
     }
 
 }

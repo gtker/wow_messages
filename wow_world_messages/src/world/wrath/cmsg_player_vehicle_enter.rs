@@ -17,7 +17,7 @@ impl crate::private::Sealed for CMSG_PLAYER_VEHICLE_ENTER {}
 impl CMSG_PLAYER_VEHICLE_ENTER {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 8 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x04A8, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // vehicle: Guid
@@ -75,8 +75,8 @@ impl crate::Message for CMSG_PLAYER_VEHICLE_ENTER {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1192, "CMSG_PLAYER_VEHICLE_ENTER", body_size, a))
     }
 
 }

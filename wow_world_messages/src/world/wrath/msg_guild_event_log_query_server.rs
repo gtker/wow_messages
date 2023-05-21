@@ -21,7 +21,7 @@ impl crate::private::Sealed for MSG_GUILD_EVENT_LOG_QUERY_Server {}
 impl MSG_GUILD_EVENT_LOG_QUERY_Server {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(1..=5377).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x03FF, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // amount_of_events: u8
@@ -143,8 +143,8 @@ impl crate::Message for MSG_GUILD_EVENT_LOG_QUERY_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1023, "MSG_GUILD_EVENT_LOG_QUERY_Server", body_size, a))
     }
 
 }

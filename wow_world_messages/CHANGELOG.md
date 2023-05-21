@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+* BREAKING: `ParseError` enum has been renamed to `ParseErrorKind`. `ParseError` is now a struct that holds more information about the error, such as opcode and size.
 * BREAKING: `MSG_AUCTION_HELLO_Server`, `SMSG_AUCTION_BIDDER_NOTIFICATION`, and `ReceivedMail` have had the
   variable `auction_house_id` of type `u32` changed to `auction_house` of type `AuctionHouse` enum.
 * BREAKING: Vanilla `UpdatePlayer` methods `VISIBLE_ITEM_*` have been replaced by a single `VISIBLE_ITEM` method.

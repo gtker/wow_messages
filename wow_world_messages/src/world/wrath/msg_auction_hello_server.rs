@@ -22,7 +22,7 @@ impl crate::private::Sealed for MSG_AUCTION_HELLO_Server {}
 impl MSG_AUCTION_HELLO_Server {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 13 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0255, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // auctioneer: Guid
@@ -98,8 +98,8 @@ impl crate::Message for MSG_AUCTION_HELLO_Server {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(597, "MSG_AUCTION_HELLO_Server", body_size, a))
     }
 
 }

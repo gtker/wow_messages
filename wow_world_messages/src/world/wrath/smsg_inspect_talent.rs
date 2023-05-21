@@ -32,7 +32,7 @@ impl crate::private::Sealed for SMSG_INSPECT_TALENT {}
 impl SMSG_INSPECT_TALENT {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(13..=330164).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x03F4, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // player: PackedGuid
@@ -213,8 +213,8 @@ impl crate::Message for SMSG_INSPECT_TALENT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1012, "SMSG_INSPECT_TALENT", body_size, a))
     }
 
 }

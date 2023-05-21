@@ -67,7 +67,7 @@ impl crate::private::Sealed for SMSG_GM_MESSAGECHAT {}
 impl SMSG_GM_MESSAGECHAT {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(31..=24038).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x03B3, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         let mut chat_type_if_sender1 = Default::default();
@@ -3412,8 +3412,8 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(947, "SMSG_GM_MESSAGECHAT", body_size, a))
     }
 
 }

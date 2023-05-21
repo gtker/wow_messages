@@ -37,7 +37,7 @@ impl crate::private::Sealed for CMSG_CAST_SPELL {}
 impl CMSG_CAST_SPELL {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(10..=418).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x012E, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // cast_count: u8
@@ -569,8 +569,8 @@ impl crate::Message for CMSG_CAST_SPELL {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(302, "CMSG_CAST_SPELL", body_size, a))
     }
 
 }

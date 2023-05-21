@@ -30,5 +30,5 @@ pub trait Message: Sized + private::Sealed {
     fn read_body<S: private::Sealed>(
         r: &mut &[u8],
         body_size: u32,
-    ) -> Result<Self, crate::errors::ParseErrorKind>;
+    ) -> Result<Self, crate::errors::ParseError>;
 }

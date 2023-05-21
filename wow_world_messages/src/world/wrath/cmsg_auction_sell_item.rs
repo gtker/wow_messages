@@ -29,7 +29,7 @@ impl crate::private::Sealed for CMSG_AUCTION_SELL_ITEM {}
 impl CMSG_AUCTION_SELL_ITEM {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 36 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x0256, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // auctioneer: Guid
@@ -141,8 +141,8 @@ impl crate::Message for CMSG_AUCTION_SELL_ITEM {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(598, "CMSG_AUCTION_SELL_ITEM", body_size, a))
     }
 
 }

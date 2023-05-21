@@ -43,7 +43,7 @@ impl crate::private::Sealed for CMSG_AUTH_SESSION {}
 impl CMSG_AUTH_SESSION {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(61..=65851).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x01ED, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // client_build: u32
@@ -246,8 +246,8 @@ impl crate::Message for CMSG_AUTH_SESSION {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(493, "CMSG_AUTH_SESSION", body_size, a))
     }
 
 }

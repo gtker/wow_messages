@@ -13,7 +13,7 @@ impl crate::private::Sealed for CMSG_HEARTH_AND_RESURRECT {}
 impl CMSG_HEARTH_AND_RESURRECT {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if body_size != 0 {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x049C, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         Ok(Self {
@@ -62,8 +62,8 @@ impl crate::Message for CMSG_HEARTH_AND_RESURRECT {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1180, "CMSG_HEARTH_AND_RESURRECT", body_size, a))
     }
 
 }

@@ -31,7 +31,7 @@ impl crate::private::Sealed for SMSG_CALENDAR_EVENT_STATUS {}
 impl SMSG_CALENDAR_EVENT_STATUS {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(24..=31).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x043C, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // invitee: PackedGuid
@@ -143,8 +143,8 @@ impl crate::Message for SMSG_CALENDAR_EVENT_STATUS {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(1084, "SMSG_CALENDAR_EVENT_STATUS", body_size, a))
     }
 
 }

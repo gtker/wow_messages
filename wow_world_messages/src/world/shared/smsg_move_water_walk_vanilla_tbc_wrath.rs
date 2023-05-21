@@ -19,7 +19,7 @@ impl crate::private::Sealed for SMSG_MOVE_WATER_WALK {}
 impl SMSG_MOVE_WATER_WALK {
     fn read_inner(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
         if !(6..=13).contains(&body_size) {
-            return Err(crate::errors::ParseErrorKind::InvalidSize { opcode: 0x00DE, size: body_size });
+            return Err(crate::errors::ParseErrorKind::InvalidSize);
         }
 
         // guid: PackedGuid
@@ -86,8 +86,8 @@ impl crate::Message for SMSG_MOVE_WATER_WALK {
         Ok(())
     }
 
-    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseErrorKind> {
-        Self::read_inner(r, body_size)
+    fn read_body<S: crate::private::Sealed>(r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
+        Self::read_inner(r, body_size).map_err(|a| crate::errors::ParseError::new(222, "SMSG_MOVE_WATER_WALK", body_size, a))
     }
 
 }
