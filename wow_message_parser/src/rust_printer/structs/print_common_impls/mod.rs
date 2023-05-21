@@ -37,7 +37,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 PARSE_ERROR
             };
 
-            impl_read_write_non_trait(
+            impl_read_write_struct(
                 s,
                 e.name(),
                 error_name,
@@ -558,7 +558,7 @@ pub(crate) fn impl_read_and_writable_login(
     s.closing_curly_newline(); // impl
 }
 
-pub(crate) fn impl_read_write_non_trait(
+pub(crate) fn impl_read_write_struct(
     s: &mut Writer,
     type_name: impl AsRef<str>,
     error_name: impl AsRef<str>,
