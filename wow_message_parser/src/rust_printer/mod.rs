@@ -35,8 +35,6 @@ pub(crate) const WORLD_CLIENT_MESSAGE_ENUM_NAME: &str = "ClientOpcodeMessage";
 pub(crate) const WORLD_SERVER_MESSAGE_ENUM_NAME: &str = "ServerOpcodeMessage";
 
 pub(crate) const SYNC_IMPORT: &str = "use std::io::{Read, Write};";
-pub(crate) const TOKIO_IMPORT: &str = "use tokio::io::{AsyncReadExt, AsyncWriteExt};";
-pub(crate) const ASYNC_STD_IMPORT: &str = "use async_std::io::{ReadExt, WriteExt};";
 
 const CFG_SYNC_AND_ENCRYPTION: &str = "#[cfg(all(feature = \"sync\", feature = \"encryption\"))]";
 const CFG_ASYNC_TOKIO_AND_ENCRYPTION: &str =

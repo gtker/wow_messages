@@ -1,12 +1,8 @@
 use crate::tbc::{ServerMessage, ClientMessage};
 #[cfg(feature = "encryption")]
 use wow_srp::tbc_header::{DecrypterHalf, EncrypterHalf};
-
 use std::io::{Read, Write};
-#[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+
 use crate::tbc::MovementInfo;
 use crate::errors::ParseErrorKind;
 use crate::tbc::opcode_to_name;

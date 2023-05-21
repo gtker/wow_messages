@@ -1,12 +1,8 @@
 use crate::vanilla::{ServerMessage, ClientMessage};
 #[cfg(feature = "encryption")]
 use wow_srp::vanilla_header::{DecrypterHalf, EncrypterHalf};
-
 use std::io::{Read, Write};
-#[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
+
 use crate::vanilla::MovementInfo;
 use crate::errors::ParseErrorKind;
 use crate::vanilla::opcode_to_name;

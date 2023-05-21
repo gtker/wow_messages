@@ -1,9 +1,5 @@
 use crate::{ServerMessage, ClientMessage};
 use std::io::{Read, Write};
-#[cfg(feature = "tokio")]
-use tokio::io::{AsyncReadExt, AsyncWriteExt};
-#[cfg(feature = "async-std")]
-use async_std::io::{ReadExt, WriteExt};
 use super::*;
 use crate::all::*;
 

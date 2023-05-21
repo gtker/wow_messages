@@ -5,9 +5,8 @@ use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
 use crate::rust_printer::structs::print_common_impls::write_into_vec;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
-    ImplType, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO, CFG_TESTCASE,
-    CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, PARSE_ERROR_KIND, SERVER_MESSAGE_TRAIT_NAME,
-    SYNC_IMPORT, TOKIO_IMPORT,
+    ImplType, CFG_TESTCASE, CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, PARSE_ERROR_KIND,
+    SERVER_MESSAGE_TRAIT_NAME, SYNC_IMPORT,
 };
 
 const CLOGIN_NAME: &str = "Client";
@@ -76,11 +75,6 @@ pub(crate) fn includes(
 
             s.wln(SYNC_IMPORT);
 
-            s.wln(CFG_ASYNC_TOKIO);
-            s.wln(TOKIO_IMPORT);
-            s.wln(CFG_ASYNC_ASYNC_STD);
-            s.wln(ASYNC_STD_IMPORT);
-
             s.wln("use super::*;");
             s.wln("use crate::all::*;");
         }
@@ -105,14 +99,8 @@ pub(crate) fn includes(
                 }
             }
 
-            s.newline();
-
             s.wln(SYNC_IMPORT);
-
-            s.wln(CFG_ASYNC_TOKIO);
-            s.wln(TOKIO_IMPORT);
-            s.wln(CFG_ASYNC_ASYNC_STD);
-            s.wln(ASYNC_STD_IMPORT);
+            s.newline();
 
             if any_container_is_pure_movement_info(v) {
                 s.wln(format!(
