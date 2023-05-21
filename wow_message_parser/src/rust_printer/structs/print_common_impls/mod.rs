@@ -458,15 +458,12 @@ pub(crate) fn impl_read_and_writable_login(
     };
     let type_name = e.name();
 
-    let write_function = |s: &mut Writer, it: ImplType| {
+    let write_function = |s: &mut Writer| {
         s.wln("// opcode: u8");
-        s.wln(format!(
-            "w.write_all(&Self::OPCODE.to_le_bytes()){postfix}?;",
-            postfix = it.postfix(),
-        ));
+        s.wln(format!("w.write_all(&Self::OPCODE.to_le_bytes())?;",));
         s.newline();
 
-        print_write::print_write(s, e, o, it.prefix(), it.postfix());
+        print_write::print_write(s, e, o, ImplType::Std.prefix(), ImplType::Std.postfix());
     };
 
     write_into_vec(s, type_name, write_function, "pub(crate)");
@@ -512,8 +509,8 @@ fn impl_read_write_struct(s: &mut Writer, e: &Container, o: &Objects) {
 
     let ty_name = e.name();
 
-    let write_function = |s: &mut Writer, it: ImplType| {
-        print_write::print_write(s, e, o, it.prefix(), it.postfix());
+    let write_function = |s: &mut Writer| {
+        print_write::print_write(s, e, o, ImplType::Std.prefix(), ImplType::Std.postfix());
     };
     write_into_vec(s, ty_name, write_function, visibility);
 
@@ -638,7 +635,7 @@ fn print_write_decl(s: &mut Writer, it: ImplType) {
 pub(crate) fn write_into_vec(
     s: &mut Writer,
     type_name: impl AsRef<str>,
-    write_function: impl Fn(&mut Writer, ImplType),
+    write_function: impl Fn(&mut Writer),
     visibility: &str,
 ) {
     s.open_curly(format!("impl {}", type_name.as_ref()));
@@ -647,7 +644,7 @@ pub(crate) fn write_into_vec(
         "{visibility} fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error>",
     ));
 
-    write_function(s, ImplType::Std);
+    write_function(s);
 
     s.wln("Ok(())");
 

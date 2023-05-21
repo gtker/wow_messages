@@ -570,7 +570,7 @@ fn world_movement_info(s: &mut Writer, v: &[&Container]) {
 
 pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
     let ty_name = format!("{ty}OpcodeMessage");
-    let write_function = |s: &mut Writer, _it| {
+    let write_function = |s: &mut Writer| {
         s.bodyn("match self", |s| {
             for e in v {
                 if e.empty_body() {
