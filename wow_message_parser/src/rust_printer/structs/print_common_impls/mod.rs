@@ -26,37 +26,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
             impl_read_write_struct(s, e, o);
         }
         ContainerType::CLogin(opcode) | ContainerType::SLogin(opcode) => {
-            let mut sizes = e.sizes();
-            let opcode_size = 1;
-            sizes.inc_both(opcode_size);
-
-            let trait_to_impl = match e.container_type() {
-                ContainerType::CLogin(_) => CLIENT_MESSAGE_TRAIT_NAME,
-                ContainerType::SLogin(_) => SERVER_MESSAGE_TRAIT_NAME,
-                _ => unreachable!("Login branch has non login container"),
-            };
-
-            impl_read_and_writable_login(
-                s,
-                e,
-                opcode,
-                trait_to_impl,
-                |s, it| {
-                    print_read::print_read(s, e, o, it.prefix(), it.postfix());
-                },
-                |s, it| {
-                    s.wln("// opcode: u8");
-                    s.wln(format!(
-                        "w.write_all(&Self::OPCODE.to_le_bytes()){postfix}?;",
-                        postfix = it.postfix(),
-                    ));
-                    s.newline();
-
-                    print_write::print_write(s, e, o, it.prefix(), it.postfix());
-                },
-                sizes,
-                e.should_print_test_case_string(o),
-            );
+            impl_read_and_writable_login(s, e, o, opcode);
         }
         ContainerType::Msg(opcode) | ContainerType::CMsg(opcode) | ContainerType::SMsg(opcode) => {
             let bind = |s: &mut Writer, container_type, version| {
@@ -498,15 +468,30 @@ pub(crate) fn impl_world_message(
 pub(crate) fn impl_read_and_writable_login(
     s: &mut Writer,
     e: &Container,
+    o: &Objects,
     opcode: u16,
-    trait_to_impl: impl AsRef<str>,
-    read_function: impl Fn(&mut Writer, ImplType),
-    write_function: impl Fn(&mut Writer, ImplType),
-    sizes: Sizes,
-    should_write_to_test_case_string: bool,
 ) {
+    let mut sizes = e.sizes();
+    let opcode_size = 1;
+    sizes.inc_both(opcode_size);
+
+    let trait_to_impl = match e.container_type() {
+        ContainerType::CLogin(_) => CLIENT_MESSAGE_TRAIT_NAME,
+        ContainerType::SLogin(_) => SERVER_MESSAGE_TRAIT_NAME,
+        _ => unreachable!("Login branch has non login container"),
+    };
     let type_name = e.name();
-    let trait_to_impl = trait_to_impl.as_ref();
+
+    let write_function = |s: &mut Writer, it: ImplType| {
+        s.wln("// opcode: u8");
+        s.wln(format!(
+            "w.write_all(&Self::OPCODE.to_le_bytes()){postfix}?;",
+            postfix = it.postfix(),
+        ));
+        s.newline();
+
+        print_write::print_write(s, e, o, it.prefix(), it.postfix());
+    };
 
     write_into_vec(s, type_name, write_function, "pub(crate)");
 
@@ -517,12 +502,12 @@ pub(crate) fn impl_read_and_writable_login(
     s.wln(format!("const OPCODE: u8 = {opcode:#04x};"));
     s.newline();
 
-    print_to_testcase(s, e, should_write_to_test_case_string);
+    print_to_testcase(s, e, e.should_print_test_case_string(o));
 
     for it in ImplType::types() {
         print_read_decl(s, it);
 
-        read_function(s, it);
+        print_read::print_read(s, e, o, it.prefix(), it.postfix());
         if it.is_async() {
             s.closing_curly_with(")"); // Box::pin
         }
