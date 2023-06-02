@@ -11,6 +11,7 @@ enum ItemSlot : u8 {
     HEAD = 0;
     NECK = 1;
     SHOULDERS = 2;
+    SHIRT = 3;
     CHEST = 4;
     WAIST = 5;
     LEGS = 6;
@@ -56,6 +57,7 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `HEAD` | 0 (0x00) |  |  |
 | `NECK` | 1 (0x01) |  |  |
 | `SHOULDERS` | 2 (0x02) |  |  |
+| `SHIRT` | 3 (0x03) |  |  |
 | `CHEST` | 4 (0x04) |  |  |
 | `WAIST` | 5 (0x05) |  |  |
 | `LEGS` | 6 (0x06) |  |  |

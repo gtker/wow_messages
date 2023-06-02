@@ -4,6 +4,7 @@
 ///     HEAD = 0;
 ///     NECK = 1;
 ///     SHOULDERS = 2;
+///     SHIRT = 3;
 ///     CHEST = 4;
 ///     WAIST = 5;
 ///     LEGS = 6;
@@ -47,6 +48,7 @@ pub enum ItemSlot {
     Head,
     Neck,
     Shoulders,
+    Shirt,
     Chest,
     Waist,
     Legs,
@@ -90,6 +92,7 @@ impl ItemSlot {
             Self::Head => 0x0,
             Self::Neck => 0x1,
             Self::Shoulders => 0x2,
+            Self::Shirt => 0x3,
             Self::Chest => 0x4,
             Self::Waist => 0x5,
             Self::Legs => 0x6,
@@ -142,6 +145,7 @@ impl std::fmt::Display for ItemSlot {
             Self::Head => f.write_str("Head"),
             Self::Neck => f.write_str("Neck"),
             Self::Shoulders => f.write_str("Shoulders"),
+            Self::Shirt => f.write_str("Shirt"),
             Self::Chest => f.write_str("Chest"),
             Self::Waist => f.write_str("Waist"),
             Self::Legs => f.write_str("Legs"),
@@ -188,6 +192,7 @@ impl TryFrom<u8> for ItemSlot {
             0 => Ok(Self::Head),
             1 => Ok(Self::Neck),
             2 => Ok(Self::Shoulders),
+            3 => Ok(Self::Shirt),
             4 => Ok(Self::Chest),
             5 => Ok(Self::Waist),
             6 => Ok(Self::Legs),

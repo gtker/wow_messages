@@ -16,6 +16,7 @@ enum ItemSlot : u8 {
     HEAD = 0;
     NECK = 1;
     SHOULDERS = 2;
+    SHIRT = 3;
     CHEST = 4;
     WAIST = 5;
     LEGS = 6;
