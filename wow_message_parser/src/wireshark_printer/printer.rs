@@ -444,7 +444,7 @@ fn print_definition(
             s.wln("add_aura_mask(ptv);");
         }
         Type::UpdateMask { .. } => {
-            s.wln("add_update_mask(ptv, pinfo);");
+            s.wln("add_update_mask(ptv);");
         }
         Type::MonsterMoveSplines => {
             s.wln("add_monster_move_spline(ptv);");
