@@ -47,6 +47,80 @@ enum ItemSlot : u8 {
     INVENTORY_13 = 36;
     INVENTORY_14 = 37;
     INVENTORY_15 = 38;
+    BANK_1 = 39;
+    BANK_2 = 40;
+    BANK_3 = 41;
+    BANK_4 = 42;
+    BANK_5 = 43;
+    BANK_6 = 44;
+    BANK_7 = 45;
+    BANK_8 = 46;
+    BANK_9 = 47;
+    BANK_10 = 48;
+    BANK_11 = 49;
+    BANK_12 = 50;
+    BANK_13 = 51;
+    BANK_14 = 52;
+    BANK_15 = 53;
+    BANK_16 = 54;
+    BANK_17 = 55;
+    BANK_18 = 56;
+    BANK_19 = 57;
+    BANK_20 = 58;
+    BANK_21 = 59;
+    BANK_22 = 60;
+    BANK_23 = 61;
+    BANK_24 = 62;
+    BANK_BAG_SLOT_1 = 63;
+    BANK_BAG_SLOT_2 = 64;
+    BANK_BAG_SLOT_3 = 65;
+    BANK_BAG_SLOT_4 = 66;
+    BANK_BAG_SLOT_5 = 67;
+    BANK_BAG_SLOT_6 = 68;
+    VENDOR_BUYBACK_1 = 69;
+    VENDOR_BUYBACK_2 = 70;
+    VENDOR_BUYBACK_3 = 71;
+    VENDOR_BUYBACK_4 = 72;
+    VENDOR_BUYBACK_5 = 73;
+    VENDOR_BUYBACK_6 = 74;
+    VENDOR_BUYBACK_7 = 75;
+    VENDOR_BUYBACK_8 = 76;
+    VENDOR_BUYBACK_9 = 77;
+    VENDOR_BUYBACK_10 = 78;
+    VENDOR_BUYBACK_11 = 79;
+    VENDOR_BUYBACK_12 = 80;
+    KEYRING_1 = 81;
+    KEYRING_2 = 82;
+    KEYRING_3 = 83;
+    KEYRING_4 = 84;
+    KEYRING_5 = 85;
+    KEYRING_6 = 86;
+    KEYRING_7 = 87;
+    KEYRING_8 = 88;
+    KEYRING_9 = 89;
+    KEYRING_10 = 90;
+    KEYRING_11 = 91;
+    KEYRING_12 = 92;
+    KEYRING_13 = 93;
+    KEYRING_14 = 94;
+    KEYRING_15 = 95;
+    KEYRING_16 = 96;
+    KEYRING_17 = 97;
+    KEYRING_18 = 98;
+    KEYRING_19 = 99;
+    KEYRING_20 = 100;
+    KEYRING_21 = 101;
+    KEYRING_22 = 102;
+    KEYRING_23 = 103;
+    KEYRING_24 = 104;
+    KEYRING_25 = 105;
+    KEYRING_26 = 106;
+    KEYRING_27 = 107;
+    KEYRING_28 = 108;
+    KEYRING_29 = 109;
+    KEYRING_30 = 110;
+    KEYRING_31 = 111;
+    KEYRING_32 = 112;
 }
 ```
 ### Type
@@ -93,6 +167,80 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 | `INVENTORY_13` | 36 (0x24) |  |  |
 | `INVENTORY_14` | 37 (0x25) |  |  |
 | `INVENTORY_15` | 38 (0x26) |  |  |
+| `BANK_1` | 39 (0x27) |  |  |
+| `BANK_2` | 40 (0x28) |  |  |
+| `BANK_3` | 41 (0x29) |  |  |
+| `BANK_4` | 42 (0x2A) |  |  |
+| `BANK_5` | 43 (0x2B) |  |  |
+| `BANK_6` | 44 (0x2C) |  |  |
+| `BANK_7` | 45 (0x2D) |  |  |
+| `BANK_8` | 46 (0x2E) |  |  |
+| `BANK_9` | 47 (0x2F) |  |  |
+| `BANK_10` | 48 (0x30) |  |  |
+| `BANK_11` | 49 (0x31) |  |  |
+| `BANK_12` | 50 (0x32) |  |  |
+| `BANK_13` | 51 (0x33) |  |  |
+| `BANK_14` | 52 (0x34) |  |  |
+| `BANK_15` | 53 (0x35) |  |  |
+| `BANK_16` | 54 (0x36) |  |  |
+| `BANK_17` | 55 (0x37) |  |  |
+| `BANK_18` | 56 (0x38) |  |  |
+| `BANK_19` | 57 (0x39) |  |  |
+| `BANK_20` | 58 (0x3A) |  |  |
+| `BANK_21` | 59 (0x3B) |  |  |
+| `BANK_22` | 60 (0x3C) |  |  |
+| `BANK_23` | 61 (0x3D) |  |  |
+| `BANK_24` | 62 (0x3E) |  |  |
+| `BANK_BAG_SLOT_1` | 63 (0x3F) |  |  |
+| `BANK_BAG_SLOT_2` | 64 (0x40) |  |  |
+| `BANK_BAG_SLOT_3` | 65 (0x41) |  |  |
+| `BANK_BAG_SLOT_4` | 66 (0x42) |  |  |
+| `BANK_BAG_SLOT_5` | 67 (0x43) |  |  |
+| `BANK_BAG_SLOT_6` | 68 (0x44) |  |  |
+| `VENDOR_BUYBACK_1` | 69 (0x45) |  |  |
+| `VENDOR_BUYBACK_2` | 70 (0x46) |  |  |
+| `VENDOR_BUYBACK_3` | 71 (0x47) |  |  |
+| `VENDOR_BUYBACK_4` | 72 (0x48) |  |  |
+| `VENDOR_BUYBACK_5` | 73 (0x49) |  |  |
+| `VENDOR_BUYBACK_6` | 74 (0x4A) |  |  |
+| `VENDOR_BUYBACK_7` | 75 (0x4B) |  |  |
+| `VENDOR_BUYBACK_8` | 76 (0x4C) |  |  |
+| `VENDOR_BUYBACK_9` | 77 (0x4D) |  |  |
+| `VENDOR_BUYBACK_10` | 78 (0x4E) |  |  |
+| `VENDOR_BUYBACK_11` | 79 (0x4F) |  |  |
+| `VENDOR_BUYBACK_12` | 80 (0x50) |  |  |
+| `KEYRING_1` | 81 (0x51) |  |  |
+| `KEYRING_2` | 82 (0x52) |  |  |
+| `KEYRING_3` | 83 (0x53) |  |  |
+| `KEYRING_4` | 84 (0x54) |  |  |
+| `KEYRING_5` | 85 (0x55) |  |  |
+| `KEYRING_6` | 86 (0x56) |  |  |
+| `KEYRING_7` | 87 (0x57) |  |  |
+| `KEYRING_8` | 88 (0x58) |  |  |
+| `KEYRING_9` | 89 (0x59) |  |  |
+| `KEYRING_10` | 90 (0x5A) |  |  |
+| `KEYRING_11` | 91 (0x5B) |  |  |
+| `KEYRING_12` | 92 (0x5C) |  |  |
+| `KEYRING_13` | 93 (0x5D) |  |  |
+| `KEYRING_14` | 94 (0x5E) |  |  |
+| `KEYRING_15` | 95 (0x5F) |  |  |
+| `KEYRING_16` | 96 (0x60) |  |  |
+| `KEYRING_17` | 97 (0x61) |  |  |
+| `KEYRING_18` | 98 (0x62) |  |  |
+| `KEYRING_19` | 99 (0x63) |  |  |
+| `KEYRING_20` | 100 (0x64) |  |  |
+| `KEYRING_21` | 101 (0x65) |  |  |
+| `KEYRING_22` | 102 (0x66) |  |  |
+| `KEYRING_23` | 103 (0x67) |  |  |
+| `KEYRING_24` | 104 (0x68) |  |  |
+| `KEYRING_25` | 105 (0x69) |  |  |
+| `KEYRING_26` | 106 (0x6A) |  |  |
+| `KEYRING_27` | 107 (0x6B) |  |  |
+| `KEYRING_28` | 108 (0x6C) |  |  |
+| `KEYRING_29` | 109 (0x6D) |  |  |
+| `KEYRING_30` | 110 (0x6E) |  |  |
+| `KEYRING_31` | 111 (0x6F) |  |  |
+| `KEYRING_32` | 112 (0x70) |  |  |
 
 Used in:
 * [CMSG_SWAP_INV_ITEM](cmsg_swap_inv_item.md)

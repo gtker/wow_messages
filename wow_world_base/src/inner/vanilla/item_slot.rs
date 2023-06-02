@@ -40,6 +40,80 @@
 ///     INVENTORY_13 = 36;
 ///     INVENTORY_14 = 37;
 ///     INVENTORY_15 = 38;
+///     BANK_1 = 39;
+///     BANK_2 = 40;
+///     BANK_3 = 41;
+///     BANK_4 = 42;
+///     BANK_5 = 43;
+///     BANK_6 = 44;
+///     BANK_7 = 45;
+///     BANK_8 = 46;
+///     BANK_9 = 47;
+///     BANK_10 = 48;
+///     BANK_11 = 49;
+///     BANK_12 = 50;
+///     BANK_13 = 51;
+///     BANK_14 = 52;
+///     BANK_15 = 53;
+///     BANK_16 = 54;
+///     BANK_17 = 55;
+///     BANK_18 = 56;
+///     BANK_19 = 57;
+///     BANK_20 = 58;
+///     BANK_21 = 59;
+///     BANK_22 = 60;
+///     BANK_23 = 61;
+///     BANK_24 = 62;
+///     BANK_BAG_SLOT_1 = 63;
+///     BANK_BAG_SLOT_2 = 64;
+///     BANK_BAG_SLOT_3 = 65;
+///     BANK_BAG_SLOT_4 = 66;
+///     BANK_BAG_SLOT_5 = 67;
+///     BANK_BAG_SLOT_6 = 68;
+///     VENDOR_BUYBACK_1 = 69;
+///     VENDOR_BUYBACK_2 = 70;
+///     VENDOR_BUYBACK_3 = 71;
+///     VENDOR_BUYBACK_4 = 72;
+///     VENDOR_BUYBACK_5 = 73;
+///     VENDOR_BUYBACK_6 = 74;
+///     VENDOR_BUYBACK_7 = 75;
+///     VENDOR_BUYBACK_8 = 76;
+///     VENDOR_BUYBACK_9 = 77;
+///     VENDOR_BUYBACK_10 = 78;
+///     VENDOR_BUYBACK_11 = 79;
+///     VENDOR_BUYBACK_12 = 80;
+///     KEYRING_1 = 81;
+///     KEYRING_2 = 82;
+///     KEYRING_3 = 83;
+///     KEYRING_4 = 84;
+///     KEYRING_5 = 85;
+///     KEYRING_6 = 86;
+///     KEYRING_7 = 87;
+///     KEYRING_8 = 88;
+///     KEYRING_9 = 89;
+///     KEYRING_10 = 90;
+///     KEYRING_11 = 91;
+///     KEYRING_12 = 92;
+///     KEYRING_13 = 93;
+///     KEYRING_14 = 94;
+///     KEYRING_15 = 95;
+///     KEYRING_16 = 96;
+///     KEYRING_17 = 97;
+///     KEYRING_18 = 98;
+///     KEYRING_19 = 99;
+///     KEYRING_20 = 100;
+///     KEYRING_21 = 101;
+///     KEYRING_22 = 102;
+///     KEYRING_23 = 103;
+///     KEYRING_24 = 104;
+///     KEYRING_25 = 105;
+///     KEYRING_26 = 106;
+///     KEYRING_27 = 107;
+///     KEYRING_28 = 108;
+///     KEYRING_29 = 109;
+///     KEYRING_30 = 110;
+///     KEYRING_31 = 111;
+///     KEYRING_32 = 112;
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
@@ -84,6 +158,80 @@ pub enum ItemSlot {
     Inventory13,
     Inventory14,
     Inventory15,
+    Bank1,
+    Bank2,
+    Bank3,
+    Bank4,
+    Bank5,
+    Bank6,
+    Bank7,
+    Bank8,
+    Bank9,
+    Bank10,
+    Bank11,
+    Bank12,
+    Bank13,
+    Bank14,
+    Bank15,
+    Bank16,
+    Bank17,
+    Bank18,
+    Bank19,
+    Bank20,
+    Bank21,
+    Bank22,
+    Bank23,
+    Bank24,
+    BankBagSlot1,
+    BankBagSlot2,
+    BankBagSlot3,
+    BankBagSlot4,
+    BankBagSlot5,
+    BankBagSlot6,
+    VendorBuyback1,
+    VendorBuyback2,
+    VendorBuyback3,
+    VendorBuyback4,
+    VendorBuyback5,
+    VendorBuyback6,
+    VendorBuyback7,
+    VendorBuyback8,
+    VendorBuyback9,
+    VendorBuyback10,
+    VendorBuyback11,
+    VendorBuyback12,
+    Keyring1,
+    Keyring2,
+    Keyring3,
+    Keyring4,
+    Keyring5,
+    Keyring6,
+    Keyring7,
+    Keyring8,
+    Keyring9,
+    Keyring10,
+    Keyring11,
+    Keyring12,
+    Keyring13,
+    Keyring14,
+    Keyring15,
+    Keyring16,
+    Keyring17,
+    Keyring18,
+    Keyring19,
+    Keyring20,
+    Keyring21,
+    Keyring22,
+    Keyring23,
+    Keyring24,
+    Keyring25,
+    Keyring26,
+    Keyring27,
+    Keyring28,
+    Keyring29,
+    Keyring30,
+    Keyring31,
+    Keyring32,
 }
 
 impl ItemSlot {
@@ -128,6 +276,80 @@ impl ItemSlot {
             Self::Inventory13 => 0x24,
             Self::Inventory14 => 0x25,
             Self::Inventory15 => 0x26,
+            Self::Bank1 => 0x27,
+            Self::Bank2 => 0x28,
+            Self::Bank3 => 0x29,
+            Self::Bank4 => 0x2a,
+            Self::Bank5 => 0x2b,
+            Self::Bank6 => 0x2c,
+            Self::Bank7 => 0x2d,
+            Self::Bank8 => 0x2e,
+            Self::Bank9 => 0x2f,
+            Self::Bank10 => 0x30,
+            Self::Bank11 => 0x31,
+            Self::Bank12 => 0x32,
+            Self::Bank13 => 0x33,
+            Self::Bank14 => 0x34,
+            Self::Bank15 => 0x35,
+            Self::Bank16 => 0x36,
+            Self::Bank17 => 0x37,
+            Self::Bank18 => 0x38,
+            Self::Bank19 => 0x39,
+            Self::Bank20 => 0x3a,
+            Self::Bank21 => 0x3b,
+            Self::Bank22 => 0x3c,
+            Self::Bank23 => 0x3d,
+            Self::Bank24 => 0x3e,
+            Self::BankBagSlot1 => 0x3f,
+            Self::BankBagSlot2 => 0x40,
+            Self::BankBagSlot3 => 0x41,
+            Self::BankBagSlot4 => 0x42,
+            Self::BankBagSlot5 => 0x43,
+            Self::BankBagSlot6 => 0x44,
+            Self::VendorBuyback1 => 0x45,
+            Self::VendorBuyback2 => 0x46,
+            Self::VendorBuyback3 => 0x47,
+            Self::VendorBuyback4 => 0x48,
+            Self::VendorBuyback5 => 0x49,
+            Self::VendorBuyback6 => 0x4a,
+            Self::VendorBuyback7 => 0x4b,
+            Self::VendorBuyback8 => 0x4c,
+            Self::VendorBuyback9 => 0x4d,
+            Self::VendorBuyback10 => 0x4e,
+            Self::VendorBuyback11 => 0x4f,
+            Self::VendorBuyback12 => 0x50,
+            Self::Keyring1 => 0x51,
+            Self::Keyring2 => 0x52,
+            Self::Keyring3 => 0x53,
+            Self::Keyring4 => 0x54,
+            Self::Keyring5 => 0x55,
+            Self::Keyring6 => 0x56,
+            Self::Keyring7 => 0x57,
+            Self::Keyring8 => 0x58,
+            Self::Keyring9 => 0x59,
+            Self::Keyring10 => 0x5a,
+            Self::Keyring11 => 0x5b,
+            Self::Keyring12 => 0x5c,
+            Self::Keyring13 => 0x5d,
+            Self::Keyring14 => 0x5e,
+            Self::Keyring15 => 0x5f,
+            Self::Keyring16 => 0x60,
+            Self::Keyring17 => 0x61,
+            Self::Keyring18 => 0x62,
+            Self::Keyring19 => 0x63,
+            Self::Keyring20 => 0x64,
+            Self::Keyring21 => 0x65,
+            Self::Keyring22 => 0x66,
+            Self::Keyring23 => 0x67,
+            Self::Keyring24 => 0x68,
+            Self::Keyring25 => 0x69,
+            Self::Keyring26 => 0x6a,
+            Self::Keyring27 => 0x6b,
+            Self::Keyring28 => 0x6c,
+            Self::Keyring29 => 0x6d,
+            Self::Keyring30 => 0x6e,
+            Self::Keyring31 => 0x6f,
+            Self::Keyring32 => 0x70,
         }
     }
 
@@ -181,6 +403,80 @@ impl std::fmt::Display for ItemSlot {
             Self::Inventory13 => f.write_str("Inventory13"),
             Self::Inventory14 => f.write_str("Inventory14"),
             Self::Inventory15 => f.write_str("Inventory15"),
+            Self::Bank1 => f.write_str("Bank1"),
+            Self::Bank2 => f.write_str("Bank2"),
+            Self::Bank3 => f.write_str("Bank3"),
+            Self::Bank4 => f.write_str("Bank4"),
+            Self::Bank5 => f.write_str("Bank5"),
+            Self::Bank6 => f.write_str("Bank6"),
+            Self::Bank7 => f.write_str("Bank7"),
+            Self::Bank8 => f.write_str("Bank8"),
+            Self::Bank9 => f.write_str("Bank9"),
+            Self::Bank10 => f.write_str("Bank10"),
+            Self::Bank11 => f.write_str("Bank11"),
+            Self::Bank12 => f.write_str("Bank12"),
+            Self::Bank13 => f.write_str("Bank13"),
+            Self::Bank14 => f.write_str("Bank14"),
+            Self::Bank15 => f.write_str("Bank15"),
+            Self::Bank16 => f.write_str("Bank16"),
+            Self::Bank17 => f.write_str("Bank17"),
+            Self::Bank18 => f.write_str("Bank18"),
+            Self::Bank19 => f.write_str("Bank19"),
+            Self::Bank20 => f.write_str("Bank20"),
+            Self::Bank21 => f.write_str("Bank21"),
+            Self::Bank22 => f.write_str("Bank22"),
+            Self::Bank23 => f.write_str("Bank23"),
+            Self::Bank24 => f.write_str("Bank24"),
+            Self::BankBagSlot1 => f.write_str("BankBagSlot1"),
+            Self::BankBagSlot2 => f.write_str("BankBagSlot2"),
+            Self::BankBagSlot3 => f.write_str("BankBagSlot3"),
+            Self::BankBagSlot4 => f.write_str("BankBagSlot4"),
+            Self::BankBagSlot5 => f.write_str("BankBagSlot5"),
+            Self::BankBagSlot6 => f.write_str("BankBagSlot6"),
+            Self::VendorBuyback1 => f.write_str("VendorBuyback1"),
+            Self::VendorBuyback2 => f.write_str("VendorBuyback2"),
+            Self::VendorBuyback3 => f.write_str("VendorBuyback3"),
+            Self::VendorBuyback4 => f.write_str("VendorBuyback4"),
+            Self::VendorBuyback5 => f.write_str("VendorBuyback5"),
+            Self::VendorBuyback6 => f.write_str("VendorBuyback6"),
+            Self::VendorBuyback7 => f.write_str("VendorBuyback7"),
+            Self::VendorBuyback8 => f.write_str("VendorBuyback8"),
+            Self::VendorBuyback9 => f.write_str("VendorBuyback9"),
+            Self::VendorBuyback10 => f.write_str("VendorBuyback10"),
+            Self::VendorBuyback11 => f.write_str("VendorBuyback11"),
+            Self::VendorBuyback12 => f.write_str("VendorBuyback12"),
+            Self::Keyring1 => f.write_str("Keyring1"),
+            Self::Keyring2 => f.write_str("Keyring2"),
+            Self::Keyring3 => f.write_str("Keyring3"),
+            Self::Keyring4 => f.write_str("Keyring4"),
+            Self::Keyring5 => f.write_str("Keyring5"),
+            Self::Keyring6 => f.write_str("Keyring6"),
+            Self::Keyring7 => f.write_str("Keyring7"),
+            Self::Keyring8 => f.write_str("Keyring8"),
+            Self::Keyring9 => f.write_str("Keyring9"),
+            Self::Keyring10 => f.write_str("Keyring10"),
+            Self::Keyring11 => f.write_str("Keyring11"),
+            Self::Keyring12 => f.write_str("Keyring12"),
+            Self::Keyring13 => f.write_str("Keyring13"),
+            Self::Keyring14 => f.write_str("Keyring14"),
+            Self::Keyring15 => f.write_str("Keyring15"),
+            Self::Keyring16 => f.write_str("Keyring16"),
+            Self::Keyring17 => f.write_str("Keyring17"),
+            Self::Keyring18 => f.write_str("Keyring18"),
+            Self::Keyring19 => f.write_str("Keyring19"),
+            Self::Keyring20 => f.write_str("Keyring20"),
+            Self::Keyring21 => f.write_str("Keyring21"),
+            Self::Keyring22 => f.write_str("Keyring22"),
+            Self::Keyring23 => f.write_str("Keyring23"),
+            Self::Keyring24 => f.write_str("Keyring24"),
+            Self::Keyring25 => f.write_str("Keyring25"),
+            Self::Keyring26 => f.write_str("Keyring26"),
+            Self::Keyring27 => f.write_str("Keyring27"),
+            Self::Keyring28 => f.write_str("Keyring28"),
+            Self::Keyring29 => f.write_str("Keyring29"),
+            Self::Keyring30 => f.write_str("Keyring30"),
+            Self::Keyring31 => f.write_str("Keyring31"),
+            Self::Keyring32 => f.write_str("Keyring32"),
         }
     }
 }
@@ -228,6 +524,80 @@ impl TryFrom<u8> for ItemSlot {
             36 => Ok(Self::Inventory13),
             37 => Ok(Self::Inventory14),
             38 => Ok(Self::Inventory15),
+            39 => Ok(Self::Bank1),
+            40 => Ok(Self::Bank2),
+            41 => Ok(Self::Bank3),
+            42 => Ok(Self::Bank4),
+            43 => Ok(Self::Bank5),
+            44 => Ok(Self::Bank6),
+            45 => Ok(Self::Bank7),
+            46 => Ok(Self::Bank8),
+            47 => Ok(Self::Bank9),
+            48 => Ok(Self::Bank10),
+            49 => Ok(Self::Bank11),
+            50 => Ok(Self::Bank12),
+            51 => Ok(Self::Bank13),
+            52 => Ok(Self::Bank14),
+            53 => Ok(Self::Bank15),
+            54 => Ok(Self::Bank16),
+            55 => Ok(Self::Bank17),
+            56 => Ok(Self::Bank18),
+            57 => Ok(Self::Bank19),
+            58 => Ok(Self::Bank20),
+            59 => Ok(Self::Bank21),
+            60 => Ok(Self::Bank22),
+            61 => Ok(Self::Bank23),
+            62 => Ok(Self::Bank24),
+            63 => Ok(Self::BankBagSlot1),
+            64 => Ok(Self::BankBagSlot2),
+            65 => Ok(Self::BankBagSlot3),
+            66 => Ok(Self::BankBagSlot4),
+            67 => Ok(Self::BankBagSlot5),
+            68 => Ok(Self::BankBagSlot6),
+            69 => Ok(Self::VendorBuyback1),
+            70 => Ok(Self::VendorBuyback2),
+            71 => Ok(Self::VendorBuyback3),
+            72 => Ok(Self::VendorBuyback4),
+            73 => Ok(Self::VendorBuyback5),
+            74 => Ok(Self::VendorBuyback6),
+            75 => Ok(Self::VendorBuyback7),
+            76 => Ok(Self::VendorBuyback8),
+            77 => Ok(Self::VendorBuyback9),
+            78 => Ok(Self::VendorBuyback10),
+            79 => Ok(Self::VendorBuyback11),
+            80 => Ok(Self::VendorBuyback12),
+            81 => Ok(Self::Keyring1),
+            82 => Ok(Self::Keyring2),
+            83 => Ok(Self::Keyring3),
+            84 => Ok(Self::Keyring4),
+            85 => Ok(Self::Keyring5),
+            86 => Ok(Self::Keyring6),
+            87 => Ok(Self::Keyring7),
+            88 => Ok(Self::Keyring8),
+            89 => Ok(Self::Keyring9),
+            90 => Ok(Self::Keyring10),
+            91 => Ok(Self::Keyring11),
+            92 => Ok(Self::Keyring12),
+            93 => Ok(Self::Keyring13),
+            94 => Ok(Self::Keyring14),
+            95 => Ok(Self::Keyring15),
+            96 => Ok(Self::Keyring16),
+            97 => Ok(Self::Keyring17),
+            98 => Ok(Self::Keyring18),
+            99 => Ok(Self::Keyring19),
+            100 => Ok(Self::Keyring20),
+            101 => Ok(Self::Keyring21),
+            102 => Ok(Self::Keyring22),
+            103 => Ok(Self::Keyring23),
+            104 => Ok(Self::Keyring24),
+            105 => Ok(Self::Keyring25),
+            106 => Ok(Self::Keyring26),
+            107 => Ok(Self::Keyring27),
+            108 => Ok(Self::Keyring28),
+            109 => Ok(Self::Keyring29),
+            110 => Ok(Self::Keyring30),
+            111 => Ok(Self::Keyring31),
+            112 => Ok(Self::Keyring32),
             v => Err(crate::errors::EnumError::new("ItemSlot", v as u64),)
         }
     }
