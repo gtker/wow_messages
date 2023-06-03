@@ -276,6 +276,8 @@ pub(crate) fn print_update_mask() {
 }
 
 fn print_getter(s: &mut Writer, m: &MemberType) {
+    let offset = m.offset;
+
     match m.ty() {
         UfType::ArrayOfStruct { name, .. } => {
             s.open_curly(format!(
@@ -308,21 +310,17 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
 
     match m.ty() {
         UfType::Guid => {
-            s.wln(format!("let lower = self.values.get(&{});", m.offset));
-            s.wln(format!("let upper = self.values.get(&{});", m.offset + 1));
-            s.newline();
-
-            s.wln("lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))");
+            s.wln(format!("self.get_guid({offset})"));
         }
         UfType::Int => {
-            s.wln(format!("self.values.get(&{}).map(|v| *v as i32)", m.offset));
+            s.wln(format!("self.values.get(&{offset}).map(|v| *v as i32)"));
         }
         UfType::Float => {
-            s.wln(format!("self.values.get(&{}).map(|v| f32::from_le_bytes(v.to_le_bytes()))", m.offset));
+            s.wln(format!("self.values.get(&{offset}).map(|v| f32::from_le_bytes(v.to_le_bytes()))"));
         }
         UfType::Bytes => {
             s.body_else(
-                format!("if let Some(v) = self.values.get(&{})", m.offset),
+                format!("if let Some(v) = self.values.get(&{offset})"),
                 |s| {
                     s.wln("let v = v.to_le_bytes();");
                     s.wln("let (a, b, c, d) = (v[0], v[1], v[2], v[3]);");
@@ -335,7 +333,7 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
         }
         UfType::BytesWith(a, b, c, d) => {
             s.body_else(
-                format!("if let Some(v) = self.values.get(&{})", m.offset),
+                format!("if let Some(v) = self.values.get(&{offset})"),
                 |s| {
                     s.wln("let v = v.to_le_bytes();");
                     s.wln(format!(
@@ -363,7 +361,7 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
             );
         }
         UfType::TwoShort => s.body_else(
-            format!("if let Some(v) = self.values.get(&{})", m.offset),
+            format!("if let Some(v) = self.values.get(&{offset})"),
             |s| {
                 s.wln("let v = v.to_le_bytes();");
                 s.wln("let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));");
@@ -377,7 +375,7 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
             s.wln(format!("{import_location}::{name}::from_range(self.values.range(index.first()..=index.last()))"));
         }
         UfType::GuidEnumLookupArray {  variable_name, .. } => {
-            s.wln(format!("let offset = {} + {variable_name}.as_int() as u16 * 2;", m.offset));
+            s.wln(format!("let offset = {offset} + {variable_name}.as_int() as u16 * 2;"));
             s.wln(format!("let lower = self.values.get(&offset);"));
             s.wln(format!("let upper = self.values.get(&(offset + 1));"));
             s.newline();
@@ -403,13 +401,10 @@ fn print_setter(s: &mut Writer, m: &MemberType) {
 }
 
 fn print_setter_internals(s: &mut Writer, m: &MemberType) {
+    let offset = m.offset;
     match m.ty {
         UfType::Guid => {
-            s.wln(format!("self.header_set({}, v.guid() as u32);", m.offset));
-            s.wln(format!(
-                "self.header_set({}, (v.guid() >> 32) as u32);",
-                m.offset + 1
-            ));
+            s.wln(format!("self.set_guid({offset}, v);"));
         }
         UfType::ArrayOfStruct { variable_name, .. } => {
             s.open_curly(format!(
@@ -420,13 +415,9 @@ fn print_setter_internals(s: &mut Writer, m: &MemberType) {
         }
         UfType::GuidEnumLookupArray { variable_name, .. } => {
             s.wln(format!(
-                "let offset = {} + {variable_name} as u16 * 2;",
-                m.offset
+                "let offset = {offset} + {variable_name} as u16 * 2;",
             ));
-            s.wln(format!("self.header_set(offset, item.guid() as u32);"));
-            s.wln(format!(
-                "self.header_set(offset + 1, (item.guid() >> 32) as u32);",
-            ));
+            s.wln(format!("self.set_guid(offset, item);"));
         }
         _ => {
             let value = match &m.ty {

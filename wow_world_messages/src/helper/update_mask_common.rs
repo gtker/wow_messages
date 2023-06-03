@@ -124,6 +124,11 @@ macro_rules! update_item {
                 $crate::helper::update_mask_common::array_set(&mut self.header, bit);
             }
 
+            pub(crate) fn set_guid(&mut self, bit: u16, guid: $crate::Guid) {
+                self.header_set(bit, guid.guid() as u32);
+                self.header_set(bit + 1, (guid.guid() >> 32) as u32);
+            }
+
             pub fn new() -> Self {
                 const OBJECT_FIELD_TYPE: u16 = 2;
 
@@ -168,6 +173,18 @@ macro_rules! update_item {
                     dirty_mask: header,
                     values,
                 }
+            }
+
+            pub(crate) fn set_guid(&mut self, bit: u16, guid: $crate::Guid) {
+                self.header_set(bit, guid.guid() as u32);
+                self.header_set(bit + 1, (guid.guid() >> 32) as u32);
+            }
+
+            pub(crate) fn get_guid(&self, bit: u16) -> Option<$crate::Guid> {
+                let lower = self.values.get(&bit);
+                let upper = self.values.get(&(bit + 1));
+
+                lower.map(|lower| $crate::Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
             }
 
             pub(crate) fn header_set(&mut self, bit: u16, value: u32) {

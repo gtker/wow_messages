@@ -9,8 +9,7 @@ use crate::vanilla::{UpdateContainer, UpdateContainerBuilder, UpdateCorpse, Upda
 
 impl UpdateItemBuilder {
     pub fn set_object_guid(mut self, v: Guid) -> Self {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
         self
     }
 
@@ -25,26 +24,22 @@ impl UpdateItemBuilder {
     }
 
     pub fn set_item_owner(mut self, v: Guid) -> Self {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
         self
     }
 
     pub fn set_item_contained(mut self, v: Guid) -> Self {
-        self.header_set(8, v.guid() as u32);
-        self.header_set(9, (v.guid() >> 32) as u32);
+        self.set_guid(8, v);
         self
     }
 
     pub fn set_item_creator(mut self, v: Guid) -> Self {
-        self.header_set(10, v.guid() as u32);
-        self.header_set(11, (v.guid() >> 32) as u32);
+        self.set_guid(10, v);
         self
     }
 
     pub fn set_item_giftcreator(mut self, v: Guid) -> Self {
-        self.header_set(12, v.guid() as u32);
-        self.header_set(13, (v.guid() >> 32) as u32);
+        self.set_guid(12, v);
         self
     }
 
@@ -102,8 +97,7 @@ impl UpdateItemBuilder {
 
 impl UpdateContainerBuilder {
     pub fn set_object_guid(mut self, v: Guid) -> Self {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
         self
     }
 
@@ -118,26 +112,22 @@ impl UpdateContainerBuilder {
     }
 
     pub fn set_item_owner(mut self, v: Guid) -> Self {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
         self
     }
 
     pub fn set_item_contained(mut self, v: Guid) -> Self {
-        self.header_set(8, v.guid() as u32);
-        self.header_set(9, (v.guid() >> 32) as u32);
+        self.set_guid(8, v);
         self
     }
 
     pub fn set_item_creator(mut self, v: Guid) -> Self {
-        self.header_set(10, v.guid() as u32);
-        self.header_set(11, (v.guid() >> 32) as u32);
+        self.set_guid(10, v);
         self
     }
 
     pub fn set_item_giftcreator(mut self, v: Guid) -> Self {
-        self.header_set(12, v.guid() as u32);
-        self.header_set(13, (v.guid() >> 32) as u32);
+        self.set_guid(12, v);
         self
     }
 
@@ -197,8 +187,7 @@ impl UpdateContainerBuilder {
     }
 
     pub fn set_container_slot_1(mut self, v: Guid) -> Self {
-        self.header_set(50, v.guid() as u32);
-        self.header_set(51, (v.guid() >> 32) as u32);
+        self.set_guid(50, v);
         self
     }
 
@@ -206,8 +195,7 @@ impl UpdateContainerBuilder {
 
 impl UpdateUnitBuilder {
     pub fn set_object_guid(mut self, v: Guid) -> Self {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
         self
     }
 
@@ -222,50 +210,42 @@ impl UpdateUnitBuilder {
     }
 
     pub fn set_unit_charm(mut self, v: Guid) -> Self {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
         self
     }
 
     pub fn set_unit_summon(mut self, v: Guid) -> Self {
-        self.header_set(8, v.guid() as u32);
-        self.header_set(9, (v.guid() >> 32) as u32);
+        self.set_guid(8, v);
         self
     }
 
     pub fn set_unit_charmedby(mut self, v: Guid) -> Self {
-        self.header_set(10, v.guid() as u32);
-        self.header_set(11, (v.guid() >> 32) as u32);
+        self.set_guid(10, v);
         self
     }
 
     pub fn set_unit_summonedby(mut self, v: Guid) -> Self {
-        self.header_set(12, v.guid() as u32);
-        self.header_set(13, (v.guid() >> 32) as u32);
+        self.set_guid(12, v);
         self
     }
 
     pub fn set_unit_createdby(mut self, v: Guid) -> Self {
-        self.header_set(14, v.guid() as u32);
-        self.header_set(15, (v.guid() >> 32) as u32);
+        self.set_guid(14, v);
         self
     }
 
     pub fn set_unit_target(mut self, v: Guid) -> Self {
-        self.header_set(16, v.guid() as u32);
-        self.header_set(17, (v.guid() >> 32) as u32);
+        self.set_guid(16, v);
         self
     }
 
     pub fn set_unit_persuaded(mut self, v: Guid) -> Self {
-        self.header_set(18, v.guid() as u32);
-        self.header_set(19, (v.guid() >> 32) as u32);
+        self.set_guid(18, v);
         self
     }
 
     pub fn set_unit_channel_object(mut self, v: Guid) -> Self {
-        self.header_set(20, v.guid() as u32);
-        self.header_set(21, (v.guid() >> 32) as u32);
+        self.set_guid(20, v);
         self
     }
 
@@ -628,8 +608,7 @@ impl UpdateUnitBuilder {
 
 impl UpdatePlayerBuilder {
     pub fn set_object_guid(mut self, v: Guid) -> Self {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
         self
     }
 
@@ -644,50 +623,42 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_unit_charm(mut self, v: Guid) -> Self {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
         self
     }
 
     pub fn set_unit_summon(mut self, v: Guid) -> Self {
-        self.header_set(8, v.guid() as u32);
-        self.header_set(9, (v.guid() >> 32) as u32);
+        self.set_guid(8, v);
         self
     }
 
     pub fn set_unit_charmedby(mut self, v: Guid) -> Self {
-        self.header_set(10, v.guid() as u32);
-        self.header_set(11, (v.guid() >> 32) as u32);
+        self.set_guid(10, v);
         self
     }
 
     pub fn set_unit_summonedby(mut self, v: Guid) -> Self {
-        self.header_set(12, v.guid() as u32);
-        self.header_set(13, (v.guid() >> 32) as u32);
+        self.set_guid(12, v);
         self
     }
 
     pub fn set_unit_createdby(mut self, v: Guid) -> Self {
-        self.header_set(14, v.guid() as u32);
-        self.header_set(15, (v.guid() >> 32) as u32);
+        self.set_guid(14, v);
         self
     }
 
     pub fn set_unit_target(mut self, v: Guid) -> Self {
-        self.header_set(16, v.guid() as u32);
-        self.header_set(17, (v.guid() >> 32) as u32);
+        self.set_guid(16, v);
         self
     }
 
     pub fn set_unit_persuaded(mut self, v: Guid) -> Self {
-        self.header_set(18, v.guid() as u32);
-        self.header_set(19, (v.guid() >> 32) as u32);
+        self.set_guid(18, v);
         self
     }
 
     pub fn set_unit_channel_object(mut self, v: Guid) -> Self {
-        self.header_set(20, v.guid() as u32);
-        self.header_set(21, (v.guid() >> 32) as u32);
+        self.set_guid(20, v);
         self
     }
 
@@ -1047,8 +1018,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_duel_arbiter(mut self, v: Guid) -> Self {
-        self.header_set(188, v.guid() as u32);
-        self.header_set(189, (v.guid() >> 32) as u32);
+        self.set_guid(188, v);
         self
     }
 
@@ -1293,8 +1263,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_1_creator(mut self, v: Guid) -> Self {
-        self.header_set(258, v.guid() as u32);
-        self.header_set(259, (v.guid() >> 32) as u32);
+        self.set_guid(258, v);
         self
     }
 
@@ -1309,8 +1278,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_2_creator(mut self, v: Guid) -> Self {
-        self.header_set(270, v.guid() as u32);
-        self.header_set(271, (v.guid() >> 32) as u32);
+        self.set_guid(270, v);
         self
     }
 
@@ -1325,8 +1293,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_3_creator(mut self, v: Guid) -> Self {
-        self.header_set(282, v.guid() as u32);
-        self.header_set(283, (v.guid() >> 32) as u32);
+        self.set_guid(282, v);
         self
     }
 
@@ -1341,8 +1308,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_4_creator(mut self, v: Guid) -> Self {
-        self.header_set(294, v.guid() as u32);
-        self.header_set(295, (v.guid() >> 32) as u32);
+        self.set_guid(294, v);
         self
     }
 
@@ -1357,8 +1323,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_5_creator(mut self, v: Guid) -> Self {
-        self.header_set(306, v.guid() as u32);
-        self.header_set(307, (v.guid() >> 32) as u32);
+        self.set_guid(306, v);
         self
     }
 
@@ -1373,8 +1338,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_6_creator(mut self, v: Guid) -> Self {
-        self.header_set(318, v.guid() as u32);
-        self.header_set(319, (v.guid() >> 32) as u32);
+        self.set_guid(318, v);
         self
     }
 
@@ -1389,8 +1353,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_7_creator(mut self, v: Guid) -> Self {
-        self.header_set(330, v.guid() as u32);
-        self.header_set(331, (v.guid() >> 32) as u32);
+        self.set_guid(330, v);
         self
     }
 
@@ -1405,8 +1368,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_8_creator(mut self, v: Guid) -> Self {
-        self.header_set(342, v.guid() as u32);
-        self.header_set(343, (v.guid() >> 32) as u32);
+        self.set_guid(342, v);
         self
     }
 
@@ -1421,8 +1383,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_9_creator(mut self, v: Guid) -> Self {
-        self.header_set(354, v.guid() as u32);
-        self.header_set(355, (v.guid() >> 32) as u32);
+        self.set_guid(354, v);
         self
     }
 
@@ -1437,8 +1398,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_10_creator(mut self, v: Guid) -> Self {
-        self.header_set(366, v.guid() as u32);
-        self.header_set(367, (v.guid() >> 32) as u32);
+        self.set_guid(366, v);
         self
     }
 
@@ -1453,8 +1413,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_11_creator(mut self, v: Guid) -> Self {
-        self.header_set(378, v.guid() as u32);
-        self.header_set(379, (v.guid() >> 32) as u32);
+        self.set_guid(378, v);
         self
     }
 
@@ -1469,8 +1428,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_12_creator(mut self, v: Guid) -> Self {
-        self.header_set(390, v.guid() as u32);
-        self.header_set(391, (v.guid() >> 32) as u32);
+        self.set_guid(390, v);
         self
     }
 
@@ -1485,8 +1443,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_13_creator(mut self, v: Guid) -> Self {
-        self.header_set(402, v.guid() as u32);
-        self.header_set(403, (v.guid() >> 32) as u32);
+        self.set_guid(402, v);
         self
     }
 
@@ -1501,8 +1458,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_14_creator(mut self, v: Guid) -> Self {
-        self.header_set(414, v.guid() as u32);
-        self.header_set(415, (v.guid() >> 32) as u32);
+        self.set_guid(414, v);
         self
     }
 
@@ -1517,8 +1473,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_15_creator(mut self, v: Guid) -> Self {
-        self.header_set(426, v.guid() as u32);
-        self.header_set(427, (v.guid() >> 32) as u32);
+        self.set_guid(426, v);
         self
     }
 
@@ -1533,8 +1488,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_16_creator(mut self, v: Guid) -> Self {
-        self.header_set(438, v.guid() as u32);
-        self.header_set(439, (v.guid() >> 32) as u32);
+        self.set_guid(438, v);
         self
     }
 
@@ -1549,8 +1503,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_17_creator(mut self, v: Guid) -> Self {
-        self.header_set(450, v.guid() as u32);
-        self.header_set(451, (v.guid() >> 32) as u32);
+        self.set_guid(450, v);
         self
     }
 
@@ -1565,8 +1518,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_18_creator(mut self, v: Guid) -> Self {
-        self.header_set(462, v.guid() as u32);
-        self.header_set(463, (v.guid() >> 32) as u32);
+        self.set_guid(462, v);
         self
     }
 
@@ -1581,8 +1533,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_visible_item_19_creator(mut self, v: Guid) -> Self {
-        self.header_set(474, v.guid() as u32);
-        self.header_set(475, (v.guid() >> 32) as u32);
+        self.set_guid(474, v);
         self
     }
 
@@ -1598,20 +1549,17 @@ impl UpdatePlayerBuilder {
 
     pub fn set_player_field_inv(mut self, item_slot: crate::vanilla::ItemSlot, item: Guid) -> Self {
         let offset = 486 + item_slot as u16 * 2;
-        self.header_set(offset, item.guid() as u32);
-        self.header_set(offset + 1, (item.guid() >> 32) as u32);
+        self.set_guid(offset, item);
         self
     }
 
     pub fn set_player_farsight(mut self, v: Guid) -> Self {
-        self.header_set(712, v.guid() as u32);
-        self.header_set(713, (v.guid() >> 32) as u32);
+        self.set_guid(712, v);
         self
     }
 
     pub fn set_player_field_combo_target(mut self, v: Guid) -> Self {
-        self.header_set(714, v.guid() as u32);
-        self.header_set(715, (v.guid() >> 32) as u32);
+        self.set_guid(714, v);
         self
     }
 
@@ -1866,8 +1814,7 @@ impl UpdatePlayerBuilder {
 
 impl UpdateGameObjectBuilder {
     pub fn set_object_guid(mut self, v: Guid) -> Self {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
         self
     }
 
@@ -1882,8 +1829,7 @@ impl UpdateGameObjectBuilder {
     }
 
     pub fn set_gameobject_created_by(mut self, v: Guid) -> Self {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
         self
     }
 
@@ -1961,8 +1907,7 @@ impl UpdateGameObjectBuilder {
 
 impl UpdateDynamicObjectBuilder {
     pub fn set_object_guid(mut self, v: Guid) -> Self {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
         self
     }
 
@@ -1977,8 +1922,7 @@ impl UpdateDynamicObjectBuilder {
     }
 
     pub fn set_dynamicobject_caster(mut self, v: Guid) -> Self {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
         self
     }
 
@@ -2021,8 +1965,7 @@ impl UpdateDynamicObjectBuilder {
 
 impl UpdateCorpseBuilder {
     pub fn set_object_guid(mut self, v: Guid) -> Self {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
         self
     }
 
@@ -2037,8 +1980,7 @@ impl UpdateCorpseBuilder {
     }
 
     pub fn set_corpse_owner(mut self, v: Guid) -> Self {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
         self
     }
 
@@ -2101,15 +2043,11 @@ impl UpdateCorpseBuilder {
 
 impl UpdateItem {
     pub fn set_object_guid(&mut self, v: Guid) {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
     }
 
     pub fn object_guid(&self) -> Option<Guid> {
-        let lower = self.values.get(&0);
-        let upper = self.values.get(&1);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(0)
     }
 
     pub fn set_object_entry(&mut self, v: i32) {
@@ -2129,51 +2067,35 @@ impl UpdateItem {
     }
 
     pub fn set_item_owner(&mut self, v: Guid) {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
     }
 
     pub fn item_owner(&self) -> Option<Guid> {
-        let lower = self.values.get(&6);
-        let upper = self.values.get(&7);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(6)
     }
 
     pub fn set_item_contained(&mut self, v: Guid) {
-        self.header_set(8, v.guid() as u32);
-        self.header_set(9, (v.guid() >> 32) as u32);
+        self.set_guid(8, v);
     }
 
     pub fn item_contained(&self) -> Option<Guid> {
-        let lower = self.values.get(&8);
-        let upper = self.values.get(&9);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(8)
     }
 
     pub fn set_item_creator(&mut self, v: Guid) {
-        self.header_set(10, v.guid() as u32);
-        self.header_set(11, (v.guid() >> 32) as u32);
+        self.set_guid(10, v);
     }
 
     pub fn item_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&10);
-        let upper = self.values.get(&11);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(10)
     }
 
     pub fn set_item_giftcreator(&mut self, v: Guid) {
-        self.header_set(12, v.guid() as u32);
-        self.header_set(13, (v.guid() >> 32) as u32);
+        self.set_guid(12, v);
     }
 
     pub fn item_giftcreator(&self) -> Option<Guid> {
-        let lower = self.values.get(&12);
-        let upper = self.values.get(&13);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(12)
     }
 
     pub fn set_item_stack_count(&mut self, v: i32) {
@@ -2260,15 +2182,11 @@ impl UpdateItem {
 
 impl UpdateContainer {
     pub fn set_object_guid(&mut self, v: Guid) {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
     }
 
     pub fn object_guid(&self) -> Option<Guid> {
-        let lower = self.values.get(&0);
-        let upper = self.values.get(&1);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(0)
     }
 
     pub fn set_object_entry(&mut self, v: i32) {
@@ -2288,51 +2206,35 @@ impl UpdateContainer {
     }
 
     pub fn set_item_owner(&mut self, v: Guid) {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
     }
 
     pub fn item_owner(&self) -> Option<Guid> {
-        let lower = self.values.get(&6);
-        let upper = self.values.get(&7);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(6)
     }
 
     pub fn set_item_contained(&mut self, v: Guid) {
-        self.header_set(8, v.guid() as u32);
-        self.header_set(9, (v.guid() >> 32) as u32);
+        self.set_guid(8, v);
     }
 
     pub fn item_contained(&self) -> Option<Guid> {
-        let lower = self.values.get(&8);
-        let upper = self.values.get(&9);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(8)
     }
 
     pub fn set_item_creator(&mut self, v: Guid) {
-        self.header_set(10, v.guid() as u32);
-        self.header_set(11, (v.guid() >> 32) as u32);
+        self.set_guid(10, v);
     }
 
     pub fn item_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&10);
-        let upper = self.values.get(&11);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(10)
     }
 
     pub fn set_item_giftcreator(&mut self, v: Guid) {
-        self.header_set(12, v.guid() as u32);
-        self.header_set(13, (v.guid() >> 32) as u32);
+        self.set_guid(12, v);
     }
 
     pub fn item_giftcreator(&self) -> Option<Guid> {
-        let lower = self.values.get(&12);
-        let upper = self.values.get(&13);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(12)
     }
 
     pub fn set_item_stack_count(&mut self, v: i32) {
@@ -2424,30 +2326,22 @@ impl UpdateContainer {
     }
 
     pub fn set_container_slot_1(&mut self, v: Guid) {
-        self.header_set(50, v.guid() as u32);
-        self.header_set(51, (v.guid() >> 32) as u32);
+        self.set_guid(50, v);
     }
 
     pub fn container_slot_1(&self) -> Option<Guid> {
-        let lower = self.values.get(&50);
-        let upper = self.values.get(&51);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(50)
     }
 
 }
 
 impl UpdateUnit {
     pub fn set_object_guid(&mut self, v: Guid) {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
     }
 
     pub fn object_guid(&self) -> Option<Guid> {
-        let lower = self.values.get(&0);
-        let upper = self.values.get(&1);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(0)
     }
 
     pub fn set_object_entry(&mut self, v: i32) {
@@ -2467,99 +2361,67 @@ impl UpdateUnit {
     }
 
     pub fn set_unit_charm(&mut self, v: Guid) {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
     }
 
     pub fn unit_charm(&self) -> Option<Guid> {
-        let lower = self.values.get(&6);
-        let upper = self.values.get(&7);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(6)
     }
 
     pub fn set_unit_summon(&mut self, v: Guid) {
-        self.header_set(8, v.guid() as u32);
-        self.header_set(9, (v.guid() >> 32) as u32);
+        self.set_guid(8, v);
     }
 
     pub fn unit_summon(&self) -> Option<Guid> {
-        let lower = self.values.get(&8);
-        let upper = self.values.get(&9);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(8)
     }
 
     pub fn set_unit_charmedby(&mut self, v: Guid) {
-        self.header_set(10, v.guid() as u32);
-        self.header_set(11, (v.guid() >> 32) as u32);
+        self.set_guid(10, v);
     }
 
     pub fn unit_charmedby(&self) -> Option<Guid> {
-        let lower = self.values.get(&10);
-        let upper = self.values.get(&11);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(10)
     }
 
     pub fn set_unit_summonedby(&mut self, v: Guid) {
-        self.header_set(12, v.guid() as u32);
-        self.header_set(13, (v.guid() >> 32) as u32);
+        self.set_guid(12, v);
     }
 
     pub fn unit_summonedby(&self) -> Option<Guid> {
-        let lower = self.values.get(&12);
-        let upper = self.values.get(&13);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(12)
     }
 
     pub fn set_unit_createdby(&mut self, v: Guid) {
-        self.header_set(14, v.guid() as u32);
-        self.header_set(15, (v.guid() >> 32) as u32);
+        self.set_guid(14, v);
     }
 
     pub fn unit_createdby(&self) -> Option<Guid> {
-        let lower = self.values.get(&14);
-        let upper = self.values.get(&15);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(14)
     }
 
     pub fn set_unit_target(&mut self, v: Guid) {
-        self.header_set(16, v.guid() as u32);
-        self.header_set(17, (v.guid() >> 32) as u32);
+        self.set_guid(16, v);
     }
 
     pub fn unit_target(&self) -> Option<Guid> {
-        let lower = self.values.get(&16);
-        let upper = self.values.get(&17);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(16)
     }
 
     pub fn set_unit_persuaded(&mut self, v: Guid) {
-        self.header_set(18, v.guid() as u32);
-        self.header_set(19, (v.guid() >> 32) as u32);
+        self.set_guid(18, v);
     }
 
     pub fn unit_persuaded(&self) -> Option<Guid> {
-        let lower = self.values.get(&18);
-        let upper = self.values.get(&19);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(18)
     }
 
     pub fn set_unit_channel_object(&mut self, v: Guid) {
-        self.header_set(20, v.guid() as u32);
-        self.header_set(21, (v.guid() >> 32) as u32);
+        self.set_guid(20, v);
     }
 
     pub fn unit_channel_object(&self) -> Option<Guid> {
-        let lower = self.values.get(&20);
-        let upper = self.values.get(&21);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(20)
     }
 
     pub fn set_unit_health(&mut self, v: i32) {
@@ -3194,15 +3056,11 @@ impl UpdateUnit {
 
 impl UpdatePlayer {
     pub fn set_object_guid(&mut self, v: Guid) {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
     }
 
     pub fn object_guid(&self) -> Option<Guid> {
-        let lower = self.values.get(&0);
-        let upper = self.values.get(&1);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(0)
     }
 
     pub fn set_object_entry(&mut self, v: i32) {
@@ -3222,99 +3080,67 @@ impl UpdatePlayer {
     }
 
     pub fn set_unit_charm(&mut self, v: Guid) {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
     }
 
     pub fn unit_charm(&self) -> Option<Guid> {
-        let lower = self.values.get(&6);
-        let upper = self.values.get(&7);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(6)
     }
 
     pub fn set_unit_summon(&mut self, v: Guid) {
-        self.header_set(8, v.guid() as u32);
-        self.header_set(9, (v.guid() >> 32) as u32);
+        self.set_guid(8, v);
     }
 
     pub fn unit_summon(&self) -> Option<Guid> {
-        let lower = self.values.get(&8);
-        let upper = self.values.get(&9);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(8)
     }
 
     pub fn set_unit_charmedby(&mut self, v: Guid) {
-        self.header_set(10, v.guid() as u32);
-        self.header_set(11, (v.guid() >> 32) as u32);
+        self.set_guid(10, v);
     }
 
     pub fn unit_charmedby(&self) -> Option<Guid> {
-        let lower = self.values.get(&10);
-        let upper = self.values.get(&11);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(10)
     }
 
     pub fn set_unit_summonedby(&mut self, v: Guid) {
-        self.header_set(12, v.guid() as u32);
-        self.header_set(13, (v.guid() >> 32) as u32);
+        self.set_guid(12, v);
     }
 
     pub fn unit_summonedby(&self) -> Option<Guid> {
-        let lower = self.values.get(&12);
-        let upper = self.values.get(&13);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(12)
     }
 
     pub fn set_unit_createdby(&mut self, v: Guid) {
-        self.header_set(14, v.guid() as u32);
-        self.header_set(15, (v.guid() >> 32) as u32);
+        self.set_guid(14, v);
     }
 
     pub fn unit_createdby(&self) -> Option<Guid> {
-        let lower = self.values.get(&14);
-        let upper = self.values.get(&15);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(14)
     }
 
     pub fn set_unit_target(&mut self, v: Guid) {
-        self.header_set(16, v.guid() as u32);
-        self.header_set(17, (v.guid() >> 32) as u32);
+        self.set_guid(16, v);
     }
 
     pub fn unit_target(&self) -> Option<Guid> {
-        let lower = self.values.get(&16);
-        let upper = self.values.get(&17);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(16)
     }
 
     pub fn set_unit_persuaded(&mut self, v: Guid) {
-        self.header_set(18, v.guid() as u32);
-        self.header_set(19, (v.guid() >> 32) as u32);
+        self.set_guid(18, v);
     }
 
     pub fn unit_persuaded(&self) -> Option<Guid> {
-        let lower = self.values.get(&18);
-        let upper = self.values.get(&19);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(18)
     }
 
     pub fn set_unit_channel_object(&mut self, v: Guid) {
-        self.header_set(20, v.guid() as u32);
-        self.header_set(21, (v.guid() >> 32) as u32);
+        self.set_guid(20, v);
     }
 
     pub fn unit_channel_object(&self) -> Option<Guid> {
-        let lower = self.values.get(&20);
-        let upper = self.values.get(&21);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(20)
     }
 
     pub fn set_unit_health(&mut self, v: i32) {
@@ -3946,15 +3772,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_duel_arbiter(&mut self, v: Guid) {
-        self.header_set(188, v.guid() as u32);
-        self.header_set(189, (v.guid() >> 32) as u32);
+        self.set_guid(188, v);
     }
 
     pub fn player_duel_arbiter(&self) -> Option<Guid> {
-        let lower = self.values.get(&188);
-        let upper = self.values.get(&189);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(188)
     }
 
     pub fn set_player_flags(&mut self, v: i32) {
@@ -4360,15 +4182,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_1_creator(&mut self, v: Guid) {
-        self.header_set(258, v.guid() as u32);
-        self.header_set(259, (v.guid() >> 32) as u32);
+        self.set_guid(258, v);
     }
 
     pub fn player_visible_item_1_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&258);
-        let upper = self.values.get(&259);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(258)
     }
 
     pub fn set_player_visible_item_1_0(&mut self, v: i32) {
@@ -4394,15 +4212,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_2_creator(&mut self, v: Guid) {
-        self.header_set(270, v.guid() as u32);
-        self.header_set(271, (v.guid() >> 32) as u32);
+        self.set_guid(270, v);
     }
 
     pub fn player_visible_item_2_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&270);
-        let upper = self.values.get(&271);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(270)
     }
 
     pub fn set_player_visible_item_2_0(&mut self, v: i32) {
@@ -4428,15 +4242,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_3_creator(&mut self, v: Guid) {
-        self.header_set(282, v.guid() as u32);
-        self.header_set(283, (v.guid() >> 32) as u32);
+        self.set_guid(282, v);
     }
 
     pub fn player_visible_item_3_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&282);
-        let upper = self.values.get(&283);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(282)
     }
 
     pub fn set_player_visible_item_3_0(&mut self, v: i32) {
@@ -4462,15 +4272,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_4_creator(&mut self, v: Guid) {
-        self.header_set(294, v.guid() as u32);
-        self.header_set(295, (v.guid() >> 32) as u32);
+        self.set_guid(294, v);
     }
 
     pub fn player_visible_item_4_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&294);
-        let upper = self.values.get(&295);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(294)
     }
 
     pub fn set_player_visible_item_4_0(&mut self, v: i32) {
@@ -4496,15 +4302,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_5_creator(&mut self, v: Guid) {
-        self.header_set(306, v.guid() as u32);
-        self.header_set(307, (v.guid() >> 32) as u32);
+        self.set_guid(306, v);
     }
 
     pub fn player_visible_item_5_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&306);
-        let upper = self.values.get(&307);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(306)
     }
 
     pub fn set_player_visible_item_5_0(&mut self, v: i32) {
@@ -4530,15 +4332,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_6_creator(&mut self, v: Guid) {
-        self.header_set(318, v.guid() as u32);
-        self.header_set(319, (v.guid() >> 32) as u32);
+        self.set_guid(318, v);
     }
 
     pub fn player_visible_item_6_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&318);
-        let upper = self.values.get(&319);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(318)
     }
 
     pub fn set_player_visible_item_6_0(&mut self, v: i32) {
@@ -4564,15 +4362,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_7_creator(&mut self, v: Guid) {
-        self.header_set(330, v.guid() as u32);
-        self.header_set(331, (v.guid() >> 32) as u32);
+        self.set_guid(330, v);
     }
 
     pub fn player_visible_item_7_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&330);
-        let upper = self.values.get(&331);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(330)
     }
 
     pub fn set_player_visible_item_7_0(&mut self, v: i32) {
@@ -4598,15 +4392,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_8_creator(&mut self, v: Guid) {
-        self.header_set(342, v.guid() as u32);
-        self.header_set(343, (v.guid() >> 32) as u32);
+        self.set_guid(342, v);
     }
 
     pub fn player_visible_item_8_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&342);
-        let upper = self.values.get(&343);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(342)
     }
 
     pub fn set_player_visible_item_8_0(&mut self, v: i32) {
@@ -4632,15 +4422,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_9_creator(&mut self, v: Guid) {
-        self.header_set(354, v.guid() as u32);
-        self.header_set(355, (v.guid() >> 32) as u32);
+        self.set_guid(354, v);
     }
 
     pub fn player_visible_item_9_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&354);
-        let upper = self.values.get(&355);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(354)
     }
 
     pub fn set_player_visible_item_9_0(&mut self, v: i32) {
@@ -4666,15 +4452,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_10_creator(&mut self, v: Guid) {
-        self.header_set(366, v.guid() as u32);
-        self.header_set(367, (v.guid() >> 32) as u32);
+        self.set_guid(366, v);
     }
 
     pub fn player_visible_item_10_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&366);
-        let upper = self.values.get(&367);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(366)
     }
 
     pub fn set_player_visible_item_10_0(&mut self, v: i32) {
@@ -4700,15 +4482,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_11_creator(&mut self, v: Guid) {
-        self.header_set(378, v.guid() as u32);
-        self.header_set(379, (v.guid() >> 32) as u32);
+        self.set_guid(378, v);
     }
 
     pub fn player_visible_item_11_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&378);
-        let upper = self.values.get(&379);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(378)
     }
 
     pub fn set_player_visible_item_11_0(&mut self, v: i32) {
@@ -4734,15 +4512,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_12_creator(&mut self, v: Guid) {
-        self.header_set(390, v.guid() as u32);
-        self.header_set(391, (v.guid() >> 32) as u32);
+        self.set_guid(390, v);
     }
 
     pub fn player_visible_item_12_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&390);
-        let upper = self.values.get(&391);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(390)
     }
 
     pub fn set_player_visible_item_12_0(&mut self, v: i32) {
@@ -4768,15 +4542,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_13_creator(&mut self, v: Guid) {
-        self.header_set(402, v.guid() as u32);
-        self.header_set(403, (v.guid() >> 32) as u32);
+        self.set_guid(402, v);
     }
 
     pub fn player_visible_item_13_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&402);
-        let upper = self.values.get(&403);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(402)
     }
 
     pub fn set_player_visible_item_13_0(&mut self, v: i32) {
@@ -4802,15 +4572,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_14_creator(&mut self, v: Guid) {
-        self.header_set(414, v.guid() as u32);
-        self.header_set(415, (v.guid() >> 32) as u32);
+        self.set_guid(414, v);
     }
 
     pub fn player_visible_item_14_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&414);
-        let upper = self.values.get(&415);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(414)
     }
 
     pub fn set_player_visible_item_14_0(&mut self, v: i32) {
@@ -4836,15 +4602,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_15_creator(&mut self, v: Guid) {
-        self.header_set(426, v.guid() as u32);
-        self.header_set(427, (v.guid() >> 32) as u32);
+        self.set_guid(426, v);
     }
 
     pub fn player_visible_item_15_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&426);
-        let upper = self.values.get(&427);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(426)
     }
 
     pub fn set_player_visible_item_15_0(&mut self, v: i32) {
@@ -4870,15 +4632,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_16_creator(&mut self, v: Guid) {
-        self.header_set(438, v.guid() as u32);
-        self.header_set(439, (v.guid() >> 32) as u32);
+        self.set_guid(438, v);
     }
 
     pub fn player_visible_item_16_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&438);
-        let upper = self.values.get(&439);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(438)
     }
 
     pub fn set_player_visible_item_16_0(&mut self, v: i32) {
@@ -4904,15 +4662,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_17_creator(&mut self, v: Guid) {
-        self.header_set(450, v.guid() as u32);
-        self.header_set(451, (v.guid() >> 32) as u32);
+        self.set_guid(450, v);
     }
 
     pub fn player_visible_item_17_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&450);
-        let upper = self.values.get(&451);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(450)
     }
 
     pub fn set_player_visible_item_17_0(&mut self, v: i32) {
@@ -4938,15 +4692,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_18_creator(&mut self, v: Guid) {
-        self.header_set(462, v.guid() as u32);
-        self.header_set(463, (v.guid() >> 32) as u32);
+        self.set_guid(462, v);
     }
 
     pub fn player_visible_item_18_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&462);
-        let upper = self.values.get(&463);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(462)
     }
 
     pub fn set_player_visible_item_18_0(&mut self, v: i32) {
@@ -4972,15 +4722,11 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_visible_item_19_creator(&mut self, v: Guid) {
-        self.header_set(474, v.guid() as u32);
-        self.header_set(475, (v.guid() >> 32) as u32);
+        self.set_guid(474, v);
     }
 
     pub fn player_visible_item_19_creator(&self) -> Option<Guid> {
-        let lower = self.values.get(&474);
-        let upper = self.values.get(&475);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(474)
     }
 
     pub fn set_player_visible_item_19_0(&mut self, v: i32) {
@@ -5007,8 +4753,7 @@ impl UpdatePlayer {
 
     pub fn set_player_field_inv(&mut self, item_slot: crate::vanilla::ItemSlot, item: Guid) {
         let offset = 486 + item_slot as u16 * 2;
-        self.header_set(offset, item.guid() as u32);
-        self.header_set(offset + 1, (item.guid() >> 32) as u32);
+        self.set_guid(offset, item);
     }
 
     pub fn player_field_inv(&self, item_slot: crate::vanilla::ItemSlot) -> Option<Guid> {
@@ -5020,27 +4765,19 @@ impl UpdatePlayer {
     }
 
     pub fn set_player_farsight(&mut self, v: Guid) {
-        self.header_set(712, v.guid() as u32);
-        self.header_set(713, (v.guid() >> 32) as u32);
+        self.set_guid(712, v);
     }
 
     pub fn player_farsight(&self) -> Option<Guid> {
-        let lower = self.values.get(&712);
-        let upper = self.values.get(&713);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(712)
     }
 
     pub fn set_player_field_combo_target(&mut self, v: Guid) {
-        self.header_set(714, v.guid() as u32);
-        self.header_set(715, (v.guid() >> 32) as u32);
+        self.set_guid(714, v);
     }
 
     pub fn player_field_combo_target(&self) -> Option<Guid> {
-        let lower = self.values.get(&714);
-        let upper = self.values.get(&715);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(714)
     }
 
     pub fn set_player_xp(&mut self, v: i32) {
@@ -5483,15 +5220,11 @@ impl UpdatePlayer {
 
 impl UpdateGameObject {
     pub fn set_object_guid(&mut self, v: Guid) {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
     }
 
     pub fn object_guid(&self) -> Option<Guid> {
-        let lower = self.values.get(&0);
-        let upper = self.values.get(&1);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(0)
     }
 
     pub fn set_object_entry(&mut self, v: i32) {
@@ -5511,15 +5244,11 @@ impl UpdateGameObject {
     }
 
     pub fn set_gameobject_created_by(&mut self, v: Guid) {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
     }
 
     pub fn gameobject_created_by(&self) -> Option<Guid> {
-        let lower = self.values.get(&6);
-        let upper = self.values.get(&7);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(6)
     }
 
     pub fn set_gameobject_displayid(&mut self, v: i32) {
@@ -5638,15 +5367,11 @@ impl UpdateGameObject {
 
 impl UpdateDynamicObject {
     pub fn set_object_guid(&mut self, v: Guid) {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
     }
 
     pub fn object_guid(&self) -> Option<Guid> {
-        let lower = self.values.get(&0);
-        let upper = self.values.get(&1);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(0)
     }
 
     pub fn set_object_entry(&mut self, v: i32) {
@@ -5666,15 +5391,11 @@ impl UpdateDynamicObject {
     }
 
     pub fn set_dynamicobject_caster(&mut self, v: Guid) {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
     }
 
     pub fn dynamicobject_caster(&self) -> Option<Guid> {
-        let lower = self.values.get(&6);
-        let upper = self.values.get(&7);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(6)
     }
 
     pub fn set_dynamicobject_bytes(&mut self, a: u8, b: u8, c: u8, d: u8) {
@@ -5743,15 +5464,11 @@ impl UpdateDynamicObject {
 
 impl UpdateCorpse {
     pub fn set_object_guid(&mut self, v: Guid) {
-        self.header_set(0, v.guid() as u32);
-        self.header_set(1, (v.guid() >> 32) as u32);
+        self.set_guid(0, v);
     }
 
     pub fn object_guid(&self) -> Option<Guid> {
-        let lower = self.values.get(&0);
-        let upper = self.values.get(&1);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(0)
     }
 
     pub fn set_object_entry(&mut self, v: i32) {
@@ -5771,15 +5488,11 @@ impl UpdateCorpse {
     }
 
     pub fn set_corpse_owner(&mut self, v: Guid) {
-        self.header_set(6, v.guid() as u32);
-        self.header_set(7, (v.guid() >> 32) as u32);
+        self.set_guid(6, v);
     }
 
     pub fn corpse_owner(&self) -> Option<Guid> {
-        let lower = self.values.get(&6);
-        let upper = self.values.get(&7);
-
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        self.get_guid(6)
     }
 
     pub fn set_corpse_facing(&mut self, v: f32) {
