@@ -35,7 +35,7 @@ fn print_specific_update_mask_doc(fields: &[MemberType], s: &mut String) {
                     UfType::Float => "FLOAT",
                     UfType::BytesWith(_, _, _, _) | UfType::Bytes => "BYTES",
                     UfType::TwoShort => "TWO_SHORT",
-                    UfType::ArrayOfStruct { .. } => "CUSTOM",
+                    UfType::GuidEnumLookupArray { .. } | UfType::ArrayOfStruct { .. } => "CUSTOM",
                 };
 
                 writeln!(
@@ -285,6 +285,17 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
                 m.ty.ty_str(),
             ));
         }
+        UfType::GuidEnumLookupArray {
+            name,
+            variable_name,
+            import_location,
+        } => {
+            s.open_curly(format!(
+                "pub fn {}_{}(&self, {variable_name}: {import_location}::{name}) -> Option<Guid>",
+                m.object_ty.to_string().to_lowercase(),
+                m.name.to_lowercase(),
+            ));
+        }
         _ => {
             s.open_curly(format!(
                 "pub fn {}_{}(&self) -> Option<{}>",
@@ -365,6 +376,14 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
         UfType::ArrayOfStruct { name,  import_location, .. } => {
             s.wln(format!("{import_location}::{name}::from_range(self.values.range(index.first()..=index.last()))"));
         }
+        UfType::GuidEnumLookupArray {  variable_name, .. } => {
+            s.wln(format!("let offset = {} + {variable_name}.as_int() as u16 * 2;", m.offset));
+            s.wln(format!("let lower = self.values.get(&offset);"));
+            s.wln(format!("let upper = self.values.get(&(offset + 1));"));
+            s.newline();
+
+            s.wln("lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))");
+        }
     }
 
     s.closing_curly_newline(); // pub(crate) fn get_
@@ -399,6 +418,16 @@ fn print_setter_internals(s: &mut Writer, m: &MemberType) {
             s.wln("self.header_set(index, value);");
             s.closing_curly();
         }
+        UfType::GuidEnumLookupArray { variable_name, .. } => {
+            s.wln(format!(
+                "let offset = {} + {variable_name} as u16 * 2;",
+                m.offset
+            ));
+            s.wln(format!("self.header_set(offset, item.guid() as u32);"));
+            s.wln(format!(
+                "self.header_set(offset + 1, (item.guid() >> 32) as u32);",
+            ));
+        }
         _ => {
             let value = match &m.ty {
                 UfType::Int | UfType::Float => "u32::from_le_bytes(v.to_le_bytes())".to_string(),
@@ -425,6 +454,7 @@ fn print_setter_internals(s: &mut Writer, m: &MemberType) {
                     unreachable!("Guid has already been checked for in outer match")
                 }
                 UfType::Guid => unreachable!("Guid has already been checked for in outer match"),
+                UfType::GuidEnumLookupArray { .. } => unreachable!(),
             };
 
             s.wln(format!("self.header_set({}, {});", m.offset, value));
@@ -551,6 +581,11 @@ pub(crate) enum UfType {
         import_location: &'static str,
         size: i32,
     },
+    GuidEnumLookupArray {
+        name: &'static str,
+        variable_name: &'static str,
+        import_location: &'static str,
+    },
 }
 
 const GUID_TYPE: &str = "Guid";
@@ -573,7 +608,12 @@ impl UfType {
                 c.ty_str(),
                 d.ty_str(),
             ),
-            UfType::ArrayOfStruct {
+            UfType::GuidEnumLookupArray {
+                name,
+                import_location,
+                ..
+            }
+            | UfType::ArrayOfStruct {
                 name,
                 import_location,
                 ..
@@ -614,6 +654,13 @@ impl UfType {
                     return format!(
                         "{variable_name}: {import_location}::{name}, index: {name}Index"
                     ),
+                UfType::GuidEnumLookupArray {
+                    name,
+                    variable_name,
+                    import_location,
+                } => {
+                    return format!("{variable_name}: {import_location}::{name}, item: Guid");
+                }
             }
         )
     }

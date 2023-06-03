@@ -11,7 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* `set_player_field_inv_slot` method on `UpdatePlayer` and `UpdatePlayerBuilder` for vanilla.
+* BREAKING: `set_player_field_inv` method on `UpdatePlayer` and `UpdatePlayerBuilder` for vanilla that takes
+  an `ItemSlot`. This replaces the previously named functions for specific positions.
 * BREAKING: Additional fields for vanilla `ItemSlot`.
 * `From` conversion for update mask builder types to proper types.
 * `From` conversion for update mask types to `UpdateMask` type.
