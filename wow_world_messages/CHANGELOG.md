@@ -6,15 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!-- next-header -->
+
 ## [Unreleased] - ReleaseDate
 
 ### Added
 
 * `set_player_field_inv_slot` method on `UpdatePlayer` and `UpdatePlayerBuilder` for vanilla.
+* BREAKING: Additional fields for vanilla `ItemSlot`.
 
 ### Changed
 
-* BREAKING: `MSG_AUCTION_HELLO_Server`, `SMSG_AUCTION_BIDDER_NOTIFICATION`, and `ReceivedMail` have had the variable `auction_house_id` of type `u32` changed to `auction_house` of type `AuctionHouse` enum.
+* BREAKING: `MSG_AUCTION_HELLO_Server`, `SMSG_AUCTION_BIDDER_NOTIFICATION`, and `ReceivedMail` have had the
+  variable `auction_house_id` of type `u32` changed to `auction_house` of type `AuctionHouse` enum.
 
 ## [0.1.0] - 2023-05-20
 
@@ -23,5 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * First release.
 
 <!-- next-url -->
+
 [Unreleased]: https://github.com/gtker/wow_messages/compare/wow_world_messages-v0.1.1...HEAD
+
 [0.1.0]: https://github.com/gtker/wow_messages/releases/tag/wow_world_messages-v0.1.0
