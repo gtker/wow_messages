@@ -140,6 +140,12 @@ macro_rules! update_item {
             }
         }
 
+        impl From<$builder_name> for $name {
+            fn from(e: $builder_name) -> $name {
+                e.finalize()
+            }
+        }
+
         #[derive(Debug, Hash, Clone, Default, PartialEq, Eq, PartialOrd)]
         pub struct $name {
             header: Vec<u32>,
@@ -216,12 +222,6 @@ macro_rules! update_mask {
             Corpse(UpdateCorpse),
         }
 
-        impl Default for UpdateMask {
-            fn default() -> Self {
-                Self::Item(Default::default())
-            }
-        }
-
         impl UpdateMask {
             pub(crate) fn read(r: &mut impl Read) -> Result<Self, io::Error> {
                 let (header, values) = update_mask_common::read_inner(r)?;
@@ -283,6 +283,54 @@ macro_rules! update_mask {
                     UpdateMask::DynamicObject(i) => update_mask_size(&i.dirty_mask, &i.header),
                     UpdateMask::Corpse(i) => update_mask_size(&i.dirty_mask, &i.header),
                 }
+            }
+        }
+
+        impl From<UpdateItem> for UpdateMask {
+            fn from(e: UpdateItem) -> UpdateMask {
+                Self::Item(e)
+            }
+        }
+
+        impl From<UpdateContainer> for UpdateMask {
+            fn from(e: UpdateContainer) -> UpdateMask {
+                Self::Container(e)
+            }
+        }
+
+        impl From<UpdateUnit> for UpdateMask {
+            fn from(e: UpdateUnit) -> UpdateMask {
+                Self::Unit(e)
+            }
+        }
+
+        impl From<UpdatePlayer> for UpdateMask {
+            fn from(e: UpdatePlayer) -> UpdateMask {
+                Self::Player(e)
+            }
+        }
+
+        impl From<UpdateGameObject> for UpdateMask {
+            fn from(e: UpdateGameObject) -> UpdateMask {
+                Self::GameObject(e)
+            }
+        }
+
+        impl From<UpdateDynamicObject> for UpdateMask {
+            fn from(e: UpdateDynamicObject) -> UpdateMask {
+                Self::DynamicObject(e)
+            }
+        }
+
+        impl From<UpdateCorpse> for UpdateMask {
+            fn from(e: UpdateCorpse) -> UpdateMask {
+                Self::Corpse(e)
+            }
+        }
+
+        impl Default for UpdateMask {
+            fn default() -> Self {
+                Self::Item(Default::default())
             }
         }
     };
