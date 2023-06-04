@@ -6,6 +6,8 @@ pub(crate) mod wrath;
 
 #[cfg(feature = "tbc")]
 pub(crate) mod tbc;
+
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub(crate) mod update_mask_common;
 
 #[cfg(any(feature = "tbc", feature = "wrath"))]

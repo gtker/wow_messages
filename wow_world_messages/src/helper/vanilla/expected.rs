@@ -1,8 +1,11 @@
 use crate::errors::ExpectedOpcodeError;
 use crate::traits::private::Internal;
-use crate::vanilla::{opcode_to_name, ClientMessage, ServerMessage};
+#[cfg(feature = "sync")]
+use crate::vanilla::ServerMessage;
+use crate::vanilla::{opcode_to_name, ClientMessage};
 
 const CLIENT_OPCODE_LENGTH: u16 = 4;
+#[cfg(feature = "sync")]
 const SERVER_OPCODE_LENGTH: u16 = 2;
 
 #[cfg(feature = "sync")]
@@ -94,6 +97,7 @@ fn read_client_body<M: ClientMessage>(
     }
 }
 
+#[cfg(feature = "sync")]
 fn read_server_body<M: ServerMessage>(
     buf: &mut &[u8],
     size: u16,

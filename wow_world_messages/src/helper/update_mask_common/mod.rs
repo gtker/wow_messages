@@ -9,7 +9,6 @@ pub const GAMEOBJECT: u32 = 0x0020;
 pub const DYNAMICOBJECT: u32 = 0x0040;
 pub const CORPSE: u32 = 0x0080;
 
-#[allow(unused)]
 macro_rules! update_item {
     ($name:ident, $builder_name:ident, $type_value:expr) => {
         #[derive(Debug, Hash, Clone, Default, PartialEq, Eq, PartialOrd)]

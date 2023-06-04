@@ -55,12 +55,17 @@ pub(crate) fn wrath_get_encrypted_server(
     e.write_encrypted_server_header(&mut w, size, opcode)
 }
 
+#[cfg(feature = "wrath")]
 pub(crate) const MINIMUM_SIZE_LENGTH: u32 = 2;
+#[cfg(feature = "wrath")]
 pub(crate) const MAXIMUM_SIZE_LENGTH: u32 = 3;
+#[cfg(feature = "wrath")]
 pub(crate) const MINIMUM_SERVER_HEADER_LENGTH: u16 = 4;
+#[cfg(feature = "wrath")]
 pub(crate) const MAXIMUM_SERVER_HEADER_LENGTH: u16 = 5;
 pub(crate) const CLIENT_HEADER_LENGTH: u16 = 6;
 
+#[cfg(feature = "wrath")]
 pub(crate) const LARGE_MESSAGE_THRESHOLD: u32 = 0x7FFF;
 
 #[cfg(feature = "wrath")]

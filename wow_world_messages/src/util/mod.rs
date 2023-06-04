@@ -84,6 +84,7 @@ pub fn read_u16_le<R: Read>(r: &mut R) -> Result<u16, std::io::Error> {
     Ok(u16::from_le_bytes(v))
 }
 
+#[cfg(feature = "sync")]
 pub fn read_u16_be<R: Read>(r: &mut R) -> Result<u16, std::io::Error> {
     let mut v = [0_u8; 2];
     r.read_exact(&mut v)?;

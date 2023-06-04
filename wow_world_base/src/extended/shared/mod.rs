@@ -13,6 +13,7 @@ mod vanilla_tbc_item_quality;
 
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 mod vanilla_tbc_wrath_auction_house;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub use vanilla_tbc_wrath_auction_house::*;
 
 #[cfg(any(feature = "vanilla", feature = "tbc"))]
@@ -164,6 +165,7 @@ macro_rules! vanilla_starter_positions {
 
 pub(crate) use vanilla_starter_positions;
 
+#[cfg(any(feature = "tbc", feature = "wrath"))]
 macro_rules! tbc_starter_positions {
     ($position:ty, $map:ty) => {
         const BLOOD_ELF_START_POSITION: $position =
@@ -173,6 +175,7 @@ macro_rules! tbc_starter_positions {
             <$position>::new(<$map>::Outland, -3961.64, -13931.2, 100.615, 2.08364);
     };
 }
+#[cfg(any(feature = "tbc", feature = "wrath"))]
 pub(crate) use tbc_starter_positions;
 
 macro_rules! area_trigger {
@@ -256,6 +259,7 @@ macro_rules! verify_trigger {
 }
 pub(crate) use verify_trigger;
 
+#[cfg(any(feature = "tbc", feature = "wrath"))]
 macro_rules! tbc_wrath_trigger {
     ($position:ty) => {
         #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
@@ -276,6 +280,7 @@ macro_rules! tbc_wrath_trigger {
         }
     };
 }
+#[cfg(any(feature = "tbc", feature = "wrath"))]
 pub(crate) use tbc_wrath_trigger;
 
 macro_rules! vanilla_trigger {
