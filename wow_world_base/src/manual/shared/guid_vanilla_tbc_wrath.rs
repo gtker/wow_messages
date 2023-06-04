@@ -56,6 +56,25 @@ impl Guid {
         })
     }
 
+    /// Returns the guid separated into the low and high u32s.
+    ///
+    /// Returns a tuple containing `(low, high)`.
+    pub const fn to_u32s(&self) -> (u32, u32) {
+        let lower = self.guid as u32;
+        let upper = (self.guid >> 32) as u32;
+
+        (lower, upper)
+    }
+
+    /// Creates guid from low and high u32s.
+    pub const fn from_u32s(lower: u32, upper: u32) -> Self {
+        let lower = lower as u64;
+        let upper = upper as u64;
+        Self {
+            guid: upper << 32 | lower,
+        }
+    }
+
     pub const fn size(&self) -> usize {
         let mut amount_of_bytes = 1;
 

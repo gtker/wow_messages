@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: Additional fields for vanilla `ItemSlot`.
 * `From` conversion for update mask builder types to proper types.
 * `From` conversion for update mask types to `UpdateMask` type.
+* `Guid::from_u32s` and `Guid::to_u32s` to create a Guid from high/low `u32`s.
 
 ### Changed
 

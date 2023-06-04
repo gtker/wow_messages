@@ -383,7 +383,7 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
             s.wln(format!("let upper = self.values.get(&(offset + 1));"));
             s.newline();
 
-            s.wln("lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))");
+            s.wln("lower.map(|lower| Guid::from_u32s(*lower, *upper.unwrap()))");
         }
     }
 

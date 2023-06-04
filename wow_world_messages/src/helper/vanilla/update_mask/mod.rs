@@ -56,8 +56,7 @@ impl VisibleItem {
     pub(crate) const fn mask_values(&self, index: VisibleItemIndex) -> [(u16, u32); 7] {
         let offset = index.offset();
 
-        let guid_lower = self.creator.guid() as u32;
-        let guid_upper = (self.creator.guid() >> 32) as u32;
+        let (guid_lower, guid_upper) = self.creator.to_u32s();
 
         [
             (offset, guid_lower),
@@ -81,7 +80,7 @@ impl VisibleItem {
         let (_, random_property_id) = range.next()?;
         let (_, item_suffix_factor) = range.next()?;
 
-        let creator = crate::Guid::new((*guid_upper as u64) << 32 | *guid_lower as u64);
+        let creator = crate::Guid::from_u32s(*guid_lower, *guid_upper);
 
         Some(Self {
             creator,

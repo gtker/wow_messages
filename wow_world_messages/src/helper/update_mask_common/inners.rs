@@ -60,8 +60,7 @@ pub(crate) fn set_guid(
     bit: u16,
     guid: crate::Guid,
 ) {
-    let lower = guid.guid() as u32;
-    let upper = (guid.guid() >> 32) as u32;
+    let (lower, upper) = guid.to_u32s();
 
     if let Some(dirty_mask) = dirty_mask {
         header_set(values, header, Some(dirty_mask), bit, lower);
@@ -76,7 +75,7 @@ pub(crate) fn get_guid(values: &BTreeMap<u16, u32>, bit: u16) -> Option<crate::G
     let lower = values.get(&bit);
     let upper = values.get(&(bit + 1));
 
-    lower.map(|lower| crate::Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+    lower.map(|lower| crate::Guid::from_u32s(*lower, *upper.unwrap()))
 }
 
 pub(crate) fn set_int(

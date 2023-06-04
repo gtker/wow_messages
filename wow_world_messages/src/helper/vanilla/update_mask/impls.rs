@@ -3923,7 +3923,7 @@ impl UpdatePlayer {
         let lower = self.values.get(&offset);
         let upper = self.values.get(&(offset + 1));
 
-        lower.map(|lower| Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+        lower.map(|lower| Guid::from_u32s(*lower, *upper.unwrap()))
     }
 
     pub fn set_player_farsight(&mut self, v: Guid) {
