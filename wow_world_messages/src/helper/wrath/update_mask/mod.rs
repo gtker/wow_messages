@@ -4,7 +4,6 @@ mod indices;
 pub use impls::*;
 pub use indices::*;
 
-use crate::helper::update_mask_common;
 use crate::helper::update_mask_common::{
     skill_info, update_item, update_mask, CONTAINER, CORPSE, DYNAMICOBJECT, GAMEOBJECT, ITEM,
     PLAYER, UNIT,
