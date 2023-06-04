@@ -47,6 +47,50 @@ pub(crate) fn array_fill_ones(array: &mut [u32]) {
     }
 }
 
+pub(crate) fn header_set(
+    values: &mut BTreeMap<u16, u32>,
+    header: &mut Vec<u32>,
+    dirty_mask: Option<&mut Vec<u32>>,
+    bit: u16,
+    value: u32,
+) {
+    values.insert(bit, value);
+    array_set(header, bit);
+    //Any modification to the header also means we set it dirty
+    if let Some(dirty_mask) = dirty_mask {
+        array_set(dirty_mask, bit);
+    }
+}
+
+pub(crate) fn set_guid(
+    values: &mut BTreeMap<u16, u32>,
+    header: &mut Vec<u32>,
+    dirty_mask: Option<&mut Vec<u32>>,
+    bit: u16,
+    guid: crate::Guid,
+) {
+    if let Some(dirty_mask) = dirty_mask {
+        header_set(values, header, Some(dirty_mask), bit, guid.guid() as u32);
+        header_set(
+            values,
+            header,
+            Some(dirty_mask),
+            bit + 1,
+            (guid.guid() >> 32) as u32,
+        );
+    } else {
+        header_set(values, header, None, bit, guid.guid() as u32);
+        header_set(values, header, None, bit + 1, (guid.guid() >> 32) as u32);
+    }
+}
+
+pub(crate) fn get_guid(values: &BTreeMap<u16, u32>, bit: u16) -> Option<crate::Guid> {
+    let lower = values.get(&bit);
+    let upper = values.get(&(bit + 1));
+
+    lower.map(|lower| crate::Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+}
+
 pub(crate) const fn has_array_bit_set(array: &[u32], bit: u16) -> bool {
     let index = bit / 32;
     let offset = bit % 32;
@@ -120,13 +164,23 @@ macro_rules! update_item {
             }
 
             pub(crate) fn header_set(&mut self, bit: u16, value: u32) {
-                self.values.insert(bit.into(), value);
-                $crate::helper::update_mask_common::array_set(&mut self.header, bit);
+                $crate::helper::update_mask_common::header_set(
+                    &mut self.values,
+                    &mut self.header,
+                    None,
+                    bit,
+                    value,
+                );
             }
 
             pub(crate) fn set_guid(&mut self, bit: u16, guid: $crate::Guid) {
-                self.header_set(bit, guid.guid() as u32);
-                self.header_set(bit + 1, (guid.guid() >> 32) as u32);
+                $crate::helper::update_mask_common::set_guid(
+                    &mut self.values,
+                    &mut self.header,
+                    None,
+                    bit,
+                    guid,
+                );
             }
 
             pub fn new() -> Self {
@@ -176,22 +230,27 @@ macro_rules! update_item {
             }
 
             pub(crate) fn set_guid(&mut self, bit: u16, guid: $crate::Guid) {
-                self.header_set(bit, guid.guid() as u32);
-                self.header_set(bit + 1, (guid.guid() >> 32) as u32);
+                $crate::helper::update_mask_common::set_guid(
+                    &mut self.values,
+                    &mut self.header,
+                    Some(&mut self.dirty_mask),
+                    bit,
+                    guid,
+                );
             }
 
             pub(crate) fn get_guid(&self, bit: u16) -> Option<$crate::Guid> {
-                let lower = self.values.get(&bit);
-                let upper = self.values.get(&(bit + 1));
-
-                lower.map(|lower| $crate::Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+                $crate::helper::update_mask_common::get_guid(&self.values, bit)
             }
 
             pub(crate) fn header_set(&mut self, bit: u16, value: u32) {
-                self.values.insert(bit.into(), value);
-                $crate::helper::update_mask_common::array_set(&mut self.header, bit);
-                //Any modification to the header also means we set it dirty
-                $crate::helper::update_mask_common::array_set(&mut self.dirty_mask, bit);
+                $crate::helper::update_mask_common::header_set(
+                    &mut self.values,
+                    &mut self.header,
+                    Some(&mut self.dirty_mask),
+                    bit,
+                    value,
+                );
             }
 
             pub fn dirty_reset(&mut self) {
