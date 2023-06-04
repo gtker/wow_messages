@@ -181,6 +181,7 @@ fn print_specific_update_mask_indices(fields: &[MemberType]) -> Writer {
         if let UfType::ArrayOfStruct { name, size, .. } = field.ty {
             assert_eq!(field.size % size, 0);
             let amount_of_fields = field.size / size;
+            let lower_name = name.to_lowercase();
 
             let ty_name = format!("{name}Index");
 
@@ -221,7 +222,7 @@ fn print_specific_update_mask_indices(fields: &[MemberType]) -> Writer {
             });
 
             s.funcn_const(
-                "try_from_inner(value: u16)",
+                format!("{lower_name}_try_from_inner(value: u16)"),
                 format!("Option<{ty_name}>"),
                 |s| {
                     s.open_curly("Some(match value");
@@ -236,7 +237,7 @@ fn print_specific_update_mask_indices(fields: &[MemberType]) -> Writer {
                 },
             );
 
-            for from_ty in ["u16", "u32", "u64", "i16", "i32", "i64"] {
+            for from_ty in ["u16", "u32", "u64", "i16", "i32", "i64", "usize"] {
                 s.impl_for(format!("TryFrom<{from_ty}>"), &ty_name, |s| {
                     s.wln(format!("type Error = {from_ty};"));
                     s.newline();
@@ -246,7 +247,9 @@ fn print_specific_update_mask_indices(fields: &[MemberType]) -> Writer {
                     ));
                     let cast = if from_ty == "u16" { "" } else { " as u16" };
 
-                    s.wln(format!("try_from_inner(value{cast}).ok_or(value)"));
+                    s.wln(format!(
+                        "{lower_name}_try_from_inner(value{cast}).ok_or(value)"
+                    ));
 
                     s.closing_curly(); // fn try_from
                 })

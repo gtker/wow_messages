@@ -27,6 +27,72 @@ update_mask!();
 
 skill_info!(wow_world_base::vanilla::Skill, indices::SkillInfoIndex);
 
+#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash, Default)]
+pub struct VisibleItem {
+    creator: crate::Guid,
+    entry: u32,
+    enchants: [u32; 2],
+    random_property_id: u32,
+    item_suffix_factor: u32,
+}
+
+impl VisibleItem {
+    pub const fn new(
+        creator: crate::Guid,
+        entry: u32,
+        enchants: [u32; 2],
+        random_property_id: u32,
+        item_suffix_factor: u32,
+    ) -> Self {
+        Self {
+            creator,
+            entry,
+            enchants,
+            random_property_id,
+            item_suffix_factor,
+        }
+    }
+
+    pub(crate) const fn mask_values(&self, index: VisibleItemIndex) -> [(u16, u32); 7] {
+        let offset = index.offset();
+
+        let guid_lower = self.creator.guid() as u32;
+        let guid_upper = (self.creator.guid() >> 32) as u32;
+
+        [
+            (offset, guid_lower),
+            (offset + 1, guid_upper),
+            (offset + 2, self.entry),
+            (offset + 3, self.enchants[0]),
+            (offset + 4, self.enchants[1]),
+            (offset + 10, self.random_property_id),
+            (offset + 11, self.item_suffix_factor),
+        ]
+    }
+
+    pub(crate) fn from_range<'a>(
+        mut range: impl Iterator<Item = (&'a u16, &'a u32)>,
+    ) -> Option<Self> {
+        let (_, guid_lower) = range.next()?;
+        let (_, guid_upper) = range.next()?;
+        let (_, entry) = range.next()?;
+        let (_, first_enchants) = range.next()?;
+        let (_, second_enchants) = range.next()?;
+        let (_, random_property_id) = range.next()?;
+        let (_, item_suffix_factor) = range.next()?;
+
+        let creator = crate::Guid::new((*guid_upper as u64) << 32 | *guid_lower as u64);
+
+        Some(Self {
+            creator,
+            entry: *entry,
+            enchants: [*first_enchants, *second_enchants],
+            random_property_id: *random_property_id,
+            item_suffix_factor: *item_suffix_factor,
+        })
+    }
+}
+
 #[cfg(test)]
 mod test {
     use crate::vanilla::update_mask::indices::SkillInfoIndex;
