@@ -7,8 +7,8 @@ pub use indices::*;
 
 use crate::helper::update_mask_common;
 use crate::helper::update_mask_common::{
-    skill_info, update_item, update_mask, update_mask_size, CONTAINER, CORPSE, DYNAMICOBJECT,
-    GAMEOBJECT, ITEM, PLAYER, UNIT,
+    skill_info, update_item, update_mask, CONTAINER, CORPSE, DYNAMICOBJECT, GAMEOBJECT, ITEM,
+    PLAYER, UNIT,
 };
 use std::collections::BTreeMap;
 use std::convert::TryFrom;
