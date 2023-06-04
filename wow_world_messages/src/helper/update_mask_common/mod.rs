@@ -23,6 +23,7 @@ macro_rules! update_item {
                 $name::from_inners(self.header, self.values)
             }
 
+            #[allow(unused)]
             pub(crate) fn header_set(&mut self, bit: u16, value: u32) {
                 $crate::helper::update_mask_common::inners::header_set(
                     &mut self.values,
@@ -40,6 +41,54 @@ macro_rules! update_item {
                     None,
                     bit,
                     guid,
+                );
+            }
+
+            #[allow(unused)]
+            pub(crate) fn set_int(&mut self, bit: u16, v: i32) {
+                $crate::helper::update_mask_common::inners::set_int(
+                    &mut self.values,
+                    &mut self.header,
+                    None,
+                    bit,
+                    v,
+                );
+            }
+
+            #[allow(unused)]
+            pub(crate) fn set_float(&mut self, bit: u16, v: f32) {
+                $crate::helper::update_mask_common::inners::set_float(
+                    &mut self.values,
+                    &mut self.header,
+                    None,
+                    bit,
+                    v,
+                );
+            }
+
+            #[allow(unused)]
+            pub(crate) fn set_bytes(&mut self, bit: u16, a: u8, b: u8, c: u8, d: u8) {
+                $crate::helper::update_mask_common::inners::set_bytes(
+                    &mut self.values,
+                    &mut self.header,
+                    None,
+                    bit,
+                    a,
+                    b,
+                    c,
+                    d,
+                );
+            }
+
+            #[allow(unused)]
+            pub(crate) fn set_shorts(&mut self, bit: u16, a: u16, b: u16) {
+                $crate::helper::update_mask_common::inners::set_shorts(
+                    &mut self.values,
+                    &mut self.header,
+                    None,
+                    bit,
+                    a,
+                    b,
                 );
             }
 
@@ -106,6 +155,55 @@ macro_rules! update_item {
                 $crate::helper::update_mask_common::inners::get_guid(&self.values, bit)
             }
 
+            #[allow(unused)]
+            pub(crate) fn set_int(&mut self, bit: u16, v: i32) {
+                $crate::helper::update_mask_common::inners::set_int(
+                    &mut self.values,
+                    &mut self.header,
+                    None,
+                    bit,
+                    v,
+                );
+            }
+
+            #[allow(unused)]
+            pub(crate) fn set_float(&mut self, bit: u16, v: f32) {
+                $crate::helper::update_mask_common::inners::set_float(
+                    &mut self.values,
+                    &mut self.header,
+                    None,
+                    bit,
+                    v,
+                );
+            }
+
+            #[allow(unused)]
+            pub(crate) fn set_bytes(&mut self, bit: u16, a: u8, b: u8, c: u8, d: u8) {
+                $crate::helper::update_mask_common::inners::set_bytes(
+                    &mut self.values,
+                    &mut self.header,
+                    None,
+                    bit,
+                    a,
+                    b,
+                    c,
+                    d,
+                );
+            }
+
+            #[allow(unused)]
+            pub(crate) fn set_shorts(&mut self, bit: u16, a: u16, b: u16) {
+                $crate::helper::update_mask_common::inners::set_shorts(
+                    &mut self.values,
+                    &mut self.header,
+                    None,
+                    bit,
+                    a,
+                    b,
+                );
+            }
+
+            #[allow(unused)]
             pub(crate) fn header_set(&mut self, bit: u16, value: u32) {
                 $crate::helper::update_mask_common::inners::header_set(
                     &mut self.values,

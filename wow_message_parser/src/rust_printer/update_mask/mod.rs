@@ -402,7 +402,7 @@ fn print_setter(s: &mut Writer, m: &MemberType) {
 
 fn print_setter_internals(s: &mut Writer, m: &MemberType) {
     let offset = m.offset;
-    match m.ty {
+    match &m.ty {
         UfType::Guid => {
             s.wln(format!("self.set_guid({offset}, v);"));
         }
@@ -419,36 +419,34 @@ fn print_setter_internals(s: &mut Writer, m: &MemberType) {
             ));
             s.wln(format!("self.set_guid(offset, item);"));
         }
-        _ => {
-            let value = match &m.ty {
-                UfType::Int | UfType::Float => "u32::from_le_bytes(v.to_le_bytes())".to_string(),
-                UfType::Bytes => "u32::from_le_bytes([a, b, c, d])".to_string(),
-                UfType::TwoShort => "crate::util::u16s_to_u32(a, b)".to_string(),
-                UfType::BytesWith(a, b, c, d) => {
-                    let get_name = |byte_type: &ByteType| -> String {
-                        match byte_type.ty {
-                            ByteInnerTy::Byte => byte_type.name.to_string(),
-                            ByteInnerTy::Ty(_) => {
-                                format!("{name}.as_int()", name = byte_type.name)
-                            }
-                        }
-                    };
-
-                    let a = get_name(a);
-                    let b = get_name(b);
-                    let c = get_name(c);
-                    let d = get_name(d);
-
-                    format!("u32::from_le_bytes([{a}, {b}, {c}, {d}])")
+        UfType::Int => {
+            s.wln(format!("self.set_int({offset}, v);"));
+        }
+        UfType::Float => {
+            s.wln(format!("self.set_float({offset}, v);"));
+        }
+        UfType::Bytes => {
+            s.wln(format!("self.set_bytes({offset}, a, b, c, d);"));
+        }
+        UfType::TwoShort => {
+            s.wln(format!("self.set_shorts({offset}, a, b);"));
+        }
+        UfType::BytesWith(a, b, c, d) => {
+            let get_name = |byte_type: &ByteType| -> String {
+                match byte_type.ty {
+                    ByteInnerTy::Byte => byte_type.name.to_string(),
+                    ByteInnerTy::Ty(_) => {
+                        format!("{name}.as_int()", name = byte_type.name)
+                    }
                 }
-                UfType::ArrayOfStruct { .. } => {
-                    unreachable!("Guid has already been checked for in outer match")
-                }
-                UfType::Guid => unreachable!("Guid has already been checked for in outer match"),
-                UfType::GuidEnumLookupArray { .. } => unreachable!(),
             };
 
-            s.wln(format!("self.header_set({}, {});", m.offset, value));
+            let a = get_name(a);
+            let b = get_name(b);
+            let c = get_name(c);
+            let d = get_name(d);
+
+            s.wln(format!("self.set_bytes({offset}, {a}, {b}, {c}, {d});"));
         }
     }
 }

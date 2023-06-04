@@ -60,18 +60,15 @@ pub(crate) fn set_guid(
     bit: u16,
     guid: crate::Guid,
 ) {
+    let lower = guid.guid() as u32;
+    let upper = (guid.guid() >> 32) as u32;
+
     if let Some(dirty_mask) = dirty_mask {
-        header_set(values, header, Some(dirty_mask), bit, guid.guid() as u32);
-        header_set(
-            values,
-            header,
-            Some(dirty_mask),
-            bit + 1,
-            (guid.guid() >> 32) as u32,
-        );
+        header_set(values, header, Some(dirty_mask), bit, lower);
+        header_set(values, header, Some(dirty_mask), bit + 1, upper);
     } else {
-        header_set(values, header, None, bit, guid.guid() as u32);
-        header_set(values, header, None, bit + 1, (guid.guid() >> 32) as u32);
+        header_set(values, header, None, bit, lower);
+        header_set(values, header, None, bit + 1, upper);
     }
 }
 
@@ -80,6 +77,74 @@ pub(crate) fn get_guid(values: &BTreeMap<u16, u32>, bit: u16) -> Option<crate::G
     let upper = values.get(&(bit + 1));
 
     lower.map(|lower| crate::Guid::new((*upper.unwrap() as u64) << 32 | *lower as u64))
+}
+
+pub(crate) fn set_int(
+    values: &mut BTreeMap<u16, u32>,
+    header: &mut Vec<u32>,
+    dirty_mask: Option<&mut Vec<u32>>,
+    bit: u16,
+    v: i32,
+) {
+    header_set(
+        values,
+        header,
+        dirty_mask,
+        bit,
+        u32::from_le_bytes(v.to_le_bytes()),
+    );
+}
+
+pub(crate) fn set_float(
+    values: &mut BTreeMap<u16, u32>,
+    header: &mut Vec<u32>,
+    dirty_mask: Option<&mut Vec<u32>>,
+    bit: u16,
+    v: f32,
+) {
+    header_set(
+        values,
+        header,
+        dirty_mask,
+        bit,
+        u32::from_le_bytes(v.to_le_bytes()),
+    );
+}
+
+pub(crate) fn set_bytes(
+    values: &mut BTreeMap<u16, u32>,
+    header: &mut Vec<u32>,
+    dirty_mask: Option<&mut Vec<u32>>,
+    bit: u16,
+    a: u8,
+    b: u8,
+    c: u8,
+    d: u8,
+) {
+    header_set(
+        values,
+        header,
+        dirty_mask,
+        bit,
+        u32::from_le_bytes([a, b, c, d]),
+    );
+}
+
+pub(crate) fn set_shorts(
+    values: &mut BTreeMap<u16, u32>,
+    header: &mut Vec<u32>,
+    dirty_mask: Option<&mut Vec<u32>>,
+    bit: u16,
+    a: u16,
+    b: u16,
+) {
+    header_set(
+        values,
+        header,
+        dirty_mask,
+        bit,
+        crate::util::u16s_to_u32(a, b),
+    );
 }
 
 pub(crate) const fn has_array_bit_set(array: &[u32], bit: u16) -> bool {
