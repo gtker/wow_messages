@@ -15,7 +15,7 @@ macro_rules! update_item {
         #[derive(Debug, Hash, Clone, Default, PartialEq, Eq, PartialOrd)]
         pub struct $builder_name {
             header: Vec<u32>,
-            values: BTreeMap<u16, u32>,
+            values: std::collections::BTreeMap<u16, u32>,
         }
 
         impl $builder_name {
@@ -47,7 +47,7 @@ macro_rules! update_item {
                 const OBJECT_FIELD_TYPE: u16 = 2;
 
                 let mut header = vec![];
-                let mut values = BTreeMap::new();
+                let mut values = std::collections::BTreeMap::new();
 
                 $crate::helper::update_mask_common::inners::array_set(
                     &mut header,
@@ -72,7 +72,7 @@ macro_rules! update_item {
         pub struct $name {
             header: Vec<u32>,
             dirty_mask: Vec<u32>,
-            values: BTreeMap<u16, u32>,
+            values: std::collections::BTreeMap<u16, u32>,
         }
 
         impl $name {
@@ -84,7 +84,7 @@ macro_rules! update_item {
                 $builder_name::new()
             }
 
-            fn from_inners(header: Vec<u32>, values: BTreeMap<u16, u32>) -> Self {
+            fn from_inners(header: Vec<u32>, values: std::collections::BTreeMap<u16, u32>) -> Self {
                 Self {
                     header: header.clone(),
                     dirty_mask: header,
@@ -162,7 +162,7 @@ macro_rules! update_mask {
         }
 
         impl UpdateMask {
-            pub(crate) fn read(r: &mut impl Read) -> Result<Self, io::Error> {
+            pub(crate) fn read(r: &mut impl std::io::Read) -> Result<Self, std::io::Error> {
                 let (header, values) = $crate::helper::update_mask_common::inners::read_inner(r)?;
 
                 let ty = match values.get(&2) {
