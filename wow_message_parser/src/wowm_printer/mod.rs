@@ -5,62 +5,9 @@ use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::ty::Type;
 use crate::rust_printer::Writer;
 use crate::ENUM_SELF_VALUE_FIELD;
-use std::fmt::Write;
-
-struct WowmWriter {
-    inner: String,
-    prefix: String,
-    indentation: u8,
-}
-
-impl WowmWriter {
-    pub(crate) fn new(prefix: &str) -> Self {
-        Self {
-            inner: String::with_capacity(4000),
-            prefix: prefix.to_string(),
-            indentation: 0,
-        }
-    }
-
-    pub(crate) fn w(&mut self, s: impl AsRef<str>) {
-        self.inner.write_str(self.prefix.as_str()).unwrap();
-
-        for _ in 0..self.indentation {
-            self.inner.write_str(Writer::INDENTATION).unwrap();
-        }
-
-        self.inner.write_str(s.as_ref()).unwrap();
-    }
-
-    pub(crate) fn newline(&mut self) {
-        self.inner.write_str("\n").unwrap();
-    }
-
-    pub(crate) fn wln(&mut self, s: impl AsRef<str>) {
-        self.w(s);
-        self.newline();
-    }
-
-    pub(crate) fn inc(&mut self) {
-        assert_ne!(self.indentation, 0xFF);
-
-        self.indentation += 1;
-    }
-
-    pub(crate) fn dec(&mut self) {
-        assert_ne!(self.indentation, 0);
-
-        self.indentation -= 1;
-    }
-
-    pub(crate) fn wln_no_indent(&mut self, s: impl AsRef<str>) {
-        self.inner.write_str(s.as_ref()).unwrap();
-        self.newline();
-    }
-}
 
 pub(crate) fn get_definer_wowm_definition(kind: &str, e: &Definer, prefix: &str) -> String {
-    let mut s = WowmWriter::new(prefix);
+    let mut s = Writer::with_prefix(prefix);
     s.wln(&format!(
         "{kind} {name} : {ty} {{",
         kind = kind,
@@ -68,7 +15,7 @@ pub(crate) fn get_definer_wowm_definition(kind: &str, e: &Definer, prefix: &str)
         ty = e.ty().str(),
     ));
 
-    s.inc();
+    s.inc_indent();
     for field in e.fields() {
         s.wln(format!(
             "{name} = {val};",
@@ -84,14 +31,14 @@ pub(crate) fn get_definer_wowm_definition(kind: &str, e: &Definer, prefix: &str)
             self_value = ENUM_SELF_VALUE_FIELD
         ));
     }
-    s.dec();
+    s.dec_indent();
     s.wln("}");
 
-    s.inner
+    s.into_inner()
 }
 
 pub(crate) fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String {
-    let mut s = WowmWriter::new(prefix);
+    let mut s = Writer::with_prefix(prefix);
 
     s.wln(format!(
         "{kind} {name}{opcode} {{",
@@ -105,7 +52,7 @@ pub(crate) fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String 
         }
     ));
 
-    s.inc();
+    s.inc_indent();
 
     if e.tags().unimplemented() {
         s.wln("unimplemented");
@@ -115,13 +62,13 @@ pub(crate) fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String 
         }
     }
 
-    s.dec();
+    s.dec_indent();
     s.wln("}");
 
-    s.inner
+    s.into_inner()
 }
 
-fn print_members(s: &mut WowmWriter, field: &StructMember) {
+fn print_members(s: &mut Writer, field: &StructMember) {
     match field {
         StructMember::Definition(d) => {
             let upcast = match d.ty() {
@@ -152,7 +99,7 @@ fn print_members(s: &mut WowmWriter, field: &StructMember) {
                 print_members(s, f);
             }
 
-            s.dec();
+            s.dec_indent();
             s.wln("}");
 
             if !statement.else_ifs().is_empty() {
@@ -163,45 +110,45 @@ fn print_members(s: &mut WowmWriter, field: &StructMember) {
                         print_members(s, m);
                     }
 
-                    s.dec();
+                    s.dec_indent();
                     s.wln("}");
                 }
             }
 
             if !statement.else_members().is_empty() {
                 s.wln("else {");
-                s.inc();
+                s.inc_indent();
 
                 for f in statement.else_members() {
                     print_members(s, f);
                 }
 
-                s.dec();
+                s.dec_indent();
                 s.wln("}");
             }
         }
         StructMember::OptionalStatement(optional) => {
             s.wln(format!("optional {name} {{", name = optional.name()));
-            s.inc();
+            s.inc_indent();
 
             for m in optional.members() {
                 print_members(s, m);
             }
 
-            s.dec();
+            s.dec_indent();
             s.wln("}");
         }
     }
 }
 
-fn print_wowm_if_statement(s: &mut WowmWriter, statement: &IfStatement, condition: &str) {
+fn print_wowm_if_statement(s: &mut Writer, statement: &IfStatement, condition: &str) {
     let name = statement.name();
     match statement.conditional().equation() {
         Equation::Equals { values: value } => {
             for (i, v) in value.iter().enumerate() {
                 if i == 0 {
                     s.w(format!("{condition} ({name} == {v}"));
-                    s.inc();
+                    s.inc_indent();
                 } else {
                     s.w(format!("|| {name} == {v}"));
                 }
@@ -217,7 +164,7 @@ fn print_wowm_if_statement(s: &mut WowmWriter, statement: &IfStatement, conditio
             for (i, v) in value.iter().enumerate() {
                 if i == 0 {
                     s.w(format!("{condition} ({name} & {v}"));
-                    s.inc();
+                    s.inc_indent();
                 } else {
                     s.w(format!("|| {name} & {v}"));
                 }
@@ -231,7 +178,7 @@ fn print_wowm_if_statement(s: &mut WowmWriter, statement: &IfStatement, conditio
         }
         Equation::NotEquals { value } => {
             s.wln(format!("{condition} ({name} != {value}) {{"));
-            s.inc();
+            s.inc_indent();
         }
     }
 }

@@ -26,6 +26,7 @@ pub use update_mask::*;
 #[derive(Debug, Clone)]
 pub(crate) struct Writer {
     inner: String,
+    prefix: String,
     indentation_level: u8,
     docc_indentation_level: u8,
 }
@@ -62,6 +63,16 @@ impl Writer {
     pub(crate) fn new() -> Self {
         Self {
             inner: String::with_capacity(4000),
+            prefix: "".to_string(),
+            indentation_level: 0,
+            docc_indentation_level: 0,
+        }
+    }
+
+    pub(crate) fn with_prefix(prefix: &str) -> Self {
+        Self {
+            inner: String::with_capacity(4000),
+            prefix: prefix.to_string(),
             indentation_level: 0,
             docc_indentation_level: 0,
         }
@@ -565,7 +576,6 @@ impl Writer {
         self.docc("```");
     }
 
-    #[allow(unused)]
     pub(crate) fn w_no_indent(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(s.as_ref()).unwrap();
     }
@@ -573,6 +583,7 @@ impl Writer {
         let column = self.get_column();
         if column >= break_at {
             self.newline();
+            self.write_prefix();
             self.w(s.as_ref());
         } else if column == 0 {
             self.w(s.as_ref());
@@ -595,6 +606,8 @@ impl Writer {
     }
 
     pub(crate) fn w(&mut self, s: impl AsRef<str>) {
+        self.write_prefix();
+
         for _ in 0..self.indentation_level {
             self.inner.write_str(Self::INDENTATION).unwrap();
         }
@@ -604,6 +617,10 @@ impl Writer {
 
     fn get_column(&self) -> usize {
         self.inner.len() - (self.inner.rfind(|a| a == '\n').unwrap() + 1)
+    }
+
+    fn write_prefix(&mut self) {
+        self.inner.write_str(&self.prefix).unwrap();
     }
 }
 
