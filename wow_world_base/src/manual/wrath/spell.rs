@@ -5,10 +5,10 @@ use crate::wrath::{
 
 /// Struct optimized for containing the original spells most efficiently.
 ///
-/// This type is not supposed to be used by external users of the library for creating custom items.
+/// This type is not supposed to be used by external users of the library for creating custom spells.
 /// It's only supposed to be used in conjunction with the `wow_spells` crate.
 ///
-/// [`Hash`](core::hash::Hash), [`Ord`], and [`Eq`] all use only the item id without considering other fields.
+/// [`Hash`](core::hash::Hash), [`Ord`], and [`Eq`] all use only the spell id without considering other fields.
 #[derive(Debug, Copy, Clone, Default)]
 pub struct Spell {
     entry: u32,

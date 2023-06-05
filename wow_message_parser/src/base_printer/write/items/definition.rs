@@ -125,12 +125,12 @@ fn struct_definition(
         "/// Struct optimized for containing the original {lower_ty}s most efficiently."
     ));
     s.wln("///");
-    s.wln("/// This type is not supposed to be used by external users of the library for creating custom items.");
+    s.wln(format!("/// This type is not supposed to be used by external users of the library for creating custom {lower_ty}s."));
     s.wln(format!(
         "/// It's only supposed to be used in conjunction with the `wow_{lower_ty}s` crate."
     ));
     s.wln("///");
-    s.wln("/// [`Hash`](core::hash::Hash), [`Ord`], and [`Eq`] all use only the item id without considering other fields.");
+    s.wln(format!("/// [`Hash`](core::hash::Hash), [`Ord`], and [`Eq`] all use only the {lower_ty} id without considering other fields."));
 
     s.wln("#[derive(Debug, Copy, Clone, Default)]");
     s.open_curly(format!("pub struct {ty_name}"));
@@ -337,7 +337,7 @@ fn getters_and_setters(
 
                 if mainline.definition_has_extra().is_some() {
                     s.wln("})");
-                    s.inc_indent();
+                    s.dec_indent();
                 } else {
                     s.closing_curly();
                 }
