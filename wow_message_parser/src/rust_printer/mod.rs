@@ -454,6 +454,15 @@ impl Writer {
         self.closing_curly();
     }
 
+    pub(crate) fn body_no_indent_or_space_with_semicolon(&mut self, f: impl Fn(&mut Self)) {
+        self.wln_no_indent("{");
+        self.inc_indent();
+
+        f(self);
+
+        self.closing_curly_with(";");
+    }
+
     pub(crate) fn body_closing_with_semicolon(
         &mut self,
         s: impl AsRef<str>,

@@ -25,7 +25,7 @@ fn print_read_array(
     let name = d.name();
 
     if array.is_constant_sized_u8_array() {
-        s.body_closing_with_semicolon(format!("let {name} =", name = d.name()), |s| {
+        s.body_no_indent_or_space_with_semicolon(|s| {
             s.wln(format!(
                 "let mut {name} = [0_u8; {size}];",
                 size = array.size().str()
@@ -37,7 +37,9 @@ fn print_read_array(
         return;
     }
 
-    s.open_curly(format!("let {name} ="));
+    // Already wrote assignment in outer function
+    s.wln_no_indent("{");
+    s.inc_indent();
 
     match array.size() {
         ArraySize::Fixed(size) => {
@@ -201,37 +203,39 @@ fn print_read_definition(
 
     let name = d.name();
     let type_name = d.ty().rust_str();
+    let value_set = if d.value().is_some() { "_" } else { "" };
+
+    s.w(format!("{assignment_prefix}{value_set}{name} = "));
 
     match &d.ty() {
         Type::Bool(i) => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = {UTILITY_PATH}::{prefix}read_{ty}_le(&mut r){postfix}? != 0;",
+            s.wln_no_indent(format!(
+                "{UTILITY_PATH}::{prefix}read_{ty}_le(&mut r){postfix}? != 0;",
                 ty = i.rust_str(),
             ));
         }
         Type::DateTime => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = DateTime::try_from({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?)?;",
+            s.wln_no_indent(format!(
+                "DateTime::try_from({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?)?;",
             ));
         }
         Type::Integer(_) => {
-            let value_set = if d.value().is_some() { "_" } else { "" };
-            s.wln(format!(
-                "{assignment_prefix}{value_set}{name} = {UTILITY_PATH}::{prefix}read_{type_name}_le(&mut r){postfix}?;",
+            s.wln_no_indent(format!(
+                "{UTILITY_PATH}::{prefix}read_{type_name}_le(&mut r){postfix}?;",
             ));
         }
         Type::IpAddress => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = Ipv4Addr::from({UTILITY_PATH}::{prefix}read_u32_be(&mut r){postfix}?);",
+            s.wln_no_indent(format!(
+                "Ipv4Addr::from({UTILITY_PATH}::{prefix}read_u32_be(&mut r){postfix}?);",
             ));
         }
         Type::FloatingPoint => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = {UTILITY_PATH}::{prefix}read_f32_le(&mut r){postfix}?;",
+            s.wln_no_indent(format!(
+                "{UTILITY_PATH}::{prefix}read_f32_le(&mut r){postfix}?;",
             ));
         }
         Type::SizedCString => {
-            s.body_closing_with_semicolon(format!("{assignment_prefix}{name} ="), |s| {
+            s.body_no_indent_or_space_with_semicolon(|s| {
                 s.wln(format!(
                     "let {name} = crate::util::read_u32_le(&mut r)?;",
                     name = d.name()
@@ -244,18 +248,15 @@ fn print_read_definition(
             });
         }
         Type::CString => {
-            s.body_closing_with_semicolon(
-                format!("{assignment_prefix}{name} =", name = d.name()),
-                |s| {
-                    s.wln(format!(
-                        "let {name} = {UTILITY_PATH}::{prefix}read_c_string_to_vec(&mut r){postfix}?;",
-                    ));
-                    s.wln(format!("String::from_utf8({name})?"));
-                },
-            );
+            s.body_no_indent_or_space_with_semicolon(|s| {
+                s.wln(format!(
+                    "let {name} = {UTILITY_PATH}::{prefix}read_c_string_to_vec(&mut r){postfix}?;",
+                ));
+                s.wln(format!("String::from_utf8({name})?"));
+            });
         }
         Type::String => {
-            s.body_closing_with_semicolon(format!("{assignment_prefix}{name} ="), |s| {
+            s.body_no_indent_or_space_with_semicolon( |s| {
                 s.wln(format!(
                     "let {name} = crate::util::{prefix}read_u8_le(&mut r){postfix}?;",
                 ));
@@ -277,105 +278,91 @@ fn print_read_definition(
                 ("", e.ty(), "".to_string())
             };
 
-            s.wln(format!(
-                    "{assignment_prefix}{value_set}{name} = {parens}crate::util::{prefix}read_{ty}_le(&mut r){postfix}?{cast}.{into};",
-                    value_set = if d.value().is_some() { "_" } else { "" },
-                    ty = integer.rust_str(),
-                    into = match e.self_value().is_some() {
-                        true => "into()",
-                        false => "try_into()?",
-                    },
+            s.wln_no_indent(format!(
+                "{parens}crate::util::{prefix}read_{ty}_le(&mut r){postfix}?{cast}.{into};",
+                ty = integer.rust_str(),
+                into = match e.self_value().is_some() {
+                    true => "into()",
+                    false => "try_into()?",
+                },
             ));
         }
         Type::Flag { e, .. } => {
             if matches!(e.ty(), &IntegerType::U48) {
-                s.body_closing_with_semicolon(
-                    format!(
-                        "{assignment_prefix}{value_set}{name} =",
-                        value_set = if d.value().is_some() { "_" } else { "" },
-                    ),
-                    |s| {
-                        s.wln(format!(
-                            "let a = crate::util::{prefix}read_u32_le(&mut r){postfix}?;"
-                        ));
-                        s.wln(format!(
-                            "let b = crate::util::{prefix}read_u16_le(&mut r){postfix}?;"
-                        ));
-                        s.wln(format!("{type_name}::new((a as u64) | ((b as u64) << 32))",));
-                    },
-                );
+                s.body_no_indent_or_space_with_semicolon(|s| {
+                    s.wln(format!(
+                        "let a = crate::util::{prefix}read_u32_le(&mut r){postfix}?;"
+                    ));
+                    s.wln(format!(
+                        "let b = crate::util::{prefix}read_u16_le(&mut r){postfix}?;"
+                    ));
+                    s.wln(format!("{type_name}::new((a as u64) | ((b as u64) << 32))",));
+                });
             } else {
-                s.wln(format ! (
-                    "{assignment_prefix}{value_set}{name} = {type_name}::new(crate::util::{prefix}read_{ty}_le(&mut r){postfix}?);",
-                    value_set = if d.value().is_some() { "_" } else { "" },
+                s.wln_no_indent(format!(
+                    "{type_name}::new(crate::util::{prefix}read_{ty}_le(&mut r){postfix}?);",
                     ty = e.ty().rust_str(),
                 ));
             }
         }
         Type::PackedGuid => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = crate::util::read_packed_guid(&mut r){postfix}?;",
-            ));
+            s.wln_no_indent(format!("crate::util::read_packed_guid(&mut r){postfix}?;",));
         }
 
         Type::Level => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = Level::new({UTILITY_PATH}::{prefix}read_u8_le(&mut r){postfix}?);",
+            s.wln_no_indent(format!(
+                "Level::new({UTILITY_PATH}::{prefix}read_u8_le(&mut r){postfix}?);",
             ));
         }
         Type::Level16 => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = Level::new({UTILITY_PATH}::{prefix}read_u16_le(&mut r){postfix}? as u8);",
+            s.wln_no_indent(format!(
+                "Level::new({UTILITY_PATH}::{prefix}read_u16_le(&mut r){postfix}? as u8);",
             ));
         }
         Type::Level32 => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = Level::new({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}? as u8);",
+            s.wln_no_indent(format!(
+                "Level::new({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}? as u8);",
             ));
         }
 
         Type::Seconds => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = Duration::from_secs({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?.into());",
+            s.wln_no_indent(format!(
+                "Duration::from_secs({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?.into());",
             ));
         }
         Type::Milliseconds => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = Duration::from_millis({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?.into());",
+            s.wln_no_indent(format!(
+                "Duration::from_millis({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?.into());",
             ));
         }
 
         Type::Gold => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = Gold::new({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?);",
+            s.wln_no_indent(format!(
+                "Gold::new({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?);",
             ));
         }
 
         Type::MonsterMoveSplines => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = crate::util::read_monster_move_spline(&mut r){postfix}?;",
+            s.wln_no_indent(format!(
+                "crate::util::read_monster_move_spline(&mut r){postfix}?;",
             ));
         }
         Type::AchievementDoneArray => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = crate::util::read_achievement_done(&mut r){postfix}?;",
+            s.wln_no_indent(format!(
+                "crate::util::read_achievement_done(&mut r){postfix}?;",
             ));
         }
         Type::AchievementInProgressArray => {
-            s.wln(format!(
-                 "{assignment_prefix}{name} = crate::util::read_achievement_in_progress(&mut r){postfix}?;",
-             ));
+            s.wln_no_indent(format!(
+                "crate::util::read_achievement_in_progress(&mut r){postfix}?;",
+            ));
         }
         Type::AddonArray => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = crate::util::read_addon_array(&mut r){postfix}?;",
-            ));
+            s.wln_no_indent(format!("crate::util::read_addon_array(&mut r){postfix}?;",));
         }
 
         Type::Guid => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = crate::util::read_guid(&mut r)?;",
-            ));
+            s.wln_no_indent(format!("crate::util::read_guid(&mut r)?;",));
         }
 
         Type::VariableItemRandomProperty
@@ -385,9 +372,7 @@ fn print_read_definition(
         | Type::AuraMask
         | Type::EnchantMask
         | Type::InspectTalentGearMask => {
-            s.wln(format!(
-                "{assignment_prefix}{name} = {type_name}::{prefix}read(&mut r){postfix}?;",
-            ));
+            s.wln_no_indent(format!("{type_name}::{prefix}read(&mut r){postfix}?;",));
         }
     }
 
