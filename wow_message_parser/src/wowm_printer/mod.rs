@@ -8,31 +8,31 @@ use crate::ENUM_SELF_VALUE_FIELD;
 
 pub(crate) fn get_definer_wowm_definition(kind: &str, e: &Definer, prefix: &str) -> String {
     let mut s = Writer::with_prefix(prefix);
-    s.wln(&format!(
-        "{kind} {name} : {ty} {{",
-        kind = kind,
-        name = e.name(),
-        ty = e.ty().str(),
-    ));
+    s.body(
+        &format!(
+            "{kind} {name} : {ty}",
+            kind = kind,
+            name = e.name(),
+            ty = e.ty().str(),
+        ),
+        |s| {
+            for field in e.fields() {
+                s.wln(format!(
+                    "{name} = {val};",
+                    name = field.name(),
+                    val = field.value().original()
+                ));
+            }
 
-    s.inc_indent();
-    for field in e.fields() {
-        s.wln(format!(
-            "{name} = {val};",
-            name = field.name(),
-            val = field.value().original()
-        ));
-    }
-
-    if let Some(f) = e.self_value() {
-        s.wln(format!(
-            "{name} = {self_value}",
-            name = f.name(),
-            self_value = ENUM_SELF_VALUE_FIELD
-        ));
-    }
-    s.dec_indent();
-    s.wln("}");
+            if let Some(f) = e.self_value() {
+                s.wln(format!(
+                    "{name} = {self_value}",
+                    name = f.name(),
+                    self_value = ENUM_SELF_VALUE_FIELD
+                ));
+            }
+        },
+    );
 
     s.into_inner()
 }
@@ -40,30 +40,28 @@ pub(crate) fn get_definer_wowm_definition(kind: &str, e: &Definer, prefix: &str)
 pub(crate) fn get_struct_wowm_definition(e: &Container, prefix: &str) -> String {
     let mut s = Writer::with_prefix(prefix);
 
-    s.wln(format!(
-        "{kind} {name}{opcode} {{",
-        kind = e.container_type().str(),
-        name = e.name(),
-        opcode = match e.container_type() {
-            ContainerType::Struct => "".to_string(),
-            ContainerType::CLogin(o) | ContainerType::SLogin(o) => format!(" = 0x{o:0>2X}"),
-            ContainerType::Msg(o) | ContainerType::CMsg(o) | ContainerType::SMsg(o) =>
-                format!(" = 0x{o:0>4X}"),
-        }
-    ));
-
-    s.inc_indent();
-
-    if e.tags().unimplemented() {
-        s.wln("unimplemented");
-    } else {
-        for field in e.members() {
-            print_members(&mut s, field);
-        }
-    }
-
-    s.dec_indent();
-    s.wln("}");
+    s.body(
+        format!(
+            "{kind} {name}{opcode}",
+            kind = e.container_type().str(),
+            name = e.name(),
+            opcode = match e.container_type() {
+                ContainerType::Struct => "".to_string(),
+                ContainerType::CLogin(o) | ContainerType::SLogin(o) => format!(" = 0x{o:0>2X}"),
+                ContainerType::Msg(o) | ContainerType::CMsg(o) | ContainerType::SMsg(o) =>
+                    format!(" = 0x{o:0>4X}"),
+            }
+        ),
+        |s| {
+            if e.tags().unimplemented() {
+                s.wln("unimplemented");
+            } else {
+                for field in e.members() {
+                    print_members(s, field);
+                }
+            }
+        },
+    );
 
     s.into_inner()
 }
@@ -93,55 +91,46 @@ fn print_members(s: &mut Writer, field: &StructMember) {
             ));
         }
         StructMember::IfStatement(statement) => {
-            print_wowm_if_statement(s, statement, "if");
-
-            for f in statement.members() {
-                print_members(s, f);
-            }
-
-            s.dec_indent();
-            s.wln("}");
+            print_wowm_if_statement(s, statement, "if", |s| {
+                for f in statement.members() {
+                    print_members(s, f);
+                }
+            });
 
             if !statement.else_ifs().is_empty() {
                 for else_if in statement.else_ifs() {
-                    print_wowm_if_statement(s, else_if, "else if");
-
-                    for m in else_if.members() {
-                        print_members(s, m);
-                    }
-
-                    s.dec_indent();
-                    s.wln("}");
+                    print_wowm_if_statement(s, else_if, "else if", |s| {
+                        for m in else_if.members() {
+                            print_members(s, m);
+                        }
+                    });
                 }
             }
 
             if !statement.else_members().is_empty() {
-                s.wln("else {");
-                s.inc_indent();
-
-                for f in statement.else_members() {
-                    print_members(s, f);
-                }
-
-                s.dec_indent();
-                s.wln("}");
+                s.body("else", |s| {
+                    for f in statement.else_members() {
+                        print_members(s, f);
+                    }
+                });
             }
         }
         StructMember::OptionalStatement(optional) => {
-            s.wln(format!("optional {name} {{", name = optional.name()));
-            s.inc_indent();
-
-            for m in optional.members() {
-                print_members(s, m);
-            }
-
-            s.dec_indent();
-            s.wln("}");
+            s.body(format!("optional {name}", name = optional.name()), |s| {
+                for m in optional.members() {
+                    print_members(s, m);
+                }
+            });
         }
     }
 }
 
-fn print_wowm_if_statement(s: &mut Writer, statement: &IfStatement, condition: &str) {
+fn print_wowm_if_statement(
+    s: &mut Writer,
+    statement: &IfStatement,
+    condition: &str,
+    f: impl Fn(&mut Writer),
+) {
     let name = statement.name();
     match statement.conditional().equation() {
         Equation::Equals { values: value } => {
@@ -181,4 +170,9 @@ fn print_wowm_if_statement(s: &mut Writer, statement: &IfStatement, condition: &
             s.inc_indent();
         }
     }
+
+    f(s);
+
+    s.dec_indent();
+    s.wln("}");
 }
