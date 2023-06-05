@@ -263,8 +263,10 @@ macro_rules! update_item {
         }
     };
 }
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub(crate) use update_item;
 
-#[allow(unused)]
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 macro_rules! update_mask {
     () => {
         #[derive(Debug, Hash, Clone, PartialEq, Eq, PartialOrd)]
@@ -428,13 +430,10 @@ macro_rules! update_mask {
         }
     };
 }
-
-#[allow(unused)]
-pub(crate) use update_item;
-#[allow(unused)]
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub(crate) use update_mask;
 
-#[allow(unused)]
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 macro_rules! skill_info {
     ($skill:ty, $index:ty) => {
         #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash, Default)]
@@ -512,5 +511,5 @@ macro_rules! skill_info {
         }
     };
 }
-#[allow(unused)]
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub(crate) use skill_info;

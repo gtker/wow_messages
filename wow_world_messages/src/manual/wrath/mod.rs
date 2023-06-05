@@ -16,5 +16,5 @@ pub use movement_info::*;
 pub use wow_world_base::wrath::Gold;
 pub use wow_world_base::wrath::Level;
 
-pub use crate::helper::named_guid::NamedGuid;
-pub use crate::helper::variable_item_random_property::VariableItemRandomProperty;
+pub use crate::manual::shared::tbc_wrath_named_guid::NamedGuid;
+pub use crate::manual::shared::tbc_wrath_variable_item_random_property::VariableItemRandomProperty;
