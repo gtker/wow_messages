@@ -14,8 +14,7 @@ use crate::{Container, ObjectTags, Objects};
 use std::fmt::UpperHex;
 
 pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer) {
-    let mut s = Writer::new();
-    s.inc_indent();
+    let mut s = Writer::at_indentation(1);
 
     let mut variables = Vec::new();
 
@@ -77,6 +76,7 @@ pub(crate) fn print_parser(o: &Objects, w: &WiresharkObject) -> (Writer, Writer)
     s.wln("default:");
     s.inc_indent();
     s.wln("break;");
+    s.dec_indent();
     s.closing_curly();
 
     (s, print_variables(variables))
@@ -611,10 +611,8 @@ fn print_definer(
 }
 
 pub(crate) fn print_register_info(w: &WiresharkObject) -> Writer {
-    let mut s = Writer::new();
-    s.inc_indent();
+    let mut s = Writer::at_indentation(2);
 
-    s.inc_indent();
     for m in w.members() {
         s.wln(format!("{{ &{},", m.name()));
         s.inc_indent();
@@ -651,7 +649,6 @@ pub(crate) fn print_register_info(w: &WiresharkObject) -> Writer {
         s.closing_curly(); // { pretty_name, "ui_name"
         s.closing_curly_with(","); // { &hf_woww
     }
-    s.dec_indent();
 
     s
 }

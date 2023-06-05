@@ -23,14 +23,6 @@ use crate::{ObjectTags, Objects};
 pub use opcode_to_name::print_opcode_to_name;
 pub use update_mask::*;
 
-#[derive(Debug, Clone)]
-pub(crate) struct Writer {
-    inner: String,
-    prefix: String,
-    indentation_level: u8,
-    docc_indentation_level: u8,
-}
-
 pub(crate) const EXPECTED_OPCODE_ERROR: &str = "crate::errors::ExpectedOpcodeError";
 pub(crate) const PARSE_ERROR: &str = "crate::errors::ParseError";
 
@@ -58,6 +50,15 @@ const CFG_SYNC: &str = "#[cfg(feature = \"sync\")]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"tokio\")]";
 const CFG_ASYNC_ASYNC_STD: &str = "#[cfg(feature = \"async-std\")]";
 
+#[derive(Debug, Clone)]
+pub(crate) struct Writer {
+    inner: String,
+    prefix: String,
+    indentation_level: u8,
+    docc_indentation_level: u8,
+    initial_indentation_level: u8,
+}
+
 impl Writer {
     pub(crate) const INDENTATION: &'static str = "    ";
     const METADATA: bool = true;
@@ -68,6 +69,16 @@ impl Writer {
             prefix: "".to_string(),
             indentation_level: 0,
             docc_indentation_level: 0,
+            initial_indentation_level: 0,
+        }
+    }
+    pub(crate) fn at_indentation(indentation: u8) -> Self {
+        Self {
+            inner: String::with_capacity(4000),
+            prefix: "".to_string(),
+            indentation_level: indentation,
+            docc_indentation_level: 0,
+            initial_indentation_level: indentation,
         }
     }
 
@@ -77,6 +88,7 @@ impl Writer {
             prefix: "".to_string(),
             indentation_level: 0,
             docc_indentation_level: 0,
+            initial_indentation_level: 0,
         }
     }
 
@@ -86,14 +98,17 @@ impl Writer {
             prefix: prefix.to_string(),
             indentation_level: 0,
             docc_indentation_level: 0,
+            initial_indentation_level: 0,
         }
     }
 
     pub(crate) fn into_inner(self) -> String {
+        assert_eq!(self.indentation_level, self.initial_indentation_level);
         self.inner
     }
 
     pub(crate) fn inner(&self) -> &str {
+        assert_eq!(self.indentation_level, self.initial_indentation_level);
         &self.inner
     }
 
