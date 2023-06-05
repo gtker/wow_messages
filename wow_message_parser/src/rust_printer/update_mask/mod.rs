@@ -49,24 +49,8 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
     ];
 
     let mut s = Writer::new();
-    s.wln("use crate::Guid;");
-    s.wln("use std::convert::TryInto;");
-    s.wln("use super::indices::*;");
-    for m in fields {
-        if let UfType::BytesWith(a, b, c, d) = m.ty() {
-            for ty in [a, b, c, d] {
-                match ty.ty {
-                    ByteInnerTy::Byte => {}
-                    ByteInnerTy::Ty(ty) => {
-                        s.wln(format!("use crate::{}::{{{}}};", version.module_name(), ty));
-                    }
-                }
-            }
-        }
-    }
 
-    s.wln(format!("use crate::{}::{{UpdateContainer, UpdateContainerBuilder, UpdateCorpse, UpdateCorpseBuilder, UpdateDynamicObject, UpdateDynamicObjectBuilder, UpdateGameObject, UpdateGameObjectBuilder, UpdateItem, UpdateItemBuilder, UpdatePlayer, UpdatePlayerBuilder, UpdateUnit, UpdateUnitBuilder}};", version.module_name()));
-    s.newline();
+    print_includes(&mut s, fields, version, &update_types);
 
     for (ty, types) in &update_types {
         s.bodyn(format!("impl {ty}Builder"), |s| {
@@ -86,6 +70,49 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
     }
 
     s
+}
+
+fn print_includes(
+    s: &mut Writer,
+    fields: &[MemberType],
+    version: MajorWorldVersion,
+    update_types: &[(&str, Vec<UpdateMaskType>); 7],
+) {
+    s.wln("use crate::Guid;");
+    s.wln("use std::convert::TryInto;");
+    s.wln("use super::indices::*;");
+    s.newline();
+
+    let mut imports = Vec::new();
+
+    for m in fields {
+        if let UfType::BytesWith(a, b, c, d) = m.ty() {
+            for ty in [a, b, c, d] {
+                match ty.ty {
+                    ByteInnerTy::Byte => {}
+                    ByteInnerTy::Ty(ty) => {
+                        imports.push(ty.to_string());
+                    }
+                }
+            }
+        }
+    }
+
+    for (ty, _) in update_types {
+        imports.push(ty.to_string());
+        imports.push(format!("{ty}Builder"));
+    }
+
+    s.wln(format!("use crate::{}::{{", version.module_name()));
+    s.inc_indent();
+    for (i, ty) in imports.iter().enumerate() {
+        let extra = if i != imports.len() - 1 { ", " } else { "" };
+        s.w_break_at(format!("{ty}{extra}"), 80);
+    }
+    s.newline();
+    s.closing_curly_with(";");
+
+    s.newline();
 }
 
 fn print_specific_update_mask_indices(fields: &[MemberType]) -> Writer {

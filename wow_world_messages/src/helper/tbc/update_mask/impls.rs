@@ -1,11 +1,13 @@
 use crate::Guid;
 use std::convert::TryInto;
 use super::indices::*;
-use crate::tbc::{Race};
-use crate::tbc::{Class};
-use crate::tbc::{Gender};
-use crate::tbc::{Power};
-use crate::tbc::{UpdateContainer, UpdateContainerBuilder, UpdateCorpse, UpdateCorpseBuilder, UpdateDynamicObject, UpdateDynamicObjectBuilder, UpdateGameObject, UpdateGameObjectBuilder, UpdateItem, UpdateItemBuilder, UpdatePlayer, UpdatePlayerBuilder, UpdateUnit, UpdateUnitBuilder};
+
+use crate::tbc::{
+    Race, Class, Gender, Power, UpdateItem, UpdateItemBuilder, UpdateContainer, 
+    UpdateContainerBuilder, UpdateUnit, UpdateUnitBuilder, UpdatePlayer, UpdatePlayerBuilder, 
+    UpdateGameObject, UpdateGameObjectBuilder, UpdateDynamicObject, UpdateDynamicObjectBuilder, 
+    UpdateCorpse, UpdateCorpseBuilder
+};
 
 impl UpdateItemBuilder {
     pub fn set_object_guid(mut self, v: Guid) -> Self {

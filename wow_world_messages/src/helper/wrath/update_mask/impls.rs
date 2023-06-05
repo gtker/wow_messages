@@ -1,12 +1,13 @@
 use crate::Guid;
 use std::convert::TryInto;
 use super::indices::*;
-use crate::wrath::{Race};
-use crate::wrath::{Class};
-use crate::wrath::{Gender};
-use crate::wrath::{Power};
-use crate::wrath::{UnitStandState};
-use crate::wrath::{UpdateContainer, UpdateContainerBuilder, UpdateCorpse, UpdateCorpseBuilder, UpdateDynamicObject, UpdateDynamicObjectBuilder, UpdateGameObject, UpdateGameObjectBuilder, UpdateItem, UpdateItemBuilder, UpdatePlayer, UpdatePlayerBuilder, UpdateUnit, UpdateUnitBuilder};
+
+use crate::wrath::{
+    Race, Class, Gender, Power, UnitStandState, UpdateItem, UpdateItemBuilder, UpdateContainer, 
+    UpdateContainerBuilder, UpdateUnit, UpdateUnitBuilder, UpdatePlayer, UpdatePlayerBuilder, 
+    UpdateGameObject, UpdateGameObjectBuilder, UpdateDynamicObject, UpdateDynamicObjectBuilder, 
+    UpdateCorpse, UpdateCorpseBuilder
+};
 
 impl UpdateItemBuilder {
     pub fn set_object_guid(mut self, v: Guid) -> Self {
