@@ -24,7 +24,7 @@ pub(crate) fn print_to_testcase(s: &mut Writer, e: &Container) {
     s.wln(CFG_TESTCASE);
     s.open_curly(format!("impl {name}"));
 
-    s.funcn_pub("to_test_case_string(&self)", "String", |s| {
+    s.funcn_pub("to_test_case_string(&self)", "Option<String>", |s| {
         print_inner_function(s, e);
     });
 
@@ -52,33 +52,39 @@ fn print_inner_function(s: &mut Writer, e: &Container) {
     s.newline();
 
     wln(s, &format!("test {name} {{{{"));
-    members::print_members(s, e, "self.");
+    members::print_members(s, e, "self.", "    ");
 
     wln(s, "}} [");
     bytes::print_bytes(s, e);
 
     wln(s, "] {{");
     if e.tags().has_login_version() {
-        let versions = e
-            .tags()
-            .logon_versions()
-            .map(|a| a.to_string())
-            .collect::<Vec<_>>()
-            .join(" ");
+        let versions = if let Ok(versions) = std::env::var("WOWM_TEST_CASE_LOGIN_VERSION") {
+            versions
+        } else {
+            e.tags()
+                .logon_versions()
+                .map(|a| a.to_string())
+                .collect::<Vec<_>>()
+                .join(" ")
+        };
 
         wln(s, &format!("    login_versions = \\\"{versions}\\\";"));
     } else {
-        let versions = e
-            .tags()
-            .versions()
-            .map(|a| a.to_string())
-            .collect::<Vec<_>>()
-            .join(" ");
+        let versions = if let Ok(versions) = std::env::var("WOWM_TEST_CASE_WORLD_VERSION") {
+            versions
+        } else {
+            e.tags()
+                .versions()
+                .map(|a| a.to_string())
+                .collect::<Vec<_>>()
+                .join(" ")
+        };
 
         wln(s, &format!("    versions = \\\"{versions}\\\";"));
     }
     wln(s, "}}\\n");
     s.newline();
 
-    s.wln("s");
+    s.wln("Some(s)");
 }

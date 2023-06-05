@@ -34,7 +34,7 @@ pub struct CMSG_GMTICKET_CREATE {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_GMTICKET_CREATE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -74,30 +74,43 @@ impl CMSG_GMTICKET_CREATE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 517_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 517_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "category");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "category", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "map", "    ");
+        writeln!(s, "    /* position: Vector3d start */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "        ");
+        writeln!(s, "    /* position: Vector3d end */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, self.message.len() + 1, "message", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.reserved_for_future_use.len() + 1, "reserved_for_future_use", "    ");
+        match &self.category {
+            crate::vanilla::CMSG_GMTICKET_CREATE_GmTicketType::BehaviorHarassment {
+                chat_data_line_count,
+                chat_data_size_uncompressed,
+                compressed_chat_data,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "chat_data_line_count", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "chat_data_size_uncompressed", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, compressed_chat_data.len(), "compressed_chat_data", "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            _ => {}
         }
+
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1.12\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -105,6 +118,11 @@ impl CMSG_GMTICKET_CREATE {
 impl crate::private::Sealed for CMSG_GMTICKET_CREATE {}
 impl crate::Message for CMSG_GMTICKET_CREATE {
     const OPCODE: u32 = 0x0205;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_GMTICKET_CREATE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

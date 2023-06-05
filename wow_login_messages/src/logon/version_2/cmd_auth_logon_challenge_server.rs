@@ -42,7 +42,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 
 #[cfg(feature = "print-testcase")]
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
 
         let mut s = String::new();
@@ -92,27 +92,39 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        // Bytes
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
         writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "protocol_version");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "protocol_version", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
+        match &self.result {
+            crate::logon::version_2::CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
+                crc_salt,
+                generator,
+                large_safe_prime,
+                salt,
+                server_public_key,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, server_public_key.len(), "server_public_key", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "generator_length", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, generator.len(), "generator", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "large_safe_prime_length", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, large_safe_prime.len(), "large_safe_prime", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, salt.len(), "salt", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, crc_salt.len(), "crc_salt", "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            _ => {}
         }
+
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    login_versions = \"2\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -179,6 +191,11 @@ impl crate::private::Sealed for CMD_AUTH_LOGON_CHALLENGE_Server {}
 
 impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
     const OPCODE: u8 = 0x00;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMD_AUTH_LOGON_CHALLENGE_Server::to_test_case_string(self)
+    }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // protocol_version: u8

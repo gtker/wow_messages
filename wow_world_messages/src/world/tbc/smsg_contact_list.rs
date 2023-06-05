@@ -22,7 +22,7 @@ pub struct SMSG_CONTACT_LIST {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_CONTACT_LIST {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -36,20 +36,20 @@ impl SMSG_CONTACT_LIST {
         for v in self.relations.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "    relation_mask = {};", crate::tbc::RelationType::new(v.relation_mask.as_int()).as_test_case_value()).unwrap();
-            writeln!(s, "    note = \"{}\";", v.note).unwrap();
+            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "        relation_mask = {};", crate::tbc::RelationType::new(v.relation_mask.as_int()).as_test_case_value()).unwrap();
+            writeln!(s, "        note = \"{}\";", v.note).unwrap();
             if let Some(if_statement) = &v.relation_mask.get_friend() {
-                writeln!(s, "    status = {};", crate::tbc::FriendStatus::try_from(if_statement.status.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "        status = {};", crate::tbc::FriendStatus::try_from(if_statement.status.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &if_statement.status {
                     crate::tbc::Relation_FriendStatus::Online {
                         area,
                         class,
                         level,
                     } => {
-                        writeln!(s, "    area = {};", area.as_test_case_value()).unwrap();
-                        writeln!(s, "    level = {};", level.as_int()).unwrap();
-                        writeln!(s, "    class = {};", class.as_test_case_value()).unwrap();
+                        writeln!(s, "        area = {};", area.as_test_case_value()).unwrap();
+                        writeln!(s, "        level = {};", level.as_int()).unwrap();
+                        writeln!(s, "        class = {};", class.as_test_case_value()).unwrap();
                     }
                     _ => {}
                 }
@@ -63,22 +63,43 @@ impl SMSG_CONTACT_LIST {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 103_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 103_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "list_mask");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "list_mask", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_relations", "    ");
+        if !self.relations.is_empty() {
+            writeln!(s, "    /* relations: Relation[amount_of_relations] start */").unwrap();
+            for (i, v) in self.relations.iter().enumerate() {
+                writeln!(s, "    /* relations: Relation[amount_of_relations] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "relation_mask", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, v.note.len() + 1, "note", "        ");
+                if let Some(if_statement) = &v.relation_mask.get_friend() {
+                    crate::util::write_bytes(&mut s, &mut bytes, 1, "status", "        ");
+                    match &if_statement.status {
+                        crate::tbc::Relation_FriendStatus::Online {
+                            area,
+                            class,
+                            level,
+                        } => {
+                            crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "        ");
+                            crate::util::write_bytes(&mut s, &mut bytes, 4, "level", "        ");
+                            crate::util::write_bytes(&mut s, &mut bytes, 4, "class", "        ");
+                        }
+                        _ => {}
+                    }
+
+                }
+
+                writeln!(s, "    /* relations: Relation[amount_of_relations] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* relations: Relation[amount_of_relations] end */").unwrap();
         }
 
 
@@ -86,7 +107,7 @@ impl SMSG_CONTACT_LIST {
         writeln!(s, "    versions = \"2.4.3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -94,6 +115,11 @@ impl SMSG_CONTACT_LIST {
 impl crate::private::Sealed for SMSG_CONTACT_LIST {}
 impl crate::Message for SMSG_CONTACT_LIST {
     const OPCODE: u32 = 0x0067;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_CONTACT_LIST::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

@@ -18,6 +18,9 @@ pub(crate) mod private {
 pub trait Message: Sized + private::Sealed {
     const OPCODE: u32;
 
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String>;
+
     fn size_without_header(&self) -> u32;
 
     fn write_into_vec(&self, w: impl std::io::Write) -> Result<(), std::io::Error>;

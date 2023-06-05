@@ -18,7 +18,7 @@ pub struct SMSG_AUCTION_LIST_RESULT {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_AUCTION_LIST_RESULT {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -31,20 +31,20 @@ impl SMSG_AUCTION_LIST_RESULT {
         for v in self.auctions.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    id = {};", v.id).unwrap();
-            writeln!(s, "    item = {};", v.item).unwrap();
-            writeln!(s, "    item_enchantment = {};", v.item_enchantment).unwrap();
-            writeln!(s, "    item_random_property_id = {};", v.item_random_property_id).unwrap();
-            writeln!(s, "    item_suffix_factor = {};", v.item_suffix_factor).unwrap();
-            writeln!(s, "    item_count = {};", v.item_count).unwrap();
-            writeln!(s, "    item_charges = {};", v.item_charges).unwrap();
-            writeln!(s, "    item_owner = {};", v.item_owner.guid()).unwrap();
-            writeln!(s, "    start_bid = {};", v.start_bid).unwrap();
-            writeln!(s, "    minimum_bid = {};", v.minimum_bid).unwrap();
-            writeln!(s, "    buyout_amount = {};", v.buyout_amount).unwrap();
-            writeln!(s, "    time_left = {};", v.time_left.as_millis()).unwrap();
-            writeln!(s, "    highest_bidder = {};", v.highest_bidder.guid()).unwrap();
-            writeln!(s, "    highest_bid = {};", v.highest_bid).unwrap();
+            writeln!(s, "        id = {};", v.id).unwrap();
+            writeln!(s, "        item = {};", v.item).unwrap();
+            writeln!(s, "        item_enchantment = {};", v.item_enchantment).unwrap();
+            writeln!(s, "        item_random_property_id = {};", v.item_random_property_id).unwrap();
+            writeln!(s, "        item_suffix_factor = {};", v.item_suffix_factor).unwrap();
+            writeln!(s, "        item_count = {};", v.item_count).unwrap();
+            writeln!(s, "        item_charges = {};", v.item_charges).unwrap();
+            writeln!(s, "        item_owner = {};", v.item_owner.guid()).unwrap();
+            writeln!(s, "        start_bid = {};", v.start_bid).unwrap();
+            writeln!(s, "        minimum_bid = {};", v.minimum_bid).unwrap();
+            writeln!(s, "        buyout_amount = {};", v.buyout_amount).unwrap();
+            writeln!(s, "        time_left = {};", v.time_left.as_millis()).unwrap();
+            writeln!(s, "        highest_bidder = {};", v.highest_bidder.guid()).unwrap();
+            writeln!(s, "        highest_bid = {};", v.highest_bid).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -53,30 +53,45 @@ impl SMSG_AUCTION_LIST_RESULT {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 604_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 604_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "count");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "count", "    ");
+        if !self.auctions.is_empty() {
+            writeln!(s, "    /* auctions: AuctionListItem[count] start */").unwrap();
+            for (i, v) in self.auctions.iter().enumerate() {
+                writeln!(s, "    /* auctions: AuctionListItem[count] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_enchantment", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_random_property_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_suffix_factor", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_charges", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "item_owner", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "start_bid", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "minimum_bid", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "buyout_amount", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "time_left", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "highest_bidder", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "highest_bid", "        ");
+                writeln!(s, "    /* auctions: AuctionListItem[count] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* auctions: AuctionListItem[count] end */").unwrap();
         }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "total_amount_of_auctions", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -84,6 +99,11 @@ impl SMSG_AUCTION_LIST_RESULT {
 impl crate::private::Sealed for SMSG_AUCTION_LIST_RESULT {}
 impl crate::Message for SMSG_AUCTION_LIST_RESULT {
     const OPCODE: u32 = 0x025c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_AUCTION_LIST_RESULT::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

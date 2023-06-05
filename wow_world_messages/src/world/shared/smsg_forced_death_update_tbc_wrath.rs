@@ -13,7 +13,7 @@ pub struct SMSG_FORCED_DEATH_UPDATE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_FORCED_DEATH_UPDATE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -24,12 +24,10 @@ impl SMSG_FORCED_DEATH_UPDATE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 4_u16.to_be_bytes();
+        let [a, b] = 2_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 890_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 890_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
@@ -40,7 +38,7 @@ impl SMSG_FORCED_DEATH_UPDATE {
         writeln!(s, "    versions = \"2.4.3 3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -48,6 +46,11 @@ impl SMSG_FORCED_DEATH_UPDATE {
 impl crate::private::Sealed for SMSG_FORCED_DEATH_UPDATE {}
 impl crate::Message for SMSG_FORCED_DEATH_UPDATE {
     const OPCODE: u32 = 0x037a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_FORCED_DEATH_UPDATE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         0

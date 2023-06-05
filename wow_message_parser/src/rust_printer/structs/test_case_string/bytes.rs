@@ -1,21 +1,24 @@
+use crate::parser::types::array::{ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::rust_printer::structs::test_case_string;
-use crate::rust_printer::structs::test_case_string::wlna;
-use crate::rust_printer::Writer;
+use crate::rust_printer::structs::test_case_string::members::{
+    print_if_statement_enum, print_if_statement_flag,
+};
+use crate::rust_printer::structs::test_case_string::{wln, wlna};
+use crate::rust_printer::{DefinerType, Writer};
 
 pub(crate) fn print_bytes(s: &mut Writer, e: &Container) {
     s.newline();
-    s.wln("// Size/Opcode");
 
     if matches!(
         e.container_type(),
         ContainerType::SMsg(_) | ContainerType::CMsg(_)
     ) {
         let additional_size = match e.container_type() {
-            ContainerType::CMsg(_) => 6,
-            ContainerType::SMsg(_) => 4,
+            ContainerType::CMsg(_) => 4,
+            ContainerType::SMsg(_) => 2,
             _ => 0,
         };
 
@@ -31,11 +34,11 @@ pub(crate) fn print_bytes(s: &mut Writer, e: &Container) {
         test_case_string::wln(s, "    {a:#04X}, {b:#04X}, /* size */");
         let opcode = e.opcode();
         match e.container_type() {
-            ContainerType::CMsg(_) => {
+            ContainerType::SMsg(_) => {
                 s.wln(format!("let [a, b] = {opcode}_u16.to_le_bytes();"));
                 test_case_string::wln(s, "    {a:#04X}, {b:#04X}, /* opcode */");
             }
-            ContainerType::SMsg(_) => {
+            ContainerType::CMsg(_) => {
                 s.wln(format!("let [a, b, c, d] = {opcode}_u32.to_le_bytes();"));
                 test_case_string::wln(
                     s,
@@ -46,20 +49,17 @@ pub(crate) fn print_bytes(s: &mut Writer, e: &Container) {
         }
     }
 
-    print_bytes_member(s, e);
+    print_bytes_members(s, e);
 
     s.newline();
 }
 
-fn print_bytes_member(s: &mut Writer, e: &Container) {
-    s.wln("// Bytes");
+fn print_bytes_members(s: &mut Writer, e: &Container) {
     s.wln("let mut bytes: Vec<u8> = Vec::new();");
     s.wln("self.write_into_vec(&mut bytes).unwrap();");
     s.wln("let mut bytes = bytes.into_iter();");
 
     s.newline();
-
-    let mut all_printed = true;
 
     if matches!(
         e.container_type(),
@@ -69,40 +69,68 @@ fn print_bytes_member(s: &mut Writer, e: &Container) {
     }
 
     for m in e.members() {
-        if !print_bytes_struct_member(s, m) {
-            all_printed = false;
-            break;
-        }
-    }
-
-    if !all_printed {
-        s.body("for (i, b) in bytes.enumerate()", |s| {
-            s.body("if i == 0", |s| {
-                s.wln("write!(s, \"    \").unwrap();");
-            });
-            s.wln("write!(s, \"{b:#04X}, \").unwrap();");
-        });
+        print_bytes_struct_member(s, e, m, "self.", "    ");
     }
 
     s.newline();
 }
 
-fn print_bytes_struct_member(s: &mut Writer, m: &StructMember) -> bool {
+fn print_bytes_struct_member(
+    s: &mut Writer,
+    e: &Container,
+    m: &StructMember,
+    variable_prefix: &str,
+    prefix: &str,
+) {
     match m {
         StructMember::Definition(d) => {
-            if !print_bytes_struct_member_definition(s, d) {
-                return false;
-            }
+            print_bytes_definition(s, d, variable_prefix, prefix);
         }
-        StructMember::IfStatement(_) => {}
-        StructMember::OptionalStatement(_) => {}
+        StructMember::IfStatement(statement) => match statement.definer_type() {
+            DefinerType::Enum => {
+                print_if_statement_enum(
+                    s,
+                    e,
+                    statement,
+                    variable_prefix,
+                    prefix,
+                    print_bytes_struct_member,
+                );
+            }
+            DefinerType::Flag => {
+                print_if_statement_flag(
+                    s,
+                    e,
+                    statement,
+                    variable_prefix,
+                    prefix,
+                    print_bytes_struct_member,
+                );
+            }
+        },
+        StructMember::OptionalStatement(optional) => {
+            let name = optional.name();
+            s.body(format!("if let Some({name}) = &self.{name}"), |s| {
+                for m in optional.members() {
+                    let variable_prefix = format!("{name}.");
+                    print_bytes_struct_member(s, e, m, &variable_prefix, prefix);
+                }
+            });
+        }
     }
-
-    false
 }
 
-fn print_bytes_struct_member_definition(s: &mut Writer, d: &StructMemberDefinition) -> bool {
+fn print_bytes_definition(
+    s: &mut Writer,
+    d: &StructMemberDefinition,
+    variable_prefix: &str,
+    prefix: &str,
+) {
     let name = d.name();
+    let var_name = format!("{variable_prefix}{name}");
+    let ty_name = d.ty().str();
+
+    let prefix_text = format!("\"{prefix}\"");
 
     match d.ty() {
         Type::Guid
@@ -119,10 +147,8 @@ fn print_bytes_struct_member_definition(s: &mut Writer, d: &StructMemberDefiniti
         | Type::Gold => {
             let size = d.ty().sizes().is_constant().unwrap();
             s.wln(format!(
-                "crate::util::write_bytes(&mut s, &mut bytes, {size}, \"{name}\");"
+                "crate::util::write_bytes(&mut s, &mut bytes, {size}, \"{name}\", {prefix_text});"
             ));
-
-            return true;
         }
 
         Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
@@ -133,19 +159,101 @@ fn print_bytes_struct_member_definition(s: &mut Writer, d: &StructMemberDefiniti
             };
 
             s.wln(format!(
-                "crate::util::write_bytes(&mut s, &mut bytes, {size}, \"{name}\");"
+                "crate::util::write_bytes(&mut s, &mut bytes, {size}, \"{name}\", {prefix_text});"
             ));
-
-            return true;
         }
 
-        Type::PackedGuid => {}
+        Type::PackedGuid => {
+            s.wln(format!(
+                "crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&{var_name}), \"{name}\", {prefix_text});"
+            ));
+        }
 
-        Type::CString => {}
-        Type::SizedCString => {}
-        Type::String => {}
-        Type::Array(_) => {}
-        Type::Struct { .. } => {}
+        Type::String | Type::CString => {
+            s.wln(format!(
+                "crate::util::write_bytes(&mut s, &mut bytes, {var_name}.len() + 1, \"{name}\", {prefix_text});"
+            ));
+        }
+
+        Type::SizedCString => {
+            s.wln(format!(
+                "crate::util::write_bytes(&mut s, &mut bytes, {var_name}.len() + 5, \"{name}\", {prefix_text});"
+            ));
+        }
+
+        Type::Struct { e } => {
+            wln(s, format!("    /* {name}: {ty_name} start */"));
+            let variable_prefix = format!("{var_name}.");
+            let prefix = format!("{prefix}    ");
+
+            for m in e.members() {
+                print_bytes_struct_member(s, e, m, &variable_prefix, &prefix);
+            }
+            wln(s, format!("    /* {name}: {ty_name} end */"));
+        }
+
+        Type::Array(array) => {
+            if array.is_byte_array() {
+                s.wln(format!(
+                    "crate::util::write_bytes(&mut s, &mut bytes, {var_name}.len(), \"{name}\", {prefix_text});"
+                ));
+            } else {
+                let can_be_empty = { !matches!(array.size(), ArraySize::Fixed(_)) };
+                if can_be_empty {
+                    s.open_curly(format!("if !{var_name}.is_empty()"));
+                }
+
+                wln(s, format!("    /* {name}: {ty_name} start */"));
+
+                let name_text = format!("&format!(\"{name} {{i}}\")");
+
+                s.body(format!("for (i, v) in {var_name}.iter().enumerate()"), |s| {
+                    match array.ty() {
+                        ArrayType::Integer(i) => {
+                            let size = i.size();
+
+                            s.wln(format!(
+                                "crate::util::write_bytes(&mut s, &mut bytes, {size}, {name_text}, {prefix_text});"
+                            ));
+                        }
+                        ArrayType::Guid => {
+                            s.wln(format!(
+                                "crate::util::write_bytes(&mut s, &mut bytes, 8, {name_text}, {prefix_text});"
+                            ));
+                        }
+                        ArrayType::PackedGuid => {
+                            s.wln(format!(
+                                "crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(v), {name_text}, {prefix_text});"
+                            ));
+                        }
+                        ArrayType::CString => {
+                            s.wln(format!(
+                                "crate::util::write_bytes(&mut s, &mut bytes, v.len() + 1, {name_text}, {prefix_text});"
+                            ));
+                        }
+                        ArrayType::Struct(e) => {
+                            wln(s, format!("    /* {name}: {ty_name} {{i}} start */"));
+
+                            let variable_prefix = format!("v.");
+
+                            let prefix = format!("{prefix}    ");
+                            for m in e.members() {
+                                print_bytes_struct_member(s, e, m, &variable_prefix, &prefix);
+                            }
+
+                            wln(s, format!("    /* {name}: {ty_name} {{i}} end */"));
+                        }
+                    }
+
+                });
+
+                wln(s, format!("    /* {name}: {ty_name} end */"));
+
+                if can_be_empty {
+                    s.closing_curly(); // if !is_empty
+                }
+            }
+        }
 
         Type::UpdateMask { .. }
         | Type::MonsterMoveSplines
@@ -163,6 +271,4 @@ fn print_bytes_struct_member_definition(s: &mut Writer, d: &StructMemberDefiniti
             ));
         }
     }
-
-    false
 }

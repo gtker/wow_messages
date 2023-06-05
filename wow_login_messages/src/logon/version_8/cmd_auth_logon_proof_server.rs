@@ -41,7 +41,7 @@ impl CMD_AUTH_LOGON_PROOF_Server {
 
 #[cfg(feature = "print-testcase")]
 impl CMD_AUTH_LOGON_PROOF_Server {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
 
         let mut s = String::new();
@@ -118,27 +118,97 @@ impl CMD_AUTH_LOGON_PROOF_Server {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        // Bytes
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
         writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "result");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
+        match &self.result {
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
+                account_flag,
+                hardware_survey_id,
+                server_proof,
+                unknown_flags,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, server_proof.len(), "server_proof", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "account_flag", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "hardware_survey_id", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "unknown_flags", "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0 {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1 {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailLockedEnforced {
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "padding", "    ");
+            }
         }
+
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    login_versions = \"8\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -279,6 +349,11 @@ impl crate::private::Sealed for CMD_AUTH_LOGON_PROOF_Server {}
 
 impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
     const OPCODE: u8 = 0x01;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMD_AUTH_LOGON_PROOF_Server::to_test_case_string(self)
+    }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // result: LoginResult

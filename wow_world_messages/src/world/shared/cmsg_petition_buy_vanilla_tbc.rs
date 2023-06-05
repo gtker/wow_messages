@@ -53,7 +53,7 @@ pub struct CMSG_PETITION_BUY {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_PETITION_BUY {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -82,30 +82,39 @@ impl CMSG_PETITION_BUY {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 445_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 445_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "npc");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "npc", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown1", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "unknown2", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.name.len() + 1, "name", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown3", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown4", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown5", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown6", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown7", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown8", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown9", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown10", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown11", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown12", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "unknown13", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "unknown14", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "index", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown15", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1 2\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -113,6 +122,11 @@ impl CMSG_PETITION_BUY {
 impl crate::private::Sealed for CMSG_PETITION_BUY {}
 impl crate::Message for CMSG_PETITION_BUY {
     const OPCODE: u32 = 0x01bd;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_PETITION_BUY::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

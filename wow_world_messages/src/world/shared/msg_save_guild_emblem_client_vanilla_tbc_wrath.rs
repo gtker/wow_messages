@@ -25,7 +25,7 @@ pub struct MSG_SAVE_GUILD_EMBLEM_Client {
 
 #[cfg(feature = "print-testcase")]
 impl MSG_SAVE_GUILD_EMBLEM_Client {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -42,30 +42,27 @@ impl MSG_SAVE_GUILD_EMBLEM_Client {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 34_u16.to_be_bytes();
+        let [a, b] = 32_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 497_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 497_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "vendor");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "vendor", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "emblem_style", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "emblem_color", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "border_style", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "border_color", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "background_color", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -73,6 +70,11 @@ impl MSG_SAVE_GUILD_EMBLEM_Client {
 impl crate::private::Sealed for MSG_SAVE_GUILD_EMBLEM_Client {}
 impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Client {
     const OPCODE: u32 = 0x01f1;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        MSG_SAVE_GUILD_EMBLEM_Client::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         28

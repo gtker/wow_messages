@@ -16,7 +16,7 @@ pub struct MSG_GUILD_EVENT_LOG_QUERY_Server {
 
 #[cfg(feature = "print-testcase")]
 impl MSG_GUILD_EVENT_LOG_QUERY_Server {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -29,23 +29,23 @@ impl MSG_GUILD_EVENT_LOG_QUERY_Server {
         for v in self.events.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    event = {};", crate::tbc::GuildEvent::try_from(v.event.as_int()).unwrap().as_test_case_value()).unwrap();
-            writeln!(s, "    player1 = {};", v.player1.guid()).unwrap();
+            writeln!(s, "        event = {};", crate::tbc::GuildEvent::try_from(v.event.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        player1 = {};", v.player1.guid()).unwrap();
             match &v.event {
                 crate::tbc::GuildLogEvent_GuildEvent::Joined {
                     player2,
                 } => {
-                    writeln!(s, "    player2 = {};", player2.guid()).unwrap();
+                    writeln!(s, "        player2 = {};", player2.guid()).unwrap();
                 }
                 crate::tbc::GuildLogEvent_GuildEvent::Left {
                     player2,
                 } => {
-                    writeln!(s, "    player2 = {};", player2.guid()).unwrap();
+                    writeln!(s, "        player2 = {};", player2.guid()).unwrap();
                 }
                 _ => {}
             }
 
-            writeln!(s, "    unix_time = {};", v.unix_time).unwrap();
+            writeln!(s, "        unix_time = {};", v.unix_time).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -53,22 +53,39 @@ impl MSG_GUILD_EVENT_LOG_QUERY_Server {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 1022_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 1022_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_events");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_events", "    ");
+        if !self.events.is_empty() {
+            writeln!(s, "    /* events: GuildLogEvent[amount_of_events] start */").unwrap();
+            for (i, v) in self.events.iter().enumerate() {
+                writeln!(s, "    /* events: GuildLogEvent[amount_of_events] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "event", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "player1", "        ");
+                match &v.event {
+                    crate::tbc::GuildLogEvent_GuildEvent::Joined {
+                        player2,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 8, "player2", "        ");
+                    }
+                    crate::tbc::GuildLogEvent_GuildEvent::Left {
+                        player2,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 8, "player2", "        ");
+                    }
+                    _ => {}
+                }
+
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "unix_time", "        ");
+                writeln!(s, "    /* events: GuildLogEvent[amount_of_events] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* events: GuildLogEvent[amount_of_events] end */").unwrap();
         }
 
 
@@ -76,7 +93,7 @@ impl MSG_GUILD_EVENT_LOG_QUERY_Server {
         writeln!(s, "    versions = \"2.4.3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -84,6 +101,11 @@ impl MSG_GUILD_EVENT_LOG_QUERY_Server {
 impl crate::private::Sealed for MSG_GUILD_EVENT_LOG_QUERY_Server {}
 impl crate::Message for MSG_GUILD_EVENT_LOG_QUERY_Server {
     const OPCODE: u32 = 0x03fe;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        MSG_GUILD_EVENT_LOG_QUERY_Server::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

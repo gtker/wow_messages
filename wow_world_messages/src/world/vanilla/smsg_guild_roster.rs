@@ -23,7 +23,7 @@ pub struct SMSG_GUILD_ROSTER {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_GUILD_ROSTER {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -44,13 +44,13 @@ impl SMSG_GUILD_ROSTER {
         for v in self.members.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "    status = {};", crate::vanilla::GuildMemberStatus::try_from(v.status.as_int()).unwrap().as_test_case_value()).unwrap();
-            writeln!(s, "    name = \"{}\";", v.name).unwrap();
-            writeln!(s, "    rank = {};", v.rank).unwrap();
-            writeln!(s, "    level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "    class = {};", v.class.as_test_case_value()).unwrap();
-            writeln!(s, "    area = {};", v.area.as_test_case_value()).unwrap();
+            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "        status = {};", crate::vanilla::GuildMemberStatus::try_from(v.status.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        name = \"{}\";", v.name).unwrap();
+            writeln!(s, "        rank = {};", v.rank).unwrap();
+            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "        class = {};", v.class.as_test_case_value()).unwrap();
+            writeln!(s, "        area = {};", v.area.as_test_case_value()).unwrap();
             match &v.status {
                 crate::vanilla::GuildMember_GuildMemberStatus::Offline {
                     time_offline,
@@ -60,8 +60,8 @@ impl SMSG_GUILD_ROSTER {
                 _ => {}
             }
 
-            writeln!(s, "    public_note = \"{}\";", v.public_note).unwrap();
-            writeln!(s, "    officer_note = \"{}\";", v.officer_note).unwrap();
+            writeln!(s, "        public_note = \"{}\";", v.public_note).unwrap();
+            writeln!(s, "        officer_note = \"{}\";", v.officer_note).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -69,22 +69,50 @@ impl SMSG_GUILD_ROSTER {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 138_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 138_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_members");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_members", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.motd.len() + 1, "motd", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.guild_info.len() + 1, "guild_info", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_rights", "    ");
+        if !self.rights.is_empty() {
+            writeln!(s, "    /* rights: u32[amount_of_rights] start */").unwrap();
+            for (i, v) in self.rights.iter().enumerate() {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("rights {i}"), "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* rights: u32[amount_of_rights] end */").unwrap();
+        }
+        if !self.members.is_empty() {
+            writeln!(s, "    /* members: GuildMember[amount_of_members] start */").unwrap();
+            for (i, v) in self.members.iter().enumerate() {
+                writeln!(s, "    /* members: GuildMember[amount_of_members] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "status", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, v.name.len() + 1, "name", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "rank", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "level", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "class", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "        ");
+                match &v.status {
+                    crate::vanilla::GuildMember_GuildMemberStatus::Offline {
+                        time_offline,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "time_offline", "        ");
+                    }
+                    _ => {}
+                }
+
+                crate::util::write_bytes(&mut s, &mut bytes, v.public_note.len() + 1, "public_note", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, v.officer_note.len() + 1, "officer_note", "        ");
+                writeln!(s, "    /* members: GuildMember[amount_of_members] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* members: GuildMember[amount_of_members] end */").unwrap();
         }
 
 
@@ -92,7 +120,7 @@ impl SMSG_GUILD_ROSTER {
         writeln!(s, "    versions = \"1.12\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -100,6 +128,11 @@ impl SMSG_GUILD_ROSTER {
 impl crate::private::Sealed for SMSG_GUILD_ROSTER {}
 impl crate::Message for SMSG_GUILD_ROSTER {
     const OPCODE: u32 = 0x008a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_GUILD_ROSTER::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

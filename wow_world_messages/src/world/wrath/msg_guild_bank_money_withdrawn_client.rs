@@ -11,7 +11,7 @@ pub struct MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {
 
 #[cfg(feature = "print-testcase")]
 impl MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -22,12 +22,10 @@ impl MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 6_u16.to_be_bytes();
+        let [a, b] = 4_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 1022_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 1022_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
@@ -38,7 +36,7 @@ impl MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -46,6 +44,11 @@ impl MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {
 impl crate::private::Sealed for MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {}
 impl crate::Message for MSG_GUILD_BANK_MONEY_WITHDRAWN_Client {
     const OPCODE: u32 = 0x03fe;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        MSG_GUILD_BANK_MONEY_WITHDRAWN_Client::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         0

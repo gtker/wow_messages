@@ -27,7 +27,7 @@ pub struct CMSG_AUCTION_SELL_ITEM {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_AUCTION_SELL_ITEM {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,30 +45,28 @@ impl CMSG_AUCTION_SELL_ITEM {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 42_u16.to_be_bytes();
+        let [a, b] = 40_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 598_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 598_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "auctioneer");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "auctioneer", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown1", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "item", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown2", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "starting_bid", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "buyout", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "auction_duration_in_minutes", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -76,6 +74,11 @@ impl CMSG_AUCTION_SELL_ITEM {
 impl crate::private::Sealed for CMSG_AUCTION_SELL_ITEM {}
 impl crate::Message for CMSG_AUCTION_SELL_ITEM {
     const OPCODE: u32 = 0x0256;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_AUCTION_SELL_ITEM::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         36

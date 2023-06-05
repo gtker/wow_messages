@@ -21,7 +21,7 @@ pub struct SMSG_LFG_PLAYER_INFO {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_LFG_PLAYER_INFO {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -34,20 +34,20 @@ impl SMSG_LFG_PLAYER_INFO {
         for v in self.available_dungeons.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    dungeon_entry = {};", v.dungeon_entry).unwrap();
-            writeln!(s, "    done = {};", if v.done { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "    quest_reward = {};", v.quest_reward).unwrap();
-            writeln!(s, "    xp_reward = {};", v.xp_reward).unwrap();
-            writeln!(s, "    unknown1 = {};", v.unknown1).unwrap();
-            writeln!(s, "    unknown2 = {};", v.unknown2).unwrap();
-            writeln!(s, "    amount_of_rewards = {};", v.rewards.len()).unwrap();
-            write!(s, "    rewards = [").unwrap();
+            writeln!(s, "        dungeon_entry = {};", v.dungeon_entry).unwrap();
+            writeln!(s, "        done = {};", if v.done { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "        quest_reward = {};", v.quest_reward).unwrap();
+            writeln!(s, "        xp_reward = {};", v.xp_reward).unwrap();
+            writeln!(s, "        unknown1 = {};", v.unknown1).unwrap();
+            writeln!(s, "        unknown2 = {};", v.unknown2).unwrap();
+            writeln!(s, "        amount_of_rewards = {};", v.rewards.len()).unwrap();
+            write!(s, "        rewards = [").unwrap();
             for v in v.rewards.as_slice() {
                 writeln!(s, "{{").unwrap();
                 // Members
-                writeln!(s, "    item = {};", v.item).unwrap();
-                writeln!(s, "    display_id = {};", v.display_id).unwrap();
-                writeln!(s, "    amount_of_rewards = {};", v.amount_of_rewards).unwrap();
+                writeln!(s, "            item = {};", v.item).unwrap();
+                writeln!(s, "            display_id = {};", v.display_id).unwrap();
+                writeln!(s, "            amount_of_rewards = {};", v.amount_of_rewards).unwrap();
 
                 writeln!(s, "    }},").unwrap();
             }
@@ -61,8 +61,8 @@ impl SMSG_LFG_PLAYER_INFO {
         for v in self.locked_dungeons.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    dungeon_entry = {};", v.dungeon_entry).unwrap();
-            writeln!(s, "    reason = {};", v.reason).unwrap();
+            writeln!(s, "        dungeon_entry = {};", v.dungeon_entry).unwrap();
+            writeln!(s, "        reason = {};", v.reason).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -70,22 +70,51 @@ impl SMSG_LFG_PLAYER_INFO {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 879_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 879_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_available_dungeons");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_available_dungeons", "    ");
+        if !self.available_dungeons.is_empty() {
+            writeln!(s, "    /* available_dungeons: LfgAvailableDungeon[amount_of_available_dungeons] start */").unwrap();
+            for (i, v) in self.available_dungeons.iter().enumerate() {
+                writeln!(s, "    /* available_dungeons: LfgAvailableDungeon[amount_of_available_dungeons] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "dungeon_entry", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "done", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_reward", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "xp_reward", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown1", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown2", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_rewards", "        ");
+                if !v.rewards.is_empty() {
+                    writeln!(s, "    /* rewards: LfgQuestReward[amount_of_rewards] start */").unwrap();
+                    for (i, v) in v.rewards.iter().enumerate() {
+                        writeln!(s, "    /* rewards: LfgQuestReward[amount_of_rewards] {i} start */").unwrap();
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "display_id", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_rewards", "            ");
+                        writeln!(s, "    /* rewards: LfgQuestReward[amount_of_rewards] {i} end */").unwrap();
+                    }
+                    writeln!(s, "    /* rewards: LfgQuestReward[amount_of_rewards] end */").unwrap();
+                }
+                writeln!(s, "    /* available_dungeons: LfgAvailableDungeon[amount_of_available_dungeons] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* available_dungeons: LfgAvailableDungeon[amount_of_available_dungeons] end */").unwrap();
+        }
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_locked_dungeons", "    ");
+        if !self.locked_dungeons.is_empty() {
+            writeln!(s, "    /* locked_dungeons: LfgJoinLockedDungeon[amount_of_locked_dungeons] start */").unwrap();
+            for (i, v) in self.locked_dungeons.iter().enumerate() {
+                writeln!(s, "    /* locked_dungeons: LfgJoinLockedDungeon[amount_of_locked_dungeons] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "dungeon_entry", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "reason", "        ");
+                writeln!(s, "    /* locked_dungeons: LfgJoinLockedDungeon[amount_of_locked_dungeons] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* locked_dungeons: LfgJoinLockedDungeon[amount_of_locked_dungeons] end */").unwrap();
         }
 
 
@@ -93,7 +122,7 @@ impl SMSG_LFG_PLAYER_INFO {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -101,6 +130,11 @@ impl SMSG_LFG_PLAYER_INFO {
 impl crate::private::Sealed for SMSG_LFG_PLAYER_INFO {}
 impl crate::Message for SMSG_LFG_PLAYER_INFO {
     const OPCODE: u32 = 0x036f;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_LFG_PLAYER_INFO::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

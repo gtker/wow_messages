@@ -37,7 +37,7 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_ATTACKERSTATEUPDATE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -54,11 +54,11 @@ impl SMSG_ATTACKERSTATEUPDATE {
         for v in self.damages.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    spell_school_mask = {};", v.spell_school_mask).unwrap();
+            writeln!(s, "        spell_school_mask = {};", v.spell_school_mask).unwrap();
             writeln!(s, "    {}", if v.damage_float.to_string().contains(".") { v.damage_float.to_string() } else { format!("{}.0", v.damage_float) }).unwrap();
-            writeln!(s, "    damage_uint = {};", v.damage_uint).unwrap();
-            writeln!(s, "    absorb = {};", v.absorb).unwrap();
-            writeln!(s, "    resist = {};", v.resist).unwrap();
+            writeln!(s, "        damage_uint = {};", v.damage_uint).unwrap();
+            writeln!(s, "        absorb = {};", v.absorb).unwrap();
+            writeln!(s, "        resist = {};", v.resist).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -70,30 +70,43 @@ impl SMSG_ATTACKERSTATEUPDATE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 330_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 330_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "hit_info");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "hit_info", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.attacker), "attacker", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.target), "target", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "total_damage", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_damages", "    ");
+        if !self.damages.is_empty() {
+            writeln!(s, "    /* damages: DamageInfo[amount_of_damages] start */").unwrap();
+            for (i, v) in self.damages.iter().enumerate() {
+                writeln!(s, "    /* damages: DamageInfo[amount_of_damages] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_school_mask", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "damage_float", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "damage_uint", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "absorb", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "resist", "        ");
+                writeln!(s, "    /* damages: DamageInfo[amount_of_damages] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* damages: DamageInfo[amount_of_damages] end */").unwrap();
         }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "damage_state", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown1", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "blocked_amount", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1.12\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -101,6 +114,11 @@ impl SMSG_ATTACKERSTATEUPDATE {
 impl crate::private::Sealed for SMSG_ATTACKERSTATEUPDATE {}
 impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
     const OPCODE: u32 = 0x014a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_ATTACKERSTATEUPDATE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

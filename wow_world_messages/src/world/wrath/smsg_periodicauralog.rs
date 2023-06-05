@@ -23,7 +23,7 @@ pub struct SMSG_PERIODICAURALOG {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_PERIODICAURALOG {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -39,7 +39,7 @@ impl SMSG_PERIODICAURALOG {
         for v in self.auras.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    aura_type = {};", crate::wrath::AuraType::try_from(v.aura_type.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        aura_type = {};", crate::wrath::AuraType::try_from(v.aura_type.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.aura_type {
                 crate::wrath::AuraLog_AuraType::PeriodicDamage {
                     absorb1,
@@ -49,12 +49,12 @@ impl SMSG_PERIODICAURALOG {
                     resisted,
                     school,
                 } => {
-                    writeln!(s, "    damage1 = {};", damage1).unwrap();
-                    writeln!(s, "    overkill_damage = {};", overkill_damage).unwrap();
-                    writeln!(s, "    school = {};", school.as_test_case_value()).unwrap();
-                    writeln!(s, "    absorb1 = {};", absorb1).unwrap();
-                    writeln!(s, "    resisted = {};", resisted).unwrap();
-                    writeln!(s, "    critical1 = {};", if *critical1 { "TRUE" } else { "FALSE" }).unwrap();
+                    writeln!(s, "        damage1 = {};", damage1).unwrap();
+                    writeln!(s, "        overkill_damage = {};", overkill_damage).unwrap();
+                    writeln!(s, "        school = {};", school.as_test_case_value()).unwrap();
+                    writeln!(s, "        absorb1 = {};", absorb1).unwrap();
+                    writeln!(s, "        resisted = {};", resisted).unwrap();
+                    writeln!(s, "        critical1 = {};", if *critical1 { "TRUE" } else { "FALSE" }).unwrap();
                 }
                 crate::wrath::AuraLog_AuraType::PeriodicHeal {
                     absorb2,
@@ -62,10 +62,10 @@ impl SMSG_PERIODICAURALOG {
                     damage2,
                     over_damage,
                 } => {
-                    writeln!(s, "    damage2 = {};", damage2).unwrap();
-                    writeln!(s, "    over_damage = {};", over_damage).unwrap();
-                    writeln!(s, "    absorb2 = {};", absorb2).unwrap();
-                    writeln!(s, "    critical2 = {};", if *critical2 { "TRUE" } else { "FALSE" }).unwrap();
+                    writeln!(s, "        damage2 = {};", damage2).unwrap();
+                    writeln!(s, "        over_damage = {};", over_damage).unwrap();
+                    writeln!(s, "        absorb2 = {};", absorb2).unwrap();
+                    writeln!(s, "        critical2 = {};", if *critical2 { "TRUE" } else { "FALSE" }).unwrap();
                 }
                 crate::wrath::AuraLog_AuraType::ObsModHealth {
                     absorb2,
@@ -73,25 +73,25 @@ impl SMSG_PERIODICAURALOG {
                     damage2,
                     over_damage,
                 } => {
-                    writeln!(s, "    damage2 = {};", damage2).unwrap();
-                    writeln!(s, "    over_damage = {};", over_damage).unwrap();
-                    writeln!(s, "    absorb2 = {};", absorb2).unwrap();
-                    writeln!(s, "    critical2 = {};", if *critical2 { "TRUE" } else { "FALSE" }).unwrap();
+                    writeln!(s, "        damage2 = {};", damage2).unwrap();
+                    writeln!(s, "        over_damage = {};", over_damage).unwrap();
+                    writeln!(s, "        absorb2 = {};", absorb2).unwrap();
+                    writeln!(s, "        critical2 = {};", if *critical2 { "TRUE" } else { "FALSE" }).unwrap();
                 }
                 crate::wrath::AuraLog_AuraType::PeriodicEnergize {
                     damage3,
                     misc_value1,
                 } => {
-                    writeln!(s, "    misc_value1 = {};", misc_value1).unwrap();
-                    writeln!(s, "    damage3 = {};", damage3).unwrap();
+                    writeln!(s, "        misc_value1 = {};", misc_value1).unwrap();
+                    writeln!(s, "        damage3 = {};", damage3).unwrap();
                 }
                 crate::wrath::AuraLog_AuraType::PeriodicManaLeech {
                     damage4,
                     gain_multiplier,
                     misc_value2,
                 } => {
-                    writeln!(s, "    misc_value2 = {};", misc_value2).unwrap();
-                    writeln!(s, "    damage4 = {};", damage4).unwrap();
+                    writeln!(s, "        misc_value2 = {};", misc_value2).unwrap();
+                    writeln!(s, "        damage4 = {};", damage4).unwrap();
                     writeln!(s, "    {}", if gain_multiplier.to_string().contains(".") { gain_multiplier.to_string() } else { format!("{}.0", gain_multiplier) }).unwrap();
                 }
                 crate::wrath::AuraLog_AuraType::PeriodicDamagePercent {
@@ -102,12 +102,12 @@ impl SMSG_PERIODICAURALOG {
                     resisted,
                     school,
                 } => {
-                    writeln!(s, "    damage1 = {};", damage1).unwrap();
-                    writeln!(s, "    overkill_damage = {};", overkill_damage).unwrap();
-                    writeln!(s, "    school = {};", school.as_test_case_value()).unwrap();
-                    writeln!(s, "    absorb1 = {};", absorb1).unwrap();
-                    writeln!(s, "    resisted = {};", resisted).unwrap();
-                    writeln!(s, "    critical1 = {};", if *critical1 { "TRUE" } else { "FALSE" }).unwrap();
+                    writeln!(s, "        damage1 = {};", damage1).unwrap();
+                    writeln!(s, "        overkill_damage = {};", overkill_damage).unwrap();
+                    writeln!(s, "        school = {};", school.as_test_case_value()).unwrap();
+                    writeln!(s, "        absorb1 = {};", absorb1).unwrap();
+                    writeln!(s, "        resisted = {};", resisted).unwrap();
+                    writeln!(s, "        critical1 = {};", if *critical1 { "TRUE" } else { "FALSE" }).unwrap();
                 }
                 _ => {}
             }
@@ -119,21 +119,98 @@ impl SMSG_PERIODICAURALOG {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 590_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 590_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.target), "target", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.caster), "caster", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "spell", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_auras", "    ");
+        if !self.auras.is_empty() {
+            writeln!(s, "    /* auras: AuraLog[amount_of_auras] start */").unwrap();
+            for (i, v) in self.auras.iter().enumerate() {
+                writeln!(s, "    /* auras: AuraLog[amount_of_auras] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "aura_type", "        ");
+                match &v.aura_type {
+                    crate::wrath::AuraLog_AuraType::PeriodicDamage {
+                        absorb1,
+                        critical1,
+                        damage1,
+                        overkill_damage,
+                        resisted,
+                        school,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "damage1", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "overkill_damage", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "school", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "absorb1", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "resisted", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "critical1", "        ");
+                    }
+                    crate::wrath::AuraLog_AuraType::PeriodicHeal {
+                        absorb2,
+                        critical2,
+                        damage2,
+                        over_damage,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "damage2", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "over_damage", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "absorb2", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "critical2", "        ");
+                    }
+                    crate::wrath::AuraLog_AuraType::ObsModHealth {
+                        absorb2,
+                        critical2,
+                        damage2,
+                        over_damage,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "damage2", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "over_damage", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "absorb2", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "critical2", "        ");
+                    }
+                    crate::wrath::AuraLog_AuraType::PeriodicEnergize {
+                        damage3,
+                        misc_value1,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "misc_value1", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "damage3", "        ");
+                    }
+                    crate::wrath::AuraLog_AuraType::PeriodicManaLeech {
+                        damage4,
+                        gain_multiplier,
+                        misc_value2,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "misc_value2", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "damage4", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "gain_multiplier", "        ");
+                    }
+                    crate::wrath::AuraLog_AuraType::PeriodicDamagePercent {
+                        absorb1,
+                        critical1,
+                        damage1,
+                        overkill_damage,
+                        resisted,
+                        school,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "damage1", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "overkill_damage", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "school", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "absorb1", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "resisted", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "critical1", "        ");
+                    }
+                    _ => {}
+                }
+
+                writeln!(s, "    /* auras: AuraLog[amount_of_auras] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* auras: AuraLog[amount_of_auras] end */").unwrap();
         }
 
 
@@ -141,7 +218,7 @@ impl SMSG_PERIODICAURALOG {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -149,6 +226,11 @@ impl SMSG_PERIODICAURALOG {
 impl crate::private::Sealed for SMSG_PERIODICAURALOG {}
 impl crate::Message for SMSG_PERIODICAURALOG {
     const OPCODE: u32 = 0x024e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_PERIODICAURALOG::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

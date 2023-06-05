@@ -23,7 +23,7 @@ pub struct SMSG_PETITION_SHOW_SIGNATURES {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_PETITION_SHOW_SIGNATURES {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -39,8 +39,8 @@ impl SMSG_PETITION_SHOW_SIGNATURES {
         for v in self.signatures.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    signer = {};", v.signer.guid()).unwrap();
-            writeln!(s, "    unknown1 = {};", v.unknown1).unwrap();
+            writeln!(s, "        signer = {};", v.signer.guid()).unwrap();
+            writeln!(s, "        unknown1 = {};", v.unknown1).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -48,22 +48,27 @@ impl SMSG_PETITION_SHOW_SIGNATURES {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 447_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 447_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "item");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "item", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "owner", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "petition", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_signatures", "    ");
+        if !self.signatures.is_empty() {
+            writeln!(s, "    /* signatures: PetitionSignature[amount_of_signatures] start */").unwrap();
+            for (i, v) in self.signatures.iter().enumerate() {
+                writeln!(s, "    /* signatures: PetitionSignature[amount_of_signatures] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "signer", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown1", "        ");
+                writeln!(s, "    /* signatures: PetitionSignature[amount_of_signatures] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* signatures: PetitionSignature[amount_of_signatures] end */").unwrap();
         }
 
 
@@ -71,7 +76,7 @@ impl SMSG_PETITION_SHOW_SIGNATURES {
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -79,6 +84,11 @@ impl SMSG_PETITION_SHOW_SIGNATURES {
 impl crate::private::Sealed for SMSG_PETITION_SHOW_SIGNATURES {}
 impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
     const OPCODE: u32 = 0x01bf;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_PETITION_SHOW_SIGNATURES::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

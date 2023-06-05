@@ -18,7 +18,7 @@ pub struct SMSG_WHO {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_WHO {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -32,13 +32,13 @@ impl SMSG_WHO {
         for v in self.players.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    name = \"{}\";", v.name).unwrap();
-            writeln!(s, "    guild = \"{}\";", v.guild).unwrap();
-            writeln!(s, "    level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "    class = {};", v.class.as_test_case_value()).unwrap();
-            writeln!(s, "    race = {};", v.race.as_test_case_value()).unwrap();
-            writeln!(s, "    area = {};", v.area.as_test_case_value()).unwrap();
-            writeln!(s, "    party_status = {};", v.party_status).unwrap();
+            writeln!(s, "        name = \"{}\";", v.name).unwrap();
+            writeln!(s, "        guild = \"{}\";", v.guild).unwrap();
+            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "        class = {};", v.class.as_test_case_value()).unwrap();
+            writeln!(s, "        race = {};", v.race.as_test_case_value()).unwrap();
+            writeln!(s, "        area = {};", v.area.as_test_case_value()).unwrap();
+            writeln!(s, "        party_status = {};", v.party_status).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -46,22 +46,30 @@ impl SMSG_WHO {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 99_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 99_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "listed_players");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "listed_players", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "online_players", "    ");
+        if !self.players.is_empty() {
+            writeln!(s, "    /* players: WhoPlayer[listed_players] start */").unwrap();
+            for (i, v) in self.players.iter().enumerate() {
+                writeln!(s, "    /* players: WhoPlayer[listed_players] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, v.name.len() + 1, "name", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, v.guild.len() + 1, "guild", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "level", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "class", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "race", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "party_status", "        ");
+                writeln!(s, "    /* players: WhoPlayer[listed_players] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* players: WhoPlayer[listed_players] end */").unwrap();
         }
 
 
@@ -69,7 +77,7 @@ impl SMSG_WHO {
         writeln!(s, "    versions = \"1.12\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -77,6 +85,11 @@ impl SMSG_WHO {
 impl crate::private::Sealed for SMSG_WHO {}
 impl crate::Message for SMSG_WHO {
     const OPCODE: u32 = 0x0063;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_WHO::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

@@ -11,7 +11,7 @@ pub struct SMSG_CALENDAR_CLEAR_PENDING_ACTION {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_CALENDAR_CLEAR_PENDING_ACTION {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -22,12 +22,10 @@ impl SMSG_CALENDAR_CLEAR_PENDING_ACTION {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 4_u16.to_be_bytes();
+        let [a, b] = 2_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 1211_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 1211_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
@@ -38,7 +36,7 @@ impl SMSG_CALENDAR_CLEAR_PENDING_ACTION {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -46,6 +44,11 @@ impl SMSG_CALENDAR_CLEAR_PENDING_ACTION {
 impl crate::private::Sealed for SMSG_CALENDAR_CLEAR_PENDING_ACTION {}
 impl crate::Message for SMSG_CALENDAR_CLEAR_PENDING_ACTION {
     const OPCODE: u32 = 0x04bb;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_CALENDAR_CLEAR_PENDING_ACTION::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         0

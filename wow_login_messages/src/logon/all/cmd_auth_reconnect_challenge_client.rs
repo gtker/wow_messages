@@ -61,7 +61,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
 
 #[cfg(feature = "print-testcase")]
 impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
 
         let mut s = String::new();
@@ -72,10 +72,10 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
         // version: Version
         writeln!(s, "    version = {{").unwrap();
         // Members
-        writeln!(s, "    major = {};", self.version.major).unwrap();
-        writeln!(s, "    minor = {};", self.version.minor).unwrap();
-        writeln!(s, "    patch = {};", self.version.patch).unwrap();
-        writeln!(s, "    build = {};", self.version.build).unwrap();
+        writeln!(s, "        major = {};", self.version.major).unwrap();
+        writeln!(s, "        minor = {};", self.version.minor).unwrap();
+        writeln!(s, "        patch = {};", self.version.patch).unwrap();
+        writeln!(s, "        build = {};", self.version.build).unwrap();
 
         writeln!(s, "    }};").unwrap();
         writeln!(s, "    platform = {};", self.platform.as_test_case_value()).unwrap();
@@ -87,27 +87,33 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        // Bytes
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
         writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "protocol_version");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "protocol_version", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "size", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "game_name", "    ");
+        writeln!(s, "    /* version: Version start */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "major", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "minor", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "patch", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "build", "        ");
+        writeln!(s, "    /* version: Version end */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "platform", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "os", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "locale", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "utc_timezone_offset", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "client_ip_address", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.account_name.len() + 1, "account_name", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    login_versions = \"*\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -156,6 +162,11 @@ impl crate::private::Sealed for CMD_AUTH_RECONNECT_CHALLENGE_Client {}
 
 impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
     const OPCODE: u8 = 0x02;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMD_AUTH_RECONNECT_CHALLENGE_Client::to_test_case_string(self)
+    }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // protocol_version: ProtocolVersion

@@ -30,7 +30,7 @@ pub struct SMSG_GOSSIP_MESSAGE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_GOSSIP_MESSAGE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -46,12 +46,12 @@ impl SMSG_GOSSIP_MESSAGE {
         for v in self.gossips.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    id = {};", v.id).unwrap();
-            writeln!(s, "    item_icon = {};", v.item_icon).unwrap();
-            writeln!(s, "    coded = {};", if v.coded { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "    money_required = {};", v.money_required.as_int()).unwrap();
-            writeln!(s, "    message = \"{}\";", v.message).unwrap();
-            writeln!(s, "    accept_text = \"{}\";", v.accept_text).unwrap();
+            writeln!(s, "        id = {};", v.id).unwrap();
+            writeln!(s, "        item_icon = {};", v.item_icon).unwrap();
+            writeln!(s, "        coded = {};", if v.coded { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "        money_required = {};", v.money_required.as_int()).unwrap();
+            writeln!(s, "        message = \"{}\";", v.message).unwrap();
+            writeln!(s, "        accept_text = \"{}\";", v.accept_text).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -61,10 +61,10 @@ impl SMSG_GOSSIP_MESSAGE {
         for v in self.quests.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    quest_id = {};", v.quest_id).unwrap();
-            writeln!(s, "    quest_icon = {};", v.quest_icon).unwrap();
-            writeln!(s, "    level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "    title = \"{}\";", v.title).unwrap();
+            writeln!(s, "        quest_id = {};", v.quest_id).unwrap();
+            writeln!(s, "        quest_icon = {};", v.quest_icon).unwrap();
+            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "        title = \"{}\";", v.title).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -72,22 +72,44 @@ impl SMSG_GOSSIP_MESSAGE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 381_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 381_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "menu_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "title_text_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_gossip_items", "    ");
+        if !self.gossips.is_empty() {
+            writeln!(s, "    /* gossips: GossipItem[amount_of_gossip_items] start */").unwrap();
+            for (i, v) in self.gossips.iter().enumerate() {
+                writeln!(s, "    /* gossips: GossipItem[amount_of_gossip_items] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "item_icon", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "coded", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "money_required", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, v.message.len() + 1, "message", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, v.accept_text.len() + 1, "accept_text", "        ");
+                writeln!(s, "    /* gossips: GossipItem[amount_of_gossip_items] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* gossips: GossipItem[amount_of_gossip_items] end */").unwrap();
+        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_quests", "    ");
+        if !self.quests.is_empty() {
+            writeln!(s, "    /* quests: QuestItem[amount_of_quests] start */").unwrap();
+            for (i, v) in self.quests.iter().enumerate() {
+                writeln!(s, "    /* quests: QuestItem[amount_of_quests] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_icon", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "level", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, v.title.len() + 1, "title", "        ");
+                writeln!(s, "    /* quests: QuestItem[amount_of_quests] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* quests: QuestItem[amount_of_quests] end */").unwrap();
         }
 
 
@@ -95,7 +117,7 @@ impl SMSG_GOSSIP_MESSAGE {
         writeln!(s, "    versions = \"2.4\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -103,6 +125,11 @@ impl SMSG_GOSSIP_MESSAGE {
 impl crate::private::Sealed for SMSG_GOSSIP_MESSAGE {}
 impl crate::Message for SMSG_GOSSIP_MESSAGE {
     const OPCODE: u32 = 0x017d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_GOSSIP_MESSAGE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

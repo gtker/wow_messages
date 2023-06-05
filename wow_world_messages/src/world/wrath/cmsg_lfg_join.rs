@@ -25,7 +25,7 @@ pub struct CMSG_LFG_JOIN {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_LFG_JOIN {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -52,30 +52,35 @@ impl CMSG_LFG_JOIN {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 860_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 860_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "roles");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "roles", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "no_partial_clear", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "achievements", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_slots", "    ");
+        if !self.slots.is_empty() {
+            writeln!(s, "    /* slots: u32[amount_of_slots] start */").unwrap();
+            for (i, v) in self.slots.iter().enumerate() {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("slots {i}"), "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* slots: u32[amount_of_slots] end */").unwrap();
         }
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_needs", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.needs.len(), "needs", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.comment.len() + 1, "comment", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -83,6 +88,11 @@ impl CMSG_LFG_JOIN {
 impl crate::private::Sealed for CMSG_LFG_JOIN {}
 impl crate::Message for CMSG_LFG_JOIN {
     const OPCODE: u32 = 0x035c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_LFG_JOIN::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

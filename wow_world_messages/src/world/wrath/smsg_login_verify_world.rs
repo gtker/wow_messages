@@ -25,7 +25,7 @@ pub struct SMSG_LOGIN_VERIFY_WORLD {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_LOGIN_VERIFY_WORLD {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -46,30 +46,28 @@ impl SMSG_LOGIN_VERIFY_WORLD {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 24_u16.to_be_bytes();
+        let [a, b] = 22_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 566_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 566_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "map");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "map", "    ");
+        writeln!(s, "    /* position: Vector3d start */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "        ");
+        writeln!(s, "    /* position: Vector3d end */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -77,6 +75,11 @@ impl SMSG_LOGIN_VERIFY_WORLD {
 impl crate::private::Sealed for SMSG_LOGIN_VERIFY_WORLD {}
 impl crate::Message for SMSG_LOGIN_VERIFY_WORLD {
     const OPCODE: u32 = 0x0236;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_LOGIN_VERIFY_WORLD::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         20

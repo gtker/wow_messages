@@ -24,7 +24,7 @@ pub struct MSG_GUILD_PERMISSIONS_Server {
 
 #[cfg(feature = "print-testcase")]
 impl MSG_GUILD_PERMISSIONS_Server {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -40,8 +40,8 @@ impl MSG_GUILD_PERMISSIONS_Server {
         for v in self.bank_tabs.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    flags = {};", v.flags).unwrap();
-            writeln!(s, "    stacks_per_day = {};", v.stacks_per_day).unwrap();
+            writeln!(s, "        flags = {};", v.flags).unwrap();
+            writeln!(s, "        stacks_per_day = {};", v.stacks_per_day).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -49,30 +49,33 @@ impl MSG_GUILD_PERMISSIONS_Server {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 65_u16.to_be_bytes();
+        let [a, b] = 63_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 1020_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 1020_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "id");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "rights", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "gold_limit_per_day", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "purchased_bank_tabs", "    ");
+        writeln!(s, "    /* bank_tabs: BankTab[6] start */").unwrap();
+        for (i, v) in self.bank_tabs.iter().enumerate() {
+            writeln!(s, "    /* bank_tabs: BankTab[6] {i} start */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "flags", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "stacks_per_day", "        ");
+            writeln!(s, "    /* bank_tabs: BankTab[6] {i} end */").unwrap();
         }
+        writeln!(s, "    /* bank_tabs: BankTab[6] end */").unwrap();
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"2.4.3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -80,6 +83,11 @@ impl MSG_GUILD_PERMISSIONS_Server {
 impl crate::private::Sealed for MSG_GUILD_PERMISSIONS_Server {}
 impl crate::Message for MSG_GUILD_PERMISSIONS_Server {
     const OPCODE: u32 = 0x03fc;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        MSG_GUILD_PERMISSIONS_Server::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         61

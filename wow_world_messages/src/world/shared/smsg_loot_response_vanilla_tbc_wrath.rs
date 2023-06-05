@@ -29,7 +29,7 @@ pub struct SMSG_LOOT_RESPONSE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_LOOT_RESPONSE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -54,9 +54,9 @@ impl SMSG_LOOT_RESPONSE {
         for v in self.items.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    index = {};", v.index).unwrap();
-            writeln!(s, "    item = {};", v.item).unwrap();
-            writeln!(s, "    ty = {};", v.ty.as_test_case_value()).unwrap();
+            writeln!(s, "        index = {};", v.index).unwrap();
+            writeln!(s, "        item = {};", v.item).unwrap();
+            writeln!(s, "        ty = {};", v.ty.as_test_case_value()).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -64,22 +64,37 @@ impl SMSG_LOOT_RESPONSE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 352_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 352_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "loot_method", "    ");
+        match &self.loot_method {
+            crate::vanilla::SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
+                loot_error,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "loot_error", "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            _ => {}
+        }
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "gold", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_items", "    ");
+        if !self.items.is_empty() {
+            writeln!(s, "    /* items: LootItem[amount_of_items] start */").unwrap();
+            for (i, v) in self.items.iter().enumerate() {
+                writeln!(s, "    /* items: LootItem[amount_of_items] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "index", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "ty", "        ");
+                writeln!(s, "    /* items: LootItem[amount_of_items] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* items: LootItem[amount_of_items] end */").unwrap();
         }
 
 
@@ -87,7 +102,7 @@ impl SMSG_LOOT_RESPONSE {
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -95,6 +110,11 @@ impl SMSG_LOOT_RESPONSE {
 impl crate::private::Sealed for SMSG_LOOT_RESPONSE {}
 impl crate::Message for SMSG_LOOT_RESPONSE {
     const OPCODE: u32 = 0x0160;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_LOOT_RESPONSE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

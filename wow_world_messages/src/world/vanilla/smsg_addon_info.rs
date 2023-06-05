@@ -15,7 +15,7 @@ pub struct SMSG_ADDON_INFO {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_ADDON_INFO {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -27,19 +27,19 @@ impl SMSG_ADDON_INFO {
         for v in self.addons.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    addon_type = {};", v.addon_type.as_test_case_value()).unwrap();
-            writeln!(s, "    info_block = {};", crate::vanilla::InfoBlock::try_from(v.info_block.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        addon_type = {};", v.addon_type.as_test_case_value()).unwrap();
+            writeln!(s, "        info_block = {};", crate::vanilla::InfoBlock::try_from(v.info_block.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.info_block {
                 crate::vanilla::Addon_InfoBlock::Available {
                     key_version,
                     update_available_flag,
                 } => {
-                    writeln!(s, "    key_version = {};", crate::vanilla::KeyVersion::try_from(key_version.as_int()).unwrap().as_test_case_value()).unwrap();
+                    writeln!(s, "        key_version = {};", crate::vanilla::KeyVersion::try_from(key_version.as_int()).unwrap().as_test_case_value()).unwrap();
                     match &key_version {
                         crate::vanilla::Addon_KeyVersion::One {
                             public_key,
                         } => {
-                            write!(s, "    public_key = [").unwrap();
+                            write!(s, "        public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
@@ -48,7 +48,7 @@ impl SMSG_ADDON_INFO {
                         crate::vanilla::Addon_KeyVersion::Two {
                             public_key,
                         } => {
-                            write!(s, "    public_key = [").unwrap();
+                            write!(s, "        public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
@@ -57,7 +57,7 @@ impl SMSG_ADDON_INFO {
                         crate::vanilla::Addon_KeyVersion::Three {
                             public_key,
                         } => {
-                            write!(s, "    public_key = [").unwrap();
+                            write!(s, "        public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
@@ -66,7 +66,7 @@ impl SMSG_ADDON_INFO {
                         crate::vanilla::Addon_KeyVersion::Four {
                             public_key,
                         } => {
-                            write!(s, "    public_key = [").unwrap();
+                            write!(s, "        public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
@@ -75,7 +75,7 @@ impl SMSG_ADDON_INFO {
                         crate::vanilla::Addon_KeyVersion::Five {
                             public_key,
                         } => {
-                            write!(s, "    public_key = [").unwrap();
+                            write!(s, "        public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
@@ -84,7 +84,7 @@ impl SMSG_ADDON_INFO {
                         crate::vanilla::Addon_KeyVersion::Six {
                             public_key,
                         } => {
-                            write!(s, "    public_key = [").unwrap();
+                            write!(s, "        public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
@@ -93,7 +93,7 @@ impl SMSG_ADDON_INFO {
                         crate::vanilla::Addon_KeyVersion::Seven {
                             public_key,
                         } => {
-                            write!(s, "    public_key = [").unwrap();
+                            write!(s, "        public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
@@ -102,7 +102,7 @@ impl SMSG_ADDON_INFO {
                         crate::vanilla::Addon_KeyVersion::Eight {
                             public_key,
                         } => {
-                            write!(s, "    public_key = [").unwrap();
+                            write!(s, "        public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
@@ -111,7 +111,7 @@ impl SMSG_ADDON_INFO {
                         crate::vanilla::Addon_KeyVersion::Nine {
                             public_key,
                         } => {
-                            write!(s, "    public_key = [").unwrap();
+                            write!(s, "        public_key = [").unwrap();
                             for v in public_key.as_slice() {
                                 write!(s, "{v:#04X}, ").unwrap();
                             }
@@ -120,17 +120,17 @@ impl SMSG_ADDON_INFO {
                         _ => {}
                     }
 
-                    writeln!(s, "    update_available_flag = {};", update_available_flag).unwrap();
+                    writeln!(s, "        update_available_flag = {};", update_available_flag).unwrap();
                 }
                 _ => {}
             }
 
-            writeln!(s, "    url_info = {};", crate::vanilla::UrlInfo::try_from(v.url_info.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        url_info = {};", crate::vanilla::UrlInfo::try_from(v.url_info.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.url_info {
                 crate::vanilla::Addon_UrlInfo::Available {
                     url,
                 } => {
-                    writeln!(s, "    url = \"{}\";", url).unwrap();
+                    writeln!(s, "        url = \"{}\";", url).unwrap();
                 }
                 _ => {}
             }
@@ -142,21 +142,93 @@ impl SMSG_ADDON_INFO {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 751_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 751_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        if !self.addons.is_empty() {
+            writeln!(s, "    /* addons: Addon[-] start */").unwrap();
+            for (i, v) in self.addons.iter().enumerate() {
+                writeln!(s, "    /* addons: Addon[-] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "addon_type", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "info_block", "        ");
+                match &v.info_block {
+                    crate::vanilla::Addon_InfoBlock::Available {
+                        key_version,
+                        update_available_flag,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "key_version", "        ");
+                        match &key_version {
+                            crate::vanilla::Addon_KeyVersion::One {
+                                public_key,
+                            } => {
+                                crate::util::write_bytes(&mut s, &mut bytes, public_key.len(), "public_key", "        ");
+                            }
+                            crate::vanilla::Addon_KeyVersion::Two {
+                                public_key,
+                            } => {
+                                crate::util::write_bytes(&mut s, &mut bytes, public_key.len(), "public_key", "        ");
+                            }
+                            crate::vanilla::Addon_KeyVersion::Three {
+                                public_key,
+                            } => {
+                                crate::util::write_bytes(&mut s, &mut bytes, public_key.len(), "public_key", "        ");
+                            }
+                            crate::vanilla::Addon_KeyVersion::Four {
+                                public_key,
+                            } => {
+                                crate::util::write_bytes(&mut s, &mut bytes, public_key.len(), "public_key", "        ");
+                            }
+                            crate::vanilla::Addon_KeyVersion::Five {
+                                public_key,
+                            } => {
+                                crate::util::write_bytes(&mut s, &mut bytes, public_key.len(), "public_key", "        ");
+                            }
+                            crate::vanilla::Addon_KeyVersion::Six {
+                                public_key,
+                            } => {
+                                crate::util::write_bytes(&mut s, &mut bytes, public_key.len(), "public_key", "        ");
+                            }
+                            crate::vanilla::Addon_KeyVersion::Seven {
+                                public_key,
+                            } => {
+                                crate::util::write_bytes(&mut s, &mut bytes, public_key.len(), "public_key", "        ");
+                            }
+                            crate::vanilla::Addon_KeyVersion::Eight {
+                                public_key,
+                            } => {
+                                crate::util::write_bytes(&mut s, &mut bytes, public_key.len(), "public_key", "        ");
+                            }
+                            crate::vanilla::Addon_KeyVersion::Nine {
+                                public_key,
+                            } => {
+                                crate::util::write_bytes(&mut s, &mut bytes, public_key.len(), "public_key", "        ");
+                            }
+                            _ => {}
+                        }
+
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "update_available_flag", "        ");
+                    }
+                    _ => {}
+                }
+
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "url_info", "        ");
+                match &v.url_info {
+                    crate::vanilla::Addon_UrlInfo::Available {
+                        url,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, url.len() + 1, "url", "        ");
+                    }
+                    _ => {}
+                }
+
+                writeln!(s, "    /* addons: Addon[-] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* addons: Addon[-] end */").unwrap();
         }
 
 
@@ -164,7 +236,7 @@ impl SMSG_ADDON_INFO {
         writeln!(s, "    versions = \"1.12\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -172,6 +244,11 @@ impl SMSG_ADDON_INFO {
 impl crate::private::Sealed for SMSG_ADDON_INFO {}
 impl crate::Message for SMSG_ADDON_INFO {
     const OPCODE: u32 = 0x02ef;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_ADDON_INFO::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

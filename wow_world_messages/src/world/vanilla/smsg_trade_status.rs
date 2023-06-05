@@ -30,7 +30,7 @@ pub struct SMSG_TRADE_STATUS {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_TRADE_STATUS {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -70,30 +70,50 @@ impl SMSG_TRADE_STATUS {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 288_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 288_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "status");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "status", "    ");
+        match &self.status {
+            crate::vanilla::SMSG_TRADE_STATUS_TradeStatus::BeginTrade {
+                unknown1,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "unknown1", "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            crate::vanilla::SMSG_TRADE_STATUS_TradeStatus::CloseWindow {
+                inventory_result,
+                item_limit_category_id,
+                target_error,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "inventory_result", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "target_error", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_limit_category_id", "    ");
+            }
+            crate::vanilla::SMSG_TRADE_STATUS_TradeStatus::OnlyConjured {
+                slot,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "slot", "    ");
+            }
+            crate::vanilla::SMSG_TRADE_STATUS_TradeStatus::NotOnTaplist {
+                slot,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "slot", "    ");
+            }
+            _ => {}
         }
+
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1.12\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -101,6 +121,11 @@ impl SMSG_TRADE_STATUS {
 impl crate::private::Sealed for SMSG_TRADE_STATUS {}
 impl crate::Message for SMSG_TRADE_STATUS {
     const OPCODE: u32 = 0x0120;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_TRADE_STATUS::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

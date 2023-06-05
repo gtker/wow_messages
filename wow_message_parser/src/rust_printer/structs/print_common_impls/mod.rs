@@ -10,7 +10,8 @@ use crate::rust_printer::rust_view::rust_object::RustObject;
 use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::rust_printer::structs::test_case_string::print_to_testcase;
 use crate::rust_printer::{
-    ImplType, Writer, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
+    ImplType, Writer, CFG_TESTCASE, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR,
+    SERVER_MESSAGE_TRAIT_NAME,
 };
 use crate::CONTAINER_SELF_SIZE_FIELD;
 
@@ -682,41 +683,42 @@ pub(crate) fn impl_world_message(
     read_function: impl Fn(&mut Writer, ImplType),
     sizes: Option<Sizes>,
 ) {
-    s.wln(format!(
-        "impl crate::private::Sealed for {} {{}}",
-        type_name.as_ref()
-    ));
+    let type_name = type_name.as_ref();
 
-    s.open_curly(format!("impl crate::Message for {}", type_name.as_ref()));
-    s.wln(format!("const OPCODE: u32 = {opcode:#06x};"));
-    s.newline();
+    s.wln(format!("impl crate::private::Sealed for {type_name} {{}}",));
 
-    s.open_curly("fn size_without_header(&self) -> u32");
-    if sizes.is_some() && sizes.unwrap().is_constant().is_some() {
-        s.wln(format!("{}", sizes.unwrap().maximum()));
-    } else {
-        s.wln("self.size() as u32");
-    }
-    s.closing_curly(); // size_without_header
-    s.newline();
+    s.impl_for("crate::Message", type_name, |s| {
+        s.wln(format!("const OPCODE: u32 = {opcode:#06x};"));
+        s.newline();
 
-    s.open_curly("fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error>");
+        s.wln(CFG_TESTCASE);
+        s.bodyn("fn to_test_case_string(&self) -> Option<String>", |s| {
+            s.wln(format!("{type_name}::to_test_case_string(self)"))
+        });
 
-    write_function(s, ImplType::Std);
+        s.bodyn("fn size_without_header(&self) -> u32", |s| {
+            if sizes.is_some() && sizes.unwrap().is_constant().is_some() {
+                s.wln(format!("{}", sizes.unwrap().maximum()));
+            } else {
+                s.wln("self.size() as u32");
+            }
+        });
 
-    s.wln("Ok(())");
+        s.bodyn(
+            "fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error>",
+            |s| {
+                write_function(s, ImplType::Std);
 
-    s.closing_curly();
+                s.wln("Ok(())");
+            },
+        );
 
-    s.open_curly(format!(
-        "fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, {PARSE_ERROR}>",
-    ));
-
-    read_function(s, ImplType::Std);
-
-    s.closing_curly_newline(); // read_body
-
-    s.closing_curly(); // impl Message
+        s.bodyn(format!(
+            "fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, {PARSE_ERROR}>",
+        ), |s| {
+            read_function(s, ImplType::Std);
+        });
+    });
 }
 
 pub(crate) fn impl_read_and_writable_login(
@@ -728,21 +730,22 @@ pub(crate) fn impl_read_and_writable_login(
     write_function: impl Fn(&mut Writer, ImplType),
     sizes: Sizes,
 ) {
-    s.write_into_vec(&type_name, write_function, "pub(crate)");
+    let type_name = type_name.as_ref();
+    let trait_to_impl = trait_to_impl.as_ref();
 
-    s.wln(format!(
-        "impl crate::private::Sealed for {} {{}}",
-        type_name.as_ref()
-    ));
+    s.write_into_vec(type_name, write_function, "pub(crate)");
+
+    s.wln(format!("impl crate::private::Sealed for {type_name} {{}}",));
     s.newline();
 
-    s.open_curly(format!(
-        "impl {} for {}",
-        trait_to_impl.as_ref(),
-        type_name.as_ref(),
-    ));
+    s.open_curly(format!("impl {trait_to_impl} for {type_name}",));
     s.wln(format!("const OPCODE: u8 = {opcode:#04x};"));
     s.newline();
+
+    s.wln(CFG_TESTCASE);
+    s.bodyn("fn to_test_case_string(&self) -> Option<String>", |s| {
+        s.wln(format!("{type_name}::to_test_case_string(self)"))
+    });
 
     for it in ImplType::types() {
         s.print_read_decl(it);

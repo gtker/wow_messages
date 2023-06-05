@@ -90,7 +90,7 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_QUESTGIVER_QUEST_DETAILS {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -113,9 +113,9 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         for v in self.choice_item_rewards.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    item = {};", v.item).unwrap();
-            writeln!(s, "    item_count = {};", v.item_count).unwrap();
-            writeln!(s, "    display_id = {};", v.display_id).unwrap();
+            writeln!(s, "        item = {};", v.item).unwrap();
+            writeln!(s, "        item_count = {};", v.item_count).unwrap();
+            writeln!(s, "        display_id = {};", v.display_id).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -125,9 +125,9 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         for v in self.item_rewards.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    item = {};", v.item).unwrap();
-            writeln!(s, "    item_count = {};", v.item_count).unwrap();
-            writeln!(s, "    display_id = {};", v.display_id).unwrap();
+            writeln!(s, "        item = {};", v.item).unwrap();
+            writeln!(s, "        item_count = {};", v.item_count).unwrap();
+            writeln!(s, "        display_id = {};", v.display_id).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -162,8 +162,8 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         for v in self.emotes.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    emote = {};", v.emote).unwrap();
-            writeln!(s, "    emote_delay = {};", v.emote_delay.as_millis()).unwrap();
+            writeln!(s, "        emote = {};", v.emote).unwrap();
+            writeln!(s, "        emote_delay = {};", v.emote_delay.as_millis()).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -171,22 +171,83 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 392_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 392_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid2", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.title.len() + 1, "title", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.details.len() + 1, "details", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.objectives.len() + 1, "objectives", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "auto_finish", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_flags", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "suggested_players", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "is_finished", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_choice_item_rewards", "    ");
+        if !self.choice_item_rewards.is_empty() {
+            writeln!(s, "    /* choice_item_rewards: QuestGiverReward[amount_of_choice_item_rewards] start */").unwrap();
+            for (i, v) in self.choice_item_rewards.iter().enumerate() {
+                writeln!(s, "    /* choice_item_rewards: QuestGiverReward[amount_of_choice_item_rewards] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "display_id", "        ");
+                writeln!(s, "    /* choice_item_rewards: QuestGiverReward[amount_of_choice_item_rewards] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* choice_item_rewards: QuestGiverReward[amount_of_choice_item_rewards] end */").unwrap();
+        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_item_rewards", "    ");
+        if !self.item_rewards.is_empty() {
+            writeln!(s, "    /* item_rewards: QuestGiverReward[amount_of_item_rewards] start */").unwrap();
+            for (i, v) in self.item_rewards.iter().enumerate() {
+                writeln!(s, "    /* item_rewards: QuestGiverReward[amount_of_item_rewards] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "display_id", "        ");
+                writeln!(s, "    /* item_rewards: QuestGiverReward[amount_of_item_rewards] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* item_rewards: QuestGiverReward[amount_of_item_rewards] end */").unwrap();
+        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "money_reward", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "experience_reward", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "honor_reward", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "honor_reward_multiplier", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "reward_spell", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "casted_spell", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "title_reward", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "talent_reward", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "arena_point_reward", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown2", "    ");
+        writeln!(s, "    /* reward_factions: u32[5] start */").unwrap();
+        for (i, v) in self.reward_factions.iter().enumerate() {
+            crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("reward_factions {i}"), "    ");
+        }
+        writeln!(s, "    /* reward_factions: u32[5] end */").unwrap();
+        writeln!(s, "    /* reward_reputations: u32[5] start */").unwrap();
+        for (i, v) in self.reward_reputations.iter().enumerate() {
+            crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("reward_reputations {i}"), "    ");
+        }
+        writeln!(s, "    /* reward_reputations: u32[5] end */").unwrap();
+        writeln!(s, "    /* reward_reputations_override: u32[5] start */").unwrap();
+        for (i, v) in self.reward_reputations_override.iter().enumerate() {
+            crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("reward_reputations_override {i}"), "    ");
+        }
+        writeln!(s, "    /* reward_reputations_override: u32[5] end */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_emotes", "    ");
+        if !self.emotes.is_empty() {
+            writeln!(s, "    /* emotes: QuestDetailsEmote[amount_of_emotes] start */").unwrap();
+            for (i, v) in self.emotes.iter().enumerate() {
+                writeln!(s, "    /* emotes: QuestDetailsEmote[amount_of_emotes] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "emote", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "emote_delay", "        ");
+                writeln!(s, "    /* emotes: QuestDetailsEmote[amount_of_emotes] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* emotes: QuestDetailsEmote[amount_of_emotes] end */").unwrap();
         }
 
 
@@ -194,7 +255,7 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -202,6 +263,11 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
 impl crate::private::Sealed for SMSG_QUESTGIVER_QUEST_DETAILS {}
 impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
     const OPCODE: u32 = 0x0188;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_QUESTGIVER_QUEST_DETAILS::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

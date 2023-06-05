@@ -27,7 +27,7 @@ pub struct SMSG_QUESTGIVER_QUEST_COMPLETE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_QUESTGIVER_QUEST_COMPLETE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -44,8 +44,8 @@ impl SMSG_QUESTGIVER_QUEST_COMPLETE {
         for v in self.item_rewards.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    item = {};", v.item).unwrap();
-            writeln!(s, "    item_count = {};", v.item_count).unwrap();
+            writeln!(s, "        item = {};", v.item).unwrap();
+            writeln!(s, "        item_count = {};", v.item_count).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -53,22 +53,28 @@ impl SMSG_QUESTGIVER_QUEST_COMPLETE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 401_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 401_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_id");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "experience_reward", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "money_reward", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_item_rewards", "    ");
+        if !self.item_rewards.is_empty() {
+            writeln!(s, "    /* item_rewards: QuestItemReward[amount_of_item_rewards] start */").unwrap();
+            for (i, v) in self.item_rewards.iter().enumerate() {
+                writeln!(s, "    /* item_rewards: QuestItemReward[amount_of_item_rewards] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "        ");
+                writeln!(s, "    /* item_rewards: QuestItemReward[amount_of_item_rewards] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* item_rewards: QuestItemReward[amount_of_item_rewards] end */").unwrap();
         }
 
 
@@ -76,7 +82,7 @@ impl SMSG_QUESTGIVER_QUEST_COMPLETE {
         writeln!(s, "    versions = \"1\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -84,6 +90,11 @@ impl SMSG_QUESTGIVER_QUEST_COMPLETE {
 impl crate::private::Sealed for SMSG_QUESTGIVER_QUEST_COMPLETE {}
 impl crate::Message for SMSG_QUESTGIVER_QUEST_COMPLETE {
     const OPCODE: u32 = 0x0191;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_QUESTGIVER_QUEST_COMPLETE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

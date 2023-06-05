@@ -13,7 +13,7 @@ pub struct SimpleMsg {
 
 #[cfg(feature = "print-testcase")]
 impl SimpleMsg {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         panic!("MSG types not supported");
     }
 
@@ -22,6 +22,11 @@ impl SimpleMsg {
 impl crate::private::Sealed for SimpleMsg {}
 impl crate::Message for SimpleMsg {
     const OPCODE: u32 = 0x0002;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SimpleMsg::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         1

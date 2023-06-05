@@ -16,7 +16,7 @@ pub struct CMSG_LOGOUT_REQUEST {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_LOGOUT_REQUEST {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -27,12 +27,10 @@ impl CMSG_LOGOUT_REQUEST {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 6_u16.to_be_bytes();
+        let [a, b] = 4_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 75_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 75_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
@@ -43,7 +41,7 @@ impl CMSG_LOGOUT_REQUEST {
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -51,6 +49,11 @@ impl CMSG_LOGOUT_REQUEST {
 impl crate::private::Sealed for CMSG_LOGOUT_REQUEST {}
 impl crate::Message for CMSG_LOGOUT_REQUEST {
     const OPCODE: u32 = 0x004b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_LOGOUT_REQUEST::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         0

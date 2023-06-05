@@ -29,7 +29,7 @@ pub struct SMSG_ARENA_TEAM_QUERY_RESPONSE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_ARENA_TEAM_QUERY_RESPONSE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -48,30 +48,29 @@ impl SMSG_ARENA_TEAM_QUERY_RESPONSE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 844_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 844_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "arena_team");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "arena_team", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.team_name.len() + 1, "team_name", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "team_type", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "background_color", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "emblem_style", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "emblem_color", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "border_style", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "border_color", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -79,6 +78,11 @@ impl SMSG_ARENA_TEAM_QUERY_RESPONSE {
 impl crate::private::Sealed for SMSG_ARENA_TEAM_QUERY_RESPONSE {}
 impl crate::Message for SMSG_ARENA_TEAM_QUERY_RESPONSE {
     const OPCODE: u32 = 0x034c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_ARENA_TEAM_QUERY_RESPONSE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

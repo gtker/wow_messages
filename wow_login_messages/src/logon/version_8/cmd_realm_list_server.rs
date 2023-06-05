@@ -45,7 +45,7 @@ impl CMD_REALM_LIST_Server {
 
 #[cfg(feature = "print-testcase")]
 impl CMD_REALM_LIST_Server {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
 
         let mut s = String::new();
@@ -57,23 +57,23 @@ impl CMD_REALM_LIST_Server {
         for v in self.realms.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    realm_type = {};", v.realm_type.as_test_case_value()).unwrap();
-            writeln!(s, "    locked = {};", if v.locked { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "    flag = {};", crate::logon::version_8::RealmFlag::new(v.flag.as_int()).as_test_case_value()).unwrap();
-            writeln!(s, "    name = \"{}\";", v.name).unwrap();
-            writeln!(s, "    address = \"{}\";", v.address).unwrap();
-            writeln!(s, "    population = {};", v.population.as_test_case_value()).unwrap();
-            writeln!(s, "    number_of_characters_on_realm = {};", v.number_of_characters_on_realm).unwrap();
-            writeln!(s, "    category = {};", v.category.as_test_case_value()).unwrap();
-            writeln!(s, "    realm_id = {};", v.realm_id).unwrap();
+            writeln!(s, "        realm_type = {};", v.realm_type.as_test_case_value()).unwrap();
+            writeln!(s, "        locked = {};", if v.locked { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "        flag = {};", crate::logon::version_8::RealmFlag::new(v.flag.as_int()).as_test_case_value()).unwrap();
+            writeln!(s, "        name = \"{}\";", v.name).unwrap();
+            writeln!(s, "        address = \"{}\";", v.address).unwrap();
+            writeln!(s, "        population = {};", v.population.as_test_case_value()).unwrap();
+            writeln!(s, "        number_of_characters_on_realm = {};", v.number_of_characters_on_realm).unwrap();
+            writeln!(s, "        category = {};", v.category.as_test_case_value()).unwrap();
+            writeln!(s, "        realm_id = {};", v.realm_id).unwrap();
             if let Some(if_statement) = &v.flag.get_specify_build() {
                 // version: Version
-                writeln!(s, "    version = {{").unwrap();
+                writeln!(s, "        version = {{").unwrap();
                 // Members
-                writeln!(s, "    major = {};", if_statement.version.major).unwrap();
-                writeln!(s, "    minor = {};", if_statement.version.minor).unwrap();
-                writeln!(s, "    patch = {};", if_statement.version.patch).unwrap();
-                writeln!(s, "    build = {};", if_statement.version.build).unwrap();
+                writeln!(s, "            major = {};", if_statement.version.major).unwrap();
+                writeln!(s, "            minor = {};", if_statement.version.minor).unwrap();
+                writeln!(s, "            patch = {};", if_statement.version.patch).unwrap();
+                writeln!(s, "            build = {};", if_statement.version.build).unwrap();
 
                 writeln!(s, "    }};").unwrap();
             }
@@ -85,27 +85,48 @@ impl CMD_REALM_LIST_Server {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        // Bytes
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
         writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 2, "size");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "size", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "header_padding", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "number_of_realms", "    ");
+        if !self.realms.is_empty() {
+            writeln!(s, "    /* realms: Realm[number_of_realms] start */").unwrap();
+            for (i, v) in self.realms.iter().enumerate() {
+                writeln!(s, "    /* realms: Realm[number_of_realms] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "realm_type", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "locked", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "flag", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, v.name.len() + 1, "name", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, v.address.len() + 1, "address", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "population", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "number_of_characters_on_realm", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "category", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "realm_id", "        ");
+                if let Some(if_statement) = &v.flag.get_specify_build() {
+                    writeln!(s, "    /* version: Version start */").unwrap();
+                    crate::util::write_bytes(&mut s, &mut bytes, 1, "major", "            ");
+                    crate::util::write_bytes(&mut s, &mut bytes, 1, "minor", "            ");
+                    crate::util::write_bytes(&mut s, &mut bytes, 1, "patch", "            ");
+                    crate::util::write_bytes(&mut s, &mut bytes, 2, "build", "            ");
+                    writeln!(s, "    /* version: Version end */").unwrap();
+                }
+
+                writeln!(s, "    /* realms: Realm[number_of_realms] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* realms: Realm[number_of_realms] end */").unwrap();
         }
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "footer_padding", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    login_versions = \"8\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -140,6 +161,11 @@ impl crate::private::Sealed for CMD_REALM_LIST_Server {}
 
 impl ServerMessage for CMD_REALM_LIST_Server {
     const OPCODE: u8 = 0x10;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMD_REALM_LIST_Server::to_test_case_string(self)
+    }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // size: u16

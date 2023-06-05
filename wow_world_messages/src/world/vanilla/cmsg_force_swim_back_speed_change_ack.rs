@@ -22,7 +22,7 @@ pub struct CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -35,10 +35,10 @@ impl CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
         // info: MovementInfo
         writeln!(s, "    info = {{").unwrap();
         // Members
-        writeln!(s, "    flags = {};", crate::vanilla::MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
-        writeln!(s, "    timestamp = {};", self.info.timestamp).unwrap();
+        writeln!(s, "        flags = {};", crate::vanilla::MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "        timestamp = {};", self.info.timestamp).unwrap();
         // position: Vector3d
-        writeln!(s, "    position = {{").unwrap();
+        writeln!(s, "        position = {{").unwrap();
         // Members
         writeln!(s, "    {}", if self.info.position.x.to_string().contains(".") { self.info.position.x.to_string() } else { format!("{}.0", self.info.position.x) }).unwrap();
         writeln!(s, "    {}", if self.info.position.y.to_string().contains(".") { self.info.position.y.to_string() } else { format!("{}.0", self.info.position.y) }).unwrap();
@@ -48,11 +48,11 @@ impl CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
         writeln!(s, "    {}", if self.info.orientation.to_string().contains(".") { self.info.orientation.to_string() } else { format!("{}.0", self.info.orientation) }).unwrap();
         if let Some(if_statement) = &self.info.flags.get_on_transport() {
             // transport: TransportInfo
-            writeln!(s, "    transport = {{").unwrap();
+            writeln!(s, "        transport = {{").unwrap();
             // Members
-            writeln!(s, "    guid = {};", if_statement.transport.guid.guid()).unwrap();
+            writeln!(s, "            guid = {};", if_statement.transport.guid.guid()).unwrap();
             // position: Vector3d
-            writeln!(s, "    position = {{").unwrap();
+            writeln!(s, "            position = {{").unwrap();
             // Members
             writeln!(s, "    {}", if if_statement.transport.position.x.to_string().contains(".") { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
             writeln!(s, "    {}", if if_statement.transport.position.y.to_string().contains(".") { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
@@ -60,7 +60,7 @@ impl CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
 
             writeln!(s, "    }};").unwrap();
             writeln!(s, "    {}", if if_statement.transport.orientation.to_string().contains(".") { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
-            writeln!(s, "    timestamp = {};", if_statement.transport.timestamp).unwrap();
+            writeln!(s, "            timestamp = {};", if_statement.transport.timestamp).unwrap();
 
             writeln!(s, "    }};").unwrap();
         }
@@ -87,30 +87,63 @@ impl CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 733_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 733_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "counter", "    ");
+        writeln!(s, "    /* info: MovementInfo start */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "flags", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "        ");
+        writeln!(s, "    /* position: Vector3d start */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "            ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "            ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "            ");
+        writeln!(s, "    /* position: Vector3d end */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "        ");
+        if let Some(if_statement) = &self.info.flags.get_on_transport() {
+            writeln!(s, "    /* transport: TransportInfo start */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&if_statement.transport.guid), "guid", "            ");
+            writeln!(s, "    /* position: Vector3d start */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                ");
+            writeln!(s, "    /* position: Vector3d end */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "            ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "            ");
+            writeln!(s, "    /* transport: TransportInfo end */").unwrap();
         }
+
+        if let Some(if_statement) = &self.info.flags.get_swimming() {
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "pitch", "        ");
+        }
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "fall_time", "        ");
+        if let Some(if_statement) = &self.info.flags.get_jumping() {
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "z_speed", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "cos_angle", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "sin_angle", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "xy_speed", "        ");
+        }
+
+        if let Some(if_statement) = &self.info.flags.get_spline_elevation() {
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "spline_elevation", "        ");
+        }
+
+        writeln!(s, "    /* info: MovementInfo end */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "new_speed", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1.12\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -118,6 +151,11 @@ impl CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
 impl crate::private::Sealed for CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {}
 impl crate::Message for CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK {
     const OPCODE: u32 = 0x02dd;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_FORCE_SWIM_BACK_SPEED_CHANGE_ACK::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

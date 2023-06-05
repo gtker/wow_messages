@@ -35,7 +35,7 @@ pub struct SMSG_SEND_MAIL_RESULT {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_SEND_MAIL_RESULT {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -225,30 +225,200 @@ impl SMSG_SEND_MAIL_RESULT {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 569_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 569_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "mail_id");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "mail_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "action", "    ");
+        match &self.action {
+            crate::wrath::SMSG_SEND_MAIL_RESULT_MailAction::Send {
+                result2,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "result2", "    ");
+                match &result2 {
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                        equip_error2,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "equip_error2", "    ");
+                    }
+                    _ => {}
+                }
+
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            crate::wrath::SMSG_SEND_MAIL_RESULT_MailAction::MoneyTaken {
+                result2,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "result2", "    ");
+                match &result2 {
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                        equip_error2,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "equip_error2", "    ");
+                    }
+                    _ => {}
+                }
+
+            }
+            crate::wrath::SMSG_SEND_MAIL_RESULT_MailAction::ItemTaken {
+                result,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "result", "    ");
+                match &result {
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::Ok {
+                        item,
+                        item_count,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
+                    }
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::ErrEquipError {
+                        equip_error,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "equip_error", "    ");
+                    }
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::ErrCannotSendToSelf {
+                        item,
+                        item_count,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
+                    }
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::ErrNotEnoughMoney {
+                        item,
+                        item_count,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
+                    }
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::ErrRecipientNotFound {
+                        item,
+                        item_count,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
+                    }
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::ErrNotYourTeam {
+                        item,
+                        item_count,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
+                    }
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::ErrInternalError {
+                        item,
+                        item_count,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
+                    }
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::ErrDisabledForTrialAcc {
+                        item,
+                        item_count,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
+                    }
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::ErrRecipientCapReached {
+                        item,
+                        item_count,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
+                    }
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::ErrCantSendWrappedCod {
+                        item,
+                        item_count,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
+                    }
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::ErrMailAndChatSuspended {
+                        item,
+                        item_count,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
+                    }
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::ErrTooManyAttachments {
+                        item,
+                        item_count,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
+                    }
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::ErrMailAttachmentInvalid {
+                        item,
+                        item_count,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
+                    }
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::ErrItemHasExpired {
+                        item,
+                        item_count,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
+                    }
+                }
+
+            }
+            crate::wrath::SMSG_SEND_MAIL_RESULT_MailAction::ReturnedToSender {
+                result2,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "result2", "    ");
+                match &result2 {
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                        equip_error2,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "equip_error2", "    ");
+                    }
+                    _ => {}
+                }
+
+            }
+            crate::wrath::SMSG_SEND_MAIL_RESULT_MailAction::Deleted {
+                result2,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "result2", "    ");
+                match &result2 {
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                        equip_error2,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "equip_error2", "    ");
+                    }
+                    _ => {}
+                }
+
+            }
+            crate::wrath::SMSG_SEND_MAIL_RESULT_MailAction::MadePermanent {
+                result2,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "result2", "    ");
+                match &result2 {
+                    crate::wrath::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                        equip_error2,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "equip_error2", "    ");
+                    }
+                    _ => {}
+                }
+
+            }
         }
+
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -256,6 +426,11 @@ impl SMSG_SEND_MAIL_RESULT {
 impl crate::private::Sealed for SMSG_SEND_MAIL_RESULT {}
 impl crate::Message for SMSG_SEND_MAIL_RESULT {
     const OPCODE: u32 = 0x0239;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_SEND_MAIL_RESULT::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

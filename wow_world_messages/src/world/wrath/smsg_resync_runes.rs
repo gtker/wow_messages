@@ -16,7 +16,7 @@ pub struct SMSG_RESYNC_RUNES {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_RESYNC_RUNES {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -29,8 +29,8 @@ impl SMSG_RESYNC_RUNES {
         for v in self.runes.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    current_rune = {};", v.current_rune).unwrap();
-            writeln!(s, "    rune_cooldown = {};", v.rune_cooldown).unwrap();
+            writeln!(s, "        current_rune = {};", v.current_rune).unwrap();
+            writeln!(s, "        rune_cooldown = {};", v.rune_cooldown).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -38,22 +38,24 @@ impl SMSG_RESYNC_RUNES {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 1159_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 1159_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_runes");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_runes", "    ");
+        if !self.runes.is_empty() {
+            writeln!(s, "    /* runes: ResyncRune[amount_of_runes] start */").unwrap();
+            for (i, v) in self.runes.iter().enumerate() {
+                writeln!(s, "    /* runes: ResyncRune[amount_of_runes] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "current_rune", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "rune_cooldown", "        ");
+                writeln!(s, "    /* runes: ResyncRune[amount_of_runes] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* runes: ResyncRune[amount_of_runes] end */").unwrap();
         }
 
 
@@ -61,7 +63,7 @@ impl SMSG_RESYNC_RUNES {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -69,6 +71,11 @@ impl SMSG_RESYNC_RUNES {
 impl crate::private::Sealed for SMSG_RESYNC_RUNES {}
 impl crate::Message for SMSG_RESYNC_RUNES {
     const OPCODE: u32 = 0x0487;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_RESYNC_RUNES::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

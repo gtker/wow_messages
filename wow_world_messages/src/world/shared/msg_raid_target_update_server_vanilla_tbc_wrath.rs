@@ -22,7 +22,7 @@ pub struct MSG_RAID_TARGET_UPDATE_Server {
 
 #[cfg(feature = "print-testcase")]
 impl MSG_RAID_TARGET_UPDATE_Server {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -38,8 +38,8 @@ impl MSG_RAID_TARGET_UPDATE_Server {
                 // raid_target: RaidTargetUpdate
                 writeln!(s, "    raid_target = {{").unwrap();
                 // Members
-                writeln!(s, "    index = {};", raid_target.index.as_test_case_value()).unwrap();
-                writeln!(s, "    guid = {};", raid_target.guid.guid()).unwrap();
+                writeln!(s, "        index = {};", raid_target.index.as_test_case_value()).unwrap();
+                writeln!(s, "        guid = {};", raid_target.guid.guid()).unwrap();
 
                 writeln!(s, "    }};").unwrap();
             }
@@ -50,8 +50,8 @@ impl MSG_RAID_TARGET_UPDATE_Server {
                 for v in raid_targets.as_slice() {
                     writeln!(s, "{{").unwrap();
                     // Members
-                    writeln!(s, "    index = {};", v.index.as_test_case_value()).unwrap();
-                    writeln!(s, "    guid = {};", v.guid.guid()).unwrap();
+                    writeln!(s, "        index = {};", v.index.as_test_case_value()).unwrap();
+                    writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
 
                     writeln!(s, "    }},").unwrap();
                 }
@@ -62,30 +62,45 @@ impl MSG_RAID_TARGET_UPDATE_Server {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 801_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 801_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "update_type");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "update_type", "    ");
+        match &self.update_type {
+            crate::vanilla::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Partial {
+                raid_target,
+            } => {
+                writeln!(s, "    /* raid_target: RaidTargetUpdate start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "index", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "        ");
+                writeln!(s, "    /* raid_target: RaidTargetUpdate end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            crate::vanilla::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Full {
+                raid_targets,
+            } => {
+                writeln!(s, "    /* raid_targets: RaidTargetUpdate[8] start */").unwrap();
+                for (i, v) in raid_targets.iter().enumerate() {
+                    writeln!(s, "    /* raid_targets: RaidTargetUpdate[8] {i} start */").unwrap();
+                    crate::util::write_bytes(&mut s, &mut bytes, 1, "index", "        ");
+                    crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "        ");
+                    writeln!(s, "    /* raid_targets: RaidTargetUpdate[8] {i} end */").unwrap();
+                }
+                writeln!(s, "    /* raid_targets: RaidTargetUpdate[8] end */").unwrap();
+            }
         }
+
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -93,6 +108,11 @@ impl MSG_RAID_TARGET_UPDATE_Server {
 impl crate::private::Sealed for MSG_RAID_TARGET_UPDATE_Server {}
 impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
     const OPCODE: u32 = 0x0321;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        MSG_RAID_TARGET_UPDATE_Server::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

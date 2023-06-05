@@ -25,7 +25,7 @@ pub struct SMSG_START_MIRROR_TIMER {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_START_MIRROR_TIMER {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -42,30 +42,27 @@ impl SMSG_START_MIRROR_TIMER {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 25_u16.to_be_bytes();
+        let [a, b] = 23_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 473_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 473_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "timer");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "timer", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "time_remaining", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "duration", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "scale", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "is_frozen", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "id", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -73,6 +70,11 @@ impl SMSG_START_MIRROR_TIMER {
 impl crate::private::Sealed for SMSG_START_MIRROR_TIMER {}
 impl crate::Message for SMSG_START_MIRROR_TIMER {
     const OPCODE: u32 = 0x01d9;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_START_MIRROR_TIMER::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         21

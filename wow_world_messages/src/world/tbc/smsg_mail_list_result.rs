@@ -16,7 +16,7 @@ pub struct SMSG_MAIL_LIST_RESULT {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_MAIL_LIST_RESULT {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -29,70 +29,70 @@ impl SMSG_MAIL_LIST_RESULT {
         for v in self.mails.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    message_id = {};", v.message_id).unwrap();
-            writeln!(s, "    message_type = {};", crate::vanilla::MailType::try_from(v.message_type.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        message_id = {};", v.message_id).unwrap();
+            writeln!(s, "        message_type = {};", crate::vanilla::MailType::try_from(v.message_type.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.message_type {
                 crate::tbc::Mail_MailType::Normal {
                     sender,
                 } => {
-                    writeln!(s, "    sender = {};", sender.guid()).unwrap();
+                    writeln!(s, "        sender = {};", sender.guid()).unwrap();
                 }
                 crate::tbc::Mail_MailType::Auction {
                     auction_id,
                 } => {
-                    writeln!(s, "    auction_id = {};", auction_id).unwrap();
+                    writeln!(s, "        auction_id = {};", auction_id).unwrap();
                 }
                 crate::tbc::Mail_MailType::Creature {
                     sender_id,
                 } => {
-                    writeln!(s, "    sender_id = {};", sender_id).unwrap();
+                    writeln!(s, "        sender_id = {};", sender_id).unwrap();
                 }
                 crate::tbc::Mail_MailType::Gameobject {
                     sender_id,
                 } => {
-                    writeln!(s, "    sender_id = {};", sender_id).unwrap();
+                    writeln!(s, "        sender_id = {};", sender_id).unwrap();
                 }
                 crate::tbc::Mail_MailType::Item {
                     item,
                 } => {
-                    writeln!(s, "    item = {};", item).unwrap();
+                    writeln!(s, "        item = {};", item).unwrap();
                 }
             }
 
-            writeln!(s, "    cash_on_delivery = {};", v.cash_on_delivery.as_int()).unwrap();
-            writeln!(s, "    item_text_id = {};", v.item_text_id).unwrap();
-            writeln!(s, "    unknown = {};", v.unknown).unwrap();
-            writeln!(s, "    stationery = {};", v.stationery).unwrap();
-            writeln!(s, "    money = {};", v.money.as_int()).unwrap();
-            writeln!(s, "    flags = {};", v.flags).unwrap();
+            writeln!(s, "        cash_on_delivery = {};", v.cash_on_delivery.as_int()).unwrap();
+            writeln!(s, "        item_text_id = {};", v.item_text_id).unwrap();
+            writeln!(s, "        unknown = {};", v.unknown).unwrap();
+            writeln!(s, "        stationery = {};", v.stationery).unwrap();
+            writeln!(s, "        money = {};", v.money.as_int()).unwrap();
+            writeln!(s, "        flags = {};", v.flags).unwrap();
             writeln!(s, "    {}", if v.expiration_time.to_string().contains(".") { v.expiration_time.to_string() } else { format!("{}.0", v.expiration_time) }).unwrap();
-            writeln!(s, "    mail_template_id = {};", v.mail_template_id).unwrap();
-            writeln!(s, "    subject = \"{}\";", v.subject).unwrap();
-            writeln!(s, "    amount_of_items = {};", v.items.len()).unwrap();
-            write!(s, "    items = [").unwrap();
+            writeln!(s, "        mail_template_id = {};", v.mail_template_id).unwrap();
+            writeln!(s, "        subject = \"{}\";", v.subject).unwrap();
+            writeln!(s, "        amount_of_items = {};", v.items.len()).unwrap();
+            write!(s, "        items = [").unwrap();
             for v in v.items.as_slice() {
                 writeln!(s, "{{").unwrap();
                 // Members
-                writeln!(s, "    item_index = {};", v.item_index).unwrap();
-                writeln!(s, "    low_guid = {};", v.low_guid).unwrap();
-                writeln!(s, "    item = {};", v.item).unwrap();
-                write!(s, "    enchants = [").unwrap();
+                writeln!(s, "            item_index = {};", v.item_index).unwrap();
+                writeln!(s, "            low_guid = {};", v.low_guid).unwrap();
+                writeln!(s, "            item = {};", v.item).unwrap();
+                write!(s, "            enchants = [").unwrap();
                 for v in v.enchants.as_slice() {
                     writeln!(s, "{{").unwrap();
                     // Members
-                    writeln!(s, "    charges = {};", v.charges).unwrap();
-                    writeln!(s, "    duration = {};", v.duration).unwrap();
-                    writeln!(s, "    enchant_id = {};", v.enchant_id).unwrap();
+                    writeln!(s, "                charges = {};", v.charges).unwrap();
+                    writeln!(s, "                duration = {};", v.duration).unwrap();
+                    writeln!(s, "                enchant_id = {};", v.enchant_id).unwrap();
 
                     writeln!(s, "    }},").unwrap();
                 }
                 writeln!(s, "];").unwrap();
-                writeln!(s, "    item_random_property_id = {};", v.item_random_property_id).unwrap();
-                writeln!(s, "    item_suffix_factor = {};", v.item_suffix_factor).unwrap();
-                writeln!(s, "    item_amount = {};", v.item_amount).unwrap();
-                writeln!(s, "    charges = {};", v.charges).unwrap();
-                writeln!(s, "    max_durability = {};", v.max_durability).unwrap();
-                writeln!(s, "    durability = {};", v.durability).unwrap();
+                writeln!(s, "            item_random_property_id = {};", v.item_random_property_id).unwrap();
+                writeln!(s, "            item_suffix_factor = {};", v.item_suffix_factor).unwrap();
+                writeln!(s, "            item_amount = {};", v.item_amount).unwrap();
+                writeln!(s, "            charges = {};", v.charges).unwrap();
+                writeln!(s, "            max_durability = {};", v.max_durability).unwrap();
+                writeln!(s, "            durability = {};", v.durability).unwrap();
 
                 writeln!(s, "    }},").unwrap();
             }
@@ -104,22 +104,89 @@ impl SMSG_MAIL_LIST_RESULT {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 571_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 571_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_mails");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_mails", "    ");
+        if !self.mails.is_empty() {
+            writeln!(s, "    /* mails: Mail[amount_of_mails] start */").unwrap();
+            for (i, v) in self.mails.iter().enumerate() {
+                writeln!(s, "    /* mails: Mail[amount_of_mails] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "size", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "message_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "message_type", "        ");
+                match &v.message_type {
+                    crate::tbc::Mail_MailType::Normal {
+                        sender,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 8, "sender", "        ");
+                    }
+                    crate::tbc::Mail_MailType::Auction {
+                        auction_id,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "auction_id", "        ");
+                    }
+                    crate::tbc::Mail_MailType::Creature {
+                        sender_id,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "sender_id", "        ");
+                    }
+                    crate::tbc::Mail_MailType::Gameobject {
+                        sender_id,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "sender_id", "        ");
+                    }
+                    crate::tbc::Mail_MailType::Item {
+                        item,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
+                    }
+                }
+
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "cash_on_delivery", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_text_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "stationery", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "money", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "flags", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "expiration_time", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "mail_template_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, v.subject.len() + 1, "subject", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_items", "        ");
+                if !v.items.is_empty() {
+                    writeln!(s, "    /* items: MailListItem[amount_of_items] start */").unwrap();
+                    for (i, v) in v.items.iter().enumerate() {
+                        writeln!(s, "    /* items: MailListItem[amount_of_items] {i} start */").unwrap();
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "item_index", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "low_guid", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "            ");
+                        writeln!(s, "    /* enchants: MailListItemEnchant[6] start */").unwrap();
+                        for (i, v) in v.enchants.iter().enumerate() {
+                            writeln!(s, "    /* enchants: MailListItemEnchant[6] {i} start */").unwrap();
+                            crate::util::write_bytes(&mut s, &mut bytes, 4, "charges", "                ");
+                            crate::util::write_bytes(&mut s, &mut bytes, 4, "duration", "                ");
+                            crate::util::write_bytes(&mut s, &mut bytes, 4, "enchant_id", "                ");
+                            writeln!(s, "    /* enchants: MailListItemEnchant[6] {i} end */").unwrap();
+                        }
+                        writeln!(s, "    /* enchants: MailListItemEnchant[6] end */").unwrap();
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_random_property_id", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_suffix_factor", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "item_amount", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "charges", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "max_durability", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "durability", "            ");
+                        writeln!(s, "    /* items: MailListItem[amount_of_items] {i} end */").unwrap();
+                    }
+                    writeln!(s, "    /* items: MailListItem[amount_of_items] end */").unwrap();
+                }
+                writeln!(s, "    /* mails: Mail[amount_of_mails] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* mails: Mail[amount_of_mails] end */").unwrap();
         }
 
 
@@ -127,7 +194,7 @@ impl SMSG_MAIL_LIST_RESULT {
         writeln!(s, "    versions = \"2.4.3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -135,6 +202,11 @@ impl SMSG_MAIL_LIST_RESULT {
 impl crate::private::Sealed for SMSG_MAIL_LIST_RESULT {}
 impl crate::Message for SMSG_MAIL_LIST_RESULT {
     const OPCODE: u32 = 0x023b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_MAIL_LIST_RESULT::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

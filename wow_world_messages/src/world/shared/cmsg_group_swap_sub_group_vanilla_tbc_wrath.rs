@@ -15,7 +15,7 @@ pub struct CMSG_GROUP_SWAP_SUB_GROUP {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_GROUP_SWAP_SUB_GROUP {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -28,29 +28,23 @@ impl CMSG_GROUP_SWAP_SUB_GROUP {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 640_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 640_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, self.name.len() + 1, "name", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.swap_with_name.len() + 1, "swap_with_name", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -58,6 +52,11 @@ impl CMSG_GROUP_SWAP_SUB_GROUP {
 impl crate::private::Sealed for CMSG_GROUP_SWAP_SUB_GROUP {}
 impl crate::Message for CMSG_GROUP_SWAP_SUB_GROUP {
     const OPCODE: u32 = 0x0280;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_GROUP_SWAP_SUB_GROUP::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

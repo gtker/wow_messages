@@ -16,7 +16,7 @@ pub struct SMSG_INITIALIZE_FACTIONS {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_INITIALIZE_FACTIONS {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -29,8 +29,8 @@ impl SMSG_INITIALIZE_FACTIONS {
         for v in self.factions.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    flag = {};", v.flag.as_test_case_value()).unwrap();
-            writeln!(s, "    standing = {};", v.standing).unwrap();
+            writeln!(s, "        flag = {};", v.flag.as_test_case_value()).unwrap();
+            writeln!(s, "        standing = {};", v.standing).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -38,22 +38,24 @@ impl SMSG_INITIALIZE_FACTIONS {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 290_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 290_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_factions");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_factions", "    ");
+        if !self.factions.is_empty() {
+            writeln!(s, "    /* factions: FactionInitializer[amount_of_factions] start */").unwrap();
+            for (i, v) in self.factions.iter().enumerate() {
+                writeln!(s, "    /* factions: FactionInitializer[amount_of_factions] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "flag", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "standing", "        ");
+                writeln!(s, "    /* factions: FactionInitializer[amount_of_factions] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* factions: FactionInitializer[amount_of_factions] end */").unwrap();
         }
 
 
@@ -61,7 +63,7 @@ impl SMSG_INITIALIZE_FACTIONS {
         writeln!(s, "    versions = \"3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -69,6 +71,11 @@ impl SMSG_INITIALIZE_FACTIONS {
 impl crate::private::Sealed for SMSG_INITIALIZE_FACTIONS {}
 impl crate::Message for SMSG_INITIALIZE_FACTIONS {
     const OPCODE: u32 = 0x0122;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_INITIALIZE_FACTIONS::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

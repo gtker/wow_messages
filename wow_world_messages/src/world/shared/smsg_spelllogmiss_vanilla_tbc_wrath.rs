@@ -25,7 +25,7 @@ pub struct SMSG_SPELLLOGMISS {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_SPELLLOGMISS {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,8 +41,8 @@ impl SMSG_SPELLLOGMISS {
         for v in self.targets.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    target = {};", v.target.guid()).unwrap();
-            writeln!(s, "    miss_info = {};", v.miss_info.as_test_case_value()).unwrap();
+            writeln!(s, "        target = {};", v.target.guid()).unwrap();
+            writeln!(s, "        miss_info = {};", v.miss_info.as_test_case_value()).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -50,22 +50,27 @@ impl SMSG_SPELLLOGMISS {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 587_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 587_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "id");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "caster", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "unknown1", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_targets", "    ");
+        if !self.targets.is_empty() {
+            writeln!(s, "    /* targets: SpellLogMiss[amount_of_targets] start */").unwrap();
+            for (i, v) in self.targets.iter().enumerate() {
+                writeln!(s, "    /* targets: SpellLogMiss[amount_of_targets] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "miss_info", "        ");
+                writeln!(s, "    /* targets: SpellLogMiss[amount_of_targets] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* targets: SpellLogMiss[amount_of_targets] end */").unwrap();
         }
 
 
@@ -73,7 +78,7 @@ impl SMSG_SPELLLOGMISS {
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -81,6 +86,11 @@ impl SMSG_SPELLLOGMISS {
 impl crate::private::Sealed for SMSG_SPELLLOGMISS {}
 impl crate::Message for SMSG_SPELLLOGMISS {
     const OPCODE: u32 = 0x024b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_SPELLLOGMISS::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

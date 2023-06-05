@@ -20,7 +20,7 @@ pub struct CMSG_AUCTION_LIST_BIDDER_ITEMS {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_AUCTION_LIST_BIDDER_ITEMS {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -39,22 +39,23 @@ impl CMSG_AUCTION_LIST_BIDDER_ITEMS {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 612_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 612_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "auctioneer");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "auctioneer", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "start_from_page", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_outbid_items", "    ");
+        if !self.outbid_item_ids.is_empty() {
+            writeln!(s, "    /* outbid_item_ids: u32[amount_of_outbid_items] start */").unwrap();
+            for (i, v) in self.outbid_item_ids.iter().enumerate() {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("outbid_item_ids {i}"), "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* outbid_item_ids: u32[amount_of_outbid_items] end */").unwrap();
         }
 
 
@@ -62,7 +63,7 @@ impl CMSG_AUCTION_LIST_BIDDER_ITEMS {
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -70,6 +71,11 @@ impl CMSG_AUCTION_LIST_BIDDER_ITEMS {
 impl crate::private::Sealed for CMSG_AUCTION_LIST_BIDDER_ITEMS {}
 impl crate::Message for CMSG_AUCTION_LIST_BIDDER_ITEMS {
     const OPCODE: u32 = 0x0264;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_AUCTION_LIST_BIDDER_ITEMS::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

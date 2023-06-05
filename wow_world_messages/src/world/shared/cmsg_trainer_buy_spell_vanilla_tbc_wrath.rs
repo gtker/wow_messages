@@ -17,7 +17,7 @@ pub struct CMSG_TRAINER_BUY_SPELL {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_TRAINER_BUY_SPELL {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -30,30 +30,23 @@ impl CMSG_TRAINER_BUY_SPELL {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 18_u16.to_be_bytes();
+        let [a, b] = 16_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 434_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 434_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "id", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -61,6 +54,11 @@ impl CMSG_TRAINER_BUY_SPELL {
 impl crate::private::Sealed for CMSG_TRAINER_BUY_SPELL {}
 impl crate::Message for CMSG_TRAINER_BUY_SPELL {
     const OPCODE: u32 = 0x01b2;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_TRAINER_BUY_SPELL::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         12

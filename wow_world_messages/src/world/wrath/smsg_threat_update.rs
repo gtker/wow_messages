@@ -19,7 +19,7 @@ pub struct SMSG_THREAT_UPDATE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_THREAT_UPDATE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -33,8 +33,8 @@ impl SMSG_THREAT_UPDATE {
         for v in self.units.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    unit = {};", v.unit.guid()).unwrap();
-            writeln!(s, "    threat = {};", v.threat).unwrap();
+            writeln!(s, "        unit = {};", v.unit.guid()).unwrap();
+            writeln!(s, "        threat = {};", v.threat).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -42,21 +42,25 @@ impl SMSG_THREAT_UPDATE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 1155_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 1155_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.unit), "unit", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_units", "    ");
+        if !self.units.is_empty() {
+            writeln!(s, "    /* units: ThreatUpdateUnit[amount_of_units] start */").unwrap();
+            for (i, v) in self.units.iter().enumerate() {
+                writeln!(s, "    /* units: ThreatUpdateUnit[amount_of_units] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&v.unit), "unit", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "threat", "        ");
+                writeln!(s, "    /* units: ThreatUpdateUnit[amount_of_units] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* units: ThreatUpdateUnit[amount_of_units] end */").unwrap();
         }
 
 
@@ -64,7 +68,7 @@ impl SMSG_THREAT_UPDATE {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -72,6 +76,11 @@ impl SMSG_THREAT_UPDATE {
 impl crate::private::Sealed for SMSG_THREAT_UPDATE {}
 impl crate::Message for SMSG_THREAT_UPDATE {
     const OPCODE: u32 = 0x0483;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_THREAT_UPDATE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

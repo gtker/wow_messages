@@ -58,7 +58,7 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_QUESTGIVER_REQUEST_ITEMS {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -81,9 +81,9 @@ impl SMSG_QUESTGIVER_REQUEST_ITEMS {
         for v in self.required_items.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    item = {};", v.item).unwrap();
-            writeln!(s, "    item_count = {};", v.item_count).unwrap();
-            writeln!(s, "    item_display_id = {};", v.item_display_id).unwrap();
+            writeln!(s, "        item = {};", v.item).unwrap();
+            writeln!(s, "        item_count = {};", v.item_count).unwrap();
+            writeln!(s, "        item_display_id = {};", v.item_display_id).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -95,30 +95,47 @@ impl SMSG_QUESTGIVER_REQUEST_ITEMS {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 395_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 395_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "npc");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "npc", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.title.len() + 1, "title", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.request_items_text.len() + 1, "request_items_text", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "emote_delay", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "emote", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "auto_finish", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "flags1", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "suggested_players", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "required_money", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_required_items", "    ");
+        if !self.required_items.is_empty() {
+            writeln!(s, "    /* required_items: QuestItemRequirement[amount_of_required_items] start */").unwrap();
+            for (i, v) in self.required_items.iter().enumerate() {
+                writeln!(s, "    /* required_items: QuestItemRequirement[amount_of_required_items] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_display_id", "        ");
+                writeln!(s, "    /* required_items: QuestItemRequirement[amount_of_required_items] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* required_items: QuestItemRequirement[amount_of_required_items] end */").unwrap();
         }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "completable", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "flags2", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "flags3", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "flags4", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -126,6 +143,11 @@ impl SMSG_QUESTGIVER_REQUEST_ITEMS {
 impl crate::private::Sealed for SMSG_QUESTGIVER_REQUEST_ITEMS {}
 impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
     const OPCODE: u32 = 0x018b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_QUESTGIVER_REQUEST_ITEMS::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

@@ -14,7 +14,7 @@ pub struct SMSG_IGNORE_LIST {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_IGNORE_LIST {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -31,22 +31,21 @@ impl SMSG_IGNORE_LIST {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 107_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 107_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_ignored");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_ignored", "    ");
+        if !self.ignored.is_empty() {
+            writeln!(s, "    /* ignored: u64[amount_of_ignored] start */").unwrap();
+            for (i, v) in self.ignored.iter().enumerate() {
+                crate::util::write_bytes(&mut s, &mut bytes, 8, &format!("ignored {i}"), "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* ignored: u64[amount_of_ignored] end */").unwrap();
         }
 
 
@@ -54,7 +53,7 @@ impl SMSG_IGNORE_LIST {
         writeln!(s, "    versions = \"1.12\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -62,6 +61,11 @@ impl SMSG_IGNORE_LIST {
 impl crate::private::Sealed for SMSG_IGNORE_LIST {}
 impl crate::Message for SMSG_IGNORE_LIST {
     const OPCODE: u32 = 0x006b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_IGNORE_LIST::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

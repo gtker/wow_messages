@@ -11,7 +11,7 @@ pub struct SMSG_MEETINGSTONE_COMPLETE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_MEETINGSTONE_COMPLETE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -22,12 +22,10 @@ impl SMSG_MEETINGSTONE_COMPLETE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 4_u16.to_be_bytes();
+        let [a, b] = 2_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 663_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 663_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
@@ -38,7 +36,7 @@ impl SMSG_MEETINGSTONE_COMPLETE {
         writeln!(s, "    versions = \"1\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -46,6 +44,11 @@ impl SMSG_MEETINGSTONE_COMPLETE {
 impl crate::private::Sealed for SMSG_MEETINGSTONE_COMPLETE {}
 impl crate::Message for SMSG_MEETINGSTONE_COMPLETE {
     const OPCODE: u32 = 0x0297;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_MEETINGSTONE_COMPLETE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         0

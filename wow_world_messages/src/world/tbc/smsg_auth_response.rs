@@ -26,7 +26,7 @@ pub struct SMSG_AUTH_RESPONSE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_AUTH_RESPONSE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -58,30 +58,42 @@ impl SMSG_AUTH_RESPONSE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 494_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 494_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "result");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
+        match &self.result {
+            crate::tbc::SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
+                billing_flags,
+                billing_rested,
+                billing_time,
+                expansion,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "billing_time", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "billing_flags", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "billing_rested", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "expansion", "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            crate::tbc::SMSG_AUTH_RESPONSE_WorldResult::AuthWaitQueue {
+                queue_position,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "queue_position", "    ");
+            }
+            _ => {}
         }
+
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"2.4.3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -89,6 +101,11 @@ impl SMSG_AUTH_RESPONSE {
 impl crate::private::Sealed for SMSG_AUTH_RESPONSE {}
 impl crate::Message for SMSG_AUTH_RESPONSE {
     const OPCODE: u32 = 0x01ee;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_AUTH_RESPONSE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

@@ -14,7 +14,7 @@ pub struct CMSG_QUEST_POI_QUERY {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_QUEST_POI_QUERY {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -31,22 +31,21 @@ impl CMSG_QUEST_POI_QUERY {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 483_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 483_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_pois");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_pois", "    ");
+        if !self.points_of_interests.is_empty() {
+            writeln!(s, "    /* points_of_interests: u32[amount_of_pois] start */").unwrap();
+            for (i, v) in self.points_of_interests.iter().enumerate() {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("points_of_interests {i}"), "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* points_of_interests: u32[amount_of_pois] end */").unwrap();
         }
 
 
@@ -54,7 +53,7 @@ impl CMSG_QUEST_POI_QUERY {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -62,6 +61,11 @@ impl CMSG_QUEST_POI_QUERY {
 impl crate::private::Sealed for CMSG_QUEST_POI_QUERY {}
 impl crate::Message for CMSG_QUEST_POI_QUERY {
     const OPCODE: u32 = 0x01e3;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_QUEST_POI_QUERY::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

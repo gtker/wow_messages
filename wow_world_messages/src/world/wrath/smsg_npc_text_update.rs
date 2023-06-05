@@ -17,7 +17,7 @@ pub struct SMSG_NPC_TEXT_UPDATE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_NPC_TEXT_UPDATE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -31,18 +31,18 @@ impl SMSG_NPC_TEXT_UPDATE {
             writeln!(s, "{{").unwrap();
             // Members
             writeln!(s, "    {}", if v.probability.to_string().contains(".") { v.probability.to_string() } else { format!("{}.0", v.probability) }).unwrap();
-            write!(s, "    texts = [").unwrap();
+            write!(s, "        texts = [").unwrap();
             for v in v.texts.as_slice() {
                 write!(s, "\"{v}\", ").unwrap();
             }
             writeln!(s, "];").unwrap();
-            writeln!(s, "    language = {};", v.language.as_test_case_value()).unwrap();
-            write!(s, "    emotes = [").unwrap();
+            writeln!(s, "        language = {};", v.language.as_test_case_value()).unwrap();
+            write!(s, "        emotes = [").unwrap();
             for v in v.emotes.as_slice() {
                 writeln!(s, "{{").unwrap();
                 // Members
-                writeln!(s, "    delay = {};", v.delay).unwrap();
-                writeln!(s, "    emote = {};", v.emote).unwrap();
+                writeln!(s, "            delay = {};", v.delay).unwrap();
+                writeln!(s, "            emote = {};", v.emote).unwrap();
 
                 writeln!(s, "    }},").unwrap();
             }
@@ -54,30 +54,43 @@ impl SMSG_NPC_TEXT_UPDATE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 384_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 384_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "text_id");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "text_id", "    ");
+        writeln!(s, "    /* texts: NpcTextUpdate[8] start */").unwrap();
+        for (i, v) in self.texts.iter().enumerate() {
+            writeln!(s, "    /* texts: NpcTextUpdate[8] {i} start */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "probability", "        ");
+            writeln!(s, "    /* texts: CString[2] start */").unwrap();
+            for (i, v) in v.texts.iter().enumerate() {
+                crate::util::write_bytes(&mut s, &mut bytes, v.len() + 1, &format!("texts {i}"), "        ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* texts: CString[2] end */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 1, "language", "        ");
+            writeln!(s, "    /* emotes: NpcTextUpdateEmote[3] start */").unwrap();
+            for (i, v) in v.emotes.iter().enumerate() {
+                writeln!(s, "    /* emotes: NpcTextUpdateEmote[3] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "delay", "            ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "emote", "            ");
+                writeln!(s, "    /* emotes: NpcTextUpdateEmote[3] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* emotes: NpcTextUpdateEmote[3] end */").unwrap();
+            writeln!(s, "    /* texts: NpcTextUpdate[8] {i} end */").unwrap();
         }
+        writeln!(s, "    /* texts: NpcTextUpdate[8] end */").unwrap();
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -85,6 +98,11 @@ impl SMSG_NPC_TEXT_UPDATE {
 impl crate::private::Sealed for SMSG_NPC_TEXT_UPDATE {}
 impl crate::Message for SMSG_NPC_TEXT_UPDATE {
     const OPCODE: u32 = 0x0180;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_NPC_TEXT_UPDATE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

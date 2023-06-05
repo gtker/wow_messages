@@ -22,11 +22,12 @@ pub(crate) fn write_bytes(
     bytes: &mut impl Iterator<Item = u8>,
     size: usize,
     name: &str,
+    prefix: &str,
 ) {
     use std::fmt::Write;
     let mut bytes = bytes.take(size);
 
-    write!(s, "    {:#04X}, ", bytes.next().unwrap()).unwrap();
+    write!(s, "{prefix}{:#04X}, ", bytes.next().unwrap()).unwrap();
 
     for b in bytes {
         write!(s, "{b:#04X}, ").unwrap();

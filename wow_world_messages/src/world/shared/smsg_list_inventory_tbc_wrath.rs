@@ -21,7 +21,7 @@ pub struct SMSG_LIST_INVENTORY {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_LIST_INVENTORY {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -35,14 +35,14 @@ impl SMSG_LIST_INVENTORY {
         for v in self.items.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    item_stack_count = {};", v.item_stack_count).unwrap();
-            writeln!(s, "    item = {};", v.item).unwrap();
-            writeln!(s, "    item_display_id = {};", v.item_display_id).unwrap();
-            writeln!(s, "    max_items = {};", v.max_items).unwrap();
-            writeln!(s, "    price = {};", v.price.as_int()).unwrap();
-            writeln!(s, "    max_durability = {};", v.max_durability).unwrap();
-            writeln!(s, "    durability = {};", v.durability).unwrap();
-            writeln!(s, "    extended_cost = {};", v.extended_cost).unwrap();
+            writeln!(s, "        item_stack_count = {};", v.item_stack_count).unwrap();
+            writeln!(s, "        item = {};", v.item).unwrap();
+            writeln!(s, "        item_display_id = {};", v.item_display_id).unwrap();
+            writeln!(s, "        max_items = {};", v.max_items).unwrap();
+            writeln!(s, "        price = {};", v.price.as_int()).unwrap();
+            writeln!(s, "        max_durability = {};", v.max_durability).unwrap();
+            writeln!(s, "        durability = {};", v.durability).unwrap();
+            writeln!(s, "        extended_cost = {};", v.extended_cost).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -50,22 +50,31 @@ impl SMSG_LIST_INVENTORY {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 415_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 415_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "vendor");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "vendor", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_items", "    ");
+        if !self.items.is_empty() {
+            writeln!(s, "    /* items: ListInventoryItem[amount_of_items] start */").unwrap();
+            for (i, v) in self.items.iter().enumerate() {
+                writeln!(s, "    /* items: ListInventoryItem[amount_of_items] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_stack_count", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item_display_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "max_items", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "price", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "max_durability", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "durability", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "extended_cost", "        ");
+                writeln!(s, "    /* items: ListInventoryItem[amount_of_items] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* items: ListInventoryItem[amount_of_items] end */").unwrap();
         }
 
 
@@ -73,7 +82,7 @@ impl SMSG_LIST_INVENTORY {
         writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -81,6 +90,11 @@ impl SMSG_LIST_INVENTORY {
 impl crate::private::Sealed for SMSG_LIST_INVENTORY {}
 impl crate::Message for SMSG_LIST_INVENTORY {
     const OPCODE: u32 = 0x019f;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_LIST_INVENTORY::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

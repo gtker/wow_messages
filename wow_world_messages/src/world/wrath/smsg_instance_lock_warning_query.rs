@@ -19,7 +19,7 @@ pub struct SMSG_INSTANCE_LOCK_WARNING_QUERY {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_INSTANCE_LOCK_WARNING_QUERY {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -33,30 +33,24 @@ impl SMSG_INSTANCE_LOCK_WARNING_QUERY {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 13_u16.to_be_bytes();
+        let [a, b] = 11_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 327_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 327_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "time");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "time", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "encounter_mask", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "unknown", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -64,6 +58,11 @@ impl SMSG_INSTANCE_LOCK_WARNING_QUERY {
 impl crate::private::Sealed for SMSG_INSTANCE_LOCK_WARNING_QUERY {}
 impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
     const OPCODE: u32 = 0x0147;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_INSTANCE_LOCK_WARNING_QUERY::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         9

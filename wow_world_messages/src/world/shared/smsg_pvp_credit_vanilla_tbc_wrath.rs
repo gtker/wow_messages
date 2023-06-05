@@ -20,7 +20,7 @@ pub struct SMSG_PVP_CREDIT {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_PVP_CREDIT {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -34,30 +34,24 @@ impl SMSG_PVP_CREDIT {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 20_u16.to_be_bytes();
+        let [a, b] = 18_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 652_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 652_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "honor_points");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "honor_points", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "victim", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "rank", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -65,6 +59,11 @@ impl SMSG_PVP_CREDIT {
 impl crate::private::Sealed for SMSG_PVP_CREDIT {}
 impl crate::Message for SMSG_PVP_CREDIT {
     const OPCODE: u32 = 0x028c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_PVP_CREDIT::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         16

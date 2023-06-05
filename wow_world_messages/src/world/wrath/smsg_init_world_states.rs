@@ -24,7 +24,7 @@ pub struct SMSG_INIT_WORLD_STATES {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_INIT_WORLD_STATES {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -40,8 +40,8 @@ impl SMSG_INIT_WORLD_STATES {
         for v in self.states.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    state = {};", v.state).unwrap();
-            writeln!(s, "    value = {};", v.value).unwrap();
+            writeln!(s, "        state = {};", v.state).unwrap();
+            writeln!(s, "        value = {};", v.value).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -49,22 +49,27 @@ impl SMSG_INIT_WORLD_STATES {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 706_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 706_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "map");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "map", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "sub_area", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "amount_of_states", "    ");
+        if !self.states.is_empty() {
+            writeln!(s, "    /* states: WorldState[amount_of_states] start */").unwrap();
+            for (i, v) in self.states.iter().enumerate() {
+                writeln!(s, "    /* states: WorldState[amount_of_states] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "state", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "value", "        ");
+                writeln!(s, "    /* states: WorldState[amount_of_states] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* states: WorldState[amount_of_states] end */").unwrap();
         }
 
 
@@ -72,7 +77,7 @@ impl SMSG_INIT_WORLD_STATES {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -80,6 +85,11 @@ impl SMSG_INIT_WORLD_STATES {
 impl crate::private::Sealed for SMSG_INIT_WORLD_STATES {}
 impl crate::Message for SMSG_INIT_WORLD_STATES {
     const OPCODE: u32 = 0x02c2;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_INIT_WORLD_STATES::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

@@ -20,7 +20,7 @@ pub struct SMSG_SPELLDISPELLOG {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_SPELLDISPELLOG {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -39,21 +39,23 @@ impl SMSG_SPELLDISPELLOG {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 635_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 635_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.victim), "victim", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.caster), "caster", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_spells", "    ");
+        if !self.spells.is_empty() {
+            writeln!(s, "    /* spells: u32[amount_of_spells] start */").unwrap();
+            for (i, v) in self.spells.iter().enumerate() {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("spells {i}"), "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* spells: u32[amount_of_spells] end */").unwrap();
         }
 
 
@@ -61,7 +63,7 @@ impl SMSG_SPELLDISPELLOG {
         writeln!(s, "    versions = \"1.12\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -69,6 +71,11 @@ impl SMSG_SPELLDISPELLOG {
 impl crate::private::Sealed for SMSG_SPELLDISPELLOG {}
 impl crate::Message for SMSG_SPELLDISPELLOG {
     const OPCODE: u32 = 0x027b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_SPELLDISPELLOG::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

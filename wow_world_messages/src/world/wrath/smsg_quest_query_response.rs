@@ -122,7 +122,7 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_QUEST_QUERY_RESPONSE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -159,8 +159,8 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         for v in self.rewards.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    item = {};", v.item).unwrap();
-            writeln!(s, "    item_count = {};", v.item_count).unwrap();
+            writeln!(s, "        item = {};", v.item).unwrap();
+            writeln!(s, "        item_count = {};", v.item_count).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -169,8 +169,8 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         for v in self.choice_rewards.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    item = {};", v.item).unwrap();
-            writeln!(s, "    item_count = {};", v.item_count).unwrap();
+            writeln!(s, "        item = {};", v.item).unwrap();
+            writeln!(s, "        item_count = {};", v.item_count).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -208,10 +208,10 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         for v in self.objectives.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    creature_id = {};", v.creature_id).unwrap();
-            writeln!(s, "    kill_count = {};", v.kill_count).unwrap();
-            writeln!(s, "    required_item_id = {};", v.required_item_id).unwrap();
-            writeln!(s, "    required_item_count = {};", v.required_item_count).unwrap();
+            writeln!(s, "        creature_id = {};", v.creature_id).unwrap();
+            writeln!(s, "        kill_count = {};", v.kill_count).unwrap();
+            writeln!(s, "        required_item_id = {};", v.required_item_id).unwrap();
+            writeln!(s, "        required_item_count = {};", v.required_item_count).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -220,9 +220,9 @@ impl SMSG_QUEST_QUERY_RESPONSE {
         for v in self.item_requirements.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    item = {};", v.item).unwrap();
-            writeln!(s, "    item_count = {};", v.item_count).unwrap();
-            writeln!(s, "    item_display_id = {};", v.item_display_id).unwrap();
+            writeln!(s, "        item = {};", v.item).unwrap();
+            writeln!(s, "        item_count = {};", v.item_count).unwrap();
+            writeln!(s, "        item_display_id = {};", v.item_display_id).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -235,30 +235,112 @@ impl SMSG_QUEST_QUERY_RESPONSE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 93_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 93_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_id");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_method", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_level", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "minimum_quest_level", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "zone_or_sort", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_type", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "suggest_player_amount", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "reputation_objective_faction", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "reputation_objective_value", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "required_opposite_faction", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "required_opposite_reputation_value", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "next_quest_in_chain", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "money_reward", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "max_level_money_reward", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "reward_spell", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "casted_reward_spell", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "honor_reward", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "honor_reward_multiplier", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "source_item_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_flags", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "title_reward", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "players_slain", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "bonus_talents", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "bonus_arena_points", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown1", "    ");
+        writeln!(s, "    /* rewards: QuestItemReward[4] start */").unwrap();
+        for (i, v) in self.rewards.iter().enumerate() {
+            writeln!(s, "    /* rewards: QuestItemReward[4] {i} start */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "        ");
+            writeln!(s, "    /* rewards: QuestItemReward[4] {i} end */").unwrap();
         }
+        writeln!(s, "    /* rewards: QuestItemReward[4] end */").unwrap();
+        writeln!(s, "    /* choice_rewards: QuestItemReward[6] start */").unwrap();
+        for (i, v) in self.choice_rewards.iter().enumerate() {
+            writeln!(s, "    /* choice_rewards: QuestItemReward[6] {i} start */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "        ");
+            writeln!(s, "    /* choice_rewards: QuestItemReward[6] {i} end */").unwrap();
+        }
+        writeln!(s, "    /* choice_rewards: QuestItemReward[6] end */").unwrap();
+        writeln!(s, "    /* reputation_rewards: u32[5] start */").unwrap();
+        for (i, v) in self.reputation_rewards.iter().enumerate() {
+            crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("reputation_rewards {i}"), "    ");
+        }
+        writeln!(s, "    /* reputation_rewards: u32[5] end */").unwrap();
+        writeln!(s, "    /* reputation_reward_amounts: u32[5] start */").unwrap();
+        for (i, v) in self.reputation_reward_amounts.iter().enumerate() {
+            crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("reputation_reward_amounts {i}"), "    ");
+        }
+        writeln!(s, "    /* reputation_reward_amounts: u32[5] end */").unwrap();
+        writeln!(s, "    /* reputation_reward_overrides: u32[5] start */").unwrap();
+        for (i, v) in self.reputation_reward_overrides.iter().enumerate() {
+            crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("reputation_reward_overrides {i}"), "    ");
+        }
+        writeln!(s, "    /* reputation_reward_overrides: u32[5] end */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "point_map_id", "    ");
+        writeln!(s, "    /* position: Vector2d start */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "        ");
+        writeln!(s, "    /* position: Vector2d end */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "point_opt", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.title.len() + 1, "title", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.objective_text.len() + 1, "objective_text", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.details.len() + 1, "details", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.end_text.len() + 1, "end_text", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.completed_text.len() + 1, "completed_text", "    ");
+        writeln!(s, "    /* objectives: QuestObjective[4] start */").unwrap();
+        for (i, v) in self.objectives.iter().enumerate() {
+            writeln!(s, "    /* objectives: QuestObjective[4] {i} start */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "creature_id", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "kill_count", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_item_id", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_item_count", "        ");
+            writeln!(s, "    /* objectives: QuestObjective[4] {i} end */").unwrap();
+        }
+        writeln!(s, "    /* objectives: QuestObjective[4] end */").unwrap();
+        writeln!(s, "    /* item_requirements: QuestItemRequirement[6] start */").unwrap();
+        for (i, v) in self.item_requirements.iter().enumerate() {
+            writeln!(s, "    /* item_requirements: QuestItemRequirement[6] {i} start */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "item_display_id", "        ");
+            writeln!(s, "    /* item_requirements: QuestItemRequirement[6] {i} end */").unwrap();
+        }
+        writeln!(s, "    /* item_requirements: QuestItemRequirement[6] end */").unwrap();
+        writeln!(s, "    /* objective_texts: CString[4] start */").unwrap();
+        for (i, v) in self.objective_texts.iter().enumerate() {
+            crate::util::write_bytes(&mut s, &mut bytes, v.len() + 1, &format!("objective_texts {i}"), "    ");
+        }
+        writeln!(s, "    /* objective_texts: CString[4] end */").unwrap();
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -266,6 +348,11 @@ impl SMSG_QUEST_QUERY_RESPONSE {
 impl crate::private::Sealed for SMSG_QUEST_QUERY_RESPONSE {}
 impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
     const OPCODE: u32 = 0x005d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_QUEST_QUERY_RESPONSE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

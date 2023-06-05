@@ -42,7 +42,7 @@ pub struct SMSG_ARENA_TEAM_EVENT {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_ARENA_TEAM_EVENT {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -109,22 +109,71 @@ impl SMSG_ARENA_TEAM_EVENT {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 855_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 855_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "event");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "event", "    ");
+        match &self.event {
+            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Join {
+                arena_team_name1,
+                joiner,
+                joiner_name,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, joiner_name.len() + 1, "joiner_name", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, arena_team_name1.len() + 1, "arena_team_name1", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "joiner", "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Leave {
+                leaver,
+                leaver_name,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, leaver_name.len() + 1, "leaver_name", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "leaver", "    ");
+            }
+            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Remove {
+                arena_team_name2,
+                kicked_player_name,
+                kicker_name,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, kicked_player_name.len() + 1, "kicked_player_name", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, arena_team_name2.len() + 1, "arena_team_name2", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, kicker_name.len() + 1, "kicker_name", "    ");
+            }
+            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderIs {
+                arena_team_name3,
+                leader_name,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, leader_name.len() + 1, "leader_name", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, arena_team_name3.len() + 1, "arena_team_name3", "    ");
+            }
+            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderChanged {
+                new_leader,
+                old_leader,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, old_leader.len() + 1, "old_leader", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, new_leader.len() + 1, "new_leader", "    ");
+            }
+            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Disbanded {
+                arena_team_name3,
+                leader_name,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, leader_name.len() + 1, "leader_name", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, arena_team_name3.len() + 1, "arena_team_name3", "    ");
+            }
+        }
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_strings", "    ");
+        if !self.string.is_empty() {
+            writeln!(s, "    /* string: CString[amount_of_strings] start */").unwrap();
+            for (i, v) in self.string.iter().enumerate() {
+                crate::util::write_bytes(&mut s, &mut bytes, v.len() + 1, &format!("string {i}"), "    ");
+            }
+            writeln!(s, "    /* string: CString[amount_of_strings] end */").unwrap();
         }
 
 
@@ -132,7 +181,7 @@ impl SMSG_ARENA_TEAM_EVENT {
         writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -140,6 +189,11 @@ impl SMSG_ARENA_TEAM_EVENT {
 impl crate::private::Sealed for SMSG_ARENA_TEAM_EVENT {}
 impl crate::Message for SMSG_ARENA_TEAM_EVENT {
     const OPCODE: u32 = 0x0357;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_ARENA_TEAM_EVENT::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

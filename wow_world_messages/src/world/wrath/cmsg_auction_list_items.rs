@@ -41,7 +41,7 @@ pub struct CMSG_AUCTION_LIST_ITEMS {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_AUCTION_LIST_ITEMS {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -65,8 +65,8 @@ impl CMSG_AUCTION_LIST_ITEMS {
         for v in self.sorted_auctions.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    column = {};", v.column).unwrap();
-            writeln!(s, "    reversed = {};", v.reversed).unwrap();
+            writeln!(s, "        column = {};", v.column).unwrap();
+            writeln!(s, "        reversed = {};", v.reversed).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -74,22 +74,35 @@ impl CMSG_AUCTION_LIST_ITEMS {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 600_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 600_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "auctioneer");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "auctioneer", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "list_start_item", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.searched_name.len() + 1, "searched_name", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "minimum_level", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "maximum_level", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "auction_slot_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "auction_main_category", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "auction_sub_category", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "auction_quality", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "usable", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "is_full", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_sorted_auctions", "    ");
+        if !self.sorted_auctions.is_empty() {
+            writeln!(s, "    /* sorted_auctions: AuctionSort[amount_of_sorted_auctions] start */").unwrap();
+            for (i, v) in self.sorted_auctions.iter().enumerate() {
+                writeln!(s, "    /* sorted_auctions: AuctionSort[amount_of_sorted_auctions] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "column", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "reversed", "        ");
+                writeln!(s, "    /* sorted_auctions: AuctionSort[amount_of_sorted_auctions] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* sorted_auctions: AuctionSort[amount_of_sorted_auctions] end */").unwrap();
         }
 
 
@@ -97,7 +110,7 @@ impl CMSG_AUCTION_LIST_ITEMS {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -105,6 +118,11 @@ impl CMSG_AUCTION_LIST_ITEMS {
 impl crate::private::Sealed for CMSG_AUCTION_LIST_ITEMS {}
 impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
     const OPCODE: u32 = 0x0258;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_AUCTION_LIST_ITEMS::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

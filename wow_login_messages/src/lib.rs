@@ -151,6 +151,9 @@ pub trait ServerMessage: Sized + private::Sealed {
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: W) -> Result<(), std::io::Error>;
 
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String>;
+
     #[doc(hidden)]
     #[cfg(feature = "async-std")]
     fn astd_read<'async_trait, R, I: private::Sealed>(
@@ -209,6 +212,9 @@ pub trait ClientMessage: Sized + private::Sealed {
 
     #[cfg(feature = "sync")]
     fn write<W: std::io::Write>(&self, w: W) -> Result<(), std::io::Error>;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String>;
 
     #[doc(hidden)]
     #[cfg(feature = "async-std")]

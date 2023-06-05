@@ -12,7 +12,7 @@ pub struct CMD_XFER_ACCEPT {
 
 #[cfg(feature = "print-testcase")]
 impl CMD_XFER_ACCEPT {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
 
         let mut s = String::new();
@@ -22,8 +22,6 @@ impl CMD_XFER_ACCEPT {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        // Bytes
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
@@ -35,7 +33,7 @@ impl CMD_XFER_ACCEPT {
         writeln!(s, "    login_versions = \"3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -53,6 +51,11 @@ impl crate::private::Sealed for CMD_XFER_ACCEPT {}
 
 impl ClientMessage for CMD_XFER_ACCEPT {
     const OPCODE: u8 = 0x32;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMD_XFER_ACCEPT::to_test_case_string(self)
+    }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         Ok(Self {

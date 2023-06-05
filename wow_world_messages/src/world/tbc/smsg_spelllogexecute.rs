@@ -21,7 +21,7 @@ pub struct SMSG_SPELLLOGEXECUTE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_SPELLLOGEXECUTE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -36,7 +36,7 @@ impl SMSG_SPELLLOGEXECUTE {
         for v in self.logs.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    effect = {};", crate::tbc::SpellEffect::try_from(v.effect.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        effect = {};", crate::tbc::SpellEffect::try_from(v.effect.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.effect {
                 crate::tbc::SpellLog_SpellEffect::PowerDrain {
                     amount,
@@ -44,108 +44,108 @@ impl SMSG_SPELLLOGEXECUTE {
                     power,
                     target1,
                 } => {
-                    writeln!(s, "    target1 = {};", target1.guid()).unwrap();
-                    writeln!(s, "    amount = {};", amount).unwrap();
-                    writeln!(s, "    power = {};", power.as_test_case_value()).unwrap();
+                    writeln!(s, "        target1 = {};", target1.guid()).unwrap();
+                    writeln!(s, "        amount = {};", amount).unwrap();
+                    writeln!(s, "        power = {};", power.as_test_case_value()).unwrap();
                     writeln!(s, "    {}", if multiplier.to_string().contains(".") { multiplier.to_string() } else { format!("{}.0", multiplier) }).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::AddExtraAttacks {
                     extra_attacks,
                     target4,
                 } => {
-                    writeln!(s, "    target4 = {};", target4.guid()).unwrap();
-                    writeln!(s, "    extra_attacks = {};", extra_attacks).unwrap();
+                    writeln!(s, "        target4 = {};", target4.guid()).unwrap();
+                    writeln!(s, "        extra_attacks = {};", extra_attacks).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::CreateItem {
                     item,
                 } => {
-                    writeln!(s, "    item = {};", item).unwrap();
+                    writeln!(s, "        item = {};", item).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::Summon {
                     summon_target,
                 } => {
-                    writeln!(s, "    summon_target = {};", summon_target.guid()).unwrap();
+                    writeln!(s, "        summon_target = {};", summon_target.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::OpenLock {
                     lock_target,
                 } => {
-                    writeln!(s, "    lock_target = {};", lock_target.guid()).unwrap();
+                    writeln!(s, "        lock_target = {};", lock_target.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::TransDoor {
                     summon_target,
                 } => {
-                    writeln!(s, "    summon_target = {};", summon_target.guid()).unwrap();
+                    writeln!(s, "        summon_target = {};", summon_target.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::SummonPet {
                     summon_target,
                 } => {
-                    writeln!(s, "    summon_target = {};", summon_target.guid()).unwrap();
+                    writeln!(s, "        summon_target = {};", summon_target.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::OpenLockItem {
                     lock_target,
                 } => {
-                    writeln!(s, "    lock_target = {};", lock_target.guid()).unwrap();
+                    writeln!(s, "        lock_target = {};", lock_target.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::InterruptCast {
                     interrupted_spell,
                     target5,
                 } => {
-                    writeln!(s, "    target5 = {};", target5.guid()).unwrap();
-                    writeln!(s, "    interrupted_spell = {};", interrupted_spell).unwrap();
+                    writeln!(s, "        target5 = {};", target5.guid()).unwrap();
+                    writeln!(s, "        interrupted_spell = {};", interrupted_spell).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::SummonObjectWild {
                     summon_target,
                 } => {
-                    writeln!(s, "    summon_target = {};", summon_target.guid()).unwrap();
+                    writeln!(s, "        summon_target = {};", summon_target.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::CreateHouse {
                     summon_target,
                 } => {
-                    writeln!(s, "    summon_target = {};", summon_target.guid()).unwrap();
+                    writeln!(s, "        summon_target = {};", summon_target.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::Duel {
                     summon_target,
                 } => {
-                    writeln!(s, "    summon_target = {};", summon_target.guid()).unwrap();
+                    writeln!(s, "        summon_target = {};", summon_target.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::FeedPet {
                     pet_feed_guid,
                 } => {
-                    writeln!(s, "    pet_feed_guid = {};", pet_feed_guid.guid()).unwrap();
+                    writeln!(s, "        pet_feed_guid = {};", pet_feed_guid.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::DismissPet {
                     pet_dismiss_guid,
                 } => {
-                    writeln!(s, "    pet_dismiss_guid = {};", pet_dismiss_guid.guid()).unwrap();
+                    writeln!(s, "        pet_dismiss_guid = {};", pet_dismiss_guid.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::SummonObjectSlot1 {
                     summon_target,
                 } => {
-                    writeln!(s, "    summon_target = {};", summon_target.guid()).unwrap();
+                    writeln!(s, "        summon_target = {};", summon_target.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::SummonObjectSlot2 {
                     summon_target,
                 } => {
-                    writeln!(s, "    summon_target = {};", summon_target.guid()).unwrap();
+                    writeln!(s, "        summon_target = {};", summon_target.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::SummonObjectSlot3 {
                     summon_target,
                 } => {
-                    writeln!(s, "    summon_target = {};", summon_target.guid()).unwrap();
+                    writeln!(s, "        summon_target = {};", summon_target.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::SummonObjectSlot4 {
                     summon_target,
                 } => {
-                    writeln!(s, "    summon_target = {};", summon_target.guid()).unwrap();
+                    writeln!(s, "        summon_target = {};", summon_target.guid()).unwrap();
                 }
                 crate::tbc::SpellLog_SpellEffect::DurabilityDamage {
                     item_to_damage,
                     target6,
                     unknown5,
                 } => {
-                    writeln!(s, "    target6 = {};", target6.guid()).unwrap();
-                    writeln!(s, "    item_to_damage = {};", item_to_damage).unwrap();
-                    writeln!(s, "    unknown5 = {};", unknown5).unwrap();
+                    writeln!(s, "        target6 = {};", target6.guid()).unwrap();
+                    writeln!(s, "        item_to_damage = {};", item_to_damage).unwrap();
+                    writeln!(s, "        unknown5 = {};", unknown5).unwrap();
                 }
                 _ => {}
             }
@@ -157,21 +157,139 @@ impl SMSG_SPELLLOGEXECUTE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 588_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 588_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.caster), "caster", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "spell", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_effects", "    ");
+        if !self.logs.is_empty() {
+            writeln!(s, "    /* logs: SpellLog[amount_of_effects] start */").unwrap();
+            for (i, v) in self.logs.iter().enumerate() {
+                writeln!(s, "    /* logs: SpellLog[amount_of_effects] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "effect", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_logs", "        ");
+                match &v.effect {
+                    crate::tbc::SpellLog_SpellEffect::PowerDrain {
+                        amount,
+                        multiplier,
+                        power,
+                        target1,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&target1), "target1", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "power", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "multiplier", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::AddExtraAttacks {
+                        extra_attacks,
+                        target4,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&target4), "target4", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "extra_attacks", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::CreateItem {
+                        item,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::Summon {
+                        summon_target,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&summon_target), "summon_target", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::OpenLock {
+                        lock_target,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&lock_target), "lock_target", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::TransDoor {
+                        summon_target,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&summon_target), "summon_target", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::SummonPet {
+                        summon_target,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&summon_target), "summon_target", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::OpenLockItem {
+                        lock_target,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&lock_target), "lock_target", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::InterruptCast {
+                        interrupted_spell,
+                        target5,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&target5), "target5", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "interrupted_spell", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::SummonObjectWild {
+                        summon_target,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&summon_target), "summon_target", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::CreateHouse {
+                        summon_target,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&summon_target), "summon_target", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::Duel {
+                        summon_target,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&summon_target), "summon_target", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::FeedPet {
+                        pet_feed_guid,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&pet_feed_guid), "pet_feed_guid", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::DismissPet {
+                        pet_dismiss_guid,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&pet_dismiss_guid), "pet_dismiss_guid", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::SummonObjectSlot1 {
+                        summon_target,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&summon_target), "summon_target", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::SummonObjectSlot2 {
+                        summon_target,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&summon_target), "summon_target", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::SummonObjectSlot3 {
+                        summon_target,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&summon_target), "summon_target", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::SummonObjectSlot4 {
+                        summon_target,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&summon_target), "summon_target", "        ");
+                    }
+                    crate::tbc::SpellLog_SpellEffect::DurabilityDamage {
+                        item_to_damage,
+                        target6,
+                        unknown5,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&target6), "target6", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_to_damage", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown5", "        ");
+                    }
+                    _ => {}
+                }
+
+                writeln!(s, "    /* logs: SpellLog[amount_of_effects] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* logs: SpellLog[amount_of_effects] end */").unwrap();
         }
 
 
@@ -179,7 +297,7 @@ impl SMSG_SPELLLOGEXECUTE {
         writeln!(s, "    versions = \"2.4.3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -187,6 +305,11 @@ impl SMSG_SPELLLOGEXECUTE {
 impl crate::private::Sealed for SMSG_SPELLLOGEXECUTE {}
 impl crate::Message for SMSG_SPELLLOGEXECUTE {
     const OPCODE: u32 = 0x024c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_SPELLLOGEXECUTE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

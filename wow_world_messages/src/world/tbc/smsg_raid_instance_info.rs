@@ -16,7 +16,7 @@ pub struct SMSG_RAID_INSTANCE_INFO {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_RAID_INSTANCE_INFO {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -29,10 +29,10 @@ impl SMSG_RAID_INSTANCE_INFO {
         for v in self.raid_infos.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    map = {};", v.map.as_test_case_value()).unwrap();
-            writeln!(s, "    reset_time = {};", v.reset_time).unwrap();
-            writeln!(s, "    instance_id = {};", v.instance_id).unwrap();
-            writeln!(s, "    index = {};", v.index).unwrap();
+            writeln!(s, "        map = {};", v.map.as_test_case_value()).unwrap();
+            writeln!(s, "        reset_time = {};", v.reset_time).unwrap();
+            writeln!(s, "        instance_id = {};", v.instance_id).unwrap();
+            writeln!(s, "        index = {};", v.index).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -40,22 +40,26 @@ impl SMSG_RAID_INSTANCE_INFO {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 716_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 716_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_raid_infos");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_raid_infos", "    ");
+        if !self.raid_infos.is_empty() {
+            writeln!(s, "    /* raid_infos: RaidInfo[amount_of_raid_infos] start */").unwrap();
+            for (i, v) in self.raid_infos.iter().enumerate() {
+                writeln!(s, "    /* raid_infos: RaidInfo[amount_of_raid_infos] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "map", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "reset_time", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "instance_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "index", "        ");
+                writeln!(s, "    /* raid_infos: RaidInfo[amount_of_raid_infos] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* raid_infos: RaidInfo[amount_of_raid_infos] end */").unwrap();
         }
 
 
@@ -63,7 +67,7 @@ impl SMSG_RAID_INSTANCE_INFO {
         writeln!(s, "    versions = \"2.4.3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -71,6 +75,11 @@ impl SMSG_RAID_INSTANCE_INFO {
 impl crate::private::Sealed for SMSG_RAID_INSTANCE_INFO {}
 impl crate::Message for SMSG_RAID_INSTANCE_INFO {
     const OPCODE: u32 = 0x02cc;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_RAID_INSTANCE_INFO::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

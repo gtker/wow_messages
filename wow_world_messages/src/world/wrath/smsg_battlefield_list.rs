@@ -43,7 +43,7 @@ pub struct SMSG_BATTLEFIELD_LIST {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_BATTLEFIELD_LIST {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -84,22 +84,45 @@ impl SMSG_BATTLEFIELD_LIST {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 573_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 573_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "battlemaster");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "battlemaster", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "battleground_type", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "unknown1", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "unknown2", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "has_win", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "win_honor", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "win_arena", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "loss_honor", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "random", "    ");
+        match &self.random {
+            crate::wrath::SMSG_BATTLEFIELD_LIST_RandomBg::Random {
+                honor_lost,
+                reward_arena,
+                reward_honor,
+                win_random,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "win_random", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "reward_honor", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "reward_arena", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "honor_lost", "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            _ => {}
+        }
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "number_of_battlegrounds", "    ");
+        if !self.battlegrounds.is_empty() {
+            writeln!(s, "    /* battlegrounds: u32[number_of_battlegrounds] start */").unwrap();
+            for (i, v) in self.battlegrounds.iter().enumerate() {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("battlegrounds {i}"), "    ");
+            }
+            writeln!(s, "    /* battlegrounds: u32[number_of_battlegrounds] end */").unwrap();
         }
 
 
@@ -107,7 +130,7 @@ impl SMSG_BATTLEFIELD_LIST {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -115,6 +138,11 @@ impl SMSG_BATTLEFIELD_LIST {
 impl crate::private::Sealed for SMSG_BATTLEFIELD_LIST {}
 impl crate::Message for SMSG_BATTLEFIELD_LIST {
     const OPCODE: u32 = 0x023d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_BATTLEFIELD_LIST::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

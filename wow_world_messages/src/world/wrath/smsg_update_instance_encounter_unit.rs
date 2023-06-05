@@ -31,7 +31,7 @@ pub struct SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -90,30 +90,69 @@ impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 532_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 532_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "frame");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "frame", "    ");
+        match &self.frame {
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::Engage {
+                guid,
+                parameter1,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&guid), "guid", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "parameter1", "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::Disengage {
+                guid,
+                parameter1,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&guid), "guid", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "parameter1", "    ");
+            }
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::UpdatePriority {
+                guid,
+                parameter1,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&guid), "guid", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "parameter1", "    ");
+            }
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::AddTimer {
+                parameter2,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "parameter2", "    ");
+            }
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::EnableObjective {
+                parameter2,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "parameter2", "    ");
+            }
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::UpdateObjective {
+                parameter3,
+                parameter4,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "parameter3", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "parameter4", "    ");
+            }
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::DisableObjective {
+                parameter2,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "parameter2", "    ");
+            }
+            _ => {}
         }
+
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -121,6 +160,11 @@ impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
 impl crate::private::Sealed for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {}
 impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
     const OPCODE: u32 = 0x0214;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

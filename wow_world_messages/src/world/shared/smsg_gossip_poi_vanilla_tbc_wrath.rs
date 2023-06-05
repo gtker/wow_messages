@@ -23,7 +23,7 @@ pub struct SMSG_GOSSIP_POI {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_GOSSIP_POI {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,30 +45,29 @@ impl SMSG_GOSSIP_POI {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 548_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 548_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "flags");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "flags", "    ");
+        writeln!(s, "    /* position: Vector2d start */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "        ");
+        writeln!(s, "    /* position: Vector2d end */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "icon", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "data", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.location_name.len() + 1, "location_name", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -76,6 +75,11 @@ impl SMSG_GOSSIP_POI {
 impl crate::private::Sealed for SMSG_GOSSIP_POI {}
 impl crate::Message for SMSG_GOSSIP_POI {
     const OPCODE: u32 = 0x0224;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_GOSSIP_POI::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

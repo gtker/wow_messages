@@ -15,7 +15,7 @@ pub struct MSG_PETITION_DECLINE {
 
 #[cfg(feature = "print-testcase")]
 impl MSG_PETITION_DECLINE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         panic!("MSG types not supported");
     }
 
@@ -24,6 +24,11 @@ impl MSG_PETITION_DECLINE {
 impl crate::private::Sealed for MSG_PETITION_DECLINE {}
 impl crate::Message for MSG_PETITION_DECLINE {
     const OPCODE: u32 = 0x01c2;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        MSG_PETITION_DECLINE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         8

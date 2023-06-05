@@ -20,7 +20,7 @@ pub struct SMSG_SET_PROJECTILE_POSITION {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_SET_PROJECTILE_POSITION {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,30 +41,28 @@ impl SMSG_SET_PROJECTILE_POSITION {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 25_u16.to_be_bytes();
+        let [a, b] = 23_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 1215_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 1215_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "caster");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "caster", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_casts", "    ");
+        writeln!(s, "    /* position: Vector3d start */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "        ");
+        writeln!(s, "    /* position: Vector3d end */").unwrap();
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -72,6 +70,11 @@ impl SMSG_SET_PROJECTILE_POSITION {
 impl crate::private::Sealed for SMSG_SET_PROJECTILE_POSITION {}
 impl crate::Message for SMSG_SET_PROJECTILE_POSITION {
     const OPCODE: u32 = 0x04bf;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_SET_PROJECTILE_POSITION::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         21

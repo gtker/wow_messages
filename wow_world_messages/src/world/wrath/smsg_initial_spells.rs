@@ -25,7 +25,7 @@ pub struct SMSG_INITIAL_SPELLS {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_INITIAL_SPELLS {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -39,8 +39,8 @@ impl SMSG_INITIAL_SPELLS {
         for v in self.initial_spells.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    spell_id = {};", v.spell_id).unwrap();
-            writeln!(s, "    unknown1 = {};", v.unknown1).unwrap();
+            writeln!(s, "        spell_id = {};", v.spell_id).unwrap();
+            writeln!(s, "        unknown1 = {};", v.unknown1).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -50,11 +50,11 @@ impl SMSG_INITIAL_SPELLS {
         for v in self.cooldowns.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    spell_id = {};", v.spell_id).unwrap();
-            writeln!(s, "    item_id = {};", v.item_id).unwrap();
-            writeln!(s, "    spell_category = {};", v.spell_category).unwrap();
-            writeln!(s, "    cooldown = {};", v.cooldown.as_millis()).unwrap();
-            writeln!(s, "    category_cooldown = {};", v.category_cooldown.as_millis()).unwrap();
+            writeln!(s, "        spell_id = {};", v.spell_id).unwrap();
+            writeln!(s, "        item_id = {};", v.item_id).unwrap();
+            writeln!(s, "        spell_category = {};", v.spell_category).unwrap();
+            writeln!(s, "        cooldown = {};", v.cooldown.as_millis()).unwrap();
+            writeln!(s, "        category_cooldown = {};", v.category_cooldown.as_millis()).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -62,22 +62,39 @@ impl SMSG_INITIAL_SPELLS {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 298_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 298_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "unknown1");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "unknown1", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "spell_count", "    ");
+        if !self.initial_spells.is_empty() {
+            writeln!(s, "    /* initial_spells: InitialSpell[spell_count] start */").unwrap();
+            for (i, v) in self.initial_spells.iter().enumerate() {
+                writeln!(s, "    /* initial_spells: InitialSpell[spell_count] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "unknown1", "        ");
+                writeln!(s, "    /* initial_spells: InitialSpell[spell_count] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* initial_spells: InitialSpell[spell_count] end */").unwrap();
+        }
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "cooldown_count", "    ");
+        if !self.cooldowns.is_empty() {
+            writeln!(s, "    /* cooldowns: CooldownSpell[cooldown_count] start */").unwrap();
+            for (i, v) in self.cooldowns.iter().enumerate() {
+                writeln!(s, "    /* cooldowns: CooldownSpell[cooldown_count] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "spell_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "item_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "spell_category", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "cooldown", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "category_cooldown", "        ");
+                writeln!(s, "    /* cooldowns: CooldownSpell[cooldown_count] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* cooldowns: CooldownSpell[cooldown_count] end */").unwrap();
         }
 
 
@@ -85,7 +102,7 @@ impl SMSG_INITIAL_SPELLS {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -93,6 +110,11 @@ impl SMSG_INITIAL_SPELLS {
 impl crate::private::Sealed for SMSG_INITIAL_SPELLS {}
 impl crate::Message for SMSG_INITIAL_SPELLS {
     const OPCODE: u32 = 0x012a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_INITIAL_SPELLS::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

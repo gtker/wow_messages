@@ -19,7 +19,7 @@ pub struct SMSG_PETITION_SHOWLIST {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_PETITION_SHOWLIST {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -33,11 +33,11 @@ impl SMSG_PETITION_SHOWLIST {
         for v in self.petitions.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    index = {};", v.index).unwrap();
-            writeln!(s, "    charter_entry = {};", v.charter_entry).unwrap();
-            writeln!(s, "    charter_display_id = {};", v.charter_display_id).unwrap();
-            writeln!(s, "    guild_charter_cost = {};", v.guild_charter_cost).unwrap();
-            writeln!(s, "    unknown1 = {};", v.unknown1).unwrap();
+            writeln!(s, "        index = {};", v.index).unwrap();
+            writeln!(s, "        charter_entry = {};", v.charter_entry).unwrap();
+            writeln!(s, "        charter_display_id = {};", v.charter_display_id).unwrap();
+            writeln!(s, "        guild_charter_cost = {};", v.guild_charter_cost).unwrap();
+            writeln!(s, "        unknown1 = {};", v.unknown1).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -45,22 +45,28 @@ impl SMSG_PETITION_SHOWLIST {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 444_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 444_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "npc");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "npc", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_petitions", "    ");
+        if !self.petitions.is_empty() {
+            writeln!(s, "    /* petitions: PetitionShowlist[amount_of_petitions] start */").unwrap();
+            for (i, v) in self.petitions.iter().enumerate() {
+                writeln!(s, "    /* petitions: PetitionShowlist[amount_of_petitions] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "index", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "charter_entry", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "charter_display_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "guild_charter_cost", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown1", "        ");
+                writeln!(s, "    /* petitions: PetitionShowlist[amount_of_petitions] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* petitions: PetitionShowlist[amount_of_petitions] end */").unwrap();
         }
 
 
@@ -68,7 +74,7 @@ impl SMSG_PETITION_SHOWLIST {
         writeln!(s, "    versions = \"1\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -76,6 +82,11 @@ impl SMSG_PETITION_SHOWLIST {
 impl crate::private::Sealed for SMSG_PETITION_SHOWLIST {}
 impl crate::Message for SMSG_PETITION_SHOWLIST {
     const OPCODE: u32 = 0x01bc;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_PETITION_SHOWLIST::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

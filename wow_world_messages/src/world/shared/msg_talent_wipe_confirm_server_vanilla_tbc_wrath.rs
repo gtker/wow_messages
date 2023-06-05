@@ -20,7 +20,7 @@ pub struct MSG_TALENT_WIPE_CONFIRM_Server {
 
 #[cfg(feature = "print-testcase")]
 impl MSG_TALENT_WIPE_CONFIRM_Server {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -33,30 +33,23 @@ impl MSG_TALENT_WIPE_CONFIRM_Server {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 16_u16.to_be_bytes();
+        let [a, b] = 14_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 682_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 682_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "wiping_npc");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "wiping_npc", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "cost_in_copper", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -64,6 +57,11 @@ impl MSG_TALENT_WIPE_CONFIRM_Server {
 impl crate::private::Sealed for MSG_TALENT_WIPE_CONFIRM_Server {}
 impl crate::Message for MSG_TALENT_WIPE_CONFIRM_Server {
     const OPCODE: u32 = 0x02aa;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        MSG_TALENT_WIPE_CONFIRM_Server::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         12

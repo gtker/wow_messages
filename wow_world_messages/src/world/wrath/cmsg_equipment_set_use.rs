@@ -15,7 +15,7 @@ pub struct CMSG_EQUIPMENT_SET_USE {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_EQUIPMENT_SET_USE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -27,9 +27,9 @@ impl CMSG_EQUIPMENT_SET_USE {
         for v in self.sets.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    item = {};", v.item.guid()).unwrap();
-            writeln!(s, "    source_bag = {};", v.source_bag).unwrap();
-            writeln!(s, "    source_slot = {};", v.source_slot).unwrap();
+            writeln!(s, "        item = {};", v.item.guid()).unwrap();
+            writeln!(s, "        source_bag = {};", v.source_bag).unwrap();
+            writeln!(s, "        source_slot = {};", v.source_slot).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -37,29 +37,30 @@ impl CMSG_EQUIPMENT_SET_USE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 196_u16.to_be_bytes();
+        let [a, b] = 194_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 1237_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 1237_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
+        writeln!(s, "    /* sets: EquipmentSet[19] start */").unwrap();
+        for (i, v) in self.sets.iter().enumerate() {
+            writeln!(s, "    /* sets: EquipmentSet[19] {i} start */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 8, "item", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 1, "source_bag", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 1, "source_slot", "        ");
+            writeln!(s, "    /* sets: EquipmentSet[19] {i} end */").unwrap();
         }
+        writeln!(s, "    /* sets: EquipmentSet[19] end */").unwrap();
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -67,6 +68,11 @@ impl CMSG_EQUIPMENT_SET_USE {
 impl crate::private::Sealed for CMSG_EQUIPMENT_SET_USE {}
 impl crate::Message for CMSG_EQUIPMENT_SET_USE {
     const OPCODE: u32 = 0x04d5;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_EQUIPMENT_SET_USE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         190

@@ -35,7 +35,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
 
 #[cfg(feature = "print-testcase")]
 impl CMD_AUTH_RECONNECT_PROOF_Client {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
 
         let mut s = String::new();
@@ -60,26 +60,22 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        // Bytes
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
         writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, self.proof_data.len(), "proof_data", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.client_proof.len(), "client_proof", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.client_checksum.len(), "client_checksum", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "key_count", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    login_versions = \"2 5 6 7 8\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -115,6 +111,11 @@ impl crate::private::Sealed for CMD_AUTH_RECONNECT_PROOF_Client {}
 
 impl ClientMessage for CMD_AUTH_RECONNECT_PROOF_Client {
     const OPCODE: u8 = 0x03;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMD_AUTH_RECONNECT_PROOF_Client::to_test_case_string(self)
+    }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // proof_data: u8[16]

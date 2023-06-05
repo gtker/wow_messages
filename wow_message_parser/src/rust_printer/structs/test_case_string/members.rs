@@ -7,27 +7,47 @@ use crate::parser::types::ty::Type;
 use crate::rust_printer::structs::test_case_string;
 use crate::rust_printer::{DefinerType, Writer};
 
-pub(crate) fn print_members(s: &mut Writer, e: &Container, variable_prefix: &str) {
+pub(crate) fn print_members(s: &mut Writer, e: &Container, variable_prefix: &str, prefix: &str) {
     s.wln("// Members");
 
     for m in e.members() {
-        print_struct_member(s, e, m, variable_prefix);
+        print_struct_member(s, e, m, variable_prefix, prefix);
     }
 
     s.newline();
 }
 
-fn print_struct_member(s: &mut Writer, e: &Container, m: &StructMember, variable_prefix: &str) {
+fn print_struct_member(
+    s: &mut Writer,
+    e: &Container,
+    m: &StructMember,
+    variable_prefix: &str,
+    prefix: &str,
+) {
     match m {
         StructMember::Definition(d) => {
-            print_member_definition(s, d, variable_prefix);
+            print_member_definition(s, d, variable_prefix, prefix);
         }
         StructMember::IfStatement(statement) => match statement.definer_type() {
             DefinerType::Enum => {
-                print_if_statement_enum(s, e, statement, variable_prefix);
+                print_if_statement_enum(
+                    s,
+                    e,
+                    statement,
+                    variable_prefix,
+                    prefix,
+                    print_struct_member,
+                );
             }
             DefinerType::Flag => {
-                print_if_statement_flag(s, e, statement, variable_prefix);
+                print_if_statement_flag(
+                    s,
+                    e,
+                    statement,
+                    variable_prefix,
+                    prefix,
+                    print_struct_member,
+                );
             }
         },
         StructMember::OptionalStatement(optional) => {
@@ -35,18 +55,20 @@ fn print_struct_member(s: &mut Writer, e: &Container, m: &StructMember, variable
             s.body(format!("if let Some({name}) = &self.{name}"), |s| {
                 for m in optional.members() {
                     let variable_prefix = format!("{name}.");
-                    print_struct_member(s, e, m, &variable_prefix);
+                    print_struct_member(s, e, m, &variable_prefix, prefix);
                 }
             });
         }
     }
 }
 
-fn print_if_statement_flag(
+pub(crate) fn print_if_statement_flag(
     s: &mut Writer,
     e: &Container,
     statement: &IfStatement,
     variable_prefix: &str,
+    prefix: &str,
+    print_function: impl Fn(&mut Writer, &Container, &StructMember, &str, &str),
 ) {
     s.open_curly(format!(
         "if let Some(if_statement) = &{variable_prefix}{variable}.get_{variant}()",
@@ -56,7 +78,7 @@ fn print_if_statement_flag(
     if statement.else_ifs().is_empty() {
         let variable_prefix = "if_statement.";
         for m in statement.members() {
-            print_struct_member(s, e, m, variable_prefix);
+            print_function(s, e, m, variable_prefix, prefix);
         }
     } else {
         s.open_curly("match if_statement");
@@ -84,7 +106,7 @@ fn print_if_statement_flag(
 
             let variable_prefix = "";
             for m in enumerator.original_fields() {
-                print_struct_member(s, e, m, variable_prefix);
+                print_function(s, e, m, variable_prefix, prefix);
             }
 
             s.closing_curly(); // Enumerator body
@@ -96,11 +118,13 @@ fn print_if_statement_flag(
     s.closing_curly_newline(); // if let Some(s)
 }
 
-fn print_if_statement_enum(
+pub(crate) fn print_if_statement_enum(
     s: &mut Writer,
     e: &Container,
     statement: &IfStatement,
     variable_prefix: &str,
+    prefix: &str,
+    print_function: impl Fn(&mut Writer, &Container, &StructMember, &str, &str),
 ) {
     s.open_curly(format!(
         "match &{prefix}{name}",
@@ -147,7 +171,7 @@ fn print_if_statement_enum(
 
         for m in enumerator.original_fields() {
             if statement.contains(m) {
-                print_struct_member(s, e, m, "");
+                print_function(s, e, m, "", prefix);
             }
         }
 
@@ -161,7 +185,12 @@ fn print_if_statement_enum(
     s.closing_curly_newline(); // match
 }
 
-fn print_member_definition(s: &mut Writer, d: &StructMemberDefinition, variable_prefix: &str) {
+fn print_member_definition(
+    s: &mut Writer,
+    d: &StructMemberDefinition,
+    variable_prefix: &str,
+    prefix: &str,
+) {
     if d.value().is_some() {
         return;
     }
@@ -175,49 +204,49 @@ fn print_member_definition(s: &mut Writer, d: &StructMemberDefinition, variable_
 
     match d.ty() {
         Type::Integer(_) => {
-            test_case_string::wlna(s, format!("    {name} = {{}};"), format!("{var_name}"));
+            test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), format!("{var_name}"));
         }
         Type::Bool(_) => {
             let extra = if variable_prefix == "" { "*" } else { "" };
 
             test_case_string::wlna(
                 s,
-                format!("    {name} = {{}};"),
+                format!("{prefix}{name} = {{}};"),
                 format!("if {extra}{var_name} {{ \"TRUE\" }} else {{ \"FALSE\" }}"),
             );
         }
         Type::Guid | Type::PackedGuid => {
             test_case_string::wlna(
                 s,
-                format!("    {name} = {{}};"),
+                format!("{prefix}{name} = {{}};"),
                 format!("{var_name}.guid()"),
             );
         }
         Type::Seconds => {
             test_case_string::wlna(
                 s,
-                format!("    {name} = {{}};"),
+                format!("{prefix}{name} = {{}};"),
                 format!("{var_name}.as_secs()"),
             );
         }
         Type::Milliseconds => {
             test_case_string::wlna(
                 s,
-                format!("    {name} = {{}};"),
+                format!("{prefix}{name} = {{}};"),
                 format!("{var_name}.as_millis()"),
             );
         }
         Type::Gold | Type::Level | Type::Level16 | Type::Level32 | Type::DateTime => {
             test_case_string::wlna(
                 s,
-                format!("    {name} = {{}};"),
+                format!("{prefix}{name} = {{}};"),
                 format!("{var_name}.as_int()"),
             );
         }
         Type::String | Type::CString | Type::SizedCString => {
             test_case_string::wlna(
                 s,
-                format!("    {name} = \\\"{{}}\\\";"),
+                format!("{prefix}{name} = \\\"{{}}\\\";"),
                 format!("{var_name}"),
             );
         }
@@ -227,7 +256,7 @@ fn print_member_definition(s: &mut Writer, d: &StructMemberDefinition, variable_
         Type::IpAddress => {
             test_case_string::wlna(
                 s,
-                format!("    {name} = {{:#08X}};"),
+                format!("{prefix}{name} = {{:#08X}};"),
                 format!("u32::from_be_bytes({var_name}.octets())"),
             );
         }
@@ -245,7 +274,7 @@ fn print_member_definition(s: &mut Writer, d: &StructMemberDefinition, variable_
                 format!("{import_path}::{ty}::try_from({var_name}.as_int(){extra}).unwrap().as_test_case_value()")
             };
 
-            test_case_string::wlna(s, format!("    {name} = {{}};"), extra);
+            test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), extra);
         }
         Type::Flag { e, upcast } => {
             let import_path = get_import_path(e.tags().import_version());
@@ -261,23 +290,24 @@ fn print_member_definition(s: &mut Writer, d: &StructMemberDefinition, variable_
                 format!("{import_path}::{ty}::new({var_name}.as_int(){extra}).as_test_case_value()")
             };
 
-            test_case_string::wlna(s, format!("    {name} = {{}};"), extra);
+            test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), extra);
         }
         Type::Struct { e } => {
             let ty_name = e.name();
             s.wln(format!("// {name}: {ty_name}"));
 
-            test_case_string::wln(s, format!("    {name} = {{{{"));
+            test_case_string::wln(s, format!("{prefix}{name} = {{{{"));
 
             let variable_prefix = format!("{var_name}.");
 
-            print_members(s, e, &variable_prefix);
+            let prefix = format!("{prefix}    ");
+            print_members(s, e, &variable_prefix, &prefix);
 
             test_case_string::wln(s, "    }};");
         }
 
         Type::Array(array) => {
-            s.wln(format!("write!(s, \"    {name} = [\").unwrap();"));
+            s.wln(format!("write!(s, \"{prefix}{name} = [\").unwrap();"));
 
             s.body(format!("for v in {var_name}.as_slice()"), |s| {
                 match array.ty() {
@@ -295,7 +325,8 @@ fn print_member_definition(s: &mut Writer, d: &StructMemberDefinition, variable_
 
                         let variable_prefix = format!("v.");
 
-                        print_members(s, e, &variable_prefix);
+                        let prefix = format!("{prefix}    ");
+                        print_members(s, e, &variable_prefix, &prefix);
 
                         test_case_string::wln(s, "    }},");
                     }
@@ -315,10 +346,7 @@ fn print_member_definition(s: &mut Writer, d: &StructMemberDefinition, variable_
         | Type::VariableItemRandomProperty
         | Type::AddonArray
         | Type::NamedGuid => {
-            s.wln(format!(
-                "panic!(\"unsupported type {} for variable '{name}'\");",
-                d.ty().rust_str()
-            ));
+            s.wln("return None;");
         }
     }
 }

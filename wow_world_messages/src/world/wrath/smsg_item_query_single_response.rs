@@ -95,7 +95,7 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -137,8 +137,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             for v in found.stats.as_slice() {
                 writeln!(s, "{{").unwrap();
                 // Members
-                writeln!(s, "    stat_type = {};", v.stat_type).unwrap();
-                writeln!(s, "    value = {};", v.value).unwrap();
+                writeln!(s, "        stat_type = {};", v.stat_type).unwrap();
+                writeln!(s, "        value = {};", v.value).unwrap();
 
                 writeln!(s, "    }},").unwrap();
             }
@@ -151,7 +151,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
                 // Members
                 writeln!(s, "    {}", if v.damage_minimum.to_string().contains(".") { v.damage_minimum.to_string() } else { format!("{}.0", v.damage_minimum) }).unwrap();
                 writeln!(s, "    {}", if v.damage_maximum.to_string().contains(".") { v.damage_maximum.to_string() } else { format!("{}.0", v.damage_maximum) }).unwrap();
-                writeln!(s, "    school = {};", v.school.as_test_case_value()).unwrap();
+                writeln!(s, "        school = {};", v.school.as_test_case_value()).unwrap();
 
                 writeln!(s, "    }},").unwrap();
             }
@@ -170,12 +170,12 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             for v in found.spells.as_slice() {
                 writeln!(s, "{{").unwrap();
                 // Members
-                writeln!(s, "    spell = {};", v.spell).unwrap();
-                writeln!(s, "    spell_trigger = {};", v.spell_trigger.as_test_case_value()).unwrap();
-                writeln!(s, "    spell_charges = {};", v.spell_charges).unwrap();
-                writeln!(s, "    spell_cooldown = {};", v.spell_cooldown).unwrap();
-                writeln!(s, "    spell_category = {};", v.spell_category).unwrap();
-                writeln!(s, "    spell_category_cooldown = {};", v.spell_category_cooldown).unwrap();
+                writeln!(s, "        spell = {};", v.spell).unwrap();
+                writeln!(s, "        spell_trigger = {};", v.spell_trigger.as_test_case_value()).unwrap();
+                writeln!(s, "        spell_charges = {};", v.spell_charges).unwrap();
+                writeln!(s, "        spell_cooldown = {};", v.spell_cooldown).unwrap();
+                writeln!(s, "        spell_category = {};", v.spell_category).unwrap();
+                writeln!(s, "        spell_category_cooldown = {};", v.spell_category_cooldown).unwrap();
 
                 writeln!(s, "    }},").unwrap();
             }
@@ -202,8 +202,8 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             for v in found.sockets.as_slice() {
                 writeln!(s, "{{").unwrap();
                 // Members
-                writeln!(s, "    color = {};", v.color).unwrap();
-                writeln!(s, "    content = {};", v.content).unwrap();
+                writeln!(s, "        color = {};", v.color).unwrap();
+                writeln!(s, "        content = {};", v.content).unwrap();
 
                 writeln!(s, "    }},").unwrap();
             }
@@ -219,22 +219,120 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 88_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 88_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "item");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
+        if let Some(found) = &self.found {
+            crate::util::write_bytes(&mut s, &mut bytes, 8, "class_and_sub_class", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "sound_override_sub_class", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, found.name1.len() + 1, "name1", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, found.name2.len() + 1, "name2", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, found.name3.len() + 1, "name3", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, found.name4.len() + 1, "name4", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "display_id", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "quality", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "flags", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "flags2", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "buy_price", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "sell_price", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "inventory_type", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "allowed_class", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "allowed_race", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "item_level", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_level", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_skill", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_skill_rank", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_spell", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_honor_rank", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_city_rank", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_faction", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_faction_rank", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "max_count", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "stackable", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "container_slots", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_stats", "    ");
+            if !found.stats.is_empty() {
+                writeln!(s, "    /* stats: ItemStat[amount_of_stats] start */").unwrap();
+                for (i, v) in found.stats.iter().enumerate() {
+                    writeln!(s, "    /* stats: ItemStat[amount_of_stats] {i} start */").unwrap();
+                    crate::util::write_bytes(&mut s, &mut bytes, 4, "stat_type", "        ");
+                    crate::util::write_bytes(&mut s, &mut bytes, 4, "value", "        ");
+                    writeln!(s, "    /* stats: ItemStat[amount_of_stats] {i} end */").unwrap();
+                }
+                writeln!(s, "    /* stats: ItemStat[amount_of_stats] end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "scaling_stats_entry", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "scaling_stats_flag", "    ");
+            writeln!(s, "    /* damages: ItemDamageType[2] start */").unwrap();
+            for (i, v) in found.damages.iter().enumerate() {
+                writeln!(s, "    /* damages: ItemDamageType[2] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "damage_minimum", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "damage_maximum", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "school", "        ");
+                writeln!(s, "    /* damages: ItemDamageType[2] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* damages: ItemDamageType[2] end */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "armor", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "holy_resistance", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "fire_resistance", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "nature_resistance", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "frost_resistance", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "shadow_resistance", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "arcane_resistance", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "delay", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "ammo_type", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "ranged_range_modification", "    ");
+            writeln!(s, "    /* spells: ItemSpells[5] start */").unwrap();
+            for (i, v) in found.spells.iter().enumerate() {
+                writeln!(s, "    /* spells: ItemSpells[5] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_trigger", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_charges", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_cooldown", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_category", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_category_cooldown", "        ");
+                writeln!(s, "    /* spells: ItemSpells[5] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* spells: ItemSpells[5] end */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "bonding", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, found.description.len() + 1, "description", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "page_text", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "language", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "page_text_material", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "start_quest", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "lock_id", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "material", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "sheathe_type", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "random_property", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "random_suffix", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "block", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "item_set", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "max_durability", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "map", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "bag_family", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "totem_category", "    ");
+            writeln!(s, "    /* sockets: ItemSocket[3] start */").unwrap();
+            for (i, v) in found.sockets.iter().enumerate() {
+                writeln!(s, "    /* sockets: ItemSocket[3] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "color", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "content", "        ");
+                writeln!(s, "    /* sockets: ItemSocket[3] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* sockets: ItemSocket[3] end */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "socket_bonus", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "gem_properties", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "required_disenchant_skill", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "armor_damage_modifier", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "duration", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "item_limit_category", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "holiday_id", "    ");
         }
 
 
@@ -242,7 +340,7 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -250,6 +348,11 @@ impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
 impl crate::private::Sealed for SMSG_ITEM_QUERY_SINGLE_RESPONSE {}
 impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     const OPCODE: u32 = 0x0058;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_ITEM_QUERY_SINGLE_RESPONSE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

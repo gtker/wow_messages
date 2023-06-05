@@ -18,7 +18,7 @@ pub struct MSG_QUERY_NEXT_MAIL_TIME_Server {
 
 #[cfg(feature = "print-testcase")]
 impl MSG_QUERY_NEXT_MAIL_TIME_Server {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -32,10 +32,10 @@ impl MSG_QUERY_NEXT_MAIL_TIME_Server {
         for v in self.mails.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    sender = {};", v.sender.guid()).unwrap();
-            writeln!(s, "    auction_house = {};", v.auction_house.as_test_case_value()).unwrap();
-            writeln!(s, "    message_type = {};", v.message_type.as_test_case_value()).unwrap();
-            writeln!(s, "    stationery = {};", v.stationery).unwrap();
+            writeln!(s, "        sender = {};", v.sender.guid()).unwrap();
+            writeln!(s, "        auction_house = {};", v.auction_house.as_test_case_value()).unwrap();
+            writeln!(s, "        message_type = {};", v.message_type.as_test_case_value()).unwrap();
+            writeln!(s, "        stationery = {};", v.stationery).unwrap();
             writeln!(s, "    {}", if v.time.to_string().contains(".") { v.time.to_string() } else { format!("{}.0", v.time) }).unwrap();
 
             writeln!(s, "    }},").unwrap();
@@ -44,22 +44,28 @@ impl MSG_QUERY_NEXT_MAIL_TIME_Server {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 644_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 644_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "float");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "float", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_mails", "    ");
+        if !self.mails.is_empty() {
+            writeln!(s, "    /* mails: ReceivedMail[amount_of_mails] start */").unwrap();
+            for (i, v) in self.mails.iter().enumerate() {
+                writeln!(s, "    /* mails: ReceivedMail[amount_of_mails] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "sender", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "auction_house", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "message_type", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "stationery", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "time", "        ");
+                writeln!(s, "    /* mails: ReceivedMail[amount_of_mails] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* mails: ReceivedMail[amount_of_mails] end */").unwrap();
         }
 
 
@@ -67,7 +73,7 @@ impl MSG_QUERY_NEXT_MAIL_TIME_Server {
         writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -75,6 +81,11 @@ impl MSG_QUERY_NEXT_MAIL_TIME_Server {
 impl crate::private::Sealed for MSG_QUERY_NEXT_MAIL_TIME_Server {}
 impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
     const OPCODE: u32 = 0x0284;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        MSG_QUERY_NEXT_MAIL_TIME_Server::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

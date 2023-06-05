@@ -59,7 +59,7 @@ pub struct SMSG_BATTLEFIELD_STATUS {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_BATTLEFIELD_STATUS {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -113,30 +113,64 @@ impl SMSG_BATTLEFIELD_STATUS {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 724_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 724_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "queue_slot");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "queue_slot", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "arena_type", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "is_arena", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "battleground_type", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "unknown1", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "minimum_level", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "maximum_level", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "client_instance_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "rated", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "status_id", "    ");
+        match &self.status_id {
+            crate::wrath::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                average_wait_time_in_ms,
+                time_in_queue_in_ms,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "average_wait_time_in_ms", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "time_in_queue_in_ms", "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            crate::wrath::SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                map1,
+                time_to_remove_in_queue_in_ms,
+                unknown2,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "map1", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "unknown2", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "time_to_remove_in_queue_in_ms", "    ");
+            }
+            crate::wrath::SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                faction,
+                map2,
+                time_to_bg_autoleave_in_ms,
+                time_to_bg_start_in_ms,
+                unknown3,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "map2", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "unknown3", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "time_to_bg_autoleave_in_ms", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "time_to_bg_start_in_ms", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "faction", "    ");
+            }
+            _ => {}
         }
+
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -144,6 +178,11 @@ impl SMSG_BATTLEFIELD_STATUS {
 impl crate::private::Sealed for SMSG_BATTLEFIELD_STATUS {}
 impl crate::Message for SMSG_BATTLEFIELD_STATUS {
     const OPCODE: u32 = 0x02d4;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_BATTLEFIELD_STATUS::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

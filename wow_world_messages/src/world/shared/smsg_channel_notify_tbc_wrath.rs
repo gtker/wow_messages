@@ -22,7 +22,7 @@ pub struct SMSG_CHANNEL_NOTIFY {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_CHANNEL_NOTIFY {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -39,22 +39,19 @@ impl SMSG_CHANNEL_NOTIFY {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 153_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 153_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "notify_type");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "notify_type", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.channel_name.len() + 1, "channel_name", "    ");
+        if let Some(unknown1) = &self.unknown1 {
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown2", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "unkwown3", "    ");
         }
 
 
@@ -62,7 +59,7 @@ impl SMSG_CHANNEL_NOTIFY {
         writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -70,6 +67,11 @@ impl SMSG_CHANNEL_NOTIFY {
 impl crate::private::Sealed for SMSG_CHANNEL_NOTIFY {}
 impl crate::Message for SMSG_CHANNEL_NOTIFY {
     const OPCODE: u32 = 0x0099;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_CHANNEL_NOTIFY::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

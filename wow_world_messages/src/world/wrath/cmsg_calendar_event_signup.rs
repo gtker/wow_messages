@@ -17,7 +17,7 @@ pub struct CMSG_CALENDAR_EVENT_SIGNUP {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_CALENDAR_EVENT_SIGNUP {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -30,30 +30,23 @@ impl CMSG_CALENDAR_EVENT_SIGNUP {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 15_u16.to_be_bytes();
+        let [a, b] = 13_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 1210_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 1210_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "event_id");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "event_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "tentative", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -61,6 +54,11 @@ impl CMSG_CALENDAR_EVENT_SIGNUP {
 impl crate::private::Sealed for CMSG_CALENDAR_EVENT_SIGNUP {}
 impl crate::Message for CMSG_CALENDAR_EVENT_SIGNUP {
     const OPCODE: u32 = 0x04ba;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_CALENDAR_EVENT_SIGNUP::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         9

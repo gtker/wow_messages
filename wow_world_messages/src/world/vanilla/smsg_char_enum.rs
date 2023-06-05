@@ -18,7 +18,7 @@ pub struct SMSG_CHAR_ENUM {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_CHAR_ENUM {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -31,39 +31,39 @@ impl SMSG_CHAR_ENUM {
         for v in self.characters.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "    name = \"{}\";", v.name).unwrap();
-            writeln!(s, "    race = {};", v.race.as_test_case_value()).unwrap();
-            writeln!(s, "    class = {};", v.class.as_test_case_value()).unwrap();
-            writeln!(s, "    gender = {};", v.gender.as_test_case_value()).unwrap();
-            writeln!(s, "    skin = {};", v.skin).unwrap();
-            writeln!(s, "    face = {};", v.face).unwrap();
-            writeln!(s, "    hair_style = {};", v.hair_style).unwrap();
-            writeln!(s, "    hair_color = {};", v.hair_color).unwrap();
-            writeln!(s, "    facial_hair = {};", v.facial_hair).unwrap();
-            writeln!(s, "    level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "    area = {};", v.area.as_test_case_value()).unwrap();
-            writeln!(s, "    map = {};", v.map.as_test_case_value()).unwrap();
+            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "        name = \"{}\";", v.name).unwrap();
+            writeln!(s, "        race = {};", v.race.as_test_case_value()).unwrap();
+            writeln!(s, "        class = {};", v.class.as_test_case_value()).unwrap();
+            writeln!(s, "        gender = {};", v.gender.as_test_case_value()).unwrap();
+            writeln!(s, "        skin = {};", v.skin).unwrap();
+            writeln!(s, "        face = {};", v.face).unwrap();
+            writeln!(s, "        hair_style = {};", v.hair_style).unwrap();
+            writeln!(s, "        hair_color = {};", v.hair_color).unwrap();
+            writeln!(s, "        facial_hair = {};", v.facial_hair).unwrap();
+            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "        area = {};", v.area.as_test_case_value()).unwrap();
+            writeln!(s, "        map = {};", v.map.as_test_case_value()).unwrap();
             // position: Vector3d
-            writeln!(s, "    position = {{").unwrap();
+            writeln!(s, "        position = {{").unwrap();
             // Members
             writeln!(s, "    {}", if v.position.x.to_string().contains(".") { v.position.x.to_string() } else { format!("{}.0", v.position.x) }).unwrap();
             writeln!(s, "    {}", if v.position.y.to_string().contains(".") { v.position.y.to_string() } else { format!("{}.0", v.position.y) }).unwrap();
             writeln!(s, "    {}", if v.position.z.to_string().contains(".") { v.position.z.to_string() } else { format!("{}.0", v.position.z) }).unwrap();
 
             writeln!(s, "    }};").unwrap();
-            writeln!(s, "    guild_id = {};", v.guild_id).unwrap();
-            writeln!(s, "    flags = {};", v.flags.as_test_case_value()).unwrap();
-            writeln!(s, "    first_login = {};", if v.first_login { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "    pet_display_id = {};", v.pet_display_id).unwrap();
-            writeln!(s, "    pet_level = {};", v.pet_level.as_int()).unwrap();
-            writeln!(s, "    pet_family = {};", v.pet_family.as_test_case_value()).unwrap();
-            write!(s, "    equipment = [").unwrap();
+            writeln!(s, "        guild_id = {};", v.guild_id).unwrap();
+            writeln!(s, "        flags = {};", v.flags.as_test_case_value()).unwrap();
+            writeln!(s, "        first_login = {};", if v.first_login { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "        pet_display_id = {};", v.pet_display_id).unwrap();
+            writeln!(s, "        pet_level = {};", v.pet_level.as_int()).unwrap();
+            writeln!(s, "        pet_family = {};", v.pet_family.as_test_case_value()).unwrap();
+            write!(s, "        equipment = [").unwrap();
             for v in v.equipment.as_slice() {
                 writeln!(s, "{{").unwrap();
                 // Members
-                writeln!(s, "    equipment_display_id = {};", v.equipment_display_id).unwrap();
-                writeln!(s, "    inventory_type = {};", v.inventory_type.as_test_case_value()).unwrap();
+                writeln!(s, "            equipment_display_id = {};", v.equipment_display_id).unwrap();
+                writeln!(s, "            inventory_type = {};", v.inventory_type.as_test_case_value()).unwrap();
 
                 writeln!(s, "    }},").unwrap();
             }
@@ -75,22 +75,56 @@ impl SMSG_CHAR_ENUM {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 59_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 59_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_characters");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_characters", "    ");
+        if !self.characters.is_empty() {
+            writeln!(s, "    /* characters: Character[amount_of_characters] start */").unwrap();
+            for (i, v) in self.characters.iter().enumerate() {
+                writeln!(s, "    /* characters: Character[amount_of_characters] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, v.name.len() + 1, "name", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "race", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "class", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "gender", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "skin", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "face", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "hair_style", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "hair_color", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "facial_hair", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "level", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "map", "        ");
+                writeln!(s, "    /* position: Vector3d start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "            ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "            ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "            ");
+                writeln!(s, "    /* position: Vector3d end */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "guild_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "flags", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "first_login", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "pet_display_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "pet_level", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "pet_family", "        ");
+                writeln!(s, "    /* equipment: CharacterGear[19] start */").unwrap();
+                for (i, v) in v.equipment.iter().enumerate() {
+                    writeln!(s, "    /* equipment: CharacterGear[19] {i} start */").unwrap();
+                    crate::util::write_bytes(&mut s, &mut bytes, 4, "equipment_display_id", "            ");
+                    crate::util::write_bytes(&mut s, &mut bytes, 1, "inventory_type", "            ");
+                    writeln!(s, "    /* equipment: CharacterGear[19] {i} end */").unwrap();
+                }
+                writeln!(s, "    /* equipment: CharacterGear[19] end */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "first_bag_display_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "first_bag_inventory_id", "        ");
+                writeln!(s, "    /* characters: Character[amount_of_characters] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* characters: Character[amount_of_characters] end */").unwrap();
         }
 
 
@@ -98,7 +132,7 @@ impl SMSG_CHAR_ENUM {
         writeln!(s, "    versions = \"1.12\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -106,6 +140,11 @@ impl SMSG_CHAR_ENUM {
 impl crate::private::Sealed for SMSG_CHAR_ENUM {}
 impl crate::Message for SMSG_CHAR_ENUM {
     const OPCODE: u32 = 0x003b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_CHAR_ENUM::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

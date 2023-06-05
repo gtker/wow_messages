@@ -51,7 +51,7 @@ pub struct SMSG_MONSTER_MOVE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_MONSTER_MOVE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -109,33 +109,70 @@ impl SMSG_MONSTER_MOVE {
             writeln!(s, "    effect_start_time = {};", if_statement.effect_start_time).unwrap();
         }
 
-        panic!("unsupported type Vec<Vector3d> for variable 'splines'");
+        return None;
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 221_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 221_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.guid), "guid", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "unknown", "    ");
+        writeln!(s, "    /* spline_point: Vector3d start */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "        ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "        ");
+        writeln!(s, "    /* spline_point: Vector3d end */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "spline_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "move_type", "    ");
+        match &self.move_type {
+            crate::wrath::SMSG_MONSTER_MOVE_MonsterMoveType::FacingSpot {
+                position,
+            } => {
+                writeln!(s, "    /* position: Vector3d start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "        ");
+                writeln!(s, "    /* position: Vector3d end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            crate::wrath::SMSG_MONSTER_MOVE_MonsterMoveType::FacingTarget {
+                target,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");
+            }
+            crate::wrath::SMSG_MONSTER_MOVE_MonsterMoveType::FacingAngle {
+                angle,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "angle", "    ");
+            }
+            _ => {}
         }
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "spline_flags", "    ");
+        if let Some(if_statement) = &self.spline_flags.get_enter_cycle() {
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "animation_id", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "animation_start_time", "    ");
+        }
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "duration", "    ");
+        if let Some(if_statement) = &self.spline_flags.get_parabolic() {
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "vertical_acceleration", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "effect_start_time", "    ");
+        }
+
+        panic!("unsupported type Vec<Vector3d> for variable 'splines'");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -143,6 +180,11 @@ impl SMSG_MONSTER_MOVE {
 impl crate::private::Sealed for SMSG_MONSTER_MOVE {}
 impl crate::Message for SMSG_MONSTER_MOVE {
     const OPCODE: u32 = 0x00dd;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_MONSTER_MOVE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

@@ -18,7 +18,7 @@ pub struct MSG_MOVE_START_PITCH_UP {
 
 #[cfg(feature = "print-testcase")]
 impl MSG_MOVE_START_PITCH_UP {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         panic!("MSG types not supported");
     }
 
@@ -27,6 +27,11 @@ impl MSG_MOVE_START_PITCH_UP {
 impl crate::private::Sealed for MSG_MOVE_START_PITCH_UP {}
 impl crate::Message for MSG_MOVE_START_PITCH_UP {
     const OPCODE: u32 = 0x00bf;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        MSG_MOVE_START_PITCH_UP::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

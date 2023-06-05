@@ -21,7 +21,7 @@ pub struct MSG_SET_RAID_DIFFICULTY_Server {
 
 #[cfg(feature = "print-testcase")]
 impl MSG_SET_RAID_DIFFICULTY_Server {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -35,30 +35,24 @@ impl MSG_SET_RAID_DIFFICULTY_Server {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 16_u16.to_be_bytes();
+        let [a, b] = 14_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 1259_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 1259_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "difficulty");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "difficulty", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown1", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "in_group", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -66,6 +60,11 @@ impl MSG_SET_RAID_DIFFICULTY_Server {
 impl crate::private::Sealed for MSG_SET_RAID_DIFFICULTY_Server {}
 impl crate::Message for MSG_SET_RAID_DIFFICULTY_Server {
     const OPCODE: u32 = 0x04eb;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        MSG_SET_RAID_DIFFICULTY_Server::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         12

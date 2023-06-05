@@ -79,7 +79,7 @@ pub struct SMSG_PARTY_MEMBER_STATS {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_PARTY_MEMBER_STATS {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -127,7 +127,7 @@ impl SMSG_PARTY_MEMBER_STATS {
         }
 
         if let Some(if_statement) = &self.mask.get_auras() {
-            panic!("unsupported type AuraMask for variable 'auras'");
+            return None;
         }
 
         if let Some(if_statement) = &self.mask.get_pet_guid() {
@@ -163,35 +163,106 @@ impl SMSG_PARTY_MEMBER_STATS {
         }
 
         if let Some(if_statement) = &self.mask.get_pet_auras() {
-            panic!("unsupported type AuraMask for variable 'pet_auras'");
+            return None;
         }
 
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 126_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 126_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.guid), "guid", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "mask", "    ");
+        if let Some(if_statement) = &self.mask.get_status() {
+            crate::util::write_bytes(&mut s, &mut bytes, 1, "status", "    ");
         }
+
+        if let Some(if_statement) = &self.mask.get_cur_hp() {
+            crate::util::write_bytes(&mut s, &mut bytes, 2, "current_health", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_max_hp() {
+            crate::util::write_bytes(&mut s, &mut bytes, 2, "max_health", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_power_type() {
+            crate::util::write_bytes(&mut s, &mut bytes, 1, "power", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_cur_power() {
+            crate::util::write_bytes(&mut s, &mut bytes, 2, "current_power", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_max_power() {
+            crate::util::write_bytes(&mut s, &mut bytes, 2, "max_power", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_level() {
+            crate::util::write_bytes(&mut s, &mut bytes, 2, "level", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_zone() {
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "area", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_position() {
+            crate::util::write_bytes(&mut s, &mut bytes, 2, "position_x", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 2, "position_y", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_auras() {
+            panic!("unsupported type AuraMask for variable 'auras'");
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_guid() {
+            crate::util::write_bytes(&mut s, &mut bytes, 8, "pet", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_name() {
+            crate::util::write_bytes(&mut s, &mut bytes, if_statement.pet_name.len() + 1, "pet_name", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_model_id() {
+            crate::util::write_bytes(&mut s, &mut bytes, 2, "pet_display_id", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_cur_hp() {
+            crate::util::write_bytes(&mut s, &mut bytes, 2, "pet_current_health", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_max_hp() {
+            crate::util::write_bytes(&mut s, &mut bytes, 2, "pet_max_health", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_power_type() {
+            crate::util::write_bytes(&mut s, &mut bytes, 1, "pet_power_type", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_cur_power() {
+            crate::util::write_bytes(&mut s, &mut bytes, 2, "pet_current_power", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_max_power() {
+            crate::util::write_bytes(&mut s, &mut bytes, 2, "pet_max_power", "    ");
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_auras() {
+            panic!("unsupported type AuraMask for variable 'pet_auras'");
+        }
+
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"2.4.3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -199,6 +270,11 @@ impl SMSG_PARTY_MEMBER_STATS {
 impl crate::private::Sealed for SMSG_PARTY_MEMBER_STATS {}
 impl crate::Message for SMSG_PARTY_MEMBER_STATS {
     const OPCODE: u32 = 0x007e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_PARTY_MEMBER_STATS::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

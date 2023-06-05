@@ -40,7 +40,7 @@ pub struct SMSG_TRADE_STATUS_EXTENDED {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_TRADE_STATUS_EXTENDED {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -58,25 +58,25 @@ impl SMSG_TRADE_STATUS_EXTENDED {
         for v in self.trade_slots.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    trade_slot_number = {};", v.trade_slot_number).unwrap();
-            writeln!(s, "    item = {};", v.item).unwrap();
-            writeln!(s, "    display_id = {};", v.display_id).unwrap();
-            writeln!(s, "    stack_count = {};", v.stack_count).unwrap();
-            writeln!(s, "    wrapped = {};", if v.wrapped { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "    gift_wrapper = {};", v.gift_wrapper.guid()).unwrap();
-            writeln!(s, "    enchantment = {};", v.enchantment).unwrap();
-            write!(s, "    enchantments_slots = [").unwrap();
+            writeln!(s, "        trade_slot_number = {};", v.trade_slot_number).unwrap();
+            writeln!(s, "        item = {};", v.item).unwrap();
+            writeln!(s, "        display_id = {};", v.display_id).unwrap();
+            writeln!(s, "        stack_count = {};", v.stack_count).unwrap();
+            writeln!(s, "        wrapped = {};", if v.wrapped { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "        gift_wrapper = {};", v.gift_wrapper.guid()).unwrap();
+            writeln!(s, "        enchantment = {};", v.enchantment).unwrap();
+            write!(s, "        enchantments_slots = [").unwrap();
             for v in v.enchantments_slots.as_slice() {
                 write!(s, "{v:#04X}, ").unwrap();
             }
             writeln!(s, "];").unwrap();
-            writeln!(s, "    item_creator = {};", v.item_creator.guid()).unwrap();
-            writeln!(s, "    spell_charges = {};", v.spell_charges).unwrap();
-            writeln!(s, "    item_suffix_factor = {};", v.item_suffix_factor).unwrap();
-            writeln!(s, "    item_random_properties_id = {};", v.item_random_properties_id).unwrap();
-            writeln!(s, "    lock_id = {};", v.lock_id).unwrap();
-            writeln!(s, "    max_durability = {};", v.max_durability).unwrap();
-            writeln!(s, "    durability = {};", v.durability).unwrap();
+            writeln!(s, "        item_creator = {};", v.item_creator.guid()).unwrap();
+            writeln!(s, "        spell_charges = {};", v.spell_charges).unwrap();
+            writeln!(s, "        item_suffix_factor = {};", v.item_suffix_factor).unwrap();
+            writeln!(s, "        item_random_properties_id = {};", v.item_random_properties_id).unwrap();
+            writeln!(s, "        lock_id = {};", v.lock_id).unwrap();
+            writeln!(s, "        max_durability = {};", v.max_durability).unwrap();
+            writeln!(s, "        durability = {};", v.durability).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -84,30 +84,52 @@ impl SMSG_TRADE_STATUS_EXTENDED {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 536_u16.to_be_bytes();
+        let [a, b] = 534_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 289_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 289_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "self_player");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "self_player", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "trade_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "trade_slot_count1", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "trade_slot_count2", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "money_in_trade", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_on_lowest_slot", "    ");
+        writeln!(s, "    /* trade_slots: TradeSlot[7] start */").unwrap();
+        for (i, v) in self.trade_slots.iter().enumerate() {
+            writeln!(s, "    /* trade_slots: TradeSlot[7] {i} start */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 1, "trade_slot_number", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "display_id", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "stack_count", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "wrapped", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 8, "gift_wrapper", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "enchantment", "        ");
+            writeln!(s, "    /* enchantments_slots: u32[3] start */").unwrap();
+            for (i, v) in v.enchantments_slots.iter().enumerate() {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("enchantments_slots {i}"), "        ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* enchantments_slots: u32[3] end */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 8, "item_creator", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_charges", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "item_suffix_factor", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "item_random_properties_id", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "lock_id", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "max_durability", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "durability", "        ");
+            writeln!(s, "    /* trade_slots: TradeSlot[7] {i} end */").unwrap();
         }
+        writeln!(s, "    /* trade_slots: TradeSlot[7] end */").unwrap();
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -115,6 +137,11 @@ impl SMSG_TRADE_STATUS_EXTENDED {
 impl crate::private::Sealed for SMSG_TRADE_STATUS_EXTENDED {}
 impl crate::Message for SMSG_TRADE_STATUS_EXTENDED {
     const OPCODE: u32 = 0x0121;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_TRADE_STATUS_EXTENDED::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         532

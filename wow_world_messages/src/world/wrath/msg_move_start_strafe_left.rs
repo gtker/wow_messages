@@ -18,7 +18,7 @@ pub struct MSG_MOVE_START_STRAFE_LEFT {
 
 #[cfg(feature = "print-testcase")]
 impl MSG_MOVE_START_STRAFE_LEFT {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         panic!("MSG types not supported");
     }
 
@@ -27,6 +27,11 @@ impl MSG_MOVE_START_STRAFE_LEFT {
 impl crate::private::Sealed for MSG_MOVE_START_STRAFE_LEFT {}
 impl crate::Message for MSG_MOVE_START_STRAFE_LEFT {
     const OPCODE: u32 = 0x00b8;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        MSG_MOVE_START_STRAFE_LEFT::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

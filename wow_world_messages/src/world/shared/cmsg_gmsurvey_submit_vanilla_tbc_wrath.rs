@@ -24,7 +24,7 @@ pub struct CMSG_GMSURVEY_SUBMIT {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_GMSURVEY_SUBMIT {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,9 +37,9 @@ impl CMSG_GMSURVEY_SUBMIT {
         for v in self.questions.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    question_id = {};", v.question_id).unwrap();
-            writeln!(s, "    answer = {};", v.answer).unwrap();
-            writeln!(s, "    comment = \"{}\";", v.comment).unwrap();
+            writeln!(s, "        question_id = {};", v.question_id).unwrap();
+            writeln!(s, "        answer = {};", v.answer).unwrap();
+            writeln!(s, "        comment = \"{}\";", v.comment).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -48,30 +48,32 @@ impl CMSG_GMSURVEY_SUBMIT {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 810_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 810_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "survey_id");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "survey_id", "    ");
+        writeln!(s, "    /* questions: GmSurveyQuestion[10] start */").unwrap();
+        for (i, v) in self.questions.iter().enumerate() {
+            writeln!(s, "    /* questions: GmSurveyQuestion[10] {i} start */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "question_id", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, 1, "answer", "        ");
+            crate::util::write_bytes(&mut s, &mut bytes, v.comment.len() + 1, "comment", "        ");
+            writeln!(s, "    /* questions: GmSurveyQuestion[10] {i} end */").unwrap();
         }
+        writeln!(s, "    /* questions: GmSurveyQuestion[10] end */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, self.answer_comment.len() + 1, "answer_comment", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1 2 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -79,6 +81,11 @@ impl CMSG_GMSURVEY_SUBMIT {
 impl crate::private::Sealed for CMSG_GMSURVEY_SUBMIT {}
 impl crate::Message for CMSG_GMSURVEY_SUBMIT {
     const OPCODE: u32 = 0x032a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_GMSURVEY_SUBMIT::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

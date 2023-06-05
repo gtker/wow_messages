@@ -18,7 +18,7 @@ pub struct SMSG_AURA_UPDATE_ALL {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_AURA_UPDATE_ALL {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -31,18 +31,18 @@ impl SMSG_AURA_UPDATE_ALL {
         for v in self.aura_updates.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    visual_slot = {};", v.visual_slot).unwrap();
-            writeln!(s, "    spell = {};", v.spell).unwrap();
-            writeln!(s, "    flags = {};", crate::wrath::AuraFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
-            writeln!(s, "    level = {};", v.level.as_int()).unwrap();
-            writeln!(s, "    aura_stack_count = {};", v.aura_stack_count).unwrap();
+            writeln!(s, "        visual_slot = {};", v.visual_slot).unwrap();
+            writeln!(s, "        spell = {};", v.spell).unwrap();
+            writeln!(s, "        flags = {};", crate::wrath::AuraFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
+            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "        aura_stack_count = {};", v.aura_stack_count).unwrap();
             if let Some(if_statement) = &v.flags.get_not_caster() {
-                writeln!(s, "    caster = {};", if_statement.caster.guid()).unwrap();
+                writeln!(s, "        caster = {};", if_statement.caster.guid()).unwrap();
             }
 
             if let Some(if_statement) = &v.flags.get_duration() {
-                writeln!(s, "    duration = {};", if_statement.duration).unwrap();
-                writeln!(s, "    time_left = {};", if_statement.time_left).unwrap();
+                writeln!(s, "        duration = {};", if_statement.duration).unwrap();
+                writeln!(s, "        time_left = {};", if_statement.time_left).unwrap();
             }
 
 
@@ -52,21 +52,36 @@ impl SMSG_AURA_UPDATE_ALL {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 1173_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 1173_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.unit), "unit", "    ");
+        if !self.aura_updates.is_empty() {
+            writeln!(s, "    /* aura_updates: AuraUpdate[-] start */").unwrap();
+            for (i, v) in self.aura_updates.iter().enumerate() {
+                writeln!(s, "    /* aura_updates: AuraUpdate[-] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "visual_slot", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "flags", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "level", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "aura_stack_count", "        ");
+                if let Some(if_statement) = &v.flags.get_not_caster() {
+                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&if_statement.caster), "caster", "        ");
+                }
+
+                if let Some(if_statement) = &v.flags.get_duration() {
+                    crate::util::write_bytes(&mut s, &mut bytes, 4, "duration", "        ");
+                    crate::util::write_bytes(&mut s, &mut bytes, 4, "time_left", "        ");
+                }
+
+                writeln!(s, "    /* aura_updates: AuraUpdate[-] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* aura_updates: AuraUpdate[-] end */").unwrap();
         }
 
 
@@ -74,7 +89,7 @@ impl SMSG_AURA_UPDATE_ALL {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -82,6 +97,11 @@ impl SMSG_AURA_UPDATE_ALL {
 impl crate::private::Sealed for SMSG_AURA_UPDATE_ALL {}
 impl crate::Message for SMSG_AURA_UPDATE_ALL {
     const OPCODE: u32 = 0x0495;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_AURA_UPDATE_ALL::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

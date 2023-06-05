@@ -25,7 +25,7 @@ pub struct SMSG_ARENA_TEAM_STATS {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_ARENA_TEAM_STATS {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,30 +43,28 @@ impl SMSG_ARENA_TEAM_STATS {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = 32_u16.to_be_bytes();
+        let [a, b] = 30_u16.to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 859_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 859_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "arena_team");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "arena_team", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "rating", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "games_played_this_week", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "games_won_this_week", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "games_played_this_season", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "games_won_this_season", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "ranking", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -74,6 +72,11 @@ impl SMSG_ARENA_TEAM_STATS {
 impl crate::private::Sealed for SMSG_ARENA_TEAM_STATS {}
 impl crate::Message for SMSG_ARENA_TEAM_STATS {
     const OPCODE: u32 = 0x035b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_ARENA_TEAM_STATS::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         28

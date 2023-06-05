@@ -19,7 +19,7 @@ pub struct CMD_SURVEY_RESULT {
 
 #[cfg(feature = "print-testcase")]
 impl CMD_SURVEY_RESULT {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
 
         let mut s = String::new();
@@ -37,27 +37,22 @@ impl CMD_SURVEY_RESULT {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        // Bytes
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
         writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "survey_id");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
-            }
-            write!(s, "{b:#04X}, ").unwrap();
-        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "survey_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "error", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "compressed_data_length", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, self.data.len(), "data", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    login_versions = \"3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -89,6 +84,11 @@ impl crate::private::Sealed for CMD_SURVEY_RESULT {}
 
 impl ClientMessage for CMD_SURVEY_RESULT {
     const OPCODE: u8 = 0x04;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMD_SURVEY_RESULT::to_test_case_string(self)
+    }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // survey_id: u32

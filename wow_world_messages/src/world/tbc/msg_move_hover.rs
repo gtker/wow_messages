@@ -18,7 +18,7 @@ pub struct MSG_MOVE_HOVER {
 
 #[cfg(feature = "print-testcase")]
 impl MSG_MOVE_HOVER {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         panic!("MSG types not supported");
     }
 
@@ -27,6 +27,11 @@ impl MSG_MOVE_HOVER {
 impl crate::private::Sealed for MSG_MOVE_HOVER {}
 impl crate::Message for MSG_MOVE_HOVER {
     const OPCODE: u32 = 0x00f7;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        MSG_MOVE_HOVER::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

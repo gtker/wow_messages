@@ -27,7 +27,7 @@ pub struct CMSG_MESSAGECHAT {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_MESSAGECHAT {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -55,30 +55,38 @@ impl CMSG_MESSAGECHAT {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 149_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 149_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "chat_type");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "chat_type", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "language", "    ");
+        match &self.chat_type {
+            crate::vanilla::CMSG_MESSAGECHAT_ChatType::Whisper {
+                target_player,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, target_player.len() + 1, "target_player", "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            crate::vanilla::CMSG_MESSAGECHAT_ChatType::Channel {
+                channel,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, channel.len() + 1, "channel", "    ");
+            }
+            _ => {}
         }
+
+        crate::util::write_bytes(&mut s, &mut bytes, self.message.len() + 1, "message", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"1.12\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -86,6 +94,11 @@ impl CMSG_MESSAGECHAT {
 impl crate::private::Sealed for CMSG_MESSAGECHAT {}
 impl crate::Message for CMSG_MESSAGECHAT {
     const OPCODE: u32 = 0x0095;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_MESSAGECHAT::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

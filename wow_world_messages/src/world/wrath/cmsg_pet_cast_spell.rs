@@ -36,7 +36,7 @@ pub struct CMSG_PET_CAST_SPELL {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_PET_CAST_SPELL {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -51,33 +51,33 @@ impl CMSG_PET_CAST_SPELL {
         // targets: SpellCastTargets
         writeln!(s, "    targets = {{").unwrap();
         // Members
-        writeln!(s, "    target_flags = {};", crate::wrath::SpellCastTargetFlags::new(self.targets.target_flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "        target_flags = {};", crate::wrath::SpellCastTargetFlags::new(self.targets.target_flags.as_int()).as_test_case_value()).unwrap();
         if let Some(if_statement) = &self.targets.target_flags.get_unit() {
             match if_statement {
                 crate::wrath::SpellCastTargets_SpellCastTargetFlags_Unit::Unit {
                     unit_target,
                 } => {
-                    writeln!(s, "    unit_target = {};", unit_target.guid()).unwrap();
+                    writeln!(s, "        unit_target = {};", unit_target.guid()).unwrap();
                 }
                 crate::wrath::SpellCastTargets_SpellCastTargetFlags_Unit::UnitMinipet {
                     minipet_target,
                 } => {
-                    writeln!(s, "    minipet_target = {};", minipet_target.guid()).unwrap();
+                    writeln!(s, "        minipet_target = {};", minipet_target.guid()).unwrap();
                 }
                 crate::wrath::SpellCastTargets_SpellCastTargetFlags_Unit::Gameobject {
                     gameobject_target,
                 } => {
-                    writeln!(s, "    gameobject_target = {};", gameobject_target.guid()).unwrap();
+                    writeln!(s, "        gameobject_target = {};", gameobject_target.guid()).unwrap();
                 }
                 crate::wrath::SpellCastTargets_SpellCastTargetFlags_Unit::CorpseEnemy {
                     enemy_corpse_target,
                 } => {
-                    writeln!(s, "    enemy_corpse_target = {};", enemy_corpse_target.guid()).unwrap();
+                    writeln!(s, "        enemy_corpse_target = {};", enemy_corpse_target.guid()).unwrap();
                 }
                 crate::wrath::SpellCastTargets_SpellCastTargetFlags_Unit::CorpseAlly {
                     ally_corpse_target,
                 } => {
-                    writeln!(s, "    ally_corpse_target = {};", ally_corpse_target.guid()).unwrap();
+                    writeln!(s, "        ally_corpse_target = {};", ally_corpse_target.guid()).unwrap();
                 }
             }
         }
@@ -87,19 +87,19 @@ impl CMSG_PET_CAST_SPELL {
                 crate::wrath::SpellCastTargets_SpellCastTargetFlags_Item::Item {
                     item_target,
                 } => {
-                    writeln!(s, "    item_target = {};", item_target.guid()).unwrap();
+                    writeln!(s, "        item_target = {};", item_target.guid()).unwrap();
                 }
                 crate::wrath::SpellCastTargets_SpellCastTargetFlags_Item::TradeItem {
                     trade_item_target,
                 } => {
-                    writeln!(s, "    trade_item_target = {};", trade_item_target.guid()).unwrap();
+                    writeln!(s, "        trade_item_target = {};", trade_item_target.guid()).unwrap();
                 }
             }
         }
 
         if let Some(if_statement) = &self.targets.target_flags.get_source_location() {
             // source: Vector3d
-            writeln!(s, "    source = {{").unwrap();
+            writeln!(s, "        source = {{").unwrap();
             // Members
             writeln!(s, "    {}", if if_statement.source.x.to_string().contains(".") { if_statement.source.x.to_string() } else { format!("{}.0", if_statement.source.x) }).unwrap();
             writeln!(s, "    {}", if if_statement.source.y.to_string().contains(".") { if_statement.source.y.to_string() } else { format!("{}.0", if_statement.source.y) }).unwrap();
@@ -110,7 +110,7 @@ impl CMSG_PET_CAST_SPELL {
 
         if let Some(if_statement) = &self.targets.target_flags.get_dest_location() {
             // destination: Vector3d
-            writeln!(s, "    destination = {{").unwrap();
+            writeln!(s, "        destination = {{").unwrap();
             // Members
             writeln!(s, "    {}", if if_statement.destination.x.to_string().contains(".") { if_statement.destination.x.to_string() } else { format!("{}.0", if_statement.destination.x) }).unwrap();
             writeln!(s, "    {}", if if_statement.destination.y.to_string().contains(".") { if_statement.destination.y.to_string() } else { format!("{}.0", if_statement.destination.y) }).unwrap();
@@ -120,7 +120,7 @@ impl CMSG_PET_CAST_SPELL {
         }
 
         if let Some(if_statement) = &self.targets.target_flags.get_string() {
-            writeln!(s, "    target_string = \"{}\";", if_statement.target_string).unwrap();
+            writeln!(s, "        target_string = \"{}\";", if_statement.target_string).unwrap();
         }
 
 
@@ -145,10 +145,10 @@ impl CMSG_PET_CAST_SPELL {
                         // info: MovementInfo
                         writeln!(s, "    info = {{").unwrap();
                         // Members
-                        writeln!(s, "    flags = {};", crate::wrath::MovementFlags::new(info.flags.as_int()).as_test_case_value()).unwrap();
-                        writeln!(s, "    timestamp = {};", info.timestamp).unwrap();
+                        writeln!(s, "        flags = {};", crate::wrath::MovementFlags::new(info.flags.as_int()).as_test_case_value()).unwrap();
+                        writeln!(s, "        timestamp = {};", info.timestamp).unwrap();
                         // position: Vector3d
-                        writeln!(s, "    position = {{").unwrap();
+                        writeln!(s, "        position = {{").unwrap();
                         // Members
                         writeln!(s, "    {}", if info.position.x.to_string().contains(".") { info.position.x.to_string() } else { format!("{}.0", info.position.x) }).unwrap();
                         writeln!(s, "    {}", if info.position.y.to_string().contains(".") { info.position.y.to_string() } else { format!("{}.0", info.position.y) }).unwrap();
@@ -163,11 +163,11 @@ impl CMSG_PET_CAST_SPELL {
                                     transport_time,
                                 } => {
                                     // transport_info: TransportInfo
-                                    writeln!(s, "    transport_info = {{").unwrap();
+                                    writeln!(s, "        transport_info = {{").unwrap();
                                     // Members
-                                    writeln!(s, "    guid = {};", transport_info.guid.guid()).unwrap();
+                                    writeln!(s, "            guid = {};", transport_info.guid.guid()).unwrap();
                                     // position: Vector3d
-                                    writeln!(s, "    position = {{").unwrap();
+                                    writeln!(s, "            position = {{").unwrap();
                                     // Members
                                     writeln!(s, "    {}", if transport_info.position.x.to_string().contains(".") { transport_info.position.x.to_string() } else { format!("{}.0", transport_info.position.x) }).unwrap();
                                     writeln!(s, "    {}", if transport_info.position.y.to_string().contains(".") { transport_info.position.y.to_string() } else { format!("{}.0", transport_info.position.y) }).unwrap();
@@ -175,21 +175,21 @@ impl CMSG_PET_CAST_SPELL {
 
                                     writeln!(s, "    }};").unwrap();
                                     writeln!(s, "    {}", if transport_info.orientation.to_string().contains(".") { transport_info.orientation.to_string() } else { format!("{}.0", transport_info.orientation) }).unwrap();
-                                    writeln!(s, "    timestamp = {};", transport_info.timestamp).unwrap();
-                                    writeln!(s, "    seat = {};", transport_info.seat).unwrap();
+                                    writeln!(s, "            timestamp = {};", transport_info.timestamp).unwrap();
+                                    writeln!(s, "            seat = {};", transport_info.seat).unwrap();
 
                                     writeln!(s, "    }};").unwrap();
-                                    writeln!(s, "    transport_time = {};", transport_time).unwrap();
+                                    writeln!(s, "        transport_time = {};", transport_time).unwrap();
                                 }
                                 crate::wrath::MovementInfo_MovementFlags_OnTransportAndInterpolatedMovement::OnTransport {
                                     transport,
                                 } => {
                                     // transport: TransportInfo
-                                    writeln!(s, "    transport = {{").unwrap();
+                                    writeln!(s, "        transport = {{").unwrap();
                                     // Members
-                                    writeln!(s, "    guid = {};", transport.guid.guid()).unwrap();
+                                    writeln!(s, "            guid = {};", transport.guid.guid()).unwrap();
                                     // position: Vector3d
-                                    writeln!(s, "    position = {{").unwrap();
+                                    writeln!(s, "            position = {{").unwrap();
                                     // Members
                                     writeln!(s, "    {}", if transport.position.x.to_string().contains(".") { transport.position.x.to_string() } else { format!("{}.0", transport.position.x) }).unwrap();
                                     writeln!(s, "    {}", if transport.position.y.to_string().contains(".") { transport.position.y.to_string() } else { format!("{}.0", transport.position.y) }).unwrap();
@@ -197,8 +197,8 @@ impl CMSG_PET_CAST_SPELL {
 
                                     writeln!(s, "    }};").unwrap();
                                     writeln!(s, "    {}", if transport.orientation.to_string().contains(".") { transport.orientation.to_string() } else { format!("{}.0", transport.orientation) }).unwrap();
-                                    writeln!(s, "    timestamp = {};", transport.timestamp).unwrap();
-                                    writeln!(s, "    seat = {};", transport.seat).unwrap();
+                                    writeln!(s, "            timestamp = {};", transport.timestamp).unwrap();
+                                    writeln!(s, "            seat = {};", transport.seat).unwrap();
 
                                     writeln!(s, "    }};").unwrap();
                                 }
@@ -250,30 +250,197 @@ impl CMSG_PET_CAST_SPELL {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 496_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 496_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "cast_count", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "cast_flags", "    ");
+        writeln!(s, "    /* targets: SpellCastTargets start */").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "target_flags", "        ");
+        if let Some(if_statement) = &self.targets.target_flags.get_unit() {
+            match if_statement {
+                crate::wrath::SpellCastTargets_SpellCastTargetFlags_Unit::Unit {
+                    unit_target,
+                } => {
+                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&unit_target), "unit_target", "        ");
+                }
+                crate::wrath::SpellCastTargets_SpellCastTargetFlags_Unit::UnitMinipet {
+                    minipet_target,
+                } => {
+                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&minipet_target), "minipet_target", "        ");
+                }
+                crate::wrath::SpellCastTargets_SpellCastTargetFlags_Unit::Gameobject {
+                    gameobject_target,
+                } => {
+                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&gameobject_target), "gameobject_target", "        ");
+                }
+                crate::wrath::SpellCastTargets_SpellCastTargetFlags_Unit::CorpseEnemy {
+                    enemy_corpse_target,
+                } => {
+                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&enemy_corpse_target), "enemy_corpse_target", "        ");
+                }
+                crate::wrath::SpellCastTargets_SpellCastTargetFlags_Unit::CorpseAlly {
+                    ally_corpse_target,
+                } => {
+                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&ally_corpse_target), "ally_corpse_target", "        ");
+                }
             }
-            write!(s, "{b:#04X}, ").unwrap();
         }
+
+        if let Some(if_statement) = &self.targets.target_flags.get_item() {
+            match if_statement {
+                crate::wrath::SpellCastTargets_SpellCastTargetFlags_Item::Item {
+                    item_target,
+                } => {
+                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&item_target), "item_target", "        ");
+                }
+                crate::wrath::SpellCastTargets_SpellCastTargetFlags_Item::TradeItem {
+                    trade_item_target,
+                } => {
+                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&trade_item_target), "trade_item_target", "        ");
+                }
+            }
+        }
+
+        if let Some(if_statement) = &self.targets.target_flags.get_source_location() {
+            writeln!(s, "    /* source: Vector3d start */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "            ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "            ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "            ");
+            writeln!(s, "    /* source: Vector3d end */").unwrap();
+        }
+
+        if let Some(if_statement) = &self.targets.target_flags.get_dest_location() {
+            writeln!(s, "    /* destination: Vector3d start */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "            ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "            ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "            ");
+            writeln!(s, "    /* destination: Vector3d end */").unwrap();
+        }
+
+        if let Some(if_statement) = &self.targets.target_flags.get_string() {
+            crate::util::write_bytes(&mut s, &mut bytes, if_statement.target_string.len() + 1, "target_string", "        ");
+        }
+
+        writeln!(s, "    /* targets: SpellCastTargets end */").unwrap();
+        match &self.cast_flags {
+            crate::wrath::CMSG_PET_CAST_SPELL_ClientCastFlags::Extra {
+                elevation,
+                movement_data,
+                speed,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "elevation", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "speed", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "movement_data", "    ");
+                match &movement_data {
+                    crate::wrath::CMSG_PET_CAST_SPELL_ClientMovementData::Present {
+                        info,
+                        movement,
+                        opcode,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "opcode", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&movement), "movement", "    ");
+                        writeln!(s, "    /* info: MovementInfo start */").unwrap();
+                        crate::util::write_bytes(&mut s, &mut bytes, 6, "flags", "        ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "        ");
+                        writeln!(s, "    /* position: Vector3d start */").unwrap();
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "            ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "            ");
+                        writeln!(s, "    /* position: Vector3d end */").unwrap();
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "        ");
+                        if let Some(if_statement) = &info.flags.get_on_transport_and_interpolated_movement() {
+                            match if_statement {
+                                crate::wrath::MovementInfo_MovementFlags_OnTransportAndInterpolatedMovement::OnTransportAndInterpolatedMovement {
+                                    transport_info,
+                                    transport_time,
+                                } => {
+                                    writeln!(s, "    /* transport_info: TransportInfo start */").unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&transport_info.guid), "guid", "            ");
+                                    writeln!(s, "    /* position: Vector3d start */").unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                ");
+                                    writeln!(s, "    /* position: Vector3d end */").unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 1, "seat", "            ");
+                                    writeln!(s, "    /* transport_info: TransportInfo end */").unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "transport_time", "        ");
+                                }
+                                crate::wrath::MovementInfo_MovementFlags_OnTransportAndInterpolatedMovement::OnTransport {
+                                    transport,
+                                } => {
+                                    writeln!(s, "    /* transport: TransportInfo start */").unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&transport.guid), "guid", "            ");
+                                    writeln!(s, "    /* position: Vector3d start */").unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "                ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "                ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "                ");
+                                    writeln!(s, "    /* position: Vector3d end */").unwrap();
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "orientation", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "timestamp", "            ");
+                                    crate::util::write_bytes(&mut s, &mut bytes, 1, "seat", "            ");
+                                    writeln!(s, "    /* transport: TransportInfo end */").unwrap();
+                                }
+                            }
+                        }
+
+                        if let Some(if_statement) = &info.flags.get_swimming() {
+                            match if_statement {
+                                crate::wrath::MovementInfo_MovementFlags_Swimming::Swimming {
+                                    pitch1,
+                                } => {
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "pitch1", "        ");
+                                }
+                                crate::wrath::MovementInfo_MovementFlags_Swimming::Flying {
+                                    pitch2,
+                                } => {
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "pitch2", "        ");
+                                }
+                                crate::wrath::MovementInfo_MovementFlags_Swimming::AlwaysAllowPitching {
+                                    pitch3,
+                                } => {
+                                    crate::util::write_bytes(&mut s, &mut bytes, 4, "pitch3", "        ");
+                                }
+                            }
+                        }
+
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "fall_time", "        ");
+                        if let Some(if_statement) = &info.flags.get_falling() {
+                            crate::util::write_bytes(&mut s, &mut bytes, 4, "z_speed", "        ");
+                            crate::util::write_bytes(&mut s, &mut bytes, 4, "cos_angle", "        ");
+                            crate::util::write_bytes(&mut s, &mut bytes, 4, "sin_angle", "        ");
+                            crate::util::write_bytes(&mut s, &mut bytes, 4, "xy_speed", "        ");
+                        }
+
+                        if let Some(if_statement) = &info.flags.get_spline_elevation() {
+                            crate::util::write_bytes(&mut s, &mut bytes, 4, "spline_elevation", "        ");
+                        }
+
+                        writeln!(s, "    /* info: MovementInfo end */").unwrap();
+                    }
+                    _ => {}
+                }
+
+            }
+            _ => {}
+        }
+
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -281,6 +448,11 @@ impl CMSG_PET_CAST_SPELL {
 impl crate::private::Sealed for CMSG_PET_CAST_SPELL {}
 impl crate::Message for CMSG_PET_CAST_SPELL {
     const OPCODE: u32 = 0x01f0;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_PET_CAST_SPELL::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

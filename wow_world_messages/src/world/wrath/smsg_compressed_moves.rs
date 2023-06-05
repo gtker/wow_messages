@@ -17,7 +17,7 @@ pub struct SMSG_COMPRESSED_MOVES {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_COMPRESSED_MOVES {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -29,9 +29,9 @@ impl SMSG_COMPRESSED_MOVES {
         for v in self.moves.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    opcode = {};", v.opcode.as_test_case_value()).unwrap();
-            writeln!(s, "    guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "    movement_counter = {};", v.movement_counter).unwrap();
+            writeln!(s, "        opcode = {};", v.opcode.as_test_case_value()).unwrap();
+            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "        movement_counter = {};", v.movement_counter).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -39,22 +39,26 @@ impl SMSG_COMPRESSED_MOVES {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 763_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 763_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "size");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "size", "    ");
+        if !self.moves.is_empty() {
+            writeln!(s, "    /* moves: MiniMoveMessage[-] start */").unwrap();
+            for (i, v) in self.moves.iter().enumerate() {
+                writeln!(s, "    /* moves: MiniMoveMessage[-] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "size", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 2, "opcode", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&v.guid), "guid", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "movement_counter", "        ");
+                writeln!(s, "    /* moves: MiniMoveMessage[-] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* moves: MiniMoveMessage[-] end */").unwrap();
         }
 
 
@@ -62,7 +66,7 @@ impl SMSG_COMPRESSED_MOVES {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -70,6 +74,11 @@ impl SMSG_COMPRESSED_MOVES {
 impl crate::private::Sealed for SMSG_COMPRESSED_MOVES {}
 impl crate::Message for SMSG_COMPRESSED_MOVES {
     const OPCODE: u32 = 0x02fb;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_COMPRESSED_MOVES::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

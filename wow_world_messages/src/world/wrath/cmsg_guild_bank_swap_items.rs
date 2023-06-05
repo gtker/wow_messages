@@ -51,7 +51,7 @@ pub struct CMSG_GUILD_BANK_SWAP_ITEMS {
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_GUILD_BANK_SWAP_ITEMS {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -125,30 +125,80 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 1001_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b, c, d] = 1001_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "bank");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "bank", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "source", "    ");
+        match &self.source {
+            crate::wrath::CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource::Inventory {
+                bank_slot,
+                bank_tab,
+                item2,
+                mode,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "bank_tab", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "bank_slot", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item2", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "mode", "    ");
+                match &mode {
+                    crate::wrath::CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode::Manual {
+                        bank_to_character_transfer,
+                        player_bag,
+                        player_bag_slot,
+                        split_amount,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "player_bag", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "player_bag_slot", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "bank_to_character_transfer", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "split_amount", "    ");
+                    }
+                    crate::wrath::CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode::Automatic {
+                        auto_count,
+                        unknown3,
+                        unknown4,
+                    } => {
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "auto_count", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 1, "unknown3", "    ");
+                        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown4", "    ");
+                    }
+                }
+
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            crate::wrath::CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource::Bank {
+                amount,
+                bank_destination_slot,
+                bank_destination_tab,
+                bank_source_slot,
+                bank_source_tab,
+                item1,
+                unknown1,
+                unknown2,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "bank_destination_tab", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "bank_destination_slot", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown1", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "bank_source_tab", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "bank_source_slot", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "item1", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "unknown2", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "amount", "    ");
+            }
         }
+
+        crate::util::write_bytes(&mut s, &mut bytes, self.unknown5.len(), "unknown5", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -156,6 +206,11 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS {
 impl crate::private::Sealed for CMSG_GUILD_BANK_SWAP_ITEMS {}
 impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
     const OPCODE: u32 = 0x03e9;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        CMSG_GUILD_BANK_SWAP_ITEMS::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

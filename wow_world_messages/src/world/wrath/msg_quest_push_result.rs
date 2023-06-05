@@ -18,7 +18,7 @@ pub struct MSG_QUEST_PUSH_RESULT {
 
 #[cfg(feature = "print-testcase")]
 impl MSG_QUEST_PUSH_RESULT {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         panic!("MSG types not supported");
     }
 
@@ -27,6 +27,11 @@ impl MSG_QUEST_PUSH_RESULT {
 impl crate::private::Sealed for MSG_QUEST_PUSH_RESULT {}
 impl crate::Message for MSG_QUEST_PUSH_RESULT {
     const OPCODE: u32 = 0x0276;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        MSG_QUEST_PUSH_RESULT::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         9

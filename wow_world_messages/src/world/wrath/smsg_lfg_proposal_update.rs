@@ -26,7 +26,7 @@ pub struct SMSG_LFG_PROPOSAL_UPDATE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_LFG_PROPOSAL_UPDATE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -44,12 +44,12 @@ impl SMSG_LFG_PROPOSAL_UPDATE {
         for v in self.proposals.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    role_mask = {};", v.role_mask).unwrap();
-            writeln!(s, "    is_current_player = {};", v.is_current_player).unwrap();
-            writeln!(s, "    in_dungeon = {};", v.in_dungeon).unwrap();
-            writeln!(s, "    in_same_group = {};", v.in_same_group).unwrap();
-            writeln!(s, "    has_answered = {};", v.has_answered).unwrap();
-            writeln!(s, "    has_accepted = {};", v.has_accepted).unwrap();
+            writeln!(s, "        role_mask = {};", v.role_mask).unwrap();
+            writeln!(s, "        is_current_player = {};", v.is_current_player).unwrap();
+            writeln!(s, "        in_dungeon = {};", v.in_dungeon).unwrap();
+            writeln!(s, "        in_same_group = {};", v.in_same_group).unwrap();
+            writeln!(s, "        has_answered = {};", v.has_answered).unwrap();
+            writeln!(s, "        has_accepted = {};", v.has_accepted).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -57,22 +57,33 @@ impl SMSG_LFG_PROPOSAL_UPDATE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 865_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 865_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "dungeon_id");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "dungeon_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "proposal_state", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "proposal_id", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "encounters_finished_mask", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "silent", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_proposals", "    ");
+        if !self.proposals.is_empty() {
+            writeln!(s, "    /* proposals: LfgProposal[amount_of_proposals] start */").unwrap();
+            for (i, v) in self.proposals.iter().enumerate() {
+                writeln!(s, "    /* proposals: LfgProposal[amount_of_proposals] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "role_mask", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "is_current_player", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "in_dungeon", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "in_same_group", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "has_answered", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "has_accepted", "        ");
+                writeln!(s, "    /* proposals: LfgProposal[amount_of_proposals] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* proposals: LfgProposal[amount_of_proposals] end */").unwrap();
         }
 
 
@@ -80,7 +91,7 @@ impl SMSG_LFG_PROPOSAL_UPDATE {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -88,6 +99,11 @@ impl SMSG_LFG_PROPOSAL_UPDATE {
 impl crate::private::Sealed for SMSG_LFG_PROPOSAL_UPDATE {}
 impl crate::Message for SMSG_LFG_PROPOSAL_UPDATE {
     const OPCODE: u32 = 0x0361;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_LFG_PROPOSAL_UPDATE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

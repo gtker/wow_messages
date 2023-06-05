@@ -27,7 +27,7 @@ pub struct SMSG_GMTICKET_GETTICKET {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_GMTICKET_GETTICKET {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -62,30 +62,45 @@ impl SMSG_GMTICKET_GETTICKET {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 530_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 530_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "status");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "status", "    ");
+        match &self.status {
+            crate::wrath::SMSG_GMTICKET_GETTICKET_GmTicketStatus::HasText {
+                days_since_last_updated,
+                days_since_oldest_ticket_creation,
+                days_since_ticket_creation,
+                escalation_status,
+                id,
+                need_more_help,
+                read_by_gm,
+                text,
+            } => {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "id", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, text.len() + 1, "text", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "need_more_help", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "days_since_ticket_creation", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "days_since_oldest_ticket_creation", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "days_since_last_updated", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "escalation_status", "    ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "read_by_gm", "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            _ => {}
         }
+
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -93,6 +108,11 @@ impl SMSG_GMTICKET_GETTICKET {
 impl crate::private::Sealed for SMSG_GMTICKET_GETTICKET {}
 impl crate::Message for SMSG_GMTICKET_GETTICKET {
     const OPCODE: u32 = 0x0212;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_GMTICKET_GETTICKET::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

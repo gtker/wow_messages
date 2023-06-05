@@ -36,7 +36,7 @@ pub struct SMSG_CALENDAR_SEND_CALENDAR {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_CALENDAR_SEND_CALENDAR {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -49,12 +49,12 @@ impl SMSG_CALENDAR_SEND_CALENDAR {
         for v in self.invites.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    event_id = {};", v.event_id.guid()).unwrap();
-            writeln!(s, "    invite_id = {};", v.invite_id.guid()).unwrap();
-            writeln!(s, "    status = {};", v.status).unwrap();
-            writeln!(s, "    rank = {};", v.rank).unwrap();
-            writeln!(s, "    is_guild_event = {};", if v.is_guild_event { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "    creator = {};", v.creator.guid()).unwrap();
+            writeln!(s, "        event_id = {};", v.event_id.guid()).unwrap();
+            writeln!(s, "        invite_id = {};", v.invite_id.guid()).unwrap();
+            writeln!(s, "        status = {};", v.status).unwrap();
+            writeln!(s, "        rank = {};", v.rank).unwrap();
+            writeln!(s, "        is_guild_event = {};", if v.is_guild_event { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "        creator = {};", v.creator.guid()).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -64,13 +64,13 @@ impl SMSG_CALENDAR_SEND_CALENDAR {
         for v in self.events.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    event_id = {};", v.event_id.guid()).unwrap();
-            writeln!(s, "    title = \"{}\";", v.title).unwrap();
-            writeln!(s, "    event_type = {};", v.event_type).unwrap();
-            writeln!(s, "    event_time = {};", v.event_time.as_int()).unwrap();
-            writeln!(s, "    flags = {};", v.flags).unwrap();
-            writeln!(s, "    dungeon_id = {};", v.dungeon_id).unwrap();
-            writeln!(s, "    creator = {};", v.creator.guid()).unwrap();
+            writeln!(s, "        event_id = {};", v.event_id.guid()).unwrap();
+            writeln!(s, "        title = \"{}\";", v.title).unwrap();
+            writeln!(s, "        event_type = {};", v.event_type).unwrap();
+            writeln!(s, "        event_time = {};", v.event_time.as_int()).unwrap();
+            writeln!(s, "        flags = {};", v.flags).unwrap();
+            writeln!(s, "        dungeon_id = {};", v.dungeon_id).unwrap();
+            writeln!(s, "        creator = {};", v.creator.guid()).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -82,10 +82,10 @@ impl SMSG_CALENDAR_SEND_CALENDAR {
         for v in self.instances.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    map = {};", v.map.as_test_case_value()).unwrap();
-            writeln!(s, "    difficulty = {};", v.difficulty).unwrap();
-            writeln!(s, "    reset_time = {};", v.reset_time).unwrap();
-            writeln!(s, "    instance_id = {};", v.instance_id.guid()).unwrap();
+            writeln!(s, "        map = {};", v.map.as_test_case_value()).unwrap();
+            writeln!(s, "        difficulty = {};", v.difficulty).unwrap();
+            writeln!(s, "        reset_time = {};", v.reset_time).unwrap();
+            writeln!(s, "        instance_id = {};", v.instance_id.guid()).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -96,9 +96,9 @@ impl SMSG_CALENDAR_SEND_CALENDAR {
         for v in self.reset_times.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    map = {};", v.map.as_test_case_value()).unwrap();
-            writeln!(s, "    period = {};", v.period).unwrap();
-            writeln!(s, "    time_offset = {};", v.time_offset).unwrap();
+            writeln!(s, "        map = {};", v.map.as_test_case_value()).unwrap();
+            writeln!(s, "        period = {};", v.period).unwrap();
+            writeln!(s, "        time_offset = {};", v.time_offset).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -107,30 +107,81 @@ impl SMSG_CALENDAR_SEND_CALENDAR {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 1078_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 1078_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_invites");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_invites", "    ");
+        if !self.invites.is_empty() {
+            writeln!(s, "    /* invites: SendCalendarInvite[amount_of_invites] start */").unwrap();
+            for (i, v) in self.invites.iter().enumerate() {
+                writeln!(s, "    /* invites: SendCalendarInvite[amount_of_invites] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "event_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "invite_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "status", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "rank", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "is_guild_event", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&v.creator), "creator", "        ");
+                writeln!(s, "    /* invites: SendCalendarInvite[amount_of_invites] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* invites: SendCalendarInvite[amount_of_invites] end */").unwrap();
         }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_events", "    ");
+        if !self.events.is_empty() {
+            writeln!(s, "    /* events: SendCalendarEvent[amount_of_events] start */").unwrap();
+            for (i, v) in self.events.iter().enumerate() {
+                writeln!(s, "    /* events: SendCalendarEvent[amount_of_events] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "event_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, v.title.len() + 1, "title", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "event_type", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "event_time", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "flags", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "dungeon_id", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&v.creator), "creator", "        ");
+                writeln!(s, "    /* events: SendCalendarEvent[amount_of_events] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* events: SendCalendarEvent[amount_of_events] end */").unwrap();
+        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "current_time", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "zone_time", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_instances", "    ");
+        if !self.instances.is_empty() {
+            writeln!(s, "    /* instances: SendCalendarInstance[amount_of_instances] start */").unwrap();
+            for (i, v) in self.instances.iter().enumerate() {
+                writeln!(s, "    /* instances: SendCalendarInstance[amount_of_instances] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "map", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "difficulty", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "reset_time", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "instance_id", "        ");
+                writeln!(s, "    /* instances: SendCalendarInstance[amount_of_instances] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* instances: SendCalendarInstance[amount_of_instances] end */").unwrap();
+        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "relative_time", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_reset_times", "    ");
+        if !self.reset_times.is_empty() {
+            writeln!(s, "    /* reset_times: SendCalendarResetTime[amount_of_reset_times] start */").unwrap();
+            for (i, v) in self.reset_times.iter().enumerate() {
+                writeln!(s, "    /* reset_times: SendCalendarResetTime[amount_of_reset_times] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "map", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "period", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "time_offset", "        ");
+                writeln!(s, "    /* reset_times: SendCalendarResetTime[amount_of_reset_times] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* reset_times: SendCalendarResetTime[amount_of_reset_times] end */").unwrap();
+        }
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_holidays", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -138,6 +189,11 @@ impl SMSG_CALENDAR_SEND_CALENDAR {
 impl crate::private::Sealed for SMSG_CALENDAR_SEND_CALENDAR {}
 impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
     const OPCODE: u32 = 0x0436;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_CALENDAR_SEND_CALENDAR::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

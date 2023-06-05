@@ -25,7 +25,7 @@ pub struct SMSG_LFG_ROLE_CHECK_UPDATE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_LFG_ROLE_CHECK_UPDATE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -46,10 +46,10 @@ impl SMSG_LFG_ROLE_CHECK_UPDATE {
         for v in self.roles.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "    ready = {};", if v.ready { "TRUE" } else { "FALSE" }).unwrap();
-            writeln!(s, "    roles = {};", v.roles).unwrap();
-            writeln!(s, "    level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "        ready = {};", if v.ready { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "        roles = {};", v.roles).unwrap();
+            writeln!(s, "        level = {};", v.level.as_int()).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -57,22 +57,36 @@ impl SMSG_LFG_ROLE_CHECK_UPDATE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 867_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 867_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "rolecheck_state");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "rolecheck_state", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "rolecheck_initializing", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_dungeon_entries", "    ");
+        if !self.dungeon_entries.is_empty() {
+            writeln!(s, "    /* dungeon_entries: u32[amount_of_dungeon_entries] start */").unwrap();
+            for (i, v) in self.dungeon_entries.iter().enumerate() {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("dungeon_entries {i}"), "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* dungeon_entries: u32[amount_of_dungeon_entries] end */").unwrap();
+        }
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_roles", "    ");
+        if !self.roles.is_empty() {
+            writeln!(s, "    /* roles: LfgRole[amount_of_roles] start */").unwrap();
+            for (i, v) in self.roles.iter().enumerate() {
+                writeln!(s, "    /* roles: LfgRole[amount_of_roles] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "ready", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "roles", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "level", "        ");
+                writeln!(s, "    /* roles: LfgRole[amount_of_roles] {i} end */").unwrap();
+            }
+            writeln!(s, "    /* roles: LfgRole[amount_of_roles] end */").unwrap();
         }
 
 
@@ -80,7 +94,7 @@ impl SMSG_LFG_ROLE_CHECK_UPDATE {
         writeln!(s, "    versions = \"3.3.5\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -88,6 +102,11 @@ impl SMSG_LFG_ROLE_CHECK_UPDATE {
 impl crate::private::Sealed for SMSG_LFG_ROLE_CHECK_UPDATE {}
 impl crate::Message for SMSG_LFG_ROLE_CHECK_UPDATE {
     const OPCODE: u32 = 0x0363;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_LFG_ROLE_CHECK_UPDATE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

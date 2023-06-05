@@ -36,7 +36,7 @@ pub struct SMSG_CREATURE_QUERY_RESPONSE {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_CREATURE_QUERY_RESPONSE {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -70,22 +70,36 @@ impl SMSG_CREATURE_QUERY_RESPONSE {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 97_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 97_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "creature_entry");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "creature_entry", "    ");
+        if let Some(found) = &self.found {
+            crate::util::write_bytes(&mut s, &mut bytes, found.name1.len() + 1, "name1", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, found.name2.len() + 1, "name2", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, found.name3.len() + 1, "name3", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, found.name4.len() + 1, "name4", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, found.sub_name.len() + 1, "sub_name", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, found.description.len() + 1, "description", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "type_flags", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "creature_type", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "creature_family", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "creature_rank", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown0", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_data_id", "    ");
+            writeln!(s, "    /* display_ids: u32[4] start */").unwrap();
+            for (i, v) in found.display_ids.iter().enumerate() {
+                crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("display_ids {i}"), "    ");
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* display_ids: u32[4] end */").unwrap();
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "health_multiplier", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 4, "mana_multiplier", "    ");
+            crate::util::write_bytes(&mut s, &mut bytes, 1, "racial_leader", "    ");
         }
 
 
@@ -93,7 +107,7 @@ impl SMSG_CREATURE_QUERY_RESPONSE {
         writeln!(s, "    versions = \"2.4.3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -101,6 +115,11 @@ impl SMSG_CREATURE_QUERY_RESPONSE {
 impl crate::private::Sealed for SMSG_CREATURE_QUERY_RESPONSE {}
 impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
     const OPCODE: u32 = 0x0061;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_CREATURE_QUERY_RESPONSE::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

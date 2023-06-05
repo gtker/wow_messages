@@ -23,7 +23,7 @@ pub struct SMSG_TRAINER_LIST {
 
 #[cfg(feature = "print-testcase")]
 impl SMSG_TRAINER_LIST {
-    pub fn to_test_case_string(&self) -> String {
+    pub fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -38,15 +38,15 @@ impl SMSG_TRAINER_LIST {
         for v in self.spells.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    spell = {};", v.spell).unwrap();
-            writeln!(s, "    state = {};", v.state.as_test_case_value()).unwrap();
-            writeln!(s, "    spell_cost = {};", v.spell_cost).unwrap();
-            writeln!(s, "    talent_point_cost = {};", v.talent_point_cost).unwrap();
-            writeln!(s, "    first_rank = {};", v.first_rank).unwrap();
-            writeln!(s, "    required_level = {};", v.required_level).unwrap();
-            writeln!(s, "    required_skill = {};", v.required_skill.as_test_case_value()).unwrap();
-            writeln!(s, "    required_skill_value = {};", v.required_skill_value).unwrap();
-            write!(s, "    required_spells = [").unwrap();
+            writeln!(s, "        spell = {};", v.spell).unwrap();
+            writeln!(s, "        state = {};", v.state.as_test_case_value()).unwrap();
+            writeln!(s, "        spell_cost = {};", v.spell_cost).unwrap();
+            writeln!(s, "        talent_point_cost = {};", v.talent_point_cost).unwrap();
+            writeln!(s, "        first_rank = {};", v.first_rank).unwrap();
+            writeln!(s, "        required_level = {};", v.required_level).unwrap();
+            writeln!(s, "        required_skill = {};", v.required_skill.as_test_case_value()).unwrap();
+            writeln!(s, "        required_skill_value = {};", v.required_skill_value).unwrap();
+            write!(s, "        required_spells = [").unwrap();
             for v in v.required_spells.as_slice() {
                 write!(s, "{v:#04X}, ").unwrap();
             }
@@ -59,30 +59,46 @@ impl SMSG_TRAINER_LIST {
 
         writeln!(s, "}} [").unwrap();
 
-        // Size/Opcode
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
         writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 433_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        // Bytes
+        let [a, b] = 433_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
         let mut bytes: Vec<u8> = Vec::new();
         self.write_into_vec(&mut bytes).unwrap();
         let mut bytes = bytes.into_iter();
 
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid");
-        for (i, b) in bytes.enumerate() {
-            if i == 0 {
-                write!(s, "    ").unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "trainer_type", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_spells", "    ");
+        if !self.spells.is_empty() {
+            writeln!(s, "    /* spells: TrainerSpell[amount_of_spells] start */").unwrap();
+            for (i, v) in self.spells.iter().enumerate() {
+                writeln!(s, "    /* spells: TrainerSpell[amount_of_spells] {i} start */").unwrap();
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "state", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "spell_cost", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "talent_point_cost", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "first_rank", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 1, "required_level", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "required_skill", "        ");
+                crate::util::write_bytes(&mut s, &mut bytes, 4, "required_skill_value", "        ");
+                writeln!(s, "    /* required_spells: u32[3] start */").unwrap();
+                for (i, v) in v.required_spells.iter().enumerate() {
+                    crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("required_spells {i}"), "        ");
+                }
+                writeln!(s, "    /* required_spells: u32[3] end */").unwrap();
+                writeln!(s, "    /* spells: TrainerSpell[amount_of_spells] {i} end */").unwrap();
             }
-            write!(s, "{b:#04X}, ").unwrap();
+            writeln!(s, "    /* spells: TrainerSpell[amount_of_spells] end */").unwrap();
         }
+        crate::util::write_bytes(&mut s, &mut bytes, self.greeting.len() + 1, "greeting", "    ");
 
 
         writeln!(s, "] {{").unwrap();
         writeln!(s, "    versions = \"2.4.3\";").unwrap();
         writeln!(s, "}}\n").unwrap();
 
-        s
+        Some(s)
     }
 
 }
@@ -90,6 +106,11 @@ impl SMSG_TRAINER_LIST {
 impl crate::private::Sealed for SMSG_TRAINER_LIST {}
 impl crate::Message for SMSG_TRAINER_LIST {
     const OPCODE: u32 = 0x01b1;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
+        SMSG_TRAINER_LIST::to_test_case_string(self)
+    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32
