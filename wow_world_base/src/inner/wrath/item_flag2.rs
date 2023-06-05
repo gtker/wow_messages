@@ -41,6 +41,272 @@ pub struct ItemFlag2 {
     inner: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl ItemFlag2 {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_faction_horde() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "FACTION_HORDE").unwrap();
+            first = false;
+        }
+        if self.is_faction_alliance() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "FACTION_ALLIANCE").unwrap();
+            first = false;
+        }
+        if self.is_dont_ignore_buy_price() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DONT_IGNORE_BUY_PRICE").unwrap();
+            first = false;
+        }
+        if self.is_classify_as_caster() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CLASSIFY_AS_CASTER").unwrap();
+            first = false;
+        }
+        if self.is_classify_as_physical() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CLASSIFY_AS_PHYSICAL").unwrap();
+            first = false;
+        }
+        if self.is_everyone_can_roll_need() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "EVERYONE_CAN_ROLL_NEED").unwrap();
+            first = false;
+        }
+        if self.is_no_trade_bind_on_acquire() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_TRADE_BIND_ON_ACQUIRE").unwrap();
+            first = false;
+        }
+        if self.is_can_trade_bind_on_acquire() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CAN_TRADE_BIND_ON_ACQUIRE").unwrap();
+            first = false;
+        }
+        if self.is_can_only_roll_greed() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CAN_ONLY_ROLL_GREED").unwrap();
+            first = false;
+        }
+        if self.is_caster_weapon() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CASTER_WEAPON").unwrap();
+            first = false;
+        }
+        if self.is_delete_on_login() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DELETE_ON_LOGIN").unwrap();
+            first = false;
+        }
+        if self.is_internal_item() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "INTERNAL_ITEM").unwrap();
+            first = false;
+        }
+        if self.is_no_vendor_value() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_VENDOR_VALUE").unwrap();
+            first = false;
+        }
+        if self.is_show_before_discovered() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "SHOW_BEFORE_DISCOVERED").unwrap();
+            first = false;
+        }
+        if self.is_override_gold_cost() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "OVERRIDE_GOLD_COST").unwrap();
+            first = false;
+        }
+        if self.is_ignore_default_rated_bg_restrictions() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "IGNORE_DEFAULT_RATED_BG_RESTRICTIONS").unwrap();
+            first = false;
+        }
+        if self.is_not_usable_in_rated_bg() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NOT_USABLE_IN_RATED_BG").unwrap();
+            first = false;
+        }
+        if self.is_bnet_account_trade_ok() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "BNET_ACCOUNT_TRADE_OK").unwrap();
+            first = false;
+        }
+        if self.is_confirm_before_use() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CONFIRM_BEFORE_USE").unwrap();
+            first = false;
+        }
+        if self.is_reevaluate_bonding_on_transform() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "REEVALUATE_BONDING_ON_TRANSFORM").unwrap();
+            first = false;
+        }
+        if self.is_no_transform_on_charge_depletion() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_TRANSFORM_ON_CHARGE_DEPLETION").unwrap();
+            first = false;
+        }
+        if self.is_no_alter_item_visual() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_ALTER_ITEM_VISUAL").unwrap();
+            first = false;
+        }
+        if self.is_no_source_for_item_visual() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_SOURCE_FOR_ITEM_VISUAL").unwrap();
+            first = false;
+        }
+        if self.is_ignore_quality_for_item_visual_source() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "IGNORE_QUALITY_FOR_ITEM_VISUAL_SOURCE").unwrap();
+            first = false;
+        }
+        if self.is_no_durability() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_DURABILITY").unwrap();
+            first = false;
+        }
+        if self.is_role_tank() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ROLE_TANK").unwrap();
+            first = false;
+        }
+        if self.is_role_healer() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ROLE_HEALER").unwrap();
+            first = false;
+        }
+        if self.is_role_damage() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ROLE_DAMAGE").unwrap();
+            first = false;
+        }
+        if self.is_can_drop_in_challenge_mode() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CAN_DROP_IN_CHALLENGE_MODE").unwrap();
+            first = false;
+        }
+        if self.is_never_stack_in_loot_ui() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NEVER_STACK_IN_LOOT_UI").unwrap();
+            first = false;
+        }
+        if self.is_disenchant_to_loot_table() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DISENCHANT_TO_LOOT_TABLE").unwrap();
+            first = false;
+        }
+        if self.is_used_in_a_tradeskill() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "USED_IN_A_TRADESKILL").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl ItemFlag2 {
     pub const fn new(inner: u32) -> Self {
         Self { inner }

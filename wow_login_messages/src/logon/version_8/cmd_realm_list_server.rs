@@ -43,6 +43,73 @@ impl CMD_REALM_LIST_Server {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMD_REALM_LIST_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMD_REALM_LIST_Server {{").unwrap();
+        // Members
+        writeln!(s, "    number_of_realms = {};", self.realms.len()).unwrap();
+        write!(s, "    realms = [").unwrap();
+        for v in self.realms.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    realm_type = {};", v.realm_type.as_test_case_value()).unwrap();
+            writeln!(s, "    locked = {};", if v.locked { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "    flag = {};", crate::logon::version_8::RealmFlag::new(v.flag.as_int()).as_test_case_value()).unwrap();
+            writeln!(s, "    name = \"{}\";", v.name).unwrap();
+            writeln!(s, "    address = \"{}\";", v.address).unwrap();
+            writeln!(s, "    population = {};", v.population.as_test_case_value()).unwrap();
+            writeln!(s, "    number_of_characters_on_realm = {};", v.number_of_characters_on_realm).unwrap();
+            writeln!(s, "    category = {};", v.category.as_test_case_value()).unwrap();
+            writeln!(s, "    realm_id = {};", v.realm_id).unwrap();
+            if let Some(if_statement) = &v.flag.get_specify_build() {
+                // version: Version
+                writeln!(s, "    version = {{").unwrap();
+                // Members
+                writeln!(s, "    major = {};", if_statement.version.major).unwrap();
+                writeln!(s, "    minor = {};", if_statement.version.minor).unwrap();
+                writeln!(s, "    patch = {};", if_statement.version.patch).unwrap();
+                writeln!(s, "    build = {};", if_statement.version.build).unwrap();
+
+                writeln!(s, "    }};").unwrap();
+            }
+
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 2, "size");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    login_versions = \"8\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl CMD_REALM_LIST_Server {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8

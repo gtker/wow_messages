@@ -25,6 +25,18 @@ impl RollVote {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl RollVote {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Pass => "PASS",
+            Self::Need => "NEED",
+            Self::Greed => "GREED",
+        }
+    }
+
+}
+
 impl Default for RollVote {
     fn default() -> Self {
         Self::Pass

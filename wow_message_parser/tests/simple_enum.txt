@@ -25,6 +25,18 @@ impl SimpleEnum {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl SimpleEnum {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Zero => "ZERO",
+            Self::One => "ONE",
+            Self::Two => "TWO",
+        }
+    }
+
+}
+
 impl Default for SimpleEnum {
     fn default() -> Self {
         Self::Zero

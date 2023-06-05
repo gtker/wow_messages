@@ -28,6 +28,19 @@ impl PetCommandState {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl PetCommandState {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Stay => "STAY",
+            Self::Follow => "FOLLOW",
+            Self::Attack => "ATTACK",
+            Self::Dismiss => "DISMISS",
+        }
+    }
+
+}
+
 impl Default for PetCommandState {
     fn default() -> Self {
         Self::Stay

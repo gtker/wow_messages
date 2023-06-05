@@ -34,6 +34,21 @@ impl EnvironmentalDamageType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl EnvironmentalDamageType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Exhausted => "EXHAUSTED",
+            Self::Drowning => "DROWNING",
+            Self::Fall => "FALL",
+            Self::Lava => "LAVA",
+            Self::Slime => "SLIME",
+            Self::Fire => "FIRE",
+        }
+    }
+
+}
+
 impl Default for EnvironmentalDamageType {
     fn default() -> Self {
         Self::Exhausted

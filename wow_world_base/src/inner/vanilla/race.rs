@@ -43,6 +43,24 @@ impl Race {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl Race {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Human => "HUMAN",
+            Self::Orc => "ORC",
+            Self::Dwarf => "DWARF",
+            Self::NightElf => "NIGHT_ELF",
+            Self::Undead => "UNDEAD",
+            Self::Tauren => "TAUREN",
+            Self::Gnome => "GNOME",
+            Self::Troll => "TROLL",
+            Self::Goblin => "GOBLIN",
+        }
+    }
+
+}
+
 impl Default for Race {
     fn default() -> Self {
         Self::Human

@@ -27,6 +27,18 @@ impl SheathState {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl SheathState {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Unarmed => "UNARMED",
+            Self::Melee => "MELEE",
+            Self::Ranged => "RANGED",
+        }
+    }
+
+}
+
 impl Default for SheathState {
     fn default() -> Self {
         Self::Unarmed

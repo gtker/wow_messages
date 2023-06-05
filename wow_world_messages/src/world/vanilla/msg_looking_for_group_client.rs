@@ -9,6 +9,40 @@ use std::io::{Read, Write};
 pub struct MSG_LOOKING_FOR_GROUP_Client {
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_LOOKING_FOR_GROUP_Client {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test MSG_LOOKING_FOR_GROUP_Client {{").unwrap();
+        // Members
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 6_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 511_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for MSG_LOOKING_FOR_GROUP_Client {}
 impl crate::Message for MSG_LOOKING_FOR_GROUP_Client {
     const OPCODE: u32 = 0x01ff;

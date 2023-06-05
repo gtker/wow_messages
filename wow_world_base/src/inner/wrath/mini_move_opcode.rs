@@ -28,6 +28,19 @@ impl MiniMoveOpcode {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl MiniMoveOpcode {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::SmsgForceMoveRoot => "SMSG_FORCE_MOVE_ROOT",
+            Self::SmsgMoveFeatherFall => "SMSG_MOVE_FEATHER_FALL",
+            Self::SmsgMoveWaterWalk => "SMSG_MOVE_WATER_WALK",
+            Self::SmsgMoveSetHover => "SMSG_MOVE_SET_HOVER",
+        }
+    }
+
+}
+
 impl Default for MiniMoveOpcode {
     fn default() -> Self {
         Self::SmsgForceMoveRoot

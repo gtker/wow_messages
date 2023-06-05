@@ -51,6 +51,65 @@ pub struct CMSG_PETITION_BUY {
     pub unknown15: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_PETITION_BUY {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_PETITION_BUY {{").unwrap();
+        // Members
+        writeln!(s, "    npc = {};", self.npc.guid()).unwrap();
+        writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
+        writeln!(s, "    unknown2 = {};", self.unknown2.guid()).unwrap();
+        writeln!(s, "    name = \"{}\";", self.name).unwrap();
+        writeln!(s, "    unknown3 = {};", self.unknown3).unwrap();
+        writeln!(s, "    unknown4 = {};", self.unknown4).unwrap();
+        writeln!(s, "    unknown5 = {};", self.unknown5).unwrap();
+        writeln!(s, "    unknown6 = {};", self.unknown6).unwrap();
+        writeln!(s, "    unknown7 = {};", self.unknown7).unwrap();
+        writeln!(s, "    unknown8 = {};", self.unknown8).unwrap();
+        writeln!(s, "    unknown9 = {};", self.unknown9).unwrap();
+        writeln!(s, "    unknown10 = {};", self.unknown10).unwrap();
+        writeln!(s, "    unknown11 = {};", self.unknown11).unwrap();
+        writeln!(s, "    unknown12 = {};", self.unknown12).unwrap();
+        writeln!(s, "    unknown13 = {};", self.unknown13).unwrap();
+        writeln!(s, "    unknown14 = {};", self.unknown14).unwrap();
+        writeln!(s, "    index = {};", self.index).unwrap();
+        writeln!(s, "    unknown15 = {};", self.unknown15).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 445_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "npc");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_PETITION_BUY {}
 impl crate::Message for CMSG_PETITION_BUY {
     const OPCODE: u32 = 0x01bd;

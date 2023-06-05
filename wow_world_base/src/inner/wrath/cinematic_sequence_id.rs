@@ -61,6 +61,30 @@ impl CinematicSequenceId {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CinematicSequenceId {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Goblin => "GOBLIN",
+            Self::PalantirOfAzora => "PALANTIR_OF_AZORA",
+            Self::Undead => "UNDEAD",
+            Self::Orc => "ORC",
+            Self::Dwarf => "DWARF",
+            Self::NightElf => "NIGHT_ELF",
+            Self::Human => "HUMAN",
+            Self::Gnome => "GNOME",
+            Self::Troll => "TROLL",
+            Self::Tauren => "TAUREN",
+            Self::ScryCam => "SCRY_CAM",
+            Self::BloodElf => "BLOOD_ELF",
+            Self::Draenei => "DRAENEI",
+            Self::SunwellFiveMan => "SUNWELL_FIVE_MAN",
+            Self::DeathKnight => "DEATH_KNIGHT",
+        }
+    }
+
+}
+
 impl Default for CinematicSequenceId {
     fn default() -> Self {
         Self::Goblin

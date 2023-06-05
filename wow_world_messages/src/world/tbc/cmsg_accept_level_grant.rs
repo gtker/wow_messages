@@ -13,6 +13,47 @@ pub struct CMSG_ACCEPT_LEVEL_GRANT {
     pub guid: Guid,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_ACCEPT_LEVEL_GRANT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_ACCEPT_LEVEL_GRANT {{").unwrap();
+        // Members
+        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 1055_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_ACCEPT_LEVEL_GRANT {}
 impl crate::Message for CMSG_ACCEPT_LEVEL_GRANT {
     const OPCODE: u32 = 0x041f;

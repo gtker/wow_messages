@@ -25,6 +25,71 @@ pub struct SMSG_LFG_UPDATE_PLAYER {
     pub join_status: SMSG_LFG_UPDATE_PLAYER_LfgJoinStatus,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_LFG_UPDATE_PLAYER {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_LFG_UPDATE_PLAYER {{").unwrap();
+        // Members
+        writeln!(s, "    update_type = {};", self.update_type.as_test_case_value()).unwrap();
+        writeln!(s, "    join_status = {};", crate::wrath::LfgJoinStatus::try_from(self.join_status.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.join_status {
+            crate::wrath::SMSG_LFG_UPDATE_PLAYER_LfgJoinStatus::Joined {
+                achievements,
+                comment,
+                dungeons,
+                no_partial_clear,
+                queued,
+            } => {
+                writeln!(s, "    queued = {};", queued).unwrap();
+                writeln!(s, "    no_partial_clear = {};", no_partial_clear).unwrap();
+                writeln!(s, "    achievements = {};", achievements).unwrap();
+                writeln!(s, "    amount_of_dungeons = {};", dungeons.len()).unwrap();
+                write!(s, "    dungeons = [").unwrap();
+                for v in dungeons.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+                writeln!(s, "    comment = \"{}\";", comment).unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 871_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "update_type");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_LFG_UPDATE_PLAYER {}
 impl crate::Message for SMSG_LFG_UPDATE_PLAYER {
     const OPCODE: u32 = 0x0367;

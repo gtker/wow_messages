@@ -27,6 +27,19 @@ impl RealmType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl RealmType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::PlayerVsEnvironment => "PLAYER_VS_ENVIRONMENT",
+            Self::PlayerVsPlayer => "PLAYER_VS_PLAYER",
+            Self::Roleplaying => "ROLEPLAYING",
+            Self::RoleplayingPlayerVsPlayer => "ROLEPLAYING_PLAYER_VS_PLAYER",
+        }
+    }
+
+}
+
 impl Default for RealmType {
     fn default() -> Self {
         Self::PlayerVsEnvironment

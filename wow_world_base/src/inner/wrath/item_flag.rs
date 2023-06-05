@@ -41,6 +41,272 @@ pub struct ItemFlag {
     inner: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl ItemFlag {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_no_pickup() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_PICKUP").unwrap();
+            first = false;
+        }
+        if self.is_conjured() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CONJURED").unwrap();
+            first = false;
+        }
+        if self.is_lootable() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "LOOTABLE").unwrap();
+            first = false;
+        }
+        if self.is_heroic_tooltip() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "HEROIC_TOOLTIP").unwrap();
+            first = false;
+        }
+        if self.is_deprecated() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DEPRECATED").unwrap();
+            first = false;
+        }
+        if self.is_indestructible() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "INDESTRUCTIBLE").unwrap();
+            first = false;
+        }
+        if self.is_player_cast() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PLAYER_CAST").unwrap();
+            first = false;
+        }
+        if self.is_no_equip_cooldown() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_EQUIP_COOLDOWN").unwrap();
+            first = false;
+        }
+        if self.is_multi_loot_quest() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "MULTI_LOOT_QUEST").unwrap();
+            first = false;
+        }
+        if self.is_wrapper() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "WRAPPER").unwrap();
+            first = false;
+        }
+        if self.is_uses_resources() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "USES_RESOURCES").unwrap();
+            first = false;
+        }
+        if self.is_multi_drop() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "MULTI_DROP").unwrap();
+            first = false;
+        }
+        if self.is_item_purchase_record() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ITEM_PURCHASE_RECORD").unwrap();
+            first = false;
+        }
+        if self.is_charter() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CHARTER").unwrap();
+            first = false;
+        }
+        if self.is_has_text() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "HAS_TEXT").unwrap();
+            first = false;
+        }
+        if self.is_no_disenchant() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_DISENCHANT").unwrap();
+            first = false;
+        }
+        if self.is_real_duration() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "REAL_DURATION").unwrap();
+            first = false;
+        }
+        if self.is_no_creator() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_CREATOR").unwrap();
+            first = false;
+        }
+        if self.is_is_prospectable() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "IS_PROSPECTABLE").unwrap();
+            first = false;
+        }
+        if self.is_unique_equipped() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNIQUE_EQUIPPED").unwrap();
+            first = false;
+        }
+        if self.is_ignore_for_auras() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "IGNORE_FOR_AURAS").unwrap();
+            first = false;
+        }
+        if self.is_ignore_default_arena_restrictions() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "IGNORE_DEFAULT_ARENA_RESTRICTIONS").unwrap();
+            first = false;
+        }
+        if self.is_no_durability_loss() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_DURABILITY_LOSS").unwrap();
+            first = false;
+        }
+        if self.is_use_when_shapeshifted() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "USE_WHEN_SHAPESHIFTED").unwrap();
+            first = false;
+        }
+        if self.is_has_quest_glow() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "HAS_QUEST_GLOW").unwrap();
+            first = false;
+        }
+        if self.is_hide_unusable_recipe() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "HIDE_UNUSABLE_RECIPE").unwrap();
+            first = false;
+        }
+        if self.is_not_useable_in_arena() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NOT_USEABLE_IN_ARENA").unwrap();
+            first = false;
+        }
+        if self.is_is_bound_to_account() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "IS_BOUND_TO_ACCOUNT").unwrap();
+            first = false;
+        }
+        if self.is_no_reagent_cost() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_REAGENT_COST").unwrap();
+            first = false;
+        }
+        if self.is_is_millable() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "IS_MILLABLE").unwrap();
+            first = false;
+        }
+        if self.is_report_to_guild_chat() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "REPORT_TO_GUILD_CHAT").unwrap();
+            first = false;
+        }
+        if self.is_no_progressive_loot() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_PROGRESSIVE_LOOT").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl ItemFlag {
     pub const fn new(inner: u32) -> Self {
         Self { inner }

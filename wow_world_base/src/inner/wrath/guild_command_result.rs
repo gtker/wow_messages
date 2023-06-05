@@ -87,6 +87,38 @@ impl GuildCommandResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl GuildCommandResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::PlayerNoMoreInGuild => "PLAYER_NO_MORE_IN_GUILD",
+            Self::GuildInternal => "GUILD_INTERNAL",
+            Self::AlreadyInGuild => "ALREADY_IN_GUILD",
+            Self::AlreadyInGuildS => "ALREADY_IN_GUILD_S",
+            Self::InvitedToGuild => "INVITED_TO_GUILD",
+            Self::AlreadyInvitedToGuildS => "ALREADY_INVITED_TO_GUILD_S",
+            Self::GuildNameInvalid => "GUILD_NAME_INVALID",
+            Self::GuildNameExistsS => "GUILD_NAME_EXISTS_S",
+            Self::GuildLeaderLeaveOrPermissions => "GUILD_LEADER_LEAVE_OR_PERMISSIONS",
+            Self::GuildPlayerNotInGuild => "GUILD_PLAYER_NOT_IN_GUILD",
+            Self::GuildPlayerNotInGuildS => "GUILD_PLAYER_NOT_IN_GUILD_S",
+            Self::GuildPlayerNotFoundS => "GUILD_PLAYER_NOT_FOUND_S",
+            Self::GuildNotAllied => "GUILD_NOT_ALLIED",
+            Self::GuildRankTooHighS => "GUILD_RANK_TOO_HIGH_S",
+            Self::GuildRankTooLowS => "GUILD_RANK_TOO_LOW_S",
+            Self::GuildRanksLocked => "GUILD_RANKS_LOCKED",
+            Self::GuildRankInUse => "GUILD_RANK_IN_USE",
+            Self::GuildIgnoringYouS => "GUILD_IGNORING_YOU_S",
+            Self::GuildUnk1 => "GUILD_UNK1",
+            Self::GuildWithdrawLimit => "GUILD_WITHDRAW_LIMIT",
+            Self::GuildNotEnoughMoney => "GUILD_NOT_ENOUGH_MONEY",
+            Self::GuildBankFull => "GUILD_BANK_FULL",
+            Self::GuildItemNotFound => "GUILD_ITEM_NOT_FOUND",
+        }
+    }
+
+}
+
 impl Default for GuildCommandResult {
     fn default() -> Self {
         Self::PlayerNoMoreInGuild

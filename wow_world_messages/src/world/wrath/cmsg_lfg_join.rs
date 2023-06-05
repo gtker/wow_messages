@@ -23,6 +23,63 @@ pub struct CMSG_LFG_JOIN {
     pub comment: String,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_LFG_JOIN {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_LFG_JOIN {{").unwrap();
+        // Members
+        writeln!(s, "    roles = {};", self.roles).unwrap();
+        writeln!(s, "    no_partial_clear = {};", if self.no_partial_clear { "TRUE" } else { "FALSE" }).unwrap();
+        writeln!(s, "    achievements = {};", if self.achievements { "TRUE" } else { "FALSE" }).unwrap();
+        writeln!(s, "    amount_of_slots = {};", self.slots.len()).unwrap();
+        write!(s, "    slots = [").unwrap();
+        for v in self.slots.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        writeln!(s, "    amount_of_needs = {};", self.needs.len()).unwrap();
+        write!(s, "    needs = [").unwrap();
+        for v in self.needs.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        writeln!(s, "    comment = \"{}\";", self.comment).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 860_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "roles");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_LFG_JOIN {}
 impl crate::Message for CMSG_LFG_JOIN {
     const OPCODE: u32 = 0x035c;

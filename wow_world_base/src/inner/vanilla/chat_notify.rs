@@ -174,6 +174,47 @@ impl ChatNotify {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ChatNotify {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::JoinedNotice => "JOINED_NOTICE",
+            Self::LeftNotice => "LEFT_NOTICE",
+            Self::YouJoinedNotice => "YOU_JOINED_NOTICE",
+            Self::YouLeftNotice => "YOU_LEFT_NOTICE",
+            Self::WrongPasswordNotice => "WRONG_PASSWORD_NOTICE",
+            Self::NotMemberNotice => "NOT_MEMBER_NOTICE",
+            Self::NotModeratorNotice => "NOT_MODERATOR_NOTICE",
+            Self::PasswordChangedNotice => "PASSWORD_CHANGED_NOTICE",
+            Self::OwnerChangedNotice => "OWNER_CHANGED_NOTICE",
+            Self::PlayerNotFoundNotice => "PLAYER_NOT_FOUND_NOTICE",
+            Self::NotOwnerNotice => "NOT_OWNER_NOTICE",
+            Self::ChannelOwnerNotice => "CHANNEL_OWNER_NOTICE",
+            Self::ModeChangeNotice => "MODE_CHANGE_NOTICE",
+            Self::AnnouncementsOnNotice => "ANNOUNCEMENTS_ON_NOTICE",
+            Self::AnnouncementsOffNotice => "ANNOUNCEMENTS_OFF_NOTICE",
+            Self::ModerationOnNotice => "MODERATION_ON_NOTICE",
+            Self::ModerationOffNotice => "MODERATION_OFF_NOTICE",
+            Self::MutedNotice => "MUTED_NOTICE",
+            Self::PlayerKickedNotice => "PLAYER_KICKED_NOTICE",
+            Self::BannedNotice => "BANNED_NOTICE",
+            Self::PlayerBannedNotice => "PLAYER_BANNED_NOTICE",
+            Self::PlayerUnbannedNotice => "PLAYER_UNBANNED_NOTICE",
+            Self::PlayerNotBannedNotice => "PLAYER_NOT_BANNED_NOTICE",
+            Self::PlayerAlreadyMemberNotice => "PLAYER_ALREADY_MEMBER_NOTICE",
+            Self::InviteNotice => "INVITE_NOTICE",
+            Self::InviteWrongFactionNotice => "INVITE_WRONG_FACTION_NOTICE",
+            Self::WrongFactionNotice => "WRONG_FACTION_NOTICE",
+            Self::InvalidNameNotice => "INVALID_NAME_NOTICE",
+            Self::NotModeratedNotice => "NOT_MODERATED_NOTICE",
+            Self::PlayerInvitedNotice => "PLAYER_INVITED_NOTICE",
+            Self::PlayerInviteBannedNotice => "PLAYER_INVITE_BANNED_NOTICE",
+            Self::ThrottledNotice => "THROTTLED_NOTICE",
+        }
+    }
+
+}
+
 impl Default for ChatNotify {
     fn default() -> Self {
         Self::JoinedNotice

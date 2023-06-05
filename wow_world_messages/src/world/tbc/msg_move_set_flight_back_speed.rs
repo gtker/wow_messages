@@ -18,6 +18,14 @@ pub struct MSG_MOVE_SET_FLIGHT_BACK_SPEED {
     pub new_speed: f32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_MOVE_SET_FLIGHT_BACK_SPEED {
+    pub fn to_test_case_string(&self) -> String {
+        panic!("MSG types not supported");
+    }
+
+}
+
 impl crate::private::Sealed for MSG_MOVE_SET_FLIGHT_BACK_SPEED {}
 impl crate::Message for MSG_MOVE_SET_FLIGHT_BACK_SPEED {
     const OPCODE: u32 = 0x0380;

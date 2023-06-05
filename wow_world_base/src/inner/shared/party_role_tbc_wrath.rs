@@ -22,6 +22,17 @@ impl PartyRole {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl PartyRole {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::MainTank => "MAIN_TANK",
+            Self::Assistant => "ASSISTANT",
+        }
+    }
+
+}
+
 impl Default for PartyRole {
     fn default() -> Self {
         Self::MainTank

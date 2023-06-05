@@ -37,6 +37,22 @@ impl PageTextMaterial {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl PageTextMaterial {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::Parchment => "PARCHMENT",
+            Self::Stone => "STONE",
+            Self::Marble => "MARBLE",
+            Self::Silver => "SILVER",
+            Self::Bronze => "BRONZE",
+            Self::Valentine => "VALENTINE",
+        }
+    }
+
+}
+
 impl Default for PageTextMaterial {
     fn default() -> Self {
         Self::None

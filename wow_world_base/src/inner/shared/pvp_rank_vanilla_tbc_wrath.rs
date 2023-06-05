@@ -118,6 +118,35 @@ impl PvpRank {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl PvpRank {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NoRank => "NO_RANK",
+            Self::Pariah => "PARIAH",
+            Self::Outlaw => "OUTLAW",
+            Self::Exiled => "EXILED",
+            Self::Dishonored => "DISHONORED",
+            Self::Rank1 => "RANK1",
+            Self::Rank2 => "RANK2",
+            Self::Rank3 => "RANK3",
+            Self::Rank4 => "RANK4",
+            Self::Rank5 => "RANK5",
+            Self::Rank6 => "RANK6",
+            Self::Rank7 => "RANK7",
+            Self::Rank8 => "RANK8",
+            Self::Rank9 => "RANK9",
+            Self::Rank10 => "RANK10",
+            Self::Rank11 => "RANK11",
+            Self::Rank12 => "RANK12",
+            Self::Rank13 => "RANK13",
+            Self::Rank14 => "RANK14",
+            Self::FactionLeader => "FACTION_LEADER",
+        }
+    }
+
+}
+
 impl Default for PvpRank {
     fn default() -> Self {
         Self::NoRank

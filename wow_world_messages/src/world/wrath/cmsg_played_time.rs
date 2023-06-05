@@ -13,6 +13,48 @@ pub struct CMSG_PLAYED_TIME {
     pub show_on_ui: bool,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_PLAYED_TIME {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_PLAYED_TIME {{").unwrap();
+        // Members
+        writeln!(s, "    show_on_ui = {};", if self.show_on_ui { "TRUE" } else { "FALSE" }).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 7_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 460_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "show_on_ui");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_PLAYED_TIME {}
 impl crate::Message for CMSG_PLAYED_TIME {
     const OPCODE: u32 = 0x01cc;

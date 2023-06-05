@@ -22,6 +22,17 @@ impl PartyOperation {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl PartyOperation {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Invite => "INVITE",
+            Self::Leave => "LEAVE",
+        }
+    }
+
+}
+
 impl Default for PartyOperation {
     fn default() -> Self {
         Self::Invite

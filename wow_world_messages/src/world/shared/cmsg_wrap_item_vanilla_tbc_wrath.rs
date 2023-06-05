@@ -17,6 +17,51 @@ pub struct CMSG_WRAP_ITEM {
     pub item_slot: u8,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_WRAP_ITEM {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_WRAP_ITEM {{").unwrap();
+        // Members
+        writeln!(s, "    gift_bag_index = {};", self.gift_bag_index).unwrap();
+        writeln!(s, "    gift_slot = {};", self.gift_slot).unwrap();
+        writeln!(s, "    item_bag_index = {};", self.item_bag_index).unwrap();
+        writeln!(s, "    item_slot = {};", self.item_slot).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 10_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 467_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "gift_bag_index");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_WRAP_ITEM {}
 impl crate::Message for CMSG_WRAP_ITEM {
     const OPCODE: u32 = 0x01d3;

@@ -20,6 +20,53 @@ pub struct SMSG_CHANNEL_NOTIFY {
     pub unknown1: Option<SMSG_CHANNEL_NOTIFY_unknown1>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_CHANNEL_NOTIFY {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_CHANNEL_NOTIFY {{").unwrap();
+        // Members
+        writeln!(s, "    notify_type = {};", self.notify_type.as_test_case_value()).unwrap();
+        writeln!(s, "    channel_name = \"{}\";", self.channel_name).unwrap();
+        if let Some(unknown1) = &self.unknown1 {
+            writeln!(s, "    unknown2 = {};", unknown1.unknown2).unwrap();
+            writeln!(s, "    unkwown3 = {};", unknown1.unkwown3).unwrap();
+        }
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 153_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "notify_type");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_CHANNEL_NOTIFY {}
 impl crate::Message for SMSG_CHANNEL_NOTIFY {
     const OPCODE: u32 = 0x0099;

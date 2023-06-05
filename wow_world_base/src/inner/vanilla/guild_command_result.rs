@@ -64,6 +64,30 @@ impl GuildCommandResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl GuildCommandResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::PlayerNoMoreInGuild => "PLAYER_NO_MORE_IN_GUILD",
+            Self::GuildInternal => "GUILD_INTERNAL",
+            Self::AlreadyInGuild => "ALREADY_IN_GUILD",
+            Self::AlreadyInGuildS => "ALREADY_IN_GUILD_S",
+            Self::InvitedToGuild => "INVITED_TO_GUILD",
+            Self::AlreadyInvitedToGuildS => "ALREADY_INVITED_TO_GUILD_S",
+            Self::GuildNameInvalid => "GUILD_NAME_INVALID",
+            Self::GuildNameExistsS => "GUILD_NAME_EXISTS_S",
+            Self::GuildPermissionsOrLeader => "GUILD_PERMISSIONS_OR_LEADER",
+            Self::GuildPlayerNotInGuild => "GUILD_PLAYER_NOT_IN_GUILD",
+            Self::GuildPlayerNotInGuildS => "GUILD_PLAYER_NOT_IN_GUILD_S",
+            Self::GuildPlayerNotFoundS => "GUILD_PLAYER_NOT_FOUND_S",
+            Self::GuildNotAllied => "GUILD_NOT_ALLIED",
+            Self::GuildRankTooHighS => "GUILD_RANK_TOO_HIGH_S",
+            Self::GuildRankTooLowS => "GUILD_RANK_TOO_LOW_S",
+        }
+    }
+
+}
+
 impl Default for GuildCommandResult {
     fn default() -> Self {
         Self::PlayerNoMoreInGuild

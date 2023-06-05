@@ -34,6 +34,19 @@ impl InstanceResetFailedReason {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl InstanceResetFailedReason {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::General => "GENERAL",
+            Self::Offline => "OFFLINE",
+            Self::Zoning => "ZONING",
+            Self::Silently => "SILENTLY",
+        }
+    }
+
+}
+
 impl Default for InstanceResetFailedReason {
     fn default() -> Self {
         Self::General

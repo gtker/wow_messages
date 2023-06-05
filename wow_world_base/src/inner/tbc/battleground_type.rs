@@ -43,6 +43,24 @@ impl BattlegroundType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl BattlegroundType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::AlteracValley => "ALTERAC_VALLEY",
+            Self::WarsongGulch => "WARSONG_GULCH",
+            Self::ArathiBasin => "ARATHI_BASIN",
+            Self::Netherstorm => "NETHERSTORM",
+            Self::BladesEdgeArena => "BLADES_EDGE_ARENA",
+            Self::Arena => "ARENA",
+            Self::EyeOfTheStorm => "EYE_OF_THE_STORM",
+            Self::RuinsOfLordaeron => "RUINS_OF_LORDAERON",
+        }
+    }
+
+}
+
 impl Default for BattlegroundType {
     fn default() -> Self {
         Self::None

@@ -25,6 +25,18 @@ impl SpellTriggerType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl SpellTriggerType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::OnUse => "ON_USE",
+            Self::OnEquip => "ON_EQUIP",
+            Self::ChanceOnHit => "CHANCE_ON_HIT",
+        }
+    }
+
+}
+
 impl Default for SpellTriggerType {
     fn default() -> Self {
         Self::OnUse

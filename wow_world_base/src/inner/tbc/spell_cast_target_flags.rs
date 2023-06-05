@@ -27,6 +27,160 @@ pub struct SpellCastTargetFlags {
     inner: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SpellCastTargetFlags {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "SELF").unwrap();
+            first = false;
+        }
+        if self.is_unused1() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNUSED1").unwrap();
+            first = false;
+        }
+        if self.is_unit() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNIT").unwrap();
+            first = false;
+        }
+        if self.is_unit_raid() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNIT_RAID").unwrap();
+            first = false;
+        }
+        if self.is_unit_party() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNIT_PARTY").unwrap();
+            first = false;
+        }
+        if self.is_item() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ITEM").unwrap();
+            first = false;
+        }
+        if self.is_source_location() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "SOURCE_LOCATION").unwrap();
+            first = false;
+        }
+        if self.is_dest_location() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DEST_LOCATION").unwrap();
+            first = false;
+        }
+        if self.is_unit_enemy() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNIT_ENEMY").unwrap();
+            first = false;
+        }
+        if self.is_unit_ally() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNIT_ALLY").unwrap();
+            first = false;
+        }
+        if self.is_corpse_enemy() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CORPSE_ENEMY").unwrap();
+            first = false;
+        }
+        if self.is_unit_dead() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNIT_DEAD").unwrap();
+            first = false;
+        }
+        if self.is_gameobject() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "GAMEOBJECT").unwrap();
+            first = false;
+        }
+        if self.is_trade_item() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "TRADE_ITEM").unwrap();
+            first = false;
+        }
+        if self.is_string() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "STRING").unwrap();
+            first = false;
+        }
+        if self.is_locked() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "LOCKED").unwrap();
+            first = false;
+        }
+        if self.is_corpse_ally() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CORPSE_ALLY").unwrap();
+            first = false;
+        }
+        if self.is_unit_minipet() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNIT_MINIPET").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl SpellCastTargetFlags {
     pub const fn new(inner: u32) -> Self {
         Self { inner }

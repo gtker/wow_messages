@@ -27,6 +27,18 @@ impl Gender {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl Gender {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Male => "MALE",
+            Self::Female => "FEMALE",
+            Self::None => "NONE",
+        }
+    }
+
+}
+
 impl Default for Gender {
     fn default() -> Self {
         Self::Male

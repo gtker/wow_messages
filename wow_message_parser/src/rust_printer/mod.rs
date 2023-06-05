@@ -52,6 +52,8 @@ const CFG_ASYNC_TOKIO_AND_ENCRYPTION: &str =
 const CFG_ASYNC_ASYNC_STD_AND_ENCRYPTION: &str =
     "#[cfg(all(feature = \"async-std\", feature = \"encryption\"))]";
 
+const CFG_TESTCASE: &str = "#[cfg(feature = \"print-testcase\")]";
+
 const CFG_SYNC: &str = "#[cfg(feature = \"sync\")]";
 const CFG_ASYNC_TOKIO: &str = "#[cfg(feature = \"tokio\")]";
 const CFG_ASYNC_ASYNC_STD: &str = "#[cfg(feature = \"async-std\")]";

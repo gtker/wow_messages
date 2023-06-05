@@ -22,6 +22,17 @@ impl LfgUpdateLookingForMore {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl LfgUpdateLookingForMore {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NotLookingForMore => "NOT_LOOKING_FOR_MORE",
+            Self::LookingForMore => "LOOKING_FOR_MORE",
+        }
+    }
+
+}
+
 impl Default for LfgUpdateLookingForMore {
     fn default() -> Self {
         Self::NotLookingForMore

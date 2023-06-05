@@ -66,6 +66,25 @@ impl QuestFailedReason {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl QuestFailedReason {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::DontHaveReq => "DONT_HAVE_REQ",
+            Self::QuestFailedLowLevel => "QUEST_FAILED_LOW_LEVEL",
+            Self::QuestFailedReqs => "QUEST_FAILED_REQS",
+            Self::QuestFailedInventoryFull => "QUEST_FAILED_INVENTORY_FULL",
+            Self::QuestFailedWrongRace => "QUEST_FAILED_WRONG_RACE",
+            Self::QuestOnlyOneTimed => "QUEST_ONLY_ONE_TIMED",
+            Self::QuestAlreadyOn => "QUEST_ALREADY_ON",
+            Self::QuestFailedDuplicateItem => "QUEST_FAILED_DUPLICATE_ITEM",
+            Self::QuestFailedMissingItems => "QUEST_FAILED_MISSING_ITEMS",
+            Self::QuestFailedNotEnoughMoney => "QUEST_FAILED_NOT_ENOUGH_MONEY",
+        }
+    }
+
+}
+
 impl Default for QuestFailedReason {
     fn default() -> Self {
         Self::DontHaveReq

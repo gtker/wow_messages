@@ -9,6 +9,40 @@ use std::io::{Read, Write};
 pub struct SMSG_MEETINGSTONE_IN_PROGRESS {
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_MEETINGSTONE_IN_PROGRESS {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_MEETINGSTONE_IN_PROGRESS {{").unwrap();
+        // Members
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 4_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 664_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_MEETINGSTONE_IN_PROGRESS {}
 impl crate::Message for SMSG_MEETINGSTONE_IN_PROGRESS {
     const OPCODE: u32 = 0x0298;

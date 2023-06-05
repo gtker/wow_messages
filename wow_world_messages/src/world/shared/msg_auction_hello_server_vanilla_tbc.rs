@@ -16,6 +16,49 @@ pub struct MSG_AUCTION_HELLO_Server {
     pub auction_house: AuctionHouse,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_AUCTION_HELLO_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test MSG_AUCTION_HELLO_Server {{").unwrap();
+        // Members
+        writeln!(s, "    auctioneer = {};", self.auctioneer.guid()).unwrap();
+        writeln!(s, "    auction_house = {};", self.auction_house.as_test_case_value()).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 16_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 597_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "auctioneer");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12 2 3.0 3.1 3.2 3.3.0 3.3.1 3.3.2\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for MSG_AUCTION_HELLO_Server {}
 impl crate::Message for MSG_AUCTION_HELLO_Server {
     const OPCODE: u32 = 0x0255;

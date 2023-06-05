@@ -58,6 +58,29 @@ impl ReferAFriendError {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ReferAFriendError {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::NotReferredBy => "NOT_REFERRED_BY",
+            Self::TargetTooHigh => "TARGET_TOO_HIGH",
+            Self::InsufficientGrantableLevels => "INSUFFICIENT_GRANTABLE_LEVELS",
+            Self::TooFar => "TOO_FAR",
+            Self::DifferentFaction => "DIFFERENT_FACTION",
+            Self::NotNow => "NOT_NOW",
+            Self::GrantLevelMax => "GRANT_LEVEL_MAX",
+            Self::NoTarget => "NO_TARGET",
+            Self::NotInGroup => "NOT_IN_GROUP",
+            Self::SummonLevelMax => "SUMMON_LEVEL_MAX",
+            Self::SummonCooldown => "SUMMON_COOLDOWN",
+            Self::InsufficientExpansionLevel => "INSUFFICIENT_EXPANSION_LEVEL",
+            Self::SummonOffline => "SUMMON_OFFLINE",
+        }
+    }
+
+}
+
 impl Default for ReferAFriendError {
     fn default() -> Self {
         Self::None

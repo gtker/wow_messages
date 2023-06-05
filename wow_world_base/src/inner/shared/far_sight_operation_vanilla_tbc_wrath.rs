@@ -22,6 +22,17 @@ impl FarSightOperation {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl FarSightOperation {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Remove => "REMOVE",
+            Self::Add => "ADD",
+        }
+    }
+
+}
+
 impl Default for FarSightOperation {
     fn default() -> Self {
         Self::Remove

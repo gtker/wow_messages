@@ -55,6 +55,106 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMD_AUTH_LOGON_CHALLENGE_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMD_AUTH_LOGON_CHALLENGE_Server {{").unwrap();
+        // Members
+        writeln!(s, "    result = {};", crate::logon::version_8::LoginResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.result {
+            crate::logon::version_8::CMD_AUTH_LOGON_CHALLENGE_Server_LoginResult::Success {
+                crc_salt,
+                generator,
+                large_safe_prime,
+                salt,
+                security_flag,
+                server_public_key,
+            } => {
+                write!(s, "    server_public_key = [").unwrap();
+                for v in server_public_key.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+                writeln!(s, "    generator_length = {};", generator.len()).unwrap();
+                write!(s, "    generator = [").unwrap();
+                for v in generator.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+                writeln!(s, "    large_safe_prime_length = {};", large_safe_prime.len()).unwrap();
+                write!(s, "    large_safe_prime = [").unwrap();
+                for v in large_safe_prime.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+                write!(s, "    salt = [").unwrap();
+                for v in salt.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+                write!(s, "    crc_salt = [").unwrap();
+                for v in crc_salt.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+                writeln!(s, "    security_flag = {};", crate::logon::version_8::SecurityFlag::new(security_flag.as_int()).as_test_case_value()).unwrap();
+                if let Some(if_statement) = &security_flag.get_pin() {
+                    writeln!(s, "    pin_grid_seed = {};", if_statement.pin_grid_seed).unwrap();
+                    write!(s, "    pin_salt = [").unwrap();
+                    for v in if_statement.pin_salt.as_slice() {
+                        write!(s, "{v:#04X}, ").unwrap();
+                    }
+                    writeln!(s, "];").unwrap();
+                }
+
+                if let Some(if_statement) = &security_flag.get_matrix_card() {
+                    writeln!(s, "    width = {};", if_statement.width).unwrap();
+                    writeln!(s, "    height = {};", if_statement.height).unwrap();
+                    writeln!(s, "    digit_count = {};", if_statement.digit_count).unwrap();
+                    writeln!(s, "    challenge_count = {};", if_statement.challenge_count).unwrap();
+                    writeln!(s, "    seed = {};", if_statement.seed).unwrap();
+                }
+
+                if let Some(if_statement) = &security_flag.get_authenticator() {
+                    writeln!(s, "    required = {};", if_statement.required).unwrap();
+                }
+
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "protocol_version");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    login_versions = \"8\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8

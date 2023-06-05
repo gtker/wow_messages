@@ -34,6 +34,21 @@ impl CompressedMoveOpcode {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CompressedMoveOpcode {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::SmsgMonsterMove => "SMSG_MONSTER_MOVE",
+            Self::SmsgMonsterMoveTransport => "SMSG_MONSTER_MOVE_TRANSPORT",
+            Self::SmsgSplineSetRunSpeed => "SMSG_SPLINE_SET_RUN_SPEED",
+            Self::SmsgSplineMoveUnroot => "SMSG_SPLINE_MOVE_UNROOT",
+            Self::SmsgSplineMoveSetRunMode => "SMSG_SPLINE_MOVE_SET_RUN_MODE",
+            Self::SmsgSplineMoveSetWalkMode => "SMSG_SPLINE_MOVE_SET_WALK_MODE",
+        }
+    }
+
+}
+
 impl Default for CompressedMoveOpcode {
     fn default() -> Self {
         Self::SmsgMonsterMove

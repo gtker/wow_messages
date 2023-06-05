@@ -22,6 +22,17 @@ impl ArenaFaction {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ArenaFaction {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Horde => "HORDE",
+            Self::Alliance => "ALLIANCE",
+        }
+    }
+
+}
+
 impl Default for ArenaFaction {
     fn default() -> Self {
         Self::Horde

@@ -41,6 +41,20 @@ impl LootSlotType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl LootSlotType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::TypeAllowLoot => "TYPE_ALLOW_LOOT",
+            Self::TypeRollOngoing => "TYPE_ROLL_ONGOING",
+            Self::TypeMaster => "TYPE_MASTER",
+            Self::TypeLocked => "TYPE_LOCKED",
+            Self::TypeOwner => "TYPE_OWNER",
+        }
+    }
+
+}
+
 impl Default for LootSlotType {
     fn default() -> Self {
         Self::TypeAllowLoot

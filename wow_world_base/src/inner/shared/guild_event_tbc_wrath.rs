@@ -96,6 +96,35 @@ impl GuildEvent {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl GuildEvent {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Promotion => "PROMOTION",
+            Self::Demotion => "DEMOTION",
+            Self::Motd => "MOTD",
+            Self::Joined => "JOINED",
+            Self::Left => "LEFT",
+            Self::Removed => "REMOVED",
+            Self::LeaderIs => "LEADER_IS",
+            Self::LeaderChanged => "LEADER_CHANGED",
+            Self::Disbanded => "DISBANDED",
+            Self::TabardChanged => "TABARD_CHANGED",
+            Self::Unk1 => "UNK1",
+            Self::Unk2 => "UNK2",
+            Self::SignedOn => "SIGNED_ON",
+            Self::SignedOff => "SIGNED_OFF",
+            Self::GuildBankBagSlotsChanged => "GUILD_BANK_BAG_SLOTS_CHANGED",
+            Self::BanktabPurchased => "BANKTAB_PURCHASED",
+            Self::Unk5 => "UNK5",
+            Self::GuildBankUpdateMoney => "GUILD_BANK_UPDATE_MONEY",
+            Self::GuildBankMoneyWithdrawn => "GUILD_BANK_MONEY_WITHDRAWN",
+            Self::GuildBankTextChanged => "GUILD_BANK_TEXT_CHANGED",
+        }
+    }
+
+}
+
 impl Default for GuildEvent {
     fn default() -> Self {
         Self::Promotion

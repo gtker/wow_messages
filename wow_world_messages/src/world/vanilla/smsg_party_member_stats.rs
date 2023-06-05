@@ -80,6 +80,129 @@ pub struct SMSG_PARTY_MEMBER_STATS {
     pub mask: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_PARTY_MEMBER_STATS {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_PARTY_MEMBER_STATS {{").unwrap();
+        // Members
+        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
+        writeln!(s, "    mask = {};", crate::vanilla::GroupUpdateFlags::new(self.mask.as_int()).as_test_case_value()).unwrap();
+        if let Some(if_statement) = &self.mask.get_status() {
+            writeln!(s, "    status = {};", if_statement.status.as_test_case_value()).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_cur_hp() {
+            writeln!(s, "    current_health = {};", if_statement.current_health).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_max_hp() {
+            writeln!(s, "    max_health = {};", if_statement.max_health).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_power_type() {
+            writeln!(s, "    power = {};", if_statement.power.as_test_case_value()).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_cur_power() {
+            writeln!(s, "    current_power = {};", if_statement.current_power).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_max_power() {
+            writeln!(s, "    max_power = {};", if_statement.max_power).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_level() {
+            writeln!(s, "    level = {};", if_statement.level.as_int()).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_zone() {
+            writeln!(s, "    area = {};", if_statement.area.as_test_case_value()).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_position() {
+            writeln!(s, "    position_x = {};", if_statement.position_x).unwrap();
+            writeln!(s, "    position_y = {};", if_statement.position_y).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_auras() {
+            panic!("unsupported type AuraMask for variable 'auras'");
+        }
+
+        if let Some(if_statement) = &self.mask.get_auras_2() {
+            panic!("unsupported type AuraMask for variable 'negative_auras'");
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_guid() {
+            writeln!(s, "    pet = {};", if_statement.pet.guid()).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_name() {
+            writeln!(s, "    pet_name = \"{}\";", if_statement.pet_name).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_model_id() {
+            writeln!(s, "    pet_display_id = {};", if_statement.pet_display_id).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_cur_hp() {
+            writeln!(s, "    pet_current_health = {};", if_statement.pet_current_health).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_max_hp() {
+            writeln!(s, "    pet_max_health = {};", if_statement.pet_max_health).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_power_type() {
+            writeln!(s, "    pet_power_type = {};", if_statement.pet_power_type.as_test_case_value()).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_cur_power() {
+            writeln!(s, "    pet_current_power = {};", if_statement.pet_current_power).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_max_power() {
+            writeln!(s, "    pet_max_power = {};", if_statement.pet_max_power).unwrap();
+        }
+
+        if let Some(if_statement) = &self.mask.get_pet_auras() {
+            panic!("unsupported type AuraMask for variable 'pet_auras'");
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 126_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_PARTY_MEMBER_STATS {}
 impl crate::Message for SMSG_PARTY_MEMBER_STATS {
     const OPCODE: u32 = 0x007e;

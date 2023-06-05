@@ -18,6 +18,88 @@ pub struct LfgUpdateFlag {
     inner: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl LfgUpdateFlag {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NONE").unwrap();
+            first = false;
+        }
+        if self.is_character_info() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CHARACTER_INFO").unwrap();
+            first = false;
+        }
+        if self.is_comment() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "COMMENT").unwrap();
+            first = false;
+        }
+        if self.is_group_leader() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "GROUP_LEADER").unwrap();
+            first = false;
+        }
+        if self.is_group_guid() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "GROUP_GUID").unwrap();
+            first = false;
+        }
+        if self.is_roles() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ROLES").unwrap();
+            first = false;
+        }
+        if self.is_area() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "AREA").unwrap();
+            first = false;
+        }
+        if self.is_status() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "STATUS").unwrap();
+            first = false;
+        }
+        if self.is_bound() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "BOUND").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl LfgUpdateFlag {
     pub const fn new(inner: u32) -> Self {
         Self { inner }

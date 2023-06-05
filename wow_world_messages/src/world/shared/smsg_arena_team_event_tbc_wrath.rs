@@ -40,6 +40,103 @@ pub struct SMSG_ARENA_TEAM_EVENT {
     pub string: Vec<String>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_ARENA_TEAM_EVENT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_ARENA_TEAM_EVENT {{").unwrap();
+        // Members
+        writeln!(s, "    event = {};", crate::tbc::ArenaTeamEvent::try_from(self.event.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.event {
+            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Join {
+                arena_team_name1,
+                joiner,
+                joiner_name,
+            } => {
+                writeln!(s, "    joiner_name = \"{}\";", joiner_name).unwrap();
+                writeln!(s, "    arena_team_name1 = \"{}\";", arena_team_name1).unwrap();
+                writeln!(s, "    joiner = {};", joiner.guid()).unwrap();
+            }
+            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Leave {
+                leaver,
+                leaver_name,
+            } => {
+                writeln!(s, "    leaver_name = \"{}\";", leaver_name).unwrap();
+                writeln!(s, "    leaver = {};", leaver.guid()).unwrap();
+            }
+            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Remove {
+                arena_team_name2,
+                kicked_player_name,
+                kicker_name,
+            } => {
+                writeln!(s, "    kicked_player_name = \"{}\";", kicked_player_name).unwrap();
+                writeln!(s, "    arena_team_name2 = \"{}\";", arena_team_name2).unwrap();
+                writeln!(s, "    kicker_name = \"{}\";", kicker_name).unwrap();
+            }
+            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderIs {
+                arena_team_name3,
+                leader_name,
+            } => {
+                writeln!(s, "    leader_name = \"{}\";", leader_name).unwrap();
+                writeln!(s, "    arena_team_name3 = \"{}\";", arena_team_name3).unwrap();
+            }
+            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderChanged {
+                new_leader,
+                old_leader,
+            } => {
+                writeln!(s, "    old_leader = \"{}\";", old_leader).unwrap();
+                writeln!(s, "    new_leader = \"{}\";", new_leader).unwrap();
+            }
+            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Disbanded {
+                arena_team_name3,
+                leader_name,
+            } => {
+                writeln!(s, "    leader_name = \"{}\";", leader_name).unwrap();
+                writeln!(s, "    arena_team_name3 = \"{}\";", arena_team_name3).unwrap();
+            }
+        }
+
+        writeln!(s, "    amount_of_strings = {};", self.string.len()).unwrap();
+        write!(s, "    string = [").unwrap();
+        for v in self.string.as_slice() {
+            write!(s, "\"{v}\", ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 855_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "event");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_ARENA_TEAM_EVENT {}
 impl crate::Message for SMSG_ARENA_TEAM_EVENT {
     const OPCODE: u32 = 0x0357;

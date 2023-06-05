@@ -28,6 +28,19 @@ impl PlayerChatTag {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl PlayerChatTag {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::Afk => "AFK",
+            Self::Dnd => "DND",
+            Self::Gm => "GM",
+        }
+    }
+
+}
+
 impl Default for PlayerChatTag {
     fn default() -> Self {
         Self::None

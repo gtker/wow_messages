@@ -22,6 +22,17 @@ impl ItemRefundResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ItemRefundResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Success => "SUCCESS",
+            Self::Failure => "FAILURE",
+        }
+    }
+
+}
+
 impl Default for ItemRefundResult {
     fn default() -> Self {
         Self::Success

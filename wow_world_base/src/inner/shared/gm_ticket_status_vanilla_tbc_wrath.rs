@@ -25,6 +25,18 @@ impl GmTicketStatus {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl GmTicketStatus {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::DbError => "DB_ERROR",
+            Self::HasText => "HAS_TEXT",
+            Self::Default => "DEFAULT",
+        }
+    }
+
+}
+
 impl Default for GmTicketStatus {
     fn default() -> Self {
         Self::DbError

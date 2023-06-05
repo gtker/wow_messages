@@ -30,6 +30,19 @@ impl LogoutResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl LogoutResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Success => "SUCCESS",
+            Self::FailureInCombat => "FAILURE_IN_COMBAT",
+            Self::FailureFrozenByGm => "FAILURE_FROZEN_BY_GM",
+            Self::FailureJumpingOrFalling => "FAILURE_JUMPING_OR_FALLING",
+        }
+    }
+
+}
+
 impl Default for LogoutResult {
     fn default() -> Self {
         Self::Success

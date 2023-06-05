@@ -14,6 +14,64 @@ pub struct RealmFlag {
     inner: u8,
 }
 
+#[cfg(feature = "print-testcase")]
+impl RealmFlag {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NONE").unwrap();
+            first = false;
+        }
+        if self.is_invalid() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "INVALID").unwrap();
+            first = false;
+        }
+        if self.is_offline() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "OFFLINE").unwrap();
+            first = false;
+        }
+        if self.is_force_blue_recommended() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "FORCE_BLUE_RECOMMENDED").unwrap();
+            first = false;
+        }
+        if self.is_force_green_recommended() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "FORCE_GREEN_RECOMMENDED").unwrap();
+            first = false;
+        }
+        if self.is_force_red_full() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "FORCE_RED_FULL").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl RealmFlag {
     pub const fn new(inner: u8) -> Self {
         Self { inner }

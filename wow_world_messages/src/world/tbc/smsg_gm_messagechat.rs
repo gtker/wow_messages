@@ -49,6 +49,563 @@ pub struct SMSG_GM_MESSAGECHAT {
     pub language: Language,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_GM_MESSAGECHAT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_GM_MESSAGECHAT {{").unwrap();
+        // Members
+        writeln!(s, "    chat_type = {};", crate::tbc::ChatType::try_from(self.chat_type.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    language = {};", self.language.as_test_case_value()).unwrap();
+        match &self.chat_type {
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::System {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Say {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Party {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Raid {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Guild {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Officer {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Yell {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Whisper {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::WhisperInform {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Reply {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Emote {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::TextEmote {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::MonsterSay {
+                chat_tag1,
+                message1,
+                sender,
+                target1,
+            } => {
+                writeln!(s, "    sender = \"{}\";", sender).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+                writeln!(s, "    message1 = \"{}\";", message1).unwrap();
+                writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::MonsterParty {
+                chat_tag1,
+                message1,
+                sender,
+                target1,
+            } => {
+                writeln!(s, "    sender = \"{}\";", sender).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+                writeln!(s, "    message1 = \"{}\";", message1).unwrap();
+                writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::MonsterYell {
+                chat_tag1,
+                message1,
+                sender,
+                target1,
+            } => {
+                writeln!(s, "    sender = \"{}\";", sender).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+                writeln!(s, "    message1 = \"{}\";", message1).unwrap();
+                writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::MonsterWhisper {
+                chat_tag1,
+                message1,
+                sender,
+                target1,
+            } => {
+                writeln!(s, "    sender = \"{}\";", sender).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+                writeln!(s, "    message1 = \"{}\";", message1).unwrap();
+                writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::MonsterEmote {
+                chat_tag1,
+                message1,
+                sender,
+                target1,
+            } => {
+                writeln!(s, "    sender = \"{}\";", sender).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+                writeln!(s, "    message1 = \"{}\";", message1).unwrap();
+                writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Channel {
+                channel_name,
+                chat_tag3,
+                message3,
+                target4,
+            } => {
+                writeln!(s, "    channel_name = \"{}\";", channel_name).unwrap();
+                writeln!(s, "    target4 = {};", target4.guid()).unwrap();
+                writeln!(s, "    message3 = \"{}\";", message3).unwrap();
+                writeln!(s, "    chat_tag3 = {};", chat_tag3.as_test_case_value()).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::ChannelJoin {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::ChannelLeave {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::ChannelList {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::ChannelNotice {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::ChannelNoticeUser {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Afk {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Dnd {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Ignored {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Skill {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Loot {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Money {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Opening {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Tradeskills {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::PetInfo {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::CombatMiscInfo {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::CombatXpGain {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::CombatHonorGain {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::CombatFactionChange {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::BgSystemNeutral {
+                chat_tag2,
+                message2,
+                target2,
+            } => {
+                panic!("unsupported type NamedGuid for variable 'target2'");
+                writeln!(s, "    message2 = \"{}\";", message2).unwrap();
+                writeln!(s, "    chat_tag2 = {};", chat_tag2.as_test_case_value()).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::BgSystemAlliance {
+                chat_tag2,
+                message2,
+                target2,
+            } => {
+                panic!("unsupported type NamedGuid for variable 'target2'");
+                writeln!(s, "    message2 = \"{}\";", message2).unwrap();
+                writeln!(s, "    chat_tag2 = {};", chat_tag2.as_test_case_value()).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::BgSystemHorde {
+                chat_tag2,
+                message2,
+                target2,
+            } => {
+                panic!("unsupported type NamedGuid for variable 'target2'");
+                writeln!(s, "    message2 = \"{}\";", message2).unwrap();
+                writeln!(s, "    chat_tag2 = {};", chat_tag2.as_test_case_value()).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::RaidLeader {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::RaidWarning {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::RaidBossWhisper {
+                chat_tag1,
+                message1,
+                sender,
+                target1,
+            } => {
+                writeln!(s, "    sender = \"{}\";", sender).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+                writeln!(s, "    message1 = \"{}\";", message1).unwrap();
+                writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::RaidBossEmote {
+                chat_tag1,
+                message1,
+                sender,
+                target1,
+            } => {
+                writeln!(s, "    sender = \"{}\";", sender).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+                writeln!(s, "    message1 = \"{}\";", message1).unwrap();
+                writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Filtered {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Battleground {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::BattlegroundLeader {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+            crate::tbc::SMSG_GM_MESSAGECHAT_ChatType::Restricted {
+                chat_tag4,
+                message4,
+                sender_name,
+                target5,
+            } => {
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+                writeln!(s, "    message4 = \"{}\";", message4).unwrap();
+                writeln!(s, "    chat_tag4 = {};", chat_tag4.as_test_case_value()).unwrap();
+                writeln!(s, "    sender_name = \"{}\";", sender_name).unwrap();
+            }
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 946_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "chat_type");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_GM_MESSAGECHAT {}
 impl crate::Message for SMSG_GM_MESSAGECHAT {
     const OPCODE: u32 = 0x03b2;

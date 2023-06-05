@@ -18,6 +18,50 @@ pub struct SMSG_PETITION_SIGN_RESULTS {
     pub result: PetitionResult,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_PETITION_SIGN_RESULTS {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_PETITION_SIGN_RESULTS {{").unwrap();
+        // Members
+        writeln!(s, "    petition = {};", self.petition.guid()).unwrap();
+        writeln!(s, "    owner = {};", self.owner.guid()).unwrap();
+        writeln!(s, "    result = {};", self.result.as_test_case_value()).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 24_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 449_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "petition");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_PETITION_SIGN_RESULTS {}
 impl crate::Message for SMSG_PETITION_SIGN_RESULTS {
     const OPCODE: u32 = 0x01c1;

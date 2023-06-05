@@ -37,6 +37,22 @@ impl ItemStatType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ItemStatType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Mana => "MANA",
+            Self::Health => "HEALTH",
+            Self::Agility => "AGILITY",
+            Self::Strength => "STRENGTH",
+            Self::Intellect => "INTELLECT",
+            Self::Spirit => "SPIRIT",
+            Self::Stamina => "STAMINA",
+        }
+    }
+
+}
+
 impl Default for ItemStatType {
     fn default() -> Self {
         Self::Mana

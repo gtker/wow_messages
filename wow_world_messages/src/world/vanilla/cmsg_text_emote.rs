@@ -20,6 +20,50 @@ pub struct CMSG_TEXT_EMOTE {
     pub guid: Guid,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_TEXT_EMOTE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_TEXT_EMOTE {{").unwrap();
+        // Members
+        writeln!(s, "    text_emote = {};", self.text_emote.as_test_case_value()).unwrap();
+        writeln!(s, "    emote = {};", self.emote.as_test_case_value()).unwrap();
+        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 22_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 260_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "text_emote");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_TEXT_EMOTE {}
 impl crate::Message for CMSG_TEXT_EMOTE {
     const OPCODE: u32 = 0x0104;

@@ -297,7 +297,6 @@ fn print_write_flag_if_statement(
 ) {
     s.open_curly(format!(
         "if let Some(if_statement) = &{variable_prefix}{variable}.{variant}",
-        variable_prefix = variable_prefix,
         variable = statement.name(),
         variant = &statement.flag_get_enumerator().to_lowercase(),
     ));

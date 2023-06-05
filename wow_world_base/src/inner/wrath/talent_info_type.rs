@@ -22,6 +22,17 @@ impl TalentInfoType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl TalentInfoType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Player => "PLAYER",
+            Self::Pet => "PET",
+        }
+    }
+
+}
+
 impl Default for TalentInfoType {
     fn default() -> Self {
         Self::Player

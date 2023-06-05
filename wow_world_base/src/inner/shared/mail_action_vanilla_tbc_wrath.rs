@@ -34,6 +34,21 @@ impl MailAction {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl MailAction {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Send => "SEND",
+            Self::MoneyTaken => "MONEY_TAKEN",
+            Self::ItemTaken => "ITEM_TAKEN",
+            Self::ReturnedToSender => "RETURNED_TO_SENDER",
+            Self::Deleted => "DELETED",
+            Self::MadePermanent => "MADE_PERMANENT",
+        }
+    }
+
+}
+
 impl Default for MailAction {
     fn default() -> Self {
         Self::Send

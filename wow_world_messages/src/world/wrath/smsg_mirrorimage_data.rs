@@ -40,6 +40,63 @@ pub struct SMSG_MIRRORIMAGE_DATA {
     pub display_ids: [u32; 11],
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_MIRRORIMAGE_DATA {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_MIRRORIMAGE_DATA {{").unwrap();
+        // Members
+        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
+        writeln!(s, "    display_id = {};", self.display_id).unwrap();
+        writeln!(s, "    race = {};", self.race.as_test_case_value()).unwrap();
+        writeln!(s, "    gender = {};", self.gender.as_test_case_value()).unwrap();
+        writeln!(s, "    class = {};", self.class.as_test_case_value()).unwrap();
+        writeln!(s, "    skin_color = {};", self.skin_color).unwrap();
+        writeln!(s, "    face = {};", self.face).unwrap();
+        writeln!(s, "    hair_style = {};", self.hair_style).unwrap();
+        writeln!(s, "    hair_color = {};", self.hair_color).unwrap();
+        writeln!(s, "    facial_hair = {};", self.facial_hair).unwrap();
+        writeln!(s, "    guild_id = {};", self.guild_id).unwrap();
+        write!(s, "    display_ids = [").unwrap();
+        for v in self.display_ids.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 72_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 1026_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_MIRRORIMAGE_DATA {}
 impl crate::Message for SMSG_MIRRORIMAGE_DATA {
     const OPCODE: u32 = 0x0402;

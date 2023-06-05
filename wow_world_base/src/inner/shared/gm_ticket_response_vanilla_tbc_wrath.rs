@@ -37,6 +37,22 @@ impl GmTicketResponse {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl GmTicketResponse {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NotExist => "NOT_EXIST",
+            Self::AlreadyExist => "ALREADY_EXIST",
+            Self::CreateSuccess => "CREATE_SUCCESS",
+            Self::CreateError => "CREATE_ERROR",
+            Self::UpdateSuccess => "UPDATE_SUCCESS",
+            Self::UpdateError => "UPDATE_ERROR",
+            Self::TicketDeleted => "TICKET_DELETED",
+        }
+    }
+
+}
+
 impl Default for GmTicketResponse {
     fn default() -> Self {
         Self::NotExist

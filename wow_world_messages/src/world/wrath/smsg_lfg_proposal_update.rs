@@ -24,6 +24,67 @@ pub struct SMSG_LFG_PROPOSAL_UPDATE {
     pub proposals: Vec<LfgProposal>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_LFG_PROPOSAL_UPDATE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_LFG_PROPOSAL_UPDATE {{").unwrap();
+        // Members
+        writeln!(s, "    dungeon_id = {};", self.dungeon_id).unwrap();
+        writeln!(s, "    proposal_state = {};", self.proposal_state).unwrap();
+        writeln!(s, "    proposal_id = {};", self.proposal_id).unwrap();
+        writeln!(s, "    encounters_finished_mask = {};", self.encounters_finished_mask).unwrap();
+        writeln!(s, "    silent = {};", self.silent).unwrap();
+        writeln!(s, "    amount_of_proposals = {};", self.proposals.len()).unwrap();
+        write!(s, "    proposals = [").unwrap();
+        for v in self.proposals.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    role_mask = {};", v.role_mask).unwrap();
+            writeln!(s, "    is_current_player = {};", v.is_current_player).unwrap();
+            writeln!(s, "    in_dungeon = {};", v.in_dungeon).unwrap();
+            writeln!(s, "    in_same_group = {};", v.in_same_group).unwrap();
+            writeln!(s, "    has_answered = {};", v.has_answered).unwrap();
+            writeln!(s, "    has_accepted = {};", v.has_accepted).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 865_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "dungeon_id");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_LFG_PROPOSAL_UPDATE {}
 impl crate::Message for SMSG_LFG_PROPOSAL_UPDATE {
     const OPCODE: u32 = 0x0361;

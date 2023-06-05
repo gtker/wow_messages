@@ -22,6 +22,17 @@ impl LfgJoinStatus {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl LfgJoinStatus {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NotJoined => "NOT_JOINED",
+            Self::Joined => "JOINED",
+        }
+    }
+
+}
+
 impl Default for LfgJoinStatus {
     fn default() -> Self {
         Self::NotJoined

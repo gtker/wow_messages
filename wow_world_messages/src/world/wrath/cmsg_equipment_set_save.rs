@@ -21,6 +21,55 @@ pub struct CMSG_EQUIPMENT_SET_SAVE {
     pub equipment: [Guid; 19],
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_EQUIPMENT_SET_SAVE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_EQUIPMENT_SET_SAVE {{").unwrap();
+        // Members
+        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
+        writeln!(s, "    index = {};", self.index).unwrap();
+        writeln!(s, "    name = \"{}\";", self.name).unwrap();
+        writeln!(s, "    icon_name = \"{}\";", self.icon_name).unwrap();
+        write!(s, "    equipment = [").unwrap();
+        for v in self.equipment.as_slice() {
+            write!(s, "{v:#08X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 1213_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_EQUIPMENT_SET_SAVE {}
 impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
     const OPCODE: u32 = 0x04bd;

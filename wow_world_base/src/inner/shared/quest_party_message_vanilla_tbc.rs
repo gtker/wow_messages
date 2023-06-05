@@ -63,6 +63,24 @@ impl QuestPartyMessage {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl QuestPartyMessage {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::SharingQuest => "SHARING_QUEST",
+            Self::CantTakeQuest => "CANT_TAKE_QUEST",
+            Self::AcceptQuest => "ACCEPT_QUEST",
+            Self::DeclineQuest => "DECLINE_QUEST",
+            Self::TooFar => "TOO_FAR",
+            Self::Busy => "BUSY",
+            Self::LogFull => "LOG_FULL",
+            Self::HaveQuest => "HAVE_QUEST",
+            Self::FinishQuest => "FINISH_QUEST",
+        }
+    }
+
+}
+
 impl Default for QuestPartyMessage {
     fn default() -> Self {
         Self::SharingQuest

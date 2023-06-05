@@ -10,6 +10,36 @@ use std::io::{Read, Write};
 pub struct CMD_XFER_INITIATE {
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMD_XFER_INITIATE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMD_XFER_INITIATE {{").unwrap();
+        // Members
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    login_versions = \"3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl CMD_XFER_INITIATE {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8

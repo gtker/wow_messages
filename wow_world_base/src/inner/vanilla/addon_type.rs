@@ -29,6 +29,18 @@ impl AddonType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl AddonType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Banned => "BANNED",
+            Self::Enabled => "ENABLED",
+            Self::Blizzard => "BLIZZARD",
+        }
+    }
+
+}
+
 impl Default for AddonType {
     fn default() -> Self {
         Self::Banned

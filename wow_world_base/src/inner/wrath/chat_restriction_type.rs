@@ -28,6 +28,19 @@ impl ChatRestrictionType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ChatRestrictionType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::ChatRestricted => "CHAT_RESTRICTED",
+            Self::ChatThrottled => "CHAT_THROTTLED",
+            Self::UserSquelched => "USER_SQUELCHED",
+            Self::YellRestricted => "YELL_RESTRICTED",
+        }
+    }
+
+}
+
 impl Default for ChatRestrictionType {
     fn default() -> Self {
         Self::ChatRestricted

@@ -112,6 +112,47 @@ impl CreatureFamily {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CreatureFamily {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::Wolf => "WOLF",
+            Self::Cat => "CAT",
+            Self::Spider => "SPIDER",
+            Self::Bear => "BEAR",
+            Self::Boar => "BOAR",
+            Self::Crocolisk => "CROCOLISK",
+            Self::CarrionBird => "CARRION_BIRD",
+            Self::Crab => "CRAB",
+            Self::Gorilla => "GORILLA",
+            Self::Raptor => "RAPTOR",
+            Self::Tallstrider => "TALLSTRIDER",
+            Self::Felhunter => "FELHUNTER",
+            Self::Voidwalker => "VOIDWALKER",
+            Self::Succubus => "SUCCUBUS",
+            Self::Doomguard => "DOOMGUARD",
+            Self::Scorpid => "SCORPID",
+            Self::Turtle => "TURTLE",
+            Self::Imp => "IMP",
+            Self::Bat => "BAT",
+            Self::Hyena => "HYENA",
+            Self::Owl => "OWL",
+            Self::WindSerpent => "WIND_SERPENT",
+            Self::RemoteControl => "REMOTE_CONTROL",
+            Self::Felguard => "FELGUARD",
+            Self::Dragonhawk => "DRAGONHAWK",
+            Self::Ravager => "RAVAGER",
+            Self::WarpStalker => "WARP_STALKER",
+            Self::Sporebat => "SPOREBAT",
+            Self::NetherRay => "NETHER_RAY",
+            Self::Serpent => "SERPENT",
+            Self::SeaLion => "SEA_LION",
+        }
+    }
+
+}
+
 impl Default for CreatureFamily {
     fn default() -> Self {
         Self::None

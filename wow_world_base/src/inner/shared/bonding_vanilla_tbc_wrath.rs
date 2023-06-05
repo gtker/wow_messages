@@ -36,6 +36,21 @@ impl Bonding {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl Bonding {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NoBind => "NO_BIND",
+            Self::PickUp => "PICK_UP",
+            Self::Equip => "EQUIP",
+            Self::Use => "USE",
+            Self::QuestItem => "QUEST_ITEM",
+            Self::QuestItem1 => "QUEST_ITEM1",
+        }
+    }
+
+}
+
 impl Default for Bonding {
     fn default() -> Self {
         Self::NoBind

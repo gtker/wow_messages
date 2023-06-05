@@ -40,6 +40,23 @@ impl SheatheType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl SheatheType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::MainHand => "MAIN_HAND",
+            Self::OffHand => "OFF_HAND",
+            Self::LargeWeaponLeft => "LARGE_WEAPON_LEFT",
+            Self::LargeWeaponRight => "LARGE_WEAPON_RIGHT",
+            Self::HipWeaponLeft => "HIP_WEAPON_LEFT",
+            Self::HipWeaponRight => "HIP_WEAPON_RIGHT",
+            Self::Shield => "SHIELD",
+        }
+    }
+
+}
+
 impl Default for SheatheType {
     fn default() -> Self {
         Self::None

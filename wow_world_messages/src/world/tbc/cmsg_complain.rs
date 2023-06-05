@@ -28,6 +28,74 @@ pub struct CMSG_COMPLAIN {
     pub offender: Guid,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_COMPLAIN {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_COMPLAIN {{").unwrap();
+        // Members
+        writeln!(s, "    complaint_type = {};", crate::tbc::SpamType::try_from(self.complaint_type.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    offender = {};", self.offender.guid()).unwrap();
+        match &self.complaint_type {
+            crate::tbc::CMSG_COMPLAIN_SpamType::Mail {
+                mail_id,
+                unknown1,
+                unknown2,
+            } => {
+                writeln!(s, "    unknown1 = {};", unknown1).unwrap();
+                writeln!(s, "    mail_id = {};", mail_id).unwrap();
+                writeln!(s, "    unknown2 = {};", unknown2).unwrap();
+            }
+            crate::tbc::CMSG_COMPLAIN_SpamType::Chat {
+                channel_id,
+                description,
+                language,
+                message_type,
+                time,
+            } => {
+                writeln!(s, "    language = {};", language).unwrap();
+                writeln!(s, "    message_type = {};", message_type).unwrap();
+                writeln!(s, "    channel_id = {};", channel_id).unwrap();
+                writeln!(s, "    time = {};", time).unwrap();
+                writeln!(s, "    description = \"{}\";", description).unwrap();
+            }
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 966_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "complaint_type");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_COMPLAIN {}
 impl crate::Message for CMSG_COMPLAIN {
     const OPCODE: u32 = 0x03c6;

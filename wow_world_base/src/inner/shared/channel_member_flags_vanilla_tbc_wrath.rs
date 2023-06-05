@@ -16,6 +16,72 @@ pub struct ChannelMemberFlags {
     inner: u8,
 }
 
+#[cfg(feature = "print-testcase")]
+impl ChannelMemberFlags {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NONE").unwrap();
+            first = false;
+        }
+        if self.is_owner() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "OWNER").unwrap();
+            first = false;
+        }
+        if self.is_moderator() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "MODERATOR").unwrap();
+            first = false;
+        }
+        if self.is_voiced() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "VOICED").unwrap();
+            first = false;
+        }
+        if self.is_muted() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "MUTED").unwrap();
+            first = false;
+        }
+        if self.is_custom() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CUSTOM").unwrap();
+            first = false;
+        }
+        if self.is_microphone_mute() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "MICROPHONE_MUTE").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl ChannelMemberFlags {
     pub const fn new(inner: u8) -> Self {
         Self { inner }

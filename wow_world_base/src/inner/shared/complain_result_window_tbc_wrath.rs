@@ -22,6 +22,17 @@ impl ComplainResultWindow {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ComplainResultWindow {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::DoNotShow => "DO_NOT_SHOW",
+            Self::Show => "SHOW",
+        }
+    }
+
+}
+
 impl Default for ComplainResultWindow {
     fn default() -> Self {
         Self::DoNotShow

@@ -22,6 +22,17 @@ impl LogFormat {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl LogFormat {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Default => "DEFAULT",
+            Self::Debug => "DEBUG",
+        }
+    }
+
+}
+
 impl Default for LogFormat {
     fn default() -> Self {
         Self::Default

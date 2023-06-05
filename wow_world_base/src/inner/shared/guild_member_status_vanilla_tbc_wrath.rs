@@ -22,6 +22,17 @@ impl GuildMemberStatus {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl GuildMemberStatus {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Offline => "OFFLINE",
+            Self::Online => "ONLINE",
+        }
+    }
+
+}
+
 impl Default for GuildMemberStatus {
     fn default() -> Self {
         Self::Offline

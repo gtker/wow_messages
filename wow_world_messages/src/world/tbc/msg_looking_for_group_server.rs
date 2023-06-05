@@ -24,6 +24,80 @@ pub struct MSG_LOOKING_FOR_GROUP_Server {
     pub players_displayed: Vec<LfgPlayer>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_LOOKING_FOR_GROUP_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test MSG_LOOKING_FOR_GROUP_Server {{").unwrap();
+        // Members
+        writeln!(s, "    lfg_type = {};", self.lfg_type.as_test_case_value()).unwrap();
+        writeln!(s, "    entry = {};", self.entry).unwrap();
+        writeln!(s, "    amount_of_players_displayed = {};", self.players_displayed.len()).unwrap();
+        writeln!(s, "    amount_of_players_found = {};", self.amount_of_players_found).unwrap();
+        write!(s, "    players_displayed = [").unwrap();
+        for v in self.players_displayed.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "    level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "    area = {};", v.area.as_test_case_value()).unwrap();
+            writeln!(s, "    lfg_mode = {};", v.lfg_mode.as_test_case_value()).unwrap();
+            write!(s, "    lfg_slots = [").unwrap();
+            for v in v.lfg_slots.as_slice() {
+                write!(s, "{v:#04X}, ").unwrap();
+            }
+            writeln!(s, "];").unwrap();
+            writeln!(s, "    comment = \"{}\";", v.comment).unwrap();
+            writeln!(s, "    amount_of_members = {};", v.members.len()).unwrap();
+            write!(s, "    members = [").unwrap();
+            for v in v.members.as_slice() {
+                writeln!(s, "{{").unwrap();
+                // Members
+                writeln!(s, "    guid = {};", v.guid.guid()).unwrap();
+                writeln!(s, "    level = {};", v.level.as_int()).unwrap();
+
+                writeln!(s, "    }},").unwrap();
+            }
+            writeln!(s, "];").unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 511_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "lfg_type");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for MSG_LOOKING_FOR_GROUP_Server {}
 impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
     const OPCODE: u32 = 0x01ff;

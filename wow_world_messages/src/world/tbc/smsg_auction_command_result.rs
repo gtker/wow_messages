@@ -43,6 +43,126 @@ pub struct SMSG_AUCTION_COMMAND_RESULT {
     pub action: SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_AUCTION_COMMAND_RESULT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_AUCTION_COMMAND_RESULT {{").unwrap();
+        // Members
+        writeln!(s, "    auction_id = {};", self.auction_id).unwrap();
+        writeln!(s, "    action = {};", crate::vanilla::AuctionCommandAction::try_from(self.action.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.action {
+            crate::tbc::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction::Started {
+                result2,
+            } => {
+                writeln!(s, "    result2 = {};", crate::vanilla::AuctionCommandResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                match &result2 {
+                    crate::tbc::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrInventory {
+                        inventory_result2,
+                    } => {
+                        writeln!(s, "    inventory_result2 = {};", inventory_result2.as_test_case_value()).unwrap();
+                    }
+                    crate::tbc::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrHigherBid {
+                        auction_outbid3,
+                        higher_bidder2,
+                        new_bid2,
+                    } => {
+                        writeln!(s, "    higher_bidder2 = {};", higher_bidder2.guid()).unwrap();
+                        writeln!(s, "    new_bid2 = {};", new_bid2).unwrap();
+                        writeln!(s, "    auction_outbid3 = {};", auction_outbid3).unwrap();
+                    }
+                    _ => {}
+                }
+
+            }
+            crate::tbc::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction::Removed {
+                result2,
+            } => {
+                writeln!(s, "    result2 = {};", crate::vanilla::AuctionCommandResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                match &result2 {
+                    crate::tbc::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrInventory {
+                        inventory_result2,
+                    } => {
+                        writeln!(s, "    inventory_result2 = {};", inventory_result2.as_test_case_value()).unwrap();
+                    }
+                    crate::tbc::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrHigherBid {
+                        auction_outbid3,
+                        higher_bidder2,
+                        new_bid2,
+                    } => {
+                        writeln!(s, "    higher_bidder2 = {};", higher_bidder2.guid()).unwrap();
+                        writeln!(s, "    new_bid2 = {};", new_bid2).unwrap();
+                        writeln!(s, "    auction_outbid3 = {};", auction_outbid3).unwrap();
+                    }
+                    _ => {}
+                }
+
+            }
+            crate::tbc::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction::BidPlaced {
+                result,
+            } => {
+                writeln!(s, "    result = {};", crate::vanilla::AuctionCommandResult::try_from(result.as_int()).unwrap().as_test_case_value()).unwrap();
+                match &result {
+                    crate::tbc::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::Ok {
+                        auction_outbid1,
+                    } => {
+                        writeln!(s, "    auction_outbid1 = {};", auction_outbid1).unwrap();
+                    }
+                    crate::tbc::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrInventory {
+                        inventory_result,
+                    } => {
+                        writeln!(s, "    inventory_result = {};", inventory_result.as_test_case_value()).unwrap();
+                    }
+                    crate::tbc::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrHigherBid {
+                        auction_outbid2,
+                        higher_bidder,
+                        new_bid,
+                    } => {
+                        writeln!(s, "    higher_bidder = {};", higher_bidder.guid()).unwrap();
+                        writeln!(s, "    new_bid = {};", new_bid).unwrap();
+                        writeln!(s, "    auction_outbid2 = {};", auction_outbid2).unwrap();
+                    }
+                    _ => {}
+                }
+
+            }
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 603_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "auction_id");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_AUCTION_COMMAND_RESULT {}
 impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
     const OPCODE: u32 = 0x025b;

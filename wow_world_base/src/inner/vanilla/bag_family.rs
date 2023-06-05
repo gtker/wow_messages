@@ -46,6 +46,25 @@ impl BagFamily {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl BagFamily {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::Arrows => "ARROWS",
+            Self::Bullets => "BULLETS",
+            Self::SoulShards => "SOUL_SHARDS",
+            Self::Unknown4 => "UNKNOWN4",
+            Self::Unknown5 => "UNKNOWN5",
+            Self::Herbs => "HERBS",
+            Self::EnchantingSupplies => "ENCHANTING_SUPPLIES",
+            Self::EngineeringSupplies => "ENGINEERING_SUPPLIES",
+            Self::Keys => "KEYS",
+        }
+    }
+
+}
+
 impl Default for BagFamily {
     fn default() -> Self {
         Self::None

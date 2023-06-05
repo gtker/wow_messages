@@ -28,6 +28,96 @@ pub struct SMSG_GUILD_BANK_LIST {
     pub slot_updates: Vec<GuildBankSlot>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_GUILD_BANK_LIST {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_GUILD_BANK_LIST {{").unwrap();
+        // Members
+        writeln!(s, "    bank_balance = {};", self.bank_balance).unwrap();
+        writeln!(s, "    tab_id = {};", self.tab_id).unwrap();
+        writeln!(s, "    amount_of_allowed_item_withdraws = {};", self.amount_of_allowed_item_withdraws).unwrap();
+        writeln!(s, "    tab_result = {};", crate::tbc::GuildBankTabResult::try_from(self.tab_result.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.tab_result {
+            crate::tbc::SMSG_GUILD_BANK_LIST_GuildBankTabResult::Present {
+                tabs,
+            } => {
+                writeln!(s, "    amount_of_bank_tabs = {};", tabs.len()).unwrap();
+                write!(s, "    tabs = [").unwrap();
+                for v in tabs.as_slice() {
+                    writeln!(s, "{{").unwrap();
+                    // Members
+                    writeln!(s, "    tab_name = \"{}\";", v.tab_name).unwrap();
+                    writeln!(s, "    tab_icon = \"{}\";", v.tab_icon).unwrap();
+
+                    writeln!(s, "    }},").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+            }
+            _ => {}
+        }
+
+        writeln!(s, "    amount_of_slot_updates = {};", self.slot_updates.len()).unwrap();
+        write!(s, "    slot_updates = [").unwrap();
+        for v in self.slot_updates.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    slot = {};", v.slot).unwrap();
+            writeln!(s, "    item = {};", v.item).unwrap();
+            panic!("unsupported type VariableItemRandomProperty for variable 'item_random_property_id'");
+            writeln!(s, "    amount_of_items = {};", v.amount_of_items).unwrap();
+            writeln!(s, "    enchant = {};", v.enchant).unwrap();
+            writeln!(s, "    charges = {};", v.charges).unwrap();
+            writeln!(s, "    amount_of_sockets = {};", v.sockets.len()).unwrap();
+            write!(s, "    sockets = [").unwrap();
+            for v in v.sockets.as_slice() {
+                writeln!(s, "{{").unwrap();
+                // Members
+                writeln!(s, "    socket_index = {};", v.socket_index).unwrap();
+                writeln!(s, "    gem = {};", v.gem).unwrap();
+
+                writeln!(s, "    }},").unwrap();
+            }
+            writeln!(s, "];").unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 999_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "bank_balance");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_GUILD_BANK_LIST {}
 impl crate::Message for SMSG_GUILD_BANK_LIST {
     const OPCODE: u32 = 0x03e7;

@@ -30,6 +30,19 @@ impl TimerType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl TimerType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Fatigue => "FATIGUE",
+            Self::Breath => "BREATH",
+            Self::FeignDeath => "FEIGN_DEATH",
+            Self::Environmental => "ENVIRONMENTAL",
+        }
+    }
+
+}
+
 impl Default for TimerType {
     fn default() -> Self {
         Self::Fatigue

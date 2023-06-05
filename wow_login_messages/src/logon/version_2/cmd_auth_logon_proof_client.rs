@@ -23,6 +23,78 @@ pub struct CMD_AUTH_LOGON_PROOF_Client {
     pub telemetry_keys: Vec<TelemetryKey>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMD_AUTH_LOGON_PROOF_Client {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMD_AUTH_LOGON_PROOF_Client {{").unwrap();
+        // Members
+        write!(s, "    client_public_key = [").unwrap();
+        for v in self.client_public_key.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        write!(s, "    client_proof = [").unwrap();
+        for v in self.client_proof.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        write!(s, "    crc_hash = [").unwrap();
+        for v in self.crc_hash.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        writeln!(s, "    number_of_telemetry_keys = {};", self.telemetry_keys.len()).unwrap();
+        write!(s, "    telemetry_keys = [").unwrap();
+        for v in self.telemetry_keys.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    unknown1 = {};", v.unknown1).unwrap();
+            writeln!(s, "    unknown2 = {};", v.unknown2).unwrap();
+            write!(s, "    unknown3 = [").unwrap();
+            for v in v.unknown3.as_slice() {
+                write!(s, "{v:#04X}, ").unwrap();
+            }
+            writeln!(s, "];").unwrap();
+            write!(s, "    cd_key_proof = [").unwrap();
+            for v in v.cd_key_proof.as_slice() {
+                write!(s, "{v:#04X}, ").unwrap();
+            }
+            writeln!(s, "];").unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    login_versions = \"2\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl CMD_AUTH_LOGON_PROOF_Client {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8

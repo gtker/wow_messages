@@ -28,6 +28,17 @@ impl CacheMask {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CacheMask {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::GlobalCache => "GLOBAL_CACHE",
+            Self::PerCharacterCache => "PER_CHARACTER_CACHE",
+        }
+    }
+
+}
+
 impl Default for CacheMask {
     fn default() -> Self {
         Self::GlobalCache

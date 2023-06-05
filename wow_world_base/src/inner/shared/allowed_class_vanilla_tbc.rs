@@ -19,6 +19,96 @@ pub struct AllowedClass {
     inner: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl AllowedClass {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ALL").unwrap();
+            first = false;
+        }
+        if self.is_warrior() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "WARRIOR").unwrap();
+            first = false;
+        }
+        if self.is_paladin() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PALADIN").unwrap();
+            first = false;
+        }
+        if self.is_hunter() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "HUNTER").unwrap();
+            first = false;
+        }
+        if self.is_rogue() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ROGUE").unwrap();
+            first = false;
+        }
+        if self.is_priest() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PRIEST").unwrap();
+            first = false;
+        }
+        if self.is_shaman() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "SHAMAN").unwrap();
+            first = false;
+        }
+        if self.is_mage() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "MAGE").unwrap();
+            first = false;
+        }
+        if self.is_warlock() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "WARLOCK").unwrap();
+            first = false;
+        }
+        if self.is_druid() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DRUID").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl AllowedClass {
     pub const fn new(inner: u32) -> Self {
         Self { inner }

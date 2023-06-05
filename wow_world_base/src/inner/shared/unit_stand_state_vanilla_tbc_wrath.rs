@@ -49,6 +49,25 @@ impl UnitStandState {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl UnitStandState {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Stand => "STAND",
+            Self::Sit => "SIT",
+            Self::SitChair => "SIT_CHAIR",
+            Self::Sleep => "SLEEP",
+            Self::SitLowChair => "SIT_LOW_CHAIR",
+            Self::SitMediumChair => "SIT_MEDIUM_CHAIR",
+            Self::SitHighChair => "SIT_HIGH_CHAIR",
+            Self::Dead => "DEAD",
+            Self::Kneel => "KNEEL",
+            Self::Custom => "CUSTOM",
+        }
+    }
+
+}
+
 impl Default for UnitStandState {
     fn default() -> Self {
         Self::Stand

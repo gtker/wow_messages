@@ -55,6 +55,28 @@ impl ActivateTaxiReply {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ActivateTaxiReply {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Ok => "OK",
+            Self::UnspecifiedServerError => "UNSPECIFIED_SERVER_ERROR",
+            Self::NoSuchPath => "NO_SUCH_PATH",
+            Self::NotEnoughMoney => "NOT_ENOUGH_MONEY",
+            Self::TooFarAway => "TOO_FAR_AWAY",
+            Self::NoVendorNearby => "NO_VENDOR_NEARBY",
+            Self::NotVisited => "NOT_VISITED",
+            Self::PlayerBusy => "PLAYER_BUSY",
+            Self::PlayerAlreadyMounted => "PLAYER_ALREADY_MOUNTED",
+            Self::PlayerShapeShifted => "PLAYER_SHAPE_SHIFTED",
+            Self::PlayerMoving => "PLAYER_MOVING",
+            Self::SameNode => "SAME_NODE",
+            Self::NotStanding => "NOT_STANDING",
+        }
+    }
+
+}
+
 impl Default for ActivateTaxiReply {
     fn default() -> Self {
         Self::Ok

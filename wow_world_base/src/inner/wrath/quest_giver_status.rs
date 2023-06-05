@@ -53,6 +53,26 @@ impl QuestGiverStatus {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl QuestGiverStatus {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::Unavailable => "UNAVAILABLE",
+            Self::LowLevelAvailable => "LOW_LEVEL_AVAILABLE",
+            Self::LowLevelRewardRep => "LOW_LEVEL_REWARD_REP",
+            Self::LowLevelAvailableRep => "LOW_LEVEL_AVAILABLE_REP",
+            Self::Incomplete => "INCOMPLETE",
+            Self::RewardRep => "REWARD_REP",
+            Self::AvailableRep => "AVAILABLE_REP",
+            Self::Available => "AVAILABLE",
+            Self::Reward2 => "REWARD2",
+            Self::Reward => "REWARD",
+        }
+    }
+
+}
+
 impl Default for QuestGiverStatus {
     fn default() -> Self {
         Self::None

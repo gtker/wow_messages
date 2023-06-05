@@ -48,6 +48,25 @@ impl GmTicketType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl GmTicketType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Stuck => "STUCK",
+            Self::BehaviorHarassment => "BEHAVIOR_HARASSMENT",
+            Self::Guild => "GUILD",
+            Self::Item => "ITEM",
+            Self::Environmental => "ENVIRONMENTAL",
+            Self::NonquestCreep => "NONQUEST_CREEP",
+            Self::QuestQuestnpc => "QUEST_QUESTNPC",
+            Self::Technical => "TECHNICAL",
+            Self::AccountBilling => "ACCOUNT_BILLING",
+            Self::Character => "CHARACTER",
+        }
+    }
+
+}
+
 impl Default for GmTicketType {
     fn default() -> Self {
         Self::Stuck

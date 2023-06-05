@@ -34,6 +34,21 @@ impl MeetingStoneStatus {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl MeetingStoneStatus {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::LeaveQueue => "LEAVE_QUEUE",
+            Self::JoinedQueue => "JOINED_QUEUE",
+            Self::PartyMemberLeftLfg => "PARTY_MEMBER_LEFT_LFG",
+            Self::PartyMemberRemovedPartyRemoved => "PARTY_MEMBER_REMOVED_PARTY_REMOVED",
+            Self::LookingForNewPartyInQueue => "LOOKING_FOR_NEW_PARTY_IN_QUEUE",
+            Self::None => "NONE",
+        }
+    }
+
+}
+
 impl Default for MeetingStoneStatus {
     fn default() -> Self {
         Self::LeaveQueue

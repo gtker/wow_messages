@@ -25,6 +25,71 @@ pub struct SMSG_GMTICKET_GETTICKET {
     pub status: SMSG_GMTICKET_GETTICKET_GmTicketStatus,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_GMTICKET_GETTICKET {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_GMTICKET_GETTICKET {{").unwrap();
+        // Members
+        writeln!(s, "    status = {};", crate::vanilla::GmTicketStatus::try_from(self.status.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.status {
+            crate::wrath::SMSG_GMTICKET_GETTICKET_GmTicketStatus::HasText {
+                days_since_last_updated,
+                days_since_oldest_ticket_creation,
+                days_since_ticket_creation,
+                escalation_status,
+                id,
+                need_more_help,
+                read_by_gm,
+                text,
+            } => {
+                writeln!(s, "    id = {};", id).unwrap();
+                writeln!(s, "    text = \"{}\";", text).unwrap();
+                writeln!(s, "    need_more_help = {};", if *need_more_help { "TRUE" } else { "FALSE" }).unwrap();
+                writeln!(s, "    {}", if days_since_ticket_creation.to_string().contains(".") { days_since_ticket_creation.to_string() } else { format!("{}.0", days_since_ticket_creation) }).unwrap();
+                writeln!(s, "    {}", if days_since_oldest_ticket_creation.to_string().contains(".") { days_since_oldest_ticket_creation.to_string() } else { format!("{}.0", days_since_oldest_ticket_creation) }).unwrap();
+                writeln!(s, "    {}", if days_since_last_updated.to_string().contains(".") { days_since_last_updated.to_string() } else { format!("{}.0", days_since_last_updated) }).unwrap();
+                writeln!(s, "    escalation_status = {};", escalation_status.as_test_case_value()).unwrap();
+                writeln!(s, "    read_by_gm = {};", if *read_by_gm { "TRUE" } else { "FALSE" }).unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 530_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "status");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_GMTICKET_GETTICKET {}
 impl crate::Message for SMSG_GMTICKET_GETTICKET {
     const OPCODE: u32 = 0x0212;

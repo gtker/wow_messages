@@ -15,6 +15,48 @@ pub struct CMSG_REQUEST_ACCOUNT_DATA {
     pub data_type: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_REQUEST_ACCOUNT_DATA {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_REQUEST_ACCOUNT_DATA {{").unwrap();
+        // Members
+        writeln!(s, "    data_type = {};", self.data_type).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 10_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 522_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "data_type");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_REQUEST_ACCOUNT_DATA {}
 impl crate::Message for CMSG_REQUEST_ACCOUNT_DATA {
     const OPCODE: u32 = 0x020a;

@@ -31,6 +31,20 @@ impl FriendStatus {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl FriendStatus {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Offline => "OFFLINE",
+            Self::Online => "ONLINE",
+            Self::Afk => "AFK",
+            Self::Unknown3 => "UNKNOWN3",
+            Self::Dnd => "DND",
+        }
+    }
+
+}
+
 impl Default for FriendStatus {
     fn default() -> Self {
         Self::Offline

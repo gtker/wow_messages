@@ -33,6 +33,219 @@ pub struct SMSG_SEND_MAIL_RESULT {
     pub action: SMSG_SEND_MAIL_RESULT_MailAction,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_SEND_MAIL_RESULT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_SEND_MAIL_RESULT {{").unwrap();
+        // Members
+        writeln!(s, "    mail_id = {};", self.mail_id).unwrap();
+        writeln!(s, "    action = {};", crate::vanilla::MailAction::try_from(self.action.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.action {
+            crate::tbc::SMSG_SEND_MAIL_RESULT_MailAction::Send {
+                result2,
+            } => {
+                writeln!(s, "    result2 = {};", crate::vanilla::MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                match &result2 {
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                        equip_error2,
+                    } => {
+                        writeln!(s, "    equip_error2 = {};", equip_error2).unwrap();
+                    }
+                    _ => {}
+                }
+
+            }
+            crate::tbc::SMSG_SEND_MAIL_RESULT_MailAction::MoneyTaken {
+                result2,
+            } => {
+                writeln!(s, "    result2 = {};", crate::vanilla::MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                match &result2 {
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                        equip_error2,
+                    } => {
+                        writeln!(s, "    equip_error2 = {};", equip_error2).unwrap();
+                    }
+                    _ => {}
+                }
+
+            }
+            crate::tbc::SMSG_SEND_MAIL_RESULT_MailAction::ItemTaken {
+                result,
+            } => {
+                writeln!(s, "    result = {};", crate::vanilla::MailResult::try_from(result.as_int()).unwrap().as_test_case_value()).unwrap();
+                match &result {
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResult::Ok {
+                        item,
+                        item_count,
+                    } => {
+                        writeln!(s, "    item = {};", item).unwrap();
+                        writeln!(s, "    item_count = {};", item_count).unwrap();
+                    }
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResult::ErrEquipError {
+                        equip_error,
+                    } => {
+                        writeln!(s, "    equip_error = {};", equip_error).unwrap();
+                    }
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResult::ErrCannotSendToSelf {
+                        item,
+                        item_count,
+                    } => {
+                        writeln!(s, "    item = {};", item).unwrap();
+                        writeln!(s, "    item_count = {};", item_count).unwrap();
+                    }
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResult::ErrNotEnoughMoney {
+                        item,
+                        item_count,
+                    } => {
+                        writeln!(s, "    item = {};", item).unwrap();
+                        writeln!(s, "    item_count = {};", item_count).unwrap();
+                    }
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResult::ErrRecipientNotFound {
+                        item,
+                        item_count,
+                    } => {
+                        writeln!(s, "    item = {};", item).unwrap();
+                        writeln!(s, "    item_count = {};", item_count).unwrap();
+                    }
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResult::ErrNotYourTeam {
+                        item,
+                        item_count,
+                    } => {
+                        writeln!(s, "    item = {};", item).unwrap();
+                        writeln!(s, "    item_count = {};", item_count).unwrap();
+                    }
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResult::ErrInternalError {
+                        item,
+                        item_count,
+                    } => {
+                        writeln!(s, "    item = {};", item).unwrap();
+                        writeln!(s, "    item_count = {};", item_count).unwrap();
+                    }
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResult::ErrDisabledForTrialAcc {
+                        item,
+                        item_count,
+                    } => {
+                        writeln!(s, "    item = {};", item).unwrap();
+                        writeln!(s, "    item_count = {};", item_count).unwrap();
+                    }
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResult::ErrRecipientCapReached {
+                        item,
+                        item_count,
+                    } => {
+                        writeln!(s, "    item = {};", item).unwrap();
+                        writeln!(s, "    item_count = {};", item_count).unwrap();
+                    }
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResult::ErrCantSendWrappedCod {
+                        item,
+                        item_count,
+                    } => {
+                        writeln!(s, "    item = {};", item).unwrap();
+                        writeln!(s, "    item_count = {};", item_count).unwrap();
+                    }
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResult::ErrMailAndChatSuspended {
+                        item,
+                        item_count,
+                    } => {
+                        writeln!(s, "    item = {};", item).unwrap();
+                        writeln!(s, "    item_count = {};", item_count).unwrap();
+                    }
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResult::ErrTooManyAttachments {
+                        item,
+                        item_count,
+                    } => {
+                        writeln!(s, "    item = {};", item).unwrap();
+                        writeln!(s, "    item_count = {};", item_count).unwrap();
+                    }
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResult::ErrMailAttachmentInvalid {
+                        item,
+                        item_count,
+                    } => {
+                        writeln!(s, "    item = {};", item).unwrap();
+                        writeln!(s, "    item_count = {};", item_count).unwrap();
+                    }
+                }
+
+            }
+            crate::tbc::SMSG_SEND_MAIL_RESULT_MailAction::ReturnedToSender {
+                result2,
+            } => {
+                writeln!(s, "    result2 = {};", crate::vanilla::MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                match &result2 {
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                        equip_error2,
+                    } => {
+                        writeln!(s, "    equip_error2 = {};", equip_error2).unwrap();
+                    }
+                    _ => {}
+                }
+
+            }
+            crate::tbc::SMSG_SEND_MAIL_RESULT_MailAction::Deleted {
+                result2,
+            } => {
+                writeln!(s, "    result2 = {};", crate::vanilla::MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                match &result2 {
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                        equip_error2,
+                    } => {
+                        writeln!(s, "    equip_error2 = {};", equip_error2).unwrap();
+                    }
+                    _ => {}
+                }
+
+            }
+            crate::tbc::SMSG_SEND_MAIL_RESULT_MailAction::MadePermanent {
+                result2,
+            } => {
+                writeln!(s, "    result2 = {};", crate::vanilla::MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                match &result2 {
+                    crate::tbc::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
+                        equip_error2,
+                    } => {
+                        writeln!(s, "    equip_error2 = {};", equip_error2).unwrap();
+                    }
+                    _ => {}
+                }
+
+            }
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 569_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "mail_id");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_SEND_MAIL_RESULT {}
 impl crate::Message for SMSG_SEND_MAIL_RESULT {
     const OPCODE: u32 = 0x0239;

@@ -52,6 +52,27 @@ impl SpellMissInfo {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl SpellMissInfo {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::Miss => "MISS",
+            Self::Resist => "RESIST",
+            Self::Dodge => "DODGE",
+            Self::Parry => "PARRY",
+            Self::Block => "BLOCK",
+            Self::Evade => "EVADE",
+            Self::Immune => "IMMUNE",
+            Self::Immune2 => "IMMUNE2",
+            Self::Deflect => "DEFLECT",
+            Self::Absorb => "ABSORB",
+            Self::Reflect => "REFLECT",
+        }
+    }
+
+}
+
 impl Default for SpellMissInfo {
     fn default() -> Self {
         Self::None

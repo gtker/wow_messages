@@ -8,6 +8,7 @@ use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::rust_printer::rust_view::rust_member::RustMember;
 use crate::rust_printer::rust_view::rust_object::RustObject;
 use crate::rust_printer::rust_view::rust_type::RustType;
+use crate::rust_printer::structs::test_case_string::print_to_testcase;
 use crate::rust_printer::{
     ImplType, Writer, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
 };
@@ -18,6 +19,10 @@ pub mod print_write;
 
 pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
     print_world_message_headers_and_constants(s, e);
+
+    if !matches!(e.container_type(), ContainerType::Struct) {
+        print_to_testcase(s, e);
+    }
 
     match e.container_type() {
         ContainerType::Struct => {

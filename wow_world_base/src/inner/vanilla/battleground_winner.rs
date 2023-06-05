@@ -25,6 +25,18 @@ impl BattlegroundWinner {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl BattlegroundWinner {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Horde => "HORDE",
+            Self::Alliance => "ALLIANCE",
+            Self::None => "NONE",
+        }
+    }
+
+}
+
 impl Default for BattlegroundWinner {
     fn default() -> Self {
         Self::Horde

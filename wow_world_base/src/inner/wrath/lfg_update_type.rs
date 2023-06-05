@@ -58,6 +58,29 @@ impl LfgUpdateType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl LfgUpdateType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Default => "DEFAULT",
+            Self::LeaderLeave => "LEADER_LEAVE",
+            Self::RolecheckAborted => "ROLECHECK_ABORTED",
+            Self::Join => "JOIN",
+            Self::RolecheckFailed => "ROLECHECK_FAILED",
+            Self::Leave => "LEAVE",
+            Self::ProposalFailed => "PROPOSAL_FAILED",
+            Self::ProposalDeclined => "PROPOSAL_DECLINED",
+            Self::GroupFound => "GROUP_FOUND",
+            Self::AddedToQueue => "ADDED_TO_QUEUE",
+            Self::ProposalBegin => "PROPOSAL_BEGIN",
+            Self::Status => "STATUS",
+            Self::GroupMemberOffline => "GROUP_MEMBER_OFFLINE",
+            Self::GroupDisband => "GROUP_DISBAND",
+        }
+    }
+
+}
+
 impl Default for LfgUpdateType {
     fn default() -> Self {
         Self::Default

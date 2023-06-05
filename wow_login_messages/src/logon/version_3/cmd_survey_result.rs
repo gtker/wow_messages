@@ -17,6 +17,51 @@ pub struct CMD_SURVEY_RESULT {
     pub data: Vec<u8>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMD_SURVEY_RESULT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMD_SURVEY_RESULT {{").unwrap();
+        // Members
+        writeln!(s, "    survey_id = {};", self.survey_id).unwrap();
+        writeln!(s, "    error = {};", self.error).unwrap();
+        writeln!(s, "    compressed_data_length = {};", self.data.len()).unwrap();
+        write!(s, "    data = [").unwrap();
+        for v in self.data.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "survey_id");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    login_versions = \"3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl CMD_SURVEY_RESULT {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8

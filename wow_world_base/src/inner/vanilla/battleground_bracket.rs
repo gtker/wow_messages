@@ -46,6 +46,21 @@ impl BattlegroundBracket {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl BattlegroundBracket {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Tens => "TENS",
+            Self::Twenties => "TWENTIES",
+            Self::Thirties => "THIRTIES",
+            Self::Fourties => "FOURTIES",
+            Self::Fifties => "FIFTIES",
+            Self::Sixty => "SIXTY",
+        }
+    }
+
+}
+
 impl Default for BattlegroundBracket {
     fn default() -> Self {
         Self::Tens

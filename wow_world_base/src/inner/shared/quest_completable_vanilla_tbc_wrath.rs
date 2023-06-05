@@ -22,6 +22,17 @@ impl QuestCompletable {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl QuestCompletable {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NotCompletable => "NOT_COMPLETABLE",
+            Self::Completeable => "COMPLETEABLE",
+        }
+    }
+
+}
+
 impl Default for QuestCompletable {
     fn default() -> Self {
         Self::NotCompletable

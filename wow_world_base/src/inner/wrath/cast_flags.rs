@@ -42,6 +42,280 @@ pub struct CastFlags {
     inner: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CastFlags {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NONE").unwrap();
+            first = false;
+        }
+        if self.is_pending() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PENDING").unwrap();
+            first = false;
+        }
+        if self.is_has_trajectory() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "HAS_TRAJECTORY").unwrap();
+            first = false;
+        }
+        if self.is_unknown_3() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_3").unwrap();
+            first = false;
+        }
+        if self.is_unknown_4() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_4").unwrap();
+            first = false;
+        }
+        if self.is_unknown_5() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_5").unwrap();
+            first = false;
+        }
+        if self.is_ammo() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "AMMO").unwrap();
+            first = false;
+        }
+        if self.is_unknown_7() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_7").unwrap();
+            first = false;
+        }
+        if self.is_unknown_8() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_8").unwrap();
+            first = false;
+        }
+        if self.is_unknown_9() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_9").unwrap();
+            first = false;
+        }
+        if self.is_unknown_10() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_10").unwrap();
+            first = false;
+        }
+        if self.is_unknown_11() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_11").unwrap();
+            first = false;
+        }
+        if self.is_power_left_self() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "POWER_LEFT_SELF").unwrap();
+            first = false;
+        }
+        if self.is_unknown_13() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_13").unwrap();
+            first = false;
+        }
+        if self.is_unknown_14() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_14").unwrap();
+            first = false;
+        }
+        if self.is_unknown_15() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_15").unwrap();
+            first = false;
+        }
+        if self.is_unknown_16() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_16").unwrap();
+            first = false;
+        }
+        if self.is_unknown_17() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_17").unwrap();
+            first = false;
+        }
+        if self.is_adjust_missile() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ADJUST_MISSILE").unwrap();
+            first = false;
+        }
+        if self.is_no_gcd() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_GCD").unwrap();
+            first = false;
+        }
+        if self.is_visual_chain() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "VISUAL_CHAIN").unwrap();
+            first = false;
+        }
+        if self.is_unknown_21() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_21").unwrap();
+            first = false;
+        }
+        if self.is_rune_list() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "RUNE_LIST").unwrap();
+            first = false;
+        }
+        if self.is_unknown_23() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_23").unwrap();
+            first = false;
+        }
+        if self.is_unknown_24() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_24").unwrap();
+            first = false;
+        }
+        if self.is_unknown_25() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_25").unwrap();
+            first = false;
+        }
+        if self.is_unknown_26() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_26").unwrap();
+            first = false;
+        }
+        if self.is_immunity() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "IMMUNITY").unwrap();
+            first = false;
+        }
+        if self.is_unknown_28() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_28").unwrap();
+            first = false;
+        }
+        if self.is_unknown_29() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_29").unwrap();
+            first = false;
+        }
+        if self.is_unknown_30() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_30").unwrap();
+            first = false;
+        }
+        if self.is_heal_prediction() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "HEAL_PREDICTION").unwrap();
+            first = false;
+        }
+        if self.is_unknown_32() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN_32").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl CastFlags {
     pub const fn new(inner: u32) -> Self {
         Self { inner }

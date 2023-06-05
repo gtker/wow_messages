@@ -22,6 +22,17 @@ impl NewItemSource {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl NewItemSource {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Looted => "LOOTED",
+            Self::FromNpc => "FROM_NPC",
+        }
+    }
+
+}
+
 impl Default for NewItemSource {
     fn default() -> Self {
         Self::Looted

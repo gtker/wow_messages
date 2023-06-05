@@ -25,6 +25,18 @@ impl MeetingStoneFailure {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl MeetingStoneFailure {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::MeetingstoneFailPartyleader => "MEETINGSTONE_FAIL_PARTYLEADER",
+            Self::MeetingstoneFailFullGroup => "MEETINGSTONE_FAIL_FULL_GROUP",
+            Self::MeetingstoneFailRaidGroup => "MEETINGSTONE_FAIL_RAID_GROUP",
+        }
+    }
+
+}
+
 impl Default for MeetingStoneFailure {
     fn default() -> Self {
         Self::MeetingstoneFailPartyleader

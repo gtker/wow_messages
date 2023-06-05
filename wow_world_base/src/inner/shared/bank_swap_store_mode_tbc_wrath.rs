@@ -22,6 +22,17 @@ impl BankSwapStoreMode {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl BankSwapStoreMode {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Manual => "MANUAL",
+            Self::Automatic => "AUTOMATIC",
+        }
+    }
+
+}
+
 impl Default for BankSwapStoreMode {
     fn default() -> Self {
         Self::Manual

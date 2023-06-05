@@ -22,6 +22,17 @@ impl ClientMovementData {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ClientMovementData {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NotPresent => "NOT_PRESENT",
+            Self::Present => "PRESENT",
+        }
+    }
+
+}
+
 impl Default for ClientMovementData {
     fn default() -> Self {
         Self::NotPresent

@@ -22,6 +22,17 @@ impl GuildBankContentResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl GuildBankContentResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NotPresent => "NOT_PRESENT",
+            Self::Present => "PRESENT",
+        }
+    }
+
+}
+
 impl Default for GuildBankContentResult {
     fn default() -> Self {
         Self::NotPresent

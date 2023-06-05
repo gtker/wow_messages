@@ -52,6 +52,27 @@ impl QuestPartyMessage {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl QuestPartyMessage {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::MsgSharingQuest => "MSG_SHARING_QUEST",
+            Self::MsgCantTakeQuest => "MSG_CANT_TAKE_QUEST",
+            Self::MsgAcceptQuest => "MSG_ACCEPT_QUEST",
+            Self::MsgRefuseQuest => "MSG_REFUSE_QUEST",
+            Self::MsgBusy => "MSG_BUSY",
+            Self::MsgLogFull => "MSG_LOG_FULL",
+            Self::MsgHaveQuest => "MSG_HAVE_QUEST",
+            Self::MsgFinishQuest => "MSG_FINISH_QUEST",
+            Self::MsgCantBeSharedToday => "MSG_CANT_BE_SHARED_TODAY",
+            Self::MsgSharingTimerExpired => "MSG_SHARING_TIMER_EXPIRED",
+            Self::MsgNotInParty => "MSG_NOT_IN_PARTY",
+            Self::MsgDifferentServerDaily => "MSG_DIFFERENT_SERVER_DAILY",
+        }
+    }
+
+}
+
 impl Default for QuestPartyMessage {
     fn default() -> Self {
         Self::MsgSharingQuest

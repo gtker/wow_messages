@@ -16,6 +16,14 @@ pub struct MSG_MOVE_FALL_LAND {
     pub info: MovementInfo,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_MOVE_FALL_LAND {
+    pub fn to_test_case_string(&self) -> String {
+        panic!("MSG types not supported");
+    }
+
+}
+
 impl crate::private::Sealed for MSG_MOVE_FALL_LAND {}
 impl crate::Message for MSG_MOVE_FALL_LAND {
     const OPCODE: u32 = 0x00c9;

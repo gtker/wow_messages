@@ -21,6 +21,61 @@ pub struct SMSG_PETITION_SHOW_SIGNATURES {
     pub signatures: Vec<PetitionSignature>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_PETITION_SHOW_SIGNATURES {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_PETITION_SHOW_SIGNATURES {{").unwrap();
+        // Members
+        writeln!(s, "    item = {};", self.item.guid()).unwrap();
+        writeln!(s, "    owner = {};", self.owner.guid()).unwrap();
+        writeln!(s, "    petition = {};", self.petition).unwrap();
+        writeln!(s, "    amount_of_signatures = {};", self.signatures.len()).unwrap();
+        write!(s, "    signatures = [").unwrap();
+        for v in self.signatures.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    signer = {};", v.signer.guid()).unwrap();
+            writeln!(s, "    unknown1 = {};", v.unknown1).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 447_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "item");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_PETITION_SHOW_SIGNATURES {}
 impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
     const OPCODE: u32 = 0x01bf;

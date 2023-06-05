@@ -55,6 +55,28 @@ impl WeatherType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl WeatherType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Fine => "FINE",
+            Self::Fog => "FOG",
+            Self::LightRain => "LIGHT_RAIN",
+            Self::MediumRain => "MEDIUM_RAIN",
+            Self::HeavyRain => "HEAVY_RAIN",
+            Self::LightSnow => "LIGHT_SNOW",
+            Self::MediumSnow => "MEDIUM_SNOW",
+            Self::HeavySnow => "HEAVY_SNOW",
+            Self::LightSandstorm => "LIGHT_SANDSTORM",
+            Self::MediumSandstorm => "MEDIUM_SANDSTORM",
+            Self::HeavySandstorm => "HEAVY_SANDSTORM",
+            Self::Thunders => "THUNDERS",
+            Self::Blackrain => "BLACKRAIN",
+        }
+    }
+
+}
+
 impl Default for WeatherType {
     fn default() -> Self {
         Self::Fine

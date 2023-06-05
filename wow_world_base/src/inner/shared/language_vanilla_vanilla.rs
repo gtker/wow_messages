@@ -61,6 +61,30 @@ impl Language {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl Language {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Universal => "UNIVERSAL",
+            Self::Orcish => "ORCISH",
+            Self::Darnassian => "DARNASSIAN",
+            Self::Taurahe => "TAURAHE",
+            Self::Dwarvish => "DWARVISH",
+            Self::Common => "COMMON",
+            Self::Demonic => "DEMONIC",
+            Self::Titan => "TITAN",
+            Self::Thalassian => "THALASSIAN",
+            Self::Draconic => "DRACONIC",
+            Self::Kalimag => "KALIMAG",
+            Self::Gnomish => "GNOMISH",
+            Self::Troll => "TROLL",
+            Self::Gutterspeak => "GUTTERSPEAK",
+            Self::Addon => "ADDON",
+        }
+    }
+
+}
+
 impl Default for Language {
     fn default() -> Self {
         Self::Universal

@@ -21,6 +21,61 @@ pub struct CMD_AUTH_LOGON_PROOF_Server {
     pub result: CMD_AUTH_LOGON_PROOF_Server_LoginResult,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMD_AUTH_LOGON_PROOF_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMD_AUTH_LOGON_PROOF_Server {{").unwrap();
+        // Members
+        writeln!(s, "    result = {};", crate::logon::version_2::LoginResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.result {
+            crate::logon::version_5::CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
+                hardware_survey_id,
+                server_proof,
+                unknown,
+            } => {
+                write!(s, "    server_proof = [").unwrap();
+                for v in server_proof.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+                writeln!(s, "    hardware_survey_id = {};", hardware_survey_id).unwrap();
+                writeln!(s, "    unknown = {};", unknown).unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "result");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    login_versions = \"5 6 7\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl CMD_AUTH_LOGON_PROOF_Server {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8

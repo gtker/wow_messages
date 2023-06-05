@@ -18,6 +18,88 @@ pub struct VictimState {
     inner: u8,
 }
 
+#[cfg(feature = "print-testcase")]
+impl VictimState {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "INTACT").unwrap();
+            first = false;
+        }
+        if self.is_hit() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "HIT").unwrap();
+            first = false;
+        }
+        if self.is_dodge() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DODGE").unwrap();
+            first = false;
+        }
+        if self.is_parry() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PARRY").unwrap();
+            first = false;
+        }
+        if self.is_interrupt() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "INTERRUPT").unwrap();
+            first = false;
+        }
+        if self.is_blocks() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "BLOCKS").unwrap();
+            first = false;
+        }
+        if self.is_evades() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "EVADES").unwrap();
+            first = false;
+        }
+        if self.is_is_immune() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "IS_IMMUNE").unwrap();
+            first = false;
+        }
+        if self.is_deflects() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DEFLECTS").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl VictimState {
     pub const fn new(inner: u8) -> Self {
         Self { inner }

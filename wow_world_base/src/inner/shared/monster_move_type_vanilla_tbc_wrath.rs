@@ -31,6 +31,20 @@ impl MonsterMoveType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl MonsterMoveType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Normal => "NORMAL",
+            Self::Stop => "STOP",
+            Self::FacingSpot => "FACING_SPOT",
+            Self::FacingTarget => "FACING_TARGET",
+            Self::FacingAngle => "FACING_ANGLE",
+        }
+    }
+
+}
+
 impl Default for MonsterMoveType {
     fn default() -> Self {
         Self::Normal

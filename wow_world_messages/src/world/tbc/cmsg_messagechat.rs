@@ -25,6 +25,64 @@ pub struct CMSG_MESSAGECHAT {
     pub message: String,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_MESSAGECHAT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_MESSAGECHAT {{").unwrap();
+        // Members
+        writeln!(s, "    chat_type = {};", crate::tbc::ChatType::try_from(self.chat_type.as_int()as u8).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    language = {};", self.language.as_test_case_value()).unwrap();
+        match &self.chat_type {
+            crate::tbc::CMSG_MESSAGECHAT_ChatType::Whisper {
+                target_player,
+            } => {
+                writeln!(s, "    target_player = \"{}\";", target_player).unwrap();
+            }
+            crate::tbc::CMSG_MESSAGECHAT_ChatType::Channel {
+                channel,
+            } => {
+                writeln!(s, "    channel = \"{}\";", channel).unwrap();
+            }
+            _ => {}
+        }
+
+        writeln!(s, "    message = \"{}\";", self.message).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 149_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "chat_type");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_MESSAGECHAT {}
 impl crate::Message for CMSG_MESSAGECHAT {
     const OPCODE: u32 = 0x0095;

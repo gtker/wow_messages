@@ -35,6 +35,58 @@ pub struct SMSG_CALENDAR_EVENT_INVITE_ALERT {
     pub invite_sender: Guid,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_CALENDAR_EVENT_INVITE_ALERT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_CALENDAR_EVENT_INVITE_ALERT {{").unwrap();
+        // Members
+        writeln!(s, "    event_id = {};", self.event_id.guid()).unwrap();
+        writeln!(s, "    title = \"{}\";", self.title).unwrap();
+        writeln!(s, "    event_time = {};", self.event_time.as_int()).unwrap();
+        writeln!(s, "    flags = {};", self.flags).unwrap();
+        writeln!(s, "    event_type = {};", self.event_type).unwrap();
+        writeln!(s, "    dungeon_id = {};", self.dungeon_id).unwrap();
+        writeln!(s, "    invite_id = {};", self.invite_id.guid()).unwrap();
+        writeln!(s, "    status = {};", self.status).unwrap();
+        writeln!(s, "    rank = {};", self.rank).unwrap();
+        writeln!(s, "    event_creator = {};", self.event_creator.guid()).unwrap();
+        writeln!(s, "    invite_sender = {};", self.invite_sender.guid()).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 1088_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "event_id");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_CALENDAR_EVENT_INVITE_ALERT {}
 impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_ALERT {
     const OPCODE: u32 = 0x0440;

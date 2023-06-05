@@ -19,6 +19,96 @@ pub struct CastFlags {
     inner: u16,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CastFlags {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NONE").unwrap();
+            first = false;
+        }
+        if self.is_hidden_combatlog() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "HIDDEN_COMBATLOG").unwrap();
+            first = false;
+        }
+        if self.is_unknown2() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN2").unwrap();
+            first = false;
+        }
+        if self.is_unknown3() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN3").unwrap();
+            first = false;
+        }
+        if self.is_unknown4() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN4").unwrap();
+            first = false;
+        }
+        if self.is_unknown5() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN5").unwrap();
+            first = false;
+        }
+        if self.is_ammo() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "AMMO").unwrap();
+            first = false;
+        }
+        if self.is_unknown7() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN7").unwrap();
+            first = false;
+        }
+        if self.is_unknown8() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN8").unwrap();
+            first = false;
+        }
+        if self.is_unknown9() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN9").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl CastFlags {
     pub const fn new(inner: u16) -> Self {
         Self { inner }

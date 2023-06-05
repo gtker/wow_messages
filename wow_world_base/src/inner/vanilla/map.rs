@@ -150,6 +150,59 @@ impl Map {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl Map {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::EasternKingdoms => "EASTERN_KINGDOMS",
+            Self::Kalimdor => "KALIMDOR",
+            Self::Testing => "TESTING",
+            Self::ScottTest => "SCOTT_TEST",
+            Self::CashTest => "CASH_TEST",
+            Self::AlteracValley => "ALTERAC_VALLEY",
+            Self::ShadowfangKeep => "SHADOWFANG_KEEP",
+            Self::StormwindStockade => "STORMWIND_STOCKADE",
+            Self::StormwindPrison => "STORMWIND_PRISON",
+            Self::Deadmines => "DEADMINES",
+            Self::AzsharaCrater => "AZSHARA_CRATER",
+            Self::CollinsTest => "COLLINS_TEST",
+            Self::WailingCaverns => "WAILING_CAVERNS",
+            Self::MonasteryUnused => "MONASTERY_UNUSED",
+            Self::RazorfenKraul => "RAZORFEN_KRAUL",
+            Self::BlackfathomDeeps => "BLACKFATHOM_DEEPS",
+            Self::Uldaman => "ULDAMAN",
+            Self::Gnomeregan => "GNOMEREGAN",
+            Self::SunkenTemple => "SUNKEN_TEMPLE",
+            Self::RazorfenDowns => "RAZORFEN_DOWNS",
+            Self::EmeraldDream => "EMERALD_DREAM",
+            Self::ScarletMonastery => "SCARLET_MONASTERY",
+            Self::ZulFarrak => "ZUL_FARRAK",
+            Self::BlackrockSpire => "BLACKROCK_SPIRE",
+            Self::BlackrockDepths => "BLACKROCK_DEPTHS",
+            Self::OnyxiasLair => "ONYXIAS_LAIR",
+            Self::OpeningOfTheDarkPortal => "OPENING_OF_THE_DARK_PORTAL",
+            Self::Scholomance => "SCHOLOMANCE",
+            Self::ZulGurub => "ZUL_GURUB",
+            Self::Stratholme => "STRATHOLME",
+            Self::Maraudon => "MARAUDON",
+            Self::DeeprunTram => "DEEPRUN_TRAM",
+            Self::RagefireChasm => "RAGEFIRE_CHASM",
+            Self::MoltenCore => "MOLTEN_CORE",
+            Self::DireMaul => "DIRE_MAUL",
+            Self::AlliancePvpBarracks => "ALLIANCE_PVP_BARRACKS",
+            Self::HordePvpBarracks => "HORDE_PVP_BARRACKS",
+            Self::DevelopmentLand => "DEVELOPMENT_LAND",
+            Self::BlackwingLair => "BLACKWING_LAIR",
+            Self::WarsongGulch => "WARSONG_GULCH",
+            Self::RuinsOfAhnQiraj => "RUINS_OF_AHN_QIRAJ",
+            Self::ArathiBasin => "ARATHI_BASIN",
+            Self::AhnQirajTemple => "AHN_QIRAJ_TEMPLE",
+            Self::Naxxramas => "NAXXRAMAS",
+        }
+    }
+
+}
+
 impl Default for Map {
     fn default() -> Self {
         Self::EasternKingdoms

@@ -14,6 +14,14 @@ use std::io::{Read, Write};
 pub struct MSG_MOVE_WORLDPORT_ACK {
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_MOVE_WORLDPORT_ACK {
+    pub fn to_test_case_string(&self) -> String {
+        panic!("MSG types not supported");
+    }
+
+}
+
 impl crate::private::Sealed for MSG_MOVE_WORLDPORT_ACK {}
 impl crate::Message for MSG_MOVE_WORLDPORT_ACK {
     const OPCODE: u32 = 0x00dc;

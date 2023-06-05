@@ -30,6 +30,56 @@ pub struct SMSG_LFG_BOOT_PROPOSAL_UPDATE {
     pub reason: String,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_LFG_BOOT_PROPOSAL_UPDATE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_LFG_BOOT_PROPOSAL_UPDATE {{").unwrap();
+        // Members
+        writeln!(s, "    vote_in_progress = {};", if self.vote_in_progress { "TRUE" } else { "FALSE" }).unwrap();
+        writeln!(s, "    did_vote = {};", if self.did_vote { "TRUE" } else { "FALSE" }).unwrap();
+        writeln!(s, "    agreed_with_kick = {};", if self.agreed_with_kick { "TRUE" } else { "FALSE" }).unwrap();
+        writeln!(s, "    victim = {};", self.victim.guid()).unwrap();
+        writeln!(s, "    total_votes = {};", self.total_votes).unwrap();
+        writeln!(s, "    votes_agree = {};", self.votes_agree).unwrap();
+        writeln!(s, "    time_left = {};", self.time_left.as_secs()).unwrap();
+        writeln!(s, "    votes_needed = {};", self.votes_needed).unwrap();
+        writeln!(s, "    reason = \"{}\";", self.reason).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 877_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "vote_in_progress");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_LFG_BOOT_PROPOSAL_UPDATE {}
 impl crate::Message for SMSG_LFG_BOOT_PROPOSAL_UPDATE {
     const OPCODE: u32 = 0x036d;

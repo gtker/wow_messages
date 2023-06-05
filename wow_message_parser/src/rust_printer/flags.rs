@@ -2,7 +2,7 @@ use crate::parser::types::definer::Definer;
 use crate::rust_printer::enums::print_wowm_definition;
 use crate::rust_printer::{
     print_docc_description_and_comment, print_member_docc_description_and_comment,
-    print_serde_derive, Writer,
+    print_serde_derive, Writer, CFG_TESTCASE,
 };
 use crate::Objects;
 
@@ -27,6 +27,30 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
 }
 
 fn common_impls(s: &mut Writer, e: &Definer, o: &Objects) {
+    s.wln(CFG_TESTCASE);
+    s.bodyn(format!("impl {name}", name = e.name()), |s| {
+        s.funcn_pub("as_test_case_value(&self)", "String", |s| {
+            s.wln("let mut s = String::new();");
+            s.wln("let mut first = true;");
+
+            for field in e.fields() {
+                let conditional = if field.value().int() != 0 {
+                    format!("if self.is_{}()", field.function_name())
+                } else {
+                    "if self.is_empty()".to_string()
+                };
+                s.body(conditional, |s| {
+                    s.wln("use std::fmt::Write;");
+                    s.body("if !first", |s| s.wln("write!(s, \"| \").unwrap();"));
+                    s.wln(format!("write!(s, \"{}\").unwrap();", field.name()));
+                    s.wln("first = false;");
+                });
+            }
+
+            s.wln("s");
+        });
+    });
+
     s.bodyn(format!("impl {name}", name = e.name()), |s| {
         s.funcn_pub_const(
             format!("new(inner: {ty})", ty = e.ty().rust_str()),

@@ -28,6 +28,19 @@ impl PetFeedback {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl PetFeedback {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::PetDead => "PET_DEAD",
+            Self::NothingToAttack => "NOTHING_TO_ATTACK",
+            Self::CantAttackTarget => "CANT_ATTACK_TARGET",
+            Self::NoPathTo => "NO_PATH_TO",
+        }
+    }
+
+}
+
 impl Default for PetFeedback {
     fn default() -> Self {
         Self::PetDead

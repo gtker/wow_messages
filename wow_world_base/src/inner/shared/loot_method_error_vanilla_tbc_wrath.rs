@@ -81,6 +81,28 @@ impl LootMethodError {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl LootMethodError {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::DidntKill => "DIDNT_KILL",
+            Self::TooFar => "TOO_FAR",
+            Self::BadFacing => "BAD_FACING",
+            Self::Locked => "LOCKED",
+            Self::Notstanding => "NOTSTANDING",
+            Self::Stunned => "STUNNED",
+            Self::PlayerNotFound => "PLAYER_NOT_FOUND",
+            Self::PlayTimeExceeded => "PLAY_TIME_EXCEEDED",
+            Self::MasterInvFull => "MASTER_INV_FULL",
+            Self::MasterUniqueItem => "MASTER_UNIQUE_ITEM",
+            Self::MasterOther => "MASTER_OTHER",
+            Self::AlreadyPickpocketed => "ALREADY_PICKPOCKETED",
+            Self::NotWhileShapeshifted => "NOT_WHILE_SHAPESHIFTED",
+        }
+    }
+
+}
+
 impl Default for LootMethodError {
     fn default() -> Self {
         Self::DidntKill

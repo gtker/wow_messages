@@ -43,6 +43,24 @@ impl AccountDataType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl AccountDataType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::GlobalConfigCache => "GLOBAL_CONFIG_CACHE",
+            Self::PerCharacterConfigCache => "PER_CHARACTER_CONFIG_CACHE",
+            Self::GlobalBindingsCache => "GLOBAL_BINDINGS_CACHE",
+            Self::PerCharacterBindingsCache => "PER_CHARACTER_BINDINGS_CACHE",
+            Self::GlobalMacrosCache => "GLOBAL_MACROS_CACHE",
+            Self::PerCharacterMacrosCache => "PER_CHARACTER_MACROS_CACHE",
+            Self::PerCharacterLayoutCache => "PER_CHARACTER_LAYOUT_CACHE",
+            Self::PerCharacterChatCache => "PER_CHARACTER_CHAT_CACHE",
+            Self::NumAccountDataTypes => "NUM_ACCOUNT_DATA_TYPES",
+        }
+    }
+
+}
+
 impl Default for AccountDataType {
     fn default() -> Self {
         Self::GlobalConfigCache

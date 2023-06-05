@@ -2,7 +2,7 @@ use crate::parser::types::definer::Definer;
 use crate::parser::types::IntegerType;
 use crate::rust_printer::{
     print_docc_description_and_comment, print_member_docc_description_and_comment,
-    print_serde_derive, Writer,
+    print_serde_derive, Writer, CFG_TESTCASE,
 };
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::Objects;
@@ -21,6 +21,8 @@ fn print_enum_inner(e: &Definer, o: &Objects, visibility_override: bool) -> Writ
     declaration(&mut s, e, o, visibility_override);
 
     common_impls(&mut s, e, visibility_override);
+
+    testcase_string(&mut s, e);
 
     print_default(&mut s, e);
 
@@ -99,6 +101,32 @@ fn as_type(s: &mut Writer, e: &Definer, visibility_override: bool) {
                     s.wln(format!("Self::{}(v) => *v,", self_value.rust_name()));
                 }
             }
+        });
+    });
+}
+
+fn testcase_string(s: &mut Writer, e: &Definer) {
+    let name = e.name();
+    s.wln(CFG_TESTCASE);
+    s.bodyn(format!("impl {name}"), |s| {
+        s.funcn_pub("as_test_case_value(&self)", "&'static str", |s| {
+            s.body("match self", |s| {
+                for field in e.fields() {
+                    let rust = field.rust_name();
+                    let field = field.name();
+
+                    s.wln(format!("Self::{rust} => \"{field}\","));
+                }
+                match e.self_value() {
+                    None => {}
+                    Some(self_value) => {
+                        let rust = self_value.rust_name();
+                        let field = self_value.name();
+
+                        s.wln(format!("Self::{rust}(_) => \"{field}\","));
+                    }
+                }
+            });
         });
     });
 }

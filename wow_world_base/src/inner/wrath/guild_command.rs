@@ -40,6 +40,23 @@ impl GuildCommand {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl GuildCommand {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Create => "CREATE",
+            Self::Invite => "INVITE",
+            Self::Quit => "QUIT",
+            Self::Promote => "PROMOTE",
+            Self::Founder => "FOUNDER",
+            Self::Member => "MEMBER",
+            Self::PublicNoteChanged => "PUBLIC_NOTE_CHANGED",
+            Self::OfficerNoteChanged => "OFFICER_NOTE_CHANGED",
+        }
+    }
+
+}
+
 impl Default for GuildCommand {
     fn default() -> Self {
         Self::Create

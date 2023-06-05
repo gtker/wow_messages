@@ -13,6 +13,14 @@ pub struct MSG_PETITION_DECLINE {
     pub petition: Guid,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_PETITION_DECLINE {
+    pub fn to_test_case_string(&self) -> String {
+        panic!("MSG types not supported");
+    }
+
+}
+
 impl crate::private::Sealed for MSG_PETITION_DECLINE {}
 impl crate::Message for MSG_PETITION_DECLINE {
     const OPCODE: u32 = 0x01c2;

@@ -22,6 +22,17 @@ impl InfoBlock {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl InfoBlock {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Unavailable => "UNAVAILABLE",
+            Self::Available => "AVAILABLE",
+        }
+    }
+
+}
+
 impl Default for InfoBlock {
     fn default() -> Self {
         Self::Unavailable

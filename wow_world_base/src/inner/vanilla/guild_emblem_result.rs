@@ -44,6 +44,21 @@ impl GuildEmblemResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl GuildEmblemResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Success => "SUCCESS",
+            Self::InvalidTabardColors => "INVALID_TABARD_COLORS",
+            Self::NoGuild => "NO_GUILD",
+            Self::NotGuildMaster => "NOT_GUILD_MASTER",
+            Self::NotEnoughMoney => "NOT_ENOUGH_MONEY",
+            Self::NoMessage => "NO_MESSAGE",
+        }
+    }
+
+}
+
 impl Default for GuildEmblemResult {
     fn default() -> Self {
         Self::Success

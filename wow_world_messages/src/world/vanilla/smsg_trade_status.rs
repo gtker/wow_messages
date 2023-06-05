@@ -28,6 +28,76 @@ pub struct SMSG_TRADE_STATUS {
     pub status: SMSG_TRADE_STATUS_TradeStatus,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_TRADE_STATUS {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_TRADE_STATUS {{").unwrap();
+        // Members
+        writeln!(s, "    status = {};", crate::vanilla::TradeStatus::try_from(self.status.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.status {
+            crate::vanilla::SMSG_TRADE_STATUS_TradeStatus::BeginTrade {
+                unknown1,
+            } => {
+                writeln!(s, "    unknown1 = {};", unknown1.guid()).unwrap();
+            }
+            crate::vanilla::SMSG_TRADE_STATUS_TradeStatus::CloseWindow {
+                inventory_result,
+                item_limit_category_id,
+                target_error,
+            } => {
+                writeln!(s, "    inventory_result = {};", inventory_result.as_test_case_value()).unwrap();
+                writeln!(s, "    target_error = {};", if *target_error { "TRUE" } else { "FALSE" }).unwrap();
+                writeln!(s, "    item_limit_category_id = {};", item_limit_category_id).unwrap();
+            }
+            crate::vanilla::SMSG_TRADE_STATUS_TradeStatus::OnlyConjured {
+                slot,
+            } => {
+                writeln!(s, "    slot = {};", slot).unwrap();
+            }
+            crate::vanilla::SMSG_TRADE_STATUS_TradeStatus::NotOnTaplist {
+                slot,
+            } => {
+                writeln!(s, "    slot = {};", slot).unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 288_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "status");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_TRADE_STATUS {}
 impl crate::Message for SMSG_TRADE_STATUS {
     const OPCODE: u32 = 0x0120;

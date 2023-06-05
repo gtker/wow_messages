@@ -92,6 +92,31 @@ impl TransferAbortReason {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl TransferAbortReason {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::ErrorX => "ERROR",
+            Self::MaxPlayers => "MAX_PLAYERS",
+            Self::NotFound => "NOT_FOUND",
+            Self::TooManyInstances => "TOO_MANY_INSTANCES",
+            Self::ZoneInCombat => "ZONE_IN_COMBAT",
+            Self::InsufficientExpansionLevel => "INSUFFICIENT_EXPANSION_LEVEL",
+            Self::DifficultyNotAvailable => "DIFFICULTY_NOT_AVAILABLE",
+            Self::UniqueMessage => "UNIQUE_MESSAGE",
+            Self::TooManyRealmInstances => "TOO_MANY_REALM_INSTANCES",
+            Self::NeedGroup => "NEED_GROUP",
+            Self::NotFound1 => "NOT_FOUND1",
+            Self::NotFound2 => "NOT_FOUND2",
+            Self::NotFound3 => "NOT_FOUND3",
+            Self::RealmOnly => "REALM_ONLY",
+            Self::MapNotAllowed => "MAP_NOT_ALLOWED",
+        }
+    }
+
+}
+
 impl Default for TransferAbortReason {
     fn default() -> Self {
         Self::None

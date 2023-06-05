@@ -29,6 +29,65 @@ pub struct CMSG_WHO {
     pub search_strings: Vec<String>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_WHO {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_WHO {{").unwrap();
+        // Members
+        writeln!(s, "    minimum_level = {};", self.minimum_level.as_int()).unwrap();
+        writeln!(s, "    maximum_level = {};", self.maximum_level.as_int()).unwrap();
+        writeln!(s, "    player_name = \"{}\";", self.player_name).unwrap();
+        writeln!(s, "    guild_name = \"{}\";", self.guild_name).unwrap();
+        writeln!(s, "    race_mask = {};", self.race_mask).unwrap();
+        writeln!(s, "    class_mask = {};", self.class_mask).unwrap();
+        writeln!(s, "    amount_of_zones = {};", self.zones.len()).unwrap();
+        write!(s, "    zones = [").unwrap();
+        for v in self.zones.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        writeln!(s, "    amount_of_strings = {};", self.search_strings.len()).unwrap();
+        write!(s, "    search_strings = [").unwrap();
+        for v in self.search_strings.as_slice() {
+            write!(s, "\"{v}\", ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 98_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "minimum_level");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_WHO {}
 impl crate::Message for CMSG_WHO {
     const OPCODE: u32 = 0x0062;

@@ -36,6 +36,19 @@ impl RaidInstanceMessage {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl RaidInstanceMessage {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::WarningHours => "WARNING_HOURS",
+            Self::WarningMin => "WARNING_MIN",
+            Self::WarningMinSoon => "WARNING_MIN_SOON",
+            Self::Welcome => "WELCOME",
+        }
+    }
+
+}
+
 impl Default for RaidInstanceMessage {
     fn default() -> Self {
         Self::WarningHours

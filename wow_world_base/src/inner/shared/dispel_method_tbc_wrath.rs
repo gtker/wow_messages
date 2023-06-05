@@ -22,6 +22,17 @@ impl DispelMethod {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl DispelMethod {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Dispelled => "DISPELLED",
+            Self::Cleansed => "CLEANSED",
+        }
+    }
+
+}
+
 impl Default for DispelMethod {
     fn default() -> Self {
         Self::Dispelled

@@ -14,6 +14,98 @@ pub struct SMSG_FRIEND_LIST {
     pub friends: Vec<Friend>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_FRIEND_LIST {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_FRIEND_LIST {{").unwrap();
+        // Members
+        writeln!(s, "    amount_of_friends = {};", self.friends.len()).unwrap();
+        write!(s, "    friends = [").unwrap();
+        for v in self.friends.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "    status = {};", crate::vanilla::FriendStatus::try_from(v.status.as_int()).unwrap().as_test_case_value()).unwrap();
+            match &v.status {
+                crate::vanilla::Friend_FriendStatus::Online {
+                    area,
+                    class,
+                    level,
+                } => {
+                    writeln!(s, "    area = {};", area.as_test_case_value()).unwrap();
+                    writeln!(s, "    level = {};", level.as_int()).unwrap();
+                    writeln!(s, "    class = {};", class.as_test_case_value()).unwrap();
+                }
+                crate::vanilla::Friend_FriendStatus::Afk {
+                    area,
+                    class,
+                    level,
+                } => {
+                    writeln!(s, "    area = {};", area.as_test_case_value()).unwrap();
+                    writeln!(s, "    level = {};", level.as_int()).unwrap();
+                    writeln!(s, "    class = {};", class.as_test_case_value()).unwrap();
+                }
+                crate::vanilla::Friend_FriendStatus::Unknown3 {
+                    area,
+                    class,
+                    level,
+                } => {
+                    writeln!(s, "    area = {};", area.as_test_case_value()).unwrap();
+                    writeln!(s, "    level = {};", level.as_int()).unwrap();
+                    writeln!(s, "    class = {};", class.as_test_case_value()).unwrap();
+                }
+                crate::vanilla::Friend_FriendStatus::Dnd {
+                    area,
+                    class,
+                    level,
+                } => {
+                    writeln!(s, "    area = {};", area.as_test_case_value()).unwrap();
+                    writeln!(s, "    level = {};", level.as_int()).unwrap();
+                    writeln!(s, "    class = {};", class.as_test_case_value()).unwrap();
+                }
+                _ => {}
+            }
+
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 103_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_friends");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_FRIEND_LIST {}
 impl crate::Message for SMSG_FRIEND_LIST {
     const OPCODE: u32 = 0x0067;

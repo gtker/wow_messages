@@ -33,6 +33,18 @@ impl TrainingFailureReason {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl TrainingFailureReason {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Unavailable => "UNAVAILABLE",
+            Self::NotEnoughMoney => "NOT_ENOUGH_MONEY",
+            Self::NotEnoughSkill => "NOT_ENOUGH_SKILL",
+        }
+    }
+
+}
+
 impl Default for TrainingFailureReason {
     fn default() -> Self {
         Self::Unavailable

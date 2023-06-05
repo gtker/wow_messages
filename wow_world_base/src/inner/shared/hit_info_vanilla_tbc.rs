@@ -75,6 +75,30 @@ impl HitInfo {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl HitInfo {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NormalSwing => "NORMAL_SWING",
+            Self::Unk1 => "UNK1",
+            Self::AffectsVictim => "AFFECTS_VICTIM",
+            Self::LeftSwing => "LEFT_SWING",
+            Self::EarlyCriticalHit => "EARLY_CRITICAL_HIT",
+            Self::Miss => "MISS",
+            Self::Absorb => "ABSORB",
+            Self::Resist => "RESIST",
+            Self::CriticalHit => "CRITICAL_HIT",
+            Self::Unk9 => "UNK9",
+            Self::Unk10 => "UNK10",
+            Self::Glancing => "GLANCING",
+            Self::Crushing => "CRUSHING",
+            Self::NoAction => "NO_ACTION",
+            Self::SwingNoHitSound => "SWING_NO_HIT_SOUND",
+        }
+    }
+
+}
+
 impl Default for HitInfo {
     fn default() -> Self {
         Self::NormalSwing

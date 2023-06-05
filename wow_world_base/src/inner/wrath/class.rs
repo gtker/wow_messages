@@ -46,6 +46,25 @@ impl Class {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl Class {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Warrior => "WARRIOR",
+            Self::Paladin => "PALADIN",
+            Self::Hunter => "HUNTER",
+            Self::Rogue => "ROGUE",
+            Self::Priest => "PRIEST",
+            Self::DeathKnight => "DEATH_KNIGHT",
+            Self::Shaman => "SHAMAN",
+            Self::Mage => "MAGE",
+            Self::Warlock => "WARLOCK",
+            Self::Druid => "DRUID",
+        }
+    }
+
+}
+
 impl Default for Class {
     fn default() -> Self {
         Self::Warrior

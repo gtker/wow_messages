@@ -17,6 +17,80 @@ pub struct ChannelFlags {
     inner: u8,
 }
 
+#[cfg(feature = "print-testcase")]
+impl ChannelFlags {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NONE").unwrap();
+            first = false;
+        }
+        if self.is_custom() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CUSTOM").unwrap();
+            first = false;
+        }
+        if self.is_trade() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "TRADE").unwrap();
+            first = false;
+        }
+        if self.is_not_lfg() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NOT_LFG").unwrap();
+            first = false;
+        }
+        if self.is_general() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "GENERAL").unwrap();
+            first = false;
+        }
+        if self.is_city() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CITY").unwrap();
+            first = false;
+        }
+        if self.is_lfg() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "LFG").unwrap();
+            first = false;
+        }
+        if self.is_voice() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "VOICE").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl ChannelFlags {
     pub const fn new(inner: u8) -> Self {
         Self { inner }

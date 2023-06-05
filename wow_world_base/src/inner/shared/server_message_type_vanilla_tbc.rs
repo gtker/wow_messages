@@ -31,6 +31,20 @@ impl ServerMessageType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ServerMessageType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::ShutdownTime => "SHUTDOWN_TIME",
+            Self::RestartTime => "RESTART_TIME",
+            Self::Custom => "CUSTOM",
+            Self::ShutdownCancelled => "SHUTDOWN_CANCELLED",
+            Self::RestartCancelled => "RESTART_CANCELLED",
+        }
+    }
+
+}
+
 impl Default for ServerMessageType {
     fn default() -> Self {
         Self::ShutdownTime

@@ -25,6 +25,18 @@ impl JoinArenaType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl JoinArenaType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::TwoVsTwo => "TWO_VS_TWO",
+            Self::ThreeVsThree => "THREE_VS_THREE",
+            Self::FiveVsFive => "FIVE_VS_FIVE",
+        }
+    }
+
+}
+
 impl Default for JoinArenaType {
     fn default() -> Self {
         Self::TwoVsTwo

@@ -46,6 +46,25 @@ impl RaidTargetIndex {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl RaidTargetIndex {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Unknown0 => "UNKNOWN0",
+            Self::Unknown1 => "UNKNOWN1",
+            Self::Unknown2 => "UNKNOWN2",
+            Self::Unknown3 => "UNKNOWN3",
+            Self::Unknown4 => "UNKNOWN4",
+            Self::Unknown5 => "UNKNOWN5",
+            Self::Unknown6 => "UNKNOWN6",
+            Self::Unknown7 => "UNKNOWN7",
+            Self::Unknown8 => "UNKNOWN8",
+            Self::RequestIcons => "REQUEST_ICONS",
+        }
+    }
+
+}
+
 impl Default for RaidTargetIndex {
     fn default() -> Self {
         Self::Unknown0

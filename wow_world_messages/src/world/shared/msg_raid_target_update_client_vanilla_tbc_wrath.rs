@@ -17,6 +17,97 @@ pub struct MSG_RAID_TARGET_UPDATE_Client {
     pub target_index: MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_RAID_TARGET_UPDATE_Client {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test MSG_RAID_TARGET_UPDATE_Client {{").unwrap();
+        // Members
+        writeln!(s, "    target_index = {};", crate::vanilla::RaidTargetIndex::try_from(self.target_index.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.target_index {
+            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {
+                target,
+            } => {
+                writeln!(s, "    target = {};", target.guid()).unwrap();
+            }
+            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown1 {
+                target,
+            } => {
+                writeln!(s, "    target = {};", target.guid()).unwrap();
+            }
+            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown2 {
+                target,
+            } => {
+                writeln!(s, "    target = {};", target.guid()).unwrap();
+            }
+            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown3 {
+                target,
+            } => {
+                writeln!(s, "    target = {};", target.guid()).unwrap();
+            }
+            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown4 {
+                target,
+            } => {
+                writeln!(s, "    target = {};", target.guid()).unwrap();
+            }
+            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown5 {
+                target,
+            } => {
+                writeln!(s, "    target = {};", target.guid()).unwrap();
+            }
+            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown6 {
+                target,
+            } => {
+                writeln!(s, "    target = {};", target.guid()).unwrap();
+            }
+            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown7 {
+                target,
+            } => {
+                writeln!(s, "    target = {};", target.guid()).unwrap();
+            }
+            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown8 {
+                target,
+            } => {
+                writeln!(s, "    target = {};", target.guid()).unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 801_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "target_index");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for MSG_RAID_TARGET_UPDATE_Client {}
 impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
     const OPCODE: u32 = 0x0321;

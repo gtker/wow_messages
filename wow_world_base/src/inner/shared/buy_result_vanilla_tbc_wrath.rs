@@ -43,6 +43,24 @@ impl BuyResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl BuyResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::CantFindItem => "CANT_FIND_ITEM",
+            Self::ItemAlreadySold => "ITEM_ALREADY_SOLD",
+            Self::NotEnoughtMoney => "NOT_ENOUGHT_MONEY",
+            Self::SellerDontLikeYou => "SELLER_DONT_LIKE_YOU",
+            Self::DistanceTooFar => "DISTANCE_TOO_FAR",
+            Self::ItemSoldOut => "ITEM_SOLD_OUT",
+            Self::CantCarryMore => "CANT_CARRY_MORE",
+            Self::RankRequire => "RANK_REQUIRE",
+            Self::ReputationRequire => "REPUTATION_REQUIRE",
+        }
+    }
+
+}
+
 impl Default for BuyResult {
     fn default() -> Self {
         Self::CantFindItem

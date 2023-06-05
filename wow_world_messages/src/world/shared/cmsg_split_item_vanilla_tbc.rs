@@ -19,6 +19,52 @@ pub struct CMSG_SPLIT_ITEM {
     pub amount: u8,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_SPLIT_ITEM {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_SPLIT_ITEM {{").unwrap();
+        // Members
+        writeln!(s, "    source_bag = {};", self.source_bag).unwrap();
+        writeln!(s, "    source_slot = {};", self.source_slot).unwrap();
+        writeln!(s, "    destination_bag = {};", self.destination_bag).unwrap();
+        writeln!(s, "    destination_slot = {};", self.destination_slot).unwrap();
+        writeln!(s, "    amount = {};", self.amount).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 11_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 270_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "source_bag");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_SPLIT_ITEM {}
 impl crate::Message for CMSG_SPLIT_ITEM {
     const OPCODE: u32 = 0x010e;

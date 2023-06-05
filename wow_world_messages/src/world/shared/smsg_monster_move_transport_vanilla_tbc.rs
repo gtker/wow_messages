@@ -39,6 +39,87 @@ pub struct SMSG_MONSTER_MOVE_TRANSPORT {
     pub splines: Vec<Vector3d>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_MONSTER_MOVE_TRANSPORT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_MONSTER_MOVE_TRANSPORT {{").unwrap();
+        // Members
+        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
+        writeln!(s, "    transport = {};", self.transport.guid()).unwrap();
+        // spline_point: Vector3d
+        writeln!(s, "    spline_point = {{").unwrap();
+        // Members
+        writeln!(s, "    {}", if self.spline_point.x.to_string().contains(".") { self.spline_point.x.to_string() } else { format!("{}.0", self.spline_point.x) }).unwrap();
+        writeln!(s, "    {}", if self.spline_point.y.to_string().contains(".") { self.spline_point.y.to_string() } else { format!("{}.0", self.spline_point.y) }).unwrap();
+        writeln!(s, "    {}", if self.spline_point.z.to_string().contains(".") { self.spline_point.z.to_string() } else { format!("{}.0", self.spline_point.z) }).unwrap();
+
+        writeln!(s, "    }};").unwrap();
+        writeln!(s, "    spline_id = {};", self.spline_id).unwrap();
+        writeln!(s, "    move_type = {};", crate::vanilla::MonsterMoveType::try_from(self.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.move_type {
+            crate::vanilla::SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType::FacingSpot {
+                position,
+            } => {
+                // position: Vector3d
+                writeln!(s, "    position = {{").unwrap();
+                // Members
+                writeln!(s, "    {}", if position.x.to_string().contains(".") { position.x.to_string() } else { format!("{}.0", position.x) }).unwrap();
+                writeln!(s, "    {}", if position.y.to_string().contains(".") { position.y.to_string() } else { format!("{}.0", position.y) }).unwrap();
+                writeln!(s, "    {}", if position.z.to_string().contains(".") { position.z.to_string() } else { format!("{}.0", position.z) }).unwrap();
+
+                writeln!(s, "    }};").unwrap();
+            }
+            crate::vanilla::SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType::FacingTarget {
+                target,
+            } => {
+                writeln!(s, "    target = {};", target.guid()).unwrap();
+            }
+            crate::vanilla::SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType::FacingAngle {
+                angle,
+            } => {
+                writeln!(s, "    {}", if angle.to_string().contains(".") { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
+            }
+            _ => {}
+        }
+
+        writeln!(s, "    spline_flags = {};", self.spline_flags.as_test_case_value()).unwrap();
+        writeln!(s, "    duration = {};", self.duration).unwrap();
+        panic!("unsupported type Vec<Vector3d> for variable 'splines'");
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 686_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12 2\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_MONSTER_MOVE_TRANSPORT {}
 impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
     const OPCODE: u32 = 0x02ae;

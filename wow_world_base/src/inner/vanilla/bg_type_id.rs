@@ -41,6 +41,20 @@ impl BgTypeId {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl BgTypeId {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NotEligible => "NOT_ELIGIBLE",
+            Self::QueuedForAv => "QUEUED_FOR_AV",
+            Self::QueuedForWsg => "QUEUED_FOR_WSG",
+            Self::QueuedForAb => "QUEUED_FOR_AB",
+            Self::RemoveFromQueue => "REMOVE_FROM_QUEUE",
+        }
+    }
+
+}
+
 impl Default for BgTypeId {
     fn default() -> Self {
         Self::NotEligible

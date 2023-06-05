@@ -22,6 +22,54 @@ pub struct CMSG_UPDATE_ACCOUNT_DATA {
     pub compressed_data: Vec<u8>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_UPDATE_ACCOUNT_DATA {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_UPDATE_ACCOUNT_DATA {{").unwrap();
+        // Members
+        writeln!(s, "    data_type = {};", self.data_type.as_test_case_value()).unwrap();
+        writeln!(s, "    decompressed_size = {};", self.decompressed_size).unwrap();
+        write!(s, "    compressed_data = [").unwrap();
+        for v in self.compressed_data.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 523_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "data_type");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12 2\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_UPDATE_ACCOUNT_DATA {}
 impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
     const OPCODE: u32 = 0x020b;

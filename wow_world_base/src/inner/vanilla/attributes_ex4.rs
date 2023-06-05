@@ -22,6 +22,120 @@ pub struct AttributesEx4 {
     inner: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl AttributesEx4 {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NONE").unwrap();
+            first = false;
+        }
+        if self.is_no_cast_log() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_CAST_LOG").unwrap();
+            first = false;
+        }
+        if self.is_class_trigger_only_on_target() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CLASS_TRIGGER_ONLY_ON_TARGET").unwrap();
+            first = false;
+        }
+        if self.is_aura_expires_offline() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "AURA_EXPIRES_OFFLINE").unwrap();
+            first = false;
+        }
+        if self.is_no_helpful_threat() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_HELPFUL_THREAT").unwrap();
+            first = false;
+        }
+        if self.is_no_harmful_threat() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_HARMFUL_THREAT").unwrap();
+            first = false;
+        }
+        if self.is_allow_client_targeting() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ALLOW_CLIENT_TARGETING").unwrap();
+            first = false;
+        }
+        if self.is_cannot_be_stolen() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CANNOT_BE_STOLEN").unwrap();
+            first = false;
+        }
+        if self.is_allow_cast_while_casting() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ALLOW_CAST_WHILE_CASTING").unwrap();
+            first = false;
+        }
+        if self.is_ignore_damage_taken_modifiers() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "IGNORE_DAMAGE_TAKEN_MODIFIERS").unwrap();
+            first = false;
+        }
+        if self.is_combat_feedback_when_usable() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "COMBAT_FEEDBACK_WHEN_USABLE").unwrap();
+            first = false;
+        }
+        if self.is_weapon_speed_cost_scaling() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "WEAPON_SPEED_COST_SCALING").unwrap();
+            first = false;
+        }
+        if self.is_no_partial_immunity() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_PARTIAL_IMMUNITY").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl AttributesEx4 {
     pub const fn new(inner: u32) -> Self {
         Self { inner }

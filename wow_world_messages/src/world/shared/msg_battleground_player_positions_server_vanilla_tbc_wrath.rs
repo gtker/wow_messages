@@ -17,6 +17,71 @@ pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub carriers: Vec<BattlegroundPlayerPosition>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {{").unwrap();
+        // Members
+        writeln!(s, "    amount_of_teammates = {};", self.teammates.len()).unwrap();
+        write!(s, "    teammates = [").unwrap();
+        for v in self.teammates.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    player = {};", v.player.guid()).unwrap();
+            writeln!(s, "    {}", if v.position_x.to_string().contains(".") { v.position_x.to_string() } else { format!("{}.0", v.position_x) }).unwrap();
+            writeln!(s, "    {}", if v.position_y.to_string().contains(".") { v.position_y.to_string() } else { format!("{}.0", v.position_y) }).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        writeln!(s, "    amount_of_carriers = {};", self.carriers.len()).unwrap();
+        write!(s, "    carriers = [").unwrap();
+        for v in self.carriers.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    player = {};", v.player.guid()).unwrap();
+            writeln!(s, "    {}", if v.position_x.to_string().contains(".") { v.position_x.to_string() } else { format!("{}.0", v.position_x) }).unwrap();
+            writeln!(s, "    {}", if v.position_y.to_string().contains(".") { v.position_y.to_string() } else { format!("{}.0", v.position_y) }).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 745_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_teammates");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
 impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     const OPCODE: u32 = 0x02e9;

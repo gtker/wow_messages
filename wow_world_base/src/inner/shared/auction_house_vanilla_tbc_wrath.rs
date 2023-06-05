@@ -37,6 +37,22 @@ impl AuctionHouse {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl AuctionHouse {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Stormwind => "STORMWIND",
+            Self::Alliance => "ALLIANCE",
+            Self::Darnassus => "DARNASSUS",
+            Self::Undercity => "UNDERCITY",
+            Self::ThunderBluff => "THUNDER_BLUFF",
+            Self::Horde => "HORDE",
+            Self::Goblin => "GOBLIN",
+        }
+    }
+
+}
+
 impl Default for AuctionHouse {
     fn default() -> Self {
         Self::Stormwind

@@ -16,6 +16,14 @@ pub struct MSG_MOVE_JUMP {
     pub info: MovementInfo,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_MOVE_JUMP {
+    pub fn to_test_case_string(&self) -> String {
+        panic!("MSG types not supported");
+    }
+
+}
+
 impl crate::private::Sealed for MSG_MOVE_JUMP {}
 impl crate::Message for MSG_MOVE_JUMP {
     const OPCODE: u32 = 0x00bb;

@@ -25,6 +25,18 @@ impl ComplaintStatus {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ComplaintStatus {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Disabled => "DISABLED",
+            Self::EnabledWithoutAutoIgnore => "ENABLED_WITHOUT_AUTO_IGNORE",
+            Self::EnabledWithAutoIgnore => "ENABLED_WITH_AUTO_IGNORE",
+        }
+    }
+
+}
+
 impl Default for ComplaintStatus {
     fn default() -> Self {
         Self::Disabled

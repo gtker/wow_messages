@@ -63,6 +63,30 @@ impl ArenaTeamCommandError {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ArenaTeamCommandError {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::ArenaTeamInternal => "ARENA_TEAM_INTERNAL",
+            Self::AlreadyInArenaTeam => "ALREADY_IN_ARENA_TEAM",
+            Self::AlreadyInArenaTeamS => "ALREADY_IN_ARENA_TEAM_S",
+            Self::InvitedToArenaTeam => "INVITED_TO_ARENA_TEAM",
+            Self::AlreadyInvitedToArenaTeamS => "ALREADY_INVITED_TO_ARENA_TEAM_S",
+            Self::ArenaTeamNameInvalid => "ARENA_TEAM_NAME_INVALID",
+            Self::ArenaTeamNameExistsS => "ARENA_TEAM_NAME_EXISTS_S",
+            Self::ArenaTeamLeaderLeaveS => "ARENA_TEAM_LEADER_LEAVE_S",
+            Self::ArenaTeamPlayerNotInTeam => "ARENA_TEAM_PLAYER_NOT_IN_TEAM",
+            Self::ArenaTeamPlayerNotInTeamSs => "ARENA_TEAM_PLAYER_NOT_IN_TEAM_SS",
+            Self::ArenaTeamPlayerNotFoundS => "ARENA_TEAM_PLAYER_NOT_FOUND_S",
+            Self::ArenaTeamNotAllied => "ARENA_TEAM_NOT_ALLIED",
+            Self::ArenaTeamIgnoringYouS => "ARENA_TEAM_IGNORING_YOU_S",
+            Self::ArenaTeamTargetTooLowS => "ARENA_TEAM_TARGET_TOO_LOW_S",
+            Self::ArenaTeamTooManyMembersS => "ARENA_TEAM_TOO_MANY_MEMBERS_S",
+        }
+    }
+
+}
+
 impl Default for ArenaTeamCommandError {
     fn default() -> Self {
         Self::ArenaTeamInternal

@@ -26,6 +26,99 @@ pub struct SMSG_TALENTS_INFO {
     pub points_left: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_TALENTS_INFO {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_TALENTS_INFO {{").unwrap();
+        // Members
+        writeln!(s, "    talent_type = {};", crate::wrath::TalentInfoType::try_from(self.talent_type.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    points_left = {};", self.points_left).unwrap();
+        match &self.talent_type {
+            crate::wrath::SMSG_TALENTS_INFO_TalentInfoType::Player {
+                active_spec,
+                specs,
+            } => {
+                writeln!(s, "    amount_of_specs = {};", specs.len()).unwrap();
+                writeln!(s, "    active_spec = {};", active_spec).unwrap();
+                write!(s, "    specs = [").unwrap();
+                for v in specs.as_slice() {
+                    writeln!(s, "{{").unwrap();
+                    // Members
+                    writeln!(s, "    amount_of_talents = {};", v.talents.len()).unwrap();
+                    write!(s, "    talents = [").unwrap();
+                    for v in v.talents.as_slice() {
+                        writeln!(s, "{{").unwrap();
+                        // Members
+                        writeln!(s, "    talent = {};", v.talent.as_test_case_value()).unwrap();
+                        writeln!(s, "    max_rank = {};", v.max_rank).unwrap();
+
+                        writeln!(s, "    }},").unwrap();
+                    }
+                    writeln!(s, "];").unwrap();
+                    writeln!(s, "    amount_of_glyphs = {};", v.glyphs.len()).unwrap();
+                    write!(s, "    glyphs = [").unwrap();
+                    for v in v.glyphs.as_slice() {
+                        write!(s, "{v:#04X}, ").unwrap();
+                    }
+                    writeln!(s, "];").unwrap();
+
+                    writeln!(s, "    }},").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+            }
+            crate::wrath::SMSG_TALENTS_INFO_TalentInfoType::Pet {
+                talents,
+            } => {
+                writeln!(s, "    amount_of_talents = {};", talents.len()).unwrap();
+                write!(s, "    talents = [").unwrap();
+                for v in talents.as_slice() {
+                    writeln!(s, "{{").unwrap();
+                    // Members
+                    writeln!(s, "    talent = {};", v.talent.as_test_case_value()).unwrap();
+                    writeln!(s, "    max_rank = {};", v.max_rank).unwrap();
+
+                    writeln!(s, "    }},").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+            }
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 1216_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "talent_type");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_TALENTS_INFO {}
 impl crate::Message for SMSG_TALENTS_INFO {
     const OPCODE: u32 = 0x04c0;

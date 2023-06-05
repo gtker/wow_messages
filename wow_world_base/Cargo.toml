@@ -17,6 +17,7 @@ extended = []
 vanilla = []
 tbc = []
 wrath = []
+print-testcase = []
 
 [dependencies]
 serde = { version = "1", optional = true, features = ["derive"] }

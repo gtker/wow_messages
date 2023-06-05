@@ -16,6 +16,14 @@ pub struct MSG_MOVE_START_TURN_LEFT {
     pub info: MovementInfo,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_MOVE_START_TURN_LEFT {
+    pub fn to_test_case_string(&self) -> String {
+        panic!("MSG types not supported");
+    }
+
+}
+
 impl crate::private::Sealed for MSG_MOVE_START_TURN_LEFT {}
 impl crate::Message for MSG_MOVE_START_TURN_LEFT {
     const OPCODE: u32 = 0x00bc;

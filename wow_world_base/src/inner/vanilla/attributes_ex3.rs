@@ -42,6 +42,280 @@ pub struct AttributesEx3 {
     inner: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl AttributesEx3 {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NONE").unwrap();
+            first = false;
+        }
+        if self.is_pvp_enabling() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PVP_ENABLING").unwrap();
+            first = false;
+        }
+        if self.is_no_proc_equip_requirement() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_PROC_EQUIP_REQUIREMENT").unwrap();
+            first = false;
+        }
+        if self.is_no_casting_bar_text() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_CASTING_BAR_TEXT").unwrap();
+            first = false;
+        }
+        if self.is_completely_blocked() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "COMPLETELY_BLOCKED").unwrap();
+            first = false;
+        }
+        if self.is_no_res_timer() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_RES_TIMER").unwrap();
+            first = false;
+        }
+        if self.is_no_durability_loss() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_DURABILITY_LOSS").unwrap();
+            first = false;
+        }
+        if self.is_no_avoidance() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_AVOIDANCE").unwrap();
+            first = false;
+        }
+        if self.is_dot_stacking_rule() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DOT_STACKING_RULE").unwrap();
+            first = false;
+        }
+        if self.is_only_on_player() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ONLY_ON_PLAYER").unwrap();
+            first = false;
+        }
+        if self.is_not_a_proc() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NOT_A_PROC").unwrap();
+            first = false;
+        }
+        if self.is_requires_main_hand_weapon() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "REQUIRES_MAIN_HAND_WEAPON").unwrap();
+            first = false;
+        }
+        if self.is_only_battlegrounds() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ONLY_BATTLEGROUNDS").unwrap();
+            first = false;
+        }
+        if self.is_only_on_ghosts() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ONLY_ON_GHOSTS").unwrap();
+            first = false;
+        }
+        if self.is_hide_channel_bar() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "HIDE_CHANNEL_BAR").unwrap();
+            first = false;
+        }
+        if self.is_hide_in_raid_filter() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "HIDE_IN_RAID_FILTER").unwrap();
+            first = false;
+        }
+        if self.is_normal_ranged_attack() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NORMAL_RANGED_ATTACK").unwrap();
+            first = false;
+        }
+        if self.is_suppress_caster_procs() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "SUPPRESS_CASTER_PROCS").unwrap();
+            first = false;
+        }
+        if self.is_suppress_target_procs() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "SUPPRESS_TARGET_PROCS").unwrap();
+            first = false;
+        }
+        if self.is_always_hit() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ALWAYS_HIT").unwrap();
+            first = false;
+        }
+        if self.is_instant_target_procs() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "INSTANT_TARGET_PROCS").unwrap();
+            first = false;
+        }
+        if self.is_allow_aura_while_dead() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ALLOW_AURA_WHILE_DEAD").unwrap();
+            first = false;
+        }
+        if self.is_only_proc_outdoors() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ONLY_PROC_OUTDOORS").unwrap();
+            first = false;
+        }
+        if self.is_casting_cancels_autorepeat() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CASTING_CANCELS_AUTOREPEAT").unwrap();
+            first = false;
+        }
+        if self.is_no_damage_history() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_DAMAGE_HISTORY").unwrap();
+            first = false;
+        }
+        if self.is_requires_offhand_weapon() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "REQUIRES_OFFHAND_WEAPON").unwrap();
+            first = false;
+        }
+        if self.is_treat_as_periodic() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "TREAT_AS_PERIODIC").unwrap();
+            first = false;
+        }
+        if self.is_can_proc_from_procs() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CAN_PROC_FROM_PROCS").unwrap();
+            first = false;
+        }
+        if self.is_only_proc_on_caster() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ONLY_PROC_ON_CASTER").unwrap();
+            first = false;
+        }
+        if self.is_ignore_caster_and_target_restrictions() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "IGNORE_CASTER_AND_TARGET_RESTRICTIONS").unwrap();
+            first = false;
+        }
+        if self.is_ignore_caster_modifiers() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "IGNORE_CASTER_MODIFIERS").unwrap();
+            first = false;
+        }
+        if self.is_do_not_display_range() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DO_NOT_DISPLAY_RANGE").unwrap();
+            first = false;
+        }
+        if self.is_not_on_aoe_immune() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NOT_ON_AOE_IMMUNE").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl AttributesEx3 {
     pub const fn new(inner: u32) -> Self {
         Self { inner }

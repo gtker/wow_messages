@@ -9,6 +9,40 @@ use std::io::{Read, Write};
 pub struct CMSG_QUERY_QUESTS_COMPLETED {
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_QUERY_QUESTS_COMPLETED {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_QUERY_QUESTS_COMPLETED {{").unwrap();
+        // Members
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 6_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 1280_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_QUERY_QUESTS_COMPLETED {}
 impl crate::Message for CMSG_QUERY_QUESTS_COMPLETED {
     const OPCODE: u32 = 0x0500;

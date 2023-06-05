@@ -22,6 +22,17 @@ impl DungeonDifficulty {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl DungeonDifficulty {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Normal => "NORMAL",
+            Self::Heroic => "HEROIC",
+        }
+    }
+
+}
+
 impl Default for DungeonDifficulty {
     fn default() -> Self {
         Self::Normal

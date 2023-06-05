@@ -157,6 +157,62 @@ impl ChatType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ChatType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::System => "SYSTEM",
+            Self::Say => "SAY",
+            Self::Party => "PARTY",
+            Self::Raid => "RAID",
+            Self::Guild => "GUILD",
+            Self::Officer => "OFFICER",
+            Self::Yell => "YELL",
+            Self::Whisper => "WHISPER",
+            Self::WhisperInform => "WHISPER_INFORM",
+            Self::Reply => "REPLY",
+            Self::Emote => "EMOTE",
+            Self::TextEmote => "TEXT_EMOTE",
+            Self::MonsterSay => "MONSTER_SAY",
+            Self::MonsterParty => "MONSTER_PARTY",
+            Self::MonsterYell => "MONSTER_YELL",
+            Self::MonsterWhisper => "MONSTER_WHISPER",
+            Self::MonsterEmote => "MONSTER_EMOTE",
+            Self::Channel => "CHANNEL",
+            Self::ChannelJoin => "CHANNEL_JOIN",
+            Self::ChannelLeave => "CHANNEL_LEAVE",
+            Self::ChannelList => "CHANNEL_LIST",
+            Self::ChannelNotice => "CHANNEL_NOTICE",
+            Self::ChannelNoticeUser => "CHANNEL_NOTICE_USER",
+            Self::Afk => "AFK",
+            Self::Dnd => "DND",
+            Self::Ignored => "IGNORED",
+            Self::Skill => "SKILL",
+            Self::Loot => "LOOT",
+            Self::Money => "MONEY",
+            Self::Opening => "OPENING",
+            Self::Tradeskills => "TRADESKILLS",
+            Self::PetInfo => "PET_INFO",
+            Self::CombatMiscInfo => "COMBAT_MISC_INFO",
+            Self::CombatXpGain => "COMBAT_XP_GAIN",
+            Self::CombatHonorGain => "COMBAT_HONOR_GAIN",
+            Self::CombatFactionChange => "COMBAT_FACTION_CHANGE",
+            Self::BgSystemNeutral => "BG_SYSTEM_NEUTRAL",
+            Self::BgSystemAlliance => "BG_SYSTEM_ALLIANCE",
+            Self::BgSystemHorde => "BG_SYSTEM_HORDE",
+            Self::RaidLeader => "RAID_LEADER",
+            Self::RaidWarning => "RAID_WARNING",
+            Self::RaidBossWhisper => "RAID_BOSS_WHISPER",
+            Self::RaidBossEmote => "RAID_BOSS_EMOTE",
+            Self::Filtered => "FILTERED",
+            Self::Battleground => "BATTLEGROUND",
+            Self::BattlegroundLeader => "BATTLEGROUND_LEADER",
+            Self::Restricted => "RESTRICTED",
+        }
+    }
+
+}
+
 impl Default for ChatType {
     fn default() -> Self {
         Self::System

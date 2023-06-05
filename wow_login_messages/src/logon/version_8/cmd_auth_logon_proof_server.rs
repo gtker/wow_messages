@@ -39,6 +39,110 @@ impl CMD_AUTH_LOGON_PROOF_Server {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMD_AUTH_LOGON_PROOF_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMD_AUTH_LOGON_PROOF_Server {{").unwrap();
+        // Members
+        writeln!(s, "    result = {};", crate::logon::version_8::LoginResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.result {
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
+                account_flag,
+                hardware_survey_id,
+                server_proof,
+                unknown_flags,
+            } => {
+                write!(s, "    server_proof = [").unwrap();
+                for v in server_proof.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+                writeln!(s, "    account_flag = {};", account_flag.as_test_case_value()).unwrap();
+                writeln!(s, "    hardware_survey_id = {};", hardware_survey_id).unwrap();
+                writeln!(s, "    unknown_flags = {};", unknown_flags).unwrap();
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown0 {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknown1 {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailBanned {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailUnknownAccount {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailIncorrectPassword {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailAlreadyOnline {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoTime {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailDbBusy {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailVersionInvalid {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::LoginDownloadFile {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailInvalidServer {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailSuspended {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailNoAccess {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::SuccessSurvey {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailParentalcontrol {
+            } => {
+            }
+            crate::logon::version_8::CMD_AUTH_LOGON_PROOF_Server_LoginResult::FailLockedEnforced {
+            } => {
+            }
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "result");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    login_versions = \"8\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl CMD_AUTH_LOGON_PROOF_Server {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8

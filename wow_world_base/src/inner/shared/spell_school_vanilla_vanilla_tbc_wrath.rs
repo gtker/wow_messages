@@ -39,6 +39,22 @@ impl SpellSchool {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl SpellSchool {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Normal => "NORMAL",
+            Self::Holy => "HOLY",
+            Self::Fire => "FIRE",
+            Self::Nature => "NATURE",
+            Self::Frost => "FROST",
+            Self::Shadow => "SHADOW",
+            Self::Arcane => "ARCANE",
+        }
+    }
+
+}
+
 impl Default for SpellSchool {
     fn default() -> Self {
         Self::Normal

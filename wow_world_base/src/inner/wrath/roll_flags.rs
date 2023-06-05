@@ -13,6 +13,48 @@ pub struct RollFlags {
     inner: u8,
 }
 
+#[cfg(feature = "print-testcase")]
+impl RollFlags {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_pass() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PASS").unwrap();
+            first = false;
+        }
+        if self.is_need() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NEED").unwrap();
+            first = false;
+        }
+        if self.is_greed() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "GREED").unwrap();
+            first = false;
+        }
+        if self.is_disenchant() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DISENCHANT").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl RollFlags {
     pub const fn new(inner: u8) -> Self {
         Self { inner }

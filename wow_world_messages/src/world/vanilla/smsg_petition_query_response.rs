@@ -78,6 +78,64 @@ pub struct SMSG_PETITION_QUERY_RESPONSE {
     pub number_of_choices: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_PETITION_QUERY_RESPONSE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_PETITION_QUERY_RESPONSE {{").unwrap();
+        // Members
+        writeln!(s, "    petition_id = {};", self.petition_id).unwrap();
+        writeln!(s, "    charter_owner = {};", self.charter_owner.guid()).unwrap();
+        writeln!(s, "    guild_name = \"{}\";", self.guild_name).unwrap();
+        writeln!(s, "    body_text = \"{}\";", self.body_text).unwrap();
+        writeln!(s, "    unknown_flags = {};", self.unknown_flags).unwrap();
+        writeln!(s, "    minimum_signatures = {};", self.minimum_signatures).unwrap();
+        writeln!(s, "    maximum_signatures = {};", self.maximum_signatures).unwrap();
+        writeln!(s, "    deadline = {};", self.deadline).unwrap();
+        writeln!(s, "    issue_date = {};", self.issue_date).unwrap();
+        writeln!(s, "    allowed_guild_id = {};", self.allowed_guild_id).unwrap();
+        writeln!(s, "    allowed_class = {};", self.allowed_class.as_test_case_value()).unwrap();
+        writeln!(s, "    allowed_race = {};", self.allowed_race.as_test_case_value()).unwrap();
+        writeln!(s, "    allowed_genders = {};", self.allowed_genders).unwrap();
+        writeln!(s, "    allowed_minimum_level = {};", self.allowed_minimum_level.as_int()).unwrap();
+        writeln!(s, "    allowed_maximum_level = {};", self.allowed_maximum_level.as_int()).unwrap();
+        writeln!(s, "    todo_amount_of_signers = {};", self.todo_amount_of_signers).unwrap();
+        writeln!(s, "    number_of_choices = {};", self.number_of_choices).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 455_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "petition_id");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_PETITION_QUERY_RESPONSE {}
 impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
     const OPCODE: u32 = 0x01c7;

@@ -17,6 +17,48 @@ pub struct MSG_QUERY_NEXT_MAIL_TIME_Server {
     pub unread_mails: f32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_QUERY_NEXT_MAIL_TIME_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test MSG_QUERY_NEXT_MAIL_TIME_Server {{").unwrap();
+        // Members
+        writeln!(s, "    {}", if self.unread_mails.to_string().contains(".") { self.unread_mails.to_string() } else { format!("{}.0", self.unread_mails) }).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 8_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 644_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unread_mails");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for MSG_QUERY_NEXT_MAIL_TIME_Server {}
 impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
     const OPCODE: u32 = 0x0284;

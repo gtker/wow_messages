@@ -22,6 +22,17 @@ impl PetQueryDisabledNames {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl PetQueryDisabledNames {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Present => "PRESENT",
+            Self::NotPresent => "NOT_PRESENT",
+        }
+    }
+
+}
+
 impl Default for PetQueryDisabledNames {
     fn default() -> Self {
         Self::Present

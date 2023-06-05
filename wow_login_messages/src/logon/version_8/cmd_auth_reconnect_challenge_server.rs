@@ -20,6 +20,63 @@ pub struct CMD_AUTH_RECONNECT_CHALLENGE_Server {
     pub result: CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMD_AUTH_RECONNECT_CHALLENGE_Server {{").unwrap();
+        // Members
+        writeln!(s, "    result = {};", crate::logon::version_8::LoginResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.result {
+            crate::logon::version_8::CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
+                challenge_data,
+                checksum_salt,
+            } => {
+                write!(s, "    challenge_data = [").unwrap();
+                for v in challenge_data.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+                write!(s, "    checksum_salt = [").unwrap();
+                for v in checksum_salt.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "result");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    login_versions = \"8\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8

@@ -31,6 +31,81 @@ pub struct SMSG_CAST_RESULT {
     pub result: SMSG_CAST_RESULT_SimpleSpellCastResult,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_CAST_RESULT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_CAST_RESULT {{").unwrap();
+        // Members
+        writeln!(s, "    spell = {};", self.spell).unwrap();
+        writeln!(s, "    result = {};", crate::vanilla::SimpleSpellCastResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.result {
+            crate::vanilla::SMSG_CAST_RESULT_SimpleSpellCastResult::Success {
+                reason,
+            } => {
+                writeln!(s, "    reason = {};", crate::vanilla::CastFailureReason::try_from(reason.as_int()).unwrap().as_test_case_value()).unwrap();
+                match &reason {
+                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::EquippedItemClass {
+                        equipped_item_class,
+                        equipped_item_inventory_type_mask,
+                        equipped_item_subclass_mask,
+                    } => {
+                        writeln!(s, "    equipped_item_class = {};", equipped_item_class).unwrap();
+                        writeln!(s, "    equipped_item_subclass_mask = {};", equipped_item_subclass_mask).unwrap();
+                        writeln!(s, "    equipped_item_inventory_type_mask = {};", equipped_item_inventory_type_mask).unwrap();
+                    }
+                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::RequiresArea {
+                        area,
+                    } => {
+                        writeln!(s, "    area = {};", area.as_test_case_value()).unwrap();
+                    }
+                    crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::RequiresSpellFocus {
+                        required_spell_focus,
+                    } => {
+                        writeln!(s, "    required_spell_focus = {};", required_spell_focus).unwrap();
+                    }
+                    _ => {}
+                }
+
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 304_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "spell");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_CAST_RESULT {}
 impl crate::Message for SMSG_CAST_RESULT {
     const OPCODE: u32 = 0x0130;

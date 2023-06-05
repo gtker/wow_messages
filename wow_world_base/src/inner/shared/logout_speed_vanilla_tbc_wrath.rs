@@ -22,6 +22,17 @@ impl LogoutSpeed {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl LogoutSpeed {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Delayed => "DELAYED",
+            Self::Instant => "INSTANT",
+        }
+    }
+
+}
+
 impl Default for LogoutSpeed {
     fn default() -> Self {
         Self::Delayed

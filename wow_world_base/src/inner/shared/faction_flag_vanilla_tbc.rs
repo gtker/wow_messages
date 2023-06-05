@@ -16,6 +16,72 @@ pub struct FactionFlag {
     inner: u8,
 }
 
+#[cfg(feature = "print-testcase")]
+impl FactionFlag {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_visible() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "VISIBLE").unwrap();
+            first = false;
+        }
+        if self.is_at_war() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "AT_WAR").unwrap();
+            first = false;
+        }
+        if self.is_hidden() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "HIDDEN").unwrap();
+            first = false;
+        }
+        if self.is_invisible_forced() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "INVISIBLE_FORCED").unwrap();
+            first = false;
+        }
+        if self.is_peace_forced() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PEACE_FORCED").unwrap();
+            first = false;
+        }
+        if self.is_inactive() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "INACTIVE").unwrap();
+            first = false;
+        }
+        if self.is_rival() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "RIVAL").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl FactionFlag {
     pub const fn new(inner: u8) -> Self {
         Self { inner }

@@ -103,6 +103,44 @@ impl InventoryType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl InventoryType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NonEquip => "NON_EQUIP",
+            Self::Head => "HEAD",
+            Self::Neck => "NECK",
+            Self::Shoulders => "SHOULDERS",
+            Self::Body => "BODY",
+            Self::Chest => "CHEST",
+            Self::Waist => "WAIST",
+            Self::Legs => "LEGS",
+            Self::Feet => "FEET",
+            Self::Wrists => "WRISTS",
+            Self::Hands => "HANDS",
+            Self::Finger => "FINGER",
+            Self::Trinket => "TRINKET",
+            Self::Weapon => "WEAPON",
+            Self::Shield => "SHIELD",
+            Self::Ranged => "RANGED",
+            Self::Cloak => "CLOAK",
+            Self::TwoHandedWeapon => "TWO_HANDED_WEAPON",
+            Self::Bag => "BAG",
+            Self::Tabard => "TABARD",
+            Self::Robe => "ROBE",
+            Self::WeaponMainHand => "WEAPON_MAIN_HAND",
+            Self::WeaponOffHand => "WEAPON_OFF_HAND",
+            Self::Holdable => "HOLDABLE",
+            Self::Ammo => "AMMO",
+            Self::Thrown => "THROWN",
+            Self::RangedRight => "RANGED_RIGHT",
+            Self::Quiver => "QUIVER",
+            Self::Relic => "RELIC",
+        }
+    }
+
+}
+
 impl Default for InventoryType {
     fn default() -> Self {
         Self::NonEquip

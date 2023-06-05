@@ -22,6 +22,17 @@ impl CalendarStatusTime {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CalendarStatusTime {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NotPresent => "NOT_PRESENT",
+            Self::Present => "PRESENT",
+        }
+    }
+
+}
+
 impl Default for CalendarStatusTime {
     fn default() -> Self {
         Self::NotPresent

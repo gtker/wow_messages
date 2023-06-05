@@ -13,6 +13,49 @@ pub struct CMSG_SET_ACTIVE_VOICE_CHANNEL {
     pub unknown2: String,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_SET_ACTIVE_VOICE_CHANNEL {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_SET_ACTIVE_VOICE_CHANNEL {{").unwrap();
+        // Members
+        writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
+        writeln!(s, "    unknown2 = \"{}\";", self.unknown2).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 979_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "unknown1");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_SET_ACTIVE_VOICE_CHANNEL {}
 impl crate::Message for CMSG_SET_ACTIVE_VOICE_CHANNEL {
     const OPCODE: u32 = 0x03d3;

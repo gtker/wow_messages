@@ -121,6 +121,50 @@ impl ChatType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ChatType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Say => "SAY",
+            Self::Party => "PARTY",
+            Self::Raid => "RAID",
+            Self::Guild => "GUILD",
+            Self::Officer => "OFFICER",
+            Self::Yell => "YELL",
+            Self::Whisper => "WHISPER",
+            Self::WhisperInform => "WHISPER_INFORM",
+            Self::Emote => "EMOTE",
+            Self::TextEmote => "TEXT_EMOTE",
+            Self::System => "SYSTEM",
+            Self::MonsterSay => "MONSTER_SAY",
+            Self::MonsterYell => "MONSTER_YELL",
+            Self::MonsterEmote => "MONSTER_EMOTE",
+            Self::Channel => "CHANNEL",
+            Self::ChannelJoin => "CHANNEL_JOIN",
+            Self::ChannelLeave => "CHANNEL_LEAVE",
+            Self::ChannelList => "CHANNEL_LIST",
+            Self::ChannelNotice => "CHANNEL_NOTICE",
+            Self::ChannelNoticeUser => "CHANNEL_NOTICE_USER",
+            Self::Afk => "AFK",
+            Self::Dnd => "DND",
+            Self::Ignored => "IGNORED",
+            Self::Skill => "SKILL",
+            Self::Loot => "LOOT",
+            Self::MonsterWhisper => "MONSTER_WHISPER",
+            Self::BgSystemNeutral => "BG_SYSTEM_NEUTRAL",
+            Self::BgSystemAlliance => "BG_SYSTEM_ALLIANCE",
+            Self::BgSystemHorde => "BG_SYSTEM_HORDE",
+            Self::RaidLeader => "RAID_LEADER",
+            Self::RaidWarning => "RAID_WARNING",
+            Self::RaidBossWhisper => "RAID_BOSS_WHISPER",
+            Self::RaidBossEmote => "RAID_BOSS_EMOTE",
+            Self::Battleground => "BATTLEGROUND",
+            Self::BattlegroundLeader => "BATTLEGROUND_LEADER",
+        }
+    }
+
+}
+
 impl Default for ChatType {
     fn default() -> Self {
         Self::Say

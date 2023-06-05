@@ -28,6 +28,19 @@ impl ArenaTeamCommand {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ArenaTeamCommand {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::TeamCreateS => "TEAM_CREATE_S",
+            Self::TeamInviteSs => "TEAM_INVITE_SS",
+            Self::TeamQuitS => "TEAM_QUIT_S",
+            Self::TeamFounderS => "TEAM_FOUNDER_S",
+        }
+    }
+
+}
+
 impl Default for ArenaTeamCommand {
     fn default() -> Self {
         Self::TeamCreateS

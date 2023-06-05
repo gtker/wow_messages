@@ -17,6 +17,50 @@ pub struct SMSG_ITEM_NAME_QUERY_RESPONSE {
     pub inventory_type: InventoryType,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_ITEM_NAME_QUERY_RESPONSE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_ITEM_NAME_QUERY_RESPONSE {{").unwrap();
+        // Members
+        writeln!(s, "    item = {};", self.item).unwrap();
+        writeln!(s, "    item_name = \"{}\";", self.item_name).unwrap();
+        writeln!(s, "    inventory_type = {};", self.inventory_type.as_test_case_value()).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 709_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "item");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_ITEM_NAME_QUERY_RESPONSE {}
 impl crate::Message for SMSG_ITEM_NAME_QUERY_RESPONSE {
     const OPCODE: u32 = 0x02c5;

@@ -24,6 +24,18 @@ impl Platform {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl Platform {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::X86 => "X86",
+            Self::PowerPc => "POWER_PC",
+            Self::Other(_) => "OTHER",
+        }
+    }
+
+}
+
 impl Default for Platform {
     fn default() -> Self {
         Self::X86

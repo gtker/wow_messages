@@ -39,6 +39,69 @@ pub struct CMSG_AUCTION_LIST_ITEMS {
     pub sorted_auctions: Vec<AuctionSort>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_AUCTION_LIST_ITEMS {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_AUCTION_LIST_ITEMS {{").unwrap();
+        // Members
+        writeln!(s, "    auctioneer = {};", self.auctioneer.guid()).unwrap();
+        writeln!(s, "    list_start_item = {};", self.list_start_item).unwrap();
+        writeln!(s, "    searched_name = \"{}\";", self.searched_name).unwrap();
+        writeln!(s, "    minimum_level = {};", self.minimum_level).unwrap();
+        writeln!(s, "    maximum_level = {};", self.maximum_level).unwrap();
+        writeln!(s, "    auction_slot_id = {};", self.auction_slot_id).unwrap();
+        writeln!(s, "    auction_main_category = {};", self.auction_main_category).unwrap();
+        writeln!(s, "    auction_sub_category = {};", self.auction_sub_category).unwrap();
+        writeln!(s, "    auction_quality = {};", self.auction_quality.as_test_case_value()).unwrap();
+        writeln!(s, "    usable = {};", self.usable).unwrap();
+        writeln!(s, "    is_full = {};", self.is_full).unwrap();
+        writeln!(s, "    amount_of_sorted_auctions = {};", self.sorted_auctions.len()).unwrap();
+        write!(s, "    sorted_auctions = [").unwrap();
+        for v in self.sorted_auctions.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    column = {};", v.column).unwrap();
+            writeln!(s, "    reversed = {};", v.reversed).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 600_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "auctioneer");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_AUCTION_LIST_ITEMS {}
 impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
     const OPCODE: u32 = 0x0258;

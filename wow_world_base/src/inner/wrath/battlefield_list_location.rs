@@ -26,6 +26,17 @@ impl BattlefieldListLocation {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl BattlefieldListLocation {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Battlemaster => "BATTLEMASTER",
+            Self::Ui => "UI",
+        }
+    }
+
+}
+
 impl Default for BattlefieldListLocation {
     fn default() -> Self {
         Self::Battlemaster

@@ -29,6 +29,52 @@ pub struct CMSG_BATTLEFIELD_PORT {
     pub action: BattlefieldPortAction,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_BATTLEFIELD_PORT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_BATTLEFIELD_PORT {{").unwrap();
+        // Members
+        writeln!(s, "    arena_type = {};", self.arena_type).unwrap();
+        writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
+        writeln!(s, "    bg_type_id = {};", self.bg_type_id).unwrap();
+        writeln!(s, "    unknown2 = {};", self.unknown2).unwrap();
+        writeln!(s, "    action = {};", self.action.as_test_case_value()).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 15_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 725_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "arena_type");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_BATTLEFIELD_PORT {}
 impl crate::Message for CMSG_BATTLEFIELD_PORT {
     const OPCODE: u32 = 0x02d5;

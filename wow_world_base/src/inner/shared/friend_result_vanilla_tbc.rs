@@ -97,6 +97,42 @@ impl FriendResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl FriendResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::DbError => "DB_ERROR",
+            Self::ListFull => "LIST_FULL",
+            Self::Online => "ONLINE",
+            Self::Offline => "OFFLINE",
+            Self::NotFound => "NOT_FOUND",
+            Self::Removed => "REMOVED",
+            Self::AddedOnline => "ADDED_ONLINE",
+            Self::AddedOffline => "ADDED_OFFLINE",
+            Self::Already => "ALREADY",
+            Self::SelfX => "SELF",
+            Self::Enemy => "ENEMY",
+            Self::IgnoreFull => "IGNORE_FULL",
+            Self::IgnoreSelf => "IGNORE_SELF",
+            Self::IgnoreNotFound => "IGNORE_NOT_FOUND",
+            Self::IgnoreAlready => "IGNORE_ALREADY",
+            Self::IgnoreAdded => "IGNORE_ADDED",
+            Self::IgnoreRemoved => "IGNORE_REMOVED",
+            Self::IgnoreAmbiguous => "IGNORE_AMBIGUOUS",
+            Self::MuteFull => "MUTE_FULL",
+            Self::MuteSelf => "MUTE_SELF",
+            Self::MuteNotFound => "MUTE_NOT_FOUND",
+            Self::MuteAlready => "MUTE_ALREADY",
+            Self::MuteAdded => "MUTE_ADDED",
+            Self::MuteRemoved => "MUTE_REMOVED",
+            Self::MuteAmbiguous => "MUTE_AMBIGUOUS",
+            Self::Unknown19 => "UNKNOWN19",
+            Self::Unknown20 => "UNKNOWN20",
+        }
+    }
+
+}
+
 impl Default for FriendResult {
     fn default() -> Self {
         Self::DbError

@@ -23,6 +23,53 @@ pub struct SMSG_START_MIRROR_TIMER {
     pub id: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_START_MIRROR_TIMER {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_START_MIRROR_TIMER {{").unwrap();
+        // Members
+        writeln!(s, "    timer = {};", self.timer.as_test_case_value()).unwrap();
+        writeln!(s, "    time_remaining = {};", self.time_remaining).unwrap();
+        writeln!(s, "    duration = {};", self.duration).unwrap();
+        writeln!(s, "    scale = {};", self.scale).unwrap();
+        writeln!(s, "    is_frozen = {};", if self.is_frozen { "TRUE" } else { "FALSE" }).unwrap();
+        writeln!(s, "    id = {};", self.id).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 25_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 473_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "timer");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_START_MIRROR_TIMER {}
 impl crate::Message for SMSG_START_MIRROR_TIMER {
     const OPCODE: u32 = 0x01d9;

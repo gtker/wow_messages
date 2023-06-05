@@ -61,6 +61,24 @@ impl AuctionCommandResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl AuctionCommandResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Ok => "OK",
+            Self::ErrInventory => "ERR_INVENTORY",
+            Self::ErrDatabase => "ERR_DATABASE",
+            Self::ErrNotEnoughMoney => "ERR_NOT_ENOUGH_MONEY",
+            Self::ErrItemNotFound => "ERR_ITEM_NOT_FOUND",
+            Self::ErrHigherBid => "ERR_HIGHER_BID",
+            Self::ErrBidIncrement => "ERR_BID_INCREMENT",
+            Self::ErrBidOwn => "ERR_BID_OWN",
+            Self::ErrRestrictedAccount => "ERR_RESTRICTED_ACCOUNT",
+        }
+    }
+
+}
+
 impl Default for AuctionCommandResult {
     fn default() -> Self {
         Self::Ok

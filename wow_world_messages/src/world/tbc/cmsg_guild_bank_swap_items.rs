@@ -49,6 +49,110 @@ pub struct CMSG_GUILD_BANK_SWAP_ITEMS {
     pub unknown5: Vec<u8>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_GUILD_BANK_SWAP_ITEMS {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_GUILD_BANK_SWAP_ITEMS {{").unwrap();
+        // Members
+        writeln!(s, "    bank = {};", self.bank.guid()).unwrap();
+        writeln!(s, "    source = {};", crate::tbc::BankSwapSource::try_from(self.source.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.source {
+            crate::tbc::CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource::Inventory {
+                bank_slot,
+                bank_tab,
+                item2,
+                mode,
+            } => {
+                writeln!(s, "    bank_tab = {};", bank_tab).unwrap();
+                writeln!(s, "    bank_slot = {};", bank_slot).unwrap();
+                writeln!(s, "    item2 = {};", item2).unwrap();
+                writeln!(s, "    mode = {};", crate::tbc::BankSwapStoreMode::try_from(mode.as_int()).unwrap().as_test_case_value()).unwrap();
+                match &mode {
+                    crate::tbc::CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode::Manual {
+                        bank_to_character_transfer,
+                        player_bag,
+                        player_bag_slot,
+                        split_amount,
+                    } => {
+                        writeln!(s, "    player_bag = {};", player_bag).unwrap();
+                        writeln!(s, "    player_bag_slot = {};", player_bag_slot).unwrap();
+                        writeln!(s, "    bank_to_character_transfer = {};", if *bank_to_character_transfer { "TRUE" } else { "FALSE" }).unwrap();
+                        writeln!(s, "    split_amount = {};", split_amount).unwrap();
+                    }
+                    crate::tbc::CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode::Automatic {
+                        auto_count,
+                        unknown3,
+                        unknown4,
+                    } => {
+                        writeln!(s, "    auto_count = {};", auto_count).unwrap();
+                        writeln!(s, "    unknown3 = {};", unknown3).unwrap();
+                        writeln!(s, "    unknown4 = {};", unknown4).unwrap();
+                    }
+                }
+
+            }
+            crate::tbc::CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource::Bank {
+                amount,
+                bank_destination_slot,
+                bank_destination_tab,
+                bank_source_slot,
+                bank_source_tab,
+                item1,
+                unknown1,
+                unknown2,
+            } => {
+                writeln!(s, "    bank_destination_tab = {};", bank_destination_tab).unwrap();
+                writeln!(s, "    bank_destination_slot = {};", bank_destination_slot).unwrap();
+                writeln!(s, "    unknown1 = {};", unknown1).unwrap();
+                writeln!(s, "    bank_source_tab = {};", bank_source_tab).unwrap();
+                writeln!(s, "    bank_source_slot = {};", bank_source_slot).unwrap();
+                writeln!(s, "    item1 = {};", item1).unwrap();
+                writeln!(s, "    unknown2 = {};", unknown2).unwrap();
+                writeln!(s, "    amount = {};", amount).unwrap();
+            }
+        }
+
+        write!(s, "    unknown5 = [").unwrap();
+        for v in self.unknown5.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 1000_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "bank");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_GUILD_BANK_SWAP_ITEMS {}
 impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
     const OPCODE: u32 = 0x03e8;

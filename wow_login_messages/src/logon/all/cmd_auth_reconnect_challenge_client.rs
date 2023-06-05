@@ -59,6 +59,59 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMD_AUTH_RECONNECT_CHALLENGE_Client {{").unwrap();
+        // Members
+        writeln!(s, "    protocol_version = {};", self.protocol_version.as_test_case_value()).unwrap();
+        // version: Version
+        writeln!(s, "    version = {{").unwrap();
+        // Members
+        writeln!(s, "    major = {};", self.version.major).unwrap();
+        writeln!(s, "    minor = {};", self.version.minor).unwrap();
+        writeln!(s, "    patch = {};", self.version.patch).unwrap();
+        writeln!(s, "    build = {};", self.version.build).unwrap();
+
+        writeln!(s, "    }};").unwrap();
+        writeln!(s, "    platform = {};", self.platform.as_test_case_value()).unwrap();
+        writeln!(s, "    os = {};", self.os.as_test_case_value()).unwrap();
+        writeln!(s, "    locale = {};", self.locale.as_test_case_value()).unwrap();
+        writeln!(s, "    utc_timezone_offset = {};", self.utc_timezone_offset).unwrap();
+        writeln!(s, "    client_ip_address = {:#08X};", u32::from_be_bytes(self.client_ip_address.octets())).unwrap();
+        writeln!(s, "    account_name = \"{}\";", self.account_name).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "protocol_version");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    login_versions = \"*\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8

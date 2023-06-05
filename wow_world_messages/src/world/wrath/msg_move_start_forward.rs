@@ -16,6 +16,14 @@ pub struct MSG_MOVE_START_FORWARD {
     pub info: MovementInfo,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_MOVE_START_FORWARD {
+    pub fn to_test_case_string(&self) -> String {
+        panic!("MSG types not supported");
+    }
+
+}
+
 impl crate::private::Sealed for MSG_MOVE_START_FORWARD {}
 impl crate::Message for MSG_MOVE_START_FORWARD {
     const OPCODE: u32 = 0x00b5;

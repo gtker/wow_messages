@@ -13,6 +13,56 @@ pub struct SMSG_LFG_UPDATE_LFG {
     pub data: [LfgData; 3],
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_LFG_UPDATE_LFG {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_LFG_UPDATE_LFG {{").unwrap();
+        // Members
+        write!(s, "    data = [").unwrap();
+        for v in self.data.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    entry = {};", v.entry).unwrap();
+            writeln!(s, "    lfg_type = {};", v.lfg_type.as_test_case_value()).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 16_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 878_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_LFG_UPDATE_LFG {}
 impl crate::Message for SMSG_LFG_UPDATE_LFG {
     const OPCODE: u32 = 0x036e;

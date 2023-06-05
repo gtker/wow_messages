@@ -40,6 +40,23 @@ impl ObjectType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ObjectType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Object => "OBJECT",
+            Self::Item => "ITEM",
+            Self::Container => "CONTAINER",
+            Self::Unit => "UNIT",
+            Self::Player => "PLAYER",
+            Self::GameObject => "GAME_OBJECT",
+            Self::DynamicObject => "DYNAMIC_OBJECT",
+            Self::Corpse => "CORPSE",
+        }
+    }
+
+}
+
 impl Default for ObjectType {
     fn default() -> Self {
         Self::Object

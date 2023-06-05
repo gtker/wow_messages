@@ -34,6 +34,21 @@ impl LfgType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl LfgType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::Dungeon => "DUNGEON",
+            Self::Raid => "RAID",
+            Self::Zone => "ZONE",
+            Self::Heroic => "HEROIC",
+            Self::Random => "RANDOM",
+        }
+    }
+
+}
+
 impl Default for LfgType {
     fn default() -> Self {
         Self::None

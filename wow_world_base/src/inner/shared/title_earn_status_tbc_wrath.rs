@@ -22,6 +22,17 @@ impl TitleEarnStatus {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl TitleEarnStatus {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Lost => "LOST",
+            Self::Earned => "EARNED",
+        }
+    }
+
+}
+
 impl Default for TitleEarnStatus {
     fn default() -> Self {
         Self::Lost

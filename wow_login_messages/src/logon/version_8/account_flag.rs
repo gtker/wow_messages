@@ -13,6 +13,40 @@ pub struct AccountFlag {
     inner: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl AccountFlag {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_gm() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "GM").unwrap();
+            first = false;
+        }
+        if self.is_trial() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "TRIAL").unwrap();
+            first = false;
+        }
+        if self.is_propass() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PROPASS").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl AccountFlag {
     pub const fn new(inner: u32) -> Self {
         Self { inner }

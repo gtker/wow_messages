@@ -57,6 +57,90 @@ pub struct SMSG_BATTLEFIELD_STATUS {
     pub status_id: SMSG_BATTLEFIELD_STATUS_StatusId,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_BATTLEFIELD_STATUS {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_BATTLEFIELD_STATUS {{").unwrap();
+        // Members
+        writeln!(s, "    queue_slot = {};", self.queue_slot).unwrap();
+        writeln!(s, "    arena_type = {};", self.arena_type.as_test_case_value()).unwrap();
+        writeln!(s, "    is_arena = {};", self.is_arena).unwrap();
+        writeln!(s, "    battleground_type = {};", self.battleground_type.as_test_case_value()).unwrap();
+        writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
+        writeln!(s, "    minimum_level = {};", self.minimum_level).unwrap();
+        writeln!(s, "    maximum_level = {};", self.maximum_level).unwrap();
+        writeln!(s, "    client_instance_id = {};", self.client_instance_id).unwrap();
+        writeln!(s, "    rated = {};", if self.rated { "TRUE" } else { "FALSE" }).unwrap();
+        writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(self.status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.status_id {
+            crate::wrath::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
+                average_wait_time_in_ms,
+                time_in_queue_in_ms,
+            } => {
+                writeln!(s, "    average_wait_time_in_ms = {};", average_wait_time_in_ms).unwrap();
+                writeln!(s, "    time_in_queue_in_ms = {};", time_in_queue_in_ms).unwrap();
+            }
+            crate::wrath::SMSG_BATTLEFIELD_STATUS_StatusId::WaitJoin {
+                map1,
+                time_to_remove_in_queue_in_ms,
+                unknown2,
+            } => {
+                writeln!(s, "    map1 = {};", map1.as_test_case_value()).unwrap();
+                writeln!(s, "    unknown2 = {};", unknown2).unwrap();
+                writeln!(s, "    time_to_remove_in_queue_in_ms = {};", time_to_remove_in_queue_in_ms).unwrap();
+            }
+            crate::wrath::SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
+                faction,
+                map2,
+                time_to_bg_autoleave_in_ms,
+                time_to_bg_start_in_ms,
+                unknown3,
+            } => {
+                writeln!(s, "    map2 = {};", map2.as_test_case_value()).unwrap();
+                writeln!(s, "    unknown3 = {};", unknown3).unwrap();
+                writeln!(s, "    time_to_bg_autoleave_in_ms = {};", time_to_bg_autoleave_in_ms).unwrap();
+                writeln!(s, "    time_to_bg_start_in_ms = {};", time_to_bg_start_in_ms).unwrap();
+                writeln!(s, "    faction = {};", faction.as_test_case_value()).unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 724_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "queue_slot");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_BATTLEFIELD_STATUS {}
 impl crate::Message for SMSG_BATTLEFIELD_STATUS {
     const OPCODE: u32 = 0x02d4;

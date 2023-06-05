@@ -65,6 +65,148 @@ pub struct SMSG_CAST_FAILED {
     pub multiple_casts: bool,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_CAST_FAILED {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_CAST_FAILED {{").unwrap();
+        // Members
+        writeln!(s, "    cast_count = {};", self.cast_count).unwrap();
+        writeln!(s, "    id = {};", self.id).unwrap();
+        writeln!(s, "    result = {};", crate::wrath::SpellCastResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    multiple_casts = {};", if self.multiple_casts { "TRUE" } else { "FALSE" }).unwrap();
+        match &self.result {
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::EquippedItemClass {
+                item_class,
+                item_sub_class,
+            } => {
+                writeln!(s, "    item_class = {};", item_class).unwrap();
+                writeln!(s, "    item_sub_class = {};", item_sub_class).unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::EquippedItemClassMainhand {
+                item_class,
+                item_sub_class,
+            } => {
+                writeln!(s, "    item_class = {};", item_class).unwrap();
+                writeln!(s, "    item_sub_class = {};", item_sub_class).unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::EquippedItemClassOffhand {
+                item_class,
+                item_sub_class,
+            } => {
+                writeln!(s, "    item_class = {};", item_class).unwrap();
+                writeln!(s, "    item_sub_class = {};", item_sub_class).unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::NeedExoticAmmo {
+                equipped_item_sub_class,
+            } => {
+                writeln!(s, "    equipped_item_sub_class = {};", equipped_item_sub_class).unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::NeedMoreItems {
+                count,
+                item,
+            } => {
+                writeln!(s, "    item = {};", item).unwrap();
+                writeln!(s, "    count = {};", count).unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::Reagents {
+                missing_item,
+            } => {
+                writeln!(s, "    missing_item = {};", missing_item).unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::RequiresArea {
+                area,
+            } => {
+                writeln!(s, "    area = {};", area.as_test_case_value()).unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::RequiresSpellFocus {
+                spell_focus,
+            } => {
+                writeln!(s, "    spell_focus = {};", spell_focus).unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::TooManyOfItem {
+                item_limit_category,
+            } => {
+                writeln!(s, "    item_limit_category = {};", item_limit_category).unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::TotemCategory {
+                totem_categories,
+            } => {
+                write!(s, "    totem_categories = [").unwrap();
+                for v in totem_categories.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::Totems {
+                totems,
+            } => {
+                write!(s, "    totems = [").unwrap();
+                for v in totems.as_slice() {
+                    write!(s, "{v:#04X}, ").unwrap();
+                }
+                writeln!(s, "];").unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::PreventedByMechanic {
+                mechanic,
+            } => {
+                writeln!(s, "    mechanic = {};", mechanic).unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::MinSkill {
+                skill,
+                skill_required,
+            } => {
+                writeln!(s, "    skill = {};", skill.as_test_case_value()).unwrap();
+                writeln!(s, "    skill_required = {};", skill_required).unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::CustomError {
+                custom_error,
+            } => {
+                writeln!(s, "    custom_error = {};", custom_error).unwrap();
+            }
+            crate::wrath::SMSG_CAST_FAILED_SpellCastResult::FishingTooLow {
+                fishing_skill_required,
+            } => {
+                writeln!(s, "    fishing_skill_required = {};", fishing_skill_required).unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 304_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "cast_count");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_CAST_FAILED {}
 impl crate::Message for SMSG_CAST_FAILED {
     const OPCODE: u32 = 0x0130;

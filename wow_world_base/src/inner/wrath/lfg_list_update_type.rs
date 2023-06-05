@@ -22,6 +22,17 @@ impl LfgListUpdateType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl LfgListUpdateType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Partial => "PARTIAL",
+            Self::Full => "FULL",
+        }
+    }
+
+}
+
 impl Default for LfgListUpdateType {
     fn default() -> Self {
         Self::Partial

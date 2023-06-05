@@ -52,6 +52,27 @@ impl TransferAbortReason {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl TransferAbortReason {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::IsFull => "IS_FULL",
+            Self::NotFound => "NOT_FOUND",
+            Self::TooManyInstances => "TOO_MANY_INSTANCES",
+            Self::ZoneIsInCombat => "ZONE_IS_IN_COMBAT",
+            Self::InsufficientExpansionLevel => "INSUFFICIENT_EXPANSION_LEVEL",
+            Self::DifficultyNotAvailable => "DIFFICULTY_NOT_AVAILABLE",
+            Self::MissingDifficulty => "MISSING_DIFFICULTY",
+            Self::ZoneInCombat => "ZONE_IN_COMBAT",
+            Self::InstanceIsFull => "INSTANCE_IS_FULL",
+            Self::NotAllowed => "NOT_ALLOWED",
+            Self::HasBind => "HAS_BIND",
+        }
+    }
+
+}
+
 impl Default for TransferAbortReason {
     fn default() -> Self {
         Self::None

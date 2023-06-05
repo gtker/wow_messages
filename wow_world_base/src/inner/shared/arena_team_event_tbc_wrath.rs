@@ -46,6 +46,21 @@ impl ArenaTeamEvent {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ArenaTeamEvent {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Join => "JOIN",
+            Self::Leave => "LEAVE",
+            Self::Remove => "REMOVE",
+            Self::LeaderIs => "LEADER_IS",
+            Self::LeaderChanged => "LEADER_CHANGED",
+            Self::Disbanded => "DISBANDED",
+        }
+    }
+
+}
+
 impl Default for ArenaTeamEvent {
     fn default() -> Self {
         Self::Join

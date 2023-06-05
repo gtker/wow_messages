@@ -32,6 +32,69 @@ pub struct CMSG_AUTH_SESSION {
     pub addon_info: Vec<AddonInfo>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_AUTH_SESSION {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_AUTH_SESSION {{").unwrap();
+        // Members
+        writeln!(s, "    build = {};", self.build).unwrap();
+        writeln!(s, "    server_id = {};", self.server_id).unwrap();
+        writeln!(s, "    username = \"{}\";", self.username).unwrap();
+        writeln!(s, "    client_seed = {};", self.client_seed).unwrap();
+        write!(s, "    client_proof = [").unwrap();
+        for v in self.client_proof.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        writeln!(s, "    decompressed_addon_info_size = {};", self.decompressed_addon_info_size).unwrap();
+        write!(s, "    addon_info = [").unwrap();
+        for v in self.addon_info.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    addon_name = \"{}\";", v.addon_name).unwrap();
+            writeln!(s, "    addon_has_signature = {};", v.addon_has_signature).unwrap();
+            writeln!(s, "    addon_crc = {};", v.addon_crc).unwrap();
+            writeln!(s, "    addon_extra_crc = {};", v.addon_extra_crc).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 493_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "build");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_AUTH_SESSION {}
 impl crate::Message for CMSG_AUTH_SESSION {
     const OPCODE: u32 = 0x01ed;

@@ -35,6 +35,69 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
     pub blocked_amount: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_ATTACKERSTATEUPDATE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_ATTACKERSTATEUPDATE {{").unwrap();
+        // Members
+        writeln!(s, "    hit_info = {};", self.hit_info.as_test_case_value()).unwrap();
+        writeln!(s, "    attacker = {};", self.attacker.guid()).unwrap();
+        writeln!(s, "    target = {};", self.target.guid()).unwrap();
+        writeln!(s, "    total_damage = {};", self.total_damage).unwrap();
+        writeln!(s, "    amount_of_damages = {};", self.damages.len()).unwrap();
+        write!(s, "    damages = [").unwrap();
+        for v in self.damages.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    spell_school_mask = {};", v.spell_school_mask).unwrap();
+            writeln!(s, "    {}", if v.damage_float.to_string().contains(".") { v.damage_float.to_string() } else { format!("{}.0", v.damage_float) }).unwrap();
+            writeln!(s, "    damage_uint = {};", v.damage_uint).unwrap();
+            writeln!(s, "    absorb = {};", v.absorb).unwrap();
+            writeln!(s, "    resist = {};", v.resist).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        writeln!(s, "    damage_state = {};", self.damage_state).unwrap();
+        writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
+        writeln!(s, "    spell_id = {};", self.spell_id).unwrap();
+        writeln!(s, "    blocked_amount = {};", self.blocked_amount).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 330_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "hit_info");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_ATTACKERSTATEUPDATE {}
 impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
     const OPCODE: u32 = 0x014a;

@@ -22,6 +22,17 @@ impl RaidTargetUpdateType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl RaidTargetUpdateType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Partial => "PARTIAL",
+            Self::Full => "FULL",
+        }
+    }
+
+}
+
 impl Default for RaidTargetUpdateType {
     fn default() -> Self {
         Self::Partial

@@ -61,6 +61,98 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
     pub unknown2: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_ATTACKERSTATEUPDATE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_ATTACKERSTATEUPDATE {{").unwrap();
+        // Members
+        writeln!(s, "    hit_info = {};", crate::wrath::HitInfo::new(self.hit_info.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "    attacker = {};", self.attacker.guid()).unwrap();
+        writeln!(s, "    target = {};", self.target.guid()).unwrap();
+        writeln!(s, "    total_damage = {};", self.total_damage).unwrap();
+        writeln!(s, "    overkill = {};", self.overkill).unwrap();
+        writeln!(s, "    amount_of_damages = {};", self.damage_infos.len()).unwrap();
+        write!(s, "    damage_infos = [").unwrap();
+        for v in self.damage_infos.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    spell_school_mask = {};", v.spell_school_mask).unwrap();
+            writeln!(s, "    {}", if v.damage_float.to_string().contains(".") { v.damage_float.to_string() } else { format!("{}.0", v.damage_float) }).unwrap();
+            writeln!(s, "    damage_uint = {};", v.damage_uint).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        if let Some(if_statement) = &self.hit_info.get_all_absorb() {
+            writeln!(s, "    absorb = {};", if_statement.absorb).unwrap();
+        }
+
+        if let Some(if_statement) = &self.hit_info.get_all_resist() {
+            writeln!(s, "    resist = {};", if_statement.resist).unwrap();
+        }
+
+        writeln!(s, "    victim_state = {};", self.victim_state.as_test_case_value()).unwrap();
+        writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
+        writeln!(s, "    unknown2 = {};", self.unknown2).unwrap();
+        if let Some(if_statement) = &self.hit_info.get_block() {
+            writeln!(s, "    blocked_amount = {};", if_statement.blocked_amount).unwrap();
+        }
+
+        if let Some(if_statement) = &self.hit_info.get_unk19() {
+            writeln!(s, "    unknown3 = {};", if_statement.unknown3).unwrap();
+        }
+
+        if let Some(if_statement) = &self.hit_info.get_unk1() {
+            writeln!(s, "    unknown4 = {};", if_statement.unknown4).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown5.to_string().contains(".") { if_statement.unknown5.to_string() } else { format!("{}.0", if_statement.unknown5) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown6.to_string().contains(".") { if_statement.unknown6.to_string() } else { format!("{}.0", if_statement.unknown6) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown7.to_string().contains(".") { if_statement.unknown7.to_string() } else { format!("{}.0", if_statement.unknown7) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown8.to_string().contains(".") { if_statement.unknown8.to_string() } else { format!("{}.0", if_statement.unknown8) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown9.to_string().contains(".") { if_statement.unknown9.to_string() } else { format!("{}.0", if_statement.unknown9) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown10.to_string().contains(".") { if_statement.unknown10.to_string() } else { format!("{}.0", if_statement.unknown10) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown11.to_string().contains(".") { if_statement.unknown11.to_string() } else { format!("{}.0", if_statement.unknown11) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown12.to_string().contains(".") { if_statement.unknown12.to_string() } else { format!("{}.0", if_statement.unknown12) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown13.to_string().contains(".") { if_statement.unknown13.to_string() } else { format!("{}.0", if_statement.unknown13) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown14.to_string().contains(".") { if_statement.unknown14.to_string() } else { format!("{}.0", if_statement.unknown14) }).unwrap();
+            writeln!(s, "    unknown15 = {};", if_statement.unknown15).unwrap();
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 330_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "hit_info");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_ATTACKERSTATEUPDATE {}
 impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
     const OPCODE: u32 = 0x014a;

@@ -14,6 +14,56 @@ pub struct RelationType {
     inner: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl RelationType {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NONE").unwrap();
+            first = false;
+        }
+        if self.is_friend() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "FRIEND").unwrap();
+            first = false;
+        }
+        if self.is_ignored() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "IGNORED").unwrap();
+            first = false;
+        }
+        if self.is_muted() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "MUTED").unwrap();
+            first = false;
+        }
+        if self.is_recruitafriend() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "RECRUITAFRIEND").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl RelationType {
     pub const fn new(inner: u32) -> Self {
         Self { inner }

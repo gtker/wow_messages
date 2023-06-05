@@ -22,6 +22,17 @@ impl UrlInfo {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl UrlInfo {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Unavailable => "UNAVAILABLE",
+            Self::Available => "AVAILABLE",
+        }
+    }
+
+}
+
 impl Default for UrlInfo {
     fn default() -> Self {
         Self::Unavailable

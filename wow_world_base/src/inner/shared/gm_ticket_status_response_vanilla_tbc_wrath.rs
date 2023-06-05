@@ -25,6 +25,18 @@ impl GmTicketStatusResponse {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl GmTicketStatusResponse {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Updated => "UPDATED",
+            Self::Closed => "CLOSED",
+            Self::Survey => "SURVEY",
+        }
+    }
+
+}
+
 impl Default for GmTicketStatusResponse {
     fn default() -> Self {
         Self::Updated

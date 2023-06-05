@@ -55,6 +55,28 @@ impl PetNameInvalidReason {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl PetNameInvalidReason {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Invalid => "INVALID",
+            Self::NoName => "NO_NAME",
+            Self::TooShort => "TOO_SHORT",
+            Self::TooLong => "TOO_LONG",
+            Self::MixedLanguages => "MIXED_LANGUAGES",
+            Self::Profane => "PROFANE",
+            Self::Reserved => "RESERVED",
+            Self::ThreeConsecutive => "THREE_CONSECUTIVE",
+            Self::InvalidSpace => "INVALID_SPACE",
+            Self::ConsecutiveSpaces => "CONSECUTIVE_SPACES",
+            Self::RussianConsecutiveSilentCharacters => "RUSSIAN_CONSECUTIVE_SILENT_CHARACTERS",
+            Self::RussianSilentCharacterAtBeginningOrEnd => "RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END",
+            Self::DeclensionDoesntMatchBaseName => "DECLENSION_DOESNT_MATCH_BASE_NAME",
+        }
+    }
+
+}
+
 impl Default for PetNameInvalidReason {
     fn default() -> Self {
         Self::Invalid

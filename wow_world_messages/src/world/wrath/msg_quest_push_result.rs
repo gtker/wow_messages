@@ -16,6 +16,14 @@ pub struct MSG_QUEST_PUSH_RESULT {
     pub message: QuestPartyMessage,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_QUEST_PUSH_RESULT {
+    pub fn to_test_case_string(&self) -> String {
+        panic!("MSG types not supported");
+    }
+
+}
+
 impl crate::private::Sealed for MSG_QUEST_PUSH_RESULT {}
 impl crate::Message for MSG_QUEST_PUSH_RESULT {
     const OPCODE: u32 = 0x0276;

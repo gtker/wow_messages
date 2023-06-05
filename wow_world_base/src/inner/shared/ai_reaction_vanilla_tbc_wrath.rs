@@ -41,6 +41,20 @@ impl AiReaction {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl AiReaction {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Alert => "ALERT",
+            Self::Friendly => "FRIENDLY",
+            Self::Hostile => "HOSTILE",
+            Self::Afraid => "AFRAID",
+            Self::Destroy => "DESTROY",
+        }
+    }
+
+}
+
 impl Default for AiReaction {
     fn default() -> Self {
         Self::Alert

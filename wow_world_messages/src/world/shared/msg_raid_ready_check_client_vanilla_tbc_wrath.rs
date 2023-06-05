@@ -13,6 +13,49 @@ pub struct MSG_RAID_READY_CHECK_Client {
     pub answer: Option<MSG_RAID_READY_CHECK_Client_answer>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_RAID_READY_CHECK_Client {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test MSG_RAID_READY_CHECK_Client {{").unwrap();
+        // Members
+        if let Some(answer) = &self.answer {
+            writeln!(s, "    state = {};", answer.state).unwrap();
+        }
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 802_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for MSG_RAID_READY_CHECK_Client {}
 impl crate::Message for MSG_RAID_READY_CHECK_Client {
     const OPCODE: u32 = 0x0322;

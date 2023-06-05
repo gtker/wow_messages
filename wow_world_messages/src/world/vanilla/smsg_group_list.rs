@@ -31,6 +31,68 @@ pub struct SMSG_GROUP_LIST {
     pub group_not_empty: Option<SMSG_GROUP_LIST_group_not_empty>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_GROUP_LIST {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_GROUP_LIST {{").unwrap();
+        // Members
+        writeln!(s, "    group_type = {};", self.group_type.as_test_case_value()).unwrap();
+        writeln!(s, "    flags = {};", self.flags).unwrap();
+        writeln!(s, "    amount_of_members = {};", self.members.len()).unwrap();
+        write!(s, "    members = [").unwrap();
+        for v in self.members.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    name = \"{}\";", v.name).unwrap();
+            writeln!(s, "    guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "    is_online = {};", if v.is_online { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "    flags = {};", v.flags).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        writeln!(s, "    leader = {};", self.leader.guid()).unwrap();
+        if let Some(group_not_empty) = &self.group_not_empty {
+            writeln!(s, "    loot_setting = {};", group_not_empty.loot_setting.as_test_case_value()).unwrap();
+            writeln!(s, "    master_loot = {};", group_not_empty.master_loot.guid()).unwrap();
+            writeln!(s, "    loot_threshold = {};", group_not_empty.loot_threshold.as_test_case_value()).unwrap();
+        }
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 125_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "group_type");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_GROUP_LIST {}
 impl crate::Message for SMSG_GROUP_LIST {
     const OPCODE: u32 = 0x007d;

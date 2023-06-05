@@ -35,6 +35,59 @@ pub struct SMSG_LEVELUP_INFO {
     pub spirit: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_LEVELUP_INFO {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_LEVELUP_INFO {{").unwrap();
+        // Members
+        writeln!(s, "    new_level = {};", self.new_level.as_int()).unwrap();
+        writeln!(s, "    health = {};", self.health).unwrap();
+        writeln!(s, "    mana = {};", self.mana).unwrap();
+        writeln!(s, "    rage = {};", self.rage).unwrap();
+        writeln!(s, "    focus = {};", self.focus).unwrap();
+        writeln!(s, "    energy = {};", self.energy).unwrap();
+        writeln!(s, "    happiness = {};", self.happiness).unwrap();
+        writeln!(s, "    strength = {};", self.strength).unwrap();
+        writeln!(s, "    agility = {};", self.agility).unwrap();
+        writeln!(s, "    stamina = {};", self.stamina).unwrap();
+        writeln!(s, "    intellect = {};", self.intellect).unwrap();
+        writeln!(s, "    spirit = {};", self.spirit).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 52_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 468_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "new_level");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_LEVELUP_INFO {}
 impl crate::Message for SMSG_LEVELUP_INFO {
     const OPCODE: u32 = 0x01d4;

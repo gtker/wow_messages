@@ -61,6 +61,28 @@ impl PetTameFailureReason {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl PetTameFailureReason {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::InvalidCreature => "INVALID_CREATURE",
+            Self::TooMany => "TOO_MANY",
+            Self::CreatureAlreadyOwned => "CREATURE_ALREADY_OWNED",
+            Self::NotTameable => "NOT_TAMEABLE",
+            Self::AnotherSummonActive => "ANOTHER_SUMMON_ACTIVE",
+            Self::UnitsCantTame => "UNITS_CANT_TAME",
+            Self::NoPetAvailable => "NO_PET_AVAILABLE",
+            Self::InternaLerror => "INTERNA_LERROR",
+            Self::TooHighLevel => "TOO_HIGH_LEVEL",
+            Self::Dead => "DEAD",
+            Self::NotDead => "NOT_DEAD",
+            Self::CantControlExotic => "CANT_CONTROL_EXOTIC",
+            Self::UnknownError => "UNKNOWN_ERROR",
+        }
+    }
+
+}
+
 impl Default for PetTameFailureReason {
     fn default() -> Self {
         Self::InvalidCreature

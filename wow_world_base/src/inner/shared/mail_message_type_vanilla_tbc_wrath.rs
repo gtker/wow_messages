@@ -37,6 +37,20 @@ impl MailMessageType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl MailMessageType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Normal => "NORMAL",
+            Self::Auction => "AUCTION",
+            Self::Creature => "CREATURE",
+            Self::Gameobject => "GAMEOBJECT",
+            Self::Item => "ITEM",
+        }
+    }
+
+}
+
 impl Default for MailMessageType {
     fn default() -> Self {
         Self::Normal

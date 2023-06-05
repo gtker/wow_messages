@@ -68,6 +68,29 @@ impl BgTypeId {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl BgTypeId {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NotEligible => "NOT_ELIGIBLE",
+            Self::QueuedForAv => "QUEUED_FOR_AV",
+            Self::QueuedForWsg => "QUEUED_FOR_WSG",
+            Self::QueuedForAb => "QUEUED_FOR_AB",
+            Self::QueuedForNetherstorm => "QUEUED_FOR_NETHERSTORM",
+            Self::QueuedForBladesEdgeArena => "QUEUED_FOR_BLADES_EDGE_ARENA",
+            Self::QueuedForArena => "QUEUED_FOR_ARENA",
+            Self::QueuedForEyeOfTheStorm => "QUEUED_FOR_EYE_OF_THE_STORM",
+            Self::QueuedForRuinsOfLordaeron => "QUEUED_FOR_RUINS_OF_LORDAERON",
+            Self::QueuedForStrandOfTheAncient => "QUEUED_FOR_STRAND_OF_THE_ANCIENT",
+            Self::QueuedForDalaranSewers => "QUEUED_FOR_DALARAN_SEWERS",
+            Self::QueuedForRingOfValor => "QUEUED_FOR_RING_OF_VALOR",
+            Self::QueuedForIsleOfConquest => "QUEUED_FOR_ISLE_OF_CONQUEST",
+            Self::RemoveFromQueue => "REMOVE_FROM_QUEUE",
+        }
+    }
+
+}
+
 impl Default for BgTypeId {
     fn default() -> Self {
         Self::NotEligible

@@ -93,6 +93,160 @@ pub struct SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     pub found: Option<SMSG_ITEM_QUERY_SINGLE_RESPONSE_found>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_ITEM_QUERY_SINGLE_RESPONSE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_ITEM_QUERY_SINGLE_RESPONSE {{").unwrap();
+        // Members
+        writeln!(s, "    item = {};", self.item).unwrap();
+        if let Some(found) = &self.found {
+            writeln!(s, "    class_and_sub_class = {};", found.class_and_sub_class.as_test_case_value()).unwrap();
+            writeln!(s, "    sound_override_sub_class = {};", found.sound_override_sub_class).unwrap();
+            writeln!(s, "    name1 = \"{}\";", found.name1).unwrap();
+            writeln!(s, "    name2 = \"{}\";", found.name2).unwrap();
+            writeln!(s, "    name3 = \"{}\";", found.name3).unwrap();
+            writeln!(s, "    name4 = \"{}\";", found.name4).unwrap();
+            writeln!(s, "    display_id = {};", found.display_id).unwrap();
+            writeln!(s, "    quality = {};", found.quality.as_test_case_value()).unwrap();
+            writeln!(s, "    flags = {};", found.flags.as_test_case_value()).unwrap();
+            writeln!(s, "    flags2 = {};", found.flags2.as_test_case_value()).unwrap();
+            writeln!(s, "    buy_price = {};", found.buy_price.as_int()).unwrap();
+            writeln!(s, "    sell_price = {};", found.sell_price.as_int()).unwrap();
+            writeln!(s, "    inventory_type = {};", found.inventory_type.as_test_case_value()).unwrap();
+            writeln!(s, "    allowed_class = {};", found.allowed_class.as_test_case_value()).unwrap();
+            writeln!(s, "    allowed_race = {};", found.allowed_race.as_test_case_value()).unwrap();
+            writeln!(s, "    item_level = {};", found.item_level).unwrap();
+            writeln!(s, "    required_level = {};", found.required_level.as_int()).unwrap();
+            writeln!(s, "    required_skill = {};", found.required_skill.as_test_case_value()).unwrap();
+            writeln!(s, "    required_skill_rank = {};", found.required_skill_rank).unwrap();
+            writeln!(s, "    required_spell = {};", found.required_spell).unwrap();
+            writeln!(s, "    required_honor_rank = {};", found.required_honor_rank).unwrap();
+            writeln!(s, "    required_city_rank = {};", found.required_city_rank).unwrap();
+            writeln!(s, "    required_faction = {};", found.required_faction.as_test_case_value()).unwrap();
+            writeln!(s, "    required_faction_rank = {};", found.required_faction_rank).unwrap();
+            writeln!(s, "    max_count = {};", found.max_count).unwrap();
+            writeln!(s, "    stackable = {};", found.stackable).unwrap();
+            writeln!(s, "    container_slots = {};", found.container_slots).unwrap();
+            writeln!(s, "    amount_of_stats = {};", found.stats.len()).unwrap();
+            write!(s, "    stats = [").unwrap();
+            for v in found.stats.as_slice() {
+                writeln!(s, "{{").unwrap();
+                // Members
+                writeln!(s, "    stat_type = {};", v.stat_type).unwrap();
+                writeln!(s, "    value = {};", v.value).unwrap();
+
+                writeln!(s, "    }},").unwrap();
+            }
+            writeln!(s, "];").unwrap();
+            writeln!(s, "    scaling_stats_entry = {};", found.scaling_stats_entry).unwrap();
+            writeln!(s, "    scaling_stats_flag = {};", found.scaling_stats_flag).unwrap();
+            write!(s, "    damages = [").unwrap();
+            for v in found.damages.as_slice() {
+                writeln!(s, "{{").unwrap();
+                // Members
+                writeln!(s, "    {}", if v.damage_minimum.to_string().contains(".") { v.damage_minimum.to_string() } else { format!("{}.0", v.damage_minimum) }).unwrap();
+                writeln!(s, "    {}", if v.damage_maximum.to_string().contains(".") { v.damage_maximum.to_string() } else { format!("{}.0", v.damage_maximum) }).unwrap();
+                writeln!(s, "    school = {};", v.school.as_test_case_value()).unwrap();
+
+                writeln!(s, "    }},").unwrap();
+            }
+            writeln!(s, "];").unwrap();
+            writeln!(s, "    armor = {};", found.armor).unwrap();
+            writeln!(s, "    holy_resistance = {};", found.holy_resistance).unwrap();
+            writeln!(s, "    fire_resistance = {};", found.fire_resistance).unwrap();
+            writeln!(s, "    nature_resistance = {};", found.nature_resistance).unwrap();
+            writeln!(s, "    frost_resistance = {};", found.frost_resistance).unwrap();
+            writeln!(s, "    shadow_resistance = {};", found.shadow_resistance).unwrap();
+            writeln!(s, "    arcane_resistance = {};", found.arcane_resistance).unwrap();
+            writeln!(s, "    delay = {};", found.delay).unwrap();
+            writeln!(s, "    ammo_type = {};", found.ammo_type).unwrap();
+            writeln!(s, "    {}", if found.ranged_range_modification.to_string().contains(".") { found.ranged_range_modification.to_string() } else { format!("{}.0", found.ranged_range_modification) }).unwrap();
+            write!(s, "    spells = [").unwrap();
+            for v in found.spells.as_slice() {
+                writeln!(s, "{{").unwrap();
+                // Members
+                writeln!(s, "    spell = {};", v.spell).unwrap();
+                writeln!(s, "    spell_trigger = {};", v.spell_trigger.as_test_case_value()).unwrap();
+                writeln!(s, "    spell_charges = {};", v.spell_charges).unwrap();
+                writeln!(s, "    spell_cooldown = {};", v.spell_cooldown).unwrap();
+                writeln!(s, "    spell_category = {};", v.spell_category).unwrap();
+                writeln!(s, "    spell_category_cooldown = {};", v.spell_category_cooldown).unwrap();
+
+                writeln!(s, "    }},").unwrap();
+            }
+            writeln!(s, "];").unwrap();
+            writeln!(s, "    bonding = {};", found.bonding.as_test_case_value()).unwrap();
+            writeln!(s, "    description = \"{}\";", found.description).unwrap();
+            writeln!(s, "    page_text = {};", found.page_text).unwrap();
+            writeln!(s, "    language = {};", found.language.as_test_case_value()).unwrap();
+            writeln!(s, "    page_text_material = {};", found.page_text_material.as_test_case_value()).unwrap();
+            writeln!(s, "    start_quest = {};", found.start_quest).unwrap();
+            writeln!(s, "    lock_id = {};", found.lock_id).unwrap();
+            writeln!(s, "    material = {};", found.material).unwrap();
+            writeln!(s, "    sheathe_type = {};", found.sheathe_type.as_test_case_value()).unwrap();
+            writeln!(s, "    random_property = {};", found.random_property).unwrap();
+            writeln!(s, "    random_suffix = {};", found.random_suffix).unwrap();
+            writeln!(s, "    block = {};", found.block).unwrap();
+            writeln!(s, "    item_set = {};", found.item_set.as_test_case_value()).unwrap();
+            writeln!(s, "    max_durability = {};", found.max_durability).unwrap();
+            writeln!(s, "    area = {};", found.area.as_test_case_value()).unwrap();
+            writeln!(s, "    map = {};", found.map.as_test_case_value()).unwrap();
+            writeln!(s, "    bag_family = {};", found.bag_family.as_test_case_value()).unwrap();
+            writeln!(s, "    totem_category = {};", found.totem_category).unwrap();
+            write!(s, "    sockets = [").unwrap();
+            for v in found.sockets.as_slice() {
+                writeln!(s, "{{").unwrap();
+                // Members
+                writeln!(s, "    color = {};", v.color).unwrap();
+                writeln!(s, "    content = {};", v.content).unwrap();
+
+                writeln!(s, "    }},").unwrap();
+            }
+            writeln!(s, "];").unwrap();
+            writeln!(s, "    socket_bonus = {};", found.socket_bonus).unwrap();
+            writeln!(s, "    gem_properties = {};", found.gem_properties).unwrap();
+            writeln!(s, "    required_disenchant_skill = {};", found.required_disenchant_skill).unwrap();
+            writeln!(s, "    {}", if found.armor_damage_modifier.to_string().contains(".") { found.armor_damage_modifier.to_string() } else { format!("{}.0", found.armor_damage_modifier) }).unwrap();
+            writeln!(s, "    duration = {};", found.duration.as_secs()).unwrap();
+            writeln!(s, "    item_limit_category = {};", found.item_limit_category).unwrap();
+            writeln!(s, "    holiday_id = {};", found.holiday_id).unwrap();
+        }
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 88_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "item");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_ITEM_QUERY_SINGLE_RESPONSE {}
 impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
     const OPCODE: u32 = 0x0058;

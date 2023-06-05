@@ -13,6 +13,49 @@ pub struct MSG_MINIMAP_PING_Client {
     pub position_y: f32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_MINIMAP_PING_Client {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test MSG_MINIMAP_PING_Client {{").unwrap();
+        // Members
+        writeln!(s, "    {}", if self.position_x.to_string().contains(".") { self.position_x.to_string() } else { format!("{}.0", self.position_x) }).unwrap();
+        writeln!(s, "    {}", if self.position_y.to_string().contains(".") { self.position_y.to_string() } else { format!("{}.0", self.position_y) }).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 14_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 469_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "position_x");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for MSG_MINIMAP_PING_Client {}
 impl crate::Message for MSG_MINIMAP_PING_Client {
     const OPCODE: u32 = 0x01d5;

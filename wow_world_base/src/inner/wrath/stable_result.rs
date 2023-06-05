@@ -46,6 +46,21 @@ impl StableResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl StableResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::ErrMoney => "ERR_MONEY",
+            Self::ErrStable => "ERR_STABLE",
+            Self::SuccessStable => "SUCCESS_STABLE",
+            Self::SuccessUnstable => "SUCCESS_UNSTABLE",
+            Self::SuccessBuySlot => "SUCCESS_BUY_SLOT",
+            Self::ErrExotic => "ERR_EXOTIC",
+        }
+    }
+
+}
+
 impl Default for StableResult {
     fn default() -> Self {
         Self::ErrMoney

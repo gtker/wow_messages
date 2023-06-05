@@ -50,6 +50,63 @@ pub struct MSG_INSPECT_HONOR_STATS_Server {
     pub rank_progress_bar: u8,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_INSPECT_HONOR_STATS_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test MSG_INSPECT_HONOR_STATS_Server {{").unwrap();
+        // Members
+        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
+        writeln!(s, "    highest_rank = {};", self.highest_rank.as_test_case_value()).unwrap();
+        writeln!(s, "    today_honorable_and_dishonorable = {};", self.today_honorable_and_dishonorable).unwrap();
+        writeln!(s, "    yesterday_honorable = {};", self.yesterday_honorable).unwrap();
+        writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
+        writeln!(s, "    last_week_honorable = {};", self.last_week_honorable).unwrap();
+        writeln!(s, "    unknown2 = {};", self.unknown2).unwrap();
+        writeln!(s, "    this_week_honorable = {};", self.this_week_honorable).unwrap();
+        writeln!(s, "    unknown3 = {};", self.unknown3).unwrap();
+        writeln!(s, "    lifetime_honorable = {};", self.lifetime_honorable).unwrap();
+        writeln!(s, "    lifetime_dishonorable = {};", self.lifetime_dishonorable).unwrap();
+        writeln!(s, "    yesterday_honor = {};", self.yesterday_honor).unwrap();
+        writeln!(s, "    last_week_honor = {};", self.last_week_honor).unwrap();
+        writeln!(s, "    this_week_honor = {};", self.this_week_honor).unwrap();
+        writeln!(s, "    last_week_standing = {};", self.last_week_standing.as_test_case_value()).unwrap();
+        writeln!(s, "    rank_progress_bar = {};", self.rank_progress_bar).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 54_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 726_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for MSG_INSPECT_HONOR_STATS_Server {}
 impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
     const OPCODE: u32 = 0x02d6;

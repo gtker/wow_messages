@@ -47,6 +47,21 @@ impl Power {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl Power {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Mana => "MANA",
+            Self::Rage => "RAGE",
+            Self::Focus => "FOCUS",
+            Self::Energy => "ENERGY",
+            Self::Happiness => "HAPPINESS",
+            Self::Health => "HEALTH",
+        }
+    }
+
+}
+
 impl Default for Power {
     fn default() -> Self {
         Self::Mana

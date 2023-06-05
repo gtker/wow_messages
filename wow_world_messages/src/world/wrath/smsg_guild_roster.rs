@@ -23,6 +23,99 @@ pub struct SMSG_GUILD_ROSTER {
     pub members: Vec<GuildMember>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_GUILD_ROSTER {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_GUILD_ROSTER {{").unwrap();
+        // Members
+        writeln!(s, "    amount_of_members = {};", self.members.len()).unwrap();
+        writeln!(s, "    motd = \"{}\";", self.motd).unwrap();
+        writeln!(s, "    guild_info = \"{}\";", self.guild_info).unwrap();
+        writeln!(s, "    amount_of_rights = {};", self.rights.len()).unwrap();
+        write!(s, "    rights = [").unwrap();
+        for v in self.rights.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    rights = {};", v.rights).unwrap();
+            writeln!(s, "    money_per_day = {};", v.money_per_day.as_int()).unwrap();
+            write!(s, "    bank_tab_rights = [").unwrap();
+            for v in v.bank_tab_rights.as_slice() {
+                writeln!(s, "{{").unwrap();
+                // Members
+                writeln!(s, "    rights = {};", v.rights).unwrap();
+                writeln!(s, "    slots_per_day = {};", v.slots_per_day).unwrap();
+
+                writeln!(s, "    }},").unwrap();
+            }
+            writeln!(s, "];").unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        write!(s, "    members = [").unwrap();
+        for v in self.members.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    guid = {};", v.guid.guid()).unwrap();
+            writeln!(s, "    unknown = {};", v.unknown).unwrap();
+            writeln!(s, "    status = {};", crate::vanilla::GuildMemberStatus::try_from(v.status.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "    name = \"{}\";", v.name).unwrap();
+            writeln!(s, "    rank = {};", v.rank).unwrap();
+            writeln!(s, "    level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "    class = {};", v.class.as_test_case_value()).unwrap();
+            writeln!(s, "    gender = {};", v.gender.as_test_case_value()).unwrap();
+            writeln!(s, "    area = {};", v.area.as_test_case_value()).unwrap();
+            match &v.status {
+                crate::wrath::GuildMember_GuildMemberStatus::Offline {
+                    time_offline,
+                } => {
+                    writeln!(s, "    {}", if time_offline.to_string().contains(".") { time_offline.to_string() } else { format!("{}.0", time_offline) }).unwrap();
+                }
+                _ => {}
+            }
+
+            writeln!(s, "    public_note = \"{}\";", v.public_note).unwrap();
+            writeln!(s, "    officer_note = \"{}\";", v.officer_note).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 138_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "amount_of_members");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_GUILD_ROSTER {}
 impl crate::Message for SMSG_GUILD_ROSTER {
     const OPCODE: u32 = 0x008a;

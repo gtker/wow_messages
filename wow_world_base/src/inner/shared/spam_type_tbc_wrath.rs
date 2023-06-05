@@ -22,6 +22,17 @@ impl SpamType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl SpamType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Mail => "MAIL",
+            Self::Chat => "CHAT",
+        }
+    }
+
+}
+
 impl Default for SpamType {
     fn default() -> Self {
         Self::Mail

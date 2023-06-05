@@ -36,6 +36,21 @@ impl LfgTeleportError {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl LfgTeleportError {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::PlayerDead => "PLAYER_DEAD",
+            Self::Falling => "FALLING",
+            Self::InVehicle => "IN_VEHICLE",
+            Self::Fatigue => "FATIGUE",
+            Self::InvalidLocation => "INVALID_LOCATION",
+            Self::Combat => "COMBAT",
+        }
+    }
+
+}
+
 impl Default for LfgTeleportError {
     fn default() -> Self {
         Self::PlayerDead

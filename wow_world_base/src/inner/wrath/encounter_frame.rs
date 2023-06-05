@@ -42,6 +42,23 @@ impl EncounterFrame {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl EncounterFrame {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Engage => "ENGAGE",
+            Self::Disengage => "DISENGAGE",
+            Self::UpdatePriority => "UPDATE_PRIORITY",
+            Self::AddTimer => "ADD_TIMER",
+            Self::EnableObjective => "ENABLE_OBJECTIVE",
+            Self::UpdateObjective => "UPDATE_OBJECTIVE",
+            Self::DisableObjective => "DISABLE_OBJECTIVE",
+            Self::RefreshFrames => "REFRESH_FRAMES",
+        }
+    }
+
+}
+
 impl Default for EncounterFrame {
     fn default() -> Self {
         Self::Engage

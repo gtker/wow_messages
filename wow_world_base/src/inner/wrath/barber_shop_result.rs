@@ -28,6 +28,19 @@ impl BarberShopResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl BarberShopResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Ok => "OK",
+            Self::NotEnoughMoney => "NOT_ENOUGH_MONEY",
+            Self::MustBeSeatedInBarberChair => "MUST_BE_SEATED_IN_BARBER_CHAIR",
+            Self::NotEnoughMoney2 => "NOT_ENOUGH_MONEY2",
+        }
+    }
+
+}
+
 impl Default for BarberShopResult {
     fn default() -> Self {
         Self::Ok

@@ -71,6 +71,26 @@ impl MountResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl MountResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::InvalidMountee => "INVALID_MOUNTEE",
+            Self::TooFarAway => "TOO_FAR_AWAY",
+            Self::AlreadyMounted => "ALREADY_MOUNTED",
+            Self::NotMountable => "NOT_MOUNTABLE",
+            Self::NotYourPet => "NOT_YOUR_PET",
+            Self::Other => "OTHER",
+            Self::Looting => "LOOTING",
+            Self::RaceCantMount => "RACE_CANT_MOUNT",
+            Self::Shapeshifted => "SHAPESHIFTED",
+            Self::ForcedDismount => "FORCED_DISMOUNT",
+            Self::Ok => "OK",
+        }
+    }
+
+}
+
 impl Default for MountResult {
     fn default() -> Self {
         Self::InvalidMountee

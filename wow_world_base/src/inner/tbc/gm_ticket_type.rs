@@ -127,6 +127,52 @@ impl GmTicketType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl GmTicketType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NotSet => "NOT_SET",
+            Self::Stuck => "STUCK",
+            Self::BehaviorHarassment => "BEHAVIOR_HARASSMENT",
+            Self::Guild => "GUILD",
+            Self::Item => "ITEM",
+            Self::Environmental => "ENVIRONMENTAL",
+            Self::NonQuestCreep => "NON_QUEST_CREEP",
+            Self::QuestQuestNpc => "QUEST_QUEST_NPC",
+            Self::Technical => "TECHNICAL",
+            Self::AccountBilling => "ACCOUNT_BILLING",
+            Self::Character => "CHARACTER",
+            Self::ArenaHonorItemIssues => "ARENA_HONOR_ITEM_ISSUES",
+            Self::ArenaHonorPointsIssues => "ARENA_HONOR_POINTS_ISSUES",
+            Self::BottingCheatingHacking => "BOTTING_CHEATING_HACKING",
+            Self::BugReport => "BUG_REPORT",
+            Self::CompromisedAccountIssue => "COMPROMISED_ACCOUNT_ISSUE",
+            Self::GameSuggestions => "GAME_SUGGESTIONS",
+            Self::GameplayQuestion => "GAMEPLAY_QUESTION",
+            Self::GuildBankIssue => "GUILD_BANK_ISSUE",
+            Self::GuildMasterIssue => "GUILD_MASTER_ISSUE",
+            Self::HarassmentScamReport => "HARASSMENT_SCAM_REPORT",
+            Self::InappropriateNameGuildArenaCharacterPet => "INAPPROPRIATE_NAME_GUILD_ARENA_CHARACTER_PET",
+            Self::KnownIssueFix => "KNOWN_ISSUE_FIX",
+            Self::LatencyLagReport => "LATENCY_LAG_REPORT",
+            Self::LootingIssueMistake => "LOOTING_ISSUE_MISTAKE",
+            Self::MailIssue => "MAIL_ISSUE",
+            Self::NonInGameRelatedInquiry => "NON_IN_GAME_RELATED_INQUIRY",
+            Self::ParentalControlsCais => "PARENTAL_CONTROLS_CAIS",
+            Self::Pcnc => "PCNC",
+            Self::Pct => "PCT",
+            Self::RestorationStatusFollowUp => "RESTORATION_STATUS_FOLLOW_UP",
+            Self::ServerInstanceIssues => "SERVER_INSTANCE_ISSUES",
+            Self::Spam => "SPAM",
+            Self::SuicideCase => "SUICIDE_CASE",
+            Self::SuspensionQuestions => "SUSPENSION_QUESTIONS",
+            Self::TechnicalSoundGraphicsIssue => "TECHNICAL_SOUND_GRAPHICS_ISSUE",
+            Self::UiIssue => "UI_ISSUE",
+        }
+    }
+
+}
+
 impl Default for GmTicketType {
     fn default() -> Self {
         Self::NotSet

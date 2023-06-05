@@ -22,6 +22,17 @@ impl SimpleSpellCastResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl SimpleSpellCastResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Success => "SUCCESS",
+            Self::Failure => "FAILURE",
+        }
+    }
+
+}
+
 impl Default for SimpleSpellCastResult {
     fn default() -> Self {
         Self::Success

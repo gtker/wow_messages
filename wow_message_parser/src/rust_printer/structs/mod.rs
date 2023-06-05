@@ -14,6 +14,7 @@ pub(crate) mod print_common_impls;
 mod print_new_types;
 mod print_optional;
 mod print_tests;
+mod test_case_string;
 
 pub(crate) fn print_struct(e: &Container, o: &Objects) -> Writer {
     let mut s = Writer::new();

@@ -29,6 +29,95 @@ pub struct SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
     pub frame: SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {{").unwrap();
+        // Members
+        writeln!(s, "    frame = {};", crate::wrath::EncounterFrame::try_from(self.frame.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.frame {
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::Engage {
+                guid,
+                parameter1,
+            } => {
+                writeln!(s, "    guid = {};", guid.guid()).unwrap();
+                writeln!(s, "    parameter1 = {};", parameter1).unwrap();
+            }
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::Disengage {
+                guid,
+                parameter1,
+            } => {
+                writeln!(s, "    guid = {};", guid.guid()).unwrap();
+                writeln!(s, "    parameter1 = {};", parameter1).unwrap();
+            }
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::UpdatePriority {
+                guid,
+                parameter1,
+            } => {
+                writeln!(s, "    guid = {};", guid.guid()).unwrap();
+                writeln!(s, "    parameter1 = {};", parameter1).unwrap();
+            }
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::AddTimer {
+                parameter2,
+            } => {
+                writeln!(s, "    parameter2 = {};", parameter2).unwrap();
+            }
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::EnableObjective {
+                parameter2,
+            } => {
+                writeln!(s, "    parameter2 = {};", parameter2).unwrap();
+            }
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::UpdateObjective {
+                parameter3,
+                parameter4,
+            } => {
+                writeln!(s, "    parameter3 = {};", parameter3).unwrap();
+                writeln!(s, "    parameter4 = {};", parameter4).unwrap();
+            }
+            crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::DisableObjective {
+                parameter2,
+            } => {
+                writeln!(s, "    parameter2 = {};", parameter2).unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 532_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "frame");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {}
 impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
     const OPCODE: u32 = 0x0214;

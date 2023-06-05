@@ -27,6 +27,19 @@ impl Population {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl Population {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::GreenRecommended => "GREEN_RECOMMENDED",
+            Self::RedFull => "RED_FULL",
+            Self::BlueRecommended => "BLUE_RECOMMENDED",
+            Self::Other(_) => "OTHER",
+        }
+    }
+
+}
+
 impl Default for Population {
     fn default() -> Self {
         Self::GreenRecommended

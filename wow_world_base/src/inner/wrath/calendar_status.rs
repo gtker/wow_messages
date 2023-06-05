@@ -46,6 +46,25 @@ impl CalendarStatus {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CalendarStatus {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Invited => "INVITED",
+            Self::Accepted => "ACCEPTED",
+            Self::Declined => "DECLINED",
+            Self::Confirmed => "CONFIRMED",
+            Self::Out => "OUT",
+            Self::Standby => "STANDBY",
+            Self::SignedUp => "SIGNED_UP",
+            Self::NotSignedUp => "NOT_SIGNED_UP",
+            Self::Tentative => "TENTATIVE",
+            Self::Removed => "REMOVED",
+        }
+    }
+
+}
+
 impl Default for CalendarStatus {
     fn default() -> Self {
         Self::Invited

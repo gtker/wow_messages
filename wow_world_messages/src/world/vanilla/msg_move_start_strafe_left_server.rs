@@ -16,6 +16,98 @@ pub struct MSG_MOVE_START_STRAFE_LEFT_Server {
     pub info: MovementInfo,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_MOVE_START_STRAFE_LEFT_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test MSG_MOVE_START_STRAFE_LEFT_Server {{").unwrap();
+        // Members
+        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
+        // info: MovementInfo
+        writeln!(s, "    info = {{").unwrap();
+        // Members
+        writeln!(s, "    flags = {};", crate::vanilla::MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "    timestamp = {};", self.info.timestamp).unwrap();
+        // position: Vector3d
+        writeln!(s, "    position = {{").unwrap();
+        // Members
+        writeln!(s, "    {}", if self.info.position.x.to_string().contains(".") { self.info.position.x.to_string() } else { format!("{}.0", self.info.position.x) }).unwrap();
+        writeln!(s, "    {}", if self.info.position.y.to_string().contains(".") { self.info.position.y.to_string() } else { format!("{}.0", self.info.position.y) }).unwrap();
+        writeln!(s, "    {}", if self.info.position.z.to_string().contains(".") { self.info.position.z.to_string() } else { format!("{}.0", self.info.position.z) }).unwrap();
+
+        writeln!(s, "    }};").unwrap();
+        writeln!(s, "    {}", if self.info.orientation.to_string().contains(".") { self.info.orientation.to_string() } else { format!("{}.0", self.info.orientation) }).unwrap();
+        if let Some(if_statement) = &self.info.flags.get_on_transport() {
+            // transport: TransportInfo
+            writeln!(s, "    transport = {{").unwrap();
+            // Members
+            writeln!(s, "    guid = {};", if_statement.transport.guid.guid()).unwrap();
+            // position: Vector3d
+            writeln!(s, "    position = {{").unwrap();
+            // Members
+            writeln!(s, "    {}", if if_statement.transport.position.x.to_string().contains(".") { if_statement.transport.position.x.to_string() } else { format!("{}.0", if_statement.transport.position.x) }).unwrap();
+            writeln!(s, "    {}", if if_statement.transport.position.y.to_string().contains(".") { if_statement.transport.position.y.to_string() } else { format!("{}.0", if_statement.transport.position.y) }).unwrap();
+            writeln!(s, "    {}", if if_statement.transport.position.z.to_string().contains(".") { if_statement.transport.position.z.to_string() } else { format!("{}.0", if_statement.transport.position.z) }).unwrap();
+
+            writeln!(s, "    }};").unwrap();
+            writeln!(s, "    {}", if if_statement.transport.orientation.to_string().contains(".") { if_statement.transport.orientation.to_string() } else { format!("{}.0", if_statement.transport.orientation) }).unwrap();
+            writeln!(s, "    timestamp = {};", if_statement.transport.timestamp).unwrap();
+
+            writeln!(s, "    }};").unwrap();
+        }
+
+        if let Some(if_statement) = &self.info.flags.get_swimming() {
+            writeln!(s, "    {}", if if_statement.pitch.to_string().contains(".") { if_statement.pitch.to_string() } else { format!("{}.0", if_statement.pitch) }).unwrap();
+        }
+
+        writeln!(s, "    {}", if self.info.fall_time.to_string().contains(".") { self.info.fall_time.to_string() } else { format!("{}.0", self.info.fall_time) }).unwrap();
+        if let Some(if_statement) = &self.info.flags.get_jumping() {
+            writeln!(s, "    {}", if if_statement.z_speed.to_string().contains(".") { if_statement.z_speed.to_string() } else { format!("{}.0", if_statement.z_speed) }).unwrap();
+            writeln!(s, "    {}", if if_statement.cos_angle.to_string().contains(".") { if_statement.cos_angle.to_string() } else { format!("{}.0", if_statement.cos_angle) }).unwrap();
+            writeln!(s, "    {}", if if_statement.sin_angle.to_string().contains(".") { if_statement.sin_angle.to_string() } else { format!("{}.0", if_statement.sin_angle) }).unwrap();
+            writeln!(s, "    {}", if if_statement.xy_speed.to_string().contains(".") { if_statement.xy_speed.to_string() } else { format!("{}.0", if_statement.xy_speed) }).unwrap();
+        }
+
+        if let Some(if_statement) = &self.info.flags.get_spline_elevation() {
+            writeln!(s, "    {}", if if_statement.spline_elevation.to_string().contains(".") { if_statement.spline_elevation.to_string() } else { format!("{}.0", if_statement.spline_elevation) }).unwrap();
+        }
+
+
+        writeln!(s, "    }};").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 184_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for MSG_MOVE_START_STRAFE_LEFT_Server {}
 impl crate::Message for MSG_MOVE_START_STRAFE_LEFT_Server {
     const OPCODE: u32 = 0x00b8;

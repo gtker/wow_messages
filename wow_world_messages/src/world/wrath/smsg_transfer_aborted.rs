@@ -22,6 +22,68 @@ pub struct SMSG_TRANSFER_ABORTED {
     pub reason: SMSG_TRANSFER_ABORTED_TransferAbortReason,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_TRANSFER_ABORTED {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_TRANSFER_ABORTED {{").unwrap();
+        // Members
+        writeln!(s, "    map = {};", self.map.as_test_case_value()).unwrap();
+        writeln!(s, "    reason = {};", crate::wrath::TransferAbortReason::try_from(self.reason.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.reason {
+            crate::wrath::SMSG_TRANSFER_ABORTED_TransferAbortReason::InsufficientExpansionLevel {
+                difficulty,
+            } => {
+                writeln!(s, "    difficulty = {};", difficulty.as_test_case_value()).unwrap();
+            }
+            crate::wrath::SMSG_TRANSFER_ABORTED_TransferAbortReason::DifficultyNotAvailable {
+                difficulty,
+            } => {
+                writeln!(s, "    difficulty = {};", difficulty.as_test_case_value()).unwrap();
+            }
+            crate::wrath::SMSG_TRANSFER_ABORTED_TransferAbortReason::UniqueMessage {
+                difficulty,
+            } => {
+                writeln!(s, "    difficulty = {};", difficulty.as_test_case_value()).unwrap();
+            }
+            _ => {}
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 64_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "map");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_TRANSFER_ABORTED {}
 impl crate::Message for SMSG_TRANSFER_ABORTED {
     const OPCODE: u32 = 0x0040;

@@ -22,6 +22,17 @@ impl NewItemChatAlert {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl NewItemChatAlert {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::DoNotShow => "DO_NOT_SHOW",
+            Self::Show => "SHOW",
+        }
+    }
+
+}
+
 impl Default for NewItemChatAlert {
     fn default() -> Self {
         Self::DoNotShow

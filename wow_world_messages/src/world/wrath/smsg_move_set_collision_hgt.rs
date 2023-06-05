@@ -17,6 +17,49 @@ pub struct SMSG_MOVE_SET_COLLISION_HGT {
     pub collision_height: f32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_MOVE_SET_COLLISION_HGT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_MOVE_SET_COLLISION_HGT {{").unwrap();
+        // Members
+        writeln!(s, "    unit = {};", self.unit.guid()).unwrap();
+        writeln!(s, "    packet_counter = {};", self.packet_counter).unwrap();
+        writeln!(s, "    {}", if self.collision_height.to_string().contains(".") { self.collision_height.to_string() } else { format!("{}.0", self.collision_height) }).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 1302_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_MOVE_SET_COLLISION_HGT {}
 impl crate::Message for SMSG_MOVE_SET_COLLISION_HGT {
     const OPCODE: u32 = 0x0516;

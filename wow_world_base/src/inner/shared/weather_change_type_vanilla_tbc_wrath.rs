@@ -22,6 +22,17 @@ impl WeatherChangeType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl WeatherChangeType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Smooth => "SMOOTH",
+            Self::Instant => "INSTANT",
+        }
+    }
+
+}
+
 impl Default for WeatherChangeType {
     fn default() -> Self {
         Self::Smooth

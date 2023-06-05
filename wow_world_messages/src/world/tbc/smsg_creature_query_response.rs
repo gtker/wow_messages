@@ -34,6 +34,70 @@ pub struct SMSG_CREATURE_QUERY_RESPONSE {
     pub found: Option<SMSG_CREATURE_QUERY_RESPONSE_found>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_CREATURE_QUERY_RESPONSE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_CREATURE_QUERY_RESPONSE {{").unwrap();
+        // Members
+        writeln!(s, "    creature_entry = {};", self.creature_entry).unwrap();
+        if let Some(found) = &self.found {
+            writeln!(s, "    name1 = \"{}\";", found.name1).unwrap();
+            writeln!(s, "    name2 = \"{}\";", found.name2).unwrap();
+            writeln!(s, "    name3 = \"{}\";", found.name3).unwrap();
+            writeln!(s, "    name4 = \"{}\";", found.name4).unwrap();
+            writeln!(s, "    sub_name = \"{}\";", found.sub_name).unwrap();
+            writeln!(s, "    description = \"{}\";", found.description).unwrap();
+            writeln!(s, "    type_flags = {};", found.type_flags).unwrap();
+            writeln!(s, "    creature_type = {};", found.creature_type).unwrap();
+            writeln!(s, "    creature_family = {};", found.creature_family.as_test_case_value()).unwrap();
+            writeln!(s, "    creature_rank = {};", found.creature_rank).unwrap();
+            writeln!(s, "    unknown0 = {};", found.unknown0).unwrap();
+            writeln!(s, "    spell_data_id = {};", found.spell_data_id).unwrap();
+            write!(s, "    display_ids = [").unwrap();
+            for v in found.display_ids.as_slice() {
+                write!(s, "{v:#04X}, ").unwrap();
+            }
+            writeln!(s, "];").unwrap();
+            writeln!(s, "    {}", if found.health_multiplier.to_string().contains(".") { found.health_multiplier.to_string() } else { format!("{}.0", found.health_multiplier) }).unwrap();
+            writeln!(s, "    {}", if found.mana_multiplier.to_string().contains(".") { found.mana_multiplier.to_string() } else { format!("{}.0", found.mana_multiplier) }).unwrap();
+            writeln!(s, "    racial_leader = {};", found.racial_leader).unwrap();
+        }
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 97_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "creature_entry");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_CREATURE_QUERY_RESPONSE {}
 impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
     const OPCODE: u32 = 0x0061;

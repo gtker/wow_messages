@@ -52,6 +52,27 @@ impl PartyResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl PartyResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Success => "SUCCESS",
+            Self::BadPlayerName => "BAD_PLAYER_NAME",
+            Self::TargetNotInGroup => "TARGET_NOT_IN_GROUP",
+            Self::TargetNotInInstance => "TARGET_NOT_IN_INSTANCE",
+            Self::GroupFull => "GROUP_FULL",
+            Self::AlreadyInGroup => "ALREADY_IN_GROUP",
+            Self::NotInGroup => "NOT_IN_GROUP",
+            Self::NotLeader => "NOT_LEADER",
+            Self::PlayerWrongFaction => "PLAYER_WRONG_FACTION",
+            Self::IgnoringYou => "IGNORING_YOU",
+            Self::LfgPending => "LFG_PENDING",
+            Self::InviteRestricted => "INVITE_RESTRICTED",
+        }
+    }
+
+}
+
 impl Default for PartyResult {
     fn default() -> Self {
         Self::Success

@@ -22,6 +22,61 @@ pub struct CMSG_GUILD_RANK {
     pub bank_tab_rights: [GuildBankRights; 6],
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_GUILD_RANK {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_GUILD_RANK {{").unwrap();
+        // Members
+        writeln!(s, "    rank_id = {};", self.rank_id).unwrap();
+        writeln!(s, "    rights = {};", self.rights).unwrap();
+        writeln!(s, "    rank_name = \"{}\";", self.rank_name).unwrap();
+        writeln!(s, "    money_per_day = {};", self.money_per_day.as_int()).unwrap();
+        write!(s, "    bank_tab_rights = [").unwrap();
+        for v in self.bank_tab_rights.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    rights = {};", v.rights).unwrap();
+            writeln!(s, "    slots_per_day = {};", v.slots_per_day).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 561_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "rank_id");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_GUILD_RANK {}
 impl crate::Message for CMSG_GUILD_RANK {
     const OPCODE: u32 = 0x0231;

@@ -28,6 +28,19 @@ impl BuyBankSlotResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl BuyBankSlotResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::FailedTooMany => "FAILED_TOO_MANY",
+            Self::InsufficientFunds => "INSUFFICIENT_FUNDS",
+            Self::NotBanker => "NOT_BANKER",
+            Self::Ok => "OK",
+        }
+    }
+
+}
+
 impl Default for BuyBankSlotResult {
     fn default() -> Self {
         Self::FailedTooMany

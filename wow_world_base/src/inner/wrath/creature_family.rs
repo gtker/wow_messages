@@ -139,6 +139,56 @@ impl CreatureFamily {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CreatureFamily {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::Wolf => "WOLF",
+            Self::Cat => "CAT",
+            Self::Spider => "SPIDER",
+            Self::Bear => "BEAR",
+            Self::Boar => "BOAR",
+            Self::Crocolisk => "CROCOLISK",
+            Self::CarrionBird => "CARRION_BIRD",
+            Self::Crab => "CRAB",
+            Self::Gorilla => "GORILLA",
+            Self::Raptor => "RAPTOR",
+            Self::Tallstrider => "TALLSTRIDER",
+            Self::Felhunter => "FELHUNTER",
+            Self::Voidwalker => "VOIDWALKER",
+            Self::Succubus => "SUCCUBUS",
+            Self::Doomguard => "DOOMGUARD",
+            Self::Scorpid => "SCORPID",
+            Self::Turtle => "TURTLE",
+            Self::Imp => "IMP",
+            Self::Bat => "BAT",
+            Self::Hyena => "HYENA",
+            Self::BirdOfPrey => "BIRD_OF_PREY",
+            Self::WindSerpent => "WIND_SERPENT",
+            Self::RemoteControl => "REMOTE_CONTROL",
+            Self::Felguard => "FELGUARD",
+            Self::Dragonhawk => "DRAGONHAWK",
+            Self::Ravager => "RAVAGER",
+            Self::WarpStalker => "WARP_STALKER",
+            Self::Sporebat => "SPOREBAT",
+            Self::NetherRay => "NETHER_RAY",
+            Self::Serpent => "SERPENT",
+            Self::Moth => "MOTH",
+            Self::Chimaera => "CHIMAERA",
+            Self::Devilsaur => "DEVILSAUR",
+            Self::Ghoul => "GHOUL",
+            Self::Silithid => "SILITHID",
+            Self::Worm => "WORM",
+            Self::Rhino => "RHINO",
+            Self::Wasp => "WASP",
+            Self::CoreHound => "CORE_HOUND",
+            Self::SpiritBeast => "SPIRIT_BEAST",
+        }
+    }
+
+}
+
 impl Default for CreatureFamily {
     fn default() -> Self {
         Self::None

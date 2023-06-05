@@ -120,6 +120,149 @@ pub struct SMSG_QUEST_QUERY_RESPONSE {
     pub objective_texts: [String; 4],
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_QUEST_QUERY_RESPONSE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_QUEST_QUERY_RESPONSE {{").unwrap();
+        // Members
+        writeln!(s, "    quest_id = {};", self.quest_id).unwrap();
+        writeln!(s, "    quest_method = {};", self.quest_method).unwrap();
+        writeln!(s, "    quest_level = {};", self.quest_level.as_int()).unwrap();
+        writeln!(s, "    minimum_quest_level = {};", self.minimum_quest_level.as_int()).unwrap();
+        writeln!(s, "    zone_or_sort = {};", self.zone_or_sort).unwrap();
+        writeln!(s, "    quest_type = {};", self.quest_type).unwrap();
+        writeln!(s, "    suggest_player_amount = {};", self.suggest_player_amount).unwrap();
+        writeln!(s, "    reputation_objective_faction = {};", self.reputation_objective_faction.as_test_case_value()).unwrap();
+        writeln!(s, "    reputation_objective_value = {};", self.reputation_objective_value).unwrap();
+        writeln!(s, "    required_opposite_faction = {};", self.required_opposite_faction.as_test_case_value()).unwrap();
+        writeln!(s, "    required_opposite_reputation_value = {};", self.required_opposite_reputation_value).unwrap();
+        writeln!(s, "    next_quest_in_chain = {};", self.next_quest_in_chain).unwrap();
+        writeln!(s, "    money_reward = {};", self.money_reward.as_int()).unwrap();
+        writeln!(s, "    max_level_money_reward = {};", self.max_level_money_reward.as_int()).unwrap();
+        writeln!(s, "    reward_spell = {};", self.reward_spell).unwrap();
+        writeln!(s, "    casted_reward_spell = {};", self.casted_reward_spell).unwrap();
+        writeln!(s, "    honor_reward = {};", self.honor_reward).unwrap();
+        writeln!(s, "    {}", if self.honor_reward_multiplier.to_string().contains(".") { self.honor_reward_multiplier.to_string() } else { format!("{}.0", self.honor_reward_multiplier) }).unwrap();
+        writeln!(s, "    source_item_id = {};", self.source_item_id).unwrap();
+        writeln!(s, "    quest_flags = {};", self.quest_flags).unwrap();
+        writeln!(s, "    title_reward = {};", self.title_reward).unwrap();
+        writeln!(s, "    players_slain = {};", self.players_slain).unwrap();
+        writeln!(s, "    bonus_talents = {};", self.bonus_talents).unwrap();
+        writeln!(s, "    bonus_arena_points = {};", self.bonus_arena_points).unwrap();
+        writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
+        write!(s, "    rewards = [").unwrap();
+        for v in self.rewards.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    item = {};", v.item).unwrap();
+            writeln!(s, "    item_count = {};", v.item_count).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        write!(s, "    choice_rewards = [").unwrap();
+        for v in self.choice_rewards.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    item = {};", v.item).unwrap();
+            writeln!(s, "    item_count = {};", v.item_count).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        write!(s, "    reputation_rewards = [").unwrap();
+        for v in self.reputation_rewards.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        write!(s, "    reputation_reward_amounts = [").unwrap();
+        for v in self.reputation_reward_amounts.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        write!(s, "    reputation_reward_overrides = [").unwrap();
+        for v in self.reputation_reward_overrides.as_slice() {
+            write!(s, "{v:#04X}, ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        writeln!(s, "    point_map_id = {};", self.point_map_id).unwrap();
+        // position: Vector2d
+        writeln!(s, "    position = {{").unwrap();
+        // Members
+        writeln!(s, "    {}", if self.position.x.to_string().contains(".") { self.position.x.to_string() } else { format!("{}.0", self.position.x) }).unwrap();
+        writeln!(s, "    {}", if self.position.y.to_string().contains(".") { self.position.y.to_string() } else { format!("{}.0", self.position.y) }).unwrap();
+
+        writeln!(s, "    }};").unwrap();
+        writeln!(s, "    point_opt = {};", self.point_opt).unwrap();
+        writeln!(s, "    title = \"{}\";", self.title).unwrap();
+        writeln!(s, "    objective_text = \"{}\";", self.objective_text).unwrap();
+        writeln!(s, "    details = \"{}\";", self.details).unwrap();
+        writeln!(s, "    end_text = \"{}\";", self.end_text).unwrap();
+        writeln!(s, "    completed_text = \"{}\";", self.completed_text).unwrap();
+        write!(s, "    objectives = [").unwrap();
+        for v in self.objectives.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    creature_id = {};", v.creature_id).unwrap();
+            writeln!(s, "    kill_count = {};", v.kill_count).unwrap();
+            writeln!(s, "    required_item_id = {};", v.required_item_id).unwrap();
+            writeln!(s, "    required_item_count = {};", v.required_item_count).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        write!(s, "    item_requirements = [").unwrap();
+        for v in self.item_requirements.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    item = {};", v.item).unwrap();
+            writeln!(s, "    item_count = {};", v.item_count).unwrap();
+            writeln!(s, "    item_display_id = {};", v.item_display_id).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        write!(s, "    objective_texts = [").unwrap();
+        for v in self.objective_texts.as_slice() {
+            write!(s, "\"{v}\", ").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 93_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "quest_id");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_QUEST_QUERY_RESPONSE {}
 impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
     const OPCODE: u32 = 0x005d;

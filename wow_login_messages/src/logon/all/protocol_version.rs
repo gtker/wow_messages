@@ -46,6 +46,21 @@ impl ProtocolVersion {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ProtocolVersion {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Two => "TWO",
+            Self::Three => "THREE",
+            Self::Five => "FIVE",
+            Self::Six => "SIX",
+            Self::Seven => "SEVEN",
+            Self::Eight => "EIGHT",
+        }
+    }
+
+}
+
 impl Default for ProtocolVersion {
     fn default() -> Self {
         Self::Two

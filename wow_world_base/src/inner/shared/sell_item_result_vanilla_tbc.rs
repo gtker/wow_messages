@@ -44,6 +44,21 @@ impl SellItemResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl SellItemResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::CantFindItem => "CANT_FIND_ITEM",
+            Self::CantSellItem => "CANT_SELL_ITEM",
+            Self::CantFindVendor => "CANT_FIND_VENDOR",
+            Self::YouDontOwnThatItem => "YOU_DONT_OWN_THAT_ITEM",
+            Self::Unk => "UNK",
+            Self::OnlyEmptyBag => "ONLY_EMPTY_BAG",
+        }
+    }
+
+}
+
 impl Default for SellItemResult {
     fn default() -> Self {
         Self::CantFindItem

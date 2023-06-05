@@ -25,6 +25,18 @@ impl TrainerSpellState {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl TrainerSpellState {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Green => "GREEN",
+            Self::Red => "RED",
+            Self::Gray => "GRAY",
+        }
+    }
+
+}
+
 impl Default for TrainerSpellState {
     fn default() -> Self {
         Self::Green

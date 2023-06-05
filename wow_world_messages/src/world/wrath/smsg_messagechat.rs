@@ -63,6 +63,563 @@ pub struct SMSG_MESSAGECHAT {
     pub tag: PlayerChatTag,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_MESSAGECHAT {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_MESSAGECHAT {{").unwrap();
+        // Members
+        writeln!(s, "    chat_type = {};", crate::wrath::ChatType::try_from(self.chat_type.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    language = {};", self.language.as_test_case_value()).unwrap();
+        writeln!(s, "    sender = {};", self.sender.guid()).unwrap();
+        writeln!(s, "    flags = {};", self.flags).unwrap();
+        match &self.chat_type {
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::System {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Say {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Party {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Raid {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Guild {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Officer {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Yell {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Whisper {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::WhisperForeign {
+                sender2,
+                target2,
+            } => {
+                writeln!(s, "    sender2 = \"{}\";", sender2).unwrap();
+                writeln!(s, "    target2 = {};", target2.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::WhisperInform {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Emote {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::TextEmote {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::MonsterSay {
+                sender1,
+                target1,
+            } => {
+                writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::MonsterParty {
+                sender1,
+                target1,
+            } => {
+                writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::MonsterYell {
+                sender1,
+                target1,
+            } => {
+                writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::MonsterWhisper {
+                sender1,
+                target1,
+            } => {
+                writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::MonsterEmote {
+                sender1,
+                target1,
+            } => {
+                writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Channel {
+                channel_name,
+                target5,
+            } => {
+                writeln!(s, "    channel_name = \"{}\";", channel_name).unwrap();
+                writeln!(s, "    target5 = {};", target5.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::ChannelJoin {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::ChannelLeave {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::ChannelList {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::ChannelNotice {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::ChannelNoticeUser {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Afk {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Dnd {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Ignored {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Skill {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Loot {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Money {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Opening {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Tradeskills {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::PetInfo {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::CombatMiscInfo {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::CombatXpGain {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::CombatHonorGain {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::CombatFactionChange {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::BgSystemNeutral {
+                target3,
+            } => {
+                panic!("unsupported type NamedGuid for variable 'target3'");
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::BgSystemAlliance {
+                target3,
+            } => {
+                panic!("unsupported type NamedGuid for variable 'target3'");
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::BgSystemHorde {
+                target3,
+            } => {
+                panic!("unsupported type NamedGuid for variable 'target3'");
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::RaidLeader {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::RaidWarning {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::RaidBossEmote {
+                sender1,
+                target1,
+            } => {
+                writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::RaidBossWhisper {
+                sender1,
+                target1,
+            } => {
+                writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Filtered {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Battleground {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::BattlegroundLeader {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Restricted {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Battlenet {
+                sender1,
+                target1,
+            } => {
+                writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
+                panic!("unsupported type NamedGuid for variable 'target1'");
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Achievement {
+                achievement_id,
+                target4,
+            } => {
+                writeln!(s, "    target4 = {};", target4.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::GuildAchievement {
+                achievement_id,
+                target4,
+            } => {
+                writeln!(s, "    target4 = {};", target4.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::ArenaPoints {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::PartyLeader {
+                target6,
+            } => {
+                writeln!(s, "    target6 = {};", target6.guid()).unwrap();
+            }
+        }
+
+        writeln!(s, "    message = \"{}\";", self.message).unwrap();
+        writeln!(s, "    tag = {};", self.tag.as_test_case_value()).unwrap();
+        match &self.chat_type {
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::System {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Say {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Party {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Raid {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Guild {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Officer {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Yell {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Whisper {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::WhisperForeign {
+                sender2,
+                target2,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::WhisperInform {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Emote {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::TextEmote {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::MonsterSay {
+                sender1,
+                target1,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::MonsterParty {
+                sender1,
+                target1,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::MonsterYell {
+                sender1,
+                target1,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::MonsterWhisper {
+                sender1,
+                target1,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::MonsterEmote {
+                sender1,
+                target1,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Channel {
+                channel_name,
+                target5,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::ChannelJoin {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::ChannelLeave {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::ChannelList {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::ChannelNotice {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::ChannelNoticeUser {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Afk {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Dnd {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Ignored {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Skill {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Loot {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Money {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Opening {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Tradeskills {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::PetInfo {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::CombatMiscInfo {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::CombatXpGain {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::CombatHonorGain {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::CombatFactionChange {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::BgSystemNeutral {
+                target3,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::BgSystemAlliance {
+                target3,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::BgSystemHorde {
+                target3,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::RaidLeader {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::RaidWarning {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::RaidBossEmote {
+                sender1,
+                target1,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::RaidBossWhisper {
+                sender1,
+                target1,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Filtered {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Battleground {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::BattlegroundLeader {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Restricted {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Battlenet {
+                sender1,
+                target1,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::Achievement {
+                achievement_id,
+                target4,
+            } => {
+                writeln!(s, "    achievement_id = {};", achievement_id).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::GuildAchievement {
+                achievement_id,
+                target4,
+            } => {
+                writeln!(s, "    achievement_id = {};", achievement_id).unwrap();
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::ArenaPoints {
+                target6,
+            } => {
+            }
+            crate::wrath::SMSG_MESSAGECHAT_ChatType::PartyLeader {
+                target6,
+            } => {
+            }
+        }
+
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 150_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "chat_type");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_MESSAGECHAT {}
 impl crate::Message for SMSG_MESSAGECHAT {
     const OPCODE: u32 = 0x0096;

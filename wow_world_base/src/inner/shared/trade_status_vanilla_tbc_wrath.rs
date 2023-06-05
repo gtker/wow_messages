@@ -88,6 +88,39 @@ impl TradeStatus {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl TradeStatus {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Busy => "BUSY",
+            Self::BeginTrade => "BEGIN_TRADE",
+            Self::OpenWindow => "OPEN_WINDOW",
+            Self::TradeCanceled => "TRADE_CANCELED",
+            Self::TradeAccept => "TRADE_ACCEPT",
+            Self::Busy2 => "BUSY_2",
+            Self::NoTarget => "NO_TARGET",
+            Self::BackToTrade => "BACK_TO_TRADE",
+            Self::TradeComplete => "TRADE_COMPLETE",
+            Self::TradeRejected => "TRADE_REJECTED",
+            Self::TargetToFar => "TARGET_TO_FAR",
+            Self::WrongFaction => "WRONG_FACTION",
+            Self::CloseWindow => "CLOSE_WINDOW",
+            Self::Unknown13 => "UNKNOWN_13",
+            Self::IgnoreYou => "IGNORE_YOU",
+            Self::YouStunned => "YOU_STUNNED",
+            Self::TargetStunned => "TARGET_STUNNED",
+            Self::YouDead => "YOU_DEAD",
+            Self::TargetDead => "TARGET_DEAD",
+            Self::YouLogout => "YOU_LOGOUT",
+            Self::TargetLogout => "TARGET_LOGOUT",
+            Self::TrialAccount => "TRIAL_ACCOUNT",
+            Self::OnlyConjured => "ONLY_CONJURED",
+            Self::NotOnTaplist => "NOT_ON_TAPLIST",
+        }
+    }
+
+}
+
 impl Default for TradeStatus {
     fn default() -> Self {
         Self::Busy

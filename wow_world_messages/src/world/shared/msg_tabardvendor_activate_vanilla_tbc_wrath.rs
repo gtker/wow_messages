@@ -13,6 +13,14 @@ pub struct MSG_TABARDVENDOR_ACTIVATE {
     pub guid: Guid,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_TABARDVENDOR_ACTIVATE {
+    pub fn to_test_case_string(&self) -> String {
+        panic!("MSG types not supported");
+    }
+
+}
+
 impl crate::private::Sealed for MSG_TABARDVENDOR_ACTIVATE {}
 impl crate::Message for MSG_TABARDVENDOR_ACTIVATE {
     const OPCODE: u32 = 0x01f2;

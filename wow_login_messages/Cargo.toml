@@ -16,6 +16,7 @@ exclude = ["release.toml"]
 [features]
 default = []
 sync = []
+print-testcase = []
 
 [dependencies.tokio]
 version = "1"

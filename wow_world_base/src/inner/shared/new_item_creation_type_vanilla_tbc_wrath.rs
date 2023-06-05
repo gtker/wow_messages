@@ -22,6 +22,17 @@ impl NewItemCreationType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl NewItemCreationType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Received => "RECEIVED",
+            Self::Created => "CREATED",
+        }
+    }
+
+}
+
 impl Default for NewItemCreationType {
     fn default() -> Self {
         Self::Received

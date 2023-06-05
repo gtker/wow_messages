@@ -17,6 +17,49 @@ pub struct SMSG_ALL_ACHIEVEMENT_DATA {
     pub in_progress: Vec<AchievementInProgress>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_ALL_ACHIEVEMENT_DATA {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_ALL_ACHIEVEMENT_DATA {{").unwrap();
+        // Members
+        panic!("unsupported type Vec<AchievementDone> for variable 'done'");
+        panic!("unsupported type Vec<AchievementInProgress> for variable 'in_progress'");
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 1149_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        panic!("unsupported type Vec<AchievementDone> for variable 'done'");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_ALL_ACHIEVEMENT_DATA {}
 impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
     const OPCODE: u32 = 0x047d;

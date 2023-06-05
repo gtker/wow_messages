@@ -22,6 +22,17 @@ impl AchievementNameLinkType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl AchievementNameLinkType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Normal => "NORMAL",
+            Self::Clickable => "CLICKABLE",
+        }
+    }
+
+}
+
 impl Default for AchievementNameLinkType {
     fn default() -> Self {
         Self::Normal

@@ -57,6 +57,28 @@ impl MailResultTwo {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl MailResultTwo {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Ok => "OK",
+            Self::ErrEquipError => "ERR_EQUIP_ERROR",
+            Self::ErrCannotSendToSelf => "ERR_CANNOT_SEND_TO_SELF",
+            Self::ErrNotEnoughMoney => "ERR_NOT_ENOUGH_MONEY",
+            Self::ErrRecipientNotFound => "ERR_RECIPIENT_NOT_FOUND",
+            Self::ErrNotYourTeam => "ERR_NOT_YOUR_TEAM",
+            Self::ErrInternalError => "ERR_INTERNAL_ERROR",
+            Self::ErrDisabledForTrialAcc => "ERR_DISABLED_FOR_TRIAL_ACC",
+            Self::ErrRecipientCapReached => "ERR_RECIPIENT_CAP_REACHED",
+            Self::ErrCantSendWrappedCod => "ERR_CANT_SEND_WRAPPED_COD",
+            Self::ErrMailAndChatSuspended => "ERR_MAIL_AND_CHAT_SUSPENDED",
+            Self::ErrTooManyAttachments => "ERR_TOO_MANY_ATTACHMENTS",
+            Self::ErrMailAttachmentInvalid => "ERR_MAIL_ATTACHMENT_INVALID",
+        }
+    }
+
+}
+
 impl Default for MailResultTwo {
     fn default() -> Self {
         Self::Ok

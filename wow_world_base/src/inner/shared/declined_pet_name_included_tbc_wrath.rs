@@ -22,6 +22,17 @@ impl DeclinedPetNameIncluded {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl DeclinedPetNameIncluded {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::NotIncluded => "NOT_INCLUDED",
+            Self::Included => "INCLUDED",
+        }
+    }
+
+}
+
 impl Default for DeclinedPetNameIncluded {
     fn default() -> Self {
         Self::NotIncluded

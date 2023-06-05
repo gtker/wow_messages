@@ -17,6 +17,63 @@ pub struct SMSG_PETITION_SHOWLIST {
     pub petitions: Vec<PetitionShowlist>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_PETITION_SHOWLIST {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_PETITION_SHOWLIST {{").unwrap();
+        // Members
+        writeln!(s, "    npc = {};", self.npc.guid()).unwrap();
+        writeln!(s, "    amount_of_petitions = {};", self.petitions.len()).unwrap();
+        write!(s, "    petitions = [").unwrap();
+        for v in self.petitions.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    index = {};", v.index).unwrap();
+            writeln!(s, "    charter_entry = {};", v.charter_entry).unwrap();
+            writeln!(s, "    charter_display_id = {};", v.charter_display_id).unwrap();
+            writeln!(s, "    guild_charter_cost = {};", v.guild_charter_cost).unwrap();
+            writeln!(s, "    unknown1 = {};", v.unknown1).unwrap();
+            writeln!(s, "    signatures_required = {};", v.signatures_required).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 444_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "npc");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3 3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_PETITION_SHOWLIST {}
 impl crate::Message for SMSG_PETITION_SHOWLIST {
     const OPCODE: u32 = 0x01bc;

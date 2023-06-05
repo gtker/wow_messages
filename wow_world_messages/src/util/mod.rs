@@ -15,3 +15,21 @@ pub use functions::*;
 mod trait_helpers;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub(crate) use trait_helpers::*;
+
+#[cfg(feature = "print-testcase")]
+pub(crate) fn write_bytes(
+    s: &mut String,
+    bytes: &mut impl Iterator<Item = u8>,
+    size: usize,
+    name: &str,
+) {
+    use std::fmt::Write;
+    let mut bytes = bytes.take(size);
+
+    write!(s, "    {:#04X}, ", bytes.next().unwrap()).unwrap();
+
+    for b in bytes {
+        write!(s, "{b:#04X}, ").unwrap();
+    }
+    writeln!(s, "/* {name} */").unwrap();
+}

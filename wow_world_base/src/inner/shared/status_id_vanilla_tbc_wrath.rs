@@ -41,6 +41,20 @@ impl StatusId {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl StatusId {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::None => "NONE",
+            Self::WaitQueue => "WAIT_QUEUE",
+            Self::WaitJoin => "WAIT_JOIN",
+            Self::InProgress => "IN_PROGRESS",
+            Self::WaitLeave => "WAIT_LEAVE",
+        }
+    }
+
+}
+
 impl Default for StatusId {
     fn default() -> Self {
         Self::None

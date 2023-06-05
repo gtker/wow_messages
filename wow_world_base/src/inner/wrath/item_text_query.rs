@@ -22,6 +22,17 @@ impl ItemTextQuery {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ItemTextQuery {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::HasText => "HAS_TEXT",
+            Self::NoText => "NO_TEXT",
+        }
+    }
+
+}
+
 impl Default for ItemTextQuery {
     fn default() -> Self {
         Self::HasText

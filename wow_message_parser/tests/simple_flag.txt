@@ -12,6 +12,40 @@ pub struct SimpleFlag {
     inner: u8,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SimpleFlag {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ZERO").unwrap();
+            first = false;
+        }
+        if self.is_one() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ONE").unwrap();
+            first = false;
+        }
+        if self.is_two() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "TWO").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl SimpleFlag {
     pub const fn new(inner: u8) -> Self {
         Self { inner }

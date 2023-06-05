@@ -58,6 +58,408 @@ pub struct MovementFlags {
     inner: u64,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MovementFlags {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_empty() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NONE").unwrap();
+            first = false;
+        }
+        if self.is_forward() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "FORWARD").unwrap();
+            first = false;
+        }
+        if self.is_backward() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "BACKWARD").unwrap();
+            first = false;
+        }
+        if self.is_strafe_left() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "STRAFE_LEFT").unwrap();
+            first = false;
+        }
+        if self.is_strafe_right() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "STRAFE_RIGHT").unwrap();
+            first = false;
+        }
+        if self.is_left() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "LEFT").unwrap();
+            first = false;
+        }
+        if self.is_right() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "RIGHT").unwrap();
+            first = false;
+        }
+        if self.is_pitch_up() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PITCH_UP").unwrap();
+            first = false;
+        }
+        if self.is_pitch_down() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PITCH_DOWN").unwrap();
+            first = false;
+        }
+        if self.is_walking() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "WALKING").unwrap();
+            first = false;
+        }
+        if self.is_on_transport() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ON_TRANSPORT").unwrap();
+            first = false;
+        }
+        if self.is_disable_gravity() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DISABLE_GRAVITY").unwrap();
+            first = false;
+        }
+        if self.is_root() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ROOT").unwrap();
+            first = false;
+        }
+        if self.is_falling() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "FALLING").unwrap();
+            first = false;
+        }
+        if self.is_falling_far() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "FALLING_FAR").unwrap();
+            first = false;
+        }
+        if self.is_pending_stop() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PENDING_STOP").unwrap();
+            first = false;
+        }
+        if self.is_pending_strafe_stop() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PENDING_STRAFE_STOP").unwrap();
+            first = false;
+        }
+        if self.is_pending_forward() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PENDING_FORWARD").unwrap();
+            first = false;
+        }
+        if self.is_pending_backward() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PENDING_BACKWARD").unwrap();
+            first = false;
+        }
+        if self.is_pending_strafe_left() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PENDING_STRAFE_LEFT").unwrap();
+            first = false;
+        }
+        if self.is_pending_strafe_right() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PENDING_STRAFE_RIGHT").unwrap();
+            first = false;
+        }
+        if self.is_pending_root() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "PENDING_ROOT").unwrap();
+            first = false;
+        }
+        if self.is_swimming() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "SWIMMING").unwrap();
+            first = false;
+        }
+        if self.is_ascending() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ASCENDING").unwrap();
+            first = false;
+        }
+        if self.is_descending() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DESCENDING").unwrap();
+            first = false;
+        }
+        if self.is_can_fly() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "CAN_FLY").unwrap();
+            first = false;
+        }
+        if self.is_flying() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "FLYING").unwrap();
+            first = false;
+        }
+        if self.is_spline_elevation() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "SPLINE_ELEVATION").unwrap();
+            first = false;
+        }
+        if self.is_spline_enabled() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "SPLINE_ENABLED").unwrap();
+            first = false;
+        }
+        if self.is_waterwalking() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "WATERWALKING").unwrap();
+            first = false;
+        }
+        if self.is_falling_slow() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "FALLING_SLOW").unwrap();
+            first = false;
+        }
+        if self.is_hover() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "HOVER").unwrap();
+            first = false;
+        }
+        if self.is_no_strafe() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_STRAFE").unwrap();
+            first = false;
+        }
+        if self.is_no_jumping() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "NO_JUMPING").unwrap();
+            first = false;
+        }
+        if self.is_unk3() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK3").unwrap();
+            first = false;
+        }
+        if self.is_full_speed_turning() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "FULL_SPEED_TURNING").unwrap();
+            first = false;
+        }
+        if self.is_full_speed_pitching() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "FULL_SPEED_PITCHING").unwrap();
+            first = false;
+        }
+        if self.is_always_allow_pitching() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ALWAYS_ALLOW_PITCHING").unwrap();
+            first = false;
+        }
+        if self.is_unk7() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK7").unwrap();
+            first = false;
+        }
+        if self.is_unk8() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK8").unwrap();
+            first = false;
+        }
+        if self.is_unk9() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK9").unwrap();
+            first = false;
+        }
+        if self.is_unk10() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK10").unwrap();
+            first = false;
+        }
+        if self.is_interpolated_movement() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "INTERPOLATED_MOVEMENT").unwrap();
+            first = false;
+        }
+        if self.is_interpolated_turning() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "INTERPOLATED_TURNING").unwrap();
+            first = false;
+        }
+        if self.is_interpolated_pitching() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "INTERPOLATED_PITCHING").unwrap();
+            first = false;
+        }
+        if self.is_unk14() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK14").unwrap();
+            first = false;
+        }
+        if self.is_unk15() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK15").unwrap();
+            first = false;
+        }
+        if self.is_unk16() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK16").unwrap();
+            first = false;
+        }
+        if self.is_on_transport_and_interpolated_movement() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ON_TRANSPORT_AND_INTERPOLATED_MOVEMENT").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl MovementFlags {
     pub const fn new(inner: u64) -> Self {
         Self { inner }

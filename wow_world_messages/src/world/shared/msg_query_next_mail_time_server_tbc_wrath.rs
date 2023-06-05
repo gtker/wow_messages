@@ -16,6 +16,62 @@ pub struct MSG_QUERY_NEXT_MAIL_TIME_Server {
     pub mails: Vec<ReceivedMail>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_QUERY_NEXT_MAIL_TIME_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test MSG_QUERY_NEXT_MAIL_TIME_Server {{").unwrap();
+        // Members
+        writeln!(s, "    float = {};", self.float).unwrap();
+        writeln!(s, "    amount_of_mails = {};", self.mails.len()).unwrap();
+        write!(s, "    mails = [").unwrap();
+        for v in self.mails.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    sender = {};", v.sender.guid()).unwrap();
+            writeln!(s, "    auction_house = {};", v.auction_house.as_test_case_value()).unwrap();
+            writeln!(s, "    message_type = {};", v.message_type.as_test_case_value()).unwrap();
+            writeln!(s, "    stationery = {};", v.stationery).unwrap();
+            writeln!(s, "    {}", if v.time.to_string().contains(".") { v.time.to_string() } else { format!("{}.0", v.time) }).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 644_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "float");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for MSG_QUERY_NEXT_MAIL_TIME_Server {}
 impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
     const OPCODE: u32 = 0x0284;

@@ -48,6 +48,55 @@ impl CMSG_CHAR_CREATE {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_CHAR_CREATE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_CHAR_CREATE {{").unwrap();
+        // Members
+        writeln!(s, "    name = \"{}\";", self.name).unwrap();
+        writeln!(s, "    race = {};", self.race.as_test_case_value()).unwrap();
+        writeln!(s, "    class = {};", self.class.as_test_case_value()).unwrap();
+        writeln!(s, "    gender = {};", self.gender.as_test_case_value()).unwrap();
+        writeln!(s, "    skin_color = {};", self.skin_color).unwrap();
+        writeln!(s, "    face = {};", self.face).unwrap();
+        writeln!(s, "    hair_style = {};", self.hair_style).unwrap();
+        writeln!(s, "    hair_color = {};", self.hair_color).unwrap();
+        writeln!(s, "    facial_hair = {};", self.facial_hair).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 54_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_CHAR_CREATE {}
 impl crate::Message for CMSG_CHAR_CREATE {
     const OPCODE: u32 = 0x0036;

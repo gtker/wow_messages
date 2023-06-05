@@ -21,6 +21,78 @@ pub struct MSG_PVP_LOG_DATA_Server {
     pub players: Vec<BattlegroundPlayer>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_PVP_LOG_DATA_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test MSG_PVP_LOG_DATA_Server {{").unwrap();
+        // Members
+        writeln!(s, "    status = {};", crate::vanilla::BattlegroundEndStatus::try_from(self.status.as_int()).unwrap().as_test_case_value()).unwrap();
+        match &self.status {
+            crate::vanilla::MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::Ended {
+                winner,
+            } => {
+                writeln!(s, "    winner = {};", winner.as_test_case_value()).unwrap();
+            }
+            _ => {}
+        }
+
+        writeln!(s, "    amount_of_players = {};", self.players.len()).unwrap();
+        write!(s, "    players = [").unwrap();
+        for v in self.players.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    player = {};", v.player.guid()).unwrap();
+            writeln!(s, "    rank = {};", v.rank.as_test_case_value()).unwrap();
+            writeln!(s, "    killing_blows = {};", v.killing_blows).unwrap();
+            writeln!(s, "    honorable_kills = {};", v.honorable_kills).unwrap();
+            writeln!(s, "    deaths = {};", v.deaths).unwrap();
+            writeln!(s, "    bonus_honor = {};", v.bonus_honor).unwrap();
+            writeln!(s, "    amount_of_extra_fields = {};", v.fields.len()).unwrap();
+            write!(s, "    fields = [").unwrap();
+            for v in v.fields.as_slice() {
+                write!(s, "{v:#04X}, ").unwrap();
+            }
+            writeln!(s, "];").unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 736_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "status");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for MSG_PVP_LOG_DATA_Server {}
 impl crate::Message for MSG_PVP_LOG_DATA_Server {
     const OPCODE: u32 = 0x02e0;

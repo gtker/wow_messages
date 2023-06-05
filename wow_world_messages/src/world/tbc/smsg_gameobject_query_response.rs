@@ -27,6 +27,65 @@ pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE {
     pub found: Option<SMSG_GAMEOBJECT_QUERY_RESPONSE_found>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_GAMEOBJECT_QUERY_RESPONSE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_GAMEOBJECT_QUERY_RESPONSE {{").unwrap();
+        // Members
+        writeln!(s, "    entry_id = {};", self.entry_id).unwrap();
+        if let Some(found) = &self.found {
+            writeln!(s, "    info_type = {};", found.info_type).unwrap();
+            writeln!(s, "    display_id = {};", found.display_id).unwrap();
+            writeln!(s, "    name1 = \"{}\";", found.name1).unwrap();
+            writeln!(s, "    name2 = \"{}\";", found.name2).unwrap();
+            writeln!(s, "    name3 = \"{}\";", found.name3).unwrap();
+            writeln!(s, "    name4 = \"{}\";", found.name4).unwrap();
+            writeln!(s, "    icon_name = \"{}\";", found.icon_name).unwrap();
+            writeln!(s, "    cast_bar_caption = \"{}\";", found.cast_bar_caption).unwrap();
+            writeln!(s, "    unknown = \"{}\";", found.unknown).unwrap();
+            write!(s, "    raw_data = [").unwrap();
+            for v in found.raw_data.as_slice() {
+                write!(s, "{v:#04X}, ").unwrap();
+            }
+            writeln!(s, "];").unwrap();
+            writeln!(s, "    {}", if found.gameobject_size.to_string().contains(".") { found.gameobject_size.to_string() } else { format!("{}.0", found.gameobject_size) }).unwrap();
+        }
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 95_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 4, "entry_id");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_GAMEOBJECT_QUERY_RESPONSE {}
 impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
     const OPCODE: u32 = 0x005f;

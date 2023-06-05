@@ -15,6 +15,49 @@ pub struct CMSG_UNSTABLE_PET {
     pub pet_number: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_UNSTABLE_PET {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_UNSTABLE_PET {{").unwrap();
+        // Members
+        writeln!(s, "    stable_master = {};", self.stable_master.guid()).unwrap();
+        writeln!(s, "    pet_number = {};", self.pet_number).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 18_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 625_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "stable_master");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_UNSTABLE_PET {}
 impl crate::Message for CMSG_UNSTABLE_PET {
     const OPCODE: u32 = 0x0271;

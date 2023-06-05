@@ -28,6 +28,19 @@ impl RaidDifficulty {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl RaidDifficulty {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::TenManNormal => "TEN_MAN_NORMAL",
+            Self::TwentyFiveManNormal => "TWENTY_FIVE_MAN_NORMAL",
+            Self::TenManHeroic => "TEN_MAN_HEROIC",
+            Self::TwentyFiveManHeroic => "TWENTY_FIVE_MAN_HEROIC",
+        }
+    }
+
+}
+
 impl Default for RaidDifficulty {
     fn default() -> Self {
         Self::TenManNormal

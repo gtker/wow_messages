@@ -19,6 +19,51 @@ pub struct CMSG_GUILD_BANK_UPDATE_TAB {
     pub icon: String,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_GUILD_BANK_UPDATE_TAB {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_GUILD_BANK_UPDATE_TAB {{").unwrap();
+        // Members
+        writeln!(s, "    bank = {};", self.bank.guid()).unwrap();
+        writeln!(s, "    tab = {};", self.tab).unwrap();
+        writeln!(s, "    name = \"{}\";", self.name).unwrap();
+        writeln!(s, "    icon = \"{}\";", self.icon).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 1003_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "bank");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_GUILD_BANK_UPDATE_TAB {}
 impl crate::Message for CMSG_GUILD_BANK_UPDATE_TAB {
     const OPCODE: u32 = 0x03eb;

@@ -22,6 +22,17 @@ impl GmTicketQueueStatus {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl GmTicketQueueStatus {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Enabled => "ENABLED",
+            Self::Disabled => "DISABLED",
+        }
+    }
+
+}
+
 impl Default for GmTicketQueueStatus {
     fn default() -> Self {
         Self::Enabled

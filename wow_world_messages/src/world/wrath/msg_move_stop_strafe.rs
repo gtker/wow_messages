@@ -16,6 +16,14 @@ pub struct MSG_MOVE_STOP_STRAFE {
     pub info: MovementInfo,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_MOVE_STOP_STRAFE {
+    pub fn to_test_case_string(&self) -> String {
+        panic!("MSG types not supported");
+    }
+
+}
+
 impl crate::private::Sealed for MSG_MOVE_STOP_STRAFE {}
 impl crate::Message for MSG_MOVE_STOP_STRAFE {
     const OPCODE: u32 = 0x00ba;

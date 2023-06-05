@@ -34,6 +34,21 @@ impl PetitionResult {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl PetitionResult {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Ok => "OK",
+            Self::AlreadySigned => "ALREADY_SIGNED",
+            Self::AlreadyInGuild => "ALREADY_IN_GUILD",
+            Self::CantSignOwn => "CANT_SIGN_OWN",
+            Self::NeedMore => "NEED_MORE",
+            Self::NotServer => "NOT_SERVER",
+        }
+    }
+
+}
+
 impl Default for PetitionResult {
     fn default() -> Self {
         Self::Ok

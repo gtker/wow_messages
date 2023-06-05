@@ -22,6 +22,73 @@ pub struct SMSG_INITIAL_SPELLS {
     pub cooldowns: Vec<CooldownSpell>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_INITIAL_SPELLS {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_INITIAL_SPELLS {{").unwrap();
+        // Members
+        writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
+        writeln!(s, "    spell_count = {};", self.initial_spells.len()).unwrap();
+        write!(s, "    initial_spells = [").unwrap();
+        for v in self.initial_spells.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    spell_id = {};", v.spell_id).unwrap();
+            writeln!(s, "    unknown1 = {};", v.unknown1).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        writeln!(s, "    cooldown_count = {};", self.cooldowns.len()).unwrap();
+        write!(s, "    cooldowns = [").unwrap();
+        for v in self.cooldowns.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    spell_id = {};", v.spell_id).unwrap();
+            writeln!(s, "    item_id = {};", v.item_id).unwrap();
+            writeln!(s, "    spell_category = {};", v.spell_category).unwrap();
+            writeln!(s, "    cooldown = {};", v.cooldown.as_millis()).unwrap();
+            writeln!(s, "    category_cooldown = {};", v.category_cooldown.as_millis()).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 298_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 1, "unknown1");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1 2\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_INITIAL_SPELLS {}
 impl crate::Message for SMSG_INITIAL_SPELLS {
     const OPCODE: u32 = 0x012a;

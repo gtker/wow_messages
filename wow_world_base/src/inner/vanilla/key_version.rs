@@ -46,6 +46,25 @@ impl KeyVersion {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl KeyVersion {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Zero => "ZERO",
+            Self::One => "ONE",
+            Self::Two => "TWO",
+            Self::Three => "THREE",
+            Self::Four => "FOUR",
+            Self::Five => "FIVE",
+            Self::Six => "SIX",
+            Self::Seven => "SEVEN",
+            Self::Eight => "EIGHT",
+            Self::Nine => "NINE",
+        }
+    }
+
+}
+
 impl Default for KeyVersion {
     fn default() -> Self {
         Self::Zero

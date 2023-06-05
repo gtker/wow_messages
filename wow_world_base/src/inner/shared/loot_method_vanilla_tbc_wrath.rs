@@ -51,6 +51,24 @@ impl LootMethod {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl LootMethod {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::ErrorX => "ERROR",
+            Self::Corpse => "CORPSE",
+            Self::Pickpocketing => "PICKPOCKETING",
+            Self::Fishing => "FISHING",
+            Self::Disenchanting => "DISENCHANTING",
+            Self::Skinning => "SKINNING",
+            Self::Fishinghole => "FISHINGHOLE",
+            Self::FishingFail => "FISHING_FAIL",
+            Self::Insignia => "INSIGNIA",
+        }
+    }
+
+}
+
 impl Default for LootMethod {
     fn default() -> Self {
         Self::ErrorX

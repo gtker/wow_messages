@@ -28,6 +28,168 @@ pub struct GameobjectCastFlags {
     inner: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl GameobjectCastFlags {
+    pub fn as_test_case_value(&self) -> String {
+        let mut s = String::new();
+        let mut first = true;
+        if self.is_lock_player_cast_anim() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "LOCK_PLAYER_CAST_ANIM").unwrap();
+            first = false;
+        }
+        if self.is_unknown2() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN2").unwrap();
+            first = false;
+        }
+        if self.is_unknown4() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN4").unwrap();
+            first = false;
+        }
+        if self.is_unknown8() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN8").unwrap();
+            first = false;
+        }
+        if self.is_unknown16() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNKNOWN16").unwrap();
+            first = false;
+        }
+        if self.is_ammo() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "AMMO").unwrap();
+            first = false;
+        }
+        if self.is_dest_location() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "DEST_LOCATION").unwrap();
+            first = false;
+        }
+        if self.is_item_caster() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ITEM_CASTER").unwrap();
+            first = false;
+        }
+        if self.is_unk200() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK200").unwrap();
+            first = false;
+        }
+        if self.is_extra_message() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "EXTRA_MESSAGE").unwrap();
+            first = false;
+        }
+        if self.is_power_update() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "POWER_UPDATE").unwrap();
+            first = false;
+        }
+        if self.is_unk2000() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK2000").unwrap();
+            first = false;
+        }
+        if self.is_unk1000() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK1000").unwrap();
+            first = false;
+        }
+        if self.is_unk8000() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK8000").unwrap();
+            first = false;
+        }
+        if self.is_adjust_missile() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "ADJUST_MISSILE").unwrap();
+            first = false;
+        }
+        if self.is_unk40000() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK40000").unwrap();
+            first = false;
+        }
+        if self.is_visual_chain() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "VISUAL_CHAIN").unwrap();
+            first = false;
+        }
+        if self.is_rune_update() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "RUNE_UPDATE").unwrap();
+            first = false;
+        }
+        if self.is_unk400000() {
+            use std::fmt::Write;
+            if !first {
+                write!(s, "| ").unwrap();
+            }
+            write!(s, "UNK400000").unwrap();
+            first = false;
+        }
+        s
+    }
+
+}
+
 impl GameobjectCastFlags {
     pub const fn new(inner: u32) -> Self {
         Self { inner }

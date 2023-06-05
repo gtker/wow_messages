@@ -22,6 +22,17 @@ impl CharterType {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CharterType {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Guild => "GUILD",
+            Self::Arena => "ARENA",
+        }
+    }
+
+}
+
 impl Default for CharterType {
     fn default() -> Self {
         Self::Guild

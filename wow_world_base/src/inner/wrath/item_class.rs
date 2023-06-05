@@ -67,6 +67,32 @@ impl ItemClass {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ItemClass {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Consumable => "CONSUMABLE",
+            Self::Container => "CONTAINER",
+            Self::Weapon => "WEAPON",
+            Self::Gem => "GEM",
+            Self::Armor => "ARMOR",
+            Self::Reagent => "REAGENT",
+            Self::Projectile => "PROJECTILE",
+            Self::TradeGoods => "TRADE_GOODS",
+            Self::Generic => "GENERIC",
+            Self::Recipe => "RECIPE",
+            Self::Money => "MONEY",
+            Self::Quiver => "QUIVER",
+            Self::Quest => "QUEST",
+            Self::Key => "KEY",
+            Self::Permanent => "PERMANENT",
+            Self::Misc => "MISC",
+            Self::Glyph => "GLYPH",
+        }
+    }
+
+}
+
 impl Default for ItemClass {
     fn default() -> Self {
         Self::Consumable

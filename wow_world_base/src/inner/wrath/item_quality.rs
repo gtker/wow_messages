@@ -40,6 +40,23 @@ impl ItemQuality {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ItemQuality {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Poor => "POOR",
+            Self::Normal => "NORMAL",
+            Self::Uncommon => "UNCOMMON",
+            Self::Rare => "RARE",
+            Self::Epic => "EPIC",
+            Self::Legendary => "LEGENDARY",
+            Self::Artifact => "ARTIFACT",
+            Self::Heirloom => "HEIRLOOM",
+        }
+    }
+
+}
+
 impl Default for ItemQuality {
     fn default() -> Self {
         Self::Poor

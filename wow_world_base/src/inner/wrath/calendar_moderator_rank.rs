@@ -25,6 +25,18 @@ impl CalendarModeratorRank {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl CalendarModeratorRank {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Player => "PLAYER",
+            Self::Moderator => "MODERATOR",
+            Self::Owner => "OWNER",
+        }
+    }
+
+}
+
 impl Default for CalendarModeratorRank {
     fn default() -> Self {
         Self::Player

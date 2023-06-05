@@ -19,6 +19,52 @@ pub struct CMSG_GOSSIP_SELECT_OPTION {
     pub unknown: Option<CMSG_GOSSIP_SELECT_OPTION_unknown>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl CMSG_GOSSIP_SELECT_OPTION {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test CMSG_GOSSIP_SELECT_OPTION {{").unwrap();
+        // Members
+        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
+        writeln!(s, "    gossip_list_id = {};", self.gossip_list_id).unwrap();
+        if let Some(unknown) = &self.unknown {
+            writeln!(s, "    code = \"{}\";", unknown.code).unwrap();
+        }
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 6).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b] = 380_u16.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for CMSG_GOSSIP_SELECT_OPTION {}
 impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
     const OPCODE: u32 = 0x017c;

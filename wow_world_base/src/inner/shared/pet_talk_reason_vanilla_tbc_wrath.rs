@@ -22,6 +22,17 @@ impl PetTalkReason {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl PetTalkReason {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::SpecialSpell => "SPECIAL_SPELL",
+            Self::Attack => "ATTACK",
+        }
+    }
+
+}
+
 impl Default for PetTalkReason {
     fn default() -> Self {
         Self::SpecialSpell

@@ -28,6 +28,80 @@ pub struct SMSG_GOSSIP_MESSAGE {
     pub quests: Vec<QuestItem>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_GOSSIP_MESSAGE {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_GOSSIP_MESSAGE {{").unwrap();
+        // Members
+        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
+        writeln!(s, "    menu_id = {};", self.menu_id).unwrap();
+        writeln!(s, "    title_text_id = {};", self.title_text_id).unwrap();
+        writeln!(s, "    amount_of_gossip_items = {};", self.gossips.len()).unwrap();
+        write!(s, "    gossips = [").unwrap();
+        for v in self.gossips.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    id = {};", v.id).unwrap();
+            writeln!(s, "    item_icon = {};", v.item_icon).unwrap();
+            writeln!(s, "    coded = {};", if v.coded { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "    money_required = {};", v.money_required.as_int()).unwrap();
+            writeln!(s, "    message = \"{}\";", v.message).unwrap();
+            writeln!(s, "    accept_text = \"{}\";", v.accept_text).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+        writeln!(s, "    amount_of_quests = {};", self.quests.len()).unwrap();
+        write!(s, "    quests = [").unwrap();
+        for v in self.quests.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    quest_id = {};", v.quest_id).unwrap();
+            writeln!(s, "    quest_icon = {};", v.quest_icon).unwrap();
+            writeln!(s, "    level = {};", v.level.as_int()).unwrap();
+            writeln!(s, "    flags = {};", v.flags).unwrap();
+            writeln!(s, "    repeatable = {};", if v.repeatable { "TRUE" } else { "FALSE" }).unwrap();
+            writeln!(s, "    title = \"{}\";", v.title).unwrap();
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 381_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_GOSSIP_MESSAGE {}
 impl crate::Message for SMSG_GOSSIP_MESSAGE {
     const OPCODE: u32 = 0x017d;

@@ -13,6 +13,162 @@ pub struct SMSG_ADDON_INFO {
     pub addons: Vec<Addon>,
 }
 
+#[cfg(feature = "print-testcase")]
+impl SMSG_ADDON_INFO {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test SMSG_ADDON_INFO {{").unwrap();
+        // Members
+        write!(s, "    addons = [").unwrap();
+        for v in self.addons.as_slice() {
+            writeln!(s, "{{").unwrap();
+            // Members
+            writeln!(s, "    addon_type = {};", v.addon_type.as_test_case_value()).unwrap();
+            writeln!(s, "    info_block = {};", crate::vanilla::InfoBlock::try_from(v.info_block.as_int()).unwrap().as_test_case_value()).unwrap();
+            match &v.info_block {
+                crate::vanilla::Addon_InfoBlock::Available {
+                    key_version,
+                    update_available_flag,
+                } => {
+                    writeln!(s, "    key_version = {};", crate::vanilla::KeyVersion::try_from(key_version.as_int()).unwrap().as_test_case_value()).unwrap();
+                    match &key_version {
+                        crate::vanilla::Addon_KeyVersion::One {
+                            public_key,
+                        } => {
+                            write!(s, "    public_key = [").unwrap();
+                            for v in public_key.as_slice() {
+                                write!(s, "{v:#04X}, ").unwrap();
+                            }
+                            writeln!(s, "];").unwrap();
+                        }
+                        crate::vanilla::Addon_KeyVersion::Two {
+                            public_key,
+                        } => {
+                            write!(s, "    public_key = [").unwrap();
+                            for v in public_key.as_slice() {
+                                write!(s, "{v:#04X}, ").unwrap();
+                            }
+                            writeln!(s, "];").unwrap();
+                        }
+                        crate::vanilla::Addon_KeyVersion::Three {
+                            public_key,
+                        } => {
+                            write!(s, "    public_key = [").unwrap();
+                            for v in public_key.as_slice() {
+                                write!(s, "{v:#04X}, ").unwrap();
+                            }
+                            writeln!(s, "];").unwrap();
+                        }
+                        crate::vanilla::Addon_KeyVersion::Four {
+                            public_key,
+                        } => {
+                            write!(s, "    public_key = [").unwrap();
+                            for v in public_key.as_slice() {
+                                write!(s, "{v:#04X}, ").unwrap();
+                            }
+                            writeln!(s, "];").unwrap();
+                        }
+                        crate::vanilla::Addon_KeyVersion::Five {
+                            public_key,
+                        } => {
+                            write!(s, "    public_key = [").unwrap();
+                            for v in public_key.as_slice() {
+                                write!(s, "{v:#04X}, ").unwrap();
+                            }
+                            writeln!(s, "];").unwrap();
+                        }
+                        crate::vanilla::Addon_KeyVersion::Six {
+                            public_key,
+                        } => {
+                            write!(s, "    public_key = [").unwrap();
+                            for v in public_key.as_slice() {
+                                write!(s, "{v:#04X}, ").unwrap();
+                            }
+                            writeln!(s, "];").unwrap();
+                        }
+                        crate::vanilla::Addon_KeyVersion::Seven {
+                            public_key,
+                        } => {
+                            write!(s, "    public_key = [").unwrap();
+                            for v in public_key.as_slice() {
+                                write!(s, "{v:#04X}, ").unwrap();
+                            }
+                            writeln!(s, "];").unwrap();
+                        }
+                        crate::vanilla::Addon_KeyVersion::Eight {
+                            public_key,
+                        } => {
+                            write!(s, "    public_key = [").unwrap();
+                            for v in public_key.as_slice() {
+                                write!(s, "{v:#04X}, ").unwrap();
+                            }
+                            writeln!(s, "];").unwrap();
+                        }
+                        crate::vanilla::Addon_KeyVersion::Nine {
+                            public_key,
+                        } => {
+                            write!(s, "    public_key = [").unwrap();
+                            for v in public_key.as_slice() {
+                                write!(s, "{v:#04X}, ").unwrap();
+                            }
+                            writeln!(s, "];").unwrap();
+                        }
+                        _ => {}
+                    }
+
+                    writeln!(s, "    update_available_flag = {};", update_available_flag).unwrap();
+                }
+                _ => {}
+            }
+
+            writeln!(s, "    url_info = {};", crate::vanilla::UrlInfo::try_from(v.url_info.as_int()).unwrap().as_test_case_value()).unwrap();
+            match &v.url_info {
+                crate::vanilla::Addon_UrlInfo::Available {
+                    url,
+                } => {
+                    writeln!(s, "    url = \"{}\";", url).unwrap();
+                }
+                _ => {}
+            }
+
+
+            writeln!(s, "    }},").unwrap();
+        }
+        writeln!(s, "];").unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 751_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for SMSG_ADDON_INFO {}
 impl crate::Message for SMSG_ADDON_INFO {
     const OPCODE: u32 = 0x02ef;

@@ -27,6 +27,55 @@ pub struct MSG_INSPECT_ARENA_TEAMS_Server {
     pub personal_rating: u32,
 }
 
+#[cfg(feature = "print-testcase")]
+impl MSG_INSPECT_ARENA_TEAMS_Server {
+    pub fn to_test_case_string(&self) -> String {
+        use std::fmt::Write;
+        use crate::traits::Message;
+
+        let mut s = String::new();
+
+        writeln!(s, "test MSG_INSPECT_ARENA_TEAMS_Server {{").unwrap();
+        // Members
+        writeln!(s, "    player = {};", self.player.guid()).unwrap();
+        writeln!(s, "    slot = {};", self.slot).unwrap();
+        writeln!(s, "    arena_team = {};", self.arena_team).unwrap();
+        writeln!(s, "    rating = {};", self.rating).unwrap();
+        writeln!(s, "    games_played_this_season = {};", self.games_played_this_season).unwrap();
+        writeln!(s, "    wins_this_season = {};", self.wins_this_season).unwrap();
+        writeln!(s, "    total_games_played = {};", self.total_games_played).unwrap();
+        writeln!(s, "    personal_rating = {};", self.personal_rating).unwrap();
+
+        writeln!(s, "}} [").unwrap();
+
+        // Size/Opcode
+        let [a, b] = 37_u16.to_be_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
+        let [a, b, c, d] = 887_u32.to_le_bytes();
+        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
+        // Bytes
+        let mut bytes: Vec<u8> = Vec::new();
+        self.write_into_vec(&mut bytes).unwrap();
+        let mut bytes = bytes.into_iter();
+
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "player");
+        for (i, b) in bytes.enumerate() {
+            if i == 0 {
+                write!(s, "    ").unwrap();
+            }
+            write!(s, "{b:#04X}, ").unwrap();
+        }
+
+
+        writeln!(s, "] {{").unwrap();
+        writeln!(s, "    versions = \"2.4.3 3\";").unwrap();
+        writeln!(s, "}}\n").unwrap();
+
+        s
+    }
+
+}
+
 impl crate::private::Sealed for MSG_INSPECT_ARENA_TEAMS_Server {}
 impl crate::Message for MSG_INSPECT_ARENA_TEAMS_Server {
     const OPCODE: u32 = 0x0377;

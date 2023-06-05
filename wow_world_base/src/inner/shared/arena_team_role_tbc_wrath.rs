@@ -22,6 +22,17 @@ impl ArenaTeamRole {
 
 }
 
+#[cfg(feature = "print-testcase")]
+impl ArenaTeamRole {
+    pub fn as_test_case_value(&self) -> &'static str {
+        match self {
+            Self::Captain => "CAPTAIN",
+            Self::Member => "MEMBER",
+        }
+    }
+
+}
+
 impl Default for ArenaTeamRole {
     fn default() -> Self {
         Self::Captain
