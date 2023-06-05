@@ -104,7 +104,7 @@ fn print_message(
     inside_compressed_message: bool,
 ) {
     for m in e.members() {
-        if !print_member(
+        print_member(
             s,
             m,
             e,
@@ -114,9 +114,7 @@ fn print_message(
             variables,
             inside_compressed_message,
             0,
-        ) {
-            return;
-        }
+        );
     }
 }
 
@@ -130,11 +128,11 @@ fn print_member(
     variables: &mut Vec<String>,
     inside_compressed_message: bool,
     depth: i32,
-) -> bool {
+) {
     match m {
         StructMember::Definition(d) => {
             let w = wo.get(&name_to_hf(d.name(), d.ty()));
-            if !print_definition(
+            print_definition(
                 s,
                 e.name(),
                 d,
@@ -144,9 +142,7 @@ fn print_member(
                 variables,
                 inside_compressed_message,
                 depth,
-            ) {
-                return false;
-            }
+            );
         }
         StructMember::IfStatement(statement) => {
             print_if_statement(
@@ -182,8 +178,6 @@ fn print_member(
             s.closing_curly(); // if (len > 0)
         }
     }
-
-    true
 }
 
 fn print_if_statement(
@@ -196,7 +190,7 @@ fn print_if_statement(
     variables: &mut Vec<String>,
     inside_compressed_message: bool,
     depth: i32,
-) -> bool {
+) {
     let name = statement.name();
 
     s.w("if (");
@@ -319,8 +313,6 @@ fn print_if_statement(
 
         s.closing_curly(); // else
     }
-
-    false
 }
 
 fn print_definition(
@@ -333,7 +325,7 @@ fn print_definition(
     variables: &mut Vec<String>,
     inside_compressed_message: bool,
     depth: i32,
-) -> bool {
+) {
     if d.tags().compressed().is_some() {
         s.wln("compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));");
         s.open_curly("if (compressed_tvb != NULL)");
@@ -413,7 +405,7 @@ fn print_definition(
             print_definer(s, w, upcast, container_name, d.name(), variables, e);
         }
         Type::Struct { e } => {
-            if !print_container(
+            print_container(
                 s,
                 o,
                 wo,
@@ -422,9 +414,7 @@ fn print_definition(
                 inside_compressed_message,
                 None,
                 depth,
-            ) {
-                return false;
-            }
+            );
         }
         Type::Array(array) => {
             let len = match array.size() {
@@ -484,7 +474,7 @@ fn print_definition(
                         s.wln(format!("ptvcursor_add(ptv, {name}, 8, ENC_LITTLE_ENDIAN);",));
                     }
                     ArrayType::Struct(c) => {
-                        if !print_container(
+                        print_container(
                             s,
                             o,
                             wo,
@@ -493,10 +483,7 @@ fn print_definition(
                             inside_compressed_message,
                             iteration_variable,
                             depth,
-                        ) {
-                            s.closing_curly();
-                            return false;
-                        }
+                        );
                     }
                     ArrayType::CString => {
                         print_cstring(s, w);
@@ -551,8 +538,6 @@ fn print_definition(
         s.wln("compressed_tvb = NULL;");
         s.closing_curly(); // if (compressed_tvb != NULL)
     }
-
-    true
 }
 
 fn print_cstring(s: &mut Writer, w: Option<&WiresharkMember>) {
@@ -570,7 +555,7 @@ fn print_container(
     inside_compressed_message: bool,
     iteration_variable: Option<String>,
     depth: i32,
-) -> bool {
+) {
     let name = e.name();
     let text = if let Some(variable) = iteration_variable {
         format!("\"{name} %i\", {variable}")
@@ -582,7 +567,7 @@ fn print_container(
         "ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, {text});",
     ));
     for m in e.members() {
-        if !print_member(
+        print_member(
             s,
             m,
             e,
@@ -592,13 +577,9 @@ fn print_container(
             variables,
             inside_compressed_message,
             depth,
-        ) {
-            return false;
-        }
+        );
     }
     s.wln("ptvcursor_pop_subtree(ptv);");
-
-    true
 }
 
 fn print_definer(
