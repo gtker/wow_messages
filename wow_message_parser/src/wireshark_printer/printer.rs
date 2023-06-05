@@ -367,7 +367,7 @@ fn print_definition(
             print_definer(s, w, upcast, container_name, d.name(), variables, e);
         }
         Type::Struct { e } => {
-            if !print_container(s, o, wo, variables, e, inside_compressed_message) {
+            if !print_container(s, o, wo, variables, e, inside_compressed_message, None) {
                 return false;
             }
         }
@@ -388,9 +388,11 @@ fn print_definition(
                     hf = w.unwrap().name()
                 ));
             } else {
-                match array.size() {
+                let iteration_variable = match array.size() {
                     ArraySize::Fixed(_) | ArraySize::Variable(_) => {
                         s.open_curly(format!("for (i = 0; i < {len}; ++i)"));
+
+                        Some("i".to_string())
                     }
                     ArraySize::Endless => {
                         let packet_end = if d.tags().compressed().is_some()
@@ -404,8 +406,10 @@ fn print_definition(
                         s.open_curly(format!(
                             "while (ptvcursor_current_offset(ptv) < {packet_end})"
                         ));
+
+                        None
                     }
-                }
+                };
 
                 match array.ty() {
                     ArrayType::Integer(i) => {
@@ -421,7 +425,15 @@ fn print_definition(
                         s.wln(format!("ptvcursor_add(ptv, {name}, 8, ENC_LITTLE_ENDIAN);",));
                     }
                     ArrayType::Struct(c) => {
-                        if !print_container(s, o, wo, variables, c, inside_compressed_message) {
+                        if !print_container(
+                            s,
+                            o,
+                            wo,
+                            variables,
+                            c,
+                            inside_compressed_message,
+                            iteration_variable,
+                        ) {
                             s.closing_curly();
                             return false;
                         }
@@ -496,10 +508,17 @@ fn print_container(
     variables: &mut Vec<String>,
     e: &Container,
     inside_compressed_message: bool,
+    iteration_variable: Option<String>,
 ) -> bool {
+    let name = e.name();
+    let text = if let Some(variable) = iteration_variable {
+        format!("\"{name} %i\", {variable}")
+    } else {
+        format!("\"{name}\"")
+    };
+
     s.wln(format!(
-        "ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, \"{}\");",
-        e.name()
+        "ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, {text});",
     ));
     for m in e.members() {
         if !print_member(
