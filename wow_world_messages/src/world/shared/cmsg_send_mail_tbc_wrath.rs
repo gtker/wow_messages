@@ -184,6 +184,7 @@ impl crate::Message for CMSG_SEND_MAIL {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(36..=3105).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0238, size: body_size });
@@ -256,6 +257,7 @@ impl crate::Message for CMSG_SEND_MAIL {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ClientMessage for CMSG_SEND_MAIL {}
 

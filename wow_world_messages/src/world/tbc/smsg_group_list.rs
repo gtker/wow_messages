@@ -180,6 +180,7 @@ impl crate::Message for SMSG_GROUP_LIST {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(24..=65535).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x007D, size: body_size });
@@ -262,6 +263,7 @@ impl crate::Message for SMSG_GROUP_LIST {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ServerMessage for SMSG_GROUP_LIST {}
 

@@ -161,6 +161,7 @@ impl crate::Message for SMSG_CHAR_ENUM {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(1..=105985).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x003B, size: body_size });
@@ -184,6 +185,7 @@ impl crate::Message for SMSG_CHAR_ENUM {
     }
 
 }
+
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ServerMessage for SMSG_CHAR_ENUM {}
 

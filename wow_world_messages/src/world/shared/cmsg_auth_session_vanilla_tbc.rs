@@ -150,6 +150,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(37..=65827).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01ED, size: body_size });
@@ -212,6 +213,7 @@ impl crate::Message for CMSG_AUTH_SESSION {
     }
 
 }
+
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ClientMessage for CMSG_AUTH_SESSION {
     #[cfg(feature = "sync")]

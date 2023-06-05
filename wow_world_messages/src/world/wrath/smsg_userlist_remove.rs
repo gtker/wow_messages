@@ -91,6 +91,7 @@ impl crate::Message for SMSG_USERLIST_REMOVE {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(14..=269).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03F1, size: body_size });
@@ -120,6 +121,7 @@ impl crate::Message for SMSG_USERLIST_REMOVE {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ServerMessage for SMSG_USERLIST_REMOVE {}
 

@@ -82,6 +82,7 @@ impl crate::Message for CMSG_CALENDAR_COPY_EVENT {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0430, size: body_size });
@@ -104,6 +105,7 @@ impl crate::Message for CMSG_CALENDAR_COPY_EVENT {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_CALENDAR_COPY_EVENT {}
 

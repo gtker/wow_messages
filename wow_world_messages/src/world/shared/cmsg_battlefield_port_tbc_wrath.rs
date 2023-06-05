@@ -102,6 +102,7 @@ impl crate::Message for CMSG_BATTLEFIELD_PORT {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02D5, size: body_size });
@@ -132,6 +133,7 @@ impl crate::Message for CMSG_BATTLEFIELD_PORT {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ClientMessage for CMSG_BATTLEFIELD_PORT {}
 

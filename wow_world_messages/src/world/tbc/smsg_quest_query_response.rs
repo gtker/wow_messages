@@ -385,6 +385,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(240..=2280).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x005D, size: body_size });
@@ -552,6 +553,7 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ServerMessage for SMSG_QUEST_QUERY_RESPONSE {}
 

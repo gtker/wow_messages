@@ -79,6 +79,7 @@ impl crate::Message for CMSG_CHAR_RENAME {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(9..=264).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02C7, size: body_size });
@@ -100,6 +101,7 @@ impl crate::Message for CMSG_CHAR_RENAME {
     }
 
 }
+
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ClientMessage for CMSG_CHAR_RENAME {}
 

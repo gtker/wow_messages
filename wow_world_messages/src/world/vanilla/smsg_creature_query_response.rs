@@ -183,6 +183,7 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(4..=1314).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0061, size: body_size });
@@ -280,6 +281,7 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
     }
 
 }
+
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ServerMessage for SMSG_CREATURE_QUERY_RESPONSE {}
 

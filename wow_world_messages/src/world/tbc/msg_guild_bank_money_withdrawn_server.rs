@@ -64,6 +64,7 @@ impl crate::Message for MSG_GUILD_BANK_MONEY_WITHDRAWN_Server {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03FD, size: body_size });
@@ -78,6 +79,7 @@ impl crate::Message for MSG_GUILD_BANK_MONEY_WITHDRAWN_Server {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ServerMessage for MSG_GUILD_BANK_MONEY_WITHDRAWN_Server {}
 

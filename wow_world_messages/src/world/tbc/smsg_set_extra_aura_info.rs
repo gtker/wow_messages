@@ -101,6 +101,7 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(2..=22).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03A4, size: body_size });
@@ -143,6 +144,7 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ServerMessage for SMSG_SET_EXTRA_AURA_INFO {}
 

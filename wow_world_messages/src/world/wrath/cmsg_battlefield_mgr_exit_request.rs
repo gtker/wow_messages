@@ -64,6 +64,7 @@ impl crate::Message for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 4 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E7, size: body_size });
@@ -78,6 +79,7 @@ impl crate::Message for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {}
 

@@ -262,6 +262,7 @@ impl crate::Message for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(35..=107).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x049B, size: body_size });
@@ -288,6 +289,7 @@ impl crate::Message for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {}
 

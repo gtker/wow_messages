@@ -57,6 +57,7 @@ impl crate::Message for CMSG_DISMISS_CONTROLLED_VEHICLE {
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046D, size: body_size });
@@ -67,6 +68,7 @@ impl crate::Message for CMSG_DISMISS_CONTROLLED_VEHICLE {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_DISMISS_CONTROLLED_VEHICLE {}
 

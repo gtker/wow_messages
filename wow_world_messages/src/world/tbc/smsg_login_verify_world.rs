@@ -97,6 +97,7 @@ impl crate::Message for SMSG_LOGIN_VERIFY_WORLD {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0236, size: body_size });
@@ -119,6 +120,7 @@ impl crate::Message for SMSG_LOGIN_VERIFY_WORLD {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ServerMessage for SMSG_LOGIN_VERIFY_WORLD {}
 

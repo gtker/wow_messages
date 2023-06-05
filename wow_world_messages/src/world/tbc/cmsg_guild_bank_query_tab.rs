@@ -80,6 +80,7 @@ impl crate::Message for CMSG_GUILD_BANK_QUERY_TAB {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 10 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x03E6, size: body_size });
@@ -102,6 +103,7 @@ impl crate::Message for CMSG_GUILD_BANK_QUERY_TAB {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ClientMessage for CMSG_GUILD_BANK_QUERY_TAB {}
 

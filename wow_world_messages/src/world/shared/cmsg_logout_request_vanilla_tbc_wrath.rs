@@ -62,6 +62,7 @@ impl crate::Message for CMSG_LOGOUT_REQUEST {
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x004B, size: body_size });
@@ -72,6 +73,7 @@ impl crate::Message for CMSG_LOGOUT_REQUEST {
     }
 
 }
+
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ClientMessage for CMSG_LOGOUT_REQUEST {}
 

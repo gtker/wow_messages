@@ -66,6 +66,7 @@ impl crate::Message for CMSG_DISMISS_CRITTER {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x048D, size: body_size });
@@ -80,6 +81,7 @@ impl crate::Message for CMSG_DISMISS_CRITTER {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_DISMISS_CRITTER {}
 

@@ -66,6 +66,7 @@ impl crate::Message for SMSG_ARENA_UNIT_DESTROYED {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04C7, size: body_size });
@@ -80,6 +81,7 @@ impl crate::Message for SMSG_ARENA_UNIT_DESTROYED {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ServerMessage for SMSG_ARENA_UNIT_DESTROYED {}
 

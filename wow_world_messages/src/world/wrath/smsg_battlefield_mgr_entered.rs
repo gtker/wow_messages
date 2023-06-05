@@ -85,6 +85,7 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_ENTERED {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 7 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04E0, size: body_size });
@@ -111,6 +112,7 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_ENTERED {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ServerMessage for SMSG_BATTLEFIELD_MGR_ENTERED {}
 

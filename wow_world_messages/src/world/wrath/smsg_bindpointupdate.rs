@@ -95,6 +95,7 @@ impl crate::Message for SMSG_BINDPOINTUPDATE {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 20 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0155, size: body_size });
@@ -117,6 +118,7 @@ impl crate::Message for SMSG_BINDPOINTUPDATE {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ServerMessage for SMSG_BINDPOINTUPDATE {}
 

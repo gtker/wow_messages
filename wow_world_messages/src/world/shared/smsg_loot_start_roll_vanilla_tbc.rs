@@ -104,6 +104,7 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 28 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A1, size: body_size });
@@ -138,6 +139,7 @@ impl crate::Message for SMSG_LOOT_START_ROLL {
     }
 
 }
+
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ServerMessage for SMSG_LOOT_START_ROLL {}
 

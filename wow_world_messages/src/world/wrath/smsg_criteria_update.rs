@@ -115,6 +115,7 @@ impl crate::Message for SMSG_CRITERIA_UPDATE {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(24..=38).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x046A, size: body_size });
@@ -153,6 +154,7 @@ impl crate::Message for SMSG_CRITERIA_UPDATE {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ServerMessage for SMSG_CRITERIA_UPDATE {}
 

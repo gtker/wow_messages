@@ -155,6 +155,7 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(16..=65535).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01FF, size: body_size });
@@ -190,6 +191,7 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ServerMessage for MSG_LOOKING_FOR_GROUP_Server {}
 

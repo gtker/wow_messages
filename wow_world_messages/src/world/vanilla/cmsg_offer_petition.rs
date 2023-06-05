@@ -73,6 +73,7 @@ impl crate::Message for CMSG_OFFER_PETITION {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 16 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x01C3, size: body_size });
@@ -91,6 +92,7 @@ impl crate::Message for CMSG_OFFER_PETITION {
     }
 
 }
+
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ClientMessage for CMSG_OFFER_PETITION {}
 

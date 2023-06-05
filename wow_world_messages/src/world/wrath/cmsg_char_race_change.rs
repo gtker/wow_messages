@@ -129,6 +129,7 @@ impl crate::Message for CMSG_CHAR_RACE_CHANGE {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(16..=271).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04F8, size: body_size });
@@ -178,6 +179,7 @@ impl crate::Message for CMSG_CHAR_RACE_CHANGE {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_CHAR_RACE_CHANGE {}
 

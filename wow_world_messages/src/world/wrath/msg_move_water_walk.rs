@@ -46,6 +46,7 @@ impl crate::Message for MSG_MOVE_WATER_WALK {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(32..=97).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02B1, size: body_size });
@@ -64,6 +65,7 @@ impl crate::Message for MSG_MOVE_WATER_WALK {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for MSG_MOVE_WATER_WALK {}
 

@@ -112,6 +112,7 @@ impl crate::Message for SMSG_LFG_PARTY_INFO {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(1..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0372, size: body_size });
@@ -135,6 +136,7 @@ impl crate::Message for SMSG_LFG_PARTY_INFO {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ServerMessage for SMSG_LFG_PARTY_INFO {}
 

@@ -154,6 +154,7 @@ impl crate::Message for MSG_MOVE_SET_WALK_MODE_Client {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(28..=81).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00C3, size: body_size });
@@ -168,6 +169,7 @@ impl crate::Message for MSG_MOVE_SET_WALK_MODE_Client {
     }
 
 }
+
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ClientMessage for MSG_MOVE_SET_WALK_MODE_Client {}
 

@@ -145,6 +145,7 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 45 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0166, size: body_size });
@@ -199,6 +200,7 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ServerMessage for SMSG_ITEM_PUSH_RESULT {}
 

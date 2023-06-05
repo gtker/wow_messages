@@ -129,6 +129,7 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(5..=16777215).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02E9, size: body_size });
@@ -165,6 +166,7 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     }
 
 }
+
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ServerMessage for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
 

@@ -66,6 +66,7 @@ impl crate::Message for CMSG_ITEM_REFUND_INFO {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04B3, size: body_size });
@@ -80,6 +81,7 @@ impl crate::Message for CMSG_ITEM_REFUND_INFO {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_ITEM_REFUND_INFO {}
 

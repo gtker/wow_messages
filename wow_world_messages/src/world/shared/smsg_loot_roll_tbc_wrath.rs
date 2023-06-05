@@ -132,6 +132,7 @@ impl crate::Message for SMSG_LOOT_ROLL {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 35 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02A2, size: body_size });
@@ -178,6 +179,7 @@ impl crate::Message for SMSG_LOOT_ROLL {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ServerMessage for SMSG_LOOT_ROLL {}
 

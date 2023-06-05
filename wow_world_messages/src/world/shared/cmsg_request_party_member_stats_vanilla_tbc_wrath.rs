@@ -66,6 +66,7 @@ impl crate::Message for CMSG_REQUEST_PARTY_MEMBER_STATS {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 8 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x027F, size: body_size });
@@ -80,6 +81,7 @@ impl crate::Message for CMSG_REQUEST_PARTY_MEMBER_STATS {
     }
 
 }
+
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ClientMessage for CMSG_REQUEST_PARTY_MEMBER_STATS {}
 

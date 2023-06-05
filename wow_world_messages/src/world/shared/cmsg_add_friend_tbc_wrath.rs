@@ -79,6 +79,7 @@ impl crate::Message for CMSG_ADD_FRIEND {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(2..=512).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0069, size: body_size });
@@ -103,6 +104,7 @@ impl crate::Message for CMSG_ADD_FRIEND {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ClientMessage for CMSG_ADD_FRIEND {}
 

@@ -73,6 +73,7 @@ impl crate::Message for SMSG_LEARNED_SPELL {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 6 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x012B, size: body_size });
@@ -91,6 +92,7 @@ impl crate::Message for SMSG_LEARNED_SPELL {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ServerMessage for SMSG_LEARNED_SPELL {}
 

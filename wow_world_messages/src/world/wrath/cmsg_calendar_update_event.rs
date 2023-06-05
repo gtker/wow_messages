@@ -146,6 +146,7 @@ impl crate::Message for CMSG_CALENDAR_UPDATE_EVENT {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(40..=550).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x042E, size: body_size });
@@ -206,6 +207,7 @@ impl crate::Message for CMSG_CALENDAR_UPDATE_EVENT {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_CALENDAR_UPDATE_EVENT {}
 

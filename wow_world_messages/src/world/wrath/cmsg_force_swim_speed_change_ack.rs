@@ -262,6 +262,7 @@ impl crate::Message for CMSG_FORCE_SWIM_SPEED_CHANGE_ACK {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(40..=105).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00E7, size: body_size });
@@ -288,6 +289,7 @@ impl crate::Message for CMSG_FORCE_SWIM_SPEED_CHANGE_ACK {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_FORCE_SWIM_SPEED_CHANGE_ACK {}
 

@@ -186,6 +186,7 @@ impl crate::Message for MSG_MOVE_STOP_PITCH_Server {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(31..=91).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x00C1, size: body_size });
@@ -204,6 +205,7 @@ impl crate::Message for MSG_MOVE_STOP_PITCH_Server {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ServerMessage for MSG_MOVE_STOP_PITCH_Server {}
 

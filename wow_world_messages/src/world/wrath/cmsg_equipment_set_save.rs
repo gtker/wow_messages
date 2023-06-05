@@ -112,6 +112,7 @@ impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(160..=677).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x04BD, size: body_size });
@@ -154,6 +155,7 @@ impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_EQUIPMENT_SET_SAVE {}
 

@@ -59,6 +59,7 @@ impl crate::Message for SMSG_FORCED_DEATH_UPDATE {
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 0 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x037A, size: body_size });
@@ -69,6 +70,7 @@ impl crate::Message for SMSG_FORCED_DEATH_UPDATE {
     }
 
 }
+
 #[cfg(feature = "tbc")]
 impl crate::tbc::ServerMessage for SMSG_FORCED_DEATH_UPDATE {}
 

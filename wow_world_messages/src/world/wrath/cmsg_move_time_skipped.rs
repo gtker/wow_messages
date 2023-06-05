@@ -73,6 +73,7 @@ impl crate::Message for CMSG_MOVE_TIME_SKIPPED {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(6..=13).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x02CE, size: body_size });
@@ -91,6 +92,7 @@ impl crate::Message for CMSG_MOVE_TIME_SKIPPED {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_MOVE_TIME_SKIPPED {}
 

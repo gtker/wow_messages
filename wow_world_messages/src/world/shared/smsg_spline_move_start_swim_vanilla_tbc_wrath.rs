@@ -66,6 +66,7 @@ impl crate::Message for SMSG_SPLINE_MOVE_START_SWIM {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(2..=9).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x030B, size: body_size });
@@ -80,6 +81,7 @@ impl crate::Message for SMSG_SPLINE_MOVE_START_SWIM {
     }
 
 }
+
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ServerMessage for SMSG_SPLINE_MOVE_START_SWIM {}
 

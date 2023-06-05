@@ -80,6 +80,7 @@ impl crate::Message for CMSG_QUESTGIVER_QUERY_QUEST {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 13 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0186, size: body_size });
@@ -102,6 +103,7 @@ impl crate::Message for CMSG_QUESTGIVER_QUERY_QUEST {
     }
 
 }
+
 #[cfg(feature = "wrath")]
 impl crate::wrath::ClientMessage for CMSG_QUESTGIVER_QUERY_QUEST {}
 

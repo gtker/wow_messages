@@ -109,6 +109,7 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if !(65..=2870).contains(&body_size) {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x032A, size: body_size });
@@ -140,6 +141,7 @@ impl crate::Message for CMSG_GMSURVEY_SUBMIT {
     }
 
 }
+
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ClientMessage for CMSG_GMSURVEY_SUBMIT {}
 

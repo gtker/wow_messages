@@ -46,6 +46,7 @@ impl crate::Message for MSG_QUEST_PUSH_RESULT {
 
         Ok(())
     }
+
     fn read_body<S: crate::private::Sealed>(mut r: &mut &[u8], body_size: u32) -> Result<Self, crate::errors::ParseError> {
         if body_size != 9 {
             return Err(crate::errors::ParseError::InvalidSize { opcode: 0x0276, size: body_size });
@@ -64,6 +65,7 @@ impl crate::Message for MSG_QUEST_PUSH_RESULT {
     }
 
 }
+
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ClientMessage for MSG_QUEST_PUSH_RESULT {}
 
