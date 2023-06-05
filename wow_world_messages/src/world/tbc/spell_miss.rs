@@ -132,6 +132,25 @@ impl SpellMiss_SpellMissInfo {
 
 }
 
+impl std::fmt::Display for SpellMiss_SpellMissInfo {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::None => f.write_str("None"),
+            Self::Miss => f.write_str("Miss"),
+            Self::Resist => f.write_str("Resist"),
+            Self::Dodge => f.write_str("Dodge"),
+            Self::Parry => f.write_str("Parry"),
+            Self::Block => f.write_str("Block"),
+            Self::Evade => f.write_str("Evade"),
+            Self::Immune => f.write_str("Immune"),
+            Self::Immune2 => f.write_str("Immune2"),
+            Self::Deflect => f.write_str("Deflect"),
+            Self::Absorb => f.write_str("Absorb"),
+            Self::Reflect{ .. } => f.write_str("Reflect"),
+        }
+    }
+}
+
 impl SpellMiss_SpellMissInfo {
     pub(crate) const fn size(&self) -> usize {
         match self {

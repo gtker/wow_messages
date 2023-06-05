@@ -144,6 +144,27 @@ impl SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError {
 
 }
 
+impl std::fmt::Display for SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::None => f.write_str("None"),
+            Self::NotReferredBy => f.write_str("NotReferredBy"),
+            Self::TargetTooHigh => f.write_str("TargetTooHigh"),
+            Self::InsufficientGrantableLevels => f.write_str("InsufficientGrantableLevels"),
+            Self::TooFar => f.write_str("TooFar"),
+            Self::DifferentFaction => f.write_str("DifferentFaction"),
+            Self::NotNow => f.write_str("NotNow"),
+            Self::GrantLevelMax => f.write_str("GrantLevelMax"),
+            Self::NoTarget => f.write_str("NoTarget"),
+            Self::NotInGroup{ .. } => f.write_str("NotInGroup"),
+            Self::SummonLevelMax => f.write_str("SummonLevelMax"),
+            Self::SummonCooldown => f.write_str("SummonCooldown"),
+            Self::InsufficientExpansionLevel => f.write_str("InsufficientExpansionLevel"),
+            Self::SummonOffline => f.write_str("SummonOffline"),
+        }
+    }
+}
+
 impl SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError {
     pub(crate) fn size(&self) -> usize {
         match self {

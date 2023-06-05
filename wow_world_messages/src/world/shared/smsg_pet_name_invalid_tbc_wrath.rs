@@ -144,6 +144,15 @@ impl SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded {
 
 }
 
+impl std::fmt::Display for SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::NotIncluded => f.write_str("NotIncluded"),
+            Self::Included{ .. } => f.write_str("Included"),
+        }
+    }
+}
+
 impl SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded {
     pub(crate) fn size(&self) -> usize {
         match self {

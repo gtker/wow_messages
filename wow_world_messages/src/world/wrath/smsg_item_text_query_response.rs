@@ -119,6 +119,15 @@ impl SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery {
 
 }
 
+impl std::fmt::Display for SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::HasText{ .. } => f.write_str("HasText"),
+            Self::NoText => f.write_str("NoText"),
+        }
+    }
+}
+
 impl SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery {
     pub(crate) fn size(&self) -> usize {
         match self {

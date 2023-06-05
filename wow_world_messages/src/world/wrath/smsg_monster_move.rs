@@ -287,6 +287,18 @@ impl SMSG_MONSTER_MOVE_MonsterMoveType {
 
 }
 
+impl std::fmt::Display for SMSG_MONSTER_MOVE_MonsterMoveType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Normal => f.write_str("Normal"),
+            Self::Stop => f.write_str("Stop"),
+            Self::FacingSpot{ .. } => f.write_str("FacingSpot"),
+            Self::FacingTarget{ .. } => f.write_str("FacingTarget"),
+            Self::FacingAngle{ .. } => f.write_str("FacingAngle"),
+        }
+    }
+}
+
 impl SMSG_MONSTER_MOVE_MonsterMoveType {
     pub(crate) const fn size(&self) -> usize {
         match self {

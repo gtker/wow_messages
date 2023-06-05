@@ -196,6 +196,15 @@ impl GuildMember_GuildMemberStatus {
 
 }
 
+impl std::fmt::Display for GuildMember_GuildMemberStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Offline{ .. } => f.write_str("Offline"),
+            Self::Online => f.write_str("Online"),
+        }
+    }
+}
+
 impl GuildMember_GuildMemberStatus {
     pub(crate) const fn size(&self) -> usize {
         match self {

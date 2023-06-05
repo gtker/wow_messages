@@ -352,6 +352,18 @@ impl Mail_MailType {
 
 }
 
+impl std::fmt::Display for Mail_MailType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Normal{ .. } => f.write_str("Normal"),
+            Self::Auction{ .. } => f.write_str("Auction"),
+            Self::Creature{ .. } => f.write_str("Creature"),
+            Self::Gameobject{ .. } => f.write_str("Gameobject"),
+            Self::Item => f.write_str("Item"),
+        }
+    }
+}
+
 impl Mail_MailType {
     pub(crate) const fn size(&self) -> usize {
         match self {

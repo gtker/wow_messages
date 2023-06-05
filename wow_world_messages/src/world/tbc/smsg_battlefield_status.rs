@@ -248,6 +248,18 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
 
 }
 
+impl std::fmt::Display for SMSG_BATTLEFIELD_STATUS_StatusId {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::None => f.write_str("None"),
+            Self::WaitQueue{ .. } => f.write_str("WaitQueue"),
+            Self::WaitJoin{ .. } => f.write_str("WaitJoin"),
+            Self::InProgress{ .. } => f.write_str("InProgress"),
+            Self::WaitLeave => f.write_str("WaitLeave"),
+        }
+    }
+}
+
 impl SMSG_BATTLEFIELD_STATUS_StatusId {
     pub(crate) const fn size(&self) -> usize {
         match self {

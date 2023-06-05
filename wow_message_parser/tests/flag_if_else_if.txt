@@ -285,6 +285,16 @@ impl FlagIfElseIf_UpdateFlag_OneIf {
 
 }
 
+impl std::fmt::Display for FlagIfElseIf_UpdateFlag_OneIf {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::OneIf{ .. } => f.write_str("OneIf"),
+            Self::TwoElseif{ .. } => f.write_str("TwoElseif"),
+            Self::FourElseif{ .. } => f.write_str("FourElseif"),
+        }
+    }
+}
+
 impl FlagIfElseIf_UpdateFlag_OneIf {
     pub(crate) const fn size(&self) -> usize {
         match self {

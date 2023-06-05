@@ -129,6 +129,15 @@ impl MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
 
 }
 
+impl std::fmt::Display for MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::NotEnded => f.write_str("NotEnded"),
+            Self::Ended{ .. } => f.write_str("Ended"),
+        }
+    }
+}
+
 impl MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus {
     pub(crate) const fn size(&self) -> usize {
         match self {

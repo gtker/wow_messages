@@ -252,6 +252,15 @@ impl MovementInfo_MovementFlags_Swimming {
 
 }
 
+impl std::fmt::Display for MovementInfo_MovementFlags_Swimming {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Swimming{ .. } => f.write_str("Swimming"),
+            Self::Ontransport{ .. } => f.write_str("Ontransport"),
+        }
+    }
+}
+
 impl MovementInfo_MovementFlags_Swimming {
     pub(crate) const fn size(&self) -> usize {
         match self {

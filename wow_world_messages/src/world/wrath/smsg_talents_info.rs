@@ -174,6 +174,15 @@ impl SMSG_TALENTS_INFO_TalentInfoType {
 
 }
 
+impl std::fmt::Display for SMSG_TALENTS_INFO_TalentInfoType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Player{ .. } => f.write_str("Player"),
+            Self::Pet{ .. } => f.write_str("Pet"),
+        }
+    }
+}
+
 impl SMSG_TALENTS_INFO_TalentInfoType {
     pub(crate) fn size(&self) -> usize {
         match self {

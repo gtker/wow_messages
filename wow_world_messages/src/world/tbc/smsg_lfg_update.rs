@@ -123,6 +123,15 @@ impl SMSG_LFG_UPDATE_LfgUpdateLookingForMore {
 
 }
 
+impl std::fmt::Display for SMSG_LFG_UPDATE_LfgUpdateLookingForMore {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::NotLookingForMore => f.write_str("NotLookingForMore"),
+            Self::LookingForMore{ .. } => f.write_str("LookingForMore"),
+        }
+    }
+}
+
 impl SMSG_LFG_UPDATE_LfgUpdateLookingForMore {
     pub(crate) const fn size(&self) -> usize {
         match self {

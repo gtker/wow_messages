@@ -177,6 +177,16 @@ impl BugSeparateIfDoubleWrite_SimpleEnum {
 
 }
 
+impl std::fmt::Display for BugSeparateIfDoubleWrite_SimpleEnum {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Zero{ .. } => f.write_str("Zero"),
+            Self::One{ .. } => f.write_str("One"),
+            Self::Two{ .. } => f.write_str("Two"),
+        }
+    }
+}
+
 impl BugSeparateIfDoubleWrite_SimpleEnum {
     pub(crate) const fn size(&self) -> usize {
         match self {

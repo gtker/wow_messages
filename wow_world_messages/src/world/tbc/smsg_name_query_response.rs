@@ -192,6 +192,15 @@ impl SMSG_NAME_QUERY_RESPONSE_DeclinedNames {
 
 }
 
+impl std::fmt::Display for SMSG_NAME_QUERY_RESPONSE_DeclinedNames {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::No => f.write_str("No"),
+            Self::Yes{ .. } => f.write_str("Yes"),
+        }
+    }
+}
+
 impl SMSG_NAME_QUERY_RESPONSE_DeclinedNames {
     pub(crate) fn size(&self) -> usize {
         match self {

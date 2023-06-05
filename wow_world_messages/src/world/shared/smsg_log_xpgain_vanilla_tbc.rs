@@ -135,6 +135,15 @@ impl SMSG_LOG_XPGAIN_ExperienceAwardType {
 
 }
 
+impl std::fmt::Display for SMSG_LOG_XPGAIN_ExperienceAwardType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Kill => f.write_str("Kill"),
+            Self::NonKill{ .. } => f.write_str("NonKill"),
+        }
+    }
+}
+
 impl SMSG_LOG_XPGAIN_ExperienceAwardType {
     pub(crate) const fn size(&self) -> usize {
         match self {

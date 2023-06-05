@@ -264,6 +264,21 @@ impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame {
 
 }
 
+impl std::fmt::Display for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Engage{ .. } => f.write_str("Engage"),
+            Self::Disengage{ .. } => f.write_str("Disengage"),
+            Self::UpdatePriority{ .. } => f.write_str("UpdatePriority"),
+            Self::AddTimer{ .. } => f.write_str("AddTimer"),
+            Self::EnableObjective{ .. } => f.write_str("EnableObjective"),
+            Self::UpdateObjective{ .. } => f.write_str("UpdateObjective"),
+            Self::DisableObjective{ .. } => f.write_str("DisableObjective"),
+            Self::RefreshFrames => f.write_str("RefreshFrames"),
+        }
+    }
+}
+
 impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame {
     pub(crate) const fn size(&self) -> usize {
         match self {

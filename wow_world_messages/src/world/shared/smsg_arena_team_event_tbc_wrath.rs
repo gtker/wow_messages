@@ -404,6 +404,19 @@ impl SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent {
 
 }
 
+impl std::fmt::Display for SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Join{ .. } => f.write_str("Join"),
+            Self::Leave{ .. } => f.write_str("Leave"),
+            Self::Remove{ .. } => f.write_str("Remove"),
+            Self::LeaderIs{ .. } => f.write_str("LeaderIs"),
+            Self::LeaderChanged{ .. } => f.write_str("LeaderChanged"),
+            Self::Disbanded{ .. } => f.write_str("Disbanded"),
+        }
+    }
+}
+
 impl SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent {
     pub(crate) fn size(&self) -> usize {
         match self {

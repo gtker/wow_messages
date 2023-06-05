@@ -153,6 +153,15 @@ impl SMSG_ITEM_REFUND_RESULT_ItemRefundResult {
 
 }
 
+impl std::fmt::Display for SMSG_ITEM_REFUND_RESULT_ItemRefundResult {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Success{ .. } => f.write_str("Success"),
+            Self::Failure => f.write_str("Failure"),
+        }
+    }
+}
+
 impl SMSG_ITEM_REFUND_RESULT_ItemRefundResult {
     pub(crate) const fn size(&self) -> usize {
         match self {

@@ -298,6 +298,18 @@ impl SpellCastTargets_SpellCastTargetFlags_Unit {
 
 }
 
+impl std::fmt::Display for SpellCastTargets_SpellCastTargetFlags_Unit {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Unit{ .. } => f.write_str("Unit"),
+            Self::UnitMinipet{ .. } => f.write_str("UnitMinipet"),
+            Self::Gameobject{ .. } => f.write_str("Gameobject"),
+            Self::CorpseEnemy{ .. } => f.write_str("CorpseEnemy"),
+            Self::CorpseAlly{ .. } => f.write_str("CorpseAlly"),
+        }
+    }
+}
+
 impl SpellCastTargets_SpellCastTargetFlags_Unit {
     pub(crate) const fn size(&self) -> usize {
         match self {
@@ -353,6 +365,15 @@ impl SpellCastTargets_SpellCastTargetFlags_Item {
         }
     }
 
+}
+
+impl std::fmt::Display for SpellCastTargets_SpellCastTargetFlags_Item {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Item{ .. } => f.write_str("Item"),
+            Self::TradeItem{ .. } => f.write_str("TradeItem"),
+        }
+    }
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_Item {

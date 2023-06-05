@@ -185,6 +185,15 @@ impl SMSG_LFG_UPDATE_PARTY_LfgJoinStatus {
 
 }
 
+impl std::fmt::Display for SMSG_LFG_UPDATE_PARTY_LfgJoinStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::NotJoined => f.write_str("NotJoined"),
+            Self::Joined{ .. } => f.write_str("Joined"),
+        }
+    }
+}
+
 impl SMSG_LFG_UPDATE_PARTY_LfgJoinStatus {
     pub(crate) fn size(&self) -> usize {
         match self {

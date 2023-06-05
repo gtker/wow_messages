@@ -187,6 +187,33 @@ impl GuildLogEvent_GuildEvent {
 
 }
 
+impl std::fmt::Display for GuildLogEvent_GuildEvent {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Promotion => f.write_str("Promotion"),
+            Self::Demotion => f.write_str("Demotion"),
+            Self::Motd => f.write_str("Motd"),
+            Self::Joined{ .. } => f.write_str("Joined"),
+            Self::Left{ .. } => f.write_str("Left"),
+            Self::Removed => f.write_str("Removed"),
+            Self::LeaderIs => f.write_str("LeaderIs"),
+            Self::LeaderChanged => f.write_str("LeaderChanged"),
+            Self::Disbanded => f.write_str("Disbanded"),
+            Self::TabardChanged => f.write_str("TabardChanged"),
+            Self::Unk1 => f.write_str("Unk1"),
+            Self::Unk2 => f.write_str("Unk2"),
+            Self::SignedOn => f.write_str("SignedOn"),
+            Self::SignedOff => f.write_str("SignedOff"),
+            Self::GuildBankBagSlotsChanged => f.write_str("GuildBankBagSlotsChanged"),
+            Self::BanktabPurchased => f.write_str("BanktabPurchased"),
+            Self::Unk5 => f.write_str("Unk5"),
+            Self::GuildBankUpdateMoney => f.write_str("GuildBankUpdateMoney"),
+            Self::GuildBankMoneyWithdrawn => f.write_str("GuildBankMoneyWithdrawn"),
+            Self::GuildBankTextChanged => f.write_str("GuildBankTextChanged"),
+        }
+    }
+}
+
 impl GuildLogEvent_GuildEvent {
     pub(crate) const fn size(&self) -> usize {
         match self {

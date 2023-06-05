@@ -236,6 +236,18 @@ impl Friend_FriendStatus {
 
 }
 
+impl std::fmt::Display for Friend_FriendStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Offline => f.write_str("Offline"),
+            Self::Online{ .. } => f.write_str("Online"),
+            Self::Afk{ .. } => f.write_str("Afk"),
+            Self::Unknown3{ .. } => f.write_str("Unknown3"),
+            Self::Dnd{ .. } => f.write_str("Dnd"),
+        }
+    }
+}
+
 impl Friend_FriendStatus {
     pub(crate) const fn size(&self) -> usize {
         match self {

@@ -201,6 +201,15 @@ impl CMSG_COMPLAIN_SpamType {
 
 }
 
+impl std::fmt::Display for CMSG_COMPLAIN_SpamType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Mail{ .. } => f.write_str("Mail"),
+            Self::Chat{ .. } => f.write_str("Chat"),
+        }
+    }
+}
+
 impl CMSG_COMPLAIN_SpamType {
     pub(crate) fn size(&self) -> usize {
         match self {

@@ -769,6 +769,16 @@ impl MovementBlock_MovementFlags_Swimming {
 
 }
 
+impl std::fmt::Display for MovementBlock_MovementFlags_Swimming {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Swimming{ .. } => f.write_str("Swimming"),
+            Self::Flying{ .. } => f.write_str("Flying"),
+            Self::AlwaysAllowPitching{ .. } => f.write_str("AlwaysAllowPitching"),
+        }
+    }
+}
+
 impl MovementBlock_MovementFlags_Swimming {
     pub(crate) const fn size(&self) -> usize {
         match self {
@@ -816,6 +826,16 @@ impl MovementBlock_SplineFlag_FinalAngle {
         }
     }
 
+}
+
+impl std::fmt::Display for MovementBlock_SplineFlag_FinalAngle {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::FinalAngle{ .. } => f.write_str("FinalAngle"),
+            Self::FinalTarget{ .. } => f.write_str("FinalTarget"),
+            Self::FinalPoint{ .. } => f.write_str("FinalPoint"),
+        }
+    }
 }
 
 impl MovementBlock_SplineFlag_FinalAngle {
@@ -1598,6 +1618,15 @@ impl MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement {
         }
     }
 
+}
+
+impl std::fmt::Display for MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::OnTransportAndInterpolatedMovement{ .. } => f.write_str("OnTransportAndInterpolatedMovement"),
+            Self::OnTransport{ .. } => f.write_str("OnTransport"),
+        }
+    }
 }
 
 impl MovementBlock_MovementFlags_OnTransportAndInterpolatedMovement {
@@ -3023,6 +3052,16 @@ impl MovementBlock_UpdateFlag_Living {
         }
     }
 
+}
+
+impl std::fmt::Display for MovementBlock_UpdateFlag_Living {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Living{ .. } => f.write_str("Living"),
+            Self::Position{ .. } => f.write_str("Position"),
+            Self::HasPosition{ .. } => f.write_str("HasPosition"),
+        }
+    }
 }
 
 impl MovementBlock_UpdateFlag_Living {

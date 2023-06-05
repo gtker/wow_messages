@@ -346,6 +346,16 @@ impl SpellCastTargets_SpellCastTargetFlags_Unit {
 
 }
 
+impl std::fmt::Display for SpellCastTargets_SpellCastTargetFlags_Unit {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Unit{ .. } => f.write_str("Unit"),
+            Self::UnitMinipet{ .. } => f.write_str("UnitMinipet"),
+            Self::UnitEnemy{ .. } => f.write_str("UnitEnemy"),
+        }
+    }
+}
+
 impl SpellCastTargets_SpellCastTargetFlags_Unit {
     pub(crate) const fn size(&self) -> usize {
         match self {
@@ -391,6 +401,15 @@ impl SpellCastTargets_SpellCastTargetFlags_Item {
 
 }
 
+impl std::fmt::Display for SpellCastTargets_SpellCastTargetFlags_Item {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Item{ .. } => f.write_str("Item"),
+            Self::TradeItem{ .. } => f.write_str("TradeItem"),
+        }
+    }
+}
+
 impl SpellCastTargets_SpellCastTargetFlags_Item {
     pub(crate) const fn size(&self) -> usize {
         match self {
@@ -430,6 +449,15 @@ impl SpellCastTargets_SpellCastTargetFlags_Gameobject {
 
 }
 
+impl std::fmt::Display for SpellCastTargets_SpellCastTargetFlags_Gameobject {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Gameobject{ .. } => f.write_str("Gameobject"),
+            Self::Locked{ .. } => f.write_str("Locked"),
+        }
+    }
+}
+
 impl SpellCastTargets_SpellCastTargetFlags_Gameobject {
     pub(crate) const fn size(&self) -> usize {
         match self {
@@ -467,6 +495,15 @@ impl SpellCastTargets_SpellCastTargetFlags_CorpseAlly {
         }
     }
 
+}
+
+impl std::fmt::Display for SpellCastTargets_SpellCastTargetFlags_CorpseAlly {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::CorpseAlly{ .. } => f.write_str("CorpseAlly"),
+            Self::CorpseEnemy{ .. } => f.write_str("CorpseEnemy"),
+        }
+    }
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_CorpseAlly {

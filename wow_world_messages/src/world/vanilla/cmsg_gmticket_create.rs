@@ -360,6 +360,23 @@ impl CMSG_GMTICKET_CREATE_GmTicketType {
 
 }
 
+impl std::fmt::Display for CMSG_GMTICKET_CREATE_GmTicketType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Stuck => f.write_str("Stuck"),
+            Self::BehaviorHarassment{ .. } => f.write_str("BehaviorHarassment"),
+            Self::Guild => f.write_str("Guild"),
+            Self::Item => f.write_str("Item"),
+            Self::Environmental => f.write_str("Environmental"),
+            Self::NonquestCreep => f.write_str("NonquestCreep"),
+            Self::QuestQuestnpc => f.write_str("QuestQuestnpc"),
+            Self::Technical => f.write_str("Technical"),
+            Self::AccountBilling => f.write_str("AccountBilling"),
+            Self::Character => f.write_str("Character"),
+        }
+    }
+}
+
 impl CMSG_GMTICKET_CREATE_GmTicketType {
     pub(crate) fn size(&self) -> usize {
         match self {

@@ -300,6 +300,15 @@ impl SpellCastTargets_SpellCastTargetFlags_Item {
 
 }
 
+impl std::fmt::Display for SpellCastTargets_SpellCastTargetFlags_Item {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Item{ .. } => f.write_str("Item"),
+            Self::TradeItem{ .. } => f.write_str("TradeItem"),
+        }
+    }
+}
+
 impl SpellCastTargets_SpellCastTargetFlags_Item {
     pub(crate) const fn size(&self) -> usize {
         match self {
@@ -339,6 +348,15 @@ impl SpellCastTargets_SpellCastTargetFlags_Gameobject {
 
 }
 
+impl std::fmt::Display for SpellCastTargets_SpellCastTargetFlags_Gameobject {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Gameobject{ .. } => f.write_str("Gameobject"),
+            Self::ObjectUnk{ .. } => f.write_str("ObjectUnk"),
+        }
+    }
+}
+
 impl SpellCastTargets_SpellCastTargetFlags_Gameobject {
     pub(crate) const fn size(&self) -> usize {
         match self {
@@ -376,6 +394,15 @@ impl SpellCastTargets_SpellCastTargetFlags_Corpse {
         }
     }
 
+}
+
+impl std::fmt::Display for SpellCastTargets_SpellCastTargetFlags_Corpse {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Corpse{ .. } => f.write_str("Corpse"),
+            Self::PvpCorpse{ .. } => f.write_str("PvpCorpse"),
+        }
+    }
 }
 
 impl SpellCastTargets_SpellCastTargetFlags_Corpse {

@@ -189,6 +189,29 @@ impl SMSG_TRANSFER_ABORTED_TransferAbortReason {
 
 }
 
+impl std::fmt::Display for SMSG_TRANSFER_ABORTED_TransferAbortReason {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::None => f.write_str("None"),
+            Self::ErrorX => f.write_str("ErrorX"),
+            Self::MaxPlayers => f.write_str("MaxPlayers"),
+            Self::NotFound => f.write_str("NotFound"),
+            Self::TooManyInstances => f.write_str("TooManyInstances"),
+            Self::ZoneInCombat => f.write_str("ZoneInCombat"),
+            Self::InsufficientExpansionLevel{ .. } => f.write_str("InsufficientExpansionLevel"),
+            Self::DifficultyNotAvailable{ .. } => f.write_str("DifficultyNotAvailable"),
+            Self::UniqueMessage{ .. } => f.write_str("UniqueMessage"),
+            Self::TooManyRealmInstances => f.write_str("TooManyRealmInstances"),
+            Self::NeedGroup => f.write_str("NeedGroup"),
+            Self::NotFound1 => f.write_str("NotFound1"),
+            Self::NotFound2 => f.write_str("NotFound2"),
+            Self::NotFound3 => f.write_str("NotFound3"),
+            Self::RealmOnly => f.write_str("RealmOnly"),
+            Self::MapNotAllowed => f.write_str("MapNotAllowed"),
+        }
+    }
+}
+
 impl SMSG_TRANSFER_ABORTED_TransferAbortReason {
     pub(crate) const fn size(&self) -> usize {
         match self {

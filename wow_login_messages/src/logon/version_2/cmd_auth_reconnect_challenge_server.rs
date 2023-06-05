@@ -326,6 +326,29 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
 
 }
 
+impl std::fmt::Display for CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Success{ .. } => f.write_str("Success"),
+            Self::FailUnknown0 => f.write_str("FailUnknown0"),
+            Self::FailUnknown1 => f.write_str("FailUnknown1"),
+            Self::FailBanned => f.write_str("FailBanned"),
+            Self::FailUnknownAccount => f.write_str("FailUnknownAccount"),
+            Self::FailIncorrectPassword => f.write_str("FailIncorrectPassword"),
+            Self::FailAlreadyOnline => f.write_str("FailAlreadyOnline"),
+            Self::FailNoTime => f.write_str("FailNoTime"),
+            Self::FailDbBusy => f.write_str("FailDbBusy"),
+            Self::FailVersionInvalid => f.write_str("FailVersionInvalid"),
+            Self::LoginDownloadFile => f.write_str("LoginDownloadFile"),
+            Self::FailInvalidServer => f.write_str("FailInvalidServer"),
+            Self::FailSuspended => f.write_str("FailSuspended"),
+            Self::FailNoAccess => f.write_str("FailNoAccess"),
+            Self::SuccessSurvey => f.write_str("SuccessSurvey"),
+            Self::FailParentalcontrol => f.write_str("FailParentalcontrol"),
+        }
+    }
+}
+
 impl CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult {
     pub(crate) const fn size(&self) -> usize {
         match self {

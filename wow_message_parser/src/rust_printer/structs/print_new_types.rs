@@ -20,6 +20,7 @@ pub(crate) fn print_new_types(s: &mut Writer, e: &Container) {
                 s.bodyn(format!("impl {name}", name = rd.ty_name()), |s| {
                     print_enum_as_int(s, &rd);
                 });
+                print_enum_display(s, &rd);
                 print_size_for_new_enum(s, &rd);
             }
             DefinerType::Flag => {
@@ -464,5 +465,31 @@ fn print_enum_as_int(s: &mut Writer, rd: &RustDefiner) {
                 ));
             }
         });
+    });
+}
+
+fn print_enum_display(s: &mut Writer, rd: &RustDefiner) {
+    s.impl_for("std::fmt::Display", rd.ty_name(), |s| {
+        s.body(
+            "fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result",
+            |s| {
+                s.body("match self", |s| {
+                    for field in rd.enumerators() {
+                        let display = field.rust_name();
+                        let extra = if field.has_members_in_struct() {
+                            "{ .. }"
+                        } else {
+                            ""
+                        };
+
+                        s.wln(format!(
+                            r#"Self::{name}{extra} => f.write_str("{display}"),"#,
+                            name = field.rust_name(),
+                            display = display,
+                        ));
+                    }
+                });
+            },
+        );
     });
 }

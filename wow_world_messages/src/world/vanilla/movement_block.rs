@@ -581,6 +581,16 @@ impl MovementBlock_SplineFlag_FinalAngle {
 
 }
 
+impl std::fmt::Display for MovementBlock_SplineFlag_FinalAngle {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::FinalAngle{ .. } => f.write_str("FinalAngle"),
+            Self::FinalTarget{ .. } => f.write_str("FinalTarget"),
+            Self::FinalPoint{ .. } => f.write_str("FinalPoint"),
+        }
+    }
+}
+
 impl MovementBlock_SplineFlag_FinalAngle {
     pub(crate) const fn size(&self) -> usize {
         match self {
@@ -2193,6 +2203,15 @@ impl MovementBlock_UpdateFlag_Living {
         }
     }
 
+}
+
+impl std::fmt::Display for MovementBlock_UpdateFlag_Living {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Living{ .. } => f.write_str("Living"),
+            Self::HasPosition{ .. } => f.write_str("HasPosition"),
+        }
+    }
 }
 
 impl MovementBlock_UpdateFlag_Living {

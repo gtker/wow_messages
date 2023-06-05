@@ -376,6 +376,22 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo {
 
 }
 
+impl std::fmt::Display for SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Ok => f.write_str("Ok"),
+            Self::ErrInventory{ .. } => f.write_str("ErrInventory"),
+            Self::ErrDatabase => f.write_str("ErrDatabase"),
+            Self::ErrNotEnoughMoney => f.write_str("ErrNotEnoughMoney"),
+            Self::ErrItemNotFound => f.write_str("ErrItemNotFound"),
+            Self::ErrHigherBid{ .. } => f.write_str("ErrHigherBid"),
+            Self::ErrBidIncrement => f.write_str("ErrBidIncrement"),
+            Self::ErrBidOwn => f.write_str("ErrBidOwn"),
+            Self::ErrRestrictedAccount => f.write_str("ErrRestrictedAccount"),
+        }
+    }
+}
+
 impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo {
     pub(crate) const fn size(&self) -> usize {
         match self {
@@ -443,6 +459,22 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult {
 
 }
 
+impl std::fmt::Display for SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Ok{ .. } => f.write_str("Ok"),
+            Self::ErrInventory{ .. } => f.write_str("ErrInventory"),
+            Self::ErrDatabase => f.write_str("ErrDatabase"),
+            Self::ErrNotEnoughMoney => f.write_str("ErrNotEnoughMoney"),
+            Self::ErrItemNotFound => f.write_str("ErrItemNotFound"),
+            Self::ErrHigherBid{ .. } => f.write_str("ErrHigherBid"),
+            Self::ErrBidIncrement => f.write_str("ErrBidIncrement"),
+            Self::ErrBidOwn => f.write_str("ErrBidOwn"),
+            Self::ErrRestrictedAccount => f.write_str("ErrRestrictedAccount"),
+        }
+    }
+}
+
 impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult {
     pub(crate) const fn size(&self) -> usize {
         match self {
@@ -502,6 +534,16 @@ impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction {
         }
     }
 
+}
+
+impl std::fmt::Display for SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Started{ .. } => f.write_str("Started"),
+            Self::Removed{ .. } => f.write_str("Removed"),
+            Self::BidPlaced{ .. } => f.write_str("BidPlaced"),
+        }
+    }
 }
 
 impl SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction {

@@ -405,6 +405,15 @@ impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
 
 }
 
+impl std::fmt::Display for CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::None => f.write_str("None"),
+            Self::Pin{ .. } => f.write_str("Pin"),
+        }
+    }
+}
+
 impl CMD_AUTH_LOGON_PROOF_Client_SecurityFlag {
     pub(crate) const fn size(&self) -> usize {
         match self {

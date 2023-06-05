@@ -441,6 +441,50 @@ impl CMSG_GMTICKET_CREATE_GmTicketType {
 
 }
 
+impl std::fmt::Display for CMSG_GMTICKET_CREATE_GmTicketType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::NotSet => f.write_str("NotSet"),
+            Self::Stuck => f.write_str("Stuck"),
+            Self::BehaviorHarassment{ .. } => f.write_str("BehaviorHarassment"),
+            Self::Guild => f.write_str("Guild"),
+            Self::Item => f.write_str("Item"),
+            Self::Environmental => f.write_str("Environmental"),
+            Self::NonQuestCreep => f.write_str("NonQuestCreep"),
+            Self::QuestQuestNpc => f.write_str("QuestQuestNpc"),
+            Self::Technical => f.write_str("Technical"),
+            Self::AccountBilling => f.write_str("AccountBilling"),
+            Self::Character => f.write_str("Character"),
+            Self::ArenaHonorItemIssues => f.write_str("ArenaHonorItemIssues"),
+            Self::ArenaHonorPointsIssues => f.write_str("ArenaHonorPointsIssues"),
+            Self::BottingCheatingHacking => f.write_str("BottingCheatingHacking"),
+            Self::BugReport => f.write_str("BugReport"),
+            Self::CompromisedAccountIssue => f.write_str("CompromisedAccountIssue"),
+            Self::GameSuggestions => f.write_str("GameSuggestions"),
+            Self::GameplayQuestion => f.write_str("GameplayQuestion"),
+            Self::GuildBankIssue => f.write_str("GuildBankIssue"),
+            Self::GuildMasterIssue => f.write_str("GuildMasterIssue"),
+            Self::HarassmentScamReport => f.write_str("HarassmentScamReport"),
+            Self::InappropriateNameGuildArenaCharacterPet => f.write_str("InappropriateNameGuildArenaCharacterPet"),
+            Self::KnownIssueFix => f.write_str("KnownIssueFix"),
+            Self::LatencyLagReport => f.write_str("LatencyLagReport"),
+            Self::LootingIssueMistake => f.write_str("LootingIssueMistake"),
+            Self::MailIssue => f.write_str("MailIssue"),
+            Self::NonInGameRelatedInquiry => f.write_str("NonInGameRelatedInquiry"),
+            Self::ParentalControlsCais => f.write_str("ParentalControlsCais"),
+            Self::Pcnc => f.write_str("Pcnc"),
+            Self::Pct => f.write_str("Pct"),
+            Self::RestorationStatusFollowUp => f.write_str("RestorationStatusFollowUp"),
+            Self::ServerInstanceIssues => f.write_str("ServerInstanceIssues"),
+            Self::Spam => f.write_str("Spam"),
+            Self::SuicideCase => f.write_str("SuicideCase"),
+            Self::SuspensionQuestions => f.write_str("SuspensionQuestions"),
+            Self::TechnicalSoundGraphicsIssue => f.write_str("TechnicalSoundGraphicsIssue"),
+            Self::UiIssue => f.write_str("UiIssue"),
+        }
+    }
+}
+
 impl CMSG_GMTICKET_CREATE_GmTicketType {
     pub(crate) fn size(&self) -> usize {
         match self {

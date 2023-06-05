@@ -240,6 +240,15 @@ impl SMSG_BATTLEFIELD_LIST_RandomBg {
 
 }
 
+impl std::fmt::Display for SMSG_BATTLEFIELD_LIST_RandomBg {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::NotRandom => f.write_str("NotRandom"),
+            Self::Random{ .. } => f.write_str("Random"),
+        }
+    }
+}
+
 impl SMSG_BATTLEFIELD_LIST_RandomBg {
     pub(crate) const fn size(&self) -> usize {
         match self {

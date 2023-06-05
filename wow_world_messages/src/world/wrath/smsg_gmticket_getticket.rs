@@ -183,6 +183,16 @@ impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
 
 }
 
+impl std::fmt::Display for SMSG_GMTICKET_GETTICKET_GmTicketStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::DbError => f.write_str("DbError"),
+            Self::HasText{ .. } => f.write_str("HasText"),
+            Self::Default => f.write_str("Default"),
+        }
+    }
+}
+
 impl SMSG_GMTICKET_GETTICKET_GmTicketStatus {
     pub(crate) fn size(&self) -> usize {
         match self {

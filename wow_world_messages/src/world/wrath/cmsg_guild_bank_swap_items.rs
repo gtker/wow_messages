@@ -344,6 +344,15 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode {
 
 }
 
+impl std::fmt::Display for CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Manual{ .. } => f.write_str("Manual"),
+            Self::Automatic{ .. } => f.write_str("Automatic"),
+        }
+    }
+}
+
 impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode {
     pub(crate) const fn size(&self) -> usize {
         match self {
@@ -408,6 +417,15 @@ impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource {
         }
     }
 
+}
+
+impl std::fmt::Display for CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Inventory{ .. } => f.write_str("Inventory"),
+            Self::Bank{ .. } => f.write_str("Bank"),
+        }
+    }
 }
 
 impl CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource {

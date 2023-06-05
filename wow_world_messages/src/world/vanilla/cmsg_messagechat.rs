@@ -262,6 +262,48 @@ impl CMSG_MESSAGECHAT_ChatType {
 
 }
 
+impl std::fmt::Display for CMSG_MESSAGECHAT_ChatType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Say => f.write_str("Say"),
+            Self::Party => f.write_str("Party"),
+            Self::Raid => f.write_str("Raid"),
+            Self::Guild => f.write_str("Guild"),
+            Self::Officer => f.write_str("Officer"),
+            Self::Yell => f.write_str("Yell"),
+            Self::Whisper{ .. } => f.write_str("Whisper"),
+            Self::WhisperInform => f.write_str("WhisperInform"),
+            Self::Emote => f.write_str("Emote"),
+            Self::TextEmote => f.write_str("TextEmote"),
+            Self::System => f.write_str("System"),
+            Self::MonsterSay => f.write_str("MonsterSay"),
+            Self::MonsterYell => f.write_str("MonsterYell"),
+            Self::MonsterEmote => f.write_str("MonsterEmote"),
+            Self::Channel{ .. } => f.write_str("Channel"),
+            Self::ChannelJoin => f.write_str("ChannelJoin"),
+            Self::ChannelLeave => f.write_str("ChannelLeave"),
+            Self::ChannelList => f.write_str("ChannelList"),
+            Self::ChannelNotice => f.write_str("ChannelNotice"),
+            Self::ChannelNoticeUser => f.write_str("ChannelNoticeUser"),
+            Self::Afk => f.write_str("Afk"),
+            Self::Dnd => f.write_str("Dnd"),
+            Self::Ignored => f.write_str("Ignored"),
+            Self::Skill => f.write_str("Skill"),
+            Self::Loot => f.write_str("Loot"),
+            Self::MonsterWhisper => f.write_str("MonsterWhisper"),
+            Self::BgSystemNeutral => f.write_str("BgSystemNeutral"),
+            Self::BgSystemAlliance => f.write_str("BgSystemAlliance"),
+            Self::BgSystemHorde => f.write_str("BgSystemHorde"),
+            Self::RaidLeader => f.write_str("RaidLeader"),
+            Self::RaidWarning => f.write_str("RaidWarning"),
+            Self::RaidBossWhisper => f.write_str("RaidBossWhisper"),
+            Self::RaidBossEmote => f.write_str("RaidBossEmote"),
+            Self::Battleground => f.write_str("Battleground"),
+            Self::BattlegroundLeader => f.write_str("BattlegroundLeader"),
+        }
+    }
+}
+
 impl CMSG_MESSAGECHAT_ChatType {
     pub(crate) fn size(&self) -> usize {
         match self {

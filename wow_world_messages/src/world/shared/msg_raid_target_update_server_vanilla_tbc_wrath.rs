@@ -136,6 +136,15 @@ impl MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
 
 }
 
+impl std::fmt::Display for MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Partial{ .. } => f.write_str("Partial"),
+            Self::Full{ .. } => f.write_str("Full"),
+        }
+    }
+}
+
 impl MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType {
     pub(crate) const fn size(&self) -> usize {
         match self {

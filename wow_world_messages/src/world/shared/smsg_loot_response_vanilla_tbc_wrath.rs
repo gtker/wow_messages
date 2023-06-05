@@ -178,6 +178,22 @@ impl SMSG_LOOT_RESPONSE_LootMethod {
 
 }
 
+impl std::fmt::Display for SMSG_LOOT_RESPONSE_LootMethod {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::ErrorX{ .. } => f.write_str("ErrorX"),
+            Self::Corpse => f.write_str("Corpse"),
+            Self::Pickpocketing => f.write_str("Pickpocketing"),
+            Self::Fishing => f.write_str("Fishing"),
+            Self::Disenchanting => f.write_str("Disenchanting"),
+            Self::Skinning => f.write_str("Skinning"),
+            Self::Fishinghole => f.write_str("Fishinghole"),
+            Self::FishingFail => f.write_str("FishingFail"),
+            Self::Insignia => f.write_str("Insignia"),
+        }
+    }
+}
+
 impl SMSG_LOOT_RESPONSE_LootMethod {
     pub(crate) const fn size(&self) -> usize {
         match self {

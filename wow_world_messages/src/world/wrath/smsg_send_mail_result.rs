@@ -718,6 +718,27 @@ impl SMSG_SEND_MAIL_RESULT_MailResultTwo {
 
 }
 
+impl std::fmt::Display for SMSG_SEND_MAIL_RESULT_MailResultTwo {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Ok => f.write_str("Ok"),
+            Self::ErrEquipError{ .. } => f.write_str("ErrEquipError"),
+            Self::ErrCannotSendToSelf => f.write_str("ErrCannotSendToSelf"),
+            Self::ErrNotEnoughMoney => f.write_str("ErrNotEnoughMoney"),
+            Self::ErrRecipientNotFound => f.write_str("ErrRecipientNotFound"),
+            Self::ErrNotYourTeam => f.write_str("ErrNotYourTeam"),
+            Self::ErrInternalError => f.write_str("ErrInternalError"),
+            Self::ErrDisabledForTrialAcc => f.write_str("ErrDisabledForTrialAcc"),
+            Self::ErrRecipientCapReached => f.write_str("ErrRecipientCapReached"),
+            Self::ErrCantSendWrappedCod => f.write_str("ErrCantSendWrappedCod"),
+            Self::ErrMailAndChatSuspended => f.write_str("ErrMailAndChatSuspended"),
+            Self::ErrTooManyAttachments => f.write_str("ErrTooManyAttachments"),
+            Self::ErrMailAttachmentInvalid => f.write_str("ErrMailAttachmentInvalid"),
+            Self::ErrItemHasExpired => f.write_str("ErrItemHasExpired"),
+        }
+    }
+}
+
 impl SMSG_SEND_MAIL_RESULT_MailResultTwo {
     pub(crate) const fn size(&self) -> usize {
         match self {
@@ -821,6 +842,27 @@ impl SMSG_SEND_MAIL_RESULT_MailResult {
         }
     }
 
+}
+
+impl std::fmt::Display for SMSG_SEND_MAIL_RESULT_MailResult {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Ok{ .. } => f.write_str("Ok"),
+            Self::ErrEquipError{ .. } => f.write_str("ErrEquipError"),
+            Self::ErrCannotSendToSelf{ .. } => f.write_str("ErrCannotSendToSelf"),
+            Self::ErrNotEnoughMoney{ .. } => f.write_str("ErrNotEnoughMoney"),
+            Self::ErrRecipientNotFound{ .. } => f.write_str("ErrRecipientNotFound"),
+            Self::ErrNotYourTeam{ .. } => f.write_str("ErrNotYourTeam"),
+            Self::ErrInternalError{ .. } => f.write_str("ErrInternalError"),
+            Self::ErrDisabledForTrialAcc{ .. } => f.write_str("ErrDisabledForTrialAcc"),
+            Self::ErrRecipientCapReached{ .. } => f.write_str("ErrRecipientCapReached"),
+            Self::ErrCantSendWrappedCod{ .. } => f.write_str("ErrCantSendWrappedCod"),
+            Self::ErrMailAndChatSuspended{ .. } => f.write_str("ErrMailAndChatSuspended"),
+            Self::ErrTooManyAttachments{ .. } => f.write_str("ErrTooManyAttachments"),
+            Self::ErrMailAttachmentInvalid{ .. } => f.write_str("ErrMailAttachmentInvalid"),
+            Self::ErrItemHasExpired{ .. } => f.write_str("ErrItemHasExpired"),
+        }
+    }
 }
 
 impl SMSG_SEND_MAIL_RESULT_MailResult {
@@ -970,6 +1012,19 @@ impl SMSG_SEND_MAIL_RESULT_MailAction {
         }
     }
 
+}
+
+impl std::fmt::Display for SMSG_SEND_MAIL_RESULT_MailAction {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Send{ .. } => f.write_str("Send"),
+            Self::MoneyTaken{ .. } => f.write_str("MoneyTaken"),
+            Self::ItemTaken{ .. } => f.write_str("ItemTaken"),
+            Self::ReturnedToSender{ .. } => f.write_str("ReturnedToSender"),
+            Self::Deleted{ .. } => f.write_str("Deleted"),
+            Self::MadePermanent{ .. } => f.write_str("MadePermanent"),
+        }
+    }
 }
 
 impl SMSG_SEND_MAIL_RESULT_MailAction {

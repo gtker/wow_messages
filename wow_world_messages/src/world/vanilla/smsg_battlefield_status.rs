@@ -4468,6 +4468,18 @@ impl SMSG_BATTLEFIELD_STATUS_StatusId {
 
 }
 
+impl std::fmt::Display for SMSG_BATTLEFIELD_STATUS_StatusId {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::None => f.write_str("None"),
+            Self::WaitQueue{ .. } => f.write_str("WaitQueue"),
+            Self::WaitJoin{ .. } => f.write_str("WaitJoin"),
+            Self::InProgress{ .. } => f.write_str("InProgress"),
+            Self::WaitLeave => f.write_str("WaitLeave"),
+        }
+    }
+}
+
 impl SMSG_BATTLEFIELD_STATUS_StatusId {
     pub(crate) const fn size(&self) -> usize {
         match self {
@@ -4773,6 +4785,57 @@ impl SMSG_BATTLEFIELD_STATUS_Map {
         }
     }
 
+}
+
+impl std::fmt::Display for SMSG_BATTLEFIELD_STATUS_Map {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::EasternKingdoms => f.write_str("EasternKingdoms"),
+            Self::Kalimdor{ .. } => f.write_str("Kalimdor"),
+            Self::Testing{ .. } => f.write_str("Testing"),
+            Self::ScottTest{ .. } => f.write_str("ScottTest"),
+            Self::CashTest{ .. } => f.write_str("CashTest"),
+            Self::AlteracValley{ .. } => f.write_str("AlteracValley"),
+            Self::ShadowfangKeep{ .. } => f.write_str("ShadowfangKeep"),
+            Self::StormwindStockade{ .. } => f.write_str("StormwindStockade"),
+            Self::StormwindPrison{ .. } => f.write_str("StormwindPrison"),
+            Self::Deadmines{ .. } => f.write_str("Deadmines"),
+            Self::AzsharaCrater{ .. } => f.write_str("AzsharaCrater"),
+            Self::CollinsTest{ .. } => f.write_str("CollinsTest"),
+            Self::WailingCaverns{ .. } => f.write_str("WailingCaverns"),
+            Self::MonasteryUnused{ .. } => f.write_str("MonasteryUnused"),
+            Self::RazorfenKraul{ .. } => f.write_str("RazorfenKraul"),
+            Self::BlackfathomDeeps{ .. } => f.write_str("BlackfathomDeeps"),
+            Self::Uldaman{ .. } => f.write_str("Uldaman"),
+            Self::Gnomeregan{ .. } => f.write_str("Gnomeregan"),
+            Self::SunkenTemple{ .. } => f.write_str("SunkenTemple"),
+            Self::RazorfenDowns{ .. } => f.write_str("RazorfenDowns"),
+            Self::EmeraldDream{ .. } => f.write_str("EmeraldDream"),
+            Self::ScarletMonastery{ .. } => f.write_str("ScarletMonastery"),
+            Self::ZulFarrak{ .. } => f.write_str("ZulFarrak"),
+            Self::BlackrockSpire{ .. } => f.write_str("BlackrockSpire"),
+            Self::BlackrockDepths{ .. } => f.write_str("BlackrockDepths"),
+            Self::OnyxiasLair{ .. } => f.write_str("OnyxiasLair"),
+            Self::OpeningOfTheDarkPortal{ .. } => f.write_str("OpeningOfTheDarkPortal"),
+            Self::Scholomance{ .. } => f.write_str("Scholomance"),
+            Self::ZulGurub{ .. } => f.write_str("ZulGurub"),
+            Self::Stratholme{ .. } => f.write_str("Stratholme"),
+            Self::Maraudon{ .. } => f.write_str("Maraudon"),
+            Self::DeeprunTram{ .. } => f.write_str("DeeprunTram"),
+            Self::RagefireChasm{ .. } => f.write_str("RagefireChasm"),
+            Self::MoltenCore{ .. } => f.write_str("MoltenCore"),
+            Self::DireMaul{ .. } => f.write_str("DireMaul"),
+            Self::AlliancePvpBarracks{ .. } => f.write_str("AlliancePvpBarracks"),
+            Self::HordePvpBarracks{ .. } => f.write_str("HordePvpBarracks"),
+            Self::DevelopmentLand{ .. } => f.write_str("DevelopmentLand"),
+            Self::BlackwingLair{ .. } => f.write_str("BlackwingLair"),
+            Self::WarsongGulch{ .. } => f.write_str("WarsongGulch"),
+            Self::RuinsOfAhnQiraj{ .. } => f.write_str("RuinsOfAhnQiraj"),
+            Self::ArathiBasin{ .. } => f.write_str("ArathiBasin"),
+            Self::AhnQirajTemple{ .. } => f.write_str("AhnQirajTemple"),
+            Self::Naxxramas{ .. } => f.write_str("Naxxramas"),
+        }
+    }
 }
 
 impl SMSG_BATTLEFIELD_STATUS_Map {

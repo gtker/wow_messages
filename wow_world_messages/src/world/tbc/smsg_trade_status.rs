@@ -245,6 +245,37 @@ impl SMSG_TRADE_STATUS_TradeStatus {
 
 }
 
+impl std::fmt::Display for SMSG_TRADE_STATUS_TradeStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Busy => f.write_str("Busy"),
+            Self::BeginTrade{ .. } => f.write_str("BeginTrade"),
+            Self::OpenWindow => f.write_str("OpenWindow"),
+            Self::TradeCanceled => f.write_str("TradeCanceled"),
+            Self::TradeAccept => f.write_str("TradeAccept"),
+            Self::Busy2 => f.write_str("Busy2"),
+            Self::NoTarget => f.write_str("NoTarget"),
+            Self::BackToTrade => f.write_str("BackToTrade"),
+            Self::TradeComplete => f.write_str("TradeComplete"),
+            Self::TradeRejected => f.write_str("TradeRejected"),
+            Self::TargetToFar => f.write_str("TargetToFar"),
+            Self::WrongFaction => f.write_str("WrongFaction"),
+            Self::CloseWindow{ .. } => f.write_str("CloseWindow"),
+            Self::Unknown13 => f.write_str("Unknown13"),
+            Self::IgnoreYou => f.write_str("IgnoreYou"),
+            Self::YouStunned => f.write_str("YouStunned"),
+            Self::TargetStunned => f.write_str("TargetStunned"),
+            Self::YouDead => f.write_str("YouDead"),
+            Self::TargetDead => f.write_str("TargetDead"),
+            Self::YouLogout => f.write_str("YouLogout"),
+            Self::TargetLogout => f.write_str("TargetLogout"),
+            Self::TrialAccount => f.write_str("TrialAccount"),
+            Self::OnlyConjured{ .. } => f.write_str("OnlyConjured"),
+            Self::NotOnTaplist{ .. } => f.write_str("NotOnTaplist"),
+        }
+    }
+}
+
 impl SMSG_TRADE_STATUS_TradeStatus {
     pub(crate) const fn size(&self) -> usize {
         match self {
