@@ -316,74 +316,56 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
             s.wln(format!("self.get_guid({offset})"));
         }
         UfType::Int => {
-            s.wln(format!("self.values.get(&{offset}).map(|v| *v as i32)"));
+            s.wln(format!("self.get_int({offset})"));
         }
         UfType::Float => {
-            s.wln(format!("self.values.get(&{offset}).map(|v| f32::from_le_bytes(v.to_le_bytes()))"));
+            s.wln(format!("self.get_float({offset})"));
         }
         UfType::Bytes => {
-            s.body_else(
-                format!("if let Some(v) = self.values.get(&{offset})"),
-                |s| {
-                    s.wln("let v = v.to_le_bytes();");
-                    s.wln("let (a, b, c, d) = (v[0], v[1], v[2], v[3]);");
-                    s.wln("Some((a, b, c, d))");
-                },
-                |s| {
-                    s.wln("None");
-                },
-            );
+            s.wln(format!("self.get_bytes({offset})"));
+        }
+        UfType::TwoShort => {
+            s.wln(format!("self.get_shorts({offset})"));
         }
         UfType::BytesWith(a, b, c, d) => {
-            s.body_else(
-                format!("if let Some(v) = self.values.get(&{offset})"),
-                |s| {
-                    s.wln("let v = v.to_le_bytes();");
-                    s.wln(format!(
-                        "let ({}, {}, {}, {}) = (v[0], v[1], v[2], v[3]);",
+            let bytes = [&a, &b, &c, &d];
+            if bytes.iter().all(|a| matches!(a.ty, ByteInnerTy::Byte)) {
+                s.wln(format!("self.get_bytes({offset})"));
+            } else {
+                s.body_closing_with(
+                    format!(
+                        "self.get_bytes({offset}).map(|({}, {}, {}, {})|",
                         a.name, b.name, c.name, d.name
-                    ));
-
-                    let f = |byte: &ByteType| {
-                        match byte.ty {
+                    ),
+                    |s| {
+                        let f = |byte: &ByteType| match byte.ty {
                             ByteInnerTy::Byte => byte.name.to_string(),
                             ByteInnerTy::Ty(_) => format!("{}.try_into().unwrap()", byte.name),
-                        }
-                    };
+                        };
 
-                    let a = f(&a);
-                    let b = f(&b);
-                    let c = f(&c);
-                    let d = f(&d);
+                        let a = f(&a);
+                        let b = f(&b);
+                        let c = f(&c);
+                        let d = f(&d);
 
-                    s.wln(format!("Some(({a}, {b}, {c}, {d}))"));
-                },
-                |s| {
-                    s.wln("None");
-                },
-            );
+                        s.wln(format!("({a}, {b}, {c}, {d})"));
+                    },
+                    ")",
+                );
+            }
         }
-        UfType::TwoShort => s.body_else(
-            format!("if let Some(v) = self.values.get(&{offset})"),
-            |s| {
-                s.wln("let v = v.to_le_bytes();");
-                s.wln("let (a, b) = (u16::from_le_bytes([v[0], v[1]]), u16::from_le_bytes([v[2], v[3]]));");
-                s.wln("Some((a, b))");
-            },
-            |s| {
-                s.wln("None");
-            },
-        ),
-        UfType::ArrayOfStruct { name,  import_location, .. } => {
+        UfType::ArrayOfStruct {
+            name,
+            import_location,
+            ..
+        } => {
             s.wln(format!("{import_location}::{name}::from_range(self.values.range(index.first()..=index.last()))"));
         }
-        UfType::GuidEnumLookupArray {  variable_name, .. } => {
-            s.wln(format!("let offset = {offset} + {variable_name}.as_int() as u16 * 2;"));
-            s.wln(format!("let lower = self.values.get(&offset);"));
-            s.wln(format!("let upper = self.values.get(&(offset + 1));"));
-            s.newline();
-
-            s.wln("lower.map(|lower| Guid::from_u32s(*lower, *upper.unwrap()))");
+        UfType::GuidEnumLookupArray { variable_name, .. } => {
+            s.wln(format!(
+                "let offset = {offset} + {variable_name}.as_int() as u16 * 2;"
+            ));
+            s.wln("self.get_guid(offset)");
         }
     }
 

@@ -166,6 +166,11 @@ macro_rules! update_item {
             }
 
             #[allow(unused)]
+            pub(crate) fn get_int(&self, bit: u16) -> Option<i32> {
+                $crate::helper::update_mask_common::inners::get_int(&self.values, bit)
+            }
+
+            #[allow(unused)]
             pub(crate) fn set_float(&mut self, bit: u16, v: f32) {
                 $crate::helper::update_mask_common::inners::set_float(
                     &mut self.values,
@@ -174,6 +179,11 @@ macro_rules! update_item {
                     bit,
                     v,
                 );
+            }
+
+            #[allow(unused)]
+            pub(crate) fn get_float(&self, bit: u16) -> Option<f32> {
+                $crate::helper::update_mask_common::inners::get_float(&self.values, bit)
             }
 
             #[allow(unused)]
@@ -191,6 +201,11 @@ macro_rules! update_item {
             }
 
             #[allow(unused)]
+            pub(crate) fn get_bytes(&self, bit: u16) -> Option<(u8, u8, u8, u8)> {
+                $crate::helper::update_mask_common::inners::get_bytes(&self.values, bit)
+            }
+
+            #[allow(unused)]
             pub(crate) fn set_shorts(&mut self, bit: u16, a: u16, b: u16) {
                 $crate::helper::update_mask_common::inners::set_shorts(
                     &mut self.values,
@@ -200,6 +215,11 @@ macro_rules! update_item {
                     a,
                     b,
                 );
+            }
+
+            #[allow(unused)]
+            pub(crate) fn get_shorts(&self, bit: u16) -> Option<(u16, u16)> {
+                $crate::helper::update_mask_common::inners::get_shorts(&self.values, bit)
             }
 
             #[allow(unused)]

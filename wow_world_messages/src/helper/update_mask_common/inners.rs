@@ -94,6 +94,12 @@ pub(crate) fn set_int(
     );
 }
 
+pub(crate) fn get_int(values: &BTreeMap<u16, u32>, bit: u16) -> Option<i32> {
+    values
+        .get(&bit)
+        .map(|v| i32::from_le_bytes(v.to_le_bytes()))
+}
+
 pub(crate) fn set_float(
     values: &mut BTreeMap<u16, u32>,
     header: &mut Vec<u32>,
@@ -108,6 +114,12 @@ pub(crate) fn set_float(
         bit,
         u32::from_le_bytes(v.to_le_bytes()),
     );
+}
+
+pub(crate) fn get_float(values: &BTreeMap<u16, u32>, bit: u16) -> Option<f32> {
+    values
+        .get(&bit)
+        .map(|v| f32::from_le_bytes(v.to_le_bytes()))
 }
 
 pub(crate) fn set_bytes(
@@ -129,6 +141,17 @@ pub(crate) fn set_bytes(
     );
 }
 
+pub(crate) fn get_bytes(values: &BTreeMap<u16, u32>, bit: u16) -> Option<(u8, u8, u8, u8)> {
+    if let Some(v) = values.get(&bit) {
+        let v = v.to_le_bytes();
+        let (a, b, c, d) = (v[0], v[1], v[2], v[3]);
+
+        Some((a, b, c, d))
+    } else {
+        None
+    }
+}
+
 pub(crate) fn set_shorts(
     values: &mut BTreeMap<u16, u32>,
     header: &mut Vec<u32>,
@@ -144,6 +167,20 @@ pub(crate) fn set_shorts(
         bit,
         crate::util::u16s_to_u32(a, b),
     );
+}
+
+pub(crate) fn get_shorts(values: &BTreeMap<u16, u32>, bit: u16) -> Option<(u16, u16)> {
+    if let Some(v) = values.get(&bit) {
+        let v = v.to_le_bytes();
+        let (a, b) = (
+            u16::from_le_bytes([v[0], v[1]]),
+            u16::from_le_bytes([v[2], v[3]]),
+        );
+
+        Some((a, b))
+    } else {
+        None
+    }
 }
 
 pub(crate) const fn has_array_bit_set(array: &[u32], bit: u16) -> bool {
