@@ -72,7 +72,7 @@
 pub mod errors;
 pub(crate) mod helper;
 pub(crate) mod manual;
-mod traits;
+pub(crate) mod traits;
 pub(crate) mod util;
 #[allow(
     non_camel_case_types,
@@ -87,7 +87,9 @@ pub(crate) mod util;
 )]
 mod world;
 
-pub use traits::*;
+pub(crate) use traits::private;
+pub use traits::Message;
+
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub use world::*;
 

@@ -2,6 +2,7 @@ pub mod opcodes;
 pub use wow_world_base::wrath::*;
 pub use crate::manual::wrath::*;
 pub use crate::helper::wrath::*;
+pub use crate::traits::wrath::*;
 
 pub use wow_world_base::shared::activate_taxi_reply_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::ai_reaction_vanilla_tbc_wrath::*;

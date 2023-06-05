@@ -2,6 +2,7 @@ pub mod opcodes;
 pub use wow_world_base::vanilla::*;
 pub use crate::manual::vanilla::*;
 pub use crate::helper::vanilla::*;
+pub use crate::traits::vanilla::*;
 
 pub use wow_world_base::shared::account_data_type_vanilla_tbc::*;
 pub use wow_world_base::shared::activate_taxi_reply_vanilla_tbc_wrath::*;
