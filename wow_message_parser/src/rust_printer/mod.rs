@@ -69,6 +69,15 @@ impl Writer {
         }
     }
 
+    pub(crate) fn start_with(inner: String) -> Self {
+        Self {
+            inner,
+            prefix: "".to_string(),
+            indentation_level: 0,
+            docc_indentation_level: 0,
+        }
+    }
+
     pub(crate) fn with_prefix(prefix: &str) -> Self {
         Self {
             inner: String::with_capacity(4000),
