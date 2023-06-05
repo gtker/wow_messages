@@ -162,7 +162,7 @@ impl Mail {
         let message_id = crate::util::read_u32_le(&mut r)?;
 
         // message_type: MailType
-        let message_type: MailType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let message_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let message_type_if = match message_type {
             MailType::Normal => {

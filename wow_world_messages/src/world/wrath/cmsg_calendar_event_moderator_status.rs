@@ -58,7 +58,7 @@ impl crate::Message for CMSG_CALENDAR_EVENT_MODERATOR_STATUS {
         let sender_invite_id = crate::util::read_guid(&mut r)?;
 
         // rank: CalendarModeratorRank
-        let rank: CalendarModeratorRank = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let rank = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             event,

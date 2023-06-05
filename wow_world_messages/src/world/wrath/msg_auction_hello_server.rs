@@ -47,7 +47,7 @@ impl crate::Message for MSG_AUCTION_HELLO_Server {
         let auctioneer = crate::util::read_guid(&mut r)?;
 
         // auction_house: AuctionHouse
-        let auction_house: AuctionHouse = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let auction_house = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // auction_house_enabled: Bool
         let auction_house_enabled = crate::util::read_u8_le(&mut r)? != 0;

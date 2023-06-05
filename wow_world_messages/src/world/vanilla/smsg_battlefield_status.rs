@@ -2129,19 +2129,19 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         let queue_slot = crate::util::read_u32_le(&mut r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let map_if = match map {
             Map::EasternKingdoms => SMSG_BATTLEFIELD_STATUS_Map::EasternKingdoms,
             Map::Kalimdor => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2188,13 +2188,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::Testing => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2241,13 +2241,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::ScottTest => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2294,13 +2294,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::CashTest => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2347,13 +2347,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::AlteracValley => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2400,13 +2400,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::ShadowfangKeep => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2453,13 +2453,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::StormwindStockade => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2506,13 +2506,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::StormwindPrison => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2559,13 +2559,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::Deadmines => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2612,13 +2612,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::AzsharaCrater => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2665,13 +2665,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::CollinsTest => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2718,13 +2718,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::WailingCaverns => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2771,13 +2771,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::MonasteryUnused => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2824,13 +2824,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::RazorfenKraul => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2877,13 +2877,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::BlackfathomDeeps => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2930,13 +2930,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::Uldaman => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -2983,13 +2983,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::Gnomeregan => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3036,13 +3036,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::SunkenTemple => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3089,13 +3089,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::RazorfenDowns => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3142,13 +3142,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::EmeraldDream => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3195,13 +3195,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::ScarletMonastery => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3248,13 +3248,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::ZulFarrak => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3301,13 +3301,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::BlackrockSpire => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3354,13 +3354,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::BlackrockDepths => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3407,13 +3407,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::OnyxiasLair => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3460,13 +3460,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::OpeningOfTheDarkPortal => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3513,13 +3513,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::Scholomance => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3566,13 +3566,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::ZulGurub => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3619,13 +3619,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::Stratholme => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3672,13 +3672,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::Maraudon => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3725,13 +3725,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::DeeprunTram => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3778,13 +3778,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::RagefireChasm => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3831,13 +3831,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::MoltenCore => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3884,13 +3884,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::DireMaul => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3937,13 +3937,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::AlliancePvpBarracks => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -3990,13 +3990,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::HordePvpBarracks => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -4043,13 +4043,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::DevelopmentLand => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -4096,13 +4096,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::BlackwingLair => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -4149,13 +4149,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::WarsongGulch => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -4202,13 +4202,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::RuinsOfAhnQiraj => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -4255,13 +4255,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::ArathiBasin => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -4308,13 +4308,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::AhnQirajTemple => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -4361,13 +4361,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             Map::Naxxramas => {
                 // bracket: BattlegroundBracket
-                let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // client_instance_id: u32
                 let client_instance_id = crate::util::read_u32_le(&mut r)?;
 
                 // status_id: StatusId
-                let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let status_id_if = match status_id {
                     StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,

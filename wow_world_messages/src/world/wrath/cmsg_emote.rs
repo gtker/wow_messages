@@ -33,7 +33,7 @@ impl crate::Message for CMSG_EMOTE {
         }
 
         // emote: Emote
-        let emote: Emote = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let emote = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             emote,

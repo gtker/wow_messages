@@ -77,10 +77,10 @@ impl LfgPlayer {
         let level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // lfg_mode: LfgMode
-        let lfg_mode: LfgMode = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let lfg_mode = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // lfg_slots: u32[3]
         let lfg_slots = {

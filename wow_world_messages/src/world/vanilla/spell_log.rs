@@ -475,7 +475,7 @@ impl SpellLog {
 impl SpellLog {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // effect: SpellEffect
-        let effect: SpellEffect = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let effect = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // amount_of_logs: u32
         let _amount_of_logs = crate::util::read_u32_le(&mut r)?;
@@ -505,7 +505,7 @@ impl SpellLog {
                 let amount = crate::util::read_u32_le(&mut r)?;
 
                 // power: Power
-                let power: Power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+                let power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
                 // multiplier: f32
                 let multiplier = crate::util::read_f32_le(&mut r)?;

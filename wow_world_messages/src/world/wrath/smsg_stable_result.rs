@@ -33,7 +33,7 @@ impl crate::Message for SMSG_STABLE_RESULT {
         }
 
         // result: StableResult
-        let result: StableResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             result,

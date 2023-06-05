@@ -41,7 +41,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_FAILED {
         let quest_id = crate::util::read_u32_le(&mut r)?;
 
         // reason: QuestFailedReason
-        let reason: QuestFailedReason = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let reason = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             quest_id,

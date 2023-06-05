@@ -37,7 +37,7 @@ impl crate::Message for CMSG_ZONEUPDATE {
         }
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             area,

@@ -312,12 +312,12 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
         let mail_id = crate::util::read_u32_le(&mut r)?;
 
         // action: MailAction
-        let action: MailAction = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let action = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let action_if = match action {
             MailAction::Send => {
                 // result2: MailResultTwo
-                let result2: MailResultTwo = crate::util::read_u32_le(&mut r)?.try_into()?;
+                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 let result2_if = match result2 {
                     MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
@@ -349,7 +349,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
             }
             MailAction::MoneyTaken => {
                 // result2: MailResultTwo
-                let result2: MailResultTwo = crate::util::read_u32_le(&mut r)?.try_into()?;
+                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 let result2_if = match result2 {
                     MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
@@ -381,7 +381,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
             }
             MailAction::ItemTaken => {
                 // result: MailResult
-                let result: MailResult = crate::util::read_u32_le(&mut r)?.try_into()?;
+                let result = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 let result_if = match result {
                     MailResult::Ok => {
@@ -556,7 +556,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
             }
             MailAction::ReturnedToSender => {
                 // result2: MailResultTwo
-                let result2: MailResultTwo = crate::util::read_u32_le(&mut r)?.try_into()?;
+                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 let result2_if = match result2 {
                     MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
@@ -588,7 +588,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
             }
             MailAction::Deleted => {
                 // result2: MailResultTwo
-                let result2: MailResultTwo = crate::util::read_u32_le(&mut r)?.try_into()?;
+                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 let result2_if = match result2 {
                     MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,
@@ -620,7 +620,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
             }
             MailAction::MadePermanent => {
                 // result2: MailResultTwo
-                let result2: MailResultTwo = crate::util::read_u32_le(&mut r)?.try_into()?;
+                let result2 = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 let result2_if = match result2 {
                     MailResultTwo::Ok => SMSG_SEND_MAIL_RESULT_MailResultTwo::Ok,

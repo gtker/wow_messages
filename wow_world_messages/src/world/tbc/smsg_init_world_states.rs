@@ -51,10 +51,10 @@ impl crate::Message for SMSG_INIT_WORLD_STATES {
         }
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // amount_of_states: u16
         let amount_of_states = crate::util::read_u16_le(&mut r)?;

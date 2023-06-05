@@ -33,7 +33,7 @@ impl crate::Message for SMSG_TURN_IN_PETITION_RESULTS {
         }
 
         // result: PetitionResult
-        let result: PetitionResult = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             result,

@@ -58,7 +58,7 @@ impl crate::Message for CMSG_CALENDAR_EVENT_STATUS {
         let sender_invite_id = crate::util::read_guid(&mut r)?;
 
         // status: CalendarStatus
-        let status: CalendarStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let status = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             event,

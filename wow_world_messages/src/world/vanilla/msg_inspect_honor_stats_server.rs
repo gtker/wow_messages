@@ -118,7 +118,7 @@ impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
         let guid = crate::util::read_guid(&mut r)?;
 
         // highest_rank: PvpRank
-        let highest_rank: PvpRank = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let highest_rank = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // today_honorable_and_dishonorable: u32
         let today_honorable_and_dishonorable = crate::util::read_u32_le(&mut r)?;
@@ -157,7 +157,7 @@ impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
         let this_week_honor = crate::util::read_u32_le(&mut r)?;
 
         // last_week_standing: PvpRank
-        let last_week_standing: PvpRank = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let last_week_standing = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // rank_progress_bar: u8
         let rank_progress_bar = crate::util::read_u8_le(&mut r)?;

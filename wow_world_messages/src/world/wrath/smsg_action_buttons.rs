@@ -60,7 +60,7 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
         }
 
         // behavior: ActionBarBehavior
-        let behavior: ActionBarBehavior = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let behavior = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let behavior_if = match behavior {
             ActionBarBehavior::Initial => {

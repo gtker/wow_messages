@@ -60,7 +60,7 @@ impl crate::Message for SMSG_PROCRESIST {
         let id = crate::util::read_u32_le(&mut r)?;
 
         // log_format: LogFormat
-        let log_format: LogFormat = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let log_format = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             caster,

@@ -80,7 +80,7 @@ impl crate::Message for SMSG_TALENTS_INFO {
         }
 
         // talent_type: TalentInfoType
-        let talent_type: TalentInfoType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let talent_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // points_left: u32
         let points_left = crate::util::read_u32_le(&mut r)?;

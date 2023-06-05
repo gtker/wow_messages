@@ -79,7 +79,7 @@ impl BugSeparateIfDoubleWrite {
         let mut b_if_two = Default::default();
 
         // b: SimpleEnum
-        let b: SimpleEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let b = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         match b {
             SimpleEnum::Zero => {

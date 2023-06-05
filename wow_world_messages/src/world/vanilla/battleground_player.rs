@@ -69,7 +69,7 @@ impl BattlegroundPlayer {
         let player = crate::util::read_guid(&mut r)?;
 
         // rank: PvpRank
-        let rank: PvpRank = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let rank = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // killing_blows: u32
         let killing_blows = crate::util::read_u32_le(&mut r)?;

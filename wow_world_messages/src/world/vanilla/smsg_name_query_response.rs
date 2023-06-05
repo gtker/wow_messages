@@ -88,13 +88,13 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         };
 
         // race: Race
-        let race: Race = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let race = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // gender: Gender
-        let gender: Gender = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let gender = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // class: Class
-        let class: Class = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let class = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             guid,

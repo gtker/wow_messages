@@ -37,7 +37,7 @@ impl crate::Message for SMSG_CHAR_DELETE {
         }
 
         // result: WorldResult
-        let result: WorldResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             result,

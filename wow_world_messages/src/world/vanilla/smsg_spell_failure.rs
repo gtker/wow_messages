@@ -50,7 +50,7 @@ impl crate::Message for SMSG_SPELL_FAILURE {
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // result: SpellCastResult
-        let result: SpellCastResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             guid,

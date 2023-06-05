@@ -56,7 +56,7 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
         let battle_id = crate::util::read_u32_le(&mut r)?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // queued: Bool
         let queued = crate::util::read_u8_le(&mut r)? != 0;

@@ -110,7 +110,7 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
         let auction_sub_category = crate::util::read_u32_le(&mut r)?;
 
         // auction_quality: ItemQuality
-        let auction_quality: ItemQuality = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let auction_quality = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // usable: u8
         let usable = crate::util::read_u8_le(&mut r)?;

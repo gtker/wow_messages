@@ -60,7 +60,7 @@ impl NpcTextUpdate {
         };
 
         // language: Language
-        let language: Language = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let language = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // emotes: NpcTextUpdateEmote[3]
         let emotes = {

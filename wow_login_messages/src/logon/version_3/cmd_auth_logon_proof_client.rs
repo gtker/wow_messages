@@ -124,7 +124,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
         };
 
         // security_flag: SecurityFlag
-        let security_flag: SecurityFlag = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let security_flag = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let security_flag_if = match security_flag {
             SecurityFlag::None => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
@@ -211,7 +211,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             };
 
             // security_flag: SecurityFlag
-            let security_flag: SecurityFlag = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
+            let security_flag = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
             let security_flag_if = match security_flag {
                 SecurityFlag::None => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,
@@ -311,7 +311,7 @@ impl ClientMessage for CMD_AUTH_LOGON_PROOF_Client {
             };
 
             // security_flag: SecurityFlag
-            let security_flag: SecurityFlag = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+            let security_flag = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
             let security_flag_if = match security_flag {
                 SecurityFlag::None => CMD_AUTH_LOGON_PROOF_Client_SecurityFlag::None,

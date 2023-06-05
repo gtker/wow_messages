@@ -89,10 +89,10 @@ impl crate::Message for SMSG_LFG_UPDATE_PARTY {
         }
 
         // update_type: LfgUpdateType
-        let update_type: LfgUpdateType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let update_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // join_status: LfgJoinStatus
-        let join_status: LfgJoinStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let join_status = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let join_status_if = match join_status {
             LfgJoinStatus::NotJoined => SMSG_LFG_UPDATE_PARTY_LfgJoinStatus::NotJoined,

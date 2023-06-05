@@ -59,19 +59,19 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
         }
 
         // result: CorpseQueryResult
-        let result: CorpseQueryResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             CorpseQueryResult::NotFound => MSG_CORPSE_QUERY_Server_CorpseQueryResult::NotFound,
             CorpseQueryResult::Found => {
                 // map: Map
-                let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+                let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 // position: Vector3d
                 let position = Vector3d::read(&mut r)?;
 
                 // corpse_map: Map
-                let corpse_map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+                let corpse_map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 MSG_CORPSE_QUERY_Server_CorpseQueryResult::Found {
                     corpse_map,

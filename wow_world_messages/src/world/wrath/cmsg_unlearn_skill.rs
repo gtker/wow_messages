@@ -33,7 +33,7 @@ impl crate::Message for CMSG_UNLEARN_SKILL {
         }
 
         // skill: Skill
-        let skill: Skill = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
+        let skill = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
 
         Ok(Self {
             skill,

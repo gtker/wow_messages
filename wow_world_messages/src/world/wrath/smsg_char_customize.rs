@@ -89,7 +89,7 @@ impl crate::Message for SMSG_CHAR_CUSTOMIZE {
         }
 
         // result: WorldResult
-        let result: WorldResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             WorldResult::ResponseSuccess => {
@@ -103,7 +103,7 @@ impl crate::Message for SMSG_CHAR_CUSTOMIZE {
                 };
 
                 // gender: Gender
-                let gender: Gender = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let gender = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // skin_color: u8
                 let skin_color = crate::util::read_u8_le(&mut r)?;

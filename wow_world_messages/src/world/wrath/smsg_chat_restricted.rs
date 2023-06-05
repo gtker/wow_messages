@@ -33,7 +33,7 @@ impl crate::Message for SMSG_CHAT_RESTRICTED {
         }
 
         // restriction: ChatRestrictionType
-        let restriction: ChatRestrictionType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let restriction = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             restriction,

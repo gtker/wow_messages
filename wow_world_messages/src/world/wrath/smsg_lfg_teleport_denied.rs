@@ -33,7 +33,7 @@ impl crate::Message for SMSG_LFG_TELEPORT_DENIED {
         }
 
         // error: LfgTeleportError
-        let error: LfgTeleportError = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let error = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             error,

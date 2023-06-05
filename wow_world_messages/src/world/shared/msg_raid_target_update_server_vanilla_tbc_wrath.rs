@@ -59,7 +59,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
         }
 
         // update_type: RaidTargetUpdateType
-        let update_type: RaidTargetUpdateType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let update_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let update_type_if = match update_type {
             RaidTargetUpdateType::Partial => {

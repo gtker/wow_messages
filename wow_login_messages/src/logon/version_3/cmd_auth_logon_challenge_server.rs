@@ -136,7 +136,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
         // protocol_version is expected to always be 0 (0)
 
         // result: LoginResult
-        let result: LoginResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             LoginResult::Success => {
@@ -186,7 +186,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                 };
 
                 // security_flag: SecurityFlag
-                let security_flag: SecurityFlag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let security_flag = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let security_flag_if = match security_flag {
                     SecurityFlag::None => CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::None,
@@ -262,7 +262,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
             // protocol_version is expected to always be 0 (0)
 
             // result: LoginResult
-            let result: LoginResult = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
+            let result = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
             let result_if = match result {
                 LoginResult::Success => {
@@ -312,7 +312,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     };
 
                     // security_flag: SecurityFlag
-                    let security_flag: SecurityFlag = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
+                    let security_flag = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
                     let security_flag_if = match security_flag {
                         SecurityFlag::None => CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::None,
@@ -401,7 +401,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
             // protocol_version is expected to always be 0 (0)
 
             // result: LoginResult
-            let result: LoginResult = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+            let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
             let result_if = match result {
                 LoginResult::Success => {
@@ -451,7 +451,7 @@ impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
                     };
 
                     // security_flag: SecurityFlag
-                    let security_flag: SecurityFlag = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+                    let security_flag = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
                     let security_flag_if = match security_flag {
                         SecurityFlag::None => CMD_AUTH_LOGON_CHALLENGE_Server_SecurityFlag::None,

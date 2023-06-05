@@ -47,7 +47,7 @@ impl crate::Message for SMSG_BATTLEFIELD_MGR_ENTRY_INVITE {
         let battle_id = crate::util::read_u32_le(&mut r)?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // accept_time: Seconds
         let accept_time = Duration::from_secs(crate::util::read_u32_le(&mut r)?.into());

@@ -62,16 +62,16 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
         let auction_id = crate::util::read_u32_le(&mut r)?;
 
         // action: AuctionCommandAction
-        let action: AuctionCommandAction = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let action = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // result: AuctionCommandResult
-        let result: AuctionCommandResult = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             AuctionCommandResult::Ok => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::Ok,
             AuctionCommandResult::ErrInventory => {
                 // inventory_result: InventoryResult
-                let inventory_result: InventoryResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let inventory_result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrInventory {
                     inventory_result,

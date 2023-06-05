@@ -84,7 +84,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         }
 
         // hit_info: HitInfo
-        let hit_info: HitInfo = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let hit_info = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // attacker: PackedGuid
         let attacker = crate::util::read_packed_guid(&mut r)?;

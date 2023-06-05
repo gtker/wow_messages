@@ -147,7 +147,7 @@ impl crate::Message for CMSG_USE_ITEM {
         let glyph_index = crate::util::read_u32_le(&mut r)?;
 
         // cast_flags: ClientCastFlags
-        let cast_flags: ClientCastFlags = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let cast_flags = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let cast_flags_if = match cast_flags {
             ClientCastFlags::None => CMSG_USE_ITEM_ClientCastFlags::None,
@@ -159,7 +159,7 @@ impl crate::Message for CMSG_USE_ITEM {
                 let speed = crate::util::read_f32_le(&mut r)?;
 
                 // movement_data: ClientMovementData
-                let movement_data: ClientMovementData = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let movement_data = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let movement_data_if = match movement_data {
                     ClientMovementData::NotPresent => CMSG_USE_ITEM_ClientMovementData::NotPresent,

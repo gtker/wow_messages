@@ -42,7 +42,7 @@ impl crate::Message for SMSG_AI_REACTION {
         let guid = crate::util::read_guid(&mut r)?;
 
         // reaction: AiReaction
-        let reaction: AiReaction = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let reaction = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             guid,

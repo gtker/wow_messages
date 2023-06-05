@@ -43,7 +43,7 @@ impl crate::Message for SMSG_RAID_GROUP_ONLY {
         let homebind_timer = crate::util::read_u32_le(&mut r)?;
 
         // error: RaidGroupError
-        let error: RaidGroupError = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let error = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             homebind_timer,

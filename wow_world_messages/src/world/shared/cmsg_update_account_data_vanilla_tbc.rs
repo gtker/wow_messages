@@ -51,7 +51,7 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         }
 
         // data_type: AccountDataType
-        let data_type: AccountDataType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let data_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // decompressed_size: u32
         let decompressed_size = crate::util::read_u32_le(&mut r)?;

@@ -44,7 +44,7 @@ impl MiniMoveMessage {
         // size is expected to always be self.size (0)
 
         // opcode: MiniMoveOpcode
-        let opcode: MiniMoveOpcode = crate::util::read_u16_le(&mut r)?.try_into()?;
+        let opcode = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         // guid: PackedGuid
         let guid = crate::util::read_packed_guid(&mut r)?;

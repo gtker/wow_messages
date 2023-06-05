@@ -81,13 +81,13 @@ impl WhoPlayer {
         let level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         // class: Class
-        let class: Class = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let class = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // race: Race
-        let race: Race = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let race = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // party_status: u32
         let party_status = crate::util::read_u32_le(&mut r)?;

@@ -33,7 +33,7 @@ impl crate::Message for SMSG_GROUP_JOINED_BATTLEGROUND {
         }
 
         // id: BgTypeId
-        let id: BgTypeId = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let id = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             id,

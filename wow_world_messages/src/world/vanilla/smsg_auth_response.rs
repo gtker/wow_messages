@@ -71,7 +71,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
         }
 
         // result: WorldResult
-        let result: WorldResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             WorldResult::ResponseSuccess => SMSG_AUTH_RESPONSE_WorldResult::ResponseSuccess,

@@ -395,10 +395,10 @@ impl crate::Message for SMSG_MESSAGECHAT {
         }
 
         // chat_type: ChatType
-        let chat_type: ChatType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let chat_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // language: Language
-        let language: Language = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let language = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let chat_type_if = match chat_type {
             ChatType::Say => {
@@ -762,7 +762,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
         };
 
         // tag: PlayerChatTag
-        let tag: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let tag = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             chat_type: chat_type_if,

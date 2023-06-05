@@ -38,10 +38,10 @@ impl crate::Message for CMSG_SWAP_INV_ITEM {
         }
 
         // source_slot: ItemSlot
-        let source_slot: ItemSlot = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let source_slot = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // destination_slot: ItemSlot
-        let destination_slot: ItemSlot = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let destination_slot = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             source_slot,

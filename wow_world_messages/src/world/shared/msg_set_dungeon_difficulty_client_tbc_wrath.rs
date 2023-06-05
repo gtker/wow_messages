@@ -33,7 +33,7 @@ impl crate::Message for MSG_SET_DUNGEON_DIFFICULTY_Client {
         }
 
         // difficulty: DungeonDifficulty
-        let difficulty: DungeonDifficulty = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let difficulty = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             difficulty,

@@ -70,7 +70,7 @@ impl Realm {
 impl Realm {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // realm_type: RealmType
-        let realm_type: RealmType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let realm_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // flag: RealmFlag
         let flag = RealmFlag::new(crate::util::read_u8_le(&mut r)?);
@@ -88,13 +88,13 @@ impl Realm {
         };
 
         // population: Population
-        let population: Population = crate::util::read_u32_le(&mut r)?.into();
+        let population = crate::util::read_u32_le(&mut r)?.into();
 
         // number_of_characters_on_realm: u8
         let number_of_characters_on_realm = crate::util::read_u8_le(&mut r)?;
 
         // category: RealmCategory
-        let category: RealmCategory = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let category = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // realm_id: u8
         let realm_id = crate::util::read_u8_le(&mut r)?;
@@ -114,7 +114,7 @@ impl Realm {
     #[cfg(feature = "tokio")]
     pub(crate) async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // realm_type: RealmType
-        let realm_type: RealmType = (crate::util::tokio_read_u32_le(&mut r).await? as u8).try_into()?;
+        let realm_type = (crate::util::tokio_read_u32_le(&mut r).await? as u8).try_into()?;
 
         // flag: RealmFlag
         let flag = RealmFlag::new(crate::util::tokio_read_u8_le(&mut r).await?);
@@ -132,13 +132,13 @@ impl Realm {
         };
 
         // population: Population
-        let population: Population = crate::util::tokio_read_u32_le(&mut r).await?.into();
+        let population = crate::util::tokio_read_u32_le(&mut r).await?.into();
 
         // number_of_characters_on_realm: u8
         let number_of_characters_on_realm = crate::util::tokio_read_u8_le(&mut r).await?;
 
         // category: RealmCategory
-        let category: RealmCategory = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
+        let category = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
         // realm_id: u8
         let realm_id = crate::util::tokio_read_u8_le(&mut r).await?;
@@ -158,7 +158,7 @@ impl Realm {
     #[cfg(feature = "async-std")]
     pub(crate) async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // realm_type: RealmType
-        let realm_type: RealmType = (crate::util::astd_read_u32_le(&mut r).await? as u8).try_into()?;
+        let realm_type = (crate::util::astd_read_u32_le(&mut r).await? as u8).try_into()?;
 
         // flag: RealmFlag
         let flag = RealmFlag::new(crate::util::astd_read_u8_le(&mut r).await?);
@@ -176,13 +176,13 @@ impl Realm {
         };
 
         // population: Population
-        let population: Population = crate::util::astd_read_u32_le(&mut r).await?.into();
+        let population = crate::util::astd_read_u32_le(&mut r).await?.into();
 
         // number_of_characters_on_realm: u8
         let number_of_characters_on_realm = crate::util::astd_read_u8_le(&mut r).await?;
 
         // category: RealmCategory
-        let category: RealmCategory = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+        let category = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
         // realm_id: u8
         let realm_id = crate::util::astd_read_u8_le(&mut r).await?;

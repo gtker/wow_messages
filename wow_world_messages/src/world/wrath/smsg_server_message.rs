@@ -42,7 +42,7 @@ impl crate::Message for SMSG_SERVER_MESSAGE {
         }
 
         // message_type: ServerMessageType
-        let message_type: ServerMessageType = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let message_type = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // message: CString
         let message = {

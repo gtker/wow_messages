@@ -33,7 +33,7 @@ impl crate::Message for SMSG_PET_TAME_FAILURE {
         }
 
         // reason: PetTameFailureReason
-        let reason: PetTameFailureReason = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let reason = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             reason,

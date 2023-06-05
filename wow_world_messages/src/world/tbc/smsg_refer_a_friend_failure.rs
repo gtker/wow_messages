@@ -51,7 +51,7 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
         }
 
         // error: ReferAFriendError
-        let error: ReferAFriendError = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let error = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         let error_if = match error {
             ReferAFriendError::None => SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::None,

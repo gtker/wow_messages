@@ -96,7 +96,7 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
         let winning_roll = crate::util::read_u8_le(&mut r)?;
 
         // vote: RollVote
-        let vote: RollVote = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let vote = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             looted_target,

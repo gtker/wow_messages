@@ -53,10 +53,10 @@ impl ReceivedMail {
         let sender = crate::util::read_guid(&mut r)?;
 
         // auction_house: AuctionHouse
-        let auction_house: AuctionHouse = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let auction_house = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // message_type: MailMessageType
-        let message_type: MailMessageType = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let message_type = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // stationery: u32
         let stationery = crate::util::read_u32_le(&mut r)?;

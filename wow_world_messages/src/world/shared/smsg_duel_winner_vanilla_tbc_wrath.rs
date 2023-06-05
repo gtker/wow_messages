@@ -51,7 +51,7 @@ impl crate::Message for SMSG_DUEL_WINNER {
         }
 
         // reason: DuelWinnerReason
-        let reason: DuelWinnerReason = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let reason = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // opponent_name: CString
         let opponent_name = {

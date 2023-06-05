@@ -40,10 +40,10 @@ impl crate::Message for SMSG_INSTANCE_RESET_FAILED {
         }
 
         // reason: InstanceResetFailedReason
-        let reason: InstanceResetFailedReason = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let reason = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             reason,

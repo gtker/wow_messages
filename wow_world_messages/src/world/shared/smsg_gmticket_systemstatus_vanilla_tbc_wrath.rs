@@ -35,7 +35,7 @@ impl crate::Message for SMSG_GMTICKET_SYSTEMSTATUS {
         }
 
         // will_accept_tickets: GmTicketQueueStatus
-        let will_accept_tickets: GmTicketQueueStatus = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let will_accept_tickets = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             will_accept_tickets,

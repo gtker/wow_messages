@@ -91,7 +91,7 @@ impl ArenaTeamMember {
         let level = Level::new(crate::util::read_u8_le(&mut r)?);
 
         // class: Class
-        let class: Class = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let class = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // games_played_this_week: u32
         let games_played_this_week = crate::util::read_u32_le(&mut r)?;

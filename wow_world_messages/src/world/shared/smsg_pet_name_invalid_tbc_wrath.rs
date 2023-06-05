@@ -67,7 +67,7 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
         }
 
         // reason: PetNameInvalidReason
-        let reason: PetNameInvalidReason = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let reason = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // name: CString
         let name = {
@@ -76,7 +76,7 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
         };
 
         // included: DeclinedPetNameIncluded
-        let included: DeclinedPetNameIncluded = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let included = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let included_if = match included {
             DeclinedPetNameIncluded::NotIncluded => SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::NotIncluded,

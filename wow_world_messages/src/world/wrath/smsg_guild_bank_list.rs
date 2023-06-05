@@ -104,7 +104,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
         let amount_of_allowed_item_withdraws = crate::util::read_u32_le(&mut r)?;
 
         // tab_result: GuildBankTabResult
-        let tab_result: GuildBankTabResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let tab_result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let tab_result_if = match tab_result {
             GuildBankTabResult::NotPresent => SMSG_GUILD_BANK_LIST_GuildBankTabResult::NotPresent,
@@ -128,7 +128,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
         };
 
         // content_result: GuildBankContentResult
-        let content_result: GuildBankContentResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let content_result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let content_result_if = match content_result {
             GuildBankContentResult::NotPresent => SMSG_GUILD_BANK_LIST_GuildBankContentResult::NotPresent,

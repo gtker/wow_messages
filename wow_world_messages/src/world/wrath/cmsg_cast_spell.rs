@@ -105,7 +105,7 @@ impl crate::Message for CMSG_CAST_SPELL {
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // cast_flags: ClientCastFlags
-        let cast_flags: ClientCastFlags = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let cast_flags = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // targets: SpellCastTargets
         let targets = SpellCastTargets::read(&mut r)?;
@@ -120,7 +120,7 @@ impl crate::Message for CMSG_CAST_SPELL {
                 let speed = crate::util::read_f32_le(&mut r)?;
 
                 // movement_data: ClientMovementData
-                let movement_data: ClientMovementData = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let movement_data = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let movement_data_if = match movement_data {
                     ClientMovementData::NotPresent => CMSG_CAST_SPELL_ClientMovementData::NotPresent,

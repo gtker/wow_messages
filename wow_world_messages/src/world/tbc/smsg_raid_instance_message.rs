@@ -45,10 +45,10 @@ impl crate::Message for SMSG_RAID_INSTANCE_MESSAGE {
         }
 
         // message_type: RaidInstanceMessage
-        let message_type: RaidInstanceMessage = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let message_type = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // time_left: u32
         let time_left = crate::util::read_u32_le(&mut r)?;

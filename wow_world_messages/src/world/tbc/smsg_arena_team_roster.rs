@@ -57,7 +57,7 @@ impl crate::Message for SMSG_ARENA_TEAM_ROSTER {
         let amount_of_members = crate::util::read_u32_le(&mut r)?;
 
         // arena_type: ArenaType
-        let arena_type: ArenaType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // members: ArenaTeamMember[amount_of_members]
         let members = {

@@ -101,12 +101,12 @@ impl crate::Message for SMSG_CAST_RESULT {
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // result: SimpleSpellCastResult
-        let result: SimpleSpellCastResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             SimpleSpellCastResult::Success => {
                 // reason: CastFailureReason
-                let reason: CastFailureReason = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let reason = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let reason_if = match reason {
                     CastFailureReason::AffectingCombat => SMSG_CAST_RESULT_CastFailureReason::AffectingCombat,
@@ -219,7 +219,7 @@ impl crate::Message for SMSG_CAST_RESULT {
                     CastFailureReason::Reagents => SMSG_CAST_RESULT_CastFailureReason::Reagents,
                     CastFailureReason::RequiresArea => {
                         // area: Area
-                        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+                        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                         SMSG_CAST_RESULT_CastFailureReason::RequiresArea {
                             area,

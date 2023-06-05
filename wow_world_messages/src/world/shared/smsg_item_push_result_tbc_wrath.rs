@@ -95,13 +95,13 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
         let guid = crate::util::read_guid(&mut r)?;
 
         // source: NewItemSource
-        let source: NewItemSource = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let source = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // creation_type: NewItemCreationType
-        let creation_type: NewItemCreationType = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let creation_type = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // alert_chat: NewItemChatAlert
-        let alert_chat: NewItemChatAlert = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let alert_chat = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // bag_slot: u8
         let bag_slot = crate::util::read_u8_le(&mut r)?;

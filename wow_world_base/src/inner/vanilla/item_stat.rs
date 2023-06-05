@@ -31,7 +31,7 @@ impl ItemStat {
 impl ItemStat {
     pub fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // stat_type: ItemStatType
-        let stat_type: ItemStatType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let stat_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // value: i32
         let value = crate::util::read_i32_le(&mut r)?;

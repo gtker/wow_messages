@@ -40,10 +40,10 @@ impl crate::Message for SMSG_MEETINGSTONE_SETQUEUE {
         }
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // status: MeetingStoneStatus
-        let status: MeetingStoneStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let status = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             area,

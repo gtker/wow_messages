@@ -153,7 +153,7 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
         let spline_id = crate::util::read_u32_le(&mut r)?;
 
         // move_type: MonsterMoveType
-        let move_type: MonsterMoveType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let move_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let move_type_if = match move_type {
             MonsterMoveType::Normal => SMSG_MONSTER_MOVE_TRANSPORT_MonsterMoveType::Normal,

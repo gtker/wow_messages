@@ -76,7 +76,7 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
         let item = crate::util::read_guid(&mut r)?;
 
         // result: ItemRefundResult
-        let result: ItemRefundResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             ItemRefundResult::Success => {

@@ -64,7 +64,7 @@ impl crate::Message for SMSG_ACCOUNT_DATA_TIMES {
         let unknown1 = crate::util::read_u8_le(&mut r)?;
 
         // mask: CacheMask
-        let mask: CacheMask = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let mask = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // data: u32[-]
         let data = {

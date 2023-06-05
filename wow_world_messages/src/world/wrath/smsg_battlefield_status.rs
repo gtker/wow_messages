@@ -160,13 +160,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         let queue_slot = crate::util::read_u32_le(&mut r)?;
 
         // arena_type: ArenaType
-        let arena_type: ArenaType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // is_arena: u8
         let is_arena = crate::util::read_u8_le(&mut r)?;
 
         // battleground_type: BattlegroundType
-        let battleground_type: BattlegroundType = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let battleground_type = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // unknown1: u16
         let unknown1 = crate::util::read_u16_le(&mut r)?;
@@ -184,7 +184,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         let rated = crate::util::read_u8_le(&mut r)? != 0;
 
         // status_id: StatusId
-        let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let status_id_if = match status_id {
             StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,
@@ -202,7 +202,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             StatusId::WaitJoin => {
                 // map1: Map
-                let map1: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+                let map1 = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 // unknown2: u64
                 let unknown2 = crate::util::read_u64_le(&mut r)?;
@@ -218,7 +218,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             }
             StatusId::InProgress => {
                 // map2: Map
-                let map2: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+                let map2 = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 // unknown3: u64
                 let unknown3 = crate::util::read_u64_le(&mut r)?;
@@ -230,7 +230,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
                 let time_to_bg_start_in_ms = crate::util::read_u32_le(&mut r)?;
 
                 // faction: ArenaFaction
-                let faction: ArenaFaction = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let faction = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_BATTLEFIELD_STATUS_StatusId::InProgress {
                     faction,

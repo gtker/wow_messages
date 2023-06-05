@@ -54,10 +54,10 @@ impl RaidInfo {
 impl RaidInfo {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // difficulty: DungeonDifficulty
-        let difficulty: DungeonDifficulty = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let difficulty = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // instance_id: u64
         let instance_id = crate::util::read_u64_le(&mut r)?;

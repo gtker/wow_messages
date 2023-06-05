@@ -162,16 +162,16 @@ impl Addon {
 impl Addon {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // addon_type: AddonType
-        let addon_type: AddonType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let addon_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // info_block: InfoBlock
-        let info_block: InfoBlock = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let info_block = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let info_block_if = match info_block {
             InfoBlock::Unavailable => Addon_InfoBlock::Unavailable,
             InfoBlock::Available => {
                 // key_version: KeyVersion
-                let key_version: KeyVersion = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let key_version = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let key_version_if = match key_version {
                     KeyVersion::Zero => Addon_KeyVersion::Zero,
@@ -296,7 +296,7 @@ impl Addon {
         };
 
         // url_info: UrlInfo
-        let url_info: UrlInfo = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let url_info = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let url_info_if = match url_info {
             UrlInfo::Unavailable => Addon_UrlInfo::Unavailable,

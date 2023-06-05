@@ -175,7 +175,7 @@ impl AuraLog {
 impl AuraLog {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // aura_type: AuraType
-        let aura_type: AuraType = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let aura_type = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let aura_type_if = match aura_type {
             AuraType::None => AuraLog_AuraType::None,
@@ -189,7 +189,7 @@ impl AuraLog {
                 let overkill_damage = crate::util::read_u32_le(&mut r)?;
 
                 // school: SpellSchool
-                let school: SpellSchool = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let school = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // absorb1: u32
                 let absorb1 = crate::util::read_u32_le(&mut r)?;
@@ -366,7 +366,7 @@ impl AuraLog {
                 let overkill_damage = crate::util::read_u32_le(&mut r)?;
 
                 // school: SpellSchool
-                let school: SpellSchool = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let school = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // absorb1: u32
                 let absorb1 = crate::util::read_u32_le(&mut r)?;

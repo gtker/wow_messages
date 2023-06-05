@@ -46,10 +46,10 @@ impl crate::Message for CMSG_TEXT_EMOTE {
         }
 
         // text_emote: TextEmote
-        let text_emote: TextEmote = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let text_emote = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // emote: Emote
-        let emote: Emote = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let emote = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // guid: Guid
         let guid = crate::util::read_guid(&mut r)?;

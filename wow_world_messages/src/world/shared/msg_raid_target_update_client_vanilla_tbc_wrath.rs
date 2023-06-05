@@ -104,7 +104,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
         }
 
         // target_index: RaidTargetIndex
-        let target_index: RaidTargetIndex = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let target_index = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let target_index_if = match target_index {
             RaidTargetIndex::Unknown0 => {

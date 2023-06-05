@@ -38,7 +38,7 @@ impl crate::Message for SMSG_SET_PROFICIENCY {
         }
 
         // class: ItemClass
-        let class: ItemClass = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let class = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // item_sub_class_mask: u32
         let item_sub_class_mask = crate::util::read_u32_le(&mut r)?;

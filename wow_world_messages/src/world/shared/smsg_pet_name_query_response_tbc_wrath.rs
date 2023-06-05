@@ -81,7 +81,7 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
         let pet_name_timestamp = crate::util::read_u32_le(&mut r)?;
 
         // names: PetQueryDisabledNames
-        let names: PetQueryDisabledNames = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let names = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let names_if = match names {
             PetQueryDisabledNames::Present => {

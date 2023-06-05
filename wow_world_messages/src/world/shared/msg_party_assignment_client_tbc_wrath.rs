@@ -44,7 +44,7 @@ impl crate::Message for MSG_PARTY_ASSIGNMENT_Client {
         }
 
         // role: PartyRole
-        let role: PartyRole = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let role = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // apply: Bool
         let apply = crate::util::read_u8_le(&mut r)? != 0;

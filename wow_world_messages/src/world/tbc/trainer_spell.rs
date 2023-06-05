@@ -80,7 +80,7 @@ impl TrainerSpell {
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // state: TrainerSpellState
-        let state: TrainerSpellState = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let state = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // spell_cost: u32
         let spell_cost = crate::util::read_u32_le(&mut r)?;
@@ -95,7 +95,7 @@ impl TrainerSpell {
         let required_level = crate::util::read_u8_le(&mut r)?;
 
         // required_skill: Skill
-        let required_skill: Skill = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
+        let required_skill = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
 
         // required_skill_value: u32
         let required_skill_value = crate::util::read_u32_le(&mut r)?;

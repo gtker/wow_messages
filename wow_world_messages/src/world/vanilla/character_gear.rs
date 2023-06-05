@@ -33,7 +33,7 @@ impl CharacterGear {
         let equipment_display_id = crate::util::read_u32_le(&mut r)?;
 
         // inventory_type: InventoryType
-        let inventory_type: InventoryType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let inventory_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             equipment_display_id,

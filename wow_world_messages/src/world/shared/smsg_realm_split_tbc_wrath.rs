@@ -54,7 +54,7 @@ impl crate::Message for SMSG_REALM_SPLIT {
         let realm_id = crate::util::read_u32_le(&mut r)?;
 
         // state: RealmSplitState
-        let state: RealmSplitState = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let state = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // split_date: CString
         let split_date = {

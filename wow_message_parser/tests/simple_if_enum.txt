@@ -39,7 +39,7 @@ impl SimpleIfEnum {
 impl SimpleIfEnum {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // enum: SimpleEnum
-        let enum: SimpleEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let enum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let enum_if = match enum {
             SimpleEnum::Zero => {

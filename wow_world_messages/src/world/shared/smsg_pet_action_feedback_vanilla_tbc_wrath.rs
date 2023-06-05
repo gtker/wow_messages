@@ -33,7 +33,7 @@ impl crate::Message for SMSG_PET_ACTION_FEEDBACK {
         }
 
         // feedback: PetFeedback
-        let feedback: PetFeedback = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let feedback = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             feedback,

@@ -33,7 +33,7 @@ impl LfgData {
         let entry = crate::util::read_u16_le(&mut r)?;
 
         // lfg_type: LfgType
-        let lfg_type: LfgType = (crate::util::read_u16_le(&mut r)? as u8).try_into()?;
+        let lfg_type = (crate::util::read_u16_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             entry,

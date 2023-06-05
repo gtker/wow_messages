@@ -52,7 +52,7 @@ impl crate::Message for SMSG_TRAINER_BUY_FAILED {
         let id = crate::util::read_u32_le(&mut r)?;
 
         // error: TrainingFailureReason
-        let error: TrainingFailureReason = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let error = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             guid,

@@ -50,7 +50,7 @@ impl crate::Message for SMSG_SELL_ITEM {
         let item = crate::util::read_guid(&mut r)?;
 
         // result: SellItemResult
-        let result: SellItemResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             guid,

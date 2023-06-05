@@ -89,7 +89,7 @@ impl crate::Message for CMSG_CHAR_FACTION_CHANGE {
         };
 
         // gender: Gender
-        let gender: Gender = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let gender = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // skin_color: u8
         let skin_color = crate::util::read_u8_le(&mut r)?;
@@ -107,7 +107,7 @@ impl crate::Message for CMSG_CHAR_FACTION_CHANGE {
         let face = crate::util::read_u8_le(&mut r)?;
 
         // race: Race
-        let race: Race = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let race = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             guid,

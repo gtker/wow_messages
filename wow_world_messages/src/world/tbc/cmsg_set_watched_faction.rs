@@ -33,7 +33,7 @@ impl crate::Message for CMSG_SET_WATCHED_FACTION {
         }
 
         // faction: Faction
-        let faction: Faction = crate::util::read_u16_le(&mut r)?.try_into()?;
+        let faction = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         Ok(Self {
             faction,

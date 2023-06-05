@@ -41,7 +41,7 @@ impl crate::Message for SMSG_ARENA_ERROR {
         let unknown = crate::util::read_u32_le(&mut r)?;
 
         // arena_type: ArenaType
-        let arena_type: ArenaType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             unknown,

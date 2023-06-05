@@ -50,7 +50,7 @@ impl crate::Message for SMSG_WEATHER {
         }
 
         // weather_type: WeatherType
-        let weather_type: WeatherType = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let weather_type = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // grade: f32
         let grade = crate::util::read_f32_le(&mut r)?;
@@ -59,7 +59,7 @@ impl crate::Message for SMSG_WEATHER {
         let sound_id = crate::util::read_u32_le(&mut r)?;
 
         // change: WeatherChangeType
-        let change: WeatherChangeType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let change = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             weather_type,

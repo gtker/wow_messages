@@ -30,7 +30,7 @@ impl ForcedReaction {
 impl ForcedReaction {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // faction: Faction
-        let faction: Faction = crate::util::read_u16_le(&mut r)?.try_into()?;
+        let faction = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         // reputation_rank: u32
         let reputation_rank = crate::util::read_u32_le(&mut r)?;

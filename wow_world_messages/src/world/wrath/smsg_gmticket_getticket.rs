@@ -88,7 +88,7 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
         }
 
         // status: GmTicketStatus
-        let status: GmTicketStatus = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let status = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let status_if = match status {
             GmTicketStatus::DbError => SMSG_GMTICKET_GETTICKET_GmTicketStatus::DbError,
@@ -115,7 +115,7 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
                 let days_since_last_updated = crate::util::read_f32_le(&mut r)?;
 
                 // escalation_status: GmTicketEscalationStatus
-                let escalation_status: GmTicketEscalationStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let escalation_status = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // read_by_gm: Bool
                 let read_by_gm = crate::util::read_u8_le(&mut r)? != 0;

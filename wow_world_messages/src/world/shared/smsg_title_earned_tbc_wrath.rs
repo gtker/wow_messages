@@ -41,7 +41,7 @@ impl crate::Message for SMSG_TITLE_EARNED {
         let title = crate::util::read_u32_le(&mut r)?;
 
         // status: TitleEarnStatus
-        let status: TitleEarnStatus = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let status = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             title,

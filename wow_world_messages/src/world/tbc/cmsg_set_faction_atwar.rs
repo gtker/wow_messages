@@ -40,7 +40,7 @@ impl crate::Message for CMSG_SET_FACTION_ATWAR {
         }
 
         // faction: Faction
-        let faction: Faction = crate::util::read_u16_le(&mut r)?.try_into()?;
+        let faction = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         // flags: FactionFlag
         let flags = FactionFlag::new(crate::util::read_u8_le(&mut r)?);

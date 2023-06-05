@@ -278,8 +278,7 @@ fn print_read_definition(
             };
 
             s.wln(format!(
-                    "{assignment_prefix}{value_set}{name}: {type_name} = {parens}crate::util::{prefix}read_{ty}_le(&mut r){postfix}?{cast}.{into};",
-                    type_name = d.ty().rust_str(),
+                    "{assignment_prefix}{value_set}{name} = {parens}crate::util::{prefix}read_{ty}_le(&mut r){postfix}?{cast}.{into};",
                     value_set = if d.value().is_some() { "_" } else { "" },
                     ty = integer.rust_str(),
                     into = match e.self_value().is_some() {

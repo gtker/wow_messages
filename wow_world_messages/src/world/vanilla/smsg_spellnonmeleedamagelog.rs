@@ -109,7 +109,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         let damage = crate::util::read_u32_le(&mut r)?;
 
         // school: SpellSchool
-        let school: SpellSchool = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let school = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // absorbed_damage: u32
         let absorbed_damage = crate::util::read_u32_le(&mut r)?;
@@ -127,7 +127,7 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         let blocked = crate::util::read_u32_le(&mut r)?;
 
         // hit_info: HitInfo
-        let hit_info: HitInfo = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let hit_info = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // extend_flag: u8
         let extend_flag = crate::util::read_u8_le(&mut r)?;

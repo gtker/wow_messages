@@ -60,10 +60,10 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         let battlemaster = crate::util::read_guid(&mut r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // bracket: BattlegroundBracket
-        let bracket: BattlegroundBracket = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let bracket = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // number_of_battlegrounds: u32
         let number_of_battlegrounds = crate::util::read_u32_le(&mut r)?;

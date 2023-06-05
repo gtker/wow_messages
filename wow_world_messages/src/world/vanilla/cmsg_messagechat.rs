@@ -81,10 +81,10 @@ impl crate::Message for CMSG_MESSAGECHAT {
         }
 
         // chat_type: ChatType
-        let chat_type: ChatType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let chat_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // language: Language
-        let language: Language = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let language = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let chat_type_if = match chat_type {
             ChatType::Say => CMSG_MESSAGECHAT_ChatType::Say,

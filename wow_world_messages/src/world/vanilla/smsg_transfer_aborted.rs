@@ -47,10 +47,10 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
         }
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // reason: TransferAbortReason
-        let reason: TransferAbortReason = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let reason = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // argument: u8
         let argument = crate::util::read_u8_le(&mut r)?;

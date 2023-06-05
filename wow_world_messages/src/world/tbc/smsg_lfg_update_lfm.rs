@@ -49,7 +49,7 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
         }
 
         // looking_for_more: LfgUpdateLookingForMore
-        let looking_for_more: LfgUpdateLookingForMore = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let looking_for_more = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let looking_for_more_if = match looking_for_more {
             LfgUpdateLookingForMore::NotLookingForMore => SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::NotLookingForMore,

@@ -53,7 +53,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         let battlemaster = crate::util::read_guid(&mut r)?;
 
         // battleground_type: BattlegroundType
-        let battleground_type: BattlegroundType = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let battleground_type = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // number_of_battlegrounds: u32
         let number_of_battlegrounds = crate::util::read_u32_le(&mut r)?;

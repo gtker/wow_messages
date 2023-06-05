@@ -45,10 +45,10 @@ impl crate::Message for CMSG_SET_SAVED_INSTANCE_EXTEND {
         }
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // difficulty: RaidDifficulty
-        let difficulty: RaidDifficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let difficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // toggle_extend: Bool
         let toggle_extend = crate::util::read_u8_le(&mut r)? != 0;

@@ -45,7 +45,7 @@ impl crate::Message for MSG_LOOKING_FOR_GROUP_Client {
         }
 
         // lfg_type: LfgType
-        let lfg_type: LfgType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let lfg_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // entry: u32
         let entry = crate::util::read_u32_le(&mut r)?;

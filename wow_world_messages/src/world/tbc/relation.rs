@@ -89,19 +89,19 @@ impl Relation {
 
         let relation_mask_friend = if relation_mask.is_friend() {
             // status: FriendStatus
-            let status: FriendStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
+            let status = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             let status_if = match status {
                 FriendStatus::Offline => Relation_FriendStatus::Offline,
                 FriendStatus::Online => {
                     // area: Area
-                    let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+                    let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                     // level: Level32
                     let level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
                     // class: Class
-                    let class: Class = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+                    let class = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
                     Relation_FriendStatus::Online {
                         area,

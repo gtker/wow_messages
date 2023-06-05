@@ -96,7 +96,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
         let invite_status = crate::util::read_u8_le(&mut r)?;
 
         // time: CalendarStatusTime
-        let time: CalendarStatusTime = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let time = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let time_if = match time {
             CalendarStatusTime::NotPresent => SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::NotPresent,

@@ -45,7 +45,7 @@ impl crate::Message for MessageWithComplexTypes {
         }
 
         // simple_enum: SimpleEnum
-        let simple_enum: SimpleEnum = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let simple_enum = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // simple_flag: SimpleFlag
         let simple_flag = SimpleFlag::new(crate::util::read_u8_le(&mut r)?);

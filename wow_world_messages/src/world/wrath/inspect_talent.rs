@@ -30,7 +30,7 @@ impl InspectTalent {
 impl InspectTalent {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // talent: Talent
-        let talent: Talent = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let talent = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // max_rank: u8
         let max_rank = crate::util::read_u8_le(&mut r)?;

@@ -48,7 +48,7 @@ impl crate::Message for SMSG_SUMMON_REQUEST {
         let summoner = crate::util::read_guid(&mut r)?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // auto_decline_time: Milliseconds
         let auto_decline_time = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());

@@ -33,7 +33,7 @@ impl crate::Message for SMSG_GMTICKET_DELETETICKET {
         }
 
         // response: GmTicketResponse
-        let response: GmTicketResponse = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let response = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             response,

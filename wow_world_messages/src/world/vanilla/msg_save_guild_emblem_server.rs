@@ -33,7 +33,7 @@ impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Server {
         }
 
         // result: GuildEmblemResult
-        let result: GuildEmblemResult = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             result,

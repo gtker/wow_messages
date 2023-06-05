@@ -57,7 +57,7 @@ impl crate::Message for SMSG_ARENA_TEAM_COMMAND_RESULT {
         }
 
         // command: ArenaTeamCommand
-        let command: ArenaTeamCommand = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let command = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // team: CString
         let team = {
@@ -72,7 +72,7 @@ impl crate::Message for SMSG_ARENA_TEAM_COMMAND_RESULT {
         };
 
         // error: ArenaTeamCommandError
-        let error: ArenaTeamCommandError = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let error = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             command,

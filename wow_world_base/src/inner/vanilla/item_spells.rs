@@ -56,7 +56,7 @@ impl ItemSpells {
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // spell_trigger: SpellTriggerType
-        let spell_trigger: SpellTriggerType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let spell_trigger = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // spell_charges: i32
         let spell_charges = crate::util::read_i32_le(&mut r)?;

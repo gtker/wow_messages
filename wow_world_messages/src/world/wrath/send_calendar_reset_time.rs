@@ -35,7 +35,7 @@ impl SendCalendarResetTime {
 impl SendCalendarResetTime {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // period: u32
         let period = crate::util::read_u32_le(&mut r)?;

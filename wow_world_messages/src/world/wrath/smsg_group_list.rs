@@ -158,19 +158,19 @@ impl crate::Message for SMSG_GROUP_LIST {
         };
         let group_not_empty = if current_size < body_size as usize {
             // loot_setting: GroupLootSetting
-            let loot_setting: GroupLootSetting = crate::util::read_u8_le(&mut r)?.try_into()?;
+            let loot_setting = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // master_loot: Guid
             let master_loot = crate::util::read_guid(&mut r)?;
 
             // loot_threshold: ItemQuality
-            let loot_threshold: ItemQuality = crate::util::read_u8_le(&mut r)?.try_into()?;
+            let loot_threshold = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // difficulty: DungeonDifficulty
-            let difficulty: DungeonDifficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
+            let difficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // raid_difficulty: RaidDifficulty
-            let raid_difficulty: RaidDifficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
+            let raid_difficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // heroic: Bool
             let heroic = crate::util::read_u8_le(&mut r)? != 0;

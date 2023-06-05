@@ -38,7 +38,7 @@ impl crate::Message for CMSG_SET_FACTION_INACTIVE {
         }
 
         // faction: Faction
-        let faction: Faction = crate::util::read_u16_le(&mut r)?.try_into()?;
+        let faction = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         // inactive: Bool
         let inactive = crate::util::read_u8_le(&mut r)? != 0;

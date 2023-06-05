@@ -182,7 +182,7 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
             let creature_type = crate::util::read_u32_le(&mut r)?;
 
             // creature_family: CreatureFamily
-            let creature_family: CreatureFamily = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+            let creature_family = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             // creature_rank: u32
             let creature_rank = crate::util::read_u32_le(&mut r)?;

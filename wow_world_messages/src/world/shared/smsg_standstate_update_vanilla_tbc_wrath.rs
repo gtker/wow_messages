@@ -33,7 +33,7 @@ impl crate::Message for SMSG_STANDSTATE_UPDATE {
         }
 
         // state: UnitStandState
-        let state: UnitStandState = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let state = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             state,

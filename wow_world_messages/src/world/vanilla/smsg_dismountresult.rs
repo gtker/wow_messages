@@ -33,7 +33,7 @@ impl crate::Message for SMSG_DISMOUNTRESULT {
         }
 
         // result: DismountResult
-        let result: DismountResult = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             result,

@@ -47,10 +47,10 @@ impl crate::Message for CMSG_BATTLEFIELD_LIST {
         }
 
         // battleground_type: BattlegroundType
-        let battleground_type: BattlegroundType = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let battleground_type = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // location: BattlefieldListLocation
-        let location: BattlefieldListLocation = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let location = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // can_gain_exp: Bool
         let can_gain_exp = crate::util::read_u8_le(&mut r)? != 0;

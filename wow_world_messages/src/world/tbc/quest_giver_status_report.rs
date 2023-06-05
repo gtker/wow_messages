@@ -34,7 +34,7 @@ impl QuestGiverStatusReport {
         let npc = crate::util::read_guid(&mut r)?;
 
         // dialog_status: QuestGiverStatus
-        let dialog_status: QuestGiverStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let dialog_status = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             npc,

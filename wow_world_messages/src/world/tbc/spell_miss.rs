@@ -48,7 +48,7 @@ impl SpellMiss {
         let target = crate::util::read_guid(&mut r)?;
 
         // miss_info: SpellMissInfo
-        let miss_info: SpellMissInfo = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let miss_info = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let miss_info_if = match miss_info {
             SpellMissInfo::None => SpellMiss_SpellMissInfo::None,

@@ -41,7 +41,7 @@ impl LootItem {
         let item = crate::util::read_u32_le(&mut r)?;
 
         // ty: LootSlotType
-        let ty: LootSlotType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let ty = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             index,

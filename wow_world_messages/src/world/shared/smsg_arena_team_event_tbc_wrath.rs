@@ -194,7 +194,7 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
         }
 
         // event: ArenaTeamEvent
-        let event: ArenaTeamEvent = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let event = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let event_if = match event {
             ArenaTeamEvent::Join => {

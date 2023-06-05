@@ -49,7 +49,7 @@ impl crate::Message for SMSG_GUILD_COMMAND_RESULT {
         }
 
         // command: GuildCommand
-        let command: GuildCommand = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let command = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // string: CString
         let string = {
@@ -58,7 +58,7 @@ impl crate::Message for SMSG_GUILD_COMMAND_RESULT {
         };
 
         // result: GuildCommandResult
-        let result: GuildCommandResult = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let result = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             command,

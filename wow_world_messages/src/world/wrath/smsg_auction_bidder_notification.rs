@@ -69,7 +69,7 @@ impl crate::Message for SMSG_AUCTION_BIDDER_NOTIFICATION {
         }
 
         // auction_house: AuctionHouse
-        let auction_house: AuctionHouse = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let auction_house = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // auction_id: u32
         let auction_id = crate::util::read_u32_le(&mut r)?;

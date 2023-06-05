@@ -74,7 +74,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
         let total_exp = crate::util::read_u32_le(&mut r)?;
 
         // exp_type: ExperienceAwardType
-        let exp_type: ExperienceAwardType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let exp_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let exp_type_if = match exp_type {
             ExperienceAwardType::Kill => SMSG_LOG_XPGAIN_ExperienceAwardType::Kill,

@@ -166,7 +166,7 @@ impl crate::Message for SMSG_SPELL_GO {
 
         let flags_power_update = if flags.is_power_update() {
             // power: Power
-            let power: Power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+            let power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             Some(SMSG_SPELL_GO_GameobjectCastFlags_PowerUpdate {
                 power,

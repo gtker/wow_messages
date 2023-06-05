@@ -33,7 +33,7 @@ impl crate::Message for SMSG_TRIGGER_CINEMATIC {
         }
 
         // cinematic_sequence_id: CinematicSequenceId
-        let cinematic_sequence_id: CinematicSequenceId = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let cinematic_sequence_id = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             cinematic_sequence_id,

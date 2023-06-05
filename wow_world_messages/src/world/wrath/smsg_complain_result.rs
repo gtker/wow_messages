@@ -43,7 +43,7 @@ impl crate::Message for SMSG_COMPLAIN_RESULT {
         let unknown = crate::util::read_u8_le(&mut r)?;
 
         // window_result: ComplainResultWindow
-        let window_result: ComplainResultWindow = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let window_result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             unknown,

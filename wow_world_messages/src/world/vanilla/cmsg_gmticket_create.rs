@@ -94,10 +94,10 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         }
 
         // category: GmTicketType
-        let category: GmTicketType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let category = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // position: Vector3d
         let position = Vector3d::read(&mut r)?;

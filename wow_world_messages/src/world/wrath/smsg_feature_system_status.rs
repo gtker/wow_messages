@@ -38,7 +38,7 @@ impl crate::Message for SMSG_FEATURE_SYSTEM_STATUS {
         }
 
         // complaint_status: ComplaintStatus
-        let complaint_status: ComplaintStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let complaint_status = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // voice_chat_enabled: Bool
         let voice_chat_enabled = crate::util::read_u8_le(&mut r)? != 0;

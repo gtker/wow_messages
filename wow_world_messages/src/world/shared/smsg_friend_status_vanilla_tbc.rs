@@ -39,7 +39,7 @@ impl crate::Message for SMSG_FRIEND_STATUS {
         }
 
         // result: FriendResult
-        let result: FriendResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // guid: Guid
         let guid = crate::util::read_guid(&mut r)?;

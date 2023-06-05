@@ -59,7 +59,7 @@ impl crate::Message for SMSG_CHAR_RENAME {
         }
 
         // result: WorldResult
-        let result: WorldResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             WorldResult::ResponseSuccess => {

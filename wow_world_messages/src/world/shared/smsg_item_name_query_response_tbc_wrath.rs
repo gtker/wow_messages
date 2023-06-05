@@ -56,7 +56,7 @@ impl crate::Message for SMSG_ITEM_NAME_QUERY_RESPONSE {
         };
 
         // inventory_type: InventoryType
-        let inventory_type: InventoryType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let inventory_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             item,

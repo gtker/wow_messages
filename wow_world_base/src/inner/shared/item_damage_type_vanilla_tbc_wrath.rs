@@ -42,7 +42,7 @@ impl ItemDamageType {
         let damage_maximum = crate::util::read_f32_le(&mut r)?;
 
         // school: SpellSchool
-        let school: SpellSchool = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let school = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             damage_minimum,

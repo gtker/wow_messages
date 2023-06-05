@@ -62,10 +62,10 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
         }
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // reason: TransferAbortReason
-        let reason: TransferAbortReason = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let reason = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let reason_if = match reason {
             TransferAbortReason::None => SMSG_TRANSFER_ABORTED_TransferAbortReason::None,
@@ -75,7 +75,7 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
             TransferAbortReason::ZoneIsInCombat => SMSG_TRANSFER_ABORTED_TransferAbortReason::ZoneIsInCombat,
             TransferAbortReason::InsufficientExpansionLevel => {
                 // difficulty: DungeonDifficulty
-                let difficulty: DungeonDifficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let difficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_TRANSFER_ABORTED_TransferAbortReason::InsufficientExpansionLevel {
                     difficulty,
@@ -83,7 +83,7 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
             }
             TransferAbortReason::DifficultyNotAvailable => {
                 // difficulty: DungeonDifficulty
-                let difficulty: DungeonDifficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let difficulty = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_TRANSFER_ABORTED_TransferAbortReason::DifficultyNotAvailable {
                     difficulty,

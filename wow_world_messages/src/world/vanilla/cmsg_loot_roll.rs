@@ -50,7 +50,7 @@ impl crate::Message for CMSG_LOOT_ROLL {
         let item_slot = crate::util::read_u32_le(&mut r)?;
 
         // vote: RollVote
-        let vote: RollVote = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let vote = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             item,

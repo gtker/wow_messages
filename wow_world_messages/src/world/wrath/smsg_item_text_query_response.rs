@@ -57,7 +57,7 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
         }
 
         // query: ItemTextQuery
-        let query: ItemTextQuery = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let query = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let query_if = match query {
             ItemTextQuery::HasText => {

@@ -125,7 +125,7 @@ impl crate::Message for SMSG_SPELL_START {
 
         let flags_power_left_self = if flags.is_power_left_self() {
             // power: Power
-            let power: Power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+            let power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             Some(SMSG_SPELL_START_CastFlags_PowerLeftSelf {
                 power,

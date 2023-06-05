@@ -198,7 +198,7 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         let unknown11 = crate::util::read_u32_le(&mut r)?;
 
         // charter_type: CharterType
-        let charter_type: CharterType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let charter_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             petition_id,

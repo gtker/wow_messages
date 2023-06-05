@@ -47,7 +47,7 @@ impl crate::Message for SMSG_POWER_UPDATE {
         let unit = crate::util::read_packed_guid(&mut r)?;
 
         // power: Power
-        let power: Power = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let power = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // amount: u32
         let amount = crate::util::read_u32_le(&mut r)?;

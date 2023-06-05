@@ -33,7 +33,7 @@ impl crate::Message for CMSG_STANDSTATECHANGE {
         }
 
         // animation_state: UnitStandState
-        let animation_state: UnitStandState = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let animation_state = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             animation_state,

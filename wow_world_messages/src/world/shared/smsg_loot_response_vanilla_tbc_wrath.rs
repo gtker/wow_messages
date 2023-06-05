@@ -75,12 +75,12 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         let guid = crate::util::read_guid(&mut r)?;
 
         // loot_method: LootMethod
-        let loot_method: LootMethod = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let loot_method = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let loot_method_if = match loot_method {
             LootMethod::ErrorX => {
                 // loot_error: LootMethodError
-                let loot_error: LootMethodError = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let loot_error = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
                     loot_error,

@@ -88,7 +88,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
         }
 
         // status: TradeStatus
-        let status: TradeStatus = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let status = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let status_if = match status {
             TradeStatus::Busy => SMSG_TRADE_STATUS_TradeStatus::Busy,
@@ -112,7 +112,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
             TradeStatus::WrongFaction => SMSG_TRADE_STATUS_TradeStatus::WrongFaction,
             TradeStatus::CloseWindow => {
                 // inventory_result: InventoryResult
-                let inventory_result: InventoryResult = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+                let inventory_result = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
                 // target_error: Bool
                 let target_error = crate::util::read_u8_le(&mut r)? != 0;

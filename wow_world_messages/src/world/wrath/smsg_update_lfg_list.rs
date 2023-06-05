@@ -102,13 +102,13 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
         }
 
         // lfg_type: LfgType
-        let lfg_type: LfgType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let lfg_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // dungeon_id: u32
         let dungeon_id = crate::util::read_u32_le(&mut r)?;
 
         // update_type: LfgListUpdateType
-        let update_type: LfgListUpdateType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let update_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let update_type_if = match update_type {
             LfgListUpdateType::Partial => {

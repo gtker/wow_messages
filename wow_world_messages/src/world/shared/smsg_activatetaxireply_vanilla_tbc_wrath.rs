@@ -33,7 +33,7 @@ impl crate::Message for SMSG_ACTIVATETAXIREPLY {
         }
 
         // reply: ActivateTaxiReply
-        let reply: ActivateTaxiReply = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let reply = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             reply,

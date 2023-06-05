@@ -35,7 +35,7 @@ impl crate::Message for CMSG_SETSHEATHED {
         }
 
         // sheathed: SheathState
-        let sheathed: SheathState = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let sheathed = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             sheathed,

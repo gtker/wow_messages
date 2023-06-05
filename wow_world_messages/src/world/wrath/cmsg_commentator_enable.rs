@@ -33,7 +33,7 @@ impl crate::Message for CMSG_COMMENTATOR_ENABLE {
         }
 
         // option: CommentatorEnableOption
-        let option: CommentatorEnableOption = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let option = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             option,

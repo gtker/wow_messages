@@ -96,7 +96,7 @@ impl crate::Message for CMSG_COMPLAIN {
         }
 
         // complaint_type: SpamType
-        let complaint_type: SpamType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let complaint_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // offender: Guid
         let offender = crate::util::read_guid(&mut r)?;

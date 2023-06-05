@@ -73,7 +73,7 @@ impl crate::Message for CMSG_BATTLEFIELD_PORT {
         let unknown2 = crate::util::read_u16_le(&mut r)?;
 
         // action: BattlefieldPortAction
-        let action: BattlefieldPortAction = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let action = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             arena_type,

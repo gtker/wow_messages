@@ -101,22 +101,22 @@ impl crate::Message for SMSG_PET_SPELLS {
         };
         let action_bars = if current_size < body_size as usize {
             // family: CreatureFamily
-            let family: CreatureFamily = (crate::util::read_u16_le(&mut r)? as u8).try_into()?;
+            let family = (crate::util::read_u16_le(&mut r)? as u8).try_into()?;
 
             // duration: u32
             let duration = crate::util::read_u32_le(&mut r)?;
 
             // react: PetReactState
-            let react: PetReactState = crate::util::read_u8_le(&mut r)?.try_into()?;
+            let react = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // command: PetCommandState
-            let command: PetCommandState = crate::util::read_u8_le(&mut r)?.try_into()?;
+            let command = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // unknown: u8
             let unknown = crate::util::read_u8_le(&mut r)?;
 
             // pet_enabled: PetEnabled
-            let pet_enabled: PetEnabled = crate::util::read_u8_le(&mut r)?.try_into()?;
+            let pet_enabled = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // action_bars: u32[10]
             let action_bars = {

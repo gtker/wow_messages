@@ -781,10 +781,10 @@ impl crate::Message for SMSG_MESSAGECHAT {
         let mut chat_type_if_achievement_id = Default::default();
 
         // chat_type: ChatType
-        let chat_type: ChatType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let chat_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // language: Language
-        let language: Language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // sender: Guid
         let sender = crate::util::read_guid(&mut r)?;
@@ -1132,7 +1132,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
         };
 
         // tag: PlayerChatTag
-        let tag: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let tag = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         match chat_type {
             ChatType::System => {

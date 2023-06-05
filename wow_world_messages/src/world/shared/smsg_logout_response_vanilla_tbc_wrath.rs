@@ -43,10 +43,10 @@ impl crate::Message for SMSG_LOGOUT_RESPONSE {
         }
 
         // result: LogoutResult
-        let result: LogoutResult = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // speed: LogoutSpeed
-        let speed: LogoutSpeed = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let speed = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             result,

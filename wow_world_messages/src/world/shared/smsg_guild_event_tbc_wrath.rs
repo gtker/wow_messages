@@ -45,7 +45,7 @@ impl crate::Message for SMSG_GUILD_EVENT {
         }
 
         // event: GuildEvent
-        let event: GuildEvent = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let event = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // amount_of_events: u8
         let amount_of_events = crate::util::read_u8_le(&mut r)?;

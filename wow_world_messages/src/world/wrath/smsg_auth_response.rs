@@ -79,7 +79,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
         }
 
         // result: WorldResult
-        let result: WorldResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             WorldResult::ResponseSuccess => SMSG_AUTH_RESPONSE_WorldResult::ResponseSuccess,
@@ -105,7 +105,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
                 let billing_rested = crate::util::read_u32_le(&mut r)?;
 
                 // expansion: Expansion
-                let expansion: Expansion = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let expansion = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
                     billing_flags,

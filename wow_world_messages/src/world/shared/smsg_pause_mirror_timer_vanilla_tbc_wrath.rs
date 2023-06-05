@@ -40,7 +40,7 @@ impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
         }
 
         // timer: TimerType
-        let timer: TimerType = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let timer = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // is_frozen: Bool
         let is_frozen = crate::util::read_u8_le(&mut r)? != 0;

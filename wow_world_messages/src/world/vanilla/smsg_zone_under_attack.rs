@@ -33,7 +33,7 @@ impl crate::Message for SMSG_ZONE_UNDER_ATTACK {
         }
 
         // zone_id: Area
-        let zone_id: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let zone_id = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             zone_id,

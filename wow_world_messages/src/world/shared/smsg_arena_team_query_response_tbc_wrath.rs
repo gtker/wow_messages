@@ -81,7 +81,7 @@ impl crate::Message for SMSG_ARENA_TEAM_QUERY_RESPONSE {
         };
 
         // team_type: ArenaType
-        let team_type: ArenaType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let team_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // background_color: u32
         let background_color = crate::util::read_u32_le(&mut r)?;

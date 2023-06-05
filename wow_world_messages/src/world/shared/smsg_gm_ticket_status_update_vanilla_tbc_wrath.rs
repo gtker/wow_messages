@@ -33,7 +33,7 @@ impl crate::Message for SMSG_GM_TICKET_STATUS_UPDATE {
         }
 
         // response: GmTicketStatusResponse
-        let response: GmTicketStatusResponse = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let response = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         Ok(Self {
             response,

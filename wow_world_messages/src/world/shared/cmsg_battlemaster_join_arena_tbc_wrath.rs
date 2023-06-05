@@ -52,7 +52,7 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN_ARENA {
         let battlemaster = crate::util::read_guid(&mut r)?;
 
         // arena_type: JoinArenaType
-        let arena_type: JoinArenaType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // as_group: Bool
         let as_group = crate::util::read_u8_le(&mut r)? != 0;

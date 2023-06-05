@@ -233,7 +233,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
         let id = crate::util::read_u32_le(&mut r)?;
 
         // result: SpellCastResult
-        let result: SpellCastResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // multiple_casts: Bool
         let multiple_casts = crate::util::read_u8_le(&mut r)? != 0;
@@ -400,7 +400,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
             }
             SpellCastResult::RequiresArea => {
                 // area: Area
-                let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+                let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
                 SMSG_PET_CAST_FAILED_SpellCastResult::RequiresArea {
                     area,
@@ -503,7 +503,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
             SpellCastResult::Reputation => SMSG_PET_CAST_FAILED_SpellCastResult::Reputation,
             SpellCastResult::MinSkill => {
                 // skill: Skill
-                let skill: Skill = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
+                let skill = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
 
                 // skill_required: u32
                 let skill_required = crate::util::read_u32_le(&mut r)?;

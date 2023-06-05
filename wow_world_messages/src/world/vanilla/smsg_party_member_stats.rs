@@ -273,7 +273,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
 
         let mask_power_type = if mask.is_power_type() {
             // power: Power
-            let power: Power = crate::util::read_u8_le(&mut r)?.try_into()?;
+            let power = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             Some(SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PowerType {
                 power,
@@ -321,7 +321,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
 
         let mask_zone = if mask.is_zone() {
             // area: Area
-            let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+            let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
             Some(SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_Zone {
                 area,
@@ -436,7 +436,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
 
         let mask_pet_power_type = if mask.is_pet_power_type() {
             // pet_power_type: Power
-            let pet_power_type: Power = crate::util::read_u8_le(&mut r)?.try_into()?;
+            let pet_power_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             Some(SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags_PetPowerType {
                 pet_power_type,

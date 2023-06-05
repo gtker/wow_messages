@@ -33,7 +33,7 @@ impl DispelledSpell {
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // method: DispelMethod
-        let method: DispelMethod = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let method = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             spell,

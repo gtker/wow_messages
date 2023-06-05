@@ -33,7 +33,7 @@ impl crate::Message for CMSG_FAR_SIGHT {
         }
 
         // operation: FarSightOperation
-        let operation: FarSightOperation = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let operation = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             operation,

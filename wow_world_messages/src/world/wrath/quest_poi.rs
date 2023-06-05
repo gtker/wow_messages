@@ -74,10 +74,10 @@ impl QuestPoi {
         let objective_id = crate::util::read_u32_le(&mut r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // floor_id: u32
         let floor_id = crate::util::read_u32_le(&mut r)?;

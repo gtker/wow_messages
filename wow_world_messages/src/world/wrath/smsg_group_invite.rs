@@ -61,7 +61,7 @@ impl crate::Message for SMSG_GROUP_INVITE {
         }
 
         // status: PlayerInviteStatus
-        let status: PlayerInviteStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let status = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // name: CString
         let name = {

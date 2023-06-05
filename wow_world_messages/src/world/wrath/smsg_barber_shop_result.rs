@@ -33,7 +33,7 @@ impl crate::Message for SMSG_BARBER_SHOP_RESULT {
         }
 
         // result: BarberShopResult
-        let result: BarberShopResult = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let result = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             result,

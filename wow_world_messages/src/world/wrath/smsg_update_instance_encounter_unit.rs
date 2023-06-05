@@ -118,7 +118,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
         }
 
         // frame: EncounterFrame
-        let frame: EncounterFrame = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let frame = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         let frame_if = match frame {
             EncounterFrame::Engage => {

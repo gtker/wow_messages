@@ -179,7 +179,7 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         };
 
         // completable: QuestCompletable
-        let completable: QuestCompletable = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let completable = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // flags2: u32
         let flags2 = crate::util::read_u32_le(&mut r)?;

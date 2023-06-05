@@ -125,13 +125,13 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         let queue_slot = crate::util::read_u32_le(&mut r)?;
 
         // arena_type: ArenaType
-        let arena_type: ArenaType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let arena_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(&mut r)?;
 
         // battleground_type: BattlegroundType
-        let battleground_type: BattlegroundType = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let battleground_type = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // unknown2: u16
         let unknown2 = crate::util::read_u16_le(&mut r)?;
@@ -143,7 +143,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         let rated = crate::util::read_u8_le(&mut r)? != 0;
 
         // status_id: StatusId
-        let status_id: StatusId = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let status_id = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let status_id_if = match status_id {
             StatusId::None => SMSG_BATTLEFIELD_STATUS_StatusId::None,

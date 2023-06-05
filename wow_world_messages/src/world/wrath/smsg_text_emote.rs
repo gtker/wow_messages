@@ -57,10 +57,10 @@ impl crate::Message for SMSG_TEXT_EMOTE {
         let guid = crate::util::read_guid(&mut r)?;
 
         // text_emote: TextEmote
-        let text_emote: TextEmote = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let text_emote = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // emote: Emote
-        let emote: Emote = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let emote = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // name: SizedCString
         let name = {

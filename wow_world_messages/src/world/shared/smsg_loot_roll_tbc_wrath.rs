@@ -104,7 +104,7 @@ impl crate::Message for SMSG_LOOT_ROLL {
         let roll_number = crate::util::read_u8_le(&mut r)?;
 
         // vote: RollVote
-        let vote: RollVote = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let vote = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // auto_pass: u8
         let auto_pass = crate::util::read_u8_le(&mut r)?;

@@ -1230,10 +1230,10 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
         }
 
         // chat_type: ChatType
-        let chat_type: ChatType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let chat_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // language: Language
-        let language: Language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         let chat_type_if = match chat_type {
             ChatType::System => {
@@ -1248,7 +1248,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1276,7 +1276,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1304,7 +1304,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1332,7 +1332,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1360,7 +1360,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1388,7 +1388,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1416,7 +1416,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1444,7 +1444,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1472,7 +1472,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1500,7 +1500,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1528,7 +1528,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1556,7 +1556,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1591,7 +1591,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag1: PlayerChatTag
-                let chat_tag1: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_GM_MESSAGECHAT_ChatType::MonsterSay {
                     chat_tag1,
@@ -1619,7 +1619,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag1: PlayerChatTag
-                let chat_tag1: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_GM_MESSAGECHAT_ChatType::MonsterParty {
                     chat_tag1,
@@ -1647,7 +1647,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag1: PlayerChatTag
-                let chat_tag1: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_GM_MESSAGECHAT_ChatType::MonsterYell {
                     chat_tag1,
@@ -1675,7 +1675,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag1: PlayerChatTag
-                let chat_tag1: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_GM_MESSAGECHAT_ChatType::MonsterWhisper {
                     chat_tag1,
@@ -1703,7 +1703,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag1: PlayerChatTag
-                let chat_tag1: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_GM_MESSAGECHAT_ChatType::MonsterEmote {
                     chat_tag1,
@@ -1730,7 +1730,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag3: PlayerChatTag
-                let chat_tag3: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag3 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_GM_MESSAGECHAT_ChatType::Channel {
                     channel_name,
@@ -1751,7 +1751,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1779,7 +1779,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1807,7 +1807,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1835,7 +1835,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1863,7 +1863,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1891,7 +1891,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1919,7 +1919,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1947,7 +1947,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -1975,7 +1975,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2003,7 +2003,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2031,7 +2031,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2059,7 +2059,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2087,7 +2087,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2115,7 +2115,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2143,7 +2143,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2171,7 +2171,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2199,7 +2199,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2227,7 +2227,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2255,7 +2255,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag2: PlayerChatTag
-                let chat_tag2: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag2 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_GM_MESSAGECHAT_ChatType::BgSystemNeutral {
                     chat_tag2,
@@ -2275,7 +2275,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag2: PlayerChatTag
-                let chat_tag2: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag2 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_GM_MESSAGECHAT_ChatType::BgSystemAlliance {
                     chat_tag2,
@@ -2295,7 +2295,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag2: PlayerChatTag
-                let chat_tag2: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag2 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_GM_MESSAGECHAT_ChatType::BgSystemHorde {
                     chat_tag2,
@@ -2315,7 +2315,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2343,7 +2343,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2378,7 +2378,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag1: PlayerChatTag
-                let chat_tag1: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_GM_MESSAGECHAT_ChatType::RaidBossWhisper {
                     chat_tag1,
@@ -2406,7 +2406,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag1: PlayerChatTag
-                let chat_tag1: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag1 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 SMSG_GM_MESSAGECHAT_ChatType::RaidBossEmote {
                     chat_tag1,
@@ -2427,7 +2427,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2455,7 +2455,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2483,7 +2483,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -2511,7 +2511,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 };
 
                 // chat_tag4: PlayerChatTag
-                let chat_tag4: PlayerChatTag = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let chat_tag4 = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // sender_name: SizedCString
                 let sender_name = {

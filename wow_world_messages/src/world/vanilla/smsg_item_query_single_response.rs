@@ -296,7 +296,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
         };
         let found = if current_size < body_size as usize {
             // class_and_sub_class: ItemClassAndSubClass
-            let class_and_sub_class: ItemClassAndSubClass = crate::util::read_u64_le(&mut r)?.try_into()?;
+            let class_and_sub_class = crate::util::read_u64_le(&mut r)?.try_into()?;
 
             // name1: CString
             let name1 = {
@@ -326,7 +326,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let display_id = crate::util::read_u32_le(&mut r)?;
 
             // quality: ItemQuality
-            let quality: ItemQuality = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+            let quality = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             // flags: ItemFlag
             let flags = ItemFlag::new(crate::util::read_u32_le(&mut r)?);
@@ -338,7 +338,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let sell_price = Gold::new(crate::util::read_u32_le(&mut r)?);
 
             // inventory_type: InventoryType
-            let inventory_type: InventoryType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+            let inventory_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             // allowed_class: AllowedClass
             let allowed_class = AllowedClass::new(crate::util::read_u32_le(&mut r)?);
@@ -353,7 +353,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let required_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
             // required_skill: Skill
-            let required_skill: Skill = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
+            let required_skill = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
 
             // required_skill_rank: u32
             let required_skill_rank = crate::util::read_u32_le(&mut r)?;
@@ -368,7 +368,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let required_city_rank = crate::util::read_u32_le(&mut r)?;
 
             // required_faction: Faction
-            let required_faction: Faction = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
+            let required_faction = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
 
             // required_faction_rank: u32
             let required_faction_rank = crate::util::read_u32_le(&mut r)?;
@@ -440,7 +440,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             };
 
             // bonding: Bonding
-            let bonding: Bonding = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+            let bonding = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             // description: CString
             let description = {
@@ -452,10 +452,10 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let page_text = crate::util::read_u32_le(&mut r)?;
 
             // language: Language
-            let language: Language = crate::util::read_u32_le(&mut r)?.try_into()?;
+            let language = crate::util::read_u32_le(&mut r)?.try_into()?;
 
             // page_text_material: PageTextMaterial
-            let page_text_material: PageTextMaterial = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+            let page_text_material = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             // start_quest: u32
             let start_quest = crate::util::read_u32_le(&mut r)?;
@@ -467,7 +467,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let material = crate::util::read_u32_le(&mut r)?;
 
             // sheathe_type: SheatheType
-            let sheathe_type: SheatheType = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+            let sheathe_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             // random_property: u32
             let random_property = crate::util::read_u32_le(&mut r)?;
@@ -476,19 +476,19 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             let block = crate::util::read_u32_le(&mut r)?;
 
             // item_set: ItemSet
-            let item_set: ItemSet = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
+            let item_set = (crate::util::read_u32_le(&mut r)? as u16).try_into()?;
 
             // max_durability: u32
             let max_durability = crate::util::read_u32_le(&mut r)?;
 
             // area: Area
-            let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+            let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
             // map: Map
-            let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+            let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
             // bag_family: BagFamily
-            let bag_family: BagFamily = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+            let bag_family = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
             Some(SMSG_ITEM_QUERY_SINGLE_RESPONSE_found {
                 class_and_sub_class,

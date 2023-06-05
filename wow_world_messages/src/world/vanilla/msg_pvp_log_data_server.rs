@@ -60,13 +60,13 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
         }
 
         // status: BattlegroundEndStatus
-        let status: BattlegroundEndStatus = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let status = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let status_if = match status {
             BattlegroundEndStatus::NotEnded => MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::NotEnded,
             BattlegroundEndStatus::Ended => {
                 // winner: BattlegroundWinner
-                let winner: BattlegroundWinner = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let winner = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::Ended {
                     winner,

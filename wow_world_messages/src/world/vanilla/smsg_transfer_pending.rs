@@ -48,7 +48,7 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
         }
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // optional has_transport
         let current_size = {
@@ -59,7 +59,7 @@ impl crate::Message for SMSG_TRANSFER_PENDING {
             let transport = crate::util::read_u32_le(&mut r)?;
 
             // transport_map: Map
-            let transport_map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+            let transport_map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
             Some(SMSG_TRANSFER_PENDING_has_transport {
                 transport,

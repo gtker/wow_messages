@@ -144,13 +144,13 @@ impl Character {
         };
 
         // race: Race
-        let race: Race = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let race = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // class: Class
-        let class: Class = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let class = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // gender: Gender
-        let gender: Gender = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let gender = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // skin: u8
         let skin = crate::util::read_u8_le(&mut r)?;
@@ -171,10 +171,10 @@ impl Character {
         let level = Level::new(crate::util::read_u8_le(&mut r)?);
 
         // area: Area
-        let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let area = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // position: Vector3d
         let position = Vector3d::read(&mut r)?;
@@ -195,7 +195,7 @@ impl Character {
         let pet_level = Level::new(crate::util::read_u32_le(&mut r)? as u8);
 
         // pet_family: CreatureFamily
-        let pet_family: CreatureFamily = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let pet_family = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // equipment: CharacterGear[20]
         let equipment = {

@@ -45,7 +45,7 @@ impl crate::Message for MSG_SET_RAID_DIFFICULTY_Server {
         }
 
         // difficulty: RaidDifficulty
-        let difficulty: RaidDifficulty = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let difficulty = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(&mut r)?;

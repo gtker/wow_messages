@@ -65,7 +65,7 @@ impl crate::Message for SMSG_SERVER_FIRST_ACHIEVEMENT {
         let achievement = crate::util::read_u32_le(&mut r)?;
 
         // link_type: AchievementNameLinkType
-        let link_type: AchievementNameLinkType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let link_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             name,

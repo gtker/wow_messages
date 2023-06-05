@@ -63,7 +63,7 @@ impl crate::Message for SMSG_SPELLENERGIZELOG {
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // power: Power
-        let power: Power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let power = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // damage: u32
         let damage = crate::util::read_u32_le(&mut r)?;

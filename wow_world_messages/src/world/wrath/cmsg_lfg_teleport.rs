@@ -33,7 +33,7 @@ impl crate::Message for CMSG_LFG_TELEPORT {
         }
 
         // location: LfgTeleportLocation
-        let location: LfgTeleportLocation = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let location = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             location,

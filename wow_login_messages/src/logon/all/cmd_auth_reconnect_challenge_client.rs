@@ -106,7 +106,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // protocol_version: ProtocolVersion
-        let protocol_version: ProtocolVersion = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let protocol_version = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // size: u16
         let _size = crate::util::read_u16_le(&mut r)?;
@@ -120,13 +120,13 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
         let version = Version::read(&mut r)?;
 
         // platform: Platform
-        let platform: Platform = crate::util::read_u32_le(&mut r)?.into();
+        let platform = crate::util::read_u32_le(&mut r)?.into();
 
         // os: Os
-        let os: Os = crate::util::read_u32_le(&mut r)?.into();
+        let os = crate::util::read_u32_le(&mut r)?.into();
 
         // locale: Locale
-        let locale: Locale = crate::util::read_u32_le(&mut r)?.into();
+        let locale = crate::util::read_u32_le(&mut r)?.into();
 
         // utc_timezone_offset: u32
         let utc_timezone_offset = crate::util::read_u32_le(&mut r)?;
@@ -172,7 +172,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
      {
         Box::pin(async move {
             // protocol_version: ProtocolVersion
-            let protocol_version: ProtocolVersion = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
+            let protocol_version = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
             // size: u16
             let _size = crate::util::tokio_read_u16_le(&mut r).await?;
@@ -186,13 +186,13 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
             let version = Version::tokio_read(&mut r).await?;
 
             // platform: Platform
-            let platform: Platform = crate::util::tokio_read_u32_le(&mut r).await?.into();
+            let platform = crate::util::tokio_read_u32_le(&mut r).await?.into();
 
             // os: Os
-            let os: Os = crate::util::tokio_read_u32_le(&mut r).await?.into();
+            let os = crate::util::tokio_read_u32_le(&mut r).await?.into();
 
             // locale: Locale
-            let locale: Locale = crate::util::tokio_read_u32_le(&mut r).await?.into();
+            let locale = crate::util::tokio_read_u32_le(&mut r).await?.into();
 
             // utc_timezone_offset: u32
             let utc_timezone_offset = crate::util::tokio_read_u32_le(&mut r).await?;
@@ -251,7 +251,7 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
      {
         Box::pin(async move {
             // protocol_version: ProtocolVersion
-            let protocol_version: ProtocolVersion = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+            let protocol_version = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
             // size: u16
             let _size = crate::util::astd_read_u16_le(&mut r).await?;
@@ -265,13 +265,13 @@ impl ClientMessage for CMD_AUTH_RECONNECT_CHALLENGE_Client {
             let version = Version::astd_read(&mut r).await?;
 
             // platform: Platform
-            let platform: Platform = crate::util::astd_read_u32_le(&mut r).await?.into();
+            let platform = crate::util::astd_read_u32_le(&mut r).await?.into();
 
             // os: Os
-            let os: Os = crate::util::astd_read_u32_le(&mut r).await?.into();
+            let os = crate::util::astd_read_u32_le(&mut r).await?.into();
 
             // locale: Locale
-            let locale: Locale = crate::util::astd_read_u32_le(&mut r).await?.into();
+            let locale = crate::util::astd_read_u32_le(&mut r).await?.into();
 
             // utc_timezone_offset: u32
             let utc_timezone_offset = crate::util::astd_read_u32_le(&mut r).await?;

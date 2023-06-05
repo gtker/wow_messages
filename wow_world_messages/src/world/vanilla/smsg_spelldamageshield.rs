@@ -58,7 +58,7 @@ impl crate::Message for SMSG_SPELLDAMAGESHIELD {
         let damage = crate::util::read_u32_le(&mut r)?;
 
         // school: SpellSchool
-        let school: SpellSchool = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let school = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             victim,

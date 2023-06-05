@@ -49,7 +49,7 @@ impl crate::Message for SMSG_PARTY_COMMAND_RESULT {
         }
 
         // operation: PartyOperation
-        let operation: PartyOperation = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let operation = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // member: CString
         let member = {
@@ -58,7 +58,7 @@ impl crate::Message for SMSG_PARTY_COMMAND_RESULT {
         };
 
         // result: PartyResult
-        let result: PartyResult = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
+        let result = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         Ok(Self {
             operation,

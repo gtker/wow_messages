@@ -119,7 +119,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         let battlemaster = crate::util::read_guid(&mut r)?;
 
         // battleground_type: BattlegroundType
-        let battleground_type: BattlegroundType = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let battleground_type = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(&mut r)?;
@@ -140,7 +140,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         let loss_honor = crate::util::read_u32_le(&mut r)?;
 
         // random: RandomBg
-        let random: RandomBg = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let random = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let random_if = match random {
             RandomBg::NotRandom => SMSG_BATTLEFIELD_LIST_RandomBg::NotRandom,

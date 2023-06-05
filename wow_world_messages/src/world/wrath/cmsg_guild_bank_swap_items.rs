@@ -174,7 +174,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
         let bank = crate::util::read_guid(&mut r)?;
 
         // source: BankSwapSource
-        let source: BankSwapSource = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let source = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let source_if = match source {
             BankSwapSource::Inventory => {
@@ -188,7 +188,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
                 let item2 = crate::util::read_u32_le(&mut r)?;
 
                 // mode: BankSwapStoreMode
-                let mode: BankSwapStoreMode = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let mode = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 let mode_if = match mode {
                     BankSwapStoreMode::Manual => {

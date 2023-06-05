@@ -135,7 +135,7 @@ impl Object {
 impl Object {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // update_type: UpdateType
-        let update_type: UpdateType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let update_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let update_type_if = match update_type {
             UpdateType::Values => {
@@ -167,7 +167,7 @@ impl Object {
                 let guid3 = crate::util::read_packed_guid(&mut r)?;
 
                 // object_type: ObjectType
-                let object_type: ObjectType = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let object_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // movement2: MovementBlock
                 let movement2 = MovementBlock::read(&mut r)?;
@@ -187,7 +187,7 @@ impl Object {
                 let guid3 = crate::util::read_packed_guid(&mut r)?;
 
                 // object_type: ObjectType
-                let object_type: ObjectType = crate::util::read_u8_le(&mut r)?.try_into()?;
+                let object_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
                 // movement2: MovementBlock
                 let movement2 = MovementBlock::read(&mut r)?;

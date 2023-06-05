@@ -178,7 +178,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // result: LoginResult
-        let result: LoginResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         let result_if = match result {
             LoginResult::Success => {
@@ -247,7 +247,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
      {
         Box::pin(async move {
             // result: LoginResult
-            let result: LoginResult = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
+            let result = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
 
             let result_if = match result {
                 LoginResult::Success => {
@@ -329,7 +329,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
      {
         Box::pin(async move {
             // result: LoginResult
-            let result: LoginResult = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
+            let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
 
             let result_if = match result {
                 LoginResult::Success => {

@@ -56,7 +56,7 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN {
         let guid = crate::util::read_guid(&mut r)?;
 
         // map: Map
-        let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let map = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // instance_id: u32
         let instance_id = crate::util::read_u32_le(&mut r)?;

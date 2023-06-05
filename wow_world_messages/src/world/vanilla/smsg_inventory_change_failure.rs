@@ -1447,7 +1447,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
         let mut result_if_bag_type_subclass = Default::default();
 
         // result: InventoryResult
-        let result: InventoryResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         match result {
             InventoryResult::Ok => {}

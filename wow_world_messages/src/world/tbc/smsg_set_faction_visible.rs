@@ -33,7 +33,7 @@ impl crate::Message for SMSG_SET_FACTION_VISIBLE {
         }
 
         // faction: Faction
-        let faction: Faction = crate::util::read_u16_le(&mut r)?.try_into()?;
+        let faction = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         Ok(Self {
             faction,

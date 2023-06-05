@@ -57,7 +57,7 @@ impl crate::Message for SMSG_ENVIRONMENTAL_DAMAGE_LOG {
         let guid = crate::util::read_guid(&mut r)?;
 
         // damage_type: EnvironmentalDamageType
-        let damage_type: EnvironmentalDamageType = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let damage_type = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // damage: u32
         let damage = crate::util::read_u32_le(&mut r)?;

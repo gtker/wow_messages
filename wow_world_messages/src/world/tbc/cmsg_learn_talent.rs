@@ -38,7 +38,7 @@ impl crate::Message for CMSG_LEARN_TALENT {
         }
 
         // talent: Talent
-        let talent: Talent = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let talent = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // requested_rank: u32
         let requested_rank = crate::util::read_u32_le(&mut r)?;

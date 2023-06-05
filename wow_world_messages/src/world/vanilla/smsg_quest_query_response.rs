@@ -216,13 +216,13 @@ impl crate::Message for SMSG_QUEST_QUERY_RESPONSE {
         let quest_type = crate::util::read_u32_le(&mut r)?;
 
         // reputation_objective_faction: Faction
-        let reputation_objective_faction: Faction = crate::util::read_u16_le(&mut r)?.try_into()?;
+        let reputation_objective_faction = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         // reputation_objective_value: u32
         let reputation_objective_value = crate::util::read_u32_le(&mut r)?;
 
         // required_opposite_faction: Faction
-        let required_opposite_faction: Faction = crate::util::read_u16_le(&mut r)?.try_into()?;
+        let required_opposite_faction = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         // required_opposite_reputation_value: u32
         let required_opposite_reputation_value = crate::util::read_u32_le(&mut r)?;

@@ -52,7 +52,7 @@ impl crate::Message for SMSG_BUY_FAILED {
         let item = crate::util::read_u32_le(&mut r)?;
 
         // result: BuyResult
-        let result: BuyResult = crate::util::read_u8_le(&mut r)?.try_into()?;
+        let result = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         Ok(Self {
             guid,
