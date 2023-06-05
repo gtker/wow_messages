@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * `AuctionHouse` type for Vanilla, TBC and Wrath with member functions `deposit_percentage`, `cut_percentage`, and `(vanilla|tbc|wrath)_faction`.
+* `Octal`, `Binary`, `UpperHex`, `LowerHex` for `Guid`.
 
 ### Removed
 

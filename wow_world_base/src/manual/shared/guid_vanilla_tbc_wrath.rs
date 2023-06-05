@@ -1,6 +1,6 @@
-use std::fmt::{Display, Formatter};
+use std::fmt::Formatter;
 
-#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Default, Hash, Copy, Clone)]
+#[derive(std::fmt::Debug, Ord, PartialOrd, Eq, PartialEq, Default, Hash, Copy, Clone)]
 pub struct Guid {
     guid: u64,
 }
@@ -51,9 +51,33 @@ impl From<u64> for Guid {
     }
 }
 
-impl Display for Guid {
+impl std::fmt::Display for Guid {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        u64::fmt(&self.guid, f)
+        self.guid().fmt(f)
+    }
+}
+
+impl std::fmt::LowerHex for Guid {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        self.guid().fmt(f)
+    }
+}
+
+impl std::fmt::UpperHex for Guid {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        self.guid().fmt(f)
+    }
+}
+
+impl std::fmt::Octal for Guid {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        self.guid().fmt(f)
+    }
+}
+
+impl std::fmt::Binary for Guid {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        self.guid().fmt(f)
     }
 }
 
