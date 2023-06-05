@@ -122,7 +122,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_CALENDAR {
         let current_time = crate::util::read_u32_le(&mut r)?;
 
         // zone_time: DateTime
-        let zone_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let zone_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
 
         // amount_of_instances: u32
         let amount_of_instances = crate::util::read_u32_le(&mut r)?;

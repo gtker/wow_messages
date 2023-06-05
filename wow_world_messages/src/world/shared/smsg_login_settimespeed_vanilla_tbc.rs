@@ -51,7 +51,7 @@ impl crate::Message for SMSG_LOGIN_SETTIMESPEED {
         }
 
         // datetime: DateTime
-        let datetime: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let datetime = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
 
         // timescale: f32
         let timescale = crate::util::read_f32_le(&mut r)?;

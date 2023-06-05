@@ -85,7 +85,7 @@ impl CalendarSendInvitee {
         let invite_id = crate::util::read_guid(&mut r)?;
 
         // status_time: DateTime
-        let status_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let status_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
 
         // text: CString
         let text = {

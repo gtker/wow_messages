@@ -151,10 +151,10 @@ impl crate::Message for SMSG_CALENDAR_SEND_EVENT {
         let flags = crate::util::read_u32_le(&mut r)?;
 
         // event_time: DateTime
-        let event_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
 
         // time_zone_time: DateTime
-        let time_zone_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let time_zone_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
 
         // guild_id: u32
         let guild_id = crate::util::read_u32_le(&mut r)?;

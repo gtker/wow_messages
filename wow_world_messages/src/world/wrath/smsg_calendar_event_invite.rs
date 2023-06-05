@@ -102,7 +102,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
             CalendarStatusTime::NotPresent => SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::NotPresent,
             CalendarStatusTime::Present => {
                 // status_time: DateTime
-                let status_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
+                let status_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
 
                 SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::Present {
                     status_time,

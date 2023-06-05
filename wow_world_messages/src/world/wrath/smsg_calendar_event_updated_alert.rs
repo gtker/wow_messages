@@ -104,13 +104,13 @@ impl crate::Message for SMSG_CALENDAR_EVENT_UPDATED_ALERT {
         let event_id = crate::util::read_guid(&mut r)?;
 
         // old_event_time: DateTime
-        let old_event_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let old_event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
 
         // flags: u32
         let flags = crate::util::read_u32_le(&mut r)?;
 
         // new_event_time: DateTime
-        let new_event_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let new_event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
 
         // event_type: u8
         let event_type = crate::util::read_u8_le(&mut r)?;
@@ -137,7 +137,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_UPDATED_ALERT {
         let max_invitees = crate::util::read_u32_le(&mut r)?;
 
         // unknown_time: DateTime
-        let unknown_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let unknown_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
 
         Ok(Self {
             show_alert,

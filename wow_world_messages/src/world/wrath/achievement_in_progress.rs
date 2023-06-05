@@ -71,7 +71,7 @@ impl AchievementInProgress {
         let timed_criteria_failed = crate::util::read_u32_le(&mut r)? != 0;
 
         // progress_date: DateTime
-        let progress_date: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let progress_date = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
 
         // time_since_progress: u32
         let time_since_progress = crate::util::read_u32_le(&mut r)?;

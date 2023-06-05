@@ -211,7 +211,7 @@ fn print_read_definition(
         }
         Type::DateTime => {
             s.wln(format!(
-                "{assignment_prefix}{name}: DateTime = {UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?.try_into()?;",
+                "{assignment_prefix}{name} = DateTime::try_from({UTILITY_PATH}::{prefix}read_u32_le(&mut r){postfix}?)?;",
             ));
         }
         Type::Integer(_) => {

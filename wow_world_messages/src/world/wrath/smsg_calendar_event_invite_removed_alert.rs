@@ -53,7 +53,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_REMOVED_ALERT {
         let event_id = crate::util::read_guid(&mut r)?;
 
         // event_time: DateTime
-        let event_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
+        let event_time = DateTime::try_from(crate::util::read_u32_le(&mut r)?)?;
 
         // flags: u32
         let flags = crate::util::read_u32_le(&mut r)?;
