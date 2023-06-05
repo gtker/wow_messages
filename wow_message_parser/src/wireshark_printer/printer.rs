@@ -113,6 +113,7 @@ fn print_message(
             o,
             variables,
             inside_compressed_message,
+            0,
         ) {
             return;
         }
@@ -128,6 +129,7 @@ fn print_member(
     o: &Objects,
     variables: &mut Vec<String>,
     inside_compressed_message: bool,
+    depth: i32,
 ) -> bool {
     match m {
         StructMember::Definition(d) => {
@@ -141,6 +143,7 @@ fn print_member(
                 wo,
                 variables,
                 inside_compressed_message,
+                depth,
             ) {
                 return false;
             }
@@ -155,6 +158,7 @@ fn print_member(
                 statement,
                 variables,
                 inside_compressed_message,
+                depth,
             );
         }
         StructMember::OptionalStatement(optional) => {
@@ -162,7 +166,17 @@ fn print_member(
             s.open_curly("if (len > 0)");
 
             for m in optional.members() {
-                print_member(s, m, e, wo, tags, o, variables, inside_compressed_message);
+                print_member(
+                    s,
+                    m,
+                    e,
+                    wo,
+                    tags,
+                    o,
+                    variables,
+                    inside_compressed_message,
+                    depth,
+                );
             }
 
             s.closing_curly(); // if (len > 0)
@@ -181,6 +195,7 @@ fn print_if_statement(
     statement: &IfStatement,
     variables: &mut Vec<String>,
     inside_compressed_message: bool,
+    depth: i32,
 ) -> bool {
     let name = statement.name();
 
@@ -219,7 +234,17 @@ fn print_if_statement(
     s.inc_indent();
 
     for m in statement.members() {
-        print_member(s, m, e, wo, tags, o, variables, inside_compressed_message);
+        print_member(
+            s,
+            m,
+            e,
+            wo,
+            tags,
+            o,
+            variables,
+            inside_compressed_message,
+            depth,
+        );
     }
 
     s.closing_curly();
@@ -259,7 +284,17 @@ fn print_if_statement(
         s.inc_indent();
 
         for m in elseif.members() {
-            print_member(s, m, e, wo, tags, o, variables, inside_compressed_message);
+            print_member(
+                s,
+                m,
+                e,
+                wo,
+                tags,
+                o,
+                variables,
+                inside_compressed_message,
+                depth,
+            );
         }
 
         s.closing_curly();
@@ -269,7 +304,17 @@ fn print_if_statement(
         s.open_curly("else");
 
         for m in statement.else_members() {
-            print_member(s, m, e, wo, tags, o, variables, inside_compressed_message);
+            print_member(
+                s,
+                m,
+                e,
+                wo,
+                tags,
+                o,
+                variables,
+                inside_compressed_message,
+                depth,
+            );
         }
 
         s.closing_curly(); // else
@@ -287,6 +332,7 @@ fn print_definition(
     wo: &WiresharkObject,
     variables: &mut Vec<String>,
     inside_compressed_message: bool,
+    depth: i32,
 ) -> bool {
     if d.tags().compressed().is_some() {
         s.wln("compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));");
@@ -367,7 +413,16 @@ fn print_definition(
             print_definer(s, w, upcast, container_name, d.name(), variables, e);
         }
         Type::Struct { e } => {
-            if !print_container(s, o, wo, variables, e, inside_compressed_message, None) {
+            if !print_container(
+                s,
+                o,
+                wo,
+                variables,
+                e,
+                inside_compressed_message,
+                None,
+                depth,
+            ) {
                 return false;
             }
         }
@@ -388,11 +443,15 @@ fn print_definition(
                     hf = w.unwrap().name()
                 ));
             } else {
+                let depth = depth + 1;
+
                 let iteration_variable = match array.size() {
                     ArraySize::Fixed(_) | ArraySize::Variable(_) => {
-                        s.open_curly(format!("for (i = 0; i < {len}; ++i)"));
+                        s.open_curly(format!(
+                            "for (guint32 i{depth} = 0; i{depth} < {len}; ++i{depth})"
+                        ));
 
-                        Some("i".to_string())
+                        Some(format!("i{depth}").to_string())
                     }
                     ArraySize::Endless => {
                         let packet_end = if d.tags().compressed().is_some()
@@ -433,6 +492,7 @@ fn print_definition(
                             c,
                             inside_compressed_message,
                             iteration_variable,
+                            depth,
                         ) {
                             s.closing_curly();
                             return false;
@@ -509,6 +569,7 @@ fn print_container(
     e: &Container,
     inside_compressed_message: bool,
     iteration_variable: Option<String>,
+    depth: i32,
 ) -> bool {
     let name = e.name();
     let text = if let Some(variable) = iteration_variable {
@@ -530,6 +591,7 @@ fn print_container(
             o,
             variables,
             inside_compressed_message,
+            depth,
         ) {
             return false;
         }

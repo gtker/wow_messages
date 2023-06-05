@@ -11,7 +11,7 @@
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_total_cost, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_node_count, 4, ENC_LITTLE_ENDIAN, &node_count);
-            for (i = 0; i < node_count; ++i) {
+            for (guint32 i1 = 0; i1 < node_count; ++i1) {
                 ptvcursor_add(ptv, hf_woww_nodes, 4, ENC_LITTLE_ENDIAN);
             }
             break;
@@ -37,7 +37,7 @@
             ptvcursor_add(ptv, hf_woww_auctioneer, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_start_from_page, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_outbid_items, 4, ENC_LITTLE_ENDIAN, &amount_of_outbid_items);
-            for (i = 0; i < amount_of_outbid_items; ++i) {
+            for (guint32 i1 = 0; i1 < amount_of_outbid_items; ++i1) {
                 ptvcursor_add(ptv, hf_woww_outbid_item_ids, 4, ENC_LITTLE_ENDIAN);
             }
             break;
@@ -668,8 +668,8 @@
             break;
         case CMSG_GMSURVEY_SUBMIT:
             ptvcursor_add(ptv, hf_woww_survey_id, 4, ENC_LITTLE_ENDIAN);
-            for (i = 0; i < 10; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "GmSurveyQuestion %i", i);
+            for (guint32 i1 = 0; i1 < 10; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "GmSurveyQuestion %i", i1);
                 ptvcursor_add(ptv, hf_woww_question_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_answer, 1, ENC_LITTLE_ENDIAN);
                 add_cstring(ptv, &hf_woww_comment);
@@ -1580,11 +1580,11 @@
             ptvcursor_add(ptv, hf_woww_race_mask, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_class_mask, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_zones, 4, ENC_LITTLE_ENDIAN, &amount_of_zones);
-            for (i = 0; i < amount_of_zones; ++i) {
+            for (guint32 i1 = 0; i1 < amount_of_zones; ++i1) {
                 ptvcursor_add(ptv, hf_woww_zones, 4, ENC_LITTLE_ENDIAN);
             }
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_strings, 4, ENC_LITTLE_ENDIAN, &amount_of_strings);
-            for (i = 0; i < amount_of_strings; ++i) {
+            for (guint32 i1 = 0; i1 < amount_of_strings; ++i1) {
                 add_cstring(ptv, &hf_woww_search_strings);
             }
             break;
@@ -1622,16 +1622,16 @@
         case MSG_BATTLEGROUND_PLAYER_POSITIONS:
             if (WOWW_SERVER_TO_CLIENT) {
                 ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_teammates, 4, ENC_LITTLE_ENDIAN, &amount_of_teammates);
-                for (i = 0; i < amount_of_teammates; ++i) {
-                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "BattlegroundPlayerPosition %i", i);
+                for (guint32 i1 = 0; i1 < amount_of_teammates; ++i1) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "BattlegroundPlayerPosition %i", i1);
                     ptvcursor_add(ptv, hf_woww_player, 8, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_position_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_position_y, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_pop_subtree(ptv);
                 }
                 ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_carriers, 1, ENC_LITTLE_ENDIAN, &amount_of_carriers);
-                for (i = 0; i < amount_of_carriers; ++i) {
-                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "BattlegroundPlayerPosition %i", i);
+                for (guint32 i1 = 0; i1 < amount_of_carriers; ++i1) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "BattlegroundPlayerPosition %i", i1);
                     ptvcursor_add(ptv, hf_woww_player, 8, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_position_x, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_position_y, 4, ENC_LITTLE_ENDIAN);
@@ -1696,8 +1696,8 @@
                 ptvcursor_add(ptv, hf_woww_npc, 8, ENC_LITTLE_ENDIAN);
                 ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_pets, 1, ENC_LITTLE_ENDIAN, &amount_of_pets);
                 ptvcursor_add(ptv, hf_woww_stable_slots, 1, ENC_LITTLE_ENDIAN);
-                for (i = 0; i < amount_of_pets; ++i) {
-                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "StabledPet %i", i);
+                for (guint32 i1 = 0; i1 < amount_of_pets; ++i1) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "StabledPet %i", i1);
                     ptvcursor_add(ptv, hf_woww_pet_number, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_entry, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_level, 4, ENC_LITTLE_ENDIAN);
@@ -3490,8 +3490,8 @@
                     ptvcursor_add(ptv, hf_woww_battleground_winner, 1, ENC_LITTLE_ENDIAN);
                 }
                 ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_players, 4, ENC_LITTLE_ENDIAN, &amount_of_players);
-                for (i = 0; i < amount_of_players; ++i) {
-                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "BattlegroundPlayer %i", i);
+                for (guint32 i1 = 0; i1 < amount_of_players; ++i1) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "BattlegroundPlayer %i", i1);
                     ptvcursor_add(ptv, hf_woww_player, 8, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_pvp_rank, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_killing_blows, 4, ENC_LITTLE_ENDIAN);
@@ -3499,7 +3499,7 @@
                     ptvcursor_add(ptv, hf_woww_deaths, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_bonus_honor, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_extra_fields, 4, ENC_LITTLE_ENDIAN, &amount_of_extra_fields);
-                    for (i = 0; i < amount_of_extra_fields; ++i) {
+                    for (guint32 i2 = 0; i2 < amount_of_extra_fields; ++i2) {
                         ptvcursor_add(ptv, hf_woww_fields, 4, ENC_LITTLE_ENDIAN);
                     }
                     ptvcursor_pop_subtree(ptv);
@@ -3538,8 +3538,8 @@
             if (WOWW_SERVER_TO_CLIENT) {
                 ptvcursor_add_ret_uint(ptv, hf_woww_raid_target_update_type, 1, ENC_LITTLE_ENDIAN, &update_type);
                 if (update_type == RAID_TARGET_UPDATE_TYPE_FULL) {
-                    for (i = 0; i < 8; ++i) {
-                        ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "RaidTargetUpdate %i", i);
+                    for (guint32 i1 = 0; i1 < 8; ++i1) {
+                        ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "RaidTargetUpdate %i", i1);
                         ptvcursor_add(ptv, hf_woww_raid_target_index, 1, ENC_LITTLE_ENDIAN);
                         ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
                         ptvcursor_pop_subtree(ptv);
@@ -3597,12 +3597,12 @@
             }
             break;
         case SMSG_ACCOUNT_DATA_TIMES:
-            for (i = 0; i < 32; ++i) {
+            for (guint32 i1 = 0; i1 < 32; ++i1) {
                 ptvcursor_add(ptv, hf_woww_data, 4, ENC_LITTLE_ENDIAN);
             }
             break;
         case SMSG_ACTION_BUTTONS:
-            for (i = 0; i < 120; ++i) {
+            for (guint32 i1 = 0; i1 < 120; ++i1) {
                 ptvcursor_add(ptv, hf_woww_data, 4, ENC_LITTLE_ENDIAN);
             }
             break;
@@ -3645,8 +3645,8 @@
             add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_total_damage, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_damages, 1, ENC_LITTLE_ENDIAN, &amount_of_damages);
-            for (i = 0; i < amount_of_damages; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "DamageInfo %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_damages; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "DamageInfo %i", i1);
                 ptvcursor_add(ptv, hf_woww_spell_school_mask, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_damage_float, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_damage_uint, 4, ENC_LITTLE_ENDIAN);
@@ -3670,8 +3670,8 @@
             break;
         case SMSG_AUCTION_BIDDER_LIST_RESULT:
             ptvcursor_add_ret_uint(ptv, hf_woww_count, 4, ENC_LITTLE_ENDIAN, &count);
-            for (i = 0; i < count; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "AuctionListItem %i", i);
+            for (guint32 i1 = 0; i1 < count; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "AuctionListItem %i", i1);
                 ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_enchantment, 4, ENC_LITTLE_ENDIAN);
@@ -3730,8 +3730,8 @@
             break;
         case SMSG_AUCTION_LIST_RESULT:
             ptvcursor_add_ret_uint(ptv, hf_woww_count, 4, ENC_LITTLE_ENDIAN, &count);
-            for (i = 0; i < count; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "AuctionListItem %i", i);
+            for (guint32 i1 = 0; i1 < count; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "AuctionListItem %i", i1);
                 ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_enchantment, 4, ENC_LITTLE_ENDIAN);
@@ -3752,8 +3752,8 @@
             break;
         case SMSG_AUCTION_OWNER_LIST_RESULT:
             ptvcursor_add_ret_uint(ptv, hf_woww_count, 4, ENC_LITTLE_ENDIAN, &count);
-            for (i = 0; i < count; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "AuctionListItem %i", i);
+            for (guint32 i1 = 0; i1 < count; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "AuctionListItem %i", i1);
                 ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_enchantment, 4, ENC_LITTLE_ENDIAN);
@@ -3804,7 +3804,7 @@
             ptvcursor_add(ptv, hf_woww_map, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_battleground_bracket, 1, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_number_of_battlegrounds, 4, ENC_LITTLE_ENDIAN, &number_of_battlegrounds);
-            for (i = 0; i < number_of_battlegrounds; ++i) {
+            for (guint32 i1 = 0; i1 < number_of_battlegrounds; ++i1) {
                 ptvcursor_add(ptv, hf_woww_battlegrounds, 4, ENC_LITTLE_ENDIAN);
             }
             break;
@@ -3882,8 +3882,8 @@
             add_cstring(ptv, &hf_woww_channel_name);
             ptvcursor_add(ptv, hf_woww_channel_flags, 1, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_members, 4, ENC_LITTLE_ENDIAN, &amount_of_members);
-            for (i = 0; i < amount_of_members; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ChannelMember %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_members; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ChannelMember %i", i1);
                 ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_channel_member_flags, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
@@ -3904,8 +3904,8 @@
             break;
         case SMSG_CHAR_ENUM:
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_characters, 1, ENC_LITTLE_ENDIAN, &amount_of_characters);
-            for (i = 0; i < amount_of_characters; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Character %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_characters; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Character %i", i1);
                 ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
                 add_cstring(ptv, &hf_woww_name);
                 ptvcursor_add(ptv, hf_woww_race, 1, ENC_LITTLE_ENDIAN);
@@ -3930,8 +3930,8 @@
                 ptvcursor_add(ptv, hf_woww_pet_display_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_pet_level, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_creature_family, 4, ENC_LITTLE_ENDIAN);
-                for (i = 0; i < 19; ++i) {
-                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "CharacterGear %i", i);
+                for (guint32 i2 = 0; i2 < 19; ++i2) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "CharacterGear %i", i2);
                     ptvcursor_add(ptv, hf_woww_equipment_display_id, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_inventory_type, 1, ENC_LITTLE_ENDIAN);
                     ptvcursor_pop_subtree(ptv);
@@ -4048,8 +4048,8 @@
                 ptv = ptvcursor_new(wmem_packet_scope(), tree, compressed_tvb, 0);
                 ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_objects, 4, ENC_LITTLE_ENDIAN, &amount_of_objects);
                 ptvcursor_add(ptv, hf_woww_has_transport, 1, ENC_LITTLE_ENDIAN);
-                for (i = 0; i < amount_of_objects; ++i) {
-                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Object %i", i);
+                for (guint32 i1 = 0; i1 < amount_of_objects; ++i1) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Object %i", i1);
                     ptvcursor_add_ret_uint(ptv, hf_woww_update_type, 1, ENC_LITTLE_ENDIAN, &update_type);
                     if (update_type == UPDATE_TYPE_VALUES) {
                         add_packed_guid(ptv, pinfo);
@@ -4115,8 +4115,8 @@
                                 ptvcursor_add(ptv, hf_woww_duration, 4, ENC_LITTLE_ENDIAN);
                                 ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
                                 ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_nodes, 4, ENC_LITTLE_ENDIAN, &amount_of_nodes);
-                                for (i = 0; i < amount_of_nodes; ++i) {
-                                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d %i", i);
+                                for (guint32 i2 = 0; i2 < amount_of_nodes; ++i2) {
+                                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d %i", i2);
                                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
                                     ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
@@ -4213,8 +4213,8 @@
                                 ptvcursor_add(ptv, hf_woww_duration, 4, ENC_LITTLE_ENDIAN);
                                 ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
                                 ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_nodes, 4, ENC_LITTLE_ENDIAN, &amount_of_nodes);
-                                for (i = 0; i < amount_of_nodes; ++i) {
-                                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d %i", i);
+                                for (guint32 i2 = 0; i2 < amount_of_nodes; ++i2) {
+                                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d %i", i2);
                                     ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                                     ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
                                     ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
@@ -4253,7 +4253,7 @@
                     else if (update_type == UPDATE_TYPE_OUT_OF_RANGE_OBJECTS
                      || update_type == UPDATE_TYPE_NEAR_OBJECTS) {
                         ptvcursor_add_ret_uint(ptv, hf_woww_count, 4, ENC_LITTLE_ENDIAN, &count);
-                        for (i = 0; i < count; ++i) {
+                        for (guint32 i2 = 0; i2 < count; ++i2) {
                             add_packed_guid(ptv, pinfo);
                         }
                     }
@@ -4343,7 +4343,7 @@
             break;
         case SMSG_EXPECTED_SPAM_RECORDS:
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_records, 4, ENC_LITTLE_ENDIAN, &amount_of_records);
-            for (i = 0; i < amount_of_records; ++i) {
+            for (guint32 i1 = 0; i1 < amount_of_records; ++i1) {
                 add_cstring(ptv, &hf_woww_records);
             }
             break;
@@ -4391,8 +4391,8 @@
             break;
         case SMSG_FRIEND_LIST:
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_friends, 1, ENC_LITTLE_ENDIAN, &amount_of_friends);
-            for (i = 0; i < amount_of_friends; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Friend %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_friends; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Friend %i", i1);
                 ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
                 ptvcursor_add_ret_uint(ptv, hf_woww_friend_status, 1, ENC_LITTLE_ENDIAN, &status);
                 if (status != FRIEND_STATUS_OFFLINE) {
@@ -4428,7 +4428,7 @@
                 add_cstring(ptv, &hf_woww_name);
                 add_cstring(ptv, &hf_woww_name);
                 add_cstring(ptv, &hf_woww_name);
-                for (i = 0; i < 6; ++i) {
+                for (guint32 i1 = 0; i1 < 6; ++i1) {
                     ptvcursor_add(ptv, hf_woww_raw_data, 4, ENC_LITTLE_ENDIAN);
                 }
             }
@@ -4470,8 +4470,8 @@
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_title_text_id, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_gossip_items, 4, ENC_LITTLE_ENDIAN, &amount_of_gossip_items);
-            for (i = 0; i < amount_of_gossip_items; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "GossipItem %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_gossip_items; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "GossipItem %i", i1);
                 ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_icon, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_coded, 1, ENC_NA);
@@ -4479,8 +4479,8 @@
                 ptvcursor_pop_subtree(ptv);
             }
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_quests, 4, ENC_LITTLE_ENDIAN, &amount_of_quests);
-            for (i = 0; i < amount_of_quests; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItem %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_quests; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItem %i", i1);
                 ptvcursor_add(ptv, hf_woww_quest_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_quest_icon, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_level, 4, ENC_LITTLE_ENDIAN);
@@ -4511,8 +4511,8 @@
             ptvcursor_add(ptv, hf_woww_group_type, 1, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_flags, 1, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_members, 4, ENC_LITTLE_ENDIAN, &amount_of_members);
-            for (i = 0; i < amount_of_members; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "GroupListMember %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_members; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "GroupListMember %i", i1);
                 add_cstring(ptv, &hf_woww_name);
                 ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_is_online, 1, ENC_NA);
@@ -4538,7 +4538,7 @@
         case SMSG_GUILD_EVENT:
             ptvcursor_add(ptv, hf_woww_guild_event, 1, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_events, 1, ENC_LITTLE_ENDIAN, &amount_of_events);
-            for (i = 0; i < amount_of_events; ++i) {
+            for (guint32 i1 = 0; i1 < amount_of_events; ++i1) {
                 add_cstring(ptv, &hf_woww_event_descriptions);
             }
             break;
@@ -4557,7 +4557,7 @@
         case SMSG_GUILD_QUERY_RESPONSE:
             ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
             add_cstring(ptv, &hf_woww_name);
-            for (i = 0; i < 10; ++i) {
+            for (guint32 i1 = 0; i1 < 10; ++i1) {
                 add_cstring(ptv, &hf_woww_rank_names);
             }
             ptvcursor_add(ptv, hf_woww_emblem_style, 4, ENC_LITTLE_ENDIAN);
@@ -4571,11 +4571,11 @@
             add_cstring(ptv, &hf_woww_motd);
             add_cstring(ptv, &hf_woww_guild_info);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_rights, 4, ENC_LITTLE_ENDIAN, &amount_of_rights);
-            for (i = 0; i < amount_of_rights; ++i) {
+            for (guint32 i1 = 0; i1 < amount_of_rights; ++i1) {
                 ptvcursor_add(ptv, hf_woww_rights, 4, ENC_LITTLE_ENDIAN);
             }
-            for (i = 0; i < amount_of_members; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "GuildMember %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_members; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "GuildMember %i", i1);
                 ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
                 ptvcursor_add_ret_uint(ptv, hf_woww_guild_member_status, 1, ENC_LITTLE_ENDIAN, &status);
                 add_cstring(ptv, &hf_woww_name);
@@ -4593,14 +4593,14 @@
             break;
         case SMSG_IGNORE_LIST:
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_ignored, 1, ENC_LITTLE_ENDIAN, &amount_of_ignored);
-            for (i = 0; i < amount_of_ignored; ++i) {
+            for (guint32 i1 = 0; i1 < amount_of_ignored; ++i1) {
                 ptvcursor_add(ptv, hf_woww_ignored, 8, ENC_LITTLE_ENDIAN);
             }
             break;
         case SMSG_INITIALIZE_FACTIONS:
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_factions, 4, ENC_LITTLE_ENDIAN, &amount_of_factions);
-            for (i = 0; i < amount_of_factions; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "FactionInitializer %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_factions; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "FactionInitializer %i", i1);
                 ptvcursor_add(ptv, hf_woww_faction_flag, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_standing, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
@@ -4609,15 +4609,15 @@
         case SMSG_INITIAL_SPELLS:
             ptvcursor_add(ptv, hf_woww_unknown_int, 1, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_spell_count, 2, ENC_LITTLE_ENDIAN, &spell_count);
-            for (i = 0; i < spell_count; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "InitialSpell %i", i);
+            for (guint32 i1 = 0; i1 < spell_count; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "InitialSpell %i", i1);
                 ptvcursor_add(ptv, hf_woww_spell_id, 2, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_unknown_int, 2, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
             }
             ptvcursor_add_ret_uint(ptv, hf_woww_cooldown_count, 2, ENC_LITTLE_ENDIAN, &cooldown_count);
-            for (i = 0; i < cooldown_count; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "CooldownSpell %i", i);
+            for (guint32 i1 = 0; i1 < cooldown_count; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "CooldownSpell %i", i1);
                 ptvcursor_add(ptv, hf_woww_spell_id, 2, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_id, 2, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_spell_category, 2, ENC_LITTLE_ENDIAN);
@@ -4630,8 +4630,8 @@
             ptvcursor_add(ptv, hf_woww_map, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_area, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_states, 2, ENC_LITTLE_ENDIAN, &amount_of_states);
-            for (i = 0; i < amount_of_states; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "WorldState %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_states; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "WorldState %i", i1);
                 ptvcursor_add(ptv, hf_woww_state, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_value, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
@@ -4719,14 +4719,14 @@
                 ptvcursor_add(ptv, hf_woww_max_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_stackable, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_container_slots, 4, ENC_LITTLE_ENDIAN);
-                for (i = 0; i < 10; ++i) {
-                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ItemStat %i", i);
+                for (guint32 i1 = 0; i1 < 10; ++i1) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ItemStat %i", i1);
                     ptvcursor_add(ptv, hf_woww_item_stat_type, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_value, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_pop_subtree(ptv);
                 }
-                for (i = 0; i < 5; ++i) {
-                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ItemDamageType %i", i);
+                for (guint32 i1 = 0; i1 < 5; ++i1) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ItemDamageType %i", i1);
                     ptvcursor_add(ptv, hf_woww_damage_minimum, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_damage_maximum, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_spell_school, 4, ENC_LITTLE_ENDIAN);
@@ -4742,8 +4742,8 @@
                 ptvcursor_add(ptv, hf_woww_delay, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_ammo_type, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_ranged_range_modification, 4, ENC_LITTLE_ENDIAN);
-                for (i = 0; i < 5; ++i) {
-                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ItemSpells %i", i);
+                for (guint32 i1 = 0; i1 < 5; ++i1) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ItemSpells %i", i1);
                     ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_spell_trigger_type, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_spell_charges, 4, ENC_LITTLE_ENDIAN);
@@ -4798,8 +4798,8 @@
         case SMSG_LIST_INVENTORY:
             ptvcursor_add(ptv, hf_woww_vendor, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_items, 1, ENC_LITTLE_ENDIAN, &amount_of_items);
-            for (i = 0; i < amount_of_items; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ListInventoryItem %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_items; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ListInventoryItem %i", i1);
                 ptvcursor_add(ptv, hf_woww_item_stack_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_display_id, 4, ENC_LITTLE_ENDIAN);
@@ -4845,7 +4845,7 @@
             break;
         case SMSG_LOOT_MASTER_LIST:
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_players, 1, ENC_LITTLE_ENDIAN, &amount_of_players);
-            for (i = 0; i < amount_of_players; ++i) {
+            for (guint32 i1 = 0; i1 < amount_of_players; ++i1) {
                 ptvcursor_add(ptv, hf_woww_guids, 8, ENC_LITTLE_ENDIAN);
             }
             break;
@@ -4867,8 +4867,8 @@
             }
             ptvcursor_add(ptv, hf_woww_gold, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_items, 1, ENC_LITTLE_ENDIAN, &amount_of_items);
-            for (i = 0; i < amount_of_items; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "LootItem %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_items; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "LootItem %i", i1);
                 ptvcursor_add(ptv, hf_woww_index, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_loot_slot_type, 1, ENC_LITTLE_ENDIAN);
@@ -4905,8 +4905,8 @@
             break;
         case SMSG_MAIL_LIST_RESULT:
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_mails, 1, ENC_LITTLE_ENDIAN, &amount_of_mails);
-            for (i = 0; i < amount_of_mails; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Mail %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_mails; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Mail %i", i1);
                 ptvcursor_add(ptv, hf_woww_message_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add_ret_uint(ptv, hf_woww_mail_type, 1, ENC_LITTLE_ENDIAN, &message_type);
                 if (message_type == MAIL_TYPE_NORMAL) {
@@ -5094,15 +5094,15 @@
             break;
         case SMSG_NPC_TEXT_UPDATE:
             ptvcursor_add(ptv, hf_woww_text_id, 4, ENC_LITTLE_ENDIAN);
-            for (i = 0; i < 8; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "NpcTextUpdate %i", i);
+            for (guint32 i1 = 0; i1 < 8; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "NpcTextUpdate %i", i1);
                 ptvcursor_add(ptv, hf_woww_probability, 4, ENC_LITTLE_ENDIAN);
-                for (i = 0; i < 2; ++i) {
+                for (guint32 i2 = 0; i2 < 2; ++i2) {
                     add_cstring(ptv, &hf_woww_texts);
                 }
                 ptvcursor_add(ptv, hf_woww_language, 4, ENC_LITTLE_ENDIAN);
-                for (i = 0; i < 3; ++i) {
-                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "NpcTextUpdateEmote %i", i);
+                for (guint32 i2 = 0; i2 < 3; ++i2) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "NpcTextUpdateEmote %i", i2);
                     ptvcursor_add(ptv, hf_woww_delay, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_emote_int, 4, ENC_LITTLE_ENDIAN);
                     ptvcursor_pop_subtree(ptv);
@@ -5263,8 +5263,8 @@
             add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_auras, 4, ENC_LITTLE_ENDIAN, &amount_of_auras);
-            for (i = 0; i < amount_of_auras; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "AuraLog %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_auras; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "AuraLog %i", i1);
                 ptvcursor_add_ret_uint(ptv, hf_woww_aura_type, 4, ENC_LITTLE_ENDIAN, &aura_type);
                 if (aura_type == AURA_TYPE_PERIODIC_DAMAGE
                  || aura_type == AURA_TYPE_PERIODIC_DAMAGE_PERCENT) {
@@ -5312,8 +5312,8 @@
         case SMSG_PETITION_SHOWLIST:
             ptvcursor_add(ptv, hf_woww_npc, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_petitions, 1, ENC_LITTLE_ENDIAN, &amount_of_petitions);
-            for (i = 0; i < amount_of_petitions; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "PetitionShowlist %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_petitions; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "PetitionShowlist %i", i1);
                 ptvcursor_add(ptv, hf_woww_index, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_charter_entry, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_charter_display_id, 4, ENC_LITTLE_ENDIAN);
@@ -5327,8 +5327,8 @@
             ptvcursor_add(ptv, hf_woww_owner, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_petition, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_signatures, 1, ENC_LITTLE_ENDIAN, &amount_of_signatures);
-            for (i = 0; i < amount_of_signatures; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "PetitionSignature %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_signatures; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "PetitionSignature %i", i1);
                 ptvcursor_add(ptv, hf_woww_signer, 8, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_unknown_int, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
@@ -5380,16 +5380,16 @@
                 ptvcursor_add(ptv, hf_woww_pet_command_state, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_unknown_int, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_pet_enabled, 1, ENC_LITTLE_ENDIAN);
-                for (i = 0; i < 10; ++i) {
+                for (guint32 i1 = 0; i1 < 10; ++i1) {
                     ptvcursor_add(ptv, hf_woww_action_bars, 4, ENC_LITTLE_ENDIAN);
                 }
                 ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_spells, 1, ENC_LITTLE_ENDIAN, &amount_of_spells);
-                for (i = 0; i < amount_of_spells; ++i) {
+                for (guint32 i1 = 0; i1 < amount_of_spells; ++i1) {
                     ptvcursor_add(ptv, hf_woww_spells, 4, ENC_LITTLE_ENDIAN);
                 }
                 ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_cooldowns, 1, ENC_LITTLE_ENDIAN, &amount_of_cooldowns);
-                for (i = 0; i < amount_of_cooldowns; ++i) {
-                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "PetSpellCooldown %i", i);
+                for (guint32 i1 = 0; i1 < amount_of_cooldowns; ++i1) {
+                    ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "PetSpellCooldown %i", i1);
                     ptvcursor_add(ptv, hf_woww_spell, 2, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_spell_category, 2, ENC_LITTLE_ENDIAN);
                     ptvcursor_add(ptv, hf_woww_cooldown, 4, ENC_LITTLE_ENDIAN);
@@ -5458,23 +5458,23 @@
             add_cstring(ptv, &hf_woww_offer_reward_text);
             ptvcursor_add(ptv, hf_woww_auto_finish, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_emotes, 4, ENC_LITTLE_ENDIAN, &amount_of_emotes);
-            for (i = 0; i < amount_of_emotes; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "NpcTextUpdateEmote %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_emotes; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "NpcTextUpdateEmote %i", i1);
                 ptvcursor_add(ptv, hf_woww_delay, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_emote_int, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
             }
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_choice_item_rewards, 4, ENC_LITTLE_ENDIAN, &amount_of_choice_item_rewards);
-            for (i = 0; i < amount_of_choice_item_rewards; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemRequirement %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_choice_item_rewards; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemRequirement %i", i1);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_display_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
             }
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_item_rewards, 4, ENC_LITTLE_ENDIAN, &amount_of_item_rewards);
-            for (i = 0; i < amount_of_item_rewards; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemRequirement %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_item_rewards; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemRequirement %i", i1);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_display_id, 4, ENC_LITTLE_ENDIAN);
@@ -5490,8 +5490,8 @@
             ptvcursor_add(ptv, hf_woww_experience_reward, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_money_reward, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_item_rewards, 4, ENC_LITTLE_ENDIAN, &amount_of_item_rewards);
-            for (i = 0; i < amount_of_item_rewards; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemReward %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_item_rewards; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemReward %i", i1);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
@@ -5505,15 +5505,15 @@
             add_cstring(ptv, &hf_woww_objectives);
             ptvcursor_add(ptv, hf_woww_auto_finish, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_choice_item_rewards, 4, ENC_LITTLE_ENDIAN, &amount_of_choice_item_rewards);
-            for (i = 0; i < amount_of_choice_item_rewards; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemReward %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_choice_item_rewards; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemReward %i", i1);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
             }
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_item_rewards, 4, ENC_LITTLE_ENDIAN, &amount_of_item_rewards);
-            for (i = 0; i < amount_of_item_rewards; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemReward %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_item_rewards; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemReward %i", i1);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
@@ -5521,8 +5521,8 @@
             ptvcursor_add(ptv, hf_woww_money_reward, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_reward_spell, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_emotes, 4, ENC_LITTLE_ENDIAN, &amount_of_emotes);
-            for (i = 0; i < amount_of_emotes; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestDetailsEmote %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_emotes; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestDetailsEmote %i", i1);
                 ptvcursor_add(ptv, hf_woww_emote_int, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_emote_delay, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
@@ -5541,8 +5541,8 @@
             ptvcursor_add(ptv, hf_woww_emote_delay, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_emote_int, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_entries, 1, ENC_LITTLE_ENDIAN, &amount_of_entries);
-            for (i = 0; i < amount_of_entries; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItem %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_entries; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItem %i", i1);
                 ptvcursor_add(ptv, hf_woww_quest_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_quest_icon, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_level, 4, ENC_LITTLE_ENDIAN);
@@ -5560,8 +5560,8 @@
             ptvcursor_add(ptv, hf_woww_auto_finish, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_required_money, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_required_items, 4, ENC_LITTLE_ENDIAN, &amount_of_required_items);
-            for (i = 0; i < amount_of_required_items; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemRequirement %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_required_items; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemRequirement %i", i1);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_display_id, 4, ENC_LITTLE_ENDIAN);
@@ -5617,14 +5617,14 @@
             ptvcursor_add(ptv, hf_woww_reward_spell, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_source_item_id, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_quest_flags, 4, ENC_LITTLE_ENDIAN);
-            for (i = 0; i < 4; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemReward %i", i);
+            for (guint32 i1 = 0; i1 < 4; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemReward %i", i1);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
             }
-            for (i = 0; i < 6; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemReward %i", i);
+            for (guint32 i1 = 0; i1 < 6; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestItemReward %i", i1);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
@@ -5639,15 +5639,15 @@
             add_cstring(ptv, &hf_woww_objective_text);
             add_cstring(ptv, &hf_woww_details);
             add_cstring(ptv, &hf_woww_end_text);
-            for (i = 0; i < 4; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestObjective %i", i);
+            for (guint32 i1 = 0; i1 < 4; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "QuestObjective %i", i1);
                 ptvcursor_add(ptv, hf_woww_creature_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_kill_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_required_item_id, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_required_item_count, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
             }
-            for (i = 0; i < 4; ++i) {
+            for (guint32 i1 = 0; i1 < 4; ++i1) {
                 add_cstring(ptv, &hf_woww_objective_texts);
             }
             break;
@@ -5657,8 +5657,8 @@
             break;
         case SMSG_RAID_INSTANCE_INFO:
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_raid_infos, 4, ENC_LITTLE_ENDIAN, &amount_of_raid_infos);
-            for (i = 0; i < amount_of_raid_infos; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "RaidInfo %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_raid_infos; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "RaidInfo %i", i1);
                 ptvcursor_add(ptv, hf_woww_map, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_reset_time, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_instance_id, 4, ENC_LITTLE_ENDIAN);
@@ -5727,8 +5727,8 @@
             break;
         case SMSG_SET_FACTION_STANDING:
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_faction_standings, 4, ENC_LITTLE_ENDIAN, &amount_of_faction_standings);
-            for (i = 0; i < amount_of_faction_standings; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "FactionStanding %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_faction_standings; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "FactionStanding %i", i1);
                 ptvcursor_add(ptv, hf_woww_faction, 2, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_standing, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
@@ -5744,8 +5744,8 @@
             break;
         case SMSG_SET_FORCED_REACTIONS:
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_reactions, 4, ENC_LITTLE_ENDIAN, &amount_of_reactions);
-            for (i = 0; i < amount_of_reactions; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ForcedReaction %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_reactions; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "ForcedReaction %i", i1);
                 ptvcursor_add(ptv, hf_woww_faction, 2, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_reputation_rank, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
@@ -5784,7 +5784,7 @@
             add_packed_guid(ptv, pinfo);
             add_packed_guid(ptv, pinfo);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_spells, 4, ENC_LITTLE_ENDIAN, &amount_of_spells);
-            for (i = 0; i < amount_of_spells; ++i) {
+            for (guint32 i1 = 0; i1 < amount_of_spells; ++i1) {
                 ptvcursor_add(ptv, hf_woww_spells, 4, ENC_LITTLE_ENDIAN);
             }
             break;
@@ -5810,8 +5810,8 @@
             add_packed_guid(ptv, pinfo);
             ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_effects, 4, ENC_LITTLE_ENDIAN, &amount_of_effects);
-            for (i = 0; i < amount_of_effects; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellLog %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_effects; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellLog %i", i1);
                 ptvcursor_add_ret_uint(ptv, hf_woww_spell_effect, 4, ENC_LITTLE_ENDIAN, &effect);
                 ptvcursor_add(ptv, hf_woww_amount_of_logs, 4, ENC_LITTLE_ENDIAN);
                 if (effect == SPELL_EFFECT_POWER_DRAIN) {
@@ -5894,8 +5894,8 @@
             ptvcursor_add(ptv, hf_woww_caster, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_unknown_int, 1, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_targets, 4, ENC_LITTLE_ENDIAN, &amount_of_targets);
-            for (i = 0; i < amount_of_targets; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellLogMiss %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_targets; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellLogMiss %i", i1);
                 ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_spell_miss_info, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_pop_subtree(ptv);
@@ -5949,12 +5949,12 @@
             ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_cast_flags, 2, ENC_LITTLE_ENDIAN, &flags);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_hits, 1, ENC_LITTLE_ENDIAN, &amount_of_hits);
-            for (i = 0; i < amount_of_hits; ++i) {
+            for (guint32 i1 = 0; i1 < amount_of_hits; ++i1) {
                 ptvcursor_add(ptv, hf_woww_hits, 8, ENC_LITTLE_ENDIAN);
             }
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_misses, 1, ENC_LITTLE_ENDIAN, &amount_of_misses);
-            for (i = 0; i < amount_of_misses; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellMiss %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_misses; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "SpellMiss %i", i1);
                 ptvcursor_add(ptv, hf_woww_target, 8, ENC_LITTLE_ENDIAN);
                 ptvcursor_add_ret_uint(ptv, hf_woww_spell_miss_info, 4, ENC_LITTLE_ENDIAN, &miss_info);
                 ptvcursor_pop_subtree(ptv);
@@ -6061,7 +6061,7 @@
             ptvcursor_add(ptv, hf_woww_caster, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_targets, 4, ENC_LITTLE_ENDIAN, &amount_of_targets);
-            for (i = 0; i < amount_of_targets; ++i) {
+            for (guint32 i1 = 0; i1 < amount_of_targets; ++i1) {
                 ptvcursor_add(ptv, hf_woww_targets, 8, ENC_LITTLE_ENDIAN);
             }
             break;
@@ -6185,8 +6185,8 @@
             ptvcursor_add(ptv, hf_woww_trade_slot_count, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_money_in_trade, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_spell_on_lowest_slot, 4, ENC_LITTLE_ENDIAN);
-            for (i = 0; i < 7; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TradeSlot %i", i);
+            for (guint32 i1 = 0; i1 < 7; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TradeSlot %i", i1);
                 ptvcursor_add(ptv, hf_woww_trade_slot_number, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_item, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_display_id, 4, ENC_LITTLE_ENDIAN);
@@ -6217,8 +6217,8 @@
             ptvcursor_add(ptv, hf_woww_guid, 8, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_trainer_type, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_spells, 4, ENC_LITTLE_ENDIAN, &amount_of_spells);
-            for (i = 0; i < amount_of_spells; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TrainerSpell %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_spells; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "TrainerSpell %i", i1);
                 ptvcursor_add(ptv, hf_woww_spell, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_trainer_spell_state, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_spell_cost, 4, ENC_LITTLE_ENDIAN);
@@ -6227,7 +6227,7 @@
                 ptvcursor_add(ptv, hf_woww_required_level, 1, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_skill, 4, ENC_LITTLE_ENDIAN);
                 ptvcursor_add(ptv, hf_woww_required_skill_value, 4, ENC_LITTLE_ENDIAN);
-                for (i = 0; i < 3; ++i) {
+                for (guint32 i2 = 0; i2 < 3; ++i2) {
                     ptvcursor_add(ptv, hf_woww_required_spells, 4, ENC_LITTLE_ENDIAN);
                 }
                 ptvcursor_pop_subtree(ptv);
@@ -6254,7 +6254,7 @@
             ptvcursor_add(ptv, hf_woww_petition_result, 4, ENC_LITTLE_ENDIAN);
             break;
         case SMSG_TUTORIAL_FLAGS:
-            for (i = 0; i < 8; ++i) {
+            for (guint32 i1 = 0; i1 < 8; ++i1) {
                 ptvcursor_add(ptv, hf_woww_tutorial_data, 4, ENC_LITTLE_ENDIAN);
             }
             break;
@@ -6271,8 +6271,8 @@
         case SMSG_UPDATE_OBJECT:
             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_objects, 4, ENC_LITTLE_ENDIAN, &amount_of_objects);
             ptvcursor_add(ptv, hf_woww_has_transport, 1, ENC_LITTLE_ENDIAN);
-            for (i = 0; i < amount_of_objects; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Object %i", i);
+            for (guint32 i1 = 0; i1 < amount_of_objects; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Object %i", i1);
                 ptvcursor_add_ret_uint(ptv, hf_woww_update_type, 1, ENC_LITTLE_ENDIAN, &update_type);
                 if (update_type == UPDATE_TYPE_VALUES) {
                     add_packed_guid(ptv, pinfo);
@@ -6338,8 +6338,8 @@
                             ptvcursor_add(ptv, hf_woww_duration, 4, ENC_LITTLE_ENDIAN);
                             ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
                             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_nodes, 4, ENC_LITTLE_ENDIAN, &amount_of_nodes);
-                            for (i = 0; i < amount_of_nodes; ++i) {
-                                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d %i", i);
+                            for (guint32 i2 = 0; i2 < amount_of_nodes; ++i2) {
+                                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d %i", i2);
                                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
                                 ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
@@ -6436,8 +6436,8 @@
                             ptvcursor_add(ptv, hf_woww_duration, 4, ENC_LITTLE_ENDIAN);
                             ptvcursor_add(ptv, hf_woww_id, 4, ENC_LITTLE_ENDIAN);
                             ptvcursor_add_ret_uint(ptv, hf_woww_amount_of_nodes, 4, ENC_LITTLE_ENDIAN, &amount_of_nodes);
-                            for (i = 0; i < amount_of_nodes; ++i) {
-                                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d %i", i);
+                            for (guint32 i2 = 0; i2 < amount_of_nodes; ++i2) {
+                                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "Vector3d %i", i2);
                                 ptvcursor_add(ptv, hf_woww_x, 4, ENC_LITTLE_ENDIAN);
                                 ptvcursor_add(ptv, hf_woww_y, 4, ENC_LITTLE_ENDIAN);
                                 ptvcursor_add(ptv, hf_woww_z, 4, ENC_LITTLE_ENDIAN);
@@ -6476,7 +6476,7 @@
                 else if (update_type == UPDATE_TYPE_OUT_OF_RANGE_OBJECTS
                  || update_type == UPDATE_TYPE_NEAR_OBJECTS) {
                     ptvcursor_add_ret_uint(ptv, hf_woww_count, 4, ENC_LITTLE_ENDIAN, &count);
-                    for (i = 0; i < count; ++i) {
+                    for (guint32 i2 = 0; i2 < count; ++i2) {
                         add_packed_guid(ptv, pinfo);
                     }
                 }
@@ -6502,8 +6502,8 @@
         case SMSG_WHO:
             ptvcursor_add_ret_uint(ptv, hf_woww_listed_players, 4, ENC_LITTLE_ENDIAN, &listed_players);
             ptvcursor_add(ptv, hf_woww_online_players, 4, ENC_LITTLE_ENDIAN);
-            for (i = 0; i < listed_players; ++i) {
-                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "WhoPlayer %i", i);
+            for (guint32 i1 = 0; i1 < listed_players; ++i1) {
+                ptvcursor_add_text_with_subtree(ptv, SUBTREE_UNDEFINED_LENGTH, ett_message, "WhoPlayer %i", i1);
                 add_cstring(ptv, &hf_woww_name);
                 add_cstring(ptv, &hf_woww_guild);
                 ptvcursor_add(ptv, hf_woww_level, 4, ENC_LITTLE_ENDIAN);
