@@ -1,6 +1,5 @@
 #[cfg(feature = "encryption")]
 use crate::util::{tbc_get_encrypted_client, tbc_get_encrypted_server};
-use crate::util::{tbc_get_unencrypted_client, tbc_get_unencrypted_server};
 use crate::util::{CLIENT_HEADER_LENGTH, SERVER_HEADER_LENGTH};
 use crate::Message;
 #[cfg(any(feature = "tokio", feature = "async-std"))]
@@ -22,7 +21,7 @@ pub trait ServerMessage: Message + crate::traits::private::Sealed {
     fn write_unencrypted_server<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let size = self.server_size();
         let mut v = Vec::with_capacity(size.into());
-        tbc_get_unencrypted_server(&mut v, Self::OPCODE as u16, size)?;
+        crate::util::tbc_get_unencrypted_server(&mut v, Self::OPCODE as u16, size)?;
         self.write_into_vec(&mut v)?;
         assert_eq!(size, v.len() as u16);
 
@@ -58,7 +57,7 @@ pub trait ServerMessage: Message + crate::traits::private::Sealed {
         Box::pin(async move {
             let size = self.server_size();
             let mut v = Vec::with_capacity(size.into());
-            tbc_get_unencrypted_server(&mut v, Self::OPCODE as u16, size)?;
+            crate::util::tbc_get_unencrypted_server(&mut v, Self::OPCODE as u16, size)?;
             self.write_into_vec(&mut v)?;
             assert_eq!(size, v.len() as u16);
 
@@ -102,7 +101,7 @@ pub trait ServerMessage: Message + crate::traits::private::Sealed {
         Box::pin(async move {
             let size = self.server_size();
             let mut v = Vec::with_capacity(size.into());
-            tbc_get_unencrypted_server(&mut v, Self::OPCODE as u16, size)?;
+            crate::util::tbc_get_unencrypted_server(&mut v, Self::OPCODE as u16, size)?;
             self.write_into_vec(&mut v)?;
             assert_eq!(size, v.len() as u16);
 
@@ -146,7 +145,7 @@ pub trait ClientMessage: Message + crate::traits::private::Sealed {
     fn write_unencrypted_client<W: std::io::Write>(&self, mut w: W) -> Result<(), std::io::Error> {
         let size = self.client_size();
         let mut v = Vec::with_capacity(size.into());
-        tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, size)?;
+        crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, size)?;
         self.write_into_vec(&mut v)?;
         assert_eq!(size, v.len() as u16);
 
@@ -181,7 +180,7 @@ pub trait ClientMessage: Message + crate::traits::private::Sealed {
         Box::pin(async move {
             let size = self.client_size();
             let mut v = Vec::with_capacity(size.into());
-            tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, size)?;
+            crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, size)?;
             self.write_into_vec(&mut v)?;
             assert_eq!(size, v.len() as u16);
 
@@ -225,7 +224,7 @@ pub trait ClientMessage: Message + crate::traits::private::Sealed {
         Box::pin(async move {
             let size = self.client_size();
             let mut v = Vec::with_capacity(size.into());
-            tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, size)?;
+            crate::util::tbc_get_unencrypted_client(&mut v, Self::OPCODE as u16, size)?;
             self.write_into_vec(&mut v)?;
             assert_eq!(size, v.len() as u16);
 

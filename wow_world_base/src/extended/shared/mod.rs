@@ -283,26 +283,6 @@ macro_rules! tbc_wrath_trigger {
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub(crate) use tbc_wrath_trigger;
 
-macro_rules! vanilla_trigger {
-    ($position:ty) => {
-        #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
-        pub enum Trigger {
-            Inn,
-            Quest {
-                quest_id: u32,
-            },
-            Teleport {
-                location: $position,
-                required_level: u8,
-                required_item: u32,
-                required_quest: u32,
-                failed_text: Option<&'static str>,
-            },
-        }
-    };
-}
-pub(crate) use vanilla_trigger;
-
 #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash)]
 pub struct Action {
     button: u8,

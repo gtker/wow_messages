@@ -1,8 +1,9 @@
 mod triggers;
 
-use crate::extended::shared::{area_trigger, vanilla_trigger, verify_trigger};
+use crate::extended::shared::{area_trigger, verify_trigger};
 use crate::vanilla::position::Position;
 use crate::vanilla::trigger::triggers::TRIGGERS;
+use crate::vanilla::vanilla_trigger;
 
 vanilla_trigger!(Position);
 

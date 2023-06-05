@@ -78,3 +78,23 @@ macro_rules! vanilla_race_class_match {
     };
 }
 pub(crate) use vanilla_race_class_match;
+
+macro_rules! vanilla_trigger {
+    ($position:ty) => {
+        #[derive(Debug, Clone, Copy, PartialOrd, PartialEq)]
+        pub enum Trigger {
+            Inn,
+            Quest {
+                quest_id: u32,
+            },
+            Teleport {
+                location: $position,
+                required_level: u8,
+                required_item: u32,
+                required_quest: u32,
+                failed_text: Option<&'static str>,
+            },
+        }
+    };
+}
+pub(crate) use vanilla_trigger;

@@ -1,4 +1,6 @@
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub(crate) mod shared;
+
 pub mod top_level;
 
 #[cfg(feature = "tbc")]
