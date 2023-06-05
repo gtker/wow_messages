@@ -50,7 +50,7 @@ impl crate::Message for CMSG_SET_PLAYER_DECLINED_NAMES {
         }
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // name: CString
         let name = {

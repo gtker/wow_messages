@@ -47,7 +47,7 @@ impl crate::Message for SMSG_MODIFY_COOLDOWN {
         let spell = crate::util::read_u32_le(&mut r)?;
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // cooldown: Milliseconds
         let cooldown = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());

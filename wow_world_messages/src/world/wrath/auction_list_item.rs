@@ -131,7 +131,7 @@ impl AuctionListItem {
         let item_flags = crate::util::read_u32_le(&mut r)?;
 
         // item_owner: Guid
-        let item_owner = Guid::read(&mut r)?;
+        let item_owner = crate::util::read_guid(&mut r)?;
 
         // start_bid: u32
         let start_bid = crate::util::read_u32_le(&mut r)?;
@@ -146,7 +146,7 @@ impl AuctionListItem {
         let time_left = Duration::from_millis(crate::util::read_u32_le(&mut r)?.into());
 
         // highest_bidder: Guid
-        let highest_bidder = Guid::read(&mut r)?;
+        let highest_bidder = crate::util::read_guid(&mut r)?;
 
         // highest_bid: u32
         let highest_bid = crate::util::read_u32_le(&mut r)?;

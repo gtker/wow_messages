@@ -33,7 +33,7 @@ impl crate::Message for SMSG_ARENA_UNIT_DESTROYED {
         }
 
         // unit: Guid
-        let unit = Guid::read(&mut r)?;
+        let unit = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             unit,

@@ -54,7 +54,7 @@ impl crate::Message for SMSG_TEXT_EMOTE {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // text_emote: TextEmote
         let text_emote: TextEmote = crate::util::read_u32_le(&mut r)?.try_into()?;

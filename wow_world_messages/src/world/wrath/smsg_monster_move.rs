@@ -59,7 +59,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // unknown: u8
         w.write_all(&self.unknown.to_le_bytes())?;
@@ -133,7 +133,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // unknown: u8
         let unknown = crate::util::read_u8_le(&mut r)?;
@@ -160,7 +160,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
             }
             MonsterMoveType::FacingTarget => {
                 // target: Guid
-                let target = Guid::read(&mut r)?;
+                let target = crate::util::read_guid(&mut r)?;
 
                 SMSG_MONSTER_MOVE_MonsterMoveType::FacingTarget {
                     target,
@@ -241,7 +241,7 @@ impl crate::wrath::ServerMessage for SMSG_MONSTER_MOVE {}
 
 impl SMSG_MONSTER_MOVE {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + 1 // unknown: u8
         + 12 // spline_point: Vector3d
         + 4 // spline_id: u32

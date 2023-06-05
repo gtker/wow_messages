@@ -72,7 +72,7 @@ impl crate::Message for SMSG_AUCTION_BIDDER_NOTIFICATION {
         let auction_id = crate::util::read_u32_le(&mut r)?;
 
         // bidder: Guid
-        let bidder = Guid::read(&mut r)?;
+        let bidder = crate::util::read_guid(&mut r)?;
 
         // won: u32
         let won = crate::util::read_u32_le(&mut r)?;

@@ -119,7 +119,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
                 let deleted_guids = {
                     let mut deleted_guids = Vec::with_capacity(amount_of_deleted_guids as usize);
                     for _ in 0..amount_of_deleted_guids {
-                        deleted_guids.push(Guid::read(&mut r)?);
+                        deleted_guids.push(crate::util::read_guid(&mut r)?);
                     }
                     deleted_guids
                 };

@@ -33,7 +33,7 @@ impl crate::Message for MSG_TABARDVENDOR_ACTIVATE {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             guid,

@@ -50,7 +50,7 @@ impl crate::Message for MSG_PARTY_ASSIGNMENT_Client {
         let apply = crate::util::read_u8_le(&mut r)? != 0;
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             role,

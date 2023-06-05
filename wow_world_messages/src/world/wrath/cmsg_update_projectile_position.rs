@@ -49,7 +49,7 @@ impl crate::Message for CMSG_UPDATE_PROJECTILE_POSITION {
         }
 
         // caster: Guid
-        let caster = Guid::read(&mut r)?;
+        let caster = crate::util::read_guid(&mut r)?;
 
         // spell: u32
         let spell = crate::util::read_u32_le(&mut r)?;

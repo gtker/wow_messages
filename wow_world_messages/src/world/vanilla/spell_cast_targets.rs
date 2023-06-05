@@ -53,7 +53,7 @@ impl SpellCastTargets {
 
         if let Some(if_statement) = &self.target_flags.unit {
             // unit_target: PackedGuid
-            if_statement.unit_target.write_packed_guid_into_vec(&mut w)?;
+            crate::util::write_packed_guid(&if_statement.unit_target, &mut w)?;
 
         }
 
@@ -63,14 +63,14 @@ impl SpellCastTargets {
                     gameobject,
                 } => {
                     // gameobject: PackedGuid
-                    gameobject.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&gameobject, &mut w)?;
 
                 }
                 SpellCastTargets_SpellCastTargetFlags_Gameobject::ObjectUnk {
                     object_unk,
                 } => {
                     // object_unk: PackedGuid
-                    object_unk.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&object_unk, &mut w)?;
 
                 }
             }
@@ -82,14 +82,14 @@ impl SpellCastTargets {
                     item,
                 } => {
                     // item: PackedGuid
-                    item.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&item, &mut w)?;
 
                 }
                 SpellCastTargets_SpellCastTargetFlags_Item::TradeItem {
                     trade_item,
                 } => {
                     // trade_item: PackedGuid
-                    trade_item.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&trade_item, &mut w)?;
 
                 }
             }
@@ -123,14 +123,14 @@ impl SpellCastTargets {
                     corpse,
                 } => {
                     // corpse: PackedGuid
-                    corpse.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&corpse, &mut w)?;
 
                 }
                 SpellCastTargets_SpellCastTargetFlags_Corpse::PvpCorpse {
                     pvp_corpse,
                 } => {
                     // pvp_corpse: PackedGuid
-                    pvp_corpse.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&pvp_corpse, &mut w)?;
 
                 }
             }
@@ -147,7 +147,7 @@ impl SpellCastTargets {
 
         let target_flags_unit = if target_flags.is_unit() {
             // unit_target: PackedGuid
-            let unit_target = Guid::read_packed(&mut r)?;
+            let unit_target = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Unit {
                 unit_target,
@@ -159,7 +159,7 @@ impl SpellCastTargets {
 
         let target_flags_gameobject = if target_flags.is_gameobject() {
             // gameobject: PackedGuid
-            let gameobject = Guid::read_packed(&mut r)?;
+            let gameobject = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Gameobject::Gameobject {
                 gameobject,
@@ -167,7 +167,7 @@ impl SpellCastTargets {
         }
         else if target_flags.is_object_unk() {
             // object_unk: PackedGuid
-            let object_unk = Guid::read_packed(&mut r)?;
+            let object_unk = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Gameobject::ObjectUnk {
                 object_unk,
@@ -179,7 +179,7 @@ impl SpellCastTargets {
 
         let target_flags_item = if target_flags.is_item() {
             // item: PackedGuid
-            let item = Guid::read_packed(&mut r)?;
+            let item = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Item::Item {
                 item,
@@ -187,7 +187,7 @@ impl SpellCastTargets {
         }
         else if target_flags.is_trade_item() {
             // trade_item: PackedGuid
-            let trade_item = Guid::read_packed(&mut r)?;
+            let trade_item = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Item::TradeItem {
                 trade_item,
@@ -238,7 +238,7 @@ impl SpellCastTargets {
 
         let target_flags_corpse = if target_flags.is_corpse() {
             // corpse: PackedGuid
-            let corpse = Guid::read_packed(&mut r)?;
+            let corpse = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Corpse::Corpse {
                 corpse,
@@ -246,7 +246,7 @@ impl SpellCastTargets {
         }
         else if target_flags.is_pvp_corpse() {
             // pvp_corpse: PackedGuid
-            let pvp_corpse = Guid::read_packed(&mut r)?;
+            let pvp_corpse = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Corpse::PvpCorpse {
                 pvp_corpse,
@@ -307,13 +307,13 @@ impl SpellCastTargets_SpellCastTargetFlags_Item {
                 item,
             } => {
                 // Not an actual enum sent over the wire
-                item.size() // item: PackedGuid
+                crate::util::packed_guid_size(&item) // item: PackedGuid
             }
             Self::TradeItem {
                 trade_item,
             } => {
                 // Not an actual enum sent over the wire
-                trade_item.size() // trade_item: PackedGuid
+                crate::util::packed_guid_size(&trade_item) // trade_item: PackedGuid
             }
         }
     }
@@ -346,13 +346,13 @@ impl SpellCastTargets_SpellCastTargetFlags_Gameobject {
                 gameobject,
             } => {
                 // Not an actual enum sent over the wire
-                gameobject.size() // gameobject: PackedGuid
+                crate::util::packed_guid_size(&gameobject) // gameobject: PackedGuid
             }
             Self::ObjectUnk {
                 object_unk,
             } => {
                 // Not an actual enum sent over the wire
-                object_unk.size() // object_unk: PackedGuid
+                crate::util::packed_guid_size(&object_unk) // object_unk: PackedGuid
             }
         }
     }
@@ -385,13 +385,13 @@ impl SpellCastTargets_SpellCastTargetFlags_Corpse {
                 corpse,
             } => {
                 // Not an actual enum sent over the wire
-                corpse.size() // corpse: PackedGuid
+                crate::util::packed_guid_size(&corpse) // corpse: PackedGuid
             }
             Self::PvpCorpse {
                 pvp_corpse,
             } => {
                 // Not an actual enum sent over the wire
-                pvp_corpse.size() // pvp_corpse: PackedGuid
+                crate::util::packed_guid_size(&pvp_corpse) // pvp_corpse: PackedGuid
             }
         }
     }
@@ -905,7 +905,7 @@ pub struct SpellCastTargets_SpellCastTargetFlags_Unit {
 
 impl SpellCastTargets_SpellCastTargetFlags_Unit {
     pub(crate) const fn size(&self) -> usize {
-        self.unit_target.size() // unit_target: PackedGuid
+        crate::util::packed_guid_size(&self.unit_target) // unit_target: PackedGuid
     }
 }
 

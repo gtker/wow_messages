@@ -33,7 +33,7 @@ impl crate::Message for CMSG_ITEM_REFUND_INFO {
         }
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             item,

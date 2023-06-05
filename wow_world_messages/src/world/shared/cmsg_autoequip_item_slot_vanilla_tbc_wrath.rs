@@ -38,7 +38,7 @@ impl crate::Message for CMSG_AUTOEQUIP_ITEM_SLOT {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // destination_slot: u8
         let destination_slot = crate::util::read_u8_le(&mut r)?;

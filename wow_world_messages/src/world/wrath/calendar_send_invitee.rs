@@ -33,7 +33,7 @@ pub struct CalendarSendInvitee {
 impl CalendarSendInvitee {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // invitee: PackedGuid
-        self.invitee.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.invitee, &mut w)?;
 
         // level: Level
         w.write_all(&self.level.as_int().to_le_bytes())?;
@@ -67,7 +67,7 @@ impl CalendarSendInvitee {
 impl CalendarSendInvitee {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // invitee: PackedGuid
-        let invitee = Guid::read_packed(&mut r)?;
+        let invitee = crate::util::read_packed_guid(&mut r)?;
 
         // level: Level
         let level = Level::new(crate::util::read_u8_le(&mut r)?);
@@ -82,7 +82,7 @@ impl CalendarSendInvitee {
         let guild_member = crate::util::read_u8_le(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(&mut r)?;
+        let invite_id = crate::util::read_guid(&mut r)?;
 
         // status_time: DateTime
         let status_time: DateTime = crate::util::read_u32_le(&mut r)?.try_into()?;
@@ -109,7 +109,7 @@ impl CalendarSendInvitee {
 
 impl CalendarSendInvitee {
     pub(crate) fn size(&self) -> usize {
-        self.invitee.size() // invitee: PackedGuid
+        crate::util::packed_guid_size(&self.invitee) // invitee: PackedGuid
         + 1 // level: Level
         + 1 // status: u8
         + 1 // rank: u8

@@ -30,13 +30,13 @@ impl crate::Message for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // vehicle: PackedGuid
-        self.vehicle.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.vehicle, &mut w)?;
 
         // info: MovementInfo
         self.info.write_into_vec(&mut w)?;
 
         // accessory: PackedGuid
-        self.accessory.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.accessory, &mut w)?;
 
         // seat: u8
         w.write_all(&self.seat.to_le_bytes())?;
@@ -49,13 +49,13 @@ impl crate::Message for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
         }
 
         // vehicle: PackedGuid
-        let vehicle = Guid::read_packed(&mut r)?;
+        let vehicle = crate::util::read_packed_guid(&mut r)?;
 
         // info: MovementInfo
         let info = MovementInfo::read(&mut r)?;
 
         // accessory: PackedGuid
-        let accessory = Guid::read_packed(&mut r)?;
+        let accessory = crate::util::read_packed_guid(&mut r)?;
 
         // seat: u8
         let seat = crate::util::read_u8_le(&mut r)?;
@@ -74,9 +74,9 @@ impl crate::wrath::ClientMessage for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {}
 
 impl CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
     pub(crate) const fn size(&self) -> usize {
-        self.vehicle.size() // vehicle: PackedGuid
+        crate::util::packed_guid_size(&self.vehicle) // vehicle: PackedGuid
         + self.info.size() // info: MovementInfo
-        + self.accessory.size() // accessory: PackedGuid
+        + crate::util::packed_guid_size(&self.accessory) // accessory: PackedGuid
         + 1 // seat: u8
     }
 }

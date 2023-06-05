@@ -38,7 +38,7 @@ impl crate::Message for CMSG_PETITION_SIGN {
         }
 
         // petition: Guid
-        let petition = Guid::read(&mut r)?;
+        let petition = crate::util::read_guid(&mut r)?;
 
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(&mut r)?;

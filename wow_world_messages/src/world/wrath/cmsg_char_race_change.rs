@@ -80,7 +80,7 @@ impl crate::Message for CMSG_CHAR_RACE_CHANGE {
         }
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // name: CString
         let name = {

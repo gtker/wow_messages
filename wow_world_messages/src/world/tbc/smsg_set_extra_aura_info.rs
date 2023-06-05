@@ -30,7 +30,7 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // unit: PackedGuid
-        self.unit.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.unit, &mut w)?;
 
         // optional aura
         if let Some(v) = &self.aura {
@@ -56,11 +56,11 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO {
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(&mut r)?;
+        let unit = crate::util::read_packed_guid(&mut r)?;
 
         // optional aura
         let current_size = {
-            unit.size() // unit: PackedGuid
+            crate::util::packed_guid_size(&unit) // unit: PackedGuid
         };
         let aura = if current_size < body_size as usize {
             // slot: u8
@@ -97,7 +97,7 @@ impl crate::tbc::ServerMessage for SMSG_SET_EXTRA_AURA_INFO {}
 
 impl SMSG_SET_EXTRA_AURA_INFO {
     pub(crate) const fn size(&self) -> usize {
-        self.unit.size() // unit: PackedGuid
+        crate::util::packed_guid_size(&self.unit) // unit: PackedGuid
         + if let Some(aura) = &self.aura {
             1 // slot: u8
             + 4 // spell: u32

@@ -63,7 +63,7 @@ impl crate::Message for SMSG_GOSSIP_MESSAGE {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // title_text_id: u32
         let title_text_id = crate::util::read_u32_le(&mut r)?;

@@ -38,10 +38,10 @@ impl crate::Message for CMSG_OFFER_PETITION {
         }
 
         // petition: Guid
-        let petition = Guid::read(&mut r)?;
+        let petition = crate::util::read_guid(&mut r)?;
 
         // target: Guid
-        let target = Guid::read(&mut r)?;
+        let target = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             petition,

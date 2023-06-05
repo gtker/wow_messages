@@ -25,7 +25,7 @@ impl crate::Message for CMSG_MOVE_TIME_SKIPPED {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // lag: u32
         w.write_all(&self.lag.to_le_bytes())?;
@@ -38,7 +38,7 @@ impl crate::Message for CMSG_MOVE_TIME_SKIPPED {
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // lag: u32
         let lag = crate::util::read_u32_le(&mut r)?;
@@ -55,7 +55,7 @@ impl crate::wrath::ClientMessage for CMSG_MOVE_TIME_SKIPPED {}
 
 impl CMSG_MOVE_TIME_SKIPPED {
     pub(crate) const fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + 4 // lag: u32
     }
 }

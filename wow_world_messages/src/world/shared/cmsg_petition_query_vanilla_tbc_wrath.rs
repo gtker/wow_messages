@@ -41,7 +41,7 @@ impl crate::Message for CMSG_PETITION_QUERY {
         let guild_id = crate::util::read_u32_le(&mut r)?;
 
         // petition: Guid
-        let petition = Guid::read(&mut r)?;
+        let petition = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             guild_id,

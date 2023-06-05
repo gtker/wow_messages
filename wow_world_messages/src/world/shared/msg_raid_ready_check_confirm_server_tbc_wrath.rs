@@ -38,7 +38,7 @@ impl crate::Message for MSG_RAID_READY_CHECK_CONFIRM_Server {
         }
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // state: u8
         let state = crate::util::read_u8_le(&mut r)?;

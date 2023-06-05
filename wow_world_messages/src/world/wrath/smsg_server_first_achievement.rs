@@ -59,7 +59,7 @@ impl crate::Message for SMSG_SERVER_FIRST_ACHIEVEMENT {
         };
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // achievement: u32
         let achievement = crate::util::read_u32_le(&mut r)?;

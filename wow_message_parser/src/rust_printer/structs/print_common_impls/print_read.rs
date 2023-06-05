@@ -131,11 +131,15 @@ fn print_array_ty(
         }
         ArrayType::PackedGuid => {
             s.wln(format!(
-                "{array_prefix}Guid::{prefix}read_packed(&mut {reader}){postfix}?{array_postfix}",
+                "{array_prefix}crate::util::read_packed_guid(&mut {reader}){postfix}?{array_postfix}",
             ));
         }
-
-        ArrayType::Struct(_) | ArrayType::Guid => {
+        ArrayType::Guid => {
+            s.wln(format!(
+                "{array_prefix}crate::util::read_guid(&mut {reader})?{array_postfix}",
+            ));
+        }
+        ArrayType::Struct(_) => {
             s.wln(format!(
                 "{array_prefix}{ty}::{prefix}read(&mut {reader}){postfix}?{array_postfix}",
                 ty = array.ty().rust_str(),
@@ -311,7 +315,7 @@ fn print_read_definition(
         }
         Type::PackedGuid => {
             s.wln(format!(
-                "{assignment_prefix}{name} = Guid::{prefix}read_packed(&mut r){postfix}?;",
+                "{assignment_prefix}{name} = crate::util::read_packed_guid(&mut r){postfix}?;",
             ));
         }
 
@@ -369,10 +373,15 @@ fn print_read_definition(
             ));
         }
 
+        Type::Guid => {
+            s.wln(format!(
+                "{assignment_prefix}{name} = crate::util::read_guid(&mut r)?;",
+            ));
+        }
+
         Type::VariableItemRandomProperty
         | Type::NamedGuid
         | Type::Struct { .. }
-        | Type::Guid
         | Type::UpdateMask { .. }
         | Type::AuraMask
         | Type::EnchantMask

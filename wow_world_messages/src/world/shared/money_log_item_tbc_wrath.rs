@@ -43,7 +43,7 @@ impl MoneyLogItem {
         let action = crate::util::read_u8_le(&mut r)?;
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // entry: u32
         let entry = crate::util::read_u32_le(&mut r)?;

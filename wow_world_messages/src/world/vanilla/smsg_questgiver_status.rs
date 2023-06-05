@@ -39,7 +39,7 @@ impl crate::Message for SMSG_QUESTGIVER_STATUS {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // status: QuestGiverStatus
         let status: QuestGiverStatus = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;

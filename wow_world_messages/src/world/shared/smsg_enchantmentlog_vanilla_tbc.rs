@@ -59,10 +59,10 @@ impl crate::Message for SMSG_ENCHANTMENTLOG {
         }
 
         // target: Guid
-        let target = Guid::read(&mut r)?;
+        let target = crate::util::read_guid(&mut r)?;
 
         // caster: Guid
-        let caster = Guid::read(&mut r)?;
+        let caster = crate::util::read_guid(&mut r)?;
 
         // item: u32
         let item = crate::util::read_u32_le(&mut r)?;

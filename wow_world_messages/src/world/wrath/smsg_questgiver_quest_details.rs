@@ -216,10 +216,10 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // guid2: Guid
-        let guid2 = Guid::read(&mut r)?;
+        let guid2 = crate::util::read_guid(&mut r)?;
 
         // quest_id: u32
         let quest_id = crate::util::read_u32_le(&mut r)?;

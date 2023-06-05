@@ -34,7 +34,7 @@ impl RaidTargetUpdate {
         let index: RaidTargetIndex = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             index,

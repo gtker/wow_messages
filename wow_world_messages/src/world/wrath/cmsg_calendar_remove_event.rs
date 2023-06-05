@@ -43,10 +43,10 @@ impl crate::Message for CMSG_CALENDAR_REMOVE_EVENT {
         }
 
         // event: Guid
-        let event = Guid::read(&mut r)?;
+        let event = crate::util::read_guid(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(&mut r)?;
+        let invite_id = crate::util::read_guid(&mut r)?;
 
         // flags: u32
         let flags = crate::util::read_u32_le(&mut r)?;

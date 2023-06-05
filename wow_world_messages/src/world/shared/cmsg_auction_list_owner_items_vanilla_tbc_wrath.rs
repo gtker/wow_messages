@@ -38,7 +38,7 @@ impl crate::Message for CMSG_AUCTION_LIST_OWNER_ITEMS {
         }
 
         // auctioneer: Guid
-        let auctioneer = Guid::read(&mut r)?;
+        let auctioneer = crate::util::read_guid(&mut r)?;
 
         // list_from: u32
         let list_from = crate::util::read_u32_le(&mut r)?;

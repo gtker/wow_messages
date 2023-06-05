@@ -43,7 +43,7 @@ impl crate::Message for CMSG_PET_LEARN_TALENT {
         }
 
         // pet: Guid
-        let pet = Guid::read(&mut r)?;
+        let pet = crate::util::read_guid(&mut r)?;
 
         // talent: u32
         let talent = crate::util::read_u32_le(&mut r)?;

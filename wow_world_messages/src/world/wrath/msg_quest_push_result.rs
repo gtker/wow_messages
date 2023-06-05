@@ -39,7 +39,7 @@ impl crate::Message for MSG_QUEST_PUSH_RESULT {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // message: QuestPartyMessage
         let message: QuestPartyMessage = crate::util::read_u8_le(&mut r)?.try_into()?;

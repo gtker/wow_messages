@@ -38,7 +38,7 @@ impl crate::Message for CMSG_RESURRECT_RESPONSE {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // status: u8
         let status = crate::util::read_u8_le(&mut r)?;

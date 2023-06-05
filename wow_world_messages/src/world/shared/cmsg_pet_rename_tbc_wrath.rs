@@ -47,7 +47,7 @@ impl crate::Message for CMSG_PET_RENAME {
         }
 
         // pet: Guid
-        let pet = Guid::read(&mut r)?;
+        let pet = crate::util::read_guid(&mut r)?;
 
         // name: CString
         let name = {

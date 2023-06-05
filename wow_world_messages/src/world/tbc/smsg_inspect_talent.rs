@@ -25,7 +25,7 @@ impl crate::Message for SMSG_INSPECT_TALENT {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.player, &mut w)?;
 
         // talent_data: u8[-]
         for i in self.talent_data.iter() {
@@ -40,12 +40,12 @@ impl crate::Message for SMSG_INSPECT_TALENT {
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(&mut r)?;
+        let player = crate::util::read_packed_guid(&mut r)?;
 
         // talent_data: u8[-]
         let talent_data = {
             let mut current_size = {
-                player.size() // player: PackedGuid
+                crate::util::packed_guid_size(&player) // player: PackedGuid
             };
             let mut talent_data = Vec::with_capacity(body_size as usize - current_size);
             while current_size < (body_size as usize) {
@@ -67,7 +67,7 @@ impl crate::tbc::ServerMessage for SMSG_INSPECT_TALENT {}
 
 impl SMSG_INSPECT_TALENT {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: PackedGuid
+        crate::util::packed_guid_size(&self.player) // player: PackedGuid
         + self.talent_data.len() * core::mem::size_of::<u8>() // talent_data: u8[-]
     }
 }

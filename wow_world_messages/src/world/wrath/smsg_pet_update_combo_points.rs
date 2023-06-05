@@ -27,10 +27,10 @@ impl crate::Message for SMSG_PET_UPDATE_COMBO_POINTS {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // unit: PackedGuid
-        self.unit.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.unit, &mut w)?;
 
         // target: PackedGuid
-        self.target.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.target, &mut w)?;
 
         // combo_points: u8
         w.write_all(&self.combo_points.to_le_bytes())?;
@@ -43,10 +43,10 @@ impl crate::Message for SMSG_PET_UPDATE_COMBO_POINTS {
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(&mut r)?;
+        let unit = crate::util::read_packed_guid(&mut r)?;
 
         // target: PackedGuid
-        let target = Guid::read_packed(&mut r)?;
+        let target = crate::util::read_packed_guid(&mut r)?;
 
         // combo_points: u8
         let combo_points = crate::util::read_u8_le(&mut r)?;
@@ -64,8 +64,8 @@ impl crate::wrath::ServerMessage for SMSG_PET_UPDATE_COMBO_POINTS {}
 
 impl SMSG_PET_UPDATE_COMBO_POINTS {
     pub(crate) const fn size(&self) -> usize {
-        self.unit.size() // unit: PackedGuid
-        + self.target.size() // target: PackedGuid
+        crate::util::packed_guid_size(&self.unit) // unit: PackedGuid
+        + crate::util::packed_guid_size(&self.target) // target: PackedGuid
         + 1 // combo_points: u8
     }
 }

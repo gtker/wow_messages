@@ -43,10 +43,10 @@ impl crate::Message for CMSG_REPAIR_ITEM {
         }
 
         // npc: Guid
-        let npc = Guid::read(&mut r)?;
+        let npc = crate::util::read_guid(&mut r)?;
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         // from_guild_bank: Bool
         let from_guild_bank = crate::util::read_u8_le(&mut r)? != 0;

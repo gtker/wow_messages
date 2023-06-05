@@ -38,7 +38,7 @@ impl crate::Message for SMSG_SPELL_FAILED_OTHER {
         }
 
         // caster: Guid
-        let caster = Guid::read(&mut r)?;
+        let caster = crate::util::read_guid(&mut r)?;
 
         // id: u32
         let id = crate::util::read_u32_le(&mut r)?;

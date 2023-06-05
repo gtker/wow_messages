@@ -38,7 +38,7 @@ impl crate::Message for SMSG_AREA_SPIRIT_HEALER_TIME {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // next_resurrect_time: u32
         let next_resurrect_time = crate::util::read_u32_le(&mut r)?;

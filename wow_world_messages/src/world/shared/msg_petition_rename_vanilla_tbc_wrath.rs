@@ -42,7 +42,7 @@ impl crate::Message for MSG_PETITION_RENAME {
         }
 
         // petition: Guid
-        let petition = Guid::read(&mut r)?;
+        let petition = crate::util::read_guid(&mut r)?;
 
         // new_name: CString
         let new_name = {

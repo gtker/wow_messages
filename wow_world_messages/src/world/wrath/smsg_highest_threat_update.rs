@@ -29,10 +29,10 @@ impl crate::Message for SMSG_HIGHEST_THREAT_UPDATE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // unit: PackedGuid
-        self.unit.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.unit, &mut w)?;
 
         // new_victim: PackedGuid
-        self.new_victim.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.new_victim, &mut w)?;
 
         // amount_of_units: u32
         w.write_all(&(self.units.len() as u32).to_le_bytes())?;
@@ -50,10 +50,10 @@ impl crate::Message for SMSG_HIGHEST_THREAT_UPDATE {
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(&mut r)?;
+        let unit = crate::util::read_packed_guid(&mut r)?;
 
         // new_victim: PackedGuid
-        let new_victim = Guid::read_packed(&mut r)?;
+        let new_victim = crate::util::read_packed_guid(&mut r)?;
 
         // amount_of_units: u32
         let amount_of_units = crate::util::read_u32_le(&mut r)?;
@@ -80,8 +80,8 @@ impl crate::wrath::ServerMessage for SMSG_HIGHEST_THREAT_UPDATE {}
 
 impl SMSG_HIGHEST_THREAT_UPDATE {
     pub(crate) fn size(&self) -> usize {
-        self.unit.size() // unit: PackedGuid
-        + self.new_victim.size() // new_victim: PackedGuid
+        crate::util::packed_guid_size(&self.unit) // unit: PackedGuid
+        + crate::util::packed_guid_size(&self.new_victim) // new_victim: PackedGuid
         + 4 // amount_of_units: u32
         + self.units.iter().fold(0, |acc, x| acc + x.size()) // units: ThreatUpdateUnit[amount_of_units]
     }

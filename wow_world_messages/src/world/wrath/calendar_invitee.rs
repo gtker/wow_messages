@@ -20,7 +20,7 @@ pub struct CalendarInvitee {
 impl CalendarInvitee {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // status: u8
         w.write_all(&self.status.to_le_bytes())?;
@@ -35,7 +35,7 @@ impl CalendarInvitee {
 impl CalendarInvitee {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // status: u8
         let status = crate::util::read_u8_le(&mut r)?;
@@ -54,7 +54,7 @@ impl CalendarInvitee {
 
 impl CalendarInvitee {
     pub(crate) const fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + 1 // status: u8
         + 1 // rank: u8
     }

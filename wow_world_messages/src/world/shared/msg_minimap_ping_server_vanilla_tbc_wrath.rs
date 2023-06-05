@@ -43,7 +43,7 @@ impl crate::Message for MSG_MINIMAP_PING_Server {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // position_x: f32
         let position_x = crate::util::read_f32_le(&mut r)?;

@@ -48,10 +48,10 @@ impl crate::Message for SMSG_SPELLORDAMAGE_IMMUNE {
         }
 
         // caster: Guid
-        let caster = Guid::read(&mut r)?;
+        let caster = crate::util::read_guid(&mut r)?;
 
         // target: Guid
-        let target = Guid::read(&mut r)?;
+        let target = crate::util::read_guid(&mut r)?;
 
         // id: u32
         let id = crate::util::read_u32_le(&mut r)?;

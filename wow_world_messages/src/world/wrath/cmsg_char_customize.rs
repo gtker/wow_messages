@@ -73,7 +73,7 @@ impl crate::Message for CMSG_CHAR_CUSTOMIZE {
         }
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // new_name: CString
         let new_name = {

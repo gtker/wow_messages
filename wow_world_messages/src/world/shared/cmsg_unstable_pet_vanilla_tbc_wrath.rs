@@ -38,7 +38,7 @@ impl crate::Message for CMSG_UNSTABLE_PET {
         }
 
         // stable_master: Guid
-        let stable_master = Guid::read(&mut r)?;
+        let stable_master = crate::util::read_guid(&mut r)?;
 
         // pet_number: u32
         let pet_number = crate::util::read_u32_le(&mut r)?;

@@ -211,7 +211,7 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
                 };
 
                 // joiner: Guid
-                let joiner = Guid::read(&mut r)?;
+                let joiner = crate::util::read_guid(&mut r)?;
 
                 SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Join {
                     arena_team_name1,
@@ -227,7 +227,7 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
                 };
 
                 // leaver: Guid
-                let leaver = Guid::read(&mut r)?;
+                let leaver = crate::util::read_guid(&mut r)?;
 
                 SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Leave {
                     leaver,

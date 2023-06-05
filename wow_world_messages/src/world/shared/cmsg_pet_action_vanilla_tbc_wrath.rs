@@ -43,13 +43,13 @@ impl crate::Message for CMSG_PET_ACTION {
         }
 
         // pet: Guid
-        let pet = Guid::read(&mut r)?;
+        let pet = crate::util::read_guid(&mut r)?;
 
         // data: u32
         let data = crate::util::read_u32_le(&mut r)?;
 
         // target: Guid
-        let target = Guid::read(&mut r)?;
+        let target = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             pet,

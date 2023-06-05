@@ -1,7 +1,4 @@
 use std::fmt::{Display, Formatter};
-use std::io::Read;
-
-use crate::util::{read_u64_le, read_u8_le};
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Default, Hash, Copy, Clone)]
 pub struct Guid {
@@ -28,34 +25,6 @@ impl Guid {
         self.guid
     }
 
-    pub fn write_packed_guid_into_vec(
-        &self,
-        mut v: impl std::io::Write,
-    ) -> Result<(), std::io::Error> {
-        let guid = self.guid.to_le_bytes();
-        let mut bit_pattern: u8 = 0;
-
-        let mut placeholder = [0_u8; 9];
-        let mut index = 1;
-        for (i, &b) in guid.iter().enumerate() {
-            if b != 0 {
-                bit_pattern |= 1 << i;
-                placeholder[index] = b;
-                index += 1;
-            }
-        }
-
-        placeholder[0] = bit_pattern;
-
-        v.write_all(&placeholder[0..index])
-    }
-
-    pub fn read(r: &mut impl Read) -> Result<Self, std::io::Error> {
-        Ok(Self {
-            guid: read_u64_le(r)?,
-        })
-    }
-
     /// Returns the guid separated into the low and high u32s.
     ///
     /// Returns a tuple containing `(low, high)`.
@@ -74,37 +43,6 @@ impl Guid {
             guid: upper << 32 | lower,
         }
     }
-
-    pub const fn size(&self) -> usize {
-        let mut amount_of_bytes = 1;
-
-        let mut i = 0;
-        while i < 8 {
-            if (self.guid & (0xFF << (i * 8))) != 0 {
-                amount_of_bytes += 1;
-            }
-
-            i += 1;
-        }
-
-        amount_of_bytes
-    }
-
-    pub fn read_packed(r: &mut impl Read) -> Result<Self, std::io::Error> {
-        let bit_pattern = read_u8_le(r)?;
-        let mut guid: u64 = 0;
-
-        for index in 0..8 {
-            let bit = bit_pattern & (1 << index);
-
-            if bit != 0 {
-                let byte = read_u8_le(r)?;
-                guid |= (byte as u64) << (index * 8);
-            }
-        }
-
-        Ok(Self { guid })
-    }
 }
 
 impl From<u64> for Guid {
@@ -121,34 +59,29 @@ impl Display for Guid {
 
 #[cfg(test)]
 mod test {
-    use super::Guid;
-    use std::io::Cursor;
-    use std::io::Read;
+    use crate::vanilla::Guid;
 
     #[test]
     fn packed() {
         const GUID: u64 = 0xDEADBEEFFACADE;
+        const LOW: u32 = 0xEFFACADE;
+        const HIGH: u32 = 0xDEADBE;
 
         let guid = Guid::new(GUID);
-        assert_eq!(guid.guid(), GUID);
+        assert_eq!(GUID, guid.guid());
+        assert!(!guid.is_zero());
 
-        // Make sure that writing into a vec doesn't clobber existing values
-        let mut r = vec![1, 2, 3, 4];
-        guid.write_packed_guid_into_vec(&mut r).unwrap();
+        let zero = Guid::zero();
+        assert_eq!(0, zero.guid());
+        assert!(zero.is_zero());
 
-        let mut cursor = Cursor::new(r);
-        let mut padding = [0_u8; 4];
-        cursor.read_exact(&mut padding).unwrap();
-        let guid2 = Guid::read_packed(&mut cursor).unwrap();
+        let from_parts = Guid::from_u32s(LOW, HIGH);
+        assert_eq!(guid, from_parts);
+        assert_eq!(guid.guid(), from_parts.guid());
+        assert!(!from_parts.is_zero());
 
-        assert_eq!(guid, guid2);
-
-        let mut r = vec![1, 2, 3, 4];
-        r.append(&mut guid.guid().to_le_bytes().to_vec());
-
-        let mut cursor = Cursor::new(r);
-        cursor.read_exact(&mut padding).unwrap();
-        let guid2 = Guid::read(&mut cursor).unwrap();
-        assert_eq!(guid, guid2);
+        let (low, high) = from_parts.to_u32s();
+        assert_eq!(low, LOW);
+        assert_eq!(high, HIGH);
     }
 }

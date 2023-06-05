@@ -41,7 +41,7 @@ impl crate::Message for CMSG_PAGE_TEXT_QUERY {
         let page_id = crate::util::read_u32_le(&mut r)?;
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             page_id,

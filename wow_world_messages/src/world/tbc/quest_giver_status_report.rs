@@ -31,7 +31,7 @@ impl QuestGiverStatusReport {
 impl QuestGiverStatusReport {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // npc: Guid
-        let npc = Guid::read(&mut r)?;
+        let npc = crate::util::read_guid(&mut r)?;
 
         // dialog_status: QuestGiverStatus
         let dialog_status: QuestGiverStatus = crate::util::read_u8_le(&mut r)?.try_into()?;

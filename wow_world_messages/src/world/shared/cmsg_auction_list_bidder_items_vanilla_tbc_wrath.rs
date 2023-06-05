@@ -49,7 +49,7 @@ impl crate::Message for CMSG_AUCTION_LIST_BIDDER_ITEMS {
         }
 
         // auctioneer: Guid
-        let auctioneer = Guid::read(&mut r)?;
+        let auctioneer = crate::util::read_guid(&mut r)?;
 
         // start_from_page: u32
         let start_from_page = crate::util::read_u32_le(&mut r)?;

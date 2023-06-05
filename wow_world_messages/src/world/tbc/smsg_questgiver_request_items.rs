@@ -124,7 +124,7 @@ impl crate::Message for SMSG_QUESTGIVER_REQUEST_ITEMS {
         }
 
         // npc: Guid
-        let npc = Guid::read(&mut r)?;
+        let npc = crate::util::read_guid(&mut r)?;
 
         // quest_id: u32
         let quest_id = crate::util::read_u32_le(&mut r)?;

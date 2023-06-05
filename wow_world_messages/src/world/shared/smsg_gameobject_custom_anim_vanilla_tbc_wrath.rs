@@ -38,7 +38,7 @@ impl crate::Message for SMSG_GAMEOBJECT_CUSTOM_ANIM {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // animation_id: u32
         let animation_id = crate::util::read_u32_le(&mut r)?;

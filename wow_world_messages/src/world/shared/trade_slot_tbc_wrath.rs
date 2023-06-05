@@ -114,7 +114,7 @@ impl TradeSlot {
         let wrapped = crate::util::read_u32_le(&mut r)? != 0;
 
         // gift_wrapper: Guid
-        let gift_wrapper = Guid::read(&mut r)?;
+        let gift_wrapper = crate::util::read_guid(&mut r)?;
 
         // enchantment: u32
         let enchantment = crate::util::read_u32_le(&mut r)?;
@@ -129,7 +129,7 @@ impl TradeSlot {
         };
 
         // item_creator: Guid
-        let item_creator = Guid::read(&mut r)?;
+        let item_creator = crate::util::read_guid(&mut r)?;
 
         // spell_charges: u32
         let spell_charges = crate::util::read_u32_le(&mut r)?;

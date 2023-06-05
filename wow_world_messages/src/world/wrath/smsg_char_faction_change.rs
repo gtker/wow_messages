@@ -99,7 +99,7 @@ impl crate::Message for SMSG_CHAR_FACTION_CHANGE {
         let result_if = match result {
             WorldResult::ResponseSuccess => {
                 // guid: Guid
-                let guid = Guid::read(&mut r)?;
+                let guid = crate::util::read_guid(&mut r)?;
 
                 // name: CString
                 let name = {

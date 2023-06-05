@@ -58,7 +58,7 @@ impl crate::Message for SMSG_CALENDAR_RAID_LOCKOUT_REMOVED {
         let remaining_time = crate::util::read_u32_le(&mut r)?;
 
         // instance_id: Guid
-        let instance_id = Guid::read(&mut r)?;
+        let instance_id = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             map,

@@ -33,7 +33,7 @@ impl crate::Message for MSG_AUCTION_HELLO_Client {
         }
 
         // auctioneer: Guid
-        let auctioneer = Guid::read(&mut r)?;
+        let auctioneer = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             auctioneer,

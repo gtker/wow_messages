@@ -38,10 +38,10 @@ impl crate::Message for SMSG_PARTYKILLLOG {
         }
 
         // player_with_killing_blow: Guid
-        let player_with_killing_blow = Guid::read(&mut r)?;
+        let player_with_killing_blow = crate::util::read_guid(&mut r)?;
 
         // victim: Guid
-        let victim = Guid::read(&mut r)?;
+        let victim = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             player_with_killing_blow,

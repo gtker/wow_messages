@@ -30,7 +30,7 @@ impl crate::Message for SMSG_RESPOND_INSPECT_ACHIEVEMENTS {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.player, &mut w)?;
 
         // done: AchievementDoneArray
         crate::util::write_achievement_done(self.done.as_slice(), &mut w)?;
@@ -46,7 +46,7 @@ impl crate::Message for SMSG_RESPOND_INSPECT_ACHIEVEMENTS {
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(&mut r)?;
+        let player = crate::util::read_packed_guid(&mut r)?;
 
         // done: AchievementDoneArray
         let done = crate::util::read_achievement_done(&mut r)?;
@@ -67,7 +67,7 @@ impl crate::wrath::ServerMessage for SMSG_RESPOND_INSPECT_ACHIEVEMENTS {}
 
 impl SMSG_RESPOND_INSPECT_ACHIEVEMENTS {
     pub(crate) fn size(&self) -> usize {
-        self.player.size() // player: PackedGuid
+        crate::util::packed_guid_size(&self.player) // player: PackedGuid
         + self.done.len() * 4 // done: AchievementDoneArray
         + self.in_progress.iter().fold(0, |acc, x| acc + x.size()) // in_progress: AchievementInProgressArray
     }

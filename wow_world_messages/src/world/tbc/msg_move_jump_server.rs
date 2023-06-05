@@ -26,7 +26,7 @@ impl crate::Message for MSG_MOVE_JUMP_Server {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // info: MovementInfo
         self.info.write_into_vec(&mut w)?;
@@ -39,7 +39,7 @@ impl crate::Message for MSG_MOVE_JUMP_Server {
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // info: MovementInfo
         let info = MovementInfo::read(&mut r)?;
@@ -56,7 +56,7 @@ impl crate::tbc::ServerMessage for MSG_MOVE_JUMP_Server {}
 
 impl MSG_MOVE_JUMP_Server {
     pub(crate) const fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + self.info.size() // info: MovementInfo
     }
 }

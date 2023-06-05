@@ -49,7 +49,7 @@ impl crate::Message for CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK {
         }
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // counter: u32
         let counter = crate::util::read_u32_le(&mut r)?;

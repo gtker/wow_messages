@@ -25,7 +25,7 @@ pub struct TransportInfo {
 impl TransportInfo {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // position: Vector3d
         self.position.write_into_vec(&mut w)?;
@@ -46,7 +46,7 @@ impl TransportInfo {
 impl TransportInfo {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // position: Vector3d
         let position = Vector3d::read(&mut r)?;
@@ -73,7 +73,7 @@ impl TransportInfo {
 
 impl TransportInfo {
     pub(crate) const fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + 12 // position: Vector3d
         + 4 // orientation: f32
         + 4 // timestamp: u32

@@ -171,7 +171,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
         }
 
         // bank: Guid
-        let bank = Guid::read(&mut r)?;
+        let bank = crate::util::read_guid(&mut r)?;
 
         // source: BankSwapSource
         let source: BankSwapSource = crate::util::read_u8_le(&mut r)?.try_into()?;

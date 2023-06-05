@@ -30,7 +30,7 @@ impl crate::Message for CMSG_MOVE_SET_COLLISION_HGT_ACK {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.player, &mut w)?;
 
         // movement_counter: u32
         w.write_all(&self.movement_counter.to_le_bytes())?;
@@ -49,7 +49,7 @@ impl crate::Message for CMSG_MOVE_SET_COLLISION_HGT_ACK {
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(&mut r)?;
+        let player = crate::util::read_packed_guid(&mut r)?;
 
         // movement_counter: u32
         let movement_counter = crate::util::read_u32_le(&mut r)?;
@@ -74,7 +74,7 @@ impl crate::wrath::ClientMessage for CMSG_MOVE_SET_COLLISION_HGT_ACK {}
 
 impl CMSG_MOVE_SET_COLLISION_HGT_ACK {
     pub(crate) const fn size(&self) -> usize {
-        self.player.size() // player: PackedGuid
+        crate::util::packed_guid_size(&self.player) // player: PackedGuid
         + 4 // movement_counter: u32
         + self.info.size() // info: MovementInfo
         + 4 // new_height: f32

@@ -45,7 +45,7 @@ impl crate::Message for SMSG_PETITION_SHOWLIST {
         }
 
         // npc: Guid
-        let npc = Guid::read(&mut r)?;
+        let npc = crate::util::read_guid(&mut r)?;
 
         // amount_of_petitions: u8
         let amount_of_petitions = crate::util::read_u8_le(&mut r)?;

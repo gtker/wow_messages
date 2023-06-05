@@ -66,7 +66,7 @@ impl BattlegroundPlayer {
 impl BattlegroundPlayer {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // rank: PvpRank
         let rank: PvpRank = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;

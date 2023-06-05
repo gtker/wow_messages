@@ -25,7 +25,7 @@ impl crate::Message for SMSG_CLEAR_EXTRA_AURA_INFO {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // unit: PackedGuid
-        self.unit.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.unit, &mut w)?;
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
@@ -38,7 +38,7 @@ impl crate::Message for SMSG_CLEAR_EXTRA_AURA_INFO {
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(&mut r)?;
+        let unit = crate::util::read_packed_guid(&mut r)?;
 
         // spell: u32
         let spell = crate::util::read_u32_le(&mut r)?;
@@ -55,7 +55,7 @@ impl crate::tbc::ServerMessage for SMSG_CLEAR_EXTRA_AURA_INFO {}
 
 impl SMSG_CLEAR_EXTRA_AURA_INFO {
     pub(crate) const fn size(&self) -> usize {
-        self.unit.size() // unit: PackedGuid
+        crate::util::packed_guid_size(&self.unit) // unit: PackedGuid
         + 4 // spell: u32
     }
 }

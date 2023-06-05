@@ -46,7 +46,7 @@ impl crate::Message for SMSG_RESURRECT_REQUEST {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // name: SizedCString
         let name = {

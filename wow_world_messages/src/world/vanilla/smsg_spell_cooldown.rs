@@ -41,7 +41,7 @@ impl crate::Message for SMSG_SPELL_COOLDOWN {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // cooldowns: SpellCooldownStatus[-]
         let cooldowns = {

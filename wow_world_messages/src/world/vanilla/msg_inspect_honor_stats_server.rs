@@ -115,7 +115,7 @@ impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // highest_rank: PvpRank
         let highest_rank: PvpRank = crate::util::read_u8_le(&mut r)?.try_into()?;

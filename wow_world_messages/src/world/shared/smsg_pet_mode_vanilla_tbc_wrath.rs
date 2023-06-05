@@ -58,7 +58,7 @@ impl crate::Message for SMSG_PET_MODE {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // react_state: PetReactState
         let react_state: PetReactState = crate::util::read_u8_le(&mut r)?.try_into()?;

@@ -280,7 +280,7 @@ impl MovementBlock {
 
         if let Some(if_statement) = &self.update_flag.melee_attacking {
             // guid: PackedGuid
-            if_statement.guid.write_packed_guid_into_vec(&mut w)?;
+            crate::util::write_packed_guid(&if_statement.guid, &mut w)?;
 
         }
 
@@ -424,7 +424,7 @@ impl MovementBlock {
                 }
                 else if spline_flags.is_final_target() {
                     // target: Guid
-                    let target = Guid::read(&mut r)?;
+                    let target = crate::util::read_guid(&mut r)?;
 
                     Some(MovementBlock_SplineFlag_FinalAngle::FinalTarget {
                         target,
@@ -556,7 +556,7 @@ impl MovementBlock {
 
         let update_flag_melee_attacking = if update_flag.is_melee_attacking() {
             // guid: PackedGuid
-            let guid = Guid::read_packed(&mut r)?;
+            let guid = crate::util::read_packed_guid(&mut r)?;
 
             Some(MovementBlock_UpdateFlag_MeleeAttacking {
                 guid,
@@ -2577,7 +2577,7 @@ pub struct MovementBlock_UpdateFlag_MeleeAttacking {
 
 impl MovementBlock_UpdateFlag_MeleeAttacking {
     pub(crate) const fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
     }
 }
 

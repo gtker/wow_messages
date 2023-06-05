@@ -54,10 +54,10 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // target: PackedGuid
-        self.target.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.target, &mut w)?;
 
         // attacker: PackedGuid
-        self.attacker.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.attacker, &mut w)?;
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
@@ -97,10 +97,10 @@ impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
         }
 
         // target: PackedGuid
-        let target = Guid::read_packed(&mut r)?;
+        let target = crate::util::read_packed_guid(&mut r)?;
 
         // attacker: PackedGuid
-        let attacker = Guid::read_packed(&mut r)?;
+        let attacker = crate::util::read_packed_guid(&mut r)?;
 
         // spell: u32
         let spell = crate::util::read_u32_le(&mut r)?;
@@ -154,8 +154,8 @@ impl crate::vanilla::ServerMessage for SMSG_SPELLNONMELEEDAMAGELOG {}
 
 impl SMSG_SPELLNONMELEEDAMAGELOG {
     pub(crate) const fn size(&self) -> usize {
-        self.target.size() // target: PackedGuid
-        + self.attacker.size() // attacker: PackedGuid
+        crate::util::packed_guid_size(&self.target) // target: PackedGuid
+        + crate::util::packed_guid_size(&self.attacker) // attacker: PackedGuid
         + 4 // spell: u32
         + 4 // damage: u32
         + 1 // school: SpellSchool

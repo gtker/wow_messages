@@ -35,7 +35,7 @@ impl EquipmentSet {
 impl EquipmentSet {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         // source_bag: u8
         let source_bag = crate::util::read_u8_le(&mut r)?;

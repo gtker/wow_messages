@@ -64,7 +64,7 @@ impl crate::Message for SMSG_CHAR_RENAME {
         let result_if = match result {
             WorldResult::ResponseSuccess => {
                 // character: Guid
-                let character = Guid::read(&mut r)?;
+                let character = crate::util::read_guid(&mut r)?;
 
                 // new_name: CString
                 let new_name = {

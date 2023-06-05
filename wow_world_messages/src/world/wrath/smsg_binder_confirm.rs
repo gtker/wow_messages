@@ -41,7 +41,7 @@ impl crate::Message for SMSG_BINDER_CONFIRM {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // area: Area
         let area: Area = crate::util::read_u32_le(&mut r)?.try_into()?;

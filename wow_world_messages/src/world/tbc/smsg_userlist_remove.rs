@@ -52,7 +52,7 @@ impl crate::Message for SMSG_USERLIST_REMOVE {
         }
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // flags: u8
         let flags = crate::util::read_u8_le(&mut r)?;

@@ -50,7 +50,7 @@ impl EquipmentSetListItem {
 impl EquipmentSetListItem {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // name: CString
         let name = {
@@ -68,7 +68,7 @@ impl EquipmentSetListItem {
         let equipment = {
             let mut equipment = [Guid::default(); 19];
             for i in equipment.iter_mut() {
-                *i = Guid::read(&mut r)?;
+                *i = crate::util::read_guid(&mut r)?;
             }
             equipment
         };

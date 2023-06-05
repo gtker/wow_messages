@@ -23,7 +23,7 @@ impl crate::Message for CMSG_QUERY_INSPECT_ACHIEVEMENTS {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.player, &mut w)?;
 
         Ok(())
     }
@@ -33,7 +33,7 @@ impl crate::Message for CMSG_QUERY_INSPECT_ACHIEVEMENTS {
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(&mut r)?;
+        let player = crate::util::read_packed_guid(&mut r)?;
 
         Ok(Self {
             player,
@@ -46,7 +46,7 @@ impl crate::wrath::ClientMessage for CMSG_QUERY_INSPECT_ACHIEVEMENTS {}
 
 impl CMSG_QUERY_INSPECT_ACHIEVEMENTS {
     pub(crate) const fn size(&self) -> usize {
-        self.player.size() // player: PackedGuid
+        crate::util::packed_guid_size(&self.player) // player: PackedGuid
     }
 }
 

@@ -47,7 +47,7 @@ impl crate::Message for SMSG_PVP_CREDIT {
         let honor_points = crate::util::read_u32_le(&mut r)?;
 
         // victim: Guid
-        let victim = Guid::read(&mut r)?;
+        let victim = crate::util::read_guid(&mut r)?;
 
         // rank: PvpRank
         let rank: PvpRank = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;

@@ -72,7 +72,7 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // loot_method: LootMethod
         let loot_method: LootMethod = crate::util::read_u8_le(&mut r)?.try_into()?;

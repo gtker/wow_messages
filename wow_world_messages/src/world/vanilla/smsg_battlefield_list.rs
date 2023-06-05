@@ -57,7 +57,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         }
 
         // battlemaster: Guid
-        let battlemaster = Guid::read(&mut r)?;
+        let battlemaster = crate::util::read_guid(&mut r)?;
 
         // map: Map
         let map: Map = crate::util::read_u32_le(&mut r)?.try_into()?;

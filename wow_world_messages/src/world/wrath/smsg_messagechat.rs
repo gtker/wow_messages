@@ -787,7 +787,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
         let language: Language = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // sender: Guid
-        let sender = Guid::read(&mut r)?;
+        let sender = crate::util::read_guid(&mut r)?;
 
         // flags: u32
         let flags = crate::util::read_u32_le(&mut r)?;
@@ -795,42 +795,42 @@ impl crate::Message for SMSG_MESSAGECHAT {
         match chat_type {
             ChatType::System => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Say => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Party => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Raid => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Guild => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Officer => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Yell => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Whisper => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::WhisperForeign => {
@@ -842,22 +842,22 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 };
 
                 // target2: Guid
-                chat_type_if_target2 = Guid::read(&mut r)?;
+                chat_type_if_target2 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::WhisperInform => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Emote => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::TextEmote => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::MonsterSay => {
@@ -928,97 +928,97 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 };
 
                 // target5: Guid
-                chat_type_if_target5 = Guid::read(&mut r)?;
+                chat_type_if_target5 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::ChannelJoin => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::ChannelLeave => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::ChannelList => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::ChannelNotice => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::ChannelNoticeUser => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Afk => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Dnd => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Ignored => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Skill => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Loot => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Money => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Opening => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Tradeskills => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::PetInfo => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::CombatMiscInfo => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::CombatXpGain => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::CombatHonorGain => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::CombatFactionChange => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::BgSystemNeutral => {
@@ -1038,12 +1038,12 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::RaidLeader => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::RaidWarning => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::RaidBossEmote => {
@@ -1072,22 +1072,22 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Filtered => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Battleground => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::BattlegroundLeader => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Restricted => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::Battlenet => {
@@ -1104,22 +1104,22 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Achievement => {
                 // target4: Guid
-                chat_type_if_target4 = Guid::read(&mut r)?;
+                chat_type_if_target4 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::GuildAchievement => {
                 // target4: Guid
-                chat_type_if_target4 = Guid::read(&mut r)?;
+                chat_type_if_target4 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::ArenaPoints => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
             ChatType::PartyLeader => {
                 // target6: Guid
-                chat_type_if_target6 = Guid::read(&mut r)?;
+                chat_type_if_target6 = crate::util::read_guid(&mut r)?;
 
             }
         };

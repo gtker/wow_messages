@@ -87,7 +87,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // mask: GroupUpdateFlags
         w.write_all(&(self.mask.as_int().to_le_bytes()))?;
@@ -221,7 +221,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // mask: GroupUpdateFlags
         let mask = GroupUpdateFlags::new(crate::util::read_u32_le(&mut r)?);
@@ -352,7 +352,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
 
         let mask_pet_guid = if mask.is_pet_guid() {
             // pet: Guid
-            let pet = Guid::read(&mut r)?;
+            let pet = crate::util::read_guid(&mut r)?;
 
             Some(SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags_PetGuid {
                 pet,
@@ -496,7 +496,7 @@ impl crate::tbc::ServerMessage for SMSG_PARTY_MEMBER_STATS_FULL {}
 
 impl SMSG_PARTY_MEMBER_STATS_FULL {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + self.mask.size() // mask: SMSG_PARTY_MEMBER_STATS_FULL_GroupUpdateFlags
     }
 }

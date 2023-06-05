@@ -33,7 +33,7 @@ impl crate::Message for CMSG_GET_MAIL_LIST {
         }
 
         // mailbox: Guid
-        let mailbox = Guid::read(&mut r)?;
+        let mailbox = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             mailbox,

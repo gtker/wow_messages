@@ -43,13 +43,13 @@ impl crate::Message for CMSG_LOOT_MASTER_GIVE {
         }
 
         // loot: Guid
-        let loot = Guid::read(&mut r)?;
+        let loot = crate::util::read_guid(&mut r)?;
 
         // slot_id: u8
         let slot_id = crate::util::read_u8_le(&mut r)?;
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             loot,

@@ -90,7 +90,7 @@ impl crate::Message for SMSG_MIRRORIMAGE_DATA {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // display_id: u32
         let display_id = crate::util::read_u32_le(&mut r)?;

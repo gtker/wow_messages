@@ -116,7 +116,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         }
 
         // battlemaster: Guid
-        let battlemaster = Guid::read(&mut r)?;
+        let battlemaster = crate::util::read_guid(&mut r)?;
 
         // battleground_type: BattlegroundType
         let battleground_type: BattlegroundType = crate::util::read_u32_le(&mut r)?.try_into()?;

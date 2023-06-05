@@ -500,6 +500,9 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
         RustType::MonsterMoveSpline => {
             format!("crate::util::monster_move_spline_size({prefix}{name}.as_slice())",)
         }
+        RustType::PackedGuid => {
+            format!("crate::util::packed_guid_size(&{prefix}{name})",)
+        }
         RustType::AchievementDoneArray => {
             format!("{prefix}{name}.len() * 4")
         }
@@ -514,7 +517,6 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
         | RustType::NamedGuid
         | RustType::EnchantMask
         | RustType::InspectTalentGearMask
-        | RustType::PackedGuid
         | RustType::UpdateMask { .. }
         | RustType::AuraMask => {
             format!("{prefix}{name}.size()")
@@ -593,7 +595,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                     format!("{prefix}{name}.len() *  8",)
                 }
                 ArrayType::PackedGuid => {
-                    format!("{prefix}{name}.iter().fold(0, |acc, x| acc + x.size())",)
+                    format!("{prefix}{name}.iter().fold(0, |acc, x| acc + crate::util::packed_guid_size(x))",)
                 }
             }
         }

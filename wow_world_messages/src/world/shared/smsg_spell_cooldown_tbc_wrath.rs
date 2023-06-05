@@ -46,7 +46,7 @@ impl crate::Message for SMSG_SPELL_COOLDOWN {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // flags: u8
         let flags = crate::util::read_u8_le(&mut r)?;

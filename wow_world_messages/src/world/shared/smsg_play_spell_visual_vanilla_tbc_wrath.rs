@@ -40,7 +40,7 @@ impl crate::Message for SMSG_PLAY_SPELL_VISUAL {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // spell_art_kit: u32
         let spell_art_kit = crate::util::read_u32_le(&mut r)?;

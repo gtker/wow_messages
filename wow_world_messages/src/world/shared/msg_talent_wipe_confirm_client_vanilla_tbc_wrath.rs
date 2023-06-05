@@ -33,7 +33,7 @@ impl crate::Message for MSG_TALENT_WIPE_CONFIRM_Client {
         }
 
         // wiping_npc: Guid
-        let wiping_npc = Guid::read(&mut r)?;
+        let wiping_npc = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             wiping_npc,

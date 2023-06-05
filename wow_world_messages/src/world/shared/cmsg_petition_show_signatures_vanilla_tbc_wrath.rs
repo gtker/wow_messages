@@ -33,7 +33,7 @@ impl crate::Message for CMSG_PETITION_SHOW_SIGNATURES {
         }
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             item,

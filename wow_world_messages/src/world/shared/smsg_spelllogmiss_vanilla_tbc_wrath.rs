@@ -60,7 +60,7 @@ impl crate::Message for SMSG_SPELLLOGMISS {
         let id = crate::util::read_u32_le(&mut r)?;
 
         // caster: Guid
-        let caster = Guid::read(&mut r)?;
+        let caster = crate::util::read_guid(&mut r)?;
 
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(&mut r)?;

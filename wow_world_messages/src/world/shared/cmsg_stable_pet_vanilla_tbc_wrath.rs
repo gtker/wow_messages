@@ -33,7 +33,7 @@ impl crate::Message for CMSG_STABLE_PET {
         }
 
         // stable_master: Guid
-        let stable_master = Guid::read(&mut r)?;
+        let stable_master = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             stable_master,

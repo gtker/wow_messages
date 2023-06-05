@@ -45,10 +45,10 @@ impl crate::Message for SMSG_CRITERIA_UPDATE {
         w.write_all(&self.achievement.to_le_bytes())?;
 
         // progress_counter: PackedGuid
-        self.progress_counter.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.progress_counter, &mut w)?;
 
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.player, &mut w)?;
 
         // flags: u32
         w.write_all(&self.flags.to_le_bytes())?;
@@ -73,10 +73,10 @@ impl crate::Message for SMSG_CRITERIA_UPDATE {
         let achievement = crate::util::read_u32_le(&mut r)?;
 
         // progress_counter: PackedGuid
-        let progress_counter = Guid::read_packed(&mut r)?;
+        let progress_counter = crate::util::read_packed_guid(&mut r)?;
 
         // player: PackedGuid
-        let player = Guid::read_packed(&mut r)?;
+        let player = crate::util::read_packed_guid(&mut r)?;
 
         // flags: u32
         let flags = crate::util::read_u32_le(&mut r)?;
@@ -108,8 +108,8 @@ impl crate::wrath::ServerMessage for SMSG_CRITERIA_UPDATE {}
 impl SMSG_CRITERIA_UPDATE {
     pub(crate) const fn size(&self) -> usize {
         4 // achievement: u32
-        + self.progress_counter.size() // progress_counter: PackedGuid
-        + self.player.size() // player: PackedGuid
+        + crate::util::packed_guid_size(&self.progress_counter) // progress_counter: PackedGuid
+        + crate::util::packed_guid_size(&self.player) // player: PackedGuid
         + 4 // flags: u32
         + 4 // time: DateTime
         + 4 // time_elapsed: Seconds

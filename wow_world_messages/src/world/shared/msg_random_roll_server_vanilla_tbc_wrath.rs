@@ -57,7 +57,7 @@ impl crate::Message for MSG_RANDOM_ROLL_Server {
         let actual_roll = crate::util::read_u32_le(&mut r)?;
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             minimum,

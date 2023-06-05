@@ -38,10 +38,10 @@ impl crate::Message for SMSG_DUEL_REQUESTED {
         }
 
         // initiator: Guid
-        let initiator = Guid::read(&mut r)?;
+        let initiator = crate::util::read_guid(&mut r)?;
 
         // target: Guid
-        let target = Guid::read(&mut r)?;
+        let target = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             initiator,

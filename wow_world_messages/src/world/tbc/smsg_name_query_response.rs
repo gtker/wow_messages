@@ -45,7 +45,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // character_name: CString
         // TODO: Guard against strings that are already null-terminated
@@ -95,7 +95,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // character_name: CString
         let character_name = {
@@ -157,7 +157,7 @@ impl crate::tbc::ServerMessage for SMSG_NAME_QUERY_RESPONSE {}
 
 impl SMSG_NAME_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + self.character_name.len() + 1 // character_name: CString
         + self.realm_name.len() + 1 // realm_name: CString
         + 4 // race: Race

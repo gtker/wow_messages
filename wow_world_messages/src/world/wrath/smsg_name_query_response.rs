@@ -60,7 +60,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // early_terminate: u8
         w.write_all(&Self::EARLY_TERMINATE_VALUE.to_le_bytes())?;
@@ -113,7 +113,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // early_terminate: u8
         let _early_terminate = crate::util::read_u8_le(&mut r)?;
@@ -179,7 +179,7 @@ impl crate::wrath::ServerMessage for SMSG_NAME_QUERY_RESPONSE {}
 
 impl SMSG_NAME_QUERY_RESPONSE {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + 1 // early_terminate: u8
         + self.character_name.len() + 1 // character_name: CString
         + self.realm_name.len() + 1 // realm_name: CString

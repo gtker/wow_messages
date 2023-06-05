@@ -59,7 +59,7 @@ impl crate::Message for SMSG_TRAINER_LIST {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // trainer_type: u32
         let trainer_type = crate::util::read_u32_le(&mut r)?;

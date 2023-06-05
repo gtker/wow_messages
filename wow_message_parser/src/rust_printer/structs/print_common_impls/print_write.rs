@@ -42,7 +42,7 @@ pub(crate) fn print_write_field_array(
             ArrayType::Guid => {
                 s.wln(format!("w.write_all(&i.guid().to_le_bytes()){postfix}?;"));
             }
-            ArrayType::PackedGuid => s.wln("i.write_packed_guid_into_vec(&mut w)?;"),
+            ArrayType::PackedGuid => s.wln("crate::util::write_packed_guid(i, &mut w)?;"),
         },
     );
 }
@@ -235,7 +235,7 @@ pub(crate) fn print_write_definition(
         }
         Type::PackedGuid => {
             s.wln(format!(
-                "{variable_prefix}{name}.write_packed_guid_into_vec(&mut w)?;",
+                "crate::util::write_packed_guid(&{variable_prefix}{name}, &mut w)?;",
             ));
         }
         Type::DateTime => {

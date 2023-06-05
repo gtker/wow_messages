@@ -28,7 +28,7 @@ impl crate::Message for SMSG_POWER_UPDATE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // unit: PackedGuid
-        self.unit.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.unit, &mut w)?;
 
         // power: Power
         w.write_all(&(self.power.as_int().to_le_bytes()))?;
@@ -44,7 +44,7 @@ impl crate::Message for SMSG_POWER_UPDATE {
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(&mut r)?;
+        let unit = crate::util::read_packed_guid(&mut r)?;
 
         // power: Power
         let power: Power = crate::util::read_u8_le(&mut r)?.try_into()?;
@@ -65,7 +65,7 @@ impl crate::wrath::ServerMessage for SMSG_POWER_UPDATE {}
 
 impl SMSG_POWER_UPDATE {
     pub(crate) const fn size(&self) -> usize {
-        self.unit.size() // unit: PackedGuid
+        crate::util::packed_guid_size(&self.unit) // unit: PackedGuid
         + 1 // power: Power
         + 4 // amount: u32
     }

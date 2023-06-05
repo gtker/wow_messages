@@ -43,13 +43,13 @@ impl crate::Message for CMSG_CALENDAR_COMPLAIN {
         }
 
         // responsible_player: Guid
-        let responsible_player = Guid::read(&mut r)?;
+        let responsible_player = crate::util::read_guid(&mut r)?;
 
         // event: Guid
-        let event = Guid::read(&mut r)?;
+        let event = crate::util::read_guid(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(&mut r)?;
+        let invite_id = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             responsible_player,

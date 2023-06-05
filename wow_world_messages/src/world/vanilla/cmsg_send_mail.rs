@@ -104,7 +104,7 @@ impl crate::Message for CMSG_SEND_MAIL {
         }
 
         // mailbox: Guid
-        let mailbox = Guid::read(&mut r)?;
+        let mailbox = crate::util::read_guid(&mut r)?;
 
         // receiver: CString
         let receiver = {
@@ -131,7 +131,7 @@ impl crate::Message for CMSG_SEND_MAIL {
         let unknown2 = crate::util::read_u32_le(&mut r)?;
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         // money: Gold
         let money = Gold::new(crate::util::read_u32_le(&mut r)?);

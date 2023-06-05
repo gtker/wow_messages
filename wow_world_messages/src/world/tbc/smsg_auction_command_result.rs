@@ -200,7 +200,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
                     AuctionCommandResultTwo::ErrItemNotFound => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrItemNotFound,
                     AuctionCommandResultTwo::ErrHigherBid => {
                         // higher_bidder2: Guid
-                        let higher_bidder2 = Guid::read(&mut r)?;
+                        let higher_bidder2 = crate::util::read_guid(&mut r)?;
 
                         // new_bid2: u32
                         let new_bid2 = crate::util::read_u32_le(&mut r)?;
@@ -242,7 +242,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
                     AuctionCommandResultTwo::ErrItemNotFound => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrItemNotFound,
                     AuctionCommandResultTwo::ErrHigherBid => {
                         // higher_bidder2: Guid
-                        let higher_bidder2 = Guid::read(&mut r)?;
+                        let higher_bidder2 = crate::util::read_guid(&mut r)?;
 
                         // new_bid2: u32
                         let new_bid2 = crate::util::read_u32_le(&mut r)?;
@@ -291,7 +291,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
                     AuctionCommandResult::ErrItemNotFound => SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrItemNotFound,
                     AuctionCommandResult::ErrHigherBid => {
                         // higher_bidder: Guid
-                        let higher_bidder = Guid::read(&mut r)?;
+                        let higher_bidder = crate::util::read_guid(&mut r)?;
 
                         // new_bid: u32
                         let new_bid = crate::util::read_u32_le(&mut r)?;

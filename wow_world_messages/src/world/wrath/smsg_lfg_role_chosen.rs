@@ -43,7 +43,7 @@ impl crate::Message for SMSG_LFG_ROLE_CHOSEN {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // ready: Bool
         let ready = crate::util::read_u8_le(&mut r)? != 0;

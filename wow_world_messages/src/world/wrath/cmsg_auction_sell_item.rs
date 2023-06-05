@@ -63,13 +63,13 @@ impl crate::Message for CMSG_AUCTION_SELL_ITEM {
         }
 
         // auctioneer: Guid
-        let auctioneer = Guid::read(&mut r)?;
+        let auctioneer = crate::util::read_guid(&mut r)?;
 
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         // unknown2: u32
         let unknown2 = crate::util::read_u32_le(&mut r)?;

@@ -34,7 +34,7 @@ impl crate::Message for MSG_MOVE_KNOCK_BACK_Server {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.player, &mut w)?;
 
         // info: MovementInfo
         self.info.write_into_vec(&mut w)?;
@@ -59,7 +59,7 @@ impl crate::Message for MSG_MOVE_KNOCK_BACK_Server {
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(&mut r)?;
+        let player = crate::util::read_packed_guid(&mut r)?;
 
         // info: MovementInfo
         let info = MovementInfo::read(&mut r)?;
@@ -92,7 +92,7 @@ impl crate::tbc::ServerMessage for MSG_MOVE_KNOCK_BACK_Server {}
 
 impl MSG_MOVE_KNOCK_BACK_Server {
     pub(crate) const fn size(&self) -> usize {
-        self.player.size() // player: PackedGuid
+        crate::util::packed_guid_size(&self.player) // player: PackedGuid
         + self.info.size() // info: MovementInfo
         + 4 // sin_angle: f32
         + 4 // cos_angle: f32

@@ -133,7 +133,7 @@ impl crate::Message for SMSG_PETITION_QUERY_RESPONSE {
         let petition_id = crate::util::read_u32_le(&mut r)?;
 
         // charter_owner: Guid
-        let charter_owner = Guid::read(&mut r)?;
+        let charter_owner = crate::util::read_guid(&mut r)?;
 
         // guild_name: CString
         let guild_name = {

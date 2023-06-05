@@ -39,7 +39,7 @@ impl crate::Message for CMSG_GUILD_BANK_DEPOSIT_MONEY {
         }
 
         // bank: Guid
-        let bank = Guid::read(&mut r)?;
+        let bank = crate::util::read_guid(&mut r)?;
 
         // money: Gold
         let money = Gold::new(crate::util::read_u32_le(&mut r)?);

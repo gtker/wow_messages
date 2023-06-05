@@ -57,35 +57,35 @@ impl SpellCastTargets {
                     unit_target,
                 } => {
                     // unit_target: PackedGuid
-                    unit_target.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&unit_target, &mut w)?;
 
                 }
                 SpellCastTargets_SpellCastTargetFlags_Unit::UnitMinipet {
                     minipet_target,
                 } => {
                     // minipet_target: PackedGuid
-                    minipet_target.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&minipet_target, &mut w)?;
 
                 }
                 SpellCastTargets_SpellCastTargetFlags_Unit::Gameobject {
                     gameobject_target,
                 } => {
                     // gameobject_target: PackedGuid
-                    gameobject_target.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&gameobject_target, &mut w)?;
 
                 }
                 SpellCastTargets_SpellCastTargetFlags_Unit::CorpseEnemy {
                     enemy_corpse_target,
                 } => {
                     // enemy_corpse_target: PackedGuid
-                    enemy_corpse_target.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&enemy_corpse_target, &mut w)?;
 
                 }
                 SpellCastTargets_SpellCastTargetFlags_Unit::CorpseAlly {
                     ally_corpse_target,
                 } => {
                     // ally_corpse_target: PackedGuid
-                    ally_corpse_target.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&ally_corpse_target, &mut w)?;
 
                 }
             }
@@ -97,14 +97,14 @@ impl SpellCastTargets {
                     item_target,
                 } => {
                     // item_target: PackedGuid
-                    item_target.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&item_target, &mut w)?;
 
                 }
                 SpellCastTargets_SpellCastTargetFlags_Item::TradeItem {
                     trade_item_target,
                 } => {
                     // trade_item_target: PackedGuid
-                    trade_item_target.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&trade_item_target, &mut w)?;
 
                 }
             }
@@ -143,7 +143,7 @@ impl SpellCastTargets {
 
         let target_flags_unit = if target_flags.is_unit() {
             // unit_target: PackedGuid
-            let unit_target = Guid::read_packed(&mut r)?;
+            let unit_target = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Unit::Unit {
                 unit_target,
@@ -151,7 +151,7 @@ impl SpellCastTargets {
         }
         else if target_flags.is_unit_minipet() {
             // minipet_target: PackedGuid
-            let minipet_target = Guid::read_packed(&mut r)?;
+            let minipet_target = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Unit::UnitMinipet {
                 minipet_target,
@@ -159,7 +159,7 @@ impl SpellCastTargets {
         }
         else if target_flags.is_gameobject() {
             // gameobject_target: PackedGuid
-            let gameobject_target = Guid::read_packed(&mut r)?;
+            let gameobject_target = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Unit::Gameobject {
                 gameobject_target,
@@ -167,7 +167,7 @@ impl SpellCastTargets {
         }
         else if target_flags.is_corpse_enemy() {
             // enemy_corpse_target: PackedGuid
-            let enemy_corpse_target = Guid::read_packed(&mut r)?;
+            let enemy_corpse_target = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Unit::CorpseEnemy {
                 enemy_corpse_target,
@@ -175,7 +175,7 @@ impl SpellCastTargets {
         }
         else if target_flags.is_corpse_ally() {
             // ally_corpse_target: PackedGuid
-            let ally_corpse_target = Guid::read_packed(&mut r)?;
+            let ally_corpse_target = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Unit::CorpseAlly {
                 ally_corpse_target,
@@ -187,7 +187,7 @@ impl SpellCastTargets {
 
         let target_flags_item = if target_flags.is_item() {
             // item_target: PackedGuid
-            let item_target = Guid::read_packed(&mut r)?;
+            let item_target = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Item::Item {
                 item_target,
@@ -195,7 +195,7 @@ impl SpellCastTargets {
         }
         else if target_flags.is_trade_item() {
             // trade_item_target: PackedGuid
-            let trade_item_target = Guid::read_packed(&mut r)?;
+            let trade_item_target = crate::util::read_packed_guid(&mut r)?;
 
             Some(SpellCastTargets_SpellCastTargetFlags_Item::TradeItem {
                 trade_item_target,
@@ -305,31 +305,31 @@ impl SpellCastTargets_SpellCastTargetFlags_Unit {
                 unit_target,
             } => {
                 // Not an actual enum sent over the wire
-                unit_target.size() // unit_target: PackedGuid
+                crate::util::packed_guid_size(&unit_target) // unit_target: PackedGuid
             }
             Self::UnitMinipet {
                 minipet_target,
             } => {
                 // Not an actual enum sent over the wire
-                minipet_target.size() // minipet_target: PackedGuid
+                crate::util::packed_guid_size(&minipet_target) // minipet_target: PackedGuid
             }
             Self::Gameobject {
                 gameobject_target,
             } => {
                 // Not an actual enum sent over the wire
-                gameobject_target.size() // gameobject_target: PackedGuid
+                crate::util::packed_guid_size(&gameobject_target) // gameobject_target: PackedGuid
             }
             Self::CorpseEnemy {
                 enemy_corpse_target,
             } => {
                 // Not an actual enum sent over the wire
-                enemy_corpse_target.size() // enemy_corpse_target: PackedGuid
+                crate::util::packed_guid_size(&enemy_corpse_target) // enemy_corpse_target: PackedGuid
             }
             Self::CorpseAlly {
                 ally_corpse_target,
             } => {
                 // Not an actual enum sent over the wire
-                ally_corpse_target.size() // ally_corpse_target: PackedGuid
+                crate::util::packed_guid_size(&ally_corpse_target) // ally_corpse_target: PackedGuid
             }
         }
     }
@@ -362,13 +362,13 @@ impl SpellCastTargets_SpellCastTargetFlags_Item {
                 item_target,
             } => {
                 // Not an actual enum sent over the wire
-                item_target.size() // item_target: PackedGuid
+                crate::util::packed_guid_size(&item_target) // item_target: PackedGuid
             }
             Self::TradeItem {
                 trade_item_target,
             } => {
                 // Not an actual enum sent over the wire
-                trade_item_target.size() // trade_item_target: PackedGuid
+                crate::util::packed_guid_size(&trade_item_target) // trade_item_target: PackedGuid
             }
         }
     }

@@ -38,7 +38,7 @@ impl crate::Message for CMSG_SUMMON_RESPONSE {
         }
 
         // summoner: Guid
-        let summoner = Guid::read(&mut r)?;
+        let summoner = crate::util::read_guid(&mut r)?;
 
         // agree: Bool
         let agree = crate::util::read_u8_le(&mut r)? != 0;

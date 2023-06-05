@@ -53,13 +53,13 @@ impl crate::Message for CMSG_BUY_ITEM_IN_SLOT {
         }
 
         // vendor: Guid
-        let vendor = Guid::read(&mut r)?;
+        let vendor = crate::util::read_guid(&mut r)?;
 
         // item: u32
         let item = crate::util::read_u32_le(&mut r)?;
 
         // bag: Guid
-        let bag = Guid::read(&mut r)?;
+        let bag = crate::util::read_guid(&mut r)?;
 
         // bag_slot: u8
         let bag_slot = crate::util::read_u8_le(&mut r)?;

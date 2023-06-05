@@ -44,7 +44,7 @@ impl crate::Message for SMSG_SET_PROJECTILE_POSITION {
         }
 
         // caster: Guid
-        let caster = Guid::read(&mut r)?;
+        let caster = crate::util::read_guid(&mut r)?;
 
         // amount_of_casts: u8
         let amount_of_casts = crate::util::read_u8_le(&mut r)?;

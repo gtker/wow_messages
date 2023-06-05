@@ -50,7 +50,7 @@ impl crate::Message for MSG_LIST_STABLED_PETS_Server {
         }
 
         // npc: Guid
-        let npc = Guid::read(&mut r)?;
+        let npc = crate::util::read_guid(&mut r)?;
 
         // amount_of_pets: u8
         let amount_of_pets = crate::util::read_u8_le(&mut r)?;

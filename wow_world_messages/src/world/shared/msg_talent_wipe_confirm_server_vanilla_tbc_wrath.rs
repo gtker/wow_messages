@@ -41,7 +41,7 @@ impl crate::Message for MSG_TALENT_WIPE_CONFIRM_Server {
         }
 
         // wiping_npc: Guid
-        let wiping_npc = Guid::read(&mut r)?;
+        let wiping_npc = crate::util::read_guid(&mut r)?;
 
         // cost_in_copper: u32
         let cost_in_copper = crate::util::read_u32_le(&mut r)?;

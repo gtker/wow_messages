@@ -28,10 +28,10 @@ impl crate::Message for SMSG_SPELLDISPELLOG {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // victim: PackedGuid
-        self.victim.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.victim, &mut w)?;
 
         // caster: PackedGuid
-        self.caster.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.caster, &mut w)?;
 
         // amount_of_spells: u32
         w.write_all(&(self.spells.len() as u32).to_le_bytes())?;
@@ -49,10 +49,10 @@ impl crate::Message for SMSG_SPELLDISPELLOG {
         }
 
         // victim: PackedGuid
-        let victim = Guid::read_packed(&mut r)?;
+        let victim = crate::util::read_packed_guid(&mut r)?;
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(&mut r)?;
+        let caster = crate::util::read_packed_guid(&mut r)?;
 
         // amount_of_spells: u32
         let amount_of_spells = crate::util::read_u32_le(&mut r)?;
@@ -79,8 +79,8 @@ impl crate::vanilla::ServerMessage for SMSG_SPELLDISPELLOG {}
 
 impl SMSG_SPELLDISPELLOG {
     pub(crate) fn size(&self) -> usize {
-        self.victim.size() // victim: PackedGuid
-        + self.caster.size() // caster: PackedGuid
+        crate::util::packed_guid_size(&self.victim) // victim: PackedGuid
+        + crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
         + 4 // amount_of_spells: u32
         + self.spells.len() * core::mem::size_of::<u32>() // spells: u32[amount_of_spells]
     }

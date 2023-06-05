@@ -33,7 +33,7 @@ impl crate::Message for SMSG_ACHIEVEMENT_EARNED {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.player, &mut w)?;
 
         // achievement: u32
         w.write_all(&self.achievement.to_le_bytes())?;
@@ -52,7 +52,7 @@ impl crate::Message for SMSG_ACHIEVEMENT_EARNED {
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(&mut r)?;
+        let player = crate::util::read_packed_guid(&mut r)?;
 
         // achievement: u32
         let achievement = crate::util::read_u32_le(&mut r)?;
@@ -77,7 +77,7 @@ impl crate::wrath::ServerMessage for SMSG_ACHIEVEMENT_EARNED {}
 
 impl SMSG_ACHIEVEMENT_EARNED {
     pub(crate) const fn size(&self) -> usize {
-        self.player.size() // player: PackedGuid
+        crate::util::packed_guid_size(&self.player) // player: PackedGuid
         + 4 // achievement: u32
         + 4 // earn_time: DateTime
         + 4 // unknown: u32

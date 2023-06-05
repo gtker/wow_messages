@@ -101,7 +101,7 @@ impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
         }
 
         // auctioneer: Guid
-        let auctioneer = Guid::read(&mut r)?;
+        let auctioneer = crate::util::read_guid(&mut r)?;
 
         // list_start_item: u32
         let list_start_item = crate::util::read_u32_le(&mut r)?;

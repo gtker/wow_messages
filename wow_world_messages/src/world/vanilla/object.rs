@@ -47,7 +47,7 @@ impl Object {
                 mask1,
             } => {
                 // guid1: PackedGuid
-                guid1.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&guid1, &mut w)?;
 
                 // mask1: UpdateMask
                 mask1.write_into_vec(&mut w)?;
@@ -58,7 +58,7 @@ impl Object {
                 movement1,
             } => {
                 // guid2: PackedGuid
-                guid2.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&guid2, &mut w)?;
 
                 // movement1: MovementBlock
                 movement1.write_into_vec(&mut w)?;
@@ -71,7 +71,7 @@ impl Object {
                 object_type,
             } => {
                 // guid3: PackedGuid
-                guid3.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&guid3, &mut w)?;
 
                 // object_type: ObjectType
                 w.write_all(&(object_type.as_int().to_le_bytes()))?;
@@ -90,7 +90,7 @@ impl Object {
                 object_type,
             } => {
                 // guid3: PackedGuid
-                guid3.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&guid3, &mut w)?;
 
                 // object_type: ObjectType
                 w.write_all(&(object_type.as_int().to_le_bytes()))?;
@@ -110,7 +110,7 @@ impl Object {
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
-                    i.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(i, &mut w)?;
                 }
 
             }
@@ -122,7 +122,7 @@ impl Object {
 
                 // guids: PackedGuid[count]
                 for i in guids.iter() {
-                    i.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(i, &mut w)?;
                 }
 
             }
@@ -140,7 +140,7 @@ impl Object {
         let update_type_if = match update_type {
             UpdateType::Values => {
                 // guid1: PackedGuid
-                let guid1 = Guid::read_packed(&mut r)?;
+                let guid1 = crate::util::read_packed_guid(&mut r)?;
 
                 // mask1: UpdateMask
                 let mask1 = UpdateMask::read(&mut r)?;
@@ -152,7 +152,7 @@ impl Object {
             }
             UpdateType::Movement => {
                 // guid2: PackedGuid
-                let guid2 = Guid::read_packed(&mut r)?;
+                let guid2 = crate::util::read_packed_guid(&mut r)?;
 
                 // movement1: MovementBlock
                 let movement1 = MovementBlock::read(&mut r)?;
@@ -164,7 +164,7 @@ impl Object {
             }
             UpdateType::CreateObject => {
                 // guid3: PackedGuid
-                let guid3 = Guid::read_packed(&mut r)?;
+                let guid3 = crate::util::read_packed_guid(&mut r)?;
 
                 // object_type: ObjectType
                 let object_type: ObjectType = crate::util::read_u8_le(&mut r)?.try_into()?;
@@ -184,7 +184,7 @@ impl Object {
             }
             UpdateType::CreateObject2 => {
                 // guid3: PackedGuid
-                let guid3 = Guid::read_packed(&mut r)?;
+                let guid3 = crate::util::read_packed_guid(&mut r)?;
 
                 // object_type: ObjectType
                 let object_type: ObjectType = crate::util::read_u8_le(&mut r)?.try_into()?;
@@ -210,7 +210,7 @@ impl Object {
                 let guids = {
                     let mut guids = Vec::with_capacity(count as usize);
                     for _ in 0..count {
-                        guids.push(Guid::read_packed(&mut r)?);
+                        guids.push(crate::util::read_packed_guid(&mut r)?);
                     }
                     guids
                 };
@@ -227,7 +227,7 @@ impl Object {
                 let guids = {
                     let mut guids = Vec::with_capacity(count as usize);
                     for _ in 0..count {
-                        guids.push(Guid::read_packed(&mut r)?);
+                        guids.push(crate::util::read_packed_guid(&mut r)?);
                     }
                     guids
                 };
@@ -313,7 +313,7 @@ impl Object_UpdateType {
                 mask1,
             } => {
                 1
-                + guid1.size() // guid1: PackedGuid
+                + crate::util::packed_guid_size(&guid1) // guid1: PackedGuid
                 + mask1.size() // mask1: UpdateMask
             }
             Self::Movement {
@@ -321,7 +321,7 @@ impl Object_UpdateType {
                 movement1,
             } => {
                 1
-                + guid2.size() // guid2: PackedGuid
+                + crate::util::packed_guid_size(&guid2) // guid2: PackedGuid
                 + movement1.size() // movement1: MovementBlock
             }
             Self::CreateObject {
@@ -331,7 +331,7 @@ impl Object_UpdateType {
                 ..
             } => {
                 1
-                + guid3.size() // guid3: PackedGuid
+                + crate::util::packed_guid_size(&guid3) // guid3: PackedGuid
                 + mask2.size() // mask2: UpdateMask
                 + movement2.size() // movement2: MovementBlock
                 + 1 // object_type: ObjectType
@@ -343,7 +343,7 @@ impl Object_UpdateType {
                 ..
             } => {
                 1
-                + guid3.size() // guid3: PackedGuid
+                + crate::util::packed_guid_size(&guid3) // guid3: PackedGuid
                 + mask2.size() // mask2: UpdateMask
                 + movement2.size() // movement2: MovementBlock
                 + 1 // object_type: ObjectType
@@ -353,14 +353,14 @@ impl Object_UpdateType {
             } => {
                 1
                 + 4 // count: u32
-                + guids.iter().fold(0, |acc, x| acc + x.size()) // guids: PackedGuid[count]
+                + guids.iter().fold(0, |acc, x| acc + crate::util::packed_guid_size(x)) // guids: PackedGuid[count]
             }
             Self::NearObjects {
                 guids,
             } => {
                 1
                 + 4 // count: u32
-                + guids.iter().fold(0, |acc, x| acc + x.size()) // guids: PackedGuid[count]
+                + guids.iter().fold(0, |acc, x| acc + crate::util::packed_guid_size(x)) // guids: PackedGuid[count]
             }
         }
     }

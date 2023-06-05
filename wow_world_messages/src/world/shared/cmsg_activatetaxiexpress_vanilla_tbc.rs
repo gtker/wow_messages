@@ -51,7 +51,7 @@ impl crate::Message for CMSG_ACTIVATETAXIEXPRESS {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // total_cost: u32
         let total_cost = crate::util::read_u32_le(&mut r)?;

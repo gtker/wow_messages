@@ -80,7 +80,7 @@ impl crate::Message for CMSG_CHAR_FACTION_CHANGE {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // name: CString
         let name = {

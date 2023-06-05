@@ -93,7 +93,7 @@ impl crate::Message for SMSG_PET_SPELLS {
         }
 
         // pet: Guid
-        let pet = Guid::read(&mut r)?;
+        let pet = crate::util::read_guid(&mut r)?;
 
         // optional action_bars
         let current_size = {

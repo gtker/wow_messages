@@ -46,10 +46,10 @@ impl crate::Message for CMSG_OFFER_PETITION {
         let unknown0 = crate::util::read_u32_le(&mut r)?;
 
         // petition: Guid
-        let petition = Guid::read(&mut r)?;
+        let petition = crate::util::read_guid(&mut r)?;
 
         // target: Guid
-        let target = Guid::read(&mut r)?;
+        let target = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             unknown0,

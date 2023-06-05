@@ -62,7 +62,7 @@ impl GroupListMember {
         };
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // is_online: Bool
         let is_online = crate::util::read_u8_le(&mut r)? != 0;

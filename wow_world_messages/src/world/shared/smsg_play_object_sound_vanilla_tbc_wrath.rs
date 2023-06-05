@@ -43,7 +43,7 @@ impl crate::Message for SMSG_PLAY_OBJECT_SOUND {
         let sound_id = crate::util::read_u32_le(&mut r)?;
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             sound_id,

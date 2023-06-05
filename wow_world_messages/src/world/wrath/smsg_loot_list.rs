@@ -30,10 +30,10 @@ impl crate::Message for SMSG_LOOT_LIST {
         w.write_all(&self.creature.guid().to_le_bytes())?;
 
         // master_looter: PackedGuid
-        self.master_looter.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.master_looter, &mut w)?;
 
         // group_looter: PackedGuid
-        self.group_looter.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.group_looter, &mut w)?;
 
         Ok(())
     }
@@ -43,13 +43,13 @@ impl crate::Message for SMSG_LOOT_LIST {
         }
 
         // creature: Guid
-        let creature = Guid::read(&mut r)?;
+        let creature = crate::util::read_guid(&mut r)?;
 
         // master_looter: PackedGuid
-        let master_looter = Guid::read_packed(&mut r)?;
+        let master_looter = crate::util::read_packed_guid(&mut r)?;
 
         // group_looter: PackedGuid
-        let group_looter = Guid::read_packed(&mut r)?;
+        let group_looter = crate::util::read_packed_guid(&mut r)?;
 
         Ok(Self {
             creature,
@@ -65,8 +65,8 @@ impl crate::wrath::ServerMessage for SMSG_LOOT_LIST {}
 impl SMSG_LOOT_LIST {
     pub(crate) const fn size(&self) -> usize {
         8 // creature: Guid
-        + self.master_looter.size() // master_looter: PackedGuid
-        + self.group_looter.size() // group_looter: PackedGuid
+        + crate::util::packed_guid_size(&self.master_looter) // master_looter: PackedGuid
+        + crate::util::packed_guid_size(&self.group_looter) // group_looter: PackedGuid
     }
 }
 

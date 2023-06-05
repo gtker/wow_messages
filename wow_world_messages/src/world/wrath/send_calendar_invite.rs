@@ -41,7 +41,7 @@ impl SendCalendarInvite {
         w.write_all(u8::from(self.is_guild_event).to_le_bytes().as_slice())?;
 
         // creator: PackedGuid
-        self.creator.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.creator, &mut w)?;
 
         Ok(())
     }
@@ -50,10 +50,10 @@ impl SendCalendarInvite {
 impl SendCalendarInvite {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // event_id: Guid
-        let event_id = Guid::read(&mut r)?;
+        let event_id = crate::util::read_guid(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(&mut r)?;
+        let invite_id = crate::util::read_guid(&mut r)?;
 
         // status: u8
         let status = crate::util::read_u8_le(&mut r)?;
@@ -65,7 +65,7 @@ impl SendCalendarInvite {
         let is_guild_event = crate::util::read_u8_le(&mut r)? != 0;
 
         // creator: PackedGuid
-        let creator = Guid::read_packed(&mut r)?;
+        let creator = crate::util::read_packed_guid(&mut r)?;
 
         Ok(Self {
             event_id,
@@ -86,7 +86,7 @@ impl SendCalendarInvite {
         + 1 // status: u8
         + 1 // rank: u8
         + 1 // is_guild_event: Bool
-        + self.creator.size() // creator: PackedGuid
+        + crate::util::packed_guid_size(&self.creator) // creator: PackedGuid
     }
 }
 

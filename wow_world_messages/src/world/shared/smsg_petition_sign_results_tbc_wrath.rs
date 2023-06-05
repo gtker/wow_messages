@@ -44,10 +44,10 @@ impl crate::Message for SMSG_PETITION_SIGN_RESULTS {
         }
 
         // petition: Guid
-        let petition = Guid::read(&mut r)?;
+        let petition = crate::util::read_guid(&mut r)?;
 
         // owner: Guid
-        let owner = Guid::read(&mut r)?;
+        let owner = crate::util::read_guid(&mut r)?;
 
         // result: PetitionResult
         let result: PetitionResult = crate::util::read_u32_le(&mut r)?.try_into()?;

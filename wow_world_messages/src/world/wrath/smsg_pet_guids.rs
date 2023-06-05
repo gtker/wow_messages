@@ -45,7 +45,7 @@ impl crate::Message for SMSG_PET_GUIDS {
         let guids = {
             let mut guids = Vec::with_capacity(amount_of_guids as usize);
             for _ in 0..amount_of_guids {
-                guids.push(Guid::read(&mut r)?);
+                guids.push(crate::util::read_guid(&mut r)?);
             }
             guids
         };

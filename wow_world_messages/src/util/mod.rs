@@ -141,6 +141,63 @@ pub const fn u32_to_u16s(a: u32) -> (u16, u16) {
     (high, low)
 }
 
+pub const fn packed_guid_size(guid: &crate::Guid) -> usize {
+    let mut amount_of_bytes = 1;
+
+    let mut i = 0;
+    while i < 8 {
+        if (guid.guid() & (0xFF << (i * 8))) != 0 {
+            amount_of_bytes += 1;
+        }
+
+        i += 1;
+    }
+
+    amount_of_bytes
+}
+
+pub fn write_packed_guid(
+    guid: &crate::Guid,
+    mut v: impl std::io::Write,
+) -> Result<(), std::io::Error> {
+    let guid = guid.guid().to_le_bytes();
+    let mut bit_pattern: u8 = 0;
+
+    let mut placeholder = [0_u8; 9];
+    let mut index = 1;
+    for (i, &b) in guid.iter().enumerate() {
+        if b != 0 {
+            bit_pattern |= 1 << i;
+            placeholder[index] = b;
+            index += 1;
+        }
+    }
+
+    placeholder[0] = bit_pattern;
+
+    v.write_all(&placeholder[0..index])
+}
+
+pub fn read_guid(r: &mut impl Read) -> Result<crate::Guid, std::io::Error> {
+    Ok(crate::Guid::new(crate::util::read_u64_le(r)?))
+}
+
+pub fn read_packed_guid(r: &mut impl Read) -> Result<crate::Guid, std::io::Error> {
+    let bit_pattern = read_u8_le(r)?;
+    let mut guid: u64 = 0;
+
+    for index in 0..8 {
+        let bit = bit_pattern & (1 << index);
+
+        if bit != 0 {
+            let byte = read_u8_le(r)?;
+            guid |= (byte as u64) << (index * 8);
+        }
+    }
+
+    Ok(crate::Guid::new(guid))
+}
+
 #[cfg(any(feature = "wrath", feature = "tbc", feature = "vanilla"))]
 fn vector3d_to_packed(v: &Vector3d) -> u32 {
     let mut packed = 0;
@@ -265,8 +322,8 @@ pub(crate) fn read_achievement_in_progress(
     let mut in_progress = Vec::new();
 
     while first != ACHIEVEMENT_SENTINEL_VALUE {
-        let counter = crate::Guid::read_packed(r)?;
-        let player = crate::Guid::read_packed(r)?;
+        let counter = crate::util::read_packed_guid(r)?;
+        let player = crate::util::read_packed_guid(r)?;
         let timed_criteria_failed = read_u32_le(r)? != 0;
         let progress_date = crate::DateTime::try_from(read_u32_le(r)?)?;
         let time_since_progress = read_u32_le(r)?;

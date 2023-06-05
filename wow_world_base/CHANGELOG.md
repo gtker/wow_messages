@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * `AuctionHouse` type for Vanilla, TBC and Wrath with member functions `deposit_percentage`, `cut_percentage`, and `(vanilla|tbc|wrath)_faction`.
 
+### Removed
+
+* `write_packed_guid_into_vec`, `size`, `read_packed` methods for `Guid`.
+These were only intended to be used by `wow_world_messages` for reading `Guid`s on the wire and should provide no functionality for users for either `wow_world_messages` or `wow_world_base`.
+
 ## [0.1.1] - 2023-05-20
 
 ### Added

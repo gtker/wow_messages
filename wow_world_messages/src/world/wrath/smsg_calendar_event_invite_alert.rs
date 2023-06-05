@@ -76,10 +76,10 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_ALERT {
         w.write_all(&self.rank.to_le_bytes())?;
 
         // event_creator: PackedGuid
-        self.event_creator.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.event_creator, &mut w)?;
 
         // invite_sender: PackedGuid
-        self.invite_sender.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.invite_sender, &mut w)?;
 
         Ok(())
     }
@@ -89,7 +89,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_ALERT {
         }
 
         // event_id: Guid
-        let event_id = Guid::read(&mut r)?;
+        let event_id = crate::util::read_guid(&mut r)?;
 
         // title: CString
         let title = {
@@ -110,7 +110,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_ALERT {
         let dungeon_id = crate::util::read_u32_le(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(&mut r)?;
+        let invite_id = crate::util::read_guid(&mut r)?;
 
         // status: u8
         let status = crate::util::read_u8_le(&mut r)?;
@@ -119,10 +119,10 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_ALERT {
         let rank = crate::util::read_u8_le(&mut r)?;
 
         // event_creator: PackedGuid
-        let event_creator = Guid::read_packed(&mut r)?;
+        let event_creator = crate::util::read_packed_guid(&mut r)?;
 
         // invite_sender: PackedGuid
-        let invite_sender = Guid::read_packed(&mut r)?;
+        let invite_sender = crate::util::read_packed_guid(&mut r)?;
 
         Ok(Self {
             event_id,
@@ -154,8 +154,8 @@ impl SMSG_CALENDAR_EVENT_INVITE_ALERT {
         + 8 // invite_id: Guid
         + 1 // status: u8
         + 1 // rank: u8
-        + self.event_creator.size() // event_creator: PackedGuid
-        + self.invite_sender.size() // invite_sender: PackedGuid
+        + crate::util::packed_guid_size(&self.event_creator) // event_creator: PackedGuid
+        + crate::util::packed_guid_size(&self.invite_sender) // invite_sender: PackedGuid
     }
 }
 

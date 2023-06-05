@@ -23,7 +23,7 @@ impl crate::Message for SMSG_CANCEL_AUTO_REPEAT {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // target: PackedGuid
-        self.target.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.target, &mut w)?;
 
         Ok(())
     }
@@ -33,7 +33,7 @@ impl crate::Message for SMSG_CANCEL_AUTO_REPEAT {
         }
 
         // target: PackedGuid
-        let target = Guid::read_packed(&mut r)?;
+        let target = crate::util::read_packed_guid(&mut r)?;
 
         Ok(Self {
             target,
@@ -46,7 +46,7 @@ impl crate::wrath::ServerMessage for SMSG_CANCEL_AUTO_REPEAT {}
 
 impl SMSG_CANCEL_AUTO_REPEAT {
     pub(crate) const fn size(&self) -> usize {
-        self.target.size() // target: PackedGuid
+        crate::util::packed_guid_size(&self.target) // target: PackedGuid
     }
 }
 

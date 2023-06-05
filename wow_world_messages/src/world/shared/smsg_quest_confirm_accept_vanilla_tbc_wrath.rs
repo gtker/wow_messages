@@ -56,7 +56,7 @@ impl crate::Message for SMSG_QUEST_CONFIRM_ACCEPT {
         };
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             quest_id,

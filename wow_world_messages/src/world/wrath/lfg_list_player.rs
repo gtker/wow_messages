@@ -211,7 +211,7 @@ impl LfgListPlayer {
 impl LfgListPlayer {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // flags: LfgUpdateFlag
         let flags = LfgUpdateFlag::new(crate::util::read_u32_le(&mut r)?);
@@ -357,7 +357,7 @@ impl LfgListPlayer {
 
         let flags_group_guid = if flags.is_group_guid() {
             // group: Guid
-            let group = Guid::read(&mut r)?;
+            let group = crate::util::read_guid(&mut r)?;
 
             Some(LfgListPlayer_LfgUpdateFlag_GroupGuid {
                 group,
@@ -404,7 +404,7 @@ impl LfgListPlayer {
         };
 
         // instance: Guid
-        let instance = Guid::read(&mut r)?;
+        let instance = crate::util::read_guid(&mut r)?;
 
         // encounter_mask: u32
         let encounter_mask = crate::util::read_u32_le(&mut r)?;

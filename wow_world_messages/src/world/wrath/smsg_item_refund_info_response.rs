@@ -69,7 +69,7 @@ impl crate::Message for SMSG_ITEM_REFUND_INFO_RESPONSE {
         }
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         // money_cost: Gold
         let money_cost = Gold::new(crate::util::read_u32_le(&mut r)?);

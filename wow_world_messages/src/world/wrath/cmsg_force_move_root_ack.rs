@@ -28,7 +28,7 @@ impl crate::Message for CMSG_FORCE_MOVE_ROOT_ACK {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // movement_counter: u32
         w.write_all(&self.movement_counter.to_le_bytes())?;
@@ -44,7 +44,7 @@ impl crate::Message for CMSG_FORCE_MOVE_ROOT_ACK {
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // movement_counter: u32
         let movement_counter = crate::util::read_u32_le(&mut r)?;
@@ -65,7 +65,7 @@ impl crate::wrath::ClientMessage for CMSG_FORCE_MOVE_ROOT_ACK {}
 
 impl CMSG_FORCE_MOVE_ROOT_ACK {
     pub(crate) const fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + 4 // movement_counter: u32
         + self.info.size() // info: MovementInfo
     }

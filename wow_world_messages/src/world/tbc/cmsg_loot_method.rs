@@ -49,7 +49,7 @@ impl crate::Message for CMSG_LOOT_METHOD {
         let loot_setting: GroupLootSetting = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
         // loot_master: Guid
-        let loot_master = Guid::read(&mut r)?;
+        let loot_master = crate::util::read_guid(&mut r)?;
 
         // loot_threshold: ItemQuality
         let loot_threshold: ItemQuality = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;

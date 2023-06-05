@@ -38,7 +38,7 @@ impl crate::Message for SMSG_TRAINER_BUY_SUCCEEDED {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // id: u32
         let id = crate::util::read_u32_le(&mut r)?;

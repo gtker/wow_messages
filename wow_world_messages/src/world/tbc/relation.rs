@@ -76,7 +76,7 @@ impl Relation {
 impl Relation {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // relation_mask: RelationType
         let relation_mask = RelationType::new(crate::util::read_u32_le(&mut r)?);

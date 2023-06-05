@@ -55,7 +55,7 @@ impl crate::Message for SMSG_SHOWTAXINODES {
         let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // nearest_node: u32
         let nearest_node = crate::util::read_u32_le(&mut r)?;

@@ -49,7 +49,7 @@ impl AuraUpdate {
 
         if let Some(if_statement) = &self.flags.not_caster {
             // caster: PackedGuid
-            if_statement.caster.write_packed_guid_into_vec(&mut w)?;
+            crate::util::write_packed_guid(&if_statement.caster, &mut w)?;
 
         }
 
@@ -85,7 +85,7 @@ impl AuraUpdate {
 
         let flags_not_caster = if flags.is_not_caster() {
             // caster: PackedGuid
-            let caster = Guid::read_packed(&mut r)?;
+            let caster = crate::util::read_packed_guid(&mut r)?;
 
             Some(AuraUpdate_AuraFlag_NotCaster {
                 caster,
@@ -420,7 +420,7 @@ pub struct AuraUpdate_AuraFlag_NotCaster {
 
 impl AuraUpdate_AuraFlag_NotCaster {
     pub(crate) const fn size(&self) -> usize {
-        self.caster.size() // caster: PackedGuid
+        crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
     }
 }
 

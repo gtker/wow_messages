@@ -109,7 +109,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
         let target_index_if = match target_index {
             RaidTargetIndex::Unknown0 => {
                 // target: Guid
-                let target = Guid::read(&mut r)?;
+                let target = crate::util::read_guid(&mut r)?;
 
                 MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {
                     target,
@@ -117,7 +117,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
             }
             RaidTargetIndex::Unknown1 => {
                 // target: Guid
-                let target = Guid::read(&mut r)?;
+                let target = crate::util::read_guid(&mut r)?;
 
                 MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown1 {
                     target,
@@ -125,7 +125,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
             }
             RaidTargetIndex::Unknown2 => {
                 // target: Guid
-                let target = Guid::read(&mut r)?;
+                let target = crate::util::read_guid(&mut r)?;
 
                 MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown2 {
                     target,
@@ -133,7 +133,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
             }
             RaidTargetIndex::Unknown3 => {
                 // target: Guid
-                let target = Guid::read(&mut r)?;
+                let target = crate::util::read_guid(&mut r)?;
 
                 MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown3 {
                     target,
@@ -141,7 +141,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
             }
             RaidTargetIndex::Unknown4 => {
                 // target: Guid
-                let target = Guid::read(&mut r)?;
+                let target = crate::util::read_guid(&mut r)?;
 
                 MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown4 {
                     target,
@@ -149,7 +149,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
             }
             RaidTargetIndex::Unknown5 => {
                 // target: Guid
-                let target = Guid::read(&mut r)?;
+                let target = crate::util::read_guid(&mut r)?;
 
                 MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown5 {
                     target,
@@ -157,7 +157,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
             }
             RaidTargetIndex::Unknown6 => {
                 // target: Guid
-                let target = Guid::read(&mut r)?;
+                let target = crate::util::read_guid(&mut r)?;
 
                 MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown6 {
                     target,
@@ -165,7 +165,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
             }
             RaidTargetIndex::Unknown7 => {
                 // target: Guid
-                let target = Guid::read(&mut r)?;
+                let target = crate::util::read_guid(&mut r)?;
 
                 MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown7 {
                     target,
@@ -173,7 +173,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
             }
             RaidTargetIndex::Unknown8 => {
                 // target: Guid
-                let target = Guid::read(&mut r)?;
+                let target = crate::util::read_guid(&mut r)?;
 
                 MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown8 {
                     target,

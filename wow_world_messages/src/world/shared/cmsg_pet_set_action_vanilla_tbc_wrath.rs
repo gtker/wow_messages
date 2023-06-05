@@ -58,7 +58,7 @@ impl crate::Message for CMSG_PET_SET_ACTION {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // position1: u32
         let position1 = crate::util::read_u32_le(&mut r)?;

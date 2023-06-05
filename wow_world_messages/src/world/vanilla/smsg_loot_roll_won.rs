@@ -75,7 +75,7 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
         }
 
         // looted_target: Guid
-        let looted_target = Guid::read(&mut r)?;
+        let looted_target = crate::util::read_guid(&mut r)?;
 
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(&mut r)?;
@@ -90,7 +90,7 @@ impl crate::Message for SMSG_LOOT_ROLL_WON {
         let item_random_property_id = crate::util::read_u32_le(&mut r)?;
 
         // winning_player: Guid
-        let winning_player = Guid::read(&mut r)?;
+        let winning_player = crate::util::read_guid(&mut r)?;
 
         // winning_roll: u8
         let winning_roll = crate::util::read_u8_le(&mut r)?;

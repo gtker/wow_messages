@@ -68,7 +68,7 @@ impl crate::Message for MSG_INSPECT_ARENA_TEAMS_Server {
         }
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // slot: u8
         let slot = crate::util::read_u8_le(&mut r)?;

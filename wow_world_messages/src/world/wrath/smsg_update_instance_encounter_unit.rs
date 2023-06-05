@@ -47,7 +47,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
                 parameter1,
             } => {
                 // guid: PackedGuid
-                guid.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&guid, &mut w)?;
 
                 // parameter1: u8
                 w.write_all(&parameter1.to_le_bytes())?;
@@ -58,7 +58,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
                 parameter1,
             } => {
                 // guid: PackedGuid
-                guid.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&guid, &mut w)?;
 
                 // parameter1: u8
                 w.write_all(&parameter1.to_le_bytes())?;
@@ -69,7 +69,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
                 parameter1,
             } => {
                 // guid: PackedGuid
-                guid.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&guid, &mut w)?;
 
                 // parameter1: u8
                 w.write_all(&parameter1.to_le_bytes())?;
@@ -123,7 +123,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
         let frame_if = match frame {
             EncounterFrame::Engage => {
                 // guid: PackedGuid
-                let guid = Guid::read_packed(&mut r)?;
+                let guid = crate::util::read_packed_guid(&mut r)?;
 
                 // parameter1: u8
                 let parameter1 = crate::util::read_u8_le(&mut r)?;
@@ -135,7 +135,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
             }
             EncounterFrame::Disengage => {
                 // guid: PackedGuid
-                let guid = Guid::read_packed(&mut r)?;
+                let guid = crate::util::read_packed_guid(&mut r)?;
 
                 // parameter1: u8
                 let parameter1 = crate::util::read_u8_le(&mut r)?;
@@ -147,7 +147,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
             }
             EncounterFrame::UpdatePriority => {
                 // guid: PackedGuid
-                let guid = Guid::read_packed(&mut r)?;
+                let guid = crate::util::read_packed_guid(&mut r)?;
 
                 // parameter1: u8
                 let parameter1 = crate::util::read_u8_le(&mut r)?;
@@ -272,7 +272,7 @@ impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame {
                 ..
             } => {
                 4
-                + guid.size() // guid: PackedGuid
+                + crate::util::packed_guid_size(&guid) // guid: PackedGuid
                 + 1 // parameter1: u8
             }
             Self::Disengage {
@@ -280,7 +280,7 @@ impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame {
                 ..
             } => {
                 4
-                + guid.size() // guid: PackedGuid
+                + crate::util::packed_guid_size(&guid) // guid: PackedGuid
                 + 1 // parameter1: u8
             }
             Self::UpdatePriority {
@@ -288,7 +288,7 @@ impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame {
                 ..
             } => {
                 4
-                + guid.size() // guid: PackedGuid
+                + crate::util::packed_guid_size(&guid) // guid: PackedGuid
                 + 1 // parameter1: u8
             }
             Self::AddTimer {

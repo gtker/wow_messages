@@ -185,7 +185,7 @@ impl MonsterMove {
             }
             MonsterMoveType::FacingTarget => {
                 // target: Guid
-                move_type_if_target = Guid::read(&mut r)?;
+                move_type_if_target = crate::util::read_guid(&mut r)?;
 
             }
             MonsterMoveType::FacingAngle => {

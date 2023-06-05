@@ -38,7 +38,7 @@ impl crate::Message for SMSG_ITEM_COOLDOWN {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // id: u32
         let id = crate::util::read_u32_le(&mut r)?;

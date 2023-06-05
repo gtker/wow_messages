@@ -38,7 +38,7 @@ impl crate::Message for CMSG_MAIL_RETURN_TO_SENDER {
         }
 
         // mailbox_id: Guid
-        let mailbox_id = Guid::read(&mut r)?;
+        let mailbox_id = crate::util::read_guid(&mut r)?;
 
         // mail_id: u32
         let mail_id = crate::util::read_u32_le(&mut r)?;

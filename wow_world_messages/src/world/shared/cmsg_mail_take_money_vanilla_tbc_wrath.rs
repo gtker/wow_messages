@@ -38,7 +38,7 @@ impl crate::Message for CMSG_MAIL_TAKE_MONEY {
         }
 
         // mailbox: Guid
-        let mailbox = Guid::read(&mut r)?;
+        let mailbox = crate::util::read_guid(&mut r)?;
 
         // mail_id: u32
         let mail_id = crate::util::read_u32_le(&mut r)?;

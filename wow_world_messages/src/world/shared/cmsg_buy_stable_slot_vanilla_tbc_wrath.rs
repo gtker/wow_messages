@@ -33,7 +33,7 @@ impl crate::Message for CMSG_BUY_STABLE_SLOT {
         }
 
         // npc: Guid
-        let npc = Guid::read(&mut r)?;
+        let npc = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             npc,

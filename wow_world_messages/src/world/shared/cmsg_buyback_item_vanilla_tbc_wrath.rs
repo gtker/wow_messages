@@ -39,7 +39,7 @@ impl crate::Message for CMSG_BUYBACK_ITEM {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // slot: BuybackSlot
         let slot: BuybackSlot = crate::util::read_u32_le(&mut r)?.try_into()?;

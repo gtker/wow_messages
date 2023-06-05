@@ -40,7 +40,7 @@ impl crate::Message for SMSG_LOOT_RELEASE_RESPONSE {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // unknown1: u8
         let unknown1 = crate::util::read_u8_le(&mut r)?;

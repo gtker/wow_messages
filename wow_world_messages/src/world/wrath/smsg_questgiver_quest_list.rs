@@ -68,7 +68,7 @@ impl crate::Message for SMSG_QUESTGIVER_QUEST_LIST {
         }
 
         // npc: Guid
-        let npc = Guid::read(&mut r)?;
+        let npc = crate::util::read_guid(&mut r)?;
 
         // title: CString
         let title = {

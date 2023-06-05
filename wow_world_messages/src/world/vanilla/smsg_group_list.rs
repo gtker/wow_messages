@@ -96,7 +96,7 @@ impl crate::Message for SMSG_GROUP_LIST {
         };
 
         // leader: Guid
-        let leader = Guid::read(&mut r)?;
+        let leader = crate::util::read_guid(&mut r)?;
 
         // optional group_not_empty
         let current_size = {
@@ -111,7 +111,7 @@ impl crate::Message for SMSG_GROUP_LIST {
             let loot_setting: GroupLootSetting = crate::util::read_u8_le(&mut r)?.try_into()?;
 
             // master_loot: Guid
-            let master_loot = Guid::read(&mut r)?;
+            let master_loot = crate::util::read_guid(&mut r)?;
 
             // loot_threshold: ItemQuality
             let loot_threshold: ItemQuality = crate::util::read_u8_le(&mut r)?.try_into()?;

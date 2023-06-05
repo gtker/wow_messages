@@ -67,7 +67,7 @@ impl crate::Message for SMSG_QUESTUPDATE_ADD_KILL {
         let required_kill_count = crate::util::read_u32_le(&mut r)?;
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             quest_id,

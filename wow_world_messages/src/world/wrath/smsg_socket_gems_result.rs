@@ -40,7 +40,7 @@ impl crate::Message for SMSG_SOCKET_GEMS_RESULT {
         }
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         // sockets: u32[3]
         let sockets = {

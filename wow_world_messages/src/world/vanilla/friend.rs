@@ -103,7 +103,7 @@ impl Friend {
 impl Friend {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // status: FriendStatus
         let status: FriendStatus = crate::util::read_u8_le(&mut r)?.try_into()?;

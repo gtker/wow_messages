@@ -73,7 +73,7 @@ impl crate::Message for CMSG_USE_ITEM {
         let cast_count = crate::util::read_u8_le(&mut r)?;
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         // targets: SpellCastTargets
         let targets = SpellCastTargets::read(&mut r)?;

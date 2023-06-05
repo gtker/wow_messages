@@ -33,7 +33,7 @@ impl crate::Message for MSG_LIST_STABLED_PETS_Client {
         }
 
         // npc: Guid
-        let npc = Guid::read(&mut r)?;
+        let npc = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             npc,

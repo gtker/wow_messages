@@ -33,7 +33,7 @@ impl crate::Message for SMSG_CLEAR_TARGET {
         }
 
         // target: Guid
-        let target = Guid::read(&mut r)?;
+        let target = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             target,

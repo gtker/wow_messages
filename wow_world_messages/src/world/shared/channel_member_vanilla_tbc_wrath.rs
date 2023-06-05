@@ -31,7 +31,7 @@ impl ChannelMember {
 impl ChannelMember {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // member_flags: ChannelMemberFlags
         let member_flags = ChannelMemberFlags::new(crate::util::read_u8_le(&mut r)?);

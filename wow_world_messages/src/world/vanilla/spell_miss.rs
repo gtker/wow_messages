@@ -31,7 +31,7 @@ impl SpellMiss {
 impl SpellMiss {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // target: Guid
-        let target = Guid::read(&mut r)?;
+        let target = crate::util::read_guid(&mut r)?;
 
         // miss_info: SpellMissInfo
         let miss_info: SpellMissInfo = crate::util::read_u32_le(&mut r)?.try_into()?;

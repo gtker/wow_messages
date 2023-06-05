@@ -25,10 +25,10 @@ impl crate::Message for SMSG_THREAT_REMOVE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // unit: PackedGuid
-        self.unit.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.unit, &mut w)?;
 
         // victim: PackedGuid
-        self.victim.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.victim, &mut w)?;
 
         Ok(())
     }
@@ -38,10 +38,10 @@ impl crate::Message for SMSG_THREAT_REMOVE {
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(&mut r)?;
+        let unit = crate::util::read_packed_guid(&mut r)?;
 
         // victim: PackedGuid
-        let victim = Guid::read_packed(&mut r)?;
+        let victim = crate::util::read_packed_guid(&mut r)?;
 
         Ok(Self {
             unit,
@@ -55,8 +55,8 @@ impl crate::wrath::ServerMessage for SMSG_THREAT_REMOVE {}
 
 impl SMSG_THREAT_REMOVE {
     pub(crate) const fn size(&self) -> usize {
-        self.unit.size() // unit: PackedGuid
-        + self.victim.size() // victim: PackedGuid
+        crate::util::packed_guid_size(&self.unit) // unit: PackedGuid
+        + crate::util::packed_guid_size(&self.victim) // victim: PackedGuid
     }
 }
 

@@ -42,7 +42,7 @@ impl crate::Message for CMSG_SET_CONTACT_NOTES {
         }
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // note: CString
         let note = {

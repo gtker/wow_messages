@@ -37,10 +37,10 @@ impl crate::Message for SMSG_ENCHANTMENTLOG {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // target: PackedGuid
-        self.target.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.target, &mut w)?;
 
         // caster: PackedGuid
-        self.caster.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.caster, &mut w)?;
 
         // item: u32
         w.write_all(&self.item.to_le_bytes())?;
@@ -59,10 +59,10 @@ impl crate::Message for SMSG_ENCHANTMENTLOG {
         }
 
         // target: PackedGuid
-        let target = Guid::read_packed(&mut r)?;
+        let target = crate::util::read_packed_guid(&mut r)?;
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(&mut r)?;
+        let caster = crate::util::read_packed_guid(&mut r)?;
 
         // item: u32
         let item = crate::util::read_u32_le(&mut r)?;
@@ -88,8 +88,8 @@ impl crate::wrath::ServerMessage for SMSG_ENCHANTMENTLOG {}
 
 impl SMSG_ENCHANTMENTLOG {
     pub(crate) const fn size(&self) -> usize {
-        self.target.size() // target: PackedGuid
-        + self.caster.size() // caster: PackedGuid
+        crate::util::packed_guid_size(&self.target) // target: PackedGuid
+        + crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
         + 4 // item: u32
         + 4 // spell: u32
         + 1 // show_affiliation: Bool

@@ -35,10 +35,10 @@ impl AchievementInProgress {
         w.write_all(&self.achievement.to_le_bytes())?;
 
         // counter: PackedGuid
-        self.counter.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.counter, &mut w)?;
 
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.player, &mut w)?;
 
         // timed_criteria_failed: Bool32
         w.write_all(u32::from(self.timed_criteria_failed).to_le_bytes().as_slice())?;
@@ -62,10 +62,10 @@ impl AchievementInProgress {
         let achievement = crate::util::read_u32_le(&mut r)?;
 
         // counter: PackedGuid
-        let counter = Guid::read_packed(&mut r)?;
+        let counter = crate::util::read_packed_guid(&mut r)?;
 
         // player: PackedGuid
-        let player = Guid::read_packed(&mut r)?;
+        let player = crate::util::read_packed_guid(&mut r)?;
 
         // timed_criteria_failed: Bool32
         let timed_criteria_failed = crate::util::read_u32_le(&mut r)? != 0;
@@ -95,8 +95,8 @@ impl AchievementInProgress {
 impl AchievementInProgress {
     pub(crate) const fn size(&self) -> usize {
         4 // achievement: u32
-        + self.counter.size() // counter: PackedGuid
-        + self.player.size() // player: PackedGuid
+        + crate::util::packed_guid_size(&self.counter) // counter: PackedGuid
+        + crate::util::packed_guid_size(&self.player) // player: PackedGuid
         + 4 // timed_criteria_failed: Bool32
         + 4 // progress_date: DateTime
         + 4 // time_since_progress: u32

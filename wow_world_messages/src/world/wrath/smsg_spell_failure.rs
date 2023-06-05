@@ -49,7 +49,7 @@ impl crate::Message for SMSG_SPELL_FAILURE {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // extra_casts: u8
         let extra_casts = crate::util::read_u8_le(&mut r)?;

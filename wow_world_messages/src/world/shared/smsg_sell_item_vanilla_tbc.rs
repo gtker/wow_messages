@@ -44,10 +44,10 @@ impl crate::Message for SMSG_SELL_ITEM {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         // result: SellItemResult
         let result: SellItemResult = crate::util::read_u8_le(&mut r)?.try_into()?;

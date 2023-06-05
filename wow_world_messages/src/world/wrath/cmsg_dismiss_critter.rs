@@ -33,7 +33,7 @@ impl crate::Message for CMSG_DISMISS_CRITTER {
         }
 
         // critter: Guid
-        let critter = Guid::read(&mut r)?;
+        let critter = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             critter,

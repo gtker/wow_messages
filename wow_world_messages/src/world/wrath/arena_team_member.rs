@@ -76,7 +76,7 @@ impl ArenaTeamMember {
 impl ArenaTeamMember {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // online: Bool
         let online = crate::util::read_u8_le(&mut r)? != 0;

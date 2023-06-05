@@ -44,7 +44,7 @@ impl crate::Message for CMSG_CHAR_RENAME {
         }
 
         // character: Guid
-        let character = Guid::read(&mut r)?;
+        let character = crate::util::read_guid(&mut r)?;
 
         // new_name: CString
         let new_name = {

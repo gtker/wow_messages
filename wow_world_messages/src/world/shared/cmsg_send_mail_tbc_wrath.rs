@@ -111,7 +111,7 @@ impl crate::Message for CMSG_SEND_MAIL {
         }
 
         // mailbox: Guid
-        let mailbox = Guid::read(&mut r)?;
+        let mailbox = crate::util::read_guid(&mut r)?;
 
         // receiver: CString
         let receiver = {

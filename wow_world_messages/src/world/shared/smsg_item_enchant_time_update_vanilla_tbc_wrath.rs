@@ -50,7 +50,7 @@ impl crate::Message for SMSG_ITEM_ENCHANT_TIME_UPDATE {
         }
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         // slot: u32
         let slot = crate::util::read_u32_le(&mut r)?;
@@ -59,7 +59,7 @@ impl crate::Message for SMSG_ITEM_ENCHANT_TIME_UPDATE {
         let duration = crate::util::read_u32_le(&mut r)?;
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             item,

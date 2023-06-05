@@ -43,7 +43,7 @@ impl crate::Message for CMSG_GUILD_BANK_QUERY_TAB {
         }
 
         // bank: Guid
-        let bank = Guid::read(&mut r)?;
+        let bank = crate::util::read_guid(&mut r)?;
 
         // tab: u8
         let tab = crate::util::read_u8_le(&mut r)?;

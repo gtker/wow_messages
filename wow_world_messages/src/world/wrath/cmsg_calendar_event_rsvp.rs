@@ -44,10 +44,10 @@ impl crate::Message for CMSG_CALENDAR_EVENT_RSVP {
         }
 
         // event: Guid
-        let event = Guid::read(&mut r)?;
+        let event = crate::util::read_guid(&mut r)?;
 
         // invite_id: Guid
-        let invite_id = Guid::read(&mut r)?;
+        let invite_id = crate::util::read_guid(&mut r)?;
 
         // status: CalendarStatus
         let status: CalendarStatus = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;

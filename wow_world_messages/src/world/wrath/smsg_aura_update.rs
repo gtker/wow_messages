@@ -26,7 +26,7 @@ impl crate::Message for SMSG_AURA_UPDATE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // unit: PackedGuid
-        self.unit.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.unit, &mut w)?;
 
         // aura_update: AuraUpdate
         self.aura_update.write_into_vec(&mut w)?;
@@ -39,7 +39,7 @@ impl crate::Message for SMSG_AURA_UPDATE {
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(&mut r)?;
+        let unit = crate::util::read_packed_guid(&mut r)?;
 
         // aura_update: AuraUpdate
         let aura_update = AuraUpdate::read(&mut r)?;
@@ -56,7 +56,7 @@ impl crate::wrath::ServerMessage for SMSG_AURA_UPDATE {}
 
 impl SMSG_AURA_UPDATE {
     pub(crate) const fn size(&self) -> usize {
-        self.unit.size() // unit: PackedGuid
+        crate::util::packed_guid_size(&self.unit) // unit: PackedGuid
         + self.aura_update.size() // aura_update: AuraUpdate
     }
 }

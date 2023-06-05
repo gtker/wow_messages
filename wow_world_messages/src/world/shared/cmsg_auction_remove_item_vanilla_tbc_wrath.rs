@@ -38,7 +38,7 @@ impl crate::Message for CMSG_AUCTION_REMOVE_ITEM {
         }
 
         // auctioneer: Guid
-        let auctioneer = Guid::read(&mut r)?;
+        let auctioneer = crate::util::read_guid(&mut r)?;
 
         // auction_id: u32
         let auction_id = crate::util::read_u32_le(&mut r)?;

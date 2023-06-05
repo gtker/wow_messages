@@ -25,7 +25,7 @@ impl crate::Message for SMSG_PLAYER_VEHICLE_DATA {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // target: PackedGuid
-        self.target.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.target, &mut w)?;
 
         // vehicle_id: u32
         w.write_all(&self.vehicle_id.to_le_bytes())?;
@@ -38,7 +38,7 @@ impl crate::Message for SMSG_PLAYER_VEHICLE_DATA {
         }
 
         // target: PackedGuid
-        let target = Guid::read_packed(&mut r)?;
+        let target = crate::util::read_packed_guid(&mut r)?;
 
         // vehicle_id: u32
         let vehicle_id = crate::util::read_u32_le(&mut r)?;
@@ -55,7 +55,7 @@ impl crate::wrath::ServerMessage for SMSG_PLAYER_VEHICLE_DATA {}
 
 impl SMSG_PLAYER_VEHICLE_DATA {
     pub(crate) const fn size(&self) -> usize {
-        self.target.size() // target: PackedGuid
+        crate::util::packed_guid_size(&self.target) // target: PackedGuid
         + 4 // vehicle_id: u32
     }
 }

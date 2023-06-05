@@ -38,7 +38,7 @@ impl CompressedMove {
         w.write_all(&(self.opcode.as_int().to_le_bytes()))?;
 
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         match &self.opcode {
             CompressedMove_CompressedMoveOpcode::SmsgMonsterMove {
@@ -53,7 +53,7 @@ impl CompressedMove {
                 transport,
             } => {
                 // transport: PackedGuid
-                transport.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&transport, &mut w)?;
 
                 // monster_move_transport: MonsterMove
                 monster_move_transport.write_into_vec(&mut w)?;
@@ -83,7 +83,7 @@ impl CompressedMove {
         let opcode: CompressedMoveOpcode = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         let opcode_if = match opcode {
             CompressedMoveOpcode::SmsgMonsterMove => {
@@ -96,7 +96,7 @@ impl CompressedMove {
             }
             CompressedMoveOpcode::SmsgMonsterMoveTransport => {
                 // transport: PackedGuid
-                let transport = Guid::read_packed(&mut r)?;
+                let transport = crate::util::read_packed_guid(&mut r)?;
 
                 // monster_move_transport: MonsterMove
                 let monster_move_transport = MonsterMove::read(&mut r)?;
@@ -131,7 +131,7 @@ impl CompressedMove {
     pub(crate) fn size(&self) -> usize {
         1 // size: u8
         + self.opcode.size() // opcode: CompressedMove_CompressedMoveOpcode
-        + self.guid.size() // guid: PackedGuid
+        + crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
     }
 }
 
@@ -188,7 +188,7 @@ impl CompressedMove_CompressedMoveOpcode {
             } => {
                 2
                 + monster_move_transport.size() // monster_move_transport: MonsterMove
-                + transport.size() // transport: PackedGuid
+                + crate::util::packed_guid_size(&transport) // transport: PackedGuid
             }
             Self::SmsgSplineSetRunSpeed {
                 ..

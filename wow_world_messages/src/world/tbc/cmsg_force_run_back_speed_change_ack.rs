@@ -49,7 +49,7 @@ impl crate::Message for CMSG_FORCE_RUN_BACK_SPEED_CHANGE_ACK {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // movement_counter: u32
         let movement_counter = crate::util::read_u32_le(&mut r)?;

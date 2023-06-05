@@ -28,14 +28,14 @@ pub struct PackedGuidAndGuid {
 impl PackedGuidAndGuid {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // packed: PackedGuid
-        self.packed.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.packed, &mut w)?;
 
         // guid: Guid
         w.write_all(&self.guid.guid().to_le_bytes())?;
 
         // static_packed: PackedGuid[10]
         for i in self.static_packed.iter() {
-            i.write_packed_guid_into_vec(&mut w)?;
+            crate::util::write_packed_guid(i, &mut w)?;
         }
 
         // static_guid: Guid[10]
@@ -51,7 +51,7 @@ impl PackedGuidAndGuid {
 
         // variable_packed: PackedGuid[basic1]
         for i in self.variable_packed.iter() {
-            i.write_packed_guid_into_vec(&mut w)?;
+            crate::util::write_packed_guid(i, &mut w)?;
         }
 
         // variable_guid: Guid[basic2]
@@ -66,16 +66,16 @@ impl PackedGuidAndGuid {
 impl PackedGuidAndGuid {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // packed: PackedGuid
-        let packed = Guid::read_packed(&mut r)?;
+        let packed = crate::util::read_packed_guid(&mut r)?;
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // static_packed: PackedGuid[10]
         let static_packed = {
             let mut static_packed = [Guid::default(); 10];
             for i in static_packed.iter_mut() {
-                *i = Guid::read_packed(&mut r)?;
+                *i = crate::util::read_packed_guid(&mut r)?;
             }
             static_packed
         };
@@ -84,7 +84,7 @@ impl PackedGuidAndGuid {
         let static_guid = {
             let mut static_guid = [Guid::default(); 10];
             for i in static_guid.iter_mut() {
-                *i = Guid::read(&mut r)?;
+                *i = crate::util::read_guid(&mut r)?;
             }
             static_guid
         };
@@ -99,7 +99,7 @@ impl PackedGuidAndGuid {
         let variable_packed = {
             let mut variable_packed = Vec::with_capacity(basic1 as usize);
             for _ in 0..basic1 {
-                variable_packed.push(Guid::read_packed(&mut r)?);
+                variable_packed.push(crate::util::read_packed_guid(&mut r)?);
             }
             variable_packed
         };
@@ -108,7 +108,7 @@ impl PackedGuidAndGuid {
         let variable_guid = {
             let mut variable_guid = Vec::with_capacity(basic2 as usize);
             for _ in 0..basic2 {
-                variable_guid.push(Guid::read(&mut r)?);
+                variable_guid.push(crate::util::read_guid(&mut r)?);
             }
             variable_guid
         };
@@ -127,13 +127,13 @@ impl PackedGuidAndGuid {
 
 impl PackedGuidAndGuid {
     pub(crate) fn size(&self) -> usize {
-        self.packed.size() // packed: PackedGuid
+        crate::util::packed_guid_size(&self.packed) // packed: PackedGuid
         + 8 // guid: Guid
-        + self.static_packed.iter().fold(0, |acc, x| acc + x.size()) // static_packed: PackedGuid[10]
+        + self.static_packed.iter().fold(0, |acc, x| acc + crate::util::packed_guid_size(x)) // static_packed: PackedGuid[10]
         + self.static_guid.len() *  8 // static_guid: Guid[10]
         + 1 // basic1: u8
         + 1 // basic2: u8
-        + self.variable_packed.iter().fold(0, |acc, x| acc + x.size()) // variable_packed: PackedGuid[basic1]
+        + self.variable_packed.iter().fold(0, |acc, x| acc + crate::util::packed_guid_size(x)) // variable_packed: PackedGuid[basic1]
         + self.variable_guid.len() *  8 // variable_guid: Guid[basic2]
     }
 }

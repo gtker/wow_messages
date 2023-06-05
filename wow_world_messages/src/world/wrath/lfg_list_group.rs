@@ -65,7 +65,7 @@ impl LfgListGroup {
 impl LfgListGroup {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // group: Guid
-        let group = Guid::read(&mut r)?;
+        let group = crate::util::read_guid(&mut r)?;
 
         // flags: LfgUpdateFlag
         let flags = LfgUpdateFlag::new(crate::util::read_u32_le(&mut r)?);
@@ -102,7 +102,7 @@ impl LfgListGroup {
         };
 
         // instance: Guid
-        let instance = Guid::read(&mut r)?;
+        let instance = crate::util::read_guid(&mut r)?;
 
         // encounter_mask: u32
         let encounter_mask = crate::util::read_u32_le(&mut r)?;

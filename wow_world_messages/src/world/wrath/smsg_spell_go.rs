@@ -63,10 +63,10 @@ impl crate::Message for SMSG_SPELL_GO {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // cast_item: PackedGuid
-        self.cast_item.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.cast_item, &mut w)?;
 
         // caster: PackedGuid
-        self.caster.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.caster, &mut w)?;
 
         // extra_casts: u8
         w.write_all(&self.extra_casts.to_le_bytes())?;
@@ -144,10 +144,10 @@ impl crate::Message for SMSG_SPELL_GO {
         }
 
         // cast_item: PackedGuid
-        let cast_item = Guid::read_packed(&mut r)?;
+        let cast_item = crate::util::read_packed_guid(&mut r)?;
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(&mut r)?;
+        let caster = crate::util::read_packed_guid(&mut r)?;
 
         // extra_casts: u8
         let extra_casts = crate::util::read_u8_le(&mut r)?;
@@ -287,8 +287,8 @@ impl crate::wrath::ServerMessage for SMSG_SPELL_GO {}
 
 impl SMSG_SPELL_GO {
     pub(crate) fn size(&self) -> usize {
-        self.cast_item.size() // cast_item: PackedGuid
-        + self.caster.size() // caster: PackedGuid
+        crate::util::packed_guid_size(&self.cast_item) // cast_item: PackedGuid
+        + crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
         + 1 // extra_casts: u8
         + 4 // spell: u32
         + self.flags.size() // flags: SMSG_SPELL_GO_GameobjectCastFlags

@@ -49,7 +49,7 @@ impl crate::Message for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
         }
 
         // caster: Guid
-        let caster = Guid::read(&mut r)?;
+        let caster = crate::util::read_guid(&mut r)?;
 
         // spell: u32
         let spell = crate::util::read_u32_le(&mut r)?;
@@ -61,7 +61,7 @@ impl crate::Message for SMSG_SPELL_UPDATE_CHAIN_TARGETS {
         let targets = {
             let mut targets = Vec::with_capacity(amount_of_targets as usize);
             for _ in 0..amount_of_targets {
-                targets.push(Guid::read(&mut r)?);
+                targets.push(crate::util::read_guid(&mut r)?);
             }
             targets
         };

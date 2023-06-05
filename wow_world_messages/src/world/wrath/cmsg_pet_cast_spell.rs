@@ -83,7 +83,7 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
                         w.write_all(&opcode.to_le_bytes())?;
 
                         // movement: PackedGuid
-                        movement.write_packed_guid_into_vec(&mut w)?;
+                        crate::util::write_packed_guid(&movement, &mut w)?;
 
                         // info: MovementInfo
                         info.write_into_vec(&mut w)?;
@@ -104,7 +104,7 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // cast_count: u8
         let cast_count = crate::util::read_u8_le(&mut r)?;
@@ -137,7 +137,7 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
                         let opcode = crate::util::read_u32_le(&mut r)?;
 
                         // movement: PackedGuid
-                        let movement = Guid::read_packed(&mut r)?;
+                        let movement = crate::util::read_packed_guid(&mut r)?;
 
                         // info: MovementInfo
                         let info = MovementInfo::read(&mut r)?;
@@ -218,7 +218,7 @@ impl CMSG_PET_CAST_SPELL_ClientMovementData {
             } => {
                 1
                 + info.size() // info: MovementInfo
-                + movement.size() // movement: PackedGuid
+                + crate::util::packed_guid_size(&movement) // movement: PackedGuid
                 + 4 // opcode: u32
             }
             _ => 1,

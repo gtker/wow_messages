@@ -31,7 +31,7 @@ impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // index: u32
         w.write_all(&self.index.to_le_bytes())?;
@@ -63,7 +63,7 @@ impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // index: u32
         let index = crate::util::read_u32_le(&mut r)?;
@@ -84,7 +84,7 @@ impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
         let equipment = {
             let mut equipment = [Guid::default(); 19];
             for i in equipment.iter_mut() {
-                *i = Guid::read(&mut r)?;
+                *i = crate::util::read_guid(&mut r)?;
             }
             equipment
         };
@@ -104,7 +104,7 @@ impl crate::wrath::ClientMessage for CMSG_EQUIPMENT_SET_SAVE {}
 
 impl CMSG_EQUIPMENT_SET_SAVE {
     pub(crate) fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + 4 // index: u32
         + self.name.len() + 1 // name: CString
         + self.icon_name.len() + 1 // icon_name: CString

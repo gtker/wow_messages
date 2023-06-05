@@ -49,10 +49,10 @@ impl crate::Message for SMSG_SPELLDAMAGESHIELD {
         }
 
         // victim: Guid
-        let victim = Guid::read(&mut r)?;
+        let victim = crate::util::read_guid(&mut r)?;
 
         // caster: Guid
-        let caster = Guid::read(&mut r)?;
+        let caster = crate::util::read_guid(&mut r)?;
 
         // damage: u32
         let damage = crate::util::read_u32_le(&mut r)?;

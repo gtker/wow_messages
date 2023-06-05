@@ -58,7 +58,7 @@ impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Client {
         }
 
         // vendor: Guid
-        let vendor = Guid::read(&mut r)?;
+        let vendor = crate::util::read_guid(&mut r)?;
 
         // emblem_style: u32
         let emblem_style = crate::util::read_u32_le(&mut r)?;

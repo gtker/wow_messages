@@ -65,7 +65,7 @@ impl GuildLogEvent {
         let event: GuildEvent = crate::util::read_u8_le(&mut r)?.try_into()?;
 
         // player1: Guid
-        let player1 = Guid::read(&mut r)?;
+        let player1 = crate::util::read_guid(&mut r)?;
 
         let event_if = match event {
             GuildEvent::Promotion => GuildLogEvent_GuildEvent::Promotion,
@@ -73,7 +73,7 @@ impl GuildLogEvent {
             GuildEvent::Motd => GuildLogEvent_GuildEvent::Motd,
             GuildEvent::Joined => {
                 // player2: Guid
-                let player2 = Guid::read(&mut r)?;
+                let player2 = crate::util::read_guid(&mut r)?;
 
                 GuildLogEvent_GuildEvent::Joined {
                     player2,
@@ -81,7 +81,7 @@ impl GuildLogEvent {
             }
             GuildEvent::Left => {
                 // player2: Guid
-                let player2 = Guid::read(&mut r)?;
+                let player2 = crate::util::read_guid(&mut r)?;
 
                 GuildLogEvent_GuildEvent::Left {
                     player2,

@@ -403,10 +403,10 @@ impl crate::Message for SMSG_MESSAGECHAT {
         let chat_type_if = match chat_type {
             ChatType::Say => {
                 // speech_bubble_credit: Guid
-                let speech_bubble_credit = Guid::read(&mut r)?;
+                let speech_bubble_credit = crate::util::read_guid(&mut r)?;
 
                 // chat_credit: Guid
-                let chat_credit = Guid::read(&mut r)?;
+                let chat_credit = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Say {
                     chat_credit,
@@ -415,10 +415,10 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Party => {
                 // speech_bubble_credit: Guid
-                let speech_bubble_credit = Guid::read(&mut r)?;
+                let speech_bubble_credit = crate::util::read_guid(&mut r)?;
 
                 // chat_credit: Guid
-                let chat_credit = Guid::read(&mut r)?;
+                let chat_credit = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Party {
                     chat_credit,
@@ -427,7 +427,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Raid => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Raid {
                     sender2,
@@ -435,7 +435,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Guild => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Guild {
                     sender2,
@@ -443,7 +443,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Officer => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Officer {
                     sender2,
@@ -451,10 +451,10 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Yell => {
                 // speech_bubble_credit: Guid
-                let speech_bubble_credit = Guid::read(&mut r)?;
+                let speech_bubble_credit = crate::util::read_guid(&mut r)?;
 
                 // chat_credit: Guid
-                let chat_credit = Guid::read(&mut r)?;
+                let chat_credit = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Yell {
                     chat_credit,
@@ -463,7 +463,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Whisper => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Whisper {
                     sender2,
@@ -471,7 +471,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::WhisperInform => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::WhisperInform {
                     sender2,
@@ -479,7 +479,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Emote => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Emote {
                     sender2,
@@ -487,7 +487,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::TextEmote => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::TextEmote {
                     sender2,
@@ -495,7 +495,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::System => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::System {
                     sender2,
@@ -503,7 +503,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::MonsterSay => {
                 // sender1: Guid
-                let sender1 = Guid::read(&mut r)?;
+                let sender1 = crate::util::read_guid(&mut r)?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -513,7 +513,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 };
 
                 // target: Guid
-                let target = Guid::read(&mut r)?;
+                let target = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MonsterSay {
                     sender1,
@@ -523,7 +523,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::MonsterYell => {
                 // sender1: Guid
-                let sender1 = Guid::read(&mut r)?;
+                let sender1 = crate::util::read_guid(&mut r)?;
 
                 // sender_name: SizedCString
                 let sender_name = {
@@ -533,7 +533,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 };
 
                 // target: Guid
-                let target = Guid::read(&mut r)?;
+                let target = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MonsterYell {
                     sender1,
@@ -550,7 +550,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 };
 
                 // monster: Guid
-                let monster = Guid::read(&mut r)?;
+                let monster = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MonsterEmote {
                     monster,
@@ -568,7 +568,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 let player_rank = crate::util::read_u32_le(&mut r)?;
 
                 // player: Guid
-                let player = Guid::read(&mut r)?;
+                let player = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Channel {
                     channel_name,
@@ -578,7 +578,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::ChannelJoin => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelJoin {
                     sender2,
@@ -586,7 +586,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::ChannelLeave => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelLeave {
                     sender2,
@@ -594,7 +594,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::ChannelList => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelList {
                     sender2,
@@ -602,7 +602,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::ChannelNotice => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelNotice {
                     sender2,
@@ -610,7 +610,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::ChannelNoticeUser => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelNoticeUser {
                     sender2,
@@ -618,7 +618,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Afk => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Afk {
                     sender2,
@@ -626,7 +626,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Dnd => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Dnd {
                     sender2,
@@ -634,7 +634,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Ignored => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Ignored {
                     sender2,
@@ -642,7 +642,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Skill => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Skill {
                     sender2,
@@ -650,7 +650,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Loot => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Loot {
                     sender2,
@@ -665,7 +665,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 };
 
                 // monster: Guid
-                let monster = Guid::read(&mut r)?;
+                let monster = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::MonsterWhisper {
                     monster,
@@ -674,7 +674,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::BgSystemNeutral => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::BgSystemNeutral {
                     sender2,
@@ -682,7 +682,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::BgSystemAlliance => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::BgSystemAlliance {
                     sender2,
@@ -690,7 +690,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::BgSystemHorde => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::BgSystemHorde {
                     sender2,
@@ -698,7 +698,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::RaidLeader => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::RaidLeader {
                     sender2,
@@ -706,7 +706,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::RaidWarning => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::RaidWarning {
                     sender2,
@@ -714,7 +714,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::RaidBossWhisper => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::RaidBossWhisper {
                     sender2,
@@ -729,7 +729,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 };
 
                 // monster: Guid
-                let monster = Guid::read(&mut r)?;
+                let monster = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::RaidBossEmote {
                     monster,
@@ -738,7 +738,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Battleground => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Battleground {
                     sender2,
@@ -746,7 +746,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::BattlegroundLeader => {
                 // sender2: Guid
-                let sender2 = Guid::read(&mut r)?;
+                let sender2 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::BattlegroundLeader {
                     sender2,

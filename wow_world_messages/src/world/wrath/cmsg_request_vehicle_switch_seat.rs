@@ -38,7 +38,7 @@ impl crate::Message for CMSG_REQUEST_VEHICLE_SWITCH_SEAT {
         }
 
         // vehicle: Guid
-        let vehicle = Guid::read(&mut r)?;
+        let vehicle = crate::util::read_guid(&mut r)?;
 
         // seat: u8
         let seat = crate::util::read_u8_le(&mut r)?;

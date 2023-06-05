@@ -41,7 +41,7 @@ impl crate::Message for CMSG_NPC_TEXT_QUERY {
         let text_id = crate::util::read_u32_le(&mut r)?;
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             text_id,

@@ -38,7 +38,7 @@ impl crate::Message for SMSG_MOVE_UNSET_FLIGHT {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // counter: u32
         let counter = crate::util::read_u32_le(&mut r)?;

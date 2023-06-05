@@ -29,10 +29,10 @@ impl crate::Message for SMSG_ATTACKSTOP {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // player: PackedGuid
-        self.player.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.player, &mut w)?;
 
         // enemy: PackedGuid
-        self.enemy.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.enemy, &mut w)?;
 
         // unknown1: u32
         w.write_all(&self.unknown1.to_le_bytes())?;
@@ -45,10 +45,10 @@ impl crate::Message for SMSG_ATTACKSTOP {
         }
 
         // player: PackedGuid
-        let player = Guid::read_packed(&mut r)?;
+        let player = crate::util::read_packed_guid(&mut r)?;
 
         // enemy: PackedGuid
-        let enemy = Guid::read_packed(&mut r)?;
+        let enemy = crate::util::read_packed_guid(&mut r)?;
 
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(&mut r)?;
@@ -72,8 +72,8 @@ impl crate::wrath::ServerMessage for SMSG_ATTACKSTOP {}
 
 impl SMSG_ATTACKSTOP {
     pub(crate) const fn size(&self) -> usize {
-        self.player.size() // player: PackedGuid
-        + self.enemy.size() // enemy: PackedGuid
+        crate::util::packed_guid_size(&self.player) // player: PackedGuid
+        + crate::util::packed_guid_size(&self.enemy) // enemy: PackedGuid
         + 4 // unknown1: u32
     }
 }

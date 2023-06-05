@@ -44,7 +44,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE_NOTES_ALERT {
         }
 
         // invite_id: Guid
-        let invite_id = Guid::read(&mut r)?;
+        let invite_id = crate::util::read_guid(&mut r)?;
 
         // text: CString
         let text = {

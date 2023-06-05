@@ -33,7 +33,7 @@ impl crate::Message for CMSG_TURN_IN_PETITION {
         }
 
         // petition: Guid
-        let petition = Guid::read(&mut r)?;
+        let petition = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             petition,

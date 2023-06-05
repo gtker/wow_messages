@@ -73,7 +73,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // character_name: CString
         let character_name = {

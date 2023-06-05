@@ -45,10 +45,10 @@ impl crate::Message for SMSG_DISPEL_FAILED {
         }
 
         // caster: Guid
-        let caster = Guid::read(&mut r)?;
+        let caster = crate::util::read_guid(&mut r)?;
 
         // target: Guid
-        let target = Guid::read(&mut r)?;
+        let target = crate::util::read_guid(&mut r)?;
 
         // spells: u32[-]
         let spells = {

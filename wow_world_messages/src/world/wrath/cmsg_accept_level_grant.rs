@@ -23,7 +23,7 @@ impl crate::Message for CMSG_ACCEPT_LEVEL_GRANT {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         Ok(())
     }
@@ -33,7 +33,7 @@ impl crate::Message for CMSG_ACCEPT_LEVEL_GRANT {
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         Ok(Self {
             guid,
@@ -46,7 +46,7 @@ impl crate::wrath::ClientMessage for CMSG_ACCEPT_LEVEL_GRANT {}
 
 impl CMSG_ACCEPT_LEVEL_GRANT {
     pub(crate) const fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
     }
 }
 

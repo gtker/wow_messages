@@ -49,7 +49,7 @@ impl crate::Message for CMSG_MOVE_SET_CAN_FLY_ACK {
         }
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // counter: u32
         let counter = crate::util::read_u32_le(&mut r)?;

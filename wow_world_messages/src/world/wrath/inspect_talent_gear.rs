@@ -34,7 +34,7 @@ impl InspectTalentGear {
         w.write_all(&self.unknown1.to_le_bytes())?;
 
         // creator: PackedGuid
-        self.creator.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.creator, &mut w)?;
 
         // unknown2: u32
         w.write_all(&self.unknown2.to_le_bytes())?;
@@ -55,7 +55,7 @@ impl InspectTalentGear {
         let unknown1 = crate::util::read_u16_le(&mut r)?;
 
         // creator: PackedGuid
-        let creator = Guid::read_packed(&mut r)?;
+        let creator = crate::util::read_packed_guid(&mut r)?;
 
         // unknown2: u32
         let unknown2 = crate::util::read_u32_le(&mut r)?;
@@ -76,7 +76,7 @@ impl InspectTalentGear {
         4 // item: u32
         + self.enchant_mask.size() // enchant_mask: EnchantMask
         + 2 // unknown1: u16
-        + self.creator.size() // creator: PackedGuid
+        + crate::util::packed_guid_size(&self.creator) // creator: PackedGuid
         + 4 // unknown2: u32
     }
 }

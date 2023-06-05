@@ -24,6 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   variable `auction_house_id` of type `u32` changed to `auction_house` of type `AuctionHouse` enum.
 * BREAKING: Vanilla `UpdatePlayer` methods `VISIBLE_ITEM_*` have been replaced by a single `VISIBLE_ITEM` method.
 
+### Removed
+
+* `write_packed_guid_into_vec`, `size`, `read_packed` methods for `Guid`.
+These were only intended to be used by `wow_world_messages` for reading `Guid`s on the wire and should provide no functionality for users for either `wow_world_messages` or `wow_world_base`.
+
 ## [0.1.0] - 2023-05-20
 
 ### Added

@@ -28,7 +28,7 @@ impl crate::Message for CMSG_MOVE_GRAVITY_ENABLE_ACK {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // unknown: u32
         w.write_all(&self.unknown.to_le_bytes())?;
@@ -44,7 +44,7 @@ impl crate::Message for CMSG_MOVE_GRAVITY_ENABLE_ACK {
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // unknown: u32
         let unknown = crate::util::read_u32_le(&mut r)?;
@@ -65,7 +65,7 @@ impl crate::wrath::ClientMessage for CMSG_MOVE_GRAVITY_ENABLE_ACK {}
 
 impl CMSG_MOVE_GRAVITY_ENABLE_ACK {
     pub(crate) const fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + 4 // unknown: u32
         + self.info.size() // info: MovementInfo
     }

@@ -50,7 +50,7 @@ impl ReceivedMail {
 impl ReceivedMail {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // sender: Guid
-        let sender = Guid::read(&mut r)?;
+        let sender = crate::util::read_guid(&mut r)?;
 
         // auction_house: AuctionHouse
         let auction_house: AuctionHouse = crate::util::read_u32_le(&mut r)?.try_into()?;

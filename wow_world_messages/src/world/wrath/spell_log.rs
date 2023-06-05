@@ -96,7 +96,7 @@ impl SpellLog {
                 target1,
             } => {
                 // target1: PackedGuid
-                target1.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&target1, &mut w)?;
 
                 // amount: u32
                 w.write_all(&amount.to_le_bytes())?;
@@ -112,7 +112,7 @@ impl SpellLog {
                 resurrect_guid,
             } => {
                 // resurrect_guid: PackedGuid
-                resurrect_guid.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&resurrect_guid, &mut w)?;
 
             }
             SpellLog_SpellEffect::AddExtraAttacks {
@@ -120,7 +120,7 @@ impl SpellLog {
                 target4,
             } => {
                 // target4: PackedGuid
-                target4.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&target4, &mut w)?;
 
                 // extra_attacks: u32
                 w.write_all(&extra_attacks.to_le_bytes())?;
@@ -137,28 +137,28 @@ impl SpellLog {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
 
             }
             SpellLog_SpellEffect::OpenLock {
                 lock_target,
             } => {
                 // lock_target: PackedGuid
-                lock_target.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&lock_target, &mut w)?;
 
             }
             SpellLog_SpellEffect::TransDoor {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
 
             }
             SpellLog_SpellEffect::SummonPet {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
 
             }
             SpellLog_SpellEffect::InterruptCast {
@@ -166,7 +166,7 @@ impl SpellLog {
                 target5,
             } => {
                 // target5: PackedGuid
-                target5.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&target5, &mut w)?;
 
                 // interrupted_spell: u32
                 w.write_all(&interrupted_spell.to_le_bytes())?;
@@ -176,63 +176,63 @@ impl SpellLog {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
 
             }
             SpellLog_SpellEffect::CreateHouse {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
 
             }
             SpellLog_SpellEffect::Duel {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
 
             }
             SpellLog_SpellEffect::FeedPet {
                 pet_feed_guid,
             } => {
                 // pet_feed_guid: PackedGuid
-                pet_feed_guid.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&pet_feed_guid, &mut w)?;
 
             }
             SpellLog_SpellEffect::DismissPet {
                 pet_dismiss_guid,
             } => {
                 // pet_dismiss_guid: PackedGuid
-                pet_dismiss_guid.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&pet_dismiss_guid, &mut w)?;
 
             }
             SpellLog_SpellEffect::SummonObjectSlot1 {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
 
             }
             SpellLog_SpellEffect::SummonObjectSlot2 {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
 
             }
             SpellLog_SpellEffect::SummonObjectSlot3 {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
 
             }
             SpellLog_SpellEffect::SummonObjectSlot4 {
                 summon_target,
             } => {
                 // summon_target: PackedGuid
-                summon_target.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&summon_target, &mut w)?;
 
             }
             SpellLog_SpellEffect::DurabilityDamage {
@@ -241,7 +241,7 @@ impl SpellLog {
                 unknown5,
             } => {
                 // target6: PackedGuid
-                target6.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&target6, &mut w)?;
 
                 // item_to_damage: u32
                 w.write_all(&item_to_damage.to_le_bytes())?;
@@ -254,7 +254,7 @@ impl SpellLog {
                 resurrect_guid,
             } => {
                 // resurrect_guid: PackedGuid
-                resurrect_guid.write_packed_guid_into_vec(&mut w)?;
+                crate::util::write_packed_guid(&resurrect_guid, &mut w)?;
 
             }
             _ => {}
@@ -284,7 +284,7 @@ impl SpellLog {
             SpellEffect::EnvironmentalDamage => SpellLog_SpellEffect::EnvironmentalDamage,
             SpellEffect::PowerDrain => {
                 // target1: PackedGuid
-                let target1 = Guid::read_packed(&mut r)?;
+                let target1 = crate::util::read_packed_guid(&mut r)?;
 
                 // amount: u32
                 let amount = crate::util::read_u32_le(&mut r)?;
@@ -313,7 +313,7 @@ impl SpellLog {
             SpellEffect::WeaponDamageNoschool => SpellLog_SpellEffect::WeaponDamageNoschool,
             SpellEffect::Resurrect => {
                 // resurrect_guid: PackedGuid
-                let resurrect_guid = Guid::read_packed(&mut r)?;
+                let resurrect_guid = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::Resurrect {
                     resurrect_guid,
@@ -321,7 +321,7 @@ impl SpellLog {
             }
             SpellEffect::AddExtraAttacks => {
                 // target4: PackedGuid
-                let target4 = Guid::read_packed(&mut r)?;
+                let target4 = crate::util::read_packed_guid(&mut r)?;
 
                 // extra_attacks: u32
                 let extra_attacks = crate::util::read_u32_le(&mut r)?;
@@ -348,7 +348,7 @@ impl SpellLog {
             SpellEffect::PersistentAreaAura => SpellLog_SpellEffect::PersistentAreaAura,
             SpellEffect::Summon => {
                 // summon_target: PackedGuid
-                let summon_target = Guid::read_packed(&mut r)?;
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::Summon {
                     summon_target,
@@ -360,7 +360,7 @@ impl SpellLog {
             SpellEffect::TriggerMissile => SpellLog_SpellEffect::TriggerMissile,
             SpellEffect::OpenLock => {
                 // lock_target: PackedGuid
-                let lock_target = Guid::read_packed(&mut r)?;
+                let lock_target = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::OpenLock {
                     lock_target,
@@ -384,7 +384,7 @@ impl SpellLog {
             SpellEffect::Detect => SpellLog_SpellEffect::Detect,
             SpellEffect::TransDoor => {
                 // summon_target: PackedGuid
-                let summon_target = Guid::read_packed(&mut r)?;
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::TransDoor {
                     summon_target,
@@ -397,7 +397,7 @@ impl SpellLog {
             SpellEffect::Tamecreature => SpellLog_SpellEffect::Tamecreature,
             SpellEffect::SummonPet => {
                 // summon_target: PackedGuid
-                let summon_target = Guid::read_packed(&mut r)?;
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::SummonPet {
                     summon_target,
@@ -416,7 +416,7 @@ impl SpellLog {
             SpellEffect::HealMaxHealth => SpellLog_SpellEffect::HealMaxHealth,
             SpellEffect::InterruptCast => {
                 // target5: PackedGuid
-                let target5 = Guid::read_packed(&mut r)?;
+                let target5 = crate::util::read_packed_guid(&mut r)?;
 
                 // interrupted_spell: u32
                 let interrupted_spell = crate::util::read_u32_le(&mut r)?;
@@ -435,7 +435,7 @@ impl SpellLog {
             SpellEffect::HealMechanical => SpellLog_SpellEffect::HealMechanical,
             SpellEffect::SummonObjectWild => {
                 // summon_target: PackedGuid
-                let summon_target = Guid::read_packed(&mut r)?;
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::SummonObjectWild {
                     summon_target,
@@ -447,7 +447,7 @@ impl SpellLog {
             SpellEffect::AddComboPoints => SpellLog_SpellEffect::AddComboPoints,
             SpellEffect::CreateHouse => {
                 // summon_target: PackedGuid
-                let summon_target = Guid::read_packed(&mut r)?;
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::CreateHouse {
                     summon_target,
@@ -456,7 +456,7 @@ impl SpellLog {
             SpellEffect::BindSight => SpellLog_SpellEffect::BindSight,
             SpellEffect::Duel => {
                 // summon_target: PackedGuid
-                let summon_target = Guid::read_packed(&mut r)?;
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::Duel {
                     summon_target,
@@ -481,7 +481,7 @@ impl SpellLog {
             SpellEffect::Inebriate => SpellLog_SpellEffect::Inebriate,
             SpellEffect::FeedPet => {
                 // pet_feed_guid: PackedGuid
-                let pet_feed_guid = Guid::read_packed(&mut r)?;
+                let pet_feed_guid = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::FeedPet {
                     pet_feed_guid,
@@ -489,7 +489,7 @@ impl SpellLog {
             }
             SpellEffect::DismissPet => {
                 // pet_dismiss_guid: PackedGuid
-                let pet_dismiss_guid = Guid::read_packed(&mut r)?;
+                let pet_dismiss_guid = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::DismissPet {
                     pet_dismiss_guid,
@@ -498,7 +498,7 @@ impl SpellLog {
             SpellEffect::Reputation => SpellLog_SpellEffect::Reputation,
             SpellEffect::SummonObjectSlot1 => {
                 // summon_target: PackedGuid
-                let summon_target = Guid::read_packed(&mut r)?;
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::SummonObjectSlot1 {
                     summon_target,
@@ -506,7 +506,7 @@ impl SpellLog {
             }
             SpellEffect::SummonObjectSlot2 => {
                 // summon_target: PackedGuid
-                let summon_target = Guid::read_packed(&mut r)?;
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::SummonObjectSlot2 {
                     summon_target,
@@ -514,7 +514,7 @@ impl SpellLog {
             }
             SpellEffect::SummonObjectSlot3 => {
                 // summon_target: PackedGuid
-                let summon_target = Guid::read_packed(&mut r)?;
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::SummonObjectSlot3 {
                     summon_target,
@@ -522,7 +522,7 @@ impl SpellLog {
             }
             SpellEffect::SummonObjectSlot4 => {
                 // summon_target: PackedGuid
-                let summon_target = Guid::read_packed(&mut r)?;
+                let summon_target = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::SummonObjectSlot4 {
                     summon_target,
@@ -533,7 +533,7 @@ impl SpellLog {
             SpellEffect::DestroyAllTotems => SpellLog_SpellEffect::DestroyAllTotems,
             SpellEffect::DurabilityDamage => {
                 // target6: PackedGuid
-                let target6 = Guid::read_packed(&mut r)?;
+                let target6 = crate::util::read_packed_guid(&mut r)?;
 
                 // item_to_damage: u32
                 let item_to_damage = crate::util::read_u32_le(&mut r)?;
@@ -550,7 +550,7 @@ impl SpellLog {
             SpellEffect::Unknown112 => SpellLog_SpellEffect::Unknown112,
             SpellEffect::ResurrectNew => {
                 // resurrect_guid: PackedGuid
-                let resurrect_guid = Guid::read_packed(&mut r)?;
+                let resurrect_guid = crate::util::read_packed_guid(&mut r)?;
 
                 SpellLog_SpellEffect::ResurrectNew {
                     resurrect_guid,
@@ -1030,13 +1030,13 @@ impl SpellLog_SpellEffect {
                 + 4 // amount: u32
                 + 4 // multiplier: f32
                 + 4 // power: Power
-                + target1.size() // target1: PackedGuid
+                + crate::util::packed_guid_size(&target1) // target1: PackedGuid
             }
             Self::Resurrect {
                 resurrect_guid,
             } => {
                 4
-                + resurrect_guid.size() // resurrect_guid: PackedGuid
+                + crate::util::packed_guid_size(&resurrect_guid) // resurrect_guid: PackedGuid
             }
             Self::AddExtraAttacks {
                 target4,
@@ -1044,7 +1044,7 @@ impl SpellLog_SpellEffect {
             } => {
                 4
                 + 4 // extra_attacks: u32
-                + target4.size() // target4: PackedGuid
+                + crate::util::packed_guid_size(&target4) // target4: PackedGuid
             }
             Self::CreateItem {
                 ..
@@ -1056,25 +1056,25 @@ impl SpellLog_SpellEffect {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: PackedGuid
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
             }
             Self::OpenLock {
                 lock_target,
             } => {
                 4
-                + lock_target.size() // lock_target: PackedGuid
+                + crate::util::packed_guid_size(&lock_target) // lock_target: PackedGuid
             }
             Self::TransDoor {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: PackedGuid
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
             }
             Self::SummonPet {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: PackedGuid
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
             }
             Self::InterruptCast {
                 target5,
@@ -1082,61 +1082,61 @@ impl SpellLog_SpellEffect {
             } => {
                 4
                 + 4 // interrupted_spell: u32
-                + target5.size() // target5: PackedGuid
+                + crate::util::packed_guid_size(&target5) // target5: PackedGuid
             }
             Self::SummonObjectWild {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: PackedGuid
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
             }
             Self::CreateHouse {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: PackedGuid
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
             }
             Self::Duel {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: PackedGuid
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
             }
             Self::FeedPet {
                 pet_feed_guid,
             } => {
                 4
-                + pet_feed_guid.size() // pet_feed_guid: PackedGuid
+                + crate::util::packed_guid_size(&pet_feed_guid) // pet_feed_guid: PackedGuid
             }
             Self::DismissPet {
                 pet_dismiss_guid,
             } => {
                 4
-                + pet_dismiss_guid.size() // pet_dismiss_guid: PackedGuid
+                + crate::util::packed_guid_size(&pet_dismiss_guid) // pet_dismiss_guid: PackedGuid
             }
             Self::SummonObjectSlot1 {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: PackedGuid
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
             }
             Self::SummonObjectSlot2 {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: PackedGuid
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
             }
             Self::SummonObjectSlot3 {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: PackedGuid
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
             }
             Self::SummonObjectSlot4 {
                 summon_target,
             } => {
                 4
-                + summon_target.size() // summon_target: PackedGuid
+                + crate::util::packed_guid_size(&summon_target) // summon_target: PackedGuid
             }
             Self::DurabilityDamage {
                 target6,
@@ -1144,14 +1144,14 @@ impl SpellLog_SpellEffect {
             } => {
                 4
                 + 4 // item_to_damage: u32
-                + target6.size() // target6: PackedGuid
+                + crate::util::packed_guid_size(&target6) // target6: PackedGuid
                 + 4 // unknown5: u32
             }
             Self::ResurrectNew {
                 resurrect_guid,
             } => {
                 4
-                + resurrect_guid.size() // resurrect_guid: PackedGuid
+                + crate::util::packed_guid_size(&resurrect_guid) // resurrect_guid: PackedGuid
             }
             _ => 4,
         }

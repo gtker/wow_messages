@@ -38,7 +38,7 @@ impl crate::Message for SMSG_PET_UNLEARN_CONFIRM {
         }
 
         // pet: Guid
-        let pet = Guid::read(&mut r)?;
+        let pet = crate::util::read_guid(&mut r)?;
 
         // talent_reset_cost: u32
         let talent_reset_cost = crate::util::read_u32_le(&mut r)?;

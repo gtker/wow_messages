@@ -28,7 +28,7 @@ impl crate::Message for SMSG_FLIGHT_SPLINE_SYNC {
         w.write_all(&self.elapsed_value.to_le_bytes())?;
 
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         Ok(())
     }
@@ -41,7 +41,7 @@ impl crate::Message for SMSG_FLIGHT_SPLINE_SYNC {
         let elapsed_value = crate::util::read_f32_le(&mut r)?;
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         Ok(Self {
             elapsed_value,
@@ -56,7 +56,7 @@ impl crate::wrath::ServerMessage for SMSG_FLIGHT_SPLINE_SYNC {}
 impl SMSG_FLIGHT_SPLINE_SYNC {
     pub(crate) const fn size(&self) -> usize {
         4 // elapsed_value: f32
-        + self.guid.size() // guid: PackedGuid
+        + crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
     }
 }
 

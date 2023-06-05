@@ -33,7 +33,7 @@ impl crate::Message for CMSG_AUCTION_LIST_PENDING_SALES {
         }
 
         // auctioneer: Guid
-        let auctioneer = Guid::read(&mut r)?;
+        let auctioneer = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             auctioneer,

@@ -1592,10 +1592,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             InventoryResult::Ok => {}
             InventoryResult::CantEquipLevelI => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1603,10 +1603,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CantEquipSkill => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1614,10 +1614,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::ItemDoesntGoToSlot => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1625,10 +1625,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::BagFull => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1636,10 +1636,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::NonemptyBagOverOtherBag => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1647,10 +1647,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CantTradeEquipBags => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1658,10 +1658,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::OnlyAmmoCanGoHere => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1669,10 +1669,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::NoRequiredProficiency => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1680,10 +1680,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::NoEquipmentSlotAvailable => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1691,10 +1691,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::YouCanNeverUseThatItem => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1702,10 +1702,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::YouCanNeverUseThatItem2 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1713,10 +1713,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::NoEquipmentSlotAvailable2 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1724,10 +1724,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CantEquipWithTwohanded => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1735,10 +1735,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CantDualWield => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1746,10 +1746,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::ItemDoesntGoIntoBag => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1757,10 +1757,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::ItemDoesntGoIntoBag2 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1768,10 +1768,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CantCarryMoreOfThis => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1779,10 +1779,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::NoEquipmentSlotAvailable3 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1790,10 +1790,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::ItemCantStack => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1801,10 +1801,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::ItemCantBeEquipped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1812,10 +1812,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::ItemsCantBeSwapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1823,10 +1823,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::SlotIsEmpty => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1834,10 +1834,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::ItemNotFound => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1845,10 +1845,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CantDropSoulbound => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1856,10 +1856,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::OutOfRange => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1867,10 +1867,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::TriedToSplitMoreThanCount => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1878,10 +1878,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CouldntSplitItems => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1889,10 +1889,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::MissingReagent => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1900,10 +1900,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::NotEnoughMoney => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1911,10 +1911,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::NotABag => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1922,10 +1922,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CanOnlyDoWithEmptyBags => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1933,10 +1933,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::DontOwnThatItem => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1944,10 +1944,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CanEquipOnly1Quiver => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1955,10 +1955,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::MustPurchaseThatBagSlot => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1966,10 +1966,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::TooFarAwayFromBank => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1977,10 +1977,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::ItemLocked => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1988,10 +1988,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::YouAreStunned => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -1999,10 +1999,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::YouAreDead => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2010,10 +2010,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CantDoRightNow => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2021,10 +2021,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::IntBagError => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2032,10 +2032,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CanEquipOnly1Bolt => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2043,10 +2043,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CanEquipOnly1Ammopouch => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2054,10 +2054,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::StackableCantBeWrapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2065,10 +2065,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::EquippedCantBeWrapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2076,10 +2076,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::WrappedCantBeWrapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2087,10 +2087,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::BoundCantBeWrapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2098,10 +2098,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::UniqueCantBeWrapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2109,10 +2109,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::BagsCantBeWrapped => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2120,10 +2120,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::AlreadyLooted => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2131,10 +2131,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::InventoryFull => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2142,10 +2142,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::BankFull => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2153,10 +2153,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::ItemIsCurrentlySoldOut => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2164,10 +2164,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::BagFull3 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2175,10 +2175,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::ItemNotFound2 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2186,10 +2186,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::ItemCantStack2 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2197,10 +2197,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::BagFull4 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2208,10 +2208,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::ItemSoldOut => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2219,10 +2219,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::ObjectIsBusy => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2230,10 +2230,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::None => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2241,10 +2241,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::NotInCombat => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2252,10 +2252,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::NotWhileDisarmed => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2263,10 +2263,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::BagFull6 => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2274,10 +2274,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CantEquipRank => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2285,10 +2285,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::CantEquipReputation => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2296,10 +2296,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::TooManySpecialBags => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;
@@ -2307,10 +2307,10 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
             }
             InventoryResult::LootCantLootThatNow => {
                 // item1: Guid
-                result_if_item1 = Guid::read(&mut r)?;
+                result_if_item1 = crate::util::read_guid(&mut r)?;
 
                 // item2: Guid
-                result_if_item2 = Guid::read(&mut r)?;
+                result_if_item2 = crate::util::read_guid(&mut r)?;
 
                 // bag_type_subclass: u8
                 result_if_bag_type_subclass = crate::util::read_u8_le(&mut r)?;

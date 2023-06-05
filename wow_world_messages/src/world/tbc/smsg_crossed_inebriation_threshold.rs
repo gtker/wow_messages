@@ -43,7 +43,7 @@ impl crate::Message for SMSG_CROSSED_INEBRIATION_THRESHOLD {
         }
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // state: u32
         let state = crate::util::read_u32_le(&mut r)?;

@@ -114,7 +114,7 @@ impl MovementBlock {
 
                     if let Some(if_statement) = &flags.on_transport {
                         // transport_guid: PackedGuid
-                        if_statement.transport_guid.write_packed_guid_into_vec(&mut w)?;
+                        crate::util::write_packed_guid(&if_statement.transport_guid, &mut w)?;
 
                         // transport_position: Vector3d
                         if_statement.transport_position.write_into_vec(&mut w)?;
@@ -253,7 +253,7 @@ impl MovementBlock {
 
         if let Some(if_statement) = &self.update_flag.melee_attacking {
             // guid: PackedGuid
-            if_statement.guid.write_packed_guid_into_vec(&mut w)?;
+            crate::util::write_packed_guid(&if_statement.guid, &mut w)?;
 
         }
 
@@ -287,7 +287,7 @@ impl MovementBlock {
 
             let flags_on_transport = if flags.is_on_transport() {
                 // transport_guid: PackedGuid
-                let transport_guid = Guid::read_packed(&mut r)?;
+                let transport_guid = crate::util::read_packed_guid(&mut r)?;
 
                 // transport_position: Vector3d
                 let transport_position = Vector3d::read(&mut r)?;
@@ -513,7 +513,7 @@ impl MovementBlock {
 
         let update_flag_melee_attacking = if update_flag.is_melee_attacking() {
             // guid: PackedGuid
-            let guid = Guid::read_packed(&mut r)?;
+            let guid = crate::util::read_packed_guid(&mut r)?;
 
             Some(MovementBlock_UpdateFlag_MeleeAttacking {
                 guid,
@@ -2097,7 +2097,7 @@ pub struct MovementBlock_MovementFlags_OnTransport {
 
 impl MovementBlock_MovementFlags_OnTransport {
     pub(crate) const fn size(&self) -> usize {
-        self.transport_guid.size() // transport_guid: PackedGuid
+        crate::util::packed_guid_size(&self.transport_guid) // transport_guid: PackedGuid
         + 4 // transport_orientation: f32
         + 12 // transport_position: Vector3d
     }
@@ -2504,7 +2504,7 @@ pub struct MovementBlock_UpdateFlag_MeleeAttacking {
 
 impl MovementBlock_UpdateFlag_MeleeAttacking {
     pub(crate) const fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
     }
 }
 

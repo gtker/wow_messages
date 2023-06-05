@@ -44,7 +44,7 @@ impl crate::Message for CMSG_MOVE_KNOCK_BACK_ACK {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // counter: u32
         let counter = crate::util::read_u32_le(&mut r)?;

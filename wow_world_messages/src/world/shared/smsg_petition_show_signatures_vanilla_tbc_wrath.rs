@@ -55,10 +55,10 @@ impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
         }
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         // owner: Guid
-        let owner = Guid::read(&mut r)?;
+        let owner = crate::util::read_guid(&mut r)?;
 
         // petition: u32
         let petition = crate::util::read_u32_le(&mut r)?;

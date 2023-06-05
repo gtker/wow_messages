@@ -38,7 +38,7 @@ impl crate::Message for CMSG_CALENDAR_EVENT_SIGNUP {
         }
 
         // event_id: Guid
-        let event_id = Guid::read(&mut r)?;
+        let event_id = crate::util::read_guid(&mut r)?;
 
         // tentative: Bool
         let tentative = crate::util::read_u8_le(&mut r)? != 0;

@@ -27,7 +27,7 @@ impl crate::Message for MSG_CHANNEL_START_Server {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // caster: PackedGuid
-        self.caster.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.caster, &mut w)?;
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
@@ -43,7 +43,7 @@ impl crate::Message for MSG_CHANNEL_START_Server {
         }
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(&mut r)?;
+        let caster = crate::util::read_packed_guid(&mut r)?;
 
         // spell: u32
         let spell = crate::util::read_u32_le(&mut r)?;
@@ -67,7 +67,7 @@ impl crate::wrath::ServerMessage for MSG_CHANNEL_START_Server {}
 
 impl MSG_CHANNEL_START_Server {
     pub(crate) const fn size(&self) -> usize {
-        self.caster.size() // caster: PackedGuid
+        crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
         + 4 // spell: u32
         + 4 // duration: u32
     }

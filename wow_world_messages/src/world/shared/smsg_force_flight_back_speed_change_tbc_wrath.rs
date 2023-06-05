@@ -30,7 +30,7 @@ impl crate::Message for SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // move_event: u32
         w.write_all(&self.move_event.to_le_bytes())?;
@@ -46,7 +46,7 @@ impl crate::Message for SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE {
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // move_event: u32
         let move_event = crate::util::read_u32_le(&mut r)?;
@@ -70,7 +70,7 @@ impl crate::wrath::ServerMessage for SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE {}
 
 impl SMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE {
     pub(crate) const fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + 4 // move_event: u32
         + 4 // speed: f32
     }

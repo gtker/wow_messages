@@ -28,7 +28,7 @@ impl MiniMoveMessage {
         w.write_all(&(self.opcode.as_int().to_le_bytes()))?;
 
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // movement_counter: u32
         w.write_all(&self.movement_counter.to_le_bytes())?;
@@ -47,7 +47,7 @@ impl MiniMoveMessage {
         let opcode: MiniMoveOpcode = crate::util::read_u16_le(&mut r)?.try_into()?;
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // movement_counter: u32
         let movement_counter = crate::util::read_u32_le(&mut r)?;
@@ -65,7 +65,7 @@ impl MiniMoveMessage {
     pub(crate) const fn size(&self) -> usize {
         1 // size: u8
         + 2 // opcode: MiniMoveOpcode
-        + self.guid.size() // guid: PackedGuid
+        + crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + 4 // movement_counter: u32
     }
 }

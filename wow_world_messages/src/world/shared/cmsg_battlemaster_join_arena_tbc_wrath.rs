@@ -49,7 +49,7 @@ impl crate::Message for CMSG_BATTLEMASTER_JOIN_ARENA {
         }
 
         // battlemaster: Guid
-        let battlemaster = Guid::read(&mut r)?;
+        let battlemaster = crate::util::read_guid(&mut r)?;
 
         // arena_type: JoinArenaType
         let arena_type: JoinArenaType = crate::util::read_u8_le(&mut r)?.try_into()?;

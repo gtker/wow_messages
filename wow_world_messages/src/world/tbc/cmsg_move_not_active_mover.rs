@@ -39,7 +39,7 @@ impl crate::Message for CMSG_MOVE_NOT_ACTIVE_MOVER {
         }
 
         // old_mover: Guid
-        let old_mover = Guid::read(&mut r)?;
+        let old_mover = crate::util::read_guid(&mut r)?;
 
         // info: MovementInfo
         let info = MovementInfo::read(&mut r)?;

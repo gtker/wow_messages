@@ -38,7 +38,7 @@ impl crate::Message for CMSG_STABLE_SWAP_PET {
         }
 
         // npc: Guid
-        let npc = Guid::read(&mut r)?;
+        let npc = crate::util::read_guid(&mut r)?;
 
         // pet_slot: u32
         let pet_slot = crate::util::read_u32_le(&mut r)?;

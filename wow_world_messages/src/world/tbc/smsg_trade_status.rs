@@ -94,7 +94,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
             TradeStatus::Busy => SMSG_TRADE_STATUS_TradeStatus::Busy,
             TradeStatus::BeginTrade => {
                 // unknown1: Guid
-                let unknown1 = Guid::read(&mut r)?;
+                let unknown1 = crate::util::read_guid(&mut r)?;
 
                 SMSG_TRADE_STATUS_TradeStatus::BeginTrade {
                     unknown1,

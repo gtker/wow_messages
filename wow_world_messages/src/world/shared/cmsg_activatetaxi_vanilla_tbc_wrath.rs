@@ -43,7 +43,7 @@ impl crate::Message for CMSG_ACTIVATETAXI {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // source_node: u32
         let source_node = crate::util::read_u32_le(&mut r)?;

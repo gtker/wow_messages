@@ -33,7 +33,7 @@ impl crate::Message for CMSG_CALENDAR_GET_EVENT {
         }
 
         // event: Guid
-        let event = Guid::read(&mut r)?;
+        let event = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             event,

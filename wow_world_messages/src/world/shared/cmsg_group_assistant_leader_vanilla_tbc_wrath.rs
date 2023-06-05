@@ -38,7 +38,7 @@ impl crate::Message for CMSG_GROUP_ASSISTANT_LEADER {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // set_assistant: Bool
         let set_assistant = crate::util::read_u8_le(&mut r)? != 0;

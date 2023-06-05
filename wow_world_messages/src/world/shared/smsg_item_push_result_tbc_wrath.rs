@@ -92,7 +92,7 @@ impl crate::Message for SMSG_ITEM_PUSH_RESULT {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // source: NewItemSource
         let source: NewItemSource = crate::util::read_u32_le(&mut r)?.try_into()?;

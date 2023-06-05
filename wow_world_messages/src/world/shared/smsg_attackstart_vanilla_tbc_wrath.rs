@@ -38,10 +38,10 @@ impl crate::Message for SMSG_ATTACKSTART {
         }
 
         // attacker: Guid
-        let attacker = Guid::read(&mut r)?;
+        let attacker = crate::util::read_guid(&mut r)?;
 
         // victim: Guid
-        let victim = Guid::read(&mut r)?;
+        let victim = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             attacker,

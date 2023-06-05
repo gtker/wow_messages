@@ -58,7 +58,7 @@ impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // amount_of_honor: u8
         let amount_of_honor = crate::util::read_u8_le(&mut r)?;

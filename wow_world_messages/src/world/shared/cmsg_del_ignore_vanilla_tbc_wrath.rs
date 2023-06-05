@@ -33,7 +33,7 @@ impl crate::Message for CMSG_DEL_IGNORE {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             guid,

@@ -33,7 +33,7 @@ impl crate::Message for CMSG_SPELLCLICK {
         }
 
         // target: Guid
-        let target = Guid::read(&mut r)?;
+        let target = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             target,

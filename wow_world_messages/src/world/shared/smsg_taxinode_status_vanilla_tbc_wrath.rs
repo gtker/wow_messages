@@ -38,7 +38,7 @@ impl crate::Message for SMSG_TAXINODE_STATUS {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // taxi_mask_node_known: Bool
         let taxi_mask_node_known = crate::util::read_u8_le(&mut r)? != 0;

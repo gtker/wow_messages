@@ -62,7 +62,7 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
         let query_if = match query {
             ItemTextQuery::HasText => {
                 // item: Guid
-                let item = Guid::read(&mut r)?;
+                let item = crate::util::read_guid(&mut r)?;
 
                 // text: CString
                 let text = {

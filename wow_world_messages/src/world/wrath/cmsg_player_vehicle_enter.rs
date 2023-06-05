@@ -33,7 +33,7 @@ impl crate::Message for CMSG_PLAYER_VEHICLE_ENTER {
         }
 
         // vehicle: Guid
-        let vehicle = Guid::read(&mut r)?;
+        let vehicle = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             vehicle,

@@ -44,7 +44,7 @@ impl crate::Message for CMSG_LOOT_ROLL {
         }
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         // item_slot: u32
         let item_slot = crate::util::read_u32_le(&mut r)?;

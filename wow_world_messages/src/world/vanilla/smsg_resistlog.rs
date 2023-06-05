@@ -66,10 +66,10 @@ impl crate::Message for SMSG_RESISTLOG {
         }
 
         // guid1: Guid
-        let guid1 = Guid::read(&mut r)?;
+        let guid1 = crate::util::read_guid(&mut r)?;
 
         // guid2: Guid
-        let guid2 = Guid::read(&mut r)?;
+        let guid2 = crate::util::read_guid(&mut r)?;
 
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(&mut r)?;

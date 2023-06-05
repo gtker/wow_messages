@@ -163,7 +163,7 @@ impl Mail {
         let message_type_if = match message_type {
             MailType::Normal => {
                 // sender: Guid
-                let sender = Guid::read(&mut r)?;
+                let sender = crate::util::read_guid(&mut r)?;
 
                 Mail_MailType::Normal {
                     sender,

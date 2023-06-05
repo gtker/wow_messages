@@ -38,7 +38,7 @@ impl crate::Message for SMSG_ITEM_TIME_UPDATE {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // duration: u32
         let duration = crate::util::read_u32_le(&mut r)?;

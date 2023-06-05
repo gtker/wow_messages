@@ -23,7 +23,7 @@ impl crate::Message for CMSG_DELETEEQUIPMENT_SET {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // set: PackedGuid
-        self.set.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.set, &mut w)?;
 
         Ok(())
     }
@@ -33,7 +33,7 @@ impl crate::Message for CMSG_DELETEEQUIPMENT_SET {
         }
 
         // set: PackedGuid
-        let set = Guid::read_packed(&mut r)?;
+        let set = crate::util::read_packed_guid(&mut r)?;
 
         Ok(Self {
             set,
@@ -46,7 +46,7 @@ impl crate::wrath::ClientMessage for CMSG_DELETEEQUIPMENT_SET {}
 
 impl CMSG_DELETEEQUIPMENT_SET {
     pub(crate) const fn size(&self) -> usize {
-        self.set.size() // set: PackedGuid
+        crate::util::packed_guid_size(&self.set) // set: PackedGuid
     }
 }
 

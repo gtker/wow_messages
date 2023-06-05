@@ -33,7 +33,7 @@ impl crate::Message for CMSG_REPORT_PVP_AFK {
         }
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             player,

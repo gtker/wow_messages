@@ -30,7 +30,7 @@ impl crate::Message for CMSG_FORCE_TURN_RATE_CHANGE_ACK {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // counter: u32
         w.write_all(&self.counter.to_le_bytes())?;
@@ -49,7 +49,7 @@ impl crate::Message for CMSG_FORCE_TURN_RATE_CHANGE_ACK {
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // counter: u32
         let counter = crate::util::read_u32_le(&mut r)?;
@@ -74,7 +74,7 @@ impl crate::wrath::ClientMessage for CMSG_FORCE_TURN_RATE_CHANGE_ACK {}
 
 impl CMSG_FORCE_TURN_RATE_CHANGE_ACK {
     pub(crate) const fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + 4 // counter: u32
         + self.info.size() // info: MovementInfo
         + 4 // new_speed: f32

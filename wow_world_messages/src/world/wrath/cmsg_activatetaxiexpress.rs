@@ -44,7 +44,7 @@ impl crate::Message for CMSG_ACTIVATETAXIEXPRESS {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // node_count: u32
         let node_count = crate::util::read_u32_le(&mut r)?;

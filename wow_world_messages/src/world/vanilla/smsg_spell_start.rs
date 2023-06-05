@@ -42,10 +42,10 @@ impl crate::Message for SMSG_SPELL_START {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // cast_item: PackedGuid
-        self.cast_item.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.cast_item, &mut w)?;
 
         // caster: PackedGuid
-        self.caster.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.caster, &mut w)?;
 
         // spell: u32
         w.write_all(&self.spell.to_le_bytes())?;
@@ -76,10 +76,10 @@ impl crate::Message for SMSG_SPELL_START {
         }
 
         // cast_item: PackedGuid
-        let cast_item = Guid::read_packed(&mut r)?;
+        let cast_item = crate::util::read_packed_guid(&mut r)?;
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(&mut r)?;
+        let caster = crate::util::read_packed_guid(&mut r)?;
 
         // spell: u32
         let spell = crate::util::read_u32_le(&mut r)?;
@@ -130,8 +130,8 @@ impl crate::vanilla::ServerMessage for SMSG_SPELL_START {}
 
 impl SMSG_SPELL_START {
     pub(crate) fn size(&self) -> usize {
-        self.cast_item.size() // cast_item: PackedGuid
-        + self.caster.size() // caster: PackedGuid
+        crate::util::packed_guid_size(&self.cast_item) // cast_item: PackedGuid
+        + crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
         + 4 // spell: u32
         + self.flags.size() // flags: SMSG_SPELL_START_CastFlags
         + 4 // timer: u32

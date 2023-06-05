@@ -52,7 +52,7 @@ impl SendCalendarEvent {
         w.write_all(&self.dungeon_id.to_le_bytes())?;
 
         // creator: PackedGuid
-        self.creator.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.creator, &mut w)?;
 
         Ok(())
     }
@@ -61,7 +61,7 @@ impl SendCalendarEvent {
 impl SendCalendarEvent {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // event_id: Guid
-        let event_id = Guid::read(&mut r)?;
+        let event_id = crate::util::read_guid(&mut r)?;
 
         // title: CString
         let title = {
@@ -82,7 +82,7 @@ impl SendCalendarEvent {
         let dungeon_id = crate::util::read_u32_le(&mut r)?;
 
         // creator: PackedGuid
-        let creator = Guid::read_packed(&mut r)?;
+        let creator = crate::util::read_packed_guid(&mut r)?;
 
         Ok(Self {
             event_id,
@@ -105,7 +105,7 @@ impl SendCalendarEvent {
         + 4 // event_time: DateTime
         + 4 // flags: u32
         + 4 // dungeon_id: u32
-        + self.creator.size() // creator: PackedGuid
+        + crate::util::packed_guid_size(&self.creator) // creator: PackedGuid
     }
 }
 

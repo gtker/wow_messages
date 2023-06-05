@@ -48,7 +48,7 @@ impl crate::Message for MSG_RAID_READY_CHECK_Server {
         };
         let state_check = if current_size < body_size as usize {
             // guid: Guid
-            let guid = Guid::read(&mut r)?;
+            let guid = crate::util::read_guid(&mut r)?;
 
             // state: u8
             let state = crate::util::read_u8_le(&mut r)?;

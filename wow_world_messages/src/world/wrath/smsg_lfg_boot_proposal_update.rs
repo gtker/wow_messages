@@ -87,7 +87,7 @@ impl crate::Message for SMSG_LFG_BOOT_PROPOSAL_UPDATE {
         let agreed_with_kick = crate::util::read_u8_le(&mut r)? != 0;
 
         // victim: Guid
-        let victim = Guid::read(&mut r)?;
+        let victim = crate::util::read_guid(&mut r)?;
 
         // total_votes: u32
         let total_votes = crate::util::read_u32_le(&mut r)?;

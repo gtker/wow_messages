@@ -31,7 +31,7 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // unit: PackedGuid
-        self.unit.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.unit, &mut w)?;
 
         // slot: u8
         w.write_all(&self.slot.to_le_bytes())?;
@@ -53,7 +53,7 @@ impl crate::Message for SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(&mut r)?;
+        let unit = crate::util::read_packed_guid(&mut r)?;
 
         // slot: u8
         let slot = crate::util::read_u8_le(&mut r)?;
@@ -82,7 +82,7 @@ impl crate::tbc::ServerMessage for SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {}
 
 impl SMSG_SET_EXTRA_AURA_INFO_NEED_UPDATE {
     pub(crate) const fn size(&self) -> usize {
-        self.unit.size() // unit: PackedGuid
+        crate::util::packed_guid_size(&self.unit) // unit: PackedGuid
         + 1 // slot: u8
         + 4 // spell: u32
         + 4 // max_duration: u32

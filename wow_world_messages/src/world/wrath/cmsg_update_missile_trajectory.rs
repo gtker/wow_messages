@@ -59,7 +59,7 @@ impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // spell: u32
         let spell = crate::util::read_u32_le(&mut r)?;

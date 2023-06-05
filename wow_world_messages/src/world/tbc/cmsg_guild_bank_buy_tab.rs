@@ -38,7 +38,7 @@ impl crate::Message for CMSG_GUILD_BANK_BUY_TAB {
         }
 
         // banker: Guid
-        let banker = Guid::read(&mut r)?;
+        let banker = crate::util::read_guid(&mut r)?;
 
         // tab: u8
         let tab = crate::util::read_u8_le(&mut r)?;

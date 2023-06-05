@@ -74,10 +74,10 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         w.write_all(&(self.hit_info.as_int().to_le_bytes()))?;
 
         // attacker: PackedGuid
-        self.attacker.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.attacker, &mut w)?;
 
         // target: PackedGuid
-        self.target.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.target, &mut w)?;
 
         // total_damage: u32
         w.write_all(&self.total_damage.to_le_bytes())?;
@@ -176,10 +176,10 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
         let hit_info = HitInfo::new(crate::util::read_u32_le(&mut r)?);
 
         // attacker: PackedGuid
-        let attacker = Guid::read_packed(&mut r)?;
+        let attacker = crate::util::read_packed_guid(&mut r)?;
 
         // target: PackedGuid
-        let target = Guid::read_packed(&mut r)?;
+        let target = crate::util::read_packed_guid(&mut r)?;
 
         // total_damage: u32
         let total_damage = crate::util::read_u32_le(&mut r)?;
@@ -341,8 +341,8 @@ impl crate::wrath::ServerMessage for SMSG_ATTACKERSTATEUPDATE {}
 impl SMSG_ATTACKERSTATEUPDATE {
     pub(crate) fn size(&self) -> usize {
         self.hit_info.size() // hit_info: SMSG_ATTACKERSTATEUPDATE_HitInfo
-        + self.attacker.size() // attacker: PackedGuid
-        + self.target.size() // target: PackedGuid
+        + crate::util::packed_guid_size(&self.attacker) // attacker: PackedGuid
+        + crate::util::packed_guid_size(&self.target) // target: PackedGuid
         + 4 // total_damage: u32
         + 4 // overkill: u32
         + 1 // amount_of_damages: u8

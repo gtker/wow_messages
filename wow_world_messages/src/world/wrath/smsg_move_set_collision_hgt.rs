@@ -27,7 +27,7 @@ impl crate::Message for SMSG_MOVE_SET_COLLISION_HGT {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // unit: PackedGuid
-        self.unit.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.unit, &mut w)?;
 
         // packet_counter: u32
         w.write_all(&self.packet_counter.to_le_bytes())?;
@@ -43,7 +43,7 @@ impl crate::Message for SMSG_MOVE_SET_COLLISION_HGT {
         }
 
         // unit: PackedGuid
-        let unit = Guid::read_packed(&mut r)?;
+        let unit = crate::util::read_packed_guid(&mut r)?;
 
         // packet_counter: u32
         let packet_counter = crate::util::read_u32_le(&mut r)?;
@@ -64,7 +64,7 @@ impl crate::wrath::ServerMessage for SMSG_MOVE_SET_COLLISION_HGT {}
 
 impl SMSG_MOVE_SET_COLLISION_HGT {
     pub(crate) const fn size(&self) -> usize {
-        self.unit.size() // unit: PackedGuid
+        crate::util::packed_guid_size(&self.unit) // unit: PackedGuid
         + 4 // packet_counter: u32
         + 4 // collision_height: f32
     }

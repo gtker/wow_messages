@@ -25,7 +25,7 @@ impl crate::Message for SMSG_SPLINE_SET_RUN_BACK_SPEED {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // guid: PackedGuid
-        self.guid.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.guid, &mut w)?;
 
         // speed: f32
         w.write_all(&self.speed.to_le_bytes())?;
@@ -38,7 +38,7 @@ impl crate::Message for SMSG_SPLINE_SET_RUN_BACK_SPEED {
         }
 
         // guid: PackedGuid
-        let guid = Guid::read_packed(&mut r)?;
+        let guid = crate::util::read_packed_guid(&mut r)?;
 
         // speed: f32
         let speed = crate::util::read_f32_le(&mut r)?;
@@ -61,7 +61,7 @@ impl crate::wrath::ServerMessage for SMSG_SPLINE_SET_RUN_BACK_SPEED {}
 
 impl SMSG_SPLINE_SET_RUN_BACK_SPEED {
     pub(crate) const fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
         + 4 // speed: f32
     }
 }

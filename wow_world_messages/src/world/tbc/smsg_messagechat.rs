@@ -473,7 +473,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
         let chat_type_if = match chat_type {
             ChatType::System => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::System {
                     target5,
@@ -481,7 +481,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Say => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Say {
                     target5,
@@ -489,7 +489,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Party => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Party {
                     target5,
@@ -497,7 +497,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Raid => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Raid {
                     target5,
@@ -505,7 +505,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Guild => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Guild {
                     target5,
@@ -513,7 +513,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Officer => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Officer {
                     target5,
@@ -521,7 +521,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Yell => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Yell {
                     target5,
@@ -529,7 +529,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Whisper => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Whisper {
                     target5,
@@ -537,7 +537,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::WhisperInform => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::WhisperInform {
                     target5,
@@ -545,7 +545,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Reply => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Reply {
                     target5,
@@ -553,7 +553,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Emote => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Emote {
                     target5,
@@ -561,7 +561,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::TextEmote => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::TextEmote {
                     target5,
@@ -655,7 +655,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 };
 
                 // target4: Guid
-                let target4 = Guid::read(&mut r)?;
+                let target4 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Channel {
                     channel_name,
@@ -664,7 +664,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::ChannelJoin => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelJoin {
                     target5,
@@ -672,7 +672,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::ChannelLeave => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelLeave {
                     target5,
@@ -680,7 +680,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::ChannelList => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelList {
                     target5,
@@ -688,7 +688,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::ChannelNotice => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelNotice {
                     target5,
@@ -696,7 +696,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::ChannelNoticeUser => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::ChannelNoticeUser {
                     target5,
@@ -704,7 +704,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Afk => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Afk {
                     target5,
@@ -712,7 +712,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Dnd => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Dnd {
                     target5,
@@ -720,7 +720,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Ignored => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Ignored {
                     target5,
@@ -728,7 +728,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Skill => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Skill {
                     target5,
@@ -736,7 +736,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Loot => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Loot {
                     target5,
@@ -744,7 +744,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Money => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Money {
                     target5,
@@ -752,7 +752,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Opening => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Opening {
                     target5,
@@ -760,7 +760,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Tradeskills => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Tradeskills {
                     target5,
@@ -768,7 +768,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::PetInfo => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::PetInfo {
                     target5,
@@ -776,7 +776,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::CombatMiscInfo => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::CombatMiscInfo {
                     target5,
@@ -784,7 +784,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::CombatXpGain => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::CombatXpGain {
                     target5,
@@ -792,7 +792,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::CombatHonorGain => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::CombatHonorGain {
                     target5,
@@ -800,7 +800,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::CombatFactionChange => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::CombatFactionChange {
                     target5,
@@ -832,7 +832,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::RaidLeader => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::RaidLeader {
                     target5,
@@ -840,7 +840,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::RaidWarning => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::RaidWarning {
                     target5,
@@ -880,7 +880,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Filtered => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Filtered {
                     target5,
@@ -888,7 +888,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Battleground => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Battleground {
                     target5,
@@ -896,7 +896,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::BattlegroundLeader => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::BattlegroundLeader {
                     target5,
@@ -904,7 +904,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
             }
             ChatType::Restricted => {
                 // target5: Guid
-                let target5 = Guid::read(&mut r)?;
+                let target5 = crate::util::read_guid(&mut r)?;
 
                 SMSG_MESSAGECHAT_ChatType::Restricted {
                     target5,

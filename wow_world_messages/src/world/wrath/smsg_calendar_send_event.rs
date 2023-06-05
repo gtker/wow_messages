@@ -56,7 +56,7 @@ impl crate::Message for SMSG_CALENDAR_SEND_EVENT {
         w.write_all(&self.send_type.to_le_bytes())?;
 
         // creator: PackedGuid
-        self.creator.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.creator, &mut w)?;
 
         // event_id: Guid
         w.write_all(&self.event_id.guid().to_le_bytes())?;
@@ -118,10 +118,10 @@ impl crate::Message for SMSG_CALENDAR_SEND_EVENT {
         let send_type = crate::util::read_u8_le(&mut r)?;
 
         // creator: PackedGuid
-        let creator = Guid::read_packed(&mut r)?;
+        let creator = crate::util::read_packed_guid(&mut r)?;
 
         // event_id: Guid
-        let event_id = Guid::read(&mut r)?;
+        let event_id = crate::util::read_guid(&mut r)?;
 
         // title: CString
         let title = {
@@ -196,7 +196,7 @@ impl crate::wrath::ServerMessage for SMSG_CALENDAR_SEND_EVENT {}
 impl SMSG_CALENDAR_SEND_EVENT {
     pub(crate) fn size(&self) -> usize {
         1 // send_type: u8
-        + self.creator.size() // creator: PackedGuid
+        + crate::util::packed_guid_size(&self.creator) // creator: PackedGuid
         + 8 // event_id: Guid
         + self.title.len() + 1 // title: CString
         + self.description.len() + 1 // description: CString

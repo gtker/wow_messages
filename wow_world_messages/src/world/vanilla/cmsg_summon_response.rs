@@ -33,7 +33,7 @@ impl crate::Message for CMSG_SUMMON_RESPONSE {
         }
 
         // summoner: Guid
-        let summoner = Guid::read(&mut r)?;
+        let summoner = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             summoner,

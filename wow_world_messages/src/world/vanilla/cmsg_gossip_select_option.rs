@@ -53,7 +53,7 @@ impl crate::Message for CMSG_GOSSIP_SELECT_OPTION {
         }
 
         // guid: Guid
-        let guid = Guid::read(&mut r)?;
+        let guid = crate::util::read_guid(&mut r)?;
 
         // gossip_list_id: u32
         let gossip_list_id = crate::util::read_u32_le(&mut r)?;

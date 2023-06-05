@@ -63,7 +63,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
         }
 
         // target: Guid
-        let target = Guid::read(&mut r)?;
+        let target = crate::util::read_guid(&mut r)?;
 
         // total_exp: u32
         let total_exp = crate::util::read_u32_le(&mut r)?;

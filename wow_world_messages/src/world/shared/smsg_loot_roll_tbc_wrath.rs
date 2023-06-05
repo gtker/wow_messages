@@ -83,13 +83,13 @@ impl crate::Message for SMSG_LOOT_ROLL {
         }
 
         // creature: Guid
-        let creature = Guid::read(&mut r)?;
+        let creature = crate::util::read_guid(&mut r)?;
 
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(&mut r)?;
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         // item: u32
         let item = crate::util::read_u32_le(&mut r)?;

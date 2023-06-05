@@ -136,13 +136,13 @@ impl crate::Message for CMSG_PETITION_BUY {
         }
 
         // npc: Guid
-        let npc = Guid::read(&mut r)?;
+        let npc = crate::util::read_guid(&mut r)?;
 
         // unknown1: u32
         let unknown1 = crate::util::read_u32_le(&mut r)?;
 
         // unknown2: Guid
-        let unknown2 = Guid::read(&mut r)?;
+        let unknown2 = crate::util::read_guid(&mut r)?;
 
         // name: CString
         let name = {

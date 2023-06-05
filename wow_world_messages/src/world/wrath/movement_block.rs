@@ -300,7 +300,7 @@ impl MovementBlock {
                     transport_guid,
                 } => {
                     // transport_guid: PackedGuid
-                    transport_guid.write_packed_guid_into_vec(&mut w)?;
+                    crate::util::write_packed_guid(&transport_guid, &mut w)?;
 
                     // position1: Vector3d
                     position1.write_into_vec(&mut w)?;
@@ -340,7 +340,7 @@ impl MovementBlock {
 
         if let Some(if_statement) = &self.update_flag.has_attacking_target {
             // guid: PackedGuid
-            if_statement.guid.write_packed_guid_into_vec(&mut w)?;
+            crate::util::write_packed_guid(&if_statement.guid, &mut w)?;
 
         }
 
@@ -611,7 +611,7 @@ impl MovementBlock {
         }
         else if update_flag.is_position() {
             // transport_guid: PackedGuid
-            let transport_guid = Guid::read_packed(&mut r)?;
+            let transport_guid = crate::util::read_packed_guid(&mut r)?;
 
             // position1: Vector3d
             let position1 = Vector3d::read(&mut r)?;
@@ -671,7 +671,7 @@ impl MovementBlock {
 
         let update_flag_has_attacking_target = if update_flag.is_has_attacking_target() {
             // guid: PackedGuid
-            let guid = Guid::read_packed(&mut r)?;
+            let guid = crate::util::read_packed_guid(&mut r)?;
 
             Some(MovementBlock_UpdateFlag_HasAttackingTarget {
                 guid,
@@ -3056,7 +3056,7 @@ impl MovementBlock_UpdateFlag_Living {
                 4 // corpse_orientation: f32
                 + 4 // orientation1: f32
                 + 12 // position1: Vector3d
-                + transport_guid.size() // transport_guid: PackedGuid
+                + crate::util::packed_guid_size(&transport_guid) // transport_guid: PackedGuid
             }
             Self::HasPosition {
                 ..
@@ -3443,7 +3443,7 @@ pub struct MovementBlock_UpdateFlag_HasAttackingTarget {
 
 impl MovementBlock_UpdateFlag_HasAttackingTarget {
     pub(crate) const fn size(&self) -> usize {
-        self.guid.size() // guid: PackedGuid
+        crate::util::packed_guid_size(&self.guid) // guid: PackedGuid
     }
 }
 

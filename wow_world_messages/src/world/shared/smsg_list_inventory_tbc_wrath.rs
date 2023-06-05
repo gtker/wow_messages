@@ -47,7 +47,7 @@ impl crate::Message for SMSG_LIST_INVENTORY {
         }
 
         // vendor: Guid
-        let vendor = Guid::read(&mut r)?;
+        let vendor = crate::util::read_guid(&mut r)?;
 
         // amount_of_items: u8
         let amount_of_items = crate::util::read_u8_le(&mut r)?;

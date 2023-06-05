@@ -43,10 +43,10 @@ impl crate::Message for CMSG_SELL_ITEM {
         }
 
         // vendor: Guid
-        let vendor = Guid::read(&mut r)?;
+        let vendor = crate::util::read_guid(&mut r)?;
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         // amount: u8
         let amount = crate::util::read_u8_le(&mut r)?;

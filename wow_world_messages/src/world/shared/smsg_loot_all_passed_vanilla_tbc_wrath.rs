@@ -55,7 +55,7 @@ impl crate::Message for SMSG_LOOT_ALL_PASSED {
         }
 
         // looted_target: Guid
-        let looted_target = Guid::read(&mut r)?;
+        let looted_target = crate::util::read_guid(&mut r)?;
 
         // loot_slot: u32
         let loot_slot = crate::util::read_u32_le(&mut r)?;

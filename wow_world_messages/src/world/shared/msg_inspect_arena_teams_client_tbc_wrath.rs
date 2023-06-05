@@ -33,7 +33,7 @@ impl crate::Message for MSG_INSPECT_ARENA_TEAMS_Client {
         }
 
         // player: Guid
-        let player = Guid::read(&mut r)?;
+        let player = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             player,

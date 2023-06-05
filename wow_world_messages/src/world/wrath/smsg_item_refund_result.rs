@@ -73,7 +73,7 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
         }
 
         // item: Guid
-        let item = Guid::read(&mut r)?;
+        let item = crate::util::read_guid(&mut r)?;
 
         // result: ItemRefundResult
         let result: ItemRefundResult = crate::util::read_u8_le(&mut r)?.try_into()?;

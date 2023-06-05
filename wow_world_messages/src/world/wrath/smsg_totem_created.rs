@@ -51,7 +51,7 @@ impl crate::Message for SMSG_TOTEM_CREATED {
         let slot = crate::util::read_u8_le(&mut r)?;
 
         // totem: Guid
-        let totem = Guid::read(&mut r)?;
+        let totem = crate::util::read_guid(&mut r)?;
 
         // duration: u32
         let duration = crate::util::read_u32_le(&mut r)?;

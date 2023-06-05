@@ -31,10 +31,10 @@ impl crate::Message for SMSG_SPELLHEALLOG {
 
     fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // victim: PackedGuid
-        self.victim.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.victim, &mut w)?;
 
         // caster: PackedGuid
-        self.caster.write_packed_guid_into_vec(&mut w)?;
+        crate::util::write_packed_guid(&self.caster, &mut w)?;
 
         // id: u32
         w.write_all(&self.id.to_le_bytes())?;
@@ -53,10 +53,10 @@ impl crate::Message for SMSG_SPELLHEALLOG {
         }
 
         // victim: PackedGuid
-        let victim = Guid::read_packed(&mut r)?;
+        let victim = crate::util::read_packed_guid(&mut r)?;
 
         // caster: PackedGuid
-        let caster = Guid::read_packed(&mut r)?;
+        let caster = crate::util::read_packed_guid(&mut r)?;
 
         // id: u32
         let id = crate::util::read_u32_le(&mut r)?;
@@ -82,8 +82,8 @@ impl crate::vanilla::ServerMessage for SMSG_SPELLHEALLOG {}
 
 impl SMSG_SPELLHEALLOG {
     pub(crate) const fn size(&self) -> usize {
-        self.victim.size() // victim: PackedGuid
-        + self.caster.size() // caster: PackedGuid
+        crate::util::packed_guid_size(&self.victim) // victim: PackedGuid
+        + crate::util::packed_guid_size(&self.caster) // caster: PackedGuid
         + 4 // id: u32
         + 4 // damage: u32
         + 1 // critical: Bool
