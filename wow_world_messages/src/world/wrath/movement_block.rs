@@ -376,7 +376,7 @@ impl MovementBlock {
 
         let update_flag_living = if update_flag.is_living() {
             // flags: MovementFlags
-            let flags: MovementFlags = {
+            let flags = {
                 let a = crate::util::read_u32_le(&mut r)?;
                 let b = crate::util::read_u16_le(&mut r)?;
                 MovementFlags::new((a as u64) | ((b as u64) << 32))

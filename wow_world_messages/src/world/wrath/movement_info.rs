@@ -143,7 +143,7 @@ impl MovementInfo {
 impl MovementInfo {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, std::io::Error> {
         // flags: MovementFlags
-        let flags: MovementFlags = {
+        let flags = {
             let a = crate::util::read_u32_le(&mut r)?;
             let b = crate::util::read_u16_le(&mut r)?;
             MovementFlags::new((a as u64) | ((b as u64) << 32))

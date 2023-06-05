@@ -291,7 +291,7 @@ fn print_read_definition(
             if matches!(e.ty(), &IntegerType::U48) {
                 s.body_closing_with_semicolon(
                     format!(
-                        "{assignment_prefix}{value_set}{name}: {type_name} =",
+                        "{assignment_prefix}{value_set}{name} =",
                         value_set = if d.value().is_some() { "_" } else { "" },
                     ),
                     |s| {
