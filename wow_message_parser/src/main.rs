@@ -32,7 +32,7 @@ use walkdir::WalkDir;
 use parser::types::objects::Objects;
 use rust_printer::print_struct;
 
-use crate::doc_printer::print_docs_summary_and_objects;
+use crate::doc_printer::print_docs;
 use crate::file_utils::create_and_overwrite_if_not_same_contents;
 use crate::file_utils::mod_files::ModFiles;
 use crate::ir_printer::write_intermediate_representation;
@@ -186,7 +186,7 @@ fn print_main_types(o: &Objects) {
     definer_docs.sort_by(|a, b| a.name().cmp(b.name()));
     object_docs.sort_by(|a, b| a.name().cmp(b.name()));
 
-    print_docs_summary_and_objects(&definer_docs, &object_docs);
+    print_docs(&definer_docs, &object_docs);
 
     n.write_modules_and_remove_unwritten_files();
 }

@@ -1,6 +1,8 @@
 pub mod container;
 pub mod definer;
+mod update_mask;
 
+use crate::doc_printer::update_mask::print_update_mask_docs;
 use crate::file_utils::create_and_overwrite_if_not_same_contents;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::{LoginVersion, WorldVersion};
@@ -81,6 +83,66 @@ fn create_or_append_hashmap(s: &str, path: PathBuf, files: &mut HashMap<PathBuf,
     } else {
         files.insert(path, s.to_string());
     }
+}
+
+pub(crate) fn print_docs(definers: &[DocWriter], containers: &[DocWriter]) {
+    print_update_mask_docs();
+
+    print_docs_summary_and_objects(definers, containers);
+}
+
+fn common(s: &mut DocWriter, tags: &ObjectTags) {
+    s.wln(format!("# {}", &s.name));
+    s.newline();
+
+    print_versions(s, tags.logon_versions(), tags.versions());
+
+    print_metadata(s, tags);
+}
+
+fn print_metadata(s: &mut DocWriter, tags: &ObjectTags) {
+    if let Some(description) = tags.description() {
+        s.wln("### Description");
+        s.newline();
+        for l in description.as_doc_lines() {
+            s.wln(l);
+            s.newline();
+        }
+    }
+
+    if let Some(comment) = tags.comment() {
+        s.wln("### Comment");
+        s.newline();
+        for l in comment.as_doc_lines() {
+            s.wln(l);
+            s.newline();
+        }
+    }
+}
+
+fn print_versions(
+    s: &mut DocWriter,
+    login_versions: impl Iterator<Item = LoginVersion>,
+    world_versions: impl Iterator<Item = WorldVersion>,
+) {
+    s.w("## ");
+
+    for (i, l) in login_versions.enumerate() {
+        if i != 0 {
+            s.w(", ");
+        }
+        s.w(format!("Protocol Version {l}"));
+    }
+
+    for (i, l) in world_versions.enumerate() {
+        if i != 0 {
+            s.w(", ");
+        }
+        s.w(format!("Client Version {l}"));
+    }
+
+    s.newline();
+    s.newline();
 }
 
 pub(crate) fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocWriter]) {
@@ -183,58 +245,4 @@ pub(crate) fn print_docs_summary_and_objects(definers: &[DocWriter], containers:
     for (path, s) in &files {
         create_and_overwrite_if_not_same_contents(s, path);
     }
-}
-
-fn common(s: &mut DocWriter, tags: &ObjectTags) {
-    s.wln(format!("# {}", &s.name));
-    s.newline();
-
-    print_versions(s, tags.logon_versions(), tags.versions());
-
-    print_metadata(s, tags);
-}
-
-fn print_metadata(s: &mut DocWriter, tags: &ObjectTags) {
-    if let Some(description) = tags.description() {
-        s.wln("### Description");
-        s.newline();
-        for l in description.as_doc_lines() {
-            s.wln(l);
-            s.newline();
-        }
-    }
-
-    if let Some(comment) = tags.comment() {
-        s.wln("### Comment");
-        s.newline();
-        for l in comment.as_doc_lines() {
-            s.wln(l);
-            s.newline();
-        }
-    }
-}
-
-fn print_versions(
-    s: &mut DocWriter,
-    login_versions: impl Iterator<Item = LoginVersion>,
-    world_versions: impl Iterator<Item = WorldVersion>,
-) {
-    s.w("## ");
-
-    for (i, l) in login_versions.enumerate() {
-        if i != 0 {
-            s.w(", ");
-        }
-        s.w(format!("Protocol Version {l}"));
-    }
-
-    for (i, l) in world_versions.enumerate() {
-        if i != 0 {
-            s.w(", ");
-        }
-        s.w(format!("Client Version {l}"));
-    }
-
-    s.newline();
-    s.newline();
 }
