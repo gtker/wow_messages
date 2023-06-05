@@ -6,18 +6,8 @@ use crate::rust_printer::{
 use std::fs::read_to_string;
 
 fn print_specific_update_mask_doc(fields: &[MemberType], s: &mut Writer) {
-    let update_types = [
-        ("object", UpdateMaskType::Object),
-        ("item", UpdateMaskType::Item),
-        ("container", UpdateMaskType::Container),
-        ("unit", UpdateMaskType::Unit),
-        ("player", UpdateMaskType::Player),
-        ("gameobject", UpdateMaskType::GameObject),
-        ("dynamicobject", UpdateMaskType::DynamicObject),
-        ("corpse", UpdateMaskType::Corpse),
-    ];
-
-    for (name, u) in update_types {
+    for &u in UpdateMaskType::all() {
+        let name = u.as_str();
         s.wln(format!("Fields that all {name}s have:"));
         s.newline();
 

@@ -376,9 +376,22 @@ pub(crate) enum UpdateMaskType {
     Corpse,
 }
 
-impl Display for UpdateMaskType {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        f.write_str(match self {
+impl UpdateMaskType {
+    pub(crate) const fn all() -> &'static [Self] {
+        &[
+            Self::Object,
+            Self::Item,
+            Self::Container,
+            Self::Unit,
+            Self::Player,
+            Self::GameObject,
+            Self::DynamicObject,
+            Self::Corpse,
+        ]
+    }
+
+    pub(crate) const fn as_str(&self) -> &'static str {
+        match self {
             UpdateMaskType::Object => "object",
             UpdateMaskType::Item => "item",
             UpdateMaskType::Unit => "unit",
@@ -387,7 +400,13 @@ impl Display for UpdateMaskType {
             UpdateMaskType::GameObject => "gameobject",
             UpdateMaskType::DynamicObject => "dynamicobject",
             UpdateMaskType::Corpse => "corpse",
-        })
+        }
+    }
+}
+
+impl Display for UpdateMaskType {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        f.write_str(self.as_str())
     }
 }
 
