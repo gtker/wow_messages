@@ -770,26 +770,6 @@ pub(crate) fn impl_read_and_writable_login(
     s.closing_curly_newline(); // impl
 }
 
-pub(crate) fn impl_read_write_opcode(
-    s: &mut Writer,
-    type_name: impl AsRef<str>,
-    error_name: impl AsRef<str>,
-    read_function: impl Fn(&mut Writer, ImplType),
-    write_function: impl Fn(&mut Writer, ImplType),
-    create_async_reads: bool,
-) {
-    impl_read_write_non_trait(
-        s,
-        type_name,
-        error_name,
-        read_function,
-        write_function,
-        "pub(crate)",
-        "pub",
-        create_async_reads,
-    )
-}
-
 pub(crate) fn impl_read_write_non_trait(
     s: &mut Writer,
     type_name: impl AsRef<str>,

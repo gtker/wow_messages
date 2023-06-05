@@ -1,7 +1,7 @@
 use crate::file_utils::{get_import_path, major_version_to_string};
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
-use crate::rust_printer::structs::print_common_impls::impl_read_write_opcode;
+use crate::rust_printer::structs::print_common_impls::impl_read_write_non_trait;
 use crate::rust_printer::{
     ImplType, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO,
     CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
@@ -523,7 +523,7 @@ fn world_movement_info(s: &mut Writer, v: &[&Container]) {
 }
 
 pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
-    impl_read_write_opcode(
+    impl_read_write_non_trait(
         s,
         format!("{ty}OpcodeMessage"),
         EXPECTED_OPCODE_ERROR,
@@ -581,6 +581,8 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
                 }
             });
         },
+        "pub(crate)",
+        "pub",
         true,
     );
 
