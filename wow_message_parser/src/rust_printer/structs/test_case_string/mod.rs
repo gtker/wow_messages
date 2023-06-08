@@ -74,19 +74,24 @@ fn print_inner_function(s: &mut Writer, e: &Container) {
                 .join(" ")
         };
 
-        wln(s, &format!("    login_versions = \\\"{versions}\\\";"));
+        wlna(
+            s,
+            &"    login_versions = \\\"{}\\\";",
+            format!("std::env::var(\"WOWM_TEST_CASE_LOGIN_VERSION\").unwrap_or(\"{versions}\".to_string())"),
+        );
     } else {
-        let versions = if let Ok(versions) = std::env::var("WOWM_TEST_CASE_WORLD_VERSION") {
-            versions
-        } else {
-            e.tags()
-                .versions()
-                .map(|a| a.to_string())
-                .collect::<Vec<_>>()
-                .join(" ")
-        };
+        let versions = e
+            .tags()
+            .versions()
+            .map(|a| a.to_string())
+            .collect::<Vec<_>>()
+            .join(" ");
 
-        wln(s, &format!("    versions = \\\"{versions}\\\";"));
+        wlna(
+            s,
+            &"    versions = \\\"{}\\\";",
+            format!("std::env::var(\"WOWM_TEST_CASE_WORLD_VERSION\").unwrap_or(\"{versions}\".to_string())"),
+        );
     }
     wln(s, "}}\\n");
     s.newline();

@@ -43,7 +43,7 @@ impl CMSG_GUILD_BANK_BUY_TAB {
 
 
         writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"2.4.3\";").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("2.4.3".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)

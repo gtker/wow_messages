@@ -35,7 +35,7 @@ impl CMSG_BOOTME {
 
 
         writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"0.5 0.6 0.7 0.8 0.9 0.10 0.11 0.12 1 2 3\";").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("0.5 0.6 0.7 0.8 0.9 0.10 0.11 0.12 1 2 3".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)

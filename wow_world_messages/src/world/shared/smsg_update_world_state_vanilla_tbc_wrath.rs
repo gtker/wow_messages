@@ -48,7 +48,7 @@ impl SMSG_UPDATE_WORLD_STATE {
 
 
         writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1.12 2 3.3.5\";").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12 2 3.3.5".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)

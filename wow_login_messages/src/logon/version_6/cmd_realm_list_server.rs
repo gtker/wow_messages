@@ -102,7 +102,7 @@ impl CMD_REALM_LIST_Server {
 
 
         writeln!(s, "] {{").unwrap();
-        writeln!(s, "    login_versions = \"6 7\";").unwrap();
+        writeln!(s, "    login_versions = \"{}\";", std::env::var("WOWM_TEST_CASE_LOGIN_VERSION").unwrap_or("6 7".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)

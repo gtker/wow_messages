@@ -44,7 +44,7 @@ impl MSG_AUCTION_HELLO_Server {
 
 
         writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1.12 2 3.0 3.1 3.2 3.3.0 3.3.1 3.3.2\";").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12 2 3.0 3.1 3.2 3.3.0 3.3.1 3.3.2".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)

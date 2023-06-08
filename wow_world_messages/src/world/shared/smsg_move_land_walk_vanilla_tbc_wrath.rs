@@ -43,7 +43,7 @@ impl SMSG_MOVE_LAND_WALK {
 
 
         writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1.12 2 3\";").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12 2 3".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)

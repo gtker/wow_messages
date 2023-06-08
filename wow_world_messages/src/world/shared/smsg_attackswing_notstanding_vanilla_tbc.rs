@@ -33,7 +33,7 @@ impl SMSG_ATTACKSWING_NOTSTANDING {
 
 
         writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1 2\";").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1 2".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)

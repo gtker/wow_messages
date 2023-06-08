@@ -45,7 +45,7 @@ impl SMSG_ACTION_BUTTONS {
 
 
         writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"2.3 2.4\";").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("2.3 2.4".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)

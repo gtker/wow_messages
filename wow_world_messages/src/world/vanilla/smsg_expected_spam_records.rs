@@ -52,7 +52,7 @@ impl SMSG_EXPECTED_SPAM_RECORDS {
 
 
         writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1.12\";").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)

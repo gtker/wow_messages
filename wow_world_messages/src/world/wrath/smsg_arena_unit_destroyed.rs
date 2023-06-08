@@ -39,7 +39,7 @@ impl SMSG_ARENA_UNIT_DESTROYED {
 
 
         writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"3.3.5\";").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("3.3.5".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)

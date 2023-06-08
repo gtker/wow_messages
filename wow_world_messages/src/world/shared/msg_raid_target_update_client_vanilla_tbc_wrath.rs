@@ -141,7 +141,7 @@ impl MSG_RAID_TARGET_UPDATE_Client {
 
 
         writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1 2 3\";").unwrap();
+        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1 2 3".to_string())).unwrap();
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
