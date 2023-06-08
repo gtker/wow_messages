@@ -36,6 +36,10 @@ pub use wow_world_base::tbc::{
 ///
 /// Prefer using this over [`all_items`] since this may incorporate optimizations for lookup speed in the future and is more resilient to changes.
 pub const fn lookup_item(id: u32) -> Option<&'static Item> {
+    if id < 25 || id > 39656 {
+        return None;
+    }
+
     let mut i = 0;
     const OBJ: &[Item] = all_items();
 

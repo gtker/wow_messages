@@ -126,12 +126,12 @@ pub(crate) fn write_pub_use(
         ty_name,
         optimizations,
     );
-    lib_functions(&mut s, ty_name);
+    lib_functions(&mut s, ty_name, things);
 
     overwrite_autogenerate_if_not_same_contents(s.inner(), path);
 }
 
-fn lib_functions(s: &mut Writer, ty_name: &str) {
+fn lib_functions(s: &mut Writer, ty_name: &str, things: &[GenericThing]) {
     let ty_lower = ty_name.to_lowercase();
     s.wln(format!("/// Looks up {ty_lower}s and returns if found."));
     s.wln("///");
@@ -140,6 +140,12 @@ fn lib_functions(s: &mut Writer, ty_name: &str) {
     s.bodyn(
         format!("pub const fn lookup_{ty_lower}(id: u32) -> Option<&'static {ty_name}>"),
         |s| {
+            let min = things[0].entry;
+            let max = things.iter().last().unwrap().entry;
+            s.bodyn(format!("if id < {min} || id > {max}"), |s| {
+                s.wln("return None;");
+            });
+
             s.wln("let mut i = 0;");
             s.wln(format!("const OBJ: &[{ty_name}] = all_{ty_lower}s();"));
             s.newline();

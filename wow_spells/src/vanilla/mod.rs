@@ -21,6 +21,10 @@ pub use wow_world_base::vanilla::{
 ///
 /// Prefer using this over [`all_spells`] since this may incorporate optimizations for lookup speed in the future and is more resilient to changes.
 pub const fn lookup_spell(id: u32) -> Option<&'static Spell> {
+    if id < 1 || id > 33392 {
+        return None;
+    }
+
     let mut i = 0;
     const OBJ: &[Spell] = all_spells();
 
