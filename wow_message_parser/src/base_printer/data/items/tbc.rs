@@ -867,6 +867,17 @@ ORDER BY
             let class: u64 = row.get(1).unwrap();
             let subclass: u64 = row.get(2).unwrap();
 
+            let (required_skill, required_skill_rank) = {
+                let skill = row.get::<usize, u16>(16).unwrap();
+                let (skill, required_skill_level) = if skill == 242 {
+                    // Cmangos weirdly uses a non existent skill
+                    (0, 0)
+                } else {
+                    (skill, row.get(17).unwrap())
+                };
+                (Skill::try_from(skill).unwrap(), required_skill_level)
+            };
+
             Ok(TbcItem {
                 entry: row.get(0).unwrap(),
                 class_and_sub_class: wow_world_base::tbc::ItemClassAndSubClass::try_from(
@@ -886,8 +897,8 @@ ORDER BY
                 allowed_race: AllowedRace::new(items::i32_to_u32(row.get(13).unwrap())),
                 item_level: row.get(14).unwrap(),
                 required_level: row.get(15).unwrap(),
-                required_skill: Skill::try_from(row.get::<usize, u16>(16).unwrap()).unwrap(),
-                required_skill_rank: row.get(17).unwrap(),
+                required_skill,
+                required_skill_rank,
                 required_spell: row.get(18).unwrap(),
                 required_honor_rank: PvpRank::try_from(row.get::<usize, u8>(19).unwrap()).unwrap(),
                 required_city_rank: row.get(20).unwrap(),

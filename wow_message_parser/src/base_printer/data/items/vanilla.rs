@@ -679,6 +679,17 @@ FROM item_template ORDER BY entry;",
                 }
             };
 
+            let (required_skill, required_skill_rank) = {
+                let skill = row.get::<usize, u16>(15).unwrap();
+                let (skill, required_skill_level) = if skill == 242 {
+                    // Cmangos weirdly uses a non existent skill
+                    (0, 0)
+                } else {
+                    (skill, row.get(16).unwrap())
+                };
+                (Skill::try_from(skill).unwrap(), required_skill_level)
+            };
+
             let stats = vanilla_stat_types_to_stats(
                 row.get(25).unwrap(),
                 row.get(26).unwrap(),
@@ -720,8 +731,8 @@ FROM item_template ORDER BY entry;",
                 allowed_race: AllowedRace::new(items::i32_to_u32(row.get(12).unwrap())),
                 item_level: row.get(13).unwrap(),
                 required_level: row.get(14).unwrap(),
-                required_skill: Skill::try_from(row.get::<usize, u16>(15).unwrap()).unwrap(),
-                required_skill_rank: row.get(16).unwrap(),
+                required_skill,
+                required_skill_rank,
                 required_spell: row.get(17).unwrap(),
                 required_honor_rank: PvpRank::try_from(row.get::<usize, u8>(18).unwrap()).unwrap(),
                 required_city_rank: row.get(19).unwrap(),
