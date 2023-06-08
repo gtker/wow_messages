@@ -2,7 +2,7 @@ use crate::parser::types::array::ArraySize;
 use crate::parser::types::container::Container;
 use crate::rust_printer::rust_view::rust_definer::RustDefiner;
 use crate::rust_printer::rust_view::rust_type::RustType;
-use crate::rust_printer::structs::print_common_impls::print_rust_members_sizes;
+use crate::rust_printer::structs::print_common_impls::print_size::print_rust_members_sizes;
 use crate::rust_printer::structs::print_derives;
 use crate::rust_printer::Writer;
 use crate::rust_printer::{get_new_flag_type_name, DefinerType};
