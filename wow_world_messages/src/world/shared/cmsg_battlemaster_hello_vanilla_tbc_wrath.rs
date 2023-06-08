@@ -13,9 +13,12 @@ pub struct CMSG_BATTLEMASTER_HELLO {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_BATTLEMASTER_HELLO {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_BATTLEMASTER_HELLO {}
+impl crate::Message for CMSG_BATTLEMASTER_HELLO {
+    const OPCODE: u32 = 0x02d7;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_BATTLEMASTER_HELLO {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_BATTLEMASTER_HELLO {}
-impl crate::Message for CMSG_BATTLEMASTER_HELLO {
-    const OPCODE: u32 = 0x02d7;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_BATTLEMASTER_HELLO::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

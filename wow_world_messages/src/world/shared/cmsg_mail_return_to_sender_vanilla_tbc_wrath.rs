@@ -15,9 +15,12 @@ pub struct CMSG_MAIL_RETURN_TO_SENDER {
     pub mail_id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_MAIL_RETURN_TO_SENDER {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_MAIL_RETURN_TO_SENDER {}
+impl crate::Message for CMSG_MAIL_RETURN_TO_SENDER {
+    const OPCODE: u32 = 0x0248;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl CMSG_MAIL_RETURN_TO_SENDER {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_MAIL_RETURN_TO_SENDER {}
-impl crate::Message for CMSG_MAIL_RETURN_TO_SENDER {
-    const OPCODE: u32 = 0x0248;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_MAIL_RETURN_TO_SENDER::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

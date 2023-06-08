@@ -13,9 +13,12 @@ pub struct MSG_MINIMAP_PING_Client {
     pub position_y: f32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_MINIMAP_PING_Client {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for MSG_MINIMAP_PING_Client {}
+impl crate::Message for MSG_MINIMAP_PING_Client {
+    const OPCODE: u32 = 0x01d5;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl MSG_MINIMAP_PING_Client {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for MSG_MINIMAP_PING_Client {}
-impl crate::Message for MSG_MINIMAP_PING_Client {
-    const OPCODE: u32 = 0x01d5;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_MINIMAP_PING_Client::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

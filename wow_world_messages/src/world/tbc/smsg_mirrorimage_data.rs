@@ -37,9 +37,12 @@ pub struct SMSG_MIRRORIMAGE_DATA {
     pub display_ids: [u32; 11],
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_MIRRORIMAGE_DATA {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_MIRRORIMAGE_DATA {}
+impl crate::Message for SMSG_MIRRORIMAGE_DATA {
+    const OPCODE: u32 = 0x0401;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -95,17 +98,6 @@ impl SMSG_MIRRORIMAGE_DATA {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_MIRRORIMAGE_DATA {}
-impl crate::Message for SMSG_MIRRORIMAGE_DATA {
-    const OPCODE: u32 = 0x0401;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_MIRRORIMAGE_DATA::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

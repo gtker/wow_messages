@@ -20,9 +20,12 @@ pub struct CMSG_LOOT_METHOD {
     pub loot_threshold: ItemQuality,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_LOOT_METHOD {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_LOOT_METHOD {}
+impl crate::Message for CMSG_LOOT_METHOD {
+    const OPCODE: u32 = 0x007a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -54,17 +57,6 @@ impl CMSG_LOOT_METHOD {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_LOOT_METHOD {}
-impl crate::Message for CMSG_LOOT_METHOD {
-    const OPCODE: u32 = 0x007a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_LOOT_METHOD::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -17,9 +17,12 @@ pub struct CMSG_SET_ACTION_BUTTON {
     pub action_type: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_SET_ACTION_BUTTON {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_SET_ACTION_BUTTON {}
+impl crate::Message for CMSG_SET_ACTION_BUTTON {
+    const OPCODE: u32 = 0x0128;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -53,17 +56,6 @@ impl CMSG_SET_ACTION_BUTTON {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_SET_ACTION_BUTTON {}
-impl crate::Message for CMSG_SET_ACTION_BUTTON {
-    const OPCODE: u32 = 0x0128;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_SET_ACTION_BUTTON::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

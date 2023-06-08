@@ -71,9 +71,12 @@ pub struct SMSG_QUESTGIVER_OFFER_REWARD {
     pub reward_reputations_override: [u32; 5],
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_QUESTGIVER_OFFER_REWARD {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_QUESTGIVER_OFFER_REWARD {}
+impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
+    const OPCODE: u32 = 0x018d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -235,17 +238,6 @@ impl SMSG_QUESTGIVER_OFFER_REWARD {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_QUESTGIVER_OFFER_REWARD {}
-impl crate::Message for SMSG_QUESTGIVER_OFFER_REWARD {
-    const OPCODE: u32 = 0x018d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_QUESTGIVER_OFFER_REWARD::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

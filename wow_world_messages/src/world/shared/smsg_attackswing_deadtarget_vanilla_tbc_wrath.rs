@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct SMSG_ATTACKSWING_DEADTARGET {
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_ATTACKSWING_DEADTARGET {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_ATTACKSWING_DEADTARGET {}
+impl crate::Message for SMSG_ATTACKSWING_DEADTARGET {
+    const OPCODE: u32 = 0x0148;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl SMSG_ATTACKSWING_DEADTARGET {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_ATTACKSWING_DEADTARGET {}
-impl crate::Message for SMSG_ATTACKSWING_DEADTARGET {
-    const OPCODE: u32 = 0x0148;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_ATTACKSWING_DEADTARGET::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

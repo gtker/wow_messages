@@ -14,9 +14,12 @@ pub struct SMSG_GMTICKET_SYSTEMSTATUS {
     pub will_accept_tickets: GmTicketQueueStatus,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_GMTICKET_SYSTEMSTATUS {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_GMTICKET_SYSTEMSTATUS {}
+impl crate::Message for SMSG_GMTICKET_SYSTEMSTATUS {
+    const OPCODE: u32 = 0x021b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -44,17 +47,6 @@ impl SMSG_GMTICKET_SYSTEMSTATUS {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_GMTICKET_SYSTEMSTATUS {}
-impl crate::Message for SMSG_GMTICKET_SYSTEMSTATUS {
-    const OPCODE: u32 = 0x021b;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_GMTICKET_SYSTEMSTATUS::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -17,9 +17,12 @@ pub struct CMSG_TEST_OPTIONAL {
     pub server: Option<CMSG_TEST_OPTIONAL_server>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_TEST_OPTIONAL {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_TEST_OPTIONAL {}
+impl crate::Message for CMSG_TEST_OPTIONAL {
+    const OPCODE: u32 = 0x1137;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -55,17 +58,6 @@ impl CMSG_TEST_OPTIONAL {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_TEST_OPTIONAL {}
-impl crate::Message for CMSG_TEST_OPTIONAL {
-    const OPCODE: u32 = 0x1137;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_TEST_OPTIONAL::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -13,9 +13,12 @@ pub struct SMSG_CONVERT_RUNE {
     pub new_type: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CONVERT_RUNE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CONVERT_RUNE {}
+impl crate::Message for SMSG_CONVERT_RUNE {
+    const OPCODE: u32 = 0x0486;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl SMSG_CONVERT_RUNE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CONVERT_RUNE {}
-impl crate::Message for SMSG_CONVERT_RUNE {
-    const OPCODE: u32 = 0x0486;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CONVERT_RUNE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

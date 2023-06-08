@@ -13,9 +13,12 @@ pub struct CMSG_MOVE_FALL_RESET {
     pub info: MovementInfo,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_MOVE_FALL_RESET {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_MOVE_FALL_RESET {}
+impl crate::Message for CMSG_MOVE_FALL_RESET {
+    const OPCODE: u32 = 0x02ca;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -131,17 +134,6 @@ impl CMSG_MOVE_FALL_RESET {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_MOVE_FALL_RESET {}
-impl crate::Message for CMSG_MOVE_FALL_RESET {
-    const OPCODE: u32 = 0x02ca;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_MOVE_FALL_RESET::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -19,9 +19,12 @@ pub struct SMSG_COMPRESSED_UPDATE_OBJECT {
     pub objects: Vec<Object>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_COMPRESSED_UPDATE_OBJECT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_COMPRESSED_UPDATE_OBJECT {}
+impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
+    const OPCODE: u32 = 0x01f6;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -1196,17 +1199,6 @@ impl SMSG_COMPRESSED_UPDATE_OBJECT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_COMPRESSED_UPDATE_OBJECT {}
-impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
-    const OPCODE: u32 = 0x01f6;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_COMPRESSED_UPDATE_OBJECT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

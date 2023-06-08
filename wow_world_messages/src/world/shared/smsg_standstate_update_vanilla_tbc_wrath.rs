@@ -13,9 +13,12 @@ pub struct SMSG_STANDSTATE_UPDATE {
     pub state: UnitStandState,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_STANDSTATE_UPDATE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_STANDSTATE_UPDATE {}
+impl crate::Message for SMSG_STANDSTATE_UPDATE {
+    const OPCODE: u32 = 0x029d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_STANDSTATE_UPDATE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_STANDSTATE_UPDATE {}
-impl crate::Message for SMSG_STANDSTATE_UPDATE {
-    const OPCODE: u32 = 0x029d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_STANDSTATE_UPDATE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

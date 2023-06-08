@@ -29,9 +29,12 @@ pub struct SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
     pub frame: SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {}
+impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
+    const OPCODE: u32 = 0x0214;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -153,17 +156,6 @@ impl SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {}
-impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
-    const OPCODE: u32 = 0x0214;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

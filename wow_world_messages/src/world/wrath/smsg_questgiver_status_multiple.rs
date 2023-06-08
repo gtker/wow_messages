@@ -14,9 +14,12 @@ pub struct SMSG_QUESTGIVER_STATUS_MULTIPLE {
     pub statuses: Vec<QuestGiverStatusReport>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_QUESTGIVER_STATUS_MULTIPLE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_QUESTGIVER_STATUS_MULTIPLE {}
+impl crate::Message for SMSG_QUESTGIVER_STATUS_MULTIPLE {
+    const OPCODE: u32 = 0x0418;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -64,17 +67,6 @@ impl SMSG_QUESTGIVER_STATUS_MULTIPLE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_QUESTGIVER_STATUS_MULTIPLE {}
-impl crate::Message for SMSG_QUESTGIVER_STATUS_MULTIPLE {
-    const OPCODE: u32 = 0x0418;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_QUESTGIVER_STATUS_MULTIPLE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

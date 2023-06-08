@@ -17,9 +17,12 @@ pub struct SMSG_BINDER_CONFIRM {
     pub area: Area,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_BINDER_CONFIRM {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_BINDER_CONFIRM {}
+impl crate::Message for SMSG_BINDER_CONFIRM {
+    const OPCODE: u32 = 0x02eb;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -49,17 +52,6 @@ impl SMSG_BINDER_CONFIRM {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_BINDER_CONFIRM {}
-impl crate::Message for SMSG_BINDER_CONFIRM {
-    const OPCODE: u32 = 0x02eb;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_BINDER_CONFIRM::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

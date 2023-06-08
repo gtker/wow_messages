@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct SMSG_LOOT_CLEAR_MONEY {
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_LOOT_CLEAR_MONEY {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_LOOT_CLEAR_MONEY {}
+impl crate::Message for SMSG_LOOT_CLEAR_MONEY {
+    const OPCODE: u32 = 0x0165;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl SMSG_LOOT_CLEAR_MONEY {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_LOOT_CLEAR_MONEY {}
-impl crate::Message for SMSG_LOOT_CLEAR_MONEY {
-    const OPCODE: u32 = 0x0165;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_LOOT_CLEAR_MONEY::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

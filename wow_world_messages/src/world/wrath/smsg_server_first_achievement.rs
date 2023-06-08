@@ -20,9 +20,12 @@ pub struct SMSG_SERVER_FIRST_ACHIEVEMENT {
     pub link_type: AchievementNameLinkType,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SERVER_FIRST_ACHIEVEMENT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SERVER_FIRST_ACHIEVEMENT {}
+impl crate::Message for SMSG_SERVER_FIRST_ACHIEVEMENT {
+    const OPCODE: u32 = 0x0498;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -56,17 +59,6 @@ impl SMSG_SERVER_FIRST_ACHIEVEMENT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SERVER_FIRST_ACHIEVEMENT {}
-impl crate::Message for SMSG_SERVER_FIRST_ACHIEVEMENT {
-    const OPCODE: u32 = 0x0498;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SERVER_FIRST_ACHIEVEMENT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

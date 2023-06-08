@@ -13,9 +13,12 @@ pub struct CMSG_RECLAIM_CORPSE {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_RECLAIM_CORPSE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_RECLAIM_CORPSE {}
+impl crate::Message for CMSG_RECLAIM_CORPSE {
+    const OPCODE: u32 = 0x01d2;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_RECLAIM_CORPSE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_RECLAIM_CORPSE {}
-impl crate::Message for CMSG_RECLAIM_CORPSE {
-    const OPCODE: u32 = 0x01d2;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_RECLAIM_CORPSE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

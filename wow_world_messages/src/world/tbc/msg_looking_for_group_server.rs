@@ -23,9 +23,12 @@ pub struct MSG_LOOKING_FOR_GROUP_Server {
     pub players_displayed: Vec<LfgPlayer>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_LOOKING_FOR_GROUP_Server {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for MSG_LOOKING_FOR_GROUP_Server {}
+impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
+    const OPCODE: u32 = 0x01ff;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -117,17 +120,6 @@ impl MSG_LOOKING_FOR_GROUP_Server {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for MSG_LOOKING_FOR_GROUP_Server {}
-impl crate::Message for MSG_LOOKING_FOR_GROUP_Server {
-    const OPCODE: u32 = 0x01ff;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_LOOKING_FOR_GROUP_Server::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

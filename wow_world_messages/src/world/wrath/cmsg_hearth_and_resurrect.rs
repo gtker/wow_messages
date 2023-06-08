@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct CMSG_HEARTH_AND_RESURRECT {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_HEARTH_AND_RESURRECT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_HEARTH_AND_RESURRECT {}
+impl crate::Message for CMSG_HEARTH_AND_RESURRECT {
+    const OPCODE: u32 = 0x049c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl CMSG_HEARTH_AND_RESURRECT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_HEARTH_AND_RESURRECT {}
-impl crate::Message for CMSG_HEARTH_AND_RESURRECT {
-    const OPCODE: u32 = 0x049c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_HEARTH_AND_RESURRECT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

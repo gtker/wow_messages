@@ -12,9 +12,12 @@ pub struct SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {
     pub reward_quests: Vec<u32>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {}
+impl crate::Message for SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {
+    const OPCODE: u32 = 0x0501;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -54,17 +57,6 @@ impl SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {}
-impl crate::Message for SMSG_QUERY_QUESTS_COMPLETED_RESPONSE {
-    const OPCODE: u32 = 0x0501;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_QUERY_QUESTS_COMPLETED_RESPONSE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

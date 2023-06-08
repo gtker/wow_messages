@@ -15,9 +15,12 @@ pub struct CMSG_AUTOSTORE_BAG_ITEM {
     pub destination_bag: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_AUTOSTORE_BAG_ITEM {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_AUTOSTORE_BAG_ITEM {}
+impl crate::Message for CMSG_AUTOSTORE_BAG_ITEM {
+    const OPCODE: u32 = 0x010b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -49,17 +52,6 @@ impl CMSG_AUTOSTORE_BAG_ITEM {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_AUTOSTORE_BAG_ITEM {}
-impl crate::Message for CMSG_AUTOSTORE_BAG_ITEM {
-    const OPCODE: u32 = 0x010b;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_AUTOSTORE_BAG_ITEM::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

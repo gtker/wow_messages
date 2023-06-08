@@ -20,9 +20,12 @@ pub struct CMSG_GMSURVEY_SUBMIT {
     pub answer_comment: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_GMSURVEY_SUBMIT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_GMSURVEY_SUBMIT {}
+impl crate::Message for CMSG_GMSURVEY_SUBMIT {
+    const OPCODE: u32 = 0x032a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -72,17 +75,6 @@ impl CMSG_GMSURVEY_SUBMIT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_GMSURVEY_SUBMIT {}
-impl crate::Message for CMSG_GMSURVEY_SUBMIT {
-    const OPCODE: u32 = 0x032a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_GMSURVEY_SUBMIT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

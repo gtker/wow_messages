@@ -11,9 +11,12 @@ pub struct CMSG_OPT_OUT_OF_LOOT {
     pub pass_on_loot: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_OPT_OUT_OF_LOOT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_OPT_OUT_OF_LOOT {}
+impl crate::Message for CMSG_OPT_OUT_OF_LOOT {
+    const OPCODE: u32 = 0x0408;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl CMSG_OPT_OUT_OF_LOOT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_OPT_OUT_OF_LOOT {}
-impl crate::Message for CMSG_OPT_OUT_OF_LOOT {
-    const OPCODE: u32 = 0x0408;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_OPT_OUT_OF_LOOT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -13,9 +13,12 @@ pub struct SMSG_THREAT_CLEAR {
     pub unit: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_THREAT_CLEAR {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_THREAT_CLEAR {}
+impl crate::Message for SMSG_THREAT_CLEAR {
+    const OPCODE: u32 = 0x0485;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_THREAT_CLEAR {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_THREAT_CLEAR {}
-impl crate::Message for SMSG_THREAT_CLEAR {
-    const OPCODE: u32 = 0x0485;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_THREAT_CLEAR::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

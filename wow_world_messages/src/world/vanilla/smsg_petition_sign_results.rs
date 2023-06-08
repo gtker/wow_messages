@@ -18,9 +18,12 @@ pub struct SMSG_PETITION_SIGN_RESULTS {
     pub result: PetitionResult,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PETITION_SIGN_RESULTS {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PETITION_SIGN_RESULTS {}
+impl crate::Message for SMSG_PETITION_SIGN_RESULTS {
+    const OPCODE: u32 = 0x01c1;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -52,17 +55,6 @@ impl SMSG_PETITION_SIGN_RESULTS {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PETITION_SIGN_RESULTS {}
-impl crate::Message for SMSG_PETITION_SIGN_RESULTS {
-    const OPCODE: u32 = 0x01c1;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PETITION_SIGN_RESULTS::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -22,9 +22,12 @@ pub struct SMSG_SPELLLOGMISS {
     pub targets: Vec<SpellLogMiss>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SPELLLOGMISS {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SPELLLOGMISS {}
+impl crate::Message for SMSG_SPELLLOGMISS {
+    const OPCODE: u32 = 0x024b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -78,17 +81,6 @@ impl SMSG_SPELLLOGMISS {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SPELLLOGMISS {}
-impl crate::Message for SMSG_SPELLLOGMISS {
-    const OPCODE: u32 = 0x024b;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SPELLLOGMISS::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

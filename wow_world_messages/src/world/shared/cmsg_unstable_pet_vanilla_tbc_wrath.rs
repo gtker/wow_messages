@@ -15,9 +15,12 @@ pub struct CMSG_UNSTABLE_PET {
     pub pet_number: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_UNSTABLE_PET {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_UNSTABLE_PET {}
+impl crate::Message for CMSG_UNSTABLE_PET {
+    const OPCODE: u32 = 0x0271;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl CMSG_UNSTABLE_PET {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_UNSTABLE_PET {}
-impl crate::Message for CMSG_UNSTABLE_PET {
-    const OPCODE: u32 = 0x0271;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_UNSTABLE_PET::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

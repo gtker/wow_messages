@@ -40,9 +40,12 @@ pub struct CMSG_AUTH_SESSION {
     pub addon_info: Vec<u8>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_AUTH_SESSION {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_AUTH_SESSION {}
+impl crate::Message for CMSG_AUTH_SESSION {
+    const OPCODE: u32 = 0x01ed;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -100,17 +103,6 @@ impl CMSG_AUTH_SESSION {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_AUTH_SESSION {}
-impl crate::Message for CMSG_AUTH_SESSION {
-    const OPCODE: u32 = 0x01ed;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_AUTH_SESSION::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

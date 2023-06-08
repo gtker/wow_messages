@@ -13,9 +13,12 @@ pub struct SMSG_BARBER_SHOP_RESULT {
     pub result: BarberShopResult,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_BARBER_SHOP_RESULT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_BARBER_SHOP_RESULT {}
+impl crate::Message for SMSG_BARBER_SHOP_RESULT {
+    const OPCODE: u32 = 0x0428;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_BARBER_SHOP_RESULT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_BARBER_SHOP_RESULT {}
-impl crate::Message for SMSG_BARBER_SHOP_RESULT {
-    const OPCODE: u32 = 0x0428;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_BARBER_SHOP_RESULT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

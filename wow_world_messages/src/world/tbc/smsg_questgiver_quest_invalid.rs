@@ -13,9 +13,12 @@ pub struct SMSG_QUESTGIVER_QUEST_INVALID {
     pub msg: QuestFailedReason,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_QUESTGIVER_QUEST_INVALID {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_QUESTGIVER_QUEST_INVALID {}
+impl crate::Message for SMSG_QUESTGIVER_QUEST_INVALID {
+    const OPCODE: u32 = 0x018f;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_QUESTGIVER_QUEST_INVALID {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_QUESTGIVER_QUEST_INVALID {}
-impl crate::Message for SMSG_QUESTGIVER_QUEST_INVALID {
-    const OPCODE: u32 = 0x018f;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_QUESTGIVER_QUEST_INVALID::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

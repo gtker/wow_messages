@@ -13,9 +13,12 @@ pub struct CMSG_TRAINER_LIST {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_TRAINER_LIST {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_TRAINER_LIST {}
+impl crate::Message for CMSG_TRAINER_LIST {
+    const OPCODE: u32 = 0x01b0;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_TRAINER_LIST {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_TRAINER_LIST {}
-impl crate::Message for CMSG_TRAINER_LIST {
-    const OPCODE: u32 = 0x01b0;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_TRAINER_LIST::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

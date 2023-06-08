@@ -20,9 +20,12 @@ pub struct SMSG_INIT_WORLD_STATES {
     pub states: Vec<WorldState>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_INIT_WORLD_STATES {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_INIT_WORLD_STATES {}
+impl crate::Message for SMSG_INIT_WORLD_STATES {
+    const OPCODE: u32 = 0x02c2;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -74,17 +77,6 @@ impl SMSG_INIT_WORLD_STATES {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_INIT_WORLD_STATES {}
-impl crate::Message for SMSG_INIT_WORLD_STATES {
-    const OPCODE: u32 = 0x02c2;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_INIT_WORLD_STATES::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

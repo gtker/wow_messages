@@ -17,9 +17,12 @@ pub struct CMSG_CALENDAR_EVENT_REMOVE_INVITE {
     pub invite_id: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CALENDAR_EVENT_REMOVE_INVITE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_CALENDAR_EVENT_REMOVE_INVITE {}
+impl crate::Message for CMSG_CALENDAR_EVENT_REMOVE_INVITE {
+    const OPCODE: u32 = 0x0433;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -51,17 +54,6 @@ impl CMSG_CALENDAR_EVENT_REMOVE_INVITE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_CALENDAR_EVENT_REMOVE_INVITE {}
-impl crate::Message for CMSG_CALENDAR_EVENT_REMOVE_INVITE {
-    const OPCODE: u32 = 0x0433;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CALENDAR_EVENT_REMOVE_INVITE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

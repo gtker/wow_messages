@@ -16,9 +16,12 @@ pub struct SMSG_EMOTE {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_EMOTE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_EMOTE {}
+impl crate::Message for SMSG_EMOTE {
+    const OPCODE: u32 = 0x0103;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -48,17 +51,6 @@ impl SMSG_EMOTE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_EMOTE {}
-impl crate::Message for SMSG_EMOTE {
-    const OPCODE: u32 = 0x0103;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_EMOTE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

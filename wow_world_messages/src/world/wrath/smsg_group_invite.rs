@@ -21,9 +21,12 @@ pub struct SMSG_GROUP_INVITE {
     pub unknown: Option<SMSG_GROUP_INVITE_unknown>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_GROUP_INVITE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_GROUP_INVITE {}
+impl crate::Message for SMSG_GROUP_INVITE {
+    const OPCODE: u32 = 0x006f;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -63,17 +66,6 @@ impl SMSG_GROUP_INVITE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_GROUP_INVITE {}
-impl crate::Message for SMSG_GROUP_INVITE {
-    const OPCODE: u32 = 0x006f;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_GROUP_INVITE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

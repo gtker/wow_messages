@@ -11,21 +11,13 @@ use std::io::{Read, Write};
 pub struct CMSG_CALENDAR_GET_NUM_PENDING {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CALENDAR_GET_NUM_PENDING {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        panic!("MSG types not supported");
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_CALENDAR_GET_NUM_PENDING {}
 impl crate::Message for CMSG_CALENDAR_GET_NUM_PENDING {
     const OPCODE: u32 = 0x0447;
 
     #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CALENDAR_GET_NUM_PENDING::to_test_case_string(self)
+        panic!("MSG types not supported");
     }
 
     fn size_without_header(&self) -> u32 {

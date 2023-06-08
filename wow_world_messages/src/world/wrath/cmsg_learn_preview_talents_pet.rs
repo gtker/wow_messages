@@ -17,9 +17,12 @@ pub struct CMSG_LEARN_PREVIEW_TALENTS_PET {
     pub talents: Vec<PreviewTalent>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_LEARN_PREVIEW_TALENTS_PET {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_LEARN_PREVIEW_TALENTS_PET {}
+impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS_PET {
+    const OPCODE: u32 = 0x04c2;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -69,17 +72,6 @@ impl CMSG_LEARN_PREVIEW_TALENTS_PET {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_LEARN_PREVIEW_TALENTS_PET {}
-impl crate::Message for CMSG_LEARN_PREVIEW_TALENTS_PET {
-    const OPCODE: u32 = 0x04c2;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_LEARN_PREVIEW_TALENTS_PET::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

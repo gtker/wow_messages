@@ -24,9 +24,12 @@ pub struct SMSG_GMTICKET_GETTICKET {
     pub status: SMSG_GMTICKET_GETTICKET_GmTicketStatus,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_GMTICKET_GETTICKET {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_GMTICKET_GETTICKET {}
+impl crate::Message for SMSG_GMTICKET_GETTICKET {
+    const OPCODE: u32 = 0x0212;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -96,17 +99,6 @@ impl SMSG_GMTICKET_GETTICKET {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_GMTICKET_GETTICKET {}
-impl crate::Message for SMSG_GMTICKET_GETTICKET {
-    const OPCODE: u32 = 0x0212;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_GMTICKET_GETTICKET::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

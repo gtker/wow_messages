@@ -34,9 +34,12 @@ pub struct CMSG_PET_CAST_SPELL {
     pub targets: SpellCastTargets,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_PET_CAST_SPELL {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_PET_CAST_SPELL {}
+impl crate::Message for CMSG_PET_CAST_SPELL {
+    const OPCODE: u32 = 0x01f0;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -441,17 +444,6 @@ impl CMSG_PET_CAST_SPELL {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_PET_CAST_SPELL {}
-impl crate::Message for CMSG_PET_CAST_SPELL {
-    const OPCODE: u32 = 0x01f0;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_PET_CAST_SPELL::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

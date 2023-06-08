@@ -14,9 +14,12 @@ pub struct SMSG_LOOT_MASTER_LIST {
     pub guids: Vec<Guid>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_LOOT_MASTER_LIST {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_LOOT_MASTER_LIST {}
+impl crate::Message for SMSG_LOOT_MASTER_LIST {
+    const OPCODE: u32 = 0x02a4;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -56,17 +59,6 @@ impl SMSG_LOOT_MASTER_LIST {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_LOOT_MASTER_LIST {}
-impl crate::Message for SMSG_LOOT_MASTER_LIST {
-    const OPCODE: u32 = 0x02a4;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_LOOT_MASTER_LIST::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

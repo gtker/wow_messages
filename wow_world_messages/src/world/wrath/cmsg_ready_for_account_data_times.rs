@@ -11,9 +11,12 @@ use std::io::{Read, Write};
 pub struct CMSG_READY_FOR_ACCOUNT_DATA_TIMES {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_READY_FOR_ACCOUNT_DATA_TIMES {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_READY_FOR_ACCOUNT_DATA_TIMES {}
+impl crate::Message for CMSG_READY_FOR_ACCOUNT_DATA_TIMES {
+    const OPCODE: u32 = 0x04ff;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -39,17 +42,6 @@ impl CMSG_READY_FOR_ACCOUNT_DATA_TIMES {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_READY_FOR_ACCOUNT_DATA_TIMES {}
-impl crate::Message for CMSG_READY_FOR_ACCOUNT_DATA_TIMES {
-    const OPCODE: u32 = 0x04ff;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_READY_FOR_ACCOUNT_DATA_TIMES::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

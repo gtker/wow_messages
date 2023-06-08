@@ -11,9 +11,12 @@ pub struct CMSG_TOTEM_DESTROYED {
     pub slot: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_TOTEM_DESTROYED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_TOTEM_DESTROYED {}
+impl crate::Message for CMSG_TOTEM_DESTROYED {
+    const OPCODE: u32 = 0x0413;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl CMSG_TOTEM_DESTROYED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_TOTEM_DESTROYED {}
-impl crate::Message for CMSG_TOTEM_DESTROYED {
-    const OPCODE: u32 = 0x0413;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_TOTEM_DESTROYED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

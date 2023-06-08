@@ -13,9 +13,12 @@ pub struct SMSG_BATTLEGROUND_PLAYER_JOINED {
     pub player: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_BATTLEGROUND_PLAYER_JOINED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_BATTLEGROUND_PLAYER_JOINED {}
+impl crate::Message for SMSG_BATTLEGROUND_PLAYER_JOINED {
+    const OPCODE: u32 = 0x02ec;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_BATTLEGROUND_PLAYER_JOINED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_BATTLEGROUND_PLAYER_JOINED {}
-impl crate::Message for SMSG_BATTLEGROUND_PLAYER_JOINED {
-    const OPCODE: u32 = 0x02ec;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_BATTLEGROUND_PLAYER_JOINED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

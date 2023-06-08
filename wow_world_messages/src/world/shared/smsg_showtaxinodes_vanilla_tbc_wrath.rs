@@ -20,9 +20,12 @@ pub struct SMSG_SHOWTAXINODES {
     pub nodes: Vec<u32>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SHOWTAXINODES {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SHOWTAXINODES {}
+impl crate::Message for SMSG_SHOWTAXINODES {
+    const OPCODE: u32 = 0x01a9;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -66,17 +69,6 @@ impl SMSG_SHOWTAXINODES {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SHOWTAXINODES {}
-impl crate::Message for SMSG_SHOWTAXINODES {
-    const OPCODE: u32 = 0x01a9;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SHOWTAXINODES::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -11,9 +11,12 @@ pub struct SMSG_SET_PHASE_SHIFT {
     pub new_phase: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SET_PHASE_SHIFT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SET_PHASE_SHIFT {}
+impl crate::Message for SMSG_SET_PHASE_SHIFT {
+    const OPCODE: u32 = 0x047c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SMSG_SET_PHASE_SHIFT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SET_PHASE_SHIFT {}
-impl crate::Message for SMSG_SET_PHASE_SHIFT {
-    const OPCODE: u32 = 0x047c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SET_PHASE_SHIFT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -30,9 +30,12 @@ pub struct SMSG_LFG_BOOT_PROPOSAL_UPDATE {
     pub reason: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_LFG_BOOT_PROPOSAL_UPDATE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_LFG_BOOT_PROPOSAL_UPDATE {}
+impl crate::Message for SMSG_LFG_BOOT_PROPOSAL_UPDATE {
+    const OPCODE: u32 = 0x036d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -76,17 +79,6 @@ impl SMSG_LFG_BOOT_PROPOSAL_UPDATE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_LFG_BOOT_PROPOSAL_UPDATE {}
-impl crate::Message for SMSG_LFG_BOOT_PROPOSAL_UPDATE {
-    const OPCODE: u32 = 0x036d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_LFG_BOOT_PROPOSAL_UPDATE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

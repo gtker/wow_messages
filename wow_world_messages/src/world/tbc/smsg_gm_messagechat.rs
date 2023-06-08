@@ -49,9 +49,12 @@ pub struct SMSG_GM_MESSAGECHAT {
     pub language: Language,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_GM_MESSAGECHAT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_GM_MESSAGECHAT {}
+impl crate::Message for SMSG_GM_MESSAGECHAT {
+    const OPCODE: u32 = 0x03b2;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -1109,17 +1112,6 @@ impl SMSG_GM_MESSAGECHAT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_GM_MESSAGECHAT {}
-impl crate::Message for SMSG_GM_MESSAGECHAT {
-    const OPCODE: u32 = 0x03b2;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_GM_MESSAGECHAT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

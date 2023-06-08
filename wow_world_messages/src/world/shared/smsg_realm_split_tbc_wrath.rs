@@ -19,9 +19,12 @@ pub struct SMSG_REALM_SPLIT {
     pub split_date: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_REALM_SPLIT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_REALM_SPLIT {}
+impl crate::Message for SMSG_REALM_SPLIT {
+    const OPCODE: u32 = 0x038b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -53,17 +56,6 @@ impl SMSG_REALM_SPLIT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_REALM_SPLIT {}
-impl crate::Message for SMSG_REALM_SPLIT {
-    const OPCODE: u32 = 0x038b;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_REALM_SPLIT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

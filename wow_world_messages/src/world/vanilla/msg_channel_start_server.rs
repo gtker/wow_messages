@@ -13,9 +13,12 @@ pub struct MSG_CHANNEL_START_Server {
     pub duration: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_CHANNEL_START_Server {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for MSG_CHANNEL_START_Server {}
+impl crate::Message for MSG_CHANNEL_START_Server {
+    const OPCODE: u32 = 0x0139;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl MSG_CHANNEL_START_Server {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for MSG_CHANNEL_START_Server {}
-impl crate::Message for MSG_CHANNEL_START_Server {
-    const OPCODE: u32 = 0x0139;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_CHANNEL_START_Server::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

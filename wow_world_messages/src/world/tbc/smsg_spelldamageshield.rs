@@ -22,9 +22,12 @@ pub struct SMSG_SPELLDAMAGESHIELD {
     pub school: SpellSchool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SPELLDAMAGESHIELD {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SPELLDAMAGESHIELD {}
+impl crate::Message for SMSG_SPELLDAMAGESHIELD {
+    const OPCODE: u32 = 0x024f;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -60,17 +63,6 @@ impl SMSG_SPELLDAMAGESHIELD {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SPELLDAMAGESHIELD {}
-impl crate::Message for SMSG_SPELLDAMAGESHIELD {
-    const OPCODE: u32 = 0x024f;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SPELLDAMAGESHIELD::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -24,9 +24,12 @@ pub struct SMSG_SPELLHEALLOG {
     pub unknown: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SPELLHEALLOG {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SPELLHEALLOG {}
+impl crate::Message for SMSG_SPELLHEALLOG {
+    const OPCODE: u32 = 0x0150;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -64,17 +67,6 @@ impl SMSG_SPELLHEALLOG {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SPELLHEALLOG {}
-impl crate::Message for SMSG_SPELLHEALLOG {
-    const OPCODE: u32 = 0x0150;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SPELLHEALLOG::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

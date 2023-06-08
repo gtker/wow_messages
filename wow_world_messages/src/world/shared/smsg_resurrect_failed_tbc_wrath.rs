@@ -13,9 +13,12 @@ pub struct SMSG_RESURRECT_FAILED {
     pub unknown: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_RESURRECT_FAILED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_RESURRECT_FAILED {}
+impl crate::Message for SMSG_RESURRECT_FAILED {
+    const OPCODE: u32 = 0x0252;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_RESURRECT_FAILED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_RESURRECT_FAILED {}
-impl crate::Message for SMSG_RESURRECT_FAILED {
-    const OPCODE: u32 = 0x0252;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_RESURRECT_FAILED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

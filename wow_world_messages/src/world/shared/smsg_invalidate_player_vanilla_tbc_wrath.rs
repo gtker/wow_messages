@@ -13,9 +13,12 @@ pub struct SMSG_INVALIDATE_PLAYER {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_INVALIDATE_PLAYER {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_INVALIDATE_PLAYER {}
+impl crate::Message for SMSG_INVALIDATE_PLAYER {
+    const OPCODE: u32 = 0x031c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_INVALIDATE_PLAYER {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_INVALIDATE_PLAYER {}
-impl crate::Message for SMSG_INVALIDATE_PLAYER {
-    const OPCODE: u32 = 0x031c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_INVALIDATE_PLAYER::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

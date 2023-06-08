@@ -13,9 +13,12 @@ pub struct SMSG_SUPERCEDED_SPELL {
     pub old: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SUPERCEDED_SPELL {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SUPERCEDED_SPELL {}
+impl crate::Message for SMSG_SUPERCEDED_SPELL {
+    const OPCODE: u32 = 0x012c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl SMSG_SUPERCEDED_SPELL {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SUPERCEDED_SPELL {}
-impl crate::Message for SMSG_SUPERCEDED_SPELL {
-    const OPCODE: u32 = 0x012c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SUPERCEDED_SPELL::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

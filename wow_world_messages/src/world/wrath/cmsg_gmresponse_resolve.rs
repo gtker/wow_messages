@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct CMSG_GMRESPONSE_RESOLVE {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_GMRESPONSE_RESOLVE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_GMRESPONSE_RESOLVE {}
+impl crate::Message for CMSG_GMRESPONSE_RESOLVE {
+    const OPCODE: u32 = 0x04f0;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl CMSG_GMRESPONSE_RESOLVE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_GMRESPONSE_RESOLVE {}
-impl crate::Message for CMSG_GMRESPONSE_RESOLVE {
-    const OPCODE: u32 = 0x04f0;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_GMRESPONSE_RESOLVE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

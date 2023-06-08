@@ -23,9 +23,12 @@ pub struct SMSG_PET_NAME_INVALID {
     pub included: SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PET_NAME_INVALID {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PET_NAME_INVALID {}
+impl crate::Message for SMSG_PET_NAME_INVALID {
+    const OPCODE: u32 = 0x0178;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -83,17 +86,6 @@ impl SMSG_PET_NAME_INVALID {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PET_NAME_INVALID {}
-impl crate::Message for SMSG_PET_NAME_INVALID {
-    const OPCODE: u32 = 0x0178;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PET_NAME_INVALID::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

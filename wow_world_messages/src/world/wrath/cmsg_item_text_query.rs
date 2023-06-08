@@ -13,9 +13,12 @@ pub struct CMSG_ITEM_TEXT_QUERY {
     pub item: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_ITEM_TEXT_QUERY {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_ITEM_TEXT_QUERY {}
+impl crate::Message for CMSG_ITEM_TEXT_QUERY {
+    const OPCODE: u32 = 0x0243;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_ITEM_TEXT_QUERY {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_ITEM_TEXT_QUERY {}
-impl crate::Message for CMSG_ITEM_TEXT_QUERY {
-    const OPCODE: u32 = 0x0243;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_ITEM_TEXT_QUERY::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

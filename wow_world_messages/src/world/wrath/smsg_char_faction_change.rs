@@ -27,9 +27,12 @@ pub struct SMSG_CHAR_FACTION_CHANGE {
     pub result: SMSG_CHAR_FACTION_CHANGE_WorldResult,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CHAR_FACTION_CHANGE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CHAR_FACTION_CHANGE {}
+impl crate::Message for SMSG_CHAR_FACTION_CHANGE {
+    const OPCODE: u32 = 0x04da;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -107,17 +110,6 @@ impl SMSG_CHAR_FACTION_CHANGE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CHAR_FACTION_CHANGE {}
-impl crate::Message for SMSG_CHAR_FACTION_CHANGE {
-    const OPCODE: u32 = 0x04da;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CHAR_FACTION_CHANGE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

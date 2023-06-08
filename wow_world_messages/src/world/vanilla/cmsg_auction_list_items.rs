@@ -32,9 +32,12 @@ pub struct CMSG_AUCTION_LIST_ITEMS {
     pub usable: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_AUCTION_LIST_ITEMS {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_AUCTION_LIST_ITEMS {}
+impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
+    const OPCODE: u32 = 0x0258;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -80,17 +83,6 @@ impl CMSG_AUCTION_LIST_ITEMS {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_AUCTION_LIST_ITEMS {}
-impl crate::Message for CMSG_AUCTION_LIST_ITEMS {
-    const OPCODE: u32 = 0x0258;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_AUCTION_LIST_ITEMS::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

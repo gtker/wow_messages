@@ -15,9 +15,12 @@ pub struct CMSG_CALENDAR_EVENT_SIGNUP {
     pub tentative: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CALENDAR_EVENT_SIGNUP {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_CALENDAR_EVENT_SIGNUP {}
+impl crate::Message for CMSG_CALENDAR_EVENT_SIGNUP {
+    const OPCODE: u32 = 0x04ba;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl CMSG_CALENDAR_EVENT_SIGNUP {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_CALENDAR_EVENT_SIGNUP {}
-impl crate::Message for CMSG_CALENDAR_EVENT_SIGNUP {
-    const OPCODE: u32 = 0x04ba;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CALENDAR_EVENT_SIGNUP::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

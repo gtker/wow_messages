@@ -16,9 +16,12 @@ pub struct SMSG_GUILD_EVENT {
     pub event_descriptions: Vec<String>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_GUILD_EVENT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_GUILD_EVENT {}
+impl crate::Message for SMSG_GUILD_EVENT {
+    const OPCODE: u32 = 0x0092;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -60,17 +63,6 @@ impl SMSG_GUILD_EVENT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_GUILD_EVENT {}
-impl crate::Message for SMSG_GUILD_EVENT {
-    const OPCODE: u32 = 0x0092;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_GUILD_EVENT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

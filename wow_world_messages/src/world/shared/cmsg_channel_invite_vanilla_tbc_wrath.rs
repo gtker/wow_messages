@@ -13,9 +13,12 @@ pub struct CMSG_CHANNEL_INVITE {
     pub player_name: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CHANNEL_INVITE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_CHANNEL_INVITE {}
+impl crate::Message for CMSG_CHANNEL_INVITE {
+    const OPCODE: u32 = 0x00a3;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl CMSG_CHANNEL_INVITE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_CHANNEL_INVITE {}
-impl crate::Message for CMSG_CHANNEL_INVITE {
-    const OPCODE: u32 = 0x00a3;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CHANNEL_INVITE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -16,9 +16,12 @@ pub struct SMSG_CAMERA_SHAKE {
     pub unknown: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CAMERA_SHAKE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CAMERA_SHAKE {}
+impl crate::Message for SMSG_CAMERA_SHAKE {
+    const OPCODE: u32 = 0x050a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -48,17 +51,6 @@ impl SMSG_CAMERA_SHAKE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CAMERA_SHAKE {}
-impl crate::Message for SMSG_CAMERA_SHAKE {
-    const OPCODE: u32 = 0x050a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CAMERA_SHAKE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

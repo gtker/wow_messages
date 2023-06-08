@@ -11,9 +11,12 @@ pub struct CMSG_ARENA_TEAM_ROSTER {
     pub arena_team: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_ARENA_TEAM_ROSTER {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_ARENA_TEAM_ROSTER {}
+impl crate::Message for CMSG_ARENA_TEAM_ROSTER {
+    const OPCODE: u32 = 0x034d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl CMSG_ARENA_TEAM_ROSTER {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_ARENA_TEAM_ROSTER {}
-impl crate::Message for CMSG_ARENA_TEAM_ROSTER {
-    const OPCODE: u32 = 0x034d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_ARENA_TEAM_ROSTER::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

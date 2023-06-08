@@ -12,9 +12,12 @@ pub struct SMSG_WORLD_STATE_UI_TIMER_UPDATE {
     pub time: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_WORLD_STATE_UI_TIMER_UPDATE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_WORLD_STATE_UI_TIMER_UPDATE {}
+impl crate::Message for SMSG_WORLD_STATE_UI_TIMER_UPDATE {
+    const OPCODE: u32 = 0x04f7;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -42,17 +45,6 @@ impl SMSG_WORLD_STATE_UI_TIMER_UPDATE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_WORLD_STATE_UI_TIMER_UPDATE {}
-impl crate::Message for SMSG_WORLD_STATE_UI_TIMER_UPDATE {
-    const OPCODE: u32 = 0x04f7;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_WORLD_STATE_UI_TIMER_UPDATE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

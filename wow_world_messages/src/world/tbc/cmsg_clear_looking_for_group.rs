@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct CMSG_CLEAR_LOOKING_FOR_GROUP {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CLEAR_LOOKING_FOR_GROUP {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_CLEAR_LOOKING_FOR_GROUP {}
+impl crate::Message for CMSG_CLEAR_LOOKING_FOR_GROUP {
+    const OPCODE: u32 = 0x0363;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl CMSG_CLEAR_LOOKING_FOR_GROUP {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_CLEAR_LOOKING_FOR_GROUP {}
-impl crate::Message for CMSG_CLEAR_LOOKING_FOR_GROUP {
-    const OPCODE: u32 = 0x0363;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CLEAR_LOOKING_FOR_GROUP::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

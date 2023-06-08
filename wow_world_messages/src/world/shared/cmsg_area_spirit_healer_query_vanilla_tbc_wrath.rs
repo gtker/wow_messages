@@ -13,9 +13,12 @@ pub struct CMSG_AREA_SPIRIT_HEALER_QUERY {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_AREA_SPIRIT_HEALER_QUERY {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_AREA_SPIRIT_HEALER_QUERY {}
+impl crate::Message for CMSG_AREA_SPIRIT_HEALER_QUERY {
+    const OPCODE: u32 = 0x02e2;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_AREA_SPIRIT_HEALER_QUERY {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_AREA_SPIRIT_HEALER_QUERY {}
-impl crate::Message for CMSG_AREA_SPIRIT_HEALER_QUERY {
-    const OPCODE: u32 = 0x02e2;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_AREA_SPIRIT_HEALER_QUERY::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

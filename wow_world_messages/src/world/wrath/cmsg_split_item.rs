@@ -19,9 +19,12 @@ pub struct CMSG_SPLIT_ITEM {
     pub amount: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_SPLIT_ITEM {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_SPLIT_ITEM {}
+impl crate::Message for CMSG_SPLIT_ITEM {
+    const OPCODE: u32 = 0x010e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -57,17 +60,6 @@ impl CMSG_SPLIT_ITEM {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_SPLIT_ITEM {}
-impl crate::Message for CMSG_SPLIT_ITEM {
-    const OPCODE: u32 = 0x010e;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_SPLIT_ITEM::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

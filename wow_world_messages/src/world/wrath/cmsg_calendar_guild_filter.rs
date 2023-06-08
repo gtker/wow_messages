@@ -17,9 +17,12 @@ pub struct CMSG_CALENDAR_GUILD_FILTER {
     pub minimum_rank: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CALENDAR_GUILD_FILTER {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_CALENDAR_GUILD_FILTER {}
+impl crate::Message for CMSG_CALENDAR_GUILD_FILTER {
+    const OPCODE: u32 = 0x042b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -51,17 +54,6 @@ impl CMSG_CALENDAR_GUILD_FILTER {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_CALENDAR_GUILD_FILTER {}
-impl crate::Message for CMSG_CALENDAR_GUILD_FILTER {
-    const OPCODE: u32 = 0x042b;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CALENDAR_GUILD_FILTER::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

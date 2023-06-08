@@ -19,9 +19,12 @@ pub struct SMSG_LIST_INVENTORY {
     pub items: Vec<ListInventoryItem>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_LIST_INVENTORY {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_LIST_INVENTORY {}
+impl crate::Message for SMSG_LIST_INVENTORY {
+    const OPCODE: u32 = 0x019f;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -83,17 +86,6 @@ impl SMSG_LIST_INVENTORY {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_LIST_INVENTORY {}
-impl crate::Message for SMSG_LIST_INVENTORY {
-    const OPCODE: u32 = 0x019f;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_LIST_INVENTORY::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

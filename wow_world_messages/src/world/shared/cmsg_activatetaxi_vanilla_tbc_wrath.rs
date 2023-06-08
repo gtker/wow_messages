@@ -17,9 +17,12 @@ pub struct CMSG_ACTIVATETAXI {
     pub destination_node: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_ACTIVATETAXI {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_ACTIVATETAXI {}
+impl crate::Message for CMSG_ACTIVATETAXI {
+    const OPCODE: u32 = 0x01ad;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -51,17 +54,6 @@ impl CMSG_ACTIVATETAXI {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_ACTIVATETAXI {}
-impl crate::Message for CMSG_ACTIVATETAXI {
-    const OPCODE: u32 = 0x01ad;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_ACTIVATETAXI::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

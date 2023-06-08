@@ -15,9 +15,12 @@ pub struct SMSG_SPLINE_SET_SWIM_BACK_SPEED {
     pub speed: f32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SPLINE_SET_SWIM_BACK_SPEED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SPLINE_SET_SWIM_BACK_SPEED {}
+impl crate::Message for SMSG_SPLINE_SET_SWIM_BACK_SPEED {
+    const OPCODE: u32 = 0x0302;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_SPLINE_SET_SWIM_BACK_SPEED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SPLINE_SET_SWIM_BACK_SPEED {}
-impl crate::Message for SMSG_SPLINE_SET_SWIM_BACK_SPEED {
-    const OPCODE: u32 = 0x0302;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SPLINE_SET_SWIM_BACK_SPEED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

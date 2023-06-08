@@ -13,9 +13,12 @@ pub struct SMSG_CANCEL_AUTO_REPEAT {
     pub target: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CANCEL_AUTO_REPEAT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CANCEL_AUTO_REPEAT {}
+impl crate::Message for SMSG_CANCEL_AUTO_REPEAT {
+    const OPCODE: u32 = 0x029c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_CANCEL_AUTO_REPEAT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CANCEL_AUTO_REPEAT {}
-impl crate::Message for SMSG_CANCEL_AUTO_REPEAT {
-    const OPCODE: u32 = 0x029c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CANCEL_AUTO_REPEAT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

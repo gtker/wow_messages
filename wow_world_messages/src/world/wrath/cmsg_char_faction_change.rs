@@ -32,9 +32,12 @@ pub struct CMSG_CHAR_FACTION_CHANGE {
     pub race: Race,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CHAR_FACTION_CHANGE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_CHAR_FACTION_CHANGE {}
+impl crate::Message for CMSG_CHAR_FACTION_CHANGE {
+    const OPCODE: u32 = 0x04d9;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -78,17 +81,6 @@ impl CMSG_CHAR_FACTION_CHANGE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_CHAR_FACTION_CHANGE {}
-impl crate::Message for CMSG_CHAR_FACTION_CHANGE {
-    const OPCODE: u32 = 0x04d9;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CHAR_FACTION_CHANGE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

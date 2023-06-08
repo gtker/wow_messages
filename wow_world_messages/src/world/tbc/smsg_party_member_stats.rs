@@ -77,9 +77,12 @@ pub struct SMSG_PARTY_MEMBER_STATS {
     pub mask: SMSG_PARTY_MEMBER_STATS_GroupUpdateFlags,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PARTY_MEMBER_STATS {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PARTY_MEMBER_STATS {}
+impl crate::Message for SMSG_PARTY_MEMBER_STATS {
+    const OPCODE: u32 = 0x007e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -263,17 +266,6 @@ impl SMSG_PARTY_MEMBER_STATS {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PARTY_MEMBER_STATS {}
-impl crate::Message for SMSG_PARTY_MEMBER_STATS {
-    const OPCODE: u32 = 0x007e;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PARTY_MEMBER_STATS::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

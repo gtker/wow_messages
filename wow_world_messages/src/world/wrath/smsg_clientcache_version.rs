@@ -11,9 +11,12 @@ pub struct SMSG_CLIENTCACHE_VERSION {
     pub version: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CLIENTCACHE_VERSION {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CLIENTCACHE_VERSION {}
+impl crate::Message for SMSG_CLIENTCACHE_VERSION {
+    const OPCODE: u32 = 0x04ab;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SMSG_CLIENTCACHE_VERSION {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CLIENTCACHE_VERSION {}
-impl crate::Message for SMSG_CLIENTCACHE_VERSION {
-    const OPCODE: u32 = 0x04ab;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CLIENTCACHE_VERSION::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

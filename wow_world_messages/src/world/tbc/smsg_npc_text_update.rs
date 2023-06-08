@@ -15,9 +15,12 @@ pub struct SMSG_NPC_TEXT_UPDATE {
     pub texts: [NpcTextUpdate; 8],
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_NPC_TEXT_UPDATE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_NPC_TEXT_UPDATE {}
+impl crate::Message for SMSG_NPC_TEXT_UPDATE {
+    const OPCODE: u32 = 0x0180;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -91,17 +94,6 @@ impl SMSG_NPC_TEXT_UPDATE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_NPC_TEXT_UPDATE {}
-impl crate::Message for SMSG_NPC_TEXT_UPDATE {
-    const OPCODE: u32 = 0x0180;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_NPC_TEXT_UPDATE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

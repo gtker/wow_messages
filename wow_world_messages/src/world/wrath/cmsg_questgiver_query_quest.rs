@@ -17,9 +17,12 @@ pub struct CMSG_QUESTGIVER_QUERY_QUEST {
     pub unknown1: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_QUESTGIVER_QUERY_QUEST {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_QUESTGIVER_QUERY_QUEST {}
+impl crate::Message for CMSG_QUESTGIVER_QUERY_QUEST {
+    const OPCODE: u32 = 0x0186;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -51,17 +54,6 @@ impl CMSG_QUESTGIVER_QUERY_QUEST {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_QUESTGIVER_QUERY_QUEST {}
-impl crate::Message for CMSG_QUESTGIVER_QUERY_QUEST {
-    const OPCODE: u32 = 0x0186;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_QUESTGIVER_QUERY_QUEST::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

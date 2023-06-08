@@ -65,9 +65,12 @@ pub struct SMSG_CAST_FAILED {
     pub multiple_casts: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CAST_FAILED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CAST_FAILED {}
+impl crate::Message for SMSG_CAST_FAILED {
+    const OPCODE: u32 = 0x0130;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -295,17 +298,6 @@ impl SMSG_CAST_FAILED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CAST_FAILED {}
-impl crate::Message for SMSG_CAST_FAILED {
-    const OPCODE: u32 = 0x0130;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CAST_FAILED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

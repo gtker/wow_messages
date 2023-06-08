@@ -15,9 +15,12 @@ pub struct SMSG_SPELLINSTAKILLLOG {
     pub spell: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SPELLINSTAKILLLOG {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SPELLINSTAKILLLOG {}
+impl crate::Message for SMSG_SPELLINSTAKILLLOG {
+    const OPCODE: u32 = 0x032f;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_SPELLINSTAKILLLOG {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SPELLINSTAKILLLOG {}
-impl crate::Message for SMSG_SPELLINSTAKILLLOG {
-    const OPCODE: u32 = 0x032f;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SPELLINSTAKILLLOG::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

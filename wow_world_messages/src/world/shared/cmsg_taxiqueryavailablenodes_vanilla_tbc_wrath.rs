@@ -13,9 +13,12 @@ pub struct CMSG_TAXIQUERYAVAILABLENODES {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_TAXIQUERYAVAILABLENODES {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_TAXIQUERYAVAILABLENODES {}
+impl crate::Message for CMSG_TAXIQUERYAVAILABLENODES {
+    const OPCODE: u32 = 0x01ac;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_TAXIQUERYAVAILABLENODES {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_TAXIQUERYAVAILABLENODES {}
-impl crate::Message for CMSG_TAXIQUERYAVAILABLENODES {
-    const OPCODE: u32 = 0x01ac;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_TAXIQUERYAVAILABLENODES::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

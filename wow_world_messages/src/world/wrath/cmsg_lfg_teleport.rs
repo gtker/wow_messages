@@ -13,9 +13,12 @@ pub struct CMSG_LFG_TELEPORT {
     pub location: LfgTeleportLocation,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_LFG_TELEPORT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_LFG_TELEPORT {}
+impl crate::Message for CMSG_LFG_TELEPORT {
+    const OPCODE: u32 = 0x0370;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_LFG_TELEPORT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_LFG_TELEPORT {}
-impl crate::Message for CMSG_LFG_TELEPORT {
-    const OPCODE: u32 = 0x0370;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_LFG_TELEPORT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

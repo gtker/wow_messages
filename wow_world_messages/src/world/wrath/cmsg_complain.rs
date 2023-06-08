@@ -28,9 +28,12 @@ pub struct CMSG_COMPLAIN {
     pub offender: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_COMPLAIN {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_COMPLAIN {}
+impl crate::Message for CMSG_COMPLAIN {
+    const OPCODE: u32 = 0x03c7;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -110,17 +113,6 @@ impl CMSG_COMPLAIN {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_COMPLAIN {}
-impl crate::Message for CMSG_COMPLAIN {
-    const OPCODE: u32 = 0x03c7;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_COMPLAIN::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

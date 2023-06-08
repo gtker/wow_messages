@@ -13,9 +13,12 @@ pub struct CMSG_FAR_SIGHT {
     pub operation: FarSightOperation,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_FAR_SIGHT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_FAR_SIGHT {}
+impl crate::Message for CMSG_FAR_SIGHT {
+    const OPCODE: u32 = 0x027a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_FAR_SIGHT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_FAR_SIGHT {}
-impl crate::Message for CMSG_FAR_SIGHT {
-    const OPCODE: u32 = 0x027a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_FAR_SIGHT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

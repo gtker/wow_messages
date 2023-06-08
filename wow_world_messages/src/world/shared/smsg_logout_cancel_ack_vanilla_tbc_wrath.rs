@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct SMSG_LOGOUT_CANCEL_ACK {
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_LOGOUT_CANCEL_ACK {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_LOGOUT_CANCEL_ACK {}
+impl crate::Message for SMSG_LOGOUT_CANCEL_ACK {
+    const OPCODE: u32 = 0x004f;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl SMSG_LOGOUT_CANCEL_ACK {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_LOGOUT_CANCEL_ACK {}
-impl crate::Message for SMSG_LOGOUT_CANCEL_ACK {
-    const OPCODE: u32 = 0x004f;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_LOGOUT_CANCEL_ACK::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

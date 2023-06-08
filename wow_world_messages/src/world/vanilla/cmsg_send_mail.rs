@@ -38,9 +38,12 @@ pub struct CMSG_SEND_MAIL {
     pub unknown4: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_SEND_MAIL {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_SEND_MAIL {}
+impl crate::Message for CMSG_SEND_MAIL {
+    const OPCODE: u32 = 0x0238;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -88,17 +91,6 @@ impl CMSG_SEND_MAIL {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_SEND_MAIL {}
-impl crate::Message for CMSG_SEND_MAIL {
-    const OPCODE: u32 = 0x0238;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_SEND_MAIL::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

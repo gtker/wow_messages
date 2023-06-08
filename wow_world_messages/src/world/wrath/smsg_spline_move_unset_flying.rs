@@ -13,9 +13,12 @@ pub struct SMSG_SPLINE_MOVE_UNSET_FLYING {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SPLINE_MOVE_UNSET_FLYING {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SPLINE_MOVE_UNSET_FLYING {}
+impl crate::Message for SMSG_SPLINE_MOVE_UNSET_FLYING {
+    const OPCODE: u32 = 0x0423;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_SPLINE_MOVE_UNSET_FLYING {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SPLINE_MOVE_UNSET_FLYING {}
-impl crate::Message for SMSG_SPLINE_MOVE_UNSET_FLYING {
-    const OPCODE: u32 = 0x0423;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SPLINE_MOVE_UNSET_FLYING::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

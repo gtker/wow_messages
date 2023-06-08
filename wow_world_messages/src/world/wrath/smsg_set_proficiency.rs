@@ -15,9 +15,12 @@ pub struct SMSG_SET_PROFICIENCY {
     pub item_sub_class_mask: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SET_PROFICIENCY {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SET_PROFICIENCY {}
+impl crate::Message for SMSG_SET_PROFICIENCY {
+    const OPCODE: u32 = 0x0127;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_SET_PROFICIENCY {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SET_PROFICIENCY {}
-impl crate::Message for SMSG_SET_PROFICIENCY {
-    const OPCODE: u32 = 0x0127;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SET_PROFICIENCY::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

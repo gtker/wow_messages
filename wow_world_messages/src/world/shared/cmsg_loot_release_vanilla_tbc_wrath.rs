@@ -13,9 +13,12 @@ pub struct CMSG_LOOT_RELEASE {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_LOOT_RELEASE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_LOOT_RELEASE {}
+impl crate::Message for CMSG_LOOT_RELEASE {
+    const OPCODE: u32 = 0x015f;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_LOOT_RELEASE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_LOOT_RELEASE {}
-impl crate::Message for CMSG_LOOT_RELEASE {
-    const OPCODE: u32 = 0x015f;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_LOOT_RELEASE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

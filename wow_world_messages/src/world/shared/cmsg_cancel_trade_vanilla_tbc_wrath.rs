@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct CMSG_CANCEL_TRADE {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CANCEL_TRADE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_CANCEL_TRADE {}
+impl crate::Message for CMSG_CANCEL_TRADE {
+    const OPCODE: u32 = 0x011c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl CMSG_CANCEL_TRADE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_CANCEL_TRADE {}
-impl crate::Message for CMSG_CANCEL_TRADE {
-    const OPCODE: u32 = 0x011c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CANCEL_TRADE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

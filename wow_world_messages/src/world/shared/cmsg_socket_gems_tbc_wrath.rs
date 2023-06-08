@@ -15,9 +15,12 @@ pub struct CMSG_SOCKET_GEMS {
     pub gems: [Guid; 3],
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_SOCKET_GEMS {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_SOCKET_GEMS {}
+impl crate::Message for CMSG_SOCKET_GEMS {
+    const OPCODE: u32 = 0x0347;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -55,17 +58,6 @@ impl CMSG_SOCKET_GEMS {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_SOCKET_GEMS {}
-impl crate::Message for CMSG_SOCKET_GEMS {
-    const OPCODE: u32 = 0x0347;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_SOCKET_GEMS::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

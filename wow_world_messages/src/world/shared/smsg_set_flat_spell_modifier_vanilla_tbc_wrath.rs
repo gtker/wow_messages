@@ -15,9 +15,12 @@ pub struct SMSG_SET_FLAT_SPELL_MODIFIER {
     pub value: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SET_FLAT_SPELL_MODIFIER {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SET_FLAT_SPELL_MODIFIER {}
+impl crate::Message for SMSG_SET_FLAT_SPELL_MODIFIER {
+    const OPCODE: u32 = 0x0266;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -49,17 +52,6 @@ impl SMSG_SET_FLAT_SPELL_MODIFIER {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SET_FLAT_SPELL_MODIFIER {}
-impl crate::Message for SMSG_SET_FLAT_SPELL_MODIFIER {
-    const OPCODE: u32 = 0x0266;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SET_FLAT_SPELL_MODIFIER::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -15,9 +15,12 @@ pub struct SMSG_MOUNTRESULT {
     pub result: MountResult,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_MOUNTRESULT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_MOUNTRESULT {}
+impl crate::Message for SMSG_MOUNTRESULT {
+    const OPCODE: u32 = 0x016e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl SMSG_MOUNTRESULT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_MOUNTRESULT {}
-impl crate::Message for SMSG_MOUNTRESULT {
-    const OPCODE: u32 = 0x016e;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_MOUNTRESULT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

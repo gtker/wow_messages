@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct CMSG_TOGGLE_HELM {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_TOGGLE_HELM {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_TOGGLE_HELM {}
+impl crate::Message for CMSG_TOGGLE_HELM {
+    const OPCODE: u32 = 0x02b9;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl CMSG_TOGGLE_HELM {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_TOGGLE_HELM {}
-impl crate::Message for CMSG_TOGGLE_HELM {
-    const OPCODE: u32 = 0x02b9;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_TOGGLE_HELM::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

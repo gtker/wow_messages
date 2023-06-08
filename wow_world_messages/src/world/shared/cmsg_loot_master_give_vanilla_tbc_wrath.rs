@@ -17,9 +17,12 @@ pub struct CMSG_LOOT_MASTER_GIVE {
     pub player: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_LOOT_MASTER_GIVE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_LOOT_MASTER_GIVE {}
+impl crate::Message for CMSG_LOOT_MASTER_GIVE {
+    const OPCODE: u32 = 0x02a3;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -51,17 +54,6 @@ impl CMSG_LOOT_MASTER_GIVE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_LOOT_MASTER_GIVE {}
-impl crate::Message for CMSG_LOOT_MASTER_GIVE {
-    const OPCODE: u32 = 0x02a3;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_LOOT_MASTER_GIVE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

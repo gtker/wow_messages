@@ -11,9 +11,12 @@ use std::io::{Read, Write};
 pub struct SMSG_TOGGLE_XP_GAIN {
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_TOGGLE_XP_GAIN {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_TOGGLE_XP_GAIN {}
+impl crate::Message for SMSG_TOGGLE_XP_GAIN {
+    const OPCODE: u32 = 0x04ed;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -39,17 +42,6 @@ impl SMSG_TOGGLE_XP_GAIN {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_TOGGLE_XP_GAIN {}
-impl crate::Message for SMSG_TOGGLE_XP_GAIN {
-    const OPCODE: u32 = 0x04ed;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_TOGGLE_XP_GAIN::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -17,9 +17,12 @@ pub struct SMSG_INSTANCE_LOCK_WARNING_QUERY {
     pub unknown: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_INSTANCE_LOCK_WARNING_QUERY {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_INSTANCE_LOCK_WARNING_QUERY {}
+impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
+    const OPCODE: u32 = 0x0147;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -51,17 +54,6 @@ impl SMSG_INSTANCE_LOCK_WARNING_QUERY {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_INSTANCE_LOCK_WARNING_QUERY {}
-impl crate::Message for SMSG_INSTANCE_LOCK_WARNING_QUERY {
-    const OPCODE: u32 = 0x0147;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_INSTANCE_LOCK_WARNING_QUERY::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

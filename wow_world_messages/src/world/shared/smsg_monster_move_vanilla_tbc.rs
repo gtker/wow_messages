@@ -37,9 +37,12 @@ pub struct SMSG_MONSTER_MOVE {
     pub splines: Vec<Vector3d>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_MONSTER_MOVE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_MONSTER_MOVE {}
+impl crate::Message for SMSG_MONSTER_MOVE {
+    const OPCODE: u32 = 0x00dd;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -139,17 +142,6 @@ impl SMSG_MONSTER_MOVE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_MONSTER_MOVE {}
-impl crate::Message for SMSG_MONSTER_MOVE {
-    const OPCODE: u32 = 0x00dd;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_MONSTER_MOVE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

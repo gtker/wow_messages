@@ -17,9 +17,12 @@ pub struct SMSG_CHAR_CREATE {
     pub result: WorldResult,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CHAR_CREATE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CHAR_CREATE {}
+impl crate::Message for SMSG_CHAR_CREATE {
+    const OPCODE: u32 = 0x003a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_CHAR_CREATE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CHAR_CREATE {}
-impl crate::Message for SMSG_CHAR_CREATE {
-    const OPCODE: u32 = 0x003a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CHAR_CREATE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

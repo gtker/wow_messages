@@ -14,9 +14,12 @@ pub struct SMSG_AUCTION_LIST_PENDING_SALES {
     pub pending_sales: Vec<PendingAuctionSale>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_AUCTION_LIST_PENDING_SALES {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_AUCTION_LIST_PENDING_SALES {}
+impl crate::Message for SMSG_AUCTION_LIST_PENDING_SALES {
+    const OPCODE: u32 = 0x0490;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -70,17 +73,6 @@ impl SMSG_AUCTION_LIST_PENDING_SALES {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_AUCTION_LIST_PENDING_SALES {}
-impl crate::Message for SMSG_AUCTION_LIST_PENDING_SALES {
-    const OPCODE: u32 = 0x0490;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_AUCTION_LIST_PENDING_SALES::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

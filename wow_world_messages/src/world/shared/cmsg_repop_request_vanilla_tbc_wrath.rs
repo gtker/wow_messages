@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct CMSG_REPOP_REQUEST {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_REPOP_REQUEST {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_REPOP_REQUEST {}
+impl crate::Message for CMSG_REPOP_REQUEST {
+    const OPCODE: u32 = 0x015a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl CMSG_REPOP_REQUEST {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_REPOP_REQUEST {}
-impl crate::Message for CMSG_REPOP_REQUEST {
-    const OPCODE: u32 = 0x015a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_REPOP_REQUEST::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

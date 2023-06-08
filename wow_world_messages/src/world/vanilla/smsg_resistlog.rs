@@ -28,9 +28,12 @@ pub struct SMSG_RESISTLOG {
     pub unknown5: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_RESISTLOG {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_RESISTLOG {}
+impl crate::Message for SMSG_RESISTLOG {
+    const OPCODE: u32 = 0x01d6;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -70,17 +73,6 @@ impl SMSG_RESISTLOG {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_RESISTLOG {}
-impl crate::Message for SMSG_RESISTLOG {
-    const OPCODE: u32 = 0x01d6;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_RESISTLOG::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

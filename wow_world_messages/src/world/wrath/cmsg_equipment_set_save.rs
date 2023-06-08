@@ -21,9 +21,12 @@ pub struct CMSG_EQUIPMENT_SET_SAVE {
     pub equipment: [Guid; 19],
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_EQUIPMENT_SET_SAVE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_EQUIPMENT_SET_SAVE {}
+impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
+    const OPCODE: u32 = 0x04bd;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -67,17 +70,6 @@ impl CMSG_EQUIPMENT_SET_SAVE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_EQUIPMENT_SET_SAVE {}
-impl crate::Message for CMSG_EQUIPMENT_SET_SAVE {
-    const OPCODE: u32 = 0x04bd;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_EQUIPMENT_SET_SAVE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

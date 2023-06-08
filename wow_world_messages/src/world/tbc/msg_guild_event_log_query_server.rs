@@ -14,9 +14,12 @@ pub struct MSG_GUILD_EVENT_LOG_QUERY_Server {
     pub events: Vec<GuildLogEvent>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_GUILD_EVENT_LOG_QUERY_Server {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for MSG_GUILD_EVENT_LOG_QUERY_Server {}
+impl crate::Message for MSG_GUILD_EVENT_LOG_QUERY_Server {
+    const OPCODE: u32 = 0x03fe;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -94,17 +97,6 @@ impl MSG_GUILD_EVENT_LOG_QUERY_Server {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for MSG_GUILD_EVENT_LOG_QUERY_Server {}
-impl crate::Message for MSG_GUILD_EVENT_LOG_QUERY_Server {
-    const OPCODE: u32 = 0x03fe;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_GUILD_EVENT_LOG_QUERY_Server::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

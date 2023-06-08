@@ -23,9 +23,12 @@ pub struct SMSG_START_MIRROR_TIMER {
     pub id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_START_MIRROR_TIMER {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_START_MIRROR_TIMER {}
+impl crate::Message for SMSG_START_MIRROR_TIMER {
+    const OPCODE: u32 = 0x01d9;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -63,17 +66,6 @@ impl SMSG_START_MIRROR_TIMER {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_START_MIRROR_TIMER {}
-impl crate::Message for SMSG_START_MIRROR_TIMER {
-    const OPCODE: u32 = 0x01d9;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_START_MIRROR_TIMER::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

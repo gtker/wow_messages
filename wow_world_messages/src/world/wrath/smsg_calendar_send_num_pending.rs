@@ -14,9 +14,12 @@ pub struct SMSG_CALENDAR_SEND_NUM_PENDING {
     pub pending_events: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CALENDAR_SEND_NUM_PENDING {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CALENDAR_SEND_NUM_PENDING {}
+impl crate::Message for SMSG_CALENDAR_SEND_NUM_PENDING {
+    const OPCODE: u32 = 0x0448;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -44,17 +47,6 @@ impl SMSG_CALENDAR_SEND_NUM_PENDING {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CALENDAR_SEND_NUM_PENDING {}
-impl crate::Message for SMSG_CALENDAR_SEND_NUM_PENDING {
-    const OPCODE: u32 = 0x0448;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CALENDAR_SEND_NUM_PENDING::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

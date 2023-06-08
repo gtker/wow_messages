@@ -15,9 +15,12 @@ pub struct CMSG_MAIL_MARK_AS_READ {
     pub mail_id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_MAIL_MARK_AS_READ {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_MAIL_MARK_AS_READ {}
+impl crate::Message for CMSG_MAIL_MARK_AS_READ {
+    const OPCODE: u32 = 0x0247;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl CMSG_MAIL_MARK_AS_READ {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_MAIL_MARK_AS_READ {}
-impl crate::Message for CMSG_MAIL_MARK_AS_READ {
-    const OPCODE: u32 = 0x0247;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_MAIL_MARK_AS_READ::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

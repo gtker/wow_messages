@@ -417,11 +417,16 @@ pub(crate) fn common_impls_world(
                     let name = container.name();
 
                     if container.empty_body() {
-                        s.wln(format!("Self::{en} => {name}{{}}.to_test_case_string(),",));
+                        s.wln(format!(
+                            "Self::{en} => crate::Message::to_test_case_string(&{name}{{}}),",
+                        ));
                     } else {
-                        s.wln(format!("Self::{en}(c) => c.to_test_case_string(),",));
+                        s.wln(format!(
+                            "Self::{en}(c) => crate::Message::to_test_case_string(c),",
+                        ));
                     }
                 }
+
                 s.wln("_ => None,");
             });
         });

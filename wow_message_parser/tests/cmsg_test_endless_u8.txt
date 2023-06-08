@@ -15,9 +15,12 @@ pub struct CMSG_TEST_ENDLESS_U8 {
     pub endless: Vec<u8>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_TEST_ENDLESS_U8 {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_TEST_ENDLESS_U8 {}
+impl crate::Message for CMSG_TEST_ENDLESS_U8 {
+    const OPCODE: u32 = 0x1337;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -53,17 +56,6 @@ impl CMSG_TEST_ENDLESS_U8 {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_TEST_ENDLESS_U8 {}
-impl crate::Message for CMSG_TEST_ENDLESS_U8 {
-    const OPCODE: u32 = 0x1337;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_TEST_ENDLESS_U8::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

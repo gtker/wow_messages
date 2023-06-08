@@ -15,9 +15,12 @@ pub struct SMSG_PET_UNLEARN_CONFIRM {
     pub talent_reset_cost: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PET_UNLEARN_CONFIRM {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PET_UNLEARN_CONFIRM {}
+impl crate::Message for SMSG_PET_UNLEARN_CONFIRM {
+    const OPCODE: u32 = 0x02f1;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_PET_UNLEARN_CONFIRM {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PET_UNLEARN_CONFIRM {}
-impl crate::Message for SMSG_PET_UNLEARN_CONFIRM {
-    const OPCODE: u32 = 0x02f1;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PET_UNLEARN_CONFIRM::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

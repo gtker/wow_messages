@@ -16,9 +16,12 @@ pub struct MSG_QUERY_NEXT_MAIL_TIME_Server {
     pub unread_mails: f32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_QUERY_NEXT_MAIL_TIME_Server {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for MSG_QUERY_NEXT_MAIL_TIME_Server {}
+impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
+    const OPCODE: u32 = 0x0284;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -46,17 +49,6 @@ impl MSG_QUERY_NEXT_MAIL_TIME_Server {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for MSG_QUERY_NEXT_MAIL_TIME_Server {}
-impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
-    const OPCODE: u32 = 0x0284;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_QUERY_NEXT_MAIL_TIME_Server::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

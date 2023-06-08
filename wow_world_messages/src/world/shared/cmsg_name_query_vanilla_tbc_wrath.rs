@@ -13,9 +13,12 @@ pub struct CMSG_NAME_QUERY {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_NAME_QUERY {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_NAME_QUERY {}
+impl crate::Message for CMSG_NAME_QUERY {
+    const OPCODE: u32 = 0x0050;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_NAME_QUERY {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_NAME_QUERY {}
-impl crate::Message for CMSG_NAME_QUERY {
-    const OPCODE: u32 = 0x0050;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_NAME_QUERY::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

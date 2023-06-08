@@ -18,9 +18,12 @@ pub struct SMSG_PVP_CREDIT {
     pub rank: PvpRank,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PVP_CREDIT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PVP_CREDIT {}
+impl crate::Message for SMSG_PVP_CREDIT {
+    const OPCODE: u32 = 0x028c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -52,17 +55,6 @@ impl SMSG_PVP_CREDIT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PVP_CREDIT {}
-impl crate::Message for SMSG_PVP_CREDIT {
-    const OPCODE: u32 = 0x028c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PVP_CREDIT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

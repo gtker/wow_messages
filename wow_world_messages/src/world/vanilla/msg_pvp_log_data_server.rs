@@ -21,9 +21,12 @@ pub struct MSG_PVP_LOG_DATA_Server {
     pub players: Vec<BattlegroundPlayer>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_PVP_LOG_DATA_Server {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for MSG_PVP_LOG_DATA_Server {}
+impl crate::Message for MSG_PVP_LOG_DATA_Server {
+    const OPCODE: u32 = 0x02e0;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -113,17 +116,6 @@ impl MSG_PVP_LOG_DATA_Server {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for MSG_PVP_LOG_DATA_Server {}
-impl crate::Message for MSG_PVP_LOG_DATA_Server {
-    const OPCODE: u32 = 0x02e0;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_PVP_LOG_DATA_Server::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

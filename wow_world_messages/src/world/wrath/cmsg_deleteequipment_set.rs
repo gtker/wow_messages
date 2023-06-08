@@ -13,9 +13,12 @@ pub struct CMSG_DELETEEQUIPMENT_SET {
     pub set: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_DELETEEQUIPMENT_SET {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_DELETEEQUIPMENT_SET {}
+impl crate::Message for CMSG_DELETEEQUIPMENT_SET {
+    const OPCODE: u32 = 0x013e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_DELETEEQUIPMENT_SET {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_DELETEEQUIPMENT_SET {}
-impl crate::Message for CMSG_DELETEEQUIPMENT_SET {
-    const OPCODE: u32 = 0x013e;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_DELETEEQUIPMENT_SET::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

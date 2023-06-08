@@ -41,9 +41,12 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
     pub extend_flag: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SPELLNONMELEEDAMAGELOG {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SPELLNONMELEEDAMAGELOG {}
+impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
+    const OPCODE: u32 = 0x0250;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -93,17 +96,6 @@ impl SMSG_SPELLNONMELEEDAMAGELOG {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SPELLNONMELEEDAMAGELOG {}
-impl crate::Message for SMSG_SPELLNONMELEEDAMAGELOG {
-    const OPCODE: u32 = 0x0250;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SPELLNONMELEEDAMAGELOG::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

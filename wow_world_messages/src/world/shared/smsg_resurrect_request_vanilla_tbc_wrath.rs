@@ -17,9 +17,12 @@ pub struct SMSG_RESURRECT_REQUEST {
     pub player: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_RESURRECT_REQUEST {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_RESURRECT_REQUEST {}
+impl crate::Message for SMSG_RESURRECT_REQUEST {
+    const OPCODE: u32 = 0x015b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -51,17 +54,6 @@ impl SMSG_RESURRECT_REQUEST {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_RESURRECT_REQUEST {}
-impl crate::Message for SMSG_RESURRECT_REQUEST {
-    const OPCODE: u32 = 0x015b;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_RESURRECT_REQUEST::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

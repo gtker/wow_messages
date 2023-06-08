@@ -13,9 +13,12 @@ pub struct CMSG_VOICE_SESSION_ENABLE {
     pub microphone_enabled: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_VOICE_SESSION_ENABLE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_VOICE_SESSION_ENABLE {}
+impl crate::Message for CMSG_VOICE_SESSION_ENABLE {
+    const OPCODE: u32 = 0x03af;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl CMSG_VOICE_SESSION_ENABLE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_VOICE_SESSION_ENABLE {}
-impl crate::Message for CMSG_VOICE_SESSION_ENABLE {
-    const OPCODE: u32 = 0x03af;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_VOICE_SESSION_ENABLE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -21,9 +21,12 @@ pub struct SMSG_USERLIST_ADD {
     pub name: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_USERLIST_ADD {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_USERLIST_ADD {}
+impl crate::Message for SMSG_USERLIST_ADD {
+    const OPCODE: u32 = 0x03f0;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -59,17 +62,6 @@ impl SMSG_USERLIST_ADD {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_USERLIST_ADD {}
-impl crate::Message for SMSG_USERLIST_ADD {
-    const OPCODE: u32 = 0x03f0;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_USERLIST_ADD::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

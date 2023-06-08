@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct CMSG_COMPLETE_MOVIE {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_COMPLETE_MOVIE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_COMPLETE_MOVIE {}
+impl crate::Message for CMSG_COMPLETE_MOVIE {
+    const OPCODE: u32 = 0x0465;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl CMSG_COMPLETE_MOVIE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_COMPLETE_MOVIE {}
-impl crate::Message for CMSG_COMPLETE_MOVIE {
-    const OPCODE: u32 = 0x0465;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_COMPLETE_MOVIE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

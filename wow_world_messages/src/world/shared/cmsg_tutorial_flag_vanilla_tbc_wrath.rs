@@ -12,9 +12,12 @@ pub struct CMSG_TUTORIAL_FLAG {
     pub tutorial_flag: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_TUTORIAL_FLAG {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_TUTORIAL_FLAG {}
+impl crate::Message for CMSG_TUTORIAL_FLAG {
+    const OPCODE: u32 = 0x00fe;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -42,17 +45,6 @@ impl CMSG_TUTORIAL_FLAG {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_TUTORIAL_FLAG {}
-impl crate::Message for CMSG_TUTORIAL_FLAG {
-    const OPCODE: u32 = 0x00fe;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_TUTORIAL_FLAG::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

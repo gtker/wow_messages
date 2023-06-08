@@ -13,9 +13,12 @@ pub struct CMSG_SET_TARGET_OBSOLETE {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_SET_TARGET_OBSOLETE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_SET_TARGET_OBSOLETE {}
+impl crate::Message for CMSG_SET_TARGET_OBSOLETE {
+    const OPCODE: u32 = 0x013e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_SET_TARGET_OBSOLETE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_SET_TARGET_OBSOLETE {}
-impl crate::Message for CMSG_SET_TARGET_OBSOLETE {
-    const OPCODE: u32 = 0x013e;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_SET_TARGET_OBSOLETE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

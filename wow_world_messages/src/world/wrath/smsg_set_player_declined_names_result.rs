@@ -15,9 +15,12 @@ pub struct SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {}
+impl crate::Message for SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {
+    const OPCODE: u32 = 0x041a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {}
-impl crate::Message for SMSG_SET_PLAYER_DECLINED_NAMES_RESULT {
-    const OPCODE: u32 = 0x041a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SET_PLAYER_DECLINED_NAMES_RESULT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

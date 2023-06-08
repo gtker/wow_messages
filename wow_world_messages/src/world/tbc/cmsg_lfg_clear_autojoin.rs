@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct CMSG_LFG_CLEAR_AUTOJOIN {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_LFG_CLEAR_AUTOJOIN {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_LFG_CLEAR_AUTOJOIN {}
+impl crate::Message for CMSG_LFG_CLEAR_AUTOJOIN {
+    const OPCODE: u32 = 0x035d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl CMSG_LFG_CLEAR_AUTOJOIN {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_LFG_CLEAR_AUTOJOIN {}
-impl crate::Message for CMSG_LFG_CLEAR_AUTOJOIN {
-    const OPCODE: u32 = 0x035d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_LFG_CLEAR_AUTOJOIN::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

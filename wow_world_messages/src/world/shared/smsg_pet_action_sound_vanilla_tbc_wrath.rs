@@ -16,9 +16,12 @@ pub struct SMSG_PET_ACTION_SOUND {
     pub reason: PetTalkReason,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PET_ACTION_SOUND {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PET_ACTION_SOUND {}
+impl crate::Message for SMSG_PET_ACTION_SOUND {
+    const OPCODE: u32 = 0x0324;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -48,17 +51,6 @@ impl SMSG_PET_ACTION_SOUND {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PET_ACTION_SOUND {}
-impl crate::Message for SMSG_PET_ACTION_SOUND {
-    const OPCODE: u32 = 0x0324;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PET_ACTION_SOUND::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

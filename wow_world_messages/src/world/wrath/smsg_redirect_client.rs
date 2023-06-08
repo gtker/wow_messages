@@ -20,9 +20,12 @@ pub struct SMSG_REDIRECT_CLIENT {
     pub hash: [u8; 20],
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_REDIRECT_CLIENT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_REDIRECT_CLIENT {}
+impl crate::Message for SMSG_REDIRECT_CLIENT {
+    const OPCODE: u32 = 0x050d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -60,17 +63,6 @@ impl SMSG_REDIRECT_CLIENT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_REDIRECT_CLIENT {}
-impl crate::Message for SMSG_REDIRECT_CLIENT {
-    const OPCODE: u32 = 0x050d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_REDIRECT_CLIENT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

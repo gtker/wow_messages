@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct CMSG_MEETINGSTONE_LEAVE {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_MEETINGSTONE_LEAVE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_MEETINGSTONE_LEAVE {}
+impl crate::Message for CMSG_MEETINGSTONE_LEAVE {
+    const OPCODE: u32 = 0x0293;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl CMSG_MEETINGSTONE_LEAVE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_MEETINGSTONE_LEAVE {}
-impl crate::Message for CMSG_MEETINGSTONE_LEAVE {
-    const OPCODE: u32 = 0x0293;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_MEETINGSTONE_LEAVE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

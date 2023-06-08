@@ -17,9 +17,12 @@ pub struct SMSG_QUEST_CONFIRM_ACCEPT {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_QUEST_CONFIRM_ACCEPT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_QUEST_CONFIRM_ACCEPT {}
+impl crate::Message for SMSG_QUEST_CONFIRM_ACCEPT {
+    const OPCODE: u32 = 0x019c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -51,17 +54,6 @@ impl SMSG_QUEST_CONFIRM_ACCEPT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_QUEST_CONFIRM_ACCEPT {}
-impl crate::Message for SMSG_QUEST_CONFIRM_ACCEPT {
-    const OPCODE: u32 = 0x019c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_QUEST_CONFIRM_ACCEPT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

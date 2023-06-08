@@ -13,9 +13,12 @@ pub struct SMSG_SET_FACTION_VISIBLE {
     pub faction: Faction,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SET_FACTION_VISIBLE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SET_FACTION_VISIBLE {}
+impl crate::Message for SMSG_SET_FACTION_VISIBLE {
+    const OPCODE: u32 = 0x0123;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_SET_FACTION_VISIBLE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SET_FACTION_VISIBLE {}
-impl crate::Message for SMSG_SET_FACTION_VISIBLE {
-    const OPCODE: u32 = 0x0123;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SET_FACTION_VISIBLE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -13,9 +13,12 @@ pub struct SMSG_ARENA_UNIT_DESTROYED {
     pub unit: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_ARENA_UNIT_DESTROYED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_ARENA_UNIT_DESTROYED {}
+impl crate::Message for SMSG_ARENA_UNIT_DESTROYED {
+    const OPCODE: u32 = 0x04c7;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_ARENA_UNIT_DESTROYED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_ARENA_UNIT_DESTROYED {}
-impl crate::Message for SMSG_ARENA_UNIT_DESTROYED {
-    const OPCODE: u32 = 0x04c7;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_ARENA_UNIT_DESTROYED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

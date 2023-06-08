@@ -23,9 +23,12 @@ pub struct MSG_SAVE_GUILD_EMBLEM_Client {
     pub background_color: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_SAVE_GUILD_EMBLEM_Client {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for MSG_SAVE_GUILD_EMBLEM_Client {}
+impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Client {
+    const OPCODE: u32 = 0x01f1;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -63,17 +66,6 @@ impl MSG_SAVE_GUILD_EMBLEM_Client {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for MSG_SAVE_GUILD_EMBLEM_Client {}
-impl crate::Message for MSG_SAVE_GUILD_EMBLEM_Client {
-    const OPCODE: u32 = 0x01f1;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_SAVE_GUILD_EMBLEM_Client::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -25,9 +25,12 @@ pub struct CMSG_BATTLEFIELD_PORT {
     pub action: BattlefieldPortAction,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_BATTLEFIELD_PORT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_BATTLEFIELD_PORT {}
+impl crate::Message for CMSG_BATTLEFIELD_PORT {
+    const OPCODE: u32 = 0x02d5;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -63,17 +66,6 @@ impl CMSG_BATTLEFIELD_PORT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_BATTLEFIELD_PORT {}
-impl crate::Message for CMSG_BATTLEFIELD_PORT {
-    const OPCODE: u32 = 0x02d5;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_BATTLEFIELD_PORT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

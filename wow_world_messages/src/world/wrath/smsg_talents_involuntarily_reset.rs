@@ -13,9 +13,12 @@ pub struct SMSG_TALENTS_INVOLUNTARILY_RESET {
     pub unknown: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_TALENTS_INVOLUNTARILY_RESET {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_TALENTS_INVOLUNTARILY_RESET {}
+impl crate::Message for SMSG_TALENTS_INVOLUNTARILY_RESET {
+    const OPCODE: u32 = 0x04fa;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_TALENTS_INVOLUNTARILY_RESET {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_TALENTS_INVOLUNTARILY_RESET {}
-impl crate::Message for SMSG_TALENTS_INVOLUNTARILY_RESET {
-    const OPCODE: u32 = 0x04fa;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_TALENTS_INVOLUNTARILY_RESET::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

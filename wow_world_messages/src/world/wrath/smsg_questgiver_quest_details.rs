@@ -79,9 +79,12 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub emotes: Vec<QuestDetailsEmote>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_QUESTGIVER_QUEST_DETAILS {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_QUESTGIVER_QUEST_DETAILS {}
+impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
+    const OPCODE: u32 = 0x0188;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -247,17 +250,6 @@ impl SMSG_QUESTGIVER_QUEST_DETAILS {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_QUESTGIVER_QUEST_DETAILS {}
-impl crate::Message for SMSG_QUESTGIVER_QUEST_DETAILS {
-    const OPCODE: u32 = 0x0188;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_QUESTGIVER_QUEST_DETAILS::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -19,9 +19,12 @@ pub struct CMSG_CALENDAR_COPY_EVENT {
     pub time: DateTime,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CALENDAR_COPY_EVENT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_CALENDAR_COPY_EVENT {}
+impl crate::Message for CMSG_CALENDAR_COPY_EVENT {
+    const OPCODE: u32 = 0x0430;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -53,17 +56,6 @@ impl CMSG_CALENDAR_COPY_EVENT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_CALENDAR_COPY_EVENT {}
-impl crate::Message for CMSG_CALENDAR_COPY_EVENT {
-    const OPCODE: u32 = 0x0430;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CALENDAR_COPY_EVENT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

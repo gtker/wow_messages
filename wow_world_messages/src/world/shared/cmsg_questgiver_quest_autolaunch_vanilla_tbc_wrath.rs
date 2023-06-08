@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {}
+impl crate::Message for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
+    const OPCODE: u32 = 0x0187;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {}
-impl crate::Message for CMSG_QUESTGIVER_QUEST_AUTOLAUNCH {
-    const OPCODE: u32 = 0x0187;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_QUESTGIVER_QUEST_AUTOLAUNCH::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -17,9 +17,12 @@ pub struct MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
     pub carriers: Vec<BattlegroundPlayerPosition>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
+impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
+    const OPCODE: u32 = 0x02e9;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -93,17 +96,6 @@ impl MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {}
-impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
-    const OPCODE: u32 = 0x02e9;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_BATTLEGROUND_PLAYER_POSITIONS_Server::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

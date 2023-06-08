@@ -14,9 +14,12 @@ pub struct SMSG_LEARNED_SPELL {
     pub unknown: u16,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_LEARNED_SPELL {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_LEARNED_SPELL {}
+impl crate::Message for SMSG_LEARNED_SPELL {
+    const OPCODE: u32 = 0x012b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -46,17 +49,6 @@ impl SMSG_LEARNED_SPELL {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_LEARNED_SPELL {}
-impl crate::Message for SMSG_LEARNED_SPELL {
-    const OPCODE: u32 = 0x012b;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_LEARNED_SPELL::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

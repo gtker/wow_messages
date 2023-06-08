@@ -15,9 +15,12 @@ pub struct SMSG_ARENA_ERROR {
     pub arena_type: ArenaType,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_ARENA_ERROR {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_ARENA_ERROR {}
+impl crate::Message for SMSG_ARENA_ERROR {
+    const OPCODE: u32 = 0x0376;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_ARENA_ERROR {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_ARENA_ERROR {}
-impl crate::Message for SMSG_ARENA_ERROR {
-    const OPCODE: u32 = 0x0376;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_ARENA_ERROR::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

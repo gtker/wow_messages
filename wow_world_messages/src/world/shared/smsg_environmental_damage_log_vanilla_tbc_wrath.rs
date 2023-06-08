@@ -22,9 +22,12 @@ pub struct SMSG_ENVIRONMENTAL_DAMAGE_LOG {
     pub resist: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_ENVIRONMENTAL_DAMAGE_LOG {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_ENVIRONMENTAL_DAMAGE_LOG {}
+impl crate::Message for SMSG_ENVIRONMENTAL_DAMAGE_LOG {
+    const OPCODE: u32 = 0x01fc;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -60,17 +63,6 @@ impl SMSG_ENVIRONMENTAL_DAMAGE_LOG {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_ENVIRONMENTAL_DAMAGE_LOG {}
-impl crate::Message for SMSG_ENVIRONMENTAL_DAMAGE_LOG {
-    const OPCODE: u32 = 0x01fc;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_ENVIRONMENTAL_DAMAGE_LOG::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

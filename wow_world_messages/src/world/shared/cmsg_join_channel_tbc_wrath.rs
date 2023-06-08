@@ -19,9 +19,12 @@ pub struct CMSG_JOIN_CHANNEL {
     pub channel_password: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_JOIN_CHANNEL {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_JOIN_CHANNEL {}
+impl crate::Message for CMSG_JOIN_CHANNEL {
+    const OPCODE: u32 = 0x0097;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -57,17 +60,6 @@ impl CMSG_JOIN_CHANNEL {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_JOIN_CHANNEL {}
-impl crate::Message for CMSG_JOIN_CHANNEL {
-    const OPCODE: u32 = 0x0097;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_JOIN_CHANNEL::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

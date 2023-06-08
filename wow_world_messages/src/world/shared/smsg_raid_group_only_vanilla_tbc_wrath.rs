@@ -17,9 +17,12 @@ pub struct SMSG_RAID_GROUP_ONLY {
     pub error: RaidGroupError,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_RAID_GROUP_ONLY {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_RAID_GROUP_ONLY {}
+impl crate::Message for SMSG_RAID_GROUP_ONLY {
+    const OPCODE: u32 = 0x0286;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -49,17 +52,6 @@ impl SMSG_RAID_GROUP_ONLY {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_RAID_GROUP_ONLY {}
-impl crate::Message for SMSG_RAID_GROUP_ONLY {
-    const OPCODE: u32 = 0x0286;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_RAID_GROUP_ONLY::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

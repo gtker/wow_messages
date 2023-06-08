@@ -18,9 +18,12 @@ pub struct SMSG_MODIFY_COOLDOWN {
     pub cooldown: Duration,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_MODIFY_COOLDOWN {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_MODIFY_COOLDOWN {}
+impl crate::Message for SMSG_MODIFY_COOLDOWN {
+    const OPCODE: u32 = 0x0491;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -52,17 +55,6 @@ impl SMSG_MODIFY_COOLDOWN {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_MODIFY_COOLDOWN {}
-impl crate::Message for SMSG_MODIFY_COOLDOWN {
-    const OPCODE: u32 = 0x0491;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_MODIFY_COOLDOWN::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

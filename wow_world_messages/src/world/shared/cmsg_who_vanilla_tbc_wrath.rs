@@ -29,9 +29,12 @@ pub struct CMSG_WHO {
     pub search_strings: Vec<String>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_WHO {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_WHO {}
+impl crate::Message for CMSG_WHO {
+    const OPCODE: u32 = 0x0062;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -97,17 +100,6 @@ impl CMSG_WHO {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_WHO {}
-impl crate::Message for CMSG_WHO {
-    const OPCODE: u32 = 0x0062;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_WHO::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

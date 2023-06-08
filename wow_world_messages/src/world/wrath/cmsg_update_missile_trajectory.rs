@@ -24,9 +24,12 @@ pub struct CMSG_UPDATE_MISSILE_TRAJECTORY {
     pub target: Vector3d,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_UPDATE_MISSILE_TRAJECTORY {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_UPDATE_MISSILE_TRAJECTORY {}
+impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
+    const OPCODE: u32 = 0x0462;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -86,17 +89,6 @@ impl CMSG_UPDATE_MISSILE_TRAJECTORY {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_UPDATE_MISSILE_TRAJECTORY {}
-impl crate::Message for CMSG_UPDATE_MISSILE_TRAJECTORY {
-    const OPCODE: u32 = 0x0462;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_UPDATE_MISSILE_TRAJECTORY::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

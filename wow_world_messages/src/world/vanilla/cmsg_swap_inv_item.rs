@@ -15,9 +15,12 @@ pub struct CMSG_SWAP_INV_ITEM {
     pub destination_slot: ItemSlot,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_SWAP_INV_ITEM {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_SWAP_INV_ITEM {}
+impl crate::Message for CMSG_SWAP_INV_ITEM {
+    const OPCODE: u32 = 0x010d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl CMSG_SWAP_INV_ITEM {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_SWAP_INV_ITEM {}
-impl crate::Message for CMSG_SWAP_INV_ITEM {
-    const OPCODE: u32 = 0x010d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_SWAP_INV_ITEM::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

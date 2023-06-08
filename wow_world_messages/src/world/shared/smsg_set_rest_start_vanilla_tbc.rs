@@ -12,9 +12,12 @@ pub struct SMSG_SET_REST_START {
     pub unknown1: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SET_REST_START {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SET_REST_START {}
+impl crate::Message for SMSG_SET_REST_START {
+    const OPCODE: u32 = 0x021e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -42,17 +45,6 @@ impl SMSG_SET_REST_START {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SET_REST_START {}
-impl crate::Message for SMSG_SET_REST_START {
-    const OPCODE: u32 = 0x021e;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SET_REST_START::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

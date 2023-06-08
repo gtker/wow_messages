@@ -22,9 +22,12 @@ pub struct SMSG_ACHIEVEMENT_EARNED {
     pub unknown: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_ACHIEVEMENT_EARNED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_ACHIEVEMENT_EARNED {}
+impl crate::Message for SMSG_ACHIEVEMENT_EARNED {
+    const OPCODE: u32 = 0x0468;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -58,17 +61,6 @@ impl SMSG_ACHIEVEMENT_EARNED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_ACHIEVEMENT_EARNED {}
-impl crate::Message for SMSG_ACHIEVEMENT_EARNED {
-    const OPCODE: u32 = 0x0468;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_ACHIEVEMENT_EARNED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

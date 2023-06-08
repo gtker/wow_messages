@@ -17,9 +17,12 @@ pub struct CMSG_GUILD_BANK_QUERY_TAB {
     pub full_update: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_GUILD_BANK_QUERY_TAB {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_GUILD_BANK_QUERY_TAB {}
+impl crate::Message for CMSG_GUILD_BANK_QUERY_TAB {
+    const OPCODE: u32 = 0x03e7;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -51,17 +54,6 @@ impl CMSG_GUILD_BANK_QUERY_TAB {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_GUILD_BANK_QUERY_TAB {}
-impl crate::Message for CMSG_GUILD_BANK_QUERY_TAB {
-    const OPCODE: u32 = 0x03e7;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_GUILD_BANK_QUERY_TAB::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

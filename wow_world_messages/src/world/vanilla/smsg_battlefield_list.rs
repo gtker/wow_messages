@@ -23,9 +23,12 @@ pub struct SMSG_BATTLEFIELD_LIST {
     pub battlegrounds: Vec<u32>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_BATTLEFIELD_LIST {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_BATTLEFIELD_LIST {}
+impl crate::Message for SMSG_BATTLEFIELD_LIST {
+    const OPCODE: u32 = 0x023d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -71,17 +74,6 @@ impl SMSG_BATTLEFIELD_LIST {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_BATTLEFIELD_LIST {}
-impl crate::Message for SMSG_BATTLEFIELD_LIST {
-    const OPCODE: u32 = 0x023d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_BATTLEFIELD_LIST::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -18,9 +18,12 @@ pub struct MSG_PARTY_ASSIGNMENT_Client {
     pub player: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_PARTY_ASSIGNMENT_Client {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for MSG_PARTY_ASSIGNMENT_Client {}
+impl crate::Message for MSG_PARTY_ASSIGNMENT_Client {
+    const OPCODE: u32 = 0x038e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -52,17 +55,6 @@ impl MSG_PARTY_ASSIGNMENT_Client {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for MSG_PARTY_ASSIGNMENT_Client {}
-impl crate::Message for MSG_PARTY_ASSIGNMENT_Client {
-    const OPCODE: u32 = 0x038e;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_PARTY_ASSIGNMENT_Client::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -20,9 +20,12 @@ pub struct CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
     pub seat: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {}
+impl crate::Message for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
+    const OPCODE: u32 = 0x049b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -230,17 +233,6 @@ impl CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {}
-impl crate::Message for CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE {
-    const OPCODE: u32 = 0x049b;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CHANGE_SEATS_ON_CONTROLLED_VEHICLE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

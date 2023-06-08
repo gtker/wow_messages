@@ -17,9 +17,12 @@ pub struct CMSG_MOVE_SPLINE_DONE {
     pub unknown1: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_MOVE_SPLINE_DONE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_MOVE_SPLINE_DONE {}
+impl crate::Message for CMSG_MOVE_SPLINE_DONE {
+    const OPCODE: u32 = 0x02c9;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -139,17 +142,6 @@ impl CMSG_MOVE_SPLINE_DONE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_MOVE_SPLINE_DONE {}
-impl crate::Message for CMSG_MOVE_SPLINE_DONE {
-    const OPCODE: u32 = 0x02c9;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_MOVE_SPLINE_DONE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

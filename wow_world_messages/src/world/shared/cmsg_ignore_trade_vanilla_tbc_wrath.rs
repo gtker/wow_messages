@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct CMSG_IGNORE_TRADE {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_IGNORE_TRADE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_IGNORE_TRADE {}
+impl crate::Message for CMSG_IGNORE_TRADE {
+    const OPCODE: u32 = 0x0119;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl CMSG_IGNORE_TRADE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_IGNORE_TRADE {}
-impl crate::Message for CMSG_IGNORE_TRADE {
-    const OPCODE: u32 = 0x0119;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_IGNORE_TRADE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

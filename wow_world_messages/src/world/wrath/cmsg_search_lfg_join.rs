@@ -11,9 +11,12 @@ pub struct CMSG_SEARCH_LFG_JOIN {
     pub dungeon_id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_SEARCH_LFG_JOIN {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_SEARCH_LFG_JOIN {}
+impl crate::Message for CMSG_SEARCH_LFG_JOIN {
+    const OPCODE: u32 = 0x035e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl CMSG_SEARCH_LFG_JOIN {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_SEARCH_LFG_JOIN {}
-impl crate::Message for CMSG_SEARCH_LFG_JOIN {
-    const OPCODE: u32 = 0x035e;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_SEARCH_LFG_JOIN::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -13,9 +13,12 @@ pub struct CMSG_EQUIPMENT_SET_USE {
     pub sets: [EquipmentSet; 19],
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_EQUIPMENT_SET_USE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_EQUIPMENT_SET_USE {}
+impl crate::Message for CMSG_EQUIPMENT_SET_USE {
+    const OPCODE: u32 = 0x04d5;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -61,17 +64,6 @@ impl CMSG_EQUIPMENT_SET_USE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_EQUIPMENT_SET_USE {}
-impl crate::Message for CMSG_EQUIPMENT_SET_USE {
-    const OPCODE: u32 = 0x04d5;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_EQUIPMENT_SET_USE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

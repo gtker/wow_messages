@@ -16,9 +16,12 @@ pub struct SMSG_PLAY_SPELL_IMPACT {
     pub spell_visual_kit: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PLAY_SPELL_IMPACT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PLAY_SPELL_IMPACT {}
+impl crate::Message for SMSG_PLAY_SPELL_IMPACT {
+    const OPCODE: u32 = 0x01f7;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -48,17 +51,6 @@ impl SMSG_PLAY_SPELL_IMPACT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PLAY_SPELL_IMPACT {}
-impl crate::Message for SMSG_PLAY_SPELL_IMPACT {
-    const OPCODE: u32 = 0x01f7;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PLAY_SPELL_IMPACT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

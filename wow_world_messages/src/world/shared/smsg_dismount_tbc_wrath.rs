@@ -13,9 +13,12 @@ pub struct SMSG_DISMOUNT {
     pub player: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_DISMOUNT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_DISMOUNT {}
+impl crate::Message for SMSG_DISMOUNT {
+    const OPCODE: u32 = 0x03ac;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_DISMOUNT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_DISMOUNT {}
-impl crate::Message for SMSG_DISMOUNT {
-    const OPCODE: u32 = 0x03ac;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_DISMOUNT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

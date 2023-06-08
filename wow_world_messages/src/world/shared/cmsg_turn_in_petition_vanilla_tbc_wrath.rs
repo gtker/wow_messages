@@ -13,9 +13,12 @@ pub struct CMSG_TURN_IN_PETITION {
     pub petition: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_TURN_IN_PETITION {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_TURN_IN_PETITION {}
+impl crate::Message for CMSG_TURN_IN_PETITION {
+    const OPCODE: u32 = 0x01c4;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_TURN_IN_PETITION {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_TURN_IN_PETITION {}
-impl crate::Message for CMSG_TURN_IN_PETITION {
-    const OPCODE: u32 = 0x01c4;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_TURN_IN_PETITION::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

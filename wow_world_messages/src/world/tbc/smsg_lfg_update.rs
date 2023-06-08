@@ -22,9 +22,12 @@ pub struct SMSG_LFG_UPDATE {
     pub looking_for_more: SMSG_LFG_UPDATE_LfgUpdateLookingForMore,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_LFG_UPDATE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_LFG_UPDATE {}
+impl crate::Message for SMSG_LFG_UPDATE {
+    const OPCODE: u32 = 0x036c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -83,17 +86,6 @@ impl SMSG_LFG_UPDATE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_LFG_UPDATE {}
-impl crate::Message for SMSG_LFG_UPDATE {
-    const OPCODE: u32 = 0x036c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_LFG_UPDATE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

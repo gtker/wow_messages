@@ -16,9 +16,12 @@ pub struct SMSG_AURA_UPDATE_ALL {
     pub aura_updates: Vec<AuraUpdate>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_AURA_UPDATE_ALL {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_AURA_UPDATE_ALL {}
+impl crate::Message for SMSG_AURA_UPDATE_ALL {
+    const OPCODE: u32 = 0x0495;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -90,17 +93,6 @@ impl SMSG_AURA_UPDATE_ALL {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_AURA_UPDATE_ALL {}
-impl crate::Message for SMSG_AURA_UPDATE_ALL {
-    const OPCODE: u32 = 0x0495;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_AURA_UPDATE_ALL::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

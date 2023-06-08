@@ -31,9 +31,28 @@ impl CMD_AUTH_RECONNECT_PROOF_Server {
 
 }
 
-#[cfg(feature = "print-testcase")]
 impl CMD_AUTH_RECONNECT_PROOF_Server {
-    pub fn to_test_case_string(&self) -> Option<String> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes())?;
+
+        // result: LoginResult
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
+
+        // padding: u16
+        w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
+
+        Ok(())
+    }
+}
+
+impl crate::private::Sealed for CMD_AUTH_RECONNECT_PROOF_Server {}
+
+impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
+    const OPCODE: u8 = 0x03;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
 
         let mut s = String::new();
@@ -58,33 +77,6 @@ impl CMD_AUTH_RECONNECT_PROOF_Server {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl CMD_AUTH_RECONNECT_PROOF_Server {
-    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes())?;
-
-        // result: LoginResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
-
-        // padding: u16
-        w.write_all(&Self::PADDING_VALUE.to_le_bytes())?;
-
-        Ok(())
-    }
-}
-
-impl crate::private::Sealed for CMD_AUTH_RECONNECT_PROOF_Server {}
-
-impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
-    const OPCODE: u8 = 0x03;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMD_AUTH_RECONNECT_PROOF_Server::to_test_case_string(self)
     }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {

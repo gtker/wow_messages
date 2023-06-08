@@ -13,9 +13,12 @@ pub struct CMSG_BUY_BANK_SLOT {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_BUY_BANK_SLOT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_BUY_BANK_SLOT {}
+impl crate::Message for CMSG_BUY_BANK_SLOT {
+    const OPCODE: u32 = 0x01b9;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_BUY_BANK_SLOT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_BUY_BANK_SLOT {}
-impl crate::Message for CMSG_BUY_BANK_SLOT {
-    const OPCODE: u32 = 0x01b9;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_BUY_BANK_SLOT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

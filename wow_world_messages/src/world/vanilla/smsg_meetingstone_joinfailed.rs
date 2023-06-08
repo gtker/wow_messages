@@ -13,9 +13,12 @@ pub struct SMSG_MEETINGSTONE_JOINFAILED {
     pub reason: MeetingStoneFailure,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_MEETINGSTONE_JOINFAILED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_MEETINGSTONE_JOINFAILED {}
+impl crate::Message for SMSG_MEETINGSTONE_JOINFAILED {
+    const OPCODE: u32 = 0x02bb;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_MEETINGSTONE_JOINFAILED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_MEETINGSTONE_JOINFAILED {}
-impl crate::Message for SMSG_MEETINGSTONE_JOINFAILED {
-    const OPCODE: u32 = 0x02bb;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_MEETINGSTONE_JOINFAILED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

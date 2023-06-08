@@ -11,9 +11,12 @@ pub struct SMSG_AREA_TRIGGER_MESSAGE {
     pub message: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_AREA_TRIGGER_MESSAGE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_AREA_TRIGGER_MESSAGE {}
+impl crate::Message for SMSG_AREA_TRIGGER_MESSAGE {
+    const OPCODE: u32 = 0x02b8;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SMSG_AREA_TRIGGER_MESSAGE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_AREA_TRIGGER_MESSAGE {}
-impl crate::Message for SMSG_AREA_TRIGGER_MESSAGE {
-    const OPCODE: u32 = 0x02b8;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_AREA_TRIGGER_MESSAGE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

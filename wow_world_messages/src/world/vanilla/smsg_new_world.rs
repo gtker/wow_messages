@@ -19,9 +19,12 @@ pub struct SMSG_NEW_WORLD {
     pub orientation: f32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_NEW_WORLD {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_NEW_WORLD {}
+impl crate::Message for SMSG_NEW_WORLD {
+    const OPCODE: u32 = 0x003e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -64,17 +67,6 @@ impl SMSG_NEW_WORLD {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_NEW_WORLD {}
-impl crate::Message for SMSG_NEW_WORLD {
-    const OPCODE: u32 = 0x003e;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_NEW_WORLD::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

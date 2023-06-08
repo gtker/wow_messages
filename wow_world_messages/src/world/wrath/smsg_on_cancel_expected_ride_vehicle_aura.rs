@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA {
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA {}
+impl crate::Message for SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA {
+    const OPCODE: u32 = 0x049d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA {}
-impl crate::Message for SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA {
-    const OPCODE: u32 = 0x049d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_ON_CANCEL_EXPECTED_RIDE_VEHICLE_AURA::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

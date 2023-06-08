@@ -20,9 +20,12 @@ pub struct CMSG_MOVE_SET_COLLISION_HGT_ACK {
     pub new_height: f32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_MOVE_SET_COLLISION_HGT_ACK {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_MOVE_SET_COLLISION_HGT_ACK {}
+impl crate::Message for CMSG_MOVE_SET_COLLISION_HGT_ACK {
+    const OPCODE: u32 = 0x0517;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -230,17 +233,6 @@ impl CMSG_MOVE_SET_COLLISION_HGT_ACK {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_MOVE_SET_COLLISION_HGT_ACK {}
-impl crate::Message for CMSG_MOVE_SET_COLLISION_HGT_ACK {
-    const OPCODE: u32 = 0x0517;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_MOVE_SET_COLLISION_HGT_ACK::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

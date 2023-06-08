@@ -17,9 +17,12 @@ pub struct SMSG_ALL_ACHIEVEMENT_DATA {
     pub in_progress: Vec<AchievementInProgress>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_ALL_ACHIEVEMENT_DATA {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_ALL_ACHIEVEMENT_DATA {}
+impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
+    const OPCODE: u32 = 0x047d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -49,17 +52,6 @@ impl SMSG_ALL_ACHIEVEMENT_DATA {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_ALL_ACHIEVEMENT_DATA {}
-impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
-    const OPCODE: u32 = 0x047d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_ALL_ACHIEVEMENT_DATA::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

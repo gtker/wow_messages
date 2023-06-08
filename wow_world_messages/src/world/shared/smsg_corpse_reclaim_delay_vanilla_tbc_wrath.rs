@@ -13,9 +13,12 @@ pub struct SMSG_CORPSE_RECLAIM_DELAY {
     pub delay: Duration,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CORPSE_RECLAIM_DELAY {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CORPSE_RECLAIM_DELAY {}
+impl crate::Message for SMSG_CORPSE_RECLAIM_DELAY {
+    const OPCODE: u32 = 0x0269;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_CORPSE_RECLAIM_DELAY {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CORPSE_RECLAIM_DELAY {}
-impl crate::Message for SMSG_CORPSE_RECLAIM_DELAY {
-    const OPCODE: u32 = 0x0269;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CORPSE_RECLAIM_DELAY::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

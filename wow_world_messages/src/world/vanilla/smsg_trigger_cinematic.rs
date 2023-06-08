@@ -13,9 +13,12 @@ pub struct SMSG_TRIGGER_CINEMATIC {
     pub cinematic_sequence_id: CinematicSequenceId,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_TRIGGER_CINEMATIC {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_TRIGGER_CINEMATIC {}
+impl crate::Message for SMSG_TRIGGER_CINEMATIC {
+    const OPCODE: u32 = 0x00fa;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_TRIGGER_CINEMATIC {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_TRIGGER_CINEMATIC {}
-impl crate::Message for SMSG_TRIGGER_CINEMATIC {
-    const OPCODE: u32 = 0x00fa;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_TRIGGER_CINEMATIC::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

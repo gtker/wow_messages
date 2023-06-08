@@ -11,9 +11,12 @@ pub struct CMSG_PUSHQUESTTOPARTY {
     pub quest_id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_PUSHQUESTTOPARTY {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_PUSHQUESTTOPARTY {}
+impl crate::Message for CMSG_PUSHQUESTTOPARTY {
+    const OPCODE: u32 = 0x019d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl CMSG_PUSHQUESTTOPARTY {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_PUSHQUESTTOPARTY {}
-impl crate::Message for CMSG_PUSHQUESTTOPARTY {
-    const OPCODE: u32 = 0x019d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_PUSHQUESTTOPARTY::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

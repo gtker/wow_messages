@@ -28,9 +28,12 @@ pub struct CMSG_CHAR_CUSTOMIZE {
     pub face: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CHAR_CUSTOMIZE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_CHAR_CUSTOMIZE {}
+impl crate::Message for CMSG_CHAR_CUSTOMIZE {
+    const OPCODE: u32 = 0x0473;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -72,17 +75,6 @@ impl CMSG_CHAR_CUSTOMIZE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_CHAR_CUSTOMIZE {}
-impl crate::Message for CMSG_CHAR_CUSTOMIZE {
-    const OPCODE: u32 = 0x0473;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CHAR_CUSTOMIZE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

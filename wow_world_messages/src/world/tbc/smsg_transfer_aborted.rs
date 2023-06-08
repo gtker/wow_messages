@@ -21,9 +21,12 @@ pub struct SMSG_TRANSFER_ABORTED {
     pub reason: SMSG_TRANSFER_ABORTED_TransferAbortReason,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_TRANSFER_ABORTED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_TRANSFER_ABORTED {}
+impl crate::Message for SMSG_TRANSFER_ABORTED {
+    const OPCODE: u32 = 0x0040;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -81,17 +84,6 @@ impl SMSG_TRANSFER_ABORTED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_TRANSFER_ABORTED {}
-impl crate::Message for SMSG_TRANSFER_ABORTED {
-    const OPCODE: u32 = 0x0040;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_TRANSFER_ABORTED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

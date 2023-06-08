@@ -11,9 +11,12 @@ pub struct CMSG_LFG_SET_ROLES {
     pub roles: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_LFG_SET_ROLES {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_LFG_SET_ROLES {}
+impl crate::Message for CMSG_LFG_SET_ROLES {
+    const OPCODE: u32 = 0x036a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl CMSG_LFG_SET_ROLES {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_LFG_SET_ROLES {}
-impl crate::Message for CMSG_LFG_SET_ROLES {
-    const OPCODE: u32 = 0x036a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_LFG_SET_ROLES::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

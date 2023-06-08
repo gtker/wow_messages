@@ -13,9 +13,12 @@ pub struct CMSG_DUEL_ACCEPTED {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_DUEL_ACCEPTED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_DUEL_ACCEPTED {}
+impl crate::Message for CMSG_DUEL_ACCEPTED {
+    const OPCODE: u32 = 0x016c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_DUEL_ACCEPTED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_DUEL_ACCEPTED {}
-impl crate::Message for CMSG_DUEL_ACCEPTED {
-    const OPCODE: u32 = 0x016c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_DUEL_ACCEPTED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

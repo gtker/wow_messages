@@ -21,9 +21,12 @@ pub struct SMSG_PETITION_SHOW_SIGNATURES {
     pub signatures: Vec<PetitionSignature>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PETITION_SHOW_SIGNATURES {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PETITION_SHOW_SIGNATURES {}
+impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
+    const OPCODE: u32 = 0x01bf;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -77,17 +80,6 @@ impl SMSG_PETITION_SHOW_SIGNATURES {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PETITION_SHOW_SIGNATURES {}
-impl crate::Message for SMSG_PETITION_SHOW_SIGNATURES {
-    const OPCODE: u32 = 0x01bf;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PETITION_SHOW_SIGNATURES::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

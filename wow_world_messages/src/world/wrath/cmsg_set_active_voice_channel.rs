@@ -13,9 +13,12 @@ pub struct CMSG_SET_ACTIVE_VOICE_CHANNEL {
     pub unknown2: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_SET_ACTIVE_VOICE_CHANNEL {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_SET_ACTIVE_VOICE_CHANNEL {}
+impl crate::Message for CMSG_SET_ACTIVE_VOICE_CHANNEL {
+    const OPCODE: u32 = 0x03d3;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl CMSG_SET_ACTIVE_VOICE_CHANNEL {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_SET_ACTIVE_VOICE_CHANNEL {}
-impl crate::Message for CMSG_SET_ACTIVE_VOICE_CHANNEL {
-    const OPCODE: u32 = 0x03d3;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_SET_ACTIVE_VOICE_CHANNEL::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

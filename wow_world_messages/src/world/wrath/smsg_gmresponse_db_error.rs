@@ -11,9 +11,12 @@ use std::io::{Read, Write};
 pub struct SMSG_GMRESPONSE_DB_ERROR {
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_GMRESPONSE_DB_ERROR {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_GMRESPONSE_DB_ERROR {}
+impl crate::Message for SMSG_GMRESPONSE_DB_ERROR {
+    const OPCODE: u32 = 0x04ee;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -39,17 +42,6 @@ impl SMSG_GMRESPONSE_DB_ERROR {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_GMRESPONSE_DB_ERROR {}
-impl crate::Message for SMSG_GMRESPONSE_DB_ERROR {
-    const OPCODE: u32 = 0x04ee;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_GMRESPONSE_DB_ERROR::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -16,21 +16,13 @@ pub struct MSG_MOVE_SET_FACING {
     pub info: MovementInfo,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_MOVE_SET_FACING {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        panic!("MSG types not supported");
-    }
-
-}
-
 impl crate::private::Sealed for MSG_MOVE_SET_FACING {}
 impl crate::Message for MSG_MOVE_SET_FACING {
     const OPCODE: u32 = 0x00da;
 
     #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
-        MSG_MOVE_SET_FACING::to_test_case_string(self)
+        panic!("MSG types not supported");
     }
 
     fn size_without_header(&self) -> u32 {

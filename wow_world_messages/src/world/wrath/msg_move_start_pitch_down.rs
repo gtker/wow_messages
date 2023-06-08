@@ -16,21 +16,13 @@ pub struct MSG_MOVE_START_PITCH_DOWN {
     pub info: MovementInfo,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_MOVE_START_PITCH_DOWN {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        panic!("MSG types not supported");
-    }
-
-}
-
 impl crate::private::Sealed for MSG_MOVE_START_PITCH_DOWN {}
 impl crate::Message for MSG_MOVE_START_PITCH_DOWN {
     const OPCODE: u32 = 0x00c0;
 
     #[cfg(feature = "print-testcase")]
     fn to_test_case_string(&self) -> Option<String> {
-        MSG_MOVE_START_PITCH_DOWN::to_test_case_string(self)
+        panic!("MSG types not supported");
     }
 
     fn size_without_header(&self) -> u32 {

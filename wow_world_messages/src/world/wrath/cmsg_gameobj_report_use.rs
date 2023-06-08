@@ -13,9 +13,12 @@ pub struct CMSG_GAMEOBJ_REPORT_USE {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_GAMEOBJ_REPORT_USE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_GAMEOBJ_REPORT_USE {}
+impl crate::Message for CMSG_GAMEOBJ_REPORT_USE {
+    const OPCODE: u32 = 0x0481;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_GAMEOBJ_REPORT_USE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_GAMEOBJ_REPORT_USE {}
-impl crate::Message for CMSG_GAMEOBJ_REPORT_USE {
-    const OPCODE: u32 = 0x0481;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_GAMEOBJ_REPORT_USE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

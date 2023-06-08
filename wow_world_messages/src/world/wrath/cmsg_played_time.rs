@@ -12,9 +12,12 @@ pub struct CMSG_PLAYED_TIME {
     pub show_on_ui: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_PLAYED_TIME {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_PLAYED_TIME {}
+impl crate::Message for CMSG_PLAYED_TIME {
+    const OPCODE: u32 = 0x01cc;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -42,17 +45,6 @@ impl CMSG_PLAYED_TIME {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_PLAYED_TIME {}
-impl crate::Message for CMSG_PLAYED_TIME {
-    const OPCODE: u32 = 0x01cc;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_PLAYED_TIME::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -21,9 +21,12 @@ pub struct CMSG_DESTROYITEM {
     pub unknown3: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_DESTROYITEM {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_DESTROYITEM {}
+impl crate::Message for CMSG_DESTROYITEM {
+    const OPCODE: u32 = 0x0111;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -61,17 +64,6 @@ impl CMSG_DESTROYITEM {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_DESTROYITEM {}
-impl crate::Message for CMSG_DESTROYITEM {
-    const OPCODE: u32 = 0x0111;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_DESTROYITEM::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

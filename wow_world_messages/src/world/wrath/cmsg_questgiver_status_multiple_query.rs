@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY {}
+impl crate::Message for CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY {
+    const OPCODE: u32 = 0x0417;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY {}
-impl crate::Message for CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY {
-    const OPCODE: u32 = 0x0417;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -21,9 +21,12 @@ pub struct SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
     pub warmup: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {}
+impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
+    const OPCODE: u32 = 0x04e4;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -59,17 +62,6 @@ impl SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {}
-impl crate::Message for SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE {
-    const OPCODE: u32 = 0x04e4;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_BATTLEFIELD_MGR_QUEUE_REQUEST_RESPONSE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

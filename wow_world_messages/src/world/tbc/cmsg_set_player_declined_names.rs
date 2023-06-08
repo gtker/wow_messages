@@ -17,9 +17,12 @@ pub struct CMSG_SET_PLAYER_DECLINED_NAMES {
     pub declined_names: [String; 5],
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_SET_PLAYER_DECLINED_NAMES {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_SET_PLAYER_DECLINED_NAMES {}
+impl crate::Message for CMSG_SET_PLAYER_DECLINED_NAMES {
+    const OPCODE: u32 = 0x0418;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -59,17 +62,6 @@ impl CMSG_SET_PLAYER_DECLINED_NAMES {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_SET_PLAYER_DECLINED_NAMES {}
-impl crate::Message for CMSG_SET_PLAYER_DECLINED_NAMES {
-    const OPCODE: u32 = 0x0418;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_SET_PLAYER_DECLINED_NAMES::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -13,9 +13,12 @@ pub struct CMSG_REALM_SPLIT {
     pub realm_id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_REALM_SPLIT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_REALM_SPLIT {}
+impl crate::Message for CMSG_REALM_SPLIT {
+    const OPCODE: u32 = 0x038c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_REALM_SPLIT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_REALM_SPLIT {}
-impl crate::Message for CMSG_REALM_SPLIT {
-    const OPCODE: u32 = 0x038c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_REALM_SPLIT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

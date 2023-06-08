@@ -17,9 +17,12 @@ pub struct SMSG_PET_UPDATE_COMBO_POINTS {
     pub combo_points: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PET_UPDATE_COMBO_POINTS {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PET_UPDATE_COMBO_POINTS {}
+impl crate::Message for SMSG_PET_UPDATE_COMBO_POINTS {
+    const OPCODE: u32 = 0x0492;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -51,17 +54,6 @@ impl SMSG_PET_UPDATE_COMBO_POINTS {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PET_UPDATE_COMBO_POINTS {}
-impl crate::Message for SMSG_PET_UPDATE_COMBO_POINTS {
-    const OPCODE: u32 = 0x0492;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PET_UPDATE_COMBO_POINTS::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

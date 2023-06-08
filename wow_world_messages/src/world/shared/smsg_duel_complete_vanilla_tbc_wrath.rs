@@ -11,9 +11,12 @@ pub struct SMSG_DUEL_COMPLETE {
     pub ended_without_interruption: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_DUEL_COMPLETE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_DUEL_COMPLETE {}
+impl crate::Message for SMSG_DUEL_COMPLETE {
+    const OPCODE: u32 = 0x016a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SMSG_DUEL_COMPLETE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_DUEL_COMPLETE {}
-impl crate::Message for SMSG_DUEL_COMPLETE {
-    const OPCODE: u32 = 0x016a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_DUEL_COMPLETE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

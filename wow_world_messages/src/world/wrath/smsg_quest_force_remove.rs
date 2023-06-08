@@ -11,9 +11,12 @@ pub struct SMSG_QUEST_FORCE_REMOVE {
     pub quest_id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_QUEST_FORCE_REMOVE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_QUEST_FORCE_REMOVE {}
+impl crate::Message for SMSG_QUEST_FORCE_REMOVE {
+    const OPCODE: u32 = 0x021e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SMSG_QUEST_FORCE_REMOVE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_QUEST_FORCE_REMOVE {}
-impl crate::Message for SMSG_QUEST_FORCE_REMOVE {
-    const OPCODE: u32 = 0x021e;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_QUEST_FORCE_REMOVE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

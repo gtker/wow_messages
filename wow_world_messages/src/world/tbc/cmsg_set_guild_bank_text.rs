@@ -13,9 +13,12 @@ pub struct CMSG_SET_GUILD_BANK_TEXT {
     pub text: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_SET_GUILD_BANK_TEXT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_SET_GUILD_BANK_TEXT {}
+impl crate::Message for CMSG_SET_GUILD_BANK_TEXT {
+    const OPCODE: u32 = 0x040a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl CMSG_SET_GUILD_BANK_TEXT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_SET_GUILD_BANK_TEXT {}
-impl crate::Message for CMSG_SET_GUILD_BANK_TEXT {
-    const OPCODE: u32 = 0x040a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_SET_GUILD_BANK_TEXT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

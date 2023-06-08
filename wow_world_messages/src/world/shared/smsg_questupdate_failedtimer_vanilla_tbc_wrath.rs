@@ -11,9 +11,12 @@ pub struct SMSG_QUESTUPDATE_FAILEDTIMER {
     pub quest_id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_QUESTUPDATE_FAILEDTIMER {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_QUESTUPDATE_FAILEDTIMER {}
+impl crate::Message for SMSG_QUESTUPDATE_FAILEDTIMER {
+    const OPCODE: u32 = 0x0197;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SMSG_QUESTUPDATE_FAILEDTIMER {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_QUESTUPDATE_FAILEDTIMER {}
-impl crate::Message for SMSG_QUESTUPDATE_FAILEDTIMER {
-    const OPCODE: u32 = 0x0197;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_QUESTUPDATE_FAILEDTIMER::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

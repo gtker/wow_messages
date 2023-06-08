@@ -15,9 +15,12 @@ pub struct CMSG_QUESTGIVER_REQUEST_REWARD {
     pub quest_id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_QUESTGIVER_REQUEST_REWARD {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_QUESTGIVER_REQUEST_REWARD {}
+impl crate::Message for CMSG_QUESTGIVER_REQUEST_REWARD {
+    const OPCODE: u32 = 0x018c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl CMSG_QUESTGIVER_REQUEST_REWARD {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_QUESTGIVER_REQUEST_REWARD {}
-impl crate::Message for CMSG_QUESTGIVER_REQUEST_REWARD {
-    const OPCODE: u32 = 0x018c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_QUESTGIVER_REQUEST_REWARD::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

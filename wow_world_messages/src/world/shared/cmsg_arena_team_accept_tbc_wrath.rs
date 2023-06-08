@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct CMSG_ARENA_TEAM_ACCEPT {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_ARENA_TEAM_ACCEPT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_ARENA_TEAM_ACCEPT {}
+impl crate::Message for CMSG_ARENA_TEAM_ACCEPT {
+    const OPCODE: u32 = 0x0351;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl CMSG_ARENA_TEAM_ACCEPT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_ARENA_TEAM_ACCEPT {}
-impl crate::Message for CMSG_ARENA_TEAM_ACCEPT {
-    const OPCODE: u32 = 0x0351;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_ARENA_TEAM_ACCEPT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -19,9 +19,12 @@ pub struct SMSG_RAID_INSTANCE_MESSAGE {
     pub time_left: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_RAID_INSTANCE_MESSAGE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_RAID_INSTANCE_MESSAGE {}
+impl crate::Message for SMSG_RAID_INSTANCE_MESSAGE {
+    const OPCODE: u32 = 0x02fa;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -53,17 +56,6 @@ impl SMSG_RAID_INSTANCE_MESSAGE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_RAID_INSTANCE_MESSAGE {}
-impl crate::Message for SMSG_RAID_INSTANCE_MESSAGE {
-    const OPCODE: u32 = 0x02fa;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_RAID_INSTANCE_MESSAGE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

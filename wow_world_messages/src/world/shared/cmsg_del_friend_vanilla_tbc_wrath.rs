@@ -13,9 +13,12 @@ pub struct CMSG_DEL_FRIEND {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_DEL_FRIEND {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_DEL_FRIEND {}
+impl crate::Message for CMSG_DEL_FRIEND {
+    const OPCODE: u32 = 0x006a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_DEL_FRIEND {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_DEL_FRIEND {}
-impl crate::Message for CMSG_DEL_FRIEND {
-    const OPCODE: u32 = 0x006a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_DEL_FRIEND::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

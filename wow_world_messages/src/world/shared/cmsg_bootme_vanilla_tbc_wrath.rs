@@ -11,9 +11,12 @@ use std::io::{Read, Write};
 pub struct CMSG_BOOTME {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_BOOTME {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_BOOTME {}
+impl crate::Message for CMSG_BOOTME {
+    const OPCODE: u32 = 0x0001;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -39,17 +42,6 @@ impl CMSG_BOOTME {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_BOOTME {}
-impl crate::Message for CMSG_BOOTME {
-    const OPCODE: u32 = 0x0001;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_BOOTME::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

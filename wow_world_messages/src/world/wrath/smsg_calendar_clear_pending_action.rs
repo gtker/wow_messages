@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct SMSG_CALENDAR_CLEAR_PENDING_ACTION {
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CALENDAR_CLEAR_PENDING_ACTION {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CALENDAR_CLEAR_PENDING_ACTION {}
+impl crate::Message for SMSG_CALENDAR_CLEAR_PENDING_ACTION {
+    const OPCODE: u32 = 0x04bb;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl SMSG_CALENDAR_CLEAR_PENDING_ACTION {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CALENDAR_CLEAR_PENDING_ACTION {}
-impl crate::Message for SMSG_CALENDAR_CLEAR_PENDING_ACTION {
-    const OPCODE: u32 = 0x04bb;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CALENDAR_CLEAR_PENDING_ACTION::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

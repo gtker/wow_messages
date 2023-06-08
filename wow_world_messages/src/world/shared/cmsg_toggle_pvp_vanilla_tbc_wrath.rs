@@ -15,9 +15,12 @@ pub struct CMSG_TOGGLE_PVP {
     pub set: Option<CMSG_TOGGLE_PVP_set>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_TOGGLE_PVP {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_TOGGLE_PVP {}
+impl crate::Message for CMSG_TOGGLE_PVP {
+    const OPCODE: u32 = 0x0253;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -49,17 +52,6 @@ impl CMSG_TOGGLE_PVP {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_TOGGLE_PVP {}
-impl crate::Message for CMSG_TOGGLE_PVP {
-    const OPCODE: u32 = 0x0253;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_TOGGLE_PVP::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

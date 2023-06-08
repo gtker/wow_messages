@@ -13,9 +13,12 @@ pub struct CMSG_GRANT_LEVEL {
     pub player: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_GRANT_LEVEL {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_GRANT_LEVEL {}
+impl crate::Message for CMSG_GRANT_LEVEL {
+    const OPCODE: u32 = 0x040d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_GRANT_LEVEL {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_GRANT_LEVEL {}
-impl crate::Message for CMSG_GRANT_LEVEL {
-    const OPCODE: u32 = 0x040d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_GRANT_LEVEL::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -19,9 +19,12 @@ pub struct SMSG_PARTY_COMMAND_RESULT {
     pub result: PartyResult,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PARTY_COMMAND_RESULT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PARTY_COMMAND_RESULT {}
+impl crate::Message for SMSG_PARTY_COMMAND_RESULT {
+    const OPCODE: u32 = 0x007f;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -53,17 +56,6 @@ impl SMSG_PARTY_COMMAND_RESULT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PARTY_COMMAND_RESULT {}
-impl crate::Message for SMSG_PARTY_COMMAND_RESULT {
-    const OPCODE: u32 = 0x007f;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PARTY_COMMAND_RESULT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

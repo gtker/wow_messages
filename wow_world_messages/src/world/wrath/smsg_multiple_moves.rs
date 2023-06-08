@@ -14,9 +14,12 @@ pub struct SMSG_MULTIPLE_MOVES {
     pub moves: Vec<MiniMoveMessage>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_MULTIPLE_MOVES {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_MULTIPLE_MOVES {}
+impl crate::Message for SMSG_MULTIPLE_MOVES {
+    const OPCODE: u32 = 0x051e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -66,17 +69,6 @@ impl SMSG_MULTIPLE_MOVES {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_MULTIPLE_MOVES {}
-impl crate::Message for SMSG_MULTIPLE_MOVES {
-    const OPCODE: u32 = 0x051e;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_MULTIPLE_MOVES::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

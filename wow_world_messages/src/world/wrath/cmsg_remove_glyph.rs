@@ -11,9 +11,12 @@ pub struct CMSG_REMOVE_GLYPH {
     pub glyph: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_REMOVE_GLYPH {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_REMOVE_GLYPH {}
+impl crate::Message for CMSG_REMOVE_GLYPH {
+    const OPCODE: u32 = 0x048a;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl CMSG_REMOVE_GLYPH {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_REMOVE_GLYPH {}
-impl crate::Message for CMSG_REMOVE_GLYPH {
-    const OPCODE: u32 = 0x048a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_REMOVE_GLYPH::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

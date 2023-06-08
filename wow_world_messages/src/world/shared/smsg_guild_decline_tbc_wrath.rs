@@ -11,9 +11,12 @@ pub struct SMSG_GUILD_DECLINE {
     pub player: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_GUILD_DECLINE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_GUILD_DECLINE {}
+impl crate::Message for SMSG_GUILD_DECLINE {
+    const OPCODE: u32 = 0x0086;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SMSG_GUILD_DECLINE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_GUILD_DECLINE {}
-impl crate::Message for SMSG_GUILD_DECLINE {
-    const OPCODE: u32 = 0x0086;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_GUILD_DECLINE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

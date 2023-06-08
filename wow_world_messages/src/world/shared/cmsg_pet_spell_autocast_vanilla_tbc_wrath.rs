@@ -17,9 +17,12 @@ pub struct CMSG_PET_SPELL_AUTOCAST {
     pub autocast_enabled: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_PET_SPELL_AUTOCAST {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_PET_SPELL_AUTOCAST {}
+impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
+    const OPCODE: u32 = 0x02f3;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -51,17 +54,6 @@ impl CMSG_PET_SPELL_AUTOCAST {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_PET_SPELL_AUTOCAST {}
-impl crate::Message for CMSG_PET_SPELL_AUTOCAST {
-    const OPCODE: u32 = 0x02f3;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_PET_SPELL_AUTOCAST::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

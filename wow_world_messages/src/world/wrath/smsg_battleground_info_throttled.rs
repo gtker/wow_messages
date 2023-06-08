@@ -11,9 +11,12 @@ use std::io::{Read, Write};
 pub struct SMSG_BATTLEGROUND_INFO_THROTTLED {
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_BATTLEGROUND_INFO_THROTTLED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_BATTLEGROUND_INFO_THROTTLED {}
+impl crate::Message for SMSG_BATTLEGROUND_INFO_THROTTLED {
+    const OPCODE: u32 = 0x04a6;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -39,17 +42,6 @@ impl SMSG_BATTLEGROUND_INFO_THROTTLED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_BATTLEGROUND_INFO_THROTTLED {}
-impl crate::Message for SMSG_BATTLEGROUND_INFO_THROTTLED {
-    const OPCODE: u32 = 0x04a6;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_BATTLEGROUND_INFO_THROTTLED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -22,9 +22,12 @@ pub struct SMSG_LOG_XPGAIN {
     pub exp_type: SMSG_LOG_XPGAIN_ExperienceAwardType,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_LOG_XPGAIN {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_LOG_XPGAIN {}
+impl crate::Message for SMSG_LOG_XPGAIN {
+    const OPCODE: u32 = 0x01d0;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -78,17 +81,6 @@ impl SMSG_LOG_XPGAIN {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_LOG_XPGAIN {}
-impl crate::Message for SMSG_LOG_XPGAIN {
-    const OPCODE: u32 = 0x01d0;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_LOG_XPGAIN::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

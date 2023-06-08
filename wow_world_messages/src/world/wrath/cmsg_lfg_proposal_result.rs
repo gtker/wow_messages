@@ -13,9 +13,12 @@ pub struct CMSG_LFG_PROPOSAL_RESULT {
     pub accept_join: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_LFG_PROPOSAL_RESULT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_LFG_PROPOSAL_RESULT {}
+impl crate::Message for CMSG_LFG_PROPOSAL_RESULT {
+    const OPCODE: u32 = 0x0362;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl CMSG_LFG_PROPOSAL_RESULT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_LFG_PROPOSAL_RESULT {}
-impl crate::Message for CMSG_LFG_PROPOSAL_RESULT {
-    const OPCODE: u32 = 0x0362;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_LFG_PROPOSAL_RESULT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

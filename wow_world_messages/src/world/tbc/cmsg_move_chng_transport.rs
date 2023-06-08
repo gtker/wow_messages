@@ -13,9 +13,12 @@ pub struct CMSG_MOVE_CHNG_TRANSPORT {
     pub info: MovementInfo,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_MOVE_CHNG_TRANSPORT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_MOVE_CHNG_TRANSPORT {}
+impl crate::Message for CMSG_MOVE_CHNG_TRANSPORT {
+    const OPCODE: u32 = 0x038d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -155,17 +158,6 @@ impl CMSG_MOVE_CHNG_TRANSPORT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_MOVE_CHNG_TRANSPORT {}
-impl crate::Message for CMSG_MOVE_CHNG_TRANSPORT {
-    const OPCODE: u32 = 0x038d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_MOVE_CHNG_TRANSPORT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

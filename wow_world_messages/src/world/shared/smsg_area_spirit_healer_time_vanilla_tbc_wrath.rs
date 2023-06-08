@@ -15,9 +15,12 @@ pub struct SMSG_AREA_SPIRIT_HEALER_TIME {
     pub next_resurrect_time: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_AREA_SPIRIT_HEALER_TIME {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_AREA_SPIRIT_HEALER_TIME {}
+impl crate::Message for SMSG_AREA_SPIRIT_HEALER_TIME {
+    const OPCODE: u32 = 0x02e4;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_AREA_SPIRIT_HEALER_TIME {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_AREA_SPIRIT_HEALER_TIME {}
-impl crate::Message for SMSG_AREA_SPIRIT_HEALER_TIME {
-    const OPCODE: u32 = 0x02e4;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_AREA_SPIRIT_HEALER_TIME::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

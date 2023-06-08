@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct MSG_GUILD_EVENT_LOG_QUERY_Client {
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_GUILD_EVENT_LOG_QUERY_Client {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for MSG_GUILD_EVENT_LOG_QUERY_Client {}
+impl crate::Message for MSG_GUILD_EVENT_LOG_QUERY_Client {
+    const OPCODE: u32 = 0x03ff;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl MSG_GUILD_EVENT_LOG_QUERY_Client {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for MSG_GUILD_EVENT_LOG_QUERY_Client {}
-impl crate::Message for MSG_GUILD_EVENT_LOG_QUERY_Client {
-    const OPCODE: u32 = 0x03ff;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_GUILD_EVENT_LOG_QUERY_Client::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

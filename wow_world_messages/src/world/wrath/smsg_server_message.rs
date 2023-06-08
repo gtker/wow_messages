@@ -15,9 +15,12 @@ pub struct SMSG_SERVER_MESSAGE {
     pub message: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SERVER_MESSAGE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SERVER_MESSAGE {}
+impl crate::Message for SMSG_SERVER_MESSAGE {
+    const OPCODE: u32 = 0x0291;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_SERVER_MESSAGE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SERVER_MESSAGE {}
-impl crate::Message for SMSG_SERVER_MESSAGE {
-    const OPCODE: u32 = 0x0291;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SERVER_MESSAGE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -13,9 +13,12 @@ pub struct CMSG_COMMENTATOR_ENABLE {
     pub option: CommentatorEnableOption,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_COMMENTATOR_ENABLE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_COMMENTATOR_ENABLE {}
+impl crate::Message for CMSG_COMMENTATOR_ENABLE {
+    const OPCODE: u32 = 0x03b4;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_COMMENTATOR_ENABLE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_COMMENTATOR_ENABLE {}
-impl crate::Message for CMSG_COMMENTATOR_ENABLE {
-    const OPCODE: u32 = 0x03b4;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_COMMENTATOR_ENABLE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

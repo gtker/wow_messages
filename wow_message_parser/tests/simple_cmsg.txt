@@ -11,9 +11,12 @@ pub struct SimpleCmsg {
     pub basic: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SimpleCmsg {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SimpleCmsg {}
+impl crate::Message for SimpleCmsg {
+    const OPCODE: u32 = 0x0001;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SimpleCmsg {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SimpleCmsg {}
-impl crate::Message for SimpleCmsg {
-    const OPCODE: u32 = 0x0001;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SimpleCmsg::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

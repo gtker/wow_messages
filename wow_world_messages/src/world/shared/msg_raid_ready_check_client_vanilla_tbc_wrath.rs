@@ -13,9 +13,12 @@ pub struct MSG_RAID_READY_CHECK_Client {
     pub answer: Option<MSG_RAID_READY_CHECK_Client_answer>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_RAID_READY_CHECK_Client {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for MSG_RAID_READY_CHECK_Client {}
+impl crate::Message for MSG_RAID_READY_CHECK_Client {
+    const OPCODE: u32 = 0x0322;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl MSG_RAID_READY_CHECK_Client {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for MSG_RAID_READY_CHECK_Client {}
-impl crate::Message for MSG_RAID_READY_CHECK_Client {
-    const OPCODE: u32 = 0x0322;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_RAID_READY_CHECK_Client::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

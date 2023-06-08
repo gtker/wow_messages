@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct SMSG_CHAT_WRONG_FACTION {
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CHAT_WRONG_FACTION {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CHAT_WRONG_FACTION {}
+impl crate::Message for SMSG_CHAT_WRONG_FACTION {
+    const OPCODE: u32 = 0x0219;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl SMSG_CHAT_WRONG_FACTION {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CHAT_WRONG_FACTION {}
-impl crate::Message for SMSG_CHAT_WRONG_FACTION {
-    const OPCODE: u32 = 0x0219;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CHAT_WRONG_FACTION::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

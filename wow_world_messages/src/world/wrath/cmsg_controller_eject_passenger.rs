@@ -13,9 +13,12 @@ pub struct CMSG_CONTROLLER_EJECT_PASSENGER {
     pub player: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CONTROLLER_EJECT_PASSENGER {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_CONTROLLER_EJECT_PASSENGER {}
+impl crate::Message for CMSG_CONTROLLER_EJECT_PASSENGER {
+    const OPCODE: u32 = 0x04a9;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_CONTROLLER_EJECT_PASSENGER {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_CONTROLLER_EJECT_PASSENGER {}
-impl crate::Message for CMSG_CONTROLLER_EJECT_PASSENGER {
-    const OPCODE: u32 = 0x04a9;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CONTROLLER_EJECT_PASSENGER::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

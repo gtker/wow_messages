@@ -16,9 +16,12 @@ pub struct CMSG_BUYBACK_ITEM {
     pub slot: BuybackSlot,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_BUYBACK_ITEM {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_BUYBACK_ITEM {}
+impl crate::Message for CMSG_BUYBACK_ITEM {
+    const OPCODE: u32 = 0x0290;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -48,17 +51,6 @@ impl CMSG_BUYBACK_ITEM {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_BUYBACK_ITEM {}
-impl crate::Message for CMSG_BUYBACK_ITEM {
-    const OPCODE: u32 = 0x0290;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_BUYBACK_ITEM::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

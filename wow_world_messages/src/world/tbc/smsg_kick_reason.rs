@@ -15,9 +15,12 @@ pub struct SMSG_KICK_REASON {
     pub text: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_KICK_REASON {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_KICK_REASON {}
+impl crate::Message for SMSG_KICK_REASON {
+    const OPCODE: u32 = 0x03c4;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_KICK_REASON {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_KICK_REASON {}
-impl crate::Message for SMSG_KICK_REASON {
-    const OPCODE: u32 = 0x03c4;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_KICK_REASON::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -15,9 +15,12 @@ pub struct SMSG_PLAYER_VEHICLE_DATA {
     pub vehicle_id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PLAYER_VEHICLE_DATA {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PLAYER_VEHICLE_DATA {}
+impl crate::Message for SMSG_PLAYER_VEHICLE_DATA {
+    const OPCODE: u32 = 0x04a7;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_PLAYER_VEHICLE_DATA {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PLAYER_VEHICLE_DATA {}
-impl crate::Message for SMSG_PLAYER_VEHICLE_DATA {
-    const OPCODE: u32 = 0x04a7;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PLAYER_VEHICLE_DATA::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

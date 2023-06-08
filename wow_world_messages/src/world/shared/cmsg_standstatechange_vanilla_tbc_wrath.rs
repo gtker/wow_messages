@@ -13,9 +13,12 @@ pub struct CMSG_STANDSTATECHANGE {
     pub animation_state: UnitStandState,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_STANDSTATECHANGE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_STANDSTATECHANGE {}
+impl crate::Message for CMSG_STANDSTATECHANGE {
+    const OPCODE: u32 = 0x0101;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_STANDSTATECHANGE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_STANDSTATECHANGE {}
-impl crate::Message for CMSG_STANDSTATECHANGE {
-    const OPCODE: u32 = 0x0101;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_STANDSTATECHANGE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

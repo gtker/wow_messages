@@ -13,9 +13,12 @@ pub struct SMSG_GMTICKET_CREATE {
     pub response: GmTicketResponse,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_GMTICKET_CREATE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_GMTICKET_CREATE {}
+impl crate::Message for SMSG_GMTICKET_CREATE {
+    const OPCODE: u32 = 0x0206;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_GMTICKET_CREATE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_GMTICKET_CREATE {}
-impl crate::Message for SMSG_GMTICKET_CREATE {
-    const OPCODE: u32 = 0x0206;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_GMTICKET_CREATE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

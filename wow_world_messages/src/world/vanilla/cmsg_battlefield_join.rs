@@ -13,9 +13,12 @@ pub struct CMSG_BATTLEFIELD_JOIN {
     pub map: Map,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_BATTLEFIELD_JOIN {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_BATTLEFIELD_JOIN {}
+impl crate::Message for CMSG_BATTLEFIELD_JOIN {
+    const OPCODE: u32 = 0x023e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_BATTLEFIELD_JOIN {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_BATTLEFIELD_JOIN {}
-impl crate::Message for CMSG_BATTLEFIELD_JOIN {
-    const OPCODE: u32 = 0x023e;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_BATTLEFIELD_JOIN::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

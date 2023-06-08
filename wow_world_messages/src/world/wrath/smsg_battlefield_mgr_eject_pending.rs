@@ -13,9 +13,12 @@ pub struct SMSG_BATTLEFIELD_MGR_EJECT_PENDING {
     pub unknown: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_BATTLEFIELD_MGR_EJECT_PENDING {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_BATTLEFIELD_MGR_EJECT_PENDING {}
+impl crate::Message for SMSG_BATTLEFIELD_MGR_EJECT_PENDING {
+    const OPCODE: u32 = 0x04e5;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_BATTLEFIELD_MGR_EJECT_PENDING {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_BATTLEFIELD_MGR_EJECT_PENDING {}
-impl crate::Message for SMSG_BATTLEFIELD_MGR_EJECT_PENDING {
-    const OPCODE: u32 = 0x04e5;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_BATTLEFIELD_MGR_EJECT_PENDING::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

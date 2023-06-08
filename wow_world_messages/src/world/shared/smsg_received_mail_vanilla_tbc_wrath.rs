@@ -14,9 +14,12 @@ pub struct SMSG_RECEIVED_MAIL {
     pub unknown1: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_RECEIVED_MAIL {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_RECEIVED_MAIL {}
+impl crate::Message for SMSG_RECEIVED_MAIL {
+    const OPCODE: u32 = 0x0285;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -44,17 +47,6 @@ impl SMSG_RECEIVED_MAIL {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_RECEIVED_MAIL {}
-impl crate::Message for SMSG_RECEIVED_MAIL {
-    const OPCODE: u32 = 0x0285;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_RECEIVED_MAIL::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

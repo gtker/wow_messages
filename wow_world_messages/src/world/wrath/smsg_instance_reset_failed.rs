@@ -17,9 +17,12 @@ pub struct SMSG_INSTANCE_RESET_FAILED {
     pub map: Map,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_INSTANCE_RESET_FAILED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_INSTANCE_RESET_FAILED {}
+impl crate::Message for SMSG_INSTANCE_RESET_FAILED {
+    const OPCODE: u32 = 0x031f;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -49,17 +52,6 @@ impl SMSG_INSTANCE_RESET_FAILED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_INSTANCE_RESET_FAILED {}
-impl crate::Message for SMSG_INSTANCE_RESET_FAILED {
-    const OPCODE: u32 = 0x031f;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_INSTANCE_RESET_FAILED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

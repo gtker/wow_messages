@@ -11,9 +11,12 @@ pub struct SMSG_TRIGGER_MOVIE {
     pub movie_id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_TRIGGER_MOVIE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_TRIGGER_MOVIE {}
+impl crate::Message for SMSG_TRIGGER_MOVIE {
+    const OPCODE: u32 = 0x0464;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SMSG_TRIGGER_MOVIE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_TRIGGER_MOVIE {}
-impl crate::Message for SMSG_TRIGGER_MOVIE {
-    const OPCODE: u32 = 0x0464;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_TRIGGER_MOVIE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

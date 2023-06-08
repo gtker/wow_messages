@@ -13,9 +13,12 @@ pub struct SMSG_SPIRIT_HEALER_CONFIRM {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SPIRIT_HEALER_CONFIRM {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SPIRIT_HEALER_CONFIRM {}
+impl crate::Message for SMSG_SPIRIT_HEALER_CONFIRM {
+    const OPCODE: u32 = 0x0222;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_SPIRIT_HEALER_CONFIRM {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SPIRIT_HEALER_CONFIRM {}
-impl crate::Message for SMSG_SPIRIT_HEALER_CONFIRM {
-    const OPCODE: u32 = 0x0222;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SPIRIT_HEALER_CONFIRM::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

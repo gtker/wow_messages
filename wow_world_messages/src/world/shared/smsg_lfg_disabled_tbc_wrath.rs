@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct SMSG_LFG_DISABLED {
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_LFG_DISABLED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_LFG_DISABLED {}
+impl crate::Message for SMSG_LFG_DISABLED {
+    const OPCODE: u32 = 0x0398;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl SMSG_LFG_DISABLED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_LFG_DISABLED {}
-impl crate::Message for SMSG_LFG_DISABLED {
-    const OPCODE: u32 = 0x0398;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_LFG_DISABLED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

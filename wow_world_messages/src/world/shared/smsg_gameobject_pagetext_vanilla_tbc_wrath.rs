@@ -13,9 +13,12 @@ pub struct SMSG_GAMEOBJECT_PAGETEXT {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_GAMEOBJECT_PAGETEXT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_GAMEOBJECT_PAGETEXT {}
+impl crate::Message for SMSG_GAMEOBJECT_PAGETEXT {
+    const OPCODE: u32 = 0x01df;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_GAMEOBJECT_PAGETEXT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_GAMEOBJECT_PAGETEXT {}
-impl crate::Message for SMSG_GAMEOBJECT_PAGETEXT {
-    const OPCODE: u32 = 0x01df;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_GAMEOBJECT_PAGETEXT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

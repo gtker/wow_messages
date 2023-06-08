@@ -31,9 +31,12 @@ pub struct SMSG_GUILD_BANK_LIST {
     pub content_result: SMSG_GUILD_BANK_LIST_GuildBankContentResult,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_GUILD_BANK_LIST {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_GUILD_BANK_LIST {}
+impl crate::Message for SMSG_GUILD_BANK_LIST {
+    const OPCODE: u32 = 0x03e8;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -177,17 +180,6 @@ impl SMSG_GUILD_BANK_LIST {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_GUILD_BANK_LIST {}
-impl crate::Message for SMSG_GUILD_BANK_LIST {
-    const OPCODE: u32 = 0x03e8;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_GUILD_BANK_LIST::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

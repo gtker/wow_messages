@@ -16,9 +16,12 @@ pub struct SMSG_PLAYERBOUND {
     pub area: Area,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PLAYERBOUND {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PLAYERBOUND {}
+impl crate::Message for SMSG_PLAYERBOUND {
+    const OPCODE: u32 = 0x0158;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -48,17 +51,6 @@ impl SMSG_PLAYERBOUND {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PLAYERBOUND {}
-impl crate::Message for SMSG_PLAYERBOUND {
-    const OPCODE: u32 = 0x0158;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PLAYERBOUND::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

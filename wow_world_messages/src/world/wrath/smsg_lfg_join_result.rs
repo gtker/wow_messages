@@ -17,9 +17,12 @@ pub struct SMSG_LFG_JOIN_RESULT {
     pub players: Vec<LfgJoinPlayer>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_LFG_JOIN_RESULT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_LFG_JOIN_RESULT {}
+impl crate::Message for SMSG_LFG_JOIN_RESULT {
+    const OPCODE: u32 = 0x0364;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -89,17 +92,6 @@ impl SMSG_LFG_JOIN_RESULT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_LFG_JOIN_RESULT {}
-impl crate::Message for SMSG_LFG_JOIN_RESULT {
-    const OPCODE: u32 = 0x0364;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_LFG_JOIN_RESULT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

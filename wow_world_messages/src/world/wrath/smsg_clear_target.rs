@@ -13,9 +13,12 @@ pub struct SMSG_CLEAR_TARGET {
     pub target: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CLEAR_TARGET {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CLEAR_TARGET {}
+impl crate::Message for SMSG_CLEAR_TARGET {
+    const OPCODE: u32 = 0x03bf;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_CLEAR_TARGET {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CLEAR_TARGET {}
-impl crate::Message for SMSG_CLEAR_TARGET {
-    const OPCODE: u32 = 0x03bf;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CLEAR_TARGET::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

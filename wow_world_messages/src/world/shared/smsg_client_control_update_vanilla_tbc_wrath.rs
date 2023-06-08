@@ -15,9 +15,12 @@ pub struct SMSG_CLIENT_CONTROL_UPDATE {
     pub allow_movement: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CLIENT_CONTROL_UPDATE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CLIENT_CONTROL_UPDATE {}
+impl crate::Message for SMSG_CLIENT_CONTROL_UPDATE {
+    const OPCODE: u32 = 0x0159;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_CLIENT_CONTROL_UPDATE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CLIENT_CONTROL_UPDATE {}
-impl crate::Message for SMSG_CLIENT_CONTROL_UPDATE {
-    const OPCODE: u32 = 0x0159;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CLIENT_CONTROL_UPDATE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

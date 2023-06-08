@@ -18,9 +18,12 @@ pub struct SMSG_POWER_UPDATE {
     pub amount: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_POWER_UPDATE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_POWER_UPDATE {}
+impl crate::Message for SMSG_POWER_UPDATE {
+    const OPCODE: u32 = 0x0480;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -52,17 +55,6 @@ impl SMSG_POWER_UPDATE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_POWER_UPDATE {}
-impl crate::Message for SMSG_POWER_UPDATE {
-    const OPCODE: u32 = 0x0480;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_POWER_UPDATE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

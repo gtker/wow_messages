@@ -13,9 +13,12 @@ pub struct CMSG_LEAVE_BATTLEFIELD {
     pub map: Map,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_LEAVE_BATTLEFIELD {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_LEAVE_BATTLEFIELD {}
+impl crate::Message for CMSG_LEAVE_BATTLEFIELD {
+    const OPCODE: u32 = 0x02e1;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_LEAVE_BATTLEFIELD {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_LEAVE_BATTLEFIELD {}
-impl crate::Message for CMSG_LEAVE_BATTLEFIELD {
-    const OPCODE: u32 = 0x02e1;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_LEAVE_BATTLEFIELD::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -11,9 +11,12 @@ pub struct SMSG_TIME_SYNC_REQ {
     pub time_sync: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_TIME_SYNC_REQ {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_TIME_SYNC_REQ {}
+impl crate::Message for SMSG_TIME_SYNC_REQ {
+    const OPCODE: u32 = 0x0390;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SMSG_TIME_SYNC_REQ {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_TIME_SYNC_REQ {}
-impl crate::Message for SMSG_TIME_SYNC_REQ {
-    const OPCODE: u32 = 0x0390;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_TIME_SYNC_REQ::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

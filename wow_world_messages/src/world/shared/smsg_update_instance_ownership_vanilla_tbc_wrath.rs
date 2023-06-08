@@ -11,9 +11,12 @@ pub struct SMSG_UPDATE_INSTANCE_OWNERSHIP {
     pub player_is_saved_to_a_raid: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_UPDATE_INSTANCE_OWNERSHIP {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
+impl crate::Message for SMSG_UPDATE_INSTANCE_OWNERSHIP {
+    const OPCODE: u32 = 0x032b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SMSG_UPDATE_INSTANCE_OWNERSHIP {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_UPDATE_INSTANCE_OWNERSHIP {}
-impl crate::Message for SMSG_UPDATE_INSTANCE_OWNERSHIP {
-    const OPCODE: u32 = 0x032b;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_UPDATE_INSTANCE_OWNERSHIP::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

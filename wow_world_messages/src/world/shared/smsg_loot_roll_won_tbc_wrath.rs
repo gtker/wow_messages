@@ -31,9 +31,12 @@ pub struct SMSG_LOOT_ROLL_WON {
     pub vote: RollVote,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_LOOT_ROLL_WON {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_LOOT_ROLL_WON {}
+impl crate::Message for SMSG_LOOT_ROLL_WON {
+    const OPCODE: u32 = 0x029f;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -75,17 +78,6 @@ impl SMSG_LOOT_ROLL_WON {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_LOOT_ROLL_WON {}
-impl crate::Message for SMSG_LOOT_ROLL_WON {
-    const OPCODE: u32 = 0x029f;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_LOOT_ROLL_WON::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

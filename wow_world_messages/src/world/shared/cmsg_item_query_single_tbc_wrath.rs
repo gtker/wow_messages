@@ -11,9 +11,12 @@ pub struct CMSG_ITEM_QUERY_SINGLE {
     pub item: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_ITEM_QUERY_SINGLE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_ITEM_QUERY_SINGLE {}
+impl crate::Message for CMSG_ITEM_QUERY_SINGLE {
+    const OPCODE: u32 = 0x0056;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl CMSG_ITEM_QUERY_SINGLE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_ITEM_QUERY_SINGLE {}
-impl crate::Message for CMSG_ITEM_QUERY_SINGLE {
-    const OPCODE: u32 = 0x0056;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_ITEM_QUERY_SINGLE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

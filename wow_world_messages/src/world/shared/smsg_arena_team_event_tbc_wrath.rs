@@ -40,9 +40,12 @@ pub struct SMSG_ARENA_TEAM_EVENT {
     pub string: Vec<String>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_ARENA_TEAM_EVENT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_ARENA_TEAM_EVENT {}
+impl crate::Message for SMSG_ARENA_TEAM_EVENT {
+    const OPCODE: u32 = 0x0357;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -182,17 +185,6 @@ impl SMSG_ARENA_TEAM_EVENT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_ARENA_TEAM_EVENT {}
-impl crate::Message for SMSG_ARENA_TEAM_EVENT {
-    const OPCODE: u32 = 0x0357;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_ARENA_TEAM_EVENT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -13,9 +13,12 @@ pub struct CMSG_GROUP_UNINVITE_GUID {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_GROUP_UNINVITE_GUID {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_GROUP_UNINVITE_GUID {}
+impl crate::Message for CMSG_GROUP_UNINVITE_GUID {
+    const OPCODE: u32 = 0x0076;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_GROUP_UNINVITE_GUID {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_GROUP_UNINVITE_GUID {}
-impl crate::Message for CMSG_GROUP_UNINVITE_GUID {
-    const OPCODE: u32 = 0x0076;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_GROUP_UNINVITE_GUID::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

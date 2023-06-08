@@ -15,9 +15,12 @@ pub struct SMSG_SPELL_DELAYED {
     pub delay_time: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SPELL_DELAYED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SPELL_DELAYED {}
+impl crate::Message for SMSG_SPELL_DELAYED {
+    const OPCODE: u32 = 0x01e2;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_SPELL_DELAYED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SPELL_DELAYED {}
-impl crate::Message for SMSG_SPELL_DELAYED {
-    const OPCODE: u32 = 0x01e2;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SPELL_DELAYED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

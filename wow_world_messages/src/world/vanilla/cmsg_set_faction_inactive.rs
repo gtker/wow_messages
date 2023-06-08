@@ -15,9 +15,12 @@ pub struct CMSG_SET_FACTION_INACTIVE {
     pub inactive: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_SET_FACTION_INACTIVE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_SET_FACTION_INACTIVE {}
+impl crate::Message for CMSG_SET_FACTION_INACTIVE {
+    const OPCODE: u32 = 0x0317;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl CMSG_SET_FACTION_INACTIVE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_SET_FACTION_INACTIVE {}
-impl crate::Message for CMSG_SET_FACTION_INACTIVE {
-    const OPCODE: u32 = 0x0317;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_SET_FACTION_INACTIVE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

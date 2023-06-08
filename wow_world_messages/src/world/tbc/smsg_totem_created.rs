@@ -19,9 +19,12 @@ pub struct SMSG_TOTEM_CREATED {
     pub spell: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_TOTEM_CREATED {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_TOTEM_CREATED {}
+impl crate::Message for SMSG_TOTEM_CREATED {
+    const OPCODE: u32 = 0x0412;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -55,17 +58,6 @@ impl SMSG_TOTEM_CREATED {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_TOTEM_CREATED {}
-impl crate::Message for SMSG_TOTEM_CREATED {
-    const OPCODE: u32 = 0x0412;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_TOTEM_CREATED::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

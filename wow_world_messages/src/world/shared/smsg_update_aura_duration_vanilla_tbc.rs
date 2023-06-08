@@ -13,9 +13,12 @@ pub struct SMSG_UPDATE_AURA_DURATION {
     pub aura_duration: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_UPDATE_AURA_DURATION {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_UPDATE_AURA_DURATION {}
+impl crate::Message for SMSG_UPDATE_AURA_DURATION {
+    const OPCODE: u32 = 0x0137;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl SMSG_UPDATE_AURA_DURATION {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_UPDATE_AURA_DURATION {}
-impl crate::Message for SMSG_UPDATE_AURA_DURATION {
-    const OPCODE: u32 = 0x0137;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_UPDATE_AURA_DURATION::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

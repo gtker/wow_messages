@@ -15,9 +15,12 @@ pub struct SMSG_FORCE_MOVE_UNROOT {
     pub counter: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_FORCE_MOVE_UNROOT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_FORCE_MOVE_UNROOT {}
+impl crate::Message for SMSG_FORCE_MOVE_UNROOT {
+    const OPCODE: u32 = 0x00ea;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_FORCE_MOVE_UNROOT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_FORCE_MOVE_UNROOT {}
-impl crate::Message for SMSG_FORCE_MOVE_UNROOT {
-    const OPCODE: u32 = 0x00ea;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_FORCE_MOVE_UNROOT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

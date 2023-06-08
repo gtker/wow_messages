@@ -35,9 +35,12 @@ pub struct SMSG_CREATURE_QUERY_RESPONSE {
     pub found: Option<SMSG_CREATURE_QUERY_RESPONSE_found>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CREATURE_QUERY_RESPONSE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CREATURE_QUERY_RESPONSE {}
+impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
+    const OPCODE: u32 = 0x0061;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -121,17 +124,6 @@ impl SMSG_CREATURE_QUERY_RESPONSE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CREATURE_QUERY_RESPONSE {}
-impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
-    const OPCODE: u32 = 0x0061;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CREATURE_QUERY_RESPONSE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

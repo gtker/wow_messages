@@ -11,9 +11,12 @@ pub struct SMSG_NOTIFICATION {
     pub notification: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_NOTIFICATION {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_NOTIFICATION {}
+impl crate::Message for SMSG_NOTIFICATION {
+    const OPCODE: u32 = 0x01cb;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SMSG_NOTIFICATION {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_NOTIFICATION {}
-impl crate::Message for SMSG_NOTIFICATION {
-    const OPCODE: u32 = 0x01cb;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_NOTIFICATION::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

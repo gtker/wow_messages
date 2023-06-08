@@ -13,9 +13,12 @@ pub struct CMSG_QUESTLOG_SWAP_QUEST {
     pub slot2: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_QUESTLOG_SWAP_QUEST {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_QUESTLOG_SWAP_QUEST {}
+impl crate::Message for CMSG_QUESTLOG_SWAP_QUEST {
+    const OPCODE: u32 = 0x0193;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl CMSG_QUESTLOG_SWAP_QUEST {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_QUESTLOG_SWAP_QUEST {}
-impl crate::Message for CMSG_QUESTLOG_SWAP_QUEST {
-    const OPCODE: u32 = 0x0193;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_QUESTLOG_SWAP_QUEST::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

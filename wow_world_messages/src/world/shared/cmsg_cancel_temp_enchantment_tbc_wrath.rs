@@ -11,9 +11,12 @@ pub struct CMSG_CANCEL_TEMP_ENCHANTMENT {
     pub slot: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CANCEL_TEMP_ENCHANTMENT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_CANCEL_TEMP_ENCHANTMENT {}
+impl crate::Message for CMSG_CANCEL_TEMP_ENCHANTMENT {
+    const OPCODE: u32 = 0x0379;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl CMSG_CANCEL_TEMP_ENCHANTMENT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_CANCEL_TEMP_ENCHANTMENT {}
-impl crate::Message for CMSG_CANCEL_TEMP_ENCHANTMENT {
-    const OPCODE: u32 = 0x0379;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CANCEL_TEMP_ENCHANTMENT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

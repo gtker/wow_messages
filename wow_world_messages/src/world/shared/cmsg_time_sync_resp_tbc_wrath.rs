@@ -16,9 +16,12 @@ pub struct CMSG_TIME_SYNC_RESP {
     pub client_ticks: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_TIME_SYNC_RESP {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_TIME_SYNC_RESP {}
+impl crate::Message for CMSG_TIME_SYNC_RESP {
+    const OPCODE: u32 = 0x0391;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -48,17 +51,6 @@ impl CMSG_TIME_SYNC_RESP {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_TIME_SYNC_RESP {}
-impl crate::Message for CMSG_TIME_SYNC_RESP {
-    const OPCODE: u32 = 0x0391;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_TIME_SYNC_RESP::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

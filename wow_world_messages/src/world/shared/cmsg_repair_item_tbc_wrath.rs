@@ -17,9 +17,12 @@ pub struct CMSG_REPAIR_ITEM {
     pub from_guild_bank: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_REPAIR_ITEM {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_REPAIR_ITEM {}
+impl crate::Message for CMSG_REPAIR_ITEM {
+    const OPCODE: u32 = 0x02a8;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -51,17 +54,6 @@ impl CMSG_REPAIR_ITEM {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_REPAIR_ITEM {}
-impl crate::Message for CMSG_REPAIR_ITEM {
-    const OPCODE: u32 = 0x02a8;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_REPAIR_ITEM::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

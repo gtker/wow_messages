@@ -9,9 +9,12 @@ use std::io::{Read, Write};
 pub struct SMSG_CANCEL_COMBAT {
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CANCEL_COMBAT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CANCEL_COMBAT {}
+impl crate::Message for SMSG_CANCEL_COMBAT {
+    const OPCODE: u32 = 0x014e;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -37,17 +40,6 @@ impl SMSG_CANCEL_COMBAT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CANCEL_COMBAT {}
-impl crate::Message for SMSG_CANCEL_COMBAT {
-    const OPCODE: u32 = 0x014e;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CANCEL_COMBAT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -40,9 +40,12 @@ pub struct SMSG_SPELL_START {
     pub targets: SpellCastTargets,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SPELL_START {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SPELL_START {}
+impl crate::Message for SMSG_SPELL_START {
+    const OPCODE: u32 = 0x0131;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -253,17 +256,6 @@ impl SMSG_SPELL_START {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SPELL_START {}
-impl crate::Message for SMSG_SPELL_START {
-    const OPCODE: u32 = 0x0131;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SPELL_START::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

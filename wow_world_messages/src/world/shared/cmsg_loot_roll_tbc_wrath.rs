@@ -18,9 +18,12 @@ pub struct CMSG_LOOT_ROLL {
     pub vote: RollVote,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_LOOT_ROLL {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_LOOT_ROLL {}
+impl crate::Message for CMSG_LOOT_ROLL {
+    const OPCODE: u32 = 0x02a0;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -52,17 +55,6 @@ impl CMSG_LOOT_ROLL {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_LOOT_ROLL {}
-impl crate::Message for CMSG_LOOT_ROLL {
-    const OPCODE: u32 = 0x02a0;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_LOOT_ROLL::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

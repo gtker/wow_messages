@@ -16,9 +16,12 @@ pub struct SMSG_AI_REACTION {
     pub reaction: AiReaction,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_AI_REACTION {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_AI_REACTION {}
+impl crate::Message for SMSG_AI_REACTION {
+    const OPCODE: u32 = 0x013c;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -48,17 +51,6 @@ impl SMSG_AI_REACTION {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_AI_REACTION {}
-impl crate::Message for SMSG_AI_REACTION {
-    const OPCODE: u32 = 0x013c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_AI_REACTION::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -35,9 +35,12 @@ pub struct SMSG_LEVELUP_INFO {
     pub spirit: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_LEVELUP_INFO {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_LEVELUP_INFO {}
+impl crate::Message for SMSG_LEVELUP_INFO {
+    const OPCODE: u32 = 0x01d4;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -87,17 +90,6 @@ impl SMSG_LEVELUP_INFO {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_LEVELUP_INFO {}
-impl crate::Message for SMSG_LEVELUP_INFO {
-    const OPCODE: u32 = 0x01d4;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_LEVELUP_INFO::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

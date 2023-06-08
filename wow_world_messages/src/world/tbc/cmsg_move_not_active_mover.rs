@@ -16,9 +16,12 @@ pub struct CMSG_MOVE_NOT_ACTIVE_MOVER {
     pub info: MovementInfo,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_MOVE_NOT_ACTIVE_MOVER {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_MOVE_NOT_ACTIVE_MOVER {}
+impl crate::Message for CMSG_MOVE_NOT_ACTIVE_MOVER {
+    const OPCODE: u32 = 0x02d1;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -160,17 +163,6 @@ impl CMSG_MOVE_NOT_ACTIVE_MOVER {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_MOVE_NOT_ACTIVE_MOVER {}
-impl crate::Message for CMSG_MOVE_NOT_ACTIVE_MOVER {
-    const OPCODE: u32 = 0x02d1;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_MOVE_NOT_ACTIVE_MOVER::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

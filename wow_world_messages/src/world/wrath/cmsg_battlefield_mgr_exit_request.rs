@@ -11,9 +11,12 @@ pub struct CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {
     pub battle_id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {}
+impl crate::Message for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {
+    const OPCODE: u32 = 0x04e7;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {}
-impl crate::Message for CMSG_BATTLEFIELD_MGR_EXIT_REQUEST {
-    const OPCODE: u32 = 0x04e7;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_BATTLEFIELD_MGR_EXIT_REQUEST::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

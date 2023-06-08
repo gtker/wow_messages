@@ -10,7 +10,7 @@ use crate::rust_printer::structs::print_common_impls::print_size::{
 use crate::rust_printer::structs::test_case_string::print_to_testcase;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
-    ImplType, CFG_TESTCASE, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
+    ImplType, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
 };
 use crate::CONTAINER_SELF_SIZE_FIELD;
 
@@ -20,10 +20,6 @@ pub mod print_write;
 
 pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
     print_world_message_headers_and_constants(s, e);
-
-    if !matches!(e.container_type(), ContainerType::Struct) {
-        print_to_testcase(s, e, e.tests(o).is_empty());
-    }
 
     match e.container_type() {
         ContainerType::Struct => {
@@ -69,7 +65,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
 
             impl_read_and_writable_login(
                 s,
-                e.name(),
+                e,
                 opcode,
                 trait_to_impl,
                 |s, it| {
@@ -102,7 +98,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
 
             impl_world_message(
                 s,
-                e.name(),
+                e,
                 opcode,
                 |s, it| {
                     print_write::print_write(s, e, o, it.prefix(), it.postfix());
@@ -473,14 +469,14 @@ pub(crate) fn print_constant_member(
 
 pub(crate) fn impl_world_message(
     s: &mut Writer,
-    type_name: impl AsRef<str>,
+    e: &Container,
     opcode: u16,
     write_function: impl Fn(&mut Writer, ImplType),
     read_function: impl Fn(&mut Writer, ImplType),
     sizes: Option<Sizes>,
     should_write_test_case_string: bool,
 ) {
-    let type_name = type_name.as_ref();
+    let type_name = e.name();
 
     s.wln(format!("impl crate::private::Sealed for {type_name} {{}}",));
 
@@ -488,12 +484,7 @@ pub(crate) fn impl_world_message(
         s.wln(format!("const OPCODE: u32 = {opcode:#06x};"));
         s.newline();
 
-        if should_write_test_case_string {
-            s.wln(CFG_TESTCASE);
-            s.bodyn("fn to_test_case_string(&self) -> Option<String>", |s| {
-                s.wln(format!("{type_name}::to_test_case_string(self)"))
-            });
-        }
+        print_to_testcase(s, e, should_write_test_case_string);
 
         s.bodyn("fn size_without_header(&self) -> u32", |s| {
             if sizes.is_some() && sizes.unwrap().is_constant().is_some() {
@@ -522,7 +513,7 @@ pub(crate) fn impl_world_message(
 
 pub(crate) fn impl_read_and_writable_login(
     s: &mut Writer,
-    type_name: impl AsRef<str>,
+    e: &Container,
     opcode: u16,
     trait_to_impl: impl AsRef<str>,
     read_function: impl Fn(&mut Writer, ImplType),
@@ -530,7 +521,7 @@ pub(crate) fn impl_read_and_writable_login(
     sizes: Sizes,
     should_write_to_test_case_string: bool,
 ) {
-    let type_name = type_name.as_ref();
+    let type_name = e.name();
     let trait_to_impl = trait_to_impl.as_ref();
 
     write_into_vec(s, type_name, write_function, "pub(crate)");
@@ -542,12 +533,7 @@ pub(crate) fn impl_read_and_writable_login(
     s.wln(format!("const OPCODE: u8 = {opcode:#04x};"));
     s.newline();
 
-    if should_write_to_test_case_string {
-        s.wln(CFG_TESTCASE);
-        s.bodyn("fn to_test_case_string(&self) -> Option<String>", |s| {
-            s.wln(format!("{type_name}::to_test_case_string(self)"))
-        });
-    }
+    print_to_testcase(s, e, should_write_to_test_case_string);
 
     for it in ImplType::types() {
         print_read_decl(s, it);

@@ -14,9 +14,12 @@ pub struct CMSG_GUILD_SET_OFFICER_NOTE {
     pub note: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_GUILD_SET_OFFICER_NOTE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_GUILD_SET_OFFICER_NOTE {}
+impl crate::Message for CMSG_GUILD_SET_OFFICER_NOTE {
+    const OPCODE: u32 = 0x0235;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -46,17 +49,6 @@ impl CMSG_GUILD_SET_OFFICER_NOTE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_GUILD_SET_OFFICER_NOTE {}
-impl crate::Message for CMSG_GUILD_SET_OFFICER_NOTE {
-    const OPCODE: u32 = 0x0235;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_GUILD_SET_OFFICER_NOTE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

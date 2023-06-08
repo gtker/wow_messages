@@ -18,9 +18,12 @@ pub struct MSG_LOOKING_FOR_GROUP_Client {
     pub unknown: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_LOOKING_FOR_GROUP_Client {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for MSG_LOOKING_FOR_GROUP_Client {}
+impl crate::Message for MSG_LOOKING_FOR_GROUP_Client {
+    const OPCODE: u32 = 0x01ff;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -52,17 +55,6 @@ impl MSG_LOOKING_FOR_GROUP_Client {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for MSG_LOOKING_FOR_GROUP_Client {}
-impl crate::Message for MSG_LOOKING_FOR_GROUP_Client {
-    const OPCODE: u32 = 0x01ff;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_LOOKING_FOR_GROUP_Client::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

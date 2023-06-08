@@ -15,9 +15,12 @@ pub struct CMSG_REQUEST_VEHICLE_SWITCH_SEAT {
     pub seat: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_REQUEST_VEHICLE_SWITCH_SEAT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_REQUEST_VEHICLE_SWITCH_SEAT {}
+impl crate::Message for CMSG_REQUEST_VEHICLE_SWITCH_SEAT {
+    const OPCODE: u32 = 0x0479;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl CMSG_REQUEST_VEHICLE_SWITCH_SEAT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_REQUEST_VEHICLE_SWITCH_SEAT {}
-impl crate::Message for CMSG_REQUEST_VEHICLE_SWITCH_SEAT {
-    const OPCODE: u32 = 0x0479;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_REQUEST_VEHICLE_SWITCH_SEAT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

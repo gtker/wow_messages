@@ -12,9 +12,12 @@ pub struct CMSG_QUEST_POI_QUERY {
     pub points_of_interests: Vec<u32>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_QUEST_POI_QUERY {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_QUEST_POI_QUERY {}
+impl crate::Message for CMSG_QUEST_POI_QUERY {
+    const OPCODE: u32 = 0x01e3;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -54,17 +57,6 @@ impl CMSG_QUEST_POI_QUERY {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_QUEST_POI_QUERY {}
-impl crate::Message for CMSG_QUEST_POI_QUERY {
-    const OPCODE: u32 = 0x01e3;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_QUEST_POI_QUERY::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

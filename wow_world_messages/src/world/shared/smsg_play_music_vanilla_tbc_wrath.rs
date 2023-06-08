@@ -11,9 +11,12 @@ pub struct SMSG_PLAY_MUSIC {
     pub sound_id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PLAY_MUSIC {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PLAY_MUSIC {}
+impl crate::Message for SMSG_PLAY_MUSIC {
+    const OPCODE: u32 = 0x0277;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SMSG_PLAY_MUSIC {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PLAY_MUSIC {}
-impl crate::Message for SMSG_PLAY_MUSIC {
-    const OPCODE: u32 = 0x0277;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PLAY_MUSIC::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

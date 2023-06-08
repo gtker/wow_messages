@@ -17,9 +17,12 @@ pub struct SMSG_PAUSE_MIRROR_TIMER {
     pub is_frozen: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PAUSE_MIRROR_TIMER {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_PAUSE_MIRROR_TIMER {}
+impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
+    const OPCODE: u32 = 0x01da;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -49,17 +52,6 @@ impl SMSG_PAUSE_MIRROR_TIMER {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_PAUSE_MIRROR_TIMER {}
-impl crate::Message for SMSG_PAUSE_MIRROR_TIMER {
-    const OPCODE: u32 = 0x01da;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PAUSE_MIRROR_TIMER::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

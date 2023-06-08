@@ -13,9 +13,12 @@ pub struct CMSG_CHANNEL_SET_OWNER {
     pub new_owner: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CHANNEL_SET_OWNER {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_CHANNEL_SET_OWNER {}
+impl crate::Message for CMSG_CHANNEL_SET_OWNER {
+    const OPCODE: u32 = 0x009d;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl CMSG_CHANNEL_SET_OWNER {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_CHANNEL_SET_OWNER {}
-impl crate::Message for CMSG_CHANNEL_SET_OWNER {
-    const OPCODE: u32 = 0x009d;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CHANNEL_SET_OWNER::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

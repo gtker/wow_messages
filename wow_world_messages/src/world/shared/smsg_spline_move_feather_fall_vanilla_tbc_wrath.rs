@@ -13,9 +13,12 @@ pub struct SMSG_SPLINE_MOVE_FEATHER_FALL {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_SPLINE_MOVE_FEATHER_FALL {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_SPLINE_MOVE_FEATHER_FALL {}
+impl crate::Message for SMSG_SPLINE_MOVE_FEATHER_FALL {
+    const OPCODE: u32 = 0x0305;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl SMSG_SPLINE_MOVE_FEATHER_FALL {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_SPLINE_MOVE_FEATHER_FALL {}
-impl crate::Message for SMSG_SPLINE_MOVE_FEATHER_FALL {
-    const OPCODE: u32 = 0x0305;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_SPLINE_MOVE_FEATHER_FALL::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

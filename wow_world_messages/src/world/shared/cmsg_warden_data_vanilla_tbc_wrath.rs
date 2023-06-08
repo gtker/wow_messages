@@ -11,9 +11,12 @@ pub struct CMSG_WARDEN_DATA {
     pub encrypted_data: Vec<u8>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_WARDEN_DATA {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_WARDEN_DATA {}
+impl crate::Message for CMSG_WARDEN_DATA {
+    const OPCODE: u32 = 0x02e7;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -45,17 +48,6 @@ impl CMSG_WARDEN_DATA {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_WARDEN_DATA {}
-impl crate::Message for CMSG_WARDEN_DATA {
-    const OPCODE: u32 = 0x02e7;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_WARDEN_DATA::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

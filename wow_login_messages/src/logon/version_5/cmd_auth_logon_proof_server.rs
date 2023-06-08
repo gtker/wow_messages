@@ -21,9 +21,46 @@ pub struct CMD_AUTH_LOGON_PROOF_Server {
     pub result: CMD_AUTH_LOGON_PROOF_Server_LoginResult,
 }
 
-#[cfg(feature = "print-testcase")]
 impl CMD_AUTH_LOGON_PROOF_Server {
-    pub fn to_test_case_string(&self) -> Option<String> {
+    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
+        // opcode: u8
+        w.write_all(&Self::OPCODE.to_le_bytes())?;
+
+        // result: LoginResult
+        w.write_all(&(self.result.as_int().to_le_bytes()))?;
+
+        match &self.result {
+            CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
+                hardware_survey_id,
+                server_proof,
+                unknown,
+            } => {
+                // server_proof: u8[20]
+                for i in server_proof.iter() {
+                    w.write_all(&i.to_le_bytes())?;
+                }
+
+                // hardware_survey_id: u32
+                w.write_all(&hardware_survey_id.to_le_bytes())?;
+
+                // unknown: u16
+                w.write_all(&unknown.to_le_bytes())?;
+
+            }
+            _ => {}
+        }
+
+        Ok(())
+    }
+}
+
+impl crate::private::Sealed for CMD_AUTH_LOGON_PROOF_Server {}
+
+impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
+    const OPCODE: u8 = 0x01;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
 
         let mut s = String::new();
@@ -77,51 +114,6 @@ impl CMD_AUTH_LOGON_PROOF_Server {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl CMD_AUTH_LOGON_PROOF_Server {
-    pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
-        // opcode: u8
-        w.write_all(&Self::OPCODE.to_le_bytes())?;
-
-        // result: LoginResult
-        w.write_all(&(self.result.as_int().to_le_bytes()))?;
-
-        match &self.result {
-            CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
-                hardware_survey_id,
-                server_proof,
-                unknown,
-            } => {
-                // server_proof: u8[20]
-                for i in server_proof.iter() {
-                    w.write_all(&i.to_le_bytes())?;
-                }
-
-                // hardware_survey_id: u32
-                w.write_all(&hardware_survey_id.to_le_bytes())?;
-
-                // unknown: u16
-                w.write_all(&unknown.to_le_bytes())?;
-
-            }
-            _ => {}
-        }
-
-        Ok(())
-    }
-}
-
-impl crate::private::Sealed for CMD_AUTH_LOGON_PROOF_Server {}
-
-impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
-    const OPCODE: u8 = 0x01;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMD_AUTH_LOGON_PROOF_Server::to_test_case_string(self)
     }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {

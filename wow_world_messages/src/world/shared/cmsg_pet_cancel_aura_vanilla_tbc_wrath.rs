@@ -15,9 +15,12 @@ pub struct CMSG_PET_CANCEL_AURA {
     pub id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_PET_CANCEL_AURA {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_PET_CANCEL_AURA {}
+impl crate::Message for CMSG_PET_CANCEL_AURA {
+    const OPCODE: u32 = 0x026b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl CMSG_PET_CANCEL_AURA {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_PET_CANCEL_AURA {}
-impl crate::Message for CMSG_PET_CANCEL_AURA {
-    const OPCODE: u32 = 0x026b;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_PET_CANCEL_AURA::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

@@ -19,9 +19,12 @@ pub struct CMSG_GM_REPORT_LAG {
     pub position: Vector3d,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_GM_REPORT_LAG {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_GM_REPORT_LAG {}
+impl crate::Message for CMSG_GM_REPORT_LAG {
+    const OPCODE: u32 = 0x0502;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -64,17 +67,6 @@ impl CMSG_GM_REPORT_LAG {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_GM_REPORT_LAG {}
-impl crate::Message for CMSG_GM_REPORT_LAG {
-    const OPCODE: u32 = 0x0502;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_GM_REPORT_LAG::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

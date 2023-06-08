@@ -15,9 +15,12 @@ pub struct SMSG_FEATURE_SYSTEM_STATUS {
     pub voice_chat_enabled: bool,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_FEATURE_SYSTEM_STATUS {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_FEATURE_SYSTEM_STATUS {}
+impl crate::Message for SMSG_FEATURE_SYSTEM_STATUS {
+    const OPCODE: u32 = 0x03c8;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl SMSG_FEATURE_SYSTEM_STATUS {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_FEATURE_SYSTEM_STATUS {}
-impl crate::Message for SMSG_FEATURE_SYSTEM_STATUS {
-    const OPCODE: u32 = 0x03c8;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_FEATURE_SYSTEM_STATUS::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

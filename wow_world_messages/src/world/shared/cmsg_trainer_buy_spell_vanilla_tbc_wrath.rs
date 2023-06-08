@@ -15,9 +15,12 @@ pub struct CMSG_TRAINER_BUY_SPELL {
     pub id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_TRAINER_BUY_SPELL {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_TRAINER_BUY_SPELL {}
+impl crate::Message for CMSG_TRAINER_BUY_SPELL {
+    const OPCODE: u32 = 0x01b2;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl CMSG_TRAINER_BUY_SPELL {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_TRAINER_BUY_SPELL {}
-impl crate::Message for CMSG_TRAINER_BUY_SPELL {
-    const OPCODE: u32 = 0x01b2;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_TRAINER_BUY_SPELL::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

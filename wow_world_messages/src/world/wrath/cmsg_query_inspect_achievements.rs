@@ -13,9 +13,12 @@ pub struct CMSG_QUERY_INSPECT_ACHIEVEMENTS {
     pub player: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_QUERY_INSPECT_ACHIEVEMENTS {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_QUERY_INSPECT_ACHIEVEMENTS {}
+impl crate::Message for CMSG_QUERY_INSPECT_ACHIEVEMENTS {
+    const OPCODE: u32 = 0x046b;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -43,17 +46,6 @@ impl CMSG_QUERY_INSPECT_ACHIEVEMENTS {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_QUERY_INSPECT_ACHIEVEMENTS {}
-impl crate::Message for CMSG_QUERY_INSPECT_ACHIEVEMENTS {
-    const OPCODE: u32 = 0x046b;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_QUERY_INSPECT_ACHIEVEMENTS::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

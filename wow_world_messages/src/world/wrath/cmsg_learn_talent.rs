@@ -15,9 +15,12 @@ pub struct CMSG_LEARN_TALENT {
     pub requested_rank: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_LEARN_TALENT {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_LEARN_TALENT {}
+impl crate::Message for CMSG_LEARN_TALENT {
+    const OPCODE: u32 = 0x0251;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -47,17 +50,6 @@ impl CMSG_LEARN_TALENT {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_LEARN_TALENT {}
-impl crate::Message for CMSG_LEARN_TALENT {
-    const OPCODE: u32 = 0x0251;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_LEARN_TALENT::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

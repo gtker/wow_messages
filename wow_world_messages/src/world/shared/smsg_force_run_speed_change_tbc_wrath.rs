@@ -27,9 +27,12 @@ pub struct SMSG_FORCE_RUN_SPEED_CHANGE {
     pub speed: f32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_FORCE_RUN_SPEED_CHANGE {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_FORCE_RUN_SPEED_CHANGE {}
+impl crate::Message for SMSG_FORCE_RUN_SPEED_CHANGE {
+    const OPCODE: u32 = 0x00e2;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -63,17 +66,6 @@ impl SMSG_FORCE_RUN_SPEED_CHANGE {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_FORCE_RUN_SPEED_CHANGE {}
-impl crate::Message for SMSG_FORCE_RUN_SPEED_CHANGE {
-    const OPCODE: u32 = 0x00e2;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_FORCE_RUN_SPEED_CHANGE::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

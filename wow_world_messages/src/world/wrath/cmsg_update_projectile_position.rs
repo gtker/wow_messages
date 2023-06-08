@@ -20,9 +20,12 @@ pub struct CMSG_UPDATE_PROJECTILE_POSITION {
     pub position: Vector3d,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_UPDATE_PROJECTILE_POSITION {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for CMSG_UPDATE_PROJECTILE_POSITION {}
+impl crate::Message for CMSG_UPDATE_PROJECTILE_POSITION {
+    const OPCODE: u32 = 0x04be;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -67,17 +70,6 @@ impl CMSG_UPDATE_PROJECTILE_POSITION {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for CMSG_UPDATE_PROJECTILE_POSITION {}
-impl crate::Message for CMSG_UPDATE_PROJECTILE_POSITION {
-    const OPCODE: u32 = 0x04be;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_UPDATE_PROJECTILE_POSITION::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

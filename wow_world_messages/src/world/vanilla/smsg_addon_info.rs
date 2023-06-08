@@ -13,9 +13,12 @@ pub struct SMSG_ADDON_INFO {
     pub addons: Vec<Addon>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_ADDON_INFO {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_ADDON_INFO {}
+impl crate::Message for SMSG_ADDON_INFO {
+    const OPCODE: u32 = 0x02ef;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -237,17 +240,6 @@ impl SMSG_ADDON_INFO {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_ADDON_INFO {}
-impl crate::Message for SMSG_ADDON_INFO {
-    const OPCODE: u32 = 0x02ef;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_ADDON_INFO::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

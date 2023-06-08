@@ -47,9 +47,12 @@ pub struct MSG_INSPECT_HONOR_STATS_Server {
     pub rank_progress_bar: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_INSPECT_HONOR_STATS_Server {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for MSG_INSPECT_HONOR_STATS_Server {}
+impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
+    const OPCODE: u32 = 0x02d6;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -107,17 +110,6 @@ impl MSG_INSPECT_HONOR_STATS_Server {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for MSG_INSPECT_HONOR_STATS_Server {}
-impl crate::Message for MSG_INSPECT_HONOR_STATS_Server {
-    const OPCODE: u32 = 0x02d6;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_INSPECT_HONOR_STATS_Server::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {

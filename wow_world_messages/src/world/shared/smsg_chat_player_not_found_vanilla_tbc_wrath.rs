@@ -11,9 +11,12 @@ pub struct SMSG_CHAT_PLAYER_NOT_FOUND {
     pub name: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CHAT_PLAYER_NOT_FOUND {
-    pub fn to_test_case_string(&self) -> Option<String> {
+impl crate::private::Sealed for SMSG_CHAT_PLAYER_NOT_FOUND {}
+impl crate::Message for SMSG_CHAT_PLAYER_NOT_FOUND {
+    const OPCODE: u32 = 0x02a9;
+
+    #[cfg(feature = "print-testcase")]
+    fn to_test_case_string(&self) -> Option<String> {
         use std::fmt::Write;
         use crate::traits::Message;
 
@@ -41,17 +44,6 @@ impl SMSG_CHAT_PLAYER_NOT_FOUND {
         writeln!(s, "}}\n").unwrap();
 
         Some(s)
-    }
-
-}
-
-impl crate::private::Sealed for SMSG_CHAT_PLAYER_NOT_FOUND {}
-impl crate::Message for SMSG_CHAT_PLAYER_NOT_FOUND {
-    const OPCODE: u32 = 0x02a9;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CHAT_PLAYER_NOT_FOUND::to_test_case_string(self)
     }
 
     fn size_without_header(&self) -> u32 {
