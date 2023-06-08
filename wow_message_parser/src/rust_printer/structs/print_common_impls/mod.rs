@@ -41,18 +41,19 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                 PARSE_ERROR
             };
 
-            impl_read_write_struct(
+            impl_read_write_non_trait(
                 s,
                 e.name(),
+                error_name,
                 |s, it| {
                     print_read::print_read(s, e, o, it.prefix(), it.postfix());
                 },
                 |s, it| {
                     print_write::print_write(s, e, o, it.prefix(), it.postfix());
                 },
-                create_async_reads,
-                error_name,
                 visibility,
+                visibility,
+                create_async_reads,
             );
         }
         ContainerType::CLogin(opcode) | ContainerType::SLogin(opcode) => {
@@ -813,25 +814,4 @@ pub(crate) fn impl_read_write_non_trait(
     }
 
     s.closing_curly_newline(); // impl
-}
-
-pub(crate) fn impl_read_write_struct(
-    s: &mut Writer,
-    type_name: impl AsRef<str>,
-    read_function: impl Fn(&mut Writer, ImplType),
-    write_function: impl Fn(&mut Writer, ImplType),
-    create_async_reads: bool,
-    error_name: &str,
-    visibility: &str,
-) {
-    impl_read_write_non_trait(
-        s,
-        type_name,
-        error_name,
-        read_function,
-        write_function,
-        visibility,
-        visibility,
-        create_async_reads,
-    )
 }
