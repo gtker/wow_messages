@@ -154,7 +154,7 @@ pub(crate) fn print_size_rust_view(s: &mut Writer, c: &Container, prefix: &str) 
 
     if !r.constant_sized() {
         if c.tags().compressed() {
-            s.variable_size(r.name(), "size", false, |s| {
+            variable_size(s, r.name(), "size", false, |s| {
                 s.wln("use crate::traits::Message;");
                 s.newline();
 
@@ -185,7 +185,7 @@ pub(crate) fn print_size_uncompressed_rust_view(
                 true
             };
 
-        s.variable_size(r.name(), function_name, const_fn, |s| {
+        variable_size(s, r.name(), function_name, const_fn, |s| {
             print_rust_members_sizes(s, r.members(), None, prefix);
 
             if let Some(optional) = r.optional() {
@@ -210,4 +210,26 @@ pub(crate) fn print_size_uncompressed_rust_view(
             }
         });
     }
+}
+
+pub(crate) fn variable_size(
+    s: &mut Writer,
+    name: impl AsRef<str>,
+    function_name: &str,
+    const_fn: bool,
+    variable_sized: impl Fn(&mut Writer),
+) {
+    s.open_curly(format!("impl {}", name.as_ref()));
+    let const_fn = match const_fn {
+        true => " const",
+        false => "",
+    };
+    s.open_curly(format!(
+        "pub(crate){const_fn} fn {function_name}(&self) -> usize"
+    ));
+
+    variable_sized(s);
+
+    s.closing_curly();
+    s.closing_curly_newline();
 }

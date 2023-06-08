@@ -158,28 +158,6 @@ impl Writer {
         self.closing_curly_newline();
     }
 
-    pub(crate) fn variable_size(
-        &mut self,
-        name: impl AsRef<str>,
-        function_name: &str,
-        const_fn: bool,
-        variable_sized: impl Fn(&mut Self),
-    ) {
-        self.open_curly(format!("impl {}", name.as_ref()));
-        let const_fn = match const_fn {
-            true => " const",
-            false => "",
-        };
-        self.open_curly(format!(
-            "pub(crate){const_fn} fn {function_name}(&self) -> usize"
-        ));
-
-        variable_sized(self);
-
-        self.closing_curly();
-        self.closing_curly_newline();
-    }
-
     fn print_write_decl(&mut self, it: ImplType) {
         self.wln(it.cfg());
 
