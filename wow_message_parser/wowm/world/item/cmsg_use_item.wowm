@@ -59,3 +59,24 @@ cmsg CMSG_USE_ITEM = 0x00AB {
 } {
     versions = "3.3.5";
 }
+
+test CMSG_USE_ITEM {
+    bag_index = 255;
+    bag_slot = 24;
+    spell_index = 0;
+    targets = {
+        target_flags = SELF;
+    };
+} [
+    0x00, 0x09, /* size */
+    0xAB, 0x00, 0x00, 0x00, /* opcode */
+    0xFF, /* bag_index */
+    0x18, /* bag_slot */
+    0x00, /* spell_index */
+    /* targets: SpellCastTargets start */
+        0x00, 0x00, /* target_flags */
+    /* targets: SpellCastTargets end */
+] {
+    versions = "1.12";
+}
+

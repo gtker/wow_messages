@@ -4,3 +4,25 @@ cmsg CMSG_CANCEL_CAST = 0x012F {
     Spell id;
 }
 
+
+test CMSG_CANCEL_CAST {
+    id = 20600;
+} [
+    0x00, 0x08, /* size */
+    0x2F, 0x01, 0x00, 0x00, /* opcode */
+    0x78, 0x50, 0x00, 0x00, /* id */
+] {
+    versions = "1.12";
+}
+
+
+test CMSG_CANCEL_CAST {
+    id = 8690;
+} [
+    0x00, 0x08, /* size */
+    0x2F, 0x01, 0x00, 0x00, /* opcode */
+    0xF2, 0x21, 0x00, 0x00, /* id */
+] {
+    versions = "1.12";
+}
+

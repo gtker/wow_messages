@@ -29,6 +29,16 @@ CMSG have a header of 6 bytes.
 | 0x06 | 4 / Little | u32 | spell |  |  |
 | 0x0A | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 10, // size
+46, 1, 0, 0, // opcode (302)
+120, 80, 0, 0, // spell: u32
+0, 0, // SpellCastTargets.target_flags: SpellCastTargetFlags  SELF (0)
+```
 # CMSG_CAST_SPELL
 
 ## Client Version 2.4.3

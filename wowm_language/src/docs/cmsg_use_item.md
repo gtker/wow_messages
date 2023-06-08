@@ -33,6 +33,18 @@ CMSG have a header of 6 bytes.
 | 0x08 | 1 / - | u8 | spell_index |  |  |
 | 0x09 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 9, // size
+171, 0, 0, 0, // opcode (171)
+255, // bag_index: u8
+24, // bag_slot: u8
+0, // spell_index: u8
+0, 0, // SpellCastTargets.target_flags: SpellCastTargetFlags  SELF (0)
+```
 # CMSG_USE_ITEM
 
 ## Client Version 2.4.3

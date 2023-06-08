@@ -22,190 +22,7 @@ pub struct CMSG_USE_ITEM {
 #[cfg(feature = "print-testcase")]
 impl CMSG_USE_ITEM {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMSG_USE_ITEM {{").unwrap();
-        // Members
-        writeln!(s, "    bag_index = {};", self.bag_index).unwrap();
-        writeln!(s, "    bag_slot = {};", self.bag_slot).unwrap();
-        writeln!(s, "    spell_index = {};", self.spell_index).unwrap();
-        // targets: SpellCastTargets
-        writeln!(s, "    targets = {{").unwrap();
-        // Members
-        writeln!(s, "        target_flags = {};", crate::vanilla::SpellCastTargetFlags::new(self.targets.target_flags.as_int()).as_test_case_value()).unwrap();
-        if let Some(if_statement) = &self.targets.target_flags.get_unit() {
-            writeln!(s, "        unit_target = {};", if_statement.unit_target.guid()).unwrap();
-        }
-
-        if let Some(if_statement) = &self.targets.target_flags.get_gameobject() {
-            match if_statement {
-                crate::vanilla::SpellCastTargets_SpellCastTargetFlags_Gameobject::Gameobject {
-                    gameobject,
-                } => {
-                    writeln!(s, "        gameobject = {};", gameobject.guid()).unwrap();
-                }
-                crate::vanilla::SpellCastTargets_SpellCastTargetFlags_Gameobject::ObjectUnk {
-                    object_unk,
-                } => {
-                    writeln!(s, "        object_unk = {};", object_unk.guid()).unwrap();
-                }
-            }
-        }
-
-        if let Some(if_statement) = &self.targets.target_flags.get_item() {
-            match if_statement {
-                crate::vanilla::SpellCastTargets_SpellCastTargetFlags_Item::Item {
-                    item,
-                } => {
-                    writeln!(s, "        item = {};", item.guid()).unwrap();
-                }
-                crate::vanilla::SpellCastTargets_SpellCastTargetFlags_Item::TradeItem {
-                    trade_item,
-                } => {
-                    writeln!(s, "        trade_item = {};", trade_item.guid()).unwrap();
-                }
-            }
-        }
-
-        if let Some(if_statement) = &self.targets.target_flags.get_source_location() {
-            // source: Vector3d
-            writeln!(s, "        source = {{").unwrap();
-            // Members
-            writeln!(s, "    {}", if if_statement.source.x.to_string().contains(".") { if_statement.source.x.to_string() } else { format!("{}.0", if_statement.source.x) }).unwrap();
-            writeln!(s, "    {}", if if_statement.source.y.to_string().contains(".") { if_statement.source.y.to_string() } else { format!("{}.0", if_statement.source.y) }).unwrap();
-            writeln!(s, "    {}", if if_statement.source.z.to_string().contains(".") { if_statement.source.z.to_string() } else { format!("{}.0", if_statement.source.z) }).unwrap();
-
-            writeln!(s, "    }};").unwrap();
-        }
-
-        if let Some(if_statement) = &self.targets.target_flags.get_dest_location() {
-            // destination: Vector3d
-            writeln!(s, "        destination = {{").unwrap();
-            // Members
-            writeln!(s, "    {}", if if_statement.destination.x.to_string().contains(".") { if_statement.destination.x.to_string() } else { format!("{}.0", if_statement.destination.x) }).unwrap();
-            writeln!(s, "    {}", if if_statement.destination.y.to_string().contains(".") { if_statement.destination.y.to_string() } else { format!("{}.0", if_statement.destination.y) }).unwrap();
-            writeln!(s, "    {}", if if_statement.destination.z.to_string().contains(".") { if_statement.destination.z.to_string() } else { format!("{}.0", if_statement.destination.z) }).unwrap();
-
-            writeln!(s, "    }};").unwrap();
-        }
-
-        if let Some(if_statement) = &self.targets.target_flags.get_string() {
-            writeln!(s, "        target_string = \"{}\";", if_statement.target_string).unwrap();
-        }
-
-        if let Some(if_statement) = &self.targets.target_flags.get_corpse() {
-            match if_statement {
-                crate::vanilla::SpellCastTargets_SpellCastTargetFlags_Corpse::Corpse {
-                    corpse,
-                } => {
-                    writeln!(s, "        corpse = {};", corpse.guid()).unwrap();
-                }
-                crate::vanilla::SpellCastTargets_SpellCastTargetFlags_Corpse::PvpCorpse {
-                    pvp_corpse,
-                } => {
-                    writeln!(s, "        pvp_corpse = {};", pvp_corpse.guid()).unwrap();
-                }
-            }
-        }
-
-
-        writeln!(s, "    }};").unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 171_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_index", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_slot", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "spell_index", "    ");
-        writeln!(s, "    /* targets: SpellCastTargets start */").unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 2, "target_flags", "        ");
-        if let Some(if_statement) = &self.targets.target_flags.get_unit() {
-            crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&if_statement.unit_target), "unit_target", "        ");
-        }
-
-        if let Some(if_statement) = &self.targets.target_flags.get_gameobject() {
-            match if_statement {
-                crate::vanilla::SpellCastTargets_SpellCastTargetFlags_Gameobject::Gameobject {
-                    gameobject,
-                } => {
-                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&gameobject), "gameobject", "        ");
-                }
-                crate::vanilla::SpellCastTargets_SpellCastTargetFlags_Gameobject::ObjectUnk {
-                    object_unk,
-                } => {
-                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&object_unk), "object_unk", "        ");
-                }
-            }
-        }
-
-        if let Some(if_statement) = &self.targets.target_flags.get_item() {
-            match if_statement {
-                crate::vanilla::SpellCastTargets_SpellCastTargetFlags_Item::Item {
-                    item,
-                } => {
-                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&item), "item", "        ");
-                }
-                crate::vanilla::SpellCastTargets_SpellCastTargetFlags_Item::TradeItem {
-                    trade_item,
-                } => {
-                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&trade_item), "trade_item", "        ");
-                }
-            }
-        }
-
-        if let Some(if_statement) = &self.targets.target_flags.get_source_location() {
-            writeln!(s, "    /* source: Vector3d start */").unwrap();
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "            ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "            ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "            ");
-            writeln!(s, "    /* source: Vector3d end */").unwrap();
-        }
-
-        if let Some(if_statement) = &self.targets.target_flags.get_dest_location() {
-            writeln!(s, "    /* destination: Vector3d start */").unwrap();
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "x", "            ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "y", "            ");
-            crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "            ");
-            writeln!(s, "    /* destination: Vector3d end */").unwrap();
-        }
-
-        if let Some(if_statement) = &self.targets.target_flags.get_string() {
-            crate::util::write_bytes(&mut s, &mut bytes, if_statement.target_string.len() + 1, "target_string", "        ");
-        }
-
-        if let Some(if_statement) = &self.targets.target_flags.get_corpse() {
-            match if_statement {
-                crate::vanilla::SpellCastTargets_SpellCastTargetFlags_Corpse::Corpse {
-                    corpse,
-                } => {
-                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&corpse), "corpse", "        ");
-                }
-                crate::vanilla::SpellCastTargets_SpellCastTargetFlags_Corpse::PvpCorpse {
-                    pvp_corpse,
-                } => {
-                    crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&pvp_corpse), "pvp_corpse", "        ");
-                }
-            }
-        }
-
-        writeln!(s, "    /* targets: SpellCastTargets end */").unwrap();
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }
@@ -276,5 +93,101 @@ impl CMSG_USE_ITEM {
         + 1 // spell_index: u8
         + self.targets.size() // targets: SpellCastTargets
     }
+}
+
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMSG_USE_ITEM;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::Guid;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_USE_ITEM, expected: &CMSG_USE_ITEM) {
+        assert_eq!(t.bag_index, expected.bag_index);
+        assert_eq!(t.bag_slot, expected.bag_slot);
+        assert_eq!(t.spell_index, expected.spell_index);
+        assert_eq!(t.targets, expected.targets);
+    }
+
+    const RAW0: [u8; 11] = [ 0x00, 0x09, 0xAB, 0x00, 0x00, 0x00, 0xFF, 0x18, 0x00,
+         0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> CMSG_USE_ITEM {
+        CMSG_USE_ITEM {
+            bag_index: 0xFF,
+            bag_slot: 0x18,
+            spell_index: 0x0,
+            targets: SpellCastTargets {
+                target_flags: SpellCastTargets_SpellCastTargetFlags::empty()
+                    ,
+            },
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/item/cmsg_use_item.wowm` line 63.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmsg_use_item0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_USE_ITEM(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_USE_ITEM, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/item/cmsg_use_item.wowm` line 63.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmsg_use_item0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_USE_ITEM(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_USE_ITEM, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/item/cmsg_use_item.wowm` line 63.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmsg_use_item0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_USE_ITEM(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_USE_ITEM, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
 }
 

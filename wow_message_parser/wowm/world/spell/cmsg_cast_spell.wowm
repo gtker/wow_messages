@@ -23,3 +23,20 @@ cmsg CMSG_CAST_SPELL = 0x012E {
 } {
     versions = "3.3.5";
 }
+
+test CMSG_CAST_SPELL {
+    spell = 20600;
+    targets = {
+        target_flags = SELF;
+    };
+} [
+    0x00, 0x0A, /* size */
+    0x2E, 0x01, 0x00, 0x00, /* opcode */
+    0x78, 0x50, 0x00, 0x00, /* spell */
+    /* targets: SpellCastTargets start */
+        0x00, 0x00, /* target_flags */
+    /* targets: SpellCastTargets end */
+] {
+    versions = "1.12";
+}
+
