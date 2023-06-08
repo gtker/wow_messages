@@ -6,17 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!-- next-header -->
+
 ## [Unreleased] - ReleaseDate
 
 ### Added
 
-* `AuctionHouse` type for Vanilla, TBC and Wrath with member functions `deposit_percentage`, `cut_percentage`, and `(vanilla|tbc|wrath)_faction`.
+* `AuctionHouse` type for Vanilla, TBC and Wrath with member functions `deposit_percentage`, `cut_percentage`,
+  and `(vanilla|tbc|wrath)_faction`.
 * `Octal`, `Binary`, `UpperHex`, `LowerHex` for `Guid`.
+* `to_emote` for `TextEmote`.
 
 ### Removed
 
 * `write_packed_guid_into_vec`, `size`, `read_packed` methods for `Guid`.
-These were only intended to be used by `wow_world_messages` for reading `Guid`s on the wire and should provide no functionality for users for either `wow_world_messages` or `wow_world_base`.
+  These were only intended to be used by `wow_world_messages` for reading `Guid`s on the wire and should provide no
+  functionality for users for either `wow_world_messages` or `wow_world_base`.
 
 ## [0.1.1] - 2023-05-20
 
@@ -31,6 +35,7 @@ These were only intended to be used by `wow_world_messages` for reading `Guid`s 
 * First release.
 
 <!-- next-url -->
+
 [Unreleased]: https://github.com/gtker/wow_messages/compare/wow_world_base-v0.1.1...HEAD
 
 [0.1.1]: https://github.com/gtker/wow_messages/compare/wow_world_base-v0.1.0...wow_world_base-v0.1.1
