@@ -35,9 +35,20 @@ pub use wow_world_base::wrath::{
 
 /// Looks up items and returns if found.
 ///
-/// Prefer using this over [`all_items`] since this may incorporate optimizations for lookup speed in the future.
-pub fn lookup_item(id: u32) -> Option<&'static Item> {
-    all_items().iter().find(|a| a.entry() == id)
+/// Prefer using this over [`all_items`] since this may incorporate optimizations for lookup speed in the future and is more resilient to changes.
+pub const fn lookup_item(id: u32) -> Option<&'static Item> {
+    let mut i = 0;
+    const OBJ: &[Item] = all_items();
+
+    while i < OBJ.len() {
+        if OBJ[i].entry() == id {
+            return Some(&OBJ[i]);
+        }
+
+        i += 1;
+    }
+
+    None
 }
 
 /// Returns all items.
