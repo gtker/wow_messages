@@ -104,9 +104,12 @@ pub(crate) fn includes(
         }
     }
 
-    for e in set {
-        s.wln(format!("{e},"));
+    for (i, e) in set.iter().enumerate() {
+        let extra = if i == (set.len() - 1) { "" } else { " " };
+
+        s.w_break_at(format!("{e},{extra}"), 80);
     }
+    s.newline();
 
     s.dec_indent();
     s.wln("};");

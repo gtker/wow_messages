@@ -1,11 +1,6 @@
 #![allow(clippy::too_many_arguments)]
 use crate::vanilla::{
-    Attributes,
-    AttributesEx1,
-    AttributesEx2,
-    AttributesEx3,
-    AttributesEx4,
-    AuraMod,
+    Attributes, AttributesEx1, AttributesEx2, AttributesEx3, AttributesEx4, AuraMod,
 };
 
 /// Struct optimized for containing the original spells most efficiently.

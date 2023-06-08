@@ -1,23 +1,7 @@
 use wow_world_base::tbc::{
-    AllowedClass,
-    AllowedRace,
-    BagFamily,
-    Bonding,
-    Faction,
-    Gold,
-    InventoryType,
-    Item,
-    ItemClassAndSubClass,
-    ItemDamageType,
-    ItemFlag,
-    ItemQuality,
-    ItemSet,
-    ItemSocket,
-    ItemStat,
-    PageTextMaterial,
-    SheatheType,
-    Skill,
-    Spells,
+    AllowedClass, AllowedRace, BagFamily, Bonding, Faction, Gold, InventoryType, 
+    Item, ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemQuality, ItemSet, 
+    ItemSocket, ItemStat, PageTextMaterial, SheatheType, Skill, Spells,
 };
 
 const EMPTY_ITEMSOCKET:&[ItemSocket]=&[];

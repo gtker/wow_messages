@@ -1,24 +1,7 @@
 use wow_world_base::wrath::{
-    AllowedClass,
-    AllowedRace,
-    BagFamily,
-    Bonding,
-    Faction,
-    Gold,
-    InventoryType,
-    Item,
-    ItemClassAndSubClass,
-    ItemDamageType,
-    ItemFlag,
-    ItemFlag2,
-    ItemQuality,
-    ItemSet,
-    ItemSocket,
-    ItemStat,
-    PageTextMaterial,
-    SheatheType,
-    Skill,
-    Spells,
+    AllowedClass, AllowedRace, BagFamily, Bonding, Faction, Gold, InventoryType, 
+    Item, ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemFlag2, ItemQuality, 
+    ItemSet, ItemSocket, ItemStat, PageTextMaterial, SheatheType, Skill, Spells,
 };
 
 const EMPTY_ITEMSOCKET:&[ItemSocket]=&[];

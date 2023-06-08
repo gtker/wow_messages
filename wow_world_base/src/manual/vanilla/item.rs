@@ -1,26 +1,8 @@
 #![allow(clippy::too_many_arguments)]
 use crate::vanilla::{
-    AllowedClass,
-    AllowedRace,
-    Area,
-    BagFamily,
-    Bonding,
-    Faction,
-    Gold,
-    InventoryType,
-    ItemClassAndSubClass,
-    ItemDamageType,
-    ItemFlag,
-    ItemQuality,
-    ItemSet,
-    Language,
-    Map,
-    PageTextMaterial,
-    PvpRank,
-    SheatheType,
-    Skill,
-    SpellSchool,
-    SpellTriggerType,
+    AllowedClass, AllowedRace, Area, BagFamily, Bonding, Faction, Gold, InventoryType, 
+    ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemQuality, ItemSet, Language, 
+    Map, PageTextMaterial, PvpRank, SheatheType, Skill, SpellSchool, SpellTriggerType,
 };
 
 /// Struct optimized for containing the original items most efficiently.

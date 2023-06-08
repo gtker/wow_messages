@@ -1,29 +1,9 @@
 #![allow(clippy::too_many_arguments)]
 use crate::wrath::{
-    AllowedClass,
-    AllowedRace,
-    Area,
-    BagFamily,
-    Bonding,
-    Faction,
-    Gold,
-    InventoryType,
-    ItemClassAndSubClass,
-    ItemDamageType,
-    ItemFlag,
-    ItemFlag2,
-    ItemQuality,
-    ItemSet,
-    ItemSocket,
-    ItemStat,
-    Language,
-    Map,
-    PageTextMaterial,
-    PvpRank,
-    SheatheType,
-    Skill,
-    SpellSchool,
-    SpellTriggerType,
+    AllowedClass, AllowedRace, Area, BagFamily, Bonding, Faction, Gold, InventoryType, 
+    ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemFlag2, ItemQuality, ItemSet, 
+    ItemSocket, ItemStat, Language, Map, PageTextMaterial, PvpRank, SheatheType, 
+    Skill, SpellSchool, SpellTriggerType,
 };
 
 /// Struct optimized for containing the original items most efficiently.

@@ -1,11 +1,5 @@
 use wow_world_base::vanilla::{
-    Attributes,
-    AttributesEx1,
-    AttributesEx2,
-    AttributesEx3,
-    Reagent,
-    Spell,
-    SpellEffects,
+    Attributes, AttributesEx1, AttributesEx2, AttributesEx3, Reagent, Spell, SpellEffects, 
     Totem,
 };
 

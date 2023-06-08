@@ -1,9 +1,5 @@
 use wow_world_base::wrath::{
-    Reagent,
-    Spell,
-    SpellEffects,
-    Totem,
-    TotemCategory,
+    Reagent, Spell, SpellEffects, Totem, TotemCategory,
 };
 
 const EMPTY_REAGENT:&[Reagent]=&[];
