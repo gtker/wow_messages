@@ -4,7 +4,6 @@ mod types;
 mod write;
 
 use crate::base_printer::data::get_fields;
-use crate::base_printer::write::items::all_items::unobtainable_item;
 use crate::base_printer::write::items::{
     write_constructors, write_definition, write_pub_use, write_things,
 };
@@ -206,7 +205,6 @@ fn write_items(data: &Data, expansion: Expansion) {
         items,
         expansion,
         TY_NAME,
-        |i| unobtainable_item(i.entry, i.extra_flags, &i.name),
         optimizations,
     );
     write_definition(
@@ -245,7 +243,6 @@ fn write_spells(data: &Data, expansion: Expansion) {
         spells,
         expansion,
         TY_NAME,
-        |_| false,
         optimizations,
     );
     write_definition(

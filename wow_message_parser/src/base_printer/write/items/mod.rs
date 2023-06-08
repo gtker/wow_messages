@@ -217,7 +217,6 @@ pub(crate) fn write_things(
     things: &[GenericThing],
     expansion: Expansion,
     ty_name: &str,
-    unobtainable: impl Fn(&GenericThing) -> bool,
     optimizations: &Optimizations,
 ) {
     let mut s = Writer::new();
@@ -235,7 +234,6 @@ pub(crate) fn write_things(
         &mut s,
         things,
         expansion,
-        unobtainable,
         ty_name,
         &default_values,
         &arrays,
