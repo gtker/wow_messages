@@ -101,4 +101,28 @@ pub(crate) fn all_items(
     }
 
     s.wln("];");
+    s.newline();
+
+    let max_index = items.len();
+    let ty = lookup_type(max_index);
+
+    s.wln(format!("pub const Z________LOOKUP: &[{ty}] = &["));
+    let max = items.iter().last().unwrap().entry;
+    for i in 0..=max {
+        if let Some(pos) = items.iter().position(|a| a.entry == i) {
+            s.wln(format!("{pos},"));
+        } else {
+            s.wln(format!("{ty}::MAX,"));
+        }
+    }
+
+    s.wln("];");
+}
+
+pub(crate) fn lookup_type(max_index: usize) -> &'static str {
+    if max_index > u16::MAX as usize {
+        "usize"
+    } else {
+        "u16"
+    }
 }

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 * `lookup_items` is now a `const` `fn` for all expansions.
+* `lookup_items` is now orders of magnitude faster due to changing to a lookup array rather than linear traversal.
 
 ## [0.1.0] - 2023-05-20
 
