@@ -363,7 +363,7 @@ fn print_read_definition(
         }
 
         Type::Guid => {
-            s.wln_no_indent(format!("crate::util::read_guid(&mut r)?;",));
+            s.wln_no_indent("crate::util::read_guid(&mut r)?;");
         }
 
         Type::VariableItemRandomProperty

@@ -432,7 +432,7 @@ pub(crate) fn common_impls_world(
         });
 
         s.wln(CFG_TESTCASE);
-        s.funcn_pub("message_name(&self)", "&'static str", |s| {
+        s.funcn_pub_const("message_name(&self)", "&'static str", |s| {
             s.body("match self", |s| {
                 for container in v {
                     let en = get_enumerator_name(container.name());
@@ -441,7 +441,7 @@ pub(crate) fn common_impls_world(
                     if container.empty_body() {
                         s.wln(format!("Self::{en} => \"{name}\",",));
                     } else {
-                        s.wln(format!("Self::{en}(c) => \"{name}\",",));
+                        s.wln(format!("Self::{en}(_) => \"{name}\",",));
                     }
                 }
             });

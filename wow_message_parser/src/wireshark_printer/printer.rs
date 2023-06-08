@@ -441,7 +441,7 @@ fn print_definition(
                             "for (guint32 i{depth} = 0; i{depth} < {len}; ++i{depth})"
                         ));
 
-                        Some(format!("i{depth}").to_string())
+                        Some(format!("i{depth}"))
                     }
                     ArraySize::Endless => {
                         let packet_end = if d.tags().compressed().is_some()

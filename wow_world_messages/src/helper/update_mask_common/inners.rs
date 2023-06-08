@@ -122,6 +122,7 @@ pub(crate) fn get_float(values: &BTreeMap<u16, u32>, bit: u16) -> Option<f32> {
         .map(|v| f32::from_le_bytes(v.to_le_bytes()))
 }
 
+#[allow(clippy::complexity)]
 pub(crate) fn set_bytes(
     values: &mut BTreeMap<u16, u32>,
     header: &mut Vec<u32>,

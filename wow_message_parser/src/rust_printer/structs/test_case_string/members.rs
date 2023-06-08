@@ -205,10 +205,10 @@ fn print_member_definition(
 
     match d.ty() {
         Type::Integer(_) => {
-            test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), format!("{var_name}"));
+            test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), var_name);
         }
         Type::Bool(_) => {
-            let extra = if variable_prefix == "" { "*" } else { "" };
+            let extra = if variable_prefix.is_empty() { "*" } else { "" };
 
             test_case_string::wlna(
                 s,
@@ -245,14 +245,10 @@ fn print_member_definition(
             );
         }
         Type::String | Type::CString | Type::SizedCString => {
-            test_case_string::wlna(
-                s,
-                format!("{prefix}{name} = \\\"{{}}\\\";"),
-                format!("{var_name}"),
-            );
+            test_case_string::wlna(s, format!("{prefix}{name} = \\\"{{}}\\\";"), var_name);
         }
         Type::FloatingPoint => {
-            test_case_string::wlna(s, format!("    {{}}"), format!("if {var_name}.to_string().contains(\'.\') {{ {var_name}.to_string() }} else {{ format!(\"{{}}.0\", {var_name}) }}"));
+            test_case_string::wlna(s, "    {}", format!("if {var_name}.to_string().contains(\'.\') {{ {var_name}.to_string() }} else {{ format!(\"{{}}.0\", {var_name}) }}"));
         }
         Type::IpAddress => {
             test_case_string::wlna(
@@ -313,21 +309,21 @@ fn print_member_definition(
             s.body(format!("for v in {var_name}.as_slice()"), |s| {
                 match array.ty() {
                     ArrayType::Integer(_) => {
-                        s.wln(format!("write!(s, \"{{v:#04X}}, \").unwrap();"));
+                        s.wln("write!(s, \"{v:#04X}, \").unwrap();");
                     }
                     ArrayType::Guid | ArrayType::PackedGuid => {
-                        s.wln(format!("write!(s, \"{{v:#08X}}, \").unwrap();"));
+                        s.wln("write!(s, \"{v:#08X}, \").unwrap();");
                     }
                     ArrayType::CString => {
-                        s.wln(format!("write!(s, \"\\\"{{v}}\\\", \").unwrap();"));
+                        s.wln("write!(s, \"\\\"{v}\\\", \").unwrap();");
                     }
                     ArrayType::Struct(e) => {
                         test_case_string::wln(s, "{{");
 
-                        let variable_prefix = format!("v.");
+                        let variable_prefix = "v.";
 
                         let prefix = format!("{prefix}    ");
-                        print_members(s, e, &variable_prefix, &prefix);
+                        print_members(s, e, variable_prefix, &prefix);
 
                         test_case_string::wln(s, "    }},");
                     }

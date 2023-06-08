@@ -343,7 +343,7 @@ fn print_setter_internals(s: &mut Writer, m: &MemberType) {
             s.wln(format!(
                 "let offset = {offset} + {variable_name}.as_int() as u16 * 2;",
             ));
-            s.wln(format!("self.set_guid(offset, item);"));
+            s.wln("self.set_guid(offset, item);");
         }
         UfType::Int => {
             s.wln(format!("self.set_int({offset}, v);"));

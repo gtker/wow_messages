@@ -235,11 +235,11 @@ fn print_bytes_definition(
                         ArrayType::Struct(e) => {
                             wln(s, format!("    /* {name}: {ty_name} {{i}} start */"));
 
-                            let variable_prefix = format!("v.");
+                            let variable_prefix = "v.";
 
                             let prefix = format!("{prefix}    ");
                             for m in e.members() {
-                                print_bytes_struct_member(s, e, m, &variable_prefix, &prefix);
+                                print_bytes_struct_member(s, e, m, variable_prefix, &prefix);
                             }
 
                             wln(s, format!("    /* {name}: {ty_name} {{i}} end */"));

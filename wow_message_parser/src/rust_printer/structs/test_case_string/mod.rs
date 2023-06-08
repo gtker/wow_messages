@@ -5,14 +5,12 @@ use crate::parser::types::container::{Container, ContainerType};
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::CFG_TESTCASE;
 
-/// Write LiNe
 fn wln(s: &mut Writer, msg: impl AsRef<str>) {
     let msg = msg.as_ref();
 
     s.wln(format!("writeln!(s, \"{msg}\").unwrap();"));
 }
 
-/// Write LiNe Argument
 fn wlna(s: &mut Writer, msg: impl AsRef<str>, args: impl AsRef<str>) {
     let msg = msg.as_ref();
     let args = args.as_ref();
@@ -71,7 +69,7 @@ fn print_inner_function(s: &mut Writer, e: &Container) {
 
         wlna(
             s,
-            &"    login_versions = \\\"{}\\\";",
+            "    login_versions = \\\"{}\\\";",
             format!("std::env::var(\"WOWM_TEST_CASE_LOGIN_VERSION\").unwrap_or(\"{versions}\".to_string())"),
         );
     } else {
@@ -84,7 +82,7 @@ fn print_inner_function(s: &mut Writer, e: &Container) {
 
         wlna(
             s,
-            &"    versions = \\\"{}\\\";",
+            "    versions = \\\"{}\\\";",
             format!("std::env::var(\"WOWM_TEST_CASE_WORLD_VERSION\").unwrap_or(\"{versions}\".to_string())"),
         );
     }
