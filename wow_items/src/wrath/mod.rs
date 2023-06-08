@@ -37,6 +37,10 @@ pub use wow_world_base::wrath::{
 ///
 /// Prefer using this over [`all_items`] since this may incorporate optimizations for lookup speed in the future and is more resilient to changes.
 pub const fn lookup_item(id: u32) -> Option<&'static Item> {
+    if id < 25 || id > 56806 {
+        return None;
+    }
+
     let mut i = 0;
     const OBJ: &[Item] = all_items();
 
