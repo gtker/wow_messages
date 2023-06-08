@@ -19,9 +19,20 @@ pub use wow_world_base::vanilla::{
 
 /// Looks up spells and returns if found.
 ///
-/// Prefer using this over [`all_spells`] since this may incorporate optimizations for lookup speed in the future.
-pub fn lookup_spell(id: u32) -> Option<&'static Spell> {
-    all_spells().iter().find(|a| a.entry() == id)
+/// Prefer using this over [`all_spells`] since this may incorporate optimizations for lookup speed in the future and is more resilient to changes.
+pub const fn lookup_spell(id: u32) -> Option<&'static Spell> {
+    let mut i = 0;
+    const OBJ: &[Spell] = all_spells();
+
+    while i < OBJ.len() {
+        if OBJ[i].entry() == id {
+            return Some(&OBJ[i]);
+        }
+
+        i += 1;
+    }
+
+    None
 }
 
 /// Returns all spells.

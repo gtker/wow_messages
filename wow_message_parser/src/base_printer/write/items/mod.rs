@@ -135,25 +135,36 @@ fn lib_functions(s: &mut Writer, ty_name: &str) {
     let ty_lower = ty_name.to_lowercase();
     s.wln(format!("/// Looks up {ty_lower}s and returns if found."));
     s.wln("///");
-    s.wln(format!("/// Prefer using this over [`all_{ty_lower}s`] since this may incorporate optimizations for lookup speed in the future."));
-    s.open_curly(format!(
-        "pub fn lookup_{ty_lower}(id: u32) -> Option<&'static {ty_name}>"
-    ));
-    s.wln(format!(
-        "all_{ty_lower}s().iter().find(|a| a.entry() == id)"
-    ));
-    s.closing_curly();
-    s.newline();
+    s.wln(format!("/// Prefer using this over [`all_{ty_lower}s`] since this may incorporate optimizations for lookup speed in the future and is more resilient to changes."));
+
+    s.bodyn(
+        format!("pub const fn lookup_{ty_lower}(id: u32) -> Option<&'static {ty_name}>"),
+        |s| {
+            s.wln("let mut i = 0;");
+            s.wln(format!("const OBJ: &[{ty_name}] = all_{ty_lower}s();"));
+            s.newline();
+
+            s.bodyn("while i < OBJ.len()", |s| {
+                s.bodyn("if OBJ[i].entry() == id", |s| {
+                    s.wln("return Some(&OBJ[i]);");
+                });
+
+                s.wln("i += 1;");
+            });
+
+            s.wln("None");
+        },
+    );
 
     s.wln(format!("/// Returns all {ty_lower}s."));
     s.wln("///");
     s.wln(format!("/// Prefer using [`lookup_{ty_lower}`] since it may incorporate optimizations for lookup speed in the future."));
-    s.open_curly(format!(
-        "pub const fn all_{ty_lower}s() -> &'static [{ty_name}]"
-    ));
-    s.wln("data::Z________DATA");
-    s.closing_curly();
-    s.newline();
+    s.bodyn(
+        format!("pub const fn all_{ty_lower}s() -> &'static [{ty_name}]"),
+        |s| {
+            s.wln("data::Z________DATA");
+        },
+    );
 }
 
 pub(crate) fn write_constructors(
