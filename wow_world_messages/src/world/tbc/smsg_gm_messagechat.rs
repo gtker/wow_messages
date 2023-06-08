@@ -204,7 +204,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
                 writeln!(s, "    message1 = \"{}\";", message1).unwrap();
                 writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
             }
@@ -215,7 +215,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
                 writeln!(s, "    message1 = \"{}\";", message1).unwrap();
                 writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
             }
@@ -226,7 +226,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
                 writeln!(s, "    message1 = \"{}\";", message1).unwrap();
                 writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
             }
@@ -237,7 +237,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
                 writeln!(s, "    message1 = \"{}\";", message1).unwrap();
                 writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
             }
@@ -248,7 +248,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
                 writeln!(s, "    message1 = \"{}\";", message1).unwrap();
                 writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
             }
@@ -466,7 +466,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 message2,
                 target2,
             } => {
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target2'");
                 writeln!(s, "    message2 = \"{}\";", message2).unwrap();
                 writeln!(s, "    chat_tag2 = {};", chat_tag2.as_test_case_value()).unwrap();
             }
@@ -475,7 +475,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 message2,
                 target2,
             } => {
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target2'");
                 writeln!(s, "    message2 = \"{}\";", message2).unwrap();
                 writeln!(s, "    chat_tag2 = {};", chat_tag2.as_test_case_value()).unwrap();
             }
@@ -484,7 +484,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 message2,
                 target2,
             } => {
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target2'");
                 writeln!(s, "    message2 = \"{}\";", message2).unwrap();
                 writeln!(s, "    chat_tag2 = {};", chat_tag2.as_test_case_value()).unwrap();
             }
@@ -517,7 +517,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
                 writeln!(s, "    message1 = \"{}\";", message1).unwrap();
                 writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
             }
@@ -528,7 +528,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
                 writeln!(s, "    message1 = \"{}\";", message1).unwrap();
                 writeln!(s, "    chat_tag1 = {};", chat_tag1.as_test_case_value()).unwrap();
             }

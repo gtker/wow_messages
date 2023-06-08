@@ -30,8 +30,8 @@ impl crate::Message for SMSG_ALL_ACHIEVEMENT_DATA {
 
         writeln!(s, "test SMSG_ALL_ACHIEVEMENT_DATA {{").unwrap();
         // Members
-        return None;
-        return None;
+        panic!("unsupported type for test case printing: 'AchievementDoneArray' for variable 'done'");
+        panic!("unsupported type for test case printing: 'AchievementInProgressArray' for variable 'in_progress'");
 
         writeln!(s, "}} [").unwrap();
 

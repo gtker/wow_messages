@@ -92,7 +92,7 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
 
         writeln!(s, "    spline_flags = {};", self.spline_flags.as_test_case_value()).unwrap();
         writeln!(s, "    duration = {};", self.duration).unwrap();
-        return None;
+        panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
 
         writeln!(s, "}} [").unwrap();
 

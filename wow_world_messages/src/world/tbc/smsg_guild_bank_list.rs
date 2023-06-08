@@ -71,7 +71,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
             // Members
             writeln!(s, "        slot = {};", v.slot).unwrap();
             writeln!(s, "        item = {};", v.item).unwrap();
-            return None;
+            panic!("unsupported type for test case printing: 'VariableItemRandomProperty' for variable 'item_random_property_id'");
             writeln!(s, "        amount_of_items = {};", v.amount_of_items).unwrap();
             writeln!(s, "        enchant = {};", v.enchant).unwrap();
             writeln!(s, "        charges = {};", v.charges).unwrap();

@@ -43,7 +43,7 @@ impl crate::Message for SMSG_ADDON_INFO {
 
         writeln!(s, "test SMSG_ADDON_INFO {{").unwrap();
         // Members
-        return None;
+        panic!("unsupported type for test case printing: 'AddonArray' for variable 'addons'");
 
         writeln!(s, "}} [").unwrap();
 

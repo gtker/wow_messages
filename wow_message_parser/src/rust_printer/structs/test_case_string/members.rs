@@ -343,7 +343,10 @@ fn print_member_definition(
         | Type::VariableItemRandomProperty
         | Type::AddonArray
         | Type::NamedGuid => {
-            s.wln("return None;");
+            s.wln(format!(
+                "panic!(\"unsupported type for test case printing: '{}' for variable '{name}'\");",
+                d.ty().str()
+            ));
         }
     }
 }

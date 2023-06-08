@@ -99,7 +99,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "            duration = {};", duration).unwrap();
-                            return None;
+                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingSpot {
                             duration,
@@ -109,7 +109,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "            duration = {};", duration).unwrap();
-                            return None;
+                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingTarget {
                             duration,
@@ -119,7 +119,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "            duration = {};", duration).unwrap();
-                            return None;
+                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
                             angle,
@@ -129,7 +129,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "            duration = {};", duration).unwrap();
-                            return None;
+                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         _ => {}
                     }
@@ -204,7 +204,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "            duration = {};", duration).unwrap();
-                            return None;
+                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingSpot {
                             duration,
@@ -214,7 +214,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "            duration = {};", duration).unwrap();
-                            return None;
+                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingTarget {
                             duration,
@@ -224,7 +224,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "            duration = {};", duration).unwrap();
-                            return None;
+                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         crate::vanilla::MonsterMove_MonsterMoveType::FacingAngle {
                             angle,
@@ -234,7 +234,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
                         } => {
                             writeln!(s, "            spline_flags = {};", spline_flags.as_test_case_value()).unwrap();
                             writeln!(s, "            duration = {};", duration).unwrap();
-                            return None;
+                            panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
                         }
                         _ => {}
                     }

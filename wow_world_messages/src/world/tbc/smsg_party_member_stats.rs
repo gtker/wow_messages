@@ -130,7 +130,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
         }
 
         if let Some(if_statement) = &self.mask.get_auras() {
-            return None;
+            panic!("unsupported type for test case printing: 'AuraMask' for variable 'auras'");
         }
 
         if let Some(if_statement) = &self.mask.get_pet_guid() {
@@ -166,7 +166,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS {
         }
 
         if let Some(if_statement) = &self.mask.get_pet_auras() {
-            return None;
+            panic!("unsupported type for test case printing: 'AuraMask' for variable 'pet_auras'");
         }
 
 

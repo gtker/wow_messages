@@ -70,7 +70,7 @@ impl crate::Message for SMSG_INSPECT_TALENT {
             write!(s, "{v:#04X}, ").unwrap();
         }
         writeln!(s, "];").unwrap();
-        return None;
+        panic!("unsupported type for test case printing: 'InspectTalentGearMask' for variable 'talent_gear_mask'");
 
         writeln!(s, "}} [").unwrap();
 

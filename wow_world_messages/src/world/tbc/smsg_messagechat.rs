@@ -125,35 +125,35 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::tbc::SMSG_MESSAGECHAT_ChatType::MonsterParty {
                 sender,
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::tbc::SMSG_MESSAGECHAT_ChatType::MonsterYell {
                 sender,
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::tbc::SMSG_MESSAGECHAT_ChatType::MonsterWhisper {
                 sender,
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::tbc::SMSG_MESSAGECHAT_ChatType::MonsterEmote {
                 sender,
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::tbc::SMSG_MESSAGECHAT_ChatType::Channel {
                 channel_name,
@@ -255,17 +255,17 @@ impl crate::Message for SMSG_MESSAGECHAT {
             crate::tbc::SMSG_MESSAGECHAT_ChatType::BgSystemNeutral {
                 target2,
             } => {
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target2'");
             }
             crate::tbc::SMSG_MESSAGECHAT_ChatType::BgSystemAlliance {
                 target2,
             } => {
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target2'");
             }
             crate::tbc::SMSG_MESSAGECHAT_ChatType::BgSystemHorde {
                 target2,
             } => {
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target2'");
             }
             crate::tbc::SMSG_MESSAGECHAT_ChatType::RaidLeader {
                 target5,
@@ -282,14 +282,14 @@ impl crate::Message for SMSG_MESSAGECHAT {
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::tbc::SMSG_MESSAGECHAT_ChatType::RaidBossEmote {
                 sender,
                 target1,
             } => {
                 writeln!(s, "    sender = \"{}\";", sender).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::tbc::SMSG_MESSAGECHAT_ChatType::Filtered {
                 target5,

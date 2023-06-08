@@ -34,8 +34,8 @@ impl crate::Message for SMSG_RESPOND_INSPECT_ACHIEVEMENTS {
         writeln!(s, "test SMSG_RESPOND_INSPECT_ACHIEVEMENTS {{").unwrap();
         // Members
         writeln!(s, "    player = {};", self.player.guid()).unwrap();
-        return None;
-        return None;
+        panic!("unsupported type for test case printing: 'AchievementDoneArray' for variable 'done'");
+        panic!("unsupported type for test case printing: 'AchievementInProgressArray' for variable 'in_progress'");
 
         writeln!(s, "}} [").unwrap();
 

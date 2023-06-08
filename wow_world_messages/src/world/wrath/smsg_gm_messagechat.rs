@@ -170,35 +170,35 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 target1,
             } => {
                 writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::wrath::SMSG_GM_MESSAGECHAT_ChatType::MonsterParty {
                 sender1,
                 target1,
             } => {
                 writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::wrath::SMSG_GM_MESSAGECHAT_ChatType::MonsterYell {
                 sender1,
                 target1,
             } => {
                 writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::wrath::SMSG_GM_MESSAGECHAT_ChatType::MonsterWhisper {
                 sender1,
                 target1,
             } => {
                 writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::wrath::SMSG_GM_MESSAGECHAT_ChatType::MonsterEmote {
                 sender1,
                 target1,
             } => {
                 writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::wrath::SMSG_GM_MESSAGECHAT_ChatType::Channel {
                 channel_name,
@@ -336,17 +336,17 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
             crate::wrath::SMSG_GM_MESSAGECHAT_ChatType::BgSystemNeutral {
                 target3,
             } => {
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target3'");
             }
             crate::wrath::SMSG_GM_MESSAGECHAT_ChatType::BgSystemAlliance {
                 target3,
             } => {
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target3'");
             }
             crate::wrath::SMSG_GM_MESSAGECHAT_ChatType::BgSystemHorde {
                 target3,
             } => {
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target3'");
             }
             crate::wrath::SMSG_GM_MESSAGECHAT_ChatType::RaidLeader {
                 sender_name,
@@ -367,14 +367,14 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 target1,
             } => {
                 writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::wrath::SMSG_GM_MESSAGECHAT_ChatType::RaidBossWhisper {
                 sender1,
                 target1,
             } => {
                 writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::wrath::SMSG_GM_MESSAGECHAT_ChatType::Filtered {
                 sender_name,
@@ -409,7 +409,7 @@ impl crate::Message for SMSG_GM_MESSAGECHAT {
                 target1,
             } => {
                 writeln!(s, "    sender1 = \"{}\";", sender1).unwrap();
-                return None;
+                panic!("unsupported type for test case printing: 'NamedGuid' for variable 'target1'");
             }
             crate::wrath::SMSG_GM_MESSAGECHAT_ChatType::Achievement {
                 achievement_id,

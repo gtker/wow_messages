@@ -114,7 +114,7 @@ impl crate::Message for SMSG_MONSTER_MOVE_TRANSPORT {
             writeln!(s, "    effect_start_time = {};", if_statement.effect_start_time).unwrap();
         }
 
-        return None;
+        panic!("unsupported type for test case printing: 'MonsterMoveSplines' for variable 'splines'");
 
         writeln!(s, "}} [").unwrap();
 
