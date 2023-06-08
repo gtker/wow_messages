@@ -21,8 +21,8 @@ fn wlna(s: &mut Writer, msg: impl AsRef<str>, args: impl AsRef<str>) {
     s.wln(format!("writeln!(s, \"{msg}\", {args}).unwrap();"));
 }
 
-pub(crate) fn print_to_testcase(s: &mut Writer, e: &Container, o: &Objects) {
-    if !e.tests(o).is_empty() {
+pub(crate) fn print_to_testcase(s: &mut Writer, e: &Container, should_print_body: bool) {
+    if !should_print_body {
         return;
     }
 
@@ -31,7 +31,7 @@ pub(crate) fn print_to_testcase(s: &mut Writer, e: &Container, o: &Objects) {
     s.open_curly(format!("impl {name}"));
 
     s.funcn_pub("to_test_case_string(&self)", "Option<String>", |s| {
-        if e.tests(o).is_empty() {
+        if should_print_body {
             print_inner_function(s, e);
         } else {
             s.wln("None");
