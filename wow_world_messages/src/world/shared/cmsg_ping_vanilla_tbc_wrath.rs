@@ -16,35 +16,7 @@ pub struct CMSG_PING {
 #[cfg(feature = "print-testcase")]
 impl CMSG_PING {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMSG_PING {{").unwrap();
-        // Members
-        writeln!(s, "    sequence_id = {};", self.sequence_id).unwrap();
-        writeln!(s, "    round_time_in_ms = {};", self.round_time_in_ms).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 12_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 476_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "sequence_id", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "round_time_in_ms", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1.9 1.10 1.11 1.12 2 3\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

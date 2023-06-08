@@ -23,55 +23,7 @@ pub struct SMSG_CHAR_RENAME {
 #[cfg(feature = "print-testcase")]
 impl SMSG_CHAR_RENAME {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_CHAR_RENAME {{").unwrap();
-        // Members
-        writeln!(s, "    result = {};", crate::vanilla::WorldResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.result {
-            crate::vanilla::SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
-                character,
-                new_name,
-            } => {
-                writeln!(s, "    character = {};", character.guid()).unwrap();
-                writeln!(s, "    new_name = \"{}\";", new_name).unwrap();
-            }
-            _ => {}
-        }
-
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 712_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
-        match &self.result {
-            crate::vanilla::SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
-                character,
-                new_name,
-            } => {
-                crate::util::write_bytes(&mut s, &mut bytes, 8, "character", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, new_name.len() + 1, "new_name", "    ");
-            }
-            _ => {}
-        }
-
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

@@ -62,58 +62,7 @@ impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
 #[cfg(feature = "print-testcase")]
 impl CMD_AUTH_RECONNECT_CHALLENGE_Client {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMD_AUTH_RECONNECT_CHALLENGE_Client {{").unwrap();
-        // Members
-        writeln!(s, "    protocol_version = {};", self.protocol_version.as_test_case_value()).unwrap();
-        // version: Version
-        writeln!(s, "    version = {{").unwrap();
-        // Members
-        writeln!(s, "        major = {};", self.version.major).unwrap();
-        writeln!(s, "        minor = {};", self.version.minor).unwrap();
-        writeln!(s, "        patch = {};", self.version.patch).unwrap();
-        writeln!(s, "        build = {};", self.version.build).unwrap();
-
-        writeln!(s, "    }};").unwrap();
-        writeln!(s, "    platform = {};", self.platform.as_test_case_value()).unwrap();
-        writeln!(s, "    os = {};", self.os.as_test_case_value()).unwrap();
-        writeln!(s, "    locale = {};", self.locale.as_test_case_value()).unwrap();
-        writeln!(s, "    utc_timezone_offset = {};", self.utc_timezone_offset).unwrap();
-        writeln!(s, "    client_ip_address = {:#08X};", u32::from_be_bytes(self.client_ip_address.octets())).unwrap();
-        writeln!(s, "    account_name = \"{}\";", self.account_name).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "protocol_version", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 2, "size", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "game_name", "    ");
-        writeln!(s, "    /* version: Version start */").unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "major", "        ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "minor", "        ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "patch", "        ");
-        crate::util::write_bytes(&mut s, &mut bytes, 2, "build", "        ");
-        writeln!(s, "    /* version: Version end */").unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "platform", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "os", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "locale", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "utc_timezone_offset", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "client_ip_address", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, self.account_name.len() + 1, "account_name", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    login_versions = \"*\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

@@ -33,43 +33,7 @@ pub struct SMSG_NAME_QUERY_RESPONSE {
 #[cfg(feature = "print-testcase")]
 impl SMSG_NAME_QUERY_RESPONSE {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_NAME_QUERY_RESPONSE {{").unwrap();
-        // Members
-        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-        writeln!(s, "    character_name = \"{}\";", self.character_name).unwrap();
-        writeln!(s, "    realm_name = \"{}\";", self.realm_name).unwrap();
-        writeln!(s, "    race = {};", self.race.as_test_case_value()).unwrap();
-        writeln!(s, "    gender = {};", self.gender.as_test_case_value()).unwrap();
-        writeln!(s, "    class = {};", self.class.as_test_case_value()).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 81_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, self.character_name.len() + 1, "character_name", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, self.realm_name.len() + 1, "realm_name", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "race", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "gender", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "class", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1.12\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

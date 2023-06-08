@@ -20,33 +20,7 @@ pub struct SMSG_DESTROY_OBJECT {
 #[cfg(feature = "print-testcase")]
 impl SMSG_DESTROY_OBJECT {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_DESTROY_OBJECT {{").unwrap();
-        // Members
-        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 10_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 170_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1 2\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

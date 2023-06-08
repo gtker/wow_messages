@@ -46,64 +46,7 @@ impl CMD_REALM_LIST_Server {
 #[cfg(feature = "print-testcase")]
 impl CMD_REALM_LIST_Server {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMD_REALM_LIST_Server {{").unwrap();
-        // Members
-        writeln!(s, "    number_of_realms = {};", self.realms.len()).unwrap();
-        write!(s, "    realms = [").unwrap();
-        for v in self.realms.as_slice() {
-            writeln!(s, "{{").unwrap();
-            // Members
-            writeln!(s, "        realm_type = {};", v.realm_type.as_test_case_value()).unwrap();
-            writeln!(s, "        flag = {};", v.flag.as_test_case_value()).unwrap();
-            writeln!(s, "        name = \"{}\";", v.name).unwrap();
-            writeln!(s, "        address = \"{}\";", v.address).unwrap();
-            writeln!(s, "        population = {};", v.population.as_test_case_value()).unwrap();
-            writeln!(s, "        number_of_characters_on_realm = {};", v.number_of_characters_on_realm).unwrap();
-            writeln!(s, "        category = {};", v.category.as_test_case_value()).unwrap();
-            writeln!(s, "        realm_id = {};", v.realm_id).unwrap();
-
-            writeln!(s, "    }},").unwrap();
-        }
-        writeln!(s, "];").unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 2, "size", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "header_padding", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "number_of_realms", "    ");
-        if !self.realms.is_empty() {
-            writeln!(s, "    /* realms: Realm[number_of_realms] start */").unwrap();
-            for (i, v) in self.realms.iter().enumerate() {
-                writeln!(s, "    /* realms: Realm[number_of_realms] {i} start */").unwrap();
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "realm_type", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "flag", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, v.name.len() + 1, "name", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, v.address.len() + 1, "address", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "population", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "number_of_characters_on_realm", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "category", "        ");
-                crate::util::write_bytes(&mut s, &mut bytes, 1, "realm_id", "        ");
-                writeln!(s, "    /* realms: Realm[number_of_realms] {i} end */").unwrap();
-            }
-            writeln!(s, "    /* realms: Realm[number_of_realms] end */").unwrap();
-        }
-        crate::util::write_bytes(&mut s, &mut bytes, 2, "footer_padding", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    login_versions = \"2 3\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

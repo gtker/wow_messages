@@ -18,31 +18,7 @@ pub struct SMSG_LOGOUT_COMPLETE {
 #[cfg(feature = "print-testcase")]
 impl SMSG_LOGOUT_COMPLETE {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_LOGOUT_COMPLETE {{").unwrap();
-        // Members
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 2_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 77_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1.12 2 3\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

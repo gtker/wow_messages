@@ -18,37 +18,7 @@ pub struct SMSG_PET_NAME_QUERY_RESPONSE {
 #[cfg(feature = "print-testcase")]
 impl SMSG_PET_NAME_QUERY_RESPONSE {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_PET_NAME_QUERY_RESPONSE {{").unwrap();
-        // Members
-        writeln!(s, "    pet_number = {};", self.pet_number).unwrap();
-        writeln!(s, "    name = \"{}\";", self.name).unwrap();
-        writeln!(s, "    pet_name_timestamp = {};", self.pet_name_timestamp).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 83_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "pet_number", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, self.name.len() + 1, "name", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "pet_name_timestamp", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1.12\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

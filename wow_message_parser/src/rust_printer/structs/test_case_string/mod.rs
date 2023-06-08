@@ -2,6 +2,7 @@ mod bytes;
 mod members;
 
 use crate::parser::types::container::{Container, ContainerType};
+use crate::parser::types::objects::Objects;
 use crate::rust_printer::{Writer, CFG_TESTCASE};
 
 /// Write LiNe
@@ -19,13 +20,17 @@ fn wlna(s: &mut Writer, msg: impl AsRef<str>, args: impl AsRef<str>) {
     s.wln(format!("writeln!(s, \"{msg}\", {args}).unwrap();"));
 }
 
-pub(crate) fn print_to_testcase(s: &mut Writer, e: &Container) {
+pub(crate) fn print_to_testcase(s: &mut Writer, e: &Container, o: &Objects) {
     let name = e.name();
     s.wln(CFG_TESTCASE);
     s.open_curly(format!("impl {name}"));
 
     s.funcn_pub("to_test_case_string(&self)", "Option<String>", |s| {
-        print_inner_function(s, e);
+        if e.tests(o).is_empty() {
+            print_inner_function(s, e);
+        } else {
+            s.wln("None");
+        }
     });
 
     s.closing_curly_newline();

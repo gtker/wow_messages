@@ -19,33 +19,7 @@ pub struct SMSG_QUERY_TIME_RESPONSE {
 #[cfg(feature = "print-testcase")]
 impl SMSG_QUERY_TIME_RESPONSE {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_QUERY_TIME_RESPONSE {{").unwrap();
-        // Members
-        writeln!(s, "    time = {};", self.time).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 6_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 463_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "time", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1.12\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

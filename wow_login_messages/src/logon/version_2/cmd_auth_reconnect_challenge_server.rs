@@ -23,59 +23,7 @@ pub struct CMD_AUTH_RECONNECT_CHALLENGE_Server {
 #[cfg(feature = "print-testcase")]
 impl CMD_AUTH_RECONNECT_CHALLENGE_Server {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMD_AUTH_RECONNECT_CHALLENGE_Server {{").unwrap();
-        // Members
-        writeln!(s, "    result = {};", crate::logon::version_2::LoginResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
-        match &self.result {
-            crate::logon::version_2::CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
-                challenge_data,
-                checksum_salt,
-            } => {
-                write!(s, "    challenge_data = [").unwrap();
-                for v in challenge_data.as_slice() {
-                    write!(s, "{v:#04X}, ").unwrap();
-                }
-                writeln!(s, "];").unwrap();
-                write!(s, "    checksum_salt = [").unwrap();
-                for v in checksum_salt.as_slice() {
-                    write!(s, "{v:#04X}, ").unwrap();
-                }
-                writeln!(s, "];").unwrap();
-            }
-            _ => {}
-        }
-
-
-        writeln!(s, "}} [").unwrap();
-
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "result", "    ");
-        match &self.result {
-            crate::logon::version_2::CMD_AUTH_RECONNECT_CHALLENGE_Server_LoginResult::Success {
-                challenge_data,
-                checksum_salt,
-            } => {
-                crate::util::write_bytes(&mut s, &mut bytes, challenge_data.len(), "challenge_data", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, checksum_salt.len(), "checksum_salt", "    ");
-            }
-            _ => {}
-        }
-
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    login_versions = \"2 5 6 7\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

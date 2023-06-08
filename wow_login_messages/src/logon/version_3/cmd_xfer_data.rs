@@ -16,35 +16,7 @@ pub struct CMD_XFER_DATA {
 #[cfg(feature = "print-testcase")]
 impl CMD_XFER_DATA {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMD_XFER_DATA {{").unwrap();
-        // Members
-        writeln!(s, "    size = {};", self.data.len()).unwrap();
-        write!(s, "    data = [").unwrap();
-        for v in self.data.as_slice() {
-            write!(s, "{v:#04X}, ").unwrap();
-        }
-        writeln!(s, "];").unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-        crate::util::write_bytes(&mut s, &mut bytes, 2, "size", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, self.data.len(), "data", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    login_versions = \"3\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

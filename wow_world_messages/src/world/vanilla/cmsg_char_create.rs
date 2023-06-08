@@ -51,50 +51,7 @@ impl CMSG_CHAR_CREATE {
 #[cfg(feature = "print-testcase")]
 impl CMSG_CHAR_CREATE {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMSG_CHAR_CREATE {{").unwrap();
-        // Members
-        writeln!(s, "    name = \"{}\";", self.name).unwrap();
-        writeln!(s, "    race = {};", self.race.as_test_case_value()).unwrap();
-        writeln!(s, "    class = {};", self.class.as_test_case_value()).unwrap();
-        writeln!(s, "    gender = {};", self.gender.as_test_case_value()).unwrap();
-        writeln!(s, "    skin_color = {};", self.skin_color).unwrap();
-        writeln!(s, "    face = {};", self.face).unwrap();
-        writeln!(s, "    hair_style = {};", self.hair_style).unwrap();
-        writeln!(s, "    hair_color = {};", self.hair_color).unwrap();
-        writeln!(s, "    facial_hair = {};", self.facial_hair).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 4).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 54_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, self.name.len() + 1, "name", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "race", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "class", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "gender", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "skin_color", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "face", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "hair_style", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "hair_color", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "facial_hair", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "outfit_id", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

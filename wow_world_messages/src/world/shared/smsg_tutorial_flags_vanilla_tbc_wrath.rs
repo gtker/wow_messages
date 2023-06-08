@@ -19,41 +19,7 @@ pub struct SMSG_TUTORIAL_FLAGS {
 #[cfg(feature = "print-testcase")]
 impl SMSG_TUTORIAL_FLAGS {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_TUTORIAL_FLAGS {{").unwrap();
-        // Members
-        write!(s, "    tutorial_data = [").unwrap();
-        for v in self.tutorial_data.as_slice() {
-            write!(s, "{v:#04X}, ").unwrap();
-        }
-        writeln!(s, "];").unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 34_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 253_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        writeln!(s, "    /* tutorial_data: u32[8] start */").unwrap();
-        for (i, v) in self.tutorial_data.iter().enumerate() {
-            crate::util::write_bytes(&mut s, &mut bytes, 4, &format!("tutorial_data {i}"), "    ");
-        }
-        writeln!(s, "    /* tutorial_data: u32[8] end */").unwrap();
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1 2 3\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

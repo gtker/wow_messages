@@ -15,45 +15,7 @@ pub struct SMSG_IGNORE_LIST {
 #[cfg(feature = "print-testcase")]
 impl SMSG_IGNORE_LIST {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_IGNORE_LIST {{").unwrap();
-        // Members
-        writeln!(s, "    amount_of_ignored = {};", self.ignored.len()).unwrap();
-        write!(s, "    ignored = [").unwrap();
-        for v in self.ignored.as_slice() {
-            write!(s, "{v:#04X}, ").unwrap();
-        }
-        writeln!(s, "];").unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 107_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "amount_of_ignored", "    ");
-        if !self.ignored.is_empty() {
-            writeln!(s, "    /* ignored: u64[amount_of_ignored] start */").unwrap();
-            for (i, v) in self.ignored.iter().enumerate() {
-                crate::util::write_bytes(&mut s, &mut bytes, 8, &format!("ignored {i}"), "    ");
-            }
-            writeln!(s, "    /* ignored: u64[amount_of_ignored] end */").unwrap();
-        }
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1.12\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

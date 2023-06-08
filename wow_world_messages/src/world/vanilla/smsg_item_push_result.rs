@@ -43,51 +43,7 @@ pub struct SMSG_ITEM_PUSH_RESULT {
 #[cfg(feature = "print-testcase")]
 impl SMSG_ITEM_PUSH_RESULT {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_ITEM_PUSH_RESULT {{").unwrap();
-        // Members
-        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-        writeln!(s, "    source = {};", self.source.as_test_case_value()).unwrap();
-        writeln!(s, "    creation_type = {};", self.creation_type.as_test_case_value()).unwrap();
-        writeln!(s, "    alert_chat = {};", self.alert_chat.as_test_case_value()).unwrap();
-        writeln!(s, "    bag_slot = {};", self.bag_slot).unwrap();
-        writeln!(s, "    item_slot = {};", self.item_slot).unwrap();
-        writeln!(s, "    item = {};", self.item).unwrap();
-        writeln!(s, "    item_suffix_factor = {};", self.item_suffix_factor).unwrap();
-        writeln!(s, "    item_random_property_id = {};", self.item_random_property_id).unwrap();
-        writeln!(s, "    item_count = {};", self.item_count).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 43_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 358_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "source", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "creation_type", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "alert_chat", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 1, "bag_slot", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_slot", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "item", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_suffix_factor", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_random_property_id", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "item_count", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

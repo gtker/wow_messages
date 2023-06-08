@@ -22,7 +22,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
     print_world_message_headers_and_constants(s, e);
 
     if !matches!(e.container_type(), ContainerType::Struct) {
-        print_to_testcase(s, e);
+        print_to_testcase(s, e, o);
     }
 
     match e.container_type() {

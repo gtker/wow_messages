@@ -18,35 +18,7 @@ pub struct CMSG_PET_NAME_QUERY {
 #[cfg(feature = "print-testcase")]
 impl CMSG_PET_NAME_QUERY {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMSG_PET_NAME_QUERY {{").unwrap();
-        // Members
-        writeln!(s, "    pet_number = {};", self.pet_number).unwrap();
-        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 16_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 82_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "pet_number", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1 2 3\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

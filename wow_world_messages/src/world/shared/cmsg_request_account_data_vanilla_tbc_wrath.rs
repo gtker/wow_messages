@@ -18,33 +18,7 @@ pub struct CMSG_REQUEST_ACCOUNT_DATA {
 #[cfg(feature = "print-testcase")]
 impl CMSG_REQUEST_ACCOUNT_DATA {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMSG_REQUEST_ACCOUNT_DATA {{").unwrap();
-        // Members
-        writeln!(s, "    data_type = {};", self.data_type).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 8_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 522_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "data_type", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1 2 3\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

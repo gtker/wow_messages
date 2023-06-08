@@ -19,33 +19,7 @@ pub struct SMSG_AUTH_CHALLENGE {
 #[cfg(feature = "print-testcase")]
 impl SMSG_AUTH_CHALLENGE {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_AUTH_CHALLENGE {{").unwrap();
-        // Members
-        writeln!(s, "    server_seed = {};", self.server_seed).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 6_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 492_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "server_seed", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1 2\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

@@ -21,35 +21,7 @@ pub struct SMSG_SPLINE_SET_RUN_SPEED {
 #[cfg(feature = "print-testcase")]
 impl SMSG_SPLINE_SET_RUN_SPEED {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test SMSG_SPLINE_SET_RUN_SPEED {{").unwrap();
-        // Members
-        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-        writeln!(s, "    {}", if self.speed.to_string().contains(".") { self.speed.to_string() } else { format!("{}.0", self.speed) }).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = (u16::try_from(self.size() + 2).unwrap()).to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b] = 766_u16.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, crate::util::packed_guid_size(&self.guid), "guid", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "speed", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"1.12 2 3\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }

@@ -13,27 +13,7 @@ pub struct CMD_XFER_CANCEL {
 #[cfg(feature = "print-testcase")]
 impl CMD_XFER_CANCEL {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMD_XFER_CANCEL {{").unwrap();
-        // Members
-
-        writeln!(s, "}} [").unwrap();
-
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        writeln!(s, "    {:#04X}, /* opcode */ ", bytes.next().unwrap()).unwrap();
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    login_versions = \"3\";").unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }
