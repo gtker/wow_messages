@@ -6,7 +6,7 @@ use crate::path_utils::{
     get_login_version_file_path, get_world_filepath, get_world_shared_filepath, login_directory,
     world_directory,
 };
-use crate::rust_printer::Writer;
+use crate::rust_printer::writer::Writer;
 use std::collections::BTreeMap;
 use std::fs::remove_file;
 use std::path::{Path, PathBuf};

@@ -7,7 +7,8 @@ use crate::rust_printer::structs::test_case_string::members::{
     print_if_statement_enum, print_if_statement_flag,
 };
 use crate::rust_printer::structs::test_case_string::{wln, wlna};
-use crate::rust_printer::{DefinerType, Writer};
+use crate::rust_printer::writer::Writer;
+use crate::rust_printer::DefinerType;
 
 pub(crate) fn print_bytes(s: &mut Writer, e: &Container) {
     s.newline();

@@ -2,7 +2,7 @@ use crate::file_utils::overwrite_if_not_same_contents;
 use crate::parser::stats::{tbc_messages, vanilla_messages, wrath_messages, Data};
 use crate::parser::types::version::MajorWorldVersion;
 use crate::path_utils::opcode_to_name_location;
-use crate::rust_printer::Writer;
+use crate::rust_printer::writer::Writer;
 
 fn print_specific_opcode_to_name(messages: &[Data]) -> Writer {
     let mut s = Writer::new();

@@ -8,7 +8,7 @@ use crate::base_printer::data::area_triggers::{
 use crate::base_printer::data::pet_names::Pet;
 use crate::base_printer::data::Trigger;
 use crate::file_utils::overwrite_autogenerate_if_not_same_contents;
-use crate::rust_printer::Writer;
+use crate::rust_printer::writer::Writer;
 use std::path::Path;
 
 pub(crate) fn write_exp(directory: &Path, data: &Data) {

@@ -4,7 +4,7 @@ use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
-use crate::rust_printer::Writer;
+use crate::rust_printer::writer::Writer;
 use crate::wireshark_printer::types::{WiresharkMember, WiresharkObject, WiresharkType};
 use crate::wireshark_printer::{
     clean_opcode_name, enum_name, enum_strings, enumerator_name, is_client_name, is_server_name,

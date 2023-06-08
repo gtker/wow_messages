@@ -3,7 +3,7 @@ use crate::parser::types::container::Container;
 use crate::rust_printer::rust_view::rust_member::RustMember;
 use crate::rust_printer::rust_view::rust_object::RustObject;
 use crate::rust_printer::rust_view::rust_type::RustType;
-use crate::rust_printer::Writer;
+use crate::rust_printer::writer::Writer;
 
 pub(crate) fn print_rust_members_sizes(
     s: &mut Writer,

@@ -10,8 +10,9 @@ use crate::rust_printer::rust_view::rust_enumerator::RustEnumerator;
 use crate::rust_printer::rust_view::rust_member::RustMember;
 use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::rust_printer::update_mask::vanilla_fields::FIELDS;
+use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
-    get_new_flag_type_name, ByteInnerTy, ByteType, ImplType, UfType, UpdateMaskType, Writer,
+    get_new_flag_type_name, ByteInnerTy, ByteType, ImplType, UfType, UpdateMaskType,
     CLIENT_MESSAGE_TRAIT_NAME, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
     SERVER_MESSAGE_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };

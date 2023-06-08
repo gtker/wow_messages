@@ -1,7 +1,8 @@
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::path_utils::update_mask_doc_file;
+use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
-    tbc_fields, vanilla_fields, wrath_fields, MemberType, UfType, UpdateMaskType, Writer,
+    tbc_fields, vanilla_fields, wrath_fields, MemberType, UfType, UpdateMaskType,
 };
 use std::fs::read_to_string;
 

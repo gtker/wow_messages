@@ -1,6 +1,6 @@
 use crate::base_printer::data::items::{Array, Field, FieldOptimization, Optimizations};
 use crate::base_printer::{Expansion, ImportFrom};
-use crate::rust_printer::Writer;
+use crate::rust_printer::writer::Writer;
 use std::collections::BTreeSet;
 
 pub(crate) fn definition(

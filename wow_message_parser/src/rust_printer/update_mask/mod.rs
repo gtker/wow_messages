@@ -1,7 +1,7 @@
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::parser::types::version::MajorWorldVersion;
 use crate::path_utils::{update_mask_index_location, update_mask_location};
-use crate::rust_printer::Writer;
+use crate::rust_printer::writer::Writer;
 use std::fmt::{Display, Formatter};
 
 pub mod tbc_fields;

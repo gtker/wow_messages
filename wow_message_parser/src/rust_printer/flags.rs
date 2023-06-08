@@ -1,8 +1,9 @@
 use crate::parser::types::definer::Definer;
 use crate::rust_printer::enums::print_wowm_definition;
+use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
     print_docc_description_and_comment, print_member_docc_description_and_comment,
-    print_serde_derive, Writer, CFG_TESTCASE,
+    print_serde_derive, CFG_TESTCASE,
 };
 use crate::Objects;
 

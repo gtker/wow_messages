@@ -8,9 +8,9 @@ use crate::rust_printer::structs::print_common_impls::print_size::{
     print_size_rust_view, print_size_uncompressed_rust_view,
 };
 use crate::rust_printer::structs::test_case_string::print_to_testcase;
+use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
-    ImplType, Writer, CFG_TESTCASE, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR,
-    SERVER_MESSAGE_TRAIT_NAME,
+    ImplType, CFG_TESTCASE, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
 };
 use crate::CONTAINER_SELF_SIZE_FIELD;
 

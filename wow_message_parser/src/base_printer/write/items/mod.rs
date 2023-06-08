@@ -25,7 +25,7 @@ use crate::base_printer::{Expansion, ImportFrom};
 use crate::file_utils::{
     overwrite_autogenerate_if_not_same_contents, overwrite_if_not_same_contents,
 };
-use crate::rust_printer::Writer;
+use crate::rust_printer::writer::Writer;
 use hashbrown::HashMap;
 use std::path::Path;
 

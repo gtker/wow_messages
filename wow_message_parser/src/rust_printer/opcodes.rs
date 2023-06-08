@@ -3,8 +3,9 @@ use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
 use crate::rust_printer::structs::print_common_impls::impl_read_write_non_trait;
+use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
-    ImplType, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO, CFG_TESTCASE,
+    ImplType, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO, CFG_TESTCASE,
     CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
     SYNC_IMPORT, TOKIO_IMPORT,
 };

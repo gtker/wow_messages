@@ -6,7 +6,7 @@ use crate::rust_printer::structs::print_common_impls::print_size::{
     print_rust_members_sizes, variable_size,
 };
 use crate::rust_printer::structs::print_derives;
-use crate::rust_printer::Writer;
+use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{get_new_flag_type_name, DefinerType};
 
 pub(crate) fn print_new_types(s: &mut Writer, e: &Container) {

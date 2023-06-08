@@ -5,7 +5,8 @@ use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::rust_printer::structs::test_case_string;
-use crate::rust_printer::{DefinerType, Writer};
+use crate::rust_printer::writer::Writer;
+use crate::rust_printer::DefinerType;
 
 pub(crate) fn print_members(s: &mut Writer, e: &Container, variable_prefix: &str, prefix: &str) {
     s.wln("// Members");

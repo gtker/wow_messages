@@ -3,7 +3,8 @@ mod members;
 
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
-use crate::rust_printer::{Writer, CFG_TESTCASE};
+use crate::rust_printer::writer::Writer;
+use crate::rust_printer::CFG_TESTCASE;
 
 /// Write LiNe
 fn wln(s: &mut Writer, msg: impl AsRef<str>) {

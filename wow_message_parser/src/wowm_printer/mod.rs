@@ -3,7 +3,7 @@ use crate::parser::types::definer::Definer;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::ty::Type;
-use crate::rust_printer::Writer;
+use crate::rust_printer::writer::Writer;
 use crate::ENUM_SELF_VALUE_FIELD;
 
 pub(crate) fn get_definer_wowm_definition(kind: &str, e: &Definer, prefix: &str) -> String {

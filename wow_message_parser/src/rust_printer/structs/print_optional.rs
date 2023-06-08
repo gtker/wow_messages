@@ -1,6 +1,6 @@
 use crate::rust_printer::rust_view::rust_optional::RustOptional;
 use crate::rust_printer::structs::print_derives;
-use crate::rust_printer::Writer;
+use crate::rust_printer::writer::Writer;
 
 pub(crate) fn print_optional(s: &mut Writer, optional: &RustOptional) {
     print_declaration(s, optional);

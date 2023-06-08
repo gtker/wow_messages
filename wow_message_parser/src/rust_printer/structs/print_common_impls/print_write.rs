@@ -5,8 +5,8 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::{ContainerValue, IntegerType};
+use crate::rust_printer::writer::Writer;
 use crate::rust_printer::DefinerType;
-use crate::rust_printer::Writer;
 use crate::CONTAINER_SELF_SIZE_FIELD;
 
 pub(crate) fn print_write_field_array(

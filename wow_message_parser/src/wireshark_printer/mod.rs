@@ -6,7 +6,7 @@ use crate::parser::types::array::ArrayType;
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
 use crate::path_utils::wireshark_directory;
-use crate::rust_printer::Writer;
+use crate::rust_printer::writer::Writer;
 use crate::wireshark_printer::printer::{
     print_enums, print_int_declarations, print_parser, print_register_info,
 };
