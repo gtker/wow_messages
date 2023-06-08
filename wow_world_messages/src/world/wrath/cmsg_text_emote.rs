@@ -1,23 +1,27 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::wrath::{
-    Emote, TextEmote,
-};
+use crate::wrath::TextEmote;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+/// Sent to notify the server that the client wants to perform an emote like /dance or /cry.
+///
+/// Server responds with [`SMSG_TEXT_EMOTE`](crate::wrath::SMSG_TEXT_EMOTE) and [`SMSG_EMOTE`](crate::wrath::SMSG_EMOTE).
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm#L1):
 /// ```text
 /// cmsg CMSG_TEXT_EMOTE = 0x0104 {
 ///     TextEmote text_emote;
-///     Emote emote;
-///     Guid guid;
+///     u32 emote;
+///     Guid target;
 /// }
 /// ```
 pub struct CMSG_TEXT_EMOTE {
     pub text_emote: TextEmote,
-    pub emote: Emote,
-    pub guid: Guid,
+    pub emote: u32,
+    /// Guid targeted by the client.
+    ///
+    pub target: Guid,
 }
 
 #[cfg(feature = "print-testcase")]
@@ -31,8 +35,8 @@ impl CMSG_TEXT_EMOTE {
         writeln!(s, "test CMSG_TEXT_EMOTE {{").unwrap();
         // Members
         writeln!(s, "    text_emote = {};", self.text_emote.as_test_case_value()).unwrap();
-        writeln!(s, "    emote = {};", self.emote.as_test_case_value()).unwrap();
-        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
+        writeln!(s, "    emote = {};", self.emote).unwrap();
+        writeln!(s, "    target = {};", self.target.guid()).unwrap();
 
         writeln!(s, "}} [").unwrap();
 
@@ -46,7 +50,7 @@ impl CMSG_TEXT_EMOTE {
 
         crate::util::write_bytes(&mut s, &mut bytes, 4, "text_emote", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "emote", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
+        crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");
 
 
         writeln!(s, "] {{").unwrap();
@@ -75,11 +79,11 @@ impl crate::Message for CMSG_TEXT_EMOTE {
         // text_emote: TextEmote
         w.write_all(&(self.text_emote.as_int().to_le_bytes()))?;
 
-        // emote: Emote
-        w.write_all(&(self.emote.as_int().to_le_bytes()))?;
+        // emote: u32
+        w.write_all(&self.emote.to_le_bytes())?;
 
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
+        // target: Guid
+        w.write_all(&self.target.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -92,16 +96,16 @@ impl crate::Message for CMSG_TEXT_EMOTE {
         // text_emote: TextEmote
         let text_emote = crate::util::read_u32_le(&mut r)?.try_into()?;
 
-        // emote: Emote
-        let emote = crate::util::read_u32_le(&mut r)?.try_into()?;
+        // emote: u32
+        let emote = crate::util::read_u32_le(&mut r)?;
 
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
+        // target: Guid
+        let target = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             text_emote,
             emote,
-            guid,
+            target,
         })
     }
 

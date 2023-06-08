@@ -1,59 +1,33 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::vanilla::{
-    Emote, TextEmote,
-};
+use crate::vanilla::TextEmote;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
+/// Sent to notify the server that the client wants to perform an emote like /dance or /cry.
+///
+/// Server responds with [`SMSG_TEXT_EMOTE`](crate::vanilla::SMSG_TEXT_EMOTE) and [`SMSG_EMOTE`](crate::vanilla::SMSG_EMOTE).
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm#L1):
 /// ```text
 /// cmsg CMSG_TEXT_EMOTE = 0x0104 {
 ///     TextEmote text_emote;
-///     Emote emote;
-///     Guid guid;
+///     u32 emote;
+///     Guid target;
 /// }
 /// ```
 pub struct CMSG_TEXT_EMOTE {
     pub text_emote: TextEmote,
-    pub emote: Emote,
-    pub guid: Guid,
+    pub emote: u32,
+    /// Guid targeted by the client.
+    ///
+    pub target: Guid,
 }
 
 #[cfg(feature = "print-testcase")]
 impl CMSG_TEXT_EMOTE {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMSG_TEXT_EMOTE {{").unwrap();
-        // Members
-        writeln!(s, "    text_emote = {};", self.text_emote.as_test_case_value()).unwrap();
-        writeln!(s, "    emote = {};", self.emote.as_test_case_value()).unwrap();
-        writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 20_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 260_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "text_emote", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "emote", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }
@@ -75,11 +49,11 @@ impl crate::Message for CMSG_TEXT_EMOTE {
         // text_emote: TextEmote
         w.write_all(&(self.text_emote.as_int().to_le_bytes()))?;
 
-        // emote: Emote
-        w.write_all(&(self.emote.as_int().to_le_bytes()))?;
+        // emote: u32
+        w.write_all(&self.emote.to_le_bytes())?;
 
-        // guid: Guid
-        w.write_all(&self.guid.guid().to_le_bytes())?;
+        // target: Guid
+        w.write_all(&self.target.guid().to_le_bytes())?;
 
         Ok(())
     }
@@ -92,16 +66,16 @@ impl crate::Message for CMSG_TEXT_EMOTE {
         // text_emote: TextEmote
         let text_emote = crate::util::read_u32_le(&mut r)?.try_into()?;
 
-        // emote: Emote
-        let emote = crate::util::read_u32_le(&mut r)?.try_into()?;
+        // emote: u32
+        let emote = crate::util::read_u32_le(&mut r)?;
 
-        // guid: Guid
-        let guid = crate::util::read_guid(&mut r)?;
+        // target: Guid
+        let target = crate::util::read_guid(&mut r)?;
 
         Ok(Self {
             text_emote,
             emote,
-            guid,
+            target,
         })
     }
 
@@ -109,4 +83,96 @@ impl crate::Message for CMSG_TEXT_EMOTE {
 
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ClientMessage for CMSG_TEXT_EMOTE {}
+
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMSG_TEXT_EMOTE;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::Guid;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_TEXT_EMOTE, expected: &CMSG_TEXT_EMOTE) {
+        assert_eq!(t.text_emote, expected.text_emote);
+        assert_eq!(t.emote, expected.emote);
+        assert_eq!(t.target, expected.target);
+    }
+
+    const RAW0: [u8; 22] = [ 0x00, 0x14, 0x04, 0x01, 0x00, 0x00, 0x22, 0x00, 0x00,
+         0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+         0x00, ];
+
+    pub(crate) fn expected0() -> CMSG_TEXT_EMOTE {
+        CMSG_TEXT_EMOTE {
+            text_emote: TextEmote::Dance,
+            emote: 0xFFFFFFFF,
+            target: Guid::new(0x0),
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm` line 13.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmsg_text_emote0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_TEXT_EMOTE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_TEXT_EMOTE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm` line 13.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmsg_text_emote0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_TEXT_EMOTE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_TEXT_EMOTE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_text_emote.wowm` line 13.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmsg_text_emote0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_TEXT_EMOTE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_TEXT_EMOTE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(16 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
 
