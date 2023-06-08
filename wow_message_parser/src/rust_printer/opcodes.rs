@@ -405,17 +405,29 @@ pub(crate) fn common_impls_world(
         s.funcn_pub("to_test_case_string(&self)", "Option<String>", |s| {
             s.body("match self", |s| {
                 for container in v {
+                    let en = get_enumerator_name(container.name());
+                    let name = container.name();
+
                     if container.empty_body() {
-                        s.wln(format!(
-                            "Self::{en} => {name}{{}}.to_test_case_string(),",
-                            en = get_enumerator_name(container.name()),
-                            name = container.name(),
-                        ));
+                        s.wln(format!("Self::{en} => {name}{{}}.to_test_case_string(),",));
                     } else {
-                        s.wln(format!(
-                            "Self::{en}(c) => c.to_test_case_string(),",
-                            en = get_enumerator_name(container.name()),
-                        ));
+                        s.wln(format!("Self::{en}(c) => c.to_test_case_string(),",));
+                    }
+                }
+            });
+        });
+
+        s.wln(CFG_TESTCASE);
+        s.funcn_pub("message_name(&self)", "&'static str", |s| {
+            s.body("match self", |s| {
+                for container in v {
+                    let en = get_enumerator_name(container.name());
+                    let name = container.name();
+
+                    if container.empty_body() {
+                        s.wln(format!("Self::{en} => \"{name}\",",));
+                    } else {
+                        s.wln(format!("Self::{en}(c) => \"{name}\",",));
                     }
                 }
             });
