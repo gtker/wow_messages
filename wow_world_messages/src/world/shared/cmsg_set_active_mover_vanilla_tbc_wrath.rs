@@ -15,22 +15,9 @@ pub struct CMSG_SET_ACTIVE_MOVER {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_SET_ACTIVE_MOVER {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_SET_ACTIVE_MOVER {}
 impl crate::Message for CMSG_SET_ACTIVE_MOVER {
     const OPCODE: u32 = 0x026a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_SET_ACTIVE_MOVER::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         8

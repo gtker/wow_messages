@@ -17,22 +17,9 @@ pub struct SMSG_DESTROY_OBJECT {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_DESTROY_OBJECT {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for SMSG_DESTROY_OBJECT {}
 impl crate::Message for SMSG_DESTROY_OBJECT {
     const OPCODE: u32 = 0x00aa;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_DESTROY_OBJECT::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         8

@@ -13,22 +13,9 @@ use std::io::{Read, Write};
 pub struct CMSG_QUERY_TIME {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_QUERY_TIME {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_QUERY_TIME {}
 impl crate::Message for CMSG_QUERY_TIME {
     const OPCODE: u32 = 0x01ce;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_QUERY_TIME::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         0

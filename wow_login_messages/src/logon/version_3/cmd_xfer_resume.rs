@@ -12,14 +12,6 @@ pub struct CMD_XFER_RESUME {
     pub offset: u64,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMD_XFER_RESUME {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl CMD_XFER_RESUME {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8
@@ -36,11 +28,6 @@ impl crate::private::Sealed for CMD_XFER_RESUME {}
 
 impl ClientMessage for CMD_XFER_RESUME {
     const OPCODE: u8 = 0x33;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMD_XFER_RESUME::to_test_case_string(self)
-    }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // offset: u64

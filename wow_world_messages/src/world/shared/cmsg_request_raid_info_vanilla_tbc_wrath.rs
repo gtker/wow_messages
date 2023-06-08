@@ -11,22 +11,9 @@ use std::io::{Read, Write};
 pub struct CMSG_REQUEST_RAID_INFO {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_REQUEST_RAID_INFO {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_REQUEST_RAID_INFO {}
 impl crate::Message for CMSG_REQUEST_RAID_INFO {
     const OPCODE: u32 = 0x02cd;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_REQUEST_RAID_INFO::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         0

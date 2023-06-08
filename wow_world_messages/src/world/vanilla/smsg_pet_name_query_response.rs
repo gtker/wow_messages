@@ -15,22 +15,9 @@ pub struct SMSG_PET_NAME_QUERY_RESPONSE {
     pub pet_name_timestamp: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_PET_NAME_QUERY_RESPONSE {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for SMSG_PET_NAME_QUERY_RESPONSE {}
 impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
     const OPCODE: u32 = 0x0053;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_PET_NAME_QUERY_RESPONSE::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

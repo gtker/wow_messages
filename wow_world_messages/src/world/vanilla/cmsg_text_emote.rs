@@ -24,22 +24,9 @@ pub struct CMSG_TEXT_EMOTE {
     pub target: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_TEXT_EMOTE {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_TEXT_EMOTE {}
 impl crate::Message for CMSG_TEXT_EMOTE {
     const OPCODE: u32 = 0x0104;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_TEXT_EMOTE::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         16

@@ -15,22 +15,9 @@ pub struct CMSG_SETSHEATHED {
     pub sheathed: SheathState,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_SETSHEATHED {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_SETSHEATHED {}
 impl crate::Message for CMSG_SETSHEATHED {
     const OPCODE: u32 = 0x01e0;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_SETSHEATHED::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         4

@@ -11,22 +11,9 @@ use std::io::{Read, Write};
 pub struct CMSG_CHAR_ENUM {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CHAR_ENUM {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_CHAR_ENUM {}
 impl crate::Message for CMSG_CHAR_ENUM {
     const OPCODE: u32 = 0x0037;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CHAR_ENUM::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         0

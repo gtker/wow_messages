@@ -13,22 +13,9 @@ pub struct MSG_MOVE_SET_RUN_MODE_Client {
     pub info: MovementInfo,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_MOVE_SET_RUN_MODE_Client {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for MSG_MOVE_SET_RUN_MODE_Client {}
 impl crate::Message for MSG_MOVE_SET_RUN_MODE_Client {
     const OPCODE: u32 = 0x00c2;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_MOVE_SET_RUN_MODE_Client::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

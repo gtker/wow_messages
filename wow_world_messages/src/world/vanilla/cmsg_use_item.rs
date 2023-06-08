@@ -19,22 +19,9 @@ pub struct CMSG_USE_ITEM {
     pub targets: SpellCastTargets,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_USE_ITEM {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_USE_ITEM {}
 impl crate::Message for CMSG_USE_ITEM {
     const OPCODE: u32 = 0x00ab;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_USE_ITEM::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

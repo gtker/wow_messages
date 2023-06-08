@@ -19,7 +19,9 @@ pub trait Message: Sized + private::Sealed {
     const OPCODE: u32;
 
     #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String>;
+    fn to_test_case_string(&self) -> Option<String> {
+        None
+    }
 
     fn size_without_header(&self) -> u32;
 

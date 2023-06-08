@@ -25,22 +25,9 @@ pub struct SMSG_AUTH_RESPONSE {
     pub result: SMSG_AUTH_RESPONSE_WorldResult,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_AUTH_RESPONSE {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for SMSG_AUTH_RESPONSE {}
 impl crate::Message for SMSG_AUTH_RESPONSE {
     const OPCODE: u32 = 0x01ee;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_AUTH_RESPONSE::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

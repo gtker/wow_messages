@@ -25,22 +25,9 @@ pub struct CMSG_MESSAGECHAT {
     pub message: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_MESSAGECHAT {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_MESSAGECHAT {}
 impl crate::Message for CMSG_MESSAGECHAT {
     const OPCODE: u32 = 0x0095;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_MESSAGECHAT::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

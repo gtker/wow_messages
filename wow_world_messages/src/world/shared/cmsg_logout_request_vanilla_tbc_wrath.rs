@@ -14,22 +14,9 @@ use std::io::{Read, Write};
 pub struct CMSG_LOGOUT_REQUEST {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_LOGOUT_REQUEST {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_LOGOUT_REQUEST {}
 impl crate::Message for CMSG_LOGOUT_REQUEST {
     const OPCODE: u32 = 0x004b;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_LOGOUT_REQUEST::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         0

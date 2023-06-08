@@ -85,6 +85,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                     print_write::print_write(s, e, o, it.prefix(), it.postfix());
                 },
                 sizes,
+                e.tests(o).is_empty(),
             );
         }
         ContainerType::Msg(opcode) | ContainerType::CMsg(opcode) | ContainerType::SMsg(opcode) => {
@@ -110,6 +111,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                     print_read::print_read(s, e, o, it.prefix(), it.postfix());
                 },
                 Some(e.sizes()),
+                e.tests(o).is_empty(),
             );
 
             for version in e.tags().main_versions() {
@@ -682,6 +684,7 @@ pub(crate) fn impl_world_message(
     write_function: impl Fn(&mut Writer, ImplType),
     read_function: impl Fn(&mut Writer, ImplType),
     sizes: Option<Sizes>,
+    should_write_test_case_string: bool,
 ) {
     let type_name = type_name.as_ref();
 
@@ -691,10 +694,12 @@ pub(crate) fn impl_world_message(
         s.wln(format!("const OPCODE: u32 = {opcode:#06x};"));
         s.newline();
 
-        s.wln(CFG_TESTCASE);
-        s.bodyn("fn to_test_case_string(&self) -> Option<String>", |s| {
-            s.wln(format!("{type_name}::to_test_case_string(self)"))
-        });
+        if should_write_test_case_string {
+            s.wln(CFG_TESTCASE);
+            s.bodyn("fn to_test_case_string(&self) -> Option<String>", |s| {
+                s.wln(format!("{type_name}::to_test_case_string(self)"))
+            });
+        }
 
         s.bodyn("fn size_without_header(&self) -> u32", |s| {
             if sizes.is_some() && sizes.unwrap().is_constant().is_some() {
@@ -729,6 +734,7 @@ pub(crate) fn impl_read_and_writable_login(
     read_function: impl Fn(&mut Writer, ImplType),
     write_function: impl Fn(&mut Writer, ImplType),
     sizes: Sizes,
+    should_write_to_test_case_string: bool,
 ) {
     let type_name = type_name.as_ref();
     let trait_to_impl = trait_to_impl.as_ref();
@@ -742,10 +748,12 @@ pub(crate) fn impl_read_and_writable_login(
     s.wln(format!("const OPCODE: u8 = {opcode:#04x};"));
     s.newline();
 
-    s.wln(CFG_TESTCASE);
-    s.bodyn("fn to_test_case_string(&self) -> Option<String>", |s| {
-        s.wln(format!("{type_name}::to_test_case_string(self)"))
-    });
+    if should_write_to_test_case_string {
+        s.wln(CFG_TESTCASE);
+        s.bodyn("fn to_test_case_string(&self) -> Option<String>", |s| {
+            s.wln(format!("{type_name}::to_test_case_string(self)"))
+        });
+    }
 
     for it in ImplType::types() {
         s.print_read_decl(it);

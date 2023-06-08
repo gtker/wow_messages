@@ -13,22 +13,9 @@ pub struct CMSG_PING {
     pub round_time_in_ms: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_PING {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_PING {}
 impl crate::Message for CMSG_PING {
     const OPCODE: u32 = 0x01dc;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_PING::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         8

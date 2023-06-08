@@ -11,22 +11,9 @@ use std::io::{Read, Write};
 pub struct MSG_QUERY_NEXT_MAIL_TIME_Client {
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_QUERY_NEXT_MAIL_TIME_Client {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for MSG_QUERY_NEXT_MAIL_TIME_Client {}
 impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Client {
     const OPCODE: u32 = 0x0284;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_QUERY_NEXT_MAIL_TIME_Client::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         0

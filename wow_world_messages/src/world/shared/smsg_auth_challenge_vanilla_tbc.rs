@@ -16,22 +16,9 @@ pub struct SMSG_AUTH_CHALLENGE {
     pub server_seed: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_AUTH_CHALLENGE {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for SMSG_AUTH_CHALLENGE {}
 impl crate::Message for SMSG_AUTH_CHALLENGE {
     const OPCODE: u32 = 0x01ec;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_AUTH_CHALLENGE::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         4

@@ -208,7 +208,7 @@ fn write_world_opcodes(o: &Objects) {
             })
             .collect();
         if !cmsg.is_empty() {
-            let s = print_world_opcodes(&cmsg, &e, ContainerType::CMsg(0));
+            let s = print_world_opcodes(&cmsg, o, &e, ContainerType::CMsg(0));
             contents.write_str(s.inner()).unwrap();
         }
 
@@ -222,7 +222,7 @@ fn write_world_opcodes(o: &Objects) {
             })
             .collect();
         if !smsg.is_empty() {
-            let s = print_world_opcodes(&smsg, &e, ContainerType::SMsg(0));
+            let s = print_world_opcodes(&smsg, o, &e, ContainerType::SMsg(0));
             contents.write_str(s.inner()).unwrap();
         }
 

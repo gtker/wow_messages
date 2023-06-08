@@ -11,22 +11,9 @@ pub struct CMSG_CANCEL_CAST {
     pub id: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CANCEL_CAST {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_CANCEL_CAST {}
 impl crate::Message for CMSG_CANCEL_CAST {
     const OPCODE: u32 = 0x012f;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CANCEL_CAST::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         4

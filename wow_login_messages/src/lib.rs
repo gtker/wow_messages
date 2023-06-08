@@ -152,7 +152,9 @@ pub trait ServerMessage: Sized + private::Sealed {
     fn write<W: std::io::Write>(&self, w: W) -> Result<(), std::io::Error>;
 
     #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String>;
+    fn to_test_case_string(&self) -> Option<String> {
+        None
+    }
 
     #[doc(hidden)]
     #[cfg(feature = "async-std")]
@@ -214,7 +216,9 @@ pub trait ClientMessage: Sized + private::Sealed {
     fn write<W: std::io::Write>(&self, w: W) -> Result<(), std::io::Error>;
 
     #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String>;
+    fn to_test_case_string(&self) -> Option<String> {
+        None
+    }
 
     #[doc(hidden)]
     #[cfg(feature = "async-std")]

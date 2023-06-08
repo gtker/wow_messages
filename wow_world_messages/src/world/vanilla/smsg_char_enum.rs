@@ -16,22 +16,9 @@ pub struct SMSG_CHAR_ENUM {
     pub characters: Vec<Character>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CHAR_ENUM {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for SMSG_CHAR_ENUM {}
 impl crate::Message for SMSG_CHAR_ENUM {
     const OPCODE: u32 = 0x003b;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CHAR_ENUM::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

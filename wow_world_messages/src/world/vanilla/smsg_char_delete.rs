@@ -17,22 +17,9 @@ pub struct SMSG_CHAR_DELETE {
     pub result: WorldResult,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CHAR_DELETE {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for SMSG_CHAR_DELETE {}
 impl crate::Message for SMSG_CHAR_DELETE {
     const OPCODE: u32 = 0x003c;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CHAR_DELETE::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         1

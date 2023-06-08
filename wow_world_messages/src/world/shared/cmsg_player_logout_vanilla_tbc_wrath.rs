@@ -9,22 +9,9 @@ use std::io::{Read, Write};
 pub struct CMSG_PLAYER_LOGOUT {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_PLAYER_LOGOUT {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_PLAYER_LOGOUT {}
 impl crate::Message for CMSG_PLAYER_LOGOUT {
     const OPCODE: u32 = 0x004a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_PLAYER_LOGOUT::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         0

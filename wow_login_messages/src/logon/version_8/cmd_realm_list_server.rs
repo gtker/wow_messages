@@ -43,14 +43,6 @@ impl CMD_REALM_LIST_Server {
 
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMD_REALM_LIST_Server {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl CMD_REALM_LIST_Server {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8
@@ -81,11 +73,6 @@ impl crate::private::Sealed for CMD_REALM_LIST_Server {}
 
 impl ServerMessage for CMD_REALM_LIST_Server {
     const OPCODE: u8 = 0x10;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMD_REALM_LIST_Server::to_test_case_string(self)
-    }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // size: u16

@@ -24,22 +24,9 @@ pub struct CMSG_WORLD_TELEPORT {
     pub orientation: f32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_WORLD_TELEPORT {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_WORLD_TELEPORT {}
 impl crate::Message for CMSG_WORLD_TELEPORT {
     const OPCODE: u32 = 0x0008;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_WORLD_TELEPORT::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         24

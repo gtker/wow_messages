@@ -11,22 +11,9 @@ use std::io::{Read, Write};
 pub struct CMSG_BATTLEFIELD_STATUS {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_BATTLEFIELD_STATUS {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_BATTLEFIELD_STATUS {}
 impl crate::Message for CMSG_BATTLEFIELD_STATUS {
     const OPCODE: u32 = 0x02d3;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_BATTLEFIELD_STATUS::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         0

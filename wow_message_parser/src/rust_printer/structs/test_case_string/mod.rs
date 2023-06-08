@@ -21,6 +21,10 @@ fn wlna(s: &mut Writer, msg: impl AsRef<str>, args: impl AsRef<str>) {
 }
 
 pub(crate) fn print_to_testcase(s: &mut Writer, e: &Container, o: &Objects) {
+    if !e.tests(o).is_empty() {
+        return;
+    }
+
     let name = e.name();
     s.wln(CFG_TESTCASE);
     s.open_curly(format!("impl {name}"));

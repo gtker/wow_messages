@@ -11,22 +11,9 @@ use std::io::{Read, Write};
 pub struct CMSG_GMTICKET_GETTICKET {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_GMTICKET_GETTICKET {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_GMTICKET_GETTICKET {}
 impl crate::Message for CMSG_GMTICKET_GETTICKET {
     const OPCODE: u32 = 0x0211;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_GMTICKET_GETTICKET::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         0

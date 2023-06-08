@@ -15,22 +15,9 @@ pub struct CMSG_REQUEST_ACCOUNT_DATA {
     pub data_type: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_REQUEST_ACCOUNT_DATA {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_REQUEST_ACCOUNT_DATA {}
 impl crate::Message for CMSG_REQUEST_ACCOUNT_DATA {
     const OPCODE: u32 = 0x020a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_REQUEST_ACCOUNT_DATA::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         4

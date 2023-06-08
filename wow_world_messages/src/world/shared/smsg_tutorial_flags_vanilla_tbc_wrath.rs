@@ -16,22 +16,9 @@ pub struct SMSG_TUTORIAL_FLAGS {
     pub tutorial_data: [u32; 8],
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_TUTORIAL_FLAGS {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for SMSG_TUTORIAL_FLAGS {}
 impl crate::Message for SMSG_TUTORIAL_FLAGS {
     const OPCODE: u32 = 0x00fd;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_TUTORIAL_FLAGS::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         32

@@ -17,22 +17,9 @@ pub struct SMSG_CHARACTER_LOGIN_FAILED {
     pub result: WorldResult,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_CHARACTER_LOGIN_FAILED {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for SMSG_CHARACTER_LOGIN_FAILED {}
 impl crate::Message for SMSG_CHARACTER_LOGIN_FAILED {
     const OPCODE: u32 = 0x0041;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_CHARACTER_LOGIN_FAILED::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         1

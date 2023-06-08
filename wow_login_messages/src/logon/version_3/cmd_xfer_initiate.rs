@@ -10,14 +10,6 @@ use std::io::{Read, Write};
 pub struct CMD_XFER_INITIATE {
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMD_XFER_INITIATE {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl CMD_XFER_INITIATE {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8
@@ -31,11 +23,6 @@ impl crate::private::Sealed for CMD_XFER_INITIATE {}
 
 impl ServerMessage for CMD_XFER_INITIATE {
     const OPCODE: u8 = 0x30;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMD_XFER_INITIATE::to_test_case_string(self)
-    }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         Ok(Self {

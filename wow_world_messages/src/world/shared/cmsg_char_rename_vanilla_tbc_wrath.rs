@@ -17,22 +17,9 @@ pub struct CMSG_CHAR_RENAME {
     pub new_name: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_CHAR_RENAME {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_CHAR_RENAME {}
 impl crate::Message for CMSG_CHAR_RENAME {
     const OPCODE: u32 = 0x02c7;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_CHAR_RENAME::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

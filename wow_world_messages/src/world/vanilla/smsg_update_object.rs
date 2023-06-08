@@ -16,22 +16,9 @@ pub struct SMSG_UPDATE_OBJECT {
     pub objects: Vec<Object>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_UPDATE_OBJECT {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for SMSG_UPDATE_OBJECT {}
 impl crate::Message for SMSG_UPDATE_OBJECT {
     const OPCODE: u32 = 0x00a9;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_UPDATE_OBJECT::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

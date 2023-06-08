@@ -15,22 +15,9 @@ pub struct CMSG_PET_NAME_QUERY {
     pub guid: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_PET_NAME_QUERY {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_PET_NAME_QUERY {}
 impl crate::Message for CMSG_PET_NAME_QUERY {
     const OPCODE: u32 = 0x0052;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_PET_NAME_QUERY::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         12

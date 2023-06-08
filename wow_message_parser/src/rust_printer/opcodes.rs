@@ -1,5 +1,6 @@
 use crate::file_utils::{get_import_path, major_version_to_string};
 use crate::parser::types::container::{Container, ContainerType};
+use crate::parser::types::objects::Objects;
 use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
 use crate::rust_printer::structs::print_common_impls::impl_read_write_non_trait;
 use crate::rust_printer::{
@@ -15,6 +16,7 @@ const SMSG_NAME: &str = "Server";
 
 pub(crate) fn print_world_opcodes(
     v: &[&Container],
+    o: &Objects,
     version: &MajorWorldVersion,
     container_type: ContainerType,
 ) -> Writer {
@@ -29,7 +31,7 @@ pub(crate) fn print_world_opcodes(
 
     definition(&mut s, v, ty, (*version).into());
 
-    common_impls_world(&mut s, v, ty, container_type, *version);
+    common_impls_world(&mut s, o, v, ty, container_type, *version);
 
     s
 }
@@ -348,6 +350,7 @@ fn world_common_impls_read_write(
 
 pub(crate) fn common_impls_world(
     s: &mut Writer,
+    o: &Objects,
     v: &[&Container],
     ty: &str,
     container_type: ContainerType,
@@ -405,6 +408,10 @@ pub(crate) fn common_impls_world(
         s.funcn_pub("to_test_case_string(&self)", "Option<String>", |s| {
             s.body("match self", |s| {
                 for container in v {
+                    if !container.tests(o).is_empty() {
+                        continue;
+                    }
+
                     let en = get_enumerator_name(container.name());
                     let name = container.name();
 
@@ -414,6 +421,7 @@ pub(crate) fn common_impls_world(
                         s.wln(format!("Self::{en}(c) => c.to_test_case_string(),",));
                     }
                 }
+                s.wln("_ => None,");
             });
         });
 

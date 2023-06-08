@@ -13,22 +13,9 @@ pub struct CMSG_AUTOEQUIP_ITEM {
     pub source_slot: u8,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_AUTOEQUIP_ITEM {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_AUTOEQUIP_ITEM {}
 impl crate::Message for CMSG_AUTOEQUIP_ITEM {
     const OPCODE: u32 = 0x010a;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_AUTOEQUIP_ITEM::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         2

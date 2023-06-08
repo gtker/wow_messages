@@ -13,22 +13,9 @@ pub struct CMSG_TELEPORT_TO_UNIT {
     pub name: String,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMSG_TELEPORT_TO_UNIT {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for CMSG_TELEPORT_TO_UNIT {}
 impl crate::Message for CMSG_TELEPORT_TO_UNIT {
     const OPCODE: u32 = 0x0009;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMSG_TELEPORT_TO_UNIT::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         self.size() as u32

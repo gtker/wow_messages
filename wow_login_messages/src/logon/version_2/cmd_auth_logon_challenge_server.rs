@@ -40,14 +40,6 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMD_AUTH_LOGON_CHALLENGE_Server {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl CMD_AUTH_LOGON_CHALLENGE_Server {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8
@@ -110,11 +102,6 @@ impl crate::private::Sealed for CMD_AUTH_LOGON_CHALLENGE_Server {}
 
 impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
     const OPCODE: u8 = 0x00;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMD_AUTH_LOGON_CHALLENGE_Server::to_test_case_string(self)
-    }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // protocol_version: u8

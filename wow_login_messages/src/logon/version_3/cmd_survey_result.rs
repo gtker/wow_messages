@@ -17,14 +17,6 @@ pub struct CMD_SURVEY_RESULT {
     pub data: Vec<u8>,
 }
 
-#[cfg(feature = "print-testcase")]
-impl CMD_SURVEY_RESULT {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl CMD_SURVEY_RESULT {
     pub(crate) fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error> {
         // opcode: u8
@@ -52,11 +44,6 @@ impl crate::private::Sealed for CMD_SURVEY_RESULT {}
 
 impl ClientMessage for CMD_SURVEY_RESULT {
     const OPCODE: u8 = 0x04;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        CMD_SURVEY_RESULT::to_test_case_string(self)
-    }
 
     fn read<R: Read, I: crate::private::Sealed>(mut r: R) -> Result<Self, crate::errors::ParseError> {
         // survey_id: u32

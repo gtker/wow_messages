@@ -16,22 +16,9 @@ pub struct SMSG_QUERY_TIME_RESPONSE {
     pub time: u32,
 }
 
-#[cfg(feature = "print-testcase")]
-impl SMSG_QUERY_TIME_RESPONSE {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for SMSG_QUERY_TIME_RESPONSE {}
 impl crate::Message for SMSG_QUERY_TIME_RESPONSE {
     const OPCODE: u32 = 0x01cf;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        SMSG_QUERY_TIME_RESPONSE::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         4

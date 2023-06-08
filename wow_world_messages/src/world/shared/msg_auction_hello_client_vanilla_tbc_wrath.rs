@@ -13,22 +13,9 @@ pub struct MSG_AUCTION_HELLO_Client {
     pub auctioneer: Guid,
 }
 
-#[cfg(feature = "print-testcase")]
-impl MSG_AUCTION_HELLO_Client {
-    pub fn to_test_case_string(&self) -> Option<String> {
-        None
-    }
-
-}
-
 impl crate::private::Sealed for MSG_AUCTION_HELLO_Client {}
 impl crate::Message for MSG_AUCTION_HELLO_Client {
     const OPCODE: u32 = 0x0255;
-
-    #[cfg(feature = "print-testcase")]
-    fn to_test_case_string(&self) -> Option<String> {
-        MSG_AUCTION_HELLO_Client::to_test_case_string(self)
-    }
 
     fn size_without_header(&self) -> u32 {
         8
