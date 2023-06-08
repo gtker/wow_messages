@@ -18,7 +18,7 @@ pub(crate) struct Stats {
     pub mana: i32,
 }
 
-use crate::base_printer::write::items::all_items::all_items;
+use crate::base_printer::write::items::all_items::{all_items, lookup_type};
 use crate::base_printer::write::items::constructor::constructor;
 use crate::base_printer::write::items::definition::{definition, includes};
 use crate::base_printer::{Expansion, ImportFrom};
@@ -135,7 +135,7 @@ fn lib_functions(s: &mut Writer, ty_name: &str, things: &[GenericThing]) {
     let ty_lower = ty_name.to_lowercase();
     s.wln(format!("/// Looks up {ty_lower}s and returns if found."));
     s.wln("///");
-    s.wln(format!("/// Prefer using this over [`all_{ty_lower}s`] since this may incorporate optimizations for lookup speed in the future and is more resilient to changes."));
+    s.wln(format!("/// Prefer using this over [`all_{ty_lower}s`] since this utilizes a lookup array for very fast lookup."));
 
     s.bodyn(
         format!("pub const fn lookup_{ty_lower}(id: u32) -> Option<&'static {ty_name}>"),
@@ -146,25 +146,26 @@ fn lib_functions(s: &mut Writer, ty_name: &str, things: &[GenericThing]) {
                 s.wln("return None;");
             });
 
-            s.wln("let mut i = 0;");
-            s.wln(format!("const OBJ: &[{ty_name}] = all_{ty_lower}s();"));
-            s.newline();
-
-            s.bodyn("while i < OBJ.len()", |s| {
-                s.bodyn("if OBJ[i].entry() == id", |s| {
-                    s.wln("return Some(&OBJ[i]);");
-                });
-
-                s.wln("i += 1;");
-            });
-
-            s.wln("None");
+            let max_index = things.len();
+            let ty = lookup_type(max_index);
+            s.wln(format!(
+                "let index = data::Z________LOOKUP[(id - {min}) as usize];"
+            ));
+            s.body_else(
+                format!("if index == {ty}::MAX || index as usize > (all_{ty_lower}s().len() - 1)"),
+                |s| {
+                    s.wln("None");
+                },
+                |s| {
+                    s.wln(format!("Some(&all_{ty_lower}s()[index as usize])"));
+                },
+            );
         },
     );
 
     s.wln(format!("/// Returns all {ty_lower}s."));
     s.wln("///");
-    s.wln(format!("/// Prefer using [`lookup_{ty_lower}`] since it may incorporate optimizations for lookup speed in the future."));
+    s.wln(format!("/// Prefer using [`lookup_{ty_lower}`] since it incorporates optimizations for lookup speed."));
     s.bodyn(
         format!("pub const fn all_{ty_lower}s() -> &'static [{ty_name}]"),
         |s| {

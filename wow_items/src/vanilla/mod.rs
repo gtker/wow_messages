@@ -32,29 +32,23 @@ pub use wow_world_base::vanilla::{
 
 /// Looks up items and returns if found.
 ///
-/// Prefer using this over [`all_items`] since this may incorporate optimizations for lookup speed in the future and is more resilient to changes.
+/// Prefer using this over [`all_items`] since this utilizes a lookup array for very fast lookup.
 pub const fn lookup_item(id: u32) -> Option<&'static Item> {
     if id < 25 || id > 25818 {
         return None;
     }
 
-    let mut i = 0;
-    const OBJ: &[Item] = all_items();
-
-    while i < OBJ.len() {
-        if OBJ[i].entry() == id {
-            return Some(&OBJ[i]);
-        }
-
-        i += 1;
+    let index = data::Z________LOOKUP[(id - 25) as usize];
+    if index == u16::MAX || index as usize > (all_items().len() - 1) {
+        None
+    } else {
+        Some(&all_items()[index as usize])
     }
-
-    None
 }
 
 /// Returns all items.
 ///
-/// Prefer using [`lookup_item`] since it may incorporate optimizations for lookup speed in the future.
+/// Prefer using [`lookup_item`] since it incorporates optimizations for lookup speed.
 pub const fn all_items() -> &'static [Item] {
     data::Z________DATA
 }

@@ -15,29 +15,23 @@ pub use wow_world_base::tbc::{
 
 /// Looks up spells and returns if found.
 ///
-/// Prefer using this over [`all_spells`] since this may incorporate optimizations for lookup speed in the future and is more resilient to changes.
+/// Prefer using this over [`all_spells`] since this utilizes a lookup array for very fast lookup.
 pub const fn lookup_spell(id: u32) -> Option<&'static Spell> {
     if id < 1 || id > 53085 {
         return None;
     }
 
-    let mut i = 0;
-    const OBJ: &[Spell] = all_spells();
-
-    while i < OBJ.len() {
-        if OBJ[i].entry() == id {
-            return Some(&OBJ[i]);
-        }
-
-        i += 1;
+    let index = data::Z________LOOKUP[(id - 1) as usize];
+    if index == u16::MAX || index as usize > (all_spells().len() - 1) {
+        None
+    } else {
+        Some(&all_spells()[index as usize])
     }
-
-    None
 }
 
 /// Returns all spells.
 ///
-/// Prefer using [`lookup_spell`] since it may incorporate optimizations for lookup speed in the future.
+/// Prefer using [`lookup_spell`] since it incorporates optimizations for lookup speed.
 pub const fn all_spells() -> &'static [Spell] {
     data::Z________DATA
 }
