@@ -63,7 +63,7 @@ impl Language {
 
 #[cfg(feature = "print-testcase")]
 impl Language {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Universal => "UNIVERSAL",
             Self::Orcish => "ORCISH",

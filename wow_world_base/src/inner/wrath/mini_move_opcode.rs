@@ -30,7 +30,7 @@ impl MiniMoveOpcode {
 
 #[cfg(feature = "print-testcase")]
 impl MiniMoveOpcode {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::SmsgForceMoveRoot => "SMSG_FORCE_MOVE_ROOT",
             Self::SmsgMoveFeatherFall => "SMSG_MOVE_FEATHER_FALL",

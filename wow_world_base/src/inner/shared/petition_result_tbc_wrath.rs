@@ -33,7 +33,7 @@ impl PetitionResult {
 
 #[cfg(feature = "print-testcase")]
 impl PetitionResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Ok => "OK",
             Self::AlreadySigned => "ALREADY_SIGNED",

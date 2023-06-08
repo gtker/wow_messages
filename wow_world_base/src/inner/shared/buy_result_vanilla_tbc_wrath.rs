@@ -45,7 +45,7 @@ impl BuyResult {
 
 #[cfg(feature = "print-testcase")]
 impl BuyResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::CantFindItem => "CANT_FIND_ITEM",
             Self::ItemAlreadySold => "ITEM_ALREADY_SOLD",

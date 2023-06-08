@@ -69,7 +69,7 @@ impl QuestFailedReason {
 
 #[cfg(feature = "print-testcase")]
 impl QuestFailedReason {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::DontHaveReq => "DONT_HAVE_REQ",
             Self::QuestFailedLowLevel => "QUEST_FAILED_LOW_LEVEL",

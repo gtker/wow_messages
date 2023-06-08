@@ -36,7 +36,7 @@ impl CompressedMoveOpcode {
 
 #[cfg(feature = "print-testcase")]
 impl CompressedMoveOpcode {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::SmsgMonsterMove => "SMSG_MONSTER_MOVE",
             Self::SmsgMonsterMoveTransport => "SMSG_MONSTER_MOVE_TRANSPORT",

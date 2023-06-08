@@ -27,7 +27,7 @@ impl ActionBarBehavior {
 
 #[cfg(feature = "print-testcase")]
 impl ActionBarBehavior {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Initial => "INITIAL",
             Self::Set => "SET",

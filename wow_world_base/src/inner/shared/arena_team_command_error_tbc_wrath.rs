@@ -64,7 +64,7 @@ impl ArenaTeamCommandError {
 
 #[cfg(feature = "print-testcase")]
 impl ArenaTeamCommandError {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::ArenaTeamInternal => "ARENA_TEAM_INTERNAL",
             Self::AlreadyInArenaTeam => "ALREADY_IN_ARENA_TEAM",

@@ -30,7 +30,7 @@ impl PetCommandState {
 
 #[cfg(feature = "print-testcase")]
 impl PetCommandState {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Stay => "STAY",
             Self::Follow => "FOLLOW",

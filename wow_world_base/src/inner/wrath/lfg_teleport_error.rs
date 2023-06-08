@@ -37,7 +37,7 @@ impl LfgTeleportError {
 
 #[cfg(feature = "print-testcase")]
 impl LfgTeleportError {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::PlayerDead => "PLAYER_DEAD",
             Self::Falling => "FALLING",

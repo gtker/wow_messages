@@ -48,7 +48,7 @@ impl RaidTargetIndex {
 
 #[cfg(feature = "print-testcase")]
 impl RaidTargetIndex {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Unknown0 => "UNKNOWN0",
             Self::Unknown1 => "UNKNOWN1",

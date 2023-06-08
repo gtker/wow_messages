@@ -24,7 +24,7 @@ impl BankSwapSource {
 
 #[cfg(feature = "print-testcase")]
 impl BankSwapSource {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Inventory => "INVENTORY",
             Self::Bank => "BANK",

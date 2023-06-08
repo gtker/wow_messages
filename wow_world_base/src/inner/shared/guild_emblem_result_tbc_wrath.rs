@@ -36,7 +36,7 @@ impl GuildEmblemResult {
 
 #[cfg(feature = "print-testcase")]
 impl GuildEmblemResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Success => "SUCCESS",
             Self::InvalidTabardColors => "INVALID_TABARD_COLORS",

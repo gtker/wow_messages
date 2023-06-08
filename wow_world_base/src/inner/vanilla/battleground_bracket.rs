@@ -42,7 +42,7 @@ impl BattlegroundBracket {
 
 #[cfg(feature = "print-testcase")]
 impl BattlegroundBracket {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Tens => "TENS",
             Self::Twenties => "TWENTIES",

@@ -582,7 +582,7 @@ impl SpellCastResult {
 
 #[cfg(feature = "print-testcase")]
 impl SpellCastResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Success => "SUCCESS",
             Self::AffectingCombat => "AFFECTING_COMBAT",

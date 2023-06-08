@@ -602,7 +602,7 @@ impl CastFailureReason {
 
 #[cfg(feature = "print-testcase")]
 impl CastFailureReason {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::AffectingCombat => "AFFECTING_COMBAT",
             Self::AlreadyAtFullHealth => "ALREADY_AT_FULL_HEALTH",

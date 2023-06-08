@@ -37,7 +37,7 @@ impl Bonding {
 
 #[cfg(feature = "print-testcase")]
 impl Bonding {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::NoBind => "NO_BIND",
             Self::PickUp => "PICK_UP",

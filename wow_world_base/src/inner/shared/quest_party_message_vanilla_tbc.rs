@@ -56,7 +56,7 @@ impl QuestPartyMessage {
 
 #[cfg(feature = "print-testcase")]
 impl QuestPartyMessage {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::SharingQuest => "SHARING_QUEST",
             Self::CantTakeQuest => "CANT_TAKE_QUEST",

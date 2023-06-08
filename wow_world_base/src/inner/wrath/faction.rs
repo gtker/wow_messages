@@ -1224,7 +1224,7 @@ impl Faction {
 
 #[cfg(feature = "print-testcase")]
 impl Faction {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::None => "NONE",
             Self::PlayerHuman => "PLAYER_HUMAN",

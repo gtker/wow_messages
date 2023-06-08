@@ -48,7 +48,7 @@ impl KeyVersion {
 
 #[cfg(feature = "print-testcase")]
 impl KeyVersion {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Zero => "ZERO",
             Self::One => "ONE",

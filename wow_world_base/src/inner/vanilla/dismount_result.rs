@@ -24,7 +24,7 @@ impl DismountResult {
 
 #[cfg(feature = "print-testcase")]
 impl DismountResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::NotMounted => "NOT_MOUNTED",
             Self::Ok => "OK",

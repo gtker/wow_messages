@@ -38,7 +38,7 @@ impl GuildCommand {
 
 #[cfg(feature = "print-testcase")]
 impl GuildCommand {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Create => "CREATE",
             Self::Invite => "INVITE",

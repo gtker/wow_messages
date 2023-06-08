@@ -81,7 +81,7 @@ impl Race {
 
 #[cfg(feature = "print-testcase")]
 impl Race {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Human => "HUMAN",
             Self::Orc => "ORC",

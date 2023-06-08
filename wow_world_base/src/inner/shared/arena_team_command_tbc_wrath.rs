@@ -30,7 +30,7 @@ impl ArenaTeamCommand {
 
 #[cfg(feature = "print-testcase")]
 impl ArenaTeamCommand {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::TeamCreateS => "TEAM_CREATE_S",
             Self::TeamInviteSs => "TEAM_INVITE_SS",

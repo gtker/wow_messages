@@ -543,7 +543,7 @@ impl Emote {
 
 #[cfg(feature = "print-testcase")]
 impl Emote {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::OneshotNone => "ONESHOT_NONE",
             Self::OneshotTalk => "ONESHOT_TALK",

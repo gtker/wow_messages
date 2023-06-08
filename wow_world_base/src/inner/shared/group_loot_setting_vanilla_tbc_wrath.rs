@@ -33,7 +33,7 @@ impl GroupLootSetting {
 
 #[cfg(feature = "print-testcase")]
 impl GroupLootSetting {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::FreeForAll => "FREE_FOR_ALL",
             Self::RoundRobin => "ROUND_ROBIN",

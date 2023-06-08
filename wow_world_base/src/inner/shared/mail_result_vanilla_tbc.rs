@@ -59,7 +59,7 @@ impl MailResult {
 
 #[cfg(feature = "print-testcase")]
 impl MailResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Ok => "OK",
             Self::ErrEquipError => "ERR_EQUIP_ERROR",

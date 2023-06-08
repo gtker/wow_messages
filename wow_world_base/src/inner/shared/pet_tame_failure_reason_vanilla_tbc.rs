@@ -57,7 +57,7 @@ impl PetTameFailureReason {
 
 #[cfg(feature = "print-testcase")]
 impl PetTameFailureReason {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::InvalidCreature => "INVALID_CREATURE",
             Self::TooMany => "TOO_MANY",

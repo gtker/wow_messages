@@ -33,7 +33,7 @@ impl InstanceResetFailedReason {
 
 #[cfg(feature = "print-testcase")]
 impl InstanceResetFailedReason {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::General => "GENERAL",
             Self::Offline => "OFFLINE",

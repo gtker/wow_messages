@@ -45,7 +45,7 @@ impl PartyResult {
 
 #[cfg(feature = "print-testcase")]
 impl PartyResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Success => "SUCCESS",
             Self::BadPlayerName => "BAD_PLAYER_NAME",

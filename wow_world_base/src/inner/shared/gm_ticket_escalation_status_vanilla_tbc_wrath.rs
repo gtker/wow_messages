@@ -30,7 +30,7 @@ impl GmTicketEscalationStatus {
 
 #[cfg(feature = "print-testcase")]
 impl GmTicketEscalationStatus {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::GmticketAssignedtogmStatusNotAssigned => "GMTICKET_ASSIGNEDTOGM_STATUS_NOT_ASSIGNED",
             Self::GmticketAssignedtogmStatusAssigned => "GMTICKET_ASSIGNEDTOGM_STATUS_ASSIGNED",

@@ -36,7 +36,7 @@ impl UpdateType {
 
 #[cfg(feature = "print-testcase")]
 impl UpdateType {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Values => "VALUES",
             Self::Movement => "MOVEMENT",

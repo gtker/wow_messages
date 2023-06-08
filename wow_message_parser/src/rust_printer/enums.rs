@@ -110,7 +110,7 @@ fn testcase_string(s: &mut Writer, e: &Definer) {
     let name = e.name();
     s.wln(CFG_TESTCASE);
     s.bodyn(format!("impl {name}"), |s| {
-        s.funcn_pub("as_test_case_value(&self)", "&'static str", |s| {
+        s.funcn_pub_const("as_test_case_value(&self)", "&'static str", |s| {
             s.body("match self", |s| {
                 for field in e.fields() {
                     let rust = field.rust_name();

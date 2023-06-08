@@ -24,7 +24,7 @@ impl LfgMode {
 
 #[cfg(feature = "print-testcase")]
 impl LfgMode {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::LookingForGroup => "LOOKING_FOR_GROUP",
             Self::LookingForMore => "LOOKING_FOR_MORE",

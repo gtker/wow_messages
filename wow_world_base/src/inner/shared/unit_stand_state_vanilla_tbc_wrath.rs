@@ -50,7 +50,7 @@ impl UnitStandState {
 
 #[cfg(feature = "print-testcase")]
 impl UnitStandState {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Stand => "STAND",
             Self::Sit => "SIT",

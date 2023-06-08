@@ -27,7 +27,7 @@ impl Expansion {
 
 #[cfg(feature = "print-testcase")]
 impl Expansion {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Vanilla => "VANILLA",
             Self::TheBurningCrusade => "THE_BURNING_CRUSADE",

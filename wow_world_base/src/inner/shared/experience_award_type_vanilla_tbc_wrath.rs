@@ -24,7 +24,7 @@ impl ExperienceAwardType {
 
 #[cfg(feature = "print-testcase")]
 impl ExperienceAwardType {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Kill => "KILL",
             Self::NonKill => "NON_KILL",

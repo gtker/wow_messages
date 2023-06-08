@@ -24,7 +24,7 @@ impl BattlegroundEndStatus {
 
 #[cfg(feature = "print-testcase")]
 impl BattlegroundEndStatus {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::NotEnded => "NOT_ENDED",
             Self::Ended => "ENDED",

@@ -30,7 +30,7 @@ impl PetFeedback {
 
 #[cfg(feature = "print-testcase")]
 impl PetFeedback {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::PetDead => "PET_DEAD",
             Self::NothingToAttack => "NOTHING_TO_ATTACK",

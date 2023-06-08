@@ -65,7 +65,7 @@ impl BgTypeId {
 
 #[cfg(feature = "print-testcase")]
 impl BgTypeId {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::NotEligible => "NOT_ELIGIBLE",
             Self::QueuedForAv => "QUEUED_FOR_AV",

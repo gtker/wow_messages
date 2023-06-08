@@ -24,7 +24,7 @@ impl CorpseQueryResult {
 
 #[cfg(feature = "print-testcase")]
 impl CorpseQueryResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::NotFound => "NOT_FOUND",
             Self::Found => "FOUND",

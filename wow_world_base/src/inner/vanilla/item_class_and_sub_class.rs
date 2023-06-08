@@ -235,7 +235,7 @@ impl ItemClassAndSubClass {
 
 #[cfg(feature = "print-testcase")]
 impl ItemClassAndSubClass {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Consumable => "CONSUMABLE",
             Self::CheeseOrBreadObsolete => "CHEESE_OR_BREAD_OBSOLETE",

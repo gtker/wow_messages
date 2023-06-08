@@ -57,7 +57,7 @@ impl BuybackSlot {
 
 #[cfg(feature = "print-testcase")]
 impl BuybackSlot {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Slot1 => "SLOT1",
             Self::Slot2 => "SLOT2",

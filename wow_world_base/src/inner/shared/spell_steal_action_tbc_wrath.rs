@@ -24,7 +24,7 @@ impl SpellStealAction {
 
 #[cfg(feature = "print-testcase")]
 impl SpellStealAction {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Steal => "STEAL",
             Self::Cleanse => "CLEANSE",

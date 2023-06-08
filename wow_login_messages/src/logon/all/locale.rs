@@ -62,7 +62,7 @@ impl Locale {
 
 #[cfg(feature = "print-testcase")]
 impl Locale {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::EnGb => "EN_GB",
             Self::EnUs => "EN_US",

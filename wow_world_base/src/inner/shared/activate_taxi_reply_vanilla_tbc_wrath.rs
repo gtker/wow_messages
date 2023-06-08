@@ -57,7 +57,7 @@ impl ActivateTaxiReply {
 
 #[cfg(feature = "print-testcase")]
 impl ActivateTaxiReply {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Ok => "OK",
             Self::UnspecifiedServerError => "UNSPECIFIED_SERVER_ERROR",

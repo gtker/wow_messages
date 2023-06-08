@@ -24,7 +24,7 @@ impl LfgTeleportLocation {
 
 #[cfg(feature = "print-testcase")]
 impl LfgTeleportLocation {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::In => "IN",
             Self::Out => "OUT",

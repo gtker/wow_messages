@@ -161,7 +161,7 @@ impl ChatNotify {
 
 #[cfg(feature = "print-testcase")]
 impl ChatNotify {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::JoinedNotice => "JOINED_NOTICE",
             Self::LeftNotice => "LEFT_NOTICE",

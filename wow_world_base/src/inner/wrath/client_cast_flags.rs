@@ -24,7 +24,7 @@ impl ClientCastFlags {
 
 #[cfg(feature = "print-testcase")]
 impl ClientCastFlags {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::None => "NONE",
             Self::Extra => "EXTRA",

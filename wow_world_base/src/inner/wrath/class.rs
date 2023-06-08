@@ -48,7 +48,7 @@ impl Class {
 
 #[cfg(feature = "print-testcase")]
 impl Class {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Warrior => "WARRIOR",
             Self::Paladin => "PALADIN",

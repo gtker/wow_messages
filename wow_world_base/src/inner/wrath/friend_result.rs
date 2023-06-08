@@ -69,7 +69,7 @@ impl FriendResult {
 
 #[cfg(feature = "print-testcase")]
 impl FriendResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::DbError => "DB_ERROR",
             Self::ListFull => "LIST_FULL",

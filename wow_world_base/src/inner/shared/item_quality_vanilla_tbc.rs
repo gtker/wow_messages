@@ -39,7 +39,7 @@ impl ItemQuality {
 
 #[cfg(feature = "print-testcase")]
 impl ItemQuality {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Poor => "POOR",
             Self::Normal => "NORMAL",

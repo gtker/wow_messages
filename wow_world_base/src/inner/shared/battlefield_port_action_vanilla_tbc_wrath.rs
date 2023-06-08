@@ -24,7 +24,7 @@ impl BattlefieldPortAction {
 
 #[cfg(feature = "print-testcase")]
 impl BattlefieldPortAction {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::LeaveQueue => "LEAVE_QUEUE",
             Self::EnterBattle => "ENTER_BATTLE",

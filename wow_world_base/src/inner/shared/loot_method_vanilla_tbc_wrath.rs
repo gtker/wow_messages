@@ -49,7 +49,7 @@ impl LootMethod {
 
 #[cfg(feature = "print-testcase")]
 impl LootMethod {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::ErrorX => "ERROR",
             Self::Corpse => "CORPSE",

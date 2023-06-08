@@ -90,7 +90,7 @@ impl TradeStatus {
 
 #[cfg(feature = "print-testcase")]
 impl TradeStatus {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Busy => "BUSY",
             Self::BeginTrade => "BEGIN_TRADE",

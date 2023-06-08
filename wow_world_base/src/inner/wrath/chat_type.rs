@@ -174,7 +174,7 @@ impl ChatType {
 
 #[cfg(feature = "print-testcase")]
 impl ChatType {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::System => "SYSTEM",
             Self::Say => "SAY",

@@ -27,7 +27,7 @@ impl ComplaintStatus {
 
 #[cfg(feature = "print-testcase")]
 impl ComplaintStatus {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Disabled => "DISABLED",
             Self::EnabledWithoutAutoIgnore => "ENABLED_WITHOUT_AUTO_IGNORE",

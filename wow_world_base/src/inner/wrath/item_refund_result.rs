@@ -24,7 +24,7 @@ impl ItemRefundResult {
 
 #[cfg(feature = "print-testcase")]
 impl ItemRefundResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Success => "SUCCESS",
             Self::Failure => "FAILURE",

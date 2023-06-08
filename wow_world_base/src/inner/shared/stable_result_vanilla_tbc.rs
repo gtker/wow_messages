@@ -38,7 +38,7 @@ impl StableResult {
 
 #[cfg(feature = "print-testcase")]
 impl StableResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::ErrMoney => "ERR_MONEY",
             Self::ErrStable => "ERR_STABLE",

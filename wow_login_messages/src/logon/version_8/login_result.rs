@@ -68,7 +68,7 @@ impl LoginResult {
 
 #[cfg(feature = "print-testcase")]
 impl LoginResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Success => "SUCCESS",
             Self::FailUnknown0 => "FAIL_UNKNOWN0",

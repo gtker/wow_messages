@@ -30,7 +30,7 @@ impl BarberShopResult {
 
 #[cfg(feature = "print-testcase")]
 impl BarberShopResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Ok => "OK",
             Self::NotEnoughMoney => "NOT_ENOUGH_MONEY",

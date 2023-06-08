@@ -30,6 +30,7 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects) {
 fn common_impls(s: &mut Writer, e: &Definer, o: &Objects) {
     s.wln(CFG_TESTCASE);
     s.bodyn(format!("impl {name}", name = e.name()), |s| {
+        s.wln("#[allow(clippy::missing_const_for_fn)]");
         s.funcn_pub("as_test_case_value(&self)", "String", |s| {
             s.wln("let mut s = String::new();");
             s.wln("let mut first = true;");

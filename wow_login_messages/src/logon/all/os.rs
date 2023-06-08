@@ -26,7 +26,7 @@ impl Os {
 
 #[cfg(feature = "print-testcase")]
 impl Os {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Windows => "WINDOWS",
             Self::MacOsX => "MAC_OS_X",

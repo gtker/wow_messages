@@ -24,7 +24,7 @@ impl DeclinedNames {
 
 #[cfg(feature = "print-testcase")]
 impl DeclinedNames {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::No => "NO",
             Self::Yes => "YES",

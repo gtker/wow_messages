@@ -62,7 +62,7 @@ impl MountResult {
 
 #[cfg(feature = "print-testcase")]
 impl MountResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::InvalidMountee => "INVALID_MOUNTEE",
             Self::TooFarAway => "TOO_FAR_AWAY",

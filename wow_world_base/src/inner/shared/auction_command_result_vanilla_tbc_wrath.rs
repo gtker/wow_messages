@@ -54,7 +54,7 @@ impl AuctionCommandResult {
 
 #[cfg(feature = "print-testcase")]
 impl AuctionCommandResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Ok => "OK",
             Self::ErrInventory => "ERR_INVENTORY",

@@ -24,7 +24,7 @@ impl PlayerInviteStatus {
 
 #[cfg(feature = "print-testcase")]
 impl PlayerInviteStatus {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::AlreadyInGroup => "ALREADY_IN_GROUP",
             Self::NotInGroup => "NOT_IN_GROUP",

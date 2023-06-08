@@ -17,6 +17,7 @@ pub struct CharacterFlags {
 
 #[cfg(feature = "print-testcase")]
 impl CharacterFlags {
+    #[allow(clippy::missing_const_for_fn)]
     pub fn as_test_case_value(&self) -> String {
         let mut s = String::new();
         let mut first = true;

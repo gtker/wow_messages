@@ -43,7 +43,7 @@ impl EncounterFrame {
 
 #[cfg(feature = "print-testcase")]
 impl EncounterFrame {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Engage => "ENGAGE",
             Self::Disengage => "DISENGAGE",

@@ -24,7 +24,7 @@ impl PetEnabled {
 
 #[cfg(feature = "print-testcase")]
 impl PetEnabled {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Enabled => "ENABLED",
             Self::Disabled => "DISABLED",

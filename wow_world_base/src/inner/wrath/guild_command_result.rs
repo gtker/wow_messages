@@ -88,7 +88,7 @@ impl GuildCommandResult {
 
 #[cfg(feature = "print-testcase")]
 impl GuildCommandResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::PlayerNoMoreInGuild => "PLAYER_NO_MORE_IN_GUILD",
             Self::GuildInternal => "GUILD_INTERNAL",

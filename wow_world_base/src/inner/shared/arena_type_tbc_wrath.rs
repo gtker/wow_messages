@@ -30,7 +30,7 @@ impl ArenaType {
 
 #[cfg(feature = "print-testcase")]
 impl ArenaType {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::NotArena => "NOT_ARENA",
             Self::TwoVsTwo => "TWO_VS_TWO",

@@ -263,7 +263,7 @@ impl InventoryResult {
 
 #[cfg(feature = "print-testcase")]
 impl InventoryResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Ok => "OK",
             Self::CantEquipLevelI => "CANT_EQUIP_LEVEL_I",

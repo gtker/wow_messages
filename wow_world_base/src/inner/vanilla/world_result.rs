@@ -340,7 +340,7 @@ impl WorldResult {
 
 #[cfg(feature = "print-testcase")]
 impl WorldResult {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::ResponseSuccess => "RESPONSE_SUCCESS",
             Self::ResponseFailure => "RESPONSE_FAILURE",

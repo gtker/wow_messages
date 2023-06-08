@@ -36,7 +36,7 @@ impl MailMessageType {
 
 #[cfg(feature = "print-testcase")]
 impl MailMessageType {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Normal => "NORMAL",
             Self::Auction => "AUCTION",

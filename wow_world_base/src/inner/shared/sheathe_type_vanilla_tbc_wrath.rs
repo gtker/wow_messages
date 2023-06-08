@@ -42,7 +42,7 @@ impl SheatheType {
 
 #[cfg(feature = "print-testcase")]
 impl SheatheType {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::None => "NONE",
             Self::MainHand => "MAIN_HAND",

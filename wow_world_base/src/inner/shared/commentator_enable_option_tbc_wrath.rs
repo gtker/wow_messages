@@ -27,7 +27,7 @@ impl CommentatorEnableOption {
 
 #[cfg(feature = "print-testcase")]
 impl CommentatorEnableOption {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::Disable => "DISABLE",
             Self::Enable => "ENABLE",

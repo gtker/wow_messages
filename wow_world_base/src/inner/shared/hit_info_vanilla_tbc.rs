@@ -70,7 +70,7 @@ impl HitInfo {
 
 #[cfg(feature = "print-testcase")]
 impl HitInfo {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::NormalSwing => "NORMAL_SWING",
             Self::Unk1 => "UNK1",

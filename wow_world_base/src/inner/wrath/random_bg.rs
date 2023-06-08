@@ -24,7 +24,7 @@ impl RandomBg {
 
 #[cfg(feature = "print-testcase")]
 impl RandomBg {
-    pub fn as_test_case_value(&self) -> &'static str {
+    pub const fn as_test_case_value(&self) -> &'static str {
         match self {
             Self::NotRandom => "NOT_RANDOM",
             Self::Random => "RANDOM",
