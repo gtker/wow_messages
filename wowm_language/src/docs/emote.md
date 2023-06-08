@@ -253,7 +253,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 Used in:
 * [CMSG_EMOTE](cmsg_emote.md)
 * [SMSG_EMOTE](smsg_emote.md)
-* [SMSG_TEXT_EMOTE](smsg_text_emote.md)
 
 # Emote
 
@@ -510,7 +509,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 Used in:
 * [CMSG_EMOTE](cmsg_emote.md)
 * [SMSG_EMOTE](smsg_emote.md)
-* [SMSG_TEXT_EMOTE](smsg_text_emote.md)
 
 # Emote
 
@@ -883,5 +881,4 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 Used in:
 * [CMSG_EMOTE](cmsg_emote.md)
 * [SMSG_EMOTE](smsg_emote.md)
-* [SMSG_TEXT_EMOTE](smsg_text_emote.md)
 

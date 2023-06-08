@@ -1,7 +1,7 @@
 smsg SMSG_TEXT_EMOTE = 0x0105 {
     Guid guid;
     TextEmote text_emote;
-    Emote emote;
+    u32 emote;
     SizedCString name;
 } {
     paste_versions = "1.12 2.4.3 3.3.5";

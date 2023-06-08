@@ -1,9 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::vanilla::{
-    Emote, TextEmote,
-};
+use crate::vanilla::TextEmote;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_text_emote.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_text_emote.wowm#L1):
@@ -11,14 +9,14 @@ use crate::vanilla::{
 /// smsg SMSG_TEXT_EMOTE = 0x0105 {
 ///     Guid guid;
 ///     TextEmote text_emote;
-///     Emote emote;
+///     u32 emote;
 ///     SizedCString name;
 /// }
 /// ```
 pub struct SMSG_TEXT_EMOTE {
     pub guid: Guid,
     pub text_emote: TextEmote,
-    pub emote: Emote,
+    pub emote: u32,
     pub name: String,
 }
 
@@ -34,7 +32,7 @@ impl SMSG_TEXT_EMOTE {
         // Members
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
         writeln!(s, "    text_emote = {};", self.text_emote.as_test_case_value()).unwrap();
-        writeln!(s, "    emote = {};", self.emote.as_test_case_value()).unwrap();
+        writeln!(s, "    emote = {};", self.emote).unwrap();
         writeln!(s, "    name = \"{}\";", self.name).unwrap();
 
         writeln!(s, "}} [").unwrap();
@@ -82,8 +80,8 @@ impl crate::Message for SMSG_TEXT_EMOTE {
         // text_emote: TextEmote
         w.write_all(&(self.text_emote.as_int().to_le_bytes()))?;
 
-        // emote: Emote
-        w.write_all(&(self.emote.as_int().to_le_bytes()))?;
+        // emote: u32
+        w.write_all(&self.emote.to_le_bytes())?;
 
         // name: SizedCString
         w.write_all(&((self.name.len() + 1) as u32).to_le_bytes())?;
@@ -105,8 +103,8 @@ impl crate::Message for SMSG_TEXT_EMOTE {
         // text_emote: TextEmote
         let text_emote = crate::util::read_u32_le(&mut r)?.try_into()?;
 
-        // emote: Emote
-        let emote = crate::util::read_u32_le(&mut r)?.try_into()?;
+        // emote: u32
+        let emote = crate::util::read_u32_le(&mut r)?;
 
         // name: SizedCString
         let name = {
@@ -132,7 +130,7 @@ impl SMSG_TEXT_EMOTE {
     pub(crate) fn size(&self) -> usize {
         8 // guid: Guid
         + 4 // text_emote: TextEmote
-        + 4 // emote: Emote
+        + 4 // emote: u32
         + self.name.len() + 5 // name: SizedCString
     }
 }
