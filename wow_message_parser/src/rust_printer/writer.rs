@@ -13,6 +13,7 @@ pub struct Writer {
 impl Writer {
     pub const INDENTATION: &'static str = "    ";
     const METADATA: bool = true;
+    const COLUMN_LENGTH: usize = 80;
 
     pub(crate) fn new() -> Self {
         Self {
@@ -416,9 +417,9 @@ impl Writer {
     pub(crate) fn w_no_indent(&mut self, s: impl AsRef<str>) {
         self.inner.write_str(s.as_ref()).unwrap();
     }
-    pub(crate) fn w_break_at(&mut self, s: impl AsRef<str>, break_at: usize) {
+    pub(crate) fn w_break_at(&mut self, s: impl AsRef<str>) {
         let column = self.get_column();
-        if column >= break_at {
+        if column >= Self::COLUMN_LENGTH {
             self.newline();
             self.write_prefix();
             self.w(s.as_ref());

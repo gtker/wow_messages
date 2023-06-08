@@ -107,7 +107,7 @@ pub(crate) fn includes(
     for (i, e) in set.iter().enumerate() {
         let extra = if i == (set.len() - 1) { "" } else { " " };
 
-        s.w_break_at(format!("{e},{extra}"), 80);
+        s.w_break_at(format!("{e},{extra}"));
     }
     s.newline();
 

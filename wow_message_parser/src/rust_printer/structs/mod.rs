@@ -70,7 +70,7 @@ fn print_includes(s: &mut Writer, e: &Container) {
                 if i != 0 {
                     s.space();
                 }
-                s.w_break_at(format!("{ty},"), 80);
+                s.w_break_at(format!("{ty},"));
             }
 
             s.newline();

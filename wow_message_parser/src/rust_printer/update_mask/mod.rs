@@ -107,7 +107,7 @@ fn print_includes(
     s.inc_indent();
     for (i, ty) in imports.iter().enumerate() {
         let extra = if i != imports.len() - 1 { ", " } else { "" };
-        s.w_break_at(format!("{ty}{extra}"), 80);
+        s.w_break_at(format!("{ty}{extra}"));
     }
     s.newline();
     s.closing_curly_with(";");

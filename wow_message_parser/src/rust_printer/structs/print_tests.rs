@@ -75,7 +75,7 @@ pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
             s.inc_indent();
 
             for i in t.raw_bytes() {
-                s.w_break_at(format!(" {i:#04X},"), 80);
+                s.w_break_at(format!(" {i:#04X},"));
             }
 
             s.dec_indent();
@@ -382,7 +382,7 @@ fn print_value(
             s.inc_indent();
 
             for value in values {
-                s.w_break_at(format!(" {value:#04X},"), 80);
+                s.w_break_at(format!(" {value:#04X},"));
             }
 
             s.dec_indent();
