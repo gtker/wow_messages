@@ -132,7 +132,11 @@ pub(crate) fn write_pub_use(
 }
 
 fn lib_functions(s: &mut Writer, ty_name: &str, things: &[GenericThing]) {
+    let min = things[0].entry;
+    let max = things.iter().last().unwrap().entry;
+
     let ty_lower = ty_name.to_lowercase();
+
     s.wln(format!("/// Looks up {ty_lower}s and returns if found."));
     s.wln("///");
     s.wln(format!("/// Prefer using this over [`all_{ty_lower}s`] since this utilizes a lookup array for very fast lookup."));
@@ -140,8 +144,6 @@ fn lib_functions(s: &mut Writer, ty_name: &str, things: &[GenericThing]) {
     s.bodyn(
         format!("pub const fn lookup_{ty_lower}(id: u32) -> Option<&'static {ty_name}>"),
         |s| {
-            let min = things[0].entry;
-            let max = things.iter().last().unwrap().entry;
             s.bodyn(format!("if id < {min} || id > {max}"), |s| {
                 s.wln("return None;");
             });
@@ -172,6 +174,28 @@ fn lib_functions(s: &mut Writer, ty_name: &str, things: &[GenericThing]) {
             s.wln("data::Z________DATA");
         },
     );
+
+    s.wln("#[cfg(test)]");
+    s.body("mod test", |s| {
+        s.wln(format!("use super::lookup_{ty_lower};"));
+        s.newline();
+
+        s.wln("#[test]");
+        s.body("fn tests()", |s| {
+            s.wln("assert!(lookup_item(u32::MIN).is_none());");
+            s.wln("assert!(lookup_item(u32::MAX).is_none());");
+            s.newline();
+
+            s.wln(format!("const MIN: u32 = {min};"));
+            s.wln(format!("const MAX: u32 = {max};"));
+            s.wln("assert_eq!(lookup_item(MIN).unwrap().entry(), MIN);");
+            s.wln("assert_eq!(lookup_item(MAX).unwrap().entry(), MAX);");
+            s.newline();
+
+            s.wln("assert!(lookup_item(MIN - 1).is_none());");
+            s.wln("assert!(lookup_item(MAX + 1).is_none());");
+        });
+    });
 }
 
 pub(crate) fn write_constructors(
