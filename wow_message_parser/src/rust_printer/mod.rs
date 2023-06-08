@@ -17,7 +17,6 @@ pub mod rust_view;
 mod structs;
 mod update_mask;
 
-use crate::parser::types::sizes::Sizes;
 use crate::parser::types::tags::MemberTags;
 use crate::{ObjectTags, Objects};
 pub use opcode_to_name::print_opcode_to_name;
@@ -155,128 +154,6 @@ impl Writer {
 
         f(self);
 
-        self.closing_curly_newline();
-    }
-
-    fn print_write_decl(&mut self, it: ImplType) {
-        self.wln(it.cfg());
-
-        if !it.is_async() {
-            self.open_curly(format!(
-                "fn {prefix}write<W: {write}>(&self, mut w: W) -> Result<(), std::io::Error>",
-                prefix = it.prefix(),
-                write = it.write(),
-            ));
-
-            return;
-        }
-
-        self.wln(format!(
-            "fn {prefix}write<'life0, 'async_trait, W>(",
-            prefix = it.prefix(),
-        ));
-        self.inc_indent();
-
-        self.wln("&'life0 self,");
-        self.wln("mut w: W,");
-        self.dec_indent();
-
-        self.wln(") -> core::pin::Pin<Box<");
-        self.inc_indent();
-
-        self.wln("dyn core::future::Future<Output = Result<(), std::io::Error>>");
-        self.inc_indent();
-
-        self.wln("+ Send + 'async_trait");
-        self.dec_indent();
-        self.dec_indent();
-
-        self.wln(">> where");
-
-        self.inc_indent();
-        self.wln(format!("W: 'async_trait + {},", it.write()));
-        self.wln("'life0: 'async_trait,");
-        self.wln("Self: 'async_trait,");
-        self.dec_indent();
-
-        self.open_curly("");
-        self.open_curly("Box::pin(async move");
-    }
-
-    fn print_read_decl(&mut self, it: ImplType) {
-        if !it.is_async() {
-            self.open_curly(format!(
-                "fn {prefix}read<R: {read}, I: crate::private::Sealed>(mut r: R) -> Result<Self, {error}>",
-                prefix = it.prefix(),
-                read = it.read(),
-                error = PARSE_ERROR,
-            ));
-
-            return;
-        }
-
-        self.wln(it.cfg());
-        self.wln(format!(
-            "fn {}read<'async_trait, R, I: crate::private::Sealed>(",
-            it.prefix()
-        ));
-
-        self.inc_indent();
-        self.wln("mut r: R,");
-        self.dec_indent();
-
-        self.wln(") -> core::pin::Pin<Box<");
-
-        self.inc_indent();
-        self.wln(format!(
-            "dyn core::future::Future<Output = Result<Self, {PARSE_ERROR}>>",
-        ));
-        self.inc_indent();
-
-        self.wln("+ Send + 'async_trait,");
-        self.dec_indent();
-        self.dec_indent();
-
-        self.wln(">> where");
-
-        self.inc_indent();
-        self.wln(format!("R: 'async_trait + {},", it.read()));
-        self.wln("Self: 'async_trait,");
-        self.dec_indent();
-
-        self.open_curly("");
-        self.open_curly("Box::pin(async move");
-    }
-
-    fn call_as_bytes(&mut self, it: ImplType, sizes: Sizes) {
-        let size = if let Some(size) = sizes.is_constant() {
-            size.to_string()
-        } else {
-            "self.size() + 1".to_string()
-        };
-
-        self.wln(format!("let mut v = Vec::with_capacity({size});"));
-        self.wln("self.write_into_vec(&mut v)?;");
-        self.wln(format!("w.write_all(&v){postfix}", postfix = it.postfix()));
-    }
-
-    pub(crate) fn write_into_vec(
-        &mut self,
-        type_name: impl AsRef<str>,
-        write_function: impl Fn(&mut Self, ImplType),
-        visibility: &str,
-    ) {
-        self.open_curly(format!("impl {}", type_name.as_ref()));
-
-        self.open_curly(format!(
-            "{visibility} fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error>",
-        ));
-
-        write_function(self, ImplType::Std);
-
-        self.wln("Ok(())");
-
-        self.closing_curly();
         self.closing_curly_newline();
     }
 

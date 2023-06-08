@@ -533,7 +533,7 @@ pub(crate) fn impl_read_and_writable_login(
     let type_name = type_name.as_ref();
     let trait_to_impl = trait_to_impl.as_ref();
 
-    s.write_into_vec(type_name, write_function, "pub(crate)");
+    write_into_vec(s, type_name, write_function, "pub(crate)");
 
     s.wln(format!("impl crate::private::Sealed for {type_name} {{}}",));
     s.newline();
@@ -550,7 +550,7 @@ pub(crate) fn impl_read_and_writable_login(
     }
 
     for it in ImplType::types() {
-        s.print_read_decl(it);
+        print_read_decl(s, it);
 
         read_function(s, it);
         if it.is_async() {
@@ -558,9 +558,9 @@ pub(crate) fn impl_read_and_writable_login(
         }
         s.closing_curly_newline();
 
-        s.print_write_decl(it);
+        print_write_decl(s, it);
 
-        s.call_as_bytes(it, sizes);
+        call_as_bytes(s, it, sizes);
 
         if it.is_async() {
             s.closing_curly_with(")"); // Box::pin
@@ -582,7 +582,7 @@ pub(crate) fn impl_read_write_non_trait(
     write_visibility: impl AsRef<str>,
     create_async_reads: bool,
 ) {
-    s.write_into_vec(&type_name, write_function, read_visibility.as_ref());
+    write_into_vec(s, &type_name, write_function, read_visibility.as_ref());
 
     s.open_curly(format!("impl {}", type_name.as_ref()));
 
@@ -607,4 +607,126 @@ pub(crate) fn impl_read_write_non_trait(
     }
 
     s.closing_curly_newline(); // impl
+}
+
+fn print_read_decl(s: &mut Writer, it: ImplType) {
+    if !it.is_async() {
+        s.open_curly(format!(
+            "fn {prefix}read<R: {read}, I: crate::private::Sealed>(mut r: R) -> Result<Self, {error}>",
+            prefix = it.prefix(),
+            read = it.read(),
+            error = PARSE_ERROR,
+        ));
+
+        return;
+    }
+
+    s.wln(it.cfg());
+    s.wln(format!(
+        "fn {}read<'async_trait, R, I: crate::private::Sealed>(",
+        it.prefix()
+    ));
+
+    s.inc_indent();
+    s.wln("mut r: R,");
+    s.dec_indent();
+
+    s.wln(") -> core::pin::Pin<Box<");
+
+    s.inc_indent();
+    s.wln(format!(
+        "dyn core::future::Future<Output = Result<Self, {PARSE_ERROR}>>",
+    ));
+    s.inc_indent();
+
+    s.wln("+ Send + 'async_trait,");
+    s.dec_indent();
+    s.dec_indent();
+
+    s.wln(">> where");
+
+    s.inc_indent();
+    s.wln(format!("R: 'async_trait + {},", it.read()));
+    s.wln("Self: 'async_trait,");
+    s.dec_indent();
+
+    s.open_curly("");
+    s.open_curly("Box::pin(async move");
+}
+
+fn print_write_decl(s: &mut Writer, it: ImplType) {
+    s.wln(it.cfg());
+
+    if !it.is_async() {
+        s.open_curly(format!(
+            "fn {prefix}write<W: {write}>(&self, mut w: W) -> Result<(), std::io::Error>",
+            prefix = it.prefix(),
+            write = it.write(),
+        ));
+
+        return;
+    }
+
+    s.wln(format!(
+        "fn {prefix}write<'life0, 'async_trait, W>(",
+        prefix = it.prefix(),
+    ));
+    s.inc_indent();
+
+    s.wln("&'life0 self,");
+    s.wln("mut w: W,");
+    s.dec_indent();
+
+    s.wln(") -> core::pin::Pin<Box<");
+    s.inc_indent();
+
+    s.wln("dyn core::future::Future<Output = Result<(), std::io::Error>>");
+    s.inc_indent();
+
+    s.wln("+ Send + 'async_trait");
+    s.dec_indent();
+    s.dec_indent();
+
+    s.wln(">> where");
+
+    s.inc_indent();
+    s.wln(format!("W: 'async_trait + {},", it.write()));
+    s.wln("'life0: 'async_trait,");
+    s.wln("Self: 'async_trait,");
+    s.dec_indent();
+
+    s.open_curly("");
+    s.open_curly("Box::pin(async move");
+}
+
+pub(crate) fn write_into_vec(
+    s: &mut Writer,
+    type_name: impl AsRef<str>,
+    write_function: impl Fn(&mut Writer, ImplType),
+    visibility: &str,
+) {
+    s.open_curly(format!("impl {}", type_name.as_ref()));
+
+    s.open_curly(format!(
+        "{visibility} fn write_into_vec(&self, mut w: impl Write) -> Result<(), std::io::Error>",
+    ));
+
+    write_function(s, ImplType::Std);
+
+    s.wln("Ok(())");
+
+    s.closing_curly();
+    s.closing_curly_newline();
+}
+
+fn call_as_bytes(s: &mut Writer, it: ImplType, sizes: Sizes) {
+    let size = if let Some(size) = sizes.is_constant() {
+        size.to_string()
+    } else {
+        "self.size() + 1".to_string()
+    };
+
+    s.wln(format!("let mut v = Vec::with_capacity({size});"));
+    s.wln("self.write_into_vec(&mut v)?;");
+    s.wln(format!("w.write_all(&v){postfix}", postfix = it.postfix()));
 }
