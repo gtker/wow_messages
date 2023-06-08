@@ -48,9 +48,9 @@ impl crate::Message for SMSG_CHAR_ENUM {
             // position: Vector3d
             writeln!(s, "        position = {{").unwrap();
             // Members
-            writeln!(s, "    {}", if v.position.x.to_string().contains(".") { v.position.x.to_string() } else { format!("{}.0", v.position.x) }).unwrap();
-            writeln!(s, "    {}", if v.position.y.to_string().contains(".") { v.position.y.to_string() } else { format!("{}.0", v.position.y) }).unwrap();
-            writeln!(s, "    {}", if v.position.z.to_string().contains(".") { v.position.z.to_string() } else { format!("{}.0", v.position.z) }).unwrap();
+            writeln!(s, "    {}", if v.position.x.to_string().contains('.') { v.position.x.to_string() } else { format!("{}.0", v.position.x) }).unwrap();
+            writeln!(s, "    {}", if v.position.y.to_string().contains('.') { v.position.y.to_string() } else { format!("{}.0", v.position.y) }).unwrap();
+            writeln!(s, "    {}", if v.position.z.to_string().contains('.') { v.position.z.to_string() } else { format!("{}.0", v.position.z) }).unwrap();
 
             writeln!(s, "    }};").unwrap();
             writeln!(s, "        guild_id = {};", v.guild_id).unwrap();

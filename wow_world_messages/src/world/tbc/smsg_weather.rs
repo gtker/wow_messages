@@ -33,7 +33,7 @@ impl crate::Message for SMSG_WEATHER {
         writeln!(s, "test SMSG_WEATHER {{").unwrap();
         // Members
         writeln!(s, "    weather_type = {};", self.weather_type.as_test_case_value()).unwrap();
-        writeln!(s, "    {}", if self.grade.to_string().contains(".") { self.grade.to_string() } else { format!("{}.0", self.grade) }).unwrap();
+        writeln!(s, "    {}", if self.grade.to_string().contains('.') { self.grade.to_string() } else { format!("{}.0", self.grade) }).unwrap();
         writeln!(s, "    change = {};", self.change.as_test_case_value()).unwrap();
 
         writeln!(s, "}} [").unwrap();

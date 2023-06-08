@@ -43,7 +43,7 @@ impl crate::Message for SMSG_FORCE_RUN_SPEED_CHANGE {
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
         writeln!(s, "    move_event = {};", self.move_event).unwrap();
         writeln!(s, "    unknown = {};", self.unknown).unwrap();
-        writeln!(s, "    {}", if self.speed.to_string().contains(".") { self.speed.to_string() } else { format!("{}.0", self.speed) }).unwrap();
+        writeln!(s, "    {}", if self.speed.to_string().contains('.') { self.speed.to_string() } else { format!("{}.0", self.speed) }).unwrap();
 
         writeln!(s, "}} [").unwrap();
 

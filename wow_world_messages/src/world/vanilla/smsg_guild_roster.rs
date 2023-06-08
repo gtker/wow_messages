@@ -58,7 +58,7 @@ impl crate::Message for SMSG_GUILD_ROSTER {
                 crate::vanilla::GuildMember_GuildMemberStatus::Offline {
                     time_offline,
                 } => {
-                    writeln!(s, "    {}", if time_offline.to_string().contains(".") { time_offline.to_string() } else { format!("{}.0", time_offline) }).unwrap();
+                    writeln!(s, "    {}", if time_offline.to_string().contains('.') { time_offline.to_string() } else { format!("{}.0", time_offline) }).unwrap();
                 }
                 _ => {}
             }

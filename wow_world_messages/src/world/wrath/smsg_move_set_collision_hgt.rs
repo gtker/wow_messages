@@ -32,7 +32,7 @@ impl crate::Message for SMSG_MOVE_SET_COLLISION_HGT {
         // Members
         writeln!(s, "    unit = {};", self.unit.guid()).unwrap();
         writeln!(s, "    packet_counter = {};", self.packet_counter).unwrap();
-        writeln!(s, "    {}", if self.collision_height.to_string().contains(".") { self.collision_height.to_string() } else { format!("{}.0", self.collision_height) }).unwrap();
+        writeln!(s, "    {}", if self.collision_height.to_string().contains('.') { self.collision_height.to_string() } else { format!("{}.0", self.collision_height) }).unwrap();
 
         writeln!(s, "}} [").unwrap();
 

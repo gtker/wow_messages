@@ -113,8 +113,8 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
                 writeln!(s, "        crit_rating_melee = {};", if_statement.crit_rating_melee).unwrap();
                 writeln!(s, "        crit_rating_ranged = {};", if_statement.crit_rating_ranged).unwrap();
                 writeln!(s, "        crit_rating_spell = {};", if_statement.crit_rating_spell).unwrap();
-                writeln!(s, "    {}", if if_statement.mana_per_5_seconds.to_string().contains(".") { if_statement.mana_per_5_seconds.to_string() } else { format!("{}.0", if_statement.mana_per_5_seconds) }).unwrap();
-                writeln!(s, "    {}", if if_statement.mana_per_5_seconds_combat.to_string().contains(".") { if_statement.mana_per_5_seconds_combat.to_string() } else { format!("{}.0", if_statement.mana_per_5_seconds_combat) }).unwrap();
+                writeln!(s, "    {}", if if_statement.mana_per_5_seconds.to_string().contains('.') { if_statement.mana_per_5_seconds.to_string() } else { format!("{}.0", if_statement.mana_per_5_seconds) }).unwrap();
+                writeln!(s, "    {}", if if_statement.mana_per_5_seconds_combat.to_string().contains('.') { if_statement.mana_per_5_seconds_combat.to_string() } else { format!("{}.0", if_statement.mana_per_5_seconds_combat) }).unwrap();
                 writeln!(s, "        attack_power = {};", if_statement.attack_power).unwrap();
                 writeln!(s, "        agility = {};", if_statement.agility).unwrap();
                 writeln!(s, "        health = {};", if_statement.health).unwrap();

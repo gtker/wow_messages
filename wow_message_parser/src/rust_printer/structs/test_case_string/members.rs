@@ -252,7 +252,7 @@ fn print_member_definition(
             );
         }
         Type::FloatingPoint => {
-            test_case_string::wlna(s, format!("    {{}}"), format!("if {var_name}.to_string().contains(\".\") {{ {var_name}.to_string() }} else {{ format!(\"{{}}.0\", {var_name}) }}"));
+            test_case_string::wlna(s, format!("    {{}}"), format!("if {var_name}.to_string().contains(\'.\') {{ {var_name}.to_string() }} else {{ format!(\"{{}}.0\", {var_name}) }}"));
         }
         Type::IpAddress => {
             test_case_string::wlna(

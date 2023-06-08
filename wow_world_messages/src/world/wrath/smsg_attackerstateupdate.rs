@@ -84,7 +84,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
             writeln!(s, "{{").unwrap();
             // Members
             writeln!(s, "        spell_school_mask = {};", v.spell_school_mask).unwrap();
-            writeln!(s, "    {}", if v.damage_float.to_string().contains(".") { v.damage_float.to_string() } else { format!("{}.0", v.damage_float) }).unwrap();
+            writeln!(s, "    {}", if v.damage_float.to_string().contains('.') { v.damage_float.to_string() } else { format!("{}.0", v.damage_float) }).unwrap();
             writeln!(s, "        damage_uint = {};", v.damage_uint).unwrap();
 
             writeln!(s, "    }},").unwrap();
@@ -111,16 +111,16 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
         if let Some(if_statement) = &self.hit_info.get_unk1() {
             writeln!(s, "    unknown4 = {};", if_statement.unknown4).unwrap();
-            writeln!(s, "    {}", if if_statement.unknown5.to_string().contains(".") { if_statement.unknown5.to_string() } else { format!("{}.0", if_statement.unknown5) }).unwrap();
-            writeln!(s, "    {}", if if_statement.unknown6.to_string().contains(".") { if_statement.unknown6.to_string() } else { format!("{}.0", if_statement.unknown6) }).unwrap();
-            writeln!(s, "    {}", if if_statement.unknown7.to_string().contains(".") { if_statement.unknown7.to_string() } else { format!("{}.0", if_statement.unknown7) }).unwrap();
-            writeln!(s, "    {}", if if_statement.unknown8.to_string().contains(".") { if_statement.unknown8.to_string() } else { format!("{}.0", if_statement.unknown8) }).unwrap();
-            writeln!(s, "    {}", if if_statement.unknown9.to_string().contains(".") { if_statement.unknown9.to_string() } else { format!("{}.0", if_statement.unknown9) }).unwrap();
-            writeln!(s, "    {}", if if_statement.unknown10.to_string().contains(".") { if_statement.unknown10.to_string() } else { format!("{}.0", if_statement.unknown10) }).unwrap();
-            writeln!(s, "    {}", if if_statement.unknown11.to_string().contains(".") { if_statement.unknown11.to_string() } else { format!("{}.0", if_statement.unknown11) }).unwrap();
-            writeln!(s, "    {}", if if_statement.unknown12.to_string().contains(".") { if_statement.unknown12.to_string() } else { format!("{}.0", if_statement.unknown12) }).unwrap();
-            writeln!(s, "    {}", if if_statement.unknown13.to_string().contains(".") { if_statement.unknown13.to_string() } else { format!("{}.0", if_statement.unknown13) }).unwrap();
-            writeln!(s, "    {}", if if_statement.unknown14.to_string().contains(".") { if_statement.unknown14.to_string() } else { format!("{}.0", if_statement.unknown14) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown5.to_string().contains('.') { if_statement.unknown5.to_string() } else { format!("{}.0", if_statement.unknown5) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown6.to_string().contains('.') { if_statement.unknown6.to_string() } else { format!("{}.0", if_statement.unknown6) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown7.to_string().contains('.') { if_statement.unknown7.to_string() } else { format!("{}.0", if_statement.unknown7) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown8.to_string().contains('.') { if_statement.unknown8.to_string() } else { format!("{}.0", if_statement.unknown8) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown9.to_string().contains('.') { if_statement.unknown9.to_string() } else { format!("{}.0", if_statement.unknown9) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown10.to_string().contains('.') { if_statement.unknown10.to_string() } else { format!("{}.0", if_statement.unknown10) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown11.to_string().contains('.') { if_statement.unknown11.to_string() } else { format!("{}.0", if_statement.unknown11) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown12.to_string().contains('.') { if_statement.unknown12.to_string() } else { format!("{}.0", if_statement.unknown12) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown13.to_string().contains('.') { if_statement.unknown13.to_string() } else { format!("{}.0", if_statement.unknown13) }).unwrap();
+            writeln!(s, "    {}", if if_statement.unknown14.to_string().contains('.') { if_statement.unknown14.to_string() } else { format!("{}.0", if_statement.unknown14) }).unwrap();
             writeln!(s, "    unknown15 = {};", if_statement.unknown15).unwrap();
         }
 

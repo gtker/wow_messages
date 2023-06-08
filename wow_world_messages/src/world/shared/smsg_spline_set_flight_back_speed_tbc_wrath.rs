@@ -29,7 +29,7 @@ impl crate::Message for SMSG_SPLINE_SET_FLIGHT_BACK_SPEED {
         writeln!(s, "test SMSG_SPLINE_SET_FLIGHT_BACK_SPEED {{").unwrap();
         // Members
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-        writeln!(s, "    {}", if self.speed.to_string().contains(".") { self.speed.to_string() } else { format!("{}.0", self.speed) }).unwrap();
+        writeln!(s, "    {}", if self.speed.to_string().contains('.') { self.speed.to_string() } else { format!("{}.0", self.speed) }).unwrap();
 
         writeln!(s, "}} [").unwrap();
 

@@ -39,7 +39,7 @@ impl crate::Message for MSG_QUERY_NEXT_MAIL_TIME_Server {
             writeln!(s, "        auction_house = {};", v.auction_house.as_test_case_value()).unwrap();
             writeln!(s, "        message_type = {};", v.message_type.as_test_case_value()).unwrap();
             writeln!(s, "        stationery = {};", v.stationery).unwrap();
-            writeln!(s, "    {}", if v.time.to_string().contains(".") { v.time.to_string() } else { format!("{}.0", v.time) }).unwrap();
+            writeln!(s, "    {}", if v.time.to_string().contains('.') { v.time.to_string() } else { format!("{}.0", v.time) }).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }

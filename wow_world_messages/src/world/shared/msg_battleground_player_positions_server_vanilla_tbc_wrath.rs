@@ -36,8 +36,8 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
             writeln!(s, "{{").unwrap();
             // Members
             writeln!(s, "        player = {};", v.player.guid()).unwrap();
-            writeln!(s, "    {}", if v.position_x.to_string().contains(".") { v.position_x.to_string() } else { format!("{}.0", v.position_x) }).unwrap();
-            writeln!(s, "    {}", if v.position_y.to_string().contains(".") { v.position_y.to_string() } else { format!("{}.0", v.position_y) }).unwrap();
+            writeln!(s, "    {}", if v.position_x.to_string().contains('.') { v.position_x.to_string() } else { format!("{}.0", v.position_x) }).unwrap();
+            writeln!(s, "    {}", if v.position_y.to_string().contains('.') { v.position_y.to_string() } else { format!("{}.0", v.position_y) }).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
@@ -48,8 +48,8 @@ impl crate::Message for MSG_BATTLEGROUND_PLAYER_POSITIONS_Server {
             writeln!(s, "{{").unwrap();
             // Members
             writeln!(s, "        player = {};", v.player.guid()).unwrap();
-            writeln!(s, "    {}", if v.position_x.to_string().contains(".") { v.position_x.to_string() } else { format!("{}.0", v.position_x) }).unwrap();
-            writeln!(s, "    {}", if v.position_y.to_string().contains(".") { v.position_y.to_string() } else { format!("{}.0", v.position_y) }).unwrap();
+            writeln!(s, "    {}", if v.position_x.to_string().contains('.') { v.position_x.to_string() } else { format!("{}.0", v.position_x) }).unwrap();
+            writeln!(s, "    {}", if v.position_y.to_string().contains('.') { v.position_y.to_string() } else { format!("{}.0", v.position_y) }).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }

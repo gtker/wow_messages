@@ -44,7 +44,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
                 experience_without_rested,
             } => {
                 writeln!(s, "    experience_without_rested = {};", experience_without_rested).unwrap();
-                writeln!(s, "    {}", if exp_group_bonus.to_string().contains(".") { exp_group_bonus.to_string() } else { format!("{}.0", exp_group_bonus) }).unwrap();
+                writeln!(s, "    {}", if exp_group_bonus.to_string().contains('.') { exp_group_bonus.to_string() } else { format!("{}.0", exp_group_bonus) }).unwrap();
             }
             _ => {}
         }

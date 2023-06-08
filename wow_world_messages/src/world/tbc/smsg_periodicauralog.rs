@@ -86,7 +86,7 @@ impl crate::Message for SMSG_PERIODICAURALOG {
                 } => {
                     writeln!(s, "        misc_value2 = {};", misc_value2).unwrap();
                     writeln!(s, "        damage = {};", damage).unwrap();
-                    writeln!(s, "    {}", if gain_multiplier.to_string().contains(".") { gain_multiplier.to_string() } else { format!("{}.0", gain_multiplier) }).unwrap();
+                    writeln!(s, "    {}", if gain_multiplier.to_string().contains('.') { gain_multiplier.to_string() } else { format!("{}.0", gain_multiplier) }).unwrap();
                 }
                 crate::tbc::AuraLog_AuraType::PeriodicDamagePercent {
                     absorbed,

@@ -33,7 +33,7 @@ impl crate::Message for SMSG_NPC_TEXT_UPDATE {
         for v in self.texts.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "    {}", if v.probability.to_string().contains(".") { v.probability.to_string() } else { format!("{}.0", v.probability) }).unwrap();
+            writeln!(s, "    {}", if v.probability.to_string().contains('.') { v.probability.to_string() } else { format!("{}.0", v.probability) }).unwrap();
             write!(s, "        texts = [").unwrap();
             for v in v.texts.as_slice() {
                 write!(s, "\"{v}\", ").unwrap();

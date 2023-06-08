@@ -67,8 +67,8 @@ impl crate::Message for SMSG_CREATURE_QUERY_RESPONSE {
                 write!(s, "{v:#04X}, ").unwrap();
             }
             writeln!(s, "];").unwrap();
-            writeln!(s, "    {}", if found.health_multiplier.to_string().contains(".") { found.health_multiplier.to_string() } else { format!("{}.0", found.health_multiplier) }).unwrap();
-            writeln!(s, "    {}", if found.mana_multiplier.to_string().contains(".") { found.mana_multiplier.to_string() } else { format!("{}.0", found.mana_multiplier) }).unwrap();
+            writeln!(s, "    {}", if found.health_multiplier.to_string().contains('.') { found.health_multiplier.to_string() } else { format!("{}.0", found.health_multiplier) }).unwrap();
+            writeln!(s, "    {}", if found.mana_multiplier.to_string().contains('.') { found.mana_multiplier.to_string() } else { format!("{}.0", found.mana_multiplier) }).unwrap();
             writeln!(s, "    racial_leader = {};", found.racial_leader).unwrap();
             write!(s, "    quest_items = [").unwrap();
             for v in found.quest_items.as_slice() {

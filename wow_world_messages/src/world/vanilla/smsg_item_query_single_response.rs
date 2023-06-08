@@ -130,8 +130,8 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             for v in found.damages.as_slice() {
                 writeln!(s, "{{").unwrap();
                 // Members
-                writeln!(s, "    {}", if v.damage_minimum.to_string().contains(".") { v.damage_minimum.to_string() } else { format!("{}.0", v.damage_minimum) }).unwrap();
-                writeln!(s, "    {}", if v.damage_maximum.to_string().contains(".") { v.damage_maximum.to_string() } else { format!("{}.0", v.damage_maximum) }).unwrap();
+                writeln!(s, "    {}", if v.damage_minimum.to_string().contains('.') { v.damage_minimum.to_string() } else { format!("{}.0", v.damage_minimum) }).unwrap();
+                writeln!(s, "    {}", if v.damage_maximum.to_string().contains('.') { v.damage_maximum.to_string() } else { format!("{}.0", v.damage_maximum) }).unwrap();
                 writeln!(s, "        school = {};", v.school.as_test_case_value()).unwrap();
 
                 writeln!(s, "    }},").unwrap();
@@ -146,7 +146,7 @@ impl crate::Message for SMSG_ITEM_QUERY_SINGLE_RESPONSE {
             writeln!(s, "    arcane_resistance = {};", found.arcane_resistance).unwrap();
             writeln!(s, "    delay = {};", found.delay).unwrap();
             writeln!(s, "    ammo_type = {};", found.ammo_type).unwrap();
-            writeln!(s, "    {}", if found.ranged_range_modification.to_string().contains(".") { found.ranged_range_modification.to_string() } else { format!("{}.0", found.ranged_range_modification) }).unwrap();
+            writeln!(s, "    {}", if found.ranged_range_modification.to_string().contains('.') { found.ranged_range_modification.to_string() } else { format!("{}.0", found.ranged_range_modification) }).unwrap();
             write!(s, "    spells = [").unwrap();
             for v in found.spells.as_slice() {
                 writeln!(s, "{{").unwrap();

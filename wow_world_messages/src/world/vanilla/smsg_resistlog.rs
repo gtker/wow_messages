@@ -44,8 +44,8 @@ impl crate::Message for SMSG_RESISTLOG {
         writeln!(s, "    guid1 = {};", self.guid1.guid()).unwrap();
         writeln!(s, "    guid2 = {};", self.guid2.guid()).unwrap();
         writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
-        writeln!(s, "    {}", if self.unknown2.to_string().contains(".") { self.unknown2.to_string() } else { format!("{}.0", self.unknown2) }).unwrap();
-        writeln!(s, "    {}", if self.unknown3.to_string().contains(".") { self.unknown3.to_string() } else { format!("{}.0", self.unknown3) }).unwrap();
+        writeln!(s, "    {}", if self.unknown2.to_string().contains('.') { self.unknown2.to_string() } else { format!("{}.0", self.unknown2) }).unwrap();
+        writeln!(s, "    {}", if self.unknown3.to_string().contains('.') { self.unknown3.to_string() } else { format!("{}.0", self.unknown3) }).unwrap();
         writeln!(s, "    unknown4 = {};", self.unknown4).unwrap();
         writeln!(s, "    unknown5 = {};", self.unknown5).unwrap();
 

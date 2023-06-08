@@ -38,8 +38,8 @@ impl crate::Message for SMSG_GOSSIP_POI {
         // position: Vector2d
         writeln!(s, "    position = {{").unwrap();
         // Members
-        writeln!(s, "    {}", if self.position.x.to_string().contains(".") { self.position.x.to_string() } else { format!("{}.0", self.position.x) }).unwrap();
-        writeln!(s, "    {}", if self.position.y.to_string().contains(".") { self.position.y.to_string() } else { format!("{}.0", self.position.y) }).unwrap();
+        writeln!(s, "    {}", if self.position.x.to_string().contains('.') { self.position.x.to_string() } else { format!("{}.0", self.position.x) }).unwrap();
+        writeln!(s, "    {}", if self.position.y.to_string().contains('.') { self.position.y.to_string() } else { format!("{}.0", self.position.y) }).unwrap();
 
         writeln!(s, "    }};").unwrap();
         writeln!(s, "    icon = {};", self.icon).unwrap();

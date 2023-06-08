@@ -26,8 +26,8 @@ impl crate::Message for MSG_MINIMAP_PING_Client {
 
         writeln!(s, "test MSG_MINIMAP_PING_Client {{").unwrap();
         // Members
-        writeln!(s, "    {}", if self.position_x.to_string().contains(".") { self.position_x.to_string() } else { format!("{}.0", self.position_x) }).unwrap();
-        writeln!(s, "    {}", if self.position_y.to_string().contains(".") { self.position_y.to_string() } else { format!("{}.0", self.position_y) }).unwrap();
+        writeln!(s, "    {}", if self.position_x.to_string().contains('.') { self.position_x.to_string() } else { format!("{}.0", self.position_x) }).unwrap();
+        writeln!(s, "    {}", if self.position_y.to_string().contains('.') { self.position_y.to_string() } else { format!("{}.0", self.position_y) }).unwrap();
 
         writeln!(s, "}} [").unwrap();
 

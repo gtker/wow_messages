@@ -55,7 +55,7 @@ impl crate::Message for SMSG_GAMEOBJECT_QUERY_RESPONSE {
                 write!(s, "{v:#04X}, ").unwrap();
             }
             writeln!(s, "];").unwrap();
-            writeln!(s, "    {}", if found.gameobject_size.to_string().contains(".") { found.gameobject_size.to_string() } else { format!("{}.0", found.gameobject_size) }).unwrap();
+            writeln!(s, "    {}", if found.gameobject_size.to_string().contains('.') { found.gameobject_size.to_string() } else { format!("{}.0", found.gameobject_size) }).unwrap();
         }
 
         writeln!(s, "}} [").unwrap();

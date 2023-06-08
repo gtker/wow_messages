@@ -38,7 +38,7 @@ impl crate::Message for SMSG_LOGIN_SETTIMESPEED {
         writeln!(s, "test SMSG_LOGIN_SETTIMESPEED {{").unwrap();
         // Members
         writeln!(s, "    datetime = {};", self.datetime.as_int()).unwrap();
-        writeln!(s, "    {}", if self.timescale.to_string().contains(".") { self.timescale.to_string() } else { format!("{}.0", self.timescale) }).unwrap();
+        writeln!(s, "    {}", if self.timescale.to_string().contains('.') { self.timescale.to_string() } else { format!("{}.0", self.timescale) }).unwrap();
         writeln!(s, "    unknown1 = {};", self.unknown1).unwrap();
 
         writeln!(s, "}} [").unwrap();

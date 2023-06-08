@@ -36,7 +36,7 @@ impl crate::Message for SMSG_AUCTION_LIST_PENDING_SALES {
             writeln!(s, "        string2 = \"{}\";", v.string2).unwrap();
             writeln!(s, "        unknown1 = {};", v.unknown1).unwrap();
             writeln!(s, "        unknown2 = {};", v.unknown2).unwrap();
-            writeln!(s, "    {}", if v.time_left.to_string().contains(".") { v.time_left.to_string() } else { format!("{}.0", v.time_left) }).unwrap();
+            writeln!(s, "    {}", if v.time_left.to_string().contains('.') { v.time_left.to_string() } else { format!("{}.0", v.time_left) }).unwrap();
 
             writeln!(s, "    }},").unwrap();
         }
