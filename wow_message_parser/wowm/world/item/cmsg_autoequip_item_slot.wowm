@@ -5,3 +5,15 @@ cmsg CMSG_AUTOEQUIP_ITEM_SLOT = 0x010F {
     u8 destination_slot;
 }
 
+test CMSG_AUTOEQUIP_ITEM {
+    source_bag = 255;
+    source_slot = 24;
+} [
+    0x00, 0x06, /* size */
+    0x0A, 0x01, 0x00, 0x00, /* opcode */
+    0xFF, /* source_bag */
+    0x18, /* source_slot */
+] {
+    versions = "1.12";
+}
+

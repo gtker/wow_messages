@@ -29,6 +29,16 @@ CMSG have a header of 6 bytes.
 | 0x06 | 4 / - | [Talent](talent.md) | talent |  |  |
 | 0x0A | 4 / Little | u32 | requested_rank |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 12, // size
+81, 2, 0, 0, // opcode (593)
+158, 0, 0, 0, // talent: Talent BOOMING_VOICE (158)
+0, 0, 0, 0, // requested_rank: u32
+```
 # CMSG_LEARN_TALENT
 
 ## Client Version 2.4.3

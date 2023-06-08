@@ -2036,3 +2036,15 @@ enum Talent : u32 {
 } {
   versions = "3.3.5";
 }
+
+test CMSG_LEARN_TALENT {
+    talent = BOOMING_VOICE;
+    requested_rank = 0;
+} [
+    0x00, 0x0C, /* size */
+    0x51, 0x02, 0x00, 0x00, /* opcode */
+    0x9E, 0x00, 0x00, 0x00, /* talent */
+    0x00, 0x00, 0x00, 0x00, /* requested_rank */
+] {
+    versions = "1.12";
+}

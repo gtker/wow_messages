@@ -18,35 +18,7 @@ pub struct CMSG_LEARN_TALENT {
 #[cfg(feature = "print-testcase")]
 impl CMSG_LEARN_TALENT {
     pub fn to_test_case_string(&self) -> Option<String> {
-        use std::fmt::Write;
-        use crate::traits::Message;
-
-        let mut s = String::new();
-
-        writeln!(s, "test CMSG_LEARN_TALENT {{").unwrap();
-        // Members
-        writeln!(s, "    talent = {};", self.talent.as_test_case_value()).unwrap();
-        writeln!(s, "    requested_rank = {};", self.requested_rank).unwrap();
-
-        writeln!(s, "}} [").unwrap();
-
-        let [a, b] = 12_u16.to_be_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, /* size */").unwrap();
-        let [a, b, c, d] = 593_u32.to_le_bytes();
-        writeln!(s, "    {a:#04X}, {b:#04X}, {c:#04X}, {d:#04X}, /* opcode */").unwrap();
-        let mut bytes: Vec<u8> = Vec::new();
-        self.write_into_vec(&mut bytes).unwrap();
-        let mut bytes = bytes.into_iter();
-
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "talent", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "requested_rank", "    ");
-
-
-        writeln!(s, "] {{").unwrap();
-        writeln!(s, "    versions = \"{}\";", std::env::var("WOWM_TEST_CASE_WORLD_VERSION").unwrap_or("1.12".to_string())).unwrap();
-        writeln!(s, "}}\n").unwrap();
-
-        Some(s)
+        None
     }
 
 }
@@ -95,4 +67,92 @@ impl crate::Message for CMSG_LEARN_TALENT {
 
 #[cfg(feature = "vanilla")]
 impl crate::vanilla::ClientMessage for CMSG_LEARN_TALENT {}
+
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMSG_LEARN_TALENT;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_LEARN_TALENT, expected: &CMSG_LEARN_TALENT) {
+        assert_eq!(t.talent, expected.talent);
+        assert_eq!(t.requested_rank, expected.requested_rank);
+    }
+
+    const RAW0: [u8; 14] = [ 0x00, 0x0C, 0x51, 0x02, 0x00, 0x00, 0x9E, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> CMSG_LEARN_TALENT {
+        CMSG_LEARN_TALENT {
+            talent: Talent::BoomingVoice,
+            requested_rank: 0x0,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/spell/cmsg_learn_talent.wowm` line 2040.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmsg_learn_talent0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_LEARN_TALENT(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_LEARN_TALENT, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(8 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/spell/cmsg_learn_talent.wowm` line 2040.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmsg_learn_talent0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_LEARN_TALENT(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_LEARN_TALENT, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(8 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/spell/cmsg_learn_talent.wowm` line 2040.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmsg_learn_talent0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_LEARN_TALENT(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_LEARN_TALENT, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(8 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
 

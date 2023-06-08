@@ -29,3 +29,13 @@ CMSG have a header of 6 bytes.
 | 0x06 | 1 / - | u8 | source_bag |  |  |
 | 0x07 | 1 / - | u8 | source_slot |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 6, // size
+10, 1, 0, 0, // opcode (266)
+255, // source_bag: u8
+24, // source_slot: u8
+```
