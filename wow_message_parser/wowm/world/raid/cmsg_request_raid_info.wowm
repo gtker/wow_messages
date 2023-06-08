@@ -1,4 +1,13 @@
-#tag_all versions "1.12 2 3.3.5";
+cmsg CMSG_REQUEST_RAID_INFO = 0x02CD {} {
+    comment = "Sent when the client enters the world.";
+    versions = "1.12 2 3.3.5";
+}
 
-cmsg CMSG_REQUEST_RAID_INFO = 0x02CD {}
+test CMSG_REQUEST_RAID_INFO {
+} [
+    0x00, 0x04, /* size */
+    0xCD, 0x02, 0x00, 0x00, /* opcode */
+] {
+    versions = "1.12";
+}
 

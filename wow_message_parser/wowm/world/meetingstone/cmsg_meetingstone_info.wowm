@@ -1,4 +1,13 @@
-#tag_all versions "1 2"; /* In wrath this is a different message */
+cmsg CMSG_MEETINGSTONE_INFO = 0x0296 {} {
+    versions = "1 2"; /* In wrath this is a different message */
+    comment = "Sent when the client enters the world.";
+}
 
-cmsg CMSG_MEETINGSTONE_INFO = 0x0296 {}
+test CMSG_MEETINGSTONE_INFO {
+} [
+    0x00, 0x04, /* size */
+    0x96, 0x02, 0x00, 0x00, /* opcode */
+] {
+    versions = "1.12";
+}
 

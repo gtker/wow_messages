@@ -173,5 +173,75 @@ mod test {
         assert_eq!(dest, RAW0);
     }
 
+    const RAW1: [u8; 10] = [ 0x00, 0x08, 0xF4, 0x01, 0x00, 0x00, 0x0C, 0x00, 0x00,
+         0x00, ];
+
+    pub(crate) fn expected1() -> CMSG_ZONEUPDATE {
+        CMSG_ZONEUPDATE {
+            area: Area::ElwynnForest,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm` line 19.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmsg_zoneupdate1() {
+        let expected = expected1();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_ZONEUPDATE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_ZONEUPDATE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(4 + HEADER_SIZE, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm` line 19.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmsg_zoneupdate1() {
+        let expected = expected1();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_ZONEUPDATE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_ZONEUPDATE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(4 + HEADER_SIZE, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/client_set/cmsg_zoneupdate.wowm` line 19.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmsg_zoneupdate1() {
+        let expected = expected1();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_ZONEUPDATE(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_ZONEUPDATE, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(4 + HEADER_SIZE, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
 }
 

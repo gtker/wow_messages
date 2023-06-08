@@ -99,3 +99,181 @@ impl crate::vanilla::ClientMessage for CMSG_MOVE_TIME_SKIPPED {}
 #[cfg(feature = "tbc")]
 impl crate::tbc::ClientMessage for CMSG_MOVE_TIME_SKIPPED {}
 
+#[cfg(all(feature = "vanilla", test))]
+mod test_vanilla {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMSG_MOVE_TIME_SKIPPED;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::Guid;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_MOVE_TIME_SKIPPED, expected: &CMSG_MOVE_TIME_SKIPPED) {
+        assert_eq!(t.guid, expected.guid);
+        assert_eq!(t.lag, expected.lag);
+    }
+
+    const RAW0: [u8; 18] = [ 0x00, 0x10, 0xCE, 0x02, 0x00, 0x00, 0x17, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> CMSG_MOVE_TIME_SKIPPED {
+        CMSG_MOVE_TIME_SKIPPED {
+            guid: Guid::new(0x17),
+            lag: 0x20,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_move_time_skipped.wowm` line 8.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmsg_move_time_skipped0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_MOVE_TIME_SKIPPED(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_MOVE_TIME_SKIPPED, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(12 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_move_time_skipped.wowm` line 8.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmsg_move_time_skipped0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_MOVE_TIME_SKIPPED(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_MOVE_TIME_SKIPPED, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(12 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_move_time_skipped.wowm` line 8.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmsg_move_time_skipped0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_MOVE_TIME_SKIPPED(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_MOVE_TIME_SKIPPED, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(12 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+
+#[cfg(all(feature = "tbc", test))]
+mod test_tbc {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMSG_MOVE_TIME_SKIPPED;
+    use super::*;
+    use super::super::*;
+    use crate::tbc::opcodes::ClientOpcodeMessage;
+    use crate::Guid;
+    use crate::tbc::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_MOVE_TIME_SKIPPED, expected: &CMSG_MOVE_TIME_SKIPPED) {
+        assert_eq!(t.guid, expected.guid);
+        assert_eq!(t.lag, expected.lag);
+    }
+
+    const RAW0: [u8; 18] = [ 0x00, 0x10, 0xCE, 0x02, 0x00, 0x00, 0x17, 0x00, 0x00,
+         0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> CMSG_MOVE_TIME_SKIPPED {
+        CMSG_MOVE_TIME_SKIPPED {
+            guid: Guid::new(0x17),
+            lag: 0x20,
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_move_time_skipped.wowm` line 8.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmsg_move_time_skipped0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_MOVE_TIME_SKIPPED(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_MOVE_TIME_SKIPPED, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(12 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_move_time_skipped.wowm` line 8.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmsg_move_time_skipped0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_MOVE_TIME_SKIPPED(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_MOVE_TIME_SKIPPED, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(12 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/movement/cmsg/cmsg_move_time_skipped.wowm` line 8.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmsg_move_time_skipped0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_MOVE_TIME_SKIPPED(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_MOVE_TIME_SKIPPED, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(12 + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+}
+

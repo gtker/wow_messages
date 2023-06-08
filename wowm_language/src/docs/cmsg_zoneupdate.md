@@ -44,6 +44,13 @@ CMSG have a header of 6 bytes.
 244, 1, 0, 0, // opcode (500)
 101, 6, 0, 0, // area: Area ORGRIMMAR (1637)
 ```
+#### Example 2
+
+```c
+0, 8, // size
+244, 1, 0, 0, // opcode (500)
+12, 0, 0, 0, // area: Area ELWYNN_FOREST (12)
+```
 # CMSG_ZONEUPDATE
 
 ## Client Version 2.4.3

@@ -29,6 +29,16 @@ CMSG have a header of 6 bytes.
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x0E | 4 / Little | u32 | lag |  |  |
 
+### Examples
+
+#### Example 1
+
+```c
+0, 16, // size
+206, 2, 0, 0, // opcode (718)
+23, 0, 0, 0, 0, 0, 0, 0, // guid: Guid
+32, 0, 0, 0, // lag: u32
+```
 # CMSG_MOVE_TIME_SKIPPED
 
 ## Client Version 3.3.5

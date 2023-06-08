@@ -16,3 +16,13 @@ test CMSG_ZONEUPDATE {
     versions = "1.12";
 }
 
+test CMSG_ZONEUPDATE {
+    area = ELWYNN_FOREST;
+} [
+    0x00, 0x08, /* size */
+    0xF4, 0x01, 0x00, 0x00, /* opcode */
+    0x0C, 0x00, 0x00, 0x00, /* area */
+] {
+    versions = "1.12";
+}
+

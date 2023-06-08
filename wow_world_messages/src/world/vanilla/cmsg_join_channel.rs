@@ -115,3 +115,165 @@ impl CMSG_JOIN_CHANNEL {
     }
 }
 
+#[cfg(test)]
+mod test {
+    #![allow(clippy::missing_const_for_fn)]
+    use super::CMSG_JOIN_CHANNEL;
+    use super::*;
+    use super::super::*;
+    use crate::vanilla::opcodes::ClientOpcodeMessage;
+    use crate::vanilla::{ClientMessage, ServerMessage};
+
+    const HEADER_SIZE: usize = 2 + 4;
+    fn assert(t: &CMSG_JOIN_CHANNEL, expected: &CMSG_JOIN_CHANNEL) {
+        assert_eq!(t.channel_name, expected.channel_name);
+        assert_eq!(t.channel_password, expected.channel_password);
+    }
+
+    const RAW0: [u8; 31] = [ 0x00, 0x1D, 0x97, 0x00, 0x00, 0x00, 0x47, 0x65, 0x6E,
+         0x65, 0x72, 0x61, 0x6C, 0x20, 0x2D, 0x20, 0x45, 0x6C, 0x77, 0x79, 0x6E,
+         0x6E, 0x20, 0x46, 0x6F, 0x72, 0x65, 0x73, 0x74, 0x00, 0x00, ];
+
+    pub(crate) fn expected0() -> CMSG_JOIN_CHANNEL {
+        CMSG_JOIN_CHANNEL {
+            channel_name: String::from("General - Elwynn Forest"),
+            channel_password: String::from(""),
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_join_channel.wowm` line 8.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmsg_join_channel0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW0)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_JOIN_CHANNEL(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_JOIN_CHANNEL, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_join_channel.wowm` line 8.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmsg_join_channel0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_JOIN_CHANNEL(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_JOIN_CHANNEL, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_join_channel.wowm` line 8.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmsg_join_channel0() {
+        let expected = expected0();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW0)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_JOIN_CHANNEL(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_JOIN_CHANNEL, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW0.len());
+
+        let mut dest = Vec::with_capacity(RAW0.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW0);
+    }
+
+    const RAW1: [u8; 36] = [ 0x00, 0x22, 0x97, 0x00, 0x00, 0x00, 0x4C, 0x6F, 0x63,
+         0x61, 0x6C, 0x44, 0x65, 0x66, 0x65, 0x6E, 0x73, 0x65, 0x20, 0x2D, 0x20,
+         0x45, 0x6C, 0x77, 0x79, 0x6E, 0x6E, 0x20, 0x46, 0x6F, 0x72, 0x65, 0x73,
+         0x74, 0x00, 0x00, ];
+
+    pub(crate) fn expected1() -> CMSG_JOIN_CHANNEL {
+        CMSG_JOIN_CHANNEL {
+            channel_name: String::from("LocalDefense - Elwynn Forest"),
+            channel_password: String::from(""),
+        }
+
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_join_channel.wowm` line 20.
+    #[cfg(feature = "sync")]
+    #[cfg_attr(feature = "sync", test)]
+    fn cmsg_join_channel1() {
+        let expected = expected1();
+        let t = ClientOpcodeMessage::read_unencrypted(&mut std::io::Cursor::new(&RAW1)).unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_JOIN_CHANNEL(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_JOIN_CHANNEL, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_join_channel.wowm` line 20.
+    #[cfg(feature = "tokio")]
+    #[cfg_attr(feature = "tokio", tokio::test)]
+    async fn tokio_cmsg_join_channel1() {
+        let expected = expected1();
+        let t = ClientOpcodeMessage::tokio_read_unencrypted(&mut std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_JOIN_CHANNEL(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_JOIN_CHANNEL, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.tokio_write_unencrypted_client(&mut std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+    // Generated from `wow_message_parser/wowm/world/chat/cmsg_join_channel.wowm` line 20.
+    #[cfg(feature = "async-std")]
+    #[cfg_attr(feature = "async-std", async_std::test)]
+    async fn astd_cmsg_join_channel1() {
+        let expected = expected1();
+        let t = ClientOpcodeMessage::astd_read_unencrypted(&mut async_std::io::Cursor::new(&RAW1)).await.unwrap();
+        let t = match t {
+            ClientOpcodeMessage::CMSG_JOIN_CHANNEL(t) => t,
+            opcode => panic!("incorrect opcode. Expected CMSG_JOIN_CHANNEL, got {opcode:#?}"),
+        };
+
+        assert(&t, &expected);
+        assert_eq!(t.size() + HEADER_SIZE, RAW1.len());
+
+        let mut dest = Vec::with_capacity(RAW1.len());
+        expected.astd_write_unencrypted_client(&mut async_std::io::Cursor::new(&mut dest)).await.unwrap();
+
+        assert_eq!(dest, RAW1);
+    }
+
+}
+
