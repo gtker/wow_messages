@@ -3,7 +3,7 @@ use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::version::{LoginVersion, MajorWorldVersion, Version};
 use crate::rust_printer::structs::print_common_impls::impl_read_write_non_trait;
 use crate::rust_printer::{
-    ImplType, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO,
+    ImplType, Writer, ASYNC_STD_IMPORT, CFG_ASYNC_ASYNC_STD, CFG_ASYNC_TOKIO, CFG_TESTCASE,
     CLIENT_MESSAGE_TRAIT_NAME, EXPECTED_OPCODE_ERROR, PARSE_ERROR, SERVER_MESSAGE_TRAIT_NAME,
     SYNC_IMPORT, TOKIO_IMPORT,
 };
@@ -400,6 +400,26 @@ pub(crate) fn common_impls_world(
         if any_container_is_pure_movement_info(v) {
             world_movement_info(s, v);
         }
+
+        s.wln(CFG_TESTCASE);
+        s.funcn_pub("to_test_case_string(&self)", "Option<String>", |s| {
+            s.body("match self", |s| {
+                for container in v {
+                    if container.empty_body() {
+                        s.wln(format!(
+                            "Self::{en} => {name}{{}}.to_test_case_string(),",
+                            en = get_enumerator_name(container.name()),
+                            name = container.name(),
+                        ));
+                    } else {
+                        s.wln(format!(
+                            "Self::{en}(c) => c.to_test_case_string(),",
+                            en = get_enumerator_name(container.name()),
+                        ));
+                    }
+                }
+            });
+        });
     });
 
     impl_display(s, v, ty);
