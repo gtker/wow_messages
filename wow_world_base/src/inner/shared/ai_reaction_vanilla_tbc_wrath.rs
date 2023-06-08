@@ -12,19 +12,14 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum AiReaction {
     /// pre-aggro (used in client packet handler)
-    ///
     Alert,
     /// (NOT used in client packet handler)
-    ///
     Friendly,
     /// sent on every attack, triggers aggro sound (used in client packet handler)
-    ///
     Hostile,
     /// seen for polymorph (when AI not in control of self?) (NOT used in client packet handler)
-    ///
     Afraid,
     /// used on object destroy (NOT used in client packet handler)
-    ///
     Destroy,
 }
 

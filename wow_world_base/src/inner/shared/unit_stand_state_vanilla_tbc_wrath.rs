@@ -27,7 +27,6 @@ pub enum UnitStandState {
     Kneel,
     /// Used for Cthun according to cmangos.
     /// mangos-tbc: Depends on model animation. Submerge, freeze, hide, hibernate, rest
-    ///
     Custom,
 }
 

@@ -11,7 +11,6 @@ use std::io::{Read, Write};
 pub struct SMSG_BATTLEFIELD_MGR_QUEUE_INVITE {
     pub battle_id: u32,
     /// Possibly not used.
-    ///
     pub warmup: u8,
 }
 

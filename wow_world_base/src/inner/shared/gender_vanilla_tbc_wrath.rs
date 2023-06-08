@@ -12,7 +12,6 @@ pub enum Gender {
     Male,
     Female,
     /// Apparently used by hunter and warlock pets.
-    ///
     None,
 }
 

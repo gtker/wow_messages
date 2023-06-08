@@ -12,7 +12,6 @@ use crate::vanilla::GmTicketType;
 /// ```
 pub struct CMSG_GMTICKET_UPDATETEXT {
     /// cmangos does not have this field, vmangos does.
-    ///
     pub ticket_type: GmTicketType,
     pub message: String,
 }

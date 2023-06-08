@@ -41,7 +41,6 @@ pub struct SMSG_MONSTER_MOVE_TRANSPORT {
     pub guid: Guid,
     pub transport: Guid,
     /// cmangos-wotlk sets to 0
-    ///
     pub unknown: u8,
     pub spline_point: Vector3d,
     pub spline_id: u32,

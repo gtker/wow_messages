@@ -11,10 +11,8 @@
 pub enum AddonType {
     Banned,
     /// Shows addon in list. Probably intended for player-created addons.
-    ///
     Enabled,
     /// Hides addon from list.
-    ///
     Blizzard,
 }
 

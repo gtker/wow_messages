@@ -27,10 +27,8 @@ pub enum QuestGiverStatus {
     AvailableRep,
     Available,
     /// no yellow dot on minimap
-    ///
     Reward2,
     /// yellow dot on minimap
-    ///
     Reward,
 }
 

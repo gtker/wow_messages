@@ -11,7 +11,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct SMSG_RECEIVED_MAIL {
     /// cmangos/vmangos sends 0 as u32, mangoszero sends 0 as f32
-    ///
     pub unknown1: u32,
 }
 

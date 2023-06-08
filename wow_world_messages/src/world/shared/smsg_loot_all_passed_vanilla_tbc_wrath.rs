@@ -19,7 +19,6 @@ pub struct SMSG_LOOT_ALL_PASSED {
     pub item: u32,
     pub item_random_property_id: u32,
     /// vmangos/mangoszero: Always set to 0.
-    ///
     pub item_random_suffix_id: u32,
 }
 

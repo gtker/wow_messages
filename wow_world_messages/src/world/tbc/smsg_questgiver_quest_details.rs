@@ -43,11 +43,9 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub money_reward: Gold,
     pub honor_reward: u32,
     /// mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0)
-    ///
     pub reward_spell: u32,
     pub casted_spell: u32,
     /// mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles)
-    ///
     pub title_reward: u32,
     pub emotes: Vec<QuestDetailsEmote>,
 }

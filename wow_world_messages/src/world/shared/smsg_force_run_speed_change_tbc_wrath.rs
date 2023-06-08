@@ -20,11 +20,9 @@ pub struct SMSG_FORCE_RUN_SPEED_CHANGE {
     pub guid: Guid,
     /// cmangos/mangoszero/vmangos: set to 0
     /// cmangos/mangoszero/vmangos: moveEvent, NUM_PMOVE_EVTS = 0x39
-    ///
     pub move_event: u32,
     /// mangosone sets to 0
     /// mangosone: new 2.1.0
-    ///
     pub unknown: u8,
     pub speed: f32,
 }

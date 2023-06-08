@@ -351,7 +351,6 @@ impl HitInfo {
     }
 
     /// req correct packet structure
-    ///
     pub const fn new_unk1() -> Self {
         Self { inner: Self::UNK1 }
     }
@@ -551,7 +550,6 @@ impl HitInfo {
     }
 
     /// critical hit
-    ///
     pub const fn new_criticalhit() -> Self {
         Self { inner: Self::CRITICALHIT }
     }
@@ -625,7 +623,6 @@ impl HitInfo {
     }
 
     /// blocked damage
-    ///
     pub const fn new_block() -> Self {
         Self { inner: Self::BLOCK }
     }
@@ -645,7 +642,6 @@ impl HitInfo {
     }
 
     /// set only if meleespellid is present. no world text when victim is hit for 0 dmg(HideWorldTextForNoDamage?)
-    ///
     pub const fn new_unk14() -> Self {
         Self { inner: Self::UNK14 }
     }
@@ -665,7 +661,6 @@ impl HitInfo {
     }
 
     /// player victim? something related to blod sprut visual (`BloodSpurtInBack`?)
-    ///
     pub const fn new_unk15() -> Self {
         Self { inner: Self::UNK15 }
     }
@@ -775,7 +770,6 @@ impl HitInfo {
     }
 
     /// unused?
-    ///
     pub const fn new_swingnohitsound() -> Self {
         Self { inner: Self::SWINGNOHITSOUND }
     }
@@ -831,7 +825,6 @@ impl HitInfo {
     }
 
     /// enables damage animation even if no damage done. set only if no damage
-    ///
     pub const fn new_fake_damage() -> Self {
         Self { inner: Self::FAKE_DAMAGE }
     }

@@ -22,7 +22,6 @@ pub struct ReceivedMail {
     pub stationery: u32,
     /// mangosone sets to `0xC6000000`
     /// mangosone: float unk, time or something
-    ///
     pub time: f32,
 }
 

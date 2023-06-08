@@ -230,7 +230,6 @@ impl ItemFlag {
     }
 
     /// not used
-    ///
     pub const fn new_no_pickup() -> Self {
         Self { inner: Self::NO_PICKUP }
     }
@@ -268,7 +267,6 @@ impl ItemFlag {
     }
 
     /// affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED`
-    ///
     pub const fn new_lootable() -> Self {
         Self { inner: Self::LOOTABLE }
     }
@@ -288,7 +286,6 @@ impl ItemFlag {
     }
 
     /// can't repeat old note: appears red icon (like when item durability==0)
-    ///
     pub const fn new_deprecated() -> Self {
         Self { inner: Self::DEPRECATED }
     }
@@ -308,7 +305,6 @@ impl ItemFlag {
     }
 
     /// used for totem. Item can not be destroyed, except by using spell (item can be reagent for spell and then allowed)
-    ///
     pub const fn new_indestructible() -> Self {
         Self { inner: Self::INDESTRUCTIBLE }
     }
@@ -328,7 +324,6 @@ impl ItemFlag {
     }
 
     /// ? old note: usable
-    ///
     pub const fn new_player_cast() -> Self {
         Self { inner: Self::PLAYER_CAST }
     }
@@ -384,7 +379,6 @@ impl ItemFlag {
     }
 
     /// used or not used wrapper
-    ///
     pub const fn new_wrapper() -> Self {
         Self { inner: Self::WRAPPER }
     }
@@ -404,7 +398,6 @@ impl ItemFlag {
     }
 
     /// ignore bag space at new item creation?
-    ///
     pub const fn new_ignore_bag_space() -> Self {
         Self { inner: Self::IGNORE_BAG_SPACE }
     }
@@ -424,7 +417,6 @@ impl ItemFlag {
     }
 
     /// determines if item is party loot or not
-    ///
     pub const fn new_party_loot() -> Self {
         Self { inner: Self::PARTY_LOOT }
     }
@@ -444,7 +436,6 @@ impl ItemFlag {
     }
 
     /// guild charter
-    ///
     pub const fn new_charter() -> Self {
         Self { inner: Self::CHARTER }
     }
@@ -464,7 +455,6 @@ impl ItemFlag {
     }
 
     /// Only readable items have this (but not all)
-    ///
     pub const fn new_has_text() -> Self {
         Self { inner: Self::HAS_TEXT }
     }

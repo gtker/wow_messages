@@ -30,7 +30,6 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
     pub damage_state: u32,
     pub unknown1: u32,
     /// vmangos: spell id, seen with heroic strike and disarm as examples
-    ///
     pub spell_id: u32,
     pub blocked_amount: u32,
 }

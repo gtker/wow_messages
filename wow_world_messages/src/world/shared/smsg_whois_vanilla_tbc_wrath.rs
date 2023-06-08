@@ -9,7 +9,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct SMSG_WHOIS {
     /// vmangos: max CString length allowed: 256
-    ///
     pub message: String,
 }
 

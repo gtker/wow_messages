@@ -202,10 +202,8 @@ pub enum SpellEffect {
     Language,
     DualWield,
     /// old SPELL_EFFECT_SUMMON_WILD
-    ///
     Unknown41,
     /// old SPELL_EFFECT_SUMMON_GUARDIAN
-    ///
     Unknown42,
     TeleportUnitsFaceCaster,
     SkillStep,
@@ -238,10 +236,8 @@ pub enum SpellEffect {
     Pickpocket,
     AddFarsight,
     /// old SPELL_EFFECT_SUMMON_POSSESSED
-    ///
     Unknown73,
     /// old SPELL_EFFECT_SUMMON_TOTEM
-    ///
     Unknown74,
     HealMechanical,
     SummonObjectWild,
@@ -256,27 +252,21 @@ pub enum SpellEffect {
     SummonPlayer,
     ActivateObject,
     /// old SPELL_EFFECT_SUMMON_TOTEM_SLOT1
-    ///
     Unknown87,
     /// old SPELL_EFFECT_SUMMON_TOTEM_SLOT2
-    ///
     Unknown88,
     /// old SPELL_EFFECT_SUMMON_TOTEM_SLOT3
-    ///
     Unknown89,
     /// old SPELL_EFFECT_SUMMON_TOTEM_SLOT4
-    ///
     Unknown90,
     ThreatAll,
     EnchantHeldItem,
     /// old SPELL_EFFECT_SUMMON_PHANTASM
-    ///
     Unknown93,
     SelfResurrect,
     Skinning,
     Charge,
     /// old SPELL_EFFECT_SUMMON_CRITTER
-    ///
     Unknown97,
     KnockBack,
     Disenchant,
@@ -293,7 +283,6 @@ pub enum SpellEffect {
     DestroyAllTotems,
     DurabilityDamage,
     /// old SPELL_EFFECT_SUMMON_DEMON
-    ///
     Unknown112,
     ResurrectNew,
     AttackMe,

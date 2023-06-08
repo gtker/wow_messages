@@ -14,13 +14,10 @@ pub enum MailMessageType {
     Normal,
     Auction,
     /// client send CMSG_CREATURE_QUERY on this mailmessagetype
-    ///
     Creature,
     /// client send CMSG_GAMEOBJECT_QUERY on this mailmessagetype
-    ///
     Gameobject,
     /// client send CMSG_ITEM_QUERY on this mailmessagetype
-    ///
     Item,
 }
 

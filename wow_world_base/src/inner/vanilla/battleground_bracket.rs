@@ -13,22 +13,16 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum BattlegroundBracket {
     /// 10-19
-    ///
     Tens,
     /// 20-29
-    ///
     Twenties,
     /// 30-39
-    ///
     Thirties,
     /// 40-49
-    ///
     Fourties,
     /// 50-59
-    ///
     Fifties,
     /// 60
-    ///
     Sixty,
 }
 

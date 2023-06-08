@@ -89,238 +89,162 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum WorldResult {
     /// Shows `Success` with `Okay` button.
-    ///
     ResponseSuccess,
     /// Shows `Failure` with `Okay` button.
-    ///
     ResponseFailure,
     /// Shows `Cancelled` with `Okay` button.
-    ///
     ResponseCancelled,
     /// Shows `Disconnected from server` with `Okay` button.
-    ///
     ResponseDisconnected,
     /// Shows `Failed to connect. Please be sure that your computer is currently connected to the internet, and that no security features on your system might be blocking traffic. See www.wow-europe.com/en/support for more information.` with `Okay` button.
-    ///
     ResponseFailedToConnect,
     /// Shows `Connected` with `Okay` button.
-    ///
     ResponseConnected,
     /// Shows `Wrong client version` with `Okay` button.
-    ///
     ResponseVersionMismatch,
     /// Shows `Connecting to server...` with `Okay` button.
-    ///
     CstatusConnecting,
     /// Shows `Negotiating security` with `Okay` button.
-    ///
     CstatusNegotiatingSecurity,
     /// Shows `Security negotiation complete` with `Okay` button.
-    ///
     CstatusNegotiationComplete,
     /// Shows `Security negotiation failed` with `Okay` button.
-    ///
     CstatusNegotiationFailed,
     /// Shows `Authenticating` with `Okay` button.
-    ///
     CstatusAuthenticating,
     /// Shows `Authentication Successful` with `Okay` button.
-    ///
     AuthOk,
     /// Shows `Authentication failed` with `Okay` button.
-    ///
     AuthFailed,
     /// Shows `Login unavailable - Please contact Technical Support at http://www.wow-europe.com/en/support/` with `Okay` button.
-    ///
     AuthReject,
     /// Shows `Server is not valid` with `Okay` button.
-    ///
     AuthBadServerProof,
     /// Shows `System unavailable - Please try again later` with `Okay` button.
-    ///
     AuthUnavailable,
     AuthSystemError,
     /// Shows `Billing system error` with `Okay` button.
-    ///
     AuthBillingError,
     /// Shows `Account billing has expired` with `Okay` button.
-    ///
     AuthBillingExpired,
     /// Shows `Wrong client version` with `Okay` button.
-    ///
     AuthVersionMismatch,
     /// Shows `Unknown account` with `Okay` button.
-    ///
     AuthUnknownAccount,
     /// Shows `Incorrect Password` with `Okay` button.
-    ///
     AuthIncorrectPassword,
     /// Shows `Session Expired` with `Okay` button.
-    ///
     AuthSessionExpired,
     AuthServerShuttingDown,
     /// Shows `Already Logging In` with `Okay` button.
-    ///
     AuthAlreadyLoggingIn,
     /// Shows `Invalid Login Server` with `Okay` button.
-    ///
     AuthLoginServerNotFound,
     /// If this is sent without a `queue_position` field it will either reuse the one from before or use 0.
-    ///
     AuthWaitQueue,
     /// Shows `This account has been banned for violating the Terms of Use Agreement- http://www.wow-europe.com/en/lega. Please contact our GM department at http://www.wow-europe.com/en/support/ for more information.` with `Okay` button.
-    ///
     AuthBanned,
     /// Shows `This character is still logged on. If this character is not logged in and you continue to experience this issue for more than 15 minutes, please contact our Technical Support Department at http://www.wow-europe.com/en/support/` with `Okay` button.
-    ///
     AuthAlreadyOnline,
     /// Shows `Your World of Warcraft subscription has expired. You will need to reactivate your account. To do so, please visit http://signup.wow-europe.com/ for more information.` with `Okay` button.
-    ///
     AuthNoTime,
     /// Shows `This session has timed out. Please try again at a later time or check the status of our WoW realms at http://www.wow-europe.com/en/serverstatus` with `Okay` button.
-    ///
     AuthDbBusy,
     /// Shows 'This account has been temporarily suspended for violating the Terms of Use Agreement - `http://www.wow-europe.com/en/legal`. Please contact our GM department at `http://www.wow-europe.com/en/support/` for more information.' with 'Okay' button.
-    ///
     AuthSuspended,
     /// Shows 'Access to this account has been blocked by parental controls. Your settings may be changed in your preferences at `http://www.worldofwarcraft.com`.' with 'Okay' button.
-    ///
     AuthParentalControl,
     /// Shows 'Retrieving realm list' with 'Okay' button.
-    ///
     RealmListInProgress,
     /// Shows 'Realm list retrieved' with 'Okay' button.
-    ///
     RealmListSuccess,
     /// Shows 'Unable to connect to realm list server' with 'Okay' button.
-    ///
     RealmListFailed,
     /// Shows 'Invalid realm list' with 'Okay' button.
-    ///
     RealmListInvalid,
     /// Shows 'The game server you have chosen is currently down. Use the Change Realm button to choose another Realm. Check `http://www.wow-europe.com/en/serverstatus` for current server status.' with 'Okay' button.
-    ///
     RealmListRealmNotFound,
     /// Shows 'Creating account' with 'Okay' button.
-    ///
     AccountCreateInProgress,
     /// Shows 'Account created' with 'Okay' button.
-    ///
     AccountCreateSuccess,
     /// Shows 'Account creation failed' with 'Okay' button.
-    ///
     AccountCreateFailed,
     /// Shows 'Retrieving character list' with 'Okay' button.
-    ///
     CharListRetrieving,
     /// Shows 'Character list retrieved' with 'Okay' button.
-    ///
     CharListRetrieved,
     /// Shows 'Error retrieving character list' with 'Okay' button.
-    ///
     CharListFailed,
     /// Shows 'Creating character' with 'Okay' button.
-    ///
     CharCreateInProgress,
     CharCreateSuccess,
     CharCreateError,
     /// Shows 'Character creation failed' with 'Okay' button.
-    ///
     CharCreateFailed,
     /// Shows 'That name is unavailable' with 'Okay' button.
-    ///
     CharCreateNameInUse,
     /// Shows 'Creation of that race and/or class is currently disabled.' with 'Okay' button.
-    ///
     CharCreateDisabled,
     /// Shows 'You cannot have both a Horde and an Alliance character on the same PvP realm' with 'Okay' button.
-    ///
     CharCreatePvpTeamsViolation,
     CharCreateServerLimit,
     /// Shows 'You already have the maximum number of characters allowed on this account.' with 'Okay' button.
-    ///
     CharCreateAccountLimit,
     CharCreateServerQueue,
     /// Shows 'Only players who already have characters on this realm are currently allowed to create characters.' with 'Okay' button.
-    ///
     CharCreateOnlyExisting,
     /// Shows 'Deleting character' with 'Okay' button.
-    ///
     CharDeleteInProgress,
     /// Shows 'Character deleted' with 'Okay' button.
-    ///
     CharDeleteSuccess,
     /// Shows 'Character deletion failed' with 'Okay' button.
-    ///
     CharDeleteFailed,
     /// Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button.
-    ///
     CharDeleteFailedLockedForTransfer,
     /// Shows 'Entering the World of Warcraft' with 'Okay' button.
-    ///
     CharLoginInProgress,
     /// Shows 'Login successful' with 'Okay' button.
-    ///
     CharLoginSuccess,
     /// Shows 'World server is down' with 'Okay' button.
-    ///
     CharLoginNoWorld,
     /// Shows 'A character with that name already exists' with 'Okay' button.
-    ///
     CharLoginDuplicateCharacter,
     /// Shows 'No instance servers are available' with 'Okay' button.
-    ///
     CharLoginNoInstances,
     /// Shows 'Login failed' with 'Okay' button.
-    ///
     CharLoginFailed,
     /// Shows 'Login for that race, class or character is currently disabled.' with 'Okay' button.
-    ///
     CharLoginDisabled,
     /// Shows 'Character not found' with 'Okay' button.
-    ///
     CharLoginNoCharacter,
     /// Shows 'Your character is currently locked as part of the paid character transfer process.' with 'Okay' button.
-    ///
     CharLoginLockedForTransfer,
     /// Shows 'Enter a name for your character' with 'Okay' button.
-    ///
     CharNameNoName,
     /// Shows 'Names must be at least 2 characters' with 'Okay' button.
-    ///
     CharNameTooShort,
     /// Shows 'Names must be no more than 12 characters' with 'Okay' button.
-    ///
     CharNameTooLong,
     /// Shows 'Names can only contain letters' with 'Okay' button.
-    ///
     CharNameOnlyLetters,
     /// Shows 'Names must contain only one language' with 'Okay' button.
-    ///
     CharNameMixedLanguages,
     /// Shows 'That name contains profanity' with 'Okay' button.
-    ///
     CharNameProfane,
     /// Shows 'That name is unavailable' with 'Okay' button.
-    ///
     CharNameReserved,
     /// Shows 'You cannot use an apostrophe as the first or last character of your name' with 'Okay' button.
-    ///
     CharNameInvalidApostrophe,
     /// Shows 'You can only have one apostrophe' with 'Okay' button.
-    ///
     CharNameMultipleApostrophes,
     /// Shows 'You cannot use the same letter three times consecutively' with 'Okay' button.
-    ///
     CharNameThreeConsecutive,
     /// Shows 'You cannot use a space as the first or last character of your name' with 'Okay' button.
-    ///
     CharNameInvalidSpace,
     /// Shows an empty box with 'Okay' button.
-    ///
     CharNameSuccess,
     /// Shows 'Invalid character name' with 'Okay' button.
-    ///
     CharNameFailure,
 }
 

@@ -11,7 +11,6 @@ use std::io::{Read, Write};
 pub struct SMSG_LEARNED_SPELL {
     pub id: u32,
     /// mangostwo: 3.3.3 unk
-    ///
     pub unknown: u16,
 }
 

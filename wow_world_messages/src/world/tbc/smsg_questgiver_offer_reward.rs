@@ -44,11 +44,9 @@ pub struct SMSG_QUESTGIVER_OFFER_REWARD {
     pub honor_reward: u32,
     /// mangostwo: unused by client?
     /// mangostwo sets to 0x08.
-    ///
     pub unknown1: u32,
     pub reward_spell: u32,
     /// mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though.
-    ///
     pub reward_spell_cast: u32,
     pub title_reward: u32,
 }

@@ -15,7 +15,6 @@ use crate::Guid;
 pub struct SMSG_ITEM_ENCHANT_TIME_UPDATE {
     pub item: Guid,
     /// Possibly used with EnchantmentSlot enum.
-    ///
     pub slot: u32,
     pub duration: u32,
     pub player: Guid,

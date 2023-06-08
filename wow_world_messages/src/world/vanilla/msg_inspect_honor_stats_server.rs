@@ -31,15 +31,12 @@ pub struct MSG_INSPECT_HONOR_STATS_Server {
     pub today_honorable_and_dishonorable: u32,
     pub yesterday_honorable: u16,
     /// vmangos: Unknown (deprecated, yesterday dishonourable?)
-    ///
     pub unknown1: u16,
     pub last_week_honorable: u16,
     /// vmangos: Unknown (deprecated, last week dishonourable?)
-    ///
     pub unknown2: u16,
     pub this_week_honorable: u16,
     /// vmangos: Unknown (deprecated, this week dishonourable?)
-    ///
     pub unknown3: u16,
     pub lifetime_honorable: u32,
     pub lifetime_dishonorable: u32,

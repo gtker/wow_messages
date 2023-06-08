@@ -10,13 +10,10 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum AuctionCommandAction {
     /// ERR_AUCTION_STARTED
-    ///
     Started,
     /// ERR_AUCTION_REMOVED
-    ///
     Removed,
     /// ERR_AUCTION_BID_PLACED
-    ///
     BidPlaced,
 }
 

@@ -22,15 +22,12 @@ pub struct SMSG_LOOT_ROLL_WON {
     pub loot_slot: u32,
     pub item: u32,
     /// vmangos/mangoszero: not used ?
-    ///
     pub item_random_suffix: u32,
     pub item_random_property_id: u32,
     pub winning_player: Guid,
     /// rollnumber related to SMSG_LOOT_ROLL
-    ///
     pub winning_roll: u8,
     /// Rolltype related to SMSG_LOOT_ROLL
-    ///
     pub vote: RollVote,
 }
 

@@ -13,11 +13,9 @@ use wow_world_base::shared::realm_split_state_tbc_wrath::RealmSplitState;
 /// ```
 pub struct SMSG_REALM_SPLIT {
     /// ArcEmu/TrinityCore/mangosthree send realm_id from [`CMSG_REALM_SPLIT`](crate::tbc::CMSG_REALM_SPLIT) back.
-    ///
     pub realm_id: u32,
     pub state: RealmSplitState,
     /// Seems to be slash separated string, like '01/01/01'.
-    ///
     pub split_date: String,
 }
 

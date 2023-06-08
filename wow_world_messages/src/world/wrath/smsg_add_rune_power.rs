@@ -10,7 +10,6 @@ use std::io::{Read, Write};
 pub struct SMSG_ADD_RUNE_POWER {
     /// Emus bitshifts 1 by the rune index instead of directly sending the index.
     /// mangostwo: mask (0x00-0x3F probably)
-    ///
     pub rune: u32,
 }
 

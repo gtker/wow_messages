@@ -10,7 +10,6 @@ use std::io::{Read, Write};
 pub struct SMSG_RESURRECT_FAILED {
     /// arcemu is the only emulator that has this.
     /// arcemu sets to 1.
-    ///
     pub unknown: u32,
 }
 

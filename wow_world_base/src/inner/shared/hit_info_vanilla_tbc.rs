@@ -23,28 +23,21 @@
 pub enum HitInfo {
     NormalSwing,
     /// req correct packet structure
-    ///
     Unk1,
     /// no being hit animation on victim without it
-    ///
     AffectsVictim,
     LeftSwing,
     /// According to vmangos used as crit prior to 1.9.
-    ///
     EarlyCriticalHit,
     Miss,
     /// plays absorb sound
-    ///
     Absorb,
     /// resisted atleast some damage
-    ///
     Resist,
     CriticalHit,
     /// wotlk?
-    ///
     Unk9,
     /// wotlk?
-    ///
     Unk10,
     Glancing,
     Crushing,

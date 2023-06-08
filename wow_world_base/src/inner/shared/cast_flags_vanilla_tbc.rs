@@ -153,7 +153,6 @@ impl CastFlags {
     }
 
     /// mangoszero/cmangos/vmangos: hide in combat log?
-    ///
     pub const fn new_hidden_combatlog() -> Self {
         Self { inner: Self::HIDDEN_COMBATLOG }
     }
@@ -245,7 +244,6 @@ impl CastFlags {
     }
 
     /// cmangos/vmangos/mangoszero: Projectiles visual
-    ///
     pub const fn new_ammo() -> Self {
         Self { inner: Self::AMMO }
     }
@@ -265,7 +263,6 @@ impl CastFlags {
     }
 
     /// cmangos/vmangos/mangoszero: !0x41 mask used to call `CGTradeSkillInfo::DoRecast`
-    ///
     pub const fn new_unknown7() -> Self {
         Self { inner: Self::UNKNOWN7 }
     }

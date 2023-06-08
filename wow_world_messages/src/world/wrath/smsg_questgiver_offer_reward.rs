@@ -56,11 +56,9 @@ pub struct SMSG_QUESTGIVER_OFFER_REWARD {
     pub honor_reward_multiplier: f32,
     /// mangostwo: unused by client?
     /// mangostwo sets to 0x08.
-    ///
     pub unknown1: u32,
     pub reward_spell: u32,
     /// mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though.
-    ///
     pub reward_spell_cast: u32,
     pub title_reward: u32,
     pub reward_talents: u32,
@@ -68,10 +66,8 @@ pub struct SMSG_QUESTGIVER_OFFER_REWARD {
     pub reward_reputation_mask: u32,
     pub reward_factions: [u32; 5],
     /// mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row)
-    ///
     pub reward_reputations: [u32; 5],
     /// mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window
-    ///
     pub reward_reputations_override: [u32; 5],
 }
 

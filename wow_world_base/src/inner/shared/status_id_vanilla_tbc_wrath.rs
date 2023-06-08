@@ -12,19 +12,14 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum StatusId {
     /// first status, should mean bg is not instance
-    ///
     None,
     /// means bg is empty and waiting for queue
-    ///
     WaitQueue,
     /// this means, that BG has already started and it is waiting for more players
-    ///
     WaitJoin,
     /// means bg is running
-    ///
     InProgress,
     /// means some faction has won BG and it is ending
-    ///
     WaitLeave,
 }
 

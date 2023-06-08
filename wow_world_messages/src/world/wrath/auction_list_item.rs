@@ -34,7 +34,6 @@ pub struct AuctionListItem {
     pub item_count: u32,
     pub item_charges: u32,
     /// mangosone: item flags (dynamic?) (0x04 no lockId?)
-    ///
     pub item_flags: u32,
     pub item_owner: Guid,
     pub start_bid: u32,

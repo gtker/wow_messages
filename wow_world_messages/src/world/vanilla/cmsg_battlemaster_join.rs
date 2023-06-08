@@ -15,11 +15,9 @@ use crate::vanilla::Map;
 /// ```
 pub struct CMSG_BATTLEMASTER_JOIN {
     /// vmangos: battlemaster guid, or player guid if joining queue from BG portal
-    ///
     pub guid: Guid,
     pub map: Map,
     /// vmangos: 0 if First Available selected
-    ///
     pub instance_id: u32,
     pub join_as_group: bool,
 }

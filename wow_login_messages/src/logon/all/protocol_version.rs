@@ -13,22 +13,16 @@
 pub enum ProtocolVersion {
     /// Used for login by `1.1.2.4125`.
     /// Used for reconnect by `1.1.2.4125`, `1.12.1.5875`, `2.0.0.6080`, and 2.0.1.6180`.
-    ///
     Two,
     /// Used for login by `1.12.1.5875`, `2.0.0.6080`, and `2.0.1.6180`.
-    ///
     Three,
     /// Used for login and reconnect by `2.0.3.6299`.
-    ///
     Five,
     /// Used for login and reconnect by `2.0.5.6320`, `2.0.7.6383`, `2.0.8.6403`, `2.0.10.6448`, `2.0.12.6546`, `2.1.0.6692`, `2.1.0.6729`, `2.1.1.6739`, `2.1.2.6803`, `2.1.3.6898`, `2.2.0.7272`, `2.2.2.7318`, `2.2.2.7318`, and `2.2.3.7359`.
-    ///
     Six,
     /// Used for login and reconnect by `2.3.0.7561`, `2.3.2.7741`, and `2.3.3.7799`.
-    ///
     Seven,
     /// Used for login and reconnect by `2.4.0.8089`, `2.4.1.8125`, `2.4.2.8278`, `2.4.3.8606`, and `3.3.5.12340`.
-    ///
     Eight,
 }
 

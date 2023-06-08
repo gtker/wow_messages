@@ -15,16 +15,12 @@ use std::io::{Read, Write};
 /// ```
 pub struct CMSG_UPDATE_ACCOUNT_DATA {
     /// You can check this against the `CacheMask` to find out if this is character-specific data or account-wide data
-    ///
     pub data_type: u32,
     /// Seconds since unix epoch. The client wants this number back when it requests the ACCOUNT_DATA_TIMES
-    ///
     pub unix_time: u32,
     /// Size of the data block when it is uncompressed. (in bytes)
-    ///
     pub decompressed_size: u32,
     /// Compressed account data (macros, keybinds, etc). The server does not actually care about the uncompressed contents. It only needs to send this back to the client. The server acts as a cross-device storage
-    ///
     pub compressed_data: Vec<u8>,
 }
 

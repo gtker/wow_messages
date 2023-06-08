@@ -9,10 +9,8 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum BattlefieldListLocation {
     /// lua: ShowBattlefieldList
-    ///
     Battlemaster,
     /// lua: RequestBattlegroundInstanceInfo
-    ///
     Ui,
 }
 

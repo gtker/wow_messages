@@ -11,10 +11,8 @@ use std::io::{Read, Write};
 pub struct CMSG_TIME_SYNC_RESP {
     /// Can be used to check if the client is still properly in sync
     /// This should be the same as the counter sent in [`SMSG_TIME_SYNC_REQ`](crate::tbc::SMSG_TIME_SYNC_REQ).
-    ///
     pub time_sync: u32,
     /// You can check this against expected values to estimate client latency
-    ///
     pub client_ticks: u32,
 }
 

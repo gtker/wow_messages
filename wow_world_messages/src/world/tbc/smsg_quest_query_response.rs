@@ -45,40 +45,31 @@ use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 pub struct SMSG_QUEST_QUERY_RESPONSE {
     pub quest_id: u32,
     /// Accepted values: 0, 1 or 2. 0==IsAutoComplete() (skip objectives/details)
-    ///
     pub quest_method: u32,
     pub quest_level: Level,
     pub zone_or_sort: u32,
     pub quest_type: u32,
     pub suggest_player_amount: u32,
     /// cmangos: shown in quest log as part of quest objective
-    ///
     pub reputation_objective_faction: Faction,
     /// cmangos: shown in quest log as part of quest objective
-    ///
     pub reputation_objective_value: u32,
     /// cmangos: RequiredOpositeRepFaction, required faction value with another (oposite) faction (objective). cmangos sets to 0
-    ///
     pub required_opposite_faction: Faction,
     /// cmangos: RequiredOpositeRepValue, required faction value with another (oposite) faction (objective). cmangos sets to 0
-    ///
     pub required_opposite_reputation_value: u32,
     pub next_quest_in_chain: u32,
     pub money_reward: Gold,
     /// cmangos: used in XP calculation at client
-    ///
     pub max_level_money_reward: Gold,
     /// cmangos: reward spell, this spell will display (icon) (casted if RewSpellCast==0)
-    ///
     pub reward_spell: u32,
     /// mangosone: casted spell
-    ///
     pub casted_reward_spell: u32,
     pub honor_reward: u32,
     pub source_item_id: u32,
     pub quest_flags: u32,
     /// CharTitleId, new 2.4.0, player gets this title (id from CharTitles)
-    ///
     pub title_reward: u32,
     pub rewards: [QuestItemReward; 4],
     pub choice_rewards: [QuestItemReward; 6],

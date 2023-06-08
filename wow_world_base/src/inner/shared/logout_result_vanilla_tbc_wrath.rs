@@ -13,7 +13,6 @@ pub enum LogoutResult {
     Success,
     FailureInCombat,
     /// vmangos checks for aura 9454. Has FIXME - Need the correct value.
-    ///
     FailureFrozenByGm,
     FailureJumpingOrFalling,
 }

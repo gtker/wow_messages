@@ -46,7 +46,6 @@ pub struct CMSG_PETITION_BUY {
     pub unknown13: u16,
     pub unknown14: u8,
     /// cmangos/vmangos/mangoszero: Named but never used
-    ///
     pub index: u32,
     pub unknown15: u32,
 }

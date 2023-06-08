@@ -18,7 +18,6 @@ pub enum LfgTeleportError {
     Fatigue,
     InvalidLocation,
     /// azerothcore: It can be 7 or 8
-    ///
     Combat,
 }
 

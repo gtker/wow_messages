@@ -13,7 +13,6 @@ use crate::wrath::Mail;
 /// ```
 pub struct SMSG_MAIL_LIST_RESULT {
     /// azerothcore: this will display warning about undelivered mail to player if realCount > mailsCount
-    ///
     pub real_mail_amount: u32,
     pub mails: Vec<Mail>,
 }

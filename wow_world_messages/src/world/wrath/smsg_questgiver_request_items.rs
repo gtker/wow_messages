@@ -39,20 +39,16 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub emote: u32,
     pub auto_finish: bool,
     /// mangostwo: 3.3.3 questFlags
-    ///
     pub flags1: u32,
     pub suggested_players: u32,
     pub required_money: Gold,
     pub required_items: Vec<QuestItemRequirement>,
     pub completable: QuestCompletable,
     /// mangostwo: set to 0x04
-    ///
     pub flags2: u32,
     /// mangostwo: set to 0x08
-    ///
     pub flags3: u32,
     /// mangostwo: set to 0x10
-    ///
     pub flags4: u32,
 }
 

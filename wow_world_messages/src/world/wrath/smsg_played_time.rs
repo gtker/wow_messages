@@ -11,14 +11,11 @@ use std::io::{Read, Write};
 /// ```
 pub struct SMSG_PLAYED_TIME {
     /// Time played in total (seconds)
-    ///
     pub total_played_time: u32,
     /// Time played on this level (seconds)
-    ///
     pub level_played_time: u32,
     /// Whether this is a silent query or the client should show it on the UI (chat box).
     /// Send back the value received in [`CMSG_PLAYED_TIME`](crate::wrath::CMSG_PLAYED_TIME)
-    ///
     pub show_on_ui: bool,
 }
 

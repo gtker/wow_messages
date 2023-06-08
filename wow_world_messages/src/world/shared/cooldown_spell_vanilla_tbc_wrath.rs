@@ -16,7 +16,6 @@ use std::time::Duration;
 pub struct CooldownSpell {
     pub spell_id: u16,
     /// cmangos/mangoszero: cast item id
-    ///
     pub item_id: u16,
     pub spell_category: u16,
     pub cooldown: Duration,

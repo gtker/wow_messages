@@ -45,7 +45,6 @@ pub struct CMSG_GUILD_BANK_SWAP_ITEMS {
     pub bank: Guid,
     pub source: CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource,
     /// cmangos-tbc/mangosone has extra
-    ///
     pub unknown5: Vec<u8>,
 }
 

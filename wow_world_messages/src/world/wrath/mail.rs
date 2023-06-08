@@ -49,7 +49,6 @@ pub struct Mail {
     pub flags: u32,
     pub expiration_time: f32,
     /// cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc)
-    ///
     pub mail_template_id: u32,
     pub subject: String,
     pub message: String,

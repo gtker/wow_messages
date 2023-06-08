@@ -11,7 +11,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct CMSG_BUG {
     /// cmangos/vmangos/mangoszero: If 0 received bug report, else received suggestion
-    ///
     pub suggestion: u32,
     pub content: String,
     pub bug_type: String,

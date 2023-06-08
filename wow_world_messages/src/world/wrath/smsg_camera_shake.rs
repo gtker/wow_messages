@@ -12,7 +12,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct SMSG_CAMERA_SHAKE {
     /// SpellEffectCameraShakes.dbc
-    ///
     pub camera_shake_id: u32,
     pub unknown: u32,
 }

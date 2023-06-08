@@ -14,7 +14,6 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum SpellSchool {
     /// Physical, Armor
-    ///
     Normal,
     Holy,
     Fire,

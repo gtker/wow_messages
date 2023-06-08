@@ -12,19 +12,14 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum LootSlotType {
     /// player can loot the item.
-    ///
     TypeAllowLoot,
     /// roll is ongoing. player cannot loot.
-    ///
     TypeRollOngoing,
     /// item can only be distributed by group loot master.
-    ///
     TypeMaster,
     /// item is shown in red. player cannot loot.
-    ///
     TypeLocked,
     /// ignore binding confirmation and etc, for single player looting
-    ///
     TypeOwner,
 }
 

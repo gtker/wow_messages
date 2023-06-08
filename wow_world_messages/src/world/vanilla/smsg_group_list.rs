@@ -24,7 +24,6 @@ use crate::vanilla::{
 pub struct SMSG_GROUP_LIST {
     pub group_type: GroupType,
     /// mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))
-    ///
     pub flags: u8,
     pub members: Vec<GroupListMember>,
     pub leader: Guid,

@@ -9,7 +9,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct CMSG_ACCEPT_TRADE {
     /// Skipped in vmangos and set to 1 for bots
-    ///
     pub unknown1: u32,
 }
 

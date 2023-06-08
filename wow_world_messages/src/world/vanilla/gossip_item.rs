@@ -12,11 +12,9 @@ use std::io::{Read, Write};
 /// ```
 pub struct GossipItem {
     /// vmangos: sets to loop index
-    ///
     pub id: u32,
     pub item_icon: u8,
     /// vmangos: makes pop up box password
-    ///
     pub coded: bool,
     pub message: String,
 }

@@ -14,7 +14,6 @@ use crate::wrath::RaidDifficulty;
 pub struct MSG_SET_RAID_DIFFICULTY_Server {
     pub difficulty: RaidDifficulty,
     /// Emus set to 1.
-    ///
     pub unknown1: u32,
     pub in_group: bool,
 }

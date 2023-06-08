@@ -26,7 +26,6 @@ use crate::logon::version_8::RealmFlag;
 /// ```
 pub struct Realm {
     /// vmangos: this is the second column in Cfg_Configs.dbc
-    ///
     pub realm_type: RealmType,
     pub locked: bool,
     pub flag: Realm_RealmFlag,

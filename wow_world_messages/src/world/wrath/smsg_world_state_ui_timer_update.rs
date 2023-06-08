@@ -9,7 +9,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct SMSG_WORLD_STATE_UI_TIMER_UPDATE {
     /// Seconds since Unix Epoch
-    ///
     pub time: u32,
 }
 

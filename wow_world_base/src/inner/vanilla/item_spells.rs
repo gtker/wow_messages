@@ -19,7 +19,6 @@ pub struct ItemSpells {
     pub spell: u32,
     pub spell_trigger: SpellTriggerType,
     /// let the database control the sign here. negative means that the item should be consumed once the charges are consumed.
-    ///
     pub spell_charges: i32,
     pub spell_cooldown: i32,
     pub spell_category: u32,

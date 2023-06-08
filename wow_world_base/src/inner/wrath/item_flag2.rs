@@ -431,7 +431,6 @@ impl ItemFlag2 {
     }
 
     /// when item uses extended cost, gold is also required
-    ///
     pub const fn new_dont_ignore_buy_price() -> Self {
         Self { inner: Self::DONT_IGNORE_BUY_PRICE }
     }

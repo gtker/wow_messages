@@ -18,7 +18,6 @@ use crate::tbc::{
 pub struct MSG_LOOKING_FOR_GROUP_Server {
     pub lfg_type: LfgType,
     /// entry from LfgDunggeons.dbc
-    ///
     pub entry: u32,
     pub amount_of_players_found: u32,
     pub players_displayed: Vec<LfgPlayer>,

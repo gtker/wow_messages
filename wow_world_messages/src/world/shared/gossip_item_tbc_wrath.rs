@@ -16,18 +16,14 @@ use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 /// ```
 pub struct GossipItem {
     /// vmangos: sets to loop index
-    ///
     pub id: u32,
     pub item_icon: u8,
     /// vmangos: makes pop up box password
-    ///
     pub coded: bool,
     /// mangosone: 2.0.3
-    ///
     pub money_required: Gold,
     pub message: String,
     /// mangosone: related to money pop up box, 2.0.3, max 0x800
-    ///
     pub accept_text: String,
 }
 

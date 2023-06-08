@@ -22,7 +22,6 @@ pub enum EncounterFrame {
     UpdateObjective,
     DisableObjective,
     /// azerothcore: can be used to refresh frames after unit was destroyed from client and send back (phase changes)
-    ///
     RefreshFrames,
 }
 

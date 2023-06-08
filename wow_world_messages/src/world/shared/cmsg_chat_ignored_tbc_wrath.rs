@@ -13,7 +13,6 @@ use crate::Guid;
 pub struct CMSG_CHAT_IGNORED {
     pub guid: Guid,
     /// mangosone/arcemu/trinitycore/azerothcore: probably related to spam reporting
-    ///
     pub unknown: u8,
 }
 

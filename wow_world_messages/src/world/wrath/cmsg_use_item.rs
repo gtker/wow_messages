@@ -35,7 +35,6 @@ pub struct CMSG_USE_ITEM {
     pub bag_slot: u8,
     pub spell_index: u8,
     /// mangosone: next cast if exists (single or not)
-    ///
     pub cast_count: u8,
     pub spell: u32,
     pub item: Guid,

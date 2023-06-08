@@ -24,15 +24,12 @@ pub struct SMSG_LFG_PLAYER_REWARD {
     pub dungeon_finished_entry: u32,
     pub done: bool,
     /// emus set to 1.
-    ///
     pub unknown1: u32,
     pub money_reward: Gold,
     pub experience_reward: u32,
     /// emus set to 0.
-    ///
     pub unknown2: u32,
     /// emus set to 0.
-    ///
     pub unknown3: u32,
     pub rewards: Vec<QuestGiverReward>,
 }

@@ -105,7 +105,6 @@ impl SecurityFlag {
 
     /// Matrix Card 2FA which requires a matrix card.
     /// `https://forum.xentax.com/viewtopic.php?f=13&p=186022`
-    ///
     pub const fn new_matrix_card() -> Self {
         Self { inner: Self::MATRIX_CARD }
     }

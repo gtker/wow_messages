@@ -40,15 +40,12 @@ use crate::wrath::{
 /// ```
 pub struct SMSG_BATTLEFIELD_STATUS {
     /// vmangos: players can be in 3 queues at the same time (0..2)
-    ///
     pub queue_slot: u32,
     pub arena_type: ArenaType,
     /// azerothcore sets to 0x0E if it is arena, 0 otherwise.
-    ///
     pub is_arena: u8,
     pub battleground_type: BattlegroundType,
     /// azerothcore sets to 0x1F90
-    ///
     pub unknown1: u16,
     pub minimum_level: u8,
     pub maximum_level: u8,

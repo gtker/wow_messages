@@ -21,7 +21,6 @@ pub struct SMSG_SPELLHEALLOG {
     pub damage: u32,
     pub critical: bool,
     /// mangosone: unused in client?
-    ///
     pub unknown: u8,
 }
 

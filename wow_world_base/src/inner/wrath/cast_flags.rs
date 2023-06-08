@@ -406,7 +406,6 @@ impl CastFlags {
     }
 
     /// aoe combat log?
-    ///
     pub const fn new_pending() -> Self {
         Self { inner: Self::PENDING }
     }
@@ -462,7 +461,6 @@ impl CastFlags {
     }
 
     /// ignore AOE visual
-    ///
     pub const fn new_unknown_4() -> Self {
         Self { inner: Self::UNKNOWN_4 }
     }
@@ -500,7 +498,6 @@ impl CastFlags {
     }
 
     /// Projectiles visual
-    ///
     pub const fn new_ammo() -> Self {
         Self { inner: Self::AMMO }
     }
@@ -736,7 +733,6 @@ impl CastFlags {
     }
 
     /// no GCD for spell casts from charm/summon (vehicle spells is an example)
-    ///
     pub const fn new_no_gcd() -> Self {
         Self { inner: Self::NO_GCD }
     }
@@ -954,7 +950,6 @@ impl CastFlags {
     }
 
     /// Unused on TC 3.3.5a. Defined from TC Master.
-    ///
     pub const fn new_heal_prediction() -> Self {
         Self { inner: Self::HEAL_PREDICTION }
     }

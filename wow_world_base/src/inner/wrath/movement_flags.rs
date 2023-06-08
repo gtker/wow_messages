@@ -726,7 +726,6 @@ impl MovementFlags {
     }
 
     /// Walking
-    ///
     pub const fn new_walking() -> Self {
         Self { inner: Self::WALKING }
     }
@@ -746,7 +745,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: Used for flying on some creatures
-    ///
     pub const fn new_on_transport() -> Self {
         Self { inner: Self::ON_TRANSPORT }
     }
@@ -766,7 +764,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: Former `MOVEMENTFLAG_LEVITATING`. This is used when walking is not possible.
-    ///
     pub const fn new_disable_gravity() -> Self {
         Self { inner: Self::DISABLE_GRAVITY }
     }
@@ -786,7 +783,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: Must not be set along with `MOVEMENTFLAG_MASK_MOVING`
-    ///
     pub const fn new_root() -> Self {
         Self { inner: Self::ROOT }
     }
@@ -806,7 +802,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: damage dealt on that type of falling
-    ///
     pub const fn new_falling() -> Self {
         Self { inner: Self::FALLING }
     }
@@ -970,7 +965,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: appears with fly flag also
-    ///
     pub const fn new_swimming() -> Self {
         Self { inner: Self::SWIMMING }
     }
@@ -990,7 +984,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: press 'space' when flying
-    ///
     pub const fn new_ascending() -> Self {
         Self { inner: Self::ASCENDING }
     }
@@ -1028,7 +1021,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: Appears when unit can fly AND also walk
-    ///
     pub const fn new_can_fly() -> Self {
         Self { inner: Self::CAN_FLY }
     }
@@ -1048,7 +1040,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: unit is actually flying. pretty sure this is only used for players. creatures use `disable_gravity`
-    ///
     pub const fn new_flying() -> Self {
         Self { inner: Self::FLYING }
     }
@@ -1068,7 +1059,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: used for flight paths
-    ///
     pub const fn new_spline_elevation() -> Self {
         Self { inner: Self::SPLINE_ELEVATION }
     }
@@ -1088,7 +1078,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: used for flight paths
-    ///
     pub const fn new_spline_enabled() -> Self {
         Self { inner: Self::SPLINE_ENABLED }
     }
@@ -1108,7 +1097,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: prevent unit from falling through water
-    ///
     pub const fn new_waterwalking() -> Self {
         Self { inner: Self::WATERWALKING }
     }
@@ -1128,7 +1116,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: active rogue safe fall spell (passive)
-    ///
     pub const fn new_falling_slow() -> Self {
         Self { inner: Self::FALLING_SLOW }
     }
@@ -1148,7 +1135,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: hover, cannot jump
-    ///
     pub const fn new_hover() -> Self {
         Self { inner: Self::HOVER }
     }
@@ -1204,7 +1190,6 @@ impl MovementFlags {
     }
 
     /// `AzerothCore`: Overrides various clientside checks
-    ///
     pub const fn new_unk3() -> Self {
         Self { inner: Self::UNK3 }
     }

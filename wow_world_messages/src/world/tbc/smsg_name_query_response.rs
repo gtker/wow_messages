@@ -27,7 +27,6 @@ pub struct SMSG_NAME_QUERY_RESPONSE {
     pub guid: Guid,
     pub character_name: String,
     /// Used for showing cross realm realm names. If this is an empty string it is shown like a regular player on the same realm.
-    ///
     pub realm_name: String,
     pub race: Race,
     pub gender: Gender,

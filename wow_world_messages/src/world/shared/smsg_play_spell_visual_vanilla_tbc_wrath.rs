@@ -13,7 +13,6 @@ use crate::Guid;
 pub struct SMSG_PLAY_SPELL_VISUAL {
     pub guid: Guid,
     /// mangoszero/mangosone: index from SpellVisualKit.dbc. Set to 0xB3 when buying spells.
-    ///
     pub spell_art_kit: u32,
 }
 

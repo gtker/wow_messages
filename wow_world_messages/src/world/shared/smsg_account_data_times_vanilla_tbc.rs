@@ -13,7 +13,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct SMSG_ACCOUNT_DATA_TIMES {
     /// cmangos/vmangos/mangoszero sets to all zeros
-    ///
     pub data: [u32; 32],
 }
 

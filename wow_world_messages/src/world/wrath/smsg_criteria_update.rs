@@ -21,11 +21,9 @@ use std::time::Duration;
 pub struct SMSG_CRITERIA_UPDATE {
     pub achievement: u32,
     /// trinitycore/azerothcore: This is a u32 passed to the `appendPackGUID` function which promotes it to u64.
-    ///
     pub progress_counter: Guid,
     pub player: Guid,
     /// trinitycore: this are some flags, 1 is for keeping the counter at 0 in client
-    ///
     pub flags: u32,
     pub time: DateTime,
     pub time_elapsed: Duration,

@@ -20,43 +20,30 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum LootMethodError {
     /// You don't have permission to loot that corpse.
-    ///
     DidntKill,
     /// You are too far away to loot that corpse.
-    ///
     TooFar,
     /// You must be facing the corpse to loot it.
-    ///
     BadFacing,
     /// Someone is already looting that corpse.
-    ///
     Locked,
     /// You need to be standing up to loot something!
-    ///
     Notstanding,
     /// You can't loot anything while stunned!
-    ///
     Stunned,
     /// Player not found
-    ///
     PlayerNotFound,
     /// Maximum play time exceeded
-    ///
     PlayTimeExceeded,
     /// That player's inventory is full
-    ///
     MasterInvFull,
     /// Player has too many of that item already
-    ///
     MasterUniqueItem,
     /// Can't assign item to that player
-    ///
     MasterOther,
     /// Your target has already had its pockets picked
-    ///
     AlreadyPickpocketed,
     /// You can't do that while shapeshifted.
-    ///
     NotWhileShapeshifted,
 }
 

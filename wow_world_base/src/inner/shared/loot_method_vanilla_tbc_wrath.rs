@@ -21,16 +21,12 @@ pub enum LootMethod {
     Fishing,
     Disenchanting,
     /// unsupported by client, send LOOT_PICKPOCKETING instead
-    ///
     Skinning,
     /// unsupported by client, send LOOT_FISHING instead
-    ///
     Fishinghole,
     /// unsupported by client, send LOOT_FISHING instead
-    ///
     FishingFail,
     /// unsupported by client, send LOOT_CORPSE instead
-    ///
     Insignia,
 }
 

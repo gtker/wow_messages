@@ -42,13 +42,10 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub required_items: Vec<QuestItemRequirement>,
     pub completable: QuestCompletable,
     /// cmangos/vmangos/mangoszero: set to 0x04
-    ///
     pub flags1: u32,
     /// cmangos/vmangos/mangoszero: set to 0x08
-    ///
     pub flags2: u32,
     /// cmangos/vmangos/mangoszero: set to 0x10
-    ///
     pub flags3: u32,
 }
 

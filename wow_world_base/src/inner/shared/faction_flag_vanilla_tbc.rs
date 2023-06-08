@@ -120,7 +120,6 @@ impl FactionFlag {
     }
 
     /// makes visible in client (set or can be set at interaction with target of this faction)
-    ///
     pub const fn new_visible() -> Self {
         Self { inner: Self::VISIBLE }
     }
@@ -140,7 +139,6 @@ impl FactionFlag {
     }
 
     /// enable AtWar-button in client. player controlled (except opposition team always war state), Flag only set on initial creation
-    ///
     pub const fn new_at_war() -> Self {
         Self { inner: Self::AT_WAR }
     }
@@ -160,7 +158,6 @@ impl FactionFlag {
     }
 
     /// hidden faction from reputation pane in client (player can gain reputation, but this update not sent to client)
-    ///
     pub const fn new_hidden() -> Self {
         Self { inner: Self::HIDDEN }
     }
@@ -180,7 +177,6 @@ impl FactionFlag {
     }
 
     /// always overwrite `FACTION_FLAG_VISIBLE` and hide faction in rep.list, used for hide opposite team factions
-    ///
     pub const fn new_invisible_forced() -> Self {
         Self { inner: Self::INVISIBLE_FORCED }
     }
@@ -200,7 +196,6 @@ impl FactionFlag {
     }
 
     /// always overwrite `FACTION_FLAG_AT_WAR`, used for prevent war with own team factions
-    ///
     pub const fn new_peace_forced() -> Self {
         Self { inner: Self::PEACE_FORCED }
     }
@@ -220,7 +215,6 @@ impl FactionFlag {
     }
 
     /// player controlled, state stored in characters.data ( `CMSG_SET_FACTION_INACTIVE` )
-    ///
     pub const fn new_inactive() -> Self {
         Self { inner: Self::INACTIVE }
     }
@@ -241,7 +235,6 @@ impl FactionFlag {
 
     /// flag for the two competing outland factions
     /// This is also present in vmangos for Vanilla, unsure if it's used.
-    ///
     pub const fn new_rival() -> Self {
         Self { inner: Self::RIVAL }
     }

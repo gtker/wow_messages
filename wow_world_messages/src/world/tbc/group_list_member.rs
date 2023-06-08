@@ -19,7 +19,6 @@ pub struct GroupListMember {
     pub is_online: bool,
     pub group_id: u8,
     /// mangosone: 0x2 main assist, 0x4 main tank
-    ///
     pub flags: u8,
 }
 

@@ -20,7 +20,6 @@ pub struct SMSG_SPELLDISPELLOG {
     pub caster: Guid,
     pub dispell_spell: u32,
     /// mangosone: unused
-    ///
     pub unknown: u8,
     pub spells: Vec<DispelledSpell>,
 }

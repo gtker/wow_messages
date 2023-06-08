@@ -15,7 +15,6 @@ use std::time::Duration;
 pub struct PetSpellCooldown {
     pub spell: u16,
     /// mangoszero: sets to 0
-    ///
     pub spell_category: u16,
     pub cooldown: Duration,
     pub category_cooldown: Duration,

@@ -12,14 +12,11 @@ use std::io::{Read, Write};
 pub struct GmSurveyQuestion {
     /// cmangos: questions found in GMSurveyQuestions.dbc
     /// ref to i'th GMSurveySurveys.dbc field (all fields in that dbc point to fields in GMSurveyQuestions.dbc)
-    ///
     pub question_id: u32,
     /// Rating: hardcoded limit of 0-5 in pre-Wrath, ranges defined in GMSurveyAnswers.dbc Wrath+
-    ///
     pub answer: u8,
     /// Usage: `GMSurveyAnswerSubmit(question, rank, comment)`
     /// cmangos: Unused in stock UI, can be only set by calling Lua function
-    ///
     pub comment: String,
 }
 

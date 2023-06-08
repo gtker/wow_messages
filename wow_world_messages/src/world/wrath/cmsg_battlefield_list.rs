@@ -17,7 +17,6 @@ pub struct CMSG_BATTLEFIELD_LIST {
     pub battleground_type: BattlegroundType,
     pub location: BattlefieldListLocation,
     /// azerothcore: players with locked xp have their own bg queue on retail
-    ///
     pub can_gain_exp: bool,
 }
 

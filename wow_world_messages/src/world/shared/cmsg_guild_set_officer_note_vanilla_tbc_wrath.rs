@@ -11,7 +11,6 @@ use std::io::{Read, Write};
 pub struct CMSG_GUILD_SET_OFFICER_NOTE {
     pub player_name: String,
     /// vmangos: Max length 31
-    ///
     pub note: String,
 }
 

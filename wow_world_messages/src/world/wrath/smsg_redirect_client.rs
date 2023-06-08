@@ -17,7 +17,6 @@ pub struct SMSG_REDIRECT_CLIENT {
     pub port: u16,
     pub unknown: u32,
     /// azerothcore: ip + port, seed = sessionkey
-    ///
     pub hash: [u8; 20],
 }
 

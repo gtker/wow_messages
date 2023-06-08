@@ -21,7 +21,6 @@ use crate::wrath::{
 pub struct SMSG_GOSSIP_MESSAGE {
     pub guid: Guid,
     /// mangosone: new 2.4.0
-    ///
     pub menu_id: u32,
     pub title_text_id: u32,
     pub gossips: Vec<GossipItem>,

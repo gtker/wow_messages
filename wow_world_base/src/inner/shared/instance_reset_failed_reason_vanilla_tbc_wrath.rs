@@ -11,13 +11,10 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum InstanceResetFailedReason {
     /// at least one player is in the instance
-    ///
     General,
     /// at least one player is offline
-    ///
     Offline,
     /// at least one player try to enter the instance (being teleported in)
-    ///
     Zoning,
     Silently,
 }

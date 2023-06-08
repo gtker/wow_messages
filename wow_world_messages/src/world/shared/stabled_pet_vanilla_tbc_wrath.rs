@@ -21,7 +21,6 @@ pub struct StabledPet {
     pub name: String,
     pub loyalty: u32,
     /// vmangos/mangoszero/cmangos: client slot 1 == current pet (0)
-    ///
     pub slot: u8,
 }
 

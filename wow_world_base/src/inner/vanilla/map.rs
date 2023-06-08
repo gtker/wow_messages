@@ -77,7 +77,6 @@ pub enum Map {
     BlackrockDepths,
     OnyxiasLair,
     /// Also called 'Caverns of Time' in Vanilla. Named this way for consistency across versions.
-    ///
     OpeningOfTheDarkPortal,
     Scholomance,
     ZulGurub,

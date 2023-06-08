@@ -15,7 +15,6 @@ pub struct SMSG_ATTACKSTOP {
     pub player: Guid,
     pub enemy: Guid,
     /// cmangos/vmangos/mangoszero/arcemu/azerothcore/mangostwo: set to 0 with comment: unk, can be 1 also
-    ///
     pub unknown1: u32,
 }
 

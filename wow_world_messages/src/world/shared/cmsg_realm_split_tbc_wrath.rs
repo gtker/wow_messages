@@ -10,7 +10,6 @@ use std::io::{Read, Write};
 pub struct CMSG_REALM_SPLIT {
     /// Realm ID that was sent earlier by the Auth Server
     /// ArcEmu/TriniyCore/mangosthree send back in [`SMSG_REALM_SPLIT`](crate::tbc::SMSG_REALM_SPLIT).
-    ///
     pub realm_id: u32,
 }
 

@@ -21,10 +21,8 @@ pub enum QuestGiverStatus {
     RewardRep,
     Available,
     /// red dot on minimap
-    ///
     RewardOld,
     /// yellow dot on minimap
-    ///
     Reward2,
 }
 

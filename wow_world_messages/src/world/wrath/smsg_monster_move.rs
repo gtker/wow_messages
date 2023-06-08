@@ -39,7 +39,6 @@ use crate::wrath::{
 pub struct SMSG_MONSTER_MOVE {
     pub guid: Guid,
     /// cmangos-wotlk sets to 0
-    ///
     pub unknown: u8,
     pub spline_point: Vector3d,
     pub spline_id: u32,

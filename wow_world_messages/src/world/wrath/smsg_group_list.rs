@@ -32,12 +32,10 @@ pub struct SMSG_GROUP_LIST {
     pub group_type: u8,
     pub group_id: u8,
     /// mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))
-    ///
     pub flags: u8,
     pub roles: u8,
     pub group: Guid,
     /// azerothcore: 3.3, value increases every time this packet gets sent
-    ///
     pub counter: u32,
     pub members: Vec<GroupListMember>,
     pub leader: Guid,

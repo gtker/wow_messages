@@ -19,7 +19,6 @@ pub struct SMSG_ARENA_TEAM_ROSTER {
     pub arena_team: u32,
     /// arcemu: new 3.0.8.
     /// arcemu sets to 0.
-    ///
     pub unknown: u8,
     pub arena_type: ArenaType,
     pub members: Vec<ArenaTeamMember>,

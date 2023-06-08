@@ -20,7 +20,6 @@ pub enum SpellTriggerType {
     ChanceOnHit,
     /// cmangos-tbc: Only used by 23442, Glowing Sanctified Crystal which is used for a Hellfire Peninsula quest.
     /// Unknown why exactly it does not use the normal triggers.
-    ///
     ServerSideScript,
     Soulstone,
     NoEquipCooldown,

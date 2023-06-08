@@ -26,7 +26,6 @@ use crate::vanilla::{
 /// ```
 pub struct SMSG_SPELL_GO {
     /// cmangos/vmangos/mangoszero: if cast item is used, set this to guid of cast item, otherwise set it to same as caster.
-    ///
     pub cast_item: Guid,
     pub caster: Guid,
     pub spell: u32,

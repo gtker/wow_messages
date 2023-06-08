@@ -12,10 +12,8 @@ use std::io::{Read, Write};
 pub struct CMSG_ITEM_TEXT_QUERY {
     pub item_text_id: u32,
     /// vmangos/cmangos/mangoszero: this value can be item id in bag, but it is also mail id
-    ///
     pub mail_id: u32,
     /// vmangos/cmangos/mangoszero: maybe something like state - 0x70000000
-    ///
     pub unknown1: u32,
 }
 

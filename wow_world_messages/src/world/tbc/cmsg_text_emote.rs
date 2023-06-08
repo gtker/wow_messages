@@ -20,7 +20,6 @@ pub struct CMSG_TEXT_EMOTE {
     pub text_emote: TextEmote,
     pub emote: u32,
     /// Guid targeted by the client.
-    ///
     pub target: Guid,
 }
 

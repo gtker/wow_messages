@@ -17,7 +17,6 @@ pub struct QuestItem {
     pub quest_icon: u32,
     pub level: Level,
     /// vmangos/cmangos/mangoszero: max 0x200
-    ///
     pub title: String,
 }
 

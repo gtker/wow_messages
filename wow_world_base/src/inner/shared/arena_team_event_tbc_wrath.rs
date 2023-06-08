@@ -13,22 +13,16 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ArenaTeamEvent {
     /// player name + arena team name
-    ///
     Join,
     /// player name + arena team name
-    ///
     Leave,
     /// player name + arena team name + captain name
-    ///
     Remove,
     /// player name + arena team name
-    ///
     LeaderIs,
     /// old captain + new captain + arena team name
-    ///
     LeaderChanged,
     /// captain name + arena team name
-    ///
     Disbanded,
 }
 

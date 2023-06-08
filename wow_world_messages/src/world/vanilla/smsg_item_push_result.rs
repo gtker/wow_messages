@@ -28,14 +28,11 @@ pub struct SMSG_ITEM_PUSH_RESULT {
     pub alert_chat: NewItemChatAlert,
     pub bag_slot: u8,
     /// mangoszero: item slot, but when added to stack: 0xFFFFFFFF
-    ///
     pub item_slot: u32,
     pub item: u32,
     /// mangoszero: SuffixFactor
-    ///
     pub item_suffix_factor: u32,
     /// mangoszero: random item property id
-    ///
     pub item_random_property_id: u32,
     pub item_count: u32,
 }

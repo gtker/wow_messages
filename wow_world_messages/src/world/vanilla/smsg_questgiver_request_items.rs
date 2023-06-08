@@ -39,14 +39,11 @@ pub struct SMSG_QUESTGIVER_REQUEST_ITEMS {
     pub required_money: Gold,
     pub required_items: Vec<QuestItemRequirement>,
     /// cmangos/vmangos/mangoszero: All emulators set to 0x02
-    ///
     pub unknown1: u32,
     pub completable: QuestCompletable,
     /// cmangos/vmangos/mangoszero: set to 0x04
-    ///
     pub flags2: u32,
     /// cmangos/vmangos/mangoszero: set to 0x08
-    ///
     pub flags3: u32,
 }
 

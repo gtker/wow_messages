@@ -31,7 +31,6 @@ pub enum GuildCommandResult {
     GuildNameExistsS,
     /// mangos has 0x08 as both GUILD_LEADER_LEAVE and GUILD_PERMISSIONS.
     /// Supposedly the [`GuildCommand`](crate::vanilla::GuildCommand) QUIT used GUILD_LEADER_LEAVE and others used GUILD_PERMISSIONS
-    ///
     GuildPermissionsOrLeader,
     GuildPlayerNotInGuild,
     GuildPlayerNotInGuildS,

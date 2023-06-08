@@ -14,10 +14,8 @@ use crate::wrath::FactionStanding;
 /// ```
 pub struct SMSG_SET_FACTION_STANDING {
     /// All emus set to 0.
-    ///
     pub refer_a_friend_bonus: f32,
     /// mangostwo: display visual effect
-    ///
     pub any_rank_increased: bool,
     pub faction_standings: Vec<FactionStanding>,
 }

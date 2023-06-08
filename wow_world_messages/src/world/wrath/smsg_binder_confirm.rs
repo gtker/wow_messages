@@ -14,7 +14,6 @@ use crate::wrath::Area;
 pub struct SMSG_BINDER_CONFIRM {
     pub guid: Guid,
     /// arcemu has this field while other emus do not.
-    ///
     pub area: Area,
 }
 

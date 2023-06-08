@@ -21,17 +21,14 @@ use crate::tbc::{
 /// ```
 pub struct TrainerSpell {
     /// cmangos: learned spell (or cast-spell in profession case)
-    ///
     pub spell: u32,
     pub state: TrainerSpellState,
     pub spell_cost: u32,
     /// cmangos: spells don't cost talent points
     /// cmangos: set to 0
-    ///
     pub talent_point_cost: u32,
     /// cmangos: must be equal prev. field to have learn button in enabled state
     /// cmangos: 1 for true 0 for false
-    ///
     pub first_rank: u32,
     pub required_level: u8,
     pub required_skill: Skill,

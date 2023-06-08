@@ -13,17 +13,13 @@ use std::io::{Read, Write};
 /// ```
 pub struct Addon {
     /// Other emus hardcode this to 2. More research is required
-    ///
     pub addon_type: u8,
     /// Other emus hardcode this to 1.
-    ///
     pub uses_crc: u8,
     pub uses_diffent_public_key: bool,
     /// Other emus hardcode this to 0
-    ///
     pub unknown1: u32,
     /// Other emus hardcode this to 0
-    ///
     pub unknown2: u8,
 }
 

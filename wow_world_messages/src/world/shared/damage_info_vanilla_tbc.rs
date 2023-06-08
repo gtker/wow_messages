@@ -14,10 +14,8 @@ use std::io::{Read, Write};
 pub struct DamageInfo {
     pub spell_school_mask: u32,
     /// vmangos sends the same data in `damage_uint`.
-    ///
     pub damage_float: f32,
     /// vmangos sends the same data in `damage_float`.
-    ///
     pub damage_uint: u32,
     pub absorb: u32,
     pub resist: u32,

@@ -12,19 +12,14 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum StableResult {
     /// you don't have enough money
-    ///
     ErrMoney,
     /// currently used in most fail cases
-    ///
     ErrStable,
     /// table success
-    ///
     SuccessStable,
     /// unstable/swap success
-    ///
     SuccessUnstable,
     /// buy slot success
-    ///
     SuccessBuySlot,
 }
 

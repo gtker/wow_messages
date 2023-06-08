@@ -14,7 +14,6 @@ use crate::tbc::LfgType;
 pub struct MSG_LOOKING_FOR_GROUP_Client {
     pub lfg_type: LfgType,
     /// entry from LfgDunggeons.dbc
-    ///
     pub entry: u32,
     pub unknown: u32,
 }

@@ -26,7 +26,6 @@ pub struct SMSG_LOOT_START_ROLL {
     pub loot_slot: u32,
     pub item: u32,
     /// vmangos/mangoszero: not used ?
-    ///
     pub item_random_suffix: u32,
     pub item_random_property_id: u32,
     pub countdown_time: Duration,

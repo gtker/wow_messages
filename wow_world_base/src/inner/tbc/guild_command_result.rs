@@ -26,7 +26,6 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum GuildCommandResult {
     /// no message/error
-    ///
     PlayerNoMoreInGuild,
     GuildInternal,
     AlreadyInGuild,
@@ -37,7 +36,6 @@ pub enum GuildCommandResult {
     GuildNameExistsS,
     /// for Typecommand 0x03
     /// mangosone has both `GUILD_PERMISSIONS` and `GUILD_LEADER_LEAVE` as `0x08`.
-    ///
     GuildLeaderLeaveOrPermissions,
     GuildPlayerNotInGuild,
     GuildPlayerNotInGuildS,
@@ -49,7 +47,6 @@ pub enum GuildCommandResult {
     GuildRankInUse,
     GuildIgnoringYouS,
     /// for Typecommand 0x05 only
-    ///
     GuildUnk20,
 }
 

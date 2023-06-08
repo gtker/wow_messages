@@ -16,7 +16,6 @@ pub struct SMSG_BUY_ITEM {
     pub guid: Guid,
     /// Starts at index 1.
     /// arcemu has this field as milliseconds since something instead.
-    ///
     pub vendor_slot: u32,
     pub amount_for_sale: u32,
     pub amount_bought: u32,

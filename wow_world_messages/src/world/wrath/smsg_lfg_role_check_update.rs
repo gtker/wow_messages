@@ -19,7 +19,6 @@ pub struct SMSG_LFG_ROLE_CHECK_UPDATE {
     pub rolecheck_initializing: u8,
     pub dungeon_entries: Vec<u32>,
     /// azerothcore: Leader info MUST be sent first.
-    ///
     pub roles: Vec<LfgRole>,
 }
 

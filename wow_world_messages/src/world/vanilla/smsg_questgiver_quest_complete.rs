@@ -18,7 +18,6 @@ use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 pub struct SMSG_QUESTGIVER_QUEST_COMPLETE {
     pub quest_id: u32,
     /// cmangos/vmangos/mangoszero: set to 0x03
-    ///
     pub unknown: u32,
     pub experience_reward: u32,
     pub money_reward: Gold,

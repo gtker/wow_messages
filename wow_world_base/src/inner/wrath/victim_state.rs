@@ -142,7 +142,6 @@ impl VictimState {
     }
 
     /// azerothcore: victim got clear/blocked hit
-    ///
     pub const fn new_hit() -> Self {
         Self { inner: Self::HIT }
     }
@@ -216,7 +215,6 @@ impl VictimState {
     }
 
     /// azerothcore: unused? not set when blocked, even on full block
-    ///
     pub const fn new_blocks() -> Self {
         Self { inner: Self::BLOCKS }
     }

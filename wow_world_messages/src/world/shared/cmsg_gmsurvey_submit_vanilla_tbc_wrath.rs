@@ -13,12 +13,10 @@ use crate::shared::gm_survey_question_vanilla_tbc_wrath::GmSurveyQuestion;
 /// ```
 pub struct CMSG_GMSURVEY_SUBMIT {
     /// cmangos: Survey ID: found in GMSurveySurveys.dbc
-    ///
     pub survey_id: u32,
     pub questions: [GmSurveyQuestion; 10],
     /// cmangos: Answer comment: Unused in stock UI, can be only set by calling Lua function
     /// cmangos: Answer comment max sizes in bytes: Vanilla - 8106:8110, TBC - 11459:11463, Wrath - 582:586
-    ///
     pub answer_comment: String,
 }
 

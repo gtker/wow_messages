@@ -13,20 +13,15 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum GuildEmblemResult {
     /// Guild Emblem saved.
-    ///
     Success,
     InvalidTabardColors,
     /// vmangos: You are not part of a guild!
-    ///
     NoGuild,
     /// vmangos: Only guild leaders can create emblems.
-    ///
     NotGuildMaster,
     /// vmangos: You can't afford to do that.
-    ///
     NotEnoughMoney,
     /// mangoszero: This version fails silently.
-    ///
     NoMessage,
 }
 

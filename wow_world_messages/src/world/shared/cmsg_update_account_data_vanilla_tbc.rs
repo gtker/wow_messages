@@ -16,7 +16,6 @@ use wow_world_base::shared::account_data_type_vanilla_tbc::AccountDataType;
 /// ```
 pub struct CMSG_UPDATE_ACCOUNT_DATA {
     /// Exact meaning unknown. Seems to be between 0 and 7. Block 6 is changed when changing `layout-cache.txt` inside the WTF folder.
-    ///
     pub data_type: AccountDataType,
     pub decompressed_size: u32,
     pub compressed_data: Vec<u8>,

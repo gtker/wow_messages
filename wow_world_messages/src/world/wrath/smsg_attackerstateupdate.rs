@@ -56,7 +56,6 @@ pub struct SMSG_ATTACKERSTATEUPDATE {
     pub damage_infos: Vec<DamageInfo>,
     pub victim_state: VictimState,
     /// arcemu: can be 0,1000 or -1
-    ///
     pub unknown1: u32,
     pub unknown2: u32,
 }

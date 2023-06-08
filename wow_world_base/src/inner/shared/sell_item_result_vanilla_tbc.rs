@@ -14,19 +14,14 @@
 pub enum SellItemResult {
     CantFindItem,
     /// cmangos/vmangos/mangoszero: merchant doesn't like that item
-    ///
     CantSellItem,
     /// cmangos/vmangos/mangoszero: merchant doesn't like you
-    ///
     CantFindVendor,
     /// cmangos/vmangos/mangoszero: you don't own that item
-    ///
     YouDontOwnThatItem,
     /// cmangos/vmangos/mangoszero: nothing appears...
-    ///
     Unk,
     /// cmangos/vmangos/mangoszero: can only do with empty bags
-    ///
     OnlyEmptyBag,
 }
 

@@ -12,7 +12,6 @@ use crate::tbc::ComplainResultWindow;
 /// ```
 pub struct SMSG_COMPLAIN_RESULT {
     /// All emulators set to 0.
-    ///
     pub unknown: u8,
     pub window_result: ComplainResultWindow,
 }

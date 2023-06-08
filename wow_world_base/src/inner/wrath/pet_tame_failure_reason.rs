@@ -26,15 +26,12 @@ pub enum PetTameFailureReason {
     AnotherSummonActive,
     UnitsCantTame,
     /// not used in taming
-    ///
     NoPetAvailable,
     InternaLerror,
     TooHighLevel,
     /// not used in taming
-    ///
     Dead,
     /// not used in taming
-    ///
     NotDead,
     CantControlExotic,
     UnknownError,

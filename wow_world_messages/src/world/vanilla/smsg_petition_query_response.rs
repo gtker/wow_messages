@@ -34,47 +34,33 @@ pub struct SMSG_PETITION_QUERY_RESPONSE {
     pub charter_owner: Guid,
     pub guild_name: String,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
-    ///
     pub body_text: String,
     /// cmangos/vmangos/mangoszero: Set to 1, only info is comment from vmangos
-    ///
     pub unknown_flags: u32,
     /// cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos
-    ///
     pub minimum_signatures: u32,
     /// cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos
-    ///
     pub maximum_signatures: u32,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
-    ///
     pub deadline: u32,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
-    ///
     pub issue_date: u32,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
-    ///
     pub allowed_guild_id: u32,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
-    ///
     pub allowed_class: AllowedClass,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
-    ///
     pub allowed_race: AllowedRace,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
-    ///
     pub allowed_genders: u16,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
-    ///
     pub allowed_minimum_level: Level,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
-    ///
     pub allowed_maximum_level: Level,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
     /// vmangos: char m_choicetext`10``64`
-    ///
     pub todo_amount_of_signers: u32,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
-    ///
     pub number_of_choices: u32,
 }
 

@@ -284,7 +284,6 @@ pub enum SpellEffect {
     DestroyAllTotems,
     DurabilityDamage,
     /// old SPELL_EFFECT_SUMMON_DEMON
-    ///
     Unknown112,
     ResurrectNew,
     AttackMe,

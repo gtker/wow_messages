@@ -21,7 +21,6 @@ pub struct QuestItem {
     pub flags: u32,
     pub repeatable: bool,
     /// vmangos/cmangos/mangoszero: max 0x200
-    ///
     pub title: String,
 }
 

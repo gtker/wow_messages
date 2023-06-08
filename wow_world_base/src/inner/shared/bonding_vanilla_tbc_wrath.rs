@@ -18,7 +18,6 @@ pub enum Bonding {
     Use,
     QuestItem,
     /// Not used in game according to all emulators.
-    ///
     QuestItem1,
 }
 

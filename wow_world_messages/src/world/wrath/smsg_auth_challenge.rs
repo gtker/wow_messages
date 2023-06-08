@@ -12,11 +12,9 @@ use std::io::{Read, Write};
 pub struct SMSG_AUTH_CHALLENGE {
     /// TrinityCore/ArcEmu/mangostwo always set to 1.
     /// TrinityCore/mangostwo: 1...31
-    ///
     pub unknown1: u32,
     pub server_seed: u32,
     /// Randomized values. Is not used at all by TrinityCore/mangostwo/ArcEmu.
-    ///
     pub seed: [u8; 32],
 }
 

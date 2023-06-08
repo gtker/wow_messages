@@ -14,7 +14,6 @@ pub enum TimerType {
     Breath,
     FeignDeath,
     /// Might be a mangos only thing.
-    ///
     Environmental,
 }
 

@@ -18,7 +18,6 @@ pub struct CMSG_BUY_ITEM_IN_SLOT {
     pub vendor: Guid,
     pub item: u32,
     /// arcemu: VLack: 3.1.2 This is the slot's number on the vendor's panel, starts from 1
-    ///
     pub vendor_slot: u32,
     pub bag: Guid,
     pub bag_slot: u8,

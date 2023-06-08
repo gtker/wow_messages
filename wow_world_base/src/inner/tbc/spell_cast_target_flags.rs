@@ -241,7 +241,6 @@ impl SpellCastTargetFlags {
     }
 
     /// not used in any spells as of 2.4.3 (can be set dynamically)
-    ///
     pub const fn new_unused1() -> Self {
         Self { inner: Self::UNUSED1 }
     }
@@ -279,7 +278,6 @@ impl SpellCastTargetFlags {
     }
 
     /// not used in any spells as of 2.4.3 (can be set dynamically) - raid member
-    ///
     pub const fn new_unit_raid() -> Self {
         Self { inner: Self::UNIT_RAID }
     }
@@ -299,7 +297,6 @@ impl SpellCastTargetFlags {
     }
 
     /// not used in any spells as of 2.4.3 (can be set dynamically) - party member
-    ///
     pub const fn new_unit_party() -> Self {
         Self { inner: Self::UNIT_PARTY }
     }
@@ -373,7 +370,6 @@ impl SpellCastTargetFlags {
     }
 
     /// `CanAttack` == true
-    ///
     pub const fn new_unit_enemy() -> Self {
         Self { inner: Self::UNIT_ENEMY }
     }
@@ -393,7 +389,6 @@ impl SpellCastTargetFlags {
     }
 
     /// `CanAssist` == true
-    ///
     pub const fn new_unit_ally() -> Self {
         Self { inner: Self::UNIT_ALLY }
     }
@@ -413,7 +408,6 @@ impl SpellCastTargetFlags {
     }
 
     /// pguid, `CanAssist` == false
-    ///
     pub const fn new_corpse_enemy() -> Self {
         Self { inner: Self::CORPSE_ENEMY }
     }
@@ -433,7 +427,6 @@ impl SpellCastTargetFlags {
     }
 
     /// skinning-like effects
-    ///
     pub const fn new_unit_dead() -> Self {
         Self { inner: Self::UNIT_DEAD }
     }
@@ -453,7 +446,6 @@ impl SpellCastTargetFlags {
     }
 
     /// pguid, 0 spells in 2.4.3
-    ///
     pub const fn new_gameobject() -> Self {
         Self { inner: Self::GAMEOBJECT }
     }
@@ -473,7 +465,6 @@ impl SpellCastTargetFlags {
     }
 
     /// pguid, 0 spells
-    ///
     pub const fn new_trade_item() -> Self {
         Self { inner: Self::TRADE_ITEM }
     }
@@ -493,7 +484,6 @@ impl SpellCastTargetFlags {
     }
 
     /// string, 0 spells
-    ///
     pub const fn new_string() -> Self {
         Self { inner: Self::STRING }
     }
@@ -513,7 +503,6 @@ impl SpellCastTargetFlags {
     }
 
     /// 199 spells, opening object/lock
-    ///
     pub const fn new_locked() -> Self {
         Self { inner: Self::LOCKED }
     }
@@ -533,7 +522,6 @@ impl SpellCastTargetFlags {
     }
 
     /// pguid, `CanAssist` == true
-    ///
     pub const fn new_corpse_ally() -> Self {
         Self { inner: Self::CORPSE_ALLY }
     }
@@ -553,7 +541,6 @@ impl SpellCastTargetFlags {
     }
 
     /// pguid, not used in any spells as of 2.4.3 (can be set dynamically)
-    ///
     pub const fn new_unit_minipet() -> Self {
         Self { inner: Self::UNIT_MINIPET }
     }

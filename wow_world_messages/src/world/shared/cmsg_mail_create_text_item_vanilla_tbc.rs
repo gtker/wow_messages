@@ -15,7 +15,6 @@ pub struct CMSG_MAIL_CREATE_TEXT_ITEM {
     pub mailbox: Guid,
     pub mail_id: u32,
     /// mangoszero/cmangos/vmangos: mailTemplateId, non need, Mail store own 100% correct value anyway
-    ///
     pub mail_template_id: u32,
 }
 

@@ -15,7 +15,6 @@ use crate::Guid;
 pub struct CMSG_ACTIVATETAXIEXPRESS {
     pub guid: Guid,
     /// vmangos/mangosone: Never used.
-    ///
     pub total_cost: u32,
     pub nodes: Vec<u32>,
 }

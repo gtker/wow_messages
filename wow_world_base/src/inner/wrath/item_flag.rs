@@ -413,7 +413,6 @@ impl ItemFlag {
     }
 
     /// Conjured item
-    ///
     pub const fn new_conjured() -> Self {
         Self { inner: Self::CONJURED }
     }
@@ -433,7 +432,6 @@ impl ItemFlag {
     }
 
     /// Item can be right clicked to open for loot
-    ///
     pub const fn new_lootable() -> Self {
         Self { inner: Self::LOOTABLE }
     }
@@ -453,7 +451,6 @@ impl ItemFlag {
     }
 
     /// Makes green 'Heroic' text appear on item
-    ///
     pub const fn new_heroic_tooltip() -> Self {
         Self { inner: Self::HEROIC_TOOLTIP }
     }
@@ -473,7 +470,6 @@ impl ItemFlag {
     }
 
     /// Cannot equip or use
-    ///
     pub const fn new_deprecated() -> Self {
         Self { inner: Self::DEPRECATED }
     }
@@ -493,7 +489,6 @@ impl ItemFlag {
     }
 
     /// Item can not be destroyed, except by using spell (item can be reagent for spell)
-    ///
     pub const fn new_indestructible() -> Self {
         Self { inner: Self::INDESTRUCTIBLE }
     }
@@ -513,7 +508,6 @@ impl ItemFlag {
     }
 
     /// Item's spells are castable by players
-    ///
     pub const fn new_player_cast() -> Self {
         Self { inner: Self::PLAYER_CAST }
     }
@@ -533,7 +527,6 @@ impl ItemFlag {
     }
 
     /// No default 30 seconds cooldown when equipped
-    ///
     pub const fn new_no_equip_cooldown() -> Self {
         Self { inner: Self::NO_EQUIP_COOLDOWN }
     }
@@ -571,7 +564,6 @@ impl ItemFlag {
     }
 
     /// Item can wrap other items
-    ///
     pub const fn new_wrapper() -> Self {
         Self { inner: Self::WRAPPER }
     }
@@ -609,7 +601,6 @@ impl ItemFlag {
     }
 
     /// Looting this item does not remove it from available loot
-    ///
     pub const fn new_multi_drop() -> Self {
         Self { inner: Self::MULTI_DROP }
     }
@@ -629,7 +620,6 @@ impl ItemFlag {
     }
 
     /// Item can be returned to vendor for its original cost (extended cost)
-    ///
     pub const fn new_item_purchase_record() -> Self {
         Self { inner: Self::ITEM_PURCHASE_RECORD }
     }
@@ -649,7 +639,6 @@ impl ItemFlag {
     }
 
     /// Item is guild or arena charter
-    ///
     pub const fn new_charter() -> Self {
         Self { inner: Self::CHARTER }
     }
@@ -669,7 +658,6 @@ impl ItemFlag {
     }
 
     /// Only readable items have this (but not all)
-    ///
     pub const fn new_has_text() -> Self {
         Self { inner: Self::HAS_TEXT }
     }
@@ -743,7 +731,6 @@ impl ItemFlag {
     }
 
     /// Item can be prospected
-    ///
     pub const fn new_is_prospectable() -> Self {
         Self { inner: Self::IS_PROSPECTABLE }
     }
@@ -763,7 +750,6 @@ impl ItemFlag {
     }
 
     /// You can only equip one of these
-    ///
     pub const fn new_unique_equipped() -> Self {
         Self { inner: Self::UNIQUE_EQUIPPED }
     }
@@ -801,7 +787,6 @@ impl ItemFlag {
     }
 
     /// Item can be used during arena match
-    ///
     pub const fn new_ignore_default_arena_restrictions() -> Self {
         Self { inner: Self::IGNORE_DEFAULT_ARENA_RESTRICTIONS }
     }
@@ -821,7 +806,6 @@ impl ItemFlag {
     }
 
     /// Some Thrown weapons have it (and only Thrown) but not all
-    ///
     pub const fn new_no_durability_loss() -> Self {
         Self { inner: Self::NO_DURABILITY_LOSS }
     }
@@ -841,7 +825,6 @@ impl ItemFlag {
     }
 
     /// Item can be used in shapeshift forms
-    ///
     pub const fn new_use_when_shapeshifted() -> Self {
         Self { inner: Self::USE_WHEN_SHAPESHIFTED }
     }
@@ -879,7 +862,6 @@ impl ItemFlag {
     }
 
     /// Profession recipes: can only be looted if you meet requirements and don't already know it
-    ///
     pub const fn new_hide_unusable_recipe() -> Self {
         Self { inner: Self::HIDE_UNUSABLE_RECIPE }
     }
@@ -899,7 +881,6 @@ impl ItemFlag {
     }
 
     /// Item cannot be used in arena
-    ///
     pub const fn new_not_useable_in_arena() -> Self {
         Self { inner: Self::NOT_USEABLE_IN_ARENA }
     }
@@ -919,7 +900,6 @@ impl ItemFlag {
     }
 
     /// Item binds to account and can be sent only to your own characters
-    ///
     pub const fn new_is_bound_to_account() -> Self {
         Self { inner: Self::IS_BOUND_TO_ACCOUNT }
     }
@@ -939,7 +919,6 @@ impl ItemFlag {
     }
 
     /// Spell is cast ignoring reagents
-    ///
     pub const fn new_no_reagent_cost() -> Self {
         Self { inner: Self::NO_REAGENT_COST }
     }
@@ -959,7 +938,6 @@ impl ItemFlag {
     }
 
     /// Item can be milled
-    ///
     pub const fn new_is_millable() -> Self {
         Self { inner: Self::IS_MILLABLE }
     }

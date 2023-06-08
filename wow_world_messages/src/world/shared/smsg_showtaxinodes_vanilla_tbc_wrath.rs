@@ -14,7 +14,6 @@ use crate::Guid;
 /// ```
 pub struct SMSG_SHOWTAXINODES {
     /// Set to 1 in mangoszero
-    ///
     pub unknown1: u32,
     pub guid: Guid,
     pub nearest_node: u32,

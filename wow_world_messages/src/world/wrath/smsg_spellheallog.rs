@@ -25,7 +25,6 @@ pub struct SMSG_SPELLHEALLOG {
     pub absorb: u32,
     pub critical: bool,
     /// mangostwo: unused in client?
-    ///
     pub unknown: u8,
 }
 

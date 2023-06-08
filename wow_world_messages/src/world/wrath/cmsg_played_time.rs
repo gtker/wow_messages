@@ -9,7 +9,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct CMSG_PLAYED_TIME {
     /// Whether the clients wants it shown on the UI. Just ping it back in [`SMSG_PLAYED_TIME`](crate::wrath::SMSG_PLAYED_TIME)
-    ///
     pub show_on_ui: bool,
 }
 

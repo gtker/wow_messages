@@ -9,7 +9,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct SMSG_SET_REST_START {
     /// cmangos/mangoszero: unknown, may be rest state time or experience
-    ///
     pub unknown1: u32,
 }
 

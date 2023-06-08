@@ -13,23 +13,17 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum Power {
     /// mangoszero: The most common one, mobs usually have this or rage
-    ///
     Mana,
     /// mangoszero: This is what warriors use to cast their spells
-    ///
     Rage,
     /// mangoszero: Used by hunters after Cataclysm (4.x)
-    ///
     Focus,
     /// mangoszero: Used by rouges to do their spells
-    ///
     Energy,
     /// mangoszero: Hunter's pet's happiness affect their damage
-    ///
     Happiness,
     /// mangoszero: Health, everyone has this (-2 as signed value)
     /// This might not actually be sent to the client.
-    ///
     Health,
 }
 

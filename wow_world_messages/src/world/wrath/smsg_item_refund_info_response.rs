@@ -24,7 +24,6 @@ pub struct SMSG_ITEM_REFUND_INFO_RESPONSE {
     pub arena_point_cost: u32,
     pub extra_items: [ItemRefundExtra; 5],
     /// Emus set to 0.
-    ///
     pub unknown1: u32,
     pub time_since_loss: u32,
 }

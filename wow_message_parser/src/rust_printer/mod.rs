@@ -758,15 +758,15 @@ fn print_member_docc_description_and_comment(
             s.docc(line);
         }
 
-        s.docc_newline();
+        if tags.comment().is_some() {
+            s.docc_newline();
+        }
     }
 
     if let Some(comment) = tags.comment() {
         for line in comment.as_rust_doc_lines(o, object_tags) {
             s.docc(line);
         }
-
-        s.docc_newline();
     }
 }
 

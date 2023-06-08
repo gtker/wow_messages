@@ -11,16 +11,12 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum RaidInstanceMessage {
     /// WARNING! %s is scheduled to reset in %d hour(s).
-    ///
     WarningHours,
     /// WARNING! %s is scheduled to reset in %d minute(s)!
-    ///
     WarningMin,
     /// WARNING! %s is scheduled to reset in %d minute(s). Please exit the zone or you will be returned to your bind location!
-    ///
     WarningMinSoon,
     /// Welcome to %s. This raid instance is scheduled to reset in %s.
-    ///
     Welcome,
 }
 

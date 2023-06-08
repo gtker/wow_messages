@@ -153,442 +153,296 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum CastFailureReason {
     /// You are in combat
-    ///
     AffectingCombat,
     /// You are already at full Health.
-    ///
     AlreadyAtFullHealth,
     /// You are already at full %s.
-    ///
     AlreadyAtFullPower,
     /// That creature is already being tamed
-    ///
     AlreadyBeingTamed,
     /// You already control a charmed creature
-    ///
     AlreadyHaveCharm,
     /// You already control a summoned creature
-    ///
     AlreadyHaveSummon,
     /// Already open
-    ///
     AlreadyOpen,
     /// A more powerful spell is already active
-    ///
     AuraBounced,
     /// Message is hidden/unused
-    ///
     AutotrackInterrupted,
     /// You have no target.
-    ///
     BadImplicitTargets,
     /// Invalid target
-    ///
     BadTargets,
     /// Target can't be charmed
-    ///
     CantBeCharmed,
     /// Item cannot be disenchanted
-    ///
     CantBeDisenchanted,
     /// There are no gems in this
-    ///
     CantBeProspected,
     /// Target is tapped
-    ///
     CantCastOnTapped,
     /// You can't start a duel while invisible
-    ///
     CantDuelWhileInvisible,
     /// You can't start a duel while stealthed
-    ///
     CantDuelWhileStealthed,
     /// You are too close to enemies
-    ///
     CantStealth,
     /// You can't do that yet
-    ///
     CasterAurastate,
     /// You are dead
-    ///
     CasterDead,
     /// Can't do that while charmed
-    ///
     Charmed,
     /// That is already being used
-    ///
     ChestInUse,
     /// Can't do that while confused
-    ///
     Confused,
     /// Message is hidden/unused
-    ///
     DontReport,
     /// Must have the proper item equipped
-    ///
     EquippedItem,
     /// Must have a %s equipped
-    ///
     EquippedItemClass,
     /// Must have a %s equipped in the main hand
-    ///
     EquippedItemClassMainhand,
     /// Must have a %s equipped in the offhand
-    ///
     EquippedItemClassOffhand,
     /// Internal error
-    ///
     ErrorX,
     /// Fizzled
-    ///
     Fizzle,
     /// Can't do that while fleeing
-    ///
     Fleeing,
     /// That food's level is not high enough for your pet
-    ///
     FoodLowlevel,
     /// Target is too high level
-    ///
     Highlevel,
     /// Message is hidden/unused
-    ///
     HungerSatiated,
     /// Immune
-    ///
     Immune,
     /// Interrupted
-    ///
     Interrupted,
     /// Interrupted
-    ///
     InterruptedCombat,
     /// Item is already enchanted
-    ///
     ItemAlreadyEnchanted,
     /// Item is gone
-    ///
     ItemGone,
     /// Tried to enchant an item that didn't exist
-    ///
     ItemNotFound,
     /// Item is not ready yet.
-    ///
     ItemNotReady,
     /// You are not high enough level
-    ///
     LevelRequirement,
     /// Target not in line of sight
-    ///
     LineOfSight,
     /// Target is too low level
-    ///
     Lowlevel,
     /// Skill not high enough
-    ///
     LowCastlevel,
     /// Your weapon hand is empty
-    ///
     MainhandEmpty,
     /// Can't do that while moving
-    ///
     Moving,
     /// Ammo needs to be in the paper doll ammo slot before it can be fired
-    ///
     NeedAmmo,
     /// Requires: %s
-    ///
     NeedAmmoPouch,
     /// Requires exotic ammo: %s
-    ///
     NeedExoticAmmo,
     /// No path available
-    ///
     Nopath,
     /// You must be behind your target
-    ///
     NotBehind,
     /// Your cast didn't land in fishable water
-    ///
     NotFishable,
     /// You can't use that here
-    ///
     NotHere,
     /// You must be in front of your target
-    ///
     NotInfront,
     /// You are not in control of your actions
-    ///
     NotInControl,
     /// Spell not learned
-    ///
     NotKnown,
     /// You are mounted
-    ///
     NotMounted,
     /// You are in flight
-    ///
     NotOnTaxi,
     /// You are on a transport
-    ///
     NotOnTransport,
     /// Spell is not ready yet.
-    ///
     NotReady,
     /// You are in shapeshift form
-    ///
     NotShapeshift,
     /// You must be standing to do that
-    ///
     NotStanding,
     /// You can only use this on an object you own
-    ///
     NotTradeable,
     /// Tried to enchant a trade item, but not trading
-    ///
     NotTrading,
     /// You have to be unsheathed to do that!
-    ///
     NotUnsheathed,
     /// Can't cast as ghost
-    ///
     NotWhileGhost,
     /// Out of ammo
-    ///
     NoAmmo,
     /// No charges remain
-    ///
     NoChargesRemain,
     /// You haven't selected a champion
-    ///
     NoChampion,
     /// That ability requires combo points
-    ///
     NoComboPoints,
     /// Dueling isn't allowed here
-    ///
     NoDueling,
     /// Not enough endurance
-    ///
     NoEndurance,
     /// There aren't any fish here
-    ///
     NoFish,
     /// Can't use items while shapeshifted
-    ///
     NoItemsWhileShapeshifted,
     /// You can't mount here
-    ///
     NoMountsAllowed,
     /// You do not have a pet
-    ///
     NoPet,
     /// Dynamic pre-defined messages, no args: Not enough mana, Not enough rage, etc
-    ///
     NoPower,
     /// Nothing to dispel
-    ///
     NothingToDispel,
     /// Nothing to steal
-    ///
     NothingToSteal,
     /// Cannot use while swimming
-    ///
     OnlyAbovewater,
     /// Can only use during the day
-    ///
     OnlyDaytime,
     /// Can only use indoors
-    ///
     OnlyIndoors,
     /// Can only use while mounted
-    ///
     OnlyMounted,
     /// Can only use during the night
-    ///
     OnlyNighttime,
     /// Can only use outside
-    ///
     OnlyOutdoors,
     /// Must be in %s
-    ///
     OnlyShapeshift,
     /// You must be in stealth mode
-    ///
     OnlyStealthed,
     /// Can only use while swimming
-    ///
     OnlyUnderwater,
     /// Out of range.
-    ///
     OutOfRange,
     /// Can't use that ability while pacified
-    ///
     Pacified,
     /// You are possessed
-    ///
     Possessed,
     /// Message is hidden/unused, supposedly implemented client-side only
-    ///
     Reagents,
     /// You need to be in %s
-    ///
     RequiresArea,
     /// Requires %s
-    ///
     RequiresSpellFocus,
     /// You are unable to move
-    ///
     Rooted,
     /// Can't do that while silenced
-    ///
     Silenced,
     /// Another action is in progress
-    ///
     SpellInProgress,
     /// You have already learned the spell
-    ///
     SpellLearned,
     /// The spell is not available to you
-    ///
     SpellUnavailable,
     /// Can't do that while stunned
-    ///
     Stunned,
     /// Your target is dead
-    ///
     TargetsDead,
     /// Target is in combat
-    ///
     TargetAffectingCombat,
     /// You can't do that yet
-    ///
     TargetAurastate,
     /// Target is currently dueling
-    ///
     TargetDueling,
     /// Target is hostile
-    ///
     TargetEnemy,
     /// Target is too enraged to be charmed
-    ///
     TargetEnraged,
     /// Target is friendly
-    ///
     TargetFriendly,
     /// The target can't be in combat
-    ///
     TargetInCombat,
     /// Can't target players
-    ///
     TargetIsPlayer,
     /// Target is alive
-    ///
     TargetNotDead,
     /// Target is not in your party
-    ///
     TargetNotInParty,
     /// Creature must be looted first
-    ///
     TargetNotLooted,
     /// Target is not a player
-    ///
     TargetNotPlayer,
     /// No pockets to pick
-    ///
     TargetNoPockets,
     /// Target has no weapons equipped
-    ///
     TargetNoWeapons,
     /// Creature is not skinnable
-    ///
     TargetUnskinnable,
     /// Message is hidden/unused
-    ///
     ThirstSatiated,
     /// Target too close
-    ///
     TooClose,
     /// You have too many of that item already
-    ///
     TooManyOfItem,
     /// Message is hidden/unused, supposedly implemented client-side only
-    ///
     Totems,
     /// Not enough training points
-    ///
     TrainingPoints,
     /// Failed attempt
-    ///
     TryAgain,
     /// Target needs to be behind you
-    ///
     UnitNotBehind,
     /// Target needs to be in front of you
-    ///
     UnitNotInfront,
     /// Your pet doesn't like that food
-    ///
     WrongPetFood,
     /// Can't cast while fatigued
-    ///
     NotWhileFatigued,
     /// Target must be in this instance
-    ///
     TargetNotInInstance,
     /// Can't cast while trading
-    ///
     NotWhileTrading,
     /// Target is not in your party or raid group
-    ///
     TargetNotInRaid,
     /// Cannot disenchant while looting
-    ///
     DisenchantWhileLooting,
     /// Cannot prospect while looting
-    ///
     ProspectWhileLooting,
     /// Message is hidden/unused, supposedly implemented client-side only
-    ///
     ProspectNeedMore,
     /// Target is currently in free-for-all PvP combat
-    ///
     TargetFreeforall,
     /// There are no nearby corpses to eat
-    ///
     NoEdibleCorpses,
     /// Can only use in battlegrounds
-    ///
     OnlyBattlegrounds,
     /// Target is not a ghost
-    ///
     TargetNotGhost,
     /// Your pet can't learn any more skills
-    ///
     TooManySkills,
     /// You can't use the new item
-    ///
     TransformUnusable,
     /// The weather isn't right for that
-    ///
     WrongWeather,
     /// You can't do that while you are immune
-    ///
     DamageImmune,
     /// Can't do that while %s
-    ///
     PreventedByMechanic,
     /// Maximum play time exceeded
-    ///
     PlayTime,
     /// Your reputation isn't high enough
-    ///
     Reputation,
     /// Your skill is not high enough.  Requires %s (%d).
-    ///
     MinSkill,
     /// Generic out of bounds response:  Unknown reason
-    ///
     Unknown,
 }
 

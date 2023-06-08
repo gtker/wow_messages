@@ -11,7 +11,6 @@ use wow_world_base::shared::gm_ticket_queue_status_vanilla_tbc_wrath::GmTicketQu
 /// ```
 pub struct SMSG_GMTICKET_SYSTEMSTATUS {
     /// vmangos: This only disables the ticket UI at client side and is not fully reliable are we sure this is a uint32? Should ask Zor
-    ///
     pub will_accept_tickets: GmTicketQueueStatus,
 }
 

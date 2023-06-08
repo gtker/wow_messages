@@ -17,7 +17,6 @@ pub struct SMSG_TRANSFER_ABORTED {
     pub map: Map,
     pub reason: TransferAbortReason,
     /// Possibly not needed.
-    ///
     pub argument: u8,
 }
 

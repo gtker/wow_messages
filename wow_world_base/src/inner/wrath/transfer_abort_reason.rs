@@ -25,46 +25,32 @@ pub enum TransferAbortReason {
     None,
     ErrorX,
     /// Transfer Aborted: instance is full
-    ///
     MaxPlayers,
     /// Transfer Aborted: instance not found
-    ///
     NotFound,
     /// You have entered too many instances recently.
-    ///
     TooManyInstances,
     /// Unable to zone in while an encounter is in progress.
-    ///
     ZoneInCombat,
     /// You must have TBC/WotLK expansion installed to access this area.
-    ///
     InsufficientExpansionLevel,
     /// Normal/Heroic/Epic difficulty mode is not available for %s.
-    ///
     DifficultyNotAvailable,
     /// Until you've escaped The Lich Kings grasp, you cannot leave this place!
-    ///
     UniqueMessage,
     /// Additional instances cannot be launched, please try again later.
-    ///
     TooManyRealmInstances,
     /// 3.1
-    ///
     NeedGroup,
     /// 3.1
-    ///
     NotFound1,
     /// 3.1
-    ///
     NotFound2,
     /// 3.2
-    ///
     NotFound3,
     /// All players on party must be from the same realm.
-    ///
     RealmOnly,
     /// Map can't be entered at this time.
-    ///
     MapNotAllowed,
 }
 

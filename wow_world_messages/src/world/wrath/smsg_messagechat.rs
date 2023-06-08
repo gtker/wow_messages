@@ -57,7 +57,6 @@ pub struct SMSG_MESSAGECHAT {
     pub language: Language,
     pub sender: Guid,
     /// azerothcore sets to 0.
-    ///
     pub flags: u32,
     pub message: String,
     pub tag: PlayerChatTag,

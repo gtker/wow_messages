@@ -9,7 +9,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct CMSG_TUTORIAL_FLAG {
     /// arcemu indexes into the tutorials by dividing by 32 and modulo 32.
-    ///
     pub tutorial_flag: u32,
 }
 

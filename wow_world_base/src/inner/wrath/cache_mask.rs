@@ -11,10 +11,8 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum CacheMask {
     /// Values that are shared between all characters, such as account-wide macros
-    ///
     GlobalCache,
     /// Values that are stored per character
-    ///
     PerCharacterCache,
 }
 

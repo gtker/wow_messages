@@ -44,7 +44,6 @@ use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub guid: Guid,
     /// arcemu also sends guid2 if guid is a player. Otherwise sends 0.
-    ///
     pub guid2: Guid,
     pub quest_id: u32,
     pub title: String,
@@ -54,36 +53,28 @@ pub struct SMSG_QUESTGIVER_QUEST_DETAILS {
     pub quest_flags: u32,
     pub suggested_players: u32,
     /// arcemu: MANGOS: IsFinished? value is sent back to server in quest accept packet
-    ///
     pub is_finished: u8,
     pub choice_item_rewards: Vec<QuestGiverReward>,
     pub item_rewards: Vec<QuestGiverReward>,
     pub money_reward: Gold,
     /// arcemu: New 3.3 - this is the XP you'll see on the quest reward panel too, but I think it is fine not to show it, because it can change if the player levels up before completing the quest.
-    ///
     pub experience_reward: u32,
     pub honor_reward: u32,
     /// arcemu: new 3.3
-    ///
     pub honor_reward_multiplier: f32,
     /// mangosone: reward spell, this spell will display (icon) (casted if RewSpellCast==0)
-    ///
     pub reward_spell: u32,
     pub casted_spell: u32,
     /// mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles)
-    ///
     pub title_reward: u32,
     pub talent_reward: u32,
     pub arena_point_reward: u32,
     /// arcemu: new 3.3.0
-    ///
     pub unknown2: u32,
     pub reward_factions: [u32; 5],
     /// mangostwo: columnid in QuestFactionReward.dbc (if negative, from second row)
-    ///
     pub reward_reputations: [u32; 5],
     /// mangostwo: reward reputation override. No diplomacy bonus is expected given, reward also does not display in chat window
-    ///
     pub reward_reputations_override: [u32; 5],
     pub emotes: Vec<QuestDetailsEmote>,
 }

@@ -252,7 +252,6 @@ impl GameobjectCastFlags {
     }
 
     /// also do not send standstate update
-    ///
     pub const fn new_lock_player_cast_anim() -> Self {
         Self { inner: Self::LOCK_PLAYER_CAST_ANIM }
     }
@@ -344,7 +343,6 @@ impl GameobjectCastFlags {
     }
 
     /// 2 functions are called on 2 values
-    ///
     pub const fn new_ammo() -> Self {
         Self { inner: Self::AMMO }
     }
@@ -418,7 +416,6 @@ impl GameobjectCastFlags {
     }
 
     /// TARGET MISSES AND OTHER MESSAGES LIKE 'Resist'
-    ///
     pub const fn new_extra_message() -> Self {
         Self { inner: Self::EXTRA_MESSAGE }
     }
@@ -438,7 +435,6 @@ impl GameobjectCastFlags {
     }
 
     /// seems to work hand in hand with some visual effect of update actually
-    ///
     pub const fn new_power_update() -> Self {
         Self { inner: Self::POWER_UPDATE }
     }
@@ -476,7 +472,6 @@ impl GameobjectCastFlags {
     }
 
     /// no idea
-    ///
     pub const fn new_unk1000() -> Self {
         Self { inner: Self::UNK1000 }
     }
@@ -496,7 +491,6 @@ impl GameobjectCastFlags {
     }
 
     /// seems to make server send extra 2 bytes before UNK1 and after UNK20000
-    ///
     pub const fn new_unk8000() -> Self {
         Self { inner: Self::UNK8000 }
     }
@@ -516,7 +510,6 @@ impl GameobjectCastFlags {
     }
 
     /// seems to make server send an uint32 after `m_targets.write`
-    ///
     pub const fn new_adjust_missile() -> Self {
         Self { inner: Self::ADJUST_MISSILE }
     }
@@ -536,7 +529,6 @@ impl GameobjectCastFlags {
     }
 
     /// 1 uint32. this is not confirmed but i have a feeling about it :D
-    ///
     pub const fn new_unk40000() -> Self {
         Self { inner: Self::UNK40000 }
     }
@@ -556,7 +548,6 @@ impl GameobjectCastFlags {
     }
 
     /// 2 functions called (same ones as for ranged but different)
-    ///
     pub const fn new_visual_chain() -> Self {
         Self { inner: Self::VISUAL_CHAIN }
     }
@@ -576,7 +567,6 @@ impl GameobjectCastFlags {
     }
 
     /// 2 bytes for the rune cur and rune next flags
-    ///
     pub const fn new_rune_update() -> Self {
         Self { inner: Self::RUNE_UPDATE }
     }
@@ -596,7 +586,6 @@ impl GameobjectCastFlags {
     }
 
     /// seems to make server send an uint32 after `m_targets.write`
-    ///
     pub const fn new_unk400000() -> Self {
         Self { inner: Self::UNK400000 }
     }

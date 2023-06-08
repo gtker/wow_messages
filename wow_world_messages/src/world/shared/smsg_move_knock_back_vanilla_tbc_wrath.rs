@@ -18,19 +18,14 @@ pub struct SMSG_MOVE_KNOCK_BACK {
     pub guid: Guid,
     /// mangoszero: Sequence
     /// mangoszero sets to 0
-    ///
     pub movement_counter: u32,
     /// cmangos/mangoszero/vmangos: x direction
-    ///
     pub v_cos: f32,
     /// cmangos/mangoszero/vmangos: y direction
-    ///
     pub v_sin: f32,
     /// cmangos/mangoszero/vmangos: Horizontal speed
-    ///
     pub horizontal_speed: f32,
     /// cmangos/mangoszero/vmangos: Z Movement speed (vertical)
-    ///
     pub vertical_speed: f32,
 }
 

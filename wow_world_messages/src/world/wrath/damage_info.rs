@@ -12,10 +12,8 @@ use std::io::{Read, Write};
 pub struct DamageInfo {
     pub spell_school_mask: u32,
     /// arcemu sends the same data in `damage_uint`.
-    ///
     pub damage_float: f32,
     /// arcemu sends the same data in `damage_float`.
-    ///
     pub damage_uint: u32,
 }
 

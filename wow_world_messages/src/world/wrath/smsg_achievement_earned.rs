@@ -19,7 +19,6 @@ pub struct SMSG_ACHIEVEMENT_EARNED {
     pub achievement: u32,
     pub earn_time: DateTime,
     /// All emus set to 0.
-    ///
     pub unknown: u32,
 }
 

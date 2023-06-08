@@ -18,23 +18,18 @@ use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 /// ```
 pub struct SMSG_TRADE_STATUS_EXTENDED {
     /// cmangos/vmangos/mangoszero: send trader or own trade windows state (last need for proper show spell apply to non-trade slot)
-    ///
     pub self_player: bool,
     /// added in 2.4.0, this value must be equal to value from TRADE_STATUS_OPEN_WINDOW status packet (different value for different players to block multiple trades?)
-    ///
     pub trade_id: u32,
     /// cmangos/vmangos/mangoszero: sets to 7
     /// cmangos/vmangos/mangoszero: trade slots count/number?, = next field in most cases
-    ///
     pub trade_slot_count1: u32,
     /// cmangos/vmangos/mangoszero: sets to 7
     /// cmangos/vmangos/mangoszero: trade slots count/number?, = prev field in most cases
-    ///
     pub trade_slot_count2: u32,
     pub money_in_trade: Gold,
     pub spell_on_lowest_slot: u32,
     /// vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0.
-    ///
     pub trade_slots: [TradeSlot; 7],
 }
 

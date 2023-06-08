@@ -19,40 +19,28 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum QuestFailedReason {
     /// this is default case
-    ///
     DontHaveReq,
     /// You are not high enough level for that quest.
-    ///
     QuestFailedLowLevel,
     /// That quest is not available to your race.
-    ///
     QuestFailedWrongRace,
     /// You have completed that quest.
-    ///
     QuestAlreadyDone,
     /// You can only be on one timed quest at a time.
-    ///
     QuestOnlyOneTimed,
     /// You are already on that quest.
-    ///
     QuestAlreadyOn,
     /// This quest requires an expansion enabled account.
-    ///
     QuestFailedExpansion,
     /// You are already on that quest.
-    ///
     QuestAlreadyOn2,
     /// You don't have the required items with you. Check storage.
-    ///
     QuestFailedMissingItems,
     /// You don't have enough money for that quest.
-    ///
     QuestFailedNotEnoughMoney,
     /// You have already completed 10 daily quests today.
-    ///
     DailyQuestsRemaining,
     /// You cannot complete quests once you have reached tired time.
-    ///
     QuestFailedCais,
 }
 

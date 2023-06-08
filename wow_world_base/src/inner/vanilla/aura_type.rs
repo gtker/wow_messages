@@ -202,73 +202,51 @@ pub enum AuraType {
     BindSight,
     ModPossess,
     /// vmangos: The aura should do periodic damage, the function that handles this is Aura::HandlePeriodicDamage, the amount is usually decided by the Unit::SpellDamageBonusDone or Unit::MeleeDamageBonusDone which increases/decreases the Modifier::m_amount
-    ///
     PeriodicDamage,
     /// vmangos: Used by Aura::HandleAuraDummy
-    ///
     Dummy,
     /// vmangos: Used by Aura::HandleModConfuse, will either confuse or unconfuse the target depending on whether the apply flag is set
-    ///
     ModConfuse,
     ModCharm,
     ModFear,
     /// vmangos: The aura will do periodic heals of a target, handled by Aura::HandlePeriodicHeal, uses Unit::SpellHealingBonusDone to calculate whether to increase or decrease Modifier::m_amount
-    ///
     PeriodicHeal,
     /// vmangos: Changes the attackspeed, the Modifier::m_amount decides how much we change in percent, ie, if the m_amount is 50 the attackspeed will increase by 50%
-    ///
     ModAttackspeed,
     /// vmangos: Modifies the threat that the Aura does in percent, the Modifier::m_miscvalue decides which of the SpellSchools it should affect threat for.  \see SpellSchoolMask
-    ///
     ModThreat,
     /// vmangos: Just applies a taunt which will change the threat a mob has Taken care of in Aura::HandleModThreat
-    ///
     ModTaunt,
     /// vmangos: Stuns targets in different ways, taken care of in Aura::HandleAuraModStun
-    ///
     ModStun,
     /// vmangos: Changes the damage done by a weapon in any hand, the Modifier::m_miscvalue will tell what school the damage is from, it's used as a bitmask \see SpellSchoolMask
-    ///
     ModDamageDone,
     /// vmangos: Not handled by the Aura class but instead this is implemented in Unit::MeleeDamageBonusTaken and Unit::SpellBaseDamageBonusTaken
-    ///
     ModDamageTaken,
     /// vmangos: Not handled by the Aura class, implemented in Unit::DealMeleeDamage
-    ///
     DamageShield,
     /// vmangos: Taken care of in Aura::HandleModStealth, take note that this is not the same thing as invisibility
-    ///
     ModStealth,
     /// vmangos: Not handled by the Aura class, implemented in Unit::isVisibleForOrDetect which does a lot of checks to determine whether the person is visible or not, the SPELL_AURA_MOD_STEALTH seems to determine how in/visible ie a rogue is.
-    ///
     ModStealthDetect,
     /// vmangos: Handled by Aura::HandleInvisibility, the Modifier::m_miscvalue in the struct seems to decide what kind of invisibility it is with a bitflag. the miscvalue decides which bit is set, ie: 3 would make the 3rd bit be set.
-    ///
     ModInvisibility,
     /// vmangos: Adds one of the kinds of detections to the possible detections.  As in SPEALL_AURA_MOD_INVISIBILITY the Modifier::m_miscvalue seems to decide what kind of invisibility the Unit should be able to detect.
-    ///
     ModInvisibilityDetection,
     /// 20,21 unofficial
-    ///
     ObsModHealth,
     ObsModMana,
     /// vmangos: Handled by Aura::HandleAuraModResistance, changes the resistance for a unit the field Modifier::m_miscvalue decides which kind of resistance that should be changed, for possible values see SpellSchools.  \see SpellSchools
-    ///
     ModResistance,
     /// vmangos: Currently just sets Aura::m_isPeriodic to apply and has a special case for Curse of the Plaguebringer.
-    ///
     PeriodicTriggerSpell,
     /// vmangos: Just sets Aura::m_isPeriodic to apply
-    ///
     PeriodicEnergize,
     /// vmangos: Changes whether the target is pacified or not depending on the apply flag.  Pacify makes the target silenced and have all it's attack skill disabled.  See: `http://classic.wowhead.com/spell=6462`
-    ///
     ModPacify,
     /// vmangos: Roots or unroots the target
-    ///
     ModRoot,
     /// vmangos: Silences the target and stops and spell casts that should be stopped, they have the flag SpellPreventionType::SPELL_PREVENTION_TYPE_SILENCE
-    ///
     ModSilence,
     ReflectSpells,
     ModStat,
@@ -289,11 +267,9 @@ pub enum AuraType {
     TrackCreatures,
     TrackResources,
     /// Ignore all Gear test spells
-    ///
     Unknown46,
     ModParryPercent,
     /// One periodic spell
-    ///
     Unknown48,
     ModDodgePercent,
     ModBlockSkill,
@@ -396,29 +372,21 @@ pub enum AuraType {
     MechanicImmunityMask,
     RetainComboPoints,
     /// Resist Pushback
-    ///
     ResistPushback,
     ModShieldBlockvaluePct,
     /// Track Stealthed
-    ///
     TrackStealthed,
     /// Mod Detected Range
-    ///
     ModDetectedRange,
     /// Split Damage Flat
-    ///
     SplitDamageFlat,
     /// Stealth Level Modifier
-    ///
     ModStealthLevel,
     /// Mod Water Breathing
-    ///
     ModWaterBreathing,
     /// Mod Reputation Gain
-    ///
     ModReputationGain,
     /// Mod Pet Damage
-    ///
     PetDamageMulti,
     ModShieldBlockvalue,
     NoPvpCredit,
@@ -437,7 +405,6 @@ pub enum AuraType {
     ModMountedSpeedNotStack,
     AllowChampionSpells,
     /// in 1.12.1 only dependent spirit case
-    ///
     ModSpellDamageOfStatPercent,
     ModSpellHealingOfStatPercent,
     SpiritOfRedemption,
@@ -446,7 +413,6 @@ pub enum AuraType {
     ModAttackerSpellCritChance,
     ModFlatSpellDamageVersus,
     /// unused - possible flat spell crit damage versus
-    ///
     ModFlatSpellCritDamageVersus,
     ModResistanceOfStatPercent,
     ModCriticalThreat,

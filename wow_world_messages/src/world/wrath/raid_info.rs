@@ -23,7 +23,6 @@ pub struct RaidInfo {
     pub expired: bool,
     pub extended: bool,
     /// Seems to be in seconds
-    ///
     pub time_until_reset: u32,
 }
 

@@ -18,31 +18,22 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum QuestPartyMessage {
     /// ERR_QUEST_PUSH_SUCCESS_S
-    ///
     SharingQuest,
     /// ERR_QUEST_PUSH_INVALID_S
-    ///
     CantTakeQuest,
     /// ERR_QUEST_PUSH_ACCEPTED_S
-    ///
     AcceptQuest,
     /// ERR_QUEST_PUSH_DECLINED_S
-    ///
     DeclineQuest,
     /// removed in 3.x
-    ///
     TooFar,
     /// ERR_QUEST_PUSH_BUSY_S
-    ///
     Busy,
     /// ERR_QUEST_PUSH_LOG_FULL_S
-    ///
     LogFull,
     /// ERR_QUEST_PUSH_ONQUEST_S
-    ///
     HaveQuest,
     /// ERR_QUEST_PUSH_ALREADY_DONE_S
-    ///
     FinishQuest,
 }
 

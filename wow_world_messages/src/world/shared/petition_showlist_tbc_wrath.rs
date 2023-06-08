@@ -15,17 +15,13 @@ use std::io::{Read, Write};
 pub struct PetitionShowlist {
     pub index: u32,
     /// cmangos/vmangos/mangoszero: statically sets to guild charter item id (5863).
-    ///
     pub charter_entry: u32,
     /// cmangos/vmangos/mangoszero: statically sets to guild charter display id (16161).
-    ///
     pub charter_display_id: u32,
     /// cmangos/vmangos/mangoszero: statically set to 1000 (10 silver).
-    ///
     pub guild_charter_cost: u32,
     /// cmangos/vmangos/mangoszero: statically set to 1
     /// arcemu: charter type? seems to be 0x0 for guilds and 0x1 for arena charters
-    ///
     pub unknown1: u32,
     pub signatures_required: u32,
 }

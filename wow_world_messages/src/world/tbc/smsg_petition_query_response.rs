@@ -31,16 +31,12 @@ pub struct SMSG_PETITION_QUERY_RESPONSE {
     pub charter_owner: Guid,
     pub guild_name: String,
     /// cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos
-    ///
     pub body_text: String,
     /// cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos
-    ///
     pub minimum_signatures: u32,
     /// cmangos/vmangos/mangoszero: Set to 9, only info is comment from vmangos
-    ///
     pub maximum_signatures: u32,
     /// mangosone: bypass client - side limitation, a different value is needed here for each petition
-    ///
     pub unknown1: u32,
     pub unknown2: u32,
     pub unknown3: u32,

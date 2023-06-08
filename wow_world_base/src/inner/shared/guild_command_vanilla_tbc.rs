@@ -17,10 +17,8 @@ pub enum GuildCommand {
     Quit,
     Founder,
     /// cmangos claims this triggers UI event EVENT_GUILD_ROSTER_UPDATE
-    ///
     Unknown19,
     /// cmangos claims this triggers UI event EVENT_GUILD_ROSTER_UPDATE
-    ///
     Unknown20,
 }
 

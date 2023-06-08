@@ -24,7 +24,6 @@ use crate::Guid;
 /// ```
 pub struct TradeSlot {
     /// cmangos/vmangos/mangoszero: sets to index of array
-    ///
     pub trade_slot_number: u8,
     pub item: u32,
     pub display_id: u32,

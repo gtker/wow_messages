@@ -37,34 +37,24 @@ pub enum GuildEvent {
     Disbanded,
     TabardChanged,
     /// string EVENT_GUILD_ROSTER_UPDATE tab content change?
-    ///
     Unk1,
     /// EVENT_GUILD_ROSTER_UPDATE
-    ///
     Unk2,
     /// ERR_FRIEND_ONLINE_SS
-    ///
     SignedOn,
     /// ERR_FRIEND_OFFLINE_S
-    ///
     SignedOff,
     /// EVENT_GUILDBANKBAGSLOTS_CHANGED
-    ///
     GuildBankBagSlotsChanged,
     /// EVENT_GUILDBANK_UPDATE_TABS
-    ///
     BanktabPurchased,
     /// EVENT_GUILDBANK_UPDATE_TABS
-    ///
     Unk5,
     /// EVENT_GUILDBANK_UPDATE_MONEY. string 0000000000002710 is 1 gold
-    ///
     GuildBankUpdateMoney,
     /// MSG_GUILD_BANK_MONEY_WITHDRAWN
-    ///
     GuildBankMoneyWithdrawn,
     /// EVENT_GUILDBANK_TEXT_CHANGED
-    ///
     GuildBankTextChanged,
 }
 

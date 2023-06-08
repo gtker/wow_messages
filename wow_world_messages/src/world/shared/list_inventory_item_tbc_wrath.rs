@@ -21,7 +21,6 @@ pub struct ListInventoryItem {
     pub item: u32,
     pub item_display_id: u32,
     /// cmangos: 0 for infinity item amount, although they send 0xFFFFFFFF in that case
-    ///
     pub max_items: u32,
     pub price: Gold,
     pub max_durability: u32,

@@ -16,7 +16,6 @@ use crate::Guid;
 pub struct SMSG_QUESTUPDATE_ADD_KILL {
     pub quest_id: u32,
     /// Unsure of name
-    ///
     pub creature_id: u32,
     pub kill_count: u32,
     pub required_kill_count: u32,

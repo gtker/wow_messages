@@ -13,10 +13,8 @@ use std::io::{Read, Write};
 /// ```
 pub struct SMSG_QUERY_TIME_RESPONSE {
     /// Seconds since 1970, 1st of January (Unix Time).
-    ///
     pub time: u32,
     /// Units need confirmation, but it's likely in seconds, since many other time related things are also seconds.
-    ///
     pub time_until_daily_quest_reset: u32,
 }
 

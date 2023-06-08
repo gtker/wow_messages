@@ -23,7 +23,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct SMSG_GAMEOBJECT_QUERY_RESPONSE {
     /// When the `found` optional is not present all emulators bitwise OR the entry with `0x80000000`.``
-    ///
     pub entry_id: u32,
     pub found: Option<SMSG_GAMEOBJECT_QUERY_RESPONSE_found>,
 }

@@ -9,7 +9,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct SMSG_INSTANCE_SAVE_CREATED {
     /// All emulators across all versions set to 0
-    ///
     pub unknown: u32,
 }
 

@@ -178,7 +178,6 @@ pub enum Map {
     AlliancePvpBarracks,
     HordePvpBarracks,
     /// Map files not present on 3.3.5 client, so loading the map will crash the client.
-    ///
     DevelopmentLand,
     BlackwingLair,
     WarsongGulch,

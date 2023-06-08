@@ -13,16 +13,12 @@ use std::io::{Read, Write};
 /// ```
 pub struct PendingAuctionSale {
     /// mangostwo: string '%d:%d:%d:%d:%d' -> itemId, ItemRandomPropertyId, 2, auctionId, unk1 (stack size?, unused)
-    ///
     pub string1: String,
     /// mangostwo: string '%16I64X:%d:%d:%d:%d' -> bidderGuid, bid, buyout, deposit, auctionCut
-    ///
     pub string2: String,
     /// mangostwo sets to 97250.
-    ///
     pub unknown1: u32,
     /// mangostwo sets to 68.
-    ///
     pub unknown2: u32,
     pub time_left: f32,
 }

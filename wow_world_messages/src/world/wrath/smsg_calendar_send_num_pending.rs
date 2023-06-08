@@ -11,7 +11,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct SMSG_CALENDAR_SEND_NUM_PENDING {
     /// Number of calendar items that require attention, e.g. pending invites
-    ///
     pub pending_events: u32,
 }
 

@@ -19,7 +19,6 @@ use crate::Guid;
 pub struct SMSG_AUCTION_OWNER_NOTIFICATION {
     pub auction_id: u32,
     /// vmangos/cmangos/mangoszero: if 0, client shows ERR_AUCTION_EXPIRED_S, else ERR_AUCTION_SOLD_S (works only when guid==0)
-    ///
     pub bid: u32,
     pub auction_out_bid: u32,
     pub bidder: Guid,

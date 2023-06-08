@@ -29,11 +29,9 @@ pub struct SMSG_UPDATE_LFG_LIST {
     pub dungeon_id: u32,
     pub update_type: SMSG_UPDATE_LFG_LIST_LfgListUpdateType,
     /// emus set to 0.
-    ///
     pub unknown1: u32,
     pub groups: Vec<LfgListGroup>,
     /// emus set to 0.
-    ///
     pub unknown2: u32,
     pub players: Vec<LfgListPlayer>,
 }

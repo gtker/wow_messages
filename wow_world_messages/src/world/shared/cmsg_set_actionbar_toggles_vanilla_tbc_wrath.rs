@@ -9,7 +9,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct CMSG_SET_ACTIONBAR_TOGGLES {
     /// Emulators set PLAYER_FIELD_BYTES`2` to this unless it's 0.
-    ///
     pub action_bar: u8,
 }
 

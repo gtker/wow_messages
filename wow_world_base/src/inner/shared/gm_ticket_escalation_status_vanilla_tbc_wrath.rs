@@ -10,13 +10,10 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum GmTicketEscalationStatus {
     /// ticket is not currently assigned to a gm
-    ///
     GmticketAssignedtogmStatusNotAssigned,
     /// ticket is assigned to a normal gm
-    ///
     GmticketAssignedtogmStatusAssigned,
     /// ticket is in the escalation queue
-    ///
     GmticketAssignedtogmStatusEscalated,
 }
 

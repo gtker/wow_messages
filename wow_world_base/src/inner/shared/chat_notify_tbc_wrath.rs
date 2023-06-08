@@ -43,110 +43,75 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum ChatNotify {
     /// %s joined channel.
-    ///
     JoinedNotice,
     /// %s left channel.
-    ///
     LeftNotice,
     /// Joined Channel: %s -- You joined
-    ///
     YouJoinedNotice,
     /// Left Channel: %s -- You left
-    ///
     YouLeftNotice,
     /// Wrong password for %s.
-    ///
     WrongPasswordNotice,
     /// Not on channel %s.
-    ///
     NotMemberNotice,
     /// Not a moderator of %s.
-    ///
     NotModeratorNotice,
     /// %s Password changed by %s.
-    ///
     PasswordChangedNotice,
     /// %s Owner changed to %s.
-    ///
     OwnerChangedNotice,
     /// %s Player %s was not found.
-    ///
     PlayerNotFoundNotice,
     /// %s You are not the channel owner.
-    ///
     NotOwnerNotice,
     /// %s Channel owner is %s.
-    ///
     ChannelOwnerNotice,
     ModeChangeNotice,
     /// %s Channel announcements enabled by %s.
-    ///
     AnnouncementsOnNotice,
     /// %s Channel announcements disabled by %s.
-    ///
     AnnouncementsOffNotice,
     /// %s Channel moderation enabled by %s.
-    ///
     ModerationOnNotice,
     /// %s Channel moderation disabled by %s.
-    ///
     ModerationOffNotice,
     /// %s You do not have permission to speak.
-    ///
     MutedNotice,
     /// %s Player %s kicked by %s.
-    ///
     PlayerKickedNotice,
     /// %s You are banned from that channel.
-    ///
     BannedNotice,
     /// %s Player %s banned by %s.
-    ///
     PlayerBannedNotice,
     /// %s Player %s unbanned by %s.
-    ///
     PlayerUnbannedNotice,
     /// %s Player %s is not banned.
-    ///
     PlayerNotBannedNotice,
     /// %s Player %s is already on the channel.
-    ///
     PlayerAlreadyMemberNotice,
     /// %2$s has invited you to join the channel '%1$s'.
-    ///
     InviteNotice,
     /// Target is in the wrong alliance for %s.
-    ///
     InviteWrongFactionNotice,
     /// Wrong alliance for %s.
-    ///
     WrongFactionNotice,
     /// Invalid channel name
-    ///
     InvalidNameNotice,
     /// %s is not moderated
-    ///
     NotModeratedNotice,
     /// %s You invited %s to join the channel
-    ///
     PlayerInvitedNotice,
     /// %s %s has been banned.
-    ///
     PlayerInviteBannedNotice,
     /// %s The number of messages that can be sent to this channel is limited, please wait to send another message.
-    ///
     ThrottledNotice,
     /// %s You are not in the correct area for this channel. -- The user is trying to send a chat to a zone specific channel, and they're not physically in that zone.
-    ///
     NotInAreaNotice,
     /// %s You must be queued in looking for group before joining this channel. -- The user must be in the looking for group system to join LFG chat channels.
-    ///
     NotInLfgNotice,
     /// %s Channel voice enabled by %s.
-    ///
     VoiceOnNotice,
     /// %s Channel voice disabled by %s.
-    ///
     VoiceOffNotice,
 }
 

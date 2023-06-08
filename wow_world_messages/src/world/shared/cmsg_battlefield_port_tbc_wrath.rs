@@ -15,16 +15,12 @@ use wow_world_base::shared::battlefield_port_action_vanilla_tbc_wrath::Battlefie
 /// ```
 pub struct CMSG_BATTLEFIELD_PORT {
     /// mangosone/mangos-tbc/azerothcore: arenatype if arena
-    ///
     pub arena_type: u8,
     /// mangosone/mangos-tbc/azerothcore: unk, can be 0x0 (may be if was invited?) and 0x1
-    ///
     pub unknown1: u8,
     /// mangosone/mangos-tbc/azerothcore: type id from dbc
-    ///
     pub bg_type_id: u32,
     /// mangosone/mangos-tbc/azerothcore: 0x1F90 constant?
-    ///
     pub unknown2: u16,
     pub action: BattlefieldPortAction,
 }

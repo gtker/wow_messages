@@ -28,7 +28,6 @@ pub struct CMSG_GMTICKET_CREATE {
     pub message: String,
     /// cmangos/vmangos/mangoszero: Pre-TBC: 'Reserved for future use'
     /// cmangos/vmangos/mangoszero: Unused
-    ///
     pub reserved_for_future_use: String,
 }
 

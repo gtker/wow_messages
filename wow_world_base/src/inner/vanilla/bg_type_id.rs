@@ -12,19 +12,14 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum BgTypeId {
     /// Your group has joined a battleground queue, but you are not eligible
-    ///
     NotEligible,
     /// Your group has joined the queue for AV
-    ///
     QueuedForAv,
     /// Your group has joined the queue for WS
-    ///
     QueuedForWsg,
     /// Your group has joined the queue for AB
-    ///
     QueuedForAb,
     /// send bg command result to show nice message
-    ///
     RemoveFromQueue,
 }
 

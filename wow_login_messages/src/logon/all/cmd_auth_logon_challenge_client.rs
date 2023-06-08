@@ -28,20 +28,17 @@ use std::net::Ipv4Addr;
 /// ```
 pub struct CMD_AUTH_LOGON_CHALLENGE_Client {
     /// Determines which version of messages are used for further communication.
-    ///
     pub protocol_version: ProtocolVersion,
     pub version: Version,
     pub platform: Platform,
     pub os: Os,
     pub locale: Locale,
     /// Offset in minutes from UTC time. 180 would be UTC+3
-    ///
     pub utc_timezone_offset: u32,
     pub client_ip_address: Ipv4Addr,
     /// Real clients can send a maximum of 16 UTF-8 characters. This is not necessarily 16 bytes since one character can be more than one byte.
     /// Real clients will send a fully uppercased username, and will perform authentication calculations on the uppercased version.
     /// Uppercasing in regards to non-ASCII values is little weird. See `https://docs.rs/wow_srp/latest/wow_srp/normalized_string/index.html` for more info.
-    ///
     pub account_name: String,
 }
 

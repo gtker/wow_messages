@@ -11,7 +11,6 @@ use std::io::{Read, Write};
 pub struct SMSG_UPDATE_ACCOUNT_DATA_COMPLETE {
     pub data_type: u32,
     /// mangostwo hardcodes this to 0
-    ///
     pub unknown1: u32,
 }
 

@@ -30,7 +30,6 @@ use crate::vanilla::{
 /// ```
 pub struct SMSG_BATTLEFIELD_STATUS {
     /// vmangos: players can be in 3 queues at the same time (0..2)
-    ///
     pub queue_slot: u32,
     pub map: SMSG_BATTLEFIELD_STATUS_Map,
 }

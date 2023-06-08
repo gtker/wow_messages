@@ -33,16 +33,13 @@ pub struct SMSG_SPELLNONMELEEDAMAGELOG {
     pub school: SpellSchool,
     pub absorbed_damage: u32,
     /// cmangos/mangoszero/vmangos: sent as int32
-    ///
     pub resisted: u32,
     /// cmangos/mangoszero/vmangos: if 1, then client show spell name (example: %s's ranged shot hit %s for %u school or %s suffers %u school damage from %s's spell_name
-    ///
     pub periodic_log: bool,
     pub unused: u8,
     pub blocked: u32,
     pub hit_info: HitInfo,
     /// cmangos has some that might be correct `https://github.com/cmangos/mangos-classic/blob/524a39412dae7946d06e4b8f319f45b615075815/src/game/Entities/Unit.cpp#L5497`.
-    ///
     pub extend_flag: u8,
 }
 

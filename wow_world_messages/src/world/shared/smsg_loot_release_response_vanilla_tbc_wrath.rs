@@ -13,7 +13,6 @@ use crate::Guid;
 pub struct SMSG_LOOT_RELEASE_RESPONSE {
     pub guid: Guid,
     /// Set to 1 on mangoszero/vmangos/cmangos/azerothcraft/mangosone/mangostwo/arcemu
-    ///
     pub unknown1: u8,
 }
 

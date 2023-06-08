@@ -29,7 +29,6 @@ pub enum ArenaTeamCommandError {
     ArenaTeamNameInvalid,
     ArenaTeamNameExistsS,
     /// This value also has the name `ARENA_TEAM_PERMISSIONS`.
-    ///
     ArenaTeamLeaderLeaveS,
     ArenaTeamPlayerNotInTeam,
     ArenaTeamPlayerNotInTeamSs,

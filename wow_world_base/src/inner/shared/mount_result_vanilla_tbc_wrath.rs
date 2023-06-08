@@ -18,37 +18,26 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum MountResult {
     /// You can't mount that unit!
-    ///
     InvalidMountee,
     /// That mount is too far away!
-    ///
     TooFarAway,
     /// You're already mounted!
-    ///
     AlreadyMounted,
     /// That unit can't be mounted!
-    ///
     NotMountable,
     /// That mount isn't your pet!
-    ///
     NotYourPet,
     /// internal
-    ///
     Other,
     /// You can't mount while looting!
-    ///
     Looting,
     /// You can't mount because of your race!
-    ///
     RaceCantMount,
     /// You can't mount while shapeshifted!
-    ///
     Shapeshifted,
     /// You dismount before continuing.
-    ///
     ForcedDismount,
     /// no error
-    ///
     Ok,
 }
 

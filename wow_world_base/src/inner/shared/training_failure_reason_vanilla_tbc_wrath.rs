@@ -12,13 +12,10 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum TrainingFailureReason {
     /// Trainer service %d unavailable.
-    ///
     Unavailable,
     /// Not enough money for trainer service %d.
-    ///
     NotEnoughMoney,
     /// Not enough skill points for trainer service %d.
-    ///
     NotEnoughSkill,
 }
 

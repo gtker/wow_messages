@@ -38,7 +38,6 @@ pub enum GuildCommandResult {
     GuildNameInvalid,
     GuildNameExistsS,
     /// mangosone has both `GUILD_PERMISSIONS` and `GUILD_LEADER_LEAVE` as `0x08`.
-    ///
     GuildLeaderLeaveOrPermissions,
     GuildPlayerNotInGuild,
     GuildPlayerNotInGuildS,

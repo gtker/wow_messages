@@ -16,31 +16,22 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum SellItemResult {
     /// The item was not found.
-    ///
     ErrCantFindItem,
     /// The merchant doesn't want that item.
-    ///
     ErrCantSellItem,
     /// The merchant doesn't like you.
-    ///
     ErrCantFindVendor,
     /// You don't own that item.
-    ///
     ErrYouDontOwnThatItem,
     /// Nothing appears...
-    ///
     ErrUnk,
     /// You can only do that with empty bags.
-    ///
     ErrOnlyEmptyBag,
     /// You cannot sell items to this merchant.
-    ///
     ErrCantSellToThisMerchant,
     /// You must repair that item's durability to use it.
-    ///
     ErrMustRepairItemDurabilityToUse,
     /// Internal Bag Error
-    ///
     InternalBagError,
 }
 

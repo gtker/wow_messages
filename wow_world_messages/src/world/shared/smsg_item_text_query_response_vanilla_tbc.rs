@@ -11,7 +11,6 @@ use std::io::{Read, Write};
 pub struct SMSG_ITEM_TEXT_QUERY_RESPONSE {
     pub item_text_id: u32,
     /// mangoszero: CString TODO max length 8000
-    ///
     pub text: String,
 }
 

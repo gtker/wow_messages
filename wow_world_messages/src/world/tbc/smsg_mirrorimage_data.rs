@@ -34,7 +34,6 @@ pub struct SMSG_MIRRORIMAGE_DATA {
     pub facial_hair: u8,
     pub guild_id: u32,
     /// This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD.
-    ///
     pub display_ids: [u32; 11],
 }
 

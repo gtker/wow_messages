@@ -12,10 +12,8 @@ use std::io::{Read, Write};
 /// ```
 pub struct SMSG_CALENDAR_COMMAND_RESULT {
     /// All emus set to 0.
-    ///
     pub unknown1: u32,
     /// All emus set to 0.
-    ///
     pub unknown2: u8,
     pub name: String,
     pub result: u32,

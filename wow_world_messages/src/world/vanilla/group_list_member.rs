@@ -17,7 +17,6 @@ pub struct GroupListMember {
     pub guid: Guid,
     pub is_online: bool,
     /// mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0))
-    ///
     pub flags: u8,
 }
 

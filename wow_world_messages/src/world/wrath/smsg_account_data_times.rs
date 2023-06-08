@@ -16,14 +16,11 @@ use crate::wrath::CacheMask;
 /// ```
 pub struct SMSG_ACCOUNT_DATA_TIMES {
     /// Seconds since Unix Epoch
-    ///
     pub unix_time: u32,
     /// Both mangostwo and arcemu hardcode this to 1
-    ///
     pub unknown1: u8,
     pub mask: CacheMask,
     /// Maximum size is 32 4-bit integers. For every bit that is 1 in the mask, write one u32 with the time
-    ///
     pub data: Vec<u32>,
 }
 

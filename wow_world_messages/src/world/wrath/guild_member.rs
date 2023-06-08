@@ -29,7 +29,6 @@ use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 pub struct GuildMember {
     pub guid: Guid,
     /// arcemu: high guid
-    ///
     pub unknown: u32,
     pub status: GuildMember_GuildMemberStatus,
     pub name: String,

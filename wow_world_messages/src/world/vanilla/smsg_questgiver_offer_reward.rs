@@ -38,7 +38,6 @@ pub struct SMSG_QUESTGIVER_OFFER_REWARD {
     pub money_reward: Gold,
     pub reward_spell: u32,
     /// mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though.
-    ///
     pub reward_spell_cast: u32,
 }
 

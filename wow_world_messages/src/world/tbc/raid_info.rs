@@ -17,7 +17,6 @@ pub struct RaidInfo {
     pub reset_time: u32,
     pub instance_id: u32,
     /// Neither 1.12 nor 3.3.5 have an index field so this might not be accurate.
-    ///
     pub index: u32,
 }
 

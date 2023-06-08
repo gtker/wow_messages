@@ -26,19 +26,15 @@ pub struct CMSG_SEND_MAIL {
     pub subject: String,
     pub body: String,
     /// cmangos: stationery?
-    ///
     pub unknown1: u32,
     /// cmangos: 0x00000000
-    ///
     pub unknown2: u32,
     pub item: Guid,
     pub money: Gold,
     pub cash_on_delivery_amount: u32,
     /// cmangos: const 0
-    ///
     pub unknown3: u32,
     /// cmangos: const 0
-    ///
     pub unknown4: u32,
 }
 

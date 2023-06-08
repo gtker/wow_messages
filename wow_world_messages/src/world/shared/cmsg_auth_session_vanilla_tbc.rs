@@ -23,7 +23,6 @@ use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 pub struct CMSG_AUTH_SESSION {
     pub build: u32,
     /// This is sent to the client in `CMD_REALM_LIST_Server`.
-    ///
     pub server_id: u32,
     pub username: String,
     pub client_seed: u32,

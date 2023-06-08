@@ -285,7 +285,6 @@ impl ItemFlag {
     }
 
     /// not used
-    ///
     pub const fn new_no_pickup() -> Self {
         Self { inner: Self::NO_PICKUP }
     }
@@ -305,7 +304,6 @@ impl ItemFlag {
     }
 
     /// items created by spells with `SPELL_EFFECT_CREATE_ITEM`
-    ///
     pub const fn new_conjured() -> Self {
         Self { inner: Self::CONJURED }
     }
@@ -325,7 +323,6 @@ impl ItemFlag {
     }
 
     /// affect only non container items that can be 'open' for loot. It or lockid set enable for client show 'Right click to open'. See also `ITEM_DYNFLAG_UNLOCKED`
-    ///
     pub const fn new_lootable() -> Self {
         Self { inner: Self::LOOTABLE }
     }
@@ -345,7 +342,6 @@ impl ItemFlag {
     }
 
     /// can't repeat old note: appears red icon (like when item durability==0)
-    ///
     pub const fn new_deprecated() -> Self {
         Self { inner: Self::DEPRECATED }
     }
@@ -365,7 +361,6 @@ impl ItemFlag {
     }
 
     /// used for totem. Item can not be destroyed, except by using spell (item can be reagent for spell and then allowed)
-    ///
     pub const fn new_indestructible() -> Self {
         Self { inner: Self::INDESTRUCTIBLE }
     }
@@ -385,7 +380,6 @@ impl ItemFlag {
     }
 
     /// ? old note: usable
-    ///
     pub const fn new_player_cast() -> Self {
         Self { inner: Self::PLAYER_CAST }
     }
@@ -405,7 +399,6 @@ impl ItemFlag {
     }
 
     /// items without an equip cooldown (and usually a _USABLE flag)
-    ///
     pub const fn new_no_equip_cooldown() -> Self {
         Self { inner: Self::NO_EQUIP_COOLDOWN }
     }
@@ -425,7 +418,6 @@ impl ItemFlag {
     }
 
     /// saw this on item 47115, 49295...
-    ///
     pub const fn new_int_bonus_instead() -> Self {
         Self { inner: Self::INT_BONUS_INSTEAD }
     }
@@ -445,7 +437,6 @@ impl ItemFlag {
     }
 
     /// used or not used wrapper
-    ///
     pub const fn new_wrapper() -> Self {
         Self { inner: Self::WRAPPER }
     }
@@ -465,7 +456,6 @@ impl ItemFlag {
     }
 
     /// ignore bag space at new item creation?
-    ///
     pub const fn new_ignore_bag_space() -> Self {
         Self { inner: Self::IGNORE_BAG_SPACE }
     }
@@ -485,7 +475,6 @@ impl ItemFlag {
     }
 
     /// items which can be looted by all party members
-    ///
     pub const fn new_party_loot() -> Self {
         Self { inner: Self::PARTY_LOOT }
     }
@@ -505,7 +494,6 @@ impl ItemFlag {
     }
 
     /// arena/guild charter
-    ///
     pub const fn new_charter() -> Self {
         Self { inner: Self::CHARTER }
     }
@@ -525,7 +513,6 @@ impl ItemFlag {
     }
 
     /// readable letter items
-    ///
     pub const fn new_letter() -> Self {
         Self { inner: Self::LETTER }
     }
@@ -599,7 +586,6 @@ impl ItemFlag {
     }
 
     /// item can have prospecting loot (in fact some items expected have empty loot)
-    ///
     pub const fn new_prospectable() -> Self {
         Self { inner: Self::PROSPECTABLE }
     }
@@ -619,7 +605,6 @@ impl ItemFlag {
     }
 
     /// custom server side check, in client added in 2.x
-    ///
     pub const fn new_unique_equipped() -> Self {
         Self { inner: Self::UNIQUE_EQUIPPED }
     }
@@ -657,7 +642,6 @@ impl ItemFlag {
     }
 
     /// Item can be used during arena match
-    ///
     pub const fn new_ignore_default_arena_restrictions() -> Self {
         Self { inner: Self::IGNORE_DEFAULT_ARENA_RESTRICTIONS }
     }
@@ -677,7 +661,6 @@ impl ItemFlag {
     }
 
     /// Some Thrown weapons have it (and only Thrown) but not all
-    ///
     pub const fn new_no_durability_loss() -> Self {
         Self { inner: Self::NO_DURABILITY_LOSS }
     }

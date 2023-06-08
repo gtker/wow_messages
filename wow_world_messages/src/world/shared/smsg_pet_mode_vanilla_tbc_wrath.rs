@@ -21,7 +21,6 @@ pub struct SMSG_PET_MODE {
     pub react_state: PetReactState,
     pub command_state: PetCommandState,
     /// vmangos sets to 0.
-    ///
     pub unknown1: u8,
     pub pet_enabled: PetEnabled,
 }

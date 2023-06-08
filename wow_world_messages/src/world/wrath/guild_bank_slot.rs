@@ -23,7 +23,6 @@ pub struct GuildBankSlot {
     pub slot: u8,
     pub item: u32,
     /// 3.3.0 (0x8000, 0x8020)
-    ///
     pub unknown1: u32,
     pub item_random_property_id: VariableItemRandomProperty,
     pub amount_of_items: u32,

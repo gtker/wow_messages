@@ -9,7 +9,6 @@ use std::io::{Read, Write};
 /// ```
 pub struct CMSG_CONTACT_LIST {
     /// Sent back in [`SMSG_CONTACT_LIST`](crate::tbc::SMSG_CONTACT_LIST).
-    ///
     pub flags: u32,
 }
 

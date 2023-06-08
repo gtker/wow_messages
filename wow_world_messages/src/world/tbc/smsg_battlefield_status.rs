@@ -33,15 +33,12 @@ use crate::tbc::{
 /// ```
 pub struct SMSG_BATTLEFIELD_STATUS {
     /// vmangos: players can be in 3 queues at the same time (0..2)
-    ///
     pub queue_slot: u32,
     pub arena_type: ArenaType,
     /// mangosone sets to 0x0D.
-    ///
     pub unknown1: u8,
     pub battleground_type: BattlegroundType,
     /// mangosone sets to 0x1F90
-    ///
     pub unknown2: u16,
     pub client_instance_id: u32,
     pub rated: bool,

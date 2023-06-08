@@ -13,7 +13,6 @@ use crate::tbc::FactionStanding;
 /// ```
 pub struct SMSG_SET_FACTION_STANDING {
     /// All emus set to 0.
-    ///
     pub refer_a_friend_bonus: f32,
     pub faction_standings: Vec<FactionStanding>,
 }

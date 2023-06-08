@@ -14,7 +14,6 @@ use wow_world_base::shared::dungeon_difficulty_tbc_wrath::DungeonDifficulty;
 pub struct MSG_SET_DUNGEON_DIFFICULTY_Server {
     pub difficulty: DungeonDifficulty,
     /// ArcEmu hardcodes this to 1
-    ///
     pub unknown1: u32,
     pub is_in_group: bool,
 }

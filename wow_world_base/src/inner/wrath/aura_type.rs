@@ -344,7 +344,6 @@ pub enum AuraType {
     ModInvisibility,
     ModInvisibilityDetect,
     /// 20, 21 unofficial
-    ///
     ObsModHealth,
     ObsModPower,
     ModResistance,
@@ -372,11 +371,9 @@ pub enum AuraType {
     TrackCreatures,
     TrackResources,
     /// Ignore all Gear test spells
-    ///
     Unknown46,
     ModParryPercent,
     /// One periodic spell
-    ///
     PeriodicTriggerSpellFromClient,
     ModDodgePercent,
     ModCriticalHealingAmount,
@@ -393,7 +390,6 @@ pub enum AuraType {
     ModScale,
     PeriodicHealthFunnel,
     /// old PERIODIC_MANA_FUNNEL
-    ///
     Unknown63,
     PeriodicManaLeech,
     ModCastingSpeedNotStack,
@@ -422,7 +418,6 @@ pub enum AuraType {
     ModHealthRegenPercent,
     PeriodicDamagePercent,
     /// old MOD_RESIST_CHANCE
-    ///
     Unknown90,
     ModDetectRange,
     PreventsFleeing,
@@ -453,7 +448,6 @@ pub enum AuraType {
     ModMechanicResistance,
     ModHealingPct,
     /// old SHARE_PET_TRACKING
-    ///
     Unknown119,
     Untrackable,
     Empathy,
@@ -485,29 +479,21 @@ pub enum AuraType {
     MechanicImmunityMask,
     RetainComboPoints,
     /// Reduce Pushback
-    ///
     ReducePushback,
     ModShieldBlockvaluePct,
     /// Track Stealthed
-    ///
     TrackStealthed,
     /// Mod Detected Range
-    ///
     ModDetectedRange,
     /// Split Damage Flat
-    ///
     SplitDamageFlat,
     /// Stealth Level Modifier
-    ///
     ModStealthLevel,
     /// Mod Water Breathing
-    ///
     ModWaterBreathing,
     /// Mod Reputation Gain
-    ///
     ModReputationGain,
     /// Mod Pet Damage
-    ///
     PetDamageMulti,
     ModShieldBlockvalue,
     NoPvpCredit,
@@ -525,10 +511,8 @@ pub enum AuraType {
     ModSpeedNotStack,
     ModMountedSpeedNotStack,
     /// old ALLOW_CHAMPION_SPELLS
-    ///
     Unknown173,
     /// by defeult intelect, dependent from MOD_SPELL_HEALING_OF_STAT_PERCENT
-    ///
     ModSpellDamageOfStatPercent,
     ModSpellHealingOfStatPercent,
     SpiritOfRedemption,
@@ -537,7 +521,6 @@ pub enum AuraType {
     ModAttackerSpellCritChance,
     ModFlatSpellDamageVersus,
     /// old MOD_FLAT_SPELL_CRIT_DAMAGE_VERSUS - possible flat spell crit damage versus
-    ///
     Unknown181,
     ModResistanceOfStatPercent,
     ModCriticalThreat,
@@ -554,11 +537,9 @@ pub enum AuraType {
     ModTargetAbsorbSchool,
     ModTargetAbilityAbsorbSchool,
     /// only 24818 Noxious Breath
-    ///
     ModCooldown,
     ModAttackerSpellAndWeaponCritChance,
     /// old MOD_ALL_WEAPON_SKILLS
-    ///
     Unknown198,
     ModIncreasesSpellPctToHit,
     ModXpPct,
@@ -579,7 +560,6 @@ pub enum AuraType {
     ArenaPreparation,
     HasteSpells,
     /// NYI
-    ///
     ModMeleeHaste2,
     HasteRanged,
     ModManaRegenFromStat,
@@ -597,7 +577,6 @@ pub enum AuraType {
     ProcTriggerSpellWithValue,
     MechanicDurationMod,
     /// client-side only
-    ///
     ChangeModelForAllHumanoids,
     MechanicDurationModNotStack,
     ModDispelResist,
@@ -636,7 +615,6 @@ pub enum AuraType {
     ModAttackPowerOfStatPercent,
     ModIgnoreTargetResist,
     /// Possibly need swap vs 195 aura used only in 1 spell Chaos Bolt Passive
-    ///
     ModAbilityIgnoreTargetResist,
     ModDamageFromCaster,
     IgnoreMeleeReset,
@@ -644,7 +622,6 @@ pub enum AuraType {
     AbilityConsumeNoAmmo,
     ModIgnoreShapeshift,
     /// NYI
-    ///
     ModDamageDoneForMechanic,
     ModMaxAffectedTargets,
     ModDisarmRanged,
@@ -653,7 +630,6 @@ pub enum AuraType {
     ModHonorGainPct,
     ModBaseHealthPct,
     /// Possibly only for some spell family class spells
-    ///
     ModHealingReceived,
     Linked,
     ModAttackPowerOfArmor,

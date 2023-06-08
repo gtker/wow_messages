@@ -34,7 +34,6 @@ pub struct CMSG_AUTH_SESSION {
     pub realm_id: u32,
     /// Purpose and exact meaning of name unknown.
     /// TrinityCore has this name but never uses the variable afterwards.
-    ///
     pub dos_response: u64,
     pub client_proof: [u8; 20],
     pub decompressed_addon_info_size: u32,

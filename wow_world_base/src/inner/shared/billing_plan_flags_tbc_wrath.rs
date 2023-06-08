@@ -196,7 +196,6 @@ impl BillingPlanFlags {
     }
 
     /// Name meaning unknown
-    ///
     pub const fn new_igr() -> Self {
         Self { inner: Self::IGR }
     }

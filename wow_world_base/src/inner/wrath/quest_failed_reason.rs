@@ -21,40 +21,28 @@
 pub enum QuestFailedReason {
     DontHaveReq,
     /// DESCRIPTION You are not high enough level for that quest.
-    ///
     QuestFailedLowLevel,
     /// DESCRIPTION That quest is not available to your race.
-    ///
     QuestFailedWrongRace,
     /// DESCRIPTION You have completed that quest.
-    ///
     QuestAlreadyDone,
     /// DESCRIPTION You can only be on one timed quest at a time.
-    ///
     QuestOnlyOneTimed,
     /// DESCRIPTION You are already on that quest.
-    ///
     QuestAlreadyOn,
     /// DESCRIPTION This quest requires an expansion enabled account.
-    ///
     QuestFailedExpansion,
     /// DESCRIPTION You are already on that quest.
-    ///
     QuestAlreadyOn2,
     /// DESCRIPTION You don't have the required items with you. Check storage.
-    ///
     QuestFailedMissingItems,
     /// DESCRIPTION You don't have enough money for that quest.
-    ///
     QuestFailedNotEnoughMoney,
     /// DESCRIPTION You have already completed 25 daily quests today.
-    ///
     DailyQuestsRemaining,
     /// DESCRIPTION You cannot complete quests once you have reached tired time.
-    ///
     QuestFailedCais,
     /// DESCRIPTION You have completed that daily quest today.
-    ///
     DailyQuestCompletedToday,
 }
 

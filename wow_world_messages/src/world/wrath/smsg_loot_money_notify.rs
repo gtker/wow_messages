@@ -11,7 +11,6 @@ use std::io::{Read, Write};
 pub struct SMSG_LOOT_MONEY_NOTIFY {
     pub amount: u32,
     /// Controls the text displayed in chat. False is 'Your share is...' and true is 'You loot...'
-    ///
     pub alone: bool,
 }
 

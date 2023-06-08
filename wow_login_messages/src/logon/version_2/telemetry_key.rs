@@ -15,7 +15,6 @@ pub struct TelemetryKey {
     pub unknown2: u32,
     pub unknown3: [u8; 4],
     /// SHA1 hash of the session key, server public key, and an unknown 20 byte value.
-    ///
     pub cd_key_proof: [u8; 20],
 }
 

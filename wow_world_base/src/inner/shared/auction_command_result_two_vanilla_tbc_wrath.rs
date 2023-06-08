@@ -16,31 +16,22 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum AuctionCommandResultTwo {
     /// depends on enum AuctionAction
-    ///
     Ok,
     /// depends on enum `InventoryChangeResult`
-    ///
     ErrInventory,
     /// ERR_AUCTION_DATABASE_ERROR (default)
-    ///
     ErrDatabase,
     /// ERR_NOT_ENOUGH_MONEY
-    ///
     ErrNotEnoughMoney,
     /// ERR_ITEM_NOT_FOUND
-    ///
     ErrItemNotFound,
     /// ERR_AUCTION_HIGHER_BID
-    ///
     ErrHigherBid,
     /// ERR_AUCTION_BID_INCREMENT
-    ///
     ErrBidIncrement,
     /// ERR_AUCTION_BID_OWN
-    ///
     ErrBidOwn,
     /// ERR_RESTRICTED_ACCOUNT
-    ///
     ErrRestrictedAccount,
 }
 

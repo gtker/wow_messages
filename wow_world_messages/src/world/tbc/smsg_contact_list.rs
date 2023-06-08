@@ -15,7 +15,6 @@ use crate::tbc::{
 /// ```
 pub struct SMSG_CONTACT_LIST {
     /// Indicates which kinds of relations are being sent in this list
-    ///
     pub list_mask: RelationType,
     pub relations: Vec<Relation>,
 }

@@ -230,7 +230,6 @@ impl SpellCastTargetFlags {
     }
 
     /// not used in any spells (can be set dynamically)
-    ///
     pub const fn new_unused1() -> Self {
         Self { inner: Self::UNUSED1 }
     }
@@ -268,7 +267,6 @@ impl SpellCastTargetFlags {
     }
 
     /// not used in any spells (can be set dynamically)
-    ///
     pub const fn new_unused2() -> Self {
         Self { inner: Self::UNUSED2 }
     }
@@ -288,7 +286,6 @@ impl SpellCastTargetFlags {
     }
 
     /// not used in any spells (can be set dynamically)
-    ///
     pub const fn new_unused3() -> Self {
         Self { inner: Self::UNUSED3 }
     }
@@ -362,7 +359,6 @@ impl SpellCastTargetFlags {
     }
 
     /// used in 7 spells only
-    ///
     pub const fn new_object_unk() -> Self {
         Self { inner: Self::OBJECT_UNK }
     }
@@ -382,7 +378,6 @@ impl SpellCastTargetFlags {
     }
 
     /// looks like self target (389 spells)
-    ///
     pub const fn new_unit_unk() -> Self {
         Self { inner: Self::UNIT_UNK }
     }
@@ -420,7 +415,6 @@ impl SpellCastTargetFlags {
     }
 
     /// 10 spells (gathering professions)
-    ///
     pub const fn new_unit_corpse() -> Self {
         Self { inner: Self::UNIT_CORPSE }
     }
@@ -440,7 +434,6 @@ impl SpellCastTargetFlags {
     }
 
     /// pguid, 0 spells
-    ///
     pub const fn new_gameobject() -> Self {
         Self { inner: Self::GAMEOBJECT }
     }
@@ -460,7 +453,6 @@ impl SpellCastTargetFlags {
     }
 
     /// pguid, 0 spells
-    ///
     pub const fn new_trade_item() -> Self {
         Self { inner: Self::TRADE_ITEM }
     }
@@ -480,7 +472,6 @@ impl SpellCastTargetFlags {
     }
 
     /// string, 0 spells
-    ///
     pub const fn new_string() -> Self {
         Self { inner: Self::STRING }
     }
@@ -500,7 +491,6 @@ impl SpellCastTargetFlags {
     }
 
     /// 199 spells, opening object/lock
-    ///
     pub const fn new_unk1() -> Self {
         Self { inner: Self::UNK1 }
     }
@@ -520,7 +510,6 @@ impl SpellCastTargetFlags {
     }
 
     /// pguid, resurrection spells
-    ///
     pub const fn new_corpse() -> Self {
         Self { inner: Self::CORPSE }
     }

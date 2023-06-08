@@ -17,34 +17,24 @@
 #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
 pub enum QuestFailedReason {
     /// this is default case
-    ///
     DontHaveReq,
     /// You are not high enough level for that quest.
-    ///
     QuestFailedLowLevel,
     /// You don't meet the requirements for that quest.
-    ///
     QuestFailedReqs,
     /// Inventory is full. (Also 50. From SMSG_QUESTGIVER_QUEST_FAILED)
-    ///
     QuestFailedInventoryFull,
     /// That quest is not available to your race.
-    ///
     QuestFailedWrongRace,
     /// You can only be on one timed quest at a time.
-    ///
     QuestOnlyOneTimed,
     /// You are already on that quest.
-    ///
     QuestAlreadyOn,
     /// Duplicate item found. (From SMSG_QUESTGIVER_QUEST_FAILED)
-    ///
     QuestFailedDuplicateItem,
     /// You don't have the required items with you. Check storage.
-    ///
     QuestFailedMissingItems,
     /// You don't have enough money for that quest.
-    ///
     QuestFailedNotEnoughMoney,
 }
 

@@ -279,7 +279,6 @@ impl AuraFlag {
     }
 
     /// Seems to hide the aura and tell client the aura was removed
-    ///
     pub const fn new_hide() -> Self {
         Self { inner: Self::HIDE }
     }

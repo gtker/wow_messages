@@ -18,12 +18,10 @@ use crate::Guid;
 pub struct SMSG_ENCHANTMENTLOG {
     pub target: Guid,
     /// vmangos: message says enchant has faded if empty
-    ///
     pub caster: Guid,
     pub item: u32,
     pub spell: u32,
     /// vmangos: Only used if `caster` is not 0.
-    ///
     pub show_affiliation: bool,
 }
 

@@ -209,7 +209,6 @@ pub enum SpellCastResult {
     NotShapeshift,
     NotStanding,
     /// rogues trying 'enchant' other's weapon with poison
-    ///
     NotTradeable,
     NotTrading,
     NotUnsheathed,
