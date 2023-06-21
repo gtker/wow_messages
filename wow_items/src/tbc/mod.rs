@@ -15,11 +15,11 @@ pub use wow_world_base::tbc::{
 ///
 /// Prefer using this over [`all_items`] since this utilizes a lookup array for very fast lookup.
 pub const fn lookup_item(id: u32) -> Option<&'static Item> {
-    if id < 25 || id > 39656 {
+    if id < 17 || id > 39656 {
         return None;
     }
 
-    let index = data::Z________LOOKUP[(id - 25) as usize];
+    let index = data::Z________LOOKUP[(id - 17) as usize];
     if index == u16::MAX || index as usize > (all_items().len() - 1) {
         None
     } else {
@@ -43,7 +43,7 @@ mod test {
         assert!(lookup_item(u32::MIN).is_none());
         assert!(lookup_item(u32::MAX).is_none());
 
-        const MIN: u32 = 25;
+        const MIN: u32 = 17;
         const MAX: u32 = 39656;
         assert_eq!(lookup_item(MIN).unwrap().entry(), MIN);
         assert_eq!(lookup_item(MAX).unwrap().entry(), MAX);

@@ -531,7 +531,7 @@ impl Spell {
     /// Returns `0` except for specific item entries.
     pub const fn attributes_serverside(&self) -> i32 {
         match self.entry {
-            4044 | 4133 | 11816 | 18115 | 21789 | 27791 | 28330 => 4,
+            4044 | 4133 | 6742 | 8852 | 11816 | 13879 | 17205 | 18115 | 21789 | 23378 | 27791 | 28330 => 4,
             _ => 0,
         }
     }

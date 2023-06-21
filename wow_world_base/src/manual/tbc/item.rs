@@ -37,10 +37,11 @@ pub struct Item {
     stackable: i16,
     container_slots: i8,
     armor: i16,
-    fire_res: i8,
-    nature_res: i8,
-    frost_res: i8,
-    shadow_res: i8,
+    fire_res: i16,
+    nature_res: i16,
+    frost_res: i16,
+    shadow_res: i16,
+    arcane_res: i16,
     delay: i16,
     ammo_type: i8,
     ranged_mod_range: f32,
@@ -96,10 +97,11 @@ impl Item {
         stackable: i16,
         container_slots: i8,
         armor: i16,
-        fire_res: i8,
-        nature_res: i8,
-        frost_res: i8,
-        shadow_res: i8,
+        fire_res: i16,
+        nature_res: i16,
+        frost_res: i16,
+        shadow_res: i16,
+        arcane_res: i16,
         delay: i16,
         ammo_type: i8,
         ranged_mod_range: f32,
@@ -156,6 +158,7 @@ impl Item {
             nature_res,
             frost_res,
             shadow_res,
+            arcane_res,
             delay,
             ammo_type,
             ranged_mod_range,
@@ -256,7 +259,8 @@ impl Item {
     /// Returns `0` except for specific item entries.
     pub const fn required_spell(&self) -> i32 {
         match self.entry {
-            18653 | 18984 | 23836 | 23838 | 23839 | 30542 => 20222,
+            15780 | 29515 | 29516 | 29517 | 29519 | 29520 | 29521 | 29971 | 29975 => 10656,
+            18653 | 18984 | 23836 | 23838 | 23839 | 30542 | 35485 => 20222,
             18654 | 18660 | 18661 | 18986 | 23828 | 23829 | 23835 | 30544 => 20219,
             21846 | 21847 | 21848 | 21908 | 21909 | 21910 => 26797,
             21869 | 21870 | 21871 | 21912 | 21913 | 21914 => 26801,
@@ -265,7 +269,6 @@ impl Item {
             28425 | 28426 | 28427 | 28428 | 28429 | 28430 | 30077 | 30086 => 17039,
             28431 | 28432 | 28433 | 28434 | 28435 | 28436 | 30087 | 30088 => 17041,
             28437 | 28438 | 28439 | 28440 | 28441 | 28442 | 30089 | 30093 => 17040,
-            29515 | 29516 | 29517 | 29519 | 29520 | 29521 | 29971 | 29975 => 10656,
             29522 | 29523 | 29524 | 29970 | 29974 => 10660,
             29525 | 29526 | 29527 | 29964 | 29973 => 10658,
             30071 | 30072 | 30073 => 9787,
@@ -273,14 +276,20 @@ impl Item {
         }
     }
 
-    /// Always returns `PvpRank::NoRank`.
+    /// Returns `PvpRank::NoRank` except for specific item entries.
     pub const fn required_honor_rank(&self) -> PvpRank {
-        PvpRank::NoRank
+        match self.entry {
+            31667 => PvpRank::Pariah,
+            _ => PvpRank::NoRank,
+        }
     }
 
-    /// Always returns `0`.
+    /// Returns `0` except for specific item entries.
     pub const fn required_city_rank(&self) -> i32 {
-        0
+        match self.entry {
+            12585 => 1,
+            _ => 0,
+        }
     }
 
     pub const fn required_faction(&self) -> Faction {
@@ -328,36 +337,8 @@ impl Item {
         self.shadow_res as i32
     }
 
-    /// Returns `0` except for specific item entries.
     pub const fn arcane_res(&self) -> i32 {
-        match self.entry {
-            1604 | 12409 => 7,
-            9434 | 9455 | 9461 | 9508 | 12408 | 12903 | 12945 | 17107 | 17113 | 21467 => 5,
-            11785 | 12410 | 12414 | 13009 | 13961 | 13966 | 15857 | 16901 | 16909 | 16915 | 16922 | 16930 | 16938 | 16946 | 16954 | 16962 | 18545 | 18813 | 21128 | 27895 => 10,
-            12065 | 12405 | 15048 => 8,
-            12252 | 12406 | 13030 | 15049 | 17078 | 17110 => 6,
-            12609 | 13538 | 27449 => 20,
-            13065 => 9,
-            13535 | 13539 | 23042 => 13,
-            14128 => 17,
-            14130 | 31929 | 31938 => 18,
-            14132 | 15072 | 15075 => 16,
-            14543 | 15815 => 15,
-            15073 | 20295 | 28301 => 12,
-            15074 => 11,
-            18582 => 100,
-            18583 => 60,
-            18584 | 21868 => 50,
-            20615 => 4,
-            21792 => 3,
-            21863 | 21867 => 35,
-            21864 | 23510 | 23511 | 24098 | 29490 | 29491 | 29496 | 29497 | 30825 => 30,
-            21865 | 31113 => 45,
-            21866 => 25,
-            23509 | 23512 | 29489 | 29495 => 40,
-            30831 => 32,
-            _ => 0,
-        }
+        self.arcane_res as i32
     }
 
     pub const fn delay(&self) -> i32 {
@@ -409,14 +390,15 @@ impl Item {
     /// Returns `0` except for specific item entries.
     pub const fn lock_id(&self) -> i32 {
         match self.entry {
-            2503 => 2,
+            2503 | 3746 => 2,
             4632 | 6354 | 6712 | 16882 => 5,
             4633 => 23,
-            4634 | 6355 | 16883 => 24,
+            4634 | 6355 | 7869 | 16883 => 24,
             4636 => 60,
             4637 | 13875 | 16884 => 61,
             4638 | 5758 | 5759 | 5760 => 62,
             7209 => 319,
+            7868 => 57,
             12033 => 600,
             13918 | 16885 => 599,
             29569 => 1665,
@@ -461,7 +443,7 @@ impl Item {
             22736 => Area::Stratholme,
             24289 => Area::TheBlackMorass,
             31279 => Area::ShadowmoonValley,
-            31366 => Area::BladesEdgeMountains,
+            31366 | 32372 => Area::BladesEdgeMountains,
             36748 => Area::BlackrockDepths,
             _ => Area::None,
         }
@@ -490,6 +472,7 @@ impl Item {
     pub const fn totem_category(&self) -> i32 {
         match self.entry {
             756 | 778 | 1819 | 1893 | 1959 | 2901 | 9465 | 20723 | 30855 => 11,
+            1500 => 21,
             5175 => 2,
             5176 | 30845 => 4,
             5177 => 5,
@@ -543,6 +526,9 @@ impl Item {
             10456 => 2037,
             11937 => 6235,
             11966 => 425,
+            16882 => 25,
+            16883 | 16884 => 5,
+            16885 | 29569 => 150,
             20602 => 600000,
             20708 => 50,
             20766 | 21113 | 21150 | 21228 => 100,
@@ -550,7 +536,6 @@ impl Item {
             20768 => 1000,
             23022 | 34592 | 34593 => 50000,
             23921 => 1930,
-            29569 => 150,
             34583 | 34584 => 20000,
             34585 | 34587 => 30000,
             34594 | 34595 => 90000,
@@ -567,6 +552,9 @@ impl Item {
             10456 => 6110,
             11937 => 18704,
             11966 => 1275,
+            16882 => 125,
+            16883 | 16884 => 15,
+            16885 | 29569 => 600,
             20602 => 1000000,
             20708 => 100,
             20766 => 1000,
@@ -575,7 +563,6 @@ impl Item {
             21113 | 21150 | 21228 => 200,
             23022 => 50000,
             23921 => 5790,
-            29569 => 600,
             34583 | 34584 => 30000,
             34585 | 34587 => 40000,
             34592 | 34593 => 70000,

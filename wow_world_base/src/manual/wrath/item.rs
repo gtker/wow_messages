@@ -40,10 +40,10 @@ pub struct Item {
     container_slots: i8,
     stats_count: i8,
     armor: i16,
-    fire_res: i8,
-    nature_res: i8,
-    frost_res: i8,
-    shadow_res: i8,
+    fire_res: i16,
+    nature_res: i16,
+    frost_res: i16,
+    shadow_res: i16,
     delay: i16,
     ammo_type: i8,
     ranged_mod_range: f32,
@@ -104,10 +104,10 @@ impl Item {
         container_slots: i8,
         stats_count: i8,
         armor: i16,
-        fire_res: i8,
-        nature_res: i8,
-        frost_res: i8,
-        shadow_res: i8,
+        fire_res: i16,
+        nature_res: i16,
+        frost_res: i16,
+        shadow_res: i16,
         delay: i16,
         ammo_type: i8,
         ranged_mod_range: f32,
@@ -276,14 +276,20 @@ impl Item {
         self.required_spell
     }
 
-    /// Always returns `PvpRank::NoRank`.
+    /// Returns `PvpRank::NoRank` except for specific item entries.
     pub const fn required_honor_rank(&self) -> PvpRank {
-        PvpRank::NoRank
+        match self.entry {
+            31667 => PvpRank::Pariah,
+            _ => PvpRank::NoRank,
+        }
     }
 
-    /// Always returns `0`.
+    /// Returns `0` except for specific item entries.
     pub const fn required_city_rank(&self) -> i32 {
-        0
+        match self.entry {
+            12585 | 44119 => 1,
+            _ => 0,
+        }
     }
 
     pub const fn required_faction(&self) -> Faction {
@@ -405,25 +411,27 @@ impl Item {
     /// Returns `0` except for specific item entries.
     pub const fn arcane_res(&self) -> i32 {
         match self.entry {
-            1604 => 7,
-            9434 | 9455 | 9461 | 9508 | 12903 | 12945 | 17107 | 17113 | 21467 => 5,
-            11785 | 13009 | 13961 | 13966 | 15857 | 16901 | 16909 | 16915 | 16922 | 16930 | 16938 | 16946 | 16954 | 16962 | 18545 | 18813 | 21128 | 27895 => 10,
+            1604 | 20141 | 20267 => 7,
+            5828 => 255,
+            9434 | 9455 | 9461 | 9508 | 12903 | 12945 | 17107 | 17113 | 18800 | 20269 | 21467 => 5,
+            11785 | 13009 | 13961 | 13966 | 15857 | 16901 | 16909 | 16915 | 16922 | 16930 | 16938 | 16946 | 16954 | 16962 | 17000 | 18545 | 18813 | 20136 | 20139 | 21128 | 23363 | 27895 => 10,
             12065 => 8,
-            12252 | 13030 | 17078 | 17110 | 49307 | 49491 => 6,
+            12252 | 13030 | 17078 | 17110 | 20142 | 49307 | 49491 => 6,
             12609 | 13538 | 27449 => 20,
             13065 => 9,
             13535 | 13539 | 23042 => 13,
             14128 => 17,
-            14130 | 31929 | 31938 => 18,
+            14130 | 31929 | 31930 | 31938 => 18,
             14132 | 15072 | 15075 => 16,
             14543 | 15815 => 15,
-            15073 | 28301 => 12,
-            15074 => 11,
+            15073 | 18341 | 28301 => 12,
+            15074 | 18342 => 11,
             18582 => 100,
             18583 => 60,
             18584 | 21868 => 50,
-            20615 => 4,
-            21792 => 3,
+            20146 => 2,
+            20275 | 20276 | 20615 => 4,
+            20278 | 20279 | 21792 => 3,
             21863 | 21867 => 35,
             21864 | 23510 | 23511 | 24098 | 29490 | 29491 | 29496 | 29497 | 30825 | 49489 => 30,
             21865 | 31113 => 45,
@@ -483,18 +491,21 @@ impl Item {
     /// Returns `0` except for specific item entries.
     pub const fn lock_id(&self) -> i32 {
         match self.entry {
-            2503 => 2,
+            2503 | 3746 => 2,
             4632 | 6354 | 6712 | 16882 => 5,
             4633 => 23,
-            4634 | 6355 | 16883 => 24,
+            4634 | 6355 | 7869 | 16883 => 24,
             4636 => 60,
             4637 | 13875 | 16884 => 61,
             4638 | 5758 | 5759 | 5760 => 62,
             7209 => 319,
+            7868 => 57,
             12033 => 600,
             13918 | 16885 => 599,
             29569 => 1665,
             31952 => 1666,
+            39014 => 1780,
+            42953 => 1807,
             43575 => 1667,
             43622 => 1812,
             43624 | 45986 => 1813,
@@ -538,13 +549,14 @@ impl Item {
             22736 => Area::Stratholme,
             24289 => Area::TheBlackMorass,
             31279 => Area::ShadowmoonValley,
-            31366 => Area::BladesEdgeMountains,
+            31366 | 32372 => Area::BladesEdgeMountains,
             36748 => Area::BlackrockDepths,
             37664 => Area::GrizzlyHills,
             38335 | 38336 | 38337 | 38338 | 38339 | 38340 | 38341 | 38342 | 38343 | 38344 | 38345 | 38346 | 38369 | 38370 | 38379 | 38381 | 38384 | 38386 | 38393 | 38396 | 38397 | 38398 | 39668 | 39669 | 39670 => Area::ZulDrak,
             39213 => Area::StrandOfTheAncients,
             39737 => Area::SholazarBasin,
-            42986 => Area::Wintergrasp,
+            42986 | 43002 => Area::Wintergrasp,
+            45765 | 45918 | 45925 => Area::Icecrown,
             _ => Area::None,
         }
     }
