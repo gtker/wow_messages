@@ -28,6 +28,7 @@ pub(crate) const DUPLICATE_FIELD_NAMES: i32 = 17;
 pub(crate) const MESSAGE_NOT_IN_INDEX: i32 = 18;
 pub(crate) const OPCODE_HAS_INCORRECT_NAME: i32 = 19;
 pub(crate) const TYPE_IS_UPCAST_TO_SAME: i32 = 20;
+pub(crate) const FLAG_WITH_SIGNED_TYPE: i32 = 21;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -432,4 +433,16 @@ pub(crate) fn type_is_upcast_to_same(ty_name: &str, file_info: &FileInfo, ty: In
     );
 
     wowm_exit(s, TYPE_IS_UPCAST_TO_SAME)
+}
+
+pub(crate) fn flag_with_signed_type(ty_name: &str, file_info: &FileInfo, ty: IntegerType) -> ! {
+    let mut s = ErrorWriter::new("Flag with signed type.");
+
+    let ty = ty.str();
+    s.fileinfo(
+        file_info,
+        format!("Flag '{ty_name}' has integer type '{ty}' which is signed. Only unsigned types are allowed for flags.",),
+    );
+
+    wowm_exit(s, FLAG_WITH_SIGNED_TYPE)
 }

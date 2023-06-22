@@ -22,7 +22,7 @@ use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::IntegerType;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::DefinerType;
-use crate::{ParsedObjects, ENUM_SELF_VALUE_FIELD, UNIMPLEMENTED};
+use crate::{error_printer, ParsedObjects, ENUM_SELF_VALUE_FIELD, UNIMPLEMENTED};
 use types::container::ContainerType;
 use types::definer::SelfValueDefinerField;
 use types::if_statement::{Condition, Conditional};
@@ -582,11 +582,17 @@ pub(crate) fn parse_enum(
     let mut extras = parse_object_key_values(&mut extra_key_values, tags);
     extras.append(tags.clone());
 
+    let basic_type = IntegerType::from_str(basic_type.as_str(), ident.as_str(), &file_info);
+
+    if definer_ty == DefinerType::Flag && basic_type.is_signed() {
+        error_printer::flag_with_signed_type(ident.as_str(), &file_info, basic_type);
+    }
+
     ParsedDefiner::new(
         ident.as_str(),
         definer_ty,
         fields,
-        IntegerType::from_str(basic_type.as_str(), ident.as_str(), &file_info),
+        basic_type,
         self_value,
         extras.into_tags(ident.as_str(), &file_info, true),
         file_info,

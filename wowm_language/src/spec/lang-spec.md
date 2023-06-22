@@ -130,6 +130,7 @@ Where `<name>` is a unique identifier, `<basic_type>` is an integer type `u8`, `
 where `<name>` is a unique identifier inside the definer, and `<value>` is a valid value.
 Enums can not have multiple names with the same value, while flags can.
 Enums can have a `<value>` of `self.value`, while flags can not.
+Flags can not be signed types (`i*`), while enums can.
 
 A `<value>` of `self.value` means that the enumerator is not inclusive, so any values that do not exactly match an existing enumerator should be allowed and should not lead to failed parsing.
 

@@ -62,6 +62,13 @@ impl IntegerType {
         2_i128.pow(8 * self.size() as u32)
     }
 
+    pub(crate) fn is_signed(&self) -> bool {
+        match self {
+            IntegerType::I8 | IntegerType::I16 | IntegerType::I32 | IntegerType::I64 => true,
+            _ => false,
+        }
+    }
+
     pub(crate) fn str(&self) -> &str {
         match self {
             IntegerType::U8 => "u8",
