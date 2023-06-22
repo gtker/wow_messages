@@ -1,5 +1,6 @@
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::parser::types::version::MajorWorldVersion;
+use crate::parser::types::IntegerType;
 use crate::path_utils::{update_mask_index_location, update_mask_location};
 use crate::rust_printer::writer::Writer;
 use std::fmt::{Display, Formatter};
@@ -180,7 +181,9 @@ fn print_specific_update_mask_indices(fields: &[MemberType]) -> Writer {
                 },
             );
 
-            for from_ty in ["u16", "u32", "u64", "i16", "i32", "i64", "usize"] {
+            for (_, from_ty) in IntegerType::try_from_types() {
+                let from_ty = *from_ty;
+
                 s.impl_for(format!("TryFrom<{from_ty}>"), &ty_name, |s| {
                     s.wln(format!("type Error = {from_ty};"));
                     s.newline();
@@ -188,7 +191,13 @@ fn print_specific_update_mask_indices(fields: &[MemberType]) -> Writer {
                     s.open_curly(format!(
                         "fn try_from(value: {from_ty}) -> Result<Self, Self::Error>"
                     ));
-                    let cast = if from_ty == "u16" { "" } else { " as u16" };
+                    let cast = if from_ty == "u16" {
+                        ""
+                    } else if from_ty == "u8" {
+                        ".into()"
+                    } else {
+                        ".try_into().ok().ok_or(value)?"
+                    };
 
                     s.wln(format!(
                         "{lower_name}_try_from_inner(value{cast}).ok_or(value)"

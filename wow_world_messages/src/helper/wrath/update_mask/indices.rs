@@ -418,6 +418,14 @@ pub(crate) const fn skillinfo_try_from_inner(value: u16) -> Option<SkillInfoInde
     })
 }
 
+impl TryFrom<u8> for SkillInfoIndex {
+    type Error = u8;
+
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        skillinfo_try_from_inner(value.into()).ok_or(value)
+    }
+}
+
 impl TryFrom<u16> for SkillInfoIndex {
     type Error = u16;
 
@@ -430,7 +438,7 @@ impl TryFrom<u32> for SkillInfoIndex {
     type Error = u32;
 
     fn try_from(value: u32) -> Result<Self, Self::Error> {
-        skillinfo_try_from_inner(value as u16).ok_or(value)
+        skillinfo_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
     }
 }
 
@@ -438,7 +446,15 @@ impl TryFrom<u64> for SkillInfoIndex {
     type Error = u64;
 
     fn try_from(value: u64) -> Result<Self, Self::Error> {
-        skillinfo_try_from_inner(value as u16).ok_or(value)
+        skillinfo_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
+    }
+}
+
+impl TryFrom<i8> for SkillInfoIndex {
+    type Error = i8;
+
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        skillinfo_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
     }
 }
 
@@ -446,7 +462,7 @@ impl TryFrom<i16> for SkillInfoIndex {
     type Error = i16;
 
     fn try_from(value: i16) -> Result<Self, Self::Error> {
-        skillinfo_try_from_inner(value as u16).ok_or(value)
+        skillinfo_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
     }
 }
 
@@ -454,7 +470,7 @@ impl TryFrom<i32> for SkillInfoIndex {
     type Error = i32;
 
     fn try_from(value: i32) -> Result<Self, Self::Error> {
-        skillinfo_try_from_inner(value as u16).ok_or(value)
+        skillinfo_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
     }
 }
 
@@ -462,7 +478,7 @@ impl TryFrom<i64> for SkillInfoIndex {
     type Error = i64;
 
     fn try_from(value: i64) -> Result<Self, Self::Error> {
-        skillinfo_try_from_inner(value as u16).ok_or(value)
+        skillinfo_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
     }
 }
 
@@ -470,7 +486,7 @@ impl TryFrom<usize> for SkillInfoIndex {
     type Error = usize;
 
     fn try_from(value: usize) -> Result<Self, Self::Error> {
-        skillinfo_try_from_inner(value as u16).ok_or(value)
+        skillinfo_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
     }
 }
 
