@@ -352,3 +352,74 @@ impl std::ops::BitXorAssign for BillingPlanFlags {
     }
 }
 
+impl From<u8> for BillingPlanFlags {
+    fn from(value: u8) -> Self {
+        Self::new(value)
+    }
+}
+
+impl TryFrom<u16> for BillingPlanFlags {
+    type Error = u16;
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        let a = TryInto::<u8>::try_into(value).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl TryFrom<u32> for BillingPlanFlags {
+    type Error = u32;
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
+        let a = TryInto::<u8>::try_into(value).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl TryFrom<u64> for BillingPlanFlags {
+    type Error = u64;
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        let a = TryInto::<u8>::try_into(value).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl From<i8> for BillingPlanFlags {
+    fn from(value: i8) -> Self {
+        Self::new(u8::from_le_bytes(value.to_le_bytes()))
+    }
+}
+
+impl TryFrom<i16> for BillingPlanFlags {
+    type Error = i16;
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        let v = u16::from_le_bytes(value.to_le_bytes());
+        let a = TryInto::<u8>::try_into(v).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl TryFrom<i32> for BillingPlanFlags {
+    type Error = i32;
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        let v = u32::from_le_bytes(value.to_le_bytes());
+        let a = TryInto::<u8>::try_into(v).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl TryFrom<i64> for BillingPlanFlags {
+    type Error = i64;
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        let v = u64::from_le_bytes(value.to_le_bytes());
+        let a = TryInto::<u8>::try_into(v).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl TryFrom<usize> for BillingPlanFlags {
+    type Error = usize;
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        let a = TryInto::<u8>::try_into(value).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+

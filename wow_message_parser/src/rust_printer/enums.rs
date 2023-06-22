@@ -208,7 +208,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
         );
     });
 
-    for (_, from_ty) in IntegerType::try_from_types() {
+    for (_, _, from_ty) in IntegerType::try_from_types() {
         let from_ty = *from_ty;
         if from_ty == ty_name || (e.tags().has_login_version() && from_ty == "i64") {
             continue;

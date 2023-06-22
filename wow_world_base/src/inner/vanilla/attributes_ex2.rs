@@ -1049,3 +1049,70 @@ impl std::ops::BitXorAssign for AttributesEx2 {
     }
 }
 
+impl From<u32> for AttributesEx2 {
+    fn from(value: u32) -> Self {
+        Self::new(value)
+    }
+}
+
+impl From<u8> for AttributesEx2 {
+    fn from(value: u8) -> Self {
+        Self::new(value.into())
+    }
+}
+
+impl From<u16> for AttributesEx2 {
+    fn from(value: u16) -> Self {
+        Self::new(value.into())
+    }
+}
+
+impl TryFrom<u64> for AttributesEx2 {
+    type Error = u64;
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        let a = TryInto::<u32>::try_into(value).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl TryFrom<i8> for AttributesEx2 {
+    type Error = i8;
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        let v = u8::from_le_bytes(value.to_le_bytes());
+        let a = TryInto::<u32>::try_into(v).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl TryFrom<i16> for AttributesEx2 {
+    type Error = i16;
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        let v = u16::from_le_bytes(value.to_le_bytes());
+        let a = TryInto::<u32>::try_into(v).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl From<i32> for AttributesEx2 {
+    fn from(value: i32) -> Self {
+        Self::new(u32::from_le_bytes(value.to_le_bytes()))
+    }
+}
+
+impl TryFrom<i64> for AttributesEx2 {
+    type Error = i64;
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        let v = u64::from_le_bytes(value.to_le_bytes());
+        let a = TryInto::<u32>::try_into(v).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl TryFrom<usize> for AttributesEx2 {
+    type Error = usize;
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        let a = TryInto::<u32>::try_into(value).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+

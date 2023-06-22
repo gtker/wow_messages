@@ -1,4 +1,5 @@
 use crate::parser::types::definer::Definer;
+use crate::parser::types::IntegerType;
 use crate::rust_printer::enums::print_wowm_definition;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
@@ -119,6 +120,73 @@ fn common_impls(s: &mut Writer, e: &Definer, o: &Objects) {
                 });
             },
         );
+    }
+
+    print_try_from(s, e);
+}
+
+fn print_try_from(s: &mut Writer, e: &Definer) {
+    let ty_name = e.ty().rust_str();
+    let size: i128 = e.ty().size().into();
+
+    s.impl_for(format!("From<{ty_name}>"), e.name(), |s| {
+        s.body(format!("fn from(value: {ty_name}) -> Self"), |s| {
+            s.wln("Self::new(value)");
+        });
+    });
+
+    for (from_size, signed, from_ty) in IntegerType::try_from_types() {
+        let from_ty = *from_ty;
+        if from_ty == ty_name {
+            continue;
+        }
+
+        if *from_size < size && !*signed && from_ty != "usize" {
+            s.impl_for(format!("From<{from_ty}>"), e.name(), |s| {
+                s.body(format!("fn from(value: {from_ty}) -> Self"), |s| {
+                    s.wln("Self::new(value.into())");
+                });
+            });
+        } else if (*from_size > size && !*signed) || from_ty == "usize" {
+            s.impl_for(format!("TryFrom<{from_ty}>"), e.name(), |s| {
+                s.wln(format!("type Error = {from_ty};"));
+                s.body(
+                    format!("fn try_from(value: {from_ty}) -> Result<Self, Self::Error>"),
+                    |s| {
+                        s.wln(format!(
+                            "let a = TryInto::<{ty_name}>::try_into(value).ok().ok_or(value)?;"
+                        ));
+                        s.wln("Ok(Self::new(a))")
+                    },
+                );
+            });
+        } else if *signed && *from_size == size {
+            s.impl_for(format!("From<{from_ty}>"), e.name(), |s| {
+                s.body(format!("fn from(value: {from_ty}) -> Self"), |s| {
+                    s.wln(format!(
+                        "Self::new({ty_name}::from_le_bytes(value.to_le_bytes()))"
+                    ));
+                });
+            });
+        } else if *signed {
+            s.impl_for(format!("TryFrom<{from_ty}>"), e.name(), |s| {
+                s.wln(format!("type Error = {from_ty};"));
+                s.body(
+                    format!("fn try_from(value: {from_ty}) -> Result<Self, Self::Error>"),
+                    |s| {
+                        let converted_ty = from_ty.replace("i", "u");
+
+                        s.wln(format!(
+                            "let v = {converted_ty}::from_le_bytes(value.to_le_bytes());"
+                        ));
+                        s.wln(format!(
+                            "let a = TryInto::<{ty_name}>::try_into(v).ok().ok_or(value)?;"
+                        ));
+                        s.wln("Ok(Self::new(a))")
+                    },
+                );
+            });
+        }
     }
 }
 

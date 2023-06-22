@@ -594,3 +594,72 @@ impl std::ops::BitXorAssign for SpellCastTargetFlags {
     }
 }
 
+impl From<u16> for SpellCastTargetFlags {
+    fn from(value: u16) -> Self {
+        Self::new(value)
+    }
+}
+
+impl From<u8> for SpellCastTargetFlags {
+    fn from(value: u8) -> Self {
+        Self::new(value.into())
+    }
+}
+
+impl TryFrom<u32> for SpellCastTargetFlags {
+    type Error = u32;
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
+        let a = TryInto::<u16>::try_into(value).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl TryFrom<u64> for SpellCastTargetFlags {
+    type Error = u64;
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        let a = TryInto::<u16>::try_into(value).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl TryFrom<i8> for SpellCastTargetFlags {
+    type Error = i8;
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        let v = u8::from_le_bytes(value.to_le_bytes());
+        let a = TryInto::<u16>::try_into(v).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl From<i16> for SpellCastTargetFlags {
+    fn from(value: i16) -> Self {
+        Self::new(u16::from_le_bytes(value.to_le_bytes()))
+    }
+}
+
+impl TryFrom<i32> for SpellCastTargetFlags {
+    type Error = i32;
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        let v = u32::from_le_bytes(value.to_le_bytes());
+        let a = TryInto::<u16>::try_into(v).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl TryFrom<i64> for SpellCastTargetFlags {
+    type Error = i64;
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        let v = u64::from_le_bytes(value.to_le_bytes());
+        let a = TryInto::<u16>::try_into(v).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+
+impl TryFrom<usize> for SpellCastTargetFlags {
+    type Error = usize;
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        let a = TryInto::<u16>::try_into(value).ok().ok_or(value)?;
+        Ok(Self::new(a))
+    }
+}
+

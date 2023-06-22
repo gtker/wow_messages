@@ -181,7 +181,7 @@ fn print_specific_update_mask_indices(fields: &[MemberType]) -> Writer {
                 },
             );
 
-            for (_, from_ty) in IntegerType::try_from_types() {
+            for (_, _, from_ty) in IntegerType::try_from_types() {
                 let from_ty = *from_ty;
 
                 s.impl_for(format!("TryFrom<{from_ty}>"), &ty_name, |s| {

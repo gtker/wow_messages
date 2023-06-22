@@ -122,17 +122,17 @@ impl IntegerType {
         }
     }
 
-    pub(crate) fn try_from_types() -> &'static [(i128, &'static str)] {
+    pub(crate) fn try_from_types() -> &'static [(i128, bool, &'static str)] {
         &[
-            (1, "u8"),
-            (2, "u16"),
-            (4, "u32"),
-            (8, "u64"),
-            (1, "i8"),
-            (2, "i16"),
-            (4, "i32"),
-            (8, "i64"),
-            (2, "usize"),
+            (1, false, "u8"),
+            (2, false, "u16"),
+            (4, false, "u32"),
+            (8, false, "u64"),
+            (1, true, "i8"),
+            (2, true, "i16"),
+            (4, true, "i32"),
+            (8, true, "i64"),
+            (2, false, "usize"),
         ]
     }
 }

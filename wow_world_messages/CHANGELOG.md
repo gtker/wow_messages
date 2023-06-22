@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Guid::from_u32s` and `Guid::to_u32s` to create a Guid from high/low `u32`s.
 * `Octal`, `Binary`, `UpperHex`, `LowerHex` for `Guid`.
 * `std::fmt::Display` for new enums.
-* BREAKING: TryFrom for all enum for `u8`, `i8`, `u16`, `i16`, `u32`, `i32`, `u64`, `i64`, and `usize` regardless of underlying type.
+* BREAKING: TryFrom for all enums and flags for `u8`, `i8`, `u16`, `i16`, `u32`, `i32`, `u64`, `i64`, and `usize` regardless of underlying type.
   This may break type deduction and lead to compile errors, so it is breaking.
 
 ### Changed
