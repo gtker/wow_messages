@@ -69,7 +69,7 @@ impl TryFrom<u8> for InstanceResetFailedReason {
             1 => Ok(Self::Offline),
             2 => Ok(Self::Zoning),
             3 => Ok(Self::Silently),
-            v => Err(crate::errors::EnumError::new("InstanceResetFailedReason", v as u64),)
+            v => Err(crate::errors::EnumError::new("InstanceResetFailedReason", v.into()),)
         }
     }
 }

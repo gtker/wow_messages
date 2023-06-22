@@ -84,7 +84,7 @@ impl TryFrom<u32> for AuctionHouse {
             5 => Ok(Self::ThunderBluff),
             6 => Ok(Self::Horde),
             7 => Ok(Self::Goblin),
-            v => Err(crate::errors::EnumError::new("AuctionHouse", v as u64),)
+            v => Err(crate::errors::EnumError::new("AuctionHouse", v.into()),)
         }
     }
 }

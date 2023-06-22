@@ -54,7 +54,7 @@ impl TryFrom<u8> for CharterType {
         match value {
             0 => Ok(Self::Guild),
             1 => Ok(Self::Arena),
-            v => Err(crate::errors::EnumError::new("CharterType", v as u64),)
+            v => Err(crate::errors::EnumError::new("CharterType", v.into()),)
         }
     }
 }

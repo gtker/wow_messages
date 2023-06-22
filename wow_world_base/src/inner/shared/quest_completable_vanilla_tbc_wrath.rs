@@ -54,7 +54,7 @@ impl TryFrom<u32> for QuestCompletable {
         match value {
             0 => Ok(Self::NotCompletable),
             3 => Ok(Self::Completeable),
-            v => Err(crate::errors::EnumError::new("QuestCompletable", v as u64),)
+            v => Err(crate::errors::EnumError::new("QuestCompletable", v.into()),)
         }
     }
 }

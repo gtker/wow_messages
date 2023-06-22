@@ -54,7 +54,7 @@ impl TryFrom<u8> for ComplainResultWindow {
         match value {
             0 => Ok(Self::DoNotShow),
             1 => Ok(Self::Show),
-            v => Err(crate::errors::EnumError::new("ComplainResultWindow", v as u64),)
+            v => Err(crate::errors::EnumError::new("ComplainResultWindow", v.into()),)
         }
     }
 }

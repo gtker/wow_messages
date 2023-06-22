@@ -54,7 +54,7 @@ impl TryFrom<u8> for SpellStealAction {
         match value {
             0 => Ok(Self::Steal),
             1 => Ok(Self::Cleanse),
-            v => Err(crate::errors::EnumError::new("SpellStealAction", v as u64),)
+            v => Err(crate::errors::EnumError::new("SpellStealAction", v.into()),)
         }
     }
 }

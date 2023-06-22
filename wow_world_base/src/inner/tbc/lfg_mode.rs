@@ -54,7 +54,7 @@ impl TryFrom<u8> for LfgMode {
         match value {
             0 => Ok(Self::LookingForGroup),
             1 => Ok(Self::LookingForMore),
-            v => Err(crate::errors::EnumError::new("LfgMode", v as u64),)
+            v => Err(crate::errors::EnumError::new("LfgMode", v.into()),)
         }
     }
 }

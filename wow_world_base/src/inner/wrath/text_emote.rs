@@ -1554,7 +1554,7 @@ impl TryFrom<u32> for TextEmote {
             450 => Ok(Self::Object),
             451 => Ok(Self::Sweat),
             453 => Ok(Self::Yw),
-            v => Err(crate::errors::EnumError::new("TextEmote", v as u64),)
+            v => Err(crate::errors::EnumError::new("TextEmote", v.into()),)
         }
     }
 }

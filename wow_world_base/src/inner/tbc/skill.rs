@@ -858,7 +858,7 @@ impl TryFrom<u16> for Skill {
             767 => Ok(Self::PetRavager),
             768 => Ok(Self::PetSerpent),
             769 => Ok(Self::Internal),
-            v => Err(crate::errors::EnumError::new("Skill", v as u64),)
+            v => Err(crate::errors::EnumError::new("Skill", v.into()),)
         }
     }
 }

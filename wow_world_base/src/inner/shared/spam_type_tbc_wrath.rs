@@ -54,7 +54,7 @@ impl TryFrom<u8> for SpamType {
         match value {
             0 => Ok(Self::Mail),
             1 => Ok(Self::Chat),
-            v => Err(crate::errors::EnumError::new("SpamType", v as u64),)
+            v => Err(crate::errors::EnumError::new("SpamType", v.into()),)
         }
     }
 }

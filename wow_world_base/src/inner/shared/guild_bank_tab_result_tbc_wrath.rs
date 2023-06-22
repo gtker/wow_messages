@@ -54,7 +54,7 @@ impl TryFrom<u8> for GuildBankTabResult {
         match value {
             0 => Ok(Self::NotPresent),
             1 => Ok(Self::Present),
-            v => Err(crate::errors::EnumError::new("GuildBankTabResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("GuildBankTabResult", v.into()),)
         }
     }
 }

@@ -96,7 +96,7 @@ impl TryFrom<u32> for BattlegroundType {
             6 => Ok(Self::Arena),
             7 => Ok(Self::EyeOfTheStorm),
             8 => Ok(Self::RuinsOfLordaeron),
-            v => Err(crate::errors::EnumError::new("BattlegroundType", v as u64),)
+            v => Err(crate::errors::EnumError::new("BattlegroundType", v.into()),)
         }
     }
 }

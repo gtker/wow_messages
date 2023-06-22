@@ -102,7 +102,7 @@ impl TryFrom<u8> for BagFamily {
             7 => Ok(Self::EnchantingSupplies),
             8 => Ok(Self::EngineeringSupplies),
             9 => Ok(Self::Keys),
-            v => Err(crate::errors::EnumError::new("BagFamily", v as u64),)
+            v => Err(crate::errors::EnumError::new("BagFamily", v.into()),)
         }
     }
 }

@@ -977,7 +977,7 @@ impl TryFrom<u32> for SpellEffect {
             151 => Ok(Self::TriggerSpell2),
             152 => Ok(Self::Unknown152),
             153 => Ok(Self::Unknown153),
-            v => Err(crate::errors::EnumError::new("SpellEffect", v as u64),)
+            v => Err(crate::errors::EnumError::new("SpellEffect", v.into()),)
         }
     }
 }

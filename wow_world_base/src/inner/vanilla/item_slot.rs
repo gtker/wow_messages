@@ -720,7 +720,7 @@ impl TryFrom<u8> for ItemSlot {
             110 => Ok(Self::Keyring30),
             111 => Ok(Self::Keyring31),
             112 => Ok(Self::Keyring32),
-            v => Err(crate::errors::EnumError::new("ItemSlot", v as u64),)
+            v => Err(crate::errors::EnumError::new("ItemSlot", v.into()),)
         }
     }
 }

@@ -126,7 +126,7 @@ impl TryFrom<u8> for LfgUpdateType {
             14 => Ok(Self::Status),
             15 => Ok(Self::GroupMemberOffline),
             16 => Ok(Self::GroupDisband),
-            v => Err(crate::errors::EnumError::new("LfgUpdateType", v as u64),)
+            v => Err(crate::errors::EnumError::new("LfgUpdateType", v.into()),)
         }
     }
 }

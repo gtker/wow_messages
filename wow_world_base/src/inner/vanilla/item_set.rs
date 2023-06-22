@@ -1080,7 +1080,7 @@ impl TryFrom<u16> for ItemSet {
             549 => Ok(Self::LieutenantCommandersInvestiture),
             550 => Ok(Self::LieutenantCommandersPursuance),
             551 => Ok(Self::LieutenantCommandersRefuge),
-            v => Err(crate::errors::EnumError::new("ItemSet", v as u64),)
+            v => Err(crate::errors::EnumError::new("ItemSet", v.into()),)
         }
     }
 }

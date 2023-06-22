@@ -58,7 +58,7 @@ impl TryFrom<u32> for CacheMask {
         match value {
             21 => Ok(Self::GlobalCache),
             234 => Ok(Self::PerCharacterCache),
-            v => Err(crate::errors::EnumError::new("CacheMask", v as u64),)
+            v => Err(crate::errors::EnumError::new("CacheMask", v.into()),)
         }
     }
 }

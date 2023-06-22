@@ -66,7 +66,7 @@ impl TryFrom<u8> for RollVote {
             1 => Ok(Self::Need),
             2 => Ok(Self::Greed),
             3 => Ok(Self::Disenchant),
-            v => Err(crate::errors::EnumError::new("RollVote", v as u64),)
+            v => Err(crate::errors::EnumError::new("RollVote", v.into()),)
         }
     }
 }

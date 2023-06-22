@@ -114,7 +114,7 @@ impl TryFrom<u8> for PartyResult {
             9 => Ok(Self::IgnoringYou),
             12 => Ok(Self::LfgPending),
             13 => Ok(Self::InviteRestricted),
-            v => Err(crate::errors::EnumError::new("PartyResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("PartyResult", v.into()),)
         }
     }
 }

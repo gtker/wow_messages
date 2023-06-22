@@ -139,7 +139,7 @@ impl TryFrom<u32> for HitInfo {
             32768 => Ok(Self::Crushing),
             65536 => Ok(Self::NoAction),
             524288 => Ok(Self::SwingNoHitSound),
-            v => Err(crate::errors::EnumError::new("HitInfo", v as u64),)
+            v => Err(crate::errors::EnumError::new("HitInfo", v.into()),)
         }
     }
 }

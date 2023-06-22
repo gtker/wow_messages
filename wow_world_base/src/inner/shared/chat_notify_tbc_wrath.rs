@@ -293,7 +293,7 @@ impl TryFrom<u8> for ChatNotify {
             33 => Ok(Self::NotInLfgNotice),
             34 => Ok(Self::VoiceOnNotice),
             35 => Ok(Self::VoiceOffNotice),
-            v => Err(crate::errors::EnumError::new("ChatNotify", v as u64),)
+            v => Err(crate::errors::EnumError::new("ChatNotify", v.into()),)
         }
     }
 }

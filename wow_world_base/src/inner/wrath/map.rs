@@ -853,7 +853,7 @@ impl TryFrom<u32> for Map {
             718 => Ok(Self::TransportTheMightyWindIcecrownCitadelRaid),
             723 => Ok(Self::Stormwind),
             724 => Ok(Self::TheRubySanctum),
-            v => Err(crate::errors::EnumError::new("Map", v as u64),)
+            v => Err(crate::errors::EnumError::new("Map", v.into()),)
         }
     }
 }

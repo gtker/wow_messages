@@ -54,7 +54,7 @@ impl TryFrom<u8> for TalentInfoType {
         match value {
             0 => Ok(Self::Player),
             1 => Ok(Self::Pet),
-            v => Err(crate::errors::EnumError::new("TalentInfoType", v as u64),)
+            v => Err(crate::errors::EnumError::new("TalentInfoType", v.into()),)
         }
     }
 }

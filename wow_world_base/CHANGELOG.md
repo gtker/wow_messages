@@ -22,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   These were only intended to be used by `wow_world_messages` for reading `Guid`s on the wire and should provide no
   functionality for users for either `wow_world_messages` or `wow_world_base`.
 
+### Changed
+
+* BREAKING: `EnumError` `value` changed from `u64` to `i128`. This is so that all valid `TryFrom` values can fit.
+
 ## [0.1.1] - 2023-05-20
 
 ### Added

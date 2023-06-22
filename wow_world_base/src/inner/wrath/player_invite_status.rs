@@ -54,7 +54,7 @@ impl TryFrom<u8> for PlayerInviteStatus {
         match value {
             0 => Ok(Self::AlreadyInGroup),
             1 => Ok(Self::NotInGroup),
-            v => Err(crate::errors::EnumError::new("PlayerInviteStatus", v as u64),)
+            v => Err(crate::errors::EnumError::new("PlayerInviteStatus", v.into()),)
         }
     }
 }

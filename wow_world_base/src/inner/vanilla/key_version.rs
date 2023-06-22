@@ -102,7 +102,7 @@ impl TryFrom<u8> for KeyVersion {
             7 => Ok(Self::Seven),
             8 => Ok(Self::Eight),
             9 => Ok(Self::Nine),
-            v => Err(crate::errors::EnumError::new("KeyVersion", v as u64),)
+            v => Err(crate::errors::EnumError::new("KeyVersion", v.into()),)
         }
     }
 }

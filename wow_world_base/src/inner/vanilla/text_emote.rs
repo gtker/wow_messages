@@ -1056,7 +1056,7 @@ impl TryFrom<u32> for TextEmote {
             343 => Ok(Self::GolfClap),
             363 => Ok(Self::Wink),
             364 => Ok(Self::Pat),
-            v => Err(crate::errors::EnumError::new("TextEmote", v as u64),)
+            v => Err(crate::errors::EnumError::new("TextEmote", v.into()),)
         }
     }
 }

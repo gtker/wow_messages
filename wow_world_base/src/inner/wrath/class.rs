@@ -102,7 +102,7 @@ impl TryFrom<u8> for Class {
             8 => Ok(Self::Mage),
             9 => Ok(Self::Warlock),
             11 => Ok(Self::Druid),
-            v => Err(crate::errors::EnumError::new("Class", v as u64),)
+            v => Err(crate::errors::EnumError::new("Class", v.into()),)
         }
     }
 }

@@ -144,7 +144,7 @@ impl TryFrom<u8> for FriendResult {
             14 => Ok(Self::IgnoreAlready),
             15 => Ok(Self::IgnoreAdded),
             16 => Ok(Self::IgnoreRemoved),
-            v => Err(crate::errors::EnumError::new("FriendResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("FriendResult", v.into()),)
         }
     }
 }

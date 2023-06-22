@@ -1,5 +1,4 @@
 use crate::parser::types::definer::Definer;
-use crate::parser::types::IntegerType;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
     print_docc_description_and_comment, print_member_docc_description_and_comment,
@@ -200,15 +199,9 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                         ));
                     }
 
-                    let cast = if let IntegerType::U64 = e.ty() {
-                        "v"
-                    } else {
-                        "v as u64"
-                    };
                     s.wln(format!(
-                        "v => Err(crate::errors::EnumError::new(\"{}\", {}),)",
+                        "v => Err(crate::errors::EnumError::new(\"{}\", v.into()),)",
                         e.name(),
-                        cast,
                     ));
                 });
             },

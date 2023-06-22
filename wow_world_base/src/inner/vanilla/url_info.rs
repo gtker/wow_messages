@@ -54,7 +54,7 @@ impl TryFrom<u8> for UrlInfo {
         match value {
             0 => Ok(Self::Unavailable),
             1 => Ok(Self::Available),
-            v => Err(crate::errors::EnumError::new("UrlInfo", v as u64),)
+            v => Err(crate::errors::EnumError::new("UrlInfo", v.into()),)
         }
     }
 }

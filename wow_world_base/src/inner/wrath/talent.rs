@@ -5394,7 +5394,7 @@ impl TryFrom<u32> for Talent {
             2283 => Ok(Self::Juggernaut),
             2284 => Ok(Self::ThreatOfThassarian),
             2285 => Ok(Self::Desolation),
-            v => Err(crate::errors::EnumError::new("Talent", v as u64),)
+            v => Err(crate::errors::EnumError::new("Talent", v.into()),)
         }
     }
 }

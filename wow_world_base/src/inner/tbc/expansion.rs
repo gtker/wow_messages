@@ -54,7 +54,7 @@ impl TryFrom<u8> for Expansion {
         match value {
             0 => Ok(Self::Vanilla),
             1 => Ok(Self::TheBurningCrusade),
-            v => Err(crate::errors::EnumError::new("Expansion", v as u64),)
+            v => Err(crate::errors::EnumError::new("Expansion", v.into()),)
         }
     }
 }

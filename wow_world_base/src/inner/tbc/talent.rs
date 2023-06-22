@@ -3516,7 +3516,7 @@ impl TryFrom<u32> for Talent {
             1827 => Ok(Self::ImprovedSliceAndDice),
             1829 => Ok(Self::ImprovedHolyShield),
             1858 => Ok(Self::FocusedWill),
-            v => Err(crate::errors::EnumError::new("Talent", v as u64),)
+            v => Err(crate::errors::EnumError::new("Talent", v.into()),)
         }
     }
 }

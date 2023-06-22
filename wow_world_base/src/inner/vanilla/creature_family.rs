@@ -186,7 +186,7 @@ impl TryFrom<u8> for CreatureFamily {
             26 => Ok(Self::Owl),
             27 => Ok(Self::WindSerpent),
             28 => Ok(Self::RemoteControl),
-            v => Err(crate::errors::EnumError::new("CreatureFamily", v as u64),)
+            v => Err(crate::errors::EnumError::new("CreatureFamily", v.into()),)
         }
     }
 }

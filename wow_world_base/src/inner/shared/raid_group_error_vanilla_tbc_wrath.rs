@@ -54,7 +54,7 @@ impl TryFrom<u32> for RaidGroupError {
         match value {
             1 => Ok(Self::Required),
             2 => Ok(Self::Full),
-            v => Err(crate::errors::EnumError::new("RaidGroupError", v as u64),)
+            v => Err(crate::errors::EnumError::new("RaidGroupError", v.into()),)
         }
     }
 }

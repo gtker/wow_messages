@@ -54,7 +54,7 @@ impl TryFrom<u8> for BattlegroundEndStatus {
         match value {
             0 => Ok(Self::NotEnded),
             1 => Ok(Self::Ended),
-            v => Err(crate::errors::EnumError::new("BattlegroundEndStatus", v as u64),)
+            v => Err(crate::errors::EnumError::new("BattlegroundEndStatus", v.into()),)
         }
     }
 }

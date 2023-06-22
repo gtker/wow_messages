@@ -63,7 +63,7 @@ impl TryFrom<u8> for GmTicketEscalationStatus {
             0 => Ok(Self::GmticketAssignedtogmStatusNotAssigned),
             1 => Ok(Self::GmticketAssignedtogmStatusAssigned),
             2 => Ok(Self::GmticketAssignedtogmStatusEscalated),
-            v => Err(crate::errors::EnumError::new("GmTicketEscalationStatus", v as u64),)
+            v => Err(crate::errors::EnumError::new("GmTicketEscalationStatus", v.into()),)
         }
     }
 }

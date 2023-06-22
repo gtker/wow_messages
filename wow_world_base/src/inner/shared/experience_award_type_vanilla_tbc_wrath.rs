@@ -54,7 +54,7 @@ impl TryFrom<u8> for ExperienceAwardType {
         match value {
             0 => Ok(Self::Kill),
             1 => Ok(Self::NonKill),
-            v => Err(crate::errors::EnumError::new("ExperienceAwardType", v as u64),)
+            v => Err(crate::errors::EnumError::new("ExperienceAwardType", v.into()),)
         }
     }
 }

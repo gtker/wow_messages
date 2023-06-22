@@ -96,7 +96,7 @@ impl TryFrom<u8> for Race {
             7 => Ok(Self::Gnome),
             8 => Ok(Self::Troll),
             9 => Ok(Self::Goblin),
-            v => Err(crate::errors::EnumError::new("Race", v as u64),)
+            v => Err(crate::errors::EnumError::new("Race", v.into()),)
         }
     }
 }

@@ -60,7 +60,7 @@ impl TryFrom<u8> for PetReactState {
             0 => Ok(Self::Passive),
             1 => Ok(Self::Defensive),
             2 => Ok(Self::Aggressive),
-            v => Err(crate::errors::EnumError::new("PetReactState", v as u64),)
+            v => Err(crate::errors::EnumError::new("PetReactState", v.into()),)
         }
     }
 }

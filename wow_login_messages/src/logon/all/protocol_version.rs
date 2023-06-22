@@ -84,7 +84,7 @@ impl TryFrom<u8> for ProtocolVersion {
             6 => Ok(Self::Six),
             7 => Ok(Self::Seven),
             8 => Ok(Self::Eight),
-            v => Err(crate::errors::EnumError::new("ProtocolVersion", v as u64),)
+            v => Err(crate::errors::EnumError::new("ProtocolVersion", v.into()),)
         }
     }
 }

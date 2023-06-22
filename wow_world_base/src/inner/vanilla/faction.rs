@@ -1188,7 +1188,7 @@ impl TryFrom<u16> for Faction {
             950 => Ok(Self::TowowFlag),
             951 => Ok(Self::TowowFlagTriggerAllianceDnd),
             954 => Ok(Self::TowowFlagTriggerHordeDnd),
-            v => Err(crate::errors::EnumError::new("Faction", v as u64),)
+            v => Err(crate::errors::EnumError::new("Faction", v.into()),)
         }
     }
 }

@@ -54,7 +54,7 @@ impl TryFrom<u8> for DeclinedNames {
         match value {
             0 => Ok(Self::No),
             1 => Ok(Self::Yes),
-            v => Err(crate::errors::EnumError::new("DeclinedNames", v as u64),)
+            v => Err(crate::errors::EnumError::new("DeclinedNames", v.into()),)
         }
     }
 }

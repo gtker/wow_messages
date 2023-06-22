@@ -1228,7 +1228,7 @@ impl TryFrom<u32> for AuraType {
             189 => Ok(Self::ModRating),
             190 => Ok(Self::ModFactionReputationGain),
             191 => Ok(Self::UseNormalMovementSpeed),
-            v => Err(crate::errors::EnumError::new("AuraType", v as u64),)
+            v => Err(crate::errors::EnumError::new("AuraType", v.into()),)
         }
     }
 }

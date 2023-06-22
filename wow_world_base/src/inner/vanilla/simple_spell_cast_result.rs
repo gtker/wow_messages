@@ -54,7 +54,7 @@ impl TryFrom<u8> for SimpleSpellCastResult {
         match value {
             0 => Ok(Self::Success),
             2 => Ok(Self::Failure),
-            v => Err(crate::errors::EnumError::new("SimpleSpellCastResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("SimpleSpellCastResult", v.into()),)
         }
     }
 }

@@ -670,7 +670,7 @@ impl TryFrom<u64> for ItemClassAndSubClass {
             12884901903 => Ok(Self::Holiday),
             17179869199 => Ok(Self::MiscellaneousOther),
             21474836495 => Ok(Self::Mount),
-            v => Err(crate::errors::EnumError::new("ItemClassAndSubClass", v),)
+            v => Err(crate::errors::EnumError::new("ItemClassAndSubClass", v.into()),)
         }
     }
 }

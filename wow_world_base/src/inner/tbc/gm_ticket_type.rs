@@ -264,7 +264,7 @@ impl TryFrom<u8> for GmTicketType {
             34 => Ok(Self::SuspensionQuestions),
             35 => Ok(Self::TechnicalSoundGraphicsIssue),
             36 => Ok(Self::UiIssue),
-            v => Err(crate::errors::EnumError::new("GmTicketType", v as u64),)
+            v => Err(crate::errors::EnumError::new("GmTicketType", v.into()),)
         }
     }
 }

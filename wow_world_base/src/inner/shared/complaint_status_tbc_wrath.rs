@@ -60,7 +60,7 @@ impl TryFrom<u8> for ComplaintStatus {
             0 => Ok(Self::Disabled),
             1 => Ok(Self::EnabledWithoutAutoIgnore),
             2 => Ok(Self::EnabledWithAutoIgnore),
-            v => Err(crate::errors::EnumError::new("ComplaintStatus", v as u64),)
+            v => Err(crate::errors::EnumError::new("ComplaintStatus", v.into()),)
         }
     }
 }

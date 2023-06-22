@@ -190,7 +190,7 @@ impl TryFrom<u8> for PvpRank {
             17 => Ok(Self::Rank13),
             18 => Ok(Self::Rank14),
             19 => Ok(Self::FactionLeader),
-            v => Err(crate::errors::EnumError::new("PvpRank", v as u64),)
+            v => Err(crate::errors::EnumError::new("PvpRank", v.into()),)
         }
     }
 }

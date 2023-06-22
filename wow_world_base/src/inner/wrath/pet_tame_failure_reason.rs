@@ -123,7 +123,7 @@ impl TryFrom<u8> for PetTameFailureReason {
             11 => Ok(Self::NotDead),
             12 => Ok(Self::CantControlExotic),
             13 => Ok(Self::UnknownError),
-            v => Err(crate::errors::EnumError::new("PetTameFailureReason", v as u64),)
+            v => Err(crate::errors::EnumError::new("PetTameFailureReason", v.into()),)
         }
     }
 }

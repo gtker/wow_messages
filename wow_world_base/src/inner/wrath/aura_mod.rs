@@ -1944,7 +1944,7 @@ impl TryFrom<u32> for AuraMod {
             314 => Ok(Self::PreventResurrection),
             315 => Ok(Self::UnderwaterWalking),
             316 => Ok(Self::PeriodicHaste),
-            v => Err(crate::errors::EnumError::new("AuraMod", v as u64),)
+            v => Err(crate::errors::EnumError::new("AuraMod", v.into()),)
         }
     }
 }

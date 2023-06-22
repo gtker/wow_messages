@@ -96,7 +96,7 @@ impl TryFrom<u8> for BuyResult {
             8 => Ok(Self::CantCarryMore),
             11 => Ok(Self::RankRequire),
             12 => Ok(Self::ReputationRequire),
-            v => Err(crate::errors::EnumError::new("BuyResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("BuyResult", v.into()),)
         }
     }
 }

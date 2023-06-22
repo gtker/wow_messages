@@ -90,7 +90,7 @@ impl TryFrom<u8> for GuildCommand {
             13 => Ok(Self::Member),
             19 => Ok(Self::PublicNoteChanged),
             20 => Ok(Self::OfficerNoteChanged),
-            v => Err(crate::errors::EnumError::new("GuildCommand", v as u64),)
+            v => Err(crate::errors::EnumError::new("GuildCommand", v.into()),)
         }
     }
 }

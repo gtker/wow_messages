@@ -90,7 +90,7 @@ impl TryFrom<u8> for ObjectType {
             5 => Ok(Self::GameObject),
             6 => Ok(Self::DynamicObject),
             7 => Ok(Self::Corpse),
-            v => Err(crate::errors::EnumError::new("ObjectType", v as u64),)
+            v => Err(crate::errors::EnumError::new("ObjectType", v.into()),)
         }
     }
 }

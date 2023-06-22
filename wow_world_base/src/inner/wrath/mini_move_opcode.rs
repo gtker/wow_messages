@@ -66,7 +66,7 @@ impl TryFrom<u16> for MiniMoveOpcode {
             242 => Ok(Self::SmsgMoveFeatherFall),
             222 => Ok(Self::SmsgMoveWaterWalk),
             244 => Ok(Self::SmsgMoveSetHover),
-            v => Err(crate::errors::EnumError::new("MiniMoveOpcode", v as u64),)
+            v => Err(crate::errors::EnumError::new("MiniMoveOpcode", v.into()),)
         }
     }
 }

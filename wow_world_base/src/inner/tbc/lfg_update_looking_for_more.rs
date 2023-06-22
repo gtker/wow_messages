@@ -54,7 +54,7 @@ impl TryFrom<u8> for LfgUpdateLookingForMore {
         match value {
             0 => Ok(Self::NotLookingForMore),
             1 => Ok(Self::LookingForMore),
-            v => Err(crate::errors::EnumError::new("LfgUpdateLookingForMore", v as u64),)
+            v => Err(crate::errors::EnumError::new("LfgUpdateLookingForMore", v.into()),)
         }
     }
 }

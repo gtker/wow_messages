@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   variable `auction_house_id` of type `u32` changed to `auction_house` of type `AuctionHouse` enum.
 * BREAKING: Vanilla `UpdatePlayer` methods `VISIBLE_ITEM_*` have been replaced by a single `VISIBLE_ITEM` method.
 * BREAKING: `CMSG_TEXT_EMOTE` and `SMSG_TEXT_EMOTE` field `emote` changed from `Emote` to `u32`.
+* BREAKING: `EnumError` `value` changed from `u64` to `i128`. This is so that all valid `TryFrom` values can fit.
 
 ### Removed
 

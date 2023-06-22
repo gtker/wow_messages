@@ -72,7 +72,7 @@ impl TryFrom<u8> for FriendStatus {
             2 => Ok(Self::Afk),
             3 => Ok(Self::Unknown3),
             4 => Ok(Self::Dnd),
-            v => Err(crate::errors::EnumError::new("FriendStatus", v as u64),)
+            v => Err(crate::errors::EnumError::new("FriendStatus", v.into()),)
         }
     }
 }

@@ -122,7 +122,7 @@ impl TryFrom<u32> for MailResultTwo {
             17 => Ok(Self::ErrMailAndChatSuspended),
             18 => Ok(Self::ErrTooManyAttachments),
             19 => Ok(Self::ErrMailAttachmentInvalid),
-            v => Err(crate::errors::EnumError::new("MailResultTwo", v as u64),)
+            v => Err(crate::errors::EnumError::new("MailResultTwo", v.into()),)
         }
     }
 }

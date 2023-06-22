@@ -1140,7 +1140,7 @@ impl TryFrom<u32> for TextEmote {
             376 => Ok(Self::Enemy),
             377 => Ok(Self::EyeBrow),
             378 => Ok(Self::Toast),
-            v => Err(crate::errors::EnumError::new("TextEmote", v as u64),)
+            v => Err(crate::errors::EnumError::new("TextEmote", v.into()),)
         }
     }
 }

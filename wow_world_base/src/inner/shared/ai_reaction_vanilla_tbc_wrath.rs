@@ -77,7 +77,7 @@ impl TryFrom<u32> for AiReaction {
             2 => Ok(Self::Hostile),
             3 => Ok(Self::Afraid),
             4 => Ok(Self::Destroy),
-            v => Err(crate::errors::EnumError::new("AiReaction", v as u64),)
+            v => Err(crate::errors::EnumError::new("AiReaction", v.into()),)
         }
     }
 }

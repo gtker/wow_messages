@@ -54,7 +54,7 @@ impl TryFrom<u32> for NewItemSource {
         match value {
             0 => Ok(Self::Looted),
             1 => Ok(Self::FromNpc),
-            v => Err(crate::errors::EnumError::new("NewItemSource", v as u64),)
+            v => Err(crate::errors::EnumError::new("NewItemSource", v.into()),)
         }
     }
 }

@@ -60,7 +60,7 @@ impl TryFrom<u8> for TrainerSpellState {
             0 => Ok(Self::Green),
             1 => Ok(Self::Red),
             2 => Ok(Self::Gray),
-            v => Err(crate::errors::EnumError::new("TrainerSpellState", v as u64),)
+            v => Err(crate::errors::EnumError::new("TrainerSpellState", v.into()),)
         }
     }
 }

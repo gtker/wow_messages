@@ -67,7 +67,7 @@ impl TryFrom<u32> for TimerType {
             1 => Ok(Self::Breath),
             2 => Ok(Self::FeignDeath),
             3 => Ok(Self::Environmental),
-            v => Err(crate::errors::EnumError::new("TimerType", v as u64),)
+            v => Err(crate::errors::EnumError::new("TimerType", v.into()),)
         }
     }
 }

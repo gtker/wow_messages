@@ -786,7 +786,7 @@ impl TryFrom<u16> for Skill {
             754 => Ok(Self::RacialHuman),
             758 => Ok(Self::PetEventRc),
             762 => Ok(Self::Riding),
-            v => Err(crate::errors::EnumError::new("Skill", v as u64),)
+            v => Err(crate::errors::EnumError::new("Skill", v.into()),)
         }
     }
 }

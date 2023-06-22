@@ -114,7 +114,7 @@ impl TryFrom<u8> for TransferAbortReason {
             10 => Ok(Self::InstanceIsFull),
             11 => Ok(Self::NotAllowed),
             12 => Ok(Self::HasBind),
-            v => Err(crate::errors::EnumError::new("TransferAbortReason", v as u64),)
+            v => Err(crate::errors::EnumError::new("TransferAbortReason", v.into()),)
         }
     }
 }

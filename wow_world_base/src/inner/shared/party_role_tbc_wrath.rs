@@ -54,7 +54,7 @@ impl TryFrom<u8> for PartyRole {
         match value {
             0 => Ok(Self::MainTank),
             1 => Ok(Self::Assistant),
-            v => Err(crate::errors::EnumError::new("PartyRole", v as u64),)
+            v => Err(crate::errors::EnumError::new("PartyRole", v.into()),)
         }
     }
 }

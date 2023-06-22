@@ -54,7 +54,7 @@ impl TryFrom<u8> for WeatherChangeType {
         match value {
             0 => Ok(Self::Smooth),
             1 => Ok(Self::Instant),
-            v => Err(crate::errors::EnumError::new("WeatherChangeType", v as u64),)
+            v => Err(crate::errors::EnumError::new("WeatherChangeType", v.into()),)
         }
     }
 }

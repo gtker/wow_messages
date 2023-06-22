@@ -307,7 +307,7 @@ impl TryFrom<u32> for Map {
             529 => Ok(Self::ArathiBasin),
             531 => Ok(Self::AhnQirajTemple),
             533 => Ok(Self::Naxxramas),
-            v => Err(crate::errors::EnumError::new("Map", v as u64),)
+            v => Err(crate::errors::EnumError::new("Map", v.into()),)
         }
     }
 }

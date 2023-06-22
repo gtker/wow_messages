@@ -84,7 +84,7 @@ impl TryFrom<u8> for ItemQuality {
             4 => Ok(Self::Epic),
             5 => Ok(Self::Legendary),
             6 => Ok(Self::Artifact),
-            v => Err(crate::errors::EnumError::new("ItemQuality", v as u64),)
+            v => Err(crate::errors::EnumError::new("ItemQuality", v.into()),)
         }
     }
 }

@@ -54,7 +54,7 @@ impl TryFrom<u8> for ClientCastFlags {
         match value {
             0 => Ok(Self::None),
             2 => Ok(Self::Extra),
-            v => Err(crate::errors::EnumError::new("ClientCastFlags", v as u64),)
+            v => Err(crate::errors::EnumError::new("ClientCastFlags", v.into()),)
         }
     }
 }

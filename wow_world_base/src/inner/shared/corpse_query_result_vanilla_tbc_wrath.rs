@@ -54,7 +54,7 @@ impl TryFrom<u8> for CorpseQueryResult {
         match value {
             0 => Ok(Self::NotFound),
             1 => Ok(Self::Found),
-            v => Err(crate::errors::EnumError::new("CorpseQueryResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("CorpseQueryResult", v.into()),)
         }
     }
 }

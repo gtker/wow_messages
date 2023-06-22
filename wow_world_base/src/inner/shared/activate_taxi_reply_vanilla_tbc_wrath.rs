@@ -120,7 +120,7 @@ impl TryFrom<u32> for ActivateTaxiReply {
             10 => Ok(Self::PlayerMoving),
             11 => Ok(Self::SameNode),
             12 => Ok(Self::NotStanding),
-            v => Err(crate::errors::EnumError::new("ActivateTaxiReply", v as u64),)
+            v => Err(crate::errors::EnumError::new("ActivateTaxiReply", v.into()),)
         }
     }
 }

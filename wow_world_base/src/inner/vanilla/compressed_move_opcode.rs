@@ -78,7 +78,7 @@ impl TryFrom<u16> for CompressedMoveOpcode {
             772 => Ok(Self::SmsgSplineMoveUnroot),
             781 => Ok(Self::SmsgSplineMoveSetRunMode),
             782 => Ok(Self::SmsgSplineMoveSetWalkMode),
-            v => Err(crate::errors::EnumError::new("CompressedMoveOpcode", v as u64),)
+            v => Err(crate::errors::EnumError::new("CompressedMoveOpcode", v.into()),)
         }
     }
 }

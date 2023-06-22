@@ -96,7 +96,7 @@ impl TryFrom<u8> for AccountDataType {
             6 => Ok(Self::PerCharacterLayoutCache),
             7 => Ok(Self::PerCharacterChatCache),
             8 => Ok(Self::NumAccountDataTypes),
-            v => Err(crate::errors::EnumError::new("AccountDataType", v as u64),)
+            v => Err(crate::errors::EnumError::new("AccountDataType", v.into()),)
         }
     }
 }

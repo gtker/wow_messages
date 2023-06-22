@@ -133,7 +133,7 @@ impl TryFrom<u32> for ArenaTeamCommandError {
             19 => Ok(Self::ArenaTeamIgnoringYouS),
             21 => Ok(Self::ArenaTeamTargetTooLowS),
             22 => Ok(Self::ArenaTeamTooManyMembersS),
-            v => Err(crate::errors::EnumError::new("ArenaTeamCommandError", v as u64),)
+            v => Err(crate::errors::EnumError::new("ArenaTeamCommandError", v.into()),)
         }
     }
 }

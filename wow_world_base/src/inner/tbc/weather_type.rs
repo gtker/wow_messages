@@ -114,7 +114,7 @@ impl TryFrom<u32> for WeatherType {
             42 => Ok(Self::HeavySandstorm),
             86 => Ok(Self::Thunders),
             90 => Ok(Self::Blackrain),
-            v => Err(crate::errors::EnumError::new("WeatherType", v as u64),)
+            v => Err(crate::errors::EnumError::new("WeatherType", v.into()),)
         }
     }
 }

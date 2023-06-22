@@ -126,7 +126,7 @@ impl TryFrom<u8> for ReferAFriendError {
             11 => Ok(Self::SummonCooldown),
             12 => Ok(Self::InsufficientExpansionLevel),
             13 => Ok(Self::SummonOffline),
-            v => Err(crate::errors::EnumError::new("ReferAFriendError", v as u64),)
+            v => Err(crate::errors::EnumError::new("ReferAFriendError", v.into()),)
         }
     }
 }

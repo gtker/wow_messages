@@ -133,7 +133,7 @@ impl TryFrom<u8> for LootMethodError {
             14 => Ok(Self::MasterOther),
             15 => Ok(Self::AlreadyPickpocketed),
             16 => Ok(Self::NotWhileShapeshifted),
-            v => Err(crate::errors::EnumError::new("LootMethodError", v as u64),)
+            v => Err(crate::errors::EnumError::new("LootMethodError", v.into()),)
         }
     }
 }

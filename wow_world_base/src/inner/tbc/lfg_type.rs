@@ -78,7 +78,7 @@ impl TryFrom<u8> for LfgType {
             3 => Ok(Self::Quest),
             4 => Ok(Self::Zone),
             5 => Ok(Self::HeroicDungeon),
-            v => Err(crate::errors::EnumError::new("LfgType", v as u64),)
+            v => Err(crate::errors::EnumError::new("LfgType", v.into()),)
         }
     }
 }

@@ -96,7 +96,7 @@ impl TryFrom<u32> for CinematicSequenceId {
             101 => Ok(Self::Gnome),
             121 => Ok(Self::Troll),
             141 => Ok(Self::Tauren),
-            v => Err(crate::errors::EnumError::new("CinematicSequenceId", v as u64),)
+            v => Err(crate::errors::EnumError::new("CinematicSequenceId", v.into()),)
         }
     }
 }

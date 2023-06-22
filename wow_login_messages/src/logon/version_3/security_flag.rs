@@ -53,7 +53,7 @@ impl TryFrom<u8> for SecurityFlag {
         match value {
             0 => Ok(Self::None),
             1 => Ok(Self::Pin),
-            v => Err(crate::errors::EnumError::new("SecurityFlag", v as u64),)
+            v => Err(crate::errors::EnumError::new("SecurityFlag", v.into()),)
         }
     }
 }

@@ -1653,7 +1653,7 @@ impl TryFrom<u32> for AuraType {
             259 => Ok(Self::Unknown259),
             260 => Ok(Self::Unknown260),
             261 => Ok(Self::Unknown261),
-            v => Err(crate::errors::EnumError::new("AuraType", v as u64),)
+            v => Err(crate::errors::EnumError::new("AuraType", v.into()),)
         }
     }
 }

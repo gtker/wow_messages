@@ -1056,7 +1056,7 @@ impl TryFrom<u8> for SpellCastResult {
             166 => Ok(Self::OnlyInArena),
             167 => Ok(Self::TargetLockedToRaidInstance),
             168 => Ok(Self::Unknown),
-            v => Err(crate::errors::EnumError::new("SpellCastResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("SpellCastResult", v.into()),)
         }
     }
 }

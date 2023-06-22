@@ -2286,7 +2286,7 @@ impl TryFrom<u16> for ItemSet {
             750 => Ok(Self::SavagePlateBattlegear),
             751 => Ok(Self::CrusadersOrnamentedBattlegear),
             752 => Ok(Self::CrusadersScaledBattlegear),
-            v => Err(crate::errors::EnumError::new("ItemSet", v as u64),)
+            v => Err(crate::errors::EnumError::new("ItemSet", v.into()),)
         }
     }
 }

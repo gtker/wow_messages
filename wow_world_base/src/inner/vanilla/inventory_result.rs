@@ -446,7 +446,7 @@ impl TryFrom<u8> for InventoryResult {
             64 => Ok(Self::CantEquipReputation),
             65 => Ok(Self::TooManySpecialBags),
             66 => Ok(Self::LootCantLootThatNow),
-            v => Err(crate::errors::EnumError::new("InventoryResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("InventoryResult", v.into()),)
         }
     }
 }

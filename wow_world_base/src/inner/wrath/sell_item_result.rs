@@ -105,7 +105,7 @@ impl TryFrom<u8> for SellItemResult {
             7 => Ok(Self::ErrCantSellToThisMerchant),
             8 => Ok(Self::ErrMustRepairItemDurabilityToUse),
             9 => Ok(Self::InternalBagError),
-            v => Err(crate::errors::EnumError::new("SellItemResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("SellItemResult", v.into()),)
         }
     }
 }

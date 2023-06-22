@@ -54,7 +54,7 @@ impl TryFrom<u8> for LfgJoinStatus {
         match value {
             0 => Ok(Self::NotJoined),
             1 => Ok(Self::Joined),
-            v => Err(crate::errors::EnumError::new("LfgJoinStatus", v as u64),)
+            v => Err(crate::errors::EnumError::new("LfgJoinStatus", v.into()),)
         }
     }
 }

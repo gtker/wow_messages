@@ -570,7 +570,7 @@ impl TryFrom<u8> for InventoryResult {
             87 => Ok(Self::PurchaseLevelTooLow),
             88 => Ok(Self::CantEquipNeedTalent),
             89 => Ok(Self::ItemMaxLimitCategoryEquippedExceeded),
-            v => Err(crate::errors::EnumError::new("InventoryResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("InventoryResult", v.into()),)
         }
     }
 }

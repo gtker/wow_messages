@@ -137,7 +137,7 @@ impl TryFrom<u8> for LoginResult {
             13 => Ok(Self::FailNoAccess),
             14 => Ok(Self::SuccessSurvey),
             15 => Ok(Self::FailParentalcontrol),
-            v => Err(crate::errors::EnumError::new("LoginResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("LoginResult", v.into()),)
         }
     }
 }

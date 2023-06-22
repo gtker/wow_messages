@@ -1170,7 +1170,7 @@ impl TryFrom<u8> for SpellCastResult {
             185 => Ok(Self::PetCanRename),
             186 => Ok(Self::TargetCannotBeResurrected),
             187 => Ok(Self::Unknown),
-            v => Err(crate::errors::EnumError::new("SpellCastResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("SpellCastResult", v.into()),)
         }
     }
 }

@@ -588,7 +588,7 @@ impl TryFrom<u8> for WorldResult {
             88 => Ok(Self::CharNameRussianConsecutiveSilentCharacters),
             89 => Ok(Self::CharNameRussianSilentCharacterAtBeginningOrEnd),
             90 => Ok(Self::CharNameDeclensionDoesntMatchBaseName),
-            v => Err(crate::errors::EnumError::new("WorldResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("WorldResult", v.into()),)
         }
     }
 }

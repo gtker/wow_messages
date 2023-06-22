@@ -204,7 +204,7 @@ impl TryFrom<u8> for FriendResult {
             24 => Ok(Self::MuteAmbiguous),
             25 => Ok(Self::Unknown19),
             26 => Ok(Self::Unknown20),
-            v => Err(crate::errors::EnumError::new("FriendResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("FriendResult", v.into()),)
         }
     }
 }

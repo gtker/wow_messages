@@ -60,7 +60,7 @@ impl TryFrom<u8> for SpellTriggerType {
             0 => Ok(Self::OnUse),
             1 => Ok(Self::OnEquip),
             2 => Ok(Self::ChanceOnHit),
-            v => Err(crate::errors::EnumError::new("SpellTriggerType", v as u64),)
+            v => Err(crate::errors::EnumError::new("SpellTriggerType", v.into()),)
         }
     }
 }

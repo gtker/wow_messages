@@ -324,7 +324,7 @@ impl TryFrom<u8> for ChatType {
             44 => Ok(Self::Battleground),
             45 => Ok(Self::BattlegroundLeader),
             46 => Ok(Self::Restricted),
-            v => Err(crate::errors::EnumError::new("ChatType", v as u64),)
+            v => Err(crate::errors::EnumError::new("ChatType", v.into()),)
         }
     }
 }

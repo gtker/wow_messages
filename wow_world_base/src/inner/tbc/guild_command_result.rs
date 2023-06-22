@@ -160,7 +160,7 @@ impl TryFrom<u8> for GuildCommandResult {
             18 => Ok(Self::GuildRankInUse),
             19 => Ok(Self::GuildIgnoringYouS),
             20 => Ok(Self::GuildUnk20),
-            v => Err(crate::errors::EnumError::new("GuildCommandResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("GuildCommandResult", v.into()),)
         }
     }
 }

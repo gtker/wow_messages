@@ -134,7 +134,7 @@ impl TryFrom<u8> for GuildCommandResult {
             12 => Ok(Self::GuildNotAllied),
             13 => Ok(Self::GuildRankTooHighS),
             14 => Ok(Self::GuildRankTooLowS),
-            v => Err(crate::errors::EnumError::new("GuildCommandResult", v as u64),)
+            v => Err(crate::errors::EnumError::new("GuildCommandResult", v.into()),)
         }
     }
 }

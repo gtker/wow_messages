@@ -3102,7 +3102,7 @@ impl TryFrom<u16> for ItemSet {
             899 => Ok(Self::LightswornGarb),
             900 => Ok(Self::LightswornBattlegear),
             901 => Ok(Self::LightswornPlate),
-            v => Err(crate::errors::EnumError::new("ItemSet", v as u64),)
+            v => Err(crate::errors::EnumError::new("ItemSet", v.into()),)
         }
     }
 }

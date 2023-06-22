@@ -84,7 +84,7 @@ impl TryFrom<u8> for BattlegroundBracket {
             3 => Ok(Self::Fourties),
             4 => Ok(Self::Fifties),
             5 => Ok(Self::Sixty),
-            v => Err(crate::errors::EnumError::new("BattlegroundBracket", v as u64),)
+            v => Err(crate::errors::EnumError::new("BattlegroundBracket", v.into()),)
         }
     }
 }

@@ -760,7 +760,7 @@ impl TryFrom<u64> for ItemClassAndSubClass {
             34359738384 => Ok(Self::MageGlyph),
             38654705680 => Ok(Self::WarlockGlyph),
             47244640272 => Ok(Self::DruidGlyph),
-            v => Err(crate::errors::EnumError::new("ItemClassAndSubClass", v),)
+            v => Err(crate::errors::EnumError::new("ItemClassAndSubClass", v.into()),)
         }
     }
 }

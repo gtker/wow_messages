@@ -77,7 +77,7 @@ impl TryFrom<u8> for LootSlotType {
             2 => Ok(Self::TypeMaster),
             3 => Ok(Self::TypeLocked),
             4 => Ok(Self::TypeOwner),
-            v => Err(crate::errors::EnumError::new("LootSlotType", v as u64),)
+            v => Err(crate::errors::EnumError::new("LootSlotType", v.into()),)
         }
     }
 }

@@ -60,7 +60,7 @@ impl TryFrom<u32> for GmTicketStatusResponse {
             1 => Ok(Self::Updated),
             2 => Ok(Self::Closed),
             3 => Ok(Self::Survey),
-            v => Err(crate::errors::EnumError::new("GmTicketStatusResponse", v as u64),)
+            v => Err(crate::errors::EnumError::new("GmTicketStatusResponse", v.into()),)
         }
     }
 }

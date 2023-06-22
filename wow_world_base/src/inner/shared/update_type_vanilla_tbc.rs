@@ -78,7 +78,7 @@ impl TryFrom<u8> for UpdateType {
             3 => Ok(Self::CreateObject2),
             4 => Ok(Self::OutOfRangeObjects),
             5 => Ok(Self::NearObjects),
-            v => Err(crate::errors::EnumError::new("UpdateType", v as u64),)
+            v => Err(crate::errors::EnumError::new("UpdateType", v.into()),)
         }
     }
 }

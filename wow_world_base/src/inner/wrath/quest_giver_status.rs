@@ -110,7 +110,7 @@ impl TryFrom<u8> for QuestGiverStatus {
             8 => Ok(Self::Available),
             9 => Ok(Self::Reward2),
             10 => Ok(Self::Reward),
-            v => Err(crate::errors::EnumError::new("QuestGiverStatus", v as u64),)
+            v => Err(crate::errors::EnumError::new("QuestGiverStatus", v.into()),)
         }
     }
 }

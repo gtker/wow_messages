@@ -65,7 +65,7 @@ impl TryFrom<u8> for RealmType {
             1 => Ok(Self::PlayerVsPlayer),
             6 => Ok(Self::Roleplaying),
             8 => Ok(Self::RoleplayingPlayerVsPlayer),
-            v => Err(crate::errors::EnumError::new("RealmType", v as u64),)
+            v => Err(crate::errors::EnumError::new("RealmType", v.into()),)
         }
     }
 }

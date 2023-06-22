@@ -54,7 +54,7 @@ impl TryFrom<u8> for PetEnabled {
         match value {
             8 => Ok(Self::Enabled),
             0 => Ok(Self::Disabled),
-            v => Err(crate::errors::EnumError::new("PetEnabled", v as u64),)
+            v => Err(crate::errors::EnumError::new("PetEnabled", v.into()),)
         }
     }
 }

@@ -120,7 +120,7 @@ impl TryFrom<u32> for BuybackSlot {
             79 => Ok(Self::Slot11),
             80 => Ok(Self::Slot12),
             81 => Ok(Self::Slot13),
-            v => Err(crate::errors::EnumError::new("BuybackSlot", v as u64),)
+            v => Err(crate::errors::EnumError::new("BuybackSlot", v.into()),)
         }
     }
 }

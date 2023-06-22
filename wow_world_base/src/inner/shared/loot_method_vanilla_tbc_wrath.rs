@@ -100,7 +100,7 @@ impl TryFrom<u8> for LootMethod {
             20 => Ok(Self::Fishinghole),
             21 => Ok(Self::FishingFail),
             22 => Ok(Self::Insignia),
-            v => Err(crate::errors::EnumError::new("LootMethod", v as u64),)
+            v => Err(crate::errors::EnumError::new("LootMethod", v.into()),)
         }
     }
 }

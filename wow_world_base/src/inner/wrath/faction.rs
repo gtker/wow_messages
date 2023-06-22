@@ -2454,7 +2454,7 @@ impl TryFrom<u16> for Faction {
             1156 => Ok(Self::TheAshenVerdict),
             1159 => Ok(Self::CtfFlagAlliance2),
             1160 => Ok(Self::CtfFlagHorde2),
-            v => Err(crate::errors::EnumError::new("Faction", v as u64),)
+            v => Err(crate::errors::EnumError::new("Faction", v.into()),)
         }
     }
 }

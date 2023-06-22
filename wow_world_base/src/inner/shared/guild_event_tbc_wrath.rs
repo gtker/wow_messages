@@ -172,7 +172,7 @@ impl TryFrom<u8> for GuildEvent {
             17 => Ok(Self::GuildBankUpdateMoney),
             18 => Ok(Self::GuildBankMoneyWithdrawn),
             19 => Ok(Self::GuildBankTextChanged),
-            v => Err(crate::errors::EnumError::new("GuildEvent", v as u64),)
+            v => Err(crate::errors::EnumError::new("GuildEvent", v.into()),)
         }
     }
 }

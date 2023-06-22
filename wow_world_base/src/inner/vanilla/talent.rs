@@ -2634,7 +2634,7 @@ impl TryFrom<u32> for Talent {
             1701 => Ok(Self::HeightenedSenses),
             1702 => Ok(Self::Deadliness),
             1703 => Ok(Self::WeaponExpertise),
-            v => Err(crate::errors::EnumError::new("Talent", v as u64),)
+            v => Err(crate::errors::EnumError::new("Talent", v.into()),)
         }
     }
 }

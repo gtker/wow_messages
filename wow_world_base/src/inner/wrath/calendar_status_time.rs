@@ -54,7 +54,7 @@ impl TryFrom<u8> for CalendarStatusTime {
         match value {
             0 => Ok(Self::NotPresent),
             1 => Ok(Self::Present),
-            v => Err(crate::errors::EnumError::new("CalendarStatusTime", v as u64),)
+            v => Err(crate::errors::EnumError::new("CalendarStatusTime", v.into()),)
         }
     }
 }

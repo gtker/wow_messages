@@ -54,7 +54,7 @@ impl TryFrom<u8> for DungeonDifficulty {
         match value {
             0 => Ok(Self::Normal),
             1 => Ok(Self::Heroic),
-            v => Err(crate::errors::EnumError::new("DungeonDifficulty", v as u64),)
+            v => Err(crate::errors::EnumError::new("DungeonDifficulty", v.into()),)
         }
     }
 }

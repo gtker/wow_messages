@@ -1092,7 +1092,7 @@ impl TryFrom<u32> for Emote {
             474 => Ok(Self::StateReadySpellOmni),
             475 => Ok(Self::StateHoldJoust),
             476 => Ok(Self::OneshotCryJaina),
-            v => Err(crate::errors::EnumError::new("Emote", v as u64),)
+            v => Err(crate::errors::EnumError::new("Emote", v.into()),)
         }
     }
 }

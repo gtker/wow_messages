@@ -138,7 +138,7 @@ impl TryFrom<u8> for ItemClass {
             13 => Ok(Self::Key),
             14 => Ok(Self::Permanent),
             15 => Ok(Self::Misc),
-            v => Err(crate::errors::EnumError::new("ItemClass", v as u64),)
+            v => Err(crate::errors::EnumError::new("ItemClass", v.into()),)
         }
     }
 }

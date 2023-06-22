@@ -1980,7 +1980,7 @@ impl TryFrom<u16> for Faction {
             1080 => Ok(Self::MonsterForceReaction),
             1081 => Ok(Self::ObjectForceReaction),
             1087 => Ok(Self::HolidayMonster),
-            v => Err(crate::errors::EnumError::new("Faction", v as u64),)
+            v => Err(crate::errors::EnumError::new("Faction", v.into()),)
         }
     }
 }
