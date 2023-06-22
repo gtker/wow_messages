@@ -1,4 +1,6 @@
-use crate::error_printer::{duplicate_definer_value, invalid_definer_value};
+use crate::error_printer::{
+    definer_with_invalid_value, duplicate_definer_value, invalid_definer_value,
+};
 use crate::file_info::FileInfo;
 use crate::parser::types::if_statement::DefinerUsage;
 use crate::parser::types::tags::{MemberTags, ObjectTags};
@@ -152,6 +154,14 @@ impl Definer {
         objects_used_in: Vec<(String, DefinerUsage)>,
         file_info: FileInfo,
     ) -> Self {
+        let (min, max) = (basic_type.smallest_value(), basic_type.largest_value());
+        for field in &fields {
+            let value = field.value().int();
+            if value > max || value < min {
+                definer_with_invalid_value(&name, &file_info, basic_type, value);
+            }
+        }
+
         let s = Self {
             name,
             definer_ty,

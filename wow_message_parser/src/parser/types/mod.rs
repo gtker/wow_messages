@@ -53,6 +53,19 @@ impl IntegerType {
             IntegerType::U48 => 6,
         }
     }
+    pub(crate) fn smallest_value(&self) -> i128 {
+        match self {
+            IntegerType::U8
+            | IntegerType::U16
+            | IntegerType::U32
+            | IntegerType::U48
+            | IntegerType::U64 => 0,
+            IntegerType::I8 => i8::MIN.into(),
+            IntegerType::I16 => i16::MIN.into(),
+            IntegerType::I32 => i32::MIN.into(),
+            IntegerType::I64 => i64::MIN.into(),
+        }
+    }
 
     pub(crate) fn smallest_array_value(&self) -> i128 {
         0

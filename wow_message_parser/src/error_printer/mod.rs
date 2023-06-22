@@ -29,6 +29,7 @@ pub(crate) const MESSAGE_NOT_IN_INDEX: i32 = 18;
 pub(crate) const OPCODE_HAS_INCORRECT_NAME: i32 = 19;
 pub(crate) const TYPE_IS_UPCAST_TO_SAME: i32 = 20;
 pub(crate) const FLAG_WITH_SIGNED_TYPE: i32 = 21;
+pub(crate) const DEFINER_WITH_INVALID_VALUE: i32 = 22;
 
 fn wowm_exit(s: ErrorWriter, code: i32) -> ! {
     #[cfg(not(test))]
@@ -445,4 +446,23 @@ pub(crate) fn flag_with_signed_type(ty_name: &str, file_info: &FileInfo, ty: Int
     );
 
     wowm_exit(s, FLAG_WITH_SIGNED_TYPE)
+}
+
+pub(crate) fn definer_with_invalid_value(
+    ty_name: &str,
+    file_info: &FileInfo,
+    ty: IntegerType,
+    value: i128,
+) -> ! {
+    let mut s = ErrorWriter::new("Definer with invalid value.");
+
+    let (min, max) = (ty.smallest_value(), ty.largest_value());
+
+    let ty = ty.str();
+    s.fileinfo(
+        file_info,
+        format!("Definer '{ty_name}' has integer type '{ty}' with a minimum of '{min}' and a max of '{max}', but an enumerator with a value of {value}.",),
+    );
+
+    wowm_exit(s, DEFINER_WITH_INVALID_VALUE)
 }
