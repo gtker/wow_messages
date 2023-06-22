@@ -5,7 +5,6 @@ use std::io::{Read, Write};
 ///
 /// First thing sent when a client connects to the world server.
 /// This message is always unencrypted.
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_auth_challenge.wowm:2`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_auth_challenge.wowm#L2):
 /// ```text
 /// smsg SMSG_AUTH_CHALLENGE = 0x01EC {

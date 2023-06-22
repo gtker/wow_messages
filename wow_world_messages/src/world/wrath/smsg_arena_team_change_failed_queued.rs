@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// This message only exists as a comment in azerothcore/trinitycore.
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/arena/smsg_arena_team_change_failed_queued.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/arena/smsg_arena_team_change_failed_queued.wowm#L1):
 /// ```text
 /// smsg SMSG_ARENA_TEAM_CHANGE_FAILED_QUEUED = 0x04C8 {

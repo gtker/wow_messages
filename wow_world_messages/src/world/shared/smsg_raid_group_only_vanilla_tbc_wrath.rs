@@ -4,7 +4,6 @@ use wow_world_base::shared::raid_group_error_vanilla_tbc_wrath::RaidGroupError;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// used when player leaves raid group inside instance
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_raid_group_only.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_raid_group_only.wowm#L8):
 /// ```text
 /// smsg SMSG_RAID_GROUP_ONLY = 0x0286 {

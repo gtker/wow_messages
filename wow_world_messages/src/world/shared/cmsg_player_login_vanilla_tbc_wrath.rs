@@ -7,7 +7,6 @@ use crate::Guid;
 ///
 /// This is sent after the client has been authenticated and served the character list with [`SMSG_CHAR_ENUM`](crate::vanilla::SMSG_CHAR_ENUM).
 /// If the player receives a [`SMSG_CHARACTER_LOGIN_FAILED`](crate::vanilla::SMSG_CHARACTER_LOGIN_FAILED) it will return to the character screen and send a [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_player_login.wow#L3):
 /// ```text
 /// cmsg CMSG_PLAYER_LOGIN = 0x003D {

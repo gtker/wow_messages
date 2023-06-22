@@ -6,7 +6,6 @@ use crate::Guid;
 /// Tells the client that the running speed has changed.
 /// Client replies with [`CMSG_FORCE_RUN_SPEED_CHANGE_ACK`](crate::vanilla::CMSG_FORCE_RUN_SPEED_CHANGE_ACK).
 /// vmangos sends this message to the client being changed and [`SMSG_SPLINE_SET_RUN_SPEED`](crate::vanilla::SMSG_SPLINE_SET_RUN_SPEED) to others.
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_force_run_speed_change.wowm#L1):
 /// ```text
 /// smsg SMSG_FORCE_RUN_SPEED_CHANGE = 0x00E2 {

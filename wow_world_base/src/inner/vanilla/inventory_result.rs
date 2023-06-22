@@ -1,5 +1,4 @@
 /// Any values greater than maximum enum value show as 'bag full'
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/trade/smsg_trade_status.wowm:181`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/trade/smsg_trade_status.wowm#L181):
 /// ```text
 /// enum InventoryResult : u8 {

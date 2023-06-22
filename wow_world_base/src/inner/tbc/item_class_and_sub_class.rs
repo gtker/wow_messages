@@ -1,7 +1,6 @@
 /// This is both the class field and the sub class field.
 /// They are combined into one enum because the value of the sub class depends on the value of the class.
 /// The high bits of this are the class field since they are both sent as little endian.
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/enums/item_class_and_sub_class.wowm:81`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/enums/item_class_and_sub_class.wowm#L81):
 /// ```text
 /// enum ItemClassAndSubClass : u64 {

@@ -4,7 +4,6 @@ use crate::Guid;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sets the current target.
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/client_set/cmsg_set_selection.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/client_set/cmsg_set_selection.wowm#L1):
 /// ```text
 /// cmsg CMSG_SET_SELECTION = 0x013D {

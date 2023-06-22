@@ -5,7 +5,6 @@ use wow_world_base::shared::account_data_type_vanilla_tbc::AccountDataType;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// This is sent by the client after receiving [`SMSG_ACCOUNT_DATA_TIMES`](crate::vanilla::SMSG_ACCOUNT_DATA_TIMES). Client can also request a block through [`CMSG_REQUEST_ACCOUNT_DATA`](crate::vanilla::CMSG_REQUEST_ACCOUNT_DATA).
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm#L15):
 /// ```text
 /// cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {

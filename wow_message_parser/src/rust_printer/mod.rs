@@ -186,7 +186,9 @@ fn print_docc_description_and_comment(
             s.docc(line);
         }
 
-        s.docc_newline();
+        if tags.comment().is_some() {
+            s.docc_newline();
+        }
     }
 
     if let Some(comment) = tags.comment() {
@@ -194,6 +196,13 @@ fn print_docc_description_and_comment(
             s.docc(line);
         }
 
+        if tags.non_network_type() {
+            s.docc_newline();
+        }
+    }
+
+    if tags.non_network_type() {
+        s.docc("This type is not sent over the network, but is used in the game in another way.");
         s.docc_newline();
     }
 }

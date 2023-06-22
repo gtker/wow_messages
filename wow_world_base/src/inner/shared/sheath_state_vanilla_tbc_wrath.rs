@@ -1,5 +1,4 @@
 /// According to cmangos: byte value (`UNIT_FIELD_BYTES_2`,0)
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/client_set/cmsg_setsheathed.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/client_set/cmsg_setsheathed.wowm#L1):
 /// ```text
 /// enum SheathState : u8 {

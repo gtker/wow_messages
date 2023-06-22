@@ -1,3 +1,5 @@
+/// This type is not sent over the network, but is used in the game in another way.
+///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/external/external_spell_1_12.wowm:42`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/external/external_spell_1_12.wowm#L42):
 /// ```text
 /// flag AttributesEx1 : u32 {

@@ -6,7 +6,6 @@ use crate::vanilla::{
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent after the client presses 'Create Character'. The client will then wait for [`SMSG_CHAR_CREATE`](crate::vanilla::SMSG_CHAR_CREATE).
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_create.wowm#L1):
 /// ```text
 /// cmsg CMSG_CHAR_CREATE = 0x0036 {

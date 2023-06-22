@@ -4,7 +4,6 @@ use crate::vanilla::Character;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Response to [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm:43`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/smsg_char_enum.wowm#L43):
 /// ```text
 /// smsg SMSG_CHAR_ENUM = 0x003B {

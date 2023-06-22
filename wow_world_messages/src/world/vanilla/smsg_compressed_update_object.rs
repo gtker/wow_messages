@@ -5,7 +5,6 @@ use crate::vanilla::Object;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Compressed version of [`SMSG_UPDATE_OBJECT`](crate::vanilla::SMSG_UPDATE_OBJECT). Has the same fields when uncompressed
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_compressed_object.wowm#L1):
 /// ```text
 /// smsg SMSG_COMPRESSED_UPDATE_OBJECT = 0x01F6 {

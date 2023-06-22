@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// No TBC/Wrath emulator has a `GmTicketType` field before `message`, but vmangos does.
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_updatetext.wowm:10`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_updatetext.wowm#L10):
 /// ```text
 /// cmsg CMSG_GMTICKET_UPDATETEXT = 0x0207 {

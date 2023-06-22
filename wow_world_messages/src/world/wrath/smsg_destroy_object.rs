@@ -7,7 +7,6 @@ use crate::Guid;
 ///
 /// Used by vmangos for logout.
 /// azerothcore: If the following bool is true, the client will call `void CGUnit_C::OnDeath()` for this object. `OnDeath()` does for eg trigger death animation and interrupts certain spells/missiles/auras/sounds...
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_destroy_object.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_destroy_object.wowm#L21):
 /// ```text
 /// smsg SMSG_DESTROY_OBJECT = 0x00AA {

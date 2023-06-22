@@ -4,7 +4,6 @@ use crate::wrath::CacheMask;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Indicate when each piece of account data was last updated by a [`CMSG_UPDATE_ACCOUNT_DATA`](crate::wrath::CMSG_UPDATE_ACCOUNT_DATA). The client can check this against its own times to detect that more recent account data was written from a different client.
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm:45`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_account_data_times.wowm#L45):
 /// ```text
 /// smsg SMSG_ACCOUNT_DATA_TIMES = 0x0209 {

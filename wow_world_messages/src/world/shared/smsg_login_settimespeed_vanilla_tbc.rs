@@ -7,7 +7,6 @@ use crate::DateTime;
 ///
 /// The client also asks for the datetime with [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME) and gets a reply from [`SMSG_QUERY_TIME_RESPONSE`](crate::vanilla::SMSG_QUERY_TIME_RESPONSE), but this does not appear to change anything in the client.
 /// Despite sending this as the very first message after the client logs in it will still send a [`CMSG_QUERY_TIME`](crate::vanilla::CMSG_QUERY_TIME).
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_login_settimespeed.wowm#L1):
 /// ```text
 /// smsg SMSG_LOGIN_SETTIMESPEED = 0x0042 {

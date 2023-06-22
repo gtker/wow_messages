@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Respond with [`SMSG_UPDATE_ACCOUNT_DATA`](crate::tbc::SMSG_UPDATE_ACCOUNT_DATA)
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_request_account_data.wowm#L1):
 /// ```text
 /// cmsg CMSG_REQUEST_ACCOUNT_DATA = 0x020A {

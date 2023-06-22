@@ -6,7 +6,6 @@ use std::io::{Read, Write};
 ///
 /// The client always seems to send 2 [`CMSG_CANCEL_TRADE`](crate::vanilla::CMSG_CANCEL_TRADE) immediately after receiving this mesage, but before sending [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM).
 /// Even if 'Exit Game' is selected the client will still send a [`CMSG_CHAR_ENUM`](crate::vanilla::CMSG_CHAR_ENUM) immediately before closing the connection, despite it not needing to see the character list.
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_logout_complete.wowm#L3):
 /// ```text
 /// smsg SMSG_LOGOUT_COMPLETE = 0x004D {

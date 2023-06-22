@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent when the client enters the world.
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_getticket.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_getticket.wowm#L1):
 /// ```text
 /// cmsg CMSG_GMTICKET_GETTICKET = 0x0211 {

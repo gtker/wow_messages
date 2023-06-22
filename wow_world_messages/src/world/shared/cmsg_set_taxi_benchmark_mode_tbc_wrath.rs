@@ -2,7 +2,6 @@ use std::io::{Read, Write};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Sent when the client runs `/timetest 1`.
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_set_taxi_benchmark_mode.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_set_taxi_benchmark_mode.wowm#L1):
 /// ```text
 /// cmsg CMSG_SET_TAXI_BENCHMARK_MODE = 0x0389 {

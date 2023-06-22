@@ -5,7 +5,6 @@ use wow_world_base::shared::training_failure_reason_vanilla_tbc_wrath::TrainingF
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// No TBC emulators implement this.
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_trainer_buy_failed.wowm:18`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_trainer_buy_failed.wowm#L18):
 /// ```text
 /// smsg SMSG_TRAINER_BUY_FAILED = 0x01B4 {

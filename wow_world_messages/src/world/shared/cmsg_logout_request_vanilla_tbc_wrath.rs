@@ -5,7 +5,6 @@ use std::io::{Read, Write};
 /// Server should reply with [`SMSG_LOGOUT_RESPONSE`](crate::vanilla::SMSG_LOGOUT_RESPONSE).
 ///
 /// Spamming the 'Logout' and 'Exit Game' buttons does not send multiple messages.
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_logout_request.wowm#L3):
 /// ```text
 /// cmsg CMSG_LOGOUT_REQUEST = 0x004B {

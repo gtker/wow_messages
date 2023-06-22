@@ -6,7 +6,6 @@ use crate::Guid;
 /// Command to delete a character from the clients account. Can be sent after the client has received [`SMSG_CHAR_ENUM`](crate::vanilla::SMSG_CHAR_ENUM).
 ///
 /// Sent after the client has confirmed the character deletion.
-///
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_char_delete.wowm#L3):
 /// ```text
 /// cmsg CMSG_CHAR_DELETE = 0x0038 {
