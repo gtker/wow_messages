@@ -1,0 +1,12 @@
+flag ReputationFlags : u8 {
+    VISIBLE_TO_CLIENT = 0x01;
+    ENABLE_AT_WAR = 0x02;
+    HIDE_IN_CLIENT = 0x04;
+    FORCE_HIDE_IN_CLIENT = 0x08;
+    FORCE_AT_PEACE = 0x10;
+    FACTION_INACTIVE = 0x20;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `Faction.dbc`.";
+}

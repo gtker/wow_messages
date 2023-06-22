@@ -1,0 +1,12 @@
+flag CharacterRaceFlags : u8 {
+    NONE = 0x00;
+    NOT_PLAYABLE = 0x01;
+    BARE_FEET = 0x02;
+    CAN_CURRENT_FORM_MOUNT = 0x04;
+    UNKNOWN2 = 0x08;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `ChrRaces.dbc`.";
+}
+

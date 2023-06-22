@@ -1,0 +1,16 @@
+flag AreaFlags : u16 {
+    SNOW = 0x01;
+    UNK = 0x02;
+    DEVELOPMENT = 0x04;
+    UNK2 = 0x08;
+    UNK3 = 0x10;
+    CITY_SLAVE = 0x20;
+    CITY_ALLOW_DUELS = 0x40;
+    UNK4 = 0x80;
+    CITY = 0x100;
+    TEST = 0x200;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `AreaTable.dbc`.";
+}

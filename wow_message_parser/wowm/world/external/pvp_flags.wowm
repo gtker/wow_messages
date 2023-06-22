@@ -1,0 +1,8 @@
+flag PvpFlags : u16 {
+    PVP_FLAGGED = 0x800;
+    ATTACK_PVPING_PLAYERS = 0x1000;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `FactionTemplate.dbc`.";
+}

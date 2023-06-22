@@ -1,0 +1,15 @@
+flag DefaultChannelFlags : u32 {
+    NONE = 0x00;
+    INITIAL = 0x01;
+    ZONE_DEPENDENCY = 0x02;
+    GLOBAL = 0x04;
+    TRADE = 0x08;
+    CITY_ONLY = 0x10;
+    CITY_ONLY_2 = 0x20;
+    DEFENCE = 0x10000;
+    UNSELECTED = 0x40000;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `ChatChannels.dbc`.";
+}

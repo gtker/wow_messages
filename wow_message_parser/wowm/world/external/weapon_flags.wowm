@@ -1,0 +1,10 @@
+flag WeaponFlags : u8 {
+    WEAPON_NOT_AFFECTED_BY_ANIMATION = 0x00;
+    SHEATHE_WEAPONS_AUTOMATICALLY = 0x04;
+    SHEATHE_WEAPONS_AUTOMATICALLY_2 = 0x10;
+    UNSHEATHE_WEAPONS = 0x20;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `AnimationData.dbc`.";
+}

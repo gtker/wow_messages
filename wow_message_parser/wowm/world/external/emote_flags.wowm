@@ -1,0 +1,11 @@
+flag EmoteFlags : u8 {
+    TALK = 0x08;
+    QUESTION = 0x10;
+    EXCLAMATION = 0x20;
+    SHOUT = 0x40;
+    LAUGH = 0x80;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `Emotes.dbc`.";
+}
