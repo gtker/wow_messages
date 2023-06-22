@@ -36,6 +36,8 @@ impl Os {
 
 }
 
+const NAME: &str = "Os";
+
 impl Default for Os {
     fn default() -> Self {
         Self::Windows

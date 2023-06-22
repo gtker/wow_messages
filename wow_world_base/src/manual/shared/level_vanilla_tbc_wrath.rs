@@ -113,6 +113,74 @@ impl From<Level> for u8 {
     }
 }
 
+impl TryFrom<u16> for Level {
+    type Error = u16;
+
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        let a = TryInto::<u8>::try_into(value).ok().ok_or(value)?;
+        Ok(a.into())
+    }
+}
+
+impl TryFrom<u32> for Level {
+    type Error = u32;
+
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
+        let a = TryInto::<u8>::try_into(value).ok().ok_or(value)?;
+        Ok(a.into())
+    }
+}
+
+impl TryFrom<u64> for Level {
+    type Error = u64;
+
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        let a = TryInto::<u8>::try_into(value).ok().ok_or(value)?;
+
+        Ok(a.into())
+    }
+}
+
+impl TryFrom<i8> for Level {
+    type Error = i8;
+
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        let a = TryInto::<u8>::try_into(value).ok().ok_or(value)?;
+
+        Ok(a.into())
+    }
+}
+
+impl TryFrom<i16> for Level {
+    type Error = i16;
+
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        let a = TryInto::<u8>::try_into(value).ok().ok_or(value)?;
+
+        Ok(a.into())
+    }
+}
+
+impl TryFrom<i32> for Level {
+    type Error = i32;
+
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        let a = TryInto::<u8>::try_into(value).ok().ok_or(value)?;
+
+        Ok(a.into())
+    }
+}
+
+impl TryFrom<i64> for Level {
+    type Error = i64;
+
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        let a = TryInto::<u8>::try_into(value).ok().ok_or(value)?;
+
+        Ok(a.into())
+    }
+}
+
 impl Add for Level {
     type Output = Self;
 
@@ -127,6 +195,7 @@ impl AddAssign for Level {
         self.inner = i;
     }
 }
+
 impl Sub for Level {
     type Output = Self;
 
@@ -134,6 +203,7 @@ impl Sub for Level {
         Self::new(self.inner.saturating_sub(rhs.inner))
     }
 }
+
 impl SubAssign for Level {
     fn sub_assign(&mut self, rhs: Self) {
         // Do not use u8::sub_assign since it doesn't saturate

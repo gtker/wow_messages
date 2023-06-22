@@ -757,6 +757,8 @@ impl TextEmote {
 
 }
 
+const NAME: &str = "TextEmote";
+
 impl Default for TextEmote {
     fn default() -> Self {
         Self::Agree
@@ -1140,8 +1142,80 @@ impl TryFrom<u32> for TextEmote {
             376 => Ok(Self::Enemy),
             377 => Ok(Self::EyeBrow),
             378 => Ok(Self::Toast),
-            v => Err(crate::errors::EnumError::new("TextEmote", v.into()),)
+            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
         }
+    }
+}
+
+impl TryFrom<u8> for TextEmote {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u16> for TextEmote {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u64> for TextEmote {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i8> for TextEmote {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i16> for TextEmote {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i32> for TextEmote {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i64> for TextEmote {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<usize> for TextEmote {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value as i128))?
+            .try_into()
     }
 }
 

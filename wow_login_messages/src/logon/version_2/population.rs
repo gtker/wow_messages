@@ -40,6 +40,8 @@ impl Population {
 
 }
 
+const NAME: &str = "Population";
+
 impl Default for Population {
     fn default() -> Self {
         Self::GreenRecommended

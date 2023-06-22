@@ -44,6 +44,8 @@ impl InstanceResetFailedReason {
 
 }
 
+const NAME: &str = "InstanceResetFailedReason";
+
 impl Default for InstanceResetFailedReason {
     fn default() -> Self {
         Self::General
@@ -69,8 +71,80 @@ impl TryFrom<u8> for InstanceResetFailedReason {
             1 => Ok(Self::Offline),
             2 => Ok(Self::Zoning),
             3 => Ok(Self::Silently),
-            v => Err(crate::errors::EnumError::new("InstanceResetFailedReason", v.into()),)
+            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
         }
+    }
+}
+
+impl TryFrom<u16> for InstanceResetFailedReason {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u32> for InstanceResetFailedReason {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u64> for InstanceResetFailedReason {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i8> for InstanceResetFailedReason {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i16> for InstanceResetFailedReason {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i32> for InstanceResetFailedReason {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i64> for InstanceResetFailedReason {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<usize> for InstanceResetFailedReason {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value as i128))?
+            .try_into()
     }
 }
 

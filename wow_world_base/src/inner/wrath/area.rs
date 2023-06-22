@@ -9257,6 +9257,8 @@ impl Area {
 
 }
 
+const NAME: &str = "Area";
+
 impl Default for Area {
     fn default() -> Self {
         Self::None
@@ -13890,8 +13892,80 @@ impl TryFrom<u32> for Area {
             4908 => Ok(Self::TheHiddenPassage),
             4910 => Ok(Self::Frostmourne1),
             4987 => Ok(Self::TheRubySanctum),
-            v => Err(crate::errors::EnumError::new("Area", v.into()),)
+            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
         }
+    }
+}
+
+impl TryFrom<u8> for Area {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u16> for Area {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u64> for Area {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i8> for Area {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i16> for Area {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i32> for Area {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i64> for Area {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<usize> for Area {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value as i128))?
+            .try_into()
     }
 }
 

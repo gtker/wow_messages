@@ -40,6 +40,8 @@ impl RealmType {
 
 }
 
+const NAME: &str = "RealmType";
+
 impl Default for RealmType {
     fn default() -> Self {
         Self::PlayerVsEnvironment
@@ -65,8 +67,71 @@ impl TryFrom<u8> for RealmType {
             1 => Ok(Self::PlayerVsPlayer),
             6 => Ok(Self::Roleplaying),
             8 => Ok(Self::RoleplayingPlayerVsPlayer),
-            v => Err(crate::errors::EnumError::new("RealmType", v.into()),)
+            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
         }
+    }
+}
+
+impl TryFrom<u16> for RealmType {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u32> for RealmType {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u64> for RealmType {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i8> for RealmType {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i16> for RealmType {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i32> for RealmType {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<usize> for RealmType {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        TryInto::<u8>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value as i128))?
+            .try_into()
     }
 }
 

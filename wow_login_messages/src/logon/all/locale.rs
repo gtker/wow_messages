@@ -84,6 +84,8 @@ impl Locale {
 
 }
 
+const NAME: &str = "Locale";
+
 impl Default for Locale {
     fn default() -> Self {
         Self::EnGb

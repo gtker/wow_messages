@@ -86,6 +86,30 @@ impl DateTime {
     }
 }
 
+const fn minutes(v: u32) -> u32 {
+    v & 0b111111
+}
+
+const fn hours(v: u32) -> u32 {
+    (v >> 6) & 0b11111
+}
+
+const fn weekday(v: u32) -> u32 {
+    (v >> 11) & 0b111
+}
+
+const fn month_day(v: u32) -> u32 {
+    (v >> 14) & 0b111111
+}
+
+const fn month(v: u32) -> u32 {
+    (v >> 20) & 0b1111
+}
+
+const fn years_after_2000(v: u32) -> u32 {
+    (v >> 24) & 0b11111111
+}
+
 impl TryFrom<u32> for DateTime {
     type Error = EnumError;
 
@@ -113,30 +137,6 @@ impl TryFrom<u32> for DateTime {
             minutes as u8,
         ))
     }
-}
-
-const fn minutes(v: u32) -> u32 {
-    v & 0b111111
-}
-
-const fn hours(v: u32) -> u32 {
-    (v >> 6) & 0b11111
-}
-
-const fn weekday(v: u32) -> u32 {
-    (v >> 11) & 0b111
-}
-
-const fn month_day(v: u32) -> u32 {
-    (v >> 14) & 0b111111
-}
-
-const fn month(v: u32) -> u32 {
-    (v >> 20) & 0b1111
-}
-
-const fn years_after_2000(v: u32) -> u32 {
-    (v >> 24) & 0b11111111
 }
 
 #[cfg(feature = "chrono")]
@@ -190,6 +190,8 @@ impl Weekday {
     }
 }
 
+const WEEKDAY: &str = "Weekday";
+
 impl Default for Weekday {
     fn default() -> Self {
         Self::Monday
@@ -210,6 +212,72 @@ impl TryFrom<u32> for Weekday {
             6 => Self::Saturday,
             v => return Err(EnumError::new("Weekday", v.into())),
         })
+    }
+}
+
+impl TryFrom<u8> for Weekday {
+    type Error = EnumError;
+
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        Self::try_from(Into::<u32>::into(value))
+    }
+}
+
+impl TryFrom<u16> for Weekday {
+    type Error = EnumError;
+
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        Self::try_from(Into::<u32>::into(value))
+    }
+}
+
+impl TryFrom<u64> for Weekday {
+    type Error = EnumError;
+
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        let a =
+            TryInto::<u32>::try_into(value).map_err(|_| EnumError::new(WEEKDAY, value.into()))?;
+        a.try_into()
+    }
+}
+
+impl TryFrom<i8> for Weekday {
+    type Error = EnumError;
+
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        let a =
+            TryInto::<u32>::try_into(value).map_err(|_| EnumError::new(WEEKDAY, value.into()))?;
+        a.try_into()
+    }
+}
+
+impl TryFrom<i16> for Weekday {
+    type Error = EnumError;
+
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        let a =
+            TryInto::<u32>::try_into(value).map_err(|_| EnumError::new(WEEKDAY, value.into()))?;
+        a.try_into()
+    }
+}
+
+impl TryFrom<i32> for Weekday {
+    type Error = EnumError;
+
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        let a =
+            TryInto::<u32>::try_into(value).map_err(|_| EnumError::new(WEEKDAY, value.into()))?;
+        a.try_into()
+    }
+}
+
+impl TryFrom<i64> for Weekday {
+    type Error = EnumError;
+
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        let a =
+            TryInto::<u32>::try_into(value).map_err(|_| EnumError::new(WEEKDAY, value.into()))?;
+        a.try_into()
     }
 }
 
@@ -248,6 +316,8 @@ impl Month {
     }
 }
 
+const MONTH: &str = "Month";
+
 impl Default for Month {
     fn default() -> Self {
         Self::January
@@ -273,5 +343,66 @@ impl TryFrom<u32> for Month {
             11 => Month::December,
             v => return Err(EnumError::new("Month", v.into())),
         })
+    }
+}
+
+impl TryFrom<u8> for Month {
+    type Error = EnumError;
+
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        Self::try_from(Into::<u32>::into(value))
+    }
+}
+
+impl TryFrom<u16> for Month {
+    type Error = EnumError;
+
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        Self::try_from(Into::<u32>::into(value))
+    }
+}
+
+impl TryFrom<u64> for Month {
+    type Error = EnumError;
+
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        let a = TryInto::<u32>::try_into(value).map_err(|_| EnumError::new(MONTH, value.into()))?;
+        a.try_into()
+    }
+}
+
+impl TryFrom<i8> for Month {
+    type Error = EnumError;
+
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        let a = TryInto::<u32>::try_into(value).map_err(|_| EnumError::new(MONTH, value.into()))?;
+        a.try_into()
+    }
+}
+
+impl TryFrom<i16> for Month {
+    type Error = EnumError;
+
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        let a = TryInto::<u32>::try_into(value).map_err(|_| EnumError::new(MONTH, value.into()))?;
+        a.try_into()
+    }
+}
+
+impl TryFrom<i32> for Month {
+    type Error = EnumError;
+
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        let a = TryInto::<u32>::try_into(value).map_err(|_| EnumError::new(MONTH, value.into()))?;
+        a.try_into()
+    }
+}
+
+impl TryFrom<i64> for Month {
+    type Error = EnumError;
+
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        let a = TryInto::<u32>::try_into(value).map_err(|_| EnumError::new(MONTH, value.into()))?;
+        a.try_into()
     }
 }

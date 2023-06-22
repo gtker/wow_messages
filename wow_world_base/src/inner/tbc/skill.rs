@@ -569,6 +569,8 @@ impl Skill {
 
 }
 
+const NAME: &str = "Skill";
+
 impl Default for Skill {
     fn default() -> Self {
         Self::None
@@ -858,8 +860,80 @@ impl TryFrom<u16> for Skill {
             767 => Ok(Self::PetRavager),
             768 => Ok(Self::PetSerpent),
             769 => Ok(Self::Internal),
-            v => Err(crate::errors::EnumError::new("Skill", v.into()),)
+            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
         }
+    }
+}
+
+impl TryFrom<u8> for Skill {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u32> for Skill {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u64> for Skill {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i8> for Skill {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i16> for Skill {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i32> for Skill {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i64> for Skill {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<usize> for Skill {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value as i128))?
+            .try_into()
     }
 }
 

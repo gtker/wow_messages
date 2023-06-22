@@ -41,6 +41,8 @@ impl MiniMoveOpcode {
 
 }
 
+const NAME: &str = "MiniMoveOpcode";
+
 impl Default for MiniMoveOpcode {
     fn default() -> Self {
         Self::SmsgForceMoveRoot
@@ -66,8 +68,80 @@ impl TryFrom<u16> for MiniMoveOpcode {
             242 => Ok(Self::SmsgMoveFeatherFall),
             222 => Ok(Self::SmsgMoveWaterWalk),
             244 => Ok(Self::SmsgMoveSetHover),
-            v => Err(crate::errors::EnumError::new("MiniMoveOpcode", v.into()),)
+            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
         }
+    }
+}
+
+impl TryFrom<u8> for MiniMoveOpcode {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u32> for MiniMoveOpcode {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u64> for MiniMoveOpcode {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i8> for MiniMoveOpcode {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i16> for MiniMoveOpcode {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i32> for MiniMoveOpcode {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i64> for MiniMoveOpcode {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<usize> for MiniMoveOpcode {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        TryInto::<u16>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value as i128))?
+            .try_into()
     }
 }
 

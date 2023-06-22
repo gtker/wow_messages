@@ -1,4 +1,5 @@
 use crate::parser::types::definer::Definer;
+use crate::parser::types::IntegerType;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
     print_docc_description_and_comment, print_member_docc_description_and_comment,
@@ -23,6 +24,9 @@ fn print_enum_inner(e: &Definer, o: &Objects, visibility_override: bool) -> Writ
     common_impls(&mut s, e, visibility_override);
 
     testcase_string(&mut s, e);
+
+    s.wln(format!("const NAME: &str = \"{}\";", e.name()));
+    s.newline();
 
     print_default(&mut s, e);
 
@@ -181,7 +185,6 @@ fn print_from_or_try_from(s: &mut Writer, e: &Definer) {
 }
 
 fn print_try_from(s: &mut Writer, e: &Definer) {
-    let name = e.name();
     let ty_name = e.ty().rust_str();
     s.impl_for(format!("TryFrom<{ty_name}>"), e.name(), |s| {
         s.wln("type Error = crate::errors::EnumError;");
@@ -198,12 +201,43 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                     }
 
                     s.wln(format!(
-                        "v => Err(crate::errors::EnumError::new(\"{name}\", v.into()),)",
+                        "v => Err(crate::errors::EnumError::new(NAME, v.into()),)",
                     ));
                 });
             },
         );
     });
+
+    for (_, from_ty) in IntegerType::try_from_types() {
+        let from_ty = *from_ty;
+        if from_ty == ty_name || (e.tags().has_login_version() && from_ty == "i64") {
+            continue;
+        }
+
+        s.impl_for(format!("TryFrom<{from_ty}>"), e.name(), |s| {
+            s.wln("type Error = crate::errors::EnumError;");
+
+            s.body(
+                format!("fn try_from(value: {from_ty}) -> Result<Self, Self::Error>",),
+                |s| {
+                    s.wln(format!("TryInto::<{ty_name}>::try_into(value)"));
+                    s.inc_indent();
+
+                    let convert = if from_ty == "usize" {
+                        " as i128"
+                    } else {
+                        ".into()"
+                    };
+
+                    s.wln(format!(
+                        ".map_err(|_| crate::errors::EnumError::new(NAME, value{convert}))?"
+                    ));
+                    s.wln(".try_into()");
+                    s.dec_indent();
+                },
+            );
+        });
+    }
 }
 
 fn print_from(s: &mut Writer, e: &Definer) {

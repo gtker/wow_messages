@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and `(vanilla|tbc|wrath)_faction`.
 * `Octal`, `Binary`, `UpperHex`, `LowerHex` for `Guid`.
 * `to_emote` for `TextEmote`.
+* BREAKING: TryFrom for all enum for `u8`, `i8`, `u16`, `i16`, `u32`, `i32`, `u64`, `i64`, and `usize` regardless of underlying type.
+ This may break type deduction and lead to compile errors, so it is breaking.
 
 ### Removed
 

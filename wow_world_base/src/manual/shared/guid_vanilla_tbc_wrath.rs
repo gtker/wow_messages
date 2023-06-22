@@ -45,9 +45,63 @@ impl Guid {
     }
 }
 
+impl From<u8> for Guid {
+    fn from(v: u8) -> Self {
+        Self::new(v.into())
+    }
+}
+
+impl From<u16> for Guid {
+    fn from(v: u16) -> Self {
+        Self::new(v.into())
+    }
+}
+
+impl From<u32> for Guid {
+    fn from(v: u32) -> Self {
+        Self::new(v.into())
+    }
+}
+
 impl From<u64> for Guid {
     fn from(v: u64) -> Self {
         Self::new(v)
+    }
+}
+
+impl TryFrom<i8> for Guid {
+    type Error = i8;
+
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        let a = TryInto::<u64>::try_into(value).ok().ok_or(value)?;
+        Ok(a.into())
+    }
+}
+
+impl TryFrom<i16> for Guid {
+    type Error = i16;
+
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        let a = TryInto::<u64>::try_into(value).ok().ok_or(value)?;
+        Ok(a.into())
+    }
+}
+
+impl TryFrom<i32> for Guid {
+    type Error = i32;
+
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        let a = TryInto::<u64>::try_into(value).ok().ok_or(value)?;
+        Ok(a.into())
+    }
+}
+
+impl TryFrom<i64> for Guid {
+    type Error = i64;
+
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        let a = TryInto::<u64>::try_into(value).ok().ok_or(value)?;
+        Ok(a.into())
     }
 }
 

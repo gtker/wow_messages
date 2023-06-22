@@ -167,6 +167,42 @@ impl From<Gold> for u32 {
     }
 }
 
+impl TryFrom<i8> for Gold {
+    type Error = i8;
+
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        let a = TryInto::<u32>::try_into(value).ok().ok_or(value)?;
+        Ok(a.into())
+    }
+}
+
+impl TryFrom<i16> for Gold {
+    type Error = i16;
+
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        let a = TryInto::<u32>::try_into(value).ok().ok_or(value)?;
+        Ok(a.into())
+    }
+}
+
+impl TryFrom<i32> for Gold {
+    type Error = i32;
+
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        let a = TryInto::<u32>::try_into(value).ok().ok_or(value)?;
+        Ok(a.into())
+    }
+}
+
+impl TryFrom<i64> for Gold {
+    type Error = i64;
+
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        let a = TryInto::<u32>::try_into(value).ok().ok_or(value)?;
+        Ok(a.into())
+    }
+}
+
 #[cfg(test)]
 mod test {
     use crate::shared::gold_vanilla_tbc_wrath::Gold;

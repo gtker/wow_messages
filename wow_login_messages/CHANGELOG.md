@@ -22,6 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Flags now have their enumerators as public `const` variables.
 * Login and reconnect protocol version 5, 6, and 7.
+* BREAKING: TryFrom for all enum for `u8`, `i8`, `u16`, `i16`, `u32`, `i32`, `u64`, `i64`, and `usize` regardless of underlying type.
+  This may break type deduction and lead to compile errors, so it is breaking.
 
 ### Changed
 

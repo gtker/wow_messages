@@ -204,7 +204,7 @@ mod test {
             .finalize();
         update_mask.dirty_reset();
 
-        update_mask.set_object_guid(4.into());
+        update_mask.set_object_guid(4_u64.into());
 
         let update_mask = UpdateMask::Player(update_mask);
         assert_eq!(b.len(), update_mask.size());

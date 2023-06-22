@@ -36,6 +36,8 @@ impl Platform {
 
 }
 
+const NAME: &str = "Platform";
+
 impl Default for Platform {
     fn default() -> Self {
         Self::X86
