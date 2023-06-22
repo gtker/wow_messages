@@ -114,7 +114,7 @@ impl From<&DefinerField> for IrDefinerField {
 
 #[derive(Debug, Serialize)]
 struct IrDefinerValue {
-    int: u64,
+    int: i128,
     original: String,
 }
 

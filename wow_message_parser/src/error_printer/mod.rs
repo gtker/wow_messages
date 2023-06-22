@@ -224,7 +224,7 @@ pub(crate) fn duplicate_definer_value(
     ty_name: &str,
     first_enumerator_name: impl AsRef<str>,
     second_enumerator_name: &str,
-    value: u64,
+    value: i128,
     file_info: &FileInfo,
 ) -> ! {
     let mut s = ErrorWriter::new("Definer has two fields with the same value.");

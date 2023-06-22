@@ -118,7 +118,7 @@ impl IntegerType {
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) struct ContainerValue {
-    value: u64,
+    value: i128,
     original_string: String,
 }
 
@@ -134,7 +134,7 @@ impl Display for ContainerValue {
 }
 
 impl ContainerValue {
-    pub(crate) fn value(&self) -> u64 {
+    pub(crate) fn value(&self) -> i128 {
         self.value
     }
 
@@ -146,7 +146,7 @@ impl ContainerValue {
         field_name_to_rust_name(self.original_string())
     }
 
-    pub(crate) fn new(value: u64, original_string: String) -> Self {
+    pub(crate) fn new(value: i128, original_string: String) -> Self {
         Self {
             value,
             original_string,

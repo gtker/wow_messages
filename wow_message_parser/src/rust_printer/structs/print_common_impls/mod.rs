@@ -447,7 +447,7 @@ pub(crate) fn print_constant_member(
     name: &str,
     ty: &Type,
     original_value: &str,
-    value: u64,
+    value: i128,
 ) {
     s.docc(format!("The field `{name}` is constantly specified to be:"));
     s.docc_newline();

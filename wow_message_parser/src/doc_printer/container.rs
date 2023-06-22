@@ -39,7 +39,7 @@ fn print_container_example_array(
     s: &mut DocWriter,
     array: &Array,
     bytes: &mut Iter<u8>,
-    values: &mut HashMap<String, isize>,
+    values: &mut HashMap<String, i128>,
     o: &Objects,
     tags: &ObjectTags,
     prefix: &str,
@@ -106,7 +106,7 @@ fn print_container_example_definition(
     s: &mut DocWriter,
     d: &StructMemberDefinition,
     bytes: &mut Iter<u8>,
-    values: &mut HashMap<String, isize>,
+    values: &mut HashMap<String, i128>,
     o: &Objects,
     tags: &ObjectTags,
     prefix: &str,
@@ -275,7 +275,7 @@ fn print_container_example_member(
     s: &mut DocWriter,
     m: &StructMember,
     bytes: &mut Iter<u8>,
-    values: &mut HashMap<String, isize>,
+    values: &mut HashMap<String, i128>,
     o: &Objects,
     tags: &ObjectTags,
     prefix: &str,
@@ -310,7 +310,7 @@ fn print_container_example_member(
                 _ => unreachable!("Non definer used in original type"),
             };
 
-            let statement_set = |statement: &IfStatement, enum_value: isize| {
+            let statement_set = |statement: &IfStatement, enum_value: i128| {
                 let mut set = false;
                 match statement.conditional().equation() {
                     Equation::Equals { values: value } => {
@@ -323,7 +323,7 @@ fn print_container_example_member(
                                 .value()
                                 .int();
 
-                            if eq_value == enum_value as u64 {
+                            if eq_value == enum_value {
                                 set = true;
                             }
                         }
@@ -338,9 +338,7 @@ fn print_container_example_member(
                                 .value()
                                 .int();
 
-                            if (eq_value == 0 && enum_value == 0)
-                                || (eq_value & enum_value as u64) != 0
-                            {
+                            if (eq_value == 0 && enum_value == 0) || (eq_value & enum_value) != 0 {
                                 set = true;
                             }
                         }
@@ -771,24 +769,24 @@ fn print_container_header(s: &mut DocWriter, e: &Container) {
     s.newline();
 }
 
-fn get_integer_value(t: &IntegerType, value: &[u8]) -> isize {
+fn get_integer_value(t: &IntegerType, value: &[u8]) -> i128 {
     match t {
-        IntegerType::I8 | IntegerType::U8 => value[0] as isize,
+        IntegerType::I8 | IntegerType::U8 => value[0].into(),
         IntegerType::I16 | IntegerType::U16 => {
             let value: [u8; 2] = value.try_into().unwrap();
-            u16::from_le_bytes(value) as isize
+            u16::from_le_bytes(value).into()
         }
         IntegerType::U32 => {
             let value: [u8; 4] = value.try_into().unwrap();
-            u32::from_le_bytes(value) as isize
+            u32::from_le_bytes(value).into()
         }
         IntegerType::I64 | IntegerType::U64 => {
             let value: [u8; 8] = value.try_into().unwrap();
-            u64::from_le_bytes(value) as isize
+            u64::from_le_bytes(value).into()
         }
         IntegerType::I32 => {
             let value: [u8; 4] = value.try_into().unwrap();
-            i32::from_le_bytes(value) as isize
+            i32::from_le_bytes(value).into()
         }
         IntegerType::U48 => {
             let value: [u8; 6] = value.try_into().unwrap();

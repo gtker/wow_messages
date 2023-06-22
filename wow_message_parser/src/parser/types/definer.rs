@@ -50,12 +50,12 @@ impl DefinerField {
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) struct DefinerValue {
-    int: u64,
+    int: i128,
     original: String,
 }
 
 impl DefinerValue {
-    pub(crate) fn int(&self) -> u64 {
+    pub(crate) fn int(&self) -> i128 {
         self.int
     }
 
@@ -222,8 +222,7 @@ impl Definer {
         self.fields.iter().find(|a| a.name() == name)
     }
 
-    pub(crate) fn get_field_with_value(&self, value: isize) -> Option<&DefinerField> {
-        let value = value as u64;
+    pub(crate) fn get_field_with_value(&self, value: i128) -> Option<&DefinerField> {
         self.fields.iter().find(|a| a.value.int == value)
     }
 
@@ -240,9 +239,8 @@ impl Definer {
         width
     }
 
-    pub(crate) fn get_set_flag_fields(&self, value: isize) -> Vec<&DefinerField> {
+    pub(crate) fn get_set_flag_fields(&self, value: i128) -> Vec<&DefinerField> {
         let mut v = Vec::new();
-        let value = value as u64;
 
         for f in self.fields() {
             let val = f.value().int();

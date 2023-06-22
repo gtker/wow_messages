@@ -517,13 +517,13 @@ fn print_value(
                 .unwrap();
             let ty = parse_value(ty.value()).unwrap();
 
-            const ITEM: u64 = 0x0002;
-            const CONTAINER: u64 = 0x0004;
-            const UNIT: u64 = 0x0008;
-            const PLAYER: u64 = 0x0010;
-            const GAMEOBJECT: u64 = 0x0020;
-            const DYNAMICOBJECT: u64 = 0x0040;
-            const CORPSE: u64 = 0x0080;
+            const ITEM: i128 = 0x0002;
+            const CONTAINER: i128 = 0x0004;
+            const UNIT: i128 = 0x0008;
+            const PLAYER: i128 = 0x0010;
+            const GAMEOBJECT: i128 = 0x0020;
+            const DYNAMICOBJECT: i128 = 0x0040;
+            const CORPSE: i128 = 0x0080;
             if (ty & CONTAINER) != 0 {
                 s.wln_no_indent("UpdateMask::Container(UpdateContainer::builder()");
             } else if (ty & ITEM) != 0 {

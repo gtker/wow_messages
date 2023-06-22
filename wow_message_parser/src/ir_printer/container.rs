@@ -357,7 +357,7 @@ impl From<ArraySize> for IrArraySize {
 
 #[derive(Debug, Serialize)]
 pub(crate) struct IrIntegerEnumValue {
-    value: u64,
+    value: i128,
     original_string: String,
 }
 
