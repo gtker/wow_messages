@@ -255,15 +255,12 @@ pub(crate) enum Version {
 
 impl Ord for Version {
     fn cmp(&self, other: &Self) -> Ordering {
-        match self {
-            Version::Login(l) => match other {
-                Version::Login(ol) => l.cmp(ol),
-                Version::World(_) => Ordering::Less,
-            },
-            Version::World(w) => match other {
-                Version::Login(_) => Ordering::Greater,
-                Version::World(ow) => w.cmp(ow),
-            },
+        match (self, other) {
+            (Version::Login(l), Version::Login(ol)) => l.cmp(ol),
+            (Version::World(l), Version::World(ol)) => l.cmp(ol),
+
+            (Version::Login(_), Version::World(_)) => Ordering::Less,
+            (Version::World(_), Version::Login(_)) => Ordering::Greater,
         }
     }
 }
