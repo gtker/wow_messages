@@ -181,27 +181,24 @@ fn print_from_or_try_from(s: &mut Writer, e: &Definer) {
 }
 
 fn print_try_from(s: &mut Writer, e: &Definer) {
-    s.impl_for(format!("TryFrom<{}>", e.ty().rust_str()), e.name(), |s| {
+    let name = e.name();
+    let ty_name = e.ty().rust_str();
+    s.impl_for(format!("TryFrom<{ty_name}>"), e.name(), |s| {
         s.wln("type Error = crate::errors::EnumError;");
 
         s.body(
-            format!(
-                "fn try_from(value: {}) -> Result<Self, Self::Error>",
-                e.ty().rust_str()
-            ),
+            format!("fn try_from(value: {ty_name}) -> Result<Self, Self::Error>",),
             |s| {
                 s.body("match value", |s| {
                     for field in e.fields() {
-                        s.wln(format!(
-                            "{} => Ok(Self::{}),",
-                            field.value().int(),
-                            field.rust_name()
-                        ));
+                        let value = field.value().int();
+                        let field_name = field.rust_name();
+
+                        s.wln(format!("{value} => Ok(Self::{field_name}),",));
                     }
 
                     s.wln(format!(
-                        "v => Err(crate::errors::EnumError::new(\"{}\", v.into()),)",
-                        e.name(),
+                        "v => Err(crate::errors::EnumError::new(\"{name}\", v.into()),)",
                     ));
                 });
             },
@@ -210,25 +207,21 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
 }
 
 fn print_from(s: &mut Writer, e: &Definer) {
-    s.impl_for(format!("From<{}>", e.ty().rust_str()), e.name(), |s| {
-        s.body(
-            format!("fn from(value: {}) -> Self", e.ty().rust_str()),
-            |s| {
-                s.body("match value", |s| {
-                    for field in e.fields() {
-                        s.wln(format!(
-                            "{} => Self::{},",
-                            field.value().int(),
-                            field.rust_name()
-                        ));
-                    }
+    let ty_name = e.ty().rust_str();
 
-                    s.wln(format!(
-                        "v => Self::{}(v)",
-                        e.self_value().as_ref().unwrap().rust_name()
-                    ));
-                });
-            },
-        );
+    s.impl_for(format!("From<{ty_name}>"), e.name(), |s| {
+        s.body(format!("fn from(value: {ty_name}) -> Self"), |s| {
+            s.body("match value", |s| {
+                for field in e.fields() {
+                    let value = field.value().int();
+                    let field_name = field.rust_name();
+
+                    s.wln(format!("{value} => Self::{field_name},",));
+                }
+
+                let self_name = e.self_value().as_ref().unwrap().rust_name();
+                s.wln(format!("v => Self::{self_name}(v)",));
+            });
+        });
     });
 }
