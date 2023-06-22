@@ -7,7 +7,6 @@ mod text_emote;
 pub use crate::manual::shared::gold_vanilla_tbc_wrath::Gold;
 pub use crate::manual::shared::level_vanilla_tbc_wrath::Level;
 pub use crate::manual::shared::player_gender_vanilla_tbc_wrath::PlayerGender;
-pub use crate::manual::shared::skill_category_vanilla_tbc_wrath::SkillCategory;
 
 pub use player_race::*;
 pub use race_class::*;

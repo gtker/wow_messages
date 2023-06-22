@@ -6,7 +6,6 @@ pub use crate::manual::shared::gold_vanilla_tbc_wrath::*;
 pub use crate::manual::shared::guid_vanilla_tbc_wrath::*;
 pub use crate::manual::shared::level_vanilla_tbc_wrath::*;
 pub use crate::manual::shared::player_gender_vanilla_tbc_wrath::*;
-pub use crate::manual::shared::skill_category_vanilla_tbc_wrath::*;
 
 pub use crate::shared::account_data_type_vanilla_tbc::*;
 pub use crate::shared::activate_taxi_reply_vanilla_tbc_wrath::*;
@@ -165,6 +164,7 @@ pub(crate) mod simple_spell_cast_result;
 pub use simple_spell_cast_result::*;
 pub(crate) mod skill;
 pub use skill::*;
+pub use crate::shared::skill_category_vanilla_tbc_wrath::*;
 pub(crate) mod spell_cast_result;
 pub use spell_cast_result::*;
 pub(crate) mod spell_effect;

@@ -1,0 +1,17 @@
+#tag_all non_network_type "true";
+
+enum SkillCategory : u8 {
+    ATTRIBUTE = 5 {
+        comment = "Not used for anything in Vanilla and TBC, only used for `Pet - Exotic Spirit Beast` in Wrath.";
+    }
+    WEAPON = 6;
+    CLASS = 7;
+    ARMOR = 8;
+    SECONDARY_PROFESSION = 9;
+    LANGUAGE = 10;
+    PRIMARY_PROFESSION = 11;
+    GENERIC = 12;
+} {
+    versions = "1 2 3";
+}
+

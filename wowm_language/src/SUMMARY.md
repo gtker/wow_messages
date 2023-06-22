@@ -229,6 +229,7 @@
 - [SheatheType](docs/sheathetype.md)
 - [SimpleSpellCastResult](docs/simplespellcastresult.md)
 - [Skill](docs/skill.md)
+- [SkillCategory](docs/skillcategory.md)
 - [SpamType](docs/spamtype.md)
 - [SpellCastResult](docs/spellcastresult.md)
 - [SpellCastTargetFlags](docs/spellcasttargetflags.md)

@@ -141,7 +141,6 @@ impl ModFiles {
                     s.wln("pub use crate::manual::shared::player_race_tbc_wrath::*;");
                 }
             }
-            s.wln("pub use crate::manual::shared::skill_category_vanilla_tbc_wrath::*;");
             s.newline();
 
             s.wln(text);

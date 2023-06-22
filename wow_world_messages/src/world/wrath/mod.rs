@@ -89,6 +89,7 @@ pub use wow_world_base::shared::refer_a_friend_error_tbc_wrath::*;
 pub use wow_world_base::shared::roll_vote_tbc_wrath::*;
 pub use wow_world_base::shared::sheath_state_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::sheathe_type_vanilla_tbc_wrath::*;
+pub use wow_world_base::shared::skill_category_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::spam_type_tbc_wrath::*;
 pub use wow_world_base::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::spell_school_vanilla_vanilla_tbc_wrath::*;
