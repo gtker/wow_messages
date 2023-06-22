@@ -134,6 +134,8 @@ pub(crate) struct IrTags {
     unimplemented: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     compressed: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    non_network_type: Option<String>,
 }
 
 impl IrTags {
@@ -154,6 +156,12 @@ impl IrTags {
             None
         };
 
+        let non_network_type = if tags.non_network_type() {
+            Some("true".to_string())
+        } else {
+            None
+        };
+
         let version = Some(match tags.all_versions() {
             AllVersions::Login(l) => IrVersions::Login(l.iter().map(|a| (*a).into()).collect()),
             AllVersions::World(w) => IrVersions::World(w.iter().map(|a| (*a).into()).collect()),
@@ -166,6 +174,7 @@ impl IrTags {
             version,
             compressed,
             unimplemented,
+            non_network_type,
         }
     }
 
@@ -183,6 +192,7 @@ impl IrTags {
             version: None,
             compressed,
             unimplemented: None,
+            non_network_type: None,
         }
     }
 }

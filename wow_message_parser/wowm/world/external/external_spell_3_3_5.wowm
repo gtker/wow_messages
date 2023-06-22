@@ -1,3 +1,5 @@
+#tag_all non_network_type "true";
+
 enum AuraMod : u32 {
     NONE = 0;
     BIND_SIGHT = 1;

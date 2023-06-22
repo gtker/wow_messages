@@ -19,6 +19,7 @@ pub(crate) struct ObjectTags {
     unimplemented: bool,
     rust_base_ty: bool,
     zero_is_always_valid: bool,
+    non_network_type: bool,
 }
 
 impl ObjectTags {
@@ -32,6 +33,7 @@ impl ObjectTags {
         unimplemented: bool,
         rust_base_ty: bool,
         zero_is_always_valid: bool,
+        non_network_type: bool,
     ) -> Self {
         Self {
             all_versions,
@@ -43,6 +45,7 @@ impl ObjectTags {
             unimplemented,
             rust_base_ty,
             zero_is_always_valid,
+            non_network_type,
         }
     }
 
@@ -70,6 +73,7 @@ impl ObjectTags {
             unimplemented: false,
             rust_base_ty: false,
             zero_is_always_valid: false,
+            non_network_type: false,
         }
     }
 
@@ -89,11 +93,16 @@ impl ObjectTags {
             unimplemented: false,
             rust_base_ty: false,
             zero_is_always_valid: false,
+            non_network_type: false,
         }
     }
 
     pub(crate) fn unimplemented(&self) -> bool {
         self.unimplemented
+    }
+
+    pub(crate) fn non_network_type(&self) -> bool {
+        self.non_network_type
     }
 
     pub(crate) fn shared(&self) -> bool {

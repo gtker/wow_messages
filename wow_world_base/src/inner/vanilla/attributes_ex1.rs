@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/external_spell_1_12.wowm:40`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/external_spell_1_12.wowm#L40):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/external/external_spell_1_12.wowm:42`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/external/external_spell_1_12.wowm#L42):
 /// ```text
 /// flag AttributesEx1 : u32 {
 ///     NONE = 0x00;

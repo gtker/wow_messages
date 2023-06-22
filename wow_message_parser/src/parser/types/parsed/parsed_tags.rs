@@ -5,8 +5,9 @@ use crate::file_info::FileInfo;
 use crate::parser::types::tags::{MemberTags, TagString};
 use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
 use crate::{
-    ObjectTags, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, PASTE_VERSIONS,
-    RUST_BASE_TYPE, SKIP_STR, TEST_STR, UNIMPLEMENTED, VERSIONS, ZERO_IS_ALWAYS_VALID,
+    ObjectTags, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, NON_NETWORK_TYPE,
+    PASTE_VERSIONS, RUST_BASE_TYPE, SKIP_STR, TEST_STR, UNIMPLEMENTED, VERSIONS,
+    ZERO_IS_ALWAYS_VALID,
 };
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
@@ -24,6 +25,7 @@ pub(crate) struct ParsedTags {
     unimplemented: BoolTag,
     rust_base_ty: BoolTag,
     zero_is_always_valid: BoolTag,
+    non_network_type: BoolTag,
 }
 
 impl ParsedTags {
@@ -59,6 +61,7 @@ impl ParsedTags {
         self.unimplemented.append(t.unimplemented);
         self.rust_base_ty.append(t.rust_base_ty);
         self.zero_is_always_valid.append(t.zero_is_always_valid);
+        self.non_network_type.append(t.non_network_type);
     }
 
     pub(crate) fn into_tags(
@@ -99,6 +102,7 @@ impl ParsedTags {
             self.rust_base_ty
                 .into_bool_with_default(rust_base_type_default),
             self.zero_is_always_valid.into_bool(),
+            self.non_network_type.into_bool(),
         )
     }
 
@@ -208,6 +212,8 @@ impl ParsedTags {
             self.rust_base_ty.insert(value);
         } else if key == ZERO_IS_ALWAYS_VALID {
             self.zero_is_always_valid.insert(value);
+        } else if key == NON_NETWORK_TYPE {
+            self.non_network_type.insert(value);
         }
     }
 }

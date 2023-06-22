@@ -79,6 +79,7 @@ const SKIP_STR: &str = "skip_codegen";
 const LOGIN_VERSIONS: &str = "login_versions";
 const RUST_BASE_TYPE: &str = "rust_base_type";
 const ZERO_IS_ALWAYS_VALID: &str = "zero_is_always_valid";
+const NON_NETWORK_TYPE: &str = "non_network_type";
 const UNIMPLEMENTED: &str = "unimplemented";
 
 // Also used in /utils.rs
