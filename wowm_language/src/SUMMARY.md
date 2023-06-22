@@ -228,6 +228,7 @@
 - [SheathState](docs/sheathstate.md)
 - [SheatheType](docs/sheathetype.md)
 - [SimpleSpellCastResult](docs/simplespellcastresult.md)
+- [SizeClass](docs/sizeclass.md)
 - [Skill](docs/skill.md)
 - [SkillCategory](docs/skillcategory.md)
 - [SpamType](docs/spamtype.md)

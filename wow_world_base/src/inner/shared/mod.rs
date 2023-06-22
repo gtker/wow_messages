@@ -208,6 +208,8 @@ pub mod sheath_state_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod sheathe_type_vanilla_tbc_wrath;
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub mod size_class_vanilla_tbc_wrath;
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 pub mod skill_category_vanilla_tbc_wrath;
 #[cfg(any(feature = "tbc", feature = "wrath"))]
 pub mod spam_type_tbc_wrath;

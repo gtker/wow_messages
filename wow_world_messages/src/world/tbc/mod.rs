@@ -107,6 +107,7 @@ pub use wow_world_base::shared::sell_item_result_vanilla_tbc::*;
 pub use wow_world_base::shared::server_message_type_vanilla_tbc::*;
 pub use wow_world_base::shared::sheath_state_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::sheathe_type_vanilla_tbc_wrath::*;
+pub use wow_world_base::shared::size_class_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::skill_category_vanilla_tbc_wrath::*;
 pub use wow_world_base::shared::spam_type_tbc_wrath::*;
 pub use wow_world_base::shared::spell_miss_info_vanilla_vanilla_tbc_wrath::*;

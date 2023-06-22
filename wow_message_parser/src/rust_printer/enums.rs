@@ -93,11 +93,15 @@ fn as_type(s: &mut Writer, e: &Definer, visibility_override: bool) {
     f(s, "as_int(&self)", e.ty().rust_str(), |s: &mut Writer| {
         s.body("match self", |s| {
             for field in e.fields() {
-                s.wln(format!(
-                    "Self::{} => 0x{:x},",
-                    field.rust_name(),
-                    field.value().int()
-                ));
+                let name = field.rust_name();
+
+                let value = field.value().int();
+                let value = if value >= 0 {
+                    format!("{value:#x}")
+                } else {
+                    format!("{value}")
+                };
+                s.wln(format!("Self::{name} => {value},",));
             }
             match e.self_value() {
                 None => {}

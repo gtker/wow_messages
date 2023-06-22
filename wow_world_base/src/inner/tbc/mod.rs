@@ -161,6 +161,7 @@ pub use crate::shared::sell_item_result_vanilla_tbc::*;
 pub use crate::shared::server_message_type_vanilla_tbc::*;
 pub use crate::shared::sheath_state_vanilla_tbc_wrath::*;
 pub use crate::shared::sheathe_type_vanilla_tbc_wrath::*;
+pub use crate::shared::size_class_vanilla_tbc_wrath::*;
 pub(crate) mod skill;
 pub use skill::*;
 pub use crate::shared::skill_category_vanilla_tbc_wrath::*;

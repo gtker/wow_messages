@@ -1,0 +1,11 @@
+enum SizeClass : i8 {
+    NONE = -1;
+    SMALL = 0;
+    MEDIUM = 1;
+    LARGE = 2;
+    GIANT = 3;
+    COLOSSAL = 4;
+} {
+    versions = "1.12 2 3";
+    non_network_type = "true";
+}
