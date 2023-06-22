@@ -182,18 +182,22 @@ fn lib_functions(s: &mut Writer, ty_name: &str, things: &[GenericThing]) {
 
         s.wln("#[test]");
         s.body("fn tests()", |s| {
-            s.wln("assert!(lookup_item(u32::MIN).is_none());");
-            s.wln("assert!(lookup_item(u32::MAX).is_none());");
+            s.wln(format!("assert!(lookup_{ty_lower}(u32::MIN).is_none());"));
+            s.wln(format!("assert!(lookup_{ty_lower}(u32::MAX).is_none());"));
             s.newline();
 
             s.wln(format!("const MIN: u32 = {min};"));
             s.wln(format!("const MAX: u32 = {max};"));
-            s.wln("assert_eq!(lookup_item(MIN).unwrap().entry(), MIN);");
-            s.wln("assert_eq!(lookup_item(MAX).unwrap().entry(), MAX);");
+            s.wln(format!(
+                "assert_eq!(lookup_{ty_lower}(MIN).unwrap().entry(), MIN);"
+            ));
+            s.wln(format!(
+                "assert_eq!(lookup_{ty_lower}(MAX).unwrap().entry(), MAX);"
+            ));
             s.newline();
 
-            s.wln("assert!(lookup_item(MIN - 1).is_none());");
-            s.wln("assert!(lookup_item(MAX + 1).is_none());");
+            s.wln(format!("assert!(lookup_{ty_lower}(MIN - 1).is_none());"));
+            s.wln(format!("assert!(lookup_{ty_lower}(MAX + 1).is_none());"));
         });
     });
 }
