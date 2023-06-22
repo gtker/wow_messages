@@ -198,6 +198,14 @@ fn lib_functions(s: &mut Writer, ty_name: &str, things: &[GenericThing]) {
 
             s.wln(format!("assert!(lookup_{ty_lower}(MIN - 1).is_none());"));
             s.wln(format!("assert!(lookup_{ty_lower}(MAX + 1).is_none());"));
+            s.newline();
+
+            s.body("for i in 0..=MAX + 10", |s| {
+                s.body(format!("match lookup_{ty_lower}(i)"), |s| {
+                    s.wln("None => {}");
+                    s.wln("Some(e) => assert_eq!(i, e.entry()),");
+                });
+            });
         });
     });
 }
