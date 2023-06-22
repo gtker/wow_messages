@@ -406,7 +406,7 @@ fn test_for_invalid_size(s: &mut Writer, e: &Container) {
                 _ => unreachable!(),
             };
 
-            let max = if e.sizes().maximum() >= u32::MAX as usize {
+            let max = if e.sizes().maximum() >= u32::MAX as i128 {
                 max
             } else {
                 e.sizes().maximum()

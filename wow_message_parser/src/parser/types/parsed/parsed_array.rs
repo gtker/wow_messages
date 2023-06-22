@@ -32,7 +32,7 @@ impl ParsedArrayType {
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub enum ParsedArraySize {
-    Fixed(i64),
+    Fixed(i128),
     Variable(String),
     Endless,
 }

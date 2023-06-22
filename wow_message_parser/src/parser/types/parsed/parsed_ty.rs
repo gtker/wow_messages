@@ -120,47 +120,54 @@ impl ParsedType {
         }
     }
 
-    pub(crate) fn min_max_size(&self) -> (usize, usize) {
+    pub(crate) fn min_max_size(&self) -> (i128, i128) {
         match self {
-            ParsedType::Integer(i) | ParsedType::Bool(i) => (i.size() as usize, i.size() as usize),
-            ParsedType::Guid => (GUID_SIZE as usize, GUID_SIZE as usize),
+            ParsedType::Integer(i) | ParsedType::Bool(i) => (i.size().into(), i.size().into()),
+            ParsedType::Guid => (GUID_SIZE.into(), GUID_SIZE.into()),
             ParsedType::DateTime => (DATETIME_SIZE.into(), DATETIME_SIZE.into()),
-            ParsedType::FloatingPoint => (F32_SIZE, F32_SIZE),
-            ParsedType::PackedGuid => (PACKED_GUID_MIN_SIZE as _, PACKED_GUID_MAX_SIZE as _),
-            ParsedType::AuraMask => (AURA_MASK_MIN_SIZE as usize, AURA_MASK_MAX_SIZE as usize),
-            ParsedType::CString => (CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED),
-            ParsedType::SizedCString => (
-                SIZED_CSTRING_SMALLEST_ALLOWED,
-                SIZED_CSTRING_LARGEST_ALLOWED,
+            ParsedType::FloatingPoint => (F32_SIZE.into(), F32_SIZE.into()),
+            ParsedType::PackedGuid => (PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into()),
+            ParsedType::AuraMask => (AURA_MASK_MIN_SIZE.into(), AURA_MASK_MAX_SIZE.into()),
+            ParsedType::CString => (
+                CSTRING_SMALLEST_ALLOWED.into(),
+                CSTRING_LARGEST_ALLOWED.into(),
             ),
-            ParsedType::String => (STRING_SMALLEST_POSSIBLE, STRING_LARGEST_POSSIBLE),
+            ParsedType::SizedCString => (
+                SIZED_CSTRING_SMALLEST_ALLOWED.into(),
+                SIZED_CSTRING_LARGEST_ALLOWED.into(),
+            ),
+            ParsedType::String => (
+                STRING_SMALLEST_POSSIBLE.into(),
+                STRING_LARGEST_POSSIBLE.into(),
+            ),
             ParsedType::AchievementDoneArray | ParsedType::AchievementInProgressArray => {
-                (0, usize::MAX)
+                (0, usize::MAX.try_into().unwrap())
             }
             ParsedType::MonsterMoveSpline => (
-                MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED,
-                MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
+                MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED.into(),
+                MONSTER_MOVE_SPLINE_LARGEST_ALLOWED.into(),
             ),
-            ParsedType::EnchantMask => {
-                (ENCHANT_MASK_SMALLEST_ALLOWED, ENCHANT_MASK_LARGEST_ALLOWED)
-            }
+            ParsedType::EnchantMask => (
+                ENCHANT_MASK_SMALLEST_ALLOWED.into(),
+                ENCHANT_MASK_LARGEST_ALLOWED.into(),
+            ),
             ParsedType::InspectTalentGearMask => (
-                INSPECT_TALENT_GEAR_MASK_SMALLEST_ALLOWED,
+                INSPECT_TALENT_GEAR_MASK_SMALLEST_ALLOWED.into(),
                 INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED,
             ),
             ParsedType::Gold => (GOLD_SIZE.into(), GOLD_SIZE.into()),
             ParsedType::Level => (LEVEL_SIZE.into(), LEVEL_SIZE.into()),
-            ParsedType::Level16 => (LEVEL16_SIZE, LEVEL16_SIZE),
-            ParsedType::Level32 => (LEVEL32_SIZE, LEVEL32_SIZE),
-            ParsedType::Seconds => (SECONDS_SIZE, SECONDS_SIZE),
-            ParsedType::Milliseconds => (MILLISECONDS_SIZE, MILLISECONDS_SIZE),
-            ParsedType::NamedGuid => (NAMED_GUID_MIN_SIZE, NAMED_GUID_MAX_SIZE),
+            ParsedType::Level16 => (LEVEL16_SIZE.into(), LEVEL16_SIZE.into()),
+            ParsedType::Level32 => (LEVEL32_SIZE.into(), LEVEL32_SIZE.into()),
+            ParsedType::Seconds => (SECONDS_SIZE.into(), SECONDS_SIZE.into()),
+            ParsedType::Milliseconds => (MILLISECONDS_SIZE.into(), MILLISECONDS_SIZE.into()),
+            ParsedType::NamedGuid => (NAMED_GUID_MIN_SIZE.into(), NAMED_GUID_MAX_SIZE.into()),
             ParsedType::VariableItemRandomProperty => (
-                VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
-                VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
+                VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE.into(),
+                VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE.into(),
             ),
-            ParsedType::AddonArray => (ADDON_ARRAY_MIN, ADDON_ARRAY_MAX),
-            ParsedType::IpAddress => (IP_ADDRESS_SIZE, IP_ADDRESS_SIZE),
+            ParsedType::AddonArray => (ADDON_ARRAY_MIN.into(), ADDON_ARRAY_MAX),
+            ParsedType::IpAddress => (IP_ADDRESS_SIZE.into(), IP_ADDRESS_SIZE.into()),
             t => unimplemented!("sizes for {t:?}"),
         }
     }
@@ -177,10 +184,7 @@ impl ParsedType {
         match self {
             ParsedType::UpdateMask => {
                 let world_version = e.tags().main_versions().next().unwrap().as_major_world();
-                sizes.inc(
-                    UPDATE_MASK_MIN_SIZE as usize,
-                    update_mask_max(world_version),
-                )
+                sizes.inc(UPDATE_MASK_MIN_SIZE.into(), update_mask_max(world_version))
             }
             ParsedType::Identifier { s, upcast } => {
                 if s == e.name() {
@@ -192,9 +196,9 @@ impl ParsedType {
                         upcast.size()
                     } else {
                         get_definer(definers, s, e.tags()).unwrap().ty().size()
-                    } as usize;
+                    };
 
-                    sizes.inc_both(s);
+                    sizes.inc_both(s.into());
                 } else if let Some(c) = get_container(containers, s, e.tags()) {
                     sizes += c.create_sizes(containers, definers);
                 } else {
@@ -209,47 +213,38 @@ impl ParsedType {
                 }
 
                 let (min, max) = match array.size() {
-                    ParsedArraySize::Fixed(f) => {
-                        let f: usize = f.try_into().unwrap();
-                        (f, f)
-                    }
+                    ParsedArraySize::Fixed(f) => (f, f),
                     ParsedArraySize::Variable(f) => match e.get_field_ty(&f) {
-                        ParsedType::Integer(i) => (i.smallest_value(), i.largest_value()),
+                        ParsedType::Integer(i) => (i.smallest_array_value(), i.largest_value()),
                         _ => panic!("only ints can be string lengths"),
                     },
                     ParsedArraySize::Endless => panic!(),
                 };
 
-                match array.ty() {
-                    ParsedArrayType::Integer(i) => {
-                        sizes.inc(i.size() as usize * min, i.size() as usize * max)
-                    }
-                    ParsedArrayType::Guid => {
-                        sizes.inc(GUID_SIZE as usize * min, GUID_SIZE as usize * max)
-                    }
-                    ParsedArrayType::PackedGuid => sizes.inc(
-                        PACKED_GUID_MIN_SIZE as usize * min,
-                        PACKED_GUID_MAX_SIZE as usize * max,
+                let (inner_min, inner_max): (i128, i128) = match array.ty() {
+                    ParsedArrayType::Integer(i) => (i.size().into(), i.size().into()),
+                    ParsedArrayType::CString => (
+                        CSTRING_SMALLEST_ALLOWED.into(),
+                        CSTRING_LARGEST_ALLOWED.into(),
                     ),
-                    ParsedArrayType::CString => sizes.inc(
-                        CSTRING_SMALLEST_ALLOWED * min,
-                        CSTRING_LARGEST_ALLOWED * max,
-                    ),
+                    ParsedArrayType::Guid => (GUID_SIZE.into(), GUID_SIZE.into()),
+                    ParsedArrayType::PackedGuid => {
+                        (PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into())
+                    }
                     ParsedArrayType::Complex(s) => {
                         if let Some(e) = get_definer(definers, s, e.tags()) {
-                            let s = e.ty().size();
-                            sizes.inc(s as usize * min, s as usize * max);
+                            (e.ty().size().into(), e.ty().size().into())
                         } else if let Some(c) = get_container(containers, s, e.tags()) {
-                            let c = c.create_sizes(containers, definers);
-
-                            sizes.inc(min * c.minimum(), 0);
-                            sizes.inc(0, max.saturating_mul(c.maximum()));
+                            let s = c.create_sizes(containers, definers);
+                            (s.minimum(), s.maximum())
                         } else {
                             let related = get_related(containers, definers, s);
                             complex_not_found(e.name(), e.tags(), &e.file_info, s, &related);
                         }
                     }
-                }
+                };
+
+                sizes.inc(inner_min.saturating_mul(min), inner_max.saturating_mul(max));
             }
 
             _ => {
@@ -341,7 +336,7 @@ impl ParsedType {
                     let array_type: ParsedType = ParsedType::from_str(array_type);
 
                     let amount = i.next().unwrap().strip_suffix(']').unwrap();
-                    let parsed = str::parse::<i64>(amount);
+                    let parsed = str::parse(amount);
 
                     let size = if let Ok(parsed) = parsed {
                         ParsedArraySize::Fixed(parsed)

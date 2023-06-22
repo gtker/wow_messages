@@ -4,14 +4,14 @@ use std::ops::AddAssign;
 
 #[derive(Debug, Copy, Clone, Default, Ord, PartialOrd, Eq, PartialEq)]
 pub(crate) struct Sizes {
-    minimum: usize,
-    maximum: usize,
+    minimum: i128,
+    maximum: i128,
 }
 
 pub(crate) const AURA_MASK_MAX_SIZE: u8 = 4 + 32 * 4;
 pub(crate) const AURA_MASK_MIN_SIZE: u8 = 4;
 
-pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> usize {
+pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> i128 {
     let data = match version {
         MajorWorldVersion::Vanilla => vanilla_fields::FIELDS,
         MajorWorldVersion::BurningCrusade => tbc_fields::FIELDS,
@@ -20,15 +20,17 @@ pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> usize {
 
     let mut i = 0;
     let mut biggest = &data[i];
+    let size = biggest.size() as i128;
+
     while i < data.len() {
-        if (biggest.offset() + biggest.size()) > data[i].offset() + data[i].size() {
+        if (biggest.offset() as i128 + size) > data[i].offset() as i128 + data[i].size() as i128 {
             biggest = &data[i];
         }
         i += 1;
     }
 
-    let amount_of_bytes_for_data = (biggest.offset() + biggest.size()) as usize;
-    let amount_of_mask_blocks_size = core::mem::size_of::<u32>();
+    let amount_of_bytes_for_data = biggest.offset() as i128 + size;
+    let amount_of_mask_blocks_size = core::mem::size_of::<u32>() as i128;
 
     let mut max_mask_blocks = amount_of_bytes_for_data / 8;
     if (amount_of_bytes_for_data % 8) > 0 {
@@ -38,24 +40,24 @@ pub(crate) const fn update_mask_max(version: MajorWorldVersion) -> usize {
     amount_of_mask_blocks_size + max_mask_blocks + amount_of_bytes_for_data
 }
 
-pub(crate) const F32_SIZE: usize = 4;
+pub(crate) const F32_SIZE: u8 = 4;
 pub(crate) const UPDATE_MASK_MIN_SIZE: u8 = 1;
 pub(crate) const PACKED_GUID_MAX_SIZE: u8 = 9;
 pub(crate) const PACKED_GUID_MIN_SIZE: u8 = 2;
-pub(crate) const NAMED_GUID_MIN_SIZE: usize = 8;
-pub(crate) const NAMED_GUID_MAX_SIZE: usize = 8008;
-pub(crate) const GUID_SIZE: u8 = core::mem::size_of::<u64>() as u8;
-pub(crate) const GOLD_SIZE: u8 = core::mem::size_of::<u32>() as u8;
-pub(crate) const LEVEL_SIZE: u8 = core::mem::size_of::<u8>() as u8;
-pub(crate) const LEVEL16_SIZE: usize = core::mem::size_of::<u16>();
-pub(crate) const LEVEL32_SIZE: usize = core::mem::size_of::<u32>();
-pub(crate) const SECONDS_SIZE: usize = core::mem::size_of::<u32>();
-pub(crate) const MILLISECONDS_SIZE: usize = core::mem::size_of::<u32>();
-pub(crate) const IP_ADDRESS_SIZE: usize = core::mem::size_of::<u32>();
-pub(crate) const VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE: usize = 4;
-pub(crate) const VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE: usize = 8;
-pub(crate) const ADDON_ARRAY_MIN: usize = 0;
-pub(crate) const ADDON_ARRAY_MAX: usize = usize::MAX;
+pub(crate) const NAMED_GUID_MIN_SIZE: u8 = 8;
+pub(crate) const NAMED_GUID_MAX_SIZE: u16 = 8008;
+pub(crate) const GUID_SIZE: u8 = 8;
+pub(crate) const GOLD_SIZE: u8 = 4;
+pub(crate) const LEVEL_SIZE: u8 = 1;
+pub(crate) const LEVEL16_SIZE: u8 = 2;
+pub(crate) const LEVEL32_SIZE: u8 = 4;
+pub(crate) const SECONDS_SIZE: u8 = 4;
+pub(crate) const MILLISECONDS_SIZE: u8 = 4;
+pub(crate) const IP_ADDRESS_SIZE: u8 = 4;
+pub(crate) const VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE: u8 = 4;
+pub(crate) const VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE: u8 = 8;
+pub(crate) const ADDON_ARRAY_MIN: u8 = 0;
+pub(crate) const ADDON_ARRAY_MAX: i128 = usize::MAX as i128;
 
 pub(crate) const DATETIME_SIZE: u8 = 4;
 
@@ -64,32 +66,32 @@ impl Sizes {
         Self::default()
     }
 
-    pub(crate) fn inc(&mut self, minimum: usize, maximum: usize) {
+    pub(crate) fn inc(&mut self, minimum: i128, maximum: i128) {
         self.minimum = self.minimum.saturating_add(minimum);
         self.maximum = self.maximum.saturating_add(maximum);
     }
 
-    pub(crate) fn inc_both(&mut self, v: usize) {
+    pub(crate) fn inc_both(&mut self, v: i128) {
         self.inc(v, v);
     }
 
-    pub(crate) fn minimum(&self) -> usize {
+    pub(crate) fn minimum(&self) -> i128 {
         self.minimum
     }
 
-    pub(crate) fn maximum(&self) -> usize {
+    pub(crate) fn maximum(&self) -> i128 {
         self.maximum
     }
 
-    pub(crate) fn set_maximum(&mut self, maximum: usize) {
+    pub(crate) fn set_maximum(&mut self, maximum: i128) {
         self.maximum = maximum;
     }
 
-    pub(crate) fn set_minimum(&mut self, minimum: usize) {
+    pub(crate) fn set_minimum(&mut self, minimum: i128) {
         self.minimum = minimum;
     }
 
-    pub(crate) fn is_constant(&self) -> Option<usize> {
+    pub(crate) fn is_constant(&self) -> Option<i128> {
         if self.minimum == self.maximum {
             Some(self.maximum())
         } else {

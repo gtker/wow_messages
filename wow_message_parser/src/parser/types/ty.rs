@@ -6,7 +6,6 @@ use crate::parser::types::sizes::{
 };
 use crate::parser::types::IntegerType;
 use crate::{Container, CSTRING_LARGEST_ALLOWED, CSTRING_SMALLEST_ALLOWED};
-use std::convert::TryInto;
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) enum Type {
@@ -33,7 +32,7 @@ pub(crate) enum Type {
         e: Container,
     },
     UpdateMask {
-        max_size: usize,
+        max_size: i128,
     },
     MonsterMoveSplines,
     AuraMask,
@@ -157,9 +156,9 @@ impl Type {
                     upcast.size()
                 } else {
                     e.ty().size()
-                } as usize;
+                };
 
-                sizes.inc_both(s);
+                sizes.inc_both(s.into());
             }
             Type::Struct { e } => {
                 sizes += e.sizes();
@@ -171,39 +170,32 @@ impl Type {
                 }
 
                 let (min, max) = match array.size() {
-                    ArraySize::Fixed(f) => {
-                        let f: usize = f.try_into().unwrap();
-                        (f, f)
-                    }
+                    ArraySize::Fixed(f) => (f, f),
                     ArraySize::Variable(f) => match f.ty() {
-                        Type::Integer(i) => (i.smallest_value(), i.largest_value()),
+                        Type::Integer(i) => (i.smallest_array_value(), i.largest_value()),
                         _ => unreachable!("only ints can be string lengths"),
                     },
                     ArraySize::Endless => unreachable!("Endless has already been matched"),
                 };
 
-                match array.ty() {
-                    ArrayType::Integer(i) => {
-                        sizes.inc(i.size() as usize * min, i.size() as usize * max)
+                let (inner_min, inner_max): (i128, i128) = match array.ty() {
+                    ArrayType::Integer(i) => (i.size().into(), i.size().into()),
+                    ArrayType::Guid => (GUID_SIZE.into(), GUID_SIZE.into()),
+                    ArrayType::PackedGuid => {
+                        (PACKED_GUID_MIN_SIZE.into(), PACKED_GUID_MAX_SIZE.into())
                     }
-                    ArrayType::Guid => {
-                        sizes.inc(GUID_SIZE as usize * min, GUID_SIZE as usize * max)
-                    }
-                    ArrayType::PackedGuid => sizes.inc(
-                        PACKED_GUID_MIN_SIZE as usize * min,
-                        PACKED_GUID_MAX_SIZE as usize * max,
-                    ),
-                    ArrayType::CString => sizes.inc(
-                        CSTRING_SMALLEST_ALLOWED * min,
-                        CSTRING_LARGEST_ALLOWED * max,
+                    ArrayType::CString => (
+                        CSTRING_SMALLEST_ALLOWED.into(),
+                        CSTRING_LARGEST_ALLOWED.into(),
                     ),
                     ArrayType::Struct(c) => {
                         let c = c.sizes();
 
-                        sizes.inc(min * c.minimum(), 0);
-                        sizes.inc(0, max.saturating_mul(c.maximum()));
+                        (c.minimum(), c.maximum())
                     }
-                }
+                };
+
+                sizes.inc(inner_min.saturating_mul(min), inner_max.saturating_mul(max));
             }
 
             Type::UpdateMask { max_size } => sizes.inc(UPDATE_MASK_MIN_SIZE.into(), *max_size),

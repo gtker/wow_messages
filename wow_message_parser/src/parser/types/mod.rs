@@ -54,12 +54,12 @@ impl IntegerType {
         }
     }
 
-    pub(crate) fn smallest_value(&self) -> usize {
+    pub(crate) fn smallest_array_value(&self) -> i128 {
         0
     }
 
-    pub(crate) fn largest_value(&self) -> usize {
-        2_usize.pow(8 * self.size() as u32)
+    pub(crate) fn largest_value(&self) -> i128 {
+        2_i128.pow(8 * self.size() as u32)
     }
 
     pub(crate) fn str(&self) -> &str {

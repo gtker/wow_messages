@@ -13,7 +13,7 @@ pub(crate) enum RustType {
     DateTime,
     Floating,
     UpdateMask {
-        max_size: usize,
+        max_size: i128,
     },
     AuraMask,
     Guid,

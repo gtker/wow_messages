@@ -83,7 +83,7 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
             match array.ty() {
                 ArrayType::Integer(integer_type) => match array.size() {
                     ArraySize::Fixed(fixed_value) => {
-                        (integer_type.size() as i64 * fixed_value).to_string()
+                        (integer_type.size() as i128 * fixed_value).to_string()
                     }
                     ArraySize::Variable(_) | ArraySize::Endless => {
                         // ZLib compression is not predictable, so we compress the data and count the bytes.

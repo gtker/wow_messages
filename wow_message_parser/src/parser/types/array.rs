@@ -44,7 +44,10 @@ impl ArrayType {
                 s += c.sizes();
             }
             ArrayType::CString => {
-                s.inc(CSTRING_SMALLEST_ALLOWED, CSTRING_LARGEST_ALLOWED);
+                s.inc(
+                    CSTRING_SMALLEST_ALLOWED.into(),
+                    CSTRING_LARGEST_ALLOWED.into(),
+                );
             }
             ArrayType::Guid => {
                 s.inc_both(GUID_SIZE.into());
@@ -60,7 +63,7 @@ impl ArrayType {
 
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub(crate) enum ArraySize {
-    Fixed(i64),
+    Fixed(i128),
     Variable(Box<StructMemberDefinition>),
     Endless,
 }

@@ -265,7 +265,7 @@ fn print_container_example_definition(
 
         _ => {
             let size = d.ty().sizes().is_constant().unwrap();
-            s.bytes(bytes.take(size));
+            s.bytes(bytes.take(size.try_into().unwrap()));
         }
     }
     s.wln(comment);
@@ -469,7 +469,7 @@ fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
 fn print_container_if_statement(
     s: &mut DocWriter,
     statement: &IfStatement,
-    offset: &mut Option<usize>,
+    offset: &mut Option<i128>,
     tags: &ObjectTags,
     o: &Objects,
 ) {
@@ -528,7 +528,7 @@ fn print_container_if_statement(
 fn print_container_field(
     s: &mut DocWriter,
     m: &StructMember,
-    offset: &mut Option<usize>,
+    offset: &mut Option<i128>,
     tags: &ObjectTags,
     o: &Objects,
 ) {
