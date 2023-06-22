@@ -1,0 +1,8 @@
+enum Scalp : u8 {
+    HAIR = 0;
+    BALD = 1;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `CharHairGeosets.dbc`.";
+}

@@ -1,0 +1,9 @@
+enum LfgFaction : i8 {
+    NEUTRAL = -1;
+    HORDE = 0;
+    ALLIANCE = 1;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `LFGDungeons.dbc`.";
+}

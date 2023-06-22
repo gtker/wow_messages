@@ -1,0 +1,9 @@
+enum EmoteSpecProc : u8 {
+    NO_LOOP = 0;
+    LOOP = 1;
+    LOOP_WITH_SOUND = 2;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `Emotes.dbc`.";
+}

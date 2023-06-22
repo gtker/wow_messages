@@ -1,0 +1,9 @@
+enum FluidSpeed : u8 {
+    STILL = 0;
+    SLOW = 4;
+    RAPID = 8;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `SoundWaterType.dbc`.";
+}

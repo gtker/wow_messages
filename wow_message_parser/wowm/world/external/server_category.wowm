@@ -1,0 +1,10 @@
+enum ServerCategory : u8 {
+    ONE = 1;
+    TWO = 2;
+    THREE = 3;
+    FIVE = 5;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `Cfg_Categories.dbc`.";
+}

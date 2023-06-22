@@ -1,0 +1,13 @@
+enum ServerRegion : u8 {
+    UNITED_STATES = 1;
+    KOREA = 2;
+    EUROPE = 3;
+    TAIWAN = 4;
+    CHINA = 5;
+    TEST_SERVER = 99;
+    QA_SERVER = 101;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `Cfg_Categories.dbc`.";
+}

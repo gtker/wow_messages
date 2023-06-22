@@ -1,0 +1,32 @@
+enum SoundType : u8 {
+    UNUSED = 0x00;
+    SPELLS = 0x01;
+    UI = 0x02;
+    FOOTSTEPS = 0x03;
+    WEAPON_IMPACT = 0x04;
+    WEAPON_MISS = 0x06;
+    PICK_UP_PUT_DOWN = 0x09;
+    NPC_COMBAT = 0x0A;
+    ERRORS = 0x0C;
+    OBJECTS = 0x0E;
+    DEATH = 0x10;
+    NPC_GREETINGS = 0x11;
+    TEST = 0x12;
+    ARMOUR_FOLEY = 0x13;
+    FOOTSTEPS_2 = 0x14;
+    WATER_CHARACTER = 0x15;
+    WATER_LIQUID = 0x16;
+    TRADESKILLS = 0x17;
+    DOODADS = 0x19;
+    SPELL_FIZZLE = 0x1A;
+    NPC_LOOPS = 0x1B;
+    ZONE_MUSIC = 0x1C;
+    EMOTES = 0x1D;
+    NARRATION_MUSIC = 0x1E;
+    NARRATION = 0x1F;
+    ZONE_AMBIENCE = 0x32;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `SoundEntries.dbc`.";
+}

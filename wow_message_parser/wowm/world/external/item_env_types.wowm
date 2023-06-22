@@ -1,0 +1,9 @@
+enum ItemEnvTypes : u8 {
+    SHIELD = 0;
+    METAL_WEAPON = 1;
+    WOOD_WEAPON = 2;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `SheatheSoundLookups.dbc`.";
+}

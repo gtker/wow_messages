@@ -8,4 +8,5 @@ enum SizeClass : i8 {
 } {
     versions = "1.12 2 3";
     non_network_type = "true";
+    comment = "Used in the `CreatureDisplayInfo.dbc`, `CreatureModelData.dbc` and `DeathThudLookups.dbc`.";
 }

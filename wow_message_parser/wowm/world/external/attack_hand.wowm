@@ -1,0 +1,8 @@
+enum AttackHand : u8 {
+    MAIN_HAND = 0;
+    OFF_HAND = 1;
+} {
+    versions = "1.12";
+    non_network_type = "true";
+    comment = "Used in `AttackAnimKits.dbc`.";
+}
