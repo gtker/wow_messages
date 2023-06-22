@@ -40,11 +40,11 @@ impl From<std::io::Error> for ParseError {
 #[derive(Debug)]
 pub struct EnumError {
     pub name: &'static str,
-    pub value: u64,
+    pub value: i128,
 }
 
 impl EnumError {
-    pub const fn new(name: &'static str, value: u64) -> Self {
+    pub const fn new(name: &'static str, value: i128) -> Self {
         Self { name, value }
     }
 }

@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * BREAKING: `ServerMessage` and `ClientMessage` traits have been sealed to prevent downstream implementation. Read methods have also been sealed.
 * BREAKING: The `locked` field of `Realm` for login version 8 is now a `bool` instead of a `u8`.
 * BREAKING: All flags have had their previously `ALL_CAPS` names changed to lower case.
+* BREAKING: `EnumError` `value` field has been changed from `u64` to `i128`. This is in order to be able to hold all possible TryFrom values.
 
 ## [0.2.0] - 2022-10-31
 
