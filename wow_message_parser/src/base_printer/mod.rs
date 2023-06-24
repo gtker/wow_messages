@@ -161,9 +161,9 @@ pub(crate) fn print_base() {
     }
 
     std::thread::scope(|s| {
-        s.spawn(|| run(&sqlite_dir, Expansion::Vanilla));
-        s.spawn(|| run(&sqlite_dir, Expansion::BurningCrusade));
         s.spawn(|| run(&sqlite_dir, Expansion::WrathOfTheLichKing));
+        s.spawn(|| run(&sqlite_dir, Expansion::BurningCrusade));
+        run(&sqlite_dir, Expansion::Vanilla);
     });
 }
 
