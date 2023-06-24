@@ -23,6 +23,13 @@ impl CacheMask {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::GlobalCache,
+            Self::PerCharacterCache,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

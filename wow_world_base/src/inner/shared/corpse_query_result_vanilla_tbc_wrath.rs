@@ -20,6 +20,13 @@ impl CorpseQueryResult {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::NotFound,
+            Self::Found,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

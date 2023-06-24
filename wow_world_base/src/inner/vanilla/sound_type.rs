@@ -96,6 +96,37 @@ impl SoundType {
         }
     }
 
+    pub const fn variants() -> [Self; 26] {
+        [
+            Self::Unused,
+            Self::Spells,
+            Self::Ui,
+            Self::Footsteps,
+            Self::WeaponImpact,
+            Self::WeaponMiss,
+            Self::PickUpPutDown,
+            Self::NpcCombat,
+            Self::Errors,
+            Self::Objects,
+            Self::Death,
+            Self::NpcGreetings,
+            Self::Test,
+            Self::ArmourFoley,
+            Self::Footsteps2,
+            Self::WaterCharacter,
+            Self::WaterLiquid,
+            Self::Tradeskills,
+            Self::Doodads,
+            Self::SpellFizzle,
+            Self::NpcLoops,
+            Self::ZoneMusic,
+            Self::Emotes,
+            Self::NarrationMusic,
+            Self::Narration,
+            Self::ZoneAmbience,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

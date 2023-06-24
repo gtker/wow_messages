@@ -36,6 +36,17 @@ impl SizeClass {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::None,
+            Self::Small,
+            Self::Medium,
+            Self::Large,
+            Self::Giant,
+            Self::Colossal,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

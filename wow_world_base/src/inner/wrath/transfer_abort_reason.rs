@@ -76,6 +76,27 @@ impl TransferAbortReason {
         }
     }
 
+    pub const fn variants() -> [Self; 16] {
+        [
+            Self::None,
+            Self::ErrorX,
+            Self::MaxPlayers,
+            Self::NotFound,
+            Self::TooManyInstances,
+            Self::ZoneInCombat,
+            Self::InsufficientExpansionLevel,
+            Self::DifficultyNotAvailable,
+            Self::UniqueMessage,
+            Self::TooManyRealmInstances,
+            Self::NeedGroup,
+            Self::NotFound1,
+            Self::NotFound2,
+            Self::NotFound3,
+            Self::RealmOnly,
+            Self::MapNotAllowed,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

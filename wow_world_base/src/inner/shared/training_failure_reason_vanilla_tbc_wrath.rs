@@ -27,6 +27,14 @@ impl TrainingFailureReason {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Unavailable,
+            Self::NotEnoughMoney,
+            Self::NotEnoughSkill,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

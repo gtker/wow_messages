@@ -20,6 +20,13 @@ impl DungeonDifficulty {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Normal,
+            Self::Heroic,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

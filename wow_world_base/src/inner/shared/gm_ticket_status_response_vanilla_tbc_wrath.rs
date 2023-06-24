@@ -23,6 +23,14 @@ impl GmTicketStatusResponse {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Updated,
+            Self::Closed,
+            Self::Survey,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

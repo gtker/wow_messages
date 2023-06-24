@@ -23,6 +23,14 @@ impl ActionBarBehavior {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Initial,
+            Self::Set,
+            Self::Clear,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

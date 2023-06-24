@@ -20,6 +20,13 @@ impl PartyRole {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::MainTank,
+            Self::Assistant,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

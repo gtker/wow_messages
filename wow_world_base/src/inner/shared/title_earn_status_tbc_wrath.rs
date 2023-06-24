@@ -20,6 +20,13 @@ impl TitleEarnStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Lost,
+            Self::Earned,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

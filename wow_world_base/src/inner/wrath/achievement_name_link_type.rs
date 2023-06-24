@@ -20,6 +20,13 @@ impl AchievementNameLinkType {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Normal,
+            Self::Clickable,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

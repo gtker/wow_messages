@@ -38,6 +38,19 @@ impl ObjectType {
         }
     }
 
+    pub const fn variants() -> [Self; 8] {
+        [
+            Self::Object,
+            Self::Item,
+            Self::Container,
+            Self::Unit,
+            Self::Player,
+            Self::GameObject,
+            Self::DynamicObject,
+            Self::Corpse,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

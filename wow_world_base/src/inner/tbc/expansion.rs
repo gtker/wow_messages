@@ -20,6 +20,13 @@ impl Expansion {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Vanilla,
+            Self::TheBurningCrusade,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

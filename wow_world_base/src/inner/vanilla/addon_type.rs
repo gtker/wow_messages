@@ -25,6 +25,14 @@ impl AddonType {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Banned,
+            Self::Enabled,
+            Self::Blizzard,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -29,6 +29,16 @@ impl FriendStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::Offline,
+            Self::Online,
+            Self::Afk,
+            Self::Unknown3,
+            Self::Dnd,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

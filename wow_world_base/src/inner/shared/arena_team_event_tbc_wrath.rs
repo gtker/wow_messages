@@ -38,6 +38,17 @@ impl ArenaTeamEvent {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::Join,
+            Self::Leave,
+            Self::Remove,
+            Self::LeaderIs,
+            Self::LeaderChanged,
+            Self::Disbanded,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

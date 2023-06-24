@@ -42,6 +42,19 @@ impl ClientLanguage {
         }
     }
 
+    pub const fn variants() -> [Self; 8] {
+        [
+            Self::English,
+            Self::Korean,
+            Self::French,
+            Self::German,
+            Self::Chinese,
+            Self::Taiwanese,
+            Self::SpanishSpain,
+            Self::SpanishLatinAmerica,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -23,6 +23,14 @@ impl RealmSplitState {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Normal,
+            Self::Split,
+            Self::SplitPending,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

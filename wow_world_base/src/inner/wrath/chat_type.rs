@@ -170,6 +170,63 @@ impl ChatType {
         }
     }
 
+    pub const fn variants() -> [Self; 52] {
+        [
+            Self::System,
+            Self::Say,
+            Self::Party,
+            Self::Raid,
+            Self::Guild,
+            Self::Officer,
+            Self::Yell,
+            Self::Whisper,
+            Self::WhisperForeign,
+            Self::WhisperInform,
+            Self::Emote,
+            Self::TextEmote,
+            Self::MonsterSay,
+            Self::MonsterParty,
+            Self::MonsterYell,
+            Self::MonsterWhisper,
+            Self::MonsterEmote,
+            Self::Channel,
+            Self::ChannelJoin,
+            Self::ChannelLeave,
+            Self::ChannelList,
+            Self::ChannelNotice,
+            Self::ChannelNoticeUser,
+            Self::Afk,
+            Self::Dnd,
+            Self::Ignored,
+            Self::Skill,
+            Self::Loot,
+            Self::Money,
+            Self::Opening,
+            Self::Tradeskills,
+            Self::PetInfo,
+            Self::CombatMiscInfo,
+            Self::CombatXpGain,
+            Self::CombatHonorGain,
+            Self::CombatFactionChange,
+            Self::BgSystemNeutral,
+            Self::BgSystemAlliance,
+            Self::BgSystemHorde,
+            Self::RaidLeader,
+            Self::RaidWarning,
+            Self::RaidBossEmote,
+            Self::RaidBossWhisper,
+            Self::Filtered,
+            Self::Battleground,
+            Self::BattlegroundLeader,
+            Self::Restricted,
+            Self::Battlenet,
+            Self::Achievement,
+            Self::GuildAchievement,
+            Self::ArenaPoints,
+            Self::PartyLeader,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -50,6 +50,23 @@ impl QuestPartyMessage {
         }
     }
 
+    pub const fn variants() -> [Self; 12] {
+        [
+            Self::MsgSharingQuest,
+            Self::MsgCantTakeQuest,
+            Self::MsgAcceptQuest,
+            Self::MsgRefuseQuest,
+            Self::MsgBusy,
+            Self::MsgLogFull,
+            Self::MsgHaveQuest,
+            Self::MsgFinishQuest,
+            Self::MsgCantBeSharedToday,
+            Self::MsgSharingTimerExpired,
+            Self::MsgNotInParty,
+            Self::MsgDifferentServerDaily,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

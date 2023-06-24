@@ -26,6 +26,15 @@ impl ArenaType {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::NotArena,
+            Self::TwoVsTwo,
+            Self::ThreeVsThree,
+            Self::FiveVsFive,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

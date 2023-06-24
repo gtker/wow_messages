@@ -26,6 +26,15 @@ impl MiniMoveOpcode {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::SmsgForceMoveRoot,
+            Self::SmsgMoveFeatherFall,
+            Self::SmsgMoveWaterWalk,
+            Self::SmsgMoveSetHover,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

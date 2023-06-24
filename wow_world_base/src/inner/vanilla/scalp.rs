@@ -24,6 +24,13 @@ impl Scalp {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Hair,
+            Self::Bald,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

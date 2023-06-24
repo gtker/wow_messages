@@ -56,6 +56,25 @@ impl GuildEvent {
         }
     }
 
+    pub const fn variants() -> [Self; 14] {
+        [
+            Self::Promotion,
+            Self::Demotion,
+            Self::Motd,
+            Self::Joined,
+            Self::Left,
+            Self::Removed,
+            Self::LeaderIs,
+            Self::LeaderChanged,
+            Self::Disbanded,
+            Self::TabardChanged,
+            Self::Unknown10,
+            Self::RosterUpdate,
+            Self::SignedOn,
+            Self::SignedOff,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

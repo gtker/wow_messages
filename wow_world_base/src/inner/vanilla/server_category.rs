@@ -30,6 +30,15 @@ impl ServerCategory {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::One,
+            Self::Two,
+            Self::Three,
+            Self::Five,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

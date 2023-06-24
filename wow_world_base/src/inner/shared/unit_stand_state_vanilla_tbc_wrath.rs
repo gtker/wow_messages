@@ -46,6 +46,21 @@ impl UnitStandState {
         }
     }
 
+    pub const fn variants() -> [Self; 10] {
+        [
+            Self::Stand,
+            Self::Sit,
+            Self::SitChair,
+            Self::Sleep,
+            Self::SitLowChair,
+            Self::SitMediumChair,
+            Self::SitHighChair,
+            Self::Dead,
+            Self::Kneel,
+            Self::Custom,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

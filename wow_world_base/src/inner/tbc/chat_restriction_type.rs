@@ -23,6 +23,14 @@ impl ChatRestrictionType {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::ChatRestricted,
+            Self::ChatThrottled,
+            Self::UserSquelched,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

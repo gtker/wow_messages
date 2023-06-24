@@ -41,6 +41,20 @@ impl CinematicSequenceId {
         }
     }
 
+    pub const fn variants() -> [Self; 9] {
+        [
+            Self::Goblin,
+            Self::Undead,
+            Self::Orc,
+            Self::Dwarf,
+            Self::NightElf,
+            Self::Human,
+            Self::Gnome,
+            Self::Troll,
+            Self::Tauren,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

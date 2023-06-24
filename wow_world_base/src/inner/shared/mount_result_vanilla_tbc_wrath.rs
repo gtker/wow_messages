@@ -58,6 +58,22 @@ impl MountResult {
         }
     }
 
+    pub const fn variants() -> [Self; 11] {
+        [
+            Self::InvalidMountee,
+            Self::TooFarAway,
+            Self::AlreadyMounted,
+            Self::NotMountable,
+            Self::NotYourPet,
+            Self::Other,
+            Self::Looting,
+            Self::RaceCantMount,
+            Self::Shapeshifted,
+            Self::ForcedDismount,
+            Self::Ok,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

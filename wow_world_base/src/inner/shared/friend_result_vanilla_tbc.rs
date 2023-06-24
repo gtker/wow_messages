@@ -95,6 +95,38 @@ impl FriendResult {
         }
     }
 
+    pub const fn variants() -> [Self; 27] {
+        [
+            Self::DbError,
+            Self::ListFull,
+            Self::Online,
+            Self::Offline,
+            Self::NotFound,
+            Self::Removed,
+            Self::AddedOnline,
+            Self::AddedOffline,
+            Self::Already,
+            Self::SelfX,
+            Self::Enemy,
+            Self::IgnoreFull,
+            Self::IgnoreSelf,
+            Self::IgnoreNotFound,
+            Self::IgnoreAlready,
+            Self::IgnoreAdded,
+            Self::IgnoreRemoved,
+            Self::IgnoreAmbiguous,
+            Self::MuteFull,
+            Self::MuteSelf,
+            Self::MuteNotFound,
+            Self::MuteAlready,
+            Self::MuteAdded,
+            Self::MuteRemoved,
+            Self::MuteAmbiguous,
+            Self::Unknown19,
+            Self::Unknown20,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

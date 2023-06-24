@@ -33,6 +33,17 @@ impl LfgTeleportError {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::PlayerDead,
+            Self::Falling,
+            Self::InVehicle,
+            Self::Fatigue,
+            Self::InvalidLocation,
+            Self::Combat,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

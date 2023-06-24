@@ -20,6 +20,13 @@ impl PartyOperation {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Invite,
+            Self::Leave,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

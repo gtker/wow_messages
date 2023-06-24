@@ -58,6 +58,25 @@ impl Locale {
         }
     }
 
+    pub const fn variants() -> [Self; 14] {
+        [
+            Self::EnGb,
+            Self::EnUs,
+            Self::EsMx,
+            Self::PtBr,
+            Self::FrFr,
+            Self::DeDe,
+            Self::EsEs,
+            Self::PtPt,
+            Self::ItIt,
+            Self::RuRu,
+            Self::KoKr,
+            Self::ZhTw,
+            Self::EnTw,
+            Self::EnCn,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

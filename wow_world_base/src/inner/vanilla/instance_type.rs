@@ -36,6 +36,17 @@ impl InstanceType {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::Normal,
+            Self::GroupInstance,
+            Self::RaidInstance,
+            Self::Battleground,
+            Self::WorldZone,
+            Self::Battleground2,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

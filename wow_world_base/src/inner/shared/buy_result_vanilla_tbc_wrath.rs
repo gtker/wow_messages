@@ -41,6 +41,20 @@ impl BuyResult {
         }
     }
 
+    pub const fn variants() -> [Self; 9] {
+        [
+            Self::CantFindItem,
+            Self::ItemAlreadySold,
+            Self::NotEnoughtMoney,
+            Self::SellerDontLikeYou,
+            Self::DistanceTooFar,
+            Self::ItemSoldOut,
+            Self::CantCarryMore,
+            Self::RankRequire,
+            Self::ReputationRequire,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

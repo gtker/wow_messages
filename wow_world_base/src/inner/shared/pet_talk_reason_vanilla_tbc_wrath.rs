@@ -20,6 +20,13 @@ impl PetTalkReason {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::SpecialSpell,
+            Self::Attack,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

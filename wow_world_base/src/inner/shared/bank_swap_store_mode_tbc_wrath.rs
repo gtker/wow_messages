@@ -20,6 +20,13 @@ impl BankSwapStoreMode {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Manual,
+            Self::Automatic,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

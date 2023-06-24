@@ -147,6 +147,55 @@ impl Map {
         }
     }
 
+    pub const fn variants() -> [Self; 44] {
+        [
+            Self::EasternKingdoms,
+            Self::Kalimdor,
+            Self::Testing,
+            Self::ScottTest,
+            Self::CashTest,
+            Self::AlteracValley,
+            Self::ShadowfangKeep,
+            Self::StormwindStockade,
+            Self::StormwindPrison,
+            Self::Deadmines,
+            Self::AzsharaCrater,
+            Self::CollinsTest,
+            Self::WailingCaverns,
+            Self::MonasteryUnused,
+            Self::RazorfenKraul,
+            Self::BlackfathomDeeps,
+            Self::Uldaman,
+            Self::Gnomeregan,
+            Self::SunkenTemple,
+            Self::RazorfenDowns,
+            Self::EmeraldDream,
+            Self::ScarletMonastery,
+            Self::ZulFarrak,
+            Self::BlackrockSpire,
+            Self::BlackrockDepths,
+            Self::OnyxiasLair,
+            Self::OpeningOfTheDarkPortal,
+            Self::Scholomance,
+            Self::ZulGurub,
+            Self::Stratholme,
+            Self::Maraudon,
+            Self::DeeprunTram,
+            Self::RagefireChasm,
+            Self::MoltenCore,
+            Self::DireMaul,
+            Self::AlliancePvpBarracks,
+            Self::HordePvpBarracks,
+            Self::DevelopmentLand,
+            Self::BlackwingLair,
+            Self::WarsongGulch,
+            Self::RuinsOfAhnQiraj,
+            Self::ArathiBasin,
+            Self::AhnQirajTemple,
+            Self::Naxxramas,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

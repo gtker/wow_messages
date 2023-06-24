@@ -35,6 +35,18 @@ impl PageTextMaterial {
         }
     }
 
+    pub const fn variants() -> [Self; 7] {
+        [
+            Self::None,
+            Self::Parchment,
+            Self::Stone,
+            Self::Marble,
+            Self::Silver,
+            Self::Bronze,
+            Self::Valentine,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

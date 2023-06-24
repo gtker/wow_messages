@@ -41,6 +41,20 @@ impl AccountDataType {
         }
     }
 
+    pub const fn variants() -> [Self; 9] {
+        [
+            Self::GlobalConfigCache,
+            Self::PerCharacterConfigCache,
+            Self::GlobalBindingsCache,
+            Self::PerCharacterBindingsCache,
+            Self::GlobalMacrosCache,
+            Self::PerCharacterMacrosCache,
+            Self::PerCharacterLayoutCache,
+            Self::PerCharacterChatCache,
+            Self::NumAccountDataTypes,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

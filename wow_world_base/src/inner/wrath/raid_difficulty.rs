@@ -26,6 +26,15 @@ impl RaidDifficulty {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::TenManNormal,
+            Self::TwentyFiveManNormal,
+            Self::TenManHeroic,
+            Self::TwentyFiveManHeroic,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

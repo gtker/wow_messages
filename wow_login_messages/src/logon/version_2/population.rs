@@ -25,6 +25,14 @@ impl Population {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::GreenRecommended,
+            Self::RedFull,
+            Self::BlueRecommended,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

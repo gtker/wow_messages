@@ -20,6 +20,13 @@ impl DismountResult {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::NotMounted,
+            Self::Ok,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

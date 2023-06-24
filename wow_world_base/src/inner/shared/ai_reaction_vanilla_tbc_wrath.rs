@@ -34,6 +34,16 @@ impl AiReaction {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::Alert,
+            Self::Friendly,
+            Self::Hostile,
+            Self::Afraid,
+            Self::Destroy,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

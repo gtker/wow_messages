@@ -34,6 +34,16 @@ impl StatusId {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::None,
+            Self::WaitQueue,
+            Self::WaitJoin,
+            Self::InProgress,
+            Self::WaitLeave,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -20,6 +20,13 @@ impl DeclinedPetNameIncluded {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::NotIncluded,
+            Self::Included,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

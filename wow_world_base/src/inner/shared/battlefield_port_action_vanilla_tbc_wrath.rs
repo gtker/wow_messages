@@ -20,6 +20,13 @@ impl BattlefieldPortAction {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::LeaveQueue,
+            Self::EnterBattle,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

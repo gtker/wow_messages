@@ -141,6 +141,43 @@ impl ChatNotify {
         }
     }
 
+    pub const fn variants() -> [Self; 32] {
+        [
+            Self::JoinedNotice,
+            Self::LeftNotice,
+            Self::YouJoinedNotice,
+            Self::YouLeftNotice,
+            Self::WrongPasswordNotice,
+            Self::NotMemberNotice,
+            Self::NotModeratorNotice,
+            Self::PasswordChangedNotice,
+            Self::OwnerChangedNotice,
+            Self::PlayerNotFoundNotice,
+            Self::NotOwnerNotice,
+            Self::ChannelOwnerNotice,
+            Self::ModeChangeNotice,
+            Self::AnnouncementsOnNotice,
+            Self::AnnouncementsOffNotice,
+            Self::ModerationOnNotice,
+            Self::ModerationOffNotice,
+            Self::MutedNotice,
+            Self::PlayerKickedNotice,
+            Self::BannedNotice,
+            Self::PlayerBannedNotice,
+            Self::PlayerUnbannedNotice,
+            Self::PlayerNotBannedNotice,
+            Self::PlayerAlreadyMemberNotice,
+            Self::InviteNotice,
+            Self::InviteWrongFactionNotice,
+            Self::WrongFactionNotice,
+            Self::InvalidNameNotice,
+            Self::NotModeratedNotice,
+            Self::PlayerInvitedNotice,
+            Self::PlayerInviteBannedNotice,
+            Self::ThrottledNotice,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

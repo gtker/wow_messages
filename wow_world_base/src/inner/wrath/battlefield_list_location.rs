@@ -22,6 +22,13 @@ impl BattlefieldListLocation {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Battlemaster,
+            Self::Ui,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

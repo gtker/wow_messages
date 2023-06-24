@@ -125,6 +125,48 @@ impl GmTicketType {
         }
     }
 
+    pub const fn variants() -> [Self; 37] {
+        [
+            Self::NotSet,
+            Self::Stuck,
+            Self::BehaviorHarassment,
+            Self::Guild,
+            Self::Item,
+            Self::Environmental,
+            Self::NonQuestCreep,
+            Self::QuestQuestNpc,
+            Self::Technical,
+            Self::AccountBilling,
+            Self::Character,
+            Self::ArenaHonorItemIssues,
+            Self::ArenaHonorPointsIssues,
+            Self::BottingCheatingHacking,
+            Self::BugReport,
+            Self::CompromisedAccountIssue,
+            Self::GameSuggestions,
+            Self::GameplayQuestion,
+            Self::GuildBankIssue,
+            Self::GuildMasterIssue,
+            Self::HarassmentScamReport,
+            Self::InappropriateNameGuildArenaCharacterPet,
+            Self::KnownIssueFix,
+            Self::LatencyLagReport,
+            Self::LootingIssueMistake,
+            Self::MailIssue,
+            Self::NonInGameRelatedInquiry,
+            Self::ParentalControlsCais,
+            Self::Pcnc,
+            Self::Pct,
+            Self::RestorationStatusFollowUp,
+            Self::ServerInstanceIssues,
+            Self::Spam,
+            Self::SuicideCase,
+            Self::SuspensionQuestions,
+            Self::TechnicalSoundGraphicsIssue,
+            Self::UiIssue,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

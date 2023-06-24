@@ -26,6 +26,15 @@ impl PetFeedback {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::PetDead,
+            Self::NothingToAttack,
+            Self::CantAttackTarget,
+            Self::NoPathTo,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

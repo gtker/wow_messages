@@ -26,6 +26,15 @@ impl ArenaTeamCommand {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::TeamCreateS,
+            Self::TeamInviteSs,
+            Self::TeamQuitS,
+            Self::TeamFounderS,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

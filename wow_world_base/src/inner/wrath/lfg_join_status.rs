@@ -20,6 +20,13 @@ impl LfgJoinStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::NotJoined,
+            Self::Joined,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

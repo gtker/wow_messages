@@ -32,6 +32,17 @@ impl MailAction {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::Send,
+            Self::MoneyTaken,
+            Self::ItemTaken,
+            Self::ReturnedToSender,
+            Self::Deleted,
+            Self::MadePermanent,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

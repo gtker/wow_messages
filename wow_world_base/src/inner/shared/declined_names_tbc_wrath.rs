@@ -20,6 +20,13 @@ impl DeclinedNames {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::No,
+            Self::Yes,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

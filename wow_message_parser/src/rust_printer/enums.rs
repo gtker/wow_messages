@@ -80,6 +80,22 @@ pub(crate) fn print_wowm_definition(kind: &str, s: &mut Writer, e: &Definer) {
 fn common_impls(s: &mut Writer, e: &Definer, visibility_override: bool) {
     s.bodyn(format!("impl {}", e.name()), |s| {
         as_type(s, e, visibility_override);
+        iterators(s, e);
+    });
+}
+
+fn iterators(s: &mut Writer, e: &Definer) {
+    let size = e.fields().len();
+    s.funcn_pub_const("variants()", format!("[Self; {size}]"), |s| {
+        s.wln("[");
+        s.inc_indent();
+
+        for field in e.fields() {
+            s.wln(format!("Self::{},", field.rust_name()));
+        }
+
+        s.dec_indent();
+        s.wln("]");
     });
 }
 

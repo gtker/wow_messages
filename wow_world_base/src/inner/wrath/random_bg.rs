@@ -20,6 +20,13 @@ impl RandomBg {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::NotRandom,
+            Self::Random,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

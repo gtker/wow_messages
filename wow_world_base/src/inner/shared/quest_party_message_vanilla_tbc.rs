@@ -51,6 +51,20 @@ impl QuestPartyMessage {
         }
     }
 
+    pub const fn variants() -> [Self; 9] {
+        [
+            Self::SharingQuest,
+            Self::CantTakeQuest,
+            Self::AcceptQuest,
+            Self::DeclineQuest,
+            Self::TooFar,
+            Self::Busy,
+            Self::LogFull,
+            Self::HaveQuest,
+            Self::FinishQuest,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

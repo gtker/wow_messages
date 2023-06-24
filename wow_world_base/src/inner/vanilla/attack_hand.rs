@@ -24,6 +24,13 @@ impl AttackHand {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::MainHand,
+            Self::OffHand,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -39,6 +39,19 @@ impl EncounterFrame {
         }
     }
 
+    pub const fn variants() -> [Self; 8] {
+        [
+            Self::Engage,
+            Self::Disengage,
+            Self::UpdatePriority,
+            Self::AddTimer,
+            Self::EnableObjective,
+            Self::UpdateObjective,
+            Self::DisableObjective,
+            Self::RefreshFrames,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

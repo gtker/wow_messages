@@ -35,6 +35,18 @@ impl AuctionHouse {
         }
     }
 
+    pub const fn variants() -> [Self; 7] {
+        [
+            Self::Stormwind,
+            Self::Alliance,
+            Self::Darnassus,
+            Self::Undercity,
+            Self::ThunderBluff,
+            Self::Horde,
+            Self::Goblin,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

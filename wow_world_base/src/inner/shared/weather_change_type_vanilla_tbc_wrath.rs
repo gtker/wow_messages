@@ -20,6 +20,13 @@ impl WeatherChangeType {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Smooth,
+            Self::Instant,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -20,6 +20,13 @@ impl UrlInfo {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Unavailable,
+            Self::Available,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

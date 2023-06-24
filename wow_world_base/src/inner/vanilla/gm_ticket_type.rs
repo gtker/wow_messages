@@ -45,6 +45,21 @@ impl GmTicketType {
         }
     }
 
+    pub const fn variants() -> [Self; 10] {
+        [
+            Self::Stuck,
+            Self::BehaviorHarassment,
+            Self::Guild,
+            Self::Item,
+            Self::Environmental,
+            Self::NonquestCreep,
+            Self::QuestQuestnpc,
+            Self::Technical,
+            Self::AccountBilling,
+            Self::Character,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

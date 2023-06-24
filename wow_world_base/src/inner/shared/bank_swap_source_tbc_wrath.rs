@@ -20,6 +20,13 @@ impl BankSwapSource {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Inventory,
+            Self::Bank,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

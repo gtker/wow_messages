@@ -27,6 +27,15 @@ impl LogoutResult {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::Success,
+            Self::FailureInCombat,
+            Self::FailureFrozenByGm,
+            Self::FailureJumpingOrFalling,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

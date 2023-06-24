@@ -20,6 +20,13 @@ impl BattlegroundEndStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::NotEnded,
+            Self::Ended,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

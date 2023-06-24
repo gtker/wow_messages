@@ -20,6 +20,13 @@ impl RaidTargetUpdateType {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Partial,
+            Self::Full,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

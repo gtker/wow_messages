@@ -33,6 +33,16 @@ impl SelectionType {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::BaseSkin,
+            Self::Face,
+            Self::FacialHair,
+            Self::Hair,
+            Self::Underwear,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

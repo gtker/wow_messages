@@ -53,6 +53,23 @@ impl PetTameFailureReason {
         }
     }
 
+    pub const fn variants() -> [Self; 12] {
+        [
+            Self::InvalidCreature,
+            Self::TooMany,
+            Self::CreatureAlreadyOwned,
+            Self::NotTameable,
+            Self::AnotherSummonActive,
+            Self::UnitsCantTame,
+            Self::NoPetAvailable,
+            Self::InternalError,
+            Self::TooHighLevel,
+            Self::Dead,
+            Self::NotDead,
+            Self::UnknownError,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

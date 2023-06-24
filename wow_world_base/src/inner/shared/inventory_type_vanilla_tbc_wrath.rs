@@ -101,6 +101,40 @@ impl InventoryType {
         }
     }
 
+    pub const fn variants() -> [Self; 29] {
+        [
+            Self::NonEquip,
+            Self::Head,
+            Self::Neck,
+            Self::Shoulders,
+            Self::Body,
+            Self::Chest,
+            Self::Waist,
+            Self::Legs,
+            Self::Feet,
+            Self::Wrists,
+            Self::Hands,
+            Self::Finger,
+            Self::Trinket,
+            Self::Weapon,
+            Self::Shield,
+            Self::Ranged,
+            Self::Cloak,
+            Self::TwoHandedWeapon,
+            Self::Bag,
+            Self::Tabard,
+            Self::Robe,
+            Self::WeaponMainHand,
+            Self::WeaponOffHand,
+            Self::Holdable,
+            Self::Ammo,
+            Self::Thrown,
+            Self::RangedRight,
+            Self::Quiver,
+            Self::Relic,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

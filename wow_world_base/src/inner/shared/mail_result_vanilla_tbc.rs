@@ -54,6 +54,24 @@ impl MailResult {
         }
     }
 
+    pub const fn variants() -> [Self; 13] {
+        [
+            Self::Ok,
+            Self::ErrEquipError,
+            Self::ErrCannotSendToSelf,
+            Self::ErrNotEnoughMoney,
+            Self::ErrRecipientNotFound,
+            Self::ErrNotYourTeam,
+            Self::ErrInternalError,
+            Self::ErrDisabledForTrialAcc,
+            Self::ErrRecipientCapReached,
+            Self::ErrCantSendWrappedCod,
+            Self::ErrMailAndChatSuspended,
+            Self::ErrTooManyAttachments,
+            Self::ErrMailAttachmentInvalid,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

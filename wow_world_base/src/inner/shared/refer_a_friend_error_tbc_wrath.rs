@@ -56,6 +56,25 @@ impl ReferAFriendError {
         }
     }
 
+    pub const fn variants() -> [Self; 14] {
+        [
+            Self::None,
+            Self::NotReferredBy,
+            Self::TargetTooHigh,
+            Self::InsufficientGrantableLevels,
+            Self::TooFar,
+            Self::DifferentFaction,
+            Self::NotNow,
+            Self::GrantLevelMax,
+            Self::NoTarget,
+            Self::NotInGroup,
+            Self::SummonLevelMax,
+            Self::SummonCooldown,
+            Self::InsufficientExpansionLevel,
+            Self::SummonOffline,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

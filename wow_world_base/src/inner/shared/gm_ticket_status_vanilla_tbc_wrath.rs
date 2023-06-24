@@ -23,6 +23,14 @@ impl GmTicketStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::DbError,
+            Self::HasText,
+            Self::Default,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -29,6 +29,16 @@ impl PetitionResult {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::Ok,
+            Self::AlreadySigned,
+            Self::AlreadyInGuild,
+            Self::CantSignOwn,
+            Self::NotServer,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

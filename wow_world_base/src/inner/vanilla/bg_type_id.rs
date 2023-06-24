@@ -34,6 +34,16 @@ impl BgTypeId {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::NotEligible,
+            Self::QueuedForAv,
+            Self::QueuedForWsg,
+            Self::QueuedForAb,
+            Self::RemoveFromQueue,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

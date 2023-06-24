@@ -38,6 +38,17 @@ impl StableResult {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::ErrMoney,
+            Self::ErrStable,
+            Self::SuccessStable,
+            Self::SuccessUnstable,
+            Self::SuccessBuySlot,
+            Self::ErrExotic,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

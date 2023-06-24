@@ -26,6 +26,15 @@ impl BuyBankSlotResult {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::FailedTooMany,
+            Self::InsufficientFunds,
+            Self::NotBanker,
+            Self::Ok,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

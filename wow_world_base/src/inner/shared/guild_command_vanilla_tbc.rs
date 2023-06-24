@@ -34,6 +34,17 @@ impl GuildCommand {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::Create,
+            Self::Invite,
+            Self::Quit,
+            Self::Founder,
+            Self::Unknown19,
+            Self::Unknown20,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

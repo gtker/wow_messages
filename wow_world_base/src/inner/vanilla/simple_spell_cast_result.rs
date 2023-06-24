@@ -20,6 +20,13 @@ impl SimpleSpellCastResult {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Success,
+            Self::Failure,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

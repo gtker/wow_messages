@@ -75,6 +75,30 @@ impl GuildCommandResult {
         }
     }
 
+    pub const fn variants() -> [Self; 19] {
+        [
+            Self::PlayerNoMoreInGuild,
+            Self::GuildInternal,
+            Self::AlreadyInGuild,
+            Self::AlreadyInGuildS,
+            Self::InvitedToGuild,
+            Self::AlreadyInvitedToGuildS,
+            Self::GuildNameInvalid,
+            Self::GuildNameExistsS,
+            Self::GuildLeaderLeaveOrPermissions,
+            Self::GuildPlayerNotInGuild,
+            Self::GuildPlayerNotInGuildS,
+            Self::GuildPlayerNotFoundS,
+            Self::GuildNotAllied,
+            Self::GuildRankTooHighS,
+            Self::GuildRankTooLowS,
+            Self::GuildRanksLocked,
+            Self::GuildRankInUse,
+            Self::GuildIgnoringYouS,
+            Self::GuildUnk20,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

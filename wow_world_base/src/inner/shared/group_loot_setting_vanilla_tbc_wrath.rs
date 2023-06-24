@@ -29,6 +29,16 @@ impl GroupLootSetting {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::FreeForAll,
+            Self::RoundRobin,
+            Self::MasterLoot,
+            Self::GroupLoot,
+            Self::NeedBeforeGreed,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

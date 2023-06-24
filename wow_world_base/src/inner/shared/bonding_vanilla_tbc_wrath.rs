@@ -33,6 +33,17 @@ impl Bonding {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::NoBind,
+            Self::PickUp,
+            Self::Equip,
+            Self::Use,
+            Self::QuestItem,
+            Self::QuestItem1,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

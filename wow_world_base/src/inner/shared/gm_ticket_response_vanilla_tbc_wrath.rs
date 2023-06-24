@@ -35,6 +35,18 @@ impl GmTicketResponse {
         }
     }
 
+    pub const fn variants() -> [Self; 7] {
+        [
+            Self::NotExist,
+            Self::AlreadyExist,
+            Self::CreateSuccess,
+            Self::CreateError,
+            Self::UpdateSuccess,
+            Self::UpdateError,
+            Self::TicketDeleted,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

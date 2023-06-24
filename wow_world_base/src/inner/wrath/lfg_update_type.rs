@@ -56,6 +56,25 @@ impl LfgUpdateType {
         }
     }
 
+    pub const fn variants() -> [Self; 14] {
+        [
+            Self::Default,
+            Self::LeaderLeave,
+            Self::RolecheckAborted,
+            Self::Join,
+            Self::RolecheckFailed,
+            Self::Leave,
+            Self::ProposalFailed,
+            Self::ProposalDeclined,
+            Self::GroupFound,
+            Self::AddedToQueue,
+            Self::ProposalBegin,
+            Self::Status,
+            Self::GroupMemberOffline,
+            Self::GroupDisband,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

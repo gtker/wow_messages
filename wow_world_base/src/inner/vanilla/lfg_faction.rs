@@ -27,6 +27,14 @@ impl LfgFaction {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Neutral,
+            Self::Horde,
+            Self::Alliance,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

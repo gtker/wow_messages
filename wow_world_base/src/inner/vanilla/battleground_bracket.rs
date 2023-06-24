@@ -38,6 +38,17 @@ impl BattlegroundBracket {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::Tens,
+            Self::Twenties,
+            Self::Thirties,
+            Self::Fourties,
+            Self::Fifties,
+            Self::Sixty,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

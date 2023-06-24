@@ -32,6 +32,17 @@ impl EnvironmentalDamageType {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::Exhausted,
+            Self::Drowning,
+            Self::Fall,
+            Self::Lava,
+            Self::Slime,
+            Self::Fire,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

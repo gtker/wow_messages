@@ -44,6 +44,21 @@ impl RaidTargetIndex {
         }
     }
 
+    pub const fn variants() -> [Self; 10] {
+        [
+            Self::Unknown0,
+            Self::Unknown1,
+            Self::Unknown2,
+            Self::Unknown3,
+            Self::Unknown4,
+            Self::Unknown5,
+            Self::Unknown6,
+            Self::Unknown7,
+            Self::Unknown8,
+            Self::RequestIcons,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

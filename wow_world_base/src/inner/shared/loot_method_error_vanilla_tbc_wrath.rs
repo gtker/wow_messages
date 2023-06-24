@@ -66,6 +66,24 @@ impl LootMethodError {
         }
     }
 
+    pub const fn variants() -> [Self; 13] {
+        [
+            Self::DidntKill,
+            Self::TooFar,
+            Self::BadFacing,
+            Self::Locked,
+            Self::Notstanding,
+            Self::Stunned,
+            Self::PlayerNotFound,
+            Self::PlayTimeExceeded,
+            Self::MasterInvFull,
+            Self::MasterUniqueItem,
+            Self::MasterOther,
+            Self::AlreadyPickpocketed,
+            Self::NotWhileShapeshifted,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

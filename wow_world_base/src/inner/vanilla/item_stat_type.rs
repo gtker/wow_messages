@@ -35,6 +35,18 @@ impl ItemStatType {
         }
     }
 
+    pub const fn variants() -> [Self; 7] {
+        [
+            Self::Mana,
+            Self::Health,
+            Self::Agility,
+            Self::Strength,
+            Self::Intellect,
+            Self::Spirit,
+            Self::Stamina,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

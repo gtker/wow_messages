@@ -102,6 +102,31 @@ impl PvpRank {
         }
     }
 
+    pub const fn variants() -> [Self; 20] {
+        [
+            Self::NoRank,
+            Self::Pariah,
+            Self::Outlaw,
+            Self::Exiled,
+            Self::Dishonored,
+            Self::Rank1,
+            Self::Rank2,
+            Self::Rank3,
+            Self::Rank4,
+            Self::Rank5,
+            Self::Rank6,
+            Self::Rank7,
+            Self::Rank8,
+            Self::Rank9,
+            Self::Rank10,
+            Self::Rank11,
+            Self::Rank12,
+            Self::Rank13,
+            Self::Rank14,
+            Self::FactionLeader,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

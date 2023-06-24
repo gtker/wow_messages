@@ -34,6 +34,16 @@ impl LootSlotType {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::TypeAllowLoot,
+            Self::TypeRollOngoing,
+            Self::TypeMaster,
+            Self::TypeLocked,
+            Self::TypeOwner,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

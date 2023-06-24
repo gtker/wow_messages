@@ -32,6 +32,17 @@ impl PlayerChatTag {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::None,
+            Self::Afk,
+            Self::Dnd,
+            Self::Gm,
+            Self::Commentator,
+            Self::Developer,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -32,6 +32,17 @@ impl LfgType {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::None,
+            Self::Dungeon,
+            Self::Raid,
+            Self::Zone,
+            Self::Heroic,
+            Self::Random,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

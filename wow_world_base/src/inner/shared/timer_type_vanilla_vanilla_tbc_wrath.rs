@@ -27,6 +27,15 @@ impl TimerType {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::Fatigue,
+            Self::Breath,
+            Self::FeignDeath,
+            Self::Environmental,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

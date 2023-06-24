@@ -23,6 +23,14 @@ impl MeetingStoneFailure {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::MeetingstoneFailPartyleader,
+            Self::MeetingstoneFailFullGroup,
+            Self::MeetingstoneFailRaidGroup,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

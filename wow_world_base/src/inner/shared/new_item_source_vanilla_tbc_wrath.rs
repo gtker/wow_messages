@@ -20,6 +20,13 @@ impl NewItemSource {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Looted,
+            Self::FromNpc,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

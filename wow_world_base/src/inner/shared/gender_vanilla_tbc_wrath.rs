@@ -24,6 +24,14 @@ impl Gender {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Male,
+            Self::Female,
+            Self::None,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

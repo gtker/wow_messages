@@ -19,6 +19,13 @@ impl SecurityFlag {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::None,
+            Self::Pin,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

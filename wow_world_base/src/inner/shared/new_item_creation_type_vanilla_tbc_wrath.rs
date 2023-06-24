@@ -20,6 +20,13 @@ impl NewItemCreationType {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Received,
+            Self::Created,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

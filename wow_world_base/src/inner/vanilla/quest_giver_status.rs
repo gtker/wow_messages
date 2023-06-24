@@ -40,6 +40,19 @@ impl QuestGiverStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 8] {
+        [
+            Self::None,
+            Self::Unavailable,
+            Self::Chat,
+            Self::Incomplete,
+            Self::RewardRep,
+            Self::Available,
+            Self::RewardOld,
+            Self::Reward2,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

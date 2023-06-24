@@ -23,6 +23,14 @@ impl CalendarModeratorRank {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Player,
+            Self::Moderator,
+            Self::Owner,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

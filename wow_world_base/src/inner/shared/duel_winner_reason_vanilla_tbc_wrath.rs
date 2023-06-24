@@ -20,6 +20,13 @@ impl DuelWinnerReason {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Won,
+            Self::Fled,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -20,6 +20,13 @@ impl ItemTextQuery {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::HasText,
+            Self::NoText,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -53,6 +53,24 @@ impl PetNameInvalidReason {
         }
     }
 
+    pub const fn variants() -> [Self; 13] {
+        [
+            Self::Invalid,
+            Self::NoName,
+            Self::TooShort,
+            Self::TooLong,
+            Self::MixedLanguages,
+            Self::Profane,
+            Self::Reserved,
+            Self::ThreeConsecutive,
+            Self::InvalidSpace,
+            Self::ConsecutiveSpaces,
+            Self::RussianConsecutiveSilentCharacters,
+            Self::RussianSilentCharacterAtBeginningOrEnd,
+            Self::DeclensionDoesntMatchBaseName,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

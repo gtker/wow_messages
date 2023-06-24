@@ -66,6 +66,26 @@ impl HitInfo {
         }
     }
 
+    pub const fn variants() -> [Self; 15] {
+        [
+            Self::NormalSwing,
+            Self::Unk1,
+            Self::AffectsVictim,
+            Self::LeftSwing,
+            Self::EarlyCriticalHit,
+            Self::Miss,
+            Self::Absorb,
+            Self::Resist,
+            Self::CriticalHit,
+            Self::Unk9,
+            Self::Unk10,
+            Self::Glancing,
+            Self::Crushing,
+            Self::NoAction,
+            Self::SwingNoHitSound,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

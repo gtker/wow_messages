@@ -20,6 +20,13 @@ impl LogFormat {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Default,
+            Self::Debug,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

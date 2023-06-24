@@ -37,6 +37,17 @@ impl GuildEmblemResult {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::Success,
+            Self::InvalidTabardColors,
+            Self::NoGuild,
+            Self::NotGuildMaster,
+            Self::NotEnoughMoney,
+            Self::NoMessage,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

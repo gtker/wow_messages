@@ -23,6 +23,14 @@ impl TrainerSpellState {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Green,
+            Self::Red,
+            Self::Gray,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

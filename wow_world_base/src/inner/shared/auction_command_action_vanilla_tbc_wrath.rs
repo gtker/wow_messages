@@ -26,6 +26,14 @@ impl AuctionCommandAction {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Started,
+            Self::Removed,
+            Self::BidPlaced,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

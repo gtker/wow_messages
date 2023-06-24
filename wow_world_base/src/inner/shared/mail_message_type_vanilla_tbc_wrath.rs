@@ -32,6 +32,16 @@ impl MailMessageType {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::Normal,
+            Self::Auction,
+            Self::Creature,
+            Self::Gameobject,
+            Self::Item,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

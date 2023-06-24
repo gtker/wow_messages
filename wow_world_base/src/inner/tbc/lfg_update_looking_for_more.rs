@@ -20,6 +20,13 @@ impl LfgUpdateLookingForMore {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::NotLookingForMore,
+            Self::LookingForMore,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

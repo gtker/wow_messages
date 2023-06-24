@@ -32,6 +32,17 @@ impl UpdateType {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::Values,
+            Self::Movement,
+            Self::CreateObject,
+            Self::CreateObject2,
+            Self::OutOfRangeObjects,
+            Self::NearObjects,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -27,6 +27,14 @@ impl EmoteSpecProc {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::NoLoop,
+            Self::Loop,
+            Self::LoopWithSound,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

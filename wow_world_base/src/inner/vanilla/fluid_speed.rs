@@ -27,6 +27,14 @@ impl FluidSpeed {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Still,
+            Self::Slow,
+            Self::Rapid,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

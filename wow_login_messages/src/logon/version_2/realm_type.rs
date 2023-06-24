@@ -25,6 +25,15 @@ impl RealmType {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::PlayerVsEnvironment,
+            Self::PlayerVsPlayer,
+            Self::Roleplaying,
+            Self::RoleplayingPlayerVsPlayer,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -50,6 +50,20 @@ impl SellItemResult {
         }
     }
 
+    pub const fn variants() -> [Self; 9] {
+        [
+            Self::ErrCantFindItem,
+            Self::ErrCantSellItem,
+            Self::ErrCantFindVendor,
+            Self::ErrYouDontOwnThatItem,
+            Self::ErrUnk,
+            Self::ErrOnlyEmptyBag,
+            Self::ErrCantSellToThisMerchant,
+            Self::ErrMustRepairItemDurabilityToUse,
+            Self::InternalBagError,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

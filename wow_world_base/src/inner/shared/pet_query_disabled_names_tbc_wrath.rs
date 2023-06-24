@@ -20,6 +20,13 @@ impl PetQueryDisabledNames {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Present,
+            Self::NotPresent,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -20,6 +20,13 @@ impl LogoutSpeed {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Delayed,
+            Self::Instant,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

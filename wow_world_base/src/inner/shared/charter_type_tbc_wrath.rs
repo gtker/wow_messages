@@ -20,6 +20,13 @@ impl CharterType {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Guild,
+            Self::Arena,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

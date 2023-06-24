@@ -23,6 +23,14 @@ impl PetReactState {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Passive,
+            Self::Defensive,
+            Self::Aggressive,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

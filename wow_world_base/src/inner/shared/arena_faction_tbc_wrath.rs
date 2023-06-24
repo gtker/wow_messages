@@ -20,6 +20,13 @@ impl ArenaFaction {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Horde,
+            Self::Alliance,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -86,6 +86,35 @@ impl TradeStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 24] {
+        [
+            Self::Busy,
+            Self::BeginTrade,
+            Self::OpenWindow,
+            Self::TradeCanceled,
+            Self::TradeAccept,
+            Self::Busy2,
+            Self::NoTarget,
+            Self::BackToTrade,
+            Self::TradeComplete,
+            Self::TradeRejected,
+            Self::TargetToFar,
+            Self::WrongFaction,
+            Self::CloseWindow,
+            Self::Unknown13,
+            Self::IgnoreYou,
+            Self::YouStunned,
+            Self::TargetStunned,
+            Self::YouDead,
+            Self::TargetDead,
+            Self::YouLogout,
+            Self::TargetLogout,
+            Self::TrialAccount,
+            Self::OnlyConjured,
+            Self::NotOnTaplist,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

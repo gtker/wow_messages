@@ -27,6 +27,14 @@ impl ItemEnvTypes {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Shield,
+            Self::MetalWeapon,
+            Self::WoodWeapon,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

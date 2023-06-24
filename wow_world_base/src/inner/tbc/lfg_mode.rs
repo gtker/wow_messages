@@ -20,6 +20,13 @@ impl LfgMode {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::LookingForGroup,
+            Self::LookingForMore,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

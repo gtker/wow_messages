@@ -65,6 +65,28 @@ impl ItemClass {
         }
     }
 
+    pub const fn variants() -> [Self; 17] {
+        [
+            Self::Consumable,
+            Self::Container,
+            Self::Weapon,
+            Self::Gem,
+            Self::Armor,
+            Self::Reagent,
+            Self::Projectile,
+            Self::TradeGoods,
+            Self::Generic,
+            Self::Recipe,
+            Self::Money,
+            Self::Quiver,
+            Self::Quest,
+            Self::Key,
+            Self::Permanent,
+            Self::Misc,
+            Self::Glyph,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

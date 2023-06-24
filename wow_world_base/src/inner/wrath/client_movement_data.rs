@@ -20,6 +20,13 @@ impl ClientMovementData {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::NotPresent,
+            Self::Present,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

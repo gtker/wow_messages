@@ -20,6 +20,13 @@ impl ArenaTeamRole {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Captain,
+            Self::Member,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

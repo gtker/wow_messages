@@ -23,6 +23,14 @@ impl ComplaintStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Disabled,
+            Self::EnabledWithoutAutoIgnore,
+            Self::EnabledWithAutoIgnore,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

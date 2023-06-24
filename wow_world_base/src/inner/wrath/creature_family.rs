@@ -137,6 +137,52 @@ impl CreatureFamily {
         }
     }
 
+    pub const fn variants() -> [Self; 41] {
+        [
+            Self::None,
+            Self::Wolf,
+            Self::Cat,
+            Self::Spider,
+            Self::Bear,
+            Self::Boar,
+            Self::Crocolisk,
+            Self::CarrionBird,
+            Self::Crab,
+            Self::Gorilla,
+            Self::Raptor,
+            Self::Tallstrider,
+            Self::Felhunter,
+            Self::Voidwalker,
+            Self::Succubus,
+            Self::Doomguard,
+            Self::Scorpid,
+            Self::Turtle,
+            Self::Imp,
+            Self::Bat,
+            Self::Hyena,
+            Self::BirdOfPrey,
+            Self::WindSerpent,
+            Self::RemoteControl,
+            Self::Felguard,
+            Self::Dragonhawk,
+            Self::Ravager,
+            Self::WarpStalker,
+            Self::Sporebat,
+            Self::NetherRay,
+            Self::Serpent,
+            Self::Moth,
+            Self::Chimaera,
+            Self::Devilsaur,
+            Self::Ghoul,
+            Self::Silithid,
+            Self::Worm,
+            Self::Rhino,
+            Self::Wasp,
+            Self::CoreHound,
+            Self::SpiritBeast,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

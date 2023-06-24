@@ -26,6 +26,15 @@ impl PetCommandState {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::Stay,
+            Self::Follow,
+            Self::Attack,
+            Self::Dismiss,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

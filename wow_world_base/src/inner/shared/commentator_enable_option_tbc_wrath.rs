@@ -23,6 +23,14 @@ impl CommentatorEnableOption {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Disable,
+            Self::Enable,
+            Self::Toggle,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

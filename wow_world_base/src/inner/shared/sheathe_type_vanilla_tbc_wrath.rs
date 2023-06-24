@@ -38,6 +38,19 @@ impl SheatheType {
         }
     }
 
+    pub const fn variants() -> [Self; 8] {
+        [
+            Self::None,
+            Self::MainHand,
+            Self::OffHand,
+            Self::LargeWeaponLeft,
+            Self::LargeWeaponRight,
+            Self::HipWeaponLeft,
+            Self::HipWeaponRight,
+            Self::Shield,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -39,6 +39,18 @@ impl ServerRegion {
         }
     }
 
+    pub const fn variants() -> [Self; 7] {
+        [
+            Self::UnitedStates,
+            Self::Korea,
+            Self::Europe,
+            Self::Taiwan,
+            Self::China,
+            Self::TestServer,
+            Self::QaServer,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

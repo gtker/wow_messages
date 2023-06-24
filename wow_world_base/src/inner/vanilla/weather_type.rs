@@ -26,6 +26,15 @@ impl WeatherType {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::Fine,
+            Self::Rain,
+            Self::Snow,
+            Self::Storm,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

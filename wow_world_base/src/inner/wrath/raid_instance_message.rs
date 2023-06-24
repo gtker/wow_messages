@@ -33,6 +33,16 @@ impl RaidInstanceMessage {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::WarningHours,
+            Self::WarningMin,
+            Self::WarningMinSoon,
+            Self::Welcome,
+            Self::Expired,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

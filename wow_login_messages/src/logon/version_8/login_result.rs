@@ -64,6 +64,28 @@ impl LoginResult {
         }
     }
 
+    pub const fn variants() -> [Self; 17] {
+        [
+            Self::Success,
+            Self::FailUnknown0,
+            Self::FailUnknown1,
+            Self::FailBanned,
+            Self::FailUnknownAccount,
+            Self::FailIncorrectPassword,
+            Self::FailAlreadyOnline,
+            Self::FailNoTime,
+            Self::FailDbBusy,
+            Self::FailVersionInvalid,
+            Self::LoginDownloadFile,
+            Self::FailInvalidServer,
+            Self::FailSuspended,
+            Self::FailNoAccess,
+            Self::SuccessSurvey,
+            Self::FailParentalcontrol,
+            Self::FailLockedEnforced,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

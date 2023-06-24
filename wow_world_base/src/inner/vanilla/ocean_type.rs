@@ -27,6 +27,14 @@ impl OceanType {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Fire,
+            Self::Slime,
+            Self::Water,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

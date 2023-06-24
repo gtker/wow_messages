@@ -68,6 +68,29 @@ impl Language {
         }
     }
 
+    pub const fn variants() -> [Self; 18] {
+        [
+            Self::Universal,
+            Self::Orcish,
+            Self::Darnassian,
+            Self::Taurahe,
+            Self::Dwarvish,
+            Self::Common,
+            Self::Demonic,
+            Self::Titan,
+            Self::Thalassian,
+            Self::Draconic,
+            Self::Kalimag,
+            Self::Gnomish,
+            Self::Troll,
+            Self::Gutterspeak,
+            Self::Draenei,
+            Self::Zombie,
+            Self::GnomishBinary,
+            Self::GoblinBinary,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

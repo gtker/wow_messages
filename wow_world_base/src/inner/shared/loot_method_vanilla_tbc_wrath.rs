@@ -45,6 +45,20 @@ impl LootMethod {
         }
     }
 
+    pub const fn variants() -> [Self; 9] {
+        [
+            Self::ErrorX,
+            Self::Corpse,
+            Self::Pickpocketing,
+            Self::Fishing,
+            Self::Disenchanting,
+            Self::Skinning,
+            Self::Fishinghole,
+            Self::FishingFail,
+            Self::Insignia,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

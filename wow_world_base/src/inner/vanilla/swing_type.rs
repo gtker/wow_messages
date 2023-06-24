@@ -27,6 +27,14 @@ impl SwingType {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Light,
+            Self::Medium,
+            Self::Heavy,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

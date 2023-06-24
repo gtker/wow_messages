@@ -32,6 +32,17 @@ impl CompressedMoveOpcode {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::SmsgMonsterMove,
+            Self::SmsgMonsterMoveTransport,
+            Self::SmsgSplineSetRunSpeed,
+            Self::SmsgSplineMoveUnroot,
+            Self::SmsgSplineMoveSetRunMode,
+            Self::SmsgSplineMoveSetWalkMode,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

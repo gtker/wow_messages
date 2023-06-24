@@ -44,6 +44,21 @@ impl CalendarStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 10] {
+        [
+            Self::Invited,
+            Self::Accepted,
+            Self::Declined,
+            Self::Confirmed,
+            Self::Out,
+            Self::Standby,
+            Self::SignedUp,
+            Self::NotSignedUp,
+            Self::Tentative,
+            Self::Removed,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

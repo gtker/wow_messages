@@ -50,6 +50,23 @@ impl PartyResult {
         }
     }
 
+    pub const fn variants() -> [Self; 12] {
+        [
+            Self::Success,
+            Self::BadPlayerName,
+            Self::TargetNotInGroup,
+            Self::TargetNotInInstance,
+            Self::GroupFull,
+            Self::AlreadyInGroup,
+            Self::NotInGroup,
+            Self::NotLeader,
+            Self::PlayerWrongFaction,
+            Self::IgnoringYou,
+            Self::LfgPending,
+            Self::InviteRestricted,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

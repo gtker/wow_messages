@@ -44,6 +44,21 @@ impl BagFamily {
         }
     }
 
+    pub const fn variants() -> [Self; 10] {
+        [
+            Self::None,
+            Self::Arrows,
+            Self::Bullets,
+            Self::SoulShards,
+            Self::Unknown4,
+            Self::Unknown5,
+            Self::Herbs,
+            Self::EnchantingSupplies,
+            Self::EngineeringSupplies,
+            Self::Keys,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

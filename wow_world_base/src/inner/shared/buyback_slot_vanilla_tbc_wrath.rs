@@ -53,6 +53,24 @@ impl BuybackSlot {
         }
     }
 
+    pub const fn variants() -> [Self; 13] {
+        [
+            Self::Slot1,
+            Self::Slot2,
+            Self::Slot3,
+            Self::Slot4,
+            Self::Slot5,
+            Self::Slot6,
+            Self::Slot7,
+            Self::Slot8,
+            Self::Slot9,
+            Self::Slot10,
+            Self::Slot11,
+            Self::Slot12,
+            Self::Slot13,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

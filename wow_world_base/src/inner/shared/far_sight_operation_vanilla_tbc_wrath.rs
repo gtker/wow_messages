@@ -20,6 +20,13 @@ impl FarSightOperation {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Remove,
+            Self::Add,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

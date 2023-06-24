@@ -54,6 +54,21 @@ impl QuestFailedReason {
         }
     }
 
+    pub const fn variants() -> [Self; 10] {
+        [
+            Self::DontHaveReq,
+            Self::QuestFailedLowLevel,
+            Self::QuestFailedReqs,
+            Self::QuestFailedInventoryFull,
+            Self::QuestFailedWrongRace,
+            Self::QuestOnlyOneTimed,
+            Self::QuestAlreadyOn,
+            Self::QuestFailedDuplicateItem,
+            Self::QuestFailedMissingItems,
+            Self::QuestFailedNotEnoughMoney,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

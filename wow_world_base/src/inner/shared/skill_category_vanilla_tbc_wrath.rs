@@ -41,6 +41,19 @@ impl SkillCategory {
         }
     }
 
+    pub const fn variants() -> [Self; 8] {
+        [
+            Self::Attribute,
+            Self::Weapon,
+            Self::Class,
+            Self::Armor,
+            Self::SecondaryProfession,
+            Self::Language,
+            Self::PrimaryProfession,
+            Self::Generic,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

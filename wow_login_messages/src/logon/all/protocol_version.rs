@@ -38,6 +38,17 @@ impl ProtocolVersion {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::Two,
+            Self::Three,
+            Self::Five,
+            Self::Six,
+            Self::Seven,
+            Self::Eight,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

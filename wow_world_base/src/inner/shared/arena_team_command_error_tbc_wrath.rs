@@ -60,6 +60,26 @@ impl ArenaTeamCommandError {
         }
     }
 
+    pub const fn variants() -> [Self; 15] {
+        [
+            Self::ArenaTeamInternal,
+            Self::AlreadyInArenaTeam,
+            Self::AlreadyInArenaTeamS,
+            Self::InvitedToArenaTeam,
+            Self::AlreadyInvitedToArenaTeamS,
+            Self::ArenaTeamNameInvalid,
+            Self::ArenaTeamNameExistsS,
+            Self::ArenaTeamLeaderLeaveS,
+            Self::ArenaTeamPlayerNotInTeam,
+            Self::ArenaTeamPlayerNotInTeamSs,
+            Self::ArenaTeamPlayerNotFoundS,
+            Self::ArenaTeamNotAllied,
+            Self::ArenaTeamIgnoringYouS,
+            Self::ArenaTeamTargetTooLowS,
+            Self::ArenaTeamTooManyMembersS,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

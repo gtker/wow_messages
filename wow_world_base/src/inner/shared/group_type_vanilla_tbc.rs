@@ -20,6 +20,13 @@ impl GroupType {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Normal,
+            Self::Raid,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

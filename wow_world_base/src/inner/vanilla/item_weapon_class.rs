@@ -24,6 +24,13 @@ impl ItemWeaponClass {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Item,
+            Self::Weapon,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

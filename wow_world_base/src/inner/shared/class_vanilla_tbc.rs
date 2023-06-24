@@ -41,6 +41,20 @@ impl Class {
         }
     }
 
+    pub const fn variants() -> [Self; 9] {
+        [
+            Self::Warrior,
+            Self::Paladin,
+            Self::Hunter,
+            Self::Rogue,
+            Self::Priest,
+            Self::Shaman,
+            Self::Mage,
+            Self::Warlock,
+            Self::Druid,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

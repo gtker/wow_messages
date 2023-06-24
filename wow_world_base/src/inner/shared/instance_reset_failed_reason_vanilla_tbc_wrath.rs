@@ -29,6 +29,15 @@ impl InstanceResetFailedReason {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::General,
+            Self::Offline,
+            Self::Zoning,
+            Self::Silently,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

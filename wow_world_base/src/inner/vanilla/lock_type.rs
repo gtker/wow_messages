@@ -27,6 +27,14 @@ impl LockType {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::None,
+            Self::ItemRequired,
+            Self::LocktypeReference,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

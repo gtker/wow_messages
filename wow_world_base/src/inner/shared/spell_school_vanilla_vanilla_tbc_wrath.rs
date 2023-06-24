@@ -36,6 +36,18 @@ impl SpellSchool {
         }
     }
 
+    pub const fn variants() -> [Self; 7] {
+        [
+            Self::Normal,
+            Self::Holy,
+            Self::Fire,
+            Self::Nature,
+            Self::Frost,
+            Self::Shadow,
+            Self::Arcane,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

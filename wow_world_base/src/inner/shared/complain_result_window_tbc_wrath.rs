@@ -20,6 +20,13 @@ impl ComplainResultWindow {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::DoNotShow,
+            Self::Show,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

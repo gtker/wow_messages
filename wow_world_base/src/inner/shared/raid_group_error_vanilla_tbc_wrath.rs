@@ -20,6 +20,13 @@ impl RaidGroupError {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Required,
+            Self::Full,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

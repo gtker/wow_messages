@@ -50,6 +50,20 @@ impl AuctionCommandResult {
         }
     }
 
+    pub const fn variants() -> [Self; 9] {
+        [
+            Self::Ok,
+            Self::ErrInventory,
+            Self::ErrDatabase,
+            Self::ErrNotEnoughMoney,
+            Self::ErrItemNotFound,
+            Self::ErrHigherBid,
+            Self::ErrBidIncrement,
+            Self::ErrBidOwn,
+            Self::ErrRestrictedAccount,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

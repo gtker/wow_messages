@@ -20,6 +20,13 @@ impl GuildMemberStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Offline,
+            Self::Online,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

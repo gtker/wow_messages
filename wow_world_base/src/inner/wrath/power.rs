@@ -38,6 +38,19 @@ impl Power {
         }
     }
 
+    pub const fn variants() -> [Self; 8] {
+        [
+            Self::Mana,
+            Self::Rage,
+            Self::Focus,
+            Self::Energy,
+            Self::Happiness,
+            Self::Rune,
+            Self::RunicPower,
+            Self::Health,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

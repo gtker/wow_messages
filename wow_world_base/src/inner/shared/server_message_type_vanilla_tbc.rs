@@ -29,6 +29,16 @@ impl ServerMessageType {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::ShutdownTime,
+            Self::RestartTime,
+            Self::Custom,
+            Self::ShutdownCancelled,
+            Self::RestartCancelled,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -24,6 +24,14 @@ impl SheathState {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Unarmed,
+            Self::Melee,
+            Self::Ranged,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

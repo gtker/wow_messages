@@ -50,6 +50,23 @@ impl SpellMissInfo {
         }
     }
 
+    pub const fn variants() -> [Self; 12] {
+        [
+            Self::None,
+            Self::Miss,
+            Self::Resist,
+            Self::Dodge,
+            Self::Parry,
+            Self::Block,
+            Self::Evade,
+            Self::Immune,
+            Self::Immune2,
+            Self::Deflect,
+            Self::Absorb,
+            Self::Reflect,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -20,6 +20,13 @@ impl DispelMethod {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Dispelled,
+            Self::Cleansed,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

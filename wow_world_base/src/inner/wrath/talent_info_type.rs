@@ -20,6 +20,13 @@ impl TalentInfoType {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Player,
+            Self::Pet,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

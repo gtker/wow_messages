@@ -20,6 +20,13 @@ impl SpamType {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Mail,
+            Self::Chat,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

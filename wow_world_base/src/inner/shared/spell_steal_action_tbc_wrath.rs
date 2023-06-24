@@ -20,6 +20,13 @@ impl SpellStealAction {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Steal,
+            Self::Cleanse,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -20,6 +20,13 @@ impl LfgTeleportLocation {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::In,
+            Self::Out,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

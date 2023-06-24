@@ -26,6 +26,15 @@ impl RollVote {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::Pass,
+            Self::Need,
+            Self::Greed,
+            Self::Disenchant,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

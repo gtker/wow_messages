@@ -38,6 +38,18 @@ impl SpellTriggerType {
         }
     }
 
+    pub const fn variants() -> [Self; 7] {
+        [
+            Self::OnUse,
+            Self::OnEquip,
+            Self::ChanceOnHit,
+            Self::ServerSideScript,
+            Self::Soulstone,
+            Self::NoEquipCooldown,
+            Self::LearnSpellId,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -41,6 +41,20 @@ impl Race {
         }
     }
 
+    pub const fn variants() -> [Self; 9] {
+        [
+            Self::Human,
+            Self::Orc,
+            Self::Dwarf,
+            Self::NightElf,
+            Self::Undead,
+            Self::Tauren,
+            Self::Gnome,
+            Self::Troll,
+            Self::Goblin,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -38,6 +38,19 @@ impl ItemQuality {
         }
     }
 
+    pub const fn variants() -> [Self; 8] {
+        [
+            Self::Poor,
+            Self::Normal,
+            Self::Uncommon,
+            Self::Rare,
+            Self::Epic,
+            Self::Legendary,
+            Self::Artifact,
+            Self::Heirloom,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

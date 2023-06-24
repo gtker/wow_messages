@@ -20,6 +20,13 @@ impl GmTicketQueueStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Enabled,
+            Self::Disabled,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

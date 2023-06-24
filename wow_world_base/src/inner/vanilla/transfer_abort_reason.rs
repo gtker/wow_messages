@@ -29,6 +29,16 @@ impl TransferAbortReason {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::None,
+            Self::IsFull,
+            Self::NotFound,
+            Self::TooManyInstances,
+            Self::ZoneIsInCombat,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

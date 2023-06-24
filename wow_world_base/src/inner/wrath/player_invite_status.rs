@@ -20,6 +20,13 @@ impl PlayerInviteStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::AlreadyInGroup,
+            Self::NotInGroup,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

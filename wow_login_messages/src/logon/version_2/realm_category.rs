@@ -28,6 +28,16 @@ impl RealmCategory {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::Default,
+            Self::One,
+            Self::Two,
+            Self::Three,
+            Self::Five,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

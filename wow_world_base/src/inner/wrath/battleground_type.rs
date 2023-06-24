@@ -56,6 +56,25 @@ impl BattlegroundType {
         }
     }
 
+    pub const fn variants() -> [Self; 14] {
+        [
+            Self::None,
+            Self::AlteracValley,
+            Self::WarsongGulch,
+            Self::ArathiBasin,
+            Self::NagrandArena,
+            Self::BladesEdgeArena,
+            Self::Arena,
+            Self::EyeOfTheStorm,
+            Self::RuinsOfLordaeron,
+            Self::StrandOfTheAncient,
+            Self::DalaranSewers,
+            Self::RingOfValor,
+            Self::IsleOfConquest,
+            Self::Random,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

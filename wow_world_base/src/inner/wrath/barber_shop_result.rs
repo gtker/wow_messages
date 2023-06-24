@@ -26,6 +26,15 @@ impl BarberShopResult {
         }
     }
 
+    pub const fn variants() -> [Self; 4] {
+        [
+            Self::Ok,
+            Self::NotEnoughMoney,
+            Self::MustBeSeatedInBarberChair,
+            Self::NotEnoughMoney2,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

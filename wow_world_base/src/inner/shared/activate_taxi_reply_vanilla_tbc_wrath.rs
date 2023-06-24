@@ -53,6 +53,24 @@ impl ActivateTaxiReply {
         }
     }
 
+    pub const fn variants() -> [Self; 13] {
+        [
+            Self::Ok,
+            Self::UnspecifiedServerError,
+            Self::NoSuchPath,
+            Self::NotEnoughMoney,
+            Self::TooFarAway,
+            Self::NoVendorNearby,
+            Self::NotVisited,
+            Self::PlayerBusy,
+            Self::PlayerAlreadyMounted,
+            Self::PlayerShapeShifted,
+            Self::PlayerMoving,
+            Self::SameNode,
+            Self::NotStanding,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

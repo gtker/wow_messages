@@ -23,6 +23,14 @@ impl BattlegroundWinner {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::Horde,
+            Self::Alliance,
+            Self::None,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

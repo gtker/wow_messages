@@ -20,6 +20,13 @@ impl ExperienceAwardType {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Kill,
+            Self::NonKill,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

@@ -20,6 +20,13 @@ impl QuestCompletable {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::NotCompletable,
+            Self::Completeable,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

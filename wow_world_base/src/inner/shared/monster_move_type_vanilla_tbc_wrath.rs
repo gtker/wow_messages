@@ -29,6 +29,16 @@ impl MonsterMoveType {
         }
     }
 
+    pub const fn variants() -> [Self; 5] {
+        [
+            Self::Normal,
+            Self::Stop,
+            Self::FacingSpot,
+            Self::FacingTarget,
+            Self::FacingAngle,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

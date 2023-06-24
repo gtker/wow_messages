@@ -22,6 +22,13 @@ impl Platform {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::X86,
+            Self::PowerPc,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

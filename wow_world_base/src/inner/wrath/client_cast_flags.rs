@@ -20,6 +20,13 @@ impl ClientCastFlags {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::None,
+            Self::Extra,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

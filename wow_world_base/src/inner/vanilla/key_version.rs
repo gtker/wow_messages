@@ -44,6 +44,21 @@ impl KeyVersion {
         }
     }
 
+    pub const fn variants() -> [Self; 10] {
+        [
+            Self::Zero,
+            Self::One,
+            Self::Two,
+            Self::Three,
+            Self::Four,
+            Self::Five,
+            Self::Six,
+            Self::Seven,
+            Self::Eight,
+            Self::Nine,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

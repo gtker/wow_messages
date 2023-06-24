@@ -26,6 +26,14 @@ impl GmTicketEscalationStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::GmticketAssignedtogmStatusNotAssigned,
+            Self::GmticketAssignedtogmStatusAssigned,
+            Self::GmticketAssignedtogmStatusEscalated,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

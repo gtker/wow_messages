@@ -22,6 +22,13 @@ impl Os {
         }
     }
 
+    pub const fn variants() -> [Self; 2] {
+        [
+            Self::Windows,
+            Self::MacOsX,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

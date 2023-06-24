@@ -61,6 +61,25 @@ impl BgTypeId {
         }
     }
 
+    pub const fn variants() -> [Self; 14] {
+        [
+            Self::NotEligible,
+            Self::QueuedForAv,
+            Self::QueuedForWsg,
+            Self::QueuedForAb,
+            Self::QueuedForNetherstorm,
+            Self::QueuedForBladesEdgeArena,
+            Self::QueuedForArena,
+            Self::QueuedForEyeOfTheStorm,
+            Self::QueuedForRuinsOfLordaeron,
+            Self::QueuedForStrandOfTheAncient,
+            Self::QueuedForDalaranSewers,
+            Self::QueuedForRingOfValor,
+            Self::QueuedForIsleOfConquest,
+            Self::RemoveFromQueue,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

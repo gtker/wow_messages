@@ -32,6 +32,17 @@ impl MeetingStoneStatus {
         }
     }
 
+    pub const fn variants() -> [Self; 6] {
+        [
+            Self::LeaveQueue,
+            Self::JoinedQueue,
+            Self::PartyMemberLeftLfg,
+            Self::PartyMemberRemovedPartyRemoved,
+            Self::LookingForNewPartyInQueue,
+            Self::None,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]

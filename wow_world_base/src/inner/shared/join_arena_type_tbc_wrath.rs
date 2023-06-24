@@ -23,6 +23,14 @@ impl JoinArenaType {
         }
     }
 
+    pub const fn variants() -> [Self; 3] {
+        [
+            Self::TwoVsTwo,
+            Self::ThreeVsThree,
+            Self::FiveVsFive,
+        ]
+    }
+
 }
 
 #[cfg(feature = "print-testcase")]
