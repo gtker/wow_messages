@@ -138,45 +138,28 @@ pub(crate) fn print_base() {
         std::process::exit(1);
     }
 
-    let vanilla_path = sqlite_dir.join("classic.sqlite");
-    if !vanilla_path.exists() {
-        println!("Unable to find `classic.sqlite` in `wow_db_sqlite` directory.");
-        println!("Exiting.");
-        std::process::exit(1);
+    fn run(path: &PathBuf, expansion: Expansion) {
+        let filename = match expansion {
+            Expansion::Vanilla => "classic.sqlite",
+            Expansion::BurningCrusade => "tbc.sqlite",
+            Expansion::WrathOfTheLichKing => "wotlk.sqlite",
+        };
+        let path = path.join(filename);
+        if !path.exists() {
+            println!("Unable to find `{filename}` in `wow_db_sqlite` directory.");
+            println!("Exiting.");
+            std::process::exit(1);
+        }
+
+        let data = get_data_from_sqlite_file(&path, expansion);
+        write_to_files(&data, expansion);
     }
 
-    let tbc_path = sqlite_dir.join("tbc.sqlite");
-    if !tbc_path.exists() {
-        println!("Unable to find `tbc.sqlite` in `wow_db_sqlite` directory.");
-        println!("Exiting.");
-        std::process::exit(1);
-    }
-
-    let wrath_path = sqlite_dir.join("wotlk.sqlite");
-    if !wrath_path.exists() {
-        println!("Unable to find `wotlk.sqlite` in `wow_db_sqlite` directory.");
-        println!("Exiting.");
-        std::process::exit(1);
-    }
-
-    let vanilla = std::thread::spawn(move || {
-        let vanilla_data = get_data_from_sqlite_file(&vanilla_path, Expansion::Vanilla);
-        write_to_files(&vanilla_data, Expansion::Vanilla);
+    std::thread::scope(|s| {
+        s.spawn(|| run(&sqlite_dir, Expansion::Vanilla));
+        s.spawn(|| run(&sqlite_dir, Expansion::BurningCrusade));
+        s.spawn(|| run(&sqlite_dir, Expansion::WrathOfTheLichKing));
     });
-
-    let tbc = std::thread::spawn(move || {
-        let tbc_data = get_data_from_sqlite_file(&tbc_path, Expansion::BurningCrusade);
-        write_to_files(&tbc_data, Expansion::BurningCrusade);
-    });
-
-    let wrath = std::thread::spawn(move || {
-        let wrath_data = get_data_from_sqlite_file(&wrath_path, Expansion::WrathOfTheLichKing);
-        write_to_files(&wrath_data, Expansion::WrathOfTheLichKing);
-    });
-
-    vanilla.join().unwrap();
-    tbc.join().unwrap();
-    wrath.join().unwrap();
 }
 
 fn write_to_files(data: &Data, expansion: Expansion) {
