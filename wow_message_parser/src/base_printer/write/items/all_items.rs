@@ -25,6 +25,19 @@ pub(crate) fn all_items(
         optimizations,
     );
 
+    print_data(s, items, default_values, arrays, optimizations, ty_name);
+
+    print_lookup(s, items);
+}
+
+fn print_data(
+    s: &mut Writer,
+    items: &[GenericThing],
+    default_values: &HashMap<(Value, Option<IntegerSize>), String>,
+    arrays: &HashMap<(&ArrayInstances, &str), String>,
+    optimizations: &Optimizations,
+    ty_name: &str,
+) {
     s.wln(format!("pub const Z________DATA: &[{ty_name}] = &["));
 
     for item in items {
@@ -61,13 +74,17 @@ pub(crate) fn all_items(
 
     s.wln("];");
     s.newline();
+}
 
+fn print_lookup(s: &mut Writer, items: &[GenericThing]) {
     let max_index = items.len();
     let ty = lookup_type(max_index);
 
     s.wln(format!("pub const Z________LOOKUP: &[{ty}] = &["));
+
     let min = items.iter().next().unwrap().entry;
     let max = items.iter().last().unwrap().entry;
+
     for i in min..=max {
         if let Some(pos) = items.iter().position(|a| a.entry == i) {
             s.wln(format!("{pos},"));
