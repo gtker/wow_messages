@@ -39,7 +39,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
         writeln!(s, "    total_exp = {};", self.total_exp).unwrap();
         writeln!(s, "    exp_type = {};", ExperienceAwardType::try_from(self.exp_type.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.exp_type {
-            crate::vanilla::SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
+            crate::shared::smsg_log_xpgain_vanilla_tbc::SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
                 exp_group_bonus,
                 experience_without_rested,
             } => {
@@ -64,7 +64,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
         crate::util::write_bytes(&mut s, &mut bytes, 4, "total_exp", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 1, "exp_type", "    ");
         match &self.exp_type {
-            crate::vanilla::SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
+            crate::shared::smsg_log_xpgain_vanilla_tbc::SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
                 exp_group_bonus,
                 experience_without_rested,
             } => {

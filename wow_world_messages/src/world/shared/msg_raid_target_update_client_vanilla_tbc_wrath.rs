@@ -32,47 +32,47 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
         // Members
         writeln!(s, "    target_index = {};", RaidTargetIndex::try_from(self.target_index.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.target_index {
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {
                 target,
             } => {
                 writeln!(s, "    target = {};", target.guid()).unwrap();
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown1 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown1 {
                 target,
             } => {
                 writeln!(s, "    target = {};", target.guid()).unwrap();
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown2 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown2 {
                 target,
             } => {
                 writeln!(s, "    target = {};", target.guid()).unwrap();
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown3 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown3 {
                 target,
             } => {
                 writeln!(s, "    target = {};", target.guid()).unwrap();
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown4 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown4 {
                 target,
             } => {
                 writeln!(s, "    target = {};", target.guid()).unwrap();
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown5 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown5 {
                 target,
             } => {
                 writeln!(s, "    target = {};", target.guid()).unwrap();
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown6 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown6 {
                 target,
             } => {
                 writeln!(s, "    target = {};", target.guid()).unwrap();
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown7 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown7 {
                 target,
             } => {
                 writeln!(s, "    target = {};", target.guid()).unwrap();
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown8 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown8 {
                 target,
             } => {
                 writeln!(s, "    target = {};", target.guid()).unwrap();
@@ -93,47 +93,47 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
 
         crate::util::write_bytes(&mut s, &mut bytes, 1, "target_index", "    ");
         match &self.target_index {
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {
                 target,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown1 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown1 {
                 target,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown2 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown2 {
                 target,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown3 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown3 {
                 target,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown4 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown4 {
                 target,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown5 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown5 {
                 target,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown6 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown6 {
                 target,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown7 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown7 {
                 target,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown8 {
+            crate::shared::msg_raid_target_update_client_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown8 {
                 target,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");

@@ -19,7 +19,7 @@ vanilla = ["wow_world_base/vanilla"]
 tbc = ["wow_srp/tbc-header", "wow_world_base/tbc"]
 wrath = ["wow_srp/wrath-header", "wow_world_base/wrath"]
 encryption = ["wow_srp"]
-print-testcase = ["vanilla", "tbc", "wrath", "wow_world_base/print-testcase"]
+print-testcase = ["wow_world_base/print-testcase"]
 
 [dependencies.wow_world_base]
 workspace = true

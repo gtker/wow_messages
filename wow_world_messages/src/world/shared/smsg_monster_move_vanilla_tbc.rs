@@ -62,7 +62,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         writeln!(s, "    spline_id = {};", self.spline_id).unwrap();
         writeln!(s, "    move_type = {};", MonsterMoveType::try_from(self.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.move_type {
-            crate::vanilla::SMSG_MONSTER_MOVE_MonsterMoveType::FacingSpot {
+            crate::shared::smsg_monster_move_vanilla_tbc::SMSG_MONSTER_MOVE_MonsterMoveType::FacingSpot {
                 position,
             } => {
                 // position: Vector3d
@@ -74,12 +74,12 @@ impl crate::Message for SMSG_MONSTER_MOVE {
 
                 writeln!(s, "    }};").unwrap();
             }
-            crate::vanilla::SMSG_MONSTER_MOVE_MonsterMoveType::FacingTarget {
+            crate::shared::smsg_monster_move_vanilla_tbc::SMSG_MONSTER_MOVE_MonsterMoveType::FacingTarget {
                 target,
             } => {
                 writeln!(s, "    target = {};", target.guid()).unwrap();
             }
-            crate::vanilla::SMSG_MONSTER_MOVE_MonsterMoveType::FacingAngle {
+            crate::shared::smsg_monster_move_vanilla_tbc::SMSG_MONSTER_MOVE_MonsterMoveType::FacingAngle {
                 angle,
             } => {
                 writeln!(s, "    {}", if angle.to_string().contains('.') { angle.to_string() } else { format!("{}.0", angle) }).unwrap();
@@ -110,7 +110,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
         crate::util::write_bytes(&mut s, &mut bytes, 4, "spline_id", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 1, "move_type", "    ");
         match &self.move_type {
-            crate::vanilla::SMSG_MONSTER_MOVE_MonsterMoveType::FacingSpot {
+            crate::shared::smsg_monster_move_vanilla_tbc::SMSG_MONSTER_MOVE_MonsterMoveType::FacingSpot {
                 position,
             } => {
                 writeln!(s, "    /* position: Vector3d start */").unwrap();
@@ -119,12 +119,12 @@ impl crate::Message for SMSG_MONSTER_MOVE {
                 crate::util::write_bytes(&mut s, &mut bytes, 4, "z", "        ");
                 writeln!(s, "    /* position: Vector3d end */").unwrap();
             }
-            crate::vanilla::SMSG_MONSTER_MOVE_MonsterMoveType::FacingTarget {
+            crate::shared::smsg_monster_move_vanilla_tbc::SMSG_MONSTER_MOVE_MonsterMoveType::FacingTarget {
                 target,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "target", "    ");
             }
-            crate::vanilla::SMSG_MONSTER_MOVE_MonsterMoveType::FacingAngle {
+            crate::shared::smsg_monster_move_vanilla_tbc::SMSG_MONSTER_MOVE_MonsterMoveType::FacingAngle {
                 angle,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 4, "angle", "    ");

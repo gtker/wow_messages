@@ -40,7 +40,7 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
         writeln!(s, "    pet_name_timestamp = {};", self.pet_name_timestamp).unwrap();
         writeln!(s, "    names = {};", PetQueryDisabledNames::try_from(self.names.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.names {
-            crate::tbc::SMSG_PET_NAME_QUERY_RESPONSE_PetQueryDisabledNames::Present {
+            crate::shared::smsg_pet_name_query_response_tbc_wrath::SMSG_PET_NAME_QUERY_RESPONSE_PetQueryDisabledNames::Present {
                 declined_names,
             } => {
                 write!(s, "    declined_names = [").unwrap();
@@ -68,7 +68,7 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
         crate::util::write_bytes(&mut s, &mut bytes, 4, "pet_name_timestamp", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 1, "names", "    ");
         match &self.names {
-            crate::tbc::SMSG_PET_NAME_QUERY_RESPONSE_PetQueryDisabledNames::Present {
+            crate::shared::smsg_pet_name_query_response_tbc_wrath::SMSG_PET_NAME_QUERY_RESPONSE_PetQueryDisabledNames::Present {
                 declined_names,
             } => {
                 writeln!(s, "    /* declined_names: CString[5] start */").unwrap();

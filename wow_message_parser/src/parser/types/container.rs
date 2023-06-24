@@ -483,6 +483,27 @@ impl Container {
         false
     }
 
+    pub(crate) fn get_import_path(&self) -> String {
+        let t = self.tags();
+
+        if t.has_world_version() && t.shared() {
+            if t.is_in_base() {
+                get_base_shared_path(self.name(), t)
+            } else {
+                get_world_shared_path(self.name(), t)
+            }
+        } else {
+            let (v, _) = t.first_and_main_versions();
+            let version = if t.has_login_version() {
+                t.import_version()
+            } else {
+                v
+            };
+
+            get_import_path(version)
+        }
+    }
+
     pub(crate) fn get_imports(
         &self,
         version: Version,

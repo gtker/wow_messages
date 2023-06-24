@@ -39,7 +39,7 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
         writeln!(s, "    name = \"{}\";", self.name).unwrap();
         writeln!(s, "    included = {};", DeclinedPetNameIncluded::try_from(self.included.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.included {
-            crate::tbc::SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::Included {
+            crate::shared::smsg_pet_name_invalid_tbc_wrath::SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::Included {
                 declined_names,
             } => {
                 write!(s, "    declined_names = [").unwrap();
@@ -66,7 +66,7 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
         crate::util::write_bytes(&mut s, &mut bytes, self.name.len() + 1, "name", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 1, "included", "    ");
         match &self.included {
-            crate::tbc::SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::Included {
+            crate::shared::smsg_pet_name_invalid_tbc_wrath::SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::Included {
                 declined_names,
             } => {
                 writeln!(s, "    /* declined_names: CString[5] start */").unwrap();

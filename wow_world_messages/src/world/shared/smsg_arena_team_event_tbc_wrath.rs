@@ -55,7 +55,7 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
         // Members
         writeln!(s, "    event = {};", ArenaTeamEvent::try_from(self.event.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.event {
-            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Join {
+            crate::shared::smsg_arena_team_event_tbc_wrath::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Join {
                 arena_team_name1,
                 joiner,
                 joiner_name,
@@ -64,14 +64,14 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
                 writeln!(s, "    arena_team_name1 = \"{}\";", arena_team_name1).unwrap();
                 writeln!(s, "    joiner = {};", joiner.guid()).unwrap();
             }
-            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Leave {
+            crate::shared::smsg_arena_team_event_tbc_wrath::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Leave {
                 leaver,
                 leaver_name,
             } => {
                 writeln!(s, "    leaver_name = \"{}\";", leaver_name).unwrap();
                 writeln!(s, "    leaver = {};", leaver.guid()).unwrap();
             }
-            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Remove {
+            crate::shared::smsg_arena_team_event_tbc_wrath::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Remove {
                 arena_team_name2,
                 kicked_player_name,
                 kicker_name,
@@ -80,21 +80,21 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
                 writeln!(s, "    arena_team_name2 = \"{}\";", arena_team_name2).unwrap();
                 writeln!(s, "    kicker_name = \"{}\";", kicker_name).unwrap();
             }
-            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderIs {
+            crate::shared::smsg_arena_team_event_tbc_wrath::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderIs {
                 arena_team_name3,
                 leader_name,
             } => {
                 writeln!(s, "    leader_name = \"{}\";", leader_name).unwrap();
                 writeln!(s, "    arena_team_name3 = \"{}\";", arena_team_name3).unwrap();
             }
-            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderChanged {
+            crate::shared::smsg_arena_team_event_tbc_wrath::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderChanged {
                 new_leader,
                 old_leader,
             } => {
                 writeln!(s, "    old_leader = \"{}\";", old_leader).unwrap();
                 writeln!(s, "    new_leader = \"{}\";", new_leader).unwrap();
             }
-            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Disbanded {
+            crate::shared::smsg_arena_team_event_tbc_wrath::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Disbanded {
                 arena_team_name3,
                 leader_name,
             } => {
@@ -122,7 +122,7 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
 
         crate::util::write_bytes(&mut s, &mut bytes, 1, "event", "    ");
         match &self.event {
-            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Join {
+            crate::shared::smsg_arena_team_event_tbc_wrath::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Join {
                 arena_team_name1,
                 joiner,
                 joiner_name,
@@ -131,14 +131,14 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
                 crate::util::write_bytes(&mut s, &mut bytes, arena_team_name1.len() + 1, "arena_team_name1", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "joiner", "    ");
             }
-            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Leave {
+            crate::shared::smsg_arena_team_event_tbc_wrath::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Leave {
                 leaver,
                 leaver_name,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, leaver_name.len() + 1, "leaver_name", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "leaver", "    ");
             }
-            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Remove {
+            crate::shared::smsg_arena_team_event_tbc_wrath::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Remove {
                 arena_team_name2,
                 kicked_player_name,
                 kicker_name,
@@ -147,21 +147,21 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
                 crate::util::write_bytes(&mut s, &mut bytes, arena_team_name2.len() + 1, "arena_team_name2", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, kicker_name.len() + 1, "kicker_name", "    ");
             }
-            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderIs {
+            crate::shared::smsg_arena_team_event_tbc_wrath::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderIs {
                 arena_team_name3,
                 leader_name,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, leader_name.len() + 1, "leader_name", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, arena_team_name3.len() + 1, "arena_team_name3", "    ");
             }
-            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderChanged {
+            crate::shared::smsg_arena_team_event_tbc_wrath::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::LeaderChanged {
                 new_leader,
                 old_leader,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, old_leader.len() + 1, "old_leader", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, new_leader.len() + 1, "new_leader", "    ");
             }
-            crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Disbanded {
+            crate::shared::smsg_arena_team_event_tbc_wrath::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Disbanded {
                 arena_team_name3,
                 leader_name,
             } => {

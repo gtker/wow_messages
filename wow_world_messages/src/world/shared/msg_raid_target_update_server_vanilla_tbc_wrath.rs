@@ -37,7 +37,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
         // Members
         writeln!(s, "    update_type = {};", RaidTargetUpdateType::try_from(self.update_type.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.update_type {
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Partial {
+            crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Partial {
                 raid_target,
             } => {
                 // raid_target: RaidTargetUpdate
@@ -48,7 +48,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
 
                 writeln!(s, "    }};").unwrap();
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Full {
+            crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Full {
                 raid_targets,
             } => {
                 write!(s, "    raid_targets = [").unwrap();
@@ -77,7 +77,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
 
         crate::util::write_bytes(&mut s, &mut bytes, 1, "update_type", "    ");
         match &self.update_type {
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Partial {
+            crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Partial {
                 raid_target,
             } => {
                 writeln!(s, "    /* raid_target: RaidTargetUpdate start */").unwrap();
@@ -85,7 +85,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
                 crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "        ");
                 writeln!(s, "    /* raid_target: RaidTargetUpdate end */").unwrap();
             }
-            crate::vanilla::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Full {
+            crate::shared::msg_raid_target_update_server_vanilla_tbc_wrath::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Full {
                 raid_targets,
             } => {
                 writeln!(s, "    /* raid_targets: RaidTargetUpdate[8] start */").unwrap();

@@ -44,7 +44,7 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
         writeln!(s, "    loot_method = {};", LootMethod::try_from(self.loot_method.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.loot_method {
-            crate::vanilla::SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
+            crate::shared::smsg_loot_response_vanilla_tbc_wrath::SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
                 loot_error,
             } => {
                 writeln!(s, "    loot_error = {};", loot_error.as_test_case_value()).unwrap();
@@ -79,7 +79,7 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         crate::util::write_bytes(&mut s, &mut bytes, 8, "guid", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 1, "loot_method", "    ");
         match &self.loot_method {
-            crate::vanilla::SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
+            crate::shared::smsg_loot_response_vanilla_tbc_wrath::SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
                 loot_error,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 1, "loot_error", "    ");

@@ -1,4 +1,3 @@
-use crate::file_utils::get_import_path;
 use crate::parser::types::array::ArrayType;
 use crate::parser::types::container::Container;
 use crate::parser::types::if_statement::{Equation, IfStatement};
@@ -91,7 +90,7 @@ pub(crate) fn print_if_statement_flag(
             );
 
         for enumerator in rd.enumerators() {
-            let import_path = get_import_path(e.tags().import_version());
+            let import_path = e.get_import_path();
 
             s.open_curly(format!(
                 "{import_path}::{ty}::{enumerator}",
@@ -157,7 +156,7 @@ pub(crate) fn print_if_statement_enum(
             continue;
         }
 
-        let import_path = get_import_path(e.tags().import_version());
+        let import_path = e.get_import_path();
 
         s.open_curly(format!(
             "{import_path}::{new_enum}::{variant}",
