@@ -166,6 +166,7 @@
 - [ItemSlot](docs/itemslot.md)
 - [ItemStatType](docs/itemstattype.md)
 - [ItemTextQuery](docs/itemtextquery.md)
+- [ItemWeaponClass](docs/itemweaponclass.md)
 - [JoinArenaType](docs/joinarenatype.md)
 - [KeyVersion](docs/keyversion.md)
 - [Language](docs/language.md)

@@ -111,6 +111,8 @@ pub(crate) mod item_slot;
 pub use item_slot::*;
 pub(crate) mod item_stat_type;
 pub use item_stat_type::*;
+pub(crate) mod item_weapon_class;
+pub use item_weapon_class::*;
 pub(crate) mod key_version;
 pub use key_version::*;
 pub use crate::shared::language_vanilla_vanilla::*;
