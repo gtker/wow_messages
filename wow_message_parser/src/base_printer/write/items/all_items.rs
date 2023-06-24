@@ -85,8 +85,10 @@ fn print_lookup(s: &mut Writer, items: &[GenericThing]) {
     let min = items.iter().next().unwrap().entry;
     let max = items.iter().last().unwrap().entry;
 
+    let mut offset = 0;
     for i in min..=max {
-        if let Some(pos) = items.iter().position(|a| a.entry == i) {
+        if let Some((pos, new_offset)) = find_item_position(items, i, offset) {
+            offset = new_offset;
             s.wln(format!("{pos},"));
         } else {
             s.wln(format!("{ty}::MAX,"));
@@ -94,6 +96,18 @@ fn print_lookup(s: &mut Writer, items: &[GenericThing]) {
     }
 
     s.wln("];");
+}
+
+fn find_item_position(items: &[GenericThing], entry: u32, offset: usize) -> Option<(usize, usize)> {
+    for (i, item) in items[offset..].iter().enumerate() {
+        if item.entry == entry {
+            return Some((offset + i, offset + i));
+        } else if item.entry > entry {
+            return None;
+        }
+    }
+
+    None
 }
 
 pub(crate) fn lookup_type(max_index: usize) -> &'static str {
