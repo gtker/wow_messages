@@ -152,7 +152,12 @@ pub(crate) fn print_base() {
         }
 
         let data = get_data_from_sqlite_file(&path, expansion);
-        write_to_files(&data, expansion);
+        std::thread::scope(|s| {
+            s.spawn(|| write_to_files(&data, expansion));
+
+            // Spells end up taking way longer than everything else so do it in parallel
+            write_spells(&data, expansion);
+        })
     }
 
     std::thread::scope(|s| {
@@ -173,7 +178,6 @@ fn write_to_files(data: &Data, expansion: Expansion) {
     write::write_pet_names(&expansion.base_extended_path(), data, expansion);
 
     write_items(data, expansion);
-    write_spells(data, expansion);
 }
 
 fn write_items(data: &Data, expansion: Expansion) {
