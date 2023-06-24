@@ -50,6 +50,12 @@ pub(crate) struct XpPerLevel {
 }
 
 pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path, expansion: Expansion) -> Data {
+    let spell_file = sqlite_file.to_path_buf();
+    let spell_thread = std::thread::spawn(move || {
+        let spell_conn = Connection::open(spell_file).unwrap();
+        get_spells(&spell_conn, expansion)
+    });
+
     let conn = Connection::open(sqlite_file).unwrap();
 
     let combinations = get_combinations(&conn);
@@ -63,7 +69,8 @@ pub(crate) fn get_data_from_sqlite_file(sqlite_file: &Path, expansion: Expansion
     let triggers = get_triggers(&conn, expansion);
     let pet_names = get_pet_name_data(&conn);
     let items = get_items(&conn, expansion);
-    let spells = get_spells(&conn, expansion);
+
+    let spells = spell_thread.join().unwrap();
 
     Data {
         exp_per_level,
