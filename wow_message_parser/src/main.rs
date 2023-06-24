@@ -111,6 +111,12 @@ const GITHUB_REPO_URL: &str = "https://github.com/gtker/wow_messages";
 fn main() {
     let base = std::thread::spawn(base_printer::print_base);
 
+    load_and_print_wowm_files();
+
+    base.join().unwrap();
+}
+
+fn load_and_print_wowm_files() {
     let mut o = ParsedObjects::empty();
 
     load_files(&wowm_directory("login"), &mut o);
@@ -133,8 +139,6 @@ fn main() {
     print_opcode_to_name();
 
     print_message_stats(&o);
-
-    base.join().unwrap();
 }
 
 fn print_main_types(o: &Objects) {
