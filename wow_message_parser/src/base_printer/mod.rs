@@ -146,14 +146,14 @@ pub(crate) fn print_base() {
     }
 
     let tbc_path = sqlite_dir.join("tbc.sqlite");
-    if !vanilla_path.exists() {
+    if !tbc_path.exists() {
         println!("Unable to find `tbc.sqlite` in `wow_db_sqlite` directory.");
         println!("Exiting.");
         std::process::exit(1);
     }
 
     let wrath_path = sqlite_dir.join("wotlk.sqlite");
-    if !vanilla_path.exists() {
+    if !wrath_path.exists() {
         println!("Unable to find `wotlk.sqlite` in `wow_db_sqlite` directory.");
         println!("Exiting.");
         std::process::exit(1);
