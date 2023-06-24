@@ -1,7 +1,9 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::vanilla::MovementInfo;
+use crate::vanilla::{
+    MovementFlags, MovementInfo, TransportInfo, Vector3d,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_knock_back_ack.wowm:3`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_knock_back_ack.wowm#L3):
@@ -36,7 +38,7 @@ impl crate::Message for CMSG_MOVE_KNOCK_BACK_ACK {
         // info: MovementInfo
         writeln!(s, "    info = {{").unwrap();
         // Members
-        writeln!(s, "        flags = {};", crate::vanilla::MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "        flags = {};", MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "        timestamp = {};", self.info.timestamp).unwrap();
         // position: Vector3d
         writeln!(s, "        position = {{").unwrap();

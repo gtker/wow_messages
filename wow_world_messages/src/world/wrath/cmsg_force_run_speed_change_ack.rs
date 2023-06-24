@@ -1,7 +1,9 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::wrath::MovementInfo;
+use crate::wrath::{
+    MovementFlags, MovementInfo, TransportInfo, Vector3d,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Sent to acknowledge the new speed. Reply to [`SMSG_FORCE_RUN_SPEED_CHANGE`](crate::tbc::SMSG_FORCE_RUN_SPEED_CHANGE).
@@ -39,7 +41,7 @@ impl crate::Message for CMSG_FORCE_RUN_SPEED_CHANGE_ACK {
         // info: MovementInfo
         writeln!(s, "    info = {{").unwrap();
         // Members
-        writeln!(s, "        flags = {};", crate::wrath::MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "        flags = {};", MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "        timestamp = {};", self.info.timestamp).unwrap();
         // position: Vector3d
         writeln!(s, "        position = {{").unwrap();

@@ -1,5 +1,6 @@
 use std::io::{Read, Write};
 
+use crate::Guid;
 use crate::vanilla::{
     MovementFlags, TransportInfo, Vector3d,
 };

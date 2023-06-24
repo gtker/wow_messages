@@ -2,7 +2,8 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    ClientCastFlags, ClientMovementData, MovementInfo, SpellCastTargets,
+    ClientCastFlags, ClientMovementData, MovementFlags, MovementInfo, SpellCastTargetFlags, 
+    SpellCastTargets, TransportInfo, Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -50,11 +51,11 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
         writeln!(s, "    cast_count = {};", self.cast_count).unwrap();
         writeln!(s, "    id = {};", self.id).unwrap();
-        writeln!(s, "    cast_flags = {};", crate::wrath::ClientCastFlags::try_from(self.cast_flags.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    cast_flags = {};", ClientCastFlags::try_from(self.cast_flags.as_int()).unwrap().as_test_case_value()).unwrap();
         // targets: SpellCastTargets
         writeln!(s, "    targets = {{").unwrap();
         // Members
-        writeln!(s, "        target_flags = {};", crate::wrath::SpellCastTargetFlags::new(self.targets.target_flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "        target_flags = {};", SpellCastTargetFlags::new(self.targets.target_flags.as_int()).as_test_case_value()).unwrap();
         if let Some(if_statement) = &self.targets.target_flags.get_unit() {
             match if_statement {
                 crate::wrath::SpellCastTargets_SpellCastTargetFlags_Unit::Unit {
@@ -136,7 +137,7 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
             } => {
                 writeln!(s, "    {}", if elevation.to_string().contains('.') { elevation.to_string() } else { format!("{}.0", elevation) }).unwrap();
                 writeln!(s, "    {}", if speed.to_string().contains('.') { speed.to_string() } else { format!("{}.0", speed) }).unwrap();
-                writeln!(s, "    movement_data = {};", crate::wrath::ClientMovementData::try_from(movement_data.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    movement_data = {};", ClientMovementData::try_from(movement_data.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &movement_data {
                     crate::wrath::CMSG_PET_CAST_SPELL_ClientMovementData::Present {
                         info,
@@ -148,7 +149,7 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
                         // info: MovementInfo
                         writeln!(s, "    info = {{").unwrap();
                         // Members
-                        writeln!(s, "        flags = {};", crate::wrath::MovementFlags::new(info.flags.as_int()).as_test_case_value()).unwrap();
+                        writeln!(s, "        flags = {};", MovementFlags::new(info.flags.as_int()).as_test_case_value()).unwrap();
                         writeln!(s, "        timestamp = {};", info.timestamp).unwrap();
                         // position: Vector3d
                         writeln!(s, "        position = {{").unwrap();

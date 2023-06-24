@@ -37,7 +37,7 @@ impl crate::Message for SMSG_PET_NAME_INVALID {
         // Members
         writeln!(s, "    reason = {};", self.reason.as_test_case_value()).unwrap();
         writeln!(s, "    name = \"{}\";", self.name).unwrap();
-        writeln!(s, "    included = {};", crate::tbc::DeclinedPetNameIncluded::try_from(self.included.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    included = {};", DeclinedPetNameIncluded::try_from(self.included.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.included {
             crate::tbc::SMSG_PET_NAME_INVALID_DeclinedPetNameIncluded::Included {
                 declined_names,

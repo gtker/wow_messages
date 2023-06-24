@@ -20,7 +20,7 @@ mod test_case_string;
 pub(crate) fn print_struct(e: &Container, o: &Objects) -> Writer {
     let mut s = Writer::new();
 
-    print_includes(&mut s, e);
+    print_includes(&mut s, e, o);
 
     print_declaration(&mut s, e, o);
 
@@ -37,7 +37,7 @@ pub(crate) fn print_struct(e: &Container, o: &Objects) -> Writer {
     s
 }
 
-fn print_includes(s: &mut Writer, e: &Container) {
+fn print_includes(s: &mut Writer, e: &Container, o: &Objects) {
     match e.container_type() {
         ContainerType::CLogin(_) => {
             s.wln(format!("use crate::{CLIENT_MESSAGE_TRAIT_NAME};"));
@@ -59,7 +59,7 @@ fn print_includes(s: &mut Writer, e: &Container) {
 
     let (version, _) = e.tags().first_and_main_versions();
 
-    let imports = e.get_imports(version);
+    let imports = e.get_imports(version, e.should_print_test_case_string(o));
 
     for (prefix, types) in &imports {
         if types.len() > 1 {

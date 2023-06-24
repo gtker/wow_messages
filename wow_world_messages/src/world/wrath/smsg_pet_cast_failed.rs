@@ -80,7 +80,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
         // Members
         writeln!(s, "    cast_count = {};", self.cast_count).unwrap();
         writeln!(s, "    id = {};", self.id).unwrap();
-        writeln!(s, "    result = {};", crate::wrath::SpellCastResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    result = {};", SpellCastResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
         writeln!(s, "    multiple_casts = {};", if self.multiple_casts { "TRUE" } else { "FALSE" }).unwrap();
         match &self.result {
             crate::wrath::SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClass {

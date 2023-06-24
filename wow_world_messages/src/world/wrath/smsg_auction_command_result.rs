@@ -37,7 +37,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
         // Members
         writeln!(s, "    auction_id = {};", self.auction_id).unwrap();
         writeln!(s, "    action = {};", self.action.as_test_case_value()).unwrap();
-        writeln!(s, "    result = {};", crate::vanilla::AuctionCommandResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    result = {};", AuctionCommandResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.result {
             crate::wrath::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::ErrInventory {
                 inventory_result,

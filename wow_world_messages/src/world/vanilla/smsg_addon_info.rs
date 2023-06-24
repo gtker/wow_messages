@@ -1,6 +1,8 @@
 use std::io::{Read, Write};
 
-use crate::vanilla::Addon;
+use crate::vanilla::{
+    Addon, AddonType, InfoBlock, KeyVersion, UrlInfo,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm:60`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/smsg_addon_info.wowm#L60):
@@ -31,13 +33,13 @@ impl crate::Message for SMSG_ADDON_INFO {
             writeln!(s, "{{").unwrap();
             // Members
             writeln!(s, "        addon_type = {};", v.addon_type.as_test_case_value()).unwrap();
-            writeln!(s, "        info_block = {};", crate::vanilla::InfoBlock::try_from(v.info_block.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        info_block = {};", InfoBlock::try_from(v.info_block.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.info_block {
                 crate::vanilla::Addon_InfoBlock::Available {
                     key_version,
                     update_available_flag,
                 } => {
-                    writeln!(s, "        key_version = {};", crate::vanilla::KeyVersion::try_from(key_version.as_int()).unwrap().as_test_case_value()).unwrap();
+                    writeln!(s, "        key_version = {};", KeyVersion::try_from(key_version.as_int()).unwrap().as_test_case_value()).unwrap();
                     match &key_version {
                         crate::vanilla::Addon_KeyVersion::One {
                             public_key,
@@ -128,7 +130,7 @@ impl crate::Message for SMSG_ADDON_INFO {
                 _ => {}
             }
 
-            writeln!(s, "        url_info = {};", crate::vanilla::UrlInfo::try_from(v.url_info.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        url_info = {};", UrlInfo::try_from(v.url_info.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.url_info {
                 crate::vanilla::Addon_UrlInfo::Available {
                     url,

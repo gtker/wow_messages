@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
 
-use crate::wrath::GuildLogEvent;
+use crate::Guid;
+use crate::wrath::{
+    GuildEvent, GuildLogEvent,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/queries/msg_guild_event_log_query.wowm:34`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/queries/msg_guild_event_log_query.wowm#L34):
@@ -32,7 +35,7 @@ impl crate::Message for MSG_GUILD_EVENT_LOG_QUERY_Server {
         for v in self.events.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "        event = {};", crate::tbc::GuildEvent::try_from(v.event.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        event = {};", GuildEvent::try_from(v.event.as_int()).unwrap().as_test_case_value()).unwrap();
             writeln!(s, "        player1 = {};", v.player1.guid()).unwrap();
             match &v.event {
                 crate::tbc::GuildLogEvent_GuildEvent::Joined {

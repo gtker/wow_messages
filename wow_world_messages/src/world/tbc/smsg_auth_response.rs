@@ -37,7 +37,7 @@ impl crate::Message for SMSG_AUTH_RESPONSE {
 
         writeln!(s, "test SMSG_AUTH_RESPONSE {{").unwrap();
         // Members
-        writeln!(s, "    result = {};", crate::tbc::WorldResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    result = {};", WorldResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.result {
             crate::tbc::SMSG_AUTH_RESPONSE_WorldResult::AuthOk {
                 billing_flags,

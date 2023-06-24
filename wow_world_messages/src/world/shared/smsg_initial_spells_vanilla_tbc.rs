@@ -2,6 +2,7 @@ use std::io::{Read, Write};
 
 use crate::shared::cooldown_spell_vanilla_tbc_wrath::CooldownSpell;
 use crate::shared::initial_spell_vanilla_tbc::InitialSpell;
+use std::time::Duration;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm:25`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_initial_spells.wowm#L25):

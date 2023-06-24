@@ -2,8 +2,8 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::vanilla::{
-    Area, CharacterFlags, CharacterGear, Class, CreatureFamily, Gender, Map, Race, 
-    Vector3d,
+    Area, CharacterFlags, CharacterGear, Class, CreatureFamily, Gender, InventoryType, 
+    Map, Race, Vector3d,
 };
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 

@@ -91,7 +91,7 @@ impl crate::Message for SMSG_PARTY_MEMBER_STATS_FULL {
         writeln!(s, "test SMSG_PARTY_MEMBER_STATS_FULL {{").unwrap();
         // Members
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-        writeln!(s, "    mask = {};", crate::tbc::GroupUpdateFlags::new(self.mask.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "    mask = {};", GroupUpdateFlags::new(self.mask.as_int()).as_test_case_value()).unwrap();
         if let Some(if_statement) = &self.mask.get_status() {
             writeln!(s, "    status = {};", if_statement.status.as_test_case_value()).unwrap();
         }

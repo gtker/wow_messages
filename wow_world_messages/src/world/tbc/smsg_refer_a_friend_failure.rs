@@ -29,7 +29,7 @@ impl crate::Message for SMSG_REFER_A_FRIEND_FAILURE {
 
         writeln!(s, "test SMSG_REFER_A_FRIEND_FAILURE {{").unwrap();
         // Members
-        writeln!(s, "    error = {};", crate::tbc::ReferAFriendError::try_from(self.error.as_int()as u8).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    error = {};", ReferAFriendError::try_from(self.error.as_int()as u8).unwrap().as_test_case_value()).unwrap();
         match &self.error {
             crate::tbc::SMSG_REFER_A_FRIEND_FAILURE_ReferAFriendError::NotInGroup {
                 target_name,

@@ -1,5 +1,6 @@
 use std::io::{Read, Write};
 
+use crate::Guid;
 use crate::wrath::EquipmentSet;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

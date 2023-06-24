@@ -75,7 +75,7 @@ impl crate::Message for SMSG_MESSAGECHAT {
 
         writeln!(s, "test SMSG_MESSAGECHAT {{").unwrap();
         // Members
-        writeln!(s, "    chat_type = {};", crate::wrath::ChatType::try_from(self.chat_type.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    chat_type = {};", ChatType::try_from(self.chat_type.as_int()).unwrap().as_test_case_value()).unwrap();
         writeln!(s, "    language = {};", self.language.as_test_case_value()).unwrap();
         writeln!(s, "    sender = {};", self.sender.guid()).unwrap();
         writeln!(s, "    flags = {};", self.flags).unwrap();

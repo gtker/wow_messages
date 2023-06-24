@@ -73,7 +73,7 @@ impl crate::Message for SMSG_ATTACKERSTATEUPDATE {
 
         writeln!(s, "test SMSG_ATTACKERSTATEUPDATE {{").unwrap();
         // Members
-        writeln!(s, "    hit_info = {};", crate::wrath::HitInfo::new(self.hit_info.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "    hit_info = {};", HitInfo::new(self.hit_info.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "    attacker = {};", self.attacker.guid()).unwrap();
         writeln!(s, "    target = {};", self.target.guid()).unwrap();
         writeln!(s, "    total_damage = {};", self.total_damage).unwrap();

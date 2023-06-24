@@ -66,7 +66,7 @@ impl ServerMessage for CMD_AUTH_LOGON_PROOF_Server {
 
         writeln!(s, "test CMD_AUTH_LOGON_PROOF_Server {{").unwrap();
         // Members
-        writeln!(s, "    result = {};", crate::logon::version_2::LoginResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    result = {};", LoginResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.result {
             crate::logon::version_5::CMD_AUTH_LOGON_PROOF_Server_LoginResult::Success {
                 hardware_survey_id,

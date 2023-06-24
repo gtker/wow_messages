@@ -3,7 +3,8 @@ use std::io::{Read, Write};
 use crate::vanilla::{
     AllowedClass, AllowedRace, Area, BagFamily, Bonding, Faction, InventoryType, 
     ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemQuality, ItemSet, ItemSpells, 
-    ItemStat, Language, Map, PageTextMaterial, SheatheType, Skill,
+    ItemStat, ItemStatType, Language, Map, PageTextMaterial, SheatheType, Skill, 
+    SpellSchool, SpellTriggerType,
 };
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 use wow_world_base::shared::level_vanilla_tbc_wrath::Level;

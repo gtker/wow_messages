@@ -1,7 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    LfgAvailableDungeon, LfgJoinLockedDungeon,
+    LfgAvailableDungeon, LfgJoinLockedDungeon, LfgQuestReward,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

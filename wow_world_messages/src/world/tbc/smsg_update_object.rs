@@ -1,6 +1,10 @@
 use std::io::{Read, Write};
 
-use crate::tbc::Object;
+use crate::Guid;
+use crate::tbc::{
+    MovementBlock, MovementFlags, Object, ObjectType, SplineFlag, TransportInfo, 
+    UpdateFlag, UpdateMask, UpdateType, Vector3d,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm:117`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gameobject/smsg_update_object_2_4_3.wowm#L117):
@@ -35,7 +39,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
         for v in self.objects.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "        update_type = {};", crate::vanilla::UpdateType::try_from(v.update_type.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        update_type = {};", UpdateType::try_from(v.update_type.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.update_type {
                 crate::tbc::Object_UpdateType::Values {
                     guid1,
@@ -52,7 +56,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                     // movement1: MovementBlock
                     writeln!(s, "        movement1 = {{").unwrap();
                     // Members
-                    writeln!(s, "            update_flag = {};", crate::vanilla::UpdateFlag::new(movement1.update_flag.as_int()).as_test_case_value()).unwrap();
+                    writeln!(s, "            update_flag = {};", UpdateFlag::new(movement1.update_flag.as_int()).as_test_case_value()).unwrap();
                     if let Some(if_statement) = &movement1.update_flag.get_living() {
                         match if_statement {
                             crate::tbc::MovementBlock_UpdateFlag_Living::Living {
@@ -71,7 +75,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 turn_rate,
                                 walking_speed,
                             } => {
-                                writeln!(s, "            flags = {};", crate::tbc::MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
+                                writeln!(s, "            flags = {};", MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
                                 writeln!(s, "            extra_flags = {};", extra_flags).unwrap();
                                 writeln!(s, "            timestamp = {};", timestamp).unwrap();
                                 // living_position: Vector3d
@@ -138,7 +142,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "    {}", if backwards_swimming_speed.to_string().contains('.') { backwards_swimming_speed.to_string() } else { format!("{}.0", backwards_swimming_speed) }).unwrap();
                                 writeln!(s, "    {}", if turn_rate.to_string().contains('.') { turn_rate.to_string() } else { format!("{}.0", turn_rate) }).unwrap();
                                 if let Some(if_statement) = &flags.get_spline_enabled() {
-                                    writeln!(s, "            spline_flags = {};", crate::vanilla::SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
+                                    writeln!(s, "            spline_flags = {};", SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
                                     if let Some(if_statement) = &if_statement.spline_flags.get_final_angle() {
                                         match if_statement {
                                             crate::tbc::MovementBlock_SplineFlag_FinalAngle::FinalAngle {
@@ -240,7 +244,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                     // movement2: MovementBlock
                     writeln!(s, "        movement2 = {{").unwrap();
                     // Members
-                    writeln!(s, "            update_flag = {};", crate::vanilla::UpdateFlag::new(movement2.update_flag.as_int()).as_test_case_value()).unwrap();
+                    writeln!(s, "            update_flag = {};", UpdateFlag::new(movement2.update_flag.as_int()).as_test_case_value()).unwrap();
                     if let Some(if_statement) = &movement2.update_flag.get_living() {
                         match if_statement {
                             crate::tbc::MovementBlock_UpdateFlag_Living::Living {
@@ -259,7 +263,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 turn_rate,
                                 walking_speed,
                             } => {
-                                writeln!(s, "            flags = {};", crate::tbc::MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
+                                writeln!(s, "            flags = {};", MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
                                 writeln!(s, "            extra_flags = {};", extra_flags).unwrap();
                                 writeln!(s, "            timestamp = {};", timestamp).unwrap();
                                 // living_position: Vector3d
@@ -326,7 +330,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "    {}", if backwards_swimming_speed.to_string().contains('.') { backwards_swimming_speed.to_string() } else { format!("{}.0", backwards_swimming_speed) }).unwrap();
                                 writeln!(s, "    {}", if turn_rate.to_string().contains('.') { turn_rate.to_string() } else { format!("{}.0", turn_rate) }).unwrap();
                                 if let Some(if_statement) = &flags.get_spline_enabled() {
-                                    writeln!(s, "            spline_flags = {};", crate::vanilla::SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
+                                    writeln!(s, "            spline_flags = {};", SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
                                     if let Some(if_statement) = &if_statement.spline_flags.get_final_angle() {
                                         match if_statement {
                                             crate::tbc::MovementBlock_SplineFlag_FinalAngle::FinalAngle {
@@ -429,7 +433,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                     // movement2: MovementBlock
                     writeln!(s, "        movement2 = {{").unwrap();
                     // Members
-                    writeln!(s, "            update_flag = {};", crate::vanilla::UpdateFlag::new(movement2.update_flag.as_int()).as_test_case_value()).unwrap();
+                    writeln!(s, "            update_flag = {};", UpdateFlag::new(movement2.update_flag.as_int()).as_test_case_value()).unwrap();
                     if let Some(if_statement) = &movement2.update_flag.get_living() {
                         match if_statement {
                             crate::tbc::MovementBlock_UpdateFlag_Living::Living {
@@ -448,7 +452,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 turn_rate,
                                 walking_speed,
                             } => {
-                                writeln!(s, "            flags = {};", crate::tbc::MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
+                                writeln!(s, "            flags = {};", MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
                                 writeln!(s, "            extra_flags = {};", extra_flags).unwrap();
                                 writeln!(s, "            timestamp = {};", timestamp).unwrap();
                                 // living_position: Vector3d
@@ -515,7 +519,7 @@ impl crate::Message for SMSG_UPDATE_OBJECT {
                                 writeln!(s, "    {}", if backwards_swimming_speed.to_string().contains('.') { backwards_swimming_speed.to_string() } else { format!("{}.0", backwards_swimming_speed) }).unwrap();
                                 writeln!(s, "    {}", if turn_rate.to_string().contains('.') { turn_rate.to_string() } else { format!("{}.0", turn_rate) }).unwrap();
                                 if let Some(if_statement) = &flags.get_spline_enabled() {
-                                    writeln!(s, "            spline_flags = {};", crate::vanilla::SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
+                                    writeln!(s, "            spline_flags = {};", SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
                                     if let Some(if_statement) = &if_statement.spline_flags.get_final_angle() {
                                         match if_statement {
                                             crate::tbc::MovementBlock_SplineFlag_FinalAngle::FinalAngle {

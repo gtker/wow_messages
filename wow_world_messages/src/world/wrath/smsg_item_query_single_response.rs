@@ -4,7 +4,7 @@ use crate::wrath::{
     AllowedClass, AllowedRace, Area, BagFamily, Bonding, Faction, InventoryType, 
     ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemFlag2, ItemQuality, ItemSet, 
     ItemSocket, ItemSpells, ItemStat, Language, Map, PageTextMaterial, SheatheType, 
-    Skill,
+    Skill, SpellSchool, SpellTriggerType,
 };
 use std::time::Duration;
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;

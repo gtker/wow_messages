@@ -37,7 +37,7 @@ impl crate::Message for SMSG_LOG_XPGAIN {
         // Members
         writeln!(s, "    target = {};", self.target.guid()).unwrap();
         writeln!(s, "    total_exp = {};", self.total_exp).unwrap();
-        writeln!(s, "    exp_type = {};", crate::vanilla::ExperienceAwardType::try_from(self.exp_type.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    exp_type = {};", ExperienceAwardType::try_from(self.exp_type.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.exp_type {
             crate::vanilla::SMSG_LOG_XPGAIN_ExperienceAwardType::NonKill {
                 exp_group_bonus,

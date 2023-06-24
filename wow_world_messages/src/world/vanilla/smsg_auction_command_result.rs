@@ -57,12 +57,12 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
         writeln!(s, "test SMSG_AUCTION_COMMAND_RESULT {{").unwrap();
         // Members
         writeln!(s, "    auction_id = {};", self.auction_id).unwrap();
-        writeln!(s, "    action = {};", crate::vanilla::AuctionCommandAction::try_from(self.action.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    action = {};", AuctionCommandAction::try_from(self.action.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.action {
             crate::vanilla::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction::Started {
                 result2,
             } => {
-                writeln!(s, "    result2 = {};", crate::vanilla::AuctionCommandResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    result2 = {};", AuctionCommandResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &result2 {
                     crate::vanilla::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrInventory {
                         inventory_result2,
@@ -85,7 +85,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
             crate::vanilla::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction::Removed {
                 result2,
             } => {
-                writeln!(s, "    result2 = {};", crate::vanilla::AuctionCommandResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    result2 = {};", AuctionCommandResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &result2 {
                     crate::vanilla::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResultTwo::ErrInventory {
                         inventory_result2,
@@ -108,7 +108,7 @@ impl crate::Message for SMSG_AUCTION_COMMAND_RESULT {
             crate::vanilla::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandAction::BidPlaced {
                 result,
             } => {
-                writeln!(s, "    result = {};", crate::vanilla::AuctionCommandResult::try_from(result.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    result = {};", AuctionCommandResult::try_from(result.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &result {
                     crate::vanilla::SMSG_AUCTION_COMMAND_RESULT_AuctionCommandResult::Ok {
                         auction_outbid1,

@@ -1,6 +1,10 @@
 use std::io::{Read, Write};
 
-use crate::vanilla::Friend;
+use crate::Guid;
+use crate::vanilla::{
+    Area, Class, Friend, FriendStatus,
+};
+use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_friend_list.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_friend_list.wowm#L21):
@@ -33,7 +37,7 @@ impl crate::Message for SMSG_FRIEND_LIST {
             writeln!(s, "{{").unwrap();
             // Members
             writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        status = {};", crate::vanilla::FriendStatus::try_from(v.status.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        status = {};", FriendStatus::try_from(v.status.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.status {
                 crate::vanilla::Friend_FriendStatus::Online {
                     area,

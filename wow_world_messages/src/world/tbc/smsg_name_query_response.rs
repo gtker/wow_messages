@@ -52,7 +52,7 @@ impl crate::Message for SMSG_NAME_QUERY_RESPONSE {
         writeln!(s, "    race = {};", self.race.as_test_case_value()).unwrap();
         writeln!(s, "    gender = {};", self.gender.as_test_case_value()).unwrap();
         writeln!(s, "    class = {};", self.class.as_test_case_value()).unwrap();
-        writeln!(s, "    has_declined_names = {};", crate::tbc::DeclinedNames::try_from(self.has_declined_names.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    has_declined_names = {};", DeclinedNames::try_from(self.has_declined_names.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.has_declined_names {
             crate::tbc::SMSG_NAME_QUERY_RESPONSE_DeclinedNames::Yes {
                 declined_names,

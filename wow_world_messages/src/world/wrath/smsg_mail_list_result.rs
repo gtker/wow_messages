@@ -1,6 +1,10 @@
 use std::io::{Read, Write};
 
-use crate::wrath::Mail;
+use crate::Guid;
+use crate::wrath::{
+    Mail, MailListItem, MailListItemEnchant, MailType,
+};
+use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/mail/smsg_mail_list_result.wowm:176`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/mail/smsg_mail_list_result.wowm#L176):
@@ -37,7 +41,7 @@ impl crate::Message for SMSG_MAIL_LIST_RESULT {
             writeln!(s, "{{").unwrap();
             // Members
             writeln!(s, "        message_id = {};", v.message_id).unwrap();
-            writeln!(s, "        message_type = {};", crate::vanilla::MailType::try_from(v.message_type.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        message_type = {};", MailType::try_from(v.message_type.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.message_type {
                 crate::wrath::Mail_MailType::Normal {
                     sender,

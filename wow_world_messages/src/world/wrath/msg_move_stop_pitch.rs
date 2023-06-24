@@ -1,7 +1,9 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::wrath::MovementInfo;
+use crate::wrath::{
+    MovementFlags, MovementInfo, TransportInfo, Vector3d,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/msg/msg_move_stop_pitch.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/msg/msg_move_stop_pitch.wowm#L13):

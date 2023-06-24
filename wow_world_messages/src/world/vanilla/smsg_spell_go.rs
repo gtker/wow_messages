@@ -2,7 +2,8 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::vanilla::{
-    CastFlags, SpellCastTargets, SpellMiss,
+    CastFlags, SpellCastTargetFlags, SpellCastTargets, SpellMiss, SpellMissInfo, 
+    Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -51,7 +52,7 @@ impl crate::Message for SMSG_SPELL_GO {
         writeln!(s, "    cast_item = {};", self.cast_item.guid()).unwrap();
         writeln!(s, "    caster = {};", self.caster.guid()).unwrap();
         writeln!(s, "    spell = {};", self.spell).unwrap();
-        writeln!(s, "    flags = {};", crate::vanilla::CastFlags::new(self.flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "    flags = {};", CastFlags::new(self.flags.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "    amount_of_hits = {};", self.hits.len()).unwrap();
         write!(s, "    hits = [").unwrap();
         for v in self.hits.as_slice() {
@@ -72,7 +73,7 @@ impl crate::Message for SMSG_SPELL_GO {
         // targets: SpellCastTargets
         writeln!(s, "    targets = {{").unwrap();
         // Members
-        writeln!(s, "        target_flags = {};", crate::vanilla::SpellCastTargetFlags::new(self.targets.target_flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "        target_flags = {};", SpellCastTargetFlags::new(self.targets.target_flags.as_int()).as_test_case_value()).unwrap();
         if let Some(if_statement) = &self.targets.target_flags.get_unit() {
             writeln!(s, "        unit_target = {};", if_statement.unit_target.guid()).unwrap();
         }

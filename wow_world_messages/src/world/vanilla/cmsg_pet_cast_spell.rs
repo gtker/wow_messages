@@ -1,7 +1,9 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::vanilla::SpellCastTargets;
+use crate::vanilla::{
+    SpellCastTargetFlags, SpellCastTargets, Vector3d,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/cmsg_pet_cast_spell.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/cmsg_pet_cast_spell.wowm#L1):
@@ -36,7 +38,7 @@ impl crate::Message for CMSG_PET_CAST_SPELL {
         // targets: SpellCastTargets
         writeln!(s, "    targets = {{").unwrap();
         // Members
-        writeln!(s, "        target_flags = {};", crate::vanilla::SpellCastTargetFlags::new(self.targets.target_flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "        target_flags = {};", SpellCastTargetFlags::new(self.targets.target_flags.as_int()).as_test_case_value()).unwrap();
         if let Some(if_statement) = &self.targets.target_flags.get_unit() {
             writeln!(s, "        unit_target = {};", if_statement.unit_target.guid()).unwrap();
         }

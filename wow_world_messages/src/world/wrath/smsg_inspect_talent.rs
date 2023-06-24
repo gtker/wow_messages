@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    InspectTalentGearMask, InspectTalentSpec,
+    InspectTalent, InspectTalentGearMask, InspectTalentSpec, Talent,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

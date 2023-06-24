@@ -1,7 +1,8 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    GuildBankContentResult, GuildBankSlot, GuildBankTab, GuildBankTabResult,
+    GuildBankContentResult, GuildBankSlot, GuildBankSocket, GuildBankTab, GuildBankTabResult, 
+    VariableItemRandomProperty,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -47,7 +48,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
         writeln!(s, "    bank_balance = {};", self.bank_balance).unwrap();
         writeln!(s, "    tab_id = {};", self.tab_id).unwrap();
         writeln!(s, "    amount_of_allowed_item_withdraws = {};", self.amount_of_allowed_item_withdraws).unwrap();
-        writeln!(s, "    tab_result = {};", crate::tbc::GuildBankTabResult::try_from(self.tab_result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    tab_result = {};", GuildBankTabResult::try_from(self.tab_result.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.tab_result {
             crate::wrath::SMSG_GUILD_BANK_LIST_GuildBankTabResult::Present {
                 tabs,
@@ -67,7 +68,7 @@ impl crate::Message for SMSG_GUILD_BANK_LIST {
             _ => {}
         }
 
-        writeln!(s, "    content_result = {};", crate::wrath::GuildBankContentResult::try_from(self.content_result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    content_result = {};", GuildBankContentResult::try_from(self.content_result.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.content_result {
             crate::wrath::SMSG_GUILD_BANK_LIST_GuildBankContentResult::Present {
                 slot_updates,

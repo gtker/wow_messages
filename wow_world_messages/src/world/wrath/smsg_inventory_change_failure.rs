@@ -36,7 +36,7 @@ impl crate::Message for SMSG_INVENTORY_CHANGE_FAILURE {
 
         writeln!(s, "test SMSG_INVENTORY_CHANGE_FAILURE {{").unwrap();
         // Members
-        writeln!(s, "    result = {};", crate::wrath::InventoryResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    result = {};", InventoryResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.result {
             crate::wrath::SMSG_INVENTORY_CHANGE_FAILURE_InventoryResult::CantEquipLevelI {
                 bag_type_subclass,

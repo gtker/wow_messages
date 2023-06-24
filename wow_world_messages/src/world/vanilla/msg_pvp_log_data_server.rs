@@ -1,7 +1,8 @@
 use std::io::{Read, Write};
 
+use crate::Guid;
 use crate::vanilla::{
-    BattlegroundEndStatus, BattlegroundPlayer, BattlegroundWinner,
+    BattlegroundEndStatus, BattlegroundPlayer, BattlegroundWinner, PvpRank,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -34,7 +35,7 @@ impl crate::Message for MSG_PVP_LOG_DATA_Server {
 
         writeln!(s, "test MSG_PVP_LOG_DATA_Server {{").unwrap();
         // Members
-        writeln!(s, "    status = {};", crate::vanilla::BattlegroundEndStatus::try_from(self.status.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    status = {};", BattlegroundEndStatus::try_from(self.status.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.status {
             crate::vanilla::MSG_PVP_LOG_DATA_Server_BattlegroundEndStatus::Ended {
                 winner,

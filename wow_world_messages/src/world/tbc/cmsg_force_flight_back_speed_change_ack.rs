@@ -1,7 +1,9 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::tbc::MovementInfo;
+use crate::tbc::{
+    MovementFlags, MovementInfo, TransportInfo, Vector3d,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_force_flight_back_speed_change_ack.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_force_flight_back_speed_change_ack.wowm#L1):
@@ -38,7 +40,7 @@ impl crate::Message for CMSG_FORCE_FLIGHT_BACK_SPEED_CHANGE_ACK {
         // info: MovementInfo
         writeln!(s, "    info = {{").unwrap();
         // Members
-        writeln!(s, "        flags = {};", crate::tbc::MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "        flags = {};", MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "        extra_flags = {};", self.info.extra_flags).unwrap();
         writeln!(s, "        timestamp = {};", self.info.timestamp).unwrap();
         // position: Vector3d

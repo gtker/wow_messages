@@ -33,7 +33,7 @@ impl crate::Message for MSG_CORPSE_QUERY_Server {
 
         writeln!(s, "test MSG_CORPSE_QUERY_Server {{").unwrap();
         // Members
-        writeln!(s, "    result = {};", crate::vanilla::CorpseQueryResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    result = {};", CorpseQueryResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.result {
             crate::tbc::MSG_CORPSE_QUERY_Server_CorpseQueryResult::Found {
                 corpse_map,

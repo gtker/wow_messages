@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
 
-use crate::wrath::MovementInfo;
+use crate::Guid;
+use crate::wrath::{
+    MovementFlags, MovementInfo, TransportInfo, Vector3d,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/cmsg/cmsg_move_set_fly.wowm:7`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/cmsg/cmsg_move_set_fly.wowm#L7):
@@ -29,7 +32,7 @@ impl crate::Message for CMSG_MOVE_SET_FLY {
         // info: MovementInfo
         writeln!(s, "    info = {{").unwrap();
         // Members
-        writeln!(s, "        flags = {};", crate::wrath::MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "        flags = {};", MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "        timestamp = {};", self.info.timestamp).unwrap();
         // position: Vector3d
         writeln!(s, "        position = {{").unwrap();

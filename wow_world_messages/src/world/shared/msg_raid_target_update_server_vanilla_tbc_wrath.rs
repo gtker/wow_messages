@@ -1,6 +1,8 @@
 use std::io::{Read, Write};
 
+use crate::Guid;
 use crate::shared::raid_target_update_vanilla_tbc_wrath::RaidTargetUpdate;
+use wow_world_base::shared::raid_target_index_vanilla_tbc_wrath::RaidTargetIndex;
 use wow_world_base::shared::raid_target_update_type_vanilla_tbc_wrath::RaidTargetUpdateType;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -33,7 +35,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Server {
 
         writeln!(s, "test MSG_RAID_TARGET_UPDATE_Server {{").unwrap();
         // Members
-        writeln!(s, "    update_type = {};", crate::vanilla::RaidTargetUpdateType::try_from(self.update_type.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    update_type = {};", RaidTargetUpdateType::try_from(self.update_type.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.update_type {
             crate::vanilla::MSG_RAID_TARGET_UPDATE_Server_RaidTargetUpdateType::Partial {
                 raid_target,

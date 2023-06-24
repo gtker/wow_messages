@@ -48,7 +48,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         writeln!(s, "test SMSG_BATTLEFIELD_STATUS {{").unwrap();
         // Members
         writeln!(s, "    queue_slot = {};", self.queue_slot).unwrap();
-        writeln!(s, "    map = {};", crate::vanilla::Map::try_from(self.map.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    map = {};", Map::try_from(self.map.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.map {
             crate::vanilla::SMSG_BATTLEFIELD_STATUS_Map::Kalimdor {
                 bracket,
@@ -57,7 +57,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -89,7 +89,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -121,7 +121,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -153,7 +153,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -185,7 +185,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -217,7 +217,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -249,7 +249,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -281,7 +281,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -313,7 +313,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -345,7 +345,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -377,7 +377,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -409,7 +409,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -441,7 +441,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -473,7 +473,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -505,7 +505,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -537,7 +537,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -569,7 +569,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -601,7 +601,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -633,7 +633,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -665,7 +665,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -697,7 +697,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -729,7 +729,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -761,7 +761,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -793,7 +793,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -825,7 +825,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -857,7 +857,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -889,7 +889,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -921,7 +921,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -953,7 +953,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -985,7 +985,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -1017,7 +1017,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -1049,7 +1049,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -1081,7 +1081,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -1113,7 +1113,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -1145,7 +1145,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -1177,7 +1177,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -1209,7 +1209,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -1241,7 +1241,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -1273,7 +1273,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -1305,7 +1305,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -1337,7 +1337,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -1369,7 +1369,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,
@@ -1401,7 +1401,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
             } => {
                 writeln!(s, "    bracket = {};", bracket.as_test_case_value()).unwrap();
                 writeln!(s, "    client_instance_id = {};", client_instance_id).unwrap();
-                writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    status_id = {};", StatusId::try_from(status_id.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &status_id {
                     crate::vanilla::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                         average_wait_time_in_ms,

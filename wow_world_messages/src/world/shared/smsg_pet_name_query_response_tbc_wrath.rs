@@ -38,7 +38,7 @@ impl crate::Message for SMSG_PET_NAME_QUERY_RESPONSE {
         writeln!(s, "    pet_number = {};", self.pet_number).unwrap();
         writeln!(s, "    name = \"{}\";", self.name).unwrap();
         writeln!(s, "    pet_name_timestamp = {};", self.pet_name_timestamp).unwrap();
-        writeln!(s, "    names = {};", crate::tbc::PetQueryDisabledNames::try_from(self.names.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    names = {};", PetQueryDisabledNames::try_from(self.names.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.names {
             crate::tbc::SMSG_PET_NAME_QUERY_RESPONSE_PetQueryDisabledNames::Present {
                 declined_names,

@@ -32,7 +32,7 @@ impl crate::Message for SMSG_CHAR_RENAME {
 
         writeln!(s, "test SMSG_CHAR_RENAME {{").unwrap();
         // Members
-        writeln!(s, "    result = {};", crate::wrath::WorldResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    result = {};", WorldResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.result {
             crate::wrath::SMSG_CHAR_RENAME_WorldResult::ResponseSuccess {
                 character,

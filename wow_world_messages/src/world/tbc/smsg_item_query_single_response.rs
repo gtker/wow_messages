@@ -3,7 +3,8 @@ use std::io::{Read, Write};
 use crate::tbc::{
     AllowedClass, AllowedRace, Area, BagFamily, Bonding, Faction, InventoryType, 
     ItemClassAndSubClass, ItemDamageType, ItemFlag, ItemQuality, ItemSet, ItemSocket, 
-    ItemSpells, ItemStat, Language, Map, PageTextMaterial, SheatheType, Skill,
+    ItemSpells, ItemStat, Language, Map, PageTextMaterial, SheatheType, Skill, SpellSchool, 
+    SpellTriggerType,
 };
 use std::time::Duration;
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;

@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
 
-use crate::wrath::MovementInfo;
+use crate::Guid;
+use crate::wrath::{
+    MovementFlags, MovementInfo, TransportInfo, Vector3d,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// There does not appear to be a CMSG version of this MSG.
@@ -30,7 +33,7 @@ impl crate::Message for MSG_MOVE_ROOT_Server {
         // info: MovementInfo
         writeln!(s, "    info = {{").unwrap();
         // Members
-        writeln!(s, "        flags = {};", crate::wrath::MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "        flags = {};", MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "        timestamp = {};", self.info.timestamp).unwrap();
         // position: Vector3d
         writeln!(s, "        position = {{").unwrap();

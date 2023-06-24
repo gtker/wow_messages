@@ -62,7 +62,7 @@ impl crate::Message for SMSG_BATTLEFIELD_LIST {
         writeln!(s, "    win_honor = {};", self.win_honor).unwrap();
         writeln!(s, "    win_arena = {};", self.win_arena).unwrap();
         writeln!(s, "    loss_honor = {};", self.loss_honor).unwrap();
-        writeln!(s, "    random = {};", crate::wrath::RandomBg::try_from(self.random.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    random = {};", RandomBg::try_from(self.random.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.random {
             crate::wrath::SMSG_BATTLEFIELD_LIST_RandomBg::Random {
                 honor_lost,

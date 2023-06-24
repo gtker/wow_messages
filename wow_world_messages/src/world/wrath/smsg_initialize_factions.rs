@@ -1,6 +1,8 @@
 use std::io::{Read, Write};
 
-use crate::wrath::FactionInitializer;
+use crate::wrath::{
+    FactionFlag, FactionInitializer,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/faction/smsg_initialize_factions.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/faction/smsg_initialize_factions.wowm#L27):

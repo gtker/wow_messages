@@ -1,7 +1,9 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::tbc::MovementInfo;
+use crate::tbc::{
+    MovementFlags, MovementInfo, TransportInfo, Vector3d,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Can be response to [`CMSG_TELEPORT_TO_UNIT`](crate::vanilla::CMSG_TELEPORT_TO_UNIT).
@@ -38,7 +40,7 @@ impl crate::Message for MSG_MOVE_TELEPORT_ACK_Server {
         // info: MovementInfo
         writeln!(s, "    info = {{").unwrap();
         // Members
-        writeln!(s, "        flags = {};", crate::tbc::MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "        flags = {};", MovementFlags::new(self.info.flags.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "        extra_flags = {};", self.info.extra_flags).unwrap();
         writeln!(s, "        timestamp = {};", self.info.timestamp).unwrap();
         // position: Vector3d

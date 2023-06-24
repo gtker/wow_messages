@@ -62,7 +62,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
         writeln!(s, "test CMSG_GUILD_BANK_SWAP_ITEMS {{").unwrap();
         // Members
         writeln!(s, "    bank = {};", self.bank.guid()).unwrap();
-        writeln!(s, "    source = {};", crate::tbc::BankSwapSource::try_from(self.source.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    source = {};", BankSwapSource::try_from(self.source.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.source {
             crate::tbc::CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapSource::Inventory {
                 bank_slot,
@@ -73,7 +73,7 @@ impl crate::Message for CMSG_GUILD_BANK_SWAP_ITEMS {
                 writeln!(s, "    bank_tab = {};", bank_tab).unwrap();
                 writeln!(s, "    bank_slot = {};", bank_slot).unwrap();
                 writeln!(s, "    item2 = {};", item2).unwrap();
-                writeln!(s, "    mode = {};", crate::tbc::BankSwapStoreMode::try_from(mode.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    mode = {};", BankSwapStoreMode::try_from(mode.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &mode {
                     crate::tbc::CMSG_GUILD_BANK_SWAP_ITEMS_BankSwapStoreMode::Manual {
                         bank_to_character_transfer,

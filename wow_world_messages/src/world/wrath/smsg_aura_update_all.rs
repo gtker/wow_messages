@@ -1,7 +1,10 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::wrath::AuraUpdate;
+use crate::wrath::{
+    AuraFlag, AuraUpdate,
+};
+use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_aura_update_all.wowm:35`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_aura_update_all.wowm#L35):
@@ -36,7 +39,7 @@ impl crate::Message for SMSG_AURA_UPDATE_ALL {
             // Members
             writeln!(s, "        visual_slot = {};", v.visual_slot).unwrap();
             writeln!(s, "        spell = {};", v.spell).unwrap();
-            writeln!(s, "        flags = {};", crate::wrath::AuraFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
+            writeln!(s, "        flags = {};", AuraFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
             writeln!(s, "        level = {};", v.level.as_int()).unwrap();
             writeln!(s, "        aura_stack_count = {};", v.aura_stack_count).unwrap();
             if let Some(if_statement) = &v.flags.get_not_caster() {

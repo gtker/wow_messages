@@ -41,7 +41,7 @@ impl crate::Message for SMSG_TRADE_STATUS {
 
         writeln!(s, "test SMSG_TRADE_STATUS {{").unwrap();
         // Members
-        writeln!(s, "    status = {};", crate::vanilla::TradeStatus::try_from(self.status.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    status = {};", TradeStatus::try_from(self.status.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.status {
             crate::wrath::SMSG_TRADE_STATUS_TradeStatus::BeginTrade {
                 unknown1,

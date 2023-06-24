@@ -1,7 +1,9 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::tbc::SpellLog;
+use crate::tbc::{
+    Power, SpellEffect, SpellLog,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_spelllogexecute.wowm#L1):
@@ -39,7 +41,7 @@ impl crate::Message for SMSG_SPELLLOGEXECUTE {
         for v in self.logs.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "        effect = {};", crate::tbc::SpellEffect::try_from(v.effect.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        effect = {};", SpellEffect::try_from(v.effect.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.effect {
                 crate::tbc::SpellLog_SpellEffect::PowerDrain {
                     amount,

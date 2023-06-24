@@ -258,7 +258,6 @@ fn print_member_definition(
             );
         }
         Type::Enum { e, upcast } => {
-            let import_path = get_import_path(e.tags().import_version());
             let ty = e.name();
             let extra = if !d.used_in_if() {
                 format!("{var_name}.as_test_case_value()")
@@ -268,13 +267,12 @@ fn print_member_definition(
                 } else {
                     "".to_string()
                 };
-                format!("{import_path}::{ty}::try_from({var_name}.as_int(){extra}).unwrap().as_test_case_value()")
+                format!("{ty}::try_from({var_name}.as_int(){extra}).unwrap().as_test_case_value()")
             };
 
             test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), extra);
         }
         Type::Flag { e, upcast } => {
-            let import_path = get_import_path(e.tags().import_version());
             let ty = e.name();
             let extra = if !d.used_in_if() {
                 format!("{var_name}.as_test_case_value()")
@@ -284,7 +282,7 @@ fn print_member_definition(
                 } else {
                     "".to_string()
                 };
-                format!("{import_path}::{ty}::new({var_name}.as_int(){extra}).as_test_case_value()")
+                format!("{ty}::new({var_name}.as_int(){extra}).as_test_case_value()")
             };
 
             test_case_string::wlna(s, format!("{prefix}{name} = {{}};"), extra);

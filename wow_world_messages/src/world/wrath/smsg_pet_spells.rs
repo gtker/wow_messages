@@ -4,6 +4,7 @@ use crate::Guid;
 use crate::wrath::{
     CreatureFamily, PetCommandState, PetEnabled, PetReactState, PetSpellCooldown,
 };
+use std::time::Duration;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/pet/smsg_pet_spells.wowm:43`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/pet/smsg_pet_spells.wowm#L43):

@@ -31,7 +31,7 @@ impl crate::Message for SMSG_ACTION_BUTTONS {
 
         writeln!(s, "test SMSG_ACTION_BUTTONS {{").unwrap();
         // Members
-        writeln!(s, "    behavior = {};", crate::wrath::ActionBarBehavior::try_from(self.behavior.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    behavior = {};", ActionBarBehavior::try_from(self.behavior.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.behavior {
             crate::wrath::SMSG_ACTION_BUTTONS_ActionBarBehavior::Initial {
                 data,

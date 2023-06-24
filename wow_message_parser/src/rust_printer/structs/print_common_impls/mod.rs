@@ -82,7 +82,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                     print_write::print_write(s, e, o, it.prefix(), it.postfix());
                 },
                 sizes,
-                e.tests(o).is_empty(),
+                e.should_print_test_case_string(o),
             );
         }
         ContainerType::Msg(opcode) | ContainerType::CMsg(opcode) | ContainerType::SMsg(opcode) => {
@@ -108,7 +108,7 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
                     print_read::print_read(s, e, o, it.prefix(), it.postfix());
                 },
                 Some(e.sizes()),
-                e.tests(o).is_empty(),
+                e.should_print_test_case_string(o),
             );
 
             for version in e.tags().main_versions() {

@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
 
-use crate::wrath::LfgJoinPlayer;
+use crate::Guid;
+use crate::wrath::{
+    LfgJoinLockedDungeon, LfgJoinPlayer,
+};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_lfg_join_result.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_lfg_join_result.wowm#L1):

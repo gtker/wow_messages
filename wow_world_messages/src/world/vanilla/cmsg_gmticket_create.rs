@@ -44,7 +44,7 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
 
         writeln!(s, "test CMSG_GMTICKET_CREATE {{").unwrap();
         // Members
-        writeln!(s, "    category = {};", crate::vanilla::GmTicketType::try_from(self.category.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    category = {};", GmTicketType::try_from(self.category.as_int()).unwrap().as_test_case_value()).unwrap();
         writeln!(s, "    map = {};", self.map.as_test_case_value()).unwrap();
         // position: Vector3d
         writeln!(s, "    position = {{").unwrap();

@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    CastFlags, Power, SpellCastTargets,
+    CastFlags, Power, SpellCastTargetFlags, SpellCastTargets, Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -57,12 +57,12 @@ impl crate::Message for SMSG_SPELL_START {
         writeln!(s, "    caster = {};", self.caster.guid()).unwrap();
         writeln!(s, "    cast_count = {};", self.cast_count).unwrap();
         writeln!(s, "    spell = {};", self.spell).unwrap();
-        writeln!(s, "    flags = {};", crate::wrath::CastFlags::new(self.flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "    flags = {};", CastFlags::new(self.flags.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "    timer = {};", self.timer).unwrap();
         // targets: SpellCastTargets
         writeln!(s, "    targets = {{").unwrap();
         // Members
-        writeln!(s, "        target_flags = {};", crate::wrath::SpellCastTargetFlags::new(self.targets.target_flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "        target_flags = {};", SpellCastTargetFlags::new(self.targets.target_flags.as_int()).as_test_case_value()).unwrap();
         if let Some(if_statement) = &self.targets.target_flags.get_unit() {
             match if_statement {
                 crate::wrath::SpellCastTargets_SpellCastTargetFlags_Unit::Unit {

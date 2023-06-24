@@ -53,7 +53,7 @@ impl crate::Message for SMSG_ARENA_TEAM_EVENT {
 
         writeln!(s, "test SMSG_ARENA_TEAM_EVENT {{").unwrap();
         // Members
-        writeln!(s, "    event = {};", crate::tbc::ArenaTeamEvent::try_from(self.event.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    event = {};", ArenaTeamEvent::try_from(self.event.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.event {
             crate::tbc::SMSG_ARENA_TEAM_EVENT_ArenaTeamEvent::Join {
                 arena_team_name1,

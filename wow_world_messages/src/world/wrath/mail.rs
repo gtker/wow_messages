@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    MailListItem, MailType,
+    MailListItem, MailListItemEnchant, MailType,
 };
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 

@@ -37,7 +37,7 @@ impl crate::Message for SMSG_GMTICKET_GETTICKET {
 
         writeln!(s, "test SMSG_GMTICKET_GETTICKET {{").unwrap();
         // Members
-        writeln!(s, "    status = {};", crate::vanilla::GmTicketStatus::try_from(self.status.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    status = {};", GmTicketStatus::try_from(self.status.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.status {
             crate::vanilla::SMSG_GMTICKET_GETTICKET_GmTicketStatus::HasText {
                 days_since_last_updated,

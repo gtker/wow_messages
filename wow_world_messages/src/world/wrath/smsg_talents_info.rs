@@ -1,7 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::wrath::{
-    InspectTalent, TalentInfoSpec, TalentInfoType,
+    InspectTalent, Talent, TalentInfoSpec, TalentInfoType,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -39,7 +39,7 @@ impl crate::Message for SMSG_TALENTS_INFO {
 
         writeln!(s, "test SMSG_TALENTS_INFO {{").unwrap();
         // Members
-        writeln!(s, "    talent_type = {};", crate::wrath::TalentInfoType::try_from(self.talent_type.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    talent_type = {};", TalentInfoType::try_from(self.talent_type.as_int()).unwrap().as_test_case_value()).unwrap();
         writeln!(s, "    points_left = {};", self.points_left).unwrap();
         match &self.talent_type {
             crate::wrath::SMSG_TALENTS_INFO_TalentInfoType::Player {

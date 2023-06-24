@@ -50,7 +50,7 @@ impl crate::Message for SMSG_CALENDAR_EVENT_INVITE {
         writeln!(s, "    invite_id = {};", self.invite_id.guid()).unwrap();
         writeln!(s, "    level = {};", self.level.as_int()).unwrap();
         writeln!(s, "    invite_status = {};", self.invite_status).unwrap();
-        writeln!(s, "    time = {};", crate::wrath::CalendarStatusTime::try_from(self.time.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    time = {};", CalendarStatusTime::try_from(self.time.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.time {
             crate::wrath::SMSG_CALENDAR_EVENT_INVITE_CalendarStatusTime::Present {
                 status_time,

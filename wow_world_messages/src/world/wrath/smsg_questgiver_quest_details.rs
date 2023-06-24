@@ -4,6 +4,7 @@ use crate::Guid;
 use crate::wrath::{
     QuestDetailsEmote, QuestGiverReward,
 };
+use std::time::Duration;
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

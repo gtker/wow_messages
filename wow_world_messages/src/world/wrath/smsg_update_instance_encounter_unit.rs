@@ -42,7 +42,7 @@ impl crate::Message for SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {
 
         writeln!(s, "test SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT {{").unwrap();
         // Members
-        writeln!(s, "    frame = {};", crate::wrath::EncounterFrame::try_from(self.frame.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    frame = {};", EncounterFrame::try_from(self.frame.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.frame {
             crate::wrath::SMSG_UPDATE_INSTANCE_ENCOUNTER_UNIT_EncounterFrame::Engage {
                 guid,

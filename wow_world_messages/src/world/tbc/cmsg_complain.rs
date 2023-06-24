@@ -41,7 +41,7 @@ impl crate::Message for CMSG_COMPLAIN {
 
         writeln!(s, "test CMSG_COMPLAIN {{").unwrap();
         // Members
-        writeln!(s, "    complaint_type = {};", crate::tbc::SpamType::try_from(self.complaint_type.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    complaint_type = {};", SpamType::try_from(self.complaint_type.as_int()).unwrap().as_test_case_value()).unwrap();
         writeln!(s, "    offender = {};", self.offender.guid()).unwrap();
         match &self.complaint_type {
             crate::tbc::CMSG_COMPLAIN_SpamType::Mail {

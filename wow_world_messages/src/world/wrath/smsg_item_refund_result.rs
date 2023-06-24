@@ -39,7 +39,7 @@ impl crate::Message for SMSG_ITEM_REFUND_RESULT {
         writeln!(s, "test SMSG_ITEM_REFUND_RESULT {{").unwrap();
         // Members
         writeln!(s, "    item = {};", self.item.guid()).unwrap();
-        writeln!(s, "    result = {};", crate::wrath::ItemRefundResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    result = {};", ItemRefundResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.result {
             crate::wrath::SMSG_ITEM_REFUND_RESULT_ItemRefundResult::Success {
                 arena_point_cost,

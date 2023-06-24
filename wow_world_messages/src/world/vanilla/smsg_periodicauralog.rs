@@ -1,7 +1,9 @@
 use std::io::{Read, Write};
 
 use crate::Guid;
-use crate::vanilla::AuraLog;
+use crate::vanilla::{
+    AuraLog, AuraType, SpellSchool,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm:1`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/spell/smsg_periodicauralog.wowm#L1):
@@ -42,7 +44,7 @@ impl crate::Message for SMSG_PERIODICAURALOG {
         for v in self.auras.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "        aura_type = {};", crate::vanilla::AuraType::try_from(v.aura_type.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        aura_type = {};", AuraType::try_from(v.aura_type.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.aura_type {
                 crate::vanilla::AuraLog_AuraType::PeriodicDamage {
                     absorbed,

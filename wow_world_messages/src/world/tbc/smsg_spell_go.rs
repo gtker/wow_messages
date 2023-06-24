@@ -2,7 +2,8 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::tbc::{
-    CastFlags, SpellCastTargets, SpellMiss,
+    CastFlags, SpellCastTargetFlags, SpellCastTargets, SpellMiss, SpellMissInfo, 
+    Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
@@ -53,7 +54,7 @@ impl crate::Message for SMSG_SPELL_GO {
         writeln!(s, "    cast_item = {};", self.cast_item.guid()).unwrap();
         writeln!(s, "    caster = {};", self.caster.guid()).unwrap();
         writeln!(s, "    spell = {};", self.spell).unwrap();
-        writeln!(s, "    flags = {};", crate::vanilla::CastFlags::new(self.flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "    flags = {};", CastFlags::new(self.flags.as_int()).as_test_case_value()).unwrap();
         writeln!(s, "    timestamp = {};", self.timestamp).unwrap();
         writeln!(s, "    amount_of_hits = {};", self.hits.len()).unwrap();
         write!(s, "    hits = [").unwrap();
@@ -67,7 +68,7 @@ impl crate::Message for SMSG_SPELL_GO {
             writeln!(s, "{{").unwrap();
             // Members
             writeln!(s, "        target = {};", v.target.guid()).unwrap();
-            writeln!(s, "        miss_info = {};", crate::vanilla::SpellMissInfo::try_from(v.miss_info.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        miss_info = {};", SpellMissInfo::try_from(v.miss_info.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.miss_info {
                 crate::tbc::SpellMiss_SpellMissInfo::Reflect {
                     reflect_result,
@@ -84,7 +85,7 @@ impl crate::Message for SMSG_SPELL_GO {
         // targets: SpellCastTargets
         writeln!(s, "    targets = {{").unwrap();
         // Members
-        writeln!(s, "        target_flags = {};", crate::tbc::SpellCastTargetFlags::new(self.targets.target_flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "        target_flags = {};", SpellCastTargetFlags::new(self.targets.target_flags.as_int()).as_test_case_value()).unwrap();
         if let Some(if_statement) = &self.targets.target_flags.get_unit() {
             match if_statement {
                 crate::tbc::SpellCastTargets_SpellCastTargetFlags_Unit::Unit {

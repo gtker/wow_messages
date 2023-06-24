@@ -72,7 +72,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
 
         writeln!(s, "    }};").unwrap();
         writeln!(s, "    spline_id = {};", self.spline_id).unwrap();
-        writeln!(s, "    move_type = {};", crate::vanilla::MonsterMoveType::try_from(self.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    move_type = {};", MonsterMoveType::try_from(self.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.move_type {
             crate::wrath::SMSG_MONSTER_MOVE_MonsterMoveType::FacingSpot {
                 position,
@@ -99,7 +99,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
             _ => {}
         }
 
-        writeln!(s, "    spline_flags = {};", crate::wrath::SplineFlag::new(self.spline_flags.as_int()).as_test_case_value()).unwrap();
+        writeln!(s, "    spline_flags = {};", SplineFlag::new(self.spline_flags.as_int()).as_test_case_value()).unwrap();
         if let Some(if_statement) = &self.spline_flags.get_enter_cycle() {
             writeln!(s, "    animation_id = {};", if_statement.animation_id).unwrap();
             writeln!(s, "    animation_start_time = {};", if_statement.animation_start_time).unwrap();

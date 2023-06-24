@@ -36,7 +36,7 @@ impl crate::Message for SMSG_TRANSFER_ABORTED {
         writeln!(s, "test SMSG_TRANSFER_ABORTED {{").unwrap();
         // Members
         writeln!(s, "    map = {};", self.map.as_test_case_value()).unwrap();
-        writeln!(s, "    reason = {};", crate::wrath::TransferAbortReason::try_from(self.reason.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    reason = {};", TransferAbortReason::try_from(self.reason.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.reason {
             crate::wrath::SMSG_TRANSFER_ABORTED_TransferAbortReason::InsufficientExpansionLevel {
                 difficulty,

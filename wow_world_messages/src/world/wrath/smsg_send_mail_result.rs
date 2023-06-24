@@ -47,12 +47,12 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
         writeln!(s, "test SMSG_SEND_MAIL_RESULT {{").unwrap();
         // Members
         writeln!(s, "    mail_id = {};", self.mail_id).unwrap();
-        writeln!(s, "    action = {};", crate::vanilla::MailAction::try_from(self.action.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    action = {};", MailAction::try_from(self.action.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.action {
             crate::wrath::SMSG_SEND_MAIL_RESULT_MailAction::Send {
                 result2,
             } => {
-                writeln!(s, "    result2 = {};", crate::wrath::MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    result2 = {};", MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &result2 {
                     crate::wrath::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
                         equip_error2,
@@ -66,7 +66,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
             crate::wrath::SMSG_SEND_MAIL_RESULT_MailAction::MoneyTaken {
                 result2,
             } => {
-                writeln!(s, "    result2 = {};", crate::wrath::MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    result2 = {};", MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &result2 {
                     crate::wrath::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
                         equip_error2,
@@ -80,7 +80,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
             crate::wrath::SMSG_SEND_MAIL_RESULT_MailAction::ItemTaken {
                 result,
             } => {
-                writeln!(s, "    result = {};", crate::wrath::MailResult::try_from(result.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    result = {};", MailResult::try_from(result.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &result {
                     crate::wrath::SMSG_SEND_MAIL_RESULT_MailResult::Ok {
                         item,
@@ -184,7 +184,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
             crate::wrath::SMSG_SEND_MAIL_RESULT_MailAction::ReturnedToSender {
                 result2,
             } => {
-                writeln!(s, "    result2 = {};", crate::wrath::MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    result2 = {};", MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &result2 {
                     crate::wrath::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
                         equip_error2,
@@ -198,7 +198,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
             crate::wrath::SMSG_SEND_MAIL_RESULT_MailAction::Deleted {
                 result2,
             } => {
-                writeln!(s, "    result2 = {};", crate::wrath::MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    result2 = {};", MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &result2 {
                     crate::wrath::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
                         equip_error2,
@@ -212,7 +212,7 @@ impl crate::Message for SMSG_SEND_MAIL_RESULT {
             crate::wrath::SMSG_SEND_MAIL_RESULT_MailAction::MadePermanent {
                 result2,
             } => {
-                writeln!(s, "    result2 = {};", crate::wrath::MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    result2 = {};", MailResultTwo::try_from(result2.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &result2 {
                     crate::wrath::SMSG_SEND_MAIL_RESULT_MailResultTwo::ErrEquipError {
                         equip_error2,

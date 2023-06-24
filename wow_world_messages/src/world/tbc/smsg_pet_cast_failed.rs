@@ -50,7 +50,7 @@ impl crate::Message for SMSG_PET_CAST_FAILED {
         writeln!(s, "test SMSG_PET_CAST_FAILED {{").unwrap();
         // Members
         writeln!(s, "    id = {};", self.id).unwrap();
-        writeln!(s, "    result = {};", crate::tbc::SpellCastResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    result = {};", SpellCastResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
         writeln!(s, "    multiple_casts = {};", if self.multiple_casts { "TRUE" } else { "FALSE" }).unwrap();
         match &self.result {
             crate::tbc::SMSG_PET_CAST_FAILED_SpellCastResult::EquippedItemClass {

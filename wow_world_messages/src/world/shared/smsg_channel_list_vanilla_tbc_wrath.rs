@@ -1,7 +1,9 @@
 use std::io::{Read, Write};
 
+use crate::Guid;
 use crate::shared::channel_member_vanilla_tbc_wrath::ChannelMember;
 use wow_world_base::shared::channel_flags_vanilla_tbc_wrath::ChannelFlags;
+use wow_world_base::shared::channel_member_flags_vanilla_tbc_wrath::ChannelMemberFlags;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/chat/smsg_channel_list.wowm:29`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/chat/smsg_channel_list.wowm#L29):

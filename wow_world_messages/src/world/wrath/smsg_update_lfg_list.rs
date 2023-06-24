@@ -2,8 +2,10 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::wrath::{
-    LfgListGroup, LfgListPlayer, LfgListUpdateType, LfgType,
+    Area, Class, LfgListGroup, LfgListPlayer, LfgListUpdateType, LfgType, LfgUpdateFlag, 
+    Race,
 };
+use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/lfg/smsg_update_lfg_list.wowm:111`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/lfg/smsg_update_lfg_list.wowm#L111):
@@ -51,7 +53,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
         // Members
         writeln!(s, "    lfg_type = {};", self.lfg_type.as_test_case_value()).unwrap();
         writeln!(s, "    dungeon_id = {};", self.dungeon_id).unwrap();
-        writeln!(s, "    update_type = {};", crate::wrath::LfgListUpdateType::try_from(self.update_type.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    update_type = {};", LfgListUpdateType::try_from(self.update_type.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.update_type {
             crate::wrath::SMSG_UPDATE_LFG_LIST_LfgListUpdateType::Partial {
                 deleted_guids,
@@ -73,7 +75,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
             writeln!(s, "{{").unwrap();
             // Members
             writeln!(s, "        group = {};", v.group.guid()).unwrap();
-            writeln!(s, "        flags = {};", crate::wrath::LfgUpdateFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
+            writeln!(s, "        flags = {};", LfgUpdateFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
             if let Some(if_statement) = &v.flags.get_comment() {
                 writeln!(s, "        comment = \"{}\";", if_statement.comment).unwrap();
             }
@@ -99,7 +101,7 @@ impl crate::Message for SMSG_UPDATE_LFG_LIST {
             writeln!(s, "{{").unwrap();
             // Members
             writeln!(s, "        player = {};", v.player.guid()).unwrap();
-            writeln!(s, "        flags = {};", crate::wrath::LfgUpdateFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
+            writeln!(s, "        flags = {};", LfgUpdateFlag::new(v.flags.as_int()).as_test_case_value()).unwrap();
             if let Some(if_statement) = &v.flags.get_character_info() {
                 writeln!(s, "        level = {};", if_statement.level.as_int()).unwrap();
                 writeln!(s, "        class = {};", if_statement.class.as_test_case_value()).unwrap();

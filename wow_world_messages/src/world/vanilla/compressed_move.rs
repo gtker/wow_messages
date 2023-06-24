@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 
 use crate::Guid;
 use crate::vanilla::{
-    CompressedMoveOpcode, MonsterMove,
+    CompressedMoveOpcode, MonsterMove, MonsterMoveType, SplineFlag, Vector3d,
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]

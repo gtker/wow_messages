@@ -483,7 +483,11 @@ impl Container {
         false
     }
 
-    pub(crate) fn get_imports(&self, version: Version) -> BTreeMap<String, BTreeSet<String>> {
+    pub(crate) fn get_imports(
+        &self,
+        version: Version,
+        should_print_transitive_imports: bool,
+    ) -> BTreeMap<String, BTreeSet<String>> {
         fn object_prefix(s: &ObjectTags, e: &ObjectTags, version: Version, name: &str) -> String {
             if s.has_world_version() && s.shared() {
                 if e.is_in_base() && s.is_in_base() {
@@ -506,7 +510,12 @@ impl Container {
 
         let mut v: BTreeMap<String, BTreeSet<String>> = BTreeMap::new();
 
-        for a in self.all_definitions() {
+        let members = if should_print_transitive_imports {
+            self.all_definitions_transitively()
+        } else {
+            self.all_definitions()
+        };
+        for a in members {
             let name = a.ty().rust_str();
 
             let (prefix, ty) = match a.ty() {
@@ -620,6 +629,10 @@ impl Container {
             .iter()
             .filter(|a| a.subject() == self.name() && self.tags().fulfills_all(a.tags()))
             .collect()
+    }
+
+    pub(crate) fn should_print_test_case_string(&self, o: &Objects) -> bool {
+        self.tests(o).is_empty()
     }
 
     pub(crate) fn members(&self) -> &[StructMember] {

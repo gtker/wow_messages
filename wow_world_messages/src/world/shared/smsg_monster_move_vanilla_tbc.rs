@@ -60,7 +60,7 @@ impl crate::Message for SMSG_MONSTER_MOVE {
 
         writeln!(s, "    }};").unwrap();
         writeln!(s, "    spline_id = {};", self.spline_id).unwrap();
-        writeln!(s, "    move_type = {};", crate::vanilla::MonsterMoveType::try_from(self.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    move_type = {};", MonsterMoveType::try_from(self.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.move_type {
             crate::vanilla::SMSG_MONSTER_MOVE_MonsterMoveType::FacingSpot {
                 position,

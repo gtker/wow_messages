@@ -1,8 +1,11 @@
 use std::io::{Read, Write};
 
+use crate::Guid;
 use crate::wrath::{
-    GuildMember, GuildRights,
+    Area, Class, Gender, GuildBankRights, GuildMember, GuildMemberStatus, GuildRights,
 };
+use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
+use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm:84`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/guild/smsg_guild_roster.wowm#L84):
@@ -66,7 +69,7 @@ impl crate::Message for SMSG_GUILD_ROSTER {
             // Members
             writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
             writeln!(s, "        unknown = {};", v.unknown).unwrap();
-            writeln!(s, "        status = {};", crate::vanilla::GuildMemberStatus::try_from(v.status.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        status = {};", GuildMemberStatus::try_from(v.status.as_int()).unwrap().as_test_case_value()).unwrap();
             writeln!(s, "        name = \"{}\";", v.name).unwrap();
             writeln!(s, "        rank = {};", v.rank).unwrap();
             writeln!(s, "        level = {};", v.level.as_int()).unwrap();

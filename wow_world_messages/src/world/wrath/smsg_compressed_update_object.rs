@@ -1,7 +1,11 @@
 use crate::Message;
 use std::io::{Read, Write};
 
-use crate::wrath::Object;
+use crate::Guid;
+use crate::wrath::{
+    MovementBlock, MovementFlags, Object, ObjectType, SplineFlag, TransportInfo, 
+    UpdateFlag, UpdateMask, UpdateType, Vector3d,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Compressed version of [`SMSG_UPDATE_OBJECT`](crate::wrath::SMSG_UPDATE_OBJECT). Has the same fields when uncompressed
@@ -34,7 +38,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
         for v in self.objects.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "        update_type = {};", crate::wrath::UpdateType::try_from(v.update_type.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        update_type = {};", UpdateType::try_from(v.update_type.as_int()).unwrap().as_test_case_value()).unwrap();
             match &v.update_type {
                 crate::wrath::Object_UpdateType::Values {
                     guid1,
@@ -51,7 +55,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                     // movement1: MovementBlock
                     writeln!(s, "        movement1 = {{").unwrap();
                     // Members
-                    writeln!(s, "            update_flag = {};", crate::wrath::UpdateFlag::new(movement1.update_flag.as_int()).as_test_case_value()).unwrap();
+                    writeln!(s, "            update_flag = {};", UpdateFlag::new(movement1.update_flag.as_int()).as_test_case_value()).unwrap();
                     if let Some(if_statement) = &movement1.update_flag.get_living() {
                         match if_statement {
                             crate::wrath::MovementBlock_UpdateFlag_Living::Living {
@@ -70,7 +74,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 turn_rate,
                                 walking_speed,
                             } => {
-                                writeln!(s, "            flags = {};", crate::wrath::MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
+                                writeln!(s, "            flags = {};", MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
                                 writeln!(s, "            timestamp = {};", timestamp).unwrap();
                                 // position: Vector3d
                                 writeln!(s, "            position = {{").unwrap();
@@ -172,7 +176,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 writeln!(s, "    {}", if turn_rate.to_string().contains('.') { turn_rate.to_string() } else { format!("{}.0", turn_rate) }).unwrap();
                                 writeln!(s, "    {}", if pitch_rate.to_string().contains('.') { pitch_rate.to_string() } else { format!("{}.0", pitch_rate) }).unwrap();
                                 if let Some(if_statement) = &flags.get_spline_enabled() {
-                                    writeln!(s, "            spline_flags = {};", crate::wrath::SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
+                                    writeln!(s, "            spline_flags = {};", SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
                                     if let Some(if_statement) = &if_statement.spline_flags.get_final_angle() {
                                         match if_statement {
                                             crate::wrath::MovementBlock_SplineFlag_FinalAngle::FinalAngle {
@@ -300,7 +304,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                     // movement2: MovementBlock
                     writeln!(s, "        movement2 = {{").unwrap();
                     // Members
-                    writeln!(s, "            update_flag = {};", crate::wrath::UpdateFlag::new(movement2.update_flag.as_int()).as_test_case_value()).unwrap();
+                    writeln!(s, "            update_flag = {};", UpdateFlag::new(movement2.update_flag.as_int()).as_test_case_value()).unwrap();
                     if let Some(if_statement) = &movement2.update_flag.get_living() {
                         match if_statement {
                             crate::wrath::MovementBlock_UpdateFlag_Living::Living {
@@ -319,7 +323,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 turn_rate,
                                 walking_speed,
                             } => {
-                                writeln!(s, "            flags = {};", crate::wrath::MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
+                                writeln!(s, "            flags = {};", MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
                                 writeln!(s, "            timestamp = {};", timestamp).unwrap();
                                 // position: Vector3d
                                 writeln!(s, "            position = {{").unwrap();
@@ -421,7 +425,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 writeln!(s, "    {}", if turn_rate.to_string().contains('.') { turn_rate.to_string() } else { format!("{}.0", turn_rate) }).unwrap();
                                 writeln!(s, "    {}", if pitch_rate.to_string().contains('.') { pitch_rate.to_string() } else { format!("{}.0", pitch_rate) }).unwrap();
                                 if let Some(if_statement) = &flags.get_spline_enabled() {
-                                    writeln!(s, "            spline_flags = {};", crate::wrath::SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
+                                    writeln!(s, "            spline_flags = {};", SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
                                     if let Some(if_statement) = &if_statement.spline_flags.get_final_angle() {
                                         match if_statement {
                                             crate::wrath::MovementBlock_SplineFlag_FinalAngle::FinalAngle {
@@ -550,7 +554,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                     // movement2: MovementBlock
                     writeln!(s, "        movement2 = {{").unwrap();
                     // Members
-                    writeln!(s, "            update_flag = {};", crate::wrath::UpdateFlag::new(movement2.update_flag.as_int()).as_test_case_value()).unwrap();
+                    writeln!(s, "            update_flag = {};", UpdateFlag::new(movement2.update_flag.as_int()).as_test_case_value()).unwrap();
                     if let Some(if_statement) = &movement2.update_flag.get_living() {
                         match if_statement {
                             crate::wrath::MovementBlock_UpdateFlag_Living::Living {
@@ -569,7 +573,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 turn_rate,
                                 walking_speed,
                             } => {
-                                writeln!(s, "            flags = {};", crate::wrath::MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
+                                writeln!(s, "            flags = {};", MovementFlags::new(flags.as_int()).as_test_case_value()).unwrap();
                                 writeln!(s, "            timestamp = {};", timestamp).unwrap();
                                 // position: Vector3d
                                 writeln!(s, "            position = {{").unwrap();
@@ -671,7 +675,7 @@ impl crate::Message for SMSG_COMPRESSED_UPDATE_OBJECT {
                                 writeln!(s, "    {}", if turn_rate.to_string().contains('.') { turn_rate.to_string() } else { format!("{}.0", turn_rate) }).unwrap();
                                 writeln!(s, "    {}", if pitch_rate.to_string().contains('.') { pitch_rate.to_string() } else { format!("{}.0", pitch_rate) }).unwrap();
                                 if let Some(if_statement) = &flags.get_spline_enabled() {
-                                    writeln!(s, "            spline_flags = {};", crate::wrath::SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
+                                    writeln!(s, "            spline_flags = {};", SplineFlag::new(if_statement.spline_flags.as_int()).as_test_case_value()).unwrap();
                                     if let Some(if_statement) = &if_statement.spline_flags.get_final_angle() {
                                         match if_statement {
                                             crate::wrath::MovementBlock_SplineFlag_FinalAngle::FinalAngle {

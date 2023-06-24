@@ -64,7 +64,7 @@ impl crate::Message for SMSG_BATTLEFIELD_STATUS {
         writeln!(s, "    unknown2 = {};", self.unknown2).unwrap();
         writeln!(s, "    client_instance_id = {};", self.client_instance_id).unwrap();
         writeln!(s, "    rated = {};", if self.rated { "TRUE" } else { "FALSE" }).unwrap();
-        writeln!(s, "    status_id = {};", crate::vanilla::StatusId::try_from(self.status_id.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    status_id = {};", StatusId::try_from(self.status_id.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.status_id {
             crate::tbc::SMSG_BATTLEFIELD_STATUS_StatusId::WaitQueue {
                 average_wait_time_in_ms,

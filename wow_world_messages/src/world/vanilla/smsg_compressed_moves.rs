@@ -1,7 +1,11 @@
 use crate::Message;
 use std::io::{Read, Write};
 
-use crate::vanilla::CompressedMove;
+use crate::Guid;
+use crate::vanilla::{
+    CompressedMove, CompressedMoveOpcode, MonsterMove, MonsterMoveType, SplineFlag, 
+    Vector3d,
+};
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/movement/smsg/smsg_compressed_moves.wowm:48`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/movement/smsg/smsg_compressed_moves.wowm#L48):
@@ -31,7 +35,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
         for v in self.moves.as_slice() {
             writeln!(s, "{{").unwrap();
             // Members
-            writeln!(s, "        opcode = {};", crate::vanilla::CompressedMoveOpcode::try_from(v.opcode.as_int()).unwrap().as_test_case_value()).unwrap();
+            writeln!(s, "        opcode = {};", CompressedMoveOpcode::try_from(v.opcode.as_int()).unwrap().as_test_case_value()).unwrap();
             writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
             match &v.opcode {
                 crate::vanilla::CompressedMove_CompressedMoveOpcode::SmsgMonsterMove {
@@ -49,7 +53,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
 
                     writeln!(s, "    }};").unwrap();
                     writeln!(s, "            spline_id = {};", monster_move.spline_id).unwrap();
-                    writeln!(s, "            move_type = {};", crate::vanilla::MonsterMoveType::try_from(monster_move.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
+                    writeln!(s, "            move_type = {};", MonsterMoveType::try_from(monster_move.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
                     match &monster_move.move_type {
                         crate::vanilla::MonsterMove_MonsterMoveType::Normal {
                             duration,
@@ -154,7 +158,7 @@ impl crate::Message for SMSG_COMPRESSED_MOVES {
 
                     writeln!(s, "    }};").unwrap();
                     writeln!(s, "            spline_id = {};", monster_move_transport.spline_id).unwrap();
-                    writeln!(s, "            move_type = {};", crate::vanilla::MonsterMoveType::try_from(monster_move_transport.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
+                    writeln!(s, "            move_type = {};", MonsterMoveType::try_from(monster_move_transport.move_type.as_int()).unwrap().as_test_case_value()).unwrap();
                     match &monster_move_transport.move_type {
                         crate::vanilla::MonsterMove_MonsterMoveType::Normal {
                             duration,

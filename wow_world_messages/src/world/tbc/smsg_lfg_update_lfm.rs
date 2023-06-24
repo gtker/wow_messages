@@ -1,7 +1,7 @@
 use std::io::{Read, Write};
 
 use crate::tbc::{
-    LfgData, LfgUpdateLookingForMore,
+    LfgData, LfgType, LfgUpdateLookingForMore,
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
@@ -31,7 +31,7 @@ impl crate::Message for SMSG_LFG_UPDATE_LFM {
 
         writeln!(s, "test SMSG_LFG_UPDATE_LFM {{").unwrap();
         // Members
-        writeln!(s, "    looking_for_more = {};", crate::tbc::LfgUpdateLookingForMore::try_from(self.looking_for_more.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    looking_for_more = {};", LfgUpdateLookingForMore::try_from(self.looking_for_more.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.looking_for_more {
             crate::tbc::SMSG_LFG_UPDATE_LFM_LfgUpdateLookingForMore::LookingForMore {
                 data,

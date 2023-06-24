@@ -45,12 +45,12 @@ impl crate::Message for SMSG_CAST_RESULT {
         writeln!(s, "test SMSG_CAST_RESULT {{").unwrap();
         // Members
         writeln!(s, "    spell = {};", self.spell).unwrap();
-        writeln!(s, "    result = {};", crate::vanilla::SimpleSpellCastResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    result = {};", SimpleSpellCastResult::try_from(self.result.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.result {
             crate::vanilla::SMSG_CAST_RESULT_SimpleSpellCastResult::Success {
                 reason,
             } => {
-                writeln!(s, "    reason = {};", crate::vanilla::CastFailureReason::try_from(reason.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "    reason = {};", CastFailureReason::try_from(reason.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &reason {
                     crate::vanilla::SMSG_CAST_RESULT_CastFailureReason::EquippedItemClass {
                         equipped_item_class,

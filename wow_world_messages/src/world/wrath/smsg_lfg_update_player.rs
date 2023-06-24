@@ -39,7 +39,7 @@ impl crate::Message for SMSG_LFG_UPDATE_PLAYER {
         writeln!(s, "test SMSG_LFG_UPDATE_PLAYER {{").unwrap();
         // Members
         writeln!(s, "    update_type = {};", self.update_type.as_test_case_value()).unwrap();
-        writeln!(s, "    join_status = {};", crate::wrath::LfgJoinStatus::try_from(self.join_status.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    join_status = {};", LfgJoinStatus::try_from(self.join_status.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.join_status {
             crate::wrath::SMSG_LFG_UPDATE_PLAYER_LfgJoinStatus::Joined {
                 achievements,

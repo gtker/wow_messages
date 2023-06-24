@@ -1,6 +1,9 @@
 use std::io::{Read, Write};
 
-use crate::wrath::AuctionListItem;
+use crate::Guid;
+use crate::wrath::{
+    AuctionEnchantment, AuctionListItem,
+};
 use std::time::Duration;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]

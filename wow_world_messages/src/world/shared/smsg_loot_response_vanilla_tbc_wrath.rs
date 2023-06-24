@@ -5,6 +5,7 @@ use crate::shared::loot_item_vanilla_tbc_wrath::LootItem;
 use wow_world_base::shared::gold_vanilla_tbc_wrath::Gold;
 use wow_world_base::shared::loot_method_error_vanilla_tbc_wrath::LootMethodError;
 use wow_world_base::shared::loot_method_vanilla_tbc_wrath::LootMethod;
+use wow_world_base::shared::loot_slot_type_vanilla_tbc_wrath::LootSlotType;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/loot/smsg_loot_response.wowm:95`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/loot/smsg_loot_response.wowm#L95):
@@ -41,7 +42,7 @@ impl crate::Message for SMSG_LOOT_RESPONSE {
         writeln!(s, "test SMSG_LOOT_RESPONSE {{").unwrap();
         // Members
         writeln!(s, "    guid = {};", self.guid.guid()).unwrap();
-        writeln!(s, "    loot_method = {};", crate::vanilla::LootMethod::try_from(self.loot_method.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    loot_method = {};", LootMethod::try_from(self.loot_method.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.loot_method {
             crate::vanilla::SMSG_LOOT_RESPONSE_LootMethod::ErrorX {
                 loot_error,

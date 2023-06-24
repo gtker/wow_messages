@@ -31,7 +31,7 @@ impl crate::Message for SMSG_ITEM_TEXT_QUERY_RESPONSE {
 
         writeln!(s, "test SMSG_ITEM_TEXT_QUERY_RESPONSE {{").unwrap();
         // Members
-        writeln!(s, "    query = {};", crate::wrath::ItemTextQuery::try_from(self.query.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    query = {};", ItemTextQuery::try_from(self.query.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.query {
             crate::wrath::SMSG_ITEM_TEXT_QUERY_RESPONSE_ItemTextQuery::HasText {
                 item,

@@ -1,8 +1,10 @@
 use std::io::{Read, Write};
 
+use crate::Guid;
 use crate::tbc::{
-    Relation, RelationType,
+    Area, Class, FriendStatus, Relation, RelationType,
 };
+use wow_world_base::shared::level_vanilla_tbc_wrath::Level;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/social/smsg_contact_list.wowm:38`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/social/smsg_contact_list.wowm#L38):
@@ -39,10 +41,10 @@ impl crate::Message for SMSG_CONTACT_LIST {
             writeln!(s, "{{").unwrap();
             // Members
             writeln!(s, "        guid = {};", v.guid.guid()).unwrap();
-            writeln!(s, "        relation_mask = {};", crate::tbc::RelationType::new(v.relation_mask.as_int()).as_test_case_value()).unwrap();
+            writeln!(s, "        relation_mask = {};", RelationType::new(v.relation_mask.as_int()).as_test_case_value()).unwrap();
             writeln!(s, "        note = \"{}\";", v.note).unwrap();
             if let Some(if_statement) = &v.relation_mask.get_friend() {
-                writeln!(s, "        status = {};", crate::tbc::FriendStatus::try_from(if_statement.status.as_int()).unwrap().as_test_case_value()).unwrap();
+                writeln!(s, "        status = {};", FriendStatus::try_from(if_statement.status.as_int()).unwrap().as_test_case_value()).unwrap();
                 match &if_statement.status {
                     crate::tbc::Relation_FriendStatus::Online {
                         area,

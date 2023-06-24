@@ -30,7 +30,7 @@ impl crate::Message for MSG_RAID_TARGET_UPDATE_Client {
 
         writeln!(s, "test MSG_RAID_TARGET_UPDATE_Client {{").unwrap();
         // Members
-        writeln!(s, "    target_index = {};", crate::vanilla::RaidTargetIndex::try_from(self.target_index.as_int()).unwrap().as_test_case_value()).unwrap();
+        writeln!(s, "    target_index = {};", RaidTargetIndex::try_from(self.target_index.as_int()).unwrap().as_test_case_value()).unwrap();
         match &self.target_index {
             crate::vanilla::MSG_RAID_TARGET_UPDATE_Client_RaidTargetIndex::Unknown0 {
                 target,
