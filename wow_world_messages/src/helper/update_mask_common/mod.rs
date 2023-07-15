@@ -159,7 +159,7 @@ macro_rules! update_item {
                 $crate::helper::update_mask_common::inners::set_int(
                     &mut self.values,
                     &mut self.header,
-                    None,
+                    Some(&mut self.dirty_mask),
                     bit,
                     v,
                 );
@@ -175,7 +175,7 @@ macro_rules! update_item {
                 $crate::helper::update_mask_common::inners::set_float(
                     &mut self.values,
                     &mut self.header,
-                    None,
+                    Some(&mut self.dirty_mask),
                     bit,
                     v,
                 );
@@ -191,7 +191,7 @@ macro_rules! update_item {
                 $crate::helper::update_mask_common::inners::set_bytes(
                     &mut self.values,
                     &mut self.header,
-                    None,
+                    Some(&mut self.dirty_mask),
                     bit,
                     a,
                     b,
@@ -210,7 +210,7 @@ macro_rules! update_item {
                 $crate::helper::update_mask_common::inners::set_shorts(
                     &mut self.values,
                     &mut self.header,
-                    None,
+                    Some(&mut self.dirty_mask),
                     bit,
                     a,
                     b,
