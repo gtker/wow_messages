@@ -339,4 +339,17 @@ mod test {
         //Output should match all previously written fields
         assert_eq!(b.as_slice(), v.as_slice());
     }
+    #[test]
+    fn update_mask_header_and_dirty_size()
+    {
+        //create update mask so header and mask  have size 1
+         let mut update_mask = UpdatePlayer::builder()
+            .set_object_guid(Guid::new(3))
+            .finalize();
+        //set a field that would need to increase the size of the header and dirty mask
+        update_mask.set_unit_displayid(49);
+        //check that the header and dirty mask are the same size
+        assert_eq!(update_mask.dirty_mask.len(),update_mask.header.len());
+    }
+
 }
