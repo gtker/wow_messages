@@ -16,7 +16,7 @@ use crate::rust_printer::writer::Writer;
 use crate::rust_printer::DefinerType;
 use crate::should_not_write_object_docs;
 use hashbrown::HashMap;
-use std::collections::BTreeSet;
+use std::collections::{BTreeMap, BTreeSet};
 use std::fs::read_to_string;
 use std::path::PathBuf;
 
@@ -134,6 +134,11 @@ fn print_definers<'a>(
 
         create_or_append_hashmap(&definer_inner, docs_directory().join(&path), files);
 
+        let is_used_in_object = !definer.objects_used_in().is_empty();
+        if is_used_in_object {
+            continue;
+        }
+
         let bullet_point = format!(
             "- [{name}](docs/{path})",
             name = definer.name(),
@@ -165,8 +170,9 @@ fn print_containers<'a>(
     files: &mut HashMap<PathBuf, String>,
     o: &Objects,
 ) {
-    let mut login_containers = BTreeSet::new();
-    let mut world_containers = BTreeSet::new();
+    let mut login_containers = BTreeMap::new();
+    let mut world_containers = BTreeMap::new();
+
     for container in containers {
         let path = format!(
             "{lower_name}.md",
@@ -181,22 +187,40 @@ fn print_containers<'a>(
             name = container.name(),
             path = path,
         );
+        let definers: Vec<String> = container
+            .all_definers()
+            .iter()
+            .map(|a| {
+                let name = a.name();
+                let path = format!("{}.md", name.to_lowercase());
+
+                format!("    - [{name}](docs/{path})")
+            })
+            .collect();
         if container.tags().has_login_version() {
-            login_containers.insert(bullet_point);
+            login_containers.insert(bullet_point, definers);
         } else {
-            world_containers.insert(bullet_point);
+            world_containers.insert(bullet_point, definers);
         }
     }
 
     s.wln(LOGIN_CONTAINER_HEADER);
-    for i in login_containers {
+    for (i, definers) in login_containers {
         s.wln(&i);
+
+        for definer in definers {
+            s.wln(definer);
+        }
     }
     s.newline();
 
     s.wln(WORLD_CONTAINER_HEADER);
-    for i in world_containers {
+    for (i, definers) in world_containers {
         s.wln(&i);
+
+        for definer in definers {
+            s.wln(definer);
+        }
     }
     s.newline();
 }
