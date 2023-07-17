@@ -584,6 +584,7 @@ fn print_read_decl(s: &mut Writer, it: ImplType, inner: bool) {
     let reader = if inner { "mut r" } else { "r" };
 
     if !it.is_async() {
+        s.wln(it.cfg());
         s.open_curly(format!(
             "fn {function_name}<R: {read}{sealed}>({reader}: R) -> Result<Self, {error}>",
         ));

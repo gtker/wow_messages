@@ -363,6 +363,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Server {
 impl ServerMessage for CMD_AUTH_LOGON_CHALLENGE_Server {
     const OPCODE: u8 = 0x00;
 
+    #[cfg(feature = "sync")]
     fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
         Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(0, "CMD_AUTH_LOGON_CHALLENGE_Server", kind))
     }

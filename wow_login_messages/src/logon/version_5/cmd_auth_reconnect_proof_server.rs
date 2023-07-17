@@ -123,6 +123,7 @@ impl ServerMessage for CMD_AUTH_RECONNECT_PROOF_Server {
         Some(s)
     }
 
+    #[cfg(feature = "sync")]
     fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
         Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(3, "CMD_AUTH_RECONNECT_PROOF_Server", kind))
     }

@@ -237,6 +237,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
         Some(s)
     }
 
+    #[cfg(feature = "sync")]
     fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
         Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(16, "CMD_REALM_LIST_Server", kind))
     }

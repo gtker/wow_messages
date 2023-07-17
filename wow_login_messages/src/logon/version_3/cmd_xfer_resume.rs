@@ -62,6 +62,7 @@ impl CMD_XFER_RESUME {
 impl ClientMessage for CMD_XFER_RESUME {
     const OPCODE: u8 = 0x33;
 
+    #[cfg(feature = "sync")]
     fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
         Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(51, "CMD_XFER_RESUME", kind))
     }

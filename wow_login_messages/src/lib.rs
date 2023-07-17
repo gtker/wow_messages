@@ -146,6 +146,7 @@ pub trait ServerMessage: Sized + private::Sealed {
     const OPCODE: u8;
 
     #[doc(hidden)]
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read, I: private::Sealed>(r: R) -> Result<Self, errors::ParseError>;
 
     #[cfg(feature = "sync")]
@@ -210,6 +211,7 @@ pub trait ClientMessage: Sized + private::Sealed {
     const OPCODE: u8;
 
     #[doc(hidden)]
+    #[cfg(feature = "sync")]
     fn read<R: std::io::Read, I: private::Sealed>(r: R) -> Result<Self, errors::ParseError>;
 
     #[cfg(feature = "sync")]

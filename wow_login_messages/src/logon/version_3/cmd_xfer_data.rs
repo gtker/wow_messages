@@ -95,6 +95,7 @@ impl CMD_XFER_DATA {
 impl ServerMessage for CMD_XFER_DATA {
     const OPCODE: u8 = 0x31;
 
+    #[cfg(feature = "sync")]
     fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
         Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(49, "CMD_XFER_DATA", kind))
     }

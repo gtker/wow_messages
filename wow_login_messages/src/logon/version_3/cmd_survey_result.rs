@@ -129,6 +129,7 @@ impl CMD_SURVEY_RESULT {
 impl ClientMessage for CMD_SURVEY_RESULT {
     const OPCODE: u8 = 0x04;
 
+    #[cfg(feature = "sync")]
     fn read<R: Read, I: crate::private::Sealed>(r: R) -> Result<Self, crate::errors::ParseError> {
         Self::read_inner(r).map_err(|kind| crate::errors::ParseError::new(4, "CMD_SURVEY_RESULT", kind))
     }

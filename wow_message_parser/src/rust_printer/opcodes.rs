@@ -583,14 +583,11 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
             let func = it.func();
             let read = it.read();
             let prefix = it.prefix();
-            let postfix = it.postfix();
             let error = "crate::errors::ExpectedOpcodeError";
 
-            if it.is_async() {
-                s.wln(it.cfg());
-            }
+            s.wln(it.cfg());
             s.open_curly(format!(
-                "{func}fn {prefix}read_inner<R: {read}>(mut r: R) -> Result<{ty_name}, {error}>"
+                "pub {func}fn {prefix}read<R: {read}>(mut r: R) -> Result<Self, {error}>",
             ));
             s.wln(format!(
                 "let opcode = crate::util::{prefix}read_u8_le(&mut r){postfix}?;",
@@ -627,15 +624,6 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
 
                 s.wln(format!("opcode => Err({EXPECTED_OPCODE_ERROR}::Opcode(opcode as u32)),"));
             });
-            s.closing_curly_newline();
-
-            s.wln(it.cfg());
-            s.open_curly(format!(
-                "pub {func}fn {prefix}read<R: {read}>(r: R) -> Result<Self, {error}>",
-            ));
-
-            s.wln(format!("Self::{prefix}read_inner(r){postfix}"));
-
             s.closing_curly_newline();
         }
     });
