@@ -88,13 +88,13 @@ fn print_versions(
 
 pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
     const LOGIN_DEFINER_HEADER: &str = "# Login Definers";
-    const LOGIN_CONTAINER_HEADER: &str = "# Login Containers\n";
-    const WORLD_DEFINER_HEADER: &str = "# World Definers\n";
-    const WORLD_CONTAINER_HEADER: &str = "# World Containers\n";
+    const LOGIN_CONTAINER_HEADER: &str = "# Login Containers";
+    const WORLD_DEFINER_HEADER: &str = "# World Definers";
+    const WORLD_CONTAINER_HEADER: &str = "# World Containers";
 
     let s = read_to_string(doc_summary_path()).unwrap();
     let (s, _) = s.split_once(LOGIN_DEFINER_HEADER).unwrap();
-    let mut s = s.to_string();
+    let mut s = Writer::start_with(s.to_string());
 
     let mut login_definers = BTreeSet::new();
     let mut world_definers = BTreeSet::new();
@@ -118,7 +118,7 @@ pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
         create_or_append_hashmap(&definer_inner, docs_directory().join(&path), &mut files);
 
         let bullet_point = format!(
-            "- [{name}](docs/{path})\n",
+            "- [{name}](docs/{path})",
             name = definer.name(),
             path = path,
         );
@@ -129,18 +129,17 @@ pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
         }
     }
 
-    s.push_str(LOGIN_DEFINER_HEADER);
-    s.push('\n');
+    s.wln(LOGIN_DEFINER_HEADER);
     for i in login_definers {
-        s.push_str(&i);
+        s.wln(&i);
     }
-    s.push('\n');
+    s.newline();
 
-    s.push_str(WORLD_DEFINER_HEADER);
+    s.wln(WORLD_DEFINER_HEADER);
     for i in world_definers {
-        s.push_str(&i);
+        s.wln(&i);
     }
-    s.push('\n');
+    s.newline();
 
     let mut login_containers = BTreeSet::new();
     let mut world_containers = BTreeSet::new();
@@ -157,7 +156,7 @@ pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
         create_or_append_hashmap(&container_inner, docs_directory().join(&path), &mut files);
 
         let bullet_point = format!(
-            "- [{name}](docs/{path})\n",
+            "- [{name}](docs/{path})",
             name = container.name(),
             path = path,
         );
@@ -168,19 +167,19 @@ pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
         }
     }
 
-    s.push_str(LOGIN_CONTAINER_HEADER);
+    s.wln(LOGIN_CONTAINER_HEADER);
     for i in login_containers {
-        s.push_str(&i);
+        s.wln(&i);
     }
-    s.push('\n');
+    s.newline();
 
-    s.push_str(WORLD_CONTAINER_HEADER);
+    s.wln(WORLD_CONTAINER_HEADER);
     for i in world_containers {
-        s.push_str(&i);
+        s.wln(&i);
     }
-    s.push('\n');
+    s.newline();
 
-    create_and_overwrite_if_not_same_contents(&s, &doc_summary_path());
+    create_and_overwrite_if_not_same_contents(s.inner(), &doc_summary_path());
 
     for (path, s) in &files {
         create_and_overwrite_if_not_same_contents(s, path);
