@@ -1,5 +1,6 @@
 use crate::base_printer::data::items::{
-    Array, ArrayField, ArrayInstance, ArrayInstances, Field, Optimizations, Value,
+    process_extra_flags, Array, ArrayField, ArrayInstance, ArrayInstances, Field, Optimizations,
+    Value,
 };
 use crate::base_printer::data::{get_fields, items};
 use crate::base_printer::write::items::GenericThing;
@@ -245,7 +246,14 @@ impl TbcItem {
             Field::new("min_money_loot", Value::Int(self.min_money_loot)),
             Field::new("max_money_loot", Value::Int(self.max_money_loot)),
             Field::new("duration", Value::Int(self.duration)),
-            Field::new("extra_flags", Value::Int(self.extra_flags)),
+            Field::new(
+                "extra_flags",
+                Value::Int(process_extra_flags(
+                    self.entry,
+                    self.extra_flags,
+                    &self.name,
+                )),
+            ),
         ];
 
         let arrays = vec![

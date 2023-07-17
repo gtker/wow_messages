@@ -65,6 +65,7 @@ pub struct Item {
     disenchant_id: i8,
     food_type: i8,
     duration: i32,
+    extra_flags: i8,
     sockets: &'static [ItemSocket],
     damages: &'static [ItemDamageType],
     stats: &'static [ItemStat],
@@ -125,6 +126,7 @@ impl Item {
         disenchant_id: i8,
         food_type: i8,
         duration: i32,
+        extra_flags: i8,
         sockets: &'static [ItemSocket],
         damages: &'static [ItemDamageType],
         stats: &'static [ItemStat],
@@ -182,6 +184,7 @@ impl Item {
             disenchant_id,
             food_type,
             duration,
+            extra_flags,
             sockets,
             damages,
             stats,
@@ -576,13 +579,8 @@ impl Item {
         self.duration
     }
 
-    /// Returns `0` except for specific item entries.
     pub const fn extra_flags(&self) -> i32 {
-        match self.entry {
-            5810 | 9365 | 9437 | 9438 | 9439 | 9440 | 9441 | 9442 | 10338 | 10684 | 10790 | 10791 | 11885 | 12586 | 19807 | 20391 | 20392 | 20557 | 20561 | 20562 | 20563 | 20564 | 20565 | 20566 | 20567 | 20568 | 20569 | 20570 | 20571 | 20572 | 20573 | 20574 | 21038 | 21171 | 21174 | 21212 | 21328 | 22736 | 23247 | 23379 | 30311 | 30312 | 30313 | 30314 | 30316 | 30317 | 30318 | 30320 | 30850 | 33096 | 33176 | 33182 | 33183 | 33184 | 33189 | 33226 | 34191 | 35313 | 37582 | 37583 | 37584 | 37585 => 1,
-            7666 | 18706 => 2,
-            _ => 0,
-        }
+        self.extra_flags as i32
     }
 
     pub const fn sockets_array(&self) -> [ItemSocket; 3] {

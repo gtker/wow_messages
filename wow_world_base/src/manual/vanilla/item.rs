@@ -63,6 +63,7 @@ pub struct Item {
     bag_family: BagFamily,
     disenchant_id: i8,
     food_type: i8,
+    extra_flags: i8,
     damages: &'static [ItemDamageType],
     spells: &'static [Spells],
 }
@@ -120,6 +121,7 @@ impl Item {
         bag_family: BagFamily,
         disenchant_id: i8,
         food_type: i8,
+        extra_flags: i8,
         damages: &'static [ItemDamageType],
         spells: &'static [Spells],
     ) -> Self {
@@ -174,6 +176,7 @@ impl Item {
             bag_family,
             disenchant_id,
             food_type,
+            extra_flags,
             damages,
             spells,
         }
@@ -550,13 +553,8 @@ impl Item {
         }
     }
 
-    /// Returns `0` except for specific item entries.
     pub const fn extra_flags(&self) -> i32 {
-        match self.entry {
-            5810 | 9365 | 9437 | 9438 | 9439 | 9440 | 9441 | 9442 | 10338 | 10684 | 10790 | 10791 | 11885 | 12586 | 19807 | 20391 | 20392 | 20557 | 20561 | 20562 | 20563 | 20564 | 20565 | 20566 | 20567 | 20568 | 20569 | 20570 | 20571 | 20572 | 20573 | 20574 | 21038 | 21171 | 21174 | 21212 | 21328 | 22736 | 23247 | 23379 => 1,
-            18706 => 2,
-            _ => 0,
-        }
+        self.extra_flags as i32
     }
 
     pub const fn damages_array(&self) -> [ItemDamageType; 5] {

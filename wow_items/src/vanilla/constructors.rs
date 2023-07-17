@@ -57,6 +57,7 @@ pub const fn n(
     bag_family: BagFamily,
     disenchant_id: i8,
     food_type: i8,
+    extra_flags: i8,
     damages: &'static [ItemDamageType],
     spells: &'static [Spells],
 ) -> Item {
@@ -111,6 +112,7 @@ pub const fn n(
         bag_family,
         disenchant_id,
         food_type,
+        extra_flags,
         damages,
         spells,
     )
@@ -166,6 +168,7 @@ pub const fn na(
     bag_family: BagFamily,
     disenchant_id: i8,
     food_type: i8,
+    extra_flags: i8,
     spells: &'static [Spells],
 ) -> Item {
     Item::new(
@@ -219,6 +222,7 @@ pub const fn na(
         bag_family,
         disenchant_id,
         food_type,
+        extra_flags,
         EMPTY_ITEMDAMAGETYPE,
         spells,
     )
@@ -274,6 +278,7 @@ pub const fn nab(
     bag_family: BagFamily,
     disenchant_id: i8,
     food_type: i8,
+    extra_flags: i8,
 ) -> Item {
     Item::new(
         entry,
@@ -326,6 +331,7 @@ pub const fn nab(
         bag_family,
         disenchant_id,
         food_type,
+        extra_flags,
         EMPTY_ITEMDAMAGETYPE,
         EMPTY_SPELLS,
     )
@@ -381,6 +387,7 @@ pub const fn nb(
     bag_family: BagFamily,
     disenchant_id: i8,
     food_type: i8,
+    extra_flags: i8,
     damages: &'static [ItemDamageType],
 ) -> Item {
     Item::new(
@@ -434,6 +441,7 @@ pub const fn nb(
         bag_family,
         disenchant_id,
         food_type,
+        extra_flags,
         damages,
         EMPTY_SPELLS,
     )
