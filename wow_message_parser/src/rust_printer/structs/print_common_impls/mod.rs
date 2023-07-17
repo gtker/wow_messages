@@ -477,6 +477,7 @@ pub(crate) fn impl_read_and_writable_login(
             let prefix = it.prefix();
             let read = it.read();
 
+            s.wln(it.cfg());
             s.bodyn(format!("{func}fn {prefix}read_inner<R: {read}>(mut r: R) -> Result<Self, {PARSE_ERROR_KIND}>"), |s| {
                 print_read::print_read(s, e, o, it.prefix(), it.postfix());
             });

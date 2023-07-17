@@ -629,6 +629,7 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
             });
             s.closing_curly_newline();
 
+            s.wln(it.cfg());
             s.open_curly(format!(
                 "pub {func}fn {prefix}read<R: {read}>(r: R) -> Result<Self, {error}>",
             ));

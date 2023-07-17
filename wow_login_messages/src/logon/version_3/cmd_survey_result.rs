@@ -43,6 +43,7 @@ impl CMD_SURVEY_RESULT {
 impl crate::private::Sealed for CMD_SURVEY_RESULT {}
 
 impl CMD_SURVEY_RESULT {
+    #[cfg(feature = "sync")]
     fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // survey_id: u32
         let survey_id = crate::util::read_u32_le(&mut r)?;
@@ -69,6 +70,7 @@ impl CMD_SURVEY_RESULT {
         })
     }
 
+    #[cfg(feature = "tokio")]
     async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // survey_id: u32
         let survey_id = crate::util::tokio_read_u32_le(&mut r).await?;
@@ -95,6 +97,7 @@ impl CMD_SURVEY_RESULT {
         })
     }
 
+    #[cfg(feature = "async-std")]
     async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // survey_id: u32
         let survey_id = crate::util::astd_read_u32_le(&mut r).await?;

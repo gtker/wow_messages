@@ -39,6 +39,7 @@ impl ServerOpcodeMessage {
         }
     }
 
+    #[cfg(feature = "sync")]
     pub fn read<R: Read>(r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         Self::read_inner(r)
     }
@@ -56,6 +57,7 @@ impl ServerOpcodeMessage {
         }
     }
 
+    #[cfg(feature = "tokio")]
     pub async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         Self::tokio_read_inner(r).await
     }
@@ -73,6 +75,7 @@ impl ServerOpcodeMessage {
         }
     }
 
+    #[cfg(feature = "async-std")]
     pub async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         Self::astd_read_inner(r).await
     }
@@ -167,6 +170,7 @@ impl ClientOpcodeMessage {
         }
     }
 
+    #[cfg(feature = "sync")]
     pub fn read<R: Read>(r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         Self::read_inner(r)
     }
@@ -187,6 +191,7 @@ impl ClientOpcodeMessage {
         }
     }
 
+    #[cfg(feature = "tokio")]
     pub async fn tokio_read<R: tokio::io::AsyncReadExt + Unpin + Send>(r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         Self::tokio_read_inner(r).await
     }
@@ -207,6 +212,7 @@ impl ClientOpcodeMessage {
         }
     }
 
+    #[cfg(feature = "async-std")]
     pub async fn astd_read<R: async_std::io::ReadExt + Unpin + Send>(r: R) -> Result<Self, crate::errors::ExpectedOpcodeError> {
         Self::astd_read_inner(r).await
     }

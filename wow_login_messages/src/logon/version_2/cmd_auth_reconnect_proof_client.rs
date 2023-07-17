@@ -62,6 +62,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
 impl crate::private::Sealed for CMD_AUTH_RECONNECT_PROOF_Client {}
 
 impl CMD_AUTH_RECONNECT_PROOF_Client {
+    #[cfg(feature = "sync")]
     fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // proof_data: u8[16]
         let proof_data = {
@@ -95,6 +96,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
         })
     }
 
+    #[cfg(feature = "tokio")]
     async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // proof_data: u8[16]
         let proof_data = {
@@ -128,6 +130,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Client {
         })
     }
 
+    #[cfg(feature = "async-std")]
     async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // proof_data: u8[16]
         let proof_data = {

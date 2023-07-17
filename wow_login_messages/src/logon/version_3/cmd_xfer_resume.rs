@@ -27,6 +27,7 @@ impl CMD_XFER_RESUME {
 impl crate::private::Sealed for CMD_XFER_RESUME {}
 
 impl CMD_XFER_RESUME {
+    #[cfg(feature = "sync")]
     fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // offset: u64
         let offset = crate::util::read_u64_le(&mut r)?;
@@ -36,6 +37,7 @@ impl CMD_XFER_RESUME {
         })
     }
 
+    #[cfg(feature = "tokio")]
     async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // offset: u64
         let offset = crate::util::tokio_read_u64_le(&mut r).await?;
@@ -45,6 +47,7 @@ impl CMD_XFER_RESUME {
         })
     }
 
+    #[cfg(feature = "async-std")]
     async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // offset: u64
         let offset = crate::util::astd_read_u64_le(&mut r).await?;

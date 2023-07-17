@@ -75,6 +75,7 @@ impl CMD_REALM_LIST_Server {
 impl crate::private::Sealed for CMD_REALM_LIST_Server {}
 
 impl CMD_REALM_LIST_Server {
+    #[cfg(feature = "sync")]
     fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // size: u16
         let _size = crate::util::read_u16_le(&mut r)?;
@@ -105,6 +106,7 @@ impl CMD_REALM_LIST_Server {
         })
     }
 
+    #[cfg(feature = "tokio")]
     async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // size: u16
         let _size = crate::util::tokio_read_u16_le(&mut r).await?;
@@ -135,6 +137,7 @@ impl CMD_REALM_LIST_Server {
         })
     }
 
+    #[cfg(feature = "async-std")]
     async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // size: u16
         let _size = crate::util::astd_read_u16_le(&mut r).await?;

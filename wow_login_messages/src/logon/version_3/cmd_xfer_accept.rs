@@ -22,16 +22,19 @@ impl CMD_XFER_ACCEPT {
 impl crate::private::Sealed for CMD_XFER_ACCEPT {}
 
 impl CMD_XFER_ACCEPT {
+    #[cfg(feature = "sync")]
     fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         Ok(Self {
         })
     }
 
+    #[cfg(feature = "tokio")]
     async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         Ok(Self {
         })
     }
 
+    #[cfg(feature = "async-std")]
     async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         Ok(Self {
         })

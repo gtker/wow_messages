@@ -40,6 +40,7 @@ impl CMD_REALM_LIST_Client {
 impl crate::private::Sealed for CMD_REALM_LIST_Client {}
 
 impl CMD_REALM_LIST_Client {
+    #[cfg(feature = "sync")]
     fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // padding: u32
         let _padding = crate::util::read_u32_le(&mut r)?;
@@ -49,6 +50,7 @@ impl CMD_REALM_LIST_Client {
         })
     }
 
+    #[cfg(feature = "tokio")]
     async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // padding: u32
         let _padding = crate::util::tokio_read_u32_le(&mut r).await?;
@@ -58,6 +60,7 @@ impl CMD_REALM_LIST_Client {
         })
     }
 
+    #[cfg(feature = "async-std")]
     async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // padding: u32
         let _padding = crate::util::astd_read_u32_le(&mut r).await?;

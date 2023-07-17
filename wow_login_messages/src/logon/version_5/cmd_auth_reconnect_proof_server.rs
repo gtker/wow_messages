@@ -48,6 +48,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Server {
 impl crate::private::Sealed for CMD_AUTH_RECONNECT_PROOF_Server {}
 
 impl CMD_AUTH_RECONNECT_PROOF_Server {
+    #[cfg(feature = "sync")]
     fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // result: LoginResult
         let result = crate::util::read_u8_le(&mut r)?.try_into()?;
@@ -61,6 +62,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Server {
         })
     }
 
+    #[cfg(feature = "tokio")]
     async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // result: LoginResult
         let result = crate::util::tokio_read_u8_le(&mut r).await?.try_into()?;
@@ -74,6 +76,7 @@ impl CMD_AUTH_RECONNECT_PROOF_Server {
         })
     }
 
+    #[cfg(feature = "async-std")]
     async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // result: LoginResult
         let result = crate::util::astd_read_u8_le(&mut r).await?.try_into()?;
