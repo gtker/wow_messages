@@ -149,7 +149,7 @@ pub(crate) fn print_docs_summary_and_objects(definers: &[DocWriter], containers:
     const LOGIN_DEFINER_HEADER: &str = "# Login Definers";
     const LOGIN_CONTAINER_HEADER: &str = "# Login Containers\n";
     const WORLD_DEFINER_HEADER: &str = "# World Definers\n";
-    const WORLD_CONTAINER_HEADER: &str = "# Login Containers\n";
+    const WORLD_CONTAINER_HEADER: &str = "# World Containers\n";
 
     let s = read_to_string(doc_summary_path()).unwrap();
     let (s, _) = s.split_once(LOGIN_DEFINER_HEADER).unwrap();
