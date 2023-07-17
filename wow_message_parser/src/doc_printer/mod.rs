@@ -8,6 +8,7 @@ use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::path_utils::{doc_summary_path, docs_directory};
 use hashbrown::HashMap;
+use std::collections::BTreeSet;
 use std::fmt::Write;
 use std::fs::read_to_string;
 use std::path::PathBuf;
@@ -162,9 +163,8 @@ pub(crate) fn print_docs_summary_and_objects<'a>(
     let (s, _) = s.split_once(LOGIN_DEFINER_HEADER).unwrap();
     let mut s = s.to_string();
 
-    let mut already_added_files = Vec::new();
-    let mut login_definers = Vec::new();
-    let mut world_definers = Vec::new();
+    let mut login_definers = BTreeSet::new();
+    let mut world_definers = BTreeSet::new();
 
     let mut files = HashMap::new();
 
@@ -176,22 +176,16 @@ pub(crate) fn print_docs_summary_and_objects<'a>(
 
         create_or_append_hashmap(definer.inner(), docs_directory().join(&path), &mut files);
 
-        if already_added_files.contains(&path) {
-            continue;
-        }
-
         let bullet_point = format!(
             "- [{name}](docs/{path})\n",
             name = definer.name(),
             path = path,
         );
         if definer.tags().has_login_version() {
-            login_definers.push(bullet_point)
+            login_definers.insert(bullet_point);
         } else {
-            world_definers.push(bullet_point);
+            world_definers.insert(bullet_point);
         }
-
-        already_added_files.push(path);
     }
 
     s.push_str(LOGIN_DEFINER_HEADER);
@@ -207,8 +201,8 @@ pub(crate) fn print_docs_summary_and_objects<'a>(
     }
     s.push('\n');
 
-    let mut login_containers = Vec::new();
-    let mut world_containers = Vec::new();
+    let mut login_containers = BTreeSet::new();
+    let mut world_containers = BTreeSet::new();
     for container in containers {
         let path = format!(
             "{lower_name}.md",
@@ -217,22 +211,16 @@ pub(crate) fn print_docs_summary_and_objects<'a>(
 
         create_or_append_hashmap(container.inner(), docs_directory().join(&path), &mut files);
 
-        if already_added_files.contains(&path) {
-            continue;
-        }
-
         let bullet_point = format!(
             "- [{name}](docs/{path})\n",
             name = container.name(),
             path = path,
         );
         if container.tags().has_login_version() {
-            login_containers.push(bullet_point)
+            login_containers.insert(bullet_point);
         } else {
-            world_containers.push(bullet_point);
+            world_containers.insert(bullet_point);
         }
-
-        already_added_files.push(path);
     }
 
     s.push_str(LOGIN_CONTAINER_HEADER);
