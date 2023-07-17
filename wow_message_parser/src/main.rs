@@ -22,12 +22,9 @@
 )]
 #![allow(clippy::too_many_arguments)]
 
-use std::collections::BTreeSet;
 use std::fmt::Write;
 use std::path::Path;
 
-use doc_printer::container::print_docs_for_container;
-use doc_printer::definer::{print_docs_for_enum, print_docs_for_flag};
 use walkdir::WalkDir;
 
 use parser::types::objects::Objects;
@@ -180,21 +177,7 @@ fn print_main_types(o: &Objects) {
         }
     }
 
-    let mut definer_docs = BTreeSet::new();
-    let mut object_docs = BTreeSet::new();
-    for e in o.all_objects() {
-        if should_not_write_object_docs(e.tags()) {
-            continue;
-        }
-
-        match e {
-            Object::Container(e) => object_docs.insert(print_docs_for_container(e, o)),
-            Object::Enum(e) => definer_docs.insert(print_docs_for_enum(e)),
-            Object::Flag(e) => definer_docs.insert(print_docs_for_flag(e)),
-        };
-    }
-
-    print_docs(definer_docs.iter(), object_docs.iter());
+    print_docs(o);
 
     n.write_modules_and_remove_unwritten_files();
 }

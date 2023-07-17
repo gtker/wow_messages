@@ -2,11 +2,15 @@ pub mod container;
 pub mod definer;
 mod update_mask;
 
+use crate::doc_printer::container::print_docs_for_container;
+use crate::doc_printer::definer::{print_docs_for_enum, print_docs_for_flag};
 use crate::doc_printer::update_mask::print_update_mask_docs;
 use crate::file_utils::create_and_overwrite_if_not_same_contents;
+use crate::parser::types::objects::{Object, Objects};
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::path_utils::{doc_summary_path, docs_directory};
+use crate::should_not_write_object_docs;
 use hashbrown::HashMap;
 use std::collections::BTreeSet;
 use std::fmt::Write;
@@ -87,13 +91,10 @@ fn create_or_append_hashmap(s: &str, path: PathBuf, files: &mut HashMap<PathBuf,
     }
 }
 
-pub(crate) fn print_docs<'a>(
-    definers: impl Iterator<Item = &'a DocWriter>,
-    containers: impl Iterator<Item = &'a DocWriter>,
-) {
+pub(crate) fn print_docs(o: &Objects) {
     print_update_mask_docs();
 
-    print_docs_summary_and_objects(definers, containers);
+    print_docs_summary_and_objects(o);
 }
 
 fn common(s: &mut DocWriter, tags: &ObjectTags) {
@@ -150,10 +151,21 @@ fn print_versions(
     s.newline();
 }
 
-pub(crate) fn print_docs_summary_and_objects<'a>(
-    definers: impl Iterator<Item = &'a DocWriter>,
-    containers: impl Iterator<Item = &'a DocWriter>,
-) {
+pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
+    let mut definers = BTreeSet::new();
+    let mut containers = BTreeSet::new();
+    for e in o.all_objects() {
+        if should_not_write_object_docs(e.tags()) {
+            continue;
+        }
+
+        match e {
+            Object::Container(e) => containers.insert(print_docs_for_container(e, o)),
+            Object::Enum(e) => definers.insert(print_docs_for_enum(e)),
+            Object::Flag(e) => definers.insert(print_docs_for_flag(e)),
+        };
+    }
+
     const LOGIN_DEFINER_HEADER: &str = "# Login Definers";
     const LOGIN_CONTAINER_HEADER: &str = "# Login Containers\n";
     const WORLD_DEFINER_HEADER: &str = "# World Definers\n";
