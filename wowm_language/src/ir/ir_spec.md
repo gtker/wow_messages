@@ -3,9 +3,8 @@
 The Intermediate Representation is a JSON file that contains the members:
 
 * `version`, an object that contains the SemVer of the file.
-* `flags`, an array of [flags](definers.md).
-* `enums`, an array of [enums](definers.md).
-* `containers`, an array of [containers](containers.md).
+* `login`, [flags](definers.md), [enums](definers.md), and [structs](containers.md) and [messages](containers.md) for login messages.
+* `world`, [flags](definers.md), [enums](definers.md), and [structs](containers.md) and [messages](containers.md) for login messages.
 
 The header JSON file without any objects in it would look like:
 ```json
@@ -15,8 +14,15 @@ The header JSON file without any objects in it would look like:
     "minor": 0,
     "patch": 0
   },
-  "flags": [],
-  "enums": [],
-  "containers": []
+  "login": {
+    "flags": [],
+    "enums": [],
+    "containers": []
+  },
+  "world": {
+    "flags": [],
+    "enums": [],
+    "containers": []
+  }
 }
 ```

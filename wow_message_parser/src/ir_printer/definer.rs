@@ -8,8 +8,8 @@ use core::option::Option;
 use serde::Serialize;
 use std::collections::BTreeSet;
 
-pub(crate) fn definers_to_ir(definers: &[Definer]) -> Vec<IrDefiner> {
-    definers.iter().map(definer_to_ir).collect()
+pub(crate) fn definers_to_ir<'a>(definers: impl Iterator<Item = &'a Definer>) -> Vec<IrDefiner> {
+    definers.map(definer_to_ir).collect()
 }
 
 fn definer_to_ir(e: &Definer) -> IrDefiner {

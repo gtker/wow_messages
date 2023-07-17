@@ -6,6 +6,7 @@ use crate::ir_printer::container::{containers_to_ir, IrContainer};
 use serde::Serialize;
 
 use crate::ir_printer::definer::{definers_to_ir, IrDefiner};
+use crate::parser::types::container::ContainerType;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
@@ -205,21 +206,52 @@ struct IrVersion {
 }
 
 #[derive(Debug, Serialize)]
-struct IrObjects {
-    version: IrVersion,
+struct TypeObjects {
     flags: Vec<IrDefiner>,
     enums: Vec<IrDefiner>,
-    containers: Vec<IrContainer>,
+    structs: Vec<IrContainer>,
+    messages: Vec<IrContainer>,
+}
+
+impl TypeObjects {
+    fn only_type(o: &Objects, predicate: impl Fn(&ObjectTags) -> bool) -> Self {
+        let mut flags = definers_to_ir(o.flags().iter().filter(|a| predicate(a.tags())));
+        flags.sort_by(|a, b| a.name().cmp(b.name()));
+        let mut enums = definers_to_ir(o.enums().iter().filter(|a| predicate(a.tags())));
+        enums.sort_by(|a, b| a.name().cmp(b.name()));
+        let mut structs = containers_to_ir(
+            o.all_containers()
+                .filter(|a| predicate(a.tags()) && a.container_type() == ContainerType::Struct),
+            o,
+        );
+        structs.sort_by(|a, b| a.name().cmp(b.name()));
+        let mut messages = containers_to_ir(
+            o.all_containers()
+                .filter(|a| predicate(a.tags()) && a.container_type() != ContainerType::Struct),
+            o,
+        );
+        messages.sort_by(|a, b| a.name().cmp(b.name()));
+
+        TypeObjects {
+            flags,
+            enums,
+            structs,
+            messages,
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct IrObjects {
+    version: IrVersion,
+    login: TypeObjects,
+    world: TypeObjects,
 }
 
 impl IrObjects {
     fn from_regular_objects(o: &Objects) -> Self {
-        let mut flags = definers_to_ir(o.flags());
-        flags.sort_by(|a, b| a.name().cmp(b.name()));
-        let mut enums = definers_to_ir(o.enums());
-        enums.sort_by(|a, b| a.name().cmp(b.name()));
-        let mut containers = containers_to_ir(&o.all_containers().collect::<Vec<_>>(), o);
-        containers.sort_by(|a, b| a.name().cmp(b.name()));
+        let login = TypeObjects::only_type(o, |a| a.has_login_version());
+        let world = TypeObjects::only_type(o, |a| a.has_world_version());
 
         Self {
             version: IrVersion {
@@ -227,9 +259,8 @@ impl IrObjects {
                 minor: 0,
                 patch: 0,
             },
-            flags,
-            enums,
-            containers,
+            login,
+            world,
         }
     }
 }
