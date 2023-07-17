@@ -123,6 +123,8 @@ pub(crate) mod item_refund_result;
 pub use item_refund_result::*;
 pub(crate) mod item_set;
 pub use item_set::*;
+pub(crate) mod item_slot;
+pub use item_slot::*;
 pub(crate) mod item_text_query;
 pub use item_text_query::*;
 pub use crate::shared::join_arena_type_tbc_wrath::*;
