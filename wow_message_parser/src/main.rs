@@ -144,9 +144,6 @@ fn load_and_print_wowm_files() {
 fn print_main_types(o: &Objects) {
     let mut n = ModFiles::new();
 
-    let mut definer_docs = Vec::new();
-    let mut object_docs = Vec::new();
-
     for e in o.all_objects() {
         if should_not_write_object(e.tags()) {
             continue;
@@ -180,8 +177,16 @@ fn print_main_types(o: &Objects) {
                 n.add_world_module(e.name(), &versions, s.inner());
             }
         }
+    }
 
-        match &e {
+    let mut definer_docs = Vec::new();
+    let mut object_docs = Vec::new();
+    for e in o.all_objects() {
+        if should_not_write_object_docs(e.tags()) {
+            continue;
+        }
+
+        match e {
             Object::Container(e) => object_docs.push(print_docs_for_container(e, o)),
             Object::Enum(e) => definer_docs.push(print_docs_for_enum(e)),
             Object::Flag(e) => definer_docs.push(print_docs_for_flag(e)),
@@ -278,4 +283,8 @@ fn load_files(dir: &Path, components: &mut ParsedObjects) {
 
 fn should_not_write_object(t: &ObjectTags) -> bool {
     t.test() || t.skip() || !t.is_main_version()
+}
+
+fn should_not_write_object_docs(t: &ObjectTags) -> bool {
+    t.test() || t.skip()
 }
