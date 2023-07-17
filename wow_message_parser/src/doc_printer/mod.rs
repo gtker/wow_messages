@@ -6,6 +6,8 @@ use crate::doc_printer::container::print_docs_for_container;
 use crate::doc_printer::definer::{print_docs_for_enum, print_docs_for_flag};
 use crate::doc_printer::update_mask::print_update_mask_docs;
 use crate::file_utils::create_and_overwrite_if_not_same_contents;
+use crate::parser::types::container::Container;
+use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::{LoginVersion, WorldVersion};
@@ -78,25 +80,48 @@ fn print_versions(
     s.newline();
 }
 
-pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
-    const LOGIN_DEFINER_HEADER: &str = "# Login Definers";
-    const LOGIN_CONTAINER_HEADER: &str = "# Login Containers";
-    const WORLD_DEFINER_HEADER: &str = "# World Definers";
-    const WORLD_CONTAINER_HEADER: &str = "# World Containers";
+const LOGIN_DEFINER_HEADER: &str = "# Login Definers";
+const LOGIN_CONTAINER_HEADER: &str = "# Login Containers";
+const WORLD_DEFINER_HEADER: &str = "# World Definers";
+const WORLD_CONTAINER_HEADER: &str = "# World Containers";
 
+pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
     let s = read_to_string(doc_summary_path()).unwrap();
     let (s, _) = s.split_once(LOGIN_DEFINER_HEADER).unwrap();
     let mut s = Writer::start_with(s.to_string());
 
+    let mut files = HashMap::new();
+
+    print_definers(
+        &mut s,
+        o.all_definers()
+            .filter(|a| !should_not_write_object_docs(a.tags())),
+        &mut files,
+    );
+    print_containers(
+        &mut s,
+        o.all_containers()
+            .filter(|a| !should_not_write_object_docs(a.tags())),
+        &mut files,
+        o,
+    );
+
+    create_and_overwrite_if_not_same_contents(s.inner(), &doc_summary_path());
+
+    for (path, s) in &files {
+        create_and_overwrite_if_not_same_contents(s, path);
+    }
+}
+
+fn print_definers<'a>(
+    s: &mut Writer,
+    definers: impl Iterator<Item = &'a Definer>,
+    files: &mut HashMap<PathBuf, String>,
+) {
     let mut login_definers = BTreeSet::new();
     let mut world_definers = BTreeSet::new();
 
-    let mut files = HashMap::new();
-
-    for definer in o
-        .all_definers()
-        .filter(|a| !should_not_write_object_docs(a.tags()))
-    {
+    for definer in definers {
         let path = format!(
             "{lower_name}.md",
             lower_name = definer.name().to_lowercase()
@@ -107,7 +132,7 @@ pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
             DefinerType::Flag => print_docs_for_flag(definer).into_inner(),
         };
 
-        create_or_append_hashmap(&definer_inner, docs_directory().join(&path), &mut files);
+        create_or_append_hashmap(&definer_inner, docs_directory().join(&path), files);
 
         let bullet_point = format!(
             "- [{name}](docs/{path})",
@@ -132,20 +157,24 @@ pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
         s.wln(&i);
     }
     s.newline();
+}
 
+fn print_containers<'a>(
+    s: &mut Writer,
+    containers: impl Iterator<Item = &'a Container>,
+    files: &mut HashMap<PathBuf, String>,
+    o: &Objects,
+) {
     let mut login_containers = BTreeSet::new();
     let mut world_containers = BTreeSet::new();
-    for container in o
-        .all_containers()
-        .filter(|a| !should_not_write_object_docs(a.tags()))
-    {
+    for container in containers {
         let path = format!(
             "{lower_name}.md",
             lower_name = container.name().to_lowercase()
         );
 
         let container_inner = print_docs_for_container(container, o).into_inner();
-        create_or_append_hashmap(&container_inner, docs_directory().join(&path), &mut files);
+        create_or_append_hashmap(&container_inner, docs_directory().join(&path), files);
 
         let bullet_point = format!(
             "- [{name}](docs/{path})",
@@ -170,12 +199,6 @@ pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
         s.wln(&i);
     }
     s.newline();
-
-    create_and_overwrite_if_not_same_contents(s.inner(), &doc_summary_path());
-
-    for (path, s) in &files {
-        create_and_overwrite_if_not_same_contents(s, path);
-    }
 }
 
 fn create_or_append_hashmap(s: &str, path: PathBuf, files: &mut HashMap<PathBuf, String>) {
