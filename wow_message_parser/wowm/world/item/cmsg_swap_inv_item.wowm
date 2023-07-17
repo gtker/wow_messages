@@ -2,14 +2,14 @@ cmsg CMSG_SWAP_INV_ITEM = 0x010D {
     u8 source_slot;
     u8 destination_slot;
 } {
-    versions = "2.4.3 3";
+    versions = "3";
 }
 
 cmsg CMSG_SWAP_INV_ITEM = 0x010D {
     ItemSlot source_slot;
     ItemSlot destination_slot;
 } {
-    versions = "1.12";
+    paste_versions = "1.12 2.4.3";
 }
 
 enum ItemSlot : u8 {
@@ -128,4 +128,145 @@ enum ItemSlot : u8 {
     KEYRING_32 = 112;
 } {
      versions = "1.12";
+}
+
+enum ItemSlot : u8 {
+    HEAD = 0;
+    NECK = 1;
+    SHOULDERS = 2;
+    SHIRT = 3;
+    CHEST = 4;
+    WAIST = 5;
+    LEGS = 6;
+    BOOTS = 7;
+    WRIST = 8;
+    HANDS = 9;
+    RING1 = 10;
+    RING2 = 11;
+    TRINKET1 = 12;
+    TRINKET2 = 13;
+    BACK = 14;
+    MAIN_HAND = 15;
+    OFF_HAND = 16;
+    RANGED_OR_RELIC = 17;
+    TABARD = 18;
+    BAG1 = 19;
+    BAG2 = 20;
+    BAG3 = 21;
+    BAG4 = 22;
+    INVENTORY_0 = 23;
+    INVENTORY_1 = 24;
+    INVENTORY_2 = 25;
+    INVENTORY_3 = 26;
+    INVENTORY_4 = 27;
+    INVENTORY_5 = 28;
+    INVENTORY_6 = 29;
+    INVENTORY_7 = 30;
+    INVENTORY_8 = 31;
+    INVENTORY_9 = 32;
+    INVENTORY_10 = 33;
+    INVENTORY_11 = 34;
+    INVENTORY_12 = 35;
+    INVENTORY_13 = 36;
+    INVENTORY_14 = 37;
+    INVENTORY_15 = 38;
+    BANK_1 = 39;
+    BANK_2 = 40;
+    BANK_3 = 41;
+    BANK_4 = 42;
+    BANK_5 = 43;
+    BANK_6 = 44;
+    BANK_7 = 45;
+    BANK_8 = 46;
+    BANK_9 = 47;
+    BANK_10 = 48;
+    BANK_11 = 49;
+    BANK_12 = 50;
+    BANK_13 = 51;
+    BANK_14 = 52;
+    BANK_15 = 53;
+    BANK_16 = 54;
+    BANK_17 = 55;
+    BANK_18 = 56;
+    BANK_19 = 57;
+    BANK_20 = 58;
+    BANK_21 = 59;
+    BANK_22 = 60;
+    BANK_23 = 61;
+    BANK_24 = 62;
+    BANK_25 = 63;
+    BANK_26 = 64;
+    BANK_27 = 65;
+    BANK_28 = 66;
+    BANK_BAG_SLOT_1 = 67;
+    BANK_BAG_SLOT_2 = 68;
+    BANK_BAG_SLOT_3 = 69;
+    BANK_BAG_SLOT_4 = 70;
+    BANK_BAG_SLOT_5 = 71;
+    BANK_BAG_SLOT_6 = 72;
+    BANK_BAG_SLOT_7 = 73;
+    VENDOR_BUYBACK_1 = 74;
+    VENDOR_BUYBACK_2 = 75;
+    VENDOR_BUYBACK_3 = 76;
+    VENDOR_BUYBACK_4 = 77;
+    VENDOR_BUYBACK_5 = 78;
+    VENDOR_BUYBACK_6 = 79;
+    VENDOR_BUYBACK_7 = 80;
+    VENDOR_BUYBACK_8 = 81;
+    VENDOR_BUYBACK_9 = 82;
+    VENDOR_BUYBACK_10 = 83;
+    VENDOR_BUYBACK_11 = 84;
+    VENDOR_BUYBACK_12 = 85;
+    KEYRING_1 = 86;
+    KEYRING_2 = 87;
+    KEYRING_3 = 88;
+    KEYRING_4 = 89;
+    KEYRING_5 = 90;
+    KEYRING_6 = 91;
+    KEYRING_7 = 92;
+    KEYRING_8 = 93;
+    KEYRING_9 = 94;
+    KEYRING_10 = 95;
+    KEYRING_11 = 96;
+    KEYRING_12 = 97;
+    KEYRING_13 = 98;
+    KEYRING_14 = 99;
+    KEYRING_15 = 100;
+    KEYRING_16 = 101;
+    KEYRING_17 = 102;
+    KEYRING_18 = 103;
+    KEYRING_19 = 104;
+    KEYRING_20 = 105;
+    KEYRING_21 = 106;
+    KEYRING_22 = 107;
+    KEYRING_23 = 108;
+    KEYRING_24 = 109;
+    KEYRING_25 = 110;
+    KEYRING_26 = 111;
+    KEYRING_27 = 112;
+    KEYRING_28 = 113;
+    KEYRING_29 = 114;
+    KEYRING_30 = 115;
+    KEYRING_31 = 116;
+    KEYRING_32 = 117;
+    VANITY_PET_1 = 118;
+    VANITY_PET_2 = 119;
+    VANITY_PET_3 = 120;
+    VANITY_PET_4 = 121;
+    VANITY_PET_5 = 122;
+    VANITY_PET_6 = 123;
+    VANITY_PET_7 = 124;
+    VANITY_PET_8 = 125;
+    VANITY_PET_9 = 126;
+    VANITY_PET_10 = 127;
+    VANITY_PET_11 = 128;
+    VANITY_PET_12 = 129;
+    VANITY_PET_13 = 130;
+    VANITY_PET_14 = 131;
+    VANITY_PET_15 = 132;
+    VANITY_PET_16 = 133;
+    VANITY_PET_17 = 134;
+    VANITY_PET_18 = 135;
+} {
+     versions = "2.4.3";
 }

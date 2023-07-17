@@ -97,6 +97,8 @@ pub use item_class_and_sub_class::*;
 pub use crate::shared::item_quality_vanilla_tbc::*;
 pub(crate) mod item_set;
 pub use item_set::*;
+pub(crate) mod item_slot;
+pub use item_slot::*;
 pub use crate::shared::join_arena_type_tbc_wrath::*;
 pub use crate::shared::language_tbc_wrath::*;
 pub(crate) mod lfg_mode;
