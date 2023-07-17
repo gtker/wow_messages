@@ -580,15 +580,15 @@ pub(crate) fn common_impls_login(s: &mut Writer, v: &[&Container], ty: &str) {
 
     s.bodyn(format!("impl {ty_name}"), |s| {
         for it in ImplType::types() {
-            if it.is_async() {
-                s.wln(it.cfg());
-            }
             let func = it.func();
             let read = it.read();
             let prefix = it.prefix();
             let postfix = it.postfix();
             let error = "crate::errors::ExpectedOpcodeError";
 
+            if it.is_async() {
+                s.wln(it.cfg());
+            }
             s.open_curly(format!(
                 "{func}fn {prefix}read_inner<R: {read}>(mut r: R) -> Result<{ty_name}, {error}>"
             ));
