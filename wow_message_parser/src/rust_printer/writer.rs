@@ -465,6 +465,13 @@ impl Writer {
         self.inner.len() - (self.inner.rfind(|a| a == '\n').unwrap() + 1)
     }
 
+    pub(crate) fn bytes<'a>(&mut self, bytes: impl Iterator<Item = &'a u8>) {
+        for b in bytes {
+            let text = format!("{b}, ");
+            self.w(&text);
+        }
+    }
+
     fn write_prefix(&mut self) {
         self.inner.write_str(&self.prefix).unwrap();
     }

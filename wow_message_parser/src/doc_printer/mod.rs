@@ -10,63 +10,13 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::path_utils::{doc_summary_path, docs_directory};
+use crate::rust_printer::writer::Writer;
 use crate::rust_printer::DefinerType;
 use crate::should_not_write_object_docs;
 use hashbrown::HashMap;
 use std::collections::BTreeSet;
-use std::fmt::Write;
 use std::fs::read_to_string;
 use std::path::PathBuf;
-
-#[derive(Debug, PartialOrd, PartialEq, Ord, Eq)]
-pub(crate) struct DocWriter {
-    inner: String,
-    column: usize,
-}
-
-impl DocWriter {
-    pub(crate) fn new() -> Self {
-        Self {
-            inner: String::with_capacity(8000),
-            column: 0,
-        }
-    }
-
-    pub(crate) fn w(&mut self, s: impl AsRef<str>) {
-        self.inner.write_str(s.as_ref()).unwrap();
-        self.column += s.as_ref().len();
-    }
-
-    pub(crate) fn w_break_at(&mut self, s: impl AsRef<str>) {
-        self.w(s);
-        if self.column > 80 {
-            self.newline();
-        }
-    }
-
-    pub(crate) fn newline(&mut self) {
-        self.w("\n");
-        self.column = 0;
-    }
-
-    pub(crate) fn wln(&mut self, s: impl AsRef<str>) {
-        self.w(s);
-        self.newline();
-    }
-
-    pub(crate) fn wln_no_indent(&mut self, s: impl AsRef<str>) {
-        self.inner.write_str(s.as_ref()).unwrap();
-        self.newline();
-    }
-
-    pub(crate) fn bytes<'a>(&mut self, bytes: impl Iterator<Item = &'a u8>) {
-        for b in bytes {
-            let text = format!("{b}, ");
-            self.w(&text);
-            self.column += text.len();
-        }
-    }
-}
 
 fn create_or_append_hashmap(s: &str, path: PathBuf, files: &mut HashMap<PathBuf, String>) {
     if let Some(c) = files.get_mut(&path) {
@@ -82,7 +32,7 @@ pub(crate) fn print_docs(o: &Objects) {
     print_docs_summary_and_objects(o);
 }
 
-fn common(s: &mut DocWriter, tags: &ObjectTags, name: &str) {
+fn common(s: &mut Writer, tags: &ObjectTags, name: &str) {
     s.wln(format!("# {name}"));
     s.newline();
 
@@ -91,7 +41,7 @@ fn common(s: &mut DocWriter, tags: &ObjectTags, name: &str) {
     print_metadata(s, tags);
 }
 
-fn print_metadata(s: &mut DocWriter, tags: &ObjectTags) {
+fn print_metadata(s: &mut Writer, tags: &ObjectTags) {
     if let Some(description) = tags.description() {
         s.wln("### Description");
         s.newline();
@@ -112,7 +62,7 @@ fn print_metadata(s: &mut DocWriter, tags: &ObjectTags) {
 }
 
 fn print_versions(
-    s: &mut DocWriter,
+    s: &mut Writer,
     login_versions: impl Iterator<Item = LoginVersion>,
     world_versions: impl Iterator<Item = WorldVersion>,
 ) {
@@ -161,8 +111,8 @@ pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
         );
 
         let definer_inner = match definer.definer_ty() {
-            DefinerType::Enum => print_docs_for_enum(definer).inner,
-            DefinerType::Flag => print_docs_for_flag(definer).inner,
+            DefinerType::Enum => print_docs_for_enum(definer).into_inner(),
+            DefinerType::Flag => print_docs_for_flag(definer).into_inner(),
         };
 
         create_or_append_hashmap(&definer_inner, docs_directory().join(&path), &mut files);
@@ -203,7 +153,7 @@ pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
             lower_name = container.name().to_lowercase()
         );
 
-        let container_inner = print_docs_for_container(container, o).inner;
+        let container_inner = print_docs_for_container(container, o).into_inner();
         create_or_append_hashmap(&container_inner, docs_directory().join(&path), &mut files);
 
         let bullet_point = format!(

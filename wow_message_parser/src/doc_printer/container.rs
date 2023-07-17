@@ -1,9 +1,9 @@
-use crate::doc_printer::DocWriter;
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::ty::Type;
 use crate::parser::types::IntegerType;
+use crate::rust_printer::writer::Writer;
 use crate::wowm_printer::get_struct_wowm_definition;
 use crate::{doc_printer, Container, ContainerType, DefinerType, ObjectTags, Objects};
 use hashbrown::HashMap;
@@ -12,8 +12,8 @@ use std::fmt::Write;
 use std::io::Read;
 use std::slice::Iter;
 
-pub(crate) fn print_docs_for_container(e: &Container, o: &Objects) -> DocWriter {
-    let mut s = DocWriter::new();
+pub(crate) fn print_docs_for_container(e: &Container, o: &Objects) -> Writer {
+    let mut s = Writer::new();
 
     doc_printer::common(&mut s, e.tags(), e.name());
 
@@ -36,7 +36,7 @@ pub(crate) fn print_docs_for_container(e: &Container, o: &Objects) -> DocWriter 
 }
 
 fn print_container_example_array(
-    s: &mut DocWriter,
+    s: &mut Writer,
     array: &Array,
     bytes: &mut Iter<u8>,
     values: &mut HashMap<String, i128>,
@@ -103,7 +103,7 @@ fn print_container_example_array(
 }
 
 fn print_container_example_definition(
-    s: &mut DocWriter,
+    s: &mut Writer,
     d: &StructMemberDefinition,
     bytes: &mut Iter<u8>,
     values: &mut HashMap<String, i128>,
@@ -272,7 +272,7 @@ fn print_container_example_definition(
 }
 
 fn print_container_example_member(
-    s: &mut DocWriter,
+    s: &mut Writer,
     m: &StructMember,
     bytes: &mut Iter<u8>,
     values: &mut HashMap<String, i128>,
@@ -380,7 +380,7 @@ fn print_container_example_member(
     }
 }
 
-fn print_container_example_header(s: &mut DocWriter, e: &Container, bytes: &mut Iter<u8>) {
+fn print_container_example_header(s: &mut Writer, e: &Container, bytes: &mut Iter<u8>) {
     match e.container_type() {
         ContainerType::CLogin(o) | ContainerType::SLogin(o) => {
             let bytes = bytes.take(core::mem::size_of::<u8>());
@@ -406,7 +406,7 @@ fn print_container_example_header(s: &mut DocWriter, e: &Container, bytes: &mut 
     s.wln(format!("// opcode ({o})"));
 }
 
-fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
+fn print_container_examples(s: &mut Writer, e: &Container, o: &Objects) {
     if e.tests(o).is_empty() {
         return;
     }
@@ -467,7 +467,7 @@ fn print_container_examples(s: &mut DocWriter, e: &Container, o: &Objects) {
 }
 
 fn print_container_if_statement(
-    s: &mut DocWriter,
+    s: &mut Writer,
     statement: &IfStatement,
     offset: &mut Option<i128>,
     tags: &ObjectTags,
@@ -526,7 +526,7 @@ fn print_container_if_statement(
 }
 
 fn print_container_field(
-    s: &mut DocWriter,
+    s: &mut Writer,
     m: &StructMember,
     offset: &mut Option<i128>,
     tags: &ObjectTags,
@@ -644,12 +644,12 @@ fn print_container_field(
     }
 }
 
-fn print_container_item_header(s: &mut DocWriter) {
+fn print_container_item_header(s: &mut Writer) {
     s.wln("| Offset | Size / Endianness | Type | Name | Description | Comment |");
     s.wln("| ------ | ----------------- | ---- | ---- | ----------- | ------- |");
 }
 
-fn print_container_body(s: &mut DocWriter, e: &Container, o: &Objects) {
+fn print_container_body(s: &mut Writer, e: &Container, o: &Objects) {
     s.wln("### Body");
     s.newline();
 
@@ -704,7 +704,7 @@ fn print_container_body(s: &mut DocWriter, e: &Container, o: &Objects) {
     s.newline();
 }
 
-fn print_container_header(s: &mut DocWriter, e: &Container) {
+fn print_container_header(s: &mut Writer, e: &Container) {
     if e.container_type() == ContainerType::Struct {
         return;
     }
