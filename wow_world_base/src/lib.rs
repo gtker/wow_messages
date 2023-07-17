@@ -55,15 +55,18 @@
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
 pub(crate) mod errors;
+pub use errors::*;
+
 #[cfg(feature = "extended")]
 pub(crate) mod extended;
-#[allow(unused, non_snake_case, clippy::missing_errors_doc)]
-pub(crate) mod inner;
-pub(crate) mod manual;
-#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
-pub(crate) mod util;
-
-pub use errors::*;
 #[cfg(feature = "extended")]
 pub use extended::top_level::*;
+
+#[allow(unused, non_snake_case, clippy::missing_errors_doc)]
+pub(crate) mod inner;
 pub use inner::*;
+
+pub(crate) mod manual;
+
+#[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
+pub(crate) mod util;
