@@ -6,7 +6,7 @@ use crate::parser::types::version::{AllVersions, MajorWorldVersion, Version};
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::Objects;
 
-#[derive(Debug, Eq, PartialEq, Clone)]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone)]
 pub(crate) struct ObjectTags {
     all_versions: AllVersions,
 
@@ -218,7 +218,7 @@ impl ObjectTags {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Clone)]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone)]
 enum TagStringSymbol {
     Text(String),
     Link(String),
@@ -249,7 +249,7 @@ impl TagStringSymbol {
     }
 }
 
-#[derive(Debug, Eq, PartialEq, Clone, Default)]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Clone, Default)]
 pub(crate) struct TagString {
     inner: Vec<TagStringSymbol>,
 }

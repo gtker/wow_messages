@@ -12,6 +12,7 @@ use std::fmt::Write;
 use std::fs::read_to_string;
 use std::path::PathBuf;
 
+#[derive(Debug, PartialOrd, PartialEq, Ord, Eq)]
 pub(crate) struct DocWriter {
     name: String,
     inner: String,
@@ -85,7 +86,10 @@ fn create_or_append_hashmap(s: &str, path: PathBuf, files: &mut HashMap<PathBuf,
     }
 }
 
-pub(crate) fn print_docs(definers: &[DocWriter], containers: &[DocWriter]) {
+pub(crate) fn print_docs<'a>(
+    definers: impl Iterator<Item = &'a DocWriter>,
+    containers: impl Iterator<Item = &'a DocWriter>,
+) {
     print_update_mask_docs();
 
     print_docs_summary_and_objects(definers, containers);
@@ -145,7 +149,10 @@ fn print_versions(
     s.newline();
 }
 
-pub(crate) fn print_docs_summary_and_objects(definers: &[DocWriter], containers: &[DocWriter]) {
+pub(crate) fn print_docs_summary_and_objects<'a>(
+    definers: impl Iterator<Item = &'a DocWriter>,
+    containers: impl Iterator<Item = &'a DocWriter>,
+) {
     const LOGIN_DEFINER_HEADER: &str = "# Login Definers";
     const LOGIN_CONTAINER_HEADER: &str = "# Login Containers\n";
     const WORLD_DEFINER_HEADER: &str = "# World Definers\n";
