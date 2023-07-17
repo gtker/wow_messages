@@ -12,7 +12,7 @@ fn definer_common(
     ty: &str,
     e: &Definer,
 ) {
-    doc_printer::common(s, tags);
+    doc_printer::common(s, tags, e.name());
 
     s.wln("### Wowm Representation");
     s.newline();
@@ -28,7 +28,7 @@ fn definer_common(
 }
 
 pub(crate) fn print_docs_for_enum(e: &Definer) -> DocWriter {
-    let mut s = DocWriter::new(e.name(), e.tags());
+    let mut s = DocWriter::new();
 
     definer_common(&mut s, e.tags(), e.file_info(), "enum", e);
 
@@ -48,7 +48,7 @@ pub(crate) fn print_docs_for_enum(e: &Definer) -> DocWriter {
 }
 
 pub(crate) fn print_docs_for_flag(e: &Definer) -> DocWriter {
-    let mut s = DocWriter::new(e.name(), e.tags());
+    let mut s = DocWriter::new();
 
     definer_common(&mut s, e.tags(), e.file_info(), "flag", e);
 

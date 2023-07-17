@@ -13,9 +13,9 @@ use std::io::Read;
 use std::slice::Iter;
 
 pub(crate) fn print_docs_for_container(e: &Container, o: &Objects) -> DocWriter {
-    let mut s = DocWriter::new(e.name(), e.tags());
+    let mut s = DocWriter::new();
 
-    doc_printer::common(&mut s, e.tags());
+    doc_printer::common(&mut s, e.tags(), e.name());
 
     s.wln("### Wowm Representation");
     s.newline();

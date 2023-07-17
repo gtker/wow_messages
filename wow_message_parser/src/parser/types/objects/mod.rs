@@ -152,6 +152,10 @@ impl Objects {
         self.structs.iter().chain(&self.messages)
     }
 
+    pub(crate) fn all_definers(&self) -> impl Iterator<Item = &Definer> {
+        self.enums.iter().chain(&self.flags)
+    }
+
     pub(crate) fn messages(&self) -> &[Container] {
         &self.messages
     }

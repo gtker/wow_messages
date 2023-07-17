@@ -6,10 +6,11 @@ use crate::doc_printer::container::print_docs_for_container;
 use crate::doc_printer::definer::{print_docs_for_enum, print_docs_for_flag};
 use crate::doc_printer::update_mask::print_update_mask_docs;
 use crate::file_utils::create_and_overwrite_if_not_same_contents;
-use crate::parser::types::objects::{Object, Objects};
+use crate::parser::types::objects::Objects;
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::version::{LoginVersion, WorldVersion};
 use crate::path_utils::{doc_summary_path, docs_directory};
+use crate::rust_printer::DefinerType;
 use crate::should_not_write_object_docs;
 use hashbrown::HashMap;
 use std::collections::BTreeSet;
@@ -19,31 +20,15 @@ use std::path::PathBuf;
 
 #[derive(Debug, PartialOrd, PartialEq, Ord, Eq)]
 pub(crate) struct DocWriter {
-    name: String,
     inner: String,
     column: usize,
-    tags: ObjectTags,
 }
 
 impl DocWriter {
-    pub(crate) fn name(&self) -> &str {
-        &self.name
-    }
-
-    pub(crate) fn tags(&self) -> &ObjectTags {
-        &self.tags
-    }
-
-    pub(crate) fn inner(&self) -> &str {
-        &self.inner
-    }
-
-    pub(crate) fn new(name: &str, tags: &ObjectTags) -> Self {
+    pub(crate) fn new() -> Self {
         Self {
-            name: name.to_string(),
             inner: String::with_capacity(8000),
             column: 0,
-            tags: tags.clone(),
         }
     }
 
@@ -97,8 +82,8 @@ pub(crate) fn print_docs(o: &Objects) {
     print_docs_summary_and_objects(o);
 }
 
-fn common(s: &mut DocWriter, tags: &ObjectTags) {
-    s.wln(format!("# {}", &s.name));
+fn common(s: &mut DocWriter, tags: &ObjectTags, name: &str) {
+    s.wln(format!("# {name}"));
     s.newline();
 
     print_versions(s, tags.logon_versions(), tags.versions());
@@ -152,20 +137,6 @@ fn print_versions(
 }
 
 pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
-    let mut definers = BTreeSet::new();
-    let mut containers = BTreeSet::new();
-    for e in o.all_objects() {
-        if should_not_write_object_docs(e.tags()) {
-            continue;
-        }
-
-        match e {
-            Object::Container(e) => containers.insert(print_docs_for_container(e, o)),
-            Object::Enum(e) => definers.insert(print_docs_for_enum(e)),
-            Object::Flag(e) => definers.insert(print_docs_for_flag(e)),
-        };
-    }
-
     const LOGIN_DEFINER_HEADER: &str = "# Login Definers";
     const LOGIN_CONTAINER_HEADER: &str = "# Login Containers\n";
     const WORLD_DEFINER_HEADER: &str = "# World Definers\n";
@@ -180,13 +151,21 @@ pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
 
     let mut files = HashMap::new();
 
-    for definer in definers {
+    for definer in o
+        .all_definers()
+        .filter(|a| !should_not_write_object_docs(a.tags()))
+    {
         let path = format!(
             "{lower_name}.md",
             lower_name = definer.name().to_lowercase()
         );
 
-        create_or_append_hashmap(definer.inner(), docs_directory().join(&path), &mut files);
+        let definer_inner = match definer.definer_ty() {
+            DefinerType::Enum => print_docs_for_enum(definer).inner,
+            DefinerType::Flag => print_docs_for_flag(definer).inner,
+        };
+
+        create_or_append_hashmap(&definer_inner, docs_directory().join(&path), &mut files);
 
         let bullet_point = format!(
             "- [{name}](docs/{path})\n",
@@ -215,13 +194,17 @@ pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
 
     let mut login_containers = BTreeSet::new();
     let mut world_containers = BTreeSet::new();
-    for container in containers {
+    for container in o
+        .all_containers()
+        .filter(|a| !should_not_write_object_docs(a.tags()))
+    {
         let path = format!(
             "{lower_name}.md",
             lower_name = container.name().to_lowercase()
         );
 
-        create_or_append_hashmap(container.inner(), docs_directory().join(&path), &mut files);
+        let container_inner = print_docs_for_container(container, o).inner;
+        create_or_append_hashmap(&container_inner, docs_directory().join(&path), &mut files);
 
         let bullet_point = format!(
             "- [{name}](docs/{path})\n",
