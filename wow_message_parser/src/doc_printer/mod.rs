@@ -18,14 +18,6 @@ use std::collections::BTreeSet;
 use std::fs::read_to_string;
 use std::path::PathBuf;
 
-fn create_or_append_hashmap(s: &str, path: PathBuf, files: &mut HashMap<PathBuf, String>) {
-    if let Some(c) = files.get_mut(&path) {
-        c.push_str(s);
-    } else {
-        files.insert(path, s.to_string());
-    }
-}
-
 pub(crate) fn print_docs(o: &Objects) {
     print_update_mask_docs();
 
@@ -183,5 +175,13 @@ pub(crate) fn print_docs_summary_and_objects(o: &Objects) {
 
     for (path, s) in &files {
         create_and_overwrite_if_not_same_contents(s, path);
+    }
+}
+
+fn create_or_append_hashmap(s: &str, path: PathBuf, files: &mut HashMap<PathBuf, String>) {
+    if let Some(c) = files.get_mut(&path) {
+        c.push_str(s);
+    } else {
+        files.insert(path, s.to_string());
     }
 }
