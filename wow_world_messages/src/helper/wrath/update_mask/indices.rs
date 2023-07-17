@@ -1,4 +1,168 @@
 use std::convert::TryFrom;
+pub enum VisibleItemIndex {
+    Index0,
+    Index1,
+    Index2,
+    Index3,
+    Index4,
+    Index5,
+    Index6,
+    Index7,
+    Index8,
+    Index9,
+    Index10,
+    Index11,
+    Index12,
+    Index13,
+    Index14,
+    Index15,
+    Index16,
+    Index17,
+    Index18,
+}
+
+impl VisibleItemIndex {
+    pub(crate) const fn offset(&self) -> u16 {
+        283 + self.index()
+    }
+
+    pub(crate) const fn index(&self) -> u16 {
+        match self {
+            Self::Index0 => 0,
+            Self::Index1 => 2,
+            Self::Index2 => 4,
+            Self::Index3 => 6,
+            Self::Index4 => 8,
+            Self::Index5 => 10,
+            Self::Index6 => 12,
+            Self::Index7 => 14,
+            Self::Index8 => 16,
+            Self::Index9 => 18,
+            Self::Index10 => 20,
+            Self::Index11 => 22,
+            Self::Index12 => 24,
+            Self::Index13 => 26,
+            Self::Index14 => 28,
+            Self::Index15 => 30,
+            Self::Index16 => 32,
+            Self::Index17 => 34,
+            Self::Index18 => 36,
+        }
+    }
+
+    pub(crate) const fn first(&self) -> u16 {
+        283 + self.index()
+    }
+
+    pub(crate) const fn last(&self) -> u16 {
+        self.first() + 2
+    }
+
+}
+
+impl Default for VisibleItemIndex {
+    fn default() -> Self {
+        Self::Index0
+    }
+}
+
+pub(crate) const fn visibleitem_try_from_inner(value: u16) -> Option<VisibleItemIndex> {
+    Some(match value {
+        0 => VisibleItemIndex::Index0,
+        1 => VisibleItemIndex::Index1,
+        2 => VisibleItemIndex::Index2,
+        3 => VisibleItemIndex::Index3,
+        4 => VisibleItemIndex::Index4,
+        5 => VisibleItemIndex::Index5,
+        6 => VisibleItemIndex::Index6,
+        7 => VisibleItemIndex::Index7,
+        8 => VisibleItemIndex::Index8,
+        9 => VisibleItemIndex::Index9,
+        10 => VisibleItemIndex::Index10,
+        11 => VisibleItemIndex::Index11,
+        12 => VisibleItemIndex::Index12,
+        13 => VisibleItemIndex::Index13,
+        14 => VisibleItemIndex::Index14,
+        15 => VisibleItemIndex::Index15,
+        16 => VisibleItemIndex::Index16,
+        17 => VisibleItemIndex::Index17,
+        18 => VisibleItemIndex::Index18,
+        _ => return None,
+    })
+}
+
+impl TryFrom<u8> for VisibleItemIndex {
+    type Error = u8;
+
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        visibleitem_try_from_inner(value.into()).ok_or(value)
+    }
+}
+
+impl TryFrom<u16> for VisibleItemIndex {
+    type Error = u16;
+
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        visibleitem_try_from_inner(value).ok_or(value)
+    }
+}
+
+impl TryFrom<u32> for VisibleItemIndex {
+    type Error = u32;
+
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
+        visibleitem_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
+    }
+}
+
+impl TryFrom<u64> for VisibleItemIndex {
+    type Error = u64;
+
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        visibleitem_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
+    }
+}
+
+impl TryFrom<i8> for VisibleItemIndex {
+    type Error = i8;
+
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        visibleitem_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
+    }
+}
+
+impl TryFrom<i16> for VisibleItemIndex {
+    type Error = i16;
+
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        visibleitem_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
+    }
+}
+
+impl TryFrom<i32> for VisibleItemIndex {
+    type Error = i32;
+
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        visibleitem_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
+    }
+}
+
+impl TryFrom<i64> for VisibleItemIndex {
+    type Error = i64;
+
+    fn try_from(value: i64) -> Result<Self, Self::Error> {
+        visibleitem_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
+    }
+}
+
+impl TryFrom<usize> for VisibleItemIndex {
+    type Error = usize;
+
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        visibleitem_try_from_inner(value.try_into().ok().ok_or(value)?).ok_or(value)
+    }
+}
+
 pub enum SkillInfoIndex {
     Index0,
     Index1,
