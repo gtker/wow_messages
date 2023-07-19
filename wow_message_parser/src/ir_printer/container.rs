@@ -477,7 +477,7 @@ pub(crate) enum IrTestValue {
     Bool(bool),
     DateTime(IrIntegerEnumValue),
     Guid(IrIntegerEnumValue),
-    FloatingNumber {
+    FloatingPoint {
         value: f64,
         original_string: String,
     },
@@ -513,7 +513,7 @@ impl From<&TestValue> for IrTestValue {
             TestValue::FloatingNumber {
                 value,
                 original_string,
-            } => Self::FloatingNumber {
+            } => Self::FloatingPoint {
                 value: *value,
                 original_string: original_string.to_string(),
             },
