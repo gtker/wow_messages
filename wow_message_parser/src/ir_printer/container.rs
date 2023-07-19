@@ -418,9 +418,11 @@ impl From<&TestCaseMember> for IrTestCaseMember {
 
 #[derive(Debug, Serialize)]
 pub(crate) struct IrTestUpdateMaskValue {
-    #[serde(rename = "type")]
+    #[serde(rename = "update_mask_type")]
     ty: IrUpdateMaskType,
+    #[serde(rename = "update_mask_name")]
     name: String,
+    #[serde(rename = "update_mask_value")]
     value: String,
 }
 
