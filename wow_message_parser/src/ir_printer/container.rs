@@ -340,7 +340,7 @@ impl From<&ArrayType> for IrArrayType {
 }
 
 #[derive(Debug, Serialize)]
-#[serde(tag = "type", content = "content")]
+#[serde(tag = "array_size_type", content = "value")]
 #[serde(rename_all = "snake_case")]
 pub(crate) enum IrArraySize {
     Fixed(i128),
