@@ -100,7 +100,7 @@ The `array` type contains a `content` with:
 The `enum` and `flag` types contain a `content` with:
 
 * `type_name`, the type name of the variable.
-* `upcast`, contains the same values as an `integer` `type` field. Only present if the type is an enum where the type in
+* `integer_type`, contains the same values as an `integer` `type` field. Only present if the type is an enum where the type in
   the message is larger than the native type of the definer.
 
 ##### Enum and Flag

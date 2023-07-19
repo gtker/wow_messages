@@ -227,12 +227,12 @@ pub(crate) enum IrType {
     Array(IrArray),
     Enum {
         type_name: String,
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[serde(skip_serializing_if = "Option::is_none", flatten)]
         upcast: Option<IrIntegerType>,
     },
     Flag {
         type_name: String,
-        #[serde(skip_serializing_if = "Option::is_none")]
+        #[serde(skip_serializing_if = "Option::is_none", flatten)]
         upcast: Option<IrIntegerType>,
     },
     Struct {

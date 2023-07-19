@@ -130,6 +130,7 @@ pub(crate) struct IrDefiner {
     definer_ty: IrDefinerType,
     enumerators: Vec<IrDefinerField>,
     self_value: Option<IrSelfValueDefinerField>,
+    #[serde(flatten)]
     integer_type: IrIntegerType,
     tags: IrTags,
     objects_used_in: BTreeSet<ObjectUsedIn>,
