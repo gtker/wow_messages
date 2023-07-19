@@ -470,7 +470,7 @@ impl From<UpdateMaskType> for IrUpdateMaskType {
 }
 
 #[derive(Debug, Serialize)]
-#[serde(tag = "type", content = "content")]
+#[serde(tag = "test_value_type", content = "test_value_content")]
 #[serde(rename_all = "snake_case")]
 pub(crate) enum IrTestValue {
     Number(IrIntegerEnumValue),
