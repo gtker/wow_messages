@@ -132,11 +132,11 @@ pub(crate) struct IrTags {
     #[serde(skip_serializing_if = "Option::is_none")]
     version: Option<IrVersions>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    unimplemented: Option<String>,
+    unimplemented: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     compressed: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    non_network_type: Option<String>,
+    non_network_type: Option<bool>,
 }
 
 impl IrTags {
@@ -152,13 +152,13 @@ impl IrTags {
         };
 
         let unimplemented = if tags.unimplemented() {
-            Some("true".to_string())
+            Some(true)
         } else {
             None
         };
 
         let non_network_type = if tags.non_network_type() {
-            Some("true".to_string())
+            Some(true)
         } else {
             None
         };
