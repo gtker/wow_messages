@@ -20,7 +20,7 @@ struct IrFileInfo {
 }
 
 #[derive(Debug, Serialize)]
-#[serde(tag = "type")]
+#[serde(tag = "integer_type")]
 #[serde(rename_all = "snake_case")]
 pub(crate) enum IrIntegerType {
     U8,
