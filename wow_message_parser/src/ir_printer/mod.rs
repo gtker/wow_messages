@@ -93,7 +93,7 @@ pub(crate) enum IrWorldVersion {
 }
 
 #[derive(Debug, Serialize)]
-#[serde(tag = "type", content = "versions")]
+#[serde(tag = "version_type", content = "versions")]
 #[serde(rename_all = "snake_case")]
 pub(crate) enum IrVersions {
     Login(Vec<IrLoginVersion>),
