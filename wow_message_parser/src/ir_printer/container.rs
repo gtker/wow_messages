@@ -473,7 +473,7 @@ impl From<UpdateMaskType> for IrUpdateMaskType {
 #[serde(tag = "test_value_type", content = "test_value_content")]
 #[serde(rename_all = "snake_case")]
 pub(crate) enum IrTestValue {
-    Number(IrIntegerEnumValue),
+    Integer(IrIntegerEnumValue),
     Bool(bool),
     DateTime(IrIntegerEnumValue),
     Guid(IrIntegerEnumValue),
@@ -505,7 +505,7 @@ pub(crate) enum IrTestValue {
 impl From<&TestValue> for IrTestValue {
     fn from(v: &TestValue) -> Self {
         match v {
-            TestValue::Number(i) => Self::Number(i.into()),
+            TestValue::Number(i) => Self::Integer(i.into()),
             TestValue::DateTime(v) => Self::DateTime(v.into()),
             TestValue::Guid(i) => Self::Guid(i.into()),
             TestValue::Bool(b) => Self::Bool(*b),
