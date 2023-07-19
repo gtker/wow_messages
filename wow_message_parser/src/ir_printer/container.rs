@@ -41,7 +41,7 @@ fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
 }
 
 #[derive(Debug, Serialize)]
-#[serde(tag = "type", content = "opcode")]
+#[serde(tag = "container_type", content = "opcode", rename_all = "snake_case")]
 pub(crate) enum IrContainerType {
     Struct,
     CLogin(u16),
@@ -101,7 +101,7 @@ impl From<&OptionalStatement> for IrOptionalStatement {
 }
 
 #[derive(Debug, Serialize)]
-#[serde(tag = "type", content = "content")]
+#[serde(tag = "member_type", content = "member_content")]
 #[serde(rename_all = "snake_case")]
 pub(crate) enum IrStructMember {
     Definition(Box<IrStructMemberDefinition>),
