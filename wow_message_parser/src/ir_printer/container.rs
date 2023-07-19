@@ -190,7 +190,7 @@ impl From<&IfStatement> for IrIfStatement {
 #[derive(Debug, Serialize)]
 pub(crate) struct IrStructMemberDefinition {
     name: String,
-    member_type: IrType,
+    data_type: IrType,
     constant_value: Option<IrIntegerEnumValue>,
     used_as_size_in: Option<String>,
     used_in_if: bool,
@@ -201,7 +201,7 @@ impl From<&StructMemberDefinition> for IrStructMemberDefinition {
     fn from(v: &StructMemberDefinition) -> Self {
         Self {
             name: v.name().to_string(),
-            member_type: v.ty().into(),
+            data_type: v.ty().into(),
             constant_value: v.value().as_ref().map(|a| a.into()),
             used_as_size_in: v.used_as_size_in().clone(),
             used_in_if: v.used_in_if(),
