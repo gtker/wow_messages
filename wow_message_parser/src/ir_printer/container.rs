@@ -317,11 +317,11 @@ impl From<&Array> for IrArray {
 }
 
 #[derive(Debug, Serialize)]
-#[serde(tag = "type", content = "content")]
+#[serde(tag = "array_type", content = "content")]
 #[serde(rename_all = "snake_case")]
 pub(crate) enum IrArrayType {
     Integer(IrIntegerType),
-    Complex(String),
+    Struct(String),
     CString,
     Guid,
     PackedGuid,
@@ -331,7 +331,7 @@ impl From<&ArrayType> for IrArrayType {
     fn from(v: &ArrayType) -> Self {
         match v {
             ArrayType::Integer(i) => Self::Integer(i.into()),
-            ArrayType::Struct(f) => Self::Complex(f.name().into()),
+            ArrayType::Struct(f) => Self::Struct(f.name().into()),
             ArrayType::CString => Self::CString,
             ArrayType::Guid => Self::Guid,
             ArrayType::PackedGuid => Self::PackedGuid,
