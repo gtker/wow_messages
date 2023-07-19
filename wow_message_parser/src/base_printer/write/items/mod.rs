@@ -6,6 +6,7 @@ pub(crate) mod definition;
 use crate::base_printer::data::items::{
     Array, ArrayInstances, Field, IntegerSize, Optimizations, Value,
 };
+use std::cmp::Ordering;
 use std::collections::BTreeSet;
 
 pub(crate) struct Stats {
@@ -441,15 +442,32 @@ fn get_default_values<'a>(
     let arrays = arrays.into_iter().map(ValuesWrapper::Arrays);
 
     let mut values: Vec<_> = values.chain(arrays).collect();
-    values.sort_by(|a, b| match a {
-        ValuesWrapper::Values((_, amount)) => match b {
-            ValuesWrapper::Values((_, amount2)) => amount2.cmp(amount),
-            ValuesWrapper::Arrays((_, amount2)) => amount2.cmp(amount),
-        },
-        ValuesWrapper::Arrays((_, amount)) => match b {
-            ValuesWrapper::Values((_, amount2)) => amount2.cmp(amount),
-            ValuesWrapper::Arrays((_, amount2)) => amount2.cmp(amount),
-        },
+    values.sort_by(|a, b| match (a, b) {
+        (
+            ValuesWrapper::Values(((value, integer), amount)),
+            ValuesWrapper::Values(((value2, integer2), amount2)),
+        ) => {
+            let value = value2.cmp(value);
+            let integer = integer2.cmp(integer);
+
+            amount2.cmp(amount).then(value).then(integer)
+        }
+        (ValuesWrapper::Values((_, amount)), ValuesWrapper::Arrays((_, amount2))) => {
+            amount2.cmp(amount).then(Ordering::Greater)
+        }
+
+        (ValuesWrapper::Arrays((_, amount)), ValuesWrapper::Values((_, amount2))) => {
+            amount2.cmp(amount).then(Ordering::Less)
+        }
+        (
+            ValuesWrapper::Arrays(((value, integer), amount)),
+            ValuesWrapper::Arrays(((value2, integer2), amount2)),
+        ) => {
+            let value = value2.cmp(value);
+            let integer = integer2.cmp(integer);
+
+            amount2.cmp(amount).then(value).then(integer)
+        }
     });
 
     let mut namer = ConstNamer::new();
