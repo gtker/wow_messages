@@ -10,7 +10,6 @@ All definers have:
     * `tags`
 * `integer_type`, the underlying integer type representation, contains:
     * `type`, can be any of `u8`, `u16`, `u32` or `u64`.
-    * `endianness`, either `little` or `big`. Not present when `type` is `u8`.
 * `tags`, a [Tags](tags.md) object.
 * `objects_used_in`, an array of objects with:
     * `name`, name of the object.
