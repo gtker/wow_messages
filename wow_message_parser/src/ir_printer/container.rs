@@ -303,15 +303,15 @@ impl From<&Type> for IrType {
 
 #[derive(Debug, Serialize)]
 pub(crate) struct IrArray {
-    inner: IrArrayType,
-    size: IrArraySize,
+    array_inner_type: IrArrayType,
+    array_size: IrArraySize,
 }
 
 impl From<&Array> for IrArray {
     fn from(v: &Array) -> Self {
         Self {
-            inner: v.ty().into(),
-            size: v.size().into(),
+            array_inner_type: v.ty().into(),
+            array_size: v.size().into(),
         }
     }
 }
