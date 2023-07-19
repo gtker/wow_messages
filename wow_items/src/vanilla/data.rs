@@ -1272,9 +1272,9 @@ const BUZ:&[Spells]=&[Spells{spell: 459,spell_trigger: SpellTriggerType::OnUse,s
 const BV:InventoryType=InventoryType::Neck;
 const BVA:&[Spells]=&[Spells{spell: 16615,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 9361,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const BVB:&[Spells]=&[Spells{spell: 19887,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const BVC:&[Spells]=&[Spells{spell: 21933,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const BVC:&[Spells]=&[Spells{spell: 22054,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
 const BVD:&[Spells]=&[Spells{spell: 17453,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 1,spell_category: 330,spell_category_cooldown: 1,},];
-const BVE:&[Spells]=&[Spells{spell: 22054,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
+const BVE:&[Spells]=&[Spells{spell: 21933,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const BVF:&[Spells]=&[Spells{spell: 23246,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 1,spell_category: 330,spell_category_cooldown: 1,},];
 const BVG:&[Spells]=&[Spells{spell: 8283,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 1000,spell_category: 0,spell_category_cooldown: -1,},];
 const BVH:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 64.4,damage_maximum: 134.4,school: SpellSchool::Normal,},];
@@ -1354,10 +1354,10 @@ const BY:u32=1000;
 const BYA:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 57.6,damage_maximum: 114.6,school: SpellSchool::Normal,},];
 const BYB:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 155.0,damage_maximum: 234.0,school: SpellSchool::Normal,},];
 const BYC:&[Spells]=&[Spells{spell: 18041,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 3600000,spell_category: 0,spell_category_cooldown: 600000,},];
-const BYD:&[Spells]=&[Spells{spell: 29480,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const BYE:&[Spells]=&[Spells{spell: 24145,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const BYF:&[Spells]=&[Spells{spell: 1538,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const BYG:&[Spells]=&[Spells{spell: 18382,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 7597,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const BYD:&[Spells]=&[Spells{spell: 24145,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const BYE:&[Spells]=&[Spells{spell: 1538,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const BYF:&[Spells]=&[Spells{spell: 18382,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 7597,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const BYG:&[Spells]=&[Spells{spell: 29480,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const BYH:&[Spells]=&[Spells{spell: 26045,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const BYI:&[Spells]=&[Spells{spell: 10787,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 330,spell_category_cooldown: 3000,},];
 const BYJ:&[Spells]=&[Spells{spell: 13386,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
@@ -2310,9 +2310,9 @@ const DHI:&[Spells]=&[Spells{spell: 20270,spell_trigger: SpellTriggerType::OnUse
 const DHJ:&[Spells]=&[Spells{spell: 615,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const DHK:&[Spells]=&[Spells{spell: 20039,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const DHL:&[Spells]=&[Spells{spell: 3976,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const DHM:&[Spells]=&[Spells{spell: 14047,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 23043,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const DHM:&[Spells]=&[Spells{spell: 22102,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
 const DHN:&[Spells]=&[Spells{spell: 17592,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const DHO:&[Spells]=&[Spells{spell: 22102,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
+const DHO:&[Spells]=&[Spells{spell: 14047,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 23043,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const DHP:&[Spells]=&[Spells{spell: 12141,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const DHQ:&[Spells]=&[Spells{spell: 24433,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const DHR:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 7.0,damage_maximum: 12.0,school: SpellSchool::Normal,},];
@@ -2791,10 +2791,10 @@ const DZD:&[Spells]=&[Spells{spell: 12735,spell_trigger: SpellTriggerType::OnUse
 const DZE:&[Spells]=&[Spells{spell: 27571,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 30000,spell_category: 0,spell_category_cooldown: -1,},];
 const DZF:&[Spells]=&[Spells{spell: 16696,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const DZG:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 70.0,damage_maximum: 132.0,school: SpellSchool::Normal,},];
-const DZH:&[Spells]=&[Spells{spell: 29116,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const DZI:&[Spells]=&[Spells{spell: 24994,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const DZJ:&[Spells]=&[Spells{spell: 9215,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const DZK:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 138.0,damage_maximum: 210.0,school: SpellSchool::Normal,},];
+const DZH:&[Spells]=&[Spells{spell: 24994,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const DZI:&[Spells]=&[Spells{spell: 9215,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const DZJ:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 138.0,damage_maximum: 210.0,school: SpellSchool::Normal,},];
+const DZK:&[Spells]=&[Spells{spell: 29116,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const DZL:&[Spells]=&[Spells{spell: 28891,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 1000,spell_category: 0,spell_category_cooldown: -1,},];
 const DZM:&[Spells]=&[Spells{spell: 17155,spell_trigger: SpellTriggerType::OnUse,spell_charges: -4,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
 const DZN:&[Spells]=&[Spells{spell: 11407,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 79,spell_category_cooldown: 3000,},];
@@ -2806,8 +2806,8 @@ const DZS:&[Spells]=&[Spells{spell: 23131,spell_trigger: SpellTriggerType::OnUse
 const DZT:&[Spells]=&[Spells{spell: 18057,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 18384,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 26283,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const DZU:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 64.0,damage_maximum: 140.0,school: SpellSchool::Normal,},];
 const DZV:&[Spells]=&[Spells{spell: 11403,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 79,spell_category_cooldown: 3000,},];
-const DZW:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 78.8,damage_maximum: 161.8,school: SpellSchool::Normal,},];
-const DZX:&[Spells]=&[Spells{spell: 21343,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 1000,spell_category: 0,spell_category_cooldown: 0,},];
+const DZW:&[Spells]=&[Spells{spell: 21343,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 1000,spell_category: 0,spell_category_cooldown: 0,},];
+const DZX:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 78.8,damage_maximum: 161.8,school: SpellSchool::Normal,},];
 const DZY:&[Spells]=&[Spells{spell: 9345,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 7597,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 21618,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const DZZ:&[Spells]=&[Spells{spell: 21438,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const E:f32=0.0;
@@ -3376,30 +3376,30 @@ const EUU:&[Spells]=&[Spells{spell: 9343,spell_trigger: SpellTriggerType::OnEqui
 const EUV:&[Spells]=&[Spells{spell: 27851,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const EUW:&[Spells]=&[Spells{spell: 18040,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 21363,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const EUX:&[Spells]=&[Spells{spell: 22593,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const EUY:&[Spells]=&[Spells{spell: 28693,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 28717,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 21364,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const EUZ:&[Spells]=&[Spells{spell: 9416,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 18384,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const EUY:&[Spells]=&[Spells{spell: 9416,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 18384,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const EUZ:&[Spells]=&[Spells{spell: 17768,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
 const EV:ItemClassAndSubClass=ItemClassAndSubClass::Reagent;
-const EVA:&[Spells]=&[Spells{spell: 17768,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
-const EVB:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 110.0,damage_maximum: 166.0,school: SpellSchool::Normal,},];
-const EVC:&[Spells]=&[Spells{spell: 23015,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const EVD:&[Spells]=&[Spells{spell: 23151,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const EVE:&[Spells]=&[Spells{spell: 1031,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const EVF:&[Spells]=&[Spells{spell: 7245,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 120000,spell_category: 4,spell_category_cooldown: 120000,},];
-const EVG:&[Spells]=&[Spells{spell: 18400,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 60000,spell_category: 0,spell_category_cooldown: 0,},];
-const EVH:&[Spells]=&[Spells{spell: 23141,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
-const EVI:&[Spells]=&[Spells{spell: 22098,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
-const EVJ:&[Spells]=&[Spells{spell: 24350,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const EVK:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 170.0,damage_maximum: 255.0,school: SpellSchool::Normal,},];
-const EVL:&[Spells]=&[Spells{spell: 3895,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
-const EVM:&[Spells]=&[Spells{spell: 3897,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const EVN:&[Spells]=&[Spells{spell: 18381,spell_trigger: SpellTriggerType::ChanceOnHit,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const EVO:&[Spells]=&[Spells{spell: 19933,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 1000,spell_category: 0,spell_category_cooldown: -1,},];
-const EVP:&[Spells]=&[Spells{spell: 26074,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 120000,spell_category: 0,spell_category_cooldown: -1,},];
-const EVQ:&[Spells]=&[Spells{spell: 2557,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const EVR:&[Spells]=&[Spells{spell: 28483,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const EVS:&[Spells]=&[Spells{spell: 8394,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 330,spell_category_cooldown: 3000,},];
-const EVT:&[Spells]=&[Spells{spell: 12182,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const EVU:&[Spells]=&[Spells{spell: 22095,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
+const EVA:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 110.0,damage_maximum: 166.0,school: SpellSchool::Normal,},];
+const EVB:&[Spells]=&[Spells{spell: 23015,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const EVC:&[Spells]=&[Spells{spell: 23151,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const EVD:&[Spells]=&[Spells{spell: 1031,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const EVE:&[Spells]=&[Spells{spell: 7245,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 120000,spell_category: 4,spell_category_cooldown: 120000,},];
+const EVF:&[Spells]=&[Spells{spell: 18400,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 60000,spell_category: 0,spell_category_cooldown: 0,},];
+const EVG:&[Spells]=&[Spells{spell: 23141,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
+const EVH:&[Spells]=&[Spells{spell: 22098,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
+const EVI:&[Spells]=&[Spells{spell: 24350,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const EVJ:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 170.0,damage_maximum: 255.0,school: SpellSchool::Normal,},];
+const EVK:&[Spells]=&[Spells{spell: 3895,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
+const EVL:&[Spells]=&[Spells{spell: 3897,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const EVM:&[Spells]=&[Spells{spell: 18381,spell_trigger: SpellTriggerType::ChanceOnHit,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const EVN:&[Spells]=&[Spells{spell: 19933,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 1000,spell_category: 0,spell_category_cooldown: -1,},];
+const EVO:&[Spells]=&[Spells{spell: 26074,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 120000,spell_category: 0,spell_category_cooldown: -1,},];
+const EVP:&[Spells]=&[Spells{spell: 2557,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const EVQ:&[Spells]=&[Spells{spell: 28483,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const EVR:&[Spells]=&[Spells{spell: 8394,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 330,spell_category_cooldown: 3000,},];
+const EVS:&[Spells]=&[Spells{spell: 12182,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const EVT:&[Spells]=&[Spells{spell: 22095,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
+const EVU:&[Spells]=&[Spells{spell: 28693,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 28717,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 21364,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const EVV:&[Spells]=&[Spells{spell: 536,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
 const EVW:&[Spells]=&[Spells{spell: 23808,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const EVX:&[Spells]=&[Spells{spell: 23714,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
@@ -3968,8 +3968,8 @@ const FQR:&[Spells]=&[Spells{spell: 16197,spell_trigger: SpellTriggerType::OnUse
 const FQS:&[Spells]=&[Spells{spell: 7546,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 24254,spell_trigger: SpellTriggerType::ChanceOnHit,spell_charges: 0,spell_ppm_rate: 1.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const FQT:&[Spells]=&[Spells{spell: 25968,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const FQU:&[Spells]=&[Spells{spell: 13494,spell_trigger: SpellTriggerType::OnUse,spell_charges: 3,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const FQV:&[Spells]=&[Spells{spell: 28214,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const FQW:&[Spells]=&[Spells{spell: 29229,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const FQV:&[Spells]=&[Spells{spell: 29229,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const FQW:&[Spells]=&[Spells{spell: 28214,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const FQX:&[Spells]=&[Spells{spell: 18124,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 11,spell_category_cooldown: 1000,},];
 const FQY:&[Spells]=&[Spells{spell: 19699,spell_trigger: SpellTriggerType::OnUse,spell_charges: 3,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const FQZ:&[Spells]=&[Spells{spell: 24865,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: 180000,spell_category: 1141,spell_category_cooldown: 25000,},];
@@ -4200,12 +4200,12 @@ const FZG:&[Spells]=&[Spells{spell: 2828,spell_trigger: SpellTriggerType::OnUse,
 const FZH:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 142.0,damage_maximum: 192.0,school: SpellSchool::Normal,},];
 const FZI:&[Spells]=&[Spells{spell: 13237,spell_trigger: SpellTriggerType::OnUse,spell_charges: 6,spell_ppm_rate: 0.0,spell_cooldown: 600000,spell_category: 1141,spell_category_cooldown: 10000,},];
 const FZJ:&[Spells]=&[Spells{spell: 23568,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 150,spell_category_cooldown: 0,},];
-const FZK:&[Spells]=&[Spells{spell: 15814,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 15465,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 13669,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const FZK:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 135.0,damage_maximum: 203.0,school: SpellSchool::Normal,},];
 const FZL:&[Spells]=&[Spells{spell: 23000,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 24,spell_category_cooldown: 60000,},];
 const FZM:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 271.0,damage_maximum: 408.0,school: SpellSchool::Normal,},];
-const FZN:&[ItemDamageType]=&[ItemDamageType{damage_minimum: 135.0,damage_maximum: 203.0,school: SpellSchool::Normal,},];
-const FZO:&[Spells]=&[Spells{spell: 30152,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const FZP:&[Spells]=&[Spells{spell: 13518,spell_trigger: SpellTriggerType::ChanceOnHit,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const FZN:&[Spells]=&[Spells{spell: 30152,spell_trigger: SpellTriggerType::OnUse,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const FZO:&[Spells]=&[Spells{spell: 13518,spell_trigger: SpellTriggerType::ChanceOnHit,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const FZP:&[Spells]=&[Spells{spell: 15814,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 15465,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 13669,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const FZQ:&[Spells]=&[Spells{spell: 8094,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 1000,spell_category: 0,spell_category_cooldown: -1,},];
 const FZR:&[Spells]=&[Spells{spell: 28805,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},Spells{spell: 18378,spell_trigger: SpellTriggerType::OnEquip,spell_charges: 0,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const FZS:&[Spells]=&[Spells{spell: 3901,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
@@ -4904,8 +4904,8 @@ const GZH:&[Spells]=&[Spells{spell: 17644,spell_trigger: SpellTriggerType::OnUse
 const GZI:&[Spells]=&[Spells{spell: 6620,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const GZJ:&[Spells]=&[Spells{spell: 12186,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const GZK:&[Spells]=&[Spells{spell: 17604,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
-const GZL:&[Spells]=&[Spells{spell: 18521,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
-const GZM:&[Spells]=&[Spells{spell: 18563,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const GZL:&[Spells]=&[Spells{spell: 18563,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
+const GZM:&[Spells]=&[Spells{spell: 18521,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
 const GZN:&[Spells]=&[Spells{spell: 15858,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
 const GZO:&[Spells]=&[Spells{spell: 3092,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: 0,spell_category: 0,spell_category_cooldown: 0,},];
 const GZP:&[Spells]=&[Spells{spell: 7637,spell_trigger: SpellTriggerType::OnUse,spell_charges: -1,spell_ppm_rate: 0.0,spell_cooldown: -1,spell_category: 0,spell_category_cooldown: -1,},];
@@ -7553,7 +7553,7 @@ nab(2696,T,"Cask of Evershine",7922,L,0,1,0,0,M,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,
 na(2697,FP,"Recipe: Goretusk Liver Pie",BI,L,X,1,DG,CH,M,A,A,15,0,FQ,50,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,2,K,0,0,I,0,G,0,0,0,EZY,),
 na(2698,FP,"Recipe: Cooked Crab Claw",BI,L,X,1,DG,CH,M,A,A,15,0,FQ,85,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,2,K,0,0,I,0,G,0,0,0,HMX,),
 na(2699,FP,"Recipe: Redridge Goulash",BI,L,X,1,HA,DE,M,A,A,20,0,FQ,AY,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,2,K,0,0,I,0,G,0,0,0,BZV,),
-na(2700,FP,"Recipe: Succulent Pork Ribs",BI,L,X,1,DG,CH,M,A,A,20,0,FQ,IM,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,2,K,0,0,I,0,G,0,0,0,EVQ,),
+na(2700,FP,"Recipe: Succulent Pork Ribs",BI,L,X,1,DG,CH,M,A,A,20,0,FQ,IM,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,2,K,0,0,I,0,G,0,0,0,EVP,),
 na(2701,FP,"Recipe: Seasoned Wolf Kabob",BI,L,X,1,HT,DG,M,A,A,25,0,FQ,AY,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,2,K,0,0,I,0,G,0,0,0,HBB,),
 nab(2702,T,"Lightforge Ingot",7158,L,0,1,0,0,M,A,A,1,0,J,0,F,D,0,0,W,0,0,0,0,0,0,0,0,0,0,0,0,0,E,V,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,),
 nab(2703,EY,"Monster - Item, Tankard Wooden",24596,AC,0,1,0,0,AS,A,A,1,1,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,1,K,0,0,I,0,G,0,0,4,),
@@ -8528,7 +8528,7 @@ nab(3705,AF,"Deprecated Rabid Fang",6002,L,16,1,2910,727,M,A,A,1,0,J,0,F,D,0,0,W
 nab(3706,T,"Ensorcelled Parchment",7015,L,0,1,0,0,M,AH,AE,30,30,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,"Its letters are enshrouded in magic.",0,B,C,551,2,K,0,0,I,0,G,0,0,0,),
 nab(3707,T,"Nagaz Parchment",7015,L,0,1,0,0,M,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,2,K,0,0,I,0,G,0,0,0,),
 nab(3708,T,"Helcular's Rod",10275,L,BA,1,0,0,M,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,V,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,),
-na(3710,T,"Rod of Helcular",10275,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,V,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,BYF,),
+na(3710,T,"Rod of Helcular",10275,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,V,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,BYE,),
 nab(3711,T,"Belamoore's Research Journal",4049,L,0,1,0,0,M,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,266,B,C,0,2,K,0,0,I,0,G,0,0,0,),
 nab(3712,BH,"Turtle Meat",25472,L,0,1,IV,87,M,A,A,30,0,J,0,F,D,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,1,0,),
 nab(3713,BH,"Soothing Spices",1443,L,0,1,LB,40,M,A,A,30,0,J,0,F,D,0,0,W,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,),
@@ -9029,7 +9029,7 @@ na(4208,AJ,"Grimoire of Mind Bomb",CS,L,80,1,CW,EL,M,CV,A,32,32,J,0,F,D,0,0,1,0,
 na(4209,AJ,"Grimoire of Shadow Ward",CS,L,80,1,GM,CA,M,CV,A,30,30,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,HOH,),
 na(4210,AJ,"Grimoire of Create Lesser Bloodstone",CS,L,80,1,MP,KE,M,CV,A,14,14,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,HAZ,),
 na(4211,AJ,"Grimoire of Pestilence",CS,L,80,1,MP,KE,M,CV,A,14,14,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,BQL,),
-na(4212,AJ,"Grimoire of Curse of Mannoroth III",CS,L,80,1,CW,EL,M,CV,A,32,32,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVE,),
+na(4212,AJ,"Grimoire of Curse of Mannoroth III",CS,L,80,1,CW,EL,M,CV,A,32,32,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVD,),
 na(4213,AJ,"Grimoire of Doom",CS,P,X,1,CW,EL,M,CV,AE,S,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,GDU,),
 na(4214,AJ,"Grimoire of Life Drain III",CS,L,80,1,IJ,IB,M,CV,A,30,30,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,AQX,),
 na(4215,AJ,"Grimoire of Rain of Fire",CS,L,80,1,JQ,JC,M,CV,A,20,20,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,AGC,),
@@ -9163,8 +9163,8 @@ nab(4342,BH,"Purple Dye",6389,L,0,1,EL,MA,M,A,A,50,0,J,0,F,D,0,0,10,0,0,0,0,0,0,
 nab(4343,U,"Brown Linen Pants",12388,L,0,1,301,60,AP,A,A,Z,5,J,0,F,D,0,0,1,0,0,0,0,0,0,16,0,0,0,0,0,0,E,N,H,0,B,C,0,7,K,0,0,I,35,G,0,0,0,),
 nab(4344,AD,"Brown Linen Shirt",12802,L,0,1,58,11,FZ,A,A,7,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,7,K,0,0,I,0,G,0,0,0,),
 na(4345,CY,"Pattern: Red Woolen Boots",BN,P,X,1,DG,CH,M,A,A,19,0,DB,95,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DAL,),
-na(4346,CY,"Pattern: Heavy Woolen Cloak",BN,P,X,1,DG,CH,M,A,A,20,0,DB,AY,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVL,),
-na(4347,CY,"Pattern: Reinforced Woolen Shoulders",BN,P,X,1,FY,GE,M,A,A,24,0,DB,BT,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVM,),
+na(4346,CY,"Pattern: Heavy Woolen Cloak",BN,P,X,1,DG,CH,M,A,A,20,0,DB,AY,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVK,),
+na(4347,CY,"Pattern: Reinforced Woolen Shoulders",BN,P,X,1,FY,GE,M,A,A,24,0,DB,BT,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVL,),
 na(4348,CY,"Pattern: Phoenix Gloves",BN,P,X,1,JX,KT,M,A,A,25,0,DB,II,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FDX,),
 na(4349,CY,"Pattern: Phoenix Pants",BN,P,X,1,JX,KT,M,A,A,25,0,DB,II,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DYW,),
 na(4350,CY,"Pattern: Spider Silk Slippers",BN,P,X,1,HA,DE,M,A,A,28,0,DB,HF,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,CTR,),
@@ -9261,7 +9261,7 @@ nab(4442,Y,"Deprecated Dark Mantle",2563,AC,16,1,1532,306,AW,A,A,23,18,J,0,F,D,0
 nab(4443,AB,"Grim Pauldrons",11327,P,0,1,17360,3472,AW,A,A,36,0,J,0,F,D,0,0,1,0,0,7,0,0,7,OT,0,0,0,0,0,0,E,O,H,0,B,C,0,5,K,0,0,I,60,G,6,0,0,),
 na(4444,BG,"Black Husk Shield",18694,P,0,1,7450,1490,BE,A,A,24,19,J,0,F,D,0,0,1,0,0,0,3,0,4,478,0,0,0,0,0,0,E,Q,H,0,B,C,0,1,BF,0,9,I,75,G,23,0,0,BVK,),
 nb(4445,CE,"Flesh Carver",19398,P,0,1,10341,2068,BB,A,A,23,18,J,0,F,D,0,0,1,0,2,0,2,0,0,0,0,0,0,0,FK,0,E,Q,H,0,B,C,0,1,AI,0,0,I,65,G,23,0,0,XS,),
-n(4446,BO,"Blackvenom Blade",20369,R,0,1,17972,3594,AS,A,A,26,21,J,0,F,D,0,0,1,0,1,0,0,0,0,0,0,0,0,0,DW,0,E,Q,H,0,B,C,0,1,AI,0,0,I,60,G,42,0,0,EKK,FZP,),
+n(4446,BO,"Blackvenom Blade",20369,R,0,1,17972,3594,AS,A,A,26,21,J,0,F,D,0,0,1,0,1,0,0,0,0,0,0,0,0,0,DW,0,E,Q,H,0,B,C,0,1,AI,0,0,I,60,G,42,0,0,EKK,FZO,),
 nab(4447,U,"Cloak of Night",23019,P,0,1,4509,901,AZ,A,A,26,21,J,0,F,D,0,0,1,0,5,0,0,0,0,W,0,0,0,0,0,0,E,Q,H,0,B,C,0,7,K,0,0,I,0,G,4,0,0,),
 nab(4448,AB,"Husk of Naraxis",4723,P,0,1,9959,1991,AT,A,A,27,22,J,0,F,D,0,0,1,0,0,5,7,0,0,189,0,0,0,0,0,0,E,Q,H,0,B,C,0,5,K,0,0,I,95,G,4,0,0,),
 n(4449,BO,"Naraxis' Fang",20439,P,0,1,16662,3332,AS,A,A,27,22,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,FU,0,E,Q,H,0,B,C,0,1,AI,0,0,I,50,G,24,0,0,UR,BHA,),
@@ -10752,7 +10752,7 @@ na(6047,CM,"Plans: Golden Scale Coif",BI,L,X,1,UE,NC,M,A,A,38,0,CF,JP,F,D,0,0,1,
 na(6048,AG,"Shadow Protection Potion",15774,L,0,1,DG,CH,M,A,A,27,17,J,0,F,D,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,3,K,0,0,I,0,G,0,0,0,ELT,),
 na(6049,AG,"Fire Protection Potion",9639,L,0,1,680,170,M,A,A,33,23,J,0,F,D,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,3,K,0,0,I,0,G,0,0,0,GXA,),
 na(6050,AG,"Frost Protection Potion",9058,L,0,1,HN,EH,M,A,A,38,28,J,0,F,D,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,3,K,0,0,I,0,G,0,0,0,HMR,),
-na(6051,AG,"Holy Protection Potion",15747,L,0,1,DI,62,M,A,A,20,Z,J,0,F,D,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,3,K,0,0,I,0,G,0,0,0,EVF,),
+na(6051,AG,"Holy Protection Potion",15747,L,0,1,DI,62,M,A,A,20,Z,J,0,F,D,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,3,K,0,0,I,0,G,0,0,0,EVE,),
 na(6052,AG,"Nature Protection Potion",4135,L,0,1,HN,EH,M,A,A,38,28,J,0,F,D,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,3,K,0,0,I,0,G,0,0,0,GPU,),
 na(6053,FM,"Recipe: Holy Protection Potion",DD,L,X,1,HA,DE,M,A,A,20,0,FG,AY,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,GVG,),
 na(6054,FM,"Recipe: Shadow Protection Potion",DD,L,X,1,IW,IE,M,A,A,27,0,FG,GS,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,CMG,),
@@ -11822,7 +11822,7 @@ nab(7445,Y,"Sentinel Shoulders",5414,P,0,1,18303,3660,AW,A,A,38,33,J,0,F,D,0,0,1
 nab(7446,U,"Sentinel Cloak",23062,P,0,1,15462,3092,AZ,A,A,36,31,J,0,F,D,0,0,1,0,0,0,0,0,0,24,0,0,0,0,0,0,E,Q,H,0,B,C,0,7,K,987,0,I,0,G,6,0,0,),
 nab(7447,Y,"Sentinel Bracers",14997,P,0,1,10343,2068,AU,A,A,36,31,J,0,F,D,0,0,1,0,0,0,0,0,0,45,0,0,0,0,0,0,E,Q,H,0,B,C,0,8,K,1071,0,I,30,G,6,0,0,),
 nab(7448,Y,"Sentinel Girdle",14999,P,0,1,10380,2076,AR,A,A,36,31,J,0,F,D,0,0,1,0,0,0,0,0,0,58,0,0,0,0,0,0,E,Q,H,0,B,C,0,8,K,903,0,I,30,G,6,0,0,),
-na(7449,CR,"Pattern: Dusky Leather Leggings",BN,P,X,1,EL,MA,M,A,A,33,0,CO,GZ,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DZJ,),
+na(7449,CR,"Pattern: Dusky Leather Leggings",BN,P,X,1,EL,MA,M,A,A,33,0,CO,GZ,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DZI,),
 na(7450,CR,"Pattern: Green Whelp Armor",BI,P,X,1,CA,CN,M,A,A,35,0,CO,HS,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FLD,),
 na(7451,CR,"Pattern: Green Whelp Bracers",BI,P,X,1,WQ,JX,M,A,A,38,0,CO,JP,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EHX,),
 na(7452,CR,"Pattern: Dusky Boots",BI,R,X,1,ID,NK,M,A,A,40,0,CO,CZ,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EZW,),
@@ -12390,7 +12390,7 @@ nab(8319,AM,"Alabaster Plate Pauldrons",27396,P,0,1,45906,9181,AW,A,A,55,50,J,0,
 nab(8320,BG,"Alabaster Shield",27571,P,0,1,110461,22092,BE,A,A,57,52,J,0,F,D,0,0,1,0,0,3,13,0,0,1748,0,0,0,0,0,0,E,Q,H,0,B,C,0,1,BF,0,31,I,85,G,30,0,0,),
 nab(8343,BH,"Heavy Silken Thread",12105,L,0,1,CA,CN,M,A,A,40,0,J,0,F,D,0,0,W,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,),
 nab(8344,T,"Silvery Spinnerets",16464,L,BA,1,0,0,M,AH,AE,0,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,V,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,),
-na(8345,Y,"Wolfshead Helm",28987,R,X,1,37109,7421,AX,EA,A,45,40,J,0,F,D,0,0,1,0,0,0,0,0,Z,OA,0,0,0,0,0,0,E,Q,H,0,B,C,0,8,K,0,0,I,60,G,45,0,0,EVA,),
+na(8345,Y,"Wolfshead Helm",28987,R,X,1,37109,7421,AX,EA,A,45,40,J,0,F,D,0,0,1,0,0,0,0,0,Z,OA,0,0,0,0,0,0,E,Q,H,0,B,C,0,8,K,0,0,I,60,G,45,0,0,EUZ,),
 na(8346,Y,"Gauntlets of the Sea",16678,R,0,1,26816,5363,AQ,A,A,46,41,J,0,F,D,0,0,1,0,7,0,0,0,0,85,0,0,0,0,0,0,E,Q,H,0,B,C,0,8,K,0,0,I,35,G,46,0,0,CXA,),
 na(8347,AB,"Dragonscale Gauntlets",16731,R,0,1,29899,5979,AQ,A,A,45,40,J,0,F,D,0,0,1,0,0,0,7,0,6,OF,0,0,0,0,0,0,E,Q,H,0,B,C,0,5,K,0,0,I,40,G,45,0,0,ACU,),
 na(8348,Y,"Helm of Fire",17226,R,0,1,54099,10819,AX,A,A,50,45,J,0,F,D,0,0,1,0,17,0,Z,0,0,KW,5,0,0,0,0,0,E,Q,H,0,B,C,0,8,K,0,0,I,60,G,46,0,0,FBJ,),
@@ -12508,7 +12508,7 @@ na(8627,AF,BEJ,17606,R,80,1,DN,0,M,A,DL,40,40,EG,75,F,D,0,0,1,0,0,0,0,0,0,0,0,0,
 na(8628,AF,"Reins of the Spotted Nightsaber",17606,L,X,1,800000,0,M,AH,223,40,40,EG,75,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,ESO,),
 na(8629,AF,"Reins of the Striped Nightsaber",17606,R,X,1,DN,0,M,A,PE,40,40,EG,75,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FUQ,),
 na(8630,AF,"Reins of the Bengal Tiger",17607,R,80,1,DN,0,M,A,DL,40,40,EG,75,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,EIB,),
-na(8631,AF,"Reins of the Striped Frostsaber",WK,R,X,1,DN,0,M,A,PE,40,40,EG,75,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVS,),
+na(8631,AF,"Reins of the Striped Frostsaber",WK,R,X,1,DN,0,M,A,PE,40,40,EG,75,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVR,),
 na(8632,AF,"Reins of the Spotted Frostsaber",WK,R,X,1,DN,0,M,A,PE,40,40,EG,75,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,CAI,),
 na(8633,AF,"Reins of the Leopard",17607,R,80,1,DN,0,M,A,DL,40,40,EG,75,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,DDW,),
 nab(8643,T,"Extraordinary Egg",SX,L,0,1,CW,EL,M,AH,AE,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,"There's something very special about this egg...",0,B,C,0,-1,K,0,0,I,0,G,0,0,0,),
@@ -13924,7 +13924,7 @@ na(10314,CY,"Pattern: Lavender Mageweave Shirt",BI,L,X,1,DA,BY,M,A,A,46,0,DB,230
 na(10315,CY,"Pattern: Red Mageweave Shoulders",BN,P,X,1,HQ,NB,M,A,A,47,0,DB,235,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,GCX,),
 na(10316,CY,"Pattern: Colorful Kilt",BN,P,X,1,HA,DE,M,A,A,24,0,DB,BT,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FRG,),
 na(10317,CY,"Pattern: Pink Mageweave Shirt",BI,L,X,1,DA,BY,M,A,A,47,0,DB,235,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,CZR,),
-na(10318,CY,"Pattern: Admiral's Hat",BI,L,X,1,HQ,NB,M,A,A,48,0,DB,MB,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVT,),
+na(10318,CY,"Pattern: Admiral's Hat",BI,L,X,1,HQ,NB,M,A,A,48,0,DB,MB,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVS,),
 na(10319,CY,"Pattern: Stormcloth Headband",BN,P,X,1,HQ,NB,M,A,A,48,0,DB,MB,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DXH,),
 na(10320,CY,"Pattern: Red Mageweave Headband",BN,P,X,1,HQ,NB,M,A,A,48,0,DB,MB,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,HEV,),
 na(10321,CY,"Pattern: Tuxedo Shirt",BI,L,X,1,IO,1125,M,A,A,48,0,DB,MB,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EXE,),
@@ -15945,7 +15945,7 @@ na(13375,BG,"Crest of Retribution",23825,R,0,1,153284,30656,BE,A,A,S,55,J,0,F,D,
 nab(13376,U,"Royal Tribunal Cloak",24065,R,0,1,68693,13738,AZ,A,A,59,54,J,0,F,D,0,0,1,0,0,0,7,16,0,42,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,0,G,48,0,0,),
 nb(13377,LT,"Miniature Cannon Balls",2418,R,0,CZ,30,7,HY,AN,A,61,56,J,0,F,D,0,0,CZ,0,0,0,0,0,0,0,0,0,0,0,DP,0,E,O,H,0,B,C,0,2,K,0,0,I,0,LJ,0,0,0,CJV,),
 nab(13378,Y,"Songbird Blouse",24066,R,0,1,109860,21972,AT,A,A,58,53,J,0,F,D,0,0,1,0,13,13,13,13,13,GZ,0,0,0,0,0,0,E,O,H,0,B,C,0,8,K,0,0,I,AY,G,48,0,0,),
-na(13379,AD,"Piccolo of the Flaming Fire",2618,R,0,1,42939,10734,BS,A,A,58,53,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,48,0,0,EVG,),
+na(13379,AD,"Piccolo of the Flaming Fire",2618,R,0,1,42939,10734,BS,A,A,58,53,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,48,0,0,EVF,),
 n(13380,EF,"Willey's Portable Howitzer",18298,R,0,1,192216,38443,BP,A,A,61,56,J,0,F,D,0,0,1,0,0,0,9,0,0,0,0,0,0,0,EC,3,BC,O,H,0,B,C,0,1,K,0,0,I,75,G,48,0,0,AQP,AZW,),
 nab(13381,AM,"Master Cannoneer Boots",24068,R,0,1,77167,15433,AO,A,A,61,56,J,0,F,D,0,0,1,0,0,Z,21,0,0,438,0,0,0,0,0,0,E,O,H,0,B,C,0,6,K,0,0,I,65,G,48,0,0,),
 na(13382,AD,"Cannonball Runner",7888,R,0,1,43400,10850,BS,A,A,61,56,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,48,0,0,CCB,),
@@ -16498,7 +16498,7 @@ na(14141,U,"Ghostweave Vest",25571,P,0,1,64296,12859,AT,A,A,55,50,J,0,F,D,0,0,1,
 na(14142,U,"Ghostweave Gloves",24977,P,0,1,30436,6087,AQ,A,A,54,49,J,0,F,D,0,0,1,0,0,0,0,8,0,44,0,0,0,0,0,0,E,Q,H,0,B,C,0,7,K,0,0,I,25,G,9,0,0,AMA,),
 na(14143,U,"Ghostweave Belt",24978,P,0,1,28817,5763,AR,A,A,53,48,J,0,F,D,0,0,1,0,0,0,0,8,0,39,0,0,0,0,0,0,E,Q,H,0,B,C,0,7,K,0,0,I,25,G,9,0,0,AMA,),
 na(14144,U,"Ghostweave Pants",11166,P,0,1,71871,14374,AP,AH,AE,58,53,J,0,F,D,0,0,1,0,0,0,0,12,0,66,0,0,0,0,0,0,E,Q,H,0,B,C,0,7,K,0,0,I,55,G,Z,0,0,ALD,),
-n(14145,BK,"Cursed Felblade",24981,P,0,1,5161,IA,BB,A,A,18,13,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,EU,0,E,O,H,0,B,C,0,1,AI,0,0,I,55,G,22,0,0,ARE,EVN,),
+n(14145,BK,"Cursed Felblade",24981,P,0,1,5161,IA,BB,A,A,18,13,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,EU,0,E,O,H,0,B,C,0,1,AI,0,0,I,55,G,22,0,0,ARE,EVM,),
 na(14146,U,"Gloves of Spell Mastery",24986,AA,0,1,70421,14084,AQ,31632,A,62,57,J,0,F,D,0,0,1,0,0,0,0,10,8,60,0,0,0,0,0,0,E,Q,H,0,B,C,0,7,K,0,0,I,35,G,65,0,0,AWK,),
 nab(14147,AB,"Cavedweller Bracers",24982,P,0,1,1559,311,AU,A,A,18,13,J,0,F,D,0,0,1,0,0,1,2,0,0,71,0,0,0,0,0,0,E,O,H,0,B,C,0,5,K,0,0,I,25,G,2,0,0,),
 nab(14148,U,"Crystalline Cuffs",24983,P,0,1,1043,208,AU,A,A,18,13,J,0,F,D,0,0,1,0,0,0,0,1,2,14,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,W,G,2,0,0,),
@@ -16842,7 +16842,7 @@ nab(14503,Y,"Death's Clutch",25104,R,0,1,98260,19652,AW,A,A,62,57,J,0,F,D,0,0,1,
 na(14504,CY,"Pattern: Runecloth Shoulders",BN,P,X,1,EJ,CW,M,A,A,61,0,DB,BW,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,CJG,),
 na(14505,CY,"Pattern: Wizardweave Turban",BN,P,X,1,EJ,CW,M,A,A,61,0,DB,BW,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DQZ,),
 na(14506,CY,"Pattern: Felcloth Robe",BN,P,X,1,EJ,CW,M,A,A,61,0,DB,BW,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EQV,),
-na(14507,CY,"Pattern: Mooncloth Shoulders",BI,R,X,1,EJ,CW,M,A,A,61,0,DB,BW,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,GZL,),
+na(14507,CY,"Pattern: Mooncloth Shoulders",BI,R,X,1,EJ,CW,M,A,A,61,0,DB,BW,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,GZM,),
 na(14508,CY,"Pattern: Felcloth Shoulders",BN,P,X,1,HM,EK,M,A,A,62,0,DB,BW,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,GYD,),
 na(14509,CY,"Pattern: Mooncloth Circlet",BI,R,X,1,HM,EK,M,A,A,62,0,DB,BW,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,CJU,),
 na(14510,CY,"Pattern: Bottomless Bag",BI,R,X,1,HM,EK,M,A,A,62,0,DB,BW,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FGT,),
@@ -16854,7 +16854,7 @@ na(14522,AB,"Maelstrom Leggings",25111,R,0,1,156591,31318,AP,A,A,62,57,J,0,F,D,0
 na(14523,T,"Demon Pick",25118,L,X,1,0,0,M,AH,AE,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,V,H,0,B,C,0,1,K,0,0,I,0,G,0,0,0,DNJ,),
 nb(14524,BK,"Monster - Sword, Katana 2H Gold",25120,AC,0,1,11,2,AS,A,A,1,1,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,CC,0,E,N,H,0,B,C,0,1,AI,0,0,I,W,G,0,0,4,JI,),
 na(14525,AM,"Boneclenched Gauntlets",25116,R,0,1,52805,10561,AQ,A,A,62,57,J,0,F,D,0,0,1,0,0,15,14,0,0,404,0,0,0,0,0,0,E,O,H,0,B,C,0,6,K,0,0,I,45,G,48,0,0,QK,),
-na(14526,CY,"Pattern: Mooncloth",BI,L,X,1,CD,BU,M,A,A,55,0,DB,DT,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,GZM,),
+na(14526,CY,"Pattern: Mooncloth",BI,L,X,1,CD,BU,M,A,A,55,0,DB,DT,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,GZL,),
 nab(14527,CP,"Monster - Mace2H, Horde Hammer A03 Dark",25139,AC,0,1,0,0,AL,A,A,1,1,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,2,AV,0,0,I,0,G,0,0,4,),
 nab(14528,BG,"Rattlecage Buckler",25138,R,0,1,170909,34181,BE,A,A,62,57,J,0,F,D,0,0,1,0,0,0,7,12,7,2121,0,0,0,7,0,0,E,O,H,0,B,C,0,1,BF,0,39,I,AY,G,48,0,0,),
 na(14529,AG,"Runecloth Bandage",25146,L,X,1,CA,CN,M,A,A,52,0,IS,CZ,F,D,0,0,W,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,7,K,0,0,I,0,G,0,0,0,FAK,),
@@ -17510,7 +17510,7 @@ nb(15250,CJ,"Glimmering Flamberge",28536,P,0,1,34474,6894,AL,A,A,32,27,J,0,F,D,0
 nb(15251,CJ,"Headstriker Sword",28546,P,0,1,88428,17685,AL,A,A,43,38,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,EW,0,E,Q,H,0,B,C,0,1,AV,5263,0,I,85,G,27,0,0,ACR,),
 nb(15252,CJ,"Tusker Sword",28465,P,0,1,139530,27906,AL,A,A,49,44,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,JV,0,E,Q,H,0,B,C,0,1,AV,5281,0,I,85,G,28,0,0,AWN,),
 nb(15253,CJ,"Beheading Blade",28321,P,0,1,157738,31547,AL,A,A,52,47,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,IH,0,E,Q,H,0,B,C,0,1,AV,5290,0,I,85,G,29,0,0,GWD,),
-nb(15254,CJ,"Dark Espadon",28347,P,0,1,177922,35584,AL,A,A,54,49,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,GG,0,E,Q,H,0,B,C,0,1,AV,5290,0,I,85,G,29,0,0,EVB,),
+nb(15254,CJ,"Dark Espadon",28347,P,0,1,177922,35584,AL,A,A,54,49,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,GG,0,E,Q,H,0,B,C,0,1,AV,5290,0,I,85,G,29,0,0,EVA,),
 nb(15255,CJ,"Gallant Flamberge",28529,P,0,1,212728,42545,AL,A,A,57,52,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,GR,0,E,Q,H,0,B,C,0,1,AV,5299,0,I,85,G,30,0,0,BBG,),
 nb(15256,CJ,"Massacre Sword",28576,P,0,1,237656,47531,AL,A,A,59,54,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,IR,0,E,Q,H,0,B,C,0,1,AV,5308,0,I,85,G,30,0,0,BMI,),
 nb(15257,CJ,"Shin Blade",26589,P,0,1,276172,55234,AL,A,A,62,57,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,FJ,0,E,Q,H,0,B,C,0,1,AV,5317,0,I,85,G,31,0,0,GAJ,),
@@ -18273,7 +18273,7 @@ na(16086,AG,"Test Enchant Chest Health",GD,L,80,1,ON,HZ,M,A,A,45,0,J,0,F,D,0,0,1
 na(16102,AG,"Test Enchant Chest Mana",GD,L,80,1,ON,HZ,M,A,A,45,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,DDL,),
 na(16103,AG,"Test Enchant Boots Stamina",GD,L,80,1,ON,HZ,M,A,A,45,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,DQA,),
 na(16104,AG,"QAEnchhelp Cloak +7 Fire Resistance",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,HHY,),
-na(16105,AG,"Test Enchant Bracer Greater Stamina",GD,L,80,1,ON,HZ,M,A,A,45,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,EVO,),
+na(16105,AG,"Test Enchant Bracer Greater Stamina",GD,L,80,1,ON,HZ,M,A,A,45,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,EVN,),
 na(16106,AG,"Test Enchant Weapon Greater Striking",GD,L,80,1,ON,HZ,M,A,A,45,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,EFX,),
 na(16107,AG,"Test Enchant Bracer Greater Spirit",GD,L,80,1,ON,HZ,M,A,A,45,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,EBT,),
 na(16108,AG,"Test Enchant 2H Weapon Greater Impact",GD,L,80,1,ON,HZ,M,A,A,45,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,DLX,),
@@ -19100,7 +19100,7 @@ na(17082,AD,"Shard of the Flame",29722,AA,0,1,184585,46146,BS,A,A,74,S,J,0,F,D,0
 nab(17102,U,"Cloak of the Shrouded Mists",29824,AA,0,1,193445,38689,AZ,A,A,74,S,J,0,F,D,0,0,1,0,22,0,12,0,0,57,6,6,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,0,G,65,0,0,),
 n(17103,BK,"Azuresong Mageblade",29677,AA,0,1,559117,111823,BB,A,A,71,S,J,0,F,D,0,0,1,0,0,0,7,12,0,0,0,0,0,0,EW,0,E,O,H,0,B,C,0,1,AI,0,0,I,DK,G,65,0,0,DZU,BJH,),
 n(17104,CL,"Spinal Reaper",32200,AA,0,1,895337,179067,AL,A,A,76,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,GR,0,E,O,H,0,B,C,0,1,AV,0,0,I,BT,G,65,0,0,FOW,FXR,),
-n(17105,BQ,"Aurastone Hammer",34109,AA,0,1,510891,102178,AS,A,A,69,S,J,0,F,D,0,0,1,0,0,0,Z,10,0,0,0,0,0,0,DY,0,E,O,H,0,B,C,0,2,AI,0,0,I,DK,G,65,0,0,DZW,BND,),
+n(17105,BQ,"Aurastone Hammer",34109,AA,0,1,510891,102178,AS,A,A,69,S,J,0,F,D,0,0,1,0,0,0,Z,10,0,0,0,0,0,0,DY,0,E,O,H,0,B,C,0,2,AI,0,0,I,DK,G,65,0,0,DZX,BND,),
 na(17106,BG,"Malistar's Defender",29702,AA,0,1,439804,87960,BE,A,A,75,S,J,0,F,D,0,0,1,0,0,0,9,12,0,2822,0,0,0,0,0,0,E,O,H,0,B,C,0,1,BF,0,52,I,BT,G,65,0,0,AQF,),
 nab(17107,U,"Dragon's Blood Cape",29827,AA,0,1,187685,37537,AZ,A,A,73,S,J,0,F,D,0,0,1,0,0,9,22,0,0,116,5,0,0,5,0,0,E,O,H,0,B,C,0,7,K,0,0,I,0,G,65,0,0,),
 na(17108,AD,"Mark of Deflection",23728,AA,0,1,96854,24213,BD,A,A,65,S,J,0,F,D,0,1,1,0,0,Z,0,0,0,AY,0,0,0,0,0,0,E,O,H,0,B,C,0,3,K,0,0,I,0,G,0,0,0,HBE,),
@@ -19143,7 +19143,7 @@ na(17198,AG,"Egg Nog",29172,L,0,1,36,9,M,A,A,Z,1,J,0,F,D,0,0,W,0,0,0,0,0,0,0,0,0
 na(17199,AG,"Bad Egg Nog",29173,L,0,1,36,9,M,A,A,Z,1,J,0,F,D,0,0,W,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,SB,),
 na(17200,FP,"Recipe: Gingerbread Cookie",IT,L,X,1,25,6,M,AN,AE,5,0,FQ,1,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,HJV,),
 na(17201,FP,"Recipe: Egg Nog",IT,L,X,1,240,60,M,AN,DL,Z,0,FQ,35,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,HOC,),
-na(17202,AG,"Snowball",29169,L,X,5,10,0,M,AN,A,5,0,J,0,F,D,0,0,W,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DZX,),
+na(17202,AG,"Snowball",29169,L,X,5,10,0,M,AN,A,5,0,J,0,F,D,0,0,W,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DZW,),
 nab(17203,BH,"Sulfuron Ingot",29174,AA,0,1,HJ,DN,M,A,A,S,0,J,0,F,D,0,0,W,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,2,K,0,0,I,0,G,0,0,0,),
 na(17204,BH,"Eye of Sulfuras",29175,JG,CU,1,800000,200000,M,A,A,S,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,2,K,0,0,I,0,G,0,0,0,COA,),
 na(17222,AG,"Spider Sausage",29193,L,0,1,HN,EH,M,A,A,40,35,J,0,F,D,0,0,W,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,1,0,AHC,),
@@ -19268,7 +19268,7 @@ na(17604,U,"Field Marshal's Satin Mantle",33005,AA,AK,1,102927,20585,AW,16,A,74,
 na(17605,U,"Field Marshal's Satin Vestments",32984,AA,AK,1,137722,27544,BL,16,A,74,S,J,0,HE,D,0,1,1,0,0,0,30,28,0,OO,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AEH,AY,G,0,0,0,AOV,),
 nab(17606,U,"Marshal's Satin Bracers",30338,AA,AK,1,40304,8060,AU,16,A,65,S,J,0,FI,D,0,1,1,0,0,0,Z,19,Z,44,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,35,G,0,0,0,),
 na(17607,U,"Marshal's Satin Sandals",32992,AA,AK,1,81332,16266,AO,16,A,71,S,J,0,FI,D,0,1,1,0,0,0,21,18,0,II,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AEH,50,G,0,0,0,NR,),
-na(WK,U,"Marshal's Satin Gloves",32990,AA,AK,1,54431,10886,AQ,16,A,71,S,J,0,FI,D,0,1,1,0,0,0,21,13,0,KW,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AEH,35,G,0,0,0,DHM,),
+na(WK,U,"Marshal's Satin Gloves",32990,AA,AK,1,54431,10886,AQ,16,A,71,S,J,0,FI,D,0,1,1,0,0,0,21,13,0,KW,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AEH,35,G,0,0,0,DHO,),
 nab(17609,U,"Marshal's Satin Sash",30340,AA,AK,1,40773,8154,AR,16,A,65,S,J,0,FI,D,0,1,1,0,0,0,15,23,15,56,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,35,G,0,0,0,),
 na(17610,U,"Champion's Satin Cowl",31030,R,AK,1,41761,8352,AX,16,A,63,58,J,0,GJ,D,0,1,1,0,0,0,20,W,0,73,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AFP,50,G,0,0,0,KQ,),
 na(17611,U,"Legionnaire's Satin Trousers",31033,R,AK,1,55895,11179,AP,16,A,63,58,J,0,EN,D,0,1,1,0,0,0,16,13,16,78,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AFP,65,G,0,0,0,RB,),
@@ -19328,7 +19328,7 @@ na(17721,Y,"Gloves of the Greatfather",29898,P,0,1,11340,2268,AQ,A,A,38,33,J,0,F
 na(17722,CR,"Pattern: Gloves of the Greatfather",BI,P,X,1,WQ,JX,M,AN,A,38,0,CO,JP,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FUZ,),
 nab(17723,AD,"Green Holiday Shirt",29901,L,0,1,DJ,FF,FZ,A,A,40,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,7,K,0,0,I,0,G,0,0,0,),
 na(17724,CY,"Pattern: Green Holiday Shirt",BI,L,X,1,EE,GY,M,AN,DL,38,0,DB,JP,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EWH,),
-na(17725,ER,"Formula: Enchant Weapon - Winter's Might",HL,P,X,1,DJ,FF,M,AN,A,38,0,EQ,JP,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,DU,0,0,0,BVC,),
+na(17725,ER,"Formula: Enchant Weapon - Winter's Might",HL,P,X,1,DJ,FF,M,AN,A,38,0,EQ,JP,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,DU,0,0,0,BVE,),
 nab(17726,AF,"Smokywood Pastures Special Gift",29902,L,4,1,0,0,M,AN,AE,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,),
 nab(17727,AF,"Smokywood Pastures Gift Pack",24053,L,4,1,0,0,M,AN,AE,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,),
 nab(17728,Y,"Albino Crocscale Boots",30172,R,0,1,62291,12458,AO,A,A,53,48,J,0,F,D,0,0,1,0,20,0,5,0,0,DK,0,5,0,0,0,0,E,O,H,0,B,C,0,8,K,0,0,I,50,G,47,0,0,),
@@ -19395,7 +19395,7 @@ nab(17826,AF,"Level 65 Test Gear Plate - Warrior",CX,L,4,1,0,0,M,A,A,1,0,J,0,F,D
 na(17827,AG,"QAEnchant Bracer +9 Strength",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,BUQ,),
 na(17828,AG,"QAEnchant Bracer +9 Stamina",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,ERZ,),
 na(17829,AG,"QAEnchant Bracer +9 Spirit",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,GYE,),
-na(17830,AG,"QAEnchant Bracer +7 Intellect",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,BVE,),
+na(17830,AG,"QAEnchant Bracer +7 Intellect",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,BVC,),
 nab(17831,AF,"Level 60 Test Gear Cloth - Mage/Priest/Warlock 2",CX,L,4,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,1,K,0,0,I,0,G,0,0,0,),
 nab(17832,AF,"Level 60 Test Gear Leather - Druid 2",CX,L,4,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,1,K,0,0,I,0,G,0,0,0,),
 nab(17833,AF,"Level 60 Test Gear Leather - Rogue 2",CX,L,4,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,1,K,0,0,I,0,G,0,0,0,),
@@ -19434,14 +19434,14 @@ na(17884,AG,"QAEnchant Cloak +5 Resistances",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,
 na(17885,AG,"QAEnchant Cloak +70 Armor",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,EAR,),
 na(17886,AG,"zzOLD - QAEnchant Weapon Winter's Might",GD,L,GO,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,DST,),
 na(17887,AG,"QAEnchant 2H Weapon +9 Damage",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,CMO,),
-na(17888,AG,"QAEnchant Weapon +5 Damage",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,EVU,),
+na(17888,AG,"QAEnchant Weapon +5 Damage",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,EVT,),
 na(17889,AG,"zzOLD - QAEnchant 2H Weapon Major Intellect",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,FQN,),
 na(17890,AG,"zzOLD - QAEnchant Shield +7 Spirit",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,DXO,),
-na(17891,AG,"QAEnchant Shield +7 Stamina",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,EVI,),
+na(17891,AG,"QAEnchant Shield +7 Stamina",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,EVH,),
 na(17892,AG,"QAEnchant Shield +8 Frost Resistance",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,GPS,),
 na(17893,AG,"QAEnchant Shield +9 Spirit",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,HDA,),
 na(17894,AG,"QAEnchant Boots +7 Agility",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,FID,),
-na(17895,AG,"QAEnchant Boots +5 Spirit",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,DHO,),
+na(17895,AG,"QAEnchant Boots +5 Spirit",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,DHM,),
 na(17896,AG,"QAEnchant Boots +7 Stamina",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,COG,),
 na(17897,AG,"QAEnchant Gloves +7 Strength",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,CTL,),
 na(17898,AG,"QAEnchant Gloves +7 Agility",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,HND,),
@@ -19870,7 +19870,7 @@ na(TS,AF,"Orcish Orphan Whistle",30959,L,0,1,0,0,M,A,A,Z,0,J,0,F,D,0,1,1,0,0,0,0
 na(18598,AF,"Human Orphan Whistle",30959,L,0,1,0,0,M,A,A,Z,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FVQ,),
 na(18599,AG,"QAEnchant 2H Weapon +25 Agility",36684,L,X,1,HI,HD,M,A,AN,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,GUR,),
 na(18600,AJ,"Tome of Arcane Brilliance",CK,R,X,1,NJ,EX,M,CT,A,56,56,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DNN,),
-na(18601,T,"Glowing Crystal Prison",6689,L,X,1,0,0,M,AH,AE,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,V,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,EVC,),
+na(18601,T,"Glowing Crystal Prison",6689,L,X,1,0,0,M,AH,AE,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,V,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,EVB,),
 na(18602,AD,"Tome of Sacrifice",30875,R,0,1,0,0,BM,EB,A,S,0,J,0,F,D,0,1,1,0,0,0,8,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,48,0,0,BTQ,),
 nab(18603,T,"Satyr Blood",3663,L,BA,1,0,0,M,A,A,1,0,J,0,F,D,0,0,15,0,0,0,0,0,0,0,0,0,0,0,0,0,E,V,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,),
 nab(18604,T,"Tears of the Hederine",6688,L,BA,1,0,0,M,AH,AE,1,0,J,0,F,D,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,E,V,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,),
@@ -19919,14 +19919,14 @@ na(18655,FC,"Schematic: Major Recombobulator",BN,P,X,1,HG,DA,M,A,A,55,0,CQ,GK,F,
 na(18656,FC,"Schematic: Powerful Seaforium Charge",DD,L,X,1,HG,DA,M,A,A,55,0,CQ,GK,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FCF,),
 na(18657,FC,"Schematic: Hyper-Radiant Flame Reflector",BN,P,X,1,CD,BU,M,A,A,58,0,CQ,HK,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,HIN,),
 na(18658,FC,"Schematic: Ultra-Flash Shadow Reflector",BN,P,X,1,MR,FX,M,A,A,S,0,CQ,BW,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,HPI,),
-na(18659,T,"Splinter of Nordrassil",31034,AA,33856,1,0,0,M,A,A,71,S,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,"A tiny fragment of the World Tree",0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVD,),
+na(18659,T,"Splinter of Nordrassil",31034,AA,33856,1,0,0,M,A,A,71,S,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,"A tiny fragment of the World Tree",0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVC,),
 na(18660,HH,"World Enlarger",31205,P,DZ,1,GU,IL,M,A,A,50,0,CQ,DT,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,"Only Gnomish Technology could invent a device that affects the entire world!",0,B,C,0,8,K,0,0,I,0,CG,0,0,0,FTO,),
 na(18661,FC,"Schematic: World Enlarger",BN,P,X,1,EX,DJ,M,A,A,52,0,CQ,JJ,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DEP,),
 na(18662,AG,"Heavy Leather Ball",34892,L,0,1,20,5,M,A,A,1,1,J,0,F,D,0,10,5,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,CCF,),
 na(18663,T,"J'eevee's Jar",7155,L,X,1,1500000,0,M,IG,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,CKO,),
 nab(18664,AF,"A Treatise on Military Ranks",31095,L,0,1,CH,25,M,A,A,0,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,2654,B,CI,0,0,K,0,0,I,0,G,0,0,0,),
 nab(18665,AD,"The Eye of Shadow",31096,AA,0,1,0,0,BS,IG,A,71,S,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,Q,"Seething darkness engulfs the eye.",0,B,C,0,0,K,0,0,I,0,G,0,0,0,),
-na(18666,AG,"QAEnchant Weapon Crusader",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,EVH,),
+na(18666,AG,"QAEnchant Weapon Crusader",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,EVG,),
 na(18667,AG,"QAEnchant Weapon Icy Chill",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,FOL,),
 na(18668,AG,"QAEnchant Weapon Spell Power",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,BUT,),
 na(18669,AG,"QAEnchant Weapon Healing Power",GD,L,X,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,8,K,0,0,I,0,G,0,0,0,HHM,),
@@ -20560,7 +20560,7 @@ nab(19402,AM,"Legguards of the Fallen Crusader",31933,AA,0,1,278048,55609,AP,A,A
 na(19403,AD,"Band of Forced Concentration",31800,AA,0,1,421312,105328,BD,A,A,75,S,J,0,F,D,0,1,1,0,0,0,9,12,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,3,K,0,0,I,0,G,65,0,0,BGS,),
 nab(19404,BQ,"Monster - Mace, The Hand of Nefarius",31935,AC,0,1,0,0,AS,A,A,1,1,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,2,AI,0,0,I,0,G,0,0,4,),
 nab(19405,Y,"Malfurion's Blessed Bulwark",31934,AA,0,1,351387,70277,AT,A,A,75,S,J,0,F,D,0,0,1,0,0,40,22,0,0,392,0,0,0,0,0,0,E,O,H,0,B,C,0,8,K,0,0,I,BT,G,65,0,0,),
-na(19406,AD,"Drake Fang Talisman",31936,AA,0,1,VS,VO,BS,A,A,75,S,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,4,K,0,0,I,0,G,65,0,0,FZK,),
+na(19406,AD,"Drake Fang Talisman",31936,AA,0,1,VS,VO,BS,A,A,75,S,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,4,K,0,0,I,0,G,65,0,0,FZP,),
 na(19407,U,"Ebony Flame Gloves",18858,AA,0,1,141561,28312,AQ,A,A,75,S,J,0,F,D,0,0,1,0,0,0,17,12,0,72,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,35,G,65,0,0,GEQ,),
 nab(19422,AF,"Darkmoon Faire Fortune",31961,L,4,1,0,0,M,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,),
 nab(19423,AF,"Sayge's Fortune #23",HC,L,0,1,0,0,M,AH,AE,Z,Z,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,"Your fortune awaits you in Eastvale.",0,B,CI,7937,-1,K,0,0,I,0,G,0,0,0,),
@@ -20798,7 +20798,7 @@ nab(19775,AF,"Sealed Azure Bag",32231,L,0,1,0,0,M,AH,AE,1,0,J,0,F,D,0,0,1,0,0,0,
 na(19776,CM,"Plans: Bloodsoul Breastplate",DD,L,X,1,ET,EZ,M,A,A,65,0,CF,BW,F,MD,6,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,GZA,),
 na(19777,CM,"Plans: Bloodsoul Shoulders",DD,L,X,1,ET,EZ,M,A,A,65,0,CF,BW,F,MD,5,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FRS,),
 na(19778,CM,"Plans: Bloodsoul Gauntlets",DD,L,X,1,ET,EZ,M,A,A,65,0,CF,BW,F,MD,4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FOD,),
-na(19779,CM,"Plans: Darksoul Breastplate",DD,L,X,1,ET,EZ,M,A,A,65,0,CF,BW,F,MD,6,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,BYE,),
+na(19779,CM,"Plans: Darksoul Breastplate",DD,L,X,1,ET,EZ,M,A,A,65,0,CF,BW,F,MD,6,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,BYD,),
 na(19780,CM,"Plans: Darksoul Leggings",DD,L,X,1,ET,EZ,M,A,A,65,0,CF,BW,F,MD,5,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,CAO,),
 na(19781,CM,"Plans: Darksoul Shoulders",DD,L,X,1,ET,EZ,M,A,A,65,0,CF,BW,F,MD,4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,GFK,),
 na(19782,AF,"Presence of Might",32233,R,GO,1,0,0,M,1,A,S,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EFG,),
@@ -20987,7 +20987,7 @@ nab(19978,AF,"Fishing Tournament!",QQ,L,0,1,0,0,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,
 na(19979,AD,"Hook of the Master Angler",8233,R,0,1,DN,GI,BS,A,A,65,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,48,0,0,EDX,),
 nab(19980,BO,"Monster - Dagger, Ornate Spikey Base Red",6451,AC,0,1,0,0,AS,A,A,1,1,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,1,AI,0,0,I,0,G,0,0,4,),
 nab(19981,CJ,"Monster - Sword2H, Claymore B01/Broadsword A03 Black Sharpened",32490,AC,0,1,0,0,AS,A,A,1,1,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,1,AV,0,0,I,0,G,0,0,4,),
-na(19982,U,"Duskbat Drape",32503,R,0,1,47222,9444,AZ,IG,A,52,0,J,0,F,D,0,0,1,0,14,0,0,0,0,37,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,0,G,47,0,0,EVJ,),
+na(19982,U,"Duskbat Drape",32503,R,0,1,47222,9444,AZ,IG,A,52,0,J,0,F,D,0,0,1,0,14,0,0,0,0,37,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,0,G,47,0,0,EVI,),
 nb(19983,DM,"Monster - Wand, Horde Demon Skull Red",32507,AC,0,1,9,1,BP,A,A,1,1,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,CC,0,E,N,H,0,B,C,0,2,K,0,0,I,16,G,0,0,4,NT,),
 na(19984,Y,"Ebon Mask",32731,R,0,1,59469,11893,AX,A,A,52,0,J,0,F,D,0,0,1,0,0,0,11,0,0,LE,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,60,G,47,0,0,FUG,),
 na(19985,AM,AIH,32509,R,AK,1,0,0,AR,A,A,63,58,J,0,F,D,0,0,1,0,0,0,0,0,0,369,0,0,0,0,EP,0,E,N,H,0,B,C,0,6,K,0,0,I,45,G,0,0,0,DV,),
@@ -21139,7 +21139,7 @@ na(20130,AD,"Diamond Flask",YN,R,0,1,0,0,BS,A,A,52,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0
 nab(20131,AD,"Battle Tabard of the Defilers",32694,L,0,1,ET,EZ,LU,A,A,20,0,J,0,F,FT,7,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,0,G,0,0,0,),
 nab(20132,AD,"Arathor Battle Tabard",32695,L,0,1,ET,EZ,LU,A,A,20,0,J,0,F,GA,7,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,0,G,0,0,0,),
 na(20133,AB,"Skyfury Gauntlets",32700,AA,0,1,0,0,AQ,X,A,63,0,J,0,F,D,0,0,1,0,0,0,0,0,0,253,0,0,0,0,EP,0,E,N,H,0,B,C,0,5,K,0,0,I,50,G,0,0,0,FQC,),
-na(20134,AB,"Skyfury Helm",32735,AA,0,1,162201,32440,AX,A,A,62,0,J,0,F,D,0,0,1,0,0,13,14,0,12,324,0,0,0,0,0,0,E,O,H,0,B,C,0,5,K,0,0,I,85,G,65,0,0,BYG,),
+na(20134,AB,"Skyfury Helm",32735,AA,0,1,162201,32440,AX,A,A,62,0,J,0,F,D,0,0,1,0,0,13,14,0,12,324,0,0,0,0,0,0,E,O,H,0,B,C,0,5,K,0,0,I,85,G,65,0,0,BYF,),
 na(20135,AM,"90 Epic Warrior Bracelets",29859,AA,16,1,283661,56732,AU,1,A,90,S,J,0,F,D,0,0,1,0,0,18,17,0,0,440,0,0,0,0,0,0,E,O,H,0,B,C,0,6,K,0,0,I,55,G,0,0,0,KA,),
 na(20136,AM,"90 Epic Warrior Breastplate",29858,AA,16,1,569387,113877,AT,1,A,90,S,J,0,F,D,0,0,1,0,0,32,31,0,0,1006,10,10,10,10,0,0,E,O,H,0,B,C,0,6,K,0,0,I,GZ,G,0,0,0,HAL,),
 na(20137,AM,"90 Epic Warrior Gauntlets",29860,AA,16,1,285754,57150,AQ,1,A,90,S,J,0,F,D,0,0,1,0,0,24,23,0,0,629,0,0,0,0,0,0,E,O,H,0,B,C,0,6,K,0,0,I,55,G,0,0,0,AZP,),
@@ -21576,7 +21576,7 @@ na(20576,CR,"Pattern: Black Whelp Tunic",BI,L,X,1,QX,IV,M,A,A,20,0,CO,AY,F,D,0,0
 n(20577,BK,"Nightmare Blade",33097,AA,0,1,540400,108080,AS,AN,A,71,S,J,0,F,D,0,1,1,0,0,0,9,0,0,70,0,0,0,0,DY,0,E,O,H,0,B,C,0,1,AI,0,0,I,DK,G,65,0,0,DJY,AHJ,),
 n(20578,BO,"Emerald Dragonfang",33095,AA,0,1,542499,108499,AS,A,A,71,S,J,0,F,D,0,1,1,0,12,0,0,0,0,0,0,0,0,0,DW,0,E,O,H,0,B,C,0,1,AI,0,0,I,75,G,65,0,0,AOX,DFI,),
 na(20579,U,"Green Dragonskin Cloak",33096,AA,0,1,163379,32675,AZ,A,A,71,S,J,0,F,D,0,1,1,0,0,0,12,0,0,54,0,W,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,0,G,65,0,0,CKB,),
-n(20580,BQ,"Hammer of Bestial Fury",33017,AA,0,1,546639,109327,BB,A,A,71,S,J,0,F,D,0,1,1,0,0,13,12,0,0,90,0,0,0,0,EO,0,E,O,H,0,B,C,0,1,AI,0,0,I,DK,G,65,0,0,BAQ,DZI,),
+n(20580,BQ,"Hammer of Bestial Fury",33017,AA,0,1,546639,109327,BB,A,A,71,S,J,0,F,D,0,1,1,0,0,13,12,0,0,90,0,0,0,0,EO,0,E,O,H,0,B,C,0,1,AI,0,0,I,DK,G,65,0,0,BAQ,DZH,),
 n(20581,BR,"Staff of Rampant Growth",33015,AA,0,1,685922,137184,AL,A,A,71,S,J,0,F,D,0,1,1,0,0,0,12,16,0,0,0,W,0,0,EU,0,E,O,H,0,B,C,0,2,BJ,0,0,I,BT,G,65,0,0,FZX,DUO,),
 na(20582,AD,"Trance Stone",33018,AA,0,1,251211,62802,BM,A,A,71,S,J,0,F,D,0,1,1,0,0,0,9,8,8,0,0,0,0,0,0,0,E,O,H,0,B,C,0,3,K,0,0,I,0,G,65,0,0,QL,),
 nab(20583,AD,"Sturdy Female Dwarf Mask",32959,P,0,1,23694,4738,AX,A,A,45,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,Q,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,),
@@ -21876,7 +21876,7 @@ nab(21121,EY,"Monster - Item, Flower - Purple",33424,AC,0,1,0,0,AS,A,A,1,1,J,0,F
 nab(21122,BO,"Monster - Dagger, Korean A01 Black",33425,AC,0,1,0,0,AS,A,A,1,1,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,1,AI,0,0,I,0,G,0,0,4,),
 nab(21123,EY,"Monster - Item, Flower - White",33426,AC,0,1,0,0,AS,A,A,1,1,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,1,K,0,0,I,0,G,0,0,4,),
 nb(21124,DM,"Ahn'Qiraj Wand [PH]",33428,AA,0,1,496523,99304,BP,AN,A,75,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,GL,0,BC,O,H,0,B,C,0,2,K,0,0,I,75,G,0,0,4,FVE,),
-nb(21125,BR,"Ahn'Qiraj Staff [PH]",33429,AA,0,1,830727,166145,AL,AN,A,75,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,EC,0,E,O,H,0,B,C,0,2,BJ,0,0,I,BT,G,0,0,4,EVK,),
+nb(21125,BR,"Ahn'Qiraj Staff [PH]",33429,AA,0,1,830727,166145,AL,AN,A,75,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,EC,0,E,O,H,0,B,C,0,2,BJ,0,0,I,BT,G,0,0,4,EVJ,),
 n(21126,BO,"Death's Sting",34513,AA,0,1,1034835,206967,AS,AN,A,84,S,J,0,F,D,0,1,1,0,0,0,Z,0,0,0,0,0,0,0,DW,0,E,O,H,0,B,C,0,1,AI,0,0,I,75,G,65,0,0,CWQ,EJV,),
 nb(21127,BQ,"Ahn'Qiraj Mace [PH]",33431,AA,0,1,669614,133922,BB,AN,A,75,S,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,EU,0,E,O,H,0,B,C,0,1,AI,0,0,I,DK,G,0,0,4,AXL,),
 n(21128,BR,"Staff of the Qiraji Prophets",33429,AA,0,1,840206,168041,AL,AN,A,75,S,J,0,F,D,0,0,1,0,0,0,21,26,8,0,10,10,10,10,EC,0,E,O,H,0,B,C,0,2,BJ,0,0,I,BT,G,65,0,0,DEB,HEG,),
@@ -22075,7 +22075,7 @@ na(21324,AF,"Yellow Qiraji Resonating Crystal",33972,R,GO,1,0,0,M,A,A,S,S,EG,75,
 na(21325,AG,"Mechanical Greench",26461,P,JU,1,0,0,M,AN,AE,58,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,3,K,0,0,I,0,G,0,0,0,FNF,),
 na(21326,AD,"Defender of the Timbermaw",33702,AA,0,1,35965,8991,BS,A,A,62,0,J,0,F,PY,7,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,65,0,0,DWQ,),
 nab(21327,AF,"Ticking Present",33535,L,4,1,0,0,M,AN,AE,1,1,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,),
-na(21328,AF,"Wand of Holiday Cheer",6620,L,JU,1,0,0,M,AN,AE,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,1,EVP,),
+na(21328,AF,"Wand of Holiday Cheer",6620,L,JU,1,0,0,M,AN,AE,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,1,EVO,),
 na(21329,AM,"Conqueror's Crown",34486,AA,0,1,265185,53037,AX,1,A,81,S,J,0,F,D,0,0,1,0,18,29,34,0,0,739,0,0,0,0,0,0,E,O,H,0,B,C,0,1,K,0,0,AIM,AY,G,65,0,0,QJ,),
 na(21330,AM,"Conqueror's Spaulders",34256,AA,0,1,229939,45987,AW,1,A,78,S,J,0,F,D,0,0,1,0,16,20,21,0,0,659,0,0,0,0,0,0,E,O,H,0,B,C,0,6,K,0,0,AIM,AY,G,65,0,0,GTX,),
 na(21331,AM,"Conqueror's Breastplate",33709,AA,0,1,501319,100263,AT,1,A,88,S,J,0,F,D,0,0,1,0,24,34,38,0,0,985,0,0,0,0,0,0,E,O,H,0,B,C,0,6,K,0,0,AIM,GZ,G,65,0,0,QJ,),
@@ -22635,7 +22635,7 @@ na(22061,AB,"Beastmaster's Boots",34648,AA,0,1,155045,31009,AO,A,A,S,0,J,0,F,D,0
 na(22062,U,"Sorcerer's Belt",34599,R,0,1,65903,13180,AR,A,A,65,0,J,0,F,D,0,0,1,0,0,0,12,14,7,52,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AAC,30,G,48,0,0,JH,),
 na(22063,U,"Sorcerer's Bindings",34601,R,0,1,66138,13227,AU,A,A,65,0,J,0,F,D,0,0,1,0,0,0,8,12,5,40,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AAC,30,G,48,0,0,XJ,),
 na(22064,U,"Sorcerer's Boots",34782,AA,0,1,104000,20800,AO,A,A,S,0,J,0,F,D,0,0,1,0,0,0,14,16,Z,64,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AAC,50,G,64,0,0,ABQ,),
-na(22065,U,"Sorcerer's Crown",34602,AA,0,1,104368,20873,AX,A,A,S,0,J,0,F,D,0,0,1,0,0,0,16,25,14,75,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AAC,60,G,64,0,0,EUZ,),
+na(22065,U,"Sorcerer's Crown",34602,AA,0,1,104368,20873,AX,A,A,S,0,J,0,F,D,0,0,1,0,0,0,16,25,14,75,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AAC,60,G,64,0,0,EUY,),
 na(22066,U,"Sorcerer's Gloves",34600,AA,0,1,48119,9623,AQ,A,A,55,0,J,0,F,D,0,0,1,0,0,0,12,14,Z,54,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AAC,35,G,63,0,0,BHK,),
 na(22067,U,"Sorcerer's Leggings",34598,R,0,1,127505,25501,AP,A,A,66,0,J,0,F,D,0,0,1,0,0,0,17,22,Z,81,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AAC,65,G,49,0,0,KQ,),
 na(22068,U,"Sorcerer's Mantle",34597,R,0,1,93941,18788,AW,A,A,65,0,J,0,F,D,0,0,1,0,0,0,11,17,7,69,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AAC,50,G,48,0,0,PH,),
@@ -22751,7 +22751,7 @@ nab(22204,Y,"Wristguards of Renown",34549,R,0,1,62015,12403,AU,AN,A,S,55,J,0,F,D
 nab(22205,AM,"Black Steel Bindings",34550,R,0,1,42610,8522,AU,AN,A,57,52,J,0,F,D,0,0,1,0,7,Z,Z,0,0,261,0,0,0,0,0,0,E,O,H,0,B,C,0,6,K,0,0,I,45,G,48,0,0,),
 na(22206,AD,"Bouquet of Red Roses",34553,P,X,1,0,0,BM,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,HKN,),
 na(22207,AB,"Sash of the Grand Hunt",34555,R,0,1,71165,14233,AR,AN,A,S,55,J,0,F,D,0,0,1,0,15,0,14,6,0,199,0,0,0,0,0,0,E,O,H,0,B,C,0,5,K,0,0,I,40,G,48,0,0,GKR,),
-n(22208,CP,"Lavastone Hammer",34556,R,0,1,285396,57079,AL,AN,A,58,53,J,0,F,D,0,0,1,0,0,Z,14,12,0,0,0,0,0,0,GR,0,E,O,H,0,B,C,0,1,AV,0,0,I,AY,G,48,0,0,FZN,PW,),
+n(22208,CP,"Lavastone Hammer",34556,R,0,1,285396,57079,AL,AN,A,58,53,J,0,F,D,0,0,1,0,0,Z,14,12,0,0,0,0,0,0,GR,0,E,O,H,0,B,C,0,1,AV,0,0,I,AY,G,48,0,0,FZK,PW,),
 na(22209,CM,"Plans: Heavy Obsidian Belt",DD,L,X,1,ET,EZ,M,A,A,68,0,CF,BW,F,KU,4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,HQG,),
 nab(22210,HU,"Monster - Knuckle, B01 Red",34557,AC,0,1,0,0,AS,A,A,1,1,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,1,BX,0,0,I,0,G,0,0,4,),
 nab(22211,HU,"Monster - Knuckle, B01 Red Offhand",34557,AC,0,1,0,0,IN,A,A,1,1,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,1,BX,0,0,I,0,G,0,0,4,),
@@ -23122,7 +23122,7 @@ na(22681,AD,"Band of Piety",24569,R,0,1,42837,10709,BD,A,A,66,0,J,0,F,D,0,1,1,0,
 na(22682,BH,"Frozen Rune",35465,R,0,1,KF,CD,M,AH,AE,80,S,J,0,F,D,0,0,W,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,2,K,0,0,I,0,G,0,0,0,DPG,),
 na(22683,CY,"Pattern: Gaea's Embrace",DD,L,X,1,90000,22500,M,A,A,70,0,DB,BW,F,KU,6,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DMT,),
 na(22684,CY,"Pattern: Glacial Gloves",DD,L,X,1,NL,GU,M,A,A,80,0,DB,BW,F,JA,6,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EOP,),
-na(22685,CY,"Pattern: Glacial Cloak",DD,L,X,1,NL,GU,M,A,A,80,0,DB,BW,F,JA,6,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FQV,),
+na(22685,CY,"Pattern: Glacial Cloak",DD,L,X,1,NL,GU,M,A,A,80,0,DB,BW,F,JA,6,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FQW,),
 na(22686,CY,"Pattern: Glacial Vest",DD,L,X,1,QH,QF,M,A,A,80,0,DB,BW,F,JA,6,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DDG,),
 na(22687,CY,"Pattern: Glacial Wrists",DD,L,X,1,NL,GU,M,A,A,80,0,DB,BW,F,AMD,6,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,HHK,),
 n(22688,BO,"Verimonde's Last Resort",35094,R,0,1,322563,64512,BB,A,A,66,0,J,0,F,D,0,1,1,0,0,0,7,8,0,0,0,0,0,0,GL,0,E,O,H,0,B,C,0,1,AI,0,0,I,65,G,49,0,0,HHB,RB,),
@@ -23205,7 +23205,7 @@ na(22770,CR,"Pattern: Bramblewood Boots",DD,L,X,1,ET,EZ,M,AH,AE,70,0,CO,BW,F,KU,
 na(22771,CR,"Pattern: Bramblewood Helm",DD,L,X,1,ET,EZ,M,AH,AE,70,0,CO,BW,F,KU,6,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,FJB,),
 na(22772,CY,"Pattern: Sylvan Shoulders",DD,L,X,1,ET,EZ,M,A,A,70,0,DB,BW,F,KU,4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DFL,),
 na(22773,CY,"Pattern: Sylvan Crown",DD,L,X,1,ET,EZ,M,A,A,70,0,DB,BW,F,KU,5,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EGS,),
-na(22774,CY,"Pattern: Sylvan Vest",DD,L,X,1,ET,EZ,M,A,A,70,0,DB,BW,F,KU,6,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVR,),
+na(22774,CY,"Pattern: Sylvan Vest",DD,L,X,1,ET,EZ,M,A,A,70,0,DB,BW,F,KU,6,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,EVQ,),
 na(22780,AF,"White Murloc Egg",SX,L,0,1,0,0,M,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,CNX,),
 na(22781,AF,"Polar Bear Collar",35224,L,0,1,0,0,M,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DND,),
 n(22798,CP,"Might of Menethil",35239,AA,0,1,326465,1632328,AL,GX,AE,89,S,J,0,F,D,0,0,1,0,0,20,46,0,0,0,0,0,0,0,IR,0,E,O,H,0,B,C,0,1,AV,0,0,I,BT,G,65,0,0,GFV,JT,),
@@ -23302,7 +23302,7 @@ nab(22975,T,"A Smudged Document",HB,L,0,1,0,0,M,AN,A,45,45,J,0,F,D,0,1,1,0,0,0,0
 nab(22977,T,"A Torn Letter",3032,L,0,1,0,0,M,AN,A,45,45,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,CI,9295,0,K,0,0,I,0,G,0,0,0,),
 na(22981,AD,"Gluth's Missing Collar",35373,AA,0,1,515451,128862,BV,AH,AE,83,S,J,0,F,D,0,1,1,0,0,0,24,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,4,K,0,0,I,0,G,65,0,0,FOB,),
 na(22983,U,"Rime Covered Mantle",36424,AA,0,1,313787,62757,AW,AN,AE,83,S,J,0,F,D,0,0,1,0,0,0,12,12,0,94,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,60,G,65,0,0,EUA,),
-n(22988,BQ,"The End of Dreams",35710,AA,0,1,989733,197946,AS,AN,AE,83,S,J,0,F,D,0,1,1,0,0,0,18,18,0,0,0,0,0,0,EO,0,E,O,H,0,B,C,0,1,AI,0,0,I,DK,G,65,0,0,CCS,EUY,),
+n(22988,BQ,"The End of Dreams",35710,AA,0,1,989733,197946,AS,AN,AE,83,S,J,0,F,D,0,1,1,0,0,0,18,18,0,0,0,0,0,0,EO,0,E,O,H,0,B,C,0,1,AI,0,0,I,DK,G,65,0,0,CCS,EVU,),
 na(22994,AD,"Digested Hand of Power",35383,AA,0,1,365411,91352,BM,AN,AE,83,S,J,0,F,D,0,0,1,0,0,0,Z,14,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,1,K,0,0,I,0,G,65,0,0,APX,),
 nab(22999,AD,"Tabard of the Argent Dawn",35396,L,0,1,CW,EL,LU,A,A,S,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,0,G,0,0,0,),
 na(23000,AM,"Plated Abomination Ribcage",35398,AA,0,1,456281,91256,AT,AN,AE,85,S,J,0,F,D,0,0,1,0,0,45,25,0,0,953,0,0,0,0,0,0,E,O,H,0,B,C,0,6,K,0,0,I,GZ,G,65,0,0,KA,),
@@ -23354,7 +23354,7 @@ na(23047,AD,"Eye of the Dead",35429,AA,0,1,VO,VS,BS,GX,AE,90,S,J,0,F,D,0,1,1,0,0
 na(23048,AD,"Sapphiron's Right Eye",35816,AA,0,1,72651,290604,BM,GX,AE,90,S,J,0,F,D,0,0,1,0,0,0,9,10,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,3,K,0,0,I,0,G,65,0,0,ETO,),
 na(23049,AD,"Sapphiron's Left Eye",35792,AA,0,1,72651,290604,BM,GX,AE,90,S,J,0,F,D,0,0,1,0,0,0,12,8,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,3,K,0,0,I,0,G,65,0,0,AYJ,),
 na(23050,U,"Cloak of the Necropolis",35446,AA,0,1,86439,432199,AZ,GX,AE,90,S,J,0,F,D,0,0,1,0,0,0,12,11,0,68,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,0,G,65,0,0,AYJ,),
-n(23051,BK,"Glaive of the Defender",24925,JG,0,1,1265810,763810,BB,1,AE,86,S,J,0,F,D,0,1,1,0,12,12,18,0,0,80,0,0,8,8,FK,0,E,O,H,0,B,C,0,0,AI,0,0,I,JE,G,0,0,4,DZK,HHC,),
+n(23051,BK,"Glaive of the Defender",24925,JG,0,1,1265810,763810,BB,1,AE,86,S,J,0,F,D,0,1,1,0,12,12,18,0,0,80,0,0,8,8,FK,0,E,O,H,0,B,C,0,0,AI,0,0,I,JE,G,0,0,4,DZJ,HHC,),
 na(23053,AD,"Stormrage's Talisman of Seething",35359,AA,0,1,86443,345774,BV,GX,AE,92,S,J,0,F,D,0,0,1,0,0,0,12,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,65,0,0,FEB,),
 n(23054,BK,"Gressil, Dawn of Ruin",36378,AA,0,1,1391991,278398,AS,GX,AE,89,S,J,0,F,D,0,1,1,0,0,0,15,0,0,0,0,0,0,0,DY,0,E,O,H,0,B,C,0,1,AI,0,0,I,DK,G,65,0,0,DNO,ACV,),
 na(23055,AF,"Word of Thawing",1013,L,X,1,0,0,M,AH,AE,1,0,J,0,F,D,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,EDB,),
@@ -23437,7 +23437,7 @@ na(23203,ABZ,"Libram of Fervor",34961,R,0,1,95693,19138,ND,AN,A,65,S,J,0,F,D,0,1
 na(23206,AD,BBZ,35649,AA,0,1,0,0,BS,A,A,90,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,GRD,),
 na(23207,AD,BBZ,35621,AA,0,1,0,0,BS,A,A,90,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DYH,),
 na(23211,AG,"Toasted Smorc",35657,L,0,5,0,0,M,AN,A,1,1,J,0,F,D,0,0,W,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,"Gooey, melty, good.",0,B,C,0,0,K,0,0,I,0,G,0,0,0,GQB,),
-na(23215,AG,"Bag of Smorc Ingredients",3568,L,X,1,CA,CN,M,AN,A,1,1,J,0,F,D,0,0,W,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,"Sweet honey crackers, marshmallow and chocolate.",0,B,C,0,0,K,0,0,I,0,G,0,0,0,DZH,),
+na(23215,AG,"Bag of Smorc Ingredients",3568,L,X,1,CA,CN,M,AN,A,1,1,J,0,F,D,0,0,W,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,"Sweet honey crackers, marshmallow and chocolate.",0,B,C,0,0,K,0,0,I,0,G,0,0,0,DZK,),
 na(23219,AM,"Girdle of the Mentor",30535,AA,0,1,222368,44473,AR,A,A,85,S,J,0,F,D,0,0,1,0,20,21,21,0,0,536,0,0,0,0,0,0,E,O,H,0,B,C,0,6,K,0,0,I,55,G,65,0,0,KA,),
 na(23220,U,"Crystal Webbed Robe",36369,AA,0,1,446354,89270,BL,IG,AE,85,S,J,0,F,D,0,0,1,0,0,0,25,19,0,128,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,AY,G,65,0,0,BTR,),
 n(23221,BQ,"Misplaced Servo Arm",35643,AA,0,1,1015910,203182,AS,A,A,83,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,ED,0,E,O,H,0,B,C,0,2,AI,0,0,I,DK,G,65,0,0,BTK,EOG,),
@@ -23516,7 +23516,7 @@ na(23316,U,"Lieutenant Commander's Satin Hood",36042,R,AK,1,64119,12823,AX,16,A,
 na(23317,U,"Lieutenant Commander's Satin Mantle",36038,R,AK,1,64355,12871,AW,16,A,71,S,J,0,GJ,D,0,1,1,0,0,0,14,12,0,EM,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,ADZ,50,G,0,0,0,BAH,),
 na(23318,U,"Lieutenant Commander's Silk Cowl",36041,R,AK,1,64585,12917,AX,DS,A,71,S,J,0,GJ,D,0,1,1,0,0,0,19,18,6,141,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AFV,50,G,0,0,0,AKV,),
 na(23319,U,"Lieutenant Commander's Silk Mantle",27231,R,AK,1,64821,12964,AW,DS,A,71,S,J,0,GJ,D,0,1,1,0,0,0,14,11,4,GS,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,AFV,50,G,0,0,0,AQM,),
-na(23320,AJ,"Tablet of Flame Shock VI",33585,R,X,1,HJ,DN,M,BZ,A,S,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FQW,),
+na(23320,AJ,"Tablet of Flame Shock VI",33585,R,X,1,HJ,DN,M,BZ,A,S,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FQV,),
 nab(23323,U,"Crown of the Fire Festival",36782,L,0,1,5,1,AX,AN,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,2,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,W,G,0,0,0,),
 nab(23324,U,"Mantle of the Fire Festival",35935,L,0,1,5,1,AW,AN,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,2,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,W,G,0,0,0,),
 nab(23325,AF,"[PH] Picnic Parcel",35830,L,4,1,0,0,M,AN,A,1,1,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,4,),
@@ -23544,7 +23544,7 @@ na(23469,AD,"High Warlord's Tome of Mending",36268,AA,AK,1,301810,75452,BM,A,A,7
 na(23545,T,"Power of the Scourge",36276,AA,X,1,1,1,M,GX,AE,S,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,CPR,),
 na(23547,T,"Resilience of the Scourge",36277,AA,X,1,1,1,M,GX,AE,S,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,FEP,),
 na(23548,T,"Might of the Scourge",36275,AA,X,1,1,1,M,GX,AE,S,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,CCA,),
-na(23549,T,"Fortitude of the Scourge",36274,AA,X,1,1,1,M,GX,AE,S,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,BYD,),
+na(23549,T,"Fortitude of the Scourge",36274,AA,X,1,1,1,M,GX,AE,S,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,-1,K,0,0,I,0,G,0,0,0,BYG,),
 n(23557,EF,"Larvae of the Great Worm",34484,AA,0,1,660885,132177,BP,AN,A,81,S,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,DP,3,BC,O,H,0,B,C,0,1,K,0,0,I,90,G,65,0,0,CWD,COS,),
 na(23558,AD,"The Burrower's Shell",36290,AA,AK,1,7230,1807,BS,AH,AE,81,S,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,4,K,0,0,I,0,G,65,0,0,FGF,),
 nab(23567,BH,"[PH] Silithus PvP Dust [DEP]",27454,L,0,1,0,0,M,A,A,1,1,J,0,F,D,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,E,N,H,0,B,C,0,0,K,0,0,I,0,G,0,0,4,),
@@ -23573,7 +23573,7 @@ nab(23701,AG,"[PH] Victorious Standard of the Horde [DEP]",31257,L,0,1,0,0,M,A,A
 nab(23705,AD,"Tabard of Flame",37060,L,0,1,ET,EZ,LU,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,0,G,0,0,0,),
 nab(23709,AD,"Tabard of Frost",37061,L,0,1,ET,EZ,LU,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,0,G,0,0,0,),
 nab(23710,AD,"Upperdeck Tabard #3",36469,L,0,1,ET,EZ,LU,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,7,K,0,0,I,0,G,0,0,0,),
-na(23712,AF,"White Tiger Cub",36470,L,0,1,BU,FD,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FZO,),
+na(23712,AF,"White Tiger Cub",36470,L,0,1,BU,FD,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,FZN,),
 na(23713,AF,"Hippogryph Hatchling",18048,L,0,1,BU,FD,M,A,A,1,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,GEN,),
 na(23714,AD,"Perpetual Purple Firework",34282,L,0,1,0,0,BS,A,A,20,0,J,0,F,D,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,H,0,B,C,0,0,K,0,0,I,0,G,0,0,0,DYL,),
 na(23715,AG,"Permanent Lung Juice Cocktail",18114,L,0,1,0,0,M,A,A,1,0,J,0,F,D,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,E,O,BDS,0,B,C,0,0,K,0,0,I,0,G,0,0,0,CUI,),
