@@ -1300,7 +1300,7 @@ pub(crate) const FIELDS: &[MemberType] = &[
     MemberType::new(
         UpdateMaskType::Player,
         "FIELD_INV",
-        0x1E6,
+        0x0144,
         300,
         UfType::GuidEnumLookupArray {
             name: "ItemSlot",
