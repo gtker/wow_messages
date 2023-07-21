@@ -1937,7 +1937,7 @@ impl UpdatePlayerBuilder {
     }
 
     pub fn set_player_field_inv(mut self, item_slot: crate::wrath::ItemSlot, item: Guid) -> Self {
-        let offset = 486 + item_slot.as_int() as u16 * 2;
+        let offset = 324 + item_slot.as_int() as u16 * 2;
         self.set_guid(offset, item);
         self
     }
