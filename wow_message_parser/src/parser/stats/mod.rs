@@ -138,7 +138,7 @@ fn get_data_for(version: MajorWorldVersion, data: &[Data], o: &Objects) -> Vec<D
             continue;
         }
 
-        if let Some(mut container) = data.iter_mut().find(|a| a.name == get_real_name(s.name())) {
+        if let Some(container) = data.iter_mut().find(|a| a.name == get_real_name(s.name())) {
             let opcode = s.opcode();
             if opcode as usize != container.opcode {
                 incorrect_opcode_for_message(
