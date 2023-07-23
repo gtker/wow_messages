@@ -340,30 +340,110 @@ This sums up the sizes of all members, and then subtracts the fields that come b
 
 ### [CMD_AUTH_LOGON_CHALLENGE_Server](../docs/cmd_auth_logon_challenge_server.md)
 
-* Constant value
-* Fields hidden behind if statement
-* Same opcode as Client
-* Requires a write for servers, read for clients
+The servers reply to the client has the same opcode as the initial message, and it provides the first example
+of a message that has control flow (`if` statements).
+
+```python
+@dataclasses.dataclass
+class CMD_AUTH_LOGON_CHALLENGE_Server:
+    result: LoginResult
+    server_public_key: typing.Optional[typing.List[int]]
+    generator: typing.Optional[typing.List[int]]
+    large_safe_prime: typing.Optional[typing.List[int]]
+    salt: typing.Optional[typing.List[int]]
+    crc_salt: typing.Optional[typing.List[int]]
+```
+
+The Python version solves this issue by making every variable that is not certain to be in the message `Optional`.
+This type hint means that the variables can also be `None`, and have no value of their actual type.
+
+The python code for reading reads the `result` and then branches based on the value.
+```python
+    @staticmethod
+async def read(reader: asyncio.StreamReader):
+    server_public_key = None
+    generator_length = None
+    generator = None
+    large_safe_prime_length = None
+    large_safe_prime = None
+    salt = None
+    crc_salt = None
+
+    # protocol_version: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U8: 'U8'>)
+    _protocol_version = int.from_bytes(await reader.readexactly(1), "little")
+
+    # result: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U8: 'U8'>, type_name='LoginResult', upcast=False))
+    result = LoginResult(int.from_bytes(await reader.readexactly(1), "little"))
+
+    if result == LoginResult.SUCCESS:
+        # server_public_key: DataTypeArray(data_type_tag='Array', content=Array(inner_type=ArrayTypeInteger(array_type_tag='Integer', inner_type=<IntegerType.U8: 'U8'>), size=ArraySizeFixed(array_size_tag='Fixed', size='32')))
+        server_public_key = []
+        for _ in range(0, 32):
+            server_public_key.append(
+                int.from_bytes(await reader.readexactly(1), "little")
+            )
+
+        # generator_length: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U8: 'U8'>)
+        generator_length = int.from_bytes(await reader.readexactly(1), "little")
+
+        # generator: DataTypeArray(data_type_tag='Array', content=Array(inner_type=ArrayTypeInteger(array_type_tag='Integer', inner_type=<IntegerType.U8: 'U8'>), size=ArraySizeVariable(array_size_tag='Variable', size='generator_length')))
+        generator = []
+        for _ in range(0, generator_length):
+            generator.append(int.from_bytes(await reader.readexactly(1), "little"))
+
+        # large_safe_prime_length: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U8: 'U8'>)
+        large_safe_prime_length = int.from_bytes(
+            await reader.readexactly(1), "little"
+        )
+
+        # large_safe_prime: DataTypeArray(data_type_tag='Array', content=Array(inner_type=ArrayTypeInteger(array_type_tag='Integer', inner_type=<IntegerType.U8: 'U8'>), size=ArraySizeVariable(array_size_tag='Variable', size='large_safe_prime_length')))
+        large_safe_prime = []
+        for _ in range(0, large_safe_prime_length):
+            large_safe_prime.append(
+                int.from_bytes(await reader.readexactly(1), "little")
+            )
+
+        # salt: DataTypeArray(data_type_tag='Array', content=Array(inner_type=ArrayTypeInteger(array_type_tag='Integer', inner_type=<IntegerType.U8: 'U8'>), size=ArraySizeFixed(array_size_tag='Fixed', size='32')))
+        salt = []
+        for _ in range(0, 32):
+            salt.append(int.from_bytes(await reader.readexactly(1), "little"))
+
+        # crc_salt: DataTypeArray(data_type_tag='Array', content=Array(inner_type=ArrayTypeInteger(array_type_tag='Integer', inner_type=<IntegerType.U8: 'U8'>), size=ArraySizeFixed(array_size_tag='Fixed', size='16')))
+        crc_salt = []
+        for _ in range(0, 16):
+            crc_salt.append(int.from_bytes(await reader.readexactly(1), "little"))
+
+    return CMD_AUTH_LOGON_CHALLENGE_Server(
+        result,
+        server_public_key,
+        generator,
+        large_safe_prime,
+        salt,
+        crc_salt,
+    )
+```
 
 ### [CMD_AUTH_LOGON_PROOF_Client](../docs/cmd_auth_logon_proof_client.md)
 
-* Array of structs
+This message is much like the others, but it contains an array of structs.
 
 ### [CMD_REALM_LIST_Client](../docs/cmd_realm_list_client.md)
 
-* Not empty, but has padding
-* Will be empty if padding is ignored
+This message is not empty, but has a padding variable that should always be a constant value, so it becomes empty
+if constant values are removed.
 
 ### [CMD_XFER_ACCEPT](../docs/cmd_xfer_accept.md)
 
-* Empty body
+This message has an empty body.
 
 ### [CMD_REALM_LIST_Server](../docs/cmd_realm_list_server.md)
 
-* Array of more complex structs
+This message has a bunch of padding and an array of [Realm](../docs/realm.md) structs, as well as having a size field.
 
 ### [Realm](../docs/realm.md)
 
-* CString
-* Has `Population` alias
-* Version 8 has if flag
+This struct has several `CString` variables, which are read by reading until finding a 0 byte.
+
+It also has the `Population` alias, which can just be substituted for a 4 byte floating point value.
+
+Version 8 additionally has an if statement that uses a flag instead of an enum.
