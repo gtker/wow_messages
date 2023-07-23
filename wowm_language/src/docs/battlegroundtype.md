@@ -38,8 +38,6 @@ Used in:
 * [SMSG_BATTLEFIELD_LIST](smsg_battlefield_list.md)
 * [SMSG_BATTLEFIELD_STATUS](smsg_battlefield_status.md)
 
-# BattlegroundType
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

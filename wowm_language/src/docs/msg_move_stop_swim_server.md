@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
-# MSG_MOVE_STOP_SWIM_Server
-
 ## Client Version 2.4.3
 
 ### Wowm Representation

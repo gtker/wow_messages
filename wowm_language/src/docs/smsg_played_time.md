@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | total_played_time |  |  |
 | 0x08 | 4 / Little | u32 | level_played_time |  |  |
 
-# SMSG_PLAYED_TIME
-
 ## Client Version 3
 
 ### Wowm Representation

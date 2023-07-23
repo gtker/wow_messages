@@ -312,8 +312,6 @@ CMSG have a header of 6 bytes.
 68, 10, 10, 90, 79, 78, 69, 67, 72, 65, 78, 78, 69, 76, 83, 32, 48, 10, 10, 69, 
 78, 68, 10, 10, // compressed_data: u8[-]
 ```
-# CMSG_UPDATE_ACCOUNT_DATA
-
 ## Client Version 3.3.5
 
 ### Comment

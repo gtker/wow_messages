@@ -28,8 +28,6 @@ CMSG have a header of 6 bytes.
 
 This message has no fields in the body.
 
-# MSG_RAID_READY_CHECK_FINISHED_Client
-
 ## Client Version 3.3.5
 
 ### Comment

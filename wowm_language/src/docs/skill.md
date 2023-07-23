@@ -269,8 +269,6 @@ Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [TrainerSpell](trainerspell.md)
 
-# Skill
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -563,8 +561,6 @@ Used in:
 * [CMSG_UNLEARN_SKILL](cmsg_unlearn_skill.md)
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [TrainerSpell](trainerspell.md)
-
-# Skill
 
 ## Client Version 3.3.5
 

@@ -47,8 +47,6 @@ Empty character list.
 0, // amount_of_characters: u8
 // characters: Character[amount_of_characters]
 ```
-# SMSG_CHAR_ENUM
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -77,8 +75,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 1 / - | u8 | amount_of_characters |  |  |
 | 0x05 | ? / - | [Character](character.md)[amount_of_characters] | characters |  |  |
-
-# SMSG_CHAR_ENUM
 
 ## Client Version 3.3.5
 

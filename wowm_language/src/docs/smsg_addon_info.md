@@ -27,8 +27,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | ? / - | [Addon](addon.md)[-] | addons |  |  |
 
-# SMSG_ADDON_INFO
-
 ## Client Version 2.4.3
 
 ### Comment
@@ -61,8 +59,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | - / - | [AddonArray](../spec/addon-array.md) | addons |  |  |
 | - | 4 / Little | u32 | number_of_banned_addons |  |  |
-
-# SMSG_ADDON_INFO
 
 ## Client Version 3.3.5
 

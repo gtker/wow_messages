@@ -29,8 +29,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [Friend](friend.md)
 
-# FriendStatus
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

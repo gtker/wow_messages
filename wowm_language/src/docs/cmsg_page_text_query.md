@@ -27,8 +27,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / Little | u32 | page_id |  |  |
 
-# CMSG_PAGE_TEXT_QUERY
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

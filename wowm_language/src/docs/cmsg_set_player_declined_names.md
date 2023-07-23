@@ -31,8 +31,6 @@ CMSG have a header of 6 bytes.
 | 0x0E | - / - | CString | name |  |  |
 | - | ? / - | CString[5] | declined_names |  |  |
 
-# CMSG_SET_PLAYER_DECLINED_NAMES
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

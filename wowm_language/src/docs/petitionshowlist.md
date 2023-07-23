@@ -24,8 +24,6 @@ struct PetitionShowlist {
 | 0x0C | 4 / Little | u32 | guild_charter_cost |  | cmangos/vmangos/mangoszero: statically set to 1000 (10 silver) for guild charters and the cost of arena charters for that. |
 | 0x10 | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: statically set to 1 |
 
-# PetitionShowlist
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

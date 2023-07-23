@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x0C | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
 | 0x14 | 1 / - | [SellItemResult](sellitemresult.md) | result |  |  |
 
-# SMSG_SELL_ITEM
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

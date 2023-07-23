@@ -29,8 +29,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |  |
 | 0x0E | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
 
-# CMSG_REPAIR_ITEM
-
 ## Client Version 2.3.2, Client Version 2.3.3, Client Version 2.3.4, Client Version 2.4, Client Version 3
 
 ### Wowm Representation

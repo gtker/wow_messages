@@ -302,8 +302,6 @@ Used in:
 * [SMSG_PET_CAST_FAILED](smsg_pet_cast_failed.md)
 * [SMSG_SPELL_FAILURE](smsg_spell_failure.md)
 
-# SpellCastResult
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -662,8 +660,6 @@ Used in:
 * [SMSG_CAST_FAILED](smsg_cast_failed.md)
 * [SMSG_PET_CAST_FAILED](smsg_pet_cast_failed.md)
 * [SMSG_SPELL_FAILURE](smsg_spell_failure.md)
-
-# SpellCastResult
 
 ## Client Version 3.3.5
 

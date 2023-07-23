@@ -27,8 +27,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 480 / - | u32[120] | data |  |  |
 
-# SMSG_ACTION_BUTTONS
-
 ## Client Version 2.3, Client Version 2.4
 
 ### Wowm Representation
@@ -55,8 +53,6 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 528 / - | u32[132] | data |  |  |
-
-# SMSG_ACTION_BUTTONS
 
 ## Client Version 3.3.5
 

@@ -27,8 +27,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | remaining_withdraw_amount |  |  |
 
-# MSG_GUILD_BANK_MONEY_WITHDRAWN_Server
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

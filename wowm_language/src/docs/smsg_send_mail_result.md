@@ -70,8 +70,6 @@ If result2 is equal to `ERR_EQUIP_ERROR`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x20 | 4 / Little | u32 | equip_error2 |  |  |
 
-# SMSG_SEND_MAIL_RESULT
-
 ## Client Version 2
 
 ### Wowm Representation
@@ -141,8 +139,6 @@ If result2 is equal to `ERR_EQUIP_ERROR`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x20 | 4 / Little | u32 | equip_error2 |  |  |
-
-# SMSG_SEND_MAIL_RESULT
 
 ## Client Version 3.3.5
 

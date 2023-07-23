@@ -27,8 +27,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
-# CMSG_MOVE_FALL_RESET
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -55,8 +53,6 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
-
-# CMSG_MOVE_FALL_RESET
 
 ## Client Version 3.3.5
 

@@ -33,8 +33,6 @@ SMSG have a header of 4 bytes.
 | 0x09 | 1 / - | u8 | amount_of_money_logs |  |  |
 | 0x0A | ? / - | [MoneyLogItem](moneylogitem.md)[amount_of_money_logs] | money_logs |  |  |
 
-# MSG_GUILD_BANK_LOG_QUERY_Server
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

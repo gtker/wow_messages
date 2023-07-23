@@ -35,8 +35,6 @@ CMSG have a header of 6 bytes.
 | 0x1A | 1 / - | u8 | bag_slot |  |  |
 | 0x1B | 1 / - | u8 | amount |  |  |
 
-# CMSG_BUY_ITEM_IN_SLOT
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

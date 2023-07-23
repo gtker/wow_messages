@@ -39,8 +39,6 @@ SMSG have a header of 4 bytes.
 | 0x18 | 4 / Little | u32 | spell |  |  |
 | 0x1C | 1 / - | Bool | show_affiliation |  | vmangos: Only used if `caster` is not 0. |
 
-# SMSG_ENCHANTMENTLOG
-
 ## Client Version 3.3.5
 
 ### Comment

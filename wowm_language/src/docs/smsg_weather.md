@@ -33,8 +33,6 @@ SMSG have a header of 4 bytes.
 | 0x0C | 4 / Little | u32 | sound_id |  |  |
 | 0x10 | 1 / - | [WeatherChangeType](weatherchangetype.md) | change |  |  |
 
-# SMSG_WEATHER
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -65,8 +63,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / - | [WeatherType](weathertype.md) | weather_type |  |  |
 | 0x08 | 4 / Little | f32 | grade |  |  |
 | 0x0C | 1 / - | [WeatherChangeType](weatherchangetype.md) | change |  |  |
-
-# SMSG_WEATHER
 
 ## Client Version 3.3.5
 

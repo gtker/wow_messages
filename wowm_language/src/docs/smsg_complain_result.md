@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 1 / - | u8 | unknown |  | All emulators set to 0. |
 | 0x05 | 1 / - | [ComplainResultWindow](complainresultwindow.md) | window_result |  |  |
 
-# SMSG_COMPLAIN_RESULT
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

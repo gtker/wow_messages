@@ -32,8 +32,6 @@ Used in:
 * [Object](object.md)
 * [Object](object.md)
 
-# UpdateType
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

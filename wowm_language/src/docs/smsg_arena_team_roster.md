@@ -33,8 +33,6 @@ SMSG have a header of 4 bytes.
 | 0x0C | 1 / - | [ArenaType](arenatype.md) | arena_type |  |  |
 | 0x0D | ? / - | [ArenaTeamMember](arenateammember.md)[amount_of_members] | members |  |  |
 
-# SMSG_ARENA_TEAM_ROSTER
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

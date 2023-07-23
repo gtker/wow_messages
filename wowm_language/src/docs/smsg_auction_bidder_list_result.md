@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x08 | ? / - | [AuctionListItem](auctionlistitem.md)[count] | auctions |  |  |
 | - | 4 / Little | u32 | total_amount_of_auctions |  |  |
 
-# SMSG_AUCTION_BIDDER_LIST_RESULT
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -65,8 +63,6 @@ SMSG have a header of 4 bytes.
 | 0x08 | ? / - | [AuctionListItem](auctionlistitem.md)[count] | auctions |  |  |
 | - | 4 / Little | u32 | total_amount_of_auctions |  |  |
 | - | 4 / Little | Milliseconds | auction_search_delay |  |  |
-
-# SMSG_AUCTION_BIDDER_LIST_RESULT
 
 ## Client Version 3.3.5
 

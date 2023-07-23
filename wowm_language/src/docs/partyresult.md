@@ -37,8 +37,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [SMSG_PARTY_COMMAND_RESULT](smsg_party_command_result.md)
 
-# PartyResult
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

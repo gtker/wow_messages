@@ -29,8 +29,6 @@ Used in:
 * [SMSG_MESSAGECHAT](smsg_messagechat.md)
 * [SMSG_MESSAGECHAT](smsg_messagechat.md)
 
-# PlayerChatTag
-
 ## Client Version 3
 
 ### Wowm Representation

@@ -18,8 +18,6 @@ struct ForcedReaction {
 | 0x00 | 2 / - | [Faction](faction.md) | faction |  |  |
 | 0x02 | 4 / Little | u32 | reputation_rank |  |  |
 
-# ForcedReaction
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -37,8 +35,6 @@ struct ForcedReaction {
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 2 / - | [Faction](faction.md) | faction |  |  |
 | 0x02 | 4 / Little | u32 | reputation_rank |  |  |
-
-# ForcedReaction
 
 ## Client Version 3.3.5
 

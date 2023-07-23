@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | item_text_id |  |  |
 | 0x08 | - / - | CString | text |  | mangoszero: CString TODO max length 8000 |
 
-# SMSG_ITEM_TEXT_QUERY_RESPONSE
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

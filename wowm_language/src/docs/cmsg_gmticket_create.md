@@ -48,8 +48,6 @@ If category is equal to `BEHAVIOR_HARASSMENT`:
 | - | 4 / Little | u32 | chat_data_size_uncompressed |  |  |
 | - | ? / - | u8[-] | compressed_chat_data |  |  |
 
-# CMSG_GMTICKET_CREATE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -97,8 +95,6 @@ If category is equal to `BEHAVIOR_HARASSMENT`:
 | - | 4 / Little | u32 | chat_data_line_count |  |  |
 | - | 4 / Little | u32 | chat_data_size_uncompressed |  |  |
 | - | ? / - | u8[-] | compressed_chat_data |  |  |
-
-# CMSG_GMTICKET_CREATE
 
 ## Client Version 3.3.5
 

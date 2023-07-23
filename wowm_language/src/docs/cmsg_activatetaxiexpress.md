@@ -33,8 +33,6 @@ CMSG have a header of 6 bytes.
 | 0x12 | 4 / Little | u32 | node_count |  |  |
 | 0x16 | ? / - | u32[node_count] | nodes |  |  |
 
-# CMSG_ACTIVATETAXIEXPRESS
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

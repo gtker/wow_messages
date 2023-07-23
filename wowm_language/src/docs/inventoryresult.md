@@ -159,8 +159,6 @@ Used in:
 * [SMSG_INVENTORY_CHANGE_FAILURE](smsg_inventory_change_failure.md)
 * [SMSG_TRADE_STATUS](smsg_trade_status.md)
 
-# InventoryResult
-
 ## Client Version 2.4.3
 
 ### Comment
@@ -347,8 +345,6 @@ Used in:
 * [SMSG_AUCTION_COMMAND_RESULT](smsg_auction_command_result.md)
 * [SMSG_INVENTORY_CHANGE_FAILURE](smsg_inventory_change_failure.md)
 * [SMSG_TRADE_STATUS](smsg_trade_status.md)
-
-# InventoryResult
 
 ## Client Version 3.3.5
 

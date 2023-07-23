@@ -18,8 +18,6 @@ struct ItemStat {
 | 0x00 | 4 / - | [ItemStatType](itemstattype.md) | stat_type |  |  |
 | 0x04 | 4 / Little | i32 | value |  |  |
 
-# ItemStat
-
 ## Client Version 2, Client Version 3
 
 ### Wowm Representation

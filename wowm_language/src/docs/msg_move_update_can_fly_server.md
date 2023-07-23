@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
-# MSG_MOVE_UPDATE_CAN_FLY_Server
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

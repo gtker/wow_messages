@@ -24,8 +24,6 @@ CMSG have a header of 6 bytes.
 
 This message has no fields in the body.
 
-# CMSG_PLAYED_TIME
-
 ## Client Version 3
 
 ### Wowm Representation

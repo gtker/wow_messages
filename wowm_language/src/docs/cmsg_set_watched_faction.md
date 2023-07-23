@@ -27,8 +27,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / Little | u32 | reputation_id |  |  |
 
-# CMSG_SET_WATCHED_FACTION
-
 ## Client Version 1.12
 
 ### Wowm Representation
@@ -56,8 +54,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 2 / - | [Faction](faction.md) | faction |  |  |
 
-# CMSG_SET_WATCHED_FACTION
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -84,8 +80,6 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 2 / - | [Faction](faction.md) | faction |  |  |
-
-# CMSG_SET_WATCHED_FACTION
 
 ## Client Version 3.3.5
 

@@ -37,8 +37,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | f32 | x_y_speed |  |  |
 | - | 4 / Little | f32 | velocity |  |  |
 
-# MSG_MOVE_KNOCK_BACK_Server
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

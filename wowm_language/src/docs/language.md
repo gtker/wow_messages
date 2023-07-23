@@ -52,8 +52,6 @@ Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_MESSAGECHAT](smsg_messagechat.md)
 
-# Language
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

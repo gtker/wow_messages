@@ -28,8 +28,6 @@ Used in:
 * [SMSG_RAID_INSTANCE_MESSAGE](smsg_raid_instance_message.md)
 * [SMSG_RAID_INSTANCE_MESSAGE](smsg_raid_instance_message.md)
 
-# RaidInstanceMessage
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

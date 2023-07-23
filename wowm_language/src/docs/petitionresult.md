@@ -32,8 +32,6 @@ Used in:
 * [SMSG_PETITION_SIGN_RESULTS](smsg_petition_sign_results.md)
 * [SMSG_TURN_IN_PETITION_RESULTS](smsg_turn_in_petition_results.md)
 
-# PetitionResult
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

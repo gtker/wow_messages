@@ -68,8 +68,6 @@ is equal to `NEAR_OBJECTS`:
 | - | 4 / Little | u32 | count |  |  |
 | - | ? / - | [PackedGuid](../spec/packed-guid.md)[count] | guids |  |  |
 
-# Object
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -137,8 +135,6 @@ is equal to `NEAR_OBJECTS`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | count |  |  |
 | - | ? / - | [PackedGuid](../spec/packed-guid.md)[count] | guids |  |  |
-
-# Object
 
 ## Client Version 3.3.5
 

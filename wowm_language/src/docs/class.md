@@ -49,8 +49,6 @@ Used in:
 * [WhoPlayer](whoplayer.md)
 * [WhoPlayer](whoplayer.md)
 
-# Class
-
 ## Client Version 3
 
 ### Wowm Representation

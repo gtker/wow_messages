@@ -27,8 +27,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | unknown1 |  | vmangos sets to 0. cmangos/mangoszero don't implement |
 
-# MSG_LOOKING_FOR_GROUP_Server
-
 ## Client Version 2.4.3
 
 ### Wowm Representation

@@ -35,8 +35,6 @@ SMSG have a header of 4 bytes.
 | - | 2 / Little | u16 | cooldown_count |  |  |
 | - | ? / - | [CooldownSpell](cooldownspell.md)[cooldown_count] | cooldowns |  |  |
 
-# SMSG_INITIAL_SPELLS
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

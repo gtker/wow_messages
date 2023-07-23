@@ -33,8 +33,6 @@ CMSG have a header of 6 bytes.
 | 0x12 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 | - | 4 / Little | Bool32 | applied |  |  |
 
-# CMSG_MOVE_SET_CAN_FLY_ACK
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

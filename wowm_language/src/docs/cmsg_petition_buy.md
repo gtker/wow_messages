@@ -65,8 +65,6 @@ CMSG have a header of 6 bytes.
 | - | 4 / Little | u32 | index |  | cmangos/vmangos/mangoszero: Named but never used |
 | - | 4 / Little | u32 | unknown15 |  |  |
 
-# CMSG_PETITION_BUY
-
 ## Client Version 3.3.5
 
 ### Comment

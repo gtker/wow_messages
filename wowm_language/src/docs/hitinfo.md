@@ -52,8 +52,6 @@ Used in:
 * [SMSG_SPELLNONMELEEDAMAGELOG](smsg_spellnonmeleedamagelog.md)
 * [SMSG_SPELLNONMELEEDAMAGELOG](smsg_spellnonmeleedamagelog.md)
 
-# HitInfo
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

@@ -35,8 +35,6 @@ CMSG have a header of 6 bytes.
 | 0x09 | 1 / - | u8 | destination_slot |  |  |
 | 0x0A | 1 / - | u8 | amount |  |  |
 
-# CMSG_SPLIT_ITEM
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

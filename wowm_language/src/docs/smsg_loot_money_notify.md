@@ -27,8 +27,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | amount |  |  |
 
-# SMSG_LOOT_MONEY_NOTIFY
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

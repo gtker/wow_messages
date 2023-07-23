@@ -45,8 +45,6 @@ CMSG have a header of 6 bytes.
 | - | 4 / - | [ItemQuality](itemquality.md) | auction_quality |  |  |
 | - | 1 / - | u8 | usable |  |  |
 
-# CMSG_AUCTION_LIST_ITEMS
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -97,8 +95,6 @@ CMSG have a header of 6 bytes.
 | - | 1 / - | u8 | is_full |  |  |
 | - | 1 / - | u8 | amount_of_sorted_auctions |  |  |
 | - | ? / - | [AuctionSort](auctionsort.md)[amount_of_sorted_auctions] | sorted_auctions |  |  |
-
-# CMSG_AUCTION_LIST_ITEMS
 
 ## Client Version 3.3.5
 

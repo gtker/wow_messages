@@ -18,8 +18,6 @@ struct SpellMiss {
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
 | 0x08 | 4 / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |  |
 
-# SpellMiss
-
 ## Client Version 2.4.3
 
 ### Wowm Representation

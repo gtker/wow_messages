@@ -33,8 +33,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
-# MSG_MOVE_TELEPORT_Server
-
 ## Client Version 3.3.5
 
 ### Comment

@@ -52,8 +52,6 @@ Used in:
 * [SMSG_SET_PROFICIENCY](smsg_set_proficiency.md)
 * [SMSG_SET_PROFICIENCY](smsg_set_proficiency.md)
 
-# ItemClass
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

@@ -37,8 +37,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | amount_of_quests |  |  |
 | - | ? / - | [QuestItem](questitem.md)[amount_of_quests] | quests |  |  |
 
-# SMSG_GOSSIP_MESSAGE
-
 ## Client Version 2.4
 
 ### Wowm Representation
@@ -77,8 +75,6 @@ SMSG have a header of 4 bytes.
 | 0x18 | ? / - | [GossipItem](gossipitem.md)[amount_of_gossip_items] | gossips |  |  |
 | - | 4 / Little | u32 | amount_of_quests |  |  |
 | - | ? / - | [QuestItem](questitem.md)[amount_of_quests] | quests |  |  |
-
-# SMSG_GOSSIP_MESSAGE
 
 ## Client Version 3.3.5
 

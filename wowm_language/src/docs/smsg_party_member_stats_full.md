@@ -202,8 +202,6 @@ If mask contains `PET_AURAS`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [AuraMask](../spec/aura-mask.md) | pet_auras |  |  |
 
-# SMSG_PARTY_MEMBER_STATS_FULL
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -405,8 +403,6 @@ If mask contains `PET_AURAS`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [AuraMask](../spec/aura-mask.md) | pet_auras |  |  |
-
-# SMSG_PARTY_MEMBER_STATS_FULL
 
 ## Client Version 3.3.5
 

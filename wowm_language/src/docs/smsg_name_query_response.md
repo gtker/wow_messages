@@ -67,8 +67,6 @@ SMSG have a header of 4 bytes.
 0, 0, 0, 0, // gender: Gender MALE (0)
 1, 0, 0, 0, // class: Class WARRIOR (1)
 ```
-# SMSG_NAME_QUERY_RESPONSE
-
 ## Client Version 2.4.3
 
 ### Description
@@ -120,8 +118,6 @@ If has_declined_names is equal to `YES`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | ? / - | CString[5] | declined_names |  |  |
-
-# SMSG_NAME_QUERY_RESPONSE
 
 ## Client Version 3.3.5
 

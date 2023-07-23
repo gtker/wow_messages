@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | amount_of_faction_standings |  |  |
 | 0x08 | ? / - | [FactionStanding](factionstanding.md)[amount_of_faction_standings] | faction_standings |  |  |
 
-# SMSG_SET_FACTION_STANDING
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -61,8 +59,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | f32 | refer_a_friend_bonus |  | All emus set to 0. |
 | 0x08 | 4 / Little | u32 | amount_of_faction_standings |  |  |
 | 0x0C | ? / - | [FactionStanding](factionstanding.md)[amount_of_faction_standings] | faction_standings |  |  |
-
-# SMSG_SET_FACTION_STANDING
 
 ## Client Version 3.3.5
 

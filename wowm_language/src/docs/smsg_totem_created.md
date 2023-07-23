@@ -33,8 +33,6 @@ SMSG have a header of 4 bytes.
 | 0x0D | 4 / Little | u32 | duration |  |  |
 | 0x11 | 4 / Little | u32 | spell |  |  |
 
-# SMSG_TOTEM_CREATED
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

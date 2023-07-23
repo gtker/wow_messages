@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 1 / - | [ItemClass](itemclass.md) | class |  |  |
 | 0x05 | 4 / Little | u32 | item_sub_class_mask |  |  |
 
-# SMSG_SET_PROFICIENCY
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -59,8 +57,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 1 / - | [ItemClass](itemclass.md) | class |  |  |
 | 0x05 | 4 / Little | u32 | item_sub_class_mask |  |  |
-
-# SMSG_SET_PROFICIENCY
 
 ## Client Version 3.3.5
 

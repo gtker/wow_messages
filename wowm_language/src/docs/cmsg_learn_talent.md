@@ -39,8 +39,6 @@ CMSG have a header of 6 bytes.
 158, 0, 0, 0, // talent: Talent BOOMING_VOICE (158)
 0, 0, 0, 0, // requested_rank: u32
 ```
-# CMSG_LEARN_TALENT
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -69,8 +67,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / - | [Talent](talent.md) | talent |  |  |
 | 0x0A | 4 / Little | u32 | requested_rank |  |  |
-
-# CMSG_LEARN_TALENT
 
 ## Client Version 3.3.5
 

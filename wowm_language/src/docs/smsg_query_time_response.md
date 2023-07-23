@@ -42,8 +42,6 @@ SMSG have a header of 4 bytes.
 207, 1, // opcode (463)
 148, 152, 80, 97, // time: u32
 ```
-# SMSG_QUERY_TIME_RESPONSE
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Comment

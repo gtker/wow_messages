@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x08 | 4 / Little | u32 | id_override |  |  |
 | 0x0C | 4 / Little | Seconds | fade_in_time |  |  |
 
-# SMSG_OVERRIDE_LIGHT
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

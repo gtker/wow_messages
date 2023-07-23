@@ -32,8 +32,6 @@ struct TrainerSpell {
 | 0x16 | 4 / Little | u32 | required_skill_value |  |  |
 | 0x1A | 12 / - | u32[3] | required_spells |  |  |
 
-# TrainerSpell
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -65,8 +63,6 @@ struct TrainerSpell {
 | 0x12 | 4 / - | [Skill](skill.md) | required_skill |  |  |
 | 0x16 | 4 / Little | u32 | required_skill_value |  |  |
 | 0x1A | 12 / - | u32[3] | required_spells |  |  |
-
-# TrainerSpell
 
 ## Client Version 3.3.5
 

@@ -27,8 +27,6 @@ Used in:
 * [SMSG_LOOT_ROLL](smsg_loot_roll.md)
 * [SMSG_LOOT_ROLL_WON](smsg_loot_roll_won.md)
 
-# RollVote
-
 ## Client Version 2, Client Version 3
 
 ### Wowm Representation

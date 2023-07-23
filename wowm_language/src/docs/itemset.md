@@ -365,8 +365,6 @@ The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 
-# ItemSet
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -1133,8 +1131,6 @@ The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
-
-# ItemSet
 
 ## Client Version 3.3.5
 

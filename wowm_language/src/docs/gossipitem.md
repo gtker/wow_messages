@@ -22,8 +22,6 @@ struct GossipItem {
 | 0x05 | 1 / - | Bool | coded |  | vmangos: makes pop up box password |
 | 0x06 | - / - | CString | message |  |  |
 
-# GossipItem
-
 ## Client Version 2.0.3, Client Version 2.1, Client Version 2.2, Client Version 2.3, Client Version 2.4, Client Version 3
 
 ### Wowm Representation

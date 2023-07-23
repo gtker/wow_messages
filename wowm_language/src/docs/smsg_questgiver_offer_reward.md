@@ -53,8 +53,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | reward_spell |  |  |
 | - | 4 / Little | u32 | reward_spell_cast |  | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
 
-# SMSG_QUESTGIVER_OFFER_REWARD
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -115,8 +113,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | reward_spell |  |  |
 | - | 4 / Little | u32 | reward_spell_cast |  | mangoszero and cmangos disagree about which field is _cast, although they both agree that the _cast field should not be in zero (vanilla). They still both include both fields in the code though. |
 | - | 4 / Little | u32 | title_reward |  |  |
-
-# SMSG_QUESTGIVER_OFFER_REWARD
 
 ## Client Version 3.3.5
 

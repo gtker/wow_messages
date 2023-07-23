@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 2 / Little | u16 | new_spell_id |  |  |
 | 0x06 | 2 / Little | u16 | old_spell_id |  |  |
 
-# SMSG_SUPERCEDED_SPELL
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

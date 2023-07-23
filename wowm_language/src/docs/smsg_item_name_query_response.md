@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | item |  |  |
 | 0x08 | - / - | CString | item_name |  |  |
 
-# SMSG_ITEM_NAME_QUERY_RESPONSE
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

@@ -77,8 +77,6 @@ SMSG have a header of 4 bytes.
 | - | 64 / - | [QuestObjective](questobjective.md)[4] | objectives |  |  |
 | - | ? / - | CString[4] | objective_texts |  |  |
 
-# SMSG_QUEST_QUERY_RESPONSE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -163,8 +161,6 @@ SMSG have a header of 4 bytes.
 | - | - / - | CString | end_text |  |  |
 | - | 64 / - | [QuestObjective](questobjective.md)[4] | objectives |  |  |
 | - | ? / - | CString[4] | objective_texts |  |  |
-
-# SMSG_QUEST_QUERY_RESPONSE
 
 ## Client Version 3.3.5
 

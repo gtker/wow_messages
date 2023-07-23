@@ -142,8 +142,6 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / - | [Map](map.md) | map |  |  |
 | - | 4 / - | [BagFamily](bagfamily.md) | bag_family |  |  |
 
-# SMSG_ITEM_QUERY_SINGLE_RESPONSE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -301,8 +299,6 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | u32 | required_disenchant_skill |  |  |
 | - | 4 / Little | f32 | armor_damage_modifier |  |  |
 | - | 4 / Little | Seconds | duration |  | mangosone: added in 2.4.2.8209, duration (seconds) |
-
-# SMSG_ITEM_QUERY_SINGLE_RESPONSE
 
 ## Client Version 3.3.5
 

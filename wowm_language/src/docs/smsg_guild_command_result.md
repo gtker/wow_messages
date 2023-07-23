@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x08 | - / - | CString | string |  |  |
 | - | 4 / - | [GuildCommandResult](guildcommandresult.md) | result |  |  |
 
-# SMSG_GUILD_COMMAND_RESULT
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -63,8 +61,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / - | [GuildCommand](guildcommand.md) | command |  |  |
 | 0x08 | - / - | CString | string |  |  |
 | - | 4 / - | [GuildCommandResult](guildcommandresult.md) | result |  |  |
-
-# SMSG_GUILD_COMMAND_RESULT
 
 ## Client Version 3.3.5
 

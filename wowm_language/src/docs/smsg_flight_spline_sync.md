@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | f32 | elapsed_value |  |  |
 | 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 
-# SMSG_FLIGHT_SPLINE_SYNC
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

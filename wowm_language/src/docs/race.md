@@ -36,8 +36,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 
-# Race
-
 ## Client Version 0.5.5, Client Version 0.6, Client Version 0.7, Client Version 0.8, Client Version 0.9, Client Version 0.10, Client Version 0.11, Client Version 0.12, Client Version 1
 
 ### Wowm Representation
@@ -77,8 +75,6 @@ Used in:
 * [Character](character.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
 * [WhoPlayer](whoplayer.md)
-
-# Race
 
 ## Client Version 2.4.3, Client Version 3.0, Client Version 3.1
 
@@ -138,8 +134,6 @@ Used in:
 * [SMSG_MIRRORIMAGE_DATA](smsg_mirrorimage_data.md)
 * [SMSG_NAME_QUERY_RESPONSE](smsg_name_query_response.md)
 * [WhoPlayer](whoplayer.md)
-
-# Race
 
 ## Client Version 3.2, Client Version 3.3
 

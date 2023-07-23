@@ -129,8 +129,6 @@ Used in:
 * [SMSG_TRANSFER_PENDING](smsg_transfer_pending.md)
 * [SMSG_UPDATE_LAST_INSTANCE](smsg_update_last_instance.md)
 
-# Map
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -335,8 +333,6 @@ Used in:
 * [SMSG_TRANSFER_ABORTED](smsg_transfer_aborted.md)
 * [SMSG_TRANSFER_PENDING](smsg_transfer_pending.md)
 * [SMSG_UPDATE_LAST_INSTANCE](smsg_update_last_instance.md)
-
-# Map
 
 ## Client Version 3.3.5
 

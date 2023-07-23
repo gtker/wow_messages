@@ -42,8 +42,6 @@ If exp_type is equal to `NON_KILL`:
 | 0x11 | 4 / Little | u32 | experience_without_rested |  |  |
 | 0x15 | 4 / Little | f32 | exp_group_bonus |  | mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output |
 
-# SMSG_LOG_XPGAIN
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

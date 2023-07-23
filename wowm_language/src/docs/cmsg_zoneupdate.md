@@ -51,8 +51,6 @@ CMSG have a header of 6 bytes.
 244, 1, 0, 0, // opcode (500)
 12, 0, 0, 0, // area: Area ELWYNN_FOREST (12)
 ```
-# CMSG_ZONEUPDATE
-
 ## Client Version 2.4.3
 
 ### Description
@@ -87,8 +85,6 @@ CMSG have a header of 6 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / - | [Area](area.md) | area |  |  |
-
-# CMSG_ZONEUPDATE
 
 ## Client Version 3.3.5
 

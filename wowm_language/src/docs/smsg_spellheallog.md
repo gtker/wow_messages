@@ -35,8 +35,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | damage |  |  |
 | - | 1 / - | Bool | critical |  |  |
 
-# SMSG_SPELLHEALLOG
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -73,8 +71,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | damage |  |  |
 | - | 1 / - | Bool | critical |  |  |
 | - | 1 / - | u8 | unknown |  | mangosone: unused in client? |
-
-# SMSG_SPELLHEALLOG
 
 ## Client Version 3.3.5
 

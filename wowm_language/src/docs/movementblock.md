@@ -186,8 +186,6 @@ If update_flag contains `TRANSPORT`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | transport_progress_in_ms |  |  |
 
-# MovementBlock
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -386,8 +384,6 @@ If update_flag contains `TRANSPORT`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | transport_progress_in_ms |  |  |
-
-# MovementBlock
 
 ## Client Version 3.3.5
 

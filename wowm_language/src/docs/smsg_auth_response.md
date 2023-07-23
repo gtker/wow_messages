@@ -96,8 +96,6 @@ Client can join.
 0, // billing_flags: u8
 0, 0, 0, 0, // billing_rested: u32
 ```
-# SMSG_AUTH_RESPONSE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -148,8 +146,6 @@ Else If result is equal to `AUTH_WAIT_QUEUE`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x0F | 4 / Little | u32 | queue_position |  |  |
-
-# SMSG_AUTH_RESPONSE
 
 ## Client Version 3.3.5
 

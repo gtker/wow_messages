@@ -39,8 +39,6 @@ SMSG have a header of 4 bytes.
 | 0x1C | 4 / Little | u32 | item_template |  |  |
 | 0x20 | 4 / Little | u32 | item_random_property_id |  |  |
 
-# SMSG_AUCTION_BIDDER_NOTIFICATION
-
 ## Client Version 1.12, Client Version 2
 
 ### Wowm Representation
@@ -79,8 +77,6 @@ SMSG have a header of 4 bytes.
 | 0x18 | 4 / Little | u32 | out_bid |  |  |
 | 0x1C | 4 / Little | u32 | item_template |  |  |
 | 0x20 | 4 / Little | u32 | item_random_property_id |  |  |
-
-# SMSG_AUCTION_BIDDER_NOTIFICATION
 
 ## Client Version 3.3.5
 

@@ -111,8 +111,6 @@ CMSG have a header of 6 bytes.
 0, 0, 0, 0, // [11].AddonInfo.addon_extra_crc: u32
 // addon_info: AddonInfo[-]
 ```
-# CMSG_AUTH_SESSION
-
 ## Client Version 3.3.5
 
 ### Description

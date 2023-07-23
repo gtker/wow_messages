@@ -51,8 +51,6 @@ If result is equal to `SUCCESS`:
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // server_proof: u8[20]
 239, 190, 173, 222, // hardware_survey_id: u32
 ```
-# CMD_AUTH_LOGON_PROOF_Server
-
 ## Protocol Version 5, Protocol Version 6, Protocol Version 7
 
 ### Description
@@ -95,8 +93,6 @@ If result is equal to `SUCCESS`:
 | 0x02 | 20 / - | u8[20] | server_proof |  |  |
 | 0x16 | 4 / Little | u32 | hardware_survey_id |  |  |
 | 0x1A | 2 / Little | u16 | unknown |  |  |
-
-# CMD_AUTH_LOGON_PROOF_Server
 
 ## Protocol Version 8
 

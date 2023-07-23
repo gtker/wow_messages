@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x08 | 4 / Little | u32 | amount_of_relations |  |  |
 | 0x0C | ? / - | [Relation](relation.md)[amount_of_relations] | relations |  |  |
 
-# SMSG_CONTACT_LIST
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

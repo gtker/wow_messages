@@ -26,8 +26,6 @@ struct ItemSpells {
 | 0x10 | 4 / Little | u32 | spell_category |  |  |
 | 0x14 | 4 / Little | i32 | spell_category_cooldown |  |  |
 
-# ItemSpells
-
 ## Client Version 2, Client Version 3
 
 ### Wowm Representation

@@ -29,8 +29,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
 | 0x0E | - / - | CString | name |  |  |
 
-# CMSG_PET_RENAME
-
 ## Client Version 2, Client Version 3
 
 ### Wowm Representation

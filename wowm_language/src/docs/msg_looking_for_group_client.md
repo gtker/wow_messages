@@ -24,8 +24,6 @@ CMSG have a header of 6 bytes.
 
 This message has no fields in the body.
 
-# MSG_LOOKING_FOR_GROUP_Client
-
 ## Client Version 2.4.3
 
 ### Wowm Representation

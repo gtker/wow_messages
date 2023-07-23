@@ -57,8 +57,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | flags2 |  | cmangos/vmangos/mangoszero: set to 0x04 |
 | - | 4 / Little | u32 | flags3 |  | cmangos/vmangos/mangoszero: set to 0x08 |
 
-# SMSG_QUESTGIVER_REQUEST_ITEMS
-
 ## Client Version 2.4.3
 
 ### Comment
@@ -117,8 +115,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | flags1 |  | cmangos/vmangos/mangoszero: set to 0x04 |
 | - | 4 / Little | u32 | flags2 |  | cmangos/vmangos/mangoszero: set to 0x08 |
 | - | 4 / Little | u32 | flags3 |  | cmangos/vmangos/mangoszero: set to 0x10 |
-
-# SMSG_QUESTGIVER_REQUEST_ITEMS
 
 ## Client Version 3.3.5
 

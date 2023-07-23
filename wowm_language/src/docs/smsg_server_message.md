@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / - | [ServerMessageType](servermessagetype.md) | message_type |  |  |
 | 0x08 | - / - | CString | message |  |  |
 
-# SMSG_SERVER_MESSAGE
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

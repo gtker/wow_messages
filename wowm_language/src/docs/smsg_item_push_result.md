@@ -67,8 +67,6 @@ Pushing the creation of a lionheart helm to player with Guid 4.
 0, 0, 0, 0, // item_random_property_id: u32
 1, 0, 0, 0, // item_count: u32
 ```
-# SMSG_ITEM_PUSH_RESULT
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

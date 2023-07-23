@@ -111,8 +111,6 @@ Else:
 23, 0, 0, 0,  // SizedCString.length84, 104, 105, 115, 32, 105, 115, 32, 97, 32, 115, 97, 121, 32, 109, 101, 115, 115, 97, 103, 101, 46, 0, // message: SizedCString
 0, // tag: PlayerChatTag NONE (0)
 ```
-# SMSG_MESSAGECHAT
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -198,8 +196,6 @@ Else:
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | target5 |  |  |
 | - | - / - | SizedCString | message |  |  |
 | - | 1 / - | [PlayerChatTag](playerchattag.md) | tag |  |  |
-
-# SMSG_MESSAGECHAT
 
 ## Client Version 3.3.5
 

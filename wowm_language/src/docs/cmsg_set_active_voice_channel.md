@@ -29,8 +29,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | 4 / Little | u32 | unknown1 |  |  |
 | 0x0A | - / - | CString | unknown2 |  |  |
 
-# CMSG_SET_ACTIVE_VOICE_CHANNEL
-
 ## Client Version 3
 
 ### Wowm Representation

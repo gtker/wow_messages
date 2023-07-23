@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x0C | ? / - | [SpellCooldownStatus](spellcooldownstatus.md)[-] | cooldowns |  |  |
 
-# SMSG_SPELL_COOLDOWN
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

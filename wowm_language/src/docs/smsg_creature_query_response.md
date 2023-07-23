@@ -62,8 +62,6 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 1 / - | u8 | civilian |  | cmangos: wdbFeild14 |
 | - | 1 / - | u8 | racial_leader |  |  |
 
-# SMSG_CREATURE_QUERY_RESPONSE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -129,8 +127,6 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 4 / Little | f32 | health_multiplier |  |  |
 | - | 4 / Little | f32 | mana_multiplier |  |  |
 | - | 1 / - | u8 | racial_leader |  |  |
-
-# SMSG_CREATURE_QUERY_RESPONSE
 
 ## Client Version 3.3.5
 

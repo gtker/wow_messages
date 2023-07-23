@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | f32 | unread_mails |  | mangoszero sets 0 if has unread mail, -86400.0f (0xC7A8C000) if not<br/>vmangos sets 0 if has unread mail, -1.0f if not<br/>cmangos has the behavior of mangoszero except when there are unread mails. This is TODO. |
 
-# MSG_QUERY_NEXT_MAIL_TIME_Server
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

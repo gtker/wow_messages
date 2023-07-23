@@ -57,8 +57,6 @@ SMSG have a header of 4 bytes.
 | 0x31 | 4 / - | [PvpRank](pvprank.md) | last_week_standing |  |  |
 | 0x35 | 1 / - | u8 | rank_progress_bar |  |  |
 
-# MSG_INSPECT_HONOR_STATS_Server
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

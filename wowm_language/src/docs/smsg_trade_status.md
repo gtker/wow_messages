@@ -60,8 +60,6 @@ is equal to `NOT_ON_TAPLIST`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x19 | 1 / - | u8 | slot |  | Trade slot -1 here clears CGTradeInfo::m_tradeMoney |
 
-# SMSG_TRADE_STATUS
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -121,8 +119,6 @@ is equal to `NOT_ON_TAPLIST`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x19 | 1 / - | u8 | slot |  | Trade slot -1 here clears CGTradeInfo::m_tradeMoney |
-
-# SMSG_TRADE_STATUS
 
 ## Client Version 3.3.5
 

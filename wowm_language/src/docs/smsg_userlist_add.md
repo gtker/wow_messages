@@ -35,8 +35,6 @@ SMSG have a header of 4 bytes.
 | 0x0E | 4 / Little | u32 | amount_of_players |  |  |
 | 0x12 | - / - | CString | name |  |  |
 
-# SMSG_USERLIST_ADD
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

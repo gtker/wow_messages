@@ -30,8 +30,6 @@ struct GuildBankSlot {
 | - | 1 / - | u8 | amount_of_sockets |  |  |
 | - | ? / - | [GuildBankSocket](guildbanksocket.md)[amount_of_sockets] | sockets |  |  |
 
-# GuildBankSlot
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

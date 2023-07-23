@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / - | [Emote](emote.md) | emote |  |  |
 | 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 
-# SMSG_EMOTE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -59,8 +57,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / - | [Emote](emote.md) | emote |  |  |
 | 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
-
-# SMSG_EMOTE
 
 ## Client Version 3.3.5
 

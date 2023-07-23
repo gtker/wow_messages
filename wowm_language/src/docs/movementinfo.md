@@ -66,8 +66,6 @@ If flags contains `SPLINE_ELEVATION`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | f32 | spline_elevation |  |  |
 
-# MovementInfo
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -144,8 +142,6 @@ If flags contains `SPLINE_ELEVATION`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | f32 | spline_elevation |  |  |
-
-# MovementInfo
 
 ## Client Version 3.3.5
 

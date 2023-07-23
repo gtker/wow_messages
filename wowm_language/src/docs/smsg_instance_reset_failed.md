@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / - | [InstanceResetFailedReason](instanceresetfailedreason.md) | reason |  |  |
 | 0x08 | 4 / - | [Map](map.md) | map |  |  |
 
-# SMSG_INSTANCE_RESET_FAILED
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -59,8 +57,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / - | [InstanceResetFailedReason](instanceresetfailedreason.md) | reason |  |  |
 | 0x08 | 4 / - | [Map](map.md) | map |  |  |
-
-# SMSG_INSTANCE_RESET_FAILED
 
 ## Client Version 3.3.5
 

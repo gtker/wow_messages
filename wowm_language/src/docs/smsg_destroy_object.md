@@ -48,8 +48,6 @@ Remove object with GUID 6 from game world.
 170, 0, // opcode (170)
 6, 0, 0, 0, 0, 0, 0, 0, // guid: Guid
 ```
-# SMSG_DESTROY_OBJECT
-
 ## Client Version 3.3.5
 
 ### Description

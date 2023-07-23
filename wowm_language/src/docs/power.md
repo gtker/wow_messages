@@ -37,8 +37,6 @@ Used in:
 * [SpellLog](spelllog.md)
 * [SpellLog](spelllog.md)
 
-# Power
-
 ## Client Version 3
 
 ### Wowm Representation

@@ -67,8 +67,6 @@ Command in client was `worldport 469 452 6454 2536 180`.
 0, 128, 30, 69, // Vector3d.z: f32
 219, 15, 73, 64, // orientation: f32
 ```
-# CMSG_WORLD_TELEPORT
-
 ## Client Version 2.4.3
 
 ### Description
@@ -105,8 +103,6 @@ CMSG have a header of 6 bytes.
 | 0x0A | 4 / - | [Map](map.md) | map |  |  |
 | 0x0E | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 | 0x1A | 4 / Little | f32 | orientation |  |  |
-
-# CMSG_WORLD_TELEPORT
 
 ## Client Version 3.3.5
 

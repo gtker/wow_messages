@@ -24,8 +24,6 @@ SMSG have a header of 4 bytes.
 
 This message has no fields in the body.
 
-# SMSG_CHAT_RESTRICTED
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -52,8 +50,6 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 1 / - | [ChatRestrictionType](chatrestrictiontype.md) | restriction |  |  |
-
-# SMSG_CHAT_RESTRICTED
 
 ## Client Version 3.3.5
 

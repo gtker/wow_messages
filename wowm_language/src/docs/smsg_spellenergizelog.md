@@ -35,8 +35,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / - | [Power](power.md) | power |  |  |
 | - | 4 / Little | u32 | damage |  |  |
 
-# SMSG_SPELLENERGIZELOG
-
 ## Client Version 3
 
 ### Wowm Representation

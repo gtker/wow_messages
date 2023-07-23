@@ -106,8 +106,6 @@ Else If target_flags contains `PVP_CORPSE`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | pvp_corpse |  |  |
 
-# SpellCastTargets
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -231,8 +229,6 @@ Else If target_flags contains `CORPSE_ENEMY`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | corpse_enemy |  |  |
-
-# SpellCastTargets
 
 ## Client Version 3.3.5
 

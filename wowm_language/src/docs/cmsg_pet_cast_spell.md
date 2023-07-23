@@ -31,8 +31,6 @@ CMSG have a header of 6 bytes.
 | 0x0E | 4 / Little | u32 | id |  |  |
 | 0x12 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
 
-# CMSG_PET_CAST_SPELL
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -63,8 +61,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x0E | 4 / Little | u32 | id |  |  |
 | 0x12 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
-
-# CMSG_PET_CAST_SPELL
 
 ## Client Version 3.3.5
 

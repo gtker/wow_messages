@@ -40,8 +40,6 @@ Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 
-# ItemQuality
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

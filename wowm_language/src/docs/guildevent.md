@@ -47,8 +47,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [SMSG_GUILD_EVENT](smsg_guild_event.md)
 
-# GuildEvent
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

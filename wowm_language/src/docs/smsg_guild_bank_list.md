@@ -48,8 +48,6 @@ If tab_result is equal to `PRESENT`:
 | - | 1 / - | u8 | amount_of_slot_updates |  |  |
 | - | ? / - | [GuildBankSlot](guildbankslot.md)[amount_of_slot_updates] | slot_updates |  |  |
 
-# SMSG_GUILD_BANK_LIST
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

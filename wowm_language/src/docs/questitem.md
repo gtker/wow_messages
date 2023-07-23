@@ -22,8 +22,6 @@ struct QuestItem {
 | 0x08 | 4 / Little | Level32 | level |  |  |
 | 0x0C | - / - | CString | title |  | vmangos/cmangos/mangoszero: max 0x200 |
 
-# QuestItem
-
 ## Client Version 3.3.3, Client Version 3.3.4, Client Version 3.3.5
 
 ### Wowm Representation

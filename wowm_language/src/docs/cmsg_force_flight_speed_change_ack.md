@@ -33,8 +33,6 @@ CMSG have a header of 6 bytes.
 | 0x12 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 | - | 4 / Little | f32 | new_speed |  |  |
 
-# CMSG_FORCE_FLIGHT_SPEED_CHANGE_ACK
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

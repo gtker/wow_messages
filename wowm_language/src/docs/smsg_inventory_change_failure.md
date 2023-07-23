@@ -49,8 +49,6 @@ If result is not equal to `OK`:
 | 0x11 | 8 / Little | [Guid](../spec/packed-guid.md) | item2 |  |  |
 | 0x19 | 1 / - | u8 | bag_type_subclass |  | cmangos: bag type subclass, used with EQUIP_ERR_EVENT_AUTOEQUIP_BIND_CONFIRM and EQUIP_ERR_ITEM_DOESNT_GO_INTO_BAG2<br/>vmangos sets to 0 |
 
-# SMSG_INVENTORY_CHANGE_FAILURE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -99,8 +97,6 @@ If result is equal to `CANT_EQUIP_LEVEL_I`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x16 | 4 / Little | Level32 | required_level |  |  |
-
-# SMSG_INVENTORY_CHANGE_FAILURE
 
 ## Client Version 3.3.5
 

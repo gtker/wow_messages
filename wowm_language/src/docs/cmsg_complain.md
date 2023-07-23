@@ -59,8 +59,6 @@ Else If complaint_type is equal to `CHAT`:
 | 0x27 | 4 / Little | u32 | time |  |  |
 | 0x2B | - / - | CString | description |  |  |
 
-# CMSG_COMPLAIN
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

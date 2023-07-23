@@ -35,8 +35,6 @@ SMSG have a header of 4 bytes.
 | 0x0C | 1 / - | u8 | amount_of_items |  | cmangos: 0 displays Vendor has no inventory |
 | 0x0D | ? / - | [ListInventoryItem](listinventoryitem.md)[amount_of_items] | items |  |  |
 
-# SMSG_LIST_INVENTORY
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Comment

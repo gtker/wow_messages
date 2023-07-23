@@ -31,8 +31,6 @@ CMSG have a header of 6 bytes.
 | 0x0A | 4 / Little | u32 | rights |  |  |
 | 0x0E | - / - | CString | rank_name |  |  |
 
-# CMSG_GUILD_RANK
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

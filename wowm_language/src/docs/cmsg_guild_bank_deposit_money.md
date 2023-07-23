@@ -29,8 +29,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | bank |  |  |
 | 0x0E | 4 / Little | Gold | money |  |  |
 
-# CMSG_GUILD_BANK_DEPOSIT_MONEY
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

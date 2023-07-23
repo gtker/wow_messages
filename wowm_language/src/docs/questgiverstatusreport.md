@@ -18,8 +18,6 @@ struct QuestGiverStatusReport {
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | npc |  |  |
 | 0x08 | 1 / - | [QuestGiverStatus](questgiverstatus.md) | dialog_status |  |  |
 
-# QuestGiverStatusReport
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

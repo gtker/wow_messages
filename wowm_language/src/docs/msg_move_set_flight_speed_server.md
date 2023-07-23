@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 | - | 4 / Little | f32 | new_speed |  |  |
 
-# MSG_MOVE_SET_FLIGHT_SPEED_Server
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

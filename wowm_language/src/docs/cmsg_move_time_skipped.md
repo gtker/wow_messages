@@ -39,8 +39,6 @@ CMSG have a header of 6 bytes.
 23, 0, 0, 0, 0, 0, 0, 0, // guid: Guid
 32, 0, 0, 0, // lag: u32
 ```
-# CMSG_MOVE_TIME_SKIPPED
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

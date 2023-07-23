@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | result |  |  |
 | 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 
-# SMSG_SET_PLAYER_DECLINED_NAMES_RESULT
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

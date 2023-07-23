@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x08 | 1 / - | u8 | unknown1 |  | vmangos sets to 2 and cmangos sets to 0. |
 | 0x09 | 1 / - | [SpellCastResult](spellcastresult.md) | result |  |  |
 
-# SMSG_PET_CAST_FAILED
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -112,8 +110,6 @@ Else If result is equal to `EQUIPPED_ITEM_CLASS`:
 | 0x22 | 4 / Little | u32 | item_class |  |  |
 | 0x26 | 4 / Little | u32 | item_sub_class |  |  |
 | 0x2A | 4 / Little | u32 | item_inventory_type |  |  |
-
-# SMSG_PET_CAST_FAILED
 
 ## Client Version 3.3.5
 

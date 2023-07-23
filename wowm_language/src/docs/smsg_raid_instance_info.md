@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | amount_of_raid_infos |  |  |
 | 0x08 | ? / - | [RaidInfo](raidinfo.md)[amount_of_raid_infos] | raid_infos |  |  |
 
-# SMSG_RAID_INSTANCE_INFO
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -59,8 +57,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | amount_of_raid_infos |  |  |
 | 0x08 | ? / - | [RaidInfo](raidinfo.md)[amount_of_raid_infos] | raid_infos |  |  |
-
-# SMSG_RAID_INSTANCE_INFO
 
 ## Client Version 3.3.5
 

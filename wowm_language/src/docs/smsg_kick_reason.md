@@ -33,8 +33,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 1 / - | u8 | reason |  |  |
 | 0x05 | - / - | CString | text |  |  |
 
-# SMSG_KICK_REASON
-
 ## Client Version 3.3.5
 
 ### Comment

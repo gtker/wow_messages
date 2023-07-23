@@ -45,8 +45,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | spell_id |  | vmangos: spell id, seen with heroic strike and disarm as examples |
 | - | 4 / Little | u32 | blocked_amount |  |  |
 
-# SMSG_ATTACKERSTATEUPDATE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -91,8 +89,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | unknown1 |  |  |
 | - | 4 / Little | u32 | spell_id |  | vmangos: spell id, seen with heroic strike and disarm as examples |
 | - | 4 / Little | u32 | blocked_amount |  |  |
-
-# SMSG_ATTACKERSTATEUPDATE
 
 ## Client Version 3.3.5
 

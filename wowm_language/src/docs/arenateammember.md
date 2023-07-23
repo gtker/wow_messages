@@ -34,8 +34,6 @@ struct ArenaTeamMember {
 | - | 4 / Little | u32 | wins_this_season |  |  |
 | - | 4 / Little | u32 | personal_rating |  |  |
 
-# ArenaTeamMember
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

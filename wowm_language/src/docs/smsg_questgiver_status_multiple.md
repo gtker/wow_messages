@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | amount_of_statuses |  |  |
 | 0x08 | ? / - | [QuestGiverStatusReport](questgiverstatusreport.md)[amount_of_statuses] | statuses |  |  |
 
-# SMSG_QUESTGIVER_STATUS_MULTIPLE
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

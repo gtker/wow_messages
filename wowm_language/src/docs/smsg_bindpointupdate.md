@@ -35,8 +35,6 @@ SMSG have a header of 4 bytes.
 | 0x10 | 4 / - | [Map](map.md) | map |  |  |
 | 0x14 | 4 / - | [Area](area.md) | area |  |  |
 
-# SMSG_BINDPOINTUPDATE
-
 ## Client Version 2.4.3
 
 ### Description
@@ -71,8 +69,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 | 0x10 | 4 / - | [Map](map.md) | map |  |  |
 | 0x14 | 4 / - | [Area](area.md) | area |  |  |
-
-# SMSG_BINDPOINTUPDATE
 
 ## Client Version 3.3.5
 

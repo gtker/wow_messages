@@ -44,8 +44,6 @@ SMSG have a header of 4 bytes.
 65, 0, // opcode (65)
 65, // result: WorldResult CHAR_LOGIN_FAILED (0x41)
 ```
-# SMSG_CHARACTER_LOGIN_FAILED
-
 ## Client Version 2.4.3
 
 ### Description
@@ -80,8 +78,6 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
-
-# SMSG_CHARACTER_LOGIN_FAILED
 
 ## Client Version 3.3.5
 

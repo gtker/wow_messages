@@ -42,8 +42,6 @@ struct AuctionListItem {
 | 0x34 | 8 / Little | [Guid](../spec/packed-guid.md) | highest_bidder |  |  |
 | 0x3C | 4 / Little | u32 | highest_bid |  |  |
 
-# AuctionListItem
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -87,8 +85,6 @@ struct AuctionListItem {
 | 0x78 | 4 / Little | Milliseconds | time_left |  |  |
 | 0x7C | 8 / Little | [Guid](../spec/packed-guid.md) | highest_bidder |  |  |
 | 0x84 | 4 / Little | u32 | highest_bid |  |  |
-
-# AuctionListItem
 
 ## Client Version 3.3.5
 

@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x0C | 4 / Little | u32 | state |  |  |
 | 0x10 | 4 / Little | u32 | item |  |  |
 
-# SMSG_CROSSED_INEBRIATION_THRESHOLD
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

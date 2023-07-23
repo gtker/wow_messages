@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x05 | 1 / - | u8 | amount_of_events |  |  |
 | 0x06 | ? / - | CString[amount_of_events] | event_descriptions |  |  |
 
-# SMSG_GUILD_EVENT
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

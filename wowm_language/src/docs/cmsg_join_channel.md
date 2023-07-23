@@ -47,8 +47,6 @@ CMSG have a header of 6 bytes.
 76, 111, 99, 97, 108, 68, 101, 102, 101, 110, 115, 101, 32, 45, 32, 69, 108, 119, 121, 110, 110, 32, 70, 111, 114, 101, 115, 116, 0, // channel_name: CString
 0, // channel_password: CString
 ```
-# CMSG_JOIN_CHANNEL
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

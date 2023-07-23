@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 1 / - | [ComplaintStatus](complaintstatus.md) | complaint_status |  |  |
 | 0x05 | 1 / - | Bool | voice_chat_enabled |  |  |
 
-# SMSG_FEATURE_SYSTEM_STATUS
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

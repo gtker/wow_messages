@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / - | [Area](area.md) | area |  |  |
 | 0x08 | - / - | SizedCString | message |  |  |
 
-# SMSG_DEFENSE_MESSAGE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -59,8 +57,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / - | [Area](area.md) | area |  |  |
 | 0x08 | - / - | SizedCString | message |  |  |
-
-# SMSG_DEFENSE_MESSAGE
 
 ## Client Version 3.3.5
 

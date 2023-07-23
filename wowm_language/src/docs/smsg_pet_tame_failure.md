@@ -27,8 +27,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 1 / - | [PetTameFailureReason](pettamefailurereason.md) | reason |  |  |
 
-# SMSG_PET_TAME_FAILURE
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

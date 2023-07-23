@@ -100,8 +100,6 @@ Else:
 | - | 1 / - | [PlayerChatTag](playerchattag.md) | chat_tag4 |  |  |
 | - | - / - | SizedCString | sender_name |  |  |
 
-# SMSG_GM_MESSAGECHAT
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

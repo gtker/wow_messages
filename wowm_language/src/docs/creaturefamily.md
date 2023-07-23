@@ -68,8 +68,6 @@ Used in:
 * [Character](character.md)
 * [SMSG_CREATURE_QUERY_RESPONSE](smsg_creature_query_response.md)
 
-# CreatureFamily
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -153,8 +151,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [Character](character.md)
 * [SMSG_CREATURE_QUERY_RESPONSE](smsg_creature_query_response.md)
-
-# CreatureFamily
 
 ## Client Version 3.3.5
 

@@ -44,8 +44,6 @@ SMSG have a header of 4 bytes.
 58, 0, // opcode (58)
 47, // result: WorldResult CHAR_CREATE_ERROR (0x2F)
 ```
-# SMSG_CHAR_CREATE
-
 ## Client Version 2.4.3
 
 ### Description
@@ -80,8 +78,6 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
-
-# SMSG_CHAR_CREATE
 
 ## Client Version 3.3.5
 

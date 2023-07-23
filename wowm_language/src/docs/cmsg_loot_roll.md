@@ -31,8 +31,6 @@ CMSG have a header of 6 bytes.
 | 0x0E | 4 / Little | u32 | item_slot |  |  |
 | 0x12 | 1 / - | [RollVote](rollvote.md) | vote |  |  |
 
-# CMSG_LOOT_ROLL
-
 ## Client Version 2, Client Version 3
 
 ### Wowm Representation

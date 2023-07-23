@@ -53,8 +53,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | amount_of_emotes |  |  |
 | - | ? / - | [QuestDetailsEmote](questdetailsemote.md)[amount_of_emotes] | emotes |  |  |
 
-# SMSG_QUESTGIVER_QUEST_DETAILS
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -115,8 +113,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | title_reward |  | mangosone: CharTitle, new 2.4.0, player gets this title (bit index from CharTitles) |
 | - | 4 / Little | u32 | amount_of_emotes |  |  |
 | - | ? / - | [QuestDetailsEmote](questdetailsemote.md)[amount_of_emotes] | emotes |  |  |
-
-# SMSG_QUESTGIVER_QUEST_DETAILS
 
 ## Client Version 3.3.5
 

@@ -45,8 +45,6 @@ Used in:
 * [CMSG_GMTICKET_UPDATETEXT](cmsg_gmticket_updatetext.md)
 * [SMSG_GMTICKET_GETTICKET](smsg_gmticket_getticket.md)
 
-# GmTicketType
-
 ## Client Version 2.4.3
 
 ### Wowm Representation

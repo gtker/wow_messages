@@ -46,8 +46,6 @@ SMSG have a header of 4 bytes.
 236, 1, // opcode (492)
 239, 190, 173, 222, // server_seed: u32
 ```
-# SMSG_AUTH_CHALLENGE
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

@@ -27,8 +27,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 
-# SMSG_BINDER_CONFIRM
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

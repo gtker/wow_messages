@@ -18,8 +18,6 @@ struct FactionInitializer {
 | 0x00 | 1 / - | [FactionFlag](factionflag.md) | flag |  |  |
 | 0x01 | 4 / Little | u32 | standing |  |  |
 
-# FactionInitializer
-
 ## Client Version 3
 
 ### Wowm Representation

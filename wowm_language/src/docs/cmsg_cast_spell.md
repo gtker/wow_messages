@@ -39,8 +39,6 @@ CMSG have a header of 6 bytes.
 120, 80, 0, 0, // spell: u32
 0, 0, // SpellCastTargets.target_flags: SpellCastTargetFlags  SELF (0)
 ```
-# CMSG_CAST_SPELL
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -69,8 +67,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / Little | u32 | spell |  |  |
 | 0x0A | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
-
-# CMSG_CAST_SPELL
 
 ## Client Version 3.3.5
 

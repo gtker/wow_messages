@@ -189,8 +189,6 @@ is equal to `SUMMON_DEMON`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x6C | 8 / Little | [Guid](../spec/packed-guid.md) | target7 |  |  |
 
-# SpellLog
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -323,8 +321,6 @@ Else If effect is equal to `DISMISS_PET`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | pet_dismiss_guid |  |  |
-
-# SpellLog
 
 ## Client Version 3.3.5
 

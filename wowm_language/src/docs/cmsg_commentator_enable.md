@@ -27,8 +27,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / - | [CommentatorEnableOption](commentatorenableoption.md) | option |  |  |
 
-# CMSG_COMMENTATOR_ENABLE
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

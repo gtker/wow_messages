@@ -33,8 +33,6 @@ Used in:
 * [MSG_LOOKING_FOR_GROUP_Client](msg_looking_for_group_client.md)
 * [MSG_LOOKING_FOR_GROUP_Server](msg_looking_for_group_server.md)
 
-# LfgType
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

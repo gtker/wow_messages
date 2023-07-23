@@ -22,8 +22,6 @@ struct NpcTextUpdate {
 | - | 4 / - | [Language](language.md) | language |  |  |
 | - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
 
-# NpcTextUpdate
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -45,8 +43,6 @@ struct NpcTextUpdate {
 | 0x04 | ? / - | CString[2] | texts |  |  |
 | - | 1 / - | [Language](language.md) | language |  |  |
 | - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
-
-# NpcTextUpdate
 
 ## Client Version 3
 

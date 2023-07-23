@@ -29,8 +29,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [SMSG_STABLE_RESULT](smsg_stable_result.md)
 
-# StableResult
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

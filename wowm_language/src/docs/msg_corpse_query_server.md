@@ -40,8 +40,6 @@ If result is equal to `FOUND`:
 | 0x09 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 | 0x15 | 4 / - | [Map](map.md) | corpse_map |  |  |
 
-# MSG_CORPSE_QUERY_Server
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -81,8 +79,6 @@ If result is equal to `FOUND`:
 | 0x05 | 4 / - | [Map](map.md) | map |  |  |
 | 0x09 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
 | 0x15 | 4 / - | [Map](map.md) | corpse_map |  |  |
-
-# MSG_CORPSE_QUERY_Server
 
 ## Client Version 3.3.5
 

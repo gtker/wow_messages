@@ -37,8 +37,6 @@ SMSG have a header of 4 bytes.
 | 0x11 | 4 / Little | u32 | spell_on_lowest_slot |  |  |
 | 0x15 | 427 / - | [TradeSlot](tradeslot.md)[7] | trade_slots |  | vmangos/cmangos/mangoszero: All set to same as trade_slot_count* (7), unsure which determines how big this is. Unused slots are 0. |
 
-# SMSG_TRADE_STATUS_EXTENDED
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

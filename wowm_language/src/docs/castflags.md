@@ -41,8 +41,6 @@ Used in:
 * [SMSG_SPELL_GO](smsg_spell_go.md)
 * [SMSG_SPELL_START](smsg_spell_start.md)
 * [SMSG_SPELL_START](smsg_spell_start.md)
-# CastFlags
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

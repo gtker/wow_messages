@@ -29,8 +29,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [SMSG_TRANSFER_ABORTED](smsg_transfer_aborted.md)
 
-# TransferAbortReason
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -73,8 +71,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [SMSG_TRANSFER_ABORTED](smsg_transfer_aborted.md)
-
-# TransferAbortReason
 
 ## Client Version 3.3.5
 

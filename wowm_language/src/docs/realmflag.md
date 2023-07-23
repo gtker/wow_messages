@@ -31,8 +31,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [Realm](realm.md)
 * [Realm](realm.md)
-# RealmFlag
-
 ## Protocol Version 8
 
 ### Wowm Representation

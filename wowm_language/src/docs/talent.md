@@ -883,8 +883,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 Used in:
 * [CMSG_LEARN_TALENT](cmsg_learn_talent.md)
 
-# Talent
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -2061,8 +2059,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [CMSG_LEARN_TALENT](cmsg_learn_talent.md)
-
-# Talent
 
 ## Client Version 3.3.5
 

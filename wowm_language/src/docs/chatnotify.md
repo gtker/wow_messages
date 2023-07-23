@@ -83,8 +83,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [SMSG_CHANNEL_NOTIFY](smsg_channel_notify.md)
 
-# ChatNotify
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

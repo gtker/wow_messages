@@ -43,8 +43,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [SMSG_PET_TAME_FAILURE](smsg_pet_tame_failure.md)
 
-# PetTameFailureReason
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

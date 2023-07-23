@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
 | - | ? / - | u8[-] | talent_data |  |  |
 
-# SMSG_INSPECT_TALENT
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

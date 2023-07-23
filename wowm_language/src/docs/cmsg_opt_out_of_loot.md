@@ -27,8 +27,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / Little | Bool32 | pass_on_loot |  |  |
 
-# CMSG_OPT_OUT_OF_LOOT
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

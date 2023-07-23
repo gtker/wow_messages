@@ -22,8 +22,6 @@ struct TransportInfo {
 | - | 4 / Little | f32 | orientation |  |  |
 | - | 4 / Little | u32 | timestamp |  |  |
 
-# TransportInfo
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

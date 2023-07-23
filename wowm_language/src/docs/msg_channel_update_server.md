@@ -27,8 +27,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | time |  |  |
 
-# MSG_CHANNEL_UPDATE_Server
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

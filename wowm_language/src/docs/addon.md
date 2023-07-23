@@ -49,8 +49,6 @@ If url_info is equal to `AVAILABLE`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x108 | - / - | CString | url |  |  |
 
-# Addon
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

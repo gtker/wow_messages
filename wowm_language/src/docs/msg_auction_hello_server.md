@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | auctioneer |  |  |
 | 0x0C | 4 / Little | u32 | auction_house_id |  |  |
 
-# MSG_AUCTION_HELLO_Server
-
 ## Client Version 1.12, Client Version 2, Client Version 3.0, Client Version 3.1, Client Version 3.2, Client Version 3.3.0, Client Version 3.3.1, Client Version 3.3.2
 
 ### Wowm Representation
@@ -59,8 +57,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | auctioneer |  |  |
 | 0x0C | 4 / - | [AuctionHouse](auctionhouse.md) | auction_house |  |  |
-
-# MSG_AUCTION_HELLO_Server
 
 ## Client Version 3.3.3, Client Version 3.3.4, Client Version 3.3.5
 

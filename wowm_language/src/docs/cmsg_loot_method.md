@@ -31,8 +31,6 @@ CMSG have a header of 6 bytes.
 | 0x0A | 8 / Little | [Guid](../spec/packed-guid.md) | loot_master |  |  |
 | 0x12 | 4 / - | [ItemQuality](itemquality.md) | loot_threshold |  |  |
 
-# CMSG_LOOT_METHOD
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -63,8 +61,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | 4 / - | [GroupLootSetting](grouplootsetting.md) | loot_setting |  |  |
 | 0x0A | 8 / Little | [Guid](../spec/packed-guid.md) | loot_master |  |  |
 | 0x12 | 4 / - | [ItemQuality](itemquality.md) | loot_threshold |  |  |
-
-# CMSG_LOOT_METHOD
 
 ## Client Version 3.3.5
 

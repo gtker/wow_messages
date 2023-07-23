@@ -24,8 +24,6 @@ struct DamageInfo {
 | 0x0C | 4 / Little | u32 | absorb |  |  |
 | 0x10 | 4 / Little | u32 | resist |  |  |
 
-# DamageInfo
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

@@ -408,8 +408,6 @@ Used in:
 * [SMSG_QUEST_QUERY_RESPONSE](smsg_quest_query_response.md)
 * [SMSG_SET_FACTION_VISIBLE](smsg_set_faction_visible.md)
 
-# Faction
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -1081,8 +1079,6 @@ Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_QUEST_QUERY_RESPONSE](smsg_quest_query_response.md)
 * [SMSG_SET_FACTION_VISIBLE](smsg_set_faction_visible.md)
-
-# Faction
 
 ## Client Version 3.3.5
 

@@ -31,8 +31,6 @@ CMSG have a header of 6 bytes.
 | 0x0E | 1 / - | u8 | tab |  |  |
 | 0x0F | 1 / - | Bool | full_update |  |  |
 
-# CMSG_GUILD_BANK_QUERY_TAB
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

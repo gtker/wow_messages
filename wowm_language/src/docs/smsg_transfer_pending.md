@@ -38,8 +38,6 @@ Optionally the following fields can be present. This can only be detected by loo
 | 0x08 | 4 / Little | u32 | transport |  |  |
 | 0x0C | 4 / - | [Map](map.md) | transport_map |  |  |
 
-# SMSG_TRANSFER_PENDING
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -77,8 +75,6 @@ Optionally the following fields can be present. This can only be detected by loo
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x08 | 4 / Little | u32 | transport |  |  |
 | 0x0C | 4 / - | [Map](map.md) | transport_map |  |  |
-
-# SMSG_TRANSFER_PENDING
 
 ## Client Version 3.3.5
 

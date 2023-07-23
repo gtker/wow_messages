@@ -26,9 +26,11 @@ pub(crate) fn print_docs(o: &Objects) {
     print_docs_summary_and_objects(o);
 }
 
-fn common(s: &mut Writer, tags: &ObjectTags, name: &str) {
-    s.wln(format!("# {name}"));
-    s.newline();
+fn common(s: &mut Writer, tags: &ObjectTags, name: &str, print_header: bool) {
+    if print_header {
+        s.wln(format!("# {name}"));
+        s.newline();
+    }
 
     print_versions(s, tags.logon_versions(), tags.versions());
 
@@ -131,12 +133,14 @@ fn print_definers<'a>(
             lower_name = definer.name().to_lowercase()
         );
 
+        let full_path = docs_directory().join(&path);
+        let print_header = files.get(&full_path).is_none();
         let definer_inner = match definer.definer_ty() {
-            DefinerType::Enum => print_docs_for_enum(definer).into_inner(),
-            DefinerType::Flag => print_docs_for_flag(definer).into_inner(),
+            DefinerType::Enum => print_docs_for_enum(definer, print_header).into_inner(),
+            DefinerType::Flag => print_docs_for_flag(definer, print_header).into_inner(),
         };
 
-        create_or_append_hashmap(&definer_inner, docs_directory().join(&path), files);
+        create_or_append_hashmap(&definer_inner, full_path, files);
 
         let is_used_in_object = !definer.objects_used_in().is_empty();
         if is_used_in_object {
@@ -187,8 +191,10 @@ fn print_containers<'a>(
             lower_name = container.name().to_lowercase()
         );
 
-        let container_inner = print_docs_for_container(container, o).into_inner();
-        create_or_append_hashmap(&container_inner, docs_directory().join(&path), files);
+        let full_path = docs_directory().join(&path);
+        let print_header = files.get(&full_path).is_none();
+        let container_inner = print_docs_for_container(container, o, print_header).into_inner();
+        create_or_append_hashmap(&container_inner, full_path, files);
 
         let bullet_point = format!(
             "- [{name}](docs/{path})",

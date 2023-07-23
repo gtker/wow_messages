@@ -45,8 +45,6 @@ SMSG have a header of 4 bytes.
 184, 157, 194, 62, // MovementInfo.orientation: f32
 127, 3, 0, 0, // MovementInfo.fall_time: f32
 ```
-# MSG_MOVE_START_STRAFE_LEFT_Server
-
 ## Client Version 2.4.3
 
 ### Wowm Representation

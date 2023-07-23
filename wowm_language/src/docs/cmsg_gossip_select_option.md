@@ -38,8 +38,6 @@ Optionally the following fields can be present. This can only be detected by loo
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x12 | - / - | CString | code |  | vmangos: if (_player->PlayerTalkClass->GossipOptionCoded(gossipListId)) |
 
-# CMSG_GOSSIP_SELECT_OPTION
-
 ## Client Version 2, Client Version 3
 
 ### Wowm Representation

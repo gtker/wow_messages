@@ -41,8 +41,6 @@ SMSG have a header of 4 bytes.
 | 0x18 | 4 / Little | u32 | item |  |  |
 | 0x1C | 4 / Little | u32 | item_random_property_id |  |  |
 
-# SMSG_AUCTION_OWNER_NOTIFICATION
-
 ## Client Version 3.3.5
 
 ### Comment

@@ -35,8 +35,6 @@ MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x08 | 1 / - | [QuestPartyMessage](questpartymessage.md) | message |  |  |
 
-# MSG_QUEST_PUSH_RESULT
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

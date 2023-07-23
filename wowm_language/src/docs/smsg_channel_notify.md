@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 1 / - | [ChatNotify](chatnotify.md) | notify_type |  |  |
 | 0x05 | - / - | CString | channel_name |  |  |
 
-# SMSG_CHANNEL_NOTIFY
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

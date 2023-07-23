@@ -45,8 +45,6 @@ CMSG have a header of 6 bytes.
 0, // spell_index: u8
 0, 0, // SpellCastTargets.target_flags: SpellCastTargetFlags  SELF (0)
 ```
-# CMSG_USE_ITEM
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -83,8 +81,6 @@ CMSG have a header of 6 bytes.
 | 0x09 | 1 / - | u8 | cast_count |  | mangosone: next cast if exists (single or not) |
 | 0x0A | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
 | 0x12 | - / - | [SpellCastTargets](spellcasttargets.md) | targets |  |  |
-
-# CMSG_USE_ITEM
 
 ## Client Version 3.3.5
 

@@ -37,8 +37,6 @@ MSG have a header of either 6 bytes if they are sent from the client (CMSG), or 
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 | - | 4 / Little | f32 | new_speed |  |  |
 
-# MSG_MOVE_SET_FLIGHT_BACK_SPEED
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

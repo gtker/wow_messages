@@ -29,8 +29,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | 1 / - | [GmTicketType](gmtickettype.md) | ticket_type |  | cmangos does not have this field, vmangos does. |
 | 0x07 | - / - | CString | message |  |  |
 
-# CMSG_GMTICKET_UPDATETEXT
-
 ## Client Version 2, Client Version 3
 
 ### Comment

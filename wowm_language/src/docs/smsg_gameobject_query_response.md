@@ -50,8 +50,6 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | - / - | CString | name5 |  |  |
 | - | 24 / - | u32[6] | raw_data |  |  |
 
-# SMSG_GAMEOBJECT_QUERY_RESPONSE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -107,8 +105,6 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | - / - | CString | unknown |  |  |
 | - | 24 / - | u32[6] | raw_data |  |  |
 | - | 4 / Little | f32 | gameobject_size |  |  |
-
-# SMSG_GAMEOBJECT_QUERY_RESPONSE
 
 ## Client Version 3.3.5
 

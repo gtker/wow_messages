@@ -28,8 +28,6 @@ struct WhoPlayer {
 | - | 4 / - | [Area](area.md) | area |  |  |
 | - | 4 / Little | u32 | party_status |  |  |
 
-# WhoPlayer
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -57,8 +55,6 @@ struct WhoPlayer {
 | - | 1 / - | [Race](race.md) | race |  |  |
 | - | 1 / - | [Gender](gender.md) | gender |  |  |
 | - | 4 / - | [Area](area.md) | area |  |  |
-
-# WhoPlayer
 
 ## Client Version 3.3.5
 

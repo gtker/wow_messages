@@ -72,8 +72,6 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 // realms: Realm[number_of_realms]
 0, 0, // footer_padding: u16
 ```
-# CMD_REALM_LIST_Server
-
 ## Protocol Version 5
 
 ### Wowm Representation
@@ -108,8 +106,6 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | 0x08 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |  |
 | - | 2 / Little | u16 | footer_padding |  |  |
 
-# CMD_REALM_LIST_Server
-
 ## Protocol Version 6, Protocol Version 7
 
 ### Wowm Representation
@@ -143,8 +139,6 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | 0x07 | 2 / Little | u16 | number_of_realms |  |  |
 | 0x09 | ? / - | [Realm](realm.md)[number_of_realms] | realms |  |  |
 | - | 2 / Little | u16 | footer_padding |  |  |
-
-# CMD_REALM_LIST_Server
 
 ## Protocol Version 8
 

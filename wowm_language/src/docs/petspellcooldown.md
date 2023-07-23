@@ -22,8 +22,6 @@ struct PetSpellCooldown {
 | 0x04 | 4 / Little | Milliseconds | cooldown |  |  |
 | 0x08 | 4 / Little | Milliseconds | category_cooldown |  |  |
 
-# PetSpellCooldown
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

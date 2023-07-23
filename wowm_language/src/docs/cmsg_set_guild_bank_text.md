@@ -29,8 +29,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | 1 / - | u8 | tab |  |  |
 | 0x07 | - / - | CString | text |  |  |
 
-# CMSG_SET_GUILD_BANK_TEXT
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

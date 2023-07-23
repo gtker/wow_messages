@@ -47,8 +47,6 @@ CMSG have a header of 6 bytes.
 | - | 4 / Little | u32 | unknown3 |  | cmangos: const 0 |
 | - | 4 / Little | u32 | unknown4 |  | cmangos: const 0 |
 
-# CMSG_SEND_MAIL
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

@@ -31,8 +31,6 @@ CMSG have a header of 6 bytes.
 | 0x0E | 4 / Little | u32 | mail_id |  |  |
 | 0x12 | 4 / Little | u32 | mail_template_id |  | mangoszero/cmangos/vmangos: mailTemplateId, non need, Mail store own 100% correct value anyway |
 
-# CMSG_MAIL_CREATE_TEXT_ITEM
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

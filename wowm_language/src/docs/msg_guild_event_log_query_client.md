@@ -24,8 +24,6 @@ CMSG have a header of 6 bytes.
 
 This message has no fields in the body.
 
-# MSG_GUILD_EVENT_LOG_QUERY_Client
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

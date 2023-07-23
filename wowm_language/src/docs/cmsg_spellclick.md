@@ -27,8 +27,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
 
-# CMSG_SPELLCLICK
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

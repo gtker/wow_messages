@@ -27,8 +27,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / - | [PetitionResult](petitionresult.md) | result |  |  |
 
-# SMSG_TURN_IN_PETITION_RESULTS
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

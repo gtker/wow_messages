@@ -34,8 +34,6 @@ Used in:
 * [CMSG_SET_FACTION_ATWAR](cmsg_set_faction_atwar.md)
 * [CMSG_SET_FACTION_ATWAR](cmsg_set_faction_atwar.md)
 * [FactionInitializer](factioninitializer.md)
-# FactionFlag
-
 ## Client Version 3
 
 ### Wowm Representation

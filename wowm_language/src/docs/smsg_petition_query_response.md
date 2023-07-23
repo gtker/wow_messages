@@ -59,8 +59,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | todo_amount_of_signers |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos<br/>vmangos: char m_choicetext[10](./10.md)[64](./64.md) |
 | - | 4 / Little | u32 | number_of_choices |  | cmangos/vmangos/mangoszero: Set to 0, only info is comment from vmangos |
 
-# SMSG_PETITION_QUERY_RESPONSE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -119,8 +117,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | unknown9 |  |  |
 | - | 4 / Little | u32 | unknown10 |  |  |
 | - | 4 / - | [CharterType](chartertype.md) | charter_type |  |  |
-
-# SMSG_PETITION_QUERY_RESPONSE
 
 ## Client Version 3.3.5
 

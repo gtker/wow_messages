@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x08 | 1 / - | [TransferAbortReason](transferabortreason.md) | reason |  |  |
 | 0x09 | 1 / - | u8 | argument |  | Possibly not needed. |
 
-# SMSG_TRANSFER_ABORTED
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -72,8 +70,6 @@ is equal to `DIFFICULTY_NOT_AVAILABLE`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x09 | 1 / - | [DungeonDifficulty](dungeondifficulty.md) | difficulty |  |  |
-
-# SMSG_TRANSFER_ABORTED
 
 ## Client Version 3.3.5
 

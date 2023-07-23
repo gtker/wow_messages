@@ -29,8 +29,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | 1 / - | [ItemSlot](itemslot.md) | source_slot |  |  |
 | 0x07 | 1 / - | [ItemSlot](itemslot.md) | destination_slot |  |  |
 
-# CMSG_SWAP_INV_ITEM
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -59,8 +57,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 1 / - | [ItemSlot](itemslot.md) | source_slot |  |  |
 | 0x07 | 1 / - | [ItemSlot](itemslot.md) | destination_slot |  |  |
-
-# CMSG_SWAP_INV_ITEM
 
 ## Client Version 3.3.5
 

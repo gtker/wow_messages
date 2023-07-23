@@ -67,8 +67,6 @@ CMSG have a header of 6 bytes.
 4, // facial_hair: u8
 0, // outfit_id: u8
 ```
-# CMSG_CHAR_CREATE
-
 ## Client Version 2.4.3
 
 ### Description
@@ -117,8 +115,6 @@ CMSG have a header of 6 bytes.
 | - | 1 / - | u8 | hair_color |  |  |
 | - | 1 / - | u8 | facial_hair |  |  |
 | - | 1 / - | u8 | outfit_id |  |  |
-
-# CMSG_CHAR_CREATE
 
 ## Client Version 3.2, Client Version 3.3
 

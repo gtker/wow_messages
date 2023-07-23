@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | - | 1 / - | u8 | flags |  |  |
 | - | 4 / Little | u32 | amount_of_members |  |  |
 
-# SMSG_CHANNEL_MEMBER_COUNT
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

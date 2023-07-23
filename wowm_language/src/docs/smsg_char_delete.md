@@ -44,8 +44,6 @@ SMSG have a header of 4 bytes.
 60, 0, // opcode (60)
 57, // result: WorldResult CHAR_DELETE_SUCCESS (0x39)
 ```
-# SMSG_CHAR_DELETE
-
 ## Client Version 2.4.3
 
 ### Description
@@ -80,8 +78,6 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
-
-# SMSG_CHAR_DELETE
 
 ## Client Version 3.3.5
 

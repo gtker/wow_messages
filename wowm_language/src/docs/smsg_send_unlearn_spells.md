@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | amount_of_spells |  |  |
 | 0x08 | ? / - | u32[amount_of_spells] | spells |  |  |
 
-# SMSG_SEND_UNLEARN_SPELLS
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

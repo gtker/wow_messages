@@ -37,8 +37,6 @@ SMSG have a header of 4 bytes.
 | 0x14 | 4 / Little | u32 | amount_of_item_rewards |  |  |
 | 0x18 | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |  |
 
-# SMSG_QUESTGIVER_QUEST_COMPLETE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -77,8 +75,6 @@ SMSG have a header of 4 bytes.
 | 0x14 | 4 / Little | u32 | honor_reward |  |  |
 | 0x18 | 4 / Little | u32 | amount_of_item_rewards |  |  |
 | 0x1C | ? / - | [QuestItemReward](questitemreward.md)[amount_of_item_rewards] | item_rewards |  |  |
-
-# SMSG_QUESTGIVER_QUEST_COMPLETE
 
 ## Client Version 3.3.5
 

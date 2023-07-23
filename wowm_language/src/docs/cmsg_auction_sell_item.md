@@ -35,8 +35,6 @@ CMSG have a header of 6 bytes.
 | 0x1A | 4 / Little | u32 | buyout |  |  |
 | 0x1E | 4 / Little | u32 | auction_duration_in_minutes |  |  |
 
-# CMSG_AUCTION_SELL_ITEM
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

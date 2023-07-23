@@ -27,8 +27,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | player |  |  |
 
-# SMSG_PROPOSE_LEVEL_GRANT
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

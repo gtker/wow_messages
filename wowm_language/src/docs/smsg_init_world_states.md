@@ -33,8 +33,6 @@ SMSG have a header of 4 bytes.
 | 0x0C | 2 / Little | u16 | amount_of_states |  |  |
 | 0x0E | ? / - | [WorldState](worldstate.md)[amount_of_states] | states |  |  |
 
-# SMSG_INIT_WORLD_STATES
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -67,8 +65,6 @@ SMSG have a header of 4 bytes.
 | 0x08 | 4 / - | [Area](area.md) | area |  |  |
 | 0x0C | 2 / Little | u16 | amount_of_states |  |  |
 | 0x0E | ? / - | [WorldState](worldstate.md)[amount_of_states] | states |  |  |
-
-# SMSG_INIT_WORLD_STATES
 
 ## Client Version 3.3.5
 

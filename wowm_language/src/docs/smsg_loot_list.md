@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x0C | - / - | [PackedGuid](../spec/packed-guid.md) | master_looter |  |  |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | group_looter |  |  |
 
-# SMSG_LOOT_LIST
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

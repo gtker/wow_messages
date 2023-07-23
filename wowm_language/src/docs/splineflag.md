@@ -88,8 +88,6 @@ Used in:
 * [MovementBlock](movementblock.md)
 * [SMSG_MONSTER_MOVE](smsg_monster_move.md)
 * [SMSG_MONSTER_MOVE_TRANSPORT](smsg_monster_move_transport.md)
-# SplineFlag
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

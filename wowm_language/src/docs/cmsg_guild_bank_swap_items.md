@@ -91,8 +91,6 @@ Else:
 | 0x2D | 1 / - | u8 | split_amount |  |  |
 | 0x2E | ? / - | u8[-] | unknown5 |  | cmangos-tbc/mangosone has extra |
 
-# CMSG_GUILD_BANK_SWAP_ITEMS
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

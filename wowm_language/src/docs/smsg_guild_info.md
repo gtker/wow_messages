@@ -37,8 +37,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | amount_of_characters_in_guild |  |  |
 | - | 4 / Little | u32 | amount_of_accounts_in_guild |  |  |
 
-# SMSG_GUILD_INFO
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

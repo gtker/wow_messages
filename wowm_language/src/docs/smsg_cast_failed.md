@@ -80,8 +80,6 @@ Else If result is equal to `EQUIPPED_ITEM_CLASS`:
 | 0x26 | 4 / Little | u32 | item_sub_class |  |  |
 | 0x2A | 4 / Little | u32 | item_inventory_type |  |  |
 
-# SMSG_CAST_FAILED
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

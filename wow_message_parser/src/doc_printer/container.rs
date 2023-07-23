@@ -12,10 +12,10 @@ use std::fmt::Write;
 use std::io::Read;
 use std::slice::Iter;
 
-pub(crate) fn print_docs_for_container(e: &Container, o: &Objects) -> Writer {
+pub(crate) fn print_docs_for_container(e: &Container, o: &Objects, print_header: bool) -> Writer {
     let mut s = Writer::new();
 
-    doc_printer::common(&mut s, e.tags(), e.name());
+    doc_printer::common(&mut s, e.tags(), e.name(), print_header);
 
     s.wln("### Wowm Representation");
     s.newline();

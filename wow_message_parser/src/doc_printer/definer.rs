@@ -5,8 +5,15 @@ use crate::rust_printer::writer::Writer;
 use crate::wowm_printer::get_definer_wowm_definition;
 use crate::{doc_printer, ObjectTags};
 
-fn definer_common(s: &mut Writer, tags: &ObjectTags, fileinfo: &FileInfo, ty: &str, e: &Definer) {
-    doc_printer::common(s, tags, e.name());
+fn definer_common(
+    s: &mut Writer,
+    tags: &ObjectTags,
+    fileinfo: &FileInfo,
+    ty: &str,
+    e: &Definer,
+    print_header: bool,
+) {
+    doc_printer::common(s, tags, e.name(), print_header);
 
     s.wln("### Wowm Representation");
     s.newline();
@@ -21,10 +28,10 @@ fn definer_common(s: &mut Writer, tags: &ObjectTags, fileinfo: &FileInfo, ty: &s
     s.wln("```");
 }
 
-pub(crate) fn print_docs_for_enum(e: &Definer) -> Writer {
+pub(crate) fn print_docs_for_enum(e: &Definer, print_header: bool) -> Writer {
     let mut s = Writer::new();
 
-    definer_common(&mut s, e.tags(), e.file_info(), "enum", e);
+    definer_common(&mut s, e.tags(), e.file_info(), "enum", e, print_header);
 
     print_definer_table(&mut s, e);
 
@@ -41,10 +48,10 @@ pub(crate) fn print_docs_for_enum(e: &Definer) -> Writer {
     s
 }
 
-pub(crate) fn print_docs_for_flag(e: &Definer) -> Writer {
+pub(crate) fn print_docs_for_flag(e: &Definer, print_header: bool) -> Writer {
     let mut s = Writer::new();
 
-    definer_common(&mut s, e.tags(), e.file_info(), "flag", e);
+    definer_common(&mut s, e.tags(), e.file_info(), "flag", e, print_header);
 
     print_definer_table(&mut s, e);
 

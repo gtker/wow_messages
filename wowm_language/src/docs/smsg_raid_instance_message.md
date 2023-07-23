@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x08 | 4 / - | [Map](map.md) | map |  |  |
 | 0x0C | 4 / Little | u32 | time_left |  |  |
 
-# SMSG_RAID_INSTANCE_MESSAGE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -63,8 +61,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / - | [RaidInstanceMessage](raidinstancemessage.md) | message_type |  |  |
 | 0x08 | 4 / - | [Map](map.md) | map |  |  |
 | 0x0C | 4 / Little | u32 | time_left |  |  |
-
-# SMSG_RAID_INSTANCE_MESSAGE
 
 ## Client Version 3.3.5
 

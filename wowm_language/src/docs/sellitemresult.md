@@ -31,8 +31,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [SMSG_SELL_ITEM](smsg_sell_item.md)
 
-# SellItemResult
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

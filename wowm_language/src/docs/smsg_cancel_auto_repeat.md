@@ -24,8 +24,6 @@ SMSG have a header of 4 bytes.
 
 This message has no fields in the body.
 
-# SMSG_CANCEL_AUTO_REPEAT
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

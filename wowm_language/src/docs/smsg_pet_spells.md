@@ -54,8 +54,6 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 1 / - | u8 | amount_of_cooldowns |  |  |
 | - | ? / - | [PetSpellCooldown](petspellcooldown.md)[amount_of_cooldowns] | cooldowns |  |  |
 
-# SMSG_PET_SPELLS
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

@@ -46,8 +46,6 @@ CMSG have a header of 6 bytes.
 159, 246, 189, 62, // MovementInfo.sin_angle: f32
 0, 0, 224, 64, // MovementInfo.xy_speed: f32
 ```
-# MSG_MOVE_JUMP_Client
-
 ## Client Version 2.4.3
 
 ### Wowm Representation

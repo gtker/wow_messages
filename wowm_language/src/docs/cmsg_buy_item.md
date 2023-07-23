@@ -33,8 +33,6 @@ CMSG have a header of 6 bytes.
 | 0x12 | 1 / - | u8 | amount |  |  |
 | 0x13 | 1 / - | u8 | unknown1 |  | cmangos says this is hardcoded to 1 in the TBC client. |
 
-# CMSG_BUY_ITEM
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

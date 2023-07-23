@@ -36,8 +36,6 @@ If error is equal to `NOT_IN_GROUP`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x08 | - / - | CString | target_name |  |  |
 
-# SMSG_REFER_A_FRIEND_FAILURE
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

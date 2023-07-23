@@ -66,8 +66,6 @@ Else If move_type is equal to `FACING_SPOT`:
 | - | 4 / Little | u32 | duration |  |  |
 | - | - / - | [MonsterMoveSpline](../spec/monster-move-spline.md) | splines |  |  |
 
-# SMSG_MONSTER_MOVE
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

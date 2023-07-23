@@ -50,8 +50,6 @@ CMSG have a header of 6 bytes.
 255, 255, 255, 255, // emote: u32
 0, 0, 0, 0, 0, 0, 0, 0, // target: Guid
 ```
-# CMSG_TEXT_EMOTE
-
 ## Client Version 2.4.3
 
 ### Description
@@ -90,8 +88,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | 4 / - | [TextEmote](textemote.md) | text_emote |  |  |
 | 0x0A | 4 / Little | u32 | emote |  |  |
 | 0x0E | 8 / Little | [Guid](../spec/packed-guid.md) | target | Guid targeted by the client. |  |
-
-# CMSG_TEXT_EMOTE
 
 ## Client Version 3.3.5
 

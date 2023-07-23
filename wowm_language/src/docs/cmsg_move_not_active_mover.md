@@ -29,8 +29,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | old_mover |  |  |
 | 0x0E | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
-# CMSG_MOVE_NOT_ACTIVE_MOVER
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -59,8 +57,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | old_mover |  |  |
 | 0x0E | - / - | [MovementInfo](movementinfo.md) | info |  |  |
-
-# CMSG_MOVE_NOT_ACTIVE_MOVER
 
 ## Client Version 3.3.5
 

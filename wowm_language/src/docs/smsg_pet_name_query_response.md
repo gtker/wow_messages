@@ -42,8 +42,6 @@ SMSG have a header of 4 bytes.
 65, 66, 67, 68, 69, 70, 0, // name: CString
 222, 202, 250, 0, // pet_name_timestamp: u32
 ```
-# SMSG_PET_NAME_QUERY_RESPONSE
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

@@ -37,8 +37,6 @@ SMSG have a header of 4 bytes.
 | 0x18 | 4 / Little | u32 | item_random_property_id |  |  |
 | 0x1C | 4 / Little | Milliseconds | countdown_time |  |  |
 
-# SMSG_LOOT_START_ROLL
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

@@ -27,8 +27,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / - | [Map](map.md) | map |  |  |
 
-# CMSG_LEAVE_BATTLEFIELD
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -61,8 +59,6 @@ CMSG have a header of 6 bytes.
 | 0x07 | 1 / - | u8 | unknown2 |  |  |
 | 0x08 | 4 / - | [Map](map.md) | map |  |  |
 | 0x0C | 2 / Little | u16 | unknown3 |  |  |
-
-# CMSG_LEAVE_BATTLEFIELD
 
 ## Client Version 3.3.5
 

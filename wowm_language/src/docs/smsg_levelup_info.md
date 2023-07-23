@@ -49,8 +49,6 @@ SMSG have a header of 4 bytes.
 | 0x2C | 4 / Little | u32 | intellect |  |  |
 | 0x30 | 4 / Little | u32 | spirit |  |  |
 
-# SMSG_LEVELUP_INFO
-
 ## Client Version 3
 
 ### Wowm Representation

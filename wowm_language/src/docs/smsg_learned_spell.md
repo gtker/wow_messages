@@ -27,8 +27,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | id |  |  |
 
-# SMSG_LEARNED_SPELL
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -55,8 +53,6 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 4 / Little | u32 | id |  |  |
-
-# SMSG_LEARNED_SPELL
 
 ## Client Version 3.3.5
 

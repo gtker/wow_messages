@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 1 / - | u8 | amount_of_mails |  |  |
 | 0x05 | ? / - | [Mail](mail.md)[amount_of_mails] | mails |  |  |
 
-# SMSG_MAIL_LIST_RESULT
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -59,8 +57,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | 1 / - | u8 | amount_of_mails |  |  |
 | 0x05 | ? / - | [Mail](mail.md)[amount_of_mails] | mails |  |  |
-
-# SMSG_MAIL_LIST_RESULT
 
 ## Client Version 3.3.5
 

@@ -59,8 +59,6 @@ Client responds to having movement speed set to 7 in Northshire Abbey.
 57, 3, 0, 0, // MovementInfo.fall_time: f32
 0, 0, 224, 64, // new_speed: f32
 ```
-# CMSG_FORCE_RUN_SPEED_CHANGE_ACK
-
 ## Client Version 2.4.3
 
 ### Description
@@ -97,8 +95,6 @@ CMSG have a header of 6 bytes.
 | 0x0E | 4 / Little | u32 | counter |  |  |
 | 0x12 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 | - | 4 / Little | f32 | new_speed |  |  |
-
-# CMSG_FORCE_RUN_SPEED_CHANGE_ACK
 
 ## Client Version 3.3.5
 

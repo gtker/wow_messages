@@ -50,8 +50,6 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 3, // opcode (3)
 14, // result: LoginResult SUCCESS_SURVEY (0x0E)
 ```
-# CMD_AUTH_RECONNECT_PROOF_Server
-
 ## Protocol Version 5, Protocol Version 6, Protocol Version 7
 
 ### Description
@@ -83,8 +81,6 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x01 | 1 / - | [LoginResult](loginresult.md) | result |  |  |
 | 0x02 | 2 / Little | u16 | padding |  |  |
-
-# CMD_AUTH_RECONNECT_PROOF_Server
 
 ## Protocol Version 8
 

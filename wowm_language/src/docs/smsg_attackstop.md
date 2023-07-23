@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x0C | 8 / Little | [Guid](../spec/packed-guid.md) | enemy |  |  |
 | 0x14 | 4 / Little | u32 | unknown1 |  | vmangos: set to 0 with comment: unk, can be 1 also |
 
-# SMSG_ATTACKSTOP
-
 ## Client Version 1.8, Client Version 1.9, Client Version 1.10, Client Version 1.11, Client Version 1.12, Client Version 2, Client Version 3
 
 ### Wowm Representation

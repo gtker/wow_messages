@@ -27,8 +27,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 1 / - | [BattlefieldPortAction](battlefieldportaction.md) | action |  |  |
 
-# CMSG_BATTLEFIELD_PORT
-
 ## Client Version 1.12
 
 ### Wowm Representation
@@ -57,8 +55,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | 4 / - | [Map](map.md) | map |  |  |
 | 0x0A | 1 / - | [BattlefieldPortAction](battlefieldportaction.md) | action |  |  |
-
-# CMSG_BATTLEFIELD_PORT
 
 ## Client Version 2.4.3, Client Version 3
 

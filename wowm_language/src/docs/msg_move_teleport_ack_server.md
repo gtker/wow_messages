@@ -37,8 +37,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | movement_counter |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
-# MSG_MOVE_TELEPORT_ACK_Server
-
 ## Client Version 2.4.3
 
 ### Description
@@ -75,8 +73,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
 | - | 4 / Little | u32 | movement_counter |  |  |
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
-
-# MSG_MOVE_TELEPORT_ACK_Server
 
 ## Client Version 3.3.5
 

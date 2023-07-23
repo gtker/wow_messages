@@ -47,8 +47,6 @@ SMSG have a header of 4 bytes.
 | 0x17 | 4 / Little | u32 | guild_id |  |  |
 | 0x1B | 44 / - | u32[11] | display_ids |  | This array contains the: HEAD, SHOULDERS, BODY, CHEST, WAIST, LEGS, FEET, WRISTS, HANDS, BACK, and TABARD. |
 
-# SMSG_MIRRORIMAGE_DATA
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

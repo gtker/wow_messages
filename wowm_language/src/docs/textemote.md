@@ -358,8 +358,6 @@ Used in:
 * [CMSG_TEXT_EMOTE](cmsg_text_emote.md)
 * [SMSG_TEXT_EMOTE](smsg_text_emote.md)
 
-# TextEmote
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -745,8 +743,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 Used in:
 * [CMSG_TEXT_EMOTE](cmsg_text_emote.md)
 * [SMSG_TEXT_EMOTE](smsg_text_emote.md)
-
-# TextEmote
 
 ## Client Version 3.3.5
 

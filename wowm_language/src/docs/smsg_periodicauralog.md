@@ -35,8 +35,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | amount_of_auras |  |  |
 | - | ? / - | [AuraLog](auralog.md)[amount_of_auras] | auras |  |  |
 
-# SMSG_PERIODICAURALOG
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -71,8 +69,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | spell |  |  |
 | - | 4 / Little | u32 | amount_of_auras |  |  |
 | - | ? / - | [AuraLog](auralog.md)[amount_of_auras] | auras |  |  |
-
-# SMSG_PERIODICAURALOG
 
 ## Client Version 3.3.5
 

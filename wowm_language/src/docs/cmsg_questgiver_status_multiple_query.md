@@ -24,8 +24,6 @@ CMSG have a header of 6 bytes.
 
 This message has no fields in the body.
 
-# CMSG_QUESTGIVER_STATUS_MULTIPLE_QUERY
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

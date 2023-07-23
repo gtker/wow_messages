@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x0C | 1 / - | u8 | amount_of_petitions |  |  |
 | 0x0D | ? / - | [PetitionShowlist](petitionshowlist.md)[amount_of_petitions] | petitions |  |  |
 
-# SMSG_PETITION_SHOWLIST
-
 ## Client Version 2.4.3, Client Version 3.3.5
 
 ### Wowm Representation

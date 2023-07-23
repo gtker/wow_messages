@@ -50,8 +50,6 @@ Used in:
 * [SMSG_SEND_MAIL_RESULT](smsg_send_mail_result.md)
 * [SMSG_SEND_MAIL_RESULT](smsg_send_mail_result.md)
 
-# MailResultTwo
-
 ## Client Version 3.3.5
 
 ### Comment

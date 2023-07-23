@@ -35,8 +35,6 @@ SMSG have a header of 4 bytes.
 | 0x11 | 4 / Little | u32 | number_of_battlegrounds |  |  |
 | 0x15 | ? / - | u32[number_of_battlegrounds] | battlegrounds |  |  |
 
-# SMSG_BATTLEFIELD_LIST
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -69,8 +67,6 @@ SMSG have a header of 4 bytes.
 | 0x0C | 4 / - | [BattlegroundType](battlegroundtype.md) | battleground_type |  |  |
 | 0x10 | 4 / Little | u32 | number_of_battlegrounds |  |  |
 | 0x14 | ? / - | u32[number_of_battlegrounds] | battlegrounds |  |  |
-
-# SMSG_BATTLEFIELD_LIST
 
 ## Client Version 3.3.5
 

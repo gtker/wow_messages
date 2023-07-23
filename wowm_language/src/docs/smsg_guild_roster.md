@@ -37,8 +37,6 @@ SMSG have a header of 4 bytes.
 | - | ? / - | u32[amount_of_rights] | rights |  |  |
 | - | ? / - | [GuildMember](guildmember.md)[amount_of_members] | members |  |  |
 
-# SMSG_GUILD_ROSTER
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -75,8 +73,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | amount_of_rights |  |  |
 | - | ? / - | [GuildRights](guildrights.md)[amount_of_rights] | rights |  |  |
 | - | ? / - | [GuildMember](guildmember.md)[amount_of_members] | members |  |  |
-
-# SMSG_GUILD_ROSTER
 
 ## Client Version 3.3.5
 

@@ -29,8 +29,6 @@ CMSG have a header of 6 bytes.
 | 0x06 | 8 / Little | [Guid](../spec/packed-guid.md) | banker |  |  |
 | 0x0E | 1 / - | u8 | tab |  |  |
 
-# CMSG_GUILD_BANK_BUY_TAB
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

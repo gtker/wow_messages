@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x08 | - / - | CString | member |  |  |
 | - | 4 / - | [PartyResult](partyresult.md) | result |  |  |
 
-# SMSG_PARTY_COMMAND_RESULT
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -63,8 +61,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / - | [PartyOperation](partyoperation.md) | operation |  |  |
 | 0x08 | - / - | CString | member |  |  |
 | - | 4 / - | [PartyResult](partyresult.md) | result |  |  |
-
-# SMSG_PARTY_COMMAND_RESULT
 
 ## Client Version 3
 

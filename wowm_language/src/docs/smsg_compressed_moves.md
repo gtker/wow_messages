@@ -27,8 +27,6 @@ SMSG have a header of 4 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x04 | ? / - | [CompressedMove](compressedmove.md)[-] | moves |  |  |
 
-# SMSG_COMPRESSED_MOVES
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

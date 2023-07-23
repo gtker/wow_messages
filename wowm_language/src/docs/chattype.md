@@ -90,8 +90,6 @@ Used in:
 * [CMSG_MESSAGECHAT](cmsg_messagechat.md)
 * [SMSG_MESSAGECHAT](smsg_messagechat.md)
 
-# ChatType
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -206,8 +204,6 @@ Used in:
 * [CMSG_MESSAGECHAT](cmsg_messagechat.md)
 * [SMSG_GM_MESSAGECHAT](smsg_gm_messagechat.md)
 * [SMSG_MESSAGECHAT](smsg_messagechat.md)
-
-# ChatType
 
 ## Client Version 3.3.5
 

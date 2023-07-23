@@ -187,8 +187,6 @@ Used in:
 * [SMSG_CHAR_DELETE](smsg_char_delete.md)
 * [SMSG_CHAR_RENAME](smsg_char_rename.md)
 
-# WorldResult
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -393,8 +391,6 @@ Used in:
 * [SMSG_CHAR_CREATE](smsg_char_create.md)
 * [SMSG_CHAR_DELETE](smsg_char_delete.md)
 * [SMSG_CHAR_RENAME](smsg_char_rename.md)
-
-# WorldResult
 
 ## Client Version 3.3.5
 

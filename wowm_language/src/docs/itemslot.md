@@ -245,8 +245,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [CMSG_SWAP_INV_ITEM](cmsg_swap_inv_item.md)
 
-# ItemSlot
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -537,8 +535,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 
 Used in:
 * [CMSG_SWAP_INV_ITEM](cmsg_swap_inv_item.md)
-
-# ItemSlot
 
 ## Client Version 3.3.5
 

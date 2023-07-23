@@ -48,8 +48,6 @@ If status is equal to `HAS_TEXT`:
 | - | 1 / - | [GmTicketEscalationStatus](gmticketescalationstatus.md) | escalation_status |  |  |
 | - | 1 / - | Bool | read_by_gm |  |  |
 
-# SMSG_GMTICKET_GETTICKET
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -97,8 +95,6 @@ If status is equal to `HAS_TEXT`:
 | - | 4 / Little | f32 | days_since_last_updated |  |  |
 | - | 1 / - | [GmTicketEscalationStatus](gmticketescalationstatus.md) | escalation_status |  |  |
 | - | 1 / - | Bool | read_by_gm |  |  |
-
-# SMSG_GMTICKET_GETTICKET
 
 ## Client Version 3
 

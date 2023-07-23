@@ -39,8 +39,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_PETITION_QUERY_RESPONSE](smsg_petition_query_response.md)
-# AllowedRace
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -97,8 +95,6 @@ The basic type is `u32`, a 4 byte (32 bit) little endian integer.
 
 Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
-# AllowedRace
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

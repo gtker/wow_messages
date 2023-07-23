@@ -27,8 +27,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
-# MSG_MOVE_STOP_PITCH_Client
-
 ## Client Version 2.4.3
 
 ### Wowm Representation

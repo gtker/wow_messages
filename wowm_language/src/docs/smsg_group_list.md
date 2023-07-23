@@ -48,8 +48,6 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | master_loot |  | Zero if loot_setting is not MASTER_LOOT |
 | - | 1 / - | [ItemQuality](itemquality.md) | loot_threshold |  |  |
 
-# SMSG_GROUP_LIST
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -105,8 +103,6 @@ Optionally the following fields can be present. This can only be detected by loo
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | master_loot |  | Zero if loot_setting is not MASTER_LOOT |
 | - | 1 / - | [ItemQuality](itemquality.md) | loot_threshold |  |  |
 | - | 1 / - | [DungeonDifficulty](dungeondifficulty.md) | difficulty |  |  |
-
-# SMSG_GROUP_LIST
 
 ## Client Version 3.3.5
 

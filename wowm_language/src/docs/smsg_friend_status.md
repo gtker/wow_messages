@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 1 / - | [FriendResult](friendresult.md) | result |  |  |
 | 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 
-# SMSG_FRIEND_STATUS
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

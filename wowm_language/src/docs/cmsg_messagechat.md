@@ -64,8 +64,6 @@ Say message.
 7, 0, 0, 0, // language: Language COMMON (7)
 84, 104, 105, 115, 32, 105, 115, 32, 97, 32, 115, 97, 121, 32, 109, 101, 115, 115, 97, 103, 101, 46, 0, // message: CString
 ```
-# CMSG_MESSAGECHAT
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -114,8 +112,6 @@ Else If chat_type is equal to `CHANNEL`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | CString | channel |  |  |
 | - | - / - | CString | message |  |  |
-
-# CMSG_MESSAGECHAT
 
 ## Client Version 3.3.5
 

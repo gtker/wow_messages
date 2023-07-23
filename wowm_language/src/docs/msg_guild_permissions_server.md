@@ -35,8 +35,6 @@ SMSG have a header of 4 bytes.
 | 0x10 | 1 / - | u8 | purchased_bank_tabs |  |  |
 | 0x11 | 48 / - | [BankTab](banktab.md)[6] | bank_tabs |  |  |
 
-# MSG_GUILD_PERMISSIONS_Server
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

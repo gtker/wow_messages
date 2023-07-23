@@ -54,8 +54,6 @@ If flags contains `AMMO`:
 | - | 4 / Little | u32 | ammo_display_id |  |  |
 | - | 4 / Little | u32 | ammo_inventory_type |  |  |
 
-# SMSG_SPELL_GO
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -111,8 +109,6 @@ If flags contains `AMMO`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | ammo_display_id |  |  |
 | - | 4 / Little | u32 | ammo_inventory_type |  |  |
-
-# SMSG_SPELL_GO
 
 ## Client Version 3.3.5
 

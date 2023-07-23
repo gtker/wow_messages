@@ -41,8 +41,6 @@ SMSG have a header of 4 bytes.
 | 0x24 | 1 / - | u8 | winning_roll |  | rollnumber related to SMSG_LOOT_ROLL |
 | 0x25 | 1 / - | [RollVote](rollvote.md) | vote |  | Rolltype related to SMSG_LOOT_ROLL |
 
-# SMSG_LOOT_ROLL_WON
-
 ## Client Version 2, Client Version 3
 
 ### Wowm Representation

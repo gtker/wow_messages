@@ -120,8 +120,6 @@ Most minimal package required to load into the world. Also requires a valid [SMS
 // [0].Object.mask2: UpdateMask
 // objects: Object[amount_of_objects]
 ```
-# SMSG_UPDATE_OBJECT
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -152,8 +150,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / Little | u32 | amount_of_objects |  |  |
 | 0x08 | 1 / - | u8 | has_transport |  |  |
 | 0x09 | ? / - | [Object](object.md)[amount_of_objects] | objects |  |  |
-
-# SMSG_UPDATE_OBJECT
 
 ## Client Version 3.3.5
 

@@ -42,8 +42,6 @@ If status is equal to `ONLINE`:
 | - | 4 / Little | Level32 | level |  |  |
 | - | 4 / - | [Class](class.md) | class |  |  |
 
-# Relation
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

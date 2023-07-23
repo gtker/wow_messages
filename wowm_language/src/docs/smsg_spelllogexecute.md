@@ -33,8 +33,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | amount_of_effects |  |  |
 | - | ? / - | [SpellLog](spelllog.md)[amount_of_effects] | logs |  |  |
 
-# SMSG_SPELLLOGEXECUTE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -67,8 +65,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | spell |  |  |
 | - | 4 / Little | u32 | amount_of_effects |  |  |
 | - | ? / - | [SpellLog](spelllog.md)[amount_of_effects] | logs |  |  |
-
-# SMSG_SPELLLOGEXECUTE
 
 ## Client Version 3.3.5
 

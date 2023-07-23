@@ -31,8 +31,6 @@ SMSG have a header of 4 bytes.
 | 0x0C | 4 / Little | u32 | spell |  |  |
 | 0x10 | 1 / - | [SpellCastResult](spellcastresult.md) | result |  |  |
 
-# SMSG_SPELL_FAILURE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -63,8 +61,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x0C | 4 / Little | u32 | spell |  |  |
 | 0x10 | 1 / - | [SpellCastResult](spellcastresult.md) | result |  |  |
-
-# SMSG_SPELL_FAILURE
 
 ## Client Version 3.3.5
 

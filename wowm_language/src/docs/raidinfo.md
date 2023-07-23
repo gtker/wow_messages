@@ -20,8 +20,6 @@ struct RaidInfo {
 | 0x04 | 4 / Little | u32 | reset_time |  |  |
 | 0x08 | 4 / Little | u32 | instance_id |  |  |
 
-# RaidInfo
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -43,8 +41,6 @@ struct RaidInfo {
 | 0x04 | 4 / Little | u32 | reset_time |  |  |
 | 0x08 | 4 / Little | u32 | instance_id |  |  |
 | 0x0C | 4 / Little | u32 | index |  | Neither 1.12 nor 3.3.5 have an index field so this might not be accurate. |
-
-# RaidInfo
 
 ## Client Version 3.3.5
 

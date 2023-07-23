@@ -28,8 +28,6 @@ SMSG have a header of 4 bytes.
 
 This message has no fields in the body.
 
-# SMSG_PET_NAME_INVALID
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Comment

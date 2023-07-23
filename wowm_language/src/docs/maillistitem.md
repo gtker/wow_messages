@@ -34,8 +34,6 @@ struct MailListItem {
 | 0x5E | 4 / Little | u32 | max_durability |  |  |
 | 0x62 | 4 / Little | u32 | durability |  |  |
 
-# MailListItem
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

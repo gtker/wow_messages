@@ -2199,8 +2199,6 @@ Used in:
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
 * [WhoPlayer](whoplayer.md)
 
-# Area
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -5525,8 +5523,6 @@ Used in:
 * [SMSG_SUMMON_REQUEST](smsg_summon_request.md)
 * [SMSG_ZONE_UNDER_ATTACK](smsg_zone_under_attack.md)
 * [WhoPlayer](whoplayer.md)
-
-# Area
 
 ## Client Version 3.3.5
 

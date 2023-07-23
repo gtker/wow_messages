@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 1 / - | u8 | tab |  |  |
 | 0x05 | - / - | CString | text |  |  |
 
-# MSG_QUERY_GUILD_BANK_TEXT_Server
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

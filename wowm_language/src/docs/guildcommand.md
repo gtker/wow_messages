@@ -32,8 +32,6 @@ Used in:
 * [SMSG_GUILD_COMMAND_RESULT](smsg_guild_command_result.md)
 * [SMSG_GUILD_COMMAND_RESULT](smsg_guild_command_result.md)
 
-# GuildCommand
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

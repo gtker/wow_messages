@@ -60,8 +60,6 @@ If result is equal to `RESPONSE_SUCCESS`:
 239, 190, 173, 222, 0, 0, 0, 0, // character: Guid
 68, 101, 97, 100, 98, 101, 101, 102, 0, // new_name: CString
 ```
-# SMSG_CHAR_RENAME
-
 ## Client Version 2.4.3
 
 ### Description
@@ -103,8 +101,6 @@ If result is equal to `RESPONSE_SUCCESS`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | character |  |  |
 | 0x0D | - / - | CString | new_name |  |  |
-
-# SMSG_CHAR_RENAME
 
 ## Client Version 3.3.5
 

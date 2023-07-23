@@ -53,8 +53,6 @@ Set time to 2022-08-13 (Wednesday) 08:10 and timescale 0.016666668 (1/60).
 10, 26, 115, 22, // datetime: DateTime
 137, 136, 136, 60, // timescale: f32
 ```
-# SMSG_LOGIN_SETTIMESPEED
-
 ## Client Version 3.1.2, Client Version 3.2, Client Version 3.3
 
 ### Wowm Representation

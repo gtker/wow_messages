@@ -33,8 +33,6 @@ CMSG have a header of 6 bytes.
 | 0x12 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 | - | 4 / Little | u32 | apply |  |  |
 
-# CMSG_MOVE_FEATHER_FALL_ACK
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -67,8 +65,6 @@ CMSG have a header of 6 bytes.
 | 0x0E | 4 / Little | u32 | movement_counter |  |  |
 | 0x12 | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 | - | 4 / Little | u32 | apply |  |  |
-
-# CMSG_MOVE_FEATHER_FALL_ACK
 
 ## Client Version 3.3.5
 

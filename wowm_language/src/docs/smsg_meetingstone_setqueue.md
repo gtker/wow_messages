@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 | 0x04 | 4 / - | [Area](area.md) | area |  |  |
 | 0x08 | 1 / - | [MeetingStoneStatus](meetingstonestatus.md) | status |  |  |
 
-# SMSG_MEETINGSTONE_SETQUEUE
-
 ## Client Version 2.4.3
 
 ### Wowm Representation

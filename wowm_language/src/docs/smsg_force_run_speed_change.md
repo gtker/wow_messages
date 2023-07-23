@@ -54,8 +54,6 @@ Force speed to 7
 0, 0, 0, 0, // move_event: u32
 0, 0, 224, 64, // speed: f32
 ```
-# SMSG_FORCE_RUN_SPEED_CHANGE
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Description

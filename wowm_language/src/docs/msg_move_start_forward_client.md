@@ -42,8 +42,6 @@ CMSG have a header of 6 bytes.
 44, 231, 248, 62, // MovementInfo.orientation: f32
 133, 3, 0, 0, // MovementInfo.fall_time: f32
 ```
-# MSG_MOVE_START_FORWARD_Client
-
 ## Client Version 2.4.3
 
 ### Wowm Representation

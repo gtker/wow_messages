@@ -33,8 +33,6 @@ CMSG have a header of 6 bytes.
 | 0x12 | 4 / Little | u32 | instance_id |  | vmangos: 0 if First Available selected |
 | 0x16 | 1 / - | Bool | join_as_group |  |  |
 
-# CMSG_BATTLEMASTER_JOIN
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -67,8 +65,6 @@ CMSG have a header of 6 bytes.
 | 0x0E | 4 / - | [Map](map.md) | map |  |  |
 | 0x12 | 4 / Little | u32 | instance_id |  | vmangos: 0 if First Available selected |
 | 0x16 | 1 / - | Bool | join_as_group |  |  |
-
-# CMSG_BATTLEMASTER_JOIN
 
 ## Client Version 3.3.5
 

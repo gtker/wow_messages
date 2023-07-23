@@ -31,8 +31,6 @@ CMSG have a header of 6 bytes.
 | 0x0A | 4 / Little | u32 | mail_id |  | vmangos/cmangos/mangoszero: this value can be item id in bag, but it is also mail id |
 | 0x0E | 4 / Little | u32 | unknown1 |  | vmangos/cmangos/mangoszero: maybe something like state - 0x70000000 |
 
-# CMSG_ITEM_TEXT_QUERY
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

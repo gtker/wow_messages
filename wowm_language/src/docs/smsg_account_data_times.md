@@ -52,8 +52,6 @@ Zeroed out message needed for showing chat box.
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // data: u32[32]
 ```
-# SMSG_ACCOUNT_DATA_TIMES
-
 ## Client Version 3.3.5
 
 ### Comment

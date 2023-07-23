@@ -35,8 +35,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [SMSG_QUESTGIVER_STATUS](smsg_questgiver_status.md)
 
-# QuestGiverStatus
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -74,8 +72,6 @@ The basic type is `u8`, a 1 byte (8 bit) integer.
 Used in:
 * [QuestGiverStatusReport](questgiverstatusreport.md)
 * [SMSG_QUESTGIVER_STATUS](smsg_questgiver_status.md)
-
-# QuestGiverStatus
 
 ## Client Version 3.3.5
 

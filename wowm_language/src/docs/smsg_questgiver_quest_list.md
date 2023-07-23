@@ -37,8 +37,6 @@ SMSG have a header of 4 bytes.
 | - | 1 / - | u8 | amount_of_entries |  |  |
 | - | ? / - | [QuestItem](questitem.md)[amount_of_entries] | quest_items |  |  |
 
-# SMSG_QUESTGIVER_QUEST_LIST
-
 ## Client Version 3.3.5
 
 ### Wowm Representation

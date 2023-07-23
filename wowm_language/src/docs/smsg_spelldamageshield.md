@@ -33,8 +33,6 @@ SMSG have a header of 4 bytes.
 | 0x14 | 4 / Little | u32 | damage |  |  |
 | 0x18 | 4 / - | [SpellSchool](spellschool.md) | school |  |  |
 
-# SMSG_SPELLDAMAGESHIELD
-
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -69,8 +67,6 @@ SMSG have a header of 4 bytes.
 | 0x14 | 4 / Little | u32 | spell |  |  |
 | 0x18 | 4 / Little | u32 | damage |  |  |
 | 0x1C | 4 / - | [SpellSchool](spellschool.md) | school |  |  |
-
-# SMSG_SPELLDAMAGESHIELD
 
 ## Client Version 3.3.5
 

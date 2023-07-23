@@ -27,8 +27,6 @@ CMSG have a header of 6 bytes.
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x06 | - / - | CString | channel_name |  |  |
 
-# CMSG_LEAVE_CHANNEL
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation

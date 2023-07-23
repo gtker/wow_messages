@@ -42,8 +42,6 @@ struct TradeSlot {
 | 0x35 | 4 / Little | u32 | max_durability |  |  |
 | 0x39 | 4 / Little | u32 | durability |  |  |
 
-# TradeSlot
-
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation
