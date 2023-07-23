@@ -79,7 +79,7 @@ impl CMD_REALM_LIST_Server {
     fn read_inner<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // size: u16
         let _size = crate::util::read_u16_le(&mut r)?;
-        // size is expected to always be self.size (0)
+        // size is dynamic size of the object
 
         // header_padding: u32
         let _header_padding = crate::util::read_u32_le(&mut r)?;
@@ -110,7 +110,7 @@ impl CMD_REALM_LIST_Server {
     async fn tokio_read_inner<R: tokio::io::AsyncReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // size: u16
         let _size = crate::util::tokio_read_u16_le(&mut r).await?;
-        // size is expected to always be self.size (0)
+        // size is dynamic size of the object
 
         // header_padding: u32
         let _header_padding = crate::util::tokio_read_u32_le(&mut r).await?;
@@ -141,7 +141,7 @@ impl CMD_REALM_LIST_Server {
     async fn astd_read_inner<R: async_std::io::ReadExt + Unpin + Send>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // size: u16
         let _size = crate::util::astd_read_u16_le(&mut r).await?;
-        // size is expected to always be self.size (0)
+        // size is dynamic size of the object
 
         // header_padding: u32
         let _header_padding = crate::util::astd_read_u32_le(&mut r).await?;

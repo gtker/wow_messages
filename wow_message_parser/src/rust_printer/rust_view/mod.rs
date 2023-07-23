@@ -320,7 +320,7 @@ fn create_struct_member_definition(
     let mut in_rust_type = true;
     let ty = match d.ty() {
         Type::Integer(i) => {
-            if d.used_as_size_in().is_some() || d.value().is_some() {
+            if d.is_manual_size_field() || d.used_as_size_in().is_some() || d.value().is_some() {
                 in_rust_type = false;
             }
             RustType::Integer(*i)

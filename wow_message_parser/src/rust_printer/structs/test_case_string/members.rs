@@ -191,7 +191,7 @@ fn print_member_definition(
     variable_prefix: &str,
     prefix: &str,
 ) {
-    if d.value().is_some() {
+    if d.value().is_some() || d.is_manual_size_field() {
         return;
     }
 

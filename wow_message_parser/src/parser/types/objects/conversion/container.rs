@@ -29,7 +29,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::ContainerValue;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::UpdateMaskType;
-use crate::{DefinerType, ObjectTags};
+use crate::{DefinerType, ObjectTags, CONTAINER_SELF_SIZE_FIELD};
 
 pub(crate) fn verify_and_set_members(
     members: &mut [ParsedStructMember],
@@ -157,12 +157,23 @@ fn parsed_struct_member_definition_to_struct_member(
     tags: &ObjectTags,
     d: ParsedStructMemberDefinition,
 ) -> StructMemberDefinition {
+    let (is_manual_size_field, value) = if let Some(v) = d.verified_value {
+        if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
+            (true, None)
+        } else {
+            (false, Some(v))
+        }
+    } else {
+        (false, None)
+    };
+
     StructMemberDefinition::new(
         d.name,
         parsed_type_to_type(c, containers, definers, d.struct_type, tags),
-        d.verified_value,
+        value,
         d.used_as_size_in,
         d.used_in_if.unwrap(),
+        is_manual_size_field,
         d.tags,
     )
 }

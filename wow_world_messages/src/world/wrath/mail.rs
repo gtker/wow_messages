@@ -155,7 +155,7 @@ impl Mail {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // size: u16
         let _size = crate::util::read_u16_le(&mut r)?;
-        // size is expected to always be self.size (0)
+        // size is dynamic size of the object
 
         // message_id: u32
         let message_id = crate::util::read_u32_le(&mut r)?;

@@ -7,7 +7,6 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::{ContainerValue, IntegerType};
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::DefinerType;
-use crate::CONTAINER_SELF_SIZE_FIELD;
 
 pub(crate) fn print_write_field_array(
     s: &mut Writer,
@@ -55,19 +54,18 @@ pub(crate) fn print_write_field_integer(
     used_as_size_in: &Option<String>,
     verified_value: &Option<ContainerValue>,
     size_of_fields_before_size: u64,
+    is_manual_size_field: bool,
     postfix: &str,
 ) {
     let basic_type = int_type.rust_str();
 
-    if let Some(value) = verified_value {
-        if value.original_string() == CONTAINER_SELF_SIZE_FIELD {
-            s.wln(format!("w.write_all(&((self.size() - {size_of_fields_before_size}) as {basic_type}).to_le_bytes()){postfix}?;"));
-        } else {
-            s.wln(format!(
-                "w.write_all(&Self::{name}_VALUE.to_le_bytes()){postfix}?;",
-                name = variable_name.to_uppercase(),
-            ));
-        }
+    if is_manual_size_field {
+        s.wln(format!("w.write_all(&((self.size() - {size_of_fields_before_size}) as {basic_type}).to_le_bytes()){postfix}?;"));
+    } else if verified_value.is_some() {
+        s.wln(format!(
+            "w.write_all(&Self::{name}_VALUE.to_le_bytes()){postfix}?;",
+            name = variable_name.to_uppercase(),
+        ));
     } else if let Some(array) = used_as_size_in {
         s.wln(format!(
             "w.write_all(&({variable_prefix}{array}.len() as {basic_type}).to_le_bytes()){postfix}?;",
@@ -108,12 +106,8 @@ pub(crate) fn print_write_definition(
 
     match d.ty() {
         Type::Integer(int_type) => {
-            let size = if let Some(v) = d.value() {
-                if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
-                    e.size_of_fields_before_size()
-                } else {
-                    0
-                }
+            let size = if d.is_manual_size_field() {
+                e.size_of_fields_before_size()
             } else {
                 0
             };
@@ -126,6 +120,7 @@ pub(crate) fn print_write_definition(
                 d.used_as_size_in(),
                 d.value(),
                 size,
+                d.is_manual_size_field(),
                 postfix,
             );
         }

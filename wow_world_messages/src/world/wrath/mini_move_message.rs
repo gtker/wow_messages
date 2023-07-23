@@ -41,7 +41,7 @@ impl MiniMoveMessage {
     pub(crate) fn read<R: Read>(mut r: R) -> Result<Self, crate::errors::ParseErrorKind> {
         // size: u8
         let _size = crate::util::read_u8_le(&mut r)?;
-        // size is expected to always be self.size (0)
+        // size is dynamic size of the object
 
         // opcode: MiniMoveOpcode
         let opcode = crate::util::read_u16_le(&mut r)?.try_into()?;

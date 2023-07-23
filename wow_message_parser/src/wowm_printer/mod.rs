@@ -4,7 +4,7 @@ use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::struct_member::StructMember;
 use crate::parser::types::ty::Type;
 use crate::rust_printer::writer::Writer;
-use crate::ENUM_SELF_VALUE_FIELD;
+use crate::{CONTAINER_SELF_SIZE_FIELD, ENUM_SELF_VALUE_FIELD};
 
 pub(crate) fn get_definer_wowm_definition(kind: &str, e: &Definer, prefix: &str) -> String {
     let mut s = Writer::with_prefix(prefix);
@@ -81,12 +81,17 @@ fn print_members(s: &mut Writer, field: &StructMember) {
             };
 
             s.wln(format!(
-                "{upcast}{ty} {name}{constant};",
+                "{upcast}{ty} {name}{constant}{size_field};",
                 ty = d.ty().str(),
                 name = d.name(),
                 constant = match d.value() {
                     None => "".to_string(),
                     Some(c) => format!(" = {val}", val = c.original_string()),
+                },
+                size_field = if d.is_manual_size_field() {
+                    format!(" = {CONTAINER_SELF_SIZE_FIELD}")
+                } else {
+                    String::new()
                 }
             ));
         }

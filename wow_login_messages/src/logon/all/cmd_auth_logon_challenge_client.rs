@@ -105,7 +105,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
 
         // size: u16
         let _size = crate::util::read_u16_le(&mut r)?;
-        // size is expected to always be self.size (0)
+        // size is dynamic size of the object
 
         // game_name: u32
         let _game_name = crate::util::read_u32_le(&mut r)?;
@@ -155,7 +155,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
 
         // size: u16
         let _size = crate::util::tokio_read_u16_le(&mut r).await?;
-        // size is expected to always be self.size (0)
+        // size is dynamic size of the object
 
         // game_name: u32
         let _game_name = crate::util::tokio_read_u32_le(&mut r).await?;
@@ -205,7 +205,7 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
 
         // size: u16
         let _size = crate::util::astd_read_u16_le(&mut r).await?;
-        // size is expected to always be self.size (0)
+        // size is dynamic size of the object
 
         // game_name: u32
         let _game_name = crate::util::astd_read_u32_le(&mut r).await?;

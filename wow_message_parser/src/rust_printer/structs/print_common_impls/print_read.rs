@@ -204,7 +204,11 @@ fn print_read_definition(
 
     let name = d.name();
     let type_name = d.ty().rust_str();
-    let value_set = if d.value().is_some() { "_" } else { "" };
+    let value_set = if d.value().is_some() || d.is_manual_size_field() {
+        "_"
+    } else {
+        ""
+    };
 
     s.w(format!("{assignment_prefix}{value_set}{name} = "));
 
@@ -377,7 +381,9 @@ fn print_read_definition(
         }
     }
 
-    if let Some(value) = d.value() {
+    if d.is_manual_size_field() {
+        s.wln(format!("// {name} is dynamic size of the object",));
+    } else if let Some(value) = d.value() {
         s.wln(format!(
             "// {name} is expected to always be {constant_string} ({constant_value})",
             constant_string = value.original_string(),

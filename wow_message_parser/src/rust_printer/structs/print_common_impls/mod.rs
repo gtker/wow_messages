@@ -12,7 +12,6 @@ use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
     ImplType, CLIENT_MESSAGE_TRAIT_NAME, PARSE_ERROR, PARSE_ERROR_KIND, SERVER_MESSAGE_TRAIT_NAME,
 };
-use crate::CONTAINER_SELF_SIZE_FIELD;
 
 pub mod print_read;
 pub(crate) mod print_size;
@@ -334,10 +333,11 @@ fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
     if e.any_fields_have_constant_value() {
         s.bodyn(format!("impl {name}", name = e.name()), |s| {
             for d in e.all_definitions() {
+                if d.is_manual_size_field() {
+                    continue;
+                }
+
                 if let Some(v) = d.value() {
-                    if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
-                        continue;
-                    }
                     print_constant_member(s, d.name(), d.ty(), v.original_string(), v.value());
                 }
             }

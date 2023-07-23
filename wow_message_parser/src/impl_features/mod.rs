@@ -6,7 +6,6 @@ use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::ObjectTags;
 use crate::parser::types::ty::Type;
 use crate::rust_printer::DefinerType;
-use crate::CONTAINER_SELF_SIZE_FIELD;
 use serde::Serialize;
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize)]
@@ -227,10 +226,11 @@ fn features_for_definition(f: &mut ImplFeatures, d: &StructMemberDefinition) {
         | Type::FloatingPoint => {
             f.add(Feature::SimpleBuiltInTypes);
 
-            if let Some(v) = d.value() {
-                if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
-                    f.add(Feature::ManualSizeField);
-                }
+            if d.is_manual_size_field() {
+                f.add(Feature::ManualSizeField);
+            }
+
+            if d.value().is_some() {
                 f.add(Feature::ConstantValue);
             }
         }

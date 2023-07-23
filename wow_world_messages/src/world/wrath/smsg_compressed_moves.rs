@@ -31,7 +31,7 @@ impl SMSG_COMPRESSED_MOVES {
 
         // size: u32
         let _size = crate::util::read_u32_le(&mut r)?;
-        // size is expected to always be self.size (0)
+        // size is dynamic size of the object
 
         // moves: MiniMoveMessage[-]
         let moves = {
