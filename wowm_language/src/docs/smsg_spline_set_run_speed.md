@@ -2,8 +2,6 @@
 
 ## Client Version 1.12, Client Version 2, Client Version 3
 
-### Description
-
 Informs the client that the run speed of a unit has changed.
 
 Mangos sends this to third parties that aren't having their speed changed and [SMSG_FORCE_RUN_SPEED_CHANGE](./smsg_force_run_speed_change.md) to the client that has their run speed changed.

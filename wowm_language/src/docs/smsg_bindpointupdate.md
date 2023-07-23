@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Description
-
 Inform the client of a their hearthstone location.
 
 ### Wowm Representation
@@ -37,8 +35,6 @@ SMSG have a header of 4 bytes.
 
 ## Client Version 2.4.3
 
-### Description
-
 Inform the client of a their hearthstone location.
 
 ### Wowm Representation
@@ -71,8 +67,6 @@ SMSG have a header of 4 bytes.
 | 0x14 | 4 / - | [Area](area.md) | area |  |  |
 
 ## Client Version 3.3.5
-
-### Description
 
 Inform the client of a their hearthstone location.
 

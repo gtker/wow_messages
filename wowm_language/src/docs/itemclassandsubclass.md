@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Comment
-
 This is both the class field and the sub class field.
 
 They are combined into one enum because the value of the sub class depends on the value of the class.
@@ -170,8 +168,6 @@ Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 
 ## Client Version 2.4.3
-
-### Comment
 
 This is both the class field and the sub class field.
 
@@ -405,8 +401,6 @@ Used in:
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 
 ## Client Version 3.3.5
-
-### Comment
 
 This is both the class field and the sub class field.
 

@@ -2,8 +2,6 @@
 
 ## Client Version 1
 
-### Comment
-
 if `amount_of_items` is 0 it is supposedly followed by a single u8 with 0 to say that vendor has no items.
 
 ### Wowm Representation
@@ -36,8 +34,6 @@ SMSG have a header of 4 bytes.
 | 0x0D | ? / - | [ListInventoryItem](listinventoryitem.md)[amount_of_items] | items |  |  |
 
 ## Client Version 2.4.3, Client Version 3
-
-### Comment
 
 if `amount_of_items` is 0 it is supposedly followed by a single u8 with 0 to say that vendor has no items.
 

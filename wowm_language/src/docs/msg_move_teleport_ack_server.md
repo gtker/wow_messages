@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Description
-
 Can be response to [CMSG_TELEPORT_TO_UNIT](./cmsg_teleport_to_unit.md).
 
 Can also be a response to [MSG_MOVE_TELEPORT_ACK_Client](./msg_move_teleport_ack_client.md) after being sent.
@@ -39,8 +37,6 @@ SMSG have a header of 4 bytes.
 
 ## Client Version 2.4.3
 
-### Description
-
 Can be response to [CMSG_TELEPORT_TO_UNIT](./cmsg_teleport_to_unit.md).
 
 Can also be a response to [MSG_MOVE_TELEPORT_ACK_Client](./msg_move_teleport_ack_client.md) after being sent.
@@ -75,8 +71,6 @@ SMSG have a header of 4 bytes.
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
 ## Client Version 3.3.5
-
-### Description
 
 Can be response to [CMSG_TELEPORT_TO_UNIT](./cmsg_teleport_to_unit.md).
 

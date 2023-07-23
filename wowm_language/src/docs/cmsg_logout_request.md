@@ -2,13 +2,9 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Description
-
 Sent by client after pressing 'Logout' or 'Exit Game'.
 
 Server should reply with [SMSG_LOGOUT_RESPONSE](./smsg_logout_response.md).
-
-### Comment
 
 Spamming the 'Logout' and 'Exit Game' buttons does not send multiple messages.
 

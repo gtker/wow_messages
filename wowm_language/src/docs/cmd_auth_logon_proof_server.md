@@ -2,8 +2,6 @@
 
 ## Protocol Version 2, Protocol Version 3
 
-### Description
-
 Reply to [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md).
 
 ### Wowm Representation
@@ -52,8 +50,6 @@ If result is equal to `SUCCESS`:
 239, 190, 173, 222, // hardware_survey_id: u32
 ```
 ## Protocol Version 5, Protocol Version 6, Protocol Version 7
-
-### Description
 
 Reply to [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md).
 

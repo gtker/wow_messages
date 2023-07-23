@@ -2,8 +2,6 @@
 
 ## Client Version 0.5, Client Version 0.6, Client Version 0.7, Client Version 0.8, Client Version 0.9, Client Version 0.10, Client Version 0.11, Client Version 0.12, Client Version 1, Client Version 2, Client Version 3
 
-### Comment
-
 Sent in 3.3.5 by using the `bootme` console command. Command not available in 1.12. Available in 0.5.3.
 
 ### Wowm Representation

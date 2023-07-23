@@ -2,8 +2,6 @@
 
 ## Client Version 2.4.3
 
-### Comment
-
 All that exists of this is an implementation in cmangos-tbc.
 
 ### Wowm Representation
@@ -34,8 +32,6 @@ SMSG have a header of 4 bytes.
 | 0x05 | - / - | CString | text |  |  |
 
 ## Client Version 3.3.5
-
-### Comment
 
 All that exists of this is an implementation in cmangos-tbc.
 

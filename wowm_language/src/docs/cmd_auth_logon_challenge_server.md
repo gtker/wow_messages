@@ -2,8 +2,6 @@
 
 ## Protocol Version 2
 
-### Description
-
 Reply to [CMD_AUTH_LOGON_CHALLENGE_Client](./cmd_auth_logon_challenge_client.md).
 
 ### Wowm Representation
@@ -77,8 +75,6 @@ Reply to [CMD_AUTH_LOGON_CHALLENGE_Client](./cmd_auth_logon_challenge_client.md)
 186, 163, 30, 153, 160, 11, 33, 87, 252, 55, 63, 179, 105, 205, 210, 241, // crc_salt: u8[16]
 ```
 ## Protocol Version 3, Protocol Version 5, Protocol Version 6, Protocol Version 7
-
-### Description
 
 Reply to [CMD_AUTH_LOGON_CHALLENGE_Client](./cmd_auth_logon_challenge_client.md).
 

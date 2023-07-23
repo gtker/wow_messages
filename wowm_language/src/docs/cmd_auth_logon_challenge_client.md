@@ -2,11 +2,7 @@
 
 ## Protocol Version *
 
-### Description
-
 First message sent by the client when attempting to connect. The server will respond with [CMD_AUTH_LOGON_CHALLENGE_Server](./cmd_auth_logon_challenge_server.md).
-
-### Comment
 
 Has the exact same layout as [CMD_AUTH_RECONNECT_CHALLENGE_Client](./cmd_auth_reconnect_challenge_client.md).
 

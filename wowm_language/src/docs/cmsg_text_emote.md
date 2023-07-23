@@ -2,11 +2,7 @@
 
 ## Client Version 1.12
 
-### Description
-
 Sent to notify the server that the client wants to perform an emote like /dance or /cry.
-
-### Comment
 
 Server responds with [SMSG_TEXT_EMOTE](./smsg_text_emote.md) and [SMSG_EMOTE](./smsg_emote.md).
 
@@ -52,11 +48,7 @@ CMSG have a header of 6 bytes.
 ```
 ## Client Version 2.4.3
 
-### Description
-
 Sent to notify the server that the client wants to perform an emote like /dance or /cry.
-
-### Comment
 
 Server responds with [SMSG_TEXT_EMOTE](./smsg_text_emote.md) and [SMSG_EMOTE](./smsg_emote.md).
 
@@ -91,11 +83,7 @@ CMSG have a header of 6 bytes.
 
 ## Client Version 3.3.5
 
-### Description
-
 Sent to notify the server that the client wants to perform an emote like /dance or /cry.
-
-### Comment
 
 Server responds with [SMSG_TEXT_EMOTE](./smsg_text_emote.md) and [SMSG_EMOTE](./smsg_emote.md).
 

@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Comment
-
 Used in `WeaponSwingSounds2.dbc`.
 
 ### Wowm Representation

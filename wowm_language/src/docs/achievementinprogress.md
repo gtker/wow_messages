@@ -2,8 +2,6 @@
 
 ## Client Version 3.3.5
 
-### Comment
-
 Used in the `AchievementInProgressArray` built-in type.
 
 ### Wowm Representation

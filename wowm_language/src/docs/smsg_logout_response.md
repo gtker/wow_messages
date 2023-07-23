@@ -2,11 +2,7 @@
 
 ## Client Version 1.12, Client Version 2, Client Version 3
 
-### Description
-
 Reply to [CMSG_LOGOUT_REQUEST](./cmsg_logout_request.md).
-
-### Comment
 
 The client expects to get an [SMSG_LOGOUT_COMPLETE](./smsg_logout_complete.md) when logout is complete.
 

@@ -2,11 +2,7 @@
 
 ## Client Version 1, Client Version 2
 
-### Description
-
 Immediately removes an object from the presence of the player.
-
-### Comment
 
 Used by vmangos for logout.
 
@@ -50,11 +46,7 @@ Remove object with GUID 6 from game world.
 ```
 ## Client Version 3.3.5
 
-### Description
-
 Immediately removes an object from the presence of the player.
-
-### Comment
 
 Used by vmangos for logout.
 

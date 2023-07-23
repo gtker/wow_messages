@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Comment
-
 Structure as comment on `https://github1s.com/mangoszero/server/blob/HEAD/src/game/Server/Opcodes.h#L525`.
 
 Not used in azerothcore/trinitycore/mangostwo/arcemu.

@@ -2,11 +2,7 @@
 
 ## Client Version 1.12, Client Version 2, Client Version 3
 
-### Description
-
 Sent immediately after logging in. Client expects reply in [SMSG_QUERY_TIME_RESPONSE](./smsg_query_time_response.md).
-
-### Comment
 
 This message and the [SMSG_QUERY_TIME_RESPONSE](./smsg_query_time_response.md) reply does not actually appear to set the time. Instead [SMSG_LOGIN_SETTIMESPEED](./smsg_login_settimespeed.md) seems to correctly set the time.
 

@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Description
-
 Request of new name for character. This is only sent by the client if RENAME is set in the [CharacterFlags](./characterflags.md) of [SMSG_CHAR_ENUM](./smsg_char_enum.md) and the client tries to login.
 
 ### Wowm Representation

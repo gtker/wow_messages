@@ -2,11 +2,7 @@
 
 ## Client Version 1, Client Version 2, Client Version 3.0, Client Version 3.1.0, Client Version 3.1.1
 
-### Description
-
 Tells the client what the datetime is and how fast time passes.
-
-### Comment
 
 The client also asks for the datetime with [CMSG_QUERY_TIME](./cmsg_query_time.md) and gets a reply from [SMSG_QUERY_TIME_RESPONSE](./smsg_query_time_response.md), but this does not appear to change anything in the client.
 

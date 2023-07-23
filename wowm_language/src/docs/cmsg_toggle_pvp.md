@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Comment
-
 vmangos: this opcode can be used in two ways: Either set explicit new status or toggle old status
 
 ### Wowm Representation

@@ -2,13 +2,9 @@
 
 ## Client Version 1, Client Version 2
 
-### Description
-
 Sent after receiving [SMSG_AUTH_CHALLENGE](./smsg_auth_challenge.md).
 
 Followed by [SMSG_AUTH_RESPONSE](./smsg_auth_response.md).
-
-### Comment
 
 This message is never encrypted.
 
@@ -115,11 +111,7 @@ CMSG have a header of 6 bytes.
 ```
 ## Client Version 3.3.5
 
-### Description
-
 Sent after receiving [SMSG_AUTH_CHALLENGE](./smsg_auth_challenge.md).
-
-### Comment
 
 This message is never encrypted.
 

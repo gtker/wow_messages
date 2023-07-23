@@ -2,11 +2,7 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Description
-
 Command to log into the specified character.
-
-### Comment
 
 This is sent after the client has been authenticated and served the character list with [SMSG_CHAR_ENUM](./smsg_char_enum.md).
 

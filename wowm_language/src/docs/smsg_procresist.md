@@ -2,8 +2,6 @@
 
 ## Client Version 1.12, Client Version 2, Client Version 3
 
-### Comment
-
 According to cmangos/azerothcore/trinitycore/mangostwo. Not present in vmangos.
 
 ### Wowm Representation

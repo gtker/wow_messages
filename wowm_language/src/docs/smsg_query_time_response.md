@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Comment
-
 Reply to [CMSG_QUERY_TIME](./cmsg_query_time.md).
 
 [CMSG_QUERY_TIME](./cmsg_query_time.md) and this reply does not actually appear to set the time. Instead [SMSG_LOGIN_SETTIMESPEED](./smsg_login_settimespeed.md) seems to correctly set the time. Running the client with `-console` will print the date when [SMSG_LOGIN_SETTIMESPEED](./smsg_login_settimespeed.md) is received, but not when this message is received.
@@ -43,8 +41,6 @@ SMSG have a header of 4 bytes.
 148, 152, 80, 97, // time: u32
 ```
 ## Client Version 2.4.3, Client Version 3
-
-### Comment
 
 Reply to [CMSG_QUERY_TIME](./cmsg_query_time.md).
 

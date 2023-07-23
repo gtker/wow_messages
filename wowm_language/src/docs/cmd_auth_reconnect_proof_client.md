@@ -2,8 +2,6 @@
 
 ## Protocol Version 2, Protocol Version 5, Protocol Version 6, Protocol Version 7, Protocol Version 8
 
-### Description
-
 Reply to [CMD_AUTH_RECONNECT_CHALLENGE_Server](./cmd_auth_reconnect_challenge_server.md).
 
 ### Wowm Representation

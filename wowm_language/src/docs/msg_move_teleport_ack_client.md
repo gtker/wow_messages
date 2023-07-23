@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Description
-
 Response to [MSG_MOVE_TELEPORT_ACK_Server](./msg_move_teleport_ack_server.md), at which point [MSG_MOVE_TELEPORT_ACK_Server](./msg_move_teleport_ack_server.md) should be sent to observing players.
 
 ### Wowm Representation

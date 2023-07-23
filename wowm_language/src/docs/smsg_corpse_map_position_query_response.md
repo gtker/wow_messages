@@ -2,8 +2,6 @@
 
 ## Client Version 3.3.5
 
-### Comment
-
 Emus just set all values to 0.
 
 ### Wowm Representation

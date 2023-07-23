@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2
 
-### Comment
-
 cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused
 
 ### Wowm Representation
@@ -66,8 +64,6 @@ CMSG have a header of 6 bytes.
 | - | 4 / Little | u32 | unknown15 |  |  |
 
 ## Client Version 3.3.5
-
-### Comment
 
 cmangos/vmangos/mangoszero: All fields with 'skip' are completely unused
 

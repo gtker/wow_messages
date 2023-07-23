@@ -2,11 +2,7 @@
 
 ## Client Version 1.12
 
-### Description
-
 Response to [CMSG_CHAR_DELETE](./cmsg_char_delete.md).
-
-### Comment
 
 The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM](./cmsg_char_enum.md).
 
@@ -46,11 +42,7 @@ SMSG have a header of 4 bytes.
 ```
 ## Client Version 2.4.3
 
-### Description
-
 Response to [CMSG_CHAR_DELETE](./cmsg_char_delete.md).
-
-### Comment
 
 The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM](./cmsg_char_enum.md).
 
@@ -81,11 +73,7 @@ SMSG have a header of 4 bytes.
 
 ## Client Version 3.3.5
 
-### Description
-
 Response to [CMSG_CHAR_DELETE](./cmsg_char_delete.md).
-
-### Comment
 
 The result of this message will update the client character screen without them sending another [CMSG_CHAR_ENUM](./cmsg_char_enum.md).
 

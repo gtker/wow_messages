@@ -2,8 +2,6 @@
 
 ## Client Version 3.3.5
 
-### Comment
-
 Only exists as a comment in trinitycore/azerothcore.
 
 ### Wowm Representation

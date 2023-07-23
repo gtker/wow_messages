@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Comment
-
 These errors are only printed in client console.
 
 ### Wowm Representation

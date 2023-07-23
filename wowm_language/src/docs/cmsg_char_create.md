@@ -2,8 +2,6 @@
 
 ## Client Version 1
 
-### Description
-
 Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE](./smsg_char_create.md).
 
 ### Wowm Representation
@@ -69,8 +67,6 @@ CMSG have a header of 6 bytes.
 ```
 ## Client Version 2.4.3
 
-### Description
-
 Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE](./smsg_char_create.md).
 
 ### Wowm Representation
@@ -117,8 +113,6 @@ CMSG have a header of 6 bytes.
 | - | 1 / - | u8 | outfit_id |  |  |
 
 ## Client Version 3.2, Client Version 3.3
-
-### Description
 
 Sent after the client presses 'Create Character'. The client will then wait for [SMSG_CHAR_CREATE](./smsg_char_create.md).
 

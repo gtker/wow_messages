@@ -2,8 +2,6 @@
 
 ## Protocol Version 2, Protocol Version 5, Protocol Version 6, Protocol Version 7
 
-### Description
-
 Reply to [CMD_AUTH_RECONNECT_CHALLENGE_Client](./cmd_auth_reconnect_challenge_client.md).
 
 ### Wowm Representation
@@ -58,8 +56,6 @@ If result is equal to `SUCCESS`:
 3, // result: LoginResult FAIL_BANNED (0x03)
 ```
 ## Protocol Version 8
-
-### Description
 
 Reply to [CMD_AUTH_RECONNECT_CHALLENGE_Client](./cmd_auth_reconnect_challenge_client.md).
 

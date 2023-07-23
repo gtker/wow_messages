@@ -2,11 +2,7 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Description
-
 Data for which tutorials the client has passed.
-
-### Comment
 
 All bits set means that all tutorials have been passed.
 

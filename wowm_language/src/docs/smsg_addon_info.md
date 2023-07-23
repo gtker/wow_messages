@@ -29,8 +29,6 @@ SMSG have a header of 4 bytes.
 
 ## Client Version 2.4.3
 
-### Comment
-
 Banned addons are not properly implemented in the wowm. Sending any number other than 0 means that the packet is incomplete and thus invalid
 
 ### Wowm Representation
@@ -61,8 +59,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | number_of_banned_addons |  |  |
 
 ## Client Version 3.3.5
-
-### Comment
 
 Banned addons are not properly implemented in the wowm. Sending any number other than 0 means that the packet is incomplete and thus invalid
 

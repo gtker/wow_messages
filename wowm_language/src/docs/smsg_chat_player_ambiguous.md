@@ -2,8 +2,6 @@
 
 ## Client Version 2.4.3, Client Version 3
 
-### Comment
-
 Never actually sent in any emulator.
 
 ### Wowm Representation

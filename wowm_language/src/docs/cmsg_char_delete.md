@@ -2,11 +2,7 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Description
-
 Command to delete a character from the clients account. Can be sent after the client has received [SMSG_CHAR_ENUM](./smsg_char_enum.md).
-
-### Comment
 
 Sent after the client has confirmed the character deletion.
 

@@ -2,8 +2,6 @@
 
 ## Client Version 2.4.3
 
-### Comment
-
 There does not appear to be a CMSG version of this MSG.
 
 ### Wowm Representation
@@ -34,8 +32,6 @@ SMSG have a header of 4 bytes.
 | - | - / - | [MovementInfo](movementinfo.md) | info |  |  |
 
 ## Client Version 3.3.5
-
-### Comment
 
 There does not appear to be a CMSG version of this MSG.
 

@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Description
-
 Response to [CMSG_NAME_QUERY](./cmsg_name_query.md).
 
 ### Wowm Representation
@@ -69,8 +67,6 @@ SMSG have a header of 4 bytes.
 ```
 ## Client Version 2.4.3
 
-### Description
-
 Response to [CMSG_NAME_QUERY](./cmsg_name_query.md).
 
 ### Wowm Representation
@@ -120,8 +116,6 @@ If has_declined_names is equal to `YES`:
 | - | ? / - | CString[5] | declined_names |  |  |
 
 ## Client Version 3.3.5
-
-### Description
 
 Response to [CMSG_NAME_QUERY](./cmsg_name_query.md).
 

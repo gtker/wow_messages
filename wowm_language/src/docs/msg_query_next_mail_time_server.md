@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Comment
-
 mangoszero/vmangos: No idea when this is called.
 
 ### Wowm Representation

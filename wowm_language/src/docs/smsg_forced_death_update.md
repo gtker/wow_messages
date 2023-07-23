@@ -2,8 +2,6 @@
 
 ## Client Version 2.4.3, Client Version 3.3.5
 
-### Description
-
 Resets `Release spirit` timer clientside.
 
 ### Wowm Representation

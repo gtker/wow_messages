@@ -2,8 +2,6 @@
 
 ## Protocol Version 2
 
-### Description
-
 Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server](./cmd_auth_logon_challenge_server.md).
 
 ### Wowm Representation
@@ -92,8 +90,6 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 // telemetry_keys: TelemetryKey[number_of_telemetry_keys]
 ```
 ## Protocol Version 3, Protocol Version 5, Protocol Version 6, Protocol Version 7
-
-### Description
 
 Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server](./cmd_auth_logon_challenge_server.md).
 
@@ -215,8 +211,6 @@ If security_flag is equal to `PIN`:
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, // pin_hash: u8[20]
 ```
 ## Protocol Version 8
-
-### Description
 
 Reply after successful [CMD_AUTH_LOGON_CHALLENGE_Server](./cmd_auth_logon_challenge_server.md).
 

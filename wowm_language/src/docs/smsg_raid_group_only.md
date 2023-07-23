@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Comment
-
 used when player leaves raid group inside instance
 
 ### Wowm Representation

@@ -2,8 +2,6 @@
 
 ## Client Version 3.3.5
 
-### Comment
-
 Mask to indicate the variant of the cache
 
 ### Wowm Representation

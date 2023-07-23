@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Comment
-
 According to cmangos: byte value (`UNIT_FIELD_BYTES_2`,0)
 
 ### Wowm Representation

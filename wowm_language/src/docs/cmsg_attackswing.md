@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Description
-
 Signals that client has right clicked an opponent and is in the attack stance.
 
 Server should reply with [SMSG_ATTACKSTART](./smsg_attackstart.md).

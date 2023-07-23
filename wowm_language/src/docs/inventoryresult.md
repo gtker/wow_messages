@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Comment
-
 Any values greater than maximum enum value show as 'bag full'
 
 ### Wowm Representation
@@ -160,8 +158,6 @@ Used in:
 * [SMSG_TRADE_STATUS](smsg_trade_status.md)
 
 ## Client Version 2.4.3
-
-### Comment
 
 mangos-tbc/mangosone: probably exist more
 

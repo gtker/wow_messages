@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Description
-
 Response to [CMSG_CHAR_ENUM](./cmsg_char_enum.md).
 
 ### Wowm Representation

@@ -2,11 +2,7 @@
 
 ## Client Version 1.12
 
-### Description
-
 Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
-
-### Comment
 
 The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT](./smsg_update_object.md), but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT](./smsg_update_object.md).
 
@@ -54,11 +50,7 @@ SMSG have a header of 4 bytes.
 ```
 ## Client Version 2.4.3
 
-### Description
-
 Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
-
-### Comment
 
 The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT](./smsg_update_object.md), but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT](./smsg_update_object.md).
 
@@ -93,11 +85,7 @@ SMSG have a header of 4 bytes.
 
 ## Client Version 3.3.5
 
-### Description
-
 Message to the client that is has successfully logged into the world and that it should load the map and coordinates.
-
-### Comment
 
 The positions and orientations do not matter since they can be overwritten in the [SMSG_UPDATE_OBJECT](./smsg_update_object.md), but the map determines which map the client loads and this is not changeable in [SMSG_UPDATE_OBJECT](./smsg_update_object.md).
 

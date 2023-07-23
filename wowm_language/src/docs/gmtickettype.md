@@ -2,8 +2,6 @@
 
 ## Client Version 1
 
-### Comment
-
 vmangos: From GMTicketCategory.dbc
 
 ### Wowm Representation

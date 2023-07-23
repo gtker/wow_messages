@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2
 
-### Comment
-
 Sent when the client enters the world.
 
 ### Wowm Representation

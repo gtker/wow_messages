@@ -75,8 +75,6 @@ Else If status_id is equal to `IN_PROGRESS`:
 
 ## Client Version 2.4.3
 
-### Comment
-
 mangosone treats `arena_type`, `unknown1`, `battleground_type_id`, and `unknown2` as one big u64 and does not send any fields after these if all fields are 0.
 
 ### Wowm Representation
@@ -150,8 +148,6 @@ Else If status_id is equal to `IN_PROGRESS`:
 | 0x26 | 4 / Little | u32 | time_to_bg_start_in_ms |  |  |
 
 ## Client Version 3.3.5
-
-### Comment
 
 mangosone treats `arena_type`, `unknown1`, `battleground_type_id`, and `unknown2` as one big u64 and does not send any fields after these if all fields are 0.
 

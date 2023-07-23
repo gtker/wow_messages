@@ -2,8 +2,6 @@
 
 ## Client Version 3.3.5
 
-### Comment
-
 Respond with [SMSG_CALENDAR_SEND_NUM_PENDING](./smsg_calendar_send_num_pending.md)
 
 ### Wowm Representation

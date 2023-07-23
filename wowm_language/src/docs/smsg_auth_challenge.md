@@ -2,11 +2,7 @@
 
 ## Client Version 1, Client Version 2
 
-### Description
-
 Seed used by the client to prove in [CMSG_AUTH_SESSION](./cmsg_auth_session.md) that it has authenticated with the auth server.
-
-### Comment
 
 First thing sent when a client connects to the world server.
 

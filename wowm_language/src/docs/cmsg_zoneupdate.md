@@ -2,11 +2,7 @@
 
 ## Client Version 1.12
 
-### Description
-
 Sent by the client whenever it reaches a new area.
-
-### Comment
 
 The client does not send an accurate area. For example when going to Sen'jin Village, the client will send `DUROTAR` (0x0E) and not `SENJIN_VILLAGE` (0x16F).
 
@@ -53,11 +49,7 @@ CMSG have a header of 6 bytes.
 ```
 ## Client Version 2.4.3
 
-### Description
-
 Sent by the client whenever it reaches a new area.
-
-### Comment
 
 The client does not send an accurate area. For example when going to Sen'jin Village, the client will send `DUROTAR` (0x0E) and not `SENJIN_VILLAGE` (0x16F).
 
@@ -88,11 +80,7 @@ CMSG have a header of 6 bytes.
 
 ## Client Version 3.3.5
 
-### Description
-
 Sent by the client whenever it reaches a new area.
-
-### Comment
 
 The client does not send an accurate area. For example when going to Sen'jin Village, the client will send `DUROTAR` (0x0E) and not `SENJIN_VILLAGE` (0x16F).
 

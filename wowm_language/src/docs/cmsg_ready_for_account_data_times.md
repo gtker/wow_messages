@@ -2,8 +2,6 @@
 
 ## Client Version 3.3.5
 
-### Comment
-
 Respond with [SMSG_ACCOUNT_DATA_TIMES](./smsg_account_data_times.md)
 
 ### Wowm Representation

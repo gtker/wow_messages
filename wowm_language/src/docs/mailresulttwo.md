@@ -2,8 +2,6 @@
 
 ## Client Version 1.12, Client Version 2
 
-### Comment
-
 mangoszero: in [SMSG_SEND_MAIL_RESULT](./smsg_send_mail_result.md), 7-13 and 16+: 'Mail database error'
 
 ### Wowm Representation
@@ -51,8 +49,6 @@ Used in:
 * [SMSG_SEND_MAIL_RESULT](smsg_send_mail_result.md)
 
 ## Client Version 3.3.5
-
-### Comment
 
 mangoszero: in [SMSG_SEND_MAIL_RESULT](./smsg_send_mail_result.md), 7-13 and 16+: 'Mail database error'
 

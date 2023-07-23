@@ -2,8 +2,6 @@
 
 ## Client Version 1
 
-### Comment
-
 mangoszero/vmangos: Quests that don't require items use the `RequestItemsText` field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.
 
 ### Wowm Representation
@@ -58,8 +56,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | flags3 |  | cmangos/vmangos/mangoszero: set to 0x08 |
 
 ## Client Version 2.4.3
-
-### Comment
 
 mangoszero/vmangos: Quests that don't require items use the `RequestItemsText` field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.
 
@@ -117,8 +113,6 @@ SMSG have a header of 4 bytes.
 | - | 4 / Little | u32 | flags3 |  | cmangos/vmangos/mangoszero: set to 0x10 |
 
 ## Client Version 3.3.5
-
-### Comment
 
 mangoszero/vmangos: Quests that don't require items use the `RequestItemsText` field to store the text that is shown when you talk to the quest giver while the quest is incomplete. Therefore the text should not be shown for them when the quest is complete. For quests that do require items, it is self explanatory.
 

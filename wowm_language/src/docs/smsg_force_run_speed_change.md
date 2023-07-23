@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Description
-
 Tells the client that the running speed has changed.
 
 Client replies with [CMSG_FORCE_RUN_SPEED_CHANGE_ACK](./cmsg_force_run_speed_change_ack.md).
@@ -55,8 +53,6 @@ Force speed to 7
 0, 0, 224, 64, // speed: f32
 ```
 ## Client Version 2.4.3, Client Version 3
-
-### Description
 
 Tells the client that the running speed has changed.
 

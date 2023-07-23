@@ -2,11 +2,7 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Description
-
 Executes a query directly on the world server.
-
-### Comment
 
 Not implemented on any major emulator.
 

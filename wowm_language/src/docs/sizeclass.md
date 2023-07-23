@@ -2,8 +2,6 @@
 
 ## Client Version 1.12, Client Version 2, Client Version 3
 
-### Comment
-
 Used in the `CreatureDisplayInfo.dbc`, `CreatureModelData.dbc` and `DeathThudLookups.dbc`.
 
 ### Wowm Representation

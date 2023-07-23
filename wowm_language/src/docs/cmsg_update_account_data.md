@@ -2,8 +2,6 @@
 
 ## Client Version 1.12, Client Version 2
 
-### Comment
-
 This is sent by the client after receiving [SMSG_ACCOUNT_DATA_TIMES](./smsg_account_data_times.md). Client can also request a block through [CMSG_REQUEST_ACCOUNT_DATA](./cmsg_request_account_data.md).
 
 ### Wowm Representation
@@ -313,8 +311,6 @@ CMSG have a header of 6 bytes.
 78, 68, 10, 10, // compressed_data: u8[-]
 ```
 ## Client Version 3.3.5
-
-### Comment
 
 Respond with [SMSG_UPDATE_ACCOUNT_DATA_COMPLETE](./smsg_update_account_data_complete.md)
 

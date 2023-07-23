@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2
 
-### Comment
-
 vmangos/cmangos/mangoszero: this message causes on client to display: 'Your auction sold'
 
 ### Wowm Representation
@@ -42,8 +40,6 @@ SMSG have a header of 4 bytes.
 | 0x1C | 4 / Little | u32 | item_random_property_id |  |  |
 
 ## Client Version 3.3.5
-
-### Comment
 
 vmangos/cmangos/mangoszero: this message causes on client to display: 'Your auction sold'
 

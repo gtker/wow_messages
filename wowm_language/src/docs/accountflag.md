@@ -2,8 +2,6 @@
 
 ## Protocol Version 8
 
-### Description
-
 Reply to [CMD_AUTH_LOGON_PROOF_Client](./cmd_auth_logon_proof_client.md).
 
 ### Wowm Representation

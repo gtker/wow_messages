@@ -2,8 +2,6 @@
 
 ## Client Version 1
 
-### Description
-
 Response to [CMSG_CHAR_RENAME](./cmsg_char_rename.md).
 
 ### Wowm Representation
@@ -62,8 +60,6 @@ If result is equal to `RESPONSE_SUCCESS`:
 ```
 ## Client Version 2.4.3
 
-### Description
-
 Response to [CMSG_CHAR_RENAME](./cmsg_char_rename.md).
 
 ### Wowm Representation
@@ -103,8 +99,6 @@ If result is equal to `RESPONSE_SUCCESS`:
 | 0x0D | - / - | CString | new_name |  |  |
 
 ## Client Version 3.3.5
-
-### Description
 
 Response to [CMSG_CHAR_RENAME](./cmsg_char_rename.md).
 

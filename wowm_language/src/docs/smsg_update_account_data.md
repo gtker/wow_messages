@@ -2,8 +2,6 @@
 
 ## Client Version 2.4.3, Client Version 3
 
-### Comment
-
 Sent as response to [CMSG_REQUEST_ACCOUNT_DATA](./cmsg_request_account_data.md)
 
 ### Wowm Representation

@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Comment
-
 No TBC emulators implement this.
 
 ### Wowm Representation

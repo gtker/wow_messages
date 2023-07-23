@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Comment
-
 Not implemented in Wrath or TBC emus. Only implemented in cmangos.
 
 ### Wowm Representation

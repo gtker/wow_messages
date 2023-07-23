@@ -2,11 +2,7 @@
 
 ## Client Version 1
 
-### Description
-
 Response to [CMSG_CHAR_CREATE](./cmsg_char_create.md).
-
-### Comment
 
 Every [WorldResult](./worldresult.md) except `CHAR_CREATE_SUCCESS` will lead to a popup showing. `CHAR_CREATE_SUCCESS` will cause the client to send a [CMSG_CHAR_ENUM](./cmsg_char_enum.md).
 
@@ -46,11 +42,7 @@ SMSG have a header of 4 bytes.
 ```
 ## Client Version 2.4.3
 
-### Description
-
 Response to [CMSG_CHAR_CREATE](./cmsg_char_create.md).
-
-### Comment
 
 Every [WorldResult](./worldresult.md) except `CHAR_CREATE_SUCCESS` will lead to a popup showing. `CHAR_CREATE_SUCCESS` will cause the client to send a [CMSG_CHAR_ENUM](./cmsg_char_enum.md).
 
@@ -81,11 +73,7 @@ SMSG have a header of 4 bytes.
 
 ## Client Version 3.3.5
 
-### Description
-
 Response to [CMSG_CHAR_CREATE](./cmsg_char_create.md).
-
-### Comment
 
 Every [WorldResult](./worldresult.md) except `CHAR_CREATE_SUCCESS` will lead to a popup showing. `CHAR_CREATE_SUCCESS` will cause the client to send a [CMSG_CHAR_ENUM](./cmsg_char_enum.md).
 

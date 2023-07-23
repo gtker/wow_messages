@@ -2,8 +2,6 @@
 
 ## Client Version 3.3.5
 
-### Comment
-
 This message only exists as a coment in trinitycore.
 
 ### Wowm Representation

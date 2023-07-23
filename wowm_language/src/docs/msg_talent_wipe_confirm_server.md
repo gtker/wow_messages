@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Comment
-
 cmangos/vmangos/mangoszero returns guid 0 and unknown 0 when talents can not be reset
 
 cmangos/vmangos/mangoszero casts spell 14876 when resetting

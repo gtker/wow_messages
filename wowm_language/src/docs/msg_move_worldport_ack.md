@@ -2,11 +2,7 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Description
-
 Acknowledge from the client that it has received an [SMSG_NEW_WORLD](./smsg_new_world.md) and has loaded the new map.
-
-### Comment
 
 Despite the name this seems to only be sent by the client.
 

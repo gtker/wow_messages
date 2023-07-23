@@ -2,8 +2,6 @@
 
 ## Protocol Version 2
 
-### Description
-
 Reply to [CMD_AUTH_RECONNECT_PROOF_Client](./cmd_auth_reconnect_proof_client.md).
 
 ### Wowm Representation
@@ -52,8 +50,6 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 ```
 ## Protocol Version 5, Protocol Version 6, Protocol Version 7
 
-### Description
-
 Reply to [CMD_AUTH_RECONNECT_PROOF_Client](./cmd_auth_reconnect_proof_client.md).
 
 ### Wowm Representation
@@ -83,8 +79,6 @@ Login messages have a header of 1 byte with an opcode. Some messages also have a
 | 0x02 | 2 / Little | u16 | padding |  |  |
 
 ## Protocol Version 8
-
-### Description
 
 Reply to [CMD_AUTH_RECONNECT_PROOF_Client](./cmd_auth_reconnect_proof_client.md).
 

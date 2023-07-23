@@ -2,8 +2,6 @@
 
 ## Client Version 2.4.3
 
-### Comment
-
 This MSG does not appear to have an SMSG version.
 
 ### Wowm Representation
@@ -29,8 +27,6 @@ CMSG have a header of 6 bytes.
 This message has no fields in the body.
 
 ## Client Version 3.3.5
-
-### Comment
 
 This MSG does not appear to have an SMSG version.
 

@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Comment
-
 Compressed version of [SMSG_UPDATE_OBJECT](./smsg_update_object.md). Has the same fields when uncompressed
 
 ### Wowm Representation
@@ -58,8 +56,6 @@ Most minimal package required to load into the world. Also requires a valid [SMS
 ```
 ## Client Version 2.4.3
 
-### Comment
-
 Compressed version of [SMSG_UPDATE_OBJECT](./smsg_update_object.md). Has the same fields when uncompressed
 
 ### Wowm Representation
@@ -92,8 +88,6 @@ SMSG have a header of 4 bytes.
 | 0x09 | ? / - | [Object](object.md)[amount_of_objects] | objects |  |  |
 
 ## Client Version 3.3.5
-
-### Comment
 
 Compressed version of [SMSG_UPDATE_OBJECT](./smsg_update_object.md). Has the same fields when uncompressed
 

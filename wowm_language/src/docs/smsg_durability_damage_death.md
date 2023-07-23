@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Description
-
 Signals to the client that the death caused 10% durability loss.
 
 ### Wowm Representation

@@ -31,8 +31,6 @@ CMSG have a header of 6 bytes.
 
 ## Client Version 2, Client Version 3
 
-### Comment
-
 No TBC/Wrath emulator has a `GmTicketType` field before `message`, but vmangos does.
 
 ### Wowm Representation

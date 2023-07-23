@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Comment
-
 Some emulators have this with fields, but it has been verified to be empty on 1.12 through reverse engineering.
 
 ### Wowm Representation
@@ -29,8 +27,6 @@ SMSG have a header of 4 bytes.
 This message has no fields in the body.
 
 ## Client Version 2.4.3, Client Version 3
-
-### Comment
 
 Some emulators have this with fields, but it has been verified to be empty on 1.12 through reverse engineering.
 

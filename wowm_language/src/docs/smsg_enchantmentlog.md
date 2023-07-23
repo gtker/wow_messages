@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2
 
-### Comment
-
 cmangos and vmangos/mangoszero disagree about packed and extra u8
 
 ### Wowm Representation
@@ -40,8 +38,6 @@ SMSG have a header of 4 bytes.
 | 0x1C | 1 / - | Bool | show_affiliation |  | vmangos: Only used if `caster` is not 0. |
 
 ## Client Version 3.3.5
-
-### Comment
 
 Some emulators have the guids as not packed.
 

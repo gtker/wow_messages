@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2
 
-### Comment
-
 cmangos has one instance of this be u32, but both vmangos/mangoszero are u8
 
 ### Wowm Representation

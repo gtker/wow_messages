@@ -2,8 +2,6 @@
 
 ## Client Version 1, Client Version 2, Client Version 3
 
-### Comment
-
 This is not used in any TBC emulator, but trinitycore has it implemented so it is assumed to be valid for TBC as well.
 
 ### Wowm Representation

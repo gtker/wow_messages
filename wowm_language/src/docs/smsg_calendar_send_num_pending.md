@@ -2,8 +2,6 @@
 
 ## Client Version 3.3.5
 
-### Comment
-
 Sent as response to [CMSG_CALENDAR_GET_NUM_PENDING](./cmsg_calendar_get_num_pending.md)
 
 ### Wowm Representation

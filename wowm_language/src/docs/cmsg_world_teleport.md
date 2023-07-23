@@ -2,8 +2,6 @@
 
 ## Client Version 1.12
 
-### Description
-
 Sent when using the `worldport` console command.
 
 ### Wowm Representation
@@ -69,8 +67,6 @@ Command in client was `worldport 469 452 6454 2536 180`.
 ```
 ## Client Version 2.4.3
 
-### Description
-
 Sent when using the `worldport` console command.
 
 ### Wowm Representation
@@ -106,11 +102,7 @@ CMSG have a header of 6 bytes.
 
 ## Client Version 3.3.5
 
-### Description
-
 Sent when using the `worldport` console command.
-
-### Comment
 
 The 3.3.5 client includes some extra padding.
 

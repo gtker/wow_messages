@@ -2,11 +2,7 @@
 
 ## Client Version 1
 
-### Description
-
 Response to [CMSG_AUTH_SESSION](./cmsg_auth_session.md).
-
-### Comment
 
 vmangos/cmangos/mangoszero all have a variant of this message that contains fields from `AUTH_OK` for `AUTH_WAIT_QUEUE` as well (`https://github.com/vmangos/core/blob/cd896d43712ceafecdbd8f005846d7f676e55b4f/src/game/World.cpp#L322`) but this does not seem to be actually be a real thing.
 

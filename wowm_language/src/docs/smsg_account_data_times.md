@@ -2,8 +2,6 @@
 
 ## Client Version 1.12, Client Version 2
 
-### Comment
-
 The purpose of this message is unknown, but it is required in order to prevent the chat box from being a white rectangle that is unable to show text.
 
 Sending this causes the client to send [CMSG_UPDATE_ACCOUNT_DATA](./cmsg_update_account_data.md) messages.
@@ -53,8 +51,6 @@ Zeroed out message needed for showing chat box.
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // data: u32[32]
 ```
 ## Client Version 3.3.5
-
-### Comment
 
 Indicate when each piece of account data was last updated by a [CMSG_UPDATE_ACCOUNT_DATA](./cmsg_update_account_data.md). The client can check this against its own times to detect that more recent account data was written from a different client.
 

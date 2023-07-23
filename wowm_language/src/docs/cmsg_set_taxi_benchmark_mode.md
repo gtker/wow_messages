@@ -2,8 +2,6 @@
 
 ## Client Version 2.4.3, Client Version 3
 
-### Comment
-
 Sent when the client runs `/timetest 1`.
 
 ### Wowm Representation

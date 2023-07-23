@@ -2,11 +2,7 @@
 
 ## Client Version 1
 
-### Description
-
 Response if [CMSG_PLAYER_LOGIN](./cmsg_player_login.md) fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD](./smsg_login_verify_world.md).
-
-### Comment
 
 Client seems to always send a [CMSG_CANCEL_TRADE](./cmsg_cancel_trade.md) after receiving this message, for unknown reasons.
 
@@ -46,11 +42,7 @@ SMSG have a header of 4 bytes.
 ```
 ## Client Version 2.4.3
 
-### Description
-
 Response if [CMSG_PLAYER_LOGIN](./cmsg_player_login.md) fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD](./smsg_login_verify_world.md).
-
-### Comment
 
 Client seems to always send a [CMSG_CANCEL_TRADE](./cmsg_cancel_trade.md) after receiving this message, for unknown reasons.
 
@@ -81,11 +73,7 @@ SMSG have a header of 4 bytes.
 
 ## Client Version 3.3.5
 
-### Description
-
 Response if [CMSG_PLAYER_LOGIN](./cmsg_player_login.md) fails. If successful it should instead be [SMSG_LOGIN_VERIFY_WORLD](./smsg_login_verify_world.md).
-
-### Comment
 
 Client seems to always send a [CMSG_CANCEL_TRADE](./cmsg_cancel_trade.md) after receiving this message, for unknown reasons.
 
