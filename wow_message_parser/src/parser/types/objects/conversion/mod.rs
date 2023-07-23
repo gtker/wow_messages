@@ -13,7 +13,6 @@ use crate::parser::types::parsed::parsed_struct_member::{
     ParsedStructMember, ParsedStructMemberDefinition,
 };
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
-use crate::parser::types::struct_member::StructMember;
 use crate::rust_printer::rust_view::create_rust_object;
 use crate::{Container, ObjectTags, Objects, CONTAINER_SELF_SIZE_FIELD};
 
@@ -68,12 +67,13 @@ pub(crate) fn parsed_container_to_container(
 
     verify_and_set_members(&mut p.members, &p.tags, containers, definers, &p.file_info);
 
+    let size_of_fields_before_size =
+        size_of_fields_before(&p.name, &p, containers, definers, &p.members, &p.file_info);
+
     let members =
         container::parsed_members_to_members(&p, p.members.clone(), containers, definers, p.tags());
 
     let rust_object_view = create_rust_object(&p, &members, containers, definers);
-
-    let size_of_fields_before_size = size_of_fields_before(&p.name, &members, &p.file_info);
 
     Container::new(
         p.name,
@@ -90,7 +90,10 @@ pub(crate) fn parsed_container_to_container(
 
 fn size_of_fields_before(
     name: &str,
-    members: &[StructMember],
+    e: &ParsedContainer,
+    containers: &[ParsedContainer],
+    definers: &[Definer],
+    members: &[ParsedStructMember],
     file_info: &FileInfo,
 ) -> Option<i128> {
     if !members.iter().any(|a| a.is_manual_size_field()) {
@@ -100,8 +103,8 @@ fn size_of_fields_before(
     let mut sum = 0;
     for field in members {
         match field {
-            StructMember::Definition(d) => {
-                if let Some(size) = d.ty().sizes().is_constant() {
+            ParsedStructMember::Definition(d) => {
+                if let Some(size) = d.ty().sizes_parsed(e, containers, definers).is_constant() {
                     sum += size;
                 } else {
                     invalid_self_size_position(
@@ -120,12 +123,12 @@ fn size_of_fields_before(
                     return Some(sum);
                 }
             }
-            StructMember::IfStatement(_) => invalid_self_size_position(
+            ParsedStructMember::IfStatement(_) => invalid_self_size_position(
                 name,
                 file_info,
                 format!("'{CONTAINER_SELF_SIZE_FIELD}' can not come after an if statement"),
             ),
-            StructMember::OptionalStatement(_) => invalid_self_size_position(
+            ParsedStructMember::OptionalStatement(_) => invalid_self_size_position(
                 name,
                 file_info,
                 format!("'{CONTAINER_SELF_SIZE_FIELD}' can not come after an optional statement"),

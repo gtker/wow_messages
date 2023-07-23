@@ -14,6 +14,15 @@ pub(crate) enum ParsedStructMember {
     OptionalStatement(ParsedOptionalStatement),
 }
 
+impl ParsedStructMember {
+    pub(crate) fn is_manual_size_field(&self) -> bool {
+        match self {
+            ParsedStructMember::Definition(d) => d.is_manual_size_field(),
+            ParsedStructMember::IfStatement(_) | ParsedStructMember::OptionalStatement(_) => false,
+        }
+    }
+}
+
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub(crate) struct ParsedStructMemberDefinition {
     pub name: String,
@@ -36,6 +45,14 @@ impl ParsedStructMemberDefinition {
 
     pub(crate) fn set_used_in_if(&mut self, used: bool) {
         self.used_in_if = Some(used);
+    }
+
+    pub(crate) fn is_manual_size_field(&self) -> bool {
+        if let Some(v) = &self.value {
+            v.identifier == CONTAINER_SELF_SIZE_FIELD
+        } else {
+            false
+        }
     }
 
     pub(crate) fn new(

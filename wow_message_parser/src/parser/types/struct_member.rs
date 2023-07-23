@@ -11,15 +11,6 @@ pub(crate) enum StructMember {
     OptionalStatement(OptionalStatement),
 }
 
-impl StructMember {
-    pub(crate) fn is_manual_size_field(&self) -> bool {
-        match self {
-            StructMember::Definition(d) => d.is_manual_size_field(),
-            StructMember::IfStatement(_) | StructMember::OptionalStatement(_) => false,
-        }
-    }
-}
-
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub(crate) struct StructMemberDefinition {
     name: String,
