@@ -503,7 +503,7 @@ fn print_definition(
             s.wln("add_aura_mask(ptv);");
         }
         Type::UpdateMask { .. } => {
-            s.wln("add_update_mask(ptv);");
+            s.wln("add_update_mask(ptv, pinfo);");
         }
         Type::MonsterMoveSplines => {
             s.wln("add_monster_move_spline(ptv);");
