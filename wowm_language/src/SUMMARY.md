@@ -19,7 +19,7 @@
 # Intermediate Representation
 - [Introduction](./ir/introduction.md)
 - [Implementing login messages](./ir/implementing_login.md)
-- [Implementing world messages]()
+- [Implementing world messages](./ir/implementing_world.md)
 
 
 ------------
