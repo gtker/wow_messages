@@ -21,6 +21,7 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
     }
 } {
     description = "Sent after receiving [SMSG_AUTH_CHALLENGE].";
+    description = "Followed by [SMSG_AUTH_RESPONSE].";
     comment = "This message is never encrypted.";
     versions = "1 2";
 }
