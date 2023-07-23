@@ -16,6 +16,10 @@ generation,
 and the [`wow_login_messages` directory](https://github.com/gtker/wow_messages_python/tree/main/wow_login_messages)
 contains the generated library.
 
+Python code will be shown in this document to provide examples of how libraries could be implemented.
+If you want to use the Python library then just bypass this and
+[use the library directly](https://github.com/gtker/wow_messages_python/) instead.
+
 ## Message Layout
 
 All interactions start with the client sending a message, then reading the reply from the server.
@@ -26,46 +30,340 @@ This is the only thing the messages have in common.
 
 The only way to know how much data to expect in a message is by a combination of the protocol version sent
 in the very first message by the
-client, [`CMD_AUTH_LOGON_CHALLENGE_Client`](https://gtker.com/wow_messages/docs/cmd_auth_logon_challenge_client.html),
+client, [`CMD_AUTH_LOGON_CHALLENGE_Client`](../docs/cmd_auth_logon_challenge_client.md),
 and the opcode.
+
+Take a look at [the wiki page on login](https://wowdev.wiki/Login_Packet) in order to get an understanding for
+what is going to happen.
 
 ## Design of types
 
-### CMD_AUTH_LOGON_CHALLENGE_Client
+Before writing the auto generator it's a good idea to know what you actually want to generate.
+For this reason I suggest manually writing the implementations for a few select types, and using it to have a client connect.
+This will allow you to detect things that need to be changed as early as possible as well as having executable code
+that can be used to test your auto generated code later, even in interpreted languages.
 
-* Automatically sent by client
-* Has enums.
-* Has String
-* Has size
-* Has `IpAddress` alias
-* Has `Population` alias
-* Requires a read for servers, write for clients
+The following messages are necessary for logging a client in, as well as [CMD_XFER_ACCEPT](../docs/cmd_xfer_accept.md),
+which is a special case that has no members.
 
-### CMD_AUTH_LOGON_CHALLENGE_Server
+### Library layout
+
+Consider what you want the layout of the library to look like regarding files and directories.
+
+There are several different protocol versions, objects that are valid for more than one version, as well as objects that are valid for all versions.
+Consider if your programming language benefits from having a type that is identical, but for a different version actually be the same type.
+
+For the Python library, I chose to have a Python file for each version, as well as one for `all`.
+Objects that are valid for more than one version are reexported from the lowest version.
+
+The folder layout for the Python library is as follows:
+```text
+├── README.md
+└── wow_login_messages
+    ├── all.py
+    ├── __init__.py
+    ├── opcodes.py
+    ├── util.py
+    ├── version2.py
+    ├── version3.py
+    ├── version5.py
+    ├── version6.py
+    ├── version7.py
+    └── version8.py
+```
+
+The `__init__.py` file is what is imported when just importing `wow_login_messages`.
+The `opcodes.py` file just contains the opcode values for the different messages.
+The `util.py` file contains utility functions intended to be used by the user of the library,
+such as a function that reads the opcode and automatically reads the remaining fields and returns the message as a Python class.
+
+### Enums
+
+Enums can only have a single enumerator value, and it can not have any other values than those specifically described.
+Consider how you would implement and use the [ProtocolVersion](../docs/protocolversion.md) enum in your programming language.
+
+Newer Python versions have the [`enum`](https://docs.python.org/3/library/enum.html) module, which provide an easy way of creating enum types.
+
+So the [ProtocolVersion](../docs/protocolversion.md) enum in Python looks like:
+```python
+import enum
+
+class ProtocolVersion(enum.Enum):
+    TWO = 2
+    THREE = 3
+    FIVE = 5
+    SIX = 6
+    SEVEN = 7
+    EIGHT = 8
+
+
+protocol_version = ProtocolVersion(2)
+value = protocol_version.value
+```
+
+This simple snippet allows construction of `ProtocolVersion` types through `ProtocolVersion(2)` and getting the value of an enumerator through `protocol_version.value`.
+
+I have chosen not to include a `read` or `write` function on the enum, since this is handled by the object that needs to read/write the enum.
+
+The python library places all imports at the top of the file, and all objects for the same version are in the same file,
+so it is not necessary to import `enum` for every enum.
+
+### Flags
+
+Flags are like enums, but can have multiple enumerator values at the same time, or none of them.
+Consider how you would implement and use the [RealmFlag](../docs/realmflag.md) flag in your programming language.
+
+The [`enum`](https://docs.python.org/3/library/enum.html) module used for enums can also be used for flags.
+
+So the [RealmFlag](../docs/realmflag.md) enum in Python looks like:
+```python
+import enum
+
+class RealmFlag(enum.Flag):
+    NONE = 0
+    INVALID = 1
+    OFFLINE = 2
+    FORCE_BLUE_RECOMMENDED = 32
+    FORCE_GREEN_RECOMMENDED = 64
+    FORCE_RED_FULL = 128
+
+realm_flag = RealmFlag(32) | RealmFlag(2)
+
+assert realm_flag.OFFLINE
+assert realm_flag.FORCE_BLUE_RECOMMENDED
+
+value = realm_flag.value
+```
+
+This snippet allows the construction of `RealmFlag` through `RealmFlag(32)`, the
+[bitwise or](https://en.wikipedia.org/wiki/Bitwise_operation#OR) through the `|` operator and getting the value through `realm_flag.value`.
+
+Flags also do not handle reading and writing, that is handled by the objects containing them, although it could be
+different in your programming language.
+
+### [CMD_AUTH_LOGON_CHALLENGE_Client](../docs/cmd_auth_logon_challenge_client.md)
+
+This is the first message sent by the client.
+It is sent automatically upon connecting.
+
+It is the only message to have the `String` type, which is a single length byte (`u8`) followed by as many
+bytes as the length byte says of string.
+All other messages use the `CString` type, which is an arbitrary amount of bytes terminated by a 0 byte.
+
+It is the only message that contains the `IpAddress` type alias.
+This is not a "real" type, but simply a `u32` that should be interpreted as an IP address if the programming language
+has built in ways of dealing with IP addresses.
+
+It contains the [ProtocolVersion](../docs/protocolversion.md) enum, which determines which version of messages is used.
+
+It contains the [Version](../docs/version.md) struct.
+
+For writing a server, it requires being able to be read, and for clients it requires being able to be written.
+When sent by clients, it has to calculate how large the actual message being sent is, and put it in the `size` field.
+
+In Python, the definition would be:
+```python
+import dataclasses
+
+@dataclasses.dataclass
+class CMD_AUTH_LOGON_CHALLENGE_Client:
+    protocol_version: ProtocolVersion
+    version: Version
+    platform: Platform
+    os: Os
+    locale: Locale
+    utc_timezone_offset: int
+    client_ip_address: int
+    account_name: str
+```
+The types after the colon (`:`) are [type hints](https://docs.python.org/3/library/typing.html).
+The `@dataclasses.dataclass` attribute adds some niceties like automatic constructors.
+
+All containers have `read`, `write` and `_size` methods.
+The underscore in `_size` is a Python way of signalling that the method should be private.
+
+The `read` function looks like
+```python
+    @staticmethod
+    async def read(reader: asyncio.StreamReader):
+        # protocol_version: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U8: 'U8'>, type_name='ProtocolVersion', upcast=False))
+        protocol_version = ProtocolVersion(int.from_bytes(await reader.readexactly(1), 'little'))
+
+        # size: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U16: 'U16'>)
+        _size = int.from_bytes(await reader.readexactly(2), 'little')
+
+        # game_name: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U32: 'U32'>)
+        _game_name = int.from_bytes(await reader.readexactly(4), 'little')
+
+        # version: DataTypeStruct(data_type_tag='Struct', content=DataTypeStructContent(sizes=Sizes(constant_sized=True, maximum_size=5, minimum_size=5), type_name='Version'))
+        version = await Version.read(reader)
+
+        # platform: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U32: 'U32'>, type_name='Platform', upcast=False))
+        platform = Platform(int.from_bytes(await reader.readexactly(4), 'little'))
+
+        # os: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U32: 'U32'>, type_name='Os', upcast=False))
+        os = Os(int.from_bytes(await reader.readexactly(4), 'little'))
+
+        # locale: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U32: 'U32'>, type_name='Locale', upcast=False))
+        locale = Locale(int.from_bytes(await reader.readexactly(4), 'little'))
+
+        # utc_timezone_offset: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U32: 'U32'>)
+        utc_timezone_offset = int.from_bytes(await reader.readexactly(4), 'little')
+
+        # client_ip_address: DataTypeIPAddress(data_type_tag='IpAddress')
+        client_ip_address = int.from_bytes(await reader.readexactly(4), 'big')
+
+        # account_name: DataTypeString(data_type_tag='String')
+        account_name = int.from_bytes(await reader.readexactly(1), 'little')
+        account_name = (await reader.readexactly(account_name)).decode('utf-8')
+
+        return CMD_AUTH_LOGON_CHALLENGE_Client(
+            protocol_version,
+            version,
+            platform,
+            os,
+            locale,
+            utc_timezone_offset,
+            client_ip_address,
+            account_name,
+            )
+```
+
+It reads every member in sequence before returning an object with all the fields.
+The comments print the name and type of variables, in order to make debugging easier.
+
+This showcases how enums are ready by reading an appropriately sized integer and then passing it into the enum constructor.
+
+The struct `Version` is read by calling a `read` function defined on that object.
+
+The `IpAddress` is simply read as an integer.
+
+Python allows changing the type of a variable, so the `account_name` variable is first used for the length, and then for the contents.
+
+`_size` is not included in the object, since manually modifying the size is error prone and tedious.
+It is instead calculated automatically in `write`.
+`_game_name` is not included in the object since it has a constant value.
+
+The write function looks like
+```python
+    def write(self, writer: asyncio.StreamWriter):
+        fmt = '<B' # opcode
+        data = [0]
+
+        # protocol_version: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U8: 'U8'>, type_name='ProtocolVersion', upcast=False))
+        fmt += 'B'
+        data.append(self.protocol_version.value)
+
+        # size: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U16: 'U16'>)
+        fmt += 'H'
+        data.append(self._size())
+
+        # game_name: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U32: 'U32'>)
+        fmt += 'I'
+        data.append(5730135)
+
+        # version: DataTypeStruct(data_type_tag='Struct', content=DataTypeStructContent(sizes=Sizes(constant_sized=True, maximum_size=5, minimum_size=5), type_name='Version'))
+        fmt, data = self.version.write(fmt, data)
+
+        # platform: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U32: 'U32'>, type_name='Platform', upcast=False))
+        fmt += 'I'
+        data.append(self.platform.value)
+
+        # os: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U32: 'U32'>, type_name='Os', upcast=False))
+        fmt += 'I'
+        data.append(self.os.value)
+
+        # locale: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U32: 'U32'>, type_name='Locale', upcast=False))
+        fmt += 'I'
+        data.append(self.locale.value)
+
+        # utc_timezone_offset: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U32: 'U32'>)
+        fmt += 'I'
+        data.append(self.utc_timezone_offset)
+
+        # client_ip_address: DataTypeIPAddress(data_type_tag='IpAddress')
+        fmt += 'I'
+        data.append(self.client_ip_address)
+
+        # account_name: DataTypeString(data_type_tag='String')
+        fmt += f'B{len(self.account_name)}s'
+        data.append(len(self.account_name))
+        data.append(self.account_name.encode('utf-8'))
+
+        data = struct.pack(fmt, *data)
+        writer.write(data)
+```
+
+The complexity of this is because of how Pythons [struct module](https://docs.python.org/3/library/struct.html) for writing values to bytes works.
+The line with `data = struct.pack(fmt, *data)` writes the data to a byte array that is then written to the stream on the next line.
+Hopefully your programming language has a more sane way of writing data to a stream.
+
+The final part is the size calculations, it looks like
+```python
+    def _size(self):
+        size = 0
+
+        # protocol_version: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U8: 'U8'>, type_name='ProtocolVersion', upcast=False))
+        size += 1
+
+        # size: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U16: 'U16'>)
+        size += 2
+
+        # game_name: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U32: 'U32'>)
+        size += 4
+
+        # version: DataTypeStruct(data_type_tag='Struct', content=DataTypeStructContent(sizes=Sizes(constant_sized=True, maximum_size=5, minimum_size=5), type_name='Version'))
+        size += 5
+
+        # platform: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U32: 'U32'>, type_name='Platform', upcast=False))
+        size += 4
+
+        # os: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U32: 'U32'>, type_name='Os', upcast=False))
+        size += 4
+
+        # locale: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U32: 'U32'>, type_name='Locale', upcast=False))
+        size += 4
+
+        # utc_timezone_offset: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U32: 'U32'>)
+        size += 4
+
+        # client_ip_address: DataTypeIPAddress(data_type_tag='IpAddress')
+        size += 4
+
+        # account_name: DataTypeString(data_type_tag='String')
+        size += len(self.account_name)
+
+        return size - 3
+```
+
+This sums up the sizes of all members, and then subtracts the fields that come before the size field.
+
+### [CMD_AUTH_LOGON_CHALLENGE_Server](../docs/cmd_auth_logon_challenge_server.md)
 
 * Constant value
 * Fields hidden behind if statement
 * Same opcode as Client
 * Requires a write for servers, read for clients
 
-### CMD_AUTH_LOGON_PROOF_Client
+### [CMD_AUTH_LOGON_PROOF_Client](../docs/cmd_auth_logon_proof_client.md)
 
 * Array of structs
 
-### CMD_REALM_LIST_Client
+### [CMD_REALM_LIST_Client](../docs/cmd_realm_list_client.md)
 
 * Not empty, but has padding
 * Will be empty if padding is ignored
 
-### CMD_XFER_ACCEPT
+### [CMD_XFER_ACCEPT](../docs/cmd_xfer_accept.md)
 
 * Empty body
 
-### CMD_REALM_LIST_Server
+### [CMD_REALM_LIST_Server](../docs/cmd_realm_list_server.md)
 
 * Array of more complex structs
 
-### Realm
+### [Realm](../docs/realm.md)
 
 * CString
+* Has `Population` alias
 * Version 8 has if flag
