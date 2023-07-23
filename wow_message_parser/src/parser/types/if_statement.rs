@@ -7,7 +7,6 @@ use crate::DefinerType;
 
 #[derive(Debug, Eq, PartialEq, Clone, Copy)]
 pub(crate) enum DefinerUsage {
-    Unused,
     NotInIf,
     InIf,
 }

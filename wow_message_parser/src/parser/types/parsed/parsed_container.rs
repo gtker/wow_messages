@@ -45,32 +45,36 @@ impl ParsedContainer {
         s
     }
 
-    pub(crate) fn contains_definer(&self, ty_name: &str) -> DefinerUsage {
-        fn inner(m: &ParsedStructMember, ty_name: &str, variable_name: &str) -> DefinerUsage {
+    pub(crate) fn contains_definer(&self, ty_name: &str) -> Option<DefinerUsage> {
+        fn inner(
+            m: &ParsedStructMember,
+            ty_name: &str,
+            variable_name: &str,
+        ) -> Option<DefinerUsage> {
             match m {
                 ParsedStructMember::Definition(d) => {
                     if let ParsedType::Identifier { s, .. } = d.ty() {
                         if s == ty_name {
-                            return DefinerUsage::NotInIf;
+                            return Some(DefinerUsage::NotInIf);
                         }
                     }
                 }
                 ParsedStructMember::IfStatement(statement) => {
                     if statement.name() == variable_name {
-                        return DefinerUsage::InIf;
+                        return Some(DefinerUsage::InIf);
                     }
 
                     let mut not_in_if = false;
                     for m in statement.all_members() {
                         match inner(m, ty_name, variable_name) {
-                            DefinerUsage::Unused => {}
-                            DefinerUsage::NotInIf => not_in_if = true,
-                            DefinerUsage::InIf => return DefinerUsage::InIf,
+                            None => {}
+                            Some(DefinerUsage::NotInIf) => not_in_if = true,
+                            Some(DefinerUsage::InIf) => return Some(DefinerUsage::InIf),
                         }
                     }
 
                     if not_in_if {
-                        return DefinerUsage::NotInIf;
+                        return Some(DefinerUsage::NotInIf);
                     }
                 }
                 ParsedStructMember::OptionalStatement(optional) => {
@@ -78,19 +82,19 @@ impl ParsedContainer {
 
                     for m in optional.members() {
                         match inner(m, ty_name, variable_name) {
-                            DefinerUsage::Unused => {}
-                            DefinerUsage::NotInIf => not_in_if = true,
-                            DefinerUsage::InIf => return DefinerUsage::InIf,
+                            None => {}
+                            Some(DefinerUsage::NotInIf) => not_in_if = true,
+                            Some(DefinerUsage::InIf) => return Some(DefinerUsage::InIf),
                         }
                     }
 
                     if not_in_if {
-                        return DefinerUsage::NotInIf;
+                        return Some(DefinerUsage::NotInIf);
                     }
                 }
             }
 
-            DefinerUsage::Unused
+            None
         }
 
         let variable_name = self.get_variable_name_of_definer_ty(ty_name);
@@ -100,18 +104,18 @@ impl ParsedContainer {
 
             for m in self.fields() {
                 match inner(m, ty_name, &variable_name) {
-                    DefinerUsage::Unused => {}
-                    DefinerUsage::NotInIf => not_in_if = true,
-                    DefinerUsage::InIf => return DefinerUsage::InIf,
+                    None => {}
+                    Some(DefinerUsage::NotInIf) => not_in_if = true,
+                    Some(DefinerUsage::InIf) => return Some(DefinerUsage::InIf),
                 }
             }
 
             if not_in_if {
-                return DefinerUsage::NotInIf;
+                return Some(DefinerUsage::NotInIf);
             }
         }
 
-        DefinerUsage::Unused
+        None
     }
 
     pub(crate) fn get_variable_name_of_definer_ty(&self, ty_name: &str) -> Option<String> {

@@ -71,9 +71,9 @@ pub(crate) fn get_definer_objects_used_in(
         }
 
         let ty = match c.contains_definer(e.name()) {
-            DefinerUsage::Unused => continue,
-            DefinerUsage::NotInIf => DefinerUsage::NotInIf,
-            DefinerUsage::InIf => DefinerUsage::InIf,
+            None => continue,
+            Some(DefinerUsage::NotInIf) => DefinerUsage::NotInIf,
+            Some(DefinerUsage::InIf) => DefinerUsage::InIf,
         };
 
         v.push((c.name().to_string(), ty));
