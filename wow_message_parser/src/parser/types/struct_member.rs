@@ -17,7 +17,7 @@ pub(crate) struct StructMemberDefinition {
     struct_type: Type,
     value: Option<ContainerValue>,
     used_as_size_in: Option<String>,
-    is_manual_size_field: bool,
+    is_manual_size_field: Option<i128>,
     used_in_if: bool,
     tags: MemberTags,
 }
@@ -37,7 +37,7 @@ impl StructMemberDefinition {
         value: Option<ContainerValue>,
         used_as_size_in: Option<String>,
         used_in_if: bool,
-        is_manual_size_field: bool,
+        is_manual_size_field: Option<i128>,
         tags: MemberTags,
     ) -> Self {
         Self {
@@ -63,8 +63,12 @@ impl StructMemberDefinition {
         &self.value
     }
 
-    pub(crate) fn is_manual_size_field(&self) -> bool {
+    pub(crate) fn size_of_fields_before_size(&self) -> Option<i128> {
         self.is_manual_size_field
+    }
+
+    pub(crate) fn is_manual_size_field(&self) -> bool {
+        self.is_manual_size_field.is_some()
     }
 
     pub(crate) fn tags(&self) -> &MemberTags {

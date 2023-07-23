@@ -125,8 +125,9 @@ fn parsed_array_to_array(
         ParsedArraySize::Fixed(v) => ArraySize::Fixed(v),
         ParsedArraySize::Variable(v) => {
             let m = p.get_field(&v);
-            let m =
-                parsed_struct_member_definition_to_struct_member(p, containers, definers, tags, m);
+            let m = parsed_struct_member_definition_to_struct_member(
+                p, containers, definers, tags, m, None,
+            );
             ArraySize::Variable(Box::new(m))
         }
         ParsedArraySize::Endless => ArraySize::Endless,
@@ -156,6 +157,7 @@ fn parsed_struct_member_definition_to_struct_member(
     definers: &[Definer],
     tags: &ObjectTags,
     d: ParsedStructMemberDefinition,
+    size_of_fields_before_size: Option<i128>,
 ) -> StructMemberDefinition {
     let (is_manual_size_field, value) = if let Some(v) = d.verified_value {
         if v.original_string() == CONTAINER_SELF_SIZE_FIELD {
@@ -173,7 +175,11 @@ fn parsed_struct_member_definition_to_struct_member(
         value,
         d.used_as_size_in,
         d.used_in_if.unwrap(),
-        is_manual_size_field,
+        if is_manual_size_field {
+            size_of_fields_before_size
+        } else {
+            None
+        },
         d.tags,
     )
 }
@@ -184,11 +190,19 @@ fn parsed_member_to_member(
     containers: &[ParsedContainer],
     definers: &[Definer],
     tags: &ObjectTags,
+    size_of_fields_before_size: Option<i128>,
 ) -> StructMember {
     match m {
-        ParsedStructMember::Definition(d) => StructMember::Definition(
-            parsed_struct_member_definition_to_struct_member(c, containers, definers, tags, *d),
-        ),
+        ParsedStructMember::Definition(d) => {
+            StructMember::Definition(parsed_struct_member_definition_to_struct_member(
+                c,
+                containers,
+                definers,
+                tags,
+                *d,
+                size_of_fields_before_size,
+            ))
+        }
         ParsedStructMember::IfStatement(s) => {
             let member = c.get_field_ty(s.conditional.variable_name()).str();
             let definer = get_definer(definers, &member, c.tags()).unwrap();
@@ -222,9 +236,16 @@ fn parsed_member_to_member(
 
             StructMember::IfStatement(IfStatement::new(
                 s.conditional,
-                parsed_members_to_members(c, s.members, containers, definers, tags),
+                parsed_members_to_members(c, s.members, containers, definers, tags, None),
                 parsed_if_statement_to_if_statement(c, s.else_ifs, containers, definers, tags),
-                parsed_members_to_members(c, s.else_statement_members, containers, definers, tags),
+                parsed_members_to_members(
+                    c,
+                    s.else_statement_members,
+                    containers,
+                    definers,
+                    tags,
+                    None,
+                ),
                 parsed_type_to_type(c, containers, definers, s.original_ty.unwrap(), tags),
                 separate_if_statement,
             ))
@@ -232,7 +253,7 @@ fn parsed_member_to_member(
         ParsedStructMember::OptionalStatement(o) => {
             StructMember::OptionalStatement(OptionalStatement::new(
                 o.name,
-                parsed_members_to_members(c, o.members, containers, definers, tags),
+                parsed_members_to_members(c, o.members, containers, definers, tags, None),
             ))
         }
     }
@@ -244,11 +265,19 @@ pub(crate) fn parsed_members_to_members(
     containers: &[ParsedContainer],
     definers: &[Definer],
     tags: &ObjectTags,
+    size_of_fields_before_size: Option<i128>,
 ) -> Vec<StructMember> {
     let mut v = Vec::with_capacity(members.len());
 
     for m in members {
-        v.push(parsed_member_to_member(c, m, containers, definers, tags));
+        v.push(parsed_member_to_member(
+            c,
+            m,
+            containers,
+            definers,
+            tags,
+            size_of_fields_before_size,
+        ));
     }
 
     v
@@ -268,9 +297,16 @@ fn parsed_if_statement_to_if_statement(
 
         v.push(IfStatement::new(
             p.conditional,
-            parsed_members_to_members(c, p.members, containers, definers, tags),
+            parsed_members_to_members(c, p.members, containers, definers, tags, None),
             parsed_if_statement_to_if_statement(c, p.else_ifs, containers, definers, tags),
-            parsed_members_to_members(c, p.else_statement_members, containers, definers, tags),
+            parsed_members_to_members(
+                c,
+                p.else_statement_members,
+                containers,
+                definers,
+                tags,
+                None,
+            ),
             parsed_type_to_type(c, containers, definers, p.original_ty.unwrap(), tags),
             separate_if_statement,
         ))

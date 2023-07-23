@@ -96,7 +96,6 @@ pub(crate) fn print_write(s: &mut Writer, e: &Container, o: &Objects, prefix: &s
 
 pub(crate) fn print_write_definition(
     s: &mut Writer,
-    e: &Container,
     variable_prefix: &str,
     d: &StructMemberDefinition,
     postfix: &str,
@@ -114,7 +113,7 @@ pub(crate) fn print_write_definition(
                 int_type,
                 d.used_as_size_in(),
                 d.value(),
-                e.size_of_fields_before_size(),
+                d.size_of_fields_before_size(),
                 d.is_manual_size_field(),
                 postfix,
             );
@@ -340,7 +339,7 @@ pub(crate) fn print_write_field(
 ) {
     match field {
         StructMember::Definition(d) => {
-            print_write_definition(s, e, variable_prefix, d, postfix);
+            print_write_definition(s, variable_prefix, d, postfix);
         }
         StructMember::IfStatement(statement) => match statement.definer_type() {
             DefinerType::Enum => {

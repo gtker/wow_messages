@@ -70,8 +70,14 @@ pub(crate) fn parsed_container_to_container(
     let size_of_fields_before_size =
         size_of_fields_before(&p.name, &p, containers, definers, &p.members, &p.file_info);
 
-    let members =
-        container::parsed_members_to_members(&p, p.members.clone(), containers, definers, p.tags());
+    let members = container::parsed_members_to_members(
+        &p,
+        p.members.clone(),
+        containers,
+        definers,
+        p.tags(),
+        size_of_fields_before_size,
+    );
 
     let rust_object_view = create_rust_object(&p, &members, containers, definers);
 
