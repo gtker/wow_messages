@@ -1,3 +1,4 @@
+pub use crate::manual::*;
 pub(crate) mod locale;
 pub use locale::*;
 pub(crate) mod os;

@@ -588,7 +588,8 @@ fn print_container_field(
                 Type::MonsterMoveSplines => {
                     "[MonsterMoveSpline](../spec/monster-move-spline.md)".to_string()
                 }
-                Type::Seconds
+                Type::Population
+                | Type::Seconds
                 | Type::Milliseconds
                 | Type::IpAddress
                 | Type::Level16

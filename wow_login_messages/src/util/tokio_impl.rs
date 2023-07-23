@@ -50,6 +50,10 @@ pub async fn tokio_read_u32_le<R: AsyncReadExt + Unpin>(r: &mut R) -> Result<u32
     r.read_u32_le().await
 }
 
+pub async fn tokio_read_f32_le<R: AsyncReadExt + Unpin>(r: &mut R) -> Result<f32, std::io::Error> {
+    r.read_f32_le().await
+}
+
 pub async fn tokio_read_u32_be<R: AsyncReadExt + Unpin>(r: &mut R) -> Result<u32, std::io::Error> {
     let mut v = [0_u8; 4];
     r.read_exact(&mut v).await?;

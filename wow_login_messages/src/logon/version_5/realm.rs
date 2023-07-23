@@ -1,11 +1,12 @@
 use std::io::{Read, Write};
 
+use crate::all::population::Population;
 use crate::logon::version_2::{
-    Population, RealmCategory, RealmFlag, RealmType,
+    RealmCategory, RealmFlag, RealmType,
 };
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:76`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L76):
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:67`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L67):
 /// ```text
 /// struct Realm {
 ///     RealmType realm_type;
@@ -57,7 +58,7 @@ impl Realm {
         w.write_all(&[0])?;
 
         // population: Population
-        w.write_all(&(self.population.as_int().to_le_bytes()))?;
+        w.write_all(&self.population.as_int().to_le_bytes())?;
 
         // number_of_characters_on_realm: u8
         w.write_all(&self.number_of_characters_on_realm.to_le_bytes())?;
@@ -96,7 +97,7 @@ impl Realm {
         };
 
         // population: Population
-        let population = crate::util::read_u32_le(&mut r)?.into();
+        let population = crate::util::read_f32_le(&mut r)?.into();
 
         // number_of_characters_on_realm: u8
         let number_of_characters_on_realm = crate::util::read_u8_le(&mut r)?;
@@ -144,7 +145,7 @@ impl Realm {
         };
 
         // population: Population
-        let population = crate::util::tokio_read_u32_le(&mut r).await?.into();
+        let population = crate::util::tokio_read_f32_le(&mut r).await?.into();
 
         // number_of_characters_on_realm: u8
         let number_of_characters_on_realm = crate::util::tokio_read_u8_le(&mut r).await?;
@@ -192,7 +193,7 @@ impl Realm {
         };
 
         // population: Population
-        let population = crate::util::astd_read_u32_le(&mut r).await?.into();
+        let population = crate::util::astd_read_f32_le(&mut r).await?.into();
 
         // number_of_characters_on_realm: u8
         let number_of_characters_on_realm = crate::util::astd_read_u8_le(&mut r).await?;

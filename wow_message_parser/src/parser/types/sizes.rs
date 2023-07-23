@@ -54,6 +54,7 @@ pub(crate) const LEVEL32_SIZE: u8 = 4;
 pub(crate) const SECONDS_SIZE: u8 = 4;
 pub(crate) const MILLISECONDS_SIZE: u8 = 4;
 pub(crate) const IP_ADDRESS_SIZE: u8 = 4;
+pub(crate) const POPULATION_SIZE: u8 = 4;
 pub(crate) const VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE: u8 = 4;
 pub(crate) const VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE: u8 = 8;
 pub(crate) const ADDON_ARRAY_MIN: u8 = 0;

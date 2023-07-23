@@ -41,6 +41,7 @@ pub(crate) enum Type {
     EnchantMask,
     InspectTalentGearMask,
     Gold,
+    Population,
     Level,
     Level16,
     Level32,
@@ -58,6 +59,7 @@ impl Type {
     pub(crate) const LEVEL_NAME16: &'static str = "Level16";
     pub(crate) const LEVEL_NAME32: &'static str = "Level32";
     pub(crate) const GOLD_NAME: &'static str = "Gold";
+    pub(crate) const POPULATION_NAME: &'static str = "Population";
     pub(crate) const GUID_NAME: &'static str = "Guid";
     pub(crate) const PACKED_GUID_NAME: &'static str = "PackedGuid";
     pub(crate) const AURA_MASK_NAME: &'static str = "AuraMask";
@@ -143,6 +145,7 @@ impl Type {
             }
             Type::Seconds => ParsedType::Seconds,
             Type::Milliseconds => ParsedType::Milliseconds,
+            Type::Population => ParsedType::Population,
         }
     }
 
@@ -232,7 +235,8 @@ impl Type {
         match self {
             Type::Bool(i) | Type::Integer(i) => i.doc_endian_str().to_string(),
 
-            Type::Seconds
+            Type::Population
+            | Type::Seconds
             | Type::Milliseconds
             | Type::FloatingPoint
             | Type::Level16

@@ -165,6 +165,11 @@ pub(crate) fn print_write_definition(
                 "w.write_all(&{variable_prefix}{name}.to_le_bytes()){postfix}?;",
             ));
         }
+        Type::Population => {
+            s.wln(format!(
+                "w.write_all(&{variable_prefix}{name}.as_int().to_le_bytes()){postfix}?;",
+            ));
+        }
         Type::SizedCString => {
             s.wln(format!(
                 "w.write_all(&(({variable_prefix}{name}.len() + 1) as u32).to_le_bytes()){postfix}?;",

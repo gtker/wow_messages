@@ -54,6 +54,7 @@ pub(crate) enum RustType {
     EnchantMask,
     InspectTalentGearMask,
     Gold,
+    Population,
     Level,
     Level16,
     Level32,
@@ -120,12 +121,14 @@ impl RustType {
             | RustType::Struct { .. } => {
                 panic!("invalid conversion")
             }
+            RustType::Population => Type::Population,
         }
     }
 
     pub(crate) fn size_requires_variable(&self) -> bool {
         match self {
-            RustType::Integer(_)
+            RustType::Population
+            | RustType::Integer(_)
             | RustType::Bool(_)
             | RustType::DateTime
             | RustType::Floating

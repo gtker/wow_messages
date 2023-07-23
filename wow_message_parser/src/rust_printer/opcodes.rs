@@ -130,7 +130,7 @@ pub(crate) fn definition(s: &mut Writer, v: &[&Container], ty: &str, version: Ve
     // would be a breaking change.
     match version {
         Version::Login(_) => {
-            s.wln("#[derive(Debug, Clone, PartialEq, Eq)]");
+            s.wln("#[derive(Debug, Clone, PartialEq)]");
         }
         Version::World(_) => {
             s.wln("#[derive(Debug, Clone, PartialEq)]");

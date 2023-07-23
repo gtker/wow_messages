@@ -230,6 +230,13 @@
             }
           }
         },
+        "Population": {
+          "properties": {
+            "content": {
+              "type": "float32"
+            }
+          }
+        },
         "DateTime": {
           "properties": {
             "content": {
@@ -768,6 +775,9 @@
               "ref": "integer_type"
             }
           }
+        },
+        "Population": {
+          "properties": {}
         },
         "DateTime": {
           "properties": {}

@@ -561,6 +561,8 @@ impl Container {
                 Type::Seconds | Type::Milliseconds => ("std::time".to_string(), name),
                 Type::IpAddress => ("std::net".to_string(), name),
 
+                Type::Population => ("crate::all::population".to_string(), name),
+
                 Type::Gold => {
                     let pre = if self.tags().is_in_base() {
                         "crate"

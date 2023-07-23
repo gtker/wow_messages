@@ -2,8 +2,6 @@ pub mod opcodes;
 
 pub(crate) mod login_result;
 pub use login_result::*;
-pub(crate) mod population;
-pub use population::*;
 pub(crate) mod realm_category;
 pub use realm_category::*;
 pub(crate) mod realm_type;

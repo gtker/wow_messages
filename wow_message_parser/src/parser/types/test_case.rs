@@ -119,6 +119,9 @@ pub(crate) enum TestValue {
         value: f64,
         original_string: String,
     },
+    Population {
+        value: f32,
+    },
     Array {
         values: Vec<usize>,
         size: ArraySize,

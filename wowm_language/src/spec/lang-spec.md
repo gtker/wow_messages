@@ -31,24 +31,25 @@ The `CString` type is an array of valid UTF-8 `u8`s terminated by a null (0) byt
 
 The `SizedCString` is the same as a `u32` followed by a `CString`, but they are kept in the same type to semantically convey that the `u32` field has no purpose other than to parse the `CString`.
 
-| Type                         | Purpose                                                                                                                       | C Name                                      |
-|------------------------------|-------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
-| `u*`                         | Unsigned little endian `*` bit value.                                                                                         | `unsigned` `char`/`short`/`int`/`long long` |
-| `u48`                        | A `u32` followed by a `u16`. See [`u48`](u48.md)                                                                              | `unsigned int` + `unsigned short`           |
-| `i*`                         | Signed little endian `*` bit value.                                                                                           | `char`/`short`/`int`/`long long`            |
-| `f32`                        | Floating point value of 4 bytes.                                                                                              | `float`/`double`                            |
-| `CString`                    | UTF-8 string type that is terminated by a zero byte value.                                                                    | `char*`                                     |
-| `SizedCString`               | A `u32` field that determines the size of the string followed by a UTF-8 string type that is terminated by a zero byte value. | `uint32_t` + `char*`                        |
-| `String[len]`                | UTF-8 string type of exactly length `len`.                                                                                    | -                                           |
-| `PackedGuid`                 | GUID sent in the "packed" format. See [PackedGuid](packed-guid.md).                                                           | -                                           |
-| `UpdateMask`                 | Update values sent in a relatively complex format. See [UpdateMask](update-mask.md).                                          | -                                           |
-| `AuraMask`                   | Aura values sent using a mask. See [Masks](aura-mask.md).                                                                     | -                                           |
-| `EnchantMask`                | Enchant values sent using a mask. See [Masks](aura-mask.md).                                                                  | -                                           |
-| `InspectTalentGearMask`      | [InspectTalentGear](../docs/inspecttalentgear.md) values sent using a mask. See [Masks](aura-mask.md).                        | -                                           |
-| `Bool`                       | `u8` where `0` is false and any other value is `true`. Can be substituted by a `u8`.                                          | -                                           |
-| `DateTime`                   | `u32` that represents a custom bitmask for date and time. See [the DateTime section](#datetime)                               | -                                           |
-| `AchievementDoneArray`       | Array that terminates on a sentinel value. See [AchievementDoneArray](achievement-done-array.md)                              | -                                           |
-| `AchievementInProgressArray` | Array that terminates on a sentinel value. See [AchievementInProgressArray](achievement-done-array.md)                        | -                                           |
+| Type                         | Purpose                                                                                                                                                           | C Name                                      |
+|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
+| `u*`                         | Unsigned little endian `*` bit value.                                                                                                                             | `unsigned` `char`/`short`/`int`/`long long` |
+| `u48`                        | A `u32` followed by a `u16`. See [`u48`](u48.md)                                                                                                                  | `unsigned int` + `unsigned short`           |
+| `i*`                         | Signed little endian `*` bit value.                                                                                                                               | `char`/`short`/`int`/`long long`            |
+| `f32`                        | Floating point value of 4 bytes.                                                                                                                                  | `float`/`double`                            |
+| `CString`                    | UTF-8 string type that is terminated by a zero byte value.                                                                                                        | `char*`                                     |
+| `SizedCString`               | A `u32` field that determines the size of the string followed by a UTF-8 string type that is terminated by a zero byte value.                                     | `uint32_t` + `char*`                        |
+| `String[len]`                | UTF-8 string type of exactly length `len`.                                                                                                                        | -                                           |
+| `PackedGuid`                 | GUID sent in the "packed" format. See [PackedGuid](packed-guid.md).                                                                                               | -                                           |
+| `UpdateMask`                 | Update values sent in a relatively complex format. See [UpdateMask](update-mask.md).                                                                              | -                                           |
+| `AuraMask`                   | Aura values sent using a mask. See [Masks](aura-mask.md).                                                                                                         | -                                           |
+| `EnchantMask`                | Enchant values sent using a mask. See [Masks](aura-mask.md).                                                                                                      | -                                           |
+| `InspectTalentGearMask`      | [InspectTalentGear](../docs/inspecttalentgear.md) values sent using a mask. See [Masks](aura-mask.md).                                                            | -                                           |
+| `Bool`                       | `u8` where `0` is false and any other value is `true`. Can be substituted by a `u8`.                                                                              | -                                           |
+| `DateTime`                   | `u32` that represents a custom bitmask for date and time. See [the DateTime section](#datetime)                                                                   | -                                           |
+| `AchievementDoneArray`       | Array that terminates on a sentinel value. See [AchievementDoneArray](achievement-done-array.md)                                                                  | -                                           |
+| `AchievementInProgressArray` | Array that terminates on a sentinel value. See [AchievementInProgressArray](achievement-done-array.md)                                                            | -                                           |
+| `Population`                 | `f32` with the special behavior that a value of `200` always means `GREEN_RECOMMENDED`, `400` always means `RED_FULL`, and `600` always means `BLUE_RECOMMENDED`. | -                                           |
 
 ### DateTime
 

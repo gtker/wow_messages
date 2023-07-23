@@ -2,7 +2,6 @@ pub mod opcodes;
 
 pub(crate) mod login_result;
 pub use login_result::*;
-pub use crate::logon::version_2::population::*;
 pub use crate::logon::version_2::realm_category::*;
 pub use crate::logon::version_2::realm_type::*;
 pub(crate) mod account_flag;

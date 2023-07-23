@@ -1,13 +1,14 @@
 use crate::ServerMessage;
 use std::io::{Read, Write};
 
+use crate::all::population::Population;
 use crate::logon::version_2::{
-    Population, RealmCategory, RealmFlag, RealmType,
+    RealmCategory, RealmFlag, RealmType,
 };
 use crate::logon::version_5::Realm;
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:90`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L90):
+#[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/cmd_realm/server.wowm:81`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/cmd_realm/server.wowm#L81):
 /// ```text
 /// slogin CMD_REALM_LIST_Server = 0x10 {
 ///     u16 size = self.size;
@@ -191,7 +192,7 @@ impl ServerMessage for CMD_REALM_LIST_Server {
             writeln!(s, "        flag = {};", v.flag.as_test_case_value()).unwrap();
             writeln!(s, "        name = \"{}\";", v.name).unwrap();
             writeln!(s, "        address = \"{}\";", v.address).unwrap();
-            writeln!(s, "        population = {};", v.population.as_test_case_value()).unwrap();
+            writeln!(s, "    {}", if v.population.as_int().to_string().contains('.') { v.population.as_int().to_string() } else { format!("{}.0", v.population.as_int()) }).unwrap();
             writeln!(s, "        number_of_characters_on_realm = {};", v.number_of_characters_on_realm).unwrap();
             writeln!(s, "        category = {};", v.category.as_test_case_value()).unwrap();
             writeln!(s, "        realm_id = {};", v.realm_id).unwrap();

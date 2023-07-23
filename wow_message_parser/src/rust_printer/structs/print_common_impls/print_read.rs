@@ -292,6 +292,11 @@ fn print_read_definition(
                 },
             ));
         }
+        Type::Population => {
+            s.wln_no_indent(format!(
+                "crate::util::{prefix}read_f32_le(&mut r){postfix}?.into();"
+            ));
+        }
         Type::Flag { e, .. } => {
             if matches!(e.ty(), &IntegerType::U48) {
                 s.body_no_indent_or_space_with_semicolon(|s| {

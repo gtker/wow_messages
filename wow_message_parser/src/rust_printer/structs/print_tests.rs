@@ -374,6 +374,20 @@ fn print_value(
         TestValue::FloatingNumber { value, .. } => {
             s.wln_no_indent(format!("{value}_f32,"));
         }
+        TestValue::Population { value } => {
+            let value = *value;
+            let value = if value == 200.0 {
+                "Population::GreenRecommended".to_string()
+            } else if value == 400.0 {
+                "Population::RedFull".to_string()
+            } else if value == 600.0 {
+                "Population::BlueRecommended".to_string()
+            } else {
+                format!("Self::Other({value})")
+            };
+
+            s.wln_no_indent(format!("{value},"));
+        }
         TestValue::Array { values, size } => {
             match size {
                 ArraySize::Fixed(_) => s.w_no_indent("["),

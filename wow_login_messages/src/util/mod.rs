@@ -68,6 +68,13 @@ pub fn read_u32_be<R: Read>(r: &mut R) -> Result<u32, std::io::Error> {
     Ok(u32::from_be_bytes(v))
 }
 
+// u32
+pub fn read_f32_le<R: Read>(r: &mut R) -> Result<f32, std::io::Error> {
+    let mut v = [0_u8; 4];
+    r.read_exact(&mut v)?;
+    Ok(f32::from_le_bytes(v))
+}
+
 // u64
 pub fn read_u64_le<R: Read>(r: &mut R) -> Result<u64, std::io::Error> {
     let mut v = [0_u8; 8];

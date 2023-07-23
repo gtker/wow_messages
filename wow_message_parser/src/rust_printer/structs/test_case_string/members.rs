@@ -243,6 +243,9 @@ fn print_member_definition(
                 format!("{var_name}.as_int()"),
             );
         }
+        Type::Population => {
+            test_case_string::wlna(s, "    {}", format!("if {var_name}.as_int().to_string().contains(\'.\') {{ {var_name}.as_int().to_string() }} else {{ format!(\"{{}}.0\", {var_name}.as_int()) }}"));
+        }
         Type::String | Type::CString | Type::SizedCString => {
             test_case_string::wlna(s, format!("{prefix}{name} = \\\"{{}}\\\";"), var_name);
         }

@@ -318,6 +318,9 @@ impl ModFiles {
             if version != LoginVersion::All {
                 s.wln("pub mod opcodes;");
                 s.newline();
+            } else {
+                // All does have manual implementation that needs to be included
+                s.wln("pub use crate::manual::*;")
             }
 
             s.wln(text);

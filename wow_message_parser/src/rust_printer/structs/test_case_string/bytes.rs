@@ -152,6 +152,12 @@ fn print_bytes_definition(
             ));
         }
 
+        Type::Population => {
+            s.wln(format!(
+                "crate::util::write_bytes(&mut s, &mut bytes, 4, \"{name}\", {prefix_text});"
+            ));
+        }
+
         Type::Enum { e, upcast } | Type::Flag { e, upcast } => {
             let size = if let Some(upcast) = upcast {
                 upcast.size()

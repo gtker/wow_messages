@@ -278,6 +278,7 @@ pub(crate) enum IrType {
     EnchantMask,
     InspectTalentGearMask,
     Gold,
+    Population,
     Level,
     Level16,
     Level32,
@@ -348,6 +349,7 @@ impl From<&Type> for IrType {
             Type::IpAddress => Self::IpAddress,
             Type::Seconds => Self::Seconds,
             Type::Milliseconds => Self::Milliseconds,
+            Type::Population => Self::Population,
         }
     }
 }
@@ -540,6 +542,7 @@ pub(crate) enum IrTestValue {
     IpAddress(IrIntegerEnumValue),
     Seconds(IrIntegerEnumValue),
     Milliseconds(IrIntegerEnumValue),
+    Population(f32),
 }
 
 impl From<&TestValue> for IrTestValue {
@@ -580,6 +583,7 @@ impl From<&TestValue> for IrTestValue {
             }
             TestValue::Seconds(i) => Self::Seconds(i.into()),
             TestValue::Milliseconds(i) => Self::Milliseconds(i.into()),
+            TestValue::Population { value, .. } => Self::Population(*value),
         }
     }
 }

@@ -414,6 +414,7 @@ fn create_struct_member_definition(
         Type::IpAddress => RustType::IpAddress,
         Type::Seconds => RustType::Seconds,
         Type::Milliseconds => RustType::Milliseconds,
+        Type::Population => RustType::Population,
     };
 
     let name = d.name().to_string();

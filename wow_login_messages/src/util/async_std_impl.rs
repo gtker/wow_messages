@@ -51,6 +51,12 @@ pub async fn astd_read_u32_le<R: ReadExt + Unpin>(mut r: R) -> Result<u32, std::
     Ok(u32::from_le_bytes(v))
 }
 
+pub async fn astd_read_f32_le<R: ReadExt + Unpin>(mut r: R) -> Result<f32, std::io::Error> {
+    let mut v = [0_u8; 4];
+    r.read_exact(&mut v).await?;
+    Ok(f32::from_le_bytes(v))
+}
+
 pub async fn astd_read_u32_be<R: ReadExt + Unpin>(mut r: R) -> Result<u32, std::io::Error> {
     let mut v = [0_u8; 4];
     r.read_exact(&mut v).await?;

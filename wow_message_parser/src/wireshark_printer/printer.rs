@@ -530,6 +530,9 @@ fn print_definition(
         Type::IpAddress => {
             unreachable!("ip addresses are only in login")
         }
+        Type::Population => {
+            unreachable!("population only in login")
+        }
     }
 
     if d.tags().compressed().is_some() {

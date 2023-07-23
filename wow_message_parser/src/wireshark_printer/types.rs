@@ -212,6 +212,9 @@ impl WiresharkType {
             Type::IpAddress => {
                 unreachable!("ip addresses are only in login")
             }
+            Type::Population => {
+                unreachable!("population only in login")
+            }
         })
     }
 

@@ -123,6 +123,7 @@ pub mod errors;
 pub mod helper;
 #[allow(non_camel_case_types, unused, clippy::single_match)]
 pub(crate) mod logon;
+pub(crate) mod manual;
 pub(crate) mod util;
 
 pub use logon::*;

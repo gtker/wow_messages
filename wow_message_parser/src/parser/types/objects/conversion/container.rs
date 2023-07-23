@@ -111,6 +111,7 @@ fn parsed_type_to_type(
         ParsedType::IpAddress => Type::IpAddress,
         ParsedType::Seconds => Type::Seconds,
         ParsedType::Milliseconds => Type::Milliseconds,
+        ParsedType::Population => Type::Population,
     }
 }
 
@@ -577,6 +578,9 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 parsed_array_to_array(c, array.clone(), containers, definers, c.tags()).size();
             TestValue::Array { values: v, size }
         }
+        ParsedType::Population => TestValue::Population {
+            value: value.parse().unwrap(),
+        },
         ParsedType::FloatingPoint => TestValue::FloatingNumber {
             value: value.parse().unwrap(),
             original_string: value.clone(),

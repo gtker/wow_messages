@@ -3,7 +3,7 @@ use std::io::{Read, Write};
 use super::*;
 use crate::all::*;
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum ServerOpcodeMessage {
     CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Server),
     CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Server),
@@ -111,7 +111,7 @@ impl From<CMD_REALM_LIST_Server> for ServerOpcodeMessage {
 }
 
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum ClientOpcodeMessage {
     CMD_AUTH_LOGON_CHALLENGE(CMD_AUTH_LOGON_CHALLENGE_Client),
     CMD_AUTH_LOGON_PROOF(CMD_AUTH_LOGON_PROOF_Client),

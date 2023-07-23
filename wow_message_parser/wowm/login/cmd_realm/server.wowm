@@ -31,15 +31,6 @@ flag RealmFlag : u8 {
     login_versions = "8";
 }
 
-enum Population : u32 {
-    GREEN_RECOMMENDED = 0x43480000;
-    RED_FULL = 0x43c80000;
-    BLUE_RECOMMENDED = 0x44160000;
-    OTHER = self.value;
-} {
-    login_versions = "2 3 5 6 7 8";
-}
-
 enum RealmCategory : u8 {
     DEFAULT = 0x0;
     ONE = 0x1;
@@ -114,7 +105,7 @@ test CMD_REALM_LIST_Server {
             flag = NONE;
             name = "A";
             address = "A";
-            population = RED_FULL;
+            population = 400.0;
             number_of_characters_on_realm = 1;
             category = DEFAULT;
             realm_id = 2;
@@ -145,7 +136,7 @@ test CMD_REALM_LIST_Server {
             flag = INVALID | OFFLINE;
             name = "A";
             address = "A";
-            population = RED_FULL;
+            population = 400.0;
             number_of_characters_on_realm = 1;
             category = DEFAULT;
             realm_id = 2;
@@ -206,7 +197,7 @@ test CMD_REALM_LIST_Server {
             flag = INVALID | OFFLINE;
             name = "A";
             address = "A";
-            population = RED_FULL;
+            population = 400.0;
             number_of_characters_on_realm = 1;
             category = DEFAULT;
             realm_id = 2;
@@ -239,7 +230,7 @@ test CMD_REALM_LIST_Server {
             flag = SPECIFY_BUILD;
             name = "A";
             address = "A";
-            population = RED_FULL;
+            population = 400.0;
             number_of_characters_on_realm = 1;
             category = DEFAULT;
             realm_id = 2;

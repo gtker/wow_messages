@@ -8,7 +8,7 @@ use crate::parser::types::sizes::{
     update_mask_max, Sizes, ADDON_ARRAY_MAX, ADDON_ARRAY_MIN, AURA_MASK_MAX_SIZE,
     AURA_MASK_MIN_SIZE, DATETIME_SIZE, F32_SIZE, GOLD_SIZE, GUID_SIZE, IP_ADDRESS_SIZE,
     LEVEL16_SIZE, LEVEL32_SIZE, LEVEL_SIZE, MILLISECONDS_SIZE, NAMED_GUID_MAX_SIZE,
-    NAMED_GUID_MIN_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, SECONDS_SIZE,
+    NAMED_GUID_MIN_SIZE, PACKED_GUID_MAX_SIZE, PACKED_GUID_MIN_SIZE, POPULATION_SIZE, SECONDS_SIZE,
     UPDATE_MASK_MIN_SIZE, VARIABLE_ITEM_RANDOM_PROPERTY_MAX_SIZE,
     VARIABLE_ITEM_RANDOM_PROPERTY_MIN_SIZE,
 };
@@ -50,6 +50,7 @@ pub(crate) enum ParsedType {
     VariableItemRandomProperty,
     AddonArray,
     Gold,
+    Population,
     Level,
     Level16,
     Level32,
@@ -93,6 +94,7 @@ impl ParsedType {
             ParsedType::IpAddress => Type::IP_ADDRESS_NAME.to_string(),
             ParsedType::Seconds => Type::SECONDS_NAME.to_string(),
             ParsedType::Milliseconds => Type::MILLISECONDS_NAME.to_string(),
+            ParsedType::Population => Type::POPULATION_NAME.to_string(),
         }
     }
 
@@ -168,6 +170,7 @@ impl ParsedType {
             ),
             ParsedType::AddonArray => (ADDON_ARRAY_MIN.into(), ADDON_ARRAY_MAX),
             ParsedType::IpAddress => (IP_ADDRESS_SIZE.into(), IP_ADDRESS_SIZE.into()),
+            ParsedType::Population => (POPULATION_SIZE.into(), POPULATION_SIZE.into()),
             t => unimplemented!("sizes for {t:?}"),
         }
     }
@@ -306,6 +309,7 @@ impl ParsedType {
             Type::SECONDS_NAME => Self::Seconds,
             Type::SPELL_NAME | "Item" => Self::Integer(IntegerType::U32),
             Type::GOLD_NAME => Self::Gold,
+            Type::POPULATION_NAME => Self::Population,
             Type::GUID_NAME => Self::Guid,
             Type::PACKED_GUID_NAME => Self::PackedGuid,
             Type::NAMED_GUID_NAME => Self::NamedGuid,
