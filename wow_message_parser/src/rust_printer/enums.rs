@@ -54,17 +54,6 @@ fn declaration(s: &mut Writer, e: &Definer, o: &Objects, common_visibility_overr
 
             s.wln(format!("{},", field.rust_name()));
         }
-
-        match e.self_value() {
-            None => {}
-            Some(self_value) => {
-                s.wln(format!(
-                    "{}({}),",
-                    self_value.rust_name(),
-                    e.ty().rust_str()
-                ));
-            }
-        }
     });
 }
 
@@ -119,12 +108,6 @@ fn as_type(s: &mut Writer, e: &Definer, visibility_override: bool) {
                 };
                 s.wln(format!("Self::{name} => {value},",));
             }
-            match e.self_value() {
-                None => {}
-                Some(self_value) => {
-                    s.wln(format!("Self::{}(v) => *v,", self_value.rust_name()));
-                }
-            }
         });
     });
 }
@@ -140,15 +123,6 @@ fn testcase_string(s: &mut Writer, e: &Definer) {
                     let field = field.name();
 
                     s.wln(format!("Self::{rust} => \"{field}\","));
-                }
-                match e.self_value() {
-                    None => {}
-                    Some(self_value) => {
-                        let rust = self_value.rust_name();
-                        let field = self_value.name();
-
-                        s.wln(format!("Self::{rust}(_) => \"{field}\","));
-                    }
                 }
             });
         });
@@ -180,16 +154,6 @@ fn print_display(s: &mut Writer, e: &Definer) {
                             display = display,
                         ));
                     }
-
-                    match e.self_value() {
-                        None => {}
-                        Some(self_value) => {
-                            s.wln(format!(
-                                r#"Self::{name}(v) => f.write_fmt(format_args!("{name}({{v}})")),"#,
-                                name = self_value.rust_name(),
-                            ));
-                        }
-                    }
                 });
             },
         );
@@ -197,11 +161,7 @@ fn print_display(s: &mut Writer, e: &Definer) {
 }
 
 fn print_from_or_try_from(s: &mut Writer, e: &Definer) {
-    if e.self_value().is_none() {
-        print_try_from(s, e);
-    } else {
-        print_from(s, e);
-    }
+    print_try_from(s, e);
 }
 
 fn print_try_from(s: &mut Writer, e: &Definer) {
@@ -258,24 +218,4 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
             );
         });
     }
-}
-
-fn print_from(s: &mut Writer, e: &Definer) {
-    let ty_name = e.ty().rust_str();
-
-    s.impl_for(format!("From<{ty_name}>"), e.name(), |s| {
-        s.body(format!("fn from(value: {ty_name}) -> Self"), |s| {
-            s.body("match value", |s| {
-                for field in e.fields() {
-                    let value = field.value().int();
-                    let field_name = field.rust_name();
-
-                    s.wln(format!("{value} => Self::{field_name},",));
-                }
-
-                let self_name = e.self_value().as_ref().unwrap().rust_name();
-                s.wln(format!("v => Self::{self_name}(v)",));
-            });
-        });
-    });
 }

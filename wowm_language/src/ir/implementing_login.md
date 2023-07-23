@@ -34,10 +34,11 @@ and the opcode.
 ### CMD_AUTH_LOGON_CHALLENGE_Client
 
 * Automatically sent by client
-* Has enums, with and without self.value
+* Has enums.
 * Has String
 * Has size
 * Has `IpAddress` alias
+* Has `Population` alias
 * Requires a read for servers, write for clients
 
 ### CMD_AUTH_LOGON_CHALLENGE_Server

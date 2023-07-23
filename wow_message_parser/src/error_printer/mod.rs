@@ -2,7 +2,7 @@ use crate::file_info::FileInfo;
 use crate::parser::types::version::MajorWorldVersion;
 use crate::parser::types::IntegerType;
 use crate::path_utils::opcodes_file;
-use crate::{ObjectTags, CONTAINER_SELF_SIZE_FIELD, ENUM_SELF_VALUE_FIELD};
+use crate::{ObjectTags, CONTAINER_SELF_SIZE_FIELD};
 use std::process::exit;
 use writer::ErrorWriter;
 
@@ -15,7 +15,6 @@ pub(crate) const ENUM_HAS_BITWISE_AND: i32 = 4;
 pub(crate) const FLAG_HAS_EQUALS: i32 = 5;
 pub(crate) const NO_VERSIONS: i32 = 6;
 pub(crate) const INCORRECT_OPCODE_FOR_MESSAGE: i32 = 7;
-pub(crate) const MULTIPLE_SELF_VALUE: i32 = 8;
 pub(crate) const INVALID_SELF_SIZE: i32 = 9;
 pub(crate) const INVALID_DEFINER_VALUE: i32 = 10;
 pub(crate) const DUPLICATE_DEFINER_VALUES: i32 = 11;
@@ -170,21 +169,6 @@ pub(crate) fn incorrect_opcode_for_message(
     s.fileinfo(file_info, format!("Message '{ty_name}' is expected to have opcode '{expected_opcode}' but it has '{actual}'", ));
 
     wowm_exit(s, INCORRECT_OPCODE_FOR_MESSAGE)
-}
-
-pub(crate) fn multiple_self_value(
-    ty_name: &str,
-    file_info: &FileInfo,
-    first_name: &str,
-    second_name: &str,
-) -> ! {
-    let mut s = ErrorWriter::new(format!(
-        "Multiple '{ENUM_SELF_VALUE_FIELD}' defined for enum.",
-    ));
-
-    s.fileinfo(file_info, format!("Type '{ty_name} has multiple enumerators with '{ENUM_SELF_VALUE_FIELD}', first field is '{first_name}', second name is '{second_name}'"));
-
-    wowm_exit(s, MULTIPLE_SELF_VALUE);
 }
 
 pub(crate) fn invalid_self_size_position(

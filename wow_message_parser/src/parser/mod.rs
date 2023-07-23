@@ -9,7 +9,6 @@ use pest_derive::Parser;
 
 use types::definer::DefinerField;
 
-use crate::error_printer::multiple_self_value;
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::DefinerValue;
 use crate::parser::types::parsed::parsed_array::ParsedArray;
@@ -22,9 +21,8 @@ use crate::parser::types::parsed::parsed_ty::ParsedType;
 use crate::parser::types::IntegerType;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::DefinerType;
-use crate::{error_printer, ParsedObjects, ENUM_SELF_VALUE_FIELD, UNIMPLEMENTED};
+use crate::{error_printer, ParsedObjects, UNIMPLEMENTED};
 use types::container::ContainerType;
-use types::definer::SelfValueDefinerField;
 use types::if_statement::{Condition, Conditional};
 use types::parsed::parsed_container::ParsedContainer;
 use types::parsed::parsed_definer::ParsedDefiner;
@@ -528,8 +526,6 @@ pub(crate) fn parse_enum(
 
     let mut fields = Vec::new();
 
-    let mut self_value: Option<SelfValueDefinerField> = None;
-
     for item in definer_members {
         let item_rule = item.as_rule();
         assert!(item_rule == Rule::basic_definer_item || item_rule == Rule::complex_definer_item);
@@ -551,31 +547,16 @@ pub(crate) fn parse_enum(
             }
         }
 
-        if value.as_str().contains(ENUM_SELF_VALUE_FIELD) {
-            if let Some(first_value) = self_value {
-                multiple_self_value(
-                    ident.as_str(),
-                    &file_info,
-                    first_value.name(),
-                    identifier.as_str(),
-                );
-            }
-            self_value = Some(SelfValueDefinerField::new(
+        fields.push(DefinerField::new(
+            identifier.as_str(),
+            DefinerValue::from_str(
+                value.as_str(),
+                ident.as_str(),
                 identifier.as_str(),
-                kvs.into_member_tags(),
-            ));
-        } else {
-            fields.push(DefinerField::new(
-                identifier.as_str(),
-                DefinerValue::from_str(
-                    value.as_str(),
-                    ident.as_str(),
-                    identifier.as_str(),
-                    &file_info,
-                ),
-                kvs.into_member_tags(),
-            ));
-        }
+                &file_info,
+            ),
+            kvs.into_member_tags(),
+        ));
     }
 
     let mut extra_key_values = t.next();
@@ -593,7 +574,6 @@ pub(crate) fn parse_enum(
         definer_ty,
         fields,
         basic_type,
-        self_value,
         extras.into_tags(ident.as_str(), &file_info, true),
         file_info,
     )

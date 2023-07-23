@@ -284,12 +284,8 @@ fn print_read_definition(
             };
 
             s.wln_no_indent(format!(
-                "{parens}crate::util::{prefix}read_{ty}_le(&mut r){postfix}?{cast}.{into};",
+                "{parens}crate::util::{prefix}read_{ty}_le(&mut r){postfix}?{cast}.try_into()?;",
                 ty = integer.rust_str(),
-                into = match e.self_value().is_some() {
-                    true => "into()",
-                    false => "try_into()?",
-                },
             ));
         }
         Type::Population => {

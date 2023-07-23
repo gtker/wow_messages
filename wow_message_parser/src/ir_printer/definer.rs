@@ -1,11 +1,10 @@
 use crate::impl_features::{get_impl_features_for_definer, Feature};
 use crate::ir_printer::container::IrIntegerEnumValue;
 use crate::ir_printer::{IrFileInfo, IrIntegerType, IrTags};
-use crate::parser::types::definer::{Definer, DefinerField, SelfValueDefinerField};
+use crate::parser::types::definer::{Definer, DefinerField};
 use crate::parser::types::if_statement::DefinerUsage;
 use crate::rust_printer::DefinerType;
 use core::convert::From;
-use core::option::Option;
 use serde::Serialize;
 use std::collections::BTreeSet;
 
@@ -33,7 +32,6 @@ fn definer_to_ir(e: &Definer) -> IrDefiner {
         name: e.name().to_string(),
         definer_type: e.definer_ty().into(),
         enumerators: fields,
-        self_value: e.self_value().as_ref().map(|a| a.into()),
         integer_type: IrIntegerType::from_integer_type(e.ty()),
         tags: IrTags::from_tags(e.tags()),
         objects_used_in,
@@ -78,21 +76,6 @@ impl From<DefinerUsage> for IrDefinerUsage {
 }
 
 #[derive(Debug, Serialize)]
-struct IrSelfValueDefinerField {
-    name: String,
-    tags: IrTags,
-}
-
-impl From<&SelfValueDefinerField> for IrSelfValueDefinerField {
-    fn from(v: &SelfValueDefinerField) -> Self {
-        Self {
-            name: v.name().to_string(),
-            tags: IrTags::from_member_tags(v.tags()),
-        }
-    }
-}
-
-#[derive(Debug, Serialize)]
 pub(crate) struct IrDefinerField {
     name: String,
     value: IrIntegerEnumValue,
@@ -123,7 +106,6 @@ pub(crate) struct IrDefiner {
     name: String,
     definer_type: IrDefinerType,
     enumerators: Vec<IrDefinerField>,
-    self_value: Option<IrSelfValueDefinerField>,
     integer_type: IrIntegerType,
     tags: IrTags,
     objects_used_in: BTreeSet<ObjectUsedIn>,

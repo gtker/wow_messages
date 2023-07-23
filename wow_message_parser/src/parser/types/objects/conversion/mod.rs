@@ -184,7 +184,6 @@ pub(crate) fn parsed_definer_to_definer(
             p.definer_ty,
             p.fields,
             p.basic_type,
-            p.self_value,
             p.tags,
             objects_used_in,
             p.file_info,

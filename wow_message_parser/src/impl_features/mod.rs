@@ -68,7 +68,6 @@ pub(crate) enum Feature {
     Optional,
 
     Enum,
-    EnumSelf,
     EnumUpcast,
     Flag,
     #[allow(unused)]
@@ -112,10 +111,6 @@ pub(crate) fn get_impl_features_for_definer(e: &Definer) -> ImplFeatures {
         DefinerType::Enum => f.add(Feature::Enum),
         DefinerType::Flag => f.add(Feature::Flag),
     };
-
-    if e.self_value().is_some() {
-        f.add(Feature::EnumSelf);
-    }
 
     add_version(e.tags(), &mut f);
 

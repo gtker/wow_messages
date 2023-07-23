@@ -101,7 +101,6 @@ const INSPECT_TALENT_GEAR_MASK_LARGEST_ALLOWED: i128 =
     4 + 32 * (ENCHANT_MASK_LARGEST_ALLOWED as i128 + 4 + 2 + PACKED_GUID_MAX_SIZE as i128 + 4);
 
 // Also used in auth.pest
-const ENUM_SELF_VALUE_FIELD: &str = "self.value";
 const CONTAINER_SELF_SIZE_FIELD: &str = "self.size";
 
 const GITHUB_REPO_URL: &str = "https://github.com/gtker/wow_messages";

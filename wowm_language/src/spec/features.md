@@ -6,11 +6,7 @@
 ### Enums
 #### `Enum`
 
-Any enumerator with and without a `self.value` field.
-
-### `EnumSelf`
-
-Any enumerator with a `self.value` field.
+Any enumerator.
 
 ### Flags
 #### `Flag`

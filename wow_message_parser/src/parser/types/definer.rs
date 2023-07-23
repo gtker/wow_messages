@@ -7,7 +7,6 @@ use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::{compare_name_and_tags, IntegerType};
 use crate::parser::utility;
 use crate::rust_printer::{field_name_to_rust_name, DefinerType};
-use crate::ENUM_SELF_VALUE_FIELD;
 use hashbrown::HashMap;
 use std::cmp::Ordering;
 
@@ -79,40 +78,7 @@ impl DefinerValue {
             };
         }
 
-        if s == ENUM_SELF_VALUE_FIELD {
-            unreachable!("self.value passed to DefinerValue From<&str>");
-        }
-
         invalid_definer_value(ty_name, enumerator_name, s, file_info);
-    }
-}
-
-#[derive(Debug, Eq, PartialEq, Clone)]
-pub(crate) struct SelfValueDefinerField {
-    name: String,
-    rust_name: String,
-    tags: MemberTags,
-}
-
-impl SelfValueDefinerField {
-    pub(crate) fn new(name: &str, tags: MemberTags) -> Self {
-        Self {
-            name: name.to_string(),
-            rust_name: field_name_to_rust_name(name),
-            tags,
-        }
-    }
-
-    pub(crate) fn name(&self) -> &str {
-        &self.name
-    }
-
-    pub(crate) fn rust_name(&self) -> &str {
-        &self.rust_name
-    }
-
-    pub(crate) fn tags(&self) -> &MemberTags {
-        &self.tags
     }
 }
 
@@ -121,7 +87,6 @@ pub(crate) struct Definer {
     name: String,
     definer_ty: DefinerType,
     fields: Vec<DefinerField>,
-    self_value: Option<SelfValueDefinerField>,
     basic_type: IntegerType,
     tags: ObjectTags,
     objects_used_in: Vec<(String, DefinerUsage)>,
@@ -149,7 +114,6 @@ impl Definer {
         definer_ty: DefinerType,
         fields: Vec<DefinerField>,
         basic_type: IntegerType,
-        self_value: Option<SelfValueDefinerField>,
         tags: ObjectTags,
         objects_used_in: Vec<(String, DefinerUsage)>,
         file_info: FileInfo,
@@ -166,7 +130,6 @@ impl Definer {
             name,
             definer_ty,
             fields,
-            self_value,
             basic_type,
             tags,
             objects_used_in,
@@ -210,10 +173,6 @@ impl Definer {
 
     pub(crate) fn ty(&self) -> &IntegerType {
         &self.basic_type
-    }
-
-    pub(crate) fn self_value(&self) -> &Option<SelfValueDefinerField> {
-        &self.self_value
     }
 
     pub(crate) fn fields(&self) -> &[DefinerField] {

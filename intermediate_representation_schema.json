@@ -122,17 +122,6 @@
         "features": {
           "ref": "features"
         },
-        "self_value": {
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "tags": {
-              "ref": "member_tags"
-            }
-          },
-          "nullable": true
-        },
         "file_info": {
           "ref": "file_info"
         }
