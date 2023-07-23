@@ -28,3 +28,14 @@ jobs:
         with:
           command: test # "wow_items" bloats compile time significantly
           args: --all-features --workspace --exclude 'wow_items' --exclude 'wow_spells'
+  validate-ir:
+    name: Validate Intermediate Representation
+    steps:
+      - name: Install deps
+        run: apt install zip -y
+      - name: Download jtd-validate
+        run: wget https://github.com/jsontypedef/json-typedef-validate/releases/download/v0.2.0/x86_64-unknown-linux-musl.zip
+      - name: Extract jtd-validate
+        run: unzip x86_64-unknown-linux-musl.zip
+      - name: Validate IR
+        run: ./x86_64-unknown-linux-musl/jtd-validate intermediate_representation_schema.json intermediate_representation.json

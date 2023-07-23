@@ -1,0 +1,994 @@
+{
+  "properties": {
+    "version": {
+      "ref": "schema_version"
+    },
+    "world": {
+      "ref": "world_objects"
+    },
+    "integer_type_information": {
+      "values": {
+        "properties": {
+          "size": {
+            "type": "uint8"
+          },
+          "bits": {
+            "type": "uint8"
+          }
+        }
+      }
+    },
+    "distinct_login_versions_other_than_all": {
+      "elements": {
+        "type": "uint8"
+      }
+    },
+    "login_version_opcodes": {
+      "values": {
+        "type": "uint8"
+      }
+    },
+    "login": {
+      "ref": "login_objects"
+    }
+  },
+  "definitions": {
+    "schema_version": {
+      "properties": {
+        "major": {
+          "type": "uint32"
+        },
+        "minor": {
+          "type": "uint32"
+        },
+        "patch": {
+          "type": "uint32"
+        }
+      }
+    },
+    "world_objects": {
+      "properties": {
+        "enums": {
+          "ref": "enums"
+        },
+        "flags": {
+          "ref": "flags"
+        },
+        "structs": {
+          "ref": "structs"
+        },
+        "messages": {
+          "ref": "messages"
+        }
+      }
+    },
+    "login_objects": {
+      "properties": {
+        "enums": {
+          "ref": "enums"
+        },
+        "flags": {
+          "ref": "flags"
+        },
+        "structs": {
+          "ref": "structs"
+        },
+        "messages": {
+          "ref": "messages"
+        }
+      }
+    },
+    "enums": {
+      "elements": {
+        "ref": "definer"
+      }
+    },
+    "flags": {
+      "elements": {
+        "ref": "definer"
+      }
+    },
+    "definer": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "definer_type": {
+          "ref": "definer_type"
+        },
+        "objects_used_in": {
+          "elements": {
+            "properties": {
+              "object_name": {
+                "type": "string"
+              },
+              "definer_usage": {
+                "ref": "definer_usage"
+              }
+            }
+          }
+        },
+        "enumerators": {
+          "elements": {
+            "ref": "enumerator"
+          }
+        },
+        "integer_type": {
+          "ref": "integer_type"
+        },
+        "tags": {
+          "ref": "object_tags"
+        },
+        "features": {
+          "ref": "features"
+        },
+        "self_value": {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "tags": {
+              "ref": "member_tags"
+            }
+          },
+          "nullable": true
+        },
+        "file_info": {
+          "ref": "file_info"
+        }
+      }
+    },
+    "structs": {
+      "elements": {
+        "ref": "container"
+      }
+    },
+    "messages": {
+      "elements": {
+        "ref": "container"
+      }
+    },
+    "sizes": {
+      "properties": {
+        "constant_sized": {
+          "type": "boolean"
+        },
+        "minimum_size": {
+          "type": "uint32"
+        },
+        "maximum_size": {
+          "type": "uint32"
+        }
+      }
+    },
+    "container": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "object_type": {
+          "ref": "object_type"
+        },
+        "has_manual_size_field": {
+          "type": "boolean"
+        },
+        "manual_size_subtraction": {
+          "type": "uint16",
+          "nullable": true
+        },
+        "sizes": {
+          "ref": "sizes"
+        },
+        "file_info": {
+          "ref": "file_info"
+        },
+        "only_has_io_error": {
+          "type": "boolean"
+        },
+        "tags": {
+          "ref": "object_tags"
+        },
+        "features": {
+          "ref": "features"
+        },
+        "members": {
+          "elements": {
+            "ref": "struct_member"
+          }
+        },
+        "tests": {
+          "elements": {
+            "ref": "test_case"
+          }
+        }
+      }
+    },
+    "floating_point_value": {
+      "properties": {
+        "value": {
+          "type": "float64"
+        },
+        "original_string": {
+          "type": "string"
+        }
+      }
+    },
+    "test_case_value": {
+      "discriminator": "test_value_tag",
+      "mapping": {
+        "Integer": {
+          "properties": {
+            "content": {
+              "ref": "value"
+            }
+          }
+        },
+        "Bool": {
+          "properties": {
+            "content": {
+              "type": "boolean"
+            }
+          }
+        },
+        "DateTime": {
+          "properties": {
+            "content": {
+              "ref": "value"
+            }
+          }
+        },
+        "Guid": {
+          "properties": {
+            "content": {
+              "ref": "value"
+            }
+          }
+        },
+        "FloatingPoint": {
+          "properties": {
+            "content": {
+              "ref": "floating_point_value"
+            }
+          }
+        },
+        "Array": {
+          "properties": {
+            "content": {
+              "properties": {
+                "values": {
+                  "elements": {
+                    "type": "string"
+                  }
+                },
+                "size": {
+                  "ref": "array_size"
+                }
+              }
+            }
+          }
+        },
+        "String": {
+          "properties": {
+            "content": {
+              "type": "string"
+            }
+          }
+        },
+        "Flag": {
+          "properties": {
+            "content": {
+              "elements": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "Enum": {
+          "properties": {
+            "content": {
+              "ref": "value"
+            }
+          }
+        },
+        "SubObject": {
+          "properties": {
+            "content": {
+              "properties": {
+                "type_name": {
+                  "type": "string"
+                },
+                "members": {
+                  "elements": {
+                    "ref": "test_case_member"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ArrayOfSubObject": {
+          "properties": {
+            "content": {
+              "properties": {
+                "type_name": {
+                  "type": "string"
+                },
+                "members": {
+                  "elements": {
+                    "elements": {
+                      "ref": "test_case_member"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "UpdateMask": {
+          "properties": {
+            "content": {
+              "elements": {
+                "properties": {
+                  "update_mask_type": {
+                    "enum": [
+                      "Object",
+                      "Item",
+                      "Unit",
+                      "Player",
+                      "Container",
+                      "GameObject",
+                      "DynamicObject",
+                      "Corpse"
+                    ]
+                  },
+                  "update_mask_name": {
+                    "type": "string"
+                  },
+                  "update_mask_value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "IpAddress": {
+          "properties": {
+            "content": {
+              "ref": "value"
+            }
+          }
+        },
+        "Seconds": {
+          "properties": {
+            "content": {
+              "ref": "value"
+            }
+          }
+        },
+        "Milliseconds": {
+          "properties": {
+            "content": {
+              "ref": "value"
+            }
+          }
+        }
+      }
+    },
+    "test_case_member": {
+      "properties": {
+        "variable_name": {
+          "type": "string"
+        },
+        "value": {
+          "ref": "test_case_value"
+        },
+        "tags": {
+          "ref": "member_tags"
+        }
+      }
+    },
+    "test_case": {
+      "properties": {
+        "subject": {
+          "type": "string"
+        },
+        "members": {
+          "elements": {
+            "ref": "test_case_member"
+          }
+        },
+        "raw_bytes": {
+          "elements": {
+            "type": "uint8"
+          }
+        },
+        "tags": {
+          "ref": "object_tags"
+        },
+        "file_info": {
+          "ref": "file_info"
+        }
+      }
+    },
+    "object_tags": {
+      "properties": {
+        "version": {
+          "ref": "object_versions"
+        }
+      },
+      "optionalProperties": {
+        "description": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "unimplemented": {
+          "type": "boolean"
+        },
+        "compressed": {
+          "type": "boolean"
+        },
+        "non_network_type": {
+          "type": "boolean"
+        }
+      }
+    },
+    "member_tags": {
+      "optionalProperties": {
+        "description": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        },
+        "compressed": {
+          "type": "string"
+        }
+      }
+    },
+    "object_versions": {
+      "discriminator": "version_type_tag",
+      "mapping": {
+        "login": {
+          "properties": {
+            "version_type": {
+              "ref": "login_versions"
+            }
+          }
+        },
+        "world": {
+          "properties": {
+            "version_type": {
+              "ref": "world_versions"
+            }
+          }
+        }
+      }
+    },
+    "login_versions": {
+      "discriminator": "login_version_tag",
+      "mapping": {
+        "specific": {
+          "properties": {
+            "versions": {
+              "elements": {
+                "type": "uint8"
+              }
+            }
+          }
+        },
+        "all": {
+          "properties": {}
+        }
+      }
+    },
+    "world_versions": {
+      "discriminator": "world_version_tag",
+      "mapping": {
+        "specific": {
+          "properties": {
+            "versions": {
+              "elements": {
+                "ref": "world_version"
+              }
+            }
+          }
+        },
+        "all": {
+          "properties": {}
+        }
+      }
+    },
+    "world_version": {
+      "properties": {
+        "major": {
+          "type": "uint8"
+        },
+        "minor": {
+          "type": "uint8",
+          "nullable": true
+        },
+        "patch": {
+          "type": "uint8",
+          "nullable": true
+        },
+        "build": {
+          "type": "uint16",
+          "nullable": true
+        }
+      }
+    },
+    "integer_type": {
+      "enum": [
+        "U8",
+        "I8",
+        "U16",
+        "U32",
+        "U64",
+        "I16",
+        "I32",
+        "I64",
+        "U48"
+      ]
+    },
+    "file_info": {
+      "properties": {
+        "file_name": {
+          "type": "string"
+        },
+        "start_position": {
+          "type": "uint32"
+        },
+        "end_position": {
+          "type": "uint32"
+        }
+      }
+    },
+    "value": {
+      "properties": {
+        "value": {
+          "metadata": {
+            "description": "JSON Typedef does not support integers larger than unsigned 32 bit, so this is a string"
+          },
+          "type": "string"
+        },
+        "original_string": {
+          "type": "string"
+        }
+      }
+    },
+    "definer_type": {
+      "enum": [
+        "Enum",
+        "Flag"
+      ]
+    },
+    "enumerator": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "ref": "value"
+        },
+        "tags": {
+          "ref": "member_tags"
+        }
+      }
+    },
+    "definer_usage": {
+      "enum": [
+        "RegularUse",
+        "InIfStatement"
+      ]
+    },
+    "object_type": {
+      "discriminator": "container_type_tag",
+      "mapping": {
+        "Struct": {
+          "properties": {}
+        },
+        "CLogin": {
+          "properties": {
+            "opcode": {
+              "type": "uint16"
+            }
+          }
+        },
+        "SLogin": {
+          "properties": {
+            "opcode": {
+              "type": "uint16"
+            }
+          }
+        },
+        "Msg": {
+          "properties": {
+            "opcode": {
+              "type": "uint16"
+            }
+          }
+        },
+        "CMsg": {
+          "properties": {
+            "opcode": {
+              "type": "uint16"
+            }
+          }
+        },
+        "SMsg": {
+          "properties": {
+            "opcode": {
+              "type": "uint16"
+            }
+          }
+        }
+      }
+    },
+    "features": {
+      "elements": {
+        "type": "string"
+      }
+    },
+    "struct_member": {
+      "discriminator": "struct_member_tag",
+      "mapping": {
+        "Definition": {
+          "properties": {
+            "struct_member_content": {
+              "ref": "definition"
+            }
+          }
+        },
+        "IfStatement": {
+          "properties": {
+            "struct_member_content": {
+              "ref": "if_statement"
+            }
+          }
+        },
+        "Optional": {
+          "properties": {
+            "struct_member_content": {
+              "ref": "optional_members"
+            }
+          }
+        }
+      }
+    },
+    "definition": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "data_type": {
+          "ref": "data_type"
+        },
+        "constant_value": {
+          "ref": "value",
+          "nullable": true
+        },
+        "size_of_fields_before_size": {
+          "type": "uint8",
+          "nullable": true
+        },
+        "used_as_size_in": {
+          "type": "string",
+          "nullable": true
+        },
+        "used_in_if": {
+          "type": "boolean"
+        },
+        "tags": {
+          "ref": "member_tags"
+        }
+      }
+    },
+    "array": {
+      "properties": {
+        "inner_type": {
+          "ref": "array_type"
+        },
+        "size": {
+          "ref": "array_size"
+        }
+      }
+    },
+    "array_type": {
+      "discriminator": "array_type_tag",
+      "mapping": {
+        "Integer": {
+          "properties": {
+            "inner_type": {
+              "ref": "integer_type"
+            }
+          }
+        },
+        "Struct": {
+          "properties": {
+            "inner_type": {
+              "type": "string"
+            }
+          }
+        },
+        "CString": {
+          "properties": {}
+        },
+        "Guid": {
+          "properties": {}
+        },
+        "PackedGuid": {
+          "properties": {}
+        }
+      }
+    },
+    "array_size": {
+      "discriminator": "array_size_tag",
+      "mapping": {
+        "Fixed": {
+          "properties": {
+            "size": {
+              "metadata": {
+                "description": "JSON Typedef does not support integers larger than unsigned 32 bit, so this is a string"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "Variable": {
+          "properties": {
+            "size": {
+              "type": "string"
+            }
+          }
+        },
+        "Endless": {
+          "properties": {}
+        }
+      }
+    },
+    "data_type": {
+      "discriminator": "data_type_tag",
+      "mapping": {
+        "Integer": {
+          "properties": {
+            "content": {
+              "ref": "integer_type"
+            }
+          }
+        },
+        "Bool": {
+          "properties": {
+            "content": {
+              "ref": "integer_type"
+            }
+          }
+        },
+        "DateTime": {
+          "properties": {}
+        },
+        "PackedGuid": {
+          "properties": {}
+        },
+        "Guid": {
+          "properties": {}
+        },
+        "NamedGuid": {
+          "properties": {}
+        },
+        "FloatingPoint": {
+          "properties": {}
+        },
+        "CString": {
+          "properties": {}
+        },
+        "SizedCString": {
+          "properties": {}
+        },
+        "String": {
+          "properties": {}
+        },
+        "Array": {
+          "properties": {
+            "content": {
+              "ref": "array"
+            }
+          }
+        },
+        "Enum": {
+          "properties": {
+            "content": {
+              "properties": {
+                "type_name": {
+                  "type": "string"
+                },
+                "integer_type": {
+                  "ref": "integer_type"
+                },
+                "upcast": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "Flag": {
+          "properties": {
+            "content": {
+              "properties": {
+                "type_name": {
+                  "type": "string"
+                },
+                "integer_type": {
+                  "ref": "integer_type"
+                },
+                "upcast": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "Struct": {
+          "properties": {
+            "content": {
+              "properties": {
+                "type_name": {
+                  "type": "string"
+                },
+                "sizes": {
+                  "ref": "sizes"
+                }
+              }
+            }
+          }
+        },
+        "UpdateMask": {
+          "properties": {}
+        },
+        "AuraMask": {
+          "properties": {}
+        },
+        "MonsterMoveSpline": {
+          "properties": {}
+        },
+        "AchievementDoneArray": {
+          "properties": {}
+        },
+        "AchievementInProgressArray": {
+          "properties": {}
+        },
+        "EnchantMask": {
+          "properties": {}
+        },
+        "InspectTalentGearMask": {
+          "properties": {}
+        },
+        "Gold": {
+          "properties": {}
+        },
+        "Level": {
+          "properties": {}
+        },
+        "Level16": {
+          "properties": {}
+        },
+        "Level32": {
+          "properties": {}
+        },
+        "VariableItemRandomProperty": {
+          "properties": {}
+        },
+        "AddonArray": {
+          "properties": {}
+        },
+        "IpAddress": {
+          "properties": {}
+        },
+        "Seconds": {
+          "properties": {}
+        },
+        "Milliseconds": {
+          "properties": {}
+        }
+      }
+    },
+    "conditional": {
+      "properties": {
+        "variable_name": {
+          "type": "string"
+        },
+        "equations": {
+          "discriminator": "equation_tag",
+          "mapping": {
+            "Equals": {
+              "properties": {
+                "values": {
+                  "properties": {
+                    "value": {
+                      "elements": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "BitwiseAnd": {
+              "properties": {
+                "values": {
+                  "properties": {
+                    "value": {
+                      "elements": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "NotEquals": {
+              "properties": {
+                "values": {
+                  "properties": {
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "if_statement": {
+      "properties": {
+        "conditional": {
+          "ref": "conditional"
+        },
+        "members": {
+          "elements": {
+            "ref": "struct_member"
+          }
+        },
+        "else_if_statements": {
+          "elements": {
+            "ref": "if_statement"
+          }
+        },
+        "else_members": {
+          "elements": {
+            "ref": "struct_member"
+          }
+        },
+        "original_type": {
+          "ref": "data_type"
+        },
+        "part_of_separate_if_statement": {
+          "type": "boolean"
+        },
+        "is_else_if_flag": {
+          "type": "boolean"
+        }
+      }
+    },
+    "optional_members": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "members": {
+          "elements": {
+            "ref": "struct_member"
+          }
+        }
+      }
+    }
+  }
+}

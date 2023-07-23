@@ -17,11 +17,7 @@
     - [Implementation Features](./spec/features.md)
 
 # Intermediate Representation
-- [Specification](./ir/ir_spec.md)
-    - [Definers](./ir/definers.md)
-    - [Containers](./ir/containers.md)
-    - [Tags](./ir/tags.md)
-    - [FileInfo](./ir/fileinfo.md)
+- [Introduction](./ir/introduction.md)
 - [Implementing login messages](./ir/implementing_login.md)
 - [Implementing world messages]()
 

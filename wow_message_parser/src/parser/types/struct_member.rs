@@ -11,6 +11,15 @@ pub(crate) enum StructMember {
     OptionalStatement(OptionalStatement),
 }
 
+impl StructMember {
+    pub(crate) fn size_of_fields_before_size(&self) -> Option<i128> {
+        match self {
+            StructMember::Definition(d) => d.size_of_fields_before_size(),
+            StructMember::IfStatement(_) | StructMember::OptionalStatement(_) => None,
+        }
+    }
+}
+
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub(crate) struct StructMemberDefinition {
     name: String,

@@ -43,6 +43,20 @@ pub(crate) enum IntegerType {
 }
 
 impl IntegerType {
+    pub(crate) fn values() -> [Self; 9] {
+        [
+            Self::U8,
+            Self::U16,
+            Self::U32,
+            Self::U48,
+            Self::U64,
+            Self::I8,
+            Self::I16,
+            Self::I32,
+            Self::I64,
+        ]
+    }
+
     pub(crate) fn size(&self) -> u8 {
         match self {
             IntegerType::I8 | IntegerType::U8 => 1,

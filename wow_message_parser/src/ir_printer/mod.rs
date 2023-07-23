@@ -4,6 +4,7 @@ mod definer;
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::ir_printer::container::{containers_to_ir, IrContainer};
 use serde::Serialize;
+use std::collections::{BTreeMap, BTreeSet};
 
 use crate::ir_printer::definer::{definers_to_ir, IrDefiner};
 use crate::parser::types::container::ContainerType;
@@ -16,12 +17,11 @@ use crate::path_utils::intermediate_representation;
 #[derive(Serialize, Debug)]
 struct IrFileInfo {
     file_name: String,
-    start_position: usize,
+    start_position: u32,
+    end_position: u32,
 }
 
-#[derive(Debug, Serialize)]
-#[serde(tag = "integer_type")]
-#[serde(rename_all = "snake_case")]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Serialize)]
 pub(crate) enum IrIntegerType {
     U8,
     I8,
@@ -34,8 +34,8 @@ pub(crate) enum IrIntegerType {
     U48,
 }
 
-impl From<&IntegerType> for IrIntegerType {
-    fn from(v: &IntegerType) -> Self {
+impl IrIntegerType {
+    fn from_integer_type(v: &IntegerType) -> Self {
         match v {
             IntegerType::U8 => Self::U8,
             IntegerType::U16 => Self::U16,
@@ -51,72 +51,79 @@ impl From<&IntegerType> for IrIntegerType {
 }
 
 #[derive(Debug, Serialize)]
-#[serde(tag = "type", content = "version")]
 #[serde(rename_all = "snake_case")]
+#[serde(tag = "login_version_tag", content = "versions")]
 pub(crate) enum IrLoginVersion {
     All,
-    Specific(u8),
+    Specific(Vec<u8>),
 }
 
-impl From<LoginVersion> for IrLoginVersion {
-    fn from(v: LoginVersion) -> Self {
-        match v {
-            LoginVersion::Specific(s) => Self::Specific(s),
-            LoginVersion::All => Self::All,
+impl IrLoginVersion {
+    fn from_login_versions(versions: &BTreeSet<LoginVersion>) -> Self {
+        if versions.contains(&LoginVersion::All) {
+            return Self::All;
         }
+
+        Self::Specific(
+            versions
+                .iter()
+                .map(|a| match a {
+                    LoginVersion::Specific(v) => *v,
+                    LoginVersion::All => unreachable!(),
+                })
+                .collect(),
+        )
+    }
+}
+#[derive(Debug, Serialize)]
+#[serde(tag = "world_version_tag", content = "versions")]
+#[serde(rename_all = "snake_case")]
+pub(crate) enum IrWorldVersionOuter {
+    All,
+    Specific(Vec<IrWorldVersion>),
+}
+
+impl IrWorldVersionOuter {
+    fn from_version(v: &BTreeSet<WorldVersion>) -> Self {
+        if v.contains(&WorldVersion::All) {
+            return Self::All;
+        }
+
+        Self::Specific(v.iter().copied().map(|a| a.into()).collect())
     }
 }
 
 #[derive(Debug, Serialize)]
-#[serde(tag = "type", content = "version")]
-#[serde(rename_all = "snake_case")]
-pub(crate) enum IrWorldVersion {
-    All,
-    Major {
-        major: u8,
-    },
-    Minor {
-        major: u8,
-        minor: u8,
-    },
-    Patch {
-        major: u8,
-        minor: u8,
-        patch: u8,
-    },
-    Exact {
-        major: u8,
-        minor: u8,
-        patch: u8,
-        exact: u16,
-    },
+pub(crate) struct IrWorldVersion {
+    major: u8,
+    minor: Option<u8>,
+    patch: Option<u8>,
+    build: Option<u16>,
 }
 
 #[derive(Debug, Serialize)]
-#[serde(tag = "version_type", content = "versions")]
 #[serde(rename_all = "snake_case")]
+#[serde(tag = "version_type_tag", content = "version_type")]
 pub(crate) enum IrVersions {
-    Login(Vec<IrLoginVersion>),
-    World(Vec<IrWorldVersion>),
+    Login(IrLoginVersion),
+    World(IrWorldVersionOuter),
 }
 
 impl From<WorldVersion> for IrWorldVersion {
     fn from(v: WorldVersion) -> Self {
-        match v {
-            WorldVersion::Major(m) => Self::Major { major: m },
-            WorldVersion::Minor(m, i) => Self::Minor { major: m, minor: i },
-            WorldVersion::Patch(m, i, p) => Self::Patch {
-                major: m,
-                minor: i,
-                patch: p,
-            },
-            WorldVersion::Exact(m, i, p, e) => Self::Exact {
-                major: m,
-                minor: i,
-                patch: p,
-                exact: e,
-            },
-            WorldVersion::All => Self::All,
+        let (m, i, p, b) = match v {
+            WorldVersion::Major(m) => (m, None, None, None),
+            WorldVersion::Minor(m, i) => (m, Some(i), None, None),
+            WorldVersion::Patch(m, i, p) => (m, Some(i), Some(p), None),
+            WorldVersion::Exact(m, i, p, e) => (m, Some(i), Some(p), Some(e)),
+            WorldVersion::All => unreachable!(),
+        };
+
+        Self {
+            major: m,
+            minor: i,
+            patch: p,
+            build: b,
         }
     }
 }
@@ -135,6 +142,8 @@ pub(crate) struct IrTags {
     unimplemented: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     compressed: Option<String>,
+    #[serde(rename = "compressed", skip_serializing_if = "Option::is_none")]
+    compressed_bool: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     non_network_type: Option<bool>,
 }
@@ -145,11 +154,7 @@ impl IrTags {
 
         let comment = tags.comment().map(|d| d.as_ir_string());
 
-        let compressed = if tags.compressed() {
-            Some("true".to_string())
-        } else {
-            None
-        };
+        let compressed_bool = if tags.compressed() { Some(true) } else { None };
 
         let unimplemented = if tags.unimplemented() {
             Some(true)
@@ -164,8 +169,14 @@ impl IrTags {
         };
 
         let version = Some(match tags.all_versions() {
-            AllVersions::Login(l) => IrVersions::Login(l.iter().map(|a| (*a).into()).collect()),
-            AllVersions::World(w) => IrVersions::World(w.iter().map(|a| (*a).into()).collect()),
+            AllVersions::Login(l) => {
+                let versions = IrLoginVersion::from_login_versions(l);
+                IrVersions::Login(versions)
+            }
+            AllVersions::World(w) => {
+                let versions = IrWorldVersionOuter::from_version(w);
+                IrVersions::World(versions)
+            }
         });
 
         Self {
@@ -173,9 +184,10 @@ impl IrTags {
             comment,
             display: None,
             version,
-            compressed,
+            compressed: None,
             unimplemented,
             non_network_type,
+            compressed_bool,
         }
     }
 
@@ -194,6 +206,7 @@ impl IrTags {
             compressed,
             unimplemented: None,
             non_network_type: None,
+            compressed_bool: None,
         }
     }
 }
@@ -242,9 +255,18 @@ impl TypeObjects {
 }
 
 #[derive(Debug, Serialize)]
+struct IntegerTypeInformation {
+    size: u8,
+    bits: u8,
+}
+
+#[derive(Debug, Serialize)]
 struct IrObjects {
     version: IrVersion,
     login: TypeObjects,
+    distinct_login_versions_other_than_all: BTreeSet<u8>,
+    login_version_opcodes: BTreeMap<String, u8>,
+    integer_type_information: BTreeMap<IrIntegerType, IntegerTypeInformation>,
     world: TypeObjects,
 }
 
@@ -253,6 +275,39 @@ impl IrObjects {
         let login = TypeObjects::only_type(o, |a| a.has_login_version());
         let world = TypeObjects::only_type(o, |a| a.has_world_version());
 
+        let distinct_login_versions_other_than_all = {
+            let objects = o.all_objects().filter(|a| a.tags().has_login_version());
+            let mut versions = BTreeSet::new();
+            for o in objects {
+                for v in o.tags().logon_versions() {
+                    match v {
+                        LoginVersion::Specific(s) => {
+                            versions.insert(s);
+                        }
+                        LoginVersion::All => {}
+                    }
+                }
+            }
+
+            versions
+        };
+
+        let login_version_opcodes = {
+            let mut v = BTreeMap::new();
+
+            for o in o.messages().iter().filter(|a| a.tags().has_login_version()) {
+                let name_without_client_or_server =
+                    o.name().replace("_Client", "").replace("_Server", "");
+                if let Some(c) = v.get(&name_without_client_or_server) {
+                    assert_eq!(*c, o.opcode() as u8)
+                } else {
+                    v.insert(name_without_client_or_server, o.opcode() as u8);
+                }
+            }
+
+            v
+        };
+
         Self {
             version: IrVersion {
                 major: 0,
@@ -260,9 +315,28 @@ impl IrObjects {
                 patch: 0,
             },
             login,
+            distinct_login_versions_other_than_all,
+            login_version_opcodes,
+            integer_type_information: create_integer_type_information(),
             world,
         }
     }
+}
+
+fn create_integer_type_information() -> BTreeMap<IrIntegerType, IntegerTypeInformation> {
+    let mut v = BTreeMap::new();
+
+    for t in IntegerType::values() {
+        v.insert(
+            IrIntegerType::from_integer_type(&t),
+            IntegerTypeInformation {
+                size: t.size(),
+                bits: t.size() * 8,
+            },
+        );
+    }
+
+    v
 }
 
 pub(crate) fn write_intermediate_representation(o: &Objects) {

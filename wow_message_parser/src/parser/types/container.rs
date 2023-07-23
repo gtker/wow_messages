@@ -52,7 +52,6 @@ pub(crate) struct Container {
     tags: ObjectTags,
     file_info: FileInfo,
     only_has_io_error: bool,
-    size_of_fields_before_size: Option<i128>,
     rust_object_view: RustObject,
 }
 
@@ -90,7 +89,6 @@ impl Container {
         file_info: FileInfo,
         sizes: Sizes,
         only_has_io_error: bool,
-        size_of_fields_before_size: Option<i128>,
         rust_object_view: RustObject,
     ) -> Self {
         Self {
@@ -101,7 +99,6 @@ impl Container {
             tags,
             file_info,
             only_has_io_error,
-            size_of_fields_before_size,
             rust_object_view,
         }
     }
@@ -218,6 +215,19 @@ impl Container {
         self.only_has_io_error
     }
 
+    pub(crate) fn manual_size_field_subtraction(&self) -> Option<u16> {
+        match self.object_type {
+            ContainerType::Struct => None,
+            ContainerType::CLogin(_) | ContainerType::SLogin(_) => self
+                .members()
+                .iter()
+                .find(|a| a.size_of_fields_before_size().is_some())
+                .and_then(|a| a.size_of_fields_before_size())
+                .map(|a| a as u16),
+            ContainerType::Msg(_) | ContainerType::CMsg(_) | ContainerType::SMsg(_) => None,
+        }
+    }
+
     pub(crate) fn enum_separate_if_statement_variables(&self) -> Vec<String> {
         let mut v = Vec::new();
 
@@ -287,10 +297,6 @@ impl Container {
 
     pub(crate) fn rust_object(&self) -> &RustObject {
         &self.rust_object_view
-    }
-
-    pub(crate) fn size_of_fields_before_size(&self) -> Option<i128> {
-        self.size_of_fields_before_size
     }
 
     pub(crate) fn tags(&self) -> &ObjectTags {

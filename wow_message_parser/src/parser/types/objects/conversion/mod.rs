@@ -89,7 +89,6 @@ pub(crate) fn parsed_container_to_container(
         p.file_info,
         sizes,
         only_has_io_error,
-        size_of_fields_before_size,
         rust_object_view,
     )
 }
