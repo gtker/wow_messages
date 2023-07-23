@@ -3,14 +3,12 @@
 /// enum Os : u32 {
 ///     WINDOWS = "\0Win";
 ///     MAC_OS_X = "\0OSX";
-///     OTHER = self.value
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Os {
     Windows,
     MacOsX,
-    Other(u32),
 }
 
 impl Os {
@@ -18,7 +16,6 @@ impl Os {
         match self {
             Self::Windows => 0x57696e,
             Self::MacOsX => 0x4f5358,
-            Self::Other(v) => *v,
         }
     }
 
@@ -37,7 +34,6 @@ impl Os {
         match self {
             Self::Windows => "WINDOWS",
             Self::MacOsX => "MAC_OS_X",
-            Self::Other(_) => "OTHER",
         }
     }
 
@@ -56,18 +52,81 @@ impl std::fmt::Display for Os {
         match self {
             Self::Windows => f.write_str("Windows"),
             Self::MacOsX => f.write_str("MacOsX"),
-            Self::Other(v) => f.write_fmt(format_args!("Other({v})")),
         }
     }
 }
 
-impl From<u32> for Os {
-    fn from(value: u32) -> Self {
+impl TryFrom<u32> for Os {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
-            5728622 => Self::Windows,
-            5198680 => Self::MacOsX,
-            v => Self::Other(v)
+            5728622 => Ok(Self::Windows),
+            5198680 => Ok(Self::MacOsX),
+            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
         }
+    }
+}
+
+impl TryFrom<u8> for Os {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u16> for Os {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u64> for Os {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i8> for Os {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i16> for Os {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i32> for Os {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<usize> for Os {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value as i128))?
+            .try_into()
     }
 }
 

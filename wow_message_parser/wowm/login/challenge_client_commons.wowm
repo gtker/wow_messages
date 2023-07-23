@@ -3,13 +3,11 @@
 enum Os : u32 {
     WINDOWS = "\0Win";
     MAC_OS_X = "\0OSX";
-    OTHER = self.value;
 }
 
 enum Platform : u32 {
     X86 = "\0x86";
     POWER_PC = "\0PPC";
-    OTHER = self.value;
 }
 
 enum Locale : u32 {
@@ -27,7 +25,6 @@ enum Locale : u32 {
     ZH_TW = "zhTW";
     EN_TW = "enTW";
     EN_CN = "enCN";
-    OTHER = self.value;
 }
 
 struct Version {

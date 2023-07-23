@@ -1,16 +1,14 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/challenge_client_commons.wowm:9`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/challenge_client_commons.wowm#L9):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/challenge_client_commons.wowm:8`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/challenge_client_commons.wowm#L8):
 /// ```text
 /// enum Platform : u32 {
 ///     X86 = "\0x86";
 ///     POWER_PC = "\0PPC";
-///     OTHER = self.value
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
 pub enum Platform {
     X86,
     PowerPc,
-    Other(u32),
 }
 
 impl Platform {
@@ -18,7 +16,6 @@ impl Platform {
         match self {
             Self::X86 => 0x783836,
             Self::PowerPc => 0x505043,
-            Self::Other(v) => *v,
         }
     }
 
@@ -37,7 +34,6 @@ impl Platform {
         match self {
             Self::X86 => "X86",
             Self::PowerPc => "POWER_PC",
-            Self::Other(_) => "OTHER",
         }
     }
 
@@ -56,18 +52,81 @@ impl std::fmt::Display for Platform {
         match self {
             Self::X86 => f.write_str("X86"),
             Self::PowerPc => f.write_str("PowerPc"),
-            Self::Other(v) => f.write_fmt(format_args!("Other({v})")),
         }
     }
 }
 
-impl From<u32> for Platform {
-    fn from(value: u32) -> Self {
+impl TryFrom<u32> for Platform {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
-            7878710 => Self::X86,
-            5263427 => Self::PowerPc,
-            v => Self::Other(v)
+            7878710 => Ok(Self::X86),
+            5263427 => Ok(Self::PowerPc),
+            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
         }
+    }
+}
+
+impl TryFrom<u8> for Platform {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u16> for Platform {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u64> for Platform {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i8> for Platform {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i16> for Platform {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i32> for Platform {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<usize> for Platform {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value as i128))?
+            .try_into()
     }
 }
 

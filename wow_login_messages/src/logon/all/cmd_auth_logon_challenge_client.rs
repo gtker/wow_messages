@@ -115,13 +115,13 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         let version = Version::read(&mut r)?;
 
         // platform: Platform
-        let platform = crate::util::read_u32_le(&mut r)?.into();
+        let platform = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // os: Os
-        let os = crate::util::read_u32_le(&mut r)?.into();
+        let os = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // locale: Locale
-        let locale = crate::util::read_u32_le(&mut r)?.into();
+        let locale = crate::util::read_u32_le(&mut r)?.try_into()?;
 
         // utc_timezone_offset: u32
         let utc_timezone_offset = crate::util::read_u32_le(&mut r)?;
@@ -165,13 +165,13 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         let version = Version::tokio_read(&mut r).await?;
 
         // platform: Platform
-        let platform = crate::util::tokio_read_u32_le(&mut r).await?.into();
+        let platform = crate::util::tokio_read_u32_le(&mut r).await?.try_into()?;
 
         // os: Os
-        let os = crate::util::tokio_read_u32_le(&mut r).await?.into();
+        let os = crate::util::tokio_read_u32_le(&mut r).await?.try_into()?;
 
         // locale: Locale
-        let locale = crate::util::tokio_read_u32_le(&mut r).await?.into();
+        let locale = crate::util::tokio_read_u32_le(&mut r).await?.try_into()?;
 
         // utc_timezone_offset: u32
         let utc_timezone_offset = crate::util::tokio_read_u32_le(&mut r).await?;
@@ -215,13 +215,13 @@ impl CMD_AUTH_LOGON_CHALLENGE_Client {
         let version = Version::astd_read(&mut r).await?;
 
         // platform: Platform
-        let platform = crate::util::astd_read_u32_le(&mut r).await?.into();
+        let platform = crate::util::astd_read_u32_le(&mut r).await?.try_into()?;
 
         // os: Os
-        let os = crate::util::astd_read_u32_le(&mut r).await?.into();
+        let os = crate::util::astd_read_u32_le(&mut r).await?.try_into()?;
 
         // locale: Locale
-        let locale = crate::util::astd_read_u32_le(&mut r).await?.into();
+        let locale = crate::util::astd_read_u32_le(&mut r).await?.try_into()?;
 
         // utc_timezone_offset: u32
         let utc_timezone_offset = crate::util::astd_read_u32_le(&mut r).await?;

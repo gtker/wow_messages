@@ -1,4 +1,4 @@
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/challenge_client_commons.wowm:15`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/challenge_client_commons.wowm#L15):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/login/challenge_client_commons.wowm:13`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/login/challenge_client_commons.wowm#L13):
 /// ```text
 /// enum Locale : u32 {
 ///     EN_GB = "enGB";
@@ -15,7 +15,6 @@
 ///     ZH_TW = "zhTW";
 ///     EN_TW = "enTW";
 ///     EN_CN = "enCN";
-///     OTHER = self.value
 /// }
 /// ```
 #[derive(Debug, PartialEq, Eq, Hash, Ord, PartialOrd, Copy, Clone)]
@@ -34,7 +33,6 @@ pub enum Locale {
     ZhTw,
     EnTw,
     EnCn,
-    Other(u32),
 }
 
 impl Locale {
@@ -54,7 +52,6 @@ impl Locale {
             Self::ZhTw => 0x7a685457,
             Self::EnTw => 0x656e5457,
             Self::EnCn => 0x656e434e,
-            Self::Other(v) => *v,
         }
     }
 
@@ -97,7 +94,6 @@ impl Locale {
             Self::ZhTw => "ZH_TW",
             Self::EnTw => "EN_TW",
             Self::EnCn => "EN_CN",
-            Self::Other(_) => "OTHER",
         }
     }
 
@@ -128,30 +124,93 @@ impl std::fmt::Display for Locale {
             Self::ZhTw => f.write_str("ZhTw"),
             Self::EnTw => f.write_str("EnTw"),
             Self::EnCn => f.write_str("EnCn"),
-            Self::Other(v) => f.write_fmt(format_args!("Other({v})")),
         }
     }
 }
 
-impl From<u32> for Locale {
-    fn from(value: u32) -> Self {
+impl TryFrom<u32> for Locale {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
         match value {
-            1701726018 => Self::EnGb,
-            1701729619 => Self::EnUs,
-            1702055256 => Self::EsMx,
-            1886667346 => Self::PtBr,
-            1718765138 => Self::FrFr,
-            1684358213 => Self::DeDe,
-            1702053203 => Self::EsEs,
-            1886670932 => Self::PtPt,
-            1769228628 => Self::ItIt,
-            1920291413 => Self::RuRu,
-            1802455890 => Self::KoKr,
-            2053657687 => Self::ZhTw,
-            1701729367 => Self::EnTw,
-            1701725006 => Self::EnCn,
-            v => Self::Other(v)
+            1701726018 => Ok(Self::EnGb),
+            1701729619 => Ok(Self::EnUs),
+            1702055256 => Ok(Self::EsMx),
+            1886667346 => Ok(Self::PtBr),
+            1718765138 => Ok(Self::FrFr),
+            1684358213 => Ok(Self::DeDe),
+            1702053203 => Ok(Self::EsEs),
+            1886670932 => Ok(Self::PtPt),
+            1769228628 => Ok(Self::ItIt),
+            1920291413 => Ok(Self::RuRu),
+            1802455890 => Ok(Self::KoKr),
+            2053657687 => Ok(Self::ZhTw),
+            1701729367 => Ok(Self::EnTw),
+            1701725006 => Ok(Self::EnCn),
+            v => Err(crate::errors::EnumError::new(NAME, v.into()),)
         }
+    }
+}
+
+impl TryFrom<u8> for Locale {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u16> for Locale {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<u64> for Locale {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: u64) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i8> for Locale {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i8) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i16> for Locale {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i16) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<i32> for Locale {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value.into()))?
+            .try_into()
+    }
+}
+
+impl TryFrom<usize> for Locale {
+    type Error = crate::errors::EnumError;
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
+        TryInto::<u32>::try_into(value)
+            .map_err(|_| crate::errors::EnumError::new(NAME, value as i128))?
+            .try_into()
     }
 }
 
