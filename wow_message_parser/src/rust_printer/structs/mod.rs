@@ -162,16 +162,7 @@ fn can_derive_ord(members: &[&RustMember]) -> bool {
 }
 
 fn can_derive_eq(members: &[&RustMember]) -> bool {
-    for m in members {
-        if matches!(
-            m.ty(),
-            RustType::Floating | RustType::Population | RustType::MonsterMoveSpline
-        ) {
-            return false;
-        }
-    }
-
-    true
+    can_derive_ord(members)
 }
 
 fn can_derive_default(members: &[&RustMember]) -> bool {
