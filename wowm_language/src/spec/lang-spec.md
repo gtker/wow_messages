@@ -34,6 +34,7 @@ The `SizedCString` is the same as a `u32` followed by a `CString`, but they are 
 | Type                         | Purpose                                                                                                                       | C Name                                      |
 |------------------------------|-------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
 | `u*`                         | Unsigned little endian `*` bit value.                                                                                         | `unsigned` `char`/`short`/`int`/`long long` |
+| `u48`                        | A `u32` followed by a `u16`. See [`u48`](u48.md)                                                                              | `unsigned int` + `unsigned short`           |
 | `i*`                         | Signed little endian `*` bit value.                                                                                           | `char`/`short`/`int`/`long long`            |
 | `f32`                        | Floating point value of 4 bytes.                                                                                              | `float`/`double`                            |
 | `CString`                    | UTF-8 string type that is terminated by a zero byte value.                                                                    | `char*`                                     |
