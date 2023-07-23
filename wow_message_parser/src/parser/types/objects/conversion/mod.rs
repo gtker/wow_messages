@@ -1,4 +1,6 @@
-use crate::error_printer::{object_has_no_versions, overlapping_versions};
+use crate::error_printer::{
+    invalid_self_size_position, object_has_no_versions, overlapping_versions,
+};
 use crate::file_info::FileInfo;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::container::{
@@ -11,8 +13,9 @@ use crate::parser::types::parsed::parsed_struct_member::{
     ParsedStructMember, ParsedStructMemberDefinition,
 };
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
+use crate::parser::types::struct_member::StructMember;
 use crate::rust_printer::rust_view::create_rust_object;
-use crate::{Container, ObjectTags, Objects};
+use crate::{Container, ObjectTags, Objects, CONTAINER_SELF_SIZE_FIELD};
 
 mod container;
 
@@ -70,6 +73,8 @@ pub(crate) fn parsed_container_to_container(
 
     let rust_object_view = create_rust_object(&p, &members, containers, definers);
 
+    let size_of_fields_before_size = size_of_fields_before(&p.name, &members, &p.file_info);
+
     Container::new(
         p.name,
         members,
@@ -78,8 +83,57 @@ pub(crate) fn parsed_container_to_container(
         p.file_info,
         sizes,
         only_has_io_error,
+        size_of_fields_before_size,
         rust_object_view,
     )
+}
+
+fn size_of_fields_before(
+    name: &str,
+    members: &[StructMember],
+    file_info: &FileInfo,
+) -> Option<i128> {
+    if !members.iter().any(|a| a.is_manual_size_field()) {
+        return None;
+    }
+
+    let mut sum = 0;
+    for field in members {
+        match field {
+            StructMember::Definition(d) => {
+                if let Some(size) = d.ty().sizes().is_constant() {
+                    sum += size;
+                } else {
+                    invalid_self_size_position(
+                        name,
+                        file_info,
+                        format!(
+                            "'{}' can not come after variable '{}' of type '{}'",
+                            CONTAINER_SELF_SIZE_FIELD,
+                            d.name(),
+                            d.ty().str(),
+                        ),
+                    )
+                }
+
+                if d.is_manual_size_field() {
+                    return Some(sum);
+                }
+            }
+            StructMember::IfStatement(_) => invalid_self_size_position(
+                name,
+                file_info,
+                format!("'{CONTAINER_SELF_SIZE_FIELD}' can not come after an if statement"),
+            ),
+            StructMember::OptionalStatement(_) => invalid_self_size_position(
+                name,
+                file_info,
+                format!("'{CONTAINER_SELF_SIZE_FIELD}' can not come after an optional statement"),
+            ),
+        }
+    }
+
+    Some(sum)
 }
 
 pub(crate) fn parsed_tags_to_tags(

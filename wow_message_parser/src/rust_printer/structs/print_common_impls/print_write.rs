@@ -53,13 +53,14 @@ pub(crate) fn print_write_field_integer(
     int_type: &IntegerType,
     used_as_size_in: &Option<String>,
     verified_value: &Option<ContainerValue>,
-    size_of_fields_before_size: u64,
+    size_of_fields_before_size: Option<i128>,
     is_manual_size_field: bool,
     postfix: &str,
 ) {
     let basic_type = int_type.rust_str();
 
     if is_manual_size_field {
+        let size_of_fields_before_size = size_of_fields_before_size.unwrap();
         s.wln(format!("w.write_all(&((self.size() - {size_of_fields_before_size}) as {basic_type}).to_le_bytes()){postfix}?;"));
     } else if verified_value.is_some() {
         s.wln(format!(
@@ -106,12 +107,6 @@ pub(crate) fn print_write_definition(
 
     match d.ty() {
         Type::Integer(int_type) => {
-            let size = if d.is_manual_size_field() {
-                e.size_of_fields_before_size()
-            } else {
-                0
-            };
-
             print_write_field_integer(
                 s,
                 d.name(),
@@ -119,7 +114,7 @@ pub(crate) fn print_write_definition(
                 int_type,
                 d.used_as_size_in(),
                 d.value(),
-                size,
+                e.size_of_fields_before_size(),
                 d.is_manual_size_field(),
                 postfix,
             );

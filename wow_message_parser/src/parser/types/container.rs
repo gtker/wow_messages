@@ -1,4 +1,3 @@
-use crate::error_printer::invalid_self_size_position;
 use crate::file_info::FileInfo;
 use crate::file_utils::{
     get_base_internal_shared_path, get_base_shared_path, get_import_path, get_world_shared_path,
@@ -18,7 +17,6 @@ use crate::rust_printer::{
     DefinerType, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
     WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
-use crate::CONTAINER_SELF_SIZE_FIELD;
 use std::cmp::Ordering;
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -54,6 +52,7 @@ pub(crate) struct Container {
     tags: ObjectTags,
     file_info: FileInfo,
     only_has_io_error: bool,
+    size_of_fields_before_size: Option<i128>,
     rust_object_view: RustObject,
 }
 
@@ -91,6 +90,7 @@ impl Container {
         file_info: FileInfo,
         sizes: Sizes,
         only_has_io_error: bool,
+        size_of_fields_before_size: Option<i128>,
         rust_object_view: RustObject,
     ) -> Self {
         Self {
@@ -101,6 +101,7 @@ impl Container {
             tags,
             file_info,
             only_has_io_error,
+            size_of_fields_before_size,
             rust_object_view,
         }
     }
@@ -288,47 +289,8 @@ impl Container {
         &self.rust_object_view
     }
 
-    pub(crate) fn size_of_fields_before_size(&self) -> u64 {
-        let mut sum = 0;
-        for field in self.members() {
-            match field {
-                StructMember::Definition(d) => {
-                    if let Some(size) = d.ty().sizes().is_constant() {
-                        let size = size as u64;
-                        sum += size;
-                    } else {
-                        invalid_self_size_position(
-                            self.name(),
-                            self.file_info(),
-                            format!(
-                                "'{}' can not come after variable '{}' of type '{}'",
-                                CONTAINER_SELF_SIZE_FIELD,
-                                d.name(),
-                                d.ty().str(),
-                            ),
-                        )
-                    }
-
-                    if d.is_manual_size_field() {
-                        return sum;
-                    }
-                }
-                StructMember::IfStatement(_) => invalid_self_size_position(
-                    self.name(),
-                    self.file_info(),
-                    format!("'{CONTAINER_SELF_SIZE_FIELD}' can not come after an if statement"),
-                ),
-                StructMember::OptionalStatement(_) => invalid_self_size_position(
-                    self.name(),
-                    self.file_info(),
-                    format!(
-                        "'{CONTAINER_SELF_SIZE_FIELD}' can not come after an optional statement"
-                    ),
-                ),
-            }
-        }
-
-        sum
+    pub(crate) fn size_of_fields_before_size(&self) -> Option<i128> {
+        self.size_of_fields_before_size
     }
 
     pub(crate) fn tags(&self) -> &ObjectTags {
