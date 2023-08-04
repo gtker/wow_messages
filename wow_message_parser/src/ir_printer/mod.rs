@@ -7,9 +7,13 @@ use serde::Serialize;
 use std::collections::{BTreeMap, BTreeSet};
 
 use crate::ir_printer::definer::{definers_to_ir, IrDefiner};
-use crate::parser::types::container::ContainerType;
+use crate::parser::types::array::ArrayType;
+use crate::parser::types::container::{Container, ContainerType};
+use crate::parser::types::if_statement::IfStatement;
 use crate::parser::types::objects::Objects;
+use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::{MemberTags, ObjectTags};
+use crate::parser::types::ty::Type;
 use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
 use crate::parser::types::IntegerType;
 use crate::path_utils::intermediate_representation;
@@ -230,14 +234,18 @@ impl TypeObjects {
     fn only_type(o: &Objects, predicate: impl Fn(&ObjectTags) -> bool) -> Self {
         let mut flags = definers_to_ir(o.flags().iter().filter(|a| predicate(a.tags())));
         flags.sort_by(|a, b| a.name().cmp(b.name()));
+
         let mut enums = definers_to_ir(o.enums().iter().filter(|a| predicate(a.tags())));
         enums.sort_by(|a, b| a.name().cmp(b.name()));
-        let mut structs = containers_to_ir(
-            o.all_containers()
-                .filter(|a| predicate(a.tags()) && a.container_type() == ContainerType::Struct),
-            o,
-        );
-        structs.sort_by(|a, b| a.name().cmp(b.name()));
+
+        let structs = o
+            .structs()
+            .to_vec()
+            .into_iter()
+            .filter(|a| predicate(a.tags()))
+            .collect::<Vec<_>>();
+        let structs = Self::structs_in_order(&structs, o);
+
         let mut messages = containers_to_ir(
             o.all_containers()
                 .filter(|a| predicate(a.tags()) && a.container_type() != ContainerType::Struct),
@@ -251,6 +259,77 @@ impl TypeObjects {
             structs,
             messages,
         }
+    }
+
+    fn structs_in_order(structs: &[Container], o: &Objects) -> Vec<IrContainer> {
+        fn inner_d(out: &mut Vec<Container>, d: &StructMemberDefinition) {
+            match d.ty() {
+                Type::Array(array) => match array.ty() {
+                    ArrayType::Struct(e) => {
+                        if !out.contains(e) {
+                            out.push((**e).clone());
+                        }
+                    }
+                    _ => {}
+                },
+                Type::Struct { e } => {
+                    if !out.contains(e) {
+                        out.push(e.clone());
+                    }
+                }
+                _ => {}
+            }
+        }
+
+        fn inner_if(out: &mut Vec<Container>, statement: &IfStatement) {
+            for m in statement.members() {
+                inner(out, m);
+            }
+
+            for elseif in statement.else_ifs() {
+                inner_if(out, elseif);
+            }
+
+            for m in statement.else_members() {
+                inner(out, m);
+            }
+        }
+
+        fn inner(out: &mut Vec<Container>, m: &StructMember) {
+            match m {
+                StructMember::Definition(d) => {
+                    inner_d(out, d);
+                }
+                StructMember::IfStatement(statement) => {
+                    inner_if(out, statement);
+                }
+                StructMember::OptionalStatement(optional) => {
+                    for m in optional.members() {
+                        inner(out, m);
+                    }
+                }
+            }
+        }
+
+        let mut out = Vec::with_capacity(structs.len());
+
+        for e in structs {
+            if out.contains(e) {
+                continue;
+            }
+
+            for m in e.members() {
+                inner(&mut out, m);
+            }
+
+            if !out.contains(e) {
+                out.push(e.clone());
+            }
+        }
+
+        assert_eq!(out.len(), structs.len());
+
+        containers_to_ir(out.iter(), o)
     }
 }
 

@@ -57,9 +57,7 @@ pub(crate) struct Container {
 
 impl PartialEq<Self> for Container {
     fn eq(&self, other: &Self) -> bool {
-        self.name == other.name
-            && self.tags().main_versions().collect::<Vec<_>>()
-                == other.tags().main_versions().collect::<Vec<_>>()
+        self.name == other.name && self.tags().all_versions() == other.tags().all_versions()
     }
 }
 
@@ -73,10 +71,10 @@ impl PartialOrd for Container {
 
 impl Ord for Container {
     fn cmp(&self, other: &Self) -> Ordering {
-        let self_first = self.tags().main_versions().collect::<Vec<_>>();
-        let other_first = other.tags().main_versions().collect::<Vec<_>>();
+        let self_first = self.tags().all_versions();
+        let other_first = other.tags().all_versions();
 
-        compare_name_and_tags(&self.name, &self_first, &other.name, &other_first)
+        compare_name_and_tags(&self.name, self_first, &other.name, other_first)
     }
 }
 

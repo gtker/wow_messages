@@ -160,6 +160,10 @@ impl Objects {
         &self.messages
     }
 
+    pub(crate) fn structs(&self) -> &[Container] {
+        &self.structs
+    }
+
     pub(crate) fn wireshark_messages(&self) -> Vec<&Container> {
         let mut v = self
             .wireshark_containers()

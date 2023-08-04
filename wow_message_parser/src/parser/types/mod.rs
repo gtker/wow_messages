@@ -1,10 +1,10 @@
 use crate::error_printer::invalid_integer_type;
 use crate::file_info::FileInfo;
 use crate::parser::types::parsed::parsed_ty::ParsedType;
+use crate::parser::types::version::AllVersions;
 use crate::rust_printer::field_name_to_rust_name;
 use std::cmp::Ordering;
 use std::fmt::{Display, Formatter};
-use version::Version;
 
 pub(crate) mod array;
 pub(crate) mod container;
@@ -22,9 +22,9 @@ pub(crate) mod version;
 
 pub(crate) fn compare_name_and_tags(
     name1: &str,
-    v1: &[Version],
+    v1: &AllVersions,
     name2: &str,
-    v2: &[Version],
+    v2: &AllVersions,
 ) -> Ordering {
     name1.cmp(name2).then_with(|| v1.cmp(v2))
 }
