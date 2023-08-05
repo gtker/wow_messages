@@ -12,11 +12,8 @@ use crate::rust_printer::UpdateMaskType;
 use crate::Objects;
 use serde::Serialize;
 
-pub(crate) fn containers_to_ir<'a>(
-    containers: impl Iterator<Item = &'a Container>,
-    o: &'a Objects,
-) -> Vec<IrContainer> {
-    containers.map(|a| container_to_ir(a, o)).collect()
+pub(crate) fn containers_to_ir(containers: &[Container], o: &Objects) -> Vec<IrContainer> {
+    containers.iter().map(|a| container_to_ir(a, o)).collect()
 }
 
 fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
@@ -100,12 +97,6 @@ pub(crate) struct IrContainer {
     only_has_io_error: bool,
     has_manual_size_field: bool,
     manual_size_subtraction: Option<u16>,
-}
-
-impl IrContainer {
-    pub(crate) fn name(&self) -> &str {
-        &self.name
-    }
 }
 
 #[derive(Debug, Serialize)]

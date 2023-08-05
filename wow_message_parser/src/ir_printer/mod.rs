@@ -245,13 +245,18 @@ impl TypeObjects {
             .filter(|a| predicate(a.tags()))
             .collect::<Vec<_>>();
         let structs = Self::structs_in_order(&structs, o);
-
-        let mut messages = containers_to_ir(
-            o.all_containers()
-                .filter(|a| predicate(a.tags()) && a.container_type() != ContainerType::Struct),
-            o,
-        );
-        messages.sort_by(|a, b| a.name().cmp(b.name()));
+        let mut messages = o
+            .messages()
+            .iter()
+            .filter(|a| predicate(a.tags()) && a.container_type() != ContainerType::Struct)
+            .cloned()
+            .collect::<Vec<_>>();
+        messages.sort_by(|a, b| {
+            a.opcode()
+                .cmp(&b.opcode())
+                .then(a.tags().all_versions().cmp(&b.tags().all_versions()))
+        });
+        let messages = containers_to_ir(&messages, o);
 
         TypeObjects {
             flags,
@@ -329,7 +334,7 @@ impl TypeObjects {
 
         assert_eq!(out.len(), structs.len());
 
-        containers_to_ir(out.iter(), o)
+        containers_to_ir(&out, o)
     }
 }
 
