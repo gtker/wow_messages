@@ -16,17 +16,11 @@ pub(crate) fn containers_to_ir(containers: &[Container], o: &Objects) -> Vec<IrC
     containers.iter().map(|a| container_to_ir(a, o)).collect()
 }
 
-fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
+fn container_to_ir_no_tests(e: &Container) -> IrContainer {
     let members = e
         .members()
         .iter()
         .map(|a| IrStructMember::from_struct_member(a))
-        .collect();
-
-    let tests = e
-        .tests(o)
-        .iter()
-        .map(|a| IrTestCase::from_test_case(a))
         .collect();
 
     let has_manual_size_field = e
@@ -40,7 +34,7 @@ fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
         sizes: IrSizes::from_sizes(e.sizes()),
         members,
         tags: IrTags::from_tags(e.tags()),
-        tests,
+        tests: Vec::new(),
         file_info: IrFileInfo {
             file_name: e.file_info().name().to_string(),
             start_position: e.file_info().start_line() as u32,
@@ -50,6 +44,20 @@ fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
         has_manual_size_field,
         manual_size_subtraction: e.manual_size_field_subtraction(),
     }
+}
+
+fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
+    let mut c = container_to_ir_no_tests(e);
+
+    let tests = e
+        .tests(o)
+        .iter()
+        .map(|a| IrTestCase::from_test_case(a))
+        .collect();
+
+    c.tests = tests;
+
+    c
 }
 
 #[derive(Debug, Serialize)]
@@ -288,8 +296,7 @@ pub(crate) enum IrType {
         upcast: bool,
     },
     Struct {
-        type_name: String,
-        sizes: IrSizes,
+        struct_data: IrContainer,
     },
     UpdateMask,
     AuraMask,
@@ -350,8 +357,7 @@ impl IrType {
                 }
             }
             Type::Struct { e } => Self::Struct {
-                type_name: e.name().to_string(),
-                sizes: IrSizes::from_sizes(e.sizes()),
+                struct_data: container_to_ir_no_tests(e),
             },
             Type::SizedCString => Self::SizedCString,
             Type::Bool(i) => Self::Bool(IrIntegerType::from_integer_type(i)),
@@ -394,7 +400,7 @@ impl IrArray {
 #[serde(tag = "array_type_tag", content = "content")]
 pub(crate) enum IrArrayType {
     Integer(IrIntegerType),
-    Struct { type_name: String, sizes: IrSizes },
+    Struct { struct_data: IrContainer },
     CString,
     Guid,
     PackedGuid,
@@ -405,8 +411,7 @@ impl IrArrayType {
         match v {
             ArrayType::Integer(i) => Self::Integer(IrIntegerType::from_integer_type(i)),
             ArrayType::Struct(f) => Self::Struct {
-                type_name: f.name().into(),
-                sizes: IrSizes::from_sizes(f.sizes()),
+                struct_data: container_to_ir_no_tests(f),
             },
             ArrayType::CString => Self::CString,
             ArrayType::Guid => Self::Guid,

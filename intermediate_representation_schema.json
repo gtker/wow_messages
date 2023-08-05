@@ -797,11 +797,8 @@
           "properties": {
             "content": {
               "properties": {
-                "type_name": {
-                  "type": "string"
-                },
-                "sizes": {
-                  "ref": "sizes"
+                "struct_data": {
+                  "ref": "container"
                 }
               }
             }
@@ -932,11 +929,8 @@
           "properties": {
             "content": {
               "properties": {
-                "type_name": {
-                  "type": "string"
-                },
-                "sizes": {
-                  "ref": "sizes"
+                "struct_data": {
+                  "ref": "container"
                 }
               }
             }
