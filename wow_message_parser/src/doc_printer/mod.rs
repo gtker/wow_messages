@@ -197,7 +197,8 @@ fn print_containers<'a>(
             name = container.name(),
             path = path,
         );
-        let definers: Vec<String> = container
+
+        let mut definers: Vec<String> = container
             .all_definers()
             .iter()
             .map(|a| {
@@ -207,6 +208,9 @@ fn print_containers<'a>(
                 format!("    - [{name}](docs/{path})")
             })
             .collect();
+        definers.sort();
+        definers.dedup();
+
         if container.tags().has_login_version() {
             login_containers.insert(bullet_point, definers);
         } else {
