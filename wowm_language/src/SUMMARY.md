@@ -16,6 +16,7 @@
     - [AuraMask](./spec/aura-mask.md)
     - [Commands](./spec/commands.md)
     - [Tags](./spec/tags.md)
+    - [Compression](./spec/compression.md)
 
 # Intermediate Representation
 
