@@ -3,49 +3,56 @@ use crate::parser::types::version::MajorWorldVersion;
 use crate::parser::types::IntegerType;
 use crate::path_utils::{update_mask_index_location, update_mask_location};
 use crate::rust_printer::writer::Writer;
+use serde::Serialize;
 use std::fmt::{Display, Formatter};
 
 pub mod tbc_fields;
 pub mod vanilla_fields;
 pub mod wrath_fields;
 
-fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion) -> Writer {
+fn print_specific_update_mask(fields: &[UpdateMaskMember], version: MajorWorldVersion) -> Writer {
     let update_types = [
         (
             "UpdateItem",
-            vec![UpdateMaskType::Object, UpdateMaskType::Item],
+            vec![UpdateMaskObjectType::Object, UpdateMaskObjectType::Item],
         ),
         (
             "UpdateContainer",
             vec![
-                UpdateMaskType::Object,
-                UpdateMaskType::Item,
-                UpdateMaskType::Container,
+                UpdateMaskObjectType::Object,
+                UpdateMaskObjectType::Item,
+                UpdateMaskObjectType::Container,
             ],
         ),
         (
             "UpdateUnit",
-            vec![UpdateMaskType::Object, UpdateMaskType::Unit],
+            vec![UpdateMaskObjectType::Object, UpdateMaskObjectType::Unit],
         ),
         (
             "UpdatePlayer",
             vec![
-                UpdateMaskType::Object,
-                UpdateMaskType::Unit,
-                UpdateMaskType::Player,
+                UpdateMaskObjectType::Object,
+                UpdateMaskObjectType::Unit,
+                UpdateMaskObjectType::Player,
             ],
         ),
         (
             "UpdateGameObject",
-            vec![UpdateMaskType::Object, UpdateMaskType::GameObject],
+            vec![
+                UpdateMaskObjectType::Object,
+                UpdateMaskObjectType::GameObject,
+            ],
         ),
         (
             "UpdateDynamicObject",
-            vec![UpdateMaskType::Object, UpdateMaskType::DynamicObject],
+            vec![
+                UpdateMaskObjectType::Object,
+                UpdateMaskObjectType::DynamicObject,
+            ],
         ),
         (
             "UpdateCorpse",
-            vec![UpdateMaskType::Object, UpdateMaskType::Corpse],
+            vec![UpdateMaskObjectType::Object, UpdateMaskObjectType::Corpse],
         ),
     ];
 
@@ -75,9 +82,9 @@ fn print_specific_update_mask(fields: &[MemberType], version: MajorWorldVersion)
 
 fn print_includes(
     s: &mut Writer,
-    fields: &[MemberType],
+    fields: &[UpdateMaskMember],
     version: MajorWorldVersion,
-    update_types: &[(&str, Vec<UpdateMaskType>); 7],
+    update_types: &[(&str, Vec<UpdateMaskObjectType>); 7],
 ) {
     s.wln("use crate::Guid;");
     s.wln("use std::convert::TryInto;");
@@ -87,11 +94,11 @@ fn print_includes(
     let mut imports = Vec::new();
 
     for m in fields {
-        if let UfType::BytesWith(a, b, c, d) = m.ty() {
+        if let UpdateMaskDataType::Bytes(a, b, c, d) = m.ty() {
             for ty in [a, b, c, d] {
                 match ty.ty {
                     ByteInnerTy::Byte => {}
-                    ByteInnerTy::Ty(ty) => {
+                    ByteInnerTy::Definer(ty) => {
                         imports.push(ty.to_string());
                     }
                 }
@@ -116,13 +123,13 @@ fn print_includes(
     s.newline();
 }
 
-fn print_specific_update_mask_indices(fields: &[MemberType]) -> Writer {
+fn print_specific_update_mask_indices(fields: &[UpdateMaskMember]) -> Writer {
     let mut s = Writer::new();
 
     s.wln("use std::convert::TryFrom;");
 
     for field in fields {
-        if let UfType::ArrayOfStruct { name, size, .. } = field.ty {
+        if let UpdateMaskDataType::ArrayOfStruct { name, size, .. } = field.ty {
             assert_eq!(field.size % size, 0);
             let amount_of_fields = field.size / size;
             let lower_name = name.to_lowercase();
@@ -228,11 +235,11 @@ pub(crate) fn print_update_mask() {
     }
 }
 
-fn print_getter(s: &mut Writer, m: &MemberType) {
+fn print_getter(s: &mut Writer, m: &UpdateMaskMember) {
     let offset = m.offset;
 
     match m.ty() {
-        UfType::ArrayOfStruct { name, .. } => {
+        UpdateMaskDataType::ArrayOfStruct { name, .. } => {
             s.open_curly(format!(
                 "pub fn {}_{}(&self, index: {name}Index) -> Option<{}>",
                 m.object_ty.to_string().to_lowercase(),
@@ -240,7 +247,7 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
                 m.ty.ty_str(),
             ));
         }
-        UfType::GuidEnumLookupArray {
+        UpdateMaskDataType::GuidEnumLookupArray {
             name,
             variable_name,
             import_location,
@@ -262,22 +269,19 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
     }
 
     match m.ty() {
-        UfType::Guid => {
+        UpdateMaskDataType::Guid => {
             s.wln(format!("self.get_guid({offset})"));
         }
-        UfType::Int => {
+        UpdateMaskDataType::Int => {
             s.wln(format!("self.get_int({offset})"));
         }
-        UfType::Float => {
+        UpdateMaskDataType::Float => {
             s.wln(format!("self.get_float({offset})"));
         }
-        UfType::Bytes => {
-            s.wln(format!("self.get_bytes({offset})"));
-        }
-        UfType::TwoShort => {
+        UpdateMaskDataType::TwoShort => {
             s.wln(format!("self.get_shorts({offset})"));
         }
-        UfType::BytesWith(a, b, c, d) => {
+        UpdateMaskDataType::Bytes(a, b, c, d) => {
             let bytes = [&a, &b, &c, &d];
             if bytes.iter().all(|a| matches!(a.ty, ByteInnerTy::Byte)) {
                 s.wln(format!("self.get_bytes({offset})"));
@@ -290,7 +294,7 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
                     |s| {
                         let f = |byte: &ByteType| match byte.ty {
                             ByteInnerTy::Byte => byte.name.to_string(),
-                            ByteInnerTy::Ty(_) => format!("{}.try_into().unwrap()", byte.name),
+                            ByteInnerTy::Definer(_) => format!("{}.try_into().unwrap()", byte.name),
                         };
 
                         let a = f(&a);
@@ -304,14 +308,14 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
                 );
             }
         }
-        UfType::ArrayOfStruct {
+        UpdateMaskDataType::ArrayOfStruct {
             name,
             import_location,
             ..
         } => {
             s.wln(format!("{import_location}::{name}::from_range(self.values.range(index.first()..=index.last()))"));
         }
-        UfType::GuidEnumLookupArray { variable_name, .. } => {
+        UpdateMaskDataType::GuidEnumLookupArray { variable_name, .. } => {
             s.wln(format!(
                 "let offset = {offset} + {variable_name}.as_int() as u16 * 2;"
             ));
@@ -322,7 +326,7 @@ fn print_getter(s: &mut Writer, m: &MemberType) {
     s.closing_curly_newline(); // pub(crate) fn get_
 }
 
-fn print_setter(s: &mut Writer, m: &MemberType) {
+fn print_setter(s: &mut Writer, m: &UpdateMaskMember) {
     s.open_curly(format!(
         "pub fn set_{}_{}(&mut self, {})",
         m.object_ty.to_string().to_lowercase(),
@@ -335,42 +339,39 @@ fn print_setter(s: &mut Writer, m: &MemberType) {
     s.closing_curly_newline(); // pub(crate) fn set_
 }
 
-fn print_setter_internals(s: &mut Writer, m: &MemberType) {
+fn print_setter_internals(s: &mut Writer, m: &UpdateMaskMember) {
     let offset = m.offset;
     match &m.ty {
-        UfType::Guid => {
+        UpdateMaskDataType::Guid => {
             s.wln(format!("self.set_guid({offset}, v);"));
         }
-        UfType::ArrayOfStruct { variable_name, .. } => {
+        UpdateMaskDataType::ArrayOfStruct { variable_name, .. } => {
             s.open_curly(format!(
                 "for (index, value) in {variable_name}.mask_values(index)"
             ));
             s.wln("self.header_set(index, value);");
             s.closing_curly();
         }
-        UfType::GuidEnumLookupArray { variable_name, .. } => {
+        UpdateMaskDataType::GuidEnumLookupArray { variable_name, .. } => {
             s.wln(format!(
                 "let offset = {offset} + {variable_name}.as_int() as u16 * 2;",
             ));
             s.wln("self.set_guid(offset, item);");
         }
-        UfType::Int => {
+        UpdateMaskDataType::Int => {
             s.wln(format!("self.set_int({offset}, v);"));
         }
-        UfType::Float => {
+        UpdateMaskDataType::Float => {
             s.wln(format!("self.set_float({offset}, v);"));
         }
-        UfType::Bytes => {
-            s.wln(format!("self.set_bytes({offset}, a, b, c, d);"));
-        }
-        UfType::TwoShort => {
+        UpdateMaskDataType::TwoShort => {
             s.wln(format!("self.set_shorts({offset}, a, b);"));
         }
-        UfType::BytesWith(a, b, c, d) => {
+        UpdateMaskDataType::Bytes(a, b, c, d) => {
             let get_name = |byte_type: &ByteType| -> String {
                 match byte_type.ty {
                     ByteInnerTy::Byte => byte_type.name.to_string(),
-                    ByteInnerTy::Ty(_) => {
+                    ByteInnerTy::Definer(_) => {
                         format!("{name}.as_int()", name = byte_type.name)
                     }
                 }
@@ -386,7 +387,7 @@ fn print_setter_internals(s: &mut Writer, m: &MemberType) {
     }
 }
 
-fn print_builder_setter(s: &mut Writer, m: &MemberType) {
+fn print_builder_setter(s: &mut Writer, m: &UpdateMaskMember) {
     s.open_curly(format!(
         "pub fn set_{}_{}(mut self, {}) -> Self",
         m.object_ty.to_string().to_lowercase(),
@@ -400,8 +401,8 @@ fn print_builder_setter(s: &mut Writer, m: &MemberType) {
     s.closing_curly_newline(); // pub(crate) fn set_
 }
 
-#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
-pub(crate) enum UpdateMaskType {
+#[derive(Serialize, Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq)]
+pub(crate) enum UpdateMaskObjectType {
     Object,
     Item,
     Unit,
@@ -412,7 +413,7 @@ pub(crate) enum UpdateMaskType {
     Corpse,
 }
 
-impl UpdateMaskType {
+impl UpdateMaskObjectType {
     pub(crate) const fn all() -> &'static [Self] {
         &[
             Self::Object,
@@ -428,33 +429,35 @@ impl UpdateMaskType {
 
     pub(crate) const fn as_str(&self) -> &'static str {
         match self {
-            UpdateMaskType::Object => "object",
-            UpdateMaskType::Item => "item",
-            UpdateMaskType::Unit => "unit",
-            UpdateMaskType::Player => "player",
-            UpdateMaskType::Container => "container",
-            UpdateMaskType::GameObject => "gameobject",
-            UpdateMaskType::DynamicObject => "dynamicobject",
-            UpdateMaskType::Corpse => "corpse",
+            UpdateMaskObjectType::Object => "object",
+            UpdateMaskObjectType::Item => "item",
+            UpdateMaskObjectType::Unit => "unit",
+            UpdateMaskObjectType::Player => "player",
+            UpdateMaskObjectType::Container => "container",
+            UpdateMaskObjectType::GameObject => "gameobject",
+            UpdateMaskObjectType::DynamicObject => "dynamicobject",
+            UpdateMaskObjectType::Corpse => "corpse",
         }
     }
 }
 
-impl Display for UpdateMaskType {
+impl Display for UpdateMaskObjectType {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         f.write_str(self.as_str())
     }
 }
 
-#[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Serialize, Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
+#[serde(tag = "byte_type_tag", content = "byte_type")]
 pub(crate) enum ByteInnerTy {
     Byte,
-    Ty(&'static str),
+    Definer(&'static str),
 }
 
-#[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Serialize, Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub(crate) struct ByteType {
     pub name: &'static str,
+    #[serde(rename = "inner_type")]
     pub ty: ByteInnerTy,
 }
 
@@ -462,7 +465,7 @@ impl ByteType {
     pub(crate) const fn new(name: &'static str, ty: &'static str) -> Self {
         Self {
             name,
-            ty: ByteInnerTy::Ty(ty),
+            ty: ByteInnerTy::Definer(ty),
         }
     }
 
@@ -476,7 +479,7 @@ impl ByteType {
     pub(crate) const fn ty_str(&self) -> &'static str {
         match self.ty {
             ByteInnerTy::Byte => "u8",
-            ByteInnerTy::Ty(s) => s,
+            ByteInnerTy::Definer(s) => s,
         }
     }
 
@@ -511,13 +514,12 @@ impl ByteType {
 }
 
 #[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
-pub(crate) enum UfType {
+pub(crate) enum UpdateMaskDataType {
     Guid,
     Int,
     Float,
-    Bytes,
-    BytesWith(ByteType, ByteType, ByteType, ByteType),
     TwoShort,
+    Bytes(ByteType, ByteType, ByteType, ByteType),
     ArrayOfStruct {
         name: &'static str,
         variable_name: &'static str,
@@ -531,32 +533,42 @@ pub(crate) enum UfType {
     },
 }
 
+impl UpdateMaskDataType {
+    pub(crate) const fn bytes() -> Self {
+        Self::Bytes(
+            ByteType::byte("a"),
+            ByteType::byte("b"),
+            ByteType::byte("c"),
+            ByteType::byte("d"),
+        )
+    }
+}
+
 const GUID_TYPE: &str = "Guid";
 const INT_TYPE: &str = "i32";
 const FLOAT_TYPE: &str = "f32";
 const TWO_SHORT_TYPE: &str = "u16";
 
-impl UfType {
+impl UpdateMaskDataType {
     pub(crate) fn ty_str(&self) -> String {
         match self {
-            UfType::Guid => GUID_TYPE.to_string(),
-            UfType::Int => INT_TYPE.to_string(),
-            UfType::Float => FLOAT_TYPE.to_string(),
-            UfType::TwoShort => format!("({TWO_SHORT_TYPE}, {TWO_SHORT_TYPE})"),
-            UfType::Bytes => "(u8, u8, u8, u8)".to_string(),
-            UfType::BytesWith(a, b, c, d) => format!(
+            UpdateMaskDataType::Guid => GUID_TYPE.to_string(),
+            UpdateMaskDataType::Int => INT_TYPE.to_string(),
+            UpdateMaskDataType::Float => FLOAT_TYPE.to_string(),
+            UpdateMaskDataType::TwoShort => format!("({TWO_SHORT_TYPE}, {TWO_SHORT_TYPE})"),
+            UpdateMaskDataType::Bytes(a, b, c, d) => format!(
                 "({}, {}, {}, {})",
                 a.ty_str(),
                 b.ty_str(),
                 c.ty_str(),
                 d.ty_str(),
             ),
-            UfType::GuidEnumLookupArray {
+            UpdateMaskDataType::GuidEnumLookupArray {
                 name,
                 import_location,
                 ..
             }
-            | UfType::ArrayOfStruct {
+            | UpdateMaskDataType::ArrayOfStruct {
                 name,
                 import_location,
                 ..
@@ -568,14 +580,12 @@ impl UfType {
         format!(
             "v: {}",
             match self {
-                UfType::Guid => GUID_TYPE,
-                UfType::Int => INT_TYPE,
-                UfType::Float => FLOAT_TYPE,
-                UfType::TwoShort => return format!("a: {TWO_SHORT_TYPE}, b: {TWO_SHORT_TYPE}"),
-                UfType::Bytes => {
-                    return "a: u8, b: u8, c: u8, d: u8".to_string();
-                }
-                UfType::BytesWith(a, b, c, d) => {
+                UpdateMaskDataType::Guid => GUID_TYPE,
+                UpdateMaskDataType::Int => INT_TYPE,
+                UpdateMaskDataType::Float => FLOAT_TYPE,
+                UpdateMaskDataType::TwoShort =>
+                    return format!("a: {TWO_SHORT_TYPE}, b: {TWO_SHORT_TYPE}"),
+                UpdateMaskDataType::Bytes(a, b, c, d) => {
                     return format!(
                         "{}: {}, {}: {}, {}: {}, {}: {}",
                         a.name,
@@ -588,7 +598,7 @@ impl UfType {
                         d.ty_str(),
                     );
                 }
-                UfType::ArrayOfStruct {
+                UpdateMaskDataType::ArrayOfStruct {
                     name,
                     variable_name,
                     import_location,
@@ -597,7 +607,7 @@ impl UfType {
                     return format!(
                         "{variable_name}: {import_location}::{name}, index: {name}Index"
                     ),
-                UfType::GuidEnumLookupArray {
+                UpdateMaskDataType::GuidEnumLookupArray {
                     name,
                     variable_name,
                     import_location,
@@ -610,16 +620,22 @@ impl UfType {
 }
 
 #[derive(Debug, Clone, Ord, PartialOrd, Eq, PartialEq)]
-pub(crate) struct MemberType {
-    object_ty: UpdateMaskType,
+pub(crate) struct UpdateMaskMember {
+    object_ty: UpdateMaskObjectType,
     name: &'static str,
     offset: i32,
     size: i32,
-    ty: UfType,
+    ty: UpdateMaskDataType,
 }
 
-impl MemberType {
-    const fn new(ty: UpdateMaskType, s: &'static str, offset: i32, size: i32, uf: UfType) -> Self {
+impl UpdateMaskMember {
+    const fn new(
+        ty: UpdateMaskObjectType,
+        s: &'static str,
+        offset: i32,
+        size: i32,
+        uf: UpdateMaskDataType,
+    ) -> Self {
         Self {
             object_ty: ty,
             name: s,
@@ -628,13 +644,13 @@ impl MemberType {
             ty: uf,
         }
     }
-    pub(crate) const fn object_ty(&self) -> UpdateMaskType {
+    pub(crate) const fn object_ty(&self) -> UpdateMaskObjectType {
         self.object_ty
     }
     pub(crate) const fn name(&self) -> &'static str {
         self.name
     }
-    pub(crate) fn ty(&self) -> UfType {
+    pub(crate) fn ty(&self) -> UpdateMaskDataType {
         self.ty.clone()
     }
     pub(crate) const fn size(&self) -> i32 {

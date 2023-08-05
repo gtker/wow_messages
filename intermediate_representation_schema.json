@@ -30,9 +30,108 @@
     },
     "login": {
       "ref": "login_objects"
+    },
+    "vanilla_update_mask": {
+      "elements": {
+        "ref": "update_mask"
+      }
+    },
+    "tbc_update_mask": {
+      "elements": {
+        "ref": "update_mask"
+      }
+    },
+    "wrath_update_mask": {
+      "elements": {
+        "ref": "update_mask"
+      }
     }
   },
   "definitions": {
+    "update_mask": {
+      "properties": {
+        "object_type": {
+          "enum": [
+            "Object",
+            "Item",
+            "Unit",
+            "Player",
+            "Container",
+            "GameObject",
+            "DynamicObject",
+            "Corpse"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "uint16"
+        },
+        "size": {
+          "type": "uint16"
+        },
+        "data_type": {
+          "discriminator": "update_mask_type_tag",
+          "mapping": {
+            "Guid": {
+              "properties": {}
+            },
+            "Int": {
+              "properties": {}
+            },
+            "Float": {
+              "properties": {}
+            },
+            "TwoShort": {
+              "properties": {}
+            },
+            "Bytes": {
+              "properties": {
+                "content": {
+                  "properties": {
+                    "first": {
+                      "ref": "byte_type"
+                    },
+                    "second": {
+                      "ref": "byte_type"
+                    },
+                    "third": {
+                      "ref": "byte_type"
+                    },
+                    "fourth": {
+                      "ref": "byte_type"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "byte_type": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "inner_type": {
+          "discriminator": "byte_type_tag",
+          "mapping": {
+            "Byte": {
+              "properties": {}
+            },
+            "Definer": {
+              "properties": {
+                "byte_type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "schema_version": {
       "properties": {
         "major": {

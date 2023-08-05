@@ -8,7 +8,7 @@ use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
 use crate::parser::types::ContainerValue;
-use crate::rust_printer::UpdateMaskType;
+use crate::rust_printer::UpdateMaskObjectType;
 use crate::Objects;
 use serde::Serialize;
 
@@ -488,17 +488,17 @@ pub(crate) enum IrUpdateMaskType {
     Corpse,
 }
 
-impl From<UpdateMaskType> for IrUpdateMaskType {
-    fn from(e: UpdateMaskType) -> Self {
+impl From<UpdateMaskObjectType> for IrUpdateMaskType {
+    fn from(e: UpdateMaskObjectType) -> Self {
         match e {
-            UpdateMaskType::Object => Self::Object,
-            UpdateMaskType::Item => Self::Item,
-            UpdateMaskType::Unit => Self::Unit,
-            UpdateMaskType::Player => Self::Player,
-            UpdateMaskType::Container => Self::Container,
-            UpdateMaskType::GameObject => Self::GameObject,
-            UpdateMaskType::DynamicObject => Self::DynamicObject,
-            UpdateMaskType::Corpse => Self::Corpse,
+            UpdateMaskObjectType::Object => Self::Object,
+            UpdateMaskObjectType::Item => Self::Item,
+            UpdateMaskObjectType::Unit => Self::Unit,
+            UpdateMaskObjectType::Player => Self::Player,
+            UpdateMaskObjectType::Container => Self::Container,
+            UpdateMaskObjectType::GameObject => Self::GameObject,
+            UpdateMaskObjectType::DynamicObject => Self::DynamicObject,
+            UpdateMaskObjectType::Corpse => Self::Corpse,
         }
     }
 }

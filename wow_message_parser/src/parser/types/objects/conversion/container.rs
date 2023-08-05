@@ -28,7 +28,7 @@ use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskVa
 use crate::parser::types::ty::Type;
 use crate::parser::types::ContainerValue;
 use crate::parser::utility::parse_value;
-use crate::rust_printer::UpdateMaskType;
+use crate::rust_printer::UpdateMaskObjectType;
 use crate::{DefinerType, ObjectTags, CONTAINER_SELF_SIZE_FIELD};
 
 pub(crate) fn verify_and_set_members(
@@ -479,14 +479,14 @@ fn convert_parsed_test_case_value_to_test_case_value(
                 for m_inner in multiple.iter_mut() {
                     let (ty, name) = &m_inner.variable_name.split_once('_').unwrap();
                     let ty = match *ty {
-                        "OBJECT" => UpdateMaskType::Object,
-                        "UNIT" => UpdateMaskType::Unit,
-                        "ITEM" => UpdateMaskType::Item,
-                        "PLAYER" => UpdateMaskType::Player,
-                        "CONTAINER" => UpdateMaskType::Container,
-                        "GAMEOBJECT" => UpdateMaskType::GameObject,
-                        "DYNAMICOBJECT" => UpdateMaskType::DynamicObject,
-                        "CORPSE" => UpdateMaskType::Corpse,
+                        "OBJECT" => UpdateMaskObjectType::Object,
+                        "UNIT" => UpdateMaskObjectType::Unit,
+                        "ITEM" => UpdateMaskObjectType::Item,
+                        "PLAYER" => UpdateMaskObjectType::Player,
+                        "CONTAINER" => UpdateMaskObjectType::Container,
+                        "GAMEOBJECT" => UpdateMaskObjectType::GameObject,
+                        "DYNAMICOBJECT" => UpdateMaskObjectType::DynamicObject,
+                        "CORPSE" => UpdateMaskObjectType::Corpse,
                         _ => panic!("invalid update mask type: '{ty}'"),
                     };
 

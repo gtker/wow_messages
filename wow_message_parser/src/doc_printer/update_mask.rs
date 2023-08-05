@@ -2,12 +2,13 @@ use crate::file_utils::overwrite_if_not_same_contents;
 use crate::path_utils::update_mask_doc_file;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
-    tbc_fields, vanilla_fields, wrath_fields, MemberType, UfType, UpdateMaskType,
+    tbc_fields, vanilla_fields, wrath_fields, UpdateMaskDataType, UpdateMaskMember,
+    UpdateMaskObjectType,
 };
 use std::fs::read_to_string;
 
-fn print_specific_update_mask_doc(fields: &[MemberType], s: &mut Writer) {
-    for &u in UpdateMaskType::all() {
+fn print_specific_update_mask_doc(fields: &[UpdateMaskMember], s: &mut Writer) {
+    for &u in UpdateMaskObjectType::all() {
         let name = u.as_str();
         s.wln(format!("Fields that all {name}s have:"));
         s.newline();
@@ -17,12 +18,13 @@ fn print_specific_update_mask_doc(fields: &[MemberType], s: &mut Writer) {
         for field in fields {
             if field.object_ty() == u {
                 let ty = match field.ty() {
-                    UfType::Guid => "GUID",
-                    UfType::Int => "INT",
-                    UfType::Float => "FLOAT",
-                    UfType::BytesWith(_, _, _, _) | UfType::Bytes => "BYTES",
-                    UfType::TwoShort => "TWO_SHORT",
-                    UfType::GuidEnumLookupArray { .. } | UfType::ArrayOfStruct { .. } => "CUSTOM",
+                    UpdateMaskDataType::Guid => "GUID",
+                    UpdateMaskDataType::Int => "INT",
+                    UpdateMaskDataType::Float => "FLOAT",
+                    UpdateMaskDataType::Bytes(_, _, _, _) => "BYTES",
+                    UpdateMaskDataType::TwoShort => "TWO_SHORT",
+                    UpdateMaskDataType::GuidEnumLookupArray { .. }
+                    | UpdateMaskDataType::ArrayOfStruct { .. } => "CUSTOM",
                 };
 
                 s.wln(format!(
@@ -34,7 +36,7 @@ fn print_specific_update_mask_doc(fields: &[MemberType], s: &mut Writer) {
                     ty
                 ));
 
-                if field.offset() == 0 && field.ty() == UfType::Guid {
+                if field.offset() == 0 && field.ty() == UpdateMaskDataType::Guid {
                     s.wln(format!(
                         "|`{}_TYPE`| 0x{:04x?} | {} | INT |",
                         name.to_uppercase(),

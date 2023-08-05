@@ -1,5 +1,6 @@
 mod container;
 mod definer;
+mod update_mask;
 
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::ir_printer::container::{containers_to_ir, IrContainer};
@@ -7,6 +8,7 @@ use serde::Serialize;
 use std::collections::{BTreeMap, BTreeSet};
 
 use crate::ir_printer::definer::{definers_to_ir, IrDefiner};
+use crate::ir_printer::update_mask::IrUpdateMaskMember;
 use crate::parser::types::array::ArrayType;
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::if_statement::IfStatement;
@@ -17,6 +19,7 @@ use crate::parser::types::ty::Type;
 use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
 use crate::parser::types::IntegerType;
 use crate::path_utils::intermediate_representation;
+use crate::rust_printer::{tbc_fields, vanilla_fields, wrath_fields};
 
 #[derive(Serialize, Debug)]
 struct IrFileInfo {
@@ -351,6 +354,9 @@ struct IrObjects {
     distinct_login_versions_other_than_all: BTreeSet<u8>,
     login_version_opcodes: BTreeMap<String, u8>,
     integer_type_information: BTreeMap<IrIntegerType, IntegerTypeInformation>,
+    vanilla_update_mask: Vec<IrUpdateMaskMember>,
+    tbc_update_mask: Vec<IrUpdateMaskMember>,
+    wrath_update_mask: Vec<IrUpdateMaskMember>,
     world: TypeObjects,
 }
 
@@ -402,6 +408,9 @@ impl IrObjects {
             distinct_login_versions_other_than_all,
             login_version_opcodes,
             integer_type_information: create_integer_type_information(),
+            vanilla_update_mask: IrUpdateMaskMember::new_array(vanilla_fields::FIELDS),
+            tbc_update_mask: IrUpdateMaskMember::new_array(tbc_fields::FIELDS),
+            wrath_update_mask: IrUpdateMaskMember::new_array(wrath_fields::FIELDS),
             world,
         }
     }

@@ -12,9 +12,10 @@ use crate::rust_printer::rust_view::rust_type::RustType;
 use crate::rust_printer::update_mask::vanilla_fields::FIELDS;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
-    get_new_flag_type_name, ByteInnerTy, ByteType, ImplType, UfType, UpdateMaskType,
-    CLIENT_MESSAGE_TRAIT_NAME, LOGIN_CLIENT_MESSAGE_ENUM_NAME, LOGIN_SERVER_MESSAGE_ENUM_NAME,
-    SERVER_MESSAGE_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME, WORLD_SERVER_MESSAGE_ENUM_NAME,
+    get_new_flag_type_name, ByteInnerTy, ByteType, ImplType, UpdateMaskDataType,
+    UpdateMaskObjectType, CLIENT_MESSAGE_TRAIT_NAME, LOGIN_CLIENT_MESSAGE_ENUM_NAME,
+    LOGIN_SERVER_MESSAGE_ENUM_NAME, SERVER_MESSAGE_TRAIT_NAME, WORLD_CLIENT_MESSAGE_ENUM_NAME,
+    WORLD_SERVER_MESSAGE_ENUM_NAME,
 };
 
 pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
@@ -527,7 +528,7 @@ fn print_value(
         TestValue::UpdateMask(fields) => {
             let ty = fields
                 .iter()
-                .find(|a| a.ty() == UpdateMaskType::Object && a.name() == "TYPE")
+                .find(|a| a.ty() == UpdateMaskObjectType::Object && a.name() == "TYPE")
                 .unwrap();
             let ty = parse_value(ty.value()).unwrap();
 
@@ -576,7 +577,7 @@ fn print_value(
                     .clone();
 
                 match field.ty() {
-                    UfType::Guid => {
+                    UpdateMaskDataType::Guid => {
                         s.wln(format!(
                             ".set_{ty}_{field}(Guid::new({value}))",
                             value = f.value(),
@@ -584,26 +585,13 @@ fn print_value(
                             field = f.name().to_lowercase(),
                         ));
                     }
-                    UfType::Bytes => {
-                        let (a, b, c, d) = split_u32_str_into_u8s(f.value());
-
-                        s.wln(format!(
-                            ".set_{ty}_{field}({a}, {b}, {c}, {d})",
-                            ty = field.object_ty().to_string().to_lowercase(),
-                            field = f.name().to_lowercase(),
-                            a = a,
-                            b = b,
-                            c = c,
-                            d = d
-                        ))
-                    }
-                    UfType::BytesWith(a_ty, b_ty, c_ty, d_ty) => {
+                    UpdateMaskDataType::Bytes(a_ty, b_ty, c_ty, d_ty) => {
                         let (a, b, c, d) = split_u32_str_into_u8s(f.value());
 
                         let get_try = |value: u8, byte_ty: ByteType| -> String {
                             match byte_ty.ty {
                                 ByteInnerTy::Byte => value.to_string(),
-                                ByteInnerTy::Ty(_) => format!("{value}.try_into()"),
+                                ByteInnerTy::Definer(_) => format!("{value}.try_into()"),
                             }
                         };
 

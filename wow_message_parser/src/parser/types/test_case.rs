@@ -2,7 +2,7 @@ use crate::file_info::FileInfo;
 use crate::parser::types::array::ArraySize;
 use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::ContainerValue;
-use crate::rust_printer::UpdateMaskType;
+use crate::rust_printer::UpdateMaskObjectType;
 use crate::Container;
 
 #[derive(Debug, Clone)]
@@ -88,13 +88,13 @@ impl TestCaseMember {
 
 #[derive(Debug, Clone)]
 pub(crate) struct TestUpdateMaskValue {
-    ty: UpdateMaskType,
+    ty: UpdateMaskObjectType,
     name: String,
     value: String,
 }
 
 impl TestUpdateMaskValue {
-    pub(crate) fn ty(&self) -> UpdateMaskType {
+    pub(crate) fn ty(&self) -> UpdateMaskObjectType {
         self.ty
     }
     pub(crate) fn name(&self) -> &str {
@@ -104,7 +104,7 @@ impl TestUpdateMaskValue {
         &self.value
     }
 
-    pub(crate) fn new(ty: UpdateMaskType, name: String, value: String) -> Self {
+    pub(crate) fn new(ty: UpdateMaskObjectType, name: String, value: String) -> Self {
         Self { ty, name, value }
     }
 }
