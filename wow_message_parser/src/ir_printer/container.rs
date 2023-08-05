@@ -17,9 +17,17 @@ pub(crate) fn containers_to_ir(containers: &[Container], o: &Objects) -> Vec<IrC
 }
 
 fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
-    let members = e.members().iter().map(|a| a.into()).collect();
+    let members = e
+        .members()
+        .iter()
+        .map(|a| IrStructMember::from_struct_member(a))
+        .collect();
 
-    let tests = e.tests(o).iter().map(|a| a.into()).collect();
+    let tests = e
+        .tests(o)
+        .iter()
+        .map(|a| IrTestCase::from_test_case(a))
+        .collect();
 
     let has_manual_size_field = e
         .all_definitions()
@@ -28,7 +36,7 @@ fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
 
     IrContainer {
         name: e.name().to_string(),
-        object_type: e.container_type().into(),
+        object_type: IrContainerType::from_container_type(e.container_type()),
         sizes: IrSizes::from_sizes(e.sizes()),
         members,
         tags: IrTags::from_tags(e.tags()),
@@ -55,8 +63,8 @@ pub(crate) enum IrContainerType {
     SMsg(u16),
 }
 
-impl From<ContainerType> for IrContainerType {
-    fn from(v: ContainerType) -> Self {
+impl IrContainerType {
+    fn from_container_type(v: ContainerType) -> Self {
         match v {
             ContainerType::Struct => Self::Struct,
             ContainerType::CLogin(o) => Self::CLogin(o),
@@ -105,9 +113,13 @@ pub(crate) struct IrOptionalStatement {
     members: Vec<IrStructMember>,
 }
 
-impl From<&OptionalStatement> for IrOptionalStatement {
-    fn from(v: &OptionalStatement) -> Self {
-        let members = v.members().iter().map(|a| a.into()).collect();
+impl IrOptionalStatement {
+    fn from_optional(v: &OptionalStatement) -> Self {
+        let members = v
+            .members()
+            .iter()
+            .map(|a| IrStructMember::from_struct_member(a))
+            .collect();
 
         Self {
             name: v.name().to_string(),
@@ -124,12 +136,18 @@ pub(crate) enum IrStructMember {
     Optional(IrOptionalStatement),
 }
 
-impl From<&StructMember> for IrStructMember {
-    fn from(v: &StructMember) -> Self {
+impl IrStructMember {
+    fn from_struct_member(v: &StructMember) -> Self {
         match v {
-            StructMember::Definition(d) => Self::Definition(Box::new(d.into())),
-            StructMember::IfStatement(statement) => Self::IfStatement(statement.into()),
-            StructMember::OptionalStatement(optional) => Self::Optional(optional.into()),
+            StructMember::Definition(d) => {
+                Self::Definition(Box::new(IrStructMemberDefinition::from_definition(d)))
+            }
+            StructMember::IfStatement(statement) => {
+                Self::IfStatement(IrIfStatement::from_statement(statement))
+            }
+            StructMember::OptionalStatement(optional) => {
+                Self::Optional(IrOptionalStatement::from_optional(optional))
+            }
         }
     }
 }
@@ -142,8 +160,8 @@ pub(crate) enum IrEquation {
     BitwiseAnd { value: Vec<String> },
 }
 
-impl From<&Equation> for IrEquation {
-    fn from(v: &Equation) -> Self {
+impl IrEquation {
+    fn from_equation(v: &Equation) -> Self {
         match v {
             Equation::Equals { values: value } => IrEquation::Equals {
                 value: value.clone(),
@@ -164,9 +182,9 @@ pub(crate) struct IrConditional {
     equations: IrEquation,
 }
 
-impl From<Conditional> for IrConditional {
-    fn from(v: Conditional) -> Self {
-        let equations = v.equation().into();
+impl IrConditional {
+    fn from_conditional(v: Conditional) -> Self {
+        let equations = IrEquation::from_equation(v.equation());
 
         Self {
             variable_name: v.variable_name().to_string(),
@@ -186,19 +204,31 @@ pub(crate) struct IrIfStatement {
     is_else_if_flag: bool,
 }
 
-impl From<&IfStatement> for IrIfStatement {
-    fn from(v: &IfStatement) -> Self {
-        let members = v.members().iter().map(|a| a.into()).collect();
-        let else_ifs = v.else_ifs().iter().map(|a| a.into()).collect();
+impl IrIfStatement {
+    fn from_statement(v: &IfStatement) -> Self {
+        let members = v
+            .members()
+            .iter()
+            .map(|a| IrStructMember::from_struct_member(a))
+            .collect();
+        let else_ifs = v
+            .else_ifs()
+            .iter()
+            .map(|a| IrIfStatement::from_statement(a))
+            .collect();
 
-        let else_statement_members = v.else_members().iter().map(|a| a.into()).collect();
+        let else_statement_members = v
+            .else_members()
+            .iter()
+            .map(|a| IrStructMember::from_struct_member(a))
+            .collect();
 
         Self {
-            conditional: v.conditional().clone().into(),
+            conditional: IrConditional::from_conditional(v.conditional().clone()),
             members,
             else_if_statements: else_ifs,
             else_members: else_statement_members,
-            original_type: v.original_ty().into(),
+            original_type: IrType::from_type(v.original_ty()),
             part_of_separate_if_statement: v.part_of_separate_if_statement(),
             is_else_if_flag: v.is_elseif_flag(),
         }
@@ -216,12 +246,15 @@ pub(crate) struct IrStructMemberDefinition {
     tags: IrTags,
 }
 
-impl From<&StructMemberDefinition> for IrStructMemberDefinition {
-    fn from(v: &StructMemberDefinition) -> Self {
+impl IrStructMemberDefinition {
+    fn from_definition(v: &StructMemberDefinition) -> Self {
         Self {
             name: v.name().to_string(),
-            data_type: v.ty().into(),
-            constant_value: v.value().as_ref().map(|a| a.into()),
+            data_type: IrType::from_type(v.ty().into()),
+            constant_value: v
+                .value()
+                .as_ref()
+                .map(|a| IrIntegerEnumValue::from_container_value(a)),
             used_as_size_in: v.used_as_size_in().clone(),
             size_of_fields_before_size: v.size_of_fields_before_size().map(|a| a as u8),
             used_in_if: v.used_in_if(),
@@ -277,8 +310,8 @@ pub(crate) enum IrType {
     Milliseconds,
 }
 
-impl From<&Type> for IrType {
-    fn from(v: &Type) -> Self {
+impl IrType {
+    fn from_type(v: &Type) -> Self {
         match v {
             Type::Integer(i) => Self::Integer(IrIntegerType::from_integer_type(i)),
             Type::PackedGuid => Self::PackedGuid,
@@ -289,7 +322,7 @@ impl From<&Type> for IrType {
             Type::String => Self::String,
             Type::UpdateMask { .. } => Self::UpdateMask,
             Type::AuraMask => Self::AuraMask,
-            Type::Array(array) => Self::Array(array.into()),
+            Type::Array(array) => Self::Array(IrArray::from_array(array)),
             Type::Enum { e, upcast } => {
                 let (upcast, integer_type) = if let Some(c) = upcast {
                     (true, IrIntegerType::from_integer_type(c))
@@ -348,11 +381,11 @@ pub(crate) struct IrArray {
     size: IrArraySize,
 }
 
-impl From<&Array> for IrArray {
-    fn from(v: &Array) -> Self {
+impl IrArray {
+    fn from_array(v: &Array) -> Self {
         Self {
-            inner_type: v.ty().into(),
-            size: v.size().into(),
+            inner_type: IrArrayType::from_array_type(v.ty()),
+            size: IrArraySize::from_array_size(v.size()),
         }
     }
 }
@@ -367,8 +400,8 @@ pub(crate) enum IrArrayType {
     PackedGuid,
 }
 
-impl From<&ArrayType> for IrArrayType {
-    fn from(v: &ArrayType) -> Self {
+impl IrArrayType {
+    fn from_array_type(v: &ArrayType) -> Self {
         match v {
             ArrayType::Integer(i) => Self::Integer(IrIntegerType::from_integer_type(i)),
             ArrayType::Struct(f) => Self::Struct {
@@ -390,8 +423,8 @@ pub(crate) enum IrArraySize {
     Endless,
 }
 
-impl From<ArraySize> for IrArraySize {
-    fn from(v: ArraySize) -> Self {
+impl IrArraySize {
+    fn from_array_size(v: ArraySize) -> Self {
         match v {
             ArraySize::Fixed(s) => Self::Fixed(s.to_string()),
             ArraySize::Variable(s) => Self::Variable(s.name().into()),
@@ -406,8 +439,8 @@ pub(crate) struct IrIntegerEnumValue {
     pub original_string: String,
 }
 
-impl From<&ContainerValue> for IrIntegerEnumValue {
-    fn from(v: &ContainerValue) -> Self {
+impl IrIntegerEnumValue {
+    fn from_container_value(v: &ContainerValue) -> Self {
         Self {
             value: v.value().to_string(),
             original_string: v.original_string().to_string(),
@@ -424,9 +457,13 @@ pub(crate) struct IrTestCase {
     file_info: IrFileInfo,
 }
 
-impl From<&&TestCase> for IrTestCase {
-    fn from(v: &&TestCase) -> Self {
-        let members = v.members().iter().map(|a| a.into()).collect();
+impl IrTestCase {
+    fn from_test_case(v: &&TestCase) -> Self {
+        let members = v
+            .members()
+            .iter()
+            .map(|a| IrTestCaseMember::from_test_case_member(a))
+            .collect();
 
         Self {
             subject: v.subject().to_string(),
@@ -449,11 +486,11 @@ pub(crate) struct IrTestCaseMember {
     tags: IrTags,
 }
 
-impl From<&TestCaseMember> for IrTestCaseMember {
-    fn from(v: &TestCaseMember) -> Self {
+impl IrTestCaseMember {
+    fn from_test_case_member(v: &TestCaseMember) -> Self {
         Self {
             variable_name: v.name().to_string(),
-            value: v.value().into(),
+            value: IrTestValue::from_test_value(v.value()),
             tags: IrTags::from_member_tags(v.tags()),
         }
     }
@@ -466,10 +503,10 @@ pub(crate) struct IrTestUpdateMaskValue {
     update_mask_value: String,
 }
 
-impl From<&TestUpdateMaskValue> for IrTestUpdateMaskValue {
-    fn from(e: &TestUpdateMaskValue) -> Self {
+impl IrTestUpdateMaskValue {
+    fn from_mask_value(e: &TestUpdateMaskValue) -> Self {
         Self {
-            update_mask_type: e.ty().into(),
+            update_mask_type: IrUpdateMaskType::from_mask_type(e.ty()),
             update_mask_name: e.name().to_string(),
             update_mask_value: e.value().to_string(),
         }
@@ -488,8 +525,8 @@ pub(crate) enum IrUpdateMaskType {
     Corpse,
 }
 
-impl From<UpdateMaskObjectType> for IrUpdateMaskType {
-    fn from(e: UpdateMaskObjectType) -> Self {
+impl IrUpdateMaskType {
+    fn from_mask_type(e: UpdateMaskObjectType) -> Self {
         match e {
             UpdateMaskObjectType::Object => Self::Object,
             UpdateMaskObjectType::Item => Self::Item,
@@ -536,14 +573,16 @@ pub(crate) enum IrTestValue {
     Population(f32),
 }
 
-impl From<&TestValue> for IrTestValue {
-    fn from(v: &TestValue) -> Self {
+impl IrTestValue {
+    fn from_test_value(v: &TestValue) -> Self {
         match v {
-            TestValue::Number(i) => Self::Integer(i.into()),
-            TestValue::DateTime(v) => Self::DateTime(v.into()),
-            TestValue::Guid(i) => Self::Guid(i.into()),
+            TestValue::Number(i) => Self::Integer(IrIntegerEnumValue::from_container_value(i)),
+            TestValue::DateTime(v) => Self::DateTime(IrIntegerEnumValue::from_container_value(v)),
+            TestValue::Guid(i) => Self::Guid(IrIntegerEnumValue::from_container_value(i)),
             TestValue::Bool(b) => Self::Bool(*b),
-            TestValue::IpAddress(v) => IrTestValue::IpAddress(v.into()),
+            TestValue::IpAddress(v) => {
+                IrTestValue::IpAddress(IrIntegerEnumValue::from_container_value(v))
+            }
             TestValue::FloatingNumber {
                 value,
                 original_string,
@@ -553,27 +592,38 @@ impl From<&TestValue> for IrTestValue {
             },
             TestValue::Array { values, size } => Self::Array {
                 values: values.iter().map(|a| a.to_string()).collect(),
-                size: size.clone().into(),
+                size: IrArraySize::from_array_size(size.clone()),
             },
             TestValue::String(s) => Self::String(s.to_string()),
             TestValue::Flag(f) => Self::Flag(f.to_vec()),
-            TestValue::Enum(e) => Self::Enum(e.into()),
+            TestValue::Enum(e) => Self::Enum(IrIntegerEnumValue::from_container_value(e)),
             TestValue::SubObject { c, members } => Self::SubObject {
                 type_name: c.name().to_string(),
-                members: members.iter().map(|a| a.into()).collect(),
+                members: members
+                    .iter()
+                    .map(|a| IrTestCaseMember::from_test_case_member(a))
+                    .collect(),
             },
             TestValue::ArrayOfSubObject(e, t) => Self::ArrayOfSubObject {
                 type_name: e.name().to_string(),
                 members: t
                     .iter()
-                    .map(|a| a.iter().map(|a| a.into()).collect::<Vec<_>>())
+                    .map(|a| {
+                        a.iter()
+                            .map(|a| IrTestCaseMember::from_test_case_member(a))
+                            .collect::<Vec<_>>()
+                    })
                     .collect(),
             },
-            TestValue::UpdateMask(v) => {
-                IrTestValue::UpdateMask(v.iter().map(|a| a.into()).collect())
+            TestValue::UpdateMask(v) => IrTestValue::UpdateMask(
+                v.iter()
+                    .map(|a| IrTestUpdateMaskValue::from_mask_value(a))
+                    .collect(),
+            ),
+            TestValue::Seconds(i) => Self::Seconds(IrIntegerEnumValue::from_container_value(i)),
+            TestValue::Milliseconds(i) => {
+                Self::Milliseconds(IrIntegerEnumValue::from_container_value(i))
             }
-            TestValue::Seconds(i) => Self::Seconds(i.into()),
-            TestValue::Milliseconds(i) => Self::Milliseconds(i.into()),
             TestValue::Population { value, .. } => Self::Population(*value),
         }
     }

@@ -3,7 +3,6 @@ use crate::ir_printer::{IrFileInfo, IrIntegerType, IrTags};
 use crate::parser::types::definer::{Definer, DefinerField};
 use crate::parser::types::if_statement::DefinerUsage;
 use crate::rust_printer::DefinerType;
-use core::convert::From;
 use serde::Serialize;
 use std::collections::BTreeSet;
 
@@ -15,7 +14,7 @@ fn definer_to_ir(e: &Definer) -> IrDefiner {
     let fields = e
         .fields()
         .iter()
-        .map(|a| -> IrDefinerField { a.into() })
+        .map(|a| -> IrDefinerField { IrDefinerField::from_definer_field(a) })
         .collect();
 
     let objects_used_in = e
@@ -23,13 +22,13 @@ fn definer_to_ir(e: &Definer) -> IrDefiner {
         .iter()
         .map(|a| ObjectUsedIn {
             object_name: a.0.to_string(),
-            definer_usage: a.1.into(),
+            definer_usage: IrDefinerUsage::from_definer_usage(a.1),
         })
         .collect();
 
     IrDefiner {
         name: e.name().to_string(),
-        definer_type: e.definer_ty().into(),
+        definer_type: IrDefinerType::from_definer_type(e.definer_ty()),
         enumerators: fields,
         integer_type: IrIntegerType::from_integer_type(e.ty()),
         tags: IrTags::from_tags(e.tags()),
@@ -48,8 +47,8 @@ enum IrDefinerType {
     Flag,
 }
 
-impl From<DefinerType> for IrDefinerType {
-    fn from(v: DefinerType) -> Self {
+impl IrDefinerType {
+    fn from_definer_type(v: DefinerType) -> Self {
         match v {
             DefinerType::Enum => IrDefinerType::Enum,
             DefinerType::Flag => IrDefinerType::Flag,
@@ -63,8 +62,8 @@ pub(crate) enum IrDefinerUsage {
     InIfStatement,
 }
 
-impl From<DefinerUsage> for IrDefinerUsage {
-    fn from(v: DefinerUsage) -> Self {
+impl IrDefinerUsage {
+    fn from_definer_usage(v: DefinerUsage) -> Self {
         match v {
             DefinerUsage::NotInIf => IrDefinerUsage::RegularUse,
             DefinerUsage::InIf => IrDefinerUsage::InIfStatement,
@@ -79,8 +78,8 @@ pub(crate) struct IrDefinerField {
     tags: IrTags,
 }
 
-impl From<&DefinerField> for IrDefinerField {
-    fn from(a: &DefinerField) -> Self {
+impl IrDefinerField {
+    fn from_definer_field(a: &DefinerField) -> Self {
         IrDefinerField {
             name: a.name().to_string(),
             value: IrIntegerEnumValue {

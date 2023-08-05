@@ -96,7 +96,12 @@ impl IrWorldVersionOuter {
             return Self::All;
         }
 
-        Self::Specific(v.iter().copied().map(|a| a.into()).collect())
+        Self::Specific(
+            v.iter()
+                .copied()
+                .map(|a| IrWorldVersion::from_world_version(a))
+                .collect(),
+        )
     }
 }
 
@@ -116,8 +121,8 @@ pub(crate) enum IrVersions {
     World(IrWorldVersionOuter),
 }
 
-impl From<WorldVersion> for IrWorldVersion {
-    fn from(v: WorldVersion) -> Self {
+impl IrWorldVersion {
+    fn from_world_version(v: WorldVersion) -> Self {
         let (m, i, p, b) = match v {
             WorldVersion::Major(m) => (m, None, None, None),
             WorldVersion::Minor(m, i) => (m, Some(i), None, None),
