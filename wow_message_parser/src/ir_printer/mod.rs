@@ -273,16 +273,12 @@ impl TypeObjects {
             match d.ty() {
                 Type::Array(array) => match array.ty() {
                     ArrayType::Struct(e) => {
-                        if !out.contains(e) {
-                            out.push((**e).clone());
-                        }
+                        inner_container(out, e);
                     }
                     _ => {}
                 },
                 Type::Struct { e } => {
-                    if !out.contains(e) {
-                        out.push(e.clone());
-                    }
+                    inner_container(out, e);
                 }
                 _ => {}
             }
@@ -318,20 +314,24 @@ impl TypeObjects {
             }
         }
 
-        let mut out = Vec::with_capacity(structs.len());
-
-        for e in structs {
+        fn inner_container(out: &mut Vec<Container>, e: &Container) {
             if out.contains(e) {
-                continue;
+                return;
             }
 
             for m in e.members() {
-                inner(&mut out, m);
+                inner(out, m);
             }
 
             if !out.contains(e) {
                 out.push(e.clone());
             }
+        }
+
+        let mut out = Vec::with_capacity(structs.len());
+
+        for e in structs {
+            inner_container(&mut out, e);
         }
 
         assert_eq!(out.len(), structs.len());
