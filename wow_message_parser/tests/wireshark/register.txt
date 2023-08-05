@@ -958,12 +958,6 @@
                 NULL, HFILL
             }
         },
-        { &hf_woww_chat_data_size_uncompressed,
-            { "Chat Data Size Uncompressed", "woww.chat.data.size.uncompressed",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
         { &hf_woww_chat_notify,
             { "Chat Notify", "woww.chat.notify",
                 FT_UINT8, BASE_HEX_DEC, VALS(e_chat_notify_strings), 0,
@@ -1291,12 +1285,6 @@
         { &hf_woww_debug_log_format,
             { "Debug Log Format", "woww.debug.log.format",
                 FT_UINT8, BASE_HEX_DEC, NULL, 0,
-                NULL, HFILL
-            }
-        },
-        { &hf_woww_decompressed_addon_info_size,
-            { "Decompressed Addon Info Size", "woww.decompressed.addon.info.size",
-                FT_UINT32, BASE_HEX_DEC, NULL, 0,
                 NULL, HFILL
             }
         },

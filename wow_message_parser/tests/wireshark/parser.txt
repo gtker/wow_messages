@@ -79,7 +79,7 @@
             add_cstring(ptv, &hf_woww_username);
             ptvcursor_add(ptv, hf_woww_client_seed, 4, ENC_LITTLE_ENDIAN);
             ptvcursor_add(ptv, hf_woww_client_proof, 20, ENC_NA);
-            ptvcursor_add(ptv, hf_woww_decompressed_addon_info_size, 4, ENC_LITTLE_ENDIAN);
+            ptvcursor_add(ptv, hf_woww_decompressed_size, 4, ENC_LITTLE_ENDIAN);
             compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));
             if (compressed_tvb != NULL) {
                 ptvcursor_t* old_ptv = ptv;
@@ -689,7 +689,7 @@
             add_cstring(ptv, &hf_woww_reserved_for_future_use);
             if (category == GM_TICKET_TYPE_BEHAVIOR_HARASSMENT) {
                 ptvcursor_add(ptv, hf_woww_chat_data_line_count, 4, ENC_LITTLE_ENDIAN);
-                ptvcursor_add(ptv, hf_woww_chat_data_size_uncompressed, 4, ENC_LITTLE_ENDIAN);
+                ptvcursor_add(ptv, hf_woww_decompressed_size, 4, ENC_LITTLE_ENDIAN);
                 compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));
                 if (compressed_tvb != NULL) {
                     ptvcursor_t* old_ptv = ptv;

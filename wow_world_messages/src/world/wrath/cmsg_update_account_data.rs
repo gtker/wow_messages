@@ -3,12 +3,11 @@ use std::io::{Read, Write};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord, Default)]
 /// Respond with [`SMSG_UPDATE_ACCOUNT_DATA_COMPLETE`](crate::wrath::SMSG_UPDATE_ACCOUNT_DATA_COMPLETE)
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm:28`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm#L28):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm:27`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm#L27):
 /// ```text
 /// cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
 ///     u32 data_type;
 ///     u32 unix_time;
-///     u32 decompressed_size;
 ///     u8[-] compressed_data;
 /// }
 /// ```
@@ -17,8 +16,6 @@ pub struct CMSG_UPDATE_ACCOUNT_DATA {
     pub data_type: u32,
     /// Seconds since unix epoch. The client wants this number back when it requests the ACCOUNT_DATA_TIMES
     pub unix_time: u32,
-    /// Size of the data block when it is uncompressed. (in bytes)
-    pub decompressed_size: u32,
     /// Compressed account data (macros, keybinds, etc). The server does not actually care about the uncompressed contents. It only needs to send this back to the client. The server acts as a cross-device storage
     pub compressed_data: Vec<u8>,
 }
@@ -36,20 +33,18 @@ impl CMSG_UPDATE_ACCOUNT_DATA {
         // unix_time: u32
         let unix_time = crate::util::read_u32_le(&mut r)?;
 
-        // decompressed_size: u32
-        let decompressed_size = crate::util::read_u32_le(&mut r)?;
-
         // compressed_data: u8[-]
         let compressed_data = {
+            let compressed_data_decompressed_size = crate::util::read_u32_le(&mut r)?;
+
             let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
 
             let mut current_size = {
                 4 // data_type: u32
                 + 4 // unix_time: u32
-                + 4 // decompressed_size: u32
             };
             let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
-            while decoder.total_out() < (decompressed_size as u64) {
+            while decoder.total_out() < (compressed_data_decompressed_size as u64) {
                 compressed_data.push(crate::util::read_u8_le(&mut decoder)?);
                 current_size += 1;
             }
@@ -59,7 +54,6 @@ impl CMSG_UPDATE_ACCOUNT_DATA {
         Ok(Self {
             data_type,
             unix_time,
-            decompressed_size,
             compressed_data,
         })
     }
@@ -80,7 +74,6 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         // Members
         writeln!(s, "    data_type = {};", self.data_type).unwrap();
         writeln!(s, "    unix_time = {};", self.unix_time).unwrap();
-        writeln!(s, "    decompressed_size = {};", self.decompressed_size).unwrap();
         write!(s, "    compressed_data = [").unwrap();
         for v in self.compressed_data.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
@@ -99,7 +92,6 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
 
         crate::util::write_bytes(&mut s, &mut bytes, 4, "data_type", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 4, "unix_time", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "decompressed_size", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, self.compressed_data.len(), "compressed_data", "    ");
 
 
@@ -121,10 +113,9 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         // unix_time: u32
         w.write_all(&self.unix_time.to_le_bytes())?;
 
-        // decompressed_size: u32
-        w.write_all(&self.decompressed_size.to_le_bytes())?;
-
         // compressed_data: u8[-]
+        let decompressed_size: u32 = 1 * self.compressed_data.len() as u32;
+        w.write_all(&decompressed_size.to_le_bytes())?;
         let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
         for i in self.compressed_data.iter() {
             encoder.write_all(&i.to_le_bytes())?;
@@ -291,8 +282,7 @@ impl CMSG_UPDATE_ACCOUNT_DATA {
     pub(crate) fn size(&self) -> usize {
         4 // data_type: u32
         + 4 // unix_time: u32
-        + 4 // decompressed_size: u32
-        + crate::util::zlib_compressed_size(&self.compressed_data) // compressed_data: u8[-]
+        + crate::util::zlib_compressed_size(&self.compressed_data) + 4 // compressed_data: u8[-]
     }
 }
 

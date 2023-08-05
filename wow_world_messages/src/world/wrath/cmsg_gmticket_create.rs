@@ -6,7 +6,7 @@ use crate::wrath::{
 };
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Default)]
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm:21`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm#L21):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm:20`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/gamemaster/cmsg_gmticket_create.wowm#L20):
 /// ```text
 /// cmsg CMSG_GMTICKET_CREATE = 0x0205 {
 ///     Map map;
@@ -16,7 +16,6 @@ use crate::wrath::{
 ///     Bool needs_more_help;
 ///     u32 num_of_times;
 ///     u32[num_of_times] times;
-///     u32 decompressed_size;
 ///     u8[-] compressed_data;
 /// }
 /// ```
@@ -27,7 +26,6 @@ pub struct CMSG_GMTICKET_CREATE {
     pub needs_response: bool,
     pub needs_more_help: bool,
     pub times: Vec<u32>,
-    pub decompressed_size: u32,
     pub compressed_data: Vec<u8>,
 }
 
@@ -68,11 +66,10 @@ impl CMSG_GMTICKET_CREATE {
             times
         };
 
-        // decompressed_size: u32
-        let decompressed_size = crate::util::read_u32_le(&mut r)?;
-
         // compressed_data: u8[-]
         let compressed_data = {
+            let compressed_data_decompressed_size = crate::util::read_u32_le(&mut r)?;
+
             let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
 
             let mut current_size = {
@@ -83,10 +80,9 @@ impl CMSG_GMTICKET_CREATE {
                 + 1 // needs_more_help: Bool
                 + 4 // num_of_times: u32
                 + times.len() * core::mem::size_of::<u32>() // times: u32[num_of_times]
-                + 4 // decompressed_size: u32
             };
             let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
-            while decoder.total_out() < (decompressed_size as u64) {
+            while decoder.total_out() < (compressed_data_decompressed_size as u64) {
                 compressed_data.push(crate::util::read_u8_le(&mut decoder)?);
                 current_size += 1;
             }
@@ -100,7 +96,6 @@ impl CMSG_GMTICKET_CREATE {
             needs_response,
             needs_more_help,
             times,
-            decompressed_size,
             compressed_data,
         })
     }
@@ -137,7 +132,6 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
             write!(s, "{v:#04X}, ").unwrap();
         }
         writeln!(s, "];").unwrap();
-        writeln!(s, "    decompressed_size = {};", self.decompressed_size).unwrap();
         write!(s, "    compressed_data = [").unwrap();
         for v in self.compressed_data.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
@@ -171,7 +165,6 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
             }
             writeln!(s, "    /* times: u32[num_of_times] end */").unwrap();
         }
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "decompressed_size", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, self.compressed_data.len(), "compressed_data", "    ");
 
 
@@ -214,10 +207,9 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        // decompressed_size: u32
-        w.write_all(&self.decompressed_size.to_le_bytes())?;
-
         // compressed_data: u8[-]
+        let decompressed_size: u32 = 1 * self.compressed_data.len() as u32;
+        w.write_all(&decompressed_size.to_le_bytes())?;
         let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
         for i in self.compressed_data.iter() {
             encoder.write_all(&i.to_le_bytes())?;
@@ -389,8 +381,7 @@ impl CMSG_GMTICKET_CREATE {
         + 1 // needs_more_help: Bool
         + 4 // num_of_times: u32
         + self.times.len() * core::mem::size_of::<u32>() // times: u32[num_of_times]
-        + 4 // decompressed_size: u32
-        + crate::util::zlib_compressed_size(&self.compressed_data) // compressed_data: u8[-]
+        + crate::util::zlib_compressed_size(&self.compressed_data) + 4 // compressed_data: u8[-]
     }
 }
 

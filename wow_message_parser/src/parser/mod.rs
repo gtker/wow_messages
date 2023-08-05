@@ -394,7 +394,8 @@ fn parse_struct_member(
             let container_type = if let Some(ty) = upcasted_type {
                 ParsedType::with_upcast(container_type, ty, ty_name, identifier.as_str(), file_info)
             } else {
-                ParsedType::from_str(container_type)
+                let compressed = kvs.compressed();
+                ParsedType::from_str(container_type, compressed)
             };
 
             let s = ParsedStructMemberDefinition::new(

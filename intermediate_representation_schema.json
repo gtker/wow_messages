@@ -534,9 +534,6 @@
         },
         "display": {
           "type": "string"
-        },
-        "compressed": {
-          "type": "string"
         }
       }
     },
@@ -780,6 +777,9 @@
         },
         "size": {
           "ref": "array_size"
+        },
+        "compressed": {
+          "type": "boolean"
         }
       }
     },

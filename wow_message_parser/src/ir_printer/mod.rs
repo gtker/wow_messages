@@ -153,9 +153,7 @@ pub(crate) struct IrTags {
     #[serde(skip_serializing_if = "Option::is_none")]
     unimplemented: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    compressed: Option<String>,
-    #[serde(rename = "compressed", skip_serializing_if = "Option::is_none")]
-    compressed_bool: Option<bool>,
+    compressed: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     non_network_type: Option<bool>,
 }
@@ -166,7 +164,7 @@ impl IrTags {
 
         let comment = tags.comment().map(|d| d.as_ir_string());
 
-        let compressed_bool = if tags.compressed() { Some(true) } else { None };
+        let compressed = if tags.compressed() { Some(true) } else { None };
 
         let unimplemented = if tags.unimplemented() {
             Some(true)
@@ -196,10 +194,9 @@ impl IrTags {
             comment,
             display: None,
             version,
-            compressed: None,
+            compressed,
             unimplemented,
             non_network_type,
-            compressed_bool,
         }
     }
 
@@ -208,17 +205,14 @@ impl IrTags {
 
         let comment = tags.comment().map(|d| d.as_ir_string());
 
-        let compressed = tags.compressed().map(|d| d.to_string());
-
         Self {
             description,
             comment,
             display: tags.display().map(|a| a.to_owned()),
             version: None,
-            compressed,
+            compressed: None,
             unimplemented: None,
             non_network_type: None,
-            compressed_bool: None,
         }
     }
 }

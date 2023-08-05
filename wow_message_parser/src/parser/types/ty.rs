@@ -167,6 +167,10 @@ impl Type {
                 sizes += e.sizes();
             }
             Type::Array(array) => {
+                if array.compressed() {
+                    sizes.inc_both(4);
+                }
+
                 if matches!(array.size(), ArraySize::Endless) {
                     sizes.inc(0, u16::MAX as _);
                     return sizes;

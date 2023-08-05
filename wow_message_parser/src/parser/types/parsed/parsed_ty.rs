@@ -210,6 +210,10 @@ impl ParsedType {
                 }
             }
             ParsedType::Array(array) => {
+                if array.compressed {
+                    sizes.inc_both(4);
+                }
+
                 if matches!(array.size(), ParsedArraySize::Endless) {
                     sizes.inc(0, u16::MAX as _);
                     return sizes;
@@ -266,7 +270,7 @@ impl ParsedType {
         variable_name: &str,
         file_info: &FileInfo,
     ) -> Self {
-        let t = Self::from_str(s);
+        let t = Self::from_str(s, false);
         match t {
             ParsedType::Identifier { .. } => {}
             _ => {
@@ -283,7 +287,7 @@ impl ParsedType {
     }
 
     #[allow(clippy::should_implement_trait)]
-    pub(crate) fn from_str(s: &str) -> Self {
+    pub(crate) fn from_str(s: &str, compressed: bool) -> Self {
         let s = match s {
             "u8" => Self::Integer(IntegerType::U8),
             "Bool" => Self::Bool(IntegerType::U8),
@@ -337,7 +341,7 @@ impl ParsedType {
                 if i.contains('[') {
                     let mut i = i.split('[');
                     let array_type = i.next().unwrap();
-                    let array_type: ParsedType = ParsedType::from_str(array_type);
+                    let array_type: ParsedType = ParsedType::from_str(array_type, compressed);
 
                     let amount = i.next().unwrap().strip_suffix(']').unwrap();
                     let parsed = str::parse(amount);
@@ -351,20 +355,28 @@ impl ParsedType {
                     };
 
                     match array_type {
-                        ParsedType::Integer(i) => {
-                            Self::Array(ParsedArray::new(ParsedArrayType::Integer(i), size))
-                        }
-                        ParsedType::Identifier { s: i, .. } => {
-                            Self::Array(ParsedArray::new(ParsedArrayType::Complex(i), size))
-                        }
-                        ParsedType::CString => {
-                            Self::Array(ParsedArray::new(ParsedArrayType::CString, size))
-                        }
-                        ParsedType::PackedGuid => {
-                            Self::Array(ParsedArray::new(ParsedArrayType::PackedGuid, size))
-                        }
+                        ParsedType::Integer(i) => Self::Array(ParsedArray::new(
+                            ParsedArrayType::Integer(i),
+                            size,
+                            compressed,
+                        )),
+                        ParsedType::Identifier { s: i, .. } => Self::Array(ParsedArray::new(
+                            ParsedArrayType::Complex(i),
+                            size,
+                            compressed,
+                        )),
+                        ParsedType::CString => Self::Array(ParsedArray::new(
+                            ParsedArrayType::CString,
+                            size,
+                            compressed,
+                        )),
+                        ParsedType::PackedGuid => Self::Array(ParsedArray::new(
+                            ParsedArrayType::PackedGuid,
+                            size,
+                            compressed,
+                        )),
                         ParsedType::Guid => {
-                            Self::Array(ParsedArray::new(ParsedArrayType::Guid, size))
+                            Self::Array(ParsedArray::new(ParsedArrayType::Guid, size, compressed))
                         }
 
                         _ => unimplemented!("unsupported"),

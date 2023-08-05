@@ -1,6 +1,9 @@
 # Compression
 
-In `wowm` both messages and individual variables can have the `compressed` tag.
+In `wowm` both messages and individual arrays can have the `compressed` tag.
+
+Before the compressed data there is a `u32` with the size of the data after decompression.
+This is present both for entire messages that are compressed and for individual arrays.
 
 Both variables and messages can be decompressed with zlib.
 

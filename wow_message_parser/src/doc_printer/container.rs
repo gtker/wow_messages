@@ -282,7 +282,9 @@ fn print_container_example_member(
 ) {
     match m {
         StructMember::Definition(d) => {
-            if d.tags().is_compressed() {
+            if let Some(compressed) = d.compressed_definition() {
+                print_container_example_definition(s, &compressed, bytes, values, o, tags, prefix);
+
                 let mut decoded_bytes = Vec::new();
                 let mut decoder = flate2::read::ZlibDecoder::new(bytes.as_slice());
                 decoder

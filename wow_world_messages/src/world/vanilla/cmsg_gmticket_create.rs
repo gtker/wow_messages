@@ -16,7 +16,6 @@ use crate::vanilla::{
 ///     CString reserved_for_future_use;
 ///     if (category == BEHAVIOR_HARASSMENT) {
 ///         u32 chat_data_line_count;
-///         u32 chat_data_size_uncompressed;
 ///         u8[-] compressed_chat_data;
 ///     }
 /// }
@@ -65,11 +64,10 @@ impl CMSG_GMTICKET_CREATE {
                 // chat_data_line_count: u32
                 let chat_data_line_count = crate::util::read_u32_le(&mut r)?;
 
-                // chat_data_size_uncompressed: u32
-                let chat_data_size_uncompressed = crate::util::read_u32_le(&mut r)?;
-
                 // compressed_chat_data: u8[-]
                 let compressed_chat_data = {
+                    let compressed_chat_data_decompressed_size = crate::util::read_u32_le(&mut r)?;
+
                     let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
 
                     let mut current_size = {
@@ -80,7 +78,7 @@ impl CMSG_GMTICKET_CREATE {
                         + reserved_for_future_use.len() + 1 // reserved_for_future_use: CString
                     };
                     let mut compressed_chat_data = Vec::with_capacity(body_size as usize - current_size);
-                    while decoder.total_out() < (chat_data_size_uncompressed as u64) {
+                    while decoder.total_out() < (compressed_chat_data_decompressed_size as u64) {
                         compressed_chat_data.push(crate::util::read_u8_le(&mut decoder)?);
                         current_size += 1;
                     }
@@ -89,7 +87,6 @@ impl CMSG_GMTICKET_CREATE {
 
                 CMSG_GMTICKET_CREATE_GmTicketType::BehaviorHarassment {
                     chat_data_line_count,
-                    chat_data_size_uncompressed,
                     compressed_chat_data,
                 }
             }
@@ -141,11 +138,9 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         match &self.category {
             crate::vanilla::CMSG_GMTICKET_CREATE_GmTicketType::BehaviorHarassment {
                 chat_data_line_count,
-                chat_data_size_uncompressed,
                 compressed_chat_data,
             } => {
                 writeln!(s, "    chat_data_line_count = {};", chat_data_line_count).unwrap();
-                writeln!(s, "    chat_data_size_uncompressed = {};", chat_data_size_uncompressed).unwrap();
                 write!(s, "    compressed_chat_data = [").unwrap();
                 for v in compressed_chat_data.as_slice() {
                     write!(s, "{v:#04X}, ").unwrap();
@@ -178,11 +173,9 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         match &self.category {
             crate::vanilla::CMSG_GMTICKET_CREATE_GmTicketType::BehaviorHarassment {
                 chat_data_line_count,
-                chat_data_size_uncompressed,
                 compressed_chat_data,
             } => {
                 crate::util::write_bytes(&mut s, &mut bytes, 4, "chat_data_line_count", "    ");
-                crate::util::write_bytes(&mut s, &mut bytes, 4, "chat_data_size_uncompressed", "    ");
                 crate::util::write_bytes(&mut s, &mut bytes, compressed_chat_data.len(), "compressed_chat_data", "    ");
             }
             _ => {}
@@ -228,16 +221,14 @@ impl crate::Message for CMSG_GMTICKET_CREATE {
         match &self.category {
             CMSG_GMTICKET_CREATE_GmTicketType::BehaviorHarassment {
                 chat_data_line_count,
-                chat_data_size_uncompressed,
                 compressed_chat_data,
             } => {
                 // chat_data_line_count: u32
                 w.write_all(&chat_data_line_count.to_le_bytes())?;
 
-                // chat_data_size_uncompressed: u32
-                w.write_all(&chat_data_size_uncompressed.to_le_bytes())?;
-
                 // compressed_chat_data: u8[-]
+                let decompressed_size: u32 = 1 * compressed_chat_data.len() as u32;
+                w.write_all(&decompressed_size.to_le_bytes())?;
                 let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
                 for i in compressed_chat_data.iter() {
                     encoder.write_all(&i.to_le_bytes())?;
@@ -410,7 +401,6 @@ pub enum CMSG_GMTICKET_CREATE_GmTicketType {
     Stuck,
     BehaviorHarassment {
         chat_data_line_count: u32,
-        chat_data_size_uncompressed: u32,
         compressed_chat_data: Vec<u8>,
     },
     Guild,
@@ -474,8 +464,7 @@ impl CMSG_GMTICKET_CREATE_GmTicketType {
             } => {
                 1
                 + 4 // chat_data_line_count: u32
-                + 4 // chat_data_size_uncompressed: u32
-                + crate::util::zlib_compressed_size(compressed_chat_data) // compressed_chat_data: u8[-]
+                + crate::util::zlib_compressed_size(compressed_chat_data) + 4 // compressed_chat_data: u8[-]
             }
             _ => 1,
         }

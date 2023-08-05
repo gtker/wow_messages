@@ -9,9 +9,8 @@ cmsg CMSG_GMTICKET_CREATE = 0x0205 {
     }
     if (category == BEHAVIOR_HARASSMENT) {
         u32 chat_data_line_count;
-        u32 chat_data_size_uncompressed;
         u8[-] compressed_chat_data {
-            compressed = "chat_data_size_uncompressed";
+            compressed = "true";
         }
     }
 } {
@@ -26,9 +25,8 @@ cmsg CMSG_GMTICKET_CREATE = 0x0205 {
     Bool needs_more_help;
     u32 num_of_times;
     u32[num_of_times] times;
-    u32 decompressed_size;
     u8[-] compressed_data {
-        compressed = "decompressed_size";
+        compressed = "true";
     }
 } {
     versions = "3.3.5";

@@ -5,7 +5,7 @@ use std::io::{Read, Write};
 /// Sent after receiving [`SMSG_AUTH_CHALLENGE`](crate::wrath::SMSG_AUTH_CHALLENGE).
 ///
 /// This message is never encrypted.
-/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:145`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L145):
+/// Auto generated from the original `wowm` in file [`wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm:143`](https://github.com/gtker/wow_messages/tree/main/wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm#L143):
 /// ```text
 /// cmsg CMSG_AUTH_SESSION = 0x01ED {
 ///     u32 client_build;
@@ -18,7 +18,6 @@ use std::io::{Read, Write};
 ///     u32 realm_id;
 ///     u64 dos_response;
 ///     u8[20] client_proof;
-///     u32 decompressed_addon_info_size;
 ///     u8[-] addon_info;
 /// }
 /// ```
@@ -35,7 +34,6 @@ pub struct CMSG_AUTH_SESSION {
     /// TrinityCore has this name but never uses the variable afterwards.
     pub dos_response: u64,
     pub client_proof: [u8; 20],
-    pub decompressed_addon_info_size: u32,
     pub addon_info: Vec<u8>,
 }
 
@@ -83,11 +81,10 @@ impl CMSG_AUTH_SESSION {
             client_proof
         };
 
-        // decompressed_addon_info_size: u32
-        let decompressed_addon_info_size = crate::util::read_u32_le(&mut r)?;
-
         // addon_info: u8[-]
         let addon_info = {
+            let addon_info_decompressed_size = crate::util::read_u32_le(&mut r)?;
+
             let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
 
             let mut current_size = {
@@ -101,10 +98,9 @@ impl CMSG_AUTH_SESSION {
                 + 4 // realm_id: u32
                 + 8 // dos_response: u64
                 + 20 // client_proof: u8[20]
-                + 4 // decompressed_addon_info_size: u32
             };
             let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
-            while decoder.total_out() < (decompressed_addon_info_size as u64) {
+            while decoder.total_out() < (addon_info_decompressed_size as u64) {
                 addon_info.push(crate::util::read_u8_le(&mut decoder)?);
                 current_size += 1;
             }
@@ -122,7 +118,6 @@ impl CMSG_AUTH_SESSION {
             realm_id,
             dos_response,
             client_proof,
-            decompressed_addon_info_size,
             addon_info,
         })
     }
@@ -155,7 +150,6 @@ impl crate::Message for CMSG_AUTH_SESSION {
             write!(s, "{v:#04X}, ").unwrap();
         }
         writeln!(s, "];").unwrap();
-        writeln!(s, "    decompressed_addon_info_size = {};", self.decompressed_addon_info_size).unwrap();
         write!(s, "    addon_info = [").unwrap();
         for v in self.addon_info.as_slice() {
             write!(s, "{v:#04X}, ").unwrap();
@@ -182,7 +176,6 @@ impl crate::Message for CMSG_AUTH_SESSION {
         crate::util::write_bytes(&mut s, &mut bytes, 4, "realm_id", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, 8, "dos_response", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, self.client_proof.len(), "client_proof", "    ");
-        crate::util::write_bytes(&mut s, &mut bytes, 4, "decompressed_addon_info_size", "    ");
         crate::util::write_bytes(&mut s, &mut bytes, self.addon_info.len(), "addon_info", "    ");
 
 
@@ -234,10 +227,9 @@ impl crate::Message for CMSG_AUTH_SESSION {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        // decompressed_addon_info_size: u32
-        w.write_all(&self.decompressed_addon_info_size.to_le_bytes())?;
-
         // addon_info: u8[-]
+        let decompressed_size: u32 = 1 * self.addon_info.len() as u32;
+        w.write_all(&decompressed_size.to_le_bytes())?;
         let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
         for i in self.addon_info.iter() {
             encoder.write_all(&i.to_le_bytes())?;
@@ -412,8 +404,7 @@ impl CMSG_AUTH_SESSION {
         + 4 // realm_id: u32
         + 8 // dos_response: u64
         + 20 // client_proof: u8[20]
-        + 4 // decompressed_addon_info_size: u32
-        + crate::util::zlib_compressed_size(&self.addon_info) // addon_info: u8[-]
+        + crate::util::zlib_compressed_size(&self.addon_info) + 4 // addon_info: u8[-]
     }
 }
 

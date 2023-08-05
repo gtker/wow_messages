@@ -2,7 +2,7 @@ use crate::parser::types::if_statement::IfStatement;
 use crate::parser::types::optional::OptionalStatement;
 use crate::parser::types::tags::MemberTags;
 use crate::parser::types::ty::Type;
-use crate::parser::types::ContainerValue;
+use crate::parser::types::{ContainerValue, IntegerType};
 
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub(crate) enum StructMember {
@@ -32,6 +32,27 @@ pub(crate) struct StructMemberDefinition {
 }
 
 impl StructMemberDefinition {
+    pub(crate) fn compressed_definition(&self) -> Option<StructMemberDefinition> {
+        match self.ty() {
+            Type::Array(array) => {
+                if array.compressed() {
+                    Some(StructMemberDefinition {
+                        name: format!("{}_decompressed_size", self.name()),
+                        struct_type: Type::Integer(IntegerType::U32),
+                        value: None,
+                        used_as_size_in: None,
+                        is_manual_size_field: None,
+                        used_in_if: false,
+                        tags: Default::default(),
+                    })
+                } else {
+                    None
+                }
+            }
+            _ => None,
+        }
+    }
+
     pub(crate) fn used_as_size_in(&self) -> &Option<String> {
         &self.used_as_size_in
     }

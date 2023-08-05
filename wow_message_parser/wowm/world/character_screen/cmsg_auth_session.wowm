@@ -15,9 +15,8 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
     CString username;
     u32 client_seed;
     u8[20] client_proof;
-    u32 decompressed_addon_info_size;
     AddonInfo[-] addon_info {
-        compressed = "decompressed_addon_info_size";
+        compressed = "true";
     }
 } {
     description = "Sent after receiving [SMSG_AUTH_CHALLENGE].";
@@ -35,7 +34,6 @@ test CMSG_AUTH_SESSION {
         136, 157, 239, 5, 37, 187, 193, 171, 167, 138,
         219, 164, 251, 163, 231, 126, 103, 172, 234, 198,
     ];
-    decompressed_addon_info_size = 342;
     addon_info = [
         {
             addon_name = "Blizzard_AuctionUI";
@@ -156,9 +154,8 @@ cmsg CMSG_AUTH_SESSION = 0x1ED {
         comment = "TrinityCore has this name but never uses the variable afterwards.";
     }
     u8[20] client_proof;
-    u32 decompressed_addon_info_size;
     u8[-] addon_info  {
-        compressed = "decompressed_addon_info_size";
+        compressed = "true";
     }
 } {
     description = "Sent after receiving [SMSG_AUTH_CHALLENGE].";

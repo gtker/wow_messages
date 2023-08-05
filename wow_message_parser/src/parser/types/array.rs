@@ -82,11 +82,16 @@ impl ArraySize {
 pub(crate) struct Array {
     inner: ArrayType,
     size: ArraySize,
+    compressed: bool,
 }
 
 impl Array {
-    pub fn new(inner: ArrayType, size: ArraySize) -> Self {
-        Self { inner, size }
+    pub fn new(inner: ArrayType, size: ArraySize, compressed: bool) -> Self {
+        Self {
+            inner,
+            size,
+            compressed,
+        }
     }
 
     pub(crate) fn ty(&self) -> &ArrayType {
@@ -101,6 +106,9 @@ impl Array {
         format!("{}[{}]", self.inner.str(), self.size.str())
     }
 
+    pub(crate) fn compressed(&self) -> bool {
+        self.compressed
+    }
     pub(crate) fn rust_str(&self) -> String {
         match &self.size {
             ArraySize::Fixed(i) => format!("[{}; {}]", self.inner.rust_str(), i),

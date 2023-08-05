@@ -16,9 +16,8 @@ cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
     (u32)AccountDataType data_type {
         comment = "Exact meaning unknown. Seems to be between 0 and 7. Block 6 is changed when changing `layout-cache.txt` inside the WTF folder.";
     }
-    u32 decompressed_size;
     u8[-] compressed_data {
-        compressed = "decompressed_size";
+        compressed = "true";
     }
 } {
     comment = "This is sent by the client after receiving [SMSG_ACCOUNT_DATA_TIMES]. Client can also request a block through [CMSG_REQUEST_ACCOUNT_DATA].";
@@ -32,12 +31,9 @@ cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
     u32 unix_time {
         comment = "Seconds since unix epoch. The client wants this number back when it requests the ACCOUNT_DATA_TIMES";
     }
-    u32 decompressed_size {
-        comment = "Size of the data block when it is uncompressed. (in bytes)";
-    }
     u8[-] compressed_data {
         comment = "Compressed account data (macros, keybinds, etc). The server does not actually care about the uncompressed contents. It only needs to send this back to the client. The server acts as a cross-device storage";
-        compressed = "decompressed_size";
+        compressed = "true";
     }
 } {
     comment = "Respond with [SMSG_UPDATE_ACCOUNT_DATA_COMPLETE]";
@@ -46,7 +42,6 @@ cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
 
 test CMSG_UPDATE_ACCOUNT_DATA {
     data_type = PER_CHARACTER_LAYOUT_CACHE;
-    decompressed_size = 0;
     compressed_data = [];
 } [
   0x00, 0x0c, /* size */
@@ -59,7 +54,6 @@ test CMSG_UPDATE_ACCOUNT_DATA {
 
 test CMSG_UPDATE_ACCOUNT_DATA {
     data_type = PER_CHARACTER_CHAT_CACHE;
-    decompressed_size = 0x1418;
     compressed_data = [
         86, 69, 82, 83, 73, 79, 78, 32, 50, 10, 10, 65, 68, 68, 69, 68, 86, 69, 82, 83, 73,
         79, 78, 32, 50, 10, 10, 79, 80, 84, 73, 79, 78, 95, 71, 85, 73, 76, 68, 95, 82, 69,

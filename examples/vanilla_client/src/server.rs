@@ -33,7 +33,6 @@ pub fn server(
         username: USERNAME.to_string(),
         client_seed: seed_value,
         client_proof,
-        decompressed_addon_info_size: 342,
         addon_info: vec![AddonInfo {
             addon_name: "Test".to_string(),
             addon_crc: 0,

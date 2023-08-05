@@ -140,7 +140,7 @@ impl IntegerType {
     }
 
     pub(crate) fn from_str(s: &str, ty_name: &str, file_info: &FileInfo) -> Self {
-        let t = ParsedType::from_str(s);
+        let t = ParsedType::from_str(s, false);
         match t {
             ParsedType::Integer(e) => e,
             _ => {

@@ -64,6 +64,13 @@ impl ParsedTags {
         self.non_network_type.append(t.non_network_type);
     }
 
+    pub(crate) fn compressed(&self) -> bool {
+        if let Some(c) = &self.compressed {
+            c == "true"
+        } else {
+            false
+        }
+    }
     pub(crate) fn into_tags(
         self,
         ty_name: &str,
@@ -107,12 +114,7 @@ impl ParsedTags {
     }
 
     pub(crate) fn into_member_tags(self) -> MemberTags {
-        MemberTags::from_parsed(
-            self.description,
-            self.compressed,
-            self.comment,
-            self.display,
-        )
+        MemberTags::from_parsed(self.description, self.comment, self.display)
     }
 
     pub(crate) fn paste_versions(&self) -> impl Iterator<Item = WorldVersion> {

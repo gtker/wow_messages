@@ -437,13 +437,10 @@ impl Container {
     }
 
     pub(crate) fn contains_compressed_variable(&self) -> bool {
-        for d in self.all_definitions() {
-            if d.tags().is_compressed() {
-                return true;
-            }
-        }
-
-        false
+        self.all_definitions().iter().any(|a| match a.ty() {
+            Type::Array(array) => array.compressed(),
+            _ => false,
+        })
     }
 
     pub(crate) fn contains_guid_or_packed_guid_transitively(&self) -> bool {

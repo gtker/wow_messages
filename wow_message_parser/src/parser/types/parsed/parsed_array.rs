@@ -51,17 +51,23 @@ impl ParsedArraySize {
 pub(crate) struct ParsedArray {
     inner: ParsedArrayType,
     size: ParsedArraySize,
+    pub compressed: bool,
 }
 
 impl ParsedArray {
-    pub fn new(inner: ParsedArrayType, size: ParsedArraySize) -> Self {
-        Self { inner, size }
+    pub fn new(inner: ParsedArrayType, size: ParsedArraySize, compressed: bool) -> Self {
+        Self {
+            inner,
+            size,
+            compressed,
+        }
     }
 
     pub(crate) fn new_unimplemented() -> Self {
         Self {
             inner: ParsedArrayType::Integer(IntegerType::U8),
             size: ParsedArraySize::Endless,
+            compressed: false,
         }
     }
 

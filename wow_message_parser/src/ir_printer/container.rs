@@ -385,6 +385,7 @@ impl IrType {
 pub(crate) struct IrArray {
     inner_type: IrArrayType,
     size: IrArraySize,
+    compressed: bool,
 }
 
 impl IrArray {
@@ -392,6 +393,7 @@ impl IrArray {
         Self {
             inner_type: IrArrayType::from_array_type(v.ty()),
             size: IrArraySize::from_array_size(v.size()),
+            compressed: v.compressed(),
         }
     }
 }

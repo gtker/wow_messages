@@ -326,14 +326,6 @@ fn print_definition(
     inside_compressed_message: bool,
     depth: i32,
 ) {
-    if d.tags().compressed().is_some() {
-        s.wln("compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));");
-        s.open_curly("if (compressed_tvb != NULL)");
-
-        s.wln("ptvcursor_t* old_ptv = ptv;");
-        s.wln("ptv = ptvcursor_new(wmem_packet_scope(), tree, compressed_tvb, 0);");
-    }
-
     match d.ty() {
         Type::Integer(i) => {
             let name = w.unwrap().name();
@@ -417,6 +409,16 @@ fn print_definition(
             );
         }
         Type::Array(array) => {
+            if array.compressed() {
+                s.wln("ptvcursor_add(ptv, hf_woww_decompressed_size, 4, ENC_LITTLE_ENDIAN);");
+
+                s.wln("compressed_tvb = tvb_uncompress(ptvcursor_tvbuff(ptv), ptvcursor_current_offset(ptv), offset_packet_end - ptvcursor_current_offset(ptv));");
+                s.open_curly("if (compressed_tvb != NULL)");
+
+                s.wln("ptvcursor_t* old_ptv = ptv;");
+                s.wln("ptv = ptvcursor_new(wmem_packet_scope(), tree, compressed_tvb, 0);");
+            }
+
             let len = match array.size() {
                 ArraySize::Fixed(v) => v.to_string(),
                 ArraySize::Variable(v) => v.name().to_string(),
@@ -444,9 +446,7 @@ fn print_definition(
                         Some(format!("i{depth}"))
                     }
                     ArraySize::Endless => {
-                        let packet_end = if d.tags().compressed().is_some()
-                            || inside_compressed_message
-                        {
+                        let packet_end = if array.compressed() || inside_compressed_message {
                             s.wln("gint compression_end = tvb_reported_length(compressed_tvb);");
                             "compression_end"
                         } else {
@@ -495,6 +495,12 @@ fn print_definition(
 
                 s.closing_curly();
             }
+            if array.compressed() {
+                s.wln("ptvcursor_free(ptv);");
+                s.wln("ptv = old_ptv;");
+                s.wln("compressed_tvb = NULL;");
+                s.closing_curly(); // if (compressed_tvb != NULL)
+            }
         }
         Type::PackedGuid => {
             s.wln("add_packed_guid(ptv, pinfo);");
@@ -533,13 +539,6 @@ fn print_definition(
         Type::Population => {
             unreachable!("population only in login")
         }
-    }
-
-    if d.tags().compressed().is_some() {
-        s.wln("ptvcursor_free(ptv);");
-        s.wln("ptv = old_ptv;");
-        s.wln("compressed_tvb = NULL;");
-        s.closing_curly(); // if (compressed_tvb != NULL)
     }
 }
 

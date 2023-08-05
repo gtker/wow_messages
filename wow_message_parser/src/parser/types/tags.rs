@@ -360,7 +360,6 @@ impl TagString {
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
 pub(crate) struct MemberTags {
     description: Option<TagString>,
-    compressed: Option<String>,
     comment: Option<TagString>,
     display: Option<String>,
 }
@@ -368,13 +367,11 @@ pub(crate) struct MemberTags {
 impl MemberTags {
     pub(crate) fn from_parsed(
         description: Option<TagString>,
-        compressed: Option<String>,
         comment: Option<TagString>,
         display: Option<String>,
     ) -> Self {
         Self {
             description,
-            compressed,
             comment,
             display,
         }
@@ -386,14 +383,6 @@ impl MemberTags {
 
     pub(crate) fn description(&self) -> Option<&TagString> {
         self.description.as_ref()
-    }
-
-    pub(crate) fn compressed(&self) -> Option<&String> {
-        self.compressed.as_ref()
-    }
-
-    pub(crate) fn is_compressed(&self) -> bool {
-        self.compressed.is_some()
     }
 
     pub(crate) fn comment(&self) -> Option<&TagString> {

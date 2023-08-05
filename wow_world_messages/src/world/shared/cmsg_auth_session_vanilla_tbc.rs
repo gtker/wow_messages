@@ -16,7 +16,6 @@ use crate::shared::addon_info_vanilla_tbc_wrath::AddonInfo;
 ///     CString username;
 ///     u32 client_seed;
 ///     u8[20] client_proof;
-///     u32 decompressed_addon_info_size;
 ///     AddonInfo[-] addon_info;
 /// }
 /// ```
@@ -27,7 +26,6 @@ pub struct CMSG_AUTH_SESSION {
     pub username: String,
     pub client_seed: u32,
     pub client_proof: [u8; 20],
-    pub decompressed_addon_info_size: u32,
     pub addon_info: Vec<AddonInfo>,
 }
 
@@ -60,11 +58,10 @@ impl CMSG_AUTH_SESSION {
             client_proof
         };
 
-        // decompressed_addon_info_size: u32
-        let decompressed_addon_info_size = crate::util::read_u32_le(&mut r)?;
-
         // addon_info: AddonInfo[-]
         let addon_info = {
+            let addon_info_decompressed_size = crate::util::read_u32_le(&mut r)?;
+
             let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
 
             let mut current_size = {
@@ -73,10 +70,9 @@ impl CMSG_AUTH_SESSION {
                 + username.len() + 1 // username: CString
                 + 4 // client_seed: u32
                 + 20 // client_proof: u8[20]
-                + 4 // decompressed_addon_info_size: u32
             };
             let mut addon_info = Vec::with_capacity(body_size as usize - current_size);
-            while decoder.total_out() < (decompressed_addon_info_size as u64) {
+            while decoder.total_out() < (addon_info_decompressed_size as u64) {
                 addon_info.push(AddonInfo::read(&mut decoder)?);
                 current_size += 1;
             }
@@ -89,7 +85,6 @@ impl CMSG_AUTH_SESSION {
             username,
             client_seed,
             client_proof,
-            decompressed_addon_info_size,
             addon_info,
         })
     }
@@ -125,10 +120,9 @@ impl crate::Message for CMSG_AUTH_SESSION {
             w.write_all(&i.to_le_bytes())?;
         }
 
-        // decompressed_addon_info_size: u32
-        w.write_all(&self.decompressed_addon_info_size.to_le_bytes())?;
-
         // addon_info: AddonInfo[-]
+        let decompressed_size: u32 = self.addon_info.iter().fold(0, |acc, x| acc + x.size()) as u32;
+        w.write_all(&decompressed_size.to_le_bytes())?;
         let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
         for i in self.addon_info.iter() {
             i.write_into_vec(&mut encoder)?;
@@ -428,8 +422,7 @@ impl CMSG_AUTH_SESSION {
         + self.username.len() + 1 // username: CString
         + 4 // client_seed: u32
         + 20 // client_proof: u8[20]
-        + 4 // decompressed_addon_info_size: u32
-        + crate::util::zlib_compressed_size(self.addon_info.iter().fold(Vec::new(), |mut acc, x| { x.write_into_vec(&mut acc).unwrap(); acc } ).as_slice()) // addon_info: AddonInfo[-]
+        + crate::util::zlib_compressed_size(self.addon_info.iter().fold(Vec::new(), |mut acc, x| { x.write_into_vec(&mut acc).unwrap(); acc } ).as_slice()) + 4 // addon_info: AddonInfo[-]
     }
 }
 
@@ -449,7 +442,6 @@ mod test_vanilla {
         assert_eq!(t.username, expected.username);
         assert_eq!(t.client_seed, expected.client_seed);
         assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
         assert_eq!(t.addon_info, expected.addon_info);
     }
 
@@ -477,7 +469,6 @@ mod test_vanilla {
             client_seed: 0x49D80288,
             client_proof: [ 0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7,
                  0x8A, 0xDB, 0xA4, 0xFB, 0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, ],
-            decompressed_addon_info_size: 0x156,
             addon_info: vec![
                 AddonInfo {
                     addon_name: String::from("Blizzard_AuctionUI"),
@@ -556,7 +547,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 29.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_auth_session0() {
@@ -580,7 +571,7 @@ mod test_vanilla {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 29.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_auth_session0() {
@@ -604,7 +595,7 @@ mod test_vanilla {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 29.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_auth_session0() {
@@ -646,7 +637,6 @@ mod test_tbc {
         assert_eq!(t.username, expected.username);
         assert_eq!(t.client_seed, expected.client_seed);
         assert_eq!(t.client_proof, expected.client_proof);
-        assert_eq!(t.decompressed_addon_info_size, expected.decompressed_addon_info_size);
         assert_eq!(t.addon_info, expected.addon_info);
     }
 
@@ -674,7 +664,6 @@ mod test_tbc {
             client_seed: 0x49D80288,
             client_proof: [ 0x88, 0x9D, 0xEF, 0x05, 0x25, 0xBB, 0xC1, 0xAB, 0xA7,
                  0x8A, 0xDB, 0xA4, 0xFB, 0xA3, 0xE7, 0x7E, 0x67, 0xAC, 0xEA, 0xC6, ],
-            decompressed_addon_info_size: 0x156,
             addon_info: vec![
                 AddonInfo {
                     addon_name: String::from("Blizzard_AuctionUI"),
@@ -753,7 +742,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 29.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_auth_session0() {
@@ -777,7 +766,7 @@ mod test_tbc {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 29.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_auth_session0() {
@@ -801,7 +790,7 @@ mod test_tbc {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 29.
+    // Generated from `wow_message_parser/wowm/world/character_screen/cmsg_auth_session.wowm` line 28.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_auth_session0() {

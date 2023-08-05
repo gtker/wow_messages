@@ -7,6 +7,13 @@ use crate::{wireshark_printer, Objects};
 pub(crate) fn get_wireshark_object(o: &Objects) -> WiresharkObject {
     let mut objects = WiresharkObject::new();
 
+    let decompressed_size_ty = Type::Integer(IntegerType::U32);
+    let decompressed_size_name = "decompressed_size";
+    objects.push(WiresharkMember::new(
+        wireshark_printer::name_to_hf(decompressed_size_name, &decompressed_size_ty),
+        WiresharkType::from_type(&decompressed_size_ty).unwrap(),
+    ));
+
     for e in o.wireshark_containers() {
         for d in e.all_definitions() {
             let name = wireshark_printer::name_to_hf(d.name(), d.ty());

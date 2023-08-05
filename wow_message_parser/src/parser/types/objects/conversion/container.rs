@@ -149,7 +149,7 @@ fn parsed_array_to_array(
         ParsedArrayType::PackedGuid => ArrayType::PackedGuid,
     };
 
-    Array::new(inner, size)
+    Array::new(inner, size, array.compressed)
 }
 
 fn parsed_struct_member_definition_to_struct_member(

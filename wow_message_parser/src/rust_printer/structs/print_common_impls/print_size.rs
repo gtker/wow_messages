@@ -87,9 +87,9 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                     }
                     ArraySize::Variable(_) | ArraySize::Endless => {
                         // ZLib compression is not predictable, so we compress the data and count the bytes.
-                        if m.tags().is_compressed() {
+                        if array.compressed() {
                             format!(
-                                "crate::util::zlib_compressed_size({ref}{prefix}{name})",
+                                "crate::util::zlib_compressed_size({ref}{prefix}{name}) + 4",
                                 ref = if prefix.is_empty() { "" } else { "&" },
                             )
                         } else {
@@ -110,9 +110,9 @@ pub(crate) fn print_size_of_ty_rust_view(s: &mut Writer, m: &RustMember, prefix:
                     ArraySize::Variable(_) | ArraySize::Endless => {
                         // ZLib compression is not predictable, so we need to serialise each array member into a Vec
                         // and compress the entire buffer to calculate the true size of the packet.
-                        if m.tags().is_compressed() {
+                        if array.compressed() {
                             format!(
-                                "crate::util::zlib_compressed_size({prefix}{name}.iter().fold(Vec::new(), |mut acc, x| {{ x.write_into_vec(&mut acc).unwrap(); acc }} ).as_slice())",
+                                "crate::util::zlib_compressed_size({prefix}{name}.iter().fold(Vec::new(), |mut acc, x| {{ x.write_into_vec(&mut acc).unwrap(); acc }} ).as_slice()) + 4",
                             )
                         } else {
                             match inner_is_constant {

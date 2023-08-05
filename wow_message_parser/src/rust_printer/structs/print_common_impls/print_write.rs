@@ -1,4 +1,4 @@
-use crate::parser::types::array::{Array, ArrayType};
+use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::container::Container;
 use crate::parser::types::if_statement::{Equation, IfStatement};
 use crate::parser::types::objects::Objects;
@@ -15,7 +15,40 @@ pub(crate) fn print_write_field_array(
     array: &Array,
     postfix: &str,
 ) {
-    let writer = if d.tags().is_compressed() {
+    let name = d.name();
+
+    let writer = if array.compressed() {
+        let size = match array.size() {
+            ArraySize::Fixed(e) => e.to_string(),
+            ArraySize::Endless | ArraySize::Variable(_) => {
+                format!("{variable_prefix}{}.len()", d.name())
+            }
+        };
+        let calc = match array.ty() {
+            ArrayType::Integer(i) => {
+                let i = i.size();
+                format!("{i} * {size}")
+            }
+            ArrayType::Guid => {
+                format!("8 * {size}")
+            }
+            ArrayType::Struct(e) => {
+                if let Some(constant) = e.sizes().is_constant() {
+                    format!("{constant} * {size}")
+                } else {
+                    format!("{variable_prefix}{name}.iter().fold(0, |acc, x| acc + x.size())")
+                }
+            }
+            ArrayType::PackedGuid | ArrayType::CString => {
+                format!("{variable_prefix}{name}.iter().fold(0, |acc, x| acc + x.size())")
+            }
+        };
+        s.wln(format!("let decompressed_size: u32 = {calc} as u32;"));
+
+        s.wln(format!(
+            "w.write_all(&decompressed_size.to_le_bytes()){postfix}?;"
+        ));
+
         s.wln(
             "let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());",
         );
@@ -26,7 +59,7 @@ pub(crate) fn print_write_field_array(
     };
 
     s.body(
-        format!("for i in {variable_prefix}{name}.iter()", name = d.name(),),
+        format!("for i in {variable_prefix}{name}.iter()"),
         |s| match array.ty() {
             ArrayType::Integer(_) => {
                 s.wln(format!("{writer}.write_all(&i.to_le_bytes()){postfix}?;",))

@@ -71,20 +71,21 @@ fn print_read_array(
             });
         }
         ArraySize::Endless => {
-            if d.tags().is_compressed() {
+            if array.compressed() {
+                s.wln(format!(
+                    "let {name}_decompressed_size = crate::util::read_u32_le(&mut r)?;"
+                ));
+                s.newline();
+
                 s.wln("let mut decoder = &mut flate2::read::ZlibDecoder::new(r);");
                 s.newline();
             }
 
             print_size_before_variable(s, e, d.name());
 
-            let reader = if d.tags().is_compressed() {
-                "decoder"
-            } else {
-                "r"
-            };
-            let loop_condition = if let Some(decompressed_size_field) = d.tags().compressed() {
-                format!("while decoder.total_out() < ({decompressed_size_field} as u64)")
+            let reader = if array.compressed() { "decoder" } else { "r" };
+            let loop_condition = if array.compressed() {
+                format!("while decoder.total_out() < ({name}_decompressed_size as u64)")
             } else {
                 "while current_size < (body_size as usize)".to_string()
             };

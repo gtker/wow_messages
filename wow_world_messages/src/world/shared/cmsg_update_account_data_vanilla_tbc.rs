@@ -9,14 +9,12 @@ use wow_world_base::shared::account_data_type_vanilla_tbc::AccountDataType;
 /// ```text
 /// cmsg CMSG_UPDATE_ACCOUNT_DATA = 0x020B {
 ///     (u32)AccountDataType data_type;
-///     u32 decompressed_size;
 ///     u8[-] compressed_data;
 /// }
 /// ```
 pub struct CMSG_UPDATE_ACCOUNT_DATA {
     /// Exact meaning unknown. Seems to be between 0 and 7. Block 6 is changed when changing `layout-cache.txt` inside the WTF folder.
     pub data_type: AccountDataType,
-    pub decompressed_size: u32,
     pub compressed_data: Vec<u8>,
 }
 
@@ -30,19 +28,17 @@ impl CMSG_UPDATE_ACCOUNT_DATA {
         // data_type: AccountDataType
         let data_type = (crate::util::read_u32_le(&mut r)? as u8).try_into()?;
 
-        // decompressed_size: u32
-        let decompressed_size = crate::util::read_u32_le(&mut r)?;
-
         // compressed_data: u8[-]
         let compressed_data = {
+            let compressed_data_decompressed_size = crate::util::read_u32_le(&mut r)?;
+
             let mut decoder = &mut flate2::read::ZlibDecoder::new(r);
 
             let mut current_size = {
                 4 // data_type: AccountDataType
-                + 4 // decompressed_size: u32
             };
             let mut compressed_data = Vec::with_capacity(body_size as usize - current_size);
-            while decoder.total_out() < (decompressed_size as u64) {
+            while decoder.total_out() < (compressed_data_decompressed_size as u64) {
                 compressed_data.push(crate::util::read_u8_le(&mut decoder)?);
                 current_size += 1;
             }
@@ -51,7 +47,6 @@ impl CMSG_UPDATE_ACCOUNT_DATA {
 
         Ok(Self {
             data_type,
-            decompressed_size,
             compressed_data,
         })
     }
@@ -69,10 +64,9 @@ impl crate::Message for CMSG_UPDATE_ACCOUNT_DATA {
         // data_type: AccountDataType
         w.write_all(&u32::from(self.data_type.as_int()).to_le_bytes())?;
 
-        // decompressed_size: u32
-        w.write_all(&self.decompressed_size.to_le_bytes())?;
-
         // compressed_data: u8[-]
+        let decompressed_size: u32 = 1 * self.compressed_data.len() as u32;
+        w.write_all(&decompressed_size.to_le_bytes())?;
         let mut encoder = flate2::write::ZlibEncoder::new(w, flate2::Compression::default());
         for i in self.compressed_data.iter() {
             encoder.write_all(&i.to_le_bytes())?;
@@ -368,8 +362,7 @@ impl crate::tbc::ClientMessage for CMSG_UPDATE_ACCOUNT_DATA {
 impl CMSG_UPDATE_ACCOUNT_DATA {
     pub(crate) fn size(&self) -> usize {
         4 // data_type: AccountDataType
-        + 4 // decompressed_size: u32
-        + crate::util::zlib_compressed_size(&self.compressed_data) // compressed_data: u8[-]
+        + crate::util::zlib_compressed_size(&self.compressed_data) + 4 // compressed_data: u8[-]
     }
 }
 
@@ -385,7 +378,6 @@ mod test_vanilla {
     const HEADER_SIZE: usize = 2 + 4;
     fn assert(t: &CMSG_UPDATE_ACCOUNT_DATA, expected: &CMSG_UPDATE_ACCOUNT_DATA) {
         assert_eq!(t.data_type, expected.data_type);
-        assert_eq!(t.decompressed_size, expected.decompressed_size);
         assert_eq!(t.compressed_data, expected.compressed_data);
     }
 
@@ -395,13 +387,12 @@ mod test_vanilla {
     pub(crate) fn expected0() -> CMSG_UPDATE_ACCOUNT_DATA {
         CMSG_UPDATE_ACCOUNT_DATA {
             data_type: AccountDataType::PerCharacterLayoutCache,
-            decompressed_size: 0x0,
             compressed_data: vec![ ],
         }
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 47.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 43.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_update_account_data0() {
@@ -425,7 +416,7 @@ mod test_vanilla {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 47.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 43.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_update_account_data0() {
@@ -449,7 +440,7 @@ mod test_vanilla {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 47.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 43.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_update_account_data0() {
@@ -577,7 +568,6 @@ mod test_vanilla {
     pub(crate) fn expected1() -> CMSG_UPDATE_ACCOUNT_DATA {
         CMSG_UPDATE_ACCOUNT_DATA {
             data_type: AccountDataType::PerCharacterChatCache,
-            decompressed_size: 0x1418,
             compressed_data: vec![ 0x56, 0x45, 0x52, 0x53, 0x49, 0x4F, 0x4E, 0x20,
                  0x32, 0x0A, 0x0A, 0x41, 0x44, 0x44, 0x45, 0x44, 0x56, 0x45, 0x52,
                  0x53, 0x49, 0x4F, 0x4E, 0x20, 0x32, 0x0A, 0x0A, 0x4F, 0x50, 0x54,
@@ -1050,7 +1040,7 @@ mod test_vanilla {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 60.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 55.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_update_account_data1() {
@@ -1074,7 +1064,7 @@ mod test_vanilla {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 60.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 55.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_update_account_data1() {
@@ -1098,7 +1088,7 @@ mod test_vanilla {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 60.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 55.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_update_account_data1() {
@@ -1136,7 +1126,6 @@ mod test_tbc {
     const HEADER_SIZE: usize = 2 + 4;
     fn assert(t: &CMSG_UPDATE_ACCOUNT_DATA, expected: &CMSG_UPDATE_ACCOUNT_DATA) {
         assert_eq!(t.data_type, expected.data_type);
-        assert_eq!(t.decompressed_size, expected.decompressed_size);
         assert_eq!(t.compressed_data, expected.compressed_data);
     }
 
@@ -1146,13 +1135,12 @@ mod test_tbc {
     pub(crate) fn expected0() -> CMSG_UPDATE_ACCOUNT_DATA {
         CMSG_UPDATE_ACCOUNT_DATA {
             data_type: AccountDataType::PerCharacterLayoutCache,
-            decompressed_size: 0x0,
             compressed_data: vec![ ],
         }
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 47.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 43.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_update_account_data0() {
@@ -1176,7 +1164,7 @@ mod test_tbc {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 47.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 43.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_update_account_data0() {
@@ -1200,7 +1188,7 @@ mod test_tbc {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 47.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 43.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_update_account_data0() {
@@ -1328,7 +1316,6 @@ mod test_tbc {
     pub(crate) fn expected1() -> CMSG_UPDATE_ACCOUNT_DATA {
         CMSG_UPDATE_ACCOUNT_DATA {
             data_type: AccountDataType::PerCharacterChatCache,
-            decompressed_size: 0x1418,
             compressed_data: vec![ 0x56, 0x45, 0x52, 0x53, 0x49, 0x4F, 0x4E, 0x20,
                  0x32, 0x0A, 0x0A, 0x41, 0x44, 0x44, 0x45, 0x44, 0x56, 0x45, 0x52,
                  0x53, 0x49, 0x4F, 0x4E, 0x20, 0x32, 0x0A, 0x0A, 0x4F, 0x50, 0x54,
@@ -1801,7 +1788,7 @@ mod test_tbc {
 
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 60.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 55.
     #[cfg(feature = "sync")]
     #[cfg_attr(feature = "sync", test)]
     fn cmsg_update_account_data1() {
@@ -1825,7 +1812,7 @@ mod test_tbc {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 60.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 55.
     #[cfg(feature = "tokio")]
     #[cfg_attr(feature = "tokio", tokio::test)]
     async fn tokio_cmsg_update_account_data1() {
@@ -1849,7 +1836,7 @@ mod test_tbc {
         assert_eq!(t, s);
     }
 
-    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 60.
+    // Generated from `wow_message_parser/wowm/world/login_logout/cmsg_update_account_data.wowm` line 55.
     #[cfg(feature = "async-std")]
     #[cfg_attr(feature = "async-std", async_std::test)]
     async fn astd_cmsg_update_account_data1() {
