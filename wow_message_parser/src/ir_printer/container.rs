@@ -370,10 +370,10 @@ impl From<&Array> for IrArray {
 }
 
 #[derive(Debug, Serialize)]
-#[serde(tag = "array_type_tag", content = "inner_type")]
+#[serde(tag = "array_type_tag", content = "content")]
 pub(crate) enum IrArrayType {
     Integer(IrIntegerType),
-    Struct(String),
+    Struct { type_name: String, sizes: IrSizes },
     CString,
     Guid,
     PackedGuid,
@@ -383,7 +383,10 @@ impl From<&ArrayType> for IrArrayType {
     fn from(v: &ArrayType) -> Self {
         match v {
             ArrayType::Integer(i) => Self::Integer(IrIntegerType::from_integer_type(i)),
-            ArrayType::Struct(f) => Self::Struct(f.name().into()),
+            ArrayType::Struct(f) => Self::Struct {
+                type_name: f.name().into(),
+                sizes: IrSizes::from_sizes(f.sizes()),
+            },
             ArrayType::CString => Self::CString,
             ArrayType::Guid => Self::Guid,
             ArrayType::PackedGuid => Self::PackedGuid,

@@ -700,15 +700,22 @@
       "mapping": {
         "Integer": {
           "properties": {
-            "inner_type": {
+            "content": {
               "ref": "integer_type"
             }
           }
         },
         "Struct": {
           "properties": {
-            "inner_type": {
-              "type": "string"
+            "content": {
+              "properties": {
+                "type_name": {
+                  "type": "string"
+                },
+                "sizes": {
+                  "ref": "sizes"
+                }
+              }
             }
           }
         },
