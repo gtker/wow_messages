@@ -119,9 +119,6 @@
         "tags": {
           "ref": "object_tags"
         },
-        "features": {
-          "ref": "features"
-        },
         "file_info": {
           "ref": "file_info"
         }
@@ -176,9 +173,6 @@
         },
         "tags": {
           "ref": "object_tags"
-        },
-        "features": {
-          "ref": "features"
         },
         "members": {
           "elements": {
@@ -624,11 +618,6 @@
             }
           }
         }
-      }
-    },
-    "features": {
-      "elements": {
-        "type": "string"
       }
     },
     "struct_member": {

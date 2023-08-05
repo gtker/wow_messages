@@ -49,10 +49,6 @@ impl IfStatement {
         }
     }
 
-    pub(crate) fn is_not_enum(&self) -> bool {
-        matches!(self.conditional().equation(), Equation::NotEquals { .. })
-    }
-
     pub(crate) fn flag_get_enumerator(&self) -> String {
         match self.conditional().equation() {
             Equation::BitwiseAnd { values: value } => value[0].clone(),

@@ -1,4 +1,3 @@
-use crate::impl_features::{get_impl_features_for_container, Feature};
 use crate::ir_printer::{IrFileInfo, IrIntegerType, IrTags};
 use crate::parser::types::array::{Array, ArraySize, ArrayType};
 use crate::parser::types::container::{Container, ContainerType};
@@ -45,7 +44,6 @@ fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
         only_has_io_error: e.only_has_io_errors(),
         has_manual_size_field,
         manual_size_subtraction: e.manual_size_field_subtraction(),
-        features: get_impl_features_for_container(e).to_array(),
     }
 }
 
@@ -102,7 +100,6 @@ pub(crate) struct IrContainer {
     only_has_io_error: bool,
     has_manual_size_field: bool,
     manual_size_subtraction: Option<u16>,
-    features: Vec<Feature>,
 }
 
 impl IrContainer {

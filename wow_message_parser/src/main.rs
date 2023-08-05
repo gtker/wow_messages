@@ -51,7 +51,6 @@ mod base_printer;
 mod doc_printer;
 pub(crate) mod file_info;
 mod file_utils;
-pub mod impl_features;
 mod ir_printer;
 pub mod parser;
 mod rust_printer;

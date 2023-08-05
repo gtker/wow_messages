@@ -1,10 +1,12 @@
 # Summary
 
 [Introduction](./introduction.md)
+
 - [Versioning](./versioning-with-tags.md)
 - [Contribution Quick Start Guide](./contribution-quick-start.md)
 
 # Wowm Language
+
 - [Specification](./spec/lang-spec.md)
     - [AchievementDoneArray](./spec/achievement-done-array.md)
     - [AchievementInProgressArray](./spec/achievement-in-progress-array.md)
@@ -14,13 +16,12 @@
     - [AuraMask](./spec/aura-mask.md)
     - [Commands](./spec/commands.md)
     - [Tags](./spec/tags.md)
-    - [Implementation Features](./spec/features.md)
 
 # Intermediate Representation
+
 - [Introduction](./ir/introduction.md)
 - [Implementing login messages](./ir/implementing_login.md)
 - [Implementing world messages](./ir/implementing_world.md)
-
 
 ------------
 
