@@ -20,3 +20,7 @@ struct CalendarInvitee {
 | - | 1 / - | u8 | status |  |  |
 | - | 1 / - | u8 | rank |  |  |
 
+
+Used in:
+* [CMSG_CALENDAR_ADD_EVENT](cmsg_calendar_add_event.md)
+

@@ -20,3 +20,7 @@ struct LfgQuestReward {
 | 0x04 | 4 / Little | u32 | display_id |  |  |
 | 0x08 | 4 / Little | u32 | amount_of_rewards |  |  |
 
+
+Used in:
+* [LfgAvailableDungeon](lfgavailabledungeon.md)
+

@@ -18,3 +18,7 @@ struct SpellCooldownStatus {
 | 0x00 | 4 / Little | u32 | id |  |  |
 | 0x04 | 4 / Little | Milliseconds | cooldown_time |  |  |
 
+
+Used in:
+* [SMSG_SPELL_COOLDOWN](smsg_spell_cooldown.md)
+

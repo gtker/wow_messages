@@ -42,3 +42,7 @@ is equal to `DEMOTE_PLAYER`:
 | 0x11 | 1 / - | u8 | new_rank |  |  |
 | 0x12 | 4 / Little | u32 | unix_time |  |  |
 
+
+Used in:
+* [MSG_GUILD_EVENT_LOG_QUERY_Server](msg_guild_event_log_query_server.md)
+

@@ -18,3 +18,7 @@ struct ChannelMember {
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 | 0x08 | 1 / - | [ChannelMemberFlags](channelmemberflags.md) | member_flags |  |  |
 
+
+Used in:
+* [SMSG_CHANNEL_LIST](smsg_channel_list.md)
+

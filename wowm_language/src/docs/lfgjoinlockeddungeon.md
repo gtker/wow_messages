@@ -18,3 +18,9 @@ struct LfgJoinLockedDungeon {
 | 0x00 | 4 / Little | u32 | dungeon_entry |  |  |
 | 0x04 | 4 / Little | u32 | reason |  |  |
 
+
+Used in:
+* [LfgJoinPlayer](lfgjoinplayer.md)
+* [LfgPartyInfo](lfgpartyinfo.md)
+* [SMSG_LFG_PLAYER_INFO](smsg_lfg_player_info.md)
+

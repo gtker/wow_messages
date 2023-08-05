@@ -18,3 +18,7 @@ struct AuctionSort {
 | 0x00 | 1 / - | u8 | column |  |  |
 | 0x01 | 1 / - | u8 | reversed |  |  |
 
+
+Used in:
+* [CMSG_AUCTION_LIST_ITEMS](cmsg_auction_list_items.md)
+

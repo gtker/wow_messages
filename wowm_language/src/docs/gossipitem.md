@@ -22,6 +22,10 @@ struct GossipItem {
 | 0x05 | 1 / - | Bool | coded |  | vmangos: makes pop up box password |
 | 0x06 | - / - | CString | message |  |  |
 
+
+Used in:
+* [SMSG_GOSSIP_MESSAGE](smsg_gossip_message.md)
+
 ## Client Version 2.0.3, Client Version 2.1, Client Version 2.2, Client Version 2.3, Client Version 2.4, Client Version 3
 
 ### Wowm Representation
@@ -47,4 +51,8 @@ struct GossipItem {
 | 0x06 | 4 / Little | Gold | money_required |  | mangosone: 2.0.3 |
 | 0x0A | - / - | CString | message |  |  |
 | - | - / - | CString | accept_text |  | mangosone: related to money pop up box, 2.0.3, max 0x800 |
+
+
+Used in:
+* [SMSG_GOSSIP_MESSAGE](smsg_gossip_message.md)
 

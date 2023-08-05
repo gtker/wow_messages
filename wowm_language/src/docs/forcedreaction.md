@@ -18,6 +18,10 @@ struct ForcedReaction {
 | 0x00 | 2 / - | [Faction](faction.md) | faction |  |  |
 | 0x02 | 4 / Little | u32 | reputation_rank |  |  |
 
+
+Used in:
+* [SMSG_SET_FORCED_REACTIONS](smsg_set_forced_reactions.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -36,6 +40,10 @@ struct ForcedReaction {
 | 0x00 | 2 / - | [Faction](faction.md) | faction |  |  |
 | 0x02 | 4 / Little | u32 | reputation_rank |  |  |
 
+
+Used in:
+* [SMSG_SET_FORCED_REACTIONS](smsg_set_forced_reactions.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -53,4 +61,8 @@ struct ForcedReaction {
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 2 / - | [Faction](faction.md) | faction |  |  |
 | 0x02 | 4 / Little | u32 | reputation_rank |  |  |
+
+
+Used in:
+* [SMSG_SET_FORCED_REACTIONS](smsg_set_forced_reactions.md)
 

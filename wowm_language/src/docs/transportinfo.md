@@ -22,6 +22,11 @@ struct TransportInfo {
 | - | 4 / Little | f32 | orientation |  |  |
 | - | 4 / Little | u32 | timestamp |  |  |
 
+
+Used in:
+* [MovementBlock](movementblock.md)
+* [MovementInfo](movementinfo.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -45,4 +50,9 @@ struct TransportInfo {
 | - | 4 / Little | f32 | orientation |  |  |
 | - | 4 / Little | u32 | timestamp |  |  |
 | - | 1 / - | u8 | seat |  |  |
+
+
+Used in:
+* [MovementBlock](movementblock.md)
+* [MovementInfo](movementinfo.md)
 

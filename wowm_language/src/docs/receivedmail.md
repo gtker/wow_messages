@@ -24,3 +24,7 @@ struct ReceivedMail {
 | 0x10 | 4 / Little | u32 | stationery |  |  |
 | 0x14 | 4 / Little | f32 | time |  | mangosone sets to `0xC6000000`<br/>mangosone: float unk, time or something |
 
+
+Used in:
+* [MSG_QUERY_NEXT_MAIL_TIME_Server](msg_query_next_mail_time_server.md)
+

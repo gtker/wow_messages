@@ -18,6 +18,10 @@ struct InitialSpell {
 | 0x00 | 2 / Little | u16 | spell_id |  | cmangos/mangoszero: only send 'first' part of spell |
 | 0x02 | 2 / Little | u16 | unknown1 |  | cmangos/mangoszero: sets to 0<br/>cmangos/mangoszero: it's not slot id |
 
+
+Used in:
+* [SMSG_INITIAL_SPELLS](smsg_initial_spells.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -35,4 +39,8 @@ struct InitialSpell {
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | spell_id |  | cmangos/mangoszero: only send 'first' part of spell |
 | 0x04 | 2 / Little | u16 | unknown1 |  | cmangos/mangoszero: sets to 0<br/>cmangos/mangoszero: it's not slot id |
+
+
+Used in:
+* [SMSG_INITIAL_SPELLS](smsg_initial_spells.md)
 

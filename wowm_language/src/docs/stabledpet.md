@@ -26,3 +26,7 @@ struct StabledPet {
 | - | 4 / Little | u32 | loyalty |  |  |
 | - | 1 / - | u8 | slot |  | vmangos/mangoszero/cmangos: client slot 1 == current pet (0) |
 
+
+Used in:
+* [MSG_LIST_STABLED_PETS_Server](msg_list_stabled_pets_server.md)
+

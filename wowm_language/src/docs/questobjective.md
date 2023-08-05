@@ -22,3 +22,7 @@ struct QuestObjective {
 | 0x08 | 4 / Little | u32 | required_item_id |  |  |
 | 0x0C | 4 / Little | u32 | required_item_count |  |  |
 
+
+Used in:
+* [SMSG_QUEST_QUERY_RESPONSE](smsg_quest_query_response.md)
+

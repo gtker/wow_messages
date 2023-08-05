@@ -26,3 +26,7 @@ struct SendCalendarInvite {
 | 0x12 | 1 / - | Bool | is_guild_event |  |  |
 | 0x13 | - / - | [PackedGuid](../spec/packed-guid.md) | creator |  |  |
 
+
+Used in:
+* [SMSG_CALENDAR_SEND_CALENDAR](smsg_calendar_send_calendar.md)
+

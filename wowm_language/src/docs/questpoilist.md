@@ -18,3 +18,7 @@ struct QuestPoiList {
 | 0x00 | 4 / Little | u32 | quest_id |  |  |
 | 0x04 | 4 / Little | u32 | amount_of_pois |  |  |
 
+
+Used in:
+* [SMSG_QUEST_POI_QUERY_RESPONSE](smsg_quest_poi_query_response.md)
+

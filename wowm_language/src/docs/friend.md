@@ -31,3 +31,7 @@ If status is not equal to `OFFLINE`:
 | 0x0D | 4 / Little | Level32 | level |  |  |
 | 0x11 | 4 / - | [Class](class.md) | class |  |  |
 
+
+Used in:
+* [SMSG_FRIEND_LIST](smsg_friend_list.md)
+

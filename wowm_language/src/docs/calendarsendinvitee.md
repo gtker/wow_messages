@@ -30,3 +30,7 @@ struct CalendarSendInvitee {
 | - | 4 / Little | DateTime | status_time |  |  |
 | - | - / - | CString | text |  |  |
 
+
+Used in:
+* [SMSG_CALENDAR_SEND_EVENT](smsg_calendar_send_event.md)
+

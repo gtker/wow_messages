@@ -18,3 +18,7 @@ struct SpellLogMiss {
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
 | 0x08 | 4 / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |  |
 
+
+Used in:
+* [SMSG_SPELLLOGMISS](smsg_spelllogmiss.md)
+

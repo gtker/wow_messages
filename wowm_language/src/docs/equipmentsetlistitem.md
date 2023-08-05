@@ -22,3 +22,7 @@ struct EquipmentSetListItem {
 | - | - / - | CString | icon_name |  |  |
 | - | 152 / - | [Guid](../spec/packed-guid.md)[19] | equipment |  |  |
 
+
+Used in:
+* [SMSG_EQUIPMENT_SET_LIST](smsg_equipment_set_list.md)
+

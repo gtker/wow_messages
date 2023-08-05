@@ -30,3 +30,7 @@ struct BattlegroundPlayer {
 | 0x1C | 4 / Little | u32 | amount_of_extra_fields |  |  |
 | 0x20 | ? / - | u32[amount_of_extra_fields] | fields |  | This depends on the BG in question. AV expects 7: Graveyards Assaulted, Graveyards Defended, Towers Assaulted, Towers Defended, Secondary Objectives, LieutenantCount, SecondaryNpc<br/>WSG expects 2: Flag captures and flag returns<br/>AB expects 2: Bases assaulted and bases defended |
 
+
+Used in:
+* [MSG_PVP_LOG_DATA_Server](msg_pvp_log_data_server.md)
+

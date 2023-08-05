@@ -40,3 +40,7 @@ If flags contains `ROLES`:
 | - | 8 / Little | [Guid](../spec/packed-guid.md) | instance |  |  |
 | - | 4 / Little | u32 | encounter_mask |  |  |
 
+
+Used in:
+* [SMSG_UPDATE_LFG_LIST](smsg_update_lfg_list.md)
+

@@ -30,3 +30,7 @@ struct LfgPlayer {
 | - | 4 / Little | u32 | amount_of_members |  |  |
 | - | ? / - | [LfgPlayerMember](lfgplayermember.md)[amount_of_members] | members |  |  |
 
+
+Used in:
+* [MSG_LOOKING_FOR_GROUP_Server](msg_looking_for_group_server.md)
+

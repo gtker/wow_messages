@@ -32,6 +32,19 @@ pub(crate) fn print_docs_for_container(e: &Container, o: &Objects, print_header:
 
     print_container_examples(&mut s, e, o);
 
+    if let Some(objects) = e.objects_used_in() {
+        s.newline();
+        s.wln("Used in:");
+        for c in objects {
+            s.wln(format!(
+                "* [{ty}]({ty_path}.md)",
+                ty = c,
+                ty_path = c.to_lowercase(),
+            ));
+        }
+        s.newline();
+    }
+
     s
 }
 

@@ -81,6 +81,10 @@ Else If message_type is equal to `AUCTION`:
 | - | 4 / Little | f32 | expiration_time |  |  |
 | - | 4 / Little | u32 | mail_template_id |  | cmangos/vmangos/mangoszero: mail template (MailTemplate.dbc) |
 
+
+Used in:
+* [SMSG_MAIL_LIST_RESULT](smsg_mail_list_result.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -161,6 +165,10 @@ Else If message_type is equal to `ITEM`:
 | - | 1 / - | u8 | amount_of_items |  |  |
 | - | ? / - | [MailListItem](maillistitem.md)[amount_of_items] | items |  |  |
 
+
+Used in:
+* [SMSG_MAIL_LIST_RESULT](smsg_mail_list_result.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -240,4 +248,8 @@ Else If message_type is equal to `ITEM`:
 | - | - / - | CString | message |  |  |
 | - | 1 / - | u8 | amount_of_items |  |  |
 | - | ? / - | [MailListItem](maillistitem.md)[amount_of_items] | items |  |  |
+
+
+Used in:
+* [SMSG_MAIL_LIST_RESULT](smsg_mail_list_result.md)
 

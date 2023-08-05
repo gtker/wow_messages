@@ -41,6 +41,10 @@ If status is equal to `OFFLINE`:
 | - | - / - | CString | public_note |  |  |
 | - | - / - | CString | officer_note |  |  |
 
+
+Used in:
+* [SMSG_GUILD_ROSTER](smsg_guild_roster.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -83,6 +87,10 @@ If status is equal to `OFFLINE`:
 | - | 4 / Little | f32 | time_offline |  |  |
 | - | - / - | CString | public_note |  |  |
 | - | - / - | CString | officer_note |  |  |
+
+
+Used in:
+* [SMSG_GUILD_ROSTER](smsg_guild_roster.md)
 
 ## Client Version 3.3.5
 
@@ -128,4 +136,8 @@ If status is equal to `OFFLINE`:
 | - | 4 / Little | f32 | time_offline |  |  |
 | - | - / - | CString | public_note |  |  |
 | - | - / - | CString | officer_note |  |  |
+
+
+Used in:
+* [SMSG_GUILD_ROSTER](smsg_guild_roster.md)
 

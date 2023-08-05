@@ -186,6 +186,10 @@ If update_flag contains `TRANSPORT`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | transport_progress_in_ms |  |  |
 
+
+Used in:
+* [Object](object.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -384,6 +388,10 @@ If update_flag contains `TRANSPORT`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | transport_progress_in_ms |  |  |
+
+
+Used in:
+* [Object](object.md)
 
 ## Client Version 3.3.5
 
@@ -636,4 +644,8 @@ If update_flag contains `ROTATION`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 8 / Little | u64 | packed_local_rotation |  | AzerothCore deliberately casts to i64 |
+
+
+Used in:
+* [Object](object.md)
 

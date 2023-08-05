@@ -30,3 +30,7 @@ struct LfgAvailableDungeon {
 | 0x15 | 1 / - | u8 | amount_of_rewards |  |  |
 | 0x16 | ? / - | [LfgQuestReward](lfgquestreward.md)[amount_of_rewards] | rewards |  |  |
 
+
+Used in:
+* [SMSG_LFG_PLAYER_INFO](smsg_lfg_player_info.md)
+

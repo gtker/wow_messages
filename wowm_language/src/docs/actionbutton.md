@@ -20,3 +20,7 @@ struct ActionButton {
 | 0x02 | 1 / - | u8 | action_type |  |  |
 | 0x03 | 1 / - | u8 | misc |  |  |
 
+
+Used in:
+* [SMSG_ACTION_BUTTONS](smsg_action_buttons.md)
+

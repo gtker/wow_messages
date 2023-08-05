@@ -68,6 +68,11 @@ is equal to `NEAR_OBJECTS`:
 | - | 4 / Little | u32 | count |  |  |
 | - | ? / - | [PackedGuid](../spec/packed-guid.md)[count] | guids |  |  |
 
+
+Used in:
+* [SMSG_COMPRESSED_UPDATE_OBJECT](smsg_compressed_update_object.md)
+* [SMSG_UPDATE_OBJECT](smsg_update_object.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -136,6 +141,11 @@ is equal to `NEAR_OBJECTS`:
 | - | 4 / Little | u32 | count |  |  |
 | - | ? / - | [PackedGuid](../spec/packed-guid.md)[count] | guids |  |  |
 
+
+Used in:
+* [SMSG_COMPRESSED_UPDATE_OBJECT](smsg_compressed_update_object.md)
+* [SMSG_UPDATE_OBJECT](smsg_update_object.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -203,4 +213,9 @@ is equal to `NEAR_OBJECTS`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 4 / Little | u32 | count |  |  |
 | - | ? / - | [PackedGuid](../spec/packed-guid.md)[count] | guids |  |  |
+
+
+Used in:
+* [SMSG_COMPRESSED_UPDATE_OBJECT](smsg_compressed_update_object.md)
+* [SMSG_UPDATE_OBJECT](smsg_update_object.md)
 

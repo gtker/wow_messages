@@ -18,3 +18,7 @@ struct Vector2dUnsigned {
 | 0x00 | 4 / Little | u32 | x |  |  |
 | 0x04 | 4 / Little | u32 | y |  |  |
 
+
+Used in:
+* [QuestPoi](questpoi.md)
+

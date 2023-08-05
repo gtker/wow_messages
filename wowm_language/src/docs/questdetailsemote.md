@@ -18,3 +18,7 @@ struct QuestDetailsEmote {
 | 0x00 | 4 / Little | u32 | emote |  |  |
 | 0x04 | 4 / Little | Milliseconds | emote_delay |  |  |
 
+
+Used in:
+* [SMSG_QUESTGIVER_QUEST_DETAILS](smsg_questgiver_quest_details.md)
+

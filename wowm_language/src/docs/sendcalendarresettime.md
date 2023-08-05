@@ -20,3 +20,7 @@ struct SendCalendarResetTime {
 | 0x04 | 4 / Little | u32 | period |  |  |
 | 0x08 | 4 / Little | u32 | time_offset |  |  |
 
+
+Used in:
+* [SMSG_CALENDAR_SEND_CALENDAR](smsg_calendar_send_calendar.md)
+

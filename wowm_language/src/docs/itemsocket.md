@@ -18,3 +18,7 @@ struct ItemSocket {
 | 0x00 | 4 / Little | u32 | color |  |  |
 | 0x04 | 4 / Little | u32 | content |  |  |
 
+
+Used in:
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
+

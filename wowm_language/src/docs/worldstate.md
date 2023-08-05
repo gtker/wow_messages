@@ -18,3 +18,8 @@ struct WorldState {
 | 0x00 | 4 / Little | u32 | state |  |  |
 | 0x04 | 4 / Little | u32 | value |  |  |
 
+
+Used in:
+* [SMSG_INIT_WORLD_STATES](smsg_init_world_states.md)
+* [SMSG_UPDATE_WORLD_STATE](smsg_update_world_state.md)
+

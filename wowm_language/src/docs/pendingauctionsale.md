@@ -24,3 +24,7 @@ struct PendingAuctionSale {
 | - | 4 / Little | u32 | unknown2 |  | mangostwo sets to 68. |
 | - | 4 / Little | f32 | time_left |  |  |
 
+
+Used in:
+* [SMSG_AUCTION_LIST_PENDING_SALES](smsg_auction_list_pending_sales.md)
+

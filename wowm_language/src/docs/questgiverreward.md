@@ -20,3 +20,8 @@ struct QuestGiverReward {
 | 0x04 | 4 / Little | u32 | item_count |  |  |
 | 0x08 | 4 / Little | u32 | display_id |  |  |
 
+
+Used in:
+* [SMSG_LFG_PLAYER_REWARD](smsg_lfg_player_reward.md)
+* [SMSG_QUESTGIVER_QUEST_DETAILS](smsg_questgiver_quest_details.md)
+

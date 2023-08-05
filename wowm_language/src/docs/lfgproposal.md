@@ -26,3 +26,7 @@ struct LfgProposal {
 | 0x07 | 1 / - | u8 | has_answered |  |  |
 | 0x08 | 1 / - | u8 | has_accepted |  |  |
 
+
+Used in:
+* [SMSG_LFG_PROPOSAL_UPDATE](smsg_lfg_proposal_update.md)
+

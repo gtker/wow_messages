@@ -28,3 +28,7 @@ struct SendCalendarEvent {
 | - | 4 / Little | u32 | dungeon_id |  |  |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | creator |  |  |
 
+
+Used in:
+* [SMSG_CALENDAR_SEND_CALENDAR](smsg_calendar_send_calendar.md)
+

@@ -18,6 +18,10 @@ struct ItemStat {
 | 0x00 | 4 / - | [ItemStatType](itemstattype.md) | stat_type |  |  |
 | 0x04 | 4 / Little | i32 | value |  |  |
 
+
+Used in:
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
+
 ## Client Version 2, Client Version 3
 
 ### Wowm Representation
@@ -35,4 +39,8 @@ struct ItemStat {
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 4 / Little | u32 | stat_type |  |  |
 | 0x04 | 4 / Little | i32 | value |  |  |
+
+
+Used in:
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 

@@ -44,3 +44,8 @@ If flags contains `DURATION`:
 | - | 4 / Little | u32 | duration |  |  |
 | - | 4 / Little | u32 | time_left |  |  |
 
+
+Used in:
+* [SMSG_AURA_UPDATE](smsg_aura_update.md)
+* [SMSG_AURA_UPDATE_ALL](smsg_aura_update_all.md)
+

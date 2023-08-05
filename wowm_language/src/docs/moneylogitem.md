@@ -22,3 +22,7 @@ struct MoneyLogItem {
 | 0x09 | 4 / Little | u32 | entry |  |  |
 | 0x0D | 4 / Little | u32 | timestamp |  |  |
 
+
+Used in:
+* [MSG_GUILD_BANK_LOG_QUERY_Server](msg_guild_bank_log_query_server.md)
+

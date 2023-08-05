@@ -18,3 +18,7 @@ struct RaidTargetUpdate {
 | 0x00 | 1 / - | [RaidTargetIndex](raidtargetindex.md) | index |  |  |
 | 0x01 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
 
+
+Used in:
+* [MSG_RAID_TARGET_UPDATE_Server](msg_raid_target_update_server.md)
+

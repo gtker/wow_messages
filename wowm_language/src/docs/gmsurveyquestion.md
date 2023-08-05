@@ -20,3 +20,7 @@ struct GmSurveyQuestion {
 | 0x04 | 1 / - | u8 | answer |  | Rating: hardcoded limit of 0-5 in pre-Wrath, ranges defined in GMSurveyAnswers.dbc Wrath+ |
 | 0x05 | - / - | CString | comment |  | Usage: `GMSurveyAnswerSubmit(question, rank, comment)`<br/>cmangos: Unused in stock UI, can be only set by calling Lua function |
 
+
+Used in:
+* [CMSG_GMSURVEY_SUBMIT](cmsg_gmsurvey_submit.md)
+

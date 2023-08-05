@@ -26,6 +26,10 @@ struct ItemSpells {
 | 0x10 | 4 / Little | u32 | spell_category |  |  |
 | 0x14 | 4 / Little | i32 | spell_category_cooldown |  |  |
 
+
+Used in:
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
+
 ## Client Version 2, Client Version 3
 
 ### Wowm Representation
@@ -51,4 +55,8 @@ struct ItemSpells {
 | 0x0C | 4 / Little | i32 | spell_cooldown |  |  |
 | 0x10 | 4 / Little | u32 | spell_category |  |  |
 | 0x14 | 4 / Little | i32 | spell_category_cooldown |  |  |
+
+
+Used in:
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 

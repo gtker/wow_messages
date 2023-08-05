@@ -24,3 +24,7 @@ struct CooldownSpell {
 | 0x06 | 4 / Little | Milliseconds | cooldown |  |  |
 | 0x0A | 4 / Little | Milliseconds | category_cooldown |  |  |
 
+
+Used in:
+* [SMSG_INITIAL_SPELLS](smsg_initial_spells.md)
+

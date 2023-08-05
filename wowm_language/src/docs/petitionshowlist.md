@@ -24,6 +24,10 @@ struct PetitionShowlist {
 | 0x0C | 4 / Little | u32 | guild_charter_cost |  | cmangos/vmangos/mangoszero: statically set to 1000 (10 silver) for guild charters and the cost of arena charters for that. |
 | 0x10 | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: statically set to 1 |
 
+
+Used in:
+* [SMSG_PETITION_SHOWLIST](smsg_petition_showlist.md)
+
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation
@@ -49,4 +53,8 @@ struct PetitionShowlist {
 | 0x0C | 4 / Little | u32 | guild_charter_cost |  | cmangos/vmangos/mangoszero: statically set to 1000 (10 silver). |
 | 0x10 | 4 / Little | u32 | unknown1 |  | cmangos/vmangos/mangoszero: statically set to 1<br/>arcemu: charter type? seems to be 0x0 for guilds and 0x1 for arena charters |
 | 0x14 | 4 / Little | u32 | signatures_required |  |  |
+
+
+Used in:
+* [SMSG_PETITION_SHOWLIST](smsg_petition_showlist.md)
 

@@ -18,3 +18,7 @@ struct InspectTalentSpec {
 | 0x00 | 1 / - | u8 | amount_of_talents |  |  |
 | 0x01 | ? / - | [InspectTalent](inspecttalent.md)[amount_of_talents] | talents |  |  |
 
+
+Used in:
+* [SMSG_INSPECT_TALENT](smsg_inspect_talent.md)
+

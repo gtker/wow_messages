@@ -189,6 +189,10 @@ is equal to `SUMMON_DEMON`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x6C | 8 / Little | [Guid](../spec/packed-guid.md) | target7 |  |  |
 
+
+Used in:
+* [SMSG_SPELLLOGEXECUTE](smsg_spelllogexecute.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -321,6 +325,10 @@ Else If effect is equal to `DISMISS_PET`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | pet_dismiss_guid |  |  |
+
+
+Used in:
+* [SMSG_SPELLLOGEXECUTE](smsg_spelllogexecute.md)
 
 ## Client Version 3.3.5
 
@@ -467,4 +475,8 @@ is equal to `RESURRECT_NEW`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | resurrect_guid |  |  |
+
+
+Used in:
+* [SMSG_SPELLLOGEXECUTE](smsg_spelllogexecute.md)
 

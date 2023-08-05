@@ -49,3 +49,7 @@ Else If opcode is equal to `SMSG_MONSTER_MOVE_TRANSPORT`:
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | transport |  |  |
 | - | - / - | [MonsterMove](monstermove.md) | monster_move_transport |  |  |
 
+
+Used in:
+* [SMSG_COMPRESSED_MOVES](smsg_compressed_moves.md)
+

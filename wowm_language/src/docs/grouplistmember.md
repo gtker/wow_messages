@@ -22,6 +22,10 @@ struct GroupListMember {
 | - | 1 / - | Bool | is_online |  |  |
 | - | 1 / - | u8 | flags |  | mangoszero/cmangos/vmangos: own flags (groupid | (assistant?0x80:0)) |
 
+
+Used in:
+* [SMSG_GROUP_LIST](smsg_group_list.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -45,6 +49,10 @@ struct GroupListMember {
 | - | 1 / - | Bool | is_online |  |  |
 | - | 1 / - | u8 | group_id |  |  |
 | - | 1 / - | u8 | flags |  | mangosone: 0x2 main assist, 0x4 main tank |
+
+
+Used in:
+* [SMSG_GROUP_LIST](smsg_group_list.md)
 
 ## Client Version 3.3.5
 
@@ -71,4 +79,8 @@ struct GroupListMember {
 | - | 1 / - | u8 | group_id |  |  |
 | - | 1 / - | u8 | flags |  | mangosone: 0x2 main assist, 0x4 main tank |
 | - | 1 / - | u8 | lfg_roles |  |  |
+
+
+Used in:
+* [SMSG_GROUP_LIST](smsg_group_list.md)
 

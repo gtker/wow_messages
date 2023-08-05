@@ -18,3 +18,8 @@ struct GuildBankRights {
 | 0x00 | 4 / Little | u32 | rights |  |  |
 | 0x04 | 4 / Little | u32 | slots_per_day |  |  |
 
+
+Used in:
+* [CMSG_GUILD_RANK](cmsg_guild_rank.md)
+* [GuildRights](guildrights.md)
+

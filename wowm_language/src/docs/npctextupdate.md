@@ -22,6 +22,10 @@ struct NpcTextUpdate {
 | - | 4 / - | [Language](language.md) | language |  |  |
 | - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
 
+
+Used in:
+* [SMSG_NPC_TEXT_UPDATE](smsg_npc_text_update.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -44,6 +48,10 @@ struct NpcTextUpdate {
 | - | 1 / - | [Language](language.md) | language |  |  |
 | - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
 
+
+Used in:
+* [SMSG_NPC_TEXT_UPDATE](smsg_npc_text_update.md)
+
 ## Client Version 3
 
 ### Wowm Representation
@@ -65,4 +73,8 @@ struct NpcTextUpdate {
 | 0x04 | ? / - | CString[2] | texts |  |  |
 | - | 1 / - | [Language](language.md) | language |  |  |
 | - | 24 / - | [NpcTextUpdateEmote](npctextupdateemote.md)[3] | emotes |  |  |
+
+
+Used in:
+* [SMSG_NPC_TEXT_UPDATE](smsg_npc_text_update.md)
 

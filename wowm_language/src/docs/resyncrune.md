@@ -18,3 +18,7 @@ struct ResyncRune {
 | 0x00 | 1 / - | u8 | current_rune |  |  |
 | 0x01 | 1 / - | u8 | rune_cooldown |  |  |
 
+
+Used in:
+* [SMSG_RESYNC_RUNES](smsg_resync_runes.md)
+

@@ -18,3 +18,8 @@ struct ThreatUpdateUnit {
 | 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | unit |  |  |
 | - | 4 / Little | u32 | threat |  |  |
 
+
+Used in:
+* [SMSG_HIGHEST_THREAT_UPDATE](smsg_highest_threat_update.md)
+* [SMSG_THREAT_UPDATE](smsg_threat_update.md)
+

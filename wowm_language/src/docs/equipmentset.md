@@ -20,3 +20,7 @@ struct EquipmentSet {
 | 0x08 | 1 / - | u8 | source_bag |  |  |
 | 0x09 | 1 / - | u8 | source_slot |  |  |
 
+
+Used in:
+* [CMSG_EQUIPMENT_SET_USE](cmsg_equipment_set_use.md)
+

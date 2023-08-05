@@ -42,6 +42,10 @@ struct TradeSlot {
 | 0x35 | 4 / Little | u32 | max_durability |  |  |
 | 0x39 | 4 / Little | u32 | durability |  |  |
 
+
+Used in:
+* [SMSG_TRADE_STATUS_EXTENDED](smsg_trade_status_extended.md)
+
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation
@@ -85,4 +89,8 @@ struct TradeSlot {
 | 0x3D | 4 / Little | u32 | lock_id |  |  |
 | 0x41 | 4 / Little | u32 | max_durability |  |  |
 | 0x45 | 4 / Little | u32 | durability |  |  |
+
+
+Used in:
+* [SMSG_TRADE_STATUS_EXTENDED](smsg_trade_status_extended.md)
 

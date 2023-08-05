@@ -18,3 +18,8 @@ struct NpcTextUpdateEmote {
 | 0x00 | 4 / Little | u32 | delay |  |  |
 | 0x04 | 4 / Little | u32 | emote |  |  |
 
+
+Used in:
+* [NpcTextUpdate](npctextupdate.md)
+* [SMSG_QUESTGIVER_OFFER_REWARD](smsg_questgiver_offer_reward.md)
+

@@ -20,6 +20,10 @@ struct RaidInfo {
 | 0x04 | 4 / Little | u32 | reset_time |  |  |
 | 0x08 | 4 / Little | u32 | instance_id |  |  |
 
+
+Used in:
+* [SMSG_RAID_INSTANCE_INFO](smsg_raid_instance_info.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -41,6 +45,10 @@ struct RaidInfo {
 | 0x04 | 4 / Little | u32 | reset_time |  |  |
 | 0x08 | 4 / Little | u32 | instance_id |  |  |
 | 0x0C | 4 / Little | u32 | index |  | Neither 1.12 nor 3.3.5 have an index field so this might not be accurate. |
+
+
+Used in:
+* [SMSG_RAID_INSTANCE_INFO](smsg_raid_instance_info.md)
 
 ## Client Version 3.3.5
 
@@ -67,4 +75,8 @@ struct RaidInfo {
 | 0x10 | 1 / - | Bool | expired |  |  |
 | 0x11 | 1 / - | Bool | extended |  |  |
 | 0x12 | 4 / Little | u32 | time_until_reset |  | Seems to be in seconds |
+
+
+Used in:
+* [SMSG_RAID_INSTANCE_INFO](smsg_raid_instance_info.md)
 

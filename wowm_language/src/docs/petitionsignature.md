@@ -18,3 +18,7 @@ struct PetitionSignature {
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | signer |  |  |
 | 0x08 | 4 / Little | u32 | unknown1 |  |  |
 
+
+Used in:
+* [SMSG_PETITION_SHOW_SIGNATURES](smsg_petition_show_signatures.md)
+

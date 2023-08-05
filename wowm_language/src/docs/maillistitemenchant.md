@@ -20,3 +20,7 @@ struct MailListItemEnchant {
 | 0x04 | 4 / Little | u32 | duration |  |  |
 | 0x08 | 4 / Little | u32 | enchant_id |  |  |
 
+
+Used in:
+* [MailListItem](maillistitem.md)
+

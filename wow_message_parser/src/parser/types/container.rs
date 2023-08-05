@@ -53,6 +53,7 @@ pub(crate) struct Container {
     file_info: FileInfo,
     only_has_io_error: bool,
     rust_object_view: RustObject,
+    objects_used_in: Option<BTreeSet<String>>,
 }
 
 impl PartialEq<Self> for Container {
@@ -88,6 +89,7 @@ impl Container {
         sizes: Sizes,
         only_has_io_error: bool,
         rust_object_view: RustObject,
+        objects_used_in: Option<BTreeSet<String>>,
     ) -> Self {
         Self {
             name,
@@ -98,6 +100,7 @@ impl Container {
             file_info,
             only_has_io_error,
             rust_object_view,
+            objects_used_in,
         }
     }
 
@@ -291,6 +294,10 @@ impl Container {
 
     pub(crate) fn file_info(&self) -> &FileInfo {
         &self.file_info
+    }
+
+    pub(crate) fn objects_used_in(&self) -> Option<&BTreeSet<String>> {
+        self.objects_used_in.as_ref()
     }
 
     pub(crate) fn rust_object(&self) -> &RustObject {

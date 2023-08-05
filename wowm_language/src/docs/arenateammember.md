@@ -34,6 +34,10 @@ struct ArenaTeamMember {
 | - | 4 / Little | u32 | wins_this_season |  |  |
 | - | 4 / Little | u32 | personal_rating |  |  |
 
+
+Used in:
+* [SMSG_ARENA_TEAM_ROSTER](smsg_arena_team_roster.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -67,4 +71,8 @@ struct ArenaTeamMember {
 | - | 4 / Little | u32 | games_played_this_season |  |  |
 | - | 4 / Little | u32 | wins_this_season |  |  |
 | - | 4 / Little | u32 | personal_rating |  |  |
+
+
+Used in:
+* [SMSG_ARENA_TEAM_ROSTER](smsg_arena_team_roster.md)
 

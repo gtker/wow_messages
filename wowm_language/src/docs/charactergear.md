@@ -18,6 +18,10 @@ struct CharacterGear {
 | 0x00 | 4 / Little | u32 | equipment_display_id |  |  |
 | 0x04 | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
 
+
+Used in:
+* [Character](character.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -38,6 +42,10 @@ struct CharacterGear {
 | 0x04 | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
 | 0x05 | 4 / Little | u32 | enchantment |  |  |
 
+
+Used in:
+* [Character](character.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -57,4 +65,8 @@ struct CharacterGear {
 | 0x00 | 4 / Little | u32 | equipment_display_id |  |  |
 | 0x04 | 1 / - | [InventoryType](inventorytype.md) | inventory_type |  |  |
 | 0x05 | 4 / Little | u32 | enchantment |  |  |
+
+
+Used in:
+* [Character](character.md)
 

@@ -3,6 +3,7 @@ use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
 use crate::parser::types::parsed::parsed_test_case::ParsedTestCase;
 use crate::Objects;
+use std::collections::BTreeSet;
 
 #[derive(Debug, Clone)]
 pub(crate) struct ParsedObjects {
@@ -57,6 +58,25 @@ impl ParsedObjects {
             self.tests,
         )
     }
+}
+
+pub(crate) fn get_objects_used_in(
+    containers: &[ParsedContainer],
+    e: &ParsedContainer,
+) -> BTreeSet<String> {
+    let mut v = BTreeSet::new();
+
+    for c in containers {
+        if !e.tags().has_version_intersections(c.tags()) {
+            continue;
+        }
+
+        if c.contains_container(e.name()) {
+            v.insert(c.name().to_string());
+        }
+    }
+
+    v
 }
 
 pub(crate) fn get_definer_objects_used_in(

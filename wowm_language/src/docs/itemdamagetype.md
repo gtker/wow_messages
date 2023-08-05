@@ -20,3 +20,7 @@ struct ItemDamageType {
 | 0x04 | 4 / Little | f32 | damage_maximum |  |  |
 | 0x08 | 4 / - | [SpellSchool](spellschool.md) | school |  |  |
 
+
+Used in:
+* [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
+

@@ -18,6 +18,10 @@ struct FactionStanding {
 | 0x00 | 2 / - | [Faction](faction.md) | faction |  |  |
 | 0x02 | 4 / Little | u32 | standing |  |  |
 
+
+Used in:
+* [SMSG_SET_FACTION_STANDING](smsg_set_faction_standing.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -36,6 +40,10 @@ struct FactionStanding {
 | 0x00 | 2 / - | [Faction](faction.md) | faction |  |  |
 | 0x02 | 4 / Little | u32 | standing |  |  |
 
+
+Used in:
+* [SMSG_SET_FACTION_STANDING](smsg_set_faction_standing.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -53,4 +61,8 @@ struct FactionStanding {
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 2 / - | [Faction](faction.md) | faction |  |  |
 | 0x02 | 4 / Little | u32 | standing |  |  |
+
+
+Used in:
+* [SMSG_SET_FACTION_STANDING](smsg_set_faction_standing.md)
 

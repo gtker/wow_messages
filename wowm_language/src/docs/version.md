@@ -22,3 +22,9 @@ struct Version {
 | 0x02 | 1 / - | u8 | patch |  |  |
 | 0x03 | 2 / Little | u16 | build |  |  |
 
+
+Used in:
+* [CMD_AUTH_LOGON_CHALLENGE_Client](cmd_auth_logon_challenge_client.md)
+* [CMD_AUTH_RECONNECT_CHALLENGE_Client](cmd_auth_reconnect_challenge_client.md)
+* [Realm](realm.md)
+

@@ -34,6 +34,10 @@ struct MailListItem {
 | 0x5E | 4 / Little | u32 | max_durability |  |  |
 | 0x62 | 4 / Little | u32 | durability |  |  |
 
+
+Used in:
+* [Mail](mail.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -69,4 +73,8 @@ struct MailListItem {
 | 0x6A | 4 / Little | u32 | max_durability |  |  |
 | 0x6E | 4 / Little | u32 | durability |  |  |
 | 0x72 | 1 / - | u8 | unknown |  |  |
+
+
+Used in:
+* [Mail](mail.md)
 

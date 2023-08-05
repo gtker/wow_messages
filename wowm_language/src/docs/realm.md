@@ -30,6 +30,10 @@ struct Realm {
 | - | 1 / - | [RealmCategory](realmcategory.md) | category |  |  |
 | - | 1 / - | u8 | realm_id |  |  |
 
+
+Used in:
+* [CMD_REALM_LIST_Server](cmd_realm_list_server.md)
+
 ## Protocol Version 5, Protocol Version 6, Protocol Version 7
 
 ### Wowm Representation
@@ -61,6 +65,10 @@ struct Realm {
 | - | 1 / - | u8 | number_of_characters_on_realm |  |  |
 | - | 1 / - | [RealmCategory](realmcategory.md) | category |  |  |
 | - | 1 / - | u8 | realm_id |  |  |
+
+
+Used in:
+* [CMD_REALM_LIST_Server](cmd_realm_list_server.md)
 
 ## Protocol Version 8
 
@@ -102,4 +110,8 @@ If flag contains `SPECIFY_BUILD`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | 5 / - | [Version](version.md) | version |  |  |
+
+
+Used in:
+* [CMD_REALM_LIST_Server](cmd_realm_list_server.md)
 

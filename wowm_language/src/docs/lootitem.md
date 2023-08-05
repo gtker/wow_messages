@@ -20,3 +20,7 @@ struct LootItem {
 | 0x01 | 4 / Little | u32 | item |  |  |
 | 0x05 | 1 / - | [LootSlotType](lootslottype.md) | ty |  |  |
 
+
+Used in:
+* [SMSG_LOOT_RESPONSE](smsg_loot_response.md)
+

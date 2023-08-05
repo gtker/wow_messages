@@ -20,3 +20,7 @@ struct BattlegroundPlayerPosition {
 | 0x08 | 4 / Little | f32 | position_x |  |  |
 | 0x0C | 4 / Little | f32 | position_y |  |  |
 
+
+Used in:
+* [MSG_BATTLEGROUND_PLAYER_POSITIONS_Server](msg_battleground_player_positions_server.md)
+

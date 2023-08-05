@@ -20,3 +20,9 @@ struct QuestItemRequirement {
 | 0x04 | 4 / Little | u32 | item_count |  |  |
 | 0x08 | 4 / Little | u32 | item_display_id |  |  |
 
+
+Used in:
+* [SMSG_QUESTGIVER_OFFER_REWARD](smsg_questgiver_offer_reward.md)
+* [SMSG_QUESTGIVER_REQUEST_ITEMS](smsg_questgiver_request_items.md)
+* [SMSG_QUEST_QUERY_RESPONSE](smsg_quest_query_response.md)
+

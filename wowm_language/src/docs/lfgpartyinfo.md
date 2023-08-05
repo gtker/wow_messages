@@ -20,3 +20,7 @@ struct LfgPartyInfo {
 | 0x08 | 4 / Little | u32 | amount_of_dungeons |  |  |
 | 0x0C | ? / - | [LfgJoinLockedDungeon](lfgjoinlockeddungeon.md)[amount_of_dungeons] | dungeons |  |  |
 
+
+Used in:
+* [SMSG_LFG_PARTY_INFO](smsg_lfg_party_info.md)
+

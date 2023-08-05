@@ -18,3 +18,7 @@ struct BankTab {
 | 0x00 | 4 / Little | u32 | flags |  |  |
 | 0x04 | 4 / Little | u32 | stacks_per_day |  |  |
 
+
+Used in:
+* [MSG_GUILD_PERMISSIONS_Server](msg_guild_permissions_server.md)
+

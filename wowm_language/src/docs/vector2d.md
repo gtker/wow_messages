@@ -18,3 +18,8 @@ struct Vector2d {
 | 0x00 | 4 / Little | f32 | x |  |  |
 | 0x04 | 4 / Little | f32 | y |  |  |
 
+
+Used in:
+* [SMSG_GOSSIP_POI](smsg_gossip_poi.md)
+* [SMSG_QUEST_QUERY_RESPONSE](smsg_quest_query_response.md)
+

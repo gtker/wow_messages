@@ -18,6 +18,10 @@ struct FactionInitializer {
 | 0x00 | 1 / - | [FactionFlag](factionflag.md) | flag |  |  |
 | 0x01 | 4 / Little | u32 | standing |  |  |
 
+
+Used in:
+* [SMSG_INITIALIZE_FACTIONS](smsg_initialize_factions.md)
+
 ## Client Version 3
 
 ### Wowm Representation
@@ -35,4 +39,8 @@ struct FactionInitializer {
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x00 | 1 / - | [FactionFlag](factionflag.md) | flag |  |  |
 | 0x01 | 4 / Little | u32 | standing |  |  |
+
+
+Used in:
+* [SMSG_INITIALIZE_FACTIONS](smsg_initialize_factions.md)
 

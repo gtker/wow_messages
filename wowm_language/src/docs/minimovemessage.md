@@ -22,3 +22,8 @@ struct MiniMoveMessage {
 | 0x03 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
 | - | 4 / Little | u32 | movement_counter |  |  |
 
+
+Used in:
+* [SMSG_COMPRESSED_MOVES](smsg_compressed_moves.md)
+* [SMSG_MULTIPLE_MOVES](smsg_multiple_moves.md)
+

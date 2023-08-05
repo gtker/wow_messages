@@ -18,3 +18,9 @@ struct QuestItemReward {
 | 0x00 | 4 / Little | u32 | item |  |  |
 | 0x04 | 4 / Little | u32 | item_count |  |  |
 
+
+Used in:
+* [SMSG_QUESTGIVER_QUEST_COMPLETE](smsg_questgiver_quest_complete.md)
+* [SMSG_QUESTGIVER_QUEST_DETAILS](smsg_questgiver_quest_details.md)
+* [SMSG_QUEST_QUERY_RESPONSE](smsg_quest_query_response.md)
+

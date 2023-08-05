@@ -18,3 +18,8 @@ struct CalendarMember {
 | 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | member |  |  |
 | - | 1 / - | Level | level |  |  |
 
+
+Used in:
+* [SMSG_CALENDAR_ARENA_TEAM](smsg_calendar_arena_team.md)
+* [SMSG_CALENDAR_FILTER_GUILD](smsg_calendar_filter_guild.md)
+

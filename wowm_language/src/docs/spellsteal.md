@@ -18,3 +18,7 @@ struct SpellSteal {
 | 0x00 | 4 / Little | u32 | spell |  |  |
 | 0x04 | 1 / - | [SpellStealAction](spellstealaction.md) | action |  |  |
 
+
+Used in:
+* [SMSG_SPELLSTEALLOG](smsg_spellsteallog.md)
+

@@ -2,13 +2,16 @@ use crate::error_printer::{
     invalid_self_size_position, object_has_no_versions, overlapping_versions,
 };
 use crate::file_info::FileInfo;
+use crate::parser::types::container::ContainerType;
 use crate::parser::types::definer::Definer;
 use crate::parser::types::objects::conversion::container::{
     check_if_statement_operators, verify_and_set_members,
 };
 use crate::parser::types::parsed::parsed_container::ParsedContainer;
 use crate::parser::types::parsed::parsed_definer::ParsedDefiner;
-use crate::parser::types::parsed::parsed_object::get_definer_objects_used_in;
+use crate::parser::types::parsed::parsed_object::{
+    get_definer_objects_used_in, get_objects_used_in,
+};
 use crate::parser::types::parsed::parsed_struct_member::{
     ParsedStructMember, ParsedStructMemberDefinition,
 };
@@ -81,6 +84,11 @@ pub(crate) fn parsed_container_to_container(
 
     let rust_object_view = create_rust_object(&p, &members, containers, definers);
 
+    let objects_used_in = match p.object_type {
+        ContainerType::Struct => Some(get_objects_used_in(containers, &p)),
+        _ => None,
+    };
+
     Container::new(
         p.name,
         members,
@@ -90,6 +98,7 @@ pub(crate) fn parsed_container_to_container(
         sizes,
         only_has_io_error,
         rust_object_view,
+        objects_used_in,
     )
 }
 

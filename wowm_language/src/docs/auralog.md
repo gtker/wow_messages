@@ -70,6 +70,10 @@ Else If aura_type is equal to `PERIODIC_MANA_LEECH`:
 | 0x21 | 4 / Little | u32 | damage |  |  |
 | 0x25 | 4 / Little | f32 | gain_multiplier |  |  |
 
+
+Used in:
+* [SMSG_PERIODICAURALOG](smsg_periodicauralog.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -139,6 +143,10 @@ Else If aura_type is equal to `PERIODIC_MANA_LEECH`:
 | 0x1D | 4 / Little | u32 | misc_value2 |  | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
 | 0x21 | 4 / Little | u32 | damage |  |  |
 | 0x25 | 4 / Little | f32 | gain_multiplier |  |  |
+
+
+Used in:
+* [SMSG_PERIODICAURALOG](smsg_periodicauralog.md)
 
 ## Client Version 3.3.5
 
@@ -219,4 +227,8 @@ Else If aura_type is equal to `PERIODIC_MANA_LEECH`:
 | 0x2B | 4 / Little | u32 | misc_value2 |  | vmangos: A miscvalue that is dependent on what the aura will do, this is usually decided by the AuraType, ie: with AuraType::SPELL_AURA_MOD_BASE_RESISTANCE_PCT this value could be SpellSchoolMask::SPELL_SCHOOL_MASK_NORMAL which would tell the aura that it should change armor.  If Modifier::m_auraname would have been AuraType::SPELL_AURA_MOUNTED then m_miscvalue would have decided which model the mount should have |
 | 0x2F | 4 / Little | u32 | damage4 |  |  |
 | 0x33 | 4 / Little | f32 | gain_multiplier |  |  |
+
+
+Used in:
+* [SMSG_PERIODICAURALOG](smsg_periodicauralog.md)
 

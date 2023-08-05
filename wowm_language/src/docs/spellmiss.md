@@ -18,6 +18,10 @@ struct SpellMiss {
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
 | 0x08 | 4 / - | [SpellMissInfo](spellmissinfo.md) | miss_info |  |  |
 
+
+Used in:
+* [SMSG_SPELL_GO](smsg_spell_go.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -44,4 +48,8 @@ If miss_info is equal to `REFLECT`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x0C | 1 / - | u8 | reflect_result |  |  |
+
+
+Used in:
+* [SMSG_SPELL_GO](smsg_spell_go.md)
 

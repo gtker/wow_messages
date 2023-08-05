@@ -18,3 +18,8 @@ struct PreviewTalent {
 | 0x00 | 4 / - | [Talent](talent.md) | talent |  |  |
 | 0x04 | 4 / Little | u32 | rank |  |  |
 
+
+Used in:
+* [CMSG_LEARN_PREVIEW_TALENTS](cmsg_learn_preview_talents.md)
+* [CMSG_LEARN_PREVIEW_TALENTS_PET](cmsg_learn_preview_talents_pet.md)
+

@@ -20,3 +20,7 @@ struct GuildRights {
 | 0x04 | 4 / Little | Gold | money_per_day |  |  |
 | 0x08 | 48 / - | [GuildBankRights](guildbankrights.md)[6] | bank_tab_rights |  |  |
 
+
+Used in:
+* [SMSG_GUILD_ROSTER](smsg_guild_roster.md)
+

@@ -22,3 +22,7 @@ struct AddonInfo {
 | - | 4 / Little | u32 | addon_crc |  |  |
 | - | 4 / Little | u32 | addon_extra_crc |  |  |
 
+
+Used in:
+* [CMSG_AUTH_SESSION](cmsg_auth_session.md)
+

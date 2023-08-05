@@ -60,3 +60,7 @@ If move_type is not equal to `STOP`:
 | 0x2D | 4 / Little | u32 | duration |  |  |
 | 0x31 | - / - | [MonsterMoveSpline](../spec/monster-move-spline.md) | splines |  |  |
 
+
+Used in:
+* [CompressedMove](compressedmove.md)
+

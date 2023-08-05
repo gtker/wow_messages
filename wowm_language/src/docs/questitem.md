@@ -22,6 +22,11 @@ struct QuestItem {
 | 0x08 | 4 / Little | Level32 | level |  |  |
 | 0x0C | - / - | CString | title |  | vmangos/cmangos/mangoszero: max 0x200 |
 
+
+Used in:
+* [SMSG_GOSSIP_MESSAGE](smsg_gossip_message.md)
+* [SMSG_QUESTGIVER_QUEST_LIST](smsg_questgiver_quest_list.md)
+
 ## Client Version 3.3.3, Client Version 3.3.4, Client Version 3.3.5
 
 ### Wowm Representation
@@ -47,4 +52,9 @@ struct QuestItem {
 | 0x0C | 4 / Little | u32 | flags |  |  |
 | 0x10 | 1 / - | Bool | repeatable |  |  |
 | 0x11 | - / - | CString | title |  | vmangos/cmangos/mangoszero: max 0x200 |
+
+
+Used in:
+* [SMSG_GOSSIP_MESSAGE](smsg_gossip_message.md)
+* [SMSG_QUESTGIVER_QUEST_LIST](smsg_questgiver_quest_list.md)
 

@@ -18,3 +18,7 @@ struct DispelledSpell {
 | 0x00 | 4 / Little | u32 | spell |  |  |
 | 0x04 | 1 / - | [DispelMethod](dispelmethod.md) | method |  |  |
 
+
+Used in:
+* [SMSG_SPELLDISPELLOG](smsg_spelldispellog.md)
+

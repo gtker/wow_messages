@@ -42,6 +42,12 @@ struct AuctionListItem {
 | 0x34 | 8 / Little | [Guid](../spec/packed-guid.md) | highest_bidder |  |  |
 | 0x3C | 4 / Little | u32 | highest_bid |  |  |
 
+
+Used in:
+* [SMSG_AUCTION_BIDDER_LIST_RESULT](smsg_auction_bidder_list_result.md)
+* [SMSG_AUCTION_LIST_RESULT](smsg_auction_list_result.md)
+* [SMSG_AUCTION_OWNER_LIST_RESULT](smsg_auction_owner_list_result.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -86,6 +92,12 @@ struct AuctionListItem {
 | 0x7C | 8 / Little | [Guid](../spec/packed-guid.md) | highest_bidder |  |  |
 | 0x84 | 4 / Little | u32 | highest_bid |  |  |
 
+
+Used in:
+* [SMSG_AUCTION_BIDDER_LIST_RESULT](smsg_auction_bidder_list_result.md)
+* [SMSG_AUCTION_LIST_RESULT](smsg_auction_list_result.md)
+* [SMSG_AUCTION_OWNER_LIST_RESULT](smsg_auction_owner_list_result.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -129,4 +141,10 @@ struct AuctionListItem {
 | 0x84 | 4 / Little | Milliseconds | time_left |  |  |
 | 0x88 | 8 / Little | [Guid](../spec/packed-guid.md) | highest_bidder |  |  |
 | 0x90 | 4 / Little | u32 | highest_bid |  |  |
+
+
+Used in:
+* [SMSG_AUCTION_BIDDER_LIST_RESULT](smsg_auction_bidder_list_result.md)
+* [SMSG_AUCTION_LIST_RESULT](smsg_auction_list_result.md)
+* [SMSG_AUCTION_OWNER_LIST_RESULT](smsg_auction_owner_list_result.md)
 

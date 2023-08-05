@@ -32,3 +32,6 @@ struct QuestPoi {
 | 0x1C | 4 / Little | u32 | amount_of_points |  |  |
 | 0x20 | ? / - | [Vector2dUnsigned](vector2dunsigned.md)[amount_of_points] | points |  |  |
 
+
+Used in:
+

@@ -22,6 +22,10 @@ struct PetSpellCooldown {
 | 0x04 | 4 / Little | Milliseconds | cooldown |  |  |
 | 0x08 | 4 / Little | Milliseconds | category_cooldown |  |  |
 
+
+Used in:
+* [SMSG_PET_SPELLS](smsg_pet_spells.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -43,4 +47,8 @@ struct PetSpellCooldown {
 | 0x04 | 2 / Little | u16 | spell_category |  | mangoszero: sets to 0 |
 | 0x06 | 4 / Little | Milliseconds | cooldown |  |  |
 | 0x0A | 4 / Little | Milliseconds | category_cooldown |  |  |
+
+
+Used in:
+* [SMSG_PET_SPELLS](smsg_pet_spells.md)
 

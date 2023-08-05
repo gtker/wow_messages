@@ -28,6 +28,10 @@ struct ListInventoryItem {
 | 0x14 | 4 / Little | u32 | max_durability |  |  |
 | 0x18 | 4 / Little | u32 | durability |  |  |
 
+
+Used in:
+* [SMSG_LIST_INVENTORY](smsg_list_inventory.md)
+
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation
@@ -57,4 +61,8 @@ struct ListInventoryItem {
 | 0x14 | 4 / Little | u32 | max_durability |  |  |
 | 0x18 | 4 / Little | u32 | durability |  |  |
 | 0x1C | 4 / Little | u32 | extended_cost |  |  |
+
+
+Used in:
+* [SMSG_LIST_INVENTORY](smsg_list_inventory.md)
 

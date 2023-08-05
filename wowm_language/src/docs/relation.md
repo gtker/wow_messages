@@ -42,6 +42,10 @@ If status is equal to `ONLINE`:
 | - | 4 / Little | Level32 | level |  |  |
 | - | 4 / - | [Class](class.md) | class |  |  |
 
+
+Used in:
+* [SMSG_CONTACT_LIST](smsg_contact_list.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -83,4 +87,8 @@ If status is equal to `ONLINE`:
 | - | 4 / - | [Area](area.md) | area |  |  |
 | - | 4 / Little | Level32 | level |  |  |
 | - | 4 / - | [Class](class.md) | class |  |  |
+
+
+Used in:
+* [SMSG_CONTACT_LIST](smsg_contact_list.md)
 

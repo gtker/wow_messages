@@ -60,6 +60,10 @@ struct Character {
 | - | 4 / Little | u32 | first_bag_display_id |  |  |
 | - | 1 / - | u8 | first_bag_inventory_id |  |  |
 
+
+Used in:
+* [SMSG_CHAR_ENUM](smsg_char_enum.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -115,6 +119,10 @@ struct Character {
 | - | 4 / Little | Level32 | pet_level |  |  |
 | - | 4 / - | [CreatureFamily](creaturefamily.md) | pet_family |  |  |
 | - | 180 / - | [CharacterGear](charactergear.md)[20] | equipment |  |  |
+
+
+Used in:
+* [SMSG_CHAR_ENUM](smsg_char_enum.md)
 
 ## Client Version 3.3.5
 
@@ -173,4 +181,8 @@ struct Character {
 | - | 4 / Little | Level32 | pet_level |  |  |
 | - | 4 / - | [CreatureFamily](creaturefamily.md) | pet_family |  |  |
 | - | 207 / - | [CharacterGear](charactergear.md)[23] | equipment |  |  |
+
+
+Used in:
+* [SMSG_CHAR_ENUM](smsg_char_enum.md)
 

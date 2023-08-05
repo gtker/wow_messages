@@ -106,6 +106,14 @@ Else If target_flags contains `PVP_CORPSE`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | pvp_corpse |  |  |
 
+
+Used in:
+* [CMSG_CAST_SPELL](cmsg_cast_spell.md)
+* [CMSG_PET_CAST_SPELL](cmsg_pet_cast_spell.md)
+* [CMSG_USE_ITEM](cmsg_use_item.md)
+* [SMSG_SPELL_GO](smsg_spell_go.md)
+* [SMSG_SPELL_START](smsg_spell_start.md)
+
 ## Client Version 2.4.3
 
 ### Wowm Representation
@@ -230,6 +238,14 @@ Else If target_flags contains `CORPSE_ENEMY`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | corpse_enemy |  |  |
 
+
+Used in:
+* [CMSG_CAST_SPELL](cmsg_cast_spell.md)
+* [CMSG_PET_CAST_SPELL](cmsg_pet_cast_spell.md)
+* [CMSG_USE_ITEM](cmsg_use_item.md)
+* [SMSG_SPELL_GO](smsg_spell_go.md)
+* [SMSG_SPELL_START](smsg_spell_start.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -335,4 +351,12 @@ If target_flags contains `STRING`:
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | - | - / - | CString | target_string |  |  |
+
+
+Used in:
+* [CMSG_CAST_SPELL](cmsg_cast_spell.md)
+* [CMSG_PET_CAST_SPELL](cmsg_pet_cast_spell.md)
+* [CMSG_USE_ITEM](cmsg_use_item.md)
+* [SMSG_SPELL_GO](smsg_spell_go.md)
+* [SMSG_SPELL_START](smsg_spell_start.md)
 

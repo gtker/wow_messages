@@ -18,3 +18,7 @@ struct LfgPlayerMember {
 | 0x00 | - / - | [PackedGuid](../spec/packed-guid.md) | guid |  |  |
 | - | 4 / Little | Level32 | level |  |  |
 
+
+Used in:
+* [LfgPlayer](lfgplayer.md)
+

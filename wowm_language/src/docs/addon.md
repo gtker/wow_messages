@@ -49,6 +49,10 @@ If url_info is equal to `AVAILABLE`:
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
 | 0x108 | - / - | CString | url |  |  |
 
+
+Used in:
+* [SMSG_ADDON_INFO](smsg_addon_info.md)
+
 ## Client Version 2.4.3, Client Version 3
 
 ### Wowm Representation
@@ -72,4 +76,7 @@ struct Addon {
 | 0x02 | 1 / - | Bool | uses_diffent_public_key |  |  |
 | 0x03 | 4 / Little | u32 | unknown1 |  | Other emus hardcode this to 0 |
 | 0x07 | 1 / - | u8 | unknown2 |  | Other emus hardcode this to 0 |
+
+
+Used in:
 

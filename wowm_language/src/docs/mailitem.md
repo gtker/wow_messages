@@ -18,3 +18,7 @@ struct MailItem {
 | 0x00 | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
 | 0x08 | 1 / - | u8 | slot |  |  |
 
+
+Used in:
+* [CMSG_SEND_MAIL](cmsg_send_mail.md)
+

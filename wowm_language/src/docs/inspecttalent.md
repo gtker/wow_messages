@@ -18,3 +18,9 @@ struct InspectTalent {
 | 0x00 | 4 / - | [Talent](talent.md) | talent |  |  |
 | 0x04 | 1 / - | u8 | max_rank |  |  |
 
+
+Used in:
+* [InspectTalentSpec](inspecttalentspec.md)
+* [SMSG_TALENTS_INFO](smsg_talents_info.md)
+* [TalentInfoSpec](talentinfospec.md)
+

@@ -22,3 +22,7 @@ struct SendCalendarInstance {
 | 0x08 | 4 / Little | u32 | reset_time |  |  |
 | 0x0C | 8 / Little | [Guid](../spec/packed-guid.md) | instance_id |  |  |
 
+
+Used in:
+* [SMSG_CALENDAR_SEND_CALENDAR](smsg_calendar_send_calendar.md)
+

@@ -22,3 +22,7 @@ struct TalentInfoSpec {
 | - | 1 / - | u8 | amount_of_glyphs |  |  |
 | - | ? / - | u16[amount_of_glyphs] | glyphs |  |  |
 
+
+Used in:
+* [SMSG_TALENTS_INFO](smsg_talents_info.md)
+

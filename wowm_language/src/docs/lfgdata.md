@@ -18,3 +18,11 @@ struct LfgData {
 | 0x00 | 2 / Little | u16 | entry |  |  |
 | 0x02 | 2 / - | [LfgType](lfgtype.md) | lfg_type |  |  |
 
+
+Used in:
+* [CMSG_SET_LOOKING_FOR_GROUP](cmsg_set_looking_for_group.md)
+* [CMSG_SET_LOOKING_FOR_MORE](cmsg_set_looking_for_more.md)
+* [SMSG_LFG_UPDATE](smsg_lfg_update.md)
+* [SMSG_LFG_UPDATE_LFG](smsg_lfg_update_lfg.md)
+* [SMSG_LFG_UPDATE_LFM](smsg_lfg_update_lfm.md)
+

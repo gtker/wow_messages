@@ -24,6 +24,10 @@ struct DamageInfo {
 | 0x0C | 4 / Little | u32 | absorb |  |  |
 | 0x10 | 4 / Little | u32 | resist |  |  |
 
+
+Used in:
+* [SMSG_ATTACKERSTATEUPDATE](smsg_attackerstateupdate.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -43,4 +47,8 @@ struct DamageInfo {
 | 0x00 | 4 / Little | u32 | spell_school_mask |  |  |
 | 0x04 | 4 / Little | f32 | damage_float |  | arcemu sends the same data in `damage_uint`. |
 | 0x08 | 4 / Little | u32 | damage_uint |  | arcemu sends the same data in `damage_float`. |
+
+
+Used in:
+* [SMSG_ATTACKERSTATEUPDATE](smsg_attackerstateupdate.md)
 

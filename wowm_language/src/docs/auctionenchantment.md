@@ -20,3 +20,7 @@ struct AuctionEnchantment {
 | 0x04 | 4 / Little | u32 | enchant_duration |  |  |
 | 0x08 | 4 / Little | u32 | enchant_charges |  |  |
 
+
+Used in:
+* [AuctionListItem](auctionlistitem.md)
+

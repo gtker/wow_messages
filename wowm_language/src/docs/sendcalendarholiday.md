@@ -32,3 +32,6 @@ struct SendCalendarHoliday {
 | 0xA4 | 40 / - | u32[10] | flags |  |  |
 | 0xCC | - / - | CString | texture_file_name |  |  |
 
+
+Used in:
+

@@ -22,3 +22,7 @@ struct TelemetryKey {
 | 0x06 | 4 / - | u8[4] | unknown3 |  |  |
 | 0x0A | 20 / - | u8[20] | cd_key_proof |  | SHA1 hash of the session key, server public key, and an unknown 20 byte value. |
 
+
+Used in:
+* [CMD_AUTH_LOGON_PROOF_Client](cmd_auth_logon_proof_client.md)
+

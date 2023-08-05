@@ -24,3 +24,6 @@ struct InspectTalentGear {
 | - | - / - | [PackedGuid](../spec/packed-guid.md) | creator |  |  |
 | - | 4 / Little | u32 | unknown2 |  |  |
 
+
+Used in:
+

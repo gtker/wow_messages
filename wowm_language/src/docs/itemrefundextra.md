@@ -18,3 +18,8 @@ struct ItemRefundExtra {
 | 0x00 | 4 / Little | u32 | item |  |  |
 | 0x04 | 4 / Little | u32 | amount |  |  |
 
+
+Used in:
+* [SMSG_ITEM_REFUND_INFO_RESPONSE](smsg_item_refund_info_response.md)
+* [SMSG_ITEM_REFUND_RESULT](smsg_item_refund_result.md)
+

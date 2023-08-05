@@ -18,3 +18,7 @@ struct GuildBankSocket {
 | 0x00 | 1 / - | u8 | socket_index |  |  |
 | 0x01 | 4 / Little | u32 | gem |  |  |
 
+
+Used in:
+* [GuildBankSlot](guildbankslot.md)
+

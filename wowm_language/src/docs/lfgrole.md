@@ -22,3 +22,7 @@ struct LfgRole {
 | 0x09 | 4 / Little | u32 | roles |  |  |
 | 0x0D | 1 / - | Level | level |  |  |
 
+
+Used in:
+* [SMSG_LFG_ROLE_CHECK_UPDATE](smsg_lfg_role_check_update.md)
+

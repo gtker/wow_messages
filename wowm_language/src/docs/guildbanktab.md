@@ -18,3 +18,7 @@ struct GuildBankTab {
 | 0x00 | - / - | CString | tab_name |  |  |
 | - | - / - | CString | tab_icon |  |  |
 
+
+Used in:
+* [SMSG_GUILD_BANK_LIST](smsg_guild_bank_list.md)
+

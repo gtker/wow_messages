@@ -30,6 +30,10 @@ struct GuildBankSlot {
 | - | 1 / - | u8 | amount_of_sockets |  |  |
 | - | ? / - | [GuildBankSocket](guildbanksocket.md)[amount_of_sockets] | sockets |  |  |
 
+
+Used in:
+* [SMSG_GUILD_BANK_LIST](smsg_guild_bank_list.md)
+
 ## Client Version 3.3.5
 
 ### Wowm Representation
@@ -61,4 +65,8 @@ struct GuildBankSlot {
 | - | 1 / - | u8 | unknown3 |  |  |
 | - | 1 / - | u8 | amount_of_sockets |  |  |
 | - | ? / - | [GuildBankSocket](guildbanksocket.md)[amount_of_sockets] | sockets |  |  |
+
+
+Used in:
+* [SMSG_GUILD_BANK_LIST](smsg_guild_bank_list.md)
 
