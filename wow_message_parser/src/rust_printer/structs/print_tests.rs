@@ -19,7 +19,7 @@ use crate::rust_printer::{
 };
 
 pub(super) fn print_tests(s: &mut Writer, e: &Container, o: &Objects) {
-    if e.should_print_test_case_string(o) {
+    if e.tests(o).is_empty() {
         return;
     }
 
