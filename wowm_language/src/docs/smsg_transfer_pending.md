@@ -99,18 +99,18 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [Map](map.md) | map |  |  |
+| - | 4 / - | [Map](map.md) | map |  |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | 4 / Little | u32 | transport |  |  |
-| 0x0C | 4 / - | [Map](map.md) | transport_map |  |  |
+| - | 4 / Little | u32 | transport |  |  |
+| - | 4 / - | [Map](map.md) | transport_map |  |  |
 

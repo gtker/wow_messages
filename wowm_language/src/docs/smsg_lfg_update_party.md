@@ -29,24 +29,24 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [LfgUpdateType](lfgupdatetype.md) | update_type |  |  |
-| 0x05 | 1 / - | [LfgJoinStatus](lfgjoinstatus.md) | join_status |  |  |
+| - | 1 / - | [LfgUpdateType](lfgupdatetype.md) | update_type |  |  |
+| - | 1 / - | [LfgJoinStatus](lfgjoinstatus.md) | join_status |  |  |
 
 If join_status is equal to `JOINED`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x06 | 1 / - | u8 | joined |  |  |
-| 0x07 | 1 / - | u8 | queued |  |  |
-| 0x08 | 1 / - | u8 | no_partial_clear |  |  |
-| 0x09 | 1 / - | u8 | achievements |  |  |
-| 0x0A | 1 / - | u8 | amount_of_dungeons |  |  |
-| 0x0B | ? / - | u32[amount_of_dungeons] | dungeons |  |  |
+| - | 1 / - | u8 | joined |  |  |
+| - | 1 / - | u8 | queued |  |  |
+| - | 1 / - | u8 | no_partial_clear |  |  |
+| - | 1 / - | u8 | achievements |  |  |
+| - | 1 / - | u8 | amount_of_dungeons |  |  |
+| - | ? / - | u32[amount_of_dungeons] | dungeons |  |  |
 | - | - / - | CString | comment |  |  |
 

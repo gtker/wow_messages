@@ -151,32 +151,32 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / - | [TradeStatus](tradestatus.md) | status |  |  |
+| - | 4 / - | [TradeStatus](tradestatus.md) | status |  |  |
 
 If status is equal to `BEGIN_TRADE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x08 | 8 / Little | [Guid](../spec/packed-guid.md) | unknown1 |  | Set to 0 in vmangos. |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | unknown1 |  | Set to 0 in vmangos. |
 
 Else If status is equal to `CLOSE_WINDOW`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x10 | 4 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |  |
-| 0x14 | 1 / - | Bool | target_error |  | used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED |
-| 0x15 | 4 / Little | u32 | item_limit_category_id |  | ItemLimitCategory.dbc entry |
+| - | 4 / - | [InventoryResult](inventoryresult.md) | inventory_result |  |  |
+| - | 1 / - | Bool | target_error |  | used for: EQUIP_ERR_BAG_FULL, EQUIP_ERR_CANT_CARRY_MORE_OF_THIS, EQUIP_ERR_MISSING_REAGENT, EQUIP_ERR_ITEM_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED |
+| - | 4 / Little | u32 | item_limit_category_id |  | ItemLimitCategory.dbc entry |
 
 Else If status is equal to `ONLY_CONJURED` **or** 
 is equal to `NOT_ON_TAPLIST`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x19 | 1 / - | u8 | slot |  | Trade slot -1 here clears CGTradeInfo::m_tradeMoney |
+| - | 1 / - | u8 | slot |  | Trade slot -1 here clears CGTradeInfo::m_tradeMoney |
 

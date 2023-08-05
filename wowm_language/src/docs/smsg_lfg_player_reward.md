@@ -28,20 +28,20 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | random_dungeon_entry |  |  |
-| 0x08 | 4 / Little | u32 | dungeon_finished_entry |  |  |
-| 0x0C | 1 / - | Bool | done |  |  |
-| 0x0D | 4 / Little | u32 | unknown1 |  | emus set to 1. |
-| 0x11 | 4 / Little | Gold | money_reward |  |  |
-| 0x15 | 4 / Little | u32 | experience_reward |  |  |
-| 0x19 | 4 / Little | u32 | unknown2 |  | emus set to 0. |
-| 0x1D | 4 / Little | u32 | unknown3 |  | emus set to 0. |
-| 0x21 | 1 / - | u8 | amount_of_rewards |  |  |
-| 0x22 | ? / - | [QuestGiverReward](questgiverreward.md)[amount_of_rewards] | rewards |  |  |
+| - | 4 / Little | u32 | random_dungeon_entry |  |  |
+| - | 4 / Little | u32 | dungeon_finished_entry |  |  |
+| - | 1 / - | Bool | done |  |  |
+| - | 4 / Little | u32 | unknown1 |  | emus set to 1. |
+| - | 4 / Little | Gold | money_reward |  |  |
+| - | 4 / Little | u32 | experience_reward |  |  |
+| - | 4 / Little | u32 | unknown2 |  | emus set to 0. |
+| - | 4 / Little | u32 | unknown3 |  | emus set to 0. |
+| - | 1 / - | u8 | amount_of_rewards |  |  |
+| - | ? / - | [QuestGiverReward](questgiverreward.md)[amount_of_rewards] | rewards |  |  |
 

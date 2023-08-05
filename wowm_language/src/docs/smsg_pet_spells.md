@@ -86,27 +86,27 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | pet |  |  |
 
 Optionally the following fields can be present. This can only be detected by looking at the size of the message.
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0C | 2 / - | [CreatureFamily](creaturefamily.md) | family |  |  |
-| 0x0E | 4 / Little | u32 | duration |  |  |
-| 0x12 | 1 / - | [PetReactState](petreactstate.md) | react |  |  |
-| 0x13 | 1 / - | [PetCommandState](petcommandstate.md) | command |  |  |
-| 0x14 | 1 / - | u8 | unknown |  | mangoszero: set to 0 |
-| 0x15 | 1 / - | [PetEnabled](petenabled.md) | pet_enabled |  |  |
-| 0x16 | 40 / - | u32[10] | action_bars |  |  |
-| 0x3E | 1 / - | u8 | amount_of_spells |  |  |
-| 0x3F | ? / - | u32[amount_of_spells] | spells |  |  |
+| - | 2 / - | [CreatureFamily](creaturefamily.md) | family |  |  |
+| - | 4 / Little | u32 | duration |  |  |
+| - | 1 / - | [PetReactState](petreactstate.md) | react |  |  |
+| - | 1 / - | [PetCommandState](petcommandstate.md) | command |  |  |
+| - | 1 / - | u8 | unknown |  | mangoszero: set to 0 |
+| - | 1 / - | [PetEnabled](petenabled.md) | pet_enabled |  |  |
+| - | 40 / - | u32[10] | action_bars |  |  |
+| - | 1 / - | u8 | amount_of_spells |  |  |
+| - | ? / - | u32[amount_of_spells] | spells |  |  |
 | - | 1 / - | u8 | amount_of_cooldowns |  |  |
 | - | ? / - | [PetSpellCooldown](petspellcooldown.md)[amount_of_cooldowns] | cooldowns |  |  |
 

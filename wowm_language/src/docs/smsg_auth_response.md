@@ -186,27 +186,27 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [WorldResult](worldresult.md) | result |  |  |
+| - | 1 / - | [WorldResult](worldresult.md) | result |  |  |
 
 If result is equal to `AUTH_OK`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | 4 / Little | u32 | billing_time |  |  |
-| 0x09 | 1 / - | [BillingPlanFlags](billingplanflags.md) | billing_flags |  |  |
-| 0x0A | 4 / Little | u32 | billing_rested |  |  |
-| 0x0E | 1 / - | [Expansion](expansion.md) | expansion |  |  |
+| - | 4 / Little | u32 | billing_time |  |  |
+| - | 1 / - | [BillingPlanFlags](billingplanflags.md) | billing_flags |  |  |
+| - | 4 / Little | u32 | billing_rested |  |  |
+| - | 1 / - | [Expansion](expansion.md) | expansion |  |  |
 
 Else If result is equal to `AUTH_WAIT_QUEUE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0F | 4 / Little | u32 | queue_position |  |  |
-| 0x13 | 1 / - | Bool | realm_has_free_character_migration |  |  |
+| - | 4 / Little | u32 | queue_position |  |  |
+| - | 1 / - | Bool | realm_has_free_character_migration |  |  |
 

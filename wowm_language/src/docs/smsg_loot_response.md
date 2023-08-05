@@ -26,21 +26,21 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
-| 0x0C | 1 / - | [LootMethod](lootmethod.md) | loot_method |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | guid |  |  |
+| - | 1 / - | [LootMethod](lootmethod.md) | loot_method |  |  |
 
 If loot_method is equal to `ERROR`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0D | 1 / - | [LootMethodError](lootmethoderror.md) | loot_error |  |  |
-| 0x0E | 4 / Little | Gold | gold |  |  |
-| 0x12 | 1 / - | u8 | amount_of_items |  |  |
-| 0x13 | ? / - | [LootItem](lootitem.md)[amount_of_items] | items |  |  |
+| - | 1 / - | [LootMethodError](lootmethoderror.md) | loot_error |  |  |
+| - | 4 / Little | Gold | gold |  |  |
+| - | 1 / - | u8 | amount_of_items |  |  |
+| - | ? / - | [LootItem](lootitem.md)[amount_of_items] | items |  |  |
 

@@ -105,20 +105,20 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [CorpseQueryResult](corpsequeryresult.md) | result |  |  |
+| - | 1 / - | [CorpseQueryResult](corpsequeryresult.md) | result |  |  |
 
 If result is equal to `FOUND`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x05 | 4 / - | [Map](map.md) | map |  |  |
-| 0x09 | 12 / - | [Vector3d](vector3d.md) | position |  |  |
-| 0x15 | 4 / - | [Map](map.md) | corpse_map |  |  |
-| 0x19 | 4 / Little | u32 | unknown |  |  |
+| - | 4 / - | [Map](map.md) | map |  |  |
+| - | 12 / - | [Vector3d](vector3d.md) | position |  |  |
+| - | 4 / - | [Map](map.md) | corpse_map |  |  |
+| - | 4 / Little | u32 | unknown |  |  |
 

@@ -256,16 +256,16 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [ChatType](chattype.md) | chat_type |  |  |
-| 0x05 | 4 / - | [Language](language.md) | language |  |  |
-| 0x09 | 8 / Little | [Guid](../spec/packed-guid.md) | sender |  |  |
-| 0x11 | 4 / Little | u32 | flags |  | azerothcore sets to 0. |
+| - | 1 / - | [ChatType](chattype.md) | chat_type |  |  |
+| - | 4 / - | [Language](language.md) | language |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | sender |  |  |
+| - | 4 / Little | u32 | flags |  | azerothcore sets to 0. |
 
 If chat_type is equal to `MONSTER_SAY` **or** 
 is equal to `MONSTER_PARTY` **or** 
@@ -278,7 +278,7 @@ is equal to `BATTLENET`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x15 | - / - | SizedCString | sender1 |  |  |
+| - | - / - | SizedCString | sender1 |  |  |
 | - | - / - | [NamedGuid](../spec/packed-guid.md) | target1 |  |  |
 
 Else If chat_type is equal to `WHISPER_FOREIGN`:

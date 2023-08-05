@@ -30,20 +30,20 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | Bool | show_alert |  |  |
-| 0x05 | 8 / Little | [Guid](../spec/packed-guid.md) | event_id |  |  |
-| 0x0D | 4 / Little | DateTime | old_event_time |  |  |
-| 0x11 | 4 / Little | u32 | flags |  |  |
-| 0x15 | 4 / Little | DateTime | new_event_time |  |  |
-| 0x19 | 1 / - | u8 | event_type |  |  |
-| 0x1A | 4 / Little | u32 | dungeon_id |  |  |
-| 0x1E | - / - | CString | title |  |  |
+| - | 1 / - | Bool | show_alert |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | event_id |  |  |
+| - | 4 / Little | DateTime | old_event_time |  |  |
+| - | 4 / Little | u32 | flags |  |  |
+| - | 4 / Little | DateTime | new_event_time |  |  |
+| - | 1 / - | u8 | event_type |  |  |
+| - | 4 / Little | u32 | dungeon_id |  |  |
+| - | - / - | CString | title |  |  |
 | - | - / - | CString | description |  |  |
 | - | 1 / - | u8 | repeatable |  |  |
 | - | 4 / Little | u32 | max_invitees |  |  |

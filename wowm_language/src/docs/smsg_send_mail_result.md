@@ -176,37 +176,37 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | mail_id |  |  |
-| 0x08 | 4 / - | [MailAction](mailaction.md) | action |  |  |
+| - | 4 / Little | u32 | mail_id |  |  |
+| - | 4 / - | [MailAction](mailaction.md) | action |  |  |
 
 If action is equal to `ITEM_TAKEN`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0C | 4 / - | [MailResult](mailresult.md) | result |  |  |
+| - | 4 / - | [MailResult](mailresult.md) | result |  |  |
 
 If result is equal to `ERR_EQUIP_ERROR`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x10 | 4 / Little | u32 | equip_error |  |  |
+| - | 4 / Little | u32 | equip_error |  |  |
 
 Else: 
-| 0x14 | 4 / Little | u32 | item |  | cmangos/vmangos: item guid low? |
-| 0x18 | 4 / Little | u32 | item_count |  |  |
+| - | 4 / Little | u32 | item |  | cmangos/vmangos: item guid low? |
+| - | 4 / Little | u32 | item_count |  |  |
 
 Else: 
-| 0x1C | 4 / - | [MailResultTwo](mailresulttwo.md) | result2 |  |  |
+| - | 4 / - | [MailResultTwo](mailresulttwo.md) | result2 |  |  |
 
 If result2 is equal to `ERR_EQUIP_ERROR`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x20 | 4 / Little | u32 | equip_error2 |  |  |
+| - | 4 / Little | u32 | equip_error2 |  |  |
 

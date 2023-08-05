@@ -177,40 +177,40 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | u8 | cast_count |  |  |
-| 0x05 | 4 / Little | u32 | id |  |  |
-| 0x09 | 1 / - | [SpellCastResult](spellcastresult.md) | result |  |  |
-| 0x0A | 1 / - | Bool | multiple_casts |  |  |
+| - | 1 / - | u8 | cast_count |  |  |
+| - | 4 / Little | u32 | id |  |  |
+| - | 1 / - | [SpellCastResult](spellcastresult.md) | result |  |  |
+| - | 1 / - | Bool | multiple_casts |  |  |
 
 If result is equal to `REQUIRES_SPELL_FOCUS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0B | 4 / Little | u32 | spell_focus |  |  |
+| - | 4 / Little | u32 | spell_focus |  |  |
 
 Else If result is equal to `REQUIRES_AREA`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0F | 4 / - | [Area](area.md) | area |  |  |
+| - | 4 / - | [Area](area.md) | area |  |  |
 
 Else If result is equal to `TOTEMS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x13 | 8 / - | u32[2] | totems |  |  |
+| - | 8 / - | u32[2] | totems |  |  |
 
 Else If result is equal to `TOTEM_CATEGORY`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x1B | 8 / - | u32[2] | totem_categories |  |  |
+| - | 8 / - | u32[2] | totem_categories |  |  |
 
 Else If result is equal to `EQUIPPED_ITEM_CLASS` **or** 
 is equal to `EQUIPPED_ITEM_CLASS_OFFHAND` **or** 
@@ -218,56 +218,56 @@ is equal to `EQUIPPED_ITEM_CLASS_MAINHAND`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x23 | 4 / Little | u32 | item_class |  |  |
-| 0x27 | 4 / Little | u32 | item_sub_class |  |  |
+| - | 4 / Little | u32 | item_class |  |  |
+| - | 4 / Little | u32 | item_sub_class |  |  |
 
 Else If result is equal to `TOO_MANY_OF_ITEM`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x2B | 4 / Little | u32 | item_limit_category |  |  |
+| - | 4 / Little | u32 | item_limit_category |  |  |
 
 Else If result is equal to `CUSTOM_ERROR`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x2F | 4 / Little | u32 | custom_error |  |  |
+| - | 4 / Little | u32 | custom_error |  |  |
 
 Else If result is equal to `REAGENTS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x33 | 4 / Little | u32 | missing_item |  |  |
+| - | 4 / Little | u32 | missing_item |  |  |
 
 Else If result is equal to `PREVENTED_BY_MECHANIC`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x37 | 4 / Little | u32 | mechanic |  |  |
+| - | 4 / Little | u32 | mechanic |  |  |
 
 Else If result is equal to `NEED_EXOTIC_AMMO`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x3B | 4 / Little | u32 | equipped_item_sub_class |  |  |
+| - | 4 / Little | u32 | equipped_item_sub_class |  |  |
 
 Else If result is equal to `NEED_MORE_ITEMS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x3F | 4 / Little | u32 | item |  |  |
-| 0x43 | 4 / Little | u32 | count |  |  |
+| - | 4 / Little | u32 | item |  |  |
+| - | 4 / Little | u32 | count |  |  |
 
 Else If result is equal to `MIN_SKILL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x47 | 4 / - | [Skill](skill.md) | skill |  |  |
-| 0x4B | 4 / Little | u32 | skill_required |  |  |
+| - | 4 / - | [Skill](skill.md) | skill |  |  |
+| - | 4 / Little | u32 | skill_required |  |  |
 
 Else If result is equal to `FISHING_TOO_LOW`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x4F | 4 / Little | u32 | fishing_skill_required |  |  |
+| - | 4 / Little | u32 | fishing_skill_required |  |  |
 

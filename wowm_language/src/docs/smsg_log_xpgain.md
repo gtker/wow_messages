@@ -68,21 +68,21 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
-| 0x0C | 4 / Little | u32 | total_exp |  |  |
-| 0x10 | 1 / - | [ExperienceAwardType](experienceawardtype.md) | exp_type |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | target |  |  |
+| - | 4 / Little | u32 | total_exp |  |  |
+| - | 1 / - | [ExperienceAwardType](experienceawardtype.md) | exp_type |  |  |
 
 If exp_type is equal to `NON_KILL`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x11 | 4 / Little | u32 | experience_without_rested |  |  |
-| 0x15 | 4 / Little | f32 | exp_group_bonus |  | mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output |
-| 0x19 | 1 / - | Bool | exp_includes_recruit_a_friend_bonus |  |  |
+| - | 4 / Little | u32 | experience_without_rested |  |  |
+| - | 4 / Little | f32 | exp_group_bonus |  | mangoszero sets to 1 and comments: 1 - none 0 - 100% group bonus output |
+| - | 1 / - | Bool | exp_includes_recruit_a_friend_bonus |  |  |
 

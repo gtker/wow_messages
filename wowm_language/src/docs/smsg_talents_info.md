@@ -29,21 +29,21 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 1 / - | [TalentInfoType](talentinfotype.md) | talent_type |  |  |
-| 0x05 | 4 / Little | u32 | points_left |  |  |
+| - | 1 / - | [TalentInfoType](talentinfotype.md) | talent_type |  |  |
+| - | 4 / Little | u32 | points_left |  |  |
 
 If talent_type is equal to `PET`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x09 | 1 / - | u8 | amount_of_talents |  |  |
-| 0x0A | ? / - | [InspectTalent](inspecttalent.md)[amount_of_talents] | talents |  |  |
+| - | 1 / - | u8 | amount_of_talents |  |  |
+| - | ? / - | [InspectTalent](inspecttalent.md)[amount_of_talents] | talents |  |  |
 
 Else If talent_type is equal to `PLAYER`:
 

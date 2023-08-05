@@ -103,30 +103,30 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | battlemaster |  |  |
-| 0x0C | 4 / - | [BattlegroundType](battlegroundtype.md) | battleground_type |  |  |
-| 0x10 | 1 / - | u8 | unknown1 |  |  |
-| 0x11 | 1 / - | u8 | unknown2 |  |  |
-| 0x12 | 1 / - | u8 | has_win |  |  |
-| 0x13 | 4 / Little | u32 | win_honor |  |  |
-| 0x17 | 4 / Little | u32 | win_arena |  |  |
-| 0x1B | 4 / Little | u32 | loss_honor |  |  |
-| 0x1F | 1 / - | [RandomBg](randombg.md) | random |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | battlemaster |  |  |
+| - | 4 / - | [BattlegroundType](battlegroundtype.md) | battleground_type |  |  |
+| - | 1 / - | u8 | unknown1 |  |  |
+| - | 1 / - | u8 | unknown2 |  |  |
+| - | 1 / - | u8 | has_win |  |  |
+| - | 4 / Little | u32 | win_honor |  |  |
+| - | 4 / Little | u32 | win_arena |  |  |
+| - | 4 / Little | u32 | loss_honor |  |  |
+| - | 1 / - | [RandomBg](randombg.md) | random |  |  |
 
 If random is equal to `RANDOM`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x20 | 1 / - | u8 | win_random |  |  |
-| 0x21 | 4 / Little | u32 | reward_honor |  |  |
-| 0x25 | 4 / Little | u32 | reward_arena |  |  |
-| 0x29 | 4 / Little | u32 | honor_lost |  |  |
-| 0x2D | 4 / Little | u32 | number_of_battlegrounds |  |  |
-| 0x31 | ? / - | u32[number_of_battlegrounds] | battlegrounds |  |  |
+| - | 1 / - | u8 | win_random |  |  |
+| - | 4 / Little | u32 | reward_honor |  |  |
+| - | 4 / Little | u32 | reward_arena |  |  |
+| - | 4 / Little | u32 | honor_lost |  |  |
+| - | 4 / Little | u32 | number_of_battlegrounds |  |  |
+| - | ? / - | u32[number_of_battlegrounds] | battlegrounds |  |  |
 

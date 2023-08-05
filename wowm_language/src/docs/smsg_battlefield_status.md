@@ -193,45 +193,45 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | queue_slot |  | vmangos: players can be in 3 queues at the same time (0..2) |
-| 0x08 | 1 / - | [ArenaType](arenatype.md) | arena_type |  |  |
-| 0x09 | 1 / - | u8 | is_arena |  | azerothcore sets to 0x0E if it is arena, 0 otherwise. |
-| 0x0A | 4 / - | [BattlegroundType](battlegroundtype.md) | battleground_type |  |  |
-| 0x0E | 2 / Little | u16 | unknown1 |  | azerothcore sets to 0x1F90 |
-| 0x10 | 1 / - | u8 | minimum_level |  |  |
-| 0x11 | 1 / - | u8 | maximum_level |  |  |
-| 0x12 | 4 / Little | u32 | client_instance_id |  |  |
-| 0x16 | 1 / - | Bool | rated |  |  |
-| 0x17 | 1 / - | [StatusId](statusid.md) | status_id |  |  |
+| - | 4 / Little | u32 | queue_slot |  | vmangos: players can be in 3 queues at the same time (0..2) |
+| - | 1 / - | [ArenaType](arenatype.md) | arena_type |  |  |
+| - | 1 / - | u8 | is_arena |  | azerothcore sets to 0x0E if it is arena, 0 otherwise. |
+| - | 4 / - | [BattlegroundType](battlegroundtype.md) | battleground_type |  |  |
+| - | 2 / Little | u16 | unknown1 |  | azerothcore sets to 0x1F90 |
+| - | 1 / - | u8 | minimum_level |  |  |
+| - | 1 / - | u8 | maximum_level |  |  |
+| - | 4 / Little | u32 | client_instance_id |  |  |
+| - | 1 / - | Bool | rated |  |  |
+| - | 1 / - | [StatusId](statusid.md) | status_id |  |  |
 
 If status_id is equal to `WAIT_QUEUE`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x18 | 4 / Little | u32 | average_wait_time_in_ms |  |  |
-| 0x1C | 4 / Little | u32 | time_in_queue_in_ms |  |  |
+| - | 4 / Little | u32 | average_wait_time_in_ms |  |  |
+| - | 4 / Little | u32 | time_in_queue_in_ms |  |  |
 
 Else If status_id is equal to `WAIT_JOIN`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x20 | 4 / - | [Map](map.md) | map1 |  |  |
-| 0x24 | 8 / Little | u64 | unknown2 |  | azerothcore: 3.3.5 unknown |
-| 0x2C | 4 / Little | u32 | time_to_remove_in_queue_in_ms |  |  |
+| - | 4 / - | [Map](map.md) | map1 |  |  |
+| - | 8 / Little | u64 | unknown2 |  | azerothcore: 3.3.5 unknown |
+| - | 4 / Little | u32 | time_to_remove_in_queue_in_ms |  |  |
 
 Else If status_id is equal to `IN_PROGRESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x30 | 4 / - | [Map](map.md) | map2 |  |  |
-| 0x34 | 8 / Little | u64 | unknown3 |  | azerothcore: 3.3.5 unknown |
-| 0x3C | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |  |
-| 0x40 | 4 / Little | u32 | time_to_bg_start_in_ms |  |  |
-| 0x44 | 1 / - | [ArenaFaction](arenafaction.md) | faction |  |  |
+| - | 4 / - | [Map](map.md) | map2 |  |  |
+| - | 8 / Little | u64 | unknown3 |  | azerothcore: 3.3.5 unknown |
+| - | 4 / Little | u32 | time_to_bg_autoleave_in_ms |  |  |
+| - | 4 / Little | u32 | time_to_bg_start_in_ms |  |  |
+| - | 1 / - | [ArenaFaction](arenafaction.md) | faction |  |  |
 

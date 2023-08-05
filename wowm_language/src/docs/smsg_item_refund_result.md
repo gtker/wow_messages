@@ -26,21 +26,21 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
-| 0x0C | 1 / - | [ItemRefundResult](itemrefundresult.md) | result |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | item |  |  |
+| - | 1 / - | [ItemRefundResult](itemrefundresult.md) | result |  |  |
 
 If result is equal to `SUCCESS`:
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x0D | 4 / Little | Gold | cost |  |  |
-| 0x11 | 4 / Little | u32 | honor_point_cost |  |  |
-| 0x15 | 4 / Little | u32 | arena_point_cost |  |  |
-| 0x19 | 40 / - | [ItemRefundExtra](itemrefundextra.md)[5] | extra_items |  |  |
+| - | 4 / Little | Gold | cost |  |  |
+| - | 4 / Little | u32 | honor_point_cost |  |  |
+| - | 4 / Little | u32 | arena_point_cost |  |  |
+| - | 40 / - | [ItemRefundExtra](itemrefundextra.md)[5] | extra_items |  |  |
 

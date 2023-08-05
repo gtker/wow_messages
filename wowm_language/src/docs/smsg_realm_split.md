@@ -21,13 +21,13 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | realm_id |  | ArcEmu/TrinityCore/mangosthree send realm_id from [CMSG_REALM_SPLIT](./cmsg_realm_split.md) back. |
-| 0x08 | 4 / - | [RealmSplitState](realmsplitstate.md) | state |  |  |
-| 0x0C | - / - | CString | split_date |  | Seems to be slash separated string, like '01/01/01'. |
+| - | 4 / Little | u32 | realm_id |  | ArcEmu/TrinityCore/mangosthree send realm_id from [CMSG_REALM_SPLIT](./cmsg_realm_split.md) back. |
+| - | 4 / - | [RealmSplitState](realmsplitstate.md) | state |  |  |
+| - | - / - | CString | split_date |  | Seems to be slash separated string, like '01/01/01'. |
 

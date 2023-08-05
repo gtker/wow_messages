@@ -56,13 +56,13 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 8 / Little | [Guid](../spec/packed-guid.md) | vendor |  |  |
-| 0x0C | 1 / - | u8 | amount_of_items |  | cmangos: 0 displays Vendor has no inventory |
-| 0x0D | ? / - | [ListInventoryItem](listinventoryitem.md)[amount_of_items] | items |  |  |
+| - | 8 / Little | [Guid](../spec/packed-guid.md) | vendor |  |  |
+| - | 1 / - | u8 | amount_of_items |  | cmangos: 0 displays Vendor has no inventory |
+| - | ? / - | [ListInventoryItem](listinventoryitem.md)[amount_of_items] | items |  |  |
 

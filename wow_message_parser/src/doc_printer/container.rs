@@ -681,13 +681,19 @@ fn print_container_body(s: &mut Writer, e: &Container, o: &Objects) {
         return;
     }
 
-    let mut offset = Some(match e.container_type() {
-        ContainerType::Msg(_) => 0,
-        ContainerType::CMsg(_) => 6,
-        ContainerType::SMsg(_) => 4,
-        ContainerType::CLogin(_) | ContainerType::SLogin(_) => 1,
-        ContainerType::Struct => 0,
-    });
+    let mut offset = match e.container_type() {
+        ContainerType::Msg(_) => Some(0),
+        ContainerType::CMsg(_) => Some(6),
+        ContainerType::SMsg(_) => {
+            if e.tags().contains_wrath() && !e.is_constant_sized() {
+                None
+            } else {
+                Some(4)
+            }
+        }
+        ContainerType::CLogin(_) | ContainerType::SLogin(_) => Some(1),
+        ContainerType::Struct => Some(0),
+    };
 
     if !(e.members().len() == 1 && matches!(&e.members()[0], &StructMember::OptionalStatement(_))) {
         print_container_item_header(s);
@@ -766,8 +772,13 @@ fn print_container_header(s: &mut Writer, e: &Container) {
 
         s.wln("| Offset | Size / Endianness | Type   | Name   | Description |");
         s.wln("| ------ | ----------------- | ------ | ------ | ----------- |");
-        s.wln("| 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|");
-        s.wln("| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|");
+        if e.tags().contains_wrath() && !e.is_constant_sized() {
+            s.wln("| 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|");
+            s.wln("| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |");
+        } else {
+            s.wln("| 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|");
+            s.wln("| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|");
+        }
     }
 
     if matches!(

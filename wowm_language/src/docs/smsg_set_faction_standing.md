@@ -82,14 +82,14 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | f32 | refer_a_friend_bonus |  | All emus set to 0. |
-| 0x08 | 1 / - | Bool | any_rank_increased |  | mangostwo: display visual effect |
-| 0x09 | 4 / Little | u32 | amount_of_faction_standings |  |  |
-| 0x0D | ? / - | [FactionStanding](factionstanding.md)[amount_of_faction_standings] | faction_standings |  |  |
+| - | 4 / Little | f32 | refer_a_friend_bonus |  | All emus set to 0. |
+| - | 1 / - | Bool | any_rank_increased |  | mangostwo: display visual effect |
+| - | 4 / Little | u32 | amount_of_faction_standings |  |  |
+| - | ? / - | [FactionStanding](factionstanding.md)[amount_of_faction_standings] | faction_standings |  |  |
 

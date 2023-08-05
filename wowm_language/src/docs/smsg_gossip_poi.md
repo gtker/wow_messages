@@ -23,15 +23,15 @@ SMSG have a header of 4 bytes.
 | Offset | Size / Endianness | Type   | Name   | Description |
 | ------ | ----------------- | ------ | ------ | ----------- |
 | 0x00   | 2 / Big           | uint16 | size   | Size of the rest of the message including the opcode field but not including the size field.|
-| 0x02   | 2 / Little        | uint16 | opcode | Opcode that determines which fields the message contains.|
+| -      | 2 **OR** 3 / Little| uint16 **OR** uint16+uint8 | opcode | Opcode that determines which fields the message contains. Wrath server messages **can** be 3 bytes. If the first (least significant) size byte has `0x80` set, the header will be 3 bytes, otherwise it is 2. |
 
 ### Body
 
 | Offset | Size / Endianness | Type | Name | Description | Comment |
 | ------ | ----------------- | ---- | ---- | ----------- | ------- |
-| 0x04 | 4 / Little | u32 | flags |  |  |
-| 0x08 | 8 / - | [Vector2d](vector2d.md) | position |  |  |
-| 0x10 | 4 / Little | u32 | icon |  |  |
-| 0x14 | 4 / Little | u32 | data |  |  |
-| 0x18 | - / - | CString | location_name |  |  |
+| - | 4 / Little | u32 | flags |  |  |
+| - | 8 / - | [Vector2d](vector2d.md) | position |  |  |
+| - | 4 / Little | u32 | icon |  |  |
+| - | 4 / Little | u32 | data |  |  |
+| - | - / - | CString | location_name |  |  |
 
