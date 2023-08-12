@@ -35,15 +35,6 @@ fn print_specific_update_mask_doc(fields: &[UpdateMaskMember], s: &mut Writer) {
                     field.size(),
                     ty
                 ));
-
-                if field.offset() == 0 && field.ty() == UpdateMaskDataType::Guid {
-                    s.wln(format!(
-                        "|`{}_TYPE`| 0x{:04x?} | {} | INT |",
-                        name.to_uppercase(),
-                        2,
-                        1,
-                    ));
-                }
             }
         }
 

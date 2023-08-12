@@ -341,7 +341,6 @@ Fields that all objects have:
 |------|--------|------|------|
 |`OBJECT_GUID`| 0x0000 | 2 | GUID |
 |`OBJECT_TYPE`| 0x0002 | 1 | INT |
-|`OBJECT_TYPE`| 0x0002 | 1 | INT |
 |`OBJECT_ENTRY`| 0x0003 | 1 | INT |
 |`OBJECT_SCALE_X`| 0x0004 | 1 | FLOAT |
 |`OBJECT_CREATED_BY`| 0x0006 | 2 | GUID |
@@ -697,7 +696,6 @@ Fields that all objects have:
 | Name | Offset | Size | Type |
 |------|--------|------|------|
 |`OBJECT_GUID`| 0x0000 | 2 | GUID |
-|`OBJECT_TYPE`| 0x0002 | 1 | INT |
 |`OBJECT_TYPE`| 0x0002 | 1 | INT |
 |`OBJECT_ENTRY`| 0x0003 | 1 | INT |
 |`OBJECT_SCALE_X`| 0x0004 | 1 | FLOAT |

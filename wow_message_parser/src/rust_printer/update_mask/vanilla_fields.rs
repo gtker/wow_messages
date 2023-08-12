@@ -10,6 +10,13 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
     ),
     UpdateMaskMember::new(
         UpdateMaskObjectType::Object,
+        "TYPE",
+        0x2,
+        1,
+        UpdateMaskDataType::Int,
+    ),
+    UpdateMaskMember::new(
+        UpdateMaskObjectType::Object,
         "ENTRY",
         0x3,
         1,

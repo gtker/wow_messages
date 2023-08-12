@@ -15,11 +15,6 @@ impl UpdateItemBuilder {
         self
     }
 
-    pub fn set_object_type(mut self, v: i32) -> Self {
-        self.set_int(2, v);
-        self
-    }
-
     pub fn set_object_entry(mut self, v: i32) -> Self {
         self.set_int(3, v);
         self
@@ -225,11 +220,6 @@ impl UpdateItemBuilder {
 impl UpdateContainerBuilder {
     pub fn set_object_guid(mut self, v: Guid) -> Self {
         self.set_guid(0, v);
-        self
-    }
-
-    pub fn set_object_type(mut self, v: i32) -> Self {
-        self.set_int(2, v);
         self
     }
 
@@ -448,11 +438,6 @@ impl UpdateContainerBuilder {
 impl UpdateUnitBuilder {
     pub fn set_object_guid(mut self, v: Guid) -> Self {
         self.set_guid(0, v);
-        self
-    }
-
-    pub fn set_object_type(mut self, v: i32) -> Self {
-        self.set_int(2, v);
         self
     }
 
@@ -916,11 +901,6 @@ impl UpdateUnitBuilder {
 impl UpdatePlayerBuilder {
     pub fn set_object_guid(mut self, v: Guid) -> Self {
         self.set_guid(0, v);
-        self
-    }
-
-    pub fn set_object_type(mut self, v: i32) -> Self {
-        self.set_int(2, v);
         self
     }
 
@@ -2247,11 +2227,6 @@ impl UpdateGameObjectBuilder {
         self
     }
 
-    pub fn set_object_type(mut self, v: i32) -> Self {
-        self.set_int(2, v);
-        self
-    }
-
     pub fn set_object_entry(mut self, v: i32) -> Self {
         self.set_int(3, v);
         self
@@ -2310,11 +2285,6 @@ impl UpdateDynamicObjectBuilder {
         self
     }
 
-    pub fn set_object_type(mut self, v: i32) -> Self {
-        self.set_int(2, v);
-        self
-    }
-
     pub fn set_object_entry(mut self, v: i32) -> Self {
         self.set_int(3, v);
         self
@@ -2360,11 +2330,6 @@ impl UpdateDynamicObjectBuilder {
 impl UpdateCorpseBuilder {
     pub fn set_object_guid(mut self, v: Guid) -> Self {
         self.set_guid(0, v);
-        self
-    }
-
-    pub fn set_object_type(mut self, v: i32) -> Self {
-        self.set_int(2, v);
         self
     }
 
@@ -2437,14 +2402,6 @@ impl UpdateItem {
 
     pub fn object_guid(&self) -> Option<Guid> {
         self.get_guid(0)
-    }
-
-    pub fn set_object_type(&mut self, v: i32) {
-        self.set_int(2, v);
-    }
-
-    pub fn object_type(&self) -> Option<i32> {
-        self.get_int(2)
     }
 
     pub fn set_object_entry(&mut self, v: i32) {
@@ -2776,14 +2733,6 @@ impl UpdateContainer {
 
     pub fn object_guid(&self) -> Option<Guid> {
         self.get_guid(0)
-    }
-
-    pub fn set_object_type(&mut self, v: i32) {
-        self.set_int(2, v);
-    }
-
-    pub fn object_type(&self) -> Option<i32> {
-        self.get_int(2)
     }
 
     pub fn set_object_entry(&mut self, v: i32) {
@@ -3131,14 +3080,6 @@ impl UpdateUnit {
 
     pub fn object_guid(&self) -> Option<Guid> {
         self.get_guid(0)
-    }
-
-    pub fn set_object_type(&mut self, v: i32) {
-        self.set_int(2, v);
-    }
-
-    pub fn object_type(&self) -> Option<i32> {
-        self.get_int(2)
     }
 
     pub fn set_object_entry(&mut self, v: i32) {
@@ -3882,14 +3823,6 @@ impl UpdatePlayer {
 
     pub fn object_guid(&self) -> Option<Guid> {
         self.get_guid(0)
-    }
-
-    pub fn set_object_type(&mut self, v: i32) {
-        self.set_int(2, v);
-    }
-
-    pub fn object_type(&self) -> Option<i32> {
-        self.get_int(2)
     }
 
     pub fn set_object_entry(&mut self, v: i32) {
@@ -6009,14 +5942,6 @@ impl UpdateGameObject {
         self.get_guid(0)
     }
 
-    pub fn set_object_type(&mut self, v: i32) {
-        self.set_int(2, v);
-    }
-
-    pub fn object_type(&self) -> Option<i32> {
-        self.get_int(2)
-    }
-
     pub fn set_object_entry(&mut self, v: i32) {
         self.set_int(3, v);
     }
@@ -6108,14 +6033,6 @@ impl UpdateDynamicObject {
         self.get_guid(0)
     }
 
-    pub fn set_object_type(&mut self, v: i32) {
-        self.set_int(2, v);
-    }
-
-    pub fn object_type(&self) -> Option<i32> {
-        self.get_int(2)
-    }
-
     pub fn set_object_entry(&mut self, v: i32) {
         self.set_int(3, v);
     }
@@ -6189,14 +6106,6 @@ impl UpdateCorpse {
 
     pub fn object_guid(&self) -> Option<Guid> {
         self.get_guid(0)
-    }
-
-    pub fn set_object_type(&mut self, v: i32) {
-        self.set_int(2, v);
-    }
-
-    pub fn object_type(&self) -> Option<i32> {
-        self.get_int(2)
     }
 
     pub fn set_object_entry(&mut self, v: i32) {

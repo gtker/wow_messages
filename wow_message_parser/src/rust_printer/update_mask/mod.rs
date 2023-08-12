@@ -63,6 +63,10 @@ fn print_specific_update_mask(fields: &[UpdateMaskMember], version: MajorWorldVe
     for (ty, types) in &update_types {
         s.bodyn(format!("impl {ty}Builder"), |s| {
             for m in fields.iter().filter(|a| types.contains(&a.object_ty)) {
+                if m.offset == 2 && m.object_ty() == UpdateMaskObjectType::Object {
+                    continue;
+                }
+
                 print_builder_setter(s, m);
             }
         });
@@ -71,6 +75,10 @@ fn print_specific_update_mask(fields: &[UpdateMaskMember], version: MajorWorldVe
     for (ty, types) in &update_types {
         s.bodyn(format!("impl {ty}"), |s| {
             for m in fields.iter().filter(|a| types.contains(&a.object_ty)) {
+                if m.offset == 2 && m.object_ty() == UpdateMaskObjectType::Object {
+                    continue;
+                }
+
                 print_setter(s, m);
                 print_getter(s, m);
             }
