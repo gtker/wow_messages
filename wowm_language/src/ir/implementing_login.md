@@ -203,7 +203,7 @@ The underscore in `_size` is a Python way of signalling that the method should b
 The `read` function looks like
 
 ```python
-    @staticmethod
+@staticmethod
 async def read(reader: asyncio.StreamReader):
     # protocol_version: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U8: 'U8'>, type_name='ProtocolVersion', upcast=False))
     protocol_version = ProtocolVersion(int.from_bytes(await reader.readexactly(1), 'little'))
@@ -268,7 +268,7 @@ It is instead calculated automatically in `write`.
 The write function looks like
 
 ```python
-    def write(self, writer: asyncio.StreamWriter):
+def write(self, writer: asyncio.StreamWriter):
     fmt = '<B'  # opcode
     data = [0]
 
@@ -278,7 +278,7 @@ The write function looks like
 
     # size: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U16: 'U16'>)
     fmt += 'H'
-    data.append(self._size())
+    data.append(self.size())
 
     # game_name: DataTypeInteger(data_type_tag='Integer', content=<IntegerType.U32: 'U32'>)
     fmt += 'I'
@@ -325,7 +325,7 @@ Hopefully your programming language has a more sane way of writing data to a str
 The final part is the size calculations, it looks like
 
 ```python
-    def _size(self):
+def size(self):
     size = 0
 
     # protocol_version: DataTypeEnum(data_type_tag='Enum', content=DataTypeEnumContent(integer_type=<IntegerType.U8: 'U8'>, type_name='ProtocolVersion', upcast=False))

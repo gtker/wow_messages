@@ -21,3 +21,6 @@ If you want to use the Python library then just bypass this and
 [use the library directly](https://github.com/gtker/wow_messages_python/) instead.
 
 ## Message Layout
+
+All messages sent from the server start with a 2 byte **big endian** size field, 
+
