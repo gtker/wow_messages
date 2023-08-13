@@ -1722,7 +1722,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
         "FIELD_INV",
         0x0144,
         300,
-        UpdateMaskDataType::GuidEnumLookupArray {
+        UpdateMaskDataType::GuidArrayUsingEnum {
             name: "ItemSlot",
             variable_name: "item_slot",
             import_location: "crate::wrath",

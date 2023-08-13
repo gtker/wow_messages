@@ -23,7 +23,7 @@ fn print_specific_update_mask_doc(fields: &[UpdateMaskMember], s: &mut Writer) {
                     UpdateMaskDataType::Float => "FLOAT",
                     UpdateMaskDataType::Bytes(_, _, _, _) => "BYTES",
                     UpdateMaskDataType::TwoShort => "TWO_SHORT",
-                    UpdateMaskDataType::GuidEnumLookupArray { .. }
+                    UpdateMaskDataType::GuidArrayUsingEnum { .. }
                     | UpdateMaskDataType::ArrayOfStruct { .. } => "CUSTOM",
                 };
 

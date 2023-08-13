@@ -191,6 +191,15 @@ impl Objects {
             .collect()
     }
 
+    pub(crate) fn get_world_enum(&self, name: &str, version: MajorWorldVersion) -> &Definer {
+        let tags = ObjectTags::new_with_world_versions(&[version]);
+
+        self.enums
+            .iter()
+            .find(|a| a.name() == name && a.tags().fulfills_all(&tags))
+            .unwrap()
+    }
+
     pub(crate) fn sort_members(&mut self) {
         self.structs.sort();
         self.messages.sort();

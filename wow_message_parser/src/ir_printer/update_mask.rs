@@ -1,3 +1,6 @@
+use crate::ir_printer::definer::{definer_to_ir, IrDefiner};
+use crate::parser::types::objects::Objects;
+use crate::parser::types::version::MajorWorldVersion;
 use crate::rust_printer::{ByteType, UpdateMaskDataType, UpdateMaskMember, UpdateMaskObjectType};
 use serde::Serialize;
 
@@ -11,7 +14,11 @@ pub(crate) struct IrUpdateMaskMember {
 }
 
 impl IrUpdateMaskMember {
-    pub(crate) fn new_array(fields: &[UpdateMaskMember]) -> Vec<Self> {
+    pub(crate) fn new_array(
+        fields: &[UpdateMaskMember],
+        o: &Objects,
+        version: MajorWorldVersion,
+    ) -> Vec<Self> {
         let mut members = Vec::with_capacity(fields.len());
 
         for field in fields {
@@ -28,8 +35,15 @@ impl IrUpdateMaskMember {
                         fourth,
                     }
                 }
-                UpdateMaskDataType::ArrayOfStruct { .. }
-                | UpdateMaskDataType::GuidEnumLookupArray { .. } => continue,
+                UpdateMaskDataType::GuidArrayUsingEnum {
+                    name,
+                    variable_name,
+                    ..
+                } => IrUpdateMaskType::GuidArrayUsingEnum {
+                    definer: definer_to_ir(o.get_world_enum(name, version)),
+                    variable_name,
+                },
+                UpdateMaskDataType::ArrayOfStruct { .. } => continue,
             };
 
             members.push(IrUpdateMaskMember {
@@ -57,5 +71,9 @@ pub(crate) enum IrUpdateMaskType {
         second: ByteType,
         third: ByteType,
         fourth: ByteType,
+    },
+    GuidArrayUsingEnum {
+        definer: IrDefiner,
+        variable_name: &'static str,
     },
 }

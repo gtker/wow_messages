@@ -16,7 +16,7 @@ use crate::parser::types::objects::Objects;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::tags::{MemberTags, ObjectTags};
 use crate::parser::types::ty::Type;
-use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
+use crate::parser::types::version::{AllVersions, LoginVersion, MajorWorldVersion, WorldVersion};
 use crate::parser::types::IntegerType;
 use crate::path_utils::intermediate_representation;
 use crate::rust_printer::{tbc_fields, vanilla_fields, wrath_fields};
@@ -407,9 +407,21 @@ impl IrObjects {
             distinct_login_versions_other_than_all,
             login_version_opcodes,
             integer_type_information: create_integer_type_information(),
-            vanilla_update_mask: IrUpdateMaskMember::new_array(vanilla_fields::FIELDS),
-            tbc_update_mask: IrUpdateMaskMember::new_array(tbc_fields::FIELDS),
-            wrath_update_mask: IrUpdateMaskMember::new_array(wrath_fields::FIELDS),
+            vanilla_update_mask: IrUpdateMaskMember::new_array(
+                vanilla_fields::FIELDS,
+                o,
+                MajorWorldVersion::Vanilla,
+            ),
+            tbc_update_mask: IrUpdateMaskMember::new_array(
+                tbc_fields::FIELDS,
+                o,
+                MajorWorldVersion::BurningCrusade,
+            ),
+            wrath_update_mask: IrUpdateMaskMember::new_array(
+                wrath_fields::FIELDS,
+                o,
+                MajorWorldVersion::Wrath,
+            ),
             world,
         }
     }

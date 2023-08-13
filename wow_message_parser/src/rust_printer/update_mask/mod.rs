@@ -255,7 +255,7 @@ fn print_getter(s: &mut Writer, m: &UpdateMaskMember) {
                 m.ty.ty_str(),
             ));
         }
-        UpdateMaskDataType::GuidEnumLookupArray {
+        UpdateMaskDataType::GuidArrayUsingEnum {
             name,
             variable_name,
             import_location,
@@ -323,7 +323,7 @@ fn print_getter(s: &mut Writer, m: &UpdateMaskMember) {
         } => {
             s.wln(format!("{import_location}::{name}::from_range(self.values.range(index.first()..=index.last()))"));
         }
-        UpdateMaskDataType::GuidEnumLookupArray { variable_name, .. } => {
+        UpdateMaskDataType::GuidArrayUsingEnum { variable_name, .. } => {
             s.wln(format!(
                 "let offset = {offset} + {variable_name}.as_int() as u16 * 2;"
             ));
@@ -360,7 +360,7 @@ fn print_setter_internals(s: &mut Writer, m: &UpdateMaskMember) {
             s.wln("self.header_set(index, value);");
             s.closing_curly();
         }
-        UpdateMaskDataType::GuidEnumLookupArray { variable_name, .. } => {
+        UpdateMaskDataType::GuidArrayUsingEnum { variable_name, .. } => {
             s.wln(format!(
                 "let offset = {offset} + {variable_name}.as_int() as u16 * 2;",
             ));
@@ -534,7 +534,7 @@ pub(crate) enum UpdateMaskDataType {
         import_location: &'static str,
         size: i32,
     },
-    GuidEnumLookupArray {
+    GuidArrayUsingEnum {
         name: &'static str,
         variable_name: &'static str,
         import_location: &'static str,
@@ -571,7 +571,7 @@ impl UpdateMaskDataType {
                 c.ty_str(),
                 d.ty_str(),
             ),
-            UpdateMaskDataType::GuidEnumLookupArray {
+            UpdateMaskDataType::GuidArrayUsingEnum {
                 name,
                 import_location,
                 ..
@@ -615,7 +615,7 @@ impl UpdateMaskDataType {
                     return format!(
                         "{variable_name}: {import_location}::{name}, index: {name}Index"
                     ),
-                UpdateMaskDataType::GuidEnumLookupArray {
+                UpdateMaskDataType::GuidArrayUsingEnum {
                     name,
                     variable_name,
                     import_location,

@@ -86,6 +86,20 @@
             "TwoShort": {
               "properties": {}
             },
+            "GuidArrayUsingEnum": {
+              "properties": {
+                "content": {
+                  "properties": {
+                    "definer": {
+                      "ref": "definer"
+                    },
+                    "variable_name": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
             "Bytes": {
               "properties": {
                 "content": {

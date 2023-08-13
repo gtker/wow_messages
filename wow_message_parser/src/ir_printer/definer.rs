@@ -10,7 +10,7 @@ pub(crate) fn definers_to_ir<'a>(definers: impl Iterator<Item = &'a Definer>) ->
     definers.map(definer_to_ir).collect()
 }
 
-fn definer_to_ir(e: &Definer) -> IrDefiner {
+pub(crate) fn definer_to_ir(e: &Definer) -> IrDefiner {
     let fields = e
         .fields()
         .iter()
