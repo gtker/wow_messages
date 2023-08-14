@@ -25,36 +25,30 @@ update_item!(UpdateCorpse, UpdateCorpseBuilder, CORPSE);
 
 update_mask!();
 
-skill_info!(wow_world_base::wrath::Skill, indices::SkillInfoIndex);
+skill_info!(
+    wow_world_base::wrath::Skill,
+    indices::SkillInfoIndex,
+    crate::wrath::SkillInfo
+);
 
-#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash, Default)]
-pub struct VisibleItem {
-    entry: u32,
-    enchants: [u16; 2],
-}
-
-impl VisibleItem {
-    pub const fn new(entry: u32, enchants: [u16; 2]) -> Self {
-        Self { entry, enchants }
-    }
-
+impl crate::wrath::VisibleItem {
     pub(crate) const fn mask_values(&self, index: VisibleItemIndex) -> [(u16, u32); 2] {
         let offset = index.offset();
 
         let enchants = u16s_to_u32(self.enchants[0], self.enchants[1]);
 
-        [(offset, self.entry), (offset + 1, enchants)]
+        [(offset, self.item), (offset + 1, enchants)]
     }
 
     pub(crate) fn from_range<'a>(
         mut range: impl Iterator<Item = (&'a u16, &'a u32)>,
     ) -> Option<Self> {
-        let (_, entry) = range.next()?;
+        let (_, item) = range.next()?;
         let (_, enchants) = range.next()?;
         let (first_enchants, second_enchants) = u32_to_u16s(*enchants);
 
         Some(Self {
-            entry: *entry,
+            item: *item,
             enchants: [first_enchants, second_enchants],
         })
     }

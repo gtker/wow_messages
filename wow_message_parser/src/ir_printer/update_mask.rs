@@ -1,3 +1,4 @@
+use crate::ir_printer::container::{container_to_update_mask_ir, IrUpdateMaskStruct};
 use crate::ir_printer::definer::{definer_to_ir, IrDefiner};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::version::MajorWorldVersion;
@@ -43,7 +44,18 @@ impl IrUpdateMaskMember {
                     definer: definer_to_ir(o.get_world_enum(name, version)),
                     variable_name,
                 },
-                UpdateMaskDataType::ArrayOfStruct { .. } => continue,
+                UpdateMaskDataType::ArrayOfStruct {
+                    name,
+                    variable_name,
+                    size,
+                    ..
+                } => IrUpdateMaskType::ArrayOfStruct {
+                    variable_name,
+                    size,
+                    update_mask_struct: container_to_update_mask_ir(
+                        o.get_world_struct(name, version),
+                    ),
+                },
             };
 
             members.push(IrUpdateMaskMember {
@@ -75,5 +87,10 @@ pub(crate) enum IrUpdateMaskType {
     GuidArrayUsingEnum {
         definer: IrDefiner,
         variable_name: &'static str,
+    },
+    ArrayOfStruct {
+        variable_name: &'static str,
+        size: i32,
+        update_mask_struct: IrUpdateMaskStruct,
     },
 }

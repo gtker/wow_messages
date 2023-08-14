@@ -6,8 +6,8 @@ use crate::parser::types::tags::{MemberTags, TagString};
 use crate::parser::types::version::{AllVersions, LoginVersion, WorldVersion};
 use crate::{
     ObjectTags, COMMENT, COMPRESSED, DESCRIPTION, DISPLAY, LOGIN_VERSIONS, NON_NETWORK_TYPE,
-    PASTE_VERSIONS, RUST_BASE_TYPE, SKIP_STR, TEST_STR, UNIMPLEMENTED, VERSIONS,
-    ZERO_IS_ALWAYS_VALID,
+    PASTE_VERSIONS, RUST_BASE_TYPE, SKIP_STR, TEST_STR, UNIMPLEMENTED, USED_IN_UPDATE_MASK,
+    VERSIONS, ZERO_IS_ALWAYS_VALID,
 };
 
 #[derive(Debug, Eq, PartialEq, Clone, Default)]
@@ -26,6 +26,7 @@ pub(crate) struct ParsedTags {
     rust_base_ty: BoolTag,
     zero_is_always_valid: BoolTag,
     non_network_type: BoolTag,
+    used_in_update_mask: BoolTag,
 }
 
 impl ParsedTags {
@@ -62,6 +63,7 @@ impl ParsedTags {
         self.rust_base_ty.append(t.rust_base_ty);
         self.zero_is_always_valid.append(t.zero_is_always_valid);
         self.non_network_type.append(t.non_network_type);
+        self.used_in_update_mask.append(t.used_in_update_mask)
     }
 
     pub(crate) fn compressed(&self) -> bool {
@@ -110,6 +112,7 @@ impl ParsedTags {
                 .into_bool_with_default(rust_base_type_default),
             self.zero_is_always_valid.into_bool(),
             self.non_network_type.into_bool(),
+            self.used_in_update_mask.into_bool(),
         )
     }
 
@@ -216,6 +219,8 @@ impl ParsedTags {
             self.zero_is_always_valid.insert(value);
         } else if key == NON_NETWORK_TYPE {
             self.non_network_type.insert(value);
+        } else if key == USED_IN_UPDATE_MASK {
+            self.used_in_update_mask.insert(value);
         }
     }
 }

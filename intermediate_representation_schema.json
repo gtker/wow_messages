@@ -100,6 +100,23 @@
                 }
               }
             },
+            "ArrayOfStruct": {
+              "properties": {
+                "content": {
+                  "properties": {
+                    "update_mask_struct": {
+                      "ref": "update_mask_struct"
+                    },
+                    "size": {
+                      "type": "int32"
+                    },
+                    "variable_name": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
             "Bytes": {
               "properties": {
                 "content": {
@@ -295,6 +312,37 @@
         "tests": {
           "elements": {
             "ref": "test_case"
+          }
+        }
+      }
+    },
+    "update_mask_struct": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "sizes": {
+          "ref": "sizes"
+        },
+        "file_info": {
+          "ref": "file_info"
+        },
+        "tags": {
+          "ref": "object_tags"
+        },
+        "members": {
+          "elements": {
+            "properties": {
+              "member": {
+                "ref": "definition"
+              },
+              "offset": {
+                "type": "int32"
+              },
+              "index": {
+                "type": "int32"
+              }
+            }
           }
         }
       }
@@ -534,6 +582,9 @@
           "type": "boolean"
         },
         "non_network_type": {
+          "type": "boolean"
+        },
+        "used_in_update_mask": {
           "type": "boolean"
         }
       }

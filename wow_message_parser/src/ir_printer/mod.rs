@@ -2,6 +2,7 @@ mod container;
 mod definer;
 mod update_mask;
 
+use crate::file_info::FileInfo;
 use crate::file_utils::overwrite_if_not_same_contents;
 use crate::ir_printer::container::{containers_to_ir, IrContainer};
 use serde::Serialize;
@@ -26,6 +27,16 @@ struct IrFileInfo {
     file_name: String,
     start_position: u32,
     end_position: u32,
+}
+
+impl IrFileInfo {
+    pub(crate) fn from_file_info(file_info: &FileInfo) -> Self {
+        IrFileInfo {
+            file_name: file_info.name().to_string(),
+            start_position: file_info.start_line() as u32,
+            end_position: file_info.end_line() as u32,
+        }
+    }
 }
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Serialize)]
@@ -156,6 +167,8 @@ pub(crate) struct IrTags {
     compressed: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     non_network_type: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    used_in_update_mask: Option<bool>,
 }
 
 impl IrTags {
@@ -173,6 +186,12 @@ impl IrTags {
         };
 
         let non_network_type = if tags.non_network_type() {
+            Some(true)
+        } else {
+            None
+        };
+
+        let used_in_update_mask = if tags.used_in_update_mask() {
             Some(true)
         } else {
             None
@@ -197,6 +216,7 @@ impl IrTags {
             compressed,
             unimplemented,
             non_network_type,
+            used_in_update_mask,
         }
     }
 
@@ -213,6 +233,7 @@ impl IrTags {
             compressed: None,
             unimplemented: None,
             non_network_type: None,
+            used_in_update_mask: None,
         }
     }
 }
@@ -315,6 +336,10 @@ impl TypeObjects {
         }
 
         fn inner_container(out: &mut Vec<Container>, e: &Container) {
+            if e.tags().used_in_update_mask() {
+                return;
+            }
+
             if out.contains(e) {
                 return;
             }
@@ -333,8 +358,6 @@ impl TypeObjects {
         for e in structs {
             inner_container(&mut out, e);
         }
-
-        assert_eq!(out.len(), structs.len());
 
         containers_to_ir(&out, o)
     }

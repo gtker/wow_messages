@@ -200,6 +200,15 @@ impl Objects {
             .unwrap()
     }
 
+    pub(crate) fn get_world_struct(&self, name: &str, version: MajorWorldVersion) -> &Container {
+        let tags = ObjectTags::new_with_world_versions(&[version]);
+
+        self.structs
+            .iter()
+            .find(|a| a.name() == name && a.tags().fulfills_all(&tags))
+            .unwrap()
+    }
+
     pub(crate) fn sort_members(&mut self) {
         self.structs.sort();
         self.messages.sort();

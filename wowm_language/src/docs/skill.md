@@ -267,6 +267,7 @@ The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 Used in:
 * [CMSG_UNLEARN_SKILL](cmsg_unlearn_skill.md)
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
+* [SkillInfo](skillinfo.md)
 * [TrainerSpell](trainerspell.md)
 
 ## Client Version 2.4.3
@@ -560,6 +561,7 @@ The basic type is `u16`, a 2 byte (16 bit) little endian integer.
 Used in:
 * [CMSG_UNLEARN_SKILL](cmsg_unlearn_skill.md)
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
+* [SkillInfo](skillinfo.md)
 * [TrainerSpell](trainerspell.md)
 
 ## Client Version 3.3.5
@@ -885,5 +887,6 @@ Used in:
 * [SMSG_CAST_FAILED](smsg_cast_failed.md)
 * [SMSG_ITEM_QUERY_SINGLE_RESPONSE](smsg_item_query_single_response.md)
 * [SMSG_PET_CAST_FAILED](smsg_pet_cast_failed.md)
+* [SkillInfo](skillinfo.md)
 * [TrainerSpell](trainerspell.md)
 

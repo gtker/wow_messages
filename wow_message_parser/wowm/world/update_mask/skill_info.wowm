@@ -1,0 +1,44 @@
+#tag_all used_in_update_mask "true";
+
+struct SkillInfo {
+    Skill skill;
+    u16 skill_step;
+    u16 minimum;
+    u16 maximum;
+    u16 permanent_bonus;
+    u16 temporary_bonus;
+} {
+    paste_versions = "1.12 2.4.3 3.3.5";
+}
+
+struct VisibleItem {
+    Guid creator;
+    Item item;
+    u32[2] enchants;
+    u32 padding5 = 0;
+    u32 padding6 = 0;
+    u32 padding7 = 0;
+    u32 padding8 = 0;
+    u32 padding9 = 0;
+    u32 random_property_id;
+    u32 item_suffix_factor;
+} {
+    versions = "1.12";
+}
+
+struct VisibleItem {
+    Guid creator;
+    Item item;
+    u32[6] enchants;
+    u32 random_property_id;
+    u32 item_suffix_factor;
+} {
+    versions = "2.4.3";
+}
+
+struct VisibleItem {
+    Item item;
+    u16[2] enchants;
+} {
+    versions = "3.3.5";
+}

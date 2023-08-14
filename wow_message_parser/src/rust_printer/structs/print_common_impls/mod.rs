@@ -7,6 +7,7 @@ use crate::parser::types::version::{MajorWorldVersion, Version};
 use crate::rust_printer::structs::print_common_impls::print_size::{
     print_size_rust_view, print_size_uncompressed_rust_view,
 };
+use crate::rust_printer::structs::print_common_impls::print_update_mask_struct::impl_update_mask_struct;
 use crate::rust_printer::structs::test_case_string::print_to_testcase;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
@@ -15,6 +16,7 @@ use crate::rust_printer::{
 
 pub mod print_read;
 pub(crate) mod print_size;
+mod print_update_mask_struct;
 pub mod print_write;
 
 pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
@@ -22,7 +24,11 @@ pub(crate) fn print_common_impls(s: &mut Writer, e: &Container, o: &Objects) {
 
     match e.container_type() {
         ContainerType::Struct => {
-            impl_read_write_struct(s, e, o);
+            if e.tags().used_in_update_mask() {
+                impl_update_mask_struct(s, e);
+            } else {
+                impl_read_write_struct(s, e, o);
+            }
         }
         ContainerType::CLogin(opcode) | ContainerType::SLogin(opcode) => {
             impl_read_and_writable_login(s, e, o, opcode);
@@ -330,7 +336,7 @@ fn test_for_invalid_size(s: &mut Writer, e: &Container) {
 }
 
 fn print_world_message_headers_and_constants(s: &mut Writer, e: &Container) {
-    if e.any_fields_have_constant_value() {
+    if e.any_fields_have_constant_value() && !e.tags().used_in_update_mask() {
         s.bodyn(format!("impl {name}", name = e.name()), |s| {
             for d in e.all_definitions() {
                 if d.is_manual_size_field() {

@@ -25,34 +25,13 @@ update_item!(UpdateCorpse, UpdateCorpseBuilder, CORPSE);
 
 update_mask!();
 
-skill_info!(wow_world_base::vanilla::Skill, indices::SkillInfoIndex);
+skill_info!(
+    wow_world_base::vanilla::Skill,
+    indices::SkillInfoIndex,
+    crate::vanilla::SkillInfo
+);
 
-#[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash, Default)]
-pub struct VisibleItem {
-    creator: crate::Guid,
-    entry: u32,
-    enchants: [u32; 2],
-    random_property_id: u32,
-    item_suffix_factor: u32,
-}
-
-impl VisibleItem {
-    pub const fn new(
-        creator: crate::Guid,
-        entry: u32,
-        enchants: [u32; 2],
-        random_property_id: u32,
-        item_suffix_factor: u32,
-    ) -> Self {
-        Self {
-            creator,
-            entry,
-            enchants,
-            random_property_id,
-            item_suffix_factor,
-        }
-    }
-
+impl crate::vanilla::VisibleItem {
     pub(crate) const fn mask_values(&self, index: VisibleItemIndex) -> [(u16, u32); 7] {
         let offset = index.offset();
 
@@ -61,7 +40,7 @@ impl VisibleItem {
         [
             (offset, guid_lower),
             (offset + 1, guid_upper),
-            (offset + 2, self.entry),
+            (offset + 2, self.item),
             (offset + 3, self.enchants[0]),
             (offset + 4, self.enchants[1]),
             (offset + 10, self.random_property_id),
@@ -74,7 +53,7 @@ impl VisibleItem {
     ) -> Option<Self> {
         let (_, guid_lower) = range.next()?;
         let (_, guid_upper) = range.next()?;
-        let (_, entry) = range.next()?;
+        let (_, item) = range.next()?;
         let (_, first_enchants) = range.next()?;
         let (_, second_enchants) = range.next()?;
         let (_, random_property_id) = range.next()?;
@@ -84,7 +63,7 @@ impl VisibleItem {
 
         Some(Self {
             creator,
-            entry: *entry,
+            item: *item,
             enchants: [*first_enchants, *second_enchants],
             random_property_id: *random_property_id,
             item_suffix_factor: *item_suffix_factor,

@@ -7,7 +7,7 @@ use crate::parser::types::sizes::Sizes;
 use crate::parser::types::struct_member::{StructMember, StructMemberDefinition};
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestUpdateMaskValue, TestValue};
 use crate::parser::types::ty::Type;
-use crate::parser::types::ContainerValue;
+use crate::parser::types::{ContainerValue, IntegerType};
 use crate::rust_printer::UpdateMaskObjectType;
 use crate::Objects;
 use serde::Serialize;
@@ -35,18 +35,179 @@ fn container_to_ir_no_tests(e: &Container) -> IrContainer {
         members,
         tags: IrTags::from_tags(e.tags()),
         tests: Vec::new(),
-        file_info: IrFileInfo {
-            file_name: e.file_info().name().to_string(),
-            start_position: e.file_info().start_line() as u32,
-            end_position: e.file_info().end_line() as u32,
-        },
+        file_info: IrFileInfo::from_file_info(e.file_info()),
         only_has_io_error: e.only_has_io_errors(),
         has_manual_size_field,
         manual_size_subtraction: e.manual_size_field_subtraction(),
     }
 }
 
-fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
+pub(crate) fn container_to_update_mask_ir(e: &Container) -> IrUpdateMaskStruct {
+    let mut members = Vec::new();
+
+    let mut offset = 0;
+    let mut index = 0;
+
+    fn update(offset: &mut i32, index: &mut i32, size: i32) {
+        if size == 4 {
+            *index = 0;
+            *offset += 1;
+        } else if size == 8 {
+            *index = 0;
+            *offset += 2;
+        } else {
+            *index += size;
+        }
+
+        if *index == 4 {
+            *offset += 1;
+        } else if *index > 4 && *index < 8 {
+            *offset += 1;
+            *index = *index % 4;
+        }
+    }
+
+    for m in e.members() {
+        match m {
+            StructMember::Definition(d) => {
+                if d.value().is_none() {
+                    members.push(IrUpdateMaskMember {
+                        member: IrStructMemberDefinition::from_definition(d),
+                        offset,
+                        index,
+                    });
+                }
+
+                match d.ty() {
+                    Type::Level => {
+                        update(&mut offset, &mut index, 1);
+                    }
+
+                    Type::Level16 => {
+                        update(&mut offset, &mut index, 2);
+                    }
+
+                    Type::Integer(i) | Type::Bool(i) => match i {
+                        IntegerType::I8 | IntegerType::U8 => {
+                            update(&mut offset, &mut index, 1);
+                        }
+
+                        IntegerType::I16 | IntegerType::U16 => {
+                            update(&mut offset, &mut index, 2);
+                        }
+
+                        IntegerType::I32 | IntegerType::U32 => {
+                            update(&mut offset, &mut index, 4);
+                        }
+
+                        IntegerType::U64 | IntegerType::I64 => {
+                            update(&mut offset, &mut index, 8);
+                        }
+
+                        IntegerType::U48 => unimplemented!(),
+                    },
+
+                    Type::Flag { e, upcast } | Type::Enum { e, upcast } => {
+                        let ty = if let Some(upcast) = upcast {
+                            upcast
+                        } else {
+                            e.ty()
+                        };
+
+                        match ty {
+                            IntegerType::I8 | IntegerType::U8 => {
+                                update(&mut offset, &mut index, 1);
+                            }
+
+                            IntegerType::I16 | IntegerType::U16 => {
+                                update(&mut offset, &mut index, 2);
+                            }
+
+                            IntegerType::I32 | IntegerType::U32 => {
+                                update(&mut offset, &mut index, 4);
+                            }
+
+                            IntegerType::U64 | IntegerType::I64 => {
+                                update(&mut offset, &mut index, 8);
+                            }
+
+                            IntegerType::U48 => unimplemented!(),
+                        }
+                    }
+
+                    Type::DateTime | Type::FloatingPoint | Type::Level32 | Type::Gold => {
+                        update(&mut offset, &mut index, 4);
+                    }
+
+                    Type::Guid => {
+                        update(&mut offset, &mut index, 8);
+                    }
+
+                    Type::Array(array) => {
+                        let size = match array.size() {
+                            ArraySize::Fixed(s) => s as i32,
+                            ArraySize::Variable(_) | ArraySize::Endless => {
+                                panic!("type not handled for update mask type")
+                            }
+                        };
+
+                        let inner_size = match array.ty() {
+                            ArrayType::Integer(i) => match i {
+                                IntegerType::I8 | IntegerType::U8 => 1,
+                                IntegerType::I16 | IntegerType::U16 => 2,
+                                IntegerType::I32 | IntegerType::U32 => 4,
+                                IntegerType::U64 | IntegerType::I64 => 8,
+
+                                IntegerType::U48 => unimplemented!(),
+                            },
+                            ArrayType::Struct(_)
+                            | ArrayType::CString
+                            | ArrayType::Guid
+                            | ArrayType::PackedGuid => {
+                                panic!("type not handled for update mask type")
+                            }
+                        };
+
+                        update(&mut offset, &mut index, size * inner_size)
+                    }
+
+                    Type::NamedGuid
+                    | Type::PackedGuid
+                    | Type::CString
+                    | Type::SizedCString
+                    | Type::String
+                    | Type::Struct { .. }
+                    | Type::UpdateMask { .. }
+                    | Type::MonsterMoveSplines
+                    | Type::AuraMask
+                    | Type::AchievementDoneArray
+                    | Type::AchievementInProgressArray
+                    | Type::EnchantMask
+                    | Type::InspectTalentGearMask
+                    | Type::Population
+                    | Type::VariableItemRandomProperty
+                    | Type::AddonArray
+                    | Type::IpAddress
+                    | Type::Seconds
+                    | Type::Milliseconds => unimplemented!("type not handled for update mask type"),
+                }
+            }
+            StructMember::IfStatement(_) | StructMember::OptionalStatement(_) => {
+                panic!("if/optional not allowed in update mask types")
+            }
+        }
+    }
+
+    IrUpdateMaskStruct {
+        name: e.name().to_string(),
+        sizes: IrSizes::from_sizes(e.sizes()),
+        members,
+        tags: IrTags::from_tags(e.tags()),
+        file_info: IrFileInfo::from_file_info(e.file_info()),
+    }
+}
+
+pub(crate) fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
     let mut c = container_to_ir_no_tests(e);
 
     let tests = e
@@ -113,6 +274,22 @@ pub(crate) struct IrContainer {
     only_has_io_error: bool,
     has_manual_size_field: bool,
     manual_size_subtraction: Option<u16>,
+}
+
+#[derive(Debug, Serialize)]
+pub(crate) struct IrUpdateMaskStruct {
+    name: String,
+    sizes: IrSizes,
+    members: Vec<IrUpdateMaskMember>,
+    tags: IrTags,
+    file_info: IrFileInfo,
+}
+
+#[derive(Debug, Serialize)]
+pub(crate) struct IrUpdateMaskMember {
+    member: IrStructMemberDefinition,
+    offset: i32,
+    index: i32,
 }
 
 #[derive(Debug, Serialize)]

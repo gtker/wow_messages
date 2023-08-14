@@ -435,36 +435,8 @@ pub(crate) use update_mask;
 
 #[cfg(any(feature = "vanilla", feature = "tbc", feature = "wrath"))]
 macro_rules! skill_info {
-    ($skill:ty, $index:ty) => {
-        #[derive(Debug, Clone, Copy, Ord, PartialOrd, Eq, PartialEq, Hash, Default)]
-        pub struct SkillInfo {
-            pub skill: $skill,
-            pub skill_step: u16,
-            pub minimum: u16,
-            pub maximum: u16,
-            pub permanent_bonus: u16,
-            pub temporary_bonus: u16,
-        }
-
-        impl SkillInfo {
-            pub const fn new(
-                skill: $skill,
-                skill_step: u16,
-                minimum: u16,
-                maximum: u16,
-                permanent_bonus: u16,
-                temporary_bonus: u16,
-            ) -> Self {
-                Self {
-                    skill,
-                    skill_step,
-                    minimum,
-                    maximum,
-                    permanent_bonus,
-                    temporary_bonus,
-                }
-            }
-
+    ($skill:ty, $index:ty, $skill_info:ty) => {
+        impl $skill_info {
             pub(crate) const fn mask_values(&self, index: $index) -> [(u16, u32); 3] {
                 let offset = index.offset();
 

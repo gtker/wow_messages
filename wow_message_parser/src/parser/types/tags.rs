@@ -20,6 +20,7 @@ pub(crate) struct ObjectTags {
     rust_base_ty: bool,
     zero_is_always_valid: bool,
     non_network_type: bool,
+    used_in_update_mask: bool,
 }
 
 impl ObjectTags {
@@ -34,6 +35,7 @@ impl ObjectTags {
         rust_base_ty: bool,
         zero_is_always_valid: bool,
         non_network_type: bool,
+        used_in_update_mask: bool,
     ) -> Self {
         Self {
             all_versions,
@@ -46,6 +48,7 @@ impl ObjectTags {
             rust_base_ty,
             zero_is_always_valid,
             non_network_type,
+            used_in_update_mask,
         }
     }
 
@@ -74,6 +77,7 @@ impl ObjectTags {
             rust_base_ty: false,
             zero_is_always_valid: false,
             non_network_type: false,
+            used_in_update_mask: false,
         }
     }
 
@@ -94,6 +98,7 @@ impl ObjectTags {
             rust_base_ty: false,
             zero_is_always_valid: false,
             non_network_type: false,
+            used_in_update_mask: false,
         }
     }
 
@@ -215,6 +220,10 @@ impl ObjectTags {
     }
     pub(crate) fn zero_is_always_valid(&self) -> bool {
         self.zero_is_always_valid
+    }
+
+    pub(crate) fn used_in_update_mask(&self) -> bool {
+        self.used_in_update_mask
     }
 }
 
