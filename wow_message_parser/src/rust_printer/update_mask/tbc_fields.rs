@@ -1521,7 +1521,7 @@ pub(crate) const FIELDS: &[UpdateMaskMember] = &[
     UpdateMaskMember::new(
         UpdateMaskObjectType::Player,
         "VISIBLE_ITEM",
-        0x102,
+        0x158,
         228,
         UpdateMaskDataType::ArrayOfStruct {
             name: "VisibleItem",

@@ -23,7 +23,7 @@ pub enum VisibleItemIndex {
 
 impl VisibleItemIndex {
     pub(crate) const fn offset(&self) -> u16 {
-        258 + self.index()
+        344 + self.index()
     }
 
     pub(crate) const fn index(&self) -> u16 {
@@ -51,7 +51,7 @@ impl VisibleItemIndex {
     }
 
     pub(crate) const fn first(&self) -> u16 {
-        258 + self.index()
+        344 + self.index()
     }
 
     pub(crate) const fn last(&self) -> u16 {
