@@ -229,11 +229,7 @@ fn print_specific_update_mask_indices(fields: &[UpdateMaskMember]) -> Writer {
 
 pub(crate) fn print_update_mask() {
     for version in MajorWorldVersion::versions() {
-        let fields = match version {
-            MajorWorldVersion::Vanilla => vanilla_fields::FIELDS,
-            MajorWorldVersion::BurningCrusade => tbc_fields::FIELDS,
-            MajorWorldVersion::Wrath => wrath_fields::FIELDS,
-        };
+        let fields = version.update_mask();
 
         let s = print_specific_update_mask(fields, *version);
         overwrite_if_not_same_contents(s.inner(), &update_mask_location(*version));

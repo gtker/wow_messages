@@ -1,3 +1,4 @@
+use crate::rust_printer::{tbc_fields, vanilla_fields, wrath_fields, UpdateMaskMember};
 use core::cmp::{Ord, Ordering, PartialOrd};
 use core::fmt::{Display, Formatter};
 use core::option::Option;
@@ -321,6 +322,14 @@ pub(crate) enum MajorWorldVersion {
 }
 
 impl MajorWorldVersion {
+    pub(crate) fn update_mask(&self) -> &'static [UpdateMaskMember] {
+        match self {
+            MajorWorldVersion::Vanilla => vanilla_fields::FIELDS,
+            MajorWorldVersion::BurningCrusade => tbc_fields::FIELDS,
+            MajorWorldVersion::Wrath => wrath_fields::FIELDS,
+        }
+    }
+
     pub(crate) fn encryption_path(&self) -> &'static str {
         match self {
             MajorWorldVersion::Vanilla => "wow_srp::vanilla_header",

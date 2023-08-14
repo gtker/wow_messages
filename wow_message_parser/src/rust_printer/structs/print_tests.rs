@@ -3,13 +3,12 @@ use crate::parser::types::array::ArraySize;
 use crate::parser::types::container::{Container, ContainerType};
 use crate::parser::types::objects::Objects;
 use crate::parser::types::test_case::{TestCase, TestCaseMember, TestValue};
-use crate::parser::types::version::{MajorWorldVersion, Version};
+use crate::parser::types::version::Version;
 use crate::parser::utility::parse_value;
 use crate::rust_printer::opcodes::get_enumerator_name;
 use crate::rust_printer::rust_view::rust_enumerator::RustEnumerator;
 use crate::rust_printer::rust_view::rust_member::RustMember;
 use crate::rust_printer::rust_view::rust_type::RustType;
-use crate::rust_printer::update_mask::vanilla_fields::FIELDS;
 use crate::rust_printer::writer::Writer;
 use crate::rust_printer::{
     get_new_flag_type_name, ByteInnerTy, ByteType, ImplType, UpdateMaskDataType,
@@ -564,11 +563,7 @@ fn print_value(
                     continue;
                 }
 
-                let fields = match version.as_major_world() {
-                    MajorWorldVersion::Vanilla => FIELDS,
-                    MajorWorldVersion::BurningCrusade => unimplemented!(),
-                    MajorWorldVersion::Wrath => unimplemented!(),
-                };
+                let fields = version.as_major_world().update_mask();
 
                 let field = fields
                     .iter()
