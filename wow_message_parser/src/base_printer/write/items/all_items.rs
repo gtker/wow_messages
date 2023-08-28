@@ -5,6 +5,7 @@ use crate::base_printer::write::items::GenericThing;
 use crate::base_printer::{Expansion, ImportFrom};
 use crate::rust_printer::writer::Writer;
 use hashbrown::HashMap;
+use std::cmp::Ordering;
 
 pub(crate) fn all_items(
     s: &mut Writer,
@@ -100,10 +101,14 @@ fn print_lookup(s: &mut Writer, items: &[GenericThing]) {
 
 fn find_item_position(items: &[GenericThing], entry: u32, offset: usize) -> Option<(usize, usize)> {
     for (i, item) in items[offset..].iter().enumerate() {
-        if item.entry == entry {
-            return Some((offset + i, offset + i));
-        } else if item.entry > entry {
-            return None;
+        match item.entry.cmp(&entry) {
+            Ordering::Equal => {
+                return Some((offset + i, offset + i));
+            }
+            Ordering::Greater => {
+                return None;
+            }
+            Ordering::Less => {}
         }
     }
 

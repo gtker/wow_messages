@@ -147,7 +147,7 @@ impl ParsedType {
             }
             ParsedType::MonsterMoveSpline => (
                 MONSTER_MOVE_SPLINE_SMALLEST_ALLOWED.into(),
-                MONSTER_MOVE_SPLINE_LARGEST_ALLOWED.into(),
+                MONSTER_MOVE_SPLINE_LARGEST_ALLOWED,
             ),
             ParsedType::EnchantMask => (
                 ENCHANT_MASK_SMALLEST_ALLOWED.into(),

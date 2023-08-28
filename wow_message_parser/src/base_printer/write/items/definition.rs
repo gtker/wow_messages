@@ -318,22 +318,39 @@ fn getters_and_setters(
                     s.open_curly("match self.entry");
                 }
 
-                for outlier in outliers {
-                    if outlier.0.len() == 1 {
+                for (outliers, value) in outliers {
+                    if outliers.len() == 1 {
                         s.wln(format!(
                             "{} => {},",
-                            outlier.0[0],
-                            outlier.1.to_string_value()
+                            outliers.first().unwrap(),
+                            value.to_string_value()
                         ));
                     } else {
-                        for (i, entry) in outlier.0.iter().enumerate() {
-                            if i == 0 {
-                                s.w(format!("{entry}"))
-                            } else {
-                                s.w_no_indent(format!(" | {entry}"))
+                        let mut can_be_range = true;
+                        let min = outliers.first().unwrap();
+                        let max = outliers.last().unwrap();
+                        if min != max {
+                            for entry in *min..=*max {
+                                if !outliers.contains(&entry) {
+                                    can_be_range = false;
+                                }
                             }
+                        } else {
+                            can_be_range = false;
                         }
-                        s.wln_no_indent(format!(" => {},", outlier.1.to_string_value()))
+
+                        if can_be_range {
+                            s.wln(format!("{min}..={max} => {},", value.to_string_value()));
+                        } else {
+                            for (i, entry) in outliers.iter().enumerate() {
+                                if i == 0 {
+                                    s.w(format!("{entry}"))
+                                } else {
+                                    s.w_no_indent(format!(" | {entry}"))
+                                }
+                            }
+                            s.wln_no_indent(format!(" => {},", value.to_string_value()))
+                        }
                     }
                 }
                 s.wln(format!("_ => {},", mainline.to_string_value()));

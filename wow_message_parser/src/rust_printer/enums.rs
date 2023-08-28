@@ -180,9 +180,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                         s.wln(format!("{value} => Ok(Self::{field_name}),",));
                     }
 
-                    s.wln(format!(
-                        "v => Err(crate::errors::EnumError::new(NAME, v.into()),)",
-                    ));
+                    s.wln("v => Err(crate::errors::EnumError::new(NAME, v.into()),)");
                 });
             },
         );

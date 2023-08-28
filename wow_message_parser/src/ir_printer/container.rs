@@ -20,7 +20,7 @@ fn container_to_ir_no_tests(e: &Container) -> IrContainer {
     let members = e
         .members()
         .iter()
-        .map(|a| IrStructMember::from_struct_member(a))
+        .map(IrStructMember::from_struct_member)
         .collect();
 
     let has_manual_size_field = e
@@ -63,7 +63,7 @@ pub(crate) fn container_to_update_mask_ir(e: &Container) -> IrUpdateMaskStruct {
             *offset += 1;
         } else if *index > 4 && *index < 8 {
             *offset += 1;
-            *index = *index % 4;
+            *index %= 4;
         }
     }
 
@@ -213,7 +213,7 @@ pub(crate) fn container_to_ir(e: &Container, o: &Objects) -> IrContainer {
     let tests = e
         .tests(o)
         .iter()
-        .map(|a| IrTestCase::from_test_case(a))
+        .map(IrTestCase::from_test_case)
         .collect();
 
     c.tests = tests;
@@ -303,7 +303,7 @@ impl IrOptionalStatement {
         let members = v
             .members()
             .iter()
-            .map(|a| IrStructMember::from_struct_member(a))
+            .map(IrStructMember::from_struct_member)
             .collect();
 
         Self {
@@ -394,18 +394,18 @@ impl IrIfStatement {
         let members = v
             .members()
             .iter()
-            .map(|a| IrStructMember::from_struct_member(a))
+            .map(IrStructMember::from_struct_member)
             .collect();
         let else_ifs = v
             .else_ifs()
             .iter()
-            .map(|a| IrIfStatement::from_statement(a))
+            .map(IrIfStatement::from_statement)
             .collect();
 
         let else_statement_members = v
             .else_members()
             .iter()
-            .map(|a| IrStructMember::from_struct_member(a))
+            .map(IrStructMember::from_struct_member)
             .collect();
 
         Self {
@@ -435,11 +435,11 @@ impl IrStructMemberDefinition {
     fn from_definition(v: &StructMemberDefinition) -> Self {
         Self {
             name: v.name().to_string(),
-            data_type: IrType::from_type(v.ty().into()),
+            data_type: IrType::from_type(v.ty()),
             constant_value: v
                 .value()
                 .as_ref()
-                .map(|a| IrIntegerEnumValue::from_container_value(a)),
+                .map(IrIntegerEnumValue::from_container_value),
             used_as_size_in: v.used_as_size_in().clone(),
             size_of_fields_before_size: v.size_of_fields_before_size().map(|a| a as u8),
             used_in_if: v.used_in_if(),
@@ -646,7 +646,7 @@ impl IrTestCase {
         let members = v
             .members()
             .iter()
-            .map(|a| IrTestCaseMember::from_test_case_member(a))
+            .map(IrTestCaseMember::from_test_case_member)
             .collect();
 
         Self {
@@ -785,7 +785,7 @@ impl IrTestValue {
                 type_name: c.name().to_string(),
                 members: members
                     .iter()
-                    .map(|a| IrTestCaseMember::from_test_case_member(a))
+                    .map(IrTestCaseMember::from_test_case_member)
                     .collect(),
             },
             TestValue::ArrayOfSubObject(e, t) => Self::ArrayOfSubObject {
@@ -794,14 +794,14 @@ impl IrTestValue {
                     .iter()
                     .map(|a| {
                         a.iter()
-                            .map(|a| IrTestCaseMember::from_test_case_member(a))
+                            .map(IrTestCaseMember::from_test_case_member)
                             .collect::<Vec<_>>()
                     })
                     .collect(),
             },
             TestValue::UpdateMask(v) => IrTestValue::UpdateMask(
                 v.iter()
-                    .map(|a| IrTestUpdateMaskValue::from_mask_value(a))
+                    .map(IrTestUpdateMaskValue::from_mask_value)
                     .collect(),
             ),
             TestValue::Seconds(i) => Self::Seconds(IrIntegerEnumValue::from_container_value(i)),

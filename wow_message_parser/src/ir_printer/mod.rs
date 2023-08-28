@@ -110,7 +110,7 @@ impl IrWorldVersionOuter {
         Self::Specific(
             v.iter()
                 .copied()
-                .map(|a| IrWorldVersion::from_world_version(a))
+                .map(IrWorldVersion::from_world_version)
                 .collect(),
         )
     }
@@ -263,9 +263,9 @@ impl TypeObjects {
 
         let structs = o
             .structs()
-            .to_vec()
-            .into_iter()
+            .iter()
             .filter(|a| predicate(a.tags()))
+            .cloned()
             .collect::<Vec<_>>();
         let structs = Self::structs_in_order(&structs, o);
         let mut messages = o
@@ -277,7 +277,7 @@ impl TypeObjects {
         messages.sort_by(|a, b| {
             a.opcode()
                 .cmp(&b.opcode())
-                .then(a.tags().all_versions().cmp(&b.tags().all_versions()))
+                .then(a.tags().all_versions().cmp(b.tags().all_versions()))
         });
         let messages = containers_to_ir(&messages, o);
 
@@ -292,12 +292,11 @@ impl TypeObjects {
     fn structs_in_order(structs: &[Container], o: &Objects) -> Vec<IrContainer> {
         fn inner_d(out: &mut Vec<Container>, d: &StructMemberDefinition) {
             match d.ty() {
-                Type::Array(array) => match array.ty() {
-                    ArrayType::Struct(e) => {
+                Type::Array(array) => {
+                    if let ArrayType::Struct(e) = array.ty() {
                         inner_container(out, e);
                     }
-                    _ => {}
-                },
+                }
                 Type::Struct { e } => {
                     inner_container(out, e);
                 }

@@ -9,7 +9,7 @@ use crate::base_printer::write::items::{
 };
 use crate::path_utils::workspace_directory;
 use data::{get_data_from_sqlite_file, Data};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq)]
 pub enum ImportFrom {
@@ -138,7 +138,7 @@ pub(crate) fn print_base() {
         std::process::exit(1);
     }
 
-    fn run(path: &PathBuf, expansion: Expansion) {
+    fn run(path: &Path, expansion: Expansion) {
         let filename = match expansion {
             Expansion::Vanilla => "classic.sqlite",
             Expansion::BurningCrusade => "tbc.sqlite",

@@ -174,7 +174,7 @@ fn print_try_from(s: &mut Writer, e: &Definer) {
                 s.body(
                     format!("fn try_from(value: {from_ty}) -> Result<Self, Self::Error>"),
                     |s| {
-                        let converted_ty = from_ty.replace("i", "u");
+                        let converted_ty = from_ty.replace('i', "u");
 
                         s.wln(format!(
                             "let v = {converted_ty}::from_le_bytes(value.to_le_bytes());"

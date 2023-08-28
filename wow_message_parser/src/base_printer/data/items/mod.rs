@@ -3,6 +3,7 @@ use hashbrown::HashMap;
 use ordered_float::OrderedFloat;
 use rusqlite::Connection;
 use std::cmp::Ordering;
+use std::collections::BTreeSet;
 
 pub mod tbc;
 pub mod vanilla;
@@ -18,7 +19,7 @@ use wow_world_base::wrath as wrath_base;
 pub enum FieldOptimization {
     None,
     ConstantValue(Value),
-    Baseline(Value, Vec<(Vec<u32>, Value)>),
+    Baseline(Value, Vec<(BTreeSet<u32>, Value)>),
 }
 
 const OPTIMIZATION_BASELINE_DEVIATIONS: usize = 100;
@@ -133,7 +134,7 @@ impl Optimizations {
             let mut signed_min = 0;
             let mut signed_max = 0;
 
-            let mut different_values: HashMap<Value, Vec<u32>> = HashMap::new();
+            let mut different_values: HashMap<Value, BTreeSet<u32>> = HashMap::new();
             for (item_id, field) in fields {
                 if let Some(v) = field.i64_value() {
                     if v > signed_max {
@@ -149,9 +150,10 @@ impl Optimizations {
                 }
 
                 if let Some(v) = different_values.get_mut(field) {
-                    v.push(item_id);
+                    v.insert(item_id);
                 } else {
-                    let v = vec![item_id];
+                    let mut v = BTreeSet::new();
+                    v.insert(item_id);
                     different_values.insert(field.clone(), v);
                 }
             }

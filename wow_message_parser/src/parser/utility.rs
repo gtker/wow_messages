@@ -6,7 +6,7 @@ pub(crate) fn parse_value(s: &str) -> Option<i128> {
         let stripped = s.strip_prefix("0b").unwrap();
         return Some(i128::from_str_radix(stripped, 2).unwrap());
     } else if s.contains('\"') {
-        let string = s.replace('\"', "").replace(r#"\0"#, "\0");
+        let string = s.replace('\"', "").replace(r"\0", "\0");
         let stripped = string.as_bytes();
         let mut bytes = [0_u8; 8];
         let len = bytes.len() - stripped.len();

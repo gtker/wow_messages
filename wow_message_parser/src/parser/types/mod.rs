@@ -90,10 +90,10 @@ impl IntegerType {
     }
 
     pub(crate) fn is_signed(&self) -> bool {
-        match self {
-            IntegerType::I8 | IntegerType::I16 | IntegerType::I32 | IntegerType::I64 => true,
-            _ => false,
-        }
+        matches!(
+            self,
+            IntegerType::I8 | IntegerType::I16 | IntegerType::I32 | IntegerType::I64
+        )
     }
 
     pub(crate) fn str(&self) -> &str {

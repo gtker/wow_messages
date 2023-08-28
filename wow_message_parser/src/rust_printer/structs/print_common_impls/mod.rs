@@ -466,7 +466,7 @@ pub(crate) fn impl_read_and_writable_login(
 
     let write_function = |s: &mut Writer| {
         s.wln("// opcode: u8");
-        s.wln(format!("w.write_all(&Self::OPCODE.to_le_bytes())?;",));
+        s.wln("w.write_all(&Self::OPCODE.to_le_bytes())?;");
         s.newline();
 
         print_write::print_write(s, e, o, ImplType::Std.prefix(), ImplType::Std.postfix());

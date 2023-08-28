@@ -26,7 +26,7 @@ fn create_new(s: &mut Writer, e: &Container) {
         }
     }
 
-    s.funcn_pub_const(format!("new({})", name_and_args), "Self", |s| {
+    s.funcn_pub_const(format!("new({name_and_args})"), "Self", |s| {
         s.body("Self", |s| {
             for m in e.members() {
                 match m {

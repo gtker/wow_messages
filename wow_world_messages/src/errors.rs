@@ -24,11 +24,8 @@ impl ParseError {
     }
 
     pub(crate) fn opcode_convert(mut self) -> Self {
-        match self.kind {
-            ParseErrorKind::Io(e) => {
-                self.kind = BufferSizeTooSmall(e);
-            }
-            _ => {}
+        if let ParseErrorKind::Io(e) = self.kind {
+            self.kind = BufferSizeTooSmall(e);
         }
 
         self

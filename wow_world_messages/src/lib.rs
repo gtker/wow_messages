@@ -83,7 +83,8 @@ pub(crate) mod util;
     clippy::enum_variant_names,
     clippy::approx_constant,
     clippy::upper_case_acronyms,
-    clippy::needless_borrow
+    clippy::needless_borrow,
+    clippy::identity_op
 )]
 mod world;
 

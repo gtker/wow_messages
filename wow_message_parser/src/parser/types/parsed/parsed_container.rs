@@ -47,14 +47,13 @@ impl ParsedContainer {
     pub(crate) fn contains_container(&self, ty_name: &str) -> bool {
         for d in self.all_definitions() {
             match d.ty() {
-                ParsedType::Array(array) => match array.ty() {
-                    ParsedArrayType::Complex(s) => {
+                ParsedType::Array(array) => {
+                    if let ParsedArrayType::Complex(s) = array.ty() {
                         if s == ty_name {
                             return true;
                         }
                     }
-                    _ => {}
-                },
+                }
                 ParsedType::Identifier { s, .. } => {
                     if s == ty_name {
                         return true;
